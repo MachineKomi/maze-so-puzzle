@@ -1,0 +1,12 @@
+node_modules/
+dist/
+src-tauri/target/
+.vercel/
+.env
+.env.*
+!.env.example
+release/*.exe
+*.log
+.DS_Store
+.vite/
+coverage/

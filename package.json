@@ -1,0 +1,43 @@
+{
+  "name": "maze-so-puzzle",
+  "private": true,
+  "version": "0.3.0",
+  "description": "A gentle, child-friendly maze adventure for the browser and Windows.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MachineKomi/maze-so-puzzle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/issues"
+  },
+  "homepage": "https://github.com/MachineKomi/maze-so-puzzle#readme",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "check": "npm test && npm run build",
+    "check:desktop": "cargo check --locked --manifest-path src-tauri/Cargo.toml",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "tauri": "tauri",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "tauri build --bundles nsis"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "dependencies": {
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "7.0.2",
+    "vite": "8.2.2",
+    "vitest": "4.1.11"
+  }
+}

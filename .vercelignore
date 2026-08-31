@@ -1,0 +1,7 @@
+.github/
+dist/
+docs/
+release/
+src-tauri/
+coverage/
+*.md

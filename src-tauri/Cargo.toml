@@ -1,0 +1,17 @@
+[package]
+name = "maze-so-puzzle"
+version = "0.3.0"
+description = "A gentle fantasy maze adventure for young players"
+authors = ["Maze so Puzzle team"]
+edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "maze_so_puzzle_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+tauri = { version = "2.11.5", features = [] }
