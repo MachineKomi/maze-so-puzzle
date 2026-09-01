@@ -46,15 +46,19 @@ document and does not use client-side URL routing.
   phone browser in landscape orientation. Check a notched device if one is
   available; the controls should stay inside its safe area.
 - Confirm the title artwork loads, Begin Adventure enters maze 1, WASD/arrow and
-  pointer controls work, keyboard and D-pad holds repeat smoothly, sound and
-  music begin only after user interaction, and the Adventure Book opens.
+  pointer controls work, keyboard and D-pad holds repeat smoothly, rescued pets
+  follow Ame without affecting collision, sound and music begin only after user
+  interaction, and the Adventure Book opens.
 - Complete or partially play a maze, reload the page, and confirm local progress
   remains on that device.
-- Confirm every maze whose width or height exceeds 7 tiles uses the 7×7
+- Confirm every maze whose width or height exceeds 6 tiles uses the 6×6
   player-centred view and a minimap that keeps explored tiles visible while
   masking unvisited areas. Check an early 9×9 maze, a generated maze, and the
   25×25 Lanternlight Labyrinth, including camera clamping near an outer edge.
-- Click or tap the small **Playable build 0.7.1** label on the title screen and
+- Generate several Surprise Mazes and confirm their deterministic sizes vary
+  across unlocked odd 9–29 bands rather than increasing monotonically. No
+  generated dimension should reach 30.
+- Click or tap the small **Playable build 0.8.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -62,11 +66,17 @@ document and does not use client-side URL routing.
 - Inspect several straight paths, bends, diagonal contacts, enclosed pockets,
   and connected water/lava areas. Floor and wall patterns should remain aligned
   across the camera, convex and concave corners should follow the terrain
-  boundary, and hazards should have a flat subtle floor lip with no cast shadow.
-- On iPad, drag around the maze and confirm Ame follows the dominant direction,
-  changes direction during the same gesture, and stops on release. Confirm the
-  page does not pan or pinch-zoom during play. On a landscape phone, verify the
-  stage uses the full safe viewport and the sidebar does not overlap or scroll.
+  boundary, floor/wall contrast should remain clear, and connected 2–4 tile
+  hazards should have no outline, lip, cast shadow, or filter.
+- Inspect every cage style and confirm its opaque AI-generated front layer stays
+  in front of the pet without a baked-in animal or background rectangle. Rescue
+  multiple pets and confirm they occupy distinct recent footprints behind Ame.
+- On iPad and desktop, press the maze to move immediately, hold to repeat, drag
+  to steer, and recenter or release to stop. At ordinary wall bends, confirm the
+  one-tile assist never pathfinds or assists onto a hazard or through a door or
+  foe. Confirm the page does not pan or pinch-zoom during touch play. On a
+  landscape phone and iPad, verify the maze panel uses nearly the full safe
+  viewport height and the sidebar does not overlap or scroll.
 - Check portrait turn-sideways guidance on the tablet and mute/unmute after the
   first tap. Browser audio should never start before that interaction.
 
@@ -83,6 +93,7 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. Version 0.7.1 also has separately built and smoke-checked local Windows
-test artifacts; those executable files are intentionally excluded from Git and
-Vercel deployment.
+secrets. The 0.8.0 source, local production build, selected responsive sizes, and
+unsigned Windows test package are locally verified; the canonical public Vercel
+deployment still needs the smoke checks above after promotion. Executable
+artifacts remain intentionally excluded from Git and Vercel deployment.

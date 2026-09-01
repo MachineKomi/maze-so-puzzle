@@ -11,55 +11,55 @@ import {
 
 describe("maze exploration", () => {
   it("uses exploration view only when either grid dimension exceeds the field of view", () => {
-    expect(shouldUseExplorationView({ width: 7, height: 7 })).toBe(false);
-    expect(shouldUseExplorationView({ width: 6, height: 7 })).toBe(false);
-    expect(shouldUseExplorationView({ width: 8, height: 7 })).toBe(true);
-    expect(shouldUseExplorationView({ width: 7, height: 8 })).toBe(true);
+    expect(shouldUseExplorationView({ width: 6, height: 6 })).toBe(false);
+    expect(shouldUseExplorationView({ width: 5, height: 6 })).toBe(false);
+    expect(shouldUseExplorationView({ width: 7, height: 6 })).toBe(true);
+    expect(shouldUseExplorationView({ width: 6, height: 7 })).toBe(true);
     expect(shouldUseExplorationView({ width: 9, height: 9 })).toBe(true);
   });
 
-  it("uses a centred 7 by 7 field of view in open space", () => {
+  it("uses a stable 6 by 6 field of view in open space", () => {
     const grid = { width: 15, height: 11 };
     const camera = getCameraWindow(grid, { x: 7, y: 5 });
 
-    expect(DEFAULT_FOV_SIZE).toBe(7);
+    expect(DEFAULT_FOV_SIZE).toBe(6);
     expect(camera).toEqual({
-      left: 4,
-      top: 2,
+      left: 5,
+      top: 3,
       right: 10,
       bottom: 8,
-      width: 7,
-      height: 7,
+      width: 6,
+      height: 6,
     });
-    expect(getVisibleTiles(grid, { x: 7, y: 5 })).toHaveLength(49);
+    expect(getVisibleTiles(grid, { x: 7, y: 5 })).toHaveLength(36);
   });
 
-  it("clamps at corners and edges while retaining a 7 by 7 window", () => {
+  it("clamps at corners and edges while retaining an even 6 by 6 window", () => {
     const grid = { width: 15, height: 11 };
 
     expect(getCameraWindow(grid, { x: 0, y: 0 })).toEqual({
       left: 0,
       top: 0,
-      right: 6,
-      bottom: 6,
-      width: 7,
-      height: 7,
+      right: 5,
+      bottom: 5,
+      width: 6,
+      height: 6,
     });
     expect(getCameraWindow(grid, { x: 14, y: 5 })).toEqual({
-      left: 8,
-      top: 2,
+      left: 9,
+      top: 3,
       right: 14,
       bottom: 8,
-      width: 7,
-      height: 7,
+      width: 6,
+      height: 6,
     });
     expect(getCameraWindow(grid, { x: 14, y: 10 })).toEqual({
-      left: 8,
-      top: 4,
+      left: 9,
+      top: 5,
       right: 14,
       bottom: 10,
-      width: 7,
-      height: 7,
+      width: 6,
+      height: 6,
     });
   });
 
@@ -68,8 +68,8 @@ describe("maze exploration", () => {
     const first = revealVisibleTiles([], grid, { x: 7, y: 5 });
     const second = revealVisibleTiles(first, grid, { x: 8, y: 5 });
 
-    expect(first).toHaveLength(49);
-    expect(second).toHaveLength(56);
+    expect(first).toHaveLength(36);
+    expect(second).toHaveLength(42);
     expect(first.has("11,5")).toBe(false);
     expect(second.has("11,5")).toBe(true);
     expect(second).not.toBe(first);
@@ -78,7 +78,7 @@ describe("maze exploration", () => {
   it("produces canonical unique keys in deterministic row-major order", () => {
     const keys = getVisibleTileKeys({ width: 9, height: 9 }, { x: 4, y: 4 });
 
-    expect(keys[0]).toBe("1,1");
+    expect(keys[0]).toBe("2,2");
     expect(keys.at(-1)).toBe("7,7");
     expect(new Set(keys).size).toBe(keys.length);
     expect(toTileKey({ x: 12, y: 3 })).toBe("12,3");

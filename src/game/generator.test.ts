@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { generateSurpriseLevel, generateSurpriseMaze } from "./generator";
+import {
+  MAX_GENERATED_MAZE_SIZE,
+  MIN_GENERATED_MAZE_SIZE,
+  generateSurpriseLevel,
+  generateSurpriseMaze,
+} from "./generator";
 import { solveLevel, validateLevel } from "./solver";
+import type { LevelDefinition, TerrainKind } from "./types";
 import {
   ANIMALS_PER_LEVEL,
   ANIMAL_SPECIES,
@@ -9,6 +15,35 @@ import {
   TERRAIN_THEME_IDS,
   WEAPON_STYLE_IDS,
 } from "./types";
+
+function largestHazardRegion(level: LevelDefinition, terrainKind: TerrainKind): number {
+  const seen = new Set<string>();
+  let largest = 0;
+  const key = (x: number, y: number) => `${x},${y}`;
+
+  for (let y = 0; y < level.height; y += 1) {
+    for (let x = 0; x < level.width; x += 1) {
+      if (level.terrain[y]?.[x] !== terrainKind || seen.has(key(x, y))) continue;
+      const queue = [{ x, y }];
+      seen.add(key(x, y));
+      for (let head = 0; head < queue.length; head += 1) {
+        const point = queue[head];
+        if (point === undefined) continue;
+        for (const [dx, dy] of [[0, -1], [1, 0], [0, 1], [-1, 0]] as const) {
+          const next = { x: point.x + dx, y: point.y + dy };
+          if (level.terrain[next.y]?.[next.x] !== terrainKind || seen.has(key(next.x, next.y))) {
+            continue;
+          }
+          seen.add(key(next.x, next.y));
+          queue.push(next);
+        }
+      }
+      largest = Math.max(largest, queue.length);
+    }
+  }
+
+  return largest;
+}
 
 describe("deterministic surprise mazes", () => {
   it("reproduces exactly for the same seed and options", () => {
@@ -30,15 +65,38 @@ describe("deterministic surprise mazes", () => {
     const level = generateSurpriseLevel("ui-seed", 2);
     expect(level.source).toBe("generated");
     expect(level.seed).toBe("ui-seed");
-    expect(level.width).toBe(13);
+    expect(level.width).toBeGreaterThanOrEqual(MIN_GENERATED_MAZE_SIZE);
+    expect(level.width).toBeLessThanOrEqual(19);
+    expect(level.width % 2).toBe(1);
     expect(validateLevel(level).valid).toBe(true);
   });
 
-  it("keeps generated maze sizes within the readable odd 9-to-17 range", () => {
+  it("normalizes size hints into readable odd mazes below the 30-tile ceiling", () => {
     expect(generateSurpriseMaze({ seed: "tiny", size: 3 }).width).toBe(9);
-    expect(generateSurpriseMaze({ seed: "even", size: 14 }).width).toBe(15);
-    expect(generateSurpriseMaze({ seed: "huge", size: 99 }).width).toBe(17);
-    expect(generateSurpriseMaze({ seed: "not-a-number", size: Number.NaN }).width).toBe(13);
+    for (const options of [
+      { seed: "even", size: 14 },
+      { seed: "huge", size: 99, difficulty: "adventure" as const },
+      { seed: "not-a-number", size: Number.NaN },
+    ]) {
+      const width = generateSurpriseMaze(options).width;
+      expect(width).toBeGreaterThanOrEqual(MIN_GENERATED_MAZE_SIZE);
+      expect(width).toBeLessThanOrEqual(MAX_GENERATED_MAZE_SIZE);
+      expect(width % 2).toBe(1);
+    }
+    expect(MAX_GENERATED_MAZE_SIZE).toBeLessThanOrEqual(30);
+  });
+
+  it("varies later surprise sizes non-monotonically across the full unlocked band", () => {
+    const sizes = Array.from({ length: 80 }, (_, index) => generateSurpriseMaze({
+      seed: `size-variety-${index}`,
+      size: 17,
+      difficulty: "adventure",
+    }).width);
+
+    expect(new Set(sizes).size).toBeGreaterThanOrEqual(8);
+    expect(Math.min(...sizes)).toBe(MIN_GENERATED_MAZE_SIZE);
+    expect(Math.max(...sizes)).toBe(MAX_GENERATED_MAZE_SIZE);
+    expect(sizes).not.toEqual([...sizes].sort((left, right) => left - right));
   });
 
   it.each(["movement", "gentle", "growing", "adventure"] as const)(
@@ -91,6 +149,12 @@ describe("deterministic surprise mazes", () => {
           expect(enemies.every((enemy) => ENEMY_STYLE_IDS.includes(enemy.style!)), label)
             .toBe(true);
           expect(TERRAIN_THEME_IDS, label).toContain(generated.terrainThemeId);
+          for (const terrainKind of ["water", "lava"] as const) {
+            const hazardCount = generated.terrain.flat().filter((tile) => tile === terrainKind).length;
+            if (hazardCount > 0) {
+              expect(largestHazardRegion(generated, terrainKind), label).toBeGreaterThanOrEqual(2);
+            }
+          }
         }
       }
     }
@@ -144,13 +208,16 @@ describe("deterministic surprise mazes", () => {
   });
 
   it("proves perfect-rescue routes at the largest supported size", () => {
-    const generated = generateSurpriseMaze({
-      seed: "big-friendly-maze",
+    const generated = Array.from({ length: 100 }, (_, index) => generateSurpriseMaze({
+      seed: `largest-friendly-maze-${index}`,
       difficulty: "adventure",
-      size: 17,
-    });
+      size: 30,
+    })).find((level) => level.width === MAX_GENERATED_MAZE_SIZE);
 
+    expect(generated).toBeDefined();
+    if (generated === undefined) throw new Error("Expected a deterministic 29x29 sample.");
     const result = solveLevel(generated, { requireAllAnimals: true });
+    expect(generated.width).toBe(29);
     expect(result.reason).toBe("solved");
     expect(result.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
   });

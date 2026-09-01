@@ -4390,3 +4390,258 @@ body,
     grid-template-columns: 92px minmax(0, 1fr);
   }
 }
+
+/* --------------------------------------------------------------------------
+   V8.0 roomier playfield, clearer terrain, and rescued-friend flourishes
+   -------------------------------------------------------------------------- */
+
+/* Keep the pastel palette while making navigable floor and solid wall read as
+   two different planes. The href rules add a little extra garden definition. */
+.maze-terrain-svg pattern[id$="-floor"] > image {
+  filter: brightness(1.04) saturate(0.96) contrast(1.02);
+}
+
+.maze-terrain-svg pattern[id$="-wall"] > image {
+  filter: brightness(0.92) saturate(1.04) contrast(1.05);
+}
+
+.maze-terrain-svg > rect {
+  filter: brightness(1.035);
+}
+
+.maze-terrain-svg > .terrain-wall {
+  filter: brightness(0.9) saturate(1.03) contrast(1.04);
+}
+
+.maze-terrain-svg image[href*="floor-meadow-grass"] {
+  filter: brightness(1.08) saturate(1.18) contrast(1.04);
+}
+
+.maze-terrain-svg image[href*="wall-hedge"] {
+  filter: brightness(0.86) saturate(1.2) contrast(1.08);
+}
+
+/* The rounded geometry already provides a natural bank. Avoid a coloured lip
+   or filter that can make water and lava resemble raised, shadowed stickers. */
+.maze-terrain-svg > .terrain-water,
+.maze-terrain-svg > .terrain-lava {
+  stroke: none !important;
+  filter: none !important;
+}
+
+.animal-stack .animal-cage,
+.cage-mini {
+  opacity: 1;
+  filter: none;
+}
+
+/* Rescued friends use the same tile-local positioning contract as other board
+   layers. App may supply left/top/width/height inline on each follower. */
+.pet-followers {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.pet-follower {
+  position: absolute;
+  display: grid;
+  place-items: end center;
+  overflow: visible;
+  pointer-events: none;
+  transition:
+    left 78ms ease-out,
+    top 78ms ease-out;
+}
+
+.pet-follower > img,
+.pet-follower-image {
+  width: 66%;
+  height: 66%;
+  object-fit: contain;
+  transform-origin: 50% 90%;
+  filter: drop-shadow(0 1px 1px rgba(54, 42, 64, 0.24));
+  animation: pet-follower-bob 1.18s ease-in-out infinite;
+}
+
+.pet-follower:nth-child(2) > img,
+.pet-follower:nth-child(2) .pet-follower-image {
+  animation-delay: -0.37s;
+}
+
+.pet-follower:nth-child(3) > img,
+.pet-follower:nth-child(3) .pet-follower-image {
+  animation-delay: -0.73s;
+}
+
+@keyframes pet-follower-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-7%) rotate(2deg); }
+}
+
+/* Let the rescued friends be the stars of the completion moment. */
+.rescued-result-row {
+  margin-block: clamp(7px, 0.9vw, 12px);
+  gap: clamp(7px, 0.85vw, 12px);
+}
+
+.rescued-result {
+  min-height: clamp(96px, 10vw, 136px);
+  padding: clamp(5px, 0.7vw, 10px);
+  align-content: center;
+  gap: 2px;
+  border-radius: clamp(17px, 1.8vw, 24px);
+}
+
+.rescued-result img {
+  width: clamp(70px, 8vw, 110px);
+  height: clamp(70px, 8vw, 110px);
+  transform-origin: 50% 88%;
+  filter: drop-shadow(0 4px 3px rgba(72, 51, 76, 0.18));
+}
+
+.rescued-result.rescued img,
+.rescued-result.saved img {
+  animation: rescued-pet-happy-dance 1.08s cubic-bezier(0.34, 0.05, 0.42, 1) infinite;
+}
+
+.rescued-result:nth-child(2) img { animation-delay: -0.31s; }
+.rescued-result:nth-child(3) img { animation-delay: -0.67s; }
+
+@keyframes rescued-pet-happy-dance {
+  0%, 100% { transform: translateY(0) rotate(-3deg) scale(1); }
+  24% { transform: translateY(-9%) rotate(3deg) scale(1.04, 0.98); }
+  46% { transform: translateY(0) rotate(2deg) scale(0.98, 1.03); }
+  70% { transform: translateY(-6%) rotate(-2deg) scale(1.03, 0.99); }
+}
+
+/* On iPad and landscape phones, the name and live message float over the maze
+   instead of reserving two rows. The square can therefore use almost the full
+   height of the left play card. */
+@media (orientation: landscape) and (max-width: 1400px) {
+  .game-layout:not(.big-maze) .maze-panel {
+    position: relative;
+    padding: 6px;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .game-layout:not(.big-maze) .maze-board {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    grid-row: 1;
+  }
+
+  .game-layout:not(.big-maze) .maze-topline {
+    position: absolute;
+    z-index: 35;
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    min-height: 32px;
+    height: auto;
+    padding: 2px 4px;
+    gap: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.76);
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(255, 253, 246, 0.94), rgba(245, 240, 252, 0.84));
+    box-shadow: 0 2px 7px rgba(54, 44, 70, 0.13);
+    backdrop-filter: blur(5px);
+    pointer-events: none;
+  }
+
+  .game-layout:not(.big-maze) .maze-topline-actions,
+  .game-layout:not(.big-maze) .maze-topline-actions > * {
+    pointer-events: auto;
+  }
+
+  .game-layout:not(.big-maze) .maze-topline h2 {
+    overflow: hidden;
+    font-size: clamp(13px, 1.55vw, 18px);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .game-layout:not(.big-maze) .feedback-bar {
+    position: absolute;
+    z-index: 34;
+    bottom: 10px;
+    left: 50%;
+    width: min(calc(100% - 24px), 520px);
+    min-height: 28px;
+    height: auto;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 253, 246, 0.87);
+    box-shadow: 0 2px 7px rgba(56, 44, 69, 0.14);
+    backdrop-filter: blur(5px);
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .game-layout:not(.big-maze) .maze-panel {
+    padding: 5px;
+  }
+
+  .game-layout:not(.big-maze) .maze-topline {
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    min-height: 30px;
+  }
+
+  .game-layout:not(.big-maze) .feedback-bar {
+    bottom: 8px;
+    min-height: 26px;
+    padding-block: 3px;
+  }
+
+  .rescued-result {
+    min-height: 78px;
+  }
+
+  .rescued-result img {
+    width: clamp(54px, 8vw, 68px);
+    height: clamp(54px, 8vw, 68px);
+  }
+}
+
+@media (pointer: coarse) and (orientation: landscape) {
+  .game-layout:not(.big-maze) .maze-topline-actions button,
+  .game-layout:not(.big-maze) .step-pill {
+    min-width: 44px;
+    min-height: 44px;
+    height: 44px;
+  }
+
+  .utility-row,
+  .utility-row button {
+    min-height: 44px;
+  }
+
+  .modal-close {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-follower > img,
+  .pet-follower-image,
+  .rescued-result.rescued img,
+  .rescued-result.saved img {
+    animation: none !important;
+  }
+
+  .pet-follower {
+    transition: none;
+  }
+}

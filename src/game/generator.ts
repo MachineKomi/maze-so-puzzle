@@ -25,10 +25,17 @@ export type MazeDifficulty = "movement" | "gentle" | "growing" | "adventure";
 
 export interface GenerateMazeOptions {
   readonly seed: string | number;
-  /** Requested square dimension, normalized to a readable odd size from 9 to 17. */
+  /**
+   * Progression size hint. The seed chooses a readable odd dimension from the
+   * unlocked band, with an absolute 29-tile topology cap (below the 30-tile UI
+   * ceiling).
+   */
   readonly size?: number;
   readonly difficulty?: MazeDifficulty;
 }
+
+export const MIN_GENERATED_MAZE_SIZE = 9;
+export const MAX_GENERATED_MAZE_SIZE = 29;
 
 type RandomSource = () => number;
 
@@ -75,12 +82,50 @@ function mulberry32(seed: number): RandomSource {
   };
 }
 
-function normalizeSize(requested: number | undefined): number {
+function normalizeSizeHint(requested: number | undefined): number {
   const rounded = Math.round(
     requested === undefined || !Number.isFinite(requested) ? 13 : requested,
   );
-  const clamped = Math.max(9, Math.min(17, rounded));
-  return clamped % 2 === 0 ? clamped + 1 : clamped;
+  const clamped = Math.max(
+    MIN_GENERATED_MAZE_SIZE,
+    Math.min(MAX_GENERATED_MAZE_SIZE, rounded),
+  );
+  const odd = clamped % 2 === 0 ? clamped + 1 : clamped;
+  return Math.min(MAX_GENERATED_MAZE_SIZE, odd);
+}
+
+/**
+ * Surprise mazes should stay surprising: a later chapter unlocks a wider size
+ * band rather than permanently forcing every future maze to be larger. The
+ * same seed and hint always select the same member of that band.
+ */
+function selectGeneratedSize(
+  requested: number | undefined,
+  seedText: string,
+  difficulty: MazeDifficulty,
+): number {
+  const hint = normalizeSizeHint(requested);
+  const unlockedCeiling = hint <= 9
+    ? 9
+    : hint <= 11
+      ? 13
+      : hint <= 13
+        ? 19
+        : hint <= 15
+          ? 23
+          : MAX_GENERATED_MAZE_SIZE;
+  const difficultyCeiling: Record<MazeDifficulty, number> = {
+    movement: 11,
+    gentle: 15,
+    growing: 23,
+    adventure: MAX_GENERATED_MAZE_SIZE,
+  };
+  const ceiling = Math.min(unlockedCeiling, difficultyCeiling[difficulty]);
+  const candidates = Array.from(
+    { length: Math.floor((ceiling - MIN_GENERATED_MAZE_SIZE) / 2) + 1 },
+    (_, index) => MIN_GENERATED_MAZE_SIZE + index * 2,
+  );
+  return selectByHash(candidates, `maze-size-v2:${seedText}:${difficulty}:${hint}`);
 }
 
 function shuffle<T>(values: readonly T[], random: RandomSource): T[] {
@@ -384,6 +429,61 @@ function chooseAnimalPoints(
   return shuffled.slice(0, ANIMALS_PER_LEVEL);
 }
 
+interface HazardSeed {
+  readonly at: Point;
+  readonly terrain: "water" | "lava";
+}
+
+/**
+ * Grow a small connected pool from a gated critical-path tile. The perfect-maze
+ * topology is a tree, so off-path cells reached from this post-boots seed cannot
+ * provide a shortcut around an earlier gate. Reserved progression tiles remain
+ * ordinary floor and every generated pool contains at least two cells.
+ */
+function growHazardCluster(
+  terrain: TerrainKind[][],
+  hazard: HazardSeed,
+  criticalPathIndex: ReadonlyMap<string, number>,
+  bootsPathIndex: number,
+  reserved: ReadonlySet<string>,
+  random: RandomSource,
+): boolean {
+  const seedRow = terrain[hazard.at.y];
+  if (seedRow?.[hazard.at.x] !== "floor") {
+    return false;
+  }
+
+  const targetSize = 2 + Math.floor(random() * 3);
+  const cluster: Point[] = [hazard.at];
+  const clusterKeys = new Set<string>([pointKey(hazard.at)]);
+  seedRow[hazard.at.x] = hazard.terrain;
+
+  for (let head = 0; head < cluster.length && cluster.length < targetSize; head += 1) {
+    const current = cluster[head];
+    if (current === undefined) continue;
+    const candidates = shuffle(CARDINAL_STEPS, random)
+      .map((step) => ({ x: current.x + step.x, y: current.y + step.y }))
+      .filter((candidate) => {
+        const key = pointKey(candidate);
+        const pathIndex = criticalPathIndex.get(key);
+        return terrain[candidate.y]?.[candidate.x] === "floor"
+          && !clusterKeys.has(key)
+          && !reserved.has(key)
+          && (pathIndex === undefined || pathIndex > bootsPathIndex);
+      });
+
+    for (const candidate of candidates) {
+      const row = terrain[candidate.y];
+      if (row === undefined || cluster.length >= targetSize) break;
+      row[candidate.x] = hazard.terrain;
+      cluster.push(candidate);
+      clusterKeys.add(pointKey(candidate));
+    }
+  }
+
+  return cluster.length >= 2;
+}
+
 function buildGeneratedLevel(
   seedText: string,
   seedHash: number,
@@ -407,6 +507,7 @@ function buildGeneratedLevel(
 
   const id = `surprise-v2-${seedIdentity(seedText)}-${difficulty}-${size}`;
   const objects: LevelObject[] = [];
+  const hazards: HazardSeed[] = [];
   for (let index = 0; index < recipe.length; index += 1) {
     const entry = recipe[index];
     const at = placements[index];
@@ -414,11 +515,7 @@ function buildGeneratedLevel(
       return undefined;
     }
     if (entry.kind === "hazard") {
-      const row = terrain[at.y];
-      if (row === undefined) {
-        return undefined;
-      }
-      row[at.x] = entry.terrain;
+      hazards.push({ at, terrain: entry.terrain });
       continue;
     }
 
@@ -446,6 +543,34 @@ function buildGeneratedLevel(
       case "door":
         objects.push({ id: objectId, kind: entry.kind, at, color: entry.color });
         break;
+    }
+  }
+
+  if (hazards.length > 0) {
+    const bootsPlacementIndex = recipe.findIndex((entry) => entry.kind === "boots");
+    const bootsPoint = placements[bootsPlacementIndex];
+    if (bootsPoint === undefined) return undefined;
+    const criticalPathIndex = new Map(
+      criticalPath.map((point, index) => [pointKey(point), index] as const),
+    );
+    const bootsPathIndex = criticalPathIndex.get(pointKey(bootsPoint));
+    if (bootsPathIndex === undefined) return undefined;
+    const reserved = new Set<string>([
+      pointKey(start),
+      pointKey(exit),
+      ...placements.map(pointKey),
+    ]);
+    for (const hazard of hazards) {
+      if (!growHazardCluster(
+        terrain,
+        hazard,
+        criticalPathIndex,
+        bootsPathIndex,
+        reserved,
+        random,
+      )) {
+        return undefined;
+      }
     }
   }
 
@@ -510,8 +635,8 @@ function buildGeneratedLevel(
 export function generateSurpriseMaze(options: GenerateMazeOptions): LevelDefinition {
   const seedText = String(options.seed);
   const seedHash = hashSeed(seedText);
-  const size = normalizeSize(options.size);
   const difficulty = options.difficulty ?? "growing";
+  const size = selectGeneratedSize(options.size, seedText, difficulty);
 
   for (let attempt = 0; attempt < 50; attempt += 1) {
     const level = buildGeneratedLevel(

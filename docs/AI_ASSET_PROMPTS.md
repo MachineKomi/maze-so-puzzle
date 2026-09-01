@@ -287,3 +287,35 @@ masters came from built-in generations
 `exec-223814d2-b544-429d-9cb1-dc6f749755b5.png`,
 `exec-7a007e9c-1264-4bcb-8a7b-3d0d45db8ab7.png`, and
 `exec-514e2d47-2993-44f2-a1ac-9bcea20d111d.png` respectively.
+
+## Version 8 opaque cage-front layers
+
+Build 0.8.0 replaces the translucent whole-cage runtime sprites with four
+purpose-built front overlays. They were created with the built-in ImageGen
+workflow in image-edit/reference mode, using each established cage design as
+the visual reference. The common request preserved material, palette, lighting,
+camera, scale, and placement while isolating only the front bars, door, lock,
+base rail, and front-facing ornaments. Open spaces remain transparent; the
+visible cage structure is fully opaque so an animal reads naturally behind it.
+
+Common prompt intent:
+
+```text
+Create a centered 1:1 cute chunky anime fantasy JRPG sprite matching the supplied cage reference. Preserve its exact material, lighting, palette, camera, scale, and placement, but output only the fully opaque front bars, front door, lock, base rail, and front-facing ornaments. Keep every opening transparent and omit all rear cage geometry. No animal, text, watermark, external shadow, frame, scenery, or redesign.
+```
+
+| Cage style | Archived 1254 × 1254 master | 512 × 512 runtime overlay |
+|---|---|---|
+| Golden Heart | `docs/source-assets/cage-golden-heart-front-v2-master.png` | `public/assets/cage-golden-heart-front-v2.png` |
+| Storybook Wood | `docs/source-assets/cage-storybook-wood-front-v2-master.png` | `public/assets/cage-storybook-wood-front-v2.png` |
+| Moon Silver | `docs/source-assets/cage-moon-silver-front-v2-master.png` | `public/assets/cage-moon-silver-front-v2.png` |
+| Garden Vine | `docs/source-assets/cage-garden-vine-front-v2-master.png` | `public/assets/cage-garden-vine-front-v2.png` |
+
+Runtime copies were downsampled and alpha-cleaned for tile-size layering over
+the existing animal sprites; no upscaling was used. The concise per-style record
+is also retained at `docs/source-assets/cage-front-layer-prompts.md`. These cage
+overlays are AI-generated bitmap assets; the stronger floor/wall contrast,
+outline-free hazard rendering, follower motion, and responsive layout in 0.8.0
+are code-native presentation changes rather than new generated artwork. The
+0.8.0 local release pass checked the archived/runtime sources and verified the
+opaque front-layer effect in play through normal rescue controls.

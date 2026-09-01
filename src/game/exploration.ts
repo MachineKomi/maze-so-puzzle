@@ -1,7 +1,7 @@
 import type { Point } from "./types";
 
 /** The default number of maze tiles shown along each side of the camera. */
-export const DEFAULT_FOV_SIZE = 7;
+export const DEFAULT_FOV_SIZE = 6;
 
 /** Stable, serializable coordinate key used by the explored-map fog of war. */
 export type TileKey = `${number},${number}`;
@@ -58,9 +58,11 @@ export function toTileKey(point: Point): TileKey {
 }
 
 /**
- * Calculate a player-following camera window. In open space the player is in
- * the centre tile; near a level boundary the window slides until it meets that
- * boundary, preserving its requested size whenever the grid permits it.
+ * Calculate a player-following camera window. Odd windows have one centre tile;
+ * even windows place the player in the upper-left of the central four tiles so
+ * the extra visible tile is consistently to the right and below. Near a level
+ * boundary the window slides until it meets that boundary, preserving its
+ * requested size whenever the grid permits it.
  */
 export function getCameraWindow(
   grid: GridSize,
@@ -74,8 +76,8 @@ export function getCameraWindow(
 
   const width = Math.min(grid.width, fovSize);
   const height = Math.min(grid.height, fovSize);
-  const left = clamp(focus.x - Math.floor(width / 2), 0, grid.width - width);
-  const top = clamp(focus.y - Math.floor(height / 2), 0, grid.height - height);
+  const left = clamp(focus.x - Math.floor((width - 1) / 2), 0, grid.width - width);
+  const top = clamp(focus.y - Math.floor((height - 1) / 2), 0, grid.height - height);
 
   return {
     left,

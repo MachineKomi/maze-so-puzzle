@@ -1,34 +1,38 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: playable 0.7.1 web and Windows test release
+Audited build: locally verified playable 0.8.0 web and Windows test release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. The current automated suite, responsive browser checks,
-Tauri build, staging, source-to-stage hash comparison, and portable smoke launch
-all completed against 0.7.1 on 2026-09-01. Older rows remain as historical
-release evidence.
+real-device testing. On 2026-09-01 the integrated 0.8.0 suite, production web
+build, dependency audit/tree, locked-Tauri compile, local responsive-browser
+matrix, Windows packaging/source comparison, hash record, and portable smoke
+launch completed. Physical-device touch/listening/feel, clean-machine install,
+signing, and the final public Vercel smoke remain open. Older sections are kept
+as clearly labelled historical evidence.
 
-## Current 0.7.1 release status
+## Current 0.8.0 locally verified status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, touch direction/dead-zone rules, visual variants, rescue-record migration, and exhaustive terrain topology | 171 of 171 tests passed; strict TypeScript, Vite production build, zero-vulnerability npm audit, and locked Tauri compile passed |
-| Landscape phones | Full-safe-viewport layout at 667×375, 740×360, and 844×390 with compact sidebar and two-row movement controls | No body/sidebar overflow or card overlap; maze measured 277–292 px and movement/utility targets remained at least 44 px |
-| iPad-size layout | 1024×768 and 1180×820 responsive checks plus dedicated coarse-pointer D-pad rules | No sidebar overflow; maze measured 442–516 px. Physical-device gesture and pinch checks remain required |
-| Touch movement | Floating joystick uses a cell-scaled dead zone, dominant axis, 72 ms repeat, live direction changes, pointer capture, and tap fallback | Seven pure gesture regressions pass; browser markup/meta and cancellation paths reviewed, with physical-iPad interaction remaining |
-| Exploration policy | The shared rule enables the 7 x 7 camera and fog minimap whenever either maze dimension exceeds 7; focused boundary coverage includes 7, 8, and 9 tile dimensions | Passed unit coverage and local production-browser movement/reveal checks |
+| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, pointer controls, follower trails, visual variants, rescue-record migration, and exhaustive terrain topology | 189 of 189 tests across 15 files passed; strict TypeScript and the Vite production build passed. `npm audit` reported zero vulnerabilities, the dependency tree had only expected absent optional packages, and `cargo check --locked` passed |
+| Landscape phones | Full-safe-viewport shell, full-height maze card, overlaid maze information, compact sidebar, and two-row movement controls are implemented for short landscape screens | Local production QA passed at 844×390 (362 px board, 44 px minimum controls) and 667×375 (347 px board), with no overflow or overlap; physical-device feel remains |
+| iPad-size layout | Phone/iPad maze panels use almost all available height; coarse-pointer actions retain 44 px targets | Local production QA passed at 1024×768 with a 534 px board and no overflow or overlap; physical-iPad gesture/pinch/listening checks remain |
+| Pointer movement | Primary mouse/touch press moves immediately, hold repeats after 92 ms at a 68 ms cadence, drag steers, and release/recenter cancels queued motion | Focused pure-control regressions cover tile intent and strict one-tile wall-only corner assistance; final mouse and physical-touch browser checks remain |
+| Exploration policy | The shared rule enables a 6 x 6 camera and fog minimap whenever either maze dimension exceeds 6; even-window bias, edge clamping, and reveal accumulation are unit-covered | Passed focused unit coverage; repeat the public-browser follow/minimap pass after deployment |
 | Tester access | The title build label opens a direct nine-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Passed local production-browser normal-query, exact-query, direct-selection, and modal checks |
-| Terrain geometry | Maze terrain is one globally aligned SVG surface with connected wall and hazard regions, rounded convex/concave bends, preserved holes, periodic textures, a camera gutter, and flat hazard lips without cast shadows | Passed exhaustive 3 x 3 occupancy tests, targeted topology tests, and local landscape visual review; real-iPad review remains valuable play-test feedback |
-| Visual catalogue | Nine distinct paired terrain themes, five weapons, five friendly enemy looks, eight pet species, and four cage styles are selected through typed IDs and local assets | Every story maze has a distinct theme, one weapon, and three unique optional pets; the picture-first UI and held-weapon overlay resolve the authored variants |
-| Surprise Maze variants | Generated terrain, weapon, enemy, and cage looks use dedicated deterministic hash streams | Repeating a seed reproduces its presentation without changing deterministic layout or progression placement |
+| Terrain geometry | Maze terrain is one globally aligned SVG surface with connected wall/hazard regions, rounded convex/concave bends, preserved holes, periodic textures, a camera gutter, stronger floor/wall contrast, and no hazard outlines or shadows | Topology tests and production build passed; integrated visual review remains required |
+| Visual catalogue | Nine terrain themes, five weapons, five friendly enemy looks, eight pet species, and four opaque AI-generated front cage layers are selected through typed IDs and local assets | Catalogue tests cover every current runtime asset; source/opacity and the layered cage effect were locally verified through normal play |
+| Pet followers | Rescued friends occupy distinct recent visible footprints behind Ame with bounded loop-free trail state | Pure trail regressions pass and one rescued follower was verified through normal local controls; multi-follower, reduced-motion, and physical-device feel checks remain |
+| Story pacing | Authored sizes run 9, 11, 13, 15, 13, 15, 17, 17, and 25; Rainbow Picnic precedes the smaller Toasty Toes breather | All nine ordinary and perfect-rescue routes remain solver-validated |
+| Surprise Maze variants | Generated presentation remains deterministic; size varies by seed across unlocked odd 9–29 bands, and growing/adventure hazards form connected 2–4 tile post-boots clusters without consuming progression tiles | Seed replay, non-monotonic size variety, 29×29 perfect rescue, hazard connectivity, and ordinary/perfect solvability tests pass |
 | Optional Power puzzle | The Wishing Woods kitten spur is guarded by an optional Power 9 pebble-golem after a Power 2 foe, `+2` potion, and Power 5 foe | The ordinary route remains 108 steps; the solver-verified all-pets route backtracks at Power 11 and remains safely solvable |
-| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Pushes to `main` auto-deploy; the canonical alias is smoke-tested after each release push |
-| Desktop artifacts | Tauri 0.7.1 portable executable and NSIS installer built, staged, version-checked, source-compared, and SHA-256 hashed | Portable app remained responsive with the correct title for five seconds; installer clean-machine testing and signing remain |
+| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Pushes to `main` auto-deploy; 0.8.0 is not considered released until the canonical alias is updated and smoke-tested |
+| Desktop artifacts | The unsigned 0.8.0 portable executable and NSIS installer were built, staged, version-checked, source-compared, and SHA-256-hashed | The portable app remained responsive with the correct title for a five-second smoke launch; clean-machine install and signing remain |
 
-## Current 0.5.1 implementation status
+## Historical 0.5.1 implementation status
 
 | Area | Final evidence | Status |
 | --- | --- | --- |
@@ -41,7 +45,7 @@ release evidence.
 | CI parity | Browser verification remains on Linux; locked Tauri compilation also runs on `windows-latest` | Workflow is present on `origin/main`; individual hosted-run status is reported by the README badge rather than inferred here |
 | Windows artifacts | Tauri 0.5.1 executable and NSIS installer were built, staged, source-compared, and hashed; the portable app remained responsive with the correct title for five seconds | Passed locally; clean-machine install and signing remain |
 
-## Current 0.5.0 implementation status
+## Historical 0.5.0 implementation status
 
 | Area | Final evidence | Status |
 | --- | --- | --- |
@@ -89,6 +93,31 @@ release evidence.
 These results preserve the last verified 0.2.0 baseline for comparison. The
 0.4.0 evidence above remains as a historical release baseline. The verified
 0.5.0 candidate and the broader unfinished manual matrix are recorded separately.
+
+## Version 8.0 implementation snapshot
+
+- The exploration camera is now 6 x 6. Its even-sized window uses a stable
+  upper-left centre bias, clamps at every edge, and feeds the same accumulated
+  reveal state used by the fog-of-war minimap.
+- Surprise Maze dimensions vary deterministically rather than climbing in a
+  straight line. Unlocked seed bands cover readable odd sizes from 9 through 29;
+  generated topology never reaches 30 tiles in either dimension.
+- Growing and adventure generators can place connected water or lava regions of
+  2–4 tiles after the matching boots. Placement reserves required progression
+  cells and is accepted only after ordinary and perfect-rescue solver checks.
+- A primary mouse or touch pointer now acts as a continuous directional control:
+  press moves immediately, hold repeats, dragging changes direction, and release
+  or recentering stops movement. A strict one-tile assist can round an ordinary
+  wall corner, but never pathfinds, crosses a hazard, or bypasses a door or foe.
+- Rescued animals visibly follow Ame along distinct recent footprints. This trail
+  is bounded, loop-free presentation state and does not alter collision or saves.
+- The four cage styles use opaque AI-generated front layers over the existing pet
+  art. Terrain contrast is stronger, connected hazards have no outline, lip,
+  drop shadow, or filter, and the phone/iPad playfield uses nearly the full
+  landscape height.
+- The integrated 0.8.0 web source and unsigned Windows package are locally
+  verified. Physical-device touch/listening/feel, clean-machine installation,
+  signing, and the final public Vercel smoke remain separate release gates.
 
 ## Version 7.0 web implementation snapshot
 
@@ -189,17 +218,24 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 
 - Equal Power wins. This is intentional, child-friendly, covered by a unit test,
   and documented in the README.
-- Click or tap moves exactly one grid square in the dominant direction from Ame.
-  Touch dragging acts as a floating directional joystick and still never
-  pathfinds to a destination.
+- Primary mouse and touch pointers use the same continuous directional control.
+  Press moves one square immediately, hold repeats, drag steers, and release or
+  recentering stops. A one-tile wall-only corner assist may choose a safe open
+  side step; it never pathfinds or assists onto hazards or through blockers.
 - Portrait orientation shows a turn-sideways message. Landscape is the intended
   play mode rather than an accidental limitation.
 - The three animal rescues are bonus goals; reaching the maze exit must not
   require collecting them.
-- Any maze wider or taller than 7 tiles uses the 7 x 7 exploration camera and
+- Any maze wider or taller than 6 tiles uses the 6 x 6 exploration camera and
   fog minimap. Maze dimensions and presentation are no longer separate opt-ins.
+- Generated mazes vary by seed across unlocked odd 9–29 size bands. The current
+  topology cap is 29, and connected 2–4 tile hazard regions are introduced only
+  after the appropriate boots while keeping ordinary and perfect routes solvable.
+- The authored campaign deliberately varies 9, 11, 13, 15, 13, 15, 17, 17, and
+  25 tiles. Rainbow Picnic comes before the smaller Toasty Toes breather rather
+  than making every story maze monotonically larger.
 - The unsigned Windows files are suitable for local testing. SmartScreen may
-  warn on machines that did not build them; the verified files are 0.7.1.
+  warn on machines that did not build them; the verified files are 0.8.0.
 
 ## Hardening completed during housekeeping
 
@@ -217,6 +253,10 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Non-primary pointers no longer move Ame. Keyboard movement uses deterministic
   held-key timing, a single latest-turn buffer, and lifecycle cleanup, while the
   D-pad supports the same immediate press-and-hold rhythm.
+- Primary pointer intent and the wall-only corner assist are isolated in
+  `pointerControls.ts`; follower trail state is isolated in `followerTrail.ts`.
+  Focused regressions cover direction changes, cancellation inputs, even-window
+  camera behavior, generated size bands, and connected hazard placement.
 - Dialogs now receive focus, contain keyboard focus, respond to Escape where
   appropriate, restore focus, and make the background inert while open.
 - The rendered page has a logical top-level heading, control-state semantics,
@@ -227,18 +267,20 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Big Maze remains available as an optional roomier board view while retaining a
   compact Power/item/rescue HUD and an overlaid feedback toast.
 
-The 0.7.1 source passes the automated, dependency, locked-desktop-compile,
-local responsive-browser, Windows packaging, source-comparison, hash, and
-portable-smoke gates recorded above. All unchecked clean-machine, physical-device,
-listening, and broader manual items in `RELEASE_CHECKLIST.md` remain requirements
-for the artifact type they cover.
+The 0.8.0 source passes 189 tests across 15 files, strict TypeScript, the Vite
+production build, a zero-vulnerability npm audit, dependency-tree review, and
+`cargo check --locked`. Local responsive QA passed at 1024×768, 844×390, and
+667×375; cage opacity/source and one follower were checked through normal play.
+The unsigned 0.8.0 Windows pair was source-compared, hashed, and smoke-checked.
+Unchecked public-Vercel, physical-device, listening/feel, clean-install, and
+signing items in `RELEASE_CHECKLIST.md` remain requirements.
 
 ## Prioritized remaining work
 
 ### P0 - release hygiene and future packaged builds
 
 - Perform the remaining physical-device browser matrix in `RELEASE_CHECKLIST.md`
-  against the exact 0.7.1 production deployment, and separately repeat the
+  against the exact 0.8.0 production deployment, and separately repeat the
   portable and installer matrix on a clean Windows account before wider sharing.
 - Before any new Windows release, install, launch, save, upgrade, and uninstall
   on a clean Windows x64 machine.
@@ -258,7 +300,7 @@ for the artifact type they cover.
 - Add automated accessibility checks and a richer screen-reader representation
   of nearby maze cells; the visual grid should not be the only spatial model.
 - Test 200% browser zoom and Windows text scaling, including Big Maze mode and
-  the 7 x 7 camera/minimap on early, generated, and 25 x 25 mazes.
+  the 6 x 6 camera/minimap on early, generated, and 25 x 25 mazes.
 - Add visual-regression snapshots for the minimum 960 x 540 window, the default
   1280 x 720 window, 1920 x 1080, and the portrait guidance screen.
 - Repeat drag steering, recenter/release cancellation, touch targets, D-pad hold,
@@ -287,10 +329,10 @@ for the artifact type they cover.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- The current source metadata is aligned at 0.7.1 and the public Vercel alias is
-  rechecked after every deployment. Packaging, staged names, source-to-stage
+- Current source metadata is aligned at 0.8.0 and the public Vercel alias must be
+  rechecked after deployment. Packaging, staged names, source-to-stage
   comparison, portable smoke launch, sizes, and hashes in `release/` describe
-  the verified unsigned 0.7.1 Windows test artifacts.
+  the verified unsigned 0.8.0 Windows test artifacts.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

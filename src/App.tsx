@@ -44,6 +44,7 @@ import {
   type CameraWindow,
   type TileKey,
 } from "./game/exploration";
+import { getVisibleFollowerPoints, recordFollowerStep } from "./game/followerTrail";
 import {
   ANIMALS_PER_LEVEL,
   ANIMAL_SPECIES,
@@ -85,10 +86,9 @@ import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 import { getStoryRescueRecordDisplay } from "./rescueRecords";
 import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
 import {
-  directionFromTouchDrag,
-  touchDeadZoneForCell,
-  type TouchPoint,
-} from "./touchGesture";
+  pointerIntentFromTileOffset,
+  resolvePointerMoveDirection,
+} from "./pointerControls";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
   up: "▲",
@@ -118,8 +118,9 @@ const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const HELD_KEY_DELAY_MS = 105;
 const HELD_KEY_REPEAT_MS = 64;
-const TOUCH_DRAG_REPEAT_MS = 72;
-const BUILD_VERSION = "0.7.1";
+const POINTER_HOLD_DELAY_MS = 92;
+const POINTER_HOLD_REPEAT_MS = 68;
+const BUILD_VERSION = "0.8.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -147,20 +148,24 @@ interface PendingAdventure {
   readonly sound: "select" | "title";
 }
 
-interface ActiveTouchDrag {
+interface PointerPoint {
+  readonly x: number;
+  readonly y: number;
+}
+
+interface ActiveBoardPointer {
   readonly pointerId: number;
-  readonly origin: TouchPoint;
+  readonly pointerType: string;
+  readonly origin: PointerPoint;
   readonly boardLeft: number;
   readonly boardTop: number;
-  current: TouchPoint;
+  current: PointerPoint;
   direction: Direction | null;
-  dragged: boolean;
-  readonly deadZone: number;
 }
 
 interface TouchCursor {
-  readonly origin: TouchPoint;
-  readonly current: TouchPoint;
+  readonly origin: PointerPoint;
+  readonly current: PointerPoint;
   readonly direction: Direction | null;
 }
 
@@ -402,9 +407,9 @@ const MazeTerrain = memo(function MazeTerrain({
         </defs>
 
         <rect x={camera.left} y={camera.top} width={camera.width} height={camera.height} fill={`url(#${floorPatternId})`} />
-        {water.d && <path d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} stroke={theme.waterLip} strokeWidth="0.11" strokeLinejoin="round" />}
-        {lava.d && <path d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} stroke={theme.lavaLip} strokeWidth="0.11" strokeLinejoin="round" />}
-        {walls.d && <path d={walls.d} fill={`url(#${wallPatternId})`} fillRule={walls.fillRule} />}
+        {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} />}
+        {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} />}
+        {walls.d && <path className="terrain-wall" d={walls.d} fill={`url(#${wallPatternId})`} fillRule={walls.fillRule} />}
       </svg>
       {isInsideWindow(level.exit, camera) && (
         <div className="goal-layer" style={cameraLayerStyle(level.exit, camera)} aria-hidden="true">
@@ -545,6 +550,9 @@ function App() {
   const [bigMaze, setBigMaze] = useState(false);
   const [level, setLevel] = useState<LevelDefinition>(initialLevel);
   const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
+  const [playerTrail, setPlayerTrail] = useState<readonly Point[]>(() => [
+    initialRun?.game.position ?? initialLevel.start,
+  ]);
   const [runMode, setRunMode] = useState<RunMode>("normal");
   const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(
     () => isExplorationLevel(initialLevel)
@@ -576,14 +584,15 @@ function App() {
   const inputUnlockTimer = useRef<number | undefined>(undefined);
   const queuedDirection = useRef<Direction | null>(null);
   const attemptMoveRef = useRef<(direction: Direction) => void>(() => undefined);
+  const pointerDirectionRef = useRef<(clientX: number, clientY: number) => Direction | null>(() => null);
   const heldKeys = useRef(new Map<string, Direction>());
   const heldKeyOrder = useRef<string[]>([]);
   const heldKeyTimer = useRef<number | undefined>(undefined);
   const dpadHoldDirection = useRef<Direction | null>(null);
   const dpadHoldPointerId = useRef<number | null>(null);
   const dpadHoldTimer = useRef<number | undefined>(undefined);
-  const activeTouchDrag = useRef<ActiveTouchDrag | null>(null);
-  const touchDragTimer = useRef<number | undefined>(undefined);
+  const activeBoardPointer = useRef<ActiveBoardPointer | null>(null);
+  const pointerHoldTimer = useRef<number | undefined>(undefined);
   const [touchCursor, setTouchCursor] = useState<TouchCursor | null>(null);
   const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
@@ -644,6 +653,23 @@ function App() {
     () => animalObjects.filter((object) => game.rescuedAnimalIds.includes(object.id)).map((object) => object.species),
     [animalObjects, game.rescuedAnimalIds],
   );
+  const followerPlacements = useMemo(() => {
+    const rescuedAnimals = game.rescuedAnimalIds.flatMap((animalId) => {
+      const animal = animalObjects.find((candidate) => candidate.id === animalId);
+      return animal ? [animal] : [];
+    });
+    const availableTrail = getVisibleFollowerPoints(
+      playerTrail,
+      game.position,
+      cameraWindow,
+      rescuedAnimals.length,
+    );
+
+    return rescuedAnimals.flatMap((animal, index) => {
+      const point = availableTrail[index];
+      return point ? [{ animal, point }] : [];
+    });
+  }, [animalObjects, cameraWindow, game.position, game.rescuedAnimalIds, playerTrail]);
   const objectKinds = useMemo(() => new Set(level.objects.map((object) => object.kind)), [level]);
   const keyColors = useMemo(
     () => [...new Set(level.objects.flatMap((object) => object.kind === "key" ? [object.color] : []))],
@@ -678,13 +704,13 @@ function App() {
     }
   }, []);
 
-  const clearTouchDrag = useCallback(() => {
-    activeTouchDrag.current = null;
+  const clearBoardPointer = useCallback(() => {
+    activeBoardPointer.current = null;
     queuedDirection.current = null;
     setTouchCursor(null);
-    if (touchDragTimer.current !== undefined) {
-      window.clearTimeout(touchDragTimer.current);
-      touchDragTimer.current = undefined;
+    if (pointerHoldTimer.current !== undefined) {
+      window.clearTimeout(pointerHoldTimer.current);
+      pointerHoldTimer.current = undefined;
     }
   }, []);
 
@@ -697,8 +723,8 @@ function App() {
       heldKeyTimer.current = undefined;
     }
     clearDpadHold();
-    clearTouchDrag();
-  }, [clearDpadHold, clearTouchDrag]);
+    clearBoardPointer();
+  }, [clearBoardPointer, clearDpadHold]);
 
   useEffect(() => {
     mutedRef.current = muted;
@@ -735,6 +761,7 @@ function App() {
     }
     setLevel(nextLevel);
     setGame(createInitialGameState(nextLevel));
+    setPlayerTrail([nextLevel.start]);
     setRevealedTiles(isExplorationLevel(nextLevel)
       ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)
       : new Set());
@@ -778,6 +805,11 @@ function App() {
       ? feedbackFor(result.events, level)
       : { icon: "✨", text: level.objective, tone: "plain" as const, sound: "step" as const };
     setGame(result.state);
+    if (result.events.some((event) => event.type === "combat-lost")) {
+      setPlayerTrail([level.start]);
+    } else if (result.moved) {
+      setPlayerTrail((trail) => recordFollowerStep(trail, game.position));
+    }
     if (result.moved && explorationMode) {
       setRevealedTiles((revealed) => revealVisibleTiles(
         revealed,
@@ -956,115 +988,134 @@ function App() {
   useEffect(() => () => {
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
     if (heldKeyTimer.current !== undefined) window.clearTimeout(heldKeyTimer.current);
-    if (touchDragTimer.current !== undefined) window.clearTimeout(touchDragTimer.current);
+    if (pointerHoldTimer.current !== undefined) window.clearTimeout(pointerHoldTimer.current);
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     if (rewardSoundTimer.current !== undefined) window.clearTimeout(rewardSoundTimer.current);
     disposeMusic();
   }, []);
 
-  const directionFromPointer = useCallback((clientX: number, clientY: number): Direction | null => {
+  const moveDirectionFromPointer = useCallback((clientX: number, clientY: number): Direction | null => {
     const rect = boardRef.current?.getBoundingClientRect();
     if (!rect) return null;
     const cellWidth = rect.width / cameraWindow.width;
     const cellHeight = rect.height / cameraWindow.height;
     const centerX = rect.left + (game.position.x - cameraWindow.left + 0.5) * cellWidth;
     const centerY = rect.top + (game.position.y - cameraWindow.top + 0.5) * cellHeight;
-    const dx = clientX - centerX;
-    const dy = clientY - centerY;
-    if (Math.abs(dx) < cellWidth * 0.34 && Math.abs(dy) < cellHeight * 0.34) return null;
-    if (Math.abs(dx / cellWidth) >= Math.abs(dy / cellHeight)) return dx < 0 ? "left" : "right";
-    return dy < 0 ? "up" : "down";
-  }, [cameraWindow, game.position.x, game.position.y]);
+    const intent = pointerIntentFromTileOffset(
+      (clientX - centerX) / cellWidth,
+      (clientY - centerY) / cellHeight,
+    );
+    if (!intent) return null;
+    return resolvePointerMoveDirection(
+      level,
+      game,
+      intent.direction,
+      intent.lateralOffset,
+    );
+  }, [cameraWindow, game, level]);
 
-  const scheduleTouchDragRepeat = useCallback((delay: number) => {
-    if (touchDragTimer.current !== undefined) window.clearTimeout(touchDragTimer.current);
+  pointerDirectionRef.current = moveDirectionFromPointer;
+
+  const schedulePointerHoldRepeat = useCallback((delay: number) => {
+    if (pointerHoldTimer.current !== undefined) window.clearTimeout(pointerHoldTimer.current);
     const repeat = () => {
-      const direction = activeTouchDrag.current?.direction;
+      const pointer = activeBoardPointer.current;
+      const direction = pointer
+        ? pointerDirectionRef.current(pointer.current.x, pointer.current.y)
+        : null;
+      if (pointer) {
+        pointer.direction = direction;
+        setPreviewDirection(direction);
+        if (pointer.pointerType === "touch") {
+          setTouchCursor((cursor) => cursor && cursor.direction !== direction
+            ? { ...cursor, direction }
+            : cursor);
+        }
+      }
       if (!direction) {
-        touchDragTimer.current = undefined;
+        queuedDirection.current = null;
+        pointerHoldTimer.current = undefined;
         return;
       }
       attemptMoveRef.current(direction);
-      touchDragTimer.current = window.setTimeout(repeat, TOUCH_DRAG_REPEAT_MS);
+      pointerHoldTimer.current = window.setTimeout(repeat, POINTER_HOLD_REPEAT_MS);
     };
-    touchDragTimer.current = window.setTimeout(repeat, delay);
+    pointerHoldTimer.current = window.setTimeout(repeat, delay);
   }, []);
 
   const onBoardPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "touch") {
-      setPreviewDirection(directionFromPointer(event.clientX, event.clientY));
+    const pointer = activeBoardPointer.current;
+    if (!pointer || pointer.pointerId !== event.pointerId) {
+      if (event.pointerType !== "touch") {
+        setPreviewDirection(pointerDirectionRef.current(event.clientX, event.clientY));
+      }
       return;
     }
 
-    const drag = activeTouchDrag.current;
-    if (!drag || drag.pointerId !== event.pointerId) return;
     event.preventDefault();
     const current = { x: event.clientX, y: event.clientY };
-    const direction = directionFromTouchDrag(drag.origin, current, drag.deadZone);
-    const directionChanged = direction !== drag.direction;
-    drag.current = current;
-    drag.direction = direction;
-    drag.dragged ||= direction !== null;
-    setTouchCursor({
-      origin: { x: drag.origin.x - drag.boardLeft, y: drag.origin.y - drag.boardTop },
-      current: { x: current.x - drag.boardLeft, y: current.y - drag.boardTop },
-      direction,
-    });
+    const direction = pointerDirectionRef.current(current.x, current.y);
+    const directionChanged = direction !== pointer.direction;
+    pointer.current = current;
+    pointer.direction = direction;
+    if (pointer.pointerType === "touch") {
+      setTouchCursor({
+        origin: { x: pointer.origin.x - pointer.boardLeft, y: pointer.origin.y - pointer.boardTop },
+        current: { x: current.x - pointer.boardLeft, y: current.y - pointer.boardTop },
+        direction,
+      });
+    }
     setPreviewDirection(direction);
 
     if (!directionChanged) return;
-    if (touchDragTimer.current !== undefined) {
-      window.clearTimeout(touchDragTimer.current);
-      touchDragTimer.current = undefined;
+    if (pointerHoldTimer.current !== undefined) {
+      window.clearTimeout(pointerHoldTimer.current);
+      pointerHoldTimer.current = undefined;
     }
     if (!direction) {
       queuedDirection.current = null;
       return;
     }
     attemptMoveRef.current(direction);
-    scheduleTouchDragRepeat(TOUCH_DRAG_REPEAT_MS);
+    schedulePointerHoldRepeat(POINTER_HOLD_REPEAT_MS);
   };
 
   const onBoardPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
+    clearBoardPointer();
+    const rect = event.currentTarget.getBoundingClientRect();
+    const origin = { x: event.clientX, y: event.clientY };
+    const direction = pointerDirectionRef.current(origin.x, origin.y);
+    const pointer: ActiveBoardPointer = {
+      pointerId: event.pointerId,
+      pointerType: event.pointerType,
+      origin,
+      boardLeft: rect.left,
+      boardTop: rect.top,
+      current: origin,
+      direction,
+    };
+    activeBoardPointer.current = pointer;
+    event.currentTarget.setPointerCapture(event.pointerId);
     if (event.pointerType === "touch") {
-      clearTouchDrag();
-      const rect = event.currentTarget.getBoundingClientRect();
-      const origin = { x: event.clientX, y: event.clientY };
-      activeTouchDrag.current = {
-        pointerId: event.pointerId,
-        origin,
-        boardLeft: rect.left,
-        boardTop: rect.top,
-        current: origin,
-        direction: null,
-        dragged: false,
-        deadZone: touchDeadZoneForCell(rect.width / cameraWindow.width, rect.height / cameraWindow.height),
-      };
-      event.currentTarget.setPointerCapture(event.pointerId);
       const localOrigin = { x: origin.x - rect.left, y: origin.y - rect.top };
-      setTouchCursor({ origin: localOrigin, current: localOrigin, direction: null });
-      setPreviewDirection(null);
-      return;
+      setTouchCursor({ origin: localOrigin, current: localOrigin, direction });
     }
-    const direction = directionFromPointer(event.clientX, event.clientY);
-    if (direction) attemptMove(direction);
+    setPreviewDirection(direction);
+    if (!direction) return;
+    attemptMoveRef.current(direction);
+    schedulePointerHoldRepeat(POINTER_HOLD_DELAY_MS);
   };
 
-  const finishBoardTouch = (event: ReactPointerEvent<HTMLDivElement>, cancelled = false) => {
-    const drag = activeTouchDrag.current;
-    if (event.pointerType !== "touch" || !drag || drag.pointerId !== event.pointerId) return;
+  const finishBoardPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const pointer = activeBoardPointer.current;
+    if (!pointer || pointer.pointerId !== event.pointerId) return;
     event.preventDefault();
-    const wasDragged = drag.dragged;
-    clearTouchDrag();
+    clearBoardPointer();
     setPreviewDirection(null);
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
-    }
-    if (!cancelled && !wasDragged) {
-      const direction = directionFromPointer(event.clientX, event.clientY);
-      if (direction) attemptMoveRef.current(direction);
     }
   };
 
@@ -1357,7 +1408,7 @@ function App() {
                     {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}>🔑 {game.keys.length}/{keyColors.length}</span>}
                   </div>
                 )}
-                {explorationMode && <span className="exploration-view-pill" title="Ame explores seven tiles at a time">🗺 7 × 7 view</span>}
+                {explorationMode && <span className="exploration-view-pill" title="Ame explores six tiles at a time">🗺 6 × 6 view</span>}
                 {testerToolsEnabled && (
                   <button
                     className="tester-skip-button"
@@ -1383,16 +1434,16 @@ function App() {
                 touchAction: "none",
               } as CSSProperties}
               role="application"
-              aria-label="Maze board. Use arrow keys, W A S D, the arrow buttons, click in a direction from Ame, or drag a finger like a joystick."
+              aria-label="Maze board. Use arrow keys, W A S D, the arrow buttons, or press and steer a mouse or finger in a direction from Ame."
               aria-describedby="maze-status"
               aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight W A S D"
               tabIndex={0}
               onPointerMove={onBoardPointerMove}
-              onPointerLeave={(event) => { if (event.pointerType !== "touch") setPreviewDirection(null); }}
+              onPointerLeave={() => { if (!activeBoardPointer.current) setPreviewDirection(null); }}
               onPointerDown={onBoardPointerDown}
-              onPointerUp={(event) => finishBoardTouch(event)}
-              onPointerCancel={(event) => finishBoardTouch(event, true)}
-              onLostPointerCapture={(event) => finishBoardTouch(event, true)}
+              onPointerUp={finishBoardPointer}
+              onPointerCancel={finishBoardPointer}
+              onLostPointerCapture={finishBoardPointer}
               onContextMenu={(event) => event.preventDefault()}
             >
               <MazeTerrain level={level} camera={cameraWindow} />
@@ -1452,6 +1503,20 @@ function App() {
                   {object.kind === "potion" && <span className="item-amount">+{object.amount}</span>}
                 </div>
               ))}
+
+              {followerPlacements.length > 0 && (
+                <div className="pet-followers" aria-hidden="true">
+                  {followerPlacements.map(({ animal, point }) => (
+                    <div
+                      className="pet-follower"
+                      style={cameraLayerStyle(point, cameraWindow)}
+                      key={animal.id}
+                    >
+                      <img src={animalArt(animal.species)} alt="" draggable={false} />
+                    </div>
+                  ))}
+                </div>
+              )}
 
               <div
                 className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}`}
@@ -1584,7 +1649,7 @@ function App() {
                 <strong>
                   {firstMoveNudge
                     ? <>Try the glowing {suggestedMoveDirection ? DIRECTION_ICONS[suggestedMoveDirection] : "arrow"} button!</>
-                    : <><span className="desktop-controls-copy">Arrow keys · WASD · click</span><span className="touch-controls-copy">Drag on the maze, or tap an arrow</span></>}
+                    : <><span className="desktop-controls-copy">Arrow keys · WASD · click, hold or drag</span><span className="touch-controls-copy">Touch, hold or drag on the maze</span></>}
                 </strong>
               </div>
               <div className="dpad" aria-label="Movement buttons">
@@ -1627,7 +1692,7 @@ function App() {
         {helpOpen && (
           <Modal title="How to help Ame" onClose={closeHelp} returnFocus={modalReturnFocus.current}>
             <div className="help-grid">
-              <HelpStep icon="👣" title="Move" copy="Drag on the maze or tap an arrow. One square at a time." />
+              <HelpStep icon="👣" title="Move" copy="Press, hold or drag on the maze—or tap an arrow. One square at a time." />
               <HelpStep icon="🗡️" title="Find a weapon" copy="Then baddies can scoot." />
               <HelpStep icon="⭐" title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
               <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />
@@ -1730,7 +1795,7 @@ function App() {
                   <b>{index + 1}</b>
                   <span>
                     <strong>{candidate.name}</strong>
-                    <small>{candidate.width} × {candidate.height}{isExplorationLevel(candidate) ? " · 7 × 7 view" : ""}</small>
+                    <small>{candidate.width} × {candidate.height}{isExplorationLevel(candidate) ? " · 6 × 6 view" : ""}</small>
                   </span>
                   <i aria-hidden="true">→</i>
                 </button>

@@ -8,6 +8,7 @@ import {
   WISHING_WOODS_LEVEL,
 } from "./levels";
 import { solveLevel, validateLevel } from "./solver";
+import type { LevelDefinition, TerrainKind } from "./types";
 import {
   ANIMALS_PER_LEVEL,
   ANIMAL_SPECIES,
@@ -17,6 +18,37 @@ import {
   WEAPON_STYLE_IDS,
 } from "./types";
 
+function largestConnectedTerrainRegion(
+  level: LevelDefinition,
+  terrainKind: TerrainKind,
+): number {
+  const seen = new Set<string>();
+  let largest = 0;
+  const key = (x: number, y: number) => `${x},${y}`;
+
+  for (let y = 0; y < level.height; y += 1) {
+    for (let x = 0; x < level.width; x += 1) {
+      if (level.terrain[y]?.[x] !== terrainKind || seen.has(key(x, y))) continue;
+      const queue = [{ x, y }];
+      seen.add(key(x, y));
+      for (let head = 0; head < queue.length; head += 1) {
+        const point = queue[head];
+        if (point === undefined) continue;
+        for (const [dx, dy] of [[0, -1], [1, 0], [0, 1], [-1, 0]] as const) {
+          const next = { x: point.x + dx, y: point.y + dy };
+          if (level.terrain[next.y]?.[next.x] !== terrainKind || seen.has(key(next.x, next.y))) {
+            continue;
+          }
+          seen.add(key(next.x, next.y));
+          queue.push(next);
+        }
+      }
+      largest = Math.max(largest, queue.length);
+    }
+  }
+  return largest;
+}
+
 describe("curated campaign levels", () => {
   it("starts with a gentle movement teaching level", () => {
     expect(CURATED_LEVELS[0]).toBe(MOVEMENT_LEVEL);
@@ -25,13 +57,13 @@ describe("curated campaign levels", () => {
     expect(MOVEMENT_LEVEL.width).toBe(9);
   });
 
-  it("grows gradually from readable whole-maze levels into one 25 by 25 exploration maze", () => {
+  it("mixes readable maze sizes before the 25 by 25 exploration finale", () => {
     expect(CURATED_LEVELS.map((level) => [level.width, level.height])).toEqual([
       [9, 9],
       [11, 11],
       [13, 13],
-      [13, 13],
       [15, 15],
+      [13, 13],
       [15, 15],
       [17, 17],
       [17, 17],
@@ -41,13 +73,30 @@ describe("curated campaign levels", () => {
       26,
       36,
       62,
-      66,
       78,
+      66,
       90,
       108,
       114,
       280,
     ]);
+  });
+
+  it("uses connected pools and lava patches once boots and hazards are introduced", () => {
+    const levelsWithHazards = CURATED_LEVELS.filter((level) =>
+      level.terrain.some((row) => row.some((tile) => tile === "water" || tile === "lava")),
+    );
+
+    expect(levelsWithHazards).toHaveLength(7);
+    for (const level of levelsWithHazards) {
+      for (const terrainKind of ["water", "lava"] as const) {
+        const tileCount = level.terrain.flat().filter((tile) => tile === terrainKind).length;
+        if (tileCount > 0) {
+          expect(largestConnectedTerrainRegion(level, terrainKind), level.name)
+            .toBeGreaterThanOrEqual(2);
+        }
+      }
+    }
   });
 
   it.each(CURATED_LEVELS.map((level) => [level.name, level] as const))(
@@ -88,7 +137,15 @@ describe("curated campaign levels", () => {
 
   it("gives every story maze an intentional theme and varied illustrated objects", () => {
     expect(CURATED_LEVELS.map((level) => level.terrainThemeId)).toEqual([
-      ...TERRAIN_THEME_IDS,
+      "sunny-stone",
+      "rose-courtyard",
+      "moonlit-moat",
+      "star-garden",
+      "ember-keep",
+      "moonbeam-castle",
+      "wishing-woods",
+      "parade-courtyard",
+      "lantern-ruins",
     ]);
     expect(new Set(CURATED_LEVELS.map((level) => level.terrainThemeId)).size).toBe(
       CURATED_LEVELS.length,
@@ -380,14 +437,14 @@ describe("curated campaign levels", () => {
       { animal: 3, sword: 1 },
       { animal: 3, sword: 1, enemy: 1, key: 1, door: 1 },
       { animal: 3, sword: 1, potion: 1, enemy: 2, boots: 1, key: 1, door: 1 },
-      { animal: 3, sword: 1, potion: 1, enemy: 3, boots: 1, key: 2, door: 2 },
       { animal: 3, enemy: 2, door: 2, sword: 1, key: 2, boots: 1, potion: 1 },
+      { animal: 3, sword: 1, potion: 1, enemy: 3, boots: 1, key: 2, door: 2 },
       { animal: 3, key: 3, door: 3, enemy: 2, sword: 1, boots: 1, potion: 1 },
       { animal: 3, sword: 1, enemy: 4, key: 3, potion: 1, door: 3, boots: 1 },
       { animal: 3, key: 3, door: 3, enemy: 4, sword: 1, boots: 1, potion: 2 },
       { animal: 3, potion: 2, enemy: 4, boots: 1, key: 3, door: 3, sword: 1 },
     ] as const;
-    const expectedEnemyCounts = [0, 1, 2, 3, 2, 2, 3, 4, 4] as const;
+    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 4] as const;
     const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 3] as const;
 
     CURATED_LEVELS.forEach((level, index) => {

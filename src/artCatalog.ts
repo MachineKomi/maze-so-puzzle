@@ -22,9 +22,6 @@ export interface TerrainThemeArt {
   readonly label: string;
   readonly floor: TerrainTextureArt;
   readonly wall: TerrainTextureArt;
-  /** Flat floor-edge lip colours; these deliberately are not shadows. */
-  readonly waterLip: string;
-  readonly lavaLip: string;
 }
 
 export const DEFAULT_TERRAIN_THEME_ID: TerrainThemeId = "sunny-stone";
@@ -105,72 +102,54 @@ export const TERRAIN_THEMES = {
     label: "Sunny Stone Trail",
     floor: FLOORS.sunnyStone,
     wall: WALLS.lavenderStone,
-    waterLip: "#edc875",
-    lavaLip: "#efbf70",
   },
   "rose-courtyard": {
     id: "rose-courtyard",
     label: "Rose Courtyard",
     floor: FLOORS.roseBrick,
     wall: WALLS.sandstone,
-    waterLip: "#f0c8a7",
-    lavaLip: "#eeb073",
   },
   "moonlit-moat": {
     id: "moonlit-moat",
     label: "Moonlit Moat",
     floor: FLOORS.moonSlate,
     wall: WALLS.mossyRuin,
-    waterLip: "#d8d8c4",
-    lavaLip: "#e6b476",
   },
   "ember-keep": {
     id: "ember-keep",
     label: "Ember Keep",
     floor: FLOORS.roseBrick,
     wall: WALLS.darkDungeon,
-    waterLip: "#c7bed0",
-    lavaLip: "#f0ac63",
   },
   "star-garden": {
     id: "star-garden",
     label: "Star Garden",
     floor: FLOORS.meadowGrass,
     wall: WALLS.hedge,
-    waterLip: "#c5dc91",
-    lavaLip: "#e5b46a",
   },
   "moonbeam-castle": {
     id: "moonbeam-castle",
     label: "Moonbeam Castle",
     floor: FLOORS.moonSlate,
     wall: WALLS.darkDungeon,
-    waterLip: "#d1d6ed",
-    lavaLip: "#e7b176",
   },
   "wishing-woods": {
     id: "wishing-woods",
     label: "Wishing Woods",
     floor: FLOORS.woodlandDirt,
     wall: WALLS.hedge,
-    waterLip: "#d8b482",
-    lavaLip: "#e6aa62",
   },
   "parade-courtyard": {
     id: "parade-courtyard",
     label: "Parade Courtyard",
     floor: FLOORS.roseBrick,
     wall: WALLS.lavenderStone,
-    waterLip: "#f2c9a5",
-    lavaLip: "#efb26d",
   },
   "lantern-ruins": {
     id: "lantern-ruins",
     label: "Lantern Ruins",
     floor: FLOORS.sunnyStone,
     wall: WALLS.mossyRuin,
-    waterLip: "#d9cd91",
-    lavaLip: "#e7ab67",
   },
 } as const satisfies Readonly<Record<TerrainThemeId, TerrainThemeArt>>;
 
@@ -202,10 +181,10 @@ export const ANIMAL_ART = {
 } as const satisfies Readonly<Record<AnimalSpecies, SpriteArt>>;
 
 export const CAGE_ART = {
-  "golden-heart": { src: "/assets/animal-cage.png", label: "Golden Heart Cage" },
-  "storybook-wood": { src: "/assets/cage-storybook-wood-v1.png", label: "Storybook Wooden Cage" },
-  "moon-silver": { src: "/assets/cage-moon-silver-v1.png", label: "Moon Silver Cage" },
-  "garden-vine": { src: "/assets/cage-garden-vine-v1.png", label: "Garden Vine Cage" },
+  "golden-heart": { src: "/assets/cage-golden-heart-front-v2.png", label: "Golden Heart Cage" },
+  "storybook-wood": { src: "/assets/cage-storybook-wood-front-v2.png", label: "Storybook Wooden Cage" },
+  "moon-silver": { src: "/assets/cage-moon-silver-front-v2.png", label: "Moon Silver Cage" },
+  "garden-vine": { src: "/assets/cage-garden-vine-front-v2.png", label: "Garden Vine Cage" },
 } as const satisfies Readonly<Record<CageStyle, SpriteArt>>;
 
 function hasOwn<T extends object>(catalog: T, key: PropertyKey): key is keyof T {

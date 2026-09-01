@@ -1,10 +1,10 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.7.1 is a client-only game. It has no account system,
+Maze so Puzzle 0.8.0 is a client-only game. It has no account system,
 analytics, advertising, multiplayer, chat, remote database, or game-owned
 server. The browser build does not intentionally send player names, gameplay,
-or saved progress anywhere. The matching verified downloadable Windows test
-build is 0.7.1 and uses the same device-local storage model.
+or saved progress anywhere. The packaged and locally verified unsigned 0.8.0
+Windows test build uses the same device-local storage model.
 
 ## What is stored
 
@@ -16,6 +16,10 @@ explored-map coordinates so a refresh or app restart can resume safely. Both
 records are validated before use. The Windows build keeps the same information
 in its local Tauri WebView profile. No save data is included in the project
 repository.
+
+The short breadcrumb trail used to draw rescued pets following Ame is transient
+in-memory presentation state. It is not added to progress, active-run storage,
+analytics, or network requests.
 
 Saved progress is specific to a browser profile and site origin. A different
 device, another browser, a private window, a cleared site-data store, or a

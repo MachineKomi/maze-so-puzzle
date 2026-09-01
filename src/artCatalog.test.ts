@@ -53,6 +53,12 @@ describe("art catalog", () => {
     expectSpriteArt(Object.values(CAGE_ART));
   });
 
+  it("uses the opaque front-bar cage layer for every rescue style", () => {
+    for (const cage of Object.values(CAGE_ART)) {
+      expect(cage.src).toMatch(/^\/assets\/cage-[a-z-]+-front-v2\.png$/);
+    }
+  });
+
   it("provides calibrated, seamless-pattern metadata for all nine themes", () => {
     const color = /^#[0-9a-f]{6}$/i;
     const textureSources = new Set<string>();
@@ -61,8 +67,6 @@ describe("art catalog", () => {
       const theme = TERRAIN_THEMES[id];
       expect(theme.id).toBe(id);
       expect(theme.label.trim().length).toBeGreaterThan(0);
-      expect(theme.waterLip).toMatch(color);
-      expect(theme.lavaLip).toMatch(color);
 
       for (const texture of [theme.floor, theme.wall]) {
         expect(texture.src).toMatch(/^\/assets\/[a-z0-9-]+\.png$/);
