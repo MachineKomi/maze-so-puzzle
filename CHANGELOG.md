@@ -4,6 +4,75 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.9.0 - 2026-09-01
+
+This puzzle-and-presentation release adds a new traversal toy, makes the later
+story mazes require real exploration, and gives fights and rescues a much more
+satisfying storybook flourish.
+
+### Added
+
+- **Springstep Sky Hollow**, a tenth 19 x 19 story maze, plus Spring Boots and
+  safe one- or two-tile ground-hole jumps with new AI-generated transparent art
+  and a synthesized boing cue.
+- Cancellable win and loss battle set pieces: Ame and the friendly foe lunge,
+  clash and spark before the winning side's Power counts up. Rescue cages pop
+  open with hearts and two excited hops before the pet joins Ame's followers.
+- Five full OST tracks now receive session-stable per-maze assignments and
+  avoid immediately repeating the previous song.
+- New jump, friend-rescue, clash, spark, impact, Power-tick, power-up and battle
+  result sound cues.
+
+### Changed
+
+- Wishing Woods, Ame's Grand Parade, Springstep Sky Hollow and Lanternlight
+  Labyrinth now place important prerequisites on side branches, requiring
+  readable detours and backtracking. All ordinary and three-pet routes remain
+  solver-validated.
+- Floors and walls now carry dominant-colour metadata and are selected only from
+  an explicit compatibility matrix; the clashing yellow-floor/green-wall pairing
+  is rejected. The ten story mazes use ten distinct approved material pairs.
+- Adventure Surprise Mazes can place prerequisite items on branches and add
+  Spring-Boots-gated hole runs while retaining both solution modes.
+- Long-jump cameras keep both endpoints visible, and held touch/mouse/keyboard
+  movement survives short presentations without ghost inputs.
+- Old active runs from levels whose topology changed are discarded safely while
+  campaign progress, rewards and records remain untouched.
+- The release gate remains 204 tests across 15 files, with a 500-maze generated
+  stress audit, clean dependency audit, locked Rust compile and fresh unsigned
+  Windows x64 portable/installer packages.
+
+### Desktop status
+
+- The unsigned 0.9.0 portable executable and NSIS installer were rebuilt,
+  version-checked, source-compared and SHA-256 hashed. The portable app remained
+  responsive with the correct title in a hidden five-second smoke launch.
+- Clean-machine install/uninstall testing and code signing remain outstanding.
+
+## 0.8.0 - 2026-09-01
+
+This touch-and-exploration release enlarged the visible maze on tablets and
+phones while allowing Surprise Mazes to vary from small readable boards through
+larger fog-of-war adventures.
+
+### Added
+
+- A 6 x 6 player-centred camera and persistent minimap for every current maze,
+  with unrevealed tiles masked until Ame explores them.
+- Seeded Surprise Maze sizes varying non-monotonically from 9 x 9 through 29 x
+  29, including connected multi-tile water and lava regions after splash boots.
+- Opaque front-bar cage layers and rescued-pet followers using Ame's recent
+  visible footsteps.
+
+### Changed
+
+- Continuous press, hold and drag steering gained one-tile wall-corner
+  forgiveness without pathfinding or bypassing hazards, doors or enemies.
+- Connected hazards lost their outlines, lips and shadows; iPad and landscape
+  phone layouts give more of the screen to the maze.
+- The unsigned 0.8.0 Windows packages and public Vercel build were verified and
+  are retained as the previous release baseline.
+
 ## 0.7.1 - 2026-09-01
 
 This touch-first maintenance release makes the game practical on landscape

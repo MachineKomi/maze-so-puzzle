@@ -47,6 +47,7 @@ export function isObjectResolved(object: LevelObject, state: GameState): boolean
       return state.rescuedAnimalIds.includes(object.id);
     case "sword":
     case "boots":
+    case "spring-boots":
     case "potion":
     case "key":
       return state.collectedObjectIds.includes(object.id);
@@ -60,6 +61,7 @@ export function createInitialGameState(level: LevelDefinition): GameState {
     power: level.initialPower,
     hasSword: false,
     hasBoots: false,
+    hasSpringBoots: false,
     keys: [],
     collectedObjectIds: [],
     rescuedAnimalIds: [],
@@ -102,21 +104,49 @@ export function movePlayer(
   }
 
   const delta = DIRECTION_DELTAS[direction];
-  const target = {
+  const attemptedTarget = {
     x: state.position.x + delta.x,
     y: state.position.y + delta.y,
   };
 
   if (state.status !== "playing") {
-    return blocked(state, { type: "blocked", reason: "game-over", target });
+    return blocked(state, { type: "blocked", reason: "game-over", target: attemptedTarget });
   }
 
-  const terrain = getTerrainAt(level, target);
+  let target = attemptedTarget;
+  let terrain = getTerrainAt(level, target);
   if (terrain === undefined) {
     return blocked(state, { type: "blocked", reason: "out-of-bounds", target });
   }
   if (terrain === "wall") {
     return blocked(state, { type: "blocked", reason: "wall", target });
+  }
+  const jumpedHoles: Point[] = [];
+  if (terrain === "hole") {
+    if (!state.hasSpringBoots) {
+      return blocked(state, {
+        type: "blocked",
+        reason: "needs-spring-boots",
+        target,
+        terrain,
+      });
+    }
+
+    while (terrain === "hole") {
+      jumpedHoles.push(target);
+      target = {
+        x: target.x + delta.x,
+        y: target.y + delta.y,
+      };
+      terrain = getTerrainAt(level, target);
+    }
+
+    if (terrain === undefined) {
+      return blocked(state, { type: "blocked", reason: "out-of-bounds", target });
+    }
+    if (terrain === "wall") {
+      return blocked(state, { type: "blocked", reason: "wall", target });
+    }
   }
   if ((terrain === "water" || terrain === "lava") && !state.hasBoots) {
     return blocked(state, {
@@ -129,9 +159,18 @@ export function movePlayer(
 
   const object = getObjectAt(level, target);
   const events: GameEvent[] = [];
+  if (jumpedHoles.length > 0) {
+    events.push({
+      type: "hole-jumped",
+      from: state.position,
+      over: jumpedHoles,
+      to: target,
+    });
+  }
   let power = state.power;
   let hasSword = state.hasSword;
   let hasBoots = state.hasBoots;
+  let hasSpringBoots = state.hasSpringBoots;
   let keys = state.keys;
   let collectedObjectIds = state.collectedObjectIds;
   let rescuedAnimalIds = state.rescuedAnimalIds;
@@ -219,6 +258,10 @@ export function movePlayer(
         hasBoots = true;
         events.push({ type: "boots-collected", objectId: object.id });
         break;
+      case "spring-boots":
+        hasSpringBoots = true;
+        events.push({ type: "spring-boots-collected", objectId: object.id });
+        break;
       case "key":
         keys = addSorted<KeyColor>(keys, object.color);
         events.push({
@@ -250,6 +293,7 @@ export function movePlayer(
     power,
     hasSword,
     hasBoots,
+    hasSpringBoots,
     keys,
     collectedObjectIds,
     rescuedAnimalIds,

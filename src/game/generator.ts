@@ -42,11 +42,13 @@ type RandomSource = () => number;
 type RecipeEntry =
   | { readonly kind: "sword" }
   | { readonly kind: "boots" }
+  | { readonly kind: "spring-boots" }
   | { readonly kind: "potion"; readonly amount: number }
   | { readonly kind: "enemy"; readonly power: number }
   | { readonly kind: "key"; readonly color: KeyColor }
   | { readonly kind: "door"; readonly color: KeyColor }
-  | { readonly kind: "hazard"; readonly terrain: "water" | "lava" };
+  | { readonly kind: "hazard"; readonly terrain: "water" | "lava" }
+  | { readonly kind: "hole" };
 
 const CARDINAL_STEPS: readonly Point[] = [
   { x: 0, y: -1 },
@@ -333,7 +335,11 @@ function findFloorPath(
   return reversed.reverse();
 }
 
-function buildRecipe(difficulty: MazeDifficulty, random: RandomSource): readonly RecipeEntry[] {
+function buildRecipe(
+  difficulty: MazeDifficulty,
+  random: RandomSource,
+  size: number,
+): readonly RecipeEntry[] {
   if (difficulty === "movement") {
     return [{ kind: "sword" }];
   }
@@ -358,9 +364,13 @@ function buildRecipe(difficulty: MazeDifficulty, random: RandomSource): readonly
     { kind: "boots" },
     { kind: "hazard", terrain: firstHazard },
   ];
-  if (difficulty === "adventure") {
-    recipe.push({ kind: "enemy", power: 8 });
+  if (difficulty === "adventure" && size >= 13) {
+    recipe.push(
+      { kind: "spring-boots" },
+      { kind: "hole" },
+    );
   }
+  if (difficulty === "adventure") recipe.push({ kind: "enemy", power: 8 });
   recipe.push({ kind: "key", color }, { kind: "door", color });
   if (difficulty === "adventure") {
     recipe.push({
@@ -396,6 +406,235 @@ function chooseOrderedPoints(path: readonly Point[], count: number): readonly Po
     return [];
   }
   return chosen;
+}
+
+interface BranchCandidate {
+  readonly at: Point;
+  readonly attachmentIndex: number;
+  readonly distance: number;
+  /** Off-critical-path tiles from the candidate back toward its attachment. */
+  readonly route: readonly Point[];
+}
+
+/**
+ * Finds dead-end treasure branches and records where each one rejoins the
+ * start-to-exit route. Perfect-maze topology guarantees every branch has one
+ * unambiguous attachment.
+ */
+function findBranchCandidates(
+  terrain: readonly (readonly TerrainKind[])[],
+  criticalPath: readonly Point[],
+): readonly BranchCandidate[] {
+  const criticalPathIndex = new Map(
+    criticalPath.map((point, index) => [pointKey(point), index] as const),
+  );
+  const queue = [...criticalPath];
+  const parentTowardPath = new Map<string, Point>();
+  const attachmentByTile = new Map<string, number>(criticalPathIndex);
+  const distanceByTile = new Map<string, number>(
+    criticalPath.map((point) => [pointKey(point), 0] as const),
+  );
+
+  for (let head = 0; head < queue.length; head += 1) {
+    const current = queue[head];
+    if (current === undefined) continue;
+    const currentKey = pointKey(current);
+    const attachmentIndex = attachmentByTile.get(currentKey);
+    const distance = distanceByTile.get(currentKey);
+    if (attachmentIndex === undefined || distance === undefined) continue;
+
+    for (const neighbor of floorNeighbors(terrain, current)) {
+      const key = pointKey(neighbor);
+      if (attachmentByTile.has(key)) continue;
+      attachmentByTile.set(key, attachmentIndex);
+      distanceByTile.set(key, distance + 1);
+      parentTowardPath.set(key, current);
+      queue.push(neighbor);
+    }
+  }
+
+  const candidates: BranchCandidate[] = [];
+  for (let y = 0; y < terrain.length; y += 1) {
+    const row = terrain[y];
+    if (row === undefined) continue;
+    for (let x = 0; x < row.length; x += 1) {
+      const at = { x, y };
+      const key = pointKey(at);
+      if (
+        row[x] !== "floor" ||
+        criticalPathIndex.has(key) ||
+        floorNeighbors(terrain, at).length !== 1
+      ) {
+        continue;
+      }
+      const attachmentIndex = attachmentByTile.get(key);
+      const distance = distanceByTile.get(key);
+      if (attachmentIndex === undefined || distance === undefined) continue;
+
+      const route: Point[] = [];
+      let current = at;
+      while (!criticalPathIndex.has(pointKey(current))) {
+        route.push(current);
+        const parent = parentTowardPath.get(pointKey(current));
+        if (parent === undefined) break;
+        current = parent;
+      }
+      if (route.length === distance) {
+        candidates.push({ at, attachmentIndex, distance, route });
+      }
+    }
+  }
+  return candidates;
+}
+
+interface BranchedPlacements {
+  readonly placements: readonly Point[];
+  readonly reservedBranchTiles: ReadonlySet<string>;
+  readonly attachmentIndexByRecipe: ReadonlyMap<number, number>;
+}
+
+/** Moves prerequisites off the obvious route, so Ame must explore and return. */
+function movePrerequisitesOntoBranches(
+  terrain: readonly (readonly TerrainKind[])[],
+  criticalPath: readonly Point[],
+  recipe: readonly RecipeEntry[],
+  orderedPlacements: readonly Point[],
+  difficulty: MazeDifficulty,
+  random: RandomSource,
+): BranchedPlacements | undefined {
+  const placements = [...orderedPlacements];
+  const pathIndex = new Map(
+    criticalPath.map((point, index) => [pointKey(point), index] as const),
+  );
+  const attachmentIndexByRecipe = new Map<number, number>();
+  orderedPlacements.forEach((point, index) => {
+    const attachmentIndex = pathIndex.get(pointKey(point));
+    if (attachmentIndex !== undefined) attachmentIndexByRecipe.set(index, attachmentIndex);
+  });
+  if (
+    difficulty === "movement" ||
+    difficulty === "gentle" ||
+    terrain.length < 13
+  ) {
+    return {
+      placements,
+      reservedBranchTiles: new Set<string>(),
+      attachmentIndexByRecipe,
+    };
+  }
+
+  const firstIndex = (predicate: (entry: RecipeEntry) => boolean): number =>
+    recipe.findIndex(predicate);
+  const desiredDetours = [
+    {
+      itemIndex: firstIndex((entry) => entry.kind === "sword"),
+      gateIndex: firstIndex((entry) => entry.kind === "enemy"),
+    },
+    {
+      itemIndex: firstIndex((entry) => entry.kind === "potion"),
+      gateIndex: firstIndex((entry) => entry.kind === "enemy" && entry.power === 4),
+    },
+    {
+      itemIndex: firstIndex((entry) => entry.kind === "boots"),
+      gateIndex: firstIndex((entry) => entry.kind === "hazard"),
+    },
+    {
+      itemIndex: firstIndex((entry) => entry.kind === "spring-boots"),
+      gateIndex: firstIndex((entry) => entry.kind === "hole"),
+    },
+    {
+      itemIndex: firstIndex((entry) => entry.kind === "key"),
+      gateIndex: firstIndex((entry) => entry.kind === "door"),
+    },
+  ].filter(({ itemIndex, gateIndex }) => itemIndex >= 0 && gateIndex > itemIndex);
+
+  const branchCandidates = findBranchCandidates(terrain, criticalPath);
+  const reservedBranchTiles = new Set<string>();
+  let detourCount = 0;
+
+  for (const { itemIndex, gateIndex } of desiredDetours) {
+    const gatePoint = orderedPlacements[gateIndex];
+    const previousPoint = itemIndex > 0 ? orderedPlacements[itemIndex - 1] : criticalPath[0];
+    if (gatePoint === undefined || previousPoint === undefined) continue;
+    const upperBound = pathIndex.get(pointKey(gatePoint));
+    const lowerBound = pathIndex.get(pointKey(previousPoint));
+    if (upperBound === undefined || lowerBound === undefined) continue;
+
+    const eligible = shuffle(branchCandidates, random)
+      .filter((candidate) =>
+        candidate.attachmentIndex >= lowerBound &&
+        candidate.attachmentIndex < upperBound &&
+        candidate.route.every((point) => !reservedBranchTiles.has(pointKey(point))),
+      )
+      .sort((left, right) => right.distance - left.distance);
+    const candidate = eligible[0];
+    if (candidate === undefined) continue;
+
+    placements[itemIndex] = candidate.at;
+    attachmentIndexByRecipe.set(itemIndex, candidate.attachmentIndex);
+    for (const point of candidate.route) reservedBranchTiles.add(pointKey(point));
+    detourCount += 1;
+  }
+
+  const minimumDetours = criticalPath.length >= 45 ? 2 : criticalPath.length >= 25 ? 1 : 0;
+  return detourCount >= minimumDetours
+    ? { placements, reservedBranchTiles, attachmentIndexByRecipe }
+    : undefined;
+}
+
+interface HoleSegment {
+  readonly holes: readonly Point[];
+  readonly landing: Point;
+}
+
+/** Selects a straight, safely landable one- or two-tile jump on the main route. */
+function chooseHoleSegment(
+  criticalPath: readonly Point[],
+  minimumPathIndex: number,
+  preferredPathIndex: number,
+  reserved: ReadonlySet<string>,
+  random: RandomSource,
+): HoleSegment | undefined {
+  for (const length of [2, 1] as const) {
+    const candidates: Array<HoleSegment & { readonly startIndex: number }> = [];
+    for (
+      let startIndex = Math.max(1, minimumPathIndex);
+      startIndex + length < criticalPath.length;
+      startIndex += 1
+    ) {
+      const approach = criticalPath[startIndex - 1];
+      const firstHole = criticalPath[startIndex];
+      const landing = criticalPath[startIndex + length];
+      if (approach === undefined || firstHole === undefined || landing === undefined) continue;
+      const dx = firstHole.x - approach.x;
+      const dy = firstHole.y - approach.y;
+      const holes = criticalPath.slice(startIndex, startIndex + length);
+      const isStraight = holes.every((point, index) => {
+        const previous = index === 0 ? approach : holes[index - 1];
+        return previous !== undefined && point.x - previous.x === dx && point.y - previous.y === dy;
+      }) && landing.x - (holes.at(-1)?.x ?? landing.x) === dx
+        && landing.y - (holes.at(-1)?.y ?? landing.y) === dy;
+      if (
+        !isStraight ||
+        holes.some((point) => reserved.has(pointKey(point))) ||
+        reserved.has(pointKey(landing))
+      ) {
+        continue;
+      }
+      candidates.push({ holes, landing, startIndex });
+    }
+
+    const selected = shuffle(candidates, random)
+      .sort(
+        (left, right) =>
+          Math.abs(left.startIndex - preferredPathIndex) -
+          Math.abs(right.startIndex - preferredPathIndex),
+      )[0];
+    if (selected !== undefined) {
+      return { holes: selected.holes, landing: selected.landing };
+    }
+  }
+  return undefined;
 }
 
 function chooseAnimalPoints(
@@ -499,13 +738,26 @@ function buildGeneratedLevel(
   const exit = farthestFloor(terrain, start);
   const criticalPath = findFloorPath(terrain, start, exit);
   const visuals = selectGeneratedVisuals(seedText, difficulty, size);
-  const recipe = buildRecipe(difficulty, random);
-  const placements = chooseOrderedPoints(criticalPath, recipe.length);
-  if (placements.length !== recipe.length) {
+  const recipe = buildRecipe(difficulty, random, size);
+  const orderedPlacements = chooseOrderedPoints(criticalPath, recipe.length);
+  if (orderedPlacements.length !== recipe.length) {
     return undefined;
   }
+  const branched = movePrerequisitesOntoBranches(
+    terrain,
+    criticalPath,
+    recipe,
+    orderedPlacements,
+    difficulty,
+    random,
+  );
+  if (branched === undefined) {
+    return undefined;
+  }
+  const placements = branched.placements;
 
-  const id = `surprise-v2-${seedIdentity(seedText)}-${difficulty}-${size}`;
+  // v3 separates branch-and-spring layouts from older straight-progression saves.
+  const id = `surprise-v3-${seedIdentity(seedText)}-${difficulty}-${size}`;
   const objects: LevelObject[] = [];
   const hazards: HazardSeed[] = [];
   for (let index = 0; index < recipe.length; index += 1) {
@@ -518,6 +770,7 @@ function buildGeneratedLevel(
       hazards.push({ at, terrain: entry.terrain });
       continue;
     }
+    if (entry.kind === "hole") continue;
 
     const objectId = `${id}-${entry.kind}-${index + 1}`;
     switch (entry.kind) {
@@ -526,6 +779,9 @@ function buildGeneratedLevel(
         break;
       case "boots":
         objects.push({ id: objectId, kind: "boots", at });
+        break;
+      case "spring-boots":
+        objects.push({ id: objectId, kind: "spring-boots", at });
         break;
       case "enemy":
         objects.push({
@@ -546,25 +802,59 @@ function buildGeneratedLevel(
     }
   }
 
+  const pathIndex = new Map(
+    criticalPath.map((point, index) => [pointKey(point), index] as const),
+  );
+  const holeRecipeIndex = recipe.findIndex((entry) => entry.kind === "hole");
+  const springBootsRecipeIndex = recipe.findIndex(
+    (entry) => entry.kind === "spring-boots",
+  );
+  const reservedBeforeTerrain = new Set<string>([
+    pointKey(start),
+    pointKey(exit),
+    ...objects.map((object) => pointKey(object.at)),
+    ...hazards.map((hazard) => pointKey(hazard.at)),
+    ...branched.reservedBranchTiles,
+  ]);
+  let holeSegment: HoleSegment | undefined;
+  if (holeRecipeIndex >= 0 && springBootsRecipeIndex >= 0) {
+    const preferredPoint = orderedPlacements[holeRecipeIndex];
+    const springAttachment = branched.attachmentIndexByRecipe.get(
+      springBootsRecipeIndex,
+    );
+    if (preferredPoint === undefined || springAttachment === undefined) return undefined;
+    const preferredPathIndex = pathIndex.get(pointKey(preferredPoint));
+    if (preferredPathIndex === undefined) return undefined;
+    holeSegment = chooseHoleSegment(
+      criticalPath,
+      springAttachment + 1,
+      preferredPathIndex,
+      reservedBeforeTerrain,
+      random,
+    );
+    if (holeSegment === undefined) return undefined;
+    for (const hole of holeSegment.holes) {
+      const row = terrain[hole.y];
+      if (row === undefined || row[hole.x] !== "floor") return undefined;
+      row[hole.x] = "hole";
+      reservedBeforeTerrain.add(pointKey(hole));
+    }
+    reservedBeforeTerrain.add(pointKey(holeSegment.landing));
+  }
+
   if (hazards.length > 0) {
     const bootsPlacementIndex = recipe.findIndex((entry) => entry.kind === "boots");
-    const bootsPoint = placements[bootsPlacementIndex];
-    if (bootsPoint === undefined) return undefined;
-    const criticalPathIndex = new Map(
-      criticalPath.map((point, index) => [pointKey(point), index] as const),
-    );
-    const bootsPathIndex = criticalPathIndex.get(pointKey(bootsPoint));
+    const bootsPathIndex = branched.attachmentIndexByRecipe.get(bootsPlacementIndex);
     if (bootsPathIndex === undefined) return undefined;
     const reserved = new Set<string>([
-      pointKey(start),
-      pointKey(exit),
+      ...reservedBeforeTerrain,
       ...placements.map(pointKey),
     ]);
     for (const hazard of hazards) {
       if (!growHazardCluster(
         terrain,
         hazard,
-        criticalPathIndex,
+        pathIndex,
         bootsPathIndex,
         reserved,
         random,
@@ -578,6 +868,7 @@ function buildGeneratedLevel(
     pointKey(start),
     pointKey(exit),
     ...objects.map((object) => pointKey(object.at)),
+    ...branched.reservedBranchTiles,
   ]);
   const animalPoints = chooseAnimalPoints(
     terrain,
@@ -607,7 +898,11 @@ function buildGeneratedLevel(
     schemaVersion: 1,
     id,
     name: "Surprise Maze",
-    objective: difficulty === "movement" ? "Find the sparkly star!" : "Collect, grow, and find the star!",
+    objective: difficulty === "movement"
+      ? "Find the sparkly star!"
+      : recipe.some((entry) => entry.kind === "hole")
+        ? "Explore the side paths, grow stronger, and bounce to the star!"
+        : "Collect, grow, and find the star!",
     source: "generated",
     seed: seedText,
     width: size,
@@ -629,8 +924,8 @@ function buildGeneratedLevel(
 
 /**
  * Produces the same validated perfect maze for the same seed/options on every
- * run. Every progression gate lies on the unique start-to-exit path, with its
- * prerequisite earlier on that path.
+ * run. Progression gates are ordered safely, while adventure mazes may place a
+ * prerequisite on a side branch so the player has to explore and backtrack.
  */
 export function generateSurpriseMaze(options: GenerateMazeOptions): LevelDefinition {
   const seedText = String(options.seed);

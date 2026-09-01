@@ -14,7 +14,7 @@ export const DIRECTION_DELTAS: Readonly<Record<Direction, Point>> = {
   right: { x: 1, y: 0 },
 };
 
-export type TerrainKind = "wall" | "floor" | "water" | "lava";
+export type TerrainKind = "wall" | "floor" | "water" | "lava" | "hole";
 export type KeyColor = "red" | "blue" | "yellow";
 export const ANIMAL_SPECIES = [
   "bunny",
@@ -38,6 +38,7 @@ export const TERRAIN_THEME_IDS = [
   "moonbeam-castle",
   "wishing-woods",
   "parade-courtyard",
+  "springstep-hollow",
   "lantern-ruins",
 ] as const;
 export type TerrainThemeId = (typeof TERRAIN_THEME_IDS)[number];
@@ -88,6 +89,10 @@ export interface BootsObject extends ObjectBase {
   readonly kind: "boots";
 }
 
+export interface SpringBootsObject extends ObjectBase {
+  readonly kind: "spring-boots";
+}
+
 export interface PotionObject extends ObjectBase {
   readonly kind: "potion";
   readonly amount: number;
@@ -113,6 +118,7 @@ export type LevelObject =
   | EnemyObject
   | SwordObject
   | BootsObject
+  | SpringBootsObject
   | PotionObject
   | KeyObject
   | DoorObject
@@ -150,6 +156,7 @@ export interface GameState {
   readonly power: number;
   readonly hasSword: boolean;
   readonly hasBoots: boolean;
+  readonly hasSpringBoots: boolean;
   readonly keys: readonly KeyColor[];
   readonly collectedObjectIds: readonly string[];
   readonly rescuedAnimalIds: readonly string[];
@@ -164,6 +171,7 @@ export type BlockedReason =
   | "wall"
   | "needs-sword"
   | "needs-boots"
+  | "needs-spring-boots"
   | "needs-key"
   | "game-over";
 
@@ -172,7 +180,7 @@ export type GameEvent =
       readonly type: "blocked";
       readonly reason: BlockedReason;
       readonly target: Point;
-      readonly terrain?: "water" | "lava";
+      readonly terrain?: "water" | "lava" | "hole";
       readonly color?: KeyColor;
     }
   | {
@@ -187,6 +195,16 @@ export type GameEvent =
   | {
       readonly type: "boots-collected";
       readonly objectId: string;
+    }
+  | {
+      readonly type: "spring-boots-collected";
+      readonly objectId: string;
+    }
+  | {
+      readonly type: "hole-jumped";
+      readonly from: Point;
+      readonly over: readonly Point[];
+      readonly to: Point;
     }
   | {
       readonly type: "key-collected";

@@ -40,6 +40,7 @@ function stateSignature(state: GameState, includeAnimals: boolean): string {
     state.power,
     state.hasSword ? 1 : 0,
     state.hasBoots ? 1 : 0,
+    state.hasSpringBoots ? 1 : 0,
     normalized(state.keys),
     normalized(state.collectedObjectIds),
     includeAnimals ? normalized(state.rescuedAnimalIds) : "",
@@ -92,7 +93,13 @@ export function getLevelStructureErrors(level: LevelDefinition): readonly string
       continue;
     }
     for (let x = 0; x < level.width; x += 1) {
-      if (row[x] !== "wall" && row[x] !== "floor" && row[x] !== "water" && row[x] !== "lava") {
+      if (
+        row[x] !== "wall" &&
+        row[x] !== "floor" &&
+        row[x] !== "water" &&
+        row[x] !== "lava" &&
+        row[x] !== "hole"
+      ) {
         errors.push(`Terrain tile ${x},${y} has an unknown kind.`);
       }
       if ((x === 0 || y === 0 || x === level.width - 1 || y === level.height - 1) && row[x] !== "wall") {

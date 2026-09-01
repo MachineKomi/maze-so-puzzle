@@ -3,8 +3,16 @@ export type SoundName =
   | "bump"
   | "pickup"
   | "power"
+  | "powerTick"
   | "unlock"
   | "rescue"
+  | "friendRescue"
+  | "jump"
+  | "combatClash"
+  | "combatSparks"
+  | "combatImpact"
+  | "combatPowerUp"
+  | "combatVictory"
   | "win"
   | "reward"
   | "lose"
@@ -20,6 +28,7 @@ type MelodyNote = readonly [
   length: number,
   peakVolume?: number,
   waveform?: OscillatorType,
+  endFrequency?: number,
 ];
 
 let audioContext: AudioContext | undefined;
@@ -54,8 +63,55 @@ const melodies: Readonly<Record<SoundName, readonly MelodyNote[]>> = {
   bump: [[180, 0, 0.07]],
   pickup: [[620, 0, 0.07], [840, 0.07, 0.1]],
   power: [[520, 0, 0.07], [660, 0.07, 0.07], [820, 0.14, 0.11]],
+  powerTick: [[620, 0, 0.065, 0.022, "triangle", 920]],
   unlock: [[410, 0, 0.07], [610, 0.08, 0.13]],
   rescue: [[659, 0, 0.08], [784, 0.07, 0.1], [1047, 0.15, 0.18]],
+  friendRescue: [
+    [523, 0, 0.08, 0.024, "triangle", 659],
+    [659, 0.07, 0.08, 0.025, "triangle", 784],
+    [784, 0.14, 0.1, 0.026, "triangle", 1047],
+    [1047, 0.23, 0.12, 0.028, "sine", 1319],
+    [784, 0.34, 0.18, 0.019, "sine"],
+    [1047, 0.34, 0.18, 0.022, "sine"],
+    [1319, 0.34, 0.24, 0.027, "sine", 1568],
+  ],
+  // Two rubbery pitch sweeps make the jump read clearly even on tiny speakers.
+  jump: [
+    [180, 0, 0.15, 0.038, "triangle", 540],
+    [560, 0.075, 0.18, 0.03, "sine", 310],
+    [920, 0.045, 0.07, 0.012, "sine", 720],
+  ],
+  combatClash: [
+    [185, 0, 0.12, 0.045, "sawtooth", 92],
+    [980, 0, 0.08, 0.025, "square", 620],
+    [1320, 0.025, 0.07, 0.018, "triangle", 760],
+  ],
+  combatSparks: [
+    [1480, 0, 0.045, 0.018, "square", 1120],
+    [1880, 0.045, 0.045, 0.017, "square", 1420],
+    [2260, 0.09, 0.055, 0.015, "triangle", 1680],
+    [1720, 0.14, 0.05, 0.014, "square", 1240],
+  ],
+  combatImpact: [
+    [150, 0, 0.2, 0.052, "sawtooth", 58],
+    [88, 0.015, 0.24, 0.045, "triangle", 42],
+    [720, 0, 0.075, 0.018, "square", 260],
+  ],
+  combatPowerUp: [
+    [440, 0, 0.07, 0.02, "triangle", 554],
+    [523, 0.095, 0.07, 0.021, "triangle", 659],
+    [622, 0.18, 0.07, 0.022, "triangle", 784],
+    [740, 0.25, 0.07, 0.023, "triangle", 932],
+    [880, 0.31, 0.08, 0.025, "triangle", 1109],
+    [1047, 0.36, 0.14, 0.028, "sine", 1397],
+  ],
+  combatVictory: [
+    [523, 0, 0.09, 0.023, "triangle"],
+    [659, 0.07, 0.09, 0.024, "triangle"],
+    [784, 0.14, 0.11, 0.025, "triangle"],
+    [1047, 0.23, 0.2, 0.029, "sine", 1319],
+    [1319, 0.34, 0.16, 0.022, "sine", 1568],
+  ],
   win: [
     [523, 0, 0.1],
     [659, 0.09, 0.1],
@@ -102,7 +158,7 @@ function scheduleNote(
 ): void {
   if (activeVoices.size >= MAX_ACTIVE_VOICES) return;
 
-  const [frequency, delay, length, peakVolume = 0.045, waveform] = note;
+  const [frequency, delay, length, peakVolume = 0.045, waveform, endFrequency] = note;
   let oscillator: OscillatorNode | undefined;
   let gain: GainNode | undefined;
 
@@ -111,6 +167,12 @@ function scheduleNote(
     gain = ctx.createGain();
     oscillator.type = waveform ?? (name === "bump" ? "triangle" : "sine");
     oscillator.frequency.setValueAtTime(frequency, now + delay);
+    if (endFrequency !== undefined) {
+      oscillator.frequency.exponentialRampToValueAtTime(
+        Math.max(1, endFrequency),
+        now + delay + length * 0.82,
+      );
+    }
     gain.gain.setValueAtTime(0.0001, now + delay);
     gain.gain.exponentialRampToValueAtTime(peakVolume, now + delay + 0.008);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + length);

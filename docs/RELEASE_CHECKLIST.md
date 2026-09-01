@@ -6,41 +6,56 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.8.0: 189 tests across 15 files, strict TypeScript/Vite, the npm
-audit/tree, locked Tauri compile, selected integrated responsive-browser sizes,
-Windows packaging, source comparison, hash capture, portable smoke launch, and
-the initial canonical-Vercel smoke are complete. Physical-device
-touch/listening/feel, accessibility, clean-machine installation, signing, and
-the broader manual play-through remain deliberately unclaimed.
+Status for 0.9.0: 204 tests across 15 files and the strict TypeScript/Vite build
+pass. Source metadata and new-art provenance are aligned. The dependency
+audit/tree, locked Tauri compile, Windows packaging/source comparison/hash/smoke
+launch, the complete core local responsive matrix, two-hole jump, and win/loss
+combat presentation checks pass. GitHub push, canonical-Vercel promotion, and
+production smoke remain pending.
+Physical-device touch/listening/feel, accessibility, clean-machine installation,
+signing, and the broader manual play-through remain deliberately unclaimed. The
+completed 0.8.0 artifact evidence below is retained as a historical baseline.
 
 ## 1. Prepare
 
-- [x] Confirm the 0.8.0 source version in `package.json`, `package-lock.json`,
+- [x] Confirm the 0.9.0 source version in `package.json`, `package-lock.json`,
   `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
-- [x] Confirm the 0.8.0 bundle contains continuous world-aligned SVG terrain,
+- [x] Confirm the 0.9.0 bundle contains continuous world-aligned SVG terrain,
   rounded convex and concave joins, periodic paired textures, connected hazards
   without outlines, lips, shadows, or filters, stronger floor/wall contrast,
   picture-first UI, a held-weapon overlay, pet followers, opaque AI-generated
-  cage-front layers, and locally bundled OST files.
-- [x] Confirm the nine story mazes use nine distinct paired terrain themes, each
-  has exactly one weapon and three unique pets, and the full campaign covers five
-  weapons, five friendly enemy looks, eight species, and four cage styles.
-- [x] Confirm the authored size sequence is 9, 11, 13, 15, 13, 15, 17, 17, and
-  25, with Rainbow Picnic before the smaller Toasty Toes breather.
+  cage-front layers, Spring Boots/hole overlays, and locally bundled OST files.
+- [x] Confirm the terrain catalogue assigns each floor and wall a dominant-colour
+  family and rejects incompatible pairs, including yellow/gold floors with
+  green/sage walls.
+- [x] Confirm the ten story mazes each have exactly one weapon and three unique
+  pets, and the full campaign covers five weapons, five friendly enemy looks,
+  eight species, and four cage styles.
+- [x] Confirm the authored size sequence is 9, 11, 13, 15, 13, 15, 17, 17, 19,
+  and 25, with Rainbow Picnic before the smaller Toasty Toes breather and
+  Springstep Sky Hollow before Lanternlight Labyrinth.
+- [x] Confirm later authored levels put selected prerequisites and optional
+  guardians on separate branches, Spring Boots precede every required hole run,
+  and both ordinary and all-three-rescue routes remain solver-validated.
 - [x] Confirm every maze larger than 6 tiles renders a 6 x 6 player-centred
   camera and persistent fog-of-war minimap without changing full-grid engine
   behaviour.
 - [x] Confirm Surprise Maze seeds select varied unlocked odd sizes from 9 through
-  29, never reach 30, and place connected 2–4 tile hazard regions only where the
-  appropriate boots and solver-verified ordinary/perfect routes remain valid.
+  29, never reach 30, place connected 2–4 tile water/lava regions only after the
+  matching splash boots, and place one- or two-square hole runs only after
+  Spring Boots while preserving ordinary/perfect routes.
 - [x] Confirm the title-screen build label and exact `?debug=mazes` query expose
-  the direct nine-maze tester picker, and tester completion cannot write rewards,
+  the direct ten-maze tester picker, and tester completion cannot write rewards,
   records, unlocks, active sessions, or progress.
-- [x] Update `README.md`, architecture, asset, privacy, audit, release, and Vercel
-  documentation for the locally verified 0.8.0 release.
+- [x] Update `README.md`, architecture, music, asset, privacy, audit, release, and
+  Vercel documentation for the 0.9.0 candidate without marking pending release
+  gates complete.
+- [x] Archive the built-in ImageGen Spring Boots and ground-hole masters, retain
+  their prompt records, and validate/downsample transparent runtime copies with
+  `scripts/process_traversal_assets.py`.
 - [ ] Confirm every production image has known provenance and the game contains
   no unlicensed third-party material.
 - [ ] Make the owner-approved licence decision before publishing source or
@@ -61,25 +76,27 @@ npm run check:desktop
 
 - [x] `npm run check` reports that the complete unit suite passes and that
   TypeScript and the Vite production build complete without errors.
-- [x] Dependency audit output for the exact 0.8.0 source is reviewed: zero known
+- [x] Dependency audit output for the exact 0.9.0 source is reviewed: zero known
   vulnerabilities.
-- [x] `npm ls` is reviewed; only expected platform/feature optional packages are
+- [x] `npm ls` for 0.9.0 is reviewed; only expected platform/feature optional packages are
   absent.
 - [x] `npm run check:desktop` completes `cargo check --locked` without errors for
-  the exact 0.8.0 source.
-- [x] `npm run desktop:build` produces the 0.8.0 release executable and NSIS
+  the exact 0.9.0 source.
+- [x] `npm run desktop:build` produces the 0.9.0 release executable and NSIS
   installer; both are staged, source-compared, version-checked, and hashed, and
   the portable app passes its five-second smoke launch.
-- [x] Automated level checks validate all nine story mazes: the first eight from
-  the 9, 11, 13, 15, 13, 15, 17, and 17 tile sequence plus the 25 x 25
-  Lanternlight Labyrinth, with separate ordinary and all-three-rescues solutions,
-  one weapon, and three unique known pet species in every maze.
-- [x] Authored-level checks preserve Wishing Woods' 108-step ordinary route and
-  validate the optional Power 9 pebble-golem route: Power 2, `+2` potion, Power
-  5, backtrack at Power 11, then rescue the guarded kitten.
+- [x] Automated level checks validate all ten story mazes in the 9, 11, 13, 15,
+  13, 15, 17, 17, 19, and 25 tile sequence, with separate ordinary and
+  all-three-rescues solutions, one weapon, and three unique known pet species in
+  every maze.
+- [x] Authored-level checks validate the optional Wishing Woods guardian route
+  and solver-verified out-and-back progression in Wishing Woods, Ame's Grand
+  Parade, Springstep Sky Hollow, and Lanternlight Labyrinth. Their ordinary and
+  all-rescue route lengths are 114/148, 116/136, 190/214, and 290/322.
 - [x] Generator checks prove repeated seeds reproduce terrain, weapon, enemy,
-  cage, varied 9–29 size, and connected 2–4 tile hazard choices without
-  perturbing layout or progression determinism or solver validity.
+  cage, varied 9–29 size, branch prerequisites, connected 2–4 tile water/lava,
+  and post-Spring-Boots hole choices without perturbing layout or progression
+  determinism or solver validity.
 - [x] Focused exploration tests cover an even 6 x 6 window, its defined centre
   bias, edge clamping,
   current field of view, and persistent reveal accumulation; the production
@@ -89,8 +106,10 @@ npm run check:desktop
   Follower-trail tests cover bounded, loop-free, distinct placement. Physical
   mouse/touch pointer capture, repeat timing, and cancellation still require the
   device checks below.
-- [x] Repeat the relevant checks after final source changes (`npm run check`:
-  189 of 189 tests across 15 files plus the production build).
+- [x] Repeat the relevant checks after the integrated 0.9.0 source changes
+  (`npm run check`: 204 of 204 tests across 15 files plus the production build).
+- [x] Repeat `npm run check` once more if browser QA or release packaging causes
+  any additional source, asset, configuration, or lockfile change.
 
 ## 3. Browser play test
 
@@ -100,26 +119,27 @@ Test the production preview, not only the development server:
 npm run preview
 ```
 
-Production smoke record (2026-09-01): the canonical URL served playable build
-0.8.0 from GitHub `main`. Its normal title-screen build label and exact
-`?debug=mazes` query both opened the nine-maze picker, while another query value
-did not open it automatically. Public Rainbow Picnic checks at 1024 x 768 and
-844 x 390 retained the 6 x 6 view, readable contrast, opaque cage-front source,
-and no page or panel overlap.
+Historical production smoke record (2026-09-01): the canonical URL served
+playable build 0.8.0 from GitHub `main`; its build label and exact debug query
+opened the nine-maze picker, and 1024 x 768 plus 844 x 390 layouts passed. The
+0.9.0 canonical deployment and public smoke are still pending. A local 0.9.0
+preview opened the ten-maze picker and passed the complete core matrix below
+without page overflow, maze/sidebar overlap, or a non-square board.
 
-- [ ] 960 x 540: the maze and side panel fit without page overflow or clipping.
-- [ ] 1280 x 720: default layout is balanced and has no page overflow.
-- [x] 667 x 375 and 844 x 390: the phone stage fills the safe landscape viewport
-  with 347 px and 362 px boards respectively, without page overflow or overlap;
-  the 844 x 390 pass retained 44 px minimum controls.
-- [ ] 740 x 360: repeat the same phone-layout checks.
-- [x] 1024 x 768: the iPad-size layout uses a 534 px board with no page overflow,
-  sidebar overlap, or maze/control overlap.
-- [ ] 1180 x 820: repeat the same iPad-size layout checks.
-- [ ] 1366 x 768 and 1920 x 1080: artwork stays sharp and the board remains square.
+- [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
+- [x] 1280 x 720: default layout is balanced and has no page overflow.
+- [x] 667 x 375 and 844 x 390: the phone stage, safe viewport, page overflow,
+  board overlap, and minimum-control layout checks pass locally for 0.9.0.
+- [x] 740 x 360: the same phone-layout checks pass locally.
+- [x] 1024 x 768 local 0.9.0 preview: the iPad-size layout uses a 534 px board
+  with no page overflow, sidebar overlap, or maze/control overlap. Repeat this
+  check against the canonical deployment.
+- [x] 1180 x 820: the same iPad-size layout checks pass locally.
+- [x] 1366 x 768 and 1920 x 1080: the board remains square and the layout has no
+  page overflow; production-art sampling remains part of the public smoke.
 - [ ] Big Maze expands the board, keeps its compact Power/item/rescue HUD and
   feedback toast readable, and returns to the full UI with Escape or Normal.
-- [ ] Portrait: the turn-sideways guidance appears and is readable.
+- [x] Portrait at 390 x 844: the turn-sideways guidance appears and is readable.
 - [ ] 200% zoom or increased text scaling does not hide required actions.
 - [ ] The title screen loads without a blank flash, presents clear primary focus,
   and exposes Continue/Begin Adventure, Adventure Book, Surprise Maze, and sound.
@@ -148,17 +168,20 @@ and no page or panel overlap.
   and remain usable with keyboard only.
 - [ ] Mute state and reduced-motion preference are respected.
 - [ ] Every pickup, blocked action, rescue, fight, loss, and victory has the
-  intended sound or quiet fallback; also check title, menu, selection,
-  achievement, and stamp cues plus locally bundled background music across the
-  title, early story, later story, and surprise mazes.
-- [ ] All nine story levels can be completed manually; also complete several
+  intended sound or quiet fallback; specifically listen for jump, friend-rescue,
+  combat clash, sparks, impact, Power ticks/power-up, and victory cues. Check
+  title, menu, selection, achievement, and stamp cues too.
+- [ ] Start several different mazes and confirm the five full BGM tracks vary by
+  maze without an immediate repeat, revisiting the same maze keeps its assignment
+  for that session, and the short friendship cue never loops as background music.
+- [ ] All ten story levels can be completed manually; also complete several
   surprise mazes and compare observed routes with the validated solver results.
 - [ ] In both an early 9 x 9 maze and later large mazes, the main view stays
   6 x 6, follows Ame without exposing off-camera objects, clamps cleanly at map
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [x] On the normal URL, the discreet build-label button opens the direct picker.
+- [ ] On the 0.9.0 canonical URL, the discreet build-label button opens the direct picker.
   The exact `?debug=mazes` query opens it automatically, while other query values
   do not. It lists every authored maze, bypasses locks, labels previews clearly,
   and leaves saved progress unchanged.
@@ -166,7 +189,9 @@ and no page or panel overlap.
   for the perfect reward.
 - [ ] Sample every story theme and generated variant on the production URL:
   paired materials tile cleanly, enemy/pet/cage art matches the UI, inventory is
-  picture-led, and Ame holds the level's selected weapon after collection.
+  picture-led, and Ame holds the level's selected weapon after collection. No
+  yellow/gold floor may pair with a green/sage wall; floor/wall contrast must be
+  clear in every approved colour family.
 - [ ] Inspect all four cages: each opaque AI-generated front layer sits in front
   of its pet without a baked-in animal, background rectangle, or missing bars.
 - [x] Locally verify the cage source/opacity and front-layer effect through normal
@@ -179,7 +204,21 @@ and no page or panel overlap.
 - [ ] Inspect every water/lava theme and generated 2–4 tile cluster: connected
   regions read organically against the floor with no outline, lip, cast shadow,
   or filter, and floor/wall contrast remains clear at the smallest tile size.
-- [ ] Loss resets the exact level cleanly without duplicating rewards.
+- [ ] Collect Spring Boots, approach single- and two-square hole runs from both
+  directions, and confirm one input performs one smooth safe jump with a boing.
+  Before the pickup, and whenever the landing is blocked or outside the maze,
+  the same move must be refused. Hole art must remain flat, transparent, and free
+  of a coloured outline or shadow.
+- [ ] Trigger a winning battle: input locks only for the short presentation, both
+  characters lunge, clash/sparks/impact are legible, the enemy bursts away, and
+  Ame's Power eases to the exact engine result before normal play resumes with
+  one visible player. Repeat with reduced motion and navigate away mid-effect.
+- [ ] Rescue a pet: the cage front opens, the pet hops with hearts/sparks, and
+  exactly one follower joins after the handoff. Repeat with reduced motion and
+  navigate away mid-effect; no duplicate follower or stale overlay may remain.
+- [x] A local underpowered guardian check shows the same clash/sparks, counts the
+  guardian from Power 9 to 15, suppresses duplicate sprites, then presents the
+  gentle retry card. The automated engine check retains the exact reset rule.
 - [ ] Existing schema-v1 and schema-v2 saves migrate safely to schema v3,
   malformed data fails gently, and unknown historical species/source facts are
   not invented.
@@ -189,7 +228,7 @@ and no page or panel overlap.
 - [ ] Each of the nine stat-driven badges unlocks at its documented threshold and
   new rewards appear once without duplicate fanfare.
 
-## 4. Windows 0.8.0 artifact test
+## 4. Windows 0.9.0 artifact test
 
 Expected build outputs:
 
@@ -197,8 +236,11 @@ Expected build outputs:
 - `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
   Solve!_VERSION_x64-setup.exe`
 
-For the current verified Windows artifact set, `VERSION` resolves to `0.8.0`.
+For the new artifact set, `VERSION` must resolve to `0.9.0`.
 
+- [x] Build the exact final 0.9.0 source and confirm both expected outputs exist.
+- [x] Confirm the portable executable and installer report product/file version
+  0.9.0 and embed the final browser bundle.
 - [x] A hidden five-second launch of the staged portable executable remains
   running and responsive and exposes the correct game window title.
 
@@ -212,27 +254,41 @@ For the current verified Windows artifact set, `VERSION` resolves to `0.8.0`.
 - [ ] Sign the executable and installer for public distribution, then test the
   signed files again. If unsigned, label them clearly.
 
-## 5. Windows 0.8.0 staging record
+## 5. Windows 0.9.0 staging record
 
 - [x] Copy only artifacts from the final successful build into `release/` using
   versioned filenames.
-- [x] Confirm the staged names are `Maze-so-Puzzle-0.8.0-portable.exe` and
-  `Maze-so-Puzzle-0.8.0-setup.exe`.
-- [x] Confirm both artifacts report file/product version 0.8.0 and remain clearly
+- [x] Confirm the staged names are `Maze-so-Puzzle-0.9.0-portable.exe` and
+  `Maze-so-Puzzle-0.9.0-setup.exe`.
+- [x] Confirm both artifacts report file/product version 0.9.0 and remain clearly
   labelled as unsigned local test builds.
-- [x] Generate final SHA-256 values after all copying (the current test build is unsigned):
+- [x] Generate final SHA-256 values after all copying (the test build is unsigned):
 
 ```powershell
-Get-FileHash .\release\Maze-so-Puzzle-0.8.0-portable.exe -Algorithm SHA256
-Get-FileHash .\release\Maze-so-Puzzle-0.8.0-setup.exe -Algorithm SHA256
+Get-FileHash .\release\Maze-so-Puzzle-0.9.0-portable.exe -Algorithm SHA256
+Get-FileHash .\release\Maze-so-Puzzle-0.9.0-setup.exe -Algorithm SHA256
 ```
 
 - [x] Confirm the staged portable and installer hashes match their final Tauri
-  source artifacts byte-for-byte, then record the final 0.8.0 filenames, sizes,
+  source artifacts byte-for-byte, then record the final 0.9.0 filenames, sizes,
   and hashes in `release/README.md` and `release/SHA256SUMS.txt`.
-- [x] Record the portable at 47,846,912 bytes with SHA-256
+
+Current verified unsigned 0.9.0 staging record:
+
+- Portable: `Maze-so-Puzzle-0.9.0-portable.exe`, 48,397,312 bytes, SHA-256
+  `E80B68613AEDBA3A1E5831240F1D1746D5AEA5BCD4A9C6BBB82CC455ECFC5AEC`.
+- Installer: `Maze-so-Puzzle-0.9.0-setup.exe`, 41,891,642 bytes, SHA-256
+  `C040302C732AB846C77850CE2BA67FE745A5027223A6AADD62EF0CB247C17347`.
+
+### Historical verified 0.8.0 staging record
+
+The previous unsigned 0.8.0 artifacts were source-compared, version-checked,
+hashed, and smoke-launched. They remain a historical baseline and do not verify
+the new 0.9.0 files:
+
+- Portable: `Maze-so-Puzzle-0.8.0-portable.exe`, 47,846,912 bytes, SHA-256
   `6434B8EF5C237F34C3AF6A44743A9E4D55D291A8F15FD175DF44560471BD97FC`.
-- [x] Record the installer at 41,335,529 bytes with SHA-256
+- Installer: `Maze-so-Puzzle-0.8.0-setup.exe`, 41,335,529 bytes, SHA-256
   `A15D88A70AE14F7FA447F740EE2783F9E7E170C61CB9A4E5F37E08F8ABFB761E`.
 
 - [ ] Verify the published hashes against newly downloaded copies.

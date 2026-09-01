@@ -14,15 +14,20 @@ state.
    restarting inside each rendered cell. It resolves each level's picture-first
    terrain, weapon, enemy, pet, and cage presentation and overlays the selected
    weapon in Ame's hands after collection. It also owns primary-pointer capture,
-   repeat timing, the touch cursor, and rescued-pet follower presentation.
+   repeat timing, the touch cursor, rescued-pet follower presentation, and the
+   short cancellable jump, battle, rescue, and Power-count-up presentations.
 3. `src/game/engine.ts` applies one immutable movement or interaction step.
 4. Authored levels come from `src/game/levels.ts`; surprise levels come from the
    deterministic generator in `src/game/generator.ts`. The generator selects a
-   seeded odd size from unlocked 9–29 bands and grows solver-safe connected
-   2–4-tile hazard regions only beyond the boots gate. Level and object records
-   carry stable visual IDs without placing artwork concerns in the engine.
-   The authored campaign deliberately uses 9, 11, 13, 15, 13, 15, 17, 17, and
-   25 tile boards, with Rainbow Picnic before the smaller Toasty Toes breather.
+   seeded odd size from unlocked 9–29 bands, grows solver-safe connected
+   2–4-tile water/lava regions only beyond the splash-boots gate, and can place
+   one- or two-square hole runs only after reachable Spring Boots. Later
+   adventure seeds place selected prerequisites on dead-end branches to create
+   intentional detours. Level and object records carry stable visual IDs without
+   placing artwork concerns in the engine. The authored campaign deliberately
+   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, and 25 tile boards, with Rainbow
+   Picnic before the smaller Toasty Toes breather and Springstep Sky Hollow
+   before the finale.
 5. `src/game/solver.ts` validates structural rules and searches the exact engine
    state space to prove both an ordinary solution and an all-animal solution.
 6. `src/game/exploration.ts` derives clamped camera windows, the shared camera
@@ -40,13 +45,17 @@ state.
 10. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
    Audio API; those effects require no recorded audio files.
 11. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
+   A session-scoped deterministic picker maps each maze to one of five full
+   tracks and avoids an immediate repeat; the short friendship cue is excluded.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
 12. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
-   material periods, and fallbacks. The current catalogue contains nine paired
-   terrain themes, five weapons, five friendly enemy looks, eight pet species,
-   and four fully opaque AI-generated front cage layers.
+   material periods, dominant-colour families, compatibility rules, and
+   fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
+   catalogue contains ten compatible terrain themes, five weapons, five
+   friendly enemy looks, eight pet species, and four fully opaque AI-generated
+   front cage layers.
 13. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
    cardinal intent and applies the strict one-tile, wall-only corner assist. It
    never pathfinds or assists across hazards, unresolved doors, or enemies.
@@ -60,6 +69,11 @@ state.
 - Visual IDs are presentation metadata. Combat depends on an enemy's Power, not
   its illustration; collecting any weapon sets the same engine sword flag for
   save compatibility. Each story maze has one weapon and three unique pets.
+- Ground holes are engine terrain, not decorative art. A normal step is blocked
+  until Spring Boots are collected; one directional input then scans across the
+  consecutive hole run and lands on the first valid non-hole square. The engine
+  emits the complete jump path so the UI can animate it, while the solver uses
+  the exact same transition and cannot assume a safe landing.
 - Generated-maze presentation is selected from dedicated deterministic hash
   streams. Recreating a seed reproduces both its puzzle and visual variants,
   while adding artwork choices cannot perturb topology or progression placement.
@@ -85,6 +99,10 @@ state.
 - Rescued pets follow recent distinct visible footprints only; the follower
   trail is transient presentation state and never changes collision, solving,
   rewards, or durable progress.
+- Battle and rescue flourishes are cancellable presentation state layered over
+  immutable engine events. Input is briefly locked while the visual handoff is
+  legible; restart, navigation, level change, unmount, and reduced-motion mode
+  cancel or shorten timers without replaying the engine transition.
 - The exploration minimap unions the current field of view with an immutable
   reveal set. Unvisited tiles remain masked; a new level starts a fresh map, and
   an unfinished authored run restores only a validated saved reveal set.
@@ -94,11 +112,11 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The verified 0.8.0 source is shared by the web and Tauri build paths. Its
-  staged unsigned portable executable and installer were separately built,
-  source-compared, hashed, and smoke-checked as recorded in `release/`;
+- The 0.9.0 source is shared by the web and Tauri build paths. Its automated web
+  gate, locked Cargo check, staged unsigned portable executable and installer,
+  source comparison, hashes, and smoke launch pass. Public deployment,
   clean-machine installation, signing, and physical-device feel/listening remain
-  separate release checks.
+  separate release checks; older artifacts stay in `release/` as history.
 - AI-generated source art and exact prompts are recorded in
   `docs/AI_ASSET_PROMPTS.md`; source-only masters are kept outside `public/` so
   they do not inflate deployments.
@@ -109,17 +127,17 @@ The Vitest suite exercises movement, combat, items, hazards, authored and
 generated solvability, optional rescues, exploration-camera activation and
 reveal-set rules, terrain boundary geometry, persistence migrations,
 achievements, synthesized-sound and background-music safeguards, and protected
-navigation. It also checks the complete art catalogue, authored visual variety,
-deterministic generated variants, one weapon and three unique pets per maze, the
-optional Wishing Woods guardian route, 6 x 6 even-window clamping, variable
-9–29 generated sizes, connected post-boots hazard clusters, pointer intent and
-corner-assist safety, rescued-pet trail selection, and cage-front asset coverage.
-Every authored maze and sampled generated maze is run through the stateful
-solver. The verified 0.8.0 run covers 189 tests across 15 files; `npm run check`
-also completes strict TypeScript and the Vite production build. The dependency
-audit/tree and locked Cargo compilation passed, and the Tauri bundle was built
-and locally smoke-checked. Public deployment and real-device checks remain
-separate gates.
+navigation. It also checks the complete art catalogue, dominant-colour theme
+compatibility, authored visual variety, deterministic generated variants, one
+weapon and three unique pets per maze, prerequisite detours and guardians,
+Spring Boots, single/multi-hole jumps and unsafe landings, legacy-session
+migration, 6 x 6 even-window clamping, variable 9–29 generated sizes, connected
+post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
+selection, and cage-front asset coverage. Every authored maze and sampled
+generated maze is run through the stateful solver. The 0.9.0 run covers 204 tests
+across 15 files; `npm run check` also completes strict TypeScript and the Vite
+production build. Dependency review, locked Cargo compilation, packaging,
+public deployment, and real-device checks remain separate release gates.
 
 ## Extension points
 
@@ -135,9 +153,11 @@ separate gates.
 - The zoomed exploration presentation is a dimension rule, not an authored-level
   flag: if either dimension exceeds `DEFAULT_FOV_SIZE` (currently 6), use the
   camera and minimap. Change that shared rule and its boundary tests together.
-- Add a terrain kind by extending the engine union and supplying its connected
-  SVG fill, boundary treatment, and globally aligned periodic pattern. Do not
-  reintroduce independently textured or rounded DOM cells.
+- Add a terrain kind by extending the engine union and choosing the matching
+  rendering model. Connected material regions belong in the SVG fill/boundary
+  pipeline with a globally aligned periodic pattern; isolated traversal
+  overlays such as holes need an explicit square sprite and collision/solver
+  semantics. Do not reintroduce independently textured or rounded DOM cells.
 - Add generated-maze rules through deterministic placement phases followed by
   ordinary and perfect-rescue validation. Keep topology odd, at or below the
   29-tile cap, and prevent decorative hazard growth from consuming pre-gate or
@@ -145,5 +165,5 @@ separate gates.
 - Add durable statistics by versioning and defensively migrating the progress
   schema rather than changing saved data in place.
 - Add background contexts through `MUSIC_TRACKS` and the existing gesture-safe
-  controller. Keep short event stings separate from looping music, and preserve
-  the reserved arena and friendship-cue assets until their mechanics are added.
+  controller. Keep short event stings separate from `MAZE_MUSIC_TRACKS`; preserve
+  stable maze-to-track selection and the no-immediate-repeat rule.

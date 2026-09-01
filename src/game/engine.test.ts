@@ -164,6 +164,60 @@ describe("keys, doors, potions and boots", () => {
     state = movePlayer(potionLevel, state, "right").state;
     expect(state.power).toBe(4);
   });
+
+  it("blocks ground holes until spring boots are collected, then leaps a whole run", () => {
+    const noSpringBootsLevel = level("no-spring-boots", "#@o...E.#");
+    const blocked = movePlayer(
+      noSpringBootsLevel,
+      createInitialGameState(noSpringBootsLevel),
+      "right",
+    );
+    expect(blocked).toMatchObject({ moved: false });
+    expect(blocked.events[0]).toMatchObject({
+      type: "blocked",
+      reason: "needs-spring-boots",
+      terrain: "hole",
+      target: { x: 2, y: 1 },
+    });
+
+    const springBootsLevel = level("with-spring-boots", "#@joo.E.#");
+    let state = createInitialGameState(springBootsLevel);
+    const collected = movePlayer(springBootsLevel, state, "right");
+    state = collected.state;
+    expect(state.hasSpringBoots).toBe(true);
+    expect(collected.events[0]).toMatchObject({ type: "spring-boots-collected" });
+
+    const jumped = movePlayer(springBootsLevel, state, "right");
+    expect(jumped.moved).toBe(true);
+    expect(jumped.state.position).toEqual({ x: 5, y: 1 });
+    expect(jumped.state.steps).toBe(2);
+    expect(jumped.events[0]).toEqual({
+      type: "hole-jumped",
+      from: { x: 2, y: 1 },
+      over: [{ x: 3, y: 1 }, { x: 4, y: 1 }],
+      to: { x: 5, y: 1 },
+    });
+    expect(jumped.events.at(-1)).toEqual({
+      type: "moved",
+      from: { x: 2, y: 1 },
+      to: { x: 5, y: 1 },
+    });
+  });
+
+  it("refuses a spring jump without a safe landing tile", () => {
+    const unsafeLevel = level("unsafe-spring-jump", "#@jo##E.#");
+    const initial = createInitialGameState(unsafeLevel);
+    const equipped = movePlayer(unsafeLevel, initial, "right").state;
+    const blocked = movePlayer(unsafeLevel, equipped, "right");
+
+    expect(blocked.moved).toBe(false);
+    expect(blocked.state).toBe(equipped);
+    expect(blocked.events[0]).toMatchObject({
+      type: "blocked",
+      reason: "wall",
+      target: { x: 4, y: 1 },
+    });
+  });
 });
 
 describe("animal rescues", () => {

@@ -77,6 +77,8 @@ import { playSound, type SoundName } from "./sound";
 import {
   MUSIC_TRACKS,
   configureMusic,
+  createMazeMusicPicker,
+  createMusicRunSeed,
   disposeMusic,
   setMusicMuted,
   setMusicPageHidden,
@@ -120,7 +122,11 @@ const HELD_KEY_DELAY_MS = 105;
 const HELD_KEY_REPEAT_MS = 64;
 const POINTER_HOLD_DELAY_MS = 92;
 const POINTER_HOLD_REPEAT_MS = 68;
-const BUILD_VERSION = "0.8.0";
+const BATTLE_PRESENTATION_MS = 1160;
+const RESCUE_PRESENTATION_MS = 900;
+const JUMP_PRESENTATION_MS = 410;
+const REDUCED_PRESENTATION_MS = 140;
+const BUILD_VERSION = "0.9.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -169,6 +175,36 @@ interface TouchCursor {
   readonly direction: Direction | null;
 }
 
+interface BattlePresentation {
+  readonly objectId: string;
+  readonly enemySrc: string;
+  readonly enemyPower: number;
+  readonly enemyPowerAfter: number;
+  readonly from: Point;
+  readonly at: Point;
+  readonly direction: Direction;
+  readonly powerBefore: number;
+  readonly powerAfter: number;
+  readonly outcome: "won" | "lost";
+}
+
+interface RescuePresentation {
+  readonly objectId: string;
+  readonly species: AnimalSpecies;
+  readonly at: Point;
+  readonly cageSrc: string;
+}
+
+interface JumpPresentation {
+  readonly from: Point;
+  readonly to: Point;
+}
+
+function prefersReducedMotion(): boolean {
+  return typeof window !== "undefined"
+    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feedback {
   const event = [...events].reverse().find((item) => item.type !== "moved") ?? events[0];
   if (!event) return { icon: "👣", text: "Move one square.", tone: "plain", sound: "step" };
@@ -213,6 +249,10 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
     }
     case "boots-collected":
       return { icon: "🥾", text: "Splashy boots found!", tone: "good", sound: "pickup" };
+    case "spring-boots-collected":
+      return { icon: "🌸", text: "Spring boots found! Boing!", tone: "good", sound: "pickup" };
+    case "hole-jumped":
+      return { icon: "✨", text: "Boing! What a lovely jump!", tone: "good", sound: "jump" };
     case "key-collected":
       return {
         icon: "🔑",
@@ -233,6 +273,8 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
             tone: "careful",
             sound: "bump",
           };
+        case "needs-spring-boots":
+          return { icon: "🌸", text: "Find spring boots to hop across!", tone: "careful", sound: "bump" };
         case "needs-key":
           return {
             icon: "🔑",
@@ -270,6 +312,7 @@ function describeObject(object: LevelObject): string {
     case "enemy": return `${resolveEnemyArt(object.style).label.toLowerCase()} with Power ${object.power}`;
     case "sword": return resolveWeaponArt(object.style).label.toLowerCase();
     case "boots": return "protective boots";
+    case "spring-boots": return "spring boots";
     case "potion": return `Power potion worth ${object.amount}`;
     case "key": return `${COLOR_LABELS[object.color]} star key`;
     case "door": return `${COLOR_LABELS[object.color]} locked door`;
@@ -288,6 +331,7 @@ function describeMazePosition(level: LevelDefinition, state: GameState): string 
     if (object && !isObjectResolved(object, state)) return `${label}: ${describeObject(object)}`;
     if (terrain === "water") return `${label}: water`;
     if (terrain === "lava") return `${label}: warm magical lava`;
+    if (terrain === "hole") return `${label}: a hole to jump over`;
     return `${label}: open path`;
   });
   return `Ame is at column ${state.position.x + 1}, row ${state.position.y + 1}. ${nearby.join(". ")}.`;
@@ -298,6 +342,7 @@ function previewKind(level: LevelDefinition, state: GameState, direction: Direct
   const terrain = getTerrainAt(level, target);
   if (!terrain || terrain === "wall") return "stop";
   if ((terrain === "water" || terrain === "lava") && !state.hasBoots) return "stop";
+  if (terrain === "hole" && !state.hasSpringBoots) return "stop";
   const object = getObjectAt(level, target);
   if (!object || isObjectResolved(object, state)) return "go";
   if (object.kind === "door" && !state.keys.includes(object.color)) return "stop";
@@ -317,6 +362,7 @@ function spriteFor(object: Exclude<LevelObject, { kind: "animal" }>): string {
     case "enemy": return resolveEnemyArt(object.style).src;
     case "sword": return resolveWeaponArt(object.style).src;
     case "boots": return ASSETS.boots;
+    case "spring-boots": return ASSETS.springBoots;
     case "potion": return ASSETS.potion;
     case "key": return ASSETS.key;
     case "door": return ASSETS.door;
@@ -380,6 +426,13 @@ const MazeTerrain = memo(function MazeTerrain({
   const walls = createRoundedTerrainPath(level, camera, "wall", 0.13);
   const water = createRoundedTerrainPath(level, camera, "water", 0.16);
   const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
+  const holes: Point[] = [];
+  for (let y = camera.top; y <= camera.bottom; y += 1) {
+    for (let x = camera.left; x <= camera.right; x += 1) {
+      const point = { x, y };
+      if (getTerrainAt(level, point) === "hole") holes.push(point);
+    }
+  }
 
   return (
     <>
@@ -411,6 +464,11 @@ const MazeTerrain = memo(function MazeTerrain({
         {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} />}
         {walls.d && <path className="terrain-wall" d={walls.d} fill={`url(#${wallPatternId})`} fillRule={walls.fillRule} />}
       </svg>
+      {holes.map((hole) => (
+        <div className="terrain-hole-layer" style={cameraLayerStyle(hole, camera)} key={keyFor(hole)} aria-hidden="true">
+          <img src={ASSETS.hole} alt="" draggable={false} />
+        </div>
+      ))}
       {isInsideWindow(level.exit, camera) && (
         <div className="goal-layer" style={cameraLayerStyle(level.exit, camera)} aria-hidden="true">
           <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />
@@ -532,13 +590,10 @@ function surpriseSettings(progress: PlayerProgress): { size: number; difficulty:
   return { size, difficulty };
 }
 
-function musicTrackForLevel(level: LevelDefinition): string {
-  if (level.source === "generated") return MUSIC_TRACKS.surprise;
-  const index = CURATED_LEVELS.findIndex((candidate) => candidate.id === level.id);
-  return index >= 4 ? MUSIC_TRACKS.laterStory : MUSIC_TRACKS.earlyStory;
-}
-
 function App() {
+  const [mazeMusicPicker] = useState(() => createMazeMusicPicker(createMusicRunSeed(), {
+    previousTrackUrl: MUSIC_TRACKS.title,
+  }));
   const [initialRun] = useState(() => readActiveRun(CURATED_LEVELS));
   const initialLevel = initialRun
     ? CURATED_LEVELS.find((candidate) => candidate.id === initialRun.levelId) ?? CURATED_LEVELS[0]!
@@ -579,6 +634,11 @@ function App() {
   const [progress, setProgress] = useState<PlayerProgress>(readPlayerProgress);
   const [completion, setCompletion] = useState<CompletionCelebration | null>(null);
   const [restartArmed, setRestartArmed] = useState(false);
+  const [battlePresentation, setBattlePresentation] = useState<BattlePresentation | null>(null);
+  const [rescuePresentation, setRescuePresentation] = useState<RescuePresentation | null>(null);
+  const [jumpPresentation, setJumpPresentation] = useState<JumpPresentation | null>(null);
+  const [presentedPower, setPresentedPower] = useState<number | null>(null);
+  const [presentedEnemyPower, setPresentedEnemyPower] = useState<number | null>(null);
   const boardRef = useRef<HTMLDivElement>(null);
   const inputLocked = useRef(false);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
@@ -597,11 +657,19 @@ function App() {
   const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
   const rewardSoundTimer = useRef<number | undefined>(undefined);
+  const presentationTimers = useRef(new Set<number>());
+  const powerAnimationFrame = useRef<number | undefined>(undefined);
+  const presentationSequence = useRef(0);
   const modalReturnFocus = useRef<HTMLElement | null>(null);
   const titlePlayRef = useRef<HTMLButtonElement>(null);
   const achievementsHeadingRef = useRef<HTMLHeadingElement>(null);
   const mutedRef = useRef(muted);
   const [testerToolsRequested] = useState(debugMazeQueryEnabled);
+
+  const musicTrackForLevel = useCallback(
+    (nextLevel: LevelDefinition) => mazeMusicPicker.trackForMaze(nextLevel.id),
+    [mazeMusicPicker],
+  );
 
   const campaignIndex = CURATED_LEVELS.findIndex((candidate) => candidate.id === level.id);
   const isSurprise = campaignIndex === -1;
@@ -617,10 +685,16 @@ function App() {
     CURATED_LEVELS.length,
     Math.max(progress.unlockedLevelCount, inferredUnlocked),
   );
-  const cameraWindow = useMemo(
-    () => explorationMode ? getCameraWindow(level, game.position, DEFAULT_FOV_SIZE) : fullLevelWindow(level),
-    [explorationMode, game.position, level],
-  );
+  const cameraWindow = useMemo(() => {
+    if (!explorationMode) return fullLevelWindow(level);
+    const cameraFocus = jumpPresentation
+      ? {
+          x: Math.round((jumpPresentation.from.x + jumpPresentation.to.x) / 2),
+          y: Math.round((jumpPresentation.from.y + jumpPresentation.to.y) / 2),
+        }
+      : game.position;
+    return getCameraWindow(level, cameraFocus, DEFAULT_FOV_SIZE);
+  }, [explorationMode, game.position, jumpPresentation, level]);
   const currentViewTiles = useMemo(
     () => explorationMode
       ? new Set(getVisibleTileKeys(level, game.position, DEFAULT_FOV_SIZE))
@@ -632,8 +706,10 @@ function App() {
     [game, level],
   );
   const visibleObjects = useMemo(
-    () => activeObjects.filter((object) => isInsideWindow(object.at, cameraWindow)),
-    [activeObjects, cameraWindow],
+    () => activeObjects.filter((object) => (
+      object.id !== battlePresentation?.objectId && isInsideWindow(object.at, cameraWindow)
+    )),
+    [activeObjects, battlePresentation?.objectId, cameraWindow],
   );
   const animalObjects = useMemo(
     () => level.objects.filter(
@@ -655,6 +731,7 @@ function App() {
   );
   const followerPlacements = useMemo(() => {
     const rescuedAnimals = game.rescuedAnimalIds.flatMap((animalId) => {
+      if (animalId === rescuePresentation?.objectId) return [];
       const animal = animalObjects.find((candidate) => candidate.id === animalId);
       return animal ? [animal] : [];
     });
@@ -669,7 +746,7 @@ function App() {
       const point = availableTrail[index];
       return point ? [{ animal, point }] : [];
     });
-  }, [animalObjects, cameraWindow, game.position, game.rescuedAnimalIds, playerTrail]);
+  }, [animalObjects, cameraWindow, game.position, game.rescuedAnimalIds, playerTrail, rescuePresentation?.objectId]);
   const objectKinds = useMemo(() => new Set(level.objects.map((object) => object.kind)), [level]);
   const keyColors = useMemo(
     () => [...new Set(level.objects.flatMap((object) => object.kind === "key" ? [object.color] : []))],
@@ -677,9 +754,10 @@ function App() {
   );
   const mazeStatus = useMemo(() => describeMazePosition(level, game), [game, level]);
   const runInProgress = hasActiveRun && game.status === "playing";
+  const displayedPower = presentedPower ?? game.power;
   const modalOpen = testerPickerOpen
     || pendingAdventure !== null
-    || (screen === "game" && (helpOpen || game.status !== "playing"));
+    || (screen === "game" && (helpOpen || (game.status !== "playing" && battlePresentation === null)));
 
   useEffect(() => {
     if (runMode === "tester") return;
@@ -726,6 +804,228 @@ function App() {
     clearBoardPointer();
   }, [clearBoardPointer, clearDpadHold]);
 
+  const clearPresentationWork = useCallback(() => {
+    presentationSequence.current += 1;
+    presentationTimers.current.forEach((timer) => window.clearTimeout(timer));
+    presentationTimers.current.clear();
+    if (powerAnimationFrame.current !== undefined) {
+      window.cancelAnimationFrame(powerAnimationFrame.current);
+      powerAnimationFrame.current = undefined;
+    }
+  }, []);
+
+  const cancelPresentations = useCallback(() => {
+    clearPresentationWork();
+    setBattlePresentation(null);
+    setRescuePresentation(null);
+    setJumpPresentation(null);
+    setPresentedPower(null);
+    setPresentedEnemyPower(null);
+  }, [clearPresentationWork]);
+
+  const schedulePresentationTimer = useCallback((
+    sequence: number,
+    callback: () => void,
+    delay: number,
+  ) => {
+    const timer = window.setTimeout(() => {
+      presentationTimers.current.delete(timer);
+      if (presentationSequence.current === sequence) callback();
+    }, delay);
+    presentationTimers.current.add(timer);
+  }, []);
+
+  const beginBattlePresentation = useCallback((
+    event: Extract<GameEvent, { type: "enemy-defeated" }>,
+    enemy: Extract<LevelObject, { kind: "enemy" }>,
+    direction: Direction,
+    from: Point,
+  ): number => {
+    clearPresentationWork();
+    const sequence = presentationSequence.current;
+    const reducedMotion = prefersReducedMotion();
+    setRescuePresentation(null);
+    setJumpPresentation(null);
+    setPresentedEnemyPower(null);
+    setPresentedPower(reducedMotion ? event.powerAfter : event.powerBefore);
+    setBattlePresentation({
+      objectId: event.objectId,
+      enemySrc: resolveEnemyArt(enemy.style).src,
+      enemyPower: event.enemyPower,
+      enemyPowerAfter: event.enemyPower,
+      from,
+      at: enemy.at,
+      direction,
+      powerBefore: event.powerBefore,
+      powerAfter: event.powerAfter,
+      outcome: "won",
+    });
+
+    if (reducedMotion) {
+      playSound("combatVictory", mutedRef.current);
+    } else {
+      schedulePresentationTimer(sequence, () => playSound("combatClash", mutedRef.current), 255);
+      schedulePresentationTimer(sequence, () => playSound("combatSparks", mutedRef.current), 325);
+      schedulePresentationTimer(sequence, () => playSound("combatImpact", mutedRef.current), 390);
+      schedulePresentationTimer(sequence, () => playSound("combatPowerUp", mutedRef.current), 535);
+      schedulePresentationTimer(sequence, () => playSound("combatVictory", mutedRef.current), 900);
+    }
+
+    if (!reducedMotion) {
+      schedulePresentationTimer(sequence, () => {
+        const startedAt = performance.now();
+        const countDuration = 460;
+        const powerGain = Math.max(0, event.powerAfter - event.powerBefore);
+        const tickStep = Math.max(1, Math.ceil(powerGain / 11));
+        let lastDisplayedPower = event.powerBefore;
+        const countPower = (now: number) => {
+          if (presentationSequence.current !== sequence) return;
+          const progress = Math.min(1, (now - startedAt) / countDuration);
+          const eased = progress * progress * (3 - 2 * progress);
+          const easedGain = powerGain * eased;
+          const nextPower = progress >= 1
+            ? event.powerAfter
+            : Math.min(event.powerAfter, event.powerBefore + Math.floor(easedGain / tickStep) * tickStep);
+          if (nextPower !== lastDisplayedPower) {
+            lastDisplayedPower = nextPower;
+            setPresentedPower(nextPower);
+            playSound("powerTick", mutedRef.current);
+          }
+          if (progress < 1) powerAnimationFrame.current = window.requestAnimationFrame(countPower);
+          else powerAnimationFrame.current = undefined;
+        };
+        powerAnimationFrame.current = window.requestAnimationFrame(countPower);
+      }, 510);
+    }
+
+    const duration = reducedMotion ? REDUCED_PRESENTATION_MS : BATTLE_PRESENTATION_MS;
+    schedulePresentationTimer(sequence, () => {
+      setPresentedPower(null);
+      setPresentedEnemyPower(null);
+      setBattlePresentation(null);
+    }, Math.max(100, duration - 30));
+    return duration;
+  }, [clearPresentationWork, schedulePresentationTimer]);
+
+  const beginLostBattlePresentation = useCallback((
+    event: Extract<GameEvent, { type: "combat-lost" }>,
+    enemy: Extract<LevelObject, { kind: "enemy" }>,
+    direction: Direction,
+    from: Point,
+  ): number => {
+    clearPresentationWork();
+    const sequence = presentationSequence.current;
+    const reducedMotion = prefersReducedMotion();
+    setRescuePresentation(null);
+    setJumpPresentation(null);
+    setPresentedPower(event.playerPower);
+    setPresentedEnemyPower(reducedMotion ? event.enemyPowerAfter : event.enemyPower);
+    setBattlePresentation({
+      objectId: event.objectId,
+      enemySrc: resolveEnemyArt(enemy.style).src,
+      enemyPower: event.enemyPower,
+      enemyPowerAfter: event.enemyPowerAfter,
+      from,
+      at: enemy.at,
+      direction,
+      powerBefore: event.playerPower,
+      powerAfter: event.playerPower,
+      outcome: "lost",
+    });
+
+    if (reducedMotion) {
+      playSound("lose", mutedRef.current);
+    } else {
+      schedulePresentationTimer(sequence, () => playSound("combatClash", mutedRef.current), 255);
+      schedulePresentationTimer(sequence, () => playSound("combatSparks", mutedRef.current), 325);
+      schedulePresentationTimer(sequence, () => playSound("combatImpact", mutedRef.current), 390);
+      schedulePresentationTimer(sequence, () => playSound("combatPowerUp", mutedRef.current), 535);
+      schedulePresentationTimer(sequence, () => playSound("lose", mutedRef.current), 900);
+      schedulePresentationTimer(sequence, () => {
+        const startedAt = performance.now();
+        const countDuration = 460;
+        const powerGain = Math.max(0, event.enemyPowerAfter - event.enemyPower);
+        const tickStep = Math.max(1, Math.ceil(powerGain / 11));
+        let lastDisplayedPower = event.enemyPower;
+        const countPower = (now: number) => {
+          if (presentationSequence.current !== sequence) return;
+          const progress = Math.min(1, (now - startedAt) / countDuration);
+          const eased = progress * progress * (3 - 2 * progress);
+          const nextPower = progress >= 1
+            ? event.enemyPowerAfter
+            : Math.min(
+                event.enemyPowerAfter,
+                event.enemyPower + Math.floor((powerGain * eased) / tickStep) * tickStep,
+              );
+          if (nextPower !== lastDisplayedPower) {
+            lastDisplayedPower = nextPower;
+            setPresentedEnemyPower(nextPower);
+            playSound("powerTick", mutedRef.current);
+          }
+          if (progress < 1) powerAnimationFrame.current = window.requestAnimationFrame(countPower);
+          else powerAnimationFrame.current = undefined;
+        };
+        powerAnimationFrame.current = window.requestAnimationFrame(countPower);
+      }, 510);
+    }
+
+    const duration = reducedMotion ? REDUCED_PRESENTATION_MS : BATTLE_PRESENTATION_MS;
+    schedulePresentationTimer(sequence, () => {
+      setPresentedPower(null);
+      setPresentedEnemyPower(null);
+      setBattlePresentation(null);
+    }, Math.max(100, duration - 30));
+    return duration;
+  }, [clearPresentationWork, schedulePresentationTimer]);
+
+  const beginRescuePresentation = useCallback((
+    event: Extract<GameEvent, { type: "animal-rescued" }>,
+    animal: Extract<LevelObject, { kind: "animal" }>,
+  ): number => {
+    clearPresentationWork();
+    const sequence = presentationSequence.current;
+    const duration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : RESCUE_PRESENTATION_MS;
+    setBattlePresentation(null);
+    setJumpPresentation(null);
+    setPresentedPower(null);
+    setPresentedEnemyPower(null);
+    setRescuePresentation({
+      objectId: event.objectId,
+      species: event.species,
+      at: animal.at,
+      cageSrc: resolveCageArt(animal.cageStyle).src,
+    });
+    if (duration === REDUCED_PRESENTATION_MS) playSound("friendRescue", mutedRef.current);
+    else schedulePresentationTimer(sequence, () => playSound("friendRescue", mutedRef.current), 150);
+    schedulePresentationTimer(sequence, () => setRescuePresentation(null), Math.max(100, duration - 30));
+    return duration;
+  }, [clearPresentationWork, schedulePresentationTimer]);
+
+  const beginJumpPresentation = useCallback((
+    event: Extract<GameEvent, { type: "hole-jumped" }>,
+    landingSound: SoundName,
+  ): number => {
+    clearPresentationWork();
+    const sequence = presentationSequence.current;
+    const reducedMotion = prefersReducedMotion();
+    const duration = reducedMotion ? REDUCED_PRESENTATION_MS : JUMP_PRESENTATION_MS;
+    setBattlePresentation(null);
+    setRescuePresentation(null);
+    setPresentedPower(null);
+    setPresentedEnemyPower(null);
+    setJumpPresentation({ from: event.from, to: event.to });
+    playSound("jump", mutedRef.current);
+    if (landingSound !== "jump") {
+      schedulePresentationTimer(
+        sequence,
+        () => playSound(landingSound, mutedRef.current),
+        reducedMotion ? 45 : 225,
+      );
+    }
+    schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
+    return duration;
+  }, [clearPresentationWork, schedulePresentationTimer]);
+
   useEffect(() => {
     mutedRef.current = muted;
   }, [muted]);
@@ -749,6 +1049,7 @@ function App() {
   }, [screen]);
 
   const loadLevel = useCallback((nextLevel: LevelDefinition) => {
+    cancelPresentations();
     if (inputUnlockTimer.current !== undefined) {
       window.clearTimeout(inputUnlockTimer.current);
       inputUnlockTimer.current = undefined;
@@ -773,7 +1074,7 @@ function App() {
     setPendingAdventure(null);
     setFeedback({ icon: "✨", text: nextLevel.objective, tone: "plain", sound: "step" });
     setRestartArmed(false);
-  }, [clearHeldInput]);
+  }, [cancelPresentations, clearHeldInput]);
 
   const attemptMove = useCallback((direction: Direction) => {
     const unavailable = (
@@ -821,7 +1122,46 @@ function App() {
     setLastEvents(result.events);
     setFeedback(nextFeedback);
     setPreviewDirection(direction);
-    if (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200) {
+    const defeatedEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "enemy-defeated" }> => event.type === "enemy-defeated",
+    );
+    const lostCombatEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "combat-lost" }> => event.type === "combat-lost",
+    );
+    const rescuedEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "animal-rescued" }> => event.type === "animal-rescued",
+    );
+    const jumpedEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "hole-jumped" }> => event.type === "hole-jumped",
+    );
+    let presentationDuration = 0;
+    if (defeatedEvent) {
+      if (jumpedEvent) playSound("jump", mutedRef.current);
+      const enemy = level.objects.find(
+        (object): object is Extract<LevelObject, { kind: "enemy" }> => (
+          object.kind === "enemy" && object.id === defeatedEvent.objectId
+        ),
+      );
+      if (enemy) presentationDuration = beginBattlePresentation(defeatedEvent, enemy, direction, game.position);
+    } else if (lostCombatEvent) {
+      const enemy = level.objects.find(
+        (object): object is Extract<LevelObject, { kind: "enemy" }> => (
+          object.kind === "enemy" && object.id === lostCombatEvent.objectId
+        ),
+      );
+      if (enemy) presentationDuration = beginLostBattlePresentation(lostCombatEvent, enemy, direction, game.position);
+    } else if (rescuedEvent) {
+      if (jumpedEvent) playSound("jump", mutedRef.current);
+      const animal = level.objects.find(
+        (object): object is Extract<LevelObject, { kind: "animal" }> => (
+          object.kind === "animal" && object.id === rescuedEvent.objectId
+        ),
+      );
+      if (animal) presentationDuration = beginRescuePresentation(rescuedEvent, animal);
+    } else if (jumpedEvent) {
+      presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
+    }
+    if (!defeatedEvent && !lostCombatEvent && !rescuedEvent && !jumpedEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
       playSound(nextFeedback.sound, muted);
       if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
     }
@@ -898,8 +1238,8 @@ function App() {
       const nextDirection = queuedDirection.current;
       queuedDirection.current = null;
       if (nextDirection) attemptMoveRef.current(nextDirection);
-    }, result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS);
-  }, [campaignIndex, explorationMode, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerPickerOpen, testerRun]);
+    }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
+  }, [beginBattlePresentation, beginJumpPresentation, beginLostBattlePresentation, beginRescuePresentation, campaignIndex, explorationMode, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerPickerOpen, testerRun]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -962,6 +1302,9 @@ function App() {
         window.clearTimeout(heldKeyTimer.current);
         heldKeyTimer.current = undefined;
       }
+      if (queuedDirection.current === direction) {
+        queuedDirection.current = null;
+      }
     };
 
     const onVisibilityChange = () => {
@@ -986,13 +1329,14 @@ function App() {
   }, [clearHeldInput, game.status, helpOpen, pendingAdventure, screen, testerPickerOpen]);
 
   useEffect(() => () => {
+    clearPresentationWork();
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
     if (heldKeyTimer.current !== undefined) window.clearTimeout(heldKeyTimer.current);
     if (pointerHoldTimer.current !== undefined) window.clearTimeout(pointerHoldTimer.current);
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     if (rewardSoundTimer.current !== undefined) window.clearTimeout(rewardSoundTimer.current);
     disposeMusic();
-  }, []);
+  }, [clearPresentationWork]);
 
   const moveDirectionFromPointer = useCallback((clientX: number, clientY: number): Direction | null => {
     const rect = boardRef.current?.getBoundingClientRect();
@@ -1146,7 +1490,11 @@ function App() {
 
   const stopDpadHold = (event: ReactPointerEvent<HTMLButtonElement>) => {
     if (dpadHoldPointerId.current !== event.pointerId) return;
+    const releasedDirection = dpadHoldDirection.current;
     clearDpadHold();
+    if (queuedDirection.current === releasedDirection) {
+      queuedDirection.current = null;
+    }
   };
 
   const armRestart = () => {
@@ -1271,6 +1619,12 @@ function App() {
   };
 
   const showTitle = () => {
+    cancelPresentations();
+    clearHeldInput();
+    if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
+    inputUnlockTimer.current = undefined;
+    inputLocked.current = false;
+    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
     configureMusic({ trackUrl: MUSIC_TRACKS.title });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
@@ -1282,7 +1636,13 @@ function App() {
   };
 
   const showAchievements = () => {
+    cancelPresentations();
+    clearHeldInput();
+    if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
+    inputUnlockTimer.current = undefined;
+    inputLocked.current = false;
     preloadAchievementArt();
+    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
     configureMusic({ trackUrl: MUSIC_TRACKS.title });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
@@ -1398,13 +1758,14 @@ function App() {
                 {bigMaze && (
                   <div
                     className="big-maze-hud"
-                    aria-label={`${level.name}. Power ${game.power}. ${rescuedSpecies.length} of ${ANIMALS_PER_LEVEL} friends rescued. ${game.hasSword ? `${weaponArt.label} found.` : objectKinds.has("sword") ? `${weaponArt.label} not found.` : ""} ${game.hasBoots ? "Boots found." : objectKinds.has("boots") ? "Boots not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
+                    aria-label={`${level.name}. Power ${displayedPower}. ${rescuedSpecies.length} of ${ANIMALS_PER_LEVEL} friends rescued. ${game.hasSword ? `${weaponArt.label} found.` : objectKinds.has("sword") ? `${weaponArt.label} not found.` : ""} ${game.hasBoots ? "Splash boots found." : objectKinds.has("boots") ? "Splash boots not found." : ""} ${game.hasSpringBoots ? "Spring boots found." : objectKinds.has("spring-boots") ? "Spring boots not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
                   >
                     <strong>{level.name}</strong>
-                    <span>★ {game.power}</span>
+                    <span>★ {displayedPower}</span>
                     <span>💖 {rescuedSpecies.length}/{ANIMALS_PER_LEVEL}</span>
                     {objectKinds.has("sword") && <span className={game.hasSword ? "found" : "missing"}>🗡 {game.hasSword ? "✓" : "–"}</span>}
                     {objectKinds.has("boots") && <span className={game.hasBoots ? "found" : "missing"}>🥾 {game.hasBoots ? "✓" : "–"}</span>}
+                    {objectKinds.has("spring-boots") && <span className={game.hasSpringBoots ? "found" : "missing"}>↟ {game.hasSpringBoots ? "✓" : "–"}</span>}
                     {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}>🔑 {game.keys.length}/{keyColors.length}</span>}
                   </div>
                 )}
@@ -1425,13 +1786,17 @@ function App() {
 
             <div
               ref={boardRef}
-              className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}`}
+              className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}`}
               style={{
                 gridTemplateColumns: `repeat(${cameraWindow.width}, minmax(0, 1fr))`,
                 gridTemplateRows: `repeat(${cameraWindow.height}, minmax(0, 1fr))`,
                 "--grid-size": cameraWindow.width,
                 backgroundColor: terrainTheme.floor.fallbackColor,
                 touchAction: "none",
+                ...(battlePresentation ? {
+                  "--battle-focus-x": `${((battlePresentation.at.x - cameraWindow.left + 0.5) / cameraWindow.width) * 100}%`,
+                  "--battle-focus-y": `${((battlePresentation.at.y - cameraWindow.top + 0.5) / cameraWindow.height) * 100}%`,
+                } : {}),
               } as CSSProperties}
               role="application"
               aria-label="Maze board. Use arrow keys, W A S D, the arrow buttons, or press and steer a mouse or finger in a direction from Ame."
@@ -1504,6 +1869,86 @@ function App() {
                 </div>
               ))}
 
+              {battlePresentation && isInsideWindow(battlePresentation.at, cameraWindow) && (
+                <div
+                  className={`battle-presentation battle-${battlePresentation.outcome}`}
+                  data-sfx-cue={battlePresentation.outcome === "won"
+                    ? "combat-clash-and-power-rise"
+                    : "combat-clash-and-gentle-retry"}
+                  aria-hidden="true"
+                  style={{
+                    "--battle-x": `${DIRECTION_DELTAS[battlePresentation.direction].x * 46}%`,
+                    "--battle-y": `${DIRECTION_DELTAS[battlePresentation.direction].y * 46}%`,
+                    "--battle-back-x": `${DIRECTION_DELTAS[battlePresentation.direction].x * -46}%`,
+                    "--battle-back-y": `${DIRECTION_DELTAS[battlePresentation.direction].y * -46}%`,
+                    "--battle-recoil-x": `${DIRECTION_DELTAS[battlePresentation.direction].x * -24}%`,
+                    "--battle-recoil-y": `${DIRECTION_DELTAS[battlePresentation.direction].y * -24}%`,
+                    "--battle-settle-x": `${DIRECTION_DELTAS[battlePresentation.direction].x * -12}%`,
+                    "--battle-settle-y": `${DIRECTION_DELTAS[battlePresentation.direction].y * -12}%`,
+                  } as CSSProperties}
+                >
+                  <div className="battle-combatant battle-ame" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
+                    <img className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    {game.hasSword && <img className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                    <span className="power-badge player-power">{displayedPower}</span>
+                  </div>
+                  <div className="battle-combatant battle-enemy" style={cameraLayerStyle(battlePresentation.at, cameraWindow)}>
+                    <img className="battle-sprite" src={battlePresentation.enemySrc} alt="" draggable={false} />
+                    <span className="power-badge enemy-power">{presentedEnemyPower ?? battlePresentation.enemyPower}</span>
+                  </div>
+                  <div
+                    className="battle-impact"
+                    style={cameraLayerStyle({
+                      x: (battlePresentation.from.x + battlePresentation.at.x) / 2,
+                      y: (battlePresentation.from.y + battlePresentation.at.y) / 2,
+                    }, cameraWindow)}
+                  >
+                    <b>✦</b>
+                    {Array.from({ length: 12 }, (_, index) => (
+                      <i style={{ "--spark-angle": `${index * 30}deg` } as CSSProperties} key={index} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {rescuePresentation && isInsideWindow(rescuePresentation.at, cameraWindow) && (
+                <div
+                  className="rescue-presentation"
+                  data-sfx-cue="cage-pop-and-friend-cheer"
+                  style={cameraLayerStyle(rescuePresentation.at, cameraWindow)}
+                  aria-hidden="true"
+                >
+                  <img className="rescue-presentation-pet" src={animalArt(rescuePresentation.species)} alt="" draggable={false} />
+                  <span className="rescue-cage-half cage-half-left"><img src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
+                  <span className="rescue-cage-half cage-half-right"><img src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
+                  <span className="rescue-happy-burst">
+                    {Array.from({ length: 7 }, (_, index) => (
+                      <i style={{ "--heart-index": index } as CSSProperties} key={index}>{index % 2 ? "✦" : "♥"}</i>
+                    ))}
+                  </span>
+                </div>
+              )}
+
+              {jumpPresentation && (
+                <div
+                  className="jump-presentation"
+                  style={{
+                    ...cameraLayerStyle(jumpPresentation.from, cameraWindow),
+                    "--jump-x": `${(jumpPresentation.to.x - jumpPresentation.from.x) * 100}%`,
+                    "--jump-y": `${(jumpPresentation.to.y - jumpPresentation.from.y) * 100}%`,
+                  } as CSSProperties}
+                  aria-hidden="true"
+                >
+                  <div className="jump-presentation-body">
+                    <img className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    <img className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} />
+                    {game.hasSword && <img className="jump-presentation-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                    <span className="power-badge player-power">{displayedPower}</span>
+                    <i className="jump-spring-squash" />
+                  </div>
+                </div>
+              )}
+
               {followerPlacements.length > 0 && (
                 <div className="pet-followers" aria-hidden="true">
                   {followerPlacements.map(({ animal, point }) => (
@@ -1519,13 +1964,13 @@ function App() {
               )}
 
               <div
-                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}`}
+                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${battlePresentation || jumpPresentation ? " presentation-hidden" : ""}`}
                 style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
               >
                 <img className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
                 {game.hasSword && <img className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} />}
-                <span className="power-badge player-power">{game.power}</span>
+                <span className="power-badge player-power">{displayedPower}</span>
               </div>
             </div>
 
@@ -1565,7 +2010,7 @@ function App() {
               </div>
             </div>
 
-            <section className="hero-card">
+            <section className={`hero-card${battlePresentation?.outcome === "won" ? " power-rising" : ""}`}>
               <div className="portrait-wrap">
                 <img src={ASSETS.portrait} alt="Ame, a smiling blonde adventurer with a lavender backpack" />
                 <span className="portrait-spark sparkle-a" aria-hidden="true">✦</span>
@@ -1573,7 +2018,7 @@ function App() {
               </div>
               <div className="hero-copy">
                 <span className="tiny-label">Ame's Power</span>
-                <strong className="big-power">{game.power}</strong>
+                <strong className="big-power">{displayedPower}</strong>
                 <span className="power-help">Match or beat wins!</span>
               </div>
             </section>
@@ -1624,11 +2069,12 @@ function App() {
                   </div>
                   <div className="inventory-grid">
                     {objectKinds.has("sword") && <InventorySlot label={weaponArt.label} image={weaponArt.src} found={game.hasSword} />}
-                    {objectKinds.has("boots") && <InventorySlot label="Boots" image={ASSETS.boots} found={game.hasBoots} />}
+                    {objectKinds.has("boots") && <InventorySlot label="Splash boots" image={ASSETS.boots} found={game.hasBoots} />}
+                    {objectKinds.has("spring-boots") && <InventorySlot label="Spring boots" image={ASSETS.springBoots} found={game.hasSpringBoots} />}
                     {keyColors.map((color) => (
                       <InventorySlot key={color} label={`${COLOR_LABELS[color]} key`} image={ASSETS.key} found={game.keys.includes(color)} color={color} />
                     ))}
-                    {!objectKinds.has("sword") && !objectKinds.has("boots") && keyColors.length === 0 && (
+                    {!objectKinds.has("sword") && !objectKinds.has("boots") && !objectKinds.has("spring-boots") && keyColors.length === 0 && (
                       <div className="empty-bag"><span>🎒</span><strong>Bag ready!</strong></div>
                     )}
                   </div>
@@ -1697,6 +2143,7 @@ function App() {
               <HelpStep icon="⭐" title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
               <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />
               <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
+              <HelpStep icon="↟" title="Find spring boots" copy="Boing safely across holes in the path." />
               <HelpStep icon="💖" title="Rescue friends" copy="Three are hiding in every maze." />
               {explorationMode && <HelpStep icon="🗺️" title="Fill the map" copy="Exploring reveals each part." />}
             </div>
@@ -1760,7 +2207,7 @@ function App() {
           </Modal>
         )}
 
-        {game.status === "lost" && (
+        {game.status === "lost" && battlePresentation === null && (
           <Modal title="A little too strong!" returnFocus={modalReturnFocus.current}>
             <img className="modal-art goblin-art" src={lostEnemyArt.src} alt={`A friendly ${lostEnemyArt.label.toLowerCase()}`} />
             {lostEvent && <div className="power-equation"><span>{lostEvent.playerPower}</span><b>&lt;</b><span>{lostEvent.enemyPower}</span></div>}

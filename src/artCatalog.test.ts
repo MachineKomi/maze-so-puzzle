@@ -10,6 +10,7 @@ import {
   ENEMY_ART,
   TERRAIN_THEMES,
   WEAPON_ART,
+  areTerrainColorsCompatible,
   resolveAnimalArt,
   resolveCageArt,
   resolveEnemyArt,
@@ -59,7 +60,7 @@ describe("art catalog", () => {
     }
   });
 
-  it("provides calibrated, seamless-pattern metadata for all nine themes", () => {
+  it("provides calibrated, seamless-pattern metadata for every theme", () => {
     const color = /^#[0-9a-f]{6}$/i;
     const textureSources = new Set<string>();
 
@@ -74,8 +75,14 @@ describe("art catalog", () => {
         expect(texture.periodTiles).toBeGreaterThanOrEqual(4);
         expect(texture.periodTiles).toBeLessThanOrEqual(6);
         expect(texture.fallbackColor).toMatch(color);
+        expect(texture.dominantColor).toMatch(/^(gold|rose|blue|green|earth|violet|sage|indigo)$/);
         textureSources.add(texture.src);
       }
+
+      expect(areTerrainColorsCompatible(
+        theme.floor.dominantColor,
+        theme.wall.dominantColor,
+      )).toBe(true);
     }
 
     expect(new Set(TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].floor.src)).size).toBe(5);
@@ -85,6 +92,11 @@ describe("art catalog", () => {
       return `${theme.floor.src}|${theme.wall.src}`;
     })).size).toBe(TERRAIN_THEME_IDS.length);
     expect(textureSources.size).toBe(10);
+  });
+
+  it("rejects the clashing yellow-floor and green-wall palette", () => {
+    expect(areTerrainColorsCompatible("gold", "green")).toBe(false);
+    expect(areTerrainColorsCompatible("gold", "sage")).toBe(false);
   });
 
   it("resolves every valid ID to its stable catalog entry object", () => {

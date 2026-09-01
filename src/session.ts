@@ -38,7 +38,13 @@ export interface ActiveRunStorage {
 type ObjectKind = LevelObject["kind"];
 
 const KEY_COLORS: readonly KeyColor[] = ["red", "blue", "yellow"];
-const COLLECTABLE_KINDS: readonly ObjectKind[] = ["sword", "boots", "potion", "key"];
+const COLLECTABLE_KINDS: readonly ObjectKind[] = [
+  "sword",
+  "boots",
+  "spring-boots",
+  "potion",
+  "key",
+];
 const TILE_KEY_PATTERN = /^(0|[1-9]\d*),(0|[1-9]\d*)$/;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -133,10 +139,34 @@ function positionObjectIsResolved(
     case "animal": return rescuedIds.has(object.id);
     case "sword":
     case "boots":
+    case "spring-boots":
     case "potion":
     case "key":
       return collectedIds.has(object.id);
   }
+}
+
+/** One input can clear a straight run of holes and land on the following tile. */
+function maximumMovementStride(level: LevelDefinition): number {
+  let maximumHoleRun = 0;
+
+  for (const row of level.terrain) {
+    let run = 0;
+    for (const terrain of row) {
+      run = terrain === "hole" ? run + 1 : 0;
+      maximumHoleRun = Math.max(maximumHoleRun, run);
+    }
+  }
+
+  for (let x = 0; x < level.width; x += 1) {
+    let run = 0;
+    for (let y = 0; y < level.height; y += 1) {
+      run = level.terrain[y]?.[x] === "hole" ? run + 1 : 0;
+      maximumHoleRun = Math.max(maximumHoleRun, run);
+    }
+  }
+
+  return maximumHoleRun + 1;
 }
 
 function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | null {
@@ -148,18 +178,31 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   const steps = ownValue(value, "steps");
   const hasSword = ownValue(value, "hasSword");
   const hasBoots = ownValue(value, "hasBoots");
+  // Pre-0.9 active runs did not contain this field; migrate them as not found.
+  const rawHasSpringBoots = ownValue(value, "hasSpringBoots");
+  // Levels containing Spring Boots changed topology in 0.9. An older snapshot
+  // cannot prove which side of the new hole gate it belongs on, so discard only
+  // that active run while preserving the player's separate campaign progress.
+  if (
+    rawHasSpringBoots === undefined
+    && level.objects.some((object) => object.kind === "spring-boots")
+  ) {
+    return null;
+  }
+  const hasSpringBoots = rawHasSpringBoots === undefined ? false : rawHasSpringBoots;
   if (
     !position
     || !isSafeNonNegativeInteger(power)
     || !isSafeNonNegativeInteger(steps)
     || typeof hasSword !== "boolean"
     || typeof hasBoots !== "boolean"
+    || typeof hasSpringBoots !== "boolean"
   ) {
     return null;
   }
 
   const terrain = level.terrain[position.y]?.[position.x];
-  if (!terrain || terrain === "wall" || pointsEqual(position, level.exit)) return null;
+  if (!terrain || terrain === "wall" || terrain === "hole" || pointsEqual(position, level.exit)) return null;
 
   const objectIds = level.objects.map((object) => object.id);
   const objectsById = new Map(level.objects.map((object) => [object.id, object] as const));
@@ -199,10 +242,14 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   ))) as KeyColor[];
   const collectedSword = level.objects.some((object) => object.kind === "sword" && collected.has(object.id));
   const collectedBoots = level.objects.some((object) => object.kind === "boots" && collected.has(object.id));
+  const collectedSpringBoots = level.objects.some(
+    (object) => object.kind === "spring-boots" && collected.has(object.id),
+  );
   const calculatedPower = expectedPower(level, collected, defeated);
   if (
     hasSword !== collectedSword
     || hasBoots !== collectedBoots
+    || hasSpringBoots !== collectedSpringBoots
     || !equalStrings(keys, derivedKeys)
     || calculatedPower === null
     || power !== calculatedPower
@@ -215,8 +262,7 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   const distanceFromStart = Math.abs(position.x - level.start.x) + Math.abs(position.y - level.start.y);
   const resolvedCount = collected.size + rescued.size + defeated.size + opened.size;
   if (
-    distanceFromStart > steps
-    || (steps - distanceFromStart) % 2 !== 0
+    distanceFromStart > steps * maximumMovementStride(level)
     || resolvedCount > steps
   ) {
     return null;
@@ -228,6 +274,7 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     power,
     hasSword,
     hasBoots,
+    hasSpringBoots,
     keys,
     collectedObjectIds,
     rescuedAnimalIds,

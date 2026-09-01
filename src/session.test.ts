@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createInitialGameState, movePlayer } from "./game/engine";
-import { CURATED_LEVELS } from "./game/levels";
+import { CURATED_LEVELS, parseAsciiLevel } from "./game/levels";
 import { solveLevel } from "./game/solver";
 import type { GameState, LevelDefinition } from "./game/types";
 import {
@@ -59,6 +59,56 @@ function rawSnapshot(level: LevelDefinition, game: GameState = createInitialGame
 }
 
 describe("active run persistence", () => {
+  it("migrates old snapshots without spring boots and persists a completed jump", () => {
+    const oldLevel = storyLevel();
+    const legacyGame = Object.fromEntries(
+      Object.entries(createInitialGameState(oldLevel))
+        .filter(([key]) => key !== "hasSpringBoots"),
+    );
+    const migrated = sanitizeActiveRunSnapshot({
+      ...rawSnapshot(oldLevel),
+      game: legacyGame,
+    }, CURATED_LEVELS);
+    expect(migrated?.game.hasSpringBoots).toBe(false);
+
+    const changedTraversalLevel = storyLevel(6);
+    const staleTraversalGame = Object.fromEntries(
+      Object.entries(createInitialGameState(changedTraversalLevel))
+        .filter(([key]) => key !== "hasSpringBoots"),
+    );
+    expect(sanitizeActiveRunSnapshot({
+      ...rawSnapshot(changedTraversalLevel),
+      game: staleTraversalGame,
+    }, CURATED_LEVELS)).toBeNull();
+
+    const jumpLevel = parseAsciiLevel({
+      id: "saved-spring-jump",
+      name: "Saved Spring Jump",
+      objective: "Collect the spring boots and jump.",
+      initialPower: 1,
+      map: [
+        "#########",
+        "#@j.o..E#",
+        "#########",
+      ],
+    });
+    let game = createInitialGameState(jumpLevel);
+    for (const direction of ["right", "right", "right"] as const) {
+      game = movePlayer(jumpLevel, game, direction).state;
+    }
+
+    expect(game).toMatchObject({
+      position: { x: 5, y: 1 },
+      hasSpringBoots: true,
+      status: "playing",
+      steps: 3,
+    });
+    expect(sanitizeActiveRunSnapshot(
+      rawSnapshot(jumpLevel, game),
+      [jumpLevel],
+    )?.game).toEqual(game);
+  });
+
   it("round-trips a validated normal curated run", () => {
     const storage = new MemoryStorage();
     const level = storyLevel(1);

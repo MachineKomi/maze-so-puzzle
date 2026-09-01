@@ -1,10 +1,11 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.8.0 is a client-only game. It has no account system,
+Maze so Puzzle 0.9.0 is a client-only game. It has no account system,
 analytics, advertising, multiplayer, chat, remote database, or game-owned
 server. The browser build does not intentionally send player names, gameplay,
-or saved progress anywhere. The packaged and locally verified unsigned 0.8.0
-Windows test build uses the same device-local storage model.
+or saved progress anywhere. The optional Tauri Windows build uses the same
+device-local storage model; the verified unsigned 0.9.0 package is built from
+the same client-only application.
 
 ## What is stored
 

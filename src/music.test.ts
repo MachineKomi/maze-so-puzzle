@@ -49,6 +49,60 @@ afterEach(() => {
 });
 
 describe("background music", () => {
+  it("exposes every full OST song as maze BGM but excludes the short friend cue", async () => {
+    const { MAZE_MUSIC_TRACKS, MUSIC_TRACKS } = await import("./music");
+
+    expect(MAZE_MUSIC_TRACKS).toHaveLength(5);
+    expect(MAZE_MUSIC_TRACKS).toContain(MUSIC_TRACKS.arena);
+    expect(MAZE_MUSIC_TRACKS.every((track) => track.endsWith(".mp3"))).toBe(true);
+    expect(MAZE_MUSIC_TRACKS.some((track) => track.includes("cue_new_friend"))).toBe(false);
+  });
+
+  it("assigns stable deterministic maze songs without immediate first-time repeats", async () => {
+    const { createMazeMusicPicker } = await import("./music");
+    const tracks = ["/music/one.mp3", "/music/two.mp3", "/music/three.mp3"];
+    const first = createMazeMusicPicker("run-ame", {
+      tracks,
+      previousTrackUrl: "/music/one.mp3",
+    });
+    const second = createMazeMusicPicker("run-ame", {
+      tracks,
+      previousTrackUrl: "/music/one.mp3",
+    });
+    const mazeKeys = ["maze-1", "maze-2", "maze-3", "maze-4", "maze-5"];
+    const firstSequence = mazeKeys.map((key) => first.trackForMaze(key));
+    const secondSequence = mazeKeys.map((key) => second.trackForMaze(key));
+
+    expect(firstSequence).toEqual(secondSequence);
+    expect(firstSequence[0]).not.toBe("/music/one.mp3");
+    firstSequence.slice(1).forEach((track, index) => {
+      expect(track).not.toBe(firstSequence[index]);
+    });
+    expect(first.trackForMaze("maze-2")).toBe(firstSequence[1]);
+  });
+
+  it("can avoid non-maze music when returning from another screen", async () => {
+    const { createMazeMusicPicker } = await import("./music");
+    const picker = createMazeMusicPicker("returning-run", {
+      tracks: ["/music/title.mp3", "/music/adventure.mp3"],
+    });
+
+    picker.noteTrackStarted("/music/title.mp3");
+    expect(picker.trackForMaze("new-maze")).toBe("/music/adventure.mp3");
+  });
+
+  it("handles duplicate, empty, and one-song playlists safely", async () => {
+    const { createMazeMusicPicker } = await import("./music");
+    const picker = createMazeMusicPicker("tiny-run", {
+      tracks: ["", " /music/only.mp3 ", "/music/only.mp3"],
+      previousTrackUrl: "/music/only.mp3",
+    });
+
+    expect(picker.tracks).toEqual(["/music/only.mp3"]);
+    expect(picker.trackForMaze("one")).toBe("/music/only.mp3");
+    expect(picker.trackForMaze("two")).toBe("/music/only.mp3");
+  });
+
   it("does not construct or play audio before a user gesture", async () => {
     installAudio();
     const { setMusicMuted } = await import("./music");

@@ -58,7 +58,7 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.8.0** label on the title screen and
+- Click or tap the small **Playable build 0.9.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -68,6 +68,21 @@ document and does not use client-side URL routing.
   across the camera, convex and concave corners should follow the terrain
   boundary, floor/wall contrast should remain clear, and connected 2–4 tile
   hazards should have no outline, lip, cast shadow, or filter.
+- Sample all authored themes and several generated themes. Dominant-colour
+  compatibility must prevent yellow/gold floors from pairing with green/sage
+  walls, while every accepted floor remains lighter/readable against its wall.
+- Open Springstep Sky Hollow from the tester picker. Collect the illustrated
+  Spring Boots and cross both single- and two-square hole runs; before the pickup
+  or with an unsafe landing the same input must be blocked. Check the boing,
+  transparent hole edge, jump arc, and one-player handoff after landing.
+- Trigger one winning battle and one rescue presentation. Confirm their short
+  input locks end cleanly, Power reaches the exact engine value, the rescued pet
+  joins once, reduced-motion mode shortens the flourishes, and navigation or
+  restart leaves no stale overlay.
+- Enter several different mazes and listen for a varying selection from all five
+  full BGM tracks without an immediate repeat. Revisiting a maze within the same
+  session must retain its track, and the short friendship cue must never loop as
+  maze music.
 - Inspect every cage style and confirm its opaque AI-generated front layer stays
   in front of the pet without a baked-in animal or background rectangle. Rescue
   multiple pets and confirm they occupy distinct recent footprints behind Ame.
@@ -96,6 +111,9 @@ link metadata. The source-controlled configuration contains no account IDs or
 secrets. On 2026-09-01 the canonical alias served playable build 0.8.0: the
 normal build-label button and exact debug query opened the nine-maze picker, and
 the 1024 x 768 plus 844 x 390 production layouts passed the initial responsive
-smoke. The broader physical-device and manual matrix above remains required.
+smoke. That is retained as historical evidence only. Promoting and smoke-testing
+the 0.9.0 ten-maze build on the canonical alias remains pending until the final
+verified commit is pushed. The broader physical-device and manual matrix above
+also remains required.
 Executable artifacts remain intentionally excluded from Git and Vercel
 deployment.

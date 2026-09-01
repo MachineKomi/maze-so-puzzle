@@ -4,7 +4,115 @@ export const MUSIC_TRACKS = {
   earlyStory: "/assets/ost/bgm_tiles_in_the_sun_v04.mp3",
   laterStory: "/assets/ost/bgm_little_champions_v04.mp3",
   surprise: "/assets/ost/BG_Music_01_PixelSkywayRally.mp3",
+  arena: "/assets/ost/bgm_arena_overdrive_v04.mp3",
 } as const;
+
+/**
+ * Full-length songs that are safe to loop during a maze. The short
+ * `cue_new_friend...` file in the OST folder is deliberately excluded.
+ */
+export const MAZE_MUSIC_TRACKS: readonly string[] = Object.freeze([
+  MUSIC_TRACKS.earlyStory,
+  MUSIC_TRACKS.laterStory,
+  MUSIC_TRACKS.surprise,
+  MUSIC_TRACKS.arena,
+  MUSIC_TRACKS.title,
+]);
+
+export type MazeMusicKey = string | number;
+
+export interface MazeMusicPickerOptions {
+  /** Override in tests or for a future themed chapter playlist. */
+  readonly tracks?: readonly string[];
+  /** A currently playing song that the first maze should avoid if possible. */
+  readonly previousTrackUrl?: string;
+}
+
+export interface MazeMusicPicker {
+  readonly runSeed: string;
+  readonly tracks: readonly string[];
+  /** Keep repeat avoidance accurate after title/achievement music plays. */
+  noteTrackStarted(trackUrl: string): void;
+  /** Stable for every maze key already encountered during this run. */
+  trackForMaze(mazeKey: MazeMusicKey): string;
+}
+
+function stableHash(value: string): number {
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return hash >>> 0;
+}
+
+function usableTracks(tracks: readonly string[] | undefined): readonly string[] {
+  const unique = [...new Set(
+    tracks
+      ?.map((candidate) => candidate.trim())
+      .filter((candidate) => candidate.length > 0),
+  )];
+  return Object.freeze(unique.length > 0 ? unique : [...MAZE_MUSIC_TRACKS]);
+}
+
+/**
+ * Creates one deterministic-random soundtrack assignment for a play session.
+ * A maze keeps its song when React re-renders, sound is toggled, or the player
+ * revisits it. First-time maze assignments avoid the immediately previous song
+ * whenever the playlist has an alternative.
+ */
+export function createMazeMusicPicker(
+  runSeed: string | number,
+  options: MazeMusicPickerOptions = {},
+): MazeMusicPicker {
+  const normalizedSeed = String(runSeed).trim() || "ame-maze-run";
+  const tracks = usableTracks(options.tracks);
+  const assignments = new Map<string, string>();
+  let previousTrackUrl = options.previousTrackUrl?.trim() || undefined;
+
+  return {
+    runSeed: normalizedSeed,
+    tracks,
+    noteTrackStarted(nextTrackUrl: string): void {
+      previousTrackUrl = nextTrackUrl.trim() || previousTrackUrl;
+    },
+    trackForMaze(mazeKey: MazeMusicKey): string {
+      const normalizedKey = String(mazeKey);
+      const assigned = assignments.get(normalizedKey);
+      if (assigned) {
+        previousTrackUrl = assigned;
+        return assigned;
+      }
+
+      let trackIndex = stableHash(`${normalizedSeed}\u0000${normalizedKey}`) % tracks.length;
+      if (tracks.length > 1 && tracks[trackIndex] === previousTrackUrl) {
+        trackIndex = (trackIndex + 1) % tracks.length;
+      }
+
+      const selected = tracks[trackIndex] ?? DEFAULT_MUSIC_TRACK_URL;
+      assignments.set(normalizedKey, selected);
+      previousTrackUrl = selected;
+      return selected;
+    },
+  };
+}
+
+let fallbackRunSeedSequence = 0;
+
+/** Makes a session seed without touching audio or triggering autoplay. */
+export function createMusicRunSeed(): string {
+  try {
+    if (typeof crypto !== "undefined" && typeof crypto.getRandomValues === "function") {
+      const values = new Uint32Array(2);
+      crypto.getRandomValues(values);
+      return `ame-${values[0]?.toString(36)}-${values[1]?.toString(36)}`;
+    }
+  } catch {
+    // A privacy-restricted WebView may block crypto; the fallback is sufficient.
+  }
+  fallbackRunSeedSequence += 1;
+  return `ame-${Date.now().toString(36)}-${fallbackRunSeedSequence.toString(36)}`;
+}
 
 export const DEFAULT_MUSIC_TRACK_URL = MUSIC_TRACKS.earlyStory;
 export const DEFAULT_MUSIC_VOLUME = 0.22;

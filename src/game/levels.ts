@@ -57,7 +57,8 @@ const ANIMAL_SPECIES: Readonly<Record<string, AnimalSpecies>> = {
 
 /**
  * Parses the compact authoring format used by the tutorial levels and tests.
- * Interactive characters always sit on ordinary floor terrain.
+ * Interactive characters always sit on ordinary floor terrain. Lowercase `o`
+ * authors a ground hole and `j` places the spring-boots pickup.
  */
 export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
   const height = options.map.length;
@@ -108,8 +109,10 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
         continue;
       }
 
-      if (character === "~" || character === "^") {
-        terrainRow.push(character === "~" ? "water" : "lava");
+      if (character === "~" || character === "^" || character === "o") {
+        terrainRow.push(
+          character === "~" ? "water" : character === "^" ? "lava" : "hole",
+        );
         continue;
       }
 
@@ -157,6 +160,11 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
 
       if (character === "u") {
         addObject({ kind: "boots", at });
+        continue;
+      }
+
+      if (character === "j") {
+        addObject({ kind: "spring-boots", at });
         continue;
       }
 
@@ -388,14 +396,17 @@ export const WISHING_WOODS_LEVEL = parseAsciiLevel({
     "three-key-colors",
     "power-chain",
     "optional-miniboss",
+    "spring-boots",
+    "ground-holes",
+    "required-backtracking",
   ],
   map: [
     "#################",
     "#r.......9..#~..#",
     "#.#########.#~#.#",
-    "#...#....b#...#.#",
+    "#...#.oo.b#...#.#",
     "#.#.#.###.#####.#",
-    "#.#.R...#...#..u#",
+    "#j#.R...#...#..u#",
     "#######.###.#.###",
     "#....E#..h#.#.#c#",
     "#.#########B#.#9#",
@@ -403,9 +414,9 @@ export const WISHING_WOODS_LEVEL = parseAsciiLevel({
     "#.#####.#.#.#5#.#",
     "#^#.Y...#...#...#",
     "#^#.###########.#",
-    "#...#..s..#...#.#",
+    "#...#.....#...#.#",
     "#####.###.#2#.#.#",
-    "#@......#...#..p#",
+    "#@.....s#...#..p#",
     "#################",
   ],
 });
@@ -423,10 +434,17 @@ export const AMES_GRAND_PARADE_LEVEL = parseAsciiLevel({
     9: "pebble-golem",
   },
   cageStyle: "storybook-wood",
-  introducedMechanics: ["all-mechanics", "long-power-chain", "perfect-rescue-challenge"],
+  introducedMechanics: [
+    "all-mechanics",
+    "long-power-chain",
+    "spring-boots",
+    "ground-holes",
+    "required-backtracking",
+    "perfect-rescue-challenge",
+  ],
   map: [
     "#################",
-    "#n#....~~....u..#",
+    "#n#....~~....u.j#",
     "#.#.#########.###",
     "#.#.#Y..#@..#...#",
     "#.#r#.#.###.###.#",
@@ -435,13 +453,53 @@ export const AMES_GRAND_PARADE_LEVEL = parseAsciiLevel({
     "#...#.#.#.#...#a#",
     "#.###.#^#.#.#####",
     "#R#..y#^#.#p....#",
-    "#.#.###.#.#####.#",
-    "#.#.#f..#..2..#7#",
+    "#o#.###.#.#####.#",
+    "#o#.#f..#..2..#7#",
     "#.#.###.#####.#.#",
     "#.#.B.#.#..p..#.#",
     "#.###.#.#.#####.#",
     "#b....#E#...4...#",
     "#################",
+  ],
+});
+
+export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAsciiLevel({
+  id: "springstep-sky-hollow",
+  name: "Springstep Sky Hollow",
+  objective: "Explore the side paths, then bounce across the starry holes!",
+  terrainThemeId: "springstep-hollow",
+  weaponStyle: "star-sword",
+  enemyStyle: "blueberry-slime",
+  enemyStylesByPower: { 8: "pebble-golem" },
+  cageStyle: "moon-silver",
+  introducedMechanics: [
+    "required-backtracking",
+    "mixed-hazards",
+    "spring-boots",
+    "ground-holes",
+    "power-chain",
+    "perfect-rescue-challenge",
+  ],
+  map: [
+    "###################",
+    "#...#...oo.......q#",
+    "#.#.#.#######.#####",
+    "#.#b#.#E....#.....#",
+    "#.###8#####.#####.#",
+    "#.#...#..^^.#..~~~#",
+    "#.#.###.#####.###.#",
+    "#.#...#...#u..#.#.#",
+    "#.###.###B#.###.#.#",
+    "#.........#.#.#...#",
+    "#.#########.#.#.###",
+    "#h#@..#...#.#.#...#",
+    "#####.#.#.#.#.###.#",
+    "#s....#.#.4.#...#.#",
+    "#.#####.#####.#.#.#",
+    "#.#p....#.....#j#.#",
+    "#.###.###.#.#####.#",
+    "#...1.#d..#.......#",
+    "###################",
   ],
 });
 
@@ -464,19 +522,22 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
     "exploration-map",
     "fog-of-war",
     "all-mechanics",
+    "spring-boots",
+    "ground-holes",
+    "required-backtracking",
     "perfect-rescue-challenge",
   ],
   map: [
     "#########################",
     "#E9.#.........#.........#",
     "###.#.#####.#.#.#######.#",
-    "#.#.#.#...#.#...#...#...#",
-    "#.#.#.#.#.#.#####.#.#.###",
+    "#j#o#.#...#.#...#...#...#",
+    "#.#o#.#.#.#.#####.#.#.###",
     "#...#w#.#.#.p.#u#.#...#y#",
     "#.#####.#.###.#.#.#####.#",
     "#.......#.....#.#.#...#.#",
     "###############.#.#.#.#.#",
-    "#...#p...r#.....#.Y.#...#",
+    "#..p#....r#.....#.Y.#...#",
     "#.###.#.###.#.#########.#",
     "#.....#...#.#.#.........#",
     "#.#######.#.#.#.#########",
@@ -504,6 +565,7 @@ export const CURATED_LEVELS: readonly LevelDefinition[] = [
   MOONBEAM_MOAT_LEVEL,
   WISHING_WOODS_LEVEL,
   AMES_GRAND_PARADE_LEVEL,
+  SPRINGSTEP_SKY_HOLLOW_LEVEL,
   LANTERNLIGHT_LABYRINTH_LEVEL,
 ];
 

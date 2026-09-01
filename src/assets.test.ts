@@ -32,13 +32,14 @@ function levelWithRelevantArt(): LevelDefinition {
     exit: { x: 2, y: 1 },
     terrain: [
       ["wall", "wall", "wall", "wall"],
-      ["wall", "floor", "water", "wall"],
+      ["wall", "hole", "water", "wall"],
     ],
     objects: [
       { id: "enemy", kind: "enemy", at: { x: 1, y: 1 }, power: 1, style: "blueberry-slime" },
       { id: "sword", kind: "sword", at: { x: 1, y: 1 }, style: "flower-sabre" },
       { id: "key", kind: "key", at: { x: 1, y: 1 }, color: "red" },
       { id: "door", kind: "door", at: { x: 2, y: 1 }, color: "red" },
+      { id: "spring-boots", kind: "spring-boots", at: { x: 1, y: 1 } },
       { id: "puppy", kind: "animal", at: { x: 2, y: 1 }, species: "puppy", cageStyle: "garden-vine" },
     ],
   };
@@ -64,11 +65,13 @@ describe("art preloading", () => {
       wall: ASSETS.wall,
       water: ASSETS.water,
       lava: ASSETS.lava,
+      hole: ASSETS.hole,
     }).toEqual({
       floor: "/assets/floor-v3.png",
       wall: "/assets/wall-v3.png",
       water: "/assets/water-v2.png",
       lava: "/assets/lava-v2.png",
+      hole: "/assets/ground-hole-v1.png",
     });
   });
 
@@ -94,10 +97,12 @@ describe("art preloading", () => {
       theme.floor.src,
       theme.wall.src,
       ASSETS.water,
+      ASSETS.hole,
       resolveEnemyArt("blueberry-slime").src,
       resolveWeaponArt("flower-sabre").src,
       ASSETS.key,
       ASSETS.door,
+      ASSETS.springBoots,
       resolveAnimalArt("puppy").src,
       resolveCageArt("garden-vine").src,
     ]));

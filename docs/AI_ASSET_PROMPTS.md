@@ -7,7 +7,8 @@ programmatic derivatives of those generated sources. Early tile and interactive
 assets were prepared as 512 × 512 PNGs; the 0.6.0 periodic terrain textures are
 1024 × 1024 PNGs; the wide title illustration has a 1672 × 941 PNG master and an
 optimized WebP runtime derivative. Interactive assets were requested on a flat
-`#ff00ff` chroma-key background. Most early sprites arrived as clean RGBA
+`#ff00ff` chroma-key background or, for the new 0.9.0 traversal sprites, as
+native transparent RGBA cutouts. Most early sprites arrived as clean RGBA
 cutouts. The sword-holding Ame variant needed the documented connected-edge
 chroma-removal pass; alpha extrema and transparent corners were validated before
 integration. Texture tiles, the portrait, and the title illustration are opaque.
@@ -319,3 +320,50 @@ outline-free hazard rendering, follower motion, and responsive layout in 0.8.0
 are code-native presentation changes rather than new generated artwork. The
 0.8.0 local release pass checked the archived/runtime sources and verified the
 opaque front-layer effect in play through normal rescue controls.
+
+## Version 9 Spring Boots and ground-hole traversal art
+
+Build 0.9.0 adds two purpose-built square traversal sprites generated with the
+built-in OpenAI ImageGen workflow. Both generations returned native RGBA with a
+fully transparent background, so no chroma-key removal or synthetic background
+cutout was needed. The generated masters are retained unchanged for provenance;
+`scripts/process_traversal_assets.py` validates alpha extrema and creates the
+512 × 512 runtime PNGs with a high-quality Lanczos downsample. No upscaling is
+performed.
+
+### Spring Boots
+
+- Built-in generated source:
+  `exec-ed4e1058-de7f-4dbf-9579-c135c1122e6f.png`
+- Archived generated master:
+  `docs/source-assets/spring-boots-v1-master.png`
+- Optimized runtime sprite: `public/assets/spring-boots-v1.png`
+- Runtime URL: `/assets/spring-boots-v1.png`
+- Runtime format: 512 × 512 RGBA PNG with alpha extrema `(0, 255)`
+
+Prompt record (faithfully retained; whitespace normalized):
+
+```text
+Use case: stylized-concept. Create one square production game-item sprite for a gentle children's fantasy maze game: a matching pair of adorable chunky coral-pink Spring Boots, each boot fitted with a clearly readable polished golden coil spring beneath the sole and decorated with tiny mint star details. Lovely polished 2D hand-painted chunky anime fantasy RPG / storybook JRPG art, rounded toy-like shapes, subtle cream highlights, clean dark-plum linework, cheerful and magical, suitable for a five-year-old. Pure front three-quarter item view, exactly one matching pair, centred with generous even padding and a strong simple silhouette that remains readable inside one 1:1 maze tile. Output a genuine transparent RGBA background. No character, feet, ground, floor plane, cast shadow, scenery, border, frame, text, number, logo, watermark, duplicate pair, cropped parts, or background colour.
+```
+
+### Ground hole
+
+- Built-in generated source:
+  `exec-11534dc6-1466-42c3-8fa3-602a4ac2b452.png`
+- Archived generated master:
+  `docs/source-assets/ground-hole-v1-master.png`
+- Optimized runtime sprite: `public/assets/ground-hole-v1.png`
+- Runtime URL: `/assets/ground-hole-v1.png`
+- Runtime format: 512 × 512 RGBA PNG with alpha extrema `(0, 255)`
+
+Prompt record (faithfully retained; whitespace normalized):
+
+```text
+Use case: stylized-concept. Create one square production terrain-overlay sprite for a gentle children's fantasy maze game: a single cute top-down ground hole or shallow magical pit, with a dark plum oval centre, soft taupe and dusty-lilac inner earth rings, a slightly irregular rounded organic edge, and a few tiny friendly stone nubs. Lovely polished 2D hand-painted chunky anime fantasy RPG / storybook JRPG art, soft pastel colour, readable at one 1:1 maze tile, safe and whimsical rather than frightening. Purely top-down orthographic view, one centred compact hole with generous transparent padding so neighbouring holes can form a clean row. Output a genuine transparent RGBA background and softly antialiased silhouette. No floor texture outside the rim, coloured outline, glow, drop shadow, raised platform, lava, water, spikes, character, item, scenery, frame, text, number, logo, or watermark.
+```
+
+The runtime renderer places the hole as a flat terrain overlay without a CSS
+shadow, filter, or coloured outline. Collision and multi-square jumping are
+code-native mechanics; only the illustrated hole and boots are generated bitmap
+art.

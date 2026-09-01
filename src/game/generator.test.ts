@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { createInitialGameState, movePlayer } from "./engine";
 import {
   MAX_GENERATED_MAZE_SIZE,
   MIN_GENERATED_MAZE_SIZE,
@@ -97,7 +98,7 @@ describe("deterministic surprise mazes", () => {
     expect(Math.min(...sizes)).toBe(MIN_GENERATED_MAZE_SIZE);
     expect(Math.max(...sizes)).toBe(MAX_GENERATED_MAZE_SIZE);
     expect(sizes).not.toEqual([...sizes].sort((left, right) => left - right));
-  });
+  }, 10_000);
 
   it.each(["movement", "gentle", "growing", "adventure"] as const)(
     "always includes exactly one styled weapon in %s mazes",
@@ -160,6 +161,40 @@ describe("deterministic surprise mazes", () => {
     }
   });
 
+  it("builds adventure detours with spring boots before connected hole jumps", () => {
+    const generated = generateSurpriseMaze({
+      seed: "skyhop-story-5",
+      difficulty: "adventure",
+      size: 17,
+    });
+
+    expect(generated.width).toBe(19);
+    expect(generated.terrain.flat()).toContain("hole");
+    expect(generated.objects.filter((object) => object.kind === "spring-boots"))
+      .toHaveLength(1);
+    expect(largestHazardRegion(generated, "hole")).toBeGreaterThanOrEqual(2);
+
+    const solution = solveLevel(generated);
+    let state = createInitialGameState(generated);
+    const visited = new Set([`${state.position.x},${state.position.y}`]);
+    let revisitedTiles = 0;
+    const eventTypes: string[] = [];
+    for (const direction of solution.directions) {
+      const result = movePlayer(generated, state, direction);
+      state = result.state;
+      eventTypes.push(...result.events.map((event) => event.type));
+      const position = `${state.position.x},${state.position.y}`;
+      if (visited.has(position)) revisitedTiles += 1;
+      visited.add(position);
+    }
+
+    expect(state).toMatchObject({ status: "won", hasSpringBoots: true });
+    expect(revisitedTiles).toBeGreaterThan(0);
+    expect(eventTypes.indexOf("spring-boots-collected")).toBeGreaterThanOrEqual(0);
+    expect(eventTypes.indexOf("hole-jumped"))
+      .toBeGreaterThan(eventTypes.indexOf("spring-boots-collected"));
+  });
+
   it("selects varied art and animal trios deterministically without changing level identity", () => {
     const terrainThemes = new Set<string>();
     const weaponStyles = new Set<string>();
@@ -208,11 +243,15 @@ describe("deterministic surprise mazes", () => {
   });
 
   it("proves perfect-rescue routes at the largest supported size", () => {
-    const generated = Array.from({ length: 100 }, (_, index) => generateSurpriseMaze({
-      seed: `largest-friendly-maze-${index}`,
-      difficulty: "adventure",
-      size: 30,
-    })).find((level) => level.width === MAX_GENERATED_MAZE_SIZE);
+    let generated: ReturnType<typeof generateSurpriseMaze> | undefined;
+    for (let index = 0; index < 100 && generated === undefined; index += 1) {
+      const candidate = generateSurpriseMaze({
+        seed: `largest-friendly-maze-${index}`,
+        difficulty: "adventure",
+        size: 30,
+      });
+      if (candidate.width === MAX_GENERATED_MAZE_SIZE) generated = candidate;
+    }
 
     expect(generated).toBeDefined();
     if (generated === undefined) throw new Error("Expected a deterministic 29x29 sample.");

@@ -4,7 +4,10 @@ type EndListener = () => void;
 
 class FakeOscillator {
   type: OscillatorType = "sine";
-  readonly frequency = { setValueAtTime: vi.fn() };
+  readonly frequency = {
+    setValueAtTime: vi.fn(),
+    exponentialRampToValueAtTime: vi.fn(),
+  };
   readonly connect = vi.fn();
   readonly disconnect = vi.fn();
   readonly start = vi.fn();
@@ -119,6 +122,43 @@ describe("playSound", () => {
 
     for (let index = 0; index < 5; index += 1) playSound("menu", false);
     expect(ctx?.oscillators).toHaveLength(27);
+  });
+
+  it("synthesizes an unmistakable pitch-swept jump without media assets", async () => {
+    installAudioContext();
+    const { playSound } = await import("./sound");
+
+    playSound("jump", false);
+
+    const voices = contexts[0]?.oscillators ?? [];
+    expect(voices).toHaveLength(3);
+    expect(voices.map((voice) => voice.type)).toEqual(["triangle", "sine", "sine"]);
+    expect(
+      voices.every((voice) => voice.frequency.exponentialRampToValueAtTime.mock.calls.length === 1),
+    ).toBe(true);
+  });
+
+  it("provides schedulable atomic cues for rescues and each combat beat", async () => {
+    installAudioContext();
+    const { playSound } = await import("./sound");
+    const cues = [
+      "friendRescue",
+      "combatClash",
+      "combatSparks",
+      "combatImpact",
+      "combatPowerUp",
+      "combatVictory",
+      "powerTick",
+    ] as const;
+
+    for (const cue of cues) {
+      const ctx = contexts[0];
+      const before = ctx?.oscillators.length ?? 0;
+      playSound(cue, false);
+      const activeContext = contexts[0];
+      expect(activeContext?.oscillators.length).toBeGreaterThan(before);
+      activeContext?.oscillators.slice(before).forEach((voice) => voice.finish());
+    }
   });
 
   it("never lets a browser audio failure interrupt play", async () => {
