@@ -595,3 +595,66 @@ The v4 cage assets supersede the v2 runtime overlays documented above; the v2
 section remains as provenance for the earlier build. Lock matching, key/door
 labels, asset resolution, preloading, cage layering, and pickup presentation are
 code-native behavior rather than additional generated imagery.
+
+## Version 11 paired flower portals
+
+Build 0.11.0 adds three paired-portal floor-pad sprites. The Rose Heart portal
+was produced with the built-in OpenAI ImageGen workflow in **new-image mode**.
+The Mint Clover and Violet Moon variants were then produced in
+**image-edit/reference mode**, each using the Rose Heart output as Image 1 so
+all three retain the same silhouette, camera angle, scale, and material style.
+
+| Portal | Built-in generated source | Archived generated source | Production runtime asset |
+|---|---|---|---|
+| Rose Heart | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-b5a75e5d-edc0-4150-a749-13af8cce5546.png` | `docs/source-assets/portal-rose-heart-v1.png` | `public/assets/portal-rose-heart-v1.png` |
+| Mint Clover | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-3e60d023-5ef8-4a36-9a3c-f45f04431569.png` | `docs/source-assets/portal-mint-clover-v1.png` | `public/assets/portal-mint-clover-v1.png` |
+| Violet Moon | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-2e1ca49f-8995-4494-847e-745eb1b1f314.png` | `docs/source-assets/portal-violet-moon-v1.png` | `public/assets/portal-violet-moon-v1.png` |
+
+The generated sources are archived unchanged. Rose Heart contains genuine
+alpha; the Mint Clover and Violet Moon edits visualised transparency as a
+near-white neutral checkerboard. `scripts/process_portal_assets.py` removes only
+that edge-connected neutral field, leaving the enclosed cream petals opaque,
+then places a 470 × 470 high-quality Lanczos downsample on a transparent 512 ×
+512 canvas. All runtime files have transparent outer edges and full alpha range. Pairing,
+teleportation, minimap motifs, hints, fog reveal, save validation, sound, and
+the programmatic warp animation are code-native behavior.
+
+### Rose Heart exact prompt
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 game-object sprite for a browser maze tile
+Primary request: a single magical paired-portal floor pad shaped like a five-petal flower, with a very clear pink heart motif in its glowing centre. It should read instantly as a friendly warp pad that Ame can step onto.
+Scene/backdrop: none; genuinely transparent background
+Subject: one low-profile circular flower portal pad only, seen from a mostly top-down three-quarter game-camera angle; chunky petals form the outer ring, luminous heart-shaped centre, tiny restrained sparkles contained close to the object
+Style/medium: lovely cute simple chunky anime fantasy JRPG sprite, cheerful polished 3DS-era adventure-game rendering, soft painterly 3D illustration, child-friendly
+Composition/framing: perfectly centred in a square canvas, complete object visible, generous transparent padding, object fills about 80% of the tile and sits visually flat on a floor tile
+Lighting/mood: warm magical glow, joyful and safe, high readability at small size
+Color palette: soft rose pink, peach, cream and small gold highlights; strong readable separation between outer petals and heart centre
+Constraints: actual alpha transparency; clean cutout edges; no square backing tile; no cast shadow beyond the object; no character; no animal; no text; no number; no UI frame; no scenery; no watermark; one object only
+Avoid: photorealism, thin delicate linework, dark ominous portal, large bloom obscuring the silhouette, side view, floating ring
+```
+
+### Mint Clover exact edit prompt
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 game-object sprite variant
+Input images: Image 1 is the edit target and exact structural/style reference
+Primary request: change the pink heart flower portal into a mint-green clover portal for the matching second portal pair
+Subject: preserve the exact same low-profile five-petal floor-pad geometry, camera angle, scale, padding, chunky materials, lighting quality and transparent cutout; replace the central heart vortex with one unmistakable four-leaf clover shape; change the palette to soft mint, turquoise, cream and small gold highlights
+Constraints: change only the palette and central/ornamental motif; keep the full object silhouette, proportions, rendering style, alpha transparency and framing unchanged; actual transparent background; no square tile; no text; no character; no scenery; no watermark
+Avoid: heart shapes remaining anywhere, dark green, extra objects, taller side-view structure
+```
+
+### Violet Moon exact edit prompt
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 game-object sprite variant
+Input images: Image 1 is the edit target and exact structural/style reference
+Primary request: change the pink heart flower portal into a violet crescent-moon portal for the matching third portal pair
+Subject: preserve the exact same low-profile five-petal floor-pad geometry, camera angle, scale, padding, chunky materials, lighting quality and transparent cutout; replace the central heart vortex with one unmistakable crescent moon and small four-point star; replace every small heart ornament on the petals with simple crescent or star flourishes; change the palette to soft lilac, violet, periwinkle, cream and small gold highlights
+Constraints: change only the palette and motifs; keep the full object silhouette, proportions, rendering style, alpha transparency and framing unchanged; actual transparent background; no square tile; no text; no character; no scenery; no watermark
+Avoid: any heart or clover shapes, dark ominous magic, extra objects, taller side-view structure
+```

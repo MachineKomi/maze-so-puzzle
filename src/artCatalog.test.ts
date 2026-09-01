@@ -14,6 +14,7 @@ import {
   KEY_COLOR_LABELS,
   KEY_MOTIF_LABELS,
   MIN_TERRAIN_LIGHTNESS_DELTA,
+  PORTAL_ART,
   TERRAIN_DRESSING_ART,
   TERRAIN_THEMES,
   WEAPON_ART,
@@ -24,6 +25,7 @@ import {
   resolveDoorArt,
   resolveEnemyArt,
   resolveKeyArt,
+  resolvePortalArt,
   resolveTerrainTheme,
   resolveWeaponArt,
   type SpriteArt,
@@ -32,6 +34,7 @@ import {
   ANIMAL_SPECIES,
   CAGE_STYLE_IDS,
   ENEMY_STYLE_IDS,
+  PORTAL_PAIR_IDS,
   TERRAIN_THEME_IDS,
   WEAPON_STYLE_IDS,
 } from "./game/types";
@@ -61,6 +64,7 @@ describe("art catalog", () => {
     expect(sorted(Object.keys(DOOR_ART))).toEqual(sorted(KEY_COLORS));
     expect(sorted(Object.keys(KEY_COLOR_LABELS))).toEqual(sorted(KEY_COLORS));
     expect(sorted(Object.keys(KEY_MOTIF_LABELS))).toEqual(sorted(KEY_COLORS));
+    expect(sorted(Object.keys(PORTAL_ART))).toEqual(sorted(PORTAL_PAIR_IDS));
   });
 
   it("provides a unique labelled sprite for every gameplay variant", () => {
@@ -218,6 +222,7 @@ describe("art catalog", () => {
       expect(resolveKeyArt(color)).toBe(KEY_ART[color]);
       expect(resolveDoorArt(color)).toBe(DOOR_ART[color]);
     }
+    for (const pair of PORTAL_PAIR_IDS) expect(resolvePortalArt(pair)).toBe(PORTAL_ART[pair]);
   });
 
   it("uses stable defaults for absent, legacy, and untrusted IDs", () => {
@@ -235,5 +240,6 @@ describe("art catalog", () => {
     expect(resolveKeyArt("not-a-key-color")).toBe(KEY_ART[DEFAULT_KEY_COLOR]);
     expect(resolveDoorArt(null)).toBe(DOOR_ART[DEFAULT_KEY_COLOR]);
     expect(resolveDoorArt("not-a-door-color")).toBe(DOOR_ART[DEFAULT_KEY_COLOR]);
+    expect(resolvePortalArt("not-a-portal")).toBe(PORTAL_ART["rose-heart"]);
   });
 });

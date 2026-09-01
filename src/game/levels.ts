@@ -7,6 +7,7 @@ import type {
   LevelObject,
   LevelSource,
   Point,
+  PortalPairId,
   TerrainThemeId,
   TerrainKind,
   WeaponStyle,
@@ -44,6 +45,12 @@ const DOOR_COLORS: Readonly<Record<string, KeyColor>> = {
   Y: "yellow",
 };
 
+const PORTAL_PAIRS: Readonly<Record<string, PortalPairId>> = {
+  H: "rose-heart",
+  C: "mint-clover",
+  M: "violet-moon",
+};
+
 const ANIMAL_SPECIES: Readonly<Record<string, AnimalSpecies>> = {
   c: "kitten",
   f: "fox",
@@ -59,7 +66,8 @@ const ANIMAL_SPECIES: Readonly<Record<string, AnimalSpecies>> = {
  * Parses the compact authoring format used by the tutorial levels and tests.
  * Interactive characters always sit on ordinary floor terrain. Lowercase `o`
  * authors a ground hole, `%` authors poison, `j` places spring boots, and `l`
- * places the antidote leaf that makes poison safe to cross.
+ * places the antidote leaf that makes poison safe to cross. `H`, `C`, and `M`
+ * author matching Rose Heart, Mint Clover, and Violet Moon portal pairs.
  */
 export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
   const height = options.map.length;
@@ -199,6 +207,12 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
       const doorColor = DOOR_COLORS[character];
       if (doorColor !== undefined) {
         addObject({ kind: "door", at, color: doorColor });
+        continue;
+      }
+
+      const portalPair = PORTAL_PAIRS[character];
+      if (portalPair !== undefined) {
+        addObject({ kind: "portal", at, pair: portalPair });
         continue;
       }
 
@@ -682,6 +696,139 @@ export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAsciiLevel({
   ],
 });
 
+export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAsciiLevel({
+  id: "rose-heart-roundabout",
+  name: "Rose Heart Roundabout",
+  objective: "Ride the matching flower portals and bring the Rose Heart Key home!",
+  terrainThemeId: "rose-courtyard",
+  weaponStyle: "flower-sabre",
+  enemyStyle: "goblin",
+  cageStyle: "storybook-wood",
+  introducedMechanics: [
+    "paired-flower-portals",
+    "portal-tutorial",
+    "required-return-trip",
+    "off-route-prerequisites",
+  ],
+  map: [
+    "###############",
+    "#ER...##r1.#s##",
+    "#####.####.#.##",
+    "#q#...##.#.#.##",
+    "#.#.####.#.#.##",
+    "#...#H##.#...##",
+    "#.###.##.###.##",
+    "#.....##.cf#.##",
+    "#####.##.###.##",
+    "#@..#.##...#.##",
+    "###.#.##.#.#.##",
+    "#...#.##.#.#.##",
+    "#.###.##.#.#.##",
+    "#.....##H#...##",
+    "###############",
+  ],
+});
+
+export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAsciiLevel({
+  id: "clover-comeback-carnival",
+  name: "Clover Comeback Carnival",
+  objective: "Explore every portal garden, then come back strong enough for the Moon Golem!",
+  terrainThemeId: "springstep-hollow",
+  weaponStyle: "star-sword",
+  enemyStyle: "blueberry-slime",
+  enemyStylesByPower: {
+    4: "mushroom-imp",
+    7: "moon-bat",
+    9: "pebble-golem",
+  },
+  cageStyle: "golden-heart",
+  potionAmount: 3,
+  introducedMechanics: [
+    "paired-flower-portals",
+    "portal-relay",
+    "come-back-stronger",
+    "optional-miniboss-rescue",
+    "spring-boots",
+    "ground-holes",
+    "required-backtracking",
+    "four-friend-challenge",
+  ],
+  map: [
+    "#################",
+    "#@......#s..#..C#",
+    "#######.###.#.###",
+    "#q#...#.#j..#...#",
+    "#.#.#.#.#.###.#.#",
+    "#...#.#.#p..#4#2#",
+    "#.###.#.###.###.#",
+    "#..H#...#H......#",
+    "#################",
+    "#M......#C..#.9b#",
+    "#######.###.#.###",
+    "#.....#.#M#o#...#",
+    "#.###.#.#.#o###.#",
+    "#...#..f#.#.#...#",
+    "###.#####.#.#.#B#",
+    "#c7....d#.....#E#",
+    "#################",
+  ],
+});
+
+export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAsciiLevel({
+  id: "friendship-crown-vault",
+  name: "Friendship Crown Vault",
+  objective: "Link all three portal flowers and unlock the friendship crown!",
+  terrainThemeId: "moonbeam-castle",
+  weaponStyle: "moon-wand",
+  enemyStyle: "moon-bat",
+  enemyStylesByPower: {
+    2: "blueberry-slime",
+    4: "mushroom-imp",
+    7: "goblin",
+    9: "pebble-golem",
+  },
+  cageStyle: "moon-silver",
+  potionAmount: 3,
+  introducedMechanics: [
+    "large-maze",
+    "exploration-map",
+    "fog-of-war",
+    "paired-flower-portals",
+    "three-portal-relay",
+    "three-key-colors",
+    "all-traversal-tools",
+    "mixed-hazards",
+    "spring-boots",
+    "ground-holes",
+    "required-backtracking",
+    "optional-power-route",
+    "five-friend-challenge",
+  ],
+  map: [
+    "#####################",
+    "#@....#s..#u.j#.....#",
+    "#####.###.###.#.###.#",
+    "#q..#...#.#p#...#...#",
+    "###.###.#.#.#####.###",
+    "#....f#...#.....#.#C#",
+    "#.#######.#.###.#.#4#",
+    "#...#.....#.#...#.#.#",
+    "#.#.#.#####.#.###.#.#",
+    "#r#.....2H#H#.......#",
+    "#####################",
+    "#EYBR.....#C..#l....#",
+    "#########.###.#####.#",
+    "#y#.....#.#b#..oo^^.#",
+    "#9#.###.#.#.#######.#",
+    "#.#.#h#...#.%%..~~..#",
+    "#.#.#.#####.#########",
+    "#.#.#.....#.....#...#",
+    "#.#.#.###.#####.#.#.#",
+    "#.....#M..#d7c....#M#",
+    "#####################",
+  ],
+});
+
 export const CURATED_LEVELS: readonly LevelDefinition[] = [
   MOVEMENT_LEVEL,
   SWORD_AND_KEY_LEVEL,
@@ -695,6 +842,9 @@ export const CURATED_LEVELS: readonly LevelDefinition[] = [
   LANTERNLIGHT_LABYRINTH_LEVEL,
   TWILIGHT_TREASURE_LOOP_LEVEL,
   MOONLIT_FRIENDSHIP_QUEST_LEVEL,
+  ROSE_HEART_ROUNDABOUT_LEVEL,
+  CLOVER_COMEBACK_CARNIVAL_LEVEL,
+  FRIENDSHIP_CROWN_VAULT_LEVEL,
 ];
 
 export function getCuratedLevel(id: string): LevelDefinition | undefined {

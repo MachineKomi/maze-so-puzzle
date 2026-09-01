@@ -138,6 +138,7 @@ function positionObjectIsResolved(
     case "enemy": return defeatedIds.has(object.id);
     case "door": return openedIds.has(object.id);
     case "animal": return rescuedIds.has(object.id);
+    case "portal": return true;
     case "sword":
     case "boots":
     case "spring-boots":
@@ -168,7 +169,24 @@ function maximumMovementStride(level: LevelDefinition): number {
     }
   }
 
-  return maximumHoleRun + 1;
+  let maximumPortalStride = 1;
+  const portals = level.objects.filter(
+    (object): object is Extract<LevelObject, { kind: "portal" }> => object.kind === "portal",
+  );
+  for (const entrance of portals) {
+    const destination = portals.find(
+      (candidate) => candidate.id !== entrance.id && candidate.pair === entrance.pair,
+    );
+    if (!destination) continue;
+    maximumPortalStride = Math.max(
+      maximumPortalStride,
+      Math.abs(entrance.at.x - destination.at.x)
+        + Math.abs(entrance.at.y - destination.at.y)
+        + 1,
+    );
+  }
+
+  return Math.max(maximumHoleRun + 1, maximumPortalStride);
 }
 
 function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | null {

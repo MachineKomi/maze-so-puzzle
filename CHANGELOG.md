@@ -4,6 +4,56 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.11.0 - 2026-09-02
+
+This portal-puzzle release adds a deeper three-maze chapter, expands the full
+soundtrack, and makes the zoomed board feel like one continuous place as Ame
+explores it.
+
+### Added
+
+- Three new authored story mazes: **Rose Heart Roundabout**, **Clover Comeback
+  Carnival**, and the five-friend finale **Friendship Crown Vault**. Their
+  ordinary/perfect routes are 105/117, 103/177, and 231/260 inputs, with
+  mandatory backtracking, optional rescue wings, guardian growth puzzles,
+  hazards, locks, and up to three portal pairs.
+- Rose Heart, Mint Clover, and Violet Moon paired portals. Stepping onto one
+  flower pad warps Ame to its twin with a short bloom, sparkle, and synthesized
+  whoosh presentation; the paired motif is also shown on the minimap.
+- Eight additional user-provided full OST tracks, bringing per-maze music
+  rotation to thirteen songs while preserving no-immediate-repeat behavior.
+- Focused portal, camera-motion, save-validation, scaled-pointer, art, sound,
+  solver, and level-design regression coverage.
+
+### Changed
+
+- The 6 × 6 exploration camera now clips one full rendered maze world and
+  translates it smoothly beneath Ame. Terrain and objects no longer appear to
+  be reconstructed tile-by-tile when the view follows the player.
+- Pointer direction is calculated in logical board coordinates even when the
+  fixed 960 × 540 stage is scaled for iPad or phone. A small direction
+  hysteresis removes diagonal touch wobble without adding pathfinding.
+- Keyboard direction changes take effect immediately when another held key is
+  released, while the child-friendly movement ramp remains intact.
+- Hints first search Ame's currently reachable region, so they no longer point
+  through an unresolved portal/door/guardian gate when a useful local tool or
+  route is available.
+- Portal destinations, fog reveal, followers, pickup feedback, active-run
+  recovery, and maximum-stride checks now share the engine's exact warp result.
+
+### Verification
+
+- `npm run check` passes 292 tests across 22 files, strict TypeScript checking,
+  and the Vite production build. `npm audit --audit-level=moderate` reports zero
+  vulnerabilities, `npm ls` is clean, and `cargo check --locked` passes.
+- Local browser QA passed at 1280 × 720 desktop, 1194 × 834 iPad, and 844 × 390
+  landscape phone with no page overflow, panel overlap, broken visible images,
+  or console warnings/errors. The first portal maze and an iPad perfect-rescue
+  victory were played through with real controls.
+- The unsigned 0.11.0 portable executable and NSIS installer byte-match the
+  final Tauri outputs, report file/product version 0.11.0, and the portable app
+  stayed responsive with the correct title in a five-second smoke launch.
+
 ## 0.10.3 - 2026-09-01
 
 This readability-and-control release makes the maze board easier to understand

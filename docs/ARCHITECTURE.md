@@ -34,9 +34,10 @@ state.
    adventure seeds place selected prerequisites on dead-end branches to create
    intentional detours. Level and object records carry stable visual IDs without
    placing artwork concerns in the engine. The authored campaign deliberately
-   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, 25, 21, and 23 tile boards. The two
-   newest adventures add four- and five-friend backtracking routes; Moonlit
-   Friendship Quest also requires an Antidote Leaf detour before poison.
+   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, 25, 21, 23, 15, 17, and 21 tile
+   boards. The three newest portal adventures add mandatory return trips,
+   optional rescue wings, multi-pair routing, and a five-friend final vault;
+   Moonlit Friendship Quest also requires an Antidote Leaf detour before poison.
 7. `src/game/solver.ts` validates structural rules and searches the exact engine
    state space to prove both an ordinary solution and an all-animal solution.
 8. `src/game/exploration.ts` derives clamped camera windows, the shared camera
@@ -57,7 +58,7 @@ state.
 13. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
     Audio API; those effects require no recorded audio files.
 14. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
-   A session-scoped deterministic picker maps each maze to one of five full
+   A session-scoped deterministic picker maps each maze to one of thirteen full
    tracks and avoids an immediate repeat; the short friendship cue is excluded.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
@@ -68,7 +69,8 @@ state.
     catalogue contains ten compatible terrain themes, five weapons, five
     friendly enemy looks, eight pet species, four sparse AI-generated v4 cage
     fronts, and dedicated Rose Heart, Blue Star, and Sunny Sun key/door pairs.
-    Each lock pair exposes both child-readable colour and shape metadata.
+    Each lock pair exposes both child-readable colour and shape metadata. It
+    also maps three paired-portal IDs to original transparent flower-pad art.
 16. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
     touch, keyboard, and D-pad controls: a 320 ms first pause, a smooth 260–160 ms
     repeat curve over 16 held steps, and reset-on-direction-change semantics.
@@ -77,6 +79,10 @@ state.
     never pathfinds or assists across hazards, unresolved doors, or enemies.
 18. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
     has left and selects distinct visible footprints for rescued friends.
+19. `src/cameraMotion.ts` converts engine/world coordinates into one smoothly
+    translated full-maze render surface. The 6 × 6 camera clips that world rather
+    than rebuilding a different set of local tiles every step, so terrain,
+    objects, portal hops, and edge-following movement remain spatially coherent.
 
 ## Important boundaries
 
@@ -97,6 +103,12 @@ state.
   object has been collected; engine, solver, structural validation, art
   preloading, minimap, accessibility descriptions, and active-run migration use
   the same typed rule.
+- Portals are persistent paired level objects rather than pickups. Structural
+  validation requires every used pair ID to occur exactly twice. Stepping onto
+  one resolves through the same immutable engine transition as ordinary
+  movement, emits `portal-warped`, and lands on its twin without pathfinding.
+  Solver search, minimap reveal, hint reachability, follower presentation,
+  movement-stride validation, and active-run saves all use that same result.
 - Underpowered armed enemy contact emits `enemy-too-strong`, returns the exact
   same playing `GameState` object, and never advances steps, Power, position, or
   interaction IDs. The UI owns the reassuring comparison dialog.
@@ -167,14 +179,14 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.10.3 source is shared by the web and Tauri build paths, and its automated
+- The 0.11.0 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.10.3, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.11.0, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
-  five-second smoke launch with the correct title. GitHub `main` commit
-  `3f61cbd` is live on the canonical Vercel site and passed the focused 0.10.3
-  production smoke. Clean-machine installation, signing, and physical-device
-  feel/listening remain separate release checks.
+  five-second smoke launch with the correct title. The GitHub-connected Vercel
+  production deployment is verified separately after each push. Clean-machine
+  installation, signing, and physical-device feel/listening remain separate
+  release checks.
 - AI-generated source art and exact prompts are recorded in
   `docs/AI_ASSET_PROMPTS.md`; source-only masters are kept outside `public/` so
   they do not inflate deployments.
@@ -195,11 +207,11 @@ selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.10.3 run covers 267 tests across 20 files; `npm run check` also
+solver. The 0.11.0 run covers 292 tests across 22 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.10.3.
+and portable launch smoke are complete for 0.11.0.
 
 ## Extension points
 

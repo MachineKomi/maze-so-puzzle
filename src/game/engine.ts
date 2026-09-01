@@ -45,6 +45,8 @@ export function isObjectResolved(object: LevelObject, state: GameState): boolean
       return state.openedDoorIds.includes(object.id);
     case "animal":
       return state.rescuedAnimalIds.includes(object.id);
+    case "portal":
+      return false;
     case "sword":
     case "boots":
     case "spring-boots":
@@ -167,7 +169,7 @@ export function movePlayer(
     });
   }
 
-  const object = getObjectAt(level, target);
+  let object = getObjectAt(level, target);
   const events: GameEvent[] = [];
   if (jumpedHoles.length > 0) {
     events.push({
@@ -256,6 +258,25 @@ export function movePlayer(
     };
   }
 
+  if (object?.kind === "portal") {
+    const pair = object.pair;
+    const destination = level.objects.find((candidate) => (
+      candidate.kind === "portal"
+      && candidate.pair === pair
+      && candidate.id !== object.id
+    ));
+    if (destination?.kind === "portal") {
+      const portalFrom = target;
+      target = destination.at;
+      events.push({
+        type: "portal-warped",
+        pair,
+        from: portalFrom,
+        to: target,
+      });
+    }
+  }
+
   if (object?.kind === "animal" && !rescuedAnimalIds.includes(object.id)) {
     rescuedAnimalIds = addSorted(rescuedAnimalIds, object.id);
     events.push({
@@ -270,6 +291,7 @@ export function movePlayer(
     object.kind !== "enemy" &&
     object.kind !== "door" &&
     object.kind !== "animal" &&
+    object.kind !== "portal" &&
     !collectedObjectIds.includes(object.id)
   ) {
     collectedObjectIds = addSorted(collectedObjectIds, object.id);

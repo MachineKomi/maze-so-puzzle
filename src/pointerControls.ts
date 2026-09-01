@@ -13,6 +13,28 @@ export interface PointerIntent {
   readonly lateralOffset: number;
 }
 
+export interface BoardRect {
+  readonly left: number;
+  readonly top: number;
+  readonly width: number;
+  readonly height: number;
+}
+
+/** Keeps the visible drag guide attached to the pointer after the 1600×900
+ * game stage is scaled to a phone, tablet, or desktop viewport. */
+export function normalizedBoardPoint(
+  clientX: number,
+  clientY: number,
+  rect: BoardRect,
+): Point {
+  const width = Math.max(1, rect.width);
+  const height = Math.max(1, rect.height);
+  return {
+    x: Math.min(1, Math.max(0, (clientX - rect.left) / width)),
+    y: Math.min(1, Math.max(0, (clientY - rect.top) / height)),
+  };
+}
+
 /**
  * Converts a pointer offset from Ame into a cardinal intent. Keeping this in
  * tile units makes the control feel identical at every board size.
@@ -21,12 +43,33 @@ export function pointerIntentFromTileOffset(
   dxTiles: number,
   dyTiles: number,
   deadZoneTiles = 0.34,
+  previousDirection: Direction | null = null,
+  axisHysteresis = 0.2,
 ): PointerIntent | null {
   const deadZone = Math.max(0, deadZoneTiles);
   if (dxTiles === 0 && dyTiles === 0) return null;
   if (Math.abs(dxTiles) < deadZone && Math.abs(dyTiles) < deadZone) return null;
 
-  if (Math.abs(dxTiles) >= Math.abs(dyTiles)) {
+  const absX = Math.abs(dxTiles);
+  const absY = Math.abs(dyTiles);
+  let useHorizontal = absX >= absY;
+
+  if (previousDirection) {
+    const previousHorizontal = previousDirection === "left" || previousDirection === "right";
+    if (previousHorizontal !== useHorizontal) {
+      const previousAxisMagnitude = previousHorizontal ? absX : absY;
+      const challengerMagnitude = previousHorizontal ? absY : absX;
+      const threshold = Math.max(0, axisHysteresis);
+      if (
+        previousAxisMagnitude >= deadZone
+        && challengerMagnitude <= previousAxisMagnitude * (1 + threshold)
+      ) {
+        useHorizontal = previousHorizontal;
+      }
+    }
+  }
+
+  if (useHorizontal) {
     return {
       direction: dxTiles < 0 ? "left" : "right",
       lateralOffset: dyTiles,

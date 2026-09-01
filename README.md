@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.10.3 play-test build, which remains an active prototype. Its complete
+0.11.0 play-test build, which remains an active prototype. Its complete
 automated browser gate and refreshed unsigned Windows packaging are verified.
 The verified source is live on the canonical Vercel site; the broader
 physical-device play-test pass remains a release step.
@@ -61,24 +61,24 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.10.3 test build:
+The current verified desktop artifacts are the unsigned 0.11.0 test build:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.10.3-portable.exe`
-  (51,461,632 bytes; SHA-256
-  `2F7E47C76252F9E2F2C1E7939240BB81EF971DD2098FE157B647D1F248F42B7E`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.10.3-setup.exe`
-  (44,943,455 bytes; SHA-256
-  `BF31CBB461EB909558C50D7077FDEA62A0D98A8D651BE9D3BFAA844368DD399B`).
+- Portable test copy: `release/Maze-so-Puzzle-0.11.0-portable.exe`
+  (84,777,984 bytes; SHA-256
+  `A64876899DE43C93E67D8D1B40201603DED39D3A496EB14E9D3CABD4CD02E331`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.11.0-setup.exe`
+  (78,599,010 bytes; SHA-256
+  `EAEEF9B96716712DC05964652E4830631395970D8DC192A466695CC0AE58469B`).
   Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.10.3_x64-setup.exe` (byte-matches the staged
+  Puzzle - For Ame to Solve!_0.11.0_x64-setup.exe` (byte-matches the staged
   setup copy).
-- Both executables report file/product version 0.10.3. The portable app remained
+- Both executables report file/product version 0.11.0. The portable app remained
   responsive for a five-second smoke launch and showed the correct game title.
-- The verified 0.10.3 hashes and retained archive hashes are recorded in
+- The verified 0.11.0 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -112,7 +112,7 @@ The current verified desktop artifacts are the unsigned 0.10.3 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.10.3** label to
+On the title screen, click or tap the small **Playable build 0.11.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -127,7 +127,7 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.10.3
+## Included in playable build 0.11.0
 
 - One stable 16:9 visual system for title, play, Adventure Book, tester picker,
   dialogs, and victory celebrations. Its tested scaling contract covers desktop,
@@ -136,11 +136,17 @@ Turn the iPad sideways to play.
 - Count-aware victory friend cards keep rescued pets large and dancing on iPad
   and desktop. One to three friends receive roomy centred cards; groups of four
   or five remain together in a readable row.
-- Twelve progressive story mazes with deliberate changes of pace. Sizes vary
+- Fifteen progressive story mazes with deliberate changes of pace. Sizes vary
   from 9 × 9 to 25 × 25 rather than rising monotonically. The new 21 × 21
   **Twilight Treasure Loop** and 23 × 23 **Moonlit Friendship Quest** add long
   backtracking puzzles after Lanternlight Labyrinth; the latter introduces the
-  Antidote Leaf and a required connected poison crossing.
+  Antidote Leaf and a required connected poison crossing. Three new portal
+  chapters finish the current campaign with deliberately deceptive loops,
+  return trips, optional rescue wings, and a five-friend final vault.
+- Three paired flower portals—Rose Heart, Mint Clover, and Violet Moon—warp Ame
+  between distant parts of the same maze. Portal pairs are visible on the board
+  and minimap, preserve fog-of-war, active-run saving, follower trails, and
+  solver correctness, and use original transparent AI-generated sprite art.
 - A consistent player-centred 6 x 6 camera for every maze whose width or height
   exceeds 6 tiles, including all current story and Surprise Mazes. A persistent
   fog-of-war minimap distinguishes Ame's current view, explored passages, and
@@ -200,8 +206,8 @@ Turn the iPad sideways to play.
   map after a refresh or app restart. Tester and generated runs are excluded.
 - Expanded synthesized sound design for movement and interactions plus title,
   menu, selection, achievement, stamp, rescue, jump, combat clash, sparks,
-  impact, Power count-up, loss, and victory moments. Five full locally bundled
-  tracks rotate deterministically per maze without an immediate repeat; the
+  impact, Power count-up, loss, and victory moments. Thirteen full locally
+  bundled tracks rotate deterministically per maze without an immediate repeat; the
   short friendship cue remains reserved as a non-looping event sting. Spring
   Boots have a crisp four-layer synthesized boing, while every combat contact
   receives its own clash, sparks, and impact cue.
@@ -270,7 +276,7 @@ encouraging comparison so Ame can explore, grow stronger, and return.
 Core engine modules live in `src/game/`; UI input helpers live in `src/`:
 
 - `engine.ts`: movement and interactions.
-- `levels.ts`: the twelve authored story levels.
+- `levels.ts`: the fifteen authored story levels.
 - `exploration.ts`: clamped camera windows, field-of-view tiles, and persistent
   minimap reveal state.
 - `followerTrail.ts`: bounded, loop-free recent footsteps for visible rescued-pet
@@ -297,27 +303,28 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.10.3 source suite passes 267 automated tests across 20 files and the strict
+The 0.11.0 source suite passes 292 automated tests across 22 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
-prerequisite detours, all twelve authored ordinary/perfect-rescue routes,
-dominant-colour theme compatibility, five-track per-maze music selection, the
+prerequisite detours, all fifteen authored ordinary/perfect-rescue routes,
+dominant-colour theme compatibility, thirteen-track per-maze music selection, the
 6 x 6 even camera, variable 9–29 generation, solver-safe connected hazards,
 pointer intent/corner assistance, the slower eased held-input cadence, variable
 1–5 friend totals, immutable strong-enemy warnings, poison/antidote traversal
 and migration, theme lightness and colour compatibility, transparent terrain
 dressing, rescued-pet trails, persistent minimap reveal, dedicated Rose Heart,
 Blue Star, and Sunny Sun lock artwork, sparse v4 cage fronts, stationary winning
-combat, and the full-reset storage allow-list.
+combat, paired-portal structural validation and travel, portal-safe active-run
+recovery, full-world camera interpolation, scaled-pointer hysteresis, and the
+full-reset storage allow-list.
 
-The 0.10.3 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.10.3, and are size-checked and
+The 0.11.0 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.11.0, and are size-checked and
 SHA-256 hashed. The portable app also passed a responsive five-second launch
 smoke with the correct title. Clean-machine installation, signing, and
-physical-device checks remain separate release gates. GitHub `main` commit
-`3f61cbd` auto-deployed to the canonical site, where the 0.10.3 build label,
-twelve-maze tester picker, iPad/landscape-phone bounds, v4 cage art, visible
-images, and production browser logs passed the focused live smoke.
+physical-device checks remain separate release gates. The release source is
+pushed to GitHub `main`, whose connected Vercel project deploys the canonical
+site automatically.
 
 The browser matrix, remaining release gates, and Windows artifact
 record are kept in
@@ -328,7 +335,7 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.10.3 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.11.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

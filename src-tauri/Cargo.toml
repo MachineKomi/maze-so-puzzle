@@ -1,6 +1,6 @@
 [package]
 name = "maze-so-puzzle"
-version = "0.10.3"
+version = "0.11.0"
 description = "A gentle fantasy maze adventure for young players"
 authors = ["Maze so Puzzle team"]
 edition = "2021"

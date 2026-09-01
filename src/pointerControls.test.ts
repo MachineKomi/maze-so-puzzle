@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { createInitialGameState, movePlayer } from "./game/engine";
 import type { LevelDefinition, LevelObject, TerrainKind } from "./game/types";
 import {
+  normalizedBoardPoint,
   pointerIntentFromTileOffset,
   resolvePointerMoveDirection,
 } from "./pointerControls";
@@ -53,6 +54,32 @@ describe("pointerIntentFromTileOffset", () => {
 
   it("uses the horizontal axis for an exact diagonal", () => {
     expect(pointerIntentFromTileOffset(-1, 1)?.direction).toBe("left");
+  });
+
+  it("keeps the previous axis through small diagonal pointer wobble", () => {
+    expect(pointerIntentFromTileOffset(1, 1.08, 0.34, "right")?.direction).toBe("right");
+    expect(pointerIntentFromTileOffset(1, 1.26, 0.34, "right")?.direction).toBe("down");
+    expect(pointerIntentFromTileOffset(-1.05, -1, 0.34, "up")?.direction).toBe("up");
+  });
+
+  it("still reverses immediately along the current axis", () => {
+    expect(pointerIntentFromTileOffset(-1.2, 0.2, 0.34, "right")?.direction).toBe("left");
+  });
+});
+
+describe("normalizedBoardPoint", () => {
+  it.each([0.722, 1, 1.067])("tracks the same relative point at stage scale %s", (scale) => {
+    const rect = { left: 18, top: 27, width: 600 * scale, height: 600 * scale };
+    expect(normalizedBoardPoint(
+      rect.left + rect.width * 0.73,
+      rect.top + rect.height * 0.21,
+      rect,
+    )).toEqual({ x: 0.73, y: 0.21 });
+  });
+
+  it("clamps the guide to the board", () => {
+    expect(normalizedBoardPoint(-100, 999, { left: 10, top: 20, width: 200, height: 100 }))
+      .toEqual({ x: 0, y: 1 });
   });
 });
 

@@ -25,6 +25,7 @@ import {
   resolveDoorArt,
   resolveEnemyArt,
   resolveKeyArt,
+  resolvePortalArt,
   resolveTerrainTheme,
   resolveWeaponArt,
   type TerrainRenderTreatment,
@@ -96,9 +97,11 @@ import {
 } from "./music";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 import { getStoryRescueRecordDisplay } from "./rescueRecords";
+import { cameraWorldStyle, worldLayerStyle } from "./cameraMotion";
 import { resetAllGameProgress } from "./resetProgress";
 import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
 import {
+  normalizedBoardPoint,
   pointerIntentFromTileOffset,
   resolvePointerMoveDirection,
   type PointerIntent,
@@ -143,8 +146,9 @@ const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const JUMP_PRESENTATION_MS = 540;
+const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.10.3";
+const BUILD_VERSION = "0.11.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -198,6 +202,8 @@ interface ActiveBoardPointer {
   readonly origin: PointerPoint;
   readonly boardLeft: number;
   readonly boardTop: number;
+  readonly boardWidth: number;
+  readonly boardHeight: number;
   current: PointerPoint;
   direction: Direction | null;
 }
@@ -240,6 +246,12 @@ interface RescuePresentation {
 }
 
 interface JumpPresentation {
+  readonly from: Point;
+  readonly to: Point;
+}
+
+interface PortalPresentation {
+  readonly pair: Extract<LevelObject, { kind: "portal" }>["pair"];
   readonly from: Point;
   readonly to: Point;
 }
@@ -299,6 +311,13 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
       return { icon: "🍃", text: "Antidote leaf found! Purple poison is safe now.", tone: "good", sound: "pickup" };
     case "hole-jumped":
       return { icon: "✨", text: "Boing! What a lovely jump!", tone: "good", sound: "jump" };
+    case "portal-warped":
+      return {
+        icon: resolvePortalArt(event.pair).motif,
+        text: `Whoosh! The ${resolvePortalArt(event.pair).label} found its twin!`,
+        tone: "good",
+        sound: "portal",
+      };
     case "key-collected":
       return {
         icon: "🔑",
@@ -395,6 +414,7 @@ function describeObject(object: LevelObject): string {
     case "key": return resolveKeyArt(object.color).label.toLowerCase();
     case "door": return `${resolveDoorArt(object.color).label.toLowerCase()}, locked`;
     case "animal": return `caged ${ANIMAL_LABELS[object.species].toLowerCase()}`;
+    case "portal": return `${resolvePortalArt(object.pair).label.toLowerCase()} magic flower`;
   }
 }
 
@@ -447,6 +467,7 @@ function spriteFor(object: Exclude<LevelObject, { kind: "animal" }>): string {
     case "potion": return ASSETS.potion;
     case "key": return resolveKeyArt(object.color).src;
     case "door": return resolveDoorArt(object.color).src;
+    case "portal": return resolvePortalArt(object.pair).src;
   }
 }
 
@@ -750,7 +771,7 @@ const MiniMap = memo(function MiniMap({
               className={`minimap-tile ${seen ? `map-${terrain} ${inView ? "in-view" : "remembered"}` : "map-fog"}`}
             >
               {isExit && <b className="map-marker marker-exit" />}
-              {object && <b className={`map-marker marker-${object.kind}${object.kind === "door" || object.kind === "key" ? ` marker-${object.color}` : ""}`} />}
+              {object && <b className={`map-marker marker-${object.kind}${object.kind === "door" || object.kind === "key" ? ` marker-${object.color}` : object.kind === "portal" ? ` marker-${object.pair}` : ""}`} />}
               {isPlayer && <b className="map-player" />}
             </i>
           );
@@ -807,33 +828,78 @@ function surpriseSettings(progress: PlayerProgress): { size: number; difficulty:
   return { size, difficulty };
 }
 
+function getHintReachableTiles(level: LevelDefinition, state: GameState): ReadonlySet<string> {
+  const reachable = new Set<string>([keyFor(state.position)]);
+  const queue = [state.position];
+  for (let head = 0; head < queue.length; head += 1) {
+    const point = queue[head];
+    if (!point) continue;
+    for (const direction of ["up", "right", "down", "left"] as const) {
+      const delta = DIRECTION_DELTAS[direction];
+      const next = { x: point.x + delta.x, y: point.y + delta.y };
+      const nextKey = keyFor(next);
+      if (reachable.has(nextKey)) continue;
+      const terrain = getTerrainAt(level, next);
+      if (!terrain || terrain === "wall") continue;
+      if ((terrain === "water" || terrain === "lava") && !state.hasBoots) continue;
+      if (terrain === "poison" && !state.hasAntidoteLeaf) continue;
+      if (terrain === "hole" && !state.hasSpringBoots) continue;
+      const object = getObjectAt(level, next);
+      if (object && !isObjectResolved(object, state)) {
+        if (object.kind === "door" && !state.keys.includes(object.color)) continue;
+        if (object.kind === "enemy" && (!state.hasSword || state.power < object.power)) continue;
+      }
+      reachable.add(nextKey);
+      queue.push(next);
+    }
+  }
+  return reachable;
+}
+
 function hintFor(level: LevelDefinition, state: GameState): string {
   const unresolved = level.objects.filter((object) => !isObjectResolved(object, state));
-  const weapon = unresolved.find((object) => object.kind === "sword");
+  const reachable = getHintReachableTiles(level, state);
+  const accessible = unresolved.filter((object) => reachable.has(keyFor(object.at)));
+  const weapon = accessible.find((object) => object.kind === "sword");
   if (!state.hasSword && weapon) {
     return `Look along a side path for the ${resolveWeaponArt(weapon.style).label}. Ame needs it before she can challenge a baddie.`;
   }
-  if (!state.hasAntidoteLeaf && level.terrain.some((row) => row.includes("poison"))) {
+  if (!state.hasAntidoteLeaf && accessible.some((object) => object.kind === "antidote-leaf")) {
     return "A bright green antidote leaf is hidden before the purple poison. Explore the branches you have not tried yet.";
   }
-  if (!state.hasBoots && level.terrain.some((row) => row.some((tile) => tile === "water" || tile === "lava"))) {
+  if (!state.hasBoots && accessible.some((object) => object.kind === "boots")) {
     return "Find the splashy boots on another path before crossing water or warm lava.";
   }
-  if (!state.hasSpringBoots && level.terrain.some((row) => row.includes("hole"))) {
+  if (!state.hasSpringBoots && accessible.some((object) => object.kind === "spring-boots")) {
     return "The pink spring boots let Ame boing over holes. Check the side passages before the jump.";
   }
-  const strongEnemy = unresolved.find((object) => object.kind === "enemy" && object.power > state.power);
+  const strongEnemy = unresolved.find((object) => (
+    object.kind === "enemy"
+    && object.power > state.power
+    && ([object.at, ...Object.values(DIRECTION_DELTAS).map((delta) => ({
+      x: object.at.x + delta.x,
+      y: object.at.y + delta.y,
+    }))]).some((point) => reachable.has(keyFor(point)))
+  ));
   if (strongEnemy?.kind === "enemy") {
     return `${resolveEnemyArt(strongEnemy.style).label} has Power ${strongEnemy.power}. Find potions or defeat smaller baddies until Ame reaches ${strongEnemy.power}.`;
   }
-  const missingKey = unresolved.find((object) => object.kind === "key");
+  const missingKey = accessible.find((object) => object.kind === "key");
   if (missingKey?.kind === "key") {
     const lockName = lockPairLabel(missingKey.color);
     return `Look for the ${lockName} Key. Its colour and ${KEY_MOTIF_LABELS[missingKey.color].toLowerCase()} shape match only the ${lockName} Door.`;
   }
-  const waitingFriend = unresolved.find((object) => object.kind === "animal");
+  const waitingFriend = accessible.find((object) => object.kind === "animal");
   if (waitingFriend?.kind === "animal") {
     return `${ANIMAL_LABELS[waitingFriend.species]} is still waiting in a cage. Try an unexplored branch before heading to the star.`;
+  }
+  const portal = accessible.find((object) => object.kind === "portal");
+  if (portal?.kind === "portal") {
+    const art = resolvePortalArt(portal.pair);
+    return `Step on the ${art.label} to pop out of its matching ${art.motif} flower. Matching colours and shapes always travel together.`;
+  }
+  if (!state.hasSword && unresolved.some((object) => object.kind === "sword")) {
+    return "The maze weapon is in another garden. Look for a matching magic flower or an unexplored turning.";
   }
   return "The way is ready now—follow the open passages toward the sparkling star.";
 }
@@ -887,6 +953,7 @@ function App() {
   const [battlePresentation, setBattlePresentation] = useState<BattlePresentation | null>(null);
   const [rescuePresentation, setRescuePresentation] = useState<RescuePresentation | null>(null);
   const [jumpPresentation, setJumpPresentation] = useState<JumpPresentation | null>(null);
+  const [portalPresentation, setPortalPresentation] = useState<PortalPresentation | null>(null);
   const [presentedPower, setPresentedPower] = useState<number | null>(null);
   const [presentedEnemyPower, setPresentedEnemyPower] = useState<number | null>(null);
   const appFrameRef = useRef<HTMLElement>(null);
@@ -900,7 +967,7 @@ function App() {
   const inputUnlockTimer = useRef<number | undefined>(undefined);
   const queuedMove = useRef<QueuedMoveIntent | null>(null);
   const attemptMoveRef = useRef<(direction: Direction, lateralOffset?: number) => void>(() => undefined);
-  const pointerDirectionRef = useRef<(clientX: number, clientY: number) => PointerIntent | null>(() => null);
+  const pointerDirectionRef = useRef<(clientX: number, clientY: number, previousDirection?: Direction | null) => PointerIntent | null>(() => null);
   const lastMovedDirection = useRef<Direction | null>(null);
   const heldKeys = useRef(new Map<string, Direction>());
   const heldKeyOrder = useRef<string[]>([]);
@@ -998,11 +1065,9 @@ function App() {
     () => level.objects.filter((object) => !isObjectResolved(object, game)),
     [game, level],
   );
-  const visibleObjects = useMemo(
-    () => activeObjects.filter((object) => (
-      object.id !== battlePresentation?.objectId && isInsideWindow(object.at, cameraWindow)
-    )),
-    [activeObjects, battlePresentation?.objectId, cameraWindow],
+  const worldObjects = useMemo(
+    () => activeObjects.filter((object) => object.id !== battlePresentation?.objectId),
+    [activeObjects, battlePresentation?.objectId],
   );
   const animalObjects = useMemo(
     () => level.objects.filter(
@@ -1050,7 +1115,8 @@ function App() {
   const displayedPower = presentedPower ?? game.power;
   const presentationActive = battlePresentation !== null
     || rescuePresentation !== null
-    || jumpPresentation !== null;
+    || jumpPresentation !== null
+    || portalPresentation !== null;
   const modalOpen = resetProgressOpen
     || testerPickerOpen
     || pendingAdventure !== null
@@ -1121,6 +1187,7 @@ function App() {
     setBattlePresentation(null);
     setRescuePresentation(null);
     setJumpPresentation(null);
+    setPortalPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
   }, [clearPresentationWork]);
@@ -1153,6 +1220,7 @@ function App() {
     }, { reducedMotion });
     setRescuePresentation(null);
     setJumpPresentation(null);
+    setPortalPresentation(null);
     setPresentedEnemyPower(event.enemyPower);
     setPresentedPower(event.powerBefore);
     setBattlePresentation({
@@ -1200,6 +1268,7 @@ function App() {
     const duration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : RESCUE_PRESENTATION_MS;
     setBattlePresentation(null);
     setJumpPresentation(null);
+    setPortalPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
     setRescuePresentation({
@@ -1224,6 +1293,7 @@ function App() {
     const duration = reducedMotion ? REDUCED_PRESENTATION_MS : JUMP_PRESENTATION_MS;
     setBattlePresentation(null);
     setRescuePresentation(null);
+    setPortalPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
     setJumpPresentation({ from: event.from, to: event.to });
@@ -1236,6 +1306,23 @@ function App() {
       );
     }
     schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
+    return duration;
+  }, [clearPresentationWork, schedulePresentationTimer]);
+
+  const beginPortalPresentation = useCallback((
+    event: Extract<GameEvent, { type: "portal-warped" }>,
+  ): number => {
+    clearPresentationWork();
+    const sequence = presentationSequence.current;
+    const duration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : PORTAL_PRESENTATION_MS;
+    setBattlePresentation(null);
+    setRescuePresentation(null);
+    setJumpPresentation(null);
+    setPresentedPower(null);
+    setPresentedEnemyPower(null);
+    setPortalPresentation({ pair: event.pair, from: event.from, to: event.to });
+    playSound("portal", mutedRef.current);
+    schedulePresentationTimer(sequence, () => setPortalPresentation(null), Math.max(100, duration - 25));
     return duration;
   }, [clearPresentationWork, schedulePresentationTimer]);
 
@@ -1392,6 +1479,9 @@ function App() {
     const jumpedEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "hole-jumped" }> => event.type === "hole-jumped",
     );
+    const portalEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "portal-warped" }> => event.type === "portal-warped",
+    );
     let presentationDuration = 0;
     if (defeatedEvent) {
       clearHeldInput();
@@ -1454,8 +1544,11 @@ function App() {
       }
     } else if (jumpedEvent) {
       presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
+    } else if (portalEvent) {
+      clearHeldInput();
+      presentationDuration = beginPortalPresentation(portalEvent);
     }
-    if (!defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
+    if (!defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && !portalEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
       playSound(nextFeedback.sound, muted);
       if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
     }
@@ -1535,7 +1628,7 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginJumpPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, testerPickerOpen, testerRun, tooStrongEncounter]);
+  }, [beginBattlePresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, testerPickerOpen, testerRun, tooStrongEncounter]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -1603,6 +1696,7 @@ function App() {
       const fallbackDirection = fallbackKey ? heldKeys.current.get(fallbackKey) : undefined;
       if (fallbackDirection) {
         heldKeyCadence.current = beginHeldMoveCadence(fallbackDirection);
+        attemptMoveRef.current(fallbackDirection);
         scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
       } else {
         if (heldKeyTimer.current !== undefined) {
@@ -1647,7 +1741,7 @@ function App() {
     disposeMusic();
   }, [clearPresentationWork]);
 
-  const moveDirectionFromPointer = useCallback((clientX: number, clientY: number): PointerIntent | null => {
+  const moveDirectionFromPointer = useCallback((clientX: number, clientY: number, previousDirection: Direction | null = null): PointerIntent | null => {
     const rect = boardRef.current?.getBoundingClientRect();
     if (!rect) return null;
     const cellWidth = rect.width / cameraWindow.width;
@@ -1657,6 +1751,8 @@ function App() {
     return pointerIntentFromTileOffset(
       (clientX - centerX) / cellWidth,
       (clientY - centerY) / cellHeight,
+      undefined,
+      previousDirection,
     );
   }, [cameraWindow, game.position]);
 
@@ -1667,7 +1763,7 @@ function App() {
     const repeat = () => {
       const pointer = activeBoardPointer.current;
       const intent = pointer
-        ? pointerDirectionRef.current(pointer.current.x, pointer.current.y)
+        ? pointerDirectionRef.current(pointer.current.x, pointer.current.y, pointer.direction)
         : null;
       const direction = intent?.direction ?? null;
       if (pointer) {
@@ -1700,15 +1796,21 @@ function App() {
 
     event.preventDefault();
     const current = { x: event.clientX, y: event.clientY };
-    const intent = pointerDirectionRef.current(current.x, current.y);
+    const intent = pointerDirectionRef.current(current.x, current.y, pointer.direction);
     const direction = intent?.direction ?? null;
     const directionChanged = direction !== pointer.direction;
     pointer.current = current;
     pointer.direction = direction;
     if (pointer.pointerType === "touch") {
+      const boardRect = {
+        left: pointer.boardLeft,
+        top: pointer.boardTop,
+        width: pointer.boardWidth,
+        height: pointer.boardHeight,
+      };
       setTouchCursor({
-        origin: { x: pointer.origin.x - pointer.boardLeft, y: pointer.origin.y - pointer.boardTop },
-        current: { x: current.x - pointer.boardLeft, y: current.y - pointer.boardTop },
+        origin: normalizedBoardPoint(pointer.origin.x, pointer.origin.y, boardRect),
+        current: normalizedBoardPoint(current.x, current.y, boardRect),
         direction,
       });
     }
@@ -1741,13 +1843,15 @@ function App() {
       origin,
       boardLeft: rect.left,
       boardTop: rect.top,
+      boardWidth: rect.width,
+      boardHeight: rect.height,
       current: origin,
       direction,
     };
     activeBoardPointer.current = pointer;
     event.currentTarget.setPointerCapture(event.pointerId);
     if (event.pointerType === "touch") {
-      const localOrigin = { x: origin.x - rect.left, y: origin.y - rect.top };
+      const localOrigin = normalizedBoardPoint(origin.x, origin.y, rect);
       setTouchCursor({ origin: localOrigin, current: localOrigin, direction });
     }
     if (!direction) return;
@@ -2136,7 +2240,7 @@ function App() {
 
             <div
               ref={boardRef}
-              className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}`}
+              className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}${portalPresentation ? " portal-active" : ""}`}
               style={{
                 gridTemplateColumns: `repeat(${cameraWindow.width}, minmax(0, 1fr))`,
                 gridTemplateRows: `repeat(${cameraWindow.height}, minmax(0, 1fr))`,
@@ -2161,7 +2265,48 @@ function App() {
               onLostPointerCapture={finishBoardPointer}
               onContextMenu={(event) => event.preventDefault()}
             >
-              <MazeTerrain level={level} camera={cameraWindow} />
+              <div className="camera-world" style={cameraWorldStyle(level, cameraWindow)} aria-hidden="true">
+                <MazeTerrain level={level} camera={fullLevelWindow(level)} />
+
+                {worldObjects.map((object) => (
+                  <div
+                    className={`object-layer${object.at.y === cameraWindow.top ? " camera-edge-top" : ""}`}
+                    key={object.id}
+                    style={worldLayerStyle(object.at, level)}
+                  >
+                    {object.kind === "animal" ? (
+                      <div className="animal-stack">
+                        <img className="animal-sprite" src={animalArt(object.species)} alt="" draggable={false} />
+                        <img className="animal-cage" src={resolveCageArt(object.cageStyle).src} alt="" draggable={false} />
+                      </div>
+                    ) : (
+                      <img className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
+                    )}
+                    {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
+                    {object.kind === "potion" && <span className="item-amount">+{object.amount}</span>}
+                    {(object.kind === "key" || object.kind === "door") && (
+                      <span className={`object-color-name color-name-${object.color}`}>{KEY_MOTIF_LABELS[object.color]}</span>
+                    )}
+                    {object.kind === "portal" && (
+                      <span className={`portal-pair-name portal-name-${object.pair}`}>{resolvePortalArt(object.pair).motif}</span>
+                    )}
+                  </div>
+                ))}
+
+                {followerPlacements.length > 0 && (
+                  <div className="pet-followers">
+                    {followerPlacements.map(({ animal, point }) => (
+                      <div
+                        className="pet-follower"
+                        style={worldLayerStyle(point, level)}
+                        key={animal.id}
+                      >
+                        <img src={animalArt(animal.species)} alt="" draggable={false} />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               {touchCursor && (
                 <div
@@ -2172,10 +2317,10 @@ function App() {
                     zIndex: 40,
                     inset: 0,
                     pointerEvents: "none",
-                    "--touch-origin-x": `${touchCursor.origin.x}px`,
-                    "--touch-origin-y": `${touchCursor.origin.y}px`,
-                    "--touch-cursor-x": `${touchCursor.current.x}px`,
-                    "--touch-cursor-y": `${touchCursor.current.y}px`,
+                    "--touch-origin-x": `${touchCursor.origin.x * 100}%`,
+                    "--touch-origin-y": `${touchCursor.origin.y * 100}%`,
+                    "--touch-cursor-x": `${touchCursor.current.x * 100}%`,
+                    "--touch-cursor-y": `${touchCursor.current.y * 100}%`,
                   } as CSSProperties}
                 >
                   <i
@@ -2188,29 +2333,6 @@ function App() {
                   >{touchCursor.direction ? DIRECTION_ICONS[touchCursor.direction] : "✦"}</i>
                 </div>
               )}
-
-              {visibleObjects.map((object) => (
-                <div
-                  className="object-layer"
-                  key={object.id}
-                  style={cameraLayerStyle(object.at, cameraWindow)}
-                  aria-hidden="true"
-                >
-                  {object.kind === "animal" ? (
-                    <div className="animal-stack">
-                      <img className="animal-sprite" src={animalArt(object.species)} alt="" draggable={false} />
-                      <img className="animal-cage" src={resolveCageArt(object.cageStyle).src} alt="" draggable={false} />
-                    </div>
-                  ) : (
-                    <img className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
-                  )}
-                  {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
-                  {object.kind === "potion" && <span className="item-amount">+{object.amount}</span>}
-                  {(object.kind === "key" || object.kind === "door") && (
-                    <span className={`object-color-name color-name-${object.color}`}>{KEY_MOTIF_LABELS[object.color]}</span>
-                  )}
-                </div>
-              ))}
 
               {battlePresentation && isInsideWindow(battlePresentation.at, cameraWindow) && (
                 <div
@@ -2305,22 +2427,26 @@ function App() {
                 </div>
               )}
 
-              {followerPlacements.length > 0 && (
-                <div className="pet-followers" aria-hidden="true">
-                  {followerPlacements.map(({ animal, point }) => (
-                    <div
-                      className="pet-follower"
-                      style={cameraLayerStyle(point, cameraWindow)}
-                      key={animal.id}
-                    >
-                      <img src={animalArt(animal.species)} alt="" draggable={false} />
-                    </div>
-                  ))}
+              {portalPresentation && (
+                <div
+                  className={`portal-presentation portal-${portalPresentation.pair}`}
+                  style={cameraLayerStyle(portalPresentation.to, cameraWindow)}
+                  data-sfx-cue="magic-flower-whoosh"
+                  aria-hidden="true"
+                >
+                  <img className="portal-presentation-pad" src={resolvePortalArt(portalPresentation.pair).src} alt="" draggable={false} />
+                  <span className="portal-presentation-rings"><i /><i /><i /></span>
+                  <div className="portal-presentation-body">
+                    <img className="portal-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    {game.hasSword && <img className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                    <span className="power-badge player-power">{displayedPower}</span>
+                  </div>
+                  <span className="portal-presentation-sparkles">✦ <b>{resolvePortalArt(portalPresentation.pair).motif}</b> ✦</span>
                 </div>
               )}
 
               <div
-                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${battlePresentation || jumpPresentation ? " presentation-hidden" : ""}`}
+                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}`}
                 style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
               >
@@ -2330,7 +2456,7 @@ function App() {
               </div>
 
               {mapPickupToast && (
-                <div className="map-pickup-toast" key={mapPickupToast.id} aria-hidden="true">
+                <div className="map-pickup-toast" key={mapPickupToast.id} role="status" aria-live="polite" aria-atomic="true">
                   <span>{mapPickupToast.icon}</span>
                   <strong>{mapPickupToast.text}</strong>
                 </div>
@@ -2354,7 +2480,7 @@ function App() {
 
             <p className="sr-only" id="maze-status">{mazeStatus}</p>
 
-            <div className={`feedback-bar tone-${feedback.tone}`} aria-live="polite" aria-atomic="true">
+            <div className={`feedback-bar tone-${feedback.tone}`} aria-live={mapPickupToast ? "off" : "polite"} aria-atomic="true">
               <span className="feedback-icon" aria-hidden="true">{feedback.icon}</span>
               <span>{feedback.text}</span>
             </div>
@@ -2519,6 +2645,7 @@ function App() {
               <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
               <HelpStep icon="↟" title="Find spring boots" copy="Boing safely across holes in the path." />
               <HelpStep icon="🍃" title="Find the antidote leaf" copy="It makes purple poison safe to cross." />
+              {objectKinds.has("portal") && <HelpStep icon="♥" title="Match magic flowers" copy="Step on one flower to pop out of its matching colour and shape." />}
               <HelpStep icon="💖" title="Rescue friends" copy="Some mazes have one friend; big adventures can have five." />
               {explorationMode && <HelpStep icon="🗺️" title="Fill the map" copy="Exploring reveals each part." />}
             </div>

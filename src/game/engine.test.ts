@@ -50,6 +50,36 @@ describe("immutable movement", () => {
   });
 });
 
+describe("paired magic flower portals", () => {
+  it("warps to the matching flower in one counted move and then walks off normally", () => {
+    const portalLevel = level("portal-corridor", "#@H..H.E#");
+    const [entrance, destination] = portalLevel.objects.filter(
+      (object) => object.kind === "portal",
+    );
+    const before = createInitialGameState(portalLevel);
+    const warped = movePlayer(portalLevel, before, "right");
+
+    expect(warped.moved).toBe(true);
+    expect(warped.state.position).toEqual({ x: 5, y: 1 });
+    expect(warped.state.steps).toBe(1);
+    expect(warped.events).toEqual([
+      {
+        type: "portal-warped",
+        pair: "rose-heart",
+        from: { x: 2, y: 1 },
+        to: { x: 5, y: 1 },
+      },
+      { type: "moved", from: { x: 1, y: 1 }, to: { x: 5, y: 1 } },
+    ]);
+    expect(entrance && isObjectResolved(entrance, warped.state)).toBe(false);
+    expect(destination && isObjectResolved(destination, warped.state)).toBe(false);
+
+    const walkedOff = movePlayer(portalLevel, warped.state, "right");
+    expect(walkedOff.state.position).toEqual({ x: 6, y: 1 });
+    expect(walkedOff.events.some((event) => event.type === "portal-warped")).toBe(false);
+  });
+});
+
 describe("Power combat", () => {
   it("blocks a goblin safely until the sword is collected", () => {
     const testLevel = level("no-sword", "#@1...E.#");

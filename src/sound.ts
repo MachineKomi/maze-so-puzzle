@@ -8,6 +8,7 @@ export type SoundName =
   | "rescue"
   | "friendRescue"
   | "jump"
+  | "portal"
   | "combatClash"
   | "combatSparks"
   | "combatImpact"
@@ -83,6 +84,14 @@ const melodies: Readonly<Record<SoundName, readonly MelodyNote[]>> = {
     [330, 0.012, 0.16, 0.018, "sine", 990],
     [1175, 0.035, 0.055, 0.009, "sine", 880],
     [660, 0.09, 0.19, 0.032, "sine", 300],
+  ],
+  portal: [
+    [440, 0, 0.11, 0.022, "sine", 660],
+    [659, 0.07, 0.12, 0.024, "triangle", 988],
+    [988, 0.15, 0.13, 0.026, "sine", 1480],
+    [1480, 0.24, 0.08, 0.018, "sine", 740],
+    [740, 0.31, 0.17, 0.026, "triangle", 1175],
+    [1175, 0.41, 0.2, 0.024, "sine", 1568],
   ],
   combatClash: [
     [185, 0, 0.12, 0.045, "sawtooth", 92],

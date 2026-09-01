@@ -77,6 +77,9 @@ describe("curated campaign levels", () => {
       [25, 25],
       [21, 21],
       [23, 23],
+      [15, 15],
+      [17, 17],
+      [21, 21],
     ]);
     expect(CURATED_LEVELS.map((level) => solveLevel(level).directions.length)).toEqual([
       26,
@@ -91,6 +94,9 @@ describe("curated campaign levels", () => {
       294,
       236,
       231,
+      105,
+      103,
+      231,
     ]);
   });
 
@@ -99,7 +105,7 @@ describe("curated campaign levels", () => {
       level.terrain.some((row) => row.some((tile) => tile === "water" || tile === "lava")),
     );
 
-    expect(levelsWithHazards).toHaveLength(10);
+    expect(levelsWithHazards).toHaveLength(11);
     for (const level of levelsWithHazards) {
       for (const terrainKind of ["water", "lava"] as const) {
         const tileCount = level.terrain.flat().filter((tile) => tile === terrainKind).length;
@@ -115,7 +121,7 @@ describe("curated campaign levels", () => {
     const backtrackingLevels = CURATED_LEVELS.filter((level) =>
       level.introducedMechanics?.includes("required-backtracking"),
     );
-    expect(backtrackingLevels).toHaveLength(6);
+    expect(backtrackingLevels).toHaveLength(8);
 
     for (const level of backtrackingLevels) {
       const springBoots = level.objects.filter(
@@ -137,8 +143,8 @@ describe("curated campaign levels", () => {
         state = result.state;
         events.push(...result.events.map((event) => event.type));
         const position = `${state.position.x},${state.position.y}`;
-        if (visited.has(position)) revisitedTiles += 1;
-        visited.add(position);
+        if (result.moved && visited.has(position)) revisitedTiles += 1;
+        if (result.moved) visited.add(position);
       }
 
       expect(state).toMatchObject({ status: "won", hasSpringBoots: true });
@@ -167,7 +173,7 @@ describe("curated campaign levels", () => {
     },
   );
 
-  const rescueCounts = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5] as const;
+  const rescueCounts = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 3, 4, 5] as const;
 
   it.each(CURATED_LEVELS.map((level, index) => [
     level.name,
@@ -378,6 +384,9 @@ describe("curated campaign levels", () => {
       "springstep-hollow",
       "lantern-ruins",
       "parade-courtyard",
+      "moonbeam-castle",
+      "rose-courtyard",
+      "springstep-hollow",
       "moonbeam-castle",
     ]);
     expect(
@@ -750,9 +759,39 @@ describe("curated campaign levels", () => {
         "spring-boots": 1,
         "antidote-leaf": 1,
       },
+      {
+        door: 1,
+        key: 1,
+        enemy: 1,
+        sword: 1,
+        animal: 3,
+        portal: 2,
+      },
+      {
+        sword: 1,
+        animal: 4,
+        "spring-boots": 1,
+        potion: 1,
+        enemy: 4,
+        portal: 6,
+        key: 1,
+        door: 1,
+      },
+      {
+        sword: 1,
+        boots: 1,
+        "spring-boots": 1,
+        animal: 5,
+        potion: 1,
+        enemy: 4,
+        key: 3,
+        portal: 6,
+        door: 3,
+        "antidote-leaf": 1,
+      },
     ] as const;
-    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 3, 4, 4, 5] as const;
-    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 1, 3, 3, 3] as const;
+    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 3, 4, 4, 5, 1, 3, 3] as const;
+    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 1, 3, 3, 3, 1, 1, 3] as const;
 
     CURATED_LEVELS.forEach((level, index) => {
       const counts = Object.fromEntries(
@@ -765,8 +804,12 @@ describe("curated campaign levels", () => {
 
       const result = solveLevel(level);
       expect(result.finalState?.hasSword).toBe(true);
-      expect(result.finalState?.hasBoots).toBe(index > 1);
-      expect(result.finalState?.hasSpringBoots).toBe(index >= 6);
+      expect(result.finalState?.hasBoots).toBe(
+        level.objects.some((object) => object.kind === "boots"),
+      );
+      expect(result.finalState?.hasSpringBoots).toBe(
+        level.objects.some((object) => object.kind === "spring-boots"),
+      );
       expect(result.finalState?.defeatedEnemyIds).toHaveLength(expectedEnemyCounts[index] ?? 0);
       expect(result.finalState?.openedDoorIds).toHaveLength(expectedDoorCounts[index] ?? 0);
     });

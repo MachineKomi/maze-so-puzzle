@@ -168,6 +168,7 @@ describe("playSound", () => {
       "combatPowerUp",
       "combatVictory",
       "powerTick",
+      "portal",
     ] as const;
 
     for (const cue of cues) {

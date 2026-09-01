@@ -5,6 +5,14 @@ export const MUSIC_TRACKS = {
   laterStory: "/assets/ost/bgm_little_champions_v04.mp3",
   surprise: "/assets/ost/BG_Music_01_PixelSkywayRally.mp3",
   arena: "/assets/ost/bgm_arena_overdrive_v04.mp3",
+  dungeon: "/assets/ost/Dungeon - Teeth Beneath the Temple.mp3",
+  gallop: "/assets/ost/Iron Heart Gallop.mp3",
+  sanctuary: "/assets/ost/Sanctuary - Warm Stone After Midnight.mp3",
+  shore: "/assets/ost/Shore - Saltfire Horizon.mp3",
+  throatBass: "/assets/ost/Throat Bass.mp3",
+  hardBass: "/assets/ost/Violent Hard Bass Throat Step.mp3",
+  hardBassOne: "/assets/ost/Violent Hard Bass Throat Step (1).mp3",
+  hardBassTwo: "/assets/ost/Violent Hard Bass Throat Step (2).mp3",
 } as const;
 
 /**
@@ -17,6 +25,14 @@ export const MAZE_MUSIC_TRACKS: readonly string[] = Object.freeze([
   MUSIC_TRACKS.surprise,
   MUSIC_TRACKS.arena,
   MUSIC_TRACKS.title,
+  MUSIC_TRACKS.dungeon,
+  MUSIC_TRACKS.gallop,
+  MUSIC_TRACKS.sanctuary,
+  MUSIC_TRACKS.shore,
+  MUSIC_TRACKS.throatBass,
+  MUSIC_TRACKS.hardBass,
+  MUSIC_TRACKS.hardBassOne,
+  MUSIC_TRACKS.hardBassTwo,
 ]);
 
 export type MazeMusicKey = string | number;

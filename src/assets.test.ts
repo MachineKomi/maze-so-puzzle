@@ -40,6 +40,7 @@ function levelWithRelevantArt(): LevelDefinition {
       { id: "sword", kind: "sword", at: { x: 1, y: 1 }, style: "flower-sabre" },
       { id: "key", kind: "key", at: { x: 1, y: 1 }, color: "red" },
       { id: "door", kind: "door", at: { x: 2, y: 1 }, color: "red" },
+      { id: "portal", kind: "portal", at: { x: 2, y: 2 }, pair: "mint-clover" },
       { id: "spring-boots", kind: "spring-boots", at: { x: 1, y: 1 } },
       { id: "antidote-leaf", kind: "antidote-leaf", at: { x: 1, y: 2 } },
       { id: "puppy", kind: "animal", at: { x: 2, y: 1 }, species: "puppy", cageStyle: "garden-vine" },
@@ -113,6 +114,7 @@ describe("art preloading", () => {
       resolveDoorArt,
       resolveEnemyArt,
       resolveKeyArt,
+      resolvePortalArt,
       resolveTerrainTheme,
       resolveWeaponArt,
     } = await import("./artCatalog");
@@ -136,6 +138,7 @@ describe("art preloading", () => {
       resolveWeaponArt("flower-sabre").src,
       resolveKeyArt("red").src,
       resolveDoorArt("red").src,
+      resolvePortalArt("mint-clover").src,
       ASSETS.springBoots,
       ASSETS.antidoteLeaf,
       resolveAnimalArt("puppy").src,

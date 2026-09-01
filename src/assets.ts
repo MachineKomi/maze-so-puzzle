@@ -9,6 +9,7 @@ import {
   DOOR_ART,
   ENEMY_ART,
   KEY_ART,
+  PORTAL_ART,
   TERRAIN_THEMES,
   WEAPON_ART,
   resolveAnimalArt,
@@ -16,6 +17,7 @@ import {
   resolveDoorArt,
   resolveEnemyArt,
   resolveKeyArt,
+  resolvePortalArt,
   resolveTerrainTheme,
   resolveWeaponArt,
 } from "./artCatalog";
@@ -39,6 +41,9 @@ export const ASSETS = {
   doorRoseHeart: DOOR_ART.red.src,
   doorBlueStar: DOOR_ART.blue.src,
   doorSunnySun: DOOR_ART.yellow.src,
+  portalRoseHeart: PORTAL_ART["rose-heart"].src,
+  portalMintClover: PORTAL_ART["mint-clover"].src,
+  portalVioletMoon: PORTAL_ART["violet-moon"].src,
   goal: "/assets/goal.png",
   floor: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].floor.src,
   wall: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].wall.src,
@@ -168,6 +173,9 @@ export function preloadLevelArt(level: LevelDefinition): void {
         break;
       case "door":
         sources.add(resolveDoorArt(object.color).src);
+        break;
+      case "portal":
+        sources.add(resolvePortalArt(object.pair).src);
         break;
       case "potion":
       case "boots":

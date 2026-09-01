@@ -261,6 +261,24 @@ button:focus-visible,
   pointer-events: none;
 }
 
+/* The full maze lives on one oversized world plane. Sliding that plane keeps
+   Ame comfortably centred in exploration view without snapping every tile and
+   also preserves the exact edge behavior of smaller mazes. */
+.camera-world {
+  position: absolute;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+  transition:
+    left 120ms cubic-bezier(0.2, 0.72, 0.25, 1),
+    top 120ms cubic-bezier(0.2, 0.72, 0.25, 1);
+  will-change: left, top;
+}
+
+.maze-board.portal-active .camera-world {
+  transition: none;
+}
+
 .player-layer {
   z-index: 9;
   animation: ame-hop 145ms ease-out;
@@ -307,6 +325,34 @@ button:focus-visible,
 .object-enemy {
   width: 90%;
   height: 90%;
+}
+
+.object-portal {
+  inset: 4%;
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(74, 55, 96, 0.26));
+  animation: portal-pad-breathe 1.8s ease-in-out infinite;
+}
+
+.portal-pair-name {
+  position: absolute;
+  z-index: 16;
+  right: 4%;
+  bottom: 1%;
+  color: #fff;
+  font-size: clamp(8px, calc(19cqw / var(--grid-size, 13)), 15px);
+  font-weight: 1000;
+  line-height: 1;
+  paint-order: stroke fill;
+  text-shadow: 0 2px 2px rgba(51, 39, 69, 0.42);
+  -webkit-text-stroke: 1px #4b405f;
+}
+
+@keyframes portal-pad-breathe {
+  0%, 100% { transform: scale(0.96); filter: drop-shadow(0 2px 3px rgba(74, 55, 96, 0.24)); }
+  50% { transform: scale(1.025); filter: drop-shadow(0 0 8px rgba(255, 239, 166, 0.7)); }
 }
 
 .object-door {
@@ -3558,6 +3604,14 @@ img.wallet-pouch {
   background: #fff7df;
   box-shadow: 0 0 0 0.5px #b57a92;
 }
+.marker-portal {
+  width: 86%;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: #ed86ae;
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.9), 0 0 0 0.5px #645477;
+}
+.marker-mint-clover { background: #62c9a8; }
+.marker-violet-moon { background: #9b86dc; }
 
 .marker-red { background: #de6876; }
 .marker-blue { background: #5b9fd0; }
@@ -4178,7 +4232,7 @@ body,
 }
 
 /* The touch drag controller is visual feedback only; the board retains the
-   pointer stream. Coordinates are supplied by the game in board-local pixels. */
+   pointer stream. Normalized percentages keep it aligned on scaled stages. */
 .touch-joystick {
   position: absolute;
   z-index: 32;
@@ -5441,6 +5495,18 @@ body,
   bottom: 82%;
 }
 
+/* A top-row label stays inside the camera instead of being cropped by its
+   rounded frame. The sprite still keeps clear space around the face. */
+.camera-edge-top > .power-badge {
+  top: 1%;
+  bottom: auto;
+}
+
+.camera-edge-top > .player-sprite,
+.camera-edge-top > .object-enemy {
+  bottom: -7%;
+}
+
 /* Match the board scale during set pieces so Ame does not shrink when combat
    or a spring jump temporarily swaps in a presentation sprite. */
 .battle-ame .battle-sprite {
@@ -5498,6 +5564,117 @@ body,
   bottom: -1%;
   width: 96%;
   height: 96%;
+}
+
+.portal-presentation {
+  position: absolute;
+  z-index: 46;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.portal-presentation-pad {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+  object-fit: contain;
+  animation: portal-arrival-pad 695ms cubic-bezier(0.2, 0.78, 0.3, 1) both;
+  filter: drop-shadow(0 0 11px rgba(255, 238, 158, 0.85));
+}
+
+.portal-presentation-body {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  animation: portal-arrival-ame 695ms cubic-bezier(0.16, 0.8, 0.3, 1.08) both;
+}
+
+.portal-presentation-sprite {
+  position: absolute;
+  bottom: -1%;
+  width: 94%;
+  height: 94%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
+}
+
+.portal-presentation-weapon {
+  position: absolute;
+  z-index: 6;
+  right: -1%;
+  bottom: 5%;
+  width: 58%;
+  height: 58%;
+  object-fit: contain;
+  transform: rotate(-7deg);
+  filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
+}
+
+.portal-presentation-body > .player-power {
+  top: auto;
+  bottom: 92%;
+}
+
+.portal-presentation-rings,
+.portal-presentation-rings i {
+  position: absolute;
+  z-index: 3;
+  inset: 7%;
+  border: 3px solid rgba(255, 255, 255, 0.86);
+  border-radius: 50%;
+  animation: portal-arrival-ring 610ms ease-out both;
+}
+
+.portal-presentation-rings i:nth-child(1) { animation-delay: 80ms; }
+.portal-presentation-rings i:nth-child(2) { animation-delay: 160ms; }
+.portal-presentation-rings i:nth-child(3) { animation-delay: 240ms; }
+
+.portal-presentation-sparkles {
+  position: absolute;
+  z-index: 8;
+  top: -18%;
+  left: 50%;
+  color: #fff6c8;
+  font-size: clamp(10px, calc(24cqw / var(--grid-size, 13)), 22px);
+  font-weight: 1000;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: portal-arrival-sparkle 695ms ease-out both;
+  text-shadow: 0 0 8px #fff, 0 2px 2px #5f4d78;
+}
+
+.portal-presentation-sparkles b {
+  color: white;
+  font-size: 1.25em;
+}
+
+@keyframes portal-arrival-pad {
+  0% { opacity: 0.15; transform: rotate(-18deg) scale(0.72); }
+  35% { opacity: 1; transform: rotate(5deg) scale(1.13); }
+  100% { opacity: 0.82; transform: rotate(0) scale(1); }
+}
+
+@keyframes portal-arrival-ame {
+  0%, 20% { opacity: 0; transform: translateY(44%) rotate(-7deg) scale(0.28); }
+  54% { opacity: 1; transform: translateY(-18%) rotate(3deg) scale(1.16); }
+  76% { transform: translateY(4%) rotate(-1deg) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
+}
+
+@keyframes portal-arrival-ring {
+  0% { opacity: 0.95; transform: scale(0.2); }
+  100% { opacity: 0; transform: scale(1.7); }
+}
+
+@keyframes portal-arrival-sparkle {
+  0%, 18% { opacity: 0; transform: translate(-50%, 30%) scale(0.5); }
+  48% { opacity: 1; transform: translate(-50%, -10%) scale(1.15); }
+  100% { opacity: 0; transform: translate(-50%, -70%) scale(0.88); }
 }
 
 .rescue-cage-half {
@@ -5562,7 +5739,8 @@ body,
 
 @media (prefers-reduced-motion: reduce) {
   .player-layer,
-  .pet-follower {
+  .pet-follower,
+  .camera-world {
     transition: none !important;
     will-change: auto;
   }
@@ -5571,5 +5749,14 @@ body,
     animation: none;
     opacity: 1;
     transform: translate3d(-50%, -28px, 0);
+  }
+
+  .object-portal,
+  .portal-presentation-pad,
+  .portal-presentation-body,
+  .portal-presentation-rings,
+  .portal-presentation-rings i,
+  .portal-presentation-sparkles {
+    animation: none !important;
   }
 }

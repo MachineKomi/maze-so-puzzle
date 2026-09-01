@@ -1,24 +1,65 @@
 # Release checklist
 
-Verification date: 2026-09-01
+Verification date: 2026-09-02
 
 Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.10.3: `npm run check` passes 267 tests across 20 files plus strict
+Status for 0.11.0: `npm run check` passes 292 tests across 22 files plus strict
 TypeScript and the Vite production build. The moderate-level npm audit reports
-zero vulnerabilities; `npm ls` contains only expected unmet optional
-cross-platform packages, and locked Cargo compilation passes. Browser QA at
-1280×720 desktop, 1194×834 iPad, and 844×390 landscape phone found no page
-overflow, overlap, console warning/error, or broken visible image. Reset entry
-points and the warning dialog, the pickup toast, and the new v4 front-only cage
-were visually checked; the destructive reset confirmation was not clicked. The
-unsigned Windows portable and setup builds were built, hashed, and smoke-tested.
-Physical-device touch/listening/feel, accessibility, clean-machine installation,
-signing, and the broader manual play-through remain deliberately unclaimed. The
-completed 0.10.2, 0.10.1, 0.10.0, 0.9.1, 0.9.0, and 0.8.0 evidence below is
-retained as a historical baseline.
+zero vulnerabilities; `npm ls` is clean, and locked Cargo compilation passes.
+Browser QA at 1280×720 desktop, 1194×834 iPad, and 844×390 landscape phone found
+no page overflow, overlap, console warning/error, or broken visible image. The
+first portal chapter was played through with real controls; an iPad
+perfect-rescue victory retained a large dancing friend card. The unsigned
+Windows portable and setup builds were built, hashed, byte-compared, versioned,
+and smoke-tested. Physical-device touch/listening/feel, accessibility,
+clean-machine installation, signing, and the broader manual play-through remain
+deliberately unclaimed. Earlier release evidence below remains historical.
+
+## 0.11.0 verification record
+
+- [x] Version 0.11.0 is aligned in npm, Cargo, Tauri, and the visible build label.
+- [x] Fifteen authored story mazes use the deliberately varied size sequence 9,
+  11, 13, 15, 13, 15, 17, 17, 19, 25, 21, 23, 15, 17, and 21.
+- [x] Rose Heart Roundabout, Clover Comeback Carnival, and Friendship Crown
+  Vault have solver-proven ordinary/perfect routes of 105/117, 103/177, and
+  231/260 inputs. Ordinary routes rescue zero optional friends; perfect routes
+  rescue all three, four, and five friends respectively.
+- [x] Every portal pair used by a level occurs exactly twice; unmatched pairs
+  are rejected, and disconnected geometry can be solved only through the exact
+  engine teleport transition.
+- [x] Portal travel is covered across engine events, solver search, fog reveal,
+  minimap motifs, active-run recovery, save-stride validation, hints, art
+  preloading, synthesized sound, and the cancellable arrival presentation.
+- [x] The 6 × 6 camera clips and translates one full rendered maze world.
+  Logical-coordinate pointer mapping and direction hysteresis are covered at
+  both native and scaled board bounds.
+- [x] Thirteen full local OST tracks participate in per-maze rotation; the short
+  friendship cue remains excluded from background looping.
+- [x] Rose Heart, Mint Clover, and Violet Moon portal masters and exact prompts
+  are archived. The 512 × 512 runtime files have full alpha range and fully
+  transparent canvas edges after deterministic processing.
+- [x] `npm run check`: 292/292 tests pass across 22 files; strict TypeScript and
+  the Vite production build pass.
+- [x] `npm audit --audit-level=moderate`: zero vulnerabilities. `npm ls`: clean.
+  `cargo check --locked`: passed.
+- [x] Desktop 1280×720, iPad 1194×834, and landscape phone 844×390 retain the
+  fixed composition without page overflow or panel overlap. Visible assets load
+  and browser logs contain no warning/error entries.
+- [x] `Maze-so-Puzzle-0.11.0-portable.exe`: 84,777,984 bytes, file/product
+  version 0.11.0, SHA-256
+  `A64876899DE43C93E67D8D1B40201603DED39D3A496EB14E9D3CABD4CD02E331`.
+- [x] `Maze-so-Puzzle-0.11.0-setup.exe`: 78,599,010 bytes, file/product version
+  0.11.0, SHA-256
+  `EAEEF9B96716712DC05964652E4830631395970D8DC192A466695CC0AE58469B`.
+- [x] Both staged binaries byte-match their final Tauri outputs. The portable
+  app stayed responsive for five seconds and reported the correct window title.
+- [ ] Clean-machine install, code signing, physical-device listening/feel, and
+  the complete manual campaign remain owner/device checks.
+
+## Historical 0.10.3 checklist
 
 ## 1. Prepare
 

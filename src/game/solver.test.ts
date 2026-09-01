@@ -3,6 +3,55 @@ import { parseAsciiLevel } from "./levels";
 import { solveLevel, validateLevel } from "./solver";
 
 describe("solver interaction gates", () => {
+  it("uses a paired flower portal to connect otherwise separate maze gardens", () => {
+    const level = parseAsciiLevel({
+      id: "portal-only-bridge",
+      name: "Portal Only Bridge",
+      objective: "Use the flower.",
+      map: [
+        "#########",
+        "#@H######",
+        "#########",
+        "#####H.E#",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+      ],
+    });
+
+    const result = solveLevel(level);
+    expect(result.solvable).toBe(true);
+    expect(result.directions).toEqual(["right", "right", "right"]);
+    expect(result.finalState).toMatchObject({ status: "won", steps: 3 });
+  });
+
+  it("rejects an unmatched flower portal before searching", () => {
+    const level = parseAsciiLevel({
+      id: "lonely-portal",
+      name: "Lonely Portal",
+      objective: "Test structural validation.",
+      map: [
+        "#########",
+        "#@H...E.#",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+      ],
+    });
+
+    expect(validateLevel(level)).toMatchObject({
+      valid: false,
+      solvable: false,
+      errors: ['Portal pair "rose-heart" must contain exactly two portals.'],
+    });
+  });
+
   it("includes a stationary combat interaction before entering the cleared tile", () => {
     const level = parseAsciiLevel({
       id: "winnable-enemy-gate",

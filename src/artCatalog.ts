@@ -3,6 +3,7 @@ import type {
   CageStyle,
   EnemyStyle,
   KeyColor,
+  PortalPairId,
   TerrainThemeId,
   WeaponStyle,
 } from "./game/types";
@@ -351,6 +352,12 @@ export const DOOR_ART = {
   yellow: { src: "/assets/door-sunny-sun-v1.png", label: "Sunny Sun Door" },
 } as const satisfies Readonly<Record<KeyColor, SpriteArt>>;
 
+export const PORTAL_ART = {
+  "rose-heart": { src: "/assets/portal-rose-heart-v1.png", label: "Rose Heart Portal", motif: "♥" },
+  "mint-clover": { src: "/assets/portal-mint-clover-v1.png", label: "Mint Clover Portal", motif: "♣" },
+  "violet-moon": { src: "/assets/portal-violet-moon-v1.png", label: "Violet Moon Portal", motif: "☾" },
+} as const satisfies Readonly<Record<PortalPairId, SpriteArt & { readonly motif: string }>>;
+
 function hasOwn<T extends object>(catalog: T, key: PropertyKey): key is keyof T {
   return Object.hasOwn(catalog, key);
 }
@@ -405,4 +412,10 @@ export function resolveDoorArt(color: unknown): SpriteArt {
   return typeof color === "string" && hasOwn(DOOR_ART, color)
     ? DOOR_ART[color]
     : DOOR_ART[DEFAULT_KEY_COLOR];
+}
+
+export function resolvePortalArt(pair: unknown): SpriteArt & { readonly motif: string } {
+  return typeof pair === "string" && hasOwn(PORTAL_ART, pair)
+    ? PORTAL_ART[pair]
+    : PORTAL_ART["rose-heart"];
 }

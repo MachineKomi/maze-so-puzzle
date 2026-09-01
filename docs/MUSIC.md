@@ -14,9 +14,17 @@ service, Suno API, account, or runtime download from a third-party host.
 | `bgm_little_champions_v04.mp3` | Full-length maze playlist track. |
 | `BG_Music_01_PixelSkywayRally.mp3` | Full-length maze playlist track. |
 | `bgm_arena_overdrive_v04.mp3` | Full-length maze playlist track; its energetic feel is useful for later challenge layouts. |
+| `Dungeon - Teeth Beneath the Temple.mp3` | Full-length maze playlist track for mysterious dungeon chapters. |
+| `Iron Heart Gallop.mp3` | Full-length maze playlist track for energetic adventures. |
+| `Sanctuary - Warm Stone After Midnight.mp3` | Full-length maze playlist track for gentle, cozy exploration. |
+| `Shore - Saltfire Horizon.mp3` | Full-length maze playlist track for bright outdoor journeys. |
+| `Throat Bass.mp3` | Full-length maze playlist track for playful high-energy challenge runs. |
+| `Violent Hard Bass Throat Step.mp3` | Full-length late-adventure energy track; the filename is never shown in the child-facing UI. |
+| `Violent Hard Bass Throat Step (1).mp3` | Alternate full-length high-energy maze track. |
+| `Violent Hard Bass Throat Step (2).mp3` | Alternate full-length high-energy maze track. |
 | `cue_new_friend_new_horizon_v04.mp3` | Reserved as a future one-shot rescue or friendship-milestone cue. It is an event sting, not looping background music. |
 
-All five full songs—including the gentle title track—are defined in
+All thirteen full songs—including the gentle title track—are defined in
 `MUSIC_TRACKS` and listed in `MAZE_MUSIC_TRACKS` in `src/music.ts`. Keep
 filenames stable when replacing a mastered track. If a file is renamed, update
 both catalogues and their tests in the same change. The short friendship cue is
@@ -28,7 +36,7 @@ future one-shot event controller.
 - Music uses one reusable `HTMLAudioElement`, loops, plays inline, and defaults
   to 22% volume so the short gameplay cues remain clear.
 - One `createMazeMusicPicker()` instance is created for a play session. It gives
-  each maze ID a stable deterministic assignment from the five-track playlist,
+  each maze ID a stable deterministic assignment from the thirteen-track playlist,
   including generated IDs, so React re-renders, mute toggles, and revisits do
   not change that maze's song. A first-time maze assignment avoids whichever
   song most recently played whenever another choice exists.
@@ -71,7 +79,7 @@ For a quick controller regression check, run:
 npm test -- --run src/music.test.ts
 ```
 
-The tests cover the five-track catalogue, exclusion of the short cue, stable
+The tests cover the thirteen-track catalogue, exclusion of the short cue, stable
 per-maze assignments, immediate-repeat avoidance, fresh run seeds, gesture-only
 startup, looping configuration, mute state, page-visibility pause/resume races,
 rejected or unavailable media, stop/reuse, disposal, server-side safety, and

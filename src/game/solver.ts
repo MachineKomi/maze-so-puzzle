@@ -2,6 +2,7 @@ import { createInitialGameState, getTerrainAt, isInBounds, movePlayer, pointKey,
 import {
   ANIMAL_SPECIES,
   DIRECTIONS,
+  PORTAL_PAIR_IDS,
   type Direction,
   type GameState,
   type LevelDefinition,
@@ -158,6 +159,14 @@ export function getLevelStructureErrors(level: LevelDefinition): readonly string
       !(ANIMAL_SPECIES as readonly string[]).includes(object.species)
     ) {
       errors.push(`Animal "${object.id}" has an unknown species.`);
+    }
+  }
+
+
+  for (const pair of PORTAL_PAIR_IDS) {
+    const portals = level.objects.filter((object) => object.kind === "portal" && object.pair === pair);
+    if (portals.length !== 0 && portals.length !== 2) {
+      errors.push(`Portal pair "${pair}" must contain exactly two portals.`);
     }
   }
 

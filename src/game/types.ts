@@ -16,6 +16,8 @@ export const DIRECTION_DELTAS: Readonly<Record<Direction, Point>> = {
 
 export type TerrainKind = "wall" | "floor" | "water" | "lava" | "poison" | "hole";
 export type KeyColor = "red" | "blue" | "yellow";
+export const PORTAL_PAIR_IDS = ["rose-heart", "mint-clover", "violet-moon"] as const;
+export type PortalPairId = (typeof PORTAL_PAIR_IDS)[number];
 export const ANIMAL_SPECIES = [
   "bunny",
   "fox",
@@ -118,6 +120,11 @@ export interface AnimalObject extends ObjectBase {
   readonly cageStyle?: CageStyle;
 }
 
+export interface PortalObject extends ObjectBase {
+  readonly kind: "portal";
+  readonly pair: PortalPairId;
+}
+
 export type LevelObject =
   | EnemyObject
   | SwordObject
@@ -127,7 +134,8 @@ export type LevelObject =
   | PotionObject
   | KeyObject
   | DoorObject
-  | AnimalObject;
+  | AnimalObject
+  | PortalObject;
 
 export type LevelSource = "curated" | "generated";
 
@@ -233,6 +241,12 @@ export type GameEvent =
       readonly type: "animal-rescued";
       readonly objectId: string;
       readonly species: AnimalSpecies;
+    }
+  | {
+      readonly type: "portal-warped";
+      readonly pair: PortalPairId;
+      readonly from: Point;
+      readonly to: Point;
     }
   | {
       readonly type: "door-opened";

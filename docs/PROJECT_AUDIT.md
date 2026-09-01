@@ -1,39 +1,46 @@
 # Project audit
 
-Audit date: 2026-09-01
-Audited build: 0.10.3 web/Windows playable release
+Audit date: 2026-09-02
+Audited build: 0.11.0 web/Windows playable release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-01 the integrated 0.10.3 suite passed 267 tests
-across 20 files plus strict TypeScript and the Vite production build. The npm
-moderate-level audit reports zero vulnerabilities; `npm ls` contains only the
-expected unmet optional cross-platform packages, and `cargo check --locked`
-passes. Browser QA at desktop 1280 × 720, iPad 1194 × 834, and landscape-phone
-844 × 390 found no page overflow, overlapping panels, console warnings/errors,
-or broken visible images. The title and Adventure Book reset entries and their
-warning modal were exercised without clicking the destructive confirmation.
-The pickup toast and new v4 front-only cage were visually verified. Unsigned
-0.10.3 portable and setup artifacts were built and byte-verified, and the
-portable executable passed a five-second launch smoke.
+real-device testing. On 2026-09-02 the integrated 0.11.0 suite passed 292 tests
+across 22 files plus strict TypeScript and the Vite production build. The npm
+moderate-level audit reports zero vulnerabilities; `npm ls` is clean, and
+`cargo check --locked` passes. Browser QA at desktop 1280 × 720, iPad 1194 ×
+834, and landscape-phone 844 × 390 found no page overflow, overlapping panels,
+console warnings/errors, or broken visible images. Rose Heart Roundabout was
+played through its real portal route, and an iPad perfect-rescue victory kept
+its friend card large and animated. The full rendered maze camera, scaled
+pointer coordinates, portal arrival presentation, and fog/minimap pairing were
+visually verified. Unsigned 0.11.0 portable and setup artifacts were built and
+byte-verified, and the portable executable passed a five-second launch smoke.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
-## Current 0.10.3 release status
+## Current 0.11.0 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 267 tests across 20 files and completed the production build |
-| Dependencies | JavaScript dependency vulnerability and tree review | `npm audit --audit-level=moderate` reports zero vulnerabilities; `npm ls` reports only expected optional cross-platform packages as unmet |
+| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 292 tests across 22 files and completed the production build |
+| Dependencies | JavaScript dependency vulnerability and tree review | `npm audit --audit-level=moderate` reports zero vulnerabilities; `npm ls` is clean |
 | Desktop compile | Locked Rust/Tauri dependency graph | `cargo check --locked` passed |
 | Responsive browser QA | Desktop 1280×720, iPad 1194×834, and landscape phone 844×390 | No page overflow or UI overlap; no console warning/error logs and no broken visible images |
-| Reset flow | Reset entry points on the title and Adventure Book plus the destructive warning dialog | Both entries and modal were verified; destructive confirmation was deliberately not clicked during browser QA |
-| Interaction polish | In-maze pickup feedback and revised cage presentation | Floating pickup toast and the new v4 front-only cage were visually verified |
-| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Commit `3f61cbd` auto-deployed; the canonical alias reports 0.10.3, lists all twelve tester mazes, fits 1194×834 and 844×390 without page overflow, loads the v4 cage/visible art, and has no production warning/error logs |
-| Desktop artifacts | Unsigned 0.10.3 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+| Story/puzzle design | Fifteen solver-validated authored mazes, including three portal chapters | New ordinary/perfect route lengths are 105/117, 103/177, and 231/260; each ordinary route skips optional rescues and each perfect route rescues all friends |
+| Portal mechanic | Three visual pairs integrated through engine, solver, saves, hints, minimap, followers, sound, and presentation | Every used pair occurs exactly twice; disconnected geometry is solvable only through the engine warp and unmatched pairs are rejected |
+| Camera/controls | Full-world translated 6 × 6 camera, logical-coordinate pointer intent, direction hysteresis, and held-key fallback | Desktop, iPad, and phone bounds passed; real portal play retained coherent terrain/objects and no touch-scale drift |
+| Audio/art | Thirteen full maze songs and three transparent portal sprites | All track paths package locally; portal runtime assets are 512 × 512 RGBA with transparent canvas edges and retained masters/prompts |
+| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Production status is recorded after the release push in `VERCEL_DEPLOYMENT.md` |
+| Desktop artifacts | Unsigned 0.11.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+
+## Historical 0.10.3 release status
+
+The 0.10.3 browser and Windows evidence remains in the release checklist and
+changelog. It is superseded by the current 0.11.0 gate rather than deleted.
 
 ## Historical 0.10.2 release status
 

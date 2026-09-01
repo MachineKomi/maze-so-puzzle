@@ -113,6 +113,34 @@ describe("active run persistence", () => {
     )?.game).toEqual(game);
   });
 
+  it("round-trips a run immediately after a long flower-portal hop", () => {
+    const portalLevel = parseAsciiLevel({
+      id: "saved-portal-hop",
+      name: "Saved Portal Hop",
+      objective: "Use the flowers.",
+      map: [
+        "#########",
+        "#@H######",
+        "#########",
+        "#####H.E#",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+      ],
+    });
+    const game = movePlayer(
+      portalLevel,
+      createInitialGameState(portalLevel),
+      "right",
+    ).state;
+
+    expect(game).toMatchObject({ position: { x: 5, y: 3 }, steps: 1 });
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(portalLevel, game), [portalLevel])?.game)
+      .toEqual(game);
+  });
+
   it("rejects pre-poison snapshots for changed levels and round-trips an antidote run", () => {
     const corridor = parseAsciiLevel({
       id: "saved-antidote-run",

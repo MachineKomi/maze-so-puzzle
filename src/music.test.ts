@@ -52,8 +52,18 @@ describe("background music", () => {
   it("exposes every full OST song as maze BGM but excludes the short friend cue", async () => {
     const { MAZE_MUSIC_TRACKS, MUSIC_TRACKS } = await import("./music");
 
-    expect(MAZE_MUSIC_TRACKS).toHaveLength(5);
+    expect(MAZE_MUSIC_TRACKS).toHaveLength(13);
     expect(MAZE_MUSIC_TRACKS).toContain(MUSIC_TRACKS.arena);
+    expect(MAZE_MUSIC_TRACKS).toEqual(expect.arrayContaining([
+      MUSIC_TRACKS.dungeon,
+      MUSIC_TRACKS.gallop,
+      MUSIC_TRACKS.sanctuary,
+      MUSIC_TRACKS.shore,
+      MUSIC_TRACKS.throatBass,
+      MUSIC_TRACKS.hardBass,
+      MUSIC_TRACKS.hardBassOne,
+      MUSIC_TRACKS.hardBassTwo,
+    ]));
     expect(MAZE_MUSIC_TRACKS.every((track) => track.endsWith(".mp3"))).toBe(true);
     expect(MAZE_MUSIC_TRACKS.some((track) => track.includes("cue_new_friend"))).toBe(false);
   });
