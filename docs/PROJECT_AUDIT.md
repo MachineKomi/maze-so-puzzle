@@ -34,7 +34,7 @@ historical evidence.
 | Portal mechanic | Three visual pairs integrated through engine, solver, saves, hints, minimap, followers, sound, and presentation | Every used pair occurs exactly twice; disconnected geometry is solvable only through the engine warp and unmatched pairs are rejected |
 | Camera/controls | Full-world translated 6 × 6 camera, logical-coordinate pointer intent, direction hysteresis, and held-key fallback | Desktop, iPad, and phone bounds passed; real portal play retained coherent terrain/objects and no touch-scale drift |
 | Audio/art | Thirteen full maze songs and three transparent portal sprites | All track paths package locally; portal runtime assets are 512 × 512 RGBA with transparent canvas edges and retained masters/prompts |
-| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Production status is recorded after the release push in `VERCEL_DEPLOYMENT.md` |
+| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Commit `934a7db` auto-deployed; the canonical site reports 0.11.0, lists all fifteen tester mazes, opens Rose Heart Roundabout, and serves all three portal sprites plus a new OST track with HTTP 200 |
 | Desktop artifacts | Unsigned 0.11.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
 
 ## Historical 0.10.3 release status

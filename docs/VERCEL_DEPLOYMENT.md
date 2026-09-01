@@ -58,7 +58,7 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.10.3** label on the title screen and
+- Click or tap the small **Playable build 0.11.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -155,3 +155,13 @@ portable app has passed its launch smoke. On 2026-09-01 GitHub `main` commit
 retain viewport-sized pages with no broken visible images, the new v4 cage asset
 loads, and the production console has no warning/error entries. The 0.10.2
 paragraph above remains historical evidence.
+
+Playable build 0.11.0 was pushed to GitHub `main` as commit `934a7db` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical title screen reports 0.11.0; the tester picker lists all
+fifteen story mazes with the new portal chapter in positions 13–15. Rose Heart
+Roundabout opens in its 6 × 6 camera with the expected three-friend objective,
+and direct production requests for all three portal PNGs plus a newly added OST
+track return HTTP 200 with the correct image/audio content types. Local
+1280 × 720, 1194 × 834, and 844 × 390 browser QA remains the detailed layout
+record for this source. The 0.10.2 and 0.10.3 paragraphs above are historical.

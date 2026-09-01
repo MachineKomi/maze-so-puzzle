@@ -48,6 +48,10 @@ deliberately unclaimed. Earlier release evidence below remains historical.
 - [x] Desktop 1280×720, iPad 1194×834, and landscape phone 844×390 retain the
   fixed composition without page overflow or panel overlap. Visible assets load
   and browser logs contain no warning/error entries.
+- [x] GitHub `main` commit `934a7db` auto-deployed to the canonical Vercel site.
+  The public label reports 0.11.0, the tester picker lists all fifteen mazes,
+  Rose Heart Roundabout opens, and all three portal sprites plus a new OST track
+  return HTTP 200 with the correct content types.
 - [x] `Maze-so-Puzzle-0.11.0-portable.exe`: 84,777,984 bytes, file/product
   version 0.11.0, SHA-256
   `A64876899DE43C93E67D8D1B40201603DED39D3A496EB14E9D3CABD4CD02E331`.
