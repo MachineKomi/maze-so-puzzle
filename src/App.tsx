@@ -17,6 +17,13 @@ import {
   preloadRewardArt,
 } from "./assets";
 import {
+  resolveAnimalArt,
+  resolveCageArt,
+  resolveEnemyArt,
+  resolveTerrainTheme,
+  resolveWeaponArt,
+} from "./artCatalog";
+import {
   createInitialGameState,
   getObjectAt,
   getTerrainAt,
@@ -38,6 +45,7 @@ import {
   type TileKey,
 } from "./game/exploration";
 import {
+  ANIMALS_PER_LEVEL,
   ANIMAL_SPECIES,
   DIRECTION_DELTAS,
   type AnimalSpecies,
@@ -74,6 +82,7 @@ import {
   startMusicFromUserGesture,
 } from "./music";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
+import { getStoryRescueRecordDisplay } from "./rescueRecords";
 import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
@@ -93,13 +102,18 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   bunny: "Bunny",
   fox: "Fox",
   kitten: "Kitten",
+  puppy: "Puppy",
+  duckling: "Duckling",
+  hedgehog: "Hedgehog",
+  fawn: "Fawn",
+  "red-panda": "Red panda",
 };
 
 const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const HELD_KEY_DELAY_MS = 105;
 const HELD_KEY_REPEAT_MS = 64;
-const BUILD_VERSION = "0.6.0";
+const BUILD_VERSION = "0.7.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -127,7 +141,7 @@ interface PendingAdventure {
   readonly sound: "select" | "title";
 }
 
-function feedbackFor(events: readonly GameEvent[]): Feedback {
+function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feedback {
   const event = [...events].reverse().find((item) => item.type !== "moved") ?? events[0];
   if (!event) return { icon: "👣", text: "Move one square.", tone: "plain", sound: "step" };
 
@@ -135,14 +149,21 @@ function feedbackFor(events: readonly GameEvent[]): Feedback {
     case "level-won":
       return { icon: "✨", text: "Maze solved!", tone: "good", sound: "win" };
     case "combat-lost":
-      return { icon: "☁️", text: "That goblin is stronger. Try again!", tone: "careful", sound: "lose" };
-    case "enemy-defeated":
+      return {
+        icon: "☁️",
+        text: `That ${enemyLabelForEvent(level, event.objectId).toLowerCase()} is stronger. Try again!`,
+        tone: "careful",
+        sound: "lose",
+      };
+    case "enemy-defeated": {
+      const enemyLabel = enemyLabelForEvent(level, event.objectId);
       return {
         icon: "⭐",
-        text: `Goblin scooted away! ${event.powerBefore} + ${event.enemyPower} = ${event.powerAfter}`,
+        text: `${enemyLabel} scooted away! ${event.powerBefore} + ${event.enemyPower} = ${event.powerAfter}`,
         tone: "good",
         sound: "power",
       };
+    }
     case "potion-collected":
       return {
         icon: "🧡",
@@ -157,8 +178,11 @@ function feedbackFor(events: readonly GameEvent[]): Feedback {
         tone: "good",
         sound: "rescue",
       };
-    case "sword-collected":
-      return { icon: "🗡️", text: "Shiny sword found!", tone: "good", sound: "pickup" };
+    case "sword-collected": {
+      const object = level.objects.find((candidate) => candidate.id === event.objectId);
+      const weapon = resolveWeaponArt(object?.kind === "sword" ? object.style : undefined);
+      return { icon: "🗡️", text: `${weapon.label} found!`, tone: "good", sound: "pickup" };
+    }
     case "boots-collected":
       return { icon: "🥾", text: "Splashy boots found!", tone: "good", sound: "pickup" };
     case "key-collected":
@@ -173,7 +197,7 @@ function feedbackFor(events: readonly GameEvent[]): Feedback {
     case "blocked":
       switch (event.reason) {
         case "needs-sword":
-          return { icon: "🗡️", text: "Find the sword first!", tone: "careful", sound: "bump" };
+          return { icon: "🗡️", text: "Find the maze weapon first!", tone: "careful", sound: "bump" };
         case "needs-boots":
           return {
             icon: "🥾",
@@ -199,6 +223,11 @@ function feedbackFor(events: readonly GameEvent[]): Feedback {
   }
 }
 
+function enemyLabelForEvent(level: LevelDefinition, objectId: string): string {
+  const object = level.objects.find((candidate) => candidate.id === objectId);
+  return resolveEnemyArt(object?.kind === "enemy" ? object.style : undefined).label;
+}
+
 function keyFor(point: Point): string {
   return `${point.x},${point.y}`;
 }
@@ -210,8 +239,8 @@ function targetFor(state: GameState, direction: Direction): Point {
 
 function describeObject(object: LevelObject): string {
   switch (object.kind) {
-    case "enemy": return `friendly goblin with Power ${object.power}`;
-    case "sword": return "shiny sword";
+    case "enemy": return `${resolveEnemyArt(object.style).label.toLowerCase()} with Power ${object.power}`;
+    case "sword": return resolveWeaponArt(object.style).label.toLowerCase();
     case "boots": return "protective boots";
     case "potion": return `Power potion worth ${object.amount}`;
     case "key": return `${COLOR_LABELS[object.color]} star key`;
@@ -252,17 +281,13 @@ function previewKind(level: LevelDefinition, state: GameState, direction: Direct
 }
 
 function animalArt(species: AnimalSpecies): string {
-  switch (species) {
-    case "bunny": return ASSETS.animalBunny;
-    case "fox": return ASSETS.animalFox;
-    case "kitten": return ASSETS.animalKitten;
-  }
+  return resolveAnimalArt(species).src;
 }
 
 function spriteFor(object: Exclude<LevelObject, { kind: "animal" }>): string {
   switch (object.kind) {
-    case "enemy": return ASSETS.goblin;
-    case "sword": return ASSETS.sword;
+    case "enemy": return resolveEnemyArt(object.style).src;
+    case "sword": return resolveWeaponArt(object.style).src;
     case "boots": return ASSETS.boots;
     case "potion": return ASSETS.potion;
     case "key": return ASSETS.key;
@@ -318,6 +343,12 @@ const MazeTerrain = memo(function MazeTerrain({
   readonly level: LevelDefinition;
   readonly camera: CameraWindow;
 }) {
+  const patternPrefix = useId().replace(/:/g, "");
+  const theme = resolveTerrainTheme(level.terrainThemeId);
+  const floorPatternId = `${patternPrefix}-floor`;
+  const wallPatternId = `${patternPrefix}-wall`;
+  const waterPatternId = `${patternPrefix}-water`;
+  const lavaPatternId = `${patternPrefix}-lava`;
   const walls = createRoundedTerrainPath(level, camera, "wall", 0.13);
   const water = createRoundedTerrainPath(level, camera, "water", 0.16);
   const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
@@ -331,24 +362,26 @@ const MazeTerrain = memo(function MazeTerrain({
         aria-hidden="true"
       >
         <defs>
-          <pattern id="maze-floor-pattern" patternUnits="userSpaceOnUse" width="5.2" height="5.2">
-            <image href={ASSETS.floor} x="0" y="0" width="5.2" height="5.2" preserveAspectRatio="none" />
+          <pattern id={floorPatternId} patternUnits="userSpaceOnUse" width={theme.floor.periodTiles} height={theme.floor.periodTiles}>
+            <rect width={theme.floor.periodTiles} height={theme.floor.periodTiles} fill={theme.floor.fallbackColor} />
+            <image href={theme.floor.src} x="0" y="0" width={theme.floor.periodTiles} height={theme.floor.periodTiles} preserveAspectRatio="none" />
           </pattern>
-          <pattern id="maze-wall-pattern" patternUnits="userSpaceOnUse" width="5.2" height="5.2">
-            <image href={ASSETS.wall} x="0" y="0" width="5.2" height="5.2" preserveAspectRatio="none" />
+          <pattern id={wallPatternId} patternUnits="userSpaceOnUse" width={theme.wall.periodTiles} height={theme.wall.periodTiles}>
+            <rect width={theme.wall.periodTiles} height={theme.wall.periodTiles} fill={theme.wall.fallbackColor} />
+            <image href={theme.wall.src} x="0" y="0" width={theme.wall.periodTiles} height={theme.wall.periodTiles} preserveAspectRatio="none" />
           </pattern>
-          <pattern id="maze-water-pattern" patternUnits="userSpaceOnUse" width="4.6" height="4.6">
+          <pattern id={waterPatternId} patternUnits="userSpaceOnUse" width="4.6" height="4.6">
             <image href={ASSETS.water} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
           </pattern>
-          <pattern id="maze-lava-pattern" patternUnits="userSpaceOnUse" width="4.6" height="4.6">
+          <pattern id={lavaPatternId} patternUnits="userSpaceOnUse" width="4.6" height="4.6">
             <image href={ASSETS.lava} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
           </pattern>
         </defs>
 
-        <rect x={camera.left} y={camera.top} width={camera.width} height={camera.height} fill="url(#maze-floor-pattern)" />
-        {water.d && <path d={water.d} fill="url(#maze-water-pattern)" fillRule={water.fillRule} stroke="#edc875" strokeWidth="0.11" strokeLinejoin="round" />}
-        {lava.d && <path d={lava.d} fill="url(#maze-lava-pattern)" fillRule={lava.fillRule} stroke="#efbf70" strokeWidth="0.11" strokeLinejoin="round" />}
-        {walls.d && <path d={walls.d} fill="url(#maze-wall-pattern)" fillRule={walls.fillRule} />}
+        <rect x={camera.left} y={camera.top} width={camera.width} height={camera.height} fill={`url(#${floorPatternId})`} />
+        {water.d && <path d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} stroke={theme.waterLip} strokeWidth="0.11" strokeLinejoin="round" />}
+        {lava.d && <path d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} stroke={theme.lavaLip} strokeWidth="0.11" strokeLinejoin="round" />}
+        {walls.d && <path d={walls.d} fill={`url(#${wallPatternId})`} fillRule={walls.fillRule} />}
       </svg>
       {isInsideWindow(level.exit, camera) && (
         <div className="goal-layer" style={cameraLayerStyle(level.exit, camera)} aria-hidden="true">
@@ -568,11 +601,19 @@ function App() {
     [activeObjects, cameraWindow],
   );
   const animalObjects = useMemo(
-    () => ANIMAL_SPECIES.map((species) => level.objects.find(
-      (object): object is Extract<LevelObject, { kind: "animal" }> => object.kind === "animal" && object.species === species,
-    )).filter((object): object is Extract<LevelObject, { kind: "animal" }> => object !== undefined),
+    () => level.objects.filter(
+      (object): object is Extract<LevelObject, { kind: "animal" }> => object.kind === "animal",
+    ),
     [level],
   );
+  const weaponObject = useMemo(
+    () => level.objects.find(
+      (object): object is Extract<LevelObject, { kind: "sword" }> => object.kind === "sword",
+    ),
+    [level],
+  );
+  const weaponArt = resolveWeaponArt(weaponObject?.style);
+  const terrainTheme = resolveTerrainTheme(level.terrainThemeId);
   const rescuedSpecies = useMemo(
     () => animalObjects.filter((object) => game.rescuedAnimalIds.includes(object.id)).map((object) => object.species),
     [animalObjects, game.rescuedAnimalIds],
@@ -697,7 +738,7 @@ function App() {
     }
     const hasInteraction = result.events.some((event) => event.type !== "moved");
     const nextFeedback = hasInteraction
-      ? feedbackFor(result.events)
+      ? feedbackFor(result.events, level)
       : { icon: "✨", text: level.objective, tone: "plain" as const, sound: "step" as const };
     setGame(result.state);
     if (result.moved && explorationMode) {
@@ -1120,6 +1161,12 @@ function App() {
   const previewTarget = shownPreviewDirection ? targetFor(game, shownPreviewDirection) : null;
   const previewState = shownPreviewDirection ? previewKind(level, game, shownPreviewDirection) : null;
   const lostEvent = lastEvents.find((event): event is Extract<GameEvent, { type: "combat-lost" }> => event.type === "combat-lost");
+  const lostEnemy = lostEvent
+    ? level.objects.find((object): object is Extract<LevelObject, { kind: "enemy" }> => (
+      object.kind === "enemy" && object.id === lostEvent.objectId
+    ))
+    : undefined;
+  const lostEnemyArt = resolveEnemyArt(lostEnemy?.style);
   const ownedCollectibles = [
     ...progress.stickers.slice(-3).map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id) })),
     ...progress.medals.slice(-2).map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id) })),
@@ -1177,11 +1224,11 @@ function App() {
                 {bigMaze && (
                   <div
                     className="big-maze-hud"
-                    aria-label={`${level.name}. Power ${game.power}. ${rescuedSpecies.length} of 3 friends rescued. ${game.hasSword ? "Sword found." : objectKinds.has("sword") ? "Sword not found." : ""} ${game.hasBoots ? "Boots found." : objectKinds.has("boots") ? "Boots not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
+                    aria-label={`${level.name}. Power ${game.power}. ${rescuedSpecies.length} of ${ANIMALS_PER_LEVEL} friends rescued. ${game.hasSword ? `${weaponArt.label} found.` : objectKinds.has("sword") ? `${weaponArt.label} not found.` : ""} ${game.hasBoots ? "Boots found." : objectKinds.has("boots") ? "Boots not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
                   >
                     <strong>{level.name}</strong>
                     <span>★ {game.power}</span>
-                    <span>💖 {rescuedSpecies.length}/3</span>
+                    <span>💖 {rescuedSpecies.length}/{ANIMALS_PER_LEVEL}</span>
                     {objectKinds.has("sword") && <span className={game.hasSword ? "found" : "missing"}>🗡 {game.hasSword ? "✓" : "–"}</span>}
                     {objectKinds.has("boots") && <span className={game.hasBoots ? "found" : "missing"}>🥾 {game.hasBoots ? "✓" : "–"}</span>}
                     {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}>🔑 {game.keys.length}/{keyColors.length}</span>}
@@ -1209,6 +1256,7 @@ function App() {
                 gridTemplateColumns: `repeat(${cameraWindow.width}, minmax(0, 1fr))`,
                 gridTemplateRows: `repeat(${cameraWindow.height}, minmax(0, 1fr))`,
                 "--grid-size": cameraWindow.width,
+                backgroundColor: terrainTheme.floor.fallbackColor,
               } as CSSProperties}
               role="application"
               aria-label="Maze board. Use arrow keys, W A S D, the arrow buttons, or click in a direction from Ame."
@@ -1242,7 +1290,7 @@ function App() {
                   {object.kind === "animal" ? (
                     <div className="animal-stack">
                       <img className="animal-sprite" src={animalArt(object.species)} alt="" draggable={false} />
-                      <img className="animal-cage" src={ASSETS.animalCage} alt="" draggable={false} />
+                      <img className="animal-cage" src={resolveCageArt(object.cageStyle).src} alt="" draggable={false} />
                     </div>
                   ) : (
                     <img className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
@@ -1257,7 +1305,8 @@ function App() {
                 style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
               >
-                <img className="player-sprite" src={game.hasSword ? ASSETS.ameSword : ASSETS.ame} alt="" draggable={false} />
+                <img className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                {game.hasSword && <img className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} />}
                 <span className="power-badge player-power">{game.power}</span>
               </div>
             </div>
@@ -1329,10 +1378,10 @@ function App() {
                   <div><span className="tiny-label">Right now</span><strong>{level.objective}</strong></div>
                 </section>
 
-                <section className="rescue-card" aria-label={`${rescuedSpecies.length} of 3 animal friends rescued`}>
+                <section className="rescue-card" aria-label={`${rescuedSpecies.length} of ${ANIMALS_PER_LEVEL} animal friends rescued`}>
                   <div className="rescue-heading">
                     <div><span className="tiny-label">Optional adventure</span><strong>Rescue the friends</strong></div>
-                    <span className="rescue-count">{rescuedSpecies.length}/3</span>
+                    <span className="rescue-count">{rescuedSpecies.length}/{ANIMALS_PER_LEVEL}</span>
                   </div>
                   <div className="rescue-list">
                     {animalObjects.map((animal) => {
@@ -1341,7 +1390,7 @@ function App() {
                         <div className={`rescue-friend ${rescued ? "rescued" : ""}`} key={animal.id} aria-label={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`} title={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`}>
                           <div className="rescue-icon">
                             <img src={animalArt(animal.species)} alt="" />
-                            {!rescued && <img className="cage-mini" src={ASSETS.animalCage} alt="" />}
+                            {!rescued && <img className="cage-mini" src={resolveCageArt(animal.cageStyle).src} alt="" />}
                           </div>
                           {rescued && <b className="rescue-check" aria-hidden="true">✓</b>}
                         </div>
@@ -1356,7 +1405,7 @@ function App() {
                     <span className="bag-count">{game.collectedObjectIds.length}</span>
                   </div>
                   <div className="inventory-grid">
-                    {objectKinds.has("sword") && <InventorySlot label="Sword" image={ASSETS.sword} found={game.hasSword} />}
+                    {objectKinds.has("sword") && <InventorySlot label={weaponArt.label} image={weaponArt.src} found={game.hasSword} />}
                     {objectKinds.has("boots") && <InventorySlot label="Boots" image={ASSETS.boots} found={game.hasBoots} />}
                     {keyColors.map((color) => (
                       <InventorySlot key={color} label={`${COLOR_LABELS[color]} key`} image={ASSETS.key} found={game.keys.includes(color)} color={color} />
@@ -1426,8 +1475,8 @@ function App() {
           <Modal title="How to help Ame" onClose={closeHelp} returnFocus={modalReturnFocus.current}>
             <div className="help-grid">
               <HelpStep icon="👣" title="Move" copy="One square at a time." />
-              <HelpStep icon="🗡️" title="Find the sword" copy="Then goblins can scoot." />
-              <HelpStep icon="⭐" title="Check Power" copy="Match or beat a goblin. Its Power joins Ame!" />
+              <HelpStep icon="🗡️" title="Find a weapon" copy="Then baddies can scoot." />
+              <HelpStep icon="⭐" title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
               <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />
               <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
               <HelpStep icon="💖" title="Rescue friends" copy="Three are hiding in every maze." />
@@ -1447,17 +1496,17 @@ function App() {
               <div><strong>Wonderful, Ame!</strong><span>The star was found in {game.steps} steps.</span></div>
             </div>
             <div className="rescued-result-row" aria-label={`${completion.rescuedSpecies.length} animal friends rescued`}>
-              {ANIMAL_SPECIES.map((species) => {
-                const rescued = completion.rescuedSpecies.includes(species);
+              {animalObjects.map((animal) => {
+                const rescued = completion.rescuedSpecies.includes(animal.species);
                 return (
-                  <div className={`rescued-result ${rescued ? "rescued" : ""}`} key={species}>
-                    <img src={animalArt(species)} alt={ANIMAL_LABELS[species]} />
+                  <div className={`rescued-result ${rescued ? "rescued" : ""}`} key={animal.id}>
+                    <img src={animalArt(animal.species)} alt={ANIMAL_LABELS[animal.species]} />
                     <span>{rescued ? "Safe!" : "Next time"}</span>
                   </div>
                 );
               })}
             </div>
-            {completion.rescuedSpecies.length === 3 && <div className="perfect-banner">💖 Perfect rescue! All three friends are safe!</div>}
+            {completion.rescuedSpecies.length === ANIMALS_PER_LEVEL && <div className="perfect-banner">💖 Perfect rescue! All three friends are safe!</div>}
             {completion.testerRun ? (
               <div className="tester-preview-banner" role="status">
                 <span aria-hidden="true">🛠️</span>
@@ -1495,7 +1544,7 @@ function App() {
 
         {game.status === "lost" && (
           <Modal title="A little too strong!" returnFocus={modalReturnFocus.current}>
-            <img className="modal-art goblin-art" src={ASSETS.goblin} alt="A friendly green goblin" />
+            <img className="modal-art goblin-art" src={lostEnemyArt.src} alt={`A friendly ${lostEnemyArt.label.toLowerCase()}`} />
             {lostEvent && <div className="power-equation"><span>{lostEvent.playerPower}</span><b>&lt;</b><span>{lostEvent.enemyPower}</span></div>}
             <p className="modal-lead">Find more Power, then come back. This maze will start fresh.</p>
             <div className="modal-actions">
@@ -1800,7 +1849,14 @@ function AchievementsScreen({
               const locked = index >= unlocked;
               const rescueCount = result?.bestRescuedCount ?? 0;
               const documentedSpecies = result?.bestRescuedSpecies ?? [];
-              const hasUnknownRescues = rescueCount > documentedSpecies.length;
+              const storySpecies = storyLevel.objects.flatMap((object) => (
+                object.kind === "animal" ? [object.species] : []
+              ));
+              const { documentedStorySpecies, hasUnknownRescues } = getStoryRescueRecordDisplay(
+                storySpecies,
+                rescueCount,
+                documentedSpecies,
+              );
               const isActive = activeRun?.levelId === storyLevel.id;
               return (
                 <button
@@ -1808,15 +1864,15 @@ function AchievementsScreen({
                   key={storyLevel.id}
                   disabled={locked}
                   onClick={() => isActive ? onResume() : onPlayLevel(storyLevel)}
-                  aria-label={`${storyLevel.name}. ${locked ? "Locked" : isActive ? `Current maze, ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : result ? `Cleared, best ${result.bestSteps ?? 0} steps, ${rescueCount} friends rescued${hasUnknownRescues ? ", species not recorded in the earlier save" : ""}` : "Ready to play"}`}
+                  aria-label={`${storyLevel.name}. ${locked ? "Locked" : isActive ? `Current maze, ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : result ? `Cleared, best ${result.bestSteps ?? 0} steps, ${rescueCount} friends rescued${hasUnknownRescues ? ", some friend details came from an earlier version" : ""}` : "Ready to play"}`}
                 >
                   <span className="record-number">{locked ? "◆" : isActive ? "▶" : index + 1}</span>
                   <span className="record-copy"><strong>{locked ? "A mystery maze" : storyLevel.name}</strong><small>{locked ? "Keep adventuring to unlock" : isActive ? "Current maze · tap to resume" : `${storyLevel.width} × ${storyLevel.height}`}</small></span>
                   <span className="record-best">{result ? <><b>{result.bestSteps ?? "—"}</b><small>best steps</small></> : <><b>{locked ? "🔒" : "New"}</b><small>{locked ? "locked" : "ready"}</small></>}</span>
                   <span className="record-friends" aria-hidden="true">
-                    {ANIMAL_SPECIES.map((species) => (
+                    {storySpecies.map((species) => (
                       <img
-                        className={documentedSpecies.includes(species) ? "saved" : hasUnknownRescues ? "saved-unknown" : ""}
+                        className={documentedStorySpecies.includes(species) ? "saved" : hasUnknownRescues ? "saved-unknown" : ""}
                         key={species}
                         src={animalArt(species)}
                         alt=""

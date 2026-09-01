@@ -5,13 +5,23 @@ import {
   LANTERNLIGHT_LABYRINTH_LEVEL,
   MOVEMENT_LEVEL,
   parseAsciiLevel,
+  WISHING_WOODS_LEVEL,
 } from "./levels";
 import { solveLevel, validateLevel } from "./solver";
+import {
+  ANIMALS_PER_LEVEL,
+  ANIMAL_SPECIES,
+  CAGE_STYLE_IDS,
+  ENEMY_STYLE_IDS,
+  TERRAIN_THEME_IDS,
+  WEAPON_STYLE_IDS,
+} from "./types";
 
 describe("curated campaign levels", () => {
-  it("starts with a movement-only teaching level", () => {
+  it("starts with a gentle movement teaching level", () => {
     expect(CURATED_LEVELS[0]).toBe(MOVEMENT_LEVEL);
-    expect(MOVEMENT_LEVEL.objects.every((object) => object.kind === "animal")).toBe(true);
+    expect(MOVEMENT_LEVEL.objects.filter((object) => object.kind === "enemy")).toEqual([]);
+    expect(MOVEMENT_LEVEL.objects.filter((object) => object.kind === "sword")).toHaveLength(1);
     expect(MOVEMENT_LEVEL.width).toBe(9);
   });
 
@@ -58,22 +68,80 @@ describe("curated campaign levels", () => {
   );
 
   it.each(CURATED_LEVELS.map((level) => [level.name, level] as const))(
-    "%s has three optional animal rescues and all three can be saved safely",
+    "%s has three distinct optional animal rescues and all three can be saved safely",
     (_name, level) => {
       const animals = level.objects.filter((object) => object.kind === "animal");
-      expect(animals.map((animal) => animal.species).sort()).toEqual([
-        "bunny",
-        "fox",
-        "kitten",
-      ]);
+      const species = animals.map((animal) => animal.species);
+      expect(animals).toHaveLength(ANIMALS_PER_LEVEL);
+      expect(new Set(species).size).toBe(ANIMALS_PER_LEVEL);
+      expect(
+        species.every((animalSpecies) => ANIMAL_SPECIES.includes(animalSpecies)),
+      ).toBe(true);
 
       const ordinaryWin = solveLevel(level);
       const perfectRescueWin = solveLevel(level, { requireAllAnimals: true });
       expect(ordinaryWin.finalState?.rescuedAnimalIds).toHaveLength(0);
       expect(perfectRescueWin.solvable).toBe(true);
-      expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(3);
+      expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
     },
   );
+
+  it("gives every story maze an intentional theme and varied illustrated objects", () => {
+    expect(CURATED_LEVELS.map((level) => level.terrainThemeId)).toEqual([
+      ...TERRAIN_THEME_IDS,
+    ]);
+    expect(new Set(CURATED_LEVELS.map((level) => level.terrainThemeId)).size).toBe(
+      CURATED_LEVELS.length,
+    );
+
+    for (const level of CURATED_LEVELS) {
+      const weapons = level.objects.filter((object) => object.kind === "sword");
+      const enemies = level.objects.filter((object) => object.kind === "enemy");
+      const animals = level.objects.filter((object) => object.kind === "animal");
+
+      expect(weapons, `${level.name} should contain one weapon.`).toHaveLength(1);
+      expect(WEAPON_STYLE_IDS).toContain(weapons[0]?.style);
+      expect(
+        enemies.every(
+          (enemy) => enemy.style !== undefined && ENEMY_STYLE_IDS.includes(enemy.style),
+        ),
+      ).toBe(true);
+      expect(
+        animals.every(
+          (animal) =>
+            animal.cageStyle !== undefined && CAGE_STYLE_IDS.includes(animal.cageStyle),
+        ),
+      ).toBe(true);
+    }
+
+    const weaponStyles = CURATED_LEVELS.flatMap((level) =>
+      level.objects.flatMap((object) =>
+        object.kind === "sword" && object.style !== undefined ? [object.style] : [],
+      ),
+    );
+    const enemyStyles = CURATED_LEVELS.flatMap((level) =>
+      level.objects.flatMap((object) =>
+        object.kind === "enemy" && object.style !== undefined ? [object.style] : [],
+      ),
+    );
+    const cageStyles = CURATED_LEVELS.flatMap((level) =>
+      level.objects.flatMap((object) =>
+        object.kind === "animal" && object.cageStyle !== undefined
+          ? [object.cageStyle]
+          : [],
+      ),
+    );
+    const campaignSpecies = CURATED_LEVELS.flatMap((level) =>
+      level.objects.flatMap((object) =>
+        object.kind === "animal" ? [object.species] : [],
+      ),
+    );
+
+    expect([...new Set(weaponStyles)].sort()).toEqual([...WEAPON_STYLE_IDS].sort());
+    expect([...new Set(enemyStyles)].sort()).toEqual([...ENEMY_STYLE_IDS].sort());
+    expect([...new Set(cageStyles)].sort()).toEqual([...CAGE_STYLE_IDS].sort());
+    expect([...new Set(campaignSpecies)].sort()).toEqual([...ANIMAL_SPECIES].sort());
+  });
 
   it("keeps the giant exploration finale gentle, ordered, and rewarding to fully explore", () => {
     const ordinaryWin = solveLevel(LANTERNLIGHT_LABYRINTH_LEVEL);
@@ -92,7 +160,7 @@ describe("curated campaign levels", () => {
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(4);
     expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(3);
     expect(perfectRescueWin.directions).toHaveLength(312);
-    expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(3);
+    expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
 
     let state = createInitialGameState(LANTERNLIGHT_LABYRINTH_LEVEL);
     const progressionEvents: string[] = [];
@@ -123,6 +191,134 @@ describe("curated campaign levels", () => {
     ]);
   });
 
+  it("makes the Wishing Woods kitten a safe optional miniboss stretch rescue", () => {
+    const objectAt = (x: number, y: number) => {
+      const object = WISHING_WOODS_LEVEL.objects.find(
+        (candidate) => candidate.at.x === x && candidate.at.y === y,
+      );
+      expect(object, `Expected a Wishing Woods object at ${x},${y}.`).toBeDefined();
+      if (object === undefined) {
+        throw new Error(`Missing Wishing Woods object at ${x},${y}.`);
+      }
+      return object;
+    };
+
+    const sword = objectAt(7, 13);
+    const firstEnemy = objectAt(11, 14);
+    const potion = objectAt(15, 15);
+    const bridgeEnemy = objectAt(13, 10);
+    const guardian = objectAt(15, 8);
+    const kitten = objectAt(15, 7);
+
+    expect(sword.kind).toBe("sword");
+    expect(firstEnemy).toMatchObject({
+      kind: "enemy",
+      power: 2,
+      style: "mushroom-imp",
+    });
+    expect(potion).toMatchObject({ kind: "potion", amount: 2 });
+    expect(bridgeEnemy).toMatchObject({
+      kind: "enemy",
+      power: 5,
+      style: "mushroom-imp",
+    });
+    expect(guardian).toMatchObject({
+      kind: "enemy",
+      power: 9,
+      style: "pebble-golem",
+    });
+    expect(kitten).toMatchObject({ kind: "animal", species: "kitten" });
+
+    const ordinaryWin = solveLevel(WISHING_WOODS_LEVEL);
+    const perfectRescueWin = solveLevel(WISHING_WOODS_LEVEL, {
+      requireAllAnimals: true,
+    });
+
+    expect(ordinaryWin.directions).toHaveLength(108);
+    expect(ordinaryWin.finalState).toMatchObject({
+      power: 20,
+      rescuedAnimalIds: [],
+      status: "won",
+    });
+    expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(3);
+    expect(ordinaryWin.finalState?.defeatedEnemyIds).not.toContain(guardian.id);
+
+    expect(perfectRescueWin.directions).toHaveLength(142);
+    expect(perfectRescueWin.finalState).toMatchObject({
+      power: 29,
+      status: "won",
+    });
+    expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
+    expect(perfectRescueWin.finalState?.defeatedEnemyIds).toHaveLength(4);
+    expect(perfectRescueWin.finalState?.defeatedEnemyIds).toContain(guardian.id);
+
+    let state = createInitialGameState(WISHING_WOODS_LEVEL);
+    const puzzleObjectIds = new Set([
+      sword.id,
+      firstEnemy.id,
+      potion.id,
+      bridgeEnemy.id,
+      guardian.id,
+      kitten.id,
+    ]);
+    const puzzleProgression: string[] = [];
+    for (const direction of perfectRescueWin.directions) {
+      const result = movePlayer(WISHING_WOODS_LEVEL, state, direction);
+      state = result.state;
+      for (const event of result.events) {
+        if (!("objectId" in event) || !puzzleObjectIds.has(event.objectId)) {
+          continue;
+        }
+        if (event.type === "enemy-defeated" || event.type === "potion-collected") {
+          puzzleProgression.push(
+            `${event.type}:${event.objectId}:${event.powerBefore}->${event.powerAfter}`,
+          );
+        } else {
+          puzzleProgression.push(`${event.type}:${event.objectId}`);
+        }
+      }
+    }
+    expect(puzzleProgression).toEqual([
+      `sword-collected:${sword.id}`,
+      `enemy-defeated:${firstEnemy.id}:2->4`,
+      `potion-collected:${potion.id}:4->6`,
+      `enemy-defeated:${bridgeEnemy.id}:6->11`,
+      `enemy-defeated:${guardian.id}:11->20`,
+      `animal-rescued:${kitten.id}`,
+    ]);
+
+    // The tempting branch is visible at Power 6, but remains safely optional.
+    let scoutingState = createInitialGameState(WISHING_WOODS_LEVEL);
+    for (const direction of ordinaryWin.directions) {
+      scoutingState = movePlayer(WISHING_WOODS_LEVEL, scoutingState, direction).state;
+      if (
+        scoutingState.position.x === 15 &&
+        scoutingState.position.y === 11 &&
+        scoutingState.power === 6
+      ) {
+        break;
+      }
+    }
+    expect(scoutingState).toMatchObject({
+      position: { x: 15, y: 11 },
+      power: 6,
+      hasSword: true,
+      status: "playing",
+    });
+    scoutingState = movePlayer(WISHING_WOODS_LEVEL, scoutingState, "up").state;
+    scoutingState = movePlayer(WISHING_WOODS_LEVEL, scoutingState, "up").state;
+    const earlyChallenge = movePlayer(WISHING_WOODS_LEVEL, scoutingState, "up");
+    expect(earlyChallenge.moved).toBe(false);
+    expect(earlyChallenge.state.status).toBe("lost");
+    expect(earlyChallenge.events).toContainEqual({
+      type: "combat-lost",
+      objectId: guardian.id,
+      playerPower: 6,
+      enemyPower: 9,
+      enemyPowerAfter: 15,
+    });
+  });
+
   it.each(CURATED_LEVELS.map((level) => [level.name, level] as const))(
     "%s never exposes an underpowered combat after Ame finds her sword",
     (_name, level) => {
@@ -151,7 +347,17 @@ describe("curated campaign levels", () => {
         for (const direction of ["up", "down", "left", "right"] as const) {
           const result = movePlayer(level, current, direction);
           const loss = result.events.find((event) => event.type === "combat-lost");
-          if (loss?.type === "combat-lost") {
+          const isIntentionalOptionalGuardian =
+            level === WISHING_WOODS_LEVEL &&
+            loss?.type === "combat-lost" &&
+            loss.objectId === level.objects.find(
+              (object) =>
+                object.kind === "enemy" &&
+                object.at.x === 15 &&
+                object.at.y === 8 &&
+                object.power === 9,
+            )?.id;
+          if (loss?.type === "combat-lost" && !isIntentionalOptionalGuardian) {
             throw new Error(
               `${level.id} exposes enemy ${loss.enemyPower} to Ame at Power ${loss.playerPower}.`,
             );
@@ -171,13 +377,13 @@ describe("curated campaign levels", () => {
 
   it("keeps every required gate on the winning route", () => {
     const expectedKinds = [
-      { animal: 3 },
+      { animal: 3, sword: 1 },
       { animal: 3, sword: 1, enemy: 1, key: 1, door: 1 },
       { animal: 3, sword: 1, potion: 1, enemy: 2, boots: 1, key: 1, door: 1 },
       { animal: 3, sword: 1, potion: 1, enemy: 3, boots: 1, key: 2, door: 2 },
       { animal: 3, enemy: 2, door: 2, sword: 1, key: 2, boots: 1, potion: 1 },
       { animal: 3, key: 3, door: 3, enemy: 2, sword: 1, boots: 1, potion: 1 },
-      { animal: 3, sword: 1, enemy: 3, key: 3, potion: 1, door: 3, boots: 1 },
+      { animal: 3, sword: 1, enemy: 4, key: 3, potion: 1, door: 3, boots: 1 },
       { animal: 3, key: 3, door: 3, enemy: 4, sword: 1, boots: 1, potion: 2 },
       { animal: 3, potion: 2, enemy: 4, boots: 1, key: 3, door: 3, sword: 1 },
     ] as const;
@@ -194,7 +400,7 @@ describe("curated campaign levels", () => {
       expect(counts).toEqual(expectedKinds[index]);
 
       const result = solveLevel(level);
-      expect(result.finalState?.hasSword).toBe(index > 0);
+      expect(result.finalState?.hasSword).toBe(true);
       expect(result.finalState?.hasBoots).toBe(index > 1);
       expect(result.finalState?.defeatedEnemyIds).toHaveLength(expectedEnemyCounts[index] ?? 0);
       expect(result.finalState?.openedDoorIds).toHaveLength(expectedDoorCounts[index] ?? 0);

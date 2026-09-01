@@ -1,25 +1,57 @@
-import type { LevelDefinition, LevelObject, TerrainKind } from "./game/types";
+import {
+  ANIMAL_ART,
+  CAGE_ART,
+  DEFAULT_CAGE_STYLE,
+  DEFAULT_ENEMY_STYLE,
+  DEFAULT_TERRAIN_THEME_ID,
+  DEFAULT_WEAPON_STYLE,
+  ENEMY_ART,
+  TERRAIN_THEMES,
+  WEAPON_ART,
+  resolveAnimalArt,
+  resolveCageArt,
+  resolveEnemyArt,
+  resolveTerrainTheme,
+  resolveWeaponArt,
+} from "./artCatalog";
+import type { LevelDefinition, TerrainKind } from "./game/types";
 
 export const ASSETS = {
   titleBackground: "/assets/title-background-v1.webp",
   ame: "/assets/ame.png",
   ameSword: "/assets/ame-sword.png",
   portrait: "/assets/ame-portrait.png",
-  goblin: "/assets/goblin.png",
-  sword: "/assets/sword.png",
+  goblin: ENEMY_ART[DEFAULT_ENEMY_STYLE].src,
+  sword: WEAPON_ART[DEFAULT_WEAPON_STYLE].src,
   potion: "/assets/potion.png",
   boots: "/assets/boots.png",
   key: "/assets/star-key.png",
   door: "/assets/star-door.png",
   goal: "/assets/goal.png",
-  floor: "/assets/floor-v3.png",
-  wall: "/assets/wall-v3.png",
+  floor: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].floor.src,
+  wall: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].wall.src,
   water: "/assets/water-v2.png",
   lava: "/assets/lava-v2.png",
-  animalBunny: "/assets/animal-bunny.png",
-  animalFox: "/assets/animal-fox.png",
-  animalKitten: "/assets/animal-kitten.png",
-  animalCage: "/assets/animal-cage.png",
+  animalBunny: ANIMAL_ART.bunny.src,
+  animalFox: ANIMAL_ART.fox.src,
+  animalKitten: ANIMAL_ART.kitten.src,
+  animalPuppy: ANIMAL_ART.puppy.src,
+  animalDuckling: ANIMAL_ART.duckling.src,
+  animalHedgehog: ANIMAL_ART.hedgehog.src,
+  animalFawn: ANIMAL_ART.fawn.src,
+  animalRedPanda: ANIMAL_ART["red-panda"].src,
+  animalCage: CAGE_ART[DEFAULT_CAGE_STYLE].src,
+  cageStorybookWood: CAGE_ART["storybook-wood"].src,
+  cageMoonSilver: CAGE_ART["moon-silver"].src,
+  cageGardenVine: CAGE_ART["garden-vine"].src,
+  weaponFlowerSabre: WEAPON_ART["flower-sabre"].src,
+  weaponMoonWand: WEAPON_ART["moon-wand"].src,
+  weaponLeafBlade: WEAPON_ART["leaf-blade"].src,
+  weaponSunMallet: WEAPON_ART["sun-mallet"].src,
+  enemyBlueberrySlime: ENEMY_ART["blueberry-slime"].src,
+  enemyMushroomImp: ENEMY_ART["mushroom-imp"].src,
+  enemyMoonBat: ENEMY_ART["moon-bat"].src,
+  enemyPebbleGolem: ENEMY_ART["pebble-golem"].src,
   coinPouch: "/assets/coin-pouch.png",
   rewardTrailSticker: "/assets/reward-trail-sticker.png",
   rewardBraveMedal: "/assets/reward-brave-medal.png",
@@ -31,8 +63,6 @@ const COMMON_GAMEPLAY_ART = [
   ASSETS.ame,
   ASSETS.portrait,
   ASSETS.goal,
-  ASSETS.floor,
-  ASSETS.wall,
   ASSETS.coinPouch,
 ] as const;
 
@@ -41,34 +71,26 @@ const TERRAIN_ART: Readonly<Partial<Record<TerrainKind, string>>> = {
   lava: ASSETS.lava,
 };
 
-const OBJECT_ART: Readonly<Record<Exclude<LevelObject["kind"], "animal">, readonly string[]>> = {
-  enemy: [ASSETS.goblin],
-  sword: [ASSETS.sword, ASSETS.ameSword],
+const STATIC_OBJECT_ART = {
   potion: [ASSETS.potion],
   boots: [ASSETS.boots],
   key: [ASSETS.key],
   door: [ASSETS.door],
-};
-
-const ANIMAL_ART = {
-  bunny: ASSETS.animalBunny,
-  fox: ASSETS.animalFox,
-  kitten: ASSETS.animalKitten,
 } as const;
 
 const REWARD_ART = [
   ASSETS.goal,
   ASSETS.coinPouch,
-  ASSETS.animalBunny,
-  ASSETS.animalFox,
-  ASSETS.animalKitten,
   ASSETS.rewardTrailSticker,
   ASSETS.rewardBraveMedal,
   ASSETS.rewardSplashSticker,
   ASSETS.rewardRescueMedal,
 ] as const;
 
-const ACHIEVEMENT_ART = REWARD_ART;
+const ACHIEVEMENT_ART = [
+  ...REWARD_ART,
+  ...Object.values(ANIMAL_ART).map((art) => art.src),
+] as const;
 const preloadedSources = new Set<string>();
 let rewardPreloadScheduled = false;
 
@@ -99,6 +121,9 @@ function preloadSources(sources: Iterable<string>): void {
  */
 export function preloadLevelArt(level: LevelDefinition): void {
   const sources = new Set<string>(COMMON_GAMEPLAY_ART);
+  const theme = resolveTerrainTheme(level.terrainThemeId);
+  sources.add(theme.floor.src);
+  sources.add(theme.wall.src);
 
   for (const row of level.terrain) {
     for (const terrain of row) {
@@ -108,13 +133,24 @@ export function preloadLevelArt(level: LevelDefinition): void {
   }
 
   for (const object of level.objects) {
-    if (object.kind === "animal") {
-      sources.add(ANIMAL_ART[object.species]);
-      sources.add(ASSETS.animalCage);
-      continue;
+    switch (object.kind) {
+      case "animal":
+        sources.add(resolveAnimalArt(object.species).src);
+        sources.add(resolveCageArt(object.cageStyle).src);
+        break;
+      case "enemy":
+        sources.add(resolveEnemyArt(object.style).src);
+        break;
+      case "sword":
+        sources.add(resolveWeaponArt(object.style).src);
+        break;
+      case "potion":
+      case "boots":
+      case "key":
+      case "door":
+        for (const source of STATIC_OBJECT_ART[object.kind]) sources.add(source);
+        break;
     }
-
-    for (const source of OBJECT_ART[object.kind]) sources.add(source);
   }
 
   preloadSources(sources);

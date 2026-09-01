@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the current
-playable 0.6.0 web release, which remains an active play-test prototype. The
+playable 0.7.0 web release, which remains an active play-test prototype. The
 last verified downloadable Windows binaries remain version 0.5.1 until a new
 desktop package is built and checked separately.
 
@@ -60,7 +60,7 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The source version has advanced to 0.6.0 for the web release, but that alone does
+The source version has advanced to 0.7.0 for the web release, but that alone does
 not verify a desktop binary. The most recently verified desktop artifacts are
 the unsigned 0.5.1 test build:
 
@@ -93,7 +93,7 @@ the unsigned 0.5.1 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.6.0** label to
+On the title screen, click or tap the small **Playable build 0.7.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -101,7 +101,7 @@ and camera mode. Runs entered through the picker are previews: completion
 rewards, records, unlocks, active-run recovery, and saved progress are not
 changed.
 
-## Included in playable web build 0.6.0
+## Included in playable web build 0.7.0
 
 - Nine progressive story mazes: eight readable mazes from 9 x 9 through 17 x 17,
   followed by the 25 x 25 **Lanternlight Labyrinth** exploration finale.
@@ -111,19 +111,25 @@ changed.
   still-mysterious parts of the maze; a bright outline links it to the exact
   area shown on the main board.
 - Fresh, solver-validated 9 x 9 through 17 x 17 surprise mazes from the
-  deterministic "New maze" generator.
-- Three optional animal friends to rescue in every maze: a bunny, fox, and kitten.
+  deterministic "New maze" generator. Each seed also selects its illustrated
+  terrain, weapon, friendly enemy, and cage variants deterministically.
+- Nine distinct paired floor-and-wall themes across the story campaign, plus
+  five weapon looks, five friendly enemy looks, eight pet species, and four cage
+  styles. Every maze contains one weapon and three different optional pets.
 - A new illustrated title screen, backed by original AI-generated key art, with
   Continue, Adventure Book, and Surprise Maze shortcuts.
 - An Adventure Book showing story-maze clears, best step counts, rescue records,
-  cumulative bunny/fox/kitten totals, gold, completion statistics, stickers,
-  rescue medals, and nine stat-driven achievement badges.
+  cumulative totals for all eight pet species, gold, completion statistics,
+  stickers, rescue medals, and nine stat-driven achievement badges.
 - Persistent gold rewards, three collectible stickers, best results, and rescue
   medals for 5, 10, and 15 perfect three-animal rescues.
-- Sword-gated goblin encounters and visible Power numbers.
-- Ame visibly holds her sword after collecting it, and Power numbers sit above
+- Weapon-gated friendly enemy encounters and visible Power numbers. Wishing
+  Woods includes an optional Power 9 pebble-golem guarding a kitten: Ame can
+  take the easy exit or defeat smaller foes, use a potion, and backtrack for the
+  perfect rescue.
+- Ame visibly holds the level's collected weapon, and Power numbers sit above
   character art without covering faces.
-- Power growth from defeated lower-level goblins and `+2` potions.
+- Power growth from defeated lower-level enemies and `+2` potions.
 - Colour-coded star keys and matching doors.
 - Protective boots for water and warm magical lava.
 - Exact level reset after a loss, schema-v3 saved progress with defensive v1/v2
@@ -135,13 +141,14 @@ changed.
   menu, selection, achievement, stamp, rescue, loss, and victory moments, with
   a locally bundled looping soundtrack for title, story, and surprise mazes.
 - Continuous SVG terrain rendered in global maze coordinates, so textures do
-  not restart or reveal a border at every grid square. New AI-generated seamless
-  v3 floor and wall materials use smaller, more readable stones; periodic water
+  not restart or reveal a border at every grid square. The AI-generated paired
+  floor and wall materials tile seamlessly at a readable scale; periodic water
   and lava textures join into connected regions. Exact convex and concave wall
   curves follow bends cleanly, while hazards have rounded banks, a flat subtle
   floor lip, and no cast shadow.
-- A cleaner picture-first sidebar with larger rescue friends and inventory art,
-  less repeated text, and clearer found/missing silhouettes.
+- A cleaner picture-first sidebar with larger rescue friends, cages, enemy and
+  inventory variants, less repeated text, clearer found/missing silhouettes,
+  and the selected weapon overlaid in Ame's hands.
 - A 16:9 landscape presentation with a friendly turn-sideways screen on portrait
   devices.
 - Safe session navigation: a maze can be resumed after visiting Home, the
@@ -152,13 +159,13 @@ changed.
 
 The core engine is immutable and UI-independent. Generated and curated levels
 are checked with a stateful breadth-first solver that tracks position, Power,
-sword, boots, keys, rescued animals, collected pickups, defeated goblins, and
+weapon, boots, keys, rescued animals, collected pickups, defeated enemies, and
 opened doors. Geometric reachability alone is never treated as proof that a
 level is solvable.
 
 Combat uses one child-friendly rule: Ame wins when her Power is **at least** the
-goblin's Power. Winning adds the goblin's number to Ame's Power. A stronger
-goblin triggers a low-stakes retry screen and restores the same level state.
+enemy's Power. Winning adds the enemy's number to Ame's Power. A stronger enemy
+triggers a low-stakes retry screen and restores the same level state.
 
 Core modules live in `src/game/`:
 
@@ -182,8 +189,9 @@ npm run check:desktop
 `npm run check` runs the complete unit suite followed by the strict TypeScript
 and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
-rewards, statistics, achievements, protected navigation, and audio safeguards.
-The 0.6.0 web release gate passes 145 automated tests, the strict TypeScript and
+rewards, statistics, achievements, protected navigation, deterministic visual
+variants, the optional guardian route, and audio safeguards.
+The 0.7.0 web release gate passes 164 automated tests, the strict TypeScript and
 production Vite build, a zero-vulnerability npm audit, the locked Tauri compile,
 and focused landscape-browser checks for the tester picker, 7 x 7 camera,
 persistent minimap reveal, connected terrain, hazard treatment, and layout

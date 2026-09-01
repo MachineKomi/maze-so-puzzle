@@ -16,8 +16,18 @@ import {
   type LevelCompletionInput,
   type ProgressStorage,
 } from "./progress";
+import { ANIMAL_SPECIES, type AnimalSpecies } from "./game/types";
 
 const SPECIES = ["bunny", "fox", "kitten"] as const;
+
+function rescueTotals(
+  overrides: Partial<Record<AnimalSpecies, number>> = {},
+): Record<AnimalSpecies, number> {
+  const totals = Object.fromEntries(
+    ANIMAL_SPECIES.map((species) => [species, 0]),
+  ) as Record<AnimalSpecies, number>;
+  return { ...totals, ...overrides };
+}
 
 class MemoryStorage implements ProgressStorage {
   readonly values = new Map<string, string>();
@@ -65,7 +75,7 @@ describe("player progress migration and persistence", () => {
       generatedCompletions: 0,
       generatedMazesCompleted: 0,
       totalAnimalsRescued: 0,
-      rescuesBySpecies: { bunny: 0, fox: 0, kitten: 0 },
+      rescuesBySpecies: rescueTotals(),
       perfectRescueMazeCount: 0,
       currentPerfectRescueStreak: 0,
       bestPerfectRescueStreak: 0,
@@ -242,6 +252,22 @@ describe("player progress migration and persistence", () => {
     expect(migrated.bestResultsByLevel.meadow!.bestRescuedSpecies).toEqual(["fox"]);
   });
 
+  it("preserves legacy species totals while initializing every newer species", () => {
+    const migrated = migratePlayerProgress({
+      schemaVersion: 3,
+      rescuesBySpecies: { bunny: 4, fox: 2, kitten: 3 },
+      totalAnimalsRescued: 9,
+      bestResultsByLevel: {},
+    });
+
+    expect(migrated.rescuesBySpecies).toEqual(rescueTotals({
+      bunny: 4,
+      fox: 2,
+      kitten: 3,
+    }));
+    expect(migrated.totalAnimalsRescued).toBe(9);
+  });
+
   it("prefers v3, but falls back to v2 before v1 when newer data is corrupt", () => {
     const storage = new MemoryStorage();
     storage.values.set(PLAYER_PROGRESS_STORAGE_KEY, JSON.stringify({
@@ -277,7 +303,7 @@ describe("player progress migration and persistence", () => {
     const migrated = migratePlayerProgress(inheritedSave);
 
     expect(migrated.unlockedLevelCount).toBe(1);
-    expect(migrated.rescuesBySpecies).toEqual({ bunny: 0, fox: 2, kitten: 0 });
+    expect(migrated.rescuesBySpecies).toEqual(rescueTotals({ fox: 2 }));
     expect(Object.keys(migrated.bestResultsByLevel)).toEqual(["safe"]);
     expect(Object.getPrototypeOf(migrated.bestResultsByLevel)).toBe(Object.prototype);
   });
@@ -469,6 +495,23 @@ describe("applying level completions", () => {
     });
   });
 
+  it("records rescues for the expanded animal roll-call", () => {
+    const progress = applyLevelCompletion(
+      createDefaultPlayerProgress(),
+      completion("new-friends", 0, 3, {
+        rescuedSpecies: ["puppy", "fawn", "red-panda"],
+      }),
+    );
+
+    expect(progress.rescuesBySpecies).toEqual(rescueTotals({
+      puppy: 1,
+      fawn: 1,
+      "red-panda": 1,
+    }));
+    expect(progress.bestResultsByLevel["new-friends"]?.bestRescuedSpecies)
+      .toEqual(["puppy", "fawn", "red-panda"]);
+  });
+
   it("deduplicates and validates reported species without changing reward counts", () => {
     const suppliedSpecies = ["kitten", "kitten", "dragon", "bunny"];
     const progress = applyLevelCompletion(
@@ -480,7 +523,7 @@ describe("applying level completions", () => {
     suppliedSpecies.push("fox");
 
     expect(progress.totalAnimalsRescued).toBe(3);
-    expect(progress.rescuesBySpecies).toEqual({ bunny: 1, fox: 0, kitten: 1 });
+    expect(progress.rescuesBySpecies).toEqual(rescueTotals({ bunny: 1, kitten: 1 }));
     expect(progress.bestResultsByLevel["messy-report"]!.bestRescuedSpecies)
       .toEqual(["bunny", "kitten"]);
     expect(progress.gold).toBe(30);
@@ -505,12 +548,30 @@ describe("applying level completions", () => {
     expect(replay.gold - migrated.gold).toBe(25);
     expect(replay.totalCompletions).toBe(3);
     expect(replay.totalAnimalsRescued).toBe(9);
-    expect(replay.rescuesBySpecies).toEqual({ bunny: 1, fox: 1, kitten: 1 });
+    expect(replay.rescuesBySpecies).toEqual(rescueTotals({ bunny: 1, fox: 1, kitten: 1 }));
     expect(replay.bestResultsByLevel["old-maze"]).toMatchObject({
       completions: 3,
       source: "curated",
       bestRescuedSpecies: ["bunny", "fox", "kitten"],
     });
+  });
+
+  it("refreshes an equal perfect-rescue trio after a level's animals change", () => {
+    const oldVersion = applyLevelCompletion(
+      createDefaultPlayerProgress(),
+      completion("changing-friends", 0, 3),
+    );
+    const currentTrio = ["puppy", "duckling", "fawn"] as const;
+    const replay = applyLevelCompletion(
+      oldVersion,
+      completion("changing-friends", 0, 3, { rescuedSpecies: currentTrio }),
+    );
+
+    expect(oldVersion.bestResultsByLevel["changing-friends"]?.bestRescuedSpecies)
+      .toEqual(["bunny", "fox", "kitten"]);
+    expect(replay.bestResultsByLevel["changing-friends"]?.bestRescuedSpecies)
+      .toEqual(currentTrio);
+    expect(replay.bestResultsByLevel["changing-friends"]?.bestRescuedCount).toBe(3);
   });
 
   it("unlocks explorer, surprise, power, step, and species badges", () => {

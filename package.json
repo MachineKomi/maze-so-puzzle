@@ -1,7 +1,7 @@
 {
   "name": "maze-so-puzzle",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A gentle, child-friendly maze adventure for the browser and Windows.",
   "repository": {
     "type": "git",

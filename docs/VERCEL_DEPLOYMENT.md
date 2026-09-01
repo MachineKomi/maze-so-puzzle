@@ -54,7 +54,7 @@ document and does not use client-side URL routing.
   player-centred view and a minimap that keeps explored tiles visible while
   masking unvisited areas. Check an early 9×9 maze, a generated maze, and the
   25×25 Lanternlight Labyrinth, including camera clamping near an outer edge.
-- Click or tap the small **Playable build 0.6.0** label on the title screen and
+- Click or tap the small **Playable build 0.7.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -79,6 +79,6 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. The 0.6.0 deployment is a web release; version 0.5.1 remains the last
+secrets. The 0.7.0 deployment is a web release; version 0.5.1 remains the last
 verified downloadable Windows build until the desktop artifacts are rebuilt and
 checked separately.

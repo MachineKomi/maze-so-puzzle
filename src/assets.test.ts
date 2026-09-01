@@ -24,6 +24,7 @@ function levelWithRelevantArt(): LevelDefinition {
     name: "Preload Test",
     objective: "Test only the required art.",
     source: "curated",
+    terrainThemeId: "star-garden",
     width: 4,
     height: 2,
     initialPower: 2,
@@ -34,11 +35,11 @@ function levelWithRelevantArt(): LevelDefinition {
       ["wall", "floor", "water", "wall"],
     ],
     objects: [
-      { id: "enemy", kind: "enemy", at: { x: 1, y: 1 }, power: 1 },
-      { id: "sword", kind: "sword", at: { x: 1, y: 1 } },
+      { id: "enemy", kind: "enemy", at: { x: 1, y: 1 }, power: 1, style: "blueberry-slime" },
+      { id: "sword", kind: "sword", at: { x: 1, y: 1 }, style: "flower-sabre" },
       { id: "key", kind: "key", at: { x: 1, y: 1 }, color: "red" },
       { id: "door", kind: "door", at: { x: 2, y: 1 }, color: "red" },
-      { id: "bunny", kind: "animal", at: { x: 2, y: 1 }, species: "bunny" },
+      { id: "puppy", kind: "animal", at: { x: 2, y: 1 }, species: "puppy", cageStyle: "garden-vine" },
     ],
   };
 }
@@ -73,6 +74,14 @@ describe("art preloading", () => {
 
   it("loads common gameplay art plus only the supplied level's terrain and objects", async () => {
     const { ASSETS, preloadLevelArt } = await import("./assets");
+    const {
+      resolveAnimalArt,
+      resolveCageArt,
+      resolveEnemyArt,
+      resolveTerrainTheme,
+      resolveWeaponArt,
+    } = await import("./artCatalog");
+    const theme = resolveTerrainTheme("star-garden");
 
     preloadLevelArt(levelWithRelevantArt());
     preloadLevelArt(levelWithRelevantArt());
@@ -81,25 +90,57 @@ describe("art preloading", () => {
       ASSETS.ame,
       ASSETS.portrait,
       ASSETS.goal,
-      ASSETS.floor,
-      ASSETS.wall,
       ASSETS.coinPouch,
+      theme.floor.src,
+      theme.wall.src,
       ASSETS.water,
-      ASSETS.goblin,
-      ASSETS.sword,
-      ASSETS.ameSword,
+      resolveEnemyArt("blueberry-slime").src,
+      resolveWeaponArt("flower-sabre").src,
       ASSETS.key,
       ASSETS.door,
-      ASSETS.animalBunny,
-      ASSETS.animalCage,
+      resolveAnimalArt("puppy").src,
+      resolveCageArt("garden-vine").src,
     ]));
     expect(loadedSources).toHaveLength(new Set(loadedSources).size);
     expect(loadedSources).not.toContain(ASSETS.titleBackground);
+    expect(loadedSources).not.toContain(ASSETS.floor);
+    expect(loadedSources).not.toContain(ASSETS.wall);
     expect(loadedSources).not.toContain(ASSETS.lava);
+    expect(loadedSources).not.toContain(ASSETS.goblin);
+    expect(loadedSources).not.toContain(ASSETS.sword);
+    expect(loadedSources).not.toContain(ASSETS.ameSword);
     expect(loadedSources).not.toContain(ASSETS.potion);
     expect(loadedSources).not.toContain(ASSETS.boots);
     expect(loadedSources).not.toContain(ASSETS.animalFox);
+    expect(loadedSources).not.toContain(ASSETS.animalCage);
     expect(loadedSources).not.toContain(ASSETS.rewardTrailSticker);
+  });
+
+  it("falls back to the legacy default theme and variants when style metadata is absent", async () => {
+    const { ASSETS, preloadLevelArt } = await import("./assets");
+    const legacyLevel: LevelDefinition = {
+      ...levelWithRelevantArt(),
+      terrainThemeId: undefined,
+      objects: [
+        { id: "enemy", kind: "enemy", at: { x: 1, y: 1 }, power: 1 },
+        { id: "sword", kind: "sword", at: { x: 1, y: 1 } },
+        { id: "bunny", kind: "animal", at: { x: 2, y: 1 }, species: "bunny" },
+      ],
+    };
+
+    preloadLevelArt(legacyLevel);
+
+    expect(loadedSources).toContain(ASSETS.floor);
+    expect(loadedSources).toContain(ASSETS.wall);
+    expect(loadedSources).toContain(ASSETS.goblin);
+    expect(loadedSources).toContain(ASSETS.sword);
+    expect(loadedSources).not.toContain(ASSETS.ameSword);
+    expect(loadedSources).toContain(ASSETS.animalBunny);
+    expect(loadedSources).toContain(ASSETS.animalCage);
+    expect(loadedSources).not.toContain(ASSETS.enemyBlueberrySlime);
+    expect(loadedSources).not.toContain(ASSETS.weaponFlowerSabre);
+    expect(loadedSources).not.toContain(ASSETS.animalPuppy);
+    expect(loadedSources).not.toContain(ASSETS.cageGardenVine);
   });
 
   it("deduplicates shared sources across different level preloads", async () => {
@@ -152,9 +193,6 @@ describe("art preloading", () => {
     expect(new Set(loadedSources)).toEqual(new Set([
       ASSETS.goal,
       ASSETS.coinPouch,
-      ASSETS.animalBunny,
-      ASSETS.animalFox,
-      ASSETS.animalKitten,
       ASSETS.rewardTrailSticker,
       ASSETS.rewardBraveMedal,
       ASSETS.rewardSplashSticker,
@@ -192,6 +230,11 @@ describe("art preloading", () => {
       ASSETS.animalBunny,
       ASSETS.animalFox,
       ASSETS.animalKitten,
+      ASSETS.animalPuppy,
+      ASSETS.animalDuckling,
+      ASSETS.animalHedgehog,
+      ASSETS.animalFawn,
+      ASSETS.animalRedPanda,
       ASSETS.rewardTrailSticker,
       ASSETS.rewardBraveMedal,
       ASSETS.rewardSplashSticker,

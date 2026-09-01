@@ -1,7 +1,7 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: playable 0.6.0 web release
+Audited build: playable 0.7.0 web release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
@@ -10,20 +10,22 @@ real-device testing. The automated suite, production browser checks, Tauri
 build, staging, hash comparison, and portable smoke launch below all completed
 against the 0.5.0 source candidate on 2026-09-01. The 0.5.1 rows record the
 repeated source, production-browser, desktop packaging, staging, hash, and smoke
-checks for that candidate. The 0.6.0 section records the current web-only release
+checks for that candidate. The 0.7.0 section records the current web-only release
 and deliberately does not claim a rebuilt Windows package.
 
-## Current 0.6.0 web release status
+## Current 0.7.0 web release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, and exhaustive terrain topology | 145 of 145 tests passed; strict TypeScript, Vite production build, zero-vulnerability npm audit, and locked Tauri compile passed |
+| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, visual variants, rescue-record migration, and exhaustive terrain topology | 164 of 164 tests passed; strict TypeScript, Vite production build, zero-vulnerability npm audit, and locked Tauri compile passed |
 | Exploration policy | The shared rule enables the 7 x 7 camera and fog minimap whenever either maze dimension exceeds 7; focused boundary coverage includes 7, 8, and 9 tile dimensions | Passed unit coverage and local production-browser movement/reveal checks |
 | Tester access | The title build label opens a direct nine-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Passed local production-browser normal-query, exact-query, direct-selection, and modal checks |
 | Terrain geometry | Maze terrain is one globally aligned SVG surface with connected wall and hazard regions, rounded convex/concave bends, preserved holes, periodic textures, a camera gutter, and flat hazard lips without cast shadows | Passed exhaustive 3 x 3 occupancy tests, targeted topology tests, and local landscape visual review; real-iPad review remains valuable play-test feedback |
-| Terrain art | AI-generated v3 wall and floor masters use smaller-scale fantasy stones; optimized exact-periodic runtime variants plus periodic water/lava derivatives are documented with provenance | Runtime assets are in the production bundle and pass local visual review without per-cell seams |
+| Visual catalogue | Nine distinct paired terrain themes, five weapons, five friendly enemy looks, eight pet species, and four cage styles are selected through typed IDs and local assets | Every story maze has a distinct theme, one weapon, and three unique optional pets; the picture-first UI and held-weapon overlay resolve the authored variants |
+| Surprise Maze variants | Generated terrain, weapon, enemy, and cage looks use dedicated deterministic hash streams | Repeating a seed reproduces its presentation without changing deterministic layout or progression placement |
+| Optional Power puzzle | The Wishing Woods kitten spur is guarded by an optional Power 9 pebble-golem after a Power 2 foe, `+2` potion, and Power 5 foe | The ordinary route remains 108 steps; the solver-verified all-pets route backtracks at Power 11 and remains safely solvable |
 | Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Pushes to `main` auto-deploy; the canonical alias is smoke-tested after each release push |
-| Desktop artifacts | No 0.6.0 Windows package is claimed by this web release | Version 0.5.1 remains the last verified portable executable and installer until rebuilt, smoke-tested, staged, and re-hashed |
+| Desktop artifacts | No 0.7.0 Windows package is claimed by this web release | Version 0.5.1 remains the last verified portable executable and installer until rebuilt, smoke-tested, staged, and re-hashed |
 
 ## Current 0.5.1 implementation status
 
@@ -86,6 +88,21 @@ and deliberately does not claim a rebuilt Windows package.
 These results preserve the last verified 0.2.0 baseline for comparison. The
 0.4.0 evidence above remains as a historical release baseline. The verified
 0.5.0 candidate and the broader unfinished manual matrix are recorded separately.
+
+## Version 7 web implementation snapshot
+
+- Each of the nine story mazes has its own paired floor-and-wall theme, one
+  illustrated weapon, and three distinct optional pets. The full local catalogue
+  contains five weapons, five friendly enemy looks, eight pets, and four cages.
+- The picture-first board and inventory resolve variants from typed IDs, and Ame
+  visibly carries the selected level weapon after collecting it.
+- Surprise Maze seeds deterministically select their terrain, weapon, enemy, and
+  cage variants from a presentation-only stream, preserving puzzle determinism.
+- Wishing Woods adds an optional Power 9 pebble-golem guarding its kitten. The
+  ordinary exit remains unchanged; a perfect rescue uses the weapon, Power 2 foe,
+  potion, Power 5 foe, and a short backtrack to challenge it at Power 11.
+- This remains a web release. The downloadable Windows executable and installer
+  remain at their last verified 0.5.1 version.
 
 ## Version 6 web implementation snapshot
 
@@ -208,7 +225,7 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Big Maze remains available as an optional roomier board view while retaining a
   compact Power/item/rescue HUD and an overlaid feedback toast.
 
-The 0.6.0 web source passes the automated, dependency, locked-desktop-compile,
+The 0.7.0 web source passes the automated, dependency, locked-desktop-compile,
 and local production-browser gates recorded above. The 0.5.1 packaged-Windows
 baseline remains complete. All unchecked clean-machine, physical-device,
 listening, and broader manual items in `RELEASE_CHECKLIST.md` remain requirements
@@ -219,7 +236,7 @@ for the artifact type they cover.
 ### P0 - release hygiene and future packaged builds
 
 - Perform the applicable browser matrix in `RELEASE_CHECKLIST.md` against the
-  exact 0.6.0 production deployment. If a new desktop build is later shared,
+  exact 0.7.0 production deployment. If a new desktop build is later shared,
   separately repeat the portable and installer matrix against those artifacts.
 - Before any new Windows release, install, launch, save, upgrade, and uninstall
   on a clean Windows x64 machine.
@@ -269,7 +286,7 @@ for the artifact type they cover.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- The current source metadata is aligned at 0.6.0 and the public Vercel alias is
+- The current source metadata is aligned at 0.7.0 and the public Vercel alias is
   rechecked after every deployment. Existing packaging, staged names,
   source-to-stage comparison, portable smoke launch, sizes, and hashes in
   `release/` describe the last verified 0.5.1 Windows artifacts only; a source
@@ -277,5 +294,5 @@ for the artifact type they cover.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in
-  `AI_ASSET_PROMPTS.md`, including the title screen, v3 floor/wall masters, and
-  optimized exact-periodic runtime derivatives.
+  `AI_ASSET_PROMPTS.md`, including the title screen, paired terrain materials,
+  character/item variants, and optimized runtime derivatives.

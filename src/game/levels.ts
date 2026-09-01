@@ -1,11 +1,15 @@
 import type {
   AnimalSpecies,
+  CageStyle,
+  EnemyStyle,
   KeyColor,
   LevelDefinition,
   LevelObject,
   LevelSource,
   Point,
+  TerrainThemeId,
   TerrainKind,
+  WeaponStyle,
 } from "./types";
 
 export interface AsciiLevelOptions {
@@ -17,6 +21,11 @@ export interface AsciiLevelOptions {
   readonly potionAmount?: number;
   readonly source?: LevelSource;
   readonly seed?: string;
+  readonly terrainThemeId?: TerrainThemeId;
+  readonly weaponStyle?: WeaponStyle;
+  readonly enemyStyle?: EnemyStyle;
+  readonly enemyStylesByPower?: Readonly<Partial<Record<number, EnemyStyle>>>;
+  readonly cageStyle?: CageStyle;
   readonly introducedMechanics?: readonly string[];
 }
 
@@ -39,6 +48,11 @@ const ANIMAL_SPECIES: Readonly<Record<string, AnimalSpecies>> = {
   c: "kitten",
   f: "fox",
   q: "bunny",
+  w: "puppy",
+  d: "duckling",
+  h: "hedgehog",
+  n: "fawn",
+  a: "red-panda",
 };
 
 /**
@@ -121,12 +135,23 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
       }
 
       if (/^[1-9]$/.test(character)) {
-        addObject({ kind: "enemy", at, power: Number(character) });
+        const power = Number(character);
+        const style = options.enemyStylesByPower?.[power] ?? options.enemyStyle;
+        addObject({
+          kind: "enemy",
+          at,
+          power,
+          ...(style === undefined ? {} : { style }),
+        });
         continue;
       }
 
       if (character === "s") {
-        addObject({ kind: "sword", at });
+        addObject({
+          kind: "sword",
+          at,
+          ...(options.weaponStyle === undefined ? {} : { style: options.weaponStyle }),
+        });
         continue;
       }
 
@@ -154,7 +179,12 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
 
       const animalSpecies = ANIMAL_SPECIES[character];
       if (animalSpecies !== undefined) {
-        addObject({ kind: "animal", at, species: animalSpecies });
+        addObject({
+          kind: "animal",
+          at,
+          species: animalSpecies,
+          ...(options.cageStyle === undefined ? {} : { cageStyle: options.cageStyle }),
+        });
         continue;
       }
 
@@ -183,6 +213,7 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
     exit,
     terrain,
     objects,
+    terrainThemeId: options.terrainThemeId,
     introducedMechanics: options.introducedMechanics,
   };
 }
@@ -191,16 +222,20 @@ export const MOVEMENT_LEVEL = parseAsciiLevel({
   id: "little-star-trail",
   name: "Little Star Trail",
   objective: "Follow the paths to the star!",
+  terrainThemeId: "sunny-stone",
+  weaponStyle: "star-sword",
+  enemyStyle: "goblin",
+  cageStyle: "golden-heart",
   introducedMechanics: ["movement", "exit", "animal-rescue"],
   map: [
     "#########",
-    "#qc.f...#",
+    "#wc.d...#",
     "#####.#.#",
     "#.....#.#",
     "#.#####.#",
     "#.#.....#",
     "#.#.#####",
-    "#E#....@#",
+    "#E#...s@#",
     "#########",
   ],
 });
@@ -209,6 +244,10 @@ export const SWORD_AND_KEY_LEVEL = parseAsciiLevel({
   id: "shiny-sword",
   name: "Shiny Sword",
   objective: "Find the sword and star key!",
+  terrainThemeId: "rose-courtyard",
+  weaponStyle: "flower-sabre",
+  enemyStyle: "goblin",
+  cageStyle: "storybook-wood",
   introducedMechanics: ["sword", "enemy", "red-key", "red-door"],
   map: [
     "###########",
@@ -216,7 +255,7 @@ export const SWORD_AND_KEY_LEVEL = parseAsciiLevel({
     "#.#.#.#.#.#",
     "#.#.#.#...#",
     "#.#.#.###.#",
-    "#.#f#.#c#s#",
+    "#.#h#.#f#s#",
     "#.###.#.#.#",
     "#.R.#r#...#",
     "###.#.#.###",
@@ -229,10 +268,14 @@ export const SPLASHY_BOOTS_LEVEL = parseAsciiLevel({
   id: "splashy-boots",
   name: "Splashy Boots",
   objective: "Grow your Power and cross the water!",
+  terrainThemeId: "moonlit-moat",
+  weaponStyle: "moon-wand",
+  enemyStyle: "blueberry-slime",
+  cageStyle: "moon-silver",
   introducedMechanics: ["potion", "stronger-enemy", "boots", "water", "blue-key"],
   map: [
     "#############",
-    "#u........qf#",
+    "#u........dn#",
     "#.#####~#####",
     "#...#...#...#",
     "###.#.###.#B#",
@@ -242,7 +285,7 @@ export const SPLASHY_BOOTS_LEVEL = parseAsciiLevel({
     "###3#.#######",
     "#...#.......#",
     "#.#######s#.#",
-    "#..p......#c#",
+    "#..p......#a#",
     "#############",
   ],
 });
@@ -251,6 +294,11 @@ export const TOASTY_TOES_LEVEL = parseAsciiLevel({
   id: "toasty-toes",
   name: "Toasty Toes",
   objective: "Use everything to reach the star!",
+  terrainThemeId: "ember-keep",
+  weaponStyle: "leaf-blade",
+  enemyStyle: "mushroom-imp",
+  enemyStylesByPower: { 9: "pebble-golem" },
+  cageStyle: "garden-vine",
   introducedMechanics: ["lava", "two-key-colors", "power-chain"],
   map: [
     "#############",
@@ -260,11 +308,11 @@ export const TOASTY_TOES_LEVEL = parseAsciiLevel({
     "#.#^#####.#.#",
     "#.#...#@..#.#",
     "#.###.#####3#",
-    "#.#c#u#6....#",
-    "#B#f#.#.#####",
+    "#.#w#u#6....#",
+    "#B#h#.#.#####",
     "#...#...#...#",
     "###.#####.#.#",
-    "#q..r....R#E#",
+    "#c..r....R#E#",
     "#############",
   ],
 });
@@ -273,6 +321,11 @@ export const RAINBOW_PICNIC_LEVEL = parseAsciiLevel({
   id: "rainbow-picnic",
   name: "Rainbow Picnic",
   objective: "Pack your boots and open both rainbow gates!",
+  terrainThemeId: "star-garden",
+  weaponStyle: "sun-mallet",
+  enemyStyle: "blueberry-slime",
+  enemyStylesByPower: { 4: "pebble-golem" },
+  cageStyle: "golden-heart",
   introducedMechanics: ["water", "two-key-colors", "power-chain"],
   map: [
     "###############",
@@ -284,11 +337,11 @@ export const RAINBOW_PICNIC_LEVEL = parseAsciiLevel({
     "#.#####.#.###.#",
     "#.#.....R.#@#.#",
     "#.#.#####.#.###",
-    "#.#.#...#c#...#",
+    "#.#.#...#d#...#",
     "#.#.#.#.#####.#",
     "#.#.#2#.p.#s..#",
     "#4###.###.#.###",
-    "#......q#....f#",
+    "#......n#....f#",
     "###############",
   ],
 });
@@ -297,15 +350,19 @@ export const MOONBEAM_MOAT_LEVEL = parseAsciiLevel({
   id: "moonbeam-moat",
   name: "Moonbeam Moat",
   objective: "Splash past the moonlit moat and its three gates!",
+  terrainThemeId: "moonbeam-castle",
+  weaponStyle: "moon-wand",
+  enemyStyle: "moon-bat",
+  cageStyle: "moon-silver",
   introducedMechanics: ["water", "lava", "three-key-colors"],
   map: [
     "###############",
     "#q#..B#......@#",
     "#.#.#.#s#######",
     "#.#.#.#.....p.#",
-    "#c#.#.#######.#",
+    "#a#.#.#######.#",
     "#.#y#.#..3....#",
-    "#f#.#.#.#######",
+    "#w#.#.#.#######",
     "#...#b#..6....#",
     "#.###.#######.#",
     "#.Y.#...#...#u#",
@@ -321,7 +378,17 @@ export const WISHING_WOODS_LEVEL = parseAsciiLevel({
   id: "wishing-woods",
   name: "Wishing Woods",
   objective: "Follow the three wishes through water and warm sparkles!",
-  introducedMechanics: ["mixed-hazards", "three-key-colors", "power-chain"],
+  terrainThemeId: "wishing-woods",
+  weaponStyle: "leaf-blade",
+  enemyStyle: "mushroom-imp",
+  enemyStylesByPower: { 9: "pebble-golem" },
+  cageStyle: "garden-vine",
+  introducedMechanics: [
+    "mixed-hazards",
+    "three-key-colors",
+    "power-chain",
+    "optional-miniboss",
+  ],
   map: [
     "#################",
     "#r.......9..#...#",
@@ -330,9 +397,9 @@ export const WISHING_WOODS_LEVEL = parseAsciiLevel({
     "#.#.#.###.#####.#",
     "#.#.R...#...#..u#",
     "#######.###.#.###",
-    "#....E#..f#.#.#c#",
-    "#.#########B#.#.#",
-    "#.#q.....y#.#.#.#",
+    "#....E#..h#.#.#c#",
+    "#.#########B#.#9#",
+    "#.#d.....y#.#.#.#",
     "#.#####.#.#.#5#.#",
     "#^#.Y...#...#...#",
     "#.#.###########.#",
@@ -347,16 +414,25 @@ export const AMES_GRAND_PARADE_LEVEL = parseAsciiLevel({
   id: "ames-grand-parade",
   name: "Ame's Grand Parade",
   objective: "Gather every colour and lead the grand parade home!",
+  terrainThemeId: "parade-courtyard",
+  weaponStyle: "sun-mallet",
+  enemyStyle: "goblin",
+  enemyStylesByPower: {
+    4: "blueberry-slime",
+    7: "moon-bat",
+    9: "pebble-golem",
+  },
+  cageStyle: "storybook-wood",
   introducedMechanics: ["all-mechanics", "long-power-chain", "perfect-rescue-challenge"],
   map: [
     "#################",
-    "#c#....~.....u..#",
+    "#n#....~.....u..#",
     "#.#.#########.###",
     "#.#.#Y..#@..#...#",
     "#.#r#.#.###.###.#",
     "#.#.#.#.#...#.9.#",
     "#.#.#.#.#s###.#.#",
-    "#...#.#.#.#...#q#",
+    "#...#.#.#.#...#a#",
     "#.###.#^#.#.#####",
     "#R#..y#.#.#p....#",
     "#.#.###.#.#####.#",
@@ -373,6 +449,16 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
   id: "lanternlight-labyrinth",
   name: "Lanternlight Labyrinth",
   objective: "Explore to find the star. Rescue little friends if you can!",
+  terrainThemeId: "lantern-ruins",
+  weaponStyle: "flower-sabre",
+  enemyStyle: "moon-bat",
+  enemyStylesByPower: {
+    2: "blueberry-slime",
+    5: "mushroom-imp",
+    7: "goblin",
+    9: "pebble-golem",
+  },
+  cageStyle: "golden-heart",
   introducedMechanics: [
     "large-maze",
     "exploration-map",
@@ -386,7 +472,7 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
     "###.#.#####.#.#.#######.#",
     "#.#.#.#...#.#...#...#...#",
     "#.#.#.#.#.#.#####.#.#.###",
-    "#...#f#.#.#.p.#u#.#...#y#",
+    "#...#w#.#.#.p.#u#.#...#y#",
     "#.#####.#.###.#.#.#####.#",
     "#.......#.....#.#.#...#.#",
     "###############.#.#.#.#.#",
@@ -398,11 +484,11 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
     "#######.#.#.#.#####.#.#.#",
     "#s#...2.#.#.#.~...#...#.#",
     "#.#.#####R#.#####.#####.#",
-    "#......c#...#...5.#.7...#",
+    "#......d#...#...5.#.7...#",
     "#.###########.#####.#####",
     "#...#.......^.#...#.....#",
     "###.#.#.#######.#.#####.#",
-    "#@#.#.#q#.....#.#.#...#.#",
+    "#@#.#.#h#.....#.#.#...#.#",
     "#.#.#.###.###.#.#.#.#.#.#",
     "#...#......b#.B.#...#...#",
     "#########################",

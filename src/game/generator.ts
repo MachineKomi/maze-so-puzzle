@@ -2,13 +2,24 @@ import { pointKey } from "./engine";
 import { validateLevel } from "./solver";
 import type {
   AnimalSpecies,
+  CageStyle,
+  EnemyStyle,
   KeyColor,
   LevelDefinition,
   LevelObject,
   Point,
   TerrainKind,
+  TerrainThemeId,
+  WeaponStyle,
 } from "./types";
-import { ANIMAL_SPECIES } from "./types";
+import {
+  ANIMALS_PER_LEVEL,
+  ANIMAL_SPECIES,
+  CAGE_STYLE_IDS,
+  ENEMY_STYLE_IDS,
+  TERRAIN_THEME_IDS,
+  WEAPON_STYLE_IDS,
+} from "./types";
 
 export type MazeDifficulty = "movement" | "gentle" | "growing" | "adventure";
 
@@ -85,6 +96,43 @@ function shuffle<T>(values: readonly T[], random: RandomSource): T[] {
     shuffled[other] = held;
   }
   return shuffled;
+}
+
+function selectByHash<T>(values: readonly T[], key: string): T {
+  const selected = values[hashSeed(key) % values.length];
+  if (selected === undefined) {
+    throw new RangeError("A generated visual catalogue cannot be empty.");
+  }
+  return selected;
+}
+
+interface GeneratedVisuals {
+  readonly terrainThemeId: TerrainThemeId;
+  readonly weaponStyle: WeaponStyle;
+  readonly enemyStyle: EnemyStyle;
+  readonly cageStyle: CageStyle;
+  readonly animalSpecies: readonly AnimalSpecies[];
+}
+
+/**
+ * Select presentation from a dedicated deterministic stream. Keeping these
+ * choices separate means adding art never perturbs the maze-layout PRNG.
+ */
+function selectGeneratedVisuals(
+  seedText: string,
+  difficulty: MazeDifficulty,
+  size: number,
+): GeneratedVisuals {
+  const identity = `${seedText}:${difficulty}:${size}`;
+  const speciesRandom = mulberry32(hashSeed(`visual-animals:${identity}`));
+  return {
+    terrainThemeId: selectByHash(TERRAIN_THEME_IDS, `visual-terrain:${identity}`),
+    weaponStyle: selectByHash(WEAPON_STYLE_IDS, `visual-weapon:${identity}`),
+    enemyStyle: selectByHash(ENEMY_STYLE_IDS, `visual-enemy:${identity}`),
+    cageStyle: selectByHash(CAGE_STYLE_IDS, `visual-cage:${identity}`),
+    animalSpecies: shuffle<AnimalSpecies>(ANIMAL_SPECIES, speciesRandom)
+      .slice(0, ANIMALS_PER_LEVEL),
+  };
 }
 
 function carvePerfectMaze(size: number, random: RandomSource): TerrainKind[][] {
@@ -242,7 +290,7 @@ function findFloorPath(
 
 function buildRecipe(difficulty: MazeDifficulty, random: RandomSource): readonly RecipeEntry[] {
   if (difficulty === "movement") {
-    return [];
+    return [{ kind: "sword" }];
   }
 
   const colors: readonly KeyColor[] = ["red", "blue", "yellow"];
@@ -333,7 +381,7 @@ function chooseAnimalPoints(
     return floorNeighbors(terrain, point).length === 1 ? 0 : 1;
   };
   shuffled.sort((left, right) => priority(left) - priority(right));
-  return shuffled.slice(0, ANIMAL_SPECIES.length);
+  return shuffled.slice(0, ANIMALS_PER_LEVEL);
 }
 
 function buildGeneratedLevel(
@@ -350,6 +398,7 @@ function buildGeneratedLevel(
   const start = farthestFloor(terrain, firstFloor);
   const exit = farthestFloor(terrain, start);
   const criticalPath = findFloorPath(terrain, start, exit);
+  const visuals = selectGeneratedVisuals(seedText, difficulty, size);
   const recipe = buildRecipe(difficulty, random);
   const placements = chooseOrderedPoints(criticalPath, recipe.length);
   if (placements.length !== recipe.length) {
@@ -376,11 +425,19 @@ function buildGeneratedLevel(
     const objectId = `${id}-${entry.kind}-${index + 1}`;
     switch (entry.kind) {
       case "sword":
+        objects.push({ id: objectId, kind: "sword", at, style: visuals.weaponStyle });
+        break;
       case "boots":
-        objects.push({ id: objectId, kind: entry.kind, at });
+        objects.push({ id: objectId, kind: "boots", at });
         break;
       case "enemy":
-        objects.push({ id: objectId, kind: "enemy", at, power: entry.power });
+        objects.push({
+          id: objectId,
+          kind: "enemy",
+          at,
+          power: entry.power,
+          style: visuals.enemyStyle,
+        });
         break;
       case "potion":
         objects.push({ id: objectId, kind: "potion", at, amount: entry.amount });
@@ -403,13 +460,12 @@ function buildGeneratedLevel(
     unavailable,
     random,
   );
-  if (animalPoints.length !== ANIMAL_SPECIES.length) {
+  if (animalPoints.length !== ANIMALS_PER_LEVEL) {
     return undefined;
   }
-  const species = shuffle<AnimalSpecies>(ANIMAL_SPECIES, random);
-  for (let index = 0; index < ANIMAL_SPECIES.length; index += 1) {
+  for (let index = 0; index < ANIMALS_PER_LEVEL; index += 1) {
     const at = animalPoints[index];
-    const animalSpecies = species[index];
+    const animalSpecies = visuals.animalSpecies[index];
     if (at === undefined || animalSpecies === undefined) {
       return undefined;
     }
@@ -418,6 +474,7 @@ function buildGeneratedLevel(
       kind: "animal",
       at,
       species: animalSpecies,
+      cageStyle: visuals.cageStyle,
     });
   }
 
@@ -435,9 +492,10 @@ function buildGeneratedLevel(
     exit,
     terrain,
     objects,
+    terrainThemeId: visuals.terrainThemeId,
     introducedMechanics: [...new Set([
       ...(difficulty === "movement"
-        ? ["movement", "exit"]
+        ? ["movement", "exit", ...recipe.map((entry) => entry.kind)]
         : recipe.map((entry) => entry.kind)),
       "animal-rescue",
     ])],

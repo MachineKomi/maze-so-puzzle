@@ -16,8 +16,57 @@ export const DIRECTION_DELTAS: Readonly<Record<Direction, Point>> = {
 
 export type TerrainKind = "wall" | "floor" | "water" | "lava";
 export type KeyColor = "red" | "blue" | "yellow";
-export const ANIMAL_SPECIES = ["bunny", "fox", "kitten"] as const;
+export const ANIMAL_SPECIES = [
+  "bunny",
+  "fox",
+  "kitten",
+  "puppy",
+  "duckling",
+  "hedgehog",
+  "fawn",
+  "red-panda",
+] as const;
 export type AnimalSpecies = (typeof ANIMAL_SPECIES)[number];
+export const ANIMALS_PER_LEVEL = 3;
+
+export const TERRAIN_THEME_IDS = [
+  "sunny-stone",
+  "rose-courtyard",
+  "moonlit-moat",
+  "ember-keep",
+  "star-garden",
+  "moonbeam-castle",
+  "wishing-woods",
+  "parade-courtyard",
+  "lantern-ruins",
+] as const;
+export type TerrainThemeId = (typeof TERRAIN_THEME_IDS)[number];
+
+export const WEAPON_STYLE_IDS = [
+  "star-sword",
+  "flower-sabre",
+  "moon-wand",
+  "leaf-blade",
+  "sun-mallet",
+] as const;
+export type WeaponStyle = (typeof WEAPON_STYLE_IDS)[number];
+
+export const ENEMY_STYLE_IDS = [
+  "goblin",
+  "blueberry-slime",
+  "mushroom-imp",
+  "moon-bat",
+  "pebble-golem",
+] as const;
+export type EnemyStyle = (typeof ENEMY_STYLE_IDS)[number];
+
+export const CAGE_STYLE_IDS = [
+  "golden-heart",
+  "storybook-wood",
+  "moon-silver",
+  "garden-vine",
+] as const;
+export type CageStyle = (typeof CAGE_STYLE_IDS)[number];
 
 interface ObjectBase {
   readonly id: string;
@@ -27,10 +76,12 @@ interface ObjectBase {
 export interface EnemyObject extends ObjectBase {
   readonly kind: "enemy";
   readonly power: number;
+  readonly style?: EnemyStyle;
 }
 
 export interface SwordObject extends ObjectBase {
   readonly kind: "sword";
+  readonly style?: WeaponStyle;
 }
 
 export interface BootsObject extends ObjectBase {
@@ -55,6 +106,7 @@ export interface DoorObject extends ObjectBase {
 export interface AnimalObject extends ObjectBase {
   readonly kind: "animal";
   readonly species: AnimalSpecies;
+  readonly cageStyle?: CageStyle;
 }
 
 export type LevelObject =
@@ -82,6 +134,7 @@ export interface LevelDefinition {
   readonly exit: Point;
   readonly terrain: readonly (readonly TerrainKind[])[];
   readonly objects: readonly LevelObject[];
+  readonly terrainThemeId?: TerrainThemeId;
   readonly introducedMechanics?: readonly string[];
 }
 

@@ -6,13 +6,17 @@
  * unavailable, full, or contains an older/corrupt save.
  */
 
-import { ANIMAL_SPECIES, type AnimalSpecies } from "./game/types";
+import {
+  ANIMALS_PER_LEVEL,
+  ANIMAL_SPECIES,
+  type AnimalSpecies,
+} from "./game/types";
 
 export const PLAYER_PROGRESS_SCHEMA_VERSION = 3 as const;
 export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v3";
 export const VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v2";
 export const LEGACY_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v1";
-export const ANIMALS_PER_MAZE = 3;
+export const ANIMALS_PER_MAZE = ANIMALS_PER_LEVEL;
 
 export type ProgressLevelSource = "curated" | "generated";
 
@@ -290,7 +294,9 @@ export const RESCUE_MILESTONES: readonly Readonly<{
 const MEDAL_IDS = RESCUE_MILESTONES.map((milestone) => milestone.id);
 
 function emptyRescueTotals(): Record<AnimalSpecies, number> {
-  return { bunny: 0, fox: 0, kitten: 0 };
+  const totals = {} as Record<AnimalSpecies, number>;
+  for (const species of ANIMAL_SPECIES) totals[species] = 0;
+  return totals;
 }
 
 function nonNegativeInteger(value: unknown, fallback = 0): number {
@@ -708,9 +714,12 @@ export function applyLevelCompletion(
     : current.unlockedLevelCount;
   const previousBestRescuedCount = existing?.bestRescuedCount ?? 0;
   const previousBestSpecies = existing?.bestRescuedSpecies ?? [];
+  const hasCompleteCurrentSpeciesRecord = rescuedSpecies.length === rescuedCount;
   const bestRescuedSpecies = rescuedCount > previousBestRescuedCount
     || (rescuedCount === previousBestRescuedCount
-      && rescuedSpecies.length > previousBestSpecies.length)
+      && (rescuedSpecies.length > previousBestSpecies.length
+        || (hasCompleteCurrentSpeciesRecord
+          && rescuedSpecies.some((species) => !previousBestSpecies.includes(species)))))
     ? rescuedSpecies
     : [...previousBestSpecies];
 

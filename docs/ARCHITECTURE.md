@@ -11,10 +11,13 @@ state.
 2. `src/App.tsx` owns screen navigation and presents the title, Adventure Book,
    maze board, side panel, dialogs, rewards, accessibility descriptions, and the
    SVG terrain surface. Terrain patterns use global maze coordinates rather than
-   restarting inside each rendered cell.
+   restarting inside each rendered cell. It resolves each level's picture-first
+   terrain, weapon, enemy, pet, and cage presentation and overlays the selected
+   weapon in Ame's hands after collection.
 3. `src/game/engine.ts` applies one immutable movement or interaction step.
 4. Authored levels come from `src/game/levels.ts`; surprise levels come from the
-   deterministic generator in `src/game/generator.ts`.
+   deterministic generator in `src/game/generator.ts`. Level and object records
+   carry stable visual IDs without placing artwork concerns in the engine.
 5. `src/game/solver.ts` validates structural rules and searches the exact engine
    state space to prove both an ordinary solution and an all-animal solution.
 6. `src/game/exploration.ts` derives clamped camera windows, the shared camera
@@ -35,11 +38,21 @@ state.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
+12. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
+   material periods, and fallbacks. The current catalogue contains nine paired
+   terrain themes, five weapons, five friendly enemy looks, eight pet species,
+   and four cages.
 
 ## Important boundaries
 
 - The engine, generator, solver, rewards, and navigation decisions are UI-agnostic
   pure TypeScript wherever practical.
+- Visual IDs are presentation metadata. Combat depends on an enemy's Power, not
+  its illustration; collecting any weapon sets the same engine sword flag for
+  save compatibility. Each story maze has one weapon and three unique pets.
+- Generated-maze presentation is selected from dedicated deterministic hash
+  streams. Recreating a seed reproduces both its puzzle and visual variants,
+  while adding artwork choices cannot perturb topology or progression placement.
 - The browser build uses only local static assets from `public/`.
 - Progress belongs to the current browser or Tauri WebView profile. It is not
   synchronized between devices.
@@ -61,6 +74,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
+- The current 0.7.0 source is a web release. Architecture compatibility with
+  Tauri is not binary verification; the last verified Windows executable and
+  installer remain version 0.5.1 until separately rebuilt and checked.
 - AI-generated source art and exact prompts are recorded in
   `docs/AI_ASSET_PROMPTS.md`; source-only masters are kept outside `public/` so
   they do not inflate deployments.
@@ -71,7 +87,9 @@ The Vitest suite exercises movement, combat, items, hazards, authored and
 generated solvability, optional rescues, exploration-camera activation and
 reveal-set rules, terrain boundary geometry, persistence migrations,
 achievements, synthesized-sound and background-music safeguards, and protected
-navigation.
+navigation. It also checks the complete art catalogue, authored visual variety,
+deterministic generated variants, one weapon and three unique pets per maze, and
+the optional Wishing Woods guardian route.
 Every authored maze and sampled generated maze is run through the stateful
 solver. `npm run check` is the normal browser release gate; locked Cargo
 compilation and a Tauri bundle build are the additional Windows gates.
@@ -82,7 +100,11 @@ compilation and a Tauri bundle build are the additional Windows gates.
   then implement the rule once in the engine and teach the solver through that
   same transition function.
 - Add story mazes to `CURATED_LEVELS`; structural and progression tests will
-  reject unsolvable or incorrectly gated content.
+  reject unsolvable or incorrectly gated content. Give each new story an
+  intentional terrain theme, weapon/enemy/cage styles, and three distinct pets.
+- Add a visual variant by extending the typed ID union and `artCatalog.ts`, then
+  supply and validate the local asset. Keep engine behavior keyed to object kind
+  and Power rather than art labels or filenames.
 - The zoomed exploration presentation is a dimension rule, not an authored-level
   flag: if either dimension exceeds `DEFAULT_FOV_SIZE` (currently 7), use the
   camera and minimap. Change that shared rule and its boundary tests together.

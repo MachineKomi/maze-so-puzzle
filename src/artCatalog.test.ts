@@ -1,0 +1,106 @@
+import { describe, expect, it } from "vitest";
+import {
+  ANIMAL_ART,
+  CAGE_ART,
+  DEFAULT_ANIMAL_SPECIES,
+  DEFAULT_CAGE_STYLE,
+  DEFAULT_ENEMY_STYLE,
+  DEFAULT_TERRAIN_THEME_ID,
+  DEFAULT_WEAPON_STYLE,
+  ENEMY_ART,
+  TERRAIN_THEMES,
+  WEAPON_ART,
+  resolveAnimalArt,
+  resolveCageArt,
+  resolveEnemyArt,
+  resolveTerrainTheme,
+  resolveWeaponArt,
+  type SpriteArt,
+} from "./artCatalog";
+import {
+  ANIMAL_SPECIES,
+  CAGE_STYLE_IDS,
+  ENEMY_STYLE_IDS,
+  TERRAIN_THEME_IDS,
+  WEAPON_STYLE_IDS,
+} from "./game/types";
+
+function sorted(values: readonly string[]): readonly string[] {
+  return [...values].sort((first, second) => first.localeCompare(second));
+}
+
+function expectSpriteArt(entries: readonly SpriteArt[]): void {
+  for (const entry of entries) {
+    expect(entry.src).toMatch(/^\/assets\/[a-z0-9-]+\.png$/);
+    expect(entry.label.trim().length).toBeGreaterThan(0);
+  }
+  expect(new Set(entries.map((entry) => entry.src)).size).toBe(entries.length);
+}
+
+describe("art catalog", () => {
+  it("exhaustively covers every canonical style and species ID", () => {
+    expect(sorted(Object.keys(TERRAIN_THEMES))).toEqual(sorted(TERRAIN_THEME_IDS));
+    expect(sorted(Object.keys(WEAPON_ART))).toEqual(sorted(WEAPON_STYLE_IDS));
+    expect(sorted(Object.keys(ENEMY_ART))).toEqual(sorted(ENEMY_STYLE_IDS));
+    expect(sorted(Object.keys(ANIMAL_ART))).toEqual(sorted(ANIMAL_SPECIES));
+    expect(sorted(Object.keys(CAGE_ART))).toEqual(sorted(CAGE_STYLE_IDS));
+  });
+
+  it("provides a unique labelled sprite for every gameplay variant", () => {
+    expectSpriteArt(Object.values(WEAPON_ART));
+    expectSpriteArt(Object.values(ENEMY_ART));
+    expectSpriteArt(Object.values(ANIMAL_ART));
+    expectSpriteArt(Object.values(CAGE_ART));
+  });
+
+  it("provides calibrated, seamless-pattern metadata for all nine themes", () => {
+    const color = /^#[0-9a-f]{6}$/i;
+    const textureSources = new Set<string>();
+
+    for (const id of TERRAIN_THEME_IDS) {
+      const theme = TERRAIN_THEMES[id];
+      expect(theme.id).toBe(id);
+      expect(theme.label.trim().length).toBeGreaterThan(0);
+      expect(theme.waterLip).toMatch(color);
+      expect(theme.lavaLip).toMatch(color);
+
+      for (const texture of [theme.floor, theme.wall]) {
+        expect(texture.src).toMatch(/^\/assets\/[a-z0-9-]+\.png$/);
+        expect(texture.label.trim().length).toBeGreaterThan(0);
+        expect(texture.periodTiles).toBeGreaterThanOrEqual(4);
+        expect(texture.periodTiles).toBeLessThanOrEqual(6);
+        expect(texture.fallbackColor).toMatch(color);
+        textureSources.add(texture.src);
+      }
+    }
+
+    expect(new Set(TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].floor.src)).size).toBe(5);
+    expect(new Set(TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].wall.src)).size).toBe(5);
+    expect(new Set(TERRAIN_THEME_IDS.map((id) => {
+      const theme = TERRAIN_THEMES[id];
+      return `${theme.floor.src}|${theme.wall.src}`;
+    })).size).toBe(TERRAIN_THEME_IDS.length);
+    expect(textureSources.size).toBe(10);
+  });
+
+  it("resolves every valid ID to its stable catalog entry object", () => {
+    for (const id of TERRAIN_THEME_IDS) expect(resolveTerrainTheme(id)).toBe(TERRAIN_THEMES[id]);
+    for (const id of WEAPON_STYLE_IDS) expect(resolveWeaponArt(id)).toBe(WEAPON_ART[id]);
+    for (const id of ENEMY_STYLE_IDS) expect(resolveEnemyArt(id)).toBe(ENEMY_ART[id]);
+    for (const id of ANIMAL_SPECIES) expect(resolveAnimalArt(id)).toBe(ANIMAL_ART[id]);
+    for (const id of CAGE_STYLE_IDS) expect(resolveCageArt(id)).toBe(CAGE_ART[id]);
+  });
+
+  it("uses stable defaults for absent, legacy, and untrusted IDs", () => {
+    expect(resolveTerrainTheme(undefined)).toBe(TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID]);
+    expect(resolveTerrainTheme("not-a-theme")).toBe(TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID]);
+    expect(resolveWeaponArt(null)).toBe(WEAPON_ART[DEFAULT_WEAPON_STYLE]);
+    expect(resolveWeaponArt("not-a-weapon")).toBe(WEAPON_ART[DEFAULT_WEAPON_STYLE]);
+    expect(resolveEnemyArt(undefined)).toBe(ENEMY_ART[DEFAULT_ENEMY_STYLE]);
+    expect(resolveEnemyArt("not-an-enemy")).toBe(ENEMY_ART[DEFAULT_ENEMY_STYLE]);
+    expect(resolveAnimalArt(undefined)).toBe(ANIMAL_ART[DEFAULT_ANIMAL_SPECIES]);
+    expect(resolveAnimalArt("not-an-animal")).toBe(ANIMAL_ART[DEFAULT_ANIMAL_SPECIES]);
+    expect(resolveCageArt(null)).toBe(CAGE_ART[DEFAULT_CAGE_STYLE]);
+    expect(resolveCageArt("not-a-cage")).toBe(CAGE_ART[DEFAULT_CAGE_STYLE]);
+  });
+});

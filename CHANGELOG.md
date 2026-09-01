@@ -4,6 +4,39 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.7.0 - 2026-09-01
+
+This picture-first variety build gives every maze its own illustrated identity,
+expands the rescue cast, and adds one optional backtracking Power puzzle without
+making the ordinary story route harder.
+
+### Added
+
+- Nine distinct paired terrain themes across the story campaign, five weapon
+  looks, five friendly enemy looks, eight pet species, and four cage styles.
+  Every maze now contains one weapon and three different optional pets.
+- A Power 9 pebble-golem guarding the Wishing Woods kitten. The normal exit
+  remains unchanged; a perfect rescue asks Ame to collect her weapon, defeat the
+  Power 2 and Power 5 foes with a `+2` potion between them, then backtrack and
+  win the optional fight at Power 11.
+- Deterministic visual variants for generated Surprise Mazes. A seed always
+  recreates the same terrain, weapon, enemy, and cage presentation as well as
+  the same puzzle.
+
+### Changed
+
+- Reworked maze, rescue, and inventory presentation around the illustrated
+  variants, with less repeated copy and a level-specific weapon overlay in
+  Ame's hands after collection.
+- Expanded authored-level and generator regressions; the release gate now runs
+  164 automated tests.
+
+### Desktop status
+
+- Version 0.7.0 is a web release. The unsigned downloadable Windows executable
+  and installer at version 0.5.1 remain the last verified desktop artifacts
+  until Tauri is rebuilt, packaged, smoke-tested, and re-hashed.
+
 ## 0.6.0 - 2026-09-01
 
 This web-first polish build makes the exploration presentation consistent,

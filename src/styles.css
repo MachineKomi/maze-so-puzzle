@@ -302,6 +302,20 @@ button:focus-visible,
   filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
 }
 
+.player-held-weapon {
+  position: absolute;
+  z-index: 10;
+  right: -1%;
+  bottom: 5%;
+  width: 58%;
+  height: 58%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
+  transform: rotate(-7deg);
+  transform-origin: 50% 80%;
+}
+
 .player-sprite {
   width: 95%;
   height: 95%;
@@ -2215,9 +2229,6 @@ body {
   border: clamp(4px, 0.5vw, 7px) solid #5d587b;
   border-radius: clamp(16px, 1.7vw, 23px);
   background-color: #f8d991;
-  background-image: url("/assets/floor-v3.png");
-  background-repeat: repeat;
-  background-size: 20% 20%;
   box-shadow:
     0 5px 0 #443f60,
     0 11px 21px rgba(57, 45, 71, 0.24),
@@ -2595,8 +2606,8 @@ img.wallet-pouch {
 .rescue-icon > img:not(.cage-mini),
 .rescue-icon .animal-sprite {
   z-index: 2;
-  width: 94%;
-  height: 94%;
+  width: 104%;
+  height: 104%;
   object-fit: contain;
   filter: drop-shadow(0 1px 1px rgba(68, 47, 66, 0.35));
 }
@@ -2608,7 +2619,7 @@ img.wallet-pouch {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  opacity: 0.64;
+  opacity: 0.48;
   filter: drop-shadow(0 1px 1px rgba(71, 58, 78, 0.2));
 }
 
@@ -2650,9 +2661,9 @@ img.wallet-pouch {
 .animal-stack .animal-sprite {
   position: absolute;
   z-index: 2;
-  bottom: 2%;
-  width: 82%;
-  height: 82%;
+  bottom: 0;
+  width: 96%;
+  height: 96%;
   object-fit: contain;
   filter: drop-shadow(0 1px 1px rgba(60, 45, 67, 0.23));
 }
@@ -2664,7 +2675,7 @@ img.wallet-pouch {
   width: 104%;
   height: 104%;
   object-fit: contain;
-  opacity: 0.64;
+  opacity: 0.52;
   filter: drop-shadow(0 2px 2px rgba(55, 45, 69, 0.24));
 }
 
@@ -3905,6 +3916,129 @@ img.wallet-pouch {
   .touch-controls-copy {
     display: inline;
   }
+}
+
+/* Classic 4:3 iPads letterbox the 16:9 stage to 576px high. Compact against
+   the stage's effective height while preserving the 44px touch D-pad. */
+@media (pointer: coarse) and (orientation: landscape) and (min-height: 601px) and (max-width: 1200px) {
+  .game-layout {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .maze-panel {
+    padding: 7px;
+    gap: 4px;
+  }
+
+  .maze-topline { min-height: 34px; }
+  .maze-topline h2 { font-size: 18px; }
+  .feedback-bar { min-height: 32px; padding-block: 5px; }
+  .sidebar { gap: 4px; }
+  .hero-card { min-height: 70px; grid-template-columns: 62px 1fr; padding: 5px; }
+  .big-power { font-size: 37px; }
+
+  .exploration-dashboard {
+    grid-template-columns: minmax(128px, 0.9fr) minmax(0, 1.1fr);
+    gap: 4px;
+    flex-basis: 164px;
+  }
+
+  .exploration-dashboard .adventure-details { gap: 3px; }
+  .exploration-dashboard .objective-card { min-height: 34px; padding-block: 3px; }
+  .exploration-dashboard .objective-icon { width: 26px; }
+  .exploration-dashboard .objective-card .tiny-label { display: none; }
+  .exploration-dashboard .rescue-card { min-height: 55px; padding: 3px 4px; }
+  .exploration-dashboard .rescue-heading { min-height: 14px; font-size: 7px; }
+  .exploration-dashboard .rescue-icon { width: min(100%, 40px); }
+  .exploration-dashboard .bag-card { min-height: 53px; padding: 3px 5px; }
+  .exploration-dashboard .inventory-grid { margin-top: 2px; gap: 2px; }
+  .exploration-dashboard .inventory-slot { padding: 2px; }
+
+  .maze-map-card { padding: 4px; gap: 2px; border-radius: 13px; }
+  .maze-map-heading { min-height: 15px; }
+  .maze-map-heading > span { font-size: 11px; }
+  .maze-minimap { width: min(100%, 128px); border-width: 2px; border-radius: 7px; }
+  .maze-map-key { gap: 5px; font-size: 6px; }
+  .controls-copy .tiny-label { display: none; }
+  .level-dots { min-height: 24px; }
+  .level-dots button { width: 24px; height: 24px; }
+  .utility-row { min-height: 25px; }
+}
+
+/* Short landscape phones keep full-size 44px targets in a two-row direction
+   cluster, while the picture cards compress enough to remain wholly visible. */
+@media (orientation: landscape) and (max-height: 600px) {
+  .brand-and-wallet { min-height: 28px; }
+  .wallet-pill { min-height: 30px; }
+
+  .hero-card {
+    min-height: 46px;
+    padding: 3px 5px;
+    grid-template-columns: 42px 1fr;
+  }
+
+  .portrait-wrap { width: 42px; height: 42px; }
+  .hero-copy .tiny-label,
+  .power-help { display: none; }
+  .big-power { font-size: 29px; }
+
+  .exploration-dashboard {
+    flex-basis: 127px;
+    grid-template-columns: minmax(108px, 0.82fr) minmax(0, 1.18fr);
+  }
+
+  .exploration-dashboard .objective-card { min-height: 24px; padding: 1px 4px; }
+  .exploration-dashboard .objective-icon { width: 18px; }
+  .exploration-dashboard .objective-card > div { min-width: 0; overflow: hidden; }
+  .exploration-dashboard .objective-card strong {
+    overflow: hidden;
+    font-size: 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .exploration-dashboard .rescue-card { min-height: 50px; }
+  .exploration-dashboard .rescue-heading { min-height: 11px; }
+  .exploration-dashboard .rescue-heading .tiny-label { display: none; }
+  .exploration-dashboard .rescue-list { margin-top: 1px; }
+  .exploration-dashboard .rescue-friend { height: 28px; aspect-ratio: auto; }
+  .exploration-dashboard .rescue-icon { width: min(100%, 28px); }
+  .exploration-dashboard .bag-card { min-height: 47px; padding: 2px 4px; }
+  .exploration-dashboard .section-heading { min-height: 10px; }
+  .exploration-dashboard .section-heading strong { font-size: 7px; }
+  .exploration-dashboard .inventory-grid { grid-template-columns: repeat(5, 26px); }
+  .exploration-dashboard .inventory-slot { width: 26px; }
+  .exploration-dashboard .owned-collection { display: none; }
+  .maze-minimap { width: min(100%, 96px); }
+
+  .controls-card {
+    min-height: 92px;
+    padding: 0 4px;
+    grid-template-columns: minmax(0, 1fr) 132px;
+  }
+
+  .dpad {
+    width: 132px;
+    height: 88px;
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(2, 44px);
+    gap: 0;
+  }
+
+  .dpad button {
+    width: 44px;
+    min-height: 44px;
+  }
+
+  .dpad-center { display: none; }
+  .dpad-up { grid-column: 2; grid-row: 1; }
+  .dpad-left { grid-column: 1; grid-row: 2; }
+  .dpad-right { grid-column: 3; grid-row: 2; }
+  .dpad-down { grid-column: 2; grid-row: 2; }
+}
+
+@media (orientation: landscape) and (max-height: 600px) and (max-width: 700px) {
+  .level-dots { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

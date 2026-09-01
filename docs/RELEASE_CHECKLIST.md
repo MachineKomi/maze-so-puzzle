@@ -6,30 +6,33 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for web 0.6.0: automated verification, dependency audit, locked Tauri
+Status for web 0.7.0: automated verification, dependency audit, locked Tauri
 compile, and targeted production-browser checks are complete. Physical-iPad,
 listening, accessibility, and broad manual play-through items remain deliberately
 unclaimed. Sections 4 and 5 preserve the last verified Windows artifact record,
-which is version 0.5.1; no 0.6.0 executable or installer is claimed.
+which is version 0.5.1; no 0.7.0 executable or installer is claimed.
 
 ## 1. Prepare
 
-- [x] Confirm the intended 0.6.0 source version in `package.json`, `package-lock.json`,
+- [x] Confirm the intended 0.7.0 source version in `package.json`, `package-lock.json`,
   `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
-- [x] Confirm the 0.6.0 bundle contains continuous world-aligned SVG terrain,
-  rounded convex and concave joins, periodic v3 textures, flat connected hazard
-  lips, icon-led UI, sword-held Ame, and locally bundled OST files.
+- [x] Confirm the 0.7.0 bundle contains continuous world-aligned SVG terrain,
+  rounded convex and concave joins, periodic paired textures, flat connected hazard
+  lips, picture-first UI, a held-weapon overlay, and locally bundled OST files.
+- [x] Confirm the nine story mazes use nine distinct paired terrain themes, each
+  has exactly one weapon and three unique pets, and the full campaign covers five
+  weapons, five friendly enemy looks, eight species, and four cage styles.
 - [x] Confirm every maze larger than 7 tiles renders a 7 x 7 player-centred
   camera and persistent fog-of-war minimap without changing full-grid engine
   behaviour.
 - [x] Confirm the title-screen build label and exact `?debug=mazes` query expose
   the direct nine-maze tester picker, and tester completion cannot write rewards,
   records, unlocks, active sessions, or progress.
-- [x] Update `CHANGELOG.md`, `README.md`, architecture, deployment, privacy, and
-  audit documentation for the exploration build.
+- [x] Update `CHANGELOG.md`, `README.md`, architecture, audit, and release
+  documentation for the visual-variety build.
 - [ ] Confirm every production image has known provenance and the game contains
   no unlicensed third-party material.
 - [ ] Make the owner-approved licence decision before publishing source or
@@ -53,20 +56,27 @@ npm run check:desktop
 - [x] Dependency audit output is reviewed: zero known vulnerabilities.
 - [x] `npm ls` reports a clean JavaScript dependency tree.
 - [x] `npm run check:desktop` completes `cargo check --locked` without errors.
-- [ ] A future 0.6.x Windows release separately runs `npm run desktop:build` and
+- [ ] A future 0.7.x Windows release separately runs `npm run desktop:build` and
   verifies both the release executable and NSIS installer before sharing them.
 - [x] Automated level checks validate all nine story mazes: the first eight from
   9 x 9 through 17 x 17 plus the 25 x 25 Lanternlight Labyrinth, with separate
-  ordinary and all-three-rescues solutions.
+  ordinary and all-three-rescues solutions, one weapon, and three unique known
+  pet species in every maze.
+- [x] Authored-level checks preserve Wishing Woods' 108-step ordinary route and
+  validate the optional Power 9 pebble-golem route: Power 2, `+2` potion, Power
+  5, backtrack at Power 11, then rescue the guarded kitten.
+- [x] Generator checks prove repeated seeds reproduce terrain, weapon, enemy,
+  and cage variants without perturbing layout or progression determinism.
 - [x] Focused exploration tests cover a centred 7 x 7 window, edge clamping,
   current field of view, and persistent reveal accumulation; the production
   browser pass confirms reveal reset on level switch.
 - [ ] Add focused controller automation for buffered turns, deterministic holds,
   modifier safety, focus/visibility cleanup, D-pad press-and-hold, and pointer
   cancellation. The previous 0.4.0 pass manually confirmed synchronous keyboard
-  movement and exactly one move per D-pad tap; repeat that check for 0.5.1.
+  movement and exactly one move per D-pad tap; repeat that check for the 0.7.0
+  production web build and any future desktop package.
 - [x] Repeat the relevant checks after final source changes (`npm run check`:
-  145 of 145 tests plus the production build).
+  164 of 164 tests plus the production build).
 
 ## 3. Browser play test
 
@@ -92,7 +102,7 @@ npm run preview
   a different maze after moving opens a confirmation and keyboard input cannot
   move Ame behind it.
 - [ ] The Adventure Book scrolls internally without page overflow and accurately
-  shows overall totals, bunny/fox/kitten counts, sticker/medal/badge ownership,
+  shows overall totals, all eight pet-species counts, sticker/medal/badge ownership,
   locked story levels, cleared levels, best steps, and rescue pips.
 - [ ] Arrow keys and WASD respond immediately and each move one legal square.
 - [ ] Left click or primary tap moves one square toward the pointer; right and
@@ -117,8 +127,11 @@ npm run preview
   The exact `?debug=mazes` query opens it automatically, while other query values
   do not. It lists every authored maze, bypasses locks, labels previews clearly,
   and leaves saved progress unchanged.
-- [x] All three animals are optional for the ordinary exit and jointly rescuable
+- [x] All three pets are optional for the ordinary exit and jointly rescuable
   for the perfect reward.
+- [ ] Sample every story theme and generated variant on the production URL:
+  paired materials tile cleanly, enemy/pet/cage art matches the UI, inventory is
+  picture-led, and Ame holds the level's selected weapon after collection.
 - [ ] Loss resets the exact level cleanly without duplicating rewards.
 - [ ] Existing schema-v1 and schema-v2 saves migrate safely to schema v3,
   malformed data fails gently, and unknown historical species/source facts are
@@ -159,7 +172,7 @@ For the last verified Windows artifact set, `VERSION` resolves to `0.5.1`.
 - [x] Confirm the staged names are `Maze-so-Puzzle-0.5.1-portable.exe` and
   `Maze-so-Puzzle-0.5.1-setup.exe`.
 - [x] Keep the Windows artifacts clearly identified as the last verified 0.5.1
-  desktop build; never present them as the current 0.6.0 web build.
+  desktop build; never present them as the current 0.7.0 web build.
 - [x] Generate final SHA-256 values after all copying (the current test build is unsigned):
 
 ```powershell

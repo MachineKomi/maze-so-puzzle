@@ -222,3 +222,68 @@ from the prior AI-generated `water.png` and `lava.png` sources, using the same
 512-pixel working tile and 256-colour, no-dither optimization. The SVG renderer
 joins neighbouring hazard cells before applying these patterns, so the runtime
 art needs no per-tile shore, rounded box, blur, or drop shadow.
+
+## Version 7 themed maze collection
+
+Build 0.7.0 adds a coordinated material and sprite collection generated with
+the built-in ImageGen workflow. All masters are archived under
+`docs/source-assets/`; runtime copies live under `public/assets/`. The visual
+brief throughout was: lovely soft-pastel, chunky anime fantasy RPG art with the
+friendly clarity of a children's storybook or handheld JRPG, no text, no
+watermark, and a strong silhouette at one-square maze-tile size.
+
+### Floor and wall materials
+
+| Runtime asset | Concise generation prompt |
+|---|---|
+| `floor-rose-brick-v1.png` | Uniform top-down rose, peach, and cream storybook brick paving; small quiet masonry; edge-to-edge with no border, perspective, shadow, scenery, or maze diagram. |
+| `floor-moon-slate-v1.png` | Uniform top-down powder-blue and moon-lilac slate cobbles; softly varied small pavers; edge-to-edge and quiet behind sprites. |
+| `floor-meadow-grass-v1.png` | Uniform top-down spring-green meadow turf with tiny pastel flowers and leaves; fine repeatable detail rather than large clumps or a landscape. |
+| `floor-woodland-dirt-v1.png` | Uniform top-down warm biscuit-brown woodland dirt path with tiny pebbles and subtle leaf flecks; no path boundary or scenery. |
+| `wall-sandstone-v1.png` | Uniform top-down clean honey-cream sandstone brickwork; rounded small blocks with soft pastel grout; no wall silhouette or maze picture. |
+| `wall-dark-dungeon-v1.png` | Uniform top-down old midnight-plum dungeon masonry; readable small blocks, gently softened for a child-friendly game. |
+| `wall-hedge-v1.png` | Uniform top-down dense storybook hedge foliage with tiny mint leaves and sparse pastel flowers; no hedge outline or scenery. |
+| `wall-mossy-ruin-v1.png` | Uniform top-down pale sage ruin stonework with moss between small blocks; soft, friendly, and seamless-looking. |
+
+The generated 1254 × 1254 masters were downsampled to a 512 × 512 working
+tile, mirrored into a 2 × 2 1024 × 1024 exact-periodic composition, and
+quantized to a 256-colour palette without dithering. This was a downsample and
+periodic composition only—no upscaling was applied. Opposite runtime edges were
+verified byte-for-byte, and all textures are fully opaque.
+
+### Weapons and friendly opponents
+
+| Runtime asset | Concise generation prompt |
+|---|---|
+| `weapon-flower-sabre-v1.png` | One elegant toy-like silver flower sabre with pink blossoms and ribbon, diagonal, centered, transparent, no character or scenery. |
+| `weapon-moon-wand-v1.png` | One crescent-moon crystal wand with stars and lavender ribbons, diagonal, centered, transparent, magical but not dangerous. |
+| `weapon-leaf-blade-v1.png` | One glossy leaf-shaped green fantasy blade with curled storybook hilt and jewel, diagonal, centered, transparent. |
+| `weapon-sun-mallet-v1.png` | One chunky golden sun mallet with coral handle and lavender bow, centered on transparency, cheerful and toy-like. |
+| `enemy-blueberry-slime-v1.png` | One smiling blueberry-blue slime with leafy sprout, bright eyes, full-body tile sprite on transparency. |
+| `enemy-mushroom-imp-v1.png` | One tiny cheerful mushroom child with red spotted cap and little twig, full-body tile sprite on transparency. |
+| `enemy-moon-bat-v1.png` | One fluffy lavender moon bat with starry wings and friendly expression, full-body tile sprite on transparency. |
+| `enemy-pebble-golem-v1.png` | One sturdy but sweet flower-covered pebble golem, readable as a friendly mini-boss, full-body tile sprite on transparency. |
+
+Each master is 1254 × 1254. Runtime sprites are 512 × 512 RGBA PNGs produced by
+high-quality downsampling and centering on a transparent square canvas. No
+upscaling was used.
+
+### New animal friends and cages
+
+| Runtime asset | Concise generation prompt |
+|---|---|
+| `animal-puppy-v1.png` | One golden floppy-eared puppy with a lilac neckerchief, seated and smiling on transparency. |
+| `animal-duckling-v1.png` | One fluffy yellow duckling with a mint bow, standing happily on transparency. |
+| `animal-hedgehog-v1.png` | One round baby hedgehog with a tiny flower, seated with visible paws on transparency. |
+| `animal-fawn-v1.png` | One gentle spotted baby fawn with a mint flower collar, seated on transparency. |
+| `animal-red-panda-v1.png` | One fluffy baby red panda with a sky-blue bow, seated with curled striped tail on transparency. |
+| `cage-storybook-wood-v1.png` | One empty rounded warm-wood-and-gold storybook rescue cage with visible interior, heart details, and transparent background. |
+| `cage-moon-silver-v1.png` | One empty domed moon-silver rescue cage with crescent, star, and crystal details, visible interior, transparent background. |
+| `cage-garden-vine-v1.png` | One empty rounded garden-vine cage with leaves, tiny flowers, heart latch, visible interior, transparent background. |
+
+These also use 1254 × 1254 generation masters and 512 × 512 downsampled RGBA
+runtime sprites with transparent corners and full alpha range. The three cage
+masters came from built-in generations
+`exec-223814d2-b544-429d-9cb1-dc6f749755b5.png`,
+`exec-7a007e9c-1264-4bcb-8a7b-3d0d45db8ab7.png`, and
+`exec-514e2d47-2993-44f2-a1ac-9bcea20d111d.png` respectively.
