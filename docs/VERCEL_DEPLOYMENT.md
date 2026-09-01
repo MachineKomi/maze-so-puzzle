@@ -108,12 +108,12 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. On 2026-09-01 the canonical alias served playable build 0.8.0: the
-normal build-label button and exact debug query opened the nine-maze picker, and
-the 1024 x 768 plus 844 x 390 production layouts passed the initial responsive
-smoke. That is retained as historical evidence only. Promoting and smoke-testing
-the 0.9.0 ten-maze build on the canonical alias remains pending until the final
-verified commit is pushed. The broader physical-device and manual matrix above
-also remains required.
+secrets. On 2026-09-01 release commit `00ab61e` was pushed to GitHub `main` and
+the canonical alias promoted playable build 0.9.0. The normal build-label button
+and exact debug query opened the ten-maze picker; Springstep Sky Hollow opened as
+a 19 x 19 maze with a 6 x 6 view. Canonical 1024 x 768, 667 x 375, and 390 x 844
+portrait checks had exact viewport-sized documents and no overflow; the new
+Spring Boots and ground-hole PNGs returned HTTP 200, and browser logs were clear.
+The broader physical-device and manual matrix above remains required.
 Executable artifacts remain intentionally excluded from Git and Vercel
 deployment.

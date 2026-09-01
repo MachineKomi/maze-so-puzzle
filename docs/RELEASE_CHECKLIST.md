@@ -10,8 +10,8 @@ Status for 0.9.0: 204 tests across 15 files and the strict TypeScript/Vite build
 pass. Source metadata and new-art provenance are aligned. The dependency
 audit/tree, locked Tauri compile, Windows packaging/source comparison/hash/smoke
 launch, the complete core local responsive matrix, two-hole jump, and win/loss
-combat presentation checks pass. GitHub push, canonical-Vercel promotion, and
-production smoke remain pending.
+combat presentation checks pass. GitHub `main` contains release commit
+`00ab61e`, and the canonical Vercel promotion and initial production smoke pass.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed. The
 completed 0.8.0 artifact evidence below is retained as a historical baseline.
@@ -51,8 +51,7 @@ completed 0.8.0 artifact evidence below is retained as a historical baseline.
   the direct ten-maze tester picker, and tester completion cannot write rewards,
   records, unlocks, active sessions, or progress.
 - [x] Update `README.md`, architecture, music, asset, privacy, audit, release, and
-  Vercel documentation for the 0.9.0 candidate without marking pending release
-  gates complete.
+  Vercel documentation for 0.9.0 while leaving unfinished release gates clear.
 - [x] Archive the built-in ImageGen Spring Boots and ground-hole masters, retain
   their prompt records, and validate/downsample transparent runtime copies with
   `scripts/process_traversal_assets.py`.
@@ -119,27 +118,29 @@ Test the production preview, not only the development server:
 npm run preview
 ```
 
-Historical production smoke record (2026-09-01): the canonical URL served
-playable build 0.8.0 from GitHub `main`; its build label and exact debug query
-opened the nine-maze picker, and 1024 x 768 plus 844 x 390 layouts passed. The
-0.9.0 canonical deployment and public smoke are still pending. A local 0.9.0
-preview opened the ten-maze picker and passed the complete core matrix below
-without page overflow, maze/sidebar overlap, or a non-square board.
+Production smoke record (2026-09-01): the canonical URL serves playable build
+0.9.0 from GitHub `main`. Its build-label button and exact debug query open the
+ten-maze picker; Springstep Sky Hollow opens as a 19 x 19 tester level with a
+6 x 6 camera and fog minimap. At 1024 x 768 the public board is 534 px square,
+and at 667 x 375 it is 347 px square with 44 px movement controls. Both have
+exact viewport-sized documents, no overflow, and no browser log errors. The two
+new traversal PNGs return HTTP 200. The complete core matrix also passes locally.
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
 - [x] 667 x 375 and 844 x 390: the phone stage, safe viewport, page overflow,
-  board overlap, and minimum-control layout checks pass locally for 0.9.0.
+  board overlap, and minimum-control layout checks pass locally for 0.9.0;
+  667 x 375 also passes against the canonical deployment.
 - [x] 740 x 360: the same phone-layout checks pass locally.
-- [x] 1024 x 768 local 0.9.0 preview: the iPad-size layout uses a 534 px board
-  with no page overflow, sidebar overlap, or maze/control overlap. Repeat this
-  check against the canonical deployment.
+- [x] 1024 x 768 local and canonical 0.9.0: the iPad-size layout uses a 534 px
+  board with no page overflow, sidebar overlap, or maze/control overlap.
 - [x] 1180 x 820: the same iPad-size layout checks pass locally.
 - [x] 1366 x 768 and 1920 x 1080: the board remains square and the layout has no
   page overflow; production-art sampling remains part of the public smoke.
 - [ ] Big Maze expands the board, keeps its compact Power/item/rescue HUD and
   feedback toast readable, and returns to the full UI with Escape or Normal.
-- [x] Portrait at 390 x 844: the turn-sideways guidance appears and is readable.
+- [x] Portrait at 390 x 844: the turn-sideways guidance appears and is readable
+  locally and on the canonical deployment.
 - [ ] 200% zoom or increased text scaling does not hide required actions.
 - [ ] The title screen loads without a blank flash, presents clear primary focus,
   and exposes Continue/Begin Adventure, Adventure Book, Surprise Maze, and sound.
@@ -181,10 +182,11 @@ without page overflow, maze/sidebar overlap, or a non-square board.
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [ ] On the 0.9.0 canonical URL, the discreet build-label button opens the direct picker.
-  The exact `?debug=mazes` query opens it automatically, while other query values
-  do not. It lists every authored maze, bypasses locks, labels previews clearly,
-  and leaves saved progress unchanged.
+- [x] On the 0.9.0 canonical URL, the discreet build-label button opens the direct
+  picker. The exact `?debug=mazes` query opens it automatically, another query
+  does not, and all ten authored mazes are listed with tester-preview labels.
+- [ ] Complete a canonical tester run and reconfirm that rewards, records,
+  unlocks, active-run recovery, and progress stay unchanged.
 - [ ] All three pets are optional for the ordinary exit and jointly rescuable
   for the perfect reward.
 - [ ] Sample every story theme and generated variant on the production URL:
