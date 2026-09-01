@@ -6,25 +6,28 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.5.1: automated verification, targeted production-browser checks,
-Tauri packaging, staging, hash comparison, and the portable smoke launch are
-complete. Unchecked clean-machine, device, listening, signing, and broad manual
-items below remain deliberately unclaimed.
+Status for web 0.6.0: automated verification, dependency audit, locked Tauri
+compile, and targeted production-browser checks are complete. Physical-iPad,
+listening, accessibility, and broad manual play-through items remain deliberately
+unclaimed. Sections 4 and 5 preserve the last verified Windows artifact record,
+which is version 0.5.1; no 0.6.0 executable or installer is claimed.
 
 ## 1. Prepare
 
-- [x] Confirm the intended 0.5.1 version in `package.json`, `package-lock.json`,
+- [x] Confirm the intended 0.6.0 source version in `package.json`, `package-lock.json`,
   `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
-- [x] Confirm the 0.5.1 bundle contains the tiled terrain treatment, rounded inner
-  wall joins, icon-led rescue/inventory UI, sword-held Ame sprite, and locally
-  bundled OST files documented for this build.
-- [x] Confirm Lanternlight Labyrinth renders a 7 x 7 player-centred camera and a
-  persistent fog-of-war minimap without changing full-grid engine behaviour.
-- [x] Confirm `?debug=mazes` is the only query that exposes tester controls and
-  that preview completion cannot write rewards, records, unlocks, or progress.
+- [x] Confirm the 0.6.0 bundle contains continuous world-aligned SVG terrain,
+  rounded convex and concave joins, periodic v3 textures, flat connected hazard
+  lips, icon-led UI, sword-held Ame, and locally bundled OST files.
+- [x] Confirm every maze larger than 7 tiles renders a 7 x 7 player-centred
+  camera and persistent fog-of-war minimap without changing full-grid engine
+  behaviour.
+- [x] Confirm the title-screen build label and exact `?debug=mazes` query expose
+  the direct nine-maze tester picker, and tester completion cannot write rewards,
+  records, unlocks, active sessions, or progress.
 - [x] Update `CHANGELOG.md`, `README.md`, architecture, deployment, privacy, and
   audit documentation for the exploration build.
 - [ ] Confirm every production image has known provenance and the game contains
@@ -43,7 +46,6 @@ Run each command from the project root in PowerShell:
 npm run check
 npm audit
 npm run check:desktop
-npm run desktop:build
 ```
 
 - [x] `npm run check` reports that the complete unit suite passes and that
@@ -51,7 +53,8 @@ npm run desktop:build
 - [x] Dependency audit output is reviewed: zero known vulnerabilities.
 - [x] `npm ls` reports a clean JavaScript dependency tree.
 - [x] `npm run check:desktop` completes `cargo check --locked` without errors.
-- [x] Tauri produces both the release executable and the NSIS installer.
+- [ ] A future 0.6.x Windows release separately runs `npm run desktop:build` and
+  verifies both the release executable and NSIS installer before sharing them.
 - [x] Automated level checks validate all nine story mazes: the first eight from
   9 x 9 through 17 x 17 plus the 25 x 25 Lanternlight Labyrinth, with separate
   ordinary and all-three-rescues solutions.
@@ -63,7 +66,7 @@ npm run desktop:build
   cancellation. The previous 0.4.0 pass manually confirmed synchronous keyboard
   movement and exactly one move per D-pad tap; repeat that check for 0.5.1.
 - [x] Repeat the relevant checks after final source changes (`npm run check`:
-  122 of 122 tests plus the production build).
+  145 of 145 tests plus the production build).
 
 ## 3. Browser play test
 
@@ -105,13 +108,15 @@ npm run preview
   title, early story, later story, and surprise mazes.
 - [ ] All nine story levels can be completed manually; also complete several
   surprise mazes and compare observed routes with the validated solver results.
-- [x] In Lanternlight Labyrinth, the main view stays 7 x 7, follows Ame without
-  exposing off-camera objects, clamps cleanly at map edges, and remains readable.
+- [x] In both an early 9 x 9 maze and later large mazes, the main view stays
+  7 x 7, follows Ame without exposing off-camera objects, clamps cleanly at map
+  edges, and remains readable.
 - [x] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [x] Without a query there is no tester control in the DOM. With the exact
-  `?debug=mazes` query, the control cycles and wraps through every authored maze,
-  bypasses locks, labels previews clearly, and leaves saved progress unchanged.
+- [x] On the normal URL, the discreet build-label button opens the direct picker.
+  The exact `?debug=mazes` query opens it automatically, while other query values
+  do not. It lists every authored maze, bypasses locks, labels previews clearly,
+  and leaves saved progress unchanged.
 - [x] All three animals are optional for the ordinary exit and jointly rescuable
   for the perfect reward.
 - [ ] Loss resets the exact level cleanly without duplicating rewards.
@@ -124,7 +129,7 @@ npm run preview
 - [ ] Each of the nine stat-driven badges unlocks at its documented threshold and
   new rewards appear once without duplicate fanfare.
 
-## 4. Windows artifact test
+## 4. Historical Windows 0.5.1 artifact test
 
 Expected build outputs:
 
@@ -132,7 +137,7 @@ Expected build outputs:
 - `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
   Solve!_VERSION_x64-setup.exe`
 
-For this release, `VERSION` must resolve to `0.5.1`.
+For the last verified Windows artifact set, `VERSION` resolves to `0.5.1`.
 
 - [x] A hidden five-second launch of the staged portable executable remains
   running and responsive and exposes the correct game window title.
@@ -147,14 +152,14 @@ For this release, `VERSION` must resolve to `0.5.1`.
 - [ ] Sign the executable and installer for public distribution, then test the
   signed files again. If unsigned, label them clearly.
 
-## 5. Stage and verify release copies
+## 5. Historical Windows 0.5.1 staging record
 
 - [x] Copy only artifacts from the final successful build into `release/` using
   versioned filenames.
 - [x] Confirm the staged names are `Maze-so-Puzzle-0.5.1-portable.exe` and
   `Maze-so-Puzzle-0.5.1-setup.exe`.
-- [x] Keep older artifacts clearly identified as archives, or move them to the
-  chosen archive location; never present them as the current build.
+- [x] Keep the Windows artifacts clearly identified as the last verified 0.5.1
+  desktop build; never present them as the current 0.6.0 web build.
 - [x] Generate final SHA-256 values after all copying (the current test build is unsigned):
 
 ```powershell

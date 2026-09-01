@@ -26,11 +26,13 @@ import {
 } from "./game/engine";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
 import { CURATED_LEVELS } from "./game/levels";
+import { createRoundedTerrainPath } from "./game/terrainGeometry";
 import {
   DEFAULT_FOV_SIZE,
   getCameraWindow,
   getVisibleTileKeys,
   revealVisibleTiles,
+  shouldUseExplorationView,
   toTileKey,
   type CameraWindow,
   type TileKey,
@@ -97,7 +99,7 @@ const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const HELD_KEY_DELAY_MS = 105;
 const HELD_KEY_REPEAT_MS = 64;
-const BUILD_VERSION = "0.5.1";
+const BUILD_VERSION = "0.6.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -273,49 +275,8 @@ function classForObject(object: LevelObject): string {
   return `maze-object object-${object.kind}${color}`;
 }
 
-function isWall(level: LevelDefinition, x: number, y: number): boolean {
-  if (x < 0 || y < 0 || x >= level.width || y >= level.height) return true;
-  return level.terrain[y]?.[x] === "wall";
-}
-
-function wallCornerClasses(level: LevelDefinition, x: number, y: number): string {
-  if (!isWall(level, x, y)) return "";
-  const up = isWall(level, x, y - 1);
-  const down = isWall(level, x, y + 1);
-  const left = isWall(level, x - 1, y);
-  const right = isWall(level, x + 1, y);
-  const upLeft = isWall(level, x - 1, y - 1);
-  const upRight = isWall(level, x + 1, y - 1);
-  const downLeft = isWall(level, x - 1, y + 1);
-  const downRight = isWall(level, x + 1, y + 1);
-  return [
-    !up && !left ? "wall-round-tl" : "",
-    !up && !right ? "wall-round-tr" : "",
-    !down && !left ? "wall-round-bl" : "",
-    !down && !right ? "wall-round-br" : "",
-    up && left && !upLeft ? "wall-inner-tl" : "",
-    up && right && !upRight ? "wall-inner-tr" : "",
-    down && left && !downLeft ? "wall-inner-bl" : "",
-    down && right && !downRight ? "wall-inner-br" : "",
-  ].filter(Boolean).join(" ");
-}
-
-function innerWallCaps(level: LevelDefinition, x: number, y: number): readonly string[] {
-  if (isWall(level, x, y)) return [];
-  const up = isWall(level, x, y - 1);
-  const down = isWall(level, x, y + 1);
-  const left = isWall(level, x - 1, y);
-  const right = isWall(level, x + 1, y);
-  return [
-    up && left && isWall(level, x - 1, y - 1) ? "tl" : "",
-    up && right && isWall(level, x + 1, y - 1) ? "tr" : "",
-    down && left && isWall(level, x - 1, y + 1) ? "bl" : "",
-    down && right && isWall(level, x + 1, y + 1) ? "br" : "",
-  ].filter(Boolean);
-}
-
 function isExplorationLevel(level: LevelDefinition): boolean {
-  return level.introducedMechanics?.includes("exploration-map") ?? false;
+  return shouldUseExplorationView(level);
 }
 
 function fullLevelWindow(level: LevelDefinition): CameraWindow {
@@ -357,34 +318,45 @@ const MazeTerrain = memo(function MazeTerrain({
   readonly level: LevelDefinition;
   readonly camera: CameraWindow;
 }) {
-  const tiles = [];
-  for (let y = camera.top; y <= camera.bottom; y += 1) {
-    for (let x = camera.left; x <= camera.right; x += 1) {
-      const terrain = level.terrain[y]?.[x];
-      if (!terrain) continue;
-      const point = { x, y };
-      const isExit = pointsEqual(level.exit, point);
-      const corners = wallCornerClasses(level, x, y);
-      const caps = innerWallCaps(level, x, y);
-      tiles.push(
-        <div
-          key={keyFor(point)}
-          className={`maze-tile terrain-${terrain}${corners ? ` ${corners}` : ""}${isExit ? " exit-tile" : ""}`}
-          style={{
-            "--texture-x-2": `${(x % 2) * 100}%`,
-            "--texture-y-2": `${(y % 2) * 100}%`,
-            "--texture-x-3": `${(x % 3) * 50}%`,
-            "--texture-y-3": `${(y % 3) * 50}%`,
-          } as CSSProperties}
-          aria-hidden="true"
-        >
-          {caps.map((corner) => <span key={corner} className={`inner-wall-cap cap-${corner}`} />)}
-          {isExit && <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />}
+  const walls = createRoundedTerrainPath(level, camera, "wall", 0.13);
+  const water = createRoundedTerrainPath(level, camera, "water", 0.16);
+  const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
+
+  return (
+    <>
+      <svg
+        className="maze-terrain-svg"
+        viewBox={`${camera.left} ${camera.top} ${camera.width} ${camera.height}`}
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern id="maze-floor-pattern" patternUnits="userSpaceOnUse" width="5.2" height="5.2">
+            <image href={ASSETS.floor} x="0" y="0" width="5.2" height="5.2" preserveAspectRatio="none" />
+          </pattern>
+          <pattern id="maze-wall-pattern" patternUnits="userSpaceOnUse" width="5.2" height="5.2">
+            <image href={ASSETS.wall} x="0" y="0" width="5.2" height="5.2" preserveAspectRatio="none" />
+          </pattern>
+          <pattern id="maze-water-pattern" patternUnits="userSpaceOnUse" width="4.6" height="4.6">
+            <image href={ASSETS.water} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
+          </pattern>
+          <pattern id="maze-lava-pattern" patternUnits="userSpaceOnUse" width="4.6" height="4.6">
+            <image href={ASSETS.lava} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
+          </pattern>
+        </defs>
+
+        <rect x={camera.left} y={camera.top} width={camera.width} height={camera.height} fill="url(#maze-floor-pattern)" />
+        {water.d && <path d={water.d} fill="url(#maze-water-pattern)" fillRule={water.fillRule} stroke="#edc875" strokeWidth="0.11" strokeLinejoin="round" />}
+        {lava.d && <path d={lava.d} fill="url(#maze-lava-pattern)" fillRule={lava.fillRule} stroke="#efbf70" strokeWidth="0.11" strokeLinejoin="round" />}
+        {walls.d && <path d={walls.d} fill="url(#maze-wall-pattern)" fillRule={walls.fillRule} />}
+      </svg>
+      {isInsideWindow(level.exit, camera) && (
+        <div className="goal-layer" style={cameraLayerStyle(level.exit, camera)} aria-hidden="true">
+          <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />
         </div>
-      );
-    }
-  }
-  return tiles;
+      )}
+    </>
+  );
 });
 
 interface MiniMapProps {
@@ -513,12 +485,20 @@ function App() {
   const [screen, setScreen] = useState<AppScreen>("title");
   const [hasActiveRun, setHasActiveRun] = useState(initialRun !== null);
   const [pendingAdventure, setPendingAdventure] = useState<PendingAdventure | null>(null);
+  const [testerPickerOpen, setTesterPickerOpen] = useState(debugMazeQueryEnabled);
   const [bigMaze, setBigMaze] = useState(false);
   const [level, setLevel] = useState<LevelDefinition>(initialLevel);
   const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
   const [runMode, setRunMode] = useState<RunMode>("normal");
   const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(
-    () => new Set(initialRun?.revealedTiles ?? []),
+    () => isExplorationLevel(initialLevel)
+      ? revealVisibleTiles(
+        initialRun?.revealedTiles ?? [],
+        initialLevel,
+        initialRun?.game.position ?? initialLevel.start,
+        DEFAULT_FOV_SIZE,
+      )
+      : new Set(),
   );
   const [feedback, setFeedback] = useState<Feedback>({
     icon: "✨",
@@ -553,12 +533,13 @@ function App() {
   const titlePlayRef = useRef<HTMLButtonElement>(null);
   const achievementsHeadingRef = useRef<HTMLHeadingElement>(null);
   const mutedRef = useRef(muted);
-  const testerToolsEnabled = useMemo(debugMazeQueryEnabled, []);
+  const [testerToolsRequested] = useState(debugMazeQueryEnabled);
 
   const campaignIndex = CURATED_LEVELS.findIndex((candidate) => candidate.id === level.id);
   const isSurprise = campaignIndex === -1;
   const explorationMode = isExplorationLevel(level);
   const testerRun = runMode === "tester";
+  const testerToolsEnabled = testerToolsRequested || testerRun;
   const inferredUnlocked = CURATED_LEVELS.reduce((highest, candidate, index) => (
     progress.bestResultsByLevel[candidate.id]
       ? Math.max(highest, index + 2)
@@ -603,7 +584,8 @@ function App() {
   );
   const mazeStatus = useMemo(() => describeMazePosition(level, game), [game, level]);
   const runInProgress = hasActiveRun && game.status === "playing";
-  const modalOpen = pendingAdventure !== null
+  const modalOpen = testerPickerOpen
+    || pendingAdventure !== null
     || (screen === "game" && (helpOpen || game.status !== "playing"));
 
   useEffect(() => {
@@ -692,6 +674,7 @@ function App() {
     const unavailable = (
       screen !== "game"
       || pendingAdventure !== null
+      || testerPickerOpen
       || helpOpen
       || game.status !== "playing"
     );
@@ -806,7 +789,7 @@ function App() {
       queuedDirection.current = null;
       if (nextDirection) attemptMoveRef.current(nextDirection);
     }, result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS);
-  }, [campaignIndex, explorationMode, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerRun]);
+  }, [campaignIndex, explorationMode, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerPickerOpen, testerRun]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -833,7 +816,7 @@ function App() {
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (pendingAdventure !== null) return;
+      if (pendingAdventure !== null || testerPickerOpen) return;
       if (
         event.key === "Escape"
         && screen === "game"
@@ -846,7 +829,7 @@ function App() {
         return;
       }
       const direction = directionForKey(event.key);
-      if (!direction || screen !== "game" || helpOpen || game.status !== "playing") return;
+      if (!direction || screen !== "game" || helpOpen || testerPickerOpen || game.status !== "playing") return;
       if (event.ctrlKey || event.metaKey || event.altKey) return;
       event.preventDefault();
       if (event.repeat) return;
@@ -884,13 +867,13 @@ function App() {
       window.removeEventListener("blur", clearHeldInput);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [bigMaze, clearHeldInput, game.status, helpOpen, pendingAdventure, screen]);
+  }, [bigMaze, clearHeldInput, game.status, helpOpen, pendingAdventure, screen, testerPickerOpen]);
 
   useEffect(() => {
-    if (screen !== "game" || helpOpen || pendingAdventure !== null || game.status !== "playing") {
+    if (screen !== "game" || helpOpen || testerPickerOpen || pendingAdventure !== null || game.status !== "playing") {
       clearHeldInput();
     }
-  }, [clearHeldInput, game.status, helpOpen, pendingAdventure, screen]);
+  }, [clearHeldInput, game.status, helpOpen, pendingAdventure, screen, testerPickerOpen]);
 
   useEffect(() => () => {
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
@@ -1020,6 +1003,30 @@ function App() {
     playSound("menu", muted);
   };
 
+  const openTesterPicker = () => {
+    modalReturnFocus.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+    setTesterPickerOpen(true);
+    playSound("menu", muted);
+  };
+
+  const closeTesterPicker = () => {
+    setTesterPickerOpen(false);
+    playSound("menu", muted);
+  };
+
+  const enterTesterLevel = (nextLevel: LevelDefinition) => {
+    setTesterPickerOpen(false);
+    enterLevel(nextLevel, "select", "tester");
+    setFeedback({
+      icon: "🛠️",
+      text: `Tester preview: ${nextLevel.name}. Rewards stay unchanged.`,
+      tone: "plain",
+      sound: "select",
+    });
+  };
+
   const toggleBigMaze = () => {
     setBigMaze((value) => !value);
     playSound("select", muted);
@@ -1057,6 +1064,7 @@ function App() {
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
     setHelpOpen(false);
+    setTesterPickerOpen(false);
     setBigMaze(false);
     setScreen("title");
     playSound("menu", muted);
@@ -1098,18 +1106,6 @@ function App() {
     }
   };
 
-  const enterDebugNextLevel = () => {
-    const nextIndex = campaignIndex >= 0 ? (campaignIndex + 1) % CURATED_LEVELS.length : 0;
-    const nextStoryLevel = CURATED_LEVELS[nextIndex]!;
-    enterLevel(nextStoryLevel, "select", "tester");
-    setFeedback({
-      icon: "🛠️",
-      text: `Tester preview: ${nextStoryLevel.name}. Rewards stay unchanged.`,
-      tone: "plain",
-      sound: "select",
-    });
-  };
-
   const firstMoveNudge = campaignIndex === 0
     && runMode === "normal"
     && game.status === "playing"
@@ -1141,12 +1137,13 @@ function App() {
           <TitleScreen
             progress={progress}
             activeRun={runInProgress ? { name: level.name, steps: game.steps } : null}
-            blocked={pendingAdventure !== null}
+            blocked={pendingAdventure !== null || testerPickerOpen}
             muted={muted}
             playRef={titlePlayRef}
             onPlay={runInProgress ? resumeRun : continueStory}
             onSurprise={() => requestEnterLevel(makeSurprise(), "title")}
             onAchievements={showAchievements}
+            onOpenTester={openTesterPicker}
             onToggleSound={toggleSound}
           />
         ) : screen === "achievements" ? (
@@ -1154,7 +1151,7 @@ function App() {
             progress={progress}
             unlocked={unlocked}
             activeRun={runInProgress ? { levelId: level.id, name: level.name, steps: game.steps } : null}
-            blocked={pendingAdventure !== null}
+            blocked={pendingAdventure !== null || testerPickerOpen}
             headingRef={achievementsHeadingRef}
             muted={muted}
             onHome={showTitle}
@@ -1194,10 +1191,10 @@ function App() {
                 {testerToolsEnabled && (
                   <button
                     className="tester-skip-button"
-                    onClick={enterDebugNextLevel}
-                    title="Tester preview: skip to the next authored maze without saving rewards or progress"
-                    aria-label={`Tester preview. Skip to the next story maze. Current maze ${campaignIndex >= 0 ? campaignIndex + 1 : "is a surprise"} of ${CURATED_LEVELS.length}. Rewards and progress are off.`}
-                  >🛠 <span>Test next</span></button>
+                    onClick={openTesterPicker}
+                    title="Open the tester maze picker"
+                    aria-label={`Open tester maze picker. Current maze ${campaignIndex >= 0 ? campaignIndex + 1 : "is a surprise"} of ${CURATED_LEVELS.length}. Tester rewards and progress are off.`}
+                  >🛠 <span>Pick maze</span></button>
                 )}
                 <button className="big-maze-button" aria-pressed={bigMaze} onClick={toggleBigMaze} title="Make the maze larger">{bigMaze ? "↙ Normal" : "⛶ Big maze"}</button>
                 <button className="surprise-button" onClick={() => requestEnterLevel(makeSurprise())} title="Make a new solvable maze">✦ New maze</button>
@@ -1511,6 +1508,36 @@ function App() {
           </>
         )}
 
+        {testerPickerOpen && (
+          <Modal
+            title="Tester maze picker"
+            onClose={closeTesterPicker}
+            returnFocus={modalReturnFocus.current}
+          >
+            <p className="modal-lead tester-picker-lead">
+              Jump straight to any story maze. Tester runs never save rewards, stars, or progress.
+            </p>
+            <div className="tester-level-grid" aria-label="Story mazes available for testing">
+              {CURATED_LEVELS.map((candidate, index) => (
+                <button
+                  key={candidate.id}
+                  className={candidate.id === level.id && testerRun ? "current" : ""}
+                  onClick={() => enterTesterLevel(candidate)}
+                  aria-label={`Test story maze ${index + 1}: ${candidate.name}, ${candidate.width} by ${candidate.height}`}
+                >
+                  <b>{index + 1}</b>
+                  <span>
+                    <strong>{candidate.name}</strong>
+                    <small>{candidate.width} × {candidate.height}{isExplorationLevel(candidate) ? " · 7 × 7 view" : ""}</small>
+                  </span>
+                  <i aria-hidden="true">→</i>
+                </button>
+              ))}
+            </div>
+            <button className="secondary-button tester-picker-close" onClick={closeTesterPicker}>Back to the adventure</button>
+          </Modal>
+        )}
+
         {pendingAdventure && (
           <Modal
             title="Start a different maze?"
@@ -1552,6 +1579,7 @@ interface TitleScreenProps {
   readonly onPlay: () => void;
   readonly onSurprise: () => void;
   readonly onAchievements: () => void;
+  readonly onOpenTester: () => void;
   readonly onToggleSound: () => void;
 }
 
@@ -1564,6 +1592,7 @@ function TitleScreen({
   onPlay,
   onSurprise,
   onAchievements,
+  onOpenTester,
   onToggleSound,
 }: TitleScreenProps) {
   const solvedIds = Object.keys(progress.bestResultsByLevel);
@@ -1631,7 +1660,12 @@ function TitleScreen({
         </div>
       </div>
 
-      <span className="title-version">Playable build {BUILD_VERSION}</span>
+      <button
+        className="title-version"
+        onClick={onOpenTester}
+        aria-label={`Playable build ${BUILD_VERSION}. Open the secret tester maze picker.`}
+        title="Secret tester maze picker"
+      >Playable build {BUILD_VERSION} <span aria-hidden="true">🛠</span></button>
     </section>
   );
 }

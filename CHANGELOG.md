@@ -4,6 +4,45 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.6.0 - 2026-09-01
+
+This web-first polish build makes the exploration presentation consistent,
+turns the hidden tester shortcut into a useful maze picker, and replaces the
+cell-by-cell terrain treatment with one continuous illustrated maze surface.
+
+### Added
+
+- A consistent camera rule: whenever either maze dimension exceeds 7 tiles, the
+  board shows a player-centred 7 x 7 field of view and a fog-of-war minimap that
+  remembers explored squares. The engine, objects, saves, and solver continue to
+  use full-level coordinates.
+- A secret direct-access tester picker. Click or tap the small build label on the
+  title screen, or use the exact `?debug=mazes` query, then choose any authored
+  maze without unlocking or solving the earlier ones. Tester runs remain
+  non-saving previews and cannot grant rewards, records, gold, or unlocks.
+- New AI-generated seamless v3 floor and wall materials with smaller-scale warm
+  limestone and lavender-blue fantasy cobblestones. Editable generation masters
+  remain under `docs/source-assets/`; optimized periodic runtime assets remain
+  under `public/assets/`.
+
+### Changed
+
+- Rebuilt maze terrain as globally aligned, world-coordinate SVG geometry. Wall,
+  floor, water, and lava textures continue smoothly across cell boundaries
+  instead of restarting inside every tile.
+- Replaced the separate wall-corner caps with connected terrain outlines that
+  follow both convex and concave bends. Connected water and lava cells now form
+  one rounded region with a restrained flat floor lip and no drop shadow.
+- Connected GitHub `main` to the production Vercel Hobby deployment at
+  `https://maze-so-puzzle.vercel.app/`; subsequent pushes to `main` deploy the
+  newest web build automatically after Vercel's build completes.
+
+### Desktop status
+
+- Version 0.6.0 is currently a web release. The unsigned downloadable Windows
+  executable and installer at version 0.5.1 remain the last verified desktop
+  artifacts until Tauri is rebuilt, packaged, smoke-tested, and re-hashed.
+
 ## 0.5.1 - 2026-09-01
 
 This child-first polish build makes the opening easier to understand, the long

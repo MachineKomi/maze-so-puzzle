@@ -11,6 +11,11 @@ export interface GridSize {
   readonly height: number;
 }
 
+/** Use the player-following camera whenever the full grid exceeds its view. */
+export function shouldUseExplorationView(grid: GridSize): boolean {
+  return grid.width > DEFAULT_FOV_SIZE || grid.height > DEFAULT_FOV_SIZE;
+}
+
 /**
  * An inclusive tile window. Width and height can be smaller than the requested
  * field of view only when the level itself is smaller along that axis.
@@ -125,4 +130,3 @@ export function revealVisibleTiles(
   }
   return next;
 }
-

@@ -1,8 +1,11 @@
 # AI art prompt set
 
-All artwork in `public/assets/` was generated for this project with the built-in
-OpenAI image-generation tool. Tile and interactive assets were prepared as
-512 × 512 PNGs; the wide title illustration has a 1672 × 941 PNG master and an
+All base artwork in `public/assets/` was generated for this project with the
+built-in OpenAI image-generation tool. Runtime resizing, chroma removal, WebP
+conversion, palette optimization, and exact-periodic mirror composition are
+programmatic derivatives of those generated sources. Early tile and interactive
+assets were prepared as 512 × 512 PNGs; the 0.6.0 periodic terrain textures are
+1024 × 1024 PNGs; the wide title illustration has a 1672 × 941 PNG master and an
 optimized WebP runtime derivative. Interactive assets were requested on a flat
 `#ff00ff` chroma-key background. Most early sprites arrived as clean RGBA
 cutouts. The sword-holding Ame variant needed the documented connected-edge
@@ -148,7 +151,7 @@ master and unused v1 floor/wall tiles are also archived under
 
 ## Version 2 environment, rescue, and reward art
 
-The feedback update added a second generated art pass. These PNGs use the same chunky anime storybook JRPG direction as the original set. Character, cage, currency, sticker, and medal art has a transparent background; the two environment textures are opaque seamless tiles. The active `floor` and `wall` entries in `src/assets.ts` now point to the v2 textures.
+The feedback update added a second generated art pass. These PNGs use the same chunky anime storybook JRPG direction as the original set. Character, cage, currency, sticker, and medal art has a transparent background; the two environment textures are opaque seamless tiles. The v2 floor and wall remain historical runtime sources; build 0.6.0 supersedes them with the v3 terrain materials documented below.
 
 | Project path | Concise generation prompt |
 |---|---|
@@ -164,4 +167,58 @@ The feedback update added a second generated art pass. These PNGs use the same c
 | `public/assets/reward-splash-sticker.png` | A joyful aqua water-drop sticker wearing tiny winged adventure boots, surrounded by friendly splashes and golden sparkles. |
 | `public/assets/reward-rescue-medal.png` | An ornate coral heart rescue medal with three colorful paw emblems, cream wings, mint-and-lilac ribbon, and celebratory gold trim. |
 
-At runtime these files are served from their matching `/assets/...` URLs and are all included by `preloadGameArt()`.
+At runtime these files are served from their matching `/assets/...` URLs. Art
+warming is level-scoped or deferred rather than loading the whole catalogue on
+the title screen.
+
+## Version 6 seamless terrain materials
+
+Build 0.6.0 replaces the large-slab v2 terrain with smaller-scale materials and
+renders them as globally aligned SVG `userSpaceOnUse` patterns. The SVG geometry
+owns the shape of walls and hazards; the generated bitmap supplies only the
+continuous illustrated material. This separation allows exact rounded convex
+and concave bends, connected water/lava regions, and a flat floor-colour hazard
+lip without baking borders, shadows, or maze shapes into the art.
+
+### Wall v3
+
+- Generated source: `exec-e2b61d30-91a2-4223-b4a4-097a8fd9c3ae.png`
+- Archived 1254 × 1254 master:
+  `docs/source-assets/wall-v3-master.png`
+- Optimized exact-periodic runtime texture: `public/assets/wall-v3.png`
+- Runtime URL: `/assets/wall-v3.png`
+
+Generation request:
+
+```text
+Use case: stylized-concept. Create one genuinely seamless, purely top-down square fantasy stone material for a children's maze game. Show roughly 10 to 14 small rounded cobblestones across the image, using lavender-blue and periwinkle stones, plum-purple mortar, tiny sparse moss accents, and soft diffuse lighting. Lovely polished hand-painted chunky anime fantasy RPG / storybook game art, friendly and readable behind small sprites. The image must tile perfectly on every edge and contain only a continuous stone material: no maze diagram, path, wall silhouette, frame, border, lip, cast shadow, perspective, giant slabs, characters, objects, text, or watermark.
+```
+
+### Floor v3
+
+- Generated source: `exec-4984c443-517f-43fa-833e-a67319dc18a4.png`
+- Archived 1254 × 1254 master:
+  `docs/source-assets/floor-v3-master.png`
+- Optimized exact-periodic runtime texture: `public/assets/floor-v3.png`
+- Runtime URL: `/assets/floor-v3.png`
+
+Generation request:
+
+```text
+Use case: stylized-concept. Create one genuinely seamless, purely top-down square fantasy floor material for a children's maze game. Show roughly 10 to 14 small softly rounded limestone pavers across the image, using buttercream, warm honey-gold, and pale apricot tones that harmonize clearly with lavender-blue walls. Lovely polished hand-painted chunky anime fantasy RPG / storybook game art, quiet enough for characters and items to remain readable, with soft diffuse lighting. The image must tile perfectly on every edge and contain only a continuous paving material: no maze diagram, path, wall, frame, border, lip, cast shadow, perspective, giant slabs, characters, objects, text, or watermark.
+```
+
+For each v3 material, the generated master was resized to a 512 × 512 working
+tile and mirrored into a 2 × 2 periodic composition. The resulting 1024 × 1024
+PNG was quantized to a 256-colour palette without dithering. This guarantees an
+exact matching edge period for the world-coordinate SVG pattern while retaining
+the AI-painted interior detail.
+
+### Periodic hazards
+
+`public/assets/water-v2.png` and `public/assets/lava-v2.png` are not new scene
+generations. They are 1024 × 1024 exact-periodic 2 × 2 mirror compositions made
+from the prior AI-generated `water.png` and `lava.png` sources, using the same
+512-pixel working tile and 256-colour, no-dither optimization. The SVG renderer
+joins neighbouring hazard cells before applying these patterns, so the runtime
+art needs no per-tile shore, rounded box, blur, or drop shadow.

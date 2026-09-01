@@ -5,10 +5,19 @@ import {
   getVisibleTileKeys,
   getVisibleTiles,
   revealVisibleTiles,
+  shouldUseExplorationView,
   toTileKey,
 } from "./exploration";
 
 describe("maze exploration", () => {
+  it("uses exploration view only when either grid dimension exceeds the field of view", () => {
+    expect(shouldUseExplorationView({ width: 7, height: 7 })).toBe(false);
+    expect(shouldUseExplorationView({ width: 6, height: 7 })).toBe(false);
+    expect(shouldUseExplorationView({ width: 8, height: 7 })).toBe(true);
+    expect(shouldUseExplorationView({ width: 7, height: 8 })).toBe(true);
+    expect(shouldUseExplorationView({ width: 9, height: 9 })).toBe(true);
+  });
+
   it("uses a centred 7 by 7 field of view in open space", () => {
     const grid = { width: 15, height: 11 };
     const camera = getCameraWindow(grid, { x: 7, y: 5 });

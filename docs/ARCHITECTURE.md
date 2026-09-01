@@ -9,23 +9,29 @@ state.
 
 1. `src/main.tsx` mounts the React application.
 2. `src/App.tsx` owns screen navigation and presents the title, Adventure Book,
-   maze board, side panel, dialogs, rewards, and accessibility descriptions.
+   maze board, side panel, dialogs, rewards, accessibility descriptions, and the
+   SVG terrain surface. Terrain patterns use global maze coordinates rather than
+   restarting inside each rendered cell.
 3. `src/game/engine.ts` applies one immutable movement or interaction step.
 4. Authored levels come from `src/game/levels.ts`; surprise levels come from the
    deterministic generator in `src/game/generator.ts`.
 5. `src/game/solver.ts` validates structural rules and searches the exact engine
    state space to prove both an ordinary solution and an all-animal solution.
-6. `src/game/exploration.ts` derives clamped camera windows and immutable reveal
-   sets. Large exploration levels render a 7 x 7 player-centred view while the
-   engine and solver continue to use full-level coordinates.
-7. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
+6. `src/game/exploration.ts` derives clamped camera windows, the shared camera
+   policy, and immutable reveal sets. Any level wider or taller than 7 tiles
+   renders a 7 x 7 player-centred view while the engine and solver continue to
+   use full-level coordinates.
+7. `src/game/terrainGeometry.ts` traces connected orthogonal cell unions into
+   rounded SVG paths in stable world coordinates, including holes, diagonal
+   contacts, and the camera gutter used by the renderer.
+8. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
    in browser `localStorage`.
-8. `src/session.ts` validates and stores a schema-v1 snapshot for an unfinished
+9. `src/session.ts` validates and stores a schema-v1 snapshot for an unfinished
    normal authored run, including exploration reveal state. It rejects tester,
    generated, corrupt, inconsistent, and completed states.
-9. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
+10. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
    Audio API; those effects require no recorded audio files.
-10. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
+11. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
@@ -39,12 +45,20 @@ state.
   synchronized between devices.
 - Camera coordinates affect presentation only. Movement, collision, combat,
   collection, and solving continue to operate in global level coordinates.
+- Terrain geometry is a connected cell union rendered through SVG. Globally
+  aligned `userSpaceOnUse` patterns keep the floor, wall, water, and lava art in
+  world coordinates as the camera moves. Boundary tracing resolves diagonal
+  touches deterministically, preserves holes, rounds convex and concave corners,
+  and includes a camera gutter so the viewport edge cannot invent a corner.
+- Water and lava use connected region outlines, a separate shallow floor-colour
+  lip, and no cast shadow. Their periodic textures remain aligned across joins.
 - The exploration minimap unions the current field of view with an immutable
   reveal set. Unvisited tiles remain masked; a new level starts a fresh map, and
   an unfinished authored run restores only a validated saved reveal set.
-- Tester mode exists only when the URL has the exact `debug=mazes` query value.
-  Tester-entered runs are marked as previews and must bypass all reward and
-  progress writes, even if the preview maze is completed.
+- The secret tester picker opens from the title screen's build label or
+  automatically when the URL has the exact `debug=mazes` query value.
+  Tester-entered runs are marked as previews and must bypass all reward,
+  active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
 - AI-generated source art and exact prompts are recorded in
@@ -54,9 +68,10 @@ state.
 ## Testing strategy
 
 The Vitest suite exercises movement, combat, items, hazards, authored and
-generated solvability, optional rescues, exploration-camera and reveal-set rules,
-persistence migrations, achievements, synthesized-sound and background-music
-safeguards, and protected navigation.
+generated solvability, optional rescues, exploration-camera activation and
+reveal-set rules, terrain boundary geometry, persistence migrations,
+achievements, synthesized-sound and background-music safeguards, and protected
+navigation.
 Every authored maze and sampled generated maze is run through the stateful
 solver. `npm run check` is the normal browser release gate; locked Cargo
 compilation and a Tauri bundle build are the additional Windows gates.
@@ -68,9 +83,12 @@ compilation and a Tauri bundle build are the additional Windows gates.
   same transition function.
 - Add story mazes to `CURATED_LEVELS`; structural and progression tests will
   reject unsolvable or incorrectly gated content.
-- Opt a story maze into the zoomed exploration presentation with its explicit
-  `exploration-map` mechanic marker. Do not infer camera mode from dimensions;
-  this keeps level size and presentation independently testable.
+- The zoomed exploration presentation is a dimension rule, not an authored-level
+  flag: if either dimension exceeds `DEFAULT_FOV_SIZE` (currently 7), use the
+  camera and minimap. Change that shared rule and its boundary tests together.
+- Add a terrain kind by extending the engine union and supplying its connected
+  SVG fill, boundary treatment, and globally aligned periodic pattern. Do not
+  reintroduce independently textured or rounded DOM cells.
 - Add generated-maze rules through deterministic placement phases followed by
   ordinary and perfect-rescue validation.
 - Add durable statistics by versioning and defensively migrating the progress

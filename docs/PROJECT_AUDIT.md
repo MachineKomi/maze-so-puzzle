@@ -1,7 +1,7 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: 0.5.1 child-first polish candidate
+Audited build: playable 0.6.0 web release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
@@ -10,7 +10,20 @@ real-device testing. The automated suite, production browser checks, Tauri
 build, staging, hash comparison, and portable smoke launch below all completed
 against the 0.5.0 source candidate on 2026-09-01. The 0.5.1 rows record the
 repeated source, production-browser, desktop packaging, staging, hash, and smoke
-checks for this candidate.
+checks for that candidate. The 0.6.0 section records the current web-only release
+and deliberately does not claim a rebuilt Windows package.
+
+## Current 0.6.0 web release status
+
+| Area | Current evidence | Status |
+| --- | --- | --- |
+| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, and exhaustive terrain topology | 145 of 145 tests passed; strict TypeScript, Vite production build, zero-vulnerability npm audit, and locked Tauri compile passed |
+| Exploration policy | The shared rule enables the 7 x 7 camera and fog minimap whenever either maze dimension exceeds 7; focused boundary coverage includes 7, 8, and 9 tile dimensions | Passed unit coverage and local production-browser movement/reveal checks |
+| Tester access | The title build label opens a direct nine-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Passed local production-browser normal-query, exact-query, direct-selection, and modal checks |
+| Terrain geometry | Maze terrain is one globally aligned SVG surface with connected wall and hazard regions, rounded convex/concave bends, preserved holes, periodic textures, a camera gutter, and flat hazard lips without cast shadows | Passed exhaustive 3 x 3 occupancy tests, targeted topology tests, and local landscape visual review; real-iPad review remains valuable play-test feedback |
+| Terrain art | AI-generated v3 wall and floor masters use smaller-scale fantasy stones; optimized exact-periodic runtime variants plus periodic water/lava derivatives are documented with provenance | Runtime assets are in the production bundle and pass local visual review without per-cell seams |
+| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Pushes to `main` auto-deploy; the canonical alias is smoke-tested after each release push |
+| Desktop artifacts | No 0.6.0 Windows package is claimed by this web release | Version 0.5.1 remains the last verified portable executable and installer until rebuilt, smoke-tested, staged, and re-hashed |
 
 ## Current 0.5.1 implementation status
 
@@ -22,7 +35,7 @@ checks for this candidate.
 | Celebration | A perfect 34-step first clear displayed all three friends, 30 gold, two new stickers, and both actions | Passed at 1280 x 720 with `clientHeight` equal to `scrollHeight` (501 px) |
 | Lanternlight progression | Exhaustive reachable-state search rejects any authored state that can attack underpowered after finding the sword | Passed; ordinary/perfect finale routes are now 280/312 steps |
 | Load performance | Art warming is deduplicated and limited to the current level, with reward art deferred until idle | Unit-covered; broader low-end device profiling remains |
-| CI parity | Browser verification remains on Linux; locked Tauri compilation now also runs on `windows-latest` | Workflow source and YAML passed local review; first hosted run is pending push |
+| CI parity | Browser verification remains on Linux; locked Tauri compilation also runs on `windows-latest` | Workflow is present on `origin/main`; individual hosted-run status is reported by the README badge rather than inferred here |
 | Windows artifacts | Tauri 0.5.1 executable and NSIS installer were built, staged, source-compared, and hashed; the portable app remained responsive with the correct title for five seconds | Passed locally; clean-machine install and signing remain |
 
 ## Current 0.5.0 implementation status
@@ -73,6 +86,28 @@ checks for this candidate.
 These results preserve the last verified 0.2.0 baseline for comparison. The
 0.4.0 evidence above remains as a historical release baseline. The verified
 0.5.0 candidate and the broader unfinished manual matrix are recorded separately.
+
+## Version 6 web implementation snapshot
+
+- Every grid whose width or height exceeds the seven-tile field of view now uses
+  the same player-centred camera and fog-of-war minimap. This includes every
+  current story and generated maze, while the engine and solver remain on full
+  global coordinates.
+- The small title-screen build label is the secret entry to a direct authored
+  maze picker. Exact `?debug=mazes` opens that picker automatically. Selected
+  runs are tester previews and must not create active-session saves or mutate
+  rewards, records, gold, unlocks, or normal story progress.
+- Floor, walls, water, and lava render through continuous world-coordinate SVG
+  patterns rather than independently textured grid cells. Connected terrain
+  boundaries support rounded convex and concave corners, holes, diagonal-touch
+  resolution, and a camera gutter that avoids false curves at the view edge.
+- AI-generated v3 floor and wall materials show smaller stones at a more useful
+  maze scale. Exact-periodic runtime conversions keep those patterns seamless;
+  water and lava use matching periodic derivatives, connected shapes, a shallow
+  flat floor-colour lip, and no cast shadow.
+- The GitHub `main` branch is the production source for the Vercel Hobby site at
+  `https://maze-so-puzzle.vercel.app/`. This is a web release: the downloadable
+  Windows executable and installer remain at their last verified 0.5.1 version.
 
 ## Version 5 implementation snapshot
 
@@ -142,8 +177,10 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
   play mode rather than an accidental limitation.
 - The three animal rescues are bonus goals; reaching the maze exit must not
   require collecting them.
+- Any maze wider or taller than 7 tiles uses the 7 x 7 exploration camera and
+  fog minimap. Maze dimensions and presentation are no longer separate opt-ins.
 - The unsigned Windows files are suitable for local testing. SmartScreen may
-  warn on machines that did not build them.
+  warn on machines that did not build them; the verified files remain 0.5.1.
 
 ## Hardening completed during housekeeping
 
@@ -171,21 +208,26 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Big Maze remains available as an optional roomier board view while retaining a
   compact Power/item/rescue HUD and an overlaid feedback toast.
 
-The 0.5.1 automated run and targeted production-browser pass are complete. All
-unchecked clean-machine, device, listening, and broader manual items in
-`RELEASE_CHECKLIST.md` remain release requirements.
+The 0.6.0 web source passes the automated, dependency, locked-desktop-compile,
+and local production-browser gates recorded above. The 0.5.1 packaged-Windows
+baseline remains complete. All unchecked clean-machine, physical-device,
+listening, and broader manual items in `RELEASE_CHECKLIST.md` remain requirements
+for the artifact type they cover.
 
 ## Prioritized remaining work
 
-### P0 - required before a public release
+### P0 - release hygiene and future packaged builds
 
-- Perform the complete manual test matrix in `RELEASE_CHECKLIST.md` against the
-  exact final browser bundle, portable executable, and installer.
-- Install, launch, save, upgrade, and uninstall on a clean Windows x64 machine.
-- Code-sign the Windows executable and installer, or explicitly label the public
-  build as unsigned and document the expected SmartScreen warning.
-- Choose and add a source-code and asset licence. This is an owner decision and
-  was deliberately not guessed during housekeeping.
+- Perform the applicable browser matrix in `RELEASE_CHECKLIST.md` against the
+  exact 0.6.0 production deployment. If a new desktop build is later shared,
+  separately repeat the portable and installer matrix against those artifacts.
+- Before any new Windows release, install, launch, save, upgrade, and uninstall
+  on a clean Windows x64 machine.
+- Code-sign any future Windows executable and installer, or explicitly label the
+  files unsigned and document the expected SmartScreen warning.
+- Choose and add a source-code and asset licence before inviting reuse or
+  redistribution beyond the current all-rights-reserved public prototype. This
+  is an owner decision and was deliberately not guessed during housekeeping.
 - Verify the recorded staged SHA-256 values against any copies uploaded for
   testers.
 
@@ -197,7 +239,7 @@ unchecked clean-machine, device, listening, and broader manual items in
 - Add automated accessibility checks and a richer screen-reader representation
   of nearby maze cells; the visual grid should not be the only spatial model.
 - Test 200% browser zoom and Windows text scaling, including Big Maze mode and
-  the 25 x 25 exploration level's 7 x 7 camera and minimap.
+  the 7 x 7 camera/minimap on early, generated, and 25 x 25 mazes.
 - Add visual-regression snapshots for the minimum 960 x 540 window, the default
   1280 x 720 window, 1920 x 1080, and the portrait guidance screen.
 - Repeat touch-target and press-and-hold checks on Amelia's actual iPad. The
@@ -208,8 +250,8 @@ unchecked clean-machine, device, listening, and broader manual items in
 ### P2 - maintainability and polish
 
 - Add browser-level regression coverage for camera following, minimap fog and
-  remembered tiles, hidden tester-control gating, authored-level cycling, and
-  preview completion isolation.
+  remembered tiles, build-label/query tester-picker entry, direct authored-level
+  selection, and preview completion isolation.
 - Consolidate repeated responsive CSS rules after the current visual design
   settles; this reduces cascade surprises without changing the look.
 - The unused original `floor.png` and `wall.png` are preserved under
@@ -227,11 +269,13 @@ unchecked clean-machine, device, listening, and broader manual items in
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- The release target is 0.5.1. Package, lockfile, Cargo, and Tauri source versions
-  are aligned. Packaging, staged names, source-to-stage comparison, portable
-  smoke launch, sizes, and hashes are recorded in `release/`.
+- The current source metadata is aligned at 0.6.0 and the public Vercel alias is
+  rechecked after every deployment. Existing packaging, staged names,
+  source-to-stage comparison, portable smoke launch, sizes, and hashes in
+  `release/` describe the last verified 0.5.1 Windows artifacts only; a source
+  version bump is not evidence of a rebuilt or verified desktop binary.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in
-  `AI_ASSET_PROMPTS.md`, including the exact title-screen prompt and optimized
-  runtime derivative.
+  `AI_ASSET_PROMPTS.md`, including the title screen, v3 floor/wall masters, and
+  optimized exact-periodic runtime derivatives.

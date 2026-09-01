@@ -3,9 +3,10 @@
 This folder documents convenience copies of Windows x64 artifacts staged for
 local play testing. Executables are deliberately excluded from source history;
 publish the current pair as GitHub Release assets when a downloadable desktop
-build is wanted. Version 0.5.1 is the current playable test build. Its Tauri
-build, staging, portable smoke launch, source-to-stage comparison, and hashes
-completed successfully on 2026-09-01.
+build is wanted. Version 0.5.1 is the current verified Windows test build; the
+browser game has newer web-only releases. Its Tauri build, staging, portable
+smoke launch, source-to-stage comparison, and hashes completed successfully on
+2026-09-01.
 
 ## Current 0.5.1 test files
 

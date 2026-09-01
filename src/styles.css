@@ -232,58 +232,6 @@ button:focus-visible,
   user-select: none;
 }
 
-.maze-tile {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
-  background-position: center;
-  background-size: cover;
-}
-
-.maze-tile::after {
-  position: absolute;
-  inset: 0;
-  border: 0.5px solid rgba(86, 50, 100, 0.035);
-  content: "";
-  pointer-events: none;
-}
-
-.terrain-floor {
-  background-color: #fff4d9;
-  background-image: url("/assets/floor-v2.png");
-}
-
-.terrain-wall {
-  z-index: 2;
-  background-color: #a77ac4;
-  background-image: url("/assets/wall-v2.png");
-  box-shadow: inset 0 -2px 3px rgba(58, 31, 69, 0.25);
-}
-
-.terrain-water {
-  background-color: #54d0ca;
-  background-image: url("/assets/water.png");
-}
-
-.terrain-lava {
-  background-color: #ff8c64;
-  background-image: url("/assets/lava.png");
-}
-
-.exit-tile {
-  isolation: isolate;
-}
-
-.exit-tile::before {
-  position: absolute;
-  z-index: 1;
-  inset: 13%;
-  border-radius: 50%;
-  background: rgba(255, 222, 99, 0.34);
-  box-shadow: 0 0 15px rgba(255, 215, 88, 0.72);
-  content: "";
-}
-
 .goal-sprite {
   position: absolute;
   z-index: 2;
@@ -1508,12 +1456,27 @@ button:focus-visible,
   position: absolute;
   right: 16px;
   bottom: 10px;
+  width: auto;
+  min-height: 0;
+  padding: 4px 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: rgba(67, 48, 78, 0.08);
   color: rgba(255, 255, 255, 0.86);
   font-size: 9px;
   font-weight: 900;
   letter-spacing: 0.08em;
   text-shadow: 0 1px 3px rgba(39, 28, 51, 0.55);
   text-transform: uppercase;
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.title-version:hover,
+.title-version:focus-visible {
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(67, 48, 78, 0.35);
+  transform: translateY(-1px);
 }
 
 .title-fireflies i {
@@ -2252,148 +2215,42 @@ body {
   border: clamp(4px, 0.5vw, 7px) solid #5d587b;
   border-radius: clamp(16px, 1.7vw, 23px);
   background-color: #f8d991;
-  background-image: url("/assets/floor-v2.png");
+  background-image: url("/assets/floor-v3.png");
   background-repeat: repeat;
-  background-size: 18% 18%;
+  background-size: 20% 20%;
   box-shadow:
     0 5px 0 #443f60,
     0 11px 21px rgba(57, 45, 71, 0.24),
     inset 0 0 0 2px rgba(255, 255, 255, 0.62);
 }
 
-.maze-tile {
-  isolation: isolate;
-  background-repeat: no-repeat;
-}
-
-.maze-tile::after {
-  border-color: rgba(80, 60, 70, 0.022);
-}
-
-.terrain-floor,
-.terrain-water,
-.terrain-lava {
-  background-color: #f8d991;
-  background-image:
-    linear-gradient(rgba(255, 236, 178, 0.12), rgba(238, 184, 101, 0.08)),
-    url("/assets/floor-v2.png");
-  background-position: center, var(--texture-x-3) var(--texture-y-3);
-  background-size: 100% 100%, 300% 300%;
-}
-
-.terrain-wall {
-  z-index: 2;
-  overflow: hidden;
-  background-color: var(--periwinkle);
-  background-image:
-    linear-gradient(rgba(190, 194, 235, 0.13), rgba(63, 57, 96, 0.1)),
-    url("/assets/wall-v2.png");
-  background-position: center, var(--texture-x-2) var(--texture-y-2);
-  background-size: 100% 100%, 200% 200%;
-  box-shadow:
-    inset 0 1px 1px rgba(235, 236, 255, 0.28),
-    inset 0 -2px 3px rgba(51, 45, 78, 0.28),
-    0 1px 2px rgba(54, 47, 76, 0.18);
-}
-
-.terrain-wall::before {
+.maze-terrain-svg {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   inset: 0;
-  border: 1px solid rgba(220, 220, 250, 0.1);
-  border-radius: inherit;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent 42%, rgba(49, 42, 75, 0.09));
-  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   pointer-events: none;
 }
 
-.wall-round-tl { border-top-left-radius: 18%; }
-.wall-round-tr { border-top-right-radius: 18%; }
-.wall-round-bl { border-bottom-left-radius: 18%; }
-.wall-round-br { border-bottom-right-radius: 18%; }
-.wall-inner-tl { border-top-left-radius: 12%; }
-.wall-inner-tr { border-top-right-radius: 12%; }
-.wall-inner-bl { border-bottom-left-radius: 12%; }
-.wall-inner-br { border-bottom-right-radius: 12%; }
-
-.inner-wall-cap {
+.goal-layer {
   position: absolute;
-  z-index: 3;
-  width: 14%;
-  height: 14%;
-  background:
-    linear-gradient(145deg, rgba(224, 224, 249, 0.22), rgba(64, 58, 95, 0.2)),
-    #666287;
-  box-shadow: inset 0 1px 1px rgba(237, 237, 255, 0.25);
+  z-index: 5;
+  display: grid;
+  place-items: center;
   pointer-events: none;
 }
 
-.inner-wall-cap.cap-tl {
-  top: 0;
-  left: 0;
-  border-bottom-right-radius: 100%;
-}
-
-.inner-wall-cap.cap-tr {
-  top: 0;
-  right: 0;
-  border-bottom-left-radius: 100%;
-}
-
-.inner-wall-cap.cap-bl {
-  bottom: 0;
-  left: 0;
-  border-top-right-radius: 100%;
-}
-
-.inner-wall-cap.cap-br {
-  right: 0;
-  bottom: 0;
-  border-top-left-radius: 100%;
-}
-
-.terrain-water,
-.terrain-lava {
-  overflow: visible;
-}
-
-.terrain-water::before,
-.terrain-lava::before {
+.goal-layer::before {
   position: absolute;
-  z-index: 1;
-  inset: -3%;
-  border-radius: 18%;
-  background-repeat: no-repeat;
-  background-position: var(--texture-x-2) var(--texture-y-2);
-  background-size: 200% 200%;
+  inset: 16%;
+  border-radius: 50%;
+  background: rgba(255, 222, 99, 0.34);
   content: "";
-  filter: saturate(1.06) drop-shadow(0 1px 2px rgba(62, 70, 93, 0.14));
-  opacity: 0.92;
+  box-shadow: 0 0 15px rgba(255, 215, 88, 0.72);
   pointer-events: none;
-  box-shadow: 0 0 4px rgba(62, 70, 93, 0.14);
-}
-
-.terrain-water::before {
-  background-color: #4fd4cb;
-  background-image: url("/assets/water.png");
-}
-
-.terrain-lava::before {
-  background-color: #ff8a5e;
-  background-image: url("/assets/lava.png");
-  filter: saturate(1.05) drop-shadow(0 0 3px rgba(255, 107, 55, 0.3));
-}
-
-.terrain-water:nth-child(3n + 1)::before,
-.terrain-lava:nth-child(3n + 1)::before {
-  border-radius: 21% 17% 20% 16%;
-  transform: rotate(0.35deg) scale(1.015);
-}
-
-.terrain-water:nth-child(3n + 2)::before,
-.terrain-lava:nth-child(3n + 2)::before {
-  border-radius: 16% 21% 17% 20%;
-  transform: rotate(-0.35deg) scale(1.015);
 }
 
 .move-preview-layer {
@@ -3684,6 +3541,100 @@ img.wallet-pouch {
 .tester-skip-button:active {
   transform: translateY(1px);
   box-shadow: 0 1px 0 #4c486f;
+}
+
+.tester-picker-lead {
+  max-width: 610px;
+  margin: 0 auto 10px;
+  text-align: center;
+}
+
+.tester-level-grid {
+  display: grid;
+  width: min(100%, 680px);
+  max-height: min(55vh, 430px);
+  margin: 0 auto;
+  padding: 3px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.tester-level-grid button {
+  display: grid;
+  min-height: 58px;
+  padding: 7px 9px;
+  cursor: pointer;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid rgba(126, 113, 158, 0.2);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #fffef9, #f2efff);
+  color: #5b4d73;
+  text-align: left;
+  box-shadow: 0 3px 0 rgba(132, 119, 167, 0.22);
+}
+
+.tester-level-grid button:hover,
+.tester-level-grid button:focus-visible,
+.tester-level-grid button.current {
+  border-color: #7d75ad;
+  background: linear-gradient(145deg, #fff8d9, #e8e2ff);
+  transform: translateY(-1px);
+}
+
+.tester-level-grid button > b {
+  display: grid;
+  width: 34px;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #8a84ba, #666097);
+  color: white;
+  font-size: 15px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+}
+
+.tester-level-grid button > span,
+.tester-level-grid button strong,
+.tester-level-grid button small {
+  display: block;
+  min-width: 0;
+}
+
+.tester-level-grid button strong {
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tester-level-grid button small {
+  margin-top: 3px;
+  color: #776c8c;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.tester-level-grid button > i {
+  color: #7a72a5;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.tester-picker-close {
+  display: block;
+  width: min(100%, 240px);
+  margin: 12px auto 0;
+}
+
+@media (max-width: 760px) {
+  .tester-level-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .tester-preview-banner {

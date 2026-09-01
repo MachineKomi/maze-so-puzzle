@@ -1,9 +1,10 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.5.1 is a client-only game. It has no account system, analytics,
-advertising, multiplayer, chat, remote database, or game-owned server. The
-browser build does not intentionally send player names, gameplay, or saved
-progress anywhere.
+Maze so Puzzle 0.6.0 is a client-only web game. It has no account system,
+analytics, advertising, multiplayer, chat, remote database, or game-owned
+server. The browser build does not intentionally send player names, gameplay,
+or saved progress anywhere. The last verified downloadable Windows build is
+still 0.5.1 and uses the same device-local storage model.
 
 ## What is stored
 
@@ -21,10 +22,11 @@ device, another browser, a private window, a cleared site-data store, or a
 different Vercel preview hostname starts with a separate save. There is no cloud
 sync or recovery service in this build.
 
-The hidden `?debug=mazes` tester preview does not write completion rewards,
-records, unlocks, or active-run maze progress. Generated Surprise Mazes are also
-excluded from active-run recovery. Existing local story progress remains
-available after leaving a preview run.
+The secret tester picker, opened from the title build label or the exact
+`?debug=mazes` query, does not write completion rewards, records, unlocks, or
+active-run maze progress. Opening or closing the picker does not transmit data.
+Generated Surprise Mazes are also excluded from active-run recovery. Existing
+local story progress remains available after leaving a preview run.
 
 ## Network behaviour
 
@@ -33,9 +35,12 @@ the static browser build. Sound effects are synthesized locally with the Web
 Audio API, and background music is read from same-origin `/assets/ost/` files.
 During normal play the game itself makes no third-party API or streaming calls.
 
-The hosting platform and browser may still create ordinary infrastructure logs
-or make browser-controlled requests that are outside the game code. Review the
-selected host's current privacy settings before sharing a public deployment.
+The production site is statically hosted on Vercel Hobby at
+`https://maze-so-puzzle.vercel.app/`. Vercel and the browser may still create
+ordinary infrastructure logs or make browser-controlled requests that are
+outside the game code. GitHub-to-Vercel deployment does not add gameplay
+telemetry or cloud saves. Review the selected host's current privacy settings
+before sharing a public deployment.
 
 This document describes the current implementation; it is not a substitute for
 a formal privacy policy if accounts, telemetry, online services, or public

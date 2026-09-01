@@ -55,6 +55,22 @@ afterEach(() => {
 });
 
 describe("art preloading", () => {
+  it("uses the current seamless terrain asset revisions", async () => {
+    const { ASSETS } = await import("./assets");
+
+    expect({
+      floor: ASSETS.floor,
+      wall: ASSETS.wall,
+      water: ASSETS.water,
+      lava: ASSETS.lava,
+    }).toEqual({
+      floor: "/assets/floor-v3.png",
+      wall: "/assets/wall-v3.png",
+      water: "/assets/water-v2.png",
+      lava: "/assets/lava-v2.png",
+    });
+  });
+
   it("loads common gameplay art plus only the supplied level's terrain and objects", async () => {
     const { ASSETS, preloadLevelArt } = await import("./assets");
 
