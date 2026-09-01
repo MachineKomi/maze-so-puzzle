@@ -45,7 +45,7 @@ function stepFrom(point: Point, direction: Direction): Point {
 
 /**
  * Corner assistance deliberately accepts only ordinary floor. It will never
- * auto-steer Ame onto water/lava or through an unresolved door or enemy, even
+ * auto-steer Ame onto water/lava/poison or through an unresolved door or enemy, even
  * when the current inventory would technically make that interaction legal.
  */
 function isSafeAssistTile(

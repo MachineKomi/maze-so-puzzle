@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.9.1 play-test build, which remains an active prototype. Its complete automated
+0.10.0 play-test build, which remains an active prototype. Its complete automated
 web gate, unsigned Windows packaging, and public Vercel promotion are verified;
 the final physical-device pass remains a release step rather than an
 already-verified claim.
@@ -61,16 +61,16 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.9.1 test build:
+The current verified desktop artifacts are the unsigned 0.10.0 test build:
 
-- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.9.1-portable.exe`
-  and `release/Maze-so-Puzzle-0.9.1-setup.exe`. Executables are deliberately
+- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.10.0-portable.exe`
+  and `release/Maze-so-Puzzle-0.10.0-setup.exe`. Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path may be replaced by a later local build).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.9.1_x64-setup.exe`.
-- The verified 0.9.1 hashes and retained archive hashes are recorded in
+  Puzzle - For Ame to Solve!_0.10.0_x64-setup.exe`.
+- The verified 0.10.0 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -102,7 +102,7 @@ The current verified desktop artifacts are the unsigned 0.9.1 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.9.1** label to
+On the title screen, click or tap the small **Playable build 0.10.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -117,13 +117,13 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.9.1
+## Included in playable build 0.10.0
 
-- Ten progressive story mazes with deliberate changes of pace: their sizes are
-  9, 11, 13, 15, 13, 15, 17, 17, 19, then the 25 x 25
-  **Lanternlight Labyrinth** exploration finale. The new 19 x 19
-  **Springstep Sky Hollow** teaches Spring Boots and multi-tile hole jumps;
-  **Rainbow Picnic** still precedes the smaller 13 x 13 **Toasty Toes** breather.
+- Twelve progressive story mazes with deliberate changes of pace. Sizes vary
+  from 9 × 9 to 25 × 25 rather than rising monotonically. The new 21 × 21
+  **Twilight Treasure Loop** and 23 × 23 **Moonlit Friendship Quest** add long
+  backtracking puzzles after Lanternlight Labyrinth; the latter introduces the
+  Antidote Leaf and a required connected poison crossing.
 - A consistent player-centred 6 x 6 camera for every maze whose width or height
   exceeds 6 tiles, including all current story and Surprise Mazes. A persistent
   fog-of-war minimap distinguishes Ame's current view, explored passages, and
@@ -138,15 +138,16 @@ Turn the iPad sideways to play.
   explicit compatibility matrix, plus five weapon looks, five friendly enemy
   looks, eight pet species, and four cage styles. Story and generated mazes use
   only compatible pastel material pairs—yellow/gold floors are never combined
-  with green or sage walls. Every maze contains one weapon and three different
-  optional pets.
+  with green or sage walls. Every maze contains one weapon; rescue parties now
+  vary from one or two friends in the opening mazes to four and five in the
+  largest late adventures.
 - A new illustrated title screen, backed by original AI-generated key art, with
   Continue, Adventure Book, and Surprise Maze shortcuts.
 - An Adventure Book showing story-maze clears, best step counts, rescue records,
   cumulative totals for all eight pet species, gold, completion statistics,
   stickers, rescue medals, and nine stat-driven achievement badges.
 - Persistent gold rewards, three collectible stickers, best results, and rescue
-  medals for 5, 10, and 15 perfect three-animal rescues.
+  medals for 5, 10, and 15 perfect rescues using each maze's actual friend total.
 - Weapon-gated friendly enemy encounters and visible Power numbers. Later
   authored layouts deliberately place weapons, keys, boots, potions, weaker
   enemies, and optional guardians on different branches, so progress requires
@@ -157,17 +158,21 @@ Turn the iPad sideways to play.
 - Ame visibly holds the level's collected weapon, and Power numbers sit above
   character art without covering faces.
 - Power growth from defeated lower-level enemies and `+2` potions.
-- Colour-coded star keys and matching doors.
-- Protective splash boots for water and warm magical lava, plus illustrated
-  Spring Boots for jumping over one or more consecutive ground holes. One
+- Colour-coded Rose, Blue, and Sunny star keys and matching labelled doors.
+- Protective splash boots for water and warm magical lava, illustrated Spring
+  Boots for jumping over one or more consecutive ground holes, and a magical
+  Antidote Leaf for crossing soft purple poison. One
   directional input performs the whole safe jump and can land only on a valid
   non-hole square; holes never become ordinary walkable floor.
 - Authored hazards form connected pools and patches of at least two tiles;
   generated growing/adventure mazes create deterministic connected 2–4 tile
   water or lava regions only after the boots gate, while preserving both the
   ordinary and perfect-rescue solutions.
-- Exact level reset after a loss, schema-v3 saved progress with defensive v1/v2
-  migration, a pictorial help card, mute control, and reduced-motion support.
+- Child-safe strong-enemy blocking: an underpowered collision leaves the exact
+  same playing state intact and offers one clear “I'll go get stronger” action;
+  there is no maze reset or accidental defeat. Saved progress and active-run
+  snapshots migrate defensively, with a pictorial help card, state-aware hints,
+  mute control, and reduced-motion support.
 - A separately validated active-run snapshot lets authored story mazes resume at
   the exact position, inventory, Power, step count, rescue state, and explored
   map after a refresh or app restart. Tester and generated runs are excluded.
@@ -186,14 +191,16 @@ Turn the iPad sideways to play.
   not restart or reveal a border at every grid square. The AI-generated paired
   floor and wall materials use seam-suppressing periodic correction and a
   smaller readable scale; selected garden, woodland, and ruin themes add sparse
-  transparent flower, moss, and ivy dressing. Periodic water and lava textures
-  join into connected regions. Exact convex and concave wall
-  curves follow bends cleanly. Hazards use their rounded connected silhouette
-  with no outline, lip, raised edge, or cast shadow; restrained brightness and
-  saturation treatment makes walls read more clearly against navigable floors.
+  transparent flower, moss, and ivy dressing. Periodic water, lava, and poison
+  textures join into connected regions. Exact convex and concave wall curves
+  follow bends cleanly. Hazards use a slightly inset, softly feathered rounded
+  silhouette with no outline, lip, raised edge, or cast shadow. Per-theme
+  brightness, saturation, and contrast treatment keeps walls readable without
+  crushing naturally dark masonry.
 - A cleaner picture-first sidebar with larger rescue friends, cages, enemy and
-  inventory variants, less repeated text, clearer found/missing silhouettes,
-  and the selected weapon overlaid in Ame's hands.
+  inventory variants, no overlapping completion ticks, clearer found/missing
+  silhouettes, and the selected weapon overlaid in Ame's hands. The old
+  tile-sized move arrow/cross overlay is removed.
 - Rescued friends leave their cages and follow Ame along her recent visible
   footsteps. Four AI-generated, fully opaque front cage layers keep bars and
   locks crisp over the animal art before rescue, with transparent openings.
@@ -218,18 +225,19 @@ level is solvable.
 
 Combat uses one child-friendly rule: Ame wins when her Power is **at least** the
 enemy's Power. Winning adds the enemy's number to Ame's Power. A stronger enemy
-triggers a low-stakes retry screen and restores the same level state.
+refuses the move, preserves the exact same playing state, and shows an
+encouraging comparison so Ame can explore, grow stronger, and return.
 
 Core engine modules live in `src/game/`; UI input helpers live in `src/`:
 
 - `engine.ts`: movement and interactions.
-- `levels.ts`: the ten authored story levels.
+- `levels.ts`: the twelve authored story levels.
 - `exploration.ts`: clamped camera windows, field-of-view tiles, and persistent
   minimap reveal state.
 - `followerTrail.ts`: bounded, loop-free recent footsteps for visible rescued-pet
   followers.
 - `terrainGeometry.ts`: connected rounded SVG boundaries in stable maze/world
-  coordinates for walls, water, and lava.
+  coordinates for walls, water, lava, and poison.
 - `solver.ts`: structural validation and stateful solution search.
 - `generator.ts`: seeded perfect-maze generation and progression placement.
 - `pointerControls.ts`: tile-relative pointer intent and the strict one-tile,
@@ -250,16 +258,18 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.9.1 source suite passes 215 automated tests across 16 files and the strict
+The 0.10.0 source suite passes 239 automated tests across 17 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
-prerequisite detours, all ten authored ordinary/perfect-rescue routes,
+prerequisite detours, all twelve authored ordinary/perfect-rescue routes,
 dominant-colour theme compatibility, five-track per-maze music selection, the
 6 x 6 even camera, variable 9–29 generation, solver-safe connected hazards,
-pointer intent/corner assistance, held-input acceleration, theme lightness and
+pointer intent/corner assistance, held-input acceleration, variable 1–5 friend
+totals, immutable strong-enemy warnings, poison/antidote traversal and migration,
+theme lightness and
 colour compatibility, transparent terrain dressing, rescued-pet trail
 placement, cage-front assets, persistent minimap reveal, and the established
-engine/save/audio checks. The exact 0.9.1 dependency audit/tree and locked Cargo
+engine/save/audio checks. The exact 0.10.0 dependency audit/tree and locked Cargo
 compile pass. Its Windows
 portable app and installer are source-compared, version-checked, hashed, and the
 portable app passed a hidden five-second smoke launch. The canonical deployment
@@ -268,7 +278,7 @@ single-step, and browser-log smoke checks. Physical-device listening/feel remain
 on the release checklist; the previous 0.9.0 record is retained as historical
 evidence.
 
-The browser matrix, remaining 0.9.1 gates, and Windows artifact
+The browser matrix, remaining 0.10.0 gates, and Windows artifact
 record are kept in
 [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md). Rebuilding the Windows
 package is a separate release step:
@@ -277,7 +287,7 @@ package is a separate release step:
 npm run desktop:build
 ```
 
-The 0.9.1 Windows test installer is unsigned, so Windows SmartScreen
+The 0.10.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

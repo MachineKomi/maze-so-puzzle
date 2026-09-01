@@ -4,6 +4,56 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.10.0 - 2026-09-01
+
+This safety-and-puzzles release makes strong-enemy encounters encouraging
+instead of punishing, adds a new traversal item and hazard, and grows the story
+campaign with two genuinely backtracking-focused adventures.
+
+### Added
+
+- **Twilight Treasure Loop** (21 × 21) and **Moonlit Friendship Quest**
+  (23 × 23), bringing the authored campaign to twelve mazes. Their required
+  weapon, boots, Spring Boots, potions, and three coloured keys live on
+  deliberate side trails; solver tests prove those prerequisites cannot be
+  skipped.
+- A connected magical-poison crossing and a new AI-generated Antidote Leaf.
+  Moonlit Friendship Quest requires finding the leaf on a detour before its
+  two-tile poison gate.
+- A picture-first Hint button with short, state-aware guidance for weapons,
+  traversal items, strong enemies, keys, rescues, and the exit.
+- Variable rescue parties: the first two mazes introduce one and two friends,
+  middle mazes use three, and the two new large adventures hold four and five.
+  Rewards, records, perfect-rescue history, and save migration now use each
+  maze's actual friend total.
+
+### Changed
+
+- Walking into an enemy with higher Power no longer defeats Ame or resets the
+  maze. Movement is refused without changing a single game-state field, and a
+  clear **Too strong!** comparison offers one reassuring action: **I'll go get
+  stronger.** Equal Power still wins.
+- Removed the tile-sized move arrow/cross and the overlapping inventory/rescue
+  tick badges. Found state now comes from the artwork itself.
+- Water, lava, and poison use slightly inset, feathered connected silhouettes,
+  leaving a narrow floor margin without outlines, lips, or shadows.
+- Per-theme material treatment replaces blanket wall darkening. Dark dungeon
+  art is gently lifted, while floor/wall separation remains clear.
+- Keys and matching doors keep their colour treatment and now carry a compact
+  Rose, Blue, or Sunny label on the board.
+- Tablet and phone layouts reserve space for up to five rescue portraits and
+  keep cards from overlapping. The 1024 × 768 and 844 × 390 browser checks fit
+  without document overflow.
+- The release gate now covers 239 tests across 17 files, including immutable
+  strong-enemy blocking, poison traversal and save migration, variable rescue
+  totals, and both new ordinary/perfect-rescue routes.
+
+### Desktop status
+
+- The unsigned 0.10.0 portable executable and NSIS installer are rebuilt from
+  the same source as the browser release and staged in `release/`.
+- Clean-machine install/uninstall testing and code signing remain outstanding.
+
 ## 0.9.1 - 2026-09-01
 
 This comfort-and-materials release responds to the first extended iPad play

@@ -48,6 +48,7 @@ export function isObjectResolved(object: LevelObject, state: GameState): boolean
     case "sword":
     case "boots":
     case "spring-boots":
+    case "antidote-leaf":
     case "potion":
     case "key":
       return state.collectedObjectIds.includes(object.id);
@@ -62,6 +63,7 @@ export function createInitialGameState(level: LevelDefinition): GameState {
     hasSword: false,
     hasBoots: false,
     hasSpringBoots: false,
+    hasAntidoteLeaf: false,
     keys: [],
     collectedObjectIds: [],
     rescuedAnimalIds: [],
@@ -156,6 +158,14 @@ export function movePlayer(
       terrain,
     });
   }
+  if (terrain === "poison" && !state.hasAntidoteLeaf) {
+    return blocked(state, {
+      type: "blocked",
+      reason: "needs-antidote-leaf",
+      target,
+      terrain,
+    });
+  }
 
   const object = getObjectAt(level, target);
   const events: GameEvent[] = [];
@@ -171,6 +181,7 @@ export function movePlayer(
   let hasSword = state.hasSword;
   let hasBoots = state.hasBoots;
   let hasSpringBoots = state.hasSpringBoots;
+  let hasAntidoteLeaf = state.hasAntidoteLeaf;
   let keys = state.keys;
   let collectedObjectIds = state.collectedObjectIds;
   let rescuedAnimalIds = state.rescuedAnimalIds;
@@ -204,17 +215,15 @@ export function movePlayer(
     }
 
     if (power < object.power) {
-      const lostState: GameState = { ...state, status: "lost" };
       return {
-        state: lostState,
+        state,
         moved: false,
         events: [
           {
-            type: "combat-lost",
+            type: "enemy-too-strong",
             objectId: object.id,
             playerPower: power,
             enemyPower: object.power,
-            enemyPowerAfter: object.power + power,
           },
         ],
       };
@@ -262,6 +271,10 @@ export function movePlayer(
         hasSpringBoots = true;
         events.push({ type: "spring-boots-collected", objectId: object.id });
         break;
+      case "antidote-leaf":
+        hasAntidoteLeaf = true;
+        events.push({ type: "antidote-leaf-collected", objectId: object.id });
+        break;
       case "key":
         keys = addSorted<KeyColor>(keys, object.color);
         events.push({
@@ -294,6 +307,7 @@ export function movePlayer(
     hasSword,
     hasBoots,
     hasSpringBoots,
+    hasAntidoteLeaf,
     keys,
     collectedObjectIds,
     rescuedAnimalIds,

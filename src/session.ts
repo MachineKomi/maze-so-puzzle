@@ -42,6 +42,7 @@ const COLLECTABLE_KINDS: readonly ObjectKind[] = [
   "sword",
   "boots",
   "spring-boots",
+  "antidote-leaf",
   "potion",
   "key",
 ];
@@ -140,6 +141,7 @@ function positionObjectIsResolved(
     case "sword":
     case "boots":
     case "spring-boots":
+    case "antidote-leaf":
     case "potion":
     case "key":
       return collectedIds.has(object.id);
@@ -180,6 +182,10 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   const hasBoots = ownValue(value, "hasBoots");
   // Pre-0.9 active runs did not contain this field; migrate them as not found.
   const rawHasSpringBoots = ownValue(value, "hasSpringBoots");
+  // Pre-poison active runs did not contain this field. Any level now using
+  // poison or its antidote has changed traversal rules, so its old in-progress
+  // snapshot cannot be restored safely.
+  const rawHasAntidoteLeaf = ownValue(value, "hasAntidoteLeaf");
   // Levels containing Spring Boots changed topology in 0.9. An older snapshot
   // cannot prove which side of the new hole gate it belongs on, so discard only
   // that active run while preserving the player's separate campaign progress.
@@ -191,12 +197,23 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   }
   const hasSpringBoots = rawHasSpringBoots === undefined ? false : rawHasSpringBoots;
   if (
+    rawHasAntidoteLeaf === undefined
+    && (
+      level.objects.some((object) => object.kind === "antidote-leaf")
+      || level.terrain.some((row) => row.includes("poison"))
+    )
+  ) {
+    return null;
+  }
+  const hasAntidoteLeaf = rawHasAntidoteLeaf === undefined ? false : rawHasAntidoteLeaf;
+  if (
     !position
     || !isSafeNonNegativeInteger(power)
     || !isSafeNonNegativeInteger(steps)
     || typeof hasSword !== "boolean"
     || typeof hasBoots !== "boolean"
     || typeof hasSpringBoots !== "boolean"
+    || typeof hasAntidoteLeaf !== "boolean"
   ) {
     return null;
   }
@@ -245,15 +262,20 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   const collectedSpringBoots = level.objects.some(
     (object) => object.kind === "spring-boots" && collected.has(object.id),
   );
+  const collectedAntidoteLeaf = level.objects.some(
+    (object) => object.kind === "antidote-leaf" && collected.has(object.id),
+  );
   const calculatedPower = expectedPower(level, collected, defeated);
   if (
     hasSword !== collectedSword
     || hasBoots !== collectedBoots
     || hasSpringBoots !== collectedSpringBoots
+    || hasAntidoteLeaf !== collectedAntidoteLeaf
     || !equalStrings(keys, derivedKeys)
     || calculatedPower === null
     || power !== calculatedPower
     || ((terrain === "water" || terrain === "lava") && !hasBoots)
+    || (terrain === "poison" && !hasAntidoteLeaf)
     || !positionObjectIsResolved(objectAt(level, position), collected, rescued, defeated, opened)
   ) {
     return null;
@@ -275,6 +297,7 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     hasSword,
     hasBoots,
     hasSpringBoots,
+    hasAntidoteLeaf,
     keys,
     collectedObjectIds,
     rescuedAnimalIds,

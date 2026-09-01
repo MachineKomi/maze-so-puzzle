@@ -44,11 +44,20 @@ export interface TerrainDressingArt extends SpriteArt {
   readonly opacity: number;
 }
 
+export interface TerrainRenderTreatment {
+  /** Small, material-specific correction applied after the source texture. */
+  readonly brightness: number;
+  readonly saturation: number;
+  readonly contrast: number;
+}
+
 export interface TerrainThemeArt {
   readonly id: TerrainThemeId;
   readonly label: string;
   readonly floor: TerrainTextureArt;
   readonly wall: TerrainTextureArt;
+  readonly floorTreatment: TerrainRenderTreatment;
+  readonly wallTreatment: TerrainRenderTreatment;
   readonly floorDressing?: TerrainDressingArt;
   readonly wallDressing?: TerrainDressingArt;
 }
@@ -200,30 +209,40 @@ export const TERRAIN_THEMES = {
     label: "Sunny Stone Trail",
     floor: FLOORS.sunnyStone,
     wall: WALLS.lavenderStone,
+    floorTreatment: { brightness: 1.02, saturation: 0.96, contrast: 1 },
+    wallTreatment: { brightness: 1.02, saturation: 1, contrast: 1 },
   },
   "rose-courtyard": {
     id: "rose-courtyard",
     label: "Rose Courtyard",
     floor: FLOORS.roseBrick,
     wall: WALLS.mossyRuin,
+    floorTreatment: { brightness: 1.02, saturation: 0.96, contrast: 1 },
+    wallTreatment: { brightness: 1.02, saturation: 0.98, contrast: 1 },
   },
   "moonlit-moat": {
     id: "moonlit-moat",
     label: "Moonlit Moat",
     floor: FLOORS.moonSlate,
     wall: WALLS.hedge,
+    floorTreatment: { brightness: 1.04, saturation: 0.94, contrast: 1 },
+    wallTreatment: { brightness: 0.99, saturation: 1.06, contrast: 1.02 },
   },
   "ember-keep": {
     id: "ember-keep",
     label: "Ember Keep",
     floor: FLOORS.roseBrick,
     wall: WALLS.darkDungeon,
+    floorTreatment: { brightness: 1.02, saturation: 0.96, contrast: 1 },
+    wallTreatment: { brightness: 1.12, saturation: 0.94, contrast: 0.96 },
   },
   "star-garden": {
     id: "star-garden",
     label: "Star Garden",
     floor: FLOORS.meadowGrass,
     wall: WALLS.hedge,
+    floorTreatment: { brightness: 1.06, saturation: 1.08, contrast: 1.02 },
+    wallTreatment: { brightness: 0.98, saturation: 1.08, contrast: 1.02 },
     floorDressing: TERRAIN_DRESSING_ART.garden,
   },
   "moonbeam-castle": {
@@ -231,12 +250,16 @@ export const TERRAIN_THEMES = {
     label: "Moonbeam Castle",
     floor: FLOORS.moonSlate,
     wall: WALLS.darkDungeon,
+    floorTreatment: { brightness: 1.04, saturation: 0.94, contrast: 1 },
+    wallTreatment: { brightness: 1.13, saturation: 0.92, contrast: 0.95 },
   },
   "wishing-woods": {
     id: "wishing-woods",
     label: "Wishing Woods",
     floor: FLOORS.woodlandDirt,
     wall: WALLS.hedge,
+    floorTreatment: { brightness: 1.04, saturation: 0.98, contrast: 1 },
+    wallTreatment: { brightness: 0.99, saturation: 1.07, contrast: 1.02 },
     floorDressing: TERRAIN_DRESSING_ART.garden,
   },
   "parade-courtyard": {
@@ -244,18 +267,24 @@ export const TERRAIN_THEMES = {
     label: "Parade Courtyard",
     floor: FLOORS.roseBrick,
     wall: WALLS.lavenderStone,
+    floorTreatment: { brightness: 1.02, saturation: 0.96, contrast: 1 },
+    wallTreatment: { brightness: 1.01, saturation: 1, contrast: 1 },
   },
   "springstep-hollow": {
     id: "springstep-hollow",
     label: "Springstep Hollow",
     floor: FLOORS.moonSlate,
     wall: WALLS.lavenderStone,
+    floorTreatment: { brightness: 1.04, saturation: 0.94, contrast: 1 },
+    wallTreatment: { brightness: 1.01, saturation: 1, contrast: 1 },
   },
   "lantern-ruins": {
     id: "lantern-ruins",
     label: "Lantern Ruins",
     floor: FLOORS.sunnyStone,
     wall: WALLS.darkDungeon,
+    floorTreatment: { brightness: 1.02, saturation: 0.96, contrast: 1 },
+    wallTreatment: { brightness: 1.13, saturation: 0.92, contrast: 0.95 },
     wallDressing: TERRAIN_DRESSING_ART.vines,
   },
 } as const satisfies Readonly<Record<TerrainThemeId, TerrainThemeArt>>;

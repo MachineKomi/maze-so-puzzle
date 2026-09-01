@@ -90,6 +90,19 @@ describe("art catalog", () => {
         textureSources.add(texture.src);
       }
 
+      for (const treatment of [theme.floorTreatment, theme.wallTreatment]) {
+        expect(treatment.brightness).toBeGreaterThanOrEqual(0.9);
+        expect(treatment.brightness).toBeLessThanOrEqual(1.15);
+        expect(treatment.saturation).toBeGreaterThanOrEqual(0.9);
+        expect(treatment.saturation).toBeLessThanOrEqual(1.15);
+        expect(treatment.contrast).toBeGreaterThanOrEqual(0.9);
+        expect(treatment.contrast).toBeLessThanOrEqual(1.1);
+      }
+
+      // Theme-specific rendering must never recreate the old blanket wall
+      // darkening that crushed already-dark stone and hedge textures.
+      expect(theme.wallTreatment.brightness).toBeGreaterThanOrEqual(0.98);
+
       expect(areTerrainTexturesCompatible(theme.floor, theme.wall), theme.label).toBe(true);
       expect(
         theme.floor.visualLightness - theme.wall.visualLightness,
@@ -108,6 +121,14 @@ describe("art catalog", () => {
       return `${theme.floor.src}|${theme.wall.src}`;
     })).size).toBe(TERRAIN_THEME_IDS.length);
     expect(textureSources.size).toBe(9);
+  });
+
+  it("gently lifts dark-dungeon walls instead of crushing their detail", () => {
+    for (const theme of Object.values(TERRAIN_THEMES)) {
+      if (theme.wall.src !== "/assets/wall-dark-dungeon-v1.png") continue;
+      expect(theme.wallTreatment.brightness).toBeGreaterThanOrEqual(1.1);
+      expect(theme.wallTreatment.contrast).toBeLessThanOrEqual(1);
+    }
   });
 
   it("rejects yellow with green or pink in either floor/wall direction", () => {

@@ -423,3 +423,54 @@ The runtime renderer places the hole as a flat terrain overlay without a CSS
 shadow, filter, or coloured outline. Collision and multi-square jumping are
 code-native mechanics; only the illustrated hole and boots are generated bitmap
 art.
+
+## Version 10 poison and Antidote Leaf art
+
+Build 0.10.0 adds two bitmap assets produced with the built-in OpenAI ImageGen
+workflow in new-image mode (no reference image). The original generated files
+remain in the Codex generation store and are copied unchanged into
+`docs/source-assets` for provenance.
+
+### Magical poison texture
+
+- Built-in generated source:
+  `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-01bc00e3-9cfe-42c9-b014-f6bed1642d81.png`
+- Archived master: `docs/source-assets/terrain-poison-v1-master.png`
+- Periodic runtime texture: `public/assets/terrain-poison-v1.png`
+- Processing: 1024 × 1024 RGB resize, periodic-plus-smooth Poisson boundary
+  correction, and optimized 256-colour PNG output through
+  `scripts/process_terrain_textures.py`
+
+Exact prompt:
+
+```text
+Create a single square 1:1 game texture asset for a cute children's fantasy maze game titled "Maze so Puzzle: For Ame to Solve!".
+SUBJECT: a top-down magical poison puddle surface texture, soft lilac and grape-purple liquid with small mint-green bubbles and gentle pearly highlights. It must feel harmless, whimsical, and clearly different from water and lava.
+STYLE: lovely simple chunky anime fantasy JRPG art, soft pastel palette, polished 3DS-era storybook game rendering, rounded painted forms, subtle material depth, suitable for a five-year-old.
+COMPOSITION: texture fills the entire square canvas uniformly; orthographic top-down view; no horizon and no perspective; evenly distributed small motifs; quiet center and edges so repeated copies do not reveal a focal point.
+TILING: designed as a seamless repeatable material; left edge must naturally continue into right edge and top edge into bottom edge; no border, frame, lip, rim, shadow, vignette, tile outline, large central blob, path, floor around it, objects, characters, icons, letters, or text.
+BACKGROUND/OUTPUT: opaque full-bleed texture, clean high-resolution square PNG. The game will programmatically inset and softly feather connected poison regions over a floor texture.
+```
+
+### Antidote Leaf
+
+- Built-in generated source:
+  `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-adc496d8-70eb-4fa4-8d50-5f7d8042ea70.png`
+- Archived master: `docs/source-assets/antidote-leaf-v1-master.png`
+- Runtime sprite: `public/assets/antidote-leaf-v1.png`
+- Processing: 512 × 512 RGBA Lanczos downsample with the source transparency
+  validated and preserved by `scripts/process_traversal_assets.py`
+
+Exact prompt:
+
+```text
+Create one isolated inventory and maze pickup sprite for a cute children's fantasy maze game titled "Maze so Puzzle: For Ame to Solve!".
+SUBJECT: a magical antidote leaf — one plump mint-and-teal leaf with a softly glowing pale vein, a tiny lavender ribbon tied around its short stem, and two small sparkling dew drops. It should immediately read as a friendly protective herb that lets a child cross purple poison.
+STYLE: lovely simple chunky anime fantasy JRPG sprite, soft pastel colors, rounded toy-like forms, polished 3DS-era storybook game rendering, crisp silhouette, bright and cheerful, suitable for a five-year-old.
+COMPOSITION: centered single object, fully visible, roughly 75% of the square, balanced 1:1 tile silhouette, readable at tiny game-sprite size. Front/top three-quarter icon view with no scene and no floor.
+BACKGROUND/OUTPUT: transparent background with clean antialiased cutout edges and no cast shadow outside the object. No frame, badge, circle, pedestal, hand, character, extra plants, letters, labels, numbers, or text. High-resolution square PNG.
+```
+
+Both runtime assets are preloaded only for levels that use them. Connected
+poison geometry, collision gating, the leaf's inventory state, and the soft
+inset/feathered region mask are code-native behavior rather than generated art.

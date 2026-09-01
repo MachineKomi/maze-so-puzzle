@@ -16,6 +16,7 @@ export const PLAYER_PROGRESS_SCHEMA_VERSION = 3 as const;
 export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v3";
 export const VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v2";
 export const LEGACY_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v1";
+/** Legacy/default rescue target for callers and saves created before variable pet counts. */
 export const ANIMALS_PER_MAZE = ANIMALS_PER_LEVEL;
 
 export type ProgressLevelSource = "curated" | "generated";
@@ -75,8 +76,8 @@ export const REWARD_LABELS = {
   },
   perfectRescue: {
     label: "Perfect rescue bonus",
-    shortLabel: "All three!",
-    description: "Bonus gold for rescuing all three friends in one maze.",
+    shortLabel: "All friends!",
+    description: "Bonus gold for rescuing every friend in one maze.",
     icon: "\u2605",
   },
 } as const satisfies Readonly<Record<string, LabelMetadata>>;
@@ -91,7 +92,7 @@ export const STICKER_LABELS: Readonly<Record<StickerId, LabelMetadata>> = {
   "animal-friend": {
     label: "Animal Friend",
     shortLabel: "Animal Friend",
-    description: "Rescue all three animal friends in one maze.",
+    description: "Rescue every animal friend in one maze.",
     icon: "\ud83d\udc3e",
   },
   "surprise-sparkle": {
@@ -106,19 +107,19 @@ export const ACHIEVEMENT_LABELS: Readonly<Record<RescueMedalId, LabelMetadata>> 
   "perfect-rescue-5": {
     label: "Helping Paw Medal",
     shortLabel: "5 perfect rescues",
-    description: "Rescue all three friends in five different mazes.",
+    description: "Rescue every friend in five different mazes.",
     icon: "\ud83e\udd49",
   },
   "perfect-rescue-10": {
     label: "Rainbow Rescue Medal",
     shortLabel: "10 perfect rescues",
-    description: "Rescue all three friends in ten different mazes.",
+    description: "Rescue every friend in ten different mazes.",
     icon: "\ud83e\udd48",
   },
   "perfect-rescue-15": {
     label: "Golden Guardian Medal",
     shortLabel: "15 perfect rescues",
-    description: "Rescue all three friends in fifteen different mazes.",
+    description: "Rescue every friend in fifteen different mazes.",
     icon: "\ud83e\udd47",
   },
 };
@@ -190,6 +191,10 @@ export interface LevelBestResult {
   readonly bestSteps: number | null;
   readonly bestPower: number | null;
   readonly bestRescuedCount: number;
+  /** Rescue target for the latest known version of this maze. */
+  readonly totalRescueCount: number;
+  /** True once every available friend has been rescued on any completion. */
+  readonly perfectRescue: boolean;
   /** Null only when a v2 save did not record how this maze was created. */
   readonly source: ProgressLevelSource | null;
   /** Species from the best documented rescue attempt; v2 history remains unknown. */
@@ -216,9 +221,9 @@ export interface PlayerProgress {
   readonly totalAnimalsRescued: number;
   /** Known cumulative species rescues; v2 partial-rescue species are deliberately not guessed. */
   readonly rescuesBySpecies: AnimalRescueTotals;
-  /** Number of distinct mazes in which the best rescue result is all three. */
+  /** Number of distinct mazes in which every available friend was rescued. */
   readonly perfectRescueMazeCount: number;
-  /** Consecutive first-time maze completions on which all three were rescued. */
+  /** Consecutive first-time maze completions on which every friend was rescued. */
   readonly currentPerfectRescueStreak: number;
   readonly bestPerfectRescueStreak: number;
 }
@@ -229,6 +234,8 @@ export interface LevelRewardInput {
   /** Zero-based for story mazes; pass -1 for generated mazes. */
   readonly campaignIndex: number;
   readonly rescuedCount: number;
+  /** Defaults to the legacy three-friend target when omitted. */
+  readonly totalRescueCount?: number;
   readonly firstCompletion: boolean;
 }
 
@@ -252,6 +259,8 @@ export interface LevelCompletionInput {
   /** Zero-based for story mazes; pass -1 for generated mazes. */
   readonly campaignIndex: number;
   readonly rescuedCount: number;
+  /** Defaults to the legacy three-friend target when omitted. */
+  readonly totalRescueCount?: number;
   /** Unknown entries and duplicates are ignored at the persistence boundary. */
   readonly rescuedSpecies?: readonly AnimalSpecies[];
   readonly steps: number;
@@ -306,7 +315,20 @@ function nonNegativeInteger(value: unknown, fallback = 0): number {
 }
 
 function rescuedAnimalCount(value: unknown): number {
-  return Math.min(ANIMALS_PER_MAZE, nonNegativeInteger(value));
+  return Math.min(ANIMAL_SPECIES.length, nonNegativeInteger(value));
+}
+
+function totalRescueCount(value: unknown): number {
+  if (value === undefined) return ANIMALS_PER_MAZE;
+  return Math.min(ANIMAL_SPECIES.length, nonNegativeInteger(value));
+}
+
+function rescuedCountForTarget(value: unknown, target: number): number {
+  return Math.min(target, rescuedAnimalCount(value));
+}
+
+function isPerfectRescue(rescuedCount: number, target: number): boolean {
+  return target > 0 && rescuedCount >= target;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -349,7 +371,7 @@ function mergeUnique<T extends string>(existing: readonly T[], added: readonly T
   return [...new Set([...existing, ...added])];
 }
 
-function knownSpecies(value: unknown, maximum = ANIMALS_PER_MAZE): AnimalSpecies[] {
+function knownSpecies(value: unknown, maximum: number = ANIMAL_SPECIES.length): AnimalSpecies[] {
   if (!Array.isArray(value)) return [];
   const unique = new Set(value.filter(isAnimalSpecies));
   return ANIMAL_SPECIES.filter((species) => unique.has(species)).slice(0, maximum);
@@ -449,6 +471,10 @@ function sanitizeBestResults(
     const bestSteps = ownValue(candidate, "bestSteps");
     const bestPower = ownValue(candidate, "bestPower");
     const bestRescuedCount = rescuedAnimalCount(ownValue(candidate, "bestRescuedCount"));
+    const rescueTarget = includeVersionThreeFields
+      ? totalRescueCount(ownValue(candidate, "totalRescueCount"))
+      : ANIMALS_PER_MAZE;
+    const storedPerfectRescue = ownValue(candidate, "perfectRescue");
     const source = ownValue(candidate, "source");
     results[normalizedLevelId] = {
       completions,
@@ -459,6 +485,9 @@ function sanitizeBestResults(
         ? nonNegativeInteger(bestPower)
         : null,
       bestRescuedCount,
+      totalRescueCount: rescueTarget,
+      perfectRescue: (includeVersionThreeFields && storedPerfectRescue === true)
+        || isPerfectRescue(bestRescuedCount, rescueTarget),
       source: includeVersionThreeFields && isLevelSource(source)
         ? source
         : null,
@@ -492,7 +521,7 @@ function sanitizeProgressObject(
   );
   const results = Object.values(bestResultsByLevel);
   const perfectResultsInSave = Object.values(bestResultsByLevel)
-    .filter((result) => result.bestRescuedCount === ANIMALS_PER_MAZE)
+    .filter((result) => result.perfectRescue)
     .length;
   const bestRescuesInSave = results
     .reduce((sum, result) => sum + result.bestRescuedCount, 0);
@@ -641,20 +670,22 @@ export function migratePlayerProgress(value: unknown): PlayerProgress {
 /** Calculate the deterministic prizes for one successful maze attempt. */
 export function calculateLevelReward(input: LevelRewardInput): CalculatedLevelReward {
   const levelId = safeLevelId(input.levelId);
-  const rescuedCount = rescuedAnimalCount(input.rescuedCount);
+  const rescueTarget = totalRescueCount(input.totalRescueCount);
+  const rescuedCount = rescuedCountForTarget(input.rescuedCount, rescueTarget);
+  const perfect = isPerfectRescue(rescuedCount, rescueTarget);
   const campaignTier = input.source === "curated" && input.campaignIndex >= 0
     ? Math.min(5, Math.floor(nonNegativeInteger(input.campaignIndex) / 5))
     : 0;
   const completion = input.source === "curated" ? 10 + campaignTier * 2 : 8;
   const firstCompletion = input.firstCompletion ? 5 : 0;
   const animalRescue = rescuedCount * 3;
-  const perfectRescue = rescuedCount === ANIMALS_PER_MAZE ? 6 : 0;
+  const perfectRescue = perfect ? 6 : 0;
   const stickerIds: StickerId[] = [];
 
   if (input.firstCompletion && input.source === "curated" && input.campaignIndex === 0) {
     stickerIds.push("first-star");
   }
-  if (rescuedCount === ANIMALS_PER_MAZE) {
+  if (perfect) {
     stickerIds.push("animal-friend");
   }
   if (input.firstCompletion && input.source === "generated") {
@@ -685,7 +716,9 @@ export function applyLevelCompletion(
 ): PlayerProgress {
   const current = migratePlayerProgress(progress);
   const levelId = safeLevelId(input.levelId);
-  const rescuedCount = rescuedAnimalCount(input.rescuedCount);
+  const rescueTarget = totalRescueCount(input.totalRescueCount);
+  const rescuedCount = rescuedCountForTarget(input.rescuedCount, rescueTarget);
+  const perfect = isPerfectRescue(rescuedCount, rescueTarget);
   const rescuedSpecies = knownSpecies(input.rescuedSpecies, rescuedCount);
   const existing = Object.hasOwn(current.bestResultsByLevel, levelId)
     ? current.bestResultsByLevel[levelId]
@@ -697,15 +730,16 @@ export function applyLevelCompletion(
     source,
     campaignIndex: input.campaignIndex,
     rescuedCount,
+    totalRescueCount: rescueTarget,
     firstCompletion,
   });
   const steps = nonNegativeInteger(input.steps);
   const power = nonNegativeInteger(input.power);
-  const wasPerfectRescue = existing?.bestRescuedCount === ANIMALS_PER_MAZE;
-  const newlyPerfectRescue = !wasPerfectRescue && rescuedCount === ANIMALS_PER_MAZE;
+  const wasPerfectRescue = existing?.perfectRescue ?? false;
+  const newlyPerfectRescue = !wasPerfectRescue && perfect;
   const perfectRescueMazeCount = current.perfectRescueMazeCount + (newlyPerfectRescue ? 1 : 0);
   const currentPerfectRescueStreak = firstCompletion
-    ? rescuedCount === ANIMALS_PER_MAZE
+    ? perfect
       ? current.currentPerfectRescueStreak + 1
       : 0
     : current.currentPerfectRescueStreak;
@@ -732,6 +766,8 @@ export function applyLevelCompletion(
       ? power
       : Math.max(existing.bestPower, power),
     bestRescuedCount: Math.max(previousBestRescuedCount, rescuedCount),
+    totalRescueCount: rescueTarget,
+    perfectRescue: wasPerfectRescue || perfect,
     source,
     bestRescuedSpecies,
   };

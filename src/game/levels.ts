@@ -58,7 +58,8 @@ const ANIMAL_SPECIES: Readonly<Record<string, AnimalSpecies>> = {
 /**
  * Parses the compact authoring format used by the tutorial levels and tests.
  * Interactive characters always sit on ordinary floor terrain. Lowercase `o`
- * authors a ground hole and `j` places the spring-boots pickup.
+ * authors a ground hole, `%` authors poison, `j` places spring boots, and `l`
+ * places the antidote leaf that makes poison safe to cross.
  */
 export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
   const height = options.map.length;
@@ -109,9 +110,20 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
         continue;
       }
 
-      if (character === "~" || character === "^" || character === "o") {
+      if (
+        character === "~" ||
+        character === "^" ||
+        character === "%" ||
+        character === "o"
+      ) {
         terrainRow.push(
-          character === "~" ? "water" : character === "^" ? "lava" : "hole",
+          character === "~"
+            ? "water"
+            : character === "^"
+              ? "lava"
+              : character === "%"
+                ? "poison"
+                : "hole",
         );
         continue;
       }
@@ -165,6 +177,11 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
 
       if (character === "j") {
         addObject({ kind: "spring-boots", at });
+        continue;
+      }
+
+      if (character === "l") {
+        addObject({ kind: "antidote-leaf", at });
         continue;
       }
 
@@ -237,7 +254,7 @@ export const MOVEMENT_LEVEL = parseAsciiLevel({
   introducedMechanics: ["movement", "exit", "animal-rescue"],
   map: [
     "#########",
-    "#wc.d...#",
+    "#c......#",
     "#####.#.#",
     "#.....#.#",
     "#.#####.#",
@@ -267,7 +284,7 @@ export const SWORD_AND_KEY_LEVEL = parseAsciiLevel({
     "#.###.#.#.#",
     "#.R.#r#...#",
     "###.#.#.###",
-    "#q....#..@#",
+    "#.....#..@#",
     "###########",
   ],
 });
@@ -556,6 +573,115 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
   ],
 });
 
+export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAsciiLevel({
+  id: "twilight-treasure-loop",
+  name: "Twilight Treasure Loop",
+  objective: "Search the side trails for every tool, then unlock the twilight star!",
+  terrainThemeId: "parade-courtyard",
+  weaponStyle: "leaf-blade",
+  enemyStyle: "mushroom-imp",
+  enemyStylesByPower: {
+    4: "blueberry-slime",
+    6: "goblin",
+    9: "pebble-golem",
+  },
+  cageStyle: "garden-vine",
+  potionAmount: 3,
+  introducedMechanics: [
+    "large-maze",
+    "exploration-map",
+    "three-key-colors",
+    "power-chain",
+    "spring-boots",
+    "ground-holes",
+    "required-backtracking",
+    "off-route-prerequisites",
+    "optional-miniboss-rescue",
+    "four-friend-challenge",
+  ],
+  map: [
+    "#####################",
+    "#E#.....#...#cy9....#",
+    "#.###.#.#.#.#######.#",
+    "#.....#...#.....#...#",
+    "###############.#.#.#",
+    "#@#.......#..u#.#.#.#",
+    "#.#.#.###.#.###.#.###",
+    "#.#R#.#...#.#...#...#",
+    "#.#.#.#.###.#.#####.#",
+    "#.#.#.#.....#^#..6Y.#",
+    "#.#.#4#####.#^#.###.#",
+    "#.#.#...#...#.#.#bp.#",
+    "#.#.###.#####.#.###.#",
+    "#.#...#.....#B#...#.#",
+    "#.###.#####.#.###.#o#",
+    "#...#.....#.#.....#o#",
+    "#.#.#####.#.#######.#",
+    "#.#..h#...#.~~#.....#",
+    "#s#2###.#####.#.#####",
+    "#q#.......rf#......j#",
+    "#####################",
+  ],
+});
+
+export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAsciiLevel({
+  id: "moonlit-friendship-quest",
+  name: "Moonlit Friendship Quest",
+  objective: "Remember every turning and gather the three keys for five moonlit friends!",
+  terrainThemeId: "moonbeam-castle",
+  weaponStyle: "moon-wand",
+  enemyStyle: "moon-bat",
+  enemyStylesByPower: {
+    2: "blueberry-slime",
+    4: "mushroom-imp",
+    7: "goblin",
+    8: "moon-bat",
+    9: "pebble-golem",
+  },
+  cageStyle: "moon-silver",
+  potionAmount: 3,
+  introducedMechanics: [
+    "large-maze",
+    "exploration-map",
+    "fog-of-war",
+    "three-key-colors",
+    "long-power-chain",
+    "spring-boots",
+    "ground-holes",
+    "poison",
+    "antidote-leaf",
+    "required-backtracking",
+    "off-route-prerequisites",
+    "miniboss-key-guardian",
+    "five-friend-challenge",
+  ],
+  map: [
+    "#######################",
+    "#E..#.......#.......#p#",
+    "###.#####.#.#####.#.#.#",
+    "#.#...#...#.......#.#.#",
+    "#.###.#.###########.#.#",
+    "#.rq#...#.......#.#.#.#",
+    "#.#######.#.###.#.#.#.#",
+    "#.......#.#...#...#.#.#",
+    "#.#####.#Y###.###.#.#.#",
+    "#....2#.#B#n#..8#.#...#",
+    "#####.#.#.#y###.#####.#",
+    "#.....#.#.#...#.....#.#",
+    "#.#####.#.###9###.#.#.#",
+    "#..s#R..#...#...#.#.#.#",
+    "#.###.#####.###.#.###.#",
+    "#.#...#..~#.....#.#^^.#",
+    "#.#.#l#.#~#####.#.#.###",
+    "#.#.#f#.#.....#.#.#7..#",
+    "#.#.###.###.#j#o#.###.#",
+    "#.#..4#%#h#.#d#o#.....#",
+    "#.###.#%#u#.###.#######",
+    "#..@#.....#.........bp#",
+    "#######################",
+  ],
+});
+
 export const CURATED_LEVELS: readonly LevelDefinition[] = [
   MOVEMENT_LEVEL,
   SWORD_AND_KEY_LEVEL,
@@ -567,6 +693,8 @@ export const CURATED_LEVELS: readonly LevelDefinition[] = [
   AMES_GRAND_PARADE_LEVEL,
   SPRINGSTEP_SKY_HOLLOW_LEVEL,
   LANTERNLIGHT_LABYRINTH_LEVEL,
+  TWILIGHT_TREASURE_LOOP_LEVEL,
+  MOONLIT_FRIENDSHIP_QUEST_LEVEL,
 ];
 
 export function getCuratedLevel(id: string): LevelDefinition | undefined {

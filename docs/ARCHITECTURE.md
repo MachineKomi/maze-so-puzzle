@@ -25,9 +25,9 @@ state.
    adventure seeds place selected prerequisites on dead-end branches to create
    intentional detours. Level and object records carry stable visual IDs without
    placing artwork concerns in the engine. The authored campaign deliberately
-   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, and 25 tile boards, with Rainbow
-   Picnic before the smaller Toasty Toes breather and Springstep Sky Hollow
-   before the finale.
+   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, 25, 21, and 23 tile boards. The two
+   newest adventures add four- and five-friend backtracking routes; Moonlit
+   Friendship Quest also requires an Antidote Leaf detour before poison.
 5. `src/game/solver.ts` validates structural rules and searches the exact engine
    state space to prove both an ordinary solution and an all-animal solution.
 6. `src/game/exploration.ts` derives clamped camera windows, the shared camera
@@ -68,12 +68,20 @@ state.
   pure TypeScript wherever practical.
 - Visual IDs are presentation metadata. Combat depends on an enemy's Power, not
   its illustration; collecting any weapon sets the same engine sword flag for
-  save compatibility. Each story maze has one weapon and three unique pets.
+  save compatibility. Each story maze has one weapon and between one and five
+  distinct optional pets.
 - Ground holes are engine terrain, not decorative art. A normal step is blocked
   until Spring Boots are collected; one directional input then scans across the
   consecutive hole run and lands on the first valid non-hole square. The engine
   emits the complete jump path so the UI can animate it, while the solver uses
   the exact same transition and cannot assume a safe landing.
+- Poison is connected engine terrain. It blocks until an `antidote-leaf`
+  object has been collected; engine, solver, structural validation, art
+  preloading, minimap, accessibility descriptions, and active-run migration use
+  the same typed rule.
+- Underpowered armed enemy contact emits `enemy-too-strong`, returns the exact
+  same playing `GameState` object, and never advances steps, Power, position, or
+  interaction IDs. The UI owns the reassuring comparison dialog.
 - Generated-maze presentation is selected from dedicated deterministic hash
   streams. Recreating a seed reproduces both its puzzle and visual variants,
   while adding artwork choices cannot perturb topology or progression placement.
@@ -90,12 +98,13 @@ state.
   but cannot follow a wall or bypass a hazard, door, or enemy. Keyboard and D-pad
   controls remain independent.
 - Terrain geometry is a connected cell union rendered through SVG. Globally
-  aligned `userSpaceOnUse` patterns keep the floor, wall, water, and lava art in
+  aligned `userSpaceOnUse` patterns keep the floor, wall, water, lava, and poison art in
   world coordinates as the camera moves. Boundary tracing resolves diagonal
   touches deterministically, preserves holes, rounds convex and concave corners,
   and includes a camera gutter so the viewport edge cannot invent a corner.
-- Water and lava use connected rounded fills with no outline, floor lip, raised
-  edge, or cast shadow. Their periodic textures remain aligned across joins.
+- Water, lava, and poison use slightly inset, softly feathered connected rounded
+  fills with no outline, floor lip, raised edge, or cast shadow. Their periodic
+  textures remain aligned across joins.
 - Floor and wall paintings are converted from retained ImageGen masters with a
   periodic-plus-smooth Poisson correction, then rendered at a small world scale.
   Selected themes may add a sparse, world-aligned transparent dressing pattern;
@@ -116,7 +125,7 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.9.1 source is shared by the web and Tauri build paths. Its automated web
+- The 0.10.0 source is shared by the web and Tauri build paths. Its automated web
   gate, locked Cargo check, staged unsigned portable executable and installer,
   source comparison, hashes, and smoke launch pass. Public deployment,
   clean-machine installation, signing, and physical-device feel/listening remain
@@ -139,8 +148,8 @@ migration, 6 x 6 even-window clamping, variable 9–29 generated sizes, connecte
 post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
 selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, and cage-front asset coverage. Every authored maze and sampled
-generated maze is run through the stateful solver. The 0.9.1 run covers 215 tests
-across 16 files; `npm run check` also completes strict TypeScript and the Vite
+generated maze is run through the stateful solver. The 0.10.0 run covers 239 tests
+across 17 files; `npm run check` also completes strict TypeScript and the Vite
 production build. Dependency review, locked Cargo compilation, packaging,
 public deployment, and real-device checks remain separate release gates.
 
@@ -151,7 +160,8 @@ public deployment, and real-device checks remain separate release gates.
   same transition function.
 - Add story mazes to `CURATED_LEVELS`; structural and progression tests will
   reject unsolvable or incorrectly gated content. Give each new story an
-  intentional terrain theme, weapon/enemy/cage styles, and three distinct pets.
+  intentional terrain theme, weapon/enemy/cage styles, and a deliberate rescue
+  count from one through five.
 - Add a visual variant by extending the typed ID union and `artCatalog.ts`, then
   supply and validate the local asset. Keep engine behavior keyed to object kind
   and Power rather than art labels or filenames.

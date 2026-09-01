@@ -1,38 +1,37 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: published 0.9.1 web/Windows release
+Audited build: 0.10.0 web/Windows release candidate
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-01 the integrated 0.9.1 unit suite and strict
-TypeScript/Vite production build completed. Local 1024 x 768 and 667 x 375
-previews render the rebuilt terrain without overlap, document overflow, or
-browser errors. The exact 0.9.1 dependency audit/tree, locked-Tauri compile,
-Windows packaging/source comparison/hash/smoke launch, periodic-texture checks,
-and core local responsive matrix also pass. Release commit `9213213` is on
-GitHub `main`; the canonical Vercel alias serves 0.9.1 and passes the initial
-production smoke at 1024×768 and 667×375.
+real-device testing. On 2026-09-01 the integrated 0.10.0 suite passed 239 tests
+across 17 files and the strict TypeScript/Vite production build. Local 1024 ×
+768 and 844 × 390 previews show the twelve-maze picker, variable 1–5 friend
+cards, hint dialog, non-destructive stronger-enemy dialog, and poison/Antidote
+Leaf route without card overlap or document overflow. Locked-Tauri compilation,
+Windows packaging, GitHub/Vercel promotion, and the final public smoke are
+recorded as they complete below.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
-## Current 0.9.1 release status
+## Current 0.10.0 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, pointer controls, held cadence, follower trails, visual variants, rescue-record migration, terrain topology, Spring Boots, and hole jumps | 215 of 215 tests across 16 files passed; strict TypeScript/Vite, zero-vulnerability npm audit, clean direct tree, and locked Cargo check passed |
-| Landscape phones | Full-safe-viewport shell, full-height maze card, overlaid maze information, compact sidebar, and two-row movement controls are implemented for short landscape screens | Local 0.9.1 passed at 667×375 with a 347 px square board and no document overflow; the established 740×360 and 844×390 baseline remains. Physical-device repeats remain |
-| iPad-size layout | Phone/iPad maze panels use almost all available height; coarse-pointer actions retain 44 px targets | Local 0.9.1 passed at 1024×768 with a 534 px square board and no overflow or overlap; the established 1180×820 baseline remains. Physical-iPad gesture/pinch/listening checks remain |
+| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, pointer controls, held cadence, follower trails, visual variants, rescue-record migration, terrain topology, Spring Boots, poison, and Antidote Leaf | 239 of 239 tests across 17 files passed; strict TypeScript/Vite passed. Dependency and locked-Cargo checks remain in the final gate below |
+| Landscape phones | Full-safe-viewport shell, full-height maze card, overlaid maze information, compact sidebar, and two-row movement controls are implemented for short landscape screens | Local 0.10.0 passed at 844×390 with exact viewport-sized layout, five visible rescue portraits, and no document overflow. Physical-device repeat remains |
+| iPad-size layout | Phone/iPad maze panels use almost all available height; coarse-pointer actions retain 44 px targets | Local 0.10.0 passed at 1024×768; objective, 1–5 friend card, bag, minimap, controls, level dots, and utility row have non-overlapping rectangles. Physical-iPad gesture/pinch/listening checks remain |
 | Pointer movement | All input paths move once immediately, allow 220 ms to release for one square, then accelerate smoothly from 160 ms to a capped 100 ms repeat; direction changes reset the ramp | Focused cadence and corner regressions cover tile intent, queued steering, approach-direction choice, wobble tolerance, and strict one-tile safety; final physical-touch feel remains |
 | Exploration policy | The shared rule enables a 6 x 6 camera and fog minimap whenever either maze dimension exceeds 6; even-window bias, edge clamping, and reveal accumulation are unit-covered | Focused tests pass and the public 15 x 15 camera rendered the 6 x 6 view; the complete follow/minimap movement pass remains manual |
-| Tester access | The title build label opens a direct ten-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Local 0.9.1 build-label, exact-query, and ten-entry list checks pass; the complete canonical picker/isolation repeat remains pending |
+| Tester access | The title build label opens a direct twelve-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Local 0.10.0 exact-query and twelve-entry picker checks pass; the complete canonical picker/isolation repeat remains pending |
 | Terrain geometry | Maze terrain is one globally aligned SVG surface with connected wall/water/lava regions, rounded convex/concave bends, periodic textures, a camera gutter, stronger floor/wall contrast, and no hazard outlines or shadows; holes use flat transparent overlays | All ten floor/wall files pass 1024 px opacity/repeat-boundary checks after Poisson correction; local Maze 2, garden, and ruin sampling found no seams, mirrored bands, or ghost masonry |
 | Visual catalogue | Ten unique terrain themes with dominant-colour plus measured-lightness compatibility, five weapons, five friendly enemy looks, eight pet species, four opaque AI-generated front cage layers, Spring Boots, a ground-hole overlay, and two sparse terrain dressings are selected through typed IDs and local assets | Tests reject gold with green/sage or rose in both directions, require every floor to lead its wall by at least eight lightness points, and cover both floor- and wall-dressing preload; both dressing files pass 512 px RGBA/transparent-edge checks |
 | Pet followers | Rescued friends occupy distinct recent visible footprints behind Ame with bounded loop-free trail state | Pure trail regressions pass and one rescued follower was verified through normal local controls; multi-follower, reduced-motion, and physical-device feel checks remain |
-| Story pacing | Authored sizes run 9, 11, 13, 15, 13, 15, 17, 17, 19, and 25; Springstep Sky Hollow introduces hole jumps before the finale | All ten ordinary and perfect-rescue routes are solver-validated; four later levels deliberately require out-and-back detours |
+| Story pacing | Authored sizes run 9, 11, 13, 15, 13, 15, 17, 17, 19, 25, 21, and 23; friend totals grow 1, 2, 3…, 4, 5 | All twelve ordinary and perfect-rescue routes are solver-validated. Twilight and Moonlit require every authored prerequisite off the bare exit route; Moonlit's leaf precedes a connected poison gate |
 | Surprise Maze variants | Generated presentation remains deterministic; size varies by seed across unlocked odd 9–29 bands, water/lava form connected post-boots clusters, and eligible adventure seeds add branch prerequisites plus post-Spring-Boots holes | A 500-seed adventure stress audit spanning every odd size found zero ordinary/perfect failures; 353 samples had exactly one Spring Boots pickup before connected holes |
 | Optional Power puzzles | Wishing Woods, Ame's Grand Parade, Springstep Sky Hollow, and Lanternlight separate progression/rescue requirements across branches | Solver-verified ordinary/all-pets routes are 114/148, 116/136, 190/214, and 290/322 steps respectively |
 | Audio and presentations | Five full OST songs are assigned per maze with stable session mapping and immediate-repeat avoidance; jump, rescue, clash, sparks, impact, Power, win, and loss cues support short event presentations | Focused audio tests pass; local winning and underpowered battles showed one opponent, the clash, Power count-up, and clean handoff. Final listening, reduced-motion, cancellation, and public-device feel remain manual |

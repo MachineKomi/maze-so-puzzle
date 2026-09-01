@@ -14,6 +14,7 @@ function makeLevel(
     if (tile === "#") return "wall";
     if (tile === "~") return "water";
     if (tile === "^") return "lava";
+    if (tile === "%") return "poison";
     if (tile === "o") return "hole";
     return "floor";
   }));
@@ -160,6 +161,7 @@ describe("resolvePointerMoveDirection", () => {
   it.each([
     ["water", "~"],
     ["lava", "^"],
+    ["poison", "%"],
   ] as const)("never auto-steers onto %s", (_label, unsafeTile) => {
     const level = makeLevel([
       "#####",
@@ -168,7 +170,7 @@ describe("resolvePointerMoveDirection", () => {
       "#...#",
       "#####",
     ]);
-    const state = { ...createInitialGameState(level), hasBoots: true };
+    const state = { ...createInitialGameState(level), hasBoots: true, hasAntidoteLeaf: true };
     expect(resolvePointerMoveDirection(level, state, "right", -1)).toBe("right");
   });
 
@@ -200,7 +202,7 @@ describe("resolvePointerMoveDirection", () => {
     expect(resolvePointerMoveDirection(level, state, "right", -1)).toBe("right");
   });
 
-  it.each(["~", "^", "o"] as const)("does not route around an intended hazard", (hazard) => {
+  it.each(["~", "^", "%", "o"] as const)("does not route around an intended hazard", (hazard) => {
     const waterLevel = makeLevel([
       "#####",
       "#...#",

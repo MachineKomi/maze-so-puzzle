@@ -82,7 +82,7 @@ describe("Power combat", () => {
     expect(revisit.defeatedEnemyIds).toHaveLength(1);
   });
 
-  it("loses to a stronger goblin and restart restores the level", () => {
+  it("stops safely at a stronger goblin without changing the attempt", () => {
     const testLevel = level("stronger-combat", "#@s4..E.#");
     const armed = movePlayer(
       testLevel,
@@ -92,13 +92,17 @@ describe("Power combat", () => {
     const result = movePlayer(testLevel, armed, "right");
 
     expect(result.moved).toBe(false);
-    expect(result.state.status).toBe("lost");
+    expect(result.state).toBe(armed);
+    expect(result.state.status).toBe("playing");
     expect(result.state.position).toEqual(armed.position);
+    expect(result.state.steps).toBe(armed.steps);
+    expect(result.state.power).toBe(armed.power);
+    expect(result.state.defeatedEnemyIds).toEqual([]);
     expect(result.events[0]).toMatchObject({
-      type: "combat-lost",
+      type: "enemy-too-strong",
+      objectId: testLevel.objects.find((object) => object.kind === "enemy")?.id,
       playerPower: 2,
       enemyPower: 4,
-      enemyPowerAfter: 6,
     });
     expect(restartLevel(testLevel)).toEqual(createInitialGameState(testLevel));
   });
@@ -153,6 +157,51 @@ describe("keys, doors, potions and boots", () => {
     expect(state.position.x).toBe(3);
     state = movePlayer(bootsLevel, state, "right").state;
     expect(state.position.x).toBe(4);
+  });
+
+  it("blocks poison until the antidote leaf is collected, then permits it", () => {
+    const corridor = level("with-antidote-leaf", "#@....E.#");
+    const terrain = corridor.terrain.map((row, y) => row.map((tile, x) => (
+      y === 1 && (x === 3 || x === 4) ? "poison" as const : tile
+    )));
+    const antidoteLeaf = {
+      id: "with-antidote-leaf-antidote-leaf-1",
+      kind: "antidote-leaf" as const,
+      at: { x: 2, y: 1 },
+    };
+    const poisonLevel = { ...corridor, terrain, objects: [antidoteLeaf] };
+    const initial = createInitialGameState(poisonLevel);
+
+    const noLeafLevel = { ...poisonLevel, id: "without-antidote-leaf", objects: [] };
+    const beforePoison = movePlayer(
+      noLeafLevel,
+      createInitialGameState(noLeafLevel),
+      "right",
+    ).state;
+    const blocked = movePlayer(noLeafLevel, beforePoison, "right");
+    expect(blocked.state).toBe(beforePoison);
+    expect(blocked).toMatchObject({ moved: false });
+    expect(blocked.events[0]).toEqual({
+      type: "blocked",
+      reason: "needs-antidote-leaf",
+      target: { x: 3, y: 1 },
+      terrain: "poison",
+    });
+
+    const collected = movePlayer(poisonLevel, initial, "right");
+    expect(collected.state.hasAntidoteLeaf).toBe(true);
+    expect(collected.state.collectedObjectIds).toEqual([antidoteLeaf.id]);
+    expect(collected.events[0]).toEqual({
+      type: "antidote-leaf-collected",
+      objectId: antidoteLeaf.id,
+    });
+    expect(isObjectResolved(antidoteLeaf, collected.state)).toBe(true);
+
+    const crossedFirst = movePlayer(poisonLevel, collected.state, "right");
+    const crossedSecond = movePlayer(poisonLevel, crossedFirst.state, "right");
+    expect(crossedFirst.moved).toBe(true);
+    expect(crossedSecond.moved).toBe(true);
+    expect(crossedSecond.state.position).toEqual({ x: 4, y: 1 });
   });
 
   it("applies a potion exactly once", () => {

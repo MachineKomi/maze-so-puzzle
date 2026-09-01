@@ -26,13 +26,14 @@ function levelWithRelevantArt(): LevelDefinition {
     source: "curated",
     terrainThemeId: "star-garden",
     width: 4,
-    height: 2,
+    height: 3,
     initialPower: 2,
     start: { x: 1, y: 1 },
     exit: { x: 2, y: 1 },
     terrain: [
       ["wall", "wall", "wall", "wall"],
       ["wall", "hole", "water", "wall"],
+      ["wall", "poison", "floor", "wall"],
     ],
     objects: [
       { id: "enemy", kind: "enemy", at: { x: 1, y: 1 }, power: 1, style: "blueberry-slime" },
@@ -40,6 +41,7 @@ function levelWithRelevantArt(): LevelDefinition {
       { id: "key", kind: "key", at: { x: 1, y: 1 }, color: "red" },
       { id: "door", kind: "door", at: { x: 2, y: 1 }, color: "red" },
       { id: "spring-boots", kind: "spring-boots", at: { x: 1, y: 1 } },
+      { id: "antidote-leaf", kind: "antidote-leaf", at: { x: 1, y: 2 } },
       { id: "puppy", kind: "animal", at: { x: 2, y: 1 }, species: "puppy", cageStyle: "garden-vine" },
     ],
   };
@@ -65,13 +67,17 @@ describe("art preloading", () => {
       wall: ASSETS.wall,
       water: ASSETS.water,
       lava: ASSETS.lava,
+      poison: ASSETS.poison,
       hole: ASSETS.hole,
+      antidoteLeaf: ASSETS.antidoteLeaf,
     }).toEqual({
       floor: "/assets/floor-v3.png",
       wall: "/assets/wall-v3.png",
       water: "/assets/water-v2.png",
       lava: "/assets/lava-v2.png",
+      poison: "/assets/terrain-poison-v1.png",
       hole: "/assets/ground-hole-v1.png",
+      antidoteLeaf: "/assets/antidote-leaf-v1.png",
     });
   });
 
@@ -98,12 +104,14 @@ describe("art preloading", () => {
       theme.wall.src,
       theme.floorDressing!.src,
       ASSETS.water,
+      ASSETS.poison,
       ASSETS.hole,
       resolveEnemyArt("blueberry-slime").src,
       resolveWeaponArt("flower-sabre").src,
       ASSETS.key,
       ASSETS.door,
       ASSETS.springBoots,
+      ASSETS.antidoteLeaf,
       resolveAnimalArt("puppy").src,
       resolveCageArt("garden-vine").src,
     ]));

@@ -58,13 +58,13 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.9.1** label on the title screen and
+- Click or tap the small **Playable build 0.10.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
   progress.
 - Inspect several straight paths, bends, diagonal contacts, enclosed pockets,
-  and connected water/lava areas. Floor and wall patterns should remain aligned
+  and connected water/lava/poison areas. Floor and wall patterns should remain aligned
   across the camera, convex and concave corners should follow the terrain
   boundary, floor/wall contrast should remain clear, and connected 2–4 tile
   hazards should have no outline, lip, cast shadow, or filter.
@@ -75,6 +75,12 @@ document and does not use client-side URL routing.
   Spring Boots and cross both single- and two-square hole runs; before the pickup
   or with an unsafe landing the same input must be blocked. Check the boing,
   transparent hole edge, jump arc, and one-player handoff after landing.
+- Open Moonlit Friendship Quest. Confirm the Antidote Leaf is on a real detour,
+  poison blocks before collection, its connected two-tile region is inset and
+  feathered over visible floor, and the collected leaf appears in the bag.
+- Touch a stronger enemy while armed. Confirm the move and step count do not
+  advance, only the **Too strong!** comparison appears, and dismissing it leaves
+  the maze ready for backtracking rather than resetting the run.
 - Trigger one winning battle and one rescue presentation. Confirm their short
   input locks end cleanly, Power reaches the exact engine value, the rescued pet
   joins once, reduced-motion mode shortens the flourishes, and navigation or

@@ -17,6 +17,7 @@ DESTINATION = ROOT / "public" / "assets"
 ASSETS = {
     "spring-boots-v1-master.png": "spring-boots-v1.png",
     "ground-hole-v1-master.png": "ground-hole-v1.png",
+    "antidote-leaf-v1-master.png": "antidote-leaf-v1.png",
 }
 
 

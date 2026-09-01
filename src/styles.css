@@ -242,42 +242,6 @@ button:focus-visible,
   filter: drop-shadow(0 2px 2px rgba(69, 34, 75, 0.32));
 }
 
-.move-preview::before {
-  position: absolute;
-  z-index: 12;
-  inset: 7%;
-  border: clamp(2px, 0.22vw, 3px) solid #fff;
-  border-radius: 30%;
-  background: rgba(88, 196, 177, 0.34);
-  box-shadow:
-    0 0 0 3px rgba(65, 154, 143, 0.74),
-    0 0 16px rgba(103, 228, 207, 0.82);
-  content: "";
-}
-
-.preview-stop::before {
-  background: rgba(248, 179, 137, 0.36);
-  box-shadow: 0 0 0 3px rgba(204, 105, 91, 0.76);
-}
-
-.preview-danger::before {
-  background: rgba(255, 212, 83, 0.38);
-  box-shadow: 0 0 0 3px rgba(202, 139, 38, 0.86);
-}
-
-.preview-arrow {
-  position: absolute;
-  z-index: 13;
-  top: 50%;
-  left: 50%;
-  color: white;
-  font-size: clamp(11px, 1.45vw, 20px);
-  font-weight: 1000;
-  line-height: 1;
-  text-shadow: 0 1px 4px rgba(48, 25, 57, 0.85);
-  transform: translate(-50%, -50%);
-}
-
 .object-layer,
 .player-layer {
   position: absolute;
@@ -666,20 +630,6 @@ button:focus-visible,
   font-weight: 900;
   line-height: 1.05;
   text-overflow: ellipsis;
-}
-
-.inventory-slot > b {
-  position: absolute;
-  top: 2px;
-  right: 3px;
-  display: grid;
-  width: 16px;
-  height: 16px;
-  place-items: center;
-  border-radius: 50%;
-  background: #53af90;
-  color: white;
-  font-size: 10px;
 }
 
 .empty-bag {
@@ -1094,6 +1044,231 @@ button:focus-visible,
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* --------------------------------------------------------------------------
+   V10.0 gentle puzzle guidance, poison traversal, and safer encounters
+   -------------------------------------------------------------------------- */
+
+.maze-terrain-svg > .terrain-water,
+.maze-terrain-svg > .terrain-lava,
+.maze-terrain-svg > .terrain-poison {
+  stroke: none !important;
+  filter: none !important;
+}
+
+.object-antidote-leaf {
+  inset: 9%;
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(46, 91, 76, 0.22));
+}
+
+.minimap-tile.map-poison {
+  background: #ad72d5;
+}
+
+.marker-antidote-leaf {
+  width: 66%;
+  height: 66%;
+  border-radius: 80% 20% 72% 28%;
+  background: #64d8a1;
+  box-shadow: inset 0 -2px 0 #26987c, 0 0 0 0.5px #285c58;
+  transform: rotate(-24deg);
+}
+
+.object-color-name {
+  position: absolute;
+  z-index: 16;
+  bottom: 3%;
+  left: 50%;
+  max-width: 88%;
+  padding: 1px clamp(3px, 0.28vw, 6px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  color: #fff;
+  font-size: clamp(6px, calc(16vw / var(--grid-size, 13)), 10px);
+  font-weight: 1000;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 1px rgba(46, 31, 55, 0.42);
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(49, 33, 58, 0.18);
+}
+
+.color-name-red { background: #df6681; }
+.color-name-blue { background: #5b88d8; }
+.color-name-yellow { background: #d79a2d; }
+
+.objective-card {
+  padding-right: clamp(4px, 0.45vw, 7px);
+}
+
+.objective-card > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.objective-hint-button {
+  display: inline-flex;
+  min-width: clamp(48px, 4.6vw, 66px);
+  min-height: clamp(30px, 2.8vw, 38px);
+  padding: 3px clamp(6px, 0.55vw, 9px);
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 0 0 auto;
+  cursor: pointer;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: linear-gradient(145deg, #fff3a8, #ffd27b);
+  color: #725172;
+  font: inherit;
+  font-size: clamp(8px, 0.72vw, 11px);
+  font-weight: 1000;
+  box-shadow: 0 2px 0 #d5a866, 0 4px 8px rgba(111, 75, 93, 0.12);
+}
+
+.objective-hint-button:hover,
+.objective-hint-button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 #d5a866, 0 6px 10px rgba(111, 75, 93, 0.16);
+}
+
+.hint-card {
+  display: flex;
+  width: 100%;
+  margin: 14px 0 18px;
+  padding: clamp(13px, 1.5vw, 20px);
+  align-items: center;
+  gap: 12px;
+  border: 2px solid #fff;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #fff7c8, #f2eaff);
+  color: #5d4b6b;
+  text-align: left;
+  box-shadow: 0 4px 0 rgba(187, 158, 194, 0.28);
+}
+
+.hint-card p {
+  margin: 0;
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.hint-spark {
+  flex: 0 0 auto;
+  font-size: clamp(30px, 3.5vw, 48px);
+  filter: drop-shadow(0 2px 2px rgba(124, 85, 74, 0.16));
+}
+
+.too-strong-enemy-art {
+  width: clamp(112px, 13vw, 176px);
+  height: clamp(112px, 13vw, 176px);
+  margin-bottom: -8px;
+}
+
+.too-strong-equation {
+  min-height: 112px;
+  margin: 2px 0 8px;
+  align-items: center;
+  gap: clamp(13px, 1.6vw, 24px);
+}
+
+.too-strong-equation .power-side {
+  display: flex;
+  padding: 6px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(72, 48, 77, 0.2);
+}
+
+.too-strong-equation .ame-side {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(145deg, #f29a9e, #d9687c);
+}
+
+.too-strong-equation .enemy-side {
+  width: 102px;
+  height: 102px;
+  background: linear-gradient(145deg, #8a80d2, #635da9);
+}
+
+.too-strong-equation .power-side small {
+  max-width: 84%;
+  overflow: hidden;
+  font-size: 9px;
+  font-weight: 1000;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.too-strong-equation .power-side strong {
+  font-size: 34px;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.too-strong-equation .enemy-side strong {
+  font-size: 49px;
+}
+
+.too-strong-equation > b {
+  color: #6e5577;
+  font-size: 46px;
+  line-height: 1;
+}
+
+.too-strong-action {
+  min-width: min(100%, 250px);
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .objective-hint-button {
+    min-width: 33px;
+    min-height: 27px;
+    padding: 2px 5px;
+  }
+
+  .objective-hint-button b {
+    display: none;
+  }
+
+  .too-strong-enemy-art {
+    width: 88px;
+    height: 88px;
+  }
+
+  .too-strong-equation {
+    min-height: 82px;
+  }
+
+  .too-strong-equation .ame-side {
+    width: 58px;
+    height: 58px;
+  }
+
+  .too-strong-equation .enemy-side {
+    width: 78px;
+    height: 78px;
+  }
+
+  .too-strong-equation .power-side strong { font-size: 27px; }
+  .too-strong-equation .enemy-side strong { font-size: 38px; }
 }
 
 /* V3 release refinements: protected navigation and a roomier late-maze view. */
@@ -2264,42 +2439,6 @@ body {
   pointer-events: none;
 }
 
-.move-preview-layer {
-  position: absolute;
-  z-index: 12;
-  pointer-events: none;
-}
-
-/* The movement hint temporarily takes over the texture pseudo-element. */
-.move-preview::before {
-  position: absolute;
-  z-index: 12;
-  inset: 7%;
-  border: clamp(2px, 0.22vw, 3px) solid #fff;
-  border-radius: 32%;
-  background: rgba(75, 189, 169, 0.4);
-  box-shadow:
-    0 0 0 2px rgba(54, 145, 137, 0.72),
-    0 0 13px rgba(109, 228, 210, 0.74);
-  content: "";
-  filter: none;
-  opacity: 1;
-  pointer-events: none;
-  transform: none;
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-
-.preview-stop::before {
-  background: rgba(249, 180, 138, 0.46);
-  box-shadow: 0 0 0 2px rgba(199, 101, 90, 0.78);
-}
-
-.preview-danger::before {
-  background: rgba(255, 213, 78, 0.48);
-  box-shadow: 0 0 0 2px rgba(194, 132, 34, 0.82);
-}
-
 .player-layer,
 .object-layer {
   overflow: visible;
@@ -2631,24 +2770,6 @@ img.wallet-pouch {
   line-height: 1.05;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.rescue-check {
-  position: absolute;
-  z-index: 3;
-  top: 2px;
-  right: 3px;
-  display: grid;
-  width: clamp(13px, 1.25vw, 17px);
-  aspect-ratio: 1;
-  place-items: center;
-  border: 1px solid white;
-  border-radius: 50%;
-  background: #28775f;
-  color: white;
-  font-size: clamp(8px, 0.7vw, 10px);
-  line-height: 1;
-  box-shadow: 0 2px 4px rgba(52, 105, 88, 0.2);
 }
 
 .animal-stack {
@@ -4395,31 +4516,9 @@ body,
    V8.0 roomier playfield, clearer terrain, and rescued-friend flourishes
    -------------------------------------------------------------------------- */
 
-/* Keep the pastel palette while making navigable floor and solid wall read as
-   two different planes. The href rules add a little extra garden definition. */
-.maze-terrain-svg pattern[id$="-floor"] > image {
-  filter: brightness(1.04) saturate(0.96) contrast(1.02);
-}
-
-.maze-terrain-svg pattern[id$="-wall"] > image {
-  filter: brightness(0.92) saturate(1.04) contrast(1.05);
-}
-
-.maze-terrain-svg > rect {
-  filter: brightness(1.035);
-}
-
-.maze-terrain-svg > .terrain-wall {
-  filter: brightness(0.9) saturate(1.03) contrast(1.04);
-}
-
-.maze-terrain-svg image[href*="floor-meadow-grass"] {
-  filter: brightness(1.08) saturate(1.18) contrast(1.04);
-}
-
-.maze-terrain-svg image[href*="wall-hedge"] {
-  filter: brightness(0.86) saturate(1.2) contrast(1.08);
-}
+/* The renderer applies a gentle treatment selected for each complete theme.
+   Avoid stacking another global filter here: that previously crushed the
+   already-dark dungeon and hedge artwork. */
 
 /* The rounded geometry already provides a natural bank. Avoid a coloured lip
    or filter that can make water and lava resemble raised, shadowed stickers. */
@@ -5145,4 +5244,47 @@ body,
   .rescue-happy-burst {
     display: none;
   }
+}
+
+/* Keep rescue portraits present at desktop-style tablet viewports too. The
+   iPad-specific coarse-pointer rules already reserve this room, but desktop
+   preview and keyboard users at the same 4:3 size need the same guarantee. */
+@media (orientation: landscape) and (min-width: 761px) and (max-width: 1200px) {
+  .exploration-dashboard .adventure-details {
+    grid-template-rows: 46px 58px minmax(0, 1fr);
+  }
+
+  .exploration-dashboard .objective-card {
+    min-height: 46px;
+    padding-block: 3px;
+  }
+
+  .exploration-dashboard .rescue-card {
+    min-height: 55px;
+  }
+
+  .exploration-dashboard .rescue-friend {
+    min-width: 0;
+  }
+
+  .exploration-dashboard .bag-card {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .exploration-dashboard .owned-collection {
+    display: none;
+  }
+}
+
+.rescue-list.rescue-count-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.rescue-list.rescue-count-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.too-strong-equation span.enemy-side {
+  background: linear-gradient(145deg, #8a80d2, #635da9);
 }

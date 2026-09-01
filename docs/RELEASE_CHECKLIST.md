@@ -6,29 +6,30 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.9.1: 215 tests across 16 files and the strict TypeScript/Vite build
-pass. Source metadata and new-art provenance are aligned. The dependency
-audit/tree, locked Tauri compile, Windows packaging/source comparison/hash/smoke
-launch, repeat-boundary/alpha checks, local iPad and landscape-phone previews,
-two-hole jump, and win/loss combat presentation checks pass. GitHub `main`
-contains release commit `9213213`; the canonical Vercel promotion and initial
-0.9.1 production smoke pass.
+Status for 0.10.0: 239 tests across 17 files and the strict TypeScript/Vite
+build pass. Source metadata and poison/Antidote Leaf provenance are aligned.
+The zero-vulnerability dependency audit/tree, locked Tauri compile, Windows
+packaging/source comparison/hash/smoke launch, repeat-boundary/alpha checks,
+local 1024 × 768 and 844 × 390 previews, exact 65-step poison route, and
+non-destructive stronger-enemy dialog pass. GitHub/Vercel promotion and the
+canonical production smoke are the remaining automated release steps.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed. The
-completed 0.9.0 and 0.8.0 evidence below is retained as a historical baseline.
+completed 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a historical baseline.
 
 ## 1. Prepare
 
-- [x] Confirm the 0.9.1 source version in `package.json`, `package-lock.json`,
+- [x] Confirm the 0.10.0 source version in `package.json`, `package-lock.json`,
   `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
-- [x] Confirm the 0.9.1 bundle contains continuous world-aligned SVG terrain,
+- [x] Confirm the 0.10.0 bundle contains continuous world-aligned SVG terrain,
   rounded convex and concave joins, periodic paired textures, connected hazards
   without outlines, lips, shadows, or filters, stronger floor/wall contrast,
   picture-first UI, a held-weapon overlay, pet followers, opaque AI-generated
-  cage-front layers, Spring Boots/hole overlays, and locally bundled OST files.
+  cage-front layers, Spring Boots/hole overlays, poison/Antidote Leaf art, and
+  locally bundled OST files.
 - [x] Confirm the terrain catalogue assigns each floor and wall a dominant-colour
   family and measured lightness, rejects yellow/gold with green/sage or rose in
   either direction, and keeps every navigable floor at least eight points lighter
@@ -57,7 +58,7 @@ completed 0.9.0 and 0.8.0 evidence below is retained as a historical baseline.
   the direct ten-maze tester picker, and tester completion cannot write rewards,
   records, unlocks, active sessions, or progress.
 - [x] Update `README.md`, architecture, music, asset, privacy, audit, release, and
-  Vercel documentation for 0.9.1 while leaving unfinished release gates clear.
+  Vercel documentation for 0.10.0 while leaving unfinished release gates clear.
 - [x] Archive the built-in ImageGen Spring Boots and ground-hole masters, retain
   their prompt records, and validate/downsample transparent runtime copies with
   `scripts/process_traversal_assets.py`.
@@ -81,13 +82,13 @@ npm run check:desktop
 
 - [x] `npm run check` reports that the complete unit suite passes and that
   TypeScript and the Vite production build complete without errors.
-- [x] Dependency audit output for the exact 0.9.1 source is reviewed: zero known
+- [x] Dependency audit output for the exact 0.10.0 source is reviewed: zero known
   vulnerabilities.
-- [x] `npm ls` for 0.9.1 is reviewed; only expected platform/feature optional packages are
+- [x] `npm ls` for 0.10.0 is reviewed; only expected platform/feature optional packages are
   absent.
 - [x] `npm run check:desktop` completes `cargo check --locked` without errors for
-  the exact 0.9.1 source.
-- [x] `npm run desktop:build` produces the 0.9.1 release executable and NSIS
+  the exact 0.10.0 source.
+- [x] `npm run desktop:build` produces the 0.10.0 release executable and NSIS
   installer; both are staged, source-compared, version-checked, and hashed, and
   the portable app passes its five-second smoke launch.
 - [x] Automated level checks validate all ten story mazes in the 9, 11, 13, 15,
@@ -112,7 +113,7 @@ npm run check:desktop
   Follower-trail tests cover bounded, loop-free, distinct placement. Physical
   mouse/touch pointer capture, repeat timing, and cancellation still require the
   device checks below.
-- [x] Repeat the relevant checks after the integrated 0.9.1 source changes
+- [x] Repeat the relevant checks after the integrated 0.10.0 source changes
   (`npm run check`: 215 of 215 tests across 16 files plus the production build).
 - [x] Repeat `npm run check` once more if browser QA or release packaging causes
   any additional source, asset, configuration, or lockfile change.
@@ -238,7 +239,7 @@ browser log remains clear.
 - [ ] Each of the nine stat-driven badges unlocks at its documented threshold and
   new rewards appear once without duplicate fanfare.
 
-## 4. Windows 0.9.1 artifact test
+## 4. Windows 0.10.0 artifact test
 
 Expected build outputs:
 
@@ -246,11 +247,11 @@ Expected build outputs:
 - `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
   Solve!_VERSION_x64-setup.exe`
 
-For the new artifact set, `VERSION` must resolve to `0.9.1`.
+For the new artifact set, `VERSION` must resolve to `0.10.0`.
 
-- [x] Build the exact final 0.9.1 source and confirm both expected outputs exist.
+- [x] Build the exact final 0.10.0 source and confirm both expected outputs exist.
 - [x] Confirm the portable executable and installer report product/file version
-  0.9.1 and embed the final browser bundle.
+  0.10.0 and embed the final browser bundle.
 - [x] A hidden five-second launch of the staged portable executable remains
   running and responsive and exposes the correct game window title.
 
@@ -264,26 +265,37 @@ For the new artifact set, `VERSION` must resolve to `0.9.1`.
 - [ ] Sign the executable and installer for public distribution, then test the
   signed files again. If unsigned, label them clearly.
 
-## 5. Windows 0.9.1 staging record
+## 5. Windows 0.10.0 staging record
 
 - [x] Copy only artifacts from the final successful build into `release/` using
   versioned filenames.
-- [x] Confirm the staged names are `Maze-so-Puzzle-0.9.1-portable.exe` and
-  `Maze-so-Puzzle-0.9.1-setup.exe`.
-- [x] Confirm both artifacts report file/product version 0.9.1 and remain clearly
+- [x] Confirm the staged names are `Maze-so-Puzzle-0.10.0-portable.exe` and
+  `Maze-so-Puzzle-0.10.0-setup.exe`.
+- [x] Confirm both artifacts report file/product version 0.10.0 and remain clearly
   labelled as unsigned local test builds.
 - [x] Generate final SHA-256 values after all copying (the test build is unsigned):
 
 ```powershell
-Get-FileHash .\release\Maze-so-Puzzle-0.9.1-portable.exe -Algorithm SHA256
-Get-FileHash .\release\Maze-so-Puzzle-0.9.1-setup.exe -Algorithm SHA256
+Get-FileHash .\release\Maze-so-Puzzle-0.10.0-portable.exe -Algorithm SHA256
+Get-FileHash .\release\Maze-so-Puzzle-0.10.0-setup.exe -Algorithm SHA256
 ```
 
 - [x] Confirm the staged portable and installer hashes match their final Tauri
-  source artifacts byte-for-byte, then record the final 0.9.1 filenames, sizes,
+  source artifacts byte-for-byte, then record the final 0.10.0 filenames, sizes,
   and hashes in `release/README.md` and `release/SHA256SUMS.txt`.
 
-Current verified unsigned 0.9.1 staging record:
+Current verified unsigned 0.10.0 staging record:
+
+- Portable: `Maze-so-Puzzle-0.10.0-portable.exe`, 49,222,656 bytes, SHA-256
+  `073EB840039176A3BF86B563A340271E9B41A37EFE2D469E36772A77A278F7F0`.
+- Installer: `Maze-so-Puzzle-0.10.0-setup.exe`, 42,694,296 bytes, SHA-256
+  `1A5C12CD9114727E82B23524A15CAF042D8F7F2495864BA7D889A8B4C9EC0073`.
+
+The staged files match the final Tauri outputs byte-for-byte, report file and
+product version 0.10.0, and the hidden portable smoke stayed responsive with
+the correct title for five seconds.
+
+### Historical verified 0.9.1 staging record
 
 - Portable: `Maze-so-Puzzle-0.9.1-portable.exe`, 48,216,576 bytes, SHA-256
   `29D14C1EACED7AA5F7257C390C2E7366995731CDFFF9346E402CF037A01A488C`.

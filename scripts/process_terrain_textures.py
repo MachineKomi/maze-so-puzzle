@@ -36,6 +36,7 @@ TEXTURE_NAMES = (
     "wall-mossy-ruin-v1",
     "wall-dark-dungeon-v1",
     "wall-hedge-v1",
+    "terrain-poison-v1",
 )
 
 # A repeat boundary should look like an ordinary neighbouring pixel transition,

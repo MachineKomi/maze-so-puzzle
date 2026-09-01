@@ -143,7 +143,7 @@ describe("player progress migration and persistence", () => {
       gold: 14,
       stickers: ["animal-friend"],
       medals: ["perfect-rescue-5"],
-      totalAnimalsRescued: 3,
+      totalAnimalsRescued: ANIMAL_SPECIES.length,
       perfectRescueMazeCount: 5,
       currentPerfectRescueStreak: 5,
       bestPerfectRescueStreak: 5,
@@ -158,7 +158,9 @@ describe("player progress migration and persistence", () => {
       completions: 2,
       bestSteps: 21,
       bestPower: 9,
-      bestRescuedCount: 3,
+      bestRescuedCount: ANIMAL_SPECIES.length,
+      totalRescueCount: 3,
+      perfectRescue: true,
       source: null,
       bestRescuedSpecies: [],
     });
@@ -337,6 +339,26 @@ describe("player progress migration and persistence", () => {
     expect(writePlayerProgress(progress, storage)).toBe(true);
     expect(readPlayerProgress(storage)).toEqual(progress);
   });
+
+  it("round-trips a five-friend rescue target without truncating it", () => {
+    const storage = new MemoryStorage();
+    const progress = applyLevelCompletion(
+      createDefaultPlayerProgress(),
+      completion("five-friend-fort", 4, 5, {
+        totalRescueCount: 5,
+        rescuedSpecies: ANIMAL_SPECIES.slice(0, 5),
+      }),
+    );
+
+    expect(writePlayerProgress(progress, storage)).toBe(true);
+    const reloaded = readPlayerProgress(storage);
+    expect(reloaded).toEqual(progress);
+    expect(reloaded.bestResultsByLevel["five-friend-fort"]).toMatchObject({
+      bestRescuedCount: 5,
+      totalRescueCount: 5,
+      perfectRescue: true,
+    });
+  });
 });
 
 describe("level rewards", () => {
@@ -379,6 +401,61 @@ describe("level rewards", () => {
     expect(reward.stickerIds).toEqual(["animal-friend", "surprise-sparkle"]);
   });
 
+  it.each([1, 2, 4, 5])(
+    "recognizes a perfect rescue when all %i available friends are saved",
+    (totalRescueCount) => {
+      const reward = calculateLevelReward({
+        levelId: `friends-${totalRescueCount}`,
+        source: "curated",
+        campaignIndex: 0,
+        rescuedCount: totalRescueCount,
+        totalRescueCount,
+        firstCompletion: false,
+      });
+
+      expect(reward.goldBreakdown).toMatchObject({
+        animalRescue: totalRescueCount * 3,
+        perfectRescue: 6,
+      });
+      expect(reward.stickerIds).toEqual(["animal-friend"]);
+    },
+  );
+
+  it("does not award an all-friends bonus for an incomplete variable rescue target", () => {
+    const reward = calculateLevelReward({
+      levelId: "five-friends",
+      source: "curated",
+      campaignIndex: 0,
+      rescuedCount: 4,
+      totalRescueCount: 5,
+      firstCompletion: false,
+    });
+
+    expect(reward.goldBreakdown.animalRescue).toBe(12);
+    expect(reward.goldBreakdown.perfectRescue).toBe(0);
+    expect(reward.stickerIds).toEqual([]);
+  });
+
+  it("keeps three friends as the reward target for legacy callers", () => {
+    const incomplete = calculateLevelReward({
+      levelId: "legacy-two",
+      source: "curated",
+      campaignIndex: 0,
+      rescuedCount: 2,
+      firstCompletion: false,
+    });
+    const perfect = calculateLevelReward({
+      levelId: "legacy-three",
+      source: "curated",
+      campaignIndex: 0,
+      rescuedCount: 3,
+      firstCompletion: false,
+    });
+
+    expect(incomplete.goldBreakdown.perfectRescue).toBe(0);
+    expect(perfect.goldBreakdown.perfectRescue).toBe(6);
+  });
+
   it("gently increases completion gold after each five story mazes", () => {
     const reward = calculateLevelReward({
       levelId: "story-7",
@@ -394,7 +471,7 @@ describe("level rewards", () => {
 
   it("exports child-friendly label metadata for every prize", () => {
     expect(REWARD_LABELS.gold.label).toBe("Gold stars");
-    expect(STICKER_LABELS["animal-friend"].description).toContain("three");
+    expect(STICKER_LABELS["animal-friend"].description).toContain("every");
     expect(ACHIEVEMENT_LABELS["perfect-rescue-15"].shortLabel).toContain("15");
     expect(BADGE_LABELS["maze-explorer-5"].description).toContain("five");
   });
@@ -424,6 +501,8 @@ describe("applying level completions", () => {
       bestSteps: 42,
       bestPower: 4,
       bestRescuedCount: 0,
+      totalRescueCount: 3,
+      perfectRescue: false,
       source: "curated",
       bestRescuedSpecies: [],
     });
@@ -449,6 +528,8 @@ describe("applying level completions", () => {
       bestSteps: 32,
       bestPower: 12,
       bestRescuedCount: 3,
+      totalRescueCount: 3,
+      perfectRescue: true,
       source: "curated",
       bestRescuedSpecies: ["bunny", "fox", "kitten"],
     });
@@ -510,6 +591,64 @@ describe("applying level completions", () => {
     }));
     expect(progress.bestResultsByLevel["new-friends"]?.bestRescuedSpecies)
       .toEqual(["puppy", "fawn", "red-panda"]);
+  });
+
+  it("persists perfect results for mazes with one, two, four, or five friends", () => {
+    const rescueTargets = [1, 2, 4, 5] as const;
+    let progress = createDefaultPlayerProgress();
+
+    rescueTargets.forEach((totalRescueCount, campaignIndex) => {
+      progress = applyLevelCompletion(
+        progress,
+        completion(`variable-${totalRescueCount}`, campaignIndex, totalRescueCount, {
+          totalRescueCount,
+          rescuedSpecies: ANIMAL_SPECIES.slice(0, totalRescueCount),
+        }),
+      );
+      expect(progress.bestResultsByLevel[`variable-${totalRescueCount}`]).toMatchObject({
+        bestRescuedCount: totalRescueCount,
+        totalRescueCount,
+        perfectRescue: true,
+      });
+    });
+
+    expect(progress.perfectRescueMazeCount).toBe(4);
+    expect(progress.currentPerfectRescueStreak).toBe(4);
+    expect(progress.bestPerfectRescueStreak).toBe(4);
+    expect(progress.totalAnimalsRescued).toBe(12);
+  });
+
+  it("increments a variable-target perfect counter once, only after a perfect replay", () => {
+    const first = applyLevelCompletion(
+      createDefaultPlayerProgress(),
+      completion("five-friend-fort", 0, 4, {
+        totalRescueCount: 5,
+        rescuedSpecies: ANIMAL_SPECIES.slice(0, 4),
+      }),
+    );
+    const perfectReplay = applyLevelCompletion(
+      first,
+      completion("five-friend-fort", 0, 5, {
+        totalRescueCount: 5,
+        rescuedSpecies: ANIMAL_SPECIES.slice(0, 5),
+      }),
+    );
+    const laterIncompleteReplay = applyLevelCompletion(
+      perfectReplay,
+      completion("five-friend-fort", 0, 3, {
+        totalRescueCount: 5,
+        rescuedSpecies: ANIMAL_SPECIES.slice(0, 3),
+      }),
+    );
+
+    expect(first.perfectRescueMazeCount).toBe(0);
+    expect(perfectReplay.perfectRescueMazeCount).toBe(1);
+    expect(laterIncompleteReplay.perfectRescueMazeCount).toBe(1);
+    expect(laterIncompleteReplay.bestResultsByLevel["five-friend-fort"]).toMatchObject({
+      bestRescuedCount: 5,
+      totalRescueCount: 5,
+      perfectRescue: true,
+    });
   });
 
   it("deduplicates and validates reported species without changing reward counts", () => {

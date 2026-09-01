@@ -33,7 +33,9 @@ export const ASSETS = {
   wall: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].wall.src,
   water: "/assets/water-v2.png",
   lava: "/assets/lava-v2.png",
+  poison: "/assets/terrain-poison-v1.png",
   hole: "/assets/ground-hole-v1.png",
+  antidoteLeaf: "/assets/antidote-leaf-v1.png",
   animalBunny: ANIMAL_ART.bunny.src,
   animalFox: ANIMAL_ART.fox.src,
   animalKitten: ANIMAL_ART.kitten.src,
@@ -71,6 +73,7 @@ const COMMON_GAMEPLAY_ART = [
 const TERRAIN_ART: Readonly<Partial<Record<TerrainKind, string>>> = {
   water: ASSETS.water,
   lava: ASSETS.lava,
+  poison: ASSETS.poison,
   hole: ASSETS.hole,
 };
 
@@ -78,6 +81,7 @@ const STATIC_OBJECT_ART = {
   potion: [ASSETS.potion],
   boots: [ASSETS.boots],
   "spring-boots": [ASSETS.springBoots],
+  "antidote-leaf": [ASSETS.antidoteLeaf],
   key: [ASSETS.key],
   door: [ASSETS.door],
 } as const;
@@ -153,6 +157,7 @@ export function preloadLevelArt(level: LevelDefinition): void {
       case "potion":
       case "boots":
       case "spring-boots":
+      case "antidote-leaf":
       case "key":
       case "door":
         for (const source of STATIC_OBJECT_ART[object.kind]) sources.add(source);

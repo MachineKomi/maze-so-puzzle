@@ -41,6 +41,7 @@ function stateSignature(state: GameState, includeAnimals: boolean): string {
     state.hasSword ? 1 : 0,
     state.hasBoots ? 1 : 0,
     state.hasSpringBoots ? 1 : 0,
+    state.hasAntidoteLeaf ? 1 : 0,
     normalized(state.keys),
     normalized(state.collectedObjectIds),
     includeAnimals ? normalized(state.rescuedAnimalIds) : "",
@@ -98,6 +99,7 @@ export function getLevelStructureErrors(level: LevelDefinition): readonly string
         row[x] !== "floor" &&
         row[x] !== "water" &&
         row[x] !== "lava" &&
+        row[x] !== "poison" &&
         row[x] !== "hole"
       ) {
         errors.push(`Terrain tile ${x},${y} has an unknown kind.`);

@@ -14,7 +14,7 @@ export const DIRECTION_DELTAS: Readonly<Record<Direction, Point>> = {
   right: { x: 1, y: 0 },
 };
 
-export type TerrainKind = "wall" | "floor" | "water" | "lava" | "hole";
+export type TerrainKind = "wall" | "floor" | "water" | "lava" | "poison" | "hole";
 export type KeyColor = "red" | "blue" | "yellow";
 export const ANIMAL_SPECIES = [
   "bunny",
@@ -93,6 +93,10 @@ export interface SpringBootsObject extends ObjectBase {
   readonly kind: "spring-boots";
 }
 
+export interface AntidoteLeafObject extends ObjectBase {
+  readonly kind: "antidote-leaf";
+}
+
 export interface PotionObject extends ObjectBase {
   readonly kind: "potion";
   readonly amount: number;
@@ -119,6 +123,7 @@ export type LevelObject =
   | SwordObject
   | BootsObject
   | SpringBootsObject
+  | AntidoteLeafObject
   | PotionObject
   | KeyObject
   | DoorObject
@@ -157,6 +162,7 @@ export interface GameState {
   readonly hasSword: boolean;
   readonly hasBoots: boolean;
   readonly hasSpringBoots: boolean;
+  readonly hasAntidoteLeaf: boolean;
   readonly keys: readonly KeyColor[];
   readonly collectedObjectIds: readonly string[];
   readonly rescuedAnimalIds: readonly string[];
@@ -172,6 +178,7 @@ export type BlockedReason =
   | "needs-sword"
   | "needs-boots"
   | "needs-spring-boots"
+  | "needs-antidote-leaf"
   | "needs-key"
   | "game-over";
 
@@ -180,7 +187,7 @@ export type GameEvent =
       readonly type: "blocked";
       readonly reason: BlockedReason;
       readonly target: Point;
-      readonly terrain?: "water" | "lava" | "hole";
+      readonly terrain?: "water" | "lava" | "poison" | "hole";
       readonly color?: KeyColor;
     }
   | {
@@ -198,6 +205,10 @@ export type GameEvent =
     }
   | {
       readonly type: "spring-boots-collected";
+      readonly objectId: string;
+    }
+  | {
+      readonly type: "antidote-leaf-collected";
       readonly objectId: string;
     }
   | {
@@ -236,11 +247,10 @@ export type GameEvent =
       readonly powerAfter: number;
     }
   | {
-      readonly type: "combat-lost";
+      readonly type: "enemy-too-strong";
       readonly objectId: string;
       readonly playerPower: number;
       readonly enemyPower: number;
-      readonly enemyPowerAfter: number;
     }
   | {
       readonly type: "level-won";

@@ -59,17 +59,18 @@ function rawSnapshot(level: LevelDefinition, game: GameState = createInitialGame
 }
 
 describe("active run persistence", () => {
-  it("migrates old snapshots without spring boots and persists a completed jump", () => {
+  it("migrates old snapshots without newer inventory flags and persists a completed jump", () => {
     const oldLevel = storyLevel();
     const legacyGame = Object.fromEntries(
       Object.entries(createInitialGameState(oldLevel))
-        .filter(([key]) => key !== "hasSpringBoots"),
+        .filter(([key]) => key !== "hasSpringBoots" && key !== "hasAntidoteLeaf"),
     );
     const migrated = sanitizeActiveRunSnapshot({
       ...rawSnapshot(oldLevel),
       game: legacyGame,
     }, CURATED_LEVELS);
     expect(migrated?.game.hasSpringBoots).toBe(false);
+    expect(migrated?.game.hasAntidoteLeaf).toBe(false);
 
     const changedTraversalLevel = storyLevel(6);
     const staleTraversalGame = Object.fromEntries(
@@ -106,6 +107,60 @@ describe("active run persistence", () => {
     expect(sanitizeActiveRunSnapshot(
       rawSnapshot(jumpLevel, game),
       [jumpLevel],
+    )?.game).toEqual(game);
+  });
+
+  it("rejects pre-poison snapshots for changed levels and round-trips an antidote run", () => {
+    const corridor = parseAsciiLevel({
+      id: "saved-antidote-run",
+      name: "Saved Antidote Run",
+      objective: "Collect the leaf and cross the poison.",
+      initialPower: 1,
+      map: [
+        "#########",
+        "#@....E.#",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+      ],
+    });
+    const terrain = corridor.terrain.map((row, y) => row.map((tile, x) => (
+      y === 1 && (x === 3 || x === 4) ? "poison" as const : tile
+    )));
+    const leaf = {
+      id: "saved-antidote-run-antidote-leaf-1",
+      kind: "antidote-leaf" as const,
+      at: { x: 2, y: 1 },
+    };
+    const poisonLevel = { ...corridor, terrain, objects: [leaf] };
+    const legacyGame = Object.fromEntries(
+      Object.entries(createInitialGameState(poisonLevel))
+        .filter(([key]) => key !== "hasAntidoteLeaf"),
+    );
+
+    expect(sanitizeActiveRunSnapshot({
+      ...rawSnapshot(poisonLevel),
+      game: legacyGame,
+    }, [poisonLevel])).toBeNull();
+
+    let game = createInitialGameState(poisonLevel);
+    for (const direction of ["right", "right", "right"] as const) {
+      game = movePlayer(poisonLevel, game, direction).state;
+    }
+    expect(game).toMatchObject({
+      position: { x: 4, y: 1 },
+      hasAntidoteLeaf: true,
+      collectedObjectIds: [leaf.id],
+      status: "playing",
+      steps: 3,
+    });
+    expect(sanitizeActiveRunSnapshot(
+      rawSnapshot(poisonLevel, game),
+      [poisonLevel],
     )?.game).toEqual(game);
   });
 
@@ -183,6 +238,7 @@ describe("active run persistence", () => {
       { ...initial, status: "won" },
       { ...initial, status: "paused" },
       { ...initial, keys: ["green"] },
+      { ...initial, hasAntidoteLeaf: true },
       { ...initial, position: { ...level.exit } },
     ];
 

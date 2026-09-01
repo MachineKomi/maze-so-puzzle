@@ -22,6 +22,7 @@ import {
   resolveEnemyArt,
   resolveTerrainTheme,
   resolveWeaponArt,
+  type TerrainRenderTreatment,
 } from "./artCatalog";
 import {
   createInitialGameState,
@@ -46,7 +47,6 @@ import {
 } from "./game/exploration";
 import { getVisibleFollowerPoints, recordFollowerStep } from "./game/followerTrail";
 import {
-  ANIMALS_PER_LEVEL,
   ANIMAL_SPECIES,
   DIRECTION_DELTAS,
   type AnimalSpecies,
@@ -130,7 +130,7 @@ const BATTLE_PRESENTATION_MS = 1160;
 const RESCUE_PRESENTATION_MS = 900;
 const JUMP_PRESENTATION_MS = 410;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.9.1";
+const BUILD_VERSION = "0.10.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -197,6 +197,12 @@ interface BattlePresentation {
   readonly outcome: "won" | "lost";
 }
 
+interface TooStrongEncounter {
+  readonly event: Extract<GameEvent, { type: "enemy-too-strong" }>;
+  readonly enemySrc: string;
+  readonly enemyLabel: string;
+}
+
 interface RescuePresentation {
   readonly objectId: string;
   readonly species: AnimalSpecies;
@@ -221,12 +227,12 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
   switch (event.type) {
     case "level-won":
       return { icon: "✨", text: "Maze solved!", tone: "good", sound: "win" };
-    case "combat-lost":
+    case "enemy-too-strong":
       return {
-        icon: "☁️",
-        text: `That ${enemyLabelForEvent(level, event.objectId).toLowerCase()} is stronger. Try again!`,
+        icon: "💪",
+        text: `That ${enemyLabelForEvent(level, event.objectId).toLowerCase()} is too strong just now.`,
         tone: "careful",
-        sound: "lose",
+        sound: "bump",
       };
     case "enemy-defeated": {
       const enemyLabel = enemyLabelForEvent(level, event.objectId);
@@ -260,6 +266,8 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
       return { icon: "🥾", text: "Splashy boots found!", tone: "good", sound: "pickup" };
     case "spring-boots-collected":
       return { icon: "🌸", text: "Spring boots found! Boing!", tone: "good", sound: "pickup" };
+    case "antidote-leaf-collected":
+      return { icon: "🍃", text: "Antidote leaf found! Purple poison is safe now.", tone: "good", sound: "pickup" };
     case "hole-jumped":
       return { icon: "✨", text: "Boing! What a lovely jump!", tone: "good", sound: "jump" };
     case "key-collected":
@@ -270,7 +278,7 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
         sound: "pickup",
       };
     case "door-opened":
-      return { icon: "✨", text: "The star door opened!", tone: "good", sound: "unlock" };
+      return { icon: "✨", text: `The ${COLOR_LABELS[event.color].toLowerCase()} star door opened!`, tone: "good", sound: "unlock" };
     case "blocked":
       switch (event.reason) {
         case "needs-sword":
@@ -284,6 +292,8 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
           };
         case "needs-spring-boots":
           return { icon: "🌸", text: "Find spring boots to hop across!", tone: "careful", sound: "bump" };
+        case "needs-antidote-leaf":
+          return { icon: "🍃", text: "Find the antidote leaf before crossing purple poison!", tone: "careful", sound: "bump" };
         case "needs-key":
           return {
             icon: "🔑",
@@ -322,6 +332,7 @@ function describeObject(object: LevelObject): string {
     case "sword": return resolveWeaponArt(object.style).label.toLowerCase();
     case "boots": return "protective boots";
     case "spring-boots": return "spring boots";
+    case "antidote-leaf": return "antidote leaf";
     case "potion": return `Power potion worth ${object.amount}`;
     case "key": return `${COLOR_LABELS[object.color]} star key`;
     case "door": return `${COLOR_LABELS[object.color]} locked door`;
@@ -340,6 +351,7 @@ function describeMazePosition(level: LevelDefinition, state: GameState): string 
     if (object && !isObjectResolved(object, state)) return `${label}: ${describeObject(object)}`;
     if (terrain === "water") return `${label}: water`;
     if (terrain === "lava") return `${label}: warm magical lava`;
+    if (terrain === "poison") return `${label}: purple magical poison`;
     if (terrain === "hole") return `${label}: a hole to jump over`;
     return `${label}: open path`;
   });
@@ -351,6 +363,7 @@ function previewKind(level: LevelDefinition, state: GameState, direction: Direct
   const terrain = getTerrainAt(level, target);
   if (!terrain || terrain === "wall") return "stop";
   if ((terrain === "water" || terrain === "lava") && !state.hasBoots) return "stop";
+  if (terrain === "poison" && !state.hasAntidoteLeaf) return "stop";
   if (terrain === "hole" && !state.hasSpringBoots) return "stop";
   const object = getObjectAt(level, target);
   if (!object || isObjectResolved(object, state)) return "go";
@@ -372,6 +385,7 @@ function spriteFor(object: Exclude<LevelObject, { kind: "animal" }>): string {
     case "sword": return resolveWeaponArt(object.style).src;
     case "boots": return ASSETS.boots;
     case "spring-boots": return ASSETS.springBoots;
+    case "antidote-leaf": return ASSETS.antidoteLeaf;
     case "potion": return ASSETS.potion;
     case "key": return ASSETS.key;
     case "door": return ASSETS.door;
@@ -419,6 +433,10 @@ function debugMazeQueryEnabled(): boolean {
   return new URLSearchParams(window.location.search).get("debug") === DEBUG_MAZE_QUERY;
 }
 
+function terrainTreatmentFilter(treatment: TerrainRenderTreatment): string {
+  return `brightness(${treatment.brightness}) saturate(${treatment.saturation}) contrast(${treatment.contrast})`;
+}
+
 const MazeTerrain = memo(function MazeTerrain({
   level,
   camera,
@@ -432,11 +450,17 @@ const MazeTerrain = memo(function MazeTerrain({
   const wallPatternId = `${patternPrefix}-wall`;
   const waterPatternId = `${patternPrefix}-water`;
   const lavaPatternId = `${patternPrefix}-lava`;
+  const poisonPatternId = `${patternPrefix}-poison`;
+  const hazardInsetFilterId = `${patternPrefix}-hazard-inset`;
+  const waterMaskId = `${patternPrefix}-water-mask`;
+  const lavaMaskId = `${patternPrefix}-lava-mask`;
+  const poisonMaskId = `${patternPrefix}-poison-mask`;
   const floorDressingPatternId = `${patternPrefix}-floor-dressing`;
   const wallDressingPatternId = `${patternPrefix}-wall-dressing`;
   const walls = createRoundedTerrainPath(level, camera, "wall", 0.13);
   const water = createRoundedTerrainPath(level, camera, "water", 0.16);
   const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
+  const poison = createRoundedTerrainPath(level, camera, "poison", 0.16);
   const holes: Point[] = [];
   for (let y = camera.top; y <= camera.bottom; y += 1) {
     for (let x = camera.left; x <= camera.right; x += 1) {
@@ -468,6 +492,60 @@ const MazeTerrain = memo(function MazeTerrain({
           <pattern id={lavaPatternId} patternUnits="userSpaceOnUse" width="4.6" height="4.6">
             <image href={ASSETS.lava} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
           </pattern>
+          <pattern id={poisonPatternId} patternUnits="userSpaceOnUse" width="4.2" height="4.2">
+            <image href={ASSETS.poison} x="0" y="0" width="4.2" height="4.2" preserveAspectRatio="none" />
+          </pattern>
+          <filter
+            id={hazardInsetFilterId}
+            x={camera.left - 0.2}
+            y={camera.top - 0.2}
+            width={camera.width + 0.4}
+            height={camera.height + 0.4}
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feMorphology in="SourceGraphic" operator="erode" radius="0.055" result="inset" />
+            <feGaussianBlur in="inset" stdDeviation="0.022" />
+          </filter>
+          {water.d && (
+            <mask
+              id={waterMaskId}
+              x={camera.left - 0.2}
+              y={camera.top - 0.2}
+              width={camera.width + 0.4}
+              height={camera.height + 0.4}
+              maskUnits="userSpaceOnUse"
+              maskContentUnits="userSpaceOnUse"
+            >
+              <path d={water.d} fill="white" fillRule={water.fillRule} filter={`url(#${hazardInsetFilterId})`} />
+            </mask>
+          )}
+          {lava.d && (
+            <mask
+              id={lavaMaskId}
+              x={camera.left - 0.2}
+              y={camera.top - 0.2}
+              width={camera.width + 0.4}
+              height={camera.height + 0.4}
+              maskUnits="userSpaceOnUse"
+              maskContentUnits="userSpaceOnUse"
+            >
+              <path d={lava.d} fill="white" fillRule={lava.fillRule} filter={`url(#${hazardInsetFilterId})`} />
+            </mask>
+          )}
+          {poison.d && (
+            <mask
+              id={poisonMaskId}
+              x={camera.left - 0.2}
+              y={camera.top - 0.2}
+              width={camera.width + 0.4}
+              height={camera.height + 0.4}
+              maskUnits="userSpaceOnUse"
+              maskContentUnits="userSpaceOnUse"
+            >
+              <path d={poison.d} fill="white" fillRule={poison.fillRule} filter={`url(#${hazardInsetFilterId})`} />
+            </mask>
+          )}
           {theme.floorDressing && (
             <pattern
               id={floorDressingPatternId}
@@ -504,7 +582,15 @@ const MazeTerrain = memo(function MazeTerrain({
           )}
         </defs>
 
-        <rect x={camera.left} y={camera.top} width={camera.width} height={camera.height} fill={`url(#${floorPatternId})`} />
+        <rect
+          className="terrain-floor"
+          x={camera.left}
+          y={camera.top}
+          width={camera.width}
+          height={camera.height}
+          fill={`url(#${floorPatternId})`}
+          style={{ filter: terrainTreatmentFilter(theme.floorTreatment) }}
+        />
         {theme.floorDressing && (
           <rect
             className="terrain-floor-dressing"
@@ -516,9 +602,18 @@ const MazeTerrain = memo(function MazeTerrain({
             opacity={theme.floorDressing.opacity}
           />
         )}
-        {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} />}
-        {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} />}
-        {walls.d && <path className="terrain-wall" d={walls.d} fill={`url(#${wallPatternId})`} fillRule={walls.fillRule} />}
+        {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} mask={`url(#${waterMaskId})`} />}
+        {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} mask={`url(#${lavaMaskId})`} />}
+        {poison.d && <path className="terrain-poison" d={poison.d} fill={`url(#${poisonPatternId})`} fillRule={poison.fillRule} mask={`url(#${poisonMaskId})`} />}
+        {walls.d && (
+          <path
+            className="terrain-wall"
+            d={walls.d}
+            fill={`url(#${wallPatternId})`}
+            fillRule={walls.fillRule}
+            style={{ filter: terrainTreatmentFilter(theme.wallTreatment) }}
+          />
+        )}
         {walls.d && theme.wallDressing && (
           <path
             className="terrain-wall-dressing"
@@ -655,6 +750,36 @@ function surpriseSettings(progress: PlayerProgress): { size: number; difficulty:
   return { size, difficulty };
 }
 
+function hintFor(level: LevelDefinition, state: GameState): string {
+  const unresolved = level.objects.filter((object) => !isObjectResolved(object, state));
+  const weapon = unresolved.find((object) => object.kind === "sword");
+  if (!state.hasSword && weapon) {
+    return `Look along a side path for the ${resolveWeaponArt(weapon.style).label}. Ame needs it before she can challenge a baddie.`;
+  }
+  if (!state.hasAntidoteLeaf && level.terrain.some((row) => row.includes("poison"))) {
+    return "A bright green antidote leaf is hidden before the purple poison. Explore the branches you have not tried yet.";
+  }
+  if (!state.hasBoots && level.terrain.some((row) => row.some((tile) => tile === "water" || tile === "lava"))) {
+    return "Find the splashy boots on another path before crossing water or warm lava.";
+  }
+  if (!state.hasSpringBoots && level.terrain.some((row) => row.includes("hole"))) {
+    return "The pink spring boots let Ame boing over holes. Check the side passages before the jump.";
+  }
+  const strongEnemy = unresolved.find((object) => object.kind === "enemy" && object.power > state.power);
+  if (strongEnemy?.kind === "enemy") {
+    return `${resolveEnemyArt(strongEnemy.style).label} has Power ${strongEnemy.power}. Find potions or defeat smaller baddies until Ame reaches ${strongEnemy.power}.`;
+  }
+  const missingKey = unresolved.find((object) => object.kind === "key");
+  if (missingKey?.kind === "key") {
+    return `Look for the ${COLOR_LABELS[missingKey.color].toLowerCase()} star key. It opens only the matching ${COLOR_LABELS[missingKey.color].toLowerCase()} door.`;
+  }
+  const waitingFriend = unresolved.find((object) => object.kind === "animal");
+  if (waitingFriend?.kind === "animal") {
+    return `${ANIMAL_LABELS[waitingFriend.species]} is still waiting in a cage. Try an unexplored branch before heading to the star.`;
+  }
+  return "The way is ready now—follow the open passages toward the sparkling star.";
+}
+
 function App() {
   const [mazeMusicPicker] = useState(() => createMazeMusicPicker(createMusicRunSeed(), {
     previousTrackUrl: MUSIC_TRACKS.title,
@@ -690,12 +815,12 @@ function App() {
     tone: "plain",
     sound: "step",
   });
-  const [previewDirection, setPreviewDirection] = useState<Direction | null>(null);
-  const [lastEvents, setLastEvents] = useState<readonly GameEvent[]>([]);
   const [movePulse, setMovePulse] = useState(0);
   const [bumpPulse, setBumpPulse] = useState(0);
   const [muted, setMuted] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
+  const [hintOpen, setHintOpen] = useState(false);
+  const [tooStrongEncounter, setTooStrongEncounter] = useState<TooStrongEncounter | null>(null);
   const [progress, setProgress] = useState<PlayerProgress>(readPlayerProgress);
   const [completion, setCompletion] = useState<CompletionCelebration | null>(null);
   const [restartArmed, setRestartArmed] = useState(false);
@@ -826,7 +951,12 @@ function App() {
   const displayedPower = presentedPower ?? game.power;
   const modalOpen = testerPickerOpen
     || pendingAdventure !== null
-    || (screen === "game" && (helpOpen || (game.status !== "playing" && battlePresentation === null)));
+    || (screen === "game" && (
+      helpOpen
+      || hintOpen
+      || tooStrongEncounter !== null
+      || (game.status !== "playing" && battlePresentation === null)
+    ));
 
   useEffect(() => {
     if (runMode === "tester") return;
@@ -980,77 +1110,6 @@ function App() {
     return duration;
   }, [clearPresentationWork, schedulePresentationTimer]);
 
-  const beginLostBattlePresentation = useCallback((
-    event: Extract<GameEvent, { type: "combat-lost" }>,
-    enemy: Extract<LevelObject, { kind: "enemy" }>,
-    direction: Direction,
-    from: Point,
-  ): number => {
-    clearPresentationWork();
-    const sequence = presentationSequence.current;
-    const reducedMotion = prefersReducedMotion();
-    setRescuePresentation(null);
-    setJumpPresentation(null);
-    setPresentedPower(event.playerPower);
-    setPresentedEnemyPower(reducedMotion ? event.enemyPowerAfter : event.enemyPower);
-    setBattlePresentation({
-      objectId: event.objectId,
-      enemySrc: resolveEnemyArt(enemy.style).src,
-      enemyPower: event.enemyPower,
-      enemyPowerAfter: event.enemyPowerAfter,
-      from,
-      at: enemy.at,
-      direction,
-      powerBefore: event.playerPower,
-      powerAfter: event.playerPower,
-      outcome: "lost",
-    });
-
-    if (reducedMotion) {
-      playSound("lose", mutedRef.current);
-    } else {
-      schedulePresentationTimer(sequence, () => playSound("combatClash", mutedRef.current), 255);
-      schedulePresentationTimer(sequence, () => playSound("combatSparks", mutedRef.current), 325);
-      schedulePresentationTimer(sequence, () => playSound("combatImpact", mutedRef.current), 390);
-      schedulePresentationTimer(sequence, () => playSound("combatPowerUp", mutedRef.current), 535);
-      schedulePresentationTimer(sequence, () => playSound("lose", mutedRef.current), 900);
-      schedulePresentationTimer(sequence, () => {
-        const startedAt = performance.now();
-        const countDuration = 460;
-        const powerGain = Math.max(0, event.enemyPowerAfter - event.enemyPower);
-        const tickStep = Math.max(1, Math.ceil(powerGain / 11));
-        let lastDisplayedPower = event.enemyPower;
-        const countPower = (now: number) => {
-          if (presentationSequence.current !== sequence) return;
-          const progress = Math.min(1, (now - startedAt) / countDuration);
-          const eased = progress * progress * (3 - 2 * progress);
-          const nextPower = progress >= 1
-            ? event.enemyPowerAfter
-            : Math.min(
-                event.enemyPowerAfter,
-                event.enemyPower + Math.floor((powerGain * eased) / tickStep) * tickStep,
-              );
-          if (nextPower !== lastDisplayedPower) {
-            lastDisplayedPower = nextPower;
-            setPresentedEnemyPower(nextPower);
-            playSound("powerTick", mutedRef.current);
-          }
-          if (progress < 1) powerAnimationFrame.current = window.requestAnimationFrame(countPower);
-          else powerAnimationFrame.current = undefined;
-        };
-        powerAnimationFrame.current = window.requestAnimationFrame(countPower);
-      }, 510);
-    }
-
-    const duration = reducedMotion ? REDUCED_PRESENTATION_MS : BATTLE_PRESENTATION_MS;
-    schedulePresentationTimer(sequence, () => {
-      setPresentedPower(null);
-      setPresentedEnemyPower(null);
-      setBattlePresentation(null);
-    }, Math.max(100, duration - 30));
-    return duration;
-  }, [clearPresentationWork, schedulePresentationTimer]);
-
   const beginRescuePresentation = useCallback((
     event: Extract<GameEvent, { type: "animal-rescued" }>,
     animal: Extract<LevelObject, { kind: "animal" }>,
@@ -1139,11 +1198,11 @@ function App() {
     setRevealedTiles(isExplorationLevel(nextLevel)
       ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)
       : new Set());
-    setLastEvents([]);
-    setPreviewDirection(null);
     setMovePulse(0);
     setBumpPulse(0);
     setCompletion(null);
+    setTooStrongEncounter(null);
+    setHintOpen(false);
     setPendingAdventure(null);
     setFeedback({ icon: "✨", text: nextLevel.objective, tone: "plain", sound: "step" });
     setRestartArmed(false);
@@ -1155,6 +1214,8 @@ function App() {
       || pendingAdventure !== null
       || testerPickerOpen
       || helpOpen
+      || hintOpen
+      || tooStrongEncounter !== null
       || game.status !== "playing"
     );
     if (unavailable) {
@@ -1175,7 +1236,10 @@ function App() {
       lastMovedDirection.current,
     );
     const result = movePlayer(level, game, direction);
-    if (result.state.status !== "playing") {
+    const tooStrongEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "enemy-too-strong" }> => event.type === "enemy-too-strong",
+    );
+    if (result.state.status !== "playing" || tooStrongEvent) {
       modalReturnFocus.current = document.activeElement instanceof HTMLElement
         && document.activeElement !== document.body
         ? document.activeElement
@@ -1186,10 +1250,7 @@ function App() {
       ? feedbackFor(result.events, level)
       : { icon: "✨", text: level.objective, tone: "plain" as const, sound: "step" as const };
     setGame(result.state);
-    if (result.events.some((event) => event.type === "combat-lost")) {
-      lastMovedDirection.current = null;
-      setPlayerTrail([level.start]);
-    } else if (result.moved) {
+    if (result.moved) {
       lastMovedDirection.current = direction;
       setPlayerTrail((trail) => recordFollowerStep(trail, game.position));
     }
@@ -1201,14 +1262,9 @@ function App() {
         DEFAULT_FOV_SIZE,
       ));
     }
-    setLastEvents(result.events);
     setFeedback(nextFeedback);
-    setPreviewDirection(direction);
     const defeatedEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "enemy-defeated" }> => event.type === "enemy-defeated",
-    );
-    const lostCombatEvent = result.events.find(
-      (event): event is Extract<GameEvent, { type: "combat-lost" }> => event.type === "combat-lost",
     );
     const rescuedEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "animal-rescued" }> => event.type === "animal-rescued",
@@ -1225,13 +1281,18 @@ function App() {
         ),
       );
       if (enemy) presentationDuration = beginBattlePresentation(defeatedEvent, enemy, direction, game.position);
-    } else if (lostCombatEvent) {
+    } else if (tooStrongEvent) {
       const enemy = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "enemy" }> => (
-          object.kind === "enemy" && object.id === lostCombatEvent.objectId
+          object.kind === "enemy" && object.id === tooStrongEvent.objectId
         ),
       );
-      if (enemy) presentationDuration = beginLostBattlePresentation(lostCombatEvent, enemy, direction, game.position);
+      clearHeldInput();
+      if (enemy) {
+        const art = resolveEnemyArt(enemy.style);
+        setTooStrongEncounter({ event: tooStrongEvent, enemySrc: art.src, enemyLabel: art.label });
+      }
+      playSound("bump", mutedRef.current);
     } else if (rescuedEvent) {
       if (jumpedEvent) playSound("jump", mutedRef.current);
       const animal = level.objects.find(
@@ -1243,7 +1304,7 @@ function App() {
     } else if (jumpedEvent) {
       presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
     }
-    if (!defeatedEvent && !lostCombatEvent && !rescuedEvent && !jumpedEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
+    if (!defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
       playSound(nextFeedback.sound, muted);
       if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
     }
@@ -1279,6 +1340,7 @@ function App() {
           source: level.source,
           campaignIndex,
           rescuedCount: resultRescuedSpecies.length,
+          totalRescueCount: resultAnimalObjects.length,
           firstCompletion,
         });
         const nextProgress = applyLevelCompletion(progress, {
@@ -1286,6 +1348,7 @@ function App() {
           source: level.source,
           campaignIndex,
           rescuedCount: resultRescuedSpecies.length,
+          totalRescueCount: resultAnimalObjects.length,
           rescuedSpecies: resultRescuedSpecies,
           steps: result.state.steps,
           power: result.state.power,
@@ -1321,7 +1384,7 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginJumpPresentation, beginLostBattlePresentation, beginRescuePresentation, campaignIndex, explorationMode, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerPickerOpen, testerRun]);
+  }, [beginBattlePresentation, beginJumpPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, helpOpen, hintOpen, level, muted, pendingAdventure, progress, screen, testerPickerOpen, testerRun, tooStrongEncounter]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -1357,6 +1420,8 @@ function App() {
         && screen === "game"
         && bigMaze
         && !helpOpen
+        && !hintOpen
+        && tooStrongEncounter === null
         && game.status === "playing"
       ) {
         event.preventDefault();
@@ -1364,7 +1429,7 @@ function App() {
         return;
       }
       const direction = directionForKey(event.key);
-      if (!direction || screen !== "game" || helpOpen || testerPickerOpen || game.status !== "playing") return;
+      if (!direction || screen !== "game" || helpOpen || hintOpen || tooStrongEncounter !== null || testerPickerOpen || game.status !== "playing") return;
       if (event.ctrlKey || event.metaKey || event.altKey) return;
       event.preventDefault();
       if (event.repeat) return;
@@ -1413,13 +1478,13 @@ function App() {
       window.removeEventListener("blur", clearHeldInput);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [bigMaze, clearHeldInput, game.status, helpOpen, pendingAdventure, screen, testerPickerOpen]);
+  }, [bigMaze, clearHeldInput, game.status, helpOpen, hintOpen, pendingAdventure, screen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => {
-    if (screen !== "game" || helpOpen || testerPickerOpen || pendingAdventure !== null || game.status !== "playing") {
+    if (screen !== "game" || helpOpen || hintOpen || tooStrongEncounter !== null || testerPickerOpen || pendingAdventure !== null || game.status !== "playing") {
       clearHeldInput();
     }
-  }, [clearHeldInput, game.status, helpOpen, pendingAdventure, screen, testerPickerOpen]);
+  }, [clearHeldInput, game.status, helpOpen, hintOpen, pendingAdventure, screen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => () => {
     clearPresentationWork();
@@ -1456,7 +1521,6 @@ function App() {
       const direction = intent?.direction ?? null;
       if (pointer) {
         pointer.direction = direction;
-        setPreviewDirection(direction);
         if (pointer.pointerType === "touch") {
           setTouchCursor((cursor) => cursor && cursor.direction !== direction
             ? { ...cursor, direction }
@@ -1480,9 +1544,6 @@ function App() {
   const onBoardPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     const pointer = activeBoardPointer.current;
     if (!pointer || pointer.pointerId !== event.pointerId) {
-      if (event.pointerType !== "touch") {
-        setPreviewDirection(pointerDirectionRef.current(event.clientX, event.clientY)?.direction ?? null);
-      }
       return;
     }
 
@@ -1500,8 +1561,6 @@ function App() {
         direction,
       });
     }
-    setPreviewDirection(direction);
-
     if (!directionChanged) return;
     if (pointerHoldTimer.current !== undefined) {
       window.clearTimeout(pointerHoldTimer.current);
@@ -1540,7 +1599,6 @@ function App() {
       const localOrigin = { x: origin.x - rect.left, y: origin.y - rect.top };
       setTouchCursor({ origin: localOrigin, current: localOrigin, direction });
     }
-    setPreviewDirection(direction);
     if (!direction) return;
     pointerHoldCadence.current = beginHeldMoveCadence(direction);
     attemptMoveRef.current(direction, intent?.lateralOffset);
@@ -1552,7 +1610,6 @@ function App() {
     if (!pointer || pointer.pointerId !== event.pointerId) return;
     event.preventDefault();
     clearBoardPointer();
-    setPreviewDirection(null);
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
@@ -1656,6 +1713,23 @@ function App() {
     playSound("menu", muted);
   };
 
+  const openHint = (trigger: HTMLElement) => {
+    modalReturnFocus.current = trigger;
+    setHintOpen(true);
+    playSound("menu", muted);
+  };
+
+  const closeHint = () => {
+    setHintOpen(false);
+    playSound("menu", muted);
+  };
+
+  const dismissTooStrongEncounter = () => {
+    setTooStrongEncounter(null);
+    setFeedback({ icon: "💪", text: "Let’s find more Power, then come back!", tone: "plain", sound: "menu" });
+    playSound("menu", muted);
+  };
+
   const closePendingAdventure = () => {
     setPendingAdventure(null);
     playSound("menu", muted);
@@ -1728,6 +1802,8 @@ function App() {
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
     setHelpOpen(false);
+    setHintOpen(false);
+    setTooStrongEncounter(null);
     setTesterPickerOpen(false);
     setBigMaze(false);
     setScreen("title");
@@ -1746,6 +1822,8 @@ function App() {
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
     setHelpOpen(false);
+    setHintOpen(false);
+    setTooStrongEncounter(null);
     setBigMaze(false);
     setScreen("achievements");
     playSound("achievement", muted);
@@ -1786,16 +1864,7 @@ function App() {
       (direction) => previewKind(level, game, direction) === "go",
     ) ?? null
     : null;
-  const shownPreviewDirection = previewDirection ?? suggestedMoveDirection;
-  const previewTarget = shownPreviewDirection ? targetFor(game, shownPreviewDirection) : null;
-  const previewState = shownPreviewDirection ? previewKind(level, game, shownPreviewDirection) : null;
-  const lostEvent = lastEvents.find((event): event is Extract<GameEvent, { type: "combat-lost" }> => event.type === "combat-lost");
-  const lostEnemy = lostEvent
-    ? level.objects.find((object): object is Extract<LevelObject, { kind: "enemy" }> => (
-      object.kind === "enemy" && object.id === lostEvent.objectId
-    ))
-    : undefined;
-  const lostEnemyArt = resolveEnemyArt(lostEnemy?.style);
+  const currentHint = hintFor(level, game);
   const ownedCollectibles = [
     ...progress.stickers.slice(-3).map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id) })),
     ...progress.medals.slice(-2).map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id) })),
@@ -1857,14 +1926,15 @@ function App() {
                 {bigMaze && (
                   <div
                     className="big-maze-hud"
-                    aria-label={`${level.name}. Power ${displayedPower}. ${rescuedSpecies.length} of ${ANIMALS_PER_LEVEL} friends rescued. ${game.hasSword ? `${weaponArt.label} found.` : objectKinds.has("sword") ? `${weaponArt.label} not found.` : ""} ${game.hasBoots ? "Splash boots found." : objectKinds.has("boots") ? "Splash boots not found." : ""} ${game.hasSpringBoots ? "Spring boots found." : objectKinds.has("spring-boots") ? "Spring boots not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
+                    aria-label={`${level.name}. Power ${displayedPower}. ${rescuedSpecies.length} of ${animalObjects.length} friends rescued. ${game.hasSword ? `${weaponArt.label} found.` : objectKinds.has("sword") ? `${weaponArt.label} not found.` : ""} ${game.hasBoots ? "Splash boots found." : objectKinds.has("boots") ? "Splash boots not found." : ""} ${game.hasSpringBoots ? "Spring boots found." : objectKinds.has("spring-boots") ? "Spring boots not found." : ""} ${game.hasAntidoteLeaf ? "Antidote leaf found." : objectKinds.has("antidote-leaf") ? "Antidote leaf not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
                   >
                     <strong>{level.name}</strong>
                     <span>★ {displayedPower}</span>
-                    <span>💖 {rescuedSpecies.length}/{ANIMALS_PER_LEVEL}</span>
-                    {objectKinds.has("sword") && <span className={game.hasSword ? "found" : "missing"}>🗡 {game.hasSword ? "✓" : "–"}</span>}
-                    {objectKinds.has("boots") && <span className={game.hasBoots ? "found" : "missing"}>🥾 {game.hasBoots ? "✓" : "–"}</span>}
-                    {objectKinds.has("spring-boots") && <span className={game.hasSpringBoots ? "found" : "missing"}>↟ {game.hasSpringBoots ? "✓" : "–"}</span>}
+                    <span>💖 {rescuedSpecies.length}/{animalObjects.length}</span>
+                    {objectKinds.has("sword") && <span className={game.hasSword ? "found" : "missing"} title={game.hasSword ? `${weaponArt.label} found` : `${weaponArt.label} not found`}>🗡</span>}
+                    {objectKinds.has("boots") && <span className={game.hasBoots ? "found" : "missing"} title={game.hasBoots ? "Splash boots found" : "Splash boots not found"}>🥾</span>}
+                    {objectKinds.has("spring-boots") && <span className={game.hasSpringBoots ? "found" : "missing"} title={game.hasSpringBoots ? "Spring boots found" : "Spring boots not found"}>↟</span>}
+                    {objectKinds.has("antidote-leaf") && <span className={game.hasAntidoteLeaf ? "found" : "missing"} title={game.hasAntidoteLeaf ? "Antidote leaf found" : "Antidote leaf not found"}>🍃</span>}
                     {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}>🔑 {game.keys.length}/{keyColors.length}</span>}
                   </div>
                 )}
@@ -1903,7 +1973,6 @@ function App() {
               aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight W A S D"
               tabIndex={0}
               onPointerMove={onBoardPointerMove}
-              onPointerLeave={() => { if (!activeBoardPointer.current) setPreviewDirection(null); }}
               onPointerDown={onBoardPointerDown}
               onPointerUp={finishBoardPointer}
               onPointerCancel={finishBoardPointer}
@@ -1938,16 +2007,6 @@ function App() {
                 </div>
               )}
 
-              {previewTarget && shownPreviewDirection && isInsideWindow(previewTarget, cameraWindow) && (
-                <div
-                  className={`move-preview move-preview-layer preview-${previewState}`}
-                  style={cameraLayerStyle(previewTarget, cameraWindow)}
-                  aria-hidden="true"
-                >
-                  <span className="preview-arrow">{previewState === "danger" ? "!" : previewState === "stop" ? "×" : DIRECTION_ICONS[shownPreviewDirection]}</span>
-                </div>
-              )}
-
               {visibleObjects.map((object) => (
                 <div
                   className="object-layer"
@@ -1965,6 +2024,9 @@ function App() {
                   )}
                   {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
                   {object.kind === "potion" && <span className="item-amount">+{object.amount}</span>}
+                  {(object.kind === "key" || object.kind === "door") && (
+                    <span className={`object-color-name color-name-${object.color}`}>{COLOR_LABELS[object.color]}</span>
+                  )}
                 </div>
               ))}
 
@@ -2138,14 +2200,20 @@ function App() {
                 <section className="objective-card">
                   <span className="objective-icon" aria-hidden="true">★</span>
                   <div><span className="tiny-label">Right now</span><strong>{level.objective}</strong></div>
+                  <button
+                    className="objective-hint-button"
+                    onClick={(event) => openHint(event.currentTarget)}
+                    aria-label="Show a gentle hint for this maze"
+                    title="Show a gentle hint"
+                  ><span aria-hidden="true">💡</span><b>Hint</b></button>
                 </section>
 
-                <section className="rescue-card" aria-label={`${rescuedSpecies.length} of ${ANIMALS_PER_LEVEL} animal friends rescued`}>
+                <section className="rescue-card" aria-label={`${rescuedSpecies.length} of ${animalObjects.length} animal friends rescued`}>
                   <div className="rescue-heading">
                     <div><span className="tiny-label">Optional adventure</span><strong>Rescue the friends</strong></div>
-                    <span className="rescue-count">{rescuedSpecies.length}/{ANIMALS_PER_LEVEL}</span>
+                    <span className="rescue-count">{rescuedSpecies.length}/{animalObjects.length}</span>
                   </div>
-                  <div className="rescue-list">
+                  <div className={`rescue-list rescue-count-${Math.min(5, animalObjects.length)}`}>
                     {animalObjects.map((animal) => {
                       const rescued = game.rescuedAnimalIds.includes(animal.id);
                       return (
@@ -2154,7 +2222,6 @@ function App() {
                             <img src={animalArt(animal.species)} alt="" />
                             {!rescued && <img className="cage-mini" src={resolveCageArt(animal.cageStyle).src} alt="" />}
                           </div>
-                          {rescued && <b className="rescue-check" aria-hidden="true">✓</b>}
                         </div>
                       );
                     })}
@@ -2170,10 +2237,11 @@ function App() {
                     {objectKinds.has("sword") && <InventorySlot label={weaponArt.label} image={weaponArt.src} found={game.hasSword} />}
                     {objectKinds.has("boots") && <InventorySlot label="Splash boots" image={ASSETS.boots} found={game.hasBoots} />}
                     {objectKinds.has("spring-boots") && <InventorySlot label="Spring boots" image={ASSETS.springBoots} found={game.hasSpringBoots} />}
+                    {objectKinds.has("antidote-leaf") && <InventorySlot label="Antidote leaf" image={ASSETS.antidoteLeaf} found={game.hasAntidoteLeaf} />}
                     {keyColors.map((color) => (
                       <InventorySlot key={color} label={`${COLOR_LABELS[color]} key`} image={ASSETS.key} found={game.keys.includes(color)} color={color} />
                     ))}
-                    {!objectKinds.has("sword") && !objectKinds.has("boots") && !objectKinds.has("spring-boots") && keyColors.length === 0 && (
+                    {!objectKinds.has("sword") && !objectKinds.has("boots") && !objectKinds.has("spring-boots") && !objectKinds.has("antidote-leaf") && keyColors.length === 0 && (
                       <div className="empty-bag"><span>🎒</span><strong>Bag ready!</strong></div>
                     )}
                   </div>
@@ -2243,10 +2311,21 @@ function App() {
               <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />
               <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
               <HelpStep icon="↟" title="Find spring boots" copy="Boing safely across holes in the path." />
-              <HelpStep icon="💖" title="Rescue friends" copy="Three are hiding in every maze." />
+              <HelpStep icon="🍃" title="Find the antidote leaf" copy="It makes purple poison safe to cross." />
+              <HelpStep icon="💖" title="Rescue friends" copy="Some mazes have one friend; big adventures can have five." />
               {explorationMode && <HelpStep icon="🗺️" title="Fill the map" copy="Exploring reveals each part." />}
             </div>
             <button className="primary-button" onClick={closeHelp}>Let's explore!</button>
+          </Modal>
+        )}
+
+        {hintOpen && (
+          <Modal title="A little hint" onClose={closeHint} returnFocus={modalReturnFocus.current}>
+            <div className="hint-card">
+              <span className="hint-spark" aria-hidden="true">💡</span>
+              <p>{currentHint}</p>
+            </div>
+            <button className="primary-button" onClick={closeHint}>Got it!</button>
           </Modal>
         )}
 
@@ -2270,7 +2349,7 @@ function App() {
                 );
               })}
             </div>
-            {completion.rescuedSpecies.length === ANIMALS_PER_LEVEL && <div className="perfect-banner">💖 Perfect rescue! All three friends are safe!</div>}
+            {animalObjects.length > 0 && completion.rescuedSpecies.length === animalObjects.length && <div className="perfect-banner">💖 Perfect rescue! Every friend is safe!</div>}
             {completion.testerRun ? (
               <div className="tester-preview-banner" role="status">
                 <span aria-hidden="true">🛠️</span>
@@ -2282,7 +2361,7 @@ function App() {
                 <div className="reward-copy">
                   <span>Maze reward</span>
                   <strong>+{completion.reward.gold} gold stars</strong>
-                  <small className="reward-breakdown">Solve {completion.reward.goldBreakdown.completion} · Friends {completion.reward.goldBreakdown.animalRescue}{completion.reward.goldBreakdown.perfectRescue > 0 ? ` · All three ${completion.reward.goldBreakdown.perfectRescue}` : ""}{completion.reward.goldBreakdown.firstCompletion > 0 ? ` · New maze ${completion.reward.goldBreakdown.firstCompletion}` : ""}</small>
+                  <small className="reward-breakdown">Solve {completion.reward.goldBreakdown.completion} · Friends {completion.reward.goldBreakdown.animalRescue}{completion.reward.goldBreakdown.perfectRescue > 0 ? ` · Every friend ${completion.reward.goldBreakdown.perfectRescue}` : ""}{completion.reward.goldBreakdown.firstCompletion > 0 ? ` · New maze ${completion.reward.goldBreakdown.firstCompletion}` : ""}</small>
                 </div>
                 <span className="reward-badge">Total {completion.totalGold}</span>
               </div>
@@ -2306,15 +2385,16 @@ function App() {
           </Modal>
         )}
 
-        {game.status === "lost" && battlePresentation === null && (
-          <Modal title="A little too strong!" returnFocus={modalReturnFocus.current}>
-            <img className="modal-art goblin-art" src={lostEnemyArt.src} alt={`A friendly ${lostEnemyArt.label.toLowerCase()}`} />
-            {lostEvent && <div className="power-equation"><span>{lostEvent.playerPower}</span><b>&lt;</b><span>{lostEvent.enemyPower}</span></div>}
-            <p className="modal-lead">Find more Power, then come back. This maze will start fresh.</p>
-            <div className="modal-actions">
-              <button className="primary-button" onClick={replayLevel}>Try again</button>
-              <button className="secondary-button" onClick={showTitle}>Choose a maze</button>
+        {tooStrongEncounter && (
+          <Modal title="Too strong!" returnFocus={modalReturnFocus.current}>
+            <img className="modal-art too-strong-enemy-art" src={tooStrongEncounter.enemySrc} alt={`A friendly ${tooStrongEncounter.enemyLabel.toLowerCase()}`} />
+            <div className="power-equation too-strong-equation" aria-label={`Ame has Power ${tooStrongEncounter.event.playerPower}, which is less than ${tooStrongEncounter.enemyLabel} with Power ${tooStrongEncounter.event.enemyPower}`}>
+              <span className="power-side ame-side"><small>Ame</small><strong>{tooStrongEncounter.event.playerPower}</strong></span>
+              <b aria-hidden="true">&lt;</b>
+              <span className="power-side enemy-side"><small>{tooStrongEncounter.enemyLabel}</small><strong>{tooStrongEncounter.event.enemyPower}</strong></span>
             </div>
+            <p className="modal-lead">Ame stayed safely one square away. Find more Power, then come back!</p>
+            <button className="primary-button too-strong-action" onClick={dismissTooStrongEncounter}>I’ll go get stronger.</button>
           </Modal>
         )}
 
@@ -2668,7 +2748,6 @@ function InventorySlot({ label, image, found, color }: InventorySlotProps) {
       title={`${label}: ${found ? "found" : "not found"}`}
     >
       <div className="slot-image"><img src={image} alt="" /></div>
-      {found && <b aria-label="found">✓</b>}
     </div>
   );
 }
