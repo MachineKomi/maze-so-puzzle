@@ -83,13 +83,20 @@ button:focus-visible,
   overflow: hidden;
 }
 
+.game-stage-slot {
+  position: relative;
+  width: calc(960px * var(--stage-scale, 1));
+  height: calc(540px * var(--stage-scale, 1));
+  min-width: 0;
+  min-height: 0;
+}
+
 .game-stage {
   position: relative;
-  width: min(100%, 177.7778vh);
-  height: min(100%, 56.25vw);
-  width: min(100%, calc((100dvh - var(--safe-top) - var(--safe-bottom)) * 1.7778));
-  height: min(100%, calc((100vw - var(--safe-left) - var(--safe-right)) * 0.5625));
-  min-height: min(360px, 100%);
+  width: 960px;
+  height: 540px;
+  min-width: 960px;
+  min-height: 540px;
   overflow: hidden;
   overflow: clip;
   background:
@@ -100,6 +107,9 @@ button:focus-visible,
   border: 1px solid rgba(255, 255, 255, 0.44);
   box-shadow: 0 24px 80px rgba(20, 8, 32, 0.46);
   isolation: isolate;
+  container: game-stage / size;
+  transform: scale(var(--stage-scale, 1));
+  transform-origin: top left;
 }
 
 .game-stage::before,
@@ -129,16 +139,16 @@ button:focus-visible,
   display: grid;
   width: 100%;
   height: 100%;
-  padding: clamp(10px, 1.35vw, 18px);
+  padding: clamp(10px, 1.35cqw, 18px);
   grid-template-columns: minmax(0, 1.12fr) minmax(330px, 0.88fr);
-  gap: clamp(10px, 1.4vw, 20px);
+  gap: clamp(10px, 1.4cqw, 20px);
 }
 
 .ambient-star {
   position: absolute;
   z-index: 0;
   color: rgba(255, 255, 255, 0.68);
-  font-size: clamp(16px, 2vw, 28px);
+  font-size: clamp(16px, 2cqw, 28px);
   pointer-events: none;
 }
 
@@ -157,11 +167,11 @@ button:focus-visible,
   display: grid;
   min-width: 0;
   min-height: 0;
-  padding: clamp(8px, 0.9vw, 13px);
+  padding: clamp(8px, 0.9cqw, 13px);
   grid-template-rows: auto minmax(0, 1fr) auto;
-  gap: clamp(5px, 0.6vw, 9px);
+  gap: clamp(5px, 0.6cqw, 9px);
   border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: clamp(18px, 2.2vw, 30px);
+  border-radius: clamp(18px, 2.2cqw, 30px);
   background: rgba(255, 253, 245, 0.55);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
@@ -174,7 +184,7 @@ button:focus-visible,
   min-height: 40px;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(2px, 0.5vw, 8px);
+  padding: 0 clamp(2px, 0.5cqw, 8px);
 }
 
 .level-kicker,
@@ -182,7 +192,7 @@ button:focus-visible,
 .tiny-label {
   display: block;
   color: #856b8d;
-  font-size: clamp(8px, 0.72vw, 11px);
+  font-size: clamp(8px, 0.72cqw, 11px);
   font-weight: 900;
   letter-spacing: 0.11em;
   line-height: 1.15;
@@ -192,7 +202,7 @@ button:focus-visible,
 .maze-topline h2 {
   margin: 2px 0 0;
   color: var(--plum);
-  font-size: clamp(18px, 1.75vw, 25px);
+  font-size: clamp(18px, 1.75cqw, 25px);
   letter-spacing: -0.035em;
   line-height: 1;
 }
@@ -208,7 +218,7 @@ button:focus-visible,
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.74);
   color: var(--plum);
-  font-size: clamp(13px, 1.15vw, 17px);
+  font-size: clamp(13px, 1.15cqw, 17px);
   font-weight: 900;
   box-shadow: 0 4px 12px rgba(65, 35, 78, 0.08);
 }
@@ -223,8 +233,8 @@ button:focus-visible,
   overflow: hidden;
   touch-action: manipulation;
   cursor: crosshair;
-  border: clamp(4px, 0.55vw, 8px) solid #624276;
-  border-radius: clamp(14px, 1.8vw, 24px);
+  border: clamp(4px, 0.55cqw, 8px) solid #624276;
+  border-radius: clamp(14px, 1.8cqw, 24px);
   background: #f8ead8;
   box-shadow:
     0 10px 20px rgba(62, 35, 70, 0.22),
@@ -319,14 +329,14 @@ button:focus-visible,
   top: -9%;
   left: 50%;
   display: grid;
-  min-width: clamp(20px, 2.25vw, 30px);
-  height: clamp(20px, 2.25vw, 30px);
+  min-width: clamp(20px, 2.25cqw, 30px);
+  height: clamp(20px, 2.25cqw, 30px);
   padding: 0 5px;
   place-items: center;
   border: 2px solid white;
   border-radius: 999px;
   color: white;
-  font-size: clamp(10px, 1.15vw, 16px);
+  font-size: clamp(10px, 1.15cqw, 16px);
   font-weight: 1000;
   line-height: 1;
   text-shadow: 0 1px 2px rgba(49, 25, 55, 0.7);
@@ -352,7 +362,7 @@ button:focus-visible,
   border-radius: 999px;
   background: var(--coral);
   color: white;
-  font-size: clamp(8px, 0.9vw, 13px);
+  font-size: clamp(8px, 0.9cqw, 13px);
   font-weight: 1000;
   line-height: 1.3;
   box-shadow: 0 2px 5px rgba(60, 30, 66, 0.3);
@@ -360,16 +370,16 @@ button:focus-visible,
 
 .feedback-bar {
   display: flex;
-  min-height: clamp(38px, 4vw, 50px);
+  min-height: clamp(38px, 4cqw, 50px);
   align-items: center;
   justify-content: center;
-  gap: clamp(7px, 0.8vw, 11px);
+  gap: clamp(7px, 0.8cqw, 11px);
   padding: 7px 14px;
   border: 1px solid rgba(102, 74, 111, 0.12);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.78);
   color: var(--plum);
-  font-size: clamp(11px, 1.14vw, 16px);
+  font-size: clamp(11px, 1.14cqw, 16px);
   font-weight: 900;
   line-height: 1.1;
   text-align: center;
@@ -398,18 +408,18 @@ button:focus-visible,
   min-width: 0;
   min-height: 0;
   flex-direction: column;
-  gap: clamp(5px, 0.55vw, 8px);
+  gap: clamp(5px, 0.55cqw, 8px);
 }
 
 .brand-block {
   min-height: 52px;
-  padding: clamp(2px, 0.4vw, 6px) clamp(90px, 8vw, 112px) 0 clamp(3px, 0.6vw, 8px);
+  padding: clamp(2px, 0.4cqw, 6px) clamp(90px, 8cqw, 112px) 0 clamp(3px, 0.6cqw, 8px);
 }
 
 .brand-block .brand-title {
   margin: 2px 0 0;
   color: var(--plum);
-  font-size: clamp(21px, 2.35vw, 34px);
+  font-size: clamp(21px, 2.35cqw, 34px);
   font-weight: 1000;
   letter-spacing: -0.065em;
   line-height: 0.95;
@@ -423,7 +433,7 @@ button:focus-visible,
 .brand-block p {
   margin: 3px 0 0 2px;
   color: #79647f;
-  font-size: clamp(9px, 0.8vw, 12px);
+  font-size: clamp(9px, 0.8cqw, 12px);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -443,13 +453,13 @@ button:focus-visible,
 
 .hero-card {
   display: grid;
-  min-height: clamp(82px, 9.4vw, 126px);
-  padding: clamp(5px, 0.55vw, 8px);
-  grid-template-columns: clamp(76px, 8.1vw, 112px) 1fr;
+  min-height: clamp(82px, 9.4cqw, 126px);
+  padding: clamp(5px, 0.55cqw, 8px);
+  grid-template-columns: clamp(76px, 8.1cqw, 112px) 1fr;
   align-items: center;
-  gap: clamp(7px, 0.75vw, 11px);
+  gap: clamp(7px, 0.75cqw, 11px);
   overflow: hidden;
-  border-radius: clamp(16px, 1.8vw, 25px);
+  border-radius: clamp(16px, 1.8cqw, 25px);
 }
 
 .portrait-wrap {
@@ -502,7 +512,7 @@ button:focus-visible,
   grid-column: 1;
   margin: -2px 0 -3px;
   color: #d96769;
-  font-size: clamp(38px, 4.8vw, 68px);
+  font-size: clamp(38px, 4.8cqw, 68px);
   font-weight: 1000;
   letter-spacing: -0.08em;
   line-height: 1;
@@ -511,29 +521,29 @@ button:focus-visible,
 
 .power-help {
   color: #735d78;
-  font-size: clamp(9px, 0.88vw, 13px);
+  font-size: clamp(9px, 0.88cqw, 13px);
   font-weight: 900;
 }
 
 .objective-card {
   display: flex;
-  min-height: clamp(46px, 4.5vw, 60px);
-  padding: 7px clamp(9px, 1vw, 14px);
+  min-height: clamp(46px, 4.5cqw, 60px);
+  padding: 7px clamp(9px, 1cqw, 14px);
   align-items: center;
   gap: 10px;
-  border-radius: clamp(13px, 1.4vw, 19px);
+  border-radius: clamp(13px, 1.4cqw, 19px);
 }
 
 .objective-icon {
   display: grid;
-  width: clamp(31px, 3vw, 42px);
+  width: clamp(31px, 3cqw, 42px);
   aspect-ratio: 1;
   flex: 0 0 auto;
   place-items: center;
   border-radius: 32%;
   background: linear-gradient(145deg, #ffd46f, #f19b63);
   color: white;
-  font-size: clamp(16px, 1.7vw, 24px);
+  font-size: clamp(16px, 1.7cqw, 24px);
   text-shadow: 0 1px 3px rgba(110, 61, 56, 0.3);
   box-shadow: 0 3px 9px rgba(170, 101, 71, 0.2);
 }
@@ -544,14 +554,14 @@ button:focus-visible,
   display: block;
   margin-top: 2px;
   color: var(--plum);
-  font-size: clamp(11px, 1.02vw, 15px);
+  font-size: clamp(11px, 1.02cqw, 15px);
   line-height: 1.1;
 }
 
 .bag-card {
   min-height: 91px;
-  padding: clamp(7px, 0.75vw, 11px);
-  border-radius: clamp(14px, 1.55vw, 21px);
+  padding: clamp(7px, 0.75cqw, 11px);
+  border-radius: clamp(14px, 1.55cqw, 21px);
 }
 
 .section-heading {
@@ -574,18 +584,18 @@ button:focus-visible,
 
 .inventory-grid {
   display: grid;
-  margin-top: clamp(5px, 0.5vw, 8px);
+  margin-top: clamp(5px, 0.5cqw, 8px);
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(4px, 0.45vw, 7px);
+  gap: clamp(4px, 0.45cqw, 7px);
 }
 
 .inventory-slot {
   position: relative;
   display: grid;
   min-width: 0;
-  min-height: clamp(43px, 4.4vw, 60px);
+  min-height: clamp(43px, 4.4cqw, 60px);
   padding: 3px 5px;
-  grid-template-columns: clamp(29px, 3vw, 41px) 1fr;
+  grid-template-columns: clamp(29px, 3cqw, 41px) 1fr;
   align-items: center;
   gap: 4px;
   overflow: hidden;
@@ -626,7 +636,7 @@ button:focus-visible,
 .inventory-slot > span {
   overflow: hidden;
   color: #76647b;
-  font-size: clamp(8px, 0.68vw, 10px);
+  font-size: clamp(8px, 0.68cqw, 10px);
   font-weight: 900;
   line-height: 1.05;
   text-overflow: ellipsis;
@@ -642,7 +652,7 @@ button:focus-visible,
   border: 1px dashed rgba(115, 83, 123, 0.22);
   border-radius: 12px;
   color: #79667d;
-  font-size: clamp(10px, 0.9vw, 13px);
+  font-size: clamp(10px, 0.9cqw, 13px);
 }
 
 .empty-bag span {
@@ -651,12 +661,12 @@ button:focus-visible,
 
 .controls-card {
   display: grid;
-  min-height: clamp(76px, 7.2vw, 98px);
-  padding: clamp(6px, 0.7vw, 10px) clamp(8px, 0.85vw, 12px);
-  grid-template-columns: 1fr clamp(96px, 10vw, 138px);
+  min-height: clamp(76px, 7.2cqw, 98px);
+  padding: clamp(6px, 0.7cqw, 10px) clamp(8px, 0.85cqw, 12px);
+  grid-template-columns: 1fr clamp(96px, 10cqw, 138px);
   align-items: center;
   gap: 8px;
-  border-radius: clamp(14px, 1.55vw, 21px);
+  border-radius: clamp(14px, 1.55cqw, 21px);
 }
 
 .dpad {
@@ -671,11 +681,11 @@ button:focus-visible,
 .dpad-center {
   display: grid;
   min-width: 0;
-  min-height: clamp(23px, 2.2vw, 31px);
+  min-height: clamp(23px, 2.2cqw, 31px);
   place-items: center;
   border: 0;
   color: white;
-  font-size: clamp(9px, 0.8vw, 12px);
+  font-size: clamp(9px, 0.8cqw, 12px);
   line-height: 1;
 }
 
@@ -710,15 +720,15 @@ button:focus-visible,
 
 .level-dots button {
   display: grid;
-  width: clamp(25px, 2.4vw, 34px);
-  height: clamp(25px, 2.4vw, 34px);
+  width: clamp(25px, 2.4cqw, 34px);
+  height: clamp(25px, 2.4cqw, 34px);
   cursor: pointer;
   place-items: center;
   border: 2px solid rgba(255, 255, 255, 0.9);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.55);
   color: #775c84;
-  font-size: clamp(9px, 0.8vw, 12px);
+  font-size: clamp(9px, 0.8cqw, 12px);
   font-weight: 1000;
   box-shadow: 0 3px 8px rgba(74, 45, 82, 0.1);
 }
@@ -748,7 +758,7 @@ button:focus-visible,
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.7);
   color: #6d5874;
-  font-size: clamp(8px, 0.75vw, 11px);
+  font-size: clamp(8px, 0.75cqw, 11px);
   font-weight: 900;
   box-shadow: 0 3px 9px rgba(65, 37, 72, 0.08);
 }
@@ -773,10 +783,10 @@ button:focus-visible,
 .surprise-button {
   position: absolute;
   z-index: 5;
-  top: clamp(12px, 1.35vw, 18px);
-  right: clamp(12px, 1.35vw, 18px);
-  min-height: clamp(28px, 2.6vw, 36px);
-  padding: 4px clamp(9px, 0.8vw, 12px);
+  top: clamp(12px, 1.35cqw, 18px);
+  right: clamp(12px, 1.35cqw, 18px);
+  min-height: clamp(28px, 2.6cqw, 36px);
+  padding: 4px clamp(9px, 0.8cqw, 12px);
   background: rgba(255, 253, 247, 0.8);
 }
 
@@ -796,12 +806,12 @@ button:focus-visible,
   display: flex;
   width: min(92%, 480px);
   max-height: 92%;
-  padding: clamp(18px, 2.4vw, 34px);
+  padding: clamp(18px, 2.4cqw, 34px);
   align-items: center;
   flex-direction: column;
   overflow: auto;
   border: 3px solid white;
-  border-radius: clamp(24px, 3vw, 38px);
+  border-radius: clamp(24px, 3cqw, 38px);
   background:
     radial-gradient(circle at 20% 10%, rgba(255, 220, 151, 0.35), transparent 24%),
     linear-gradient(145deg, #fffdf4, #f2e8f8);
@@ -819,14 +829,14 @@ button:focus-visible,
 .modal-card h2 {
   margin: 0;
   color: var(--plum);
-  font-size: clamp(26px, 3vw, 42px);
+  font-size: clamp(26px, 3cqw, 42px);
   letter-spacing: -0.05em;
 }
 
 .modal-star {
   margin-bottom: -2px;
   color: #e8a83e;
-  font-size: clamp(22px, 2.4vw, 34px);
+  font-size: clamp(22px, 2.4cqw, 34px);
 }
 
 .modal-close {
@@ -847,21 +857,21 @@ button:focus-visible,
 }
 
 .modal-art {
-  width: clamp(100px, 12vw, 170px);
-  height: clamp(100px, 12vw, 170px);
+  width: clamp(100px, 12cqw, 170px);
+  height: clamp(100px, 12cqw, 170px);
   margin: 5px auto -4px;
   object-fit: contain;
 }
 
 .goblin-art {
-  width: clamp(88px, 10vw, 140px);
-  height: clamp(88px, 10vw, 140px);
+  width: clamp(88px, 10cqw, 140px);
+  height: clamp(88px, 10cqw, 140px);
 }
 
 .modal-lead {
   margin: 7px 0 14px;
   color: #745d78;
-  font-size: clamp(14px, 1.35vw, 19px);
+  font-size: clamp(14px, 1.35cqw, 19px);
   font-weight: 800;
 }
 
@@ -977,7 +987,7 @@ button:focus-visible,
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@media (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .game-layout { grid-template-columns: minmax(0, 1.1fr) minmax(310px, 0.9fr); }
   .sidebar { gap: 4px; }
   .brand-block { min-height: 42px; }
@@ -991,14 +1001,14 @@ button:focus-visible,
   .utility-row { min-height: 29px; }
 }
 
-@media (max-width: 1050px) and (orientation: landscape) {
+@container game-stage (max-width: 1050px) {
   .game-layout { grid-template-columns: minmax(0, 1.08fr) minmax(305px, 0.92fr); }
   .inventory-grid { gap: 3px; }
   .bag-count { width: 23px; height: 23px; }
 }
 
 @media (orientation: portrait) {
-  .game-stage {
+  .game-stage-slot {
     display: none;
   }
 
@@ -1084,12 +1094,12 @@ button:focus-visible,
   bottom: 3%;
   left: 50%;
   max-width: 88%;
-  padding: 1px clamp(3px, 0.28vw, 6px);
+  padding: 1px clamp(3px, 0.28cqw, 6px);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.92);
   border-radius: 999px;
   color: #fff;
-  font-size: clamp(6px, calc(16vw / var(--grid-size, 13)), 10px);
+  font-size: clamp(6px, calc(16cqw / var(--grid-size, 13)), 10px);
   font-weight: 1000;
   letter-spacing: 0.02em;
   line-height: 1.25;
@@ -1106,7 +1116,7 @@ button:focus-visible,
 .color-name-yellow { background: #d79a2d; }
 
 .objective-card {
-  padding-right: clamp(4px, 0.45vw, 7px);
+  padding-right: clamp(4px, 0.45cqw, 7px);
 }
 
 .objective-card > div {
@@ -1116,9 +1126,9 @@ button:focus-visible,
 
 .objective-hint-button {
   display: inline-flex;
-  min-width: clamp(48px, 4.6vw, 66px);
-  min-height: clamp(30px, 2.8vw, 38px);
-  padding: 3px clamp(6px, 0.55vw, 9px);
+  min-width: clamp(48px, 4.6cqw, 66px);
+  min-height: clamp(30px, 2.8cqw, 38px);
+  padding: 3px clamp(6px, 0.55cqw, 9px);
   align-items: center;
   justify-content: center;
   gap: 3px;
@@ -1129,7 +1139,7 @@ button:focus-visible,
   background: linear-gradient(145deg, #fff3a8, #ffd27b);
   color: #725172;
   font: inherit;
-  font-size: clamp(8px, 0.72vw, 11px);
+  font-size: clamp(8px, 0.72cqw, 11px);
   font-weight: 1000;
   box-shadow: 0 2px 0 #d5a866, 0 4px 8px rgba(111, 75, 93, 0.12);
 }
@@ -1144,7 +1154,7 @@ button:focus-visible,
   display: flex;
   width: 100%;
   margin: 14px 0 18px;
-  padding: clamp(13px, 1.5vw, 20px);
+  padding: clamp(13px, 1.5cqw, 20px);
   align-items: center;
   gap: 12px;
   border: 2px solid #fff;
@@ -1157,20 +1167,20 @@ button:focus-visible,
 
 .hint-card p {
   margin: 0;
-  font-size: clamp(14px, 1.3vw, 18px);
+  font-size: clamp(14px, 1.3cqw, 18px);
   font-weight: 850;
   line-height: 1.35;
 }
 
 .hint-spark {
   flex: 0 0 auto;
-  font-size: clamp(30px, 3.5vw, 48px);
+  font-size: clamp(30px, 3.5cqw, 48px);
   filter: drop-shadow(0 2px 2px rgba(124, 85, 74, 0.16));
 }
 
 .too-strong-enemy-art {
-  width: clamp(112px, 13vw, 176px);
-  height: clamp(112px, 13vw, 176px);
+  width: clamp(112px, 13cqw, 176px);
+  height: clamp(112px, 13cqw, 176px);
   margin-bottom: -8px;
 }
 
@@ -1178,7 +1188,7 @@ button:focus-visible,
   min-height: 112px;
   margin: 2px 0 8px;
   align-items: center;
-  gap: clamp(13px, 1.6vw, 24px);
+  gap: clamp(13px, 1.6cqw, 24px);
 }
 
 .too-strong-equation .power-side {
@@ -1237,7 +1247,7 @@ button:focus-visible,
   min-width: min(100%, 250px);
 }
 
-@media (orientation: landscape) and (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .objective-hint-button {
     min-width: 33px;
     min-height: 27px;
@@ -1273,14 +1283,14 @@ button:focus-visible,
 
 /* V3 release refinements: protected navigation and a roomier late-maze view. */
 .big-maze-button {
-  min-height: clamp(29px, 3vw, 40px);
-  padding: 5px clamp(8px, 0.75vw, 12px);
+  min-height: clamp(29px, 3cqw, 40px);
+  padding: 5px clamp(8px, 0.75cqw, 12px);
   cursor: pointer;
   border: 2px solid rgba(255, 255, 255, 0.85);
   border-radius: 999px;
   background: rgba(255, 253, 247, 0.8);
   color: #645a7a;
-  font-size: clamp(8px, 0.7vw, 10px);
+  font-size: clamp(8px, 0.7cqw, 10px);
   font-weight: 1000;
   white-space: nowrap;
   box-shadow: 0 2px 0 rgba(152, 139, 176, 0.35);
@@ -1305,7 +1315,7 @@ button:focus-visible,
 
 .big-maze .maze-panel {
   position: relative;
-  width: min(100%, calc(100vh - 12px));
+  width: min(100%, calc(100cqh - 12px));
   padding: 5px;
   justify-self: center;
   grid-template-rows: auto minmax(0, 1fr) 1px;
@@ -1339,7 +1349,7 @@ button:focus-visible,
   border-radius: 999px;
   background: rgba(255, 253, 246, 0.88);
   color: #605478;
-  font-size: clamp(7px, 0.72vw, 10px);
+  font-size: clamp(7px, 0.72cqw, 10px);
   font-weight: 1000;
   white-space: nowrap;
 }
@@ -1390,7 +1400,7 @@ button:focus-visible,
   opacity: 0.52;
 }
 
-@media (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .big-maze-button {
     min-height: 25px;
     padding-block: 3px;
@@ -1453,7 +1463,7 @@ button:focus-visible,
   display: flex;
   width: min(48%, 620px);
   height: 100%;
-  padding: clamp(30px, 4.4vw, 68px) clamp(24px, 4.7vw, 72px);
+  padding: clamp(30px, 4.4cqw, 68px) clamp(24px, 4.7cqw, 72px);
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
@@ -1463,7 +1473,7 @@ button:focus-visible,
 .book-header > div > span,
 .book-section-heading > div > span {
   color: #826b8a;
-  font-size: clamp(9px, 0.85vw, 13px);
+  font-size: clamp(9px, 0.85cqw, 13px);
   font-weight: 1000;
   letter-spacing: 0.17em;
   text-transform: uppercase;
@@ -1471,9 +1481,9 @@ button:focus-visible,
 
 .title-copy h1 {
   max-width: 580px;
-  margin: clamp(4px, 0.8vw, 11px) 0 0;
+  margin: clamp(4px, 0.8cqw, 11px) 0 0;
   color: #50406b;
-  font-size: clamp(52px, 6.15vw, 88px);
+  font-size: clamp(52px, 6.15cqw, 88px);
   font-weight: 1000;
   letter-spacing: -0.078em;
   line-height: 0.82;
@@ -1488,18 +1498,18 @@ button:focus-visible,
 }
 
 .title-subtitle {
-  margin: clamp(8px, 1vw, 14px) 0 0 3px;
+  margin: clamp(8px, 1cqw, 14px) 0 0 3px;
   color: #6c5276;
-  font-size: clamp(18px, 2vw, 30px);
+  font-size: clamp(18px, 2cqw, 30px);
   font-weight: 1000;
   letter-spacing: 0.06em;
 }
 
 .title-welcome {
   max-width: 520px;
-  margin: clamp(8px, 1.2vw, 17px) 0 clamp(12px, 1.5vw, 22px) 3px;
+  margin: clamp(8px, 1.2cqw, 17px) 0 clamp(12px, 1.5cqw, 22px) 3px;
   color: #6e5975;
-  font-size: clamp(12px, 1.1vw, 17px);
+  font-size: clamp(12px, 1.1cqw, 17px);
   font-weight: 800;
   line-height: 1.35;
   text-wrap: balance;
@@ -1512,14 +1522,14 @@ button:focus-visible,
 .title-play-button {
   display: grid;
   width: 100%;
-  min-height: clamp(66px, 7.1vw, 96px);
-  padding: clamp(8px, 1vw, 14px) clamp(16px, 1.7vw, 25px);
+  min-height: clamp(66px, 7.1cqw, 96px);
+  padding: clamp(8px, 1cqw, 14px) clamp(16px, 1.7cqw, 25px);
   cursor: pointer;
-  grid-template-columns: clamp(40px, 4.3vw, 60px) minmax(0, 1fr);
+  grid-template-columns: clamp(40px, 4.3cqw, 60px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(8px, 1vw, 14px);
+  gap: clamp(8px, 1cqw, 14px);
   border: 3px solid #fff;
-  border-radius: clamp(18px, 2vw, 28px);
+  border-radius: clamp(18px, 2cqw, 28px);
   background: linear-gradient(145deg, #b44860, #8f3850);
   color: #fff;
   text-align: left;
@@ -1535,7 +1545,7 @@ button:focus-visible,
   border-radius: 50%;
   background: linear-gradient(#ffe682, #f2ae48);
   color: #754b39;
-  font-size: clamp(21px, 2.4vw, 34px);
+  font-size: clamp(21px, 2.4cqw, 34px);
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.75), 0 3px 0 #b46c42;
 }
 
@@ -1545,14 +1555,14 @@ button:focus-visible,
 }
 
 .title-play-button strong {
-  font-size: clamp(17px, 1.7vw, 25px);
+  font-size: clamp(17px, 1.7cqw, 25px);
   line-height: 1;
 }
 
 .title-play-button small {
   margin-top: 4px;
   color: #ffeef0;
-  font-size: clamp(9px, 0.82vw, 12px);
+  font-size: clamp(9px, 0.82cqw, 12px);
   font-weight: 900;
 }
 
@@ -1568,9 +1578,9 @@ button:focus-visible,
 
 .title-secondary-actions {
   display: grid;
-  margin-top: clamp(8px, 0.8vw, 12px);
+  margin-top: clamp(8px, 0.8cqw, 12px);
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(6px, 0.7vw, 10px);
+  gap: clamp(6px, 0.7cqw, 10px);
 }
 
 .title-secondary-actions button,
@@ -1597,13 +1607,13 @@ button:focus-visible,
 .title-progress {
   display: grid;
   width: min(100%, 520px);
-  margin-top: clamp(10px, 1.2vw, 17px);
+  margin-top: clamp(10px, 1.2cqw, 17px);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
 }
 
 .title-progress span {
-  padding: clamp(6px, 0.7vw, 10px);
+  padding: clamp(6px, 0.7cqw, 10px);
   border: 1px solid rgba(119, 82, 110, 0.12);
   border-radius: 13px;
   background: rgba(255, 251, 238, 0.71);
@@ -1618,12 +1628,12 @@ button:focus-visible,
 
 .title-progress b {
   color: #a0435a;
-  font-size: clamp(16px, 1.65vw, 24px);
+  font-size: clamp(16px, 1.65cqw, 24px);
 }
 
 .title-progress small {
   color: #76617b;
-  font-size: clamp(7px, 0.68vw, 10px);
+  font-size: clamp(7px, 0.68cqw, 10px);
   font-weight: 1000;
   text-transform: uppercase;
 }
@@ -1631,14 +1641,14 @@ button:focus-visible,
 .title-sound {
   position: absolute;
   z-index: 4;
-  top: clamp(12px, 1.5vw, 22px);
-  right: clamp(12px, 1.5vw, 22px);
+  top: clamp(12px, 1.5cqw, 22px);
+  right: clamp(12px, 1.5cqw, 22px);
   display: grid;
-  width: clamp(42px, 4.2vw, 58px);
+  width: clamp(42px, 4.2cqw, 58px);
   min-height: 0;
   aspect-ratio: 1;
   place-items: center;
-  font-size: clamp(17px, 1.6vw, 23px);
+  font-size: clamp(17px, 1.6cqw, 23px);
 }
 
 .title-version {
@@ -1686,7 +1696,7 @@ button:focus-visible,
   position: absolute;
   inset: 0;
   display: flex;
-  padding: clamp(10px, 1.25vw, 18px);
+  padding: clamp(10px, 1.25cqw, 18px);
   flex-direction: column;
   overflow: hidden;
   background:
@@ -1700,7 +1710,7 @@ button:focus-visible,
   top: 8%;
   right: 7%;
   color: rgba(201, 146, 51, 0.38);
-  font-size: clamp(18px, 2vw, 30px);
+  font-size: clamp(18px, 2cqw, 30px);
   pointer-events: none;
   animation: book-sparkle 2.7s ease-in-out infinite;
 }
@@ -1709,8 +1719,8 @@ button:focus-visible,
   position: relative;
   z-index: 2;
   display: grid;
-  min-height: clamp(78px, 8vw, 112px);
-  padding: 0 clamp(3px, 0.6vw, 9px);
+  min-height: clamp(78px, 8cqw, 112px);
+  padding: 0 clamp(3px, 0.6cqw, 9px);
   grid-template-columns: minmax(105px, 0.7fr) minmax(300px, 2fr) minmax(180px, 0.9fr);
   align-items: center;
   gap: 12px;
@@ -1723,7 +1733,7 @@ button:focus-visible,
 .book-header h1 {
   margin: 1px 0 0;
   color: #51436e;
-  font-size: clamp(30px, 3.7vw, 53px);
+  font-size: clamp(30px, 3.7cqw, 53px);
   letter-spacing: -0.06em;
   line-height: 0.95;
   text-shadow: 0 2px 0 #fff;
@@ -1736,7 +1746,7 @@ button:focus-visible,
 .book-header p {
   margin: 3px 0 0;
   color: #786c82;
-  font-size: clamp(9px, 0.85vw, 13px);
+  font-size: clamp(9px, 0.85cqw, 13px);
   font-weight: 800;
 }
 
@@ -1762,11 +1772,11 @@ button:focus-visible,
 
 .book-scroll {
   min-height: 0;
-  padding: clamp(8px, 1vw, 14px);
+  padding: clamp(8px, 1cqw, 14px);
   overflow-x: hidden;
   overflow-y: auto;
   border: 2px solid rgba(255, 255, 255, 0.88);
-  border-radius: clamp(18px, 2vw, 28px);
+  border-radius: clamp(18px, 2cqw, 28px);
   background: rgba(255, 253, 247, 0.74);
   box-shadow: inset 0 1px 0 #fff, 0 5px 0 rgba(156, 143, 180, 0.28), 0 14px 34px rgba(67, 50, 80, 0.12);
   scrollbar-color: #afa4ce rgba(255, 255, 255, 0.42);
@@ -1781,15 +1791,15 @@ button:focus-visible,
 .book-stats {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: clamp(5px, 0.65vw, 9px);
+  gap: clamp(5px, 0.65cqw, 9px);
 }
 
 .book-stats article {
   display: grid;
   min-width: 0;
-  min-height: clamp(57px, 6.2vw, 84px);
+  min-height: clamp(57px, 6.2cqw, 84px);
   padding: 5px 8px;
-  grid-template-columns: clamp(33px, 3.8vw, 52px) minmax(0, 1fr);
+  grid-template-columns: clamp(33px, 3.8cqw, 52px) minmax(0, 1fr);
   align-items: center;
   gap: 4px;
   border: 1px solid rgba(108, 86, 128, 0.12);
@@ -1812,7 +1822,7 @@ button:focus-visible,
   border-radius: 32%;
   background: linear-gradient(145deg, #f8d674, #ef9c62);
   color: #fff;
-  font-size: clamp(18px, 2.2vw, 30px);
+  font-size: clamp(18px, 2.2cqw, 30px);
   box-shadow: inset 0 1px 0 #fff8c7, 0 3px 0 #c47458;
 }
 
@@ -1823,7 +1833,7 @@ button:focus-visible,
 
 .book-stats b {
   color: #57486f;
-  font-size: clamp(17px, 1.8vw, 25px);
+  font-size: clamp(17px, 1.8cqw, 25px);
   line-height: 1;
 }
 
@@ -1831,7 +1841,7 @@ button:focus-visible,
   margin-top: 3px;
   overflow: hidden;
   color: #81758e;
-  font-size: clamp(7px, 0.64vw, 9px);
+  font-size: clamp(7px, 0.64cqw, 9px);
   font-weight: 1000;
   line-height: 1.05;
   text-overflow: ellipsis;
@@ -1841,7 +1851,7 @@ button:focus-visible,
 .friend-ledger,
 .badge-shelf,
 .maze-records {
-  margin-top: clamp(11px, 1.2vw, 18px);
+  margin-top: clamp(11px, 1.2cqw, 18px);
 }
 
 .book-section-heading {
@@ -1855,7 +1865,7 @@ button:focus-visible,
 .book-section-heading h2 {
   margin: 1px 0 4px;
   color: #55476f;
-  font-size: clamp(18px, 1.8vw, 27px);
+  font-size: clamp(18px, 1.8cqw, 27px);
   letter-spacing: -0.035em;
 }
 
@@ -1865,7 +1875,7 @@ button:focus-visible,
   border-radius: 999px;
   background: #eee9fa;
   color: #746a96;
-  font-size: clamp(9px, 0.78vw, 11px);
+  font-size: clamp(9px, 0.78cqw, 11px);
 }
 
 .friend-ledger-grid {
@@ -1877,9 +1887,9 @@ button:focus-visible,
 .friend-ledger-grid article {
   display: grid;
   min-width: 0;
-  min-height: clamp(69px, 7.4vw, 101px);
+  min-height: clamp(69px, 7.4cqw, 101px);
   padding: 5px 9px;
-  grid-template-columns: clamp(48px, 5.7vw, 77px) minmax(0, 1fr);
+  grid-template-columns: clamp(48px, 5.7cqw, 77px) minmax(0, 1fr);
   align-items: center;
   gap: 7px;
   border: 2px solid #fff;
@@ -1903,18 +1913,18 @@ button:focus-visible,
 }
 
 .friend-ledger-grid strong {
-  font-size: clamp(10px, 0.95vw, 14px);
+  font-size: clamp(10px, 0.95cqw, 14px);
 }
 
 .friend-ledger-grid b {
   color: #39735f;
-  font-size: clamp(20px, 2.1vw, 30px);
+  font-size: clamp(20px, 2.1cqw, 30px);
   line-height: 1;
 }
 
 .friend-ledger-grid small {
   color: #7b7281;
-  font-size: clamp(7px, 0.62vw, 9px);
+  font-size: clamp(7px, 0.62cqw, 9px);
   font-weight: 900;
 }
 
@@ -1932,9 +1942,9 @@ button:focus-visible,
 .badge-card {
   display: grid;
   min-width: 0;
-  min-height: clamp(83px, 9vw, 122px);
+  min-height: clamp(83px, 9cqw, 122px);
   padding: 7px 9px;
-  grid-template-columns: clamp(58px, 6.7vw, 91px) minmax(0, 1fr);
+  grid-template-columns: clamp(58px, 6.7cqw, 91px) minmax(0, 1fr);
   align-items: center;
   gap: 8px;
   overflow: hidden;
@@ -1974,7 +1984,7 @@ button:focus-visible,
   border-radius: 36%;
   background: linear-gradient(145deg, #ffe783, #ee9c71 54%, #b585cf);
   color: #fff;
-  font-size: clamp(25px, 3.2vw, 46px);
+  font-size: clamp(25px, 3.2cqw, 46px);
   box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.62), 0 4px 0 rgba(137, 86, 113, 0.27);
   text-shadow: 0 2px 2px rgba(74, 49, 78, 0.25);
 }
@@ -1985,9 +1995,9 @@ button:focus-visible,
 }
 
 .modal-reward-icon {
-  width: clamp(40px, 4.5vw, 61px);
+  width: clamp(40px, 4.5cqw, 61px);
   justify-self: center;
-  font-size: clamp(20px, 2.4vw, 34px);
+  font-size: clamp(20px, 2.4cqw, 34px);
 }
 
 .badge-card.locked .badge-art-wrap img {
@@ -2017,7 +2027,7 @@ button:focus-visible,
 
 .badge-card small {
   color: #8a7994;
-  font-size: clamp(7px, 0.6vw, 9px);
+  font-size: clamp(7px, 0.6cqw, 9px);
   font-weight: 1000;
   text-transform: uppercase;
 }
@@ -2025,14 +2035,14 @@ button:focus-visible,
 .badge-card strong {
   margin-top: 2px;
   color: #57476e;
-  font-size: clamp(11px, 1vw, 15px);
+  font-size: clamp(11px, 1cqw, 15px);
   line-height: 1.05;
 }
 
 .badge-card p {
   margin: 4px 0 0;
   color: #796d82;
-  font-size: clamp(8px, 0.7vw, 10px);
+  font-size: clamp(8px, 0.7cqw, 10px);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -2047,10 +2057,10 @@ button:focus-visible,
 .maze-record-card {
   display: grid;
   min-width: 0;
-  min-height: clamp(70px, 7.4vw, 100px);
+  min-height: clamp(70px, 7.4cqw, 100px);
   padding: 6px 8px;
   cursor: pointer;
-  grid-template-columns: clamp(34px, 3.8vw, 51px) minmax(0, 1fr) clamp(52px, 5.6vw, 76px) clamp(75px, 7vw, 100px);
+  grid-template-columns: clamp(34px, 3.8cqw, 51px) minmax(0, 1fr) clamp(52px, 5.6cqw, 76px) clamp(75px, 7cqw, 100px);
   align-items: center;
   gap: 6px;
   border: 2px solid rgba(255, 255, 255, 0.92);
@@ -2103,7 +2113,7 @@ button:focus-visible,
 
 .record-copy strong {
   overflow: hidden;
-  font-size: clamp(10px, 1vw, 15px);
+  font-size: clamp(10px, 1cqw, 15px);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -2111,7 +2121,7 @@ button:focus-visible,
 .record-copy small,
 .record-best small {
   color: #80748b;
-  font-size: clamp(7px, 0.62vw, 9px);
+  font-size: clamp(7px, 0.62cqw, 9px);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -2123,7 +2133,7 @@ button:focus-visible,
 }
 
 .record-best b {
-  font-size: clamp(12px, 1.2vw, 18px);
+  font-size: clamp(12px, 1.2cqw, 18px);
 }
 
 .record-friends {
@@ -2151,7 +2161,7 @@ button:focus-visible,
   z-index: 3;
   bottom: 2%;
   color: #fff1a6;
-  font-size: clamp(5px, calc(11vw / var(--grid-size, 13)), 10px);
+  font-size: clamp(5px, calc(11cqw / var(--grid-size, 13)), 10px);
   content: "✦";
   opacity: 0;
   pointer-events: none;
@@ -2185,12 +2195,12 @@ button:focus-visible,
 .utility-row button {
   min-width: 0;
   padding-inline: 3px;
-  font-size: clamp(7px, 0.66vw, 10px);
+  font-size: clamp(7px, 0.66cqw, 10px);
   white-space: nowrap;
 }
 
 .level-dots {
-  gap: clamp(3px, 0.45vw, 6px);
+  gap: clamp(3px, 0.45cqw, 6px);
 }
 
 @keyframes title-breathe {
@@ -2251,7 +2261,7 @@ button:focus-visible,
   50% { filter: drop-shadow(0 0 7px rgba(255, 218, 87, 0.74)); transform: scale(1.04) rotate(1deg); }
 }
 
-@media (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .title-copy {
     width: 50%;
     padding: 22px 34px;
@@ -2343,16 +2353,16 @@ body {
 }
 
 .game-layout {
-  padding: clamp(8px, 1.15vw, 16px);
+  padding: clamp(8px, 1.15cqw, 16px);
   grid-template-columns: minmax(0, 1.18fr) minmax(310px, 0.82fr);
-  gap: clamp(8px, 1.05vw, 15px);
+  gap: clamp(8px, 1.05cqw, 15px);
 }
 
 .maze-panel {
-  padding: clamp(7px, 0.8vw, 12px);
-  gap: clamp(4px, 0.5vw, 8px);
+  padding: clamp(7px, 0.8cqw, 12px);
+  gap: clamp(4px, 0.5cqw, 8px);
   border: 2px solid rgba(255, 255, 255, 0.92);
-  border-radius: clamp(18px, 2vw, 28px);
+  border-radius: clamp(18px, 2cqw, 28px);
   background: rgba(255, 253, 246, 0.67);
   box-shadow:
     inset 0 1px 0 white,
@@ -2370,14 +2380,14 @@ body {
 .maze-topline-actions {
   display: flex;
   align-items: center;
-  gap: clamp(5px, 0.55vw, 8px);
+  gap: clamp(5px, 0.55cqw, 8px);
 }
 
 .maze-topline-actions .surprise-button {
   position: static;
   inset: auto;
-  min-height: clamp(29px, 3vw, 40px);
-  padding: 5px clamp(9px, 0.85vw, 13px);
+  min-height: clamp(29px, 3cqw, 40px);
+  padding: 5px clamp(9px, 0.85cqw, 13px);
   white-space: nowrap;
 }
 
@@ -2401,8 +2411,8 @@ body {
 .maze-board {
   container-type: inline-size;
   overflow: hidden;
-  border: clamp(4px, 0.5vw, 7px) solid #5d587b;
-  border-radius: clamp(16px, 1.7vw, 23px);
+  border: clamp(4px, 0.5cqw, 7px) solid #5d587b;
+  border-radius: clamp(16px, 1.7cqw, 23px);
   background-color: #f8d991;
   box-shadow:
     0 5px 0 #443f60,
@@ -2503,7 +2513,7 @@ body {
   border-radius: 0;
   background: none;
   color: #fff;
-  font-size: clamp(7px, calc(18vw / var(--grid-size, 13)), 14px);
+  font-size: clamp(7px, calc(18cqw / var(--grid-size, 13)), 14px);
   font-weight: 1000;
   letter-spacing: -0.04em;
   line-height: 0.9;
@@ -2516,7 +2526,7 @@ body {
     0 2px 2px rgba(42, 35, 58, 0.45);
   transform: translateX(-50%);
   box-shadow: none;
-  -webkit-text-stroke: clamp(0.65px, calc(1.55vw / var(--grid-size, 13)), 1.15px) #39324f;
+  -webkit-text-stroke: clamp(0.65px, calc(1.55cqw / var(--grid-size, 13)), 1.15px) #39324f;
 }
 
 .player-power,
@@ -2552,20 +2562,20 @@ body {
 }
 
 .feedback-bar {
-  min-height: clamp(34px, 3.7vw, 47px);
+  min-height: clamp(34px, 3.7cqw, 47px);
   border: 2px solid rgba(255, 255, 255, 0.9);
   background: rgba(255, 253, 246, 0.9);
   box-shadow: 0 3px 0 rgba(170, 158, 194, 0.28);
 }
 
 .sidebar {
-  gap: clamp(4px, 0.45vw, 7px);
+  gap: clamp(4px, 0.45cqw, 7px);
 }
 
 .brand-and-wallet {
   display: flex;
   min-width: 0;
-  min-height: clamp(43px, 4.8vw, 66px);
+  min-height: clamp(43px, 4.8cqw, 66px);
   align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
@@ -2574,20 +2584,20 @@ body {
 .brand-and-wallet .brand-block,
 .brand-block {
   min-width: 0;
-  min-height: clamp(43px, 4.8vw, 66px);
-  padding: clamp(1px, 0.3vw, 4px) 0 0 clamp(3px, 0.5vw, 7px);
+  min-height: clamp(43px, 4.8cqw, 66px);
+  padding: clamp(1px, 0.3cqw, 4px) 0 0 clamp(3px, 0.5cqw, 7px);
 }
 
 .brand-block .brand-title {
-  font-size: clamp(20px, 2.15vw, 32px);
+  font-size: clamp(20px, 2.15cqw, 32px);
 }
 
 .wallet-pill {
   display: grid;
-  min-width: clamp(92px, 9vw, 126px);
-  min-height: clamp(35px, 3.8vw, 51px);
-  padding: 3px clamp(7px, 0.75vw, 11px) 3px 3px;
-  grid-template-columns: clamp(29px, 3vw, 42px) minmax(0, 1fr);
+  min-width: clamp(92px, 9cqw, 126px);
+  min-height: clamp(35px, 3.8cqw, 51px);
+  padding: 3px clamp(7px, 0.75cqw, 11px) 3px 3px;
+  grid-template-columns: clamp(29px, 3cqw, 42px) minmax(0, 1fr);
   align-items: center;
   gap: 4px;
   flex: 0 0 auto;
@@ -2614,7 +2624,7 @@ img.wallet-pouch {
   min-width: 0;
   flex-direction: column;
   color: #6e5d72;
-  font-size: clamp(7px, 0.64vw, 10px);
+  font-size: clamp(7px, 0.64cqw, 10px);
   font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
@@ -2622,7 +2632,7 @@ img.wallet-pouch {
 
 .wallet-copy strong {
   color: #7b5537;
-  font-size: clamp(15px, 1.55vw, 22px);
+  font-size: clamp(15px, 1.55cqw, 22px);
   letter-spacing: -0.04em;
 }
 
@@ -2642,9 +2652,9 @@ img.wallet-pouch {
 }
 
 .hero-card {
-  min-height: clamp(76px, 8.4vw, 115px);
-  grid-template-columns: clamp(68px, 7.3vw, 102px) 1fr;
-  border-radius: clamp(16px, 1.65vw, 23px);
+  min-height: clamp(76px, 8.4cqw, 115px);
+  grid-template-columns: clamp(68px, 7.3cqw, 102px) 1fr;
+  border-radius: clamp(16px, 1.65cqw, 23px);
 }
 
 .portrait-wrap {
@@ -2660,8 +2670,8 @@ img.wallet-pouch {
 }
 
 .objective-card {
-  min-height: clamp(42px, 4vw, 55px);
-  border-radius: clamp(13px, 1.35vw, 18px);
+  min-height: clamp(42px, 4cqw, 55px);
+  border-radius: clamp(13px, 1.35cqw, 18px);
 }
 
 .objective-icon {
@@ -2670,9 +2680,9 @@ img.wallet-pouch {
 }
 
 .rescue-card {
-  min-height: clamp(76px, 7.7vw, 106px);
-  padding: clamp(5px, 0.55vw, 8px) clamp(7px, 0.75vw, 11px);
-  border-radius: clamp(14px, 1.45vw, 20px);
+  min-height: clamp(76px, 7.7cqw, 106px);
+  padding: clamp(5px, 0.55cqw, 8px) clamp(7px, 0.75cqw, 11px);
+  border-radius: clamp(14px, 1.45cqw, 20px);
 }
 
 .rescue-heading {
@@ -2681,7 +2691,7 @@ img.wallet-pouch {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  font-size: clamp(8px, 0.7vw, 10px);
+  font-size: clamp(8px, 0.7cqw, 10px);
   font-weight: 1000;
   letter-spacing: 0.09em;
   line-height: 1;
@@ -2690,7 +2700,7 @@ img.wallet-pouch {
 
 .rescue-heading strong {
   color: #53476e;
-  font-size: clamp(10px, 0.88vw, 13px);
+  font-size: clamp(10px, 0.88cqw, 13px);
   letter-spacing: 0;
   text-transform: none;
 }
@@ -2705,16 +2715,16 @@ img.wallet-pouch {
 
 .rescue-list {
   display: grid;
-  margin-top: clamp(3px, 0.35vw, 5px);
+  margin-top: clamp(3px, 0.35cqw, 5px);
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(3px, 0.35vw, 5px);
+  gap: clamp(3px, 0.35cqw, 5px);
 }
 
 .rescue-friend {
   position: relative;
   display: grid;
   min-width: 0;
-  min-height: clamp(49px, 4.9vw, 68px);
+  min-height: clamp(49px, 4.9cqw, 68px);
   padding: 2px;
   grid-template-columns: 1fr;
   align-items: center;
@@ -2737,7 +2747,7 @@ img.wallet-pouch {
 .rescue-icon {
   position: relative;
   display: grid;
-  width: min(100%, clamp(44px, 4.5vw, 62px));
+  width: min(100%, clamp(44px, 4.5cqw, 62px));
   aspect-ratio: 1;
   place-items: center;
 }
@@ -2765,7 +2775,7 @@ img.wallet-pouch {
 .rescue-name {
   min-width: 0;
   overflow: hidden;
-  font-size: clamp(7px, 0.65vw, 10px);
+  font-size: clamp(7px, 0.65cqw, 10px);
   font-weight: 1000;
   line-height: 1.05;
   text-overflow: ellipsis;
@@ -2801,7 +2811,7 @@ img.wallet-pouch {
 }
 
 .bag-card {
-  min-height: clamp(72px, 7.4vw, 100px);
+  min-height: clamp(72px, 7.4cqw, 100px);
 }
 
 .inventory-grid {
@@ -2811,10 +2821,10 @@ img.wallet-pouch {
 .inventory-slot {
   min-height: 0;
   aspect-ratio: 1;
-  padding: clamp(3px, 0.35vw, 5px);
+  padding: clamp(3px, 0.35cqw, 5px);
   grid-template-columns: 1fr;
   place-items: center;
-  border-radius: clamp(11px, 1.1vw, 15px);
+  border-radius: clamp(11px, 1.1cqw, 15px);
   background: rgba(241, 238, 248, 0.66);
 }
 
@@ -2832,8 +2842,8 @@ img.wallet-pouch {
 }
 
 .controls-card {
-  min-height: clamp(58px, 6vw, 84px);
-  grid-template-columns: 1fr clamp(84px, 8.8vw, 122px);
+  min-height: clamp(58px, 6cqw, 84px);
+  grid-template-columns: 1fr clamp(84px, 8.8cqw, 122px);
 }
 
 .dpad button {
@@ -2873,7 +2883,7 @@ img.wallet-pouch {
 .collection-strip,
 .owned-collection {
   display: flex;
-  min-height: clamp(37px, 3.8vw, 52px);
+  min-height: clamp(37px, 3.8cqw, 52px);
   padding: 4px 7px;
   align-items: center;
   gap: 5px;
@@ -2890,7 +2900,7 @@ img.wallet-pouch {
   position: relative;
   display: grid;
   min-width: 0;
-  height: clamp(29px, 3vw, 41px);
+  height: clamp(29px, 3cqw, 41px);
   place-items: center;
   overflow: hidden;
   border: 1px solid rgba(121, 106, 144, 0.16);
@@ -2952,8 +2962,8 @@ img.wallet-pouch {
   position: absolute;
   top: -8%;
   left: var(--confetti-x, 50%);
-  width: clamp(5px, 0.6vw, 9px);
-  height: clamp(9px, 1vw, 15px);
+  width: clamp(5px, 0.6cqw, 9px);
+  height: clamp(9px, 1cqw, 15px);
   border-radius: 3px;
   background: var(--confetti-color, #f4bc4d);
   opacity: 0.85;
@@ -2969,16 +2979,16 @@ img.wallet-pouch {
 .win-summary {
   display: grid;
   width: 100%;
-  margin-top: clamp(5px, 0.7vw, 10px);
+  margin-top: clamp(5px, 0.7cqw, 10px);
   grid-template-columns: minmax(100px, 0.76fr) minmax(0, 1.24fr);
   align-items: center;
-  gap: clamp(8px, 1vw, 14px);
+  gap: clamp(8px, 1cqw, 14px);
 }
 
 .win-star-art,
 .modal-reward-art {
   width: 100%;
-  max-width: clamp(94px, 11vw, 150px);
+  max-width: clamp(94px, 11cqw, 150px);
   aspect-ratio: 1;
   justify-self: center;
   object-fit: contain;
@@ -2997,14 +3007,14 @@ img.wallet-pouch {
 .rescued-result {
   display: grid;
   min-width: 0;
-  min-height: clamp(51px, 5.3vw, 72px);
+  min-height: clamp(51px, 5.3cqw, 72px);
   padding: 4px;
   place-items: center;
   border: 2px solid white;
   border-radius: 14px;
   background: linear-gradient(145deg, #f0edfa, #e2dff0);
   color: #726b82;
-  font-size: clamp(8px, 0.72vw, 11px);
+  font-size: clamp(8px, 0.72cqw, 11px);
   font-weight: 1000;
   box-shadow: 0 3px 0 rgba(153, 142, 175, 0.32);
 }
@@ -3016,22 +3026,22 @@ img.wallet-pouch {
 }
 
 .rescued-result img {
-  width: clamp(31px, 3.5vw, 48px);
-  height: clamp(31px, 3.5vw, 48px);
+  width: clamp(31px, 3.5cqw, 48px);
+  height: clamp(31px, 3.5cqw, 48px);
   object-fit: contain;
 }
 
 .reward-panel {
   display: grid;
   width: 100%;
-  min-height: clamp(72px, 8vw, 108px);
-  margin: clamp(5px, 0.7vw, 10px) 0;
-  padding: clamp(6px, 0.8vw, 11px);
-  grid-template-columns: clamp(59px, 6.5vw, 88px) minmax(0, 1fr) auto;
+  min-height: clamp(72px, 8cqw, 108px);
+  margin: clamp(5px, 0.7cqw, 10px) 0;
+  padding: clamp(6px, 0.8cqw, 11px);
+  grid-template-columns: clamp(59px, 6.5cqw, 88px) minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(6px, 0.8vw, 11px);
+  gap: clamp(6px, 0.8cqw, 11px);
   border: 2px solid #fff3c3;
-  border-radius: clamp(16px, 1.8vw, 24px);
+  border-radius: clamp(16px, 1.8cqw, 24px);
   background:
     radial-gradient(circle at 10% 12%, rgba(255, 255, 255, 0.72), transparent 32%),
     linear-gradient(145deg, #fff2b9, #ffd993 58%, #ffc9a9);
@@ -3057,7 +3067,7 @@ img.wallet-pouch {
 .reward-copy span {
   display: block;
   color: #8a6754;
-  font-size: clamp(8px, 0.75vw, 11px);
+  font-size: clamp(8px, 0.75cqw, 11px);
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -3065,14 +3075,14 @@ img.wallet-pouch {
 .reward-copy strong {
   display: block;
   color: #725038;
-  font-size: clamp(18px, 2vw, 28px);
+  font-size: clamp(18px, 2cqw, 28px);
   letter-spacing: -0.045em;
 }
 
 .reward-breakdown {
   margin-top: 2px;
   color: #866554;
-  font-size: clamp(8px, 0.72vw, 11px);
+  font-size: clamp(8px, 0.72cqw, 11px);
   font-weight: 800;
   line-height: 1.15;
 }
@@ -3080,7 +3090,7 @@ img.wallet-pouch {
 .reward-badge {
   position: relative;
   display: grid;
-  width: clamp(53px, 6vw, 82px);
+  width: clamp(53px, 6cqw, 82px);
   aspect-ratio: 1;
   place-items: center;
   border-radius: 24%;
@@ -3102,7 +3112,7 @@ img.wallet-pouch {
   border-radius: 999px;
   background: #e66e7a;
   color: white;
-  font-size: clamp(7px, 0.62vw, 9px);
+  font-size: clamp(7px, 0.62cqw, 9px);
   font-weight: 1000;
   text-transform: uppercase;
   transform: rotate(7deg);
@@ -3118,8 +3128,8 @@ img.wallet-pouch {
   right: auto;
   display: grid;
   width: 100%;
-  min-height: clamp(56px, 6vw, 82px);
-  padding: clamp(5px, 0.65vw, 9px);
+  min-height: clamp(56px, 6cqw, 82px);
+  padding: clamp(5px, 0.65cqw, 9px);
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 6px;
   border: 2px solid rgba(255, 255, 255, 0.94);
@@ -3136,9 +3146,9 @@ img.wallet-pouch {
 .collection-strip.reward-new .collection-pop {
   display: grid;
   min-width: 0;
-  min-height: clamp(45px, 5vw, 68px);
+  min-height: clamp(45px, 5cqw, 68px);
   padding: 4px 7px;
-  grid-template-columns: clamp(42px, 4.8vw, 64px) minmax(0, 1fr);
+  grid-template-columns: clamp(42px, 4.8cqw, 64px) minmax(0, 1fr);
   align-items: center;
   gap: 6px;
   border: 1px solid rgba(123, 108, 151, 0.16);
@@ -3151,7 +3161,7 @@ img.wallet-pouch {
 .collection-strip.reward-new .modal-reward-art {
   width: 100%;
   max-width: none;
-  height: clamp(40px, 4.5vw, 61px);
+  height: clamp(40px, 4.5cqw, 61px);
   aspect-ratio: 1;
   object-fit: contain;
 }
@@ -3159,7 +3169,7 @@ img.wallet-pouch {
 .collection-strip.reward-new small {
   display: block;
   color: #807694;
-  font-size: clamp(7px, 0.65vw, 9px);
+  font-size: clamp(7px, 0.65cqw, 9px);
   font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
@@ -3170,7 +3180,7 @@ img.wallet-pouch {
   margin-top: 2px;
   overflow: hidden;
   color: #55496e;
-  font-size: clamp(9px, 0.9vw, 13px);
+  font-size: clamp(9px, 0.9cqw, 13px);
   line-height: 1.05;
   text-overflow: ellipsis;
 }
@@ -3187,21 +3197,21 @@ img.wallet-pouch {
 
 .win-summary > div strong {
   color: #51456d;
-  font-size: clamp(17px, 1.8vw, 25px);
+  font-size: clamp(17px, 1.8cqw, 25px);
   line-height: 1.05;
 }
 
 .win-summary > div span {
   margin-top: 3px;
   color: #756a82;
-  font-size: clamp(10px, 0.95vw, 14px);
+  font-size: clamp(10px, 0.95cqw, 14px);
   font-weight: 800;
 }
 
 .reward-badge {
   padding: 5px;
   color: #7d573b;
-  font-size: clamp(9px, 0.82vw, 12px);
+  font-size: clamp(9px, 0.82cqw, 12px);
   font-weight: 1000;
   line-height: 1.05;
   text-align: center;
@@ -3230,7 +3240,7 @@ img.wallet-pouch {
   border-radius: 999px;
   background: linear-gradient(180deg, #3c806d, #356f60);
   color: white;
-  font-size: clamp(10px, 1vw, 14px);
+  font-size: clamp(10px, 1cqw, 14px);
   font-weight: 1000;
   box-shadow: 0 3px 0 #27574b, 0 7px 13px rgba(54, 118, 96, 0.2);
   text-shadow: 0 1px 1px rgba(24, 59, 49, 0.45);
@@ -3257,7 +3267,7 @@ img.wallet-pouch {
 }
 
 /* Compact landscape tuning: the complete game remains visible at 960 x 540. */
-@media (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .game-layout {
     padding: 8px;
     grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
@@ -3304,8 +3314,6 @@ img.wallet-pouch {
   .win-summary { grid-template-columns: 92px 1fr; gap: 7px; }
   .win-star-art,
   .modal-reward-art { max-width: 88px; }
-  .rescued-result { min-height: 45px; }
-  .rescued-result img { width: 29px; height: 29px; }
   .reward-panel { min-height: 66px; margin: 4px 0; padding: 5px 7px; grid-template-columns: 52px 1fr auto; }
   .reward-badge { width: 49px; }
   .modal-lead { margin: 4px 0 7px; }
@@ -3313,7 +3321,7 @@ img.wallet-pouch {
   .secondary-button { min-height: 38px; padding: 6px 17px; }
 }
 
-@media (max-width: 1050px) and (orientation: landscape) {
+@container game-stage (max-width: 1050px) {
   .game-layout {
     grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
   }
@@ -3355,7 +3363,7 @@ img.wallet-pouch {
   min-height: 0;
   grid-template-columns: minmax(150px, 0.92fr) minmax(0, 1.08fr);
   align-items: stretch;
-  gap: clamp(4px, 0.5vw, 7px);
+  gap: clamp(4px, 0.5cqw, 7px);
   flex: 1 1 190px;
 }
 
@@ -3369,7 +3377,7 @@ img.wallet-pouch {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   align-content: stretch;
-  gap: clamp(4px, 0.45vw, 6px);
+  gap: clamp(4px, 0.45cqw, 6px);
 }
 
 .exploration-dashboard .objective-card,
@@ -3380,16 +3388,16 @@ img.wallet-pouch {
 }
 
 .exploration-dashboard .objective-card {
-  padding: 5px clamp(6px, 0.65vw, 9px);
+  padding: 5px clamp(6px, 0.65cqw, 9px);
   gap: 6px;
 }
 
 .exploration-dashboard .objective-icon {
-  width: clamp(27px, 2.5vw, 35px);
+  width: clamp(27px, 2.5cqw, 35px);
 }
 
 .exploration-dashboard .objective-card strong {
-  font-size: clamp(9px, 0.84vw, 12px);
+  font-size: clamp(9px, 0.84cqw, 12px);
 }
 
 .exploration-dashboard .rescue-card {
@@ -3424,13 +3432,13 @@ img.wallet-pouch {
   display: grid;
   min-width: 0;
   min-height: 0;
-  padding: clamp(5px, 0.55vw, 8px);
+  padding: clamp(5px, 0.55cqw, 8px);
   grid-template-rows: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(3px, 0.35vw, 5px);
+  gap: clamp(3px, 0.35cqw, 5px);
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.92);
-  border-radius: clamp(14px, 1.45vw, 20px);
+  border-radius: clamp(14px, 1.45cqw, 20px);
   background:
     radial-gradient(circle at 88% 8%, rgba(255, 224, 139, 0.44), transparent 26%),
     linear-gradient(150deg, rgba(240, 237, 255, 0.96), rgba(255, 249, 221, 0.93));
@@ -3452,13 +3460,13 @@ img.wallet-pouch {
 }
 
 .maze-map-heading > span {
-  font-size: clamp(12px, 1.15vw, 16px);
+  font-size: clamp(12px, 1.15cqw, 16px);
   filter: drop-shadow(0 1px 0 white);
 }
 
 .maze-map-heading strong {
   overflow: hidden;
-  font-size: clamp(9px, 0.86vw, 12px);
+  font-size: clamp(9px, 0.86cqw, 12px);
   font-weight: 1000;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3470,7 +3478,7 @@ img.wallet-pouch {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.68);
   color: #736990;
-  font-size: clamp(7px, 0.62vw, 9px);
+  font-size: clamp(7px, 0.62cqw, 9px);
   font-weight: 1000;
 }
 
@@ -3482,8 +3490,8 @@ img.wallet-pouch {
   aspect-ratio: 1;
   place-self: center;
   overflow: hidden;
-  border: clamp(2px, 0.24vw, 3px) solid #5d577d;
-  border-radius: clamp(7px, 0.72vw, 10px);
+  border: clamp(2px, 0.24cqw, 3px) solid #5d577d;
+  border-radius: clamp(7px, 0.72cqw, 10px);
   background: #37344e;
   box-shadow:
     0 2px 0 #45415f,
@@ -3586,9 +3594,9 @@ img.wallet-pouch {
   min-width: 0;
   align-items: center;
   justify-content: center;
-  gap: clamp(5px, 0.65vw, 9px);
+  gap: clamp(5px, 0.65cqw, 9px);
   color: #706784;
-  font-size: clamp(6px, 0.55vw, 8px);
+  font-size: clamp(6px, 0.55cqw, 8px);
   font-weight: 900;
   line-height: 1;
   white-space: nowrap;
@@ -3603,7 +3611,7 @@ img.wallet-pouch {
 
 .maze-map-key i {
   display: inline-block;
-  width: clamp(6px, 0.6vw, 9px);
+  width: clamp(6px, 0.6cqw, 9px);
   aspect-ratio: 1;
   flex: 0 0 auto;
   border-radius: 3px;
@@ -3617,7 +3625,7 @@ img.wallet-pouch {
 .maze-board.exploration-camera {
   cursor: pointer;
   border-color: #575575;
-  border-radius: clamp(14px, 1.55vw, 21px);
+  border-radius: clamp(14px, 1.55cqw, 21px);
   box-shadow:
     0 5px 0 #403d5c,
     0 13px 25px rgba(52, 44, 71, 0.27),
@@ -3636,28 +3644,28 @@ img.wallet-pouch {
 
 .exploration-view-pill {
   display: inline-flex;
-  min-height: clamp(27px, 2.8vw, 36px);
-  padding: 4px clamp(7px, 0.7vw, 10px);
+  min-height: clamp(27px, 2.8cqw, 36px);
+  padding: 4px clamp(7px, 0.7cqw, 10px);
   align-items: center;
   border: 2px solid rgba(255, 255, 255, 0.88);
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(231, 247, 238, 0.96), rgba(204, 232, 222, 0.96));
   color: #3e7064;
-  font-size: clamp(7px, 0.67vw, 10px);
+  font-size: clamp(7px, 0.67cqw, 10px);
   font-weight: 1000;
   white-space: nowrap;
   box-shadow: 0 2px 0 rgba(76, 139, 120, 0.28);
 }
 
 .tester-skip-button {
-  min-height: clamp(29px, 3vw, 40px);
-  padding: 4px clamp(8px, 0.76vw, 11px);
+  min-height: clamp(29px, 3cqw, 40px);
+  padding: 4px clamp(8px, 0.76cqw, 11px);
   cursor: pointer;
   border: 2px solid rgba(255, 255, 255, 0.9);
   border-radius: 999px;
   background: linear-gradient(180deg, #817cb4, #625d91);
   color: white;
-  font-size: clamp(7px, 0.68vw, 10px);
+  font-size: clamp(7px, 0.68cqw, 10px);
   font-weight: 1000;
   white-space: nowrap;
   box-shadow: 0 3px 0 #4c486f, 0 6px 10px rgba(70, 62, 98, 0.16);
@@ -3684,7 +3692,7 @@ img.wallet-pouch {
 .tester-level-grid {
   display: grid;
   width: min(100%, 680px);
-  max-height: min(55vh, 430px);
+  max-height: min(55cqh, 430px);
   margin: 0 auto;
   padding: 3px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3763,7 +3771,7 @@ img.wallet-pouch {
   margin: 12px auto 0;
 }
 
-@media (max-width: 760px) {
+@container game-stage (max-width: 760px) {
   .tester-level-grid {
     grid-template-columns: 1fr;
   }
@@ -3781,7 +3789,7 @@ img.wallet-pouch {
   border-radius: 13px;
   background: linear-gradient(135deg, #ebe7ff, #fff1bd);
   color: #62567d;
-  font-size: clamp(9px, 0.85vw, 12px);
+  font-size: clamp(9px, 0.85cqw, 12px);
   font-weight: 900;
   line-height: 1.18;
   box-shadow: 0 3px 0 rgba(132, 119, 167, 0.3);
@@ -3806,15 +3814,15 @@ img.wallet-pouch {
 .big-maze-minimap {
   position: absolute;
   z-index: 30;
-  top: clamp(42px, 5.1vh, 54px);
-  right: calc(clamp(118px, 14vw, 170px) * -1 - clamp(7px, 0.8vw, 11px));
-  width: clamp(118px, 14vw, 170px);
+  top: clamp(42px, 5.1cqh, 54px);
+  right: calc(clamp(118px, 14cqw, 170px) * -1 - clamp(7px, 0.8cqw, 11px));
+  width: clamp(118px, 14cqw, 170px);
   pointer-events: none;
 }
 
 .compact-map {
   width: 100%;
-  padding: clamp(4px, 0.42vw, 6px);
+  padding: clamp(4px, 0.42cqw, 6px);
   border-radius: 14px;
   background: rgba(247, 243, 255, 0.9);
   box-shadow:
@@ -3833,7 +3841,7 @@ img.wallet-pouch {
   display: none;
 }
 
-@media (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .exploration-dashboard {
     grid-template-columns: minmax(128px, 0.9fr) minmax(0, 1.1fr);
     gap: 4px;
@@ -3868,13 +3876,13 @@ img.wallet-pouch {
   .tester-preview-banner { margin-block: 2px 4px; padding: 5px 9px; }
   .big-maze-minimap {
     top: 38px;
-    right: calc(clamp(112px, 14vw, 142px) * -1 - 7px);
-    width: clamp(112px, 14vw, 142px);
+    right: calc(clamp(112px, 14cqw, 142px) * -1 - 7px);
+    width: clamp(112px, 14cqw, 142px);
   }
   .compact-map .maze-minimap { width: 100%; }
 }
 
-@media (max-width: 1050px) and (orientation: landscape) {
+@container game-stage (max-width: 1050px) {
   .exploration-dashboard {
     grid-template-columns: minmax(128px, 0.92fr) minmax(0, 1.08fr);
   }
@@ -3885,7 +3893,7 @@ img.wallet-pouch {
   .tester-skip-button span { display: none; }
 }
 
-@media (max-width: 760px) and (orientation: landscape) {
+@container game-stage (max-width: 760px) {
   .exploration-dashboard {
     grid-template-columns: minmax(110px, 0.82fr) minmax(0, 1.18fr);
   }
@@ -3923,8 +3931,8 @@ img.wallet-pouch {
   z-index: 5;
   box-sizing: border-box;
   display: block;
-  border: clamp(1px, 0.16vw, 2px) solid rgba(255, 255, 255, 0.96);
-  border-radius: clamp(2px, 0.26vw, 4px);
+  border: clamp(1px, 0.16cqw, 2px) solid rgba(255, 255, 255, 0.96);
+  border-radius: clamp(2px, 0.26cqw, 4px);
   box-shadow:
     0 0 0 1px rgba(70, 62, 97, 0.82),
     0 0 7px rgba(255, 244, 187, 0.84),
@@ -3941,7 +3949,7 @@ img.wallet-pouch {
   gap: 3px;
   overflow: hidden;
   color: #665883;
-  font-size: clamp(7px, 0.62vw, 9px);
+  font-size: clamp(7px, 0.62cqw, 9px);
   font-weight: 1000;
   line-height: 1;
   text-overflow: ellipsis;
@@ -3949,14 +3957,14 @@ img.wallet-pouch {
 }
 
 /* Keep the full first reward in view at the common 1280 x 720 test size. */
-@media (max-height: 760px) and (orientation: landscape) {
+@container game-stage (max-height: 760px) {
   .modal-card.celebratory {
     padding: 12px 20px 14px;
-    border-radius: clamp(20px, 2.2vw, 30px);
+    border-radius: clamp(20px, 2.2cqw, 30px);
   }
 
   .modal-card.celebratory h2 {
-    font-size: clamp(25px, 2.5vw, 34px);
+    font-size: clamp(25px, 2.5cqw, 34px);
   }
 
   .modal-card.celebratory .win-summary {
@@ -3967,15 +3975,6 @@ img.wallet-pouch {
   .modal-card.celebratory .win-star-art,
   .modal-card.celebratory .modal-reward-art {
     max-width: 84px;
-  }
-
-  .modal-card.celebratory .rescued-result {
-    min-height: 43px;
-  }
-
-  .modal-card.celebratory .rescued-result img {
-    width: 29px;
-    height: 29px;
   }
 
   .modal-card.celebratory .reward-panel {
@@ -4089,7 +4088,7 @@ img.wallet-pouch {
 
 /* Short landscape phones keep full-size 44px targets in a two-row direction
    cluster, while the picture cards compress enough to remain wholly visible. */
-@media (orientation: landscape) and (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .brand-and-wallet { min-height: 28px; }
   .wallet-pill { min-height: 30px; }
 
@@ -4158,7 +4157,7 @@ img.wallet-pouch {
   .dpad-down { grid-column: 2; grid-row: 2; }
 }
 
-@media (orientation: landscape) and (max-height: 600px) and (max-width: 700px) {
+@container game-stage (max-height: 600px) and (max-width: 700px) {
   .level-dots { display: none; }
 }
 
@@ -4289,17 +4288,10 @@ body,
   }
 }
 
-@media (orientation: landscape) and (max-height: 600px) {
-  .game-stage {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    border-radius: 0;
-  }
-
+@container game-stage (max-height: 600px) {
   .game-layout {
     padding: 6px;
-    grid-template-columns: minmax(0, 1fr) clamp(248px, 38vw, 286px);
+    grid-template-columns: minmax(0, 1fr) clamp(248px, 38cqw, 286px);
     gap: 6px;
   }
 
@@ -4498,7 +4490,7 @@ body,
   }
 }
 
-@media (orientation: landscape) and (max-height: 420px) and (max-width: 700px) {
+@container game-stage (max-height: 420px) and (max-width: 700px) {
   .game-layout {
     grid-template-columns: minmax(0, 1fr) 248px;
   }
@@ -4580,25 +4572,93 @@ body,
   50% { transform: translateY(-7%) rotate(2deg); }
 }
 
-/* Let the rescued friends be the stars of the completion moment. */
+/* Let the rescued friends be the stars of the completion moment. This is the
+   single sizing contract for the celebration row: older compact-height rules
+   must not shrink the character art independently of its card. */
+.modal-card.celebratory {
+  --celebration-friend-size: 100px;
+  --celebration-friend-card-height: 128px;
+  width: min(calc(100% - 24px), 680px);
+}
+
 .rescued-result-row {
-  margin-block: clamp(7px, 0.9vw, 12px);
-  gap: clamp(7px, 0.85vw, 12px);
+  --friend-count: 3;
+  grid-template-columns: repeat(var(--friend-count), minmax(0, 1fr));
+  align-items: stretch;
+  justify-content: center;
+  margin-block: clamp(7px, 0.9cqw, 12px);
+  gap: clamp(7px, 0.85cqw, 12px);
+}
+
+.rescued-result-row[data-friend-count="1"] {
+  grid-template-columns: minmax(0, 180px);
+}
+
+.rescued-result-row[data-friend-count="2"] {
+  grid-template-columns: repeat(2, minmax(0, 180px));
+}
+
+.rescued-result-row[data-friend-count="3"] {
+  grid-template-columns: repeat(3, minmax(0, 170px));
 }
 
 .rescued-result {
-  min-height: clamp(96px, 10vw, 136px);
-  padding: clamp(5px, 0.7vw, 10px);
+  position: relative;
+  min-height: var(--celebration-friend-card-height);
+  padding: clamp(5px, 0.7cqw, 10px);
+  grid-template-rows: minmax(0, 1fr) auto;
   align-content: center;
   gap: 2px;
-  border-radius: clamp(17px, 1.8vw, 24px);
+  overflow: hidden;
+  border-radius: clamp(17px, 1.8cqw, 24px);
+}
+
+.rescued-result::before {
+  position: absolute;
+  inset: 7% 10% 21%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.94), rgba(255, 235, 153, 0.42) 48%, transparent 72%);
+  content: "";
+  pointer-events: none;
+}
+
+.rescued-result.rescued::after,
+.rescued-result.saved::after {
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  right: 11px;
+  color: #e8a83e;
+  content: "\2726";
+  font-size: 18px;
+  line-height: 1;
+  text-shadow: -14px 13px 0 rgba(255, 180, 204, 0.82);
+  animation: rescued-pet-sparkle 1.08s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .rescued-result img {
-  width: clamp(70px, 8vw, 110px);
-  height: clamp(70px, 8vw, 110px);
+  z-index: 1;
+  width: min(var(--celebration-friend-size), 100%);
+  height: min(var(--celebration-friend-size), 100%);
+  align-self: end;
   transform-origin: 50% 88%;
   filter: drop-shadow(0 4px 3px rgba(72, 51, 76, 0.18));
+}
+
+.rescued-result > span {
+  z-index: 1;
+  line-height: 1.15;
+}
+
+.rescued-result:not(.rescued, .saved) img {
+  filter: grayscale(0.55) drop-shadow(0 3px 2px rgba(72, 51, 76, 0.12));
+  opacity: 0.58;
+}
+
+.rescued-result-row:is([data-friend-count="4"], [data-friend-count="5"]) {
+  --celebration-friend-size: 86px;
+  --celebration-friend-card-height: 116px;
 }
 
 .rescued-result.rescued img,
@@ -4616,10 +4676,15 @@ body,
   70% { transform: translateY(-6%) rotate(-2deg) scale(1.03, 0.99); }
 }
 
+@keyframes rescued-pet-sparkle {
+  0%, 100% { opacity: 0.55; transform: rotate(-8deg) scale(0.82); }
+  45% { opacity: 1; transform: rotate(8deg) scale(1.16); }
+}
+
 /* On iPad and landscape phones, the name and live message float over the maze
    instead of reserving two rows. The square can therefore use almost the full
    height of the left play card. */
-@media (orientation: landscape) and (max-width: 1400px) {
+@container game-stage (max-width: 1400px) {
   .game-layout:not(.big-maze) .maze-panel {
     position: relative;
     padding: 6px;
@@ -4662,7 +4727,7 @@ body,
 
   .game-layout:not(.big-maze) .maze-topline h2 {
     overflow: hidden;
-    font-size: clamp(13px, 1.55vw, 18px);
+    font-size: clamp(13px, 1.55cqw, 18px);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -4685,7 +4750,7 @@ body,
   }
 }
 
-@media (orientation: landscape) and (max-height: 600px) {
+@container game-stage (max-height: 600px) {
   .game-layout:not(.big-maze) .maze-panel {
     padding: 5px;
   }
@@ -4703,27 +4768,47 @@ body,
     padding-block: 3px;
   }
 
-  .rescued-result {
-    min-height: 78px;
+  .modal-card.celebratory .rescued-result-row {
+    margin-block: 4px;
+    gap: 6px;
   }
 
-  .rescued-result img {
-    width: clamp(54px, 8vw, 68px);
-    height: clamp(54px, 8vw, 68px);
+  .modal-card.celebratory .rescued-result {
+    min-height: var(--celebration-friend-card-height);
+    padding: 4px;
+  }
+}
+
+@container game-stage (max-height: 430px) {
+  .modal-backdrop {
+    padding: 6px;
+  }
+
+  .modal-card.celebratory {
+    --celebration-friend-size: 62px;
+    --celebration-friend-card-height: 80px;
+    width: min(calc(100% - 8px), 680px);
+    max-height: calc(100% - 4px);
+    padding: 8px 14px 10px;
+  }
+
+  .modal-card.celebratory .rescued-result-row {
+    gap: 5px;
+  }
+
+  .modal-card.celebratory .rescued-result > span {
+    font-size: 9px;
   }
 }
 
 @media (pointer: coarse) and (orientation: landscape) {
-  .game-layout:not(.big-maze) .maze-topline-actions button,
-  .game-layout:not(.big-maze) .step-pill {
-    min-width: 44px;
-    min-height: 44px;
-    height: 44px;
-  }
-
   .utility-row,
   .utility-row button {
     min-height: 44px;
+  }
+
+  .game-layout button {
+    touch-action: manipulation;
   }
 
   .modal-close {
@@ -4736,7 +4821,9 @@ body,
   .pet-follower > img,
   .pet-follower-image,
   .rescued-result.rescued img,
-  .rescued-result.saved img {
+  .rescued-result.saved img,
+  .rescued-result.rescued::after,
+  .rescued-result.saved::after {
     animation: none !important;
   }
 
@@ -5284,7 +5371,7 @@ body,
 /* Keep rescue portraits present at desktop-style tablet viewports too. The
    iPad-specific coarse-pointer rules already reserve this room, but desktop
    preview and keyboard users at the same 4:3 size need the same guarantee. */
-@media (orientation: landscape) and (min-width: 761px) and (max-width: 1200px) {
+@container game-stage (min-width: 761px) and (max-width: 1200px) {
   .exploration-dashboard .adventure-details {
     grid-template-rows: 46px 58px minmax(0, 1fr);
   }

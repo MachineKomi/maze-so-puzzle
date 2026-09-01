@@ -4,6 +4,49 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.10.2 - 2026-09-01
+
+This responsive-foundation release keeps the game deliberately composed on
+desktop, iPad, and landscape phones instead of rearranging or stretching its
+interface for each device.
+
+### Changed
+
+- The complete game now renders on one fixed 960 × 540 logical canvas and is
+  uniformly scaled into the browser's safe area. Wide phones letterbox cleanly
+  instead of stretching the interface, while 4:3 iPads retain a centred 16:9
+  play surface.
+- Stage-internal responsive sizing now follows the logical canvas through CSS
+  container units and queries. Text, cards, maze, sidebar, controls, title,
+  Adventure Book, and dialogs therefore keep the same relative size and
+  position at every landscape viewport.
+- Portrait devices hide the canvas cleanly and show the existing friendly
+  rotate prompt. Safe-area insets remain part of the scale calculation for
+  notched phones and installed web apps.
+- Victory friends use count-aware portrait cards and remain large on iPad and
+  desktop. One to three friends receive roomy centred cards; four or five stay
+  together in a readable single row, with subdued missing slots and a gentle
+  sparkle behind rescued friends.
+- The old short-screen rule that reduced completion friends to tiny icons has
+  been removed. Reduced-motion mode still disables the dance and sparkle.
+
+### Verification
+
+- The release gate covers 260 tests across 19 files, including a pure fixed-stage
+  scale contract for desktop, iPad, wide-phone, and minimum landscape sizes.
+- Local browser checks covered 1920 × 1080, 1600 × 900, 1366 × 768, 1280 × 720,
+  1366 × 1024, 1180 × 820, 1024 × 768, 932 × 430, 844 × 390, 740 × 360,
+  667 × 375, and 568 × 320. Every landscape check retained a 16:9 stage with no
+  document overflow or panel intersection.
+- A perfect-rescue completion was replayed at iPad and phone sizes. The friend
+  card, reward rows, and actions remained separate and fully inside the stage.
+
+### Desktop status
+
+- The unsigned 0.10.2 portable executable and NSIS installer are rebuilt from
+  the same source as the browser release and staged in `release/`.
+- Clean-machine install/uninstall testing and code signing remain outstanding.
+
 ## 0.10.1 - 2026-09-01
 
 This combat-and-spring polish release makes two of the game's most satisfying

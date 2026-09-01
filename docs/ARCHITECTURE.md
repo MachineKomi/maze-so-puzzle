@@ -19,8 +19,12 @@ state.
 3. `src/combatPresentation.ts` builds a pure deterministic victory timeline:
    three clashes, semantic sound cues, exact conserved Power-transfer steps,
    final enemy Power `0`, and a short reduced-motion handoff.
-4. `src/game/engine.ts` applies one immutable movement or interaction step.
-5. Authored levels come from `src/game/levels.ts`; surprise levels come from the
+4. `src/stageScale.ts` defines the 960 × 540 logical stage and its pure
+   fit-without-stretching calculation. `App.tsx` observes the safe viewport and
+   scales one fixed canvas; CSS container queries and units size every internal
+   screen against that canvas rather than the physical device.
+5. `src/game/engine.ts` applies one immutable movement or interaction step.
+6. Authored levels come from `src/game/levels.ts`; surprise levels come from the
    deterministic generator in `src/game/generator.ts`. The generator selects a
    seeded odd size from unlocked 9–29 bands, grows solver-safe connected
    2–4-tile water/lava regions only beyond the splash-boots gate, and can place
@@ -31,38 +35,38 @@ state.
    uses 9, 11, 13, 15, 13, 15, 17, 17, 19, 25, 21, and 23 tile boards. The two
    newest adventures add four- and five-friend backtracking routes; Moonlit
    Friendship Quest also requires an Antidote Leaf detour before poison.
-6. `src/game/solver.ts` validates structural rules and searches the exact engine
+7. `src/game/solver.ts` validates structural rules and searches the exact engine
    state space to prove both an ordinary solution and an all-animal solution.
-7. `src/game/exploration.ts` derives clamped camera windows, the shared camera
+8. `src/game/exploration.ts` derives clamped camera windows, the shared camera
    policy, and immutable reveal sets. Any level wider or taller than 6 tiles
    renders a 6 x 6 player-centred view while the engine and solver continue to
    use full-level coordinates.
-8. `src/game/terrainGeometry.ts` traces connected orthogonal cell unions into
+9. `src/game/terrainGeometry.ts` traces connected orthogonal cell unions into
    rounded SVG paths in stable world coordinates, including holes, diagonal
    contacts, and the camera gutter used by the renderer.
-9. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
+10. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
    in browser `localStorage`.
-10. `src/session.ts` validates and stores a schema-v1 snapshot for an unfinished
+11. `src/session.ts` validates and stores a schema-v1 snapshot for an unfinished
    normal authored run, including exploration reveal state. It rejects tester,
    generated, corrupt, inconsistent, and completed states.
-11. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
+12. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
    Audio API; those effects require no recorded audio files.
-12. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
+13. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
    A session-scoped deterministic picker maps each maze to one of five full
    tracks and avoids an immediate repeat; the short friendship cue is excluded.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
-13. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
+14. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
    material periods, dominant-colour families, compatibility rules, and
    fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
    catalogue contains ten compatible terrain themes, five weapons, five
    friendly enemy looks, eight pet species, and four fully opaque AI-generated
    front cage layers.
-14. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
+15. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
    cardinal intent and applies the strict one-tile, wall-only corner assist. It
    never pathfinds or assists across hazards, unresolved doors, or enemies.
-15. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
+16. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
    has left and selects distinct visible footprints for rescued friends.
 
 ## Important boundaries
@@ -89,6 +93,12 @@ state.
   streams. Recreating a seed reproduces both its puzzle and visual variants,
   while adding artwork choices cannot perturb topology or progression placement.
 - The browser build uses only local static assets from `public/`.
+- All landscape screens share one 960 × 540 logical canvas. A `ResizeObserver`
+  fits that canvas inside the safe viewport with a single uniform scale, so its
+  aspect ratio, panel order, and relative sizing cannot diverge between desktop,
+  iPad, phone, Safari, or installed-web-app chrome. Extra space is deliberately
+  letterboxed. Only the portrait rotate prompt and pointer-specific interaction
+  semantics remain viewport media behaviour.
 - Progress belongs to the current browser or Tauri WebView profile. It is not
   synchronized between devices.
 - Camera coordinates affect presentation only. Movement, collision, combat,
@@ -131,7 +141,7 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.10.1 source is shared by the web and Tauri build paths. Its automated web
+- The 0.10.2 source is shared by the web and Tauri build paths. Its automated web
   gate, locked Cargo check, staged unsigned portable executable and installer,
   source comparison, hashes, and smoke launch pass. Public deployment,
   clean-machine installation, signing, and physical-device feel/listening remain
@@ -154,8 +164,8 @@ migration, 6 x 6 even-window clamping, variable 9–29 generated sizes, connecte
 post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
 selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, and cage-front asset coverage. Every authored maze and sampled
-generated maze is run through the stateful solver. The 0.10.1 run covers 247 tests
-across 18 files; `npm run check` also completes strict TypeScript and the Vite
+generated maze is run through the stateful solver. The 0.10.2 run covers 260 tests
+across 19 files; `npm run check` also completes strict TypeScript and the Vite
 production build. Dependency review, locked Cargo compilation, packaging,
 public deployment, and real-device checks remain separate release gates.
 

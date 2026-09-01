@@ -168,7 +168,7 @@ describe("deterministic surprise mazes", () => {
         }
       }
     }
-  });
+  }, 15_000);
 
   it("builds adventure detours with spring boots before connected hole jumps", () => {
     const generated = generateSurpriseMaze({

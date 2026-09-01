@@ -3,6 +3,7 @@ import {
   useCallback,
   useEffect,
   useId,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -75,6 +76,11 @@ import {
 } from "./progress";
 import { playSound, type SoundName } from "./sound";
 import {
+  calculateStageScale,
+  LOGICAL_STAGE_HEIGHT,
+  LOGICAL_STAGE_WIDTH,
+} from "./stageScale";
+import {
   MUSIC_TRACKS,
   configureMusic,
   createMazeMusicPicker,
@@ -133,7 +139,7 @@ const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const JUMP_PRESENTATION_MS = 540;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.10.1";
+const BUILD_VERSION = "0.10.2";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -841,6 +847,12 @@ function App() {
   const [jumpPresentation, setJumpPresentation] = useState<JumpPresentation | null>(null);
   const [presentedPower, setPresentedPower] = useState<number | null>(null);
   const [presentedEnemyPower, setPresentedEnemyPower] = useState<number | null>(null);
+  const appFrameRef = useRef<HTMLElement>(null);
+  const [stageScale, setStageScale] = useState(() => (
+    typeof window === "undefined"
+      ? 1
+      : calculateStageScale(window.innerWidth, window.innerHeight)
+  ));
   const boardRef = useRef<HTMLDivElement>(null);
   const inputLocked = useRef(false);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
@@ -870,6 +882,38 @@ function App() {
   const achievementsHeadingRef = useRef<HTMLHeadingElement>(null);
   const mutedRef = useRef(muted);
   const [testerToolsRequested] = useState(debugMazeQueryEnabled);
+
+  useLayoutEffect(() => {
+    const frame = appFrameRef.current;
+    if (!frame) return undefined;
+
+    const updateStageScale = () => {
+      const styles = window.getComputedStyle(frame);
+      const horizontalPadding = Number.parseFloat(styles.paddingLeft)
+        + Number.parseFloat(styles.paddingRight);
+      const verticalPadding = Number.parseFloat(styles.paddingTop)
+        + Number.parseFloat(styles.paddingBottom);
+      const availableWidth = Math.max(0, frame.clientWidth - horizontalPadding);
+      const availableHeight = Math.max(0, frame.clientHeight - verticalPadding);
+      const nextScale = calculateStageScale(availableWidth, availableHeight);
+
+      setStageScale((currentScale) => (
+        Math.abs(currentScale - nextScale) < 0.0001 ? currentScale : nextScale
+      ));
+    };
+
+    updateStageScale();
+    const resizeObserver = new ResizeObserver(updateStageScale);
+    resizeObserver.observe(frame);
+    window.addEventListener("resize", updateStageScale);
+    window.visualViewport?.addEventListener("resize", updateStageScale);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateStageScale);
+      window.visualViewport?.removeEventListener("resize", updateStageScale);
+    };
+  }, []);
 
   const musicTrackForLevel = useCallback(
     (nextLevel: LevelDefinition) => mazeMusicPicker.trackForMaze(nextLevel.id),
@@ -1913,12 +1957,17 @@ function App() {
   ] : [];
 
   return (
-    <main className="app-frame">
-      <section
-        className={`game-stage screen-${screen}`}
-        aria-label="Maze so Puzzle game"
-        style={screen === "game" ? { touchAction: "none", userSelect: "none", WebkitUserSelect: "none" } : undefined}
+    <main ref={appFrameRef} className="app-frame">
+      <div
+        className="game-stage-slot"
+        style={{ "--stage-scale": stageScale } as CSSProperties}
       >
+        <section
+          className={`game-stage screen-${screen}`}
+          aria-label="Maze so Puzzle game"
+          data-logical-size={`${LOGICAL_STAGE_WIDTH}x${LOGICAL_STAGE_HEIGHT}`}
+          style={screen === "game" ? { touchAction: "none", userSelect: "none", WebkitUserSelect: "none" } : undefined}
+        >
         {screen === "title" ? (
           <TitleScreen
             progress={progress}
@@ -2394,7 +2443,12 @@ function App() {
               <img className="win-star-art" src={ASSETS.goal} alt="A sparkling golden star portal" />
               <div><strong>Wonderful, Ame!</strong><span>The star was found in {game.steps} {game.steps === 1 ? "step" : "steps"}.</span></div>
             </div>
-            <div className="rescued-result-row" aria-label={`${completion.rescuedSpecies.length} animal friends rescued`}>
+            <div
+              className="rescued-result-row"
+              data-friend-count={animalObjects.length}
+              style={{ "--friend-count": Math.max(1, animalObjects.length) } as CSSProperties}
+              aria-label={`${completion.rescuedSpecies.length} of ${animalObjects.length} animal friends rescued`}
+            >
               {animalObjects.map((animal) => {
                 const rescued = completion.rescuedSpecies.includes(animal.species);
                 return (
@@ -2508,7 +2562,8 @@ function App() {
           </Modal>
         )}
 
-      </section>
+        </section>
+      </div>
 
       <div className="rotate-message" role="status">
         <img src={ASSETS.portrait} alt="" />

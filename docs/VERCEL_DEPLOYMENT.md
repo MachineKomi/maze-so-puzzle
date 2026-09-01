@@ -58,7 +58,7 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.10.1** label on the title screen and
+- Click or tap the small **Playable build 0.10.2** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -114,14 +114,12 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. On 2026-09-01 release commit `6b3a64c` was pushed to GitHub `main` and
-the Vercel Hobby production deployment became ready. The canonical alias reports
-playable build 0.10.1; the exact debug query lists all twelve story mazes, the
-1280 × 720 document exactly matches its viewport, the focused Shiny Sword route
-completes the conserved multi-bash Power transfer, and browser warning/error
-logs are clear. The same source bundle also passed the exact 1024 × 768 and
-844 × 390 layout checks, the 65-step Antidote Leaf and connected-poison route,
-and the non-destructive stronger-enemy interaction. The broader physical-device
-and manual matrix above remains required.
+secrets. The 0.10.2 source is ready for its GitHub `main` push and Vercel Hobby
+promotion. After Vercel reports Ready, record the deployed commit and repeat the
+canonical build-label, exact debug-query, responsive bounds, and browser-log
+checks. The same source already passes the local twelve-size fixed-canvas matrix,
+perfect-rescue iPad/phone finish, 65-step Antidote Leaf route, conserved
+multi-bash Power transfer, and non-destructive stronger-enemy interaction. The
+broader physical-device and manual matrix above remains required.
 Executable artifacts remain intentionally excluded from Git and Vercel
 deployment.
