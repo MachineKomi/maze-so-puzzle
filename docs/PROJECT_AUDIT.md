@@ -1,7 +1,7 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: 0.9.1 web/Windows release candidate
+Audited build: published 0.9.1 web/Windows release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
@@ -11,8 +11,9 @@ TypeScript/Vite production build completed. Local 1024 x 768 and 667 x 375
 previews render the rebuilt terrain without overlap, document overflow, or
 browser errors. The exact 0.9.1 dependency audit/tree, locked-Tauri compile,
 Windows packaging/source comparison/hash/smoke launch, periodic-texture checks,
-and core local responsive matrix also pass. GitHub/Vercel publication and the
-canonical production smoke are the remaining automated release steps.
+and core local responsive matrix also pass. Release commit `9213213` is on
+GitHub `main`; the canonical Vercel alias serves 0.9.1 and passes the initial
+production smoke at 1024×768 and 667×375.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
@@ -35,7 +36,7 @@ historical evidence.
 | Surprise Maze variants | Generated presentation remains deterministic; size varies by seed across unlocked odd 9–29 bands, water/lava form connected post-boots clusters, and eligible adventure seeds add branch prerequisites plus post-Spring-Boots holes | A 500-seed adventure stress audit spanning every odd size found zero ordinary/perfect failures; 353 samples had exactly one Spring Boots pickup before connected holes |
 | Optional Power puzzles | Wishing Woods, Ame's Grand Parade, Springstep Sky Hollow, and Lanternlight separate progression/rescue requirements across branches | Solver-verified ordinary/all-pets routes are 114/148, 116/136, 190/214, and 290/322 steps respectively |
 | Audio and presentations | Five full OST songs are assigned per maze with stable session mapping and immediate-repeat avoidance; jump, rescue, clash, sparks, impact, Power, win, and loss cues support short event presentations | Focused audio tests pass; local winning and underpowered battles showed one opponent, the clash, Power count-up, and clean handoff. Final listening, reduced-motion, cancellation, and public-device feel remain manual |
-| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | 0.9.1 push, automatic promotion, and canonical smoke remain pending; the public site continues to serve the prior verified build until then |
+| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Release commit `9213213` pushed successfully; canonical build label reports 0.9.1, both tester entry paths list ten mazes, sampled materials render, responsive documents have no overflow, one keyboard step succeeds, and the production browser log is clear |
 | Desktop artifacts | Unsigned 0.9.1 portable executable and NSIS installer are staged in `release/` | Both match final Tauri outputs, report 0.9.1, are SHA-256 recorded, and the portable app stayed responsive with the correct title for five seconds; clean-machine install and signing remain |
 
 ## Historical 0.5.1 implementation status
@@ -342,8 +343,8 @@ The 0.9.1 source passes 215 tests across 16 files, strict TypeScript, and the
 Vite production build. The local 1024×768 and 667×375 responsive checks are
 green. The dependency audit/tree and locked Cargo check pass, and the unsigned
 0.9.1 Windows pair is built, versioned, source-compared, hashed, and
-smoke-launched. GitHub/Vercel publication and canonical 0.9.1 smoke remain open;
-the prior 0.9.0 record is historical evidence only. Unchecked
+smoke-launched. GitHub `main` and the canonical public deployment now serve
+0.9.1; the prior 0.9.0 record is historical evidence only. Unchecked
 physical-device, listening/feel, broader production, clean-install, and signing
 items in `RELEASE_CHECKLIST.md` remain requirements.
 
@@ -402,8 +403,8 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
 - Current source metadata and `release/` records are aligned at 0.9.1. GitHub
-  `main`, the public Vercel alias, and canonical smoke evidence remain the final
-  publication steps and are not inferred from the prior build.
+  `main` and the public Vercel alias contain the release, and canonical smoke
+  evidence is recorded above rather than inferred from the prior build.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

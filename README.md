@@ -7,9 +7,9 @@
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
 0.9.1 play-test build, which remains an active prototype. Its complete automated
-web gate and unsigned Windows packaging are verified locally; the public Vercel
-promotion and final physical-device pass remain release steps rather than
-already-verified claims.
+web gate, unsigned Windows packaging, and public Vercel promotion are verified;
+the final physical-device pass remains a release step rather than an
+already-verified claim.
 
 ![The previous 0.4.0 Little Star Trail build, with Ame's maze on the left and her picture-led adventure panel on the right](docs/screenshots/gameplay-v0.4.0.png)
 
@@ -262,9 +262,11 @@ placement, cage-front assets, persistent minimap reveal, and the established
 engine/save/audio checks. The exact 0.9.1 dependency audit/tree and locked Cargo
 compile pass. Its Windows
 portable app and installer are source-compared, version-checked, hashed, and the
-portable app passed a hidden five-second smoke launch. Public deployment smoke
-and physical-device listening/feel remain on the release checklist; the previous
-0.8.0 record is retained as historical evidence.
+portable app passed a hidden five-second smoke launch. The canonical deployment
+passes the build-label/picker, 1024 x 768 and 667 x 375 overflow, production-art,
+single-step, and browser-log smoke checks. Physical-device listening/feel remains
+on the release checklist; the previous 0.9.0 record is retained as historical
+evidence.
 
 The browser matrix, remaining 0.9.1 gates, and Windows artifact
 record are kept in

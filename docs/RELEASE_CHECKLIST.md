@@ -10,8 +10,9 @@ Status for 0.9.1: 215 tests across 16 files and the strict TypeScript/Vite build
 pass. Source metadata and new-art provenance are aligned. The dependency
 audit/tree, locked Tauri compile, Windows packaging/source comparison/hash/smoke
 launch, repeat-boundary/alpha checks, local iPad and landscape-phone previews,
-two-hole jump, and win/loss combat presentation checks pass. GitHub `main`, the
-canonical Vercel promotion, and the 0.9.1 production smoke remain pending.
+two-hole jump, and win/loss combat presentation checks pass. GitHub `main`
+contains release commit `9213213`; the canonical Vercel promotion and initial
+0.9.1 production smoke pass.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed. The
 completed 0.9.0 and 0.8.0 evidence below is retained as a historical baseline.
@@ -124,23 +125,23 @@ Test the production preview, not only the development server:
 npm run preview
 ```
 
-Local 0.9.1 smoke record (2026-09-01): the exact debug query opens the ten-maze
-picker and Maze 2 renders its rose path against darker mossy ruins. At 1024 x
-768 the board is 534 px square; at 667 x 375 it is 347 px square. Both documents
-exactly match their viewport with no overflow or browser log errors. Garden and
-ruin dressing, reduced material scale, and regenerated repeat boundaries were
-sampled without seams, cross-bands, or ghost masonry. Canonical 0.9.1 promotion
-and smoke remain pending.
+Production smoke record (2026-09-01): the canonical URL serves playable build
+0.9.1 from GitHub `main`. The build-label button and exact debug query each open
+the ten-maze picker. Maze 2 renders rose paths against darker mossy ruins;
+Rainbow Picnic and Lanternlight render their sparse garden/ivy treatment without
+visible seams, cross-bands, or ghost masonry. At 1024 x 768 the board is 534 px
+square; at 667 x 375 it is 347 px square. Both documents exactly match their
+viewport, one keyboard step updates position and singular step wording, and the
+browser log remains clear.
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
 - [x] 667 x 375 and 844 x 390: the phone stage, safe viewport, page overflow,
-  board overlap, and minimum-control layout baseline passes; local 0.9.1
-  reconfirms 667 x 375. Canonical 0.9.1 remains pending.
+  board overlap, and minimum-control layout baseline passes; local and canonical
+  0.9.1 reconfirm 667 x 375.
 - [x] 740 x 360: the same phone-layout checks pass locally.
-- [x] 1024 x 768 local 0.9.1: the iPad-size layout uses a 534 px board with no
-  page overflow, sidebar overlap, or maze/control overlap. Canonical 0.9.1
-  remains pending.
+- [x] 1024 x 768 local and canonical 0.9.1: the iPad-size layout uses a 534 px
+  board with no page overflow, sidebar overlap, or maze/control overlap.
 - [x] 1180 x 820: the same iPad-size layout checks pass locally.
 - [x] 1366 x 768 and 1920 x 1080: the board remains square and the layout has no
   page overflow; production-art sampling remains part of the public smoke.
@@ -189,7 +190,7 @@ and smoke remain pending.
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [ ] On the 0.9.1 canonical URL, the discreet build-label button opens the direct
+- [x] On the 0.9.1 canonical URL, the discreet build-label button opens the direct
   picker. The exact `?debug=mazes` query opens it automatically, another query
   does not, and all ten authored mazes are listed with tester-preview labels.
 - [ ] Complete a canonical tester run and reconfirm that rewards, records,
