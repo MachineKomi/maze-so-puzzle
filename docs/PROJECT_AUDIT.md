@@ -1,7 +1,7 @@
 # Project audit
 
-Audit date: 2026-08-31
-Audited build: 0.3.0 playable test build
+Audit date: 2026-09-01
+Audited build: 0.4.0 playable test build
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
@@ -10,18 +10,22 @@ checklist after source or asset changes. Local browser and Tauri packaging
 verification is complete; clean-machine installation and the full family
 play-test matrix are not claimed.
 
-## Current 0.3.0 candidate status
+## Current 0.4.0 candidate status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Unit suite | 79 tests cover the engine, solver, generator, eight story levels, progress schema v3, achievements, protected navigation, and synthesized-audio safeguards | 79 of 79 passed in the final run |
-| Story campaign | Eight authored, solver-validated levels from 13 x 13 through 23 x 23; three optional and jointly rescuable animals per level | Implemented; final play-through pending |
+| Unit suite | 87 tests cover the engine, solver, generator, eight story levels, progress schema v3, achievements, protected navigation, synthesized-audio safeguards, and local music control | 87 of 87 passed in the final run; `npm run check` completed the production build |
+| Story campaign | Eight authored levels from 9 x 9 through 17 x 17, with solver routes spanning 26 to 114 steps; every ordinary exit and all-three-rescues route is validated | Implemented and solver-verified; final human play-through pending |
 | Title experience | AI-illustrated title screen, story continuation, Adventure Book, surprise-maze shortcut, sound control, and reduced-motion-aware flourishes | Production bundle verified at 1280 x 720; broader manual matrix remains |
 | Adventure Book | Species totals, overall stats, stickers, rescue medals, nine stat-driven badges, and per-story-maze clear/step/rescue records | Browser structure, visuals, current-run record, and keyboard focus verified |
 | Saves | Schema v3 records richer statistics and defensively migrates v1/v2 data without inventing unknown historical species | Automated coverage present; browser-profile upgrade test pending |
-| Audio | Added title, menu, select, achievement, and stamp cues; overlapping voices and closed contexts are bounded and guarded | Automated coverage present; browser and WebView2 listening pass pending |
+| Input | Immediate keyboard and primary-pointer movement, deterministic held-key cadence, latest-direction buffering, D-pad press-and-hold, and cancellation on focus or visibility loss | Source review plus production-browser checks confirmed synchronous key movement and one move per D-pad tap; real-device hold/cancel testing and focused controller automation remain |
+| Visual polish | Correctly tiled floor, wall, water, and lava textures; restrained outer rounding and rounded inner wall joins; larger icon-led rescue/inventory UI; Ame visibly holds her sword after collecting it | Implemented in the production bundle; broader device visual review remains |
+| Audio | Synthesized action/UI cues plus locally bundled looping music for title, early story, later story, and surprise mazes; overlapping voices and closed contexts are bounded and guarded | Automated music/control coverage present; browser and WebView2 listening pass pending |
 | Title asset | PNG master archived; 256,684-byte WebP derivative served in-game | Production bundle verified; source-only art excluded |
-| Windows package | Tauri 0.3.0 portable executable and NSIS installer | Built and staged; hashes match sources; portable smoke launch responsive |
+| Dependencies | `npm audit` and `npm ls` | 0 vulnerabilities; dependency tree clean |
+| Desktop compile | `cargo check --locked` through `npm run check:desktop` | Passed without errors |
+| Windows package | Tauri 0.4.0 portable executable and NSIS installer | Built and staged with 0.4.0 filenames; source and staged hashes match; hidden five-second portable smoke launch stayed responsive with the correct title |
 
 ## Last fully verified 0.2.0 baseline
 
@@ -41,14 +45,21 @@ play-test matrix are not claimed.
 | Tauri permissions | `core:default` capability and local-only content security policy | Appropriately narrow for the current app |
 
 These results preserve the last verified 0.2.0 baseline for comparison. The
-0.3.0 evidence above is current, while the broader manual release matrix remains
+0.4.0 evidence above is current, while the broader manual release matrix remains
 intentionally separate below.
 
-## Version 3 implementation snapshot
+## Version 4 implementation snapshot
 
-- The campaign now has eight story mazes. The four new adventures reach 21 x 21
-  and 23 x 23 while combining swords, Power growth, potions, multiple coloured
-  keys and doors, protective boots, water, lava, and optional rescue routes.
+- The campaign has eight story mazes scaled from 9 x 9 through 17 x 17 for clearer
+  characters and objects. Validated ordinary routes span 26 to 114 steps, and
+  every level separately proves that all three optional friends can be rescued.
+- Input now responds immediately, buffers the latest turn during its short
+  cadence, repeats held keyboard directions consistently, and supports D-pad
+  press-and-hold without turning pointer input into pathfinding.
+- Floor, wall, water, and lava art tiles at a maze-appropriate scale. Wall shapes
+  use gentler outer corners and rounded inner joins, while the side panel favours
+  larger rescue and inventory icons over repeated labels.
+- Ame swaps to an original sword-held sprite as soon as the sword is collected.
 - The title screen uses original AI-generated key art. Its editable PNG master is
   archived at `docs/source-assets/title-background-v1.png`; the app serves the substantially
   smaller `public/assets/title-background-v1.webp` derivative.
@@ -59,8 +70,9 @@ intentionally separate below.
 - Progress schema v3 stores the richer records. Migration preserves known v1/v2
   facts, marks formerly unrecorded source/species history as unknown, sanitizes
   malformed values, and never fabricates achievement progress.
-- Synthesized audio now includes title, menu, selection, achievement, and stamp
-  cues, with a voice cap, safe node cleanup, and recovery from a closed context.
+- Synthesized audio includes title, menu, selection, achievement, and stamp cues,
+  with a voice cap, safe node cleanup, and recovery from a closed context. Four
+  locally bundled music tracks now cover the title, story, and surprise mazes.
 
 ## Confirmed product rules
 
@@ -88,7 +100,9 @@ intentionally separate below.
   accidental save-key collisions much less likely.
 - Saved level IDs are trimmed and reserved JavaScript object keys are rejected;
   replay lookup checks own properties only.
-- Non-primary mouse-button releases no longer move Ame.
+- Non-primary pointers no longer move Ame. Keyboard movement uses deterministic
+  held-key timing, a single latest-turn buffer, and lifecycle cleanup, while the
+  D-pad supports the same immediate press-and-hold rhythm.
 - Dialogs now receive focus, contain keyboard focus, respond to Escape where
   appropriate, restore focus, and make the background inert while open.
 - The rendered page has a logical top-level heading, control-state semantics,
@@ -96,11 +110,11 @@ intentionally separate below.
 - Home and Adventure Book preserve the active run, cross-maze switches are
   confirmed once movement has begun, and modal keyboard input cannot move Ame
   behind the confirmation.
-- Big Maze expands the board for later 21 x 21 and 23 x 23 levels while retaining
-  a compact Power/item/rescue HUD and an overlaid feedback toast.
+- Big Maze remains available as an optional roomier board view while retaining a
+  compact Power/item/rescue HUD and an overlaid feedback toast.
 
-These changes still require the final post-change automated and manual run in
-`RELEASE_CHECKLIST.md`; their presence in source is not itself a release sign-off.
+The final automated run is complete. The unchecked clean-machine, device, and
+manual items in `RELEASE_CHECKLIST.md` remain separate release requirements.
 
 ## Prioritized remaining work
 
@@ -123,8 +137,8 @@ These changes still require the final post-change automated and manual run in
   loss/retry, and a full maze completion.
 - Add automated accessibility checks and a richer screen-reader representation
   of nearby maze cells; the visual grid should not be the only spatial model.
-- Test 200% browser zoom and Windows text scaling, including Big Maze mode on
-  both 21 x 21 and 23 x 23 levels.
+- Test 200% browser zoom and Windows text scaling, including Big Maze mode on the
+  largest 17 x 17 story and generated mazes.
 - Add visual-regression snapshots for the minimum 960 x 540 window, the default
   1280 x 720 window, 1920 x 1080, and the portrait guidance screen.
 - Reassess compact-window touch targets. The 960 x 540 layout prioritizes fitting
@@ -133,6 +147,10 @@ These changes still require the final post-change automated and manual run in
 
 ### P2 - maintainability and polish
 
+- If mazes larger than 17 x 17 return, use a player-centred zoomed camera and a
+  simplified explored-area minimap instead of shrinking the full board and its
+  sprites. Keep that as a separate navigation feature rather than complicating
+  the current readable story progression.
 - Consolidate repeated responsive CSS rules after the current visual design
   settles; this reduces cascade surprises without changing the look.
 - The unused original `floor.png` and `wall.png` are preserved under
@@ -150,7 +168,7 @@ These changes still require the final post-change automated and manual run in
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- The release target is 0.3.0. Package, lockfile, Cargo, and Tauri versions were
+- The release target is 0.4.0. Package, lockfile, Cargo, and Tauri versions were
   confirmed aligned during final packaging.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.

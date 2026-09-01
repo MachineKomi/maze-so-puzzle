@@ -6,9 +6,9 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes playable build
-0.3.0, which is still an active play-test prototype.
+0.4.0, which is still an active play-test prototype.
 
-![Little Star Trail gameplay with Ame's maze on the left and her adventure panel on the right](docs/screenshots/gameplay-v0.3.0.png)
+![Little Star Trail gameplay with Ame's maze on the left and her picture-led adventure panel on the right](docs/screenshots/gameplay-v0.4.0.png)
 
 ## Requirements
 
@@ -54,15 +54,15 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-Verified local outputs from the 0.3.0 desktop build and release-copy step:
+Verified local outputs from the 0.4.0 desktop build and release-copy step:
 
-- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.3.0-portable.exe`
-  and `release/Maze-so-Puzzle-0.3.0-setup.exe`. Executables are deliberately
+- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.4.0-portable.exe`
+  and `release/Maze-so-Puzzle-0.4.0-setup.exe`. Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Standalone app: `src-tauri/target/release/maze-so-puzzle.exe`.
 - Installer: `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
-  Solve!_0.3.0_x64-setup.exe`.
-- The verified 0.3.0 hashes are recorded in
+  Solve!_0.4.0_x64-setup.exe`.
+- The verified 0.4.0 hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -72,14 +72,16 @@ Verified local outputs from the 0.3.0 desktop build and release-copy step:
 - Click or tap anywhere on the maze: move one square in the dominant direction
   from Ame. There is deliberately no destination pathfinding.
 - On-screen arrows: touch- and mouse-friendly movement.
+- Hold a keyboard direction or an on-screen arrow for quick, predictable travel
+  through a path; a tap still moves exactly one square.
 - Big Maze: enlarge the board while keeping a compact Power, rescue, and item
   HUD; press `Escape` or Normal to return to the full side panel.
 
-## Included in playable build 0.3.0
+## Included in playable build 0.4.0
 
-- Eight progressive story mazes sized from 13 x 13 through 23 x 23, with gentle
+- Eight progressive story mazes sized from 9 x 9 through 17 x 17, with gentle
   one-mechanic-at-a-time onboarding before later levels combine the full toybox.
-- Fresh, solver-validated 13 x 13 through 23 x 23 surprise mazes from the
+- Fresh, solver-validated 9 x 9 through 17 x 17 surprise mazes from the
   deterministic "New maze" generator.
 - Three optional animal friends to rescue in every maze: a bunny, fox, and kitten.
 - A new illustrated title screen, backed by original AI-generated key art, with
@@ -90,16 +92,22 @@ Verified local outputs from the 0.3.0 desktop build and release-copy step:
 - Persistent gold rewards, three collectible stickers, best results, and rescue
   medals for 5, 10, and 15 perfect three-animal rescues.
 - Sword-gated goblin encounters and visible Power numbers.
+- Ame visibly holds her sword after collecting it, and Power numbers sit above
+  character art without covering faces.
 - Power growth from defeated lower-level goblins and `+2` potions.
 - Colour-coded star keys and matching doors.
 - Protective boots for water and warm magical lava.
 - Exact level reset after a loss, schema-v3 saved progress with defensive v1/v2
   migration, a pictorial help card, mute control, and reduced-motion support.
 - Expanded synthesized sound design for movement and interactions plus title,
-  menu, selection, achievement, stamp, rescue, loss, and victory moments.
+  menu, selection, achievement, stamp, rescue, loss, and victory moments, with
+  a locally bundled looping soundtrack for title, story, and surprise mazes.
 - Upgraded v2 AI-generated art, including Ame, animal friends, goblins, items,
   doors, goals, UI decoration, and seamless floor, stone wall, water, and lava
-  treatments.
+  treatments. Terrain art now repeats at a consistent two- or three-tile scale,
+  with restrained outer rounding, softened inner joins, and blended hazards.
+- A cleaner picture-first sidebar with larger rescue friends and inventory art,
+  less repeated text, and clearer found/missing silhouettes.
 - A 16:9 landscape presentation with a friendly turn-sideways screen on portrait
   devices.
 - Safe session navigation: a maze can be resumed after visiting Home or the
@@ -134,10 +142,10 @@ npm run desktop:build
 ```
 
 `npm run check` runs the complete unit suite followed by the strict TypeScript
-and Vite production build. The current suite contains 79 tests covering
+and Vite production build. The current suite contains 87 tests covering
 movement, interactions, solvability, generation, animal rescues, progress
 migration, rewards, statistics, achievements, protected navigation, and audio
-safeguards. The final local run passed all 79 tests, strict TypeScript/Vite,
+safeguards. The final local run passed all 87 tests, strict TypeScript/Vite,
 locked Cargo compilation, dependency audit, production-browser smoke tests, and
 Tauri packaging. The portable executable also remained responsive in a smoke
 launch. Clean-machine installer, signing, and full manual play-through checks
@@ -151,6 +159,7 @@ so Windows SmartScreen may show a warning. A public release should be code-signe
 ## Project documentation
 
 - [Architecture and extension points](docs/ARCHITECTURE.md)
+- [Soundtrack catalogue and playback policy](docs/MUSIC.md)
 - [Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md)
 - [Privacy and saved-data notes](docs/PRIVACY.md)
 - [AI asset provenance and prompts](docs/AI_ASSET_PROMPTS.md)

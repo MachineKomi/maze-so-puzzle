@@ -4,8 +4,9 @@ All artwork in `public/assets/` was generated for this project with the built-in
 OpenAI image-generation tool. Tile and interactive assets were prepared as
 512 × 512 PNGs; the wide title illustration has a 1672 × 941 PNG master and an
 optimized WebP runtime derivative. Interactive assets were requested on a flat
-`#ff00ff` chroma-key background. The built-in generator returned clean RGBA
-cutouts directly; alpha extrema and transparent corners were validated before
+`#ff00ff` chroma-key background. Most early sprites arrived as clean RGBA
+cutouts. The sword-holding Ame variant needed the documented connected-edge
+chroma-removal pass; alpha extrema and transparent corners were validated before
 integration. Texture tiles, the portrait, and the title illustration are opaque.
 
 ## Shared character and item direction
@@ -88,11 +89,38 @@ Constraints: preserve Ame's blonde bob, teal tunic, lavender cape and backpack; 
 Avoid: photorealism, dark horror mood, clutter on the left, hard-edged pixel art, complex tiny details.
 ```
 
+## Version 4 sword-holding Ame variant
+
+This variant was created with the built-in OpenAI image-generation tool as a
+precise edit, using `public/assets/ame.png` and `public/assets/sword.png` as the
+identity and prop references.
+
+- First edit output: `exec-f1b181ca-09d3-4f4c-a424-b3b6d07c9cf6.png`
+- Final chroma output: `exec-6cda387d-cd9d-4ae9-bce1-b887880edd16.png`
+- Archived 1254 x 1254 generated master:
+  `docs/source-assets/ame-sword-master.png`
+- Programmatically cut-out 512 x 512 runtime sprite:
+  `public/assets/ame-sword.png`
+- Runtime URL: `/assets/ame-sword.png`
+- Built-in mode: precise image edit
+
+Exact final edit prompt:
+
+```text
+Use case: stylized-concept. Edit the supplied Ame gameplay sprite into a production game-sprite variant. Keep exactly the same cute blonde adventurer, face, chibi proportions, mint tunic, lilac capelet, lavender backpack, coral boots, full-body three-quarter pose, linework, palette, lighting, padding, and chunky anime storybook JRPG rendering. Put the supplied friendly toy-like silver sword with lavender grip and golden star pommel clearly in Ame's hand, held upright beside her body, without covering her face. Exactly one character and one sword. Replace the entire background with perfectly flat uniform solid #ff00ff chroma magenta suitable for programmatic removal: no transparency checkerboard, gradient, texture, shadow, ground, scenery, glow, border, text, number, watermark, or extra object. Do not use #ff00ff on the subject. Keep the silhouette crisp and readable in one square maze tile; cheerful, gentle, and suitable for a five-year-old.
+```
+
+The generated background contained slight near-magenta variation, so the active
+sprite was produced by removing chroma pixels connected to the canvas edges,
+cleaning the remaining fringe without erasing enclosed character colours, and
+resizing to 512 x 512. The master remains unchanged for future edits.
+
 ## Source-to-production mapping
 
 | Production asset | Built-in generated source |
 |---|---|
 | `ame.png` | `exec-4a073da0-4d41-4349-9b08-1e943b5a959a.png` |
+| `ame-sword.png` | `exec-6cda387d-cd9d-4ae9-bce1-b887880edd16.png` |
 | `goblin.png` | `exec-04a30af7-a15a-4691-a3d0-66bda29f9347.png` |
 | `ame-portrait.png` | `exec-4e0a7b4b-6cd5-458c-8011-3e689049c80f.png` |
 | `sword.png` | `exec-1c70b1b5-3955-44eb-97d1-aa37af41cd59.png` |

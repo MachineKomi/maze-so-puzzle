@@ -17,8 +17,12 @@ state.
    state space to prove both an ordinary solution and an all-animal solution.
 6. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
    in browser `localStorage`.
-7. `src/sound.ts` synthesizes short sound cues with the Web Audio API. No audio
-   files or network requests are required.
+7. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
+   Audio API; those effects require no recorded audio files.
+8. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
+   Playback begins only from a user gesture, follows the shared mute control,
+   and degrades harmlessly when media is unavailable. Track roles and reserved
+   music are documented in `docs/MUSIC.md`.
 
 ## Important boundaries
 
@@ -37,10 +41,10 @@ state.
 
 The Vitest suite exercises movement, combat, items, hazards, authored and
 generated solvability, optional rescues, persistence migrations, achievements,
-audio safeguards, and protected navigation. Every authored maze and sampled
-generated maze is run through the stateful solver. `npm run check` is the normal
-browser release gate; locked Cargo compilation and a Tauri bundle build are the
-additional Windows gates.
+synthesized-sound and background-music safeguards, and protected navigation.
+Every authored maze and sampled generated maze is run through the stateful
+solver. `npm run check` is the normal browser release gate; locked Cargo
+compilation and a Tauri bundle build are the additional Windows gates.
 
 ## Extension points
 
@@ -53,3 +57,6 @@ additional Windows gates.
   ordinary and perfect-rescue validation.
 - Add durable statistics by versioning and defensively migrating the progress
   schema rather than changing saved data in place.
+- Add background contexts through `MUSIC_TRACKS` and the existing gesture-safe
+  controller. Keep short event stings separate from looping music, and preserve
+  the reserved arena and friendship-cue assets until their mechanics are added.

@@ -1,4 +1,5 @@
 import {
+  memo,
   useCallback,
   useEffect,
   useId,
@@ -48,6 +49,13 @@ import {
   type StickerId,
 } from "./progress";
 import { playSound, type SoundName } from "./sound";
+import {
+  MUSIC_TRACKS,
+  configureMusic,
+  disposeMusic,
+  setMusicMuted,
+  startMusicFromUserGesture,
+} from "./music";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
@@ -68,6 +76,11 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   fox: "Fox",
   kitten: "Kitten",
 };
+
+const MOVE_CADENCE_MS = 82;
+const BUMP_CADENCE_MS = 55;
+const HELD_KEY_DELAY_MS = 140;
+const HELD_KEY_REPEAT_MS = 82;
 
 interface Feedback {
   readonly icon: string;
@@ -251,13 +264,60 @@ function wallCornerClasses(level: LevelDefinition, x: number, y: number): string
   const down = isWall(level, x, y + 1);
   const left = isWall(level, x - 1, y);
   const right = isWall(level, x + 1, y);
+  const upLeft = isWall(level, x - 1, y - 1);
+  const upRight = isWall(level, x + 1, y - 1);
+  const downLeft = isWall(level, x - 1, y + 1);
+  const downRight = isWall(level, x + 1, y + 1);
   return [
     !up && !left ? "wall-round-tl" : "",
     !up && !right ? "wall-round-tr" : "",
     !down && !left ? "wall-round-bl" : "",
     !down && !right ? "wall-round-br" : "",
+    up && left && !upLeft ? "wall-inner-tl" : "",
+    up && right && !upRight ? "wall-inner-tr" : "",
+    down && left && !downLeft ? "wall-inner-bl" : "",
+    down && right && !downRight ? "wall-inner-br" : "",
   ].filter(Boolean).join(" ");
 }
+
+function innerWallCaps(level: LevelDefinition, x: number, y: number): readonly string[] {
+  if (isWall(level, x, y)) return [];
+  const up = isWall(level, x, y - 1);
+  const down = isWall(level, x, y + 1);
+  const left = isWall(level, x - 1, y);
+  const right = isWall(level, x + 1, y);
+  return [
+    up && left && isWall(level, x - 1, y - 1) ? "tl" : "",
+    up && right && isWall(level, x + 1, y - 1) ? "tr" : "",
+    down && left && isWall(level, x - 1, y + 1) ? "bl" : "",
+    down && right && isWall(level, x + 1, y + 1) ? "br" : "",
+  ].filter(Boolean);
+}
+
+const MazeTerrain = memo(function MazeTerrain({ level }: { readonly level: LevelDefinition }) {
+  return level.terrain.flatMap((row, y) => row.map((terrain, x) => {
+    const point = { x, y };
+    const isExit = pointsEqual(level.exit, point);
+    const corners = wallCornerClasses(level, x, y);
+    const caps = innerWallCaps(level, x, y);
+    return (
+      <div
+        key={keyFor(point)}
+        className={`maze-tile terrain-${terrain}${corners ? ` ${corners}` : ""}${isExit ? " exit-tile" : ""}`}
+        style={{
+          "--texture-x-2": `${(x % 2) * 100}%`,
+          "--texture-y-2": `${(y % 2) * 100}%`,
+          "--texture-x-3": `${(x % 3) * 50}%`,
+          "--texture-y-3": `${(y % 3) * 50}%`,
+        } as CSSProperties}
+        aria-hidden="true"
+      >
+        {caps.map((corner) => <span key={corner} className={`inner-wall-cap cap-${corner}`} />)}
+        {isExit && <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />}
+      </div>
+    );
+  }));
+});
 
 function stickerArt(id: StickerId): string {
   switch (id) {
@@ -276,10 +336,16 @@ function surpriseSettings(progress: PlayerProgress): { size: number; difficulty:
     .filter((levelId) => levelId.startsWith("surprise-"))
     .length;
   const chapter = Math.max(1, progress.unlockedLevelCount) + (solvedSurprises >= 2 ? 1 : 0);
-  const sizes = [13, 15, 17, 19, 21, 23] as const;
-  const size = sizes[Math.min(sizes.length - 1, chapter - 1)] ?? 13;
+  const sizes = [9, 11, 13, 15, 17] as const;
+  const size = sizes[Math.min(sizes.length - 1, chapter - 1)] ?? 9;
   const difficulty: MazeDifficulty = chapter >= 5 ? "adventure" : chapter >= 3 ? "growing" : "gentle";
   return { size, difficulty };
+}
+
+function musicTrackForLevel(level: LevelDefinition): string {
+  if (level.source === "generated") return MUSIC_TRACKS.surprise;
+  const index = CURATED_LEVELS.findIndex((candidate) => candidate.id === level.id);
+  return index >= 4 ? MUSIC_TRACKS.laterStory : MUSIC_TRACKS.earlyStory;
 }
 
 function App() {
@@ -307,6 +373,15 @@ function App() {
   const boardRef = useRef<HTMLDivElement>(null);
   const inputLocked = useRef(false);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
+  const queuedDirection = useRef<Direction | null>(null);
+  const attemptMoveRef = useRef<(direction: Direction) => void>(() => undefined);
+  const heldKeys = useRef(new Map<string, Direction>());
+  const heldKeyOrder = useRef<string[]>([]);
+  const heldKeyTimer = useRef<number | undefined>(undefined);
+  const dpadHoldDirection = useRef<Direction | null>(null);
+  const dpadHoldPointerId = useRef<number | null>(null);
+  const dpadHoldTimer = useRef<number | undefined>(undefined);
+  const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
   const rewardSoundTimer = useRef<number | undefined>(undefined);
   const modalReturnFocus = useRef<HTMLElement | null>(null);
@@ -340,6 +415,27 @@ function App() {
   const runInProgress = hasActiveRun && game.status === "playing";
   const modalOpen = pendingAdventure !== null
     || (screen === "game" && (helpOpen || game.status !== "playing"));
+  const hasImportantAnnouncement = lastEvents.some((event) => event.type !== "moved");
+
+  const clearDpadHold = useCallback(() => {
+    dpadHoldDirection.current = null;
+    dpadHoldPointerId.current = null;
+    if (dpadHoldTimer.current !== undefined) {
+      window.clearTimeout(dpadHoldTimer.current);
+      dpadHoldTimer.current = undefined;
+    }
+  }, []);
+
+  const clearHeldInput = useCallback(() => {
+    heldKeys.current.clear();
+    heldKeyOrder.current = [];
+    queuedDirection.current = null;
+    if (heldKeyTimer.current !== undefined) {
+      window.clearTimeout(heldKeyTimer.current);
+      heldKeyTimer.current = undefined;
+    }
+    clearDpadHold();
+  }, [clearDpadHold]);
 
   useEffect(() => {
     mutedRef.current = muted;
@@ -360,6 +456,7 @@ function App() {
       inputUnlockTimer.current = undefined;
     }
     inputLocked.current = false;
+    clearHeldInput();
     if (rewardSoundTimer.current !== undefined) {
       window.clearTimeout(rewardSoundTimer.current);
       rewardSoundTimer.current = undefined;
@@ -374,16 +471,24 @@ function App() {
     setPendingAdventure(null);
     setFeedback({ icon: "✨", text: nextLevel.objective, tone: "plain", sound: "step" });
     setRestartArmed(false);
-  }, []);
+  }, [clearHeldInput]);
 
   const attemptMove = useCallback((direction: Direction) => {
-    if (
+    const unavailable = (
       screen !== "game"
       || pendingAdventure !== null
-      || inputLocked.current
       || helpOpen
       || game.status !== "playing"
-    ) return;
+    );
+    if (unavailable) {
+      queuedDirection.current = null;
+      return;
+    }
+    if (inputLocked.current) {
+      queuedDirection.current = direction;
+      return;
+    }
+    queuedDirection.current = null;
     inputLocked.current = true;
     const result = movePlayer(level, game, direction);
     if (result.state.status !== "playing") {
@@ -397,7 +502,10 @@ function App() {
     setLastEvents(result.events);
     setFeedback(nextFeedback);
     setPreviewDirection(direction);
-    playSound(nextFeedback.sound, muted);
+    if (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200) {
+      playSound(nextFeedback.sound, muted);
+      if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
+    }
     if (result.moved) setMovePulse((value) => value + 1);
     else setBumpPulse((value) => value + 1);
 
@@ -450,10 +558,36 @@ function App() {
     inputUnlockTimer.current = window.setTimeout(() => {
       inputLocked.current = false;
       inputUnlockTimer.current = undefined;
-    }, result.moved ? 145 : 110);
+      const nextDirection = queuedDirection.current;
+      queuedDirection.current = null;
+      if (nextDirection) attemptMoveRef.current(nextDirection);
+    }, result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS);
   }, [campaignIndex, game, helpOpen, level, muted, pendingAdventure, progress, screen]);
 
+  attemptMoveRef.current = attemptMove;
+
   useEffect(() => {
+    const directionForKey = (key: string): Direction | undefined => ({
+      ArrowUp: "up", w: "up", W: "up",
+      ArrowDown: "down", s: "down", S: "down",
+      ArrowLeft: "left", a: "left", A: "left",
+      ArrowRight: "right", d: "right", D: "right",
+    })[key] as Direction | undefined;
+
+    const scheduleHeldMove = (delay: number) => {
+      if (heldKeyTimer.current !== undefined) window.clearTimeout(heldKeyTimer.current);
+      heldKeyTimer.current = window.setTimeout(() => {
+        const keyId = heldKeyOrder.current.at(-1);
+        const direction = keyId ? heldKeys.current.get(keyId) : undefined;
+        if (!direction) {
+          heldKeyTimer.current = undefined;
+          return;
+        }
+        attemptMoveRef.current(direction);
+        scheduleHeldMove(HELD_KEY_REPEAT_MS);
+      }, delay);
+    };
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (pendingAdventure !== null) return;
       if (
@@ -467,24 +601,59 @@ function App() {
         setBigMaze(false);
         return;
       }
-      const direction: Direction | undefined = {
-        ArrowUp: "up", w: "up", W: "up",
-        ArrowDown: "down", s: "down", S: "down",
-        ArrowLeft: "left", a: "left", A: "left",
-        ArrowRight: "right", d: "right", D: "right",
-      }[event.key] as Direction | undefined;
+      const direction = directionForKey(event.key);
       if (!direction || screen !== "game" || helpOpen || game.status !== "playing") return;
+      if (event.ctrlKey || event.metaKey || event.altKey) return;
       event.preventDefault();
-      attemptMove(direction);
+      if (event.repeat) return;
+      const keyId = event.code || event.key;
+      if (heldKeys.current.has(keyId)) return;
+      heldKeys.current.set(keyId, direction);
+      heldKeyOrder.current = [...heldKeyOrder.current.filter((item) => item !== keyId), keyId];
+      attemptMoveRef.current(direction);
+      scheduleHeldMove(HELD_KEY_DELAY_MS);
+    };
+
+    const onKeyUp = (event: KeyboardEvent) => {
+      const direction = directionForKey(event.key);
+      if (!direction) return;
+      const keyId = event.code || event.key;
+      heldKeys.current.delete(keyId);
+      heldKeyOrder.current = heldKeyOrder.current.filter((item) => item !== keyId);
+      if (heldKeyOrder.current.length > 0) scheduleHeldMove(HELD_KEY_REPEAT_MS);
+      else if (heldKeyTimer.current !== undefined) {
+        window.clearTimeout(heldKeyTimer.current);
+        heldKeyTimer.current = undefined;
+      }
+    };
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState !== "visible") clearHeldInput();
     };
     window.addEventListener("keydown", onKeyDown, { passive: false });
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [attemptMove, bigMaze, game.status, helpOpen, pendingAdventure, screen]);
+    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("blur", clearHeldInput);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("blur", clearHeldInput);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
+  }, [bigMaze, clearHeldInput, game.status, helpOpen, pendingAdventure, screen]);
+
+  useEffect(() => {
+    if (screen !== "game" || helpOpen || pendingAdventure !== null || game.status !== "playing") {
+      clearHeldInput();
+    }
+  }, [clearHeldInput, game.status, helpOpen, pendingAdventure, screen]);
 
   useEffect(() => () => {
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
+    if (heldKeyTimer.current !== undefined) window.clearTimeout(heldKeyTimer.current);
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     if (rewardSoundTimer.current !== undefined) window.clearTimeout(rewardSoundTimer.current);
+    disposeMusic();
   }, []);
 
   const directionFromPointer = useCallback((clientX: number, clientY: number): Direction | null => {
@@ -505,10 +674,41 @@ function App() {
     if (event.pointerType !== "touch") setPreviewDirection(directionFromPointer(event.clientX, event.clientY));
   };
 
-  const onBoardPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === "mouse" && event.button !== 0) return;
+  const onBoardPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    event.preventDefault();
     const direction = directionFromPointer(event.clientX, event.clientY);
     if (direction) attemptMove(direction);
+  };
+
+  const scheduleDpadRepeat = useCallback((delay: number) => {
+    if (dpadHoldTimer.current !== undefined) window.clearTimeout(dpadHoldTimer.current);
+    const repeat = () => {
+      const direction = dpadHoldDirection.current;
+      if (!direction) {
+        dpadHoldTimer.current = undefined;
+        return;
+      }
+      attemptMoveRef.current(direction);
+      dpadHoldTimer.current = window.setTimeout(repeat, HELD_KEY_REPEAT_MS);
+    };
+    dpadHoldTimer.current = window.setTimeout(repeat, delay);
+  }, []);
+
+  const startDpadHold = (event: ReactPointerEvent<HTMLButtonElement>, direction: Direction) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    event.preventDefault();
+    clearDpadHold();
+    dpadHoldDirection.current = direction;
+    dpadHoldPointerId.current = event.pointerId;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    attemptMoveRef.current(direction);
+    scheduleDpadRepeat(HELD_KEY_DELAY_MS);
+  };
+
+  const stopDpadHold = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (dpadHoldPointerId.current !== event.pointerId) return;
+    clearDpadHold();
   };
 
   const armRestart = () => {
@@ -535,6 +735,9 @@ function App() {
 
   const enterLevel = (nextLevel: LevelDefinition, sound: "select" | "title" = "select") => {
     preloadGameArt();
+    configureMusic({ trackUrl: musicTrackForLevel(nextLevel) });
+    setMusicMuted(muted);
+    if (!muted) void startMusicFromUserGesture();
     loadLevel(nextLevel);
     setHasActiveRun(true);
     setScreen("game");
@@ -542,6 +745,9 @@ function App() {
   };
 
   const resumeRun = () => {
+    configureMusic({ trackUrl: musicTrackForLevel(level) });
+    setMusicMuted(muted);
+    if (!muted) void startMusicFromUserGesture();
     setPendingAdventure(null);
     setScreen("game");
     playSound("select", muted);
@@ -596,6 +802,9 @@ function App() {
   };
 
   const showTitle = () => {
+    configureMusic({ trackUrl: MUSIC_TRACKS.title });
+    setMusicMuted(muted);
+    if (!muted) void startMusicFromUserGesture();
     setHelpOpen(false);
     setBigMaze(false);
     setScreen("title");
@@ -604,6 +813,9 @@ function App() {
 
   const showAchievements = () => {
     preloadGameArt();
+    configureMusic({ trackUrl: MUSIC_TRACKS.title });
+    setMusicMuted(muted);
+    if (!muted) void startMusicFromUserGesture();
     setHelpOpen(false);
     setBigMaze(false);
     setScreen("achievements");
@@ -613,7 +825,13 @@ function App() {
   const toggleSound = () => {
     const nextMuted = !muted;
     setMuted(nextMuted);
-    if (!nextMuted) playSound("title", false);
+    setMusicMuted(nextMuted);
+    if (!nextMuted) {
+      const track = screen === "game" ? musicTrackForLevel(level) : MUSIC_TRACKS.title;
+      configureMusic({ trackUrl: track });
+      void startMusicFromUserGesture();
+      playSound("title", false);
+    }
   };
 
   const nextLevel = () => {
@@ -714,28 +932,25 @@ function App() {
               tabIndex={0}
               onPointerMove={onBoardPointerMove}
               onPointerLeave={() => setPreviewDirection(null)}
-              onPointerUp={onBoardPointerUp}
+              onPointerDown={onBoardPointerDown}
               onContextMenu={(event) => event.preventDefault()}
             >
-              {level.terrain.flatMap((row, y) => row.map((terrain, x) => {
-                const point = { x, y };
-                const isPreview = previewTarget && pointsEqual(previewTarget, point);
-                const isExit = pointsEqual(level.exit, point);
-                const corners = wallCornerClasses(level, x, y);
-                return (
-                  <div
-                    key={keyFor(point)}
-                    className={`maze-tile terrain-${terrain}${corners ? ` ${corners}` : ""}${isPreview ? ` move-preview preview-${previewState}` : ""}${isExit ? " exit-tile" : ""}`}
-                    style={{ "--tile-x": x, "--tile-y": y } as CSSProperties}
-                    aria-hidden="true"
-                  >
-                    {isExit && <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />}
-                    {isPreview && previewDirection && (
-                      <span className="preview-arrow">{previewState === "danger" ? "!" : previewState === "stop" ? "×" : DIRECTION_ICONS[previewDirection]}</span>
-                    )}
-                  </div>
-                );
-              }))}
+              <MazeTerrain level={level} />
+
+              {previewTarget && previewDirection && (
+                <div
+                  className={`move-preview move-preview-layer preview-${previewState}`}
+                  style={{
+                    left: `${(previewTarget.x / level.width) * 100}%`,
+                    top: `${(previewTarget.y / level.height) * 100}%`,
+                    width: `${100 / level.width}%`,
+                    height: `${100 / level.height}%`,
+                  }}
+                  aria-hidden="true"
+                >
+                  <span className="preview-arrow">{previewState === "danger" ? "!" : previewState === "stop" ? "×" : DIRECTION_ICONS[previewDirection]}</span>
+                </div>
+              )}
 
               {activeObjects.map((object) => (
                 <div
@@ -763,8 +978,7 @@ function App() {
               ))}
 
               <div
-                key={`${game.position.x}-${game.position.y}-${movePulse}`}
-                className="player-layer"
+                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}`}
                 style={{
                   left: `${(game.position.x / level.width) * 100}%`,
                   top: `${(game.position.y / level.height) * 100}%`,
@@ -773,14 +987,14 @@ function App() {
                 }}
                 aria-hidden="true"
               >
-                <img className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                <img className="player-sprite" src={game.hasSword ? ASSETS.ameSword : ASSETS.ame} alt="" draggable={false} />
                 <span className="power-badge player-power">{game.power}</span>
               </div>
             </div>
 
-            <p className="sr-only" id="maze-status" aria-live="polite" aria-atomic="true">{mazeStatus}</p>
+            <p className="sr-only" id="maze-status" aria-live={hasImportantAnnouncement ? "polite" : "off"} aria-atomic="true">{mazeStatus}</p>
 
-            <div className={`feedback-bar tone-${feedback.tone}`} aria-live="polite">
+            <div className={`feedback-bar tone-${feedback.tone}`} aria-live={hasImportantAnnouncement ? "polite" : "off"}>
               <span className="feedback-icon" aria-hidden="true">{feedback.icon}</span>
               <span>{feedback.text}</span>
             </div>
@@ -831,7 +1045,6 @@ function App() {
                         <img src={animalArt(animal.species)} alt="" />
                         {!rescued && <img className="cage-mini" src={ASSETS.animalCage} alt="" />}
                       </div>
-                      <span className="rescue-name">{ANIMAL_LABELS[animal.species]}</span>
                       {rescued && <b className="rescue-check" aria-hidden="true">✓</b>}
                     </div>
                   );
@@ -839,9 +1052,9 @@ function App() {
               </div>
             </section>
 
-            <section className="bag-card">
+            <section className="bag-card" aria-label="Adventure bag">
               <div className="section-heading">
-                <div><span className="tiny-label">Adventure bag</span><strong>Things Ame found</strong></div>
+                <div><strong>Adventure bag</strong></div>
                 <span className="bag-count">{game.collectedObjectIds.length}</span>
               </div>
               <div className="inventory-grid">
@@ -869,11 +1082,11 @@ function App() {
                 <strong>Arrow keys · WASD · click</strong>
               </div>
               <div className="dpad" aria-label="Movement buttons">
-                <button className="dpad-up" onClick={() => attemptMove("up")} aria-label="Move up">▲</button>
-                <button className="dpad-left" onClick={() => attemptMove("left")} aria-label="Move left">◀</button>
+                <button className="dpad-up" onPointerDown={(event) => startDpadHold(event, "up")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("up"); }} aria-label="Move up">▲</button>
+                <button className="dpad-left" onPointerDown={(event) => startDpadHold(event, "left")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("left"); }} aria-label="Move left">◀</button>
                 <span className="dpad-center" aria-hidden="true">✦</span>
-                <button className="dpad-right" onClick={() => attemptMove("right")} aria-label="Move right">▶</button>
-                <button className="dpad-down" onClick={() => attemptMove("down")} aria-label="Move down">▼</button>
+                <button className="dpad-right" onPointerDown={(event) => startDpadHold(event, "right")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("right"); }} aria-label="Move right">▶</button>
+                <button className="dpad-down" onPointerDown={(event) => startDpadHold(event, "down")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("down"); }} aria-label="Move down">▼</button>
               </div>
             </section>
 
@@ -1100,7 +1313,7 @@ function TitleScreen({
         </div>
       </div>
 
-      <span className="title-version">Playable build 0.3.0</span>
+      <span className="title-version">Playable build 0.4.0</span>
     </section>
   );
 }
@@ -1277,9 +1490,12 @@ interface InventorySlotProps {
 
 function InventorySlot({ label, image, found, color }: InventorySlotProps) {
   return (
-    <div className={`inventory-slot ${found ? "found" : "missing"}${color ? ` color-${color}` : ""}`}>
+    <div
+      className={`inventory-slot ${found ? "found" : "missing"}${color ? ` color-${color}` : ""}`}
+      aria-label={`${label}: ${found ? "found" : "not found"}`}
+      title={`${label}: ${found ? "found" : "not found"}`}
+    >
       <div className="slot-image"><img src={image} alt="" /></div>
-      <span>{found ? label : "Find me"}</span>
       {found && <b aria-label="found">✓</b>}
     </div>
   );

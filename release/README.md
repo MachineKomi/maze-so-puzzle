@@ -3,22 +3,26 @@
 This folder documents convenience copies of Windows x64 artifacts staged for
 local play testing. Executables are deliberately excluded from source history;
 publish the current pair as GitHub Release assets when a downloadable desktop
-build is wanted. Version 0.3.0 is the current playable test build. Its Tauri
+build is wanted. Version 0.4.0 is the current playable test build. Its Tauri
 build, staging, portable smoke launch, source-to-stage comparison, and hashes
-completed successfully on 2026-08-31.
+completed successfully on 2026-09-01.
 
-## Current 0.3.0 test files
+## Current 0.4.0 test files
 
-- `Maze-so-Puzzle-0.3.0-portable.exe` - standalone application executable,
-  16,767,488 bytes. It remained running and responsive with the correct title in
+- `Maze-so-Puzzle-0.4.0-portable.exe` - standalone application executable,
+  33,282,048 bytes. It remained running and responsive with the correct title in
   a five-second local smoke launch.
-- `Maze-so-Puzzle-0.3.0-setup.exe` - NSIS installer, 10,083,973 bytes. It was
+- `Maze-so-Puzzle-0.4.0-setup.exe` - NSIS installer, 26,664,842 bytes. It was
   built and staged but has not been clean-machine installed during this pass.
 
-`SHA256SUMS.txt` contains their staged hashes plus retained 0.2.0 archive hashes.
+`SHA256SUMS.txt` contains their staged hashes plus retained 0.3.0 and 0.2.0
+archive hashes. The larger 0.4.0 files include the locally bundled soundtrack.
 The staged files match their final Tauri build sources byte-for-byte.
 
 ## Older verified archive files
+
+- `Maze-so-Puzzle-0.3.0-portable.exe`
+- `Maze-so-Puzzle-0.3.0-setup.exe`
 
 - `Maze-so-Puzzle-0.2.0-portable.exe` - standalone application executable; no
   installer is required. "Portable" describes the executable packaging, not the
@@ -46,14 +50,14 @@ The staged files match their final Tauri build sources byte-for-byte.
 Verify the current files in PowerShell with:
 
 ```powershell
-Get-FileHash .\Maze-so-Puzzle-0.3.0-portable.exe -Algorithm SHA256
-Get-FileHash .\Maze-so-Puzzle-0.3.0-setup.exe -Algorithm SHA256
+Get-FileHash .\Maze-so-Puzzle-0.4.0-portable.exe -Algorithm SHA256
+Get-FileHash .\Maze-so-Puzzle-0.4.0-setup.exe -Algorithm SHA256
 ```
 
 Expected hashes are:
 
-- portable: `517F8FB562C5F6CD12881BA3C075B98396406BA3585FFE0DFB1CC69755E93F1E`
-- installer: `F118220823AACF47196366B71354C9DD6812C5CB0A5DB7608A20BA4A92360EDF`
+- portable: `1F0A523DC428D7BB0F4212EC303A8DDEC6AF49031D8B18901515BD797C0A1488`
+- installer: `AF7786076D91D7B255FDE93B4C42E90A6054D4E59AF877E81DBD0661B2D7F003`
 
 The package is unsigned unless the owner completes code signing and repeats the
 artifact tests.

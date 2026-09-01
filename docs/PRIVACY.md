@@ -1,6 +1,6 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.3.0 is a client-only game. It has no account system, analytics,
+Maze so Puzzle 0.4.0 is a client-only game. It has no account system, analytics,
 advertising, multiplayer, chat, remote database, or game-owned server. The
 browser build does not intentionally send player names, gameplay, or saved
 progress anywhere.
@@ -19,9 +19,10 @@ sync or recovery service in this build.
 
 ## Network behaviour
 
-All game code, images, and sound logic ship with the static browser bundle.
-Sound effects are synthesized locally with the Web Audio API. During normal play
-the game itself makes no third-party API calls.
+All game code, images, synthesized sound logic, and MP3 music tracks ship with
+the static browser build. Sound effects are synthesized locally with the Web
+Audio API, and background music is read from same-origin `/assets/ost/` files.
+During normal play the game itself makes no third-party API or streaming calls.
 
 The hosting platform and browser may still create ordinary infrastructure logs
 or make browser-controlled requests that are outside the game code. Review the

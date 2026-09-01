@@ -2062,6 +2062,28 @@ button:focus-visible,
   100% { opacity: 0; transform: translateY(-85%) scale(1.2) rotate(25deg); }
 }
 
+@keyframes step-spark-a {
+  0% { opacity: 0.74; transform: translateY(0) scale(0.52); }
+  100% { opacity: 0; transform: translateY(-72%) scale(1.08) rotate(20deg); }
+}
+
+@keyframes step-spark-b {
+  0% { opacity: 0.74; transform: translateY(0) scale(0.52); }
+  100% { opacity: 0; transform: translateY(-72%) scale(1.08) rotate(20deg); }
+}
+
+@keyframes ame-hop-a {
+  0% { transform: translateY(4%) scale(0.97); }
+  58% { transform: translateY(-2.5%) scale(1.015); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes ame-hop-b {
+  0% { transform: translateY(4%) scale(0.97); }
+  58% { transform: translateY(-2.5%) scale(1.015); }
+  100% { transform: translateY(0) scale(1); }
+}
+
 @keyframes goblin-bob {
   0%, 100% { transform: translateX(-50%) translateY(0) rotate(-1deg); }
   50% { transform: translateX(-50%) translateY(-3%) rotate(1deg); }
@@ -2231,7 +2253,8 @@ body {
   border-radius: clamp(16px, 1.7vw, 23px);
   background-color: #f8d991;
   background-image: url("/assets/floor-v2.png");
-  background-size: 58% 58%;
+  background-repeat: repeat;
+  background-size: 18% 18%;
   box-shadow:
     0 5px 0 #443f60,
     0 11px 21px rgba(57, 45, 71, 0.24),
@@ -2241,12 +2264,6 @@ body {
 .maze-tile {
   isolation: isolate;
   background-repeat: no-repeat;
-  background-size:
-    calc(var(--grid-size, 13) * 100%)
-    calc(var(--grid-size, 13) * 100%);
-  background-position:
-    calc(var(--tile-x, 0) * 100% / (var(--grid-size, 13) - 1))
-    calc(var(--tile-y, 0) * 100% / (var(--grid-size, 13) - 1));
 }
 
 .maze-tile::after {
@@ -2260,6 +2277,8 @@ body {
   background-image:
     linear-gradient(rgba(255, 236, 178, 0.12), rgba(238, 184, 101, 0.08)),
     url("/assets/floor-v2.png");
+  background-position: center, var(--texture-x-3) var(--texture-y-3);
+  background-size: 100% 100%, 300% 300%;
 }
 
 .terrain-wall {
@@ -2269,6 +2288,8 @@ body {
   background-image:
     linear-gradient(rgba(190, 194, 235, 0.13), rgba(63, 57, 96, 0.1)),
     url("/assets/wall-v2.png");
+  background-position: center, var(--texture-x-2) var(--texture-y-2);
+  background-size: 100% 100%, 200% 200%;
   box-shadow:
     inset 0 1px 1px rgba(235, 236, 255, 0.28),
     inset 0 -2px 3px rgba(51, 45, 78, 0.28),
@@ -2286,10 +2307,50 @@ body {
   pointer-events: none;
 }
 
-.wall-round-tl { border-top-left-radius: 43%; }
-.wall-round-tr { border-top-right-radius: 43%; }
-.wall-round-bl { border-bottom-left-radius: 43%; }
-.wall-round-br { border-bottom-right-radius: 43%; }
+.wall-round-tl { border-top-left-radius: 18%; }
+.wall-round-tr { border-top-right-radius: 18%; }
+.wall-round-bl { border-bottom-left-radius: 18%; }
+.wall-round-br { border-bottom-right-radius: 18%; }
+.wall-inner-tl { border-top-left-radius: 12%; }
+.wall-inner-tr { border-top-right-radius: 12%; }
+.wall-inner-bl { border-bottom-left-radius: 12%; }
+.wall-inner-br { border-bottom-right-radius: 12%; }
+
+.inner-wall-cap {
+  position: absolute;
+  z-index: 3;
+  width: 14%;
+  height: 14%;
+  background:
+    linear-gradient(145deg, rgba(224, 224, 249, 0.22), rgba(64, 58, 95, 0.2)),
+    #666287;
+  box-shadow: inset 0 1px 1px rgba(237, 237, 255, 0.25);
+  pointer-events: none;
+}
+
+.inner-wall-cap.cap-tl {
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 100%;
+}
+
+.inner-wall-cap.cap-tr {
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: 100%;
+}
+
+.inner-wall-cap.cap-bl {
+  bottom: 0;
+  left: 0;
+  border-top-right-radius: 100%;
+}
+
+.inner-wall-cap.cap-br {
+  right: 0;
+  bottom: 0;
+  border-top-left-radius: 100%;
+}
 
 .terrain-water,
 .terrain-lava {
@@ -2300,21 +2361,16 @@ body {
 .terrain-lava::before {
   position: absolute;
   z-index: 1;
-  inset: -8%;
-  border-radius: 44% 56% 49% 51% / 55% 43% 57% 45%;
+  inset: -3%;
+  border-radius: 18%;
   background-repeat: no-repeat;
-  background-size:
-    calc(var(--grid-size, 13) * 100%)
-    calc(var(--grid-size, 13) * 100%);
-  background-position:
-    calc(var(--tile-x, 0) * 100% / (var(--grid-size, 13) - 1))
-    calc(var(--tile-y, 0) * 100% / (var(--grid-size, 13) - 1));
+  background-position: var(--texture-x-2) var(--texture-y-2);
+  background-size: 200% 200%;
   content: "";
   filter: saturate(1.06) drop-shadow(0 1px 2px rgba(62, 70, 93, 0.14));
   opacity: 0.92;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 51%, rgba(0, 0, 0, 0.96) 65%, transparent 89%);
-  mask-image: radial-gradient(ellipse at center, #000 51%, rgba(0, 0, 0, 0.96) 65%, transparent 89%);
+  box-shadow: 0 0 4px rgba(62, 70, 93, 0.14);
 }
 
 .terrain-water::before {
@@ -2330,14 +2386,20 @@ body {
 
 .terrain-water:nth-child(3n + 1)::before,
 .terrain-lava:nth-child(3n + 1)::before {
-  border-radius: 55% 45% 58% 42% / 43% 57% 45% 55%;
-  transform: rotate(1.5deg) scale(1.03);
+  border-radius: 21% 17% 20% 16%;
+  transform: rotate(0.35deg) scale(1.015);
 }
 
 .terrain-water:nth-child(3n + 2)::before,
 .terrain-lava:nth-child(3n + 2)::before {
-  border-radius: 42% 58% 45% 55% / 58% 43% 57% 42%;
-  transform: rotate(-1.5deg) scale(1.04);
+  border-radius: 16% 21% 17% 20%;
+  transform: rotate(-0.35deg) scale(1.015);
+}
+
+.move-preview-layer {
+  position: absolute;
+  z-index: 12;
+  pointer-events: none;
 }
 
 /* The movement hint temporarily takes over the texture pseudo-element. */
@@ -2373,6 +2435,33 @@ body {
 .player-layer,
 .object-layer {
   overflow: visible;
+}
+
+.player-layer {
+  animation: none;
+}
+
+.player-layer.move-a {
+  animation: ame-hop-a 76ms ease-out;
+}
+
+.player-layer.move-b {
+  animation: ame-hop-b 76ms ease-out;
+}
+
+.player-layer.move-a::before,
+.player-layer.move-a::after {
+  animation: step-spark-a 260ms ease-out;
+}
+
+.player-layer.move-b::before,
+.player-layer.move-b::after {
+  animation: step-spark-b 260ms ease-out;
+}
+
+.player-layer.move-a::after,
+.player-layer.move-b::after {
+  animation-delay: 28ms;
 }
 
 .player-sprite,
@@ -2574,7 +2663,7 @@ img.wallet-pouch {
 }
 
 .rescue-card {
-  min-height: clamp(69px, 7vw, 96px);
+  min-height: clamp(76px, 7.7vw, 106px);
   padding: clamp(5px, 0.55vw, 8px) clamp(7px, 0.75vw, 11px);
   border-radius: clamp(14px, 1.45vw, 20px);
 }
@@ -2618,9 +2707,9 @@ img.wallet-pouch {
   position: relative;
   display: grid;
   min-width: 0;
-  min-height: clamp(39px, 3.8vw, 53px);
-  padding: 2px 3px;
-  grid-template-columns: clamp(31px, 3vw, 42px) minmax(0, 1fr);
+  min-height: clamp(49px, 4.9vw, 68px);
+  padding: 2px;
+  grid-template-columns: 1fr;
   align-items: center;
   gap: 2px;
   overflow: hidden;
@@ -2641,7 +2730,7 @@ img.wallet-pouch {
 .rescue-icon {
   position: relative;
   display: grid;
-  width: 100%;
+  width: min(100%, clamp(44px, 4.5vw, 62px));
   aspect-ratio: 1;
   place-items: center;
 }
@@ -2649,8 +2738,8 @@ img.wallet-pouch {
 .rescue-icon > img:not(.cage-mini),
 .rescue-icon .animal-sprite {
   z-index: 2;
-  width: 82%;
-  height: 82%;
+  width: 94%;
+  height: 94%;
   object-fit: contain;
   filter: drop-shadow(0 1px 1px rgba(68, 47, 66, 0.35));
 }
@@ -2723,13 +2812,29 @@ img.wallet-pouch {
 }
 
 .bag-card {
-  min-height: clamp(72px, 7.2vw, 96px);
+  min-height: clamp(72px, 7.4vw, 100px);
+}
+
+.inventory-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .inventory-slot {
-  min-height: clamp(36px, 3.8vw, 52px);
-  grid-template-columns: clamp(25px, 2.65vw, 36px) 1fr;
+  min-height: 0;
+  aspect-ratio: 1;
+  padding: clamp(3px, 0.35vw, 5px);
+  grid-template-columns: 1fr;
+  place-items: center;
+  border-radius: clamp(11px, 1.1vw, 15px);
   background: rgba(241, 238, 248, 0.66);
+}
+
+.inventory-slot .slot-image {
+  width: 88%;
+}
+
+.inventory-slot > span {
+  display: none;
 }
 
 .inventory-slot.found {
@@ -3186,10 +3291,10 @@ img.wallet-pouch {
   .objective-card { min-height: 38px; padding-block: 4px; }
   .objective-icon { width: 29px; }
   .rescue-card { min-height: 63px; padding: 4px 6px; }
-  .rescue-friend { min-height: 35px; grid-template-columns: 28px 1fr; }
+  .rescue-friend { min-height: 42px; grid-template-columns: 1fr; }
   .bag-card { min-height: 64px; padding: 5px 7px; }
   .inventory-grid { margin-top: 3px; }
-  .inventory-slot { min-height: 33px; grid-template-columns: 23px 1fr; }
+  .inventory-slot { min-height: 0; grid-template-columns: 1fr; }
   .controls-card { min-height: 80px; padding: 4px 7px; grid-template-columns: 1fr 86px; }
   .dpad button,
   .dpad-center { min-height: 24px; }
@@ -3234,7 +3339,13 @@ img.wallet-pouch {
   .confetti-piece,
   .win-star-art,
   .modal-reward-art,
-  .collection-pop {
+  .collection-pop,
+  .player-layer.move-a,
+  .player-layer.move-b,
+  .player-layer.move-a::before,
+  .player-layer.move-a::after,
+  .player-layer.move-b::before,
+  .player-layer.move-b::after {
     animation: none !important;
   }
 }

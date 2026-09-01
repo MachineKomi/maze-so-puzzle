@@ -14,6 +14,7 @@ export type MazeDifficulty = "movement" | "gentle" | "growing" | "adventure";
 
 export interface GenerateMazeOptions {
   readonly seed: string | number;
+  /** Requested square dimension, normalized to a readable odd size from 9 to 17. */
   readonly size?: number;
   readonly difficulty?: MazeDifficulty;
 }
@@ -64,8 +65,10 @@ function mulberry32(seed: number): RandomSource {
 }
 
 function normalizeSize(requested: number | undefined): number {
-  const rounded = Math.round(requested ?? 13);
-  const clamped = Math.max(13, Math.min(23, rounded));
+  const rounded = Math.round(
+    requested === undefined || !Number.isFinite(requested) ? 13 : requested,
+  );
+  const clamped = Math.max(9, Math.min(17, rounded));
   return clamped % 2 === 0 ? clamped + 1 : clamped;
 }
 

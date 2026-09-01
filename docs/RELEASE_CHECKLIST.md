@@ -1,13 +1,15 @@
 # Release checklist
 
+Verification date: 2026-09-01
+
 Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.3.0: local source integration, production-browser smoke testing,
+Status for 0.4.0: local source integration, production-browser smoke testing,
 Tauri packaging, staging, hashing, and portable launch testing are complete.
 Unchecked items below still require the stated device, owner decision, or full
-manual play-through and are not implied by the 79-test suite.
+manual play-through and are not implied by the 87-test suite.
 
 ## 1. Prepare
 
@@ -16,6 +18,9 @@ manual play-through and are not implied by the 79-test suite.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
+- [x] Confirm the 0.4.0 bundle contains the tiled terrain treatment, rounded inner
+  wall joins, icon-led rescue/inventory UI, sword-held Ame sprite, and local music
+  files documented for this build.
 - [x] Update `CHANGELOG.md`, `README.md`, and `docs/AI_ASSET_PROMPTS.md` as needed.
 - [ ] Confirm every production image has known provenance and the game contains
   no unlicensed third-party material.
@@ -36,12 +41,19 @@ npm run check:desktop
 npm run desktop:build
 ```
 
-- [x] `npm run check` reports that every unit test passes and that TypeScript and
-  the Vite production build complete without errors; the 0.3.0 suite currently
-  contains 79 tests.
+- [x] `npm run check` reports that all 87 unit tests pass and that TypeScript and
+  the Vite production build complete without errors.
 - [x] Dependency audit output is reviewed: `npm audit` reported 0 vulnerabilities.
-- [x] `npm run check:desktop` completes the locked Rust compile without errors.
+- [x] `npm ls` reports a clean JavaScript dependency tree.
+- [x] `npm run check:desktop` completes `cargo check --locked` without errors.
 - [x] Tauri produces both the release executable and the NSIS installer.
+- [x] Automated level checks validate all eight 9 x 9 through 17 x 17 story
+  mazes, their 26-to-114-step solver routes, and separate ordinary and
+  all-three-rescues solutions.
+- [ ] Add focused controller automation for buffered turns, deterministic holds,
+  modifier safety, focus/visibility cleanup, D-pad press-and-hold, and pointer
+  cancellation. The current pass manually confirmed synchronous keyboard movement
+  and exactly one move per D-pad tap in the production browser build.
 - [x] Repeat the relevant checks if any file changes after this point.
 
 ## 3. Browser play test
@@ -70,18 +82,21 @@ npm run preview
 - [x] The Adventure Book scrolls internally without page overflow and accurately
   shows overall totals, bunny/fox/kitten counts, sticker/medal/badge ownership,
   locked story levels, cleared levels, best steps, and rescue pips.
-- [x] Arrow keys and WASD each move one legal square.
+- [x] Arrow keys and WASD respond immediately and each move one legal square.
 - [ ] Left click or primary tap moves one square toward the pointer; right and
   middle click do not move Ame.
-- [ ] On-screen arrows work with mouse and touch input.
+- [ ] On-screen arrows work with mouse and touch input, including press-and-hold
+  travel and release/cancel cleanup.
 - [ ] Help and completion dialogs trap focus, close as intended, restore focus,
   and remain usable with keyboard only.
 - [ ] Mute state and reduced-motion preference are respected.
 - [ ] Every pickup, blocked action, rescue, fight, loss, and victory has the
   intended sound or quiet fallback; also check title, menu, selection,
-  achievement, and stamp cues.
-- [ ] All eight story levels, including both 21 x 21 and both 23 x 23 levels, can
-  be completed; also complete several surprise mazes.
+  achievement, and stamp cues plus locally bundled background music across the
+  title, early story, later story, and surprise mazes.
+- [ ] All eight 9 x 9 through 17 x 17 story levels can be completed manually;
+  also complete several surprise mazes and compare observed routes with the
+  validated 26-to-114-step range.
 - [ ] All three animals are optional for the ordinary exit and jointly rescuable
   for the perfect reward.
 - [ ] Loss resets the exact level cleanly without duplicating rewards.
@@ -102,7 +117,10 @@ Expected build outputs:
 - `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
   Solve!_VERSION_x64-setup.exe`
 
-For this release, `VERSION` must resolve to `0.3.0`.
+For this release, `VERSION` must resolve to `0.4.0`.
+
+- [x] A hidden five-second launch of the staged portable executable remained
+  running and responsive and exposed the correct 0.4.0 window title.
 
 - [ ] Launch the standalone executable on a clean Windows x64 account.
 - [ ] Install, launch, save progress, close, reopen, and uninstall the NSIS build.
@@ -118,8 +136,8 @@ For this release, `VERSION` must resolve to `0.3.0`.
 
 - [x] Copy only artifacts from the final successful build into `release/` using
   versioned filenames.
-- [x] Confirm the staged names are `Maze-so-Puzzle-0.3.0-portable.exe` and
-  `Maze-so-Puzzle-0.3.0-setup.exe`.
+- [x] Confirm the staged names are `Maze-so-Puzzle-0.4.0-portable.exe` and
+  `Maze-so-Puzzle-0.4.0-setup.exe`.
 - [x] Keep older artifacts clearly identified as archives, or move them to the
   chosen archive location; never present them as the current build.
 - [x] Generate final SHA-256 values after all copying (the current test build is unsigned):
@@ -128,6 +146,10 @@ For this release, `VERSION` must resolve to `0.3.0`.
 Get-FileHash .\release\Maze-so-Puzzle-*-portable.exe -Algorithm SHA256
 Get-FileHash .\release\Maze-so-Puzzle-*-setup.exe -Algorithm SHA256
 ```
+
+- [x] Confirm the staged portable and installer hashes match their final Tauri
+  source artifacts byte-for-byte; current SHA-256 details remain recorded in
+  `release/README.md` and `release/SHA256SUMS.txt`.
 
 - [ ] Verify the published hashes against newly downloaded copies.
 - [ ] Check filenames, sizes, version metadata, release notes, and download links.

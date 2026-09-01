@@ -1,6 +1,7 @@
 export const ASSETS = {
   titleBackground: "/assets/title-background-v1.webp",
   ame: "/assets/ame.png",
+  ameSword: "/assets/ame-sword.png",
   portrait: "/assets/ame-portrait.png",
   goblin: "/assets/goblin.png",
   sword: "/assets/sword.png",
@@ -24,7 +25,11 @@ export const ASSETS = {
   rewardRescueMedal: "/assets/reward-rescue-medal.png",
 } as const;
 
+let gameArtPreloaded = false;
+
 export function preloadGameArt(): void {
+  if (gameArtPreloaded) return;
+  gameArtPreloaded = true;
   Object.values(ASSETS).forEach((source) => {
     const image = new Image();
     image.decoding = "async";

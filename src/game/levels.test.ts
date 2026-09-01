@@ -7,29 +7,29 @@ describe("curated campaign levels", () => {
   it("starts with a movement-only teaching level", () => {
     expect(CURATED_LEVELS[0]).toBe(MOVEMENT_LEVEL);
     expect(MOVEMENT_LEVEL.objects.every((object) => object.kind === "animal")).toBe(true);
-    expect(MOVEMENT_LEVEL.width).toBe(13);
+    expect(MOVEMENT_LEVEL.width).toBe(9);
   });
 
-  it("grows gradually from 13 by 13 to 23 by 23", () => {
+  it("grows gradually from a readable 9 by 9 to a maximum 17 by 17", () => {
     expect(CURATED_LEVELS.map((level) => [level.width, level.height])).toEqual([
+      [9, 9],
+      [11, 11],
+      [13, 13],
       [13, 13],
       [15, 15],
+      [15, 15],
       [17, 17],
-      [19, 19],
-      [21, 21],
-      [21, 21],
-      [23, 23],
-      [23, 23],
+      [17, 17],
     ]);
     expect(CURATED_LEVELS.map((level) => solveLevel(level).directions.length)).toEqual([
-      32,
-      52,
-      74,
-      100,
-      112,
-      128,
-      142,
-      158,
+      26,
+      36,
+      62,
+      66,
+      78,
+      90,
+      108,
+      114,
     ]);
   });
 

@@ -4,6 +4,44 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.4.0 - 2026-09-01
+
+This family-playtest build focuses on clarity, responsiveness, and a more
+picture-led interface while keeping all existing progress compatible.
+
+### Added
+
+- A locally bundled soundtrack with distinct title, early-story, later-story,
+  and Surprise Maze music. Music follows the existing Sound button, starts only
+  after a player gesture, loops gently, and works offline in browser and Tauri.
+- A new AI-generated Ame gameplay sprite that shows her holding the sword after
+  it has been collected.
+- Press-and-hold travel for keyboard directions and the tablet D-pad, with a
+  quick deterministic repeat cadence and latest-direction buffering.
+- Soft inner wall caps so both convex and concave path corners have restrained,
+  friendly rounding.
+
+### Changed
+
+- Rebalanced all eight story mazes from 9 x 9 through 17 x 17. Required routes
+  still grow steadily from 26 to 114 steps and every maze retains three optional,
+  jointly rescuable animal friends.
+- Limited generated Surprise Mazes to readable odd sizes from 9 x 9 through
+  17 x 17 and expanded solver tests across every supported size and difficulty.
+- Re-tiled floor art over three-cell patches and wall, water, and lava art over
+  two-cell patches instead of stretching one texture across the full board.
+- Tightened overly round outer wall corners and softened water/lava boundaries.
+- Reduced movement cadence to 82 ms, shortened the hop flourish, moved pointer
+  actions to press-down, memoized static terrain, retained Ame's DOM node between
+  moves, and rate-limited repeated wall-bump sounds.
+- Reworked the sidebar around larger animal and item images, compact pictorial
+  inventory slots, and less redundant text.
+- Prevented secondary touches and modifier-key shortcuts from producing stray
+  movement, and stopped routine rapid steps from flooding screen-reader live
+  announcements.
+- Expanded the automated suite to 87 passing tests, including soundtrack failure
+  safety and the revised authored/generated maze ranges.
+
 ## 0.3.0 - 2026-08-31
 
 The production browser bundle and unsigned Windows x64 test artifacts were

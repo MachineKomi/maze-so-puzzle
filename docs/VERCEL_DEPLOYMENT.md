@@ -28,13 +28,13 @@ because the game has one document and does not use client-side URL routing.
   phone browser in landscape orientation. Check a notched device if one is
   available; the controls should stay inside its safe area.
 - Confirm the title artwork loads, Begin Adventure enters maze 1, WASD/arrow and
-  pointer controls work, sound begins only after user interaction, and the
-  Adventure Book opens.
+  pointer controls work, keyboard and D-pad holds repeat smoothly, sound and
+  music begin only after user interaction, and the Adventure Book opens.
 - Complete or partially play a maze, reload the page, and confirm local progress
   remains on that device.
-- Check Big Maze on a 21×21 or 23×23 level, portrait turn-sideways guidance on
-  the tablet, and mute/unmute after the first tap. Browser audio should never
-  start before that interaction.
+- Check the 17×17 finale in both the full interface and Big Maze view, portrait
+  turn-sideways guidance on the tablet, and mute/unmute after the first tap.
+  Browser audio should never start before that interaction.
 
 Progress is intentionally device-local. A browser, private session, cleared site
 data, different Vercel preview hostname, or another device has a separate save.
