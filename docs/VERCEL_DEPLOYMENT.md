@@ -32,9 +32,16 @@ because the game has one document and does not use client-side URL routing.
   music begin only after user interaction, and the Adventure Book opens.
 - Complete or partially play a maze, reload the page, and confirm local progress
   remains on that device.
-- Check the 17×17 finale in both the full interface and Big Maze view, portrait
-  turn-sideways guidance on the tablet, and mute/unmute after the first tap.
-  Browser audio should never start before that interaction.
+- Check a readable 17×17 story maze in both the full interface and Big Maze
+  view, then check the 25×25 Lanternlight Labyrinth. The latter should show a
+  7×7 player-centred view and a minimap that keeps explored tiles visible while
+  masking unvisited areas.
+- For deployment-only maze review, append the exact query `?debug=mazes` and use
+  the tester skip control. Confirm preview runs do not change gold, records,
+  rewards, or unlocked progress, and that the control is absent without the
+  query.
+- Check portrait turn-sideways guidance on the tablet and mute/unmute after the
+  first tap. Browser audio should never start before that interaction.
 
 Progress is intentionally device-local. A browser, private session, cleared site
 data, different Vercel preview hostname, or another device has a separate save.

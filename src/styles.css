@@ -3349,3 +3349,464 @@ img.wallet-pouch {
     animation: none !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   V5 exploration map, camera view, and opt-in maze tester
+   -------------------------------------------------------------------------- */
+
+/* Keep the familiar card stack on ordinary story mazes. */
+.adventure-dashboard:not(.exploration-dashboard),
+.adventure-dashboard:not(.exploration-dashboard) > .adventure-details {
+  display: contents;
+}
+
+.exploration-dashboard {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  grid-template-columns: minmax(150px, 0.92fr) minmax(0, 1.08fr);
+  align-items: stretch;
+  gap: clamp(4px, 0.5vw, 7px);
+  flex: 1 1 190px;
+}
+
+.exploration-dashboard > *,
+.adventure-details {
+  min-width: 0;
+  min-height: 0;
+}
+
+.exploration-dashboard .adventure-details {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-content: stretch;
+  gap: clamp(4px, 0.45vw, 6px);
+}
+
+.exploration-dashboard .objective-card,
+.exploration-dashboard .rescue-card,
+.exploration-dashboard .bag-card {
+  min-width: 0;
+  min-height: 0;
+}
+
+.exploration-dashboard .objective-card {
+  padding: 5px clamp(6px, 0.65vw, 9px);
+  gap: 6px;
+}
+
+.exploration-dashboard .objective-icon {
+  width: clamp(27px, 2.5vw, 35px);
+}
+
+.exploration-dashboard .objective-card strong {
+  font-size: clamp(9px, 0.84vw, 12px);
+}
+
+.exploration-dashboard .rescue-card {
+  padding: 4px 5px;
+  overflow: hidden;
+}
+
+.exploration-dashboard .rescue-list {
+  gap: 3px;
+}
+
+.exploration-dashboard .rescue-friend {
+  min-height: 0;
+  aspect-ratio: 1;
+}
+
+.exploration-dashboard .rescue-icon {
+  width: min(100%, 47px);
+}
+
+.exploration-dashboard .bag-card {
+  padding: 5px 6px;
+}
+
+.exploration-dashboard .inventory-grid {
+  margin-top: 3px;
+  gap: 3px;
+}
+
+.maze-map-card {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  padding: clamp(5px, 0.55vw, 8px);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(3px, 0.35vw, 5px);
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: clamp(14px, 1.45vw, 20px);
+  background:
+    radial-gradient(circle at 88% 8%, rgba(255, 224, 139, 0.44), transparent 26%),
+    linear-gradient(150deg, rgba(240, 237, 255, 0.96), rgba(255, 249, 221, 0.93));
+  box-shadow:
+    inset 0 1px 0 white,
+    0 3px 0 rgba(146, 135, 180, 0.35),
+    0 8px 18px rgba(70, 58, 94, 0.12);
+}
+
+.maze-map-heading {
+  display: grid;
+  width: 100%;
+  min-height: 18px;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 4px;
+  color: #574e76;
+  line-height: 1;
+}
+
+.maze-map-heading > span {
+  font-size: clamp(12px, 1.15vw, 16px);
+  filter: drop-shadow(0 1px 0 white);
+}
+
+.maze-map-heading strong {
+  overflow: hidden;
+  font-size: clamp(9px, 0.86vw, 12px);
+  font-weight: 1000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.maze-map-heading small {
+  padding: 2px 5px;
+  border: 1px solid rgba(94, 87, 131, 0.11);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.68);
+  color: #736990;
+  font-size: clamp(7px, 0.62vw, 9px);
+  font-weight: 1000;
+}
+
+.maze-minimap {
+  position: relative;
+  display: grid;
+  width: min(100%, 194px);
+  max-width: 100%;
+  aspect-ratio: 1;
+  place-self: center;
+  overflow: hidden;
+  border: clamp(2px, 0.24vw, 3px) solid #5d577d;
+  border-radius: clamp(7px, 0.72vw, 10px);
+  background: #37344e;
+  box-shadow:
+    0 2px 0 #45415f,
+    0 5px 10px rgba(55, 48, 76, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.minimap-tile {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #39364f;
+}
+
+.minimap-tile.map-floor { background: #f6d991; }
+.minimap-tile.map-wall { background: #7473a2; }
+.minimap-tile.map-water { background: #55bfc0; }
+.minimap-tile.map-lava { background: #ef8065; }
+
+.minimap-tile.in-view {
+  z-index: 1;
+  filter: saturate(1.1) brightness(1.08);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.24);
+}
+
+.minimap-tile.remembered {
+  filter: saturate(0.56) brightness(0.9);
+  opacity: 0.86;
+}
+
+.minimap-tile.map-fog {
+  background: #3a374f;
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.015);
+}
+
+.map-marker,
+.map-player {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #fff8d6;
+  box-shadow: 0 0 0 0.5px rgba(56, 49, 77, 0.64);
+  transform: translate(-50%, -50%);
+}
+
+.marker-exit {
+  z-index: 2;
+  width: 80%;
+  border-radius: 22%;
+  background: #ffd65a;
+  box-shadow: 0 0 0 0.5px #8b6742;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.marker-enemy { background: #dc6674; }
+.marker-sword {
+  width: 74%;
+  border-radius: 18%;
+  background: #f8f6ff;
+  transform: translate(-50%, -50%) rotate(45deg) scaleX(0.42);
+}
+.marker-boots { border-radius: 42% 42% 28% 28%; background: #986f55; }
+.marker-potion { width: 62%; background: #ef77ad; }
+.marker-key { width: 58%; background: #f7c851; }
+.marker-door {
+  width: 86%;
+  border-radius: 18%;
+  background: #9a6e62;
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.55), 0 0 0 0.5px #4e4664;
+}
+.marker-animal {
+  width: 74%;
+  background: #fff7df;
+  box-shadow: 0 0 0 0.5px #b57a92;
+}
+
+.marker-red { background: #de6876; }
+.marker-blue { background: #5b9fd0; }
+.marker-yellow { background: #edbd4c; }
+
+.map-player {
+  z-index: 6;
+  width: 92%;
+  border: 1px solid white;
+  background: #3e9f7e;
+  box-shadow:
+    0 0 0 1px rgba(43, 74, 67, 0.76),
+    0 0 4px rgba(255, 255, 255, 0.94);
+}
+
+.maze-map-key {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(5px, 0.65vw, 9px);
+  color: #706784;
+  font-size: clamp(6px, 0.55vw, 8px);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.maze-map-key > span {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 3px;
+}
+
+.maze-map-key i {
+  display: inline-block;
+  width: clamp(6px, 0.6vw, 9px);
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(66, 57, 89, 0.16);
+}
+
+.key-current { background: #f7d987; }
+.key-seen { background: #86849f; }
+.key-fog { background: #3a374f; }
+
+.maze-board.exploration-camera {
+  cursor: pointer;
+  border-color: #575575;
+  border-radius: clamp(14px, 1.55vw, 21px);
+  box-shadow:
+    0 5px 0 #403d5c,
+    0 13px 25px rgba(52, 44, 71, 0.27),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.68);
+}
+
+.maze-board.exploration-camera::after {
+  position: absolute;
+  z-index: 25;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 clamp(11px, 2.2cqw, 20px) rgba(51, 45, 71, 0.2);
+  content: "";
+  pointer-events: none;
+}
+
+.exploration-view-pill {
+  display: inline-flex;
+  min-height: clamp(27px, 2.8vw, 36px);
+  padding: 4px clamp(7px, 0.7vw, 10px);
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.88);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(231, 247, 238, 0.96), rgba(204, 232, 222, 0.96));
+  color: #3e7064;
+  font-size: clamp(7px, 0.67vw, 10px);
+  font-weight: 1000;
+  white-space: nowrap;
+  box-shadow: 0 2px 0 rgba(76, 139, 120, 0.28);
+}
+
+.tester-skip-button {
+  min-height: clamp(29px, 3vw, 40px);
+  padding: 4px clamp(8px, 0.76vw, 11px);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #817cb4, #625d91);
+  color: white;
+  font-size: clamp(7px, 0.68vw, 10px);
+  font-weight: 1000;
+  white-space: nowrap;
+  box-shadow: 0 3px 0 #4c486f, 0 6px 10px rgba(70, 62, 98, 0.16);
+  text-shadow: 0 1px 1px rgba(42, 37, 68, 0.38);
+}
+
+.tester-skip-button:hover,
+.tester-skip-button:focus-visible {
+  background: linear-gradient(180deg, #918bc2, #6b659c);
+  transform: translateY(-1px);
+}
+
+.tester-skip-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #4c486f;
+}
+
+.tester-preview-banner {
+  display: flex;
+  width: min(100%, 560px);
+  margin: 4px auto 7px;
+  padding: 7px 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 13px;
+  background: linear-gradient(135deg, #ebe7ff, #fff1bd);
+  color: #62567d;
+  font-size: clamp(9px, 0.85vw, 12px);
+  font-weight: 900;
+  line-height: 1.18;
+  box-shadow: 0 3px 0 rgba(132, 119, 167, 0.3);
+}
+
+.tester-preview-banner > div {
+  min-width: 0;
+  text-align: left;
+}
+
+.tester-preview-banner strong,
+.tester-preview-banner small {
+  display: block;
+}
+
+.tester-preview-banner small {
+  margin-top: 2px;
+  color: #776d8f;
+  font-size: 0.82em;
+}
+
+.big-maze-minimap {
+  position: absolute;
+  z-index: 30;
+  top: clamp(42px, 5.1vh, 54px);
+  right: calc(clamp(118px, 14vw, 170px) * -1 - clamp(7px, 0.8vw, 11px));
+  width: clamp(118px, 14vw, 170px);
+  pointer-events: none;
+}
+
+.compact-map {
+  width: 100%;
+  padding: clamp(4px, 0.42vw, 6px);
+  border-radius: 14px;
+  background: rgba(247, 243, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    0 3px 0 rgba(67, 61, 91, 0.42),
+    0 9px 24px rgba(39, 34, 57, 0.28);
+  backdrop-filter: blur(7px);
+}
+
+.compact-map .maze-minimap {
+  width: 100%;
+  border-width: 2px;
+}
+
+.compact-map .maze-map-key {
+  display: none;
+}
+
+@media (max-height: 600px) {
+  .exploration-dashboard {
+    grid-template-columns: minmax(128px, 0.9fr) minmax(0, 1.1fr);
+    gap: 4px;
+    flex-basis: 164px;
+  }
+
+  .exploration-dashboard .adventure-details { gap: 3px; }
+  .exploration-dashboard .objective-card { min-height: 34px; padding-block: 3px; }
+  .exploration-dashboard .objective-icon { width: 26px; }
+  .exploration-dashboard .objective-card .tiny-label { display: none; }
+  .exploration-dashboard .rescue-card { min-height: 55px; padding: 3px 4px; }
+  .exploration-dashboard .rescue-heading { min-height: 14px; font-size: 7px; }
+  .exploration-dashboard .rescue-icon { width: min(100%, 40px); }
+  .exploration-dashboard .bag-card { min-height: 53px; padding: 3px 5px; }
+  .exploration-dashboard .section-heading .tiny-label { display: none; }
+  .exploration-dashboard .inventory-grid { margin-top: 2px; gap: 2px; }
+  .exploration-dashboard .inventory-slot { padding: 2px; }
+
+  .maze-map-card { padding: 4px; gap: 2px; border-radius: 13px; }
+  .maze-map-heading { min-height: 15px; }
+  .maze-map-heading > span { font-size: 11px; }
+  .maze-minimap { width: min(100%, 128px); border-width: 2px; border-radius: 7px; }
+  .maze-map-key { gap: 5px; font-size: 6px; }
+
+  .exploration-view-pill,
+  .tester-skip-button {
+    min-height: 25px;
+    padding: 3px 7px;
+    font-size: 7px;
+  }
+
+  .tester-preview-banner { margin-block: 2px 4px; padding: 5px 9px; }
+  .big-maze-minimap {
+    top: 38px;
+    right: calc(clamp(112px, 14vw, 142px) * -1 - 7px);
+    width: clamp(112px, 14vw, 142px);
+  }
+  .compact-map .maze-minimap { width: 100%; }
+}
+
+@media (max-width: 1050px) and (orientation: landscape) {
+  .exploration-dashboard {
+    grid-template-columns: minmax(128px, 0.92fr) minmax(0, 1.08fr);
+  }
+
+  .maze-map-heading strong { font-size: 9px; }
+  .maze-map-key { gap: 5px; }
+  .exploration-view-pill { padding-inline: 7px; }
+  .tester-skip-button span { display: none; }
+}
+
+@media (max-width: 760px) and (orientation: landscape) {
+  .exploration-dashboard {
+    grid-template-columns: minmax(110px, 0.82fr) minmax(0, 1.18fr);
+  }
+
+  .maze-map-key { display: none; }
+  .big-maze-minimap { right: -115px; width: 108px; }
+}

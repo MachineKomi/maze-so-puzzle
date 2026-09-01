@@ -4,6 +4,36 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.5.0 - 2026-09-01
+
+This exploration build keeps the early story mazes large and readable, then
+introduces one deliberately bigger adventure without shrinking Ame or the
+important objects into tiny tiles.
+
+### Added
+
+- **Lanternlight Labyrinth**, a ninth authored story maze measuring 25 x 25,
+  with its ordinary exit and optional all-three-animal rescue route covered by
+  the same stateful level-validation rules as the rest of the campaign.
+- A player-centred 7 x 7 exploration camera for the larger maze. The underlying
+  engine still moves on the full level grid, so movement and puzzle rules remain
+  deterministic.
+- A persistent fog-of-war minimap. Ame can always see her current 7 x 7 field of
+  view; previously explored passages stay revealed, while unvisited areas remain
+  masked until she reaches them.
+- A hidden tester preview reached with the exact URL query `?debug=mazes`. Its
+  compact skip control cycles through every authored maze without requiring
+  unlocks, and preview completions deliberately do not award gold, collectibles,
+  records, unlocks, or saved progress.
+
+### Changed
+
+- Kept the first eight story mazes in their readable 9 x 9 through 17 x 17
+  progression, using the new exploration presentation only for the 25 x 25
+  finale.
+- Retained the locally bundled, offline-capable soundtrack across the title,
+  story, later-story, and Surprise Maze contexts.
+
 ## 0.4.0 - 2026-09-01
 
 This family-playtest build focuses on clarity, responsiveness, and a more

@@ -369,6 +369,46 @@ export const AMES_GRAND_PARADE_LEVEL = parseAsciiLevel({
   ],
 });
 
+export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
+  id: "lanternlight-labyrinth",
+  name: "Lanternlight Labyrinth",
+  objective: "Explore to find the star. Rescue little friends if you can!",
+  introducedMechanics: [
+    "large-maze",
+    "exploration-map",
+    "fog-of-war",
+    "all-mechanics",
+    "perfect-rescue-challenge",
+  ],
+  map: [
+    "#########################",
+    "#E..#.........#.........#",
+    "###.#.#####.#.#.#######.#",
+    "#p#.#.#...#.#...#...#...#",
+    "#.#.#.#.#.#.#####.#.#.###",
+    "#...#f#.#.#.9.#u#.#...#y#",
+    "#.#####.#.###.#.#.#####.#",
+    "#.......#.....#.#.#...#.#",
+    "###############.#.#.#.#.#",
+    "#..p#....r#.....#.Y.#...#",
+    "#.###.#.###.#.#########.#",
+    "#.....#...#.#.#.........#",
+    "#.#######.#.#.#.#########",
+    "#.......#.#.#.#.....#...#",
+    "#######.#.#.#.#####.#.#.#",
+    "#s#...2.#.#.#.~...#...#.#",
+    "#.#.#####R#.#####.#####.#",
+    "#......c#...#...5.#.7...#",
+    "#.###########.#####.#####",
+    "#...#.......^.#...#.....#",
+    "###.#.#.#######.#.#####.#",
+    "#@#.#.#q#.....#.#.#...#.#",
+    "#.#.#.###.###.#.#.#.#.#.#",
+    "#...#......b#.B.#...#...#",
+    "#########################",
+  ],
+});
+
 export const CURATED_LEVELS: readonly LevelDefinition[] = [
   MOVEMENT_LEVEL,
   SWORD_AND_KEY_LEVEL,
@@ -378,6 +418,7 @@ export const CURATED_LEVELS: readonly LevelDefinition[] = [
   MOONBEAM_MOAT_LEVEL,
   WISHING_WOODS_LEVEL,
   AMES_GRAND_PARADE_LEVEL,
+  LANTERNLIGHT_LABYRINTH_LEVEL,
 ];
 
 export function getCuratedLevel(id: string): LevelDefinition | undefined {

@@ -11,7 +11,7 @@ service, Suno API, account, or runtime download from a third-party host.
 | --- | --- |
 | `bgm_harbour_morning_v04.mp3` | Title screen and Adventure Book music. |
 | `bgm_tiles_in_the_sun_v04.mp3` | Early story music for authored mazes 1–4. |
-| `bgm_little_champions_v04.mp3` | Later story music for authored mazes 5 onward. |
+| `bgm_little_champions_v04.mp3` | Later story music for authored mazes 5 onward, including Lanternlight Labyrinth. |
 | `BG_Music_01_PixelSkywayRally.mp3` | Surprise Maze music for generated adventures. |
 | `bgm_arena_overdrive_v04.mp3` | Reserved for a future arena, boss, or special challenge. Keep this file even though the current track map does not select it. |
 | `cue_new_friend_new_horizon_v04.mp3` | Reserved as a future one-shot rescue or friendship-milestone cue. It is an event sting, not looping background music. |
@@ -61,4 +61,3 @@ npm test -- --run src/music.test.ts
 The tests cover gesture-only startup, looping configuration, mute state,
 rejected or unavailable media, stop/reuse, disposal, server-side safety, and
 custom track configuration.
-

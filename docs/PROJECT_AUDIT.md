@@ -1,16 +1,27 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: 0.4.0 playable test build
+Audited build: 0.5.0 exploration release candidate
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
-remaining work ordered by risk. It is not a substitute for the final release
-checklist after source or asset changes. Local browser and Tauri packaging
-verification is complete; clean-machine installation and the full family
-play-test matrix are not claimed.
+remaining work ordered by risk. It is not a substitute for clean-machine and
+real-device testing. The automated suite, production browser checks, Tauri
+build, staging, hash comparison, and portable smoke launch below all completed
+against the final 0.5.0 source candidate on 2026-09-01.
 
-## Current 0.4.0 candidate status
+## Current 0.5.0 implementation status
+
+| Area | Final evidence | Status |
+| --- | --- | --- |
+| Story campaign | 96 tests cover all nine authored levels, including ordinary and all-three-rescue solutions for the 25 x 25 **Lanternlight Labyrinth** | 96 of 96 passed; production TypeScript and Vite build passed |
+| Exploration view | Production browser rendered exactly 49 camera tiles at 1280 x 720 and 960 x 540; after leaving the edge, Ame occupied the centred camera tile | Passed at the checked landscape sizes; broader real-device matrix remains |
+| Fog-of-war map | Production browser rendered all 625 minimap cells; travel grew revealed tiles from 49 to 63, retained 14 remembered tiles, and left 562 masked | Passed, including reset on maze switch and discovered-only landmark text |
+| Tester preview | Normal URL exposed zero tester controls; exact `?debug=mazes` exposed one, cycled and wrapped all nine mazes, and a 26-move tester completion left displayed gold unchanged | Passed; preview completion showed no reward panel and explicit non-saving copy |
+| Music | All six local MP3s are present in the production bundle and music controls produced no browser console errors | Packaging passed; listening/autoplay checks still belong in the device matrix |
+| Release artifacts | Tauri 0.5.0 executable and NSIS installer were built, staged, compared, hashed, and the portable executable remained responsive in a hidden five-second launch | Passed; clean-machine installer testing and code signing remain |
+
+## Last verified 0.4.0 candidate status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
@@ -45,8 +56,23 @@ play-test matrix are not claimed.
 | Tauri permissions | `core:default` capability and local-only content security policy | Appropriately narrow for the current app |
 
 These results preserve the last verified 0.2.0 baseline for comparison. The
-0.4.0 evidence above is current, while the broader manual release matrix remains
-intentionally separate below.
+0.4.0 evidence above remains as a historical release baseline. The verified
+0.5.0 candidate and the broader unfinished manual matrix are recorded separately.
+
+## Version 5 implementation snapshot
+
+- **Lanternlight Labyrinth** extends the story to nine authored mazes. The first
+  eight remain at the readable 9 x 9 through 17 x 17 sizes, while the new finale
+  is a 25 x 25 exploration level.
+- The large level renders through an explicit player-centred 7 x 7 camera. Camera
+  offsets affect only presentation; the engine, objects, and solver retain global
+  level coordinates.
+- A persistent fog-of-war minimap separates the current field of view, remembered
+  explored tiles, and unvisited mystery.
+- An exact `?debug=mazes` tester entry point exposes quick authored-level cycling.
+  Tester runs are previews and must not grant rewards or mutate progress.
+- The locally bundled OST introduced in 0.4.0 remains part of the offline browser
+  and Tauri bundle.
 
 ## Version 4 implementation snapshot
 
@@ -113,8 +139,9 @@ intentionally separate below.
 - Big Maze remains available as an optional roomier board view while retaining a
   compact Power/item/rescue HUD and an overlaid feedback toast.
 
-The final automated run is complete. The unchecked clean-machine, device, and
-manual items in `RELEASE_CHECKLIST.md` remain separate release requirements.
+The 0.5.0 automated run and targeted production-browser pass are complete. All
+unchecked clean-machine, device, listening, and broader manual items in
+`RELEASE_CHECKLIST.md` remain release requirements.
 
 ## Prioritized remaining work
 
@@ -137,8 +164,8 @@ manual items in `RELEASE_CHECKLIST.md` remain separate release requirements.
   loss/retry, and a full maze completion.
 - Add automated accessibility checks and a richer screen-reader representation
   of nearby maze cells; the visual grid should not be the only spatial model.
-- Test 200% browser zoom and Windows text scaling, including Big Maze mode on the
-  largest 17 x 17 story and generated mazes.
+- Test 200% browser zoom and Windows text scaling, including Big Maze mode and
+  the 25 x 25 exploration level's 7 x 7 camera and minimap.
 - Add visual-regression snapshots for the minimum 960 x 540 window, the default
   1280 x 720 window, 1920 x 1080, and the portrait guidance screen.
 - Reassess compact-window touch targets. The 960 x 540 layout prioritizes fitting
@@ -147,10 +174,9 @@ manual items in `RELEASE_CHECKLIST.md` remain separate release requirements.
 
 ### P2 - maintainability and polish
 
-- If mazes larger than 17 x 17 return, use a player-centred zoomed camera and a
-  simplified explored-area minimap instead of shrinking the full board and its
-  sprites. Keep that as a separate navigation feature rather than complicating
-  the current readable story progression.
+- Add browser-level regression coverage for camera following, minimap fog and
+  remembered tiles, hidden tester-control gating, authored-level cycling, and
+  preview completion isolation.
 - Consolidate repeated responsive CSS rules after the current visual design
   settles; this reduces cascade surprises without changing the look.
 - The unused original `floor.png` and `wall.png` are preserved under
@@ -168,8 +194,9 @@ manual items in `RELEASE_CHECKLIST.md` remain separate release requirements.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- The release target is 0.4.0. Package, lockfile, Cargo, and Tauri versions were
-  confirmed aligned during final packaging.
+- The release target is 0.5.0. Package, lockfile, Cargo, and Tauri source versions
+  are aligned. Packaging, staged names, source-to-stage comparison, portable
+  smoke launch, sizes, and hashes are recorded in `release/`.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

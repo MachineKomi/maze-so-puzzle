@@ -22,6 +22,15 @@ import {
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
 import { CURATED_LEVELS } from "./game/levels";
 import {
+  DEFAULT_FOV_SIZE,
+  getCameraWindow,
+  getVisibleTileKeys,
+  revealVisibleTiles,
+  toTileKey,
+  type CameraWindow,
+  type TileKey,
+} from "./game/exploration";
+import {
   ANIMAL_SPECIES,
   DIRECTION_DELTAS,
   type AnimalSpecies,
@@ -81,6 +90,8 @@ const MOVE_CADENCE_MS = 82;
 const BUMP_CADENCE_MS = 55;
 const HELD_KEY_DELAY_MS = 140;
 const HELD_KEY_REPEAT_MS = 82;
+const BUILD_VERSION = "0.5.0";
+const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
   readonly icon: string;
@@ -96,9 +107,11 @@ interface CompletionCelebration {
   readonly newBadgeIds: readonly BadgeId[];
   readonly rescuedSpecies: readonly AnimalSpecies[];
   readonly totalGold: number;
+  readonly testerRun: boolean;
 }
 
 type AppScreen = "title" | "game" | "achievements";
+type RunMode = "normal" | "tester";
 
 interface PendingAdventure {
   readonly level: LevelDefinition;
@@ -294,29 +307,151 @@ function innerWallCaps(level: LevelDefinition, x: number, y: number): readonly s
   ].filter(Boolean);
 }
 
-const MazeTerrain = memo(function MazeTerrain({ level }: { readonly level: LevelDefinition }) {
-  return level.terrain.flatMap((row, y) => row.map((terrain, x) => {
-    const point = { x, y };
-    const isExit = pointsEqual(level.exit, point);
-    const corners = wallCornerClasses(level, x, y);
-    const caps = innerWallCaps(level, x, y);
-    return (
+function isExplorationLevel(level: LevelDefinition): boolean {
+  return level.introducedMechanics?.includes("exploration-map") ?? false;
+}
+
+function fullLevelWindow(level: LevelDefinition): CameraWindow {
+  return {
+    left: 0,
+    top: 0,
+    right: level.width - 1,
+    bottom: level.height - 1,
+    width: level.width,
+    height: level.height,
+  };
+}
+
+function isInsideWindow(point: Point, camera: CameraWindow): boolean {
+  return point.x >= camera.left
+    && point.x <= camera.right
+    && point.y >= camera.top
+    && point.y <= camera.bottom;
+}
+
+function cameraLayerStyle(point: Point, camera: CameraWindow): CSSProperties {
+  return {
+    left: `${((point.x - camera.left) / camera.width) * 100}%`,
+    top: `${((point.y - camera.top) / camera.height) * 100}%`,
+    width: `${100 / camera.width}%`,
+    height: `${100 / camera.height}%`,
+  };
+}
+
+function debugMazeQueryEnabled(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("debug") === DEBUG_MAZE_QUERY;
+}
+
+const MazeTerrain = memo(function MazeTerrain({
+  level,
+  camera,
+}: {
+  readonly level: LevelDefinition;
+  readonly camera: CameraWindow;
+}) {
+  const tiles = [];
+  for (let y = camera.top; y <= camera.bottom; y += 1) {
+    for (let x = camera.left; x <= camera.right; x += 1) {
+      const terrain = level.terrain[y]?.[x];
+      if (!terrain) continue;
+      const point = { x, y };
+      const isExit = pointsEqual(level.exit, point);
+      const corners = wallCornerClasses(level, x, y);
+      const caps = innerWallCaps(level, x, y);
+      tiles.push(
+        <div
+          key={keyFor(point)}
+          className={`maze-tile terrain-${terrain}${corners ? ` ${corners}` : ""}${isExit ? " exit-tile" : ""}`}
+          style={{
+            "--texture-x-2": `${(x % 2) * 100}%`,
+            "--texture-y-2": `${(y % 2) * 100}%`,
+            "--texture-x-3": `${(x % 3) * 50}%`,
+            "--texture-y-3": `${(y % 3) * 50}%`,
+          } as CSSProperties}
+          aria-hidden="true"
+        >
+          {caps.map((corner) => <span key={corner} className={`inner-wall-cap cap-${corner}`} />)}
+          {isExit && <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />}
+        </div>
+      );
+    }
+  }
+  return tiles;
+});
+
+interface MiniMapProps {
+  readonly level: LevelDefinition;
+  readonly position: Point;
+  readonly revealed: ReadonlySet<TileKey>;
+  readonly currentView: ReadonlySet<TileKey>;
+  readonly objects: readonly LevelObject[];
+  readonly compact?: boolean;
+}
+
+const MiniMap = memo(function MiniMap({
+  level,
+  position,
+  revealed,
+  currentView,
+  objects,
+  compact = false,
+}: MiniMapProps) {
+  const visibleObjectByTile = useMemo(() => new Map(
+    objects.map((object) => [toTileKey(object.at), object] as const),
+  ), [objects]);
+  const exploredCount = useMemo(() => new Set([...revealed, ...currentView]).size, [currentView, revealed]);
+  const exploredPercent = Math.round((exploredCount / (level.width * level.height)) * 100);
+
+  return (
+    <section
+      className={`maze-map-card${compact ? " compact-map" : ""}`}
+      aria-label={`Exploration map. ${exploredCount} of ${level.width * level.height} tiles revealed, ${exploredPercent} percent.`}
+    >
+      <div className="maze-map-heading"><span aria-hidden="true">🗺️</span><strong>My map</strong><small>{exploredPercent}%</small></div>
       <div
-        key={keyFor(point)}
-        className={`maze-tile terrain-${terrain}${corners ? ` ${corners}` : ""}${isExit ? " exit-tile" : ""}`}
+        className="maze-minimap"
         style={{
-          "--texture-x-2": `${(x % 2) * 100}%`,
-          "--texture-y-2": `${(y % 2) * 100}%`,
-          "--texture-x-3": `${(x % 3) * 50}%`,
-          "--texture-y-3": `${(y % 3) * 50}%`,
-        } as CSSProperties}
+          gridTemplateColumns: `repeat(${level.width}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${level.height}, minmax(0, 1fr))`,
+        }}
         aria-hidden="true"
       >
-        {caps.map((corner) => <span key={corner} className={`inner-wall-cap cap-${corner}`} />)}
-        {isExit && <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />}
+        {level.terrain.flatMap((row, y) => row.map((terrain, x) => {
+          const point = { x, y };
+          const tileKey = toTileKey(point);
+          const inView = currentView.has(tileKey);
+          const seen = inView || revealed.has(tileKey);
+          const object = seen ? visibleObjectByTile.get(tileKey) : undefined;
+          const isPlayer = pointsEqual(position, point);
+          const isExit = seen && pointsEqual(level.exit, point);
+          return (
+            <i
+              key={tileKey}
+              className={`minimap-tile ${seen ? `map-${terrain} ${inView ? "in-view" : "remembered"}` : "map-fog"}`}
+            >
+              {isExit && <b className="map-marker marker-exit" />}
+              {object && <b className={`map-marker marker-${object.kind}${object.kind === "door" || object.kind === "key" ? ` marker-${object.color}` : ""}`} />}
+              {isPlayer && <b className="map-player" />}
+            </i>
+          );
+        }))}
       </div>
-    );
-  }));
+      <div className="maze-map-key"><span><i className="key-current" />Now</span><span><i className="key-seen" />Explored</span><span><i className="key-fog" />Mystery</span></div>
+      <p className="sr-only">
+        Ame is at column {position.x + 1}, row {position.y + 1}.
+        {pointsEqual(level.exit, position) || currentView.has(toTileKey(level.exit)) || revealed.has(toTileKey(level.exit))
+          ? ` The sparkling exit is at column ${level.exit.x + 1}, row ${level.exit.y + 1}.`
+          : " The exit has not been discovered yet."}
+        {objects.some((object) => currentView.has(toTileKey(object.at)) || revealed.has(toTileKey(object.at)))
+          ? ` Discovered landmarks: ${objects
+            .filter((object) => currentView.has(toTileKey(object.at)) || revealed.has(toTileKey(object.at)))
+            .map((object) => `${describeObject(object)} at column ${object.at.x + 1}, row ${object.at.y + 1}`)
+            .join("; ")}.`
+          : " No unresolved landmarks have been discovered yet."}
+      </p>
+    </section>
+  );
 });
 
 function stickerArt(id: StickerId): string {
@@ -355,6 +490,8 @@ function App() {
   const [bigMaze, setBigMaze] = useState(false);
   const [level, setLevel] = useState<LevelDefinition>(() => CURATED_LEVELS[0]!);
   const [game, setGame] = useState<GameState>(() => createInitialGameState(CURATED_LEVELS[0]!));
+  const [runMode, setRunMode] = useState<RunMode>("normal");
+  const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(() => new Set());
   const [feedback, setFeedback] = useState<Feedback>({
     icon: "✨",
     text: "Help Ame find the star!",
@@ -388,13 +525,30 @@ function App() {
   const titlePlayRef = useRef<HTMLButtonElement>(null);
   const achievementsHeadingRef = useRef<HTMLHeadingElement>(null);
   const mutedRef = useRef(muted);
+  const testerToolsEnabled = useMemo(debugMazeQueryEnabled, []);
 
   const campaignIndex = CURATED_LEVELS.findIndex((candidate) => candidate.id === level.id);
   const isSurprise = campaignIndex === -1;
+  const explorationMode = isExplorationLevel(level);
+  const testerRun = runMode === "tester";
   const unlocked = Math.min(CURATED_LEVELS.length, progress.unlockedLevelCount);
+  const cameraWindow = useMemo(
+    () => explorationMode ? getCameraWindow(level, game.position, DEFAULT_FOV_SIZE) : fullLevelWindow(level),
+    [explorationMode, game.position, level],
+  );
+  const currentViewTiles = useMemo(
+    () => explorationMode
+      ? new Set(getVisibleTileKeys(level, game.position, DEFAULT_FOV_SIZE))
+      : new Set<TileKey>(),
+    [explorationMode, game.position, level],
+  );
   const activeObjects = useMemo(
     () => level.objects.filter((object) => !isObjectResolved(object, game)),
     [game, level],
+  );
+  const visibleObjects = useMemo(
+    () => activeObjects.filter((object) => isInsideWindow(object.at, cameraWindow)),
+    [activeObjects, cameraWindow],
   );
   const animalObjects = useMemo(
     () => ANIMAL_SPECIES.map((species) => level.objects.find(
@@ -416,6 +570,16 @@ function App() {
   const modalOpen = pendingAdventure !== null
     || (screen === "game" && (helpOpen || game.status !== "playing"));
   const hasImportantAnnouncement = lastEvents.some((event) => event.type !== "moved");
+
+  useEffect(() => {
+    if (!explorationMode) return;
+    setRevealedTiles((revealed) => revealVisibleTiles(
+      revealed,
+      level,
+      game.position,
+      DEFAULT_FOV_SIZE,
+    ));
+  }, [explorationMode, game.position, level]);
 
   const clearDpadHold = useCallback(() => {
     dpadHoldDirection.current = null;
@@ -463,6 +627,9 @@ function App() {
     }
     setLevel(nextLevel);
     setGame(createInitialGameState(nextLevel));
+    setRevealedTiles(isExplorationLevel(nextLevel)
+      ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)
+      : new Set());
     setLastEvents([]);
     setPreviewDirection(null);
     setMovePulse(0);
@@ -516,41 +683,59 @@ function App() {
       const resultRescuedSpecies = resultAnimalObjects
         .filter((object) => result.state.rescuedAnimalIds.includes(object.id))
         .map((object) => object.species);
-      const firstCompletion = progress.bestResultsByLevel[level.id] === undefined;
-      const reward = calculateLevelReward({
-        levelId: level.id,
-        source: level.source,
-        campaignIndex,
-        rescuedCount: resultRescuedSpecies.length,
-        firstCompletion,
-      });
-      const nextProgress = applyLevelCompletion(progress, {
-        levelId: level.id,
-        source: level.source,
-        campaignIndex,
-        rescuedCount: resultRescuedSpecies.length,
-        rescuedSpecies: resultRescuedSpecies,
-        steps: result.state.steps,
-        power: result.state.power,
-      });
-      const newStickerIds = nextProgress.stickers.filter((id) => !progress.stickers.includes(id));
-      const newMedalIds = nextProgress.medals.filter((id) => !progress.medals.includes(id));
-      const newBadgeIds = nextProgress.badges.filter((id) => !progress.badges.includes(id));
-      setProgress(nextProgress);
-      writePlayerProgress(nextProgress);
-      setCompletion({
-        reward,
-        newStickerIds,
-        newMedalIds,
-        newBadgeIds,
-        rescuedSpecies: resultRescuedSpecies,
-        totalGold: nextProgress.gold,
-      });
-      if (newStickerIds.length > 0 || newMedalIds.length > 0 || newBadgeIds.length > 0) {
-        rewardSoundTimer.current = window.setTimeout(() => {
-          playSound(newBadgeIds.length > 0 ? "stamp" : "reward", mutedRef.current);
-          rewardSoundTimer.current = undefined;
-        }, 520);
+      if (testerRun) {
+        setCompletion({
+          reward: {
+            levelId: level.id,
+            gold: 0,
+            goldBreakdown: { completion: 0, firstCompletion: 0, animalRescue: 0, perfectRescue: 0 },
+            stickerIds: [],
+          },
+          newStickerIds: [],
+          newMedalIds: [],
+          newBadgeIds: [],
+          rescuedSpecies: resultRescuedSpecies,
+          totalGold: progress.gold,
+          testerRun: true,
+        });
+      } else {
+        const firstCompletion = progress.bestResultsByLevel[level.id] === undefined;
+        const reward = calculateLevelReward({
+          levelId: level.id,
+          source: level.source,
+          campaignIndex,
+          rescuedCount: resultRescuedSpecies.length,
+          firstCompletion,
+        });
+        const nextProgress = applyLevelCompletion(progress, {
+          levelId: level.id,
+          source: level.source,
+          campaignIndex,
+          rescuedCount: resultRescuedSpecies.length,
+          rescuedSpecies: resultRescuedSpecies,
+          steps: result.state.steps,
+          power: result.state.power,
+        });
+        const newStickerIds = nextProgress.stickers.filter((id) => !progress.stickers.includes(id));
+        const newMedalIds = nextProgress.medals.filter((id) => !progress.medals.includes(id));
+        const newBadgeIds = nextProgress.badges.filter((id) => !progress.badges.includes(id));
+        setProgress(nextProgress);
+        writePlayerProgress(nextProgress);
+        setCompletion({
+          reward,
+          newStickerIds,
+          newMedalIds,
+          newBadgeIds,
+          rescuedSpecies: resultRescuedSpecies,
+          totalGold: nextProgress.gold,
+          testerRun: false,
+        });
+        if (newStickerIds.length > 0 || newMedalIds.length > 0 || newBadgeIds.length > 0) {
+          rewardSoundTimer.current = window.setTimeout(() => {
+            playSound(newBadgeIds.length > 0 ? "stamp" : "reward", mutedRef.current);
+            rewardSoundTimer.current = undefined;
+          }, 520);
+        }
       }
     }
 
@@ -562,7 +747,7 @@ function App() {
       queuedDirection.current = null;
       if (nextDirection) attemptMoveRef.current(nextDirection);
     }, result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS);
-  }, [campaignIndex, game, helpOpen, level, muted, pendingAdventure, progress, screen]);
+  }, [campaignIndex, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerRun]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -659,16 +844,16 @@ function App() {
   const directionFromPointer = useCallback((clientX: number, clientY: number): Direction | null => {
     const rect = boardRef.current?.getBoundingClientRect();
     if (!rect) return null;
-    const cellWidth = rect.width / level.width;
-    const cellHeight = rect.height / level.height;
-    const centerX = rect.left + (game.position.x + 0.5) * cellWidth;
-    const centerY = rect.top + (game.position.y + 0.5) * cellHeight;
+    const cellWidth = rect.width / cameraWindow.width;
+    const cellHeight = rect.height / cameraWindow.height;
+    const centerX = rect.left + (game.position.x - cameraWindow.left + 0.5) * cellWidth;
+    const centerY = rect.top + (game.position.y - cameraWindow.top + 0.5) * cellHeight;
     const dx = clientX - centerX;
     const dy = clientY - centerY;
     if (Math.abs(dx) < cellWidth * 0.34 && Math.abs(dy) < cellHeight * 0.34) return null;
     if (Math.abs(dx / cellWidth) >= Math.abs(dy / cellHeight)) return dx < 0 ? "left" : "right";
     return dy < 0 ? "up" : "down";
-  }, [game.position.x, game.position.y, level.height, level.width]);
+  }, [cameraWindow, game.position.x, game.position.y]);
 
   const onBoardPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "touch") setPreviewDirection(directionFromPointer(event.clientX, event.clientY));
@@ -733,11 +918,16 @@ function App() {
     });
   };
 
-  const enterLevel = (nextLevel: LevelDefinition, sound: "select" | "title" = "select") => {
+  const enterLevel = (
+    nextLevel: LevelDefinition,
+    sound: "select" | "title" = "select",
+    mode: RunMode = "normal",
+  ) => {
     preloadGameArt();
     configureMusic({ trackUrl: musicTrackForLevel(nextLevel) });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
+    setRunMode(mode);
     loadLevel(nextLevel);
     setHasActiveRun(true);
     setScreen("game");
@@ -835,11 +1025,28 @@ function App() {
   };
 
   const nextLevel = () => {
+    if (testerRun) {
+      const nextIndex = campaignIndex >= 0 ? (campaignIndex + 1) % CURATED_LEVELS.length : 0;
+      enterLevel(CURATED_LEVELS[nextIndex]!, "select", "tester");
+      return;
+    }
     if (campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length) {
       enterLevel(CURATED_LEVELS[campaignIndex + 1]!);
     } else {
       enterLevel(makeSurprise());
     }
+  };
+
+  const enterDebugNextLevel = () => {
+    const nextIndex = campaignIndex >= 0 ? (campaignIndex + 1) % CURATED_LEVELS.length : 0;
+    const nextStoryLevel = CURATED_LEVELS[nextIndex]!;
+    enterLevel(nextStoryLevel, "select", "tester");
+    setFeedback({
+      icon: "🛠️",
+      text: `Tester preview: ${nextStoryLevel.name}. Rewards stay unchanged.`,
+      tone: "plain",
+      sound: "select",
+    });
   };
 
   const previewTarget = previewDirection ? targetFor(game, previewDirection) : null;
@@ -894,7 +1101,7 @@ function App() {
           <section className="maze-panel" aria-label={`${level.name} maze`}>
             <div className="maze-topline">
               <div>
-                <span className="level-kicker">{isSurprise ? `${level.width} × ${level.height} surprise maze` : `Story maze ${campaignIndex + 1} of ${CURATED_LEVELS.length}`}</span>
+                <span className="level-kicker">{isSurprise ? `${level.width} × ${level.height} surprise maze` : `Story maze ${campaignIndex + 1} of ${CURATED_LEVELS.length}${explorationMode ? ` · ${level.width} × ${level.height}` : ""}`}</span>
                 <h2>{level.name}</h2>
               </div>
               <div className="maze-topline-actions">
@@ -911,6 +1118,15 @@ function App() {
                     {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}>🔑 {game.keys.length}/{keyColors.length}</span>}
                   </div>
                 )}
+                {explorationMode && <span className="exploration-view-pill" title="Ame explores seven tiles at a time">🗺 7 × 7 view</span>}
+                {testerToolsEnabled && (
+                  <button
+                    className="tester-skip-button"
+                    onClick={enterDebugNextLevel}
+                    title="Tester preview: skip to the next authored maze without saving rewards or progress"
+                    aria-label={`Tester preview. Skip to the next story maze. Current maze ${campaignIndex >= 0 ? campaignIndex + 1 : "is a surprise"} of ${CURATED_LEVELS.length}. Rewards and progress are off.`}
+                  >🛠 <span>Test next</span></button>
+                )}
                 <button className="big-maze-button" aria-pressed={bigMaze} onClick={toggleBigMaze} title="Make the maze larger">{bigMaze ? "↙ Normal" : "⛶ Big maze"}</button>
                 <button className="surprise-button" onClick={() => requestEnterLevel(makeSurprise())} title="Make a new solvable maze">✦ New maze</button>
                 <div className="step-pill" aria-label={`${game.steps} steps`}><span>👣</span>{game.steps}</div>
@@ -919,11 +1135,11 @@ function App() {
 
             <div
               ref={boardRef}
-              className={`maze-board ${bumpPulse % 2 ? "bump-a" : "bump-b"}`}
+              className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}`}
               style={{
-                gridTemplateColumns: `repeat(${level.width}, minmax(0, 1fr))`,
-                gridTemplateRows: `repeat(${level.height}, minmax(0, 1fr))`,
-                "--grid-size": level.width,
+                gridTemplateColumns: `repeat(${cameraWindow.width}, minmax(0, 1fr))`,
+                gridTemplateRows: `repeat(${cameraWindow.height}, minmax(0, 1fr))`,
+                "--grid-size": cameraWindow.width,
               } as CSSProperties}
               role="application"
               aria-label="Maze board. Use arrow keys, W A S D, the arrow buttons, or click in a direction from Ame."
@@ -935,33 +1151,23 @@ function App() {
               onPointerDown={onBoardPointerDown}
               onContextMenu={(event) => event.preventDefault()}
             >
-              <MazeTerrain level={level} />
+              <MazeTerrain level={level} camera={cameraWindow} />
 
-              {previewTarget && previewDirection && (
+              {previewTarget && previewDirection && isInsideWindow(previewTarget, cameraWindow) && (
                 <div
                   className={`move-preview move-preview-layer preview-${previewState}`}
-                  style={{
-                    left: `${(previewTarget.x / level.width) * 100}%`,
-                    top: `${(previewTarget.y / level.height) * 100}%`,
-                    width: `${100 / level.width}%`,
-                    height: `${100 / level.height}%`,
-                  }}
+                  style={cameraLayerStyle(previewTarget, cameraWindow)}
                   aria-hidden="true"
                 >
                   <span className="preview-arrow">{previewState === "danger" ? "!" : previewState === "stop" ? "×" : DIRECTION_ICONS[previewDirection]}</span>
                 </div>
               )}
 
-              {activeObjects.map((object) => (
+              {visibleObjects.map((object) => (
                 <div
                   className="object-layer"
                   key={object.id}
-                  style={{
-                    left: `${(object.at.x / level.width) * 100}%`,
-                    top: `${(object.at.y / level.height) * 100}%`,
-                    width: `${100 / level.width}%`,
-                    height: `${100 / level.height}%`,
-                  }}
+                  style={cameraLayerStyle(object.at, cameraWindow)}
                   aria-hidden="true"
                 >
                   {object.kind === "animal" ? (
@@ -979,18 +1185,26 @@ function App() {
 
               <div
                 className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}`}
-                style={{
-                  left: `${(game.position.x / level.width) * 100}%`,
-                  top: `${(game.position.y / level.height) * 100}%`,
-                  width: `${100 / level.width}%`,
-                  height: `${100 / level.height}%`,
-                }}
+                style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
               >
                 <img className="player-sprite" src={game.hasSword ? ASSETS.ameSword : ASSETS.ame} alt="" draggable={false} />
                 <span className="power-badge player-power">{game.power}</span>
               </div>
             </div>
+
+            {explorationMode && bigMaze && (
+              <div className="big-maze-minimap">
+                <MiniMap
+                  level={level}
+                  position={game.position}
+                  revealed={revealedTiles}
+                  currentView={currentViewTiles}
+                  objects={activeObjects}
+                  compact
+                />
+              </div>
+            )}
 
             <p className="sr-only" id="maze-status" aria-live={hasImportantAnnouncement ? "polite" : "off"} aria-atomic="true">{mazeStatus}</p>
 
@@ -1026,55 +1240,68 @@ function App() {
               </div>
             </section>
 
-            <section className="objective-card">
-              <span className="objective-icon" aria-hidden="true">★</span>
-              <div><span className="tiny-label">Right now</span><strong>{level.objective}</strong></div>
-            </section>
-
-            <section className="rescue-card" aria-label={`${rescuedSpecies.length} of 3 animal friends rescued`}>
-              <div className="rescue-heading">
-                <div><span className="tiny-label">Optional adventure</span><strong>Rescue the friends</strong></div>
-                <span className="rescue-count">{rescuedSpecies.length}/3</span>
-              </div>
-              <div className="rescue-list">
-                {animalObjects.map((animal) => {
-                  const rescued = game.rescuedAnimalIds.includes(animal.id);
-                  return (
-                    <div className={`rescue-friend ${rescued ? "rescued" : ""}`} key={animal.id} aria-label={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`} title={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`}>
-                      <div className="rescue-icon">
-                        <img src={animalArt(animal.species)} alt="" />
-                        {!rescued && <img className="cage-mini" src={ASSETS.animalCage} alt="" />}
-                      </div>
-                      {rescued && <b className="rescue-check" aria-hidden="true">✓</b>}
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section className="bag-card" aria-label="Adventure bag">
-              <div className="section-heading">
-                <div><strong>Adventure bag</strong></div>
-                <span className="bag-count">{game.collectedObjectIds.length}</span>
-              </div>
-              <div className="inventory-grid">
-                {objectKinds.has("sword") && <InventorySlot label="Sword" image={ASSETS.sword} found={game.hasSword} />}
-                {objectKinds.has("boots") && <InventorySlot label="Boots" image={ASSETS.boots} found={game.hasBoots} />}
-                {keyColors.map((color) => (
-                  <InventorySlot key={color} label={`${COLOR_LABELS[color]} key`} image={ASSETS.key} found={game.keys.includes(color)} color={color} />
-                ))}
-                {!objectKinds.has("sword") && !objectKinds.has("boots") && keyColors.length === 0 && (
-                  <div className="empty-bag"><span>🎒</span><strong>Bag ready!</strong></div>
-                )}
-              </div>
-              {ownedCollectibles.length > 0 && (
-                <div className="collection-strip owned-collection" aria-label="Ame's stickers and medals">
-                  {ownedCollectibles.map((item) => (
-                    <div className="collection-item owned" key={item.id} title={item.label}><img src={item.art} alt={item.label} /></div>
-                  ))}
-                </div>
+            <div className={`adventure-dashboard${explorationMode ? " exploration-dashboard" : ""}`}>
+              {explorationMode && !bigMaze && (
+                <MiniMap
+                  level={level}
+                  position={game.position}
+                  revealed={revealedTiles}
+                  currentView={currentViewTiles}
+                  objects={activeObjects}
+                />
               )}
-            </section>
+              <div className="adventure-details">
+                <section className="objective-card">
+                  <span className="objective-icon" aria-hidden="true">★</span>
+                  <div><span className="tiny-label">Right now</span><strong>{level.objective}</strong></div>
+                </section>
+
+                <section className="rescue-card" aria-label={`${rescuedSpecies.length} of 3 animal friends rescued`}>
+                  <div className="rescue-heading">
+                    <div><span className="tiny-label">Optional adventure</span><strong>Rescue the friends</strong></div>
+                    <span className="rescue-count">{rescuedSpecies.length}/3</span>
+                  </div>
+                  <div className="rescue-list">
+                    {animalObjects.map((animal) => {
+                      const rescued = game.rescuedAnimalIds.includes(animal.id);
+                      return (
+                        <div className={`rescue-friend ${rescued ? "rescued" : ""}`} key={animal.id} aria-label={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`} title={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`}>
+                          <div className="rescue-icon">
+                            <img src={animalArt(animal.species)} alt="" />
+                            {!rescued && <img className="cage-mini" src={ASSETS.animalCage} alt="" />}
+                          </div>
+                          {rescued && <b className="rescue-check" aria-hidden="true">✓</b>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+
+                <section className="bag-card" aria-label="Adventure bag">
+                  <div className="section-heading">
+                    <div><strong>Adventure bag</strong></div>
+                    <span className="bag-count">{game.collectedObjectIds.length}</span>
+                  </div>
+                  <div className="inventory-grid">
+                    {objectKinds.has("sword") && <InventorySlot label="Sword" image={ASSETS.sword} found={game.hasSword} />}
+                    {objectKinds.has("boots") && <InventorySlot label="Boots" image={ASSETS.boots} found={game.hasBoots} />}
+                    {keyColors.map((color) => (
+                      <InventorySlot key={color} label={`${COLOR_LABELS[color]} key`} image={ASSETS.key} found={game.keys.includes(color)} color={color} />
+                    ))}
+                    {!objectKinds.has("sword") && !objectKinds.has("boots") && keyColors.length === 0 && (
+                      <div className="empty-bag"><span>🎒</span><strong>Bag ready!</strong></div>
+                    )}
+                  </div>
+                  {ownedCollectibles.length > 0 && (
+                    <div className="collection-strip owned-collection" aria-label="Ame's stickers and medals">
+                      {ownedCollectibles.map((item) => (
+                        <div className="collection-item owned" key={item.id} title={item.label}><img src={item.art} alt={item.label} /></div>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              </div>
+            </div>
 
             <section className="controls-card">
               <div className="controls-copy">
@@ -1127,6 +1354,7 @@ function App() {
               <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />
               <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
               <HelpStep icon="💖" title="Rescue friends" copy="Three are hiding in every maze." />
+              {explorationMode && <HelpStep icon="🗺️" title="Fill the map" copy="Exploring reveals each part." />}
             </div>
             <button className="primary-button" onClick={closeHelp}>Let's explore!</button>
           </Modal>
@@ -1153,16 +1381,23 @@ function App() {
               })}
             </div>
             {completion.rescuedSpecies.length === 3 && <div className="perfect-banner">💖 Perfect rescue! All three friends are safe!</div>}
-            <div className="reward-panel">
-              <img className="reward-pouch" src={ASSETS.coinPouch} alt="A pouch of gold star coins" />
-              <div className="reward-copy">
-                <span>Maze reward</span>
-                <strong>+{completion.reward.gold} gold stars</strong>
-                <small className="reward-breakdown">Solve {completion.reward.goldBreakdown.completion} · Friends {completion.reward.goldBreakdown.animalRescue}{completion.reward.goldBreakdown.perfectRescue > 0 ? ` · All three ${completion.reward.goldBreakdown.perfectRescue}` : ""}{completion.reward.goldBreakdown.firstCompletion > 0 ? ` · New maze ${completion.reward.goldBreakdown.firstCompletion}` : ""}</small>
+            {completion.testerRun ? (
+              <div className="tester-preview-banner" role="status">
+                <span aria-hidden="true">🛠️</span>
+                <div><strong>Tester preview complete</strong><small>Nothing was saved and rewards stayed unchanged.</small></div>
               </div>
-              <span className="reward-badge">Total {completion.totalGold}</span>
-            </div>
-            {newCollectibles.length > 0 && (
+            ) : (
+              <div className="reward-panel">
+                <img className="reward-pouch" src={ASSETS.coinPouch} alt="A pouch of gold star coins" />
+                <div className="reward-copy">
+                  <span>Maze reward</span>
+                  <strong>+{completion.reward.gold} gold stars</strong>
+                  <small className="reward-breakdown">Solve {completion.reward.goldBreakdown.completion} · Friends {completion.reward.goldBreakdown.animalRescue}{completion.reward.goldBreakdown.perfectRescue > 0 ? ` · All three ${completion.reward.goldBreakdown.perfectRescue}` : ""}{completion.reward.goldBreakdown.firstCompletion > 0 ? ` · New maze ${completion.reward.goldBreakdown.firstCompletion}` : ""}</small>
+                </div>
+                <span className="reward-badge">Total {completion.totalGold}</span>
+              </div>
+            )}
+            {!completion.testerRun && newCollectibles.length > 0 && (
               <div className="collection-strip reward-new" aria-label="New rewards">
                 {newCollectibles.map((item) => (
                   <div className="collection-pop" key={item.id}>
@@ -1175,7 +1410,7 @@ function App() {
               </div>
             )}
             <div className="modal-actions">
-              <button className="primary-button" onClick={nextLevel}>{campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze"} <span>→</span></button>
+              <button className="primary-button" onClick={nextLevel}>{completion.testerRun ? "Next test maze" : campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze"} <span>→</span></button>
               <button className="secondary-button" onClick={replayLevel}>Play again</button>
             </div>
           </Modal>
@@ -1313,7 +1548,7 @@ function TitleScreen({
         </div>
       </div>
 
-      <span className="title-version">Playable build 0.4.0</span>
+      <span className="title-version">Playable build {BUILD_VERSION}</span>
     </section>
   );
 }

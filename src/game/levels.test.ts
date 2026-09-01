@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { createInitialGameState, movePlayer } from "./engine";
-import { CURATED_LEVELS, MOVEMENT_LEVEL, parseAsciiLevel } from "./levels";
+import {
+  CURATED_LEVELS,
+  LANTERNLIGHT_LABYRINTH_LEVEL,
+  MOVEMENT_LEVEL,
+  parseAsciiLevel,
+} from "./levels";
 import { solveLevel, validateLevel } from "./solver";
 
 describe("curated campaign levels", () => {
@@ -10,7 +15,7 @@ describe("curated campaign levels", () => {
     expect(MOVEMENT_LEVEL.width).toBe(9);
   });
 
-  it("grows gradually from a readable 9 by 9 to a maximum 17 by 17", () => {
+  it("grows gradually from readable whole-maze levels into one 25 by 25 exploration maze", () => {
     expect(CURATED_LEVELS.map((level) => [level.width, level.height])).toEqual([
       [9, 9],
       [11, 11],
@@ -20,6 +25,7 @@ describe("curated campaign levels", () => {
       [15, 15],
       [17, 17],
       [17, 17],
+      [25, 25],
     ]);
     expect(CURATED_LEVELS.map((level) => solveLevel(level).directions.length)).toEqual([
       26,
@@ -30,6 +36,7 @@ describe("curated campaign levels", () => {
       90,
       108,
       114,
+      288,
     ]);
   });
 
@@ -68,6 +75,26 @@ describe("curated campaign levels", () => {
     },
   );
 
+  it("keeps the giant exploration finale gentle, ordered, and rewarding to fully explore", () => {
+    const ordinaryWin = solveLevel(LANTERNLIGHT_LABYRINTH_LEVEL);
+    const perfectRescueWin = solveLevel(LANTERNLIGHT_LABYRINTH_LEVEL, {
+      requireAllAnimals: true,
+    });
+
+    expect(ordinaryWin.directions).toHaveLength(288);
+    expect(ordinaryWin.finalState).toMatchObject({
+      power: 27,
+      hasSword: true,
+      hasBoots: true,
+      keys: ["blue", "red", "yellow"],
+      status: "won",
+    });
+    expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(4);
+    expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(3);
+    expect(perfectRescueWin.directions).toHaveLength(320);
+    expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(3);
+  });
+
   it("keeps every required gate on the winning route", () => {
     const expectedKinds = [
       { animal: 3 },
@@ -78,9 +105,10 @@ describe("curated campaign levels", () => {
       { animal: 3, key: 3, door: 3, enemy: 2, sword: 1, boots: 1, potion: 1 },
       { animal: 3, sword: 1, enemy: 3, key: 3, potion: 1, door: 3, boots: 1 },
       { animal: 3, key: 3, door: 3, enemy: 4, sword: 1, boots: 1, potion: 2 },
+      { animal: 3, potion: 2, enemy: 4, boots: 1, key: 3, door: 3, sword: 1 },
     ] as const;
-    const expectedEnemyCounts = [0, 1, 2, 3, 2, 2, 3, 4] as const;
-    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3] as const;
+    const expectedEnemyCounts = [0, 1, 2, 3, 2, 2, 3, 4, 4] as const;
+    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 3] as const;
 
     CURATED_LEVELS.forEach((level, index) => {
       const counts = Object.fromEntries(

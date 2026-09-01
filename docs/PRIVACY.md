@@ -1,6 +1,6 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.4.0 is a client-only game. It has no account system, analytics,
+Maze so Puzzle 0.5.0 is a client-only game. It has no account system, analytics,
 advertising, multiplayer, chat, remote database, or game-owned server. The
 browser build does not intentionally send player names, gameplay, or saved
 progress anywhere.
@@ -16,6 +16,10 @@ Saved progress is specific to a browser profile and site origin. A different
 device, another browser, a private window, a cleared site-data store, or a
 different Vercel preview hostname starts with a separate save. There is no cloud
 sync or recovery service in this build.
+
+The hidden `?debug=mazes` tester preview does not write completion rewards,
+records, unlocks, or maze progress. Existing local progress remains available
+after leaving a preview run.
 
 ## Network behaviour
 
