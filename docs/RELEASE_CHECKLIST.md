@@ -6,20 +6,20 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for web 0.7.0: automated verification, dependency audit, locked Tauri
-compile, and targeted production-browser checks are complete. Physical-iPad,
-listening, accessibility, and broad manual play-through items remain deliberately
-unclaimed. Sections 4 and 5 preserve the last verified Windows artifact record,
-which is version 0.5.1; no 0.7.0 executable or installer is claimed.
+Status for 0.7.1: automated verification, dependency audit, locked Tauri compile,
+local responsive-browser checks, Windows packaging, source-to-stage comparison,
+and portable smoke launch are complete. Physical-iPad gesture testing, listening,
+accessibility, clean-machine installation, and broad manual play-through items
+remain deliberately unclaimed.
 
 ## 1. Prepare
 
-- [x] Confirm the intended 0.7.0 source version in `package.json`, `package-lock.json`,
+- [x] Confirm the intended 0.7.1 source version in `package.json`, `package-lock.json`,
   `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
-- [x] Confirm the 0.7.0 bundle contains continuous world-aligned SVG terrain,
+- [x] Confirm the 0.7.1 bundle contains continuous world-aligned SVG terrain,
   rounded convex and concave joins, periodic paired textures, flat connected hazard
   lips, picture-first UI, a held-weapon overlay, and locally bundled OST files.
 - [x] Confirm the nine story mazes use nine distinct paired terrain themes, each
@@ -32,7 +32,7 @@ which is version 0.5.1; no 0.7.0 executable or installer is claimed.
   the direct nine-maze tester picker, and tester completion cannot write rewards,
   records, unlocks, active sessions, or progress.
 - [x] Update `CHANGELOG.md`, `README.md`, architecture, audit, and release
-  documentation for the visual-variety build.
+  documentation for the touch, responsive-layout, and Windows build.
 - [ ] Confirm every production image has known provenance and the game contains
   no unlicensed third-party material.
 - [ ] Make the owner-approved licence decision before publishing source or
@@ -56,8 +56,8 @@ npm run check:desktop
 - [x] Dependency audit output is reviewed: zero known vulnerabilities.
 - [x] `npm ls` reports a clean JavaScript dependency tree.
 - [x] `npm run check:desktop` completes `cargo check --locked` without errors.
-- [ ] A future 0.7.x Windows release separately runs `npm run desktop:build` and
-  verifies both the release executable and NSIS installer before sharing them.
+- [x] `npm run desktop:build` produces the 0.7.1 release executable and NSIS
+  installer; both are staged, source-compared, version-checked, and hashed.
 - [x] Automated level checks validate all nine story mazes: the first eight from
   9 x 9 through 17 x 17 plus the 25 x 25 Lanternlight Labyrinth, with separate
   ordinary and all-three-rescues solutions, one weapon, and three unique known
@@ -70,13 +70,12 @@ npm run check:desktop
 - [x] Focused exploration tests cover a centred 7 x 7 window, edge clamping,
   current field of view, and persistent reveal accumulation; the production
   browser pass confirms reveal reset on level switch.
-- [ ] Add focused controller automation for buffered turns, deterministic holds,
-  modifier safety, focus/visibility cleanup, D-pad press-and-hold, and pointer
-  cancellation. The previous 0.4.0 pass manually confirmed synchronous keyboard
-  movement and exactly one move per D-pad tap; repeat that check for the 0.7.0
-  production web build and any future desktop package.
+- [x] Seven focused touch-gesture tests cover dead-zone limits, all four dominant
+  directions, and direction changes during one drag. Keyboard/D-pad timing and
+  lifecycle cleanup retain their existing tests; physical touch pointer capture
+  and cancellation still require the device check below.
 - [x] Repeat the relevant checks after final source changes (`npm run check`:
-  164 of 164 tests plus the production build).
+  171 of 171 tests plus the production build).
 
 ## 3. Browser play test
 
@@ -88,6 +87,11 @@ npm run preview
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
+- [x] 667 x 375, 740 x 360, and 844 x 390: the phone stage fills the safe
+  landscape viewport, the maze remains readable, the sidebar does not overlap
+  or scroll, and movement/utility targets stay at least 44 px.
+- [x] 1024 x 768 and 1180 x 820: the iPad-size layout has no sidebar overflow;
+  the coarse-pointer rules replace the tall D-pad with a two-row control.
 - [ ] 1366 x 768 and 1920 x 1080: artwork stays sharp and the board remains square.
 - [x] Big Maze expands the board, keeps its compact Power/item/rescue HUD and
   feedback toast readable, and returns to the full UI with Escape or Normal.
@@ -109,6 +113,9 @@ npm run preview
   middle click do not move Ame.
 - [ ] On-screen arrows work with mouse and touch input, including press-and-hold
   travel and release/cancel cleanup.
+- [ ] On a physical iPad, drag anywhere on the maze, steer during the same
+  gesture, recenter to stop, release outside the board, and confirm the page
+  neither pans nor pinch-zooms while playing.
 - [ ] Help and completion dialogs trap focus, close as intended, restore focus,
   and remain usable with keyboard only.
 - [ ] Mute state and reduced-motion preference are respected.
@@ -142,7 +149,7 @@ npm run preview
 - [ ] Each of the nine stat-driven badges unlocks at its documented threshold and
   new rewards appear once without duplicate fanfare.
 
-## 4. Historical Windows 0.5.1 artifact test
+## 4. Windows 0.7.1 artifact test
 
 Expected build outputs:
 
@@ -150,7 +157,7 @@ Expected build outputs:
 - `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
   Solve!_VERSION_x64-setup.exe`
 
-For the last verified Windows artifact set, `VERSION` resolves to `0.5.1`.
+For the current verified Windows artifact set, `VERSION` resolves to `0.7.1`.
 
 - [x] A hidden five-second launch of the staged portable executable remains
   running and responsive and exposes the correct game window title.
@@ -165,14 +172,14 @@ For the last verified Windows artifact set, `VERSION` resolves to `0.5.1`.
 - [ ] Sign the executable and installer for public distribution, then test the
   signed files again. If unsigned, label them clearly.
 
-## 5. Historical Windows 0.5.1 staging record
+## 5. Windows 0.7.1 staging record
 
 - [x] Copy only artifacts from the final successful build into `release/` using
   versioned filenames.
-- [x] Confirm the staged names are `Maze-so-Puzzle-0.5.1-portable.exe` and
-  `Maze-so-Puzzle-0.5.1-setup.exe`.
-- [x] Keep the Windows artifacts clearly identified as the last verified 0.5.1
-  desktop build; never present them as the current 0.7.0 web build.
+- [x] Confirm the staged names are `Maze-so-Puzzle-0.7.1-portable.exe` and
+  `Maze-so-Puzzle-0.7.1-setup.exe`.
+- [x] Confirm both artifacts report file/product version 0.7.1 and remain clearly
+  labelled as unsigned local test builds.
 - [x] Generate final SHA-256 values after all copying (the current test build is unsigned):
 
 ```powershell
@@ -181,7 +188,7 @@ Get-FileHash .\release\Maze-so-Puzzle-*-setup.exe -Algorithm SHA256
 ```
 
 - [x] Confirm the staged portable and installer hashes match their final Tauri
-  source artifacts byte-for-byte, then record the final 0.5.1 filenames, sizes,
+  source artifacts byte-for-byte, then record the final 0.7.1 filenames, sizes,
   and hashes in `release/README.md` and `release/SHA256SUMS.txt`.
 
 - [ ] Verify the published hashes against newly downloaded copies.

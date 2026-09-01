@@ -54,7 +54,7 @@ document and does not use client-side URL routing.
   player-centred view and a minimap that keeps explored tiles visible while
   masking unvisited areas. Check an early 9×9 maze, a generated maze, and the
   25×25 Lanternlight Labyrinth, including camera clamping near an outer edge.
-- Click or tap the small **Playable build 0.7.0** label on the title screen and
+- Click or tap the small **Playable build 0.7.1** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -63,6 +63,10 @@ document and does not use client-side URL routing.
   and connected water/lava areas. Floor and wall patterns should remain aligned
   across the camera, convex and concave corners should follow the terrain
   boundary, and hazards should have a flat subtle floor lip with no cast shadow.
+- On iPad, drag around the maze and confirm Ame follows the dominant direction,
+  changes direction during the same gesture, and stops on release. Confirm the
+  page does not pan or pinch-zoom during play. On a landscape phone, verify the
+  stage uses the full safe viewport and the sidebar does not overlap or scroll.
 - Check portrait turn-sideways guidance on the tablet and mute/unmute after the
   first tap. Browser audio should never start before that interaction.
 
@@ -79,6 +83,6 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. The 0.7.0 deployment is a web release; version 0.5.1 remains the last
-verified downloadable Windows build until the desktop artifacts are rebuilt and
-checked separately.
+secrets. Version 0.7.1 also has separately built and smoke-checked local Windows
+test artifacts; those executable files are intentionally excluded from Git and
+Vercel deployment.

@@ -4046,3 +4046,347 @@ img.wallet-pouch {
     animation: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   V7.1 mobile play surface
+
+   Wide phones have much less *effective* height than a desktop. Filling the
+   available landscape viewport gives the maze room to breathe, while the
+   compact two-row direction pad keeps every movement target at least 44px.
+   -------------------------------------------------------------------------- */
+
+html,
+body,
+#root,
+.app-frame,
+.game-stage,
+.game-layout {
+  overscroll-behavior: none;
+}
+
+.game-layout {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.maze-board {
+  touch-action: none;
+}
+
+/* The touch drag controller is visual feedback only; the board retains the
+   pointer stream. Coordinates are supplied by the game in board-local pixels. */
+.touch-joystick {
+  position: absolute;
+  z-index: 32;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.touch-joystick-origin,
+.touch-joystick-cursor {
+  position: absolute;
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  font-style: normal;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.touch-joystick-origin {
+  top: var(--touch-origin-y);
+  left: var(--touch-origin-x);
+  width: clamp(34px, 11cqw, 46px);
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  background: rgba(72, 62, 102, 0.22);
+  box-shadow:
+    0 0 0 2px rgba(85, 74, 116, 0.2),
+    inset 0 0 12px rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(2px);
+}
+
+.touch-joystick-cursor {
+  top: var(--touch-cursor-y);
+  left: var(--touch-cursor-x);
+  width: clamp(28px, 8.5cqw, 40px);
+  border: 2px solid rgba(255, 255, 255, 0.96);
+  background: linear-gradient(145deg, rgba(255, 220, 104, 0.98), rgba(232, 112, 136, 0.96));
+  color: white;
+  font-size: clamp(11px, 3.6cqw, 16px);
+  font-weight: 1000;
+  box-shadow:
+    0 0 0 2px rgba(92, 69, 111, 0.38),
+    0 5px 13px rgba(53, 42, 72, 0.28),
+    0 0 16px rgba(255, 224, 113, 0.64);
+  text-shadow: 0 1px 2px rgba(65, 43, 75, 0.52);
+}
+
+.touch-joystick.active .touch-joystick-origin {
+  background: rgba(78, 67, 109, 0.28);
+}
+
+/* A real iPad matches pointer:coarse. Its 4:3 screen letterboxes the game to a
+   576px-high 16:9 stage, so a three-row 136px D-pad crowds the dashboard even
+   though the browser viewport itself is taller. */
+@media (pointer: coarse) and (orientation: landscape) and (min-height: 601px) and (max-width: 1200px) {
+  .controls-card {
+    min-height: 92px;
+    height: 92px;
+    padding: 2px 6px 2px 9px;
+    grid-template-columns: minmax(0, 1fr) 132px;
+    gap: 6px;
+  }
+
+  .dpad {
+    width: 132px;
+    height: 88px;
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(2, 44px);
+    gap: 0;
+    justify-self: end;
+  }
+
+  .dpad button {
+    width: 44px;
+    min-height: 44px;
+  }
+
+  .dpad-center { display: none; }
+  .dpad-up { grid-column: 2; grid-row: 1; }
+  .dpad-left { grid-column: 1; grid-row: 2; }
+  .dpad-right { grid-column: 3; grid-row: 2; }
+  .dpad-down { grid-column: 2; grid-row: 2; }
+
+  .utility-row {
+    min-height: 44px;
+  }
+
+  .utility-row button {
+    min-height: 44px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .game-stage {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    border-radius: 0;
+  }
+
+  .game-layout {
+    padding: 6px;
+    grid-template-columns: minmax(0, 1fr) clamp(248px, 38vw, 286px);
+    gap: 6px;
+  }
+
+  .maze-panel {
+    padding: 5px;
+    gap: 3px;
+    overflow: hidden;
+    border-radius: 14px;
+  }
+
+  .maze-topline {
+    display: grid;
+    height: 34px;
+    min-height: 34px;
+    padding: 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 3px;
+    overflow: hidden;
+  }
+
+  .maze-topline > div:first-child {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .maze-topline .level-kicker {
+    display: none;
+  }
+
+  .maze-topline h2 {
+    margin: 0;
+    overflow: hidden;
+    font-size: 15px;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .maze-topline-actions {
+    min-width: 0;
+    gap: 2px;
+    flex-wrap: nowrap;
+  }
+
+  .exploration-view-pill {
+    display: none;
+  }
+
+  .maze-topline-actions .tester-skip-button,
+  .maze-topline-actions .big-maze-button,
+  .maze-topline-actions .surprise-button {
+    width: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 0;
+  }
+
+  .maze-topline-actions .tester-skip-button::before {
+    content: "\1f6e0";
+    font-size: 13px;
+  }
+
+  .maze-topline-actions .big-maze-button::before {
+    content: "\26f6";
+    font-size: 15px;
+  }
+
+  .maze-topline-actions .surprise-button::before {
+    content: "\2726";
+    font-size: 15px;
+  }
+
+  .step-pill {
+    min-width: 42px;
+    min-height: 30px;
+    height: 30px;
+    padding-inline: 5px;
+    gap: 2px;
+    font-size: 11px;
+  }
+
+  .maze-board {
+    height: 100%;
+    max-height: 100%;
+    border-width: 4px;
+    border-radius: 14px;
+  }
+
+  .feedback-bar {
+    min-height: 30px;
+    height: 30px;
+    padding: 3px 7px;
+    gap: 5px;
+    overflow: hidden;
+    border-radius: 12px;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .feedback-bar > span:last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidebar {
+    gap: 4px;
+    overflow: hidden;
+  }
+
+  .brand-and-wallet {
+    display: none;
+  }
+
+  .hero-card {
+    height: 48px;
+    min-height: 48px;
+    padding: 2px 5px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    flex: 0 0 48px;
+  }
+
+  .portrait-wrap {
+    width: 40px;
+    height: 40px;
+  }
+
+  .big-power {
+    font-size: 28px;
+  }
+
+  .exploration-dashboard {
+    min-height: 0;
+    flex: 1 1 auto;
+    grid-template-columns: minmax(92px, 0.78fr) minmax(0, 1.22fr);
+    gap: 3px;
+    overflow: hidden;
+  }
+
+  .maze-map-card {
+    min-height: 0;
+  }
+
+  .maze-minimap {
+    width: min(100%, 112px);
+  }
+
+  .exploration-dashboard .adventure-details {
+    gap: 2px;
+  }
+
+  .exploration-dashboard .objective-card {
+    min-height: 25px;
+  }
+
+  .exploration-dashboard .rescue-card {
+    min-height: 50px;
+  }
+
+  .exploration-dashboard .bag-card {
+    min-height: 47px;
+  }
+
+  .controls-card {
+    height: 92px;
+    min-height: 92px;
+    flex: 0 0 92px;
+  }
+
+  .controls-copy strong {
+    font-size: 10px;
+  }
+
+  .level-dots {
+    display: none;
+  }
+
+  .utility-row {
+    min-height: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    gap: 2px;
+  }
+
+  .utility-row button {
+    min-width: 0;
+    min-height: 44px;
+    padding-inline: 1px;
+    overflow: hidden;
+    font-size: 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 420px) and (max-width: 700px) {
+  .game-layout {
+    grid-template-columns: minmax(0, 1fr) 248px;
+  }
+
+  .maze-topline-actions .surprise-button {
+    display: none;
+  }
+
+  .exploration-dashboard {
+    grid-template-columns: 92px minmax(0, 1fr);
+  }
+}

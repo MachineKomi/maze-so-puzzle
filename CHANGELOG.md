@@ -4,6 +4,38 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.7.1 - 2026-09-01
+
+This touch-first maintenance release makes the game practical on landscape
+phones, improves the iPad layout, and restores matching Windows test builds.
+
+### Added
+
+- A floating touch joystick on the maze: drag in any direction for continuous
+  grid movement, steer while holding, recenter to stop, or tap for one step.
+- iPad standalone-web-app metadata and an explicit no-pinch viewport policy.
+- Fresh unsigned Windows x64 portable and NSIS installer builds staged locally
+  at version 0.7.1 with recorded SHA-256 checksums.
+
+### Changed
+
+- Extra-wide landscape phones now use their entire safe viewport instead of a
+  narrow letterboxed 16:9 stage. The maze is larger and the compact sidebar no
+  longer overlaps or scrolls at the tested 667×375 through 844×390 sizes.
+- Coarse-pointer iPads use a compact two-row D-pad; movement and utility targets
+  remain at least 44px while the 1024×768 and 1180×820 layouts fit cleanly.
+- Page panning, selection, overscroll, and pinch zoom no longer compete with
+  maze gestures during play.
+- Expanded the release gate to 171 automated tests, including seven focused
+  floating-joystick direction and dead-zone tests.
+
+### Desktop status
+
+- The 0.7.1 portable executable launched responsive with the correct title in a
+  five-second smoke test. The installer was built and source-compared but has
+  not yet received a clean-machine install/uninstall test. Both files are
+  unsigned and may trigger Windows SmartScreen.
+
 ## 0.7.0 - 2026-09-01
 
 This picture-first variety build gives every maze its own illustrated identity,

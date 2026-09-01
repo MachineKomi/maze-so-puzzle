@@ -42,6 +42,10 @@ state.
    material periods, and fallbacks. The current catalogue contains nine paired
    terrain themes, five weapons, five friendly enemy looks, eight pet species,
    and four cages.
+13. `src/touchGesture.ts` contains the pure floating-joystick direction and
+   cell-relative dead-zone rules. `App.tsx` owns pointer capture, repeat timing,
+   cancellation, and the visual touch cursor while reusing the normal immutable
+   movement transition for every step.
 
 ## Important boundaries
 
@@ -58,6 +62,10 @@ state.
   synchronized between devices.
 - Camera coordinates affect presentation only. Movement, collision, combat,
   collection, and solving continue to operate in global level coordinates.
+- Touch dragging begins only on the maze board. It chooses the dominant axis,
+  has no destination pathfinding, changes direction as the finger moves, and
+  clears all queued touch input on release, cancellation, modal entry, blur, or
+  visibility loss. Keyboard, click, and D-pad controls remain independent.
 - Terrain geometry is a connected cell union rendered through SVG. Globally
   aligned `userSpaceOnUse` patterns keep the floor, wall, water, and lava art in
   world coordinates as the camera moves. Boundary tracing resolves diagonal
@@ -74,9 +82,10 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The current 0.7.0 source is a web release. Architecture compatibility with
-  Tauri is not binary verification; the last verified Windows executable and
-  installer remain version 0.5.1 until separately rebuilt and checked.
+- The current 0.7.1 source is shared by the web and Tauri builds. The staged
+  0.7.1 portable executable and installer were separately built, source-compared,
+  hashed, and smoke-checked as recorded in `release/`; clean-machine installer
+  testing and code signing remain separate release steps.
 - AI-generated source art and exact prompts are recorded in
   `docs/AI_ASSET_PROMPTS.md`; source-only masters are kept outside `public/` so
   they do not inflate deployments.
@@ -88,8 +97,9 @@ generated solvability, optional rescues, exploration-camera activation and
 reveal-set rules, terrain boundary geometry, persistence migrations,
 achievements, synthesized-sound and background-music safeguards, and protected
 navigation. It also checks the complete art catalogue, authored visual variety,
-deterministic generated variants, one weapon and three unique pets per maze, and
-the optional Wishing Woods guardian route.
+deterministic generated variants, one weapon and three unique pets per maze, the
+optional Wishing Woods guardian route, and the floating touch joystick's dead
+zone and dominant-axis direction changes.
 Every authored maze and sampled generated maze is run through the stateful
 solver. `npm run check` is the normal browser release gate; locked Cargo
 compilation and a Tauri bundle build are the additional Windows gates.

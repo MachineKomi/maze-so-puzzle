@@ -84,6 +84,11 @@ import {
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 import { getStoryRescueRecordDisplay } from "./rescueRecords";
 import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
+import {
+  directionFromTouchDrag,
+  touchDeadZoneForCell,
+  type TouchPoint,
+} from "./touchGesture";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
   up: "▲",
@@ -113,7 +118,8 @@ const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const HELD_KEY_DELAY_MS = 105;
 const HELD_KEY_REPEAT_MS = 64;
-const BUILD_VERSION = "0.7.0";
+const TOUCH_DRAG_REPEAT_MS = 72;
+const BUILD_VERSION = "0.7.1";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -139,6 +145,23 @@ type RunMode = "normal" | "tester";
 interface PendingAdventure {
   readonly level: LevelDefinition;
   readonly sound: "select" | "title";
+}
+
+interface ActiveTouchDrag {
+  readonly pointerId: number;
+  readonly origin: TouchPoint;
+  readonly boardLeft: number;
+  readonly boardTop: number;
+  current: TouchPoint;
+  direction: Direction | null;
+  dragged: boolean;
+  readonly deadZone: number;
+}
+
+interface TouchCursor {
+  readonly origin: TouchPoint;
+  readonly current: TouchPoint;
+  readonly direction: Direction | null;
 }
 
 function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feedback {
@@ -559,6 +582,9 @@ function App() {
   const dpadHoldDirection = useRef<Direction | null>(null);
   const dpadHoldPointerId = useRef<number | null>(null);
   const dpadHoldTimer = useRef<number | undefined>(undefined);
+  const activeTouchDrag = useRef<ActiveTouchDrag | null>(null);
+  const touchDragTimer = useRef<number | undefined>(undefined);
+  const [touchCursor, setTouchCursor] = useState<TouchCursor | null>(null);
   const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
   const rewardSoundTimer = useRef<number | undefined>(undefined);
@@ -652,6 +678,16 @@ function App() {
     }
   }, []);
 
+  const clearTouchDrag = useCallback(() => {
+    activeTouchDrag.current = null;
+    queuedDirection.current = null;
+    setTouchCursor(null);
+    if (touchDragTimer.current !== undefined) {
+      window.clearTimeout(touchDragTimer.current);
+      touchDragTimer.current = undefined;
+    }
+  }, []);
+
   const clearHeldInput = useCallback(() => {
     heldKeys.current.clear();
     heldKeyOrder.current = [];
@@ -661,7 +697,8 @@ function App() {
       heldKeyTimer.current = undefined;
     }
     clearDpadHold();
-  }, [clearDpadHold]);
+    clearTouchDrag();
+  }, [clearDpadHold, clearTouchDrag]);
 
   useEffect(() => {
     mutedRef.current = muted;
@@ -919,6 +956,7 @@ function App() {
   useEffect(() => () => {
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
     if (heldKeyTimer.current !== undefined) window.clearTimeout(heldKeyTimer.current);
+    if (touchDragTimer.current !== undefined) window.clearTimeout(touchDragTimer.current);
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     if (rewardSoundTimer.current !== undefined) window.clearTimeout(rewardSoundTimer.current);
     disposeMusic();
@@ -938,15 +976,96 @@ function App() {
     return dy < 0 ? "up" : "down";
   }, [cameraWindow, game.position.x, game.position.y]);
 
+  const scheduleTouchDragRepeat = useCallback((delay: number) => {
+    if (touchDragTimer.current !== undefined) window.clearTimeout(touchDragTimer.current);
+    const repeat = () => {
+      const direction = activeTouchDrag.current?.direction;
+      if (!direction) {
+        touchDragTimer.current = undefined;
+        return;
+      }
+      attemptMoveRef.current(direction);
+      touchDragTimer.current = window.setTimeout(repeat, TOUCH_DRAG_REPEAT_MS);
+    };
+    touchDragTimer.current = window.setTimeout(repeat, delay);
+  }, []);
+
   const onBoardPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "touch") setPreviewDirection(directionFromPointer(event.clientX, event.clientY));
+    if (event.pointerType !== "touch") {
+      setPreviewDirection(directionFromPointer(event.clientX, event.clientY));
+      return;
+    }
+
+    const drag = activeTouchDrag.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    const current = { x: event.clientX, y: event.clientY };
+    const direction = directionFromTouchDrag(drag.origin, current, drag.deadZone);
+    const directionChanged = direction !== drag.direction;
+    drag.current = current;
+    drag.direction = direction;
+    drag.dragged ||= direction !== null;
+    setTouchCursor({
+      origin: { x: drag.origin.x - drag.boardLeft, y: drag.origin.y - drag.boardTop },
+      current: { x: current.x - drag.boardLeft, y: current.y - drag.boardTop },
+      direction,
+    });
+    setPreviewDirection(direction);
+
+    if (!directionChanged) return;
+    if (touchDragTimer.current !== undefined) {
+      window.clearTimeout(touchDragTimer.current);
+      touchDragTimer.current = undefined;
+    }
+    if (!direction) {
+      queuedDirection.current = null;
+      return;
+    }
+    attemptMoveRef.current(direction);
+    scheduleTouchDragRepeat(TOUCH_DRAG_REPEAT_MS);
   };
 
   const onBoardPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
+    if (event.pointerType === "touch") {
+      clearTouchDrag();
+      const rect = event.currentTarget.getBoundingClientRect();
+      const origin = { x: event.clientX, y: event.clientY };
+      activeTouchDrag.current = {
+        pointerId: event.pointerId,
+        origin,
+        boardLeft: rect.left,
+        boardTop: rect.top,
+        current: origin,
+        direction: null,
+        dragged: false,
+        deadZone: touchDeadZoneForCell(rect.width / cameraWindow.width, rect.height / cameraWindow.height),
+      };
+      event.currentTarget.setPointerCapture(event.pointerId);
+      const localOrigin = { x: origin.x - rect.left, y: origin.y - rect.top };
+      setTouchCursor({ origin: localOrigin, current: localOrigin, direction: null });
+      setPreviewDirection(null);
+      return;
+    }
     const direction = directionFromPointer(event.clientX, event.clientY);
     if (direction) attemptMove(direction);
+  };
+
+  const finishBoardTouch = (event: ReactPointerEvent<HTMLDivElement>, cancelled = false) => {
+    const drag = activeTouchDrag.current;
+    if (event.pointerType !== "touch" || !drag || drag.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    const wasDragged = drag.dragged;
+    clearTouchDrag();
+    setPreviewDirection(null);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    if (!cancelled && !wasDragged) {
+      const direction = directionFromPointer(event.clientX, event.clientY);
+      if (direction) attemptMoveRef.current(direction);
+    }
   };
 
   const scheduleDpadRepeat = useCallback((delay: number) => {
@@ -1179,7 +1298,11 @@ function App() {
 
   return (
     <main className="app-frame">
-      <section className={`game-stage screen-${screen}`} aria-label="Maze so Puzzle game">
+      <section
+        className={`game-stage screen-${screen}`}
+        aria-label="Maze so Puzzle game"
+        style={screen === "game" ? { touchAction: "none", userSelect: "none", WebkitUserSelect: "none" } : undefined}
+      >
         {screen === "title" ? (
           <TitleScreen
             progress={progress}
@@ -1257,18 +1380,48 @@ function App() {
                 gridTemplateRows: `repeat(${cameraWindow.height}, minmax(0, 1fr))`,
                 "--grid-size": cameraWindow.width,
                 backgroundColor: terrainTheme.floor.fallbackColor,
+                touchAction: "none",
               } as CSSProperties}
               role="application"
-              aria-label="Maze board. Use arrow keys, W A S D, the arrow buttons, or click in a direction from Ame."
+              aria-label="Maze board. Use arrow keys, W A S D, the arrow buttons, click in a direction from Ame, or drag a finger like a joystick."
               aria-describedby="maze-status"
               aria-keyshortcuts="ArrowUp ArrowDown ArrowLeft ArrowRight W A S D"
               tabIndex={0}
               onPointerMove={onBoardPointerMove}
-              onPointerLeave={() => setPreviewDirection(null)}
+              onPointerLeave={(event) => { if (event.pointerType !== "touch") setPreviewDirection(null); }}
               onPointerDown={onBoardPointerDown}
+              onPointerUp={(event) => finishBoardTouch(event)}
+              onPointerCancel={(event) => finishBoardTouch(event, true)}
+              onLostPointerCapture={(event) => finishBoardTouch(event, true)}
               onContextMenu={(event) => event.preventDefault()}
             >
               <MazeTerrain level={level} camera={cameraWindow} />
+
+              {touchCursor && (
+                <div
+                  className={`touch-joystick${touchCursor.direction ? " active" : ""}`}
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    zIndex: 40,
+                    inset: 0,
+                    pointerEvents: "none",
+                    "--touch-origin-x": `${touchCursor.origin.x}px`,
+                    "--touch-origin-y": `${touchCursor.origin.y}px`,
+                    "--touch-cursor-x": `${touchCursor.current.x}px`,
+                    "--touch-cursor-y": `${touchCursor.current.y}px`,
+                  } as CSSProperties}
+                >
+                  <i
+                    className="touch-joystick-origin"
+                    style={{ position: "absolute", left: "var(--touch-origin-x)", top: "var(--touch-origin-y)", transform: "translate(-50%, -50%)" }}
+                  />
+                  <i
+                    className="touch-joystick-cursor"
+                    style={{ position: "absolute", left: "var(--touch-cursor-x)", top: "var(--touch-cursor-y)", transform: "translate(-50%, -50%)" }}
+                  >{touchCursor.direction ? DIRECTION_ICONS[touchCursor.direction] : "✦"}</i>
+                </div>
+              )}
 
               {previewTarget && shownPreviewDirection && isInsideWindow(previewTarget, cameraWindow) && (
                 <div
@@ -1431,7 +1584,7 @@ function App() {
                 <strong>
                   {firstMoveNudge
                     ? <>Try the glowing {suggestedMoveDirection ? DIRECTION_ICONS[suggestedMoveDirection] : "arrow"} button!</>
-                    : <><span className="desktop-controls-copy">Arrow keys · WASD · click</span><span className="touch-controls-copy">Tap an arrow, or tap beside Ame</span></>}
+                    : <><span className="desktop-controls-copy">Arrow keys · WASD · click</span><span className="touch-controls-copy">Drag on the maze, or tap an arrow</span></>}
                 </strong>
               </div>
               <div className="dpad" aria-label="Movement buttons">
@@ -1474,7 +1627,7 @@ function App() {
         {helpOpen && (
           <Modal title="How to help Ame" onClose={closeHelp} returnFocus={modalReturnFocus.current}>
             <div className="help-grid">
-              <HelpStep icon="👣" title="Move" copy="One square at a time." />
+              <HelpStep icon="👣" title="Move" copy="Drag on the maze or tap an arrow. One square at a time." />
               <HelpStep icon="🗡️" title="Find a weapon" copy="Then baddies can scoot." />
               <HelpStep icon="⭐" title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
               <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />

@@ -1,10 +1,10 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.7.0 is a client-only web game. It has no account system,
+Maze so Puzzle 0.7.1 is a client-only game. It has no account system,
 analytics, advertising, multiplayer, chat, remote database, or game-owned
 server. The browser build does not intentionally send player names, gameplay,
-or saved progress anywhere. The last verified downloadable Windows build is
-still 0.5.1 and uses the same device-local storage model.
+or saved progress anywhere. The matching verified downloadable Windows test
+build is 0.7.1 and uses the same device-local storage model.
 
 ## What is stored
 

@@ -6,9 +6,8 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the current
-playable 0.7.0 web release, which remains an active play-test prototype. The
-last verified downloadable Windows binaries remain version 0.5.1 until a new
-desktop package is built and checked separately.
+playable 0.7.1 web and Windows release, which remains an active play-test
+prototype. Version 0.7.1 is also the current locally verified Windows package.
 
 ![The previous 0.4.0 Little Star Trail build, with Ame's maze on the left and her picture-led adventure panel on the right](docs/screenshots/gameplay-v0.4.0.png)
 
@@ -60,31 +59,33 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The source version has advanced to 0.7.0 for the web release, but that alone does
-not verify a desktop binary. The most recently verified desktop artifacts are
-the unsigned 0.5.1 test build:
+The most recently verified desktop artifacts are the unsigned 0.7.1 test build:
 
-- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.5.1-portable.exe`
-  and `release/Maze-so-Puzzle-0.5.1-setup.exe`. Executables are deliberately
+- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.7.1-portable.exe`
+  and `release/Maze-so-Puzzle-0.7.1-setup.exe`. Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path may be replaced by a later local build).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.5.1_x64-setup.exe`.
-- The verified 0.5.1 hashes and retained archive hashes are recorded in
+  Puzzle - For Ame to Solve!_0.7.1_x64-setup.exe`.
+- The verified 0.7.1 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
 ## Controls
 
 - Arrow keys or `WASD`: move one square.
-- Click or tap anywhere on the maze: move one square in the dominant direction
-  from Ame. There is deliberately no destination pathfinding.
+- Click anywhere on the maze: move one square in the dominant direction from
+  Ame. There is deliberately no destination pathfinding.
+- On a touchscreen, drag anywhere on the maze like a floating joystick. Ame
+  moves repeatedly in the dominant drag direction, changes direction with your
+  finger, and stops when you recenter or lift it. A simple tap still moves one
+  square toward that point.
 - On-screen arrows: touch- and mouse-friendly movement.
 - Hold a keyboard direction or an on-screen arrow for quick, predictable travel
   through a path; a tap still moves exactly one square.
-- Touch devices receive a larger 44 px-minimum direction pad and shorter
-  touch-specific instructions.
+- Extra-wide landscape phones use their complete safe viewport. Touch play
+  prevents page panning and pinch-zoom and retains 44 px-minimum controls.
 - Big Maze: enlarge the board while keeping a compact Power, rescue, and item
   HUD; press `Escape` or Normal to return to the full side panel.
 - Any maze wider or taller than 7 tiles uses a player-centred 7 x 7 exploration
@@ -93,7 +94,7 @@ the unsigned 0.5.1 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.7.0** label to
+On the title screen, click or tap the small **Playable build 0.7.1** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -101,7 +102,14 @@ and camera mode. Runs entered through the picker are previews: completion
 rewards, records, unlocks, active-run recovery, and saved progress are not
 changed.
 
-## Included in playable web build 0.7.0
+## Install on an iPad
+
+Open the production URL in Safari, tap **Share**, choose **More**, then
+**Add to Home Screen**. Enable **Open as Web App** and tap **Add**. The installed
+icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
+Turn the iPad sideways to play.
+
+## Included in playable build 0.7.1
 
 - Nine progressive story mazes: eight readable mazes from 9 x 9 through 17 x 17,
   followed by the 25 x 25 **Lanternlight Labyrinth** exploration finale.
@@ -150,7 +158,10 @@ changed.
   inventory variants, less repeated text, clearer found/missing silhouettes,
   and the selected weapon overlaid in Ame's hands.
 - A 16:9 landscape presentation with a friendly turn-sideways screen on portrait
-  devices.
+  devices. Extra-wide phones use their full landscape screen instead of wasting
+  space on letterboxing, while iPad controls compact without overlap.
+- A floating touch joystick on the maze, no-pinch installed-app metadata, and
+  safer overscroll/selection handling for iPad and Android play.
 - Safe session navigation: a maze can be resumed after visiting Home, the
   Adventure Book, refreshing the page, or reopening the app; changing maze
   mid-run asks for confirmation.
@@ -191,13 +202,13 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.7.0 web release gate passes 164 automated tests, the strict TypeScript and
+The 0.7.1 release gate passes 171 automated tests, the strict TypeScript and
 production Vite build, a zero-vulnerability npm audit, the locked Tauri compile,
 and focused landscape-browser checks for the tester picker, 7 x 7 camera,
 persistent minimap reveal, connected terrain, hazard treatment, and layout
 overflow. Repeat the public URL smoke after every production push.
 
-The browser matrix and the historical 0.5.1 Windows artifact record are kept in
+The browser matrix and the current 0.7.1 Windows artifact record are kept in
 [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md). Building a future
 Windows package is a separate release step:
 
@@ -205,7 +216,7 @@ Windows package is a separate release step:
 npm run desktop:build
 ```
 
-The retained 0.5.1 Windows test installer is unsigned, so Windows SmartScreen
+The 0.7.1 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 
