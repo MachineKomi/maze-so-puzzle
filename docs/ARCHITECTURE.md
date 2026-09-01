@@ -16,6 +16,8 @@ state.
    weapon in Ame's hands after collection. It also owns primary-pointer capture,
    repeat timing, the touch cursor, rescued-pet follower presentation, and the
    cancellable jump, three-bash battle, rescue, and Power-transfer presentations.
+   Important pickups also create an independently timed, board-centred toast;
+   larger player/enemy sprites and Power labels are presentation-only CSS.
 3. `src/combatPresentation.ts` builds a pure deterministic victory timeline:
    three clashes, semantic sound cues, exact conserved Power-transfer steps,
    final enemy Power `0`, and a short reduced-motion handoff.
@@ -45,29 +47,36 @@ state.
    rounded SVG paths in stable world coordinates, including holes, diagonal
    contacts, and the camera gutter used by the renderer.
 10. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
-   in browser `localStorage`.
+    in browser `localStorage`.
 11. `src/session.ts` validates and stores a schema-v1 snapshot for an unfinished
-   normal authored run, including exploration reveal state. It rejects tester,
-   generated, corrupt, inconsistent, and completed states.
-12. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
-   Audio API; those effects require no recorded audio files.
-13. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
+    normal authored run, including exploration reveal state. It rejects tester,
+    generated, corrupt, inconsistent, and completed states.
+12. `src/resetProgress.ts` provides the UI-independent full-reset boundary. It
+    removes only the current, v2, legacy, and active-run Maze so Puzzle keys,
+    isolates each storage failure, and returns a fresh default progress value.
+13. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
+    Audio API; those effects require no recorded audio files.
+14. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
    A session-scoped deterministic picker maps each maze to one of five full
    tracks and avoids an immediate repeat; the short friendship cue is excluded.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
-14. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
-   material periods, dominant-colour families, compatibility rules, and
-   fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
-   catalogue contains ten compatible terrain themes, five weapons, five
-   friendly enemy looks, eight pet species, and four fully opaque AI-generated
-   front cage layers.
-15. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
-   cardinal intent and applies the strict one-tile, wall-only corner assist. It
-   never pathfinds or assists across hazards, unresolved doors, or enemies.
-16. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
-   has left and selects distinct visible footprints for rescued friends.
+15. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
+    material periods, dominant-colour families, compatibility rules, and
+    fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
+    catalogue contains ten compatible terrain themes, five weapons, five
+    friendly enemy looks, eight pet species, four sparse AI-generated v4 cage
+    fronts, and dedicated Rose Heart, Blue Star, and Sunny Sun key/door pairs.
+    Each lock pair exposes both child-readable colour and shape metadata.
+16. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
+    touch, keyboard, and D-pad controls: a 320 ms first pause, a smooth 260–160 ms
+    repeat curve over 16 held steps, and reset-on-direction-change semantics.
+17. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
+    cardinal intent and applies the strict one-tile, wall-only corner assist. It
+    never pathfinds or assists across hazards, unresolved doors, or enemies.
+18. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
+    has left and selects distinct visible footprints for rescued friends.
 
 ## Important boundaries
 
@@ -76,7 +85,9 @@ state.
 - Visual IDs are presentation metadata. Combat depends on an enemy's Power, not
   its illustration; collecting any weapon sets the same engine sword flag for
   save compatibility. Each story maze has one weapon and between one and five
-  distinct optional pets.
+  distinct optional pets. Keys and doors still use the engine's `KeyColor`
+  identity, while `artCatalog.ts` resolves that identity to paired colour,
+  motif, label, and sprite metadata without CSS hue rotation.
 - Ground holes are engine terrain, not decorative art. A normal step is blocked
   until Spring Boots are collected; one directional input then scans across the
   consecutive hole run and lands on the first valid non-hole square. The engine
@@ -89,6 +100,12 @@ state.
 - Underpowered armed enemy contact emits `enemy-too-strong`, returns the exact
   same playing `GameState` object, and never advances steps, Power, position, or
   interaction IDs. The UI owns the reassuring comparison dialog.
+- A winning enemy contact removes the enemy and applies the exact Power gain but
+  returns `moved: false`: Ame remains in the adjacent square and the step counter
+  does not advance. The next ordinary input may enter the now-clear tile. Solver
+  and session helpers therefore treat a state-changing `enemy-defeated` result
+  as a valid transition even without movement, while ignoring a truly unchanged
+  result.
 - Generated-maze presentation is selected from dedicated deterministic hash
   streams. Recreating a seed reproduces both its puzzle and visual variants,
   while adding artwork choices cannot perturb topology or progression placement.
@@ -101,6 +118,11 @@ state.
   semantics remain viewport media behaviour.
 - Progress belongs to the current browser or Tauri WebView profile. It is not
   synchronized between devices.
+- Full reset is an explicit destructive UI flow available from the title and
+  Adventure Book. After confirmation, `resetProgress.ts` deletes only
+  `maze-so-puzzle-progress-v3`, `maze-so-puzzle-progress-v2`,
+  `maze-so-puzzle-progress-v1`, and `maze-so-puzzle-active-run-v1`; unrelated
+  origin storage is intentionally preserved, and the app reloads Story Maze 1.
 - Camera coordinates affect presentation only. Movement, collision, combat,
   collection, and solving continue to operate in global level coordinates.
 - Primary mouse and touch input begins only on the maze board. Pressing moves one
@@ -132,6 +154,10 @@ state.
   Completion and reward sounds wait for the set piece. Restart, navigation,
   level change, visibility loss, unmount, and reduced-motion mode cancel or
   shorten timers without replaying the engine transition.
+- Pickup toasts are also transient presentation state. Weapon, splash-boots,
+  Spring Boots, Antidote Leaf, potion, and key events select their illustrated
+  notice; one cancellable 1.85 s timer replaces any earlier notice and level
+  changes or unmounts clear it. Reduced motion keeps the notice static.
 - The exploration minimap unions the current field of view with an immutable
   reveal set. Unvisited tiles remain masked; a new level starts a fresh map, and
   an unfinished authored run restores only a validated saved reveal set.
@@ -141,11 +167,14 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.10.2 source is shared by the web and Tauri build paths. Its automated web
-  gate, locked Cargo check, staged unsigned portable executable and installer,
-  source comparison, hashes, and smoke launch pass. Public deployment,
+- The 0.10.3 source is shared by the web and Tauri build paths, and its automated
+  browser gate passes. The refreshed unsigned Windows portable executable and
+  NSIS installer byte-match the final Tauri outputs, report version 0.10.3, have
+  recorded sizes and SHA-256 hashes, and the portable app passed a responsive
+  five-second smoke launch with the correct title. Public Vercel promotion,
   clean-machine installation, signing, and physical-device feel/listening remain
-  separate release checks; older artifacts stay in `release/` as history.
+  separate 0.10.3 release checks. The canonical 0.10.2 deployment stays as the
+  latest live record until 0.10.3 is pushed and smoke-tested in production.
 - AI-generated source art and exact prompts are recorded in
   `docs/AI_ASSET_PROMPTS.md`; source-only masters are kept outside `public/` so
   they do not inflate deployments.
@@ -163,11 +192,14 @@ Spring Boots, single/multi-hole jumps and unsafe landings, legacy-session
 migration, 6 x 6 even-window clamping, variable 9–29 generated sizes, connected
 post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
 selection, held-input acceleration, theme colour/lightness separation, terrain
-dressing preload, and cage-front asset coverage. Every authored maze and sampled
-generated maze is run through the stateful solver. The 0.10.2 run covers 260 tests
-across 19 files; `npm run check` also completes strict TypeScript and the Vite
-production build. Dependency review, locked Cargo compilation, packaging,
-public deployment, and real-device checks remain separate release gates.
+dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
+stationary winning-combat semantics, and the full-reset storage allow-list.
+Every authored maze and sampled generated maze is run through the stateful
+solver. The 0.10.3 run covers 267 tests across 20 files; `npm run check` also
+completes strict TypeScript and the Vite production build. Dependency review,
+public deployment, clean-machine installation, and real-device checks remain
+separate release gates; the locked Tauri build, packaging, version/hash checks,
+and portable launch smoke are complete for 0.10.3.
 
 ## Extension points
 

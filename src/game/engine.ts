@@ -232,13 +232,28 @@ export function movePlayer(
     const powerBefore = power;
     power += object.power;
     defeatedEnemyIds = addSorted(defeatedEnemyIds, object.id);
-    events.push({
+    const defeatedEvent: Extract<GameEvent, { readonly type: "enemy-defeated" }> = {
       type: "enemy-defeated",
       objectId: object.id,
       enemyPower: object.power,
       powerBefore,
       powerAfter: power,
-    });
+    };
+
+    // Combat is an interaction at the edge of Ame's tile, not a movement into
+    // the enemy's tile. Keeping her in place avoids the jarring post-battle
+    // teleport and makes entering the newly cleared square a deliberate next
+    // input. A combat interaction also does not increase the movement-based
+    // step counter.
+    return {
+      state: {
+        ...state,
+        power,
+        defeatedEnemyIds,
+      },
+      moved: false,
+      events: [defeatedEvent],
+    };
   }
 
   if (object?.kind === "animal" && !rescuedAnimalIds.includes(object.id)) {

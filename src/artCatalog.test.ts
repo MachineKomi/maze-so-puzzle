@@ -5,9 +5,14 @@ import {
   DEFAULT_ANIMAL_SPECIES,
   DEFAULT_CAGE_STYLE,
   DEFAULT_ENEMY_STYLE,
+  DEFAULT_KEY_COLOR,
   DEFAULT_TERRAIN_THEME_ID,
   DEFAULT_WEAPON_STYLE,
+  DOOR_ART,
   ENEMY_ART,
+  KEY_ART,
+  KEY_COLOR_LABELS,
+  KEY_MOTIF_LABELS,
   MIN_TERRAIN_LIGHTNESS_DELTA,
   TERRAIN_DRESSING_ART,
   TERRAIN_THEMES,
@@ -16,7 +21,9 @@ import {
   areTerrainTexturesCompatible,
   resolveAnimalArt,
   resolveCageArt,
+  resolveDoorArt,
   resolveEnemyArt,
+  resolveKeyArt,
   resolveTerrainTheme,
   resolveWeaponArt,
   type SpriteArt,
@@ -28,6 +35,8 @@ import {
   TERRAIN_THEME_IDS,
   WEAPON_STYLE_IDS,
 } from "./game/types";
+
+const KEY_COLORS = ["red", "blue", "yellow"] as const;
 
 function sorted(values: readonly string[]): readonly string[] {
   return [...values].sort((first, second) => first.localeCompare(second));
@@ -48,6 +57,10 @@ describe("art catalog", () => {
     expect(sorted(Object.keys(ENEMY_ART))).toEqual(sorted(ENEMY_STYLE_IDS));
     expect(sorted(Object.keys(ANIMAL_ART))).toEqual(sorted(ANIMAL_SPECIES));
     expect(sorted(Object.keys(CAGE_ART))).toEqual(sorted(CAGE_STYLE_IDS));
+    expect(sorted(Object.keys(KEY_ART))).toEqual(sorted(KEY_COLORS));
+    expect(sorted(Object.keys(DOOR_ART))).toEqual(sorted(KEY_COLORS));
+    expect(sorted(Object.keys(KEY_COLOR_LABELS))).toEqual(sorted(KEY_COLORS));
+    expect(sorted(Object.keys(KEY_MOTIF_LABELS))).toEqual(sorted(KEY_COLORS));
   });
 
   it("provides a unique labelled sprite for every gameplay variant", () => {
@@ -55,6 +68,8 @@ describe("art catalog", () => {
     expectSpriteArt(Object.values(ENEMY_ART));
     expectSpriteArt(Object.values(ANIMAL_ART));
     expectSpriteArt(Object.values(CAGE_ART));
+    expectSpriteArt(Object.values(KEY_ART));
+    expectSpriteArt(Object.values(DOOR_ART));
     expectSpriteArt(Object.values(TERRAIN_DRESSING_ART));
     for (const dressing of Object.values(TERRAIN_DRESSING_ART)) {
       expect(dressing.periodTiles).toBeGreaterThanOrEqual(10);
@@ -65,8 +80,50 @@ describe("art catalog", () => {
 
   it("uses the opaque front-bar cage layer for every rescue style", () => {
     for (const cage of Object.values(CAGE_ART)) {
-      expect(cage.src).toMatch(/^\/assets\/cage-[a-z-]+-front-v2\.png$/);
+      expect(cage.src).toMatch(/^\/assets\/cage-[a-z-]+-front-v4\.png$/);
     }
+  });
+
+  it("pairs each lock color with dedicated matching key and door art", () => {
+    expect({
+      red: {
+        color: KEY_COLOR_LABELS.red,
+        motif: KEY_MOTIF_LABELS.red,
+        key: KEY_ART.red,
+        door: DOOR_ART.red,
+      },
+      blue: {
+        color: KEY_COLOR_LABELS.blue,
+        motif: KEY_MOTIF_LABELS.blue,
+        key: KEY_ART.blue,
+        door: DOOR_ART.blue,
+      },
+      yellow: {
+        color: KEY_COLOR_LABELS.yellow,
+        motif: KEY_MOTIF_LABELS.yellow,
+        key: KEY_ART.yellow,
+        door: DOOR_ART.yellow,
+      },
+    }).toEqual({
+      red: {
+        color: "Rose",
+        motif: "Heart",
+        key: { src: "/assets/key-rose-heart-v1.png", label: "Rose Heart Key" },
+        door: { src: "/assets/door-rose-heart-v1.png", label: "Rose Heart Door" },
+      },
+      blue: {
+        color: "Blue",
+        motif: "Star",
+        key: { src: "/assets/star-key.png", label: "Blue Star Key" },
+        door: { src: "/assets/star-door.png", label: "Blue Star Door" },
+      },
+      yellow: {
+        color: "Sunny",
+        motif: "Sun",
+        key: { src: "/assets/key-sunny-sun-v1.png", label: "Sunny Sun Key" },
+        door: { src: "/assets/door-sunny-sun-v1.png", label: "Sunny Sun Door" },
+      },
+    });
   });
 
   it("provides calibrated pattern metadata for every readable theme", () => {
@@ -157,6 +214,10 @@ describe("art catalog", () => {
     for (const id of ENEMY_STYLE_IDS) expect(resolveEnemyArt(id)).toBe(ENEMY_ART[id]);
     for (const id of ANIMAL_SPECIES) expect(resolveAnimalArt(id)).toBe(ANIMAL_ART[id]);
     for (const id of CAGE_STYLE_IDS) expect(resolveCageArt(id)).toBe(CAGE_ART[id]);
+    for (const color of KEY_COLORS) {
+      expect(resolveKeyArt(color)).toBe(KEY_ART[color]);
+      expect(resolveDoorArt(color)).toBe(DOOR_ART[color]);
+    }
   });
 
   it("uses stable defaults for absent, legacy, and untrusted IDs", () => {
@@ -170,5 +231,9 @@ describe("art catalog", () => {
     expect(resolveAnimalArt("not-an-animal")).toBe(ANIMAL_ART[DEFAULT_ANIMAL_SPECIES]);
     expect(resolveCageArt(null)).toBe(CAGE_ART[DEFAULT_CAGE_STYLE]);
     expect(resolveCageArt("not-a-cage")).toBe(CAGE_ART[DEFAULT_CAGE_STYLE]);
+    expect(resolveKeyArt(undefined)).toBe(KEY_ART[DEFAULT_KEY_COLOR]);
+    expect(resolveKeyArt("not-a-key-color")).toBe(KEY_ART[DEFAULT_KEY_COLOR]);
+    expect(resolveDoorArt(null)).toBe(DOOR_ART[DEFAULT_KEY_COLOR]);
+    expect(resolveDoorArt("not-a-door-color")).toBe(DOOR_ART[DEFAULT_KEY_COLOR]);
   });
 });

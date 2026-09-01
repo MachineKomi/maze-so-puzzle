@@ -18,9 +18,13 @@ import {
   preloadRewardArt,
 } from "./assets";
 import {
+  KEY_COLOR_LABELS,
+  KEY_MOTIF_LABELS,
   resolveAnimalArt,
   resolveCageArt,
+  resolveDoorArt,
   resolveEnemyArt,
+  resolveKeyArt,
   resolveTerrainTheme,
   resolveWeaponArt,
   type TerrainRenderTreatment,
@@ -92,6 +96,7 @@ import {
 } from "./music";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 import { getStoryRescueRecordDisplay } from "./rescueRecords";
+import { resetAllGameProgress } from "./resetProgress";
 import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
 import {
   pointerIntentFromTileOffset,
@@ -117,11 +122,11 @@ const DIRECTION_ICONS: Record<Direction, string> = {
   right: "▶",
 };
 
-const COLOR_LABELS: Record<KeyColor, string> = {
-  red: "Rose",
-  blue: "Blue",
-  yellow: "Sunny",
-};
+const COLOR_LABELS: Readonly<Record<KeyColor, string>> = KEY_COLOR_LABELS;
+
+function lockPairLabel(color: KeyColor): string {
+  return `${COLOR_LABELS[color]} ${KEY_MOTIF_LABELS[color]}`;
+}
 
 const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   bunny: "Bunny",
@@ -139,7 +144,7 @@ const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const JUMP_PRESENTATION_MS = 540;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.10.2";
+const BUILD_VERSION = "0.10.3";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -156,6 +161,12 @@ interface Feedback {
   readonly text: string;
   readonly tone: "plain" | "good" | "careful";
   readonly sound: SoundName;
+}
+
+interface MapPickupToast {
+  readonly id: number;
+  readonly icon: string;
+  readonly text: string;
 }
 
 interface CompletionCelebration {
@@ -291,12 +302,12 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
     case "key-collected":
       return {
         icon: "🔑",
-        text: `${COLOR_LABELS[event.color]} star key found!`,
+        text: `${lockPairLabel(event.color)} Key found!`,
         tone: "good",
         sound: "pickup",
       };
     case "door-opened":
-      return { icon: "✨", text: `The ${COLOR_LABELS[event.color].toLowerCase()} star door opened!`, tone: "good", sound: "unlock" };
+      return { icon: "✨", text: `The ${lockPairLabel(event.color)} Door opened!`, tone: "good", sound: "unlock" };
     case "blocked":
       switch (event.reason) {
         case "needs-sword":
@@ -315,7 +326,7 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
         case "needs-key":
           return {
             icon: "🔑",
-            text: `Find the ${event.color ? COLOR_LABELS[event.color].toLowerCase() : "matching"} star key!`,
+            text: `Find the ${event.color ? lockPairLabel(event.color) : "matching"} Key!`,
             tone: "careful",
             sound: "bump",
           };
@@ -328,6 +339,35 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
     case "moved":
       return { icon: "👣", text: "One step closer!", tone: "plain", sound: "step" };
   }
+}
+
+function pickupToastFor(
+  events: readonly GameEvent[],
+  level: LevelDefinition,
+): Omit<MapPickupToast, "id"> | null {
+  for (let index = events.length - 1; index >= 0; index -= 1) {
+    const event = events[index]!;
+    switch (event.type) {
+      case "sword-collected": {
+        const object = level.objects.find((candidate) => candidate.id === event.objectId);
+        const weapon = resolveWeaponArt(object?.kind === "sword" ? object.style : undefined);
+        return { icon: "🗡️", text: `Picked up the ${weapon.label}!` };
+      }
+      case "boots-collected":
+        return { icon: "🥾", text: "Picked up the Splash Boots!" };
+      case "spring-boots-collected":
+        return { icon: "🌸", text: "Picked up the Spring Boots!" };
+      case "antidote-leaf-collected":
+        return { icon: "🍃", text: "Picked up the Antidote Leaf!" };
+      case "potion-collected":
+        return { icon: "🧡", text: `Picked up a Power Potion! +${event.amount} Power` };
+      case "key-collected":
+        return { icon: "🔑", text: `Picked up the ${resolveKeyArt(event.color).label}!` };
+      default:
+        break;
+    }
+  }
+  return null;
 }
 
 function enemyLabelForEvent(level: LevelDefinition, objectId: string): string {
@@ -352,8 +392,8 @@ function describeObject(object: LevelObject): string {
     case "spring-boots": return "spring boots";
     case "antidote-leaf": return "antidote leaf";
     case "potion": return `Power potion worth ${object.amount}`;
-    case "key": return `${COLOR_LABELS[object.color]} star key`;
-    case "door": return `${COLOR_LABELS[object.color]} locked door`;
+    case "key": return resolveKeyArt(object.color).label.toLowerCase();
+    case "door": return `${resolveDoorArt(object.color).label.toLowerCase()}, locked`;
     case "animal": return `caged ${ANIMAL_LABELS[object.species].toLowerCase()}`;
   }
 }
@@ -405,14 +445,13 @@ function spriteFor(object: Exclude<LevelObject, { kind: "animal" }>): string {
     case "spring-boots": return ASSETS.springBoots;
     case "antidote-leaf": return ASSETS.antidoteLeaf;
     case "potion": return ASSETS.potion;
-    case "key": return ASSETS.key;
-    case "door": return ASSETS.door;
+    case "key": return resolveKeyArt(object.color).src;
+    case "door": return resolveDoorArt(object.color).src;
   }
 }
 
 function classForObject(object: LevelObject): string {
-  const color = object.kind === "key" || object.kind === "door" ? ` color-${object.color}` : "";
-  return `maze-object object-${object.kind}${color}`;
+  return `maze-object object-${object.kind}`;
 }
 
 function isExplorationLevel(level: LevelDefinition): boolean {
@@ -789,7 +828,8 @@ function hintFor(level: LevelDefinition, state: GameState): string {
   }
   const missingKey = unresolved.find((object) => object.kind === "key");
   if (missingKey?.kind === "key") {
-    return `Look for the ${COLOR_LABELS[missingKey.color].toLowerCase()} star key. It opens only the matching ${COLOR_LABELS[missingKey.color].toLowerCase()} door.`;
+    const lockName = lockPairLabel(missingKey.color);
+    return `Look for the ${lockName} Key. Its colour and ${KEY_MOTIF_LABELS[missingKey.color].toLowerCase()} shape match only the ${lockName} Door.`;
   }
   const waitingFriend = unresolved.find((object) => object.kind === "animal");
   if (waitingFriend?.kind === "animal") {
@@ -833,11 +873,13 @@ function App() {
     tone: "plain",
     sound: "step",
   });
+  const [mapPickupToast, setMapPickupToast] = useState<MapPickupToast | null>(null);
   const [movePulse, setMovePulse] = useState(0);
   const [bumpPulse, setBumpPulse] = useState(0);
   const [muted, setMuted] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
+  const [resetProgressOpen, setResetProgressOpen] = useState(false);
   const [tooStrongEncounter, setTooStrongEncounter] = useState<TooStrongEncounter | null>(null);
   const [progress, setProgress] = useState<PlayerProgress>(readPlayerProgress);
   const [completion, setCompletion] = useState<CompletionCelebration | null>(null);
@@ -875,6 +917,8 @@ function App() {
   const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
   const rewardSoundTimer = useRef<number | undefined>(undefined);
+  const mapPickupTimer = useRef<number | undefined>(undefined);
+  const mapPickupSequence = useRef(0);
   const presentationTimers = useRef(new Set<number>());
   const presentationSequence = useRef(0);
   const modalReturnFocus = useRef<HTMLElement | null>(null);
@@ -1007,7 +1051,8 @@ function App() {
   const presentationActive = battlePresentation !== null
     || rescuePresentation !== null
     || jumpPresentation !== null;
-  const modalOpen = testerPickerOpen
+  const modalOpen = resetProgressOpen
+    || testerPickerOpen
     || pendingAdventure !== null
     || (screen === "game" && (
       helpOpen
@@ -1198,6 +1243,12 @@ function App() {
     mutedRef.current = muted;
   }, [muted]);
 
+  useEffect(() => () => {
+    if (mapPickupTimer.current !== undefined) {
+      window.clearTimeout(mapPickupTimer.current);
+    }
+  }, []);
+
   useEffect(() => {
     const syncMusicVisibility = () => {
       const hidden = document.visibilityState !== "visible";
@@ -1242,6 +1293,12 @@ function App() {
       window.clearTimeout(rewardSoundTimer.current);
       rewardSoundTimer.current = undefined;
     }
+    if (mapPickupTimer.current !== undefined) {
+      window.clearTimeout(mapPickupTimer.current);
+      mapPickupTimer.current = undefined;
+    }
+    mapPickupSequence.current += 1;
+    setMapPickupToast(null);
     setLevel(nextLevel);
     setGame(createInitialGameState(nextLevel));
     setPlayerTrail([nextLevel.start]);
@@ -1313,6 +1370,19 @@ function App() {
       ));
     }
     setFeedback(nextFeedback);
+    const nextPickupToast = pickupToastFor(result.events, level);
+    if (nextPickupToast) {
+      if (mapPickupTimer.current !== undefined) {
+        window.clearTimeout(mapPickupTimer.current);
+      }
+      const toastId = mapPickupSequence.current + 1;
+      mapPickupSequence.current = toastId;
+      setMapPickupToast({ id: toastId, ...nextPickupToast });
+      mapPickupTimer.current = window.setTimeout(() => {
+        setMapPickupToast((current) => current?.id === toastId ? null : current);
+        mapPickupTimer.current = undefined;
+      }, 1_850);
+    }
     const defeatedEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "enemy-defeated" }> => event.type === "enemy-defeated",
     );
@@ -1816,6 +1886,17 @@ function App() {
     playSound("menu", muted);
   };
 
+  const openResetProgress = (trigger: HTMLElement) => {
+    modalReturnFocus.current = trigger;
+    setResetProgressOpen(true);
+    playSound("menu", muted);
+  };
+
+  const closeResetProgress = () => {
+    setResetProgressOpen(false);
+    playSound("menu", muted);
+  };
+
   const openTesterPicker = () => {
     modalReturnFocus.current = document.activeElement instanceof HTMLElement
       ? document.activeElement
@@ -1910,6 +1991,18 @@ function App() {
     playSound("achievement", muted);
   };
 
+  const confirmResetProgress = () => {
+    const firstLevel = CURATED_LEVELS[0];
+    if (!firstLevel) return;
+
+    setProgress(resetAllGameProgress());
+    setRunMode("normal");
+    setHasActiveRun(false);
+    setResetProgressOpen(false);
+    loadLevel(firstLevel);
+    showTitle();
+  };
+
   const toggleSound = () => {
     const nextMuted = !muted;
     setMuted(nextMuted);
@@ -1972,12 +2065,13 @@ function App() {
           <TitleScreen
             progress={progress}
             activeRun={runInProgress ? { name: level.name, steps: game.steps } : null}
-            blocked={pendingAdventure !== null || testerPickerOpen}
+            blocked={pendingAdventure !== null || resetProgressOpen || testerPickerOpen}
             muted={muted}
             playRef={titlePlayRef}
             onPlay={runInProgress ? resumeRun : continueStory}
             onSurprise={() => requestEnterLevel(makeSurprise(), "title")}
             onAchievements={showAchievements}
+            onRequestReset={openResetProgress}
             onOpenTester={openTesterPicker}
             onToggleSound={toggleSound}
           />
@@ -1986,13 +2080,14 @@ function App() {
             progress={progress}
             unlocked={unlocked}
             activeRun={runInProgress ? { levelId: level.id, name: level.name, steps: game.steps } : null}
-            blocked={pendingAdventure !== null || testerPickerOpen}
+            blocked={pendingAdventure !== null || resetProgressOpen || testerPickerOpen}
             headingRef={achievementsHeadingRef}
             muted={muted}
             onHome={showTitle}
             onResume={resumeRun}
             onPlayLevel={requestEnterLevel}
             onSurprise={() => requestEnterLevel(makeSurprise())}
+            onRequestReset={openResetProgress}
             onToggleSound={toggleSound}
           />
         ) : (
@@ -2112,7 +2207,7 @@ function App() {
                   {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
                   {object.kind === "potion" && <span className="item-amount">+{object.amount}</span>}
                   {(object.kind === "key" || object.kind === "door") && (
-                    <span className={`object-color-name color-name-${object.color}`}>{COLOR_LABELS[object.color]}</span>
+                    <span className={`object-color-name color-name-${object.color}`}>{KEY_MOTIF_LABELS[object.color]}</span>
                   )}
                 </div>
               ))}
@@ -2233,6 +2328,13 @@ function App() {
                 {game.hasSword && <img className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} />}
                 <span className="power-badge player-power">{displayedPower}</span>
               </div>
+
+              {mapPickupToast && (
+                <div className="map-pickup-toast" key={mapPickupToast.id} aria-hidden="true">
+                  <span>{mapPickupToast.icon}</span>
+                  <strong>{mapPickupToast.text}</strong>
+                </div>
+              )}
             </div>
 
             {explorationMode && bigMaze && (
@@ -2344,7 +2446,7 @@ function App() {
                     {objectKinds.has("spring-boots") && <InventorySlot label="Spring boots" image={ASSETS.springBoots} found={game.hasSpringBoots} />}
                     {objectKinds.has("antidote-leaf") && <InventorySlot label="Antidote leaf" image={ASSETS.antidoteLeaf} found={game.hasAntidoteLeaf} />}
                     {keyColors.map((color) => (
-                      <InventorySlot key={color} label={`${COLOR_LABELS[color]} key`} image={ASSETS.key} found={game.keys.includes(color)} color={color} />
+                      <InventorySlot key={color} label={resolveKeyArt(color).label} image={resolveKeyArt(color).src} found={game.keys.includes(color)} />
                     ))}
                     {!objectKinds.has("sword") && !objectKinds.has("boots") && !objectKinds.has("spring-boots") && !objectKinds.has("antidote-leaf") && keyColors.length === 0 && (
                       <div className="empty-bag"><span>🎒</span><strong>Bag ready!</strong></div>
@@ -2413,7 +2515,7 @@ function App() {
               <HelpStep icon="👣" title="Move" copy="Press, hold or drag on the maze—or tap an arrow. One square at a time." />
               <HelpStep icon="🗡️" title="Find a weapon" copy="Then baddies can scoot." />
               <HelpStep icon="⭐" title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
-              <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />
+              <HelpStep icon="🔑" title="Match keys" copy="Keys open doors with the same colour and shape." />
               <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
               <HelpStep icon="↟" title="Find spring boots" copy="Boing safely across holes in the path." />
               <HelpStep icon="🍃" title="Find the antidote leaf" copy="It makes purple poison safe to cross." />
@@ -2562,6 +2664,24 @@ function App() {
           </Modal>
         )}
 
+        {resetProgressOpen && (
+          <Modal
+            title="Reset all progress?"
+            onClose={closeResetProgress}
+            returnFocus={modalReturnFocus.current}
+          >
+            <img className="modal-art" src={ASSETS.portrait} alt="Ame smiling with her adventure backpack" />
+            <p className="modal-lead">
+              This will forget every maze record, gold star, rescued friend, sticker, medal, badge, and the current maze.
+              You’ll begin again from Story Maze 1. This cannot be undone.
+            </p>
+            <div className="modal-actions">
+              <button className="primary-button" onClick={closeResetProgress}>Keep my adventure</button>
+              <button className="secondary-button" onClick={confirmResetProgress}>Yes, reset everything</button>
+            </div>
+          </Modal>
+        )}
+
         </section>
       </div>
 
@@ -2583,6 +2703,7 @@ interface TitleScreenProps {
   readonly onPlay: () => void;
   readonly onSurprise: () => void;
   readonly onAchievements: () => void;
+  readonly onRequestReset: (trigger: HTMLElement) => void;
   readonly onOpenTester: () => void;
   readonly onToggleSound: () => void;
 }
@@ -2596,6 +2717,7 @@ function TitleScreen({
   onPlay,
   onSurprise,
   onAchievements,
+  onRequestReset,
   onOpenTester,
   onToggleSound,
 }: TitleScreenProps) {
@@ -2654,6 +2776,7 @@ function TitleScreen({
           <div className="title-secondary-actions">
             <button onClick={onAchievements}><span aria-hidden="true">🏅</span> Ame's adventure book</button>
             <button onClick={onSurprise}><span aria-hidden="true">✦</span> Surprise maze</button>
+            <button style={{ gridColumn: "1 / -1" }} onClick={(event) => onRequestReset(event.currentTarget)}><span aria-hidden="true">↻</span> Reset progress</button>
           </div>
         </div>
 
@@ -2685,6 +2808,7 @@ interface AchievementsScreenProps {
   readonly onResume: () => void;
   readonly onPlayLevel: (level: LevelDefinition) => void;
   readonly onSurprise: () => void;
+  readonly onRequestReset: (trigger: HTMLElement) => void;
   readonly onToggleSound: () => void;
 }
 
@@ -2699,6 +2823,7 @@ function AchievementsScreen({
   onResume,
   onPlayLevel,
   onSurprise,
+  onRequestReset,
   onToggleSound,
 }: AchievementsScreenProps) {
   const solvedIds = Object.keys(progress.bestResultsByLevel);
@@ -2839,6 +2964,13 @@ function AchievementsScreen({
             })}
           </div>
         </section>
+
+        <section className="maze-records" aria-labelledby="reset-progress-title">
+          <div className="book-section-heading">
+            <div><span>New beginning</span><h2 id="reset-progress-title">Reset the adventure</h2></div>
+            <button className="secondary-button" onClick={(event) => onRequestReset(event.currentTarget)}>↻ Reset progress</button>
+          </div>
+        </section>
       </div>
     </section>
   );
@@ -2848,13 +2980,12 @@ interface InventorySlotProps {
   readonly label: string;
   readonly image: string;
   readonly found: boolean;
-  readonly color?: KeyColor;
 }
 
-function InventorySlot({ label, image, found, color }: InventorySlotProps) {
+function InventorySlot({ label, image, found }: InventorySlotProps) {
   return (
     <div
-      className={`inventory-slot ${found ? "found" : "missing"}${color ? ` color-${color}` : ""}`}
+      className={`inventory-slot ${found ? "found" : "missing"}`}
       aria-label={`${label}: ${found ? "found" : "not found"}`}
       title={`${label}: ${found ? "found" : "not found"}`}
     >

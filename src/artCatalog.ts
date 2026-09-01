@@ -2,6 +2,7 @@ import type {
   AnimalSpecies,
   CageStyle,
   EnemyStyle,
+  KeyColor,
   TerrainThemeId,
   WeaponStyle,
 } from "./game/types";
@@ -67,6 +68,7 @@ export const DEFAULT_WEAPON_STYLE: WeaponStyle = "star-sword";
 export const DEFAULT_ENEMY_STYLE: EnemyStyle = "goblin";
 export const DEFAULT_ANIMAL_SPECIES: AnimalSpecies = "bunny";
 export const DEFAULT_CAGE_STYLE: CageStyle = "golden-heart";
+export const DEFAULT_KEY_COLOR: KeyColor = "blue";
 
 /**
  * A deliberately small art-directed palette matrix. Generated mazes select a
@@ -317,11 +319,37 @@ export const ANIMAL_ART = {
 } as const satisfies Readonly<Record<AnimalSpecies, SpriteArt>>;
 
 export const CAGE_ART = {
-  "golden-heart": { src: "/assets/cage-golden-heart-front-v2.png", label: "Golden Heart Cage" },
-  "storybook-wood": { src: "/assets/cage-storybook-wood-front-v2.png", label: "Storybook Wooden Cage" },
-  "moon-silver": { src: "/assets/cage-moon-silver-front-v2.png", label: "Moon Silver Cage" },
-  "garden-vine": { src: "/assets/cage-garden-vine-front-v2.png", label: "Garden Vine Cage" },
+  "golden-heart": { src: "/assets/cage-golden-heart-front-v4.png", label: "Golden Heart Cage" },
+  "storybook-wood": { src: "/assets/cage-storybook-wood-front-v4.png", label: "Storybook Wooden Cage" },
+  "moon-silver": { src: "/assets/cage-moon-silver-front-v4.png", label: "Moon Silver Cage" },
+  "garden-vine": { src: "/assets/cage-garden-vine-front-v4.png", label: "Garden Vine Cage" },
 } as const satisfies Readonly<Record<CageStyle, SpriteArt>>;
+
+/** Child-readable names shared by board labels, hints and accessible text. */
+export const KEY_COLOR_LABELS = {
+  red: "Rose",
+  blue: "Blue",
+  yellow: "Sunny",
+} as const satisfies Readonly<Record<KeyColor, string>>;
+
+/** A second, shape-based cue keeps each lock pair readable without colour. */
+export const KEY_MOTIF_LABELS = {
+  red: "Heart",
+  blue: "Star",
+  yellow: "Sun",
+} as const satisfies Readonly<Record<KeyColor, string>>;
+
+export const KEY_ART = {
+  red: { src: "/assets/key-rose-heart-v1.png", label: "Rose Heart Key" },
+  blue: { src: "/assets/star-key.png", label: "Blue Star Key" },
+  yellow: { src: "/assets/key-sunny-sun-v1.png", label: "Sunny Sun Key" },
+} as const satisfies Readonly<Record<KeyColor, SpriteArt>>;
+
+export const DOOR_ART = {
+  red: { src: "/assets/door-rose-heart-v1.png", label: "Rose Heart Door" },
+  blue: { src: "/assets/star-door.png", label: "Blue Star Door" },
+  yellow: { src: "/assets/door-sunny-sun-v1.png", label: "Sunny Sun Door" },
+} as const satisfies Readonly<Record<KeyColor, SpriteArt>>;
 
 function hasOwn<T extends object>(catalog: T, key: PropertyKey): key is keyof T {
   return Object.hasOwn(catalog, key);
@@ -365,4 +393,16 @@ export function resolveCageArt(
   return typeof style === "string" && hasOwn(CAGE_ART, style)
     ? CAGE_ART[style]
     : CAGE_ART[DEFAULT_CAGE_STYLE];
+}
+
+export function resolveKeyArt(color: unknown): SpriteArt {
+  return typeof color === "string" && hasOwn(KEY_ART, color)
+    ? KEY_ART[color]
+    : KEY_ART[DEFAULT_KEY_COLOR];
+}
+
+export function resolveDoorArt(color: unknown): SpriteArt {
+  return typeof color === "string" && hasOwn(DOOR_ART, color)
+    ? DOOR_ART[color]
+    : DOOR_ART[DEFAULT_KEY_COLOR];
 }

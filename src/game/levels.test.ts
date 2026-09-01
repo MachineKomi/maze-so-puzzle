@@ -80,17 +80,17 @@ describe("curated campaign levels", () => {
     ]);
     expect(CURATED_LEVELS.map((level) => solveLevel(level).directions.length)).toEqual([
       26,
-      36,
-      62,
-      78,
-      66,
-      90,
-      114,
-      116,
-      190,
-      290,
-      232,
-      226,
+      37,
+      64,
+      80,
+      69,
+      92,
+      117,
+      120,
+      193,
+      294,
+      236,
+      231,
     ]);
   });
 
@@ -198,8 +198,8 @@ describe("curated campaign levels", () => {
     [
       TWILIGHT_TREASURE_LOOP_LEVEL,
       136,
-      232,
-      242,
+      236,
+      246,
       [
         "sword-collected",
         "enemy-defeated:2->4",
@@ -221,8 +221,8 @@ describe("curated campaign levels", () => {
     [
       MOONLIT_FRIENDSHIP_QUEST_LEVEL,
       174,
-      226,
-      236,
+      231,
+      241,
       [
         "sword-collected",
         "enemy-defeated:2->4",
@@ -444,7 +444,7 @@ describe("curated campaign levels", () => {
       requireAllAnimals: true,
     });
 
-    expect(ordinaryWin.directions).toHaveLength(290);
+    expect(ordinaryWin.directions).toHaveLength(294);
     expect(ordinaryWin.finalState).toMatchObject({
       power: 29,
       hasSword: true,
@@ -455,7 +455,7 @@ describe("curated campaign levels", () => {
     });
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(4);
     expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(3);
-    expect(perfectRescueWin.directions).toHaveLength(322);
+    expect(perfectRescueWin.directions).toHaveLength(326);
     expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
 
     let state = createInitialGameState(LANTERNLIGHT_LABYRINTH_LEVEL);
@@ -532,7 +532,7 @@ describe("curated campaign levels", () => {
       requireAllAnimals: true,
     });
 
-    expect(ordinaryWin.directions).toHaveLength(114);
+    expect(ordinaryWin.directions).toHaveLength(117);
     expect(ordinaryWin.finalState).toMatchObject({
       power: 20,
       rescuedAnimalIds: [],
@@ -541,7 +541,7 @@ describe("curated campaign levels", () => {
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(3);
     expect(ordinaryWin.finalState?.defeatedEnemyIds).not.toContain(guardian.id);
 
-    expect(perfectRescueWin.directions).toHaveLength(148);
+    expect(perfectRescueWin.directions).toHaveLength(150);
     expect(perfectRescueWin.finalState).toMatchObject({
       power: 29,
       status: "won",
@@ -669,7 +669,7 @@ describe("curated campaign levels", () => {
             );
           }
 
-          if (result.moved && result.state.status === "playing") {
+          if (result.state.status === "playing") {
             const nextSignature = signature(result.state);
             if (!seen.has(nextSignature)) {
               seen.add(nextSignature);

@@ -1,17 +1,18 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.10.2 is a client-only game. It has no account system,
+Maze so Puzzle 0.10.3 is a client-only game. It has no account system,
 analytics, advertising, multiplayer, chat, remote database, or game-owned
 server. The browser build does not intentionally send player names, gameplay,
 or saved progress anywhere. The optional Tauri Windows build uses the same
-device-local storage model; the verified unsigned 0.10.2 package is built from
-the same client-only application.
+device-local storage model. The current verified unsigned 0.10.3 portable app
+and installer are built from this same client-only application; their local
+packaging does not add accounts, telemetry, remote storage, or network services.
 
 ## What is stored
 
 The game keeps progress in the browser's `localStorage`, including completed
-mazes, best step counts, rescued animals, rewards, achievements, gold, and sound
-preference. A separate versioned active-run record stores the current authored
+mazes, best step counts, rescued animals, rewards, achievements, and gold. A
+separate versioned active-run record stores the current authored
 story maze's position, Power, inventory, interactions, rescues, step count, and
 explored-map coordinates so a refresh or app restart can resume safely. Both
 records are validated before use. The Windows build keeps the same information
@@ -32,6 +33,28 @@ The secret tester picker, opened from the title build label or the exact
 active-run maze progress. Opening or closing the picker does not transmit data.
 Generated Surprise Mazes are also excluded from active-run recovery. Existing
 local story progress remains available after leaving a preview run.
+
+## Resetting saved data
+
+**Reset progress** is available from the title screen and Adventure Book. It
+always opens a confirmation explaining that maze records, gold, rescued friends,
+stickers, medals, badges, and the current maze will be forgotten. Confirming
+returns the game to a fresh Story Maze 1.
+
+The reset uses an explicit allow-list and attempts to remove only these
+game-owned `localStorage` entries:
+
+- `maze-so-puzzle-progress-v3`
+- `maze-so-puzzle-progress-v2`
+- `maze-so-puzzle-progress-v1`
+- `maze-so-puzzle-active-run-v1`
+
+It does not call `localStorage.clear()` and therefore preserves unrelated data
+stored by the same browser origin or desktop WebView. A failure to remove one
+entry does not prevent attempts on the other game-owned entries, and the running
+game still receives a fresh in-memory progress value. Clearing browser site data
+through browser settings is broader and remains controlled by the player or
+browser.
 
 ## Network behaviour
 

@@ -6,26 +6,28 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.10.2: 260 tests across 19 files and the strict TypeScript/Vite
-build pass. Source metadata and artwork provenance remain aligned.
-The zero-vulnerability dependency audit/tree, locked Tauri compile, Windows
-packaging/source comparison/hash/smoke launch, repeat-boundary/alpha checks,
-local twelve-size responsive matrix, exact 65-step poison route,
-non-destructive stronger-enemy dialog, three-bash conserved Power transfer,
-540 ms jump arc, layered boing, source comparison, five-second portable smoke,
-GitHub/Vercel promotion, and the focused canonical 0.10.2 smoke all pass.
+Status for 0.10.3: `npm run check` passes 267 tests across 20 files plus strict
+TypeScript and the Vite production build. The moderate-level npm audit reports
+zero vulnerabilities; `npm ls` contains only expected unmet optional
+cross-platform packages, and locked Cargo compilation passes. Browser QA at
+1280×720 desktop, 1194×834 iPad, and 844×390 landscape phone found no page
+overflow, overlap, console warning/error, or broken visible image. Reset entry
+points and the warning dialog, the pickup toast, and the new v4 front-only cage
+were visually checked; the destructive reset confirmation was not clicked. The
+unsigned Windows portable and setup builds were built, hashed, and smoke-tested.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed. The
-completed 0.10.0, 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a historical baseline.
+completed 0.10.2, 0.10.1, 0.10.0, 0.9.1, 0.9.0, and 0.8.0 evidence below is
+retained as a historical baseline.
 
 ## 1. Prepare
 
-- [x] Confirm the 0.10.2 source version in `package.json`, `package-lock.json`,
+- [x] Confirm the 0.10.3 source version in `package.json`, `package-lock.json`,
   `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
-- [x] Confirm the 0.10.2 bundle contains continuous world-aligned SVG terrain,
+- [x] Confirm the 0.10.3 bundle contains continuous world-aligned SVG terrain,
   rounded convex and concave joins, periodic paired textures, connected hazards
   without outlines, lips, shadows, or filters, stronger floor/wall contrast,
   picture-first UI, a held-weapon overlay, pet followers, opaque AI-generated
@@ -57,8 +59,8 @@ completed 0.10.0, 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a histor
 - [x] Confirm the title-screen build label and exact `?debug=mazes` query expose
   the direct twelve-maze tester picker, and tester completion cannot write rewards,
   records, unlocks, active sessions, or progress.
-- [x] Update `README.md`, architecture, music, asset, privacy, audit, release, and
-  Vercel documentation for 0.10.2 while leaving unfinished release gates clear.
+- [x] Update release/audit records for 0.10.3 while leaving unfinished release
+  gates clear.
 - [x] Archive the built-in ImageGen Spring Boots and ground-hole masters, retain
   their prompt records, and validate/downsample transparent runtime copies with
   `scripts/process_traversal_assets.py`.
@@ -82,15 +84,14 @@ npm run check:desktop
 
 - [x] `npm run check` reports that the complete unit suite passes and that
   TypeScript and the Vite production build complete without errors.
-- [x] Dependency audit output for the exact 0.10.2 source is reviewed: zero known
-  vulnerabilities.
-- [x] `npm ls` for 0.10.2 is reviewed; only expected platform/feature optional packages are
-  absent.
+- [x] Dependency audit output for the exact 0.10.3 source is reviewed at the
+  moderate threshold: zero vulnerabilities.
+- [x] `npm ls` for 0.10.3 is reviewed; only expected optional cross-platform
+  packages are unmet.
 - [x] `npm run check:desktop` completes `cargo check --locked` without errors for
-  the exact 0.10.2 source.
-- [x] `npm run desktop:build` produces the 0.10.2 release executable and NSIS
-  installer; both are staged, source-compared, version-checked, and hashed, and
-  the portable app passes its five-second smoke launch.
+  the exact 0.10.3 source.
+- [x] `npm run desktop:build` produces the 0.10.3 release executable and NSIS
+  installer; the portable/setup artifacts are staged, hashed, and smoke-tested.
 - [x] Automated level checks validate all twelve story mazes in the 9, 11, 13,
   15, 13, 15, 17, 17, 19, 25, 21, and 23 tile sequence, with separate ordinary
   and every-friend solutions, exactly one weapon, and the intended 1–5 distinct
@@ -119,8 +120,9 @@ npm run check:desktop
 - [x] Jump-audio checks prove the four pitch-swept voices, 280 ms audible end,
   mute behavior, and failure isolation; local browser timing shows the 540 ms
   arc before a chained landing interaction.
-- [x] Repeat the relevant checks after the integrated 0.10.2 source changes
-  (`npm run check`: 260 of 260 tests across 19 files plus the production build).
+- [x] Repeat the relevant checks after the integrated 0.10.3 source changes
+  (`npm run check`: 267 of 267 tests across 20 files plus strict TypeScript and
+  the Vite production build).
 - [x] Repeat `npm run check` once more if browser QA or release packaging causes
   any additional source, asset, configuration, or lockfile change.
 
@@ -132,11 +134,13 @@ Test the production preview, not only the development server:
 npm run preview
 ```
 
-Production smoke record (2026-09-01): the canonical URL serves playable build
-0.10.2 from GitHub `main` commit `65fe554`. The exact debug query opens all twelve
-tester mazes. Live 1024 × 768, 844 × 390, and 568 × 320 checks preserve the same
-normalized panel geometry, exact 16:9 stage, and zero document overflow; browser
-warning/error logs are clear. Physical-device feel remains a human test.
+0.10.3 browser QA record (2026-09-01): desktop 1280×720, iPad 1194×834,
+and landscape-phone 844×390 checks have no document overflow or overlapping UI.
+Browser warning/error logs are clear and every visible image loaded. The title
+and Adventure Book reset entries opened the warning modal correctly; the
+destructive confirmation was deliberately not clicked. The pickup toast and v4
+front-only cage were also visually verified. Physical-device feel and canonical
+deployment promotion remain separate checks.
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
@@ -147,6 +151,8 @@ warning/error logs are clear. Physical-device feel remains a human test.
 - [x] 1024 x 768 local: the stage is exactly 1024 × 576 at y=96; sidebar rows,
   maze, controls, and large victory friend cards do not overlap.
 - [x] 1180 x 820: the same iPad-size layout checks pass locally.
+- [x] 1194 x 834: the 0.10.3 iPad layout has no page overflow, panel overlap,
+  browser warning/error, or broken visible image.
 - [x] 1366 x 768 and 1920 x 1080: the board remains square and the layout has no
   page overflow; production-art sampling remains part of the public smoke.
 - [ ] Big Maze expands the board, keeps its compact Power/item/rescue HUD and
@@ -194,7 +200,7 @@ warning/error logs are clear. Physical-device feel remains a human test.
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [x] On the 0.10.2 canonical URL, the exact `?debug=mazes` query opens the
+- [x] On the historical 0.10.2 canonical URL, the exact `?debug=mazes` query opens the
   direct picker and all twelve authored mazes are listed; the normal build-label
   entry and non-debug isolation remain covered locally and by the prior public smoke.
 - [ ] Complete a canonical tester run and reconfirm that rewards, records,
@@ -210,6 +216,11 @@ warning/error logs are clear. Physical-device feel remains a human test.
   of its pet without a baked-in animal, background rectangle, or missing bars.
 - [x] Locally verify the cage source/opacity and front-layer effect through normal
   controls; keep the all-four-style production-URL sample above pending.
+- [x] Visually verify a v4 cage in 0.10.3 uses a front-only layer without a
+  transparent full-cage shell obscuring the friend.
+- [x] Verify pickup feedback appears as a readable floating toast over the maze.
+- [x] Open the full-progress reset warning from both the title and Adventure Book;
+  leave the destructive confirmation unclicked during this release QA pass.
 - [ ] Rescue one through five animals, then move and backtrack: each rescued
   friend follows on a distinct recent visible footprint, never blocks movement,
   and reduced-motion mode removes decorative follower animation.
@@ -247,7 +258,7 @@ warning/error logs are clear. Physical-device feel remains a human test.
 - [ ] Each of the nine stat-driven badges unlocks at its documented threshold and
   new rewards appear once without duplicate fanfare.
 
-## 4. Windows 0.10.2 artifact test
+## 4. Windows 0.10.3 artifact test
 
 Expected build outputs:
 
@@ -255,13 +266,14 @@ Expected build outputs:
 - `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
   Solve!_VERSION_x64-setup.exe`
 
-For the new artifact set, `VERSION` must resolve to `0.10.2`.
+For the new artifact set, `VERSION` must resolve to `0.10.3`.
 
-- [x] Build the exact final 0.10.2 source and confirm both expected outputs exist.
-- [x] Confirm the portable executable and installer report product/file version
-  0.10.2 and embed the final browser bundle.
-- [x] A hidden five-second launch of the staged portable executable remains
-  running and responsive and exposes the correct game window title.
+- [x] Build the exact final 0.10.3 source and confirm both expected outputs exist.
+- [x] Independently inspect the portable executable and installer product/file
+  version metadata and confirm both report 0.10.3.
+- [x] Smoke-test the Windows portable artifact; it remained responsive for five
+  seconds with the expected title. The installer workflow remains a clean-machine
+  test below.
 
 - [ ] Launch the standalone executable on a clean Windows x64 account.
 - [ ] Install, launch, save progress, close, reopen, and uninstall the NSIS build.
@@ -273,35 +285,46 @@ For the new artifact set, `VERSION` must resolve to `0.10.2`.
 - [ ] Sign the executable and installer for public distribution, then test the
   signed files again. If unsigned, label them clearly.
 
-## 5. Windows 0.10.2 staging record
+## 5. Windows 0.10.3 staging record
 
 - [x] Copy only artifacts from the final successful build into `release/` using
   versioned filenames.
-- [x] Confirm the staged names are `Maze-so-Puzzle-0.10.2-portable.exe` and
-  `Maze-so-Puzzle-0.10.2-setup.exe`.
-- [x] Confirm both artifacts report file/product version 0.10.2 and remain clearly
-  labelled as unsigned local test builds.
+- [x] Confirm the staged names are `Maze-so-Puzzle-0.10.3-portable.exe` and
+  `Maze-so-Puzzle-0.10.3-setup.exe`.
+- [x] Independently confirm both artifacts report file/product version 0.10.3.
 - [x] Generate final SHA-256 values after all copying (the test build is unsigned):
 
 ```powershell
-Get-FileHash .\release\Maze-so-Puzzle-0.10.2-portable.exe -Algorithm SHA256
-Get-FileHash .\release\Maze-so-Puzzle-0.10.2-setup.exe -Algorithm SHA256
+Get-FileHash .\release\Maze-so-Puzzle-0.10.3-portable.exe -Algorithm SHA256
+Get-FileHash .\release\Maze-so-Puzzle-0.10.3-setup.exe -Algorithm SHA256
 ```
 
-- [x] Confirm the staged portable and installer hashes match their final Tauri
-  source artifacts byte-for-byte, then record the final 0.10.2 filenames, sizes,
-  and hashes in `release/README.md` and `release/SHA256SUMS.txt`.
+- [x] Record the final 0.10.3 filenames, sizes, and SHA-256 values below.
+- [x] Independently compare the staged hashes with the final Tauri output paths
+  byte-for-byte and mirror the verified record into `release/README.md` and
+  `release/SHA256SUMS.txt`.
 
-Current verified unsigned 0.10.2 staging record:
+Current verified unsigned 0.10.3 staging record:
+
+- Portable: `Maze-so-Puzzle-0.10.3-portable.exe`, 51,461,632 bytes, SHA-256
+  `2F7E47C76252F9E2F2C1E7939240BB81EF971DD2098FE157B647D1F248F42B7E`.
+- Installer: `Maze-so-Puzzle-0.10.3-setup.exe`, 44,943,455 bytes, SHA-256
+  `BF31CBB461EB909558C50D7077FDEA62A0D98A8D651BE9D3BFAA844368DD399B`.
+
+The unsigned portable and setup artifacts were built and byte-compared with the
+final Tauri outputs. The portable executable was smoke-launched; the installer
+itself still requires the clean-machine workflow above.
+
+### Historical verified 0.10.2 staging record
 
 - Portable: `Maze-so-Puzzle-0.10.2-portable.exe`, 49,224,704 bytes, SHA-256
   `3D84F67F33821C8D38D8CEC9B6F1DA07B4BEC55464A76060314B7A25258A227E`.
 - Installer: `Maze-so-Puzzle-0.10.2-setup.exe`, 42,696,746 bytes, SHA-256
   `94F1AF3C56799141DF9E0EDB4FD23A60A23BFE5141197E4BDB0091AA77F00EDC`.
 
-The staged files match the final Tauri outputs byte-for-byte, report file and
-product version 0.10.2, and the hidden portable smoke stayed responsive with
-the correct title for five seconds.
+The historical staged files matched the final 0.10.2 Tauri outputs
+byte-for-byte, reported file and product version 0.10.2, and the hidden portable
+smoke stayed responsive with the correct title for five seconds.
 
 ### Historical verified 0.10.1 staging record
 

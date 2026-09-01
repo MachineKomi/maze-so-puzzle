@@ -42,7 +42,10 @@ function progressedPlayingState(level: LevelDefinition): GameState {
   let state = createInitialGameState(level);
   for (const direction of solution.directions.slice(0, -1)) {
     const result = movePlayer(level, state, direction);
-    expect(result.moved).toBe(true);
+    expect(
+      result.moved || result.events.some((event) => event.type === "enemy-defeated"),
+    ).toBe(true);
+    expect(result.state).not.toBe(state);
     state = result.state;
   }
   expect(state.status).toBe("playing");

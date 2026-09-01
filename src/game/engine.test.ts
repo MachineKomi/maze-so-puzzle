@@ -67,16 +67,24 @@ describe("Power combat", () => {
     const armed = movePlayer(testLevel, initial, "right").state;
     const victory = movePlayer(testLevel, armed, "right");
 
-    expect(victory.moved).toBe(true);
+    expect(victory.moved).toBe(false);
+    expect(victory.state.position).toEqual(armed.position);
+    expect(victory.state.steps).toBe(armed.steps);
     expect(victory.state.power).toBe(4);
     expect(victory.state.defeatedEnemyIds).toHaveLength(1);
-    expect(victory.events[0]).toMatchObject({
+    expect(victory.events).toEqual([expect.objectContaining({
       type: "enemy-defeated",
       powerBefore: 2,
       powerAfter: 4,
-    });
+    })]);
 
-    const back = movePlayer(testLevel, victory.state, "left").state;
+    const enteredClearedTile = movePlayer(testLevel, victory.state, "right");
+    expect(enteredClearedTile.moved).toBe(true);
+    expect(enteredClearedTile.state.position.x).toBe(3);
+    expect(enteredClearedTile.state.power).toBe(4);
+    expect(enteredClearedTile.events.some((event) => event.type === "enemy-defeated")).toBe(false);
+
+    const back = movePlayer(testLevel, enteredClearedTile.state, "left").state;
     const revisit = movePlayer(testLevel, back, "right").state;
     expect(revisit.power).toBe(4);
     expect(revisit.defeatedEnemyIds).toHaveLength(1);

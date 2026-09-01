@@ -3,6 +3,41 @@ import { parseAsciiLevel } from "./levels";
 import { solveLevel, validateLevel } from "./solver";
 
 describe("solver interaction gates", () => {
+  it("includes a stationary combat interaction before entering the cleared tile", () => {
+    const level = parseAsciiLevel({
+      id: "winnable-enemy-gate",
+      name: "Winnable Enemy Gate",
+      objective: "Defeat the enemy, then walk forward.",
+      initialPower: 2,
+      map: [
+        "#########",
+        "#@s2..E.#",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+      ],
+    });
+
+    const result = solveLevel(level);
+    expect(result).toMatchObject({
+      solvable: true,
+      reason: "solved",
+      finalState: {
+        status: "won",
+        power: 4,
+      },
+    });
+    expect(result.finalState?.defeatedEnemyIds).toHaveLength(1);
+    // Sword, stationary battle, the cleared tile, two floor tiles, then exit.
+    expect(result.directions).toEqual([
+      "right", "right", "right", "right", "right", "right",
+    ]);
+  });
+
   it("does not treat contact with an underpowered enemy as movement or progress", () => {
     const level = parseAsciiLevel({
       id: "strong-enemy-gate",

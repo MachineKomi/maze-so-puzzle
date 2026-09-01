@@ -4,6 +4,64 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.10.3 - 2026-09-01
+
+This readability-and-control release makes the maze board easier to understand
+at a glance, makes held movement gentler for small hands, and adds a safe way to
+start the whole adventure again.
+
+### Changed
+
+- Every lock family now has its own colour **and** silhouette: the pink
+  **Rose Heart Key** opens the Rose Heart Door, the blue **Blue Star Key** opens
+  the Blue Star Door, and the yellow **Sunny Sun Key** opens the Sunny Sun Door.
+  Board art, names, hints, accessibility text, and preloading all use the same
+  typed catalogue instead of recolouring one star asset.
+- All four rescue-cage styles use new sparse front-only v4 overlays. A low base,
+  two side posts, and three narrow bars keep the animal clearly visible while
+  the opaque cage pieces still read cleanly in a small maze tile.
+- Ame and the friendly enemies render larger, with larger outlined Power values
+  positioned above their heads. Battle and Spring Boots presentation copies use
+  the same proportions.
+- Important map pickups now receive a short board-centred picture-and-name toast
+  for the weapon, splash boots, Spring Boots, Antidote Leaf, potion, and key.
+  The existing compact feedback remains available independently.
+- Winning a friendly battle now resolves while Ame stays safely in the square
+  beside the enemy. The enemy disappears and its Power transfers to Ame, but the
+  step counter and position do not advance; the next input enters the cleared
+  square. The solver follows this same state-changing, non-moving transition.
+- Held keyboard, pointer, touch, and D-pad movement is deliberately slower and
+  smoother: the first repeat waits 320 ms, begins at 260 ms between steps, and
+  eases over 16 repeats to a capped 160 ms corridor cadence. A short 120 ms
+  visual interpolation softens each grid step without delaying the game rule.
+- The title screen and Adventure Book now offer **Reset progress**. A clear
+  confirmation lists the records, gold, rescued friends, stickers, medals,
+  badges, and active maze that will be forgotten before returning to Story
+  Maze 1. The reset removes only Maze so Puzzle's four known save keys and
+  preserves unrelated browser storage.
+
+### Verification
+
+- `npm run check` passes 267 tests across 20 files, followed by strict
+  TypeScript checking and the Vite production build.
+- New coverage locks down the three key/door art pairs, v4 cage catalogue and
+  preload paths, stationary combat and solver semantics, the eased held-input
+  cadence, and the exact storage allow-list used by the full reset.
+
+### Release status
+
+- The 0.10.3 browser source gate and unsigned Windows build are complete. The
+  staged portable executable is 51,461,632 bytes with SHA-256
+  `2F7E47C76252F9E2F2C1E7939240BB81EF971DD2098FE157B647D1F248F42B7E`;
+  the staged NSIS installer is 44,943,455 bytes with SHA-256
+  `BF31CBB461EB909558C50D7077FDEA62A0D98A8D651BE9D3BFAA844368DD399B`.
+- Both staged files byte-match the final Tauri outputs and report file/product
+  version 0.10.3. The portable app remained responsive through a five-second
+  smoke launch and displayed the correct title.
+- Production Vercel promotion and physical-device smoke testing remain release
+  steps. The canonical site continues to report 0.10.2 until the verified
+  0.10.3 source is pushed and its live deployment passes the smoke matrix.
+
 ## 0.10.2 - 2026-09-01
 
 This responsive-foundation release keeps the game deliberately composed on

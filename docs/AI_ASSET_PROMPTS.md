@@ -474,3 +474,124 @@ BACKGROUND/OUTPUT: transparent background with clean antialiased cutout edges an
 Both runtime assets are preloaded only for levels that use them. Connected
 poison geometry, collision gating, the leaf's inventory state, and the soft
 inset/feathered region mask are code-native behavior rather than generated art.
+
+## Version 10.3 lock pairs and sparse cage fronts
+
+Build 0.10.3 adds four dedicated lock sprites and replaces all four active cage
+fronts with much sparser v4 overlays. All eight images were produced through the
+built-in OpenAI ImageGen workflow in **image-edit/reference mode**: an existing
+key, door, or cage was supplied as Image 1 so the new object retained the game's
+established chunky anime storybook JRPG rendering. This was not new-image mode.
+The existing `star-key.png` and `star-door.png` remain the Blue Star pair and
+were not regenerated in this pass.
+
+Each built-in result is a native 1254 × 1254 RGBA image. The generated output is
+archived unchanged in `docs/source-assets`; a 512 × 512 RGBA downsample with the
+source alpha preserved is shipped from `public/assets`. Archived v4 filenames
+deliberately do not use a `-master` suffix.
+
+### Exact generated-output and production mapping
+
+| Asset | Built-in generated source | Archived generated source | Production runtime asset |
+|---|---|---|---|
+| Golden Heart cage front v4 | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-297f2f0d-81f8-42e5-a8f9-7cda4f0858bf.png` | `docs/source-assets/cage-golden-heart-front-v4.png` | `public/assets/cage-golden-heart-front-v4.png` |
+| Storybook Wood cage front v4 | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-74946821-4baf-4000-aabc-4ffc07fa2405.png` | `docs/source-assets/cage-storybook-wood-front-v4.png` | `public/assets/cage-storybook-wood-front-v4.png` |
+| Moon Silver cage front v4 | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-03be4f48-93fe-460c-87c7-b3cdcd17dcc9.png` | `docs/source-assets/cage-moon-silver-front-v4.png` | `public/assets/cage-moon-silver-front-v4.png` |
+| Garden Vine cage front v4 | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-652f9c72-66b6-4ae0-bd74-ef7231fb9d86.png` | `docs/source-assets/cage-garden-vine-front-v4.png` | `public/assets/cage-garden-vine-front-v4.png` |
+| Rose Heart Key | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-86954c5b-6374-49c8-9a79-4cc7bb169446.png` | `docs/source-assets/key-rose-heart-v1.png` | `public/assets/key-rose-heart-v1.png` |
+| Sunny Sun Key | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-019d8827-84af-4e30-a6ac-ceae04e26602.png` | `docs/source-assets/key-sunny-sun-v1.png` | `public/assets/key-sunny-sun-v1.png` |
+| Rose Heart Door | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-11992432-0fb9-4fe4-80d3-3345b90fb405.png` | `docs/source-assets/door-rose-heart-v1.png` | `public/assets/door-rose-heart-v1.png` |
+| Sunny Sun Door | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-9460311e-8212-4124-9bf5-4151ee32592f.png` | `docs/source-assets/door-sunny-sun-v1.png` | `public/assets/door-sunny-sun-v1.png` |
+
+The runtime catalogue pairs these with the retained Blue Star art as follows:
+
+| Engine colour | Child-readable pair | Key | Door |
+|---|---|---|---|
+| `red` | Rose Heart | `public/assets/key-rose-heart-v1.png` | `public/assets/door-rose-heart-v1.png` |
+| `blue` | Blue Star | `public/assets/star-key.png` | `public/assets/star-door.png` |
+| `yellow` | Sunny Sun | `public/assets/key-sunny-sun-v1.png` | `public/assets/door-sunny-sun-v1.png` |
+
+### Exact key and door prompts
+
+Rose Heart Key:
+
+```text
+Use case: precise object edit for a browser game tile sprite.
+Image 1 is the edit target and rendering/style reference. Preserve the cute chunky anime fantasy JRPG asset quality, readable proportions, polished pastel materials, and square transparent sprite layout.
+Redesign the object as a pink heart-shaped key: large faceted rose-pink heart bow, tiny cream wings, warm gold shaft, clearly heart-shaped silhouette; no star anywhere. The key and its matching door must be instantly distinguishable by motif and dominant color at very small tile size.
+Output one centered isolated object only, true transparent background, no text, no label, no scenery, no floor, no cast shadow, no extra objects.
+```
+
+Sunny Sun Key:
+
+```text
+Use case: precise object edit for a browser game tile sprite.
+Image 1 is the edit target and rendering/style reference. Preserve the cute chunky anime fantasy JRPG asset quality, readable proportions, polished pastel materials, and square transparent sprite layout.
+Redesign the object as a sunny yellow sun-shaped key: large round golden-yellow smiling sun bow with eight chunky rays, orange-gold shaft, clearly sun-shaped silhouette; no star or heart anywhere. The key and its matching door must be instantly distinguishable by motif and dominant color at very small tile size.
+Output one centered isolated object only, true transparent background, no text, no label, no scenery, no floor, no cast shadow, no extra objects.
+```
+
+Rose Heart Door:
+
+```text
+Use case: precise object edit for a browser game tile sprite.
+Image 1 is the edit target and rendering/style reference. Preserve the cute chunky anime fantasy JRPG asset quality, readable proportions, polished pastel materials, and square transparent sprite layout.
+Redesign the object as a magical pink heart door: cream-and-rose arched door with one huge faceted pink heart crest and heart-shaped lock, warm gold trim; no star anywhere. The key and its matching door must be instantly distinguishable by motif and dominant color at very small tile size.
+Output one centered isolated object only, true transparent background, no text, no label, no scenery, no floor, no cast shadow, no extra objects.
+```
+
+Sunny Sun Door:
+
+```text
+Use case: precise object edit for a browser game tile sprite.
+Image 1 is the edit target and rendering/style reference. Preserve the cute chunky anime fantasy JRPG asset quality, readable proportions, polished pastel materials, and square transparent sprite layout.
+Redesign the object as a magical sunny yellow sun door: pale yellow and warm orange arched door with one huge round sun crest with eight chunky rays and sun-shaped lock, warm gold trim; no star or heart anywhere. The key and its matching door must be instantly distinguishable by motif and dominant color at very small tile size.
+Output one centered isolated object only, true transparent background, no text, no label, no scenery, no floor, no cast shadow, no extra objects.
+```
+
+### Exact sparse cage-front prompts
+
+Golden Heart:
+
+```text
+Use case: precise object simplification for a browser game tile sprite.
+Image 1 is the edit target and style reference. Keep its lovely chunky anime JRPG rendering and warm pastel gold with tiny pink heart gems, but make the cage front dramatically sparser so a separate cute animal sprite behind it stays clearly visible at 80-pixel tile size.
+Required exact structure: one low decorative base rail occupying only the bottom 18% of the square; two narrow side posts; EXACTLY THREE narrow, evenly spaced vertical front bars rising from the base and ending separately near 72% height. Add one tiny centered lock ornament on the base only. At least 70% of the central area must remain fully transparent.
+Completely remove the central door panel, door arch, top rail, curved roof, dome, rear bars, rear floor, broad frame, and any horizontal piece above the base. Bars must be thin and must not connect across the top.
+Output one centered 1:1 sprite with true transparent background. No animal, no text, no label, no scenery, no ground, no cast shadow, no checkerboard.
+```
+
+Storybook Wood:
+
+```text
+Use case: precise object simplification for a browser game tile sprite.
+Image 1 is the edit target and style reference. Keep its lovely chunky anime JRPG rendering and warm pastel honey wood with tiny carved flower details, but make the cage front dramatically sparser so a separate cute animal sprite behind it stays clearly visible at 80-pixel tile size.
+Required exact structure: one low decorative base rail occupying only the bottom 18% of the square; two narrow side posts; EXACTLY THREE narrow, evenly spaced vertical front bars rising from the base and ending separately near 72% height. Add one tiny centered lock ornament on the base only. At least 70% of the central area must remain fully transparent.
+Completely remove the central door panel, door arch, top rail, curved roof, dome, rear bars, rear floor, broad frame, and any horizontal piece above the base. Bars must be thin and must not connect across the top.
+Output one centered 1:1 sprite with true transparent background. No animal, no text, no label, no scenery, no ground, no cast shadow, no checkerboard.
+```
+
+Moon Silver:
+
+```text
+Use case: precise object simplification for a browser game tile sprite.
+Image 1 is the edit target and style reference. Keep its lovely chunky anime JRPG rendering and cool pastel moon-silver with tiny pale-blue crescent gems, but make the cage front dramatically sparser so a separate cute animal sprite behind it stays clearly visible at 80-pixel tile size.
+Required exact structure: one low decorative base rail occupying only the bottom 18% of the square; two narrow side posts; EXACTLY THREE narrow, evenly spaced vertical front bars rising from the base and ending separately near 72% height. Add one tiny centered lock ornament on the base only. At least 70% of the central area must remain fully transparent.
+Completely remove the central door panel, door arch, top rail, curved roof, dome, rear bars, rear floor, broad frame, and any horizontal piece above the base. Bars must be thin and must not connect across the top.
+Output one centered 1:1 sprite with true transparent background. No animal, no text, no label, no scenery, no ground, no cast shadow, no checkerboard.
+```
+
+Garden Vine:
+
+```text
+Use case: precise object simplification for a browser game tile sprite.
+Image 1 is the edit target and style reference. Keep its lovely chunky anime JRPG rendering and pastel gold and green vines with only a few tiny pink flowers, but make the cage front dramatically sparser so a separate cute animal sprite behind it stays clearly visible at 80-pixel tile size.
+Required exact structure: one low decorative base rail occupying only the bottom 18% of the square; two narrow side posts; EXACTLY THREE narrow, evenly spaced vertical front bars rising from the base and ending separately near 72% height. Add one tiny centered lock ornament on the base only. At least 70% of the central area must remain fully transparent.
+Completely remove the central door panel, door arch, top rail, curved roof, dome, rear bars, rear floor, broad frame, and any horizontal piece above the base. Bars must be thin and must not connect across the top.
+Output one centered 1:1 sprite with true transparent background. No animal, no text, no label, no scenery, no ground, no cast shadow, no checkerboard.
+```
+
+The v4 cage assets supersede the v2 runtime overlays documented above; the v2
+section remains as provenance for the earlier build. Lock matching, key/door
+labels, asset resolution, preloading, cage layering, and pickup presentation are
+code-native behavior rather than additional generated imagery.

@@ -3,14 +3,19 @@ import {
   CAGE_ART,
   DEFAULT_CAGE_STYLE,
   DEFAULT_ENEMY_STYLE,
+  DEFAULT_KEY_COLOR,
   DEFAULT_TERRAIN_THEME_ID,
   DEFAULT_WEAPON_STYLE,
+  DOOR_ART,
   ENEMY_ART,
+  KEY_ART,
   TERRAIN_THEMES,
   WEAPON_ART,
   resolveAnimalArt,
   resolveCageArt,
+  resolveDoorArt,
   resolveEnemyArt,
+  resolveKeyArt,
   resolveTerrainTheme,
   resolveWeaponArt,
 } from "./artCatalog";
@@ -26,8 +31,14 @@ export const ASSETS = {
   potion: "/assets/potion.png",
   boots: "/assets/boots.png",
   springBoots: "/assets/spring-boots-v1.png",
-  key: "/assets/star-key.png",
-  door: "/assets/star-door.png",
+  key: KEY_ART[DEFAULT_KEY_COLOR].src,
+  door: DOOR_ART[DEFAULT_KEY_COLOR].src,
+  keyRoseHeart: KEY_ART.red.src,
+  keyBlueStar: KEY_ART.blue.src,
+  keySunnySun: KEY_ART.yellow.src,
+  doorRoseHeart: DOOR_ART.red.src,
+  doorBlueStar: DOOR_ART.blue.src,
+  doorSunnySun: DOOR_ART.yellow.src,
   goal: "/assets/goal.png",
   floor: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].floor.src,
   wall: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].wall.src,
@@ -82,8 +93,6 @@ const STATIC_OBJECT_ART = {
   boots: [ASSETS.boots],
   "spring-boots": [ASSETS.springBoots],
   "antidote-leaf": [ASSETS.antidoteLeaf],
-  key: [ASSETS.key],
-  door: [ASSETS.door],
 } as const;
 
 const REWARD_ART = [
@@ -154,12 +163,16 @@ export function preloadLevelArt(level: LevelDefinition): void {
       case "sword":
         sources.add(resolveWeaponArt(object.style).src);
         break;
+      case "key":
+        sources.add(resolveKeyArt(object.color).src);
+        break;
+      case "door":
+        sources.add(resolveDoorArt(object.color).src);
+        break;
       case "potion":
       case "boots":
       case "spring-boots":
       case "antidote-leaf":
-      case "key":
-      case "door":
         for (const source of STATIC_OBJECT_ART[object.kind]) sources.add(source);
         break;
     }

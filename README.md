@@ -6,10 +6,11 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.10.2 play-test build, which remains an active prototype. Its complete automated
-web gate, unsigned Windows packaging, and public Vercel promotion are verified;
-the final physical-device pass remains a release step rather than an
-already-verified claim.
+0.10.3 play-test build, which remains an active prototype. Its complete
+automated browser gate and refreshed unsigned Windows packaging are verified.
+Production Vercel promotion and the physical-device pass remain release steps;
+the canonical site still reports 0.10.2 until the verified source is pushed and
+the live 0.10.3 smoke check passes.
 
 ![The previous 0.4.0 Little Star Trail build, with Ame's maze on the left and her picture-led adventure panel on the right](docs/screenshots/gameplay-v0.4.0.png)
 
@@ -61,16 +62,24 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.10.2 test build:
+The current verified desktop artifacts are the unsigned 0.10.3 test build:
 
-- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.10.2-portable.exe`
-  and `release/Maze-so-Puzzle-0.10.2-setup.exe`. Executables are deliberately
+- Portable test copy: `release/Maze-so-Puzzle-0.10.3-portable.exe`
+  (51,461,632 bytes; SHA-256
+  `2F7E47C76252F9E2F2C1E7939240BB81EF971DD2098FE157B647D1F248F42B7E`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.10.3-setup.exe`
+  (44,943,455 bytes; SHA-256
+  `BF31CBB461EB909558C50D7077FDEA62A0D98A8D651BE9D3BFAA844368DD399B`).
+  Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
-  (this mutable path may be replaced by a later local build).
+  (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.10.2_x64-setup.exe`.
-- The verified 0.10.2 hashes and retained archive hashes are recorded in
+  Puzzle - For Ame to Solve!_0.10.3_x64-setup.exe` (byte-matches the staged
+  setup copy).
+- Both executables report file/product version 0.10.3. The portable app remained
+  responsive for a five-second smoke launch and showed the correct game title.
+- The verified 0.10.3 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -88,8 +97,10 @@ The current verified desktop artifacts are the unsigned 0.10.2 test build:
   door or enemy.
 - On-screen arrows: touch- and mouse-friendly movement.
 - Holding touch, mouse, keyboard, or an on-screen arrow moves once immediately,
-  pauses long enough to release for a single square, then accelerates smoothly
-  to a capped corridor speed. Changing direction resets the acceleration.
+  waits 320 ms so a child can release after one square, then accelerates
+  smoothly from 260 ms to a capped 160 ms repeat over 16 held steps. Changing
+  direction resets the acceleration, and a 120 ms visual ease keeps each grid
+  step readable.
 - The complete interface uses a fixed 960 × 540 logical canvas and scales
   uniformly into the device safe area. Desktop and iPad keep the same relative
   composition; extra-wide phones letterbox instead of stretching or rearranging
@@ -102,7 +113,7 @@ The current verified desktop artifacts are the unsigned 0.10.2 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.10.2** label to
+On the title screen, click or tap the small **Playable build 0.10.3** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -117,7 +128,7 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.10.2
+## Included in playable build 0.10.3
 
 - One stable 16:9 visual system for title, play, Adventure Book, tester picker,
   dialogs, and victory celebrations. Its tested scaling contract covers desktop,
@@ -162,10 +173,15 @@ Turn the iPad sideways to play.
   forward path. Wishing Woods retains its optional Power 9 pebble-golem rescue
   puzzle, and the four latest challenge mazes have solver-verified out-and-back
   routes.
-- Ame visibly holds the level's collected weapon, and Power numbers sit above
-  character art without covering faces.
+- Ame visibly holds the level's collected weapon. Her maze sprite and the
+  friendly enemies are larger, and their larger outlined Power numbers sit
+  above the character art without covering faces. Jump and battle copies retain
+  the same readable scale.
 - Power growth from defeated lower-level enemies and `+2` potions.
-- Colour-coded Rose, Blue, and Sunny star keys and matching labelled doors.
+- Three dedicated colour-and-shape lock pairs: a pink **Rose Heart Key** and
+  Rose Heart Door, blue **Blue Star Key** and Blue Star Door, and yellow
+  **Sunny Sun Key** and Sunny Sun Door. The art, names, hints, and accessible
+  descriptions all share the same typed pair metadata.
 - Protective splash boots for water and warm magical lava, illustrated Spring
   Boots for jumping over one or more consecutive ground holes, and a magical
   Antidote Leaf for crossing soft purple poison. One
@@ -194,6 +210,8 @@ Turn the iPad sideways to play.
   readable without changing engine rules. A winning battle now has three cute
   bashes: the enemy's visible Power drains stepwise to `0` while the exact same
   amount counts into Ame, with glowing Power motes and a final victory burst.
+  The engine resolves that battle without moving Ame or adding a step: the foe
+  clears while she stays one square away, and the next input enters that square.
   Rescued friends pop free, hop excitedly, and then join the follower trail.
   Reduced-motion mode collapses these flourishes to a brief exact handoff.
 - Spring Boots crossings show a clear 540 ms take-off, high hop, moving ground
@@ -214,9 +232,14 @@ Turn the iPad sideways to play.
   inventory variants, no overlapping completion ticks, clearer found/missing
   silhouettes, and the selected weapon overlaid in Ame's hands. The old
   tile-sized move arrow/cross overlay is removed.
+- A short board-centred picture-and-name toast celebrates each important pickup:
+  the maze weapon, splash boots, Spring Boots, Antidote Leaf, potion, and the
+  current lock-pair key. It runs independently from the compact feedback bar and
+  becomes a static notice when reduced motion is preferred.
 - Rescued friends leave their cages and follow Ame along her recent visible
-  footsteps. Four AI-generated, fully opaque front cage layers keep bars and
-  locks crisp over the animal art before rescue, with transparent openings.
+  footsteps. Four new sparse v4 front-only cage overlays use a low base, two
+  side posts, and exactly three narrow bars. Their visible pieces stay opaque
+  and crisp while at least 70% of the centre remains open for the animal art.
 - A landscape presentation with a friendly turn-sideways screen on portrait
   devices. Phones fill their safe landscape viewport; iPad and phone boards use
   a full-height play card with compact, overlaid maze information.
@@ -226,6 +249,10 @@ Turn the iPad sideways to play.
 - Safe session navigation: a maze can be resumed after visiting Home, the
   Adventure Book, refreshing the page, or reopening the app; changing maze
   mid-run asks for confirmation.
+- A confirmed **Reset progress** action on both the title screen and Adventure
+  Book forgets Maze so Puzzle records, gold, rescues, stickers, medals, badges,
+  and the active maze, then returns to Story Maze 1. It removes only the game's
+  explicit current, v2, legacy, and active-run storage keys.
 
 ## Solvability and game rules
 
@@ -271,36 +298,38 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.10.2 source suite passes 260 automated tests across 19 files and the strict
+The 0.10.3 source suite passes 267 automated tests across 20 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all twelve authored ordinary/perfect-rescue routes,
 dominant-colour theme compatibility, five-track per-maze music selection, the
 6 x 6 even camera, variable 9–29 generation, solver-safe connected hazards,
-pointer intent/corner assistance, held-input acceleration, variable 1–5 friend
-totals, immutable strong-enemy warnings, poison/antidote traversal and migration,
-theme lightness and
-colour compatibility, transparent terrain dressing, rescued-pet trail
-placement, cage-front assets, persistent minimap reveal, and the established
-engine/save/audio checks. The exact 0.10.2 dependency audit/tree and locked Cargo
-compile pass. Its Windows
-portable app and installer are source-compared, version-checked, hashed, and the
-portable app passed a hidden five-second smoke launch. The canonical deployment
-passes the build-label/picker, 1024 x 768 and 667 x 375 overflow, production-art,
-single-step, and browser-log smoke checks. Physical-device listening/feel remains
-on the release checklist; the previous 0.9.0 record is retained as historical
-evidence.
+pointer intent/corner assistance, the slower eased held-input cadence, variable
+1–5 friend totals, immutable strong-enemy warnings, poison/antidote traversal
+and migration, theme lightness and colour compatibility, transparent terrain
+dressing, rescued-pet trails, persistent minimap reveal, dedicated Rose Heart,
+Blue Star, and Sunny Sun lock artwork, sparse v4 cage fronts, stationary winning
+combat, and the full-reset storage allow-list.
 
-The browser matrix, remaining 0.10.2 gates, and Windows artifact
+The 0.10.3 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.10.3, and are size-checked and
+SHA-256 hashed. The portable app also passed a responsive five-second launch
+smoke with the correct title. Dependency review, Vercel promotion, and
+physical-device checks remain separate release gates. The canonical site's
+0.10.2 build-label/picker, overflow, production-art, single-step, and browser-log
+checks remain the latest live deployment record until 0.10.3 is promoted and
+smoke-tested there.
+
+The browser matrix, remaining release gates, and Windows artifact
 record are kept in
-[`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md). Rebuilding the Windows
-package is a separate release step:
+[`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md). Rebuild the Windows
+package after any later source or version change with:
 
 ```powershell
 npm run desktop:build
 ```
 
-The 0.10.2 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.10.3 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

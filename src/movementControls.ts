@@ -6,11 +6,11 @@ import type { Direction } from "./game/types";
  * to corridor speed over the next few steps instead of jumping straight to
  * full speed.
  */
-export const HELD_MOVE_INITIAL_DELAY_MS = 220;
+export const HELD_MOVE_INITIAL_DELAY_MS = 320;
 
-const HELD_MOVE_START_REPEAT_MS = 160;
-const HELD_MOVE_FASTEST_REPEAT_MS = 100;
-const HELD_MOVE_ACCELERATION_STEPS = 10;
+export const HELD_MOVE_START_REPEAT_MS = 260;
+export const HELD_MOVE_FASTEST_REPEAT_MS = 160;
+export const HELD_MOVE_ACCELERATION_STEPS = 16;
 
 export interface HeldMoveCadence {
   readonly direction: Direction | null;

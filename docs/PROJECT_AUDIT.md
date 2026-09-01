@@ -1,28 +1,40 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: 0.10.2 web/Windows playable release
+Audited build: 0.10.3 web/Windows playable release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-01 the integrated 0.10.2 suite passed 260 tests
-across 19 files and the strict TypeScript/Vite production build. The fixed
-960 × 540 stage passed a twelve-size browser matrix from 1920 × 1080 through
-classic and modern iPads to 568 × 320 landscape phones: every case retained an
-exact 16:9 stage, fixed logical panel geometry, and no document overflow or
-panel intersection. A perfect-rescue finish was replayed at iPad and phone sizes;
-its large friend card, rewards, and actions stayed separate. The three-bash
-combat timeline and 540 ms Spring Boots hop retain their focused logic/audio and
-local browser timing checks. Locked-Tauri compilation and Windows packaging
-pass. GitHub `main` commit `65fe554` auto-deployed through Vercel, and the
-canonical 0.10.2 responsive smoke passes.
+real-device testing. On 2026-09-01 the integrated 0.10.3 suite passed 267 tests
+across 20 files plus strict TypeScript and the Vite production build. The npm
+moderate-level audit reports zero vulnerabilities; `npm ls` contains only the
+expected unmet optional cross-platform packages, and `cargo check --locked`
+passes. Browser QA at desktop 1280 × 720, iPad 1194 × 834, and landscape-phone
+844 × 390 found no page overflow, overlapping panels, console warnings/errors,
+or broken visible images. The title and Adventure Book reset entries and their
+warning modal were exercised without clicking the destructive confirmation.
+The pickup toast and new v4 front-only cage were visually verified. Unsigned
+0.10.3 portable and setup artifacts were built and byte-verified, and the
+portable executable passed a five-second launch smoke.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
-## Current 0.10.2 release status
+## Current 0.10.3 release status
+
+| Area | Current evidence | Status |
+| --- | --- | --- |
+| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 267 tests across 20 files and completed the production build |
+| Dependencies | JavaScript dependency vulnerability and tree review | `npm audit --audit-level=moderate` reports zero vulnerabilities; `npm ls` reports only expected optional cross-platform packages as unmet |
+| Desktop compile | Locked Rust/Tauri dependency graph | `cargo check --locked` passed |
+| Responsive browser QA | Desktop 1280×720, iPad 1194×834, and landscape phone 844×390 | No page overflow or UI overlap; no console warning/error logs and no broken visible images |
+| Reset flow | Reset entry points on the title and Adventure Book plus the destructive warning dialog | Both entries and modal were verified; destructive confirmation was deliberately not clicked during browser QA |
+| Interaction polish | In-maze pickup feedback and revised cage presentation | Floating pickup toast and the new v4 front-only cage were visually verified |
+| Desktop artifacts | Unsigned 0.10.3 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+
+## Historical 0.10.2 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
@@ -309,7 +321,8 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Theme selection must pass the dominant-colour compatibility matrix; in
   particular, yellow/gold floors cannot pair with green/sage walls.
 - The unsigned Windows files are suitable for local testing. SmartScreen may
-  warn on machines that did not build them; the verified files are 0.10.2.
+  warn on machines that did not build them; the current verified files are
+  0.10.3. Earlier artifact records remain historical evidence.
 
 ## Hardening completed during housekeeping
 
@@ -341,12 +354,14 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Big Maze remains available as an optional roomier board view while retaining a
   compact Power/item/rescue HUD and an overlaid feedback toast.
 
-The 0.10.2 source passes 260 tests across 19 files, strict TypeScript, and the
-Vite production build. The local twelve-size responsive matrix and iPad/phone
-perfect-rescue finish are green. The dependency audit/tree and locked Cargo check pass, and the unsigned
-0.10.2 Windows pair is built, versioned, source-compared, hashed, and
-smoke-launched. GitHub `main` commit `65fe554` is live through Vercel and the
-canonical 0.10.2 focused responsive smoke passes. Unchecked
+The 0.10.3 source passes 267 tests across 20 files, strict TypeScript, and the
+Vite production build. Desktop 1280×720, iPad 1194×834, and landscape-phone
+844×390 browser checks have no page overflow, overlap, console warning/error,
+or broken visible image. The dependency audit/tree and locked Cargo check pass,
+and the unsigned 0.10.3 Windows pair is built and hashed, with a passing portable
+launch smoke. Reset
+entry points and their warning were checked without invoking the destructive
+action; the pickup toast and v4 front-only cage were visually verified. Unchecked
 physical-device, listening/feel, broader production, clean-install, and signing
 items in `RELEASE_CHECKLIST.md` remain requirements.
 
@@ -355,7 +370,7 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 ### P0 - release hygiene and future packaged builds
 
 - Perform the remaining physical-device browser matrix in `RELEASE_CHECKLIST.md`
-  against the exact 0.10.2 production deployment, and separately repeat the
+  against the exact 0.10.3 build, and separately repeat the
   portable and installer matrix on a clean Windows account before wider sharing.
 - Before any new Windows release, install, launch, save, upgrade, and uninstall
   on a clean Windows x64 machine.
@@ -404,8 +419,8 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- Current source metadata and `release/` records are aligned at 0.10.2. GitHub
-  `main` and the canonical Vercel deployment serve the same playable build.
+- Current source metadata and `release/` records are aligned at 0.10.3. Public
+  GitHub/Vercel promotion should be verified separately before it is claimed.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

@@ -260,6 +260,7 @@ export type GameEvent =
 
 export interface MoveResult {
   readonly state: GameState;
+  /** True only when Ame's grid position changed; interactions can still update state. */
   readonly moved: boolean;
   readonly events: readonly GameEvent[];
 }

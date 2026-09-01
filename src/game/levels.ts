@@ -268,7 +268,7 @@ export const MOVEMENT_LEVEL = parseAsciiLevel({
 export const SWORD_AND_KEY_LEVEL = parseAsciiLevel({
   id: "shiny-sword",
   name: "Shiny Sword",
-  objective: "Find the sword and star key!",
+  objective: "Find the sword and Rose Heart Key!",
   terrainThemeId: "rose-courtyard",
   weaponStyle: "flower-sabre",
   enemyStyle: "goblin",

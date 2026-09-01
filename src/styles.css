@@ -315,14 +315,6 @@ button:focus-visible,
   height: 98%;
 }
 
-.color-red {
-  filter: hue-rotate(105deg) saturate(1.16) drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
-}
-
-.color-yellow {
-  filter: hue-rotate(-148deg) saturate(0.98) drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
-}
-
 .power-badge {
   position: absolute;
   z-index: 14;
@@ -623,14 +615,6 @@ button:focus-visible,
 
 .inventory-slot.missing img {
   filter: grayscale(0.9) opacity(0.23);
-}
-
-.inventory-slot.color-red.found img {
-  filter: hue-rotate(105deg) saturate(1.16);
-}
-
-.inventory-slot.color-yellow.found img {
-  filter: hue-rotate(-148deg);
 }
 
 .inventory-slot > span {
@@ -5409,4 +5393,183 @@ body,
 
 .too-strong-equation span.enemy-side {
   background: linear-gradient(145deg, #8a80d2, #635da9);
+}
+
+/* --------------------------------------------------------------------------
+   V10.3 character scale, readable Power, and gentle grid interpolation
+   -------------------------------------------------------------------------- */
+
+/* cameraLayerStyle supplies tile-local left/top coordinates inline. Animating
+   those two properties keeps the existing grid contract while softening the
+   visual step between adjacent squares. The 120ms travel settles before the
+   accelerated held-input cadence reaches its next square. */
+.player-layer {
+  transition:
+    left 120ms cubic-bezier(0.2, 0.72, 0.25, 1),
+    top 120ms cubic-bezier(0.2, 0.72, 0.25, 1);
+  will-change: left, top;
+}
+
+/* Ame's source artwork already has a clean transparent cutout, so let her use
+   almost the whole square instead of shrinking her inside a second margin. */
+.player-sprite {
+  bottom: -1%;
+  width: 92%;
+  height: 92%;
+}
+
+.object-enemy {
+  width: 82%;
+  height: 82%;
+}
+
+/* Power remains plain outlined text, but is large enough to read at the 6x6
+   exploration camera and is anchored to the actual top of each cutout. */
+.power-badge {
+  font-size: clamp(10px, calc(25cqw / var(--grid-size, 13)), 20px);
+  line-height: 0.92;
+  -webkit-text-stroke: clamp(0.8px, calc(1.9cqw / var(--grid-size, 13)), 1.5px) #39324f;
+}
+
+.player-layer > .player-power {
+  top: auto;
+  bottom: 91%;
+}
+
+.object-layer > .enemy-power {
+  top: auto;
+  bottom: 82%;
+}
+
+/* Match the board scale during set pieces so Ame does not shrink when combat
+   or a spring jump temporarily swaps in a presentation sprite. */
+.battle-ame .battle-sprite {
+  width: 94%;
+  height: 94%;
+}
+
+.battle-enemy .battle-sprite {
+  width: 88%;
+  height: 88%;
+}
+
+.battle-ame > .player-power,
+.jump-presentation-body > .player-power {
+  top: auto;
+  bottom: 92%;
+}
+
+.battle-enemy > .enemy-power {
+  top: auto;
+  bottom: 87%;
+}
+
+/* The new cage art contains only a decorative front frame and bars. Keep the
+   friend large behind it, while letting the frame reach the tile edges. */
+.animal-stack {
+  inset: 1%;
+}
+
+.animal-stack .animal-sprite {
+  bottom: 1%;
+  width: 94%;
+  height: 94%;
+}
+
+.animal-stack .animal-cage {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rescue-icon > img:not(.cage-mini),
+.rescue-icon .animal-sprite {
+  width: 110%;
+  height: 110%;
+}
+
+.cage-mini {
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+}
+
+.rescue-presentation-pet {
+  bottom: -1%;
+  width: 96%;
+  height: 96%;
+}
+
+.rescue-cage-half {
+  inset: -3%;
+}
+
+.pet-follower > img,
+.pet-follower-image {
+  width: 74%;
+  height: 74%;
+}
+
+/* Item notices live on the playfield, independently from the compact status
+   bar, so another movement input cannot erase them before a child sees them. */
+.map-pickup-toast {
+  position: absolute;
+  z-index: 58;
+  top: 47%;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  max-width: 84%;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.7cqw, 10px);
+  color: #fff;
+  font-size: clamp(16px, 1.9cqw, 28px);
+  font-weight: 1000;
+  line-height: 1.08;
+  text-align: center;
+  pointer-events: none;
+  paint-order: stroke fill;
+  transform: translate3d(-50%, 18px, 0) scale(0.86);
+  animation: map-pickup-float 1.85s cubic-bezier(0.2, 0.76, 0.3, 1) both;
+  -webkit-text-stroke: clamp(1px, 0.16cqw, 1.8px) #302a43;
+  text-shadow:
+    -1px -1px 0 #302a43,
+    1px -1px 0 #302a43,
+    -1px 1px 0 #302a43,
+    1px 1px 0 #302a43,
+    0 3px 5px rgba(36, 29, 52, 0.5);
+}
+
+.map-pickup-toast > span {
+  flex: 0 0 auto;
+  font-size: 1.15em;
+  -webkit-text-stroke: 0;
+  filter: drop-shadow(0 2px 1px rgba(48, 37, 58, 0.4));
+}
+
+.map-pickup-toast > strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@keyframes map-pickup-float {
+  0% { opacity: 0; transform: translate3d(-50%, 18px, 0) scale(0.86); }
+  13% { opacity: 1; transform: translate3d(-50%, 0, 0) scale(1.06); }
+  72% { opacity: 1; transform: translate3d(-50%, -35px, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(-50%, -72px, 0) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player-layer,
+  .pet-follower {
+    transition: none !important;
+    will-change: auto;
+  }
+
+  .map-pickup-toast {
+    animation: none;
+    opacity: 1;
+    transform: translate3d(-50%, -28px, 0);
+  }
 }

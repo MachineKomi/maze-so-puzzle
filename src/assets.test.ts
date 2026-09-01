@@ -81,12 +81,38 @@ describe("art preloading", () => {
     });
   });
 
+  it("exposes dedicated lock-pair assets while keeping blue legacy aliases", async () => {
+    const { ASSETS } = await import("./assets");
+
+    expect({
+      legacyKey: ASSETS.key,
+      legacyDoor: ASSETS.door,
+      roseKey: ASSETS.keyRoseHeart,
+      roseDoor: ASSETS.doorRoseHeart,
+      blueKey: ASSETS.keyBlueStar,
+      blueDoor: ASSETS.doorBlueStar,
+      sunnyKey: ASSETS.keySunnySun,
+      sunnyDoor: ASSETS.doorSunnySun,
+    }).toEqual({
+      legacyKey: "/assets/star-key.png",
+      legacyDoor: "/assets/star-door.png",
+      roseKey: "/assets/key-rose-heart-v1.png",
+      roseDoor: "/assets/door-rose-heart-v1.png",
+      blueKey: "/assets/star-key.png",
+      blueDoor: "/assets/star-door.png",
+      sunnyKey: "/assets/key-sunny-sun-v1.png",
+      sunnyDoor: "/assets/door-sunny-sun-v1.png",
+    });
+  });
+
   it("loads common gameplay art plus only the supplied level's terrain and objects", async () => {
     const { ASSETS, preloadLevelArt } = await import("./assets");
     const {
       resolveAnimalArt,
       resolveCageArt,
+      resolveDoorArt,
       resolveEnemyArt,
+      resolveKeyArt,
       resolveTerrainTheme,
       resolveWeaponArt,
     } = await import("./artCatalog");
@@ -108,8 +134,8 @@ describe("art preloading", () => {
       ASSETS.hole,
       resolveEnemyArt("blueberry-slime").src,
       resolveWeaponArt("flower-sabre").src,
-      ASSETS.key,
-      ASSETS.door,
+      resolveKeyArt("red").src,
+      resolveDoorArt("red").src,
       ASSETS.springBoots,
       ASSETS.antidoteLeaf,
       resolveAnimalArt("puppy").src,
@@ -123,6 +149,10 @@ describe("art preloading", () => {
     expect(loadedSources).not.toContain(ASSETS.goblin);
     expect(loadedSources).not.toContain(ASSETS.sword);
     expect(loadedSources).not.toContain(ASSETS.ameSword);
+    expect(loadedSources).not.toContain(ASSETS.keyBlueStar);
+    expect(loadedSources).not.toContain(ASSETS.doorBlueStar);
+    expect(loadedSources).not.toContain(ASSETS.keySunnySun);
+    expect(loadedSources).not.toContain(ASSETS.doorSunnySun);
     expect(loadedSources).not.toContain(ASSETS.potion);
     expect(loadedSources).not.toContain(ASSETS.boots);
     expect(loadedSources).not.toContain(ASSETS.animalFox);

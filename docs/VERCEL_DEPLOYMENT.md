@@ -58,7 +58,7 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.10.2** label on the title screen and
+- Click or tap the small **Playable build 0.10.3** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -71,6 +71,16 @@ document and does not use client-side URL routing.
 - Sample all authored themes and several generated themes. Dominant-colour
   compatibility must prevent yellow/gold floors from pairing with green/sage
   walls, while every accepted floor remains lighter/readable against its wall.
+- Use the tester picker to inspect all three lock families. The pink Rose Heart
+  Key must match the Rose Heart Door, the blue Blue Star Key the Blue Star Door,
+  and the yellow Sunny Sun Key the Sunny Sun Door. Confirm each pair has its own
+  unmistakable colour and silhouette, and that hints and labels use the full
+  matching pair name rather than showing a recoloured star.
+- Collect a maze weapon, splash boots, Spring Boots, Antidote Leaf, potion, and
+  key across representative mazes. Each should display a short board-centred
+  picture-and-name toast without hiding the compact feedback permanently. Ame,
+  enemy sprites, and outlined Power values should remain large and readable
+  without Power covering a face.
 - Open Springstep Sky Hollow from the tester picker. Collect the illustrated
   Spring Boots and cross both single- and two-square hole runs; before the pickup
   or with an unsafe landing the same input must be blocked. Check the boing,
@@ -82,24 +92,34 @@ document and does not use client-side URL routing.
   advance, only the **Too strong!** comparison appears, and dismissing it leaves
   the maze ready for backtracking rather than resetting the run.
 - Trigger one winning battle and one rescue presentation. Confirm their short
-  input locks end cleanly, Power reaches the exact engine value, the rescued pet
-  joins once, reduced-motion mode shortens the flourishes, and navigation or
-  restart leaves no stale overlay.
+  input locks end cleanly, Power reaches the exact engine value, Ame remains one
+  square away with no added step, and the next input enters the cleared enemy
+  tile. The rescued pet should join once, reduced-motion mode should shorten the
+  flourishes, and navigation or restart must leave no stale overlay.
 - Enter several different mazes and listen for a varying selection from all five
   full BGM tracks without an immediate repeat. Revisiting a maze within the same
   session must retain its track, and the short friendship cue must never loop as
   maze music.
-- Inspect every cage style and confirm its opaque AI-generated front layer stays
-  in front of the pet without a baked-in animal or background rectangle. Rescue
-  multiple pets and confirm they occupy distinct recent footprints behind Ame.
+- Inspect every cage style and confirm the sparse v4 front layer shows one low
+  base, two side posts, and three narrow bars in front of the pet, without a
+  baked-in animal, rear cage, dome, central panel, or background rectangle. The
+  pet should remain easy to recognize through the open centre. Rescue multiple
+  pets and confirm they occupy distinct recent footprints behind Ame.
 - On iPad and desktop, press the maze to move immediately, hold to repeat, drag
   to steer, and recenter or release to stop. At ordinary wall bends, confirm the
   one-tile assist never pathfinds or assists onto a hazard or through a door or
-  foe. Confirm the page does not pan or pinch-zoom during touch play. On a
+  foe. A single press should remain easy to release: the first repeat waits about
+  320 ms, then the held cadence should ease gradually rather than zipping to full
+  speed. Confirm the page does not pan or pinch-zoom during touch play. On a
   landscape phone and iPad, verify the maze panel uses nearly the full safe
   viewport height and the sidebar does not overlap or scroll.
 - Check portrait turn-sideways guidance on the tablet and mute/unmute after the
   first tap. Browser audio should never start before that interaction.
+- From both the title screen and Adventure Book, open **Reset progress** and
+  cancel once to prove nothing changes. In a disposable browser profile, confirm
+  once and verify the game returns to Story Maze 1 with records, gold, rescues,
+  stickers, medals, badges, and the active run cleared. If testing storage
+  directly, an unrelated `localStorage` entry must remain untouched.
 
 Progress is intentionally device-local. A browser, private session, cleared site
 data, different Vercel preview hostname, or another device has a separate save.
@@ -125,3 +145,13 @@ transfer, and non-destructive stronger-enemy interaction. The broader
 physical-device and manual matrix above remains required.
 Executable artifacts remain intentionally excluded from Git and Vercel
 deployment.
+
+Playable build 0.10.3 passes its local 267-test/20-file browser gate. Its
+separate unsigned Windows portable executable and NSIS installer are also built,
+version/hash checked, byte-compared with the final Tauri outputs, and the
+portable app has passed its launch smoke. The browser build is ready for
+promotion, but it must not be described as canonical production until the
+0.10.3 commit is pushed, Vercel reports the deployment ready, the canonical
+build label reads 0.10.3, and the smoke checks above pass. The 0.10.2 paragraph
+remains the last verified production record rather than a claim about the
+pending update.

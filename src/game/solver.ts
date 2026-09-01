@@ -204,11 +204,17 @@ export function solveLevel(
 
     for (const direction of DIRECTIONS) {
       const result = movePlayer(level, state, direction);
-      if (!result.moved || result.state.status === "lost") {
+      if (result.state.status === "lost") {
         continue;
       }
 
       const nextSignature = stateSignature(result.state, requireAllAnimals);
+      // A successful combat changes Power and clears the enemy without moving
+      // Ame. Treat any genuine state transition as a searchable edge; blocked
+      // movement and too-strong encounters retain the current signature.
+      if (nextSignature === currentSignature) {
+        continue;
+      }
       if (seen.has(nextSignature)) {
         continue;
       }
