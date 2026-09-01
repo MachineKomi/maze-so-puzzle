@@ -4755,7 +4755,7 @@ body,
 
 .maze-board.battle-active {
   transform-origin: var(--battle-focus-x, 50%) var(--battle-focus-y, 50%);
-  animation: battle-camera-punch 1.13s cubic-bezier(0.25, 0.72, 0.3, 1) both;
+  animation: battle-camera-punch var(--battle-duration, 2220ms) cubic-bezier(0.25, 0.72, 0.3, 1) both;
 }
 
 .battle-presentation {
@@ -4777,7 +4777,7 @@ body,
   );
   content: "";
   opacity: 0;
-  animation: battle-flash 1.13s ease-out both;
+  animation: battle-flash var(--battle-duration, 2220ms) ease-out both;
 }
 
 .battle-combatant {
@@ -4801,11 +4801,11 @@ body,
 }
 
 .battle-ame {
-  animation: battle-ame-lunge 1.13s cubic-bezier(0.22, 0.78, 0.29, 1) both;
+  animation: battle-ame-lunge var(--battle-duration, 2220ms) cubic-bezier(0.22, 0.78, 0.29, 1) both;
 }
 
 .battle-enemy {
-  animation: battle-enemy-lunge 1.13s cubic-bezier(0.22, 0.78, 0.29, 1) both;
+  animation: battle-enemy-lunge var(--battle-duration, 2220ms) cubic-bezier(0.22, 0.78, 0.29, 1) both;
 }
 
 .battle-held-weapon {
@@ -4819,7 +4819,7 @@ body,
   filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.3));
   transform: rotate(-18deg);
   transform-origin: 50% 82%;
-  animation: battle-weapon-swish 1.13s ease-out both;
+  animation: battle-weapon-swish var(--battle-duration, 2220ms) ease-out both;
 }
 
 .battle-impact {
@@ -4842,7 +4842,7 @@ body,
     0 0 4px #fff,
     0 0 12px #ffc74e,
     0 0 24px rgba(255, 133, 91, 0.72);
-  animation: battle-impact-star 1.13s ease-out both;
+  animation: battle-impact-star var(--battle-duration, 2220ms) ease-out both;
 }
 
 .battle-impact i {
@@ -4855,11 +4855,47 @@ body,
   opacity: 0;
   box-shadow: 0 0 5px rgba(255, 199, 78, 0.8);
   transform: rotate(var(--spark-angle)) translateY(0) scale(0.2);
-  animation: battle-impact-spark 1.13s cubic-bezier(0.18, 0.72, 0.24, 1) both;
+  animation: battle-impact-spark var(--battle-duration, 2220ms) cubic-bezier(0.18, 0.72, 0.24, 1) both;
 }
 
 .hero-card.power-rising .big-power {
-  animation: power-number-rise 1.13s cubic-bezier(0.22, 0.78, 0.3, 1) both;
+  animation: power-number-rise var(--battle-duration, 2220ms) cubic-bezier(0.22, 0.78, 0.3, 1) both;
+}
+
+.battle-presentation.battle-won .battle-ame .player-power {
+  animation: power-number-rise var(--battle-duration, 2220ms) cubic-bezier(0.22, 0.78, 0.3, 1) both;
+}
+
+.battle-presentation.battle-won .battle-enemy .enemy-power {
+  animation: enemy-power-drain var(--battle-duration, 2220ms) cubic-bezier(0.22, 0.78, 0.3, 1) both;
+}
+
+.battle-power-transfer {
+  position: absolute;
+  z-index: 10;
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.battle-power-transfer i {
+  position: absolute;
+  top: 35%;
+  left: 42%;
+  color: #fff7a9;
+  font-size: clamp(8px, 3.4cqw, 20px);
+  font-style: normal;
+  line-height: 1;
+  opacity: 0;
+  filter: drop-shadow(0 0 5px #ffb95d);
+  text-shadow: 0 0 3px #fff, 0 0 9px rgba(255, 145, 114, 0.88);
+  animation: battle-power-mote 470ms cubic-bezier(0.22, 0.72, 0.25, 1) both;
+  animation-delay: var(--mote-delay, 380ms);
+}
+
+.battle-power-transfer i:nth-child(even) {
+  color: #ffc8ef;
+  filter: drop-shadow(0 0 5px #d99cff);
 }
 
 .rescue-presentation {
@@ -4947,113 +4983,86 @@ body,
 }
 
 @keyframes battle-camera-punch {
-  0%, 20% { transform: scale(1); }
-  33% { transform: scale(1.025); }
-  42% { transform: scale(1.052); }
-  76% { transform: scale(1.038); }
-  100% { transform: scale(1); }
+  0%, 9%, 22%, 29%, 42%, 49%, 62%, 100% { transform: scale(1); }
+  15% { transform: scale(1.025); }
+  34% { transform: scale(1.032); }
+  54% { transform: scale(1.046); }
+  78% { transform: scale(1.035); }
+  88% { transform: scale(1); }
 }
 
 @keyframes battle-flash {
-  0%, 28%, 100% { opacity: 0; }
-  34% { opacity: 1; }
-  47% { opacity: 0.24; }
+  0%, 11%, 20%, 30%, 40%, 50%, 61%, 73%, 100% { opacity: 0; }
+  15%, 34% { opacity: 0.78; }
+  54% { opacity: 1; }
+  80% { opacity: 0.42; }
 }
 
 @keyframes battle-ame-lunge {
-  0%, 13% { transform: translate(0, 0) scale(1); }
-  29% { transform: translate(var(--battle-x), var(--battle-y)) scale(1.08); }
-  36% { transform: translate(var(--battle-x), var(--battle-y)) scale(0.94, 1.08); }
-  50% { transform: translate(0, 0) scale(0.96, 1.03); }
-  66% { transform: translate(0, -5%) scale(1.04); }
+  0%, 7%, 23%, 28%, 43%, 48%, 63% { transform: translate(0, 0) scale(1); }
+  13%, 32%, 52% { transform: translate(var(--battle-x), var(--battle-y)) scale(1.08); }
+  15%, 34%, 54% { transform: translate(var(--battle-x), var(--battle-y)) scale(0.93, 1.1); }
+  20%, 39%, 60% { transform: translate(0, 0) scale(0.96, 1.04); }
+  72% { transform: translate(0, -8%) rotate(-2deg) scale(1.07); }
+  82% { transform: translate(0, 1%) rotate(2deg) scale(1.03, 0.97); }
   100% { transform: translate(0, 0) scale(1); }
 }
 
 @keyframes battle-enemy-lunge {
-  0%, 13% { transform: translate(0, 0) scale(1); opacity: 1; }
-  29% { transform: translate(var(--battle-back-x), var(--battle-back-y)) scale(1.06); opacity: 1; }
-  36% { transform: translate(var(--battle-back-x), var(--battle-back-y)) rotate(-4deg) scale(0.94, 1.08); opacity: 1; }
-  49% { transform: translate(5%, -3%) rotate(6deg) scale(1.08); opacity: 1; }
-  61% { transform: translate(-3%, -13%) rotate(-8deg) scale(1.3); opacity: 0; }
-  100% { transform: translate(-3%, -13%) rotate(-8deg) scale(1.3); opacity: 0; }
-}
-
-.battle-presentation.battle-lost .battle-ame {
-  animation-name: battle-ame-gentle-recoil;
-}
-
-.battle-presentation.battle-lost .battle-enemy {
-  animation-name: battle-enemy-happy-win;
-}
-
-.battle-presentation.battle-lost .battle-held-weapon {
-  animation-name: battle-weapon-wobble;
-}
-
-.battle-presentation.battle-lost .battle-enemy .enemy-power {
-  animation: enemy-power-rise 1.13s cubic-bezier(0.22, 0.78, 0.3, 1) both;
-}
-
-@keyframes battle-ame-gentle-recoil {
-  0%, 13% { transform: translate(0, 0) scale(1); opacity: 1; }
-  29% { transform: translate(var(--battle-x), var(--battle-y)) scale(1.06); opacity: 1; }
-  36% { transform: translate(var(--battle-x), var(--battle-y)) scale(0.94, 1.08); opacity: 1; }
-  51% { transform: translate(var(--battle-recoil-x), var(--battle-recoil-y)) rotate(-7deg) scale(0.95); opacity: 1; }
-  70% { transform: translate(var(--battle-settle-x), var(--battle-settle-y)) rotate(5deg) scale(1.02); opacity: 0.82; }
-  100% { transform: translate(var(--battle-settle-x), var(--battle-settle-y)) rotate(-2deg) scale(0.96); opacity: 0.68; }
-}
-
-@keyframes battle-enemy-happy-win {
-  0%, 13% { transform: translate(0, 0) scale(1); opacity: 1; }
-  29% { transform: translate(var(--battle-back-x), var(--battle-back-y)) scale(1.08); opacity: 1; }
-  36% { transform: translate(var(--battle-back-x), var(--battle-back-y)) rotate(4deg) scale(0.96, 1.1); opacity: 1; }
-  54% { transform: translate(0, -9%) rotate(-4deg) scale(1.11, 0.94); opacity: 1; }
-  70% { transform: translate(0, 0) rotate(4deg) scale(0.96, 1.08); opacity: 1; }
-  84% { transform: translate(0, -5%) rotate(-2deg) scale(1.05); opacity: 1; }
-  100% { transform: translate(0, 0) rotate(0) scale(1); opacity: 1; }
-}
-
-@keyframes battle-weapon-wobble {
-  0%, 13% { transform: rotate(-18deg); }
-  30% { transform: rotate(24deg) scale(1.08); }
-  43% { transform: rotate(-38deg) scale(0.94); }
-  61% { transform: rotate(-8deg) scale(1); }
-  100% { transform: rotate(-14deg) scale(0.98); }
-}
-
-@keyframes enemy-power-rise {
-  0%, 42% { transform: scale(1); color: #fff; }
-  58% { transform: scale(1.24) rotate(2deg); color: #fff3a0; }
-  76% { transform: scale(1.1) rotate(-1deg); color: #fff; }
-  100% { transform: scale(1); color: #fff; }
+  0%, 7%, 23%, 28%, 43%, 48%, 63% { transform: translate(0, 0) scale(1); opacity: 1; }
+  13%, 32%, 52% { transform: translate(var(--battle-back-x), var(--battle-back-y)) scale(1.06); opacity: 1; }
+  15% { transform: translate(var(--battle-back-x), var(--battle-back-y)) rotate(-5deg) scale(0.94, 1.09); opacity: 1; }
+  34% { transform: translate(var(--battle-back-x), var(--battle-back-y)) rotate(5deg) scale(0.93, 1.1); opacity: 1; }
+  54% { transform: translate(var(--battle-back-x), var(--battle-back-y)) rotate(-7deg) scale(0.91, 1.12); opacity: 1; }
+  20%, 39%, 60% { transform: translate(var(--battle-recoil-x), var(--battle-recoil-y)) scale(1.04); opacity: 1; }
+  78% { transform: translate(0, -4%) rotate(4deg) scale(0.9); opacity: 1; }
+  85%, 100% { transform: translate(-3%, -18%) rotate(-10deg) scale(1.42); opacity: 0; }
 }
 
 @keyframes battle-weapon-swish {
-  0%, 13% { transform: rotate(-18deg); }
-  30% { transform: rotate(31deg) scale(1.12); }
-  42% { transform: rotate(-31deg) scale(1.05); }
-  66%, 100% { transform: rotate(-7deg); }
+  0%, 8%, 22%, 28%, 42%, 48%, 63% { transform: rotate(-18deg); }
+  15%, 34%, 54% { transform: rotate(34deg) scale(1.14); }
+  20%, 39%, 60% { transform: rotate(-34deg) scale(1.05); }
+  72%, 100% { transform: rotate(-7deg); }
 }
 
 @keyframes battle-impact-star {
-  0%, 27% { transform: scale(0.15) rotate(-20deg); opacity: 0; }
-  34% { transform: scale(1.18) rotate(8deg); opacity: 1; }
-  45% { transform: scale(0.72) rotate(20deg); opacity: 0.62; }
-  58%, 100% { transform: scale(1.48) rotate(34deg); opacity: 0; }
+  0%, 11%, 21%, 30%, 41%, 50%, 62%, 100% { transform: scale(0.15) rotate(-20deg); opacity: 0; }
+  15%, 34%, 54% { transform: scale(1.18) rotate(8deg); opacity: 1; }
+  19%, 38%, 59% { transform: scale(0.72) rotate(20deg); opacity: 0.5; }
 }
 
 @keyframes battle-impact-spark {
-  0%, 29% { transform: rotate(var(--spark-angle)) translateY(0) scale(0.2); opacity: 0; }
-  34% { opacity: 1; }
-  57% { transform: rotate(var(--spark-angle)) translateY(clamp(-34px, -7cqw, -13px)) scale(1); opacity: 0.72; }
-  69%, 100% { transform: rotate(var(--spark-angle)) translateY(clamp(-46px, -9cqw, -17px)) scale(0.3); opacity: 0; }
+  0%, 11%, 22%, 30%, 41%, 50%, 62%, 100% { transform: rotate(var(--spark-angle)) translateY(0) scale(0.2); opacity: 0; }
+  15%, 34%, 54% { transform: rotate(var(--spark-angle)) translateY(-4px) scale(1); opacity: 1; }
+  20%, 39%, 60% { transform: rotate(var(--spark-angle)) translateY(clamp(-38px, -8cqw, -14px)) scale(0.38); opacity: 0; }
 }
 
 @keyframes power-number-rise {
-  0%, 42% { transform: scale(1); color: #d96769; }
-  58% { transform: scale(1.18) rotate(-2deg); color: #e47b55; }
-  76% { transform: scale(1.08) rotate(1deg); color: #d25e7d; }
+  0%, 13%, 23%, 31%, 43%, 51%, 63% { transform: scale(1); color: #d96769; }
+  17%, 36%, 56% { transform: scale(1.13) rotate(-2deg); color: #e47b55; }
+  78% { transform: scale(1.2) rotate(2deg); color: #d25e7d; }
+  88% { transform: scale(1.07) rotate(-1deg); color: #e47b55; }
   100% { transform: scale(1); color: #d96769; }
+}
+
+@keyframes enemy-power-drain {
+  0%, 13%, 23%, 31%, 43%, 51%, 63% { transform: scale(1); color: #fff; }
+  17%, 36%, 56% { transform: scale(1.2) rotate(2deg); color: #fff3a0; }
+  76% { transform: scale(0.9) rotate(-3deg); color: #ffd6e8; }
+  84%, 100% { transform: scale(0.62); color: #fff; opacity: 0; }
+}
+
+@keyframes battle-power-mote {
+  0% { top: 35%; left: 42%; transform: translateY(0) rotate(-12deg) scale(0.25); opacity: 0; }
+  18% { opacity: 1; }
+  58% { transform: translateY(-120%) rotate(18deg) scale(1.08); opacity: 0.92; }
+  100% {
+    top: calc(35% + var(--power-flight-y));
+    left: calc(42% + var(--power-flight-x));
+    transform: translateY(0) rotate(34deg) scale(0.38);
+    opacity: 0;
+  }
 }
 
 @keyframes cage-left-pop-open {
@@ -5135,7 +5144,21 @@ body,
   place-items: center;
   overflow: visible;
   pointer-events: none;
-  animation: spring-jump-travel 410ms cubic-bezier(0.2, 0.72, 0.22, 1) both;
+  animation: spring-jump-travel var(--jump-duration, 540ms) cubic-bezier(0.2, 0.72, 0.22, 1) both;
+}
+
+.jump-presentation-shadow {
+  position: absolute;
+  z-index: 1;
+  bottom: 4%;
+  left: 15%;
+  width: 70%;
+  height: 19%;
+  border-radius: 50%;
+  background: rgba(50, 32, 66, 0.24);
+  filter: blur(2px);
+  transform-origin: 50% 50%;
+  animation: spring-jump-shadow var(--jump-duration, 540ms) ease-in-out both;
 }
 
 .jump-presentation-body {
@@ -5145,7 +5168,7 @@ body,
   height: 100%;
   place-items: center;
   transform-origin: 50% 88%;
-  animation: spring-jump-arc 410ms cubic-bezier(0.22, 0.74, 0.24, 1) both;
+  animation: spring-jump-arc var(--jump-duration, 540ms) cubic-bezier(0.22, 0.74, 0.24, 1) both;
 }
 
 .jump-presentation-sprite {
@@ -5192,7 +5215,7 @@ body,
   border-radius: 50%;
   opacity: 0;
   box-shadow: 0 0 8px rgba(255, 189, 84, 0.72);
-  animation: spring-jump-ring 410ms ease-out both;
+  animation: spring-jump-ring var(--jump-duration, 540ms) ease-out both;
 }
 
 @keyframes spring-jump-travel {
@@ -5201,12 +5224,20 @@ body,
 }
 
 @keyframes spring-jump-arc {
-  0% { transform: translateY(5%) scale(1.03, 0.92); }
-  18% { transform: translateY(-18%) scale(0.96, 1.08); }
-  48% { transform: translateY(-62%) rotate(-2deg) scale(1.04); }
-  72% { transform: translateY(-26%) rotate(2deg) scale(1.02); }
-  90% { transform: translateY(3%) scale(1.08, 0.9); }
+  0% { transform: translateY(7%) scale(1.08, 0.86); }
+  15% { transform: translateY(-20%) rotate(-2deg) scale(0.94, 1.12); }
+  46% { transform: translateY(-72%) rotate(-4deg) scale(1.06); }
+  68% { transform: translateY(-38%) rotate(3deg) scale(1.03); }
+  88% { transform: translateY(5%) scale(1.11, 0.86); }
   100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes spring-jump-shadow {
+  0%, 100% { opacity: 0.72; transform: scale(1); }
+  16% { opacity: 0.52; transform: scale(0.78); }
+  48% { opacity: 0.2; transform: scale(0.43); }
+  72% { opacity: 0.4; transform: scale(0.68); }
+  90% { opacity: 0.74; transform: scale(1.08, 0.82); }
 }
 
 @keyframes spring-jump-ring {
@@ -5225,6 +5256,9 @@ body,
   .battle-held-weapon,
   .battle-impact b,
   .battle-impact i,
+  .battle-ame .player-power,
+  .battle-enemy .enemy-power,
+  .battle-power-transfer i,
   .hero-card.power-rising .big-power,
   .rescue-presentation-pet,
     .rescue-cage-half,
@@ -5232,6 +5266,7 @@ body,
     .maze-board.rescue-active .player-layer,
     .jump-presentation,
     .jump-presentation-body,
+    .jump-presentation-shadow,
     .jump-spring-squash {
     animation: none !important;
   }

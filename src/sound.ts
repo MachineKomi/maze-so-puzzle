@@ -75,11 +75,14 @@ const melodies: Readonly<Record<SoundName, readonly MelodyNote[]>> = {
     [1047, 0.34, 0.18, 0.022, "sine"],
     [1319, 0.34, 0.24, 0.027, "sine", 1568],
   ],
-  // Two rubbery pitch sweeps make the jump read clearly even on tiny speakers.
+  // A compact spring launch, bright stretch and rubbery rebound. The final
+  // voice ends at 280ms so the cue reads as one crisp "boing" within the
+  // 540ms hop presentation, without masking a sound made on landing.
   jump: [
-    [180, 0, 0.15, 0.038, "triangle", 540],
-    [560, 0.075, 0.18, 0.03, "sine", 310],
-    [920, 0.045, 0.07, 0.012, "sine", 720],
+    [165, 0, 0.145, 0.04, "triangle", 660],
+    [330, 0.012, 0.16, 0.018, "sine", 990],
+    [1175, 0.035, 0.055, 0.009, "sine", 880],
+    [660, 0.09, 0.19, 0.032, "sine", 300],
   ],
   combatClash: [
     [185, 0, 0.12, 0.045, "sawtooth", 92],

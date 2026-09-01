@@ -1,28 +1,29 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: 0.10.0 web/Windows playable release
+Audited build: 0.10.1 web/Windows release candidate
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-01 the integrated 0.10.0 suite passed 239 tests
-across 17 files and the strict TypeScript/Vite production build. Local 1024 ×
+real-device testing. On 2026-09-01 the integrated 0.10.1 suite passed 247 tests
+across 18 files and the strict TypeScript/Vite production build. Local 1024 ×
 768 and 844 × 390 previews show the twelve-maze picker, variable 1–5 friend
 cards, hint dialog, non-destructive stronger-enemy dialog, and poison/Antidote
-Leaf route without card overlap or document overflow. Locked-Tauri compilation,
-Windows packaging, GitHub/Vercel promotion, and the final public smoke all pass
-as recorded below.
+Leaf route without card overlap or document overflow. The new three-bash combat
+timeline and 540 ms Spring Boots hop pass focused logic/audio and local browser
+timing checks. Locked-Tauri compilation and Windows packaging pass; GitHub/Vercel
+promotion and the final public smoke remain.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
-## Current 0.10.0 release status
+## Current 0.10.1 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, pointer controls, held cadence, follower trails, visual variants, rescue-record migration, terrain topology, Spring Boots, poison, and Antidote Leaf | 239 of 239 tests across 17 files passed; strict TypeScript/Vite passed. Dependency and locked-Cargo checks remain in the final gate below |
+| Automated gate | Engine, solver, generated/authored levels, exploration, progress, assets, audio, navigation, pointer controls, held cadence, follower trails, visual variants, rescue-record migration, terrain topology, Spring Boots, poison, Antidote Leaf, and pure combat presentation | 247 of 247 tests across 18 files passed; strict TypeScript/Vite, zero-vulnerability audit/tree, and locked Cargo passed |
 | Landscape phones | Full-safe-viewport shell, full-height maze card, overlaid maze information, compact sidebar, and two-row movement controls are implemented for short landscape screens | Local 0.10.0 passed at 844×390 with exact viewport-sized layout, five visible rescue portraits, and no document overflow. Physical-device repeat remains |
 | iPad-size layout | Phone/iPad maze panels use almost all available height; coarse-pointer actions retain 44 px targets | Local 0.10.0 passed at 1024×768; objective, 1–5 friend card, bag, minimap, controls, level dots, and utility row have non-overlapping rectangles. Physical-iPad gesture/pinch/listening checks remain |
 | Pointer movement | All input paths move once immediately, allow 220 ms to release for one square, then accelerate smoothly from 160 ms to a capped 100 ms repeat; direction changes reset the ramp | Focused cadence and corner regressions cover tile intent, queued steering, approach-direction choice, wobble tolerance, and strict one-tile safety; final physical-touch feel remains |
@@ -34,9 +35,9 @@ historical evidence.
 | Story pacing | Authored sizes run 9, 11, 13, 15, 13, 15, 17, 17, 19, 25, 21, and 23; friend totals grow 1, 2, 3…, 4, 5 | All twelve ordinary and perfect-rescue routes are solver-validated. Twilight and Moonlit require every authored prerequisite off the bare exit route; Moonlit's leaf precedes a connected poison gate |
 | Surprise Maze variants | Generated presentation remains deterministic; size varies by seed across unlocked odd 9–29 bands, water/lava form connected post-boots clusters, and eligible adventure seeds add branch prerequisites plus post-Spring-Boots holes | A 500-seed adventure stress audit spanning every odd size found zero ordinary/perfect failures; 353 samples had exactly one Spring Boots pickup before connected holes |
 | Optional Power puzzles | Wishing Woods, Ame's Grand Parade, Springstep Sky Hollow, and Lanternlight separate progression/rescue requirements across branches | Solver-verified ordinary/all-pets routes are 114/148, 116/136, 190/214, and 290/322 steps respectively |
-| Audio and presentations | Five full OST songs are assigned per maze with stable session mapping and immediate-repeat avoidance; jump, rescue, clash, sparks, impact, Power, and win cues support short event presentations | Focused audio tests pass; a local winning battle showed one opponent, the clash, Power count-up, and clean handoff, while an underpowered contact correctly skipped combat for the gentle comparison. Final listening, reduced-motion, cancellation, and public-device feel remain manual |
-| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Release commit `76fdb6c` pushed successfully; Vercel reports the production deployment ready, the canonical build label reports 0.10.0, the debug picker lists twelve mazes, Maze 12 opens with five friends and the 6 × 6 camera, the 1024 × 768 document has no overflow, and production browser logs are clear |
-| Desktop artifacts | Unsigned 0.10.0 portable executable and NSIS installer are staged in `release/` | Both match final Tauri outputs, report 0.10.0, are SHA-256 recorded, and the portable app stayed responsive with the correct title for five seconds; clean-machine install and signing remain |
+| Audio and presentations | Five full OST songs are assigned per maze with stable session mapping and immediate-repeat avoidance; jump, rescue, clash, sparks, impact, Power, and win cues support short event presentations | The four-layer jump boing and semantic three-clash sound schedule have focused tests. Local browser timing observed all three contacts, a conserved 1→0 / 2→3 Power transfer, the 2.22 s cleanup, and no runtime warning after a clean reload. Physical listening/reduced-motion feel remains manual |
+| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Canonical 0.10.0 remains the last promoted baseline while the verified 0.10.1 source waits for its release commit and production smoke |
+| Desktop artifacts | Unsigned 0.10.1 portable executable and NSIS installer are staged in `release/` | Both match final Tauri outputs, report 0.10.1, are SHA-256 recorded, and the portable app stayed responsive with the correct title for five seconds; clean-machine install and signing remain |
 
 ## Historical 0.5.1 implementation status
 
@@ -305,7 +306,7 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Theme selection must pass the dominant-colour compatibility matrix; in
   particular, yellow/gold floors cannot pair with green/sage walls.
 - The unsigned Windows files are suitable for local testing. SmartScreen may
-  warn on machines that did not build them; the verified files are 0.10.0.
+  warn on machines that did not build them; the verified files are 0.10.1.
 
 ## Hardening completed during housekeeping
 
@@ -337,12 +338,12 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Big Maze remains available as an optional roomier board view while retaining a
   compact Power/item/rescue HUD and an overlaid feedback toast.
 
-The 0.10.0 source passes 239 tests across 17 files, strict TypeScript, and the
+The 0.10.1 source passes 247 tests across 18 files, strict TypeScript, and the
 Vite production build. The local 1024×768 and 844×390 responsive checks are
 green. The dependency audit/tree and locked Cargo check pass, and the unsigned
-0.10.0 Windows pair is built, versioned, source-compared, hashed, and
-smoke-launched. GitHub `main` and the canonical public deployment now serve
-0.10.0; the prior 0.9.1 record is historical evidence only. Unchecked
+0.10.1 Windows pair is built, versioned, source-compared, hashed, and
+smoke-launched. GitHub/Vercel promotion still remains; the prior 0.10.0 public
+record is historical evidence only. Unchecked
 physical-device, listening/feel, broader production, clean-install, and signing
 items in `RELEASE_CHECKLIST.md` remain requirements.
 
@@ -351,7 +352,7 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 ### P0 - release hygiene and future packaged builds
 
 - Perform the remaining physical-device browser matrix in `RELEASE_CHECKLIST.md`
-  against the exact 0.10.0 production deployment, and separately repeat the
+  against the exact 0.10.1 production deployment, and separately repeat the
   portable and installer matrix on a clean Windows account before wider sharing.
 - Before any new Windows release, install, launch, save, upgrade, and uninstall
   on a clean Windows x64 machine.
@@ -400,9 +401,9 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- Current source metadata and `release/` records are aligned at 0.10.0. GitHub
-  `main` and the public Vercel alias contain the release, and canonical smoke
-  evidence is recorded above rather than inferred from the prior build.
+- Current source metadata and `release/` records are aligned at 0.10.1. GitHub
+  and Vercel still serve the previous baseline until the candidate is committed,
+  promoted, and smoke-tested.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

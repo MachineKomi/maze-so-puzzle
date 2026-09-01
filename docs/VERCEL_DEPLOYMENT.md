@@ -58,7 +58,7 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.10.0** label on the title screen and
+- Click or tap the small **Playable build 0.10.1** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked

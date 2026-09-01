@@ -124,18 +124,37 @@ describe("playSound", () => {
     expect(ctx?.oscillators).toHaveLength(27);
   });
 
-  it("synthesizes an unmistakable pitch-swept jump without media assets", async () => {
+  it("synthesizes a short layered spring-boots boing without media assets", async () => {
     installAudioContext();
     const { playSound } = await import("./sound");
 
     playSound("jump", false);
 
     const voices = contexts[0]?.oscillators ?? [];
-    expect(voices).toHaveLength(3);
-    expect(voices.map((voice) => voice.type)).toEqual(["triangle", "sine", "sine"]);
+    expect(voices).toHaveLength(4);
+    expect(voices.map((voice) => voice.type)).toEqual(["triangle", "sine", "sine", "sine"]);
+    expect(voices.map((voice) => voice.frequency.setValueAtTime.mock.calls[0])).toEqual([
+      [165, 4],
+      [330, 4.012],
+      [1175, 4.035],
+      [660, 4.09],
+    ]);
+    expect(voices.map((voice) => voice.frequency.exponentialRampToValueAtTime.mock.calls[0]?.[0]))
+      .toEqual([660, 990, 880, 300]);
     expect(
       voices.every((voice) => voice.frequency.exponentialRampToValueAtTime.mock.calls.length === 1),
     ).toBe(true);
+    expect(Math.max(...voices.map((voice) => voice.stop.mock.calls[0]?.[0] as number)))
+      .toBeCloseTo(4.3, 5);
+  });
+
+  it("does not allocate a jump voice while sound is muted", async () => {
+    installAudioContext();
+    const { playSound } = await import("./sound");
+
+    playSound("jump", true);
+
+    expect(contexts).toHaveLength(0);
   });
 
   it("provides schedulable atomic cues for rescues and each combat beat", async () => {

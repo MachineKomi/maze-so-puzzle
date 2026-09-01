@@ -99,6 +99,10 @@ import {
   beginHeldMoveCadence,
   type HeldMoveCadence,
 } from "./movementControls";
+import {
+  createCombatVictoryPlan,
+  type CombatPresentationCueKind,
+} from "./combatPresentation";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
   up: "▲",
@@ -126,12 +130,20 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
 
 const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
-const BATTLE_PRESENTATION_MS = 1160;
 const RESCUE_PRESENTATION_MS = 900;
-const JUMP_PRESENTATION_MS = 410;
+const JUMP_PRESENTATION_MS = 540;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.10.0";
+const BUILD_VERSION = "0.10.1";
 const DEBUG_MAZE_QUERY = "mazes";
+
+const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
+  clash: "combatClash",
+  sparks: "combatSparks",
+  impact: "combatImpact",
+  "power-start": "combatPowerUp",
+  "power-tick": "powerTick",
+  victory: "combatVictory",
+};
 
 interface Feedback {
   readonly icon: string;
@@ -188,13 +200,13 @@ interface BattlePresentation {
   readonly objectId: string;
   readonly enemySrc: string;
   readonly enemyPower: number;
-  readonly enemyPowerAfter: number;
   readonly from: Point;
   readonly at: Point;
   readonly direction: Direction;
   readonly powerBefore: number;
   readonly powerAfter: number;
-  readonly outcome: "won" | "lost";
+  readonly durationMs: number;
+  readonly clashCount: number;
 }
 
 interface TooStrongEncounter {
@@ -852,7 +864,6 @@ function App() {
   const restartTimer = useRef<number | undefined>(undefined);
   const rewardSoundTimer = useRef<number | undefined>(undefined);
   const presentationTimers = useRef(new Set<number>());
-  const powerAnimationFrame = useRef<number | undefined>(undefined);
   const presentationSequence = useRef(0);
   const modalReturnFocus = useRef<HTMLElement | null>(null);
   const titlePlayRef = useRef<HTMLButtonElement>(null);
@@ -949,13 +960,16 @@ function App() {
   const mazeStatus = useMemo(() => describeMazePosition(level, game), [game, level]);
   const runInProgress = hasActiveRun && game.status === "playing";
   const displayedPower = presentedPower ?? game.power;
+  const presentationActive = battlePresentation !== null
+    || rescuePresentation !== null
+    || jumpPresentation !== null;
   const modalOpen = testerPickerOpen
     || pendingAdventure !== null
     || (screen === "game" && (
       helpOpen
       || hintOpen
       || tooStrongEncounter !== null
-      || (game.status !== "playing" && battlePresentation === null)
+      || (game.status !== "playing" && !presentationActive)
     ));
 
   useEffect(() => {
@@ -1011,10 +1025,6 @@ function App() {
     presentationSequence.current += 1;
     presentationTimers.current.forEach((timer) => window.clearTimeout(timer));
     presentationTimers.current.clear();
-    if (powerAnimationFrame.current !== undefined) {
-      window.cancelAnimationFrame(powerAnimationFrame.current);
-      powerAnimationFrame.current = undefined;
-    }
   }, []);
 
   const cancelPresentations = useCallback(() => {
@@ -1047,61 +1057,43 @@ function App() {
     clearPresentationWork();
     const sequence = presentationSequence.current;
     const reducedMotion = prefersReducedMotion();
+    const plan = createCombatVictoryPlan({
+      powerBefore: event.powerBefore,
+      enemyPower: event.enemyPower,
+      powerAfter: event.powerAfter,
+    }, { reducedMotion });
     setRescuePresentation(null);
     setJumpPresentation(null);
-    setPresentedEnemyPower(null);
-    setPresentedPower(reducedMotion ? event.powerAfter : event.powerBefore);
+    setPresentedEnemyPower(event.enemyPower);
+    setPresentedPower(event.powerBefore);
     setBattlePresentation({
       objectId: event.objectId,
       enemySrc: resolveEnemyArt(enemy.style).src,
       enemyPower: event.enemyPower,
-      enemyPowerAfter: event.enemyPower,
       from,
       at: enemy.at,
       direction,
       powerBefore: event.powerBefore,
       powerAfter: event.powerAfter,
-      outcome: "won",
+      durationMs: plan.durationMs,
+      clashCount: plan.clashes.length,
     });
 
-    if (reducedMotion) {
-      playSound("combatVictory", mutedRef.current);
-    } else {
-      schedulePresentationTimer(sequence, () => playSound("combatClash", mutedRef.current), 255);
-      schedulePresentationTimer(sequence, () => playSound("combatSparks", mutedRef.current), 325);
-      schedulePresentationTimer(sequence, () => playSound("combatImpact", mutedRef.current), 390);
-      schedulePresentationTimer(sequence, () => playSound("combatPowerUp", mutedRef.current), 535);
-      schedulePresentationTimer(sequence, () => playSound("combatVictory", mutedRef.current), 900);
-    }
-
-    if (!reducedMotion) {
+    plan.transferSteps.forEach((step) => {
       schedulePresentationTimer(sequence, () => {
-        const startedAt = performance.now();
-        const countDuration = 460;
-        const powerGain = Math.max(0, event.powerAfter - event.powerBefore);
-        const tickStep = Math.max(1, Math.ceil(powerGain / 11));
-        let lastDisplayedPower = event.powerBefore;
-        const countPower = (now: number) => {
-          if (presentationSequence.current !== sequence) return;
-          const progress = Math.min(1, (now - startedAt) / countDuration);
-          const eased = progress * progress * (3 - 2 * progress);
-          const easedGain = powerGain * eased;
-          const nextPower = progress >= 1
-            ? event.powerAfter
-            : Math.min(event.powerAfter, event.powerBefore + Math.floor(easedGain / tickStep) * tickStep);
-          if (nextPower !== lastDisplayedPower) {
-            lastDisplayedPower = nextPower;
-            setPresentedPower(nextPower);
-            playSound("powerTick", mutedRef.current);
-          }
-          if (progress < 1) powerAnimationFrame.current = window.requestAnimationFrame(countPower);
-          else powerAnimationFrame.current = undefined;
-        };
-        powerAnimationFrame.current = window.requestAnimationFrame(countPower);
-      }, 510);
-    }
+        setPresentedPower(step.playerPower);
+        setPresentedEnemyPower(step.enemyPower);
+      }, step.atMs);
+    });
+    plan.cues.forEach((cue) => {
+      schedulePresentationTimer(
+        sequence,
+        () => playSound(COMBAT_CUE_SOUNDS[cue.kind], mutedRef.current),
+        cue.atMs,
+      );
+    });
 
-    const duration = reducedMotion ? REDUCED_PRESENTATION_MS : BATTLE_PRESENTATION_MS;
+    const duration = plan.durationMs;
     schedulePresentationTimer(sequence, () => {
       setPresentedPower(null);
       setPresentedEnemyPower(null);
@@ -1151,7 +1143,7 @@ function App() {
       schedulePresentationTimer(
         sequence,
         () => playSound(landingSound, mutedRef.current),
-        reducedMotion ? 45 : 225,
+        reducedMotion ? 45 : JUMP_PRESENTATION_MS - 105,
       );
     }
     schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
@@ -1164,12 +1156,26 @@ function App() {
 
   useEffect(() => {
     const syncMusicVisibility = () => {
-      setMusicPageHidden(document.visibilityState !== "visible");
+      const hidden = document.visibilityState !== "visible";
+      setMusicPageHidden(hidden);
+      if (hidden) {
+        cancelPresentations();
+        clearHeldInput();
+        if (inputUnlockTimer.current !== undefined) {
+          window.clearTimeout(inputUnlockTimer.current);
+          inputUnlockTimer.current = undefined;
+        }
+        if (rewardSoundTimer.current !== undefined) {
+          window.clearTimeout(rewardSoundTimer.current);
+          rewardSoundTimer.current = undefined;
+        }
+        inputLocked.current = false;
+      }
     };
     syncMusicVisibility();
     document.addEventListener("visibilitychange", syncMusicVisibility);
     return () => document.removeEventListener("visibilitychange", syncMusicVisibility);
-  }, []);
+  }, [cancelPresentations, clearHeldInput]);
 
   useEffect(() => {
     const focusTimer = window.setTimeout(() => {
@@ -1274,13 +1280,33 @@ function App() {
     );
     let presentationDuration = 0;
     if (defeatedEvent) {
-      if (jumpedEvent) playSound("jump", mutedRef.current);
+      clearHeldInput();
       const enemy = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "enemy" }> => (
           object.kind === "enemy" && object.id === defeatedEvent.objectId
         ),
       );
-      if (enemy) presentationDuration = beginBattlePresentation(defeatedEvent, enemy, direction, game.position);
+      if (enemy && jumpedEvent) {
+        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump");
+        const jumpSequence = presentationSequence.current;
+        const battleDuration = createCombatVictoryPlan({
+          powerBefore: defeatedEvent.powerBefore,
+          enemyPower: defeatedEvent.enemyPower,
+          powerAfter: defeatedEvent.powerAfter,
+        }, { reducedMotion: prefersReducedMotion() }).durationMs;
+        const battleFrom = {
+          x: enemy.at.x - DIRECTION_DELTAS[direction].x,
+          y: enemy.at.y - DIRECTION_DELTAS[direction].y,
+        };
+        schedulePresentationTimer(
+          jumpSequence,
+          () => beginBattlePresentation(defeatedEvent, enemy, direction, battleFrom),
+          Math.max(100, jumpDuration - 20),
+        );
+        presentationDuration = Math.max(100, jumpDuration - 20) + battleDuration;
+      } else if (enemy) {
+        presentationDuration = beginBattlePresentation(defeatedEvent, enemy, direction, game.position);
+      }
     } else if (tooStrongEvent) {
       const enemy = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "enemy" }> => (
@@ -1294,13 +1320,24 @@ function App() {
       }
       playSound("bump", mutedRef.current);
     } else if (rescuedEvent) {
-      if (jumpedEvent) playSound("jump", mutedRef.current);
       const animal = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "animal" }> => (
           object.kind === "animal" && object.id === rescuedEvent.objectId
         ),
       );
-      if (animal) presentationDuration = beginRescuePresentation(rescuedEvent, animal);
+      if (animal && jumpedEvent) {
+        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump");
+        const jumpSequence = presentationSequence.current;
+        const rescueDuration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : RESCUE_PRESENTATION_MS;
+        schedulePresentationTimer(
+          jumpSequence,
+          () => beginRescuePresentation(rescuedEvent, animal),
+          Math.max(100, jumpDuration - 20),
+        );
+        presentationDuration = Math.max(100, jumpDuration - 20) + rescueDuration;
+      } else if (animal) {
+        presentationDuration = beginRescuePresentation(rescuedEvent, animal);
+      }
     } else if (jumpedEvent) {
       presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
     }
@@ -1371,7 +1408,7 @@ function App() {
           rewardSoundTimer.current = window.setTimeout(() => {
             playSound(newBadgeIds.length > 0 ? "stamp" : "reward", mutedRef.current);
             rewardSoundTimer.current = undefined;
-          }, 520);
+          }, presentationDuration + 520);
         }
       }
     }
@@ -1384,7 +1421,7 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginJumpPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, helpOpen, hintOpen, level, muted, pendingAdventure, progress, screen, testerPickerOpen, testerRun, tooStrongEncounter]);
+  }, [beginBattlePresentation, beginJumpPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, testerPickerOpen, testerRun, tooStrongEncounter]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -1965,6 +2002,7 @@ function App() {
                 ...(battlePresentation ? {
                   "--battle-focus-x": `${((battlePresentation.at.x - cameraWindow.left + 0.5) / cameraWindow.width) * 100}%`,
                   "--battle-focus-y": `${((battlePresentation.at.y - cameraWindow.top + 0.5) / cameraWindow.height) * 100}%`,
+                  "--battle-duration": `${battlePresentation.durationMs}ms`,
                 } : {}),
               } as CSSProperties}
               role="application"
@@ -2032,10 +2070,8 @@ function App() {
 
               {battlePresentation && isInsideWindow(battlePresentation.at, cameraWindow) && (
                 <div
-                  className={`battle-presentation battle-${battlePresentation.outcome}`}
-                  data-sfx-cue={battlePresentation.outcome === "won"
-                    ? "combat-clash-and-power-rise"
-                    : "combat-clash-and-gentle-retry"}
+                  className="battle-presentation battle-won"
+                  data-sfx-cue="three-clashes-power-transfer-and-victory"
                   aria-hidden="true"
                   style={{
                     "--battle-x": `${DIRECTION_DELTAS[battlePresentation.direction].x * 46}%`,
@@ -2044,8 +2080,9 @@ function App() {
                     "--battle-back-y": `${DIRECTION_DELTAS[battlePresentation.direction].y * -46}%`,
                     "--battle-recoil-x": `${DIRECTION_DELTAS[battlePresentation.direction].x * -24}%`,
                     "--battle-recoil-y": `${DIRECTION_DELTAS[battlePresentation.direction].y * -24}%`,
-                    "--battle-settle-x": `${DIRECTION_DELTAS[battlePresentation.direction].x * -12}%`,
-                    "--battle-settle-y": `${DIRECTION_DELTAS[battlePresentation.direction].y * -12}%`,
+                    "--battle-duration": `${battlePresentation.durationMs}ms`,
+                    "--power-flight-x": `${(battlePresentation.from.x - battlePresentation.at.x) * 100}%`,
+                    "--power-flight-y": `${(battlePresentation.from.y - battlePresentation.at.y) * 100}%`,
                   } as CSSProperties}
                 >
                   <div className="battle-combatant battle-ame" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
@@ -2069,6 +2106,17 @@ function App() {
                       <i style={{ "--spark-angle": `${index * 30}deg` } as CSSProperties} key={index} />
                     ))}
                   </div>
+                  <span
+                    className="battle-power-transfer"
+                    style={cameraLayerStyle(battlePresentation.at, cameraWindow)}
+                  >
+                    {Array.from({ length: Math.max(3, battlePresentation.clashCount * 2) }, (_, index) => (
+                      <i
+                        style={{ "--mote-delay": `${385 + index * 220}ms` } as CSSProperties}
+                        key={index}
+                      >✦</i>
+                    ))}
+                  </span>
                 </div>
               )}
 
@@ -2093,13 +2141,16 @@ function App() {
               {jumpPresentation && (
                 <div
                   className="jump-presentation"
+                  data-sfx-cue="spring-boots-boing"
                   style={{
                     ...cameraLayerStyle(jumpPresentation.from, cameraWindow),
                     "--jump-x": `${(jumpPresentation.to.x - jumpPresentation.from.x) * 100}%`,
                     "--jump-y": `${(jumpPresentation.to.y - jumpPresentation.from.y) * 100}%`,
+                    "--jump-duration": `${JUMP_PRESENTATION_MS}ms`,
                   } as CSSProperties}
                   aria-hidden="true"
                 >
+                  <i className="jump-presentation-shadow" />
                   <div className="jump-presentation-body">
                     <img className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
                     <img className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} />
@@ -2171,7 +2222,12 @@ function App() {
               </div>
             </div>
 
-            <section className={`hero-card${battlePresentation?.outcome === "won" ? " power-rising" : ""}`}>
+            <section
+              className={`hero-card${battlePresentation ? " power-rising" : ""}`}
+              style={battlePresentation
+                ? { "--battle-duration": `${battlePresentation.durationMs}ms` } as CSSProperties
+                : undefined}
+            >
               <div className="portrait-wrap">
                 <img src={ASSETS.portrait} alt="Ame, a smiling blonde adventurer with a lavender backpack" />
                 <span className="portrait-spark sparkle-a" aria-hidden="true">✦</span>
@@ -2329,7 +2385,7 @@ function App() {
           </Modal>
         )}
 
-        {game.status === "won" && completion && (
+        {game.status === "won" && completion && !presentationActive && (
           <Modal title="Maze solved!" celebratory returnFocus={modalReturnFocus.current}>
             <div className="celebration-burst" aria-hidden="true">
               {Array.from({ length: 12 }, (_, index) => <i className="confetti-piece" style={{ "--i": index } as CSSProperties} key={index} />)}

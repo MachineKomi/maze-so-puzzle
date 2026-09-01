@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.10.0 play-test build, which remains an active prototype. Its complete automated
+0.10.1 play-test build, which remains an active prototype. Its complete automated
 web gate, unsigned Windows packaging, and public Vercel promotion are verified;
 the final physical-device pass remains a release step rather than an
 already-verified claim.
@@ -61,16 +61,16 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.10.0 test build:
+The current verified desktop artifacts are the unsigned 0.10.1 test build:
 
-- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.10.0-portable.exe`
-  and `release/Maze-so-Puzzle-0.10.0-setup.exe`. Executables are deliberately
+- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.10.1-portable.exe`
+  and `release/Maze-so-Puzzle-0.10.1-setup.exe`. Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path may be replaced by a later local build).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.10.0_x64-setup.exe`.
-- The verified 0.10.0 hashes and retained archive hashes are recorded in
+  Puzzle - For Ame to Solve!_0.10.1_x64-setup.exe`.
+- The verified 0.10.1 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -102,7 +102,7 @@ The current verified desktop artifacts are the unsigned 0.10.0 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.10.0** label to
+On the title screen, click or tap the small **Playable build 0.10.1** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -117,7 +117,7 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.10.0
+## Included in playable build 0.10.1
 
 - Twelve progressive story mazes with deliberate changes of pace. Sizes vary
   from 9 × 9 to 25 × 25 rather than rising monotonically. The new 21 × 21
@@ -180,13 +180,19 @@ Turn the iPad sideways to play.
   menu, selection, achievement, stamp, rescue, jump, combat clash, sparks,
   impact, Power count-up, loss, and victory moments. Five full locally bundled
   tracks rotate deterministically per maze without an immediate repeat; the
-  short friendship cue remains reserved as a non-looping event sting.
+  short friendship cue remains reserved as a non-looping event sting. Spring
+  Boots have a crisp four-layer synthesized boing, while every combat contact
+  receives its own clash, sparks, and impact cue.
 - Short, input-locking combat and rescue presentations make important moments
-  readable without changing engine rules: Ame and the friendly foe lunge and
-  clash, sparks and particles punctuate the win, and the Power number eases up
-  before the camera settles. Rescued friends pop free, hop excitedly, and then
-  join the follower trail. Reduced-motion mode collapses these flourishes to a
-  brief state handoff.
+  readable without changing engine rules. A winning battle now has three cute
+  bashes: the enemy's visible Power drains stepwise to `0` while the exact same
+  amount counts into Ame, with glowing Power motes and a final victory burst.
+  Rescued friends pop free, hop excitedly, and then join the follower trail.
+  Reduced-motion mode collapses these flourishes to a brief exact handoff.
+- Spring Boots crossings show a clear 540 ms take-off, high hop, moving ground
+  shadow, landing squash, and boing. The hop plays before a rescue or battle if
+  Ame lands directly on an interactive tile, and completion waits for the full
+  set piece before opening.
 - Continuous SVG terrain rendered in global maze coordinates, so textures do
   not restart or reveal a border at every grid square. The AI-generated paired
   floor and wall materials use seam-suppressing periodic correction and a
@@ -258,7 +264,7 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.10.0 source suite passes 239 automated tests across 17 files and the strict
+The 0.10.1 source suite passes 247 automated tests across 18 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all twelve authored ordinary/perfect-rescue routes,
@@ -269,7 +275,7 @@ totals, immutable strong-enemy warnings, poison/antidote traversal and migration
 theme lightness and
 colour compatibility, transparent terrain dressing, rescued-pet trail
 placement, cage-front assets, persistent minimap reveal, and the established
-engine/save/audio checks. The exact 0.10.0 dependency audit/tree and locked Cargo
+engine/save/audio checks. The exact 0.10.1 dependency audit/tree and locked Cargo
 compile pass. Its Windows
 portable app and installer are source-compared, version-checked, hashed, and the
 portable app passed a hidden five-second smoke launch. The canonical deployment
@@ -278,7 +284,7 @@ single-step, and browser-log smoke checks. Physical-device listening/feel remain
 on the release checklist; the previous 0.9.0 record is retained as historical
 evidence.
 
-The browser matrix, remaining 0.10.0 gates, and Windows artifact
+The browser matrix, remaining 0.10.1 gates, and Windows artifact
 record are kept in
 [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md). Rebuilding the Windows
 package is a separate release step:
@@ -287,7 +293,7 @@ package is a separate release step:
 npm run desktop:build
 ```
 
-The 0.10.0 Windows test installer is unsigned, so Windows SmartScreen
+The 0.10.1 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

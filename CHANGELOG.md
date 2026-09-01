@@ -4,6 +4,44 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.10.1 - 2026-09-01
+
+This combat-and-spring polish release makes two of the game's most satisfying
+moments easier to see, hear, and enjoy without changing any maze rules.
+
+### Changed
+
+- Winning combat now lasts for three distinct friendly bashes instead of one
+  quick collision. Every contact has synchronized clash, spark, and impact
+  sounds and effects.
+- The defeated enemy's visible Power drains in exact steps to `0` while the
+  same amount counts into Ame's visible Power. A tested presentation plan keeps
+  the transfer conserved at every frame and ends on the engine's exact result.
+- Glowing Power motes travel from the enemy to Ame before the final victory
+  burst. Held keyboard, pointer, and D-pad input is cleared at combat start so
+  a long presentation cannot queue an accidental move.
+- Spring Boots jumps use a higher, clearer 540 ms hop with a take-off squash,
+  moving ground shadow, landing squash, and a crisp four-layer synthesized
+  boing. A jump that lands directly on a friend or enemy now plays the hop first
+  and chains into the rescue or battle set piece.
+- Completion dialogs and reward sounds wait until any jump, rescue, or battle
+  finishes. Hiding the page cancels pending presentation work so delayed sounds
+  cannot bunch together on return.
+- Reduced-motion mode retains a short exact Power handoff and static jump
+  landing without playing the full movement sequence.
+
+### Verification
+
+- The release gate now covers 247 tests across 18 files, including deterministic
+  three-clash timing, exact Power conservation, small and large enemies,
+  reduced-motion handoff, and Spring Boots audio timing/mute safeguards.
+
+### Desktop status
+
+- The unsigned 0.10.1 portable executable and NSIS installer are rebuilt from
+  the same source as the browser release and staged in `release/`.
+- Clean-machine install/uninstall testing and code signing remain outstanding.
+
 ## 0.10.0 - 2026-09-01
 
 This safety-and-puzzles release makes strong-enemy encounters encouraging
