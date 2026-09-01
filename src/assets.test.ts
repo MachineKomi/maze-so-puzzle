@@ -96,6 +96,7 @@ describe("art preloading", () => {
       ASSETS.coinPouch,
       theme.floor.src,
       theme.wall.src,
+      theme.floorDressing!.src,
       ASSETS.water,
       ASSETS.hole,
       resolveEnemyArt("blueberry-slime").src,
@@ -119,6 +120,28 @@ describe("art preloading", () => {
     expect(loadedSources).not.toContain(ASSETS.animalFox);
     expect(loadedSources).not.toContain(ASSETS.animalCage);
     expect(loadedSources).not.toContain(ASSETS.rewardTrailSticker);
+  });
+
+  it("preloads sparse wall dressing for its selected ruin theme", async () => {
+    const { preloadLevelArt } = await import("./assets");
+    const { resolveTerrainTheme } = await import("./artCatalog");
+    const theme = resolveTerrainTheme("lantern-ruins");
+    const ruinLevel: LevelDefinition = {
+      ...levelWithRelevantArt(),
+      id: "wall-dressing-preload-test",
+      terrainThemeId: "lantern-ruins",
+      terrain: [
+        ["wall", "wall", "wall", "wall"],
+        ["wall", "floor", "floor", "wall"],
+      ],
+      objects: [],
+    };
+
+    preloadLevelArt(ruinLevel);
+
+    expect(theme.wallDressing).toBeDefined();
+    expect(loadedSources).toContain(theme.wallDressing!.src);
+    expect(theme.floorDressing).toBeUndefined();
   });
 
   it("falls back to the legacy default theme and variants when style metadata is absent", async () => {

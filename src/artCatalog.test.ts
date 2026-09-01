@@ -8,9 +8,12 @@ import {
   DEFAULT_TERRAIN_THEME_ID,
   DEFAULT_WEAPON_STYLE,
   ENEMY_ART,
+  MIN_TERRAIN_LIGHTNESS_DELTA,
+  TERRAIN_DRESSING_ART,
   TERRAIN_THEMES,
   WEAPON_ART,
   areTerrainColorsCompatible,
+  areTerrainTexturesCompatible,
   resolveAnimalArt,
   resolveCageArt,
   resolveEnemyArt,
@@ -52,6 +55,12 @@ describe("art catalog", () => {
     expectSpriteArt(Object.values(ENEMY_ART));
     expectSpriteArt(Object.values(ANIMAL_ART));
     expectSpriteArt(Object.values(CAGE_ART));
+    expectSpriteArt(Object.values(TERRAIN_DRESSING_ART));
+    for (const dressing of Object.values(TERRAIN_DRESSING_ART)) {
+      expect(dressing.periodTiles).toBeGreaterThanOrEqual(10);
+      expect(dressing.opacity).toBeGreaterThan(0);
+      expect(dressing.opacity).toBeLessThanOrEqual(0.2);
+    }
   });
 
   it("uses the opaque front-bar cage layer for every rescue style", () => {
@@ -60,7 +69,7 @@ describe("art catalog", () => {
     }
   });
 
-  it("provides calibrated, seamless-pattern metadata for every theme", () => {
+  it("provides calibrated pattern metadata for every readable theme", () => {
     const color = /^#[0-9a-f]{6}$/i;
     const textureSources = new Set<string>();
 
@@ -72,31 +81,53 @@ describe("art catalog", () => {
       for (const texture of [theme.floor, theme.wall]) {
         expect(texture.src).toMatch(/^\/assets\/[a-z0-9-]+\.png$/);
         expect(texture.label.trim().length).toBeGreaterThan(0);
-        expect(texture.periodTiles).toBeGreaterThanOrEqual(4);
-        expect(texture.periodTiles).toBeLessThanOrEqual(6);
+        expect(texture.periodTiles).toBeGreaterThanOrEqual(3);
+        expect(texture.periodTiles).toBeLessThanOrEqual(4.5);
         expect(texture.fallbackColor).toMatch(color);
         expect(texture.dominantColor).toMatch(/^(gold|rose|blue|green|earth|violet|sage|indigo)$/);
+        expect(texture.visualLightness).toBeGreaterThanOrEqual(0);
+        expect(texture.visualLightness).toBeLessThanOrEqual(100);
         textureSources.add(texture.src);
       }
 
-      expect(areTerrainColorsCompatible(
-        theme.floor.dominantColor,
-        theme.wall.dominantColor,
-      )).toBe(true);
+      expect(areTerrainTexturesCompatible(theme.floor, theme.wall), theme.label).toBe(true);
+      expect(
+        theme.floor.visualLightness - theme.wall.visualLightness,
+        `${theme.label} should keep its path visibly lighter than its walls.`,
+      ).toBeGreaterThanOrEqual(MIN_TERRAIN_LIGHTNESS_DELTA);
     }
 
     expect(new Set(TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].floor.src)).size).toBe(5);
-    expect(new Set(TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].wall.src)).size).toBe(5);
+    const activeWalls = new Set<string>(
+      TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].wall.src),
+    );
+    expect(activeWalls.size).toBe(4);
+    expect(activeWalls.has("/assets/wall-sandstone-v1.png")).toBe(false);
     expect(new Set(TERRAIN_THEME_IDS.map((id) => {
       const theme = TERRAIN_THEMES[id];
       return `${theme.floor.src}|${theme.wall.src}`;
     })).size).toBe(TERRAIN_THEME_IDS.length);
-    expect(textureSources.size).toBe(10);
+    expect(textureSources.size).toBe(9);
   });
 
-  it("rejects the clashing yellow-floor and green-wall palette", () => {
+  it("rejects yellow with green or pink in either floor/wall direction", () => {
     expect(areTerrainColorsCompatible("gold", "green")).toBe(false);
     expect(areTerrainColorsCompatible("gold", "sage")).toBe(false);
+    expect(areTerrainColorsCompatible("green", "gold")).toBe(false);
+    expect(areTerrainColorsCompatible("sage", "gold")).toBe(false);
+    expect(areTerrainColorsCompatible("gold", "rose")).toBe(false);
+    expect(areTerrainColorsCompatible("rose", "gold")).toBe(false);
+  });
+
+  it("replaces the reported bright pink/yellow pair with gentle readable palettes", () => {
+    expect(TERRAIN_THEMES["rose-courtyard"]).toMatchObject({
+      floor: { dominantColor: "rose" },
+      wall: { dominantColor: "sage" },
+    });
+    expect(TERRAIN_THEMES["moonlit-moat"]).toMatchObject({
+      floor: { dominantColor: "blue" },
+      wall: { dominantColor: "green" },
+    });
   });
 
   it("resolves every valid ID to its stable catalog entry object", () => {

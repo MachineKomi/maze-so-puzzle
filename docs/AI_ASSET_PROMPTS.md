@@ -2,10 +2,11 @@
 
 All base artwork in `public/assets/` was generated for this project with the
 built-in OpenAI image-generation tool. Runtime resizing, chroma removal, WebP
-conversion, palette optimization, and exact-periodic mirror composition are
-programmatic derivatives of those generated sources. Early tile and interactive
-assets were prepared as 512 × 512 PNGs; the 0.6.0 periodic terrain textures are
-1024 × 1024 PNGs; the wide title illustration has a 1672 × 941 PNG master and an
+conversion, palette optimization, periodic Poisson correction, and the older
+hazard mirror compositions are programmatic derivatives of those generated
+sources. Early tile and interactive assets were prepared as 512 × 512 PNGs;
+the periodic terrain textures are 1024 × 1024 PNGs; the wide title illustration
+has a 1672 × 941 PNG master and an
 optimized WebP runtime derivative. Interactive assets were requested on a flat
 `#ff00ff` chroma-key background or, for the new 0.9.0 traversal sprites, as
 native transparent RGBA cutouts. Most early sprites arrived as clean RGBA
@@ -186,7 +187,7 @@ lip without baking borders, shadows, or maze shapes into the art.
 - Generated source: `exec-e2b61d30-91a2-4223-b4a4-097a8fd9c3ae.png`
 - Archived 1254 × 1254 master:
   `docs/source-assets/wall-v3-master.png`
-- Optimized exact-periodic runtime texture: `public/assets/wall-v3.png`
+- Optimized periodic runtime texture: `public/assets/wall-v3.png`
 - Runtime URL: `/assets/wall-v3.png`
 
 Generation request:
@@ -200,7 +201,7 @@ Use case: stylized-concept. Create one genuinely seamless, purely top-down squar
 - Generated source: `exec-4984c443-517f-43fa-833e-a67319dc18a4.png`
 - Archived 1254 × 1254 master:
   `docs/source-assets/floor-v3-master.png`
-- Optimized exact-periodic runtime texture: `public/assets/floor-v3.png`
+- Optimized periodic runtime texture: `public/assets/floor-v3.png`
 - Runtime URL: `/assets/floor-v3.png`
 
 Generation request:
@@ -209,11 +210,14 @@ Generation request:
 Use case: stylized-concept. Create one genuinely seamless, purely top-down square fantasy floor material for a children's maze game. Show roughly 10 to 14 small softly rounded limestone pavers across the image, using buttercream, warm honey-gold, and pale apricot tones that harmonize clearly with lavender-blue walls. Lovely polished hand-painted chunky anime fantasy RPG / storybook game art, quiet enough for characters and items to remain readable, with soft diffuse lighting. The image must tile perfectly on every edge and contain only a continuous paving material: no maze diagram, path, wall, frame, border, lip, cast shadow, perspective, giant slabs, characters, objects, text, or watermark.
 ```
 
-For each v3 material, the generated master was resized to a 512 × 512 working
-tile and mirrored into a 2 × 2 periodic composition. The resulting 1024 × 1024
-PNG was quantized to a 256-colour palette without dithering. This guarantees an
-exact matching edge period for the world-coordinate SVG pattern while retaining
-the AI-painted interior detail.
+The current v3 runtime files are built from their masters by
+`scripts/process_terrain_textures.py`. Each master is resized directly to
+1024 × 1024 and passed through a periodic-plus-smooth decomposition. The script
+solves the boundary mismatch as a smooth periodic Poisson problem and subtracts
+that low-frequency component from the painting. This retains single, crisp
+stone outlines—unlike mirroring or broad alpha blending—while making the repeat
+boundary weaker than ordinary neighbouring detail. The result is quantized to
+a 256-colour palette for a modest mobile download.
 
 ### Periodic hazards
 
@@ -246,11 +250,63 @@ watermark, and a strong silhouette at one-square maze-tile size.
 | `wall-hedge-v1.png` | Uniform top-down dense storybook hedge foliage with tiny mint leaves and sparse pastel flowers; no hedge outline or scenery. |
 | `wall-mossy-ruin-v1.png` | Uniform top-down pale sage ruin stonework with moss between small blocks; soft, friendly, and seamless-looking. |
 
-The generated 1254 × 1254 masters were downsampled to a 512 × 512 working
-tile, mirrored into a 2 × 2 1024 × 1024 exact-periodic composition, and
-quantized to a 256-colour palette without dithering. This was a downsample and
-periodic composition only—no upscaling was applied. Opposite runtime edges were
-verified byte-for-byte, and all textures are fully opaque.
+The current generated 1254 × 1254 masters are converted into 1024 × 1024
+periodic runtime textures by `scripts/process_terrain_textures.py`, using the
+same periodic-plus-smooth Poisson correction as the v3 floor and wall. All ten
+floor and wall materials are fully opaque. The script validates their
+dimensions and compares
+the mean colour transition at each wrap boundary with ordinary adjacent-pixel
+transitions inside the image; this catches a discontinuous seam without
+requiring opposite pixels to be artificially identical.
+
+Rebuild and validate the material set with:
+
+```powershell
+python -m pip install Pillow numpy
+python scripts/process_terrain_textures.py
+python scripts/process_terrain_textures.py --check
+```
+
+### Sparse terrain dressing
+
+Build 0.9.1 adds two native-transparent ImageGen overlays that break up broad
+material areas without disguising paths, adding tile borders, or changing
+collision. Their generated masters are retained at
+`docs/source-assets/terrain-dressing-garden-v1-master.png` and
+`docs/source-assets/terrain-dressing-vines-v1-master.png`; the 512 x 512 runtime
+copies live under `public/assets/`. The built-in ImageGen workflow used
+`stylized-concept` mode for both masters and `background-extraction` mode for a
+targeted alpha cleanup of the vine source.
+
+- Garden generation: `exec-ae3746f9-e9f6-4645-b8dd-9e62eec4a10f.png`.
+- Original vine generation: `exec-f3e661b4-a5e0-4cb9-8998-1aefeb3ca2b5.png`.
+- Retained vine cleanup edit: `exec-3109df52-36c4-4c10-a9eb-af24fc9903df.png`.
+
+Garden overlay prompt:
+
+```text
+Use case: stylized-concept. Create a transparent top-down game terrain set-dressing overlay for light garden and woodland maze floors: sparse isolated clusters of tiny grass tufts, rounded clover leaves, miniature moss cushions, a few tiny blush-pink and cream wildflowers, and occasional small smooth pebbles. Use lovely cute polished chunky anime fantasy JRPG game art with soft hand-painted storybook rendering for a young child's maze game. Compose an orthographic square texture with many small irregular clusters, generous transparent negative space, no single focal object, and decoration small enough to sit inside grid-floor tiles. Use soft sage, mint, pale cream, dusty pink, and muted lavender-gray. Preserve genuine transparent alpha and soft clean edges. Keep decoration comfortably away from the outermost edge. No cast shadows, border, frame, text, logo, watermark, opaque background, large plants, tile grid lines, hard square patches, photorealism, or dramatic lighting.
+```
+
+Ivy overlay prompt:
+
+```text
+Use case: stylized-concept. Create a transparent top-down game terrain set-dressing overlay for old stone and hedge maze walls: sparse curling ivy tendrils, tiny rounded leaves, delicate moss patches, a few tiny star-shaped pale flowers, and subtle lichen flecks. Use lovely cute polished chunky anime fantasy JRPG game art with soft hand-painted storybook rendering for a young child's maze game. Compose an orthographic square texture with several small irregular clusters, generous transparent negative space, no single focal object, and decoration small enough to remain readable on maze wall tiles. Use deep sage, soft moss green, pale mint highlights, and tiny lavender and cream flowers. Preserve genuine transparent alpha and soft clean edges. Keep decoration comfortably away from the outermost edge. No cast shadows, border, frame, text, logo, watermark, opaque background, large branches, tile grid lines, hard square patches, photorealism, or dramatic lighting.
+```
+
+The retained vine master came from a targeted edit that removed neon spill while
+preserving the painted leaves, flowers, moss, and natural alpha edges. Runtime
+copies are rebuilt deterministically with:
+
+```powershell
+python scripts/process_terrain_dressing.py
+python scripts/process_terrain_dressing.py --check
+```
+
+The overlays repeat over 13 world tiles at deliberately low opacity. Garden
+dressing is limited to Star Garden and Wishing Woods, and vine dressing to
+Lantern Ruins. There the green ivy stays sparse and subordinate to its dark
+indigo wall, rather than changing the wall's dominant colour or path contrast.
 
 ### Weapons and friendly opponents
 

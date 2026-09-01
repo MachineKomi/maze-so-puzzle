@@ -58,7 +58,7 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.9.0** label on the title screen and
+- Click or tap the small **Playable build 0.9.1** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -108,12 +108,10 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. On 2026-09-01 release commit `00ab61e` was pushed to GitHub `main` and
-the canonical alias promoted playable build 0.9.0. The normal build-label button
-and exact debug query opened the ten-maze picker; Springstep Sky Hollow opened as
-a 19 x 19 maze with a 6 x 6 view. Canonical 1024 x 768, 667 x 375, and 390 x 844
-portrait checks had exact viewport-sized documents and no overflow; the new
-Spring Boots and ground-hole PNGs returned HTTP 200, and browser logs were clear.
+secrets. The previous canonical 0.9.0 promotion passed its build-label, ten-maze
+picker, 1024 x 768, 667 x 375, 390 x 844 portrait, traversal-asset, and browser-log
+smoke checks. The 0.9.1 GitHub push, automatic promotion, and canonical smoke are
+pending and must be recorded here rather than inferred from that prior build.
 The broader physical-device and manual matrix above remains required.
 Executable artifacts remain intentionally excluded from Git and Vercel
 deployment.

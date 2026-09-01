@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createInitialGameState } from "./game/engine";
+import { createInitialGameState, movePlayer } from "./game/engine";
 import type { LevelDefinition, LevelObject, TerrainKind } from "./game/types";
 import {
   pointerIntentFromTileOffset,
@@ -14,6 +14,7 @@ function makeLevel(
     if (tile === "#") return "wall";
     if (tile === "~") return "water";
     if (tile === "^") return "lava";
+    if (tile === "o") return "hole";
     return "floor";
   }));
   return {
@@ -106,11 +107,42 @@ describe("resolvePointerMoveDirection", () => {
     expect(resolvePointerMoveDirection(level, state, "up", 0)).toBe("right");
   });
 
+  it("takes the only valid slip despite a small pointer wobble toward the blocked side", () => {
+    const level = makeLevel([
+      "#####",
+      "##..#",
+      "#..##",
+      "#####",
+      "#####",
+    ]);
+    const state = createInitialGameState(level);
+    expect(resolvePointerMoveDirection(level, state, "up", -0.4)).toBe("right");
+  });
+
   it("does not guess a branch without meaningful lateral pointer offset", () => {
     const level = makeLevel(cornerRows);
     const state = createInitialGameState(level);
     expect(resolvePointerMoveDirection(level, state, "right", 0)).toBe("right");
     expect(resolvePointerMoveDirection(level, state, "right", 0.05)).toBe("right");
+  });
+
+  it("continues the previous perpendicular movement when a key is pressed just before a corner", () => {
+    const level = makeLevel(cornerRows);
+    const state = createInitialGameState(level);
+    expect(resolvePointerMoveDirection(level, state, "right", 0, "up")).toBe("up");
+    expect(resolvePointerMoveDirection(level, state, "right", 0, "down")).toBe("down");
+    expect(resolvePointerMoveDirection(level, state, "right", 0, "left")).toBe("right");
+  });
+
+  it("corrects for one tile and then immediately follows the requested direction", () => {
+    const level = makeLevel(cornerRows);
+    const start = createInitialGameState(level);
+    const correction = resolvePointerMoveDirection(level, start, "right", 0, "up");
+    const aligned = movePlayer(level, start, correction).state;
+
+    expect(correction).toBe("up");
+    expect(aligned.position).toEqual({ x: 1, y: 1 });
+    expect(resolvePointerMoveDirection(level, aligned, "right", 0, correction)).toBe("right");
   });
 
   it("does not wall-follow when the original direction is still blocked after one side tile", () => {
@@ -168,7 +200,7 @@ describe("resolvePointerMoveDirection", () => {
     expect(resolvePointerMoveDirection(level, state, "right", -1)).toBe("right");
   });
 
-  it.each(["~", "^"] as const)("does not route around an intended hazard", (hazard) => {
+  it.each(["~", "^", "o"] as const)("does not route around an intended hazard", (hazard) => {
     const waterLevel = makeLevel([
       "#####",
       "#...#",
@@ -182,6 +214,34 @@ describe("resolvePointerMoveDirection", () => {
       "right",
       -1,
     )).toBe("right");
+  });
+
+  it("never uses a hole as the one-tile correction or its forward landing", () => {
+    const sideHoleLevel = makeLevel([
+      "#####",
+      "#o..#",
+      "#.###",
+      "#...#",
+      "#####",
+    ]);
+    const sideHoleState = {
+      ...createInitialGameState(sideHoleLevel),
+      hasSpringBoots: true,
+    };
+    expect(resolvePointerMoveDirection(sideHoleLevel, sideHoleState, "right", -1)).toBe("right");
+
+    const forwardHoleLevel = makeLevel([
+      "#####",
+      "#.o.#",
+      "#.###",
+      "#...#",
+      "#####",
+    ]);
+    const forwardHoleState = {
+      ...createInitialGameState(forwardHoleLevel),
+      hasSpringBoots: true,
+    };
+    expect(resolvePointerMoveDirection(forwardHoleLevel, forwardHoleState, "right", -1)).toBe("right");
   });
 
   it.each([

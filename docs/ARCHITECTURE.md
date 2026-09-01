@@ -96,6 +96,10 @@ state.
   and includes a camera gutter so the viewport edge cannot invent a corner.
 - Water and lava use connected rounded fills with no outline, floor lip, raised
   edge, or cast shadow. Their periodic textures remain aligned across joins.
+- Floor and wall paintings are converted from retained ImageGen masters with a
+  periodic-plus-smooth Poisson correction, then rendered at a small world scale.
+  Selected themes may add a sparse, world-aligned transparent dressing pattern;
+  dressing is presentation-only and clipped by the same connected terrain shape.
 - Rescued pets follow recent distinct visible footprints only; the follower
   trail is transient presentation state and never changes collision, solving,
   rewards, or durable progress.
@@ -112,7 +116,7 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.9.0 source is shared by the web and Tauri build paths. Its automated web
+- The 0.9.1 source is shared by the web and Tauri build paths. Its automated web
   gate, locked Cargo check, staged unsigned portable executable and installer,
   source comparison, hashes, and smoke launch pass. Public deployment,
   clean-machine installation, signing, and physical-device feel/listening remain
@@ -133,9 +137,10 @@ weapon and three unique pets per maze, prerequisite detours and guardians,
 Spring Boots, single/multi-hole jumps and unsafe landings, legacy-session
 migration, 6 x 6 even-window clamping, variable 9–29 generated sizes, connected
 post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
-selection, and cage-front asset coverage. Every authored maze and sampled
-generated maze is run through the stateful solver. The 0.9.0 run covers 204 tests
-across 15 files; `npm run check` also completes strict TypeScript and the Vite
+selection, held-input acceleration, theme colour/lightness separation, terrain
+dressing preload, and cage-front asset coverage. Every authored maze and sampled
+generated maze is run through the stateful solver. The 0.9.1 run covers 215 tests
+across 16 files; `npm run check` also completes strict TypeScript and the Vite
 production build. Dependency review, locked Cargo compilation, packaging,
 public deployment, and real-device checks remain separate release gates.
 

@@ -30,6 +30,18 @@ export interface TerrainTextureArt extends SpriteArt {
   readonly fallbackColor: string;
   /** Dominant hue used to prevent clashing floor/wall combinations. */
   readonly dominantColor: TerrainColorFamily;
+  /**
+   * Perceived lightness of the production texture on a 0–100 scale. This is
+   * calibrated from the texture itself rather than inferred from its hue.
+   */
+  readonly visualLightness: number;
+}
+
+export interface TerrainDressingArt extends SpriteArt {
+  /** Width and height of the sparse transparent repeat, in maze tiles. */
+  readonly periodTiles: number;
+  /** Decorations should enrich the material without competing with gameplay. */
+  readonly opacity: number;
 }
 
 export interface TerrainThemeArt {
@@ -37,6 +49,8 @@ export interface TerrainThemeArt {
   readonly label: string;
   readonly floor: TerrainTextureArt;
   readonly wall: TerrainTextureArt;
+  readonly floorDressing?: TerrainDressingArt;
+  readonly wallDressing?: TerrainDressingArt;
 }
 
 export const DEFAULT_TERRAIN_THEME_ID: TerrainThemeId = "sunny-stone";
@@ -51,9 +65,9 @@ export const DEFAULT_CAGE_STYLE: CageStyle = "golden-heart";
  * accidental combinations such as a yellow floor beside a green wall.
  */
 export const COMPATIBLE_WALL_COLORS = {
-  gold: ["violet", "gold", "indigo"],
-  rose: ["gold", "violet", "sage", "indigo"],
-  blue: ["violet", "sage", "indigo"],
+  gold: ["violet", "indigo"],
+  rose: ["violet", "sage", "indigo"],
+  blue: ["violet", "green", "indigo"],
   green: ["green", "violet", "indigo"],
   earth: ["green", "sage", "violet", "indigo"],
   violet: ["gold", "rose", "blue", "earth"],
@@ -68,41 +82,57 @@ export function areTerrainColorsCompatible(
   return (COMPATIBLE_WALL_COLORS[floorColor] as readonly TerrainColorFamily[]).includes(wallColor);
 }
 
+/** Minimum visual separation needed to read maze paths at phone and tablet scale. */
+export const MIN_TERRAIN_LIGHTNESS_DELTA = 8;
+
+export function areTerrainTexturesCompatible(
+  floor: TerrainTextureArt,
+  wall: TerrainTextureArt,
+): boolean {
+  return areTerrainColorsCompatible(floor.dominantColor, wall.dominantColor) &&
+    floor.visualLightness - wall.visualLightness >= MIN_TERRAIN_LIGHTNESS_DELTA;
+}
+
 const FLOORS = {
   sunnyStone: {
     src: "/assets/floor-v3.png",
     label: "Sunny stone path",
-    periodTiles: 5.2,
+    periodTiles: 3.4,
     fallbackColor: "#f8d991",
     dominantColor: "gold",
+    visualLightness: 81,
   },
   roseBrick: {
     src: "/assets/floor-rose-brick-v1.png",
     label: "Rose courtyard bricks",
-    periodTiles: 5.4,
+    periodTiles: 4.2,
     fallbackColor: "#efb8ad",
     dominantColor: "rose",
+    visualLightness: 82,
   },
   moonSlate: {
     src: "/assets/floor-moon-slate-v1.png",
     label: "Moonlit slate",
-    periodTiles: 5,
+    periodTiles: 3.8,
     fallbackColor: "#aeb9d8",
     dominantColor: "blue",
+    visualLightness: 69,
   },
   meadowGrass: {
     src: "/assets/floor-meadow-grass-v1.png",
     label: "Flower meadow grass",
-    periodTiles: 4.8,
+    periodTiles: 3.6,
     fallbackColor: "#81c95d",
     dominantColor: "green",
+    visualLightness: 73,
   },
   woodlandDirt: {
     src: "/assets/floor-woodland-dirt-v1.png",
     label: "Woodland pebble trail",
-    periodTiles: 4.8,
+    periodTiles: 3.8,
     fallbackColor: "#d9a36f",
     dominantColor: "earth",
+    visualLightness: 68,
   },
 } as const satisfies Readonly<Record<string, TerrainTextureArt>>;
 
@@ -110,39 +140,59 @@ const WALLS = {
   lavenderStone: {
     src: "/assets/wall-v3.png",
     label: "Lavender stone wall",
-    periodTiles: 5.2,
+    periodTiles: 3.4,
     fallbackColor: "#7775b6",
     dominantColor: "violet",
+    visualLightness: 56,
   },
   sandstone: {
     src: "/assets/wall-sandstone-v1.png",
     label: "Golden sandstone wall",
-    periodTiles: 5.8,
+    periodTiles: 4.2,
     fallbackColor: "#e5af58",
     dominantColor: "gold",
+    visualLightness: 83,
   },
   mossyRuin: {
     src: "/assets/wall-mossy-ruin-v1.png",
     label: "Mossy storybook ruins",
-    periodTiles: 5.4,
+    periodTiles: 4,
     fallbackColor: "#91a96e",
     dominantColor: "sage",
+    visualLightness: 71,
   },
   darkDungeon: {
     src: "/assets/wall-dark-dungeon-v1.png",
     label: "Moon-dark dungeon wall",
-    periodTiles: 5.6,
+    periodTiles: 4,
     fallbackColor: "#3d3a63",
     dominantColor: "indigo",
+    visualLightness: 19,
   },
   hedge: {
     src: "/assets/wall-hedge-v1.png",
     label: "Flowering garden hedge",
-    periodTiles: 4.8,
+    periodTiles: 3.6,
     fallbackColor: "#3f9c55",
     dominantColor: "green",
+    visualLightness: 60,
   },
 } as const satisfies Readonly<Record<string, TerrainTextureArt>>;
+
+export const TERRAIN_DRESSING_ART = {
+  garden: {
+    src: "/assets/terrain-dressing-garden-v1.png",
+    label: "Tiny garden flowers and moss",
+    periodTiles: 13,
+    opacity: 0.16,
+  },
+  vines: {
+    src: "/assets/terrain-dressing-vines-v1.png",
+    label: "Soft ivy and moss",
+    periodTiles: 13,
+    opacity: 0.17,
+  },
+} as const satisfies Readonly<Record<string, TerrainDressingArt>>;
 
 export const TERRAIN_THEMES = {
   "sunny-stone": {
@@ -155,13 +205,13 @@ export const TERRAIN_THEMES = {
     id: "rose-courtyard",
     label: "Rose Courtyard",
     floor: FLOORS.roseBrick,
-    wall: WALLS.sandstone,
+    wall: WALLS.mossyRuin,
   },
   "moonlit-moat": {
     id: "moonlit-moat",
     label: "Moonlit Moat",
     floor: FLOORS.moonSlate,
-    wall: WALLS.mossyRuin,
+    wall: WALLS.hedge,
   },
   "ember-keep": {
     id: "ember-keep",
@@ -174,6 +224,7 @@ export const TERRAIN_THEMES = {
     label: "Star Garden",
     floor: FLOORS.meadowGrass,
     wall: WALLS.hedge,
+    floorDressing: TERRAIN_DRESSING_ART.garden,
   },
   "moonbeam-castle": {
     id: "moonbeam-castle",
@@ -186,6 +237,7 @@ export const TERRAIN_THEMES = {
     label: "Wishing Woods",
     floor: FLOORS.woodlandDirt,
     wall: WALLS.hedge,
+    floorDressing: TERRAIN_DRESSING_ART.garden,
   },
   "parade-courtyard": {
     id: "parade-courtyard",
@@ -204,6 +256,7 @@ export const TERRAIN_THEMES = {
     label: "Lantern Ruins",
     floor: FLOORS.sunnyStone,
     wall: WALLS.darkDungeon,
+    wallDressing: TERRAIN_DRESSING_ART.vines,
   },
 } as const satisfies Readonly<Record<TerrainThemeId, TerrainThemeArt>>;
 

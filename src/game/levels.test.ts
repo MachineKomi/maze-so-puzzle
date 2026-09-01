@@ -1,4 +1,8 @@
 import { describe, expect, it } from "vitest";
+import {
+  areTerrainTexturesCompatible,
+  resolveTerrainTheme,
+} from "../artCatalog";
 import { createInitialGameState, movePlayer } from "./engine";
 import {
   CURATED_LEVELS,
@@ -196,10 +200,15 @@ describe("curated campaign levels", () => {
     ).toEqual([...TERRAIN_THEME_IDS].sort());
 
     for (const level of CURATED_LEVELS) {
+      const terrainTheme = resolveTerrainTheme(level.terrainThemeId);
       const weapons = level.objects.filter((object) => object.kind === "sword");
       const enemies = level.objects.filter((object) => object.kind === "enemy");
       const animals = level.objects.filter((object) => object.kind === "animal");
 
+      expect(
+        areTerrainTexturesCompatible(terrainTheme.floor, terrainTheme.wall),
+        `${level.name} should use a harmonious light-floor/dark-wall theme.`,
+      ).toBe(true);
       expect(weapons, `${level.name} should contain one weapon.`).toHaveLength(1);
       expect(WEAPON_STYLE_IDS).toContain(weapons[0]?.style);
       expect(

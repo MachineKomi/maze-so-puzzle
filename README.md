@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.9.0 play-test build, which remains an active prototype. Its complete automated
+0.9.1 play-test build, which remains an active prototype. Its complete automated
 web gate and unsigned Windows packaging are verified locally; the public Vercel
 promotion and final physical-device pass remain release steps rather than
 already-verified claims.
@@ -61,16 +61,16 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.9.0 test build:
+The current verified desktop artifacts are the unsigned 0.9.1 test build:
 
-- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.9.0-portable.exe`
-  and `release/Maze-so-Puzzle-0.9.0-setup.exe`. Executables are deliberately
+- Easy-to-find local test copies: `release/Maze-so-Puzzle-0.9.1-portable.exe`
+  and `release/Maze-so-Puzzle-0.9.1-setup.exe`. Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path may be replaced by a later local build).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.9.0_x64-setup.exe`.
-- The verified 0.9.0 hashes and retained archive hashes are recorded in
+  Puzzle - For Ame to Solve!_0.9.1_x64-setup.exe`.
+- The verified 0.9.1 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -81,13 +81,15 @@ The current verified desktop artifacts are the unsigned 0.9.0 test build:
   pointer. Keep holding for continuous grid movement, or drag to steer; Ame
   recalculates the direction as the pointer moves and stops on release or when
   the pointer returns to her dead zone.
-- Pointer movement has a deliberately small one-tile corner assist when the
-  intended square is a wall and the pointer clearly favours a safe perpendicular
-  floor tile. It never follows a wall, pathfinds, enters a hazard, or routes
-  around a door or enemy.
+- Movement has a deliberately small one-tile corner assist when the intended
+  square is a wall. A clear pointer offset or Ame's approach direction chooses
+  the safe perpendicular floor tile, with a little touch-wobble tolerance. It
+  never follows a wall, pathfinds, enters a hazard or hole, or routes around a
+  door or enemy.
 - On-screen arrows: touch- and mouse-friendly movement.
-- Hold a keyboard direction or an on-screen arrow for quick, predictable travel
-  through a path; a tap still moves exactly one square.
+- Holding touch, mouse, keyboard, or an on-screen arrow moves once immediately,
+  pauses long enough to release for a single square, then accelerates smoothly
+  to a capped corridor speed. Changing direction resets the acceleration.
 - Landscape phones use their complete safe viewport, while phone and iPad maze
   headings/status float over the play card so the board can use nearly its full
   height. Touch play prevents page panning and pinch-zoom and retains 44
@@ -100,7 +102,7 @@ The current verified desktop artifacts are the unsigned 0.9.0 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.9.0** label to
+On the title screen, click or tap the small **Playable build 0.9.1** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -115,7 +117,7 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.9.0
+## Included in playable build 0.9.1
 
 - Ten progressive story mazes with deliberate changes of pace: their sizes are
   9, 11, 13, 15, 13, 15, 17, 17, 19, then the 25 x 25
@@ -182,8 +184,10 @@ Turn the iPad sideways to play.
   brief state handoff.
 - Continuous SVG terrain rendered in global maze coordinates, so textures do
   not restart or reveal a border at every grid square. The AI-generated paired
-  floor and wall materials tile seamlessly at a readable scale; periodic water
-  and lava textures join into connected regions. Exact convex and concave wall
+  floor and wall materials use seam-suppressing periodic correction and a
+  smaller readable scale; selected garden, woodland, and ruin themes add sparse
+  transparent flower, moss, and ivy dressing. Periodic water and lava textures
+  join into connected regions. Exact convex and concave wall
   curves follow bends cleanly. Hazards use their rounded connected silhouette
   with no outline, lip, raised edge, or cast shadow; restrained brightness and
   saturation treatment makes walls read more clearly against navigable floors.
@@ -216,7 +220,7 @@ Combat uses one child-friendly rule: Ame wins when her Power is **at least** the
 enemy's Power. Winning adds the enemy's number to Ame's Power. A stronger enemy
 triggers a low-stakes retry screen and restores the same level state.
 
-Core modules live in `src/game/`:
+Core engine modules live in `src/game/`; UI input helpers live in `src/`:
 
 - `engine.ts`: movement and interactions.
 - `levels.ts`: the ten authored story levels.
@@ -230,6 +234,8 @@ Core modules live in `src/game/`:
 - `generator.ts`: seeded perfect-maze generation and progression placement.
 - `pointerControls.ts`: tile-relative pointer intent and the strict one-tile,
   wall-only corner-assist rule.
+- `movementControls.ts`: the shared held-input acceleration curve and cadence
+  state used by touch, mouse, keyboard/WASD, and on-screen arrows.
 
 ## Verification
 
@@ -244,21 +250,23 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.9.0 source suite passes 204 automated tests across 15 files and the strict
+The 0.9.1 source suite passes 215 automated tests across 16 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all ten authored ordinary/perfect-rescue routes,
 dominant-colour theme compatibility, five-track per-maze music selection, the
 6 x 6 even camera, variable 9–29 generation, solver-safe connected hazards,
-pointer intent/corner assistance, rescued-pet trail placement, cage-front
-assets, persistent minimap reveal, and the established engine/save/audio checks.
-The exact 0.9.0 dependency audit/tree and locked Cargo compile pass. Its Windows
+pointer intent/corner assistance, held-input acceleration, theme lightness and
+colour compatibility, transparent terrain dressing, rescued-pet trail
+placement, cage-front assets, persistent minimap reveal, and the established
+engine/save/audio checks. The exact 0.9.1 dependency audit/tree and locked Cargo
+compile pass. Its Windows
 portable app and installer are source-compared, version-checked, hashed, and the
 portable app passed a hidden five-second smoke launch. Public deployment smoke
 and physical-device listening/feel remain on the release checklist; the previous
 0.8.0 record is retained as historical evidence.
 
-The browser matrix, remaining 0.9.0 gates, and Windows artifact
+The browser matrix, remaining 0.9.1 gates, and Windows artifact
 record are kept in
 [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md). Rebuilding the Windows
 package is a separate release step:
@@ -267,7 +275,7 @@ package is a separate release step:
 npm run desktop:build
 ```
 
-The 0.9.0 Windows test installer is unsigned, so Windows SmartScreen
+The 0.9.1 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

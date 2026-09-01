@@ -1,4 +1,8 @@
 import { describe, expect, it } from "vitest";
+import {
+  areTerrainTexturesCompatible,
+  resolveTerrainTheme,
+} from "../artCatalog";
 import { createInitialGameState, movePlayer } from "./engine";
 import {
   MAX_GENERATED_MAZE_SIZE,
@@ -150,6 +154,11 @@ describe("deterministic surprise mazes", () => {
           expect(enemies.every((enemy) => ENEMY_STYLE_IDS.includes(enemy.style!)), label)
             .toBe(true);
           expect(TERRAIN_THEME_IDS, label).toContain(generated.terrainThemeId);
+          const terrainTheme = resolveTerrainTheme(generated.terrainThemeId);
+          expect(
+            areTerrainTexturesCompatible(terrainTheme.floor, terrainTheme.wall),
+            `${label} should select a harmonious light-floor/dark-wall theme.`,
+          ).toBe(true);
           for (const terrainKind of ["water", "lava"] as const) {
             const hazardCount = generated.terrain.flat().filter((tile) => tile === terrainKind).length;
             if (hazardCount > 0) {

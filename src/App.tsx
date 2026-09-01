@@ -90,7 +90,15 @@ import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
 import {
   pointerIntentFromTileOffset,
   resolvePointerMoveDirection,
+  type PointerIntent,
 } from "./pointerControls";
+import {
+  HELD_MOVE_INITIAL_DELAY_MS,
+  IDLE_HELD_MOVE_CADENCE,
+  advanceHeldMoveCadence,
+  beginHeldMoveCadence,
+  type HeldMoveCadence,
+} from "./movementControls";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
   up: "▲",
@@ -118,15 +126,11 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
 
 const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
-const HELD_KEY_DELAY_MS = 105;
-const HELD_KEY_REPEAT_MS = 64;
-const POINTER_HOLD_DELAY_MS = 92;
-const POINTER_HOLD_REPEAT_MS = 68;
 const BATTLE_PRESENTATION_MS = 1160;
 const RESCUE_PRESENTATION_MS = 900;
 const JUMP_PRESENTATION_MS = 410;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.9.0";
+const BUILD_VERSION = "0.9.1";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -173,6 +177,11 @@ interface TouchCursor {
   readonly origin: PointerPoint;
   readonly current: PointerPoint;
   readonly direction: Direction | null;
+}
+
+interface QueuedMoveIntent {
+  readonly direction: Direction;
+  readonly lateralOffset: number;
 }
 
 interface BattlePresentation {
@@ -423,6 +432,8 @@ const MazeTerrain = memo(function MazeTerrain({
   const wallPatternId = `${patternPrefix}-wall`;
   const waterPatternId = `${patternPrefix}-water`;
   const lavaPatternId = `${patternPrefix}-lava`;
+  const floorDressingPatternId = `${patternPrefix}-floor-dressing`;
+  const wallDressingPatternId = `${patternPrefix}-wall-dressing`;
   const walls = createRoundedTerrainPath(level, camera, "wall", 0.13);
   const water = createRoundedTerrainPath(level, camera, "water", 0.16);
   const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
@@ -457,12 +468,66 @@ const MazeTerrain = memo(function MazeTerrain({
           <pattern id={lavaPatternId} patternUnits="userSpaceOnUse" width="4.6" height="4.6">
             <image href={ASSETS.lava} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
           </pattern>
+          {theme.floorDressing && (
+            <pattern
+              id={floorDressingPatternId}
+              patternUnits="userSpaceOnUse"
+              width={theme.floorDressing.periodTiles}
+              height={theme.floorDressing.periodTiles}
+            >
+              <image
+                href={theme.floorDressing.src}
+                x="0"
+                y="0"
+                width={theme.floorDressing.periodTiles}
+                height={theme.floorDressing.periodTiles}
+                preserveAspectRatio="none"
+              />
+            </pattern>
+          )}
+          {theme.wallDressing && (
+            <pattern
+              id={wallDressingPatternId}
+              patternUnits="userSpaceOnUse"
+              width={theme.wallDressing.periodTiles}
+              height={theme.wallDressing.periodTiles}
+            >
+              <image
+                href={theme.wallDressing.src}
+                x="0"
+                y="0"
+                width={theme.wallDressing.periodTiles}
+                height={theme.wallDressing.periodTiles}
+                preserveAspectRatio="none"
+              />
+            </pattern>
+          )}
         </defs>
 
         <rect x={camera.left} y={camera.top} width={camera.width} height={camera.height} fill={`url(#${floorPatternId})`} />
+        {theme.floorDressing && (
+          <rect
+            className="terrain-floor-dressing"
+            x={camera.left}
+            y={camera.top}
+            width={camera.width}
+            height={camera.height}
+            fill={`url(#${floorDressingPatternId})`}
+            opacity={theme.floorDressing.opacity}
+          />
+        )}
         {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} />}
         {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} />}
         {walls.d && <path className="terrain-wall" d={walls.d} fill={`url(#${wallPatternId})`} fillRule={walls.fillRule} />}
+        {walls.d && theme.wallDressing && (
+          <path
+            className="terrain-wall-dressing"
+            d={walls.d}
+            fill={`url(#${wallDressingPatternId})`}
+            fillRule={walls.fillRule}
+            opacity={theme.wallDressing.opacity}
+          />
+        )}
       </svg>
       {holes.map((hole) => (
         <div className="terrain-hole-layer" style={cameraLayerStyle(hole, camera)} key={keyFor(hole)} aria-hidden="true">
@@ -642,17 +707,21 @@ function App() {
   const boardRef = useRef<HTMLDivElement>(null);
   const inputLocked = useRef(false);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
-  const queuedDirection = useRef<Direction | null>(null);
-  const attemptMoveRef = useRef<(direction: Direction) => void>(() => undefined);
-  const pointerDirectionRef = useRef<(clientX: number, clientY: number) => Direction | null>(() => null);
+  const queuedMove = useRef<QueuedMoveIntent | null>(null);
+  const attemptMoveRef = useRef<(direction: Direction, lateralOffset?: number) => void>(() => undefined);
+  const pointerDirectionRef = useRef<(clientX: number, clientY: number) => PointerIntent | null>(() => null);
+  const lastMovedDirection = useRef<Direction | null>(null);
   const heldKeys = useRef(new Map<string, Direction>());
   const heldKeyOrder = useRef<string[]>([]);
   const heldKeyTimer = useRef<number | undefined>(undefined);
+  const heldKeyCadence = useRef<HeldMoveCadence>(IDLE_HELD_MOVE_CADENCE);
   const dpadHoldDirection = useRef<Direction | null>(null);
   const dpadHoldPointerId = useRef<number | null>(null);
   const dpadHoldTimer = useRef<number | undefined>(undefined);
+  const dpadHoldCadence = useRef<HeldMoveCadence>(IDLE_HELD_MOVE_CADENCE);
   const activeBoardPointer = useRef<ActiveBoardPointer | null>(null);
   const pointerHoldTimer = useRef<number | undefined>(undefined);
+  const pointerHoldCadence = useRef<HeldMoveCadence>(IDLE_HELD_MOVE_CADENCE);
   const [touchCursor, setTouchCursor] = useState<TouchCursor | null>(null);
   const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
@@ -776,6 +845,7 @@ function App() {
   const clearDpadHold = useCallback(() => {
     dpadHoldDirection.current = null;
     dpadHoldPointerId.current = null;
+    dpadHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
     if (dpadHoldTimer.current !== undefined) {
       window.clearTimeout(dpadHoldTimer.current);
       dpadHoldTimer.current = undefined;
@@ -784,7 +854,8 @@ function App() {
 
   const clearBoardPointer = useCallback(() => {
     activeBoardPointer.current = null;
-    queuedDirection.current = null;
+    queuedMove.current = null;
+    pointerHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
     setTouchCursor(null);
     if (pointerHoldTimer.current !== undefined) {
       window.clearTimeout(pointerHoldTimer.current);
@@ -795,7 +866,9 @@ function App() {
   const clearHeldInput = useCallback(() => {
     heldKeys.current.clear();
     heldKeyOrder.current = [];
-    queuedDirection.current = null;
+    queuedMove.current = null;
+    heldKeyCadence.current = IDLE_HELD_MOVE_CADENCE;
+    lastMovedDirection.current = null;
     if (heldKeyTimer.current !== undefined) {
       window.clearTimeout(heldKeyTimer.current);
       heldKeyTimer.current = undefined;
@@ -1076,7 +1149,7 @@ function App() {
     setRestartArmed(false);
   }, [cancelPresentations, clearHeldInput]);
 
-  const attemptMove = useCallback((direction: Direction) => {
+  const attemptMove = useCallback((requestedDirection: Direction, lateralOffset = 0) => {
     const unavailable = (
       screen !== "game"
       || pendingAdventure !== null
@@ -1085,15 +1158,22 @@ function App() {
       || game.status !== "playing"
     );
     if (unavailable) {
-      queuedDirection.current = null;
+      queuedMove.current = null;
       return;
     }
     if (inputLocked.current) {
-      queuedDirection.current = direction;
+      queuedMove.current = { direction: requestedDirection, lateralOffset };
       return;
     }
-    queuedDirection.current = null;
+    queuedMove.current = null;
     inputLocked.current = true;
+    const direction = resolvePointerMoveDirection(
+      level,
+      game,
+      requestedDirection,
+      lateralOffset,
+      lastMovedDirection.current,
+    );
     const result = movePlayer(level, game, direction);
     if (result.state.status !== "playing") {
       modalReturnFocus.current = document.activeElement instanceof HTMLElement
@@ -1107,8 +1187,10 @@ function App() {
       : { icon: "✨", text: level.objective, tone: "plain" as const, sound: "step" as const };
     setGame(result.state);
     if (result.events.some((event) => event.type === "combat-lost")) {
+      lastMovedDirection.current = null;
       setPlayerTrail([level.start]);
     } else if (result.moved) {
+      lastMovedDirection.current = direction;
       setPlayerTrail((trail) => recordFollowerStep(trail, game.position));
     }
     if (result.moved && explorationMode) {
@@ -1235,9 +1317,9 @@ function App() {
     inputUnlockTimer.current = window.setTimeout(() => {
       inputLocked.current = false;
       inputUnlockTimer.current = undefined;
-      const nextDirection = queuedDirection.current;
-      queuedDirection.current = null;
-      if (nextDirection) attemptMoveRef.current(nextDirection);
+      const nextMove = queuedMove.current;
+      queuedMove.current = null;
+      if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
   }, [beginBattlePresentation, beginJumpPresentation, beginLostBattlePresentation, beginRescuePresentation, campaignIndex, explorationMode, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerPickerOpen, testerRun]);
 
@@ -1257,11 +1339,14 @@ function App() {
         const keyId = heldKeyOrder.current.at(-1);
         const direction = keyId ? heldKeys.current.get(keyId) : undefined;
         if (!direction) {
+          heldKeyCadence.current = IDLE_HELD_MOVE_CADENCE;
           heldKeyTimer.current = undefined;
           return;
         }
+        const cadenceStep = advanceHeldMoveCadence(heldKeyCadence.current, direction);
+        heldKeyCadence.current = cadenceStep.cadence;
         attemptMoveRef.current(direction);
-        scheduleHeldMove(HELD_KEY_REPEAT_MS);
+        scheduleHeldMove(cadenceStep.nextDelayMs);
       }, delay);
     };
 
@@ -1287,8 +1372,9 @@ function App() {
       if (heldKeys.current.has(keyId)) return;
       heldKeys.current.set(keyId, direction);
       heldKeyOrder.current = [...heldKeyOrder.current.filter((item) => item !== keyId), keyId];
+      heldKeyCadence.current = beginHeldMoveCadence(direction);
       attemptMoveRef.current(direction);
-      scheduleHeldMove(HELD_KEY_DELAY_MS);
+      scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
     };
 
     const onKeyUp = (event: KeyboardEvent) => {
@@ -1297,13 +1383,20 @@ function App() {
       const keyId = event.code || event.key;
       heldKeys.current.delete(keyId);
       heldKeyOrder.current = heldKeyOrder.current.filter((item) => item !== keyId);
-      if (heldKeyOrder.current.length > 0) scheduleHeldMove(HELD_KEY_REPEAT_MS);
-      else if (heldKeyTimer.current !== undefined) {
-        window.clearTimeout(heldKeyTimer.current);
-        heldKeyTimer.current = undefined;
+      const fallbackKey = heldKeyOrder.current.at(-1);
+      const fallbackDirection = fallbackKey ? heldKeys.current.get(fallbackKey) : undefined;
+      if (fallbackDirection) {
+        heldKeyCadence.current = beginHeldMoveCadence(fallbackDirection);
+        scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
+      } else {
+        if (heldKeyTimer.current !== undefined) {
+          window.clearTimeout(heldKeyTimer.current);
+          heldKeyTimer.current = undefined;
+        }
+        heldKeyCadence.current = IDLE_HELD_MOVE_CADENCE;
       }
-      if (queuedDirection.current === direction) {
-        queuedDirection.current = null;
+      if (queuedMove.current?.direction === direction) {
+        queuedMove.current = null;
       }
     };
 
@@ -1338,25 +1431,18 @@ function App() {
     disposeMusic();
   }, [clearPresentationWork]);
 
-  const moveDirectionFromPointer = useCallback((clientX: number, clientY: number): Direction | null => {
+  const moveDirectionFromPointer = useCallback((clientX: number, clientY: number): PointerIntent | null => {
     const rect = boardRef.current?.getBoundingClientRect();
     if (!rect) return null;
     const cellWidth = rect.width / cameraWindow.width;
     const cellHeight = rect.height / cameraWindow.height;
     const centerX = rect.left + (game.position.x - cameraWindow.left + 0.5) * cellWidth;
     const centerY = rect.top + (game.position.y - cameraWindow.top + 0.5) * cellHeight;
-    const intent = pointerIntentFromTileOffset(
+    return pointerIntentFromTileOffset(
       (clientX - centerX) / cellWidth,
       (clientY - centerY) / cellHeight,
     );
-    if (!intent) return null;
-    return resolvePointerMoveDirection(
-      level,
-      game,
-      intent.direction,
-      intent.lateralOffset,
-    );
-  }, [cameraWindow, game, level]);
+  }, [cameraWindow, game.position]);
 
   pointerDirectionRef.current = moveDirectionFromPointer;
 
@@ -1364,9 +1450,10 @@ function App() {
     if (pointerHoldTimer.current !== undefined) window.clearTimeout(pointerHoldTimer.current);
     const repeat = () => {
       const pointer = activeBoardPointer.current;
-      const direction = pointer
+      const intent = pointer
         ? pointerDirectionRef.current(pointer.current.x, pointer.current.y)
         : null;
+      const direction = intent?.direction ?? null;
       if (pointer) {
         pointer.direction = direction;
         setPreviewDirection(direction);
@@ -1376,13 +1463,16 @@ function App() {
             : cursor);
         }
       }
-      if (!direction) {
-        queuedDirection.current = null;
+      if (!intent) {
+        queuedMove.current = null;
+        pointerHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
         pointerHoldTimer.current = undefined;
         return;
       }
-      attemptMoveRef.current(direction);
-      pointerHoldTimer.current = window.setTimeout(repeat, POINTER_HOLD_REPEAT_MS);
+      const cadenceStep = advanceHeldMoveCadence(pointerHoldCadence.current, intent.direction);
+      pointerHoldCadence.current = cadenceStep.cadence;
+      attemptMoveRef.current(intent.direction, intent.lateralOffset);
+      pointerHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
     pointerHoldTimer.current = window.setTimeout(repeat, delay);
   }, []);
@@ -1391,14 +1481,15 @@ function App() {
     const pointer = activeBoardPointer.current;
     if (!pointer || pointer.pointerId !== event.pointerId) {
       if (event.pointerType !== "touch") {
-        setPreviewDirection(pointerDirectionRef.current(event.clientX, event.clientY));
+        setPreviewDirection(pointerDirectionRef.current(event.clientX, event.clientY)?.direction ?? null);
       }
       return;
     }
 
     event.preventDefault();
     const current = { x: event.clientX, y: event.clientY };
-    const direction = pointerDirectionRef.current(current.x, current.y);
+    const intent = pointerDirectionRef.current(current.x, current.y);
+    const direction = intent?.direction ?? null;
     const directionChanged = direction !== pointer.direction;
     pointer.current = current;
     pointer.direction = direction;
@@ -1417,11 +1508,13 @@ function App() {
       pointerHoldTimer.current = undefined;
     }
     if (!direction) {
-      queuedDirection.current = null;
+      queuedMove.current = null;
+      pointerHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
       return;
     }
-    attemptMoveRef.current(direction);
-    schedulePointerHoldRepeat(POINTER_HOLD_REPEAT_MS);
+    pointerHoldCadence.current = beginHeldMoveCadence(direction);
+    attemptMoveRef.current(direction, intent?.lateralOffset);
+    schedulePointerHoldRepeat(HELD_MOVE_INITIAL_DELAY_MS);
   };
 
   const onBoardPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -1430,7 +1523,8 @@ function App() {
     clearBoardPointer();
     const rect = event.currentTarget.getBoundingClientRect();
     const origin = { x: event.clientX, y: event.clientY };
-    const direction = pointerDirectionRef.current(origin.x, origin.y);
+    const intent = pointerDirectionRef.current(origin.x, origin.y);
+    const direction = intent?.direction ?? null;
     const pointer: ActiveBoardPointer = {
       pointerId: event.pointerId,
       pointerType: event.pointerType,
@@ -1448,8 +1542,9 @@ function App() {
     }
     setPreviewDirection(direction);
     if (!direction) return;
-    attemptMoveRef.current(direction);
-    schedulePointerHoldRepeat(POINTER_HOLD_DELAY_MS);
+    pointerHoldCadence.current = beginHeldMoveCadence(direction);
+    attemptMoveRef.current(direction, intent?.lateralOffset);
+    schedulePointerHoldRepeat(HELD_MOVE_INITIAL_DELAY_MS);
   };
 
   const finishBoardPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -1468,11 +1563,14 @@ function App() {
     const repeat = () => {
       const direction = dpadHoldDirection.current;
       if (!direction) {
+        dpadHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
         dpadHoldTimer.current = undefined;
         return;
       }
+      const cadenceStep = advanceHeldMoveCadence(dpadHoldCadence.current, direction);
+      dpadHoldCadence.current = cadenceStep.cadence;
       attemptMoveRef.current(direction);
-      dpadHoldTimer.current = window.setTimeout(repeat, HELD_KEY_REPEAT_MS);
+      dpadHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
     dpadHoldTimer.current = window.setTimeout(repeat, delay);
   }, []);
@@ -1483,17 +1581,18 @@ function App() {
     clearDpadHold();
     dpadHoldDirection.current = direction;
     dpadHoldPointerId.current = event.pointerId;
+    dpadHoldCadence.current = beginHeldMoveCadence(direction);
     event.currentTarget.setPointerCapture(event.pointerId);
     attemptMoveRef.current(direction);
-    scheduleDpadRepeat(HELD_KEY_DELAY_MS);
+    scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
   };
 
   const stopDpadHold = (event: ReactPointerEvent<HTMLButtonElement>) => {
     if (dpadHoldPointerId.current !== event.pointerId) return;
     const releasedDirection = dpadHoldDirection.current;
     clearDpadHold();
-    if (queuedDirection.current === releasedDirection) {
-      queuedDirection.current = null;
+    if (queuedMove.current?.direction === releasedDirection) {
+      queuedMove.current = null;
     }
   };
 
@@ -1780,7 +1879,7 @@ function App() {
                 )}
                 <button className="big-maze-button" aria-pressed={bigMaze} onClick={toggleBigMaze} title="Make the maze larger">{bigMaze ? "↙ Normal" : "⛶ Big maze"}</button>
                 <button className="surprise-button" onClick={() => requestEnterLevel(makeSurprise())} title="Make a new solvable maze">✦ New maze</button>
-                <div className="step-pill" aria-label={`${game.steps} steps`}><span>👣</span>{game.steps}</div>
+                <div className="step-pill" aria-label={`${game.steps} ${game.steps === 1 ? "step" : "steps"}`}><span>👣</span>{game.steps}</div>
               </div>
             </div>
 
@@ -2158,7 +2257,7 @@ function App() {
             </div>
             <div className="win-summary">
               <img className="win-star-art" src={ASSETS.goal} alt="A sparkling golden star portal" />
-              <div><strong>Wonderful, Ame!</strong><span>The star was found in {game.steps} steps.</span></div>
+              <div><strong>Wonderful, Ame!</strong><span>The star was found in {game.steps} {game.steps === 1 ? "step" : "steps"}.</span></div>
             </div>
             <div className="rescued-result-row" aria-label={`${completion.rescuedSpecies.length} animal friends rescued`}>
               {animalObjects.map((animal) => {
@@ -2533,7 +2632,7 @@ function AchievementsScreen({
                 >
                   <span className="record-number">{locked ? "◆" : isActive ? "▶" : index + 1}</span>
                   <span className="record-copy"><strong>{locked ? "A mystery maze" : storyLevel.name}</strong><small>{locked ? "Keep adventuring to unlock" : isActive ? "Current maze · tap to resume" : `${storyLevel.width} × ${storyLevel.height}`}</small></span>
-                  <span className="record-best">{result ? <><b>{result.bestSteps ?? "—"}</b><small>best steps</small></> : <><b>{locked ? "🔒" : "New"}</b><small>{locked ? "locked" : "ready"}</small></>}</span>
+                  <span className="record-best">{result ? <><b>{result.bestSteps ?? "—"}</b><small>best {result.bestSteps === 1 ? "step" : "steps"}</small></> : <><b>{locked ? "🔒" : "New"}</b><small>{locked ? "locked" : "ready"}</small></>}</span>
                   <span className="record-friends" aria-hidden="true">
                     {storySpecies.map((species) => (
                       <img

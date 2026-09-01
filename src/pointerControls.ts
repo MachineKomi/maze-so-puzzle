@@ -80,18 +80,23 @@ function preferredPerpendicularFromOffset(
   return lateralOffset < 0 ? "left" : "right";
 }
 
+const WRONG_SIDE_WOBBLE_TOLERANCE_TILES = 0.55;
+
 /**
- * Applies a strictly one-tile pointer-only corner assist. The intended tile
+ * Applies a strictly one-tile corner assist for pointer, keyboard, and D-pad
+ * requests. The intended tile
  * must itself be a wall, and both a side tile and the immediately-forward tile
  * must be safe. A single valid slip is accepted automatically; when both sides
- * work, the pointer's lateral offset chooses. Otherwise the original direction
- * is returned so the engine reports the real blocker.
+ * work, the pointer's lateral offset or Ame's immediately previous movement
+ * chooses. Otherwise the original direction is returned so the engine reports
+ * the real blocker.
  */
 export function resolvePointerMoveDirection(
   level: LevelDefinition,
   state: GameState,
   intended: Direction,
   lateralOffset: number,
+  previousDirection: Direction | null = null,
 ): Direction {
   const intendedTarget = stepFrom(state.position, intended);
   if (getTerrainAt(level, intendedTarget) !== "wall") return intended;
@@ -104,6 +109,18 @@ export function resolvePointerMoveDirection(
   if (candidates.length === 0) return intended;
 
   const preferred = preferredPerpendicularFromOffset(intended, lateralOffset);
-  if (preferred) return candidates.includes(preferred) ? preferred : intended;
-  return candidates.length === 1 ? candidates[0] ?? intended : intended;
+  if (candidates.length === 1) {
+    const candidate = candidates[0] ?? intended;
+    // Forgive a modest wobble in the wrong direction, but never move opposite
+    // a deliberate full-tile steering gesture just because that side is unsafe.
+    return !preferred
+      || candidate === preferred
+      || Math.abs(lateralOffset) <= WRONG_SIDE_WOBBLE_TOLERANCE_TILES
+      ? candidate
+      : intended;
+  }
+
+  if (preferred && candidates.includes(preferred)) return preferred;
+  if (previousDirection && candidates.includes(previousDirection)) return previousDirection;
+  return intended;
 }

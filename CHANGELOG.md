@@ -4,6 +4,48 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.9.1 - 2026-09-01
+
+This comfort-and-materials release responds to the first extended iPad play
+session: movement is easier to stop and steer, nearby corners are more
+forgiving, and every maze material is calmer, smaller-scale, and easier to read.
+
+### Added
+
+- Shared held-input acceleration for touch, mouse, keyboard/WASD, and the
+  on-screen arrows: one immediate tile, a generous tap-release pause, then a
+  smooth ramp from careful movement to corridor speed.
+- Sparse AI-generated grass, clover, flower, moss, and ivy dressing on selected
+  garden, woodland, and ruin themes. World-aligned transparent overlays add
+  variety without introducing tile edges or affecting play.
+- Reproducible terrain-processing scripts and automated checks for runtime
+  texture dimensions, opacity, repeat boundaries, dressing alpha, theme colour
+  harmony, and minimum floor/wall lightness separation.
+
+### Changed
+
+- All ten floor and wall textures were rebuilt from their untouched ImageGen
+  masters with periodic Poisson correction. Seams are subdued without mirrored
+  cross-bands, broad-blend ghosting, or doubled masonry, and their in-game
+  repeat scale is smaller.
+- Maze 2 now pairs a soft rose-brick floor with darker mossy ruins. The active
+  catalogue rejects gold/yellow with both green/sage and rose/pink, and every
+  story theme keeps a lighter floor against a darker wall.
+- One-tile corner assistance is resolved at the moment each move occurs and is
+  shared by all controls. It tolerates a small finger wobble, remembers Ame's
+  approach direction at ambiguous bends, and still cannot pathfind or bypass
+  hazards, holes, doors, or enemies.
+- The release gate now covers 215 tests across 16 files, including the new
+  acceleration curve, queued steering, colour/lightness rules, dressing assets,
+  and expanded corner-safety cases.
+
+### Desktop status
+
+- The unsigned 0.9.1 portable executable and NSIS installer are rebuilt from
+  the same source as the browser release, version-checked, source-compared, and
+  SHA-256 recorded in `release/`.
+- Clean-machine install/uninstall testing and code signing remain outstanding.
+
 ## 0.9.0 - 2026-09-01
 
 This puzzle-and-presentation release adds a new traversal toy, makes the later

@@ -128,6 +128,8 @@ export function preloadLevelArt(level: LevelDefinition): void {
   const theme = resolveTerrainTheme(level.terrainThemeId);
   sources.add(theme.floor.src);
   sources.add(theme.wall.src);
+  if (theme.floorDressing) sources.add(theme.floorDressing.src);
+  if (theme.wallDressing) sources.add(theme.wallDressing.src);
 
   for (const row of level.terrain) {
     for (const terrain of row) {
