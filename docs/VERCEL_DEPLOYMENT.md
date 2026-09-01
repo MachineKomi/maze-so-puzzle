@@ -114,12 +114,14 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. The 0.10.2 source is ready for its GitHub `main` push and Vercel Hobby
-promotion. After Vercel reports Ready, record the deployed commit and repeat the
-canonical build-label, exact debug-query, responsive bounds, and browser-log
-checks. The same source already passes the local twelve-size fixed-canvas matrix,
-perfect-rescue iPad/phone finish, 65-step Antidote Leaf route, conserved
-multi-bash Power transfer, and non-destructive stronger-enemy interaction. The
-broader physical-device and manual matrix above remains required.
+secrets. On 2026-09-01 release commit `65fe554` was pushed to GitHub `main` and
+the Vercel Hobby production deployment became ready. The canonical alias reports
+playable build 0.10.2; the exact debug query lists all twelve story mazes. Live
+1024 × 768, 844 × 390, and 568 × 320 checks retain one fixed normalized layout,
+an exact 16:9 stage, no document overflow, and no production warning/error logs.
+The same source also passes the local twelve-size matrix, perfect-rescue
+iPad/phone finish, 65-step Antidote Leaf route, conserved multi-bash Power
+transfer, and non-destructive stronger-enemy interaction. The broader
+physical-device and manual matrix above remains required.
 Executable artifacts remain intentionally excluded from Git and Vercel
 deployment.

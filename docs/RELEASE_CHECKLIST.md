@@ -13,8 +13,8 @@ packaging/source comparison/hash/smoke launch, repeat-boundary/alpha checks,
 local twelve-size responsive matrix, exact 65-step poison route,
 non-destructive stronger-enemy dialog, three-bash conserved Power transfer,
 540 ms jump arc, layered boing, source comparison, five-second portable smoke,
-all pass. GitHub/Vercel promotion and the focused canonical 0.10.2 smoke are the
-remaining publication steps. Physical-device touch/listening/feel, accessibility, clean-machine installation,
+GitHub/Vercel promotion, and the focused canonical 0.10.2 smoke all pass.
+Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed. The
 completed 0.10.0, 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a historical baseline.
 
@@ -132,10 +132,11 @@ Test the production preview, not only the development server:
 npm run preview
 ```
 
-Production smoke record (2026-09-01): the exact 0.10.2 source passes locally and
-is ready for GitHub/Vercel promotion. Record the deployed commit, canonical build
-label, responsive bounds, tester picker, and browser logs after Vercel reports
-Ready; physical-device feel remains a human test.
+Production smoke record (2026-09-01): the canonical URL serves playable build
+0.10.2 from GitHub `main` commit `65fe554`. The exact debug query opens all twelve
+tester mazes. Live 1024 × 768, 844 × 390, and 568 × 320 checks preserve the same
+normalized panel geometry, exact 16:9 stage, and zero document overflow; browser
+warning/error logs are clear. Physical-device feel remains a human test.
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
@@ -193,7 +194,7 @@ Ready; physical-device feel remains a human test.
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [ ] On the 0.10.2 canonical URL, the exact `?debug=mazes` query opens the
+- [x] On the 0.10.2 canonical URL, the exact `?debug=mazes` query opens the
   direct picker and all twelve authored mazes are listed; the normal build-label
   entry and non-debug isolation remain covered locally and by the prior public smoke.
 - [ ] Complete a canonical tester run and reconfirm that rewards, records,

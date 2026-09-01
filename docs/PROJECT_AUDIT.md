@@ -15,8 +15,8 @@ panel intersection. A perfect-rescue finish was replayed at iPad and phone sizes
 its large friend card, rewards, and actions stayed separate. The three-bash
 combat timeline and 540 ms Spring Boots hop retain their focused logic/audio and
 local browser timing checks. Locked-Tauri compilation and Windows packaging
-pass. GitHub/Vercel promotion and canonical 0.10.2 smoke are recorded after the
-source release commit below.
+pass. GitHub `main` commit `65fe554` auto-deployed through Vercel, and the
+canonical 0.10.2 responsive smoke passes.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
@@ -39,7 +39,7 @@ historical evidence.
 | Surprise Maze variants | Generated presentation remains deterministic; size varies by seed across unlocked odd 9–29 bands, water/lava form connected post-boots clusters, and eligible adventure seeds add branch prerequisites plus post-Spring-Boots holes | A 500-seed adventure stress audit spanning every odd size found zero ordinary/perfect failures; 353 samples had exactly one Spring Boots pickup before connected holes |
 | Optional Power puzzles | Wishing Woods, Ame's Grand Parade, Springstep Sky Hollow, and Lanternlight separate progression/rescue requirements across branches | Solver-verified ordinary/all-pets routes are 114/148, 116/136, 190/214, and 290/322 steps respectively |
 | Audio and presentations | Five full OST songs are assigned per maze with stable session mapping and immediate-repeat avoidance; jump, rescue, clash, sparks, impact, Power, and win cues support short event presentations | The four-layer jump boing and semantic three-clash sound schedule have focused tests. Local browser timing observed all three contacts, a conserved 1→0 / 2→3 Power transfer, the 2.22 s cleanup, and no runtime warning after a clean reload. Physical listening/reduced-motion feel remains manual |
-| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | 0.10.2 promotion and canonical responsive smoke are the final release steps; record the deployed commit after the source gate passes |
+| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Commit `65fe554` auto-deployed Ready; the canonical alias reports 0.10.2, lists all twelve tester mazes, keeps fixed normalized geometry at 1024×768, 844×390, and 568×320, and has no production warning/error logs |
 | Desktop artifacts | Unsigned 0.10.2 portable executable and NSIS installer are staged in `release/` | Both match final Tauri outputs, report 0.10.2, are SHA-256 recorded, and the portable app stayed responsive with the correct title for five seconds; clean-machine install and signing remain |
 
 ## Historical 0.5.1 implementation status
@@ -345,8 +345,8 @@ The 0.10.2 source passes 260 tests across 19 files, strict TypeScript, and the
 Vite production build. The local twelve-size responsive matrix and iPad/phone
 perfect-rescue finish are green. The dependency audit/tree and locked Cargo check pass, and the unsigned
 0.10.2 Windows pair is built, versioned, source-compared, hashed, and
-smoke-launched. GitHub/Vercel promotion and the canonical 0.10.2 focused smoke
-remain the final publication steps. Unchecked
+smoke-launched. GitHub `main` commit `65fe554` is live through Vercel and the
+canonical 0.10.2 focused responsive smoke passes. Unchecked
 physical-device, listening/feel, broader production, clean-install, and signing
 items in `RELEASE_CHECKLIST.md` remain requirements.
 
@@ -404,8 +404,8 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- Current source metadata and `release/` records are aligned at 0.10.2. The
-  GitHub `main` push and canonical Vercel confirmation are pending below.
+- Current source metadata and `release/` records are aligned at 0.10.2. GitHub
+  `main` and the canonical Vercel deployment serve the same playable build.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in
