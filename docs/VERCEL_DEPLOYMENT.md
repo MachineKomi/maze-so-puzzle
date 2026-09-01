@@ -149,9 +149,9 @@ deployment.
 Playable build 0.10.3 passes its local 267-test/20-file browser gate. Its
 separate unsigned Windows portable executable and NSIS installer are also built,
 version/hash checked, byte-compared with the final Tauri outputs, and the
-portable app has passed its launch smoke. The browser build is ready for
-promotion, but it must not be described as canonical production until the
-0.10.3 commit is pushed, Vercel reports the deployment ready, the canonical
-build label reads 0.10.3, and the smoke checks above pass. The 0.10.2 paragraph
-remains the last verified production record rather than a claim about the
-pending update.
+portable app has passed its launch smoke. On 2026-09-01 GitHub `main` commit
+`3f61cbd` auto-deployed to the canonical Vercel site. The public label reports
+0.10.3, the exact debug query lists all twelve mazes, 1194 × 834 and 844 × 390
+retain viewport-sized pages with no broken visible images, the new v4 cage asset
+loads, and the production console has no warning/error entries. The 0.10.2
+paragraph above remains historical evidence.

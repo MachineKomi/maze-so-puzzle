@@ -32,6 +32,7 @@ historical evidence.
 | Responsive browser QA | Desktop 1280×720, iPad 1194×834, and landscape phone 844×390 | No page overflow or UI overlap; no console warning/error logs and no broken visible images |
 | Reset flow | Reset entry points on the title and Adventure Book plus the destructive warning dialog | Both entries and modal were verified; destructive confirmation was deliberately not clicked during browser QA |
 | Interaction polish | In-maze pickup feedback and revised cage presentation | Floating pickup toast and the new v4 front-only cage were visually verified |
+| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Commit `3f61cbd` auto-deployed; the canonical alias reports 0.10.3, lists all twelve tester mazes, fits 1194×834 and 844×390 without page overflow, loads the v4 cage/visible art, and has no production warning/error logs |
 | Desktop artifacts | Unsigned 0.10.3 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
 
 ## Historical 0.10.2 release status
@@ -419,8 +420,8 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- Current source metadata and `release/` records are aligned at 0.10.3. Public
-  GitHub/Vercel promotion should be verified separately before it is claimed.
+- Current source metadata and `release/` records are aligned at 0.10.3. GitHub
+  `main` commit `3f61cbd` is verified live on the canonical Vercel site.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

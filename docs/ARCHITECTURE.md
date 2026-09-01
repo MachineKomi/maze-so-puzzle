@@ -171,10 +171,10 @@ state.
   browser gate passes. The refreshed unsigned Windows portable executable and
   NSIS installer byte-match the final Tauri outputs, report version 0.10.3, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
-  five-second smoke launch with the correct title. Public Vercel promotion,
-  clean-machine installation, signing, and physical-device feel/listening remain
-  separate 0.10.3 release checks. The canonical 0.10.2 deployment stays as the
-  latest live record until 0.10.3 is pushed and smoke-tested in production.
+  five-second smoke launch with the correct title. GitHub `main` commit
+  `3f61cbd` is live on the canonical Vercel site and passed the focused 0.10.3
+  production smoke. Clean-machine installation, signing, and physical-device
+  feel/listening remain separate release checks.
 - AI-generated source art and exact prompts are recorded in
   `docs/AI_ASSET_PROMPTS.md`; source-only masters are kept outside `public/` so
   they do not inflate deployments.

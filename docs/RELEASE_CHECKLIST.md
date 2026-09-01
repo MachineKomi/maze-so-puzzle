@@ -139,8 +139,10 @@ and landscape-phone 844×390 checks have no document overflow or overlapping UI.
 Browser warning/error logs are clear and every visible image loaded. The title
 and Adventure Book reset entries opened the warning modal correctly; the
 destructive confirmation was deliberately not clicked. The pickup toast and v4
-front-only cage were also visually verified. Physical-device feel and canonical
-deployment promotion remain separate checks.
+front-only cage were also visually verified. GitHub `main` commit `3f61cbd`
+auto-deployed successfully: the canonical 0.10.3 site passed focused 1194×834
+and 844×390 bounds, tester-picker, visible-image, v4-cage, and browser-log checks.
+Physical-device feel remains separate.
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
@@ -200,9 +202,9 @@ deployment promotion remain separate checks.
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [x] On the historical 0.10.2 canonical URL, the exact `?debug=mazes` query opens the
-  direct picker and all twelve authored mazes are listed; the normal build-label
-  entry and non-debug isolation remain covered locally and by the prior public smoke.
+- [x] On the canonical 0.10.3 URL, the exact `?debug=mazes` query opens the direct
+  picker and all twelve authored mazes are listed; the title reports playable
+  build 0.10.3 and the focused public smoke has no warning/error logs.
 - [ ] Complete a canonical tester run and reconfirm that rewards, records,
   unlocks, active-run recovery, and progress stay unchanged.
 - [ ] Each maze's authored 1–5 pets are optional for the ordinary exit and all

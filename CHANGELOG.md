@@ -58,9 +58,10 @@ start the whole adventure again.
 - Both staged files byte-match the final Tauri outputs and report file/product
   version 0.10.3. The portable app remained responsive through a five-second
   smoke launch and displayed the correct title.
-- Production Vercel promotion and physical-device smoke testing remain release
-  steps. The canonical site continues to report 0.10.2 until the verified
-  0.10.3 source is pushed and its live deployment passes the smoke matrix.
+- GitHub `main` commit `3f61cbd` auto-deployed to the canonical Vercel site.
+  The live 0.10.3 label, twelve-maze tester picker, iPad and landscape-phone
+  bounds, v4 cage asset, visible images, and production browser logs passed the
+  focused smoke. Physical-device play testing remains a separate release step.
 
 ## 0.10.2 - 2026-09-01
 
