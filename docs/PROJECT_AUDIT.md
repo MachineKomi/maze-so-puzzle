@@ -1,7 +1,7 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: 0.10.1 web/Windows release candidate
+Audited build: 0.10.1 web/Windows playable release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
@@ -12,8 +12,9 @@ across 18 files and the strict TypeScript/Vite production build. Local 1024 ×
 cards, hint dialog, non-destructive stronger-enemy dialog, and poison/Antidote
 Leaf route without card overlap or document overflow. The new three-bash combat
 timeline and 540 ms Spring Boots hop pass focused logic/audio and local browser
-timing checks. Locked-Tauri compilation and Windows packaging pass; GitHub/Vercel
-promotion and the final public smoke remain.
+timing checks. Locked-Tauri compilation and Windows packaging pass. GitHub
+`main` commit `6b3a64c` auto-deployed successfully through Vercel, and the
+canonical 0.10.1 build passed the focused public smoke.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
@@ -28,7 +29,7 @@ historical evidence.
 | iPad-size layout | Phone/iPad maze panels use almost all available height; coarse-pointer actions retain 44 px targets | Local 0.10.0 passed at 1024×768; objective, 1–5 friend card, bag, minimap, controls, level dots, and utility row have non-overlapping rectangles. Physical-iPad gesture/pinch/listening checks remain |
 | Pointer movement | All input paths move once immediately, allow 220 ms to release for one square, then accelerate smoothly from 160 ms to a capped 100 ms repeat; direction changes reset the ramp | Focused cadence and corner regressions cover tile intent, queued steering, approach-direction choice, wobble tolerance, and strict one-tile safety; final physical-touch feel remains |
 | Exploration policy | The shared rule enables a 6 x 6 camera and fog minimap whenever either maze dimension exceeds 6; even-window bias, edge clamping, and reveal accumulation are unit-covered | Focused tests pass and the public 15 x 15 camera rendered the 6 x 6 view; the complete follow/minimap movement pass remains manual |
-| Tester access | The title build label opens a direct twelve-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Local and canonical 0.10.0 exact-query checks show all twelve entries. Full canonical completion/isolation remains a manual follow-up |
+| Tester access | The title build label opens a direct twelve-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Canonical 0.10.1 exact-query check shows all twelve entries. Full canonical completion/isolation remains a manual follow-up |
 | Terrain geometry | Maze terrain is one globally aligned SVG surface with connected wall/water/lava regions, rounded convex/concave bends, periodic textures, a camera gutter, stronger floor/wall contrast, and no hazard outlines or shadows; holes use flat transparent overlays | All ten floor/wall files pass 1024 px opacity/repeat-boundary checks after Poisson correction; local Maze 2, garden, and ruin sampling found no seams, mirrored bands, or ghost masonry |
 | Visual catalogue | Ten unique terrain themes with dominant-colour plus measured-lightness compatibility, five weapons, five friendly enemy looks, eight pet species, four opaque AI-generated front cage layers, Spring Boots, a ground-hole overlay, and two sparse terrain dressings are selected through typed IDs and local assets | Tests reject gold with green/sage or rose in both directions, require every floor to lead its wall by at least eight lightness points, and cover both floor- and wall-dressing preload; both dressing files pass 512 px RGBA/transparent-edge checks |
 | Pet followers | Rescued friends occupy distinct recent visible footprints behind Ame with bounded loop-free trail state | Pure trail regressions pass and one rescued follower was verified through normal local controls; multi-follower, reduced-motion, and physical-device feel checks remain |
@@ -36,7 +37,7 @@ historical evidence.
 | Surprise Maze variants | Generated presentation remains deterministic; size varies by seed across unlocked odd 9–29 bands, water/lava form connected post-boots clusters, and eligible adventure seeds add branch prerequisites plus post-Spring-Boots holes | A 500-seed adventure stress audit spanning every odd size found zero ordinary/perfect failures; 353 samples had exactly one Spring Boots pickup before connected holes |
 | Optional Power puzzles | Wishing Woods, Ame's Grand Parade, Springstep Sky Hollow, and Lanternlight separate progression/rescue requirements across branches | Solver-verified ordinary/all-pets routes are 114/148, 116/136, 190/214, and 290/322 steps respectively |
 | Audio and presentations | Five full OST songs are assigned per maze with stable session mapping and immediate-repeat avoidance; jump, rescue, clash, sparks, impact, Power, and win cues support short event presentations | The four-layer jump boing and semantic three-clash sound schedule have focused tests. Local browser timing observed all three contacts, a conserved 1→0 / 2→3 Power transfer, the 2.22 s cleanup, and no runtime warning after a clean reload. Physical listening/reduced-motion feel remains manual |
-| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Canonical 0.10.0 remains the last promoted baseline while the verified 0.10.1 source waits for its release commit and production smoke |
+| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Commit `6b3a64c` auto-deployed Ready; the canonical alias reports 0.10.1, lists all twelve tester mazes, fits 1280×720 exactly, completes the focused combat route with conserved Power, and has clear warning/error logs |
 | Desktop artifacts | Unsigned 0.10.1 portable executable and NSIS installer are staged in `release/` | Both match final Tauri outputs, report 0.10.1, are SHA-256 recorded, and the portable app stayed responsive with the correct title for five seconds; clean-machine install and signing remain |
 
 ## Historical 0.5.1 implementation status
@@ -342,8 +343,8 @@ The 0.10.1 source passes 247 tests across 18 files, strict TypeScript, and the
 Vite production build. The local 1024×768 and 844×390 responsive checks are
 green. The dependency audit/tree and locked Cargo check pass, and the unsigned
 0.10.1 Windows pair is built, versioned, source-compared, hashed, and
-smoke-launched. GitHub/Vercel promotion still remains; the prior 0.10.0 public
-record is historical evidence only. Unchecked
+smoke-launched. GitHub `main` commit `6b3a64c` is live through the Vercel Hobby
+production project, and the canonical 0.10.1 focused smoke passes. Unchecked
 physical-device, listening/feel, broader production, clean-install, and signing
 items in `RELEASE_CHECKLIST.md` remain requirements.
 
@@ -402,8 +403,7 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
 - Current source metadata and `release/` records are aligned at 0.10.1. GitHub
-  and Vercel still serve the previous baseline until the candidate is committed,
-  promoted, and smoke-tested.
+  `main` and the canonical Vercel deployment serve the same playable build.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

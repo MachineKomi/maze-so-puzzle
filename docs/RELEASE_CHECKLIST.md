@@ -12,8 +12,8 @@ The zero-vulnerability dependency audit/tree, locked Tauri compile, Windows
 packaging/source comparison/hash/smoke launch, repeat-boundary/alpha checks,
 local 1024 × 768 and 844 × 390 previews, exact 65-step poison route,
 non-destructive stronger-enemy dialog, three-bash conserved Power transfer,
-540 ms jump arc, layered boing, source comparison, and five-second portable
-smoke pass. GitHub/Vercel promotion and the canonical 0.10.1 smoke remain.
+540 ms jump arc, layered boing, source comparison, five-second portable smoke,
+GitHub/Vercel promotion, and the focused canonical 0.10.1 smoke pass.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed. The
 completed 0.10.0, 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a historical baseline.
@@ -133,12 +133,13 @@ npm run preview
 ```
 
 Production smoke record (2026-09-01): the canonical URL serves playable build
-0.10.0 from GitHub `main` commit `76fdb6c`. The exact debug query opens the
-twelve-maze picker, Maze 12 opens with five friends and its 6 × 6 camera, the
-1024 × 768 document exactly matches its viewport, and the production browser
-error/warning logs are clear. The 844 × 390 exact-fit phone check and the full
-65-step Antidote Leaf/connected-poison route also pass against the same local
-production bundle; physical-device feel remains a human test.
+0.10.1 from GitHub `main` commit `6b3a64c`. The exact debug query opens the
+twelve-maze picker, the 1280 × 720 document exactly matches its viewport, and a
+focused Shiny Sword replay showed the extended battle, enemy Power reaching
+zero, and Ame receiving the same Power. Production browser warning/error logs
+remain clear. The earlier 1024 × 768 canonical, 844 × 390 local, and full
+65-step Antidote Leaf/connected-poison checks remain valid historical evidence;
+physical-device feel remains a human test.
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
@@ -196,7 +197,7 @@ production bundle; physical-device feel remains a human test.
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [x] On the 0.10.0 canonical URL, the exact `?debug=mazes` query opens the
+- [x] On the 0.10.1 canonical URL, the exact `?debug=mazes` query opens the
   direct picker and all twelve authored mazes are listed; the normal build-label
   entry and non-debug isolation remain covered locally and by the prior public smoke.
 - [ ] Complete a canonical tester run and reconfirm that rewards, records,
