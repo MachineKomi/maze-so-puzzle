@@ -11,8 +11,9 @@ build pass. Source metadata and poison/Antidote Leaf provenance are aligned.
 The zero-vulnerability dependency audit/tree, locked Tauri compile, Windows
 packaging/source comparison/hash/smoke launch, repeat-boundary/alpha checks,
 local 1024 × 768 and 844 × 390 previews, exact 65-step poison route, and
-non-destructive stronger-enemy dialog pass. GitHub/Vercel promotion and the
-canonical production smoke are the remaining automated release steps.
+non-destructive stronger-enemy dialog pass. Commit `76fdb6c` is on GitHub
+`main`; Vercel reports the production deployment ready, and the canonical
+0.10.0 build/picker/Maze 12/error-log smoke passes.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed. The
 completed 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a historical baseline.
@@ -38,15 +39,14 @@ completed 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a historical bas
   validate their 1024 px opacity/repeat boundaries. Validate both 512 px RGBA
   garden/ivy dressings and transparent repeat edges; retain their ImageGen
   masters, exact prompts, output IDs, and deterministic processing scripts.
-- [x] Confirm the ten story mazes each have exactly one weapon and three unique
-  pets, and the full campaign covers five weapons, five friendly enemy looks,
-  eight species, and four cage styles.
+- [x] Confirm all twelve story mazes each have exactly one weapon, carry the
+  authored 1–5 friend total, and collectively cover five weapons, five friendly
+  enemy looks, eight species, and four cage styles.
 - [x] Confirm the authored size sequence is 9, 11, 13, 15, 13, 15, 17, 17, 19,
-  and 25, with Rainbow Picnic before the smaller Toasty Toes breather and
-  Springstep Sky Hollow before Lanternlight Labyrinth.
+  25, 21, and 23, with deliberately smaller breathers among the large mazes.
 - [x] Confirm later authored levels put selected prerequisites and optional
   guardians on separate branches, Spring Boots precede every required hole run,
-  and both ordinary and all-three-rescue routes remain solver-validated.
+  and both ordinary and every-friend rescue routes remain solver-validated.
 - [x] Confirm every maze larger than 6 tiles renders a 6 x 6 player-centred
   camera and persistent fog-of-war minimap without changing full-grid engine
   behaviour.
@@ -55,7 +55,7 @@ completed 0.9.1, 0.9.0, and 0.8.0 evidence below is retained as a historical bas
   matching splash boots, and place one- or two-square hole runs only after
   Spring Boots while preserving ordinary/perfect routes.
 - [x] Confirm the title-screen build label and exact `?debug=mazes` query expose
-  the direct ten-maze tester picker, and tester completion cannot write rewards,
+  the direct twelve-maze tester picker, and tester completion cannot write rewards,
   records, unlocks, active sessions, or progress.
 - [x] Update `README.md`, architecture, music, asset, privacy, audit, release, and
   Vercel documentation for 0.10.0 while leaving unfinished release gates clear.
@@ -91,10 +91,10 @@ npm run check:desktop
 - [x] `npm run desktop:build` produces the 0.10.0 release executable and NSIS
   installer; both are staged, source-compared, version-checked, and hashed, and
   the portable app passes its five-second smoke launch.
-- [x] Automated level checks validate all ten story mazes in the 9, 11, 13, 15,
-  13, 15, 17, 17, 19, and 25 tile sequence, with separate ordinary and
-  all-three-rescues solutions, one weapon, and three unique known pet species in
-  every maze.
+- [x] Automated level checks validate all twelve story mazes in the 9, 11, 13,
+  15, 13, 15, 17, 17, 19, 25, 21, and 23 tile sequence, with separate ordinary
+  and every-friend solutions, exactly one weapon, and the intended 1–5 distinct
+  pet species in each maze.
 - [x] Authored-level checks validate the optional Wishing Woods guardian route
   and solver-verified out-and-back progression in Wishing Woods, Ame's Grand
   Parade, Springstep Sky Hollow, and Lanternlight Labyrinth. Their ordinary and
@@ -114,7 +114,7 @@ npm run check:desktop
   mouse/touch pointer capture, repeat timing, and cancellation still require the
   device checks below.
 - [x] Repeat the relevant checks after the integrated 0.10.0 source changes
-  (`npm run check`: 215 of 215 tests across 16 files plus the production build).
+  (`npm run check`: 239 of 239 tests across 17 files plus the production build).
 - [x] Repeat `npm run check` once more if browser QA or release packaging causes
   any additional source, asset, configuration, or lockfile change.
 
@@ -127,22 +127,21 @@ npm run preview
 ```
 
 Production smoke record (2026-09-01): the canonical URL serves playable build
-0.9.1 from GitHub `main`. The build-label button and exact debug query each open
-the ten-maze picker. Maze 2 renders rose paths against darker mossy ruins;
-Rainbow Picnic and Lanternlight render their sparse garden/ivy treatment without
-visible seams, cross-bands, or ghost masonry. At 1024 x 768 the board is 534 px
-square; at 667 x 375 it is 347 px square. Both documents exactly match their
-viewport, one keyboard step updates position and singular step wording, and the
-browser log remains clear.
+0.10.0 from GitHub `main` commit `76fdb6c`. The exact debug query opens the
+twelve-maze picker, Maze 12 opens with five friends and its 6 × 6 camera, the
+1024 × 768 document exactly matches its viewport, and the production browser
+error/warning logs are clear. The 844 × 390 exact-fit phone check and the full
+65-step Antidote Leaf/connected-poison route also pass against the same local
+production bundle; physical-device feel remains a human test.
 
 - [x] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [x] 1280 x 720: default layout is balanced and has no page overflow.
 - [x] 667 x 375 and 844 x 390: the phone stage, safe viewport, page overflow,
-  board overlap, and minimum-control layout baseline passes; local and canonical
-  0.9.1 reconfirm 667 x 375.
+  board overlap, and minimum-control layout baseline passes locally; 0.9.1
+  canonical checks remain historical evidence.
 - [x] 740 x 360: the same phone-layout checks pass locally.
-- [x] 1024 x 768 local and canonical 0.9.1: the iPad-size layout uses a 534 px
-  board with no page overflow, sidebar overlap, or maze/control overlap.
+- [x] 1024 x 768 local and canonical 0.10.0: the iPad-size layout has no page
+  overflow, sidebar overlap, or maze/control overlap.
 - [x] 1180 x 820: the same iPad-size layout checks pass locally.
 - [x] 1366 x 768 and 1920 x 1080: the board remains square and the layout has no
   page overflow; production-art sampling remains part of the public smoke.
@@ -167,7 +166,7 @@ browser log remains clear.
   steers, recentering or release stops queued movement, and right/middle click do
   not move Ame.
 - [ ] Try shallow wall bends: the one-tile assist may take only a safe ordinary
-  floor step around the intended wall. It must not pathfind, enter water/lava,
+  floor step around the intended wall. It must not pathfind, enter water/lava/poison,
   open or bypass a door, or challenge/bypass a foe.
 - [ ] On-screen arrows work with mouse and touch input, including press-and-hold
   travel and release/cancel cleanup.
@@ -184,20 +183,20 @@ browser log remains clear.
 - [ ] Start several different mazes and confirm the five full BGM tracks vary by
   maze without an immediate repeat, revisiting the same maze keeps its assignment
   for that session, and the short friendship cue never loops as background music.
-- [ ] All ten story levels can be completed manually; also complete several
+- [ ] All twelve story levels can be completed manually; also complete several
   surprise mazes and compare observed routes with the validated solver results.
 - [ ] In both an early 9 x 9 maze and later large mazes, the main view stays
   6 x 6, follows Ame without exposing off-camera objects, clamps cleanly at map
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [x] On the 0.9.1 canonical URL, the discreet build-label button opens the direct
-  picker. The exact `?debug=mazes` query opens it automatically, another query
-  does not, and all ten authored mazes are listed with tester-preview labels.
+- [x] On the 0.10.0 canonical URL, the exact `?debug=mazes` query opens the
+  direct picker and all twelve authored mazes are listed; the normal build-label
+  entry and non-debug isolation remain covered locally and by the prior public smoke.
 - [ ] Complete a canonical tester run and reconfirm that rewards, records,
   unlocks, active-run recovery, and progress stay unchanged.
-- [ ] All three pets are optional for the ordinary exit and jointly rescuable
-  for the perfect reward.
+- [ ] Each maze's authored 1–5 pets are optional for the ordinary exit and all
+  are jointly rescuable for that maze's perfect reward.
 - [ ] Sample every story theme and generated variant on the production URL:
   paired materials tile cleanly, enemy/pet/cage art matches the UI, inventory is
   picture-led, and Ame holds the level's selected weapon after collection. No
@@ -207,7 +206,7 @@ browser log remains clear.
   of its pet without a baked-in animal, background rectangle, or missing bars.
 - [x] Locally verify the cage source/opacity and front-layer effect through normal
   controls; keep the all-four-style production-URL sample above pending.
-- [ ] Rescue one, two, and three animals, then move and backtrack: each rescued
+- [ ] Rescue one through five animals, then move and backtrack: each rescued
   friend follows on a distinct recent visible footprint, never blocks movement,
   and reduced-motion mode removes decorative follower animation.
 - [x] Rescue one animal through normal local controls and verify that it follows
@@ -227,9 +226,10 @@ browser log remains clear.
 - [ ] Rescue a pet: the cage front opens, the pet hops with hearts/sparks, and
   exactly one follower joins after the handoff. Repeat with reduced motion and
   navigate away mid-effect; no duplicate follower or stale overlay may remain.
-- [x] A local underpowered guardian check shows the same clash/sparks, counts the
-  guardian from Power 9 to 15, suppresses duplicate sprites, then presents the
-  gentle retry card. The automated engine check retains the exact reset rule.
+- [x] A local underpowered guardian check presents the non-dismissible **Too
+  strong!** comparison without beginning combat. The attempted move preserves
+  Ame's position, Power, step count, inventory, and the enemy; the only action
+  returns directly to safe play for backtracking.
 - [ ] Existing schema-v1 and schema-v2 saves migrate safely to schema v3,
   malformed data fails gently, and unknown historical species/source facts are
   not invented.
