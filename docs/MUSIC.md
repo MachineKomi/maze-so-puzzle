@@ -33,6 +33,9 @@ map only when their corresponding gameplay event exists.
 - The single Sound control mutes both music and synthesized effects. While
   muted, background music retains its position; unmuting from the button can
   resume immediately because that button press is also a valid user gesture.
+- Hiding or backgrounding the page pauses confirmed active playback. Returning
+  resumes only that exact still-current player; mute, stop, track replacement,
+  disposal, failed playback, and browser rejection all cancel the resume safely.
 - Moving between title, story, and Surprise Maze contexts disposes the previous
   media element before starting the new selection. Application cleanup pauses
   playback and releases its source request.
@@ -59,5 +62,5 @@ npm test -- --run src/music.test.ts
 ```
 
 The tests cover gesture-only startup, looping configuration, mute state,
-rejected or unavailable media, stop/reuse, disposal, server-side safety, and
-custom track configuration.
+page-visibility pause/resume races, rejected or unavailable media, stop/reuse,
+disposal, server-side safety, and custom track configuration.

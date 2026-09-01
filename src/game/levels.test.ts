@@ -36,7 +36,7 @@ describe("curated campaign levels", () => {
       90,
       108,
       114,
-      288,
+      280,
     ]);
   });
 
@@ -81,9 +81,9 @@ describe("curated campaign levels", () => {
       requireAllAnimals: true,
     });
 
-    expect(ordinaryWin.directions).toHaveLength(288);
+    expect(ordinaryWin.directions).toHaveLength(280);
     expect(ordinaryWin.finalState).toMatchObject({
-      power: 27,
+      power: 29,
       hasSword: true,
       hasBoots: true,
       keys: ["blue", "red", "yellow"],
@@ -91,9 +91,83 @@ describe("curated campaign levels", () => {
     });
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(4);
     expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(3);
-    expect(perfectRescueWin.directions).toHaveLength(320);
+    expect(perfectRescueWin.directions).toHaveLength(312);
     expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(3);
+
+    let state = createInitialGameState(LANTERNLIGHT_LABYRINTH_LEVEL);
+    const progressionEvents: string[] = [];
+    for (const direction of ordinaryWin.directions) {
+      const result = movePlayer(LANTERNLIGHT_LABYRINTH_LEVEL, state, direction);
+      state = result.state;
+      progressionEvents.push(
+        ...result.events
+          .filter((event) => event.type !== "moved" && event.type !== "level-won")
+          .map((event) => event.type),
+      );
+    }
+    expect(progressionEvents).toEqual([
+      "sword-collected",
+      "enemy-defeated",
+      "potion-collected",
+      "key-collected",
+      "door-opened",
+      "boots-collected",
+      "enemy-defeated",
+      "key-collected",
+      "door-opened",
+      "enemy-defeated",
+      "key-collected",
+      "door-opened",
+      "potion-collected",
+      "enemy-defeated",
+    ]);
   });
+
+  it.each(CURATED_LEVELS.map((level) => [level.name, level] as const))(
+    "%s never exposes an underpowered combat after Ame finds her sword",
+    (_name, level) => {
+      const initial = createInitialGameState(level);
+      const queue = [initial];
+      const signature = (state: typeof initial): string => [
+        state.position.x,
+        state.position.y,
+        state.power,
+        state.hasSword ? 1 : 0,
+        state.hasBoots ? 1 : 0,
+        state.keys.join(","),
+        state.collectedObjectIds.join(","),
+        state.rescuedAnimalIds.join(","),
+        state.defeatedEnemyIds.join(","),
+        state.openedDoorIds.join(","),
+      ].join("|");
+      const seen = new Set([signature(initial)]);
+
+      for (let head = 0; head < queue.length; head += 1) {
+        const current = queue[head];
+        if (current === undefined) {
+          continue;
+        }
+
+        for (const direction of ["up", "down", "left", "right"] as const) {
+          const result = movePlayer(level, current, direction);
+          const loss = result.events.find((event) => event.type === "combat-lost");
+          if (loss?.type === "combat-lost") {
+            throw new Error(
+              `${level.id} exposes enemy ${loss.enemyPower} to Ame at Power ${loss.playerPower}.`,
+            );
+          }
+
+          if (result.moved && result.state.status === "playing") {
+            const nextSignature = signature(result.state);
+            if (!seen.has(nextSignature)) {
+              seen.add(nextSignature);
+              queue.push(result.state);
+            }
+          }
+        }
+      }
+    },
+  );
 
   it("keeps every required gate on the winning route", () => {
     const expectedKinds = [

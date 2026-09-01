@@ -4,6 +4,48 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.5.1 - 2026-09-01
+
+This child-first polish build makes the opening easier to understand, the long
+exploration maze safer to pause, and repeated travel quicker and more pleasant.
+
+### Added
+
+- Refresh-safe active-run saves for authored story mazes. Ame's exact position,
+  Power, inventory, rescued friends, step count, and explored minimap tiles can
+  now be resumed after a refresh, tab eviction, browser close, or desktop-app
+  restart. Corrupt, stale, generated, and tester snapshots fail closed.
+- A gentle first-step coach that highlights the opening maze's safe arrow and
+  then disappears as soon as Ame moves.
+- A bright 7 x 7 camera outline on the fog-of-war minimap plus an initial
+  "Walk to reveal the maze" prompt.
+- A Windows CI job that runs the locked Tauri/Rust compile check alongside the
+  existing browser test-and-build gate.
+
+### Changed
+
+- Enlarged the on-screen direction pad to 44 px minimum targets for coarse
+  pointers, with touch-specific instructions and a compact surrounding layout.
+- Shortened movement and held-direction cadence from 82 ms to 64 ms, while
+  keeping one-square taps and deterministic direction buffering.
+- Kept the current maze objective visible after ordinary footsteps instead of
+  replacing it with repetitive status copy. Important pickups, rescues, doors,
+  combat, and bumps still announce their own feedback and sounds.
+- Clarified the Power rule throughout the interface: matching or beating a
+  goblin wins, and the goblin's Power joins Ame.
+- Condensed the full first-clear celebration so its animals, gold, new stickers,
+  and buttons fit at 1280 x 720 without a scrollbar.
+- Rebalanced Lanternlight Labyrinth so its required early potion cannot be
+  bypassed before the Power 5 goblin, and moved its final Power 9 challenge next
+  to the exit. The ordinary route is now 280 steps and the perfect-rescue route
+  312 steps.
+- Replaced eager all-art warming with deduplicated per-level and idle reward-art
+  preloads, reducing the image burst when play first begins.
+- Paused background music automatically while the page or app is hidden and
+  resumed only the same still-active, unmuted track when play returns.
+- Added an exhaustive authored-level regression proving that no reachable
+  sword-equipped game state can enter an underpowered combat trap.
+
 ## 0.5.0 - 2026-09-01
 
 This exploration build keeps the early story mazes large and readable, then

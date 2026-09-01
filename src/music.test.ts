@@ -9,13 +9,18 @@ class FakeAudio {
   preload = "";
   volume = 1;
   muted = false;
+  paused = true;
   currentTime = 12;
-  readonly play = vi.fn(() =>
-    playResult === "resolve"
-      ? Promise.resolve()
-      : Promise.reject(new DOMException("Track unavailable", "NotSupportedError")),
-  );
-  readonly pause = vi.fn();
+  readonly play = vi.fn(() => {
+    if (playResult === "reject") {
+      return Promise.reject(new DOMException("Track unavailable", "NotSupportedError"));
+    }
+    this.paused = false;
+    return Promise.resolve();
+  });
+  readonly pause = vi.fn(() => {
+    this.paused = true;
+  });
   readonly load = vi.fn();
   readonly setAttribute = vi.fn();
   readonly removeAttribute = vi.fn((name: string) => {
@@ -137,5 +142,109 @@ describe("background music", () => {
 
     expect(audioInstances[0]?.src).toBe("/music/ame-theme.ogg");
     expect(audioInstances[0]?.volume).toBe(1);
+  });
+
+  it("pauses active music while hidden and resumes the same current player", async () => {
+    installAudio();
+    const { setMusicPageHidden, startMusicFromUserGesture } = await import("./music");
+    await startMusicFromUserGesture();
+    const audio = audioInstances[0];
+
+    setMusicPageHidden(true);
+    expect(audio?.pause).toHaveBeenCalledOnce();
+    expect(audio?.paused).toBe(true);
+
+    setMusicPageHidden(false);
+    await Promise.resolve();
+    expect(audioInstances).toHaveLength(1);
+    expect(audio?.play).toHaveBeenCalledTimes(2);
+    expect(audio?.paused).toBe(false);
+  });
+
+  it("does not turn failed or explicitly stopped playback into visibility autoplay", async () => {
+    installAudio();
+    playResult = "reject";
+    const { setMusicPageHidden, startMusicFromUserGesture, stopMusic } = await import("./music");
+    await startMusicFromUserGesture();
+    const failedAudio = audioInstances[0];
+
+    setMusicPageHidden(true);
+    setMusicPageHidden(false);
+    await Promise.resolve();
+    expect(failedAudio?.play).toHaveBeenCalledOnce();
+
+    playResult = "resolve";
+    await startMusicFromUserGesture();
+    stopMusic();
+    setMusicPageHidden(true);
+    setMusicPageHidden(false);
+    await Promise.resolve();
+    expect(failedAudio?.play).toHaveBeenCalledTimes(2);
+  });
+
+  it("does not resume visibility-paused music while sound is muted", async () => {
+    installAudio();
+    const { setMusicMuted, setMusicPageHidden, startMusicFromUserGesture } = await import("./music");
+    await startMusicFromUserGesture();
+    const audio = audioInstances[0];
+
+    setMusicPageHidden(true);
+    setMusicMuted(true);
+    setMusicPageHidden(false);
+    await Promise.resolve();
+
+    expect(audio?.play).toHaveBeenCalledOnce();
+    expect(audio?.paused).toBe(true);
+  });
+
+  it("never resumes a visibility-paused player after disposal or track replacement", async () => {
+    installAudio();
+    const {
+      configureMusic,
+      disposeMusic,
+      setMusicPageHidden,
+      startMusicFromUserGesture,
+    } = await import("./music");
+    await startMusicFromUserGesture();
+    const disposedAudio = audioInstances[0];
+    setMusicPageHidden(true);
+    disposeMusic();
+    setMusicPageHidden(false);
+    await Promise.resolve();
+    expect(disposedAudio?.play).toHaveBeenCalledOnce();
+
+    await startMusicFromUserGesture();
+    const replacedAudio = audioInstances[1];
+    setMusicPageHidden(true);
+    configureMusic({ trackUrl: "/music/replacement.ogg" });
+    setMusicPageHidden(false);
+    await Promise.resolve();
+
+    expect(replacedAudio?.play).toHaveBeenCalledOnce();
+    expect(audioInstances).toHaveLength(2);
+  });
+
+  it("keeps visibility changes harmless when media accessors or methods throw", async () => {
+    installAudio();
+    const { setMusicPageHidden, startMusicFromUserGesture } = await import("./music");
+    await startMusicFromUserGesture();
+    const audio = audioInstances[0];
+    expect(audio).toBeDefined();
+    if (!audio) return;
+
+    Object.defineProperty(audio, "paused", {
+      configurable: true,
+      get: () => { throw new DOMException("Detached", "InvalidStateError"); },
+    });
+    audio.pause.mockImplementationOnce(() => {
+      throw new DOMException("Detached", "InvalidStateError");
+    });
+    expect(() => setMusicPageHidden(true)).not.toThrow();
+
+    audio.play.mockImplementationOnce(() => {
+      throw new DOMException("Blocked", "NotAllowedError");
+    });
+    expect(() => setMusicPageHidden(false)).not.toThrow();
+    await Promise.resolve();
   });
 });

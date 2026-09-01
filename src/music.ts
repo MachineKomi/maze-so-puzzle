@@ -19,6 +19,12 @@ let volume = DEFAULT_MUSIC_VOLUME;
 let muted = false;
 let player: HTMLAudioElement | undefined;
 let generation = 0;
+let pageHidden = false;
+let activelyPlayingPlayer: HTMLAudioElement | undefined;
+let visibilityPausedPlayer: {
+  readonly audio: HTMLAudioElement;
+  readonly generation: number;
+} | undefined;
 
 function clampVolume(value: number): number {
   if (!Number.isFinite(value)) return DEFAULT_MUSIC_VOLUME;
@@ -77,7 +83,7 @@ export function configureMusic(options: MusicOptions = {}): void {
  */
 export async function startMusicFromUserGesture(): Promise<boolean> {
   const audio = player ?? createPlayer();
-  if (!audio) return false;
+  if (!audio || pageHidden) return false;
 
   audio.loop = true;
   audio.volume = volume;
@@ -90,6 +96,13 @@ export async function startMusicFromUserGesture(): Promise<boolean> {
       safelyPause(audio);
       return false;
     }
+    if (pageHidden) {
+      activelyPlayingPlayer = undefined;
+      visibilityPausedPlayer = { audio, generation: attemptGeneration };
+      safelyPause(audio);
+      return true;
+    }
+    activelyPlayingPlayer = audio;
     return true;
   } catch {
     // Includes autoplay denial, an absent file, and unsupported codecs.
@@ -103,9 +116,69 @@ export function setMusicMuted(nextMuted: boolean): void {
   if (player) player.muted = nextMuted;
 }
 
+async function resumeVisibilityPausedPlayer(
+  audio: HTMLAudioElement,
+  expectedGeneration: number,
+): Promise<void> {
+  try {
+    await audio.play();
+    if (
+      expectedGeneration !== generation
+      || player !== audio
+      || muted
+      || pageHidden
+    ) {
+      safelyPause(audio);
+      if (pageHidden && !muted && expectedGeneration === generation && player === audio) {
+        visibilityPausedPlayer = { audio, generation: expectedGeneration };
+      }
+      return;
+    }
+    activelyPlayingPlayer = audio;
+  } catch {
+    // Visibility-driven playback is optional and browser policy may reject it.
+  }
+}
+
+/**
+ * Pause active BGM while its page is hidden, then resume only that exact
+ * still-current player when the page returns. This never creates a player or
+ * turns a previously stopped/failed track into autoplay.
+ */
+export function setMusicPageHidden(hidden: boolean): void {
+  if (pageHidden === hidden) return;
+  pageHidden = hidden;
+
+  if (hidden) {
+    const audio = player;
+    let wasPlaying = audio !== undefined && activelyPlayingPlayer === audio;
+    if (audio && wasPlaying) {
+      try {
+        wasPlaying = !audio.paused;
+      } catch {
+        // The successful play result tracked above is the safe fallback.
+      }
+    }
+    activelyPlayingPlayer = undefined;
+    visibilityPausedPlayer = wasPlaying && audio
+      ? { audio, generation }
+      : undefined;
+    if (wasPlaying && audio) safelyPause(audio);
+    return;
+  }
+
+  const paused = visibilityPausedPlayer;
+  visibilityPausedPlayer = undefined;
+  if (!paused || muted || paused.generation !== generation || player !== paused.audio) return;
+  void resumeVisibilityPausedPlayer(paused.audio, paused.generation);
+}
+
 /** Pauses and rewinds while retaining the reusable audio element. */
 export function stopMusic(): void {
   if (!player) return;
+  generation += 1;
+  activelyPlayingPlayer = undefined;
+  visibilityPausedPlayer = undefined;
   safelyPause(player);
   try {
     player.currentTime = 0;
@@ -119,6 +192,8 @@ export function disposeMusic(): void {
   generation += 1;
   const audio = player;
   player = undefined;
+  activelyPlayingPlayer = undefined;
+  visibilityPausedPlayer = undefined;
   if (!audio) return;
 
   safelyPause(audio);

@@ -6,19 +6,19 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.5.0: automated verification, targeted production-browser checks,
+Status for 0.5.1: automated verification, targeted production-browser checks,
 Tauri packaging, staging, hash comparison, and the portable smoke launch are
 complete. Unchecked clean-machine, device, listening, signing, and broad manual
 items below remain deliberately unclaimed.
 
 ## 1. Prepare
 
-- [x] Confirm the intended 0.5.0 version in `package.json`, `package-lock.json`,
+- [x] Confirm the intended 0.5.1 version in `package.json`, `package-lock.json`,
   `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json`.
 - [x] Confirm the title screen displays the optimized
   `public/assets/title-background-v1.webp`, while the PNG master remains at
   `docs/source-assets/title-background-v1.png` for provenance and future edits.
-- [x] Confirm the 0.5.0 bundle contains the tiled terrain treatment, rounded inner
+- [x] Confirm the 0.5.1 bundle contains the tiled terrain treatment, rounded inner
   wall joins, icon-led rescue/inventory UI, sword-held Ame sprite, and locally
   bundled OST files documented for this build.
 - [x] Confirm Lanternlight Labyrinth renders a 7 x 7 player-centred camera and a
@@ -61,9 +61,9 @@ npm run desktop:build
 - [ ] Add focused controller automation for buffered turns, deterministic holds,
   modifier safety, focus/visibility cleanup, D-pad press-and-hold, and pointer
   cancellation. The previous 0.4.0 pass manually confirmed synchronous keyboard
-  movement and exactly one move per D-pad tap; repeat that check for 0.5.0.
+  movement and exactly one move per D-pad tap; repeat that check for 0.5.1.
 - [x] Repeat the relevant checks after final source changes (`npm run check`:
-  96 of 96 tests plus the production build).
+  122 of 122 tests plus the production build).
 
 ## 3. Browser play test
 
@@ -132,10 +132,10 @@ Expected build outputs:
 - `src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to
   Solve!_VERSION_x64-setup.exe`
 
-For this release, `VERSION` must resolve to `0.5.0`.
+For this release, `VERSION` must resolve to `0.5.1`.
 
 - [x] A hidden five-second launch of the staged portable executable remains
-  running and responsive and exposes the correct 0.5.0 window title.
+  running and responsive and exposes the correct game window title.
 
 - [ ] Launch the standalone executable on a clean Windows x64 account.
 - [ ] Install, launch, save progress, close, reopen, and uninstall the NSIS build.
@@ -151,8 +151,8 @@ For this release, `VERSION` must resolve to `0.5.0`.
 
 - [x] Copy only artifacts from the final successful build into `release/` using
   versioned filenames.
-- [x] Confirm the staged names are `Maze-so-Puzzle-0.5.0-portable.exe` and
-  `Maze-so-Puzzle-0.5.0-setup.exe`.
+- [x] Confirm the staged names are `Maze-so-Puzzle-0.5.1-portable.exe` and
+  `Maze-so-Puzzle-0.5.1-setup.exe`.
 - [x] Keep older artifacts clearly identified as archives, or move them to the
   chosen archive location; never present them as the current build.
 - [x] Generate final SHA-256 values after all copying (the current test build is unsigned):
@@ -163,9 +163,8 @@ Get-FileHash .\release\Maze-so-Puzzle-*-setup.exe -Algorithm SHA256
 ```
 
 - [x] Confirm the staged portable and installer hashes match their final Tauri
-  source artifacts byte-for-byte, then replace the archived 0.4.0 details in
-  `release/README.md` and `release/SHA256SUMS.txt` with the final 0.5.0 filenames,
-  sizes, and hashes.
+  source artifacts byte-for-byte, then record the final 0.5.1 filenames, sizes,
+  and hashes in `release/README.md` and `release/SHA256SUMS.txt`.
 
 - [ ] Verify the published hashes against newly downloaded copies.
 - [ ] Check filenames, sizes, version metadata, release notes, and download links.

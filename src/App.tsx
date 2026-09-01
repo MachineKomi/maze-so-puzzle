@@ -10,7 +10,12 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from "react";
-import { ASSETS, preloadGameArt } from "./assets";
+import {
+  ASSETS,
+  preloadAchievementArt,
+  preloadLevelArt,
+  preloadRewardArt,
+} from "./assets";
 import {
   createInitialGameState,
   getObjectAt,
@@ -63,9 +68,11 @@ import {
   configureMusic,
   disposeMusic,
   setMusicMuted,
+  setMusicPageHidden,
   startMusicFromUserGesture,
 } from "./music";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
+import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
   up: "▲",
@@ -86,11 +93,11 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   kitten: "Kitten",
 };
 
-const MOVE_CADENCE_MS = 82;
-const BUMP_CADENCE_MS = 55;
-const HELD_KEY_DELAY_MS = 140;
-const HELD_KEY_REPEAT_MS = 82;
-const BUILD_VERSION = "0.5.0";
+const MOVE_CADENCE_MS = 64;
+const BUMP_CADENCE_MS = 45;
+const HELD_KEY_DELAY_MS = 105;
+const HELD_KEY_REPEAT_MS = 64;
+const BUILD_VERSION = "0.5.1";
 const DEBUG_MAZE_QUERY = "mazes";
 
 interface Feedback {
@@ -383,18 +390,22 @@ const MazeTerrain = memo(function MazeTerrain({
 interface MiniMapProps {
   readonly level: LevelDefinition;
   readonly position: Point;
+  readonly camera: CameraWindow;
   readonly revealed: ReadonlySet<TileKey>;
   readonly currentView: ReadonlySet<TileKey>;
   readonly objects: readonly LevelObject[];
+  readonly newExplorer?: boolean;
   readonly compact?: boolean;
 }
 
 const MiniMap = memo(function MiniMap({
   level,
   position,
+  camera,
   revealed,
   currentView,
   objects,
+  newExplorer = false,
   compact = false,
 }: MiniMapProps) {
   const visibleObjectByTile = useMemo(() => new Map(
@@ -436,8 +447,19 @@ const MiniMap = memo(function MiniMap({
             </i>
           );
         }))}
+        <span
+          className="map-camera-frame"
+          style={{
+            left: `${(camera.left / level.width) * 100}%`,
+            top: `${(camera.top / level.height) * 100}%`,
+            width: `${(camera.width / level.width) * 100}%`,
+            height: `${(camera.height / level.height) * 100}%`,
+          }}
+        />
       </div>
-      <div className="maze-map-key"><span><i className="key-current" />Now</span><span><i className="key-seen" />Explored</span><span><i className="key-fog" />Mystery</span></div>
+      {newExplorer
+        ? <div className="maze-map-nudge"><span>✨</span> Walk to reveal the maze!</div>
+        : <div className="maze-map-key"><span><i className="key-current" />Now</span><span><i className="key-seen" />Explored</span><span><i className="key-fog" />Mystery</span></div>}
       <p className="sr-only">
         Ame is at column {position.x + 1}, row {position.y + 1}.
         {pointsEqual(level.exit, position) || currentView.has(toTileKey(level.exit)) || revealed.has(toTileKey(level.exit))
@@ -484,17 +506,23 @@ function musicTrackForLevel(level: LevelDefinition): string {
 }
 
 function App() {
+  const [initialRun] = useState(() => readActiveRun(CURATED_LEVELS));
+  const initialLevel = initialRun
+    ? CURATED_LEVELS.find((candidate) => candidate.id === initialRun.levelId) ?? CURATED_LEVELS[0]!
+    : CURATED_LEVELS[0]!;
   const [screen, setScreen] = useState<AppScreen>("title");
-  const [hasActiveRun, setHasActiveRun] = useState(false);
+  const [hasActiveRun, setHasActiveRun] = useState(initialRun !== null);
   const [pendingAdventure, setPendingAdventure] = useState<PendingAdventure | null>(null);
   const [bigMaze, setBigMaze] = useState(false);
-  const [level, setLevel] = useState<LevelDefinition>(() => CURATED_LEVELS[0]!);
-  const [game, setGame] = useState<GameState>(() => createInitialGameState(CURATED_LEVELS[0]!));
+  const [level, setLevel] = useState<LevelDefinition>(initialLevel);
+  const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
   const [runMode, setRunMode] = useState<RunMode>("normal");
-  const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(() => new Set());
+  const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(
+    () => new Set(initialRun?.revealedTiles ?? []),
+  );
   const [feedback, setFeedback] = useState<Feedback>({
     icon: "✨",
-    text: "Help Ame find the star!",
+    text: initialRun ? initialLevel.objective : "Help Ame find the star!",
     tone: "plain",
     sound: "step",
   });
@@ -531,7 +559,15 @@ function App() {
   const isSurprise = campaignIndex === -1;
   const explorationMode = isExplorationLevel(level);
   const testerRun = runMode === "tester";
-  const unlocked = Math.min(CURATED_LEVELS.length, progress.unlockedLevelCount);
+  const inferredUnlocked = CURATED_LEVELS.reduce((highest, candidate, index) => (
+    progress.bestResultsByLevel[candidate.id]
+      ? Math.max(highest, index + 2)
+      : highest
+  ), 1);
+  const unlocked = Math.min(
+    CURATED_LEVELS.length,
+    Math.max(progress.unlockedLevelCount, inferredUnlocked),
+  );
   const cameraWindow = useMemo(
     () => explorationMode ? getCameraWindow(level, game.position, DEFAULT_FOV_SIZE) : fullLevelWindow(level),
     [explorationMode, game.position, level],
@@ -569,17 +605,20 @@ function App() {
   const runInProgress = hasActiveRun && game.status === "playing";
   const modalOpen = pendingAdventure !== null
     || (screen === "game" && (helpOpen || game.status !== "playing"));
-  const hasImportantAnnouncement = lastEvents.some((event) => event.type !== "moved");
 
   useEffect(() => {
-    if (!explorationMode) return;
-    setRevealedTiles((revealed) => revealVisibleTiles(
-      revealed,
+    if (runMode === "tester") return;
+    if (!hasActiveRun || level.source !== "curated" || game.status !== "playing") {
+      clearActiveRun();
+      return;
+    }
+    writeActiveRun({
+      mode: "normal",
       level,
-      game.position,
-      DEFAULT_FOV_SIZE,
-    ));
-  }, [explorationMode, game.position, level]);
+      game,
+      revealedTiles,
+    });
+  }, [game, hasActiveRun, level, revealedTiles, runMode]);
 
   const clearDpadHold = useCallback(() => {
     dpadHoldDirection.current = null;
@@ -604,6 +643,15 @@ function App() {
   useEffect(() => {
     mutedRef.current = muted;
   }, [muted]);
+
+  useEffect(() => {
+    const syncMusicVisibility = () => {
+      setMusicPageHidden(document.visibilityState !== "visible");
+    };
+    syncMusicVisibility();
+    document.addEventListener("visibilitychange", syncMusicVisibility);
+    return () => document.removeEventListener("visibilitychange", syncMusicVisibility);
+  }, []);
 
   useEffect(() => {
     const focusTimer = window.setTimeout(() => {
@@ -664,8 +712,19 @@ function App() {
         ? document.activeElement
         : boardRef.current;
     }
-    const nextFeedback = feedbackFor(result.events);
+    const hasInteraction = result.events.some((event) => event.type !== "moved");
+    const nextFeedback = hasInteraction
+      ? feedbackFor(result.events)
+      : { icon: "✨", text: level.objective, tone: "plain" as const, sound: "step" as const };
     setGame(result.state);
+    if (result.moved && explorationMode) {
+      setRevealedTiles((revealed) => revealVisibleTiles(
+        revealed,
+        level,
+        result.state.position,
+        DEFAULT_FOV_SIZE,
+      ));
+    }
     setLastEvents(result.events);
     setFeedback(nextFeedback);
     setPreviewDirection(direction);
@@ -747,7 +806,7 @@ function App() {
       queuedDirection.current = null;
       if (nextDirection) attemptMoveRef.current(nextDirection);
     }, result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS);
-  }, [campaignIndex, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerRun]);
+  }, [campaignIndex, explorationMode, game, helpOpen, level, muted, pendingAdventure, progress, screen, testerRun]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -923,7 +982,8 @@ function App() {
     sound: "select" | "title" = "select",
     mode: RunMode = "normal",
   ) => {
-    preloadGameArt();
+    preloadLevelArt(nextLevel);
+    preloadRewardArt();
     configureMusic({ trackUrl: musicTrackForLevel(nextLevel) });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
@@ -935,6 +995,7 @@ function App() {
   };
 
   const resumeRun = () => {
+    preloadLevelArt(level);
     configureMusic({ trackUrl: musicTrackForLevel(level) });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
@@ -1002,7 +1063,7 @@ function App() {
   };
 
   const showAchievements = () => {
-    preloadGameArt();
+    preloadAchievementArt();
     configureMusic({ trackUrl: MUSIC_TRACKS.title });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
@@ -1049,8 +1110,19 @@ function App() {
     });
   };
 
-  const previewTarget = previewDirection ? targetFor(game, previewDirection) : null;
-  const previewState = previewDirection ? previewKind(level, game, previewDirection) : null;
+  const firstMoveNudge = campaignIndex === 0
+    && runMode === "normal"
+    && game.status === "playing"
+    && game.steps === 0
+    && progress.bestResultsByLevel[level.id] === undefined;
+  const suggestedMoveDirection = firstMoveNudge
+    ? (["left", "right", "up", "down"] as const).find(
+      (direction) => previewKind(level, game, direction) === "go",
+    ) ?? null
+    : null;
+  const shownPreviewDirection = previewDirection ?? suggestedMoveDirection;
+  const previewTarget = shownPreviewDirection ? targetFor(game, shownPreviewDirection) : null;
+  const previewState = shownPreviewDirection ? previewKind(level, game, shownPreviewDirection) : null;
   const lostEvent = lastEvents.find((event): event is Extract<GameEvent, { type: "combat-lost" }> => event.type === "combat-lost");
   const ownedCollectibles = [
     ...progress.stickers.slice(-3).map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id) })),
@@ -1153,13 +1225,13 @@ function App() {
             >
               <MazeTerrain level={level} camera={cameraWindow} />
 
-              {previewTarget && previewDirection && isInsideWindow(previewTarget, cameraWindow) && (
+              {previewTarget && shownPreviewDirection && isInsideWindow(previewTarget, cameraWindow) && (
                 <div
                   className={`move-preview move-preview-layer preview-${previewState}`}
                   style={cameraLayerStyle(previewTarget, cameraWindow)}
                   aria-hidden="true"
                 >
-                  <span className="preview-arrow">{previewState === "danger" ? "!" : previewState === "stop" ? "×" : DIRECTION_ICONS[previewDirection]}</span>
+                  <span className="preview-arrow">{previewState === "danger" ? "!" : previewState === "stop" ? "×" : DIRECTION_ICONS[shownPreviewDirection]}</span>
                 </div>
               )}
 
@@ -1198,17 +1270,19 @@ function App() {
                 <MiniMap
                   level={level}
                   position={game.position}
+                  camera={cameraWindow}
                   revealed={revealedTiles}
                   currentView={currentViewTiles}
                   objects={activeObjects}
+                  newExplorer={game.steps === 0}
                   compact
                 />
               </div>
             )}
 
-            <p className="sr-only" id="maze-status" aria-live={hasImportantAnnouncement ? "polite" : "off"} aria-atomic="true">{mazeStatus}</p>
+            <p className="sr-only" id="maze-status">{mazeStatus}</p>
 
-            <div className={`feedback-bar tone-${feedback.tone}`} aria-live={hasImportantAnnouncement ? "polite" : "off"}>
+            <div className={`feedback-bar tone-${feedback.tone}`} aria-live="polite" aria-atomic="true">
               <span className="feedback-icon" aria-hidden="true">{feedback.icon}</span>
               <span>{feedback.text}</span>
             </div>
@@ -1236,7 +1310,7 @@ function App() {
               <div className="hero-copy">
                 <span className="tiny-label">Ame's Power</span>
                 <strong className="big-power">{game.power}</strong>
-                <span className="power-help">Big enough wins!</span>
+                <span className="power-help">Match or beat wins!</span>
               </div>
             </section>
 
@@ -1245,9 +1319,11 @@ function App() {
                 <MiniMap
                   level={level}
                   position={game.position}
+                  camera={cameraWindow}
                   revealed={revealedTiles}
                   currentView={currentViewTiles}
                   objects={activeObjects}
+                  newExplorer={game.steps === 0}
                 />
               )}
               <div className="adventure-details">
@@ -1305,15 +1381,19 @@ function App() {
 
             <section className="controls-card">
               <div className="controls-copy">
-                <span className="tiny-label">Move one square</span>
-                <strong>Arrow keys · WASD · click</strong>
+                <span className="tiny-label">{firstMoveNudge ? "Your first step" : "Move one square"}</span>
+                <strong>
+                  {firstMoveNudge
+                    ? <>Try the glowing {suggestedMoveDirection ? DIRECTION_ICONS[suggestedMoveDirection] : "arrow"} button!</>
+                    : <><span className="desktop-controls-copy">Arrow keys · WASD · click</span><span className="touch-controls-copy">Tap an arrow, or tap beside Ame</span></>}
+                </strong>
               </div>
               <div className="dpad" aria-label="Movement buttons">
-                <button className="dpad-up" onPointerDown={(event) => startDpadHold(event, "up")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("up"); }} aria-label="Move up">▲</button>
-                <button className="dpad-left" onPointerDown={(event) => startDpadHold(event, "left")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("left"); }} aria-label="Move left">◀</button>
+                <button className={`dpad-up${suggestedMoveDirection === "up" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "up")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("up"); }} aria-label="Move up">▲</button>
+                <button className={`dpad-left${suggestedMoveDirection === "left" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "left")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("left"); }} aria-label="Move left">◀</button>
                 <span className="dpad-center" aria-hidden="true">✦</span>
-                <button className="dpad-right" onPointerDown={(event) => startDpadHold(event, "right")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("right"); }} aria-label="Move right">▶</button>
-                <button className="dpad-down" onPointerDown={(event) => startDpadHold(event, "down")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("down"); }} aria-label="Move down">▼</button>
+                <button className={`dpad-right${suggestedMoveDirection === "right" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "right")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("right"); }} aria-label="Move right">▶</button>
+                <button className={`dpad-down${suggestedMoveDirection === "down" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "down")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("down"); }} aria-label="Move down">▼</button>
               </div>
             </section>
 
@@ -1350,7 +1430,7 @@ function App() {
             <div className="help-grid">
               <HelpStep icon="👣" title="Move" copy="One square at a time." />
               <HelpStep icon="🗡️" title="Find the sword" copy="Then goblins can scoot." />
-              <HelpStep icon="⭐" title="Check Power" copy="Ame's number must be big enough." />
+              <HelpStep icon="⭐" title="Check Power" copy="Match or beat a goblin. Its Power joins Ame!" />
               <HelpStep icon="🔑" title="Match keys" copy="Keys open same-colour doors." />
               <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
               <HelpStep icon="💖" title="Rescue friends" copy="Three are hiding in every maze." />
@@ -1420,8 +1500,11 @@ function App() {
           <Modal title="A little too strong!" returnFocus={modalReturnFocus.current}>
             <img className="modal-art goblin-art" src={ASSETS.goblin} alt="A friendly green goblin" />
             {lostEvent && <div className="power-equation"><span>{lostEvent.playerPower}</span><b>&lt;</b><span>{lostEvent.enemyPower}</span></div>}
-            <p className="modal-lead">Find more Power, then come back.</p>
-            <button className="primary-button" onClick={replayLevel}>Try again</button>
+            <p className="modal-lead">Find more Power, then come back. This maze will start fresh.</p>
+            <div className="modal-actions">
+              <button className="primary-button" onClick={replayLevel}>Try again</button>
+              <button className="secondary-button" onClick={showTitle}>Choose a maze</button>
+            </div>
           </Modal>
         )}
 

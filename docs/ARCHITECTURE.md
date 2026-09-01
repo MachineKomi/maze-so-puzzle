@@ -20,12 +20,15 @@ state.
    engine and solver continue to use full-level coordinates.
 7. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
    in browser `localStorage`.
-8. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
+8. `src/session.ts` validates and stores a schema-v1 snapshot for an unfinished
+   normal authored run, including exploration reveal state. It rejects tester,
+   generated, corrupt, inconsistent, and completed states.
+9. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
    Audio API; those effects require no recorded audio files.
-9. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
+10. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
    Playback begins only from a user gesture, follows the shared mute control,
-   and degrades harmlessly when media is unavailable. Track roles and reserved
-   music are documented in `docs/MUSIC.md`.
+   pauses while the page or app is hidden, and degrades harmlessly when media is
+   unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
 
 ## Important boundaries
 
@@ -36,8 +39,9 @@ state.
   synchronized between devices.
 - Camera coordinates affect presentation only. Movement, collision, combat,
   collection, and solving continue to operate in global level coordinates.
-- The exploration minimap unions the current field of view with an in-memory
-  reveal set. Unvisited tiles remain masked, and a level load starts a fresh map.
+- The exploration minimap unions the current field of view with an immutable
+  reveal set. Unvisited tiles remain masked; a new level starts a fresh map, and
+  an unfinished authored run restores only a validated saved reveal set.
 - Tester mode exists only when the URL has the exact `debug=mazes` query value.
   Tester-entered runs are marked as previews and must bypass all reward and
   progress writes, even if the preview maze is completed.

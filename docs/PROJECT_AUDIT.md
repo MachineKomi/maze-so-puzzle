@@ -1,14 +1,29 @@
 # Project audit
 
 Audit date: 2026-09-01
-Audited build: 0.5.0 exploration release candidate
+Audited build: 0.5.1 child-first polish candidate
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
 real-device testing. The automated suite, production browser checks, Tauri
 build, staging, hash comparison, and portable smoke launch below all completed
-against the final 0.5.0 source candidate on 2026-09-01.
+against the 0.5.0 source candidate on 2026-09-01. The 0.5.1 rows record the
+repeated source, production-browser, desktop packaging, staging, hash, and smoke
+checks for this candidate.
+
+## Current 0.5.1 implementation status
+
+| Area | Final evidence | Status |
+| --- | --- | --- |
+| Automated suite | Engine, solver, every authored level, generated levels, exploration, progress, active-session validation, assets, audio, and navigation | 122 of 122 passed; strict TypeScript and production Vite build passed |
+| Child onboarding | Fresh-profile production check at 1280 x 720 showed the safe first arrow on both the board and D-pad; it disappeared after one move | Passed without a forced tutorial modal |
+| Refresh recovery | A production-browser move saved step 1; a full reload returned to `Resume maze`, and restoring placed Ame at the saved state | Passed; malformed and inconsistent snapshots have focused fail-closed tests |
+| Celebration | A perfect 34-step first clear displayed all three friends, 30 gold, two new stickers, and both actions | Passed at 1280 x 720 with `clientHeight` equal to `scrollHeight` (501 px) |
+| Lanternlight progression | Exhaustive reachable-state search rejects any authored state that can attack underpowered after finding the sword | Passed; ordinary/perfect finale routes are now 280/312 steps |
+| Load performance | Art warming is deduplicated and limited to the current level, with reward art deferred until idle | Unit-covered; broader low-end device profiling remains |
+| CI parity | Browser verification remains on Linux; locked Tauri compilation now also runs on `windows-latest` | Workflow source and YAML passed local review; first hosted run is pending push |
+| Windows artifacts | Tauri 0.5.1 executable and NSIS installer were built, staged, source-compared, and hashed; the portable app remained responsive with the correct title for five seconds | Passed locally; clean-machine install and signing remain |
 
 ## Current 0.5.0 implementation status
 
@@ -73,6 +88,23 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
   Tester runs are previews and must not grant rewards or mutate progress.
 - The locally bundled OST introduced in 0.4.0 remains part of the offline browser
   and Tauri bundle.
+
+## Version 5.1 polish snapshot
+
+- Normal authored runs now survive refreshes and app restarts through a narrow,
+  defensively validated active-session schema; tester and Surprise Maze runs do
+  not write it.
+- The opening offers a one-step visual coach, coarse-pointer D-pad buttons meet
+  a 44 px minimum, and the movement repeat cadence is 64 ms.
+- The minimap outlines the current camera window, while the completion card fits
+  the complete first-clear reward at the default landscape size without scroll.
+- Lanternlight's progression has a forced early Power pickup and a final goblin
+  immediately before the exit. Exhaustive state exploration now guards every
+  authored level against reachable underpowered combat traps.
+- Level-scoped art preloads replace the previous eager all-art warm-up, and the
+  hosted CI configuration now checks the locked Windows/Tauri compile path.
+- Background music pauses on page hide and resumes only the same current,
+  previously active, unmuted player; disposal and track changes cancel resuming.
 
 ## Version 4 implementation snapshot
 
@@ -139,7 +171,7 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
 - Big Maze remains available as an optional roomier board view while retaining a
   compact Power/item/rescue HUD and an overlaid feedback toast.
 
-The 0.5.0 automated run and targeted production-browser pass are complete. All
+The 0.5.1 automated run and targeted production-browser pass are complete. All
 unchecked clean-machine, device, listening, and broader manual items in
 `RELEASE_CHECKLIST.md` remain release requirements.
 
@@ -168,9 +200,10 @@ unchecked clean-machine, device, listening, and broader manual items in
   the 25 x 25 exploration level's 7 x 7 camera and minimap.
 - Add visual-regression snapshots for the minimum 960 x 540 window, the default
   1280 x 720 window, 1920 x 1080, and the portrait guidance screen.
-- Reassess compact-window touch targets. The 960 x 540 layout prioritizes fitting
-  the complete game, so an alternate large-control mode may be better than
-  forcing every control to desktop-unfriendly dimensions.
+- Repeat touch-target and press-and-hold checks on Amelia's actual iPad. The
+  coarse-pointer layout now provides 44 px minimum direction buttons and hides
+  decorative branding to make room, but desktop emulation cannot replace a
+  physical-device check.
 
 ### P2 - maintainability and polish
 
@@ -194,7 +227,7 @@ unchecked clean-machine, device, listening, and broader manual items in
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- The release target is 0.5.0. Package, lockfile, Cargo, and Tauri source versions
+- The release target is 0.5.1. Package, lockfile, Cargo, and Tauri source versions
   are aligned. Packaging, staged names, source-to-stage comparison, portable
   smoke launch, sizes, and hashes are recorded in `release/`.
 - The Tauri content security policy is local-only. Inline style permission is
