@@ -8,10 +8,11 @@ what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
 real-device testing. On 2026-09-01 the integrated 0.8.0 suite, production web
 build, dependency audit/tree, locked-Tauri compile, local responsive-browser
-matrix, Windows packaging/source comparison, hash record, and portable smoke
-launch completed. Physical-device touch/listening/feel, clean-machine install,
-signing, and the final public Vercel smoke remain open. Older sections are kept
-as clearly labelled historical evidence.
+matrix, Windows packaging/source comparison, hash record, portable smoke launch,
+and the canonical Vercel build-label/debug-picker and responsive visual smoke
+completed. Physical-device touch/listening/feel, clean-machine installation,
+signing, and the broader manual production walkthrough remain open. Older
+sections are kept as clearly labelled historical evidence.
 
 ## Current 0.8.0 locally verified status
 
@@ -21,7 +22,7 @@ as clearly labelled historical evidence.
 | Landscape phones | Full-safe-viewport shell, full-height maze card, overlaid maze information, compact sidebar, and two-row movement controls are implemented for short landscape screens | Local production QA passed at 844×390 (362 px board, 44 px minimum controls) and 667×375 (347 px board), with no overflow or overlap; physical-device feel remains |
 | iPad-size layout | Phone/iPad maze panels use almost all available height; coarse-pointer actions retain 44 px targets | Local production QA passed at 1024×768 with a 534 px board and no overflow or overlap; physical-iPad gesture/pinch/listening checks remain |
 | Pointer movement | Primary mouse/touch press moves immediately, hold repeats after 92 ms at a 68 ms cadence, drag steers, and release/recenter cancels queued motion | Focused pure-control regressions cover tile intent and strict one-tile wall-only corner assistance; final mouse and physical-touch browser checks remain |
-| Exploration policy | The shared rule enables a 6 x 6 camera and fog minimap whenever either maze dimension exceeds 6; even-window bias, edge clamping, and reveal accumulation are unit-covered | Passed focused unit coverage; repeat the public-browser follow/minimap pass after deployment |
+| Exploration policy | The shared rule enables a 6 x 6 camera and fog minimap whenever either maze dimension exceeds 6; even-window bias, edge clamping, and reveal accumulation are unit-covered | Focused tests pass and the public 15 x 15 camera rendered the 6 x 6 view; the complete follow/minimap movement pass remains manual |
 | Tester access | The title build label opens a direct nine-maze picker, and exact `?debug=mazes` opens the same picker automatically; tester runs retain the non-saving preview mode | Passed local production-browser normal-query, exact-query, direct-selection, and modal checks |
 | Terrain geometry | Maze terrain is one globally aligned SVG surface with connected wall/hazard regions, rounded convex/concave bends, preserved holes, periodic textures, a camera gutter, stronger floor/wall contrast, and no hazard outlines or shadows | Topology tests and production build passed; integrated visual review remains required |
 | Visual catalogue | Nine terrain themes, five weapons, five friendly enemy looks, eight pet species, and four opaque AI-generated front cage layers are selected through typed IDs and local assets | Catalogue tests cover every current runtime asset; source/opacity and the layered cage effect were locally verified through normal play |
@@ -29,7 +30,7 @@ as clearly labelled historical evidence.
 | Story pacing | Authored sizes run 9, 11, 13, 15, 13, 15, 17, 17, and 25; Rainbow Picnic precedes the smaller Toasty Toes breather | All nine ordinary and perfect-rescue routes remain solver-validated |
 | Surprise Maze variants | Generated presentation remains deterministic; size varies by seed across unlocked odd 9–29 bands, and growing/adventure hazards form connected 2–4 tile post-boots clusters without consuming progression tiles | Seed replay, non-monotonic size variety, 29×29 perfect rescue, hazard connectivity, and ordinary/perfect solvability tests pass |
 | Optional Power puzzle | The Wishing Woods kitten spur is guarded by an optional Power 9 pebble-golem after a Power 2 foe, `+2` potion, and Power 5 foe | The ordinary route remains 108 steps; the solver-verified all-pets route backtracks at Power 11 and remains safely solvable |
-| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | Pushes to `main` auto-deploy; 0.8.0 is not considered released until the canonical alias is updated and smoke-tested |
+| Hosting | GitHub `main` is connected to the Vercel Hobby production project at `https://maze-so-puzzle.vercel.app/` | The canonical alias served 0.8.0; the normal build label and exact debug query opened the picker, and 1024 x 768 plus 844 x 390 production layout checks passed |
 | Desktop artifacts | The unsigned 0.8.0 portable executable and NSIS installer were built, staged, version-checked, source-compared, and SHA-256-hashed | The portable app remained responsive with the correct title for a five-second smoke launch; clean-machine install and signing remain |
 
 ## Historical 0.5.1 implementation status
@@ -116,8 +117,9 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
   drop shadow, or filter, and the phone/iPad playfield uses nearly the full
   landscape height.
 - The integrated 0.8.0 web source and unsigned Windows package are locally
-  verified. Physical-device touch/listening/feel, clean-machine installation,
-  signing, and the final public Vercel smoke remain separate release gates.
+  verified, and the canonical Vercel build passed its initial production smoke.
+  Physical-device touch/listening/feel, clean-machine installation, signing, and
+  the broader production walkthrough remain separate release gates.
 
 ## Version 7.0 web implementation snapshot
 
@@ -271,9 +273,10 @@ The 0.8.0 source passes 189 tests across 15 files, strict TypeScript, the Vite
 production build, a zero-vulnerability npm audit, dependency-tree review, and
 `cargo check --locked`. Local responsive QA passed at 1024×768, 844×390, and
 667×375; cage opacity/source and one follower were checked through normal play.
-The unsigned 0.8.0 Windows pair was source-compared, hashed, and smoke-checked.
-Unchecked public-Vercel, physical-device, listening/feel, clean-install, and
-signing items in `RELEASE_CHECKLIST.md` remain requirements.
+The unsigned 0.8.0 Windows pair was source-compared, hashed, and smoke-checked;
+the canonical public build also passed its initial 0.8.0 picker and responsive
+layout smoke. Unchecked physical-device, listening/feel, broader production,
+clean-install, and signing items in `RELEASE_CHECKLIST.md` remain requirements.
 
 ## Prioritized remaining work
 
@@ -329,10 +332,10 @@ signing items in `RELEASE_CHECKLIST.md` remain requirements.
 
 - Build outputs are ignored through `.gitignore`: `dist/`, `src-tauri/target/`,
   coverage, Vite cache files, logs, and `node_modules/`.
-- Current source metadata is aligned at 0.8.0 and the public Vercel alias must be
-  rechecked after deployment. Packaging, staged names, source-to-stage
-  comparison, portable smoke launch, sizes, and hashes in `release/` describe
-  the verified unsigned 0.8.0 Windows test artifacts.
+- Current source metadata is aligned at 0.8.0, and the public Vercel alias was
+  rechecked after deployment of source commit `76cfcd1`. Packaging, staged
+  names, source-to-stage comparison, portable smoke launch, sizes, and hashes in
+  `release/` describe the verified unsigned 0.8.0 Windows test artifacts.
 - The Tauri content security policy is local-only. Inline style permission is
   currently needed because the UI uses dynamic positioning and CSS variables.
 - AI artwork provenance and regeneration prompts are documented in

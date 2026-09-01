@@ -93,7 +93,9 @@ npm run preview
 
 The `.vercel/` directory is ignored because it contains machine-specific project
 link metadata. The source-controlled configuration contains no account IDs or
-secrets. The 0.8.0 source, local production build, selected responsive sizes, and
-unsigned Windows test package are locally verified; the canonical public Vercel
-deployment still needs the smoke checks above after promotion. Executable
-artifacts remain intentionally excluded from Git and Vercel deployment.
+secrets. On 2026-09-01 the canonical alias served playable build 0.8.0: the
+normal build-label button and exact debug query opened the nine-maze picker, and
+the 1024 x 768 plus 844 x 390 production layouts passed the initial responsive
+smoke. The broader physical-device and manual matrix above remains required.
+Executable artifacts remain intentionally excluded from Git and Vercel
+deployment.

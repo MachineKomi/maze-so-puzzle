@@ -8,10 +8,10 @@ dependency, configuration, or asset change.
 
 Status for 0.8.0: 189 tests across 15 files, strict TypeScript/Vite, the npm
 audit/tree, locked Tauri compile, selected integrated responsive-browser sizes,
-Windows packaging, source comparison, hash capture, and portable smoke launch
-are complete. Physical-device touch/listening/feel, public-Vercel smoke,
-accessibility, clean-machine installation, signing, and the broader manual
-play-through remain deliberately unclaimed.
+Windows packaging, source comparison, hash capture, portable smoke launch, and
+the initial canonical-Vercel smoke are complete. Physical-device
+touch/listening/feel, accessibility, clean-machine installation, signing, and
+the broader manual play-through remain deliberately unclaimed.
 
 ## 1. Prepare
 
@@ -100,6 +100,13 @@ Test the production preview, not only the development server:
 npm run preview
 ```
 
+Production smoke record (2026-09-01): the canonical URL served playable build
+0.8.0 from GitHub `main`. Its normal title-screen build label and exact
+`?debug=mazes` query both opened the nine-maze picker, while another query value
+did not open it automatically. Public Rainbow Picnic checks at 1024 x 768 and
+844 x 390 retained the 6 x 6 view, readable contrast, opaque cage-front source,
+and no page or panel overlap.
+
 - [ ] 960 x 540: the maze and side panel fit without page overflow or clipping.
 - [ ] 1280 x 720: default layout is balanced and has no page overflow.
 - [x] 667 x 375 and 844 x 390: the phone stage fills the safe landscape viewport
@@ -151,7 +158,7 @@ npm run preview
   edges, and remains readable.
 - [ ] The minimap shows every tile in the current field of view, remembers tiles
   after they leave view, masks unvisited areas, and resets on a new level.
-- [ ] On the normal URL, the discreet build-label button opens the direct picker.
+- [x] On the normal URL, the discreet build-label button opens the direct picker.
   The exact `?debug=mazes` query opens it automatically, while other query values
   do not. It lists every authored maze, bypasses locks, labels previews clearly,
   and leaves saved progress unchanged.

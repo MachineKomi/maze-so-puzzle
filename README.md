@@ -5,10 +5,10 @@
 ![Ame and her animal friends beside a magical storybook maze](public/assets/title-background-v1.webp)
 
 A gentle, browser-first fantasy maze game for young players, with an optional
-Windows desktop build powered by Tauri 2. This README describes the locally
-verified playable 0.8.0 browser and Windows test release, which remains an active
-play-test prototype. Physical-device feel/listening and the public Vercel build
-still require their final release smoke checks.
+Windows desktop build powered by Tauri 2. This README describes the verified
+playable 0.8.0 browser and Windows test release, which remains an active
+play-test prototype. The canonical Vercel build has passed its initial
+production smoke test; physical-device feel/listening still need hands-on checks.
 
 ![The previous 0.4.0 Little Star Trail build, with Ame's maze on the left and her picture-led adventure panel on the right](docs/screenshots/gameplay-v0.4.0.png)
 
@@ -233,8 +233,9 @@ vulnerabilities, the dependency tree contains only expected absent optional
 platform/feature packages, and `cargo check --locked` passes. Local responsive
 QA passed at 1024 x 768, 844 x 390, and 667 x 375 without board overlap or page
 overflow; cage opacity/source and a rescued follower were exercised through
-normal controls. Physical-device touch/listening/feel and the public-URL smoke
-check remain pending.
+normal controls. The canonical production URL serves build 0.8.0 and passed
+build-label, tester-picker, 1024 x 768, and 844 x 390 smoke checks.
+Physical-device touch/listening/feel remains pending.
 
 The browser matrix and current 0.8.0 Windows artifact record are kept in
 [`docs/RELEASE_CHECKLIST.md`](docs/RELEASE_CHECKLIST.md). Rebuilding the Windows
