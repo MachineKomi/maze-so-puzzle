@@ -31,7 +31,19 @@
     { "owner": "lighting", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include reference and low-end frame-time cohorts." },
     { "owner": "vfx", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include overlap stress and reduced-motion coverage." },
     { "owner": "animation", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include compositing/layer evidence and idle-cost checks." },
-    { "owner": "gameplay", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Correctness and save integrity are hard guardrails." },
+    {
+      "id": "gameplay-plan06-engine-hints-and-save-identity",
+      "owner": "gameplay",
+      "status": "approved",
+      "compressedJsBytes": 4020,
+      "compressedCssBytes": 128,
+      "runtimePublicBytes": 0,
+      "reason": "The complete Plan 06 gameplay, campaign, hint, save-integrity, recovery, and accessibility batch measures +3,959 gzip-9 JavaScript bytes and +99 gzip-9 CSS bytes over the Plan 07A baseline.",
+      "evidencePath": "docs/GAMEPLAY_DESIGN_SPEC.md#plan-06-static-allocation-evidence",
+      "reviewBy": "2026-10-02",
+      "rollbackPoint": "Before distribution, revert the whole Plan 06 batch to checkpoint 555cdd622a98bd77585f2e60f1096712392d71b3 as one coordinated content/schema change. After distribution, retain backward-compatible schema readers and instead split or compact solver-backed hint code under Pass 07B before reducing this allocation.",
+      "notes": "The allocation leaves 61 JavaScript bytes and 29 CSS bytes beyond the source-matched measurement for compression variance only. It authorizes no runtime asset growth; every later feature needs its own measured allocation."
+    },
     { "owner": "controls", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Preserve held cadence, focus semantics, and controller responsiveness." },
     { "owner": "audio", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Report title, level-entry, music-change, and offline behavior." },
     { "owner": "campaign", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "New levels need loading-phase and reachability evidence." }

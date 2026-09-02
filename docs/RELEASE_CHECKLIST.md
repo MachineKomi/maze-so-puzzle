@@ -6,7 +6,7 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.19.0: `npm run check` passes 316 tests across 27 files plus strict
+Historical released status for 0.19.0: `npm run check` passed 316 tests across 27 files plus strict
 TypeScript and the Vite production build. Production JavaScript is 117.04 KB
 gzipped. The production-only npm audit reports zero vulnerabilities; `npm ls` is
 clean, and locked Cargo compilation passes. Local browser QA at 1280 × 720 and
@@ -16,6 +16,43 @@ setup builds were built, hashed, byte-compared, versioned, and smoke-tested.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
+
+## Unreleased gameplay-systems candidate
+
+- [x] This accepted implementation candidate began from manager checkpoint
+  `555cdd622a98bd77585f2e60f1096712392d71b3` on `main`. This section does not
+  claim a public release or accepted hardware-timing cohort.
+- [x] All 16 authored mazes have an engine-derived ordinary solution with zero
+  rescues and a perfect solution with exactly every available friend.
+- [x] Chapter 1 is a complete 6×6 whole-board onboarding maze; camera/fog begins
+  only when a later maze exceeds six tiles.
+- [x] The Power-99 finale is a 61-input ordinary / 77-input perfect hub-and-return
+  plan with seven ordered guardians and five genuinely optional rescues.
+- [x] Stable object identity, content revisions/fingerprints, campaign-order
+  history, progress schema v4, active-run schema v2, and current-layout versus
+  historical route records have migration coverage.
+- [x] Required Path uses four replayable tiers and exact engine transitions;
+  ordinary hint routes never prioritize optional content.
+- [x] Corner assistance is restricted to safe, non-exit ordinary floor that
+  cannot begin a new interaction. Blocker feedback reserves its modal for the
+  third repeat, and stronger-enemy repeats remain safe without reopening it.
+- [x] Fixed Surprise seeds, route-quality metrics, semantic performance
+  checkpoints, and documentation-consistency surfaces are covered.
+- [x] Final candidate validation on 2026-09-02: `npm run check` passed 397/397
+  tests across 34 files plus TypeScript and the production build;
+  `npm run perf:check` passed at 119,779 / 119,840 allocated gzip-9 JavaScript
+  bytes, 29,206 / 29,235 CSS bytes, and exactly 89,394,012 public-runtime bytes;
+  scenario fixtures passed 4/4; `npm run check:desktop` passed; and
+  `git diff --check` passed.
+- [x] A manager production-preview smoke check—not a performance timing
+  cohort—confirmed modal input gating, a saved/reloaded one-step active run,
+  tier-4 hint persistence, semantic rendering at 1024×768 and 844×390, and zero
+  browser warning/error logs. Timing remains contaminated/report-only.
+- [ ] Complete child/family sessions from `GAMEPLAY_DESIGN_SPEC.md`, including
+  Chapters 1, 2, 3, 7, 9, 10–13, 15–16 and fixed Surprise seeds.
+- [ ] Repeat physical iPad, landscape-phone, keyboard, mouse, touch, browser,
+  WebView2, reduced-motion, and listening checks. Automated evidence is not a
+  substitute for those device/child gates.
 
 ## 0.19.0 verification record
 

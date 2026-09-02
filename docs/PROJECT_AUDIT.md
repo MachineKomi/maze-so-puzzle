@@ -34,6 +34,25 @@ interactive evidence.
 No production optimization or media change is claimed. Exact evidence classes
 and remaining hardware gates are in `PERFORMANCE_BUDGETS.md`.
 
+## Current gameplay-systems implementation candidate
+
+This candidate was implemented from manager checkpoint
+`555cdd622a98bd77585f2e60f1096712392d71b3`; the historical 0.19.0 evidence
+below is preserved and does not validate this later implementation candidate.
+
+| Area | Current evidence | Status |
+| --- | --- | --- |
+| Content identity | Every level has a positive content revision and deterministic gameplay fingerprint; repeated semantic roles require explicit IDs | A golden tuple test binds all 16 identities; current authored content is revision 2 except corrected Chapter 15 revision 3 |
+| Persistence | Progress schema v4 stores stable unlocked IDs/campaign version and revision-scoped current/historical records; active runs use schema v2 and exact revision/fingerprint | Legacy/future access is preserved safely; stale runs explain their restart; save/reset failures are surfaced |
+| Campaign solvability | Engine solver derives zero-rescue ordinary and exact-all-rescue perfect solutions for all 16 mazes | Route expectations are 6–201 ordinary and 6–211 perfect; the final 397-test gate and 4/4 semantic scenario fixtures pass |
+| Challenge quality | Later ordinary routes are 181, 149, 201, 161, 28, 103, 44, and 61 inputs | Chapters 12, 13, 15, and 16 remove substantial corridor endurance; Chapters 9–11 remain child-test risks |
+| Hint/recovery | Required Path has four replayable tiers from exact engine transitions; blocker modal is third-repeat escalation | Portal/multi-hole and zero-rescue fixtures pass; production-preview QA confirmed tier-4 reload persistence and modal input gating, while child/device review remains pending |
+| Rewards | Gold and Science copy describes keepsakes without implying a shop | No economy, inventory expansion, or progression gate was added |
+| Static budget | Source-matched production build and external inventory | 119,779 B gzip-9 JavaScript, 29,206 B CSS, 89,394,012 B public runtime, and 144 dist files / 89,929,629 B pass the approved Plan 06 allocation; timing remains report-only |
+
+The maintained design contract, complete experience matrix, route rubric, and
+family playtest protocol are in `GAMEPLAY_DESIGN_SPEC.md`.
+
 ## Current 0.19.0 release status
 
 | Area | Current evidence | Status |
@@ -344,7 +363,11 @@ These results preserve the last verified 0.2.0 baseline for comparison. The
   with a voice cap, safe node cleanup, and recovery from a closed context. Four
   locally bundled music tracks now cover the title, story, and surprise mazes.
 
-## Confirmed product rules
+## Historical version 4 product-rule snapshot
+
+The rules below record the version 4 implementation era and are retained as
+historical evidence. They are not current authority where the maintained design
+specifications or later candidate sections above differ.
 
 - Equal Power wins. This is intentional, child-friendly, covered by a unit test,
   and documented in the README.

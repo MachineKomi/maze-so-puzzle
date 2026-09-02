@@ -8,6 +8,10 @@ describe("solver interaction gates", () => {
       id: "portal-only-bridge",
       name: "Portal Only Bridge",
       objective: "Use the flower.",
+      objectIds: {
+        "2,1": "portal-only-bridge-portal-entry",
+        "5,3": "portal-only-bridge-portal-exit",
+      },
       map: [
         "#########",
         "#@H######",

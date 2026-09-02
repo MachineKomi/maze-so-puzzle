@@ -11,9 +11,18 @@ import {
   ANIMAL_SPECIES,
   type AnimalSpecies,
 } from "./game/types";
+import {
+  CAMPAIGN_ORDER_VERSION,
+  CURRENT_CAMPAIGN_ORDER,
+  HISTORICAL_CAMPAIGN_ORDERS,
+  campaignOrderForVersion,
+  contiguousUnlockedCount,
+  migrateCampaignAccess,
+} from "./campaign";
 
-export const PLAYER_PROGRESS_SCHEMA_VERSION = 3 as const;
-export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v3";
+export const PLAYER_PROGRESS_SCHEMA_VERSION = 4 as const;
+export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v4";
+export const VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v3";
 export const VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v2";
 export const LEGACY_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v1";
 /** Legacy/default rescue target for callers and saves created before variable pet counts. */
@@ -53,7 +62,7 @@ export const REWARD_LABELS = {
   gold: {
     label: "Gold stars",
     shortLabel: "Gold",
-    description: "Spend these on cute portrait frames and outfits later.",
+    description: "A cheerful keepsake total from solved mazes, rescues, and discoveries.",
     icon: "\u2605",
   },
   completion: {
@@ -188,22 +197,35 @@ export type AnimalRescueTotals = Readonly<Record<AnimalSpecies, number>>;
 
 export interface LevelBestResult {
   readonly completions: number;
+  /** Competitive records below describe only `gameplayFingerprint`. */
   readonly bestSteps: number | null;
+  readonly contentRevision?: number;
+  readonly gameplayFingerprint?: string;
   readonly bestPower: number | null;
   readonly bestRescuedCount: number;
   /** Rescue target for the latest known version of this maze. */
   readonly totalRescueCount: number;
-  /** True once every available friend has been rescued on any completion. */
+  /** True only for a completion of the current gameplay fingerprint. */
   readonly perfectRescue: boolean;
   /** Null only when a v2 save did not record how this maze was created. */
   readonly source: ProgressLevelSource | null;
   /** Species from the best documented rescue attempt; v2 history remains unknown. */
   readonly bestRescuedSpecies: readonly AnimalSpecies[];
+  /** Earlier-layout accomplishments remain visible but never compete as current. */
+  readonly historicalBestSteps?: number | null;
+  readonly historicalBestPower?: number | null;
+  readonly historicalBestRescuedCount?: number;
+  readonly historicalBestRescuedSpecies?: readonly AnimalSpecies[];
+  readonly historicalPerfectRescue?: boolean;
 }
 
 export interface PlayerProgress {
   readonly schemaVersion: typeof PLAYER_PROGRESS_SCHEMA_VERSION;
   readonly unlockedLevelCount: number;
+  /** May be newer than this build; unknown future versions are preserved. */
+  readonly campaignOrderVersion: number;
+  /** Stable story IDs; count remains as a compatibility/display cache. */
+  readonly unlockedLevelIds: readonly string[];
   readonly gold: number;
   readonly sciencePoints: number;
   readonly stickers: readonly StickerId[];
@@ -266,6 +288,8 @@ export interface LevelCompletionInput {
   readonly rescuedSpecies?: readonly AnimalSpecies[];
   readonly steps: number;
   readonly power: number;
+  readonly contentRevision?: number;
+  readonly gameplayFingerprint?: string;
   /** Optional treasures collected during this completed run. */
   readonly bonusGold?: number;
   readonly sciencePoints?: number;
@@ -415,11 +439,18 @@ function badgesForMetrics(metrics: BadgeMetrics): BadgeId[] {
   if (metrics.generatedMazesCompleted >= 3) badges.push("surprise-explorer-3");
 
   const results = Object.values(metrics.bestResultsByLevel);
-  if (results.some((result) => (result.bestPower ?? 0) >= 15)) {
+  if (results.some((result) => Math.max(
+    result.bestPower ?? 0,
+    result.historicalBestPower ?? 0,
+  ) >= 15)) {
     badges.push("mighty-adventurer");
   }
   if (results.some((result) => (
-    result.bestSteps !== null && result.bestSteps > 0 && result.bestSteps <= 30
+    (result.bestSteps !== null && result.bestSteps > 0 && result.bestSteps <= 30)
+    || (result.historicalBestSteps !== null
+      && result.historicalBestSteps !== undefined
+      && result.historicalBestSteps > 0
+      && result.historicalBestSteps <= 30)
   ))) {
     badges.push("twinkle-toes");
   }
@@ -430,9 +461,16 @@ function badgesForMetrics(metrics: BadgeMetrics): BadgeId[] {
 }
 
 export function createDefaultPlayerProgress(unlockedLevelCount = 1): PlayerProgress {
+  const unlockedLevelIds = migrateCampaignAccess({
+    previousOrder: HISTORICAL_CAMPAIGN_ORDERS[1]!,
+    currentOrder: CURRENT_CAMPAIGN_ORDER,
+    unlockedCount: Math.max(1, nonNegativeInteger(unlockedLevelCount, 1)),
+  });
   return {
     schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
-    unlockedLevelCount: Math.max(1, nonNegativeInteger(unlockedLevelCount, 1)),
+    unlockedLevelCount: contiguousUnlockedCount(CURRENT_CAMPAIGN_ORDER, unlockedLevelIds),
+    campaignOrderVersion: CAMPAIGN_ORDER_VERSION,
+    unlockedLevelIds,
     gold: 0,
     sciencePoints: 0,
     stickers: [],
@@ -481,6 +519,14 @@ function sanitizeBestResults(
       : ANIMALS_PER_MAZE;
     const storedPerfectRescue = ownValue(candidate, "perfectRescue");
     const source = ownValue(candidate, "source");
+    const contentRevision = ownValue(candidate, "contentRevision");
+    const gameplayFingerprint = ownValue(candidate, "gameplayFingerprint");
+    const historicalBestSteps = ownValue(candidate, "historicalBestSteps");
+    const historicalBestPower = ownValue(candidate, "historicalBestPower");
+    const historicalBestRescuedCount = rescuedAnimalCount(
+      ownValue(candidate, "historicalBestRescuedCount"),
+    );
+    const historicalPerfectRescue = ownValue(candidate, "historicalPerfectRescue") === true;
     results[normalizedLevelId] = {
       completions,
       bestSteps: typeof bestSteps === "number" && Number.isFinite(bestSteps)
@@ -499,6 +545,34 @@ function sanitizeBestResults(
       bestRescuedSpecies: includeVersionThreeFields
         ? knownSpecies(ownValue(candidate, "bestRescuedSpecies"), bestRescuedCount)
         : [],
+      ...(typeof contentRevision === "number" && Number.isInteger(contentRevision) && contentRevision > 0
+        ? { contentRevision }
+        : {}),
+      ...(typeof gameplayFingerprint === "string" && gameplayFingerprint.trim().length > 0
+        ? { gameplayFingerprint: gameplayFingerprint.trim() }
+        : {}),
+      ...(historicalBestSteps === null
+        ? { historicalBestSteps: null }
+        : typeof historicalBestSteps === "number" && Number.isFinite(historicalBestSteps)
+          ? { historicalBestSteps: nonNegativeInteger(historicalBestSteps) }
+          : {}),
+      ...(historicalBestPower === null
+        ? { historicalBestPower: null }
+        : typeof historicalBestPower === "number" && Number.isFinite(historicalBestPower)
+          ? { historicalBestPower: nonNegativeInteger(historicalBestPower) }
+          : {}),
+      ...(historicalBestRescuedCount > 0
+        ? { historicalBestRescuedCount }
+        : {}),
+      ...(historicalBestRescuedCount > 0
+        ? {
+            historicalBestRescuedSpecies: knownSpecies(
+              ownValue(candidate, "historicalBestRescuedSpecies"),
+              historicalBestRescuedCount,
+            ),
+          }
+        : {}),
+      ...(historicalPerfectRescue ? { historicalPerfectRescue: true } : {}),
     };
   }
 
@@ -526,10 +600,13 @@ function sanitizeProgressObject(
   );
   const results = Object.values(bestResultsByLevel);
   const perfectResultsInSave = Object.values(bestResultsByLevel)
-    .filter((result) => result.perfectRescue)
+    .filter((result) => result.perfectRescue || result.historicalPerfectRescue)
     .length;
   const bestRescuesInSave = results
-    .reduce((sum, result) => sum + result.bestRescuedCount, 0);
+    .reduce((sum, result) => sum + Math.max(
+      result.bestRescuedCount,
+      result.historicalBestRescuedCount ?? 0,
+    ), 0);
   const perfectRescueMazeCount = Math.max(
     perfectResultsInSave,
     nonNegativeInteger(ownValue(value, "perfectRescueMazeCount")),
@@ -586,12 +663,50 @@ function sanitizeProgressObject(
     ? uniqueKnownIds(ownValue(value, "badges"), isBadgeId)
     : [];
 
+  const storedUnlocked = Math.max(1, nonNegativeInteger(ownValue(value, "unlockedLevelCount"), 1));
+  const rawUnlockedIds = ownValue(value, "unlockedLevelIds");
+  const explicitIds = Array.isArray(rawUnlockedIds)
+    ? [...new Set(rawUnlockedIds.flatMap((candidate) => {
+        if (typeof candidate !== "string") return [];
+        const id = candidate.trim();
+        return id.length > 0
+          && id !== "__proto__"
+          && id !== "prototype"
+          && id !== "constructor"
+          ? [id]
+          : [];
+      }))]
+    : [];
+  const rawCampaignOrderVersion = ownValue(value, "campaignOrderVersion");
+  const storedCampaignOrderVersion = typeof rawCampaignOrderVersion === "number"
+    && Number.isSafeInteger(rawCampaignOrderVersion)
+    && rawCampaignOrderVersion >= 1
+    ? rawCampaignOrderVersion
+    : 1;
+  const futureCampaignOrder = storedCampaignOrderVersion > CAMPAIGN_ORDER_VERSION;
+  const previousOrder = campaignOrderForVersion(storedCampaignOrderVersion)
+    ?? HISTORICAL_CAMPAIGN_ORDERS[1]!;
+  const unlockedLevelIds = futureCampaignOrder
+    ? [...new Set([CURRENT_CAMPAIGN_ORDER[0]!, ...explicitIds])]
+    : migrateCampaignAccess({
+      previousOrder,
+      currentOrder: CURRENT_CAMPAIGN_ORDER,
+      unlockedCount: storedUnlocked,
+      completedLevelIds: Object.keys(bestResultsByLevel),
+      ...(includeVersionThreeFields && explicitIds.length > 0
+        ? { unlockedLevelIds: explicitIds }
+        : {}),
+    });
+  const unlockedLevelCount = futureCampaignOrder
+    ? Math.max(storedUnlocked, contiguousUnlockedCount(CURRENT_CAMPAIGN_ORDER, unlockedLevelIds))
+    : contiguousUnlockedCount(CURRENT_CAMPAIGN_ORDER, unlockedLevelIds);
   return {
     schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
-    unlockedLevelCount: Math.max(
-      1,
-      nonNegativeInteger(ownValue(value, "unlockedLevelCount"), 1),
-    ),
+    unlockedLevelCount,
+    campaignOrderVersion: futureCampaignOrder
+      ? storedCampaignOrderVersion
+      : CAMPAIGN_ORDER_VERSION,
+    unlockedLevelIds,
     gold: nonNegativeInteger(ownValue(value, "gold")),
     sciencePoints: nonNegativeInteger(ownValue(value, "sciencePoints")),
     stickers: uniqueKnownIds(ownValue(value, "stickers"), isStickerId),
@@ -648,7 +763,7 @@ export function migratePlayerProgress(value: unknown): PlayerProgress {
   if (!isRecord(value)) return createDefaultPlayerProgress();
 
   const schemaVersion = ownValue(value, "schemaVersion");
-  if (schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION) {
+  if (schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION || schemaVersion === 3) {
     return sanitizeVersionThree(value);
   }
 
@@ -731,29 +846,103 @@ export function applyLevelCompletion(
     : undefined;
   const firstCompletion = existing === undefined;
   const source = existing?.source ?? input.source;
+  const canonicalCampaignIndex = source === "curated"
+    ? (CURRENT_CAMPAIGN_ORDER as readonly string[]).indexOf(levelId)
+    : -1;
+  const campaignIndex = canonicalCampaignIndex >= 0
+    ? canonicalCampaignIndex
+    : input.campaignIndex;
   const reward = calculateLevelReward({
     levelId,
     source,
-    campaignIndex: input.campaignIndex,
+    campaignIndex,
     rescuedCount,
     totalRescueCount: rescueTarget,
     firstCompletion,
   });
   const steps = nonNegativeInteger(input.steps);
   const power = nonNegativeInteger(input.power);
-  const wasPerfectRescue = existing?.perfectRescue ?? false;
-  const newlyPerfectRescue = !wasPerfectRescue && perfect;
+  const suppliedContentRevision = typeof input.contentRevision === "number"
+    && Number.isInteger(input.contentRevision)
+    && input.contentRevision > 0
+    ? input.contentRevision
+    : undefined;
+  const suppliedGameplayFingerprint = typeof input.gameplayFingerprint === "string"
+    && input.gameplayFingerprint.trim().length > 0
+    ? input.gameplayFingerprint.trim()
+    : undefined;
+  const contentRevision = suppliedContentRevision ?? existing?.contentRevision;
+  const gameplayFingerprint = suppliedGameplayFingerprint ?? existing?.gameplayFingerprint;
+  // A legacy route has no identity with which to prove comparability. Once a
+  // current completion supplies identity, treat that old best as history just
+  // like an explicitly different fingerprint instead of stamping it current.
+  const contentChanged = existing !== undefined
+    && suppliedGameplayFingerprint !== undefined
+    && (
+      existing.gameplayFingerprint !== suppliedGameplayFingerprint
+      || (suppliedContentRevision !== undefined
+        && existing.contentRevision !== suppliedContentRevision)
+    );
+  const historicalStepCandidates = [existing?.historicalBestSteps, existing?.bestSteps]
+    .filter((value): value is number => value !== null && value !== undefined);
+  const historicalBestSteps = contentChanged
+    ? historicalStepCandidates.length > 0
+      ? Math.min(...historicalStepCandidates)
+      : null
+    : existing?.historicalBestSteps;
+  const historicalPowerCandidates = [
+    existing?.historicalBestPower,
+    ...(contentChanged ? [existing?.bestPower] : []),
+  ].filter((value): value is number => value !== null && value !== undefined);
+  const historicalBestPower = contentChanged
+    ? historicalPowerCandidates.length > 0
+      ? Math.max(...historicalPowerCandidates)
+      : null
+    : existing?.historicalBestPower;
+  let historicalBestRescuedCount = existing?.historicalBestRescuedCount;
+  let historicalBestRescuedSpecies = existing?.historicalBestRescuedSpecies;
+  if (contentChanged && existing) {
+    const archivedCount = historicalBestRescuedCount ?? 0;
+    if (
+      existing.bestRescuedCount > archivedCount
+      || (existing.bestRescuedCount === archivedCount
+        && existing.bestRescuedSpecies.length > (historicalBestRescuedSpecies?.length ?? 0))
+    ) {
+      historicalBestRescuedCount = existing.bestRescuedCount;
+      historicalBestRescuedSpecies = existing.bestRescuedSpecies;
+    }
+  }
+  const historicalPerfectRescue = contentChanged
+    ? (existing?.historicalPerfectRescue ?? false) || (existing?.perfectRescue ?? false)
+    : existing?.historicalPerfectRescue;
+  const hadEverPerfectRescue = (existing?.perfectRescue ?? false)
+    || (existing?.historicalPerfectRescue ?? false);
+  const newlyPerfectRescue = !hadEverPerfectRescue && perfect;
   const perfectRescueMazeCount = current.perfectRescueMazeCount + (newlyPerfectRescue ? 1 : 0);
   const currentPerfectRescueStreak = firstCompletion
     ? perfect
       ? current.currentPerfectRescueStreak + 1
       : 0
     : current.currentPerfectRescueStreak;
-  const unlockedLevelCount = source === "curated" && input.campaignIndex >= 0
-    ? Math.max(current.unlockedLevelCount, Math.floor(input.campaignIndex) + 2)
-    : current.unlockedLevelCount;
-  const previousBestRescuedCount = existing?.bestRescuedCount ?? 0;
-  const previousBestSpecies = existing?.bestRescuedSpecies ?? [];
+  const knownUnlockedCount = source === "curated" && campaignIndex >= 0
+    ? Math.min(CURRENT_CAMPAIGN_ORDER.length, Math.max(
+      contiguousUnlockedCount(CURRENT_CAMPAIGN_ORDER, current.unlockedLevelIds),
+      Math.floor(campaignIndex) + 2,
+    ))
+    : contiguousUnlockedCount(CURRENT_CAMPAIGN_ORDER, current.unlockedLevelIds);
+  const futureCampaignOrder = current.campaignOrderVersion > CAMPAIGN_ORDER_VERSION;
+  const unlockedLevelCount = futureCampaignOrder
+    ? Math.max(current.unlockedLevelCount, knownUnlockedCount)
+    : knownUnlockedCount;
+  const knownUnlockedIds = source === "curated"
+    ? CURRENT_CAMPAIGN_ORDER.slice(0, knownUnlockedCount)
+    : current.unlockedLevelIds;
+  const unlockedLevelIds = futureCampaignOrder
+    ? mergeUnique(current.unlockedLevelIds, knownUnlockedIds)
+    : knownUnlockedIds;
+  const currentExisting = contentChanged ? undefined : existing;
+  const previousBestRescuedCount = currentExisting?.bestRescuedCount ?? 0;
+  const previousBestSpecies = currentExisting?.bestRescuedSpecies ?? [];
   const hasCompleteCurrentSpeciesRecord = rescuedSpecies.length === rescuedCount;
   const bestRescuedSpecies = rescuedCount > previousBestRescuedCount
     || (rescuedCount === previousBestRescuedCount
@@ -765,17 +954,24 @@ export function applyLevelCompletion(
 
   const bestResult: LevelBestResult = {
     completions: (existing?.completions ?? 0) + 1,
-    bestSteps: existing?.bestSteps === null || existing?.bestSteps === undefined
+    bestSteps: currentExisting?.bestSteps === null || currentExisting?.bestSteps === undefined
       ? steps
-      : Math.min(existing.bestSteps, steps),
-    bestPower: existing?.bestPower === null || existing?.bestPower === undefined
+      : Math.min(currentExisting.bestSteps, steps),
+    bestPower: currentExisting?.bestPower === null || currentExisting?.bestPower === undefined
       ? power
-      : Math.max(existing.bestPower, power),
+      : Math.max(currentExisting.bestPower, power),
     bestRescuedCount: Math.max(previousBestRescuedCount, rescuedCount),
     totalRescueCount: rescueTarget,
-    perfectRescue: wasPerfectRescue || perfect,
+    perfectRescue: (currentExisting?.perfectRescue ?? false) || perfect,
     source,
     bestRescuedSpecies,
+    ...(contentRevision === undefined ? {} : { contentRevision }),
+    ...(gameplayFingerprint === undefined ? {} : { gameplayFingerprint }),
+    ...(historicalBestSteps === undefined ? {} : { historicalBestSteps }),
+    ...(historicalBestPower === undefined ? {} : { historicalBestPower }),
+    ...(historicalBestRescuedCount === undefined ? {} : { historicalBestRescuedCount }),
+    ...(historicalBestRescuedSpecies === undefined ? {} : { historicalBestRescuedSpecies }),
+    ...(historicalPerfectRescue === undefined ? {} : { historicalPerfectRescue }),
   };
   const bestResultsByLevel = {
     ...current.bestResultsByLevel,
@@ -810,6 +1006,10 @@ export function applyLevelCompletion(
   return {
     schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
     unlockedLevelCount,
+    campaignOrderVersion: futureCampaignOrder
+      ? current.campaignOrderVersion
+      : CAMPAIGN_ORDER_VERSION,
+    unlockedLevelIds,
     gold: current.gold + reward.gold + nonNegativeInteger(input.bonusGold),
     sciencePoints: current.sciencePoints + nonNegativeInteger(input.sciencePoints),
     stickers: mergeUnique(current.stickers, reward.stickerIds),
@@ -842,7 +1042,7 @@ function browserStorage(): ProgressStorage | null {
   }
 }
 
-/** Save a sanitized v3 snapshot. Returns false instead of throwing on failure. */
+/** Save a sanitized v4 snapshot. Returns false instead of throwing on failure. */
 export function writePlayerProgress(
   progress: PlayerProgress,
   storage: ProgressStorage | null | undefined = undefined,
@@ -862,8 +1062,8 @@ export function writePlayerProgress(
 }
 
 /**
- * Read v3 progress, falling back through v2 and the released numeric v1 save.
- * Successful legacy migrations are transparently copied to the v3 key. Every
+ * Read v4 progress, falling back through v3, v2 and the released numeric v1 save.
+ * Successful legacy migrations are transparently copied to the v4 key. Every
  * storage and parsing failure returns a fresh default.
  */
 export function readPlayerProgress(
@@ -879,6 +1079,7 @@ export function readPlayerProgress(
         const parsed = JSON.parse(storedV3) as unknown;
         if (isRecord(parsed) && (
           parsed.schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION
+          || parsed.schemaVersion === 3
           || parsed.schemaVersion === 2
         )) {
           const migrated = migratePlayerProgress(parsed);
@@ -887,6 +1088,20 @@ export function readPlayerProgress(
         }
       } catch {
         // A usable legacy save may still be present below.
+      }
+    }
+
+    const priorV3 = target.getItem(VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY);
+    if (priorV3 !== null) {
+      try {
+        const parsed = JSON.parse(priorV3) as unknown;
+        if (isRecord(parsed) && parsed.schemaVersion === 3) {
+          const migrated = migratePlayerProgress(parsed);
+          writePlayerProgress(migrated, target);
+          return migrated;
+        }
+      } catch {
+        // Continue to older released formats.
       }
     }
 

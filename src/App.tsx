@@ -48,6 +48,7 @@ import {
   movePlayer,
   pointsEqual,
 } from "./game/engine";
+import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
 import { CURATED_LEVELS } from "./game/levels";
 import { createRoundedTerrainPath } from "./game/terrainGeometry";
@@ -62,6 +63,8 @@ import {
   type TileKey,
 } from "./game/exploration";
 import { getVisibleFollowerPoints, recordFollowerStep } from "./game/followerTrail";
+import { getProgressiveHint, hintStateKey } from "./game/hints";
+import { getRequiredPath } from "./game/reachability";
 import { animalPersonality, enemyPersonality } from "./game/visualPersonality";
 import {
   ANIMAL_SPECIES,
@@ -110,8 +113,8 @@ import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 import { getStoryRescueRecordDisplay } from "./rescueRecords";
 import { cameraWorldStyle, worldLayerStyle } from "./cameraMotion";
 import { getJumpPresentationMotion } from "./jumpPresentation";
-import { resetAllGameProgress } from "./resetProgress";
-import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
+import { resetAllGameProgressResult } from "./resetProgress";
+import { clearActiveRun, readActiveRunResult, writeActiveRun } from "./session";
 import {
   normalizedBoardPoint,
   pointerIntentFromTileOffset,
@@ -476,23 +479,6 @@ function describeMazePosition(level: LevelDefinition, state: GameState): string 
     return `${label}: open path`;
   });
   return `Ame is at column ${state.position.x + 1}, row ${state.position.y + 1}. ${nearby.join(". ")}.`;
-}
-
-function previewKind(level: LevelDefinition, state: GameState, direction: Direction): "go" | "stop" | "danger" {
-  const target = targetFor(state, direction);
-  const terrain = getTerrainAt(level, target);
-  if (!terrain || terrain === "wall") return "stop";
-  if ((terrain === "water" || terrain === "lava") && !state.hasBoots) return "stop";
-  if (terrain === "poison" && !state.hasAntidoteLeaf) return "stop";
-  if (terrain === "hole" && !state.hasSpringBoots) return "stop";
-  const object = getObjectAt(level, target);
-  if (!object || isObjectResolved(object, state)) return "go";
-  if (object.kind === "door" && !state.keys.includes(object.color)) return "stop";
-  if (object.kind === "enemy") {
-    if (!state.hasSword) return "stop";
-    if (state.power < object.power) return "danger";
-  }
-  return "go";
 }
 
 function animalArt(species: AnimalSpecies): string {
@@ -911,11 +897,14 @@ const MiniMap = memo(function MiniMap({
   ), [objects]);
   const exploredCount = useMemo(() => new Set([...revealed, ...currentView]).size, [currentView, revealed]);
   const exploredPercent = Math.round((exploredCount / (level.width * level.height)) * 100);
+  const guidedObject = highlightedObjectId
+    ? objects.find((object) => object.id === highlightedObjectId)
+    : undefined;
 
   return (
     <section
       className={`maze-map-card${compact ? " compact-map" : ""}`}
-      aria-label={`Exploration map. ${exploredCount} of ${level.width * level.height} tiles revealed, ${exploredPercent} percent.`}
+      aria-label={`Exploration map. ${exploredCount} of ${level.width * level.height} tiles revealed, ${exploredPercent} percent.${guidedObject ? ` Guided marker: ${describeObject(guidedObject)} at column ${guidedObject.at.x + 1}, row ${guidedObject.at.y + 1}.` : ""}`}
     >
       <div className="maze-map-heading"><img src={ASSETS.navMazes} alt="" /><strong>My map</strong><small>{exploredPercent}%</small></div>
       <div
@@ -992,7 +981,7 @@ function surpriseSettings(progress: PlayerProgress): { size: number; difficulty:
   const solvedSurprises = Object.keys(progress.bestResultsByLevel)
     .filter((levelId) => levelId.startsWith("surprise-"))
     .length;
-  const chapter = Math.max(1, progress.unlockedLevelCount) + (solvedSurprises >= 2 ? 1 : 0);
+  const chapter = Math.max(1, progress.unlockedLevelIds.length) + (solvedSurprises >= 2 ? 1 : 0);
   const sizes = [9, 11, 13, 15, 17] as const;
   const size = sizes[Math.min(sizes.length - 1, chapter - 1)] ?? 9;
   const difficulty: MazeDifficulty = chapter >= 5 ? "adventure" : chapter >= 3 ? "growing" : "gentle";
@@ -1007,87 +996,12 @@ function describeGeneratedRecord(levelId: string): string {
   return `${Number.isFinite(size) ? `${size} × ${size} · ` : ""}${difficulty[0]?.toUpperCase()}${difficulty.slice(1)}`;
 }
 
-function getHintReachableTiles(level: LevelDefinition, state: GameState): ReadonlySet<string> {
-  const reachable = new Set<string>([keyFor(state.position)]);
-  const queue = [state.position];
-  for (let head = 0; head < queue.length; head += 1) {
-    const point = queue[head];
-    if (!point) continue;
-    for (const direction of ["up", "right", "down", "left"] as const) {
-      const delta = DIRECTION_DELTAS[direction];
-      const next = { x: point.x + delta.x, y: point.y + delta.y };
-      const nextKey = keyFor(next);
-      if (reachable.has(nextKey)) continue;
-      const terrain = getTerrainAt(level, next);
-      if (!terrain || terrain === "wall") continue;
-      if ((terrain === "water" || terrain === "lava") && !state.hasBoots) continue;
-      if (terrain === "poison" && !state.hasAntidoteLeaf) continue;
-      if (terrain === "hole" && !state.hasSpringBoots) continue;
-      const object = getObjectAt(level, next);
-      if (object && !isObjectResolved(object, state)) {
-        if (object.kind === "door" && !state.keys.includes(object.color)) continue;
-        if (object.kind === "enemy" && (!state.hasSword || state.power < object.power)) continue;
-      }
-      reachable.add(nextKey);
-      queue.push(next);
-    }
-  }
-  return reachable;
-}
-
-function hintFor(level: LevelDefinition, state: GameState): string {
-  const unresolved = level.objects.filter((object) => !isObjectResolved(object, state));
-  const reachable = getHintReachableTiles(level, state);
-  const accessible = unresolved.filter((object) => reachable.has(keyFor(object.at)));
-  const weapon = accessible.find((object) => object.kind === "sword");
-  if (!state.hasSword && weapon) {
-    return `Look along a side path for the ${resolveWeaponArt(weapon.style).label}. Ame needs it before she can challenge a baddie.`;
-  }
-  if (!state.hasAntidoteLeaf && accessible.some((object) => object.kind === "antidote-leaf")) {
-    return "A bright green antidote leaf is hidden before the purple poison. Explore the branches you have not tried yet.";
-  }
-  if (!state.hasBoots && accessible.some((object) => object.kind === "boots")) {
-    return "Find the splashy boots on another path before crossing water or warm lava.";
-  }
-  if (!state.hasSpringBoots && accessible.some((object) => object.kind === "spring-boots")) {
-    return "The pink spring boots let Ame boing over holes. Check the side passages before the jump.";
-  }
-  const strongEnemy = unresolved.find((object) => (
-    object.kind === "enemy"
-    && object.power > state.power
-    && ([object.at, ...Object.values(DIRECTION_DELTAS).map((delta) => ({
-      x: object.at.x + delta.x,
-      y: object.at.y + delta.y,
-    }))]).some((point) => reachable.has(keyFor(point)))
-  ));
-  if (strongEnemy?.kind === "enemy") {
-    return `${resolveEnemyArt(strongEnemy.style).label} has Power ${strongEnemy.power}. Find potions or defeat smaller baddies until Ame reaches ${strongEnemy.power}.`;
-  }
-  const missingKey = accessible.find((object) => object.kind === "key");
-  if (missingKey?.kind === "key") {
-    const lockName = lockPairLabel(missingKey.color);
-    return `Look for the ${lockName} Key. Its colour and ${KEY_MOTIF_LABELS[missingKey.color].toLowerCase()} shape match only the ${lockName} Door.`;
-  }
-  const waitingFriend = accessible.find((object) => object.kind === "animal");
-  if (waitingFriend?.kind === "animal") {
-    return `${ANIMAL_LABELS[waitingFriend.species]} is still waiting in a cage. Try an unexplored branch before heading to the star.`;
-  }
-  const portal = accessible.find((object) => object.kind === "portal");
-  if (portal?.kind === "portal") {
-    const art = resolvePortalArt(portal.pair);
-    return `Step on the ${art.label} to pop out of its matching ${art.motif} flower. Matching colours and shapes always travel together.`;
-  }
-  if (!state.hasSword && unresolved.some((object) => object.kind === "sword")) {
-    return "The maze weapon is in another garden. Look for a matching magic flower or an unexplored turning.";
-  }
-  return "The way is ready now—follow the open passages toward the sparkling star.";
-}
-
 function App() {
   const [mazeMusicPicker] = useState(() => createMazeMusicPicker(createMusicRunSeed(), {
     previousTrackUrl: MUSIC_TRACKS.title,
   }));
-  const [initialRun] = useState(() => readActiveRun(CURATED_LEVELS));
+  const [initialRunResult] = useState(() => readActiveRunResult(CURATED_LEVELS));
+  const initialRun = initialRunResult.snapshot;
   const initialLevel = initialRun
     ? CURATED_LEVELS.find((candidate) => candidate.id === initialRun.levelId) ?? CURATED_LEVELS[0]!
     : CURATED_LEVELS[0]!;
@@ -1125,10 +1039,13 @@ function App() {
   const [muted, setMuted] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
+  const [hintUsesByState, setHintUsesByState] = useState<Readonly<Record<string, number>>>(() => initialRun?.hintUsesByState ?? {});
   const [storyOpen, setStoryOpen] = useState(false);
   const [blockerHint, setBlockerHint] = useState<BlockerHint | null>(null);
   const [guidedObjectId, setGuidedObjectId] = useState<string | null>(null);
   const [resetProgressOpen, setResetProgressOpen] = useState(false);
+  const [resetProgressError, setResetProgressError] = useState(false);
+  const [saveWarning, setSaveWarning] = useState<"run" | "progress" | null>(null);
   const [tooStrongEncounter, setTooStrongEncounter] = useState<TooStrongEncounter | null>(null);
   const [progress, setProgress] = useState<PlayerProgress>(readPlayerProgress);
   const [completion, setCompletion] = useState<CompletionCelebration | null>(null);
@@ -1172,6 +1089,7 @@ function App() {
   const mapPickupTimer = useRef<number | undefined>(undefined);
   const mapPickupSequence = useRef(0);
   const blockerBumps = useRef(new Map<string, number>());
+  const strongEnemyBumps = useRef(new Map<string, number>());
   const presentationTimers = useRef(new Set<number>());
   const presentationSequence = useRef(0);
   const treasureTimer = useRef<number | undefined>(undefined);
@@ -1240,15 +1158,8 @@ function App() {
   const explorationMode = isExplorationLevel(level);
   const testerRun = runMode === "tester";
   const testerToolsEnabled = testerToolsRequested || testerRun;
-  const inferredUnlocked = CURATED_LEVELS.reduce((highest, candidate, index) => (
-    progress.bestResultsByLevel[candidate.id]
-      ? Math.max(highest, index + 2)
-      : highest
-  ), 1);
-  const unlocked = Math.min(
-    CURATED_LEVELS.length,
-    Math.max(progress.unlockedLevelCount, inferredUnlocked),
-  );
+  const unlockedLevelIds = new Set(progress.unlockedLevelIds);
+  const unlockedStoryLevels = CURATED_LEVELS.filter((candidate) => unlockedLevelIds.has(candidate.id));
   const cameraWindow = useMemo(() => {
     if (!explorationMode) return fullLevelWindow(level);
     const cameraFocus = jumpPresentation
@@ -1345,16 +1256,23 @@ function App() {
   useEffect(() => {
     if (runMode === "tester") return;
     if (!hasActiveRun || level.source !== "curated" || game.status !== "playing") {
-      clearActiveRun();
+      const cleared = clearActiveRun();
+      setSaveWarning((current) => cleared && current === "run"
+        ? null
+        : !cleared && hasActiveRun && current !== "progress" ? "run" : current);
       return;
     }
-    writeActiveRun({
+    const saved = writeActiveRun({
       mode: "normal",
       level,
       game,
       revealedTiles,
+      hintUsesByState,
     });
-  }, [game, hasActiveRun, level, revealedTiles, runMode]);
+    setSaveWarning((current) => saved && current === "run"
+      ? null
+      : !saved && current !== "progress" ? "run" : current);
+  }, [game, hasActiveRun, hintUsesByState, level, revealedTiles, runMode]);
 
   const clearDpadHold = useCallback(() => {
     dpadHoldDirection.current = null;
@@ -1674,9 +1592,11 @@ function App() {
     setCompletion(null);
     setTooStrongEncounter(null);
     setHintOpen(false);
+    setHintUsesByState({});
     setBlockerHint(null);
     setGuidedObjectId(null);
     blockerBumps.current.clear();
+    strongEnemyBumps.current.clear();
     setPendingAdventure(null);
     setFeedback({ icon: ASSETS.goal, text: nextLevel.objective, tone: "plain", sound: "step" });
     setRestartArmed(false);
@@ -1685,13 +1605,7 @@ function App() {
   const attemptMove = useCallback((requestedDirection: Direction, lateralOffset = 0) => {
     const unavailable = (
       screen !== "game"
-      || pendingAdventure !== null
-      || testerPickerOpen
-      || helpOpen
-      || hintOpen
-      || storyOpen
-      || blockerHint !== null
-      || tooStrongEncounter !== null
+      || modalOpen
       || game.status !== "playing"
     );
     if (unavailable) {
@@ -1726,8 +1640,8 @@ function App() {
         const nextHint = { ...hintSeed, count };
         modalReturnFocus.current = boardRef.current;
         clearHeldInput();
-        setBlockerHint(nextHint);
-        if (count >= 3) setGuidedObjectId(nextHint.itemId);
+        if (count >= 3) setBlockerHint(nextHint);
+        if (count >= 2) setGuidedObjectId(nextHint.itemId);
       }
     }
     if (result.state.status !== "playing" || tooStrongEvent) {
@@ -1830,13 +1744,25 @@ function App() {
           object.kind === "enemy" && object.id === tooStrongEvent.objectId
         ),
       );
+      const priorBumps = strongEnemyBumps.current.get(tooStrongEvent.objectId) ?? 0;
+      strongEnemyBumps.current.set(tooStrongEvent.objectId, priorBumps + 1);
+      // Every safe collision requires a fresh deliberate press. Otherwise one
+      // held input floods the live region and bump audio at accelerated cadence.
       clearHeldInput();
-      if (enemy) {
+      if (enemy && priorBumps === 0) {
         const art = resolveEnemyArt(enemy.style);
         setTooStrongEncounter({ event: tooStrongEvent, enemySrc: art.src, enemyLabel: art.label });
+      } else if (enemy) {
+        setFeedback({
+          icon: resolveEnemyArt(enemy.style).src,
+          text: `${resolveEnemyArt(enemy.style).label}: ${tooStrongEvent.enemyPower} Power. Ame is safe at ${tooStrongEvent.playerPower}; explore, then return.`,
+          tone: "plain",
+          sound: "bump",
+        });
       }
       playSound("bump", mutedRef.current);
     } else if (rescuedEvent) {
+      clearHeldInput();
       const animal = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "animal" }> => (
           object.kind === "animal" && object.id === rescuedEvent.objectId
@@ -1931,6 +1857,8 @@ function App() {
           rescuedSpecies: resultRescuedSpecies,
           steps: result.state.steps,
           power: result.state.power,
+          contentRevision: level.contentRevision,
+          gameplayFingerprint: level.gameplayFingerprint,
           bonusGold: result.state.goldStarsCollected,
           sciencePoints: result.state.sciencePointsCollected,
         });
@@ -1938,7 +1866,10 @@ function App() {
         const newMedalIds = nextProgress.medals.filter((id) => !progress.medals.includes(id));
         const newBadgeIds = nextProgress.badges.filter((id) => !progress.badges.includes(id));
         setProgress(nextProgress);
-        writePlayerProgress(nextProgress);
+        const progressSaved = writePlayerProgress(nextProgress);
+        setSaveWarning((current) => progressSaved && current === "progress"
+          ? null
+          : !progressSaved ? "progress" : current);
         setCompletion({
           reward,
           newStickerIds,
@@ -1967,7 +1898,7 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, blockerHint, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, showMapNotice, storyOpen, testerPickerOpen, testerRun, tooStrongEncounter]);
+  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, level, modalOpen, muted, progress, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
   const dismissStory = useCallback(() => {
     setStoryOpen(false);
@@ -2010,7 +1941,7 @@ function App() {
         }
         return;
       }
-      if (pendingAdventure !== null || testerPickerOpen) return;
+      if (modalOpen) return;
       if (
         event.key === "Escape"
         && screen === "game"
@@ -2025,7 +1956,7 @@ function App() {
         return;
       }
       const direction = directionForKey(event.key);
-      if (!direction || screen !== "game" || helpOpen || hintOpen || tooStrongEncounter !== null || testerPickerOpen || game.status !== "playing") return;
+      if (!direction || screen !== "game" || modalOpen || game.status !== "playing") return;
       if (event.ctrlKey || event.metaKey || event.altKey) return;
       event.preventDefault();
       if (event.repeat) return;
@@ -2075,13 +2006,13 @@ function App() {
       window.removeEventListener("blur", clearHeldInput);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [bigMaze, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
+  }, [bigMaze, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => {
-    if (screen !== "game" || helpOpen || hintOpen || storyOpen || tooStrongEncounter !== null || testerPickerOpen || pendingAdventure !== null || game.status !== "playing") {
+    if (screen !== "game" || modalOpen || game.status !== "playing") {
       clearHeldInput();
     }
-  }, [clearHeldInput, game.status, helpOpen, hintOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
+  }, [clearHeldInput, game.status, modalOpen, screen]);
 
   useEffect(() => () => {
     clearPresentationWork();
@@ -2334,6 +2265,8 @@ function App() {
 
   const openHint = (trigger: HTMLElement) => {
     modalReturnFocus.current = trigger;
+    const key = hintStateKey(game);
+    setHintUsesByState((uses) => ({ ...uses, [key]: Math.min(4, (uses[key] ?? 0) + 1) }));
     setHintOpen(true);
     playSound("menu", muted);
   };
@@ -2362,11 +2295,13 @@ function App() {
 
   const openResetProgress = (trigger: HTMLElement) => {
     modalReturnFocus.current = trigger;
+    setResetProgressError(false);
     setResetProgressOpen(true);
     playSound("menu", muted);
   };
 
   const closeResetProgress = () => {
+    setResetProgressError(false);
     setResetProgressOpen(false);
     playSound("menu", muted);
   };
@@ -2386,6 +2321,7 @@ function App() {
 
   const openLevelPicker = (trigger?: HTMLElement) => {
     modalReturnFocus.current = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    clearHeldInput();
     setLevelPickerOpen(true);
     playSound("menu", muted);
   };
@@ -2483,7 +2419,12 @@ function App() {
     const firstLevel = CURATED_LEVELS[0];
     if (!firstLevel) return;
 
-    setProgress(resetAllGameProgress());
+    const resetResult = resetAllGameProgressResult();
+    if (!resetResult.cleared) {
+      setResetProgressError(true);
+      return;
+    }
+    setProgress(resetResult.progress);
     setRunMode("normal");
     setHasActiveRun(false);
     setResetProgressOpen(false);
@@ -2520,11 +2461,19 @@ function App() {
     && game.steps === 0
     && progress.bestResultsByLevel[level.id] === undefined;
   const suggestedMoveDirection = firstMoveNudge
-    ? (["left", "right", "up", "down"] as const).find(
-      (direction) => previewKind(level, game, direction) === "go",
-    ) ?? null
+    ? getRequiredPath(level, game)?.[0] ?? null
     : null;
-  const currentHint = hintFor(level, game);
+  const currentHintKey = hintStateKey(game);
+  // Solver-backed help is intentionally on demand. Running this search during
+  // every ordinary render/movement commit makes larger mazes feel sticky.
+  const currentHint = useMemo(() => hintOpen
+    ? getProgressiveHint(
+      level,
+      game,
+      Math.max(0, (hintUsesByState[currentHintKey] ?? 1) - 1),
+    )
+    : null,
+  [game, hintOpen, hintUsesByState, currentHintKey, level]);
   const ownedCollectibles = [
     ...progress.stickers.slice(-3).map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id) })),
     ...progress.medals.slice(-2).map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id) })),
@@ -2560,9 +2509,17 @@ function App() {
           data-logical-size={`${LOGICAL_STAGE_WIDTH}x${LOGICAL_STAGE_HEIGHT}`}
           style={screen === "game" ? { touchAction: "none", userSelect: "none", WebkitUserSelect: "none" } : undefined}
         >
+        {saveWarning && (
+          <p className="save-warning" role="alert">
+            {saveWarning === "progress"
+              ? "Ame’s Adventure Book couldn’t be saved on this device. Keep the game open and try another maze after checking storage access."
+              : "This maze couldn’t be saved on this device. You can keep playing, but closing the game may restart this maze."}
+          </p>
+        )}
         {screen === "title" ? (
           <TitleScreen
             progress={progress}
+            updatedMazeRestarted={initialRunResult.discardedUpdatedRun}
             activeRun={runInProgress ? { name: level.name, steps: game.steps } : null}
             blocked={pendingAdventure !== null || resetProgressOpen || testerPickerOpen || levelPickerOpen}
             muted={muted}
@@ -2578,7 +2535,7 @@ function App() {
         ) : screen === "achievements" ? (
           <AchievementsScreen
             progress={progress}
-            unlocked={unlocked}
+            unlockedLevelIds={progress.unlockedLevelIds}
             activeRun={runInProgress ? { levelId: level.id, name: level.name, steps: game.steps } : null}
             blocked={pendingAdventure !== null || resetProgressOpen || testerPickerOpen || levelPickerOpen}
             headingRef={achievementsHeadingRef}
@@ -3121,11 +3078,12 @@ function App() {
           </Modal>
         )}
 
-        {hintOpen && (
+        {hintOpen && currentHint && (
           <Modal title="A little hint" onClose={closeHint} returnFocus={modalReturnFocus.current}>
             <div className="hint-card">
               <img className="hint-spark" src={ASSETS.navHelp} alt="" />
-              <p>{currentHint}</p>
+              <p>{currentHint.text}</p>
+              <small>Hint {currentHint.tier + 1} of 4 · ask again for a little more help</small>
             </div>
             <button className="primary-button" onClick={closeHint}>Got it!</button>
           </Modal>
@@ -3240,9 +3198,20 @@ function App() {
           <Modal title="Choose a maze" onClose={closeLevelPicker} returnFocus={modalReturnFocus.current}>
             <p className="modal-lead level-picker-lead">Replay any unlocked story maze and bring home friends you missed.</p>
             <div className="level-picker-list" aria-label="Unlocked story mazes">
-              {CURATED_LEVELS.slice(0, unlocked).map((candidate, index) => {
+              {unlockedStoryLevels.map((candidate) => {
+                const index = CURATED_LEVELS.findIndex((storyLevel) => storyLevel.id === candidate.id);
                 const result = progress.bestResultsByLevel[candidate.id];
+                const currentResult = result && hasCurrentGameplay(
+                  candidate,
+                  result.contentRevision ?? 0,
+                  result.gameplayFingerprint ?? "",
+                ) ? result : undefined;
                 const friendTotal = candidate.objects.filter((object) => object.kind === "animal").length;
+                const earlierBest = [
+                  result?.historicalBestSteps,
+                  !currentResult ? result?.bestSteps : undefined,
+                ].filter((steps): steps is number => typeof steps === "number")
+                  .reduce<number | undefined>((best, steps) => best === undefined ? steps : Math.min(best, steps), undefined);
                 return (
                   <button key={candidate.id} className={candidate.id === level.id ? "current" : ""} onClick={() => {
                     setLevelPickerOpen(false);
@@ -3251,10 +3220,14 @@ function App() {
                     <b>{index + 1}</b>
                     <span>
                       <strong>{candidate.name}</strong>
-                      <small>{result ? `Best ${result.bestSteps ?? "—"} steps · Friends ${result.bestRescuedCount}/${friendTotal}` : `${candidate.width} × ${candidate.height} · New`}</small>
+                      <small>{currentResult
+                        ? `Best ${currentResult.bestSteps ?? "—"} steps · Friends ${currentResult.bestRescuedCount}/${friendTotal}${earlierBest !== undefined && earlierBest !== null ? ` · Earlier ${earlierBest}` : ""}`
+                        : result
+                          ? `New layout ready · Earlier best ${earlierBest ?? "—"} steps`
+                          : `${candidate.width} × ${candidate.height} · New`}</small>
                       <em>{storyForLevel(candidate.id)?.puzzlePower}</em>
                     </span>
-                    <i aria-hidden="true">{result?.perfectRescue ? "★" : "→"}</i>
+                    <i aria-hidden="true">{currentResult?.perfectRescue ? "★" : "→"}</i>
                   </button>
                 );
               })}
@@ -3309,6 +3282,11 @@ function App() {
               <strong>{level.name}</strong> is waiting at {game.steps} {game.steps === 1 ? "step" : "steps"}.
               Starting <strong>{pendingAdventure.level.name}</strong> will restart this run.
             </p>
+            {resetProgressError && (
+              <p className="modal-lead" role="alert">
+                We couldn’t finish forgetting the saved adventure on this device, so this screen has not changed. Please try again.
+              </p>
+            )}
             <div className="modal-actions">
               <button className="primary-button" onClick={resumeRun}>Keep this maze</button>
               <button className="secondary-button" onClick={() => {
@@ -3351,6 +3329,7 @@ function App() {
 
 interface TitleScreenProps {
   readonly progress: PlayerProgress;
+  readonly updatedMazeRestarted: boolean;
   readonly activeRun: { readonly name: string; readonly steps: number } | null;
   readonly blocked: boolean;
   readonly muted: boolean;
@@ -3366,6 +3345,7 @@ interface TitleScreenProps {
 
 function TitleScreen({
   progress,
+  updatedMazeRestarted,
   activeRun,
   blocked,
   muted,
@@ -3421,6 +3401,11 @@ function TitleScreen({
         <h1 id="game-title">Maze so <em>Puzzle!</em></h1>
         <p className="title-subtitle">For Ame to Solve!</p>
         <p className="title-welcome">Follow the paths, grow Ame's Power, and help every little friend find their way home.</p>
+        {updatedMazeRestarted && (
+          <p className="title-welcome" role="status">
+            This maze was updated, so Ame restarted it. Your Adventure Book is safe.
+          </p>
+        )}
 
         <div className="title-actions">
           <button ref={playRef} className="title-play-button" onClick={onPlay}>
@@ -3457,7 +3442,7 @@ function TitleScreen({
 
 interface AchievementsScreenProps {
   readonly progress: PlayerProgress;
-  readonly unlocked: number;
+  readonly unlockedLevelIds: readonly string[];
   readonly activeRun: { readonly levelId: string; readonly name: string; readonly steps: number } | null;
   readonly blocked: boolean;
   readonly headingRef: React.RefObject<HTMLHeadingElement | null>;
@@ -3472,7 +3457,7 @@ interface AchievementsScreenProps {
 
 function AchievementsScreen({
   progress,
-  unlocked,
+  unlockedLevelIds,
   activeRun,
   blocked,
   headingRef,
@@ -3581,9 +3566,19 @@ function AchievementsScreen({
           <div className="maze-record-grid">
             {CURATED_LEVELS.map((storyLevel, index) => {
               const result = progress.bestResultsByLevel[storyLevel.id];
-              const locked = index >= unlocked;
-              const rescueCount = result?.bestRescuedCount ?? 0;
-              const documentedSpecies = result?.bestRescuedSpecies ?? [];
+              const currentResult = result && hasCurrentGameplay(
+                storyLevel,
+                result.contentRevision ?? 0,
+                result.gameplayFingerprint ?? "",
+              ) ? result : undefined;
+              const locked = !unlockedLevelIds.includes(storyLevel.id);
+              const rescueCount = currentResult?.bestRescuedCount ?? 0;
+              const documentedSpecies = currentResult?.bestRescuedSpecies ?? [];
+              const earlierBest = [
+                result?.historicalBestSteps,
+                !currentResult ? result?.bestSteps : undefined,
+              ].filter((steps): steps is number => typeof steps === "number")
+                .reduce<number | undefined>((best, steps) => best === undefined ? steps : Math.min(best, steps), undefined);
               const storySpecies = storyLevel.objects.flatMap((object) => (
                 object.kind === "animal" ? [object.species] : []
               ));
@@ -3599,7 +3594,7 @@ function AchievementsScreen({
                   key={storyLevel.id}
                   disabled={locked}
                   onClick={() => isActive ? onResume() : onPlayLevel(storyLevel)}
-                  aria-label={`${storyLevel.name}. ${locked ? "Locked" : isActive ? `Current maze, ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : result ? `Cleared, best ${result.bestSteps ?? 0} steps, ${rescueCount} friends rescued${hasUnknownRescues ? ", some friend details came from an earlier version" : ""}` : "Ready to play"}`}
+                  aria-label={`${storyLevel.name}. ${locked ? "Locked" : isActive ? `Current maze, ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : currentResult ? `Cleared on this layout, best ${currentResult.bestSteps ?? 0} steps, ${rescueCount} friends rescued${hasUnknownRescues ? ", some friend details came from an earlier version" : ""}` : result ? "Cleared on an earlier maze version; this layout has no record yet" : "Ready to play"}`}
                 >
                   <span className="record-number">{locked ? "◆" : isActive ? "▶" : index + 1}</span>
                   <span className="record-copy">
@@ -3607,7 +3602,13 @@ function AchievementsScreen({
                     <small>{locked ? "Keep adventuring to unlock" : isActive ? "Current maze · tap to resume" : `${storyLevel.width} × ${storyLevel.height}`}</small>
                     {!locked && <em className="record-skill">{storyForLevel(storyLevel.id)?.puzzlePower}</em>}
                   </span>
-                  <span className="record-best">{result ? <><b>{result.bestSteps ?? "—"}</b><small>best {result.bestSteps === 1 ? "step" : "steps"}</small></> : locked ? <><img className="record-lock-art" src={ASSETS.doorBlueStar} alt="" /><small>locked</small></> : <><b>New</b><small>ready</small></>}</span>
+                  <span className="record-best">{currentResult
+                    ? <><b>{currentResult.bestSteps ?? "—"}</b><small>best {currentResult.bestSteps === 1 ? "step" : "steps"}{earlierBest !== undefined && earlierBest !== null ? ` · earlier ${earlierBest}` : ""}</small></>
+                    : result
+                      ? <><b>New</b><small>layout · earlier {earlierBest ?? "—"}</small></>
+                      : locked
+                        ? <><img className="record-lock-art" src={ASSETS.doorBlueStar} alt="" /><small>locked</small></>
+                        : <><b>New</b><small>ready</small></>}</span>
                   <span className="record-friends" aria-hidden="true">
                     {storySpecies.map((species) => (
                       <img

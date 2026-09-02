@@ -1,4 +1,5 @@
 import { pointKey } from "./engine";
+import { gameplayFingerprint } from "./contentIdentity";
 import { solveLevel, validateLevel } from "./solver";
 import type {
   AnimalSpecies,
@@ -1144,8 +1145,20 @@ function buildGeneratedLevel(
     });
   }
 
+  const identityInput = {
+    contentRevision: 1,
+    width: size,
+    height: size,
+    initialPower: 2,
+    start,
+    exit,
+    terrain,
+    objects,
+  };
   return {
     schemaVersion: 1,
+    contentRevision: 1,
+    gameplayFingerprint: gameplayFingerprint(identityInput),
     id,
     name: "Surprise Maze",
     objective: difficulty === "movement"
@@ -1157,7 +1170,7 @@ function buildGeneratedLevel(
     seed: seedText,
     width: size,
     height: size,
-    initialPower: 2,
+    initialPower: identityInput.initialPower,
     start,
     exit,
     terrain,

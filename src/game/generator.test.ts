@@ -67,6 +67,15 @@ describe("deterministic surprise mazes", () => {
     expect(second).toEqual(first);
   });
 
+  it.each([
+    ["golden-move", "movement", 9, "g-e8c43d52"],
+    ["golden-grow", "growing", 13, "g-2fa84446"],
+    ["golden-adventure", "adventure", 17, "g-c575e9cd"],
+  ] as const)("keeps fixed seed %s on its reviewed gameplay fingerprint", (seed, difficulty, size, fingerprint) => {
+    const level = generateSurpriseMaze({ seed, difficulty, size });
+    expect(level.gameplayFingerprint).toBe(fingerprint);
+  });
+
   it("provides the numeric-difficulty UI wrapper", () => {
     const level = generateSurpriseLevel("ui-seed", 2);
     expect(level.source).toBe("generated");

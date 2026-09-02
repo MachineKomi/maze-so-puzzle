@@ -21,6 +21,8 @@ function makeLevel(
   }));
   return {
     schemaVersion: 1,
+    contentRevision: 1,
+    gameplayFingerprint: "test-pointer",
     id: "pointer-test",
     name: "Pointer test",
     objective: "Test pointer movement",
@@ -91,6 +93,19 @@ describe("resolvePointerMoveDirection", () => {
     "#...#",
     "#####",
   ] as const;
+  const unresolvedInteractionObjects = [
+    { id: "sword", kind: "sword", at: { x: 1, y: 1 } },
+    { id: "boots", kind: "boots", at: { x: 1, y: 1 } },
+    { id: "spring-boots", kind: "spring-boots", at: { x: 1, y: 1 } },
+    { id: "leaf", kind: "antidote-leaf", at: { x: 1, y: 1 } },
+    { id: "potion", kind: "potion", amount: 2, at: { x: 1, y: 1 } },
+    { id: "key", kind: "key", color: "red", at: { x: 1, y: 1 } },
+    { id: "treasure", kind: "treasure", currency: "gold", amount: 2, style: "gold-bag", at: { x: 1, y: 1 } },
+    { id: "animal", kind: "animal", species: "bunny", at: { x: 1, y: 1 } },
+    { id: "door", kind: "door", color: "red", at: { x: 1, y: 1 } },
+    { id: "enemy", kind: "enemy", power: 1, at: { x: 1, y: 1 } },
+    { id: "portal", kind: "portal", pair: "rose-heart", at: { x: 1, y: 1 } },
+  ] satisfies readonly LevelObject[];
 
   it("leaves an ordinary intended move unchanged", () => {
     const level = makeLevel(cornerRows);
@@ -201,10 +216,7 @@ describe("resolvePointerMoveDirection", () => {
     expect(resolvePointerMoveDirection(level, state, "right", -1)).toBe("right");
   });
 
-  it.each([
-    { id: "door", kind: "door", color: "red", at: { x: 1, y: 1 } },
-    { id: "enemy", kind: "enemy", power: 1, at: { x: 1, y: 1 } },
-  ] satisfies readonly LevelObject[])("never auto-steers through an unresolved blocker", (object) => {
+  it.each(unresolvedInteractionObjects)("never auto-steers onto unresolved $kind interactions", (object) => {
     const level = makeLevel(cornerRows, [object]);
     const state = {
       ...createInitialGameState(level),
@@ -212,6 +224,40 @@ describe("resolvePointerMoveDirection", () => {
       keys: ["red"] as const,
     };
     expect(resolvePointerMoveDirection(level, state, "right", -1)).toBe("right");
+  });
+
+  it.each(unresolvedInteractionObjects)("requires the forward tile to avoid unresolved $kind interactions", (object) => {
+    const level = makeLevel(cornerRows, [{ ...object, at: { x: 2, y: 1 } }]);
+    expect(resolvePointerMoveDirection(
+      level,
+      createInitialGameState(level),
+      "right",
+      -1,
+    )).toBe("right");
+  });
+
+  it("allows a one-tile correction across an already collected ordinary floor object", () => {
+    const object = { id: "collected-sword", kind: "sword", at: { x: 1, y: 1 } } as const;
+    const level = makeLevel(cornerRows, [object]);
+    const state = {
+      ...createInitialGameState(level),
+      hasSword: true,
+      collectedObjectIds: [object.id],
+    };
+    expect(resolvePointerMoveDirection(level, state, "right", -1)).toBe("up");
+  });
+
+  it.each([
+    ["correction", { x: 1, y: 1 }],
+    ["forward landing", { x: 2, y: 1 }],
+  ] as const)("never turns a wall assist into an accidental exit via its %s tile", (_case, exit) => {
+    const level = { ...makeLevel(cornerRows), exit };
+    expect(resolvePointerMoveDirection(
+      level,
+      createInitialGameState(level),
+      "right",
+      -1,
+    )).toBe("right");
   });
 
   it.each([

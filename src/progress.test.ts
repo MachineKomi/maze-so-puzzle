@@ -12,6 +12,7 @@ import {
   REWARD_LABELS,
   STICKER_LABELS,
   VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY,
+  VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY,
   writePlayerProgress,
   type LevelCompletionInput,
   type ProgressStorage,
@@ -63,8 +64,10 @@ describe("player progress migration and persistence", () => {
     const second = createDefaultPlayerProgress();
 
     expect(first).toEqual({
-      schemaVersion: 3,
+      schemaVersion: 4,
       unlockedLevelCount: 1,
+      campaignOrderVersion: 2,
+      unlockedLevelIds: ["little-star-trail"],
       gold: 0,
       sciencePoints: 0,
       stickers: [],
@@ -94,7 +97,7 @@ describe("player progress migration and persistence", () => {
   ])("migrates a v1 value %j", (stored, expectedUnlocked) => {
     const migrated = migratePlayerProgress(stored);
 
-    expect(migrated.schemaVersion).toBe(3);
+    expect(migrated.schemaVersion).toBe(4);
     expect(migrated.unlockedLevelCount).toBe(expectedUnlocked);
     expect(migrated.gold).toBe(0);
   });
@@ -110,7 +113,7 @@ describe("player progress migration and persistence", () => {
     };
 
     expect(loaded.unlockedLevelCount).toBe(4);
-    expect(copied).toMatchObject({ schemaVersion: 3, unlockedLevelCount: 4 });
+    expect(copied).toMatchObject({ schemaVersion: 4, unlockedLevelCount: 4 });
   });
 
   it("prefers a valid v2 save and sanitizes unsafe values", () => {
@@ -139,7 +142,7 @@ describe("player progress migration and persistence", () => {
     const loaded = readPlayerProgress(storage);
 
     expect(loaded).toMatchObject({
-      schemaVersion: 3,
+      schemaVersion: 4,
       unlockedLevelCount: 1,
       gold: 14,
       stickers: ["animal-friend"],
@@ -166,7 +169,7 @@ describe("player progress migration and persistence", () => {
       bestRescuedSpecies: [],
     });
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 3 });
+      .toMatchObject({ schemaVersion: 4 });
   });
 
   it("migrates v2 species and generated history conservatively", () => {
@@ -191,7 +194,7 @@ describe("player progress migration and persistence", () => {
     });
 
     expect(migrated).toMatchObject({
-      schemaVersion: 3,
+      schemaVersion: 4,
       totalMazesCompleted: 1,
       totalCompletions: 2,
       generatedCompletions: 0,
@@ -271,9 +274,39 @@ describe("player progress migration and persistence", () => {
     expect(migrated.totalAnimalsRescued).toBe(9);
   });
 
+  it.each([
+    [1, ["little-star-trail"]],
+    [8, [
+      "little-star-trail", "shiny-sword", "splashy-boots", "rainbow-picnic",
+      "toasty-toes", "moonbeam-moat", "wishing-woods", "ames-grand-parade",
+    ]],
+    [99, [
+      "little-star-trail", "shiny-sword", "splashy-boots", "rainbow-picnic",
+      "toasty-toes", "moonbeam-moat", "wishing-woods", "ames-grand-parade",
+      "springstep-sky-hollow", "lanternlight-labyrinth", "twilight-treasure-loop",
+      "moonlit-friendship-quest", "rose-heart-roundabout", "clover-comeback-carnival",
+      "friendship-crown-vault", "rainbow-power-parade",
+    ]],
+  ] as const)("migrates legacy campaign access safely for unlocked count %s", (count, ids) => {
+    const migrated = migratePlayerProgress({ schemaVersion: 3, unlockedLevelCount: count });
+    expect(migrated.unlockedLevelIds).toEqual(ids);
+    expect(migrated.unlockedLevelCount).toBe(ids.length);
+  });
+
+  it("repairs inconsistent current campaign IDs to a contiguous, bounded prefix", () => {
+    const migrated = migratePlayerProgress({
+      schemaVersion: 4,
+      unlockedLevelCount: 99,
+      campaignOrderVersion: 2,
+      unlockedLevelIds: ["little-star-trail", "splashy-boots", "not-a-maze"],
+    });
+    expect(migrated.unlockedLevelIds).toEqual(["little-star-trail", "shiny-sword", "splashy-boots"]);
+    expect(migrated.unlockedLevelCount).toBe(3);
+  });
+
   it("prefers v3, but falls back to v2 before v1 when newer data is corrupt", () => {
     const storage = new MemoryStorage();
-    storage.values.set(PLAYER_PROGRESS_STORAGE_KEY, JSON.stringify({
+    storage.values.set(VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY, JSON.stringify({
       schemaVersion: 3,
       unlockedLevelCount: 6,
     }));
@@ -284,11 +317,49 @@ describe("player progress migration and persistence", () => {
     storage.values.set(LEGACY_PLAYER_PROGRESS_STORAGE_KEY, "2");
 
     expect(readPlayerProgress(storage).unlockedLevelCount).toBe(6);
+    expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
+      .toMatchObject({ schemaVersion: 4, unlockedLevelCount: 6 });
 
     storage.values.set(PLAYER_PROGRESS_STORAGE_KEY, "{broken");
+    storage.values.set(VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY, "{broken");
     expect(readPlayerProgress(storage).unlockedLevelCount).toBe(4);
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 3, unlockedLevelCount: 4 });
+      .toMatchObject({ schemaVersion: 4, unlockedLevelCount: 4 });
+  });
+
+  it("preserves unknown future campaign identity through sanitize, apply, and storage", () => {
+    const future = migratePlayerProgress({
+      schemaVersion: 4,
+      campaignOrderVersion: 3,
+      unlockedLevelCount: 18,
+      unlockedLevelIds: ["little-star-trail", "future-maze-17", "future-maze-18"],
+      bestResultsByLevel: {},
+    });
+    expect(future).toMatchObject({
+      campaignOrderVersion: 3,
+      unlockedLevelCount: 18,
+      unlockedLevelIds: ["little-star-trail", "future-maze-17", "future-maze-18"],
+    });
+
+    const afterCompletion = applyLevelCompletion(
+      future,
+      completion("little-star-trail", 99, 0, {
+        contentRevision: 2,
+        gameplayFingerprint: "g-881ac73e",
+      }),
+    );
+    expect(afterCompletion.campaignOrderVersion).toBe(3);
+    expect(afterCompletion.unlockedLevelCount).toBe(18);
+    expect(afterCompletion.unlockedLevelIds).toEqual([
+      "little-star-trail",
+      "future-maze-17",
+      "future-maze-18",
+      "shiny-sword",
+    ]);
+
+    const storage = new MemoryStorage();
+    expect(writePlayerProgress(afterCompletion, storage)).toBe(true);
+    expect(readPlayerProgress(storage)).toEqual(afterCompletion);
   });
 
   it("ignores inherited save data and prototype-sensitive level ids", () => {
@@ -330,7 +401,7 @@ describe("player progress migration and persistence", () => {
     expect(readPlayerProgress(null)).toEqual(createDefaultPlayerProgress());
   });
 
-  it("round-trips a v3 save", () => {
+  it("round-trips a v4 save", () => {
     const storage = new MemoryStorage();
     const progress = applyLevelCompletion(
       createDefaultPlayerProgress(),
@@ -479,6 +550,117 @@ describe("level rewards", () => {
 });
 
 describe("applying level completions", () => {
+  it("does not launder an unidentified v3 route into the current layout", () => {
+    const legacy = migratePlayerProgress({
+      schemaVersion: 3,
+      unlockedLevelCount: 2,
+      bestResultsByLevel: {
+        "changing-maze": {
+          completions: 1,
+          bestSteps: 24,
+          bestPower: 5,
+          bestRescuedCount: 0,
+          totalRescueCount: 3,
+          perfectRescue: false,
+          source: "curated",
+          bestRescuedSpecies: [],
+        },
+      },
+    });
+    const revised = applyLevelCompletion(
+      legacy,
+      completion("changing-maze", 0, 0, {
+        steps: 31,
+        contentRevision: 2,
+        gameplayFingerprint: "g-current",
+      }),
+    );
+
+    expect(revised.bestResultsByLevel["changing-maze"]).toMatchObject({
+      completions: 2,
+      bestSteps: 31,
+      historicalBestSteps: 24,
+      contentRevision: 2,
+      gameplayFingerprint: "g-current",
+    });
+  });
+
+  it("keeps an older route as history when a maze fingerprint changes", () => {
+    const oldContent = applyLevelCompletion(
+      createDefaultPlayerProgress(),
+      completion("changing-maze", 0, 0, {
+        steps: 24,
+        contentRevision: 1,
+        gameplayFingerprint: "g-old",
+      }),
+    );
+    const revisedContent = applyLevelCompletion(
+      oldContent,
+      completion("changing-maze", 0, 0, {
+        steps: 31,
+        contentRevision: 2,
+        gameplayFingerprint: "g-new",
+      }),
+    );
+    const fasterReplay = applyLevelCompletion(
+      revisedContent,
+      completion("changing-maze", 0, 0, {
+        steps: 29,
+        contentRevision: 2,
+        gameplayFingerprint: "g-new",
+      }),
+    );
+
+    expect(fasterReplay.bestResultsByLevel["changing-maze"]).toMatchObject({
+      completions: 3,
+      bestSteps: 29,
+      historicalBestSteps: 24,
+      contentRevision: 2,
+      gameplayFingerprint: "g-new",
+    });
+  });
+
+  it("separates current-layout Power and rescue records from historical accomplishments", () => {
+    const oldContent = applyLevelCompletion(
+      createDefaultPlayerProgress(),
+      completion("changing-rescues", 0, 3, {
+        steps: 24,
+        power: 99,
+        totalRescueCount: 3,
+        contentRevision: 1,
+        gameplayFingerprint: "g-old",
+      }),
+    );
+    const revisedContent = applyLevelCompletion(
+      oldContent,
+      completion("changing-rescues", 0, 0, {
+        steps: 31,
+        power: 4,
+        totalRescueCount: 1,
+        contentRevision: 2,
+        gameplayFingerprint: "g-new",
+      }),
+    );
+
+    expect(revisedContent.bestResultsByLevel["changing-rescues"]).toMatchObject({
+      completions: 2,
+      bestSteps: 31,
+      bestPower: 4,
+      bestRescuedCount: 0,
+      totalRescueCount: 1,
+      perfectRescue: false,
+      bestRescuedSpecies: [],
+      historicalBestSteps: 24,
+      historicalBestPower: 99,
+      historicalBestRescuedCount: 3,
+      historicalBestRescuedSpecies: [...SPECIES],
+      historicalPerfectRescue: true,
+      contentRevision: 2,
+      gameplayFingerprint: "g-new",
+    });
+    expect(revisedContent.perfectRescueMazeCount).toBe(1);
+  });
+
   it("immutably applies unlocks, rewards, and the first best result", () => {
     const before = createDefaultPlayerProgress();
     const beforeSnapshot = JSON.stringify(before);

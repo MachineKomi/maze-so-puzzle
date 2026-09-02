@@ -29,6 +29,14 @@ describe("getNextStoryIndex", () => {
   it("clamps an oversized unlock count to the campaign", () => {
     expect(getNextStoryIndex({ unlockedLevelCount: 99, bestResultsByLevel: {} }, STORY_IDS)).toBe(3);
   });
+
+  it("uses stable unlocked IDs instead of a stale positional count", () => {
+    expect(getNextStoryIndex({
+      unlockedLevelCount: 1,
+      unlockedLevelIds: ["one", "two", "three"],
+      bestResultsByLevel: { one: {} },
+    }, STORY_IDS)).toBe(1);
+  });
 });
 
 describe("shouldConfirmMazeSwitch", () => {

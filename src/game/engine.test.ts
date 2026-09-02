@@ -7,12 +7,18 @@ import {
 } from "./engine";
 import { parseAsciiLevel } from "./levels";
 
-const level = (id: string, corridor: string, initialPower = 2) =>
+const level = (
+  id: string,
+  corridor: string,
+  initialPower = 2,
+  objectIds?: Readonly<Record<string, string>>,
+) =>
   parseAsciiLevel({
     id,
     name: id,
     objective: "Test",
     initialPower,
+    objectIds,
     map: [
       "#########",
       corridor,
@@ -73,7 +79,10 @@ describe("optional maze treasures", () => {
 
 describe("paired magic flower portals", () => {
   it("warps to the matching flower in one counted move and then walks off normally", () => {
-    const portalLevel = level("portal-corridor", "#@H..H.E#");
+    const portalLevel = level("portal-corridor", "#@H..H.E#", 2, {
+      "2,1": "portal-corridor-portal-entry",
+      "5,1": "portal-corridor-portal-exit",
+    });
     const [entrance, destination] = portalLevel.objects.filter(
       (object) => object.kind === "portal",
     );

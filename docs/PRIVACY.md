@@ -1,6 +1,6 @@
 # Privacy and saved data
 
-Maze so Puzzle 0.10.3 is a client-only game. It has no account system,
+Maze so Puzzle is a client-only game. It has no account system,
 analytics, advertising, multiplayer, chat, remote database, or game-owned
 server. The browser build does not intentionally send player names, gameplay,
 or saved progress anywhere. The optional Tauri Windows build uses the same
@@ -11,11 +11,14 @@ packaging does not add accounts, telemetry, remote storage, or network services.
 ## What is stored
 
 The game keeps progress in the browser's `localStorage`, including completed
-mazes, best step counts, rescued animals, rewards, achievements, and gold. A
+mazes, current and historical best step counts, rescued animals, rewards,
+achievements, Gold, Science Points, and stable campaign access. A
 separate versioned active-run record stores the current authored
 story maze's position, Power, inventory, interactions, rescues, step count, and
-explored-map coordinates so a refresh or app restart can resume safely. Both
-records are validated before use. The Windows build keeps the same information
+explored-map coordinates, content revision/fingerprint, and progressive-hint
+state so a refresh or app restart can resume safely. Both records are validated
+before use. If authored gameplay changes, a mismatched active run is removed
+without deleting durable progress. The Windows build keeps the same information
 in its local Tauri WebView profile. No save data is included in the project
 repository.
 
@@ -44,17 +47,21 @@ returns the game to a fresh Story Maze 1.
 The reset uses an explicit allow-list and attempts to remove only these
 game-owned `localStorage` entries:
 
+- `maze-so-puzzle-progress-v4`
 - `maze-so-puzzle-progress-v3`
 - `maze-so-puzzle-progress-v2`
 - `maze-so-puzzle-progress-v1`
+- `maze-so-puzzle-active-run-v2`
 - `maze-so-puzzle-active-run-v1`
 
 It does not call `localStorage.clear()` and therefore preserves unrelated data
 stored by the same browser origin or desktop WebView. A failure to remove one
-entry does not prevent attempts on the other game-owned entries, and the running
-game still receives a fresh in-memory progress value. Clearing browser site data
-through browser settings is broader and remains controlled by the player or
-browser.
+entry does not prevent attempts on the other game-owned entries. If any removal
+fails, the game reports that the reset could not finish, leaves the current
+screen and in-memory adventure unchanged, and allows another attempt. Because
+some entries may already have been removed before the failure, the message does
+not claim that storage was untouched. Clearing browser site data through browser
+settings is broader and remains controlled by the player or browser.
 
 ## Network behaviour
 

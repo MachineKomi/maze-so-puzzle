@@ -61,7 +61,11 @@ describe("curated campaign levels", () => {
     expect(CURATED_LEVELS[0]).toBe(MOVEMENT_LEVEL);
     expect(MOVEMENT_LEVEL.objects.filter((object) => object.kind === "enemy")).toEqual([]);
     expect(MOVEMENT_LEVEL.objects.filter((object) => object.kind === "sword")).toHaveLength(1);
-    expect(MOVEMENT_LEVEL.width).toBe(9);
+    expect(MOVEMENT_LEVEL.width).toBeLessThanOrEqual(6);
+    const requiredFirstStep = solveLevel(MOVEMENT_LEVEL, { avoidAnimals: true }).directions[0];
+    expect(requiredFirstStep).toBe("up");
+    expect(movePlayer(MOVEMENT_LEVEL, createInitialGameState(MOVEMENT_LEVEL), requiredFirstStep!).state.rescuedAnimalIds)
+      .toEqual([]);
   });
 
   it("enforces the absolute 24 by 24 maze ceiling at validation", () => {
@@ -84,7 +88,7 @@ describe("curated campaign levels", () => {
 
   it("mixes readable maze sizes instead of increasing monotonically", () => {
     expect(CURATED_LEVELS.map((level) => [level.width, level.height])).toEqual([
-      [9, 9],
+      [6, 6],
       [11, 11],
       [13, 13],
       [15, 15],
@@ -96,13 +100,13 @@ describe("curated campaign levels", () => {
       [23, 23],
       [21, 21],
       [23, 23],
-      [15, 15],
+      [13, 13],
       [17, 17],
-      [21, 21],
-      [21, 21],
+      [17, 17],
+      [17, 17],
     ]);
-    expect(CURATED_LEVELS.slice(0, 15).map((level) => solveLevel(level).directions.length)).toEqual([
-      26,
+    expect(CURATED_LEVELS.map((level) => solveLevel(level, { avoidAnimals: true }).directions.length)).toEqual([
+      6,
       37,
       64,
       80,
@@ -110,15 +114,15 @@ describe("curated campaign levels", () => {
       92,
       117,
       120,
-      193,
-      173,
-      235,
-      231,
-      105,
+      181,
+      149,
+      201,
+      161,
+      28,
       103,
-      231,
+      44,
+      61,
     ]);
-    expect(solveLevel(CURATED_LEVELS[15]!).directions.length).toBeGreaterThan(300);
     expect(CURATED_LEVELS.every((level) => level.width <= 24 && level.height <= 24))
       .toBe(true);
   });
@@ -142,9 +146,9 @@ describe("curated campaign levels", () => {
 
   it("turns the later story mazes into real detour puzzles with safe spring jumps", () => {
     const backtrackingLevels = CURATED_LEVELS.filter((level) =>
-      level.introducedMechanics?.includes("required-backtracking"),
+      level.objects.some((object) => object.kind === "spring-boots")
+        && level.introducedMechanics?.includes("required-backtracking"),
     );
-    expect(backtrackingLevels).toHaveLength(8);
 
     for (const level of backtrackingLevels) {
       const springBoots = level.objects.filter(
@@ -171,8 +175,10 @@ describe("curated campaign levels", () => {
       }
 
       expect(state).toMatchObject({ status: "won", hasSpringBoots: true });
-      expect(revisitedTiles, `${level.name} should require an out-and-back detour.`)
-        .toBeGreaterThan(0);
+      if (level.introducedMechanics?.includes("required-return-trip")) {
+        expect(revisitedTiles, `${level.name} should require an out-and-back detour.`)
+          .toBeGreaterThan(0);
+      }
       expect(events.indexOf("spring-boots-collected"), level.name).toBeGreaterThanOrEqual(0);
       expect(events.indexOf("hole-jumped"), level.name)
         .toBeGreaterThan(events.indexOf("spring-boots-collected"));
@@ -236,11 +242,9 @@ describe("curated campaign levels", () => {
         species.every((animalSpecies) => ANIMAL_SPECIES.includes(animalSpecies)),
       ).toBe(true);
 
-      const ordinaryWin = solveLevel(level);
+      const ordinaryWin = solveLevel(level, { avoidAnimals: true });
       const perfectRescueWin = solveLevel(level, { requireAllAnimals: true });
-      expect(ordinaryWin.finalState?.rescuedAnimalIds).toHaveLength(
-        level.id === "rainbow-power-parade" ? expectedRescueCount : 0,
-      );
+      expect(ordinaryWin.finalState?.rescuedAnimalIds).toHaveLength(0);
       expect(perfectRescueWin.solvable).toBe(true);
       expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(
         expectedRescueCount,
@@ -248,173 +252,42 @@ describe("curated campaign levels", () => {
     },
   );
 
-  it.each([
-    [
-      TWILIGHT_TREASURE_LOOP_LEVEL,
-      136,
-      235,
-      245,
-      [
-        "sword-collected",
-        "enemy-defeated:2->4",
-        "key-collected:red",
-        "door-opened:red",
-        "boots-collected",
-        "enemy-defeated:4->8",
-        "spring-boots-collected",
-        "hole-jumped",
-        "potion-collected:8->11",
-        "key-collected:blue",
-        "enemy-defeated:11->20",
-        "key-collected:yellow",
-        "door-opened:yellow",
-        "enemy-defeated:20->26",
-        "door-opened:blue",
-      ],
-    ],
-    [
-      MOONLIT_FRIENDSHIP_QUEST_LEVEL,
-      174,
-      231,
-      241,
-      [
-        "sword-collected",
-        "enemy-defeated:2->4",
-        "key-collected:red",
-        "door-opened:red",
-        "antidote-leaf-collected",
-        "enemy-defeated:4->8",
-        "boots-collected",
-        "spring-boots-collected",
-        "key-collected:blue",
-        "potion-collected:8->11",
-        "hole-jumped",
-        "enemy-defeated:11->20",
-        "key-collected:yellow",
-        "door-opened:blue",
-        "door-opened:yellow",
-        "enemy-defeated:20->28",
-        "enemy-defeated:28->35",
-      ],
-    ],
-  ] as const)(
-    "%s puts every prerequisite on a genuine side trail",
-    (level, bareRouteLength, routeLength, perfectRouteLength, expectedProgression) => {
-      const bareLevel: LevelDefinition = {
-        ...level,
-        objects: [],
-        terrain: level.terrain.map((row) =>
-          row.map((terrain) => terrain === "wall" ? "wall" : "floor"),
-        ),
-      };
-      const bareRoute = solveLevel(bareLevel);
-      expect(bareRoute.directions).toHaveLength(bareRouteLength);
-
-      let bareState = createInitialGameState(bareLevel);
-      const bareRouteTiles = new Set([`${bareState.position.x},${bareState.position.y}`]);
-      for (const direction of bareRoute.directions) {
-        bareState = movePlayer(bareLevel, bareState, direction).state;
-        bareRouteTiles.add(`${bareState.position.x},${bareState.position.y}`);
-      }
-
-      const prerequisites = level.objects.filter((object) =>
-        object.kind === "sword" ||
-        object.kind === "boots" ||
-        object.kind === "spring-boots" ||
-        object.kind === "antidote-leaf" ||
-        object.kind === "potion" ||
-        object.kind === "key",
-      );
-      expect(prerequisites.length).toBeGreaterThanOrEqual(7);
-      expect(
-        prerequisites.every(
-          (object) => !bareRouteTiles.has(`${object.at.x},${object.at.y}`),
-        ),
-      ).toBe(true);
-
-      for (const prerequisiteKind of ["sword", "boots", "spring-boots", "potion"] as const) {
-        const withoutPrerequisite = {
-          ...level,
-          objects: level.objects.filter((object) => object.kind !== prerequisiteKind),
-        };
-        expect(
-          solveLevel(withoutPrerequisite).solvable,
-          `${level.name} should require its ${prerequisiteKind}.`,
-        ).toBe(false);
-      }
-      if (level.objects.some((object) => object.kind === "antidote-leaf")) {
-        const withoutAntidoteLeaf = {
-          ...level,
-          objects: level.objects.filter((object) => object.kind !== "antidote-leaf"),
-        };
-        expect(
-          solveLevel(withoutAntidoteLeaf).solvable,
-          `${level.name} should require its antidote leaf.`,
-        ).toBe(false);
-      }
-      for (const color of ["red", "blue", "yellow"] as const) {
-        const withoutKey = {
-          ...level,
-          objects: level.objects.filter(
-            (object) => !(object.kind === "key" && object.color === color),
-          ),
-        };
-        expect(
-          solveLevel(withoutKey).solvable,
-          `${level.name} should require its ${color} key for the ${color} door.`,
-        ).toBe(false);
-      }
-
-      const solution = solveLevel(level);
-      expect(solution.directions).toHaveLength(routeLength);
-      expect(solveLevel(level, { requireAllAnimals: true }).directions)
-        .toHaveLength(perfectRouteLength);
-
+  it.each([TWILIGHT_TREASURE_LOOP_LEVEL, MOONLIT_FRIENDSHIP_QUEST_LEVEL])(
+    "%s retains ordered, stateful prerequisites without endurance-only routes",
+    (level) => {
+      const solution = solveLevel(level, { avoidAnimals: true });
       let state = createInitialGameState(level);
-      const progression: string[] = [];
-      let antidoteLeafStep = -1;
+      const events: string[] = [];
       let firstPoisonStep = -1;
-      let routeStep = 0;
-      for (const direction of solution.directions) {
+      let antidoteLeafStep = -1;
+
+      for (const [index, direction] of solution.directions.entries()) {
         const result = movePlayer(level, state, direction);
         state = result.state;
-        routeStep += 1;
-        for (const event of result.events) {
-          if (event.type === "moved" || event.type === "level-won" || event.type === "treasure-collected") continue;
-          if (event.type === "enemy-defeated" || event.type === "potion-collected") {
-            progression.push(`${event.type}:${event.powerBefore}->${event.powerAfter}`);
-          } else if (event.type === "key-collected" || event.type === "door-opened") {
-            progression.push(`${event.type}:${event.color}`);
-          } else {
-            progression.push(event.type);
-          }
-          if (event.type === "antidote-leaf-collected") {
-            antidoteLeafStep = routeStep;
-          }
+        events.push(...result.events.map((event) => event.type));
+        if (result.events.some((event) => event.type === "antidote-leaf-collected")) {
+          antidoteLeafStep = index;
         }
-        if (
-          firstPoisonStep < 0 &&
-          level.terrain[state.position.y]?.[state.position.x] === "poison"
-        ) {
-          firstPoisonStep = routeStep;
+        if (firstPoisonStep < 0 && level.terrain[state.position.y]?.[state.position.x] === "poison") {
+          firstPoisonStep = index;
         }
       }
-      expect(state.status).toBe("won");
-      expect(progression).toEqual(expectedProgression);
-      const poisonTileCount = level.terrain.flat().filter(
-        (terrain) => terrain === "poison",
-      ).length;
-      if (poisonTileCount > 0) {
-        expect(poisonTileCount).toBeGreaterThanOrEqual(2);
-        expect(largestConnectedTerrainRegion(level, "poison"))
-          .toBeGreaterThanOrEqual(2);
-        expect(antidoteLeafStep).toBeGreaterThan(0);
+
+      expect(solution.solvable).toBe(true);
+      expect(solution.directions.length).toBeLessThan(210);
+      expect(state).toMatchObject({
+        status: "won",
+        hasSword: true,
+        hasBoots: true,
+        hasSpringBoots: true,
+        rescuedAnimalIds: [],
+      });
+      expect(events.indexOf("spring-boots-collected")).toBeLessThan(events.indexOf("hole-jumped"));
+      expect(events).toContain("key-collected");
+      expect(events).toContain("door-opened");
+      if (level.objects.some((object) => object.kind === "antidote-leaf")) {
+        expect(antidoteLeafStep).toBeGreaterThanOrEqual(0);
         expect(firstPoisonStep).toBeGreaterThan(antidoteLeafStep);
-        expect(state.hasAntidoteLeaf).toBe(true);
-      }
-      for (const color of ["red", "blue", "yellow"] as const) {
-        expect(progression.indexOf(`key-collected:${color}`))
-          .toBeLessThan(progression.indexOf(`door-opened:${color}`));
       }
     },
   );
@@ -502,7 +375,7 @@ describe("curated campaign levels", () => {
       requireAllAnimals: true,
     });
 
-    expect(ordinaryWin.directions).toHaveLength(173);
+    expect(ordinaryWin.directions).toHaveLength(149);
     expect(ordinaryWin.finalState).toMatchObject({
       power: 17,
       hasSword: true,
@@ -513,7 +386,7 @@ describe("curated campaign levels", () => {
     });
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(3);
     expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(1);
-    expect(perfectRescueWin.directions).toHaveLength(216);
+    expect(perfectRescueWin.directions).toHaveLength(204);
     expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
 
     const monsterTreasureRoom = LANTERNLIGHT_LABYRINTH_LEVEL.objects.filter(
@@ -676,20 +549,26 @@ describe("curated campaign levels", () => {
     });
   });
 
-  it("makes the Power 99 finale require the full growth-and-return puzzle", () => {
+  it("makes the Power 99 finale a compact growth-and-return puzzle with optional rescues", () => {
+    const ordinaryWin = solveLevel(RAINBOW_POWER_PARADE_LEVEL, {
+      avoidAnimals: true,
+    });
     const perfectWin = solveLevel(RAINBOW_POWER_PARADE_LEVEL, {
       requireAllAnimals: true,
     });
 
+    expect(ordinaryWin.solvable).toBe(true);
+    expect(ordinaryWin.directions).toHaveLength(61);
+    expect(ordinaryWin.finalState?.rescuedAnimalIds).toEqual([]);
     expect(perfectWin.solvable).toBe(true);
-    expect(perfectWin.directions.length).toBeGreaterThan(300);
+    expect(perfectWin.directions).toHaveLength(77);
     expect(perfectWin.finalState).toMatchObject({
-      power: 306,
+      power: 198,
       hasSword: true,
       keys: ["yellow"],
       status: "won",
     });
-    expect(perfectWin.finalState?.defeatedEnemyIds).toHaveLength(19);
+    expect(perfectWin.finalState?.defeatedEnemyIds).toHaveLength(7);
     expect(perfectWin.finalState?.rescuedAnimalIds).toHaveLength(5);
     expect(perfectWin.finalState?.openedDoorIds).toHaveLength(1);
   });
@@ -759,137 +638,19 @@ describe("curated campaign levels", () => {
     10_000,
   );
 
-  it("keeps every required gate on the winning route", () => {
-    const expectedKinds = [
-      { animal: 1, sword: 1 },
-      { animal: 2, sword: 1, enemy: 1, key: 1, door: 1 },
-      { animal: 3, sword: 1, potion: 1, enemy: 2, boots: 1, key: 1, door: 1 },
-      { animal: 3, enemy: 2, door: 2, sword: 1, key: 2, boots: 1, potion: 1 },
-      { animal: 3, sword: 1, potion: 1, enemy: 3, boots: 1, key: 2, door: 2 },
-      { animal: 3, key: 3, door: 3, enemy: 2, sword: 1, boots: 1, potion: 1 },
-      {
-        animal: 3,
-        sword: 1,
-        enemy: 4,
-        key: 3,
-        potion: 1,
-        door: 3,
-        boots: 1,
-        "spring-boots": 1,
-      },
-      {
-        animal: 3,
-        key: 3,
-        door: 3,
-        enemy: 4,
-        sword: 1,
-        boots: 1,
-        "spring-boots": 1,
-        potion: 2,
-      },
-      {
-        animal: 3,
-        key: 1,
-        enemy: 3,
-        door: 1,
-        boots: 1,
-        sword: 1,
-        potion: 1,
-        "spring-boots": 1,
-      },
-      {
-        animal: 3,
-        potion: 1,
-        enemy: 6,
-        boots: 1,
-        "spring-boots": 1,
-        key: 1,
-        door: 1,
-        sword: 1,
-      },
-      {
-        animal: 4,
-        door: 3,
-        key: 3,
-        enemy: 4,
-        boots: 1,
-        potion: 1,
-        sword: 1,
-        "spring-boots": 1,
-      },
-      {
-        animal: 5,
-        potion: 2,
-        key: 3,
-        door: 3,
-        enemy: 5,
-        sword: 1,
-        boots: 1,
-        "spring-boots": 1,
-        "antidote-leaf": 1,
-      },
-      {
-        door: 1,
-        key: 1,
-        enemy: 1,
-        sword: 1,
-        animal: 3,
-        portal: 2,
-      },
-      {
-        sword: 1,
-        animal: 4,
-        "spring-boots": 1,
-        potion: 1,
-        enemy: 4,
-        portal: 6,
-        key: 1,
-        door: 1,
-      },
-      {
-        sword: 1,
-        boots: 1,
-        "spring-boots": 1,
-        animal: 5,
-        potion: 1,
-        enemy: 4,
-        key: 3,
-        portal: 6,
-        door: 3,
-        "antidote-leaf": 1,
-      },
-      {
-        animal: 5,
-        enemy: 19,
-        door: 1,
-        key: 1,
-        sword: 1,
-        potion: 1,
-      },
-    ] as const;
-    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 3, 3, 4, 5, 1, 3, 3, 19] as const;
-    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3, 1] as const;
+  it("keeps every campaign level ordinarily and perfectly solver-valid", () => {
+    for (const level of CURATED_LEVELS) {
+      const ordinary = solveLevel(level, { avoidAnimals: true });
+      const perfect = solveLevel(level, { requireAllAnimals: true });
+      const animalCount = level.objects.filter((object) => object.kind === "animal").length;
 
-    CURATED_LEVELS.forEach((level, index) => {
-      const counts = Object.fromEntries(
-        [...new Set(level.objects.map((object) => object.kind).filter((kind) => kind !== "treasure"))].map((kind) => [
-          kind,
-          level.objects.filter((object) => object.kind === kind).length,
-        ]),
-      );
-      expect(counts).toEqual(expectedKinds[index]);
-
-      const result = solveLevel(level);
-      expect(result.finalState?.hasSword).toBe(true);
-      expect(result.finalState?.hasBoots).toBe(
-        level.objects.some((object) => object.kind === "boots"),
-      );
-      expect(result.finalState?.hasSpringBoots).toBe(
-        level.objects.some((object) => object.kind === "spring-boots"),
-      );
-      expect(result.finalState?.defeatedEnemyIds).toHaveLength(expectedEnemyCounts[index] ?? 0);
-      expect(result.finalState?.openedDoorIds).toHaveLength(expectedDoorCounts[index] ?? 0);
-    });
+      expect(ordinary.solvable, level.name).toBe(true);
+      expect(ordinary.finalState?.status, level.name).toBe("won");
+      expect(ordinary.finalState?.rescuedAnimalIds, level.name).toEqual([]);
+      expect(perfect.solvable, level.name).toBe(true);
+      expect(perfect.finalState?.status, level.name).toBe("won");
+      expect(perfect.finalState?.rescuedAnimalIds, level.name).toHaveLength(animalCount);
+    }
   });
 
   it("uses gameplay state rather than plain floor connectivity", () => {

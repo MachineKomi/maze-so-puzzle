@@ -5,9 +5,11 @@ import { solveLevel } from "./game/solver";
 import type { GameState, LevelDefinition } from "./game/types";
 import {
   ACTIVE_RUN_STORAGE_KEY,
+  LEGACY_ACTIVE_RUN_STORAGE_KEY,
   clearActiveRun,
   createActiveRunSnapshot,
   readActiveRun,
+  readActiveRunResult,
   sanitizeActiveRunSnapshot,
   writeActiveRun,
   type ActiveRunSnapshot,
@@ -54,14 +56,178 @@ function progressedPlayingState(level: LevelDefinition): GameState {
 
 function rawSnapshot(level: LevelDefinition, game: GameState = createInitialGameState(level)): ActiveRunSnapshot {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     levelId: level.id,
+    contentRevision: level.contentRevision,
+    gameplayFingerprint: level.gameplayFingerprint,
     game,
     revealedTiles: [`${level.start.x},${level.start.y}`],
+    hintUsesByState: {},
   };
 }
 
 describe("active run persistence", () => {
+  it("persists the fourth and strongest hint tier without clearing the run", () => {
+    const level = storyLevel();
+    expect(sanitizeActiveRunSnapshot({
+      ...rawSnapshot(level),
+      hintUsesByState: { "state-key": 4 },
+    }, CURATED_LEVELS)?.hintUsesByState).toEqual({ "state-key": 4 });
+    expect(sanitizeActiveRunSnapshot({
+      ...rawSnapshot(level),
+      hintUsesByState: { "state-key": 5 },
+    }, CURATED_LEVELS)).toBeNull();
+  });
+
+  it("bounds valid in-memory hint history before persistence", () => {
+    const level = storyLevel();
+    const hintUsesByState = Object.fromEntries(
+      Array.from({ length: 300 }, (_, index) => [`state-${index}`, 1]),
+    );
+    const snapshot = createActiveRunSnapshot({
+      mode: "normal",
+      level,
+      game: createInitialGameState(level),
+      revealedTiles: [],
+      hintUsesByState,
+    });
+
+    expect(Object.keys(snapshot?.hintUsesByState ?? {})).toHaveLength(256);
+    expect(snapshot?.hintUsesByState).not.toHaveProperty("state-0");
+    expect(snapshot?.hintUsesByState).toHaveProperty("state-299", 1);
+  });
+
+  it("accepts a save taken immediately after stationary combat", () => {
+    const level = parseAsciiLevel({
+      id: "stationary-combat-save",
+      name: "Stationary Combat Save",
+      objective: "Test",
+      map: [
+        "#######",
+        "#@s1.E#",
+        "#.....#",
+        "#.....#",
+        "#.....#",
+        "#.....#",
+        "#######",
+      ],
+    });
+    let game = movePlayer(level, createInitialGameState(level), "right").state;
+    game = movePlayer(level, game, "right").state;
+
+    expect(game).toMatchObject({
+      position: { x: 2, y: 1 },
+      steps: 1,
+      defeatedEnemyIds: [level.objects.find((object) => object.kind === "enemy")?.id],
+    });
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game).toEqual(game);
+  });
+
+  it("rejects stale revision and fingerprint snapshots without touching durable progress", () => {
+    const level = storyLevel();
+    expect(sanitizeActiveRunSnapshot({
+      ...rawSnapshot(level),
+      contentRevision: level.contentRevision - 1,
+    }, CURATED_LEVELS)).toBeNull();
+    expect(sanitizeActiveRunSnapshot({
+      ...rawSnapshot(level),
+      gameplayFingerprint: "g-stale",
+    }, CURATED_LEVELS)).toBeNull();
+  });
+
+  it("fails closed on a legacy active run for revised authored content", () => {
+    const storage = new MemoryStorage();
+    const level = storyLevel();
+    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
+      ...rawSnapshot(level),
+      schemaVersion: 1,
+      contentRevision: undefined,
+      gameplayFingerprint: undefined,
+      hintUsesByState: undefined,
+    }));
+
+    expect(readActiveRunResult(CURATED_LEVELS, storage)).toEqual({
+      snapshot: null,
+      discardedUpdatedRun: true,
+    });
+    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+  });
+
+  it("reports and removes a current snapshot for an updated maze", () => {
+    const storage = new MemoryStorage();
+    const level = storyLevel();
+    storage.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
+      ...rawSnapshot(level),
+      gameplayFingerprint: "g-before-update",
+    }));
+    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, "legacy-shadow");
+
+    expect(readActiveRunResult(CURATED_LEVELS, storage)).toEqual({
+      snapshot: null,
+      discardedUpdatedRun: true,
+    });
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+  });
+
+  it("migrates a valid legacy active run when authored content is still revision 1", () => {
+    const storage = new MemoryStorage();
+    const level = parseAsciiLevel({
+      id: "legacy-revision-one",
+      name: "Legacy Revision One",
+      objective: "Test",
+      contentRevision: 1,
+      map: ["#####", "#@.E#", "#...#", "#...#", "#####"],
+    });
+    const game = movePlayer(level, createInitialGameState(level), "right").state;
+    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
+      schemaVersion: 1,
+      levelId: level.id,
+      game,
+      revealedTiles: [],
+    }));
+
+    expect(readActiveRun([level], storage)).toMatchObject({
+      schemaVersion: 2,
+      levelId: level.id,
+      contentRevision: 1,
+      gameplayFingerprint: level.gameplayFingerprint,
+      game,
+      hintUsesByState: {},
+    });
+    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
+  });
+
+  it("resumes a valid legacy run in memory when migration storage is full", () => {
+    const storage = new MemoryStorage();
+    const level = parseAsciiLevel({
+      id: "legacy-quota",
+      name: "Legacy quota",
+      objective: "Test",
+      contentRevision: 1,
+      map: ["#####", "#@.E#", "#...#", "#...#", "#####"],
+    });
+    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
+      schemaVersion: 1,
+      levelId: level.id,
+      game: createInitialGameState(level),
+      revealedTiles: [],
+    }));
+    const quotaStorage: ActiveRunStorage = {
+      getItem: (key) => storage.getItem(key),
+      setItem: () => { throw new Error("quota"); },
+      removeItem: (key) => storage.removeItem(key),
+    };
+
+    expect(readActiveRunResult([level], quotaStorage).snapshot).toMatchObject({
+      levelId: level.id,
+      contentRevision: 1,
+    });
+    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+  });
+
   it("migrates old snapshots without newer inventory flags and persists a completed jump", () => {
     const oldLevel = storyLevel();
     const legacyGame = Object.fromEntries(
@@ -118,6 +284,10 @@ describe("active run persistence", () => {
       id: "saved-portal-hop",
       name: "Saved Portal Hop",
       objective: "Use the flowers.",
+      objectIds: {
+        "2,1": "saved-portal-hop-portal-entry",
+        "5,3": "saved-portal-hop-portal-exit",
+      },
       map: [
         "#########",
         "#@H######",
@@ -208,10 +378,13 @@ describe("active run persistence", () => {
     }, storage)).toBe(true);
 
     expect(readActiveRun(CURATED_LEVELS, storage)).toEqual({
-      schemaVersion: 1,
+      schemaVersion: 2,
       levelId: level.id,
+      contentRevision: level.contentRevision,
+      gameplayFingerprint: level.gameplayFingerprint,
       game,
       revealedTiles: [`${game.position.x},${game.position.y}`, `${level.start.x},${level.start.y}`],
+      hintUsesByState: {},
     });
   });
 
@@ -223,7 +396,7 @@ describe("active run persistence", () => {
 
     storage.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
       ...rawSnapshot(storyLevel()),
-      schemaVersion: 2,
+      schemaVersion: 99,
     }));
     expect(readActiveRun(CURATED_LEVELS, storage)).toBeNull();
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
@@ -290,8 +463,10 @@ describe("active run persistence", () => {
     const game = progressedPlayingState(level);
     const duplicate = <T,>(values: readonly T[]): T[] => [...values].reverse().flatMap((value) => [value, value]);
     const sanitized = sanitizeActiveRunSnapshot({
-      schemaVersion: 1,
+      schemaVersion: 2,
       levelId: level.id,
+      contentRevision: level.contentRevision,
+      gameplayFingerprint: level.gameplayFingerprint,
       game: {
         ...game,
         keys: duplicate(game.keys),
@@ -305,6 +480,7 @@ describe("active run persistence", () => {
         `${level.start.x},${level.start.y}`,
         `${game.position.x},${game.position.y}`,
       ],
+      hintUsesByState: {},
     }, CURATED_LEVELS);
 
     expect(sanitized?.game.keys).toEqual([...game.keys].sort());
@@ -322,6 +498,7 @@ describe("active run persistence", () => {
     const storage = new MemoryStorage();
     const level = storyLevel();
     storage.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(rawSnapshot(level)));
+    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, "stale legacy run");
     expect(writeActiveRun({
       mode: "tester",
       level,
@@ -329,6 +506,7 @@ describe("active run persistence", () => {
       revealedTiles: [],
     }, storage)).toBe(false);
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
 
     const generated = { ...level, id: "generated-test", source: "generated" as const };
     expect(createActiveRunSnapshot({

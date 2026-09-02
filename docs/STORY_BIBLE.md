@@ -111,6 +111,13 @@ answer. The maze itself remains the real activity.
 | 15 | Friendship Crown Vault | Combine strategies | Select different tools for different problems |
 | 16 | Rainbow Power Parade | Sequence and backtrack | Build an ordered chain and return |
 
+Gameplay interpretation is maintained in `docs/GAMEPLAY_DESIGN_SPEC.md`.
+Chapter 1 now presents its complete 6×6 trail before the exploration camera is
+introduced. Chapters 13 and 15 use compact portal graphs, and Chapter 16 uses a
+short Power-99 hub-and-return plan. These layout changes do not alter canon:
+rescuing friends remains a kind optional act, never a condition for restoring
+the Star Map.
+
 ## Tone and writing rules
 
 - Prefer concrete, read-aloud sentences and one joke per story card.

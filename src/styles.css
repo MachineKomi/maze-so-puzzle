@@ -7260,3 +7260,20 @@ body,
   .door-opening-halo { opacity: 0.8; }
   .door-opening-motif { opacity: 1; }
 }
+.save-warning {
+  position: absolute;
+  z-index: 200;
+  top: 0.6rem;
+  left: 50%;
+  width: min(42rem, calc(100% - 2rem));
+  margin: 0;
+  padding: 0.55rem 0.9rem;
+  transform: translateX(-50%);
+  border: 2px solid rgba(111, 62, 25, 0.4);
+  border-radius: 999px;
+  background: #fff4c9;
+  color: #60320f;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 0.3rem 1rem rgba(67, 37, 17, 0.2);
+}

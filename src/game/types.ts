@@ -172,6 +172,10 @@ export type LevelSource = "curated" | "generated";
 
 export interface LevelDefinition {
   readonly schemaVersion: 1;
+  /** Authored traversal/content revision. Increment when a saved run is no longer replay-safe. */
+  readonly contentRevision: number;
+  /** Deterministic fingerprint of rules-relevant terrain, objects, start and exit. */
+  readonly gameplayFingerprint: string;
   readonly id: string;
   readonly name: string;
   readonly objective: string;

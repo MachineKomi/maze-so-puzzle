@@ -92,8 +92,8 @@ The current verified desktop artifacts are the unsigned 0.19.0 test build:
 - Movement has a deliberately small one-tile corner assist when the intended
   square is a wall. A clear pointer offset or Ame's approach direction chooses
   the safe perpendicular floor tile, with a little touch-wobble tolerance. It
-  never follows a wall, pathfinds, enters a hazard or hole, or routes around a
-  door or enemy.
+  never follows a wall, pathfinds, enters a hazard or hole, collects an object,
+  rescues a friend, enters a portal, or routes around a door or enemy.
 - On-screen arrows: touch- and mouse-friendly movement.
 - Holding touch, mouse, keyboard, or an on-screen arrow moves once immediately,
   waits 320 ms so a child can release after one square, then accelerates
@@ -213,17 +213,23 @@ Turn the iPad sideways to play.
 - Rewarding exploration: optional Golden Star bags and overflowing treasure
   chests, plus gears and magical beakers worth Science Points, populate dead
   ends. Pickups burst into stars or science sparkles and fly to two persistent
-  currency counters.
-- Contextual obstacle help shows the exact missing key or equipment. Repeating
-  the same blocked action three times marks that prerequisite with a pulsing
-  minimap beacon until Ame collects it.
+  keepsake counters. Gold and Science Points are records of discovery; the
+  current game does not spend them or promise a future shop.
+- Contextual obstacle help escalates gently. First contact uses HUD feedback,
+  the second repeat marks the prerequisite, and only the third repeat may open
+  the full explanation. Strong-enemy repeats remain safe without reopening a
+  modal loop.
+- Required Path help is a replayable four-step ladder—Goal, Principle,
+  Direction, then one engine-valid Step—and always follows a zero-rescue route.
+  Portal warps and complete Spring-Boots jumps use the exact engine transition.
 - A picture-led **Mazes** menu is available from Home and during play. It lists
   every unlocked numbered story maze, its best steps and rescue record, plus
   Surprise Maze, while the secret tester picker still exposes all authored
   chapters.
-- Sixteen story mazes now culminate in **Rainbow Power Parade**, a long
-  out-and-back Power-growth puzzle with nineteen enemies, five friends, a
-  Power-99 boss gate, and a rainbow aura for Ame at Power 99 or above.
+- Sixteen story mazes now culminate in **Rainbow Power Parade**, a compact
+  hub-and-return Power-growth puzzle with seven ordered guardians, five
+  optional friends, a Sunny Key, a Power-99 boss gate, and a rainbow aura for
+  Ame at Power 99 or above.
 - Every maze chooses a directional light. Wall highlights, directional depth
   shadows, and soft offset character shadows give the flat tile art more depth
   without sacrificing readability.
@@ -238,19 +244,21 @@ Turn the iPad sideways to play.
 - Count-aware victory friend cards keep rescued pets large and dancing on iPad
   and desktop. One to three friends receive roomy centred cards; groups of four
   or five remain together in a readable row.
-- Sixteen progressive story mazes with deliberate changes of pace. Sizes vary
-  from 9 × 9 to 23 × 23 rather than rising monotonically. The 21 × 21
+- Sixteen progressive story mazes with deliberate changes of pace. The first
+  6 × 6 maze is fully visible; later sizes vary up to 23 × 23 rather than rising
+  monotonically. The 21 × 21
   **Twilight Treasure Loop** and 23 × 23 **Moonlit Friendship Quest** add long
   backtracking puzzles after Lanternlight Labyrinth; the latter introduces the
   Antidote Leaf and a required connected poison crossing. Three new portal
-  chapters finish the current campaign with deliberately deceptive loops,
-  return trips, optional rescue wings, and a five-friend final vault.
+  chapters finish the current campaign with portal inference, optional rescue
+  wings, and a compact five-friend three-pair relay.
 - Three paired flower portals—Rose Heart, Mint Clover, and Violet Moon—warp Ame
   between distant parts of the same maze. Portal pairs are visible on the board
   and minimap, preserve fog-of-war, active-run saving, follower trails, and
   solver correctness, and use original transparent AI-generated sprite art.
 - A consistent player-centred 6 x 6 camera for every maze whose width or height
-  exceeds 6 tiles, including all current story and Surprise Mazes. A persistent
+  exceeds 6 tiles. Chapter 1 stays on a whole-board view; all current Surprise
+  Mazes use the camera. A persistent
   fog-of-war minimap distinguishes Ame's current view, explored passages, and
   still-mysterious parts of the maze; a bright outline links it to the exact
   area shown on the main board.
@@ -260,16 +268,17 @@ Turn the iPad sideways to play.
   presentation ceiling is 24. Each seed also selects its illustrated terrain,
   weapon, friendly enemy, and cage variants deterministically.
 - A typed floor-and-wall theme catalogue with dominant-colour metadata and an
-  explicit compatibility matrix, plus eight weapon looks, eight friendly enemy
-  looks, eleven pet species, and four cage styles. Story and generated mazes use
+  explicit compatibility matrix, plus eleven weapon looks, twelve friendly
+  enemy looks, fifteen pet species, and four cage styles. Story and generated mazes use
   only compatible pastel material pairs—yellow/gold floors are never combined
   with green or sage walls. Every maze contains one weapon; rescue parties now
   vary from one or two friends in the opening mazes to four and five in the
   largest late adventures.
 - A new illustrated title screen, backed by original AI-generated key art, with
   Continue, Adventure Book, and Surprise Maze shortcuts.
-- An Adventure Book showing story-maze clears, best step counts, rescue records,
-  cumulative totals for all eleven pet species, gold, completion statistics,
+- An Adventure Book showing story-maze clears, current-layout best step counts,
+  rescue records, cumulative totals for all fifteen pet species, Gold, Science,
+  completion statistics,
   stickers, rescue medals, and nine stat-driven achievement badges.
 - Persistent gold rewards, three collectible stickers, best results, and rescue
   medals for 5, 10, and 15 perfect rescues using each maze's actual friend total.
@@ -278,8 +287,8 @@ Turn the iPad sideways to play.
   enemies, and optional guardians on different branches, so progress requires
   readable detours and backtracking instead of placing every answer along one
   forward path. Wishing Woods retains its optional Power 9 pebble-golem rescue
-  puzzle, and the four latest challenge mazes have solver-verified out-and-back
-  routes.
+  puzzle. Compact portal relays and changed-state returns now replace much of
+  the former corridor endurance in the last four challenge mazes.
 - Ame visibly holds the level's collected weapon. Her maze sprite and the
   friendly enemies are larger, and their larger outlined Power numbers sit
   above the character art without covering faces. Jump and battle copies retain
@@ -301,11 +310,16 @@ Turn the iPad sideways to play.
 - Child-safe strong-enemy blocking: an underpowered collision leaves the exact
   same playing state intact and offers one clear “I'll go get stronger” action;
   there is no maze reset or accidental defeat. Saved progress and active-run
-  snapshots migrate defensively, with a pictorial help card, state-aware hints,
+  snapshots migrate defensively, with semantic authored-object IDs, content
+  revisions and fingerprints, campaign-order history, a pictorial help card,
+  progressive state-aware hints,
   mute control, and reduced-motion support.
 - A separately validated active-run snapshot lets authored story mazes resume at
   the exact position, inventory, Power, step count, rescue state, and explored
-  map after a refresh or app restart. Tester and generated runs are excluded.
+  map after a refresh or app restart. A map revision mismatch forgets only the
+  stale run, explains the restart, and keeps durable rewards and records;
+  tester and generated runs are excluded. Save/reset failures are reported
+  instead of being presented as successful persistence.
 - Expanded synthesized sound design for movement and interactions plus title,
   menu, selection, achievement, stamp, rescue, jump, combat clash, sparks,
   impact, Power count-up, loss, and victory moments. Thirteen full locally
@@ -388,9 +402,18 @@ Core engine modules live in `src/game/`; UI input helpers live in `src/`:
 - `terrainGeometry.ts`: connected rounded SVG boundaries in stable maze/world
   coordinates for walls, water, lava, and poison.
 - `solver.ts`: structural validation and stateful solution search.
+- `reachability.ts`: budgeted current-state traversal derived from engine steps,
+  with explicit complete/truncated evidence.
+- `hints.ts`: replayable four-tier Required Path help over zero-rescue routes.
+- `metrics.ts`: reproducible campaign route-quality and route-activity report;
+  raw branch counts are not presented as cognitive decisions.
+- `contentIdentity.ts`: deterministic gameplay fingerprints.
 - `generator.ts`: seeded perfect-maze generation and progression placement.
+- `campaign.ts` and `progress.ts`: versioned campaign order, durable progress,
+  revision-scoped records, rewards, and defensive migrations.
+- `session.ts`: revision/fingerprint-safe active-run persistence.
 - `pointerControls.ts`: tile-relative pointer intent and the strict one-tile,
-  wall-only corner-assist rule.
+  non-exit/no-new-interaction corner-assist rule.
 - `movementControls.ts`: the shared held-input acceleration curve and cadence
   state used by touch, mouse, keyboard/WASD, and on-screen arrows.
 
@@ -423,8 +446,8 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.19.0 source suite passes 316 automated tests across 27 files and the strict
-TypeScript/Vite production build. Coverage includes Spring Boots and single- or
+The current validation result is recorded in `docs/RELEASE_CHECKLIST.md` rather
+than frozen here. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
 dominant-colour theme compatibility, thirteen-track per-maze music selection, the
@@ -436,7 +459,9 @@ dressing, rescued-pet trails, persistent minimap reveal, dedicated Rose Heart,
 Blue Star, and Sunny Sun lock artwork, complete v5 cage fronts, stationary winning
 combat, paired-portal structural validation and travel, portal-safe active-run
 recovery, full-world camera interpolation, scaled-pointer hysteresis, and the
-full-reset storage allow-list, complete friend/enemy personality maps, scoped
+full-reset storage allow-list, stable content identity, campaign-order and save
+migrations, current-state reachability, progressive hints, route-quality
+metrics, fixed Surprise seeds, complete friend/enemy personality maps, scoped
 large-maze object mounting, and below-fold portrait lazy loading.
 
 The 0.19.0 Tauri portable executable and NSIS installer byte-match their final

@@ -19,7 +19,9 @@ class FakeImage {
 
 function levelWithRelevantArt(): LevelDefinition {
   return {
-    schemaVersion: 1,
+  schemaVersion: 1,
+  contentRevision: 1,
+  gameplayFingerprint: "test-assets",
     id: "preload-test",
     name: "Preload Test",
     objective: "Test only the required art.",

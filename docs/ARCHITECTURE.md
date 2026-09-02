@@ -43,32 +43,45 @@ state.
    Boots. Later
    adventure seeds carve 2×2 through 4×4 rooms, cluster rewards and rescues,
    add Power-gated room guardians, and place selected prerequisites on side
-   branches to create intentional detours. Level and object records carry stable visual IDs without
-   placing artwork concerns in the engine. The authored campaign deliberately
-   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, 23, 21, 23, 15, 17, and 21 tile
-   boards. The three newest portal adventures add mandatory return trips,
-   optional rescue wings, multi-pair routing, and a five-friend final vault;
-   Moonlit Friendship Quest also requires an Antidote Leaf detour before poison.
+   branches to create intentional detours. Level records carry a content revision
+   and deterministic gameplay fingerprint; authored objects use semantic IDs
+   rather than parser position. The campaign size sequence is 6, 11, 13, 15,
+   13, 15, 17, 17, 19, 23, 21, 23, 13, 17, 17, and 17. Chapter 1 therefore
+   teaches on a whole-board view before camera/fog begins in Chapter 2. The
+   portal trilogy ends in a compact three-pair quadrant relay; the Power-99
+   finale uses a changed-state return and keeps all five rescues optional.
 8. `src/game/solver.ts` validates structural rules and searches the exact engine
-   state space to prove both an ordinary solution and an all-animal solution.
-9. `src/game/exploration.ts` derives clamped camera windows, the shared camera
+   state space to prove both an ordinary zero-rescue solution and an all-animal
+   solution. It can begin at a validated current state.
+9. `src/game/reachability.ts`, `src/game/hints.ts`, and `src/game/metrics.ts`
+   derive current-state reachability, four-tier Required Path help, and campaign
+   route-quality reports from engine transitions. Portals and complete hole-run
+   jumps therefore cannot drift from UI reasoning. Reachability exposes whether
+   its state budget completed; route metrics distinguish raw branches from
+   demonstrated player decisions and leave causal prerequisite depth pending.
+10. `src/game/exploration.ts` derives clamped camera windows, the shared camera
    policy, and immutable reveal sets. Any level wider or taller than 6 tiles
    renders a 6 x 6 player-centred view while the engine and solver continue to
    use full-level coordinates.
-10. `src/game/terrainGeometry.ts` traces connected orthogonal cell unions into
+11. `src/game/terrainGeometry.ts` traces connected orthogonal cell unions into
    rounded SVG paths in stable world coordinates, including holes, diagonal
    contacts, and the camera gutter used by the renderer.
-11. `src/progress.ts` calculates rewards and stores a sanitized schema-v3 snapshot
-    in browser `localStorage`.
-12. `src/session.ts` validates and stores a schema-v1 snapshot for an unfinished
-    normal authored run, including exploration reveal state. It rejects tester,
-    generated, corrupt, inconsistent, and completed states.
-13. `src/resetProgress.ts` provides the UI-independent full-reset boundary. It
-    removes only the current, v2, legacy, and active-run Maze so Puzzle keys,
-    isolates each storage failure, and returns a fresh default progress value.
-14. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
+12. `src/campaign.ts` owns versioned campaign order/history and ID-based access
+    migration. `src/progress.ts` stores sanitized schema-v4 progress, stable
+    unlocked story IDs, and revision-scoped route records in browser
+    `localStorage`; old best steps remain explicitly historical after a map edit.
+13. `src/session.ts` validates and stores a schema-v2 snapshot for an unfinished
+    normal authored run, including revision, fingerprint, reveal state, and
+    progressive-hint state. It fails closed on changed content, reports that
+    narrow restart case to the player, and rejects tester, generated, corrupt,
+    inconsistent, and completed states.
+14. `src/resetProgress.ts` provides the UI-independent full-reset boundary. It
+    removes only the current, v3, v2, legacy, and active-run Maze so Puzzle keys,
+    isolates each storage failure, and returns both a fresh default value and an
+    honest durability result so the UI does not claim a partial reset succeeded.
+15. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
     Audio API; those effects require no recorded audio files.
-15. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
+16. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
    A session-scoped deterministic shuffle bag cycles through all thirteen full
    tracks on maze transitions and avoids an immediate repeat; the short
    friendship cue is excluded. The title theme starts from the first permitted
@@ -76,7 +89,7 @@ state.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
-16. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
+17. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
     material periods, dominant-colour families, compatibility rules, and
     fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
     catalogue contains twelve compatible terrain themes, eleven weapons, twelve
@@ -84,19 +97,22 @@ state.
     cage fronts, and dedicated Rose Heart, Blue Star, and Sunny Sun key/door pairs.
     Each lock pair exposes both child-readable colour and shape metadata. It
     also maps three paired-portal IDs to original transparent flower-pad art.
-17. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
+18. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
     touch, keyboard, and D-pad controls: a 320 ms first pause, a smooth 260–160 ms
     repeat curve over 16 held steps, and reset-on-direction-change semantics.
-18. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
-    cardinal intent and applies the strict one-tile, wall-only corner assist. It
-    never pathfinds or assists across hazards, unresolved doors, or enemies.
-19. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
+19. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
+    cardinal intent and applies the strict one-tile corner assist. The assisted
+    destination must be safe, non-exit ordinary floor with no unresolved
+    interaction. A previously resolved non-portal pickup square is eligible,
+    but a pickup, rescue, treasure, hazard, unresolved object, portal, jump, or
+    exit never is.
+20. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
     has left and selects distinct visible footprints for rescued friends.
-20. `src/cameraMotion.ts` converts engine/world coordinates into one smoothly
+21. `src/cameraMotion.ts` converts engine/world coordinates into one smoothly
     translated full-maze render surface. The 6 × 6 camera clips that world rather
     than rebuilding a different set of local tiles every step, so terrain,
     objects, portal hops, and edge-following movement remain spatially coherent.
-21. `src/game/visualPersonality.ts` exhaustively maps every rescue species and
+22. `src/game/visualPersonality.ts` exhaustively maps every rescue species and
     enemy look to a lightweight CSS motion family, flourish glyph, and friendly
     character trait. This keeps personality presentation typed and testable
     without multiplying raster animation frames or network requests.
@@ -141,6 +157,10 @@ state.
 - Generated-maze presentation is selected from dedicated deterministic hash
   streams. Recreating a seed reproduces both its puzzle and visual variants,
   while adding artwork choices cannot perturb topology or progression placement.
+- Required Path is a four-tier, on-demand ladder: Goal, Principle, Direction,
+  and the next engine-valid Step. Repetition advances the tier only for the same
+  meaningful game state, and the active run persists that bounded replay state.
+  Its solver route always avoids optional animals.
 - The browser build uses only local static assets from `public/`.
 - All landscape screens share one 960 × 540 logical canvas. A `ResizeObserver`
   fits that canvas inside the safe viewport with a single uniform scale, so its
@@ -152,8 +172,9 @@ state.
   synchronized between devices.
 - Full reset is an explicit destructive UI flow available from the title and
   Adventure Book. After confirmation, `resetProgress.ts` deletes only
-  `maze-so-puzzle-progress-v3`, `maze-so-puzzle-progress-v2`,
-  `maze-so-puzzle-progress-v1`, and `maze-so-puzzle-active-run-v1`; unrelated
+  `maze-so-puzzle-progress-v4`, `maze-so-puzzle-progress-v3`,
+  `maze-so-puzzle-progress-v2`, `maze-so-puzzle-progress-v1`,
+  `maze-so-puzzle-active-run-v2`, and `maze-so-puzzle-active-run-v1`; unrelated
   origin storage is intentionally preserved, and the app reloads Story Maze 1.
 - Camera coordinates affect presentation only. Movement, collision, combat,
   collection, and solving continue to operate in global level coordinates.
@@ -164,6 +185,10 @@ state.
   can take one safe perpendicular floor step around an immediately intended wall
   but cannot follow a wall or bypass a hazard, door, or enemy. Keyboard and D-pad
   controls remain independent.
+- Capability blockers escalate without modal loops: first contact uses HUD
+  feedback, the second repeat adds a marker, and only the third repeat may open
+  the explanatory modal. Strong-enemy explanation opens once per encounter;
+  later safe contacts stay in HUD feedback.
 - Terrain geometry is a connected cell union rendered through SVG. Globally
   aligned `userSpaceOnUse` patterns keep the floor, wall, water, lava, and poison art in
   world coordinates as the camera moves. Boundary tracing resolves diagonal
@@ -232,10 +257,14 @@ post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
 selection, held-input acceleration, theme colour/lightness separation, terrain
   dressing preload, dedicated key/door pair, deterministic colour/motif door
   bursts, and complete v5 cage-front coverage,
-stationary winning-combat semantics, and the full-reset storage allow-list.
+stationary winning-combat semantics, content fingerprints and semantic IDs,
+campaign-order migration, revision-scoped route records, engine-transition
+reachability, progressive hints, route-quality metrics, fixed Surprise seeds,
+and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.19.0 run covers 316 tests across 27 files; `npm run check` also
-completes strict TypeScript and the Vite production build. Dependency review,
+solver. The current test count is recorded by the release checklist rather than
+hard-coded here; `npm run check` also completes strict TypeScript and the Vite
+production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
 and portable launch smoke are complete for 0.19.0.
@@ -262,6 +291,9 @@ variance is qualified; see
   reject unsolvable or incorrectly gated content. Give each new story an
   intentional terrain theme, weapon/enemy/cage styles, and a deliberate rescue
   count from one through five.
+- Treat map edits as persistence migrations: preserve semantic object IDs,
+  increment `contentRevision`, update the gameplay fingerprint and route report,
+  and verify that stale active runs fail closed while durable progress survives.
 - Add a visual variant by extending the typed ID union and `artCatalog.ts`, then
   supply and validate the local asset. Keep engine behavior keyed to object kind
   and Power rather than art labels or filenames.

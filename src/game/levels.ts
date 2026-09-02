@@ -13,6 +13,7 @@ import type {
   LightDirection,
   WeaponStyle,
 } from "./types";
+import { gameplayFingerprint } from "./contentIdentity";
 
 export interface AsciiLevelOptions {
   readonly id: string;
@@ -31,10 +32,24 @@ export interface AsciiLevelOptions {
   readonly cageStyle?: CageStyle;
   readonly lightDirection?: LightDirection;
   readonly introducedMechanics?: readonly string[];
+  readonly contentRevision?: number;
+  /** Explicit semantic IDs by `x,y`; recommended for repeated same-kind objects. */
+  readonly objectIds?: Readonly<Record<string, string>>;
 }
 
 type WithoutId<T> = T extends { readonly id: string } ? Omit<T, "id"> : never;
 type LevelObjectInput = WithoutId<LevelObject>;
+
+function semanticObjectBase(levelId: string, object: LevelObjectInput | LevelObject): string {
+  const qualifier = object.kind === "enemy" ? `power-${object.power}`
+    : object.kind === "potion" ? `plus-${object.amount}`
+      : object.kind === "key" || object.kind === "door" ? object.color
+        : object.kind === "animal" ? object.species
+          : object.kind === "portal" ? object.pair
+            : object.kind === "treasure" ? `${object.currency}-plus-${object.amount}`
+              : "main";
+  return `${levelId}-${object.kind}-${qualifier}`;
+}
 
 const KEY_COLORS: Readonly<Record<string, KeyColor>> = {
   r: "red",
@@ -99,13 +114,12 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
   const objects: LevelObject[] = [];
   let start: Point | undefined;
   let exit: Point | undefined;
-  let objectNumber = 0;
 
   const addObject = (object: LevelObjectInput): void => {
-    objectNumber += 1;
+    const explicitId = options.objectIds?.[`${object.at.x},${object.at.y}`];
     objects.push({
       ...object,
-      id: `${options.id}-${object.kind}-${objectNumber}`,
+      id: explicitId ?? semanticObjectBase(options.id, object),
     } as LevelObject);
   };
 
@@ -279,8 +293,60 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
     throw new Error(`Level "${options.id}" needs exactly one start and exit.`);
   }
 
+  const objectsByCoordinate = new Map<string, LevelObject>(objects.map((object) => [
+    `${object.at.x},${object.at.y}`,
+    object,
+  ] as const));
+  for (const [coordinate, explicitId] of Object.entries(options.objectIds ?? {})) {
+    const mappedObject = objectsByCoordinate.get(coordinate);
+    if (!mappedObject) {
+      throw new Error(`Level "${options.id}" maps object id "${explicitId}" to empty coordinate ${coordinate}.`);
+    }
+    if (
+      explicitId.length === 0
+      || explicitId !== explicitId.trim()
+      || !explicitId.startsWith(`${options.id}-${mappedObject.kind}-`)
+    ) {
+      throw new Error(`Object id "${explicitId}" at ${coordinate} does not match its ${mappedObject.kind} role.`);
+    }
+  }
+  const objectsByBase = new Map<string, LevelObject[]>();
+  for (const object of objects) {
+    const base = semanticObjectBase(options.id, object);
+    objectsByBase.set(base, [...(objectsByBase.get(base) ?? []), object]);
+  }
+  for (const [base, matchingObjects] of objectsByBase) {
+    if (matchingObjects.length <= 1) continue;
+    for (const object of matchingObjects) {
+      const coordinate = `${object.at.x},${object.at.y}`;
+      if (options.objectIds?.[coordinate] === undefined) {
+        throw new Error(`Repeated authored role "${base}" needs an explicit semantic id at ${coordinate}.`);
+      }
+    }
+  }
+  const objectIds = objects.map((object) => object.id);
+  if (new Set(objectIds).size !== objectIds.length) {
+    throw new Error(`Level "${options.id}" contains duplicate semantic object ids.`);
+  }
+
+  const contentRevision = options.contentRevision ?? 1;
+  if (!Number.isSafeInteger(contentRevision) || contentRevision < 1) {
+    throw new Error(`Level "${options.id}" needs a positive integer content revision.`);
+  }
+  const identityInput = {
+    contentRevision,
+    width,
+    height,
+    initialPower: options.initialPower ?? 2,
+    start,
+    exit,
+    terrain,
+    objects,
+  };
   return {
     schemaVersion: 1,
+    contentRevision,
+    gameplayFingerprint: gameplayFingerprint(identityInput),
     id: options.id,
     name: options.name,
     objective: options.objective,
@@ -288,7 +354,7 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
     seed: options.seed,
     width,
     height,
-    initialPower: options.initialPower ?? 2,
+    initialPower: identityInput.initialPower,
     start,
     exit,
     terrain,
@@ -299,7 +365,14 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
   };
 }
 
-export const MOVEMENT_LEVEL = parseAsciiLevel({
+type AuthoredAsciiLevelOptions = AsciiLevelOptions & { readonly contentRevision: number };
+
+function parseAuthoredLevel(options: AuthoredAsciiLevelOptions): LevelDefinition {
+  return parseAsciiLevel(options);
+}
+
+export const MOVEMENT_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "little-star-trail",
   name: "Little Star Trail",
   objective: "Follow the paths to the star!",
@@ -309,19 +382,17 @@ export const MOVEMENT_LEVEL = parseAsciiLevel({
   cageStyle: "golden-heart",
   introducedMechanics: ["movement", "exit", "animal-rescue"],
   map: [
-    "#########",
-    "#c......#",
-    "#####.#.#",
-    "#.....#.#",
-    "#.#####.#",
-    "#.#.....#",
-    "#.#.#####",
-    "#E#...s@#",
-    "#########",
+    "######",
+    "#...E#",
+    "#.##.#",
+    "#....#",
+    "#@c.s#",
+    "######",
   ],
 });
 
-export const SWORD_AND_KEY_LEVEL = parseAsciiLevel({
+export const SWORD_AND_KEY_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "shiny-sword",
   name: "Shiny Sword",
   objective: "Find the sword and Rose Heart Key!",
@@ -345,7 +416,8 @@ export const SWORD_AND_KEY_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const SPLASHY_BOOTS_LEVEL = parseAsciiLevel({
+export const SPLASHY_BOOTS_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "splashy-boots",
   name: "Splashy Boots",
   objective: "Grow your Power and cross the water!",
@@ -371,7 +443,8 @@ export const SPLASHY_BOOTS_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const TOASTY_TOES_LEVEL = parseAsciiLevel({
+export const TOASTY_TOES_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "toasty-toes",
   name: "Toasty Toes",
   objective: "Use everything to reach the star!",
@@ -398,7 +471,8 @@ export const TOASTY_TOES_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const RAINBOW_PICNIC_LEVEL = parseAsciiLevel({
+export const RAINBOW_PICNIC_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "rainbow-picnic",
   name: "Rainbow Picnic",
   objective: "Pack your boots and open both rainbow gates!",
@@ -427,7 +501,8 @@ export const RAINBOW_PICNIC_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const MOONBEAM_MOAT_LEVEL = parseAsciiLevel({
+export const MOONBEAM_MOAT_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "moonbeam-moat",
   name: "Moonbeam Moat",
   objective: "Splash past the moonlit moat and its three gates!",
@@ -455,8 +530,13 @@ export const MOONBEAM_MOAT_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const WISHING_WOODS_LEVEL = parseAsciiLevel({
+export const WISHING_WOODS_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "wishing-woods",
+  objectIds: {
+    "9,1": "wishing-woods-enemy-north-watch",
+    "15,8": "wishing-woods-enemy-kitten-guardian",
+  },
   name: "Wishing Woods",
   objective: "Follow the three wishes through water and warm sparkles!",
   terrainThemeId: "wishing-woods",
@@ -494,8 +574,13 @@ export const WISHING_WOODS_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const AMES_GRAND_PARADE_LEVEL = parseAsciiLevel({
+export const AMES_GRAND_PARADE_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "ames-grand-parade",
+  objectIds: {
+    "11,9": "ames-grand-parade-potion-north-garden",
+    "11,13": "ames-grand-parade-potion-south-garden",
+  },
   name: "Ame's Grand Parade",
   objective: "Gather every colour and lead the grand parade home!",
   terrainThemeId: "parade-courtyard",
@@ -536,7 +621,8 @@ export const AMES_GRAND_PARADE_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAsciiLevel({
+export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "springstep-sky-hollow",
   name: "Springstep Sky Hollow",
   objective: "Explore the side paths, then bounce across the starry holes!",
@@ -555,15 +641,15 @@ export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAsciiLevel({
   ],
   map: [
     "###################",
-    "#...#...oo.......q#",
+    "#...#...oo........#",
     "#.#.#.#######.#####",
     "#.#b#.#E....#.....#",
-    "#.###8#####.#####.#",
+    "#.###8####q.#####.#",
     "#.#...#..^^.#..~~~#",
     "#.#.###.#####.###.#",
     "#.#...#...#u..#.#.#",
     "#.###.###B#.###.#.#",
-    "#.........#.#.#...#",
+    "#.........o.#.#...#",
     "#.#########.#.#.###",
     "#h#@..#...#.#.#...#",
     "#####.#.#.#.#.###.#",
@@ -576,8 +662,13 @@ export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
+export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "lanternlight-labyrinth",
+  objectIds: {
+    "2,1": "lanternlight-labyrinth-enemy-entry-imp",
+    "5,13": "lanternlight-labyrinth-enemy-return-imp",
+  },
   name: "Lanternlight Labyrinth",
   objective: "Explore to find the star. Rescue little friends if you can!",
   terrainThemeId: "lantern-ruins",
@@ -631,7 +722,7 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
     "#....@#.....#.....#...#",
     "#########.###.#########",
     "#.........#...#...#...#",
-    "#.#########.###.#.#.#.#",
+    "#.###.#####.###.#.#.#.#",
     "#.#.......#.#...#.#p#.#",
     "#.#.#####.#.#.###.###.#",
     "#.......#.....#.......#",
@@ -639,7 +730,8 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAsciiLevel({
+export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "twilight-treasure-loop",
   name: "Twilight Treasure Loop",
   objective: "Search the side trails for every tool, then unlock the twilight star!",
@@ -668,7 +760,7 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAsciiLevel({
   ],
   map: [
     "#####################",
-    "#E#..k..#...#zy9.x..#",
+    "#.#..k..#...#zy9.x..#",
     "#.###.#.#.#.#######.#",
     "#..i..#...#.....#...#",
     "###############.#.#.#",
@@ -678,7 +770,7 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAsciiLevel({
     "#.#.#.#.###.#.#####.#",
     "#.#.#.#.....#^#..6Y.#",
     "#.#.#4#####.#^#.###.#",
-    "#.#.#...#...#.#.#bp.#",
+    "#.#.#...#...#E#.#bp.#",
     "#.#.###.#####.#.###.#",
     "#.#...#.....#B#...#o#",
     "#.###.#####.#.###.#o#",
@@ -691,8 +783,13 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAsciiLevel({
+export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "moonlit-friendship-quest",
+  objectIds: {
+    "21,1": "moonlit-friendship-quest-potion-north-vial",
+    "21,21": "moonlit-friendship-quest-potion-south-vial",
+  },
   name: "Moonlit Friendship Quest",
   objective: "Remember every turning and gather the three keys for five moonlit friends!",
   terrainThemeId: "moonbeam-castle",
@@ -728,7 +825,7 @@ export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAsciiLevel({
     "###.#####.#.#####.#.#.#",
     "#.#...#...#.......#.#.#",
     "#.###.#.###########.#.#",
-    "#.rP#...#.......#.#.#.#",
+    "#.rP#...........#.#.#.#",
     "#.#######.#.###.#.#.#.#",
     "#...i...#.#...#...#.#.#",
     "#.#####.#Y###.###.#.#.#",
@@ -749,8 +846,13 @@ export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAsciiLevel({
+export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "rose-heart-roundabout",
+  objectIds: {
+    "9,3": "rose-heart-roundabout-portal-east-garden",
+    "4,9": "rose-heart-roundabout-portal-west-garden",
+  },
   name: "Rose Heart Roundabout",
   objective: "Ride the matching flower portals and bring the Rose Heart Key home!",
   terrainThemeId: "rose-courtyard",
@@ -764,26 +866,33 @@ export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAsciiLevel({
     "off-route-prerequisites",
   ],
   map: [
-    "###############",
-    "#ER.k.##r1.#s##",
-    "#####.####.#.##",
-    "#q#...##.#.#.##",
-    "#.#.####.#.#.##",
-    "#...#H##.#...##",
-    "#.###.##.###.##",
-    "#..i..##.cf#.##",
-    "#####.##.###.##",
-    "#@..#.##...#.##",
-    "###.#.##.#.#.##",
-    "#...#.##.#.#.##",
-    "#.###.##.#.#.##",
-    "#.....##H#...##",
-    "###############",
+    "#############",
+    "#ER...#.....#",
+    "###.#.#.###.#",
+    "#.....#..H..#",
+    "#.###.#.###.#",
+    "#...q.#..r..#",
+    "###.#.#.#.###",
+    "#...#.#.#...#",
+    "#.###.#.###.#",
+    "#@..H.#..cf.#",
+    "#.....#..s1.#",
+    "#..i..#.....#",
+    "#############",
   ],
 });
 
-export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAsciiLevel({
+export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "clover-comeback-carnival",
+  objectIds: {
+    "15,1": "clover-comeback-carnival-portal-mint-north",
+    "3,7": "clover-comeback-carnival-portal-rose-west",
+    "9,7": "clover-comeback-carnival-portal-rose-east",
+    "1,9": "clover-comeback-carnival-portal-violet-west",
+    "9,9": "clover-comeback-carnival-portal-mint-centre",
+    "9,11": "clover-comeback-carnival-portal-violet-south",
+  },
   name: "Clover Comeback Carnival",
   objective: "Explore every portal garden, then come back strong enough for the Moon Golem!",
   terrainThemeId: "springstep-hollow",
@@ -827,8 +936,17 @@ export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAsciiLevel({
   ],
 });
 
-export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAsciiLevel({
+export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAuthoredLevel({
+  contentRevision: 3,
   id: "friendship-crown-vault",
+  objectIds: {
+    "6,1": "friendship-crown-vault-portal-rose-west",
+    "9,1": "friendship-crown-vault-portal-rose-east",
+    "14,7": "friendship-crown-vault-portal-mint-north",
+    "6,9": "friendship-crown-vault-portal-violet-west",
+    "9,9": "friendship-crown-vault-portal-violet-east",
+    "15,9": "friendship-crown-vault-portal-mint-south",
+  },
   name: "Friendship Crown Vault",
   objective: "Link all three portal flowers and unlock the friendship crown!",
   terrainThemeId: "moonbeam-castle",
@@ -858,31 +976,28 @@ export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAsciiLevel({
     "five-friend-challenge",
   ],
   map: [
-    "#####################",
-    "#@.k..#s..#u.j#..x..#",
-    "#####.###.###.#.###.#",
-    "#t..#...#.#p#...#...#",
-    "###.###.#.#.#####.###",
-    "#..i.f#...#.....#.#C#",
-    "#.#######.#.###.#.#4#",
-    "#...#.....#.#...#.#.#",
-    "#.#.#.#####.#.###.#.#",
-    "#r#.....2H#H#.......#",
-    "#####################",
-    "#EYBR.....#C..#l....#",
-    "#########.###.#####.#",
-    "#y#.....#.#b#..oo^^.#",
-    "#9#.###.#.#.#######.#",
-    "#.#.#h#...#.%%..~~..#",
-    "#.#.#.#####.#########",
-    "#.#.#..v..#.....#...#",
-    "#.#.#.###.#####.#.#.#",
-    "#.....#M..#d7m....#M#",
-    "#####################",
+    "#################",
+    "#@.s..H.#H...~.r#",
+    "#.###...#..u.~..#",
+    "#...t...#....~..#",
+    "#.###...#....~..#",
+    "#2......#....~d.#",
+    "#..m....#....~..#",
+    "#......y#....~C.#",
+    "#################",
+    "#EYBR.M.#M.bo.jC#",
+    "#..###l.#...o...#",
+    "#f.%#...#...o.h.#",
+    "#..%#...#...o..4#",
+    "#..%#...#...o...#",
+    "#..%#...#...o...#",
+    "#..%#...#...o...#",
+    "#################",
   ],
 });
 
-export const RAINBOW_POWER_PARADE_LEVEL = parseAsciiLevel({
+export const RAINBOW_POWER_PARADE_LEVEL = parseAuthoredLevel({
+  contentRevision: 2,
   id: "rainbow-power-parade",
   name: "Rainbow Power Parade",
   objective: "Build Power 99, bring home the Sunny Key, and return for the Rainbow Guardian!",
@@ -905,33 +1020,31 @@ export const RAINBOW_POWER_PARADE_LEVEL = parseAsciiLevel({
     "power-99",
     "rainbow-power",
     "boss-rescue",
+    "come-back-stronger",
+    "required-backtracking",
     "required-return-trip",
     "gold-star-treasures",
     "science-collectibles",
     "five-friend-challenge",
   ],
   map: [
-    "#####################",
-    "#EqZY@s2p4k.........#",
-    "###################.#",
-    "#...i....K..........#",
-    "#.###################",
-    "#....L......x.......#",
-    "###################.#",
-    "#...v......N........#",
-    "#.###################",
-    "#....O...9...k......#",
-    "###################.#",
-    "#9..9..9..i.........#",
-    "#.###################",
-    "#c...9...d...9...x..#",
-    "###################.#",
-    "#....9...h...9......#",
-    "#.###################",
-    "#v...9...9...9......#",
-    "###################.#",
-    "#y....9....f....x...#",
-    "#####################",
+    "#################",
+    "#EYZ###.#..q....#",
+    "###.###.#.#####.#",
+    "#h....#.#.......#",
+    "#.....s.2.......#",
+    "#.###x..#...###.#",
+    "#...c...#..p....#",
+    "#@......#.......#",
+    "####O#######4####",
+    "#.......#.......#",
+    "#.#####.#..K....#",
+    "#.#yN...#....d..#",
+    "#.......L.......#",
+    "#..f....#.......#",
+    "#.###...#...###.#",
+    "#.......#.......#",
+    "#################",
   ],
 });
 

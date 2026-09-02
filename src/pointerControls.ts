@@ -1,4 +1,4 @@
-import { getObjectAt, getTerrainAt, isObjectResolved } from "./game/engine";
+import { getObjectAt, getTerrainAt, isObjectResolved, pointsEqual } from "./game/engine";
 import {
   DIRECTION_DELTAS,
   type Direction,
@@ -96,10 +96,9 @@ function isSafeAssistTile(
   state: GameState,
   point: Point,
 ): boolean {
-  if (getTerrainAt(level, point) !== "floor") return false;
+  if (getTerrainAt(level, point) !== "floor" || pointsEqual(point, level.exit)) return false;
   const object = getObjectAt(level, point);
-  if (!object || isObjectResolved(object, state)) return true;
-  return object.kind !== "door" && object.kind !== "enemy";
+  return !object || (object.kind !== "portal" && isObjectResolved(object, state));
 }
 
 function perpendicularDirections(

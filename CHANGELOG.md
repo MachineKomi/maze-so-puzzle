@@ -4,6 +4,32 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## Unreleased
+
+### Added
+
+- Stable authored-object identity, gameplay revisions/fingerprints, versioned
+  campaign order, revision-scoped route history, and fail-closed active-run
+  migration.
+- Four replayable Required Path tiers derived from the current engine state,
+  plus reproducible route-quality and route-activity campaign metrics.
+- A maintained gameplay design specification with the sixteen-level progression
+  and experience/asset-opportunity matrices and a family playtest protocol.
+
+### Changed
+
+- Chapter 1 is now a complete 6×6 whole-board movement lesson. Later campaign
+  edits reduce ordinary corridor endurance, while Chapters 13 and 15 become
+  compact portal-inference puzzles.
+- Rainbow Power Parade is rebuilt as a 61-input Power-99 and Sunny-Key return
+  puzzle; its five friends are optional on the ordinary route and all rescuable
+  on the 77-input perfect route.
+- Blocker guidance escalates from HUD feedback to a marker before a modal;
+  repeat stronger-enemy contacts no longer reopen the same interruption.
+- Pointer corner assistance may land only on safe, non-exit ordinary floor
+  without a new interaction. Gold and Science text now describes keepsakes
+  rather than implying a future shop.
+
 ## 0.19.0 - 2026-09-02
 
 This living-magic release makes the maze itself feel more enchanted while

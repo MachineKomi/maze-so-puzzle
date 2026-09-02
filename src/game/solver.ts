@@ -13,6 +13,10 @@ export interface SolveOptions {
   readonly maxStates?: number;
   /** Require a route that rescues every animal before entering the exit. */
   readonly requireAllAnimals?: boolean;
+  /** Search from a validated live state instead of restarting the level. */
+  readonly initialState?: GameState;
+  /** Ordinary-path contract: never step onto an unresolved optional rescue. */
+  readonly avoidAnimals?: boolean;
 }
 
 export type SolveReason = "solved" | "unsolvable" | "state-limit" | "invalid-level";
@@ -34,10 +38,18 @@ export interface LevelValidation {
   readonly visitedStates: number;
 }
 
-function stateSignature(state: GameState, includeAnimals: boolean, level: LevelDefinition): string {
-  const normalized = (values: readonly string[]) => [...values].sort().join(",");
+export function progressionStateSignature(
+  state: GameState,
+  includeAnimals: boolean,
+  statefulCollectibleIds: ReadonlySet<string>,
+): string {
+  // Engine-owned arrays are kept sorted. Equipment and reusable keys already
+  // have canonical capability fields, and an opened reusable-key door cannot
+  // change future reachability. Only potions need their individual collection
+  // identity retained: equal current Power can otherwise hide an uncollected
+  // potion that changes a later route.
   const progressionCollectibles = state.collectedObjectIds.filter((id) => (
-    level.objects.find((object) => object.id === id)?.kind !== "treasure"
+    statefulCollectibleIds.has(id)
   ));
   return [
     state.position.x,
@@ -47,11 +59,10 @@ function stateSignature(state: GameState, includeAnimals: boolean, level: LevelD
     state.hasBoots ? 1 : 0,
     state.hasSpringBoots ? 1 : 0,
     state.hasAntidoteLeaf ? 1 : 0,
-    normalized(state.keys),
-    normalized(progressionCollectibles),
-    includeAnimals ? normalized(state.rescuedAnimalIds) : "",
-    normalized(state.defeatedEnemyIds),
-    normalized(state.openedDoorIds),
+    state.keys.join(","),
+    progressionCollectibles.join(","),
+    includeAnimals ? state.rescuedAnimalIds.join(",") : "",
+    state.defeatedEnemyIds.join(","),
     state.status,
   ].join("|");
 }
@@ -78,6 +89,13 @@ function reconstructDirections(
 
 export function getLevelStructureErrors(level: LevelDefinition): readonly string[] {
   const errors: string[] = [];
+
+  if (!Number.isSafeInteger(level.contentRevision) || level.contentRevision < 1) {
+    errors.push("Content revision must be a positive integer.");
+  }
+  if (typeof level.gameplayFingerprint !== "string" || level.gameplayFingerprint.length === 0) {
+    errors.push("Gameplay fingerprint must be present.");
+  }
 
   if (!Number.isInteger(level.width) || !Number.isInteger(level.height) || level.width < 3 || level.height < 3) {
     errors.push("Level dimensions must be integers of at least 3 tiles.");
@@ -201,8 +219,20 @@ export function solveLevel(
     : Math.max(1, Math.floor(options.maxStates));
   const requireAllAnimals = options.requireAllAnimals ?? false;
   const animalCount = level.objects.filter((object) => object.kind === "animal").length;
-  const initial = createInitialGameState(level);
-  const initialSignature = stateSignature(initial, requireAllAnimals, level);
+  const statefulCollectibleIds = new Set(
+    level.objects.filter((object) => object.kind === "potion").map((object) => object.id),
+  );
+  const initial = options.initialState ?? createInitialGameState(level);
+  if (initial.levelId !== level.id || initial.status !== "playing") {
+    return {
+      solvable: false,
+      reason: "invalid-level",
+      directions: [],
+      visitedStates: 0,
+      errors: ["Initial solver state must be a playing state for this level."],
+    };
+  }
+  const initialSignature = progressionStateSignature(initial, requireAllAnimals, statefulCollectibleIds);
   const queue: GameState[] = [initial];
   const signatures: string[] = [initialSignature];
   const seen = new Set<string>([initialSignature]);
@@ -223,8 +253,14 @@ export function solveLevel(
       if (result.state.status === "lost") {
         continue;
       }
+      if (
+        options.avoidAnimals
+        && result.state.rescuedAnimalIds.length > state.rescuedAnimalIds.length
+      ) {
+        continue;
+      }
 
-      const nextSignature = stateSignature(result.state, requireAllAnimals, level);
+      const nextSignature = progressionStateSignature(result.state, requireAllAnimals, statefulCollectibleIds);
       // A successful combat changes Power and clears the enemy without moving
       // Ame. Treat any genuine state transition as a searchable edge; blocked
       // movement and too-strong encounters retain the current signature.

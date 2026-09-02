@@ -24,9 +24,9 @@ those classes without a new reviewed artifact manifest.
 Development-server, production-preview, and packaged-release values are
 different cohorts. They must never share a baseline row.
 
-## Reproducibility identity
+## Pass 07A baseline reproducibility identity
 
-The current measurement identity is:
+The preserved Pass 07A baseline measurement identity is:
 
 | Field | Value |
 | --- | --- |
@@ -87,6 +87,30 @@ growth. Reductions pass. Growth needs
 a positive, reviewed allocation in
 `scripts/performance/feature-allocations.json`, supporting evidence, an owner,
 and a rollback point.
+
+## Plan 06 candidate static addendum
+
+This addendum preserves the `a34de2f` rows above as the measurement baseline.
+The manager-reviewed Plan 06 candidate was built from checkpoint
+`555cdd622a98bd77585f2e60f1096712392d71b3` plus the complete candidate
+worktree. Its source-matched provenance records runtime-input SHA-256
+`6c1f0894266a5580d16f5b6f08980b7259efac83398710f9ed743f10adc43ebb` and
+dist fingerprint SHA-256
+`ad257b4f26069e46dc141ded38c9bbb1e246ae11ba6385b84663c8686d4dfd42`.
+
+The deterministic gate measured 119,779 B gzip-9 JavaScript, 29,206 B gzip-9
+CSS, and 89,394,012 B public runtime files. Those totals are within the approved
+4,020 B JavaScript / 128 B CSS Plan 06 allocation and authorize no public-runtime
+asset growth. The source-matched external inventory records 139 runtime assets /
+89,330,098 B and 144 dist files / 89,929,629 B at
+`C:\Users\hellb\AppData\Local\Temp\maze-so-puzzle-performance\plan06-manager-final-20260902-2146\inventory.json`;
+its SHA-256 is
+`25984a8678b5f89e6d7d28b4940426f7a7b3a185d6053d93c563dbf521a8dc87`.
+
+The manager production-preview pass exercised functional recovery, hint, modal,
+and responsive-rendering checkpoints only. It collected no accepted timing
+cohort, so all loading, frame-time, and Tauri timing rows remain report-only or
+pending exactly as classified below.
 
 The two current 0.19.0 executables match their entries in
 `release/SHA256SUMS.txt`. The command example labelled “Expected hashes” in

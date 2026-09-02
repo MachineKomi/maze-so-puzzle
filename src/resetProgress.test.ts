@@ -3,16 +3,19 @@ import {
   createDefaultPlayerProgress,
   LEGACY_PLAYER_PROGRESS_STORAGE_KEY,
   PLAYER_PROGRESS_STORAGE_KEY,
+  VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY,
   VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY,
 } from "./progress";
-import { resetAllGameProgress } from "./resetProgress";
-import { ACTIVE_RUN_STORAGE_KEY } from "./session";
+import { resetAllGameProgress, resetAllGameProgressResult } from "./resetProgress";
+import { ACTIVE_RUN_STORAGE_KEY, LEGACY_ACTIVE_RUN_STORAGE_KEY } from "./session";
 
 const GAME_KEYS = [
   PLAYER_PROGRESS_STORAGE_KEY,
+  VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY,
   VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY,
   LEGACY_PLAYER_PROGRESS_STORAGE_KEY,
   ACTIVE_RUN_STORAGE_KEY,
+  LEGACY_ACTIVE_RUN_STORAGE_KEY,
 ] as const;
 
 class MemoryStorage {
@@ -51,8 +54,18 @@ describe("full game progress reset", () => {
       },
     };
 
-    expect(() => resetAllGameProgress(storage)).not.toThrow();
+    const result = resetAllGameProgressResult(storage);
+    expect(result.cleared).toBe(false);
+    expect(result.failedKeys).toEqual([VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY]);
+    expect(result.progress).toEqual(createDefaultPlayerProgress());
     expect(attemptedKeys).toEqual(GAME_KEYS);
+  });
+
+  it("reports unavailable storage instead of claiming a durable reset", () => {
+    const result = resetAllGameProgressResult(null);
+
+    expect(result.cleared).toBe(false);
+    expect(result.failedKeys).toEqual(GAME_KEYS);
   });
 
   it("returns a clean default when browser storage is unavailable", () => {

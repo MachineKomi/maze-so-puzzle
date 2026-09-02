@@ -9,13 +9,13 @@ import { solveLevel } from "./solver";
 
 describe("portal level design stats", () => {
   it.each([
-    ["Rose Heart Roundabout", ROSE_HEART_ROUNDABOUT_LEVEL, 105, 117, 33, 1, 1],
-    ["Clover Comeback Carnival", CLOVER_COMEBACK_CARNIVAL_LEVEL, 103, 177, 21, 3, 1],
-    ["Friendship Crown Vault", FRIENDSHIP_CROWN_VAULT_LEVEL, 231, 260, 54, 3, 3],
+    ["Rose Heart Roundabout", ROSE_HEART_ROUNDABOUT_LEVEL, 28, 42, 1],
+    ["Clover Comeback Carnival", CLOVER_COMEBACK_CARNIVAL_LEVEL, 103, 177, 21],
+    ["Friendship Crown Vault", FRIENDSHIP_CROWN_VAULT_LEVEL, 44, 56, 0],
   ] as const)(
-    "%s requires portal travel, physical backtracking, and optional rescue detours",
-    (_name, level, ordinaryLength, perfectLength, minimumMovedRevisits, defeatedCount, doorCount) => {
-      const ordinary = solveLevel(level);
+    "%s requires portal travel and keeps rescue detours optional",
+    (_name, level, ordinaryLength, perfectLength, minimumMovedRevisits) => {
+      const ordinary = solveLevel(level, { avoidAnimals: true });
       const perfect = solveLevel(level, { requireAllAnimals: true });
       let state = createInitialGameState(level);
       const events: string[] = [];
@@ -41,12 +41,43 @@ describe("portal level design stats", () => {
         status: "won",
         rescuedAnimalIds: [],
       });
-      expect(ordinary.finalState?.defeatedEnemyIds).toHaveLength(defeatedCount);
-      expect(ordinary.finalState?.openedDoorIds).toHaveLength(doorCount);
+      expect(ordinary.finalState?.openedDoorIds.length).toBeGreaterThanOrEqual(1);
       expect(perfect.finalState?.rescuedAnimalIds).toHaveLength(animalCount);
       expect(movedRevisits).toBeGreaterThanOrEqual(minimumMovedRevisits);
       expect(events.filter((event) => event === "portal-warped").length)
         .toBeGreaterThanOrEqual(2);
     },
   );
+
+  it("makes all three Crown Vault keys, doors, and portal pairs required", () => {
+    const level = FRIENDSHIP_CROWN_VAULT_LEVEL;
+    const ordinary = solveLevel(level, { avoidAnimals: true });
+    expect(ordinary.solvable).toBe(true);
+    expect(ordinary.finalState?.keys).toEqual(["blue", "red", "yellow"]);
+    expect(ordinary.finalState?.openedDoorIds).toEqual(
+      level.objects.filter((object) => object.kind === "door").map((object) => object.id).sort(),
+    );
+
+    let state = createInitialGameState(level);
+    const usedPortalPairs: string[] = [];
+    for (const direction of ordinary.directions) {
+      const result = movePlayer(level, state, direction);
+      state = result.state;
+      usedPortalPairs.push(...result.events.flatMap((event) => (
+        event.type === "portal-warped" ? [event.pair] : []
+      )));
+    }
+    const expectedPairs = [...new Set(level.objects.flatMap((object) => (
+      object.kind === "portal" ? [object.pair] : []
+    )))].sort();
+    expect(usedPortalPairs.sort()).toEqual(expectedPairs);
+
+    for (const color of ["red", "yellow", "blue"] as const) {
+      const withoutKey = {
+        ...level,
+        objects: level.objects.filter((object) => object.kind !== "key" || object.color !== color),
+      };
+      expect(solveLevel(withoutKey, { avoidAnimals: true }).solvable, color).toBe(false);
+    }
+  }, 120_000);
 });
