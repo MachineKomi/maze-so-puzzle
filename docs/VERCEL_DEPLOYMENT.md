@@ -255,3 +255,12 @@ runtime asset. Local browser checks at 1280×720 and 1024×768 exercised the
 larger sprite-backed pickup notice, complete cage, rescue opening, and exact
 post-combat Power reward without warning or error logs. Earlier release
 paragraphs remain historical evidence.
+
+Playable build 0.19.0 was pushed to GitHub `main` as release commit `288e653`
+on 2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical JavaScript is `index-DyaTff51.js` and reports 0.19.0;
+the live CSS/JavaScript contain the water-ripple, lava-shimmer, poison-bubble,
+and colour/motif door-burst contracts. Local production-browser checks at
+1280×720 and 1024×768 exercised live hazards, the Blue Star Key glow, and a
+single 18-particle Blue Star Door opening with no document overflow or browser
+warning/error logs. Earlier release paragraphs remain historical evidence.

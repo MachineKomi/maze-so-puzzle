@@ -33,8 +33,9 @@ Earlier evidence is kept as historical release evidence.
   the Blue Star Key glow and opening burst, and verified poison animation
   contracts. A 1024 × 768 iPad viewport has no document overflow; warning and
   error logs are empty.
-- [ ] GitHub/Vercel source deployment and canonical live-bundle verification
-  are completed after the release commit is pushed.
+- [x] Release commit `288e653` was pushed to GitHub `main` and auto-deployed by
+  Vercel. The canonical JavaScript is `index-DyaTff51.js`, reports 0.19.0, and
+  its CSS/JavaScript contain all four new visual-effect contracts.
 - [x] `Maze-so-Puzzle-0.19.0-portable.exe`: 97,871,360 bytes, file/product
   version 0.19.0, SHA-256
   `2E89AB011E20A6EB4C6E066D6221E21147BC8DBDED24A053C74472EEE6E73916`.
