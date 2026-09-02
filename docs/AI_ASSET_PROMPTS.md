@@ -1,5 +1,15 @@
 # AI art prompt set
 
+> **Current identity authority (2026-09-02):** this file preserves historical
+> prompts and production provenance; earlier wording such as “blonde bob” is not
+> a future design lock. Before generating or editing new art, read
+> `docs/GAME_VISION_AND_DESIGN_SPEC.md`, the current `docs/ART_BIBLE.md` when it
+> exists, and `docs/characters/AME_MODEL_SHEET.md` when it exists. Ame must have
+> golden-blonde hair and clearly blue irises in every depiction. Her approved
+> future model is expected to use a restrained slightly longer hairstyle while
+> preserving her recognisable mint/lavender adventure identity. Never rewrite
+> the exact historical prompts below; append new versioned records instead.
+
 All base artwork in `public/assets/` was generated for this project with the
 built-in OpenAI image-generation tool. Runtime resizing, chroma removal, WebP
 conversion, palette optimization, periodic Poisson correction, and the older

@@ -1,5 +1,29 @@
 # Graphics and VFX overhaul plan
 
+## 0. Manager-reviewed execution addendum
+
+This addendum is execution authority and supersedes any conflict in the planning body. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and the implementation-time Art Bible, UI/UX spec, Lighting spec, and Gameplay spec before changing code.
+
+Execution begins only after Plans 07A, 06, 03, 01, and 04 are accepted. Re-resolve every symbol against current `HEAD`; consume the landed scene/render/anchor contracts rather than independently refactoring `MazeTerrain`, `App.tsx`, styles, or input state.
+
+### Adopted product amendments
+
+- Final Art Bible tokens and material rules replace the provisional hex palette in this plan. VFX may derive bounded effect values but may not create a competing world palette.
+- Add a deterministic, typed `VfxFlavor` (or equivalent) that varies restrained accents by terrain theme, weapon, enemy personality, cage, portal pair, or authored story beat while preserving the semantic effect family. Provide an explicit chapter/effect variation matrix so repeated pickups, rescues, fights, traversal, and victories do not feel mechanically copied.
+- Variation must create wonder and intelligent reuse, not noise: use fewer, larger, purposeful anime-readable shapes, one dominant silhouette, controlled accent motifs, and finite release. Do not satisfy variety with particle count.
+- Preserve exact Power conservation, engine-event order, accessible outcome, abort/cancellation, and final reconciliation. The current 2,220ms combat duration is a measured starting recipe, not an immutable product rule; tune it with gameplay and child-readability evidence when a shorter cadence is clearer and more fun.
+- Use revisioned measured anchors supplied by UI, including `bag:<semantic-slot-id>` with a generic Bag fallback. No fixed screen coordinate survives responsive layout.
+- The presentation director owns run identity, absolute time, abort/final state, sound/VFX cues, and a presentation-busy lease. It requests that controls stop/neutral-gate input; it does not independently clear each device's private queues.
+- Use the Plan-04 terrain/render seam. Lighting owns topology, wall/depth geometry, global light, masks, gutter, and grounding nodes. VFX owns assigned moving hazard material layers, local emission, particles, transient effects, and step sparkle styling.
+- Import resolved `MotionMode = "full" | "reduced"` from Plan 01's canonical `src/motion.ts`; do not redefine it in `src/vfx/types.ts` or add another preference. Keep `VfxQuality = "full" | "lite" | "static"` independent: static is a forced quality/semantic fallback, not a third motion preference or an accidental frozen frame. This addendum supersedes the duplicate type declaration in the illustrative body below.
+- Treat resource budgets as provisional allocations until Plan 07B measures the integrated build. Preserve the authored emotional beat in full/lite/static recipes.
+
+### Documentation and completion
+
+Create and maintain `docs/VFX_BIBLE.md` covering semantic effect grammar, flavor/variation rules, intensity tiers, typed timing authority, sound synchronization, layer/transform ownership, cancellation, quality tiers, and designed reduced/static equivalents. Update architecture, relevant sound documentation, audit, and release evidence in the same change that makes them true.
+
+Extend the shared browser/performance harness established by Plan 07A. Completion requires paused-frame, grayscale, reduced/static, phone, tablet, desktop/TV, cancellation, hidden-tab, resize, Big Maze, jump→portal, per-slot flight, sound-skew, lifecycle-leak, and packaged-WebView checks plus the full project gates.
+
 **Document status:** implementation-ready plan; research and audit only
 
 **VFX scope:** dynamic effects, transient presentation choreography, environmental material motion, particles, effect/sound synchronization, reduced-motion equivalents, and presentation cancellation

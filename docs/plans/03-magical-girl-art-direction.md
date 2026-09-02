@@ -1,5 +1,33 @@
 # Magical-girl art direction and graphic-design plan
 
+## 0. Manager-reviewed execution addendum
+
+This addendum records direct Human decisions and supersedes conflicting identity or style statements below. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the current Gameplay spec, this plan in full, current asset/provenance documentation, and current source before implementation. Plan 07A and Plan 06 must already be accepted.
+
+### Ame identity is non-negotiable
+
+- Every depiction of Ame must have clearly **blonde/golden hair and blue irises**: field sprite, portrait, title/story art, UI art, future animation frames, promotional art, and every optical derivative. Blue does not mean teal, green, violet, or grey at actual display scale.
+- Preserve Ame's recognisable face, warmth, young age-appropriate design, mint tunic, lavender/cape/backpack adventure identity, and the character the real Ame already loves.
+- The current bob silhouette is not immutable. Produce a restrained slightly longer, softly layered hair study closer to the real Ame; settle its exact length and silhouette in the approved model sheet before broad Ame production.
+- `docs/characters/AME_MODEL_SHEET.md` must record golden-blonde and blue-eye swatches, front/side/back silhouette, hair-length decision, facial landmarks, eye shape, expression vocabulary, costume anchors, proportions, baseline, pivot, face-safe zone, hand socket, secondary-motion envelope, and gameplay/portrait-size proofs.
+- Historical runtime images and hashes are provenance/reference, not the source of truth for new frames. No Ame animation, story-image family, or broad pose family proceeds without the final static model-sheet design. If live Human/Ame approval cannot occur within the execution turn, mark that gate honestly and do not imply it passed.
+- The manager may preserve an approval-candidate checkpoint, but this plan is not accepted and Plan 01 does not start until the Human/Ame selects the canonical model-sheet/static-sprite candidate. Apply any requested bounded revisions through this art track before dependent layouts and assets freeze around it.
+
+### Refined art north star
+
+- Prioritize clean, simple, chunky, unmistakably anime character design; larger expressive faces; strong silhouettes; controlled deep-plum linework; broad cel-like three-value groups; and restrained painterly texture.
+- Reduce excessive jewels, filigree, sparkles, ribbons, and micro-detail before sacrificing readability or individual personality.
+- Add a “Human references translated into original principles” section to the Art Bible. The named taste references communicate cosy optimistic fantasy, bright clean anime faces, expressive ensemble warmth, appealing SD/chibi proportions, readable fantasy icons, and warm story-led handheld-JRPG presentation.
+- Preserve the complete named reference set in that analysis: *Chillin' in Another World with Level 2 Super Cheat Powers*, *I've Been Killing Slimes for 300 Years and Maxed Out My Level*, *Ragnarök Online: New World*, *Idle Poring*, *Ragnarök M: Eternal Love*, and *Trails in the Sky*.
+- Keep franchise names and reference images out of generation prompts. Do not reproduce a protected character, costume, prop, logo, composition, UI skin, or signature. Translate principles into original descriptive constraints.
+- Static field assets use soft, mostly neutral front/top form modelling without a baked cast shadow or strong fixed rim. Plan 04 owns directional maze lighting. Story/key art may retain a declared cinematic light.
+
+### Execution and documentation gate
+
+Create `docs/ART_BIBLE.md`, `docs/characters/AME_MODEL_SHEET.md`, structured source records/manifest, and the shared reproducible art pipeline before broad replacements. Append a new versioned section to `docs/AI_ASSET_PROMPTS.md`; never rewrite historical exact prompts. Update `docs/STORY_BIBLE.md` so Ame's blonde hair, blue eyes, and approved hair silhouette are narrative/visual canon.
+
+Plan 03 owns static identity, catalogue schema, geometry metadata, source/provenance, and art pipeline. Plan 01 implements runtime UI tokens; Plan 04 owns directional light; Plan 02 consumes tokens for VFX; Plan 05 later extends the approved pipeline for frames. Actual-size, context, grayscale, cage, held-weapon, byte/decode, alpha, seam, and rollback proofs are release gates, not optional polish.
+
 - Status: planning and research only
 - Prepared: 2026-09-02, Europe/London
 - Repository state inspected: main at c6b6628b6e651d18161a4d1302935d3096f665c6

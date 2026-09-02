@@ -1,5 +1,45 @@
 # Web and Tauri performance optimization plan
 
+## 0. Manager-reviewed two-pass execution addendum
+
+This agent runs twice. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and current repository authority before each pass.
+
+### Pass 07A — first execution, measurement only
+
+Run before Plan 06 or any visual/input implementation. Implement only the original Phase-0 instrumentation and evidence foundation:
+
+- one shared repository browser/performance harness usable by every later track;
+- reproducible scenario fixtures identified by stable level/semantic state rather than brittle route coordinates;
+- asset, bundle, media, CSS/JS, and package inventory/reporting;
+- clean host-gated production web/Tauri baseline cohorts where this machine permits them;
+- raw-artifact manifest/index conventions outside runtime delivery;
+- reporting-only or conservative non-regression checks until variance is understood; and
+- a feature-allocation ledger for approved art, UI, lighting, VFX, controls, and animation cost.
+
+Do not optimize production code, delete/re-encode assets, alter save scheduling, change caching policy, or claim a speedup in 07A. Preserve the recorded 0.19.0 evidence as a labelled historical baseline and mark any still-contaminated cell honestly. Create the initial `docs/PERFORMANCE_BUDGETS.md` with provisional/baseline labels.
+
+### Pass 07B — final specialist execution
+
+Return after Plans 06, 03, 01, 04, 02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement Phases 1–7 against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.
+
+Also read `docs/plans/09-campaign-expansion-24-mazes-plan.md` before final media/package work. An asset, cue, semantic fixture, or capacity explicitly reserved there is planned reachability, not an orphan. Keep each approved reservation in an owner/reason/expected-use/byte/expiry ledger, include it in the 24-level forecast, and revisit it during root's final qualification; this is not permission to retain unrelated speculative files indefinitely.
+
+Add 1280×800 Steam Deck and 1920×1080 TV/60Hz profiles, controller polling/normalization and action-to-next-paint latency, suspend/resume/focus/Bluetooth reconnect/Steam Input scenarios, and the delivery route actually chosen by Plan 08. Do not infer Windows WebView2 evidence applies to Linux/SteamOS.
+
+Protect the large minimap, clear static semantics, signature wonder beats, animation, VFX, music, and sound as product requirements. Optimize static/dynamic layers, loading, representation, and redundant work before shrinking or removing the experience. Full/lite/static modes preserve the authored emotional and semantic beat.
+
+Re-evaluate every orphan/deletion candidate against the final Art Bible and VFX/audio use. A currently unused friendship cue may be deliberately reserved; either qualify a real use or prove it dead. Never delete it solely because the old call graph lacks a consumer.
+
+### Moving baselines and final scope
+
+- Keep separate budgets for critical-path transfer, active six-tile decoded working set, steady-state render/input cost, and total offline package.
+- Approved richer features may change old exact byte totals. Require measured value, allocation, and offsets where practical; do not fail them blindly against one historical gzip number.
+- The 25% media/package reduction remains a quality-qualified goal, not authority to degrade art or audio.
+- Plan 07B qualifies the integrated current campaign. Root Plan 09 must rerun the relevant 24-level/24-card Book performance and final release matrix after expansion.
+- All level scenarios resolve current campaign entries by stable ID and derive checkpoints through engine-replayed transitions.
+
+Update `docs/PERFORMANCE_BUDGETS.md`, architecture/delivery docs, project audit, release checklist, and package provenance with reproducible evidence. Never mix development, profiling, headless, headed, browser, Tauri, or SteamOS populations without an explicit bridge cohort.
+
 **Status:** planning and research only; no optimization is authorized by this document
 
 **Evidence date:** 2026-09-02, Europe/London

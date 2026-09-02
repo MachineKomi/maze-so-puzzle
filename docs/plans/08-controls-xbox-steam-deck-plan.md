@@ -1,5 +1,34 @@
 # Controls, Xbox Controller, and Steam Deck Plan
 
+## 0. Manager-reviewed execution addendum
+
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, and VFX specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, 01, 04, and 02, and before Plan 05 animation.
+
+### Ownership and architecture amendments
+
+- Controls owns pure input intent, input-source normalization, semantic actions, held cadence, neutral/release gates, gamepad polling/ownership/deadzones, controller prompts, and focus navigation.
+- UI owns overlay state, DialogShell/game-menu markup, stable focusable semantic IDs/groups, scroll containers, layout, and visual focus treatment. Gameplay owns legal action semantics. Controls consumes both; it does not invent a parallel modal/menu UI.
+- Controls owns canonical `src/inputContext.ts`, structured `InputContext`, `InputAction`/`InputSource`, and `getInteractionPolicy()`. The policy consumes Plan 01's typed `src/ui/interactionState.ts` top-overlay/focus truth, Plan 02's presentation-busy lease, and Plan 06's gameplay-legality truth. It does not duplicate or mutate their source state. This supersedes any original wording that also assigns `getInteractionPolicy()` to UI.
+- Model context as structured state—screen, top overlay/focus scope, presentation lock, and controller status—not a flat union that loses the underlying story/dialog/victory state. A disconnect/reconnect must restore the correct underlying context.
+- Make held scheduling modality-neutral after intent normalization. Keyboard, on-screen buttons, and gamepad share cadence/neutral gates; free-form board pointer/touch steering alone retains the pointer-specific safe corner assist.
+- Consume Plan 02's presentation-busy lease and cancellation boundaries. A controller hold is dropped and neutral-gated across combat, rescue, jump, portal, door, victory, navigation, overlay, blur, hidden, disconnect, and reconnect; no catch-up or queued replay.
+
+### Product and platform amendments
+
+- Xbox-controller-only completion after launch is a primary requirement, including title, story, all gameplay, Hint, Help, Book, scrolling, menus, confirmations, victory, replay, and return.
+- TV, desktop, and iPad/tablet use the same logical focus order, commands, prompts, and region order. Phone may compact presentation but retains every essential action. Geometric focus discovery is a fallback and must not create different logical navigation on primary devices.
+- P0 is shared web/Tauri controller support plus a tested Steam Deck launch/setup guide. Hosted Chromium/PWA and Linux Tauri remain delivery choices; this plan does not automatically authorize a service worker, Linux release pipeline, Steamworks, or Proton claim.
+- A controller-only TV route is not called fully qualified if browser activation leaves it permanently silent. Real hardware must prove audio after controller-only launch, document an honest one-time setup gesture, or leave the gate pending for a separately approved native route.
+- Do not claim Steam Deck, Bluetooth, USB, haptics, or couch-distance success without physical evidence. Provide a precise user-run checklist and keep unrun rows explicitly unverified.
+- Keep haptics P1 until core navigation/movement and semantic VFX events pass. Preferences for motion, haptics, input mode, and similar accessibility choices remain separate from campaign progress and survive Reset Progress.
+- Expand the test matrix to 40/60/90Hz, Xbox USB/Bluetooth, two pads, active-pad disconnect/reconnect, `mapping === ""`, Steam overlay focus loss, 1280×800 Deck, 1920×1080 TV, and input-to-visible-step latency.
+
+### Documentation and completion
+
+Create and maintain `docs/CONTROLS_AND_STEAM_DECK.md`. Update README controls/setup, architecture input contracts, preference/accessibility behavior, project audit, and release checklist only with proven implementation/hardware status. Repair stale generic release-checklist assumptions as part of the owned documentation update rather than extending contradictions.
+
+Completion requires controller-only deterministic coverage for every app surface, no regression to keyboard/pointer/touch/on-screen controls, stable A/B/Menu/View behavior, visible couch focus, safe destructive actions, modality-neutral cadence, no idle App renders, honest audio/hardware qualification, and full web/Tauri project gates.
+
 **Status:** implementation-ready planning and research only; no controller code is implemented by this document<br>
 **Prepared:** 2026-09-02<br>
 **Primary scenario:** the game is already open on a television through a Steam Deck, and the player completes every flow with a wired or Bluetooth Xbox controller<br>

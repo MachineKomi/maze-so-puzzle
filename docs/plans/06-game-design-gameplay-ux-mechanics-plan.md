@@ -1,5 +1,42 @@
 # Game Design, Gameplay UX, and Mechanics Improvement Plan
 
+## 0. Manager-reviewed execution addendum
+
+This plan executes after the Plan-07A measurement-only pre-pass and before all presentation tracks. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, current story/architecture/release documentation, and current source/tests. The execution prompt authorizes implementation; the original planning-only wording remains provenance for the research pass.
+
+### Expanded design contract
+
+- Every maze must be mechanically solvable **and legibly solvable**. A solver route alone does not excuse obscurity. Every required prerequisite needs a fair discovery, visible relation, reviewable description, or progressively requestable hint.
+- Add checks for a zero-rescue ordinary route, exact-all-rescue perfect route, engine-replayable tier-4 route from current state, and recovery from every reachable valid playing state where practical. Record and approve any intentional fairness exception; never hide it.
+- Challenge comes from fair inference, comparison, prediction, memory aids, sequencing, perseverance, route choice, and changed-state returns—not blind branches, repetitive neutral walking, or forced optional content.
+- Parent collaboration is an intended success mode. A small requested nudge followed by independent execution on a later maze is not automatically a usability failure.
+- Every current level plan and metric report must include: learning/puzzle habit, signature wonder reveal, satisfying aha, comic/story payoff, functional landmark, optional curiosity discovery, healthy replay proposition, and coordinated opportunities for terrain, character/friend/enemy, weapon, treasure, hazard, portal, authored light, VFX, animation, SFX, and music. This is an experience-and-asset matrix, not a quota.
+- Pace the catalogue intelligently: avoid accidental consecutive sameness and avoid combining so many flourishes that the clue hierarchy disappears. Gameplay owns the semantic showcase event; specialist owners determine its final art/sound/effect treatment.
+- Interpret “addictive” only as healthy voluntary repeat appeal through autonomy, mastery, novelty, pride, alternate routes, discovery, and warmth. No FOMO, loss-aversion streak, daily pressure, forced grind, punitive incomplete copy, monetization, or shop is approved.
+- Extend the family playtest to track delight: smiles/laughter, spontaneous comments, show-a-parent moments, remembered character beats, favourite surprise, voluntary replay, and desire to continue. Ask what surprised, amused, and felt clever; distinguish collaborative help from frustrated takeover.
+
+### Manager decisions on original open gates
+
+- Adopt the zero-rescue ordinary contract for the current finale. Five forced rescues are a defect, not a special finale rule.
+- Adopt the ≤6×6 Chapter-1 direction if the best of two paper/fixture prototypes preserves one real optional choice, recognisable art, input readability, and the Chapter-1 comprehension gate. Use the plan's scoped full-board fallback only if measured UI evidence proves both compact candidates unviable.
+- Treat initial route budgets as prototype targets and preserve/increase reasoning density when reducing length.
+- Ship semantic object identity, content revision/fingerprint, campaign-order migration, and engine-consistent search before any topology edit.
+- Surprise reconstruction persistence remains deferred unless implementation evidence justifies it; debug seed reproduction is approved.
+
+### Campaign-order and Plan-09 foundation
+
+Before a future insertion, replace ordinal-only progress assumptions with a versioned campaign-order contract and historical 16-level order. Preserve old completions, records, medals, badges, rescues, Gold, Science, and access. Derive display chapter from canonical order rather than duplicating an unsafe number where practical.
+
+Make current work campaign-length-safe without scattering a hard-coded `24`. Add migration fixtures for fresh, partial, fully complete, record-less legacy, active-run, and inconsistent saves. Document the intended legacy-complete expansion behavior: inserted adventures become available, former-finale completion makes the first post-finale chapter available, and later appended chapters unlock normally.
+
+This execution improves the current 16 levels and their scalable foundations. It does **not** add the eight Plan-09 levels.
+
+### Documentation and completion
+
+Create and maintain `docs/GAMEPLAY_DESIGN_SPEC.md`, including the mechanic lifecycle, legible-solvability rules, route metrics, experience/asset matrix, and campaign-order contract. Update `docs/STORY_BIBLE.md`, `docs/ARCHITECTURE.md`, README, audit, changelog if present, and release evidence only as implementation ships.
+
+Completion requires stable identity/migrations before map edits, engine-replayed hints and metrics, all current levels meeting approved ordinary/perfect/fairness and experience gates, a more reasoning-dense later curve, family playtest protocol/results labelled honestly, deterministic Surprise fixtures, and full project checks without dismissing timeouts as success.
+
 | Field | Value |
 |---|---|
 | Status | Planning and research only; no gameplay change is authorized by this document |

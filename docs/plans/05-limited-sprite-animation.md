@@ -1,5 +1,31 @@
 # Plan 05 — Limited Sprite Animation System
 
+## 0. Manager-reviewed execution addendum
+
+This track is deliberately late. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the final Art Bible/Ame model sheet, UI/UX spec, Lighting spec, VFX Bible, Controls spec, this plan in full, and current code before changing anything. Execution is blocked until Plans 07A, 06, 03, 01, 04, 02, and 08 are accepted.
+
+### Final dependencies and identity rules
+
+- The sole visual authority for Ame frames is the final Plan-03-approved static design and model sheet. Historical runtime hashes are provenance/reference only.
+- Every Ame frame preserves unmistakably blonde/golden hair, clearly blue irises, the approved slightly longer hairstyle, facial/costume landmarks, body registration, and age-appropriate warmth.
+- Do not independently revise interfaces already landed by art, UI, lighting, VFX, or controls. Adapt the manifest/renderer to their current contracts and document any unavoidable versioned migration.
+- Consume Plan 04's grounding wrappers and `--entity-lift`-style contract, Plan 02's presentation run/absolute clock/pose intents, Plan 01's target display sizes and canonical `src/motion.ts` types/provider, and Plan 08's input/presentation-lock lifecycle. Import `MotionMode` from `src/motion.ts`, not `src/vfx/types.ts`; static sprite quality remains independent of the full/reduced preference. This addendum supersedes the older illustrative import paths below.
+
+### Bounded first tranche
+
+- Treat the proposed 16-file/13-new-drawing set as a maximum first tranche, not a quota. Ship only drawings with a clear acting job and approved actual-size improvement; do not bulk-fill every family.
+- Lock one-shot availability at action start. If optional frames finish decoding mid-action, remain on the selected static/reduced fallback until the next action; never pop into animation halfway through a beat.
+- Body and held weapon availability/registration are atomic for an action. If either required component is unavailable, use the complete canonical static composition.
+- Base-art URL history and catalogue pointer rollback remain owned by Plan 03's resolver/pipeline. Animation selects optional frames and falls back to the canonical static sprite; it does not add a second permanent legacy-fallback system.
+- Sprite/ambient animation owns only its namespaced frame/secondary-motion rules. VFX timeline keyframes and presentation lifetime remain Plan 02-owned; CSS layer order and common motion preference remain Plan 01-owned.
+- Add integration coverage for held controller input through locks, disconnect/reconnect during a presentation, resize/Big mode during an action, motion-preference changes, visibility loss, cancellation, and no mid-clip upgrade.
+
+### Documentation and completion
+
+Create and maintain `docs/ANIMATION_SPEC.md` and versioned frame/source records through the shared art pipeline. Update the Art Bible/Ame-model references, append exact new generation/edit provenance to `docs/AI_ASSET_PROMPTS.md`, and update architecture/audit/release evidence when true.
+
+Completion is the accepted bounded tranche, not the number of possible animated families. It requires on-model onion-skin/actual-size proofs, deterministic selection, isolated rendering with zero App/grid cadence commits, atomic fallback, bounded loading/decode/memory, controller and reduced/static parity, and the complete project gates.
+
 **Status:** implementation-ready planning and research only
 
 **Prepared:** 2026-09-02

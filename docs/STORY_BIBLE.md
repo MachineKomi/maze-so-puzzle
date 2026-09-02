@@ -1,7 +1,11 @@
 # Puzzlewild story bible
 
-Version: playable build 0.13.0  
+Status: current 16-chapter narrative authority; canon reviewed 2026-09-02
 Audience: a young player playing alone, or a child and adult reading together
+
+Canon review: 2026-09-02. The chapter table below describes the currently
+shipped 16-chapter story. The approved future expansion to 24 chapters is a
+planning target, not yet shipped content.
 
 ## One-sentence premise
 
@@ -55,8 +59,12 @@ Ame is observant, kind, practical, and willing to revise a plan. She never needs
 to know everything at once. Her greatest strength is noticing what she knows,
 what she still needs, and which idea she can try next.
 
-Visual anchor: the existing blonde adventurer with mint tunic, lavender cape,
-boots, and backpack.
+Visual canon: Ame has golden-blonde hair and clearly blue eyes in every field,
+portrait, story, title, UI, animation, and promotional depiction. Preserve her
+recognisable warm face, mint tunic, lavender cape, boots, and backpack. Her next
+approved model sheet should explore a restrained slightly longer hairstyle that
+more closely resembles the real Ame; the current bob is historical reference,
+not an immutable silhouette.
 
 ### Professor Poggle — Cartographer of Almost Everywhere
 
@@ -117,10 +125,19 @@ answer. The maze itself remains the real activity.
 
 ## Future story hooks
 
+The approved 24-chapter expansion will eventually insert four adventures into
+the existing learning arc and add a four-chapter **Elsewhere Encore** after the
+current finale. The restored Star Map remains a complete victory; the encore
+follows a new path beyond it rather than adding another supposedly final knot.
+See `docs/plans/09-campaign-expansion-24-mazes-plan.md`. Until that plan is
+implemented, the 16-chapter matrix above remains shipped story authority.
+
 Future chapters can follow new loose threads without undoing the first arc:
 
 - Poggle's “Useful for Somewhere Else” map leads to a seasonal maze island.
-- A Science Point observatory lets collected curiosity restore constellations.
+- A Science Point observatory may let collected curiosity light optional,
+  celebratory constellations; Science is never spent, required, or used to gate
+  story progress.
 - Rescued animal friends contribute different clue abilities without automating
   maze solutions.
 - Sprig practises weather magic and accidentally creates reversible ice paths,

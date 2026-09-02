@@ -1,5 +1,27 @@
 # Lighting and wall-depth implementation plan
 
+## 0. Manager-reviewed execution addendum
+
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Art Bible, UI/UX spec, and this complete plan before implementation. Execution is gated on Plans 07A, 06, 03, and 01. This addendum supersedes conflicting planning details.
+
+### Adopted integration requirements
+
+- Final Plan-03 art/material metadata is a hard dependency. Lighting owns runtime illumination, topology, wall depth, highlights, contact/cast shadows, and theme calibration; it does not independently repaint materials or change the catalogue's visual language.
+- Static character art retains soft neutral form shading. Runtime lighting grounds opaque sprites with separate contact/cast surfaces; it does not pretend to relight their internal pixels. VFX owns local magical glows/flashes in assigned layers.
+- Hazards are flush surfaces: they may receive a restrained wall cast shadow through the approved receiver mask, but water, lava, poison, portals, and other flat emissive fields do not cast wall-like shadows themselves.
+- Consume the Plan-01 MazeViewport host, scene slots, CSS layer names, and transform hierarchy. Do not hard-code a legacy `.game-stage` or introduce a competing layer system.
+- Establish the one shared cached `MazeTerrain` extraction, boundary topology, world mask, gutter, and compositing order. Lighting owns wall/topology/grounding layers; Plan 02 later attaches moving material/emissive/transient layers to this seam.
+- Create dedicated shadow and sparkle nodes/wrappers. Fix the current `.player-layer::before` collision structurally so VFX can style sparkle without taking grounding ownership.
+- Preserve explicit varied authored light angles and deterministic generated bearings. New curated levels, including Plan 09, must set intentional light metadata rather than depend on title/order hashes.
+- Aim for materially more believable three-dimensional walls while preserving clean anime-JRPG stylization, path readability, and the authoritative collision silhouette. Photorealistic grime, heavy darkness, and corridor-obscuring extrusion are out of scope.
+- Treat numeric render budgets as provisional until Plan 07B. TV, desktop, and iPad use the same default approved quality; lower quality is capability-measured, not device-name guesswork, with phone the acceptable lower-priority fallback.
+
+### Documentation and completion
+
+Create and maintain `docs/LIGHTING_AND_DEPTH_SPEC.md` unless the accepted Art Bible already contains an unambiguous owned section, in which case update that and record the decision. Update `docs/ARCHITECTURE.md`, catalogue material metadata, audit, and release visual evidence when implementation ships.
+
+Completion requires cardinal/diagonal/continuous direction proofs, every active material, camera seams, fractional/DPR rendering, dedicated entity grounding, hazard receiver behavior, full/medium/low tiers, reduced/contrast modes, TV/desktop/iPad/phone, packaged WebView, cache/rebuild counts, and all full project gates.
+
 Status: planning and research only
 
 Owner: maze lighting, wall depth, terrain-edge metadata, entity grounding, and theme lighting calibration

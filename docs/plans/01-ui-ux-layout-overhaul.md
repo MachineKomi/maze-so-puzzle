@@ -1,5 +1,41 @@
 # UI/UX and Layout Overhaul Plan
 
+## 0. Manager-reviewed execution addendum
+
+This addendum is execution authority and supersedes any conflicting recommendation below. The original status and baseline text describe the research pass; a later manager execution prompt authorizes implementation within this scope.
+
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-implementation-roadmap.md` first, then re-read this plan in full and inspect current `HEAD`. Execution is gated on completed Plan 07A instrumentation, Plan 06 semantic/gameplay foundations, and Plan 03 art/catalogue/safe-bound contracts.
+
+### Adopted product amendments
+
+- Preserve one recognisable landscape composition across TV, desktop, 960×540 Tauri, and iPad/tablet: square maze on the left, persistent information/control deck on the right, and the same section/action order everywhere. Track sizes may adapt, but primary-device controls must not jump between a special rail and deck or disappear into `More`.
+- Retain the plan's accessible real-CSS-pixel architecture, square maze, stable DOM order, content-driven sizing, and removal of the historical override cascade. “Near-identical” does not mean scaling a broken fixed HUD; it means stable topology and behaviour with responsive dimensions.
+- Permit one constrained compact-phone fallback. It may use `More`, tighter cells, and smaller art, but it retains every essential action and the same logical order. A larger-device recommendation is acceptable; functional loss is not.
+- Re-run the geometry study. The original five-regime relocation model and its exact table are not implementation authority where they conflict with this addendum.
+- Make the minimap the largest feasible square after the full Objective and complete state indicators are guaranteed. Starting targets are at least 192px at 1280×720/ordinary TV, 160–176px at 960×540 and normal iPad/tablet, 120–144px on ordinary landscape phones, and 96px only at 568×320. The original 160px ceiling and 152px-wide inconsistency are superseded.
+- Keep all one-to-seven Adventure Bag slots and one-to-five friend states simultaneously visible and contained. Never solve density by clipping, horizontal scrolling, silent omission, or hover-only detail.
+- Eliminate accidental negative space around the minimap and maze. Big Maze uses all remaining width for a larger board or purposeful focus deck; it never reserves a hidden sidebar track.
+- Add 1920×1080 TV/couch and 1194×834 iPad coverage. Verify TV-safe margins, couch-readable focus/labels/controller glyphs, and consistent logical focus order.
+- Supply per-slot VFX anchors such as `bag:<semantic-slot-id>` plus a generic Bag fallback, not one fixed Bag coordinate.
+
+### Shared ownership
+
+- Plan 06 owns required/optional semantics, HUD view-model truth, and legal gameplay-input truth.
+- This plan owns shell/dialog markup, overlay state, focusable semantic IDs, layout anchors, CSS import/layer order, and the shared motion preference/provider. It creates canonical neutral `src/motion.ts`, exporting `MotionPreference = "system" | "full" | "reduced"` and resolved `MotionMode = "full" | "reduced"`; downstream systems import these rather than define them again. Forced static presentation remains a separate quality/fallback policy, not a third persisted preference.
+- Store the motion preference through a small presentation/accessibility preference contract separate from campaign progress and active-run state. `Reset Progress` must preserve it. Plan 08 extends that same preference store for haptics/input choices; it must not have to migrate motion out of `progress.ts` later. Original placement suggestions that mix the preference into campaign progress are superseded.
+- Centralize typed UI surface/top-overlay truth in `src/ui/interactionState.ts` (or the final path recorded in the UI spec) and expose a narrow current-input blocking selector so keyboard/pointer/touch cannot move behind the top layer before Plan 08 lands. This plan does **not** define canonical `InputContext`, `InputAction`, `InputSource`, or `getInteractionPolicy()`; references to that name in the original body are superseded.
+- Plan 08 owns input-source normalization, held cadence, gamepad actions, and focus navigation; it consumes this plan's focus surfaces.
+- Plan 08 also owns canonical `src/inputContext.ts` and `getInteractionPolicy()`, combining this plan's typed UI/top-overlay state with Plan-02 presentation locks and Plan-06 gameplay legality. It replaces the narrow compatibility selector only after parity tests prove every existing source stays blocked correctly.
+- Plan 04 owns terrain topology/rendering and scene grounding; this plan supplies the MazeViewport host and declared layer slots.
+- Plan 02 owns VFX timelines/keyframes inside its declared layer. Plan 05 owns sprite-frame motion inside its declared layer. Neither creates a competing CSS layer manifest or motion preference.
+- Plan 07A owns the common browser/performance harness. Extend it; do not add a rival framework.
+
+### Documentation and completion
+
+Create and maintain `docs/UI_UX_SPEC.md`. Update `docs/ARCHITECTURE.md`, the README device/layout description, `docs/PROJECT_AUDIT.md`, and `docs/RELEASE_CHECKLIST.md` only as the new layout becomes true. Remove obsolete fixed-stage claims when cutover is complete rather than leaving contradictory authorities.
+
+The implementation is not complete without automated geometry/state coverage, live screenshots for the shared viewport matrix, Normal/Big/dialog/controller-focus checks, full objective and inventory containment, no accidental card bands, no legacy override layer, and `npm run check` plus `npm run check:desktop` passing.
+
 Status: planning and research only; no UI implementation is included in this change.
 
 Plan date: 2026-09-02
