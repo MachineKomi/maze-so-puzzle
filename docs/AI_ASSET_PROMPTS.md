@@ -1020,3 +1020,138 @@ hips, and gold specks.
 512 WebP character files and removes only the Alpaca export's edge-connected
 neutral checker. The existing Poisson seam processor creates the four repeatable
 terrain PNGs, and the dressing processor creates transparent 512 x 512 overlays.
+
+## Build 0.17.0: illustrated keepsake shelf
+
+Build 0.17.0 used the built-in OpenAI ImageGen workflow in
+`stylized-concept` mode. Each collectible was generated in a separate call.
+`public/assets/reward-trail-sticker.png` was supplied as a reference for style,
+polish, linework, material, and framing only; it was never composited into a new
+asset.
+
+### Sticker and medal prompt
+
+The following exact shared prompt was used, with one of the primary requests
+listed beneath it appended to each call:
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 collectible achievement sprite for Maze so Puzzle
+Input image: the supplied golden boot-star sticker is a style, polish, linework,
+material, and framing reference only; create a completely new design.
+Style/medium: gorgeous polished 2D hand-painted chunky anime fantasy JRPG
+achievement art for a five-year-old; rounded toy-like forms, clean dark-plum
+linework, soft dimensional shading, enamel-and-gold materials, jewel highlights,
+gentle pastel colours.
+Composition/framing: exactly one complete collectible badge or sticker,
+centered, strong readable silhouette, generous transparent padding, fills about
+82 percent of the square.
+Lighting/mood: warm magical studio highlights, celebratory, sweet and
+non-threatening.
+Constraints: genuine transparent RGBA background, clean softly antialiased
+edges, no text, no numerals, no character body, no scenery, no floor plane, no
+cast shadow, no frame beyond the collectible itself, no watermark, no duplicate
+objects, no cropped parts.
+```
+
+Primary requests:
+
+- Animal Friend Sticker: `a soft coral heart, with a smiling cream bunny face
+  and tiny golden paw-print, mint leaves, and lavender sparkle accents; clearly
+  an adhesive enamel sticker rather than a medal.`
+- Surprise Sparkle Sticker: `a rounded violet maze-cloud, winding golden path
+  leading to a bright star, tiny mystery gift bow, aqua and coral sparkles;
+  clearly an adhesive enamel sticker rather than a medal.`
+- Helping Paw Medal: `a warm rose-gold paw-print medallion surrounded by exactly
+  five small star gems, short mint and peach ribbons, and a tiny heart jewel.`
+- Rainbow Rescue Medal: `a pearly silver medallion with a pastel rainbow arch
+  sheltering a tiny golden paw, a ring of sparkling gems, and lavender and aqua
+  ribbons.`
+- Golden Guardian Medal: `a magnificent warm-gold winged shield medallion with a
+  tiny crown, central heart-shaped paw jewel, ring of star gems, and rich coral
+  and violet ribbons; this is the grandest medal.`
+
+### Embroidered achievement-patch prompt
+
+The following exact shared prompt was used for the nine patches, with the
+appropriate primary request appended:
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 collectible achievement sprite for Maze so Puzzle
+Input image: the supplied golden boot-star sticker is a style, polish, linework,
+material, and framing reference only; create a completely new design.
+Style/medium: gorgeous polished 2D hand-painted chunky anime fantasy JRPG
+achievement art for a five-year-old; rounded toy-like forms, clean dark-plum
+linework, soft dimensional shading, embroidered fabric and enamel-and-gold
+materials, jewel highlights, gentle pastel colours.
+Composition/framing: exactly one complete collectible badge, centered, strong
+readable silhouette, generous transparent padding, fills about 82 percent of the
+square.
+Lighting/mood: warm magical studio highlights, celebratory, sweet and
+non-threatening.
+Constraints: genuine transparent RGBA background, clean softly antialiased
+edges, no text, no numerals, no character body, no scenery, no floor plane, no
+cast shadow, no frame beyond the collectible itself, no watermark, no duplicate
+objects, no cropped parts.
+```
+
+Primary requests:
+
+- Pathfinder Patch: `a rounded rose-and-mint embroidered fabric patch showing a
+  cute golden compass above one clear winding path, cream stitching, and tiny
+  leaf accents.`
+- Maze Mapper Badge: `a rounded sky-blue and lavender embroidered patch showing
+  an unfurled parchment maze map with one coral route line and a tiny gold
+  destination star, with cream stitching.`
+- Grand Explorer Badge: `a prestigious rounded indigo embroidered patch with a
+  pastel rainbow arch over a tiny golden maze crest and three floating stars,
+  with cream stitching and gold edging.`
+- Surprise Scout: `a playful rounded violet embroidered patch showing a magical
+  gift box whose ribbon unfolds into a tiny maze path and starburst, with aqua
+  and coral accents and cream stitching.`
+- Mighty Adventurer: `a rounded warm-orange embroidered patch showing one cute
+  polished golden gauntlet proudly holding a glowing star crystal, with coral
+  rays, lavender jewels, and cream stitching; friendly magical strength.`
+- Twinkle Toes: `a rounded blush-pink and aqua embroidered patch showing a pair
+  of tiny winged adventure boots leaping through gold sparkles, with cream
+  stitching.`
+- Bunny Buddy: `a rounded peach-and-cream embroidered fabric patch showing an
+  adorable smiling cream bunny face with floppy ears, nestled in a tiny carrot,
+  heart, and leaf wreath, with lavender jewel sparkles and cream stitching.`
+- Fox Friend: `a rounded warm-russet and mint embroidered fabric patch showing
+  an adorable smiling orange fox face with fluffy cheeks and a tail-tip motif,
+  nestled in a tiny leaf, heart, and gold-star wreath, with aqua jewel sparkles
+  and cream stitching.`
+- Kitten Pal: `a rounded lavender-and-aqua embroidered fabric patch showing an
+  adorable smiling fluffy cream kitten face with a tiny pink nose and curled
+  tail motif, nestled with one mint yarn ball, tiny hearts, and gold stars, with
+  coral jewel sparkles and cream stitching. Output genuine transparent RGBA
+  outside the patch silhouette; do not paint or simulate a checkerboard or
+  background field.`
+
+### Generated and saved files
+
+| Collectible | Built-in output | Archived master | Runtime |
+| --- | --- | --- | --- |
+| Animal Friend Sticker | `exec-1b57bbd7-0dc7-4035-b73b-d93742db2afc.png` | `docs/source-assets/reward-animal-friend-sticker-v2-master.png` | `public/assets/reward-animal-friend-sticker-v2.webp` |
+| Surprise Sparkle Sticker | `exec-bf26996c-7e87-40cf-9dfe-a7de4f87dbc7.png` | `docs/source-assets/reward-surprise-sparkle-sticker-v2-master.png` | `public/assets/reward-surprise-sparkle-sticker-v2.webp` |
+| Helping Paw Medal | `exec-d4b45361-8e46-4ecc-94bd-3c6118282556.png` | `docs/source-assets/reward-helping-paw-medal-v2-master.png` | `public/assets/reward-helping-paw-medal-v2.webp` |
+| Rainbow Rescue Medal | `exec-79b0133a-444f-4bc7-8476-be22b76a9d44.png` | `docs/source-assets/reward-rainbow-rescue-medal-v2-master.png` | `public/assets/reward-rainbow-rescue-medal-v2.webp` |
+| Golden Guardian Medal | `exec-d8ecd115-2eaf-4c80-a784-12655aa618d7.png` | `docs/source-assets/reward-golden-guardian-medal-v2-master.png` | `public/assets/reward-golden-guardian-medal-v2.webp` |
+| Pathfinder Patch | `exec-c8b56815-c9c7-46a4-bac7-671c17171a05.png` | `docs/source-assets/badge-pathfinder-v1-master.png` | `public/assets/badge-pathfinder-v1.webp` |
+| Maze Mapper Badge | `exec-e9566b02-3b6d-490b-827f-d1a6c32cafa2.png` | `docs/source-assets/badge-maze-mapper-v1-master.png` | `public/assets/badge-maze-mapper-v1.webp` |
+| Grand Explorer Badge | `exec-a00ec6eb-a1af-4d17-8666-6b907a8686ca.png` | `docs/source-assets/badge-grand-explorer-v1-master.png` | `public/assets/badge-grand-explorer-v1.webp` |
+| Surprise Scout | `exec-989079b4-00ec-4d0c-9afc-452018ae885b.png` | `docs/source-assets/badge-surprise-scout-v1-master.png` | `public/assets/badge-surprise-scout-v1.webp` |
+| Mighty Adventurer | `exec-f9f2e3fa-d491-40ae-a49b-02d2e78020e0.png` | `docs/source-assets/badge-mighty-adventurer-v1-master.png` | `public/assets/badge-mighty-adventurer-v1.webp` |
+| Twinkle Toes | `exec-f92de3c1-7334-46ff-ac76-f71e9c0128f2.png` | `docs/source-assets/badge-twinkle-toes-v1-master.png` | `public/assets/badge-twinkle-toes-v1.webp` |
+| Bunny Buddy | `exec-415a6a36-c8c7-490c-b2ed-d7c5f00a0fac.png` | `docs/source-assets/badge-bunny-buddy-v1-master.png` | `public/assets/badge-bunny-buddy-v1.webp` |
+| Fox Friend | `exec-0b364964-8603-4552-8c6e-0a0bd2739d32.png` | `docs/source-assets/badge-fox-friend-v1-master.png` | `public/assets/badge-fox-friend-v1.webp` |
+| Kitten Pal | `exec-9f8569fa-9054-4fa9-b4a4-60fa3b341989.png` | `docs/source-assets/badge-kitten-pal-v1-master.png` | `public/assets/badge-kitten-pal-v1.webp` |
+
+`scripts/process_v17_achievement_assets.py` exports every master as a transparent
+512 x 512 lossless WebP. The Mighty Adventurer and Twinkle Toes masters arrived
+with a pale neutral checker field, and the Kitten Pal master arrived on solid
+black; the deterministic processor removes only edge-connected background
+pixels and preserves the illustrated silhouettes. A first Kitten Pal attempt
+with a painted checkerboard was rejected and is not part of the project.

@@ -22,6 +22,7 @@ import {
   resolveWeaponArt,
 } from "./artCatalog";
 import type { LevelDefinition, TerrainKind } from "./game/types";
+import type { BadgeId, RescueMedalId, StickerId } from "./progress";
 
 export const ASSETS = {
   titleBackground: "/assets/title-background-v1.webp",
@@ -106,7 +107,45 @@ export const ASSETS = {
   rewardBraveMedal: "/assets/reward-brave-medal.png",
   rewardSplashSticker: "/assets/reward-splash-sticker.png",
   rewardRescueMedal: "/assets/reward-rescue-medal.png",
+  rewardAnimalFriendSticker: "/assets/reward-animal-friend-sticker-v2.webp",
+  rewardSurpriseSparkleSticker: "/assets/reward-surprise-sparkle-sticker-v2.webp",
+  rewardHelpingPawMedal: "/assets/reward-helping-paw-medal-v2.webp",
+  rewardRainbowRescueMedal: "/assets/reward-rainbow-rescue-medal-v2.webp",
+  rewardGoldenGuardianMedal: "/assets/reward-golden-guardian-medal-v2.webp",
+  badgePathfinder: "/assets/badge-pathfinder-v1.webp",
+  badgeMazeMapper: "/assets/badge-maze-mapper-v1.webp",
+  badgeGrandExplorer: "/assets/badge-grand-explorer-v1.webp",
+  badgeSurpriseScout: "/assets/badge-surprise-scout-v1.webp",
+  badgeMightyAdventurer: "/assets/badge-mighty-adventurer-v1.webp",
+  badgeTwinkleToes: "/assets/badge-twinkle-toes-v1.webp",
+  badgeBunnyBuddy: "/assets/badge-bunny-buddy-v1.webp",
+  badgeFoxFriend: "/assets/badge-fox-friend-v1.webp",
+  badgeKittenPal: "/assets/badge-kitten-pal-v1.webp",
 } as const;
+
+export const STICKER_ART: Readonly<Record<StickerId, string>> = {
+  "first-star": ASSETS.rewardTrailSticker,
+  "animal-friend": ASSETS.rewardAnimalFriendSticker,
+  "surprise-sparkle": ASSETS.rewardSurpriseSparkleSticker,
+};
+
+export const MEDAL_ART: Readonly<Record<RescueMedalId, string>> = {
+  "perfect-rescue-5": ASSETS.rewardHelpingPawMedal,
+  "perfect-rescue-10": ASSETS.rewardRainbowRescueMedal,
+  "perfect-rescue-15": ASSETS.rewardGoldenGuardianMedal,
+};
+
+export const BADGE_ART: Readonly<Record<BadgeId, string>> = {
+  "maze-explorer-5": ASSETS.badgePathfinder,
+  "maze-explorer-10": ASSETS.badgeMazeMapper,
+  "maze-explorer-20": ASSETS.badgeGrandExplorer,
+  "surprise-explorer-3": ASSETS.badgeSurpriseScout,
+  "mighty-adventurer": ASSETS.badgeMightyAdventurer,
+  "twinkle-toes": ASSETS.badgeTwinkleToes,
+  "bunny-buddy-10": ASSETS.badgeBunnyBuddy,
+  "fox-friend-10": ASSETS.badgeFoxFriend,
+  "kitten-pal-10": ASSETS.badgeKittenPal,
+};
 
 const COMMON_GAMEPLAY_ART = [
   ASSETS.ame,
@@ -142,9 +181,11 @@ const REWARD_ART = [
   ASSETS.goal,
   ASSETS.coinPouch,
   ASSETS.rewardTrailSticker,
-  ASSETS.rewardBraveMedal,
-  ASSETS.rewardSplashSticker,
-  ASSETS.rewardRescueMedal,
+  ASSETS.rewardAnimalFriendSticker,
+  ASSETS.rewardSurpriseSparkleSticker,
+  ASSETS.rewardHelpingPawMedal,
+  ASSETS.rewardRainbowRescueMedal,
+  ASSETS.rewardGoldenGuardianMedal,
 ] as const;
 
 const ACHIEVEMENT_ABOVE_FOLD_ART = [

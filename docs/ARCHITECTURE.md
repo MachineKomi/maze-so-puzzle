@@ -186,6 +186,11 @@ state.
   Spring Boots, Antidote Leaf, potion, and key events select their illustrated
   notice; one cancellable 1.85 s timer replaces any earlier notice and level
   changes or unmounts clear it. Reduced motion keeps the notice static.
+- Sticker, medal, and badge IDs map exhaustively through typed `STICKER_ART`,
+  `MEDAL_ART`, and `BADGE_ART` records. The Book and victory screen consume the
+  same catalogue, preventing earned rewards from falling back to emoji. Source
+  PNG masters remain in documentation while the runtime uses transparent
+  512 × 512 lossless WebP and native lazy decoding for below-fold cards.
 - The exploration minimap unions the current field of view with an immutable
   reveal set. Unvisited tiles remain masked; a new level starts a fresh map, and
   an unfinished authored run restores only a validated saved reveal set.
@@ -195,9 +200,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.16.1 source is shared by the web and Tauri build paths, and its automated
+- The 0.17.0 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.16.1, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.17.0, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
   five-second smoke launch with the correct title. The GitHub-connected Vercel
   production deployment is verified separately after each push. Clean-machine
@@ -224,11 +229,11 @@ selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.16.1 run covers 311 tests across 25 files; `npm run check` also
+solver. The 0.17.0 run covers 312 tests across 25 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.16.1.
+and portable launch smoke are complete for 0.17.0.
 
 ## Extension points
 

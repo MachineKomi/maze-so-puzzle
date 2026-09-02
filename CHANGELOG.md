@@ -4,6 +4,34 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.17.0 - 2026-09-02
+
+This illustrated-keepsakes release replaces the Adventure Book's remaining
+emoji placeholders with a complete collection drawn in Maze so Puzzle's
+chunky anime fantasy JRPG style.
+
+### Added
+
+- Fourteen new transparent collectible sprites: two stickers, three rescue
+  medals, and nine achievement patches. Together with the existing First Star,
+  every one of the game's fifteen keepsakes now has unique artwork.
+- A deterministic source-to-runtime asset processor that preserves archived
+  ImageGen masters and produces crisp 512 x 512 lossless WebP sprites.
+- Automated coverage proving that every sticker, medal, and badge ID maps to a
+  distinct illustrated asset.
+
+### Changed
+
+- Adventure Book totals, badge cards, surprise memories, locked maze markers,
+  title actions, hints, help cards, compact maze status, feedback toasts, and
+  completion notices now use rendered game art instead of platform-dependent
+  emoji.
+- Newly earned badges appear as their real embroidered patch in the victory
+  celebration, and recently earned badges can appear in Ame's in-maze keepsake
+  strip alongside stickers and medals.
+- Achievement art is losslessly optimized and lazily decoded in the Book so
+  the expanded collection stays crisp without slowing the initial title load.
+
 ## 0.16.1 - 2026-09-02
 
 This soundtrack shuffle release brings music to the home screen and makes every

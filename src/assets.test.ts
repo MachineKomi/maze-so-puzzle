@@ -265,9 +265,11 @@ describe("art preloading", () => {
       ASSETS.goal,
       ASSETS.coinPouch,
       ASSETS.rewardTrailSticker,
-      ASSETS.rewardBraveMedal,
-      ASSETS.rewardSplashSticker,
-      ASSETS.rewardRescueMedal,
+      ASSETS.rewardAnimalFriendSticker,
+      ASSETS.rewardSurpriseSparkleSticker,
+      ASSETS.rewardHelpingPawMedal,
+      ASSETS.rewardRainbowRescueMedal,
+      ASSETS.rewardGoldenGuardianMedal,
     ]));
   });
 
@@ -286,7 +288,7 @@ describe("art preloading", () => {
 
     timerTasks[0]?.();
     expect(loadedSources).toContain(ASSETS.rewardTrailSticker);
-    expect(loadedSources).toContain(ASSETS.rewardRescueMedal);
+    expect(loadedSources).toContain(ASSETS.rewardGoldenGuardianMedal);
   });
 
   it("loads only the Adventure Book opening shelf and remains safe without Image", async () => {
@@ -303,9 +305,11 @@ describe("art preloading", () => {
       ASSETS.animalKitten,
       ASSETS.animalPuppy,
       ASSETS.rewardTrailSticker,
-      ASSETS.rewardBraveMedal,
-      ASSETS.rewardSplashSticker,
-      ASSETS.rewardRescueMedal,
+      ASSETS.rewardAnimalFriendSticker,
+      ASSETS.rewardSurpriseSparkleSticker,
+      ASSETS.rewardHelpingPawMedal,
+      ASSETS.rewardRainbowRescueMedal,
+      ASSETS.rewardGoldenGuardianMedal,
     ]));
     expect(loadedSources).toHaveLength(new Set(loadedSources).size);
     expect(loadedSources).not.toContain(ASSETS.animalCapybara);
@@ -317,5 +321,33 @@ describe("art preloading", () => {
     expect(() => withoutImage.preloadLevelArt(levelWithRelevantArt())).not.toThrow();
     expect(() => withoutImage.preloadRewardArt()).not.toThrow();
     expect(() => withoutImage.preloadAchievementArt()).not.toThrow();
+  });
+
+  it("gives every sticker, medal, and badge its own rendered art", async () => {
+    const { BADGE_ART, MEDAL_ART, STICKER_ART } = await import("./assets");
+    const stickerIds = ["first-star", "animal-friend", "surprise-sparkle"];
+    const medalIds = ["perfect-rescue-5", "perfect-rescue-10", "perfect-rescue-15"];
+    const badgeIds = [
+      "maze-explorer-5",
+      "maze-explorer-10",
+      "maze-explorer-20",
+      "surprise-explorer-3",
+      "mighty-adventurer",
+      "twinkle-toes",
+      "bunny-buddy-10",
+      "fox-friend-10",
+      "kitten-pal-10",
+    ];
+    const allArt = [
+      ...Object.values(STICKER_ART),
+      ...Object.values(MEDAL_ART),
+      ...Object.values(BADGE_ART),
+    ];
+
+    expect(Object.keys(STICKER_ART)).toEqual(stickerIds);
+    expect(Object.keys(MEDAL_ART)).toEqual(medalIds);
+    expect(Object.keys(BADGE_ART)).toEqual(badgeIds);
+    expect(new Set(allArt)).toHaveLength(15);
+    expect(allArt.every((source) => source.startsWith("/assets/"))).toBe(true);
   });
 });

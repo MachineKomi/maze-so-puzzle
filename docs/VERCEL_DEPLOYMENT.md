@@ -61,7 +61,7 @@ document and does not use client-side URL routing.
 - Inspect later generated mazes for 2×2–4×4 chambers, clustered treasure or
   rescues, and Power-gated monster rooms. The widened geometry must not make any
   ordinary or all-friends route unsolvable.
-- Click or tap the small **Playable build 0.16.1** label on the title screen and
+- Click or tap the small **Playable build 0.17.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked

@@ -6796,3 +6796,167 @@ body,
   transform: translateY(-1px);
   box-shadow: 0 3px 0 #aa95c3, 0 6px 9px rgba(75, 59, 91, 0.16);
 }
+
+/* V17 rendered UI art: functional symbols use the same illustrated sprite
+   language as the maze instead of platform-dependent emoji glyphs. */
+.feedback-icon {
+  width: clamp(23px, 2.4cqw, 34px);
+  height: clamp(23px, 2.4cqw, 34px);
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(61, 43, 70, 0.18));
+}
+
+.map-pickup-toast > img {
+  width: clamp(38px, 4.4cqw, 62px);
+  height: clamp(38px, 4.4cqw, 62px);
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 2px rgba(48, 37, 58, 0.42));
+  -webkit-text-stroke: 0;
+}
+
+.help-step > img {
+  width: clamp(38px, 4.4cqw, 60px);
+  height: clamp(38px, 4.4cqw, 60px);
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(78, 55, 78, 0.14));
+}
+
+.maze-map-heading > img,
+.maze-map-nudge > img {
+  width: clamp(16px, 1.5cqw, 22px);
+  height: clamp(16px, 1.5cqw, 22px);
+  object-fit: contain;
+  filter: drop-shadow(0 1px 0 white);
+}
+
+.objective-icon {
+  padding: 2px;
+  object-fit: contain;
+}
+
+.objective-hint-button img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+}
+
+.hint-spark {
+  width: clamp(48px, 5cqw, 70px);
+  height: clamp(48px, 5cqw, 70px);
+  object-fit: contain;
+}
+
+.empty-bag img {
+  width: clamp(30px, 3.2cqw, 44px);
+  height: clamp(30px, 3.2cqw, 44px);
+  object-fit: contain;
+  filter: grayscale(0.2) opacity(0.78);
+}
+
+.step-pill > img,
+.exploration-view-pill > img,
+.tester-skip-button > img,
+.surprise-button > img {
+  width: clamp(18px, 1.8cqw, 25px);
+  height: clamp(18px, 1.8cqw, 25px);
+  object-fit: contain;
+}
+
+.exploration-view-pill,
+.tester-skip-button,
+.surprise-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.big-maze-hud span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.big-maze-hud span img {
+  width: clamp(15px, 1.45cqw, 20px);
+  height: clamp(15px, 1.45cqw, 20px);
+  object-fit: contain;
+}
+
+.title-play-button > span:first-child img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+}
+
+.title-sound img {
+  width: 76%;
+  height: 76%;
+  object-fit: contain;
+}
+
+.title-version {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.title-version img {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
+}
+
+.book-header-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.book-header-actions img,
+.book-section-heading .secondary-button img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.surprise-explainer-star {
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 4px 4px rgba(88, 60, 98, 0.18));
+}
+
+.surprise-record-grid article > img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.record-lock-art {
+  display: block;
+  width: clamp(26px, 2.8cqw, 38px);
+  height: clamp(26px, 2.8cqw, 38px);
+  margin: 0 auto;
+  object-fit: contain;
+  filter: grayscale(0.35) opacity(0.72);
+}
+
+.perfect-banner img,
+.tester-preview-banner > img {
+  width: clamp(30px, 3.2cqw, 44px);
+  height: clamp(30px, 3.2cqw, 44px);
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.book-section-heading .secondary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}

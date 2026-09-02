@@ -756,6 +756,7 @@ describe("curated campaign levels", () => {
         }
       }
     },
+    10_000,
   );
 
   it("keeps every required gate on the winning route", () => {

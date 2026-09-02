@@ -6,17 +6,41 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.16.1: `npm run check` passes 311 tests across 25 files plus strict
-TypeScript and the Vite production build. The production JavaScript is 115.46 KB
+Status for 0.17.0: `npm run check` passes 312 tests across 25 files plus strict
+TypeScript and the Vite production build. Production JavaScript is 115.79 KB
 gzipped. The production-only npm audit reports zero vulnerabilities; `npm ls` is
-clean, and locked Cargo compilation passes. Browser QA at desktop, iPad, and
-phone aspect ratios found no overflow or console errors; all 15 Book portraits
-use asynchronous decoding and below-fold portraits use native lazy loading.
-The unsigned Windows portable and setup builds were built, hashed,
-byte-compared, versioned, and smoke-tested. Physical-device touch/listening/
-feel, accessibility, clean-machine installation, signing, and the broader
-manual play-through remain deliberately unclaimed. Earlier evidence is kept as
-historical release evidence.
+clean, and locked Cargo compilation passes. Local browser QA at 1280 × 720 and
+1024 × 768 verified the title, illustrated Adventure Book, gameplay HUD, and
+Help dialog with no warning or error logs. The unsigned Windows portable and
+setup builds were built, hashed, byte-compared, versioned, and smoke-tested.
+Physical-device touch/listening/feel, accessibility, clean-machine installation,
+signing, and the broader manual play-through remain deliberately unclaimed.
+Earlier evidence is kept as historical release evidence.
+
+## 0.17.0 verification record
+
+- [x] Version 0.17.0 is aligned in npm, Cargo, Tauri, and the visible label.
+- [x] All 15 sticker, medal, and badge IDs have distinct rendered art; all 14
+  new runtime files are 512 × 512 transparent lossless WebP.
+- [x] Adventure Book, title, help, in-game status, feedback, lock, and completion
+  surfaces use illustrated local assets instead of functional emoji placeholders.
+- [x] `npm run check`: 312/312 tests pass across 25 files; strict TypeScript and
+  Vite production builds pass. `npm audit --omit=dev`: zero vulnerabilities;
+  `npm ls` and `cargo check --locked` pass.
+- [x] Desktop and iPad browser compositions are readable, new art remains crisp,
+  and local browser warning/error logs are empty.
+- [ ] GitHub/Vercel source deployment and live asset checks are completed after
+  the release commit is pushed.
+- [x] `Maze-so-Puzzle-0.17.0-portable.exe`: 97,084,416 bytes, file/product
+  version 0.17.0, SHA-256
+  `6BA5646F19190D508A72F9E1D4B6B6F464E1141C279EE0575F7218282779A7FD`.
+- [x] `Maze-so-Puzzle-0.17.0-setup.exe`: 90,987,042 bytes, file/product version
+  0.17.0, SHA-256
+  `723B21F355BA941BE10B3EC180ABBB639C111780EC389BE45C47AFB8386E7F9D`.
+- [x] Both staged binaries byte-match the Tauri outputs. The portable app stayed
+  responsive for five seconds with the correct window title.
+- [ ] Clean-machine install, signing, and physical-device play testing remain
+  owner/device checks.
 
 ## 0.16.1 verification record
 

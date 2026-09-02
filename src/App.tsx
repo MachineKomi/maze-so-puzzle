@@ -13,6 +13,9 @@ import {
 } from "react";
 import {
   ASSETS,
+  BADGE_ART,
+  MEDAL_ART,
+  STICKER_ART,
   TREASURE_ART,
   preloadAchievementArt,
   preloadLevelArt,
@@ -175,7 +178,7 @@ const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.16.1";
+const BUILD_VERSION = "0.17.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -312,14 +315,14 @@ function prefersReducedMotion(): boolean {
 
 function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feedback {
   const event = [...events].reverse().find((item) => item.type !== "moved") ?? events[0];
-  if (!event) return { icon: "👣", text: "Move one square.", tone: "plain", sound: "step" };
+  if (!event) return { icon: ASSETS.navMazes, text: "Move one square.", tone: "plain", sound: "step" };
 
   switch (event.type) {
     case "level-won":
-      return { icon: "✨", text: "Maze solved!", tone: "good", sound: "win" };
+      return { icon: ASSETS.goal, text: "Maze solved!", tone: "good", sound: "win" };
     case "enemy-too-strong":
       return {
-        icon: "💪",
+        icon: ASSETS.potion,
         text: `That ${enemyLabelForEvent(level, event.objectId).toLowerCase()} is too strong just now.`,
         tone: "careful",
         sound: "bump",
@@ -327,7 +330,7 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
     case "enemy-defeated": {
       const enemyLabel = enemyLabelForEvent(level, event.objectId);
       return {
-        icon: "⭐",
+        icon: ASSETS.potion,
         text: `${enemyLabel} scooted away! ${event.powerBefore} + ${event.enemyPower} = ${event.powerAfter}`,
         tone: "good",
         sound: "power",
@@ -335,14 +338,14 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
     }
     case "potion-collected":
       return {
-        icon: "🧡",
+        icon: ASSETS.potion,
         text: `Power potion! ${event.powerBefore} + ${event.amount} = ${event.powerAfter}`,
         tone: "good",
         sound: "power",
       };
     case "animal-rescued":
       return {
-        icon: "💖",
+        icon: resolveAnimalArt(event.species).src,
         text: `${ANIMAL_LABELS[event.species]} is free! What a lovely friend!`,
         tone: "good",
         sound: "rescue",
@@ -350,70 +353,70 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
     case "sword-collected": {
       const object = level.objects.find((candidate) => candidate.id === event.objectId);
       const weapon = resolveWeaponArt(object?.kind === "sword" ? object.style : undefined);
-      return { icon: "🗡️", text: `${weapon.label} found!`, tone: "good", sound: "pickup" };
+      return { icon: weapon.src, text: `${weapon.label} found!`, tone: "good", sound: "pickup" };
     }
     case "boots-collected":
-      return { icon: "🥾", text: "Splashy boots found!", tone: "good", sound: "pickup" };
+      return { icon: ASSETS.boots, text: "Splashy boots found!", tone: "good", sound: "pickup" };
     case "spring-boots-collected":
-      return { icon: "🌸", text: "Spring boots found! Boing!", tone: "good", sound: "pickup" };
+      return { icon: ASSETS.springBoots, text: "Spring boots found! Boing!", tone: "good", sound: "pickup" };
     case "antidote-leaf-collected":
-      return { icon: "🍃", text: "Antidote leaf found! Purple poison is safe now.", tone: "good", sound: "pickup" };
+      return { icon: ASSETS.antidoteLeaf, text: "Antidote leaf found! Purple poison is safe now.", tone: "good", sound: "pickup" };
     case "hole-jumped": {
       const distanceLabel = event.over.length === 1
         ? "one hole"
         : `${event.over.length} holes`;
-      return { icon: "✨", text: `Boing! A lovely jump over ${distanceLabel}!`, tone: "good", sound: "jump" };
+      return { icon: ASSETS.springBoots, text: `Boing! A lovely jump over ${distanceLabel}!`, tone: "good", sound: "jump" };
     }
     case "portal-warped":
       return {
-        icon: resolvePortalArt(event.pair).motif,
+        icon: resolvePortalArt(event.pair).src,
         text: `Whoosh! The ${resolvePortalArt(event.pair).label} found its twin!`,
         tone: "good",
         sound: "portal",
       };
     case "treasure-collected":
       return event.currency === "gold"
-        ? { icon: "⭐", text: `Found ${event.amount} Gold Stars!`, tone: "good", sound: "treasure" }
-        : { icon: "⚙️", text: `Found ${event.amount} Science Points!`, tone: "good", sound: "science" };
+        ? { icon: ASSETS.treasureGoldChest, text: `Found ${event.amount} Gold Stars!`, tone: "good", sound: "treasure" }
+        : { icon: ASSETS.treasureScienceGears, text: `Found ${event.amount} Science Points!`, tone: "good", sound: "science" };
     case "key-collected":
       return {
-        icon: "🔑",
+        icon: resolveKeyArt(event.color).src,
         text: `${lockPairLabel(event.color)} Key found!`,
         tone: "good",
         sound: "pickup",
       };
     case "door-opened":
-      return { icon: "✨", text: `The ${lockPairLabel(event.color)} Door opened!`, tone: "good", sound: "unlock" };
+      return { icon: resolveDoorArt(event.color).src, text: `The ${lockPairLabel(event.color)} Door opened!`, tone: "good", sound: "unlock" };
     case "blocked":
       switch (event.reason) {
         case "needs-sword":
-          return { icon: "🗡️", text: "Find the maze weapon first!", tone: "careful", sound: "bump" };
+          return { icon: ASSETS.sword, text: "Find the maze weapon first!", tone: "careful", sound: "bump" };
         case "needs-boots":
           return {
-            icon: "🥾",
+            icon: ASSETS.boots,
             text: event.terrain === "lava" ? "Boots make lava safe!" : "Boots keep toes dry!",
             tone: "careful",
             sound: "bump",
           };
         case "needs-spring-boots":
-          return { icon: "🌸", text: "Find spring boots to hop across!", tone: "careful", sound: "bump" };
+          return { icon: ASSETS.springBoots, text: "Find spring boots to hop across!", tone: "careful", sound: "bump" };
         case "needs-antidote-leaf":
-          return { icon: "🍃", text: "Find the antidote leaf before crossing purple poison!", tone: "careful", sound: "bump" };
+          return { icon: ASSETS.antidoteLeaf, text: "Find the antidote leaf before crossing purple poison!", tone: "careful", sound: "bump" };
         case "needs-key":
           return {
-            icon: "🔑",
+            icon: event.color ? resolveKeyArt(event.color).src : ASSETS.key,
             text: `Find the ${event.color ? lockPairLabel(event.color) : "matching"} Key!`,
             tone: "careful",
             sound: "bump",
           };
         case "wall":
         case "out-of-bounds":
-          return { icon: "🌸", text: "Boop! A wall.", tone: "plain", sound: "bump" };
+          return { icon: ASSETS.navMazes, text: "Boop! A wall.", tone: "plain", sound: "bump" };
         case "game-over":
-          return { icon: "✨", text: "Choose a button below.", tone: "plain", sound: "bump" };
+          return { icon: ASSETS.navHelp, text: "Choose a button below.", tone: "plain", sound: "bump" };
       }
     case "moved":
-      return { icon: "👣", text: "One step closer!", tone: "plain", sound: "step" };
+      return { icon: ASSETS.navMazes, text: "One step closer!", tone: "plain", sound: "step" };
   }
 }
 
@@ -427,22 +430,22 @@ function pickupToastFor(
       case "sword-collected": {
         const object = level.objects.find((candidate) => candidate.id === event.objectId);
         const weapon = resolveWeaponArt(object?.kind === "sword" ? object.style : undefined);
-        return { icon: "🗡️", text: `Picked up the ${weapon.label}!` };
+        return { icon: weapon.src, text: `Picked up the ${weapon.label}!` };
       }
       case "boots-collected":
-        return { icon: "🥾", text: "Picked up the Splash Boots!" };
+        return { icon: ASSETS.boots, text: "Picked up the Splash Boots!" };
       case "spring-boots-collected":
-        return { icon: "🌸", text: "Picked up the Spring Boots!" };
+        return { icon: ASSETS.springBoots, text: "Picked up the Spring Boots!" };
       case "antidote-leaf-collected":
-        return { icon: "🍃", text: "Picked up the Antidote Leaf!" };
+        return { icon: ASSETS.antidoteLeaf, text: "Picked up the Antidote Leaf!" };
       case "potion-collected":
-        return { icon: "🧡", text: `Picked up a Power Potion! +${event.amount} Power` };
+        return { icon: ASSETS.potion, text: `Picked up a Power Potion! +${event.amount} Power` };
       case "key-collected":
-        return { icon: "🔑", text: `Picked up the ${resolveKeyArt(event.color).label}!` };
+        return { icon: resolveKeyArt(event.color).src, text: `Picked up the ${resolveKeyArt(event.color).label}!` };
       case "treasure-collected":
         return event.currency === "gold"
-          ? { icon: "⭐", text: `Collected ${event.amount} Gold Stars!` }
-          : { icon: "⚙️", text: `Collected ${event.amount} Science Points!` };
+          ? { icon: ASSETS.treasureGoldChest, text: `Collected ${event.amount} Gold Stars!` }
+          : { icon: ASSETS.treasureScienceGears, text: `Collected ${event.amount} Science Points!` };
       default:
         break;
     }
@@ -904,7 +907,7 @@ const MiniMap = memo(function MiniMap({
       className={`maze-map-card${compact ? " compact-map" : ""}`}
       aria-label={`Exploration map. ${exploredCount} of ${level.width * level.height} tiles revealed, ${exploredPercent} percent.`}
     >
-      <div className="maze-map-heading"><span aria-hidden="true">🗺️</span><strong>My map</strong><small>{exploredPercent}%</small></div>
+      <div className="maze-map-heading"><img src={ASSETS.navMazes} alt="" /><strong>My map</strong><small>{exploredPercent}%</small></div>
       <div
         className="maze-minimap"
         style={{
@@ -945,7 +948,7 @@ const MiniMap = memo(function MiniMap({
         />
       </div>
       {newExplorer
-        ? <div className="maze-map-nudge"><span>✨</span> Walk to reveal the maze!</div>
+        ? <div className="maze-map-nudge"><img src={ASSETS.goal} alt="" /> Walk to reveal the maze!</div>
         : <div className="maze-map-key"><span><i className="key-current" />Now</span><span><i className="key-seen" />Explored</span><span><i className="key-fog" />Mystery</span></div>}
       <p className="sr-only">
         Ame is at column {position.x + 1}, row {position.y + 1}.
@@ -964,15 +967,15 @@ const MiniMap = memo(function MiniMap({
 });
 
 function stickerArt(id: StickerId): string {
-  switch (id) {
-    case "first-star": return ASSETS.rewardTrailSticker;
-    case "animal-friend": return ASSETS.rewardRescueMedal;
-    case "surprise-sparkle": return ASSETS.rewardSplashSticker;
-  }
+  return STICKER_ART[id];
 }
 
 function medalArt(id: RescueMedalId): string {
-  return id === "perfect-rescue-10" ? ASSETS.rewardBraveMedal : ASSETS.rewardRescueMedal;
+  return MEDAL_ART[id];
+}
+
+function badgeArt(id: BadgeId): string {
+  return BADGE_ART[id];
 }
 
 function surpriseSettings(progress: PlayerProgress): { size: number; difficulty: MazeDifficulty } {
@@ -1101,7 +1104,7 @@ function App() {
       : new Set(),
   );
   const [feedback, setFeedback] = useState<Feedback>({
-    icon: "✨",
+    icon: ASSETS.goal,
     text: initialRun ? initialLevel.objective : "Help Ame find the star!",
     tone: "plain",
     sound: "step",
@@ -1614,7 +1617,7 @@ function App() {
     setGuidedObjectId(null);
     blockerBumps.current.clear();
     setPendingAdventure(null);
-    setFeedback({ icon: "✨", text: nextLevel.objective, tone: "plain", sound: "step" });
+    setFeedback({ icon: ASSETS.goal, text: nextLevel.objective, tone: "plain", sound: "step" });
     setRestartArmed(false);
   }, [cancelPresentations, clearHeldInput]);
 
@@ -1675,7 +1678,7 @@ function App() {
     const hasInteraction = result.events.some((event) => event.type !== "moved");
     const nextFeedback = hasInteraction
       ? feedbackFor(result.events, level)
-      : { icon: "✨", text: level.objective, tone: "plain" as const, sound: "step" as const };
+      : { icon: ASSETS.goal, text: level.objective, tone: "plain" as const, sound: "step" as const };
     setGame(result.state);
     if (guidedObjectId && result.state.collectedObjectIds.includes(guidedObjectId)) {
       setGuidedObjectId(null);
@@ -2190,7 +2193,7 @@ function App() {
     }
     playSound("bump", muted);
     setRestartArmed(true);
-    setFeedback({ icon: "↻", text: "Tap restart once more.", tone: "plain", sound: "bump" });
+    setFeedback({ icon: ASSETS.navRestart, text: "Tap restart once more.", tone: "plain", sound: "bump" });
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     restartTimer.current = window.setTimeout(() => setRestartArmed(false), 2200);
   };
@@ -2273,7 +2276,7 @@ function App() {
 
   const dismissTooStrongEncounter = () => {
     setTooStrongEncounter(null);
-    setFeedback({ icon: "💪", text: "Let’s find more Power, then come back!", tone: "plain", sound: "menu" });
+    setFeedback({ icon: ASSETS.potion, text: "Let’s find more Power, then come back!", tone: "plain", sound: "menu" });
     playSound("menu", muted);
   };
 
@@ -2322,7 +2325,7 @@ function App() {
     setLevelPickerOpen(false);
     enterLevel(nextLevel, "select", "tester");
     setFeedback({
-      icon: "🛠️",
+      icon: ASSETS.navMazes,
       text: `Tester preview: ${nextLevel.name}. Rewards stay unchanged.`,
       tone: "plain",
       sound: "select",
@@ -2450,11 +2453,12 @@ function App() {
   const ownedCollectibles = [
     ...progress.stickers.slice(-3).map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id) })),
     ...progress.medals.slice(-2).map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id) })),
+    ...progress.badges.slice(-2).map((id) => ({ id, label: BADGE_LABELS[id].label, art: badgeArt(id) })),
   ];
   const newCollectibles = completion ? [
-    ...completion.newStickerIds.map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id), icon: null, kind: "New sticker" })),
-    ...completion.newMedalIds.map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id), icon: null, kind: "New medal" })),
-    ...completion.newBadgeIds.map((id) => ({ id, label: BADGE_LABELS[id].label, art: null, icon: BADGE_LABELS[id].icon, kind: "New badge" })),
+    ...completion.newStickerIds.map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id), kind: "New sticker" })),
+    ...completion.newMedalIds.map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id), kind: "New medal" })),
+    ...completion.newBadgeIds.map((id) => ({ id, label: BADGE_LABELS[id].label, art: badgeArt(id), kind: "New badge" })),
   ] : [];
   const treasureFlightStyle = treasurePresentation ? (() => {
     const startX = 18 + ((treasurePresentation.at.x - cameraWindow.left + 0.5) / cameraWindow.width) * 626;
@@ -2538,23 +2542,23 @@ function App() {
                     aria-label={`${level.name}. Power ${displayedPower}. ${rescuedSpecies.length} of ${animalObjects.length} friends rescued. ${game.hasSword ? `${weaponArt.label} found.` : objectKinds.has("sword") ? `${weaponArt.label} not found.` : ""} ${game.hasBoots ? "Splash boots found." : objectKinds.has("boots") ? "Splash boots not found." : ""} ${game.hasSpringBoots ? "Spring boots found." : objectKinds.has("spring-boots") ? "Spring boots not found." : ""} ${game.hasAntidoteLeaf ? "Antidote leaf found." : objectKinds.has("antidote-leaf") ? "Antidote leaf not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
                   >
                     <strong>{level.name}</strong>
-                    <span>★ {displayedPower}</span>
-                    <span>💖 {rescuedSpecies.length}/{animalObjects.length}</span>
-                    {objectKinds.has("sword") && <span className={game.hasSword ? "found" : "missing"} title={game.hasSword ? `${weaponArt.label} found` : `${weaponArt.label} not found`}>🗡</span>}
-                    {objectKinds.has("boots") && <span className={game.hasBoots ? "found" : "missing"} title={game.hasBoots ? "Splash boots found" : "Splash boots not found"}>🥾</span>}
-                    {objectKinds.has("spring-boots") && <span className={game.hasSpringBoots ? "found" : "missing"} title={game.hasSpringBoots ? "Spring boots found" : "Spring boots not found"}>↟</span>}
-                    {objectKinds.has("antidote-leaf") && <span className={game.hasAntidoteLeaf ? "found" : "missing"} title={game.hasAntidoteLeaf ? "Antidote leaf found" : "Antidote leaf not found"}>🍃</span>}
-                    {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}>🔑 {game.keys.length}/{keyColors.length}</span>}
+                    <span><img src={ASSETS.potion} alt="" /> {displayedPower}</span>
+                    <span><img src={ASSETS.rewardAnimalFriendSticker} alt="" /> {rescuedSpecies.length}/{animalObjects.length}</span>
+                    {objectKinds.has("sword") && <span className={game.hasSword ? "found" : "missing"} title={game.hasSword ? `${weaponArt.label} found` : `${weaponArt.label} not found`}><img src={weaponArt.src} alt="" /></span>}
+                    {objectKinds.has("boots") && <span className={game.hasBoots ? "found" : "missing"} title={game.hasBoots ? "Splash boots found" : "Splash boots not found"}><img src={ASSETS.boots} alt="" /></span>}
+                    {objectKinds.has("spring-boots") && <span className={game.hasSpringBoots ? "found" : "missing"} title={game.hasSpringBoots ? "Spring boots found" : "Spring boots not found"}><img src={ASSETS.springBoots} alt="" /></span>}
+                    {objectKinds.has("antidote-leaf") && <span className={game.hasAntidoteLeaf ? "found" : "missing"} title={game.hasAntidoteLeaf ? "Antidote leaf found" : "Antidote leaf not found"}><img src={ASSETS.antidoteLeaf} alt="" /></span>}
+                    {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}><img src={ASSETS.key} alt="" /> {game.keys.length}/{keyColors.length}</span>}
                   </div>
                 )}
-                {explorationMode && <span className="exploration-view-pill" title="Ame explores six tiles at a time">🗺 6 × 6 view</span>}
+                {explorationMode && <span className="exploration-view-pill" title="Ame explores six tiles at a time"><img src={ASSETS.navMazes} alt="" /> 6 × 6 view</span>}
                 {testerToolsEnabled && (
                   <button
                     className="tester-skip-button"
                     onClick={openTesterPicker}
                     title="Open the tester maze picker"
                     aria-label={`Open tester maze picker. Current maze ${campaignIndex >= 0 ? campaignIndex + 1 : "is a surprise"} of ${CURATED_LEVELS.length}. Tester rewards and progress are off.`}
-                  >🛠 <span>Pick maze</span></button>
+                  ><img src={ASSETS.navMazes} alt="" /><span>Pick maze</span></button>
                 )}
                 {levelStory && (
                   <button
@@ -2565,8 +2569,8 @@ function App() {
                   ><img src={ASSETS.navBook} alt="" /><span>Story</span></button>
                 )}
                 <button className="big-maze-button" aria-pressed={bigMaze} onClick={toggleBigMaze} title="Make the maze larger">{bigMaze ? "↙ Normal" : "⛶ Big maze"}</button>
-                <button className="surprise-button" onClick={() => requestEnterLevel(makeSurprise())} title="Make a new solvable maze">✦ New maze</button>
-                <div className="step-pill" aria-label={`${game.steps} ${game.steps === 1 ? "step" : "steps"}`}><span>👣</span>{game.steps}</div>
+                <button className="surprise-button" onClick={() => requestEnterLevel(makeSurprise())} title="Make a new solvable maze"><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /> New maze</button>
+                <div className="step-pill" aria-label={`${game.steps} ${game.steps === 1 ? "step" : "steps"}`}><img src={ASSETS.boots} alt="" />{game.steps}</div>
               </div>
             </div>
 
@@ -2810,7 +2814,7 @@ function App() {
 
               {mapPickupToast && (
                 <div className="map-pickup-toast" key={mapPickupToast.id} role="status" aria-live="polite" aria-atomic="true">
-                  <span>{mapPickupToast.icon}</span>
+                  <img src={mapPickupToast.icon} alt="" />
                   <strong>{mapPickupToast.text}</strong>
                 </div>
               )}
@@ -2835,7 +2839,7 @@ function App() {
             <p className="sr-only" id="maze-status">{mazeStatus}</p>
 
             <div className={`feedback-bar tone-${feedback.tone}`} aria-live={mapPickupToast ? "off" : "polite"} aria-atomic="true">
-              <span className="feedback-icon" aria-hidden="true">{feedback.icon}</span>
+              <img className="feedback-icon" src={feedback.icon} alt="" />
               <span>{feedback.text}</span>
             </div>
           </section>
@@ -2885,7 +2889,7 @@ function App() {
               )}
               <div className="adventure-details">
                 <section className="objective-card">
-                  <span className="objective-icon" aria-hidden="true">★</span>
+                  <img className="objective-icon" src={ASSETS.goal} alt="" />
                   <div>
                     <span className="tiny-label">Right now</span>
                     <strong>{level.objective}</strong>
@@ -2896,7 +2900,7 @@ function App() {
                     onClick={(event) => openHint(event.currentTarget)}
                     aria-label="Show a gentle hint for this maze"
                     title="Show a gentle hint"
-                  ><span aria-hidden="true">💡</span><b>Hint</b></button>
+                  ><img src={ASSETS.navHelp} alt="" /><b>Hint</b></button>
                 </section>
 
                 <section className="rescue-card" aria-label={`${rescuedSpecies.length} of ${animalObjects.length} animal friends rescued`}>
@@ -2933,11 +2937,11 @@ function App() {
                       <InventorySlot key={color} label={resolveKeyArt(color).label} image={resolveKeyArt(color).src} found={game.keys.includes(color)} />
                     ))}
                     {!objectKinds.has("sword") && !objectKinds.has("boots") && !objectKinds.has("spring-boots") && !objectKinds.has("antidote-leaf") && keyColors.length === 0 && (
-                      <div className="empty-bag"><span>🎒</span><strong>Bag ready!</strong></div>
+                      <div className="empty-bag"><img src={ASSETS.coinPouch} alt="" /><strong>Bag ready!</strong></div>
                     )}
                   </div>
                   {ownedCollectibles.length > 0 && (
-                    <div className="collection-strip owned-collection" aria-label="Ame's stickers and medals">
+                    <div className="collection-strip owned-collection" aria-label="Ame's stickers, medals, and badges">
                       {ownedCollectibles.map((item) => (
                         <div className="collection-item owned" key={item.id} title={item.label}><img src={item.art} alt={item.label} /></div>
                       ))}
@@ -2987,16 +2991,16 @@ function App() {
         {helpOpen && (
           <Modal title="How to help Ame" onClose={closeHelp} returnFocus={modalReturnFocus.current}>
             <div className="help-grid">
-              <HelpStep icon="👣" title="Move" copy="Press, hold or drag on the maze—or tap an arrow. One square at a time." />
-              <HelpStep icon="🗡️" title="Find a weapon" copy="Then baddies can scoot." />
-              <HelpStep icon="⭐" title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
-              <HelpStep icon="🔑" title="Match keys" copy="Keys open doors with the same colour and shape." />
-              <HelpStep icon="🥾" title="Wear boots" copy="Cross water and warm lava." />
-              <HelpStep icon="↟" title="Find spring boots" copy="Boing safely across holes in the path." />
-              <HelpStep icon="🍃" title="Find the antidote leaf" copy="It makes purple poison safe to cross." />
-              {objectKinds.has("portal") && <HelpStep icon="♥" title="Match magic flowers" copy="Step on one flower to pop out of its matching colour and shape." />}
-              <HelpStep icon="💖" title="Rescue friends" copy="Some mazes have one friend; big adventures can have five." />
-              {explorationMode && <HelpStep icon="🗺️" title="Fill the map" copy="Exploring reveals each part." />}
+              <HelpStep image={ASSETS.boots} title="Move" copy="Press, hold or drag on the maze—or tap an arrow. One square at a time." />
+              <HelpStep image={weaponArt.src} title="Find a weapon" copy="Then baddies can scoot." />
+              <HelpStep image={ASSETS.potion} title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
+              <HelpStep image={ASSETS.key} title="Match keys" copy="Keys open doors with the same colour and shape." />
+              <HelpStep image={ASSETS.boots} title="Wear boots" copy="Cross water and warm lava." />
+              <HelpStep image={ASSETS.springBoots} title="Find spring boots" copy="Boing safely across holes in the path." />
+              <HelpStep image={ASSETS.antidoteLeaf} title="Find the antidote leaf" copy="It makes purple poison safe to cross." />
+              {objectKinds.has("portal") && <HelpStep image={ASSETS.portalRoseHeart} title="Match magic flowers" copy="Step on one flower to pop out of its matching colour and shape." />}
+              <HelpStep image={ASSETS.animalBunny} title="Rescue friends" copy="Some mazes have one friend; big adventures can have five." />
+              {explorationMode && <HelpStep image={ASSETS.navMazes} title="Fill the map" copy="Exploring reveals each part." />}
             </div>
             <button className="primary-button" onClick={closeHelp}>Let's explore!</button>
           </Modal>
@@ -3005,7 +3009,7 @@ function App() {
         {hintOpen && (
           <Modal title="A little hint" onClose={closeHint} returnFocus={modalReturnFocus.current}>
             <div className="hint-card">
-              <span className="hint-spark" aria-hidden="true">💡</span>
+              <img className="hint-spark" src={ASSETS.navHelp} alt="" />
               <p>{currentHint}</p>
             </div>
             <button className="primary-button" onClick={closeHint}>Got it!</button>
@@ -3058,7 +3062,7 @@ function App() {
                 );
               })}
             </div>
-            {animalObjects.length > 0 && completion.rescuedSpecies.length === animalObjects.length && <div className="perfect-banner">💖 Perfect rescue! Every friend is safe!</div>}
+            {animalObjects.length > 0 && completion.rescuedSpecies.length === animalObjects.length && <div className="perfect-banner"><img src={ASSETS.rewardAnimalFriendSticker} alt="" /> Perfect rescue! Every friend is safe!</div>}
             {levelStory && (
               <div className="story-outro-card">
                 <img src={storySpeakerArt(levelStory.speaker)} alt="" />
@@ -3070,7 +3074,7 @@ function App() {
             )}
             {completion.testerRun ? (
               <div className="tester-preview-banner" role="status">
-                <span aria-hidden="true">🛠️</span>
+                <img src={ASSETS.navMazes} alt="" />
                 <div><strong>Tester preview complete</strong><small>Nothing was saved and rewards stayed unchanged.</small></div>
               </div>
             ) : (
@@ -3088,9 +3092,7 @@ function App() {
               <div className="collection-strip reward-new" aria-label="New rewards">
                 {newCollectibles.map((item) => (
                   <div className="collection-pop" key={item.id}>
-                    {item.art
-                      ? <img className="modal-reward-art" src={item.art} alt="" />
-                      : <span className="modal-reward-icon" aria-hidden="true">{item.icon}</span>}
+                    <img className="modal-reward-art" src={item.art} alt="" />
                     <div><small>{item.kind}</small><strong>{item.label}</strong></div>
                   </div>
                 ))}
@@ -3297,7 +3299,7 @@ function TitleScreen({
         aria-label={muted ? "Turn sound on" : "Turn sound off"}
         aria-pressed={!muted}
         onClick={onToggleSound}
-      >{muted ? "♪" : "♫"}</button>
+      ><img src={ASSETS.navSound} alt="" /></button>
 
       <div className="title-copy">
         <span className="title-eyebrow">A gentle adventure for Ame</span>
@@ -3307,7 +3309,7 @@ function TitleScreen({
 
         <div className="title-actions">
           <button ref={playRef} className="title-play-button" onClick={onPlay}>
-            <span aria-hidden="true">★</span>
+            <span aria-hidden="true"><img src={ASSETS.goal} alt="" /></span>
             <span>
               <strong>{activeRun || hasProgress ? "Continue" : "Begin adventure"}</strong>
               <small>{activeRun ? `${activeRun.name} · ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : hasProgress ? `Story maze ${nextStoryNumber} awaits` : "A lovely first maze awaits"}</small>
@@ -3315,9 +3317,9 @@ function TitleScreen({
           </button>
           <div className="title-secondary-actions">
             <button onClick={(event) => onChooseMaze(event.currentTarget)}><img src={ASSETS.navMazes} alt="" /> Choose a maze</button>
-            <button onClick={onAchievements}><span aria-hidden="true">🏅</span> Ame's adventure book</button>
-            <button onClick={onSurprise}><span aria-hidden="true">✦</span> Surprise maze</button>
-            <button style={{ gridColumn: "1 / -1" }} onClick={(event) => onRequestReset(event.currentTarget)}><span aria-hidden="true">↻</span> Reset progress</button>
+            <button onClick={onAchievements}><img src={ASSETS.navBook} alt="" /> Ame's adventure book</button>
+            <button onClick={onSurprise}><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /> Surprise maze</button>
+            <button style={{ gridColumn: "1 / -1" }} onClick={(event) => onRequestReset(event.currentTarget)}><img src={ASSETS.navRestart} alt="" /> Reset progress</button>
           </div>
         </div>
 
@@ -3333,7 +3335,7 @@ function TitleScreen({
         onClick={onOpenTester}
         aria-label={`Playable build ${BUILD_VERSION}. Open the secret tester maze picker.`}
         title="Secret tester maze picker"
-      >Playable build {BUILD_VERSION} <span aria-hidden="true">🛠</span></button>
+      >Playable build {BUILD_VERSION} <img src={ASSETS.navMazes} alt="" /></button>
     </section>
   );
 }
@@ -3382,7 +3384,6 @@ function AchievementsScreen({
       label: STICKER_LABELS[id].label,
       description: STICKER_LABELS[id].description,
       art: stickerArt(id),
-      icon: null,
       owned: progress.stickers.includes(id),
       kind: "Sticker",
     })),
@@ -3391,7 +3392,6 @@ function AchievementsScreen({
       label: ACHIEVEMENT_LABELS[id].label,
       description: ACHIEVEMENT_LABELS[id].description,
       art: medalArt(id),
-      icon: null,
       owned: progress.medals.includes(id),
       kind: "Medal",
     })),
@@ -3399,8 +3399,7 @@ function AchievementsScreen({
       id,
       label: BADGE_LABELS[id].label,
       description: BADGE_LABELS[id].description,
-      art: null,
-      icon: BADGE_LABELS[id].icon,
+      art: badgeArt(id),
       owned: progress.badges.includes(id),
       kind: "Badge",
     })),
@@ -3417,9 +3416,9 @@ function AchievementsScreen({
           <p>Every star, stamp, and friend from the journey.</p>
         </div>
         <div className="book-header-actions">
-          <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={onToggleSound}>{muted ? "♪" : "♫"}</button>
-          {activeRun && <button className="book-resume" onClick={onResume}>▶ Resume</button>}
-          <button onClick={onSurprise}>✦ New maze</button>
+          <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={onToggleSound}><img src={ASSETS.navSound} alt="" /></button>
+          {activeRun && <button className="book-resume" onClick={onResume}><img src={ASSETS.goal} alt="" /> Resume</button>}
+          <button onClick={onSurprise}><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /> New maze</button>
         </div>
       </header>
 
@@ -3427,10 +3426,10 @@ function AchievementsScreen({
         <section className="book-stats" aria-label="Adventure totals">
           <article><img src={ASSETS.goal} alt="" /><span><b>{progress.totalMazesCompleted}</b><small>mazes solved</small></span></article>
           <article><img src={ASSETS.coinPouch} alt="" /><span><b>{progress.gold}</b><small>gold stars</small></span></article>
-          <article><img src={ASSETS.rewardRescueMedal} alt="" /><span><b>{progress.totalAnimalsRescued}</b><small>friends helped</small></span></article>
-          <article><img src={ASSETS.rewardBraveMedal} alt="" /><span><b>{progress.perfectRescueMazeCount}</b><small>perfect rescues</small></span></article>
-          <article><span className="book-stat-icon" aria-hidden="true">↻</span><span><b>{progress.totalCompletions}</b><small>happy finishes</small></span></article>
-          <article><span className="book-stat-icon" aria-hidden="true">✦</span><span><b>{progress.generatedMazesCompleted}</b><small>surprise stars</small></span></article>
+          <article><img src={ASSETS.rewardAnimalFriendSticker} alt="" /><span><b>{progress.totalAnimalsRescued}</b><small>friends helped</small></span></article>
+          <article><img src={ASSETS.rewardHelpingPawMedal} alt="" /><span><b>{progress.perfectRescueMazeCount}</b><small>perfect rescues</small></span></article>
+          <article><img src={ASSETS.rewardTrailSticker} alt="" /><span><b>{progress.totalCompletions}</b><small>happy finishes</small></span></article>
+          <article><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /><span><b>{progress.generatedMazesCompleted}</b><small>surprise stars</small></span></article>
         </section>
 
         <section className="friend-ledger" aria-labelledby="friend-ledger-title">
@@ -3443,7 +3442,7 @@ function AchievementsScreen({
               </article>
             ))}
             {unclassifiedRescues > 0 && (
-              <article className="past-rescues"><span className="book-stat-icon" aria-hidden="true">♡</span><span><strong>Earlier friends</strong><b>{unclassifiedRescues}</b><small>before the roll-call began</small></span></article>
+              <article className="past-rescues"><img src={ASSETS.rewardAnimalFriendSticker} alt="" /><span><strong>Earlier friends</strong><b>{unclassifiedRescues}</b><small>before the roll-call began</small></span></article>
             )}
           </div>
         </section>
@@ -3454,10 +3453,7 @@ function AchievementsScreen({
             {collectibles.map((item) => (
               <article className={`badge-card ${item.owned ? "earned" : "locked"}`} key={item.id}>
                 <div className="badge-art-wrap">
-                  {item.art
-                    ? <img src={item.art} alt="" />
-                    : <b className="badge-icon" aria-hidden="true">{item.icon}</b>}
-                  {item.owned && <span aria-hidden="true">✓</span>}
+                  <img src={item.art} alt="" loading="lazy" decoding="async" />
                 </div>
                 <div><small>{item.owned ? `Earned ${item.kind}` : `Locked ${item.kind}`}</small><strong>{item.label}</strong><p>{item.description}</p></div>
               </article>
@@ -3496,7 +3492,7 @@ function AchievementsScreen({
                     <small>{locked ? "Keep adventuring to unlock" : isActive ? "Current maze · tap to resume" : `${storyLevel.width} × ${storyLevel.height}`}</small>
                     {!locked && <em className="record-skill">{storyForLevel(storyLevel.id)?.puzzlePower}</em>}
                   </span>
-                  <span className="record-best">{result ? <><b>{result.bestSteps ?? "—"}</b><small>best {result.bestSteps === 1 ? "step" : "steps"}</small></> : <><b>{locked ? "🔒" : "New"}</b><small>{locked ? "locked" : "ready"}</small></>}</span>
+                  <span className="record-best">{result ? <><b>{result.bestSteps ?? "—"}</b><small>best {result.bestSteps === 1 ? "step" : "steps"}</small></> : locked ? <><img className="record-lock-art" src={ASSETS.doorBlueStar} alt="" /><small>locked</small></> : <><b>New</b><small>ready</small></>}</span>
                   <span className="record-friends" aria-hidden="true">
                     {storySpecies.map((species) => (
                       <img
@@ -3521,7 +3517,7 @@ function AchievementsScreen({
             <b>{progress.generatedMazesCompleted} unique</b>
           </div>
           <div className="surprise-explainer">
-            <span className="surprise-explainer-star" aria-hidden="true">✦</span>
+            <img className="surprise-explainer-star" src={ASSETS.rewardSurpriseSparkleSticker} alt="" />
             <div>
               <strong>Freshly made, not a hidden fixed list</strong>
               <p>Surprise Mazes are generated from a new seed, so there can always be another one. The Book remembers completed adventures while the button makes a fresh puzzle.</p>
@@ -3532,7 +3528,7 @@ function AchievementsScreen({
             <div className="surprise-record-grid" aria-label="Recent completed Surprise Maze records">
               {recentSurpriseResults.map(([levelId, result], index) => (
                 <article key={levelId}>
-                  <span aria-hidden="true">{index === 0 ? "★" : "✦"}</span>
+                  <img src={index === 0 ? ASSETS.rewardTrailSticker : ASSETS.rewardSurpriseSparkleSticker} alt="" />
                   <div><strong>Surprise memory</strong><small>{describeGeneratedRecord(levelId)}</small></div>
                   <div><b>{result.bestSteps ?? "—"}</b><small>best steps</small></div>
                   <div><b>{result.bestRescuedCount}/{result.totalRescueCount}</b><small>friends</small></div>
@@ -3545,7 +3541,7 @@ function AchievementsScreen({
         <section className="maze-records" aria-labelledby="reset-progress-title">
           <div className="book-section-heading">
             <div><span>New beginning</span><h2 id="reset-progress-title">Reset the adventure</h2></div>
-            <button className="secondary-button" onClick={(event) => onRequestReset(event.currentTarget)}>↻ Reset progress</button>
+            <button className="secondary-button" onClick={(event) => onRequestReset(event.currentTarget)}><img src={ASSETS.navRestart} alt="" /> Reset progress</button>
           </div>
         </section>
       </div>
@@ -3571,8 +3567,8 @@ function InventorySlot({ label, image, found }: InventorySlotProps) {
   );
 }
 
-function HelpStep({ icon, title, copy }: { readonly icon: string; readonly title: string; readonly copy: string }) {
-  return <div className="help-step"><span aria-hidden="true">{icon}</span><div><strong>{title}</strong><p>{copy}</p></div></div>;
+function HelpStep({ image, title, copy }: { readonly image: string; readonly title: string; readonly copy: string }) {
+  return <div className="help-step"><img src={image} alt="" /><div><strong>{title}</strong><p>{copy}</p></div></div>;
 }
 
 function StoryInterlude({
