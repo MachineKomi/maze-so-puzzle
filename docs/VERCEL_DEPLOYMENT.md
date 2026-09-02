@@ -220,3 +220,11 @@ for the four new friends, four new enemies, four new repeatable terrain
 textures, and two new transparent dressing overlays all return HTTP 200 with
 the expected WebP/PNG media types and exact local byte sizes. Earlier release
 paragraphs remain historical evidence.
+
+Playable build 0.16.1 was pushed to GitHub `main` as commit `44c1023` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical JavaScript reports 0.16.1. Direct production requests
+for all thirteen looping OST songs and the reserved friendship cue return HTTP
+200 as `audio/mpeg`; every live byte size matches its local source. The local
+browser title-to-maze navigation check reports no warning or error logs. Earlier
+release paragraphs remain historical evidence.

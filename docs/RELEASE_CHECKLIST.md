@@ -33,6 +33,9 @@ historical release evidence.
   `npm ls` and `cargo check --locked` pass.
 - [x] Local browser navigation produced no warnings or errors; audible listening
   remains a physical-device check.
+- [x] GitHub `main` commit `44c1023` auto-deployed through Vercel. The canonical
+  bundle reports 0.16.1, and all fourteen OST MP3s return HTTP 200 as
+  `audio/mpeg` with live byte sizes matching the local files.
 - [x] `Maze-so-Puzzle-0.16.1-portable.exe`: 92,971,520 bytes, file/product
   version 0.16.1, SHA-256
   `6A24526027B040C046B28775757BC89C0DEC9039DFF729FDCE12ABE43517F58B`.

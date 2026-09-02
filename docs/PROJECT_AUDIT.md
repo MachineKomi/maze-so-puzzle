@@ -32,7 +32,7 @@ historical evidence.
 | Soundtrack | Thirteen full OST tracks plus one reserved friendship cue | A seeded shuffle bag plays every full song once per cycle on maze changes, avoids immediate repeats, and home music begins from the first permitted title-screen gesture |
 | Procedural records | Maze Select and Adventure Book | Copy explicitly identifies fresh seeded generation; the Book keeps up to six recent record cards rather than presenting an infinite fixed list |
 | Responsive browser QA | Desktop, iPad, portrait phone, and landscape phone | Fixed stage and Book fit without overflow; browser warning/error logs are empty; large-maze object mounting is camera-scoped |
-| Hosting | GitHub `main` commit `496edbb` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Auto-deployed successfully; the canonical bundle reports 0.16.0 and all fourteen new WebP/PNG runtime assets return HTTP 200 with the correct media types and exact byte sizes |
+| Hosting | GitHub `main` commit `44c1023` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Auto-deployed successfully; the canonical bundle reports 0.16.1 and all fourteen OST files return HTTP 200 as `audio/mpeg` with exact local byte sizes |
 | Desktop artifacts | Unsigned 0.16.1 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
 
 ## Historical 0.14.0 release status
