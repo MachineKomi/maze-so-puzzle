@@ -6,8 +6,8 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.16.0: `npm run check` passes 311 tests across 25 files plus strict
-TypeScript and the Vite production build. The production JavaScript is 115.26 KB
+Status for 0.16.1: `npm run check` passes 311 tests across 25 files plus strict
+TypeScript and the Vite production build. The production JavaScript is 115.46 KB
 gzipped. The production-only npm audit reports zero vulnerabilities; `npm ls` is
 clean, and locked Cargo compilation passes. Browser QA at desktop, iPad, and
 phone aspect ratios found no overflow or console errors; all 15 Book portraits
@@ -17,6 +17,32 @@ byte-compared, versioned, and smoke-tested. Physical-device touch/listening/
 feel, accessibility, clean-machine installation, signing, and the broader
 manual play-through remain deliberately unclaimed. Earlier evidence is kept as
 historical release evidence.
+
+## 0.16.1 verification record
+
+- [x] Version 0.16.1 is aligned in npm, Cargo, Tauri, and the visible label.
+- [x] All thirteen full-length MP3s in `public/assets/ost/` appear exactly once
+  in the maze playlist; the short friendship cue remains excluded.
+- [x] The seeded shuffle bag uses every song before refilling, advances when a
+  maze is entered or revisited, and avoids immediate repeats at title/Book and
+  cycle boundaries. Muting and unmuting do not consume another song.
+- [x] The title prepares the harbour theme without constructing media and starts
+  it from the first browser-permitted pointer or keyboard gesture.
+- [x] `npm run check`: 311/311 tests pass across 25 files; strict TypeScript and
+  Vite production builds pass. `npm audit --omit=dev`: zero vulnerabilities;
+  `npm ls` and `cargo check --locked` pass.
+- [x] Local browser navigation produced no warnings or errors; audible listening
+  remains a physical-device check.
+- [x] `Maze-so-Puzzle-0.16.1-portable.exe`: 92,971,520 bytes, file/product
+  version 0.16.1, SHA-256
+  `6A24526027B040C046B28775757BC89C0DEC9039DFF729FDCE12ABE43517F58B`.
+- [x] `Maze-so-Puzzle-0.16.1-setup.exe`: 86,835,740 bytes, file/product version
+  0.16.1, SHA-256
+  `B9349B4C9D1811A6CF531C61664D185FD7C0E96C0A05215A71A4712F05667704`.
+- [x] Both staged binaries byte-match the Tauri outputs. The portable app stayed
+  responsive for five seconds with the correct window title.
+- [ ] Clean-machine install, signing, and physical-device soundtrack listening
+  remain owner/device checks.
 
 ## 0.16.0 verification record
 

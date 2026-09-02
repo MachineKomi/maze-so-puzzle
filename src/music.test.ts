@@ -66,9 +66,20 @@ describe("background music", () => {
     ]));
     expect(MAZE_MUSIC_TRACKS.every((track) => track.endsWith(".mp3"))).toBe(true);
     expect(MAZE_MUSIC_TRACKS.some((track) => track.includes("cue_new_friend"))).toBe(false);
+
+    const ostFiles = import.meta.glob("../public/assets/ost/*.mp3", {
+      eager: true,
+      import: "default",
+      query: "?url",
+    });
+    const fullLengthFiles = Object.keys(ostFiles)
+      .map((sourcePath) => sourcePath.replace("../public", ""))
+      .filter((sourcePath) => !sourcePath.includes("/cue_"))
+      .sort();
+    expect([...MAZE_MUSIC_TRACKS].sort()).toEqual(fullLengthFiles);
   });
 
-  it("assigns stable deterministic maze songs without immediate first-time repeats", async () => {
+  it("shuffles every song once per cycle without immediate repeats", async () => {
     const { createMazeMusicPicker } = await import("./music");
     const tracks = ["/music/one.mp3", "/music/two.mp3", "/music/three.mp3"];
     const first = createMazeMusicPicker("run-ame", {
@@ -79,16 +90,19 @@ describe("background music", () => {
       tracks,
       previousTrackUrl: "/music/one.mp3",
     });
-    const mazeKeys = ["maze-1", "maze-2", "maze-3", "maze-4", "maze-5"];
+    const mazeKeys = ["maze-1", "maze-2", "maze-3"];
     const firstSequence = mazeKeys.map((key) => first.trackForMaze(key));
     const secondSequence = mazeKeys.map((key) => second.trackForMaze(key));
 
     expect(firstSequence).toEqual(secondSequence);
     expect(firstSequence[0]).not.toBe("/music/one.mp3");
+    expect(new Set(firstSequence)).toEqual(new Set(tracks));
     firstSequence.slice(1).forEach((track, index) => {
       expect(track).not.toBe(firstSequence[index]);
     });
-    expect(first.trackForMaze("maze-2")).toBe(firstSequence[1]);
+    const nextCycleFirst = first.trackForMaze("maze-1");
+    expect(nextCycleFirst).not.toBe(firstSequence.at(-1));
+    expect(tracks).toContain(nextCycleFirst);
   });
 
   it("can avoid non-maze music when returning from another screen", async () => {

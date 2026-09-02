@@ -49,7 +49,7 @@ export interface MazeMusicPicker {
   readonly tracks: readonly string[];
   /** Keep repeat avoidance accurate after title/achievement music plays. */
   noteTrackStarted(trackUrl: string): void;
-  /** Stable for every maze key already encountered during this run. */
+  /** Draw the next song from the session's shuffled, no-repeat playlist. */
   trackForMaze(mazeKey: MazeMusicKey): string;
 }
 
@@ -71,11 +71,26 @@ function usableTracks(tracks: readonly string[] | undefined): readonly string[] 
   return Object.freeze(unique.length > 0 ? unique : [...MAZE_MUSIC_TRACKS]);
 }
 
+function shuffledCycle(tracks: readonly string[], seed: number): string[] {
+  const shuffled = [...tracks];
+  let state = seed || 0x9e3779b9;
+  const random = () => {
+    state ^= state << 13;
+    state ^= state >>> 17;
+    state ^= state << 5;
+    return (state >>> 0) / 0x100000000;
+  };
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex]!, shuffled[index]!];
+  }
+  return shuffled;
+}
+
 /**
- * Creates one deterministic-random soundtrack assignment for a play session.
- * A maze keeps its song when React re-renders, sound is toggled, or the player
- * revisits it. First-time maze assignments avoid the immediately previous song
- * whenever the playlist has an alternative.
+ * Creates a deterministic-random shuffle bag for one play session. Every
+ * full-length track is heard once before the bag refills, entering or revisiting
+ * a maze advances the bag, and cycle boundaries avoid an immediate repeat.
  */
 export function createMazeMusicPicker(
   runSeed: string | number,
@@ -83,8 +98,17 @@ export function createMazeMusicPicker(
 ): MazeMusicPicker {
   const normalizedSeed = String(runSeed).trim() || "ame-maze-run";
   const tracks = usableTracks(options.tracks);
-  const assignments = new Map<string, string>();
   let previousTrackUrl = options.previousTrackUrl?.trim() || undefined;
+  let cycle = 0;
+  let deck: string[] = [];
+
+  const refillDeck = (mazeKey: MazeMusicKey) => {
+    deck = shuffledCycle(
+      tracks,
+      stableHash(`${normalizedSeed}\u0000${cycle}\u0000${String(mazeKey)}`),
+    );
+    cycle += 1;
+  };
 
   return {
     runSeed: normalizedSeed,
@@ -93,20 +117,14 @@ export function createMazeMusicPicker(
       previousTrackUrl = nextTrackUrl.trim() || previousTrackUrl;
     },
     trackForMaze(mazeKey: MazeMusicKey): string {
-      const normalizedKey = String(mazeKey);
-      const assigned = assignments.get(normalizedKey);
-      if (assigned) {
-        previousTrackUrl = assigned;
-        return assigned;
+      if (deck.length === 0) refillDeck(mazeKey);
+      if (tracks.length > 1 && deck[0] === previousTrackUrl) {
+        const alternativeIndex = deck.findIndex((candidate) => candidate !== previousTrackUrl);
+        if (alternativeIndex > 0) {
+          [deck[0], deck[alternativeIndex]] = [deck[alternativeIndex]!, deck[0]!];
+        }
       }
-
-      let trackIndex = stableHash(`${normalizedSeed}\u0000${normalizedKey}`) % tracks.length;
-      if (tracks.length > 1 && tracks[trackIndex] === previousTrackUrl) {
-        trackIndex = (trackIndex + 1) % tracks.length;
-      }
-
-      const selected = tracks[trackIndex] ?? DEFAULT_MUSIC_TRACK_URL;
-      assignments.set(normalizedKey, selected);
+      const selected = deck.shift() ?? DEFAULT_MUSIC_TRACK_URL;
       previousTrackUrl = selected;
       return selected;
     },

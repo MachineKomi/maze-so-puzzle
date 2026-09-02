@@ -35,18 +35,18 @@ future one-shot event controller.
 
 - Music uses one reusable `HTMLAudioElement`, loops, plays inline, and defaults
   to 22% volume so the short gameplay cues remain clear.
-- One `createMazeMusicPicker()` instance is created for a play session. It gives
-  each maze ID a stable deterministic assignment from the thirteen-track playlist,
-  including generated IDs, so React re-renders, mute toggles, and revisits do
-  not change that maze's song. A first-time maze assignment avoids whichever
-  song most recently played whenever another choice exists.
-- A fresh runtime seed changes the assignments between play sessions. The title
-  and Adventure Book still request the harbour track directly and report it to
-  the picker, so the next maze avoids repeating it when possible.
+- One `createMazeMusicPicker()` instance creates a seeded shuffle bag for the
+  play session. Entering or revisiting a maze draws the next song; every one of
+  the thirteen full tracks is used before the bag refills, and no song repeats
+  immediately at a cycle boundary.
+- A fresh runtime seed changes the shuffle order between play sessions. The
+  title and Adventure Book request the harbour track directly and report it to
+  the picker, so the next maze avoids repeating it when another song is present.
 - The element uses `preload="none"`. Importing the module, opening the site, or
   changing mute state does not construct or start audio.
-- `startMusicFromUserGesture()` is called directly from a click, tap, or key
-  action. This respects browser and iPad autoplay rules. A denied play request,
+- The title screen prepares the harbour theme without creating a media element,
+  then starts it on the first click, tap, or key action. This gives the home
+  screen music while respecting browser and iPad autoplay rules. A denied play request,
   missing file, or unsupported codec resolves harmlessly and cannot block play.
 - The single Sound control mutes both music and synthesized effects. While
   muted, background music retains its position; unmuting from the button can
@@ -79,8 +79,9 @@ For a quick controller regression check, run:
 npm test -- --run src/music.test.ts
 ```
 
-The tests cover the thirteen-track catalogue, exclusion of the short cue, stable
-per-maze assignments, immediate-repeat avoidance, fresh run seeds, gesture-only
+The tests compare the thirteen-track catalogue with the actual OST directory,
+cover exclusion of the short cue, complete shuffle cycles, immediate-repeat
+avoidance, deterministic run seeds, gesture-only
 startup, looping configuration, mute state, page-visibility pause/resume races,
 rejected or unavailable media, stop/reuse, disposal, server-side safety, and
 custom track configuration.

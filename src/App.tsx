@@ -175,7 +175,7 @@ const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.16.0";
+const BUILD_VERSION = "0.16.1";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -1203,6 +1203,23 @@ function App() {
     (nextLevel: LevelDefinition) => mazeMusicPicker.trackForMaze(nextLevel.id),
     [mazeMusicPicker],
   );
+
+  useEffect(() => {
+    if (screen !== "title" || muted) return undefined;
+    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
+    configureMusic({ trackUrl: MUSIC_TRACKS.title });
+    setMusicMuted(false);
+
+    const beginTitleMusic = () => {
+      void startMusicFromUserGesture();
+    };
+    window.addEventListener("pointerdown", beginTitleMusic, { capture: true, once: true });
+    window.addEventListener("keydown", beginTitleMusic, { capture: true, once: true });
+    return () => {
+      window.removeEventListener("pointerdown", beginTitleMusic, true);
+      window.removeEventListener("keydown", beginTitleMusic, true);
+    };
+  }, [mazeMusicPicker, muted, screen]);
 
   const campaignIndex = CURATED_LEVELS.findIndex((candidate) => candidate.id === level.id);
   const isSurprise = campaignIndex === -1;
@@ -2401,8 +2418,6 @@ function App() {
     setMuted(nextMuted);
     setMusicMuted(nextMuted);
     if (!nextMuted) {
-      const track = screen === "game" ? musicTrackForLevel(level) : MUSIC_TRACKS.title;
-      configureMusic({ trackUrl: track });
       void startMusicFromUserGesture();
       playSound("title", false);
     }

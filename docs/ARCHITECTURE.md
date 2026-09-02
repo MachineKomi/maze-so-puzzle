@@ -65,8 +65,10 @@ state.
 14. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
     Audio API; those effects require no recorded audio files.
 15. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
-   A session-scoped deterministic picker maps each maze to one of thirteen full
-   tracks and avoids an immediate repeat; the short friendship cue is excluded.
+   A session-scoped deterministic shuffle bag cycles through all thirteen full
+   tracks on maze transitions and avoids an immediate repeat; the short
+   friendship cue is excluded. The title theme starts from the first permitted
+   home-screen gesture rather than attempting prohibited autoplay.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
@@ -193,9 +195,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.16.0 source is shared by the web and Tauri build paths, and its automated
+- The 0.16.1 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.16.0, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.16.1, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
   five-second smoke launch with the correct title. The GitHub-connected Vercel
   production deployment is verified separately after each push. Clean-machine
@@ -222,11 +224,11 @@ selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.16.0 run covers 311 tests across 25 files; `npm run check` also
+solver. The 0.16.1 run covers 311 tests across 25 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.16.0.
+and portable launch smoke are complete for 0.16.1.
 
 ## Extension points
 
@@ -257,4 +259,4 @@ and portable launch smoke are complete for 0.16.0.
   schema rather than changing saved data in place.
 - Add background contexts through `MUSIC_TRACKS` and the existing gesture-safe
   controller. Keep short event stings separate from `MAZE_MUSIC_TRACKS`; preserve
-  stable maze-to-track selection and the no-immediate-repeat rule.
+  complete seeded shuffle cycles and the no-immediate-repeat rule.

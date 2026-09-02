@@ -4,6 +4,22 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.16.1 - 2026-09-02
+
+This soundtrack shuffle release brings music to the home screen and makes every
+maze transition draw from the complete full-length OST before songs repeat.
+
+### Changed
+
+- The title screen now prepares its gentle harbour theme immediately and starts
+  it on the first tap, click, or key press permitted by browser autoplay rules.
+- Maze music uses a seeded shuffle bag rather than permanent per-maze song
+  assignments. All thirteen full tracks play once per cycle, revisiting a maze
+  advances the playlist, and immediate repeats are prevented across cycles and
+  when returning from the title screen or Adventure Book.
+- Soundtrack tests compare the runtime catalogue with the actual OST folder, so
+  a newly added full-length MP3 cannot be silently omitted from maze rotation.
+
 ## 0.16.0 - 2026-09-02
 
 This creature-personality and enchanted-places release makes the campaign feel
