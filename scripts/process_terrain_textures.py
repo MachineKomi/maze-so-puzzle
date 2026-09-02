@@ -31,11 +31,15 @@ TEXTURE_NAMES = (
     "floor-moon-slate-v1",
     "floor-meadow-grass-v1",
     "floor-woodland-dirt-v1",
+    "floor-pearl-shell-v1",
+    "floor-peach-leafstone-v1",
     "wall-v3",
     "wall-sandstone-v1",
     "wall-mossy-ruin-v1",
     "wall-dark-dungeon-v1",
     "wall-hedge-v1",
+    "wall-amethyst-crystal-v1",
+    "wall-berry-bramble-v1",
     "terrain-poison-v1",
 )
 

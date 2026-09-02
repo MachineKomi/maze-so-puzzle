@@ -289,7 +289,7 @@ describe("art preloading", () => {
     expect(loadedSources).toContain(ASSETS.rewardRescueMedal);
   });
 
-  it("loads Adventure Book art immediately and remains safe without Image", async () => {
+  it("loads only the Adventure Book opening shelf and remains safe without Image", async () => {
     const { ASSETS, preloadAchievementArt } = await import("./assets");
 
     preloadAchievementArt();
@@ -302,19 +302,14 @@ describe("art preloading", () => {
       ASSETS.animalFox,
       ASSETS.animalKitten,
       ASSETS.animalPuppy,
-      ASSETS.animalDuckling,
-      ASSETS.animalHedgehog,
-      ASSETS.animalFawn,
-      ASSETS.animalRedPanda,
-      ASSETS.animalOtter,
-      ASSETS.animalLamb,
-      ASSETS.animalCapybara,
       ASSETS.rewardTrailSticker,
       ASSETS.rewardBraveMedal,
       ASSETS.rewardSplashSticker,
       ASSETS.rewardRescueMedal,
     ]));
     expect(loadedSources).toHaveLength(new Set(loadedSources).size);
+    expect(loadedSources).not.toContain(ASSETS.animalCapybara);
+    expect(loadedSources).not.toContain(ASSETS.animalKoala);
 
     vi.resetModules();
     vi.stubGlobal("Image", undefined);

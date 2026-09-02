@@ -6,17 +6,44 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.15.0: `npm run check` passes 309 tests across 24 files plus strict
-TypeScript and the Vite production build. The moderate-level npm audit reports
-zero vulnerabilities; `npm ls` is clean, and locked Cargo compilation passes.
-Browser QA at 1280×720 desktop found the new visual catalogue readable without
-document overflow; all nine new asset URLs return HTTP 200, and the fixed stage
-retains the previously verified iPad composition.
+Status for 0.16.0: `npm run check` passes 311 tests across 25 files plus strict
+TypeScript and the Vite production build. The production JavaScript is 115.26 KB
+gzipped. The production-only npm audit reports zero vulnerabilities; `npm ls` is
+clean, and locked Cargo compilation passes. Browser QA at desktop, iPad, and
+phone aspect ratios found no overflow or console errors; all 15 Book portraits
+use asynchronous decoding and below-fold portraits use native lazy loading.
 The unsigned Windows portable and setup builds were built, hashed,
 byte-compared, versioned, and smoke-tested. Physical-device touch/listening/
 feel, accessibility, clean-machine installation, signing, and the broader
 manual play-through remain deliberately unclaimed. Earlier evidence is kept as
 historical release evidence.
+
+## 0.16.0 verification record
+
+- [x] Version 0.16.0 is aligned in npm, Cargo, Tauri, and the visible label.
+- [x] All 15 friend species, 12 enemy looks, and 12 terrain themes appear in the
+  authored campaign; exhaustive tests require a personality mapping for every
+  typed friend and enemy ID.
+- [x] Four new transparent character WebPs, four enemy WebPs, four seamless
+  terrain PNGs, and two transparent dressing PNGs pass their reproducible asset
+  processors and dimension/alpha/seam checks.
+- [x] Large-maze exploration mounts only camera-window objects. A 21×23 browser
+  sample mounted 7 visible object layers instead of all 19 level objects.
+- [x] Desktop, iPad, portrait-phone, and landscape-phone browser QA has no page
+  overflow or console warnings/errors. The 15-species Book grid remains crisp.
+- [x] `npm run check`: 311/311 tests pass across 25 files; strict TypeScript and
+  Vite production builds pass. `npm audit --omit=dev`: zero vulnerabilities;
+  `npm ls` and `cargo check --locked` pass.
+- [x] `Maze-so-Puzzle-0.16.0-portable.exe`: 92,971,008 bytes, file/product
+  version 0.16.0, SHA-256
+  `40349805178DE843C3C72FC941EC21DF0DFB1C2FDABE425A930BDE47BC2239AC`.
+- [x] `Maze-so-Puzzle-0.16.0-setup.exe`: 86,837,525 bytes, file/product version
+  0.16.0, SHA-256
+  `40DD871085A3F4031E132897FBD4B30FC77DC1799ED3BB587B24B1DF91493C62`.
+- [x] Both staged binaries byte-match the Tauri outputs. The portable app stayed
+  responsive for five seconds with the correct window title.
+- [ ] Clean-machine install, signing, and the complete physical-device campaign
+  remain owner/device checks.
 
 ## 0.15.0 verification record
 

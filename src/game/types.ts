@@ -34,6 +34,10 @@ export const ANIMAL_SPECIES = [
   "otter",
   "lamb",
   "capybara",
+  "chinchilla",
+  "alpaca",
+  "penguin",
+  "koala",
 ] as const;
 export type AnimalSpecies = (typeof ANIMAL_SPECIES)[number];
 export const ANIMALS_PER_LEVEL = 3;
@@ -49,6 +53,8 @@ export const TERRAIN_THEME_IDS = [
   "parade-courtyard",
   "springstep-hollow",
   "lantern-ruins",
+  "pearl-grotto",
+  "harvest-bramble",
 ] as const;
 export type TerrainThemeId = (typeof TERRAIN_THEME_IDS)[number];
 
@@ -73,6 +79,10 @@ export const ENEMY_STYLE_IDS = [
   "acorn-knight",
   "bubble-dragon",
   "candy-mimic",
+  "cloud-gremlin",
+  "pumpkin-sprite",
+  "clockwork-crab",
+  "jelly-sorcerer",
 ] as const;
 export type EnemyStyle = (typeof ENEMY_STYLE_IDS)[number];
 

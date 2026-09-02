@@ -73,8 +73,8 @@ state.
 16. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
     material periods, dominant-colour families, compatibility rules, and
     fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
-    catalogue contains ten compatible terrain themes, eight weapons, eight
-    friendly enemy looks, eleven pet species, four sparse AI-generated v4 cage
+    catalogue contains twelve compatible terrain themes, eleven weapons, twelve
+    friendly enemy looks, fifteen pet species, four sparse AI-generated v4 cage
     fronts, and dedicated Rose Heart, Blue Star, and Sunny Sun key/door pairs.
     Each lock pair exposes both child-readable colour and shape metadata. It
     also maps three paired-portal IDs to original transparent flower-pad art.
@@ -90,6 +90,10 @@ state.
     translated full-maze render surface. The 6 × 6 camera clips that world rather
     than rebuilding a different set of local tiles every step, so terrain,
     objects, portal hops, and edge-following movement remain spatially coherent.
+21. `src/game/visualPersonality.ts` exhaustively maps every rescue species and
+    enemy look to a lightweight CSS motion family, flourish glyph, and friendly
+    character trait. This keeps personality presentation typed and testable
+    without multiplying raster animation frames or network requests.
 
 ## Important boundaries
 
@@ -189,9 +193,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.15.0 source is shared by the web and Tauri build paths, and its automated
+- The 0.16.0 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.15.0, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.16.0, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
   five-second smoke launch with the correct title. The GitHub-connected Vercel
   production deployment is verified separately after each push. Clean-machine
@@ -218,11 +222,11 @@ selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.15.0 run covers 309 tests across 24 files; `npm run check` also
+solver. The 0.16.0 run covers 311 tests across 25 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.15.0.
+and portable launch smoke are complete for 0.16.0.
 
 ## Extension points
 

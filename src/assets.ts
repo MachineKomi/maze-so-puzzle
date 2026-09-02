@@ -63,6 +63,10 @@ export const ASSETS = {
   animalOtter: ANIMAL_ART.otter.src,
   animalLamb: ANIMAL_ART.lamb.src,
   animalCapybara: ANIMAL_ART.capybara.src,
+  animalChinchilla: ANIMAL_ART.chinchilla.src,
+  animalAlpaca: ANIMAL_ART.alpaca.src,
+  animalPenguin: ANIMAL_ART.penguin.src,
+  animalKoala: ANIMAL_ART.koala.src,
   animalCage: CAGE_ART[DEFAULT_CAGE_STYLE].src,
   cageStorybookWood: CAGE_ART["storybook-wood"].src,
   cageMoonSilver: CAGE_ART["moon-silver"].src,
@@ -81,6 +85,10 @@ export const ASSETS = {
   enemyAcornKnight: ENEMY_ART["acorn-knight"].src,
   enemyBubbleDragon: ENEMY_ART["bubble-dragon"].src,
   enemyCandyMimic: ENEMY_ART["candy-mimic"].src,
+  enemyCloudGremlin: ENEMY_ART["cloud-gremlin"].src,
+  enemyPumpkinSprite: ENEMY_ART["pumpkin-sprite"].src,
+  enemyClockworkCrab: ENEMY_ART["clockwork-crab"].src,
+  enemyJellySorcerer: ENEMY_ART["jelly-sorcerer"].src,
   coinPouch: "/assets/coin-pouch.png",
   treasureGoldBag: "/assets/coin-pouch.png",
   treasureGoldChest: "/assets/treasure-gold-chest-v1.webp",
@@ -139,9 +147,12 @@ const REWARD_ART = [
   ASSETS.rewardRescueMedal,
 ] as const;
 
-const ACHIEVEMENT_ART = [
+const ACHIEVEMENT_ABOVE_FOLD_ART = [
   ...REWARD_ART,
-  ...Object.values(ANIMAL_ART).map((art) => art.src),
+  ANIMAL_ART.bunny.src,
+  ANIMAL_ART.fox.src,
+  ANIMAL_ART.kitten.src,
+  ANIMAL_ART.puppy.src,
 ] as const;
 const preloadedSources = new Set<string>();
 let rewardPreloadScheduled = false;
@@ -245,7 +256,11 @@ export function preloadRewardArt(): void {
   preloadSources(REWARD_ART);
 }
 
-/** Warm the complete bitmap set used by the Adventure Book. */
+/**
+ * Warm only the Adventure Book's visible opening shelf. The remaining friend
+ * portraits use native lazy loading, so opening the book does not eagerly
+ * download the entire growing rescue catalogue on mobile.
+ */
 export function preloadAchievementArt(): void {
-  preloadSources(ACHIEVEMENT_ART);
+  preloadSources(ACHIEVEMENT_ABOVE_FOLD_ART);
 }

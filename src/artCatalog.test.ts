@@ -47,7 +47,7 @@ function sorted(values: readonly string[]): readonly string[] {
 
 function expectSpriteArt(entries: readonly SpriteArt[]): void {
   for (const entry of entries) {
-    expect(entry.src).toMatch(/^\/assets\/[a-z0-9-]+\.png$/);
+    expect(entry.src).toMatch(/^\/assets\/[a-z0-9-]+\.(?:png|webp)$/);
     expect(entry.label.trim().length).toBeGreaterThan(0);
   }
   expect(new Set(entries.map((entry) => entry.src)).size).toBe(entries.length);
@@ -171,17 +171,17 @@ describe("art catalog", () => {
       ).toBeGreaterThanOrEqual(MIN_TERRAIN_LIGHTNESS_DELTA);
     }
 
-    expect(new Set(TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].floor.src)).size).toBe(5);
+    expect(new Set(TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].floor.src)).size).toBe(7);
     const activeWalls = new Set<string>(
       TERRAIN_THEME_IDS.map((id) => TERRAIN_THEMES[id].wall.src),
     );
-    expect(activeWalls.size).toBe(4);
+    expect(activeWalls.size).toBe(6);
     expect(activeWalls.has("/assets/wall-sandstone-v1.png")).toBe(false);
     expect(new Set(TERRAIN_THEME_IDS.map((id) => {
       const theme = TERRAIN_THEMES[id];
       return `${theme.floor.src}|${theme.wall.src}`;
     })).size).toBe(TERRAIN_THEME_IDS.length);
-    expect(textureSources.size).toBe(9);
+    expect(textureSources.size).toBe(13);
   });
 
   it("gently lifts dark-dungeon walls instead of crushing their detail", () => {

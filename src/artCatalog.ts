@@ -146,6 +146,22 @@ const FLOORS = {
     dominantColor: "earth",
     visualLightness: 68,
   },
+  pearlShell: {
+    src: "/assets/floor-pearl-shell-v1.png",
+    label: "Pearl shell mosaic",
+    periodTiles: 4.1,
+    fallbackColor: "#cfe6eb",
+    dominantColor: "blue",
+    visualLightness: 83,
+  },
+  peachLeafstone: {
+    src: "/assets/floor-peach-leafstone-v1.png",
+    label: "Peach leaf-stone path",
+    periodTiles: 4.1,
+    fallbackColor: "#f5c6af",
+    dominantColor: "rose",
+    visualLightness: 81,
+  },
 } as const satisfies Readonly<Record<string, TerrainTextureArt>>;
 
 const WALLS = {
@@ -189,6 +205,22 @@ const WALLS = {
     dominantColor: "green",
     visualLightness: 60,
   },
+  amethystCrystal: {
+    src: "/assets/wall-amethyst-crystal-v1.png",
+    label: "Amethyst crystal wall",
+    periodTiles: 4.1,
+    fallbackColor: "#6d4a9b",
+    dominantColor: "violet",
+    visualLightness: 33,
+  },
+  berryBramble: {
+    src: "/assets/wall-berry-bramble-v1.png",
+    label: "Enchanted berry bramble",
+    periodTiles: 4.1,
+    fallbackColor: "#4c284d",
+    dominantColor: "indigo",
+    visualLightness: 21,
+  },
 } as const satisfies Readonly<Record<string, TerrainTextureArt>>;
 
 export const TERRAIN_DRESSING_ART = {
@@ -203,6 +235,18 @@ export const TERRAIN_DRESSING_ART = {
     label: "Soft ivy and moss",
     periodTiles: 13,
     opacity: 0.17,
+  },
+  crystal: {
+    src: "/assets/terrain-dressing-crystal-v1.png",
+    label: "Pearls and crystal glints",
+    periodTiles: 14,
+    opacity: 0.08,
+  },
+  autumn: {
+    src: "/assets/terrain-dressing-autumn-v1.png",
+    label: "Tiny leaves and acorn confetti",
+    periodTiles: 14,
+    opacity: 0.09,
   },
 } as const satisfies Readonly<Record<string, TerrainDressingArt>>;
 
@@ -290,6 +334,24 @@ export const TERRAIN_THEMES = {
     wallTreatment: { brightness: 1.13, saturation: 0.92, contrast: 0.95 },
     wallDressing: TERRAIN_DRESSING_ART.vines,
   },
+  "pearl-grotto": {
+    id: "pearl-grotto",
+    label: "Pearl Grotto",
+    floor: FLOORS.pearlShell,
+    wall: WALLS.amethystCrystal,
+    floorTreatment: { brightness: 1.02, saturation: 0.94, contrast: 0.98 },
+    wallTreatment: { brightness: 1.08, saturation: 0.96, contrast: 0.96 },
+    floorDressing: TERRAIN_DRESSING_ART.crystal,
+  },
+  "harvest-bramble": {
+    id: "harvest-bramble",
+    label: "Harvest Bramble",
+    floor: FLOORS.peachLeafstone,
+    wall: WALLS.berryBramble,
+    floorTreatment: { brightness: 1.01, saturation: 0.94, contrast: 0.98 },
+    wallTreatment: { brightness: 1.15, saturation: 0.92, contrast: 0.92 },
+    floorDressing: TERRAIN_DRESSING_ART.autumn,
+  },
 } as const satisfies Readonly<Record<TerrainThemeId, TerrainThemeArt>>;
 
 export const WEAPON_ART = {
@@ -312,6 +374,10 @@ export const ENEMY_ART = {
   "acorn-knight": { src: "/assets/enemy-acorn-knight-v1.png", label: "Acorn Knight" },
   "bubble-dragon": { src: "/assets/enemy-bubble-dragon-v1.png", label: "Bubble Dragon" },
   "candy-mimic": { src: "/assets/enemy-candy-mimic-v1.png", label: "Candy Mimic" },
+  "cloud-gremlin": { src: "/assets/enemy-cloud-gremlin-v1.webp", label: "Cloud Gremlin" },
+  "pumpkin-sprite": { src: "/assets/enemy-pumpkin-sprite-v1.webp", label: "Pumpkin Sprite" },
+  "clockwork-crab": { src: "/assets/enemy-clockwork-crab-v1.webp", label: "Clockwork Crab" },
+  "jelly-sorcerer": { src: "/assets/enemy-jelly-sorcerer-v1.webp", label: "Jelly Sorcerer" },
 } as const satisfies Readonly<Record<EnemyStyle, SpriteArt>>;
 
 export const ANIMAL_ART = {
@@ -326,6 +392,10 @@ export const ANIMAL_ART = {
   otter: { src: "/assets/animal-otter-v1.png", label: "Otter" },
   lamb: { src: "/assets/animal-lamb-v1.png", label: "Lamb" },
   capybara: { src: "/assets/animal-capybara-v1.png", label: "Capybara" },
+  chinchilla: { src: "/assets/animal-chinchilla-v1.webp", label: "Chinchilla" },
+  alpaca: { src: "/assets/animal-alpaca-v1.webp", label: "Alpaca" },
+  penguin: { src: "/assets/animal-penguin-v1.webp", label: "Penguin" },
+  koala: { src: "/assets/animal-koala-v1.webp", label: "Koala" },
 } as const satisfies Readonly<Record<AnimalSpecies, SpriteArt>>;
 
 export const CAGE_ART = {

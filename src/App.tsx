@@ -53,6 +53,7 @@ import {
   type TileKey,
 } from "./game/exploration";
 import { getVisibleFollowerPoints, recordFollowerStep } from "./game/followerTrail";
+import { animalPersonality, enemyPersonality } from "./game/visualPersonality";
 import {
   ANIMAL_SPECIES,
   DIRECTION_DELTAS,
@@ -151,6 +152,10 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   otter: "Otter",
   lamb: "Lamb",
   capybara: "Capybara",
+  chinchilla: "Chinchilla",
+  alpaca: "Alpaca",
+  penguin: "Penguin",
+  koala: "Koala",
 };
 
 const STORY_SPEAKER_LABELS: Readonly<Record<StorySpeaker, string>> = {
@@ -170,7 +175,7 @@ const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.15.0";
+const BUILD_VERSION = "0.16.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -1234,8 +1239,11 @@ function App() {
     [game, level],
   );
   const worldObjects = useMemo(
-    () => activeObjects.filter((object) => object.id !== battlePresentation?.objectId),
-    [activeObjects, battlePresentation?.objectId],
+    () => activeObjects.filter((object) => (
+      object.id !== battlePresentation?.objectId
+      && (!explorationMode || isInsideWindow(object.at, cameraWindow))
+    )),
+    [activeObjects, battlePresentation?.objectId, cameraWindow, explorationMode],
   );
   const animalObjects = useMemo(
     () => level.objects.filter(
@@ -2550,6 +2558,7 @@ function App() {
             <div
               ref={boardRef}
               className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}${portalPresentation ? " portal-active" : ""}`}
+              data-terrain-theme={terrainTheme.id}
               style={{
                 gridTemplateColumns: `repeat(${cameraWindow.width}, minmax(0, 1fr))`,
                 gridTemplateRows: `repeat(${cameraWindow.height}, minmax(0, 1fr))`,
@@ -2582,11 +2591,21 @@ function App() {
                 {worldObjects.map((object) => (
                   <div
                     className={`object-layer object-kind-${object.kind}${object.at.y === cameraWindow.top ? " camera-edge-top" : ""}`}
+                    data-animal-motion={object.kind === "animal" ? animalPersonality(object.species).motion : undefined}
+                    data-flourish={object.kind === "animal"
+                      ? animalPersonality(object.species).flourish
+                      : object.kind === "enemy"
+                        ? enemyPersonality(object.style).flourish
+                        : undefined}
+                    data-enemy-motion={object.kind === "enemy" ? enemyPersonality(object.style).motion : undefined}
                     key={object.id}
                     style={worldLayerStyle(object.at, level)}
                   >
                     {object.kind === "animal" ? (
-                      <div className="animal-stack">
+                      <div
+                        className="animal-stack"
+                        data-flourish={animalPersonality(object.species).flourish}
+                      >
                         <img className="animal-sprite" src={animalArt(object.species)} alt="" draggable={false} />
                         <img className="animal-cage" src={resolveCageArt(object.cageStyle).src} alt="" draggable={false} />
                       </div>
@@ -2610,6 +2629,8 @@ function App() {
                     {followerPlacements.map(({ animal, point }) => (
                       <div
                         className="pet-follower"
+                        data-animal-motion={animalPersonality(animal.species).motion}
+                        data-flourish={animalPersonality(animal.species).flourish}
                         style={worldLayerStyle(point, level)}
                         key={animal.id}
                       >
@@ -2701,6 +2722,8 @@ function App() {
               {rescuePresentation && isInsideWindow(rescuePresentation.at, cameraWindow) && (
                 <div
                   className="rescue-presentation"
+                  data-animal-motion={animalPersonality(rescuePresentation.species).motion}
+                  data-flourish={animalPersonality(rescuePresentation.species).flourish}
                   data-sfx-cue="cage-pop-and-friend-cheer"
                   style={cameraLayerStyle(rescuePresentation.at, cameraWindow)}
                   aria-hidden="true"
@@ -2872,7 +2895,7 @@ function App() {
                       return (
                         <div className={`rescue-friend ${rescued ? "rescued" : ""}`} key={animal.id} aria-label={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`} title={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`}>
                           <div className="rescue-icon">
-                            <img src={animalArt(animal.species)} alt="" />
+                            <img src={animalArt(animal.species)} alt="" decoding="async" />
                             {!rescued && <img className="cage-mini" src={resolveCageArt(animal.cageStyle).src} alt="" />}
                           </div>
                         </div>
@@ -3007,9 +3030,15 @@ function App() {
               {animalObjects.map((animal) => {
                 const rescued = completion.rescuedSpecies.includes(animal.species);
                 return (
-                  <div className={`rescued-result ${rescued ? "rescued" : ""}`} key={animal.id}>
-                    <img src={animalArt(animal.species)} alt={ANIMAL_LABELS[animal.species]} />
-                    <span>{rescued ? "Safe!" : "Next time"}</span>
+                  <div
+                    className={`rescued-result ${rescued ? "rescued" : ""}`}
+                    data-animal-motion={animalPersonality(animal.species).motion}
+                    data-flourish={animalPersonality(animal.species).flourish}
+                    key={animal.id}
+                    title={animalPersonality(animal.species).greeting}
+                  >
+                    <img src={animalArt(animal.species)} alt={ANIMAL_LABELS[animal.species]} decoding="async" />
+                    <span>{rescued ? animalPersonality(animal.species).greeting : "Next time"}</span>
                   </div>
                 );
               })}
@@ -3394,7 +3423,7 @@ function AchievementsScreen({
           <div className="friend-ledger-grid">
             {ANIMAL_SPECIES.map((species) => (
               <article key={species}>
-                <img src={animalArt(species)} alt="" />
+                <img src={animalArt(species)} alt="" loading="lazy" decoding="async" />
                 <span><strong>{ANIMAL_LABELS[species]}</strong><b>{progress.rescuesBySpecies[species]}</b><small>recorded rescues</small></span>
               </article>
             ))}
@@ -3460,6 +3489,8 @@ function AchievementsScreen({
                         key={species}
                         src={animalArt(species)}
                         alt=""
+                        loading="lazy"
+                        decoding="async"
                       />
                     ))}
                   </span>

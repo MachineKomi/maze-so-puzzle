@@ -431,12 +431,12 @@ describe("curated campaign levels", () => {
       "parade-courtyard",
       "springstep-hollow",
       "lantern-ruins",
-      "parade-courtyard",
+      "pearl-grotto",
       "moonbeam-castle",
       "rose-courtyard",
       "springstep-hollow",
       "moonbeam-castle",
-      "star-garden",
+      "harvest-bramble",
     ]);
     expect(
       [...new Set(CURATED_LEVELS.map((level) => level.terrainThemeId))].sort(),

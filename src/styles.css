@@ -1087,6 +1087,156 @@ button:focus-visible,
 }
 
 /* --------------------------------------------------------------------------
+   V16.0 creature personalities, themed ambience, and lightweight flourishes
+   -------------------------------------------------------------------------- */
+
+/* Large exploration mazes mount only the six-by-six camera's objects. These
+   inexpensive transform animations therefore never keep offscreen creatures
+   repainting while the player explores a 24-by-24 world. */
+.object-kind-animal .animal-sprite,
+.pet-follower > img,
+.rescued-result img {
+  transform-origin: 50% 88%;
+}
+
+.object-kind-animal[data-animal-motion="hop"] .animal-sprite,
+.pet-follower[data-animal-motion="hop"] > img,
+.rescued-result[data-animal-motion="hop"].rescued img { animation: friend-motion-hop 1.02s ease-in-out infinite; }
+.object-kind-animal[data-animal-motion="waddle"] .animal-sprite,
+.pet-follower[data-animal-motion="waddle"] > img,
+.rescued-result[data-animal-motion="waddle"].rescued img { animation: friend-motion-waddle 1.08s ease-in-out infinite; }
+.object-kind-animal[data-animal-motion="prance"] .animal-sprite,
+.pet-follower[data-animal-motion="prance"] > img,
+.rescued-result[data-animal-motion="prance"].rescued img { animation: friend-motion-prance 1.16s cubic-bezier(.35,.05,.45,1) infinite; }
+.object-kind-animal[data-animal-motion="sway"] .animal-sprite,
+.pet-follower[data-animal-motion="sway"] > img,
+.rescued-result[data-animal-motion="sway"].rescued img { animation: friend-motion-sway 1.28s ease-in-out infinite; }
+.object-kind-animal[data-animal-motion="snuggle"] .animal-sprite,
+.pet-follower[data-animal-motion="snuggle"] > img,
+.rescued-result[data-animal-motion="snuggle"].rescued img { animation: friend-motion-snuggle 1.46s ease-in-out infinite; }
+.object-kind-animal[data-animal-motion="scamper"] .animal-sprite,
+.pet-follower[data-animal-motion="scamper"] > img,
+.rescued-result[data-animal-motion="scamper"].rescued img { animation: friend-motion-scamper 1.12s ease-in-out infinite; }
+
+.pet-follower::after,
+.animal-stack::after,
+.rescue-presentation::after {
+  position: absolute;
+  z-index: 7;
+  top: 4%;
+  right: 5%;
+  color: #fff5b9;
+  content: attr(data-flourish);
+  font-size: clamp(8px, calc(18cqw / var(--grid-size, 13)), 16px);
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 4px #fff, 0 1px 3px rgba(112, 76, 128, .55);
+  animation: friend-flourish-pop 1.62s ease-in-out infinite;
+}
+
+.animal-stack::after { content: attr(data-flourish); }
+.object-kind-animal .animal-stack::after { content: attr(data-flourish); }
+.object-kind-animal[data-flourish] .animal-stack::after { content: attr(data-flourish); }
+.rescue-presentation::after {
+  top: -14%;
+  right: -7%;
+  content: attr(data-flourish);
+  font-size: clamp(15px, 5cqw, 34px);
+  animation-duration: 820ms;
+  animation-iteration-count: 1;
+}
+
+@keyframes friend-motion-hop {
+  0%,100% { transform: translateY(0) rotate(-1deg) scale(1); }
+  46% { transform: translateY(-9%) rotate(2deg) scale(1.03,.98); }
+  64% { transform: translateY(0) scale(.98,1.03); }
+}
+@keyframes friend-motion-waddle {
+  0%,100% { transform: translateY(0) rotate(-4deg); }
+  30% { transform: translateY(-3%) rotate(4deg); }
+  62% { transform: translateY(0) rotate(-3deg); }
+}
+@keyframes friend-motion-prance {
+  0%,100% { transform: translate(0,0) rotate(-2deg); }
+  28% { transform: translate(-2%,-7%) rotate(3deg); }
+  56% { transform: translate(2%,0) rotate(-1deg); }
+  76% { transform: translate(1%,-5%) rotate(2deg); }
+}
+@keyframes friend-motion-sway {
+  0%,100% { transform: rotate(-3deg); }
+  50% { transform: translateY(-3%) rotate(4deg); }
+}
+@keyframes friend-motion-snuggle {
+  0%,100% { transform: scale(1); }
+  45% { transform: translateY(1%) scale(1.035,.97); }
+  72% { transform: translateY(-2%) scale(.99,1.025); }
+}
+@keyframes friend-motion-scamper {
+  0%,100% { transform: translateX(-2%) rotate(-2deg); }
+  34% { transform: translate(3%,-5%) rotate(3deg); }
+  66% { transform: translate(-1%,0) rotate(-1deg); }
+}
+@keyframes friend-flourish-pop {
+  0%,64%,100% { opacity: 0; transform: translateY(5px) rotate(-10deg) scale(.55); }
+  74% { opacity: .9; transform: translateY(-2px) rotate(7deg) scale(1.12); }
+  90% { opacity: 0; transform: translateY(-11px) rotate(12deg) scale(.86); }
+}
+
+.object-kind-enemy[data-enemy-motion] .object-enemy { transform-origin: 50% 92%; }
+.object-kind-enemy[data-enemy-motion="squish"] .object-enemy { animation: enemy-motion-squish 1.32s ease-in-out infinite; }
+.object-kind-enemy[data-enemy-motion="flutter"] .object-enemy { animation: enemy-motion-flutter 1.08s ease-in-out infinite; }
+.object-kind-enemy[data-enemy-motion="stomp"] .object-enemy { animation: enemy-motion-stomp 1.42s ease-in-out infinite; }
+.object-kind-enemy[data-enemy-motion="skitter"] .object-enemy { animation: enemy-motion-skitter .94s ease-in-out infinite; }
+.object-kind-enemy[data-enemy-motion="swagger"] .object-enemy { animation: enemy-motion-swagger 1.48s ease-in-out infinite; }
+.object-kind-enemy[data-enemy-motion="bob"] .object-enemy { animation: enemy-motion-bob 1.36s ease-in-out infinite; }
+.object-kind-enemy[data-enemy-motion="hop"] .object-enemy { animation: enemy-motion-hop 1.08s ease-in-out infinite; }
+
+@keyframes enemy-motion-squish { 0%,100%{transform:translateX(-50%) scale(1)} 50%{transform:translateX(-50%) translateY(3%) scale(1.055,.92)} }
+@keyframes enemy-motion-flutter { 0%,100%{transform:translateX(-50%) translateY(1%) rotate(-2deg)} 50%{transform:translateX(-50%) translateY(-8%) rotate(3deg)} }
+@keyframes enemy-motion-stomp { 0%,100%{transform:translateX(-50%) scale(1)} 36%{transform:translateX(-50%) translateY(-3%) rotate(-1deg)} 51%{transform:translateX(-50%) translateY(2%) scale(1.04,.96)} }
+@keyframes enemy-motion-skitter { 0%,100%{transform:translateX(-52%) rotate(-2deg)} 50%{transform:translateX(-46%) rotate(2deg)} }
+@keyframes enemy-motion-swagger { 0%,100%{transform:translateX(-50%) rotate(-3deg)} 50%{transform:translateX(-50%) translateY(-4%) rotate(3deg)} }
+@keyframes enemy-motion-bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6%) scale(1.02)} }
+@keyframes enemy-motion-hop { 0%,100%{transform:translateX(-50%) translateY(0)} 44%{transform:translateX(-50%) translateY(-9%) rotate(3deg)} 63%{transform:translateX(-50%) scale(1.03,.96)} }
+
+/* Theme ambience is a single composited text layer, rather than a DOM particle
+   system. It adds life without downloads, timers, or per-frame React work. */
+.maze-board[data-terrain-theme="pearl-grotto"]::after,
+.maze-board[data-terrain-theme="harvest-bramble"]::after {
+  position: absolute;
+  z-index: 18;
+  top: 9%;
+  right: 7%;
+  width: 30%;
+  color: rgba(255,255,255,.66);
+  content: "✦　·　✧";
+  font-size: clamp(9px, 1.6cqw, 20px);
+  letter-spacing: .45em;
+  text-align: right;
+  pointer-events: none;
+  text-shadow: 0 0 7px rgba(203,170,255,.78);
+  animation: terrain-ambient-drift 4.4s ease-in-out infinite;
+}
+.maze-board[data-terrain-theme="harvest-bramble"]::after {
+  color: rgba(255,226,184,.72);
+  content: "❀　·　✦";
+  text-shadow: 0 0 7px rgba(255,154,143,.62);
+}
+@keyframes terrain-ambient-drift { 0%,100%{opacity:.36;transform:translate(0,3px)} 50%{opacity:.9;transform:translate(-7px,-7px)} }
+
+@media (prefers-reduced-motion: reduce) {
+  .object-kind-animal .animal-sprite,
+  .pet-follower > img,
+  .rescued-result img,
+  .object-kind-enemy .object-enemy,
+  .pet-follower::after,
+  .animal-stack::after,
+  .rescue-presentation::after,
+  .maze-board[data-terrain-theme]::after { animation: none !important; }
+}
+
+/* --------------------------------------------------------------------------
    V13 read-together story and puzzle-thinking polish
    -------------------------------------------------------------------------- */
 

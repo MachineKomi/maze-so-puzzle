@@ -23,6 +23,14 @@ ASSETS = (
         ROOT / "docs/source-assets/terrain-dressing-vines-v1-master.png",
         ROOT / "public/assets/terrain-dressing-vines-v1.png",
     ),
+    (
+        ROOT / "docs/source-assets/terrain-dressing-crystal-v1-master.png",
+        ROOT / "public/assets/terrain-dressing-crystal-v1.png",
+    ),
+    (
+        ROOT / "docs/source-assets/terrain-dressing-autumn-v1-master.png",
+        ROOT / "public/assets/terrain-dressing-autumn-v1.png",
+    ),
 )
 RUNTIME_SIZE = (512, 512)
 

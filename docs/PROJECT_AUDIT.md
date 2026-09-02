@@ -1,39 +1,38 @@
 # Project audit
 
 Audit date: 2026-09-02
-Audited build: 0.15.0 web/Windows playable release
+Audited build: 0.16.0 web/Windows playable release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-02 the integrated 0.15.0 suite passed 309 tests
-across 24 files plus strict TypeScript and the Vite production build. The npm
-moderate-level audit reports zero vulnerabilities; `npm ls` is clean, and
-`cargo check --locked` passes. Browser QA at desktop 1280 × 720 found the new
-Comet Spear presentation readable with no document overflow, while the fixed
-stage retains the previously verified iPad contract. All nine new production
-sprite URLs return HTTP 200. Unsigned 0.15.0 portable and setup artifacts were built and
+real-device testing. On 2026-09-02 the integrated 0.16.0 suite passed 311 tests
+across 25 files plus strict TypeScript and the Vite production build. The npm
+production audit reports zero vulnerabilities; `npm ls` is clean, and
+`cargo check --locked` passes. Browser QA at desktop, iPad, and phone aspect
+ratios found the expanded catalogue readable with no document overflow or
+console errors. Unsigned 0.16.0 portable and setup artifacts were built and
 byte-verified, and the portable executable passed a five-second launch smoke.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
-## Current 0.15.0 release status
+## Current 0.16.0 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 309 tests across 24 files and completed the production build |
+| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 311 tests across 25 files; production JavaScript is 115.26 KB gzipped |
 | Dependencies | JavaScript dependency vulnerability and tree review | `npm audit --audit-level=moderate` reports zero vulnerabilities; `npm ls` is clean |
 | Desktop compile | Locked Rust/Tauri dependency graph | `cargo check --locked` passed |
 | Absolute size policy | Shared solver validation and procedural dimension selection | Every board above 24×24 is rejected; odd generated topology ranges from 9×9 through 23×23 |
 | Room-based design | Later Surprise Mazes plus rebuilt Lanternlight Labyrinth | 2×2–4×4 procedural rooms cluster treasure, rescues and Power-gated guardians; Lanternlight is 23×23 with a five-object monster/treasure chamber |
 | Hole-gate variety | Engine event paths, generated gates, and authored routes | One-, two-, and three-hole straight jumps are all covered; Lanternlight adds a four-way centre-hole junction, and longer jumps scale duration/height without changing engine movement |
-| Sprite variety | Typed art catalogues plus nine new transparent runtime PNGs | Eleven friends, eight enemies, and eight weapons are available; every new 512×512 asset returns HTTP 200 in production preview |
+| Visual variety | Typed art and personality catalogues plus fourteen new runtime assets | Fifteen friends, twelve enemies, and twelve terrain themes are represented in the authored campaign; new character WebPs retain transparent 512×512 masters |
 | Procedural records | Maze Select and Adventure Book | Copy explicitly identifies fresh seeded generation; the Book keeps up to six recent record cards rather than presenting an infinite fixed list |
-| Responsive browser QA | Desktop 1280×720 and iPad 1024×768 | Lanternlight, the scrapbook and fixed stage fit without document overflow; browser warning/error logs are empty |
+| Responsive browser QA | Desktop, iPad, portrait phone, and landscape phone | Fixed stage and Book fit without overflow; browser warning/error logs are empty; large-maze object mounting is camera-scoped |
 | Hosting | GitHub `main` commit `42775f7` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Auto-deployed successfully; the canonical title reports 0.15.0, its tester lists all 16 story mazes, the 1280×720 document is viewport-exact, and all nine new sprite URLs return HTTP 200 |
-| Desktop artifacts | Unsigned 0.15.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+| Desktop artifacts | Unsigned 0.16.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
 
 ## Historical 0.14.0 release status
 

@@ -3,19 +3,19 @@
 This folder documents convenience copies of Windows x64 artifacts staged for
 local play testing. Executables are deliberately excluded from source history;
 publish the current pair as GitHub Release assets when a downloadable desktop
-build is wanted. Version 0.15.0 is the current verified Windows test build. Its
+build is wanted. Version 0.16.0 is the current verified Windows test build. Its
 Tauri build, staging, portable smoke launch, source-to-stage comparison, and
 hashes completed successfully on 2026-09-02.
 
-## Current 0.15.0 test files
+## Current 0.16.0 test files
 
-- `Maze-so-Puzzle-0.15.0-portable.exe` - standalone application executable,
-  87,775,744 bytes. It remained running and responsive with the correct title in
+- `Maze-so-Puzzle-0.16.0-portable.exe` - standalone application executable,
+  92,971,008 bytes. It remained running and responsive with the correct title in
   a five-second local smoke launch.
-- `Maze-so-Puzzle-0.15.0-setup.exe` - NSIS installer, 81,614,537 bytes. It was
+- `Maze-so-Puzzle-0.16.0-setup.exe` - NSIS installer, 86,837,525 bytes. It was
   built and staged but has not been clean-machine installed during this pass.
 
-`SHA256SUMS.txt` contains their staged hashes plus retained 0.14.0, 0.13.0, 0.12.0, 0.11.0, 0.10.3, 0.10.2, 0.10.1, 0.10.0, 0.9.1, 0.9.0, 0.8.0, 0.7.1, 0.5.1,
+`SHA256SUMS.txt` contains their staged hashes plus retained 0.15.0, 0.14.0, 0.13.0, 0.12.0, 0.11.0, 0.10.3, 0.10.2, 0.10.1, 0.10.0, 0.9.1, 0.9.0, 0.8.0, 0.7.1, 0.5.1,
 0.5.0, 0.4.0, 0.3.0, and 0.2.0 archive hashes. The current files include the locally
 bundled soundtrack.
 The staged files match their final Tauri build sources byte-for-byte.

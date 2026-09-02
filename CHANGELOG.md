@@ -4,6 +4,37 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.16.0 - 2026-09-02
+
+This creature-personality and enchanted-places release makes the campaign feel
+more alive while reducing the amount of off-screen artwork mounted and eagerly
+loaded by the web build.
+
+### Added
+
+- Four rescue friends: Chinchilla, Alpaca, Penguin, and Koala, each with a
+  species-appropriate hop, waddle, prance, sway, snuggle, or scamper personality
+  shared by the cage, follower, rescue, victory, and Adventure Book views.
+- Four friendly foes: Cloud Gremlin, Pumpkin Sprite, Clockwork Crab, and Jelly
+  Sorcerer, with their own flutter, hop, skitter, and squish idle flourishes.
+- Pearl Grotto and Harvest Bramble terrain themes, including seamless pearl,
+  amethyst, peach leafstone, and berry-bramble materials plus sparse crystal and
+  autumn set dressing.
+- Exhaustive catalogue tests which keep every friend and enemy personality
+  mapped when new visual IDs are introduced.
+
+### Changed
+
+- The authored campaign now showcases every one of its 15 rescue species, 12
+  enemy looks, and 12 compatible terrain themes.
+- Large-maze exploration mounts only objects within the visible camera window;
+  the full maze model and minimap remain intact while off-screen sprite nodes no
+  longer consume browser layout and painting work.
+- The Adventure Book warms only its opening shelf and uses native lazy loading
+  and asynchronous decoding for the rest of its friend portraits.
+- New character art is shipped as transparent 512 x 512 lossless WebP, while
+  repeatable terrain and dressing processors retain crisp 512 x 512 sources.
+
 ## 0.15.0 - 2026-09-02
 
 This spring-jump variety release makes hole puzzles less predictable and adds

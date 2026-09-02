@@ -914,3 +914,109 @@ Capybara exports contained a rendered pale checkerboard rather than alpha; the
 script removes only edge-connected neutral background pixels and softly
 antialiases the resulting cut-out. The other seven exports preserve their
 original generated alpha.
+
+## Build 0.16.0: living friends and enchanted places
+
+Build 0.16.0 used the built-in OpenAI ImageGen workflow in
+`stylized-concept` mode (not the fallback CLI). Every sprite was generated as a
+separate call. Existing Otter/Lamb, Acorn Knight, terrain, and dressing assets
+were supplied only as style references; none were composited into the outputs.
+
+### Friend prompt set
+
+```text
+Use case: stylized-concept. Create one production-ready transparent 1:1 game
+sprite of <FRIEND>. Match the supplied rescue-friend references only for polish,
+proportions, line quality, soft dimensional shading, and chunky child-friendly
+anime fantasy JRPG style. Exactly one complete animal, front three-quarter view,
+centred, generous transparent padding, strong silhouette readable in a small
+square tile. Lovely clean dark-plum linework, soft pastel colour, warm magical
+studio highlights, sweet expressive face, tiny personality-rich pose. Genuine
+transparent RGBA background and softly antialiased edges. Avoid cage, scenery,
+floor, cast shadow, frame, text, watermark, duplicate animal, cropped parts,
+photorealism, or frightening details.
+```
+
+`<FRIEND>` substitutions:
+
+- Chinchilla: a silver-grey baby chinchilla with huge rounded ears, plush round
+  cheeks, pink paws, a curled fluffy tail, and coral star neckerchief.
+- Alpaca: a cream baby alpaca with cloudlike fleece, long neck, rosy cheeks,
+  violet eyes, and a mint bow with a tiny gold bell.
+- Penguin: a round charcoal-and-cream penguin chick with stubby flippers,
+  orange feet, blue eyes, and a lavender snowflake scarf.
+- Koala: a seated mist-grey baby koala with fluffy ears, gentle eyes, peach
+  inner ears, a eucalyptus sprig, and sunny-yellow neckerchief.
+
+### Enemy prompt set
+
+```text
+Use case: stylized-concept. Create one production-ready transparent 1:1 enemy
+game sprite of <ENEMY>. Match the supplied Acorn Knight reference only for
+polish, proportions, line quality, soft dimensional shading, and chunky
+child-friendly anime fantasy JRPG style. Exactly one complete tiny creature,
+front three-quarter view, centred with transparent padding; playful, cheeky and
+safe for a five-year-old, never scary. Clean dark-plum linework, toy-like rounded
+forms, pastel fantasy colours, readable silhouette, expressive action pose,
+genuine transparent RGBA background. Avoid scenery, ground, cast shadow, frame,
+text, number, logo, watermark, duplicate creature, cropped parts, blood,
+weapons aimed at camera, horror, or photorealism.
+```
+
+`<ENEMY>` substitutions:
+
+- Cloud Gremlin: a tiny periwinkle cloud gremlin with puffy cloud ears, a curled
+  mist tail, gold star freckles, mitten paws, and a windy delighted grin.
+- Pumpkin Sprite: a tiny round apricot pumpkin sprite with a leafy cap, curled
+  vine arms, little boots, rosy cheeks, and a mischievous harvest grin.
+- Clockwork Crab: a toy-like coral-and-turquoise clockwork crab with rounded
+  harmless claws, brass gears, a wind-up key, jewel eyes, and a proud stance.
+- Jelly Sorcerer: a translucent lavender jelly sorcerer with a floppy teal star
+  hat, tiny wand, rounded jelly feet, sparkly bubbles, and an impish smile.
+
+### Terrain and dressing prompt set
+
+All terrain calls used: `seamless square 1:1 orthographic game texture, no
+perspective, no border, no objects, no text, edges tile perfectly, soft pastel
+hand-painted chunky fantasy JRPG material, readable at small scale, even light`.
+The exact material subjects were:
+
+- Pearl shell floor: small interlocking ivory, blush, and pale-aqua shell-stone
+  pavers with subtle pearl glints and fine grout.
+- Amethyst crystal wall: rounded lavender and deep-plum crystal blocks with soft
+  violet facets, dark readable mortar, and gentle edge highlights.
+- Peach leafstone floor: small warm peach and cream leaf-shaped stone pavers,
+  pale grout, and occasional muted coral petals.
+- Berry bramble wall: rounded dusty-berry masonry woven with sparse mauve
+  brambles, tiny rose hips, deep plum joints, and no bright green foliage.
+
+Both dressing calls used: `one sparse transparent 1:1 orthographic overlay sheet,
+genuine RGBA, details isolated with generous empty space, no base texture, no
+border, no text, no cast shadow, suitable for quiet repeated set dressing`.
+Crystal dressing requested tiny pale-violet crystal chips, pearl glints, and
+star dust; autumn dressing requested coral petals, muted berry leaves, tiny rose
+hips, and gold specks.
+
+### Generated and saved files
+
+| Asset | Built-in output | Archived master | Runtime |
+| --- | --- | --- | --- |
+| Chinchilla | `exec-5dc0e838-4bfc-4f8e-b617-00bec9ffe79a.png` | `docs/source-assets/animal-chinchilla-v1-master.png` | `public/assets/animal-chinchilla-v1.webp` |
+| Alpaca | `exec-0a1e2e47-8f45-4f57-9c46-0e8eaabd9ef2.png` | `docs/source-assets/animal-alpaca-v1-master.png` | `public/assets/animal-alpaca-v1.webp` |
+| Penguin | `exec-57840d2f-9524-4aee-a7ba-f35b160b13dd.png` | `docs/source-assets/animal-penguin-v1-master.png` | `public/assets/animal-penguin-v1.webp` |
+| Koala | `exec-62685adc-87de-4d5a-9616-a4acfdeb18b6.png` | `docs/source-assets/animal-koala-v1-master.png` | `public/assets/animal-koala-v1.webp` |
+| Cloud Gremlin | `exec-ce7d9308-c0b6-4ba4-8838-16e352f063cc.png` | `docs/source-assets/enemy-cloud-gremlin-v1-master.png` | `public/assets/enemy-cloud-gremlin-v1.webp` |
+| Pumpkin Sprite | `exec-4431dd4f-f35d-4006-897f-06ca7702f539.png` | `docs/source-assets/enemy-pumpkin-sprite-v1-master.png` | `public/assets/enemy-pumpkin-sprite-v1.webp` |
+| Clockwork Crab | `exec-39ad8202-37d0-47de-85f9-b738e021be6a.png` | `docs/source-assets/enemy-clockwork-crab-v1-master.png` | `public/assets/enemy-clockwork-crab-v1.webp` |
+| Jelly Sorcerer | `exec-e98b62d2-0c64-4462-945b-10093bf3f047.png` | `docs/source-assets/enemy-jelly-sorcerer-v1-master.png` | `public/assets/enemy-jelly-sorcerer-v1.webp` |
+| Pearl shell floor | `exec-dab1b7bb-4106-405e-a8c8-ba1ac22c8bcf.png` | `docs/source-assets/floor-pearl-shell-v1-master.png` | `public/assets/floor-pearl-shell-v1.png` |
+| Amethyst crystal wall | `exec-d6cc7d1e-b441-41b9-8f11-4a25d113d94d.png` | `docs/source-assets/wall-amethyst-crystal-v1-master.png` | `public/assets/wall-amethyst-crystal-v1.png` |
+| Peach leafstone floor | `exec-d468d3c8-d9b2-4c16-ab5e-f9e6d2495bce.png` | `docs/source-assets/floor-peach-leafstone-v1-master.png` | `public/assets/floor-peach-leafstone-v1.png` |
+| Berry bramble wall | `exec-4e55ce83-6c43-482e-b7ec-97f2280c5cee.png` | `docs/source-assets/wall-berry-bramble-v1-master.png` | `public/assets/wall-berry-bramble-v1.png` |
+| Crystal dressing | `exec-5b660b52-632e-427f-bd7b-6bfed0d54d29.png` | `docs/source-assets/terrain-dressing-crystal-v1-master.png` | `public/assets/terrain-dressing-crystal-v1.png` |
+| Autumn dressing | `exec-3310f2e7-3f66-4671-94ab-2bfc22c7b28c.png` | `docs/source-assets/terrain-dressing-autumn-v1-master.png` | `public/assets/terrain-dressing-autumn-v1.png` |
+
+`scripts/process_v16_variety_assets.py` creates the transparent lossless 512 x
+512 WebP character files and removes only the Alpaca export's edge-connected
+neutral checker. The existing Poisson seam processor creates the four repeatable
+terrain PNGs, and the dressing processor creates transparent 512 x 512 overlays.
