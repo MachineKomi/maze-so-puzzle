@@ -408,7 +408,7 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.15.0 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.16.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

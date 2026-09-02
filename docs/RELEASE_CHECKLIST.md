@@ -31,6 +31,9 @@ historical release evidence.
   sample mounted 7 visible object layers instead of all 19 level objects.
 - [x] Desktop, iPad, portrait-phone, and landscape-phone browser QA has no page
   overflow or console warnings/errors. The 15-species Book grid remains crisp.
+- [x] GitHub `main` commit `496edbb` auto-deployed through Vercel. The canonical
+  JavaScript reports 0.16.0 and all fourteen new runtime assets return HTTP 200
+  with the expected WebP/PNG content types and exact byte sizes.
 - [x] `npm run check`: 311/311 tests pass across 25 files; strict TypeScript and
   Vite production builds pass. `npm audit --omit=dev`: zero vulnerabilities;
   `npm ls` and `cargo check --locked` pass.

@@ -31,29 +31,29 @@ historical evidence.
 | Visual variety | Typed art and personality catalogues plus fourteen new runtime assets | Fifteen friends, twelve enemies, and twelve terrain themes are represented in the authored campaign; new character WebPs retain transparent 512×512 masters |
 | Procedural records | Maze Select and Adventure Book | Copy explicitly identifies fresh seeded generation; the Book keeps up to six recent record cards rather than presenting an infinite fixed list |
 | Responsive browser QA | Desktop, iPad, portrait phone, and landscape phone | Fixed stage and Book fit without overflow; browser warning/error logs are empty; large-maze object mounting is camera-scoped |
-| Hosting | GitHub `main` commit `42775f7` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Auto-deployed successfully; the canonical title reports 0.15.0, its tester lists all 16 story mazes, the 1280×720 document is viewport-exact, and all nine new sprite URLs return HTTP 200 |
+| Hosting | GitHub `main` commit `496edbb` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Auto-deployed successfully; the canonical bundle reports 0.16.0 and all fourteen new WebP/PNG runtime assets return HTTP 200 with the correct media types and exact byte sizes |
 | Desktop artifacts | Unsigned 0.16.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
 
 ## Historical 0.14.0 release status
 
 The 0.14.0 compact-room and procedural-scrapbook release remains recorded in
-the changelog and release checklist. It is superseded by the current 0.15.0 gate.
+the changelog and release checklist. It is superseded by the current 0.16.0 gate.
 
 ## Historical 0.13.0 release status
 
 The 0.13.0 Puzzlewild read-together story release remains recorded in the
-changelog and release checklist. It is superseded by the current 0.15.0 gate.
+changelog and release checklist. It is superseded by the current 0.16.0 gate.
 
 ## Historical 0.12.0 release status
 
 The 0.12.0 exploration-reward, prerequisite-help, lighting, and Power-99 release
 remains recorded in the changelog and release checklist. It is superseded by
-the current 0.15.0 gate rather than deleted.
+the current 0.16.0 gate rather than deleted.
 
 ## Historical 0.10.3 release status
 
 The 0.10.3 browser and Windows evidence remains in the release checklist and
-changelog. It is superseded by the current 0.15.0 gate rather than deleted.
+changelog. It is superseded by the current 0.16.0 gate rather than deleted.
 
 ## Historical 0.10.2 release status
 

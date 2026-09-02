@@ -61,7 +61,7 @@ document and does not use client-side URL routing.
 - Inspect later generated mazes for 2×2–4×4 chambers, clustered treasure or
   rescues, and Power-gated monster rooms. The widened geometry must not make any
   ordinary or all-friends route unsolvable.
-- Click or tap the small **Playable build 0.15.0** label on the title screen and
+- Click or tap the small **Playable build 0.16.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -212,3 +212,11 @@ matches the viewport. Direct production requests for all nine new Otter/Lamb/
 Capybara, Acorn Knight/Bubble Dragon/Candy Mimic, and Comet Spear/Bubble Bow/
 Cupcake Mace PNGs return HTTP 200 with `image/png`. Earlier release paragraphs
 remain historical evidence.
+
+Playable build 0.16.0 was pushed to GitHub `main` as commit `496edbb` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical JavaScript reports 0.16.0. Direct production requests
+for the four new friends, four new enemies, four new repeatable terrain
+textures, and two new transparent dressing overlays all return HTTP 200 with
+the expected WebP/PNG media types and exact local byte sizes. Earlier release
+paragraphs remain historical evidence.
