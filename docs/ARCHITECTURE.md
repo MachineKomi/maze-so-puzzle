@@ -240,6 +240,19 @@ public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
 and portable launch smoke are complete for 0.19.0.
 
+Plan 07 measurement infrastructure lives under `scripts/performance/` and is
+not imported by the runtime. A single S01–S11 fixture catalog binds browser and
+Tauri scenarios to stable level IDs and semantic UI/engine checkpoints. The
+fixture test resolves those IDs against the current campaign and derives long
+routes through the current solver. The inventory script hashes bundle, asset,
+media, and package inputs; a source/dist fingerprint binds inventories to the
+production build; browser and Tauri harnesses write raw evidence outside the
+repository and retain provenance/rejection reasons. CI currently validates the
+retained evidence and blocks malformed contracts or unallocated compressed
+JS/CSS and public-runtime growth. Timing remains report-only until clean-host
+variance is qualified; see
+`PERFORMANCE_BUDGETS.md`.
+
 ## Extension points
 
 - Add mechanics through the `TerrainKind`, `LevelObject`, and `GameEvent` unions,

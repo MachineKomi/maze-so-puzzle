@@ -18,6 +18,22 @@ clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
+Pass 07A measured product baseline commit
+`a34de2f783d2f11c2b543541b4f46ffdf8b13fe0`. It reproduces the 0.19.0 static
+bundle/asset totals, records per-file hashes and decoded-image concerns, defines
+semantic S01–S11 fixtures, adds report validation and an allocation ledger, and
+gates unallocated compressed JS/CSS or public-runtime growth. A five-run Edge
+production-preview cohort was completed but is explicitly contaminated and
+report-only because the active work session prevented a clean-host attestation.
+The audit rejected the first S04 row because its route prelude did not reach the
+claimed solver state. A fresh five-run manager cohort now verifies exact
+semantic position, steps 18→26, and 529 minimap tiles in every S04 sample. The
+Tauri row is inventory-only with zero timing samples and remains pending. Its
+launch helper is explicitly a native-window proxy, not WebView-visible or
+interactive evidence.
+No production optimization or media change is claimed. Exact evidence classes
+and remaining hardware gates are in `PERFORMANCE_BUDGETS.md`.
+
 ## Current 0.19.0 release status
 
 | Area | Current evidence | Status |
@@ -417,6 +433,9 @@ items in `RELEASE_CHECKLIST.md` remain requirements.
 
 ### P1 - next quality pass
 
+- Qualify Plan 07 timing variance on a clean reference host, then run all four
+  required viewports, the defined low-end profile, Lighthouse, ten-minute heap,
+  and current-build Tauri/WebView2 cohorts before promoting any timing gate.
 - Add automated browser interaction tests for keyboard movement, directional
   pointer movement, dialog focus trapping and restoration, reward persistence,
   the stronger-enemy comparison, and a full maze completion.

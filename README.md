@@ -402,6 +402,22 @@ npm audit
 npm run check:desktop
 ```
 
+Plan 07 performance work uses a separate measurement-only harness. The build
+writes an ignored source/dist provenance marker, and the deterministic gate
+rejects stale or modified `dist/` output:
+
+```powershell
+npm run build
+npm run perf:check
+npx vitest run scripts/performance/scenario-fixtures.test.ts
+npm run perf:inventory -- --output C:\evidence\inventory.json
+```
+
+Browser and Tauri cohort commands, the external evidence convention, and the
+current report-only timing policy are documented in
+[`docs/PERFORMANCE_BUDGETS.md`](docs/PERFORMANCE_BUDGETS.md). Playwright remains
+an ephemeral measurement tool and is not a product dependency.
+
 `npm run check` runs the complete unit suite followed by the strict TypeScript
 and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
@@ -453,6 +469,7 @@ code-signed.
 - [Privacy and saved-data notes](docs/PRIVACY.md)
 - [AI asset provenance and prompts](docs/AI_ASSET_PROMPTS.md)
 - [Project audit and prioritized backlog](docs/PROJECT_AUDIT.md)
+- [Performance budgets and evidence contract](docs/PERFORMANCE_BUDGETS.md)
 - [Release checklist](docs/RELEASE_CHECKLIST.md)
 - [Player-visible changelog](CHANGELOG.md)
 - [Windows test-build notes](release/README.md)

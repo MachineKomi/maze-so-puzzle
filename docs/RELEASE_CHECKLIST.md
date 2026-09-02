@@ -413,12 +413,21 @@ Run each command from the project root in PowerShell:
 
 ```powershell
 npm run check
+npm run perf:check
 npm audit
 npm run check:desktop
 ```
 
 - [x] `npm run check` reports that the complete unit suite passes and that
   TypeScript and the Vite production build complete without errors.
+- [x] Pass 07A `npm run perf:check` validates the S01–S11 semantic fixture
+  contract, feature-allocation ledger, retained evidence, and build provenance,
+  then enforces the current compressed JS/CSS and complete `public/` no-growth
+  ceilings. Run it immediately after the production build; this is a
+  deterministic byte/evidence gate, not a timing claim.
+- [ ] Before a future performance-qualified release, attach accepted clean-host
+  web and Tauri manifests for the exact release commit. Contaminated/report-only
+  rows and Edge browser timing cannot substitute for WebView2 results.
 - [x] Dependency audit output for the exact 0.10.3 source is reviewed at the
   moderate threshold: zero vulnerabilities.
 - [x] `npm ls` for 0.10.3 is reviewed; only expected optional cross-platform

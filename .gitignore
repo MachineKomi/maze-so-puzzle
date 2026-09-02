@@ -9,4 +9,5 @@ release/*.exe
 *.log
 .DS_Store
 .vite/
+.playwright-cli/
 coverage/

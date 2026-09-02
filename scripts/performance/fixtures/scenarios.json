@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "routePolicy": "derive-from-current-engine",
+  "scenarios": [
+    {
+      "id": "S01",
+      "name": "cold-title",
+      "surface": "web",
+      "cacheState": "cold-context-cache-disabled",
+      "checkpoint": { "kind": "role", "role": "button", "name": "Begin adventure" }
+    },
+    {
+      "id": "S02",
+      "name": "warm-title",
+      "surface": "web",
+      "cacheState": "warm-reload",
+      "checkpoint": { "kind": "role", "role": "button", "name": "Begin adventure" }
+    },
+    {
+      "id": "S03",
+      "name": "title-to-first-playable-maze",
+      "surface": "shared",
+      "levelId": "little-star-trail",
+      "checkpoint": { "kind": "level-ready", "accessibleName": "Little Star Trail maze" }
+    },
+    {
+      "id": "S04",
+      "name": "held-movement-with-minimap",
+      "surface": "shared",
+      "levelId": "lanternlight-labyrinth",
+      "checkpoint": { "kind": "ui-state", "name": "exploration-map-visible" }
+    },
+    {
+      "id": "S05",
+      "name": "large-maze-camera-and-minimap",
+      "surface": "shared",
+      "levelIds": ["lanternlight-labyrinth", "moonlit-friendship-quest"],
+      "checkpoint": { "kind": "ui-state", "name": "six-by-six-camera" }
+    },
+    {
+      "id": "S06",
+      "name": "hazards-lighting-shadows-and-ambient",
+      "surface": "shared",
+      "levelIds": ["ames-grand-parade", "wishing-woods", "moonlit-friendship-quest", "friendship-crown-vault"],
+      "checkpoint": { "kind": "terrain-set", "terrain": ["water", "lava", "poison", "hole"] }
+    },
+    {
+      "id": "S07",
+      "name": "presentation-events",
+      "surface": "shared",
+      "checkpoints": [
+        { "kind": "engine-event", "levelId": "shiny-sword", "eventType": "enemy-defeated" },
+        { "kind": "engine-event", "levelId": "little-star-trail", "eventType": "animal-rescued" },
+        { "kind": "engine-event", "levelId": "springstep-sky-hollow", "eventType": "hole-jumped" },
+        { "kind": "engine-event", "levelId": "rose-heart-roundabout", "eventType": "portal-warped" },
+        { "kind": "engine-event", "levelId": "shiny-sword", "eventType": "door-opened" },
+        { "kind": "engine-event", "levelId": "rainbow-power-parade", "eventType": "treasure-collected" },
+        { "kind": "engine-event", "levelId": "little-star-trail", "eventType": "level-won" }
+      ]
+    },
+    {
+      "id": "S08",
+      "name": "adventure-book-open-and-scroll",
+      "surface": "web",
+      "checkpoint": { "kind": "role", "role": "heading", "name": "Adventure Book" }
+    },
+    {
+      "id": "S09",
+      "name": "transition-restart-music-hide-show-stress",
+      "surface": "shared",
+      "levelIds": ["little-star-trail", "lanternlight-labyrinth", "moonlit-friendship-quest"],
+      "checkpoint": { "kind": "cycle", "count": 10 }
+    },
+    {
+      "id": "S10",
+      "name": "fixed-seed-surprise-mazes",
+      "surface": "shared",
+      "surpriseFixtures": [
+        { "seed": "plan-07-gentle", "difficulty": "gentle", "sizeHint": 13 },
+        { "seed": "plan-07-growing", "difficulty": "growing", "sizeHint": 19 },
+        { "seed": "plan-07-adventure", "difficulty": "adventure", "sizeHint": 23 }
+      ],
+      "checkpoint": { "kind": "generated-level-valid" }
+    },
+    {
+      "id": "S11",
+      "name": "tauri-lifecycle",
+      "surface": "tauri",
+      "checkpoints": [
+        { "kind": "lifecycle", "name": "cold-start" },
+        { "kind": "lifecycle", "name": "warm-start" },
+        { "kind": "lifecycle", "name": "idle" },
+        { "kind": "lifecycle", "name": "sustained-play" },
+        { "kind": "lifecycle", "name": "resize" },
+        { "kind": "lifecycle", "name": "save-resume-reopen" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "maze-performance-reviewed-summary/v1",
+  "generatedAtUtc": "2026-09-02T17:46:00.000Z",
+  "commit": "a34de2f783d2f11c2b543541b4f46ffdf8b13fe0",
+  "evidenceClass": "artifact-inventory-only",
+  "acceptance": "pending-hardware",
+  "reason": "No Tauri process was launched. The current host was contaminated by the active work session and the available executable is the historical 0.19.0 artifact rather than a freshly built current-HEAD cohort artifact.",
+  "rawEvidence": {
+    "path": "%TEMP%/maze-so-puzzle-performance/manager-07a-tauri-final-20260902-174547.json",
+    "sha256": "6db43021e800158e469d7ec556354c0ae81b88407118417b03c9e1e05ac30091"
+  },
+  "artifact": {
+    "path": "release/Maze-so-Puzzle-0.19.0-portable.exe",
+    "bytes": 97871360,
+    "sha256": "2e89ab011e20a6eb4c6e066d6221e21147bc8dbded24a053c74472eee6e73916",
+    "buildMode": "prebuilt-tauri-release-artifact"
+  },
+  "environment": {
+    "os": "Microsoft Windows 11 Home 10.0.26200 build 26200",
+    "hardware": "Lenovo 81X7; Intel Core i7-1165G7; 4 cores/8 logical processors; 8,379,490,304 bytes RAM; Intel Iris Xe 30.0.101.1692",
+    "webView2VersionsPresent": ["151.0.4129.107", "152.0.4191.53"],
+    "powerMode": "Balanced",
+    "thermalState": "unavailable"
+  },
+  "runCount": 0,
+  "unavailable": [
+    "semantic WebView2 visible-and-interactive readiness",
+    "qualified cold-start timing",
+    "qualified warm-start timing",
+    "selected WebView2 runtime verification",
+    "process-tree memory",
+    "WebView frame timing",
+    "idle and sustained-play memory",
+    "resize behavior",
+    "save-resume-reopen cohort"
+  ]
+}

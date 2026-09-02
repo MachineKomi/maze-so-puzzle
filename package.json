@@ -14,12 +14,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/performance/build-provenance.mjs",
     "check": "npm test && npm run build",
     "check:desktop": "cargo check --locked --manifest-path src-tauri/Cargo.toml",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
+    "perf:check": "node scripts/performance/check-contracts.mjs && node scripts/performance/check-budgets.mjs && node scripts/performance/validate-evidence.mjs docs/performance/evidence",
+    "perf:inventory": "node scripts/performance/inventory.mjs",
+    "perf:browser": "playwright test --config scripts/performance/playwright.config.mjs",
+    "perf:tauri": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/performance/tauri-baseline.ps1",
+    "perf:validate": "node scripts/performance/validate-evidence.mjs",
     "tauri": "tauri",
     "desktop:dev": "tauri dev",
     "desktop:build": "tauri build --bundles nsis"

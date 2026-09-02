@@ -1,0 +1,80 @@
+{
+  "schema": "maze-performance-reviewed-summary/v1",
+  "generatedAtUtc": "2026-09-02T17:37:00.000Z",
+  "commit": "a34de2f783d2f11c2b543541b4f46ffdf8b13fe0",
+  "evidenceClass": "newly-measured-contaminated-report-only",
+  "acceptance": "contaminated-report-only",
+  "reason": "The Codex work session remained active, only 765,657,088 bytes of RAM were free when the report closed, and thermal state was unavailable.",
+  "rawEvidence": {
+    "path": "%TEMP%/maze-so-puzzle-performance/manager-browser-20260902-173402/browser-cohort.json",
+    "sha256": "adfbc31f8f2e4b5a213789214e7fad701d7c62265a9dbf1eb0ea0f697f501799",
+    "artifactManifestPath": "%TEMP%/maze-so-puzzle-performance/manager-browser-20260902-173402/artifact-manifest.json",
+    "artifactManifestSha256": "3e2fc4e50a901c9f3f98d51d520a288c79272c679ea3b94adc1f8d2180d8433d"
+  },
+  "provenance": {
+    "packageLockSha256": "817415d527edc16486b49583be02b9a3c99864b60cec4ff9b629f69e462c80c4",
+    "cargoLockSha256": "175bac57da74fbb43c9a99cb95f99834a8b750db051f6ddd9c39e63b77fac6b5",
+    "distFingerprintSha256": "ba8a5ba828f9efb830d32305212df12a975e8e627a05704783c6762b59abd9ed",
+    "canonicalBuildDistFingerprintSha256": "89918548a3fecac241e354ea7eaa4839658d5a346c9f9e48941634bc6f2a91e8",
+    "runtimeInputsDirty": false,
+    "buildMode": "vite-production-preview"
+  },
+  "environment": {
+    "os": "Microsoft Windows 11 Home 10.0.26200 build 26200",
+    "hardware": "Lenovo 81X7; Intel Core i7-1165G7; 4 cores/8 logical processors; 8,379,490,304 bytes RAM; Intel Iris Xe 30.0.101.1692",
+    "browser": "Microsoft Edge 152.0.4191.53",
+    "playwright": "1.62.1",
+    "viewport": "1280x720",
+    "deviceScaleFactor": 1,
+    "throttling": "none",
+    "powerMode": "Balanced",
+    "thermalState": "unavailable",
+    "headless": true,
+    "runsPerScenario": 5
+  },
+  "rows": [
+    { "scenarioId": "S01", "readyMedianMs": 150, "readyWorstMs": 162.2, "lcpMedianMs": 172, "lcpWorstMs": 476, "clsWorst": 0, "longestTaskWorstMs": 0, "frameP95MedianMs": 17, "frameWorstMs": 233.3, "transferBytesMedian": 1635504 },
+    { "scenarioId": "S02", "readyMedianMs": 81, "readyWorstMs": 84.8, "lcpMedianMs": 92, "lcpWorstMs": 120, "clsWorst": 0, "longestTaskWorstMs": 0, "frameP95MedianMs": 16.9, "frameWorstMs": 17.1, "transferBytesMedian": 3300 },
+    { "scenarioId": "S03", "readyMedianMs": 951.559, "readyWorstMs": 1350.895, "lcpMedianMs": 152, "lcpWorstMs": 168, "clsWorst": 0, "longestTaskWorstMs": 299, "frameP95MedianMs": 17, "frameWorstMs": 599.5, "transferBytesMedian": 10926755 },
+    { "scenarioId": "S04", "readyMedianMs": 1995.391, "readyWorstMs": 2014.907, "lcpMedianMs": 200, "lcpWorstMs": 224, "clsWorst": 0.212, "longestTaskWorstMs": 0, "frameP95MedianMs": 16.9, "frameWorstMs": 17.1, "transferBytesMedian": 16271306, "minimapTiles": 529, "stepsBefore": 18, "stepsAfter": 26 },
+    { "scenarioId": "S05", "readyMedianMs": 608.049, "readyWorstMs": 706.259, "lcpMedianMs": 224, "lcpWorstMs": 296, "clsWorst": 0, "longestTaskWorstMs": 58, "frameP95MedianMs": 33.3, "frameWorstMs": 116.9, "transferBytesMedian": 18074556, "minimapTiles": 529 },
+    { "scenarioId": "S08", "readyMedianMs": 243.02, "readyWorstMs": 299.479, "lcpMedianMs": 156, "lcpWorstMs": 184, "clsWorst": 0, "longestTaskWorstMs": 105, "frameP95MedianMs": 16.9, "frameWorstMs": 99.9, "transferBytesMedian": 11221928 }
+  ],
+  "metricCaveats": [
+    "S03 and S08 LCP observations describe their initial document navigation, not the later click-to-ready transition. Their semantic-ready durations remain diagnostic.",
+    "The corrected S04 replay reached the exact solver-derived state in every run: 18 steps before the hold, 26 afterward, and 529 minimap tiles."
+  ],
+  "inAppBrowserInspection": {
+    "browserSurface": "Codex in-app browser",
+    "viewport": "1280x720",
+    "title": { "domElements": 77, "images": 9, "incompleteImages": 0, "scriptChunks": 1, "stylesheetChunks": 1 },
+    "levelId": "moonlit-friendship-quest",
+    "maze": { "domElements": 785, "minimapTiles": 529, "images": 46, "svgElements": 1, "svgPaths": 16 },
+    "cameraInlineStyle": "left: -16.6667%; top: -283.333%; width: 383.333%; height: 383.333%;"
+  },
+  "rejectedEvidence": [
+    {
+      "kind": "failed-browser-run",
+      "path": "%TEMP%/maze-so-puzzle-performance/a34de2f783d/pass-07a-reference-1280x720",
+      "reason": "S03 stopped at the Chapter 1 story because the first harness revision omitted the semantic Start the maze checkpoint. No sample from that run was reused."
+    },
+    {
+      "kind": "invalid-scenario-row",
+      "path": "%TEMP%/maze-so-puzzle-performance/a34de2f783d/pass-07a-reference-1280x720-r2/browser-cohort.json",
+      "reason": "S04 did not reach its solver-derived starting state because its prelude outran the input cadence. The S04 timing row was excluded; the corrected harness now verifies exact semantic position and steps before and after held movement."
+    },
+    {
+      "kind": "failed-browser-run",
+      "path": "%TEMP%/maze-so-puzzle-performance/manager-browser-20260902-173243",
+      "reason": "The first manager correction attempt used an exact accessible-name matcher that omitted the displayed maze dimensions. It stopped before S04 and emitted no cohort; no sample was reused."
+    }
+  ],
+  "unavailable": [
+    "accepted clean-host browser cohort",
+    "defined low-end profile cohort",
+    "1024x768, 844x390, and 568x320 cohorts",
+    "Lighthouse cohort",
+    "ten-minute retained-heap cohort",
+    "clean Tauri/WebView2 cohort"
+  ]
+}

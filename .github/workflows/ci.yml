@@ -29,6 +29,9 @@ jobs:
       - name: Test and build
         run: npm run check
 
+      - name: Validate performance contracts
+        run: npm run perf:check
+
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
 

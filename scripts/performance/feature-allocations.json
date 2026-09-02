@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "policy": "provisional-report-only",
+  "baselineCommit": "a34de2f783d2f11c2b543541b4f46ffdf8b13fe0",
+  "baseline": {
+    "compressedJsBytes": 115820,
+    "compressedCssBytes": 29107,
+    "runtimePublicBytes": 89394012
+  },
+  "rules": {
+    "compressedGrowthRequiresAllocation": true,
+    "allocationNeedsEvidence": true,
+    "allocationNeedsRollback": true,
+    "expiredAllocationBlocksMerge": false
+  },
+  "allocationSchema": {
+    "requiredForNonZeroAllocation": [
+      "id",
+      "owner",
+      "status",
+      "reason",
+      "evidencePath",
+      "reviewBy",
+      "rollbackPoint"
+    ],
+    "allowedStatus": ["unallocated", "requested", "approved", "expired", "repaid"]
+  },
+  "allocations": [
+    { "owner": "ui", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Request an explicit feature budget before growth." },
+    { "owner": "art", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Encoded and decoded-memory deltas must both be reported." },
+    { "owner": "lighting", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include reference and low-end frame-time cohorts." },
+    { "owner": "vfx", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include overlap stress and reduced-motion coverage." },
+    { "owner": "animation", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include compositing/layer evidence and idle-cost checks." },
+    { "owner": "gameplay", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Correctness and save integrity are hard guardrails." },
+    { "owner": "controls", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Preserve held cadence, focus semantics, and controller responsiveness." },
+    { "owner": "audio", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Report title, level-entry, music-change, and offline behavior." },
+    { "owner": "campaign", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "New levels need loading-phase and reachability evidence." }
+  ]
+}
