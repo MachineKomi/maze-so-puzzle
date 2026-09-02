@@ -128,6 +128,8 @@ describe("art preloading", () => {
       ASSETS.portrait,
       ASSETS.goal,
       ASSETS.coinPouch,
+      ASSETS.storyProfessorPoggle,
+      ASSETS.storySprig,
       theme.floor.src,
       theme.wall.src,
       theme.floorDressing!.src,

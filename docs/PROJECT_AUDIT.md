@@ -1,46 +1,48 @@
 # Project audit
 
 Audit date: 2026-09-02
-Audited build: 0.12.0 web/Windows playable release
+Audited build: 0.13.0 web/Windows playable release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-02 the integrated 0.12.0 suite passed 298 tests
-across 22 files plus strict TypeScript and the Vite production build. The npm
+real-device testing. On 2026-09-02 the integrated 0.13.0 suite passed 302 tests
+across 23 files plus strict TypeScript and the Vite production build. The npm
 moderate-level audit reports zero vulnerabilities; `npm ls` is clean, and
-`cargo check --locked` passes. Browser QA at desktop 1280 × 720, iPad 1194 ×
-834, and landscape-phone 844 × 390 found no page overflow, overlapping panels,
-console warnings/errors, or broken visible images. Rose Heart Roundabout was
-played through its real portal route, and an iPad perfect-rescue victory kept
-its friend card large and animated. The full rendered maze camera, scaled
-pointer coordinates, portal arrival presentation, and fog/minimap pairing were
-visually verified. Unsigned 0.12.0 portable and setup artifacts were built and
+`cargo check --locked` passes. Browser QA at desktop 1280 × 720, iPad 1024 ×
+768, and landscape-phone 844 × 390 found the illustrated opening, middle and
+finale chapters readable without page scroll or UI overlap. One-input skipping
+was verified to leave Ame unmoved with zero steps. Unsigned 0.13.0 portable and setup artifacts were built and
 byte-verified, and the portable executable passed a five-second launch smoke.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
-## Current 0.12.0 release status
+## Current 0.13.0 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 298 tests across 22 files and completed the production build |
+| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 302 tests across 23 files and completed the production build |
 | Dependencies | JavaScript dependency vulnerability and tree review | `npm audit --audit-level=moderate` reports zero vulnerabilities; `npm ls` is clean |
 | Desktop compile | Locked Rust/Tauri dependency graph | `cargo check --locked` passed |
-| Responsive browser QA | Desktop 1280×720, iPad 1194×834, and landscape phone 844×390 | No page overflow or UI overlap; no console warning/error logs and no broken visible images |
-| Story/puzzle design | Fifteen solver-validated authored mazes, including three portal chapters | New ordinary/perfect route lengths are 105/117, 103/177, and 231/260; each ordinary route skips optional rescues and each perfect route rescues all friends |
-| Portal mechanic | Three visual pairs integrated through engine, solver, saves, hints, minimap, followers, sound, and presentation | Every used pair occurs exactly twice; disconnected geometry is solvable only through the engine warp and unmatched pairs are rejected |
-| Camera/controls | Full-world translated 6 × 6 camera, logical-coordinate pointer intent, direction hysteresis, and held-key fallback | Desktop, iPad, and phone bounds passed; real portal play retained coherent terrain/objects and no touch-scale drift |
-| Audio/art | Thirteen full maze songs and three transparent portal sprites | All track paths package locally; portal runtime assets are 512 × 512 RGBA with transparent canvas edges and retained masters/prompts |
-| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Commit `2a3110a` auto-deployed; the canonical title reports 0.12.0, lists all sixteen tester mazes, opens Rainbow Power Parade, and serves representative new WebP assets with HTTP 200 |
-| Desktop artifacts | Unsigned 0.12.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+| Responsive story QA | Desktop 1280×720, iPad 1024×768, and landscape phone 844×390 | Chapters 1, 10, and 16 fit the fixed composition without scroll or overlap; skip input does not move Ame |
+| Story/learning design | Sixteen ordered authored chapters in one typed lore catalogue | Each has a concise read-aloud intro, joke, Puzzle Power, optional adult-and-child prompt, and victory epilogue |
+| Child-first flow | New normal starts present story; resume/restart/tester/generated starts do not | One tap or ordinary key skips; Story reopens on demand; Tab and modified shortcuts are preserved |
+| Audio/art | Thirteen full maze songs plus original Sprig and Poggle portraits | Portrait masters/prompts are retained and runtime WebPs are optimized and preloaded locally |
+| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Exact 0.13.0 release deployment verification is pending |
+| Desktop artifacts | Unsigned 0.13.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+
+## Historical 0.12.0 release status
+
+The 0.12.0 exploration-reward, prerequisite-help, lighting, and Power-99 release
+remains recorded in the changelog and release checklist. It is superseded by
+the current 0.13.0 gate rather than deleted.
 
 ## Historical 0.10.3 release status
 
 The 0.10.3 browser and Windows evidence remains in the release checklist and
-changelog. It is superseded by the current 0.12.0 gate rather than deleted.
+changelog. It is superseded by the current 0.13.0 gate rather than deleted.
 
 ## Historical 0.10.2 release status
 

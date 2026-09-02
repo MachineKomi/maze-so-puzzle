@@ -6,19 +6,49 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.12.0: `npm run check` passes 298 tests across 22 files plus strict
+Status for 0.13.0: `npm run check` passes 302 tests across 23 files plus strict
 TypeScript and the Vite production build. The moderate-level npm audit reports
 zero vulnerabilities; `npm ls` is clean, and locked Cargo compilation passes.
 Browser QA at 1280×720 desktop, 1024×768 iPad, and 844×390 landscape phone found
-no page overflow, overlap, console warning/error, or broken visible image. The
-new 16-maze picker, selector, Power-99 chapter and three-bump item guidance were
-exercised. The unsigned
-Windows portable and setup builds were built, hashed, byte-compared, versioned,
-and smoke-tested. Physical-device touch/listening/feel, accessibility,
-clean-machine installation, signing, and the broader manual play-through remain
-deliberately unclaimed. Earlier release evidence below remains historical.
+that chapters 1, 10, and 16 fit the fixed composition without scrolling or UI
+overlap. The unsigned Windows portable and setup builds were built, hashed,
+byte-compared, versioned, and smoke-tested. Physical-device touch/listening/
+feel, accessibility, clean-machine installation, signing, and the broader
+manual play-through remain deliberately unclaimed. Earlier evidence is kept as
+historical release evidence.
 
-## 0.12.0 verification record
+## 0.13.0 verification record
+
+- [x] Version 0.13.0 is aligned in npm, Cargo, Tauri, and the visible build label.
+- [x] Every authored story maze has exactly one ordered lore entry with two
+  concise read-aloud paragraphs, a silly character quote, educational Puzzle
+  Power, conversation prompt, and victory epilogue.
+- [x] New curated starts show their chapter. Resume, restart, Surprise Maze and
+  tester starts remain interruption-free, while Story reopens any chapter.
+- [x] One tap anywhere or one ordinary key skips a chapter without moving Ame
+  or adding a step; Tab and modified shortcuts retain accessibility behaviour.
+- [x] Sprig and Professor Poggle use original generated portraits with archived
+  masters, exact prompts, deterministic processing, and optimized local WebP
+  runtime files.
+- [x] `npm run check`: 302/302 tests pass across 23 files; strict TypeScript and
+  the Vite production build pass.
+- [x] `npm audit --audit-level=moderate`: zero vulnerabilities. `npm ls`: clean.
+  `cargo check --locked`: passed.
+- [x] Story cards 1, 10, and 16 fit at desktop 1280×720, iPad 1024×768, and
+  landscape phone 844×390 without scrolling; gameplay retains its fixed stage.
+- [ ] GitHub/Vercel deployment is pending the exact release commit.
+- [x] `Maze-so-Puzzle-0.13.0-portable.exe`: 85,586,432 bytes, file/product
+  version 0.13.0, SHA-256
+  `6B7D6C30DC10854845314547A2550F9EE340189BED8C66D83E6719EDDA608EF0`.
+- [x] `Maze-so-Puzzle-0.13.0-setup.exe`: 79,415,143 bytes, file/product version
+  0.13.0, SHA-256
+  `7310066CFC3DC12F4518821F894A15B6CD10AFE9DCCF19129527E7F7A782BE26`.
+- [x] Both staged binaries byte-match their final Tauri outputs. The portable
+  app stayed responsive for five seconds and reported the correct window title.
+- [ ] Clean-machine install, code signing, physical-device listening/feel, and
+  the complete manual campaign remain owner/device checks.
+
+## Historical 0.12.0 verification record
 
 - [x] Version 0.12.0 is aligned in npm, Cargo, Tauri, and the visible build label.
 - [x] Sixteen authored story mazes are solver-valid. Rainbow Power Parade's

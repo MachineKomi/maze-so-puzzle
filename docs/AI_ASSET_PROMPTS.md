@@ -781,3 +781,51 @@ Primary request: one circular curling lavender ribbon arrow wrapped around a sma
 Color palette: lavender, cream, mint accent and warm gold
 Avoid: text, clock face, multiple arrows, red warning color
 ```
+
+## Build 0.13.0: Puzzlewild story portraits
+
+Build 0.13.0 uses the built-in OpenAI ImageGen workflow in
+**referenced-image generation mode**. Image 1 was
+public/assets/ame-portrait.png and served only as the visual style reference;
+both outputs are wholly new characters. The generated PNG masters are archived
+unchanged. scripts/process_v13_story_assets.py creates 512 × 512, quality-92
+WebP runtime portraits while retaining the original medallion backgrounds.
+
+| Character | Built-in generated source | Archived master | Runtime asset |
+|---|---|---|---|
+| Professor Poggle | C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-f11f29ef-f7a0-4ba3-9e3f-e3a934ce62e2.png | docs/source-assets/story-professor-poggle-v1-master.png | public/assets/story-professor-poggle-v1.webp |
+| Sprig | C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-0241a443-4442-482b-a9af-e56eb9be661e.png | docs/source-assets/story-sprig-v1-master.png | public/assets/story-sprig-v1.webp |
+
+### Professor Poggle exact prompt
+
+~~~text
+Use case: stylized-concept
+Asset type: square story-dialogue character portrait for Maze so Puzzle
+Primary request: create Professor Poggle, a tiny round tawny owl fantasy cartographer with oversized teal spectacles, a lavender scholar cape, a cream waistcoat, and a little rolled map tucked under one wing
+Input images: Image 1 is a visual style reference only for the same polished chunky anime fantasy JRPG portrait rendering, warm storybook lighting, expressive child-friendly face, clean dark-plum outlines and soft 3DS-era painted finish; create a wholly new character
+Scene/backdrop: warm cream-and-mint radial storybook medallion with a few restrained golden stars
+Subject: one cheerful owl professor, chest-up, looking toward the viewer, delighted and slightly silly, spectacles sitting a little crooked
+Style/medium: cute chunky anime fantasy JRPG painted character portrait
+Composition/framing: centred 1:1 portrait, complete ears/feather tufts and cape visible, generous safe padding for a circular UI crop
+Lighting/mood: warm, magical, clever, comical and safe
+Color palette: tawny caramel, cream, mint, teal, lavender and warm gold
+Constraints: no text; no letters; no numbers; no watermark; no human; no extra character; no border outside the medallion
+Avoid: realistic bird photography, scary talons, stern expression, graduation cap, dark background
+~~~
+
+### Sprig exact prompt
+
+~~~text
+Use case: stylized-concept
+Asset type: square story-dialogue character portrait for Maze so Puzzle
+Primary request: create Sprig, a tiny round baby cloud-dragon whose harmless glitter sneeze tangled the magical Star Map, with two soft mint horns, lilac winglets, peachy cream scales, a star-shaped golden nose freckle and a bashful happy expression
+Input images: Image 1 is a visual style reference only for the same polished chunky anime fantasy JRPG portrait rendering, warm storybook lighting, expressive child-friendly face, clean dark-plum outlines and soft 3DS-era painted finish; create a wholly new character
+Scene/backdrop: pale sky-blue-and-lilac radial storybook medallion with tiny puffy clouds and restrained golden sparkles
+Subject: one cute baby dragon, chest-up, looking toward the viewer, cheeks puffed as if trying not to sneeze, absolutely friendly
+Style/medium: cute chunky anime fantasy JRPG painted character portrait
+Composition/framing: centred 1:1 portrait, complete horns and winglets visible, generous safe padding for a circular UI crop
+Lighting/mood: sweet, magical, silly, apologetic and safe
+Color palette: peach cream, mint, lilac, sky blue and warm gold
+Constraints: no text; no letters; no numbers; no watermark; no fire; no extra character; no border outside the medallion
+Avoid: reptilian realism, sharp teeth, scary eyes, dark background, large adult dragon
+~~~

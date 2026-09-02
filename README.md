@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.12.0 play-test build, which remains an active prototype. Its complete
+0.13.0 play-test build, which remains an active prototype. Its complete
 automated browser gate and refreshed unsigned Windows packaging are verified.
 The verified source is live on the canonical Vercel site; the broader
 physical-device play-test pass remains a release step.
@@ -61,24 +61,24 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.12.0 test build:
+The current verified desktop artifacts are the unsigned 0.13.0 test build:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.12.0-portable.exe`
-  (85,447,680 bytes; SHA-256
-  `4BE70602349AFA1A133024F0FB0B60356AD20809ACEC48EC2E85940AAFB3D3F6`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.12.0-setup.exe`
-  (79,272,384 bytes; SHA-256
-  `FA935AC313BEFD1415C1BF0FF797A8677F0F7B9F6E085FF1520C4E10EFD6F992`).
+- Portable test copy: `release/Maze-so-Puzzle-0.13.0-portable.exe`
+  (85,586,432 bytes; SHA-256
+  `6B7D6C30DC10854845314547A2550F9EE340189BED8C66D83E6719EDDA608EF0`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.13.0-setup.exe`
+  (79,415,143 bytes; SHA-256
+  `7310066CFC3DC12F4518821F894A15B6CD10AFE9DCCF19129527E7F7A782BE26`).
   Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.12.0_x64-setup.exe` (byte-matches the staged
+  Puzzle - For Ame to Solve!_0.13.0_x64-setup.exe` (byte-matches the staged
   setup copy).
-- Both executables report file/product version 0.12.0. The portable app remained
+- Both executables report file/product version 0.13.0. The portable app remained
   responsive for a five-second smoke launch and showed the correct game title.
-- The verified 0.12.0 hashes and retained archive hashes are recorded in
+- The verified 0.13.0 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -112,7 +112,7 @@ The current verified desktop artifacts are the unsigned 0.12.0 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.12.0** label to
+On the title screen, click or tap the small **Playable build 0.13.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -127,7 +127,22 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.12.0
+## Included in playable build 0.13.0
+
+- A complete sixteen-chapter **Puzzlewild** story arc turns the authored campaign
+  into a gentle fantasy JRPG read-together adventure. Sprig the baby
+  cloud-dragon's Great Glittery Hiccup tangled the Star Map, and Ame becomes a
+  Junior Pathkeeper with help from Professor Poggle, an owl cartographer who
+  frequently reads maps upside down.
+- Each story maze opens with one self-contained illustrated chapter card,
+  character dialogue, one real “Puzzle power,” and a simple optional
+  conversation prompt. One tap anywhere or any ordinary key skips the entire
+  card and starts play; Tab and modifier shortcuts remain available.
+- A picture-led Story control can reopen the chapter during play. Victory
+  screens include a short epilogue, Maze Select and the Adventure Book show the
+  thinking skill for each chapter, and resumed/tester runs never force an intro.
+- New original AI-generated portraits introduce Professor Poggle and Sprig in
+  the existing polished chunky fantasy-JRPG art direction.
 
 - Rewarding exploration: optional Golden Star bags and overflowing treasure
   chests, plus gears and magical beakers worth Science Points, populate dead
@@ -324,7 +339,7 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.12.0 source suite passes 298 automated tests across 22 files and the strict
+The 0.13.0 source suite passes 302 automated tests across 23 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
@@ -339,8 +354,8 @@ combat, paired-portal structural validation and travel, portal-safe active-run
 recovery, full-world camera interpolation, scaled-pointer hysteresis, and the
 full-reset storage allow-list.
 
-The 0.12.0 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.12.0, and are size-checked and
+The 0.13.0 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.13.0, and are size-checked and
 SHA-256 hashed. The portable app also passed a responsive five-second launch
 smoke with the correct title. Clean-machine installation, signing, and
 physical-device checks remain separate release gates. The release source is
@@ -356,13 +371,14 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.12.0 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.13.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 
 ## Project documentation
 
 - [Architecture and extension points](docs/ARCHITECTURE.md)
+- [Puzzlewild story bible and educational progression](docs/STORY_BIBLE.md)
 - [Soundtrack catalogue and playback policy](docs/MUSIC.md)
 - [Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md)
 - [Privacy and saved-data notes](docs/PRIVACY.md)

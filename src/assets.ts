@@ -83,6 +83,8 @@ export const ASSETS = {
   navHelp: "/assets/nav-help-v1.webp",
   navSound: "/assets/nav-sound-v1.webp",
   navRestart: "/assets/nav-restart-v1.webp",
+  storyProfessorPoggle: "/assets/story-professor-poggle-v1.webp",
+  storySprig: "/assets/story-sprig-v1.webp",
   rewardTrailSticker: "/assets/reward-trail-sticker.png",
   rewardBraveMedal: "/assets/reward-brave-medal.png",
   rewardSplashSticker: "/assets/reward-splash-sticker.png",
@@ -94,6 +96,8 @@ const COMMON_GAMEPLAY_ART = [
   ASSETS.portrait,
   ASSETS.goal,
   ASSETS.coinPouch,
+  ASSETS.storyProfessorPoggle,
+  ASSETS.storySprig,
 ] as const;
 
 const TERRAIN_ART: Readonly<Partial<Record<TerrainKind, string>>> = {

@@ -118,6 +118,12 @@ import {
   createCombatVictoryPlan,
   type CombatPresentationCueKind,
 } from "./combatPresentation";
+import {
+  shouldDismissStoryForKey,
+  storyForLevel,
+  type StoryLore,
+  type StorySpeaker,
+} from "./story";
 
 const DIRECTION_ICONS: Record<Direction, string> = {
   up: "▲",
@@ -143,13 +149,25 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   "red-panda": "Red panda",
 };
 
+const STORY_SPEAKER_LABELS: Readonly<Record<StorySpeaker, string>> = {
+  ame: "Ame",
+  poggle: "Professor Poggle",
+  sprig: "Sprig",
+};
+
+function storySpeakerArt(speaker: StorySpeaker): string {
+  if (speaker === "poggle") return ASSETS.storyProfessorPoggle;
+  if (speaker === "sprig") return ASSETS.storySprig;
+  return ASSETS.portrait;
+}
+
 const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const JUMP_PRESENTATION_MS = 540;
 const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.12.0";
+const BUILD_VERSION = "0.13.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -1070,6 +1088,7 @@ function App() {
   const [muted, setMuted] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
+  const [storyOpen, setStoryOpen] = useState(false);
   const [blockerHint, setBlockerHint] = useState<BlockerHint | null>(null);
   const [guidedObjectId, setGuidedObjectId] = useState<string | null>(null);
   const [resetProgressOpen, setResetProgressOpen] = useState(false);
@@ -1214,6 +1233,7 @@ function App() {
   const weaponArt = resolveWeaponArt(weaponObject?.style);
   const terrainTheme = resolveTerrainTheme(level.terrainThemeId);
   const mazeLight = lightVector(level);
+  const levelStory = useMemo(() => storyForLevel(level.id), [level.id]);
   const rescuedSpecies = useMemo(
     () => animalObjects.filter((object) => game.rescuedAnimalIds.includes(object.id)).map((object) => object.species),
     [animalObjects, game.rescuedAnimalIds],
@@ -1254,6 +1274,7 @@ function App() {
     || testerPickerOpen
     || levelPickerOpen
     || pendingAdventure !== null
+    || storyOpen
     || (screen === "game" && (
       helpOpen
       || hintOpen
@@ -1549,6 +1570,7 @@ function App() {
       || testerPickerOpen
       || helpOpen
       || hintOpen
+      || storyOpen
       || blockerHint !== null
       || tooStrongEncounter !== null
       || game.status !== "playing"
@@ -1812,7 +1834,13 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, blockerHint, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, testerPickerOpen, testerRun, tooStrongEncounter]);
+  }, [beginBattlePresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, blockerHint, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, storyOpen, testerPickerOpen, testerRun, tooStrongEncounter]);
+
+  const dismissStory = useCallback(() => {
+    setStoryOpen(false);
+    playSound("select", mutedRef.current);
+    window.setTimeout(() => boardRef.current?.focus(), 0);
+  }, []);
 
   attemptMoveRef.current = attemptMove;
 
@@ -1842,6 +1870,13 @@ function App() {
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
+      if (storyOpen) {
+        if (shouldDismissStoryForKey(event)) {
+          event.preventDefault();
+          dismissStory();
+        }
+        return;
+      }
       if (pendingAdventure !== null || testerPickerOpen) return;
       if (
         event.key === "Escape"
@@ -1907,13 +1942,13 @@ function App() {
       window.removeEventListener("blur", clearHeldInput);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [bigMaze, clearHeldInput, game.status, helpOpen, hintOpen, pendingAdventure, screen, testerPickerOpen, tooStrongEncounter]);
+  }, [bigMaze, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => {
-    if (screen !== "game" || helpOpen || hintOpen || tooStrongEncounter !== null || testerPickerOpen || pendingAdventure !== null || game.status !== "playing") {
+    if (screen !== "game" || helpOpen || hintOpen || storyOpen || tooStrongEncounter !== null || testerPickerOpen || pendingAdventure !== null || game.status !== "playing") {
       clearHeldInput();
     }
-  }, [clearHeldInput, game.status, helpOpen, hintOpen, pendingAdventure, screen, testerPickerOpen, tooStrongEncounter]);
+  }, [clearHeldInput, game.status, helpOpen, hintOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => () => {
     clearPresentationWork();
@@ -2126,6 +2161,7 @@ function App() {
     if (!muted) void startMusicFromUserGesture();
     setRunMode(mode);
     loadLevel(nextLevel);
+    setStoryOpen(mode === "normal" && nextLevel.source === "curated");
     setHasActiveRun(true);
     setScreen("game");
     playSound(sound, muted);
@@ -2137,6 +2173,7 @@ function App() {
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
     setPendingAdventure(null);
+    setStoryOpen(false);
     setScreen("game");
     playSound("select", muted);
   };
@@ -2144,7 +2181,17 @@ function App() {
   const replayLevel = () => {
     playSound("select", muted);
     setHasActiveRun(true);
+    setStoryOpen(false);
     loadLevel(level);
+  };
+
+  const openStory = (trigger?: HTMLElement) => {
+    if (!levelStory) return;
+    modalReturnFocus.current = trigger
+      ?? (document.activeElement instanceof HTMLElement ? document.activeElement : boardRef.current);
+    clearHeldInput();
+    setStoryOpen(true);
+    playSound("menu", muted);
   };
 
   const closeHelp = () => {
@@ -2160,6 +2207,7 @@ function App() {
 
   const closeHint = () => {
     setHintOpen(false);
+    setStoryOpen(false);
     playSound("menu", muted);
   };
 
@@ -2270,6 +2318,7 @@ function App() {
     if (!muted) void startMusicFromUserGesture();
     setHelpOpen(false);
     setHintOpen(false);
+    setStoryOpen(false);
     setBlockerHint(null);
     setTooStrongEncounter(null);
     setTesterPickerOpen(false);
@@ -2453,6 +2502,14 @@ function App() {
                     title="Open the tester maze picker"
                     aria-label={`Open tester maze picker. Current maze ${campaignIndex >= 0 ? campaignIndex + 1 : "is a surprise"} of ${CURATED_LEVELS.length}. Tester rewards and progress are off.`}
                   >🛠 <span>Pick maze</span></button>
+                )}
+                {levelStory && (
+                  <button
+                    className="story-replay-button"
+                    onClick={(event) => openStory(event.currentTarget)}
+                    aria-label={"Read chapter " + levelStory.chapter + ": " + levelStory.title}
+                    title="Read this maze's story"
+                  ><img src={ASSETS.navBook} alt="" /><span>Story</span></button>
                 )}
                 <button className="big-maze-button" aria-pressed={bigMaze} onClick={toggleBigMaze} title="Make the maze larger">{bigMaze ? "↙ Normal" : "⛶ Big maze"}</button>
                 <button className="surprise-button" onClick={() => requestEnterLevel(makeSurprise())} title="Make a new solvable maze">✦ New maze</button>
@@ -2758,7 +2815,11 @@ function App() {
               <div className="adventure-details">
                 <section className="objective-card">
                   <span className="objective-icon" aria-hidden="true">★</span>
-                  <div><span className="tiny-label">Right now</span><strong>{level.objective}</strong></div>
+                  <div>
+                    <span className="tiny-label">Right now</span>
+                    <strong>{level.objective}</strong>
+                    {levelStory && <small className="puzzle-power-line">Puzzle power: {levelStory.puzzlePower}</small>}
+                  </div>
                   <button
                     className="objective-hint-button"
                     onClick={(event) => openHint(event.currentTarget)}
@@ -2848,6 +2909,10 @@ function App() {
           </aside>
         </div>
 
+        {storyOpen && levelStory && (
+          <StoryInterlude lore={levelStory} onBegin={dismissStory} />
+        )}
+
         {helpOpen && (
           <Modal title="How to help Ame" onClose={closeHelp} returnFocus={modalReturnFocus.current}>
             <div className="help-grid">
@@ -2917,6 +2982,15 @@ function App() {
               })}
             </div>
             {animalObjects.length > 0 && completion.rescuedSpecies.length === animalObjects.length && <div className="perfect-banner">💖 Perfect rescue! Every friend is safe!</div>}
+            {levelStory && (
+              <div className="story-outro-card">
+                <img src={storySpeakerArt(levelStory.speaker)} alt="" />
+                <div>
+                  <small>Chapter {levelStory.chapter} complete · {levelStory.puzzlePower}</small>
+                  <p>{levelStory.outro}</p>
+                </div>
+              </div>
+            )}
             {completion.testerRun ? (
               <div className="tester-preview-banner" role="status">
                 <span aria-hidden="true">🛠️</span>
@@ -2981,7 +3055,11 @@ function App() {
                     requestEnterLevel(candidate, screen === "title" ? "title" : "select");
                   }}>
                     <b>{index + 1}</b>
-                    <span><strong>{candidate.name}</strong><small>{result ? `Best ${result.bestSteps ?? "—"} steps · Friends ${result.bestRescuedCount}/${friendTotal}` : `${candidate.width} × ${candidate.height} · New`}</small></span>
+                    <span>
+                      <strong>{candidate.name}</strong>
+                      <small>{result ? `Best ${result.bestSteps ?? "—"} steps · Friends ${result.bestRescuedCount}/${friendTotal}` : `${candidate.width} × ${candidate.height} · New`}</small>
+                      <em>{storyForLevel(candidate.id)?.puzzlePower}</em>
+                    </span>
                     <i aria-hidden="true">{result?.perfectRescue ? "★" : "→"}</i>
                   </button>
                 );
@@ -3333,7 +3411,11 @@ function AchievementsScreen({
                   aria-label={`${storyLevel.name}. ${locked ? "Locked" : isActive ? `Current maze, ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : result ? `Cleared, best ${result.bestSteps ?? 0} steps, ${rescueCount} friends rescued${hasUnknownRescues ? ", some friend details came from an earlier version" : ""}` : "Ready to play"}`}
                 >
                   <span className="record-number">{locked ? "◆" : isActive ? "▶" : index + 1}</span>
-                  <span className="record-copy"><strong>{locked ? "A mystery maze" : storyLevel.name}</strong><small>{locked ? "Keep adventuring to unlock" : isActive ? "Current maze · tap to resume" : `${storyLevel.width} × ${storyLevel.height}`}</small></span>
+                  <span className="record-copy">
+                    <strong>{locked ? "A mystery maze" : storyLevel.name}</strong>
+                    <small>{locked ? "Keep adventuring to unlock" : isActive ? "Current maze · tap to resume" : `${storyLevel.width} × ${storyLevel.height}`}</small>
+                    {!locked && <em className="record-skill">{storyForLevel(storyLevel.id)?.puzzlePower}</em>}
+                  </span>
                   <span className="record-best">{result ? <><b>{result.bestSteps ?? "—"}</b><small>best {result.bestSteps === 1 ? "step" : "steps"}</small></> : <><b>{locked ? "🔒" : "New"}</b><small>{locked ? "locked" : "ready"}</small></>}</span>
                   <span className="record-friends" aria-hidden="true">
                     {storySpecies.map((species) => (
@@ -3382,6 +3464,66 @@ function InventorySlot({ label, image, found }: InventorySlotProps) {
 
 function HelpStep({ icon, title, copy }: { readonly icon: string; readonly title: string; readonly copy: string }) {
   return <div className="help-step"><span aria-hidden="true">{icon}</span><div><strong>{title}</strong><p>{copy}</p></div></div>;
+}
+
+function StoryInterlude({
+  lore,
+  onBegin,
+}: {
+  readonly lore: StoryLore;
+  readonly onBegin: () => void;
+}) {
+  const speakerLabel = STORY_SPEAKER_LABELS[lore.speaker];
+
+  return (
+    <div
+      className="story-backdrop"
+      role="presentation"
+      onPointerDown={(event) => {
+        if (event.isPrimary && event.button === 0) onBegin();
+      }}
+    >
+      <section
+        className="story-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label={"Chapter " + lore.chapter + ": " + lore.title}
+      >
+        <div className="story-sparkles" aria-hidden="true"><i>✦</i><i>✧</i><i>★</i><i>✦</i></div>
+        <div className="story-chapter-ribbon">
+          <span>Read-together story</span>
+          <b>Chapter {lore.chapter}</b>
+        </div>
+        <div className="story-body">
+          <div className="story-speaker">
+            <img src={storySpeakerArt(lore.speaker)} alt={speakerLabel} />
+            <span>{speakerLabel}</span>
+          </div>
+          <div className="story-copy">
+            <span className="story-eyebrow">The Puzzlewild Star Map</span>
+            <h2>{lore.title}</h2>
+            {lore.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            <blockquote>“{lore.quote}”</blockquote>
+          </div>
+        </div>
+        <div className="story-thinking-strip">
+          <span className="story-thinking-icon" aria-hidden="true">✦</span>
+          <div><small>Puzzle power</small><strong>{lore.puzzlePower}</strong></div>
+          <p>{lore.tryThis}</p>
+        </div>
+        <button
+          className="story-start-button"
+          autoFocus
+          onPointerDown={(event) => event.stopPropagation()}
+          onClick={onBegin}
+        >
+          <span aria-hidden="true">★</span>
+          Start the maze
+        </button>
+        <small className="story-skip-note">Tap anywhere, or press any key, to start right away.</small>
+      </section>
+    </div>
+  );
 }
 
 interface ModalProps {

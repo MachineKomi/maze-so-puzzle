@@ -4,6 +4,47 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.13.0 - 2026-09-02
+
+This read-together release gives all sixteen story mazes a sweet, silly fantasy
+arc while preserving instant, child-friendly access to play.
+
+### Added
+
+- The **Puzzlewild** and Great Star Map story arc. Sprig the baby cloud-dragon's
+  glittery hiccup tangles the realm's paths, Ame becomes a Junior Pathkeeper,
+  and Professor Poggle supplies useful advice with frequently upside-down maps.
+- Sixteen concise illustrated chapter cards with dialogue, one educational
+  Puzzle Power, one optional conversation prompt, and a victory epilogue.
+- Original generated portraits for Sprig and Professor Poggle, visually matched
+  to Ame's existing chunky fantasy-JRPG portrait.
+- A persistent picture-led Story button, Puzzle Power labels during play,
+  learning-focus metadata in Maze Select and the Adventure Book, and a complete
+  story bible for future chapters.
+
+### Changed
+
+- A story card now closes with one tap anywhere or any ordinary key. Tab and
+  modifier shortcuts remain available for accessibility, and the skip input
+  never moves Ame or adds a step.
+- New maze starts show their chapter; resumed games, restarts, Surprise Mazes,
+  and tester jumps remain interruption-free. Any authored chapter can still be
+  reopened on demand.
+- The objective card keeps the current goal and Puzzle Power readable while
+  Story and Hint use separate, reliable picture controls.
+
+### Verification
+
+- npm run check passes 302 tests across 23 files, strict TypeScript, and the
+  Vite production build. Lore coverage/order, concise read-aloud limits, and the
+  one-input skip contract are regression-tested.
+- Browser QA covered chapters 1, 10, and 16 at 1280 × 720 desktop, 1024 × 768
+  iPad, and 844 × 390 landscape phone. Long text fits without scrolling, both
+  character portraits remain clear, and story skipping preserves zero steps.
+- The unsigned 0.13.0 portable and NSIS builds byte-match their final Tauri
+  outputs, report version 0.13.0, and the portable app remained responsive with
+  the correct title during a five-second smoke launch.
+
 ## 0.12.0 - 2026-09-02
 
 This rewarding-exploration release makes side paths worth visiting, helps young
