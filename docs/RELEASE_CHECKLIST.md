@@ -42,7 +42,10 @@ deliberately unclaimed. Earlier release evidence below remains historical.
 - [x] Desktop 1280×720, iPad 1024×768, and landscape phone 844×390 retain the
   fixed composition without page overflow or panel overlap. Browser logs are
   clear of warning/error entries.
-- [ ] GitHub/Vercel production verification is recorded after the release push.
+- [x] GitHub `main` commit `2a3110a` auto-deployed to Vercel. The canonical
+  title reports 0.12.0, the picker lists all sixteen mazes, Rainbow Power Parade
+  opens with five friends and nineteen enemies, and representative new WebP
+  treasure/navigation assets return HTTP 200.
 - [x] `Maze-so-Puzzle-0.12.0-portable.exe`: 85,447,680 bytes, file/product
   version 0.12.0, SHA-256
   `4BE70602349AFA1A133024F0FB0B60356AD20809ACEC48EC2E85940AAFB3D3F6`.

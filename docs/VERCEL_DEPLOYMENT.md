@@ -165,3 +165,14 @@ and direct production requests for all three portal PNGs plus a newly added OST
 track return HTTP 200 with the correct image/audio content types. Local
 1280 × 720, 1194 × 834, and 844 × 390 browser QA remains the detailed layout
 record for this source. The 0.10.2 and 0.10.3 paragraphs above are historical.
+
+Playable build 0.12.0 was pushed to GitHub `main` as commit `2a3110a` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical title reports 0.12.0; the tester picker lists all sixteen
+story mazes, and Rainbow Power Parade opens with the five-friend objective,
+nineteen visible enemy Power labels across the full board, restored Gold and
+Science counters, enlarged minimap, and generated picture-navigation controls.
+Representative Gold chest, Science beaker, and Mazes WebP assets return HTTP
+200 with `image/webp`. Local 1280 × 720, 1024 × 768, and 844 × 390 browser QA
+remains the detailed responsive layout record for this source. Earlier release
+paragraphs remain historical evidence.
