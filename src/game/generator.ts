@@ -1,5 +1,5 @@
 import { pointKey } from "./engine";
-import { validateLevel } from "./solver";
+import { solveLevel, validateLevel } from "./solver";
 import type {
   AnimalSpecies,
   CageStyle,
@@ -14,6 +14,7 @@ import type {
 } from "./types";
 import {
   ANIMALS_PER_LEVEL,
+  ABSOLUTE_MAZE_SIZE_LIMIT,
   ANIMAL_SPECIES,
   CAGE_STYLE_IDS,
   ENEMY_STYLE_IDS,
@@ -27,15 +28,16 @@ export interface GenerateMazeOptions {
   readonly seed: string | number;
   /**
    * Progression size hint. The seed chooses a readable odd dimension from the
-   * unlocked band, with an absolute 29-tile topology cap (below the 30-tile UI
-   * ceiling).
+   * unlocked band. Perfect-maze topology uses odd dimensions, so the largest
+   * generated board is 23 × 23 beneath the game's absolute 24-tile ceiling.
    */
   readonly size?: number;
   readonly difficulty?: MazeDifficulty;
 }
 
 export const MIN_GENERATED_MAZE_SIZE = 9;
-export const MAX_GENERATED_MAZE_SIZE = 29;
+export const MAX_GENERATED_MAZE_SIZE = 23;
+export { ABSOLUTE_MAZE_SIZE_LIMIT };
 
 type RandomSource = () => number;
 
@@ -257,6 +259,120 @@ function floorNeighbors(terrain: readonly (readonly TerrainKind[])[], point: Poi
       candidate.y < height &&
       terrain[candidate.y]?.[candidate.x] === "floor",
   );
+}
+
+interface GeneratedRoom {
+  readonly doorway: Point;
+  readonly tiles: readonly Point[];
+  readonly width: number;
+  readonly height: number;
+}
+
+function rectangleContains(
+  left: number,
+  top: number,
+  width: number,
+  height: number,
+  point: Point,
+): boolean {
+  return point.x >= left
+    && point.y >= top
+    && point.x < left + width
+    && point.y < top + height;
+}
+
+/**
+ * Expands selected corridor ends into compact 2–4 tile-wide rooms. The complete
+ * engine solver validates the result after progression objects are placed, so
+ * a widened chamber can add useful loops without ever making a required route
+ * impossible.
+ */
+function carveDeadEndRooms(
+  terrain: TerrainKind[][],
+  random: RandomSource,
+  forbidden: ReadonlySet<string>,
+): readonly GeneratedRoom[] {
+  const size = terrain.length;
+  const targetCount = size >= 21 ? 4 : size >= 17 ? 3 : size >= 13 ? 2 : 1;
+  const deadEnds: Point[] = [];
+  for (let y = 1; y < size - 1; y += 1) {
+    for (let x = 1; x < (terrain[y]?.length ?? 1) - 1; x += 1) {
+      const at = { x, y };
+      if (
+        terrain[y]?.[x] === "floor"
+        && !forbidden.has(pointKey(at))
+        && floorNeighbors(terrain, at).length === 1
+      ) {
+        deadEnds.push(at);
+      }
+    }
+  }
+
+  const rooms: GeneratedRoom[] = [];
+  const roomTiles = new Set<string>();
+  const dimensions = shuffle([
+    [2, 2], [2, 3], [3, 2], [3, 3], [2, 4], [4, 2], [3, 4], [4, 3], [4, 4],
+  ] as const, random);
+
+  for (const doorway of shuffle(deadEnds, random)) {
+    if (rooms.length >= targetCount) break;
+    const connection = floorNeighbors(terrain, doorway)[0];
+    if (connection === undefined) continue;
+
+    let carved: GeneratedRoom | undefined;
+    for (const [width, height] of dimensions) {
+      const origins: Point[] = [];
+      for (let top = doorway.y - height + 1; top <= doorway.y; top += 1) {
+        for (let left = doorway.x - width + 1; left <= doorway.x; left += 1) {
+          origins.push({ x: left, y: top });
+        }
+      }
+
+      for (const origin of shuffle(origins, random)) {
+        const { x: left, y: top } = origin;
+        if (
+          left < 1
+          || top < 1
+          || left + width >= size
+          || top + height >= size
+          || rectangleContains(left, top, width, height, connection)
+        ) {
+          continue;
+        }
+
+        const tiles: Point[] = [];
+        let newFloorCount = 0;
+        let compatible = true;
+        for (let y = top; y < top + height && compatible; y += 1) {
+          for (let x = left; x < left + width; x += 1) {
+            const tile = { x, y };
+            const key = pointKey(tile);
+            if (forbidden.has(key) || roomTiles.has(key)) {
+              compatible = false;
+              break;
+            }
+            if (terrain[y]?.[x] === "wall") newFloorCount += 1;
+            tiles.push(tile);
+          }
+        }
+        if (!compatible || newFloorCount < 2) {
+          continue;
+        }
+
+        for (const tile of tiles) {
+          const row = terrain[tile.y];
+          if (row !== undefined) row[tile.x] = "floor";
+        }
+        for (const tile of tiles) roomTiles.add(pointKey(tile));
+        carved = { doorway, tiles, width, height };
+        break;
+      }
+      if (carved !== undefined) break;
+    }
+    if (carved !== undefined) rooms.push(carved);
+  }
+
+  return rooms;
 }
 
 function farthestFloor(
@@ -641,6 +757,7 @@ function chooseAnimalPoints(
   terrain: readonly (readonly TerrainKind[])[],
   criticalPath: readonly Point[],
   unavailable: ReadonlySet<string>,
+  rooms: readonly GeneratedRoom[],
   random: RandomSource,
 ): readonly Point[] {
   const criticalPathKeys = new Set(criticalPath.map(pointKey));
@@ -660,12 +777,23 @@ function chooseAnimalPoints(
     }
   }
 
-  const shuffled = shuffle(candidates, random);
+  const roomPriority = shuffle(rooms, random).flatMap((room) => {
+    const available = room.tiles
+      .filter((point) => !unavailable.has(pointKey(point)))
+      .sort((left, right) => {
+        const leftDistance = Math.abs(left.x - room.doorway.x) + Math.abs(left.y - room.doorway.y);
+        const rightDistance = Math.abs(right.x - room.doorway.x) + Math.abs(right.y - room.doorway.y);
+        return rightDistance - leftDistance;
+      });
+    return available[0] === undefined ? [] : [available[0]];
+  });
+  const roomKeys = new Set(roomPriority.map(pointKey));
+  const shuffled = shuffle(candidates.filter((point) => !roomKeys.has(pointKey(point))), random);
   const priority = (point: Point): number => {
     return floorNeighbors(terrain, point).length === 1 ? 0 : 1;
   };
   shuffled.sort((left, right) => priority(left) - priority(right));
-  return shuffled.slice(0, ANIMALS_PER_LEVEL);
+  return [...roomPriority, ...shuffled].slice(0, ANIMALS_PER_LEVEL);
 }
 
 interface HazardSeed {
@@ -736,6 +864,19 @@ function buildGeneratedLevel(
   const firstFloor = { x: 1, y: 1 };
   const start = farthestFloor(terrain, firstFloor);
   const exit = farthestFloor(terrain, start);
+  const rooms = (difficulty === "movement" || difficulty === "gentle" || size < 13)
+    ? []
+    : carveDeadEndRooms(
+      terrain,
+      random,
+      new Set([pointKey(start), pointKey(exit)]),
+    );
+  const minimumRoomCount = difficulty === "adventure" && size >= 17
+    ? 2
+    : difficulty === "growing" && size >= 13
+      ? 1
+      : 0;
+  if (rooms.length < minimumRoomCount) return undefined;
   const criticalPath = findFloorPath(terrain, start, exit);
   const visuals = selectGeneratedVisuals(seedText, difficulty, size);
   const recipe = buildRecipe(difficulty, random, size);
@@ -756,8 +897,9 @@ function buildGeneratedLevel(
   }
   const placements = branched.placements;
 
-  // v4 adds rewarding dead ends without changing the safely ordered main recipe.
-  const id = `surprise-v4-${seedIdentity(seedText)}-${difficulty}-${size}`;
+  // v5 adds single-door rooms and room encounters without changing the safely
+  // ordered main progression recipe.
+  const id = `surprise-v5-${seedIdentity(seedText)}-${difficulty}-${size}`;
   const objects: LevelObject[] = [];
   const hazards: HazardSeed[] = [];
   for (let index = 0; index < recipe.length; index += 1) {
@@ -874,6 +1016,7 @@ function buildGeneratedLevel(
     terrain,
     criticalPath,
     unavailable,
+    rooms,
     random,
   );
   if (animalPoints.length !== ANIMALS_PER_LEVEL) {
@@ -910,7 +1053,19 @@ function buildGeneratedLevel(
       ) bonusDeadEnds.push(at);
     }
   }
-  const shuffledBonuses = shuffle(bonusDeadEnds, random);
+  const roomRewardPoints = shuffle(rooms, random).flatMap((room) => room.tiles
+    .filter((point) => pointKey(point) !== pointKey(room.doorway) && !occupied.has(pointKey(point)))
+    .sort((left, right) => {
+      const leftDistance = Math.abs(left.x - room.doorway.x) + Math.abs(left.y - room.doorway.y);
+      const rightDistance = Math.abs(right.x - room.doorway.x) + Math.abs(right.y - room.doorway.y);
+      return rightDistance - leftDistance;
+    })
+    .slice(0, 1));
+  const roomRewardKeys = new Set(roomRewardPoints.map(pointKey));
+  const shuffledBonuses = [
+    ...roomRewardPoints,
+    ...shuffle(bonusDeadEnds.filter((point) => !roomRewardKeys.has(pointKey(point))), random),
+  ];
   const treasureCount = difficulty === "movement" ? 0 : Math.min(
     shuffledBonuses.length,
     size >= 17 ? 4 : size >= 13 ? 3 : 2,
@@ -930,7 +1085,31 @@ function buildGeneratedLevel(
     });
     occupied.add(pointKey(at));
   }
-  const bonusEnemyCount = difficulty === "adventure" ? Math.min(3, shuffledBonuses.length - treasureCount) : difficulty === "growing" ? 1 : 0;
+
+  const occupiedRoomIndexes = rooms.flatMap((room, index) => (
+    room.tiles.some((point) => occupied.has(pointKey(point))) ? [index] : []
+  ));
+  const guardianCount = difficulty === "adventure"
+    ? Math.min(2, occupiedRoomIndexes.length)
+    : difficulty === "growing"
+      ? Math.min(1, occupiedRoomIndexes.length)
+      : 0;
+  const guardianPowers = difficulty === "adventure" ? [6, 10] : [6];
+  for (let index = 0; index < guardianCount; index += 1) {
+    const room = rooms[occupiedRoomIndexes[index] ?? -1];
+    if (room === undefined || occupied.has(pointKey(room.doorway))) continue;
+    objects.push({
+      id: `${id}-room-guardian-${index + 1}`,
+      kind: "enemy",
+      at: room.doorway,
+      power: guardianPowers[index] ?? 6,
+      style: visuals.enemyStyle,
+    });
+    occupied.add(pointKey(room.doorway));
+  }
+  const bonusEnemyCount = difficulty === "adventure"
+    ? Math.min(1, shuffledBonuses.length - treasureCount)
+    : 0;
   for (let index = 0; index < bonusEnemyCount; index += 1) {
     const at = shuffledBonuses[treasureCount + index];
     if (!at || occupied.has(pointKey(at))) continue;
@@ -968,6 +1147,8 @@ function buildGeneratedLevel(
         ? ["movement", "exit", ...recipe.map((entry) => entry.kind)]
         : recipe.map((entry) => entry.kind)),
       "animal-rescue",
+      ...(rooms.length > 0 ? ["room-layout", "treasure-room"] : []),
+      ...(guardianCount > 0 ? ["monster-room", "come-back-stronger"] : []),
     ])],
   };
 }
@@ -991,8 +1172,15 @@ export function generateSurpriseMaze(options: GenerateMazeOptions): LevelDefinit
       difficulty,
       attempt,
     );
-    if (level !== undefined && validateLevel(level, { requireAllAnimals: true }).valid) {
-      return level;
+    if (level !== undefined) {
+      const ordinary = solveLevel(level);
+      if (
+        ordinary.solvable
+        && ordinary.finalState?.rescuedAnimalIds.length === 0
+        && validateLevel(level, { requireAllAnimals: true }).valid
+      ) {
+        return level;
+      }
     }
   }
 

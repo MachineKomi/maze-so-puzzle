@@ -1,48 +1,52 @@
 # Project audit
 
 Audit date: 2026-09-02
-Audited build: 0.13.0 web/Windows playable release
+Audited build: 0.14.0 web/Windows playable release
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-02 the integrated 0.13.0 suite passed 302 tests
+real-device testing. On 2026-09-02 the integrated 0.14.0 suite passed 304 tests
 across 23 files plus strict TypeScript and the Vite production build. The npm
 moderate-level audit reports zero vulnerabilities; `npm ls` is clean, and
-`cargo check --locked` passes. Browser QA at desktop 1280 × 720, iPad 1024 ×
-768, and landscape-phone 844 × 390 found the illustrated opening, middle and
-finale chapters readable without page scroll or UI overlap. One-input skipping
-was verified to leave Ame unmoved with zero steps. Unsigned 0.13.0 portable and setup artifacts were built and
+`cargo check --locked` passes. Browser QA at desktop 1280 × 720 and iPad 1024 ×
+768 found the compact Lanternlight rooms and procedural scrapbook readable with
+no document overflow or UI overlap; browser logs were clear. Unsigned 0.14.0 portable and setup artifacts were built and
 byte-verified, and the portable executable passed a five-second launch smoke.
 Physical-device touch/listening/feel,
 clean-machine installation, signing, and the broader manual production
 walkthrough also remain open. Older sections are kept as clearly labelled
 historical evidence.
 
-## Current 0.13.0 release status
+## Current 0.14.0 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
-| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 302 tests across 23 files and completed the production build |
+| Automated gate | Full unit/integration suite plus strict TypeScript and Vite production compilation | `npm run check` passed 304 tests across 23 files and completed the production build |
 | Dependencies | JavaScript dependency vulnerability and tree review | `npm audit --audit-level=moderate` reports zero vulnerabilities; `npm ls` is clean |
 | Desktop compile | Locked Rust/Tauri dependency graph | `cargo check --locked` passed |
-| Responsive story QA | Desktop 1280×720, iPad 1024×768, and landscape phone 844×390 | Chapters 1, 10, and 16 fit the fixed composition without scroll or overlap; skip input does not move Ame |
-| Story/learning design | Sixteen ordered authored chapters in one typed lore catalogue | Each has a concise read-aloud intro, joke, Puzzle Power, optional adult-and-child prompt, and victory epilogue |
-| Child-first flow | New normal starts present story; resume/restart/tester/generated starts do not | One tap or ordinary key skips; Story reopens on demand; Tab and modified shortcuts are preserved |
-| Audio/art | Thirteen full maze songs plus original Sprig and Poggle portraits | Portrait masters/prompts are retained and runtime WebPs are optimized and preloaded locally |
-| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Commit `32b2d66` auto-deployed; the canonical title reports 0.13.0, live Chapter 10 uses Poggle, one-key skip preserves zero steps, and both portrait WebPs return HTTP 200 |
-| Desktop artifacts | Unsigned 0.13.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+| Absolute size policy | Shared solver validation and procedural dimension selection | Every board above 24×24 is rejected; odd generated topology ranges from 9×9 through 23×23 |
+| Room-based design | Later Surprise Mazes plus rebuilt Lanternlight Labyrinth | 2×2–4×4 procedural rooms cluster treasure, rescues and Power-gated guardians; Lanternlight is 23×23 with a five-object monster/treasure chamber |
+| Procedural records | Maze Select and Adventure Book | Copy explicitly identifies fresh seeded generation; the Book keeps up to six recent record cards rather than presenting an infinite fixed list |
+| Responsive browser QA | Desktop 1280×720 and iPad 1024×768 | Lanternlight, the scrapbook and fixed stage fit without document overflow; browser warning/error logs are empty |
+| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Exact 0.14.0 release deployment verification is pending |
+| Desktop artifacts | Unsigned 0.14.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
+
+## Historical 0.13.0 release status
+
+The 0.13.0 Puzzlewild read-together story release remains recorded in the
+changelog and release checklist. It is superseded by the current 0.14.0 gate.
 
 ## Historical 0.12.0 release status
 
 The 0.12.0 exploration-reward, prerequisite-help, lighting, and Power-99 release
 remains recorded in the changelog and release checklist. It is superseded by
-the current 0.13.0 gate rather than deleted.
+the current 0.14.0 gate rather than deleted.
 
 ## Historical 0.10.3 release status
 
 The 0.10.3 browser and Windows evidence remains in the release checklist and
-changelog. It is superseded by the current 0.13.0 gate rather than deleted.
+changelog. It is superseded by the current 0.14.0 gate rather than deleted.
 
 ## Historical 0.10.2 release status
 

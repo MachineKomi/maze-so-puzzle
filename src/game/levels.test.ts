@@ -64,6 +64,24 @@ describe("curated campaign levels", () => {
     expect(MOVEMENT_LEVEL.width).toBe(9);
   });
 
+  it("enforces the absolute 24 by 24 maze ceiling at validation", () => {
+    const oversized: LevelDefinition = {
+      ...MOVEMENT_LEVEL,
+      id: "oversized-test-maze",
+      width: 25,
+      height: 25,
+      terrain: [
+        ...MOVEMENT_LEVEL.terrain.map((row) => [
+          ...row,
+          ...Array.from<TerrainKind>({ length: 16 }).fill("wall"),
+        ]),
+        ...Array.from({ length: 16 }, () => Array.from<TerrainKind>({ length: 25 }).fill("wall")),
+      ],
+    };
+
+    expect(validateLevel(oversized).errors).toContain("Maze dimensions cannot exceed 24 tiles.");
+  });
+
   it("mixes readable maze sizes instead of increasing monotonically", () => {
     expect(CURATED_LEVELS.map((level) => [level.width, level.height])).toEqual([
       [9, 9],
@@ -75,7 +93,7 @@ describe("curated campaign levels", () => {
       [17, 17],
       [17, 17],
       [19, 19],
-      [25, 25],
+      [23, 23],
       [21, 21],
       [23, 23],
       [15, 15],
@@ -93,7 +111,7 @@ describe("curated campaign levels", () => {
       117,
       120,
       193,
-      294,
+      173,
       236,
       231,
       105,
@@ -101,6 +119,8 @@ describe("curated campaign levels", () => {
       231,
     ]);
     expect(solveLevel(CURATED_LEVELS[15]!).directions.length).toBeGreaterThan(300);
+    expect(CURATED_LEVELS.every((level) => level.width <= 24 && level.height <= 24))
+      .toBe(true);
   });
 
   it("uses connected pools and lava patches once boots and hazards are introduced", () => {
@@ -453,25 +473,32 @@ describe("curated campaign levels", () => {
     expect([...new Set(campaignSpecies)].sort()).toEqual([...ANIMAL_SPECIES].sort());
   });
 
-  it("keeps the giant exploration finale gentle, ordered, and rewarding to fully explore", () => {
+  it("makes compact Lanternlight rooms rich, ordered, and rewarding to revisit", () => {
     const ordinaryWin = solveLevel(LANTERNLIGHT_LABYRINTH_LEVEL);
     const perfectRescueWin = solveLevel(LANTERNLIGHT_LABYRINTH_LEVEL, {
       requireAllAnimals: true,
     });
 
-    expect(ordinaryWin.directions).toHaveLength(294);
+    expect(ordinaryWin.directions).toHaveLength(173);
     expect(ordinaryWin.finalState).toMatchObject({
-      power: 29,
+      power: 17,
       hasSword: true,
       hasBoots: true,
       hasSpringBoots: true,
-      keys: ["blue", "red", "yellow"],
+      keys: ["yellow"],
       status: "won",
     });
-    expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(4);
-    expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(3);
-    expect(perfectRescueWin.directions).toHaveLength(326);
+    expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(3);
+    expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(1);
+    expect(perfectRescueWin.directions).toHaveLength(217);
     expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
+
+    const monsterTreasureRoom = LANTERNLIGHT_LABYRINTH_LEVEL.objects.filter(
+      (object) => object.at.x >= 5 && object.at.x <= 9 && object.at.y >= 2 && object.at.y <= 5,
+    );
+    expect(monsterTreasureRoom.filter((object) => object.kind === "animal")).toHaveLength(2);
+    expect(monsterTreasureRoom.filter((object) => object.kind === "treasure")).toHaveLength(2);
+    expect(monsterTreasureRoom).toContainEqual(expect.objectContaining({ kind: "enemy", power: 10 }));
 
     let state = createInitialGameState(LANTERNLIGHT_LABYRINTH_LEVEL);
     const progressionEvents: string[] = [];
@@ -488,19 +515,13 @@ describe("curated campaign levels", () => {
       "sword-collected",
       "enemy-defeated",
       "potion-collected",
-      "key-collected",
-      "door-opened",
+      "enemy-defeated",
       "boots-collected",
-      "enemy-defeated",
-      "key-collected",
-      "door-opened",
-      "enemy-defeated",
-      "key-collected",
-      "door-opened",
-      "potion-collected",
       "spring-boots-collected",
       "hole-jumped",
       "enemy-defeated",
+      "key-collected",
+      "door-opened",
     ]);
   });
 
@@ -754,12 +775,12 @@ describe("curated campaign levels", () => {
       },
       {
         animal: 3,
-        potion: 2,
-        enemy: 4,
+        potion: 1,
+        enemy: 6,
         boots: 1,
         "spring-boots": 1,
-        key: 3,
-        door: 3,
+        key: 1,
+        door: 1,
         sword: 1,
       },
       {
@@ -822,8 +843,8 @@ describe("curated campaign levels", () => {
         potion: 1,
       },
     ] as const;
-    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 3, 4, 4, 5, 1, 3, 3, 19] as const;
-    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 1, 3, 3, 3, 1, 1, 3, 1] as const;
+    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 3, 3, 4, 5, 1, 3, 3, 19] as const;
+    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3, 1] as const;
 
     CURATED_LEVELS.forEach((level, index) => {
       const counts = Object.fromEntries(

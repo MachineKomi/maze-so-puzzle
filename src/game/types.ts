@@ -1,4 +1,5 @@
 export const DIRECTIONS = ["up", "down", "left", "right"] as const;
+export const ABSOLUTE_MAZE_SIZE_LIMIT = 24;
 
 export type Direction = (typeof DIRECTIONS)[number];
 

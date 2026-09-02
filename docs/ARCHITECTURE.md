@@ -33,13 +33,14 @@ state.
 6. `src/game/engine.ts` applies one immutable movement or interaction step.
 7. Authored levels come from `src/game/levels.ts`; surprise levels come from the
    deterministic generator in `src/game/generator.ts`. The generator selects a
-   seeded odd size from unlocked 9–29 bands, grows solver-safe connected
+   seeded odd size from unlocked 9–23 bands, grows solver-safe connected
    2–4-tile water/lava regions only beyond the splash-boots gate, and can place
    one- or two-square hole runs only after reachable Spring Boots. Later
-   adventure seeds place selected prerequisites on dead-end branches to create
-   intentional detours. Level and object records carry stable visual IDs without
+   adventure seeds carve 2×2 through 4×4 rooms, cluster rewards and rescues,
+   add Power-gated room guardians, and place selected prerequisites on side
+   branches to create intentional detours. Level and object records carry stable visual IDs without
    placing artwork concerns in the engine. The authored campaign deliberately
-   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, 25, 21, 23, 15, 17, and 21 tile
+   uses 9, 11, 13, 15, 13, 15, 17, 17, 19, 23, 21, 23, 15, 17, and 21 tile
    boards. The three newest portal adventures add mandatory return trips,
    optional rescue wings, multi-pair routing, and a five-friend final vault;
    Moonlit Friendship Quest also requires an Antidote Leaf detour before poison.
@@ -184,9 +185,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.13.0 source is shared by the web and Tauri build paths, and its automated
+- The 0.14.0 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.13.0, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.14.0, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
   five-second smoke launch with the correct title. The GitHub-connected Vercel
   production deployment is verified separately after each push. Clean-machine
@@ -206,17 +207,18 @@ navigation. It also checks the complete art catalogue, dominant-colour theme
 compatibility, authored visual variety, deterministic generated variants, one
 weapon and each maze's authored 1–5 pets, prerequisite detours and guardians,
 Spring Boots, single/multi-hole jumps and unsafe landings, legacy-session
-migration, 6 x 6 even-window clamping, variable 9–29 generated sizes, connected
+  migration, 6 x 6 even-window clamping, variable 9–23 generated sizes, room
+  carving and clustered encounters, connected
 post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
 selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.13.0 run covers 302 tests across 23 files; `npm run check` also
+solver. The 0.14.0 run covers 304 tests across 23 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.13.0.
+and portable launch smoke are complete for 0.14.0.
 
 ## Extension points
 
@@ -240,7 +242,8 @@ and portable launch smoke are complete for 0.13.0.
   semantics. Do not reintroduce independently textured or rounded DOM cells.
 - Add generated-maze rules through deterministic placement phases followed by
   ordinary and perfect-rescue validation. Keep topology odd, at or below the
-  29-tile cap, and prevent decorative hazard growth from consuming pre-gate or
+  23-tile topology cap and absolute 24-tile validator, and prevent decorative
+  room or hazard growth from consuming pre-gate or
   reserved progression tiles.
 - Add durable statistics by versioning and defensively migrating the progress
   schema rather than changing saved data in place.

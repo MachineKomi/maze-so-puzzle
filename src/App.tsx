@@ -167,7 +167,7 @@ const RESCUE_PRESENTATION_MS = 900;
 const JUMP_PRESENTATION_MS = 540;
 const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.13.0";
+const BUILD_VERSION = "0.14.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -968,6 +968,14 @@ function surpriseSettings(progress: PlayerProgress): { size: number; difficulty:
   const size = sizes[Math.min(sizes.length - 1, chapter - 1)] ?? 9;
   const difficulty: MazeDifficulty = chapter >= 5 ? "adventure" : chapter >= 3 ? "growing" : "gentle";
   return { size, difficulty };
+}
+
+function describeGeneratedRecord(levelId: string): string {
+  const match = /-(movement|gentle|growing|adventure)-(\d+)$/.exec(levelId);
+  if (match === null) return "Procedural maze";
+  const difficulty = match[1] ?? "surprise";
+  const size = Number(match[2]);
+  return `${Number.isFinite(size) ? `${size} × ${size} · ` : ""}${difficulty[0]?.toUpperCase()}${difficulty.slice(1)}`;
 }
 
 function getHintReachableTiles(level: LevelDefinition, state: GameState): ReadonlySet<string> {
@@ -3068,7 +3076,7 @@ function App() {
                 setLevelPickerOpen(false);
                 requestEnterLevel(makeSurprise(), screen === "title" ? "title" : "select");
               }}>
-                <b>✦</b><span><strong>Surprise Maze</strong><small>A fresh solvable maze made just for this run</small></span><i aria-hidden="true">→</i>
+                <b>✦</b><span><strong>Surprise Maze</strong><small>Procedurally generated · a fresh solvable maze every time</small></span><i aria-hidden="true">→</i>
               </button>
             </div>
           </Modal>
@@ -3296,6 +3304,9 @@ function AchievementsScreen({
     0,
   );
   const unclassifiedRescues = Math.max(0, progress.totalAnimalsRescued - classifiedRescues);
+  const surpriseResults = Object.entries(progress.bestResultsByLevel)
+    .filter(([, result]) => result.source === "generated");
+  const recentSurpriseResults = surpriseResults.slice(-6).reverse();
   const collectibles = [
     ...(["first-star", "animal-friend", "surprise-sparkle"] as const).map((id) => ({
       id,
@@ -3431,6 +3442,33 @@ function AchievementsScreen({
               );
             })}
           </div>
+        </section>
+
+        <section className="surprise-records" aria-labelledby="surprise-records-title">
+          <div className="book-section-heading">
+            <div><span>Procedural scrapbook</span><h2 id="surprise-records-title">Surprise Maze memories</h2></div>
+            <b>{progress.generatedMazesCompleted} unique</b>
+          </div>
+          <div className="surprise-explainer">
+            <span className="surprise-explainer-star" aria-hidden="true">✦</span>
+            <div>
+              <strong>Freshly made, not a hidden fixed list</strong>
+              <p>Surprise Mazes are generated from a new seed, so there can always be another one. The Book remembers completed adventures while the button makes a fresh puzzle.</p>
+            </div>
+            <button onClick={onSurprise}>Make a Surprise Maze</button>
+          </div>
+          {recentSurpriseResults.length > 0 && (
+            <div className="surprise-record-grid" aria-label="Recent completed Surprise Maze records">
+              {recentSurpriseResults.map(([levelId, result], index) => (
+                <article key={levelId}>
+                  <span aria-hidden="true">{index === 0 ? "★" : "✦"}</span>
+                  <div><strong>Surprise memory</strong><small>{describeGeneratedRecord(levelId)}</small></div>
+                  <div><b>{result.bestSteps ?? "—"}</b><small>best steps</small></div>
+                  <div><b>{result.bestRescuedCount}/{result.totalRescueCount}</b><small>friends</small></div>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="maze-records" aria-labelledby="reset-progress-title">

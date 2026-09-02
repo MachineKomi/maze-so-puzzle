@@ -4,6 +4,45 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.14.0 - 2026-09-02
+
+This compact-adventure release replaces maze sprawl with denser rooms, richer
+encounters, and an explicit maximum board size.
+
+### Added
+
+- Procedural 2×2 through 4×4 chambers that break up one-tile corridors and
+  create treasure rooms, rescue rooms, and Power-gated monster rooms.
+- Room guardians and clustered rewards in later Surprise Mazes, including
+  deliberately early strong encounters that invite Ame to return after growing.
+- A Surprise Maze scrapbook in the Adventure Book. It explains that these
+  mazes are procedurally generated, retains recent completion records, and keeps
+  a direct button for making another fresh puzzle.
+- A shared structural rule that rejects every authored or generated maze above
+  the absolute 24×24 limit.
+
+### Changed
+
+- Generated mazes now use odd dimensions from 9×9 through 23×23; 23 is the
+  largest compatible topology beneath the absolute 24-tile ceiling.
+- Lanternlight Labyrinth is rebuilt from 25×25 to a denser 23×23 room-based
+  puzzle. Its upper chamber contains two friends, two treasures, and a Power 10
+  guardian, while its ordinary and all-friends routes remain solver-proven.
+- Surprise Maze copy now clearly identifies procedural generation instead of
+  making an infinite set look like missing fixed entries in Maze Select.
+
+### Verification
+
+- `npm run check` passes 304 tests across 23 files plus strict TypeScript and
+  the Vite production build. Tests cover the absolute size boundary, room
+  geometry, clustered encounters, optional rescues, and all story solutions.
+- Desktop 1280×720 and iPad 1024×768 browser QA found no document overflow,
+  broken layout, or console warnings/errors in Lanternlight, Maze Select, or
+  the new procedural scrapbook.
+- The unsigned 0.14.0 portable and NSIS builds byte-match their final Tauri
+  outputs, report version 0.14.0, and the portable app passed its five-second
+  responsive launch smoke.
+
 ## 0.13.0 - 2026-09-02
 
 This read-together release gives all sixteen story mazes a sweet, silly fantasy

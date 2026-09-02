@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.13.0 play-test build, which remains an active prototype. Its complete
+0.14.0 play-test build, which remains an active prototype. Its complete
 automated browser gate and refreshed unsigned Windows packaging are verified.
 The verified source is live on the canonical Vercel site; the broader
 physical-device play-test pass remains a release step.
@@ -61,24 +61,24 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.13.0 test build:
+The current verified desktop artifacts are the unsigned 0.14.0 test build:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.13.0-portable.exe`
-  (85,586,432 bytes; SHA-256
-  `6B7D6C30DC10854845314547A2550F9EE340189BED8C66D83E6719EDDA608EF0`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.13.0-setup.exe`
-  (79,415,143 bytes; SHA-256
-  `7310066CFC3DC12F4518821F894A15B6CD10AFE9DCCF19129527E7F7A782BE26`).
+- Portable test copy: `release/Maze-so-Puzzle-0.14.0-portable.exe`
+  (85,587,456 bytes; SHA-256
+  `608BB7648D210FF3FA54C8030D3E4CC0F05B96752A70021DE9BE072521D95620`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.14.0-setup.exe`
+  (79,415,152 bytes; SHA-256
+  `97FEDB5C34C30849608FD4EA23AF42004A999929FF7FE6BE39CCAAB033746A31`).
   Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.13.0_x64-setup.exe` (byte-matches the staged
+  Puzzle - For Ame to Solve!_0.14.0_x64-setup.exe` (byte-matches the staged
   setup copy).
-- Both executables report file/product version 0.13.0. The portable app remained
+- Both executables report file/product version 0.14.0. The portable app remained
   responsive for a five-second smoke launch and showed the correct game title.
-- The verified 0.13.0 hashes and retained archive hashes are recorded in
+- The verified 0.14.0 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -112,7 +112,7 @@ The current verified desktop artifacts are the unsigned 0.13.0 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.13.0** label to
+On the title screen, click or tap the small **Playable build 0.14.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -127,7 +127,20 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.13.0
+## Included in playable build 0.14.0
+
+- A hard 24×24 maximum for every maze. Procedural topology stays on readable odd
+  sizes from 9×9 through 23×23, and authored levels are validated by the same
+  limit.
+- Later Surprise Mazes now carve compact 2×2 through 4×4 rooms, with clustered
+  friends and treasure, monster rooms, and strong guardians that encourage
+  exploring elsewhere and returning with more Power.
+- Lanternlight Labyrinth is now a denser 23×23 room puzzle rather than a 25×25
+  corridor marathon. Its main chamber combines two rescues, two treasures, and
+  a Power 10 guardian.
+- The Adventure Book now explains that Surprise Mazes are procedurally generated
+  rather than a hidden fixed catalogue, remembers recent completion records,
+  and offers a direct fresh-maze button.
 
 - A complete sixteen-chapter **Puzzlewild** story arc turns the authored campaign
   into a gentle fantasy JRPG read-together adventure. Sprig the baby
@@ -173,7 +186,7 @@ Turn the iPad sideways to play.
   and desktop. One to three friends receive roomy centred cards; groups of four
   or five remain together in a readable row.
 - Sixteen progressive story mazes with deliberate changes of pace. Sizes vary
-  from 9 × 9 to 25 × 25 rather than rising monotonically. The new 21 × 21
+  from 9 × 9 to 23 × 23 rather than rising monotonically. The 21 × 21
   **Twilight Treasure Loop** and 23 × 23 **Moonlit Friendship Quest** add long
   backtracking puzzles after Lanternlight Labyrinth; the latter introduces the
   Antidote Leaf and a required connected poison crossing. Three new portal
@@ -189,9 +202,9 @@ Turn the iPad sideways to play.
   still-mysterious parts of the maze; a bright outline links it to the exact
   area shown on the main board.
 - Fresh, solver-validated Surprise Mazes whose seed varies the readable odd
-  topology size across unlocked bands from 9 x 9 through 29 x 29. Later play
+  topology size across unlocked bands from 9 x 9 through 23 x 23. Later play
   unlocks variety rather than forcing every new maze to be larger, and the hard
-  topology cap remains below 30. Each seed also selects its illustrated terrain,
+  presentation ceiling is 24. Each seed also selects its illustrated terrain,
   weapon, friendly enemy, and cage variants deterministically.
 - A typed floor-and-wall theme catalogue with dominant-colour metadata and an
   explicit compatibility matrix, plus five weapon looks, five friendly enemy
@@ -339,12 +352,12 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.13.0 source suite passes 302 automated tests across 23 files and the strict
+The 0.14.0 source suite passes 304 automated tests across 23 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
 dominant-colour theme compatibility, thirteen-track per-maze music selection, the
-6 x 6 even camera, variable 9–29 generation, solver-safe connected hazards,
+6 x 6 even camera, variable 9–23 room-aware generation, solver-safe connected hazards,
 pointer intent/corner assistance, the slower eased held-input cadence, variable
 1–5 friend totals, immutable strong-enemy warnings, poison/antidote traversal
 and migration, theme lightness and colour compatibility, transparent terrain
@@ -354,8 +367,8 @@ combat, paired-portal structural validation and travel, portal-safe active-run
 recovery, full-world camera interpolation, scaled-pointer hysteresis, and the
 full-reset storage allow-list.
 
-The 0.13.0 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.13.0, and are size-checked and
+The 0.14.0 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.14.0, and are size-checked and
 SHA-256 hashed. The portable app also passed a responsive five-second launch
 smoke with the correct title. Clean-machine installation, signing, and
 physical-device checks remain separate release gates. The release source is
@@ -371,7 +384,7 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.13.0 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.14.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

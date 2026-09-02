@@ -1,6 +1,7 @@
 import { createInitialGameState, getTerrainAt, isInBounds, movePlayer, pointKey, pointsEqual } from "./engine";
 import {
   ANIMAL_SPECIES,
+  ABSOLUTE_MAZE_SIZE_LIMIT,
   DIRECTIONS,
   PORTAL_PAIR_IDS,
   type Direction,
@@ -83,6 +84,9 @@ export function getLevelStructureErrors(level: LevelDefinition): readonly string
   }
   if (level.width !== level.height) {
     errors.push("The maze must be square.");
+  }
+  if (level.width > ABSOLUTE_MAZE_SIZE_LIMIT || level.height > ABSOLUTE_MAZE_SIZE_LIMIT) {
+    errors.push(`Maze dimensions cannot exceed ${ABSOLUTE_MAZE_SIZE_LIMIT} tiles.`);
   }
   if (!Number.isInteger(level.initialPower) || level.initialPower <= 0) {
     errors.push("Initial Power must be a positive integer.");

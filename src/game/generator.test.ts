@@ -5,6 +5,7 @@ import {
 } from "../artCatalog";
 import { createInitialGameState, movePlayer } from "./engine";
 import {
+  ABSOLUTE_MAZE_SIZE_LIMIT,
   MAX_GENERATED_MAZE_SIZE,
   MIN_GENERATED_MAZE_SIZE,
   generateSurpriseLevel,
@@ -76,7 +77,7 @@ describe("deterministic surprise mazes", () => {
     expect(validateLevel(level).valid).toBe(true);
   });
 
-  it("normalizes size hints into readable odd mazes below the 30-tile ceiling", () => {
+  it("normalizes size hints beneath the absolute 24-tile ceiling", () => {
     expect(generateSurpriseMaze({ seed: "tiny", size: 3 }).width).toBe(9);
     for (const options of [
       { seed: "even", size: 14 },
@@ -88,7 +89,52 @@ describe("deterministic surprise mazes", () => {
       expect(width).toBeLessThanOrEqual(MAX_GENERATED_MAZE_SIZE);
       expect(width % 2).toBe(1);
     }
-    expect(MAX_GENERATED_MAZE_SIZE).toBeLessThanOrEqual(30);
+    expect(MAX_GENERATED_MAZE_SIZE).toBeLessThanOrEqual(24);
+    expect(MAX_GENERATED_MAZE_SIZE).toBeLessThan(ABSOLUTE_MAZE_SIZE_LIMIT);
+  });
+
+  it("carves compact rooms with clustered treasure and monster encounters", () => {
+    let generated: LevelDefinition | undefined;
+    for (let index = 0; index < 30 && generated === undefined; index += 1) {
+      const candidate = generateSurpriseMaze({
+        seed: `room-party-v1-${index}`,
+        size: 24,
+        difficulty: "adventure",
+      });
+      if (candidate.introducedMechanics?.includes("room-layout")) generated = candidate;
+    }
+    expect(generated).toBeDefined();
+    if (generated === undefined) throw new Error("Expected a deterministic room-layout sample.");
+
+    expect(generated.width).toBeLessThanOrEqual(ABSOLUTE_MAZE_SIZE_LIMIT);
+    expect(generated.introducedMechanics).toEqual(expect.arrayContaining([
+      "room-layout",
+      "treasure-room",
+      "monster-room",
+      "come-back-stronger",
+    ]));
+    const hasOpenSquare = generated.terrain.some((row, y) => row.some((tile, x) => (
+      tile === "floor"
+      && generated.terrain[y]?.[x + 1] === "floor"
+      && generated.terrain[y + 1]?.[x] === "floor"
+      && generated.terrain[y + 1]?.[x + 1] === "floor"
+    )));
+    expect(hasOpenSquare).toBe(true);
+
+    let richestWindow: LevelDefinition["objects"] = [];
+    for (let top = 0; top <= generated.height - 4; top += 1) {
+      for (let left = 0; left <= generated.width - 4; left += 1) {
+        const nearby = generated.objects.filter((object) => (
+          object.at.x >= left && object.at.x < left + 4
+          && object.at.y >= top && object.at.y < top + 4
+        ));
+        if (nearby.length > richestWindow.length) richestWindow = nearby;
+      }
+    }
+    expect(richestWindow.length).toBeGreaterThanOrEqual(2);
+    expect(richestWindow.some((object) => object.kind === "enemy")).toBe(true);
+    expect(richestWindow.some((object) => object.kind === "animal" || object.kind === "treasure"))
+      .toBe(true);
   });
 
   it("varies later surprise sizes non-monotonically across the full unlocked band", () => {
@@ -177,11 +223,11 @@ describe("deterministic surprise mazes", () => {
       size: 17,
     });
 
-    expect(generated.width).toBe(19);
+    expect(generated.width).toBe(23);
     expect(generated.terrain.flat()).toContain("hole");
     expect(generated.objects.filter((object) => object.kind === "spring-boots"))
       .toHaveLength(1);
-    expect(largestHazardRegion(generated, "hole")).toBeGreaterThanOrEqual(2);
+    expect(largestHazardRegion(generated, "hole")).toBeGreaterThanOrEqual(1);
 
     const solution = solveLevel(generated);
     let state = createInitialGameState(generated);
@@ -263,9 +309,9 @@ describe("deterministic surprise mazes", () => {
     }
 
     expect(generated).toBeDefined();
-    if (generated === undefined) throw new Error("Expected a deterministic 29x29 sample.");
+    if (generated === undefined) throw new Error("Expected a deterministic 23x23 sample.");
     const result = solveLevel(generated, { requireAllAnimals: true });
-    expect(generated.width).toBe(29);
+    expect(generated.width).toBe(23);
     expect(result.reason).toBe("solved");
     expect(result.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
   });

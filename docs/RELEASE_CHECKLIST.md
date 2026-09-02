@@ -6,18 +6,49 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.13.0: `npm run check` passes 302 tests across 23 files plus strict
+Status for 0.14.0: `npm run check` passes 304 tests across 23 files plus strict
 TypeScript and the Vite production build. The moderate-level npm audit reports
 zero vulnerabilities; `npm ls` is clean, and locked Cargo compilation passes.
-Browser QA at 1280×720 desktop, 1024×768 iPad, and 844×390 landscape phone found
-that chapters 1, 10, and 16 fit the fixed composition without scrolling or UI
-overlap. The unsigned Windows portable and setup builds were built, hashed,
+Browser QA at 1280×720 desktop and 1024×768 iPad found that compact Lanternlight
+rooms and the procedural scrapbook fit without document overflow or UI overlap.
+The unsigned Windows portable and setup builds were built, hashed,
 byte-compared, versioned, and smoke-tested. Physical-device touch/listening/
 feel, accessibility, clean-machine installation, signing, and the broader
 manual play-through remain deliberately unclaimed. Earlier evidence is kept as
 historical release evidence.
 
-## 0.13.0 verification record
+## 0.14.0 verification record
+
+- [x] Version 0.14.0 is aligned in npm, Cargo, Tauri, and the visible build label.
+- [x] `ABSOLUTE_MAZE_SIZE_LIMIT` is 24 and the structural validator rejects
+  oversized authored or generated levels. Generated odd topology caps at 23.
+- [x] Every authored maze is at most 23×23. Lanternlight Labyrinth is rebuilt at
+  23×23 with ordinary/perfect routes of 173/217 inputs.
+- [x] Later generated mazes carve deterministic 2×2–4×4 rooms and identify room,
+  treasure-room, monster-room and return-stronger mechanics.
+- [x] Lanternlight's upper chamber contains two rescues, two treasures and its
+  Power 10 guardian; the ordinary route can still skip optional rescues.
+- [x] Maze Select calls Surprise Mazes procedurally generated. The Adventure Book
+  explains the infinite seeded catalogue and shows up to six recent records.
+- [x] `npm run check`: 304/304 tests pass across 23 files; strict TypeScript and
+  the Vite production build pass.
+- [x] `npm audit --audit-level=moderate`: zero vulnerabilities. `npm ls`: clean.
+  `cargo check --locked`: passed.
+- [x] Desktop 1280×720 and iPad 1024×768 keep Lanternlight and the procedural
+  scrapbook inside the fixed stage with no document overflow or browser errors.
+- [ ] GitHub/Vercel deployment is pending the exact release commit.
+- [x] `Maze-so-Puzzle-0.14.0-portable.exe`: 85,587,456 bytes, file/product
+  version 0.14.0, SHA-256
+  `608BB7648D210FF3FA54C8030D3E4CC0F05B96752A70021DE9BE072521D95620`.
+- [x] `Maze-so-Puzzle-0.14.0-setup.exe`: 79,415,152 bytes, file/product version
+  0.14.0, SHA-256
+  `97FEDB5C34C30849608FD4EA23AF42004A999929FF7FE6BE39CCAAB033746A31`.
+- [x] Both staged binaries byte-match their final Tauri outputs. The portable
+  app stayed responsive for five seconds and reported the correct window title.
+- [ ] Clean-machine install, code signing, physical-device listening/feel, and
+  the complete manual campaign remain owner/device checks.
+
+## Historical 0.13.0 verification record
 
 - [x] Version 0.13.0 is aligned in npm, Cargo, Tauri, and the visible build label.
 - [x] Every authored story maze has exactly one ordered lore entry with two

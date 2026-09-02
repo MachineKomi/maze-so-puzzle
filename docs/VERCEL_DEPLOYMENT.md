@@ -54,11 +54,14 @@ document and does not use client-side URL routing.
 - Confirm every maze whose width or height exceeds 6 tiles uses the 6×6
   player-centred view and a minimap that keeps explored tiles visible while
   masking unvisited areas. Check an early 9×9 maze, a generated maze, and the
-  25×25 Lanternlight Labyrinth, including camera clamping near an outer edge.
+  23×23 Lanternlight Labyrinth, including camera clamping near an outer edge.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
-  across unlocked odd 9–29 bands rather than increasing monotonically. No
-  generated dimension should reach 30.
-- Click or tap the small **Playable build 0.13.0** label on the title screen and
+  across unlocked odd 9–23 bands rather than increasing monotonically. No maze
+  may exceed the absolute 24×24 limit.
+- Inspect later generated mazes for 2×2–4×4 chambers, clustered treasure or
+  rescues, and Power-gated monster rooms. The widened geometry must not make any
+  ordinary or all-friends route unsolvable.
+- Click or tap the small **Playable build 0.14.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
