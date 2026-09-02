@@ -29,7 +29,7 @@ historical evidence.
 | Room-based design | Later Surprise Mazes plus rebuilt Lanternlight Labyrinth | 2×2–4×4 procedural rooms cluster treasure, rescues and Power-gated guardians; Lanternlight is 23×23 with a five-object monster/treasure chamber |
 | Procedural records | Maze Select and Adventure Book | Copy explicitly identifies fresh seeded generation; the Book keeps up to six recent record cards rather than presenting an infinite fixed list |
 | Responsive browser QA | Desktop 1280×720 and iPad 1024×768 | Lanternlight, the scrapbook and fixed stage fit without document overflow; browser warning/error logs are empty |
-| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Exact 0.14.0 release deployment verification is pending |
+| Hosting | GitHub `main` commit `0a6168b` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Auto-deployed successfully; the canonical title reports 0.14.0, the tester lists all 16 story mazes with a 23×23 Lanternlight, and the live procedural scrapbook copy is present |
 | Desktop artifacts | Unsigned 0.14.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
 
 ## Historical 0.13.0 release status

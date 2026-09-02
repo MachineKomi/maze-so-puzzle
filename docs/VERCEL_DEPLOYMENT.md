@@ -193,3 +193,13 @@ and Professor Poggle WebPs return HTTP 200 as `image/webp` at 58,694 and 73,084
 bytes. Local story QA covers chapters 1, 10, and 16 at 1280 × 720 desktop,
 1024 × 768 iPad, and 844 × 390 landscape phone. Earlier release paragraphs
 remain historical evidence.
+
+Playable build 0.14.0 was pushed to GitHub `main` as commit `0a6168b` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical title reports 0.14.0; its tester lists all sixteen story
+mazes and reports the rebuilt Lanternlight Labyrinth at 23×23. The live
+Adventure Book includes the procedural Surprise Maze explanation and fresh-maze
+button. At 1280×720 the production document exactly matches the viewport with
+no page overflow. Local 1280×720 and 1024×768 checks remain the detailed room,
+fixed-stage, and browser-log record for this exact source. Earlier release
+paragraphs remain historical evidence.

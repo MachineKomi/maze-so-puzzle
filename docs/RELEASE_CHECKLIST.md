@@ -36,7 +36,10 @@ historical release evidence.
   `cargo check --locked`: passed.
 - [x] Desktop 1280×720 and iPad 1024×768 keep Lanternlight and the procedural
   scrapbook inside the fixed stage with no document overflow or browser errors.
-- [ ] GitHub/Vercel deployment is pending the exact release commit.
+- [x] GitHub `main` commit `0a6168b` auto-deployed through Vercel. The canonical
+  title reports 0.14.0, its tester lists the 23×23 Lanternlight and every one of
+  the 16 story mazes, and the live Adventure Book includes the procedural
+  Surprise Maze scrapbook. The 1280×720 production document has no overflow.
 - [x] `Maze-so-Puzzle-0.14.0-portable.exe`: 85,587,456 bytes, file/product
   version 0.14.0, SHA-256
   `608BB7648D210FF3FA54C8030D3E4CC0F05B96752A70021DE9BE072521D95620`.
