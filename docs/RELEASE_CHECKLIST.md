@@ -6,8 +6,8 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.18.0: `npm run check` passes 314 tests across 26 files plus strict
-TypeScript and the Vite production build. Production JavaScript is 116.01 KB
+Status for 0.19.0: `npm run check` passes 316 tests across 27 files plus strict
+TypeScript and the Vite production build. Production JavaScript is 117.04 KB
 gzipped. The production-only npm audit reports zero vulnerabilities; `npm ls` is
 clean, and locked Cargo compilation passes. Local browser QA at 1280 × 720 and
 1024 × 768 verified pickup art, the complete cage, rescue, gameplay HUD, and
@@ -16,6 +16,35 @@ setup builds were built, hashed, byte-compared, versioned, and smoke-tested.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
+
+## 0.19.0 verification record
+
+- [x] Version 0.19.0 is aligned in npm, Cargo, Tauri, and the visible label.
+- [x] Water uses moving cool-white ripple bands; lava uses internal shimmer
+  veins and pulsing hot cores without an outline or cast shadow; poison uses
+  four staggered rising-and-popping bubble rhythms.
+- [x] Heart, Star, and Sun keys and doors share distinct typed glow colours and
+  motif cues. Door opening uses an 860 ms edge bloom and eighteen deterministic
+  colour/motif particles, with a static reduced-motion treatment.
+- [x] `npm run check`: 316/316 tests pass across 27 files; strict TypeScript and
+  Vite production builds pass. `npm audit --omit=dev`: zero vulnerabilities;
+  `npm ls` and `cargo check --locked` pass.
+- [x] Local browser QA at 1280 × 720 walked onto live lava and water, inspected
+  the Blue Star Key glow and opening burst, and verified poison animation
+  contracts. A 1024 × 768 iPad viewport has no document overflow; warning and
+  error logs are empty.
+- [ ] GitHub/Vercel source deployment and canonical live-bundle verification
+  are completed after the release commit is pushed.
+- [x] `Maze-so-Puzzle-0.19.0-portable.exe`: 97,871,360 bytes, file/product
+  version 0.19.0, SHA-256
+  `2E89AB011E20A6EB4C6E066D6221E21147BC8DBDED24A053C74472EEE6E73916`.
+- [x] `Maze-so-Puzzle-0.19.0-setup.exe`: 91,784,124 bytes, file/product version
+  0.19.0, SHA-256
+  `5C1DA8D296EE241EA8FBD337072837C70CDBDCE44B2FF8FB164138C969F46069`.
+- [x] Both staged binaries byte-match the final Tauri outputs. The portable app
+  stayed responsive for five seconds with the correct window title.
+- [ ] Clean-machine install, signing, and physical-device play testing remain
+  owner/device checks.
 
 ## 0.18.0 verification record
 

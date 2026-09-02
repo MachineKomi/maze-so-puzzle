@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.18.0 play-test build, which remains an active prototype. Its complete
+0.19.0 play-test build, which remains an active prototype. Its complete
 automated browser gate and refreshed unsigned Windows packaging are verified.
 The verified source is live on the canonical Vercel site; the broader
 physical-device play-test pass remains a release step.
@@ -61,24 +61,24 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.18.0 test build:
+The current verified desktop artifacts are the unsigned 0.19.0 test build:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.18.0-portable.exe`
-  (97,869,312 bytes; SHA-256
-  `582C7ACCDA45D71CDC2BB26A759B6F20EF3D8872868B87AFFE3A637FEB56C4E4`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.18.0-setup.exe`
-  (91,782,678 bytes; SHA-256
-  `BB791B1F4DE256EA3F1FD1A5D599D848D37BEE2446DF123832138EE89287D745`).
+- Portable test copy: `release/Maze-so-Puzzle-0.19.0-portable.exe`
+  (97,871,360 bytes; SHA-256
+  `2E89AB011E20A6EB4C6E066D6221E21147BC8DBDED24A053C74472EEE6E73916`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.19.0-setup.exe`
+  (91,784,124 bytes; SHA-256
+  `5C1DA8D296EE241EA8FBD337072837C70CDBDCE44B2FF8FB164138C969F46069`).
   Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.18.0_x64-setup.exe` (byte-matches the staged
+  Puzzle - For Ame to Solve!_0.19.0_x64-setup.exe` (byte-matches the staged
   setup copy).
-- Both executables report file/product version 0.18.0. The portable app remained
+- Both executables report file/product version 0.19.0. The portable app remained
   responsive for a five-second smoke launch and showed the correct game title.
-- The verified 0.18.0 hashes and retained archive hashes are recorded in
+- The verified 0.19.0 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -112,7 +112,7 @@ The current verified desktop artifacts are the unsigned 0.18.0 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.18.0** label to
+On the title screen, click or tap the small **Playable build 0.19.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -127,7 +127,16 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.18.0
+## Included in playable build 0.19.0
+
+- Connected water now carries gently travelling cool-blue ripples, lava glows
+  with hot internal veins and pulsing cores, and purple poison continuously
+  releases staggered bubbles that rise and pop. These are compact SVG/CSS
+  overlays rather than additional downloaded textures.
+- Heart, Star, and Sun keys and doors glow in their matching colour. Opening a
+  door pauses movement for a short magical edge bloom, then showers the square
+  with eighteen matching motif particles before returning control.
+- Ambient and set-piece effects become static when reduced motion is enabled.
 
 - Important pickups now pair larger floating text with the exact collected
   weapon, boots, potion, key, or treasure sprite. Winning combat adds a separate
@@ -398,7 +407,7 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.18.0 source suite passes 314 automated tests across 26 files and the strict
+The 0.19.0 source suite passes 316 automated tests across 27 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
@@ -414,8 +423,8 @@ recovery, full-world camera interpolation, scaled-pointer hysteresis, and the
 full-reset storage allow-list, complete friend/enemy personality maps, scoped
 large-maze object mounting, and below-fold portrait lazy loading.
 
-The 0.18.0 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.18.0, and are size-checked and
+The 0.19.0 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.19.0, and are size-checked and
 SHA-256 hashed. The portable app also passed a responsive five-second launch
 smoke with the correct title. Clean-machine installation, signing, and
 physical-device checks remain separate release gates. The release source is
@@ -431,7 +440,7 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.18.0 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.19.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

@@ -4,6 +4,30 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.19.0 - 2026-09-02
+
+This living-magic release makes the maze itself feel more enchanted while
+keeping every effect lightweight enough for the browser and iPad target.
+
+### Added
+
+- Cool-white ripple bands that travel gently across connected water regions.
+- Bright internal lava veins and pulsing hot cores that create a red-orange
+  heat shimmer without adding a raised outline or cast shadow.
+- Staggered poison bubbles that rise, swell, and pop across purple poison.
+- Colour-and-shape-aware lock magic: Heart, Star, and Sun keys glow in their
+  matching colour, while doors breathe with the same readable aura.
+- A dedicated door-opening set piece with an edge bloom, glowing motif, and
+  eighteen deterministic heart, star, sun, petal, diamond, or sparkle motes.
+- Unit coverage for the lock-effect palette and deterministic particle shower.
+
+### Changed
+
+- Door interactions briefly hold movement for their 860 ms magical reveal and
+  reuse the existing unlock chime, then return control on the open square.
+- All new ambient animations stop under the operating system's reduced-motion
+  preference while retaining a clear static material and lock treatment.
+
 ## 0.18.0 - 2026-09-02
 
 This clearer-rewards release makes discoveries easier to read and gives every

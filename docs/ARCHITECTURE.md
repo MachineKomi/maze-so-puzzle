@@ -15,7 +15,10 @@ state.
    terrain, weapon, enemy, pet, and cage presentation and overlays the selected
    weapon in Ame's hands after collection. It also owns primary-pointer capture,
    repeat timing, the touch cursor, rescued-pet follower presentation, and the
-   cancellable jump, three-bash battle, rescue, and Power-transfer presentations.
+   cancellable jump, three-bash battle, rescue, colour-aware door-opening, and
+   Power-transfer presentations. Water, lava, and poison share the traced
+   terrain geometry with lightweight animated SVG material overlays; lock
+   colours and motif particles come from `src/magicEffects.ts`.
    Important pickups also create an independently timed, board-centred
    sprite-and-label toast; completed combat creates a tile-anchored Power reward
    notice. Larger player/enemy sprites and Power labels are presentation-only CSS. It
@@ -201,9 +204,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.18.0 source is shared by the web and Tauri build paths, and its automated
+- The 0.19.0 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.18.0, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.19.0, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
   five-second smoke launch with the correct title. The GitHub-connected Vercel
   production deployment is verified separately after each push. Clean-machine
@@ -227,14 +230,15 @@ Spring Boots, single/multi-hole jumps and unsafe landings, legacy-session
   carving and clustered encounters, connected
 post-boots hazards, pointer intent and corner-assist safety, rescued-pet trail
 selection, held-input acceleration, theme colour/lightness separation, terrain
-dressing preload, dedicated key/door pair and complete v5 cage-front coverage,
+  dressing preload, dedicated key/door pair, deterministic colour/motif door
+  bursts, and complete v5 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.18.0 run covers 314 tests across 26 files; `npm run check` also
+solver. The 0.19.0 run covers 316 tests across 27 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.18.0.
+and portable launch smoke are complete for 0.19.0.
 
 ## Extension points
 

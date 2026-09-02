@@ -26,6 +26,7 @@ import {
   pickupToastFor,
   type MapPickupToast,
 } from "./mapNotices";
+import { createDoorBurstParticles, LOCK_MAGIC_EFFECTS } from "./magicEffects";
 import {
   KEY_COLOR_LABELS,
   KEY_MOTIF_LABELS,
@@ -182,8 +183,9 @@ const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
+const DOOR_OPEN_PRESENTATION_MS = 860;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.18.0";
+const BUILD_VERSION = "0.19.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -298,6 +300,13 @@ interface PortalPresentation {
   readonly pair: Extract<LevelObject, { kind: "portal" }>["pair"];
   readonly from: Point;
   readonly to: Point;
+}
+
+interface DoorOpeningPresentation {
+  readonly objectId: string;
+  readonly color: KeyColor;
+  readonly at: Point;
+  readonly doorSrc: string;
 }
 
 interface TreasurePresentation {
@@ -632,6 +641,9 @@ const MazeTerrain = memo(function MazeTerrain({
   const waterPatternId = `${patternPrefix}-water`;
   const lavaPatternId = `${patternPrefix}-lava`;
   const poisonPatternId = `${patternPrefix}-poison`;
+  const waterFxPatternId = `${patternPrefix}-water-fx`;
+  const lavaFxPatternId = `${patternPrefix}-lava-fx`;
+  const poisonFxPatternId = `${patternPrefix}-poison-fx`;
   const hazardInsetFilterId = `${patternPrefix}-hazard-inset`;
   const waterMaskId = `${patternPrefix}-water-mask`;
   const lavaMaskId = `${patternPrefix}-lava-mask`;
@@ -677,6 +689,28 @@ const MazeTerrain = memo(function MazeTerrain({
           </pattern>
           <pattern id={poisonPatternId} patternUnits="userSpaceOnUse" width="4.2" height="4.2">
             <image href={ASSETS.poison} x="0" y="0" width="4.2" height="4.2" preserveAspectRatio="none" />
+          </pattern>
+          <pattern id={waterFxPatternId} patternUnits="userSpaceOnUse" width="1.8" height="1.8">
+            <g className="water-ripple-marks">
+              <path d="M.16 .42 C.38 .27 .68 .27 .91 .42 S1.43 .57 1.66 .4" />
+              <path d="M.06 1.16 C.3 1.02 .57 1.02 .8 1.16 S1.3 1.31 1.57 1.15" />
+              <path d="M.5 1.57 C.68 1.48 .91 1.48 1.08 1.57" />
+            </g>
+          </pattern>
+          <pattern id={lavaFxPatternId} patternUnits="userSpaceOnUse" width="1.75" height="1.75">
+            <g className="lava-shimmer-marks">
+              <circle cx=".34" cy=".42" r=".18" />
+              <circle cx="1.32" cy="1.16" r=".25" />
+              <path d="M.18 1.42 C.55 1.1 .7 1.66 1.02 1.39 S1.48 1.22 1.7 1.45" />
+            </g>
+          </pattern>
+          <pattern id={poisonFxPatternId} patternUnits="userSpaceOnUse" width="1.55" height="1.55">
+            <g className="poison-bubble-marks">
+              <circle className="poison-bubble bubble-a" cx=".3" cy="1.3" r=".09" />
+              <circle className="poison-bubble bubble-b" cx=".88" cy=".92" r=".12" />
+              <circle className="poison-bubble bubble-c" cx="1.3" cy="1.4" r=".065" />
+              <circle className="poison-bubble bubble-d" cx="1.18" cy=".42" r=".05" />
+            </g>
           </pattern>
           <filter
             id={hazardInsetFilterId}
@@ -791,6 +825,9 @@ const MazeTerrain = memo(function MazeTerrain({
         {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} mask={`url(#${waterMaskId})`} />}
         {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} mask={`url(#${lavaMaskId})`} />}
         {poison.d && <path className="terrain-poison" d={poison.d} fill={`url(#${poisonPatternId})`} fillRule={poison.fillRule} mask={`url(#${poisonMaskId})`} />}
+        {water.d && <path className="terrain-water-fx" d={water.d} fill={`url(#${waterFxPatternId})`} fillRule={water.fillRule} mask={`url(#${waterMaskId})`} />}
+        {lava.d && <path className="terrain-lava-fx" d={lava.d} fill={`url(#${lavaFxPatternId})`} fillRule={lava.fillRule} mask={`url(#${lavaMaskId})`} />}
+        {poison.d && <path className="terrain-poison-fx" d={poison.d} fill={`url(#${poisonFxPatternId})`} fillRule={poison.fillRule} mask={`url(#${poisonMaskId})`} />}
         {walls.d && (
           <path
             className="terrain-wall-depth"
@@ -1100,6 +1137,7 @@ function App() {
   const [rescuePresentation, setRescuePresentation] = useState<RescuePresentation | null>(null);
   const [jumpPresentation, setJumpPresentation] = useState<JumpPresentation | null>(null);
   const [portalPresentation, setPortalPresentation] = useState<PortalPresentation | null>(null);
+  const [doorOpeningPresentation, setDoorOpeningPresentation] = useState<DoorOpeningPresentation | null>(null);
   const [treasurePresentation, setTreasurePresentation] = useState<TreasurePresentation | null>(null);
   const [presentedPower, setPresentedPower] = useState<number | null>(null);
   const [presentedEnemyPower, setPresentedEnemyPower] = useState<number | null>(null);
@@ -1289,7 +1327,8 @@ function App() {
   const presentationActive = battlePresentation !== null
     || rescuePresentation !== null
     || jumpPresentation !== null
-    || portalPresentation !== null;
+    || portalPresentation !== null
+    || doorOpeningPresentation !== null;
   const modalOpen = resetProgressOpen
     || testerPickerOpen
     || levelPickerOpen
@@ -1364,6 +1403,7 @@ function App() {
     setRescuePresentation(null);
     setJumpPresentation(null);
     setPortalPresentation(null);
+    setDoorOpeningPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
   }, [clearPresentationWork]);
@@ -1413,6 +1453,7 @@ function App() {
     setRescuePresentation(null);
     setJumpPresentation(null);
     setPortalPresentation(null);
+    setDoorOpeningPresentation(null);
     setPresentedEnemyPower(event.enemyPower);
     setPresentedPower(event.powerBefore);
     setBattlePresentation({
@@ -1465,6 +1506,7 @@ function App() {
     setBattlePresentation(null);
     setJumpPresentation(null);
     setPortalPresentation(null);
+    setDoorOpeningPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
     setRescuePresentation({
@@ -1491,6 +1533,7 @@ function App() {
     setBattlePresentation(null);
     setRescuePresentation(null);
     setPortalPresentation(null);
+    setDoorOpeningPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
     setJumpPresentation({
@@ -1525,11 +1568,36 @@ function App() {
     setBattlePresentation(null);
     setRescuePresentation(null);
     setJumpPresentation(null);
+    setDoorOpeningPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
     setPortalPresentation({ pair: event.pair, from: event.from, to: event.to });
     playSound("portal", mutedRef.current);
     schedulePresentationTimer(sequence, () => setPortalPresentation(null), Math.max(100, duration - 25));
+    return duration;
+  }, [clearPresentationWork, schedulePresentationTimer]);
+
+  const beginDoorOpeningPresentation = useCallback((
+    event: Extract<GameEvent, { type: "door-opened" }>,
+    door: Extract<LevelObject, { kind: "door" }>,
+  ): number => {
+    clearPresentationWork();
+    const sequence = presentationSequence.current;
+    const duration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : DOOR_OPEN_PRESENTATION_MS;
+    setBattlePresentation(null);
+    setRescuePresentation(null);
+    setJumpPresentation(null);
+    setPortalPresentation(null);
+    setPresentedPower(null);
+    setPresentedEnemyPower(null);
+    setDoorOpeningPresentation({
+      objectId: event.objectId,
+      color: event.color,
+      at: door.at,
+      doorSrc: resolveDoorArt(event.color).src,
+    });
+    playSound("unlock", mutedRef.current);
+    schedulePresentationTimer(sequence, () => setDoorOpeningPresentation(null), Math.max(100, duration - 25));
     return duration;
   }, [clearPresentationWork, schedulePresentationTimer]);
 
@@ -1705,6 +1773,9 @@ function App() {
     const portalEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "portal-warped" }> => event.type === "portal-warped",
     );
+    const openedDoorEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "door-opened" }> => event.type === "door-opened",
+    );
     const treasureEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "treasure-collected" }> => event.type === "treasure-collected",
     );
@@ -1784,13 +1855,33 @@ function App() {
       } else if (animal) {
         presentationDuration = beginRescuePresentation(rescuedEvent, animal);
       }
-    } else if (jumpedEvent) {
+    } else if (jumpedEvent && !openedDoorEvent) {
       presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
     } else if (portalEvent) {
       clearHeldInput();
       presentationDuration = beginPortalPresentation(portalEvent);
+    } else if (openedDoorEvent) {
+      clearHeldInput();
+      const door = level.objects.find(
+        (object): object is Extract<LevelObject, { kind: "door" }> => (
+          object.kind === "door" && object.id === openedDoorEvent.objectId
+        ),
+      );
+      if (door && jumpedEvent) {
+        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump");
+        const jumpSequence = presentationSequence.current;
+        const doorDuration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : DOOR_OPEN_PRESENTATION_MS;
+        schedulePresentationTimer(
+          jumpSequence,
+          () => beginDoorOpeningPresentation(openedDoorEvent, door),
+          Math.max(100, jumpDuration - 20),
+        );
+        presentationDuration = Math.max(100, jumpDuration - 20) + doorDuration;
+      } else if (door) {
+        presentationDuration = beginDoorOpeningPresentation(openedDoorEvent, door);
+      }
     }
-    if (!defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && !portalEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
+    if (!defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && !portalEvent && !openedDoorEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
       playSound(nextFeedback.sound, muted);
       if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
     }
@@ -1876,7 +1967,7 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, blockerHint, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, showMapNotice, storyOpen, testerPickerOpen, testerRun, tooStrongEncounter]);
+  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, blockerHint, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, showMapNotice, storyOpen, testerPickerOpen, testerRun, tooStrongEncounter]);
 
   const dismissStory = useCallback(() => {
     setStoryOpen(false);
@@ -2560,7 +2651,7 @@ function App() {
 
             <div
               ref={boardRef}
-              className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}${portalPresentation ? " portal-active" : ""}`}
+              className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}${portalPresentation ? " portal-active" : ""}${doorOpeningPresentation ? " door-opening-active" : ""}`}
               data-terrain-theme={terrainTheme.id}
               style={{
                 gridTemplateColumns: `repeat(${cameraWindow.width}, minmax(0, 1fr))`,
@@ -2601,6 +2692,7 @@ function App() {
                         ? enemyPersonality(object.style).flourish
                         : undefined}
                     data-enemy-motion={object.kind === "enemy" ? enemyPersonality(object.style).motion : undefined}
+                    data-key-color={object.kind === "key" || object.kind === "door" ? object.color : undefined}
                     key={object.id}
                     style={worldLayerStyle(object.at, level)}
                   >
@@ -2667,6 +2759,38 @@ function App() {
                     className="touch-joystick-cursor"
                     style={{ position: "absolute", left: "var(--touch-cursor-x)", top: "var(--touch-cursor-y)", transform: "translate(-50%, -50%)" }}
                   >{touchCursor.direction ? DIRECTION_ICONS[touchCursor.direction] : "✦"}</i>
+                </div>
+              )}
+
+              {doorOpeningPresentation && isInsideWindow(doorOpeningPresentation.at, cameraWindow) && (
+                <div
+                  className={`door-opening-presentation door-magic-${doorOpeningPresentation.color}`}
+                  data-key-color={doorOpeningPresentation.color}
+                  data-sfx-cue="colour-lock-chime-and-magic-burst"
+                  style={{
+                    ...cameraLayerStyle(doorOpeningPresentation.at, cameraWindow),
+                    "--magic-core": LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].core,
+                    "--magic-glow": LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].glow,
+                    "--magic-pale": LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].pale,
+                  } as CSSProperties}
+                  aria-hidden="true"
+                >
+                  <span className="door-opening-halo" />
+                  <img className="door-opening-sprite" src={doorOpeningPresentation.doorSrc} alt="" draggable={false} />
+                  <b className="door-opening-motif">{LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].symbols[0]}</b>
+                  <span className="door-opening-particles">
+                    {createDoorBurstParticles(doorOpeningPresentation.color).map((particle, index) => (
+                      <i
+                        style={{
+                          "--burst-x": particle.x,
+                          "--burst-y": particle.y,
+                          "--burst-delay": `${particle.delayMs}ms`,
+                          "--burst-scale": particle.scale,
+                        } as CSSProperties}
+                        key={`${particle.glyph}-${index}`}
+                      >{particle.glyph}</i>
+                    ))}
+                  </span>
                 </div>
               )}
 
@@ -2787,7 +2911,7 @@ function App() {
               )}
 
               <div
-                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
+                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation || doorOpeningPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
                 style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
               >

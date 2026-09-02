@@ -61,7 +61,7 @@ document and does not use client-side URL routing.
 - Inspect later generated mazes for 2×2–4×4 chambers, clustered treasure or
   rescues, and Power-gated monster rooms. The widened geometry must not make any
   ordinary or all-friends route unsolvable.
-- Click or tap the small **Playable build 0.18.0** label on the title screen and
+- Click or tap the small **Playable build 0.19.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -74,7 +74,9 @@ document and does not use client-side URL routing.
   and connected water/lava/poison areas. Floor and wall patterns should remain aligned
   across the camera, convex and concave corners should follow the terrain
   boundary, floor/wall contrast should remain clear, and connected 2–4 tile
-  hazards should have no outline, lip, cast shadow, or filter.
+  hazard base textures should have no outline, lip, or cast shadow. Confirm the
+  water ripple, internal lava shimmer, and rising poison-bubble overlays remain
+  clipped cleanly inside those same connected rounded boundaries.
 - Sample all authored themes and several generated themes. Dominant-colour
   compatibility must prevent yellow/gold floors from pairing with green/sage
   walls, while every accepted floor remains lighter/readable against its wall.
@@ -83,6 +85,11 @@ document and does not use client-side URL routing.
   and the yellow Sunny Sun Key the Sunny Sun Door. Confirm each pair has its own
   unmistakable colour and silhouette, and that hints and labels use the full
   matching pair name rather than showing a recoloured star.
+- Collect each lock family and open its matching door. Confirm the key and door
+  share their colour glow, the opening edge blooms before the door disappears,
+  and the particle shower uses hearts/petals, stars/diamonds, or suns/sparkles
+  to match the lock motif. Reduced-motion mode should keep a readable static
+  flash and omit ambient movement.
 - Collect a maze weapon, splash boots, Spring Boots, Antidote Leaf, potion, and
   key across representative mazes. Each should display a large board-centred
   picture-and-name toast using that exact item sprite without hiding the compact feedback permanently. Ame,
