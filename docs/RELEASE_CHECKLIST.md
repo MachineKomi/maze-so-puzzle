@@ -29,8 +29,9 @@ Earlier evidence is kept as historical release evidence.
   `npm ls` and `cargo check --locked` pass.
 - [x] Desktop and iPad browser compositions are readable, new art remains crisp,
   and local browser warning/error logs are empty.
-- [ ] GitHub/Vercel source deployment and live asset checks are completed after
-  the release commit is pushed.
+- [x] GitHub `main` release commit `512a02e` auto-deployed through Vercel. The
+  canonical bundle reports 0.17.0; all 14 new achievement WebPs return HTTP 200
+  with the expected media type and exact local byte sizes.
 - [x] `Maze-so-Puzzle-0.17.0-portable.exe`: 97,084,416 bytes, file/product
   version 0.17.0, SHA-256
   `6BA5646F19190D508A72F9E1D4B6B6F464E1141C279EE0575F7218282779A7FD`.

@@ -228,3 +228,12 @@ for all thirteen looping OST songs and the reserved friendship cue return HTTP
 200 as `audio/mpeg`; every live byte size matches its local source. The local
 browser title-to-maze navigation check reports no warning or error logs. Earlier
 release paragraphs remain historical evidence.
+
+Playable build 0.17.0 was pushed to GitHub `main` as commit `512a02e` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical JavaScript reports 0.17.0. Direct production requests
+for all fourteen new illustrated sticker, medal, and badge assets return HTTP
+200 as `image/webp`; every live byte size matches its local release file. Local
+browser checks at 1280×720 and 1024×768 covered the title, Adventure Book,
+gameplay HUD, and Help dialog without warning or error logs. Earlier release
+paragraphs remain historical evidence.
