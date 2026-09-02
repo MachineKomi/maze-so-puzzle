@@ -203,3 +203,12 @@ button. At 1280×720 the production document exactly matches the viewport with
 no page overflow. Local 1280×720 and 1024×768 checks remain the detailed room,
 fixed-stage, and browser-log record for this exact source. Earlier release
 paragraphs remain historical evidence.
+
+Playable build 0.15.0 was pushed to GitHub `main` as commit `42775f7` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical title reports 0.15.0; the tester lists all sixteen story
+mazes and the 23×23 Lanternlight Labyrinth. At 1280×720 the live document exactly
+matches the viewport. Direct production requests for all nine new Otter/Lamb/
+Capybara, Acorn Knight/Bubble Dragon/Candy Mimic, and Comet Spear/Bubble Bow/
+Cupcake Mace PNGs return HTTP 200 with `image/png`. Earlier release paragraphs
+remain historical evidence.

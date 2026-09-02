@@ -43,7 +43,9 @@ historical release evidence.
 - [x] Desktop 1280×720 keeps the fixed stage viewport-exact with no document
   overflow. All nine new production-preview sprite requests return HTTP 200 as
   `image/png`.
-- [ ] GitHub/Vercel deployment is pending the exact release commit.
+- [x] GitHub `main` commit `42775f7` auto-deployed through Vercel. The canonical
+  title reports 0.15.0, its tester lists all 16 story mazes, the 1280×720
+  document is viewport-exact, and every new sprite URL returns HTTP 200.
 - [x] `Maze-so-Puzzle-0.15.0-portable.exe`: 87,775,744 bytes, file/product
   version 0.15.0, SHA-256
   `CABF7455078CA025BC2194059B3758843728DF97298CFED9DF986C7F4B6FF1AE`.
