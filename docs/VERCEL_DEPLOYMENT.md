@@ -238,3 +238,13 @@ for all fourteen new illustrated sticker, medal, and badge assets return HTTP
 browser checks at 1280×720 and 1024×768 covered the title, Adventure Book,
 gameplay HUD, and Help dialog without warning or error logs. Earlier release
 paragraphs remain historical evidence.
+
+Playable build 0.18.0 was pushed to GitHub `main` as release commit `a05061e`
+on 2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical JavaScript reports 0.18.0. Direct production requests
+for the four complete Golden Heart, Storybook Wood, Moon Silver, and Garden
+Vine cage WebPs return HTTP 200 and every live byte size matches its local
+runtime asset. Local browser checks at 1280×720 and 1024×768 exercised the
+larger sprite-backed pickup notice, complete cage, rescue opening, and exact
+post-combat Power reward without warning or error logs. Earlier release
+paragraphs remain historical evidence.

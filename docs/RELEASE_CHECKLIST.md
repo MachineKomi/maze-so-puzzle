@@ -33,8 +33,9 @@ Earlier evidence is kept as historical release evidence.
   `npm ls` and `cargo check --locked` pass.
 - [x] Local browser QA at 1280 × 720 and 1024 × 768 covered pickup, cage,
   rescue, and combat-reward moments without warning or error logs.
-- [ ] GitHub/Vercel source deployment and live asset checks are completed after
-  the release commit is pushed.
+- [x] Release commit `a05061e` was pushed to GitHub `main` and auto-deployed by
+  Vercel. The canonical bundle reports 0.18.0; all four new cage WebPs return
+  HTTP 200 and exactly match their local byte sizes.
 - [x] `Maze-so-Puzzle-0.18.0-portable.exe`: 97,869,312 bytes, file/product
   version 0.18.0, SHA-256
   `582C7ACCDA45D71CDC2BB26A759B6F20EF3D8872868B87AFFE3A637FEB56C4E4`.
