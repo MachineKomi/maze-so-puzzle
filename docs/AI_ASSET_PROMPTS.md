@@ -1155,3 +1155,55 @@ with a pale neutral checker field, and the Kitten Pal master arrived on solid
 black; the deterministic processor removes only edge-connected background
 pixels and preserves the illustrated silhouettes. A first Kitten Pal attempt
 with a painted checkerboard was rejected and is not part of the project.
+
+## Build 0.18.0: complete friend-cage fronts
+
+Build 0.18.0 used the built-in OpenAI ImageGen workflow in
+`stylized-concept` mode. Each generation treated its v4 cage as Image 1, the
+material/style reference and edit target, and the user's rough cage drawing at
+`C:/Users/hellb/AppData/Local/Temp/codex-clipboard-c483bd01-d336-4d9b-ac77-e215742b7740.png`
+as Image 2, the structural reference. The intention was not to reproduce the
+sketch's rendering, only its unmistakable top-rail/bars/lock/bottom-rail
+silhouette.
+
+### Shared final prompt contract
+
+```text
+Use case: stylized-concept
+Asset type: transparent square game sprite overlay for a friend rescue cage
+Input images: Image 1 is the existing [VARIANT] cage style and material reference; Image 2 is the user's rough structural reference.
+Primary request: redesign the [VARIANT] cage as a complete, clearly locked front face. Preserve Image 1's polished chunky cute anime fantasy JRPG rendering and the variant details listed below. Follow Image 2's enclosure structure: a substantial decorated top rail spanning the full width, a substantial decorated bottom rail spanning the full width, five evenly spaced vertical bars connecting top to bottom, and a clearly visible central themed padlock fixed over the middle bar.
+Composition/framing: straight-on orthographic front view, centered, full cage fills a square tile with comfortable transparent margins. The empty spaces between bars must stay transparent so a large animal sprite can be layered behind it.
+Materials/textures: preserve the variant materials and palette listed below, with readable highlights and thick clean outlines.
+Constraints: genuinely transparent background and genuinely transparent gaps between every bar; complete top and bottom rails fully visible; no back wall, no floor, no animal, no door swung open, no scenery, no text, no watermark. The silhouette must read instantly at small tile size as a secure closed cage, not a fence and not a half-cage.
+```
+
+Variant-specific prompt text:
+
+- Golden Heart: preserve golden metal, pink heart jewel, wing and scrollwork
+  details; use glossy storybook gold with soft pastel pink enamel and gemstones.
+- Storybook Wooden: preserve honey-gold storybook wood and metal, tiny stars,
+  purple leaves, and warm heart lock; use softly polished golden wood with warm
+  metal joints and pastel purple and peach accents.
+- Moon Silver: preserve pearly moonlit silver-blue metal, golden trim, crescent
+  moons, stars, leaves, and sapphire crystals; use glossy storybook silver and
+  icy periwinkle enamel with small gold fittings and blue-violet gems.
+- Garden Vine: preserve warm golden bars, friendly curling green vines, pink
+  blossoms, and heart jewel; use glossy storybook gold, soft green leaves and
+  vines, and pastel pink flowers and enamel. Vines may decorate the rails and
+  outer posts but must not fill or obscure the open spaces.
+
+### Output mapping
+
+| Variant | Built-in output | Archived master | Runtime asset |
+| --- | --- | --- | --- |
+| Golden Heart | `exec-1a27919f-d02d-478e-a68c-3d50ed50cb97.png` | `docs/source-assets/cage-golden-heart-front-v5-master.png` | `public/assets/cage-golden-heart-front-v5.webp` |
+| Storybook Wood | `exec-fbf62c28-bff0-46d2-8e34-0da0d8115298.png` | `docs/source-assets/cage-storybook-wood-front-v5-master.png` | `public/assets/cage-storybook-wood-front-v5.webp` |
+| Moon Silver | `exec-abb23b08-d03e-4cfd-bd50-983045647c75.png` | `docs/source-assets/cage-moon-silver-front-v5-master.png` | `public/assets/cage-moon-silver-front-v5.webp` |
+| Garden Vine | `exec-c05b9f83-ecae-4ab7-8b53-77cbb0422973.png` | `docs/source-assets/cage-garden-vine-front-v5-master.png` | `public/assets/cage-garden-vine-front-v5.webp` |
+
+`scripts/process_v18_cage_assets.py` preserves the genuine alpha in the Golden
+Heart and Storybook masters. Moon Silver and Garden Vine arrived with a painted
+neutral checker field; the deterministic processor flood-fills only neutral
+background connected to the canvas edges and the four enclosed open bays. All
+runtime copies are 512 x 512 lossless WebP with alpha extrema 0 and 255.

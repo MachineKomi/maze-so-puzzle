@@ -6,16 +6,45 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.17.0: `npm run check` passes 312 tests across 25 files plus strict
-TypeScript and the Vite production build. Production JavaScript is 115.79 KB
+Status for 0.18.0: `npm run check` passes 314 tests across 26 files plus strict
+TypeScript and the Vite production build. Production JavaScript is 116.01 KB
 gzipped. The production-only npm audit reports zero vulnerabilities; `npm ls` is
 clean, and locked Cargo compilation passes. Local browser QA at 1280 × 720 and
-1024 × 768 verified the title, illustrated Adventure Book, gameplay HUD, and
-Help dialog with no warning or error logs. The unsigned Windows portable and
+1024 × 768 verified pickup art, the complete cage, rescue, gameplay HUD, and
+post-combat Power reward with no warning or error logs. The unsigned Windows portable and
 setup builds were built, hashed, byte-compared, versioned, and smoke-tested.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
+
+## 0.18.0 verification record
+
+- [x] Version 0.18.0 is aligned in npm, Cargo, Tauri, and the visible label.
+- [x] Every pickup family maps to its real sprite, and the larger on-map notice
+  keeps that sprite and text together through the complete float-and-fade.
+- [x] Successful combat shows the exact `+X!` Power reward over Ame after the
+  final transfer; browser QA observed `+1!` after a 2 + 1 = 3 battle.
+- [x] Golden Heart, Storybook Wood, Moon Silver, and Garden Vine use distinct
+  complete cage fronts with top/bottom rails, connected bars, central locks,
+  and transparent openings. All runtime files are 512 × 512 lossless WebP with
+  full alpha range.
+- [x] `npm run check`: 314/314 tests pass across 26 files; strict TypeScript and
+  Vite production builds pass. `npm audit --omit=dev`: zero vulnerabilities;
+  `npm ls` and `cargo check --locked` pass.
+- [x] Local browser QA at 1280 × 720 and 1024 × 768 covered pickup, cage,
+  rescue, and combat-reward moments without warning or error logs.
+- [ ] GitHub/Vercel source deployment and live asset checks are completed after
+  the release commit is pushed.
+- [x] `Maze-so-Puzzle-0.18.0-portable.exe`: 97,869,312 bytes, file/product
+  version 0.18.0, SHA-256
+  `582C7ACCDA45D71CDC2BB26A759B6F20EF3D8872868B87AFFE3A637FEB56C4E4`.
+- [x] `Maze-so-Puzzle-0.18.0-setup.exe`: 91,782,678 bytes, file/product version
+  0.18.0, SHA-256
+  `BB791B1F4DE256EA3F1FD1A5D599D848D37BEE2446DF123832138EE89287D745`.
+- [x] Both staged binaries byte-match the Tauri outputs. The portable app stayed
+  responsive for five seconds with the correct window title.
+- [ ] Clean-machine install, signing, and physical-device play testing remain
+  owner/device checks.
 
 ## 0.17.0 verification record
 

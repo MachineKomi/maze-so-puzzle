@@ -6479,8 +6479,8 @@ body,
   bottom: 87%;
 }
 
-/* The new cage art contains only a decorative front frame and bars. Keep the
-   friend large behind it, while letting the frame reach the tile edges. */
+/* The cage art is a complete front face with transparent openings. Keep the
+   friend large behind it while the enclosing frame reaches the tile edges. */
 .animal-stack {
   inset: 1%;
 }
@@ -6959,4 +6959,52 @@ body,
   display: inline-flex;
   align-items: center;
   gap: 5px;
+}
+
+/* --------------------------------------------------------------------------
+   V18 complete cages and clearer on-map rewards
+   -------------------------------------------------------------------------- */
+
+/* Pickup art and its label travel as one large, readable celebration. */
+.map-pickup-toast {
+  gap: clamp(8px, 0.9cqw, 13px);
+  font-size: clamp(19px, 2.25cqw, 34px);
+  -webkit-text-stroke-width: clamp(1.2px, 0.18cqw, 2.2px);
+}
+
+.map-pickup-toast > img {
+  width: clamp(46px, 5.2cqw, 76px);
+  height: clamp(46px, 5.2cqw, 76px);
+}
+
+/* Power won in combat appears above Ame after the last clash. */
+.map-pickup-toast.notice-anchored {
+  top: auto;
+  width: max-content;
+  max-width: none;
+  color: #fff5a6;
+  font-size: clamp(24px, 3.8cqw, 52px);
+  transform: translate3d(-50%, 6px, 0) scale(0.72);
+  animation: map-power-gain-float 1.55s cubic-bezier(0.16, 0.8, 0.24, 1) both;
+  -webkit-text-stroke: clamp(1.5px, 0.24cqw, 3px) #52345f;
+  text-shadow:
+    0 0 6px #fff,
+    0 0 14px rgba(255, 204, 82, 0.95),
+    0 4px 4px rgba(50, 30, 60, 0.45);
+}
+
+@keyframes map-power-gain-float {
+  0% { opacity: 0; transform: translate3d(-50%, 8px, 0) scale(0.55) rotate(-5deg); }
+  16% { opacity: 1; transform: translate3d(-50%, -9px, 0) scale(1.22) rotate(3deg); }
+  38% { transform: translate3d(-50%, -22px, 0) scale(1) rotate(-1deg); }
+  76% { opacity: 1; transform: translate3d(-50%, -46px, 0) scale(1.04); }
+  100% { opacity: 0; transform: translate3d(-50%, -78px, 0) scale(0.9); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-pickup-toast.notice-anchored {
+    animation: none;
+    opacity: 1;
+    transform: translate3d(-50%, -34px, 0);
+  }
 }

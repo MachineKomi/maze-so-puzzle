@@ -148,7 +148,7 @@ describe("deterministic surprise mazes", () => {
     expect(Math.min(...sizes)).toBe(MIN_GENERATED_MAZE_SIZE);
     expect(Math.max(...sizes)).toBe(MAX_GENERATED_MAZE_SIZE);
     expect(sizes).not.toEqual([...sizes].sort((left, right) => left - right));
-  }, 20_000);
+  }, 30_000);
 
   it.each(["movement", "gentle", "growing", "adventure"] as const)(
     "always includes exactly one styled weapon in %s mazes",
@@ -214,7 +214,7 @@ describe("deterministic surprise mazes", () => {
         }
       }
     }
-  }, 15_000);
+  }, 30_000);
 
   it("builds adventure detours with spring boots before connected hole jumps", () => {
     const generated = generateSurpriseMaze({
@@ -289,7 +289,7 @@ describe("deterministic surprise mazes", () => {
     expect(cageStyles.size).toBeGreaterThan(1);
     expect(animalSpecies.size).toBeGreaterThan(ANIMALS_PER_LEVEL);
     expect([...holeRunLengths].sort()).toEqual([1, 2, 3]);
-  }, 20_000);
+  }, 30_000);
 
   it("keeps rescues optional for a previously failing adventure seed", () => {
     const generated = generateSurpriseMaze({

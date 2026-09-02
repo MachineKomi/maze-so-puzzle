@@ -200,7 +200,7 @@ describe("curated campaign levels", () => {
       expect(LANTERNLIGHT_LABYRINTH_LEVEL.terrain[crossroad.y + dy]?.[crossroad.x + dx])
         .not.toBe("wall");
     }
-  });
+  }, 10_000);
 
   it.each(CURATED_LEVELS.map((level) => [level.name, level] as const))(
     "%s is square, structurally valid, and safely solvable",

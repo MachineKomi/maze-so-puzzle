@@ -22,6 +22,11 @@ import {
   preloadRewardArt,
 } from "./assets";
 import {
+  combatPowerNotice,
+  pickupToastFor,
+  type MapPickupToast,
+} from "./mapNotices";
+import {
   KEY_COLOR_LABELS,
   KEY_MOTIF_LABELS,
   resolveAnimalArt,
@@ -178,7 +183,7 @@ const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.17.0";
+const BUILD_VERSION = "0.18.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -195,12 +200,6 @@ interface Feedback {
   readonly text: string;
   readonly tone: "plain" | "good" | "careful";
   readonly sound: SoundName;
-}
-
-interface MapPickupToast {
-  readonly id: number;
-  readonly icon: string;
-  readonly text: string;
 }
 
 interface CompletionCelebration {
@@ -420,39 +419,6 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
   }
 }
 
-function pickupToastFor(
-  events: readonly GameEvent[],
-  level: LevelDefinition,
-): Omit<MapPickupToast, "id"> | null {
-  for (let index = events.length - 1; index >= 0; index -= 1) {
-    const event = events[index]!;
-    switch (event.type) {
-      case "sword-collected": {
-        const object = level.objects.find((candidate) => candidate.id === event.objectId);
-        const weapon = resolveWeaponArt(object?.kind === "sword" ? object.style : undefined);
-        return { icon: weapon.src, text: `Picked up the ${weapon.label}!` };
-      }
-      case "boots-collected":
-        return { icon: ASSETS.boots, text: "Picked up the Splash Boots!" };
-      case "spring-boots-collected":
-        return { icon: ASSETS.springBoots, text: "Picked up the Spring Boots!" };
-      case "antidote-leaf-collected":
-        return { icon: ASSETS.antidoteLeaf, text: "Picked up the Antidote Leaf!" };
-      case "potion-collected":
-        return { icon: ASSETS.potion, text: `Picked up a Power Potion! +${event.amount} Power` };
-      case "key-collected":
-        return { icon: resolveKeyArt(event.color).src, text: `Picked up the ${resolveKeyArt(event.color).label}!` };
-      case "treasure-collected":
-        return event.currency === "gold"
-          ? { icon: ASSETS.treasureGoldChest, text: `Collected ${event.amount} Gold Stars!` }
-          : { icon: ASSETS.treasureScienceGears, text: `Collected ${event.amount} Science Points!` };
-      default:
-        break;
-    }
-  }
-  return null;
-}
-
 function enemyLabelForEvent(level: LevelDefinition, objectId: string): string {
   const object = level.objects.find((candidate) => candidate.id === objectId);
   return resolveEnemyArt(object?.kind === "enemy" ? object.style : undefined).label;
@@ -621,6 +587,13 @@ function cameraLayerStyle(point: Point, camera: CameraWindow): CSSProperties {
     top: `${((point.y - camera.top) / camera.height) * 100}%`,
     width: `${100 / camera.width}%`,
     height: `${100 / camera.height}%`,
+  };
+}
+
+function cameraNoticeStyle(point: Point, camera: CameraWindow): CSSProperties {
+  return {
+    left: `${((point.x - camera.left + 0.5) / camera.width) * 100}%`,
+    top: `${((point.y - camera.top + 0.18) / camera.height) * 100}%`,
   };
 }
 
@@ -1407,6 +1380,22 @@ function App() {
     presentationTimers.current.add(timer);
   }, []);
 
+  const showMapNotice = useCallback((
+    notice: Omit<MapPickupToast, "id">,
+    durationMs = 1_850,
+  ) => {
+    if (mapPickupTimer.current !== undefined) {
+      window.clearTimeout(mapPickupTimer.current);
+    }
+    const toastId = mapPickupSequence.current + 1;
+    mapPickupSequence.current = toastId;
+    setMapPickupToast({ id: toastId, ...notice });
+    mapPickupTimer.current = window.setTimeout(() => {
+      setMapPickupToast((current) => current?.id === toastId ? null : current);
+      mapPickupTimer.current = undefined;
+    }, durationMs);
+  }, []);
+
   const beginBattlePresentation = useCallback((
     event: Extract<GameEvent, { type: "enemy-defeated" }>,
     enemy: Extract<LevelObject, { kind: "enemy" }>,
@@ -1458,9 +1447,13 @@ function App() {
       setPresentedPower(null);
       setPresentedEnemyPower(null);
       setBattlePresentation(null);
+      showMapNotice(
+        combatPowerNotice(event, from),
+        prefersReducedMotion() ? 900 : 1_550,
+      );
     }, Math.max(100, duration - 30));
     return duration;
-  }, [clearPresentationWork, schedulePresentationTimer]);
+  }, [clearPresentationWork, schedulePresentationTimer, showMapNotice]);
 
   const beginRescuePresentation = useCallback((
     event: Extract<GameEvent, { type: "animal-rescued" }>,
@@ -1698,16 +1691,7 @@ function App() {
     setFeedback(nextFeedback);
     const nextPickupToast = pickupToastFor(result.events, level);
     if (nextPickupToast) {
-      if (mapPickupTimer.current !== undefined) {
-        window.clearTimeout(mapPickupTimer.current);
-      }
-      const toastId = mapPickupSequence.current + 1;
-      mapPickupSequence.current = toastId;
-      setMapPickupToast({ id: toastId, ...nextPickupToast });
-      mapPickupTimer.current = window.setTimeout(() => {
-        setMapPickupToast((current) => current?.id === toastId ? null : current);
-        mapPickupTimer.current = undefined;
-      }, 1_850);
+      showMapNotice(nextPickupToast);
     }
     const defeatedEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "enemy-defeated" }> => event.type === "enemy-defeated",
@@ -1892,7 +1876,7 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, blockerHint, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, storyOpen, testerPickerOpen, testerRun, tooStrongEncounter]);
+  }, [beginBattlePresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, blockerHint, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, helpOpen, hintOpen, level, muted, pendingAdventure, progress, schedulePresentationTimer, screen, showMapNotice, storyOpen, testerPickerOpen, testerRun, tooStrongEncounter]);
 
   const dismissStory = useCallback(() => {
     setStoryOpen(false);
@@ -2812,9 +2796,16 @@ function App() {
                 <span className="power-badge player-power">{displayedPower}</span>
               </div>
 
-              {mapPickupToast && (
-                <div className="map-pickup-toast" key={mapPickupToast.id} role="status" aria-live="polite" aria-atomic="true">
-                  <img src={mapPickupToast.icon} alt="" />
+              {mapPickupToast && (!mapPickupToast.at || isInsideWindow(mapPickupToast.at, cameraWindow)) && (
+                <div
+                  className={`map-pickup-toast notice-${mapPickupToast.kind ?? "pickup"}${mapPickupToast.at ? " notice-anchored" : ""}`}
+                  key={mapPickupToast.id}
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                  style={mapPickupToast.at ? cameraNoticeStyle(mapPickupToast.at, cameraWindow) : undefined}
+                >
+                  {mapPickupToast.icon && <img src={mapPickupToast.icon} alt="" />}
                   <strong>{mapPickupToast.text}</strong>
                 </div>
               )}

@@ -4,6 +4,31 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.18.0 - 2026-09-02
+
+This clearer-rewards release makes discoveries easier to read and gives every
+rescued friend a cage that looks unmistakably closed until Ame opens it.
+
+### Added
+
+- A dedicated post-combat `+X!` flourish appears over Ame after the final clash,
+  showing exactly how much Power moved from the defeated baddie.
+- Four newly rendered complete-front rescue cages, each with a decorated top
+  rail, bottom rail, connected bars, and large central lock while preserving
+  transparent openings for the animal sprite behind it.
+- Regression coverage for every pickup family's sprite-backed map notice and
+  exact combat Power reward copy.
+
+### Changed
+
+- Pickup notices are larger and always pair their label with the exact weapon,
+  boots, potion, key, or treasure sprite that was collected.
+- The Golden Heart, Storybook Wood, Moon Silver, and Garden Vine cage styles now
+  share a clear closed-cage silhouette without losing their distinct materials
+  and decorations. Their complete fronts also split apart during rescue.
+- Exhaustive solver stress tests keep their existing coverage while receiving
+  test-specific timing headroom on busy development machines.
+
 ## 0.17.0 - 2026-09-02
 
 This illustrated-keepsakes release replaces the Adventure Book's remaining

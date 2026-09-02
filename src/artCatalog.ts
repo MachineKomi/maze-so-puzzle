@@ -399,10 +399,10 @@ export const ANIMAL_ART = {
 } as const satisfies Readonly<Record<AnimalSpecies, SpriteArt>>;
 
 export const CAGE_ART = {
-  "golden-heart": { src: "/assets/cage-golden-heart-front-v4.png", label: "Golden Heart Cage" },
-  "storybook-wood": { src: "/assets/cage-storybook-wood-front-v4.png", label: "Storybook Wooden Cage" },
-  "moon-silver": { src: "/assets/cage-moon-silver-front-v4.png", label: "Moon Silver Cage" },
-  "garden-vine": { src: "/assets/cage-garden-vine-front-v4.png", label: "Garden Vine Cage" },
+  "golden-heart": { src: "/assets/cage-golden-heart-front-v5.webp", label: "Golden Heart Cage" },
+  "storybook-wood": { src: "/assets/cage-storybook-wood-front-v5.webp", label: "Storybook Wooden Cage" },
+  "moon-silver": { src: "/assets/cage-moon-silver-front-v5.webp", label: "Moon Silver Cage" },
+  "garden-vine": { src: "/assets/cage-garden-vine-front-v5.webp", label: "Garden Vine Cage" },
 } as const satisfies Readonly<Record<CageStyle, SpriteArt>>;
 
 /** Child-readable names shared by board labels, hints and accessible text. */

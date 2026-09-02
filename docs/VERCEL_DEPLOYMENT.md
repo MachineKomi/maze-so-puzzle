@@ -61,7 +61,7 @@ document and does not use client-side URL routing.
 - Inspect later generated mazes for 2×2–4×4 chambers, clustered treasure or
   rescues, and Power-gated monster rooms. The widened geometry must not make any
   ordinary or all-friends route unsolvable.
-- Click or tap the small **Playable build 0.17.0** label on the title screen and
+- Click or tap the small **Playable build 0.18.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
@@ -84,8 +84,8 @@ document and does not use client-side URL routing.
   unmistakable colour and silhouette, and that hints and labels use the full
   matching pair name rather than showing a recoloured star.
 - Collect a maze weapon, splash boots, Spring Boots, Antidote Leaf, potion, and
-  key across representative mazes. Each should display a short board-centred
-  picture-and-name toast without hiding the compact feedback permanently. Ame,
+  key across representative mazes. Each should display a large board-centred
+  picture-and-name toast using that exact item sprite without hiding the compact feedback permanently. Ame,
   enemy sprites, and outlined Power values should remain large and readable
   without Power covering a face.
 - Open Springstep Sky Hollow from the tester picker. Collect the illustrated
@@ -99,18 +99,19 @@ document and does not use client-side URL routing.
   advance, only the **Too strong!** comparison appears, and dismissing it leaves
   the maze ready for backtracking rather than resetting the run.
 - Trigger one winning battle and one rescue presentation. Confirm their short
-  input locks end cleanly, Power reaches the exact engine value, Ame remains one
+  input locks end cleanly, Power reaches the exact engine value, and the exact
+  `+X!` gained amount floats above Ame after the last clash. Ame remains one
   square away with no added step, and the next input enters the cleared enemy
   tile. The rescued pet should join once, reduced-motion mode should shorten the
   flourishes, and navigation or restart must leave no stale overlay.
-- Enter several different mazes and listen for a varying selection from all five
+- Enter several different mazes and listen for a varying selection from all thirteen
   full BGM tracks without an immediate repeat. Revisiting a maze within the same
   session must retain its track, and the short friendship cue must never loop as
   maze music.
-- Inspect every cage style and confirm the sparse v4 front layer shows one low
-  base, two side posts, and three narrow bars in front of the pet, without a
-  baked-in animal, rear cage, dome, central panel, or background rectangle. The
-  pet should remain easy to recognize through the open centre. Rescue multiple
+- Inspect every cage style and confirm the complete v5 front layer has a top
+  rail, bottom rail, connected bars, and central lock in front of the pet,
+  without a baked-in animal, rear cage, scenery, or background rectangle. The
+  pet should remain easy to recognize through the transparent openings. Rescue multiple
   pets and confirm they occupy distinct recent footprints behind Ame.
 - On iPad and desktop, press the maze to move immediately, hold to repeat, drag
   to steer, and recenter or release to stop. At ordinary wall bends, confirm the

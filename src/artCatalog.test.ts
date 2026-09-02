@@ -82,9 +82,9 @@ describe("art catalog", () => {
     }
   });
 
-  it("uses the opaque front-bar cage layer for every rescue style", () => {
+  it("uses the complete transparent front-cage layer for every rescue style", () => {
     for (const cage of Object.values(CAGE_ART)) {
-      expect(cage.src).toMatch(/^\/assets\/cage-[a-z-]+-front-v4\.png$/);
+      expect(cage.src).toMatch(/^\/assets\/cage-[a-z-]+-front-v5\.webp$/);
     }
   });
 
