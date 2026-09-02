@@ -36,7 +36,10 @@ historical release evidence.
   `cargo check --locked`: passed.
 - [x] Story cards 1, 10, and 16 fit at desktop 1280×720, iPad 1024×768, and
   landscape phone 844×390 without scrolling; gameplay retains its fixed stage.
-- [ ] GitHub/Vercel deployment is pending the exact release commit.
+- [x] GitHub `main` commit `32b2d66` auto-deployed to Vercel. The canonical
+  title reports 0.13.0; Chapter 10 opens with Professor Poggle, and an ArrowRight
+  skip closes it without moving Ame or changing the zero-step counter. Both new
+  portrait WebPs return HTTP 200 at their expected byte sizes.
 - [x] `Maze-so-Puzzle-0.13.0-portable.exe`: 85,586,432 bytes, file/product
   version 0.13.0, SHA-256
   `6B7D6C30DC10854845314547A2550F9EE340189BED8C66D83E6719EDDA608EF0`.

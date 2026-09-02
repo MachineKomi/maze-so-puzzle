@@ -58,11 +58,15 @@ document and does not use client-side URL routing.
 - Generate several Surprise Mazes and confirm their deterministic sizes vary
   across unlocked odd 9–29 bands rather than increasing monotonically. No
   generated dimension should reach 30.
-- Click or tap the small **Playable build 0.11.0** label on the title screen and
+- Click or tap the small **Playable build 0.13.0** label on the title screen and
   confirm the secret tester picker can open every authored maze directly. Also
   load `?debug=mazes` and confirm it opens the same picker automatically. Preview
   runs must not change gold, records, rewards, active-run recovery, or unlocked
   progress.
+- Start a new normal authored maze and confirm its illustrated chapter appears.
+  Tap anywhere or press an ordinary key and confirm it closes without moving Ame
+  or adding a step. Resume, restart, Surprise Maze, and tester starts should not
+  interrupt play; the picture-led Story button must reopen authored chapters.
 - Inspect several straight paths, bends, diagonal contacts, enclosed pockets,
   and connected water/lava/poison areas. Floor and wall patterns should remain aligned
   across the camera, convex and concave corners should follow the terrain
@@ -176,3 +180,13 @@ Representative Gold chest, Science beaker, and Mazes WebP assets return HTTP
 200 with `image/webp`. Local 1280 × 720, 1024 × 768, and 844 × 390 browser QA
 remains the detailed responsive layout record for this source. Earlier release
 paragraphs remain historical evidence.
+
+Playable build 0.13.0 was pushed to GitHub `main` as commit `32b2d66` on
+2026-09-02 and auto-deployed successfully through the connected Vercel Hobby
+project. The canonical title reports 0.13.0. Live tester navigation opened
+Chapter 10 with Professor Poggle, and an ArrowRight skip closed the chapter
+while retaining Ame's starting position and zero steps. The production Sprig
+and Professor Poggle WebPs return HTTP 200 as `image/webp` at 58,694 and 73,084
+bytes. Local story QA covers chapters 1, 10, and 16 at 1280 × 720 desktop,
+1024 × 768 iPad, and 844 × 390 landscape phone. Earlier release paragraphs
+remain historical evidence.

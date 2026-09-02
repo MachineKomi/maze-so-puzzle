@@ -30,7 +30,7 @@ historical evidence.
 | Story/learning design | Sixteen ordered authored chapters in one typed lore catalogue | Each has a concise read-aloud intro, joke, Puzzle Power, optional adult-and-child prompt, and victory epilogue |
 | Child-first flow | New normal starts present story; resume/restart/tester/generated starts do not | One tap or ordinary key skips; Story reopens on demand; Tab and modified shortcuts are preserved |
 | Audio/art | Thirteen full maze songs plus original Sprig and Poggle portraits | Portrait masters/prompts are retained and runtime WebPs are optimized and preloaded locally |
-| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Exact 0.13.0 release deployment verification is pending |
+| Hosting | GitHub `main` is connected to the Vercel Hobby project at `https://maze-so-puzzle.vercel.app/` | Commit `32b2d66` auto-deployed; the canonical title reports 0.13.0, live Chapter 10 uses Poggle, one-key skip preserves zero steps, and both portrait WebPs return HTTP 200 |
 | Desktop artifacts | Unsigned 0.13.0 portable executable and NSIS setup | Both built and byte-verified; the portable launch smoke passed, and exact sizes and SHA-256 values are recorded in `RELEASE_CHECKLIST.md` |
 
 ## Historical 0.12.0 release status
