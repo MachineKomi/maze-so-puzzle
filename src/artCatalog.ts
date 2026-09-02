@@ -298,6 +298,9 @@ export const WEAPON_ART = {
   "moon-wand": { src: "/assets/weapon-moon-wand-v1.png", label: "Moon Wand" },
   "leaf-blade": { src: "/assets/weapon-leaf-blade-v1.png", label: "Leaf Blade" },
   "sun-mallet": { src: "/assets/weapon-sun-mallet-v1.png", label: "Sun Mallet" },
+  "comet-spear": { src: "/assets/weapon-comet-spear-v1.png", label: "Comet Spear" },
+  "bubble-bow": { src: "/assets/weapon-bubble-bow-v1.png", label: "Bubble Bow" },
+  "cupcake-mace": { src: "/assets/weapon-cupcake-mace-v1.png", label: "Cupcake Mace" },
 } as const satisfies Readonly<Record<WeaponStyle, SpriteArt>>;
 
 export const ENEMY_ART = {
@@ -306,6 +309,9 @@ export const ENEMY_ART = {
   "mushroom-imp": { src: "/assets/enemy-mushroom-imp-v1.png", label: "Mushroom Imp" },
   "moon-bat": { src: "/assets/enemy-moon-bat-v1.png", label: "Moon Bat" },
   "pebble-golem": { src: "/assets/enemy-pebble-golem-v1.png", label: "Pebble Golem" },
+  "acorn-knight": { src: "/assets/enemy-acorn-knight-v1.png", label: "Acorn Knight" },
+  "bubble-dragon": { src: "/assets/enemy-bubble-dragon-v1.png", label: "Bubble Dragon" },
+  "candy-mimic": { src: "/assets/enemy-candy-mimic-v1.png", label: "Candy Mimic" },
 } as const satisfies Readonly<Record<EnemyStyle, SpriteArt>>;
 
 export const ANIMAL_ART = {
@@ -317,6 +323,9 @@ export const ANIMAL_ART = {
   hedgehog: { src: "/assets/animal-hedgehog-v1.png", label: "Hedgehog" },
   fawn: { src: "/assets/animal-fawn-v1.png", label: "Fawn" },
   "red-panda": { src: "/assets/animal-red-panda-v1.png", label: "Red Panda" },
+  otter: { src: "/assets/animal-otter-v1.png", label: "Otter" },
+  lamb: { src: "/assets/animal-lamb-v1.png", label: "Lamb" },
+  capybara: { src: "/assets/animal-capybara-v1.png", label: "Capybara" },
 } as const satisfies Readonly<Record<AnimalSpecies, SpriteArt>>;
 
 export const CAGE_ART = {

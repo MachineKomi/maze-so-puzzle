@@ -6,18 +6,56 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.14.0: `npm run check` passes 304 tests across 23 files plus strict
+Status for 0.15.0: `npm run check` passes 309 tests across 24 files plus strict
 TypeScript and the Vite production build. The moderate-level npm audit reports
 zero vulnerabilities; `npm ls` is clean, and locked Cargo compilation passes.
-Browser QA at 1280×720 desktop and 1024×768 iPad found that compact Lanternlight
-rooms and the procedural scrapbook fit without document overflow or UI overlap.
+Browser QA at 1280×720 desktop found the new visual catalogue readable without
+document overflow; all nine new asset URLs return HTTP 200, and the fixed stage
+retains the previously verified iPad composition.
 The unsigned Windows portable and setup builds were built, hashed,
 byte-compared, versioned, and smoke-tested. Physical-device touch/listening/
 feel, accessibility, clean-machine installation, signing, and the broader
 manual play-through remain deliberately unclaimed. Earlier evidence is kept as
 historical release evidence.
 
-## 0.14.0 verification record
+## 0.15.0 verification record
+
+- [x] Version 0.15.0 is aligned in npm, Cargo, Tauri, and the visible build label.
+- [x] Engine movement leaps every consecutive hole in the chosen cardinal
+  direction and lands on the first valid tile; it never turns during a jump.
+- [x] Authored perfect-rescue routes exercise one-, two-, and three-hole jumps.
+  Lanternlight includes a hole with all four neighbouring squares open, and
+  Twilight Treasure Loop includes a three-hole gate.
+- [x] Forty deterministic adventure seeds collectively produce all three hole
+  run lengths, while every sampled ordinary and all-friends route remains safe.
+- [x] Jump presentation duration and height increase with the emitted hole count;
+  focused tests cover clamping, arc progression, three-hole traversal, and the
+  straight four-way junction case.
+- [x] Otter, Lamb, Capybara, Acorn Knight, Bubble Dragon, Candy Mimic, Comet
+  Spear, Bubble Bow, and Cupcake Mace have unique typed catalogue IDs, labels,
+  transparent 512×512 runtime PNGs, archived masters, and recorded prompts.
+- [x] The campaign and generator exercise all 11 friend, 8 enemy, and 8 weapon
+  styles without changing combat or save semantics.
+- [x] `npm run check`: 309/309 tests pass across 24 files; strict TypeScript and
+  the Vite production build pass.
+- [x] `npm audit --audit-level=moderate`: zero vulnerabilities. `npm ls`: clean.
+  `cargo check --locked`: passed.
+- [x] Desktop 1280×720 keeps the fixed stage viewport-exact with no document
+  overflow. All nine new production-preview sprite requests return HTTP 200 as
+  `image/png`.
+- [ ] GitHub/Vercel deployment is pending the exact release commit.
+- [x] `Maze-so-Puzzle-0.15.0-portable.exe`: 87,775,744 bytes, file/product
+  version 0.15.0, SHA-256
+  `CABF7455078CA025BC2194059B3758843728DF97298CFED9DF986C7F4B6FF1AE`.
+- [x] `Maze-so-Puzzle-0.15.0-setup.exe`: 81,614,537 bytes, file/product version
+  0.15.0, SHA-256
+  `7F935CCB84E41F04142587C920C5FF1EF6AADB6E5FF8A3722B3EEF7D77FB3AE1`.
+- [x] Both staged binaries byte-match their final Tauri outputs. The portable
+  app stayed responsive for five seconds and reported the correct window title.
+- [ ] Clean-machine install, code signing, physical-device listening/feel, and
+  the complete manual campaign remain owner/device checks.
+
+## Historical 0.14.0 verification record
 
 - [x] Version 0.14.0 is aligned in npm, Cargo, Tauri, and the visible build label.
 - [x] `ABSOLUTE_MAZE_SIZE_LIMIT` is 24 and the structural validator rejects

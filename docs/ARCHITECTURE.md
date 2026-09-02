@@ -35,7 +35,8 @@ state.
    deterministic generator in `src/game/generator.ts`. The generator selects a
    seeded odd size from unlocked 9–23 bands, grows solver-safe connected
    2–4-tile water/lava regions only beyond the splash-boots gate, and can place
-   one- or two-square hole runs only after reachable Spring Boots. Later
+   seeded one-, two-, or three-square hole runs only after reachable Spring
+   Boots. Later
    adventure seeds carve 2×2 through 4×4 rooms, cluster rewards and rescues,
    add Power-gated room guardians, and place selected prerequisites on side
    branches to create intentional detours. Level and object records carry stable visual IDs without
@@ -72,8 +73,8 @@ state.
 16. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
     material periods, dominant-colour families, compatibility rules, and
     fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
-    catalogue contains ten compatible terrain themes, five weapons, five
-    friendly enemy looks, eight pet species, four sparse AI-generated v4 cage
+    catalogue contains ten compatible terrain themes, eight weapons, eight
+    friendly enemy looks, eleven pet species, four sparse AI-generated v4 cage
     fronts, and dedicated Rose Heart, Blue Star, and Sunny Sun key/door pairs.
     Each lock pair exposes both child-readable colour and shape metadata. It
     also maps three paired-portal IDs to original transparent flower-pad art.
@@ -104,7 +105,10 @@ state.
   until Spring Boots are collected; one directional input then scans across the
   consecutive hole run and lands on the first valid non-hole square. The engine
   emits the complete jump path so the UI can animate it, while the solver uses
-  the exact same transition and cannot assume a safe landing.
+  the exact same transition and cannot assume a safe landing. A hole at a plus
+  junction therefore controls both axes but never permits a mid-air turn. The
+  presentation derives a longer duration and higher arc from the emitted
+  one-, two-, or three-hole path without changing engine timing.
 - Poison is connected engine terrain. It blocks until an `antidote-leaf`
   object has been collected; engine, solver, structural validation, art
   preloading, minimap, accessibility descriptions, and active-run migration use
@@ -185,9 +189,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.14.0 source is shared by the web and Tauri build paths, and its automated
+- The 0.15.0 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.14.0, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.15.0, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
   five-second smoke launch with the correct title. The GitHub-connected Vercel
   production deployment is verified separately after each push. Clean-machine
@@ -214,11 +218,11 @@ selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.14.0 run covers 304 tests across 23 files; `npm run check` also
+solver. The 0.15.0 run covers 309 tests across 24 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.14.0.
+and portable launch smoke are complete for 0.15.0.
 
 ## Extension points
 

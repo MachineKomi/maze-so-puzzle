@@ -256,6 +256,7 @@ describe("deterministic surprise mazes", () => {
     const enemyStyles = new Set<string>();
     const cageStyles = new Set<string>();
     const animalSpecies = new Set<string>();
+    const holeRunLengths = new Set<number>();
 
     for (let index = 0; index < 40; index += 1) {
       const options = {
@@ -276,6 +277,10 @@ describe("deterministic surprise mazes", () => {
       if (enemy?.style) enemyStyles.add(enemy.style);
       if (animals[0]?.cageStyle) cageStyles.add(animals[0].cageStyle);
       for (const animal of animals) animalSpecies.add(animal.species);
+      for (const mechanic of first.introducedMechanics ?? []) {
+        const match = /^hole-run-([123])$/.exec(mechanic);
+        if (match?.[1]) holeRunLengths.add(Number(match[1]));
+      }
     }
 
     expect(terrainThemes.size).toBeGreaterThan(1);
@@ -283,6 +288,7 @@ describe("deterministic surprise mazes", () => {
     expect(enemyStyles.size).toBeGreaterThan(1);
     expect(cageStyles.size).toBeGreaterThan(1);
     expect(animalSpecies.size).toBeGreaterThan(ANIMALS_PER_LEVEL);
+    expect([...holeRunLengths].sort()).toEqual([1, 2, 3]);
   }, 20_000);
 
   it("keeps rescues optional for a previously failing adventure seed", () => {

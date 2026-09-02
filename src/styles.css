@@ -5894,10 +5894,14 @@ body,
 @keyframes spring-jump-arc {
   0% { transform: translateY(7%) scale(1.08, 0.86); }
   15% { transform: translateY(-20%) rotate(-2deg) scale(0.94, 1.12); }
-  46% { transform: translateY(-72%) rotate(-4deg) scale(1.06); }
-  68% { transform: translateY(-38%) rotate(3deg) scale(1.03); }
+  46% { transform: translateY(var(--jump-apex, -72%)) rotate(-4deg) scale(1.06); }
+  68% { transform: translateY(var(--jump-descent, -38%)) rotate(3deg) scale(1.03); }
   88% { transform: translateY(5%) scale(1.11, 0.86); }
   100% { transform: translateY(0) scale(1); }
+}
+
+.jump-presentation[data-hole-count="3"] .jump-presentation-body {
+  filter: drop-shadow(0 0 6px rgba(255, 223, 104, 0.48));
 }
 
 @keyframes spring-jump-shadow {

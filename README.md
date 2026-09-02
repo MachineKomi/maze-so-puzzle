@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.14.0 play-test build, which remains an active prototype. Its complete
+0.15.0 play-test build, which remains an active prototype. Its complete
 automated browser gate and refreshed unsigned Windows packaging are verified.
 The verified source is live on the canonical Vercel site; the broader
 physical-device play-test pass remains a release step.
@@ -61,24 +61,24 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.14.0 test build:
+The current verified desktop artifacts are the unsigned 0.15.0 test build:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.14.0-portable.exe`
-  (85,587,456 bytes; SHA-256
-  `608BB7648D210FF3FA54C8030D3E4CC0F05B96752A70021DE9BE072521D95620`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.14.0-setup.exe`
-  (79,415,152 bytes; SHA-256
-  `97FEDB5C34C30849608FD4EA23AF42004A999929FF7FE6BE39CCAAB033746A31`).
+- Portable test copy: `release/Maze-so-Puzzle-0.15.0-portable.exe`
+  (87,775,744 bytes; SHA-256
+  `CABF7455078CA025BC2194059B3758843728DF97298CFED9DF986C7F4B6FF1AE`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.15.0-setup.exe`
+  (81,614,537 bytes; SHA-256
+  `7F935CCB84E41F04142587C920C5FF1EF6AADB6E5FF8A3722B3EEF7D77FB3AE1`).
   Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.14.0_x64-setup.exe` (byte-matches the staged
+  Puzzle - For Ame to Solve!_0.15.0_x64-setup.exe` (byte-matches the staged
   setup copy).
-- Both executables report file/product version 0.14.0. The portable app remained
+- Both executables report file/product version 0.15.0. The portable app remained
   responsive for a five-second smoke launch and showed the correct game title.
-- The verified 0.14.0 hashes and retained archive hashes are recorded in
+- The verified 0.15.0 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -112,7 +112,7 @@ The current verified desktop artifacts are the unsigned 0.14.0 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.14.0** label to
+On the title screen, click or tap the small **Playable build 0.15.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -127,7 +127,17 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.14.0
+## Included in playable build 0.15.0
+
+- Spring Boots puzzles now vary between one, two, and three consecutive holes.
+  Longer jumps receive longer, higher arcs, with an extra mid-air boing on the
+  three-hole leap.
+- Lanternlight Labyrinth includes a four-way junction hole: one movement input
+  always jumps straight to the opposite landing, so the centre controls both
+  directions without turning or pathfinding mid-air.
+- The visual catalogue adds Otter, Lamb, and Capybara friends; Acorn Knight,
+  Bubble Dragon, and Candy Mimic enemies; plus Comet Spear, Bubble Bow, and
+  Cupcake Mace weapons.
 
 - A hard 24×24 maximum for every maze. Procedural topology stays on readable odd
   sizes from 9×9 through 23×23, and authored levels are validated by the same
@@ -207,8 +217,8 @@ Turn the iPad sideways to play.
   presentation ceiling is 24. Each seed also selects its illustrated terrain,
   weapon, friendly enemy, and cage variants deterministically.
 - A typed floor-and-wall theme catalogue with dominant-colour metadata and an
-  explicit compatibility matrix, plus five weapon looks, five friendly enemy
-  looks, eight pet species, and four cage styles. Story and generated mazes use
+  explicit compatibility matrix, plus eight weapon looks, eight friendly enemy
+  looks, eleven pet species, and four cage styles. Story and generated mazes use
   only compatible pastel material pairs—yellow/gold floors are never combined
   with green or sage walls. Every maze contains one weapon; rescue parties now
   vary from one or two friends in the opening mazes to four and five in the
@@ -216,7 +226,7 @@ Turn the iPad sideways to play.
 - A new illustrated title screen, backed by original AI-generated key art, with
   Continue, Adventure Book, and Surprise Maze shortcuts.
 - An Adventure Book showing story-maze clears, best step counts, rescue records,
-  cumulative totals for all eight pet species, gold, completion statistics,
+  cumulative totals for all eleven pet species, gold, completion statistics,
   stickers, rescue medals, and nine stat-driven achievement badges.
 - Persistent gold rewards, three collectible stickers, best results, and rescue
   medals for 5, 10, and 15 perfect rescues using each maze's actual friend total.
@@ -352,7 +362,7 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.14.0 source suite passes 304 automated tests across 23 files and the strict
+The 0.15.0 source suite passes 309 automated tests across 24 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
@@ -367,8 +377,8 @@ combat, paired-portal structural validation and travel, portal-safe active-run
 recovery, full-world camera interpolation, scaled-pointer hysteresis, and the
 full-reset storage allow-list.
 
-The 0.14.0 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.14.0, and are size-checked and
+The 0.15.0 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.15.0, and are size-checked and
 SHA-256 hashed. The portable app also passed a responsive five-second launch
 smoke with the correct title. Clean-machine installation, signing, and
 physical-device checks remain separate release gates. The release source is
@@ -384,7 +394,7 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.14.0 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.15.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

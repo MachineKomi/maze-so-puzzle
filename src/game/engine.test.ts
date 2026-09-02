@@ -312,6 +312,51 @@ describe("keys, doors, potions and boots", () => {
     });
   });
 
+  it("supports a three-hole leap as one straight movement input", () => {
+    const springBootsLevel = level("three-hole-jump", "#@joooE.#");
+    let state = createInitialGameState(springBootsLevel);
+    state = movePlayer(springBootsLevel, state, "right").state;
+    const jumped = movePlayer(springBootsLevel, state, "right");
+
+    expect(jumped.state.position).toEqual({ x: 6, y: 1 });
+    expect(jumped.events[0]).toEqual({
+      type: "hole-jumped",
+      from: { x: 2, y: 1 },
+      over: [{ x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }],
+      to: { x: 6, y: 1 },
+    });
+  });
+
+  it("crosses the centre of a plus junction only in the chosen straight direction", () => {
+    const crossroad = parseAsciiLevel({
+      id: "crossroad-hole",
+      name: "Crossroad hole",
+      objective: "Jump straight.",
+      map: [
+        "#########",
+        "###E#####",
+        "###.#####",
+        "#..o....#",
+        "###j#####",
+        "###@#####",
+        "#########",
+        "#########",
+        "#########",
+      ],
+    });
+    let state = createInitialGameState(crossroad);
+    state = movePlayer(crossroad, state, "up").state;
+    const jumped = movePlayer(crossroad, state, "up");
+
+    expect(jumped.state.position).toEqual({ x: 3, y: 2 });
+    expect(jumped.events[0]).toEqual({
+      type: "hole-jumped",
+      from: { x: 3, y: 4 },
+      over: [{ x: 3, y: 3 }],
+      to: { x: 3, y: 2 },
+    });
+  });
+
   it("refuses a spring jump without a safe landing tile", () => {
     const unsafeLevel = level("unsafe-spring-jump", "#@jo##E.#");
     const initial = createInitialGameState(unsafeLevel);

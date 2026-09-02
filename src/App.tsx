@@ -99,6 +99,7 @@ import {
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 import { getStoryRescueRecordDisplay } from "./rescueRecords";
 import { cameraWorldStyle, worldLayerStyle } from "./cameraMotion";
+import { getJumpPresentationMotion } from "./jumpPresentation";
 import { resetAllGameProgress } from "./resetProgress";
 import { clearActiveRun, readActiveRun, writeActiveRun } from "./session";
 import {
@@ -147,6 +148,9 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   hedgehog: "Hedgehog",
   fawn: "Fawn",
   "red-panda": "Red panda",
+  otter: "Otter",
+  lamb: "Lamb",
+  capybara: "Capybara",
 };
 
 const STORY_SPEAKER_LABELS: Readonly<Record<StorySpeaker, string>> = {
@@ -164,10 +168,9 @@ function storySpeakerArt(speaker: StorySpeaker): string {
 const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
-const JUMP_PRESENTATION_MS = 540;
 const PORTAL_PRESENTATION_MS = 720;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.14.0";
+const BUILD_VERSION = "0.15.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -278,6 +281,10 @@ interface RescuePresentation {
 interface JumpPresentation {
   readonly from: Point;
   readonly to: Point;
+  readonly holeCount: number;
+  readonly durationMs: number;
+  readonly apexPercent: number;
+  readonly descentPercent: number;
 }
 
 interface PortalPresentation {
@@ -346,8 +353,12 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
       return { icon: "🌸", text: "Spring boots found! Boing!", tone: "good", sound: "pickup" };
     case "antidote-leaf-collected":
       return { icon: "🍃", text: "Antidote leaf found! Purple poison is safe now.", tone: "good", sound: "pickup" };
-    case "hole-jumped":
-      return { icon: "✨", text: "Boing! What a lovely jump!", tone: "good", sound: "jump" };
+    case "hole-jumped": {
+      const distanceLabel = event.over.length === 1
+        ? "one hole"
+        : `${event.over.length} holes`;
+      return { icon: "✨", text: `Boing! A lovely jump over ${distanceLabel}!`, tone: "good", sound: "jump" };
+    }
     case "portal-warped":
       return {
         icon: resolvePortalArt(event.pair).motif,
@@ -1454,19 +1465,30 @@ function App() {
     clearPresentationWork();
     const sequence = presentationSequence.current;
     const reducedMotion = prefersReducedMotion();
-    const duration = reducedMotion ? REDUCED_PRESENTATION_MS : JUMP_PRESENTATION_MS;
+    const motion = getJumpPresentationMotion(event.over.length);
+    const duration = reducedMotion ? REDUCED_PRESENTATION_MS : motion.durationMs;
     setBattlePresentation(null);
     setRescuePresentation(null);
     setPortalPresentation(null);
     setPresentedPower(null);
     setPresentedEnemyPower(null);
-    setJumpPresentation({ from: event.from, to: event.to });
+    setJumpPresentation({
+      from: event.from,
+      to: event.to,
+      holeCount: motion.holeCount,
+      durationMs: duration,
+      apexPercent: motion.apexPercent,
+      descentPercent: motion.descentPercent,
+    });
     playSound("jump", mutedRef.current);
+    if (!reducedMotion && motion.holeCount === 3) {
+      schedulePresentationTimer(sequence, () => playSound("jump", mutedRef.current), Math.round(duration * 0.48));
+    }
     if (landingSound !== "jump") {
       schedulePresentationTimer(
         sequence,
         () => playSound(landingSound, mutedRef.current),
-        reducedMotion ? 45 : JUMP_PRESENTATION_MS - 105,
+        reducedMotion ? 45 : duration - 105,
       );
     }
     schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
@@ -2698,11 +2720,14 @@ function App() {
                 <div
                   className="jump-presentation"
                   data-sfx-cue="spring-boots-boing"
+                  data-hole-count={jumpPresentation.holeCount}
                   style={{
                     ...cameraLayerStyle(jumpPresentation.from, cameraWindow),
                     "--jump-x": `${(jumpPresentation.to.x - jumpPresentation.from.x) * 100}%`,
                     "--jump-y": `${(jumpPresentation.to.y - jumpPresentation.from.y) * 100}%`,
-                    "--jump-duration": `${JUMP_PRESENTATION_MS}ms`,
+                    "--jump-duration": `${jumpPresentation.durationMs}ms`,
+                    "--jump-apex": `${jumpPresentation.apexPercent}%`,
+                    "--jump-descent": `${jumpPresentation.descentPercent}%`,
                   } as CSSProperties}
                   aria-hidden="true"
                 >

@@ -4,6 +4,42 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.15.0 - 2026-09-02
+
+This spring-jump variety release makes hole puzzles less predictable and adds
+nine new friendly fantasy sprites to the maze catalogue.
+
+### Added
+
+- One-, two-, and three-hole Spring Boots gates in both authored and procedural
+  mazes. Longer runs receive progressively longer, higher hop presentations.
+- A true four-way hole junction in Lanternlight Labyrinth. Entering it commits
+  Ame to the straight landing on the opposite side, so one central hole controls
+  both axes without adding pathfinding.
+- Three rescue friends: Otter, Lamb, and Capybara.
+- Three playful enemies: Acorn Knight, Bubble Dragon, and Candy Mimic.
+- Three collectible weapons: Comet Spear, Bubble Bow, and Cupcake Mace.
+
+### Changed
+
+- Procedural hole gates now choose deterministically between runs of one, two,
+  and three consecutive holes instead of preferring the same length.
+- Three-hole leaps use a second mid-air boing and a gentle glow so the longer
+  traversal feels distinct while remaining one grid input.
+- Later story mazes now deliberately showcase the expanded friend, enemy, and
+  weapon catalogue.
+
+### Verification
+
+- `npm run check` passes 309 tests across 24 files plus strict TypeScript and
+  the Vite production build. Focused tests cover all three run lengths, a
+  straight cross-junction jump, generated length variety, and scalable arcs.
+- All nine new 512×512 runtime sprites have transparent PNG output and return
+  HTTP 200 from the production preview bundle. Desktop 1280×720 remains
+  viewport-exact without document overflow.
+- The unsigned 0.15.0 portable executable and NSIS installer report version
+  0.15.0, and the portable app passed its five-second responsive launch smoke.
+
 ## 0.14.0 - 2026-09-02
 
 This compact-adventure release replaces maze sprawl with denser rooms, richer

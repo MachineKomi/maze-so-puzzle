@@ -829,3 +829,88 @@ Color palette: peach cream, mint, lilac, sky blue and warm gold
 Constraints: no text; no letters; no numbers; no watermark; no fire; no extra character; no border outside the medallion
 Avoid: reptilian realism, sharp teeth, scary eyes, dark background, large adult dragon
 ~~~
+## Build 0.15.0: rescue-friend, enemy, and weapon variety
+
+Build 0.15.0 used the built-in OpenAI ImageGen workflow in `stylized-concept`
+mode. Each output was generated as a distinct asset. Existing local sprites were
+supplied only as style/finish references; no existing subject was edited.
+
+### Rescue-friend prompt template
+
+Reference image role: style reference only,
+`public/assets/animal-red-panda-v1.png`.
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 rescue-friend game sprite
+Primary request: Create one production sprite of <SUBJECT>.
+Input image: the supplied red panda sprite is a style and finish reference only; create a completely new animal subject.
+Style/medium: lovely polished 2D hand-painted chunky anime fantasy RPG / child-friendly JRPG art; rounded plush toy-like anatomy, clean dark-plum linework, soft dimensional shading, detailed but readable at small size.
+Composition/framing: exactly one full-body animal, front three-quarter view, centred, generous even transparent padding, strong simple silhouette fitting a square maze tile.
+Lighting/mood: soft warm studio light, safe, cuddly and joyful.
+Color palette: soft harmonious pastels with warm natural fur.
+Constraints: genuine transparent RGBA background; preserve clean softly antialiased edges; no cage because cage bars are layered separately.
+Avoid: scenery, ground, floor plane, cast shadow, border, frame, text, number, logo, watermark, duplicate animal, cropped ears, feet or tail, weapon, enemy pose, photorealism.
+```
+
+| ID | `<SUBJECT>` | Built-in output | Runtime |
+| --- | --- | --- | --- |
+| Otter | a tiny cuddly river otter sitting upright, warm cocoa-brown fur, cream muzzle and tummy, round sparkling amber eyes, little mint neckerchief, friendly excited smile, compact tail curled beside it | `exec-950f3c3f-789b-47c0-a67e-a7c155fc2e60.png` | `public/assets/animal-otter-v1.png` |
+| Lamb | a tiny cuddly lamb sitting upright, fluffy cream wool, peach-pink ears and nose, round sparkling violet eyes, little lavender neck ribbon with a gold star bell, sweet happy smile | `exec-57f084d6-ce40-4f97-bf53-54bad6882337.png` | `public/assets/animal-lamb-v1.png` |
+| Capybara | a tiny cuddly baby capybara sitting upright, soft caramel-brown fur, rounded muzzle and ears, round sparkling dark eyes, tiny sky-blue satchel scarf, gentle cheerful smile | `exec-cba746d6-882e-4c8b-80cb-75a874415880.png` | `public/assets/animal-capybara-v1.png` |
+
+### Friendly-enemy prompt template
+
+Reference image role: style reference only,
+`public/assets/enemy-mushroom-imp-v1.png`.
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 friendly enemy game sprite
+Primary request: Create one production sprite of <SUBJECT>.
+Input image: the supplied mushroom imp sprite is a style and finish reference only; create a completely new enemy subject.
+Style/medium: lovely polished 2D hand-painted chunky anime fantasy RPG / child-friendly JRPG art; rounded toy-like anatomy, clean dark-plum linework, soft dimensional shading, readable at small size.
+Composition/framing: exactly one full-body enemy, front three-quarter view, centred, generous even transparent padding, strong silhouette fitting a square maze tile.
+Lighting/mood: soft warm studio light; silly, low-stakes and cute rather than threatening.
+Color palette: harmonious soft fantasy pastels with clear contrast.
+Constraints: genuine transparent RGBA background; clean softly antialiased edges; full subject visible.
+Avoid: scenery, ground, floor plane, cast shadow, border, frame, text, number, logo, watermark, duplicate creature, cropped parts, blood, injury, realistic violence, frightening teeth, photorealism.
+```
+
+| ID | `<SUBJECT>` | Built-in output | Runtime |
+| --- | --- | --- | --- |
+| Acorn Knight | a tiny mischievous acorn knight creature, round polished acorn-cap helmet, warm chestnut body, leafy green cape, stubby wooden spoon lance, sturdy little boots, playful determined grin | `exec-cabb2a1c-012b-4b60-8b25-e7f34d9216e8.png` | `public/assets/enemy-acorn-knight-v1.png` |
+| Bubble Dragon | a tiny mischievous bubble dragon, round lavender-blue body, small mint wings, pearly bubble scales, curled tail, tiny harmless horns, playful competitive grin and bright teal eyes | `exec-fb52ea12-5734-4e41-a5d0-a50fd20fb91b.png` | `public/assets/enemy-bubble-dragon-v1.png` |
+| Candy Mimic | a tiny mischievous candy treasure-chest mimic, rounded strawberry-pink chest body with cream frosting trim, little mitten hands and booted feet, a lid-mouth with one harmless marshmallow tooth, playful bright-eyed grin | `exec-169372b7-88cf-44cd-8407-0f00028affaf.png` | `public/assets/enemy-candy-mimic-v1.png` |
+
+### Weapon prompt template
+
+Reference image role: style reference only,
+`public/assets/weapon-flower-sabre-v1.png`.
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 collectible weapon game sprite
+Primary request: Create one production item sprite of <SUBJECT>.
+Input image: the supplied Flower Sabre sprite is a style, polish and framing reference only; create a completely new weapon.
+Style/medium: lovely polished 2D hand-painted chunky anime fantasy RPG / child-friendly JRPG inventory art; rounded toy-like forms, clean dark-plum linework, soft dimensional shading, jewel-like highlights.
+Composition/framing: exactly one complete weapon, diagonal lower-left to upper-right where practical, centred, generous transparent padding, strong silhouette readable in one square maze tile and as a held overlay.
+Lighting/mood: bright magical studio highlights, cheerful and non-threatening.
+Color palette: harmonious soft fantasy pastels with gold accents and clear contrast.
+Constraints: genuine transparent RGBA background; clean softly antialiased edges; every part fully visible.
+Avoid: character, hand, scenery, ground, floor plane, cast shadow, border, frame, text, number, logo, watermark, duplicate weapon, cropped parts, blood, damage, realistic violence, photorealism.
+```
+
+| ID | `<SUBJECT>` | Built-in output | Runtime |
+| --- | --- | --- | --- |
+| Comet Spear | an adorable magical Comet Spear with a polished pale-blue crystal spearhead shaped like a smiling shooting star, a lavender shaft, gold fittings, and two short coral-and-mint ribbon tails | `exec-b5375e5e-a3db-4e42-81ff-0bb0211693d5.png` | `public/assets/weapon-comet-spear-v1.png` |
+| Bubble Bow | an adorable magical Bubble Bow, a compact pearly aqua and lavender fantasy bow with rounded cloudlike limbs, a taut golden string, tiny floating bubble gems built into the tips, and a central heart grip; bow only, no arrow | `exec-cd32e254-7053-49ea-bd73-81695670a31d.png` | `public/assets/weapon-bubble-bow-v1.png` |
+| Cupcake Mace | an adorable magical Cupcake Mace with a strawberry-pink frosted cupcake head, colourful star sprinkles, a golden wrapper-shaped guard, lavender handle, and mint ribbon pommel; clearly a soft toy-like fantasy weapon | `exec-82dc31d4-7eb1-4017-bd81-e80b8cccfc98.png` | `public/assets/weapon-cupcake-mace-v1.png` |
+
+Raw generated exports are archived non-destructively as matching
+`docs/source-assets/*-master.png` files. `scripts/process_v15_sprite_variety.py`
+downsamples each runtime image to transparent 512×512 PNG. The Lamb and
+Capybara exports contained a rendered pale checkerboard rather than alpha; the
+script removes only edge-connected neutral background pixels and softly
+antialiases the resulting cut-out. The other seven exports preserve their
+original generated alpha.

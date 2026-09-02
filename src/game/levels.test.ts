@@ -112,7 +112,7 @@ describe("curated campaign levels", () => {
       120,
       193,
       173,
-      236,
+      235,
       231,
       105,
       103,
@@ -179,6 +179,29 @@ describe("curated campaign levels", () => {
     }
   });
 
+  it("varies authored Spring Boots puzzles across one, two, and three holes", () => {
+    const jumpLengths = new Set<number>();
+    for (const level of CURATED_LEVELS) {
+      const perfectRoute = solveLevel(level, { requireAllAnimals: true });
+      let state = createInitialGameState(level);
+      for (const direction of perfectRoute.directions) {
+        const result = movePlayer(level, state, direction);
+        state = result.state;
+        for (const event of result.events) {
+          if (event.type === "hole-jumped") jumpLengths.add(event.over.length);
+        }
+      }
+    }
+    expect([...jumpLengths].sort()).toEqual([1, 2, 3]);
+
+    const crossroad = { x: 8, y: 4 };
+    expect(LANTERNLIGHT_LABYRINTH_LEVEL.terrain[crossroad.y]?.[crossroad.x]).toBe("hole");
+    for (const [dx, dy] of [[0, -1], [1, 0], [0, 1], [-1, 0]] as const) {
+      expect(LANTERNLIGHT_LABYRINTH_LEVEL.terrain[crossroad.y + dy]?.[crossroad.x + dx])
+        .not.toBe("wall");
+    }
+  });
+
   it.each(CURATED_LEVELS.map((level) => [level.name, level] as const))(
     "%s is square, structurally valid, and safely solvable",
     (_name, level) => {
@@ -229,8 +252,8 @@ describe("curated campaign levels", () => {
     [
       TWILIGHT_TREASURE_LOOP_LEVEL,
       136,
-      236,
-      246,
+      235,
+      245,
       [
         "sword-collected",
         "enemy-defeated:2->4",
@@ -490,7 +513,7 @@ describe("curated campaign levels", () => {
     });
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(3);
     expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(1);
-    expect(perfectRescueWin.directions).toHaveLength(217);
+    expect(perfectRescueWin.directions).toHaveLength(216);
     expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
 
     const monsterTreasureRoom = LANTERNLIGHT_LABYRINTH_LEVEL.objects.filter(

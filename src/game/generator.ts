@@ -701,17 +701,24 @@ function movePrerequisitesOntoBranches(
 interface HoleSegment {
   readonly holes: readonly Point[];
   readonly landing: Point;
+  readonly crossroad: boolean;
 }
 
-/** Selects a straight, safely landable one- or two-tile jump on the main route. */
+/** Selects a straight, safely landable one-, two-, or three-tile jump. */
 function chooseHoleSegment(
+  terrain: readonly (readonly TerrainKind[])[],
   criticalPath: readonly Point[],
   minimumPathIndex: number,
   preferredPathIndex: number,
   reserved: ReadonlySet<string>,
   random: RandomSource,
 ): HoleSegment | undefined {
-  for (const length of [2, 1] as const) {
+  const preferredLength = ([1, 2, 3] as const)[Math.floor(random() * 3)] ?? 1;
+  const lengthOrder = [preferredLength, ...shuffle(
+    ([1, 2, 3] as const).filter((length) => length !== preferredLength),
+    random,
+  )];
+  for (const length of lengthOrder) {
     const candidates: Array<HoleSegment & { readonly startIndex: number }> = [];
     for (
       let startIndex = Math.max(1, minimumPathIndex);
@@ -737,17 +744,31 @@ function chooseHoleSegment(
       ) {
         continue;
       }
-      candidates.push({ holes, landing, startIndex });
+      candidates.push({
+        holes,
+        landing,
+        startIndex,
+        crossroad: length === 1 && floorNeighbors(terrain, firstHole).length === 4,
+      });
     }
 
-    const selected = shuffle(candidates, random)
+    const preferCrossroad = length === 1 && random() < 0.6;
+    const crossroadCandidates = candidates.filter((candidate) => candidate.crossroad);
+    const eligible = preferCrossroad && crossroadCandidates.length > 0
+      ? crossroadCandidates
+      : candidates;
+    const selected = shuffle(eligible, random)
       .sort(
         (left, right) =>
           Math.abs(left.startIndex - preferredPathIndex) -
           Math.abs(right.startIndex - preferredPathIndex),
       )[0];
     if (selected !== undefined) {
-      return { holes: selected.holes, landing: selected.landing };
+      return {
+        holes: selected.holes,
+        landing: selected.landing,
+        crossroad: selected.crossroad,
+      };
     }
   }
   return undefined;
@@ -968,6 +989,7 @@ function buildGeneratedLevel(
     const preferredPathIndex = pathIndex.get(pointKey(preferredPoint));
     if (preferredPathIndex === undefined) return undefined;
     holeSegment = chooseHoleSegment(
+      terrain,
       criticalPath,
       springAttachment + 1,
       preferredPathIndex,
@@ -1149,6 +1171,8 @@ function buildGeneratedLevel(
       "animal-rescue",
       ...(rooms.length > 0 ? ["room-layout", "treasure-room"] : []),
       ...(guardianCount > 0 ? ["monster-room", "come-back-stronger"] : []),
+      ...(holeSegment === undefined ? [] : [`hole-run-${holeSegment.holes.length}`]),
+      ...(holeSegment?.crossroad ? ["crossroad-jump"] : []),
     ])],
   };
 }

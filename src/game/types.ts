@@ -31,6 +31,9 @@ export const ANIMAL_SPECIES = [
   "hedgehog",
   "fawn",
   "red-panda",
+  "otter",
+  "lamb",
+  "capybara",
 ] as const;
 export type AnimalSpecies = (typeof ANIMAL_SPECIES)[number];
 export const ANIMALS_PER_LEVEL = 3;
@@ -55,6 +58,9 @@ export const WEAPON_STYLE_IDS = [
   "moon-wand",
   "leaf-blade",
   "sun-mallet",
+  "comet-spear",
+  "bubble-bow",
+  "cupcake-mace",
 ] as const;
 export type WeaponStyle = (typeof WEAPON_STYLE_IDS)[number];
 
@@ -64,6 +70,9 @@ export const ENEMY_STYLE_IDS = [
   "mushroom-imp",
   "moon-bat",
   "pebble-golem",
+  "acorn-knight",
+  "bubble-dragon",
+  "candy-mimic",
 ] as const;
 export type EnemyStyle = (typeof ENEMY_STYLE_IDS)[number];
 
