@@ -10,6 +10,7 @@ import {
   MOONLIT_FRIENDSHIP_QUEST_LEVEL,
   MOVEMENT_LEVEL,
   parseAsciiLevel,
+  RAINBOW_POWER_PARADE_LEVEL,
   TWILIGHT_TREASURE_LOOP_LEVEL,
   WISHING_WOODS_LEVEL,
 } from "./levels";
@@ -80,8 +81,9 @@ describe("curated campaign levels", () => {
       [15, 15],
       [17, 17],
       [21, 21],
+      [21, 21],
     ]);
-    expect(CURATED_LEVELS.map((level) => solveLevel(level).directions.length)).toEqual([
+    expect(CURATED_LEVELS.slice(0, 15).map((level) => solveLevel(level).directions.length)).toEqual([
       26,
       37,
       64,
@@ -98,6 +100,7 @@ describe("curated campaign levels", () => {
       103,
       231,
     ]);
+    expect(solveLevel(CURATED_LEVELS[15]!).directions.length).toBeGreaterThan(300);
   });
 
   it("uses connected pools and lava patches once boots and hazards are introduced", () => {
@@ -173,7 +176,7 @@ describe("curated campaign levels", () => {
     },
   );
 
-  const rescueCounts = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 3, 4, 5] as const;
+  const rescueCounts = [1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 5, 3, 4, 5, 5] as const;
 
   it.each(CURATED_LEVELS.map((level, index) => [
     level.name,
@@ -192,7 +195,9 @@ describe("curated campaign levels", () => {
 
       const ordinaryWin = solveLevel(level);
       const perfectRescueWin = solveLevel(level, { requireAllAnimals: true });
-      expect(ordinaryWin.finalState?.rescuedAnimalIds).toHaveLength(0);
+      expect(ordinaryWin.finalState?.rescuedAnimalIds).toHaveLength(
+        level.id === "rainbow-power-parade" ? expectedRescueCount : 0,
+      );
       expect(perfectRescueWin.solvable).toBe(true);
       expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(
         expectedRescueCount,
@@ -332,7 +337,7 @@ describe("curated campaign levels", () => {
         state = result.state;
         routeStep += 1;
         for (const event of result.events) {
-          if (event.type === "moved" || event.type === "level-won") continue;
+          if (event.type === "moved" || event.type === "level-won" || event.type === "treasure-collected") continue;
           if (event.type === "enemy-defeated" || event.type === "potion-collected") {
             progression.push(`${event.type}:${event.powerBefore}->${event.powerAfter}`);
           } else if (event.type === "key-collected" || event.type === "door-opened") {
@@ -388,6 +393,7 @@ describe("curated campaign levels", () => {
       "rose-courtyard",
       "springstep-hollow",
       "moonbeam-castle",
+      "star-garden",
     ]);
     expect(
       [...new Set(CURATED_LEVELS.map((level) => level.terrainThemeId))].sort(),
@@ -474,7 +480,7 @@ describe("curated campaign levels", () => {
       state = result.state;
       progressionEvents.push(
         ...result.events
-          .filter((event) => event.type !== "moved" && event.type !== "level-won")
+          .filter((event) => event.type !== "moved" && event.type !== "level-won" && event.type !== "treasure-collected")
           .map((event) => event.type),
       );
     }
@@ -624,6 +630,24 @@ describe("curated campaign levels", () => {
       playerPower: 6,
       enemyPower: 9,
     });
+  });
+
+  it("makes the Power 99 finale require the full growth-and-return puzzle", () => {
+    const perfectWin = solveLevel(RAINBOW_POWER_PARADE_LEVEL, {
+      requireAllAnimals: true,
+    });
+
+    expect(perfectWin.solvable).toBe(true);
+    expect(perfectWin.directions.length).toBeGreaterThan(300);
+    expect(perfectWin.finalState).toMatchObject({
+      power: 306,
+      hasSword: true,
+      keys: ["yellow"],
+      status: "won",
+    });
+    expect(perfectWin.finalState?.defeatedEnemyIds).toHaveLength(19);
+    expect(perfectWin.finalState?.rescuedAnimalIds).toHaveLength(5);
+    expect(perfectWin.finalState?.openedDoorIds).toHaveLength(1);
   });
 
   it.each(CURATED_LEVELS.map((level) => [level.name, level] as const))(
@@ -789,13 +813,21 @@ describe("curated campaign levels", () => {
         door: 3,
         "antidote-leaf": 1,
       },
+      {
+        animal: 5,
+        enemy: 19,
+        door: 1,
+        key: 1,
+        sword: 1,
+        potion: 1,
+      },
     ] as const;
-    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 3, 4, 4, 5, 1, 3, 3] as const;
-    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 1, 3, 3, 3, 1, 1, 3] as const;
+    const expectedEnemyCounts = [0, 1, 2, 2, 3, 2, 3, 4, 3, 4, 4, 5, 1, 3, 3, 19] as const;
+    const expectedDoorCounts = [0, 1, 1, 2, 2, 3, 3, 3, 1, 3, 3, 3, 1, 1, 3, 1] as const;
 
     CURATED_LEVELS.forEach((level, index) => {
       const counts = Object.fromEntries(
-        [...new Set(level.objects.map((object) => object.kind))].map((kind) => [
+        [...new Set(level.objects.map((object) => object.kind).filter((kind) => kind !== "treasure"))].map((kind) => [
           kind,
           level.objects.filter((object) => object.kind === kind).length,
         ]),

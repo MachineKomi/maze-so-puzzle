@@ -2,6 +2,8 @@ export type SoundName =
   | "step"
   | "bump"
   | "pickup"
+  | "treasure"
+  | "science"
   | "power"
   | "powerTick"
   | "unlock"
@@ -63,6 +65,18 @@ const melodies: Readonly<Record<SoundName, readonly MelodyNote[]>> = {
   step: [[420, 0, 0.045]],
   bump: [[180, 0, 0.07]],
   pickup: [[620, 0, 0.07], [840, 0.07, 0.1]],
+  treasure: [
+    [784, 0, 0.06, 0.024, "triangle"],
+    [1047, 0.055, 0.07, 0.026, "triangle"],
+    [1319, 0.11, 0.08, 0.027, "sine"],
+    [1568, 0.18, 0.14, 0.024, "sine"],
+  ],
+  science: [
+    [440, 0, 0.06, 0.02, "square", 660],
+    [660, 0.07, 0.06, 0.021, "square", 990],
+    [990, 0.14, 0.08, 0.022, "triangle", 1320],
+    [1320, 0.22, 0.14, 0.022, "sine"],
+  ],
   power: [[520, 0, 0.07], [660, 0.07, 0.07], [820, 0.14, 0.11]],
   powerTick: [[620, 0, 0.065, 0.022, "triangle", 920]],
   unlock: [[410, 0, 0.07], [610, 0.08, 0.13]],

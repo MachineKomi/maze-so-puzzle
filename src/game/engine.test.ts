@@ -50,6 +50,27 @@ describe("immutable movement", () => {
   });
 });
 
+describe("optional maze treasures", () => {
+  it("collects Gold Stars and Science Points once without changing Power", () => {
+    const treasureLevel = level("treasure-corridor", "#@kivxE.#");
+    let state = createInitialGameState(treasureLevel);
+    const events: string[] = [];
+    for (let step = 0; step < 4; step += 1) {
+      const result = movePlayer(treasureLevel, state, "right");
+      state = result.state;
+      events.push(...result.events.map((event) => event.type));
+    }
+
+    expect(state).toMatchObject({
+      power: 2,
+      goldStarsCollected: 11,
+      sciencePointsCollected: 6,
+    });
+    expect(events.filter((event) => event === "treasure-collected")).toHaveLength(4);
+    expect(state.collectedObjectIds).toHaveLength(4);
+  });
+});
+
 describe("paired magic flower portals", () => {
   it("warps to the matching flower in one counted move and then walks off normally", () => {
     const portalLevel = level("portal-corridor", "#@H..H.E#");

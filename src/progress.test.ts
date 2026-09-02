@@ -66,6 +66,7 @@ describe("player progress migration and persistence", () => {
       schemaVersion: 3,
       unlockedLevelCount: 1,
       gold: 0,
+      sciencePoints: 0,
       stickers: [],
       medals: [],
       badges: [],
@@ -591,6 +592,16 @@ describe("applying level completions", () => {
     }));
     expect(progress.bestResultsByLevel["new-friends"]?.bestRescuedSpecies)
       .toEqual(["puppy", "fawn", "red-panda"]);
+  });
+
+  it("banks optional maze Gold Stars and Science Points on completion", () => {
+    const progress = applyLevelCompletion(
+      createDefaultPlayerProgress(),
+      completion("treasure-lab", 0, 3, { bonusGold: 7, sciencePoints: 4 }),
+    );
+
+    expect(progress.gold).toBe(37);
+    expect(progress.sciencePoints).toBe(4);
   });
 
   it("persists perfect results for mazes with one, two, four, or five friends", () => {

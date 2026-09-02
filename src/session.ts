@@ -45,6 +45,7 @@ const COLLECTABLE_KINDS: readonly ObjectKind[] = [
   "antidote-leaf",
   "potion",
   "key",
+  "treasure",
 ];
 const TILE_KEY_PATTERN = /^(0|[1-9]\d*),(0|[1-9]\d*)$/;
 
@@ -139,6 +140,7 @@ function positionObjectIsResolved(
     case "door": return openedIds.has(object.id);
     case "animal": return rescuedIds.has(object.id);
     case "portal": return true;
+    case "treasure":
     case "sword":
     case "boots":
     case "spring-boots":
@@ -204,6 +206,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   // poison or its antidote has changed traversal rules, so its old in-progress
   // snapshot cannot be restored safely.
   const rawHasAntidoteLeaf = ownValue(value, "hasAntidoteLeaf");
+  const rawGoldStarsCollected = ownValue(value, "goldStarsCollected");
+  const rawSciencePointsCollected = ownValue(value, "sciencePointsCollected");
   // Levels containing Spring Boots changed topology in 0.9. An older snapshot
   // cannot prove which side of the new hole gate it belongs on, so discard only
   // that active run while preserving the player's separate campaign progress.
@@ -224,6 +228,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     return null;
   }
   const hasAntidoteLeaf = rawHasAntidoteLeaf === undefined ? false : rawHasAntidoteLeaf;
+  const goldStarsCollected = rawGoldStarsCollected === undefined ? 0 : rawGoldStarsCollected;
+  const sciencePointsCollected = rawSciencePointsCollected === undefined ? 0 : rawSciencePointsCollected;
   if (
     !position
     || !isSafeNonNegativeInteger(power)
@@ -232,6 +238,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     || typeof hasBoots !== "boolean"
     || typeof hasSpringBoots !== "boolean"
     || typeof hasAntidoteLeaf !== "boolean"
+    || !isSafeNonNegativeInteger(goldStarsCollected)
+    || !isSafeNonNegativeInteger(sciencePointsCollected)
   ) {
     return null;
   }
@@ -284,6 +292,16 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     (object) => object.kind === "antidote-leaf" && collected.has(object.id),
   );
   const calculatedPower = expectedPower(level, collected, defeated);
+  const calculatedGoldStars = level.objects.reduce((sum, object) => (
+    object.kind === "treasure" && object.currency === "gold" && collected.has(object.id)
+      ? sum + object.amount
+      : sum
+  ), 0);
+  const calculatedSciencePoints = level.objects.reduce((sum, object) => (
+    object.kind === "treasure" && object.currency === "science" && collected.has(object.id)
+      ? sum + object.amount
+      : sum
+  ), 0);
   if (
     hasSword !== collectedSword
     || hasBoots !== collectedBoots
@@ -292,6 +310,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     || !equalStrings(keys, derivedKeys)
     || calculatedPower === null
     || power !== calculatedPower
+    || goldStarsCollected !== calculatedGoldStars
+    || sciencePointsCollected !== calculatedSciencePoints
     || ((terrain === "water" || terrain === "lava") && !hasBoots)
     || (terrain === "poison" && !hasAntidoteLeaf)
     || !positionObjectIsResolved(objectAt(level, position), collected, rescued, defeated, opened)
@@ -321,6 +341,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     rescuedAnimalIds,
     defeatedEnemyIds,
     openedDoorIds,
+    goldStarsCollected,
+    sciencePointsCollected,
     status: "playing",
     steps,
   };

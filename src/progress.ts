@@ -205,6 +205,7 @@ export interface PlayerProgress {
   readonly schemaVersion: typeof PLAYER_PROGRESS_SCHEMA_VERSION;
   readonly unlockedLevelCount: number;
   readonly gold: number;
+  readonly sciencePoints: number;
   readonly stickers: readonly StickerId[];
   readonly medals: readonly RescueMedalId[];
   readonly badges: readonly BadgeId[];
@@ -265,6 +266,9 @@ export interface LevelCompletionInput {
   readonly rescuedSpecies?: readonly AnimalSpecies[];
   readonly steps: number;
   readonly power: number;
+  /** Optional treasures collected during this completed run. */
+  readonly bonusGold?: number;
+  readonly sciencePoints?: number;
 }
 
 export interface ProgressStorage {
@@ -430,6 +434,7 @@ export function createDefaultPlayerProgress(unlockedLevelCount = 1): PlayerProgr
     schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
     unlockedLevelCount: Math.max(1, nonNegativeInteger(unlockedLevelCount, 1)),
     gold: 0,
+    sciencePoints: 0,
     stickers: [],
     medals: [],
     badges: [],
@@ -588,6 +593,7 @@ function sanitizeProgressObject(
       nonNegativeInteger(ownValue(value, "unlockedLevelCount"), 1),
     ),
     gold: nonNegativeInteger(ownValue(value, "gold")),
+    sciencePoints: nonNegativeInteger(ownValue(value, "sciencePoints")),
     stickers: uniqueKnownIds(ownValue(value, "stickers"), isStickerId),
     medals: mergeUnique(storedMedals, medalsForPerfectRescueCount(perfectRescueMazeCount)),
     badges: mergeUnique(storedBadges, badgesForMetrics(badgeMetrics)),
@@ -804,7 +810,8 @@ export function applyLevelCompletion(
   return {
     schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
     unlockedLevelCount,
-    gold: current.gold + reward.gold,
+    gold: current.gold + reward.gold + nonNegativeInteger(input.bonusGold),
+    sciencePoints: current.sciencePoints + nonNegativeInteger(input.sciencePoints),
     stickers: mergeUnique(current.stickers, reward.stickerIds),
     medals: mergeUnique(
       current.medals,

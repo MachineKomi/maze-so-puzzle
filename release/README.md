@@ -3,16 +3,16 @@
 This folder documents convenience copies of Windows x64 artifacts staged for
 local play testing. Executables are deliberately excluded from source history;
 publish the current pair as GitHub Release assets when a downloadable desktop
-build is wanted. Version 0.11.0 is the current verified Windows test build. Its
+build is wanted. Version 0.12.0 is the current verified Windows test build. Its
 Tauri build, staging, portable smoke launch, source-to-stage comparison, and
 hashes completed successfully on 2026-09-02.
 
-## Current 0.11.0 test files
+## Current 0.12.0 test files
 
-- `Maze-so-Puzzle-0.11.0-portable.exe` - standalone application executable,
-  84,777,984 bytes. It remained running and responsive with the correct title in
+- `Maze-so-Puzzle-0.12.0-portable.exe` - standalone application executable,
+  85,447,680 bytes. It remained running and responsive with the correct title in
   a five-second local smoke launch.
-- `Maze-so-Puzzle-0.11.0-setup.exe` - NSIS installer, 78,599,010 bytes. It was
+- `Maze-so-Puzzle-0.12.0-setup.exe` - NSIS installer, 79,272,384 bytes. It was
   built and staged but has not been clean-machine installed during this pass.
 
 `SHA256SUMS.txt` contains their staged hashes plus retained 0.10.3, 0.10.2, 0.10.1, 0.10.0, 0.9.1, 0.9.0, 0.8.0, 0.7.1, 0.5.1,
@@ -84,14 +84,14 @@ The staged files match their final Tauri build sources byte-for-byte.
 Verify the current files in PowerShell with:
 
 ```powershell
-Get-FileHash .\Maze-so-Puzzle-0.11.0-portable.exe -Algorithm SHA256
-Get-FileHash .\Maze-so-Puzzle-0.11.0-setup.exe -Algorithm SHA256
+Get-FileHash .\Maze-so-Puzzle-0.12.0-portable.exe -Algorithm SHA256
+Get-FileHash .\Maze-so-Puzzle-0.12.0-setup.exe -Algorithm SHA256
 ```
 
 Expected hashes are:
 
-- portable: `A64876899DE43C93E67D8D1B40201603DED39D3A496EB14E9D3CABD4CD02E331`
-- installer: `EAEEF9B96716712DC05964652E4830631395970D8DC192A466695CC0AE58469B`
+- portable: `4BE70602349AFA1A133024F0FB0B60356AD20809ACEC48EC2E85940AAFB3D3F6`
+- installer: `FA935AC313BEFD1415C1BF0FF797A8677F0F7B9F6E085FF1520C4E10EFD6F992`
 
 The package is unsigned unless the owner completes code signing and repeats the
 artifact tests.

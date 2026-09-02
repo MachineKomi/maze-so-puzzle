@@ -658,3 +658,126 @@ Subject: preserve the exact same low-profile five-petal floor-pad geometry, came
 Constraints: change only the palette and motifs; keep the full object silhouette, proportions, rendering style, alpha transparency and framing unchanged; actual transparent background; no square tile; no text; no character; no scenery; no watermark
 Avoid: any heart or clover shapes, dark ominous magic, extra objects, taller side-view structure
 ```
+
+## Build 0.12.0: treasure and navigation art
+
+Build 0.12.0 uses the built-in OpenAI ImageGen workflow in
+**referenced-image mode**. Collectibles used `public/assets/coin-pouch.png` as a
+style reference; navigation symbols used `public/assets/reward-trail-sticker.png`.
+The reference established rendering language only—the outputs are new objects.
+Generated PNG masters are archived unchanged, and
+`scripts/process_v12_assets.py` makes lossless transparent WebP runtime copies.
+
+| Asset | Built-in generated source | Archived master | Runtime asset |
+|---|---|---|---|
+| Gold chest | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-07733947-b7d6-48c8-adca-4c7390f7b6ff.png` | `docs/source-assets/treasure-gold-chest-v1-master.png` | `public/assets/treasure-gold-chest-v1.webp` |
+| Science gears | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-c989f299-ed59-4f41-91df-c7cb5a65c560.png` | `docs/source-assets/treasure-science-gears-v1-master.png` | `public/assets/treasure-science-gears-v1.webp` |
+| Science beaker | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-983f0bee-6b37-46d3-8096-876386e0d7ce.png` | `docs/source-assets/treasure-science-beaker-v1-master.png` | `public/assets/treasure-science-beaker-v1.webp` |
+| Home | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-4e3d28ca-e427-45bc-9d04-23b3574aaa67.png` | `docs/source-assets/nav-home-v1-master.png` | `public/assets/nav-home-v1.webp` |
+| Mazes | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-cc1dd1ed-87d9-4a39-99b5-f442426ece7f.png` | `docs/source-assets/nav-mazes-v1-master.png` | `public/assets/nav-mazes-v1.webp` |
+| Book | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-74d5de50-12fb-4614-8a71-9b0d76b1ebf9.png` | `docs/source-assets/nav-book-v1-master.png` | `public/assets/nav-book-v1.webp` |
+| Help | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-4f02dfc8-26f8-4d9b-9478-1ff5c77b95bf.png` | `docs/source-assets/nav-help-v1-master.png` | `public/assets/nav-help-v1.webp` |
+| Sound | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-0fc28be2-4065-4b4c-b7a4-de84e9aa5b4b.png` | `docs/source-assets/nav-sound-v1-master.png` | `public/assets/nav-sound-v1.webp` |
+| Restart | `C:/Users/hellb/.codex/generated_images/01a05916-8b99-7721-bceb-35b3a6460521/exec-d22fd5bb-88b1-46a2-99de-b994e21a3fe8.png` | `docs/source-assets/nav-restart-v1-master.png` | `public/assets/nav-restart-v1.webp` |
+
+### Collectible common prompt prefix
+
+Each collectible prompt is this exact prefix followed immediately by its exact
+object block below.
+
+```text
+Use case: stylized-concept
+Asset type: transparent 1:1 game-object sprite for Maze so Puzzle
+Input images: Image 1 is a style reference only; create a new object with the same lovely polished chunky anime fantasy JRPG rendering, warm gold trim, soft pastel materials, clean dark-plum outline and child-friendly 3DS-era storybook finish
+Scene/backdrop: none; genuinely transparent background
+Composition/framing: one centred isolated object, complete silhouette visible, generous even transparent padding, readable in one square maze tile
+Lighting/mood: cheerful soft studio sparkle, magical and rewarding
+Constraints: actual alpha transparency; no square backing tile; no floor; no cast shadow outside the object; no character; no animal; no text; no number; no UI frame; no watermark; one object only
+```
+
+#### Gold chest exact object block
+
+```text
+Primary request: a small open treasure chest overflowing with chunky golden star coins, a lavender wooden chest body, cream inner lining and one large star-shaped golden latch
+Color palette: lavender, cream, peach and luminous gold
+Avoid: closed lid, realistic money, gems dominating the chest, weapon, bag
+```
+
+#### Science gears exact object block
+
+```text
+Primary request: a compact cluster of three friendly magical science gears, one mint gear, one lilac gear and one warm-gold gear, with a tiny four-point sparkle and clear interlocking teeth
+Color palette: mint, turquoise, lilac, cream and warm gold
+Avoid: industrial grime, machinery scene, clock face, bag, chest, letters
+```
+
+#### Science beaker exact object block
+
+```text
+Primary request: one cute round laboratory beaker with a short glass neck, filled with glowing turquoise-and-lilac bubbly liquid, a tiny golden star stopper charm and two contained sparkles
+Color palette: transparent pale-blue glass, mint, turquoise, lilac, cream and warm gold
+Avoid: danger symbols, poison, realistic laboratory scene, red liquid, letters
+```
+
+### Navigation common prompt prefix
+
+Each navigation prompt is this exact prefix followed immediately by its exact
+symbol block below.
+
+```text
+Use case: stylized-concept
+Asset type: transparent square game UI navigation icon for Maze so Puzzle
+Input images: Image 1 is a style reference only; create a new simple pictogram with the same polished chunky anime fantasy JRPG rendering, creamy enamel, lavender-plum outline, small warm-gold trim and soft pastel 3DS storybook finish
+Scene/backdrop: none; genuinely transparent background
+Composition/framing: one large centred pictogram only, bold simple silhouette, generous transparent padding, readable at 28 pixels
+Lighting/mood: bright, friendly, calm
+Constraints: actual alpha transparency; no circular button backing; no square backing; no words; no letters; no numbers; no character; no scenery; no watermark; one symbol only
+```
+
+#### Home exact symbol block
+
+```text
+Primary request: a tiny cosy storybook cottage silhouette with a heart-shaped doorway and one small chimney
+Color palette: cream, blush pink, lavender and warm gold
+Avoid: landscape, trees, text, multiple buildings
+```
+
+#### Mazes exact symbol block
+
+```text
+Primary request: one cute folded miniature maze map with a simple winding lavender path and a tiny golden destination star, composed as one unified pictogram
+Color palette: cream paper, lavender path, mint accent and warm gold
+Avoid: compass, readable writing, landscape, multiple maps, question mark
+```
+
+#### Book exact symbol block
+
+```text
+Primary request: one open magical adventure book with a small golden star on the left page and a tiny paw print on the right page
+Color palette: cream pages, lavender cover, blush ribbon and warm gold
+Avoid: readable writing, loose pages, library scene, text
+```
+
+#### Help exact symbol block
+
+```text
+Primary request: one friendly glowing idea lantern shaped like a rounded flower bud, with a small golden sparkle in its centre; it must communicate help and hints without using a question mark
+Color palette: cream, sunny gold, peach and lavender
+Avoid: question mark, text, hand, character, dark metal lantern
+```
+
+#### Sound exact symbol block
+
+```text
+Primary request: one small lavender music bell with two floating golden musical notes, composed as one unified pictogram
+Color palette: lavender, cream, blush and warm gold
+Avoid: speaker box, headphones, text, more than two notes
+```
+
+#### Restart exact symbol block
+
+```text
+Primary request: one circular curling lavender ribbon arrow wrapped around a small golden four-point sparkle, clearly communicating restart
+Color palette: lavender, cream, mint accent and warm gold
+Avoid: text, clock face, multiple arrows, red warning color
+```

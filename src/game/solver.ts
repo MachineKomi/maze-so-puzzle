@@ -33,8 +33,11 @@ export interface LevelValidation {
   readonly visitedStates: number;
 }
 
-function stateSignature(state: GameState, includeAnimals: boolean): string {
+function stateSignature(state: GameState, includeAnimals: boolean, level: LevelDefinition): string {
   const normalized = (values: readonly string[]) => [...values].sort().join(",");
+  const progressionCollectibles = state.collectedObjectIds.filter((id) => (
+    level.objects.find((object) => object.id === id)?.kind !== "treasure"
+  ));
   return [
     state.position.x,
     state.position.y,
@@ -44,7 +47,7 @@ function stateSignature(state: GameState, includeAnimals: boolean): string {
     state.hasSpringBoots ? 1 : 0,
     state.hasAntidoteLeaf ? 1 : 0,
     normalized(state.keys),
-    normalized(state.collectedObjectIds),
+    normalized(progressionCollectibles),
     includeAnimals ? normalized(state.rescuedAnimalIds) : "",
     normalized(state.defeatedEnemyIds),
     normalized(state.openedDoorIds),
@@ -195,7 +198,7 @@ export function solveLevel(
   const requireAllAnimals = options.requireAllAnimals ?? false;
   const animalCount = level.objects.filter((object) => object.kind === "animal").length;
   const initial = createInitialGameState(level);
-  const initialSignature = stateSignature(initial, requireAllAnimals);
+  const initialSignature = stateSignature(initial, requireAllAnimals, level);
   const queue: GameState[] = [initial];
   const signatures: string[] = [initialSignature];
   const seen = new Set<string>([initialSignature]);
@@ -217,7 +220,7 @@ export function solveLevel(
         continue;
       }
 
-      const nextSignature = stateSignature(result.state, requireAllAnimals);
+      const nextSignature = stateSignature(result.state, requireAllAnimals, level);
       // A successful combat changes Power and clears the enemy without moving
       // Ame. Treat any genuine state transition as a searchable edge; blocked
       // movement and too-strong encounters retain the current signature.

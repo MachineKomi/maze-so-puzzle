@@ -6,19 +6,55 @@ Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
 dependency, configuration, or asset change.
 
-Status for 0.11.0: `npm run check` passes 292 tests across 22 files plus strict
+Status for 0.12.0: `npm run check` passes 298 tests across 22 files plus strict
 TypeScript and the Vite production build. The moderate-level npm audit reports
 zero vulnerabilities; `npm ls` is clean, and locked Cargo compilation passes.
-Browser QA at 1280×720 desktop, 1194×834 iPad, and 844×390 landscape phone found
+Browser QA at 1280×720 desktop, 1024×768 iPad, and 844×390 landscape phone found
 no page overflow, overlap, console warning/error, or broken visible image. The
-first portal chapter was played through with real controls; an iPad
-perfect-rescue victory retained a large dancing friend card. The unsigned
+new 16-maze picker, selector, Power-99 chapter and three-bump item guidance were
+exercised. The unsigned
 Windows portable and setup builds were built, hashed, byte-compared, versioned,
 and smoke-tested. Physical-device touch/listening/feel, accessibility,
 clean-machine installation, signing, and the broader manual play-through remain
 deliberately unclaimed. Earlier release evidence below remains historical.
 
-## 0.11.0 verification record
+## 0.12.0 verification record
+
+- [x] Version 0.12.0 is aligned in npm, Cargo, Tauri, and the visible build label.
+- [x] Sixteen authored story mazes are solver-valid. Rainbow Power Parade's
+  perfect route exceeds 300 inputs, defeats all 19 enemies, rescues five
+  friends, opens its required door, and finishes at Power 306.
+- [x] Gold and Science treasure collection is immutable, save-safe, reward-safe,
+  sound-backed, and excluded from the solver signature because it cannot change
+  traversability.
+- [x] Every blocker maps to the exact required item art and name; its third
+  repeat reveals a pulsing minimap target that clears when collected.
+- [x] Level Select includes unlocked numbered/named story mazes, best steps,
+  rescue totals, perfect status, and Surprise Maze from both Home and play.
+- [x] Directional lighting, wall depth and character shadows are deterministic
+  per maze; Power 99 activates the readable rainbow aura.
+- [x] The nine new generated masters, transparent lossless WebP derivatives,
+  exact prompts, reference modes and deterministic processing are archived.
+- [x] `npm run check`: 298/298 tests pass across 22 files; strict TypeScript and
+  the Vite production build pass.
+- [x] `npm audit --audit-level=moderate`: zero vulnerabilities. `npm ls`: clean.
+  `cargo check --locked`: passed.
+- [x] Desktop 1280×720, iPad 1024×768, and landscape phone 844×390 retain the
+  fixed composition without page overflow or panel overlap. Browser logs are
+  clear of warning/error entries.
+- [ ] GitHub/Vercel production verification is recorded after the release push.
+- [x] `Maze-so-Puzzle-0.12.0-portable.exe`: 85,447,680 bytes, file/product
+  version 0.12.0, SHA-256
+  `4BE70602349AFA1A133024F0FB0B60356AD20809ACEC48EC2E85940AAFB3D3F6`.
+- [x] `Maze-so-Puzzle-0.12.0-setup.exe`: 79,272,384 bytes, file/product version
+  0.12.0, SHA-256
+  `FA935AC313BEFD1415C1BF0FF797A8677F0F7B9F6E085FF1520C4E10EFD6F992`.
+- [x] Both staged binaries byte-match their final Tauri outputs. The portable
+  app stayed responsive for five seconds and reported the correct window title.
+- [ ] Clean-machine install, code signing, physical-device listening/feel, and
+  the complete manual campaign remain owner/device checks.
+
+## Historical 0.11.0 verification record
 
 - [x] Version 0.11.0 is aligned in npm, Cargo, Tauri, and the visible build label.
 - [x] Fifteen authored story mazes use the deliberately varied size sequence 9,

@@ -10,6 +10,7 @@ import type {
   PortalPairId,
   TerrainThemeId,
   TerrainKind,
+  LightDirection,
   WeaponStyle,
 } from "./types";
 
@@ -26,7 +27,9 @@ export interface AsciiLevelOptions {
   readonly weaponStyle?: WeaponStyle;
   readonly enemyStyle?: EnemyStyle;
   readonly enemyStylesByPower?: Readonly<Partial<Record<number, EnemyStyle>>>;
+  readonly enemyTokens?: Readonly<Record<string, { readonly power: number; readonly style?: EnemyStyle }>>;
   readonly cageStyle?: CageStyle;
+  readonly lightDirection?: LightDirection;
   readonly introducedMechanics?: readonly string[];
 }
 
@@ -157,6 +160,17 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
         continue;
       }
 
+      const tokenEnemy = options.enemyTokens?.[character];
+      if (tokenEnemy !== undefined) {
+        addObject({
+          kind: "enemy",
+          at,
+          power: tokenEnemy.power,
+          ...(tokenEnemy.style === undefined ? {} : { style: tokenEnemy.style }),
+        });
+        continue;
+      }
+
       if (/^[1-9]$/.test(character)) {
         const power = Number(character);
         const style = options.enemyStylesByPower?.[power] ?? options.enemyStyle;
@@ -195,6 +209,26 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
 
       if (character === "p") {
         addObject({ kind: "potion", at, amount: options.potionAmount ?? 2 });
+        continue;
+      }
+
+      if (character === "k") {
+        addObject({ kind: "treasure", at, currency: "gold", amount: 3, style: "gold-bag" });
+        continue;
+      }
+
+      if (character === "x") {
+        addObject({ kind: "treasure", at, currency: "gold", amount: 8, style: "gold-chest" });
+        continue;
+      }
+
+      if (character === "i") {
+        addObject({ kind: "treasure", at, currency: "science", amount: 2, style: "science-gears" });
+        continue;
+      }
+
+      if (character === "v") {
+        addObject({ kind: "treasure", at, currency: "science", amount: 4, style: "science-beaker" });
         continue;
       }
 
@@ -253,6 +287,7 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
     terrain,
     objects,
     terrainThemeId: options.terrainThemeId,
+    lightDirection: options.lightDirection,
     introducedMechanics: options.introducedMechanics,
   };
 }
@@ -560,17 +595,17 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAsciiLevel({
   ],
   map: [
     "#########################",
-    "#E9.#.........#.........#",
+    "#E9.#k........#....x....#",
     "###.#.#####.#.#.#######.#",
     "#j#o#.#...#.#...#...#...#",
     "#.#o#.#.#.#.#####.#.#.###",
     "#...#w#.#.#.p.#u#.#...#y#",
     "#.#####.#.###.#.#.#####.#",
-    "#.......#.....#.#.#...#.#",
+    "#...i...#.....#.#.#...#.#",
     "###############.#.#.#.#.#",
     "#..p#....r#.....#.Y.#...#",
     "#.###.#.###.#.#########.#",
-    "#.....#...#.#.#.........#",
+    "#..k..#...#.#.#....v....#",
     "#.#######.#.#.#.#########",
     "#.......#.#.#.#.....#...#",
     "#######.#.#.#.#####.#.#.#",
@@ -615,9 +650,9 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAsciiLevel({
   ],
   map: [
     "#####################",
-    "#E#.....#...#cy9....#",
+    "#E#..k..#...#cy9.x..#",
     "#.###.#.#.#.#######.#",
-    "#.....#...#.....#...#",
+    "#..i..#...#.....#...#",
     "###############.#.#.#",
     "#@#.......#..u#.#.#.#",
     "#.#.#.###.#.###.#.###",
@@ -631,7 +666,7 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAsciiLevel({
     "#.###.#####.#.###.#o#",
     "#...#.....#.#.....#o#",
     "#.#.#####.#.#######.#",
-    "#.#..h#...#.~~#.....#",
+    "#.#..h#..v#.~~#.....#",
     "#s#2###.#####.#.#####",
     "#q#.......rf#......j#",
     "#####################",
@@ -671,17 +706,17 @@ export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAsciiLevel({
   ],
   map: [
     "#######################",
-    "#E..#.......#.......#p#",
+    "#E.k#.......#...x...#p#",
     "###.#####.#.#####.#.#.#",
     "#.#...#...#.......#.#.#",
     "#.###.#.###########.#.#",
     "#.rq#...#.......#.#.#.#",
     "#.#######.#.###.#.#.#.#",
-    "#.......#.#...#...#.#.#",
+    "#...i...#.#...#...#.#.#",
     "#.#####.#Y###.###.#.#.#",
     "#....2#.#B#n#..8#.#...#",
     "#####.#.#.#y###.#####.#",
-    "#.....#.#.#...#.....#.#",
+    "#..v..#.#.#...#.....#.#",
     "#.#####.#.###9###.#.#.#",
     "#..s#R..#...#...#.#.#.#",
     "#.###.#####.###.#.###.#",
@@ -712,13 +747,13 @@ export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAsciiLevel({
   ],
   map: [
     "###############",
-    "#ER...##r1.#s##",
+    "#ER.k.##r1.#s##",
     "#####.####.#.##",
     "#q#...##.#.#.##",
     "#.#.####.#.#.##",
     "#...#H##.#...##",
     "#.###.##.###.##",
-    "#.....##.cf#.##",
+    "#..i..##.cf#.##",
     "#####.##.###.##",
     "#@..#.##...#.##",
     "###.#.##.#.#.##",
@@ -763,9 +798,9 @@ export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAsciiLevel({
     "#.###.#.###.###.#",
     "#..H#...#H......#",
     "#################",
-    "#M......#C..#.9b#",
+    "#M..k...#C..#.9b#",
     "#######.###.#.###",
-    "#.....#.#M#o#...#",
+    "#..i..#.#M#o#...#",
     "#.###.#.#.#o###.#",
     "#...#..f#.#.#...#",
     "###.#####.#.#.#B#",
@@ -806,11 +841,11 @@ export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAsciiLevel({
   ],
   map: [
     "#####################",
-    "#@....#s..#u.j#.....#",
+    "#@.k..#s..#u.j#..x..#",
     "#####.###.###.#.###.#",
     "#q..#...#.#p#...#...#",
     "###.###.#.#.#####.###",
-    "#....f#...#.....#.#C#",
+    "#..i.f#...#.....#.#C#",
     "#.#######.#.###.#.#4#",
     "#...#.....#.#...#.#.#",
     "#.#.#.#####.#.###.#.#",
@@ -822,9 +857,62 @@ export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAsciiLevel({
     "#9#.###.#.#.#######.#",
     "#.#.#h#...#.%%..~~..#",
     "#.#.#.#####.#########",
-    "#.#.#.....#.....#...#",
+    "#.#.#..v..#.....#...#",
     "#.#.#.###.#####.#.#.#",
     "#.....#M..#d7c....#M#",
+    "#####################",
+  ],
+});
+
+export const RAINBOW_POWER_PARADE_LEVEL = parseAsciiLevel({
+  id: "rainbow-power-parade",
+  name: "Rainbow Power Parade",
+  objective: "Build Power 99, bring home the Sunny Key, and return for the Rainbow Guardian!",
+  terrainThemeId: "star-garden",
+  weaponStyle: "sun-mallet",
+  enemyStyle: "goblin",
+  cageStyle: "garden-vine",
+  potionAmount: 5,
+  lightDirection: "left",
+  enemyTokens: {
+    K: { power: 12, style: "mushroom-imp" },
+    L: { power: 20, style: "moon-bat" },
+    N: { power: 40, style: "pebble-golem" },
+    O: { power: 14, style: "blueberry-slime" },
+    Z: { power: 99, style: "pebble-golem" },
+  },
+  introducedMechanics: [
+    "large-maze",
+    "exploration-map",
+    "power-99",
+    "rainbow-power",
+    "boss-rescue",
+    "required-return-trip",
+    "gold-star-treasures",
+    "science-collectibles",
+    "five-friend-challenge",
+  ],
+  map: [
+    "#####################",
+    "#EqZY@s2p4k.........#",
+    "###################.#",
+    "#...i....K..........#",
+    "#.###################",
+    "#....L......x.......#",
+    "###################.#",
+    "#...v......N........#",
+    "#.###################",
+    "#....O...9...k......#",
+    "###################.#",
+    "#9..9..9..i.........#",
+    "#.###################",
+    "#c...9...d...9...x..#",
+    "###################.#",
+    "#....9...h...9......#",
+    "#.###################",
+    "#v...9...9...9......#",
+    "###################.#",
+    "#y....9....f....x...#",
     "#####################",
   ],
 });
@@ -845,6 +933,7 @@ export const CURATED_LEVELS: readonly LevelDefinition[] = [
   ROSE_HEART_ROUNDABOUT_LEVEL,
   CLOVER_COMEBACK_CARNIVAL_LEVEL,
   FRIENDSHIP_CROWN_VAULT_LEVEL,
+  RAINBOW_POWER_PARADE_LEVEL,
 ];
 
 export function getCuratedLevel(id: string): LevelDefinition | undefined {

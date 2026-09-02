@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.11.0 play-test build, which remains an active prototype. Its complete
+0.12.0 play-test build, which remains an active prototype. Its complete
 automated browser gate and refreshed unsigned Windows packaging are verified.
 The verified source is live on the canonical Vercel site; the broader
 physical-device play-test pass remains a release step.
@@ -61,24 +61,24 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.11.0 test build:
+The current verified desktop artifacts are the unsigned 0.12.0 test build:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.11.0-portable.exe`
-  (84,777,984 bytes; SHA-256
-  `A64876899DE43C93E67D8D1B40201603DED39D3A496EB14E9D3CABD4CD02E331`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.11.0-setup.exe`
-  (78,599,010 bytes; SHA-256
-  `EAEEF9B96716712DC05964652E4830631395970D8DC192A466695CC0AE58469B`).
+- Portable test copy: `release/Maze-so-Puzzle-0.12.0-portable.exe`
+  (85,447,680 bytes; SHA-256
+  `4BE70602349AFA1A133024F0FB0B60356AD20809ACEC48EC2E85940AAFB3D3F6`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.12.0-setup.exe`
+  (79,272,384 bytes; SHA-256
+  `FA935AC313BEFD1415C1BF0FF797A8677F0F7B9F6E085FF1520C4E10EFD6F992`).
   Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.11.0_x64-setup.exe` (byte-matches the staged
+  Puzzle - For Ame to Solve!_0.12.0_x64-setup.exe` (byte-matches the staged
   setup copy).
-- Both executables report file/product version 0.11.0. The portable app remained
+- Both executables report file/product version 0.12.0. The portable app remained
   responsive for a five-second smoke launch and showed the correct game title.
-- The verified 0.11.0 hashes and retained archive hashes are recorded in
+- The verified 0.12.0 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -112,7 +112,7 @@ The current verified desktop artifacts are the unsigned 0.11.0 test build:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.11.0** label to
+On the title screen, click or tap the small **Playable build 0.12.0** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -127,7 +127,28 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.11.0
+## Included in playable build 0.12.0
+
+- Rewarding exploration: optional Golden Star bags and overflowing treasure
+  chests, plus gears and magical beakers worth Science Points, populate dead
+  ends. Pickups burst into stars or science sparkles and fly to two persistent
+  currency counters.
+- Contextual obstacle help shows the exact missing key or equipment. Repeating
+  the same blocked action three times marks that prerequisite with a pulsing
+  minimap beacon until Ame collects it.
+- A picture-led **Mazes** menu is available from Home and during play. It lists
+  every unlocked numbered story maze, its best steps and rescue record, plus
+  Surprise Maze, while the secret tester picker still exposes all authored
+  chapters.
+- Sixteen story mazes now culminate in **Rainbow Power Parade**, a long
+  out-and-back Power-growth puzzle with nineteen enemies, five friends, a
+  Power-99 boss gate, and a rainbow aura for Ame at Power 99 or above.
+- Every maze chooses a directional light. Wall highlights, directional depth
+  shadows, and soft offset character shadows give the flat tile art more depth
+  without sacrificing readability.
+- The sidebar dedicates more space to the minimap, rescue friends and inventory;
+  the bottom navigation uses six original transparent picture icons instead of
+  emoji glyphs.
 
 - One stable 16:9 visual system for title, play, Adventure Book, tester picker,
   dialogs, and victory celebrations. Its tested scaling contract covers desktop,
@@ -136,7 +157,7 @@ Turn the iPad sideways to play.
 - Count-aware victory friend cards keep rescued pets large and dancing on iPad
   and desktop. One to three friends receive roomy centred cards; groups of four
   or five remain together in a readable row.
-- Fifteen progressive story mazes with deliberate changes of pace. Sizes vary
+- Sixteen progressive story mazes with deliberate changes of pace. Sizes vary
   from 9 × 9 to 25 × 25 rather than rising monotonically. The new 21 × 21
   **Twilight Treasure Loop** and 23 × 23 **Moonlit Friendship Quest** add long
   backtracking puzzles after Lanternlight Labyrinth; the latter introduces the
@@ -276,7 +297,7 @@ encouraging comparison so Ame can explore, grow stronger, and return.
 Core engine modules live in `src/game/`; UI input helpers live in `src/`:
 
 - `engine.ts`: movement and interactions.
-- `levels.ts`: the fifteen authored story levels.
+- `levels.ts`: the sixteen authored story levels.
 - `exploration.ts`: clamped camera windows, field-of-view tiles, and persistent
   minimap reveal state.
 - `followerTrail.ts`: bounded, loop-free recent footsteps for visible rescued-pet
@@ -303,10 +324,10 @@ and Vite production build. The suite covers movement, interactions, solvability,
 generation, animal rescues, camera and fog-of-war rules, progress migration,
 rewards, statistics, achievements, protected navigation, deterministic visual
 variants, the optional guardian route, and audio safeguards.
-The 0.11.0 source suite passes 292 automated tests across 22 files and the strict
+The 0.12.0 source suite passes 298 automated tests across 22 files and the strict
 TypeScript/Vite production build. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
-prerequisite detours, all fifteen authored ordinary/perfect-rescue routes,
+prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
 dominant-colour theme compatibility, thirteen-track per-maze music selection, the
 6 x 6 even camera, variable 9–29 generation, solver-safe connected hazards,
 pointer intent/corner assistance, the slower eased held-input cadence, variable
@@ -318,8 +339,8 @@ combat, paired-portal structural validation and travel, portal-safe active-run
 recovery, full-world camera interpolation, scaled-pointer hysteresis, and the
 full-reset storage allow-list.
 
-The 0.11.0 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.11.0, and are size-checked and
+The 0.12.0 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.12.0, and are size-checked and
 SHA-256 hashed. The portable app also passed a responsive five-second launch
 smoke with the correct title. Clean-machine installation, signing, and
 physical-device checks remain separate release gates. The release source is
@@ -335,7 +356,7 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.11.0 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.12.0 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

@@ -179,9 +179,9 @@ state.
   active-session, and progress writes, even if the preview maze is completed.
 - Tauri exposes only its default core capability and loads the local Vite build
   under a restrictive content security policy.
-- The 0.11.0 source is shared by the web and Tauri build paths, and its automated
+- The 0.12.0 source is shared by the web and Tauri build paths, and its automated
   browser gate passes. The refreshed unsigned Windows portable executable and
-  NSIS installer byte-match the final Tauri outputs, report version 0.11.0, have
+  NSIS installer byte-match the final Tauri outputs, report version 0.12.0, have
   recorded sizes and SHA-256 hashes, and the portable app passed a responsive
   five-second smoke launch with the correct title. The GitHub-connected Vercel
   production deployment is verified separately after each push. Clean-machine
@@ -207,11 +207,11 @@ selection, held-input acceleration, theme colour/lightness separation, terrain
 dressing preload, dedicated key/door pair and sparse v4 cage-front coverage,
 stationary winning-combat semantics, and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
-solver. The 0.11.0 run covers 292 tests across 22 files; `npm run check` also
+solver. The 0.12.0 run covers 298 tests across 22 files; `npm run check` also
 completes strict TypeScript and the Vite production build. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
-and portable launch smoke are complete for 0.11.0.
+and portable launch smoke are complete for 0.12.0.
 
 ## Extension points
 

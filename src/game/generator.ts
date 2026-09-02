@@ -756,8 +756,8 @@ function buildGeneratedLevel(
   }
   const placements = branched.placements;
 
-  // v3 separates branch-and-spring layouts from older straight-progression saves.
-  const id = `surprise-v3-${seedIdentity(seedText)}-${difficulty}-${size}`;
+  // v4 adds rewarding dead ends without changing the safely ordered main recipe.
+  const id = `surprise-v4-${seedIdentity(seedText)}-${difficulty}-${size}`;
   const objects: LevelObject[] = [];
   const hazards: HazardSeed[] = [];
   for (let index = 0; index < recipe.length; index += 1) {
@@ -894,6 +894,55 @@ function buildGeneratedLevel(
     });
   }
 
+  const occupied = new Set<string>([
+    pointKey(start),
+    pointKey(exit),
+    ...objects.map((object) => pointKey(object.at)),
+  ]);
+  const bonusDeadEnds: Point[] = [];
+  for (let y = 1; y < terrain.length - 1; y += 1) {
+    for (let x = 1; x < (terrain[y]?.length ?? 1) - 1; x += 1) {
+      const at = { x, y };
+      if (
+        terrain[y]?.[x] === "floor"
+        && floorNeighbors(terrain, at).length === 1
+        && !occupied.has(pointKey(at))
+      ) bonusDeadEnds.push(at);
+    }
+  }
+  const shuffledBonuses = shuffle(bonusDeadEnds, random);
+  const treasureCount = difficulty === "movement" ? 0 : Math.min(
+    shuffledBonuses.length,
+    size >= 17 ? 4 : size >= 13 ? 3 : 2,
+  );
+  const treasureStyles = ["gold-bag", "science-gears", "gold-chest", "science-beaker"] as const;
+  for (let index = 0; index < treasureCount; index += 1) {
+    const at = shuffledBonuses[index];
+    const style = treasureStyles[index % treasureStyles.length]!;
+    if (!at) continue;
+    objects.push({
+      id: `${id}-treasure-${index + 1}`,
+      kind: "treasure",
+      at,
+      currency: style.startsWith("gold") ? "gold" : "science",
+      amount: style === "gold-chest" || style === "science-beaker" ? 4 : 2,
+      style,
+    });
+    occupied.add(pointKey(at));
+  }
+  const bonusEnemyCount = difficulty === "adventure" ? Math.min(3, shuffledBonuses.length - treasureCount) : difficulty === "growing" ? 1 : 0;
+  for (let index = 0; index < bonusEnemyCount; index += 1) {
+    const at = shuffledBonuses[treasureCount + index];
+    if (!at || occupied.has(pointKey(at))) continue;
+    objects.push({
+      id: `${id}-bonus-enemy-${index + 1}`,
+      kind: "enemy",
+      at,
+      power: 1 + index,
+      style: visuals.enemyStyle,
+    });
+  }
+
   return {
     schemaVersion: 1,
     id,
@@ -913,6 +962,7 @@ function buildGeneratedLevel(
     terrain,
     objects,
     terrainThemeId: visuals.terrainThemeId,
+    lightDirection: (["top", "right", "bottom", "left"] as const)[seedHash % 4],
     introducedMechanics: [...new Set([
       ...(difficulty === "movement"
         ? ["movement", "exit", ...recipe.map((entry) => entry.kind)]

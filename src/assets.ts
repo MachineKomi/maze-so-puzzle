@@ -73,6 +73,16 @@ export const ASSETS = {
   enemyMoonBat: ENEMY_ART["moon-bat"].src,
   enemyPebbleGolem: ENEMY_ART["pebble-golem"].src,
   coinPouch: "/assets/coin-pouch.png",
+  treasureGoldBag: "/assets/coin-pouch.png",
+  treasureGoldChest: "/assets/treasure-gold-chest-v1.webp",
+  treasureScienceGears: "/assets/treasure-science-gears-v1.webp",
+  treasureScienceBeaker: "/assets/treasure-science-beaker-v1.webp",
+  navHome: "/assets/nav-home-v1.webp",
+  navMazes: "/assets/nav-mazes-v1.webp",
+  navBook: "/assets/nav-book-v1.webp",
+  navHelp: "/assets/nav-help-v1.webp",
+  navSound: "/assets/nav-sound-v1.webp",
+  navRestart: "/assets/nav-restart-v1.webp",
   rewardTrailSticker: "/assets/reward-trail-sticker.png",
   rewardBraveMedal: "/assets/reward-brave-medal.png",
   rewardSplashSticker: "/assets/reward-splash-sticker.png",
@@ -98,6 +108,13 @@ const STATIC_OBJECT_ART = {
   boots: [ASSETS.boots],
   "spring-boots": [ASSETS.springBoots],
   "antidote-leaf": [ASSETS.antidoteLeaf],
+} as const;
+
+export const TREASURE_ART = {
+  "gold-bag": ASSETS.treasureGoldBag,
+  "gold-chest": ASSETS.treasureGoldChest,
+  "science-gears": ASSETS.treasureScienceGears,
+  "science-beaker": ASSETS.treasureScienceBeaker,
 } as const;
 
 const REWARD_ART = [
@@ -176,6 +193,9 @@ export function preloadLevelArt(level: LevelDefinition): void {
         break;
       case "portal":
         sources.add(resolvePortalArt(object.pair).src);
+        break;
+      case "treasure":
+        sources.add(TREASURE_ART[object.style]);
         break;
       case "potion":
       case "boots":

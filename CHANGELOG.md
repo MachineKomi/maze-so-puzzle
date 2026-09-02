@@ -4,6 +4,50 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.12.0 - 2026-09-02
+
+This rewarding-exploration release makes side paths worth visiting, helps young
+players recover from blocked routes, and adds the campaign's first Power-99
+finale.
+
+### Added
+
+- Golden Star bags and treasure chests, Science gears and beakers, pickup
+  bursts, flying counter rewards, and persistent Gold/Science totals.
+- Exact illustrated missing-item help for locks, hazards, holes, and enemies.
+  Three repeated bumps reveal a pulsing prerequisite marker on the minimap.
+- A Home/in-game maze selector with unlocked story records and Surprise Maze.
+- **Rainbow Power Parade**, a solver-proven 21 × 21 return-trip chapter with 19
+  enemies, five friends, nine optional treasures, a Power-99 boss, and Power-99
+  rainbow effects.
+- Per-maze top/right/bottom/left lighting, wall edge light and depth shadow,
+  plus directionally offset shadows beneath characters and friends.
+- Nine new transparent AI-generated sprites: three collectible objects and six
+  picture-led navigation icons.
+
+### Changed
+
+- Larger mazes receive more optional enemies and dead-end treasure without
+  changing the core solution requirements. Surprise Maze identity is refreshed
+  so new generations receive the updated reward population.
+- The right panel restores Gold, adds Science, enlarges the minimap/friend/item
+  art, and removes the old emoji-led bottom navigation.
+- The title action is now **Continue**, while its new **Choose a maze** shortcut
+  reuses the same accessible selector as the in-game Mazes button.
+
+### Verification
+
+- `npm run check` passes 298 tests across 22 files, strict TypeScript, and the
+  Vite production build. The moderate npm audit reports zero vulnerabilities,
+  `npm ls` is clean, and `cargo check --locked` passes.
+- Browser QA passed at 1280 × 720 desktop, 1024 × 768 iPad, and 844 × 390
+  landscape phone with no overlaps or console warnings/errors. The blocker
+  reveal was exercised through its third attempt and the 16-maze tester picker
+  and level selector were inspected.
+- The unsigned Windows portable and NSIS builds byte-match their final Tauri
+  outputs, report version 0.12.0, and the portable app remained responsive with
+  the correct title during a five-second smoke launch.
+
 ## 0.11.0 - 2026-09-02
 
 This portal-puzzle release adds a deeper three-maze chapter, expands the full

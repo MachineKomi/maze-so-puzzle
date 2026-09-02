@@ -15,6 +15,9 @@ export const DIRECTION_DELTAS: Readonly<Record<Direction, Point>> = {
 };
 
 export type TerrainKind = "wall" | "floor" | "water" | "lava" | "poison" | "hole";
+export type LightDirection = "top" | "right" | "bottom" | "left";
+export type TreasureCurrency = "gold" | "science";
+export type TreasureStyle = "gold-bag" | "gold-chest" | "science-gears" | "science-beaker";
 export type KeyColor = "red" | "blue" | "yellow";
 export const PORTAL_PAIR_IDS = ["rose-heart", "mint-clover", "violet-moon"] as const;
 export type PortalPairId = (typeof PORTAL_PAIR_IDS)[number];
@@ -125,6 +128,13 @@ export interface PortalObject extends ObjectBase {
   readonly pair: PortalPairId;
 }
 
+export interface TreasureObject extends ObjectBase {
+  readonly kind: "treasure";
+  readonly currency: TreasureCurrency;
+  readonly amount: number;
+  readonly style: TreasureStyle;
+}
+
 export type LevelObject =
   | EnemyObject
   | SwordObject
@@ -135,7 +145,8 @@ export type LevelObject =
   | KeyObject
   | DoorObject
   | AnimalObject
-  | PortalObject;
+  | PortalObject
+  | TreasureObject;
 
 export type LevelSource = "curated" | "generated";
 
@@ -154,6 +165,7 @@ export interface LevelDefinition {
   readonly terrain: readonly (readonly TerrainKind[])[];
   readonly objects: readonly LevelObject[];
   readonly terrainThemeId?: TerrainThemeId;
+  readonly lightDirection?: LightDirection;
   readonly introducedMechanics?: readonly string[];
 }
 
@@ -176,6 +188,8 @@ export interface GameState {
   readonly rescuedAnimalIds: readonly string[];
   readonly defeatedEnemyIds: readonly string[];
   readonly openedDoorIds: readonly string[];
+  readonly goldStarsCollected: number;
+  readonly sciencePointsCollected: number;
   readonly status: GameStatus;
   readonly steps: number;
 }
@@ -247,6 +261,13 @@ export type GameEvent =
       readonly pair: PortalPairId;
       readonly from: Point;
       readonly to: Point;
+    }
+  | {
+      readonly type: "treasure-collected";
+      readonly objectId: string;
+      readonly currency: TreasureCurrency;
+      readonly amount: number;
+      readonly total: number;
     }
   | {
       readonly type: "door-opened";

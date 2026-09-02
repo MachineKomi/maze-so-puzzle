@@ -47,6 +47,7 @@ export function isObjectResolved(object: LevelObject, state: GameState): boolean
       return state.rescuedAnimalIds.includes(object.id);
     case "portal":
       return false;
+    case "treasure":
     case "sword":
     case "boots":
     case "spring-boots":
@@ -71,6 +72,8 @@ export function createInitialGameState(level: LevelDefinition): GameState {
     rescuedAnimalIds: [],
     defeatedEnemyIds: [],
     openedDoorIds: [],
+    goldStarsCollected: 0,
+    sciencePointsCollected: 0,
     status: "playing",
     steps: 0,
   };
@@ -189,6 +192,8 @@ export function movePlayer(
   let rescuedAnimalIds = state.rescuedAnimalIds;
   let defeatedEnemyIds = state.defeatedEnemyIds;
   let openedDoorIds = state.openedDoorIds;
+  let goldStarsCollected = state.goldStarsCollected;
+  let sciencePointsCollected = state.sciencePointsCollected;
 
   if (object?.kind === "door" && !openedDoorIds.includes(object.id)) {
     if (!keys.includes(object.color)) {
@@ -332,6 +337,28 @@ export function movePlayer(
         });
         break;
       }
+      case "treasure": {
+        if (object.currency === "gold") {
+          goldStarsCollected += object.amount;
+          events.push({
+            type: "treasure-collected",
+            objectId: object.id,
+            currency: object.currency,
+            amount: object.amount,
+            total: goldStarsCollected,
+          });
+        } else {
+          sciencePointsCollected += object.amount;
+          events.push({
+            type: "treasure-collected",
+            objectId: object.id,
+            currency: object.currency,
+            amount: object.amount,
+            total: sciencePointsCollected,
+          });
+        }
+        break;
+      }
     }
   }
 
@@ -350,6 +377,8 @@ export function movePlayer(
     rescuedAnimalIds,
     defeatedEnemyIds,
     openedDoorIds,
+    goldStarsCollected,
+    sciencePointsCollected,
     status: won ? "won" : "playing",
     steps: nextSteps,
   };
