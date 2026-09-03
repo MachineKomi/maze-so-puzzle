@@ -144,6 +144,12 @@ These are **Human decisions**.
   rules. `docs/enemies/ENEMY_FAMILY_SHEET.md` owns their original design,
   child-safety, sibling-construction and naming constraints.
 
+- Tea-Time Skeleton is a Human-approved rescue-and-collect friend, not a
+  guardian or enemy. Preserve his approved green-tea sprite unchanged and route
+  his eventual catalogue/content work through friend rescue and Friend Garden
+  contracts. His toy-bone construction may still be a visual consistency
+  reference for Warrior Skeleton without implying shared gameplay taxonomy.
+
 ### 4.3 Game design, gameplay, and challenge
 
 - Every authored maze must be mechanically solvable, solver-verified, and human-readable. Ordinary completion and the intended perfect-rescue route must both be valid.

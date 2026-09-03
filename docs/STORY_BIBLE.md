@@ -96,15 +96,15 @@ Visual asset: public/assets/story-sprig-v1.webp.
 
 ## Future Puzzlewild guardians — art identity only
 
-The Human-directed future visual roster includes a courteous Tea-Time Skeleton,
-Classic Slime, paired Lizard Sword and Spear Guards, Wholesome Succubus, Pocket
+The Human-directed future visual roster includes Classic Slime, paired Lizard
+Sword and Spear Guards, Wholesome Succubus, Pocket
 T-Rex, a fictional Star Map Cultist whose public label remains pending, Lamia,
 Soda Slime, Orc Chieftain, Cyclops, Minotaur, Warrior Skeleton, Kappa, and a
 visibly alive Treasure Mimic. They expand the world's comic fantasy range; they
 are not villains, sources of suffering, or permission to introduce new attacks.
 
-Every one remains an enthusiastic guardian under the Polite Sword Rule. Tea,
-weapons, horns, wings, coils, size, bubbles and teeth communicate personality
+Every future enemy remains an enthusiastic guardian under the Polite Sword Rule.
+Weapons, horns, wings, coils, size, bubbles and teeth communicate personality
 and challenge silhouette only. They do not imply damage, weapon reach, charm,
 chase, constriction, drowning, poison, sacrifice or status effects. The Mimic
 must look alive immediately because no disguise/reveal mechanic exists. The
@@ -168,6 +168,12 @@ current finale. The restored Star Map remains a complete victory; the encore
 follows a new path beyond it rather than adding another supposedly final knot.
 See `docs/plans/09-campaign-expansion-24-mazes-plan.md`. Until that plan is
 implemented, the 16-chapter matrix above remains shipped story authority.
+
+Tea-Time Skeleton belongs with the rescued friends instead. He is a courteous,
+quietly funny Puzzlewild resident who pauses for green tea even in an old
+dungeon. Ame rescues and befriends him; she never challenges, defeats, or moves
+past him through Power. Preserve the approved bare toy-ivory skeleton, friendly
+face, seated tea pose, handleless green-tea cup, and single steam curl.
 
 Future chapters can follow new loose threads without undoing the first arc:
 
