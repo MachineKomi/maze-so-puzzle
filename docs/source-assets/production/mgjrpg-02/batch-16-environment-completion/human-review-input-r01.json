@@ -1,0 +1,8 @@
+{
+  "schema": "maze-human-art-review/v1",
+  "reviewId": "mgjrpg-02-batch-16-input-r01",
+  "recordedOn": "2026-09-03",
+  "scope": "legacy-environment-source-completion",
+  "instruction": "Audit the old sprites for missed refreshes and ensure Maze has more cohesive floor and wall textures. Generate the seven catalogue materials and four dressing families still lacking mgjrpg-02 source masters.",
+  "approvalBoundary": "Source generation only; periodic derivatives and catalogue switching remain review-gated."
+}
