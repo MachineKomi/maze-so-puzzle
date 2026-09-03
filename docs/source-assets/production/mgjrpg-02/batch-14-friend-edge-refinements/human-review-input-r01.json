@@ -1,0 +1,39 @@
+{
+  "schema": "maze-human-art-review/v1",
+  "reviewId": "mgjrpg-02-batch-14-input-r01",
+  "recordedOn": "2026-09-03",
+  "scope": "friend-edge-refinement-and-new-friend-brief",
+  "evidenceKind": "verbatim-conversation-summary",
+  "decisions": [
+    {
+      "status": "bounded-refinement-requested",
+      "identities": [
+        "fawn",
+        "red-panda",
+        "capybara",
+        "chinchilla",
+        "koala",
+        "mallowmusk-aroma-wisp",
+        "breezeling-sylph",
+        "griffin-cub",
+        "emberbelly-dragonling",
+        "cloudstep-pegasus",
+        "three-tumble-cerberus",
+        "riddlekit-sphinx",
+        "tidecurl-hippocamp"
+      ],
+      "instruction": "Preserve the approved overall designs and change only the thin, detailed outer edges so the friends use the same clean colour-context-aware contour readability as Bunny, Fox and Kitten at small scale."
+    },
+    {
+      "status": "replacement-requested",
+      "identities": ["ripplecap-kappa"],
+      "instruction": "Replace the helmet-like reading with a friend that clearly reads as a kappa."
+    },
+    {
+      "status": "new-identity-requested",
+      "identities": ["rainbow-horn-unicorn"],
+      "instruction": "Add a unicorn friend with white fur, light-pink mane and markings, and a rainbow horn."
+    }
+  ],
+  "approvalBoundary": "This record authorises generation and bounded reference use only. New outputs remain pending Human batch review and do not change runtime catalogue pointers."
+}
