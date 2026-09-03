@@ -135,8 +135,8 @@ These are **Human decisions**.
   cannot be offered as a replacement. Semantic UI options instead use clean
   cream-cut sticker construction. Candidate C's identity approval remains
   unchanged; only her rendering treatment is being compared.
-- The Human-directed future guardian roster is Tea-Time Skeleton, Classic
-  Slime, Lizard Sword Guard, Lizard Spear Guard, Wholesome Succubus, Pocket
+- The Human-directed future guardian roster is Classic Slime, Lizard Sword
+  Guard, Lizard Spear Guard, Wholesome Succubus, Pocket
   T-Rex, Cultist (public label pending), Lamia, Soda Slime, Orc Chieftain,
   Cyclops, Minotaur, Warrior Skeleton, Kappa, and Treasure Mimic. These are
   future source identities, not shipped styles, placements or mechanics. They
