@@ -1,0 +1,346 @@
+{
+  "schema": "maze-art-generation-ledger/v1",
+  "batchId": "mgjrpg-02-batch-21-front-door-art",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-04",
+  "purpose": "Explore fresh, separable front-door artwork for the title/home surface: two complete title key-art directions, an environment-only background, two contain-first home splash candidates, and a hybrid stone/sticker logo treatment concept.",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "revision": 4,
+    "path": "docs/source-assets/recipes/mgjrpg-02.json"
+  },
+  "decisionEvidence": {
+    "decisionId": "mgjrpg-02-human-source-review-v05",
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v05/human-decision.json",
+    "scope": "approved-source-and-rendering-references"
+  },
+  "promptFile": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/PROMPTS.md",
+    "fidelity": "exact-as-submitted-from-generation-transcript"
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in image generation capability",
+    "model": "not exposed by the tool response",
+    "seed": "not exposed by the tool response",
+    "nativeOutput": {
+      "dimensions": "per-run evidence",
+      "format": "png",
+      "mode": "per-run evidence",
+      "alphaMode": "per-run evidence"
+    }
+  },
+  "referenceRegistry": {
+    "mgjrpg-02-recipe": {
+      "path": "docs/source-assets/recipes/mgjrpg-02.json",
+      "authorityKind": "approved-rendering-contract"
+    },
+    "human-review-input-r01": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/human-review-input-r01.json",
+      "authorityKind": "generation-scope"
+    },
+    "human-source-review-v05": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v05/human-decision.json",
+      "authorityKind": "approved-source-selection-evidence"
+    },
+    "ame-candidate-c": {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+      "authorityKind": "immutable-approved-identity-and-construction-authority"
+    },
+    "ame-fresh-b-led-01": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v03/ame-v02-rendering-b-fresh-01-generator-original.png",
+      "authorityKind": "approved-rendering-craft-reference-only"
+    },
+    "friend-bunny-v02-approved-512": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-bunny-v02-512.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    },
+    "friend-fox-v02-approved-512": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-fox-v02-512.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    },
+    "friend-kitten-v02-approved-512": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-kitten-v02-512.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    },
+    "friend-unicorn-v01": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/friend-rainbow-horn-unicorn-v01-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    },
+    "friend-green-tea-skeleton-v03": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-12-enemy-corrections/enemy-tea-time-skeleton-v03-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    },
+    "terrain-lavender-stone-wall-v02": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-10-environment-canaries/terrain-lavender-stone-wall-v02-candidate-b-generator-original.png",
+      "authorityKind": "approved-stone-material-and-rendering-reference"
+    },
+    "terrain-sunny-stone-floor-v02": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-10-environment-canaries/terrain-sunny-stone-floor-v02-candidate-b-generator-original.png",
+      "authorityKind": "approved-floor-material-and-rendering-reference"
+    },
+    "goal-first-star-v02": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/goal-first-star-v02-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "pending-source-used-for-semantic-star-goal-reference-only"
+    },
+    "terrain-dressing-garden-v01": {
+      "path": "docs/source-assets/terrain-dressing-garden-v1-master.png",
+      "authorityKind": "garden-semantic-and-composition-reference-only"
+    },
+    "nav-home-v03": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/nav-home-v03-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "approved-semantic-sticker-craft-reference-only"
+    },
+    "weapon-moon-wand-v02": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-moon-wand-v02-candidate-b-matte-01-generator-original.png",
+      "authorityKind": "approved-enamel-gold-and-jewel-material-reference-only"
+    }
+  },
+  "runDefaults": {
+    "generationMode": "fresh-source",
+    "lineage": {
+      "freshCanvas": true,
+      "previousBatchOutputUsed": false,
+      "rejectedOutputUsedAsReference": false,
+      "editOfEdit": false,
+      "sourceEditDepth": 0,
+      "mayBecomeIdentityAuthority": false,
+      "mayBecomeRenderingAuthority": false
+    },
+    "orderedReferences": []
+  },
+  "runs": [
+    {
+      "runId": "batch-21-title-background-v02-a",
+      "promptBlockId": "title-background-v02-candidate-a",
+      "identityId": "title-background",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "ame-candidate-c", "role": "immutable approved Ame identity and construction authority"},
+        {"order": 2, "referenceId": "ame-fresh-b-led-01", "role": "approved rendering craft only"},
+        {"order": 3, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity and rendering authority"},
+        {"order": 4, "referenceId": "friend-fox-v02-approved-512", "role": "approved Fox identity and rendering authority"},
+        {"order": 5, "referenceId": "friend-kitten-v02-approved-512", "role": "approved Kitten identity and rendering authority"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-a-generator-original.png",
+        "outputId": "exec-760c422b-2fe4-4afa-8c01-458ebe53b622.png"
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh full-bleed title key art gives Ame and the three core friends the strongest emotional welcome while preserving a calm copy-safe left region."
+      }
+    },
+    {
+      "runId": "batch-21-home-splash-opaque-study-01",
+      "promptBlockId": "home-hero-splash-v01-opaque-study-01",
+      "identityId": "home-hero-splash",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "ame-candidate-c", "role": "immutable approved Ame identity and construction authority"},
+        {"order": 2, "referenceId": "ame-fresh-b-led-01", "role": "approved rendering craft only"},
+        {"order": 3, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity and rendering authority"},
+        {"order": 4, "referenceId": "friend-unicorn-v01", "role": "approved Unicorn identity and rendering authority"},
+        {"order": 5, "referenceId": "friend-green-tea-skeleton-v03", "role": "approved Green Tea Skeleton friend identity and rendering authority"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-opaque-study-01-generator-original.png",
+        "outputId": "exec-f37cdc5f-6772-4806-a632-b225cd666aa1.png"
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reason": "The ensemble and expressions are useful composition evidence, but an opaque painted scene cannot serve the separable transparent contain-first splash role."
+      }
+    },
+    {
+      "runId": "batch-21-logo-concept-alpha-attempt-01",
+      "promptBlockId": "game-logo-concept-v01-candidate-a-alpha-attempt-01",
+      "identityId": "game-logo-concept",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "terrain-lavender-stone-wall-v02", "role": "approved rounded stone material craft for Maze lettering"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved semantic sticker craft for the small so bridge"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold and jewel material craft for Puzzle lettering"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/game-logo-concept-v01-candidate-a-alpha-attempt-01-generator-original.png",
+        "outputId": "exec-5ff5a0d2-834b-4d84-9b20-fd53c127f2f3.png"
+      },
+      "disposition": {
+        "status": "rejected-background-invalid",
+        "reason": "This is the strongest hybrid material and lettering-construction concept and it omits the subtitle, but its letter case still needs controlled reconstruction and the generator painted a checkerboard rather than genuine alpha; it may guide an independent exact local reconstruction but cannot become the shipping alpha source."
+      }
+    },
+    {
+      "runId": "batch-21-home-splash-alpha-attempt-01",
+      "promptBlockId": "home-hero-splash-v01-alpha-attempt-01",
+      "identityId": "home-hero-splash",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "ame-candidate-c", "role": "immutable approved Ame identity and construction authority"},
+        {"order": 2, "referenceId": "ame-fresh-b-led-01", "role": "approved rendering craft only"},
+        {"order": 3, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity and rendering authority"},
+        {"order": 4, "referenceId": "friend-unicorn-v01", "role": "approved Unicorn identity and rendering authority"},
+        {"order": 5, "referenceId": "friend-green-tea-skeleton-v03", "role": "approved Green Tea Skeleton friend identity and rendering authority"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-alpha-attempt-01-generator-original.png",
+        "outputId": "exec-a929dd1d-d606-4d66-bb00-b6bae3621aac.png"
+      },
+      "disposition": {
+        "status": "rejected-background-invalid",
+        "reason": "The composition is attractive, but the checkerboard and painted ground shadow are baked RGB pixels rather than genuine transparency."
+      }
+    },
+    {
+      "runId": "batch-21-home-splash-v01-a",
+      "promptBlockId": "home-hero-splash-v01-candidate-a-matte-01",
+      "identityId": "home-hero-splash",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "ame-candidate-c", "role": "immutable approved Ame identity and construction authority"},
+        {"order": 2, "referenceId": "ame-fresh-b-led-01", "role": "approved rendering craft only"},
+        {"order": 3, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity and rendering authority"},
+        {"order": 4, "referenceId": "friend-unicorn-v01", "role": "approved Unicorn identity and rendering authority"},
+        {"order": 5, "referenceId": "friend-green-tea-skeleton-v03", "role": "approved Green Tea Skeleton friend identity and rendering authority"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-149937ef-e7fe-4065-a693-ba053d5cf294.png"
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh chroma-matte ensemble preserves all approved identities and provides a lively, separable contain-first splash candidate."
+      }
+    },
+    {
+      "runId": "batch-21-title-background-environment-study-01",
+      "promptBlockId": "title-background-v02-environment-only-study-01",
+      "identityId": "title-background-environment",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "terrain-lavender-stone-wall-v02", "role": "approved rounded stone material and seam craft"},
+        {"order": 2, "referenceId": "terrain-sunny-stone-floor-v02", "role": "approved warm floor material and value grouping"},
+        {"order": 3, "referenceId": "goal-first-star-v02", "role": "star-goal semantics only; no source or rendering authority"},
+        {"order": 4, "referenceId": "terrain-dressing-garden-v01", "role": "garden dressing semantics and broad composition only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
+        "outputId": "exec-00ba9adb-49b6-42b9-b8bc-f389211b6114.png"
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh environment-only candidate offers the cleanest responsive, layerable title/home backdrop and avoids duplicating Ame when paired with a separate splash."
+      }
+    },
+    {
+      "runId": "batch-21-home-splash-v01-b",
+      "promptBlockId": "home-hero-splash-v01-candidate-b-matte-01",
+      "identityId": "home-hero-splash",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "ame-candidate-c", "role": "immutable approved Ame identity and construction authority"},
+        {"order": 2, "referenceId": "ame-fresh-b-led-01", "role": "approved rendering craft only"},
+        {"order": 3, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity and rendering authority"},
+        {"order": 4, "referenceId": "friend-unicorn-v01", "role": "approved Unicorn identity and rendering authority"},
+        {"order": 5, "referenceId": "friend-green-tea-skeleton-v03", "role": "approved Green Tea Skeleton friend identity and rendering authority"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+        "outputId": "exec-fcacf469-1899-4928-accc-3ff372c14cbb.png"
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Independent fresh candidate uses the clearest contain-first silhouette and the strongest small-screen focal hierarchy."
+      }
+    },
+    {
+      "runId": "batch-21-logo-concept-v01-b",
+      "promptBlockId": "game-logo-concept-v01-candidate-b-matte-01",
+      "identityId": "game-logo-concept",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "terrain-lavender-stone-wall-v02", "role": "approved rounded stone material craft for Maze lettering"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved semantic sticker craft for the small so bridge"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold and jewel material craft for Puzzle lettering"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/game-logo-concept-v01-candidate-b-matte-01-generator-original.png",
+        "outputId": "exec-1e503ed0-0b81-44dc-8360-62bacf517315.png"
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reason": "The material treatment is coherent, but the middle word reads as uppercase SO rather than the intended small lowercase so and should not define the final lockup."
+      }
+    },
+    {
+      "runId": "batch-21-logo-concept-v01-c",
+      "promptBlockId": "game-logo-concept-v01-candidate-c-matte-01",
+      "identityId": "game-logo-concept",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "terrain-lavender-stone-wall-v02", "role": "approved rounded stone material craft for Maze lettering"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved semantic sticker craft for the small so bridge"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold and jewel material craft for Puzzle lettering"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/game-logo-concept-v01-candidate-c-matte-01-generator-original.png",
+        "outputId": "exec-53afbf5b-a046-4c8c-b6ad-d2f12cbb1c08.png"
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reason": "The attempted letter-case correction still reads as uppercase SO and is weaker than Candidate A's construction concept."
+      }
+    },
+    {
+      "runId": "batch-21-title-background-v02-b",
+      "promptBlockId": "title-background-v02-candidate-b",
+      "identityId": "title-background",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "ame-candidate-c", "role": "immutable approved Ame identity and construction authority"},
+        {"order": 2, "referenceId": "ame-fresh-b-led-01", "role": "approved rendering craft only"},
+        {"order": 3, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity and rendering authority"},
+        {"order": 4, "referenceId": "friend-fox-v02-approved-512", "role": "approved Fox identity and rendering authority"},
+        {"order": 5, "referenceId": "friend-kitten-v02-approved-512", "role": "approved Kitten identity and rendering authority"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-b-generator-original.png",
+        "outputId": "exec-80731c3a-282d-44ea-a7f8-9c97936a990c.png"
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Independent fresh title candidate gives the menu region still more visual quiet and a wider environment read, with a less immediate Ame focal."
+      }
+    }
+  ],
+  "nativeCanvasException": {
+    "appliesToEveryOutput": true,
+    "actual": "Generator-native outputs are 1672x941 for title/background studies, 1448x1086 for splash studies, and 1536x1024 for logo concepts; all are opaque RGB PNGs.",
+    "canonicalPolicy": "After Human selection, the title uses an approved opaque working master and responsive tuned WebP renditions; the splash uses a straight-alpha contain-first master and justified 512/1024/1536 derivatives; the exact logo is reconstructed locally from separable controlled layers.",
+    "exception": "Immutable generator originals remain native and are never rescaled or converted in place. Chroma extraction, exact logo reconstruction, registration, responsive crop definition, resize and encoding occur only after source/treatment review."
+  },
+  "lineagePolicy": {
+    "identityReference": "approved identity or semantic references only",
+    "renderingAuthority": "approved mgjrpg-02 contract",
+    "editOfEdit": "forbidden",
+    "boardCropAsMaster": "forbidden",
+    "generatedLogoLettering": "concept evidence only; never exact wordmark authority"
+  },
+  "reviewProtocol": {
+    "batchProofStatus": "awaiting Human front-door art review",
+    "decisionRule": "Human selects a title direction, a splash direction, and a logo material/construction direction independently.",
+    "silenceRule": "Silence is not approval.",
+    "candidateBoundary": "Source or concept approval does not switch runtime, add catalogue pointers, approve alpha extraction, approve responsive crops, or retire previous art."
+  },
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal approved references; no named franchise, character, logo, living artist, proprietary palette, UI layout, or composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "releaseStatus": "not-approved"
+  },
+  "runtimeImpact": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0,
+    "web": "none-source-only",
+    "tauri": "none-source-only",
+    "ipad": "none-source-only",
+    "tv": "none-source-only"
+  },
+  "rollback": {
+    "method": "Keep every immutable output and exact prompt. Current title background, live text, runtime assets, catalogue pointers, and preload behavior remain unchanged until explicit selection and a later publication gate.",
+    "runtimeRollbackRequired": false
+  }
+}

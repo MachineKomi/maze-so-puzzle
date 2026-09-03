@@ -1,0 +1,24 @@
+{
+  "schema": "maze-human-art-review/v1",
+  "reviewId": "mgjrpg-02-batch-21-input-r01",
+  "recordedOn": "2026-09-04",
+  "scope": "title-screen-key-art-home-screen-splash-and-game-logo-source-generation",
+  "evidenceKind": "verbatim-conversation-summary",
+  "decisions": [
+    {
+      "status": "generation-authorized",
+      "identities": [
+        "title-screen-artwork",
+        "home-screen-splash-art",
+        "game-logo"
+      ],
+      "instruction": "Generate title-screen artwork, home-screen splash art, and a game logo in the approved house style, aligned with the current vision, game, specifications, and existing approved artwork."
+    },
+    {
+      "status": "logo-direction",
+      "identities": ["game-logo"],
+      "instruction": "Explore a tasteful hybrid: Maze may use dimensional maze stone, so may use sticker craft, and Puzzle may bridge those treatments. Do not include the subtitle For Ame to Solve in the logo artwork."
+    }
+  ],
+  "approvalBoundary": "This authorizes fresh source generation only. It does not approve these pixels, publish runtime derivatives, add catalogue pointers, change title-screen UI, retire rollback assets, implement Plan 11, or alter gameplay. Generated lettering remains concept evidence until the exact wordmark is reconstructed locally and approved."
+}

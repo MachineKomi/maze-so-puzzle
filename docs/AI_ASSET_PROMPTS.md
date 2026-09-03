@@ -1996,3 +1996,45 @@ ImageGen prompts for:
 All viable Batch 20 images remain source-only and pending review. Current public
 assets, catalogue pointers, preload behaviour, rights state, and retirement
 ledger are unchanged.
+
+## Plan 03 front-door source exploration — Batch 21
+
+The ten-run title, home-splash, and logo exploration is recorded under
+`docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/`. Its adjacent
+`PROMPTS.md` is the exact historical prompt authority; `run-record.json` binds
+each prompt block to its ordered inputs, generator output ID, SHA-256, encoded
+bytes, dimensions, colour mode, alpha state, disposition, and rollback boundary.
+
+The source-only packet contains:
+
+- two independent opaque title-key-art candidates with Ame, Bunny, Fox, and
+  Kitten, plus one environment-only title-background study for a separable
+  responsive composition;
+- two valid uniform-matte, contain-first home-splash candidates with Ame,
+  Bunny, Rainbow-horn Unicorn, Green Tea Skeleton, and the adventure book;
+- one rejected opaque home-splash study and one rejected fake-checkerboard
+  transparency attempt, both retained as immutable iteration evidence; and
+- three logo-treatment studies exploring dimensional lavender maze-stone for
+  `Maze`, a compact coral sticker bridge for `so`, and mint/enamel-gold craft
+  for `Puzzle`. Candidate A is the preferred construction concept, but its
+  painted checkerboard makes it an invalid alpha source. Candidates B and C
+  are art-director-rejected because `so` reads as uppercase `SO`.
+
+No generated lettering is exact wordmark authority. After Human treatment
+selection, the shipping `Maze so Puzzle` lockup must be independently rebuilt
+from controlled, separable local layers, then checked for exact spelling,
+letter case, originality, compact readability, and alpha quality. The subtitle
+`For Ame to Solve` is not part of any Batch 21 logo concept.
+
+The immutable generator originals remain at their native dimensions: title
+studies are 1672×941, splash studies are 1448×1086, and logo concepts are
+1536×1024. All ten are opaque RGB PNG evidence; matte extraction and transparent
+derivatives have deliberately not been run before selection. Together they add
+21,251,306 source-record bytes and at most 62,915,040 decoded RGBA working bytes,
+with zero public/runtime encoded or decoded byte delta.
+
+Batch 21 remains `pending-human-review`. It changes no runtime asset, catalogue
+pointer, preload, title-screen text, gameplay, or retirement state. A Human
+source/treatment decision is required before deterministic alpha work,
+responsive crop definition, exact logo reconstruction, runtime derivatives, or
+publication.
