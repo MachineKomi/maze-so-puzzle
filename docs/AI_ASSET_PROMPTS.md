@@ -1856,7 +1856,7 @@ without moving or deleting runtime assets. Keep versioned rollback files until
 Plan 12 after all later consumers and catalogue pointers are final, and never
 place an archive beneath `public/assets`.
 
-## Plan 03 production batches 02–08 — forward-only source record
+## Plan 03 production batches 02–09 — forward-only source record
 
 The exact prompts, ordered reference roles, immutable generator output IDs,
 hashes, byte counts, dispositions, and rollback boundaries for current volume
@@ -1887,6 +1887,9 @@ production live beside their source masters:
 - `docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/` — fresh
   Blueberry Slime, Pebble Golem, Candy Mimic, and Cloud Gremlin sources that
   address the four current-enemy outliers identified by Plan 03.
+- `docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/` — fresh
+  Spring Boots, Antidote Leaf, and Science Gears sources with one dominant
+  function cue, fewer motifs, and cleaner item-scale silhouettes.
 
 Do not reconstruct a source from this summary. The adjacent `PROMPTS.md` files
 are the exact historical prompt authority, and each `run-record.json` binds
@@ -1925,3 +1928,8 @@ Reusable production constraints reinforced by these batches:
 - A Candy Mimic must read as a living chest, not a child inside a costume. Pale
   Cloud Gremlin materials require a strong blue-plum contour; the Pebble Golem
   uses fewer rounded stone masses and avoids foreshortened threatening fists.
+- Spring Boots reserve visual priority for their coils; Antidote Leaf adds a
+  lavender band and cream droplet as a non-green medicine cue; Science Gears
+  use exactly three broad interlocks with one optional focal spark. First Star
+  keeps its approved 512 px shelf art and receives deterministic optical sizes
+  instead of a gratuitous new identity.

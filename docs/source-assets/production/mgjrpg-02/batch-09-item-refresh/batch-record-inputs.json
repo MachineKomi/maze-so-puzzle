@@ -1,0 +1,34 @@
+{
+  "schema": "maze-art-generation-ledger/v1",
+  "batchId": "mgjrpg-02-batch-09-item-refresh",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-03",
+  "purpose": "Fresh simplified source masters for the three item/treasure outliers named by Plan 03: Spring Boots, Antidote Leaf, and Science Gears. This source-only batch does not publish runtime art.",
+  "recipeEvidence": { "recipeId": "mgjrpg-02", "revision": 4, "path": "docs/source-assets/recipes/mgjrpg-02.json" },
+  "decisionEvidence": { "decisionId": "mgjrpg-02-human-selection-v04", "path": "docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json", "scope": "rendering-recipe-and-controlled-source-production" },
+  "promptFile": { "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/PROMPTS.md", "fidelity": "exact-as-submitted-from-generation-transcript" },
+  "generator": { "provider": "OpenAI", "interface": "Codex built-in image generation capability", "model": "not exposed by the tool response", "seed": "not exposed by the tool response", "nativeOutput": { "width": 1254, "height": 1254, "format": "png", "mode": "RGB", "alphaMode": "opaque" } },
+  "referenceRegistry": {
+    "object-rendering-v02": { "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/portal-rose-heart-v02-512.png", "authorityKind": "human-approved-object-rendering-and-contour-reference" },
+    "identity-spring-boots-v01": { "path": "public/assets/spring-boots-v1.png", "authorityKind": "current-runtime-semantic-reference-only" },
+    "identity-antidote-leaf-v01": { "path": "public/assets/antidote-leaf-v1.png", "authorityKind": "current-runtime-semantic-reference-only" },
+    "identity-science-gears-v01": { "path": "public/assets/treasure-science-gears-v1.webp", "authorityKind": "current-runtime-semantic-reference-only" }
+  },
+  "referencePattern": [
+    { "referenceId": "identity-{identityId}-v01", "role": "current item function and semantic identity only; no pixel copying" },
+    { "referenceId": "object-rendering-v02", "role": "approved chunky object rendering and chromatic contour craft" }
+  ],
+  "runDefaults": { "generationMode": "fresh-reference-led-generation-on-uniform-matte", "lineage": { "freshCanvas": true, "previousBatchOutputUsed": false, "rejectedOutputUsedAsReference": false, "mayBecomeIdentityAuthority": false, "mayBecomeRenderingAuthority": false } },
+  "runs": [
+    {"runId":"batch-09-spring-boots-a","promptBlockId":"item-spring-boots-v02-candidate-a","identityId":"spring-boots","output":{"path":"docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-spring-boots-v02-candidate-a-matte-01-generator-original.png","outputId":"exec-9dcc2abe-3b36-4cf4-bca8-19f2de16f4aa.png"},"disposition":{"status":"pending-human-batch-review","reason":"Fresh motif-reduced spring-first construction awaits bulk review."}},
+    {"runId":"batch-09-antidote-leaf-a","promptBlockId":"item-antidote-leaf-v02-candidate-a","identityId":"antidote-leaf","output":{"path":"docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-antidote-leaf-v02-candidate-a-matte-01-generator-original.png","outputId":"exec-e510eb99-dc4d-49a6-8751-a64d5d661944.png"},"disposition":{"status":"pending-human-batch-review","reason":"Fresh shape-plus-band medicine cue awaits bulk review."}},
+    {"runId":"batch-09-science-gears-a","promptBlockId":"treasure-science-gears-v02-candidate-a","identityId":"science-gears","output":{"path":"docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/treasure-science-gears-v02-candidate-a-matte-01-generator-original.png","outputId":"exec-34772743-02d1-4793-94a3-96504167f6e5.png"},"disposition":{"status":"pending-human-batch-review","reason":"Fresh exactly-three-gear simplified construction awaits bulk review."}}
+  ],
+  "nativeCanvasException": { "appliesToEveryOutput": true, "actual": [1254,1254], "canonicalPolicy": "Canonical item masters normally use a documented 1536 square working canvas before registration.", "exception": "The built-in generator returned 1254-square originals; immutable originals stay native and deterministic derivatives enforce delivery dimensions." },
+  "lineagePolicy": { "identityReference": "current runtime art is semantic-only", "renderingAuthority": "Human-approved sources only", "editOfEdit": "forbidden", "boardCropAsMaster": "forbidden" },
+  "reviewProtocol": { "batchProofStatus": "awaiting bulk Human review", "decisionRule": "After presentation and explicit response, valid unlisted candidates may be approved by default and named exceptions rejected.", "silenceRule": "Silence is not approval.", "candidateBoundary": "Source approval does not switch runtime or retire previous art." },
+  "rights": { "originClaim": "Generated for Maze so Puzzle from exact prompts and ordered semantic/rendering references; no named franchise, character, logo, living artist, or proprietary composition was requested.", "licenceStatus": "pending-owner-review", "releaseStatus": "not-approved" },
+  "runtimeImpact": { "runtimeAssetWrites": 0, "cataloguePointerChanges": 0, "runtimeEncodedByteDelta": 0, "runtimeDecodedByteDelta": 0, "web": "none-source-only", "tauri": "none-source-only", "ipad": "none-source-only", "tv": "none-source-only" },
+  "rollback": { "method": "Keep immutable originals, exact prompts, deterministic derivatives, rejected sources, and Human review evidence. Runtime pointers remain unchanged.", "runtimeRollbackRequired": false }
+}
