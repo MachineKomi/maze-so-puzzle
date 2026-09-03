@@ -1856,7 +1856,7 @@ without moving or deleting runtime assets. Keep versioned rollback files until
 Plan 12 after all later consumers and catalogue pointers are final, and never
 place an archive beneath `public/assets`.
 
-## Plan 03 production batches 02–09 — forward-only source record
+## Plan 03 production batches 02–10 — forward-only source record
 
 The exact prompts, ordered reference roles, immutable generator output IDs,
 hashes, byte counts, dispositions, and rollback boundaries for current volume
@@ -1890,6 +1890,10 @@ production live beside their source masters:
 - `docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/` — fresh
   Spring Boots, Antidote Leaf, and Science Gears sources with one dominant
   function cue, fewer motifs, and cleaner item-scale silhouettes.
+- `docs/source-assets/production/mgjrpg-02/batch-10-environment-canaries/` —
+  fresh Sunny Stone and Wishing Woods floor/wall paintings. Preferred sources
+  passed the deterministic Poisson seam thresholds; three technically seamless
+  but visibly stamped attempts remain rejected macro-repeat evidence.
 
 Do not reconstruct a source from this summary. The adjacent `PROMPTS.md` files
 are the exact historical prompt authority, and each `run-record.json` binds
@@ -1933,3 +1937,6 @@ Reusable production constraints reinforced by these batches:
   use exactly three broad interlocks with one optional focal spark. First Star
   keeps its approved 512 px shelf art and receives deterministic optical sizes
   instead of a gratuitous new identity.
+- Terrain approval requires both seam metrics and a 3x3/5x5 repeat judgement.
+  A mathematically clean wrap still fails when a dominant central stone, unique
+  masonry arrangement, rosette, or accent cluster exposes the repeat period.
