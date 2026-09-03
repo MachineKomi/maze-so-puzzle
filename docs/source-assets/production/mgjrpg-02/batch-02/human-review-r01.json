@@ -20,10 +20,11 @@
     { "id": "nav-sound-v02", "reason": "Human preferred the later simplified speaker." },
     { "id": "nav-mazes-v02", "reason": "Superseded by the simpler clean v04 route mark." },
     { "id": "nav-mazes-v03", "reason": "Invalid checkerboard-like generated background." },
-    { "id": "hazard-hole-v02", "reason": "Human rejected the flat read; it does not look like a shaft descending into the ground." }
+    { "id": "hazard-hole-v02", "reason": "Human rejected the flat read; it does not look like a shaft descending into the ground." },
+    { "id": "hazard-hole-v03", "reason": "Human found the reviewed replacement still too flat and requested stronger visible descent." }
   ],
   "pending": [
-    { "id": "hazard-hole-v03", "reason": "Fresh deeper construction generated in response to the rejection; awaiting Human review." }
+    { "id": "hazard-hole-v04", "reason": "Fresh blank-canvas three-ledge shaft construction generated in response to the second rejection; awaiting Human bulk review." }
   ],
-  "evidence": "Human approved the simplified speaker and all preferred generated work through Red Panda, while explicitly rejecting the flat hole and requesting a deeper replacement. Earlier direct approvals cover Home, Help, volume and mute icons."
+  "evidence": "Human approved the simplified speaker and all preferred generated work through Red Panda, while explicitly rejecting the reviewed hole as too flat and requesting a version that darkens as it descends. Earlier direct approvals cover Home, Help, volume and mute icons."
 }

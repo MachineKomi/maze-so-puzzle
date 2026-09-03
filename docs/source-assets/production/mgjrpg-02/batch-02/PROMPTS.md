@@ -242,3 +242,18 @@ Rendering: clean simple chunky anime storybook hazard; three broad depth-value b
 Edges: terrain-family colour-aware stone and earth edges, boundaries and seams, not a character-like enclosing outline. Warm russet-plum along ochre earth, cool blue-plum along slate stone, deepest ink-plum only inside the shaft. Crisp clean matte boundary.
 Constraints: solid green matte background; no checkerboard; no sticker cutline; no character; no bones; no spikes; no face; no sign; no arrow; no text; no watermark; no outside cast shadow; original design only.
 ```
+
+## `hazard-hole-v04`
+
+Generator output: `exec-f25c00b7-7220-423d-b3bc-ef374fd83e95.png`
+
+```text
+Use case: stylized-concept
+Asset type: standalone 1024x1024 source master for a top-down field hazard sprite, fresh construction v04
+Primary request: Create one unmistakably deep circular hole viewed directly from overhead for an original child-friendly magical-girl handheld JRPG. Begin from a blank canvas. The hole must visibly descend: a chunky irregular ochre-earth and slate-stone rim, then three clearly nested interior ledges whose openings get smaller, darker, and cooler, terminating in a compact near-black deep-aubergine central shaft. Use strong concentric occlusion and visible inner vertical faces so it reads as a deep hole going down even at 48 pixels, never as a flat puddle, rug, ring, crater decal, or dark disc.
+Scene/backdrop: one perfectly flat uniform vivid chroma-green RGB background outside the complete hazard silhouette, with no texture, pattern, gradient, halo, or shadow, solely for deterministic alpha cutout.
+Composition/framing: compact tile-safe circular footprint occupying about 78% of the canvas; broad readable rim chunks; one dominant central void; restrained asymmetry; generous clean matte margin.
+Style/medium: clean simple chunky anime-storybook JRPG field art; broad painterly cel-like masses; three depth-value ledges plus the deepest void; restrained texture; neutral top-down form modelling; no directional cast shadow outside the footprint.
+Colour and edges: warm ochre and peach earth with clearly coloured russet-plum local edge marks; cool lavender-slate stone with blue-plum local seams; the inner faces transition through saturated aubergine and indigo-plum; reserve darkest ink-plum only for the deepest shaft and tiny critical occlusion. No black enclosing outline. Terrain-family boundaries, not a sticker cutline.
+Constraints: no checkerboard; no cream/white sticker border; no character; no face; no bones; no spikes; no sign; no arrow; no foliage; no text; no watermark; no outside cast shadow; no microtexture; original design only.
+```

@@ -25,7 +25,7 @@
     },
     "promptHistory": {
       "path": "docs/AI_ASSET_PROMPTS.md",
-      "sha256": "c62b1a9b5e7fd17c8139765ca2f21de3320c8f9ba84167994ab036900b0fa175"
+      "sha256": "7aaf3c55f1fde4ab2d6d207563c7c45034538b17d6d292b920e3eb6c2e719074"
     },
     "pipelineModules": [
       {
@@ -115,8 +115,8 @@
       },
       {
         "path": "scripts/art_pipeline/tests/test_generation_batch.py",
-        "sha256": "bb9de1793abcec8943a2c7b1210e3abd7bfe801ae31e54a5a5e8ec56158dab22",
-        "bytes": 4547
+        "sha256": "249696ee06c80ec39dab6dfba467f043f7dd5b3f891ccdfd19e6603f254c4a48",
+        "bytes": 4747
       },
       {
         "path": "scripts/art_pipeline/tests/test_mgjrpg02_batch01.py",
@@ -218,8 +218,8 @@
       },
       {
         "path": "docs/source-assets/production/mgjrpg-02/batch-02/PROMPTS.md",
-        "sha256": "6312bf7a41a9978d8700ce28ea2da8b7f45dcde20874d324cee518009e90d60f",
-        "bytes": 25377,
+        "sha256": "a02a6016e1a71a540ce2c162ba19622b6c0d7471ba422cbee086c3fd670eb1a6",
+        "bytes": 27473,
         "referencedBy": [
           "batch:mgjrpg-02-batch-02"
         ]
@@ -287,6 +287,14 @@
         "referencedBy": [
           "batch:mgjrpg-02-batch-10-environment-canaries"
         ]
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/PROMPTS.md",
+        "sha256": "ece819a388b41c4ed5c66f298ec7799a37a2fc160103ada43f080bc5f9ff588e",
+        "bytes": 9783,
+        "referencedBy": [
+          "batch:mgjrpg-02-batch-11-environment-outliers"
+        ]
       }
     ],
     "generationBatches": [
@@ -332,20 +340,20 @@
       },
       {
         "path": "docs/source-assets/production/mgjrpg-02/batch-02/run-record.json",
-        "sha256": "4a9e2f735aba66dcff7b63f40cc30df1bf651a2c745ca183e40176bb70a00ba0",
-        "bytes": 28040,
+        "sha256": "ea098824543e2a44ec8f85ac191cec8ec6179eeb24c091e35a11087a8585effd",
+        "bytes": 29701,
         "batchId": "mgjrpg-02-batch-02",
         "revision": 1,
         "status": "pending-human-review",
         "promptFile": {
           "path": "docs/source-assets/production/mgjrpg-02/batch-02/PROMPTS.md",
           "fidelity": "exact-as-submitted-from-generation-transcript",
-          "sha256": "6312bf7a41a9978d8700ce28ea2da8b7f45dcde20874d324cee518009e90d60f",
-          "bytes": 25377
+          "sha256": "a02a6016e1a71a540ce2c162ba19622b6c0d7471ba422cbee086c3fd670eb1a6",
+          "bytes": 27473
         },
-        "runCount": 16,
-        "generatorOriginalEncodedBytes": 21644044,
-        "generatorOriginalDecodedBytesUpperBound": 100643916,
+        "runCount": 17,
+        "generatorOriginalEncodedBytes": 23503790,
+        "generatorOriginalDecodedBytesUpperBound": 106933980,
         "approvedDerivativeCount": 0,
         "approvedDerivativeEncodedBytes": 0,
         "approvedDerivativeDecodedBytesUpperBound": 0
@@ -506,6 +514,26 @@
         "runCount": 7,
         "generatorOriginalEncodedBytes": 14151130,
         "generatorOriginalDecodedBytesUpperBound": 44030448,
+        "approvedDerivativeCount": 0,
+        "approvedDerivativeEncodedBytes": 0,
+        "approvedDerivativeDecodedBytesUpperBound": 0
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/run-record.json",
+        "sha256": "db08291efccca10909083fc6279dde974d30e1e6a334facc831027eab1e3b2f9",
+        "bytes": 13573,
+        "batchId": "mgjrpg-02-batch-11-environment-outliers",
+        "revision": 1,
+        "status": "pending-human-review",
+        "promptFile": {
+          "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/PROMPTS.md",
+          "fidelity": "exact-as-submitted-from-generation-transcript",
+          "sha256": "ece819a388b41c4ed5c66f298ec7799a37a2fc160103ada43f080bc5f9ff588e",
+          "bytes": 9783
+        },
+        "runCount": 6,
+        "generatorOriginalEncodedBytes": 11894563,
+        "generatorOriginalDecodedBytesUpperBound": 37740384,
         "approvedDerivativeCount": 0,
         "approvedDerivativeEncodedBytes": 0,
         "approvedDerivativeDecodedBytesUpperBound": 0
@@ -673,13 +701,13 @@
     "runtimeImageCount": 125,
     "runtimeEncodedBytes": 39173427,
     "runtimeDecodedBytesUpperBound": 183011232,
-    "sourceImageCount": 269,
-    "sourceEncodedBytes": 380502462,
+    "sourceImageCount": 276,
+    "sourceEncodedBytes": 394256771,
     "unreferencedSourceImageCount": 3,
-    "generationBatchCount": 11,
-    "generationBatchOutputCount": 132,
-    "generationBatchEncodedBytes": 195342064,
-    "generationBatchDecodedBytesUpperBound": 830291340,
+    "generationBatchCount": 12,
+    "generationBatchOutputCount": 139,
+    "generationBatchEncodedBytes": 209096373,
+    "generationBatchDecodedBytesUpperBound": 874321788,
     "renderingRecipeFileCount": 1,
     "renderingRecipeBytes": 8645,
     "canaryReviewFileCount": 1,
@@ -7346,6 +7374,21 @@
       ]
     },
     {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-hole-v04-generator-original.png",
+      "sha256": "beec877e0dd327cad62ebbeebc0ee6e743416fcc5835ac103559b4ffdda8f0f8",
+      "bytes": 1859746,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
       "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-lava-v03-generator-original.png",
       "sha256": "37339f9e4304f15a1862279427c126112851b1ee2010afb3adbc880be4421180",
       "bytes": 1894476,
@@ -8948,6 +8991,96 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-10-environment-canaries"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/terrain-amethyst-crystal-wall-v02-candidate-a-generator-original.png",
+      "sha256": "79bcea4811b103c901afd71a254c96a15aa3b0ff0f2b5c846051917235315cb1",
+      "bytes": 2351465,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-11-environment-outliers"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/terrain-amethyst-crystal-wall-v02-candidate-b-generator-original.png",
+      "sha256": "3bdab2c6c3913dfde0a0565a469997401ad3368bd49a2fe4d1943a199f7ea615",
+      "bytes": 2208848,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-11-environment-outliers"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/terrain-berry-bramble-wall-v02-candidate-a-generator-original.png",
+      "sha256": "16d46e4f7a06361eab289407766de4a172e387eed1e6f34b8744d3342c567068",
+      "bytes": 2412801,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-11-environment-outliers"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/terrain-berry-bramble-wall-v02-candidate-b-generator-original.png",
+      "sha256": "4f5169bcd928bd48c621cbb4781a441a38f5a245ee889a9ef99767956720c28a",
+      "bytes": 1741915,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-11-environment-outliers"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/terrain-meadow-grass-floor-v02-candidate-a-generator-original.png",
+      "sha256": "1b8bdf7ae6fee8caf6131564d783965a94a364f0bd5b1fb522010794cc652b36",
+      "bytes": 1381257,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-11-environment-outliers"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/terrain-meadow-grass-floor-v02-candidate-b-generator-original.png",
+      "sha256": "3d74e393a1d50b7f3ce40cfe51ca2be30f1d782b49f34979f7f657fe27c1ae25",
+      "bytes": 1798277,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-11-environment-outliers"
       ]
     },
     {

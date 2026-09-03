@@ -1856,14 +1856,15 @@ without moving or deleting runtime assets. Keep versioned rollback files until
 Plan 12 after all later consumers and catalogue pointers are final, and never
 place an archive beneath `public/assets`.
 
-## Plan 03 production batches 02–10 — forward-only source record
+## Plan 03 production batches 02–11 — forward-only source record
 
 The exact prompts, ordered reference roles, immutable generator output IDs,
 hashes, byte counts, dispositions, and rollback boundaries for current volume
 production live beside their source masters:
 
 - `docs/source-assets/production/mgjrpg-02/batch-02/` — navigation stickers,
-  app icon, water/lava/poison, rejected flat hole, and pending deep-hole v03.
+  app icon, water/lava/poison, two rejected flat-reading holes, and pending
+  blank-canvas deep-shaft v04 with three visible nested ledges.
 - `docs/source-assets/production/mgjrpg-02/batch-03-friends/` — independent
   candidate pairs for all fifteen established animal friends. Human-selected
   sources through Red Panda have approved 512 px derivatives; the remaining
@@ -1894,6 +1895,11 @@ production live beside their source masters:
   fresh Sunny Stone and Wishing Woods floor/wall paintings. Preferred sources
   passed the deterministic Poisson seam thresholds; three technically seamless
   but visibly stamped attempts remain rejected macro-repeat evidence.
+- `docs/source-assets/production/mgjrpg-02/batch-11-environment-outliers/` —
+  fresh Meadow, Amethyst Crystal, and Berry Bramble material paintings. The
+  first complete-clover, gemstone-carpet, and repeated-leaf attempts remain
+  rejected evidence; the calmer sibling sources pass deterministic seam checks
+  and await bulk review.
 
 Do not reconstruct a source from this summary. The adjacent `PROMPTS.md` files
 are the exact historical prompt authority, and each `run-record.json` binds
@@ -1940,3 +1946,7 @@ Reusable production constraints reinforced by these batches:
 - Terrain approval requires both seam metrics and a 3x3/5x5 repeat judgement.
   A mathematically clean wrap still fails when a dominant central stone, unique
   masonry arrangement, rosette, or accent cluster exposes the repeat period.
+- A hole communicates depth with nested openings, visible inner vertical faces,
+  progressively cooler/darker occlusion, and a compact deepest void. A flat
+  dark centre with only a decorative rim is a rejection defect even when the
+  silhouette is attractive.
