@@ -1,0 +1,135 @@
+{
+  "batchId": "mgjrpg-02-batch-18-hard-leather-work-boots",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-03",
+  "purpose": "Add the missing hard-leather work-boot pickup identity that communicates protection while crossing floor-spike hazards.",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "revision": 4,
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+    "bytes": 8645
+  },
+  "decisionEvidence": {
+    "decisionId": "mgjrpg-02-human-selection-v04",
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json",
+    "scope": "rendering-recipe-and-controlled-source-production",
+    "sha256": "306ab2b3781c741ba7c912fdc1da8fd81abde28b842d669e5d384233209b99e3",
+    "bytes": 6945
+  },
+  "promptFile": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-18-hard-leather-work-boots/PROMPTS.md",
+    "fidelity": "exact-as-submitted-from-generation-transcript",
+    "sha256": "ce9e5e8beb4ebdfd778656091ec73bc89f5484fe41331d1a43031181bea9209e",
+    "bytes": 2703
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in image generation capability",
+    "model": "not exposed by the tool response",
+    "seed": "not exposed by the tool response",
+    "nativeOutput": {
+      "dimensions": "per-run evidence",
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight"
+    }
+  },
+  "nativeCanvasException": {
+    "appliesToEveryOutput": true,
+    "actual": "per-run evidence",
+    "canonicalPolicy": "Canonical masters normally use documented family canvases before optical derivative processing.",
+    "exception": "Immutable generator originals stay native and deterministic cutout/registration later creates delivery derivatives."
+  },
+  "lineagePolicy": {
+    "identityReference": "approved recipe only",
+    "renderingAuthority": "approved mgjrpg-02 contract",
+    "editOfEdit": "forbidden",
+    "boardCropAsMaster": "forbidden"
+  },
+  "reviewProtocol": {
+    "batchProofStatus": "awaiting bulk Human review",
+    "decisionRule": "After presentation and explicit response, valid unlisted candidates may be approved by default and named exceptions rejected.",
+    "silenceRule": "Silence is not approval.",
+    "candidateBoundary": "Source approval does not switch runtime or retire previous art."
+  },
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal specifications; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "releaseStatus": "not-approved"
+  },
+  "runtimeImpact": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0,
+    "web": "none-source-only",
+    "tauri": "none-source-only",
+    "ipad": "none-source-only",
+    "tv": "none-source-only"
+  },
+  "rollback": {
+    "method": "Keep the immutable original and exact prompt; runtime item pointers remain unchanged until review.",
+    "runtimeRollbackRequired": false
+  },
+  "schema": "maze-art-generation-batch/v1",
+  "referenceRegistry": {
+    "mgjrpg-02-recipe": {
+      "path": "docs/source-assets/recipes/mgjrpg-02.json",
+      "authorityKind": "approved-rendering-and-item-family-contract",
+      "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+      "bytes": 8645
+    }
+  },
+  "runs": [
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and item-family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-18-hard-leather-work-boots",
+      "promptBlockId": "item-hard-leather-work-boots-v01",
+      "identityId": "hard-leather-work-boots",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-18-hard-leather-work-boots/item-hard-leather-work-boots-v01-generator-original.png",
+        "outputId": "exec-68899053-3528-4171-8c1a-e52c5e98a843.png",
+        "sha256": "a0aca65f50ef35102c6c6ae84669216a92943a27a73d0cf2dda1cd19a42f4782",
+        "bytes": 1581996,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Broad ankle silhouette, reinforced metal toes and thick plum soles distinguish spike-protection equipment from ordinary boots and ice skates."
+      }
+    }
+  ],
+  "counts": {
+    "runCount": 1,
+    "rejectedBackgroundInvalidCount": 0,
+    "pendingHumanCandidateCount": 1,
+    "humanApprovedSourceCount": 0,
+    "humanRejectedSourceCount": 0,
+    "artDirectorRejectedSourceCount": 0,
+    "generatorOriginalEncodedBytes": 1581996,
+    "generatorOriginalDecodedBytesUpperBound": 6290064
+  }
+}
