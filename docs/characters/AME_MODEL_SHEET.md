@@ -452,3 +452,17 @@ the candidate is rejected rather than silently redesigning Ame.
   this design decision alone is not a downstream implementation release.
 - The separate source licence/rights field remains open until independently
   reviewed; visual approval does not fabricate that evidence.
+
+### Pending portrait correction — Batch 20
+
+The active `public/assets/ame-portrait.png` remains historical runtime art and
+is not an identity authority: its irises read teal/green and its short-bob
+construction conflicts with approved Ame v02. A new blank-canvas portrait
+candidate is preserved at
+`docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/ame-portrait-v02-candidate-a-generator-original.png`.
+Its ordered authorities are Candidate C identity/construction, Candidate C's
+turnaround landmarks, and Fresh B-led 01 rendering craft. The old portrait
+contributes framing only and is explicit negative evidence for eye colour and
+hair construction. The candidate is pending Human/Ame review; it changes no
+runtime pointer and must still pass blue-iris pixel, face-landmark, actual-size,
+rights, byte and catalogue gates.

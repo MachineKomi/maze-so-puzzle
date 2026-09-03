@@ -1,0 +1,87 @@
+{
+  "schema": "maze-art-source-coverage-audit/v1",
+  "auditId": "mgjrpg-02-final-static-source-coverage-r01",
+  "recordedOn": "2026-09-03",
+  "inspectedHead": "cd97f4b1b1820eb0eabe135e22e0284512548aac",
+  "authorities": [
+    "src/artCatalog.ts",
+    "src/assets.ts",
+    "src/game/types.ts",
+    "docs/ART_BIBLE.md",
+    "docs/plans/03-magical-girl-art-direction.md",
+    "docs/source-assets/calibrations/mgjrpg-02/v05/human-decision.json",
+    "docs/source-assets/manifest.json",
+    "docs/source-assets/production/mgjrpg-02/batch-01 through batch-19"
+  ],
+  "method": "Reconciled every current runtime catalogue/asset alias and every approved planned static family against immutable mgjrpg-02 generation run IDs. A retained Art Bible decision counts as deliberate coverage; a pending source counts as candidate coverage but never as approval or runtime publication.",
+  "gapsFound": [
+    {
+      "id": "enemy-jelly-sorcerer",
+      "family": "enemy",
+      "finding": "The canary required a fresh geometry-preserving refinement, but no isolated mgjrpg-02 production source existed.",
+      "resolution": "Generated Batch 20 fresh source candidate."
+    },
+    {
+      "id": "potion",
+      "family": "item",
+      "finding": "The active Power Potion remained legacy-only despite the item-family refinement commitment.",
+      "resolution": "Generated Batch 20 fresh source candidate."
+    },
+    {
+      "id": "reward-first-star",
+      "family": "reward",
+      "finding": "The approved large shelf identity existed, but the promised simplified 32/48/64 optical source had not been authored.",
+      "resolution": "Generated Batch 20 fresh optical candidate; retained the first checkerboard attempt as rejected evidence."
+    },
+    {
+      "id": "goal",
+      "family": "portal",
+      "finding": "The approved upright goal identity existed, but its promised simplified small-field treatment had not been authored.",
+      "resolution": "Generated Batch 20 fresh simplified field candidate while preserving the legacy goal as rollback."
+    },
+    {
+      "id": "ame-portrait",
+      "family": "story",
+      "finding": "The active legacy portrait has teal/green-looking irises and an immutable short-bob construction, violating the approved Ame v02 identity contract.",
+      "resolution": "Generated Batch 20 fresh portrait candidate from Candidate C identity authority; no edit-of-edit lineage."
+    }
+  ],
+  "deliberatelyRetainedWithoutRegeneration": [
+    {
+      "scope": "identity anchors",
+      "ids": ["goblin", "fox", "title-background", "story-professor-poggle", "story-sprig"],
+      "reason": "The Art Bible explicitly retains these strong pixels/concepts; regeneration merely to acquire a recipe label is forbidden."
+    },
+    {
+      "scope": "large reward and badge shelf art",
+      "ids": ["active-v2-reward-family", "active-v1-badge-family"],
+      "reason": "Large designs are retained; later deterministic optical derivatives are a delivery task rather than missing identity art."
+    },
+    {
+      "scope": "declaration-only historical art",
+      "ids": ["ame-sword", "reward-brave-medal", "reward-splash-sticker", "reward-rescue-medal"],
+      "reason": "These are retirement-ledger candidates, not missing production identities; Plan 12 owns eventual removal after reachability proof."
+    }
+  ],
+  "familyCoverageAfterBatch20": {
+    "character": "covered; static Ame approved, replacement portrait pending",
+    "friends": "covered; ordinary, mythic, unicorn and Tea-Time Skeleton sources accounted for",
+    "enemies": "covered; Goblin retained and every other current/planned identity has a generated source candidate",
+    "weapons": "covered",
+    "itemsAndTreasure": "covered after Power Potion candidate",
+    "cages": "covered",
+    "locksAndDoors": "covered",
+    "portalsAndGoal": "covered; Batch 19 pair symbols and Batch 20 goal pending",
+    "rewardsAndBadges": "covered; retained large art plus pending First Star optical candidate",
+    "floorsWallsDressingsHazards": "covered",
+    "storyAndBrand": "covered; title/Poggle/Sprig retained, app icon approved, Ame portrait replacement pending",
+    "navigation": "covered"
+  },
+  "remainingWorkIsNotMissingSourceGeneration": [
+    "Human review of Batch 19 and Batch 20 candidates",
+    "deterministic chroma cutout, registration and optical derivative generation",
+    "alpha/seam/actual-size QA and rights review",
+    "catalogue/source-record publication and family-by-family runtime switching",
+    "Plan 12 retirement sweep"
+  ]
+}

@@ -286,6 +286,16 @@ Sunny Diamond, and rejects the literal clubs/spade sources. Batch 19's new
 four-leaf clover and violet spade-bloom remain pending review; this decision
 does not publish runtime art or retire rollback sources.
 
+The final static-source reconciliation is recorded in
+`docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/coverage-audit.json`.
+It found the missing Jelly Sorcerer and Power Potion production sources, the
+promised compact First Star and standing-goal treatments, and the active legacy
+Ame portrait's unacceptable teal-eye/short-bob mismatch. Batch 20 supplies fresh
+non-edit candidates for all five. They remain pending review and cannot replace
+runtime pointers. Existing Goblin, title, Poggle, Sprig, and large reward/badge
+art stay deliberately retained; a recipe label alone is not cause to redraw
+strong approved work.
+
 The immutable selection packet is
 `artifacts/art-proofs/mgjrpg-02/v14/`. It includes source comparisons,
 155/103/84/77/64/56/40 px Ame delivery proofs, complete sprites at

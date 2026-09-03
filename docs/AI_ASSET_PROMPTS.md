@@ -1967,8 +1967,8 @@ Reusable production constraints reinforced by these batches:
 - Spring Boots reserve visual priority for their coils; Antidote Leaf adds a
   lavender band and cream droplet as a non-green medicine cue; Science Gears
   use exactly three broad interlocks with one optional focal spark. First Star
-  keeps its approved 512 px shelf art and receives deterministic optical sizes
-  instead of a gratuitous new identity.
+  keeps its approved 512 px shelf identity; its simplified optical source may
+  remove wreath/satellite detail before deterministic 32/48/64 derivatives.
 - Terrain approval requires both seam metrics and a 3x3/5x5 repeat judgement.
   A mathematically clean wrap still fails when a dominant central stone, unique
   masonry arrangement, rosette, or accent cluster exposes the repeat period.
@@ -1976,3 +1976,23 @@ Reusable production constraints reinforced by these batches:
   progressively cooler/darker occlusion, and a compact deepest void. A flat
   dark centre with only a decorative rim is a rejection defect even when the
   silhouette is attractive.
+
+## Plan 03 final static-source coverage — Batch 20
+
+The catalogue/source reconciliation and exact six-run generation history live
+under `docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/`.
+`coverage-audit.json` records why these are genuine gaps or promised optical
+treatments rather than indiscriminate redraws. `PROMPTS.md` preserves the exact
+ImageGen prompts for:
+
+- a fresh, geometry-preserving Jelly Sorcerer;
+- a simplified coral Power Potion;
+- a compact First Star sticker source, including one rejected checkerboard
+  attempt;
+- a simplified upright star goal; and
+- a fresh Ame v02 portrait that restores golden-blonde shoulder-length layered
+  hair, clearly blue irises, and the mint/lavender/backpack identity.
+
+All viable Batch 20 images remain source-only and pending review. Current public
+assets, catalogue pointers, preload behaviour, rights state, and retirement
+ledger are unchanged.

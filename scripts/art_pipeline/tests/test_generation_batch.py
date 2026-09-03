@@ -62,7 +62,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         owners: dict[str, list[str]] = defaultdict(list)
         _validate_generation_batch_documents(errors, warnings, owners)
         self.assertEqual(errors, [])
-        self.assertEqual(len(owners), 232)
+        self.assertEqual(len(owners), 238)
         owner_counts = {
             owner: sum(values == [owner] for values in owners.values())
             for owner in {
@@ -86,6 +86,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
                 "batch:mgjrpg-02-batch-17-enemy-catalogue-completion",
                 "batch:mgjrpg-02-batch-18-hard-leather-work-boots",
                 "batch:mgjrpg-02-batch-19-teleporter-symbol-refinements",
+                "batch:mgjrpg-02-batch-20-final-coverage",
             }
         }
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-01"], 41)
@@ -108,6 +109,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-17-enemy-catalogue-completion"], 6)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-18-hard-leather-work-boots"], 1)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-19-teleporter-symbol-refinements"], 3)
+        self.assertEqual(owner_counts["batch:mgjrpg-02-batch-20-final-coverage"], 6)
         self.assertEqual(
             [warning["code"] for warning in warnings],
             [
@@ -129,8 +131,32 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
                 "generation-batch-pending",
                 "generation-batch-pending",
                 "generation-batch-pending",
+                "generation-batch-pending",
             ],
         )
+
+    def test_final_static_source_coverage_audit_closes_only_named_gaps(self) -> None:
+        audit = read_json(
+            ROOT
+            / "docs"
+            / "source-assets"
+            / "production"
+            / "mgjrpg-02"
+            / "batch-20-final-coverage"
+            / "coverage-audit.json"
+        )
+        self.assertEqual(
+            {row["id"] for row in audit["gapsFound"]},
+            {
+                "enemy-jelly-sorcerer",
+                "potion",
+                "reward-first-star",
+                "goal",
+                "ame-portrait",
+            },
+        )
+        self.assertIn("Human review of Batch 19 and Batch 20 candidates", audit["remainingWorkIsNotMissingSourceGeneration"])
+        self.assertIn("goblin", audit["deliberatelyRetainedWithoutRegeneration"][0]["ids"])
 
     def test_human_source_review_v05_names_only_recorded_runs(self) -> None:
         decision = read_json(

@@ -1,0 +1,15 @@
+{
+  "schema": "maze-human-art-review/v1",
+  "reviewId": "mgjrpg-02-batch-20-input-r01",
+  "recordedOn": "2026-09-03",
+  "scope": "final-static-source-coverage-audit-and-gap-generation",
+  "evidenceKind": "verbatim-conversation-summary",
+  "decisions": [
+    {
+      "status": "generation-authorized",
+      "identities": ["all-uncovered-or-required-refinement-static-art"],
+      "instruction": "Double-check for missing sprites or existing sprites without the final approved art treatment, and proceed with any remaining generation or regeneration."
+    }
+  ],
+  "approvalBoundary": "This authorizes fresh source generation. It is not approval of Batch 19 or Batch 20 pixels and does not publish runtime derivatives, switch catalogue pointers, retire rollback assets, or alter gameplay."
+}
