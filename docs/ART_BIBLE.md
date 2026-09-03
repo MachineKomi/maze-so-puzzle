@@ -260,9 +260,9 @@ finish:
 | --- | --- | --- |
 | Ame static rendering | Fresh B-led 01 | Selected for its clearer small-field-scale read. Candidate C remains the sole identity/construction authority; Fresh 01 controls rendering craft only and cannot override face, hair, pose, cape, socket, silhouette, registration, or any other locked landmark. Fresh 02 is not selected. |
 | Core sampler default | A | Alpaca, Moon Wand, Home/Help sticker icons, terrain and hazard direction evidence use A's chunky construction, high chroma and bright local contours. Terrain/hazard swatches remain direction evidence only until periodic masters pass seam tests. |
-| Tea-Time Skeleton, Classic Slime, Lizard Sword Guard | C | These three explicit core exceptions use C's simpler, toy-readable silhouettes and saturated local contour read while still obeying the shared Maze palette, value and no-global-violet-perimeter rules. |
+| Tea-Time Skeleton friend, Classic Slime, Lizard Sword Guard | C | These three explicit construction/rendering exceptions use C's simpler, toy-readable silhouettes and saturated local contour read while still obeying the shared Maze palette, value and no-global-violet-perimeter rules. Tea-Time Skeleton's later gameplay reclassification does not change his approved pixels. |
 | Current-family transfer | A with restrained B influence | Fox, Goblin, Jelly Sorcerer, First Star, Rose Heart lock/key and door use A's construction, detail ceiling, chroma and contour discipline. B may influence broad interior warmth and three-value shading only; it may not soften silhouettes, add granular texture or reintroduce filigree. |
-| Portal construction | Fresh flower-petal floor pad, with bounded final-pixel correction | Upright magical arches are rejected for this family. Heart, clover and moon portals remain low horizontal pads that are visibly distinct from doors. The Rose Heart centre must become brighter and clearer, and generation must use a uniform plain extraction matte rather than a painted checkerboard. |
+| Portal construction | Fresh flower-petal floor pad, with bounded final-pixel correction | Upright magical arches are rejected for this family. Heart, four-leaf clover, sunny diamond and violet spade-bloom portals remain low horizontal pads that are visibly distinct from doors. Central emblems use bright, tight edge light and generation uses a uniform plain extraction matte rather than a painted checkerboard. |
 | Future-enemy concepts | v03 Wholesome Succubus, Pocket T-Rex, Kappa and Treasure Mimic | These four designs are approved concept/render-family references. Their production masters are authored independently as isolated assets from the locked briefs; no contact-sheet cell may be cropped into a master. |
 
 The two fresh Ame studies, future-enemy transfer, and flower-pad study are recorded in
@@ -277,6 +277,14 @@ still needs the named heart-clarity and flat-matte correction before its cleaned
 pixels can be reviewed. In particular, “from scratch” never relaxes Candidate
 C's identity lock and never permits an edit-derived candidate to become the
 next generation authority.
+
+The later bulk source review is recorded additively in
+`docs/source-assets/calibrations/mgjrpg-02/v05/human-decision.json`. It approves
+the named final source candidates through Batch 18, preserves Tea-Time
+Skeleton's pixels while reclassifying him as a friend, accepts Rose Heart and
+Sunny Diamond, and rejects the literal clubs/spade sources. Batch 19's new
+four-leaf clover and violet spade-bloom remain pending review; this decision
+does not publish runtime art or retire rollback sources.
 
 The immutable selection packet is
 `artifacts/art-proofs/mgjrpg-02/v14/`. It includes source comparisons,
@@ -432,13 +440,19 @@ world,” not “make everything a sticker” or “make everything translucent.
   exception; it contains no gore, broken bone, black void sockets or realism.
 - Shapes must support abstract puff/petal/star/crystal defeat language without
   requiring a violent depiction.
-- The Human-directed future family comprises Tea-Time Skeleton, Classic Slime,
-  Lizard Sword Guard, Lizard Spear Guard, Wholesome Succubus, Pocket T-Rex,
+- The Human-directed future family comprises Classic Slime, Lizard Sword Guard,
+  Lizard Spear Guard, Wholesome Succubus, Pocket T-Rex,
   Cultist (public label pending), Lamia, Soda Slime, Orc Chieftain, Cyclops,
   Minotaur, Warrior Skeleton, Kappa, and Treasure Mimic. These are source-only
   targets until separately approved and placed; they do not retire the existing
   enemy cast or create mechanics. Exact construction and child-safety rules are
   in `docs/enemies/ENEMY_FAMILY_SHEET.md`.
+
+Tea-Time Skeleton is an approved rescue friend, never an enemy. Keep his
+approved bare toy-bone body, seated pose, warm expression, handleless green-tea
+cup and single steam curl unchanged. Friend-family presentation adds no weapon,
+threat pose, Power badge, enemy base, or hostile expression. His construction
+may guide Warrior Skeleton's bone grammar only.
 
 ### Weapons
 
@@ -473,8 +487,13 @@ world,” not “make everything a sticker” or “make everything translucent.
 ### Portals and goal
 
 - Paired portals share low flower-petal floor-pad geometry, ring width, aperture,
-  gem count, value structure and shallow floor-plane cue. Heart, clover, and moon
-  are drawn shapes. Do not replace the pads with upright arches, freestanding
+  gem count, value structure and shallow floor-plane cue. Heart, botanical
+  four-leaf clover, sunny diamond and violet spade-bloom are drawn shapes. The
+  clover must not collapse into a three-lobed clubs glyph. The spade-bloom uses
+  visible petal seams and an organic stem/root construction so it only echoes,
+  rather than reproduces, a playing-card spade. Each emblem has a bright,
+  high-contrast, tightly contained rim light that remains distinct at 40–64 px;
+  broad bloom may not erase its internal shape. Do not replace the pads with upright arches, freestanding
   magical doorways, columns, gates, steps or building silhouettes; doors and
   portals must remain categorically distinct before colour.
 - The upright goal star remains distinct. Aperture is the highest-contrast area;

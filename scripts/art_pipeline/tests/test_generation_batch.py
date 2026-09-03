@@ -62,7 +62,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         owners: dict[str, list[str]] = defaultdict(list)
         _validate_generation_batch_documents(errors, warnings, owners)
         self.assertEqual(errors, [])
-        self.assertEqual(len(owners), 229)
+        self.assertEqual(len(owners), 232)
         owner_counts = {
             owner: sum(values == [owner] for values in owners.values())
             for owner in {
@@ -85,6 +85,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
                 "batch:mgjrpg-02-batch-16-environment-completion",
                 "batch:mgjrpg-02-batch-17-enemy-catalogue-completion",
                 "batch:mgjrpg-02-batch-18-hard-leather-work-boots",
+                "batch:mgjrpg-02-batch-19-teleporter-symbol-refinements",
             }
         }
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-01"], 41)
@@ -106,6 +107,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-16-environment-completion"], 11)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-17-enemy-catalogue-completion"], 6)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-18-hard-leather-work-boots"], 1)
+        self.assertEqual(owner_counts["batch:mgjrpg-02-batch-19-teleporter-symbol-refinements"], 3)
         self.assertEqual(
             [warning["code"] for warning in warnings],
             [
@@ -126,7 +128,56 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
                 "generation-batch-pending",
                 "generation-batch-pending",
                 "generation-batch-pending",
+                "generation-batch-pending",
             ],
+        )
+
+    def test_human_source_review_v05_names_only_recorded_runs(self) -> None:
+        decision = read_json(
+            ROOT
+            / "docs"
+            / "source-assets"
+            / "calibrations"
+            / "mgjrpg-02"
+            / "v05"
+            / "human-decision.json"
+        )
+        batches = {}
+        for path in (ROOT / "docs" / "source-assets" / "production" / "mgjrpg-02").glob(
+            "batch-*/run-record.json"
+        ):
+            batch = read_json(path)
+            batches[batch["batchId"]] = {
+                run["runId"]: run for run in batch["runs"]
+            }
+
+        approved = set()
+        for batch_id, run_ids in decision["approvedByBatch"].items():
+            self.assertIn(batch_id, batches)
+            for run_id in run_ids:
+                self.assertIn(run_id, batches[batch_id])
+                self.assertRegex(batches[batch_id][run_id]["output"]["sha256"], r"^[0-9a-f]{64}$")
+                self.assertNotIn(run_id, approved)
+                approved.add(run_id)
+
+        rejected = {row["runId"] for row in decision["rejected"]}
+        self.assertTrue(rejected.isdisjoint(approved))
+        for row in decision["rejected"]:
+            self.assertIn(row["batchId"], batches)
+            self.assertIn(row["runId"], batches[row["batchId"]])
+
+        taxonomy = decision["taxonomyCorrection"]
+        self.assertIn(taxonomy["runId"], approved)
+        self.assertEqual(taxonomy["to"], "rescue-and-collect friend")
+        self.assertEqual(taxonomy["pixelChange"], "none")
+
+        pending = set(decision["pendingNextReview"])
+        self.assertEqual(
+            pending,
+            {
+                "batch-19-clover-v04",
+                "batch-19-spade-bloom-v02",
+            },
         )
 
 

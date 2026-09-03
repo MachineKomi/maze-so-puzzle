@@ -20,9 +20,14 @@ Field enemies never receive a cream sticker cutline or baked cast shadow.
 
 ## Human-directed roster
 
+Tea-Time Skeleton (`green-tea-skeleton`) was reclassified by the Human on
+2026-09-03 as a rescue-and-collect friend. Its approved sprite is unchanged,
+but it is excluded from this enemy roster and must never enter enemy catalogue,
+Power, encounter, or defeat flows. Warrior Skeleton may still share its
+toy-bone construction grammar.
+
 | Planned ID | Child-facing working name | Construction and emotional contract | Hard exclusions |
 | --- | --- | --- | --- |
-| `green-tea-skeleton` | Tea-Time Skeleton | Courteous toy-ivory skeleton calmly holding a mint ceramic teacup and saucer; one steam curl anchors the silhouette. The humour is the original contrast of a spooky dungeon archetype doing something politely ordinary. | No copied pose/costume/composition; no realistic bone, gore, broken anatomy, void sockets or horror. |
 | `classic-slime` | Classic Slime | Low rounded gel mass, broad face plane and simple generic fantasy-slime read with no accessory. | No franchise-specific droplet, face construction or colour dependency. |
 | `lizard-swordsman` | Lizard Sword Guard | Stout mint-scaled guardian, broad tail, coral scarf and blunt leaf-shaped practice sword held sideways. | No weapon toward camera, wounds or implied special attack. |
 | `lizard-spearman` | Lizard Spear Guard | Same eventual approved lizard anatomy and registration as the sword sibling; side-facing padded spear creates a clearly different diagonal/horizontal silhouette. | Not a separately improvised species; no reach or ranged mechanic implied. |
@@ -41,7 +46,7 @@ Field enemies never receive a cream sticker cutline or baked cast shadow.
 The existing Blueberry Slime, Jelly Sorcerer and Candy Mimic do not satisfy
 Classic Slime, Soda Slime or Treasure Mimic and are not silently retired. If all
 current enemies remain, this future family would eventually expand the runtime
-roster from 12 to 27.
+roster from 12 to 26.
 
 ## Human-selected rendering and concept matrix — 2026-09-03
 
@@ -50,7 +55,7 @@ The Human selected the following high-level directions:
 
 | Enemy | Selected comparison | What is carried forward |
 | --- | --- | --- |
-| Tea-Time Skeleton | Core Direction C | Toy-readable bone masses, tea/teacup silhouette and saturated local contours; not C's global violet perimeter or enamel finish |
+| Tea-Time Skeleton (friend) | Core Direction C | Historical rendering selection retained for the unchanged friend sprite: toy-readable bone masses, tea/teacup silhouette and saturated local contours; not C's global violet perimeter or enamel finish |
 | Classic Slime | Core Direction C | Simplest rounded gel silhouette, large face and very few interior marks |
 | Lizard Sword Guard | Core Direction C | Chunky upright anatomy, clear short-sword read and strong optical separation |
 | Wholesome Succubus | Extension Direction A | Friendly confident silhouette, covered lavender/coral outfit and magical gesture, simplified to the shared family detail ceiling |
@@ -69,7 +74,7 @@ art. The future-enemy default is therefore a new blank-canvas hybrid:
   softly luminous colour relationships and one restrained gouache facet per
   material. It may not soften silhouettes or add microtexture.
 - Core Direction C remains an explicit construction/optical exception for the
-  Tea-Time Skeleton, Classic Slime and Lizard Sword Guard only. Lizard Spear
+  Tea-Time Skeleton friend, Classic Slime and Lizard Sword Guard only. Lizard Spear
   later shares the approved lizard body sheet; Warrior Skeleton shares the
   approved toy-bone sheet.
 - Contact-sheet cells never become identity masters, production sprites or
@@ -87,8 +92,9 @@ cropped, cleaned, or edited into those masters.
 
 ## Shared construction groups
 
-- **Skeletons:** one approved toy-bone anatomy sheet; tea and warrior variants
-  share skull, rib, hand, foot, pivot and face grammar.
+- **Skeletons:** one approved toy-bone anatomy sheet; the Tea-Time Skeleton
+  friend and Warrior Skeleton enemy share skull, rib, hand, foot, pivot and face
+  grammar without sharing gameplay taxonomy.
 - **Slimes:** one gel/material framework; classic uses the quietest mass, soda
   uses large bubbles and a straw, while existing berry/jelly identities remain
   separate.
@@ -104,7 +110,7 @@ cropped, cleaned, or edited into those masters.
 
 ## Production and provenance sequence
 
-1. The rendering-direction gate compares Tea-Time Skeleton, Classic Slime,
+1. The historical rendering-direction gate compared Tea-Time Skeleton, Classic Slime,
    Lizard Sword Guard, Wholesome Succubus, Pocket T-Rex and Treasure Mimic.
 2. After a rendering direction is approved, transfer-test Warrior Skeleton,
    Soda Slime, Lizard Spear Guard, Cultist and Kappa.

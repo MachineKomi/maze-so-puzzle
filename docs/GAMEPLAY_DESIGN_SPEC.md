@@ -25,6 +25,18 @@ The ordinary-animal family is Bunny, Fox, Kitten, Puppy, Duckling, Hedgehog, Faw
 
 The planned mythic-friend family is Ripplecap Kappa Hatchling, Pitter-Patter Parasol, Mallowmusk Aroma Wisp, Lanternling, Breezeling Sylph, Griffin Cub, Emberbelly Dragonling, Cloudstep Pegasus Foal, Three-Tumble Cerberus Pup, Riddlekit Sphinx, Tidecurl Hippocamp Foal, Emberdown Phoenix Chick, Meadowstep Faunling, Minerva Moon-Owl, and Tessera Dolphin. These are original Maze so Puzzle interpretations of broad folklore, fantasy-JRPG, Greek, and Roman ideas. They must not reproduce franchise designs or turn cultural source material into horror caricature.
 
+Tea-Time Skeleton (`green-tea-skeleton`) is also a planned rescue-and-collect
+friend. He is the courteous toy-ivory skeleton who sits peacefully with a
+traditional handleless cup of green tea and one steam curl. His approved sprite
+and gentle visual joke are unchanged; he is not an enemy, guardian, combat
+encounter, or Power check. When published, authored content must place him in a
+friend rescue/care context and use friend persistence rather than enemy state.
+
+The Human-requested unicorn—white fur, light-pink markings and mane, and a
+rainbow horn—is an additional planned rescue-and-collect friend. Consume its
+final public name and stable species ID from Plan 03's approved catalogue when
+published; do not invent a competing runtime identity from this prose.
+
 Art and content rules for this roster:
 
 - Every friend needs a distinct stable ID, display name, source/provenance record, cage-safe face area, and readable 40/56/84 px silhouette before catalogue admission.

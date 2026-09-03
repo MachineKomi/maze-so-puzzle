@@ -1,0 +1,108 @@
+{
+  "schema": "maze-art-human-source-decision/v1",
+  "decisionId": "mgjrpg-02-human-source-review-v05",
+  "reviewedBy": "Human project owner",
+  "reviewedAt": "2026-09-03",
+  "scope": "selected source-design and rendering approval; taxonomy correction; teleporter replacement request",
+  "decision": "Approve all otherwise-selected new and refreshed art presented through Batch 18. Tea-Time Skeleton keeps its approved pixels but becomes a rescue-and-collect friend. Retain Rose Heart and Sunny Diamond teleporter sources; reject the literal clubs and spade sources and replace them with botanical, brighter-edged Batch 19 candidates for later review.",
+  "approvedByBatch": {
+    "mgjrpg-02-batch-02": [
+      "batch-02-nav-help-v02", "batch-02-nav-book-v02", "batch-02-nav-restart-v02",
+      "batch-02-nav-sound-v03", "batch-02-nav-mazes-v04", "batch-02-hazard-water-v03",
+      "batch-02-hazard-lava-v03", "batch-02-hazard-poison-v02", "batch-02-hazard-hole-v04"
+    ],
+    "mgjrpg-02-batch-03-friends": [
+      "batch-03-bunny-a", "batch-03-fox-a", "batch-03-kitten-a", "batch-03-puppy-b",
+      "batch-03-duckling-a", "batch-03-hedgehog-b", "batch-03-otter-a", "batch-03-lamb-a",
+      "batch-03-alpaca-a", "batch-03-penguin-a"
+    ],
+    "mgjrpg-02-batch-04-mythic-friends": [
+      "batch-04-pitter-patter-parasol-a", "batch-04-lanternling-a",
+      "batch-04-emberdown-phoenix-a", "batch-04-meadowstep-faunling-a",
+      "batch-04-minerva-moon-owl-a", "batch-04-tessera-dolphin-a"
+    ],
+    "mgjrpg-02-batch-05-weapons": [
+      "batch-05-star-sword-a", "batch-05-cupcake-mace-a", "batch-05-moon-wand-b",
+      "batch-05-flower-sabre-a", "batch-05-sun-mallet-a", "batch-05-comet-spear-a"
+    ],
+    "mgjrpg-02-batch-06-cages": ["batch-06-garden-vine-a", "batch-06-moon-silver-b"],
+    "mgjrpg-02-batch-07-locks-doors": [
+      "batch-07-key-rose-heart-a", "batch-07-key-blue-star-a", "batch-07-key-sunny-sun-a",
+      "batch-07-door-blue-star-a", "batch-07-door-rose-heart-b", "batch-07-door-sunny-sun-b"
+    ],
+    "mgjrpg-02-batch-08-enemy-refresh": [
+      "batch-08-pebble-golem-a", "batch-08-candy-mimic-a", "batch-08-cloud-gremlin-a"
+    ],
+    "mgjrpg-02-batch-09-item-refresh": [
+      "batch-09-spring-boots-a", "batch-09-antidote-leaf-a", "batch-09-science-gears-a"
+    ],
+    "mgjrpg-02-batch-10-environment-canaries": [
+      "batch-10-woodland-floor-a", "batch-10-sunny-floor-b",
+      "batch-10-lavender-wall-b", "batch-10-hedge-b"
+    ],
+    "mgjrpg-02-batch-11-environment-outliers": [
+      "batch-11-meadow-b", "batch-11-amethyst-b", "batch-11-bramble-b"
+    ],
+    "mgjrpg-02-batch-12-enemy-corrections": [
+      "batch-12-lizard-sword-v03", "batch-12-lizard-spear-v03", "batch-12-pocket-trex-v03",
+      "batch-12-orc-v03", "batch-12-warrior-skeleton-v03", "batch-12-tea-skeleton-v03",
+      "batch-12-cultist-v03", "batch-12-blueberry-slime-v03"
+    ],
+    "mgjrpg-02-batch-13-ui-portals-equipment": [
+      "batch-13-nav-muted-v02", "batch-13-nav-home-v03", "batch-13-app-icon-ame-v03",
+      "batch-13-portal-heart-v03", "batch-13-portal-diamond-v01", "batch-13-leaf-blade-v03",
+      "batch-13-ring-blade-v01", "batch-13-golden-cage-v03", "batch-13-wood-cage-v03"
+    ],
+    "mgjrpg-02-batch-14-friend-edge-refinements": [
+      "batch-14-fawn-edge-v03", "batch-14-red-panda-edge-v03", "batch-14-capybara-edge-v03",
+      "batch-14-chinchilla-edge-v03", "batch-14-koala-edge-v03", "batch-14-mallowmusk-edge-v02",
+      "batch-14-breezeling-edge-v02", "batch-14-griffin-edge-v02", "batch-14-dragonling-edge-v02",
+      "batch-14-pegasus-edge-v02", "batch-14-cerberus-edge-v02", "batch-14-sphinx-edge-v02",
+      "batch-14-hippocamp-edge-v02", "batch-14-kappa-v02", "batch-14-unicorn-v01"
+    ],
+    "mgjrpg-02-batch-15-chests-pickups-hazards": [
+      "batch-15-treasure-mimic-closed", "batch-15-treasure-mimic-stars",
+      "batch-15-candy-mimic-closed", "batch-15-candy-mimic-stars", "batch-15-star-chest",
+      "batch-15-star-bag", "batch-15-science-beaker", "batch-15-science-magnifier",
+      "batch-15-science-telescope", "batch-15-science-book", "batch-15-normal-boots",
+      "batch-15-ice-skates", "batch-15-floor-spikes"
+    ],
+    "mgjrpg-02-batch-16-environment-completion": [
+      "batch-16-rose-brick-floor", "batch-16-moon-slate-floor", "batch-16-pearl-shell-floor",
+      "batch-16-peach-leafstone-floor", "batch-16-mossy-ruin-wall", "batch-16-dark-dungeon-wall",
+      "batch-16-golden-sandstone-wall", "batch-16-garden-dressing", "batch-16-vines-dressing",
+      "batch-16-crystal-dressing", "batch-16-autumn-dressing"
+    ],
+    "mgjrpg-02-batch-17-enemy-catalogue-completion": [
+      "batch-17-mushroom-imp", "batch-17-moon-bat", "batch-17-acorn-knight",
+      "batch-17-bubble-dragon", "batch-17-pumpkin-sprite", "batch-17-clockwork-crab"
+    ],
+    "mgjrpg-02-batch-18-hard-leather-work-boots": ["batch-18-hard-leather-work-boots"]
+  },
+  "rejected": [
+    {
+      "batchId": "mgjrpg-02-batch-13-ui-portals-equipment",
+      "runId": "batch-13-portal-clubs-v03",
+      "reason": "The centre is too literally the playing-card clubs symbol; replace with a four-leaf botanical clover and brighter local edge glow."
+    },
+    {
+      "batchId": "mgjrpg-02-batch-13-ui-portals-equipment",
+      "runId": "batch-13-portal-spade-v01",
+      "reason": "The centre is too literally the playing-card spade; replace with a more original stylised emblem and brighter local edge glow."
+    }
+  ],
+  "taxonomyCorrection": {
+    "runId": "batch-12-tea-skeleton-v03",
+    "stableId": "green-tea-skeleton",
+    "from": "enemy/guardian",
+    "to": "rescue-and-collect friend",
+    "pixelChange": "none",
+    "rule": "Never place this identity in enemy, Power, encounter or defeat flows."
+  },
+  "pendingNextReview": [
+    "batch-19-clover-v04",
+    "batch-19-spade-bloom-v02"
+  ],
+  "approvalMeaning": "The named source pixels and rendering are approved for deterministic derivative QA and later catalogue proposals. Rights, runtime publication, catalogue switching, preload changes, performance allocation and retirement remain separate gates.",
+  "rollback": "Every approved, rejected and superseded generator original remains immutable and hash-bound in its production batch. Current runtime pointers are unchanged."
+}

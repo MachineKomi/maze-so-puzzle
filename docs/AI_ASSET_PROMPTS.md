@@ -1647,7 +1647,6 @@ communicate challenge only.
 
 | Planned ID | Reusable primary-request kernel | Hard exclusions |
 | --- | --- | --- |
-| `green-tea-skeleton` | One courteous toy-ivory skeleton calmly drinking visible green tea from a small mint ceramic teacup and saucer; one steam curl; the original joke is a spooky dungeon archetype doing something politely ordinary. | No copied character, pose, costume or composition; no realistic bone, gore, broken anatomy, void sockets or horror. |
 | `classic-slime` | One traditional low rounded fantasy gel creature with a broad friendly face plane and the simplest unmistakable slime silhouette; no accessory. | No franchise-specific droplet, face construction, palette dependency or brand cue. |
 | `lizard-swordsman` | One stout mint-scaled upright lizard guardian with a broad tail, coral scarf and blunt leaf-shaped practice sword held sideways. | No blade toward camera, wound, aggression or implied special attack. |
 | `lizard-spearman` | The same approved lizard species construction, with a side-facing padded spear creating a clean diagonal/horizontal silhouette distinct from the sword sibling. | No improvised second species, thrust toward camera, reach or ranged mechanic implication. |
@@ -1663,7 +1662,19 @@ communicate challenge only.
 | `kappa` | One respectful rounded river guardian with head dish, shell, gentle beak, playful expression and a Maze-native water palette. | No crude folklore joke, existing mascot resemblance, caricature or drowning implication. |
 | `classic-mimic` | One warm wooden treasure chest that reads as visibly alive: one large friendly eye, plum lid-mouth, broad toy-like teeth, gold fittings and short grounded feet. | No hidden/reveal requirement, child in a chest, gore, saliva, tongue attack or needle teeth. |
 
-The Tea-Time and Warrior skeletons share one approved toy-bone construction;
+Tea-Time Skeleton is now a rescue-and-collect friend, not an enemy. Preserve
+the approved sprite and use the following friend-family kernel for any future
+optical derivative or presentation proof; do not regenerate its identity:
+
+```text
+Tea-Time Skeleton friend: preserve the approved bare toy-ivory skeleton,
+friendly seated pose, warm eye presence, traditional handleless cup of vivid
+green tea and one steam curl. Present as a peaceful rescue/garden friend. No
+weapon, enemy base, Power badge, challenge pose, defeat cue, realistic bone,
+gore, broken anatomy, void sockets, costume addition or horror.
+```
+
+The Tea-Time friend and Warrior Skeleton enemy share one approved toy-bone construction;
 the two lizard guards share one approved body/scale/tail sheet; the slime family
 shares one gel-material grammar without erasing the existing Blueberry Slime or
 Jelly Sorcerer identities. Contact-sheet cells are review evidence only and may
@@ -1686,8 +1697,8 @@ The Human selected a per-family recipe:
   prior B is the fallback. Candidate C remains the sole identity/construction
   authority. Never supply prior B or another fresh attempt as a generation
   input.
-- Core sampler: A by default; C only for Tea-Time Skeleton, Classic Slime and
-  Lizard Sword Guard.
+- Core sampler: A by default; C only for Tea-Time Skeleton's retained friend
+  rendering, Classic Slime and Lizard Sword Guard.
 - Current family: A construction, detail ceiling, chroma and contours; B may
   influence broad interior colour and three-value shading only.
 - Future extension: B concept cues for T-Rex, Kappa and Mimic; A concept cues
@@ -1695,6 +1706,21 @@ The Human selected a per-family recipe:
   treatment.
 - Portals: low flower-petal floor pads are a locked category. Do not turn them
   into upright magical doors or arches.
+
+### Teleporter emblem refinement addendum v5
+
+- Preserve the approved Rose Heart v03 and Sunny Diamond v01 sources.
+- Mint Clover uses four individually readable botanical leaves and a short
+  curved stem. Never substitute the literal three-lobed clubs suit.
+- Violet Spade uses an original three-petal night bloom with visible petal
+  seams and an organic stem/root. Its overall read may echo a spade for pairing,
+  but a literal playing-card glyph is rejected.
+- Give each centre emblem a bright cream-tinted local edge light in its family
+  hue. Keep the luminous rim crisp at 40–64 px and any bloom tight enough that
+  the interior construction stays readable.
+- Use genuine alpha or a perfectly uniform `#00FF00` extraction matte. A
+  painted checkerboard, grid, gradient or background texture is automatic
+  rejection evidence, never a source master.
 
 ### Clean-base anti-accumulation block
 

@@ -1,0 +1,35 @@
+{
+  "schema": "maze-human-art-review/v1",
+  "reviewId": "mgjrpg-02-batch-19-input-r01",
+  "recordedOn": "2026-09-03",
+  "scope": "teleporter-symbol-refinement-and-source-approval",
+  "evidenceKind": "verbatim-conversation-summary",
+  "decisions": [
+    {
+      "status": "approved-source",
+      "identities": ["rose-heart", "sunny-diamond"],
+      "instruction": "Retain the existing fresh flower-pad constructions. The Rose Heart is approved as-is; the Sunny Diamond is also accepted without a new source pass."
+    },
+    {
+      "status": "replacement-requested",
+      "identities": ["mint-clover"],
+      "instruction": "Replace the literal clubs glyph with an unmistakable botanical four-leaf clover while keeping the flower-pad family and making the emblem-edge glow brighter and clearer."
+    },
+    {
+      "status": "replacement-requested",
+      "identities": ["violet-spade"],
+      "instruction": "Replace the literal playing-card spade with a more original stylised Puzzlewild emblem that remains pair-readable, and make its emblem-edge glow brighter and clearer."
+    },
+    {
+      "status": "friend-reclassification",
+      "identities": ["tea-time-skeleton"],
+      "instruction": "Preserve the approved sprite unchanged and reclassify the courteous green-tea-drinking skeleton as a rescue-and-collect friend, never an enemy or guardian."
+    },
+    {
+      "status": "approved-by-exception-review",
+      "identities": ["all-other-presented-new-and-refreshed-art"],
+      "instruction": "All other new and additional refreshed sprites presented before this response are source-design and rendering approved. This does not itself publish runtime derivatives or retire rollback assets."
+    }
+  ],
+  "approvalBoundary": "Source-design approval does not waive alpha, registration, provenance, rights, catalogue, performance, build or runtime-publication gates. The new Batch 19 clover and spade outputs remain pending a later Human review."
+}
