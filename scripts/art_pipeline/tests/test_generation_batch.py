@@ -62,7 +62,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         owners: dict[str, list[str]] = defaultdict(list)
         _validate_generation_batch_documents(errors, warnings, owners)
         self.assertEqual(errors, [])
-        self.assertEqual(len(owners), 164)
+        self.assertEqual(len(owners), 172)
         owner_counts = {
             owner: sum(values == [owner] for values in owners.values())
             for owner in {
@@ -78,6 +78,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
                 "batch:mgjrpg-02-batch-09-item-refresh",
                 "batch:mgjrpg-02-batch-10-environment-canaries",
                 "batch:mgjrpg-02-batch-11-environment-outliers",
+                "batch:mgjrpg-02-batch-12-enemy-corrections",
             }
         }
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-01"], 41)
@@ -92,9 +93,11 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-09-item-refresh"], 3)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-10-environment-canaries"], 7)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-11-environment-outliers"], 6)
+        self.assertEqual(owner_counts["batch:mgjrpg-02-batch-12-enemy-corrections"], 8)
         self.assertEqual(
             [warning["code"] for warning in warnings],
             [
+                "generation-batch-pending",
                 "generation-batch-pending",
                 "generation-batch-pending",
                 "generation-batch-pending",
