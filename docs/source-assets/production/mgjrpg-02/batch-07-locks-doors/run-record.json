@@ -1,0 +1,465 @@
+{
+  "batchId": "mgjrpg-02-batch-07-locks-doors",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-03",
+  "purpose": "Fresh source masters for the three shape-and-colour-coded key/door pairs on shared simplified anatomy. Two rejected four-hinge door attempts remain negative evidence. This source-only batch does not publish runtime art.",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "revision": 4,
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+    "bytes": 8645
+  },
+  "decisionEvidence": {
+    "decisionId": "mgjrpg-02-human-selection-v04",
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json",
+    "scope": "rendering-recipe-and-controlled-source-production",
+    "sha256": "306ab2b3781c741ba7c912fdc1da8fd81abde28b842d669e5d384233209b99e3",
+    "bytes": 6945
+  },
+  "promptFile": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/PROMPTS.md",
+    "fidelity": "exact-as-submitted-from-generation-transcript",
+    "sha256": "140daa31335e8bf4b47d5e8ce8dc3a1d510149b96301d6ebaf99e450c8f664b8",
+    "bytes": 13073
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in image generation capability",
+    "model": "not exposed by the tool response",
+    "seed": "not exposed by the tool response",
+    "nativeOutput": {
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque"
+    }
+  },
+  "nativeCanvasException": {
+    "appliesToEveryOutput": true,
+    "actual": [
+      1254,
+      1254
+    ],
+    "canonicalPolicy": "Canonical structure and item masters normally use a documented 2048 square working canvas before registration.",
+    "exception": "The built-in generator returned 1254-square originals; immutable originals stay native and deterministic derivatives enforce delivery dimensions."
+  },
+  "lineagePolicy": {
+    "identityReference": "current runtime art is semantic-only",
+    "renderingAuthority": "Human-approved sources only",
+    "editOfEdit": "forbidden",
+    "boardCropAsMaster": "forbidden"
+  },
+  "reviewProtocol": {
+    "batchProofStatus": "awaiting bulk Human review",
+    "decisionRule": "After presentation and explicit response, valid unlisted candidates may be approved by default and named exceptions rejected.",
+    "silenceRule": "Silence is not approval.",
+    "candidateBoundary": "Source approval does not switch runtime or retire previous art."
+  },
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and ordered semantic/rendering references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "releaseStatus": "not-approved"
+  },
+  "runtimeImpact": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0,
+    "web": "none-source-only",
+    "tauri": "none-source-only",
+    "ipad": "none-source-only",
+    "tv": "none-source-only"
+  },
+  "rollback": {
+    "method": "Keep immutable originals, exact prompts, deterministic derivatives, rejected sources, and Human review evidence. Runtime pointers remain unchanged.",
+    "runtimeRollbackRequired": false
+  },
+  "schema": "maze-art-generation-batch/v1",
+  "referenceRegistry": {
+    "rose-pad-rendering-v02": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/portal-rose-heart-v02-512.png",
+      "authorityKind": "human-approved-rendering-and-rose-family-reference",
+      "sha256": "f7ac1c99fa1dd62fc5c4b602f4d78c998128b17d37f13c9da3d77f79f1f90ff2",
+      "bytes": 307318
+    },
+    "identity-key-rose-heart-v01": {
+      "path": "public/assets/key-rose-heart-v1.png",
+      "authorityKind": "current-runtime-semantic-reference-only",
+      "sha256": "394a6e7b8f48df1056412342124370dfb288f7ad720ff8942431a63364dd70aa",
+      "bytes": 200635
+    },
+    "identity-key-blue-star-v01": {
+      "path": "public/assets/star-key.png",
+      "authorityKind": "current-runtime-semantic-reference-only",
+      "sha256": "ef9dae2c22ad5030e77916f44f19e04ad09dc8a41ef14317e0f66e07fc4ee691",
+      "bytes": 177010
+    },
+    "identity-key-sunny-sun-v01": {
+      "path": "public/assets/key-sunny-sun-v1.png",
+      "authorityKind": "current-runtime-semantic-reference-only",
+      "sha256": "4f240f118d44c87c126b17e7bd8e0be6befbdd85d1a8a399b664fbb0f855cf8d",
+      "bytes": 212891
+    },
+    "identity-door-rose-heart-v01": {
+      "path": "public/assets/door-rose-heart-v1.png",
+      "authorityKind": "current-runtime-semantic-reference-only",
+      "sha256": "8d9fa5753cbae835d75efd7e645365f11fd1ba53d281835226186fe4b5bd43fc",
+      "bytes": 491975
+    },
+    "identity-door-blue-star-v01": {
+      "path": "public/assets/star-door.png",
+      "authorityKind": "current-runtime-semantic-reference-only",
+      "sha256": "b5ae4223b037e31b266e99f59d360819424786d495c71745dece6b7394708cb9",
+      "bytes": 349389
+    },
+    "identity-door-sunny-sun-v01": {
+      "path": "public/assets/door-sunny-sun-v1.png",
+      "authorityKind": "current-runtime-semantic-reference-only",
+      "sha256": "1cf753ebaf413b55a8aa981fceabfbae14a51091dfbc67710bb8ee9862a04f5d",
+      "bytes": 443653
+    }
+  },
+  "runs": [
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-key-rose-heart-a",
+      "promptBlockId": "key-rose-heart-v02-candidate-a",
+      "identityId": "key-rose-heart",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-rose-heart-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-e136d884-06da-47aa-be54-61b6279d897b.png",
+        "sha256": "164a2d85ec3ab33c59736cfd4931aa7db1a0e88d413d0258fa3538cd1cebf5ba",
+        "bytes": 1269601,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh simplified shape-coded key awaits bulk review."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-key-rose-heart-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    },
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-key-blue-star-a",
+      "promptBlockId": "key-blue-star-v02-candidate-a",
+      "identityId": "key-blue-star",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-blue-star-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-3cc861ed-3ca9-44be-bb1a-87ad2459ee7c.png",
+        "sha256": "4339e7e61f180fba24bf76c4153d2401e78c059fa8623290a9a933256b752b16",
+        "bytes": 1263937,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh simplified shape-coded key awaits bulk review."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-key-blue-star-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    },
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-key-sunny-sun-a",
+      "promptBlockId": "key-sunny-sun-v02-candidate-a",
+      "identityId": "key-sunny-sun",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-sunny-sun-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-8ef7e5b0-7cc5-4226-89d6-d714e8010c6d.png",
+        "sha256": "7d45328238bdfa543ac4941ad8dc59816f954234924b8f52ab8b0d6270e787eb",
+        "bytes": 1290964,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh simplified shape-coded key awaits bulk review."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-key-sunny-sun-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    },
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-door-rose-heart-a",
+      "promptBlockId": "door-rose-heart-v02-candidate-a",
+      "identityId": "door-rose-heart",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/door-rose-heart-v02-candidate-a-rejected-four-hinges-faceted-heart-matte-01-generator-original.png",
+        "outputId": "exec-dd7fb4a1-9192-4d05-845d-80a2cd0108e1.png",
+        "sha256": "dd9340b61e1ea5e468339bed3ce1538ea2724e41baddd910538fb674abe494c1",
+        "bytes": 1622964,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reason": "Rejected for four hinge straps and an over-faceted gem-like heart that breaks shared anatomy and material simplicity."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-door-rose-heart-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    },
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-door-blue-star-a",
+      "promptBlockId": "door-blue-star-v02-candidate-a",
+      "identityId": "door-blue-star",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/door-blue-star-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-cd71e09a-bb94-450b-b61c-f73500bf5d21.png",
+        "sha256": "d77a1109fe30dbf732be676e01ac6fa7bbc718130d36ea401d37f7c9c9b04a20",
+        "bytes": 1637068,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh two-hinge shape-coded door awaits bulk review."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-door-blue-star-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    },
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-door-sunny-sun-a",
+      "promptBlockId": "door-sunny-sun-v02-candidate-a",
+      "identityId": "door-sunny-sun",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/door-sunny-sun-v02-candidate-a-rejected-four-hinges-matte-01-generator-original.png",
+        "outputId": "exec-fbf83065-8a2c-4867-8e8d-091749ce496b.png",
+        "sha256": "e4ce7957907e5a6357a85c3d01c65e3f74d5069aa65e5e3d40200a7a07b1af00",
+        "bytes": 1506801,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reason": "Rejected for four hinge straps, which breaks the shared two-hinge door anatomy."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-door-sunny-sun-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    },
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-door-rose-heart-b",
+      "promptBlockId": "door-rose-heart-v02-candidate-b",
+      "identityId": "door-rose-heart",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/door-rose-heart-v02-candidate-b-matte-01-generator-original.png",
+        "outputId": "exec-388a23d7-d6ca-48f9-be37-cd6088f43798.png",
+        "sha256": "206438d107f1e990a5428460ebf21ed118f015be1a0927b7f060b973570cfa91",
+        "bytes": 1632394,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Corrected two-hinge smooth-heart door awaits bulk review."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-door-rose-heart-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    },
+    {
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-07-door-sunny-sun-b",
+      "promptBlockId": "door-sunny-sun-v02-candidate-b",
+      "identityId": "door-sunny-sun",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/door-sunny-sun-v02-candidate-b-matte-01-generator-original.png",
+        "outputId": "exec-66d0ef2f-b07a-4240-8988-1affd8baed6e.png",
+        "sha256": "9f98c5c59dcd64d342ad55cfde275e0505b5c79bacdbc9591b045e88ff3611c0",
+        "bytes": 1535297,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Corrected two-hinge smooth-sun door awaits bulk review."
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "identity-door-sunny-sun-v01",
+          "role": "current key or door semantic identity only; no pixel copying"
+        },
+        {
+          "order": 2,
+          "referenceId": "rose-pad-rendering-v02",
+          "role": "approved chunky rendering, bright chromatic contour and restrained family craft"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "runCount": 8,
+    "rejectedBackgroundInvalidCount": 0,
+    "pendingHumanCandidateCount": 6,
+    "humanApprovedSourceCount": 0,
+    "humanRejectedSourceCount": 0,
+    "artDirectorRejectedSourceCount": 2,
+    "generatorOriginalEncodedBytes": 11759026,
+    "generatorOriginalDecodedBytesUpperBound": 50320512
+  }
+}

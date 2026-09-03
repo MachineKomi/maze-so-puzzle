@@ -1856,7 +1856,7 @@ without moving or deleting runtime assets. Keep versioned rollback files until
 Plan 12 after all later consumers and catalogue pointers are final, and never
 place an archive beneath `public/assets`.
 
-## Plan 03 production batches 02–06 — forward-only source record
+## Plan 03 production batches 02–08 — forward-only source record
 
 The exact prompts, ordered reference roles, immutable generator output IDs,
 hashes, byte counts, dispositions, and rollback boundaries for current volume
@@ -1880,6 +1880,13 @@ production live beside their source masters:
   constructions for all four cage materials. Constraint failures and the
   Storybook Wood attempt with a baked offset layer remain rejected evidence;
   corrected three-bar, neutral-lighting candidates await bulk review.
+- `docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/` — fresh
+  shape-and-colour-coded Heart, Star, and Sun keys and doors. The preferred
+  doors share a two-hinge, two-leaf, cream-stone anatomy; four-hinge attempts
+  remain rejected evidence.
+- `docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/` — fresh
+  Blueberry Slime, Pebble Golem, Candy Mimic, and Cloud Gremlin sources that
+  address the four current-enemy outliers identified by Plan 03.
 
 Do not reconstruct a source from this summary. The adjacent `PROMPTS.md` files
 are the exact historical prompt authority, and each `run-record.json` binds
@@ -1911,3 +1918,10 @@ Reusable production constraints reinforced by these batches:
   shading and occlusion at their joinery, but no duplicate/drop-shadow layer
   may sit behind them. All material variants preserve exactly three slim inner
   bars, two outer posts, one top rail, one bottom rail, and one centered lock.
+- Key/door families repeat one large semantic motif and one shared construction;
+  colour is reinforced by the Heart, Star, or Sun silhouette rather than being
+  the only cue. Paired floor portals remain the existing flower-pad category and
+  are not regenerated merely to acquire an `mgjrpg-02` label.
+- A Candy Mimic must read as a living chest, not a child inside a costume. Pale
+  Cloud Gremlin materials require a strong blue-plum contour; the Pebble Golem
+  uses fewer rounded stone masses and avoids foreshortened threatening fists.
