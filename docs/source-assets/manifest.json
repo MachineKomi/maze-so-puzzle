@@ -115,8 +115,8 @@
       },
       {
         "path": "scripts/art_pipeline/tests/test_generation_batch.py",
-        "sha256": "bb1b74b1c766c3e5993273a57cd4e5ede1ece5dc64ca9a8f9b8b594a2020ee38",
-        "bytes": 5349
+        "sha256": "2315017fce54a3c8c1fd61343ff5919d66f1bb2a62da1e24f4439ae014ee726f",
+        "bytes": 5554
       },
       {
         "path": "scripts/art_pipeline/tests/test_mgjrpg02_batch01.py",
@@ -318,6 +318,14 @@
         "bytes": 20948,
         "referencedBy": [
           "batch:mgjrpg-02-batch-14-friend-edge-refinements"
+        ]
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/PROMPTS.md",
+        "sha256": "0a0f8f6121dda83411ee44e372497400d1998fc04b91edaf2d0b70e8f4249dcb",
+        "bytes": 15220,
+        "referencedBy": [
+          "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
         ]
       }
     ],
@@ -621,6 +629,26 @@
         "approvedDerivativeCount": 0,
         "approvedDerivativeEncodedBytes": 0,
         "approvedDerivativeDecodedBytesUpperBound": 0
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/run-record.json",
+        "sha256": "5516e4dc6bd4c20734de80f4c5aa189409d7e831a7cf017807a7198f73e8f6fa",
+        "bytes": 23441,
+        "batchId": "mgjrpg-02-batch-15-chests-pickups-hazards",
+        "revision": 1,
+        "status": "pending-human-review",
+        "promptFile": {
+          "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/PROMPTS.md",
+          "fidelity": "exact-as-submitted-from-generation-transcript",
+          "sha256": "0a0f8f6121dda83411ee44e372497400d1998fc04b91edaf2d0b70e8f4249dcb",
+          "bytes": 15220
+        },
+        "runCount": 13,
+        "generatorOriginalEncodedBytes": 16322426,
+        "generatorOriginalDecodedBytesUpperBound": 81772512,
+        "approvedDerivativeCount": 0,
+        "approvedDerivativeEncodedBytes": 0,
+        "approvedDerivativeDecodedBytesUpperBound": 0
       }
     ],
     "renderingRecipes": [
@@ -785,13 +813,13 @@
     "runtimeImageCount": 125,
     "runtimeEncodedBytes": 39173427,
     "runtimeDecodedBytesUpperBound": 183011232,
-    "sourceImageCount": 310,
-    "sourceEncodedBytes": 444595830,
+    "sourceImageCount": 323,
+    "sourceEncodedBytes": 460918256,
     "unreferencedSourceImageCount": 3,
-    "generationBatchCount": 15,
-    "generationBatchOutputCount": 173,
-    "generationBatchEncodedBytes": 259435432,
-    "generationBatchDecodedBytesUpperBound": 1088183964,
+    "generationBatchCount": 16,
+    "generationBatchOutputCount": 186,
+    "generationBatchEncodedBytes": 275757858,
+    "generationBatchDecodedBytesUpperBound": 1169956476,
     "renderingRecipeFileCount": 1,
     "renderingRecipeBytes": 8645,
     "canaryReviewFileCount": 1,
@@ -9675,6 +9703,201 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-14-friend-edge-refinements"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-candy-mimic-closed-v01-generator-original.png",
+      "sha256": "dc05abc175da18773ea5d68bc54560cc9197cb9dfbc608a2ad4e8ad3e4558005",
+      "bytes": 1344403,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-candy-star-reward-open-v01-generator-original.png",
+      "sha256": "2a3bb9ea967e6d78f212af1fd69b0fc20cb44b5a27cd88f3fcf4ec4d37eb19ce",
+      "bytes": 1516339,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-treasure-mimic-closed-v01-generator-original.png",
+      "sha256": "292da436e91f13090647339dd625009e2c560a5519edfdc114c50d07ce673915",
+      "bytes": 1416869,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-treasure-star-reward-open-v01-generator-original.png",
+      "sha256": "c21d94597d0600889a21fd2c5886b67944b3b8ac855f10a33f5032e46ec151db",
+      "bytes": 1613163,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/hazard-floor-spikes-overlay-v01-generator-original.png",
+      "sha256": "4e9a5d8d7629baa804c3456aed1b62f838b68cbcf207c9b92c9d8660713c030d",
+      "bytes": 1407475,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/item-ice-skates-v01-generator-original.png",
+      "sha256": "00f9161b6abc16cb3bebfe41c3a8ce37a159d6b26c7c1482511c927a04beef90",
+      "bytes": 1569959,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/item-normal-boots-v02-generator-original.png",
+      "sha256": "fd76524bfd6d1d6233a2a0bcc7351af642b2351ab45e7487297c91af8c000e20",
+      "bytes": 1192696,
+      "width": 1312,
+      "height": 1199,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6292352,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-gold-star-bag-v02-generator-original.png",
+      "sha256": "63a10e7fadffe333d801afa2211836367dc0f4895163f4cdb39bf2784079b864",
+      "bytes": 1050572,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-gold-star-chest-open-v02-generator-original.png",
+      "sha256": "fafe9c75e03c3c1cfc604704d42cc14d0a26aaf41cc487c1624946bfc7ca5730",
+      "bytes": 1353051,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-beaker-v02-generator-original.png",
+      "sha256": "a6765b864c8bf6d89805cea4331ab773dd68697cb9332e3275cb375e4f74c006",
+      "bytes": 809671,
+      "width": 1217,
+      "height": 1292,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6289456,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-book-v01-generator-original.png",
+      "sha256": "4d55c6a08dc53388d13d1a40ac878e2c839c27306dea443cd2f24eca354b53f8",
+      "bytes": 1327265,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-magnifying-glass-v01-generator-original.png",
+      "sha256": "169f97d7db9b167cd4faf37e0203118e291edf1da1e8436bd203f7873178ba9c",
+      "bytes": 821351,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-telescope-v01-generator-original.png",
+      "sha256": "f3d6918be0bd3c8618ed7307c69414ecc1488949e86a16c2d60e7897153d3ddd",
+      "bytes": 899612,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-15-chests-pickups-hazards"
       ]
     },
     {

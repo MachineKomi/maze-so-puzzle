@@ -1,0 +1,9 @@
+{
+  "schema": "maze-human-art-review/v1",
+  "reviewId": "mgjrpg-02-batch-15-input-r01",
+  "recordedOn": "2026-09-03",
+  "scope": "missing-chest-states-pickups-footwear-and-spike-overlay",
+  "evidenceKind": "verbatim-conversation-summary",
+  "instruction": "Create closed and benign star-filled states for each mimic chest; a separate open golden-star chest and star bag; additional science beaker, magnifying-glass, telescope and science-book pickups; normal boots; ice skates; and a transparent one-tile spike obstacle.",
+  "approvalBoundary": "This record authorises source generation and direct state derivation from immutable mimic originals only. Outputs remain pending Human batch review and do not change runtime catalogue pointers."
+}

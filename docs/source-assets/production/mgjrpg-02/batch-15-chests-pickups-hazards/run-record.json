@@ -1,0 +1,610 @@
+{
+  "batchId": "mgjrpg-02-batch-15-chests-pickups-hazards",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-03",
+  "purpose": "Missing mimic presentation states, distinct reward and science pickups, ordinary and ice footwear, and a transparent-ready one-tile spike hazard overlay.",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "revision": 4,
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+    "bytes": 8645
+  },
+  "decisionEvidence": {
+    "decisionId": "mgjrpg-02-human-selection-v04",
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json",
+    "scope": "rendering-recipe-and-controlled-source-production",
+    "sha256": "306ab2b3781c741ba7c912fdc1da8fd81abde28b842d669e5d384233209b99e3",
+    "bytes": 6945
+  },
+  "promptFile": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/PROMPTS.md",
+    "fidelity": "exact-as-submitted-from-generation-transcript",
+    "sha256": "0a0f8f6121dda83411ee44e372497400d1998fc04b91edaf2d0b70e8f4249dcb",
+    "bytes": 15220
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in image generation capability",
+    "model": "not exposed by the tool response",
+    "seed": "not exposed by the tool response",
+    "nativeOutput": {
+      "dimensions": "variable; preserved per run",
+      "format": "png",
+      "modes": [
+        "RGB",
+        "RGBA"
+      ],
+      "alphaMode": "opaque chroma matte or straight alpha as returned"
+    }
+  },
+  "nativeCanvasException": {
+    "appliesToEveryOutput": true,
+    "actual": "per-run evidence",
+    "canonicalPolicy": "Canonical masters normally use documented family canvases before optical derivative processing.",
+    "exception": "Generator originals retain their returned native canvases and modes; deterministic extraction, registration and resizing later create canonical derivatives."
+  },
+  "lineagePolicy": {
+    "identityReference": "listed immutable source only",
+    "renderingAuthority": "approved mgjrpg-02 contract",
+    "editOfEdit": "forbidden",
+    "boardCropAsMaster": "forbidden"
+  },
+  "reviewProtocol": {
+    "batchProofStatus": "awaiting bulk Human review",
+    "decisionRule": "After presentation and explicit response, valid unlisted candidates may be approved by default and named exceptions rejected.",
+    "silenceRule": "Silence is not approval.",
+    "candidateBoundary": "Source approval does not switch runtime or retire previous art."
+  },
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "releaseStatus": "not-approved"
+  },
+  "runtimeImpact": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0,
+    "web": "none-source-only",
+    "tauri": "none-source-only",
+    "ipad": "none-source-only",
+    "tv": "none-source-only"
+  },
+  "rollback": {
+    "method": "Keep immutable originals, exact prompts, ordered reference hashes and review evidence; current runtime pointers remain unchanged.",
+    "runtimeRollbackRequired": false
+  },
+  "schema": "maze-art-generation-batch/v1",
+  "referenceRegistry": {
+    "treasure-mimic-v01": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01/enemy-treasure-mimic-v01-matte-02-generator-original.png",
+      "authorityKind": "immutable-approved-direction-mimic-construction",
+      "sha256": "04d378ced51d5c960b58d372bfea7284ec08a3a8150e599ecce72c167a16582e",
+      "bytes": 1544711
+    },
+    "candy-mimic-v02": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/enemy-candy-mimic-v02-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "immutable-human-liked-mimic-construction",
+      "sha256": "48f80ed146cfdb45ad06c9ede4e913289b326bb6df853a04d7df2a05c438b5bf",
+      "bytes": 1424375
+    },
+    "mgjrpg-02-recipe": {
+      "path": "docs/source-assets/recipes/mgjrpg-02.json",
+      "authorityKind": "approved-rendering-and-family-contract",
+      "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+      "bytes": 8645
+    }
+  },
+  "runs": [
+    {
+      "generationMode": "bounded-direct-state-edit",
+      "lineage": {
+        "freshCanvas": false,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/human-review-input-r01.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 1,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "treasure-mimic-v01",
+          "role": "preserve exact chest construction while closing and removing creature anatomy"
+        }
+      ],
+      "runId": "batch-15-treasure-mimic-closed",
+      "promptBlockId": "chest-treasure-mimic-closed-v01",
+      "identityId": "treasure-mimic-closed",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-treasure-mimic-closed-v01-generator-original.png",
+        "outputId": "exec-34731050-99d6-446b-84dc-ff8b916609d4.png",
+        "sha256": "292da436e91f13090647339dd625009e2c560a5519edfdc114c50d07ce673915",
+        "bytes": 1416869,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Closed ordinary state matches the red-and-gold treasure mimic construction."
+      }
+    },
+    {
+      "generationMode": "bounded-direct-state-edit",
+      "lineage": {
+        "freshCanvas": false,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/human-review-input-r01.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 1,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "treasure-mimic-v01",
+          "role": "preserve exact chest construction while replacing creature anatomy with stars"
+        }
+      ],
+      "runId": "batch-15-treasure-mimic-stars",
+      "promptBlockId": "chest-treasure-star-reward-open-v01",
+      "identityId": "treasure-mimic-star-reward",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-treasure-star-reward-open-v01-generator-original.png",
+        "outputId": "exec-37b1318d-3728-4a81-aae5-0cef4396aa6e.png",
+        "sha256": "c21d94597d0600889a21fd2c5886b67944b3b8ac855f10a33f5032e46ec151db",
+        "bytes": 1613163,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Open benign state uses a large readable heap of golden star tokens."
+      }
+    },
+    {
+      "generationMode": "bounded-direct-state-edit",
+      "lineage": {
+        "freshCanvas": false,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/human-review-input-r01.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 1,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "candy-mimic-v02",
+          "role": "preserve exact candy chest construction while closing and removing creature anatomy"
+        }
+      ],
+      "runId": "batch-15-candy-mimic-closed",
+      "promptBlockId": "chest-candy-mimic-closed-v01",
+      "identityId": "candy-mimic-closed",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-candy-mimic-closed-v01-generator-original.png",
+        "outputId": "exec-7747fabf-9fad-4697-839e-62565b5d63aa.png",
+        "sha256": "dc05abc175da18773ea5d68bc54560cc9197cb9dfbc608a2ad4e8ad3e4558005",
+        "bytes": 1344403,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Closed candy state preserves pink wood, icing, sprinkles and gold hardware."
+      }
+    },
+    {
+      "generationMode": "bounded-direct-state-edit",
+      "lineage": {
+        "freshCanvas": false,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/human-review-input-r01.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 1,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "candy-mimic-v02",
+          "role": "preserve exact candy chest construction while replacing creature anatomy with stars"
+        }
+      ],
+      "runId": "batch-15-candy-mimic-stars",
+      "promptBlockId": "chest-candy-star-reward-open-v01",
+      "identityId": "candy-mimic-star-reward",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-candy-star-reward-open-v01-generator-original.png",
+        "outputId": "exec-0083ce95-cf33-4040-a887-fc4a1b76d7d9.png",
+        "sha256": "2a3bb9ea967e6d78f212af1fd69b0fc20cb44b5a27cd88f3fcf4ec4d37eb19ce",
+        "bytes": 1516339,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Open benign candy state keeps the icing family and substitutes golden stars."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-star-chest",
+      "promptBlockId": "treasure-gold-star-chest-open-v02",
+      "identityId": "gold-star-chest",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-gold-star-chest-open-v02-generator-original.png",
+        "outputId": "exec-91c4cf61-15c7-4562-ab50-30b97deaa40a.png",
+        "sha256": "fafe9c75e03c3c1cfc604704d42cc14d0a26aaf41cc487c1624946bfc7ca5730",
+        "bytes": 1353051,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Distinct ordinary open collectible chest has no mimic or candy anatomy."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-star-bag",
+      "promptBlockId": "treasure-gold-star-bag-v02",
+      "identityId": "gold-star-bag",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-gold-star-bag-v02-generator-original.png",
+        "outputId": "exec-029b2646-17b8-4fe8-a17f-8a1646496dc2.png",
+        "sha256": "63a10e7fadffe333d801afa2211836367dc0f4895163f4cdb39bf2784079b864",
+        "bytes": 1050572,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Lavender drawstring bag and exposed stars make a compact second gold pickup."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-science-beaker",
+      "promptBlockId": "treasure-science-beaker-v02",
+      "identityId": "science-beaker",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-beaker-v02-generator-original.png",
+        "outputId": "exec-19fcb1f0-c5d2-4717-a830-a75dc9f7c5cb.png",
+        "sha256": "a6765b864c8bf6d89805cea4331ab773dd68697cb9332e3275cb375e4f74c006",
+        "bytes": 809671,
+        "width": 1217,
+        "height": 1292,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6289456
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Wide base and coral liquid distinguish the laboratory beaker from a potion."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-science-magnifier",
+      "promptBlockId": "treasure-science-magnifying-glass-v01",
+      "identityId": "science-magnifying-glass",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-magnifying-glass-v01-generator-original.png",
+        "outputId": "exec-69d88d9c-be86-4f4e-a41d-0e9e656e9363.png",
+        "sha256": "169f97d7db9b167cd4faf37e0203118e291edf1da1e8436bd203f7873178ba9c",
+        "bytes": 821351,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Large aqua lens and short coral handle remain readable at pickup size."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-science-telescope",
+      "promptBlockId": "treasure-science-telescope-v01",
+      "identityId": "science-telescope",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-telescope-v01-generator-original.png",
+        "outputId": "exec-df0a8e5b-cca8-43cb-b7cb-a0884695a7a1.png",
+        "sha256": "f3d6918be0bd3c8618ed7307c69414ecc1488949e86a16c2d60e7897153d3ddd",
+        "bytes": 899612,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Three-legged mint-lavender telescope has a unique horizontal silhouette."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-science-book",
+      "promptBlockId": "treasure-science-book-v01",
+      "identityId": "science-book",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/treasure-science-book-v01-generator-original.png",
+        "outputId": "exec-d950b379-bec3-4d2a-9c93-404e5f1a64c2.png",
+        "sha256": "4d55c6a08dc53388d13d1a40ac878e2c839c27306dea443cd2f24eca354b53f8",
+        "bytes": 1327265,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Large orbit emblem reads as science without relying on text."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-normal-boots",
+      "promptBlockId": "item-normal-boots-v02",
+      "identityId": "normal-boots",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/item-normal-boots-v02-generator-original.png",
+        "outputId": "exec-f0d711de-833f-4229-ad16-95ebc1ddb1c2.png",
+        "sha256": "fd76524bfd6d1d6233a2a0bcc7351af642b2351ab45e7487297c91af8c000e20",
+        "bytes": 1192696,
+        "width": 1312,
+        "height": 1199,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6292352
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Practical brown leather boots contain no spring or magic effect."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-ice-skates",
+      "promptBlockId": "item-ice-skates-v01",
+      "identityId": "ice-skates",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/item-ice-skates-v01-generator-original.png",
+        "outputId": "exec-0e099e12-e3f9-46b4-aba4-26f65e3a9b9a.png",
+        "sha256": "00f9161b6abc16cb3bebfe41c3a8ce37a159d6b26c7c1482511c927a04beef90",
+        "bytes": 1569959,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Steel blades and aqua boots separate the ice equipment from normal and spring boots."
+      }
+    },
+    {
+      "generationMode": "fresh-source",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": false,
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "mgjrpg-02-recipe",
+          "role": "rendering and family contract; no prior raster used"
+        }
+      ],
+      "runId": "batch-15-floor-spikes",
+      "promptBlockId": "hazard-floor-spikes-overlay-v01",
+      "identityId": "floor-spikes-overlay",
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/hazard-floor-spikes-overlay-v01-generator-original.png",
+        "outputId": "exec-f901ae43-852e-4afe-930a-39714fc285f4.png",
+        "sha256": "4e9a5d8d7629baa804c3456aed1b62f838b68cbcf207c9b92c9d8660713c030d",
+        "bytes": 1407475,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Separate lavender stone spikes form a one-tile transparent overlay without a floor plate."
+      }
+    }
+  ],
+  "counts": {
+    "runCount": 13,
+    "rejectedBackgroundInvalidCount": 0,
+    "pendingHumanCandidateCount": 13,
+    "humanApprovedSourceCount": 0,
+    "humanRejectedSourceCount": 0,
+    "artDirectorRejectedSourceCount": 0,
+    "generatorOriginalEncodedBytes": 16322426,
+    "generatorOriginalDecodedBytesUpperBound": 81772512
+  }
+}
