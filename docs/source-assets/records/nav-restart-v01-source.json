@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "nav-restart-v01-source",
+  "id": "nav-restart",
+  "artVersion": 1,
+  "family": "navigation",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [
+      "exec-d22fd5bb-88b1-46a2-99de-b994e21a3fe8.png"
+    ],
+    "notes": "The historical prompt document names this asset. Automated migration does not upgrade surrounding prose to an exact prompt; a human may classify it later.",
+    "historyHeading": "Build 0.12.0: treasure and navigation art"
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/nav-restart-v1-master.png",
+      "sha256": "28686ac0a93f977a4c751ad434cf2188588cfac70794940915617061bfca3401",
+      "bytes": 1313244,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/nav-restart-v1.webp",
+      "sha256": "df340068f61b6c10b5d103e5183d3735e1928ede43d86e20361c5692bb8ac8a4",
+      "bytes": 39230,
+      "width": 192,
+      "height": 192,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 147456,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "title-or-navigation",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "2a3110a1ceefdc0cf32057100d3047f2f6cdd660",
+    "firstSeenAt": "2026-09-02T01:53:08+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

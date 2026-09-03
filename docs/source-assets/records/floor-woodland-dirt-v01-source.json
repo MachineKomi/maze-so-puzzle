@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "floor-woodland-dirt-v01-source",
+  "id": "floor-woodland-dirt",
+  "artVersion": 1,
+  "family": "terrain",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [],
+    "notes": "The historical prompt document names this asset. Automated migration does not upgrade surrounding prose to an exact prompt; a human may classify it later.",
+    "historyHeading": "Floor and wall materials"
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/floor-woodland-dirt-v1-master.png",
+      "sha256": "1bd03d3a09797fe0d3cbd2d191139f5cc63c232d11cadf8772ffd5b4ffa519ac",
+      "bytes": 2313536,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/floor-woodland-dirt-v1.png",
+      "sha256": "3c61db827a761fa5def705efaf5abddad918cd2824561031cbc14fd906f78b1a",
+      "bytes": 891536,
+      "width": 1024,
+      "height": 1024,
+      "format": "png",
+      "mode": "P",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 4194304,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb",
+    "firstSeenAt": "2026-09-01T18:09:52+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "story-professor-poggle-v01-source",
+  "id": "story-professor-poggle",
+  "artVersion": 1,
+  "family": "story",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": false,
+    "outputIds": [],
+    "notes": "No asset-specific prompt linkage was resolved automatically. Preserve the project-level generation claim and treat asset-specific prompt details as unknown."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/story-professor-poggle-v1-master.png",
+      "sha256": "84dd1218c1a40389d0d860b48fd599d6efed095dfbad6f31e347cf46665d6609",
+      "bytes": 2304373,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/story-professor-poggle-v1.webp",
+      "sha256": "4303c128203d7d0d0f3ae10bc8dfbcaf838b0485689cdef65854b275c5e8bc31",
+      "bytes": 73084,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "story-or-level-entry",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "32b2d66817674a54b62c747de31ee8b59c0230c9",
+    "firstSeenAt": "2026-09-02T02:30:43+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

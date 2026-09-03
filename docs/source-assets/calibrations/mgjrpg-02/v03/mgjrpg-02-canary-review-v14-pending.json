@@ -1,0 +1,214 @@
+{
+  "schema": "maze-art-canary-review/v1",
+  "reviewId": "mgjrpg-02-canary-v01",
+  "recipeId": "mgjrpg-02",
+  "recipePath": "docs/source-assets/recipes/mgjrpg-02.json",
+  "recipeSha256": "42e18d607223e985486a0a37418bdbdff6d4f8d5d6eb2b61dff498fce69dd40d",
+  "scope": "global-runtime-publish-gate",
+  "status": "pending-human",
+  "decision": "The Human's direction choices are recorded as the mgjrpg-02 family recipe. The remaining gate asks the Human to confirm prior Direction B as Ame's rendering fallback because both independent fresh-base studies drift Candidate C, and to accept or reject the enemy-transfer and flower-floor-pad directions subject to the named simplifications. No runtime publication or broad production is approved by this pending review.",
+  "supersededPackets": [
+    {
+      "revision": "v04",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v04/proof-index.json",
+      "sha256": "e2f3b84ac14f61695150e95269735189cef60faf495620e9c48957757bf26a18",
+      "bytes": 303279,
+      "reason": "The viewer links are stable, but the packet predates final strict-v2 publication/integrity enforcement and its contour crops did not consistently prove the exterior silhouette boundary. Retained as immutable audit evidence."
+    },
+    {
+      "revision": "v05",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v05/proof-index.json",
+      "sha256": "c4f70114ab3d56e7139e422b5e3a4fdd08c48c06e3394ff5d1925fed5cb3c62f",
+      "bytes": 303279,
+      "reason": "Generated before the final contract, recursive proof-integrity, exterior-crop, threshold-disclosure, and staged-pixel changes. Retained and never rebound as current evidence."
+    },
+    {
+      "revision": "v06",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v06/proof-index.json",
+      "sha256": "9e0016cae862556db95b232ed091bef4cfa2599438d4935125f3662a23b45873",
+      "bytes": 303697,
+      "reason": "Binds the final pipeline but its rejected-ImageGen boundary crop targeted an unhelpful nearly blank area. Retained unchanged; v07 adds an exact lower-left crop and explicitly non-source-colour binary alpha diagnostic."
+    },
+    {
+      "revision": "v07",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v07/proof-index.json",
+      "sha256": "3a80360c8f96a38700a1551d45cdb8096793151c88b4142d3f4516e6b8e5d448",
+      "bytes": 303697,
+      "reason": "All image evidence and integrity contracts are current, but the generated packet still called retained Fox and Goblin pixels 'bounded contour only' while the Art Bible and review slate retain them unchanged. Retained unchanged; v08 corrects only this decision taxonomy."
+    },
+    {
+      "revision": "v08",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v08/proof-index.json",
+      "sha256": "56ae0ad299e9ad619ddd0ec06d164c4a4953a03fae1bfdc3c2426414897de951",
+      "bytes": 303697,
+      "reason": "Human-rejected as style-choice evidence. It was a deterministic post-process over historical pixels, produced little material change beyond a dark perimeter, and did not offer genuinely authored art-direction options. Preserved as truthful diagnostic history; it is not an art authority and does not invalidate Candidate C's identity approval."
+    },
+    {
+      "revision": "v11",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v11/proof-index.json",
+      "sha256": "71005509f05db4445b6fbc489692016c71c3f9563cba6b6cf274b73015176ee3",
+      "bytes": 18537,
+      "reason": "Human-reviewed direction slate. It established the binding A/B/C family selections and exposed the need for a truly fresh Ame base, a cross-family future-enemy transfer, and a retained flower-floor-pad teleporter topology. Preserved as the immutable selection authority; later packets are bounded follow-up evidence."
+    },
+    {
+      "revision": "v12",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v12/proof-index.json",
+      "sha256": "a9d17f8d9273e1ad6f6b2725fd640fd46d955a9f1eff1af632518187e7fc5b80",
+      "bytes": 23220,
+      "reason": "First bounded selection-response packet. Preserved unchanged, but it omitted the canonical 77 px Ame proof and complete actual-size silhouettes across every required diagnostic background."
+    },
+    {
+      "revision": "v13",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v13/proof-index.json",
+      "sha256": "26426f12d11e39f0e85d04d9889b75ebfe12a0f464f6d5fd679f2b3ae714c64b",
+      "bytes": 24890,
+      "reason": "Added 77 px and full-sprite multi-background evidence. Preserved unchanged; the Rose actual-size subtitle clipped, so v14 corrects presentation only without changing any source art."
+    }
+  ],
+  "recommendedPacket": {
+    "revision": "v14",
+    "proofRoot": "artifacts/art-proofs/mgjrpg-02/v14",
+    "reason": "v14 binds the Human's v11 selections, compares Candidate C and prior Direction B with two independently generated fresh-base Ame studies at source and 155/103/84/77/64/56/40 px, shows full sprites at 103/77/56/40 px on five diagnostic backgrounds, and presents new enemy-family-transfer and flower-floor-pad studies. Every generator original, ordered reference role, prompt, derivative, byte count, proof image, and zero-runtime-impact claim is hash-bound."
+  },
+  "evidence": [
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/proof-index.json",
+      "sha256": "763335189a1f95fb0823f12d4aaa156362bb16d9ad7ca5928d8af7588dbd4ff5",
+      "bytes": 24890
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/mgjrpg-02-selection-report.json",
+      "sha256": "84fc17e77cb2faefe007a4d8ce23610a06408149ad05760bd4bed18f628c8372",
+      "bytes": 30873
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/selection-reference-map.png",
+      "sha256": "ef4898679267a43594a88e1ee4c3b9d53e95ca05fa101390d3f333fb923d7913",
+      "bytes": 1540996
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-source-comparison.png",
+      "sha256": "8b54ce48bebf8c8f3de5001857c41a1890fb4492e5b58d82c7218217ec7d82c4",
+      "bytes": 833806
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-actual-size.png",
+      "sha256": "23f2dd8ae486f021f72b05d4963f08012259ff8116e595712d8a5b7f7540a002",
+      "bytes": 221504
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-full-sprite-actual-size-backgrounds.png",
+      "sha256": "1e387d5bbd356ae400d777ad6e65f631b9c622df7863fb9d07b02fd4910d72b0",
+      "bytes": 410874
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-contour-background-closeups.png",
+      "sha256": "736c6107d33985fa33c754a511dcd19d713389c1ca90b8b0583d2fe0484f43f9",
+      "bytes": 2121174
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/future-enemy-comparison.png",
+      "sha256": "8e5c803bf1e5476d0aa4c36733f2e6a540926614bcbb9121ffa2635d740076ba",
+      "bytes": 1164377
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/rose-floor-pad-comparison.png",
+      "sha256": "18d9fa5745fa09cd9108a7dbc720c1c2820b5607eb1cd58f2bd92d315198e958",
+      "bytes": 850707
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/rose-floor-pad-actual-size.png",
+      "sha256": "278da1cc6c85293c0455b331ffc63b5f7d525bb74d46d8c1659de553d8de4a13",
+      "bytes": 143058
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/index.html",
+      "sha256": "af5bd72591b05c6eae0a51e8479ad80fbfcc27f2bba5662acbb5dd4b737cfaa4",
+      "bytes": 14574
+    }
+  ],
+  "canaryRoster": [
+    { "id": "ame-v02-candidate-c", "decisionClass": "retain-approved-identity-prior-b-rendering-fallback-pending-confirmation" },
+    { "id": "animal-fox", "decisionClass": "replace-rendering-preserve-identity" },
+    { "id": "animal-alpaca", "decisionClass": "replace-rendering-preserve-identity" },
+    { "id": "enemy-goblin", "decisionClass": "replace-rendering-preserve-identity" },
+    { "id": "enemy-jelly-sorcerer", "decisionClass": "replace-rendering-preserve-construction" },
+    { "id": "weapon-moon-wand", "decisionClass": "replace-rendering-and-simplify" },
+    { "id": "key-rose-heart", "decisionClass": "replace-optical-rendering-preserve-motif" },
+    { "id": "door-rose-heart", "decisionClass": "replace-rendering-preserve-construction" },
+    { "id": "portal-rose-heart", "decisionClass": "retain-flower-floor-pad-topology-refine-rendering" },
+    { "id": "reward-first-star", "decisionClass": "replace-optical-rendering-preserve-achievement" },
+    { "id": "nav-home", "decisionClass": "replace-optical-rendering-preserve-metaphor" },
+    { "id": "nav-help", "decisionClass": "replace-semantic-metaphor" },
+    { "id": "terrain-sunny-floor", "decisionClass": "refine-frequency-and-neutral-light" },
+    { "id": "terrain-sunny-wall", "decisionClass": "refine-frequency-and-neutral-light" },
+    { "id": "terrain-wishing-floor", "decisionClass": "replace-rendering-quieter-material" },
+    { "id": "terrain-wishing-hedge", "decisionClass": "replace-rendering-larger-leaf-masses" },
+    { "id": "terrain-wishing-dressing", "decisionClass": "retain-concept-re-author-if-family-mismatch" },
+    { "id": "hazard-water", "decisionClass": "replace-nonmirrored-ripple-master" },
+    { "id": "hazard-lava", "decisionClass": "replace-asymmetric-flow-master" },
+    { "id": "hazard-poison", "decisionClass": "refine-aubergine-eddies-and-pattern" }
+  ],
+  "humanSelections": {
+    "recordedOn": "2026-09-03",
+    "ame": "Direction B surface/rendering language is preferred. Candidate C remains the immutable identity and construction authority. A fresh-base attempt was requested, with prior Direction B retained as the fallback.",
+    "coreDefault": "Direction A",
+    "coreDirectionCExceptions": [
+      "traditional-jrpg-slime",
+      "lizard-man-with-sword",
+      "green-tea-drinking-skeleton"
+    ],
+    "currentFamilyTransfer": "Direction A construction, chunky detail, chroma, and colour-aware contour treatment with restrained Direction B broad colour and shading influence.",
+    "futureEnemyConcepts": "Direction B except the Direction A wholesome succubus; redraw every selected concept into the current-family transfer treatment rather than preserving any mismatched board rendering.",
+    "portal": "Keep the existing flower-petal floor-pad teleporter category so portals remain visually distinct from upright magical doors."
+  },
+  "gateRecommendation": {
+    "ame": "Retain prior Direction B as the rendering fallback. Fresh 01 and Fresh 02 are cleaner independent redraws, but neither preserves Candidate C's face, hair rhythm, cape, stance, registration, and hand-socket construction closely enough to become canonical.",
+    "futureEnemy": "Accept the hybrid as direction evidence only. Preserve its selected A-family construction/chroma and B colour/shading blend, then simplify Kappa foliage/shell/basket detail and Mimic teeth/rivets/planks; restore the preferred Direction A succubus silhouette and magical gesture in any isolated master.",
+    "portal": "Accept the low flower-petal floor-pad category, not the current detailed hybrid as a production master. Reduce centre sparkles and petal filigree, strengthen the shallow floor-plane read, and deepen its pale outer edge for light-floor contrast.",
+    "publication": "Remain pending-human. No generated board or proof derivative is a runtime or edit authority."
+  },
+  "scorecard": {
+    "path": "artifacts/art-proofs/mgjrpg-02/v14/mgjrpg-02-selection-report.json",
+    "sha256": "84fc17e77cb2faefe007a4d8ce23610a06408149ad05760bd4bed18f628c8372",
+    "scale": "Bounded Human-selection follow-up with art-direction assessment; no automatic aesthetic approval",
+    "separation": "The report separates immutable identity authority, Human-selected reference roles, fresh-source lineage, deterministic difference evidence, actual-size delivery proofs, source/proof cost, known limitations, and zero runtime impact."
+  },
+  "runtimeImpact": {
+    "authoredGeneratorOriginalCount": 4,
+    "authoredGeneratorOriginalEncodedBytes": 6440962,
+    "authoredGeneratorOriginalDecodedBytesUpperBound": 25160256,
+    "historicalV11GeneratorOriginalCount": 12,
+    "historicalV11GeneratorOriginalEncodedBytes": 22908808,
+    "historicalV11GeneratorOriginalDecodedBytesUpperBound": 75489608,
+    "ignoredProofPacketEncodedBytes": 8847297,
+    "ignoredProofPacketPngDecodedBytesUpperBound": 62134064,
+    "expectedPlatformImpact": {
+      "web": "None at this gate: no file is below public/ and no module imports a candidate.",
+      "tauri": "None at this gate: candidates are absent from the packaged runtime asset graph.",
+      "ipad": "None at this gate: no transfer, decode, preload, or dual-residency path was added.",
+      "tv": "None at this gate: no runtime texture, scaling policy, or controller-facing UI changed.",
+      "futureSelectionRule": "Measure isolated registered delivery derivatives and obtain a Plan 07A allocation before any catalogue switch; never ship the opaque concept boards."
+    },
+    "publicAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0
+  },
+  "knownFailures": [
+    "Fresh Ame 01 and Fresh Ame 02 were generated independently from clean bases and did not use prior Direction B as an input, but both materially drift Candidate C's face geometry, eye spacing, hair rhythm, cape silhouette, stance, registration, or hand socket. They remain rejected as identity/rendering authorities.",
+    "Prior Direction B best preserves the Human-preferred appeal and approved construction, but retains the subtle overworked texture the Human identified. Its small-size proof remains acceptable as a fallback, not final runtime publication approval.",
+    "All v03 authored images are opaque RGB composites with painted checkerboard or ivory backgrounds. Their extracted cutouts are review-only derivatives, not production alpha masters or edit authorities.",
+    "The future-enemy hybrid belongs more closely to the selected core/current-family language but remains a concept board. Kappa and Mimic are over-detailed, and the Succubus loses the specifically preferred Direction A silhouette and magical gesture.",
+    "The Rose floor-pad hybrid preserves the correct category but is too sparkly and filigreed, has a weak pale edge on light floors, and needs a shallower floor-plane read before isolated production.",
+    "Terrain and hazard cells demonstrate palette, massing, and pattern language only. They do not prove periodic seams, phase-safe repetition, wall/floor adjacency, alpha, or traversal-scale frequency.",
+    "First Star studies simplify to a generic star badge and do not preserve every existing achievement cue; a selected-direction optical master still requires a semantic review.",
+    "The option boards sample only part of the Human-directed future enemy roster. All fifteen remain source-only future work with no enemy ID, level-placement, mechanic, catalogue pointer, or preload change.",
+    "Colour-aware contours and colour-vision simulations remain diagnostic until isolated delivery masters pass contrast, grayscale/CVD, alpha-edge, and Human/player review."
+  ],
+  "rollback": {
+    "runtime": "No rollback action is required: all public assets and runtime catalogue pointers remain unchanged.",
+    "recipe": "Keep mgjrpg-01/pre-versioned records truthful. If the Human rejects mgjrpg-02, set this review status to rejected with named evidence; do not rewrite historical records.",
+    "proof": "Retain every immutable packet revision, including rejected and superseded evidence. Any revised pixels, metrics, contracts, or presentation require a new packet revision and updated hashes."
+  }
+}

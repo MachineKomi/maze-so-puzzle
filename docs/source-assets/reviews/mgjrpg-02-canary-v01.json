@@ -1,0 +1,234 @@
+{
+  "schema": "maze-art-canary-review/v1",
+  "reviewId": "mgjrpg-02-canary-v01",
+  "recipeId": "mgjrpg-02",
+  "recipePath": "docs/source-assets/recipes/mgjrpg-02.json",
+  "recipeSha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+  "scope": "global-runtime-publish-gate",
+  "status": "approved",
+  "reviewedBy": "Human project owner",
+  "reviewedAt": "2026-09-03T12:59:05.6177539+01:00",
+  "decision": "The Human approved the composite mgjrpg-02 rendering recipe for controlled, family-by-family source production. Fresh B-led 01 is Ame's selected static rendering choice at her common small field scale while Candidate C remains her sole identity/construction authority; the fresh Rose Heart flower-pad construction is approved subject to a brighter central heart and a true flat extraction matte; and the v03 Succubus, Pocket T-Rex, Kappa, and Treasure Mimic are approved as concept/render-family references for independently authored isolated masters. This global recipe decision does not approve any unreviewed Batch 01 cutout, rights decision, public derivative, catalogue pointer, preload change, runtime publication, retirement, or animation.",
+  "decisionRecord": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json",
+    "sha256": "306ab2b3781c741ba7c912fdc1da8fd81abde28b842d669e5d384233209b99e3",
+    "bytes": 6945
+  },
+  "historicalReviewSnapshot": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v03/mgjrpg-02-canary-review-v14-pending.json",
+    "sha256": "1f6141268adacb73222bc8b5e383de9a7237175c0d07cc36106259580ff5c88b",
+    "bytes": 15654,
+    "disposition": "Exact pending-v14 review preserved before the forward-only Human decision was recorded"
+  },
+  "supersededPackets": [
+    {
+      "revision": "v04",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v04/proof-index.json",
+      "sha256": "e2f3b84ac14f61695150e95269735189cef60faf495620e9c48957757bf26a18",
+      "bytes": 303279,
+      "reason": "The viewer links are stable, but the packet predates final strict-v2 publication/integrity enforcement and its contour crops did not consistently prove the exterior silhouette boundary. Retained as immutable audit evidence."
+    },
+    {
+      "revision": "v05",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v05/proof-index.json",
+      "sha256": "c4f70114ab3d56e7139e422b5e3a4fdd08c48c06e3394ff5d1925fed5cb3c62f",
+      "bytes": 303279,
+      "reason": "Generated before the final contract, recursive proof-integrity, exterior-crop, threshold-disclosure, and staged-pixel changes. Retained and never rebound as current evidence."
+    },
+    {
+      "revision": "v06",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v06/proof-index.json",
+      "sha256": "9e0016cae862556db95b232ed091bef4cfa2599438d4935125f3662a23b45873",
+      "bytes": 303697,
+      "reason": "Binds the final pipeline but its rejected-ImageGen boundary crop targeted an unhelpful nearly blank area. Retained unchanged; v07 adds an exact lower-left crop and explicitly non-source-colour binary alpha diagnostic."
+    },
+    {
+      "revision": "v07",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v07/proof-index.json",
+      "sha256": "3a80360c8f96a38700a1551d45cdb8096793151c88b4142d3f4516e6b8e5d448",
+      "bytes": 303697,
+      "reason": "All image evidence and integrity contracts are current, but the generated packet still called retained Fox and Goblin pixels 'bounded contour only' while the Art Bible and review slate retain them unchanged. Retained unchanged; v08 corrects only this decision taxonomy."
+    },
+    {
+      "revision": "v08",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v08/proof-index.json",
+      "sha256": "56ae0ad299e9ad619ddd0ec06d164c4a4953a03fae1bfdc3c2426414897de951",
+      "bytes": 303697,
+      "reason": "Human-rejected as style-choice evidence. It was a deterministic post-process over historical pixels, produced little material change beyond a dark perimeter, and did not offer genuinely authored art-direction options. Preserved as truthful diagnostic history; it is not an art authority and does not invalidate Candidate C's identity approval."
+    },
+    {
+      "revision": "v11",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v11/proof-index.json",
+      "sha256": "71005509f05db4445b6fbc489692016c71c3f9563cba6b6cf274b73015176ee3",
+      "bytes": 18537,
+      "reason": "Human-reviewed direction slate. It established the binding A/B/C family selections and exposed the need for a truly fresh Ame base, a cross-family future-enemy transfer, and a retained flower-floor-pad teleporter topology. Preserved as the immutable selection authority; later packets are bounded follow-up evidence."
+    },
+    {
+      "revision": "v12",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v12/proof-index.json",
+      "sha256": "a9d17f8d9273e1ad6f6b2725fd640fd46d955a9f1eff1af632518187e7fc5b80",
+      "bytes": 23220,
+      "reason": "First bounded selection-response packet. Preserved unchanged, but it omitted the canonical 77 px Ame proof and complete actual-size silhouettes across every required diagnostic background."
+    },
+    {
+      "revision": "v13",
+      "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v13/proof-index.json",
+      "sha256": "26426f12d11e39f0e85d04d9889b75ebfe12a0f464f6d5fd679f2b3ae714c64b",
+      "bytes": 24890,
+      "reason": "Added 77 px and full-sprite multi-background evidence. Preserved unchanged; the Rose actual-size subtitle clipped, so v14 corrects presentation only without changing any source art."
+    }
+  ],
+  "recommendedPacket": {
+    "revision": "v14",
+    "proofRoot": "artifacts/art-proofs/mgjrpg-02/v14",
+    "reason": "v14 binds the Human's v11 selections, compares Candidate C and prior Direction B with two independently generated fresh-base Ame studies at source and 155/103/84/77/64/56/40 px, shows full sprites at 103/77/56/40 px on five diagnostic backgrounds, and presents new enemy-family-transfer and flower-floor-pad studies. Every generator original, ordered reference role, prompt, derivative, byte count, proof image, and zero-runtime-impact claim is hash-bound."
+  },
+  "evidence": [
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/proof-index.json",
+      "sha256": "763335189a1f95fb0823f12d4aaa156362bb16d9ad7ca5928d8af7588dbd4ff5",
+      "bytes": 24890
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/mgjrpg-02-selection-report.json",
+      "sha256": "84fc17e77cb2faefe007a4d8ce23610a06408149ad05760bd4bed18f628c8372",
+      "bytes": 30873
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/selection-reference-map.png",
+      "sha256": "ef4898679267a43594a88e1ee4c3b9d53e95ca05fa101390d3f333fb923d7913",
+      "bytes": 1540996
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-source-comparison.png",
+      "sha256": "8b54ce48bebf8c8f3de5001857c41a1890fb4492e5b58d82c7218217ec7d82c4",
+      "bytes": 833806
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-actual-size.png",
+      "sha256": "23f2dd8ae486f021f72b05d4963f08012259ff8116e595712d8a5b7f7540a002",
+      "bytes": 221504
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-full-sprite-actual-size-backgrounds.png",
+      "sha256": "1e387d5bbd356ae400d777ad6e65f631b9c622df7863fb9d07b02fd4910d72b0",
+      "bytes": 410874
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-contour-background-closeups.png",
+      "sha256": "736c6107d33985fa33c754a511dcd19d713389c1ca90b8b0583d2fe0484f43f9",
+      "bytes": 2121174
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/future-enemy-comparison.png",
+      "sha256": "8e5c803bf1e5476d0aa4c36733f2e6a540926614bcbb9121ffa2635d740076ba",
+      "bytes": 1164377
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/rose-floor-pad-comparison.png",
+      "sha256": "18d9fa5745fa09cd9108a7dbc720c1c2820b5607eb1cd58f2bd92d315198e958",
+      "bytes": 850707
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/rose-floor-pad-actual-size.png",
+      "sha256": "278da1cc6c85293c0455b331ffc63b5f7d525bb74d46d8c1659de553d8de4a13",
+      "bytes": 143058
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/index.html",
+      "sha256": "af5bd72591b05c6eae0a51e8479ad80fbfcc27f2bba5662acbb5dd4b737cfaa4",
+      "bytes": 14574
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json",
+      "sha256": "306ab2b3781c741ba7c912fdc1da8fd81abde28b842d669e5d384233209b99e3",
+      "bytes": 6945
+    }
+  ],
+  "canaryRoster": [
+    { "id": "ame-v02-candidate-c", "decisionClass": "retain-approved-identity-fresh-b-led-01-rendering-selected" },
+    { "id": "animal-fox", "decisionClass": "replace-rendering-preserve-identity" },
+    { "id": "animal-alpaca", "decisionClass": "replace-rendering-preserve-identity" },
+    { "id": "enemy-goblin", "decisionClass": "replace-rendering-preserve-identity" },
+    { "id": "enemy-jelly-sorcerer", "decisionClass": "replace-rendering-preserve-construction" },
+    { "id": "weapon-moon-wand", "decisionClass": "replace-rendering-and-simplify" },
+    { "id": "key-rose-heart", "decisionClass": "replace-optical-rendering-preserve-motif" },
+    { "id": "door-rose-heart", "decisionClass": "replace-rendering-preserve-construction" },
+    { "id": "portal-rose-heart", "decisionClass": "retain-flower-floor-pad-topology-refine-rendering" },
+    { "id": "reward-first-star", "decisionClass": "replace-optical-rendering-preserve-achievement" },
+    { "id": "nav-home", "decisionClass": "replace-optical-rendering-preserve-metaphor" },
+    { "id": "nav-help", "decisionClass": "replace-semantic-metaphor" },
+    { "id": "terrain-sunny-floor", "decisionClass": "refine-frequency-and-neutral-light" },
+    { "id": "terrain-sunny-wall", "decisionClass": "refine-frequency-and-neutral-light" },
+    { "id": "terrain-wishing-floor", "decisionClass": "replace-rendering-quieter-material" },
+    { "id": "terrain-wishing-hedge", "decisionClass": "replace-rendering-larger-leaf-masses" },
+    { "id": "terrain-wishing-dressing", "decisionClass": "retain-concept-re-author-if-family-mismatch" },
+    { "id": "hazard-water", "decisionClass": "replace-nonmirrored-ripple-master" },
+    { "id": "hazard-lava", "decisionClass": "replace-asymmetric-flow-master" },
+    { "id": "hazard-poison", "decisionClass": "refine-aubergine-eddies-and-pattern" }
+  ],
+  "humanSelections": {
+    "recordedOn": "2026-09-03",
+    "ame": "Fresh B-led 01 is selected because its small-scale silhouette and facial read are clearest. Fresh B-led 02 is attractive at source size but is not selected. Candidate C remains the immutable identity and construction authority; the selected rendering reference may not override any Candidate C landmark.",
+    "coreDefault": "Direction A",
+    "coreDirectionCExceptions": [
+      "traditional-jrpg-slime",
+      "lizard-man-with-sword",
+      "green-tea-drinking-skeleton"
+    ],
+    "currentFamilyTransfer": "Direction A construction, chunky detail, chroma, and colour-aware contour treatment with restrained Direction B broad colour and shading influence.",
+    "futureEnemyConcepts": "The v03 Wholesome Succubus, Pocket T-Rex, Kappa, and Treasure Mimic are approved as concept and rendering-family direction. Produce isolated fresh masters from locked briefs; never crop the board or make an edit-of-edit authoritative.",
+    "portal": "Approve the fresh flower-petal floor-pad construction so portals remain distinct from upright magical doors. The final isolated Rose Heart source needs a brighter, clearer heart and a plain flat extraction matte with no painted checkerboard bleed.",
+    "batchReview": "Continue controlled family production. Present one lightweight HTML page at one declared scale with names below; after an explicit Human response, unlisted assets in that reviewed batch are approved by default and named exceptions are regenerated independently in the next batch. Silence is not approval.",
+    "retirement": "Plan 03 classifies superseded assets and maintains a precise retirement ledger only. No existing runtime file moves or deletions occur before Plan 12, and no archive may live under public/assets."
+  },
+  "gateRecommendation": {
+    "ame": "Use Fresh B-led 01 as the approved static rendering reference because it wins at the common small gameplay scale. Preserve Candidate C exactly as the identity/construction authority; a normalized derivative or fresh production candidate that changes those landmarks still fails.",
+    "futureEnemy": "Use the approved four-enemy board as concept and rendering-family evidence only, then author one isolated source per locked enemy brief. The contact sheet is not a crop source or identity authority.",
+    "portal": "Use the approved fresh low flower-pad construction. Before derivative approval, brighten and clarify the centre heart, preserve the shallow floor-plane read, and produce against a verifiably uniform plain matte so no checker pattern contaminates colour or alpha.",
+    "publication": "The global recipe gate is approved for controlled source production. Every candidate, cleaned derivative, rights decision, catalogue switch, runtime byte allocation, and retirement remains separately gated."
+  },
+  "scorecard": {
+    "path": "artifacts/art-proofs/mgjrpg-02/v14/mgjrpg-02-selection-report.json",
+    "sha256": "84fc17e77cb2faefe007a4d8ce23610a06408149ad05760bd4bed18f628c8372",
+    "scale": "Bounded Human-selection follow-up with art-direction assessment; no automatic aesthetic approval",
+    "separation": "The report separates immutable identity authority, Human-selected reference roles, fresh-source lineage, deterministic difference evidence, actual-size delivery proofs, source/proof cost, known limitations, and zero runtime impact."
+  },
+  "runtimeImpact": {
+    "authoredGeneratorOriginalCount": 4,
+    "authoredGeneratorOriginalEncodedBytes": 6440962,
+    "authoredGeneratorOriginalDecodedBytesUpperBound": 25160256,
+    "historicalV11GeneratorOriginalCount": 12,
+    "historicalV11GeneratorOriginalEncodedBytes": 22908808,
+    "historicalV11GeneratorOriginalDecodedBytesUpperBound": 75489608,
+    "ignoredProofPacketEncodedBytes": 8847297,
+    "ignoredProofPacketPngDecodedBytesUpperBound": 62134064,
+    "expectedPlatformImpact": {
+      "web": "None at this gate: no file is below public/ and no module imports a candidate.",
+      "tauri": "None at this gate: candidates are absent from the packaged runtime asset graph.",
+      "ipad": "None at this gate: no transfer, decode, preload, or dual-residency path was added.",
+      "tv": "None at this gate: no runtime texture, scaling policy, or controller-facing UI changed.",
+      "futureSelectionRule": "Measure isolated registered delivery derivatives and obtain a Plan 07A allocation before any catalogue switch; never ship the opaque concept boards."
+    },
+    "publicAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0
+  },
+  "knownFailures": [
+    "Fresh B-led 01 is approved as Ame's static rendering choice, not as a replacement identity/construction authority. Any deviation from Candidate C's locked face, age, hair, eyes, proportions, costume, backpack, silhouette, registration, hand socket, or emotional character must be corrected from the independent authorities rather than inherited.",
+    "Fresh B-led 02 reads attractively at source size but is not selected because B-led 01 is clearer at Ame's common gameplay scale. Prior Direction B and Fresh B-led 02 remain immutable comparison/rollback evidence, not runtime publication approval.",
+    "All v03 authored images are opaque RGB composites with painted checkerboard or ivory backgrounds. Their extracted cutouts are review-only derivatives, not production alpha masters or edit authorities.",
+    "The approved future-enemy hybrid remains a concept/rendering-family board. Its four cells cannot be cropped into production masters; each enemy still requires an independently authored isolated source, flat-matte extraction, derivative validation, rights review, and batch decision.",
+    "The Rose floor-pad hybrid has approved construction but remains an opaque composite rather than a production master. Its final isolated candidate needs a brighter, clearer centre heart and a genuinely uniform plain matte; painted checkerboard colour is an extraction failure.",
+    "Terrain and hazard cells demonstrate palette, massing, and pattern language only. They do not prove periodic seams, phase-safe repetition, wall/floor adjacency, alpha, or traversal-scale frequency.",
+    "First Star studies simplify to a generic star badge and do not preserve every existing achievement cue; a selected-direction optical master still requires a semantic review.",
+    "The option boards sample only part of the Human-directed future enemy roster. All fifteen remain source-only future work with no enemy ID, level-placement, mechanic, catalogue pointer, or preload change.",
+    "Colour-aware contours and colour-vision simulations remain diagnostic until isolated delivery masters pass contrast, grayscale/CVD, alpha-edge, and Human/player review."
+  ],
+  "rollback": {
+    "runtime": "No rollback action is required: all public assets and runtime catalogue pointers remain unchanged.",
+    "recipe": "Keep mgjrpg-01/pre-versioned records truthful. If the Human rejects mgjrpg-02, set this review status to rejected with named evidence; do not rewrite historical records.",
+    "proof": "Retain every immutable packet revision, including rejected and superseded evidence. Any revised pixels, metrics, contracts, or presentation require a new packet revision and updated hashes."
+  }
+}

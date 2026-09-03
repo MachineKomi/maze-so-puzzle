@@ -62,9 +62,17 @@ what she still needs, and which idea she can try next.
 Visual canon: Ame has golden-blonde hair and clearly blue eyes in every field,
 portrait, story, title, UI, animation, and promotional depiction. Preserve her
 recognisable warm face, mint tunic, lavender cape, boots, and backpack. Her next
-approved model sheet should explore a restrained slightly longer hairstyle that
-more closely resembles the real Ame; the current bob is historical reference,
-not an immutable silhouette.
+model uses the restrained shoulder-brushing, softly layered Candidate C
+hairstyle that more closely resembles the real Ame; the current bob is
+historical reference, not an immutable silhouette.
+
+The Human approved Candidate C as the canonical static Ame v02 design direction
+on 2026-09-03 after reviewing its comparison, actual-size, and model-study
+proofs. The source-only identity and construction are canon; the current runtime
+image remains historical v01 until Plan 03 proves and selects the versioned
+runtime derivative. Portrait, story, title, UI, animation, and promotional art
+must derive from the approved model sheet without treating design approval as
+automatic approval of their pixels, runtime integration, or rights review.
 
 ### Professor Poggle — Cartographer of Almost Everywhere
 
@@ -85,6 +93,28 @@ often voices the tempting first answer. By the finale he prepares responsibly,
 apologises, and learns that a very small rainbow is an acceptable sneeze.
 
 Visual asset: public/assets/story-sprig-v1.webp.
+
+## Future Puzzlewild guardians — art identity only
+
+The Human-directed future visual roster includes a courteous Tea-Time Skeleton,
+Classic Slime, paired Lizard Sword and Spear Guards, Wholesome Succubus, Pocket
+T-Rex, a fictional Star Map Cultist whose public label remains pending, Lamia,
+Soda Slime, Orc Chieftain, Cyclops, Minotaur, Warrior Skeleton, Kappa, and a
+visibly alive Treasure Mimic. They expand the world's comic fantasy range; they
+are not villains, sources of suffering, or permission to introduce new attacks.
+
+Every one remains an enthusiastic guardian under the Polite Sword Rule. Tea,
+weapons, horns, wings, coils, size, bubbles and teeth communicate personality
+and challenge silhouette only. They do not imply damage, weapon reach, charm,
+chase, constriction, drowning, poison, sacrifice or status effects. The Mimic
+must look alive immediately because no disguise/reveal mechanic exists. The
+Succubus and Cultist need explicit Human review of child-facing names as well as
+art. Exact visual and safety construction lives in
+`docs/enemies/ENEMY_FAMILY_SHEET.md`.
+
+This section is future-facing. It neither assigns these guardians to the
+current chapters nor adds them to runtime generation; Plan 09 owns later
+placement and pacing.
 
 ## Educational design
 

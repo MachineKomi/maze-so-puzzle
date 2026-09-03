@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "cage-golden-heart-front-v05-source",
+  "id": "cage-golden-heart-front",
+  "artVersion": 5,
+  "family": "cage",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [
+      "exec-1a27919f-d02d-478e-a68c-3d50ed50cb97.png"
+    ],
+    "notes": "The historical prompt document names this asset. Automated migration does not upgrade surrounding prose to an exact prompt; a human may classify it later.",
+    "historyHeading": "Output mapping"
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/cage-golden-heart-front-v5-master.png",
+      "sha256": "8dd7a63c24f4cc0741cb82bbd8076f181447791aad5d5c64d3c7c9fb4a6de1ff",
+      "bytes": 1153009,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/cage-golden-heart-front-v5.webp",
+      "sha256": "c71b60d51cab5af878745a873f7a6fd58a808fb118295267619c67ff6856501d",
+      "bytes": 194648,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "a05061e98932f3e887c9e75549475c85c9ffa55f",
+    "firstSeenAt": "2026-09-02T07:18:33+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

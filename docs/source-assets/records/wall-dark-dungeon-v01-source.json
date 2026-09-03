@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "wall-dark-dungeon-v01-source",
+  "id": "wall-dark-dungeon",
+  "artVersion": 1,
+  "family": "terrain",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [],
+    "notes": "The historical prompt document names this asset. Automated migration does not upgrade surrounding prose to an exact prompt; a human may classify it later.",
+    "historyHeading": "Floor and wall materials"
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/wall-dark-dungeon-v1-master.png",
+      "sha256": "a04361c98ed776ad5c8eace7dde7e49e0f1234fcc17ce2e85b6de93affc38de3",
+      "bytes": 1712857,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/wall-dark-dungeon-v1.png",
+      "sha256": "f6e94564f355fd467f443c48fc1c532455d8bb338bb921692c814ce037ac688f",
+      "bytes": 705590,
+      "width": 1024,
+      "height": 1024,
+      "format": "png",
+      "mode": "P",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 4194304,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb",
+    "firstSeenAt": "2026-09-01T18:09:52+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

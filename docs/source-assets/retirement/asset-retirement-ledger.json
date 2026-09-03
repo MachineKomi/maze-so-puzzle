@@ -1,0 +1,719 @@
+{
+  "$schema": "./asset-retirement-ledger.schema.json",
+  "schemaVersion": 1,
+  "ledgerId": "plan03-static-art-retirement",
+  "createdAt": "2026-09-03T14:25:14+01:00",
+  "lastAuditedAt": "2026-09-03T14:25:14+01:00",
+  "inspectedCheckpoint": {
+    "head": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+    "workingTreeDirty": true,
+    "notes": "Shared worktree contained concurrent Human and agent changes. This audit read those files in place and did not reset, clean, move, delete, stage, or modify runtime assets."
+  },
+  "policy": {
+    "ownerPlan": "Plan 12",
+    "archiveRoot": "artifacts/asset-retirement",
+    "archiveRootMustBeIgnoredBeforeExport": true,
+    "forbiddenArchivePrefixes": ["public/assets/"],
+    "stateOrder": [
+      "classified",
+      "rollback-hold",
+      "plan12-eligible",
+      "export-staged",
+      "external-backup-confirmed",
+      "retired-from-runtime"
+    ],
+    "removalRule": "Copy and hash-verify outside public first; require external-backup confirmation and all per-entry evidence; remove only in a later family-isolated Plan 12 change."
+  },
+  "totals": {
+    "candidateCount": 16,
+    "encodedBytes": 4708989,
+    "decodedBytesUpperBound": 16777216,
+    "plan12EligibleCount": 0,
+    "soleRepositoryCopyCount": 5,
+    "partialMasterCount": 11
+  },
+  "entries": [
+    {
+      "entryId": "animal-cage-v01-runtime",
+      "assetPath": "public/assets/animal-cage.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "0a957a8a5638aec5f158a0f110e5ab80bdbdd220b8285c697e366445dc1abfcb",
+      "bytes": 259172,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/animal-cage-v01-source.json", "detail": "Structured provenance marks this derivative superseded and legacy-runtime-only.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": [
+        "public/assets/cage-golden-heart-front-v5.webp",
+        "public/assets/cage-storybook-wood-front-v5.webp",
+        "public/assets/cage-moon-silver-front-v5.webp",
+        "public/assets/cage-garden-vine-front-v5.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "legacy-runtime-only",
+        "sourceRecordPath": "docs/source-assets/records/animal-cage-v01-source.json",
+        "soleRepositoryCopy": true,
+        "rollbackSources": [
+          { "path": "public/assets/animal-cage.png", "sha256": "0a957a8a5638aec5f158a0f110e5ab80bdbdd220b8285c697e366445dc1abfcb", "bytes": 259172, "kind": "runtime-sole-copy" }
+        ],
+        "gitRestore": { "path": "public/assets/animal-cage.png", "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa", "method": "Recover the exact path from recorded Git history, then verify SHA-256 and bytes before use." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated level/theme/story/tester and preload paths have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "This file is the sole repository-local copy and has no verified external archive." }
+      ],
+      "archiveRelativePath": "payload/public/assets/animal-cage.png",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Generic historical cage was replaced in active catalogue use by four themed v5 fronts; it remains protected because no separate source master is linked."
+    },
+    {
+      "entryId": "cage-garden-vine-v01-runtime",
+      "assetPath": "public/assets/cage-garden-vine-v1.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "a7280f8560832f5a7378ec59d303a923ee5b53a4c13f157bb17e6bfe44b50f87",
+      "bytes": 333153,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-garden-vine-v01-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/cage-garden-vine-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-garden-vine-v01-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-garden-vine-v1-master.png", "sha256": "523a6c8ebac0be90f2f5e315e825accb6a4e7a1f48b21eabbe9ba76304b12e0d", "bytes": 1717009, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-garden-vine-v1.png", "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-garden-vine-v1.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-garden-vine-front-v02-runtime",
+      "assetPath": "public/assets/cage-garden-vine-front-v2.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "db36be8500203069a6b22dc6b59b81845affe16976faf90a05bbf99c7ecc6413",
+      "bytes": 303317,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-garden-vine-front-v02-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false },
+        { "kind": "processor-output", "path": "scripts/process_cage_fronts.py", "detail": "The historical processor still declares this filename as an output and could recreate it.", "blocksRetirement": true }
+      ],
+      "replacementPaths": ["public/assets/cage-garden-vine-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-garden-vine-front-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-garden-vine-front-v2-master.png", "sha256": "bf33b0c10011c0dd83fcdc23eb96d1f82d5a731b85226b82acb6e55752fe59b1", "bytes": 1460027, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-garden-vine-front-v2.png", "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "processor-dependency-active", "detail": "scripts/process_cage_fronts.py still declares this derivative output." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-garden-vine-front-v2.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-garden-vine-front-v04-runtime",
+      "assetPath": "public/assets/cage-garden-vine-front-v4.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "386e06db557d57aad71e0aca065a9603aca74c0e84f9319419b0a2515f4c5f5b",
+      "bytes": 255708,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-garden-vine-front-v04-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/cage-garden-vine-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-garden-vine-front-v04-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-garden-vine-front-v4.png", "sha256": "ed9233c190dc9bab50dc894a65546e6226fcf1f90eb4187d8c06578c6532f246", "bytes": 934636, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-garden-vine-front-v4.png", "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-garden-vine-front-v4.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-golden-heart-front-v02-runtime",
+      "assetPath": "public/assets/cage-golden-heart-front-v2.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "045350b7b6d056e6745951f806de0731900978b3b2f7aab41fdccb18263d55af",
+      "bytes": 215533,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-golden-heart-front-v02-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false },
+        { "kind": "processor-output", "path": "scripts/process_cage_fronts.py", "detail": "The historical processor still declares this filename as an output and could recreate it.", "blocksRetirement": true }
+      ],
+      "replacementPaths": ["public/assets/cage-golden-heart-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-golden-heart-front-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-golden-heart-front-v2-master.png", "sha256": "afc3ed60d0dd5ff8b72f8be0b5d2c818dd8fa5cdb78c7bc6155ee0bd69f5d3f8", "bytes": 1008698, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-golden-heart-front-v2.png", "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "processor-dependency-active", "detail": "scripts/process_cage_fronts.py still declares this derivative output." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-golden-heart-front-v2.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-golden-heart-front-v04-runtime",
+      "assetPath": "public/assets/cage-golden-heart-front-v4.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "b1e95c11f80628d4cccc5c275a4ee5476c888b63a42f95db262d22718d532e76",
+      "bytes": 187462,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-golden-heart-front-v04-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/cage-golden-heart-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-golden-heart-front-v04-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-golden-heart-front-v4.png", "sha256": "e8be40dc68a7748677129833497fdc6627baeb5dfb4838a4f162c08497f4fdc7", "bytes": 628817, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-golden-heart-front-v4.png", "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-golden-heart-front-v4.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-moon-silver-v01-runtime",
+      "assetPath": "public/assets/cage-moon-silver-v1.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "4132231da5d7406fc191c28b318b68ab3b13034912c957f54d92496eb8685be5",
+      "bytes": 298539,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-moon-silver-v01-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false },
+        { "kind": "processor-input", "path": "scripts/process_cage_fronts.py", "detail": "The historical cage-front processor opens this runtime file as its sizing/registration reference.", "blocksRetirement": true }
+      ],
+      "replacementPaths": ["public/assets/cage-moon-silver-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-moon-silver-v01-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-moon-silver-v1-master.png", "sha256": "e98343bc0fb08b3e544a1ff316f1df8cc0e15452c417549d1ae6e91e5de4779f", "bytes": 1507449, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-moon-silver-v1.png", "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "processor-dependency-active", "detail": "scripts/process_cage_fronts.py still reads this runtime file." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-moon-silver-v1.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-moon-silver-front-v02-runtime",
+      "assetPath": "public/assets/cage-moon-silver-front-v2.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "64ececeaad8ad69ee814af60f538ba4e84bf3c92b448388ef30334c124171c0a",
+      "bytes": 382007,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-moon-silver-front-v02-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false },
+        { "kind": "processor-output", "path": "scripts/process_cage_fronts.py", "detail": "The historical processor still declares this filename as an output and could recreate it.", "blocksRetirement": true }
+      ],
+      "replacementPaths": ["public/assets/cage-moon-silver-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-moon-silver-front-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-moon-silver-front-v2-master.png", "sha256": "172fb92b46543b69a00510490e96c7637da4da4c9832a8c00f09669547c0c998", "bytes": 1477768, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-moon-silver-front-v2.png", "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "processor-dependency-active", "detail": "scripts/process_cage_fronts.py still declares this derivative output." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-moon-silver-front-v2.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-moon-silver-front-v04-runtime",
+      "assetPath": "public/assets/cage-moon-silver-front-v4.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "13be403862609c71aaf2fb79fd411f6f936c77275512cac1f8edf9b59e047a5b",
+      "bytes": 222084,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-moon-silver-front-v04-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/cage-moon-silver-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-moon-silver-front-v04-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-moon-silver-front-v4.png", "sha256": "3e0cd74cd00cd778e1527ef54589c2280b039c1a7041140c87755ba87fd92e78", "bytes": 848548, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-moon-silver-front-v4.png", "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-moon-silver-front-v4.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-storybook-wood-v01-runtime",
+      "assetPath": "public/assets/cage-storybook-wood-v1.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "ccbf05783c2cd9841b47557e1c04bb6ed700fd8690c57ef2f1ecb3a61e72799d",
+      "bytes": 307326,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-storybook-wood-v01-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/cage-storybook-wood-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-storybook-wood-v01-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-storybook-wood-v1-master.png", "sha256": "c1bd991d99c500dcbfd7ed33c5fa5ac9fe8d43f9f020593bb1f25c3b237a796a", "bytes": 1582386, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-storybook-wood-v1.png", "firstSeenCommit": "bcb35e9e3231b96d5f632a318deb528e808d29eb", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-storybook-wood-v1.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-storybook-wood-front-v02-runtime",
+      "assetPath": "public/assets/cage-storybook-wood-front-v2.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "8e0ecc88fd199403364377ac416871b078a2d10db337769b7de7a384c81cc93b",
+      "bytes": 273397,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-storybook-wood-front-v02-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false },
+        { "kind": "processor-output", "path": "scripts/process_cage_fronts.py", "detail": "The historical processor still declares this filename as an output and could recreate it.", "blocksRetirement": true }
+      ],
+      "replacementPaths": ["public/assets/cage-storybook-wood-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-storybook-wood-front-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-storybook-wood-front-v2-master.png", "sha256": "6438129aab7aa46bf736fee0b1818cccb2054d292349331d3bb81ceeee9356b5", "bytes": 1336251, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-storybook-wood-front-v2.png", "firstSeenCommit": "76cfcd16e75252f6445e2f641d563d110e4af43e", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "processor-dependency-active", "detail": "scripts/process_cage_fronts.py still declares this derivative output." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-storybook-wood-front-v2.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "cage-storybook-wood-front-v04-runtime",
+      "assetPath": "public/assets/cage-storybook-wood-front-v4.png",
+      "family": "cage",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "677f2567b27238fba8fc91951fa3e3d562ef304681df78f0e8781ab4526aef2c",
+      "bytes": 229854,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/cage-storybook-wood-front-v04-source.json", "detail": "Structured provenance links the partial master and superseded derivative.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/cage-storybook-wood-front-v5.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/cage-storybook-wood-front-v04-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          { "path": "docs/source-assets/cage-storybook-wood-front-v4.png", "sha256": "ad95d314a9aa8a6edf6c248807393962e42ac9a30628ecc2564b097ef4378a1c", "bytes": 771794, "kind": "partial-master" }
+        ],
+        "gitRestore": { "path": "public/assets/cage-storybook-wood-front-v4.png", "firstSeenCommit": "3f61cbd822dbc42edfa167ed077eadff5580a347", "method": "Recover the exact derivative from recorded Git history and verify SHA-256; the partial master alone is not asserted to reproduce exact bytes." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later Plan 03 and downstream consumers may still change cage-family pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated paths and preload surfaces have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "No Plan 12 payload or external-backup confirmation exists." }
+      ],
+      "archiveRelativePath": "payload/public/assets/cage-storybook-wood-front-v4.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "floor-v02-runtime",
+      "assetPath": "public/assets/floor-v2.png",
+      "family": "terrain",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "171986acc9de70a10d215cdcbb39ae63a240b994fe0069e20f04fb332b680a08",
+      "bytes": 345877,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/floor-v02-source.json", "detail": "Structured provenance marks this derivative superseded and legacy-runtime-only.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/floor-v3.png"],
+      "preservation": {
+        "sourceStatus": "legacy-runtime-only",
+        "sourceRecordPath": "docs/source-assets/records/floor-v02-source.json",
+        "soleRepositoryCopy": true,
+        "rollbackSources": [
+          { "path": "public/assets/floor-v2.png", "sha256": "171986acc9de70a10d215cdcbb39ae63a240b994fe0069e20f04fb332b680a08", "bytes": 345877, "kind": "runtime-sole-copy" }
+        ],
+        "gitRestore": { "path": "public/assets/floor-v2.png", "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa", "method": "Recover the exact path from recorded Git history, then verify SHA-256 and bytes before use." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later terrain production and downstream consumers may still change pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated level/theme/story/tester and preload paths have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "This file is the sole repository-local copy and has no verified external archive." }
+      ],
+      "archiveRelativePath": "payload/public/assets/floor-v2.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "wall-v02-runtime",
+      "assetPath": "public/assets/wall-v2.png",
+      "family": "terrain",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "e0751540239caeeefe13d771d8343f67489b8c98ad762ae3186c73e98722343c",
+      "bytes": 354984,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/wall-v02-source.json", "detail": "Structured provenance marks this derivative superseded and legacy-runtime-only.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/wall-v3.png"],
+      "preservation": {
+        "sourceStatus": "legacy-runtime-only",
+        "sourceRecordPath": "docs/source-assets/records/wall-v02-source.json",
+        "soleRepositoryCopy": true,
+        "rollbackSources": [
+          { "path": "public/assets/wall-v2.png", "sha256": "e0751540239caeeefe13d771d8343f67489b8c98ad762ae3186c73e98722343c", "bytes": 354984, "kind": "runtime-sole-copy" }
+        ],
+        "gitRestore": { "path": "public/assets/wall-v2.png", "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa", "method": "Recover the exact path from recorded Git history, then verify SHA-256 and bytes before use." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later terrain production and downstream consumers may still change pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated level/theme/story/tester and preload paths have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "This file is the sole repository-local copy and has no verified external archive." }
+      ],
+      "archiveRelativePath": "payload/public/assets/wall-v2.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "water-v01-runtime",
+      "assetPath": "public/assets/water.png",
+      "family": "hazard",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "cba6d5d1fde179edc25a694640b035bac5b7d40c3d815ed78aafab7b86b58d29",
+      "bytes": 378418,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/water-v01-source.json", "detail": "Structured provenance marks this derivative superseded and legacy-runtime-only.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/water-v2.png"],
+      "preservation": {
+        "sourceStatus": "legacy-runtime-only",
+        "sourceRecordPath": "docs/source-assets/records/water-v01-source.json",
+        "soleRepositoryCopy": true,
+        "rollbackSources": [
+          { "path": "public/assets/water.png", "sha256": "cba6d5d1fde179edc25a694640b035bac5b7d40c3d815ed78aafab7b86b58d29", "bytes": 378418, "kind": "runtime-sole-copy" }
+        ],
+        "gitRestore": { "path": "public/assets/water.png", "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa", "method": "Recover the exact path from recorded Git history, then verify SHA-256 and bytes before use." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later hazard production and downstream consumers may still change pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated levels, themes, SVG pattern IDs, and preload paths have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "This file is the sole repository-local copy and has no verified external archive." }
+      ],
+      "archiveRelativePath": "payload/public/assets/water.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    },
+    {
+      "entryId": "lava-v01-runtime",
+      "assetPath": "public/assets/lava.png",
+      "family": "hazard",
+      "classification": "superseded-runtime-orphan-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "79c2d2afb5683a2aa7d83f89a7023b100756611557bc16a041daa4cdf12e32d6",
+      "bytes": 362158,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+      "lastVerifiedCheckpoint": "ab20f28372c93e341b13e3cf2d2c94ea71703bb2",
+      "runtimeReferences": [],
+      "currentReferences": [
+        { "kind": "source-record", "path": "docs/source-assets/records/lava-v01-source.json", "detail": "Structured provenance marks this derivative superseded and legacy-runtime-only.", "blocksRetirement": false },
+        { "kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "Generated inventory preserves the exact current runtime derivative.", "blocksRetirement": false },
+        { "kind": "validator-classification", "path": "scripts/art_pipeline/model.py", "detail": "Listed in SUPERSEDED_RUNTIME_IMAGES; classification is not deletion authority.", "blocksRetirement": false }
+      ],
+      "replacementPaths": ["public/assets/lava-v2.png"],
+      "preservation": {
+        "sourceStatus": "legacy-runtime-only",
+        "sourceRecordPath": "docs/source-assets/records/lava-v01-source.json",
+        "soleRepositoryCopy": true,
+        "rollbackSources": [
+          { "path": "public/assets/lava.png", "sha256": "79c2d2afb5683a2aa7d83f89a7023b100756611557bc16a041daa4cdf12e32d6", "bytes": 362158, "kind": "runtime-sole-copy" }
+        ],
+        "gitRestore": { "path": "public/assets/lava.png", "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa", "method": "Recover the exact path from recorded Git history, then verify SHA-256 and bytes before use." }
+      },
+      "blockers": [
+        { "id": "final-catalogue-pointers-not-frozen", "detail": "Later hazard production and downstream consumers may still change pointers." },
+        { "id": "authoritative-reachability-proof-missing", "detail": "An empty static runtime-reference result is not the required generated inventory proof." },
+        { "id": "generated-path-proof-missing", "detail": "Generated levels, themes, SVG pattern IDs, and preload paths have not been exhaustively proven." },
+        { "id": "rollback-window-not-expired", "detail": "The final replacement family and rollback window are not yet closed." },
+        { "id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline Tauri qualification belongs to Plan 12." },
+        { "id": "external-backup-not-confirmed", "detail": "This file is the sole repository-local copy and has no verified external archive." }
+      ],
+      "archiveRelativePath": "payload/public/assets/lava.png",
+      "retirementEvidence": { "catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false }
+    }
+  ]
+}

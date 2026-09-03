@@ -1,0 +1,6 @@
+# Art-pipeline dependencies are kept separate from the runtime application.
+# Derivative records capture these and the underlying codec versions so a
+# rebuild never silently claims byte-for-byte reproducibility across encoders.
+Pillow==12.2.0
+numpy==2.5.2
+jsonschema==4.26.0

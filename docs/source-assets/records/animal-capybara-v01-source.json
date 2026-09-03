@@ -1,0 +1,72 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "animal-capybara-v01-source",
+  "id": "animal-capybara",
+  "artVersion": 1,
+  "family": "friend",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": false,
+    "outputIds": [],
+    "notes": "No asset-specific prompt linkage was resolved automatically. Preserve the project-level generation claim and treat asset-specific prompt details as unknown."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/animal-capybara-v1-master.png",
+      "sha256": "fb79379080585999a42b71cd7180cc8a540a140a24784f2f497a35200eb57b26",
+      "bytes": 1632974,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/animal-capybara-v1.png",
+      "sha256": "f2db2ead6d7433ec23065f5c65ba24d788046d92e8c6760aea786452e5d25012",
+      "bytes": 260434,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "42775f763874dfaedee6fbc3e546f54d9d29696c",
+    "firstSeenAt": "2026-09-02T03:57:28+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "terrain-dressing-crystal-v01-source",
+  "id": "terrain-dressing-crystal",
+  "artVersion": 1,
+  "family": "dressing",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [
+      "exec-5b660b52-632e-427f-bd7b-6bfed0d54d29.png"
+    ],
+    "notes": "The historical prompt document names this asset. Automated migration does not upgrade surrounding prose to an exact prompt; a human may classify it later.",
+    "historyHeading": "Generated and saved files"
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/terrain-dressing-crystal-v1-master.png",
+      "sha256": "827756b184a981ff3872e38bf78807a9fbd8a6c7140bb3877335891eddd2deb9",
+      "bytes": 1026221,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/terrain-dressing-crystal-v1.png",
+      "sha256": "c244834e215424cc1d5bf531cece0298720a4c5b37845b4a1e3fe28f3a2c6959",
+      "bytes": 159787,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "496edbb923bf019c4349663ef518749e95e6268b",
+    "firstSeenAt": "2026-09-02T04:59:32+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

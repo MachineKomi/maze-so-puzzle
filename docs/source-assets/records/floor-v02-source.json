@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "floor-v02-source",
+  "id": "floor",
+  "artVersion": 2,
+  "family": "terrain",
+  "runtimeStatus": "superseded",
+  "sourceStatus": "legacy-runtime-only",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": false,
+    "outputIds": [],
+    "notes": "No asset-specific prompt linkage was resolved automatically. Preserve the project-level generation claim and treat asset-specific prompt details as unknown."
+  },
+  "sources": [],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/floor-v2.png",
+      "sha256": "171986acc9de70a10d215cdcbb39ae63a240b994fe0069e20f04fb332b680a08",
+      "bytes": 345877,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "superseded",
+      "loadingPhase": "not-loaded-by-active-catalogue",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "No repository-local immutable generator original or normalized master is linked."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+    "firstSeenAt": "2026-08-31T23:03:12+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

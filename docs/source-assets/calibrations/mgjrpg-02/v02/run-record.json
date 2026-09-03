@@ -1,0 +1,485 @@
+{
+  "schema": "maze-art-generation-run/v1",
+  "calibrationId": "mgjrpg-02-authored-options-v02",
+  "renderingProfile": "storybook-local-contour-v1",
+  "recipeCandidate": "mgjrpg-02",
+  "status": "pending-human-rendering-direction-review",
+  "humanFeedback": {
+    "recordedOn": "2026-09-03",
+    "candidateCIdentityStatus": "approved-and-immutable",
+    "v08Disposition": "rejected-as-style-choice-evidence",
+    "reason": "The deterministic v08 treatment changed little beyond adding a dark local-colour perimeter to old art. At gameplay size it looked effectively black, did not demonstrate a coherent from-scratch art style, and did not offer materially different choices.",
+    "requiredCorrection": "Present genuinely newly authored options with different interior construction, massing, value grouping, material painting, visibly lighter and brighter material-local contours, and clean cream-cut semantic UI stickers. Do not post-stroke the historical assets.",
+    "enemyRosterDirection": "Record the Human-directed fifteen-member future enemy roster without changing runtime enemy IDs or gameplay placement at this gate."
+  },
+  "identityAuthority": {
+    "recordId": "ame-v02-source",
+    "approvalScope": "identity-and-construction",
+    "immutablePath": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+    "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+    "bytes": 1458116,
+    "rule": "Candidate C remains the sole approved Ame v02 identity/construction authority. Options may vary surface rendering only; drift is rejected rather than offered."
+  },
+  "promptEvidence": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v02/PROMPTS.md",
+    "sha256": "2e7c91601ea764460886f0861e1b294030bdbbecc4d36d80dcb229c98349ec0a",
+    "bytes": 26750,
+    "fidelity": "exact-shared-block-plus-direction-suffix"
+  },
+  "familyTransferReferenceEvidence": {
+    "id": "family-transfer-current-comparator",
+    "kind": "identity-function-comparator",
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v02/family-transfer-identity-comparator-input.png",
+    "sha256": "4611f525757a487fb0ef4f00e2d8b78df2910f032294b3888ee6c3e6314a589f",
+    "bytes": 1405963,
+    "width": 2048,
+    "height": 1180,
+    "mode": "RGB",
+    "authority": "comparison-layout-only-non-authority",
+    "construction": "Deterministic Pillow comparison layout; proportional LANCZOS contain over opaque warm ivory; no component pixels repainted.",
+    "components": [
+      { "id": "animal-fox-current", "path": "public/assets/animal-fox.png", "sha256": "d770224467512611a422eacb1fc53bd10116d2b35c7ef452b7d8757f1ee79d4f", "bytes": 305400 },
+      { "id": "enemy-goblin-current", "path": "public/assets/goblin.png", "sha256": "793142291d8be5d0629e83f3776c167e80351d502a1dd9a35b20c7664b754473", "bytes": 253571 },
+      { "id": "enemy-jelly-sorcerer-master", "path": "docs/source-assets/enemy-jelly-sorcerer-v1-master.png", "sha256": "90c5a4d6ed10b90b7f86bcc7afb25e8102da0eee4b3ce533992e081d27ac8c6c", "bytes": 1641809 },
+      { "id": "reward-first-star-current", "path": "public/assets/reward-trail-sticker.png", "sha256": "114d8b98a2fec1e2c7d58e94bc6240595c47d9a418d28004291cc0bc0e640cf1", "bytes": 312552 },
+      { "id": "key-rose-heart-master", "path": "docs/source-assets/key-rose-heart-v1.png", "sha256": "5117b6fb6bec20f7312e600c8b8b38a0e8ee0384c96d3b686395c264e5b49794", "bytes": 862103 },
+      { "id": "door-rose-heart-master", "path": "docs/source-assets/door-rose-heart-v1.png", "sha256": "58d9b95af849b31f98f780ee00f3c7481445c388764fb6782d06a50ecd9bba11", "bytes": 1908942 },
+      { "id": "portal-rose-heart-master", "path": "docs/source-assets/portal-rose-heart-v1.png", "sha256": "a8a15c058674678a32341db9a47160c6026c1404e420b62f51951646af644e16", "bytes": 1760241 }
+    ]
+  },
+  "directions": [
+    {
+      "id": "a",
+      "name": "Luminous Storybook Cel",
+      "intent": "Crisp broad cel-gouache planes, sparse painterly modulation, medium-thin visibly chromatic contours, strongest clean anime and handheld-JRPG read.",
+      "recommendation": "art-director-recommended"
+    },
+    {
+      "id": "b",
+      "name": "Soft Jewel Gouache",
+      "intent": "Softly faceted matte gouache, finer luminous contours, restrained paper grain, warmest storybook and material-painting read.",
+      "recommendation": "alternative"
+    },
+    {
+      "id": "c",
+      "name": "Chunky Enamel Adventure",
+      "intent": "Bold simplified forms, thicker bright material-colour contours, minimal internal lines, strongest toy-readable thumbnail and sticker read.",
+      "recommendation": "alternative"
+    }
+  ],
+  "sharedGenerationFacts": {
+    "provider": "OpenAI ImageGen capability exposed to Codex",
+    "model": "not-disclosed-by-tool",
+    "seed": "not-disclosed-by-tool",
+    "settings": "not-disclosed-by-tool",
+    "executedOn": "2026-09-03",
+    "independence": "No direction saw or inherited another direction. Each family-transfer run used only its own matching direction sampler plus the neutral current-identity comparator; none may become a production or future-edit authority.",
+    "forbiddenAuthorityInputs": [
+      "docs/source-assets/calibrations/mgjrpg-02/v01/ame-c-rendering-assay-a-generator-original.png",
+      "artifacts/art-proofs/mgjrpg-02/v08"
+    ]
+  },
+  "runs": [
+    {
+      "runId": "mgjrpg-02-v02-direction-a-sampler",
+      "direction": "a",
+      "method": "reference-led-generation",
+      "prompt": {
+        "sharedHeading": "Shared direction-sampler block — verbatim",
+        "suffixHeading": "Direction-sampler A suffix — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "identity-and-construction-reference-for-ame-cell-only",
+          "authorityKind": "immutable-generator-original",
+          "ownerRecordId": "ame-v02-source",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116
+        }
+      ],
+      "output": {
+        "outputId": "exec-4fce690e-02e0-44e4-977b-0f3e7e05ecf4.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-sampler-generator-original.png",
+        "sha256": "f6bf0a91646864857259cd9c3d6f690859f1f4f2f471279f44923b28e8a94545",
+        "bytes": 2152762,
+        "width": 1313,
+        "height": 1198,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "authorityRule": "Whole-sheet direction evidence only; never crop a cell into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-b-sampler",
+      "direction": "b",
+      "method": "reference-led-generation",
+      "prompt": {
+        "sharedHeading": "Shared direction-sampler block — verbatim",
+        "suffixHeading": "Direction-sampler B suffix — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "identity-and-construction-reference-for-ame-cell-only",
+          "authorityKind": "immutable-generator-original",
+          "ownerRecordId": "ame-v02-source",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116
+        }
+      ],
+      "output": {
+        "outputId": "exec-6d0d35a0-5062-4dae-bb39-668c102d8285.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-sampler-generator-original.png",
+        "sha256": "5e492493d4c243833aecce17efdac56699a977a51a6370d988fbed0d2ce3d2e4",
+        "bytes": 2220646,
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "authorityRule": "Whole-sheet direction evidence only; never crop a cell into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-c-sampler",
+      "direction": "c",
+      "method": "reference-led-generation",
+      "prompt": {
+        "sharedHeading": "Shared direction-sampler block — verbatim",
+        "suffixHeading": "Direction-sampler C suffix — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "identity-and-construction-reference-for-ame-cell-only",
+          "authorityKind": "immutable-generator-original",
+          "ownerRecordId": "ame-v02-source",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116
+        }
+      ],
+      "output": {
+        "outputId": "exec-08a96093-16a2-41d5-95ad-71d9cc9602b3.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-c-sampler-generator-original.png",
+        "sha256": "155597470a4e9f61e483db98035c03b42f822fcef5071a797aeeec19d95fb14f",
+        "bytes": 1836850,
+        "width": 1402,
+        "height": 1122,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "authorityRule": "Whole-sheet direction evidence only; never crop a cell into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-ame-rendering-option-a",
+      "direction": "a",
+      "method": "identity-preserving-image-edit",
+      "prompt": {
+        "sharedHeading": "Shared Ame rendering-only block — verbatim",
+        "suffixHeading": "Ame option A suffix — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "edit-target",
+          "secondaryRole": "identity-and-construction-authority",
+          "authorityKind": "immutable-generator-original",
+          "ownerRecordId": "ame-v02-source",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116
+        }
+      ],
+      "output": {
+        "outputId": "exec-01866cfb-fb49-4293-ba88-20d136f2d533.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/ame-v02-rendering-option-a-generator-original.png",
+        "sha256": "018458ba6130b6de886f78c54fde07b0796c8d2893d770be3e546bda66614482",
+        "bytes": 1542360,
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "disposition": "pending-human-rendering-direction",
+        "sourceDefect": "The generator returned an opaque painted checkerboard despite the transparent-background request; preserve the original and extract only deterministic proof derivatives."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-ame-rendering-option-b",
+      "direction": "b",
+      "method": "identity-preserving-image-edit",
+      "prompt": {
+        "sharedHeading": "Shared Ame rendering-only block — verbatim",
+        "suffixHeading": "Ame option B suffix — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "edit-target",
+          "secondaryRole": "identity-and-construction-authority",
+          "authorityKind": "immutable-generator-original",
+          "ownerRecordId": "ame-v02-source",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116
+        }
+      ],
+      "output": {
+        "outputId": "exec-a9a50567-7a68-4a28-88f6-17ed0d0e8b9f.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/ame-v02-rendering-option-b-generator-original.png",
+        "sha256": "1e38a848480ebfc5a428f538bf7ea520dacdeb0e4efc45338e3e4b67efb734c3",
+        "bytes": 1696135,
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "disposition": "pending-human-rendering-direction",
+        "sourceDefect": "The generator returned an opaque painted checkerboard despite the transparent-background request; preserve the original and extract only deterministic proof derivatives."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-ame-rendering-option-c",
+      "direction": "c",
+      "method": "identity-preserving-image-edit",
+      "prompt": {
+        "sharedHeading": "Shared Ame rendering-only block — verbatim",
+        "suffixHeading": "Ame option C suffix — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "edit-target",
+          "secondaryRole": "identity-and-construction-authority",
+          "authorityKind": "immutable-generator-original",
+          "ownerRecordId": "ame-v02-source",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116
+        }
+      ],
+      "output": {
+        "outputId": "exec-363da929-79d8-4cd2-898c-9343e0ccb6f7.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/ame-v02-rendering-option-c-generator-original.png",
+        "sha256": "a1af339f12c4af992273b244a3c5f609717bce3c6f3961dadc45ff0ef6cb4c1a",
+        "bytes": 1712511,
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "disposition": "pending-human-rendering-direction",
+        "sourceDefect": "The generator returned an opaque painted checkerboard despite the transparent-background request; preserve the original and extract only deterministic proof derivatives."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-a-enemy-extension",
+      "direction": "a",
+      "method": "independent-text-to-image",
+      "prompt": {
+        "sharedHeading": "Shared enemy-extension block — verbatim",
+        "suffixHeading": "Enemy-extension A suffix — verbatim"
+      },
+      "orderedReferences": [],
+      "output": {
+        "outputId": "exec-3f7e38b6-cdc8-4d16-916e-f53882f99f98.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-enemy-extension-generator-original.png",
+        "sha256": "a9a09d64d4fdd9c95a56f6580325cc4ed19a05304e220caa4f719a25699ee5fd",
+        "bytes": 1917261,
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "authorityRule": "Whole-sheet direction evidence only; never crop a design into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-b-enemy-extension",
+      "direction": "b",
+      "method": "independent-text-to-image",
+      "prompt": {
+        "sharedHeading": "Shared enemy-extension block — verbatim",
+        "suffixHeading": "Enemy-extension B suffix — verbatim"
+      },
+      "orderedReferences": [],
+      "output": {
+        "outputId": "exec-0b8ebe36-a3e6-48e0-8bf0-83c9638271fa.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-enemy-extension-generator-original.png",
+        "sha256": "f180ea46d25d3cf811510a75f921d84b46c9db6542f402f8ae3d6eaa89987ed7",
+        "bytes": 1827357,
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "authorityRule": "Whole-sheet direction evidence only; never crop a design into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-c-enemy-extension",
+      "direction": "c",
+      "method": "independent-text-to-image",
+      "prompt": {
+        "sharedHeading": "Shared enemy-extension block — verbatim",
+        "suffixHeading": "Enemy-extension C suffix — verbatim"
+      },
+      "orderedReferences": [],
+      "output": {
+        "outputId": "exec-584415fc-d473-405d-8f22-26907bce513a.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-c-enemy-extension-generator-original.png",
+        "sha256": "62007f4899b129657e2730d17de13148d33537d6a4a3709a1631152866738d25",
+        "bytes": 1842841,
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "authorityRule": "Whole-sheet direction evidence only; never crop a design into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-a-family-transfer",
+      "direction": "a",
+      "method": "reference-led-generation",
+      "prompt": {
+        "fullHeading": "Family-transfer option A prompt — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "same-direction-craft-reference-comparison-only",
+          "authorityKind": "non-authority-generator-original-board",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-sampler-generator-original.png",
+          "sha256": "f6bf0a91646864857259cd9c3d6f690859f1f4f2f471279f44923b28e8a94545",
+          "bytes": 2152762
+        },
+        {
+          "position": 2,
+          "primaryRole": "current-identity-and-function-comparator-only",
+          "authorityKind": "deterministic-comparison-layout-non-authority",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/family-transfer-identity-comparator-input.png",
+          "sha256": "4611f525757a487fb0ef4f00e2d8b78df2910f032294b3888ee6c3e6314a589f",
+          "bytes": 1405963
+        }
+      ],
+      "output": {
+        "outputId": "exec-2c06423d-d8d2-4a26-aad0-0b6e4c3c1c7d.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-family-transfer-generator-original.png",
+        "sha256": "2583f027d00d662dbd52e689eca99298a5d04c24322a976747a288277c356a76",
+        "bytes": 2128927,
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "sourceDefect": "Opaque comparison board. The prompt requested seven canaries; the generator separated Rose Heart lock and key into two objects, yielding eight visible subjects.",
+        "authorityRule": "Whole-sheet transfer evidence only; never crop a cell into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-b-family-transfer",
+      "direction": "b",
+      "method": "reference-led-generation",
+      "prompt": {
+        "fullHeading": "Family-transfer option B prompt — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "same-direction-craft-reference-comparison-only",
+          "authorityKind": "non-authority-generator-original-board",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-sampler-generator-original.png",
+          "sha256": "5e492493d4c243833aecce17efdac56699a977a51a6370d988fbed0d2ce3d2e4",
+          "bytes": 2220646
+        },
+        {
+          "position": 2,
+          "primaryRole": "current-identity-and-function-comparator-only",
+          "authorityKind": "deterministic-comparison-layout-non-authority",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/family-transfer-identity-comparator-input.png",
+          "sha256": "4611f525757a487fb0ef4f00e2d8b78df2910f032294b3888ee6c3e6314a589f",
+          "bytes": 1405963
+        }
+      ],
+      "output": {
+        "outputId": "exec-648b7c0b-dbe7-4b3d-89a8-96eb8862ac0c.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-family-transfer-generator-original.png",
+        "sha256": "a34c6f6fcc1ce34d07d4ba7c32669a0448765d7f0210dd93789746507a83f1f8",
+        "bytes": 2102079,
+        "width": 1618,
+        "height": 972,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "sourceDefect": "Opaque comparison board. The prompt requested seven canaries; the generator separated Rose Heart lock and key into two objects, yielding eight visible subjects.",
+        "authorityRule": "Whole-sheet transfer evidence only; never crop a cell into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    },
+    {
+      "runId": "mgjrpg-02-v02-direction-c-family-transfer",
+      "direction": "c",
+      "method": "reference-led-generation",
+      "prompt": {
+        "fullHeading": "Family-transfer option C prompt — verbatim"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "same-direction-craft-reference-comparison-only",
+          "authorityKind": "non-authority-generator-original-board",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-c-sampler-generator-original.png",
+          "sha256": "155597470a4e9f61e483db98035c03b42f822fcef5071a797aeeec19d95fb14f",
+          "bytes": 1836850
+        },
+        {
+          "position": 2,
+          "primaryRole": "current-identity-and-function-comparator-only",
+          "authorityKind": "deterministic-comparison-layout-non-authority",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/family-transfer-identity-comparator-input.png",
+          "sha256": "4611f525757a487fb0ef4f00e2d8b78df2910f032294b3888ee6c3e6314a589f",
+          "bytes": 1405963
+        }
+      ],
+      "output": {
+        "outputId": "exec-44c14af3-1df9-47f7-b625-36ed5929707b.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-c-family-transfer-generator-original.png",
+        "sha256": "39c6fd4eb57ae5dc7dc3ab541ab376f6a206c12ec68a82a03e7b3f00f322358e",
+        "bytes": 1929079,
+        "width": 1536,
+        "height": 1024,
+        "mode": "RGB",
+        "disposition": "pending-human-comparison-only",
+        "sourceDefect": "Opaque comparison board. The prompt requested seven canaries; the generator separated Rose Heart lock and key into two objects, yielding eight visible subjects.",
+        "authorityRule": "Whole-sheet transfer evidence only; never crop a cell into a master or use it as a future edit reference."
+      },
+      "lineage": { "editOfEdit": false, "mayBeIdentityAuthority": false, "mayBeRenderingAuthority": false, "mayBeFutureEditTarget": false }
+    }
+  ],
+  "historicalEvidence": {
+    "packetRevision": "v08",
+    "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v08/proof-index.json",
+    "sha256": "56ae0ad299e9ad619ddd0ec06d164c4a4953a03fae1bfdc3c2426414897de951",
+    "bytes": 303697,
+    "disposition": "human-rejected-as-style-choice-evidence",
+    "preservationRule": "Keep immutable as evidence of the rejected post-hoc deterministic contour approach; do not use it as an art authority."
+  },
+  "byteAccounting": {
+    "trackedGeneratorOriginalCount": 12,
+    "trackedGeneratorOriginalBytes": 22908808,
+    "trackedComparisonReferenceCount": 1,
+    "trackedComparisonReferenceBytes": 1405963,
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0
+  },
+  "externalCraftBoundary": "No Puzzle Pets Arena or franchise pixel, prompt, character, palette, motif, UI layout, branded element, or composition was copied. Only general craft principles and genre-level ideas informed Maze-original prompts.",
+  "rollback": {
+    "method": "Preserve every generator original and prompt. Keep runtime pointers unchanged. If all directions are rejected, append the decision and start new independent runs from the immutable written brief and Candidate C authority rather than editing an option.",
+    "runtimeByteDelta": 0
+  }
+}

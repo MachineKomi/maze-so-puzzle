@@ -1,0 +1,304 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maze-so-puzzle.invalid/schemas/asset-retirement-ledger.schema.json",
+  "title": "Maze so Puzzle asset-retirement ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "ledgerId",
+    "createdAt",
+    "lastAuditedAt",
+    "inspectedCheckpoint",
+    "policy",
+    "totals",
+    "entries"
+  ],
+  "properties": {
+    "$schema": { "const": "./asset-retirement-ledger.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "ledgerId": { "const": "plan03-static-art-retirement" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "lastAuditedAt": { "type": "string", "format": "date-time" },
+    "inspectedCheckpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["head", "workingTreeDirty", "notes"],
+      "properties": {
+        "head": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "workingTreeDirty": { "type": "boolean" },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ownerPlan",
+        "archiveRoot",
+        "archiveRootMustBeIgnoredBeforeExport",
+        "forbiddenArchivePrefixes",
+        "stateOrder",
+        "removalRule"
+      ],
+      "properties": {
+        "ownerPlan": { "const": "Plan 12" },
+        "archiveRoot": { "const": "artifacts/asset-retirement" },
+        "archiveRootMustBeIgnoredBeforeExport": { "const": true },
+        "forbiddenArchivePrefixes": {
+          "type": "array",
+          "const": ["public/assets/"],
+          "minItems": 1
+        },
+        "stateOrder": {
+          "type": "array",
+          "const": [
+            "classified",
+            "rollback-hold",
+            "plan12-eligible",
+            "export-staged",
+            "external-backup-confirmed",
+            "retired-from-runtime"
+          ]
+        },
+        "removalRule": { "type": "string", "minLength": 1 }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidateCount",
+        "encodedBytes",
+        "decodedBytesUpperBound",
+        "plan12EligibleCount",
+        "soleRepositoryCopyCount",
+        "partialMasterCount"
+      ],
+      "properties": {
+        "candidateCount": { "type": "integer", "minimum": 0 },
+        "encodedBytes": { "type": "integer", "minimum": 0 },
+        "decodedBytesUpperBound": { "type": "integer", "minimum": 0 },
+        "plan12EligibleCount": { "type": "integer", "minimum": 0 },
+        "soleRepositoryCopyCount": { "type": "integer", "minimum": 0 },
+        "partialMasterCount": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "state": {
+      "enum": [
+        "classified",
+        "rollback-hold",
+        "plan12-eligible",
+        "export-staged",
+        "external-backup-confirmed",
+        "retired-from-runtime",
+        "restored"
+      ]
+    },
+    "fileEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes", "kind"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "kind": { "enum": ["partial-master", "runtime-sole-copy"] }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "path", "detail", "blocksRetirement"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "source-record",
+            "generated-manifest",
+            "validator-classification",
+            "processor-input",
+            "processor-output"
+          ]
+        },
+        "path": { "type": "string", "minLength": 1 },
+        "detail": { "type": "string", "minLength": 1 },
+        "blocksRetirement": { "type": "boolean" }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "detail"],
+      "properties": {
+        "id": {
+          "enum": [
+            "final-catalogue-pointers-not-frozen",
+            "authoritative-reachability-proof-missing",
+            "generated-path-proof-missing",
+            "processor-dependency-active",
+            "rollback-window-not-expired",
+            "clean-clone-route-and-package-proof-missing",
+            "external-backup-not-confirmed"
+          ]
+        },
+        "detail": { "type": "string", "minLength": 1 }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entryId",
+        "assetPath",
+        "family",
+        "classification",
+        "state",
+        "eligibleForPlan12",
+        "sha256",
+        "bytes",
+        "width",
+        "height",
+        "decodedBytesUpperBound",
+        "firstSeenCommit",
+        "lastVerifiedCheckpoint",
+        "runtimeReferences",
+        "currentReferences",
+        "replacementPaths",
+        "preservation",
+        "blockers",
+        "archiveRelativePath",
+        "retirementEvidence"
+      ],
+      "properties": {
+        "entryId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "assetPath": { "type": "string", "pattern": "^public/assets/[A-Za-z0-9._-]+$" },
+        "family": { "enum": ["cage", "terrain", "hazard"] },
+        "classification": { "const": "superseded-runtime-orphan-candidate" },
+        "state": { "$ref": "#/$defs/state" },
+        "eligibleForPlan12": { "type": "boolean" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "decodedBytesUpperBound": { "type": "integer", "minimum": 4 },
+        "firstSeenCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "lastVerifiedCheckpoint": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "runtimeReferences": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "currentReferences": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "$ref": "#/$defs/reference" }
+        },
+        "replacementPaths": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^public/assets/[A-Za-z0-9._-]+$" },
+          "uniqueItems": true
+        },
+        "preservation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sourceStatus",
+            "sourceRecordPath",
+            "soleRepositoryCopy",
+            "rollbackSources",
+            "gitRestore"
+          ],
+          "properties": {
+            "sourceStatus": { "enum": ["partial", "legacy-runtime-only"] },
+            "sourceRecordPath": {
+              "type": "string",
+              "pattern": "^docs/source-assets/records/[a-z0-9-]+-source\\.json$"
+            },
+            "soleRepositoryCopy": { "type": "boolean" },
+            "rollbackSources": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/fileEvidence" }
+            },
+            "gitRestore": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "firstSeenCommit", "method"],
+              "properties": {
+                "path": { "type": "string", "pattern": "^public/assets/[A-Za-z0-9._-]+$" },
+                "firstSeenCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+                "method": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        },
+        "blockers": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/blocker" }
+        },
+        "archiveRelativePath": {
+          "type": "string",
+          "pattern": "^payload/public/assets/[A-Za-z0-9._-]+$"
+        },
+        "retirementEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "catalogueFrozen",
+            "reachabilityPassed",
+            "generatedPathsPassed",
+            "rollbackWindowExpired",
+            "cleanClonePassed",
+            "browserRoutesPassed",
+            "tauriOfflinePackagePassed",
+            "archiveHashVerified",
+            "externalBackupConfirmed"
+          ],
+          "properties": {
+            "catalogueFrozen": { "type": "boolean" },
+            "reachabilityPassed": { "type": "boolean" },
+            "generatedPathsPassed": { "type": "boolean" },
+            "rollbackWindowExpired": { "type": "boolean" },
+            "cleanClonePassed": { "type": "boolean" },
+            "browserRoutesPassed": { "type": "boolean" },
+            "tauriOfflinePackagePassed": { "type": "boolean" },
+            "archiveHashVerified": { "type": "boolean" },
+            "externalBackupConfirmed": { "type": "boolean" }
+          }
+        },
+        "notes": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "eligibleForPlan12": { "const": false } }, "required": ["eligibleForPlan12"] },
+          "then": { "properties": { "state": { "enum": ["classified", "rollback-hold", "restored"] } } }
+        },
+        {
+          "if": { "properties": { "eligibleForPlan12": { "const": true } }, "required": ["eligibleForPlan12"] },
+          "then": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "plan12-eligible",
+                  "export-staged",
+                  "external-backup-confirmed",
+                  "retired-from-runtime"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

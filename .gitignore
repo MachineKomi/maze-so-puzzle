@@ -11,3 +11,6 @@ release/*.exe
 .vite/
 .playwright-cli/
 coverage/
+artifacts/art-proofs/
+__pycache__/
+*.py[cod]

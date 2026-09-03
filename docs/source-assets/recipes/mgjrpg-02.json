@@ -1,0 +1,118 @@
+{
+  "schema": "maze-art-recipe/v1",
+  "recipeId": "mgjrpg-02",
+  "revision": 4,
+  "status": "approved",
+  "renderingProfile": "storybook-local-contour-v1",
+  "creativeNorthStar": "Pocket-sized courage made visible: clean, chunky, emotionally warm anime-JRPG forms whose local colour-aware plum contours keep every friend, challenge, prop, and magical symbol readable without turning the world harsh.",
+  "authoredRendering": {
+    "contourMode": "material-local-color-aware",
+    "contourAuthority": "authored-or-approved-source",
+    "extractionRole": "alpha-matte-only-for-cutouts; not-applicable-for-opaque",
+    "uniformBlackOutlines": "forbidden",
+    "darkestInkUse": [
+      "eyes and pupils",
+      "mouths",
+      "deep occlusion",
+      "very small critical separations",
+      "accessibility-critical contrast that cannot be met by a local contour token"
+    ],
+    "fieldStickerCutline": "forbidden",
+    "semanticUiStickerCutline": "cream-only",
+    "terrainEnclosingContour": "forbidden",
+    "staticLighting": "neutral upper-left/front form modelling only; no baked directional cast shadow, floor shadow, spotlight, rim-light halo, particles, or environmental light",
+    "massRule": "two-to-four large colour masses at the smallest delivery size",
+    "valueRule": "three broad cel-like value groups with the focal face or semantic motif first",
+    "surfaceFrequencyRule": "material-truthful grouped detail that remains subordinate to silhouette and focal hierarchy"
+  },
+  "contourTokens": {
+    "warm-gold": "#A86249",
+    "aubergine": "#80549A",
+    "blue-plum": "#4D69A8",
+    "russet-plum": "#A95361",
+    "leaf-plum": "#4C7D68",
+    "cream-mauve": "#8C6984",
+    "ink-900": "#34203F"
+  },
+  "humanSelectionProfile": {
+    "status": "rendering-recipe-approved-for-controlled-family-production",
+    "selectedOn": "2026-09-03",
+    "ame": "Fresh B-led 01 is the approved static rendering choice because it is clearest at Ame's common small field scale. Candidate C remains the sole identity/construction authority. Fresh B-led 02 is not selected and prior Direction B remains rollback evidence only.",
+    "coreDefault": "direction-a",
+    "coreDirectionCExceptions": [
+      "green-tea-drinking-skeleton",
+      "traditional-jrpg-slime",
+      "lizard-man-with-sword"
+    ],
+    "currentFamily": "direction-a construction/chroma/contours with restrained direction-b broad colour and shading",
+    "futureEnemy": "The v03 Succubus, Pocket T-Rex, Kappa, and Treasure Mimic board is approved as concept and rendering-family direction. Each production asset must still be independently authored as an isolated source master; the board must never be cropped into masters.",
+    "portalConstruction": "The fresh low flower-petal Rose Heart floor-pad construction is approved; upright arch/door portal construction is forbidden. Final pixels still require a brighter, clearer centre heart and a truly flat extraction matte with no painted checkerboard contamination."
+  },
+  "antiAccumulationRule": "Every new source starts from a blank canvas and uses only approved identity/construction and bounded family-craft references. No prior rendering candidate, edit-of-edit, paint-over, filter, sharpening residue, micro-facet chatter, grain cloud, stipple, mottling, edge chatter, or deep-fried texture may become authority.",
+  "historicalRevision": {
+    "revision": 2,
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v02/mgjrpg-02-recipe-r02-rejected.json",
+    "sha256": "f9e882ab12d47db5c633d617b2f3884832a7aa8cd6fee8b58db1c00b37ba126a",
+    "bytes": 4899,
+    "disposition": "Human-rejected dark post-process contour calibration; preserved unchanged as history"
+  },
+  "supersededCandidateRevision": {
+    "revision": 3,
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v03/mgjrpg-02-recipe-r03-candidate.json",
+    "sha256": "42e18d607223e985486a0a37418bdbdff6d4f8d5d6eb2b61dff498fce69dd40d",
+    "bytes": 6428,
+    "disposition": "Exact pre-decision candidate recipe preserved before the forward-only r04 approval update"
+  },
+  "localityRules": [
+    "Choose the contour hue from the nearest enclosed material or colour region, then make it darker and slightly richer within Maze's deep-plum family.",
+    "Keep each material run continuous and confident; do not switch hue pixel by pixel.",
+    "Use material-aware structural separation lines at adjacent regions instead of arbitrary black dividers.",
+    "Ignore a two-pixel reference-size junction zone when measuring ambiguous material transitions.",
+    "World cutouts receive no exterior cream or white sticker halo. Semantic UI icons, badges, reaction symbols, prompts, and reward flourishes may use the declared cream cutline outside an inner local contour."
+  ],
+  "deliveryStrokePixels": {
+    "512": { "outer": "3-5", "structural": "1.5-3" },
+    "256": { "outer": "2-3", "structural": "1-2" },
+    "128-84": { "outer": "2", "structural": "1" },
+    "77-40": { "outer": "1.5-2", "structural": "1-or-omit" },
+    "semanticCutline": {
+      "64-48": "2",
+      "32": "1.5",
+      "24-16": "1"
+    },
+    "authority": "The actual delivery-size width is authoritative. A single source derivative that cannot hold it must be replaced by an authored optical sibling."
+  },
+  "layerClasses": {
+    "character-contour": "Characters, friends, enemies, weapons, items, props, locks, doors, cages, and portals use enclosing local contours plus material-aware internal separations.",
+    "semantic-ui-cutout": "Navigation icons, badges, and semantic reward cutouts use an inner local contour and may use the declared cream cutline; metaphor and silhouette must survive without colour.",
+    "terrain-boundary": "Floors, walls, liquids, hazards, and periodic dressings use local value, pattern, boundary, and seam separation; they never receive a character-like enclosing outline.",
+    "story-illustration": "Full-bleed story art uses colour-aware subject and material boundaries without a sticker cutline or an enclosing contour around the frame."
+  },
+  "provisionalMetrics": {
+    "profile": "storybook-contour-metrics-v1",
+    "pureBlackVisiblePixelsMaximum": 0,
+    "outerContinuityReferenceMinimum": 0.97,
+    "outerContinuitySmallestDeliveryMinimum": 0.94,
+    "localMaterialAgreementGlobalMinimum": 0.85,
+    "localMaterialAgreementSubstantialSegmentMinimum": 0.75,
+    "minimumRelativeLuminanceDelta": 0.12,
+    "maximumOklabDistanceFromDeclaredToken": 0.08,
+    "maximumUncoveredRunReferencePixels": 2,
+    "maximumUncoveredRunDeliveryPixels": 1,
+    "clearTransparentGutterPixels": 4,
+    "enforcementPhase": "Before the Human canary decision, pure black, role/cutline, alpha, provenance, and publication-gate violations are blocking. Locality/contrast distributions are reported; final aesthetic envelopes freeze only from Human-accepted evidence."
+  },
+  "externalCraftBoundary": "No Puzzle Pets Arena pixels, prompts, characters, palettes, motifs, UI layouts, or branded elements may be copied. Maze adopts only the general rendering craft of colour-responsive local contours.",
+  "productionAuthorization": {
+    "scope": "controlled-source-production-and-family-by-family-review",
+    "reviewProtocol": "Show each generated batch in one lightweight HTML page at one declared review scale with the asset name below. After the Human responds, unlisted assets in that reviewed batch are approved by default and named exceptions are rejected for a fresh independent generation in the next batch; silence or an unsubmitted batch is never approval.",
+    "sourceRule": "Preserve immutable generator originals, exact prompts, ordered reference roles and hashes, rejected candidates, normalized derivatives, measurements, and rollback information. Never use an edit-of-an-edit, proof cutout, or contact-sheet crop as identity or rendering authority.",
+    "publishRule": "Recipe approval permits source production. It does not approve a particular cleaned cutout, rights review, public derivative, catalogue pointer, preload change, runtime publication, retirement, or decoded-memory allocation; each family must pass its own derivative and catalogue-switch gates.",
+    "retirementRule": "During Plan 03 classify superseded assets in the retirement ledger only. Do not move or delete existing runtime files. Keep versioned rollback files until the Plan 12 retirement sweep, after every later consumer and catalogue pointer is final; never place an archive inside public/assets."
+  },
+  "gate": {
+    "requiredForRuntimePublish": true,
+    "reviewId": "mgjrpg-02-canary-v01",
+    "reviewPath": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json"
+  }
+}

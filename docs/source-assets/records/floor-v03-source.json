@@ -1,0 +1,73 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "floor-v03-source",
+  "id": "floor",
+  "artVersion": 3,
+  "family": "terrain",
+  "runtimeStatus": "active",
+  "sourceStatus": "partial",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [],
+    "notes": "The historical prompt document names this asset. Automated migration does not upgrade surrounding prose to an exact prompt; a human may classify it later.",
+    "historyHeading": "Floor v3"
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/floor-v3-master.png",
+      "sha256": "a352d07c465da82077b5bda7e010d0c388bf594aafb4d105b606d09475031849",
+      "bytes": 2077637,
+      "relationship": "same-stem-retained-source-candidate",
+      "evidence": "Repository filename correspondence only; retained as partial evidence until the historical prompt/processor relationship is reviewed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/floor-v3.png",
+      "sha256": "bc1eeaf3183919431b3e884df30b13f3056ad278866ea2fbad7a279f5ab95d07",
+      "bytes": 771153,
+      "width": 1024,
+      "height": 1024,
+      "format": "png",
+      "mode": "P",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 4194304,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The same-stem source relationship requires human provenance review."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "4e77c35a492f7ff81ef76a85e18b50b8ef2323ed",
+    "firstSeenAt": "2026-09-01T17:16:35+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

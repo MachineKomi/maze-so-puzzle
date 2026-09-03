@@ -1,0 +1,360 @@
+{
+  "schema": "maze-art-generation-run/v1",
+  "revision": "mgjrpg-02-v03",
+  "status": "pending-human-rendering-review",
+  "recordedOn": "2026-09-03",
+  "promptFile": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v03/PROMPTS.md",
+    "sha256": "0415748df6175b4b803d19ecc394ed44bbbffcc85635e7db6501105311c3136d",
+    "bytes": 22306
+  },
+  "identityAuthority": {
+    "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+    "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+    "bytes": 1458116,
+    "role": "sole-human-approved-ame-v02-static-identity-and-construction-authority"
+  },
+  "comparisonOnlyFallback": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v02/ame-v02-rendering-option-b-generator-original.png",
+    "sha256": "1e38a848480ebfc5a428f538bf7ea520dacdeb0e4efc45338e3e4b67efb734c3",
+    "bytes": 1696135,
+    "role": "human-preferred-ame-rendering-fallback-comparison-only",
+    "generationInput": false
+  },
+  "referenceInputs": [
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-turnaround-study.png",
+      "sha256": "22b312e19731718146e3a836afdf28884bec7210c49233a55090592cc275fe09",
+      "bytes": 1832045,
+      "role": "approved-ame-construction-cross-check"
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-sampler-generator-original.png",
+      "sha256": "f6bf0a91646864857259cd9c3d6f690859f1f4f2f471279f44923b28e8a94545",
+      "bytes": 2152762,
+      "role": "human-selected-core-default-and-enemy-family-craft-comparison"
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-sampler-generator-original.png",
+      "sha256": "5e492493d4c243833aecce17efdac56699a977a51a6370d988fbed0d2ce3d2e4",
+      "bytes": 2220646,
+      "role": "ame-soft-jewel-rendering-language-comparison-only"
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-c-sampler-generator-original.png",
+      "sha256": "155597470a4e9f61e483db98035c03b42f822fcef5071a797aeeec19d95fb14f",
+      "bytes": 1836850,
+      "role": "human-selected-tea-skeleton-slime-and-sword-lizard-comparison-only"
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-family-transfer-generator-original.png",
+      "sha256": "2583f027d00d662dbd52e689eca99298a5d04c24322a976747a288277c356a76",
+      "bytes": 2128927,
+      "role": "human-accepted-family-construction-contour-and-chroma-reference"
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-family-transfer-generator-original.png",
+      "sha256": "a34c6f6fcc1ce34d07d4ba7c32669a0448765d7f0210dd93789746507a83f1f8",
+      "bytes": 2102079,
+      "role": "secondary-broad-colour-and-shading-reference-only"
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-enemy-extension-generator-original.png",
+      "sha256": "a9a09d64d4fdd9c95a56f6580325cc4ed19a05304e220caa4f719a25699ee5fd",
+      "bytes": 1917261,
+      "role": "human-selected-wholesome-succubus-concept-only"
+    },
+    {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-enemy-extension-generator-original.png",
+      "sha256": "f180ea46d25d3cf811510a75f921d84b46c9db6542f402f8ae3d6eaa89987ed7",
+      "bytes": 1827357,
+      "role": "human-selected-trex-kappa-and-mimic-concepts-only"
+    },
+    {
+      "path": "docs/source-assets/portal-rose-heart-v1.png",
+      "sha256": "a8a15c058674678a32341db9a47160c6026c1404e420b62f51951646af644e16",
+      "bytes": 1760241,
+      "role": "existing-flower-floor-pad-function-and-motif-reference"
+    }
+  ],
+  "humanSelections": {
+    "ame": {
+      "preferredRendering": "direction-b",
+      "openDecision": "fresh-01-or-fresh-02-or-prior-direction-b-fallback",
+      "identityConstruction": "candidate-c-immutable"
+    },
+    "coreSampler": {
+      "default": "direction-a",
+      "directionCExceptions": [
+        "green-tea-drinking-skeleton",
+        "traditional-jrpg-slime",
+        "lizard-man-with-sword"
+      ]
+    },
+    "currentFamilyTransfer": {
+      "acceptedBase": "direction-a",
+      "secondaryInfluence": "direction-b-colour-and-broad-shading-only",
+      "portalOverride": "retain-low-flower-petal-floor-pad-category"
+    },
+    "futureEnemyExtension": {
+      "conceptDirectionB": ["t-rex", "kappa", "classic-mimic"],
+      "conceptDirectionA": ["wholesome-succubus"],
+      "requiredRendering": "direction-a-family-construction-and-contours-with-restrained-direction-b-colour-and-broad-shading"
+    }
+  },
+  "runs": [
+    {
+      "runId": "mgjrpg-02-v03-ame-fresh-01",
+      "kind": "ame-fresh",
+      "generationMode": "fresh-reference-led-generation",
+      "prompt": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/PROMPTS.md",
+        "sha256": "0415748df6175b4b803d19ecc394ed44bbbffcc85635e7db6501105311c3136d",
+        "bytes": 22306,
+        "blockId": "ame-fresh"
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116,
+          "role": "sole-static-identity-and-construction-authority",
+          "authorityKind": "human-approved-generator-original"
+        },
+        {
+          "order": 2,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-sampler-generator-original.png",
+          "sha256": "5e492493d4c243833aecce17efdac56699a977a51a6370d988fbed0d2ce3d2e4",
+          "bytes": 2220646,
+          "role": "rendering-language-comparison-only",
+          "authorityKind": "non-authority-generator-original-board"
+        },
+        {
+          "order": 3,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-family-transfer-generator-original.png",
+          "sha256": "a34c6f6fcc1ce34d07d4ba7c32669a0448765d7f0210dd93789746507a83f1f8",
+          "bytes": 2102079,
+          "role": "colour-value-material-comparison-only",
+          "authorityKind": "non-authority-generator-original-board"
+        }
+      ],
+      "output": {
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v03/ame-v02-rendering-b-fresh-01-generator-original.png",
+        "sha256": "b57660fd27a53bc00960c2cdeae92addc3b1359a1447a36d9676b0a78a03ff12",
+        "bytes": 1396813,
+        "outputId": "exec-7354445d-95c2-47a3-af1f-14e3d57a2cd6.png"
+      },
+      "lineage": {
+        "editOfEdit": false,
+        "editTargetPath": null,
+        "mayBeIdentityAuthority": false,
+        "mayBeRenderingAuthority": false,
+        "mayBeFutureEditTarget": false
+      }
+    },
+    {
+      "runId": "mgjrpg-02-v03-ame-fresh-02",
+      "kind": "ame-fresh",
+      "generationMode": "fresh-reference-led-generation",
+      "prompt": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/PROMPTS.md",
+        "sha256": "0415748df6175b4b803d19ecc394ed44bbbffcc85635e7db6501105311c3136d",
+        "bytes": 22306,
+        "blockId": "ame-fresh-02"
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116,
+          "role": "sole-static-identity-and-construction-authority",
+          "authorityKind": "human-approved-generator-original"
+        },
+        {
+          "order": 2,
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-turnaround-study.png",
+          "sha256": "22b312e19731718146e3a836afdf28884bec7210c49233a55090592cc275fe09",
+          "bytes": 1832045,
+          "role": "approved-construction-cross-check-static-image-wins-conflicts",
+          "authorityKind": "human-approved-construction-study"
+        },
+        {
+          "order": 3,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-sampler-generator-original.png",
+          "sha256": "5e492493d4c243833aecce17efdac56699a977a51a6370d988fbed0d2ce3d2e4",
+          "bytes": 2220646,
+          "role": "rendering-language-comparison-only",
+          "authorityKind": "non-authority-generator-original-board"
+        },
+        {
+          "order": 4,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-family-transfer-generator-original.png",
+          "sha256": "a34c6f6fcc1ce34d07d4ba7c32669a0448765d7f0210dd93789746507a83f1f8",
+          "bytes": 2102079,
+          "role": "colour-value-material-comparison-only",
+          "authorityKind": "non-authority-generator-original-board"
+        }
+      ],
+      "output": {
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v03/ame-v02-rendering-b-fresh-02-generator-original.png",
+        "sha256": "024e4b26a429b6a098f50f987026c74201426ae685abbd00e5da5b2ebf7fa93a",
+        "bytes": 1382663,
+        "outputId": "exec-013f2aa6-3912-4f16-9d9e-883b6b89cc40.png"
+      },
+      "lineage": {
+        "editOfEdit": false,
+        "editTargetPath": null,
+        "mayBeIdentityAuthority": false,
+        "mayBeRenderingAuthority": false,
+        "mayBeFutureEditTarget": false
+      }
+    },
+    {
+      "runId": "mgjrpg-02-v03-future-enemy-hybrid-01",
+      "kind": "future-enemy-hybrid",
+      "generationMode": "fresh-reference-led-generation",
+      "prompt": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/PROMPTS.md",
+        "sha256": "0415748df6175b4b803d19ecc394ed44bbbffcc85635e7db6501105311c3136d",
+        "bytes": 22306,
+        "blockId": "future-enemy-hybrid"
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-sampler-generator-original.png",
+          "sha256": "f6bf0a91646864857259cd9c3d6f690859f1f4f2f471279f44923b28e8a94545",
+          "bytes": 2152762,
+          "role": "selected-core-construction-mass-and-contour-reference",
+          "authorityKind": "non-authority-generator-original-board"
+        },
+        {
+          "order": 2,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-family-transfer-generator-original.png",
+          "sha256": "2583f027d00d662dbd52e689eca99298a5d04c24322a976747a288277c356a76",
+          "bytes": 2128927,
+          "role": "selected-family-construction-detail-and-contour-reference",
+          "authorityKind": "non-authority-generator-original-board"
+        },
+        {
+          "order": 3,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-family-transfer-generator-original.png",
+          "sha256": "a34c6f6fcc1ce34d07d4ba7c32669a0448765d7f0210dd93789746507a83f1f8",
+          "bytes": 2102079,
+          "role": "secondary-colour-and-broad-shading-reference-only",
+          "authorityKind": "non-authority-generator-original-board"
+        },
+        {
+          "order": 4,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-enemy-extension-generator-original.png",
+          "sha256": "f180ea46d25d3cf811510a75f921d84b46c9db6542f402f8ae3d6eaa89987ed7",
+          "bytes": 1827357,
+          "role": "trex-kappa-mimic-concept-reference-only",
+          "authorityKind": "non-authority-generator-original-board"
+        },
+        {
+          "order": 5,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-enemy-extension-generator-original.png",
+          "sha256": "a9a09d64d4fdd9c95a56f6580325cc4ed19a05304e220caa4f719a25699ee5fd",
+          "bytes": 1917261,
+          "role": "wholesome-succubus-concept-reference-only",
+          "authorityKind": "non-authority-generator-original-board"
+        }
+      ],
+      "output": {
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v03/future-enemy-hybrid-01-generator-original.png",
+        "sha256": "eef19db39fc5c2289a1797f3baf8fae91ac0bbfd763717e0198bdd9a4c60983b",
+        "bytes": 1886549,
+        "outputId": "exec-f34cd2fd-6505-41ed-a3fc-f6b726c024cf.png"
+      },
+      "lineage": {
+        "editOfEdit": false,
+        "editTargetPath": null,
+        "mayBeIdentityAuthority": false,
+        "mayBeRenderingAuthority": false,
+        "mayBeFutureEditTarget": false
+      }
+    },
+    {
+      "runId": "mgjrpg-02-v03-rose-floor-pad-hybrid-01",
+      "kind": "rose-floor-pad-hybrid",
+      "generationMode": "fresh-reference-led-generation",
+      "prompt": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/PROMPTS.md",
+        "sha256": "0415748df6175b4b803d19ecc394ed44bbbffcc85635e7db6501105311c3136d",
+        "bytes": 22306,
+        "blockId": "rose-floor-pad-hybrid"
+      },
+      "orderedReferences": [
+        {
+          "order": 1,
+          "path": "docs/source-assets/portal-rose-heart-v1.png",
+          "sha256": "a8a15c058674678a32341db9a47160c6026c1404e420b62f51951646af644e16",
+          "bytes": 1760241,
+          "role": "flower-floor-pad-function-and-motif-reference-only",
+          "authorityKind": "source-master-comparison-only"
+        },
+        {
+          "order": 2,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-family-transfer-generator-original.png",
+          "sha256": "2583f027d00d662dbd52e689eca99298a5d04c24322a976747a288277c356a76",
+          "bytes": 2128927,
+          "role": "selected-family-construction-and-contour-reference",
+          "authorityKind": "non-authority-generator-original-board"
+        },
+        {
+          "order": 3,
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-b-family-transfer-generator-original.png",
+          "sha256": "a34c6f6fcc1ce34d07d4ba7c32669a0448765d7f0210dd93789746507a83f1f8",
+          "bytes": 2102079,
+          "role": "secondary-colour-and-broad-shading-reference-only",
+          "authorityKind": "non-authority-generator-original-board"
+        }
+      ],
+      "output": {
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v03/rose-heart-floor-pad-hybrid-01-generator-original.png",
+        "sha256": "52f139e96d1e3cf5ae73bb5dca281e0157c0a97b5a19c5082d2100e8f2c7ac6c",
+        "bytes": 1774937,
+        "outputId": "exec-c4954477-6d8a-4ea9-9e41-bba97b81ee0a.png"
+      },
+      "lineage": {
+        "editOfEdit": false,
+        "editTargetPath": null,
+        "mayBeIdentityAuthority": false,
+        "mayBeRenderingAuthority": false,
+        "mayBeFutureEditTarget": false
+      }
+    }
+  ],
+  "artDirectionAssessment": {
+    "status": "recommendation-pending-human",
+    "ame": "Prior Direction B is recommended as the fallback. Fresh 01 and Fresh 02 are independent and cleaner, but both drift Candidate C's immutable face, hair, cape, stance, registration, or hand-socket construction; neither may silently become authority.",
+    "futureEnemy": "Hybrid 01 is useful transfer evidence only. Simplify Kappa and Mimic, and restore the selected Direction A Succubus silhouette and magical gesture in any isolated future master.",
+    "portal": "Hybrid 01 supports the retained flower-floor-pad category only. Prefer the existing pad until a simpler, shallower isolated redraw passes light-floor contrast and actual-size review."
+  },
+  "sourceDefects": [
+    "All four returned generator originals are opaque RGB; the two Ame studies and floor-pad study contain painted checkerboard pixels despite transparent-background requests.",
+    "The enemy board is an opaque composite; its cells are not separable assets or future generation authorities.",
+    "Fresh Ame attempts are rendering studies only and must be rejected if any Candidate C identity, construction, pose, silhouette, hand-socket, or registration drift survives review."
+  ],
+  "byteAccounting": {
+    "trackedGeneratorOriginalCount": 4,
+    "trackedGeneratorOriginalBytes": 6440962,
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0
+  },
+  "runtimeImpact": {
+    "web": "none-source-only",
+    "tauri": "none-source-only",
+    "ipad": "none-source-only",
+    "tv": "none-source-only"
+  },
+  "rollback": {
+    "method": "Keep every v01/v02/v03 source and prompt immutable. Runtime and catalogue pointers remain unchanged. If the fresh Ame studies fail identity review, retain prior Direction B as the declared fallback without deleting the failed evidence.",
+    "runtimeByteDelta": 0
+  }
+}

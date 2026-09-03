@@ -1,4 +1,5 @@
 import {
+  AME_ART,
   ANIMAL_ART,
   CAGE_ART,
   DEFAULT_CAGE_STYLE,
@@ -8,6 +9,7 @@ import {
   DEFAULT_WEAPON_STYLE,
   DOOR_ART,
   ENEMY_ART,
+  HAZARD_ART,
   KEY_ART,
   PORTAL_ART,
   TERRAIN_THEMES,
@@ -26,7 +28,7 @@ import type { BadgeId, RescueMedalId, StickerId } from "./progress";
 
 export const ASSETS = {
   titleBackground: "/assets/title-background-v1.webp",
-  ame: "/assets/ame.png",
+  ame: AME_ART.src,
   ameSword: "/assets/ame-sword.png",
   portrait: "/assets/ame-portrait.png",
   goblin: ENEMY_ART[DEFAULT_ENEMY_STYLE].src,
@@ -48,10 +50,10 @@ export const ASSETS = {
   goal: "/assets/goal.png",
   floor: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].floor.src,
   wall: TERRAIN_THEMES[DEFAULT_TERRAIN_THEME_ID].wall.src,
-  water: "/assets/water-v2.png",
-  lava: "/assets/lava-v2.png",
-  poison: "/assets/terrain-poison-v1.png",
-  hole: "/assets/ground-hole-v1.png",
+  water: HAZARD_ART.water.src,
+  lava: HAZARD_ART.lava.src,
+  poison: HAZARD_ART.poison.src,
+  hole: HAZARD_ART.hole.src,
   antidoteLeaf: "/assets/antidote-leaf-v1.png",
   animalBunny: ANIMAL_ART.bunny.src,
   animalFox: ANIMAL_ART.fox.src,

@@ -1,14 +1,15 @@
 # AI art prompt set
 
-> **Current identity authority (2026-09-02):** this file preserves historical
+> **Current identity authority (2026-09-03):** this file preserves historical
 > prompts and production provenance; earlier wording such as “blonde bob” is not
 > a future design lock. Before generating or editing new art, read
-> `docs/GAME_VISION_AND_DESIGN_SPEC.md`, the current `docs/ART_BIBLE.md` when it
-> exists, and `docs/characters/AME_MODEL_SHEET.md` when it exists. Ame must have
-> golden-blonde hair and clearly blue irises in every depiction. Her approved
-> future model is expected to use a restrained slightly longer hairstyle while
-> preserving her recognisable mint/lavender adventure identity. Never rewrite
-> the exact historical prompts below; append new versioned records instead.
+> `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/ART_BIBLE.md`, and
+> `docs/characters/AME_MODEL_SHEET.md`. Ame must have golden-blonde hair and
+> clearly blue irises in every depiction. Candidate C's shoulder-brushing,
+> softly layered hair and preserved mint/lavender adventure identity are the
+> approved static v02 design direction; the v01 runtime pointer remains active
+> until the versioned derivative and live-context gate pass. Never rewrite the
+> exact historical prompts below; append new versioned records instead.
 
 All base artwork in `public/assets/` was generated for this project with the
 built-in OpenAI image-generation tool. Runtime resizing, chroma removal, WebP
@@ -1217,3 +1218,640 @@ Heart and Storybook masters. Moon Silver and Garden Vine arrived with a painted
 neutral checker field; the deterministic processor flood-fills only neutral
 background connected to the canvas edges and the four enclosed open bays. All
 runtime copies are 512 x 512 lossless WebP with alpha extrema 0 and 255.
+
+## Plan 03 / Ame v02 Human-gate studies (2026-09-02)
+
+This section is append-only provenance for unapproved source studies. It does
+not amend the historical prompts above, change the active runtime sprite, or
+claim Human/Ame approval.
+
+Candidate C (`exec-6732e5ce-ce9c-47df-b2ca-45c02a7f99b4.png`) is the art
+director's recommendation for the open Human/Ame gate. It preserves the warm
+young face, golden-blonde shoulder-brushing layered hair, mint tunic, lavender
+cape/backpack, flower/braid, practical straps and pouch, and coral boots while
+making the irises remain clearly blue at gameplay size. Candidate A is retained
+as its visual rollback ingredient; Candidate B is retained as a conservative
+comparison. All three remain source-only and unapproved.
+
+The exact Candidate B, Candidate C, Candidate C turnaround, and Candidate C
+expression requests; reference roles and hashes; every output ID; the concise
+rather than fabricated Candidate A evidence; and rejection notes are preserved
+verbatim in:
+
+`docs/source-assets/characters/ame/v02/AME_V02_PROMPTS.md`
+
+The generator returned opaque RGB files with painted checkerboards despite the
+alpha requests. Immutable originals are retained. `scripts/art_pipeline.py`
+creates no public output for the pending candidate: deterministic cutout,
+registration, alpha-edge, actual-size, comparison, and context proofs live only
+under the ignored `artifacts/art-proofs/` tree. The structured authority is
+`docs/source-assets/records/ame-v02-source.json`.
+
+No model/version, seed, or hidden request parameter is inferred. Candidate C is
+a new global reference-led generation, not a truly local eye-only edit, even
+though its subject envelope stayed visually on model. Any future revision must
+receive a new candidate/output record; never overwrite these sources or silently
+rewrite this history.
+
+The Human subsequently approved Candidate C as the canonical static Ame v02
+design direction on 2026-09-03. The paragraphs above remain the truthful state
+and wording of the 2026-09-02 generation/review handoff; design approval does
+not retroactively approve a cutout, derivative, runtime pointer, rights review,
+animation frame, portrait, or other dependent asset.
+
+## Plan 03 / `mgjrpg-02` craft-calibration canary (2026-09-03)
+
+This append-only production recipe translates the transferable craft discipline
+from the Human-supplied PPBA specification into original Maze-native language.
+The source review and originality boundary are in
+`docs/research/2026-09-03-ppba-art-craft-synthesis.md`. No PPBA name, image,
+prompt, character, palette, object, composition, interface, or asset ID is a
+generation reference. `mgjrpg-02` is a canary recipe until its consolidated
+cross-family comparison receives Human approval; existing `mgjrpg-01` records
+remain unchanged.
+
+### Shared visual lock
+
+```text
+Use case: stylized-concept
+World: an original child-friendly magical-girl storybook maze JRPG about
+pocket-sized courage, friendship, noticing, trying again, and warm funny
+adventure.
+
+Visual construction: clean expressive anime face; rounded compact/chibi body;
+one unmistakable silhouette anchor; two to four large colour masses that read at
+the stated minimum size; one local midtone, one broad grouped shadow, and one
+broad light mass. Use restrained tactile cel-painterly texture, broad
+locks/folds/tufts/clusters, and only highlights that explain the material.
+
+Contour: one solid continuous local-material contour harmonized toward warm
+deep plum. Shift it deliberately to aubergine around lavender, russet-plum
+around coral/leather/gold, blue-plum around cool material, and leaf-plum around
+foliage. Reserve the darkest plum for pupils, mouth, deep occlusion, and critical
+separation.
+
+Hierarchy: make the face, required interaction, or narrative subject the one
+clearest focal area. Keep support areas quieter. Use exactly one approved primary
+Maze motif and no more than one supporting motif.
+
+Material: preserve the approved family recipe. Cloth is matte with broad folds;
+fur/feather uses grouped tufts; hair uses grouped locks; wood uses sparse broad
+grain; stone uses broad blocks; metal uses a narrow highlight; gem uses three to
+five large facets; liquid uses one large directional rhythm.
+
+Lighting: gentle neutral upper-left/front form modelling only. No floor shadow,
+directional cast shadow, spotlight, broad halo, or external particles. Runtime
+owns contact/cast shadow and outer magic effects.
+
+Exclude: no named-franchise or living-artist imitation; no recognizable
+character, costume, logo, prop, composition, UI skin, or other project's trade
+dress; no mature anatomy, glamour pose, horror, gore, cruelty, extra subject,
+limb, prop, accessory, motif, generated text/numeral, fake logo, signature,
+watermark, pure-black uniform perimeter, rainbow edge, broken/translucent
+outline, white field-sprite halo, plastic 3D gloss, generic airbrush gradient,
+photographic noise, vector-flat drift, or detail that vanishes at minimum size.
+```
+
+### Asset and reference block
+
+Append this completed block to the shared visual lock for every candidate:
+
+```text
+Catalogue ID and family: {id}; {family}
+Gameplay function and emotional read: {function}
+Minimum display size and first-read requirement: {size}; {read}
+Approved view, proportions, pose/facing: {geometry}
+Safe area, pivot/baseline, face/grip/motif anchors: {registration}
+Approved palette, material, primary/supporting motif: {tokens}
+
+Identity reference: {exact immutable source, SHA-256, identity invariants}
+Rendering/family reference: {exact immutable source, SHA-256, craft invariants}
+Change only: {one declared variable}
+
+Delivery intent: one isolated subject with the approved padding and alpha intent;
+no text, frame, floor, scenery, cast shadow, broad glow, or watermark. The
+deterministic art pipeline creates and validates normalized derivatives.
+```
+
+Do not omit a reference slot silently. Write `none — new identity candidate`
+where appropriate and use the identical locked brief for both independent
+candidates.
+
+### Semantic UI sticker add-on
+
+Use only for semantic UI icons, buttons, badges, prompts, anime emotion/reaction
+glyphs, and explicitly UI-context rewards—not for field characters, world
+items, terrain, walls, doors, hazards, or story art.
+
+```text
+Render as unmistakably flat 2D die-cut storybook signal art: a strong cream-white
+outer paper cutline surrounding the solid local-material inner contour, two to
+four large graphic regions, one focal symbol, and at most two tiny accents. Keep
+the silhouette readable on paper, dark plum, middle gray, and busy gameplay.
+No cast shadow, floor, background plaque, glow cloud, baked label, letter, or
+numeral.
+```
+
+### Cutout-source add-on
+
+```text
+Exactly one complete isolated subject, centered with comfortable even clear
+space and its documented baseline. Preserve pale internal details. Request a
+genuinely transparent RGBA background. No painted checkerboard, chroma-key
+colour, background texture, border, clipped flourish, floor, contact shadow,
+drop shadow, reflection, environmental light, haze, or loose sparkle outside the
+approved subject envelope.
+```
+
+Transparency remains a delivery request, never an assumption. Preserve the
+immutable returned source even when it violates the request; create any cutout
+as a separately hashed deterministic derivative and review it on the full alpha
+board.
+
+### Candidate and state protocol
+
+- A fresh identity receives exactly two independent candidates from the same
+  locked brief and equivalent pinned references. Candidate A never sees B and B
+  never sees A. Preserve both with exact request/output evidence.
+- The Human may select one, reject both, or request one objective-defect
+  correction. If that correction fails, return to the brief rather than creating
+  an unbounded reroll chain.
+- A pose, expression, material, or state of an approved identity starts from its
+  selected immutable identity source plus the rendering/family anchor. Never use
+  an expressive state, cleaned cutout, correction, runtime derivative, or
+  rejected candidate as a new identity anchor.
+- Normal/powered/selected/tired/emotional state pairs preserve silhouette,
+  pivot, baseline, alpha footprint, safe area, scale, camera, and identity
+  landmarks unless a reviewed state contract explicitly changes one. Apparent
+  internal emission belongs in the art; external halo/rays/motes belong to VFX.
+- Generated lettering is never accepted. Generate blank shells/marks and overlay
+  real application text and numerals with deterministic optical centring.
+
+## Plan 03 / `mgjrpg-02` colour-aware-contour calibration addendum v1 (2026-09-03)
+
+This is a forward-only refinement to the reusable canary recipe above. It does
+not rewrite any historical prompt, relabel a returned image, approve a rendering
+profile, or authorize production volume. The Human has approved Candidate C's
+identity/construction and has directed this rendering assay; only the resulting
+surface treatment is at the open Human gate.
+
+The adopted technique is colour-aware local contouring. It is a production-craft
+principle learned from the Human-supplied PPBA specification, not permission to
+reuse that project's pixels, prompt wording, characters, palette, motifs, props,
+composition, UI layout, asset names, logo, brand, or trade dress. All wording and
+colour families below are Maze-native.
+
+### Ordered-reference and run record
+
+Complete this block verbatim for each generation/edit request. Reference order
+is semantic and immutable, not incidental:
+
+```text
+Rendering-profile candidate: mgjrpg-02 / storybook-local-contour-v1
+Run intent: {rendering assay | independent identity candidate | family candidate}
+Change only: {one bounded surface/construction variable}
+Minimum delivered sizes: {ordered pixel sizes}
+
+Reference 1 — IDENTITY AUTHORITY:
+role `identity-authority`; authorityKind `{immutable-generator-original |
+approved-source-master}`; {immutable path or output ID}; SHA-256 {hash};
+preserve {locked identity facts}
+Reference 2 — RENDERING/FAMILY AUTHORITY:
+role `{rendering-authority | family-authority}`; authorityKind
+`{approved-rendering-anchor | approved-source-master}`; {immutable path or
+output ID}; SHA-256 {hash}; preserve {locked craft facts}
+Reference 3 — GEOMETRY/REGISTRATION AUTHORITY, when required:
+role `construction-authority`; authorityKind `{approved-model-sheet |
+approved-source-master}`; {immutable path or output ID}; SHA-256 {hash};
+preserve {bounds/pivot/anchors}
+
+Lineage: editOfEdit `false`; identityAuthorityEligible `{true|false}`;
+renderingAuthorityEligible `{true|false}`.
+
+If a role has no reference, write exactly `none — {reason}`. Do not reorder
+roles, invent a role/authority kind, silently substitute a derivative, or use a cleaned cutout, edit,
+expression, pose, rejected candidate, or runtime downsample as a new identity
+authority. Preserve the exact submitted text, ordered references and hashes,
+returned output ID/file/hash, generator facts only when known, selection or
+rejection reason, derivative recipe, measurements, and rollback source.
+```
+
+An edit result is never fed back as Reference 1. A later bounded assay starts
+again from the immutable identity original plus the approved rendering/family
+authority. Generator originals remain unchanged even when they contain an
+opaque checkerboard, bad alpha, halo, or other defect.
+
+### Colour-aware contour lock
+
+Append this exact block to every cutout canary request:
+
+```text
+Use clean, continuous, confident colour-aware contours. For each stable contour
+section, derive hue from the nearest interior material or colour region that the
+section encloses, then make it darker and slightly richer while harmonising it
+through Maze's deep-plum family. Use warm golden-brown/plum around golden-blonde
+hair and gold; aubergine around lavender; blue-plum around blue, cyan, silver,
+or other cool material; russet-plum around coral, leather, skin-adjacent warm
+cloth, or warm wood; leaf-plum around mint cloth, leaves, moss, and foliage; and
+cream-mauve around white fur, cream cloth, paper, or pale neutral material.
+
+Reserve the darkest ink-plum for pupils, mouth, deep occlusion, very small
+critical separations, and a silhouette segment that otherwise fails essential
+contrast. Change contour family only at a real material boundary or construction
+joint. Merge tiny edge islands into the dominant neighbouring section. Never use
+pure black or one dead uniform perimeter; never dither hue pixel by pixel; never
+produce rainbow-fragmented edges, gaps, soft airbrushed borders, chromatic halos,
+white/gray/magenta matte, or low-contrast pale edging.
+
+At delivered size, maintain 3–5 px outer and 1.5–3 px structural contours at
+512 px; 2–3 px and 1–2 px at 256 px; 2 px and 1 px at 128/103/84 px; and a
+continuous 1.5–2 px optical silhouette at 77/64/56/40 px, with internal marks
+omitted when they cannot remain one clean pixel. Measure the delivered raster,
+not the source request. The essential silhouette edge must remain readable
+against paper, dark plum, middle gray, saturated magenta/cyan, and named
+in-game backgrounds.
+
+Ordinary field characters, friends, enemies, weapons, items, props, locks,
+doors, cages, and portals receive no cream or white sticker cutline. Only semantic UI
+icons, badges, prompts, reaction symbols, and explicitly UI-context reward
+flourishes may add one clean cream paper cutline outside their colour-aware
+inner contour: 2 px at 64/48 px, 1.5 px at 32 px, and 1 px at 24/16 px.
+```
+
+### Terrain, wall, liquid, and hazard boundary lock
+
+Append this instead of the cutout contour block for periodic art:
+
+```text
+Do not enclose terrain, floors, walls, liquids, or hazards in a character-like
+outline. Use material-aware darker local boundaries, value steps, patterns, and
+construction seams within the painted material. Floor remains quiet and broad;
+wall solidity comes from larger masses and joints; water reads through asymmetric
+elliptical/horizontal ripple flow; lava through asymmetric directional S-flow
+and sparse bright cores; poison through violet/aubergine eddies plus sparse
+non-green bubbles. No mirror, kaleidoscope, obvious central symmetry, unique
+landmark, directional spotlight, or baked cast shadow. Opposing tile edges must
+remain exactly periodic after deterministic processing, and a 3x3/5x5 repeat
+must not reveal a cross-band, enclosing rim, seam, or character-style contour.
+```
+
+### Canary roster and immutable Ame exception
+
+The required packet contains Approved Ame Candidate C; Fox and Alpaca; Goblin
+and Jelly Sorcerer; Moon Wand; Rose Heart lock/key token, door, and portal;
+First Star; Home and Help; Sunny Stone floor/wall; Wishing Woods floor/hedge;
+and representative water, lava, and poison. Do not substitute a more convenient
+family member without recording the packet as incomplete.
+
+For Ame, append this lock after all shared text:
+
+```text
+Candidate C is the immutable Human-approved Ame v02 identity and construction
+authority. Preserve exactly her warm young face and expression, clearly blue
+irises, golden-blonde shoulder-brushing softly layered hair, crown curl, left
+braid and flower, chibi proportions, pose/anatomy, mint tunic, cream layers,
+lavender cape and backpack, brown strap/belt/pouch, coral boots, gold hardware,
+silhouette, registration envelope, and emotional character. Change rendering
+surface only. Reject rather than rationalise any output that changes identity,
+construction, pose, accessory count, colour allocation, camera, scale, pivot, or
+safe zones. No edit-of-edit becomes identity or rendering authority.
+```
+
+## Plan 03 / `mgjrpg-02` authored-options correction addendum v2 (2026-09-03)
+
+This forward-only addendum supersedes the **production method and darkness
+target** in the v1 canary assay above. It does not alter that historical prompt
+or its returned evidence. The Human rejected the v08 result as an art direction:
+adding a mostly dark contour to retained `mgjrpg-01` pixels did not constitute a
+meaningful new rendering treatment. V08 remains rejection and rollback evidence,
+not a rendering authority, production master, or shortcut for future assets.
+
+The open gate is now a comparison among independently authored rendering
+directions. The exact text, reference order, output IDs, hashes, defects, and
+lineage for the current v02 option runs are preserved in
+`docs/source-assets/calibrations/mgjrpg-02/v02/PROMPTS.md` and its adjacent
+`run-record.json`. Those immutable records—not this reusable synopsis—are the
+authority for reconstructing those runs.
+
+### Authored-pixel requirement
+
+Append this block to every future `mgjrpg-02` character, creature, object, or
+semantic-icon source request:
+
+```text
+Author the complete subject in the selected Maze rendering direction from the
+start. Build silhouette, two to four large colour masses, three broad value
+groups, facial hierarchy, material transitions, interior separations and
+material-local contours as one coherent painting. Do not take an existing
+mgjrpg-01 raster and merely add, recolour, expand or filter an outline. Do not
+trace old pixels, apply a global stroke, posterize a finished sprite, or treat a
+deterministic contour pass as art direction. The delivered source must remain a
+credible complete design even when its contour layer is mentally removed.
+
+For a new family identity, work from the locked written construction brief and
+approved family/model references, never from a rejected candidate. For an
+approved identity such as Ame Candidate C, repaint from the immutable identity
+and construction authority while preserving every locked landmark; rendering
+novelty never licenses redesign. Never use an edit-of-an-edit as identity or
+rendering authority.
+```
+
+Deterministic processing may extract alpha, register, scale, encode, assemble
+proofs, and measure edges. It may not invent or repair the selected style by
+synthesising a perimeter contour. A candidate that needs such repair returns to
+source generation or bounded source editing.
+
+### Brighter colour-aware contour lock
+
+The contour is a painted material edge, not dark ink with barely perceptible
+hue. Append this block after the authored-pixel requirement:
+
+```text
+Paint clean, continuous, confident colour-aware contours whose hue is obvious
+at the stated minimum delivery size. Each stable section follows the adjacent
+material it encloses: medium golden-ochre or warm plum for blonde hair and gold;
+clear berry-aubergine for lavender; saturated blue-violet for blue and cool
+metal; warm terracotta/russet for coral, leather and wood; leafy teal-plum for
+mint and foliage; soft rose-mauve for cream and skin-adjacent edges. Harmonise
+the set through Maze's plum family without collapsing every section into the
+same near-black ink.
+
+Target roughly 35–55% HSL lightness on long non-facial outer sections, and
+38–55% for Ame, subject to measured background contrast. Let colour and painted
+mass dominate the line. Reserve the darkest ink-plum only for pupils, mouth,
+tiny deep occlusions and the minimum critical separation needed for access.
+Pure black, charcoal-looking default perimeters, one uniform dark stroke,
+doubled outlines, muddy low-contrast edges, rainbow fragments, pixel-by-pixel
+hue switching, airbrushed borders and chromatic/white/magenta halos are failures.
+
+Change contour family only at a real material boundary or construction joint.
+Use material-aware internal separation where needed; never insert arbitrary
+black dividers. Inspect every source at 100% and every derivative on paper,
+dark-plum, middle-gray, saturated-magenta/cyan and representative in-game
+backgrounds. If the hue cannot be recognised at 64 px, or the silhouette fails
+without near-black, revise the source painting rather than adding another
+stroke.
+```
+
+Terrain, floors, walls, liquids and hazards continue to use material-local value,
+pattern, boundary and seam treatment without character-like enclosing contours.
+They must be authored for periodic processing; a perimeter, medallion, mirror,
+baked directional shadow or post-stroked tile edge is a rejection.
+
+### Authored direction options at the open gate
+
+The three current comparison directions deliberately vary more than outline
+colour. They share Maze identity but test different complete rendering systems:
+
+- **A — Luminous Storybook Cel:** crisp opaque gouache/cel planes, sparse
+  dry-brush life inside broad shapes, medium-thin bright contours, warm clarity,
+  and the strongest balance of painterly authorship with handheld readability.
+- **B — Soft Jewel Gouache:** softer faceted values, finer coloured contours,
+  restrained paper grain and pearly material cues; the warmest and most
+  painterly option, with small-size softness as its principal risk.
+- **C — Chunky Enamel Adventure:** the fewest internal marks, bold matte masses
+  and thick bright contours; the strongest thumbnail read, with excess toy-like
+  simplification as its principal risk. Ame's proportions may not change.
+
+Do not average these before the Human gate. Record the Human's selected direction
+and reasons first; only then may a new versioned rendering recipe become an
+authority for broader production.
+
+### Clean semantic-UI sticker contract
+
+Only semantic UI icons, badges, prompts, reaction symbols and explicitly
+UI-context reward flourishes use sticker construction:
+
+```text
+Author a clean flat die-cut storybook symbol from two or three large graphic
+masses and one unmistakable focal glyph. Paint a visibly coloured material-local
+inner contour, then one even cream-white paper cutline outside the entire joined
+silhouette. The cream cutline must read immediately at 16, 24, 32, 48 and 64 px,
+without swallowing openings or making multiple disconnected stickers. Use no
+plaque, floor, drop shadow, cast shadow, glow cloud, tiny filigree, baked label,
+letter, numeral, fake logo or generated text.
+```
+
+Ordinary field characters, friends, enemies, weapons, items, cages, locks,
+doors, portals, terrain and story art receive no cream/white sticker cutline.
+
+### Human-directed future enemy prompt roster
+
+These are future **source-identity briefs**, not shipped catalogue entries,
+approved designs, placements, mechanics, animation promises, or permission to
+copy a franchise monster. Every candidate also receives the current shared
+visual lock, authored-pixel requirement, brighter contour lock, child-safety
+contract, registration block and provenance block. All opponents are friendly
+guardians or comic rivals under the Polite Sword Rule; weapons and folklore cues
+communicate challenge only.
+
+| Planned ID | Reusable primary-request kernel | Hard exclusions |
+| --- | --- | --- |
+| `green-tea-skeleton` | One courteous toy-ivory skeleton calmly drinking visible green tea from a small mint ceramic teacup and saucer; one steam curl; the original joke is a spooky dungeon archetype doing something politely ordinary. | No copied character, pose, costume or composition; no realistic bone, gore, broken anatomy, void sockets or horror. |
+| `classic-slime` | One traditional low rounded fantasy gel creature with a broad friendly face plane and the simplest unmistakable slime silhouette; no accessory. | No franchise-specific droplet, face construction, palette dependency or brand cue. |
+| `lizard-swordsman` | One stout mint-scaled upright lizard guardian with a broad tail, coral scarf and blunt leaf-shaped practice sword held sideways. | No blade toward camera, wound, aggression or implied special attack. |
+| `lizard-spearman` | The same approved lizard species construction, with a side-facing padded spear creating a clean diagonal/horizontal silhouette distinct from the sword sibling. | No improvised second species, thrust toward camera, reach or ranged mechanic implication. |
+| `succubus` | One wholesome lilac/plum night guardian with small rounded bat wings, curled horns, fully covered layered tunic, cape, leggings and boots, plus a warm competitive expression. | No adult anatomy, cleavage, lingerie coding, exposed torso, glamour pose, seduction, kiss/charm magic or automatic heart clutter; public label requires Human/rating review. |
+| `t-rex` | One compact cheerful T-rex challenger with a large head, thick tail, tiny arms, planted oversized feet, blunt toy-like teeth and proud curiosity. | No predation, gore, chase pose or realistic menace. |
+| `cultist` | One overenthusiastic fictional Star Map follower with a rounded hood, fully visible friendly face and one original affiliation mark. | No real religion, hate/occult symbol, sacrifice, knife, faceless menace or ritual violence; public label requires Human/rating review. |
+| `lamia` | One fully clothed anime guardian with expressive face and hands above a broad readable coiled-serpent base and sparse scale pattern. | No pin-up curvature, sensual anatomy, constriction or hypnosis implication. |
+| `soda-slime` | One fizzy coral-and-aqua gel creature with a simple friendly face, a few large internal bubbles and one bendy-straw silhouette accent. | No real brand, can/label trade dress, ingestion instruction or poison-green dependency. |
+| `orc-chieftain` | One broad rounded green guardian whose calm planted posture and simple ceremonial mantle or crest communicate leadership. | No skull trophies, rage, dehumanising caricature, pseudo-tribal stereotype or violence. |
+| `cyclops` | One rounded guardian with a single large expressive eye, clear iris/catchlight and readable friendly competitive face. | No veins, grotesque eyelids, body horror or dark empty socket. |
+| `minotaur` | One friendly labyrinth caretaker with short broad horns, rounded muzzle, planted hooves and one quiet Maze cloth affiliation cue. | No rage pose, nose ring, giant axe or suffering/labyrinth-victim implication. |
+| `warrior-skeleton` | The same approved toy-bone anatomy as the Tea-Time Skeleton, upright with a blunt training weapon and simple lavender tabard. | No separate bone grammar, realistic anatomy, breakage or weapon aimed at camera. |
+| `kappa` | One respectful rounded river guardian with head dish, shell, gentle beak, playful expression and a Maze-native water palette. | No crude folklore joke, existing mascot resemblance, caricature or drowning implication. |
+| `classic-mimic` | One warm wooden treasure chest that reads as visibly alive: one large friendly eye, plum lid-mouth, broad toy-like teeth, gold fittings and short grounded feet. | No hidden/reveal requirement, child in a chest, gore, saliva, tongue attack or needle teeth. |
+
+The Tea-Time and Warrior skeletons share one approved toy-bone construction;
+the two lizard guards share one approved body/scale/tail sheet; the slime family
+shares one gel-material grammar without erasing the existing Blueberry Slime or
+Jelly Sorcerer identities. Contact-sheet cells are review evidence only and may
+not be cropped into masters. Each eventual identity begins with independent
+source runs from one locked brief and receives a new versioned source record,
+generator original, deterministic derivative recipe, measurements, selection or
+rejection reason, and rollback pointer before any runtime catalogue proposal.
+
+## Plan 03 / `mgjrpg-02` Human-selection addendum v3 (2026-09-03)
+
+This is a forward-only correction. The v02 exact prompts and their outputs stay
+immutable. Exact submitted prompts, ordered reference roles, output IDs and
+source defects for the new work live in
+`docs/source-assets/calibrations/mgjrpg-02/v03/PROMPTS.md` and
+`run-record.json`.
+
+The Human selected a per-family recipe:
+
+- Ame: Direction B surface appeal, with a new first-generation clean-base test;
+  prior B is the fallback. Candidate C remains the sole identity/construction
+  authority. Never supply prior B or another fresh attempt as a generation
+  input.
+- Core sampler: A by default; C only for Tea-Time Skeleton, Classic Slime and
+  Lizard Sword Guard.
+- Current family: A construction, detail ceiling, chroma and contours; B may
+  influence broad interior colour and three-value shading only.
+- Future extension: B concept cues for T-Rex, Kappa and Mimic; A concept cues
+  for Wholesome Succubus; redraw the set into the selected A-family/B-colour
+  treatment.
+- Portals: low flower-petal floor pads are a locked category. Do not turn them
+  into upright magical doors or arches.
+
+### Clean-base anti-accumulation block
+
+Append this to future character and enemy source generations. It supersedes any
+request for visible paper grain at field-sprite scale:
+
+```text
+Begin from a blank canvas. Do not edit, trace, repaint, transform, filter,
+sharpen, composite, or reuse pixels from a prior rendering candidate. Identity
+references control design and construction only; selected family boards control
+high-level rendering craft only. Use two to four dominant colour masses. Give
+each material exactly one smooth midtone, one connected broad shadow group and
+one connected broad light group. Soft painterly warmth comes from those large
+opaque colour planes, never accumulated surface noise. Keep face and skin
+completely quiet. Permit at most one or two low-frequency gouache variations on
+one large material, and only when each mark survives at 64 px. Reject
+micro-facets, polygon chatter, grain clouds, stipple, mottling, brush specks,
+nested highlight bands, repeated glints, colour fringing, sharpening halos,
+edge chatter, watercolour blooms, compression-like grit, overpaint residue and
+“deep-fried” AI texture. If the clean result changes a locked face, silhouette,
+pose, hand socket, registration or costume landmark, reject it rather than
+silently accepting the redesign.
+```
+
+### Selected r03 contour anchors
+
+Use these as visible colour targets rather than a pixel-quantisation palette:
+
+| Material neighbour | Target anchor |
+| --- | --- |
+| Blonde hair, gold | warm honey `#A86249` or the lighter Ame-specific `#B56B4F` |
+| Lavender | aubergine `#80549A` or Ame-specific orchid `#9865AD` |
+| Cool blue | blue-plum `#4D69A8` or Ame-specific cornflower `#607AB9` |
+| Coral, leather, warm wood | coral-russet `#A95361` / `#B6616F` |
+| Mint, foliage | leaf-plum `#4C7D68` / `#5F8875` |
+| Cream, pale cloth | cream-mauve `#8C6984` / `#99788F` |
+| Eyes, mouths, true occlusion only | ink-plum `#34203F` |
+
+Long outer runs should normally land around 40–58% HSL lightness and retain an
+obvious hue at 64 px. Use the ink-plum sparingly; never darken every target to
+one perimeter simply to gain contrast. UI sticker cutlines remain separate
+cream paper shapes outside a coloured inner contour. Field sprites, enemies,
+props and floor portals receive no sticker cutline.
+
+## Plan 03 / `mgjrpg-02` v03 review constraints (2026-09-03)
+
+This forward-only note records the art-direction assessment of the v03 outputs;
+it does not modify their exact prompts or assert Human approval.
+
+- Neither Ame fresh study may become identity, rendering, or edit authority.
+  Both reduce accumulated texture, but both change Candidate C's face, hair,
+  cape, stance, registration, or hand socket. Prior Direction B is the proposed
+  fallback until the Human explicitly decides.
+- A future isolated Succubus source must preserve the selected Direction A
+  broad friendly silhouette and readable magical gesture. The v03 hybrid board
+  is not sufficient evidence for that requirement.
+- Kappa production prompts must remove small leaf clusters, shell marks, and
+  basket contents until only two to four large masses survive at 40 px.
+  Treasure Mimic prompts likewise cap teeth, rivets, and plank seams to a few
+  broad construction cues.
+- Portal prompts preserve a shallow horizontal flower-pad silhouette. Reduce
+  central sparkle count and petal filigree; use a stronger rose/mauve local edge
+  on light floors. The existing portal remains the retain candidate until an
+  isolated replacement materially improves it.
+
+Any next request starts again from the immutable identity/construction source
+and the selected family references. Do not use a v03 board, extracted cell,
+cleaned proof cutout, or rejected fresh Ame as a new generation input.
+
+## Plan 03 / `mgjrpg-02` Human approval and production addendum v4 (2026-09-03)
+
+This is a forward-only decision record. It does not alter any exact historical
+prompt, ordered reference list, output ID, source defect, or assessment above.
+The exact pre-decision review and recipe bytes are preserved at:
+
+- `docs/source-assets/calibrations/mgjrpg-02/v03/mgjrpg-02-canary-review-v14-pending.json`
+- `docs/source-assets/calibrations/mgjrpg-02/v03/mgjrpg-02-recipe-r03-candidate.json`
+
+The complete Human decision is recorded in
+`docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json`.
+
+The Human approved the composite `mgjrpg-02` revision 4 rendering recipe for
+controlled, family-by-family source production with these binding selections:
+
+- **Ame:** Fresh B-led 01 is the selected static rendering reference because it
+  is clearer and more distinct at Ame's common small gameplay scale. Fresh
+  B-led 02 is appealing at higher resolution but is not selected. Candidate C
+  remains the sole identity/construction authority; Fresh 01 controls rendering
+  craft only and may not change her face, age, golden-blonde shoulder-length
+  hair, blue irises, proportions, mint/lavender costume, backpack, silhouette,
+  registration, hand socket, or emotional character.
+- **Rose Heart teleporter:** the fresh flower-petal floor-pad construction is
+  selected. Its final isolated source must make the heart brighter and more
+  clearly defined and use a verifiably uniform plain extraction matte. A
+  painted checkerboard, matte tint inside translucent colour, or checker bleed
+  is a source defect, never intentional transparency.
+- **Future enemies:** the v03 Wholesome Succubus, Pocket T-Rex, Kappa, and
+  Treasure Mimic are approved concept and rendering-family references. They are
+  not crop masters. Generate each independently as one isolated asset from its
+  locked brief and role-separated authorities.
+
+### Ame production reference roles
+
+For a fresh Ame static source, keep the roles closed and ordered:
+
+1. Candidate C generator original — **identity and construction only**.
+2. Candidate C model-sheet studies — **landmarks and registration only** when
+   the exact task needs that view; never use an expression cell as a new face.
+3. Fresh B-led 01 generator original — **approved rendering craft only**:
+   clean small-scale massing, broad three-value colour, visibly chromatic local
+   contours, and restrained painterly warmth.
+
+Begin from a blank canvas. Do not edit, trace, overpaint, filter, composite, or
+clean up Fresh B-led 01 into a new authority. Do not provide Fresh B-led 02,
+prior Direction B, a proof cutout, or another production attempt as an
+additional identity/rendering input. If identity and rendering guidance
+conflict, Candidate C wins and the output is rejected rather than averaged.
+
+### Flat-matte source block
+
+Append this block to isolated cutout generation requests:
+
+```text
+Place the one complete isolated subject on a single perfectly flat, fully opaque,
+uniform extraction matte whose colour is far from every subject material. The
+matte must be one solid RGB value from corner to corner: no checkerboard, paper,
+canvas grain, gradient, vignette, floor plane, cast shadow, glow cloud, bloom,
+texture, transparency simulation, reflected colour, or subject-coloured fringe.
+Keep at least the declared clear gutter around the full silhouette and every
+weapon, tail, horn, wing, ear, petal, and sparkle. The matte is processing aid
+only and must not appear inside translucent or reflective subject materials.
+```
+
+For the Rose Heart pad, also append:
+
+```text
+Make the central heart one simple, bright cream-gold focal shape with an
+unbroken rose-plum local contour. It must remain recognisable at the declared
+delivery size and clearly separate from the surrounding aperture. Keep the pad
+low and horizontal; do not turn it into an arch, doorway, hovering ring, or
+upright portal. Reduce sparkles and petal filigree before increasing contrast.
+```
+
+### Batch review and publication boundary
+
+Prioritise authored sources and genuine replacements over elaborate review
+presentation. A production batch uses one lightweight HTML page at one declared
+sprite scale with the exact asset name below each image. After an explicit
+Human response, every unlisted asset in that reviewed batch is approved by
+default; named exceptions are rejected and regenerated independently in the
+next batch. Silence, an unsubmitted page, or an asset absent from the page is
+not approval.
+
+Recipe approval authorizes source generation and deterministic derivative
+preparation only. It does not approve an unreviewed cleaned cutout, rights,
+public bytes, a catalogue pointer, preload, runtime publication, animation, or
+retirement. During Plan 03, classify superseded files in the retirement ledger
+without moving or deleting runtime assets. Keep versioned rollback files until
+Plan 12 after all later consumers and catalogue pointers are final, and never
+place an archive beneath `public/assets`.

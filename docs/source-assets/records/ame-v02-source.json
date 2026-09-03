@@ -1,0 +1,226 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "ame-v02-source",
+  "id": "ame",
+  "artVersion": 2,
+  "family": "character",
+  "runtimeStatus": "source-only",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "design-approved",
+  "validationProfile": "strict-v1",
+  "recipeVersion": "mgjrpg-01",
+  "derivativeRecipeVersion": "art-pipeline-v1/outer-contour-l180-chroma10-close2-trim235-holes-c20-register-v1",
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "historyHeading": "Ame v02 Human-gate prompt record / Candidate C exact prompt — recommended pending Human",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/characters/ame/v02/AME_V02_PROMPTS.md",
+      "sha256": "1af9a04b93198dd139ad91f61442c5c884838aacdd34142dbf03eccbfe773106"
+    },
+    "outputIds": [
+      "exec-81260f9b-bd41-45f0-b242-a3d0f2534bbc.png",
+      "exec-b23d0d39-1aa5-4a90-974d-14adb3144dfe.png",
+      "exec-403540e2-c5c8-416f-9da4-a91e0c4bdbab.png",
+      "exec-360df614-c90c-4829-b513-96962844c2d2.png",
+      "exec-6732e5ce-ce9c-47df-b2ca-45c02a7f99b4.png",
+      "exec-eab5d3f9-afb6-4e3c-8dfa-332e6420dede.png",
+      "exec-dd081b94-69f7-48be-be15-70d36055f5bb.png",
+      "exec-c81f684b-6548-4f52-a9da-b82c4f620110.png"
+    ],
+    "notes": "The immutable prompt file preserves exact Candidate B/C and study prompts, all seven v02 candidate/study output IDs, and the exact prompt/hash for one externally retained rejected cleanup assay. Candidate A is honestly documented there as concise because its exact request text was not retained. Candidate C was subsequently approved for static identity and construction on 2026-09-03; runtime publication and rights review remain pending. No model, seed, or request envelope is inferred."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+      "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+      "bytes": 1458116,
+      "relationship": "human-approved-design-generator-original",
+      "evidence": "Candidate C is the Human-approved static v02 identity and construction source, generated globally from Candidate A and recovered v01 identity references. It is not a deterministic local iris edit, production derivative, runtime-publish approval, or rights approval."
+    },
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-a-generator-original.png",
+      "sha256": "50828e9413b813bc36ba89c5bc0eba5e155db151aed8ab6acda321776105365f",
+      "bytes": 1446359,
+      "relationship": "comparison-and-rollback-generator-original",
+      "evidence": "Candidate A maps to output exec-81260f9b-bd41-45f0-b242-a3d0f2534bbc.png and remains unapproved comparison/rollback evidence."
+    },
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-b-generator-original.png",
+      "sha256": "ab2db1543297bc05283687f7e54697d72ce5e15df638a231d1edfd102d730c5e",
+      "bytes": 1483761,
+      "relationship": "conservative-comparison-generator-original",
+      "evidence": "Candidate B is retained as an unapproved conservative comparison and maps to output exec-b23d0d39-1aa5-4a90-974d-14adb3144dfe.png."
+    },
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-b-turnaround-study.png",
+      "sha256": "d70eb2c6739dd2845b4f87dc90c4f2fe95edd4b38d2f642089c6f19fb7097383",
+      "bytes": 1719030,
+      "relationship": "candidate-b-turnaround-study",
+      "evidence": "Unapproved reference-led study retained to evaluate silhouette and registration; it is not the selected Candidate C model authority."
+    },
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-b-expression-study.png",
+      "sha256": "47e1ec330115c49c0c14e738e2266379681838ae05912f6296199b6e56b0a479",
+      "bytes": 2557069,
+      "relationship": "candidate-b-expression-study",
+      "evidence": "Unapproved reference-led study retained to evaluate facial range; it is not the selected Candidate C model authority."
+    },
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-turnaround-study.png",
+      "sha256": "22b312e19731718146e3a836afdf28884bec7210c49233a55090592cc275fe09",
+      "bytes": 1832045,
+      "relationship": "recommended-candidate-turnaround-study",
+      "evidence": "Reference-led Candidate C turnaround study retained as approved model-sheet construction evidence. It is not a separable sprite, production derivative, runtime-publish approval, or rights approval."
+    },
+    {
+      "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-expression-study.png",
+      "sha256": "8a5b1e27604e09e63b18b0bc030d5b4a6543877b0c2abbcb92d05603cbba25c7",
+      "bytes": 2286401,
+      "relationship": "recommended-candidate-expression-study",
+      "evidence": "Reference-led Candidate C expression study retained as approved model-sheet emotional-range construction evidence. It is not a separable sprite, production derivative, runtime-publish approval, or rights approval."
+    }
+  ],
+  "derivatives": [],
+  "geometry": {
+    "class": "grounded-actor",
+    "pivot": [0.5, 0.9],
+    "visibleBounds": [0.29, 0.08, 0.43, 0.82],
+    "safeInset": [0.08, 0.08, 0.06, 0.08],
+    "faceBox": [0.39, 0.19, 0.25, 0.2],
+    "gripPoint": [0.66, 0.58],
+    "forwardAxisDegrees": 0
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+    "operation": "cutout-resize",
+    "backgroundExtraction": {
+      "mode": "outer-contour-barrier",
+      "recipeId": "ame-c-contour-l180-chroma10-close2-trim235-holes-c20-v1",
+      "barrierMaximumLuminance": 180,
+      "barrierMinimumChroma": 10,
+      "barrierClosingRadius": 2,
+      "exteriorTrimMinimumLuminance": 235,
+      "exteriorTrimMaximumChroma": 20,
+      "holeMaximumChroma": 20,
+      "foregroundSeedPoints": [
+        [0.48, 0.55],
+        [0.43, 0.72],
+        [0.6, 0.72],
+        [0.415, 0.84],
+        [0.615, 0.84]
+      ],
+      "enclosedSeedPoints": [
+        [0.599362, 0.035914],
+        [0.670391, 0.162011],
+        [0.668795, 0.197127],
+        [0.327215, 0.219473],
+        [0.674381, 0.23304],
+        [0.312051, 0.245012],
+        [0.682362, 0.26257],
+        [0.306464, 0.269753],
+        [0.691939, 0.280128],
+        [0.699122, 0.302474],
+        [0.665603, 0.351955],
+        [0.33759, 0.351157],
+        [0.659218, 0.364725]
+      ],
+      "holeGrowRadius": 3,
+      "maxEnclosedComponentPixels": 1024
+    },
+    "registration": {
+      "targetBox": [
+        0.08,
+        0.085,
+        0.92,
+        0.9
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    },
+    "profiles": [
+      {
+        "id": "field-256",
+        "outputPath": "artifacts/art-proofs/ame/v02/ame-v02-candidate-c-field-256.webp",
+        "width": 256,
+        "height": 256,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 32,
+        "maximumAlphaComponents": 1,
+        "maxEncodedBytes": 102400,
+        "alphaBounds": {
+          "minimumTop": 0.08,
+          "baseline": 0.9,
+          "baselineTolerancePixels": 2
+        },
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      },
+      {
+        "id": "presentation-512",
+        "outputPath": "artifacts/art-proofs/ame/v02/ame-v02-candidate-c-presentation-512.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 6,
+        "minimumAlphaComponentPixels": 32,
+        "maximumAlphaComponents": 1,
+        "maxEncodedBytes": 225280,
+        "alphaBounds": {
+          "minimumTop": 0.08,
+          "baseline": 0.9,
+          "baselineTolerancePixels": 2
+        },
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ]
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-outer-contour-matte-recipe",
+      "description": "A named outer-contour barrier recipe (integer luma 180, chroma 10, close 2) flood-fills the pale exterior, trims edge-connected pale pixels, clears only size-limited explicitly seeded C20 checker holes, and removes sub-32-pixel alpha flecks after resize. The immutable RGB original is unchanged.",
+      "script": "scripts/art_pipeline/cutout.py"
+    }
+  ],
+  "designApprovalEvidence": {
+    "approvedBy": "Human project author",
+    "approvedOn": "2026-09-03",
+    "scope": "identity-and-construction",
+    "decision": "The Human stated: I've reviewed the images and comparison sheets and I'm happy with the reccomendations. Recorded outcome: Candidate C is the canonical static Ame v02 identity and construction direction.",
+    "evidencePath": "docs/characters/AME_MODEL_SHEET.md"
+  },
+  "knownUnknowns": [
+    "Seeds, generator backend model/tool versions, and request envelopes are not exposed and are not inferred; the prompt record preserves the known 2026-09-02 execution session date.",
+    "Runtime-publish approval and the catalogue switch have not been granted.",
+    "Candidate C turnaround and expression studies are approved construction references, not separable approved runtime sprites or animation frames."
+  ],
+  "rights": {
+    "originClaim": "The current implementation task identifies these files as newly generated project-specific candidate and study sources.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "No third-party character, costume, composition, logo, or distinctive proprietary asset is claimed. Formal owner review remains pending and must precede runtime-publish approval; it does not invalidate the separately recorded Human identity/construction approval."
+  },
+  "rollback": {
+    "method": "Keep public/assets/ame.png and its ame-v01-source record unchanged. Candidate C is source-only; remove ignored proof derivatives to return to the pre-candidate runtime state."
+  }
+}

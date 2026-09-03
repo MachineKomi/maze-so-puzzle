@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  AME_ART,
   ANIMAL_ART,
   CAGE_ART,
   DEFAULT_ANIMAL_SPECIES,
@@ -10,9 +11,11 @@ import {
   DEFAULT_WEAPON_STYLE,
   DOOR_ART,
   ENEMY_ART,
+  HAZARD_ART,
   KEY_ART,
   KEY_COLOR_LABELS,
   KEY_MOTIF_LABELS,
+  LOCK_PAIR_ART,
   MIN_TERRAIN_LIGHTNESS_DELTA,
   PORTAL_ART,
   TERRAIN_DRESSING_ART,
@@ -25,9 +28,11 @@ import {
   resolveDoorArt,
   resolveEnemyArt,
   resolveKeyArt,
+  resolveLockPairArt,
   resolvePortalArt,
   resolveTerrainTheme,
   resolveWeaponArt,
+  type ArtReference,
   type SpriteArt,
 } from "./artCatalog";
 import {
@@ -45,12 +50,31 @@ function sorted(values: readonly string[]): readonly string[] {
   return [...values].sort((first, second) => first.localeCompare(second));
 }
 
-function expectSpriteArt(entries: readonly SpriteArt[]): void {
+function expectArtReferences(entries: readonly ArtReference[]): void {
   for (const entry of entries) {
     expect(entry.src).toMatch(/^\/assets\/[a-z0-9-]+\.(?:png|webp)$/);
     expect(entry.label.trim().length).toBeGreaterThan(0);
   }
   expect(new Set(entries.map((entry) => entry.src)).size).toBe(entries.length);
+}
+
+function expectRichSpriteArt(entry: SpriteArt): void {
+  expect(entry.id).toMatch(/^[a-z0-9-]+$/);
+  expect(entry.artVersion).toBeGreaterThan(0);
+  expect(entry.recipeVersion).toMatch(/^[a-z0-9-]+$/);
+  expect(entry.sourceRecordId).toMatch(/^[a-z0-9-]+$/);
+  expect(entry.runtimeStatus).toBe("active");
+  expect(entry.variants).toHaveLength(1);
+  expect(entry.variants[0]?.src).toBe(entry.src);
+  expect(entry.variants[0]?.width).toBe(512);
+  expect(entry.variants[0]?.height).toBe(512);
+
+  const [pivotX, pivotY] = entry.geometry.pivot;
+  const [x, y, width, height] = entry.geometry.visibleBounds;
+  const normalized = [pivotX, pivotY, x, y, width, height, ...entry.geometry.safeInset];
+  expect(normalized.every((value) => value >= 0 && value <= 1)).toBe(true);
+  expect(x + width).toBeLessThanOrEqual(1);
+  expect(y + height).toBeLessThanOrEqual(1);
 }
 
 describe("art catalog", () => {
@@ -62,19 +86,20 @@ describe("art catalog", () => {
     expect(sorted(Object.keys(CAGE_ART))).toEqual(sorted(CAGE_STYLE_IDS));
     expect(sorted(Object.keys(KEY_ART))).toEqual(sorted(KEY_COLORS));
     expect(sorted(Object.keys(DOOR_ART))).toEqual(sorted(KEY_COLORS));
+    expect(sorted(Object.keys(LOCK_PAIR_ART))).toEqual(sorted(KEY_COLORS));
     expect(sorted(Object.keys(KEY_COLOR_LABELS))).toEqual(sorted(KEY_COLORS));
     expect(sorted(Object.keys(KEY_MOTIF_LABELS))).toEqual(sorted(KEY_COLORS));
     expect(sorted(Object.keys(PORTAL_ART))).toEqual(sorted(PORTAL_PAIR_IDS));
   });
 
   it("provides a unique labelled sprite for every gameplay variant", () => {
-    expectSpriteArt(Object.values(WEAPON_ART));
-    expectSpriteArt(Object.values(ENEMY_ART));
-    expectSpriteArt(Object.values(ANIMAL_ART));
-    expectSpriteArt(Object.values(CAGE_ART));
-    expectSpriteArt(Object.values(KEY_ART));
-    expectSpriteArt(Object.values(DOOR_ART));
-    expectSpriteArt(Object.values(TERRAIN_DRESSING_ART));
+    expectArtReferences(Object.values(WEAPON_ART));
+    expectArtReferences(Object.values(ENEMY_ART));
+    expectArtReferences(Object.values(ANIMAL_ART));
+    expectArtReferences(Object.values(CAGE_ART));
+    expectArtReferences(Object.values(KEY_ART));
+    expectArtReferences(Object.values(DOOR_ART));
+    expectArtReferences(Object.values(TERRAIN_DRESSING_ART));
     for (const dressing of Object.values(TERRAIN_DRESSING_ART)) {
       expect(dressing.periodTiles).toBeGreaterThanOrEqual(10);
       expect(dressing.opacity).toBeGreaterThan(0);
@@ -89,26 +114,27 @@ describe("art catalog", () => {
   });
 
   it("pairs each lock color with dedicated matching key and door art", () => {
-    expect({
+    const projections = {
       red: {
         color: KEY_COLOR_LABELS.red,
         motif: KEY_MOTIF_LABELS.red,
-        key: KEY_ART.red,
-        door: DOOR_ART.red,
+        key: { src: KEY_ART.red.src, label: KEY_ART.red.label },
+        door: { src: DOOR_ART.red.src, label: DOOR_ART.red.label },
       },
       blue: {
         color: KEY_COLOR_LABELS.blue,
         motif: KEY_MOTIF_LABELS.blue,
-        key: KEY_ART.blue,
-        door: DOOR_ART.blue,
+        key: { src: KEY_ART.blue.src, label: KEY_ART.blue.label },
+        door: { src: DOOR_ART.blue.src, label: DOOR_ART.blue.label },
       },
       yellow: {
         color: KEY_COLOR_LABELS.yellow,
         motif: KEY_MOTIF_LABELS.yellow,
-        key: KEY_ART.yellow,
-        door: DOOR_ART.yellow,
+        key: { src: KEY_ART.yellow.src, label: KEY_ART.yellow.label },
+        door: { src: DOOR_ART.yellow.src, label: DOOR_ART.yellow.label },
       },
-    }).toEqual({
+    };
+    expect(projections).toEqual({
       red: {
         color: "Rose",
         motif: "Heart",
@@ -128,6 +154,66 @@ describe("art catalog", () => {
         door: { src: "/assets/door-sunny-sun-v1.png", label: "Sunny Sun Door" },
       },
     });
+
+    for (const color of KEY_COLORS) {
+      const pair = LOCK_PAIR_ART[color];
+      expect(KEY_ART[color]).toBe(pair.key);
+      expect(DOOR_ART[color]).toBe(pair.door);
+      expect(KEY_COLOR_LABELS[color]).toBe(pair.colorLabel);
+      expect(KEY_MOTIF_LABELS[color]).toBe(pair.motifLabel);
+    }
+  });
+
+  it("records measured geometry for current Ame and every lock-pair cutout", () => {
+    const richArt = [
+      AME_ART,
+      ...KEY_COLORS.flatMap((color) => [KEY_ART[color], DOOR_ART[color]]),
+    ];
+    for (const art of richArt) expectRichSpriteArt(art);
+    expect(new Set(richArt.map((art) => art.id)).size).toBe(richArt.length);
+
+    expect(AME_ART).toMatchObject({
+      id: "ame",
+      artVersion: 1,
+      src: "/assets/ame.png",
+      geometry: {
+        class: "grounded-actor",
+        pivot: [0.5, 0.9],
+        visibleBounds: [0.23828125, 0.013671875, 0.51953125, 0.951171875],
+        gripPoint: [0.69, 0.607],
+        forwardAxisDegrees: 0,
+      },
+    });
+    expect(KEY_ART.red.geometry.visibleBounds)
+      .toEqual([0.142578125, 0.021484375, 0.71484375, 0.94140625]);
+    expect(KEY_ART.blue.geometry.visibleBounds)
+      .toEqual([0.115234375, 0.025390625, 0.732421875, 0.935546875]);
+    expect(KEY_ART.yellow.geometry.visibleBounds)
+      .toEqual([0.115234375, 0.0078125, 0.771484375, 0.951171875]);
+    expect(DOOR_ART.red.geometry.visibleBounds)
+      .toEqual([0.052734375, 0.00390625, 0.892578125, 0.96484375]);
+    expect(DOOR_ART.blue.geometry.visibleBounds)
+      .toEqual([0.076171875, 0.03125, 0.84765625, 0.935546875]);
+    expect(DOOR_ART.yellow.geometry.visibleBounds)
+      .toEqual([0.076171875, 0.00390625, 0.84765625, 0.96484375]);
+  });
+
+  it("gives every traversal hazard a static non-colour accessibility cue", () => {
+    expect(sorted(Object.keys(HAZARD_ART))).toEqual(["hole", "lava", "poison", "water"]);
+    expect(new Set(Object.values(HAZARD_ART).map((hazard) => hazard.patternCue)).size).toBe(4);
+
+    for (const hazard of Object.values(HAZARD_ART)) {
+      expect(hazard.src).toMatch(/^\/assets\/[a-z0-9-]+\.png$/);
+      expect(hazard.fallbackColor).toMatch(/^#[0-9a-f]{6}$/i);
+      expect(hazard.visualLightness).toBeGreaterThanOrEqual(0);
+      expect(hazard.visualLightness).toBeLessThanOrEqual(100);
+      expect(hazard.reducedMotionCue.trim().length).toBeGreaterThan(0);
+      expect(hazard.runtimeStatus).toBe("active");
+    }
+    expect(HAZARD_ART.water.periodTiles).toBe(4.6);
+    expect(HAZARD_ART.lava.periodTiles).toBe(4.6);
+    expect(HAZARD_ART.poison.periodTiles).toBe(4.2);
+    expect(HAZARD_ART.hole.periodTiles).toBeNull();
   });
 
   it("provides calibrated pattern metadata for every readable theme", () => {
@@ -221,6 +307,7 @@ describe("art catalog", () => {
     for (const color of KEY_COLORS) {
       expect(resolveKeyArt(color)).toBe(KEY_ART[color]);
       expect(resolveDoorArt(color)).toBe(DOOR_ART[color]);
+      expect(resolveLockPairArt(color)).toBe(LOCK_PAIR_ART[color]);
     }
     for (const pair of PORTAL_PAIR_IDS) expect(resolvePortalArt(pair)).toBe(PORTAL_ART[pair]);
   });
@@ -240,6 +327,8 @@ describe("art catalog", () => {
     expect(resolveKeyArt("not-a-key-color")).toBe(KEY_ART[DEFAULT_KEY_COLOR]);
     expect(resolveDoorArt(null)).toBe(DOOR_ART[DEFAULT_KEY_COLOR]);
     expect(resolveDoorArt("not-a-door-color")).toBe(DOOR_ART[DEFAULT_KEY_COLOR]);
+    expect(resolveLockPairArt(undefined)).toBe(LOCK_PAIR_ART[DEFAULT_KEY_COLOR]);
+    expect(resolveLockPairArt("not-a-lock-color")).toBe(LOCK_PAIR_ART[DEFAULT_KEY_COLOR]);
     expect(resolvePortalArt("not-a-portal")).toBe(PORTAL_ART["rose-heart"]);
   });
 });

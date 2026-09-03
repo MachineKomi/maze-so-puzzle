@@ -1,0 +1,51 @@
+{
+  "schema": "maze-art-generation-batch-review/v1",
+  "reviewId": "mgjrpg-02-batch-01-human-review-r01",
+  "batchId": "mgjrpg-02-batch-01",
+  "reviewedAt": "2026-09-03T16:37:32.1853454+01:00",
+  "reviewedBy": "Human project owner",
+  "scope": "source-design-and-rendering-approval",
+  "decision": "Approve every presented Batch 01 source candidate except Lamia v01, Soda Slime v01, and Minotaur v01. Regenerate only those three exceptions, then proceed.",
+  "approvalMeaning": "The approved sources may proceed through deterministic transparent-derivative QA and family publication. This review does not waive alpha, registration, provenance, rights, catalogue, performance, or build validation.",
+  "approved": [
+    { "runId": "batch-01-ame-matte-02", "sha256": "b15ae733e328651bd1b91cccc2db2e138995a2dca39e8ff071e4b2adf1b460fe", "bytes": 1549274 },
+    { "runId": "batch-01-rose-heart-matte-02", "sha256": "b12f2a0c7e7c798de4c4e84872c4e6d8d3f45377a43c400682b8b44bd2a8d35a", "bytes": 1876937 },
+    { "runId": "batch-01-classic-slime-matte-02", "sha256": "d51db886dc4a9d51b3e889db1673b6739f0dd6b56a5041c196814198af81ade7", "bytes": 1197842 },
+    { "runId": "batch-01-tea-time-skeleton-matte-02", "sha256": "a23ed34cc64c7a92a1dc940d0e5e028d705dd0eb20a66a923beb3d1363d4e04e", "bytes": 1592632 },
+    { "runId": "batch-01-lizard-sword-matte-02", "sha256": "80813f70bcfcbf72e0cb7aa80c7ff9189f856e4dfb115d6756b4c1a04420f434", "bytes": 1576575 },
+    { "runId": "batch-01-lizard-spear-matte-02", "sha256": "c0b5b946bc779b0130daab1b833479df4c28f9d0b0ddeb0d3c22771fe5121b86", "bytes": 1539127 },
+    { "runId": "batch-01-wholesome-succubus-matte-02", "sha256": "9af77d69d35e0829b5f65ab70b9b803afc47fcca7712ea89556b3c39255b080d", "bytes": 1569160 },
+    { "runId": "batch-01-pocket-trex-matte-02", "sha256": "f5861fa748f9ccec146a9faff4ca89310ba4b7cf6c4fb2797ba042d6bb07b123", "bytes": 1596153 },
+    { "runId": "batch-01-kappa-matte-02", "sha256": "6b10633fe4fed7843d8745efd6395decc9572305125d27fab23917ebb488cae3", "bytes": 1499331 },
+    { "runId": "batch-01-treasure-mimic-matte-02", "sha256": "04d378ced51d5c960b58d372bfea7284ec08a3a8150e599ecce72c167a16582e", "bytes": 1544711 },
+    { "runId": "batch-01-kindly-cultist-matte-01", "sha256": "6d0240df9213be566e82e53396f647b68a07aa5d9ede331724a1dea9dd557a5e", "bytes": 1599074 },
+    { "runId": "batch-01-orc-chieftain-matte-01", "sha256": "6e3f84c7ed662bce6db8b49511afc5ad6742bbe3eace37a57e4ba2235bc88d8a", "bytes": 1768054 },
+    { "runId": "batch-01-cyclops-matte-01", "sha256": "1716bc3f4a5e6a743ea5afa8c9c49b3cbcae75622d60483ccd4582e89249b145", "bytes": 1586532 },
+    { "runId": "batch-01-warrior-skeleton-matte-01", "sha256": "d2a1fb506b03fc4d28b0502c9c6caf23ebe66401380e79643e390b67e6fa64a4", "bytes": 1441115 }
+  ],
+  "rejected": [
+    {
+      "runId": "batch-01-lamia-matte-01",
+      "sha256": "32ff4538e1b19dbb918adfd2984a2bd52d0ba8d9463dce839e127ada690ccc92",
+      "bytes": 1475868,
+      "reason": "The leaf in her hair and leaf markings on her snake body are arbitrary motif repetition; not every character needs a leaf motif."
+    },
+    {
+      "runId": "batch-01-soda-slime-matte-01",
+      "sha256": "7d2354a75080e13bcb9c1ac85793f1cb44ad8f7d90cbe1a1dc6afe8621b40a54",
+      "bytes": 1322239,
+      "reason": "The three large bubbles look strange. Use a traditional slime construction made from soda gel instead."
+    },
+    {
+      "runId": "batch-01-minotaur-matte-01",
+      "sha256": "b1dd052857f4339013a8dab47c62474b66c9a41e87d20134994577b06c3a8e8c",
+      "bytes": 1641252,
+      "reason": "The arrow sign reads as giving directions rather than an enemy role. Use a traditional minotaur axe."
+    }
+  ],
+  "replacementBatch": "mgjrpg-02-batch-01-r02",
+  "runtimeImpactAtDecision": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0
+  }
+}

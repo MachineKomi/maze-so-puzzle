@@ -1,0 +1,184 @@
+{
+  "schema": "maze-art-generation-batch/v1",
+  "batchId": "mgjrpg-02-batch-01-r02",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-03",
+  "purpose": "Fresh blank-canvas replacements for the three exceptions named in the Human's first Batch 01 review. This record grants no runtime, catalogue, rights, or retirement approval.",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "revision": 4,
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+    "bytes": 8645
+  },
+  "decisionEvidence": {
+    "decisionId": "mgjrpg-02-human-selection-v04",
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v04/human-decision.json",
+    "sha256": "306ab2b3781c741ba7c912fdc1da8fd81abde28b842d669e5d384233209b99e3",
+    "bytes": 6945,
+    "scope": "rendering-recipe-and-controlled-source-production"
+  },
+  "revisionReasonEvidence": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-01/human-review-r01.json",
+    "sha256": "bcbbc4db57ad20b07ca7b942b40fded223ec60671a422861f4af8b056c6a948f",
+    "bytes": 3825
+  },
+  "promptFile": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/PROMPTS.md",
+    "sha256": "de90b4554d8e0100a9859cde63033dd3320f8555ba1c18b72d83b9c5c43b90dc",
+    "bytes": 62787,
+    "fidelity": "exact-as-submitted"
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in image generation capability",
+    "model": "not exposed by the tool response",
+    "seed": "not exposed by the tool response",
+    "nativeOutput": {
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque"
+    }
+  },
+  "referenceRegistry": {
+    "future-enemy-hybrid-01": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v03/future-enemy-hybrid-01-generator-original.png",
+      "sha256": "eef19db39fc5c2289a1797f3baf8fae91ac0bbfd763717e0198bdd9a4c60983b",
+      "bytes": 1886549,
+      "authorityKind": "human-approved-concept-and-rendering-family-board"
+    },
+    "direction-a-core-sampler": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-sampler-generator-original.png",
+      "sha256": "f6bf0a91646864857259cd9c3d6f690859f1f4f2f471279f44923b28e8a94545",
+      "bytes": 2152762,
+      "authorityKind": "human-selected-rendering-comparison-board"
+    },
+    "direction-a-family-transfer": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-family-transfer-generator-original.png",
+      "sha256": "2583f027d00d662dbd52e689eca99298a5d04c24322a976747a288277c356a76",
+      "bytes": 2128927,
+      "authorityKind": "human-selected-rendering-comparison-board"
+    }
+  },
+  "runs": [
+    {
+      "runId": "batch-01-r02-lamia-matte-01",
+      "promptBlockId": "enemy-lamia-v02-matte-01",
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "orderedReferences": [
+        { "order": 1, "referenceId": "future-enemy-hybrid-01", "role": "family-rendering-authority" },
+        { "order": 2, "referenceId": "direction-a-core-sampler", "role": "rendering-and-mass-authority" },
+        { "order": 3, "referenceId": "direction-a-family-transfer", "role": "optical-scale-and-surface-authority" }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/enemy-lamia-v02-matte-01-generator-original.png",
+        "outputId": "exec-476a0f28-4541-4333-9a5b-20e271599760.png",
+        "sha256": "7163f2c5d7b8a769462ef5c05202b90513f9ca35d0770412b1bd05473493bfff",
+        "bytes": 1419835,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": { "status": "pending-human-batch-review", "reason": "Fresh Lamia replacement removes the rejected leaf motif and awaits explicit Human review." },
+      "lineage": { "freshCanvas": true, "previousBatchOutputUsed": false, "rejectedOutputUsedAsReference": false, "mayBecomeIdentityAuthority": false, "mayBecomeRenderingAuthority": false }
+    },
+    {
+      "runId": "batch-01-r02-soda-slime-matte-01",
+      "promptBlockId": "enemy-soda-slime-v02-matte-01",
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "orderedReferences": [
+        { "order": 1, "referenceId": "future-enemy-hybrid-01", "role": "family-rendering-authority" },
+        { "order": 2, "referenceId": "direction-a-core-sampler", "role": "rendering-and-mass-authority" },
+        { "order": 3, "referenceId": "direction-a-family-transfer", "role": "optical-scale-and-surface-authority" }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/enemy-soda-slime-v02-matte-01-generator-original.png",
+        "outputId": "exec-4a5f16f0-87f5-4860-bf8f-eb941ad458c3.png",
+        "sha256": "2224147e450e67818d420a3ca5200066a975e9d407832519ac82b13d5fee656d",
+        "bytes": 1229339,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": { "status": "pending-human-batch-review", "reason": "Fresh Soda Slime replacement restores traditional slime construction and awaits explicit Human review." },
+      "lineage": { "freshCanvas": true, "previousBatchOutputUsed": false, "rejectedOutputUsedAsReference": false, "mayBecomeIdentityAuthority": false, "mayBecomeRenderingAuthority": false }
+    },
+    {
+      "runId": "batch-01-r02-minotaur-matte-01",
+      "promptBlockId": "enemy-minotaur-v02-matte-01",
+      "generationMode": "fresh-reference-led-generation-on-uniform-matte",
+      "orderedReferences": [
+        { "order": 1, "referenceId": "future-enemy-hybrid-01", "role": "family-rendering-authority" },
+        { "order": 2, "referenceId": "direction-a-core-sampler", "role": "rendering-and-mass-authority" },
+        { "order": 3, "referenceId": "direction-a-family-transfer", "role": "optical-scale-and-surface-authority" }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/enemy-minotaur-v02-matte-01-generator-original.png",
+        "outputId": "exec-5d9a8caf-7182-4980-88b3-90818f2cda96.png",
+        "sha256": "d0f9b1aa7d80aa3b7eecc4b2a19f6404694e266d3bb0adb2f98284ad07ac43a9",
+        "bytes": 1669216,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": { "status": "pending-human-batch-review", "reason": "Fresh Minotaur replacement uses the requested traditional axe and awaits explicit Human review." },
+      "lineage": { "freshCanvas": true, "previousBatchOutputUsed": false, "rejectedOutputUsedAsReference": false, "mayBecomeIdentityAuthority": false, "mayBecomeRenderingAuthority": false }
+    }
+  ],
+  "nativeCanvasException": {
+    "appliesToEveryOutput": true,
+    "actual": [1254, 1254],
+    "canonicalPolicy": "Canonical character and object masters normally use a documented 1536 or 2048 square working canvas before registration.",
+    "exception": "The built-in generator returned 1254 by 1254 PNG originals. They remain byte-for-byte at native size; deterministic registered derivatives enforce delivery dimensions."
+  },
+  "lineagePolicy": {
+    "previousBatchOutputAsAuthority": "forbidden",
+    "rejectedCandidateAsAuthority": "forbidden",
+    "boardCropAsMaster": "forbidden",
+    "note": "All three replacements were independently generated from the approved family boards. The rejected v01 candidates were not reference inputs."
+  },
+  "counts": {
+    "runCount": 3,
+    "rejectedBackgroundInvalidCount": 0,
+    "pendingHumanCandidateCount": 3,
+    "generatorOriginalEncodedBytes": 4318390,
+    "generatorOriginalDecodedBytesUpperBound": 18870192
+  },
+  "reviewProtocol": {
+    "batchProofStatus": "pending",
+    "decisionRule": "After an explicit Human response to the named r02 proof page, unlisted presented assets are approved by default and named exceptions are rejected for another independent run.",
+    "silenceRule": "Silence, no response, or omission from the presented proof page is not approval.",
+    "candidateBoundary": "The three v02 matte candidates remain source-only until explicit review; technical derivative validation does not confer art approval."
+  },
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from the exact prompts and ordered approved-family references above; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "releaseStatus": "not-approved"
+  },
+  "runtimeImpact": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0,
+    "web": "none-source-only",
+    "tauri": "none-source-only",
+    "ipad": "none-source-only",
+    "tv": "none-source-only"
+  },
+  "rollback": {
+    "method": "Keep the exact prompts, approved references, immutable r02 outputs, rejected r01 outputs, and Human exception record. To abandon r02, leave runtime and catalogue pointers unchanged and append a rejection decision; never delete or rewrite history.",
+    "runtimeRollbackRequired": false
+  }
+}

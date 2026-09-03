@@ -84,6 +84,24 @@ describe("art preloading", () => {
     });
   });
 
+  it("projects current Ame and hazard URLs from the typed art catalogue", async () => {
+    const { ASSETS } = await import("./assets");
+    const { AME_ART, HAZARD_ART } = await import("./artCatalog");
+
+    expect(ASSETS.ame).toBe(AME_ART.src);
+    expect({
+      water: ASSETS.water,
+      lava: ASSETS.lava,
+      poison: ASSETS.poison,
+      hole: ASSETS.hole,
+    }).toEqual({
+      water: HAZARD_ART.water.src,
+      lava: HAZARD_ART.lava.src,
+      poison: HAZARD_ART.poison.src,
+      hole: HAZARD_ART.hole.src,
+    });
+  });
+
   it("exposes dedicated lock-pair assets while keeping blue legacy aliases", async () => {
     const { ASSETS } = await import("./assets");
 

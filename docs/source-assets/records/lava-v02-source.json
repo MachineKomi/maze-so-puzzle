@@ -1,0 +1,64 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "lava-v02-source",
+  "id": "lava",
+  "artVersion": 2,
+  "family": "hazard",
+  "runtimeStatus": "active",
+  "sourceStatus": "legacy-runtime-only",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": false,
+    "outputIds": [],
+    "notes": "No asset-specific prompt linkage was resolved automatically. Preserve the project-level generation claim and treat asset-specific prompt details as unknown."
+  },
+  "sources": [],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/lava-v2.png",
+      "sha256": "b925473fce5b06c9ae1661013ea8c1cf7dd071d3a050319afeb2e07a98b60ead",
+      "bytes": 709637,
+      "width": 1024,
+      "height": 1024,
+      "format": "png",
+      "mode": "P",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 4194304,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "No repository-local immutable generator original or normalized master is linked."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "4e77c35a492f7ff81ef76a85e18b50b8ef2323ed",
+    "firstSeenAt": "2026-09-01T17:16:35+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

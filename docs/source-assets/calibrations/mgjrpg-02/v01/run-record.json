@@ -1,0 +1,96 @@
+{
+  "schema": "maze-art-generation-run/v1",
+  "calibrationId": "mgjrpg-02-canary-v01",
+  "renderingProfile": "storybook-local-contour-v1",
+  "recipeCandidate": "mgjrpg-02",
+  "status": "pending-human-rendering-review",
+  "identityAuthority": {
+    "recordId": "ame-v02-source",
+    "approvalScope": "identity-and-construction",
+    "immutablePath": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+    "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+    "bytes": 1458116,
+    "rule": "Candidate C remains the sole approved Ame v02 identity/construction authority; calibration outputs cannot replace it."
+  },
+  "runs": [
+    {
+      "runId": "mgjrpg-02-ame-c-rendering-assay-a",
+      "method": "image-edit",
+      "provider": "OpenAI ImageGen capability exposed to Codex",
+      "model": "not-disclosed-by-tool",
+      "seed": "not-disclosed-by-tool",
+      "executedOn": "2026-09-03",
+      "changeOnly": "Surface rendering calibration: local colour-aware contour, broad value grouping, and restrained material frequency; identity and construction locked.",
+      "prompt": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v01/PROMPTS.md",
+        "sha256": "d8c51e259f4bd78c3037c3a8112d2d077d4fa0217b0754687f14928b8864d4fe",
+        "heading": "Run `mgjrpg-02-ame-c-rendering-assay-a`",
+        "fidelity": "exact"
+      },
+      "orderedReferences": [
+        {
+          "position": 1,
+          "primaryRole": "edit-target",
+          "secondaryRole": "identity-and-construction-authority",
+          "authorityKind": "immutable-generator-original",
+          "ownerRecordId": "ame-v02-source",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+          "bytes": 1458116,
+          "intendedInfluence": "Preserve Candidate C identity, construction, pose, silhouette, registration intent, and emotional character."
+        }
+      ],
+      "output": {
+        "outputId": "exec-2cfbdf10-c320-4bfd-8496-25ff84350748.png",
+        "immutableGeneratorOriginalPath": "docs/source-assets/calibrations/mgjrpg-02/v01/ame-c-rendering-assay-a-generator-original.png",
+        "sha256": "d69d70392eabca57806d5bc68146310904378f649ff28110e50484d3c9d5beae",
+        "bytes": 993396,
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "disposition": "rejected",
+        "reason": "Useful evidence that local contour hue can preserve the approved read, but not an asset candidate: alpha contacts the source boundary, the approved registration envelope is not preserved, and a chromatic edge halo is visible."
+      },
+      "lineage": {
+        "editOfEdit": false,
+        "mayBeIdentityAuthority": false,
+        "mayBeRenderingAuthority": false,
+        "mayBeFutureEditTarget": false
+      }
+    }
+  ],
+  "deterministicAssays": {
+    "authority": "analytical-proof-only",
+    "implementation": "scripts/art_pipeline/mgjrpg02.py",
+    "inputRule": "Read each immutable source where usable, otherwise the current historical runtime evidence; never promote a proof derivative to identity or rendering authority.",
+    "outputRule": "Ignored comparison artifacts may demonstrate the proposed contract but are not production assets, masters, or future edit targets.",
+    "revisions": [
+      {
+        "packetRevision": "v01",
+        "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v01/proof-index.json",
+        "sha256": "eb68e9d7a966e4d52b8ffc1e56c8781ba99aac5f8801df7f8bb51180c2c27dd8",
+        "bytes": 81425,
+        "disposition": "rejected-calibration-draft",
+        "reason": "The first deterministic sheet correctly exposed the local-token idea but used a source contour band sized from delivery scaling and treated all pale semantic pixels as cutline. This overpainted source-size surfaces and semantic interiors. Evidence is retained; it is not the Human packet."
+      },
+      {
+        "packetRevision": "v02",
+        "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v02/proof-index.json",
+        "disposition": "superseded-viewer-defect",
+        "reason": "Uses the corrected contour and cream classification, but its HTML viewer hard-codes the v01 label and constructs broken natural-size assay links. Its immutable PNG and JSON evidence remains useful but it is not the recommended review surface."
+      },
+      {
+        "packetRevision": "v03",
+        "proofIndexPath": "artifacts/art-proofs/mgjrpg-02/v03/proof-index.json",
+        "disposition": "superseded-provenance-rebinding",
+        "reason": "Corrects the viewer label and all 20 natural-size assay links, but was generated before this immutable revision history recorded the v02 viewer defect. It is retained unchanged; the separate canary review record selects the latest packet generated from this stable history."
+      }
+    ],
+    "selectionRule": "The separate global canary review record names the recommended packet revision and binds exact evidence hashes. This run record deliberately does not self-reference that packet, avoiding a circular proof-index fingerprint."
+  },
+  "externalCraftBoundary": "No Puzzle Pets Arena pixels, prompts, characters, palettes, motifs, UI layouts, or branded elements were copied; only the general craft principle of colour-responsive local contours was adopted.",
+  "rollback": {
+    "method": "Delete no historical evidence. Keep runtime pointers on mgjrpg-01/pre-versioned assets; withhold all mgjrpg-02 publication until a separate explicit Human rendering approval changes the global canary review status.",
+    "runtimeByteDelta": 0
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "ame-v01-source",
+  "id": "ame",
+  "artVersion": 1,
+  "family": "character",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "historical",
+  "validationProfile": "strict-v1",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "derivativeRecipeVersion": "art-pipeline-v1/cutout-v1",
+  "promptEvidence": {
+    "fidelity": "template-substitution",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [
+      "exec-4a073da0-4d41-4349-9b08-1e943b5a959a.png"
+    ],
+    "notes": "The historical prompt is preserved as the Shared character and item direction block plus the asset-specific ame.png request. This record does not invent a missing API request envelope or generator parameters.",
+    "historyHeading": "Shared character and item direction"
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/characters/ame/v01/ame-v01-generator-original.png",
+      "sha256": "9abf1df3d5b4f383a4d66d8e9f39f05f867caa0bfe1962f5a1e9f5d44647f498",
+      "bytes": 1224181,
+      "relationship": "recovered-immutable-generator-original",
+      "evidence": "The current implementation task recovered this source and linked it to historical output exec-4a073da0-4d41-4349-9b08-1e943b5a959a.png. Runtime identity remains the recorded public/assets/ame.png derivative."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/ame.png",
+      "sha256": "47ce04c1884eccacbe0679339d5a4b50edc6684af5276167de61adb79b1a2180",
+      "bytes": 228696,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "geometry": {
+    "class": "grounded-actor",
+    "pivot": [0.5, 0.9],
+    "visibleBounds": [0.23828125, 0.013671875, 0.51953125, 0.951171875],
+    "safeInset": [0.08, 0.08, 0.06, 0.08],
+    "gripPoint": [0.69, 0.607],
+    "forwardAxisDegrees": 0
+  },
+  "knownUnknowns": [
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "The original API request envelope is unavailable; prompt evidence is the preserved shared template plus asset-specific substitution."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/characters/ame/v01/ame-v01-generator-original.png",
+    "operation": "cutout-resize",
+    "backgroundExtraction": {
+      "mode": "native-alpha"
+    },
+    "profiles": [
+      {
+        "id": "field-256",
+        "outputPath": "artifacts/art-proofs/ame/v01/ame-v01-recovered-field-256.webp",
+        "width": 256,
+        "height": 256,
+        "format": "webp",
+        "clearAlphaBelow": 2,
+        "edgeDilationPixels": 4,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      },
+      {
+        "id": "presentation-512",
+        "outputPath": "artifacts/art-proofs/ame/v01/ame-v01-recovered-presentation-512.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "clearAlphaBelow": 2,
+        "edgeDilationPixels": 6,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ]
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+    "firstSeenAt": "2026-08-31T23:03:12+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

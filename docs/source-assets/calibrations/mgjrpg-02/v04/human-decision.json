@@ -1,0 +1,108 @@
+{
+  "schema": "maze-art-human-decision/v1",
+  "decisionId": "mgjrpg-02-human-selection-v04",
+  "recipeId": "mgjrpg-02",
+  "recipeRevision": 4,
+  "reviewId": "mgjrpg-02-canary-v01",
+  "reviewedBy": "Human project owner",
+  "reviewedAt": "2026-09-03T12:59:05.6177539+01:00",
+  "decisionScope": "rendering-recipe-and-controlled-source-production",
+  "decision": "The Human approved the composite mgjrpg-02 rendering direction for controlled, family-by-family source production. This approval selects exact rendering and construction references below while keeping each resulting cleaned derivative, rights review, runtime publication, catalogue switch, preload change, memory allocation, and retirement as a separate gate.",
+  "selections": {
+    "ame": {
+      "identityAndConstructionAuthority": {
+        "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+        "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1",
+        "bytes": 1458116
+      },
+      "selectedRenderingReference": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/ame-v02-rendering-b-fresh-01-generator-original.png",
+        "sha256": "b57660fd27a53bc00960c2cdeae92addc3b1359a1447a36d9676b0a78a03ff12",
+        "bytes": 1396813,
+        "reason": "Fresh B-led 01 is more distinct and readable at Ame's common small gameplay scale. Fresh B-led 02 has appealing high-resolution rendering but is not selected."
+      },
+      "notSelectedComparison": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/ame-v02-rendering-b-fresh-02-generator-original.png",
+        "sha256": "024e4b26a429b6a098f50f987026c74201426ae685abbd00e5da5b2ebf7fa93a",
+        "bytes": 1382663,
+        "disposition": "Preserve as immutable comparison and rollback evidence; do not publish it or use it as an identity authority."
+      },
+      "constructionLock": "Candidate C remains the sole identity and construction authority. Fresh B-led 01 supplies approved rendering direction only; any production candidate that changes Candidate C's warm young face, golden-blonde shoulder-length layered hair, clearly blue irises, proportions, mint/lavender costume, backpack, silhouette, registration, hand socket, or emotional character must be rejected."
+    },
+    "roseHeartTeleporter": {
+      "selectedConstructionReference": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/rose-heart-floor-pad-hybrid-01-generator-original.png",
+        "sha256": "52f139e96d1e3cf5ae73bb5dca281e0157c0a97b5a19c5082d2100e8f2c7ac6c",
+        "bytes": 1774937
+      },
+      "decision": "Approve the fresh low flower-petal floor-pad construction rather than an upright portal arch. The final isolated source must make the centre heart brighter and more clearly defined and must use a genuinely flat plain extraction matte; painted checkerboard contamination is a rejection. The v03 composite is construction evidence, not a production alpha master."
+    },
+    "futureEnemies": {
+      "selectedConceptAndRenderingFamilyReference": {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v03/future-enemy-hybrid-01-generator-original.png",
+        "sha256": "eef19db39fc5c2289a1797f3baf8fae91ac0bbfd763717e0198bdd9a4c60983b",
+        "bytes": 1886549
+      },
+      "approvedDesigns": [
+        "wholesome-succubus",
+        "pocket-t-rex",
+        "kappa",
+        "treasure-mimic"
+      ],
+      "decision": "Approve these four designs as concept and rendering-family direction. Generate each isolated source master from the locked brief and approved role-separated references; never crop a contact-sheet cell or use an edit-of-an-edit as authority."
+    },
+    "reviewWorkflow": {
+      "decision": "Continue iterative source generation and regeneration by family. Keep Human review lightweight: one HTML page, one declared sprite scale, and the asset name underneath. After an explicit Human batch response, every unlisted asset in that reviewed batch is approved by default and named exceptions are rejected for a fresh independent attempt in the next batch.",
+      "silenceRule": "Silence, a missing Human response, or an asset absent from the presented batch is not approval.",
+      "effortPriority": "Prioritise authoring required new assets and genuine replacements over elaborate proof-page presentation."
+    },
+    "retirementWorkflow": {
+      "decision": "During Plan 03, classify superseded assets and maintain a precise retirement/archive ledger only. Do not move or delete existing runtime assets yet.",
+      "hold": "Keep versioned rollback files through later consumer and catalogue-pointer work. Plan 12 owns the retirement sweep after those consumers and pointers are final.",
+      "archiveBoundary": "Never place an archive beneath public/assets because it would still be packaged."
+    }
+  },
+  "authorization": {
+    "approved": [
+      "mgjrpg-02 revision 4 as the selected rendering recipe",
+      "controlled source-only generation and deterministic derivative preparation",
+      "family-by-family Human review using the approve-by-exception protocol after an explicit response",
+      "retirement classification and ledger maintenance"
+    ],
+    "notApproved": [
+      "any Batch 01 cleaned cutout or isolated generated candidate not yet reviewed",
+      "rights or release approval",
+      "publication of Candidate C or Fresh B-led 01 into the runtime catalogue",
+      "any public/assets write, catalogue pointer, preload, gameplay, UI, lighting, VFX, or animation change",
+      "moving or deleting superseded runtime files",
+      "cropping a concept board into a production master"
+    ]
+  },
+  "evidence": [
+    {
+      "role": "pre-decision-review-snapshot",
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v03/mgjrpg-02-canary-review-v14-pending.json",
+      "sha256": "1f6141268adacb73222bc8b5e383de9a7237175c0d07cc36106259580ff5c88b",
+      "bytes": 15654
+    },
+    {
+      "role": "pre-decision-recipe-snapshot",
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v03/mgjrpg-02-recipe-r03-candidate.json",
+      "sha256": "42e18d607223e985486a0a37418bdbdff6d4f8d5d6eb2b61dff498fce69dd40d",
+      "bytes": 6428
+    },
+    {
+      "role": "approved-recipe",
+      "path": "docs/source-assets/recipes/mgjrpg-02.json",
+      "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+      "bytes": 8645
+    },
+    {
+      "role": "review-packet-index",
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/proof-index.json",
+      "sha256": "763335189a1f95fb0823f12d4aaa156362bb16d9ad7ca5928d8af7588dbd4ff5",
+      "bytes": 24890
+    }
+  ],
+  "rollback": "Restore the exact r03 candidate recipe and v14 pending-review snapshots only to reconstruct pre-decision state; do not erase or rewrite this decision. Runtime rollback is currently unnecessary because this decision itself changes no public asset or catalogue pointer."
+}

@@ -89,14 +89,18 @@ state.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
-17. `src/artCatalog.ts` maps the typed visual IDs to runtime artwork, labels,
+17. `src/artCatalog.ts` maps stable typed visual IDs to runtime artwork, labels,
     material periods, dominant-colour families, compatibility rules, and
-    fallbacks. Gold/yellow floors cannot pair with green/sage walls. The current
-    catalogue contains twelve compatible terrain themes, eleven weapons, twelve
-    friendly enemy looks, fifteen pet species, four complete AI-generated v5
-    cage fronts, and dedicated Rose Heart, Blue Star, and Sunny Sun key/door pairs.
-    Each lock pair exposes both child-readable colour and shape metadata. It
-    also maps three paired-portal IDs to original transparent flower-pad art.
+    fallbacks. `ArtReference` preserves the small legacy consumer surface while
+    rich `SpriteArt` canaries add pixel revision, derivative, measured geometry,
+    light, alpha, runtime status, and source-record identity without importing
+    heavy provenance into the browser. `AME_ART` deliberately selects historical
+    v01 while the v02 Human candidate remains source-only. `LOCK_PAIR_ART` is the
+    single Rose Heart, Blue Star, and Sunny Sun authority; legacy key/door maps
+    are object-identical projections. Hazard records add period, measured colour
+    and lightness, static pattern, and reduced-motion cues. Gold/yellow floors
+    still cannot pair with green/sage walls, and gameplay/content fingerprints
+    remain independent of art revisions.
 18. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
     touch, keyboard, and D-pad controls: a 320 ms first pause, a smooth 260–160 ms
     repeat curve over 16 held steps, and reset-on-direction-change semantics.
@@ -237,9 +241,81 @@ state.
   production deployment is verified separately after each push. Clean-machine
   installation, signing, and physical-device feel/listening remain separate
   release checks.
-- AI-generated source art and exact prompts are recorded in
-  `docs/AI_ASSET_PROMPTS.md`; source-only masters are kept outside `public/` so
-  they do not inflate deployments.
+- AI-generated source art and exact prompts are recorded append-only in
+  `docs/AI_ASSET_PROMPTS.md` and versioned source records. Source-only masters
+  stay outside `public/` so they do not inflate deployments.
+
+## Static art source and build boundary
+
+`docs/ART_BIBLE.md` is the static visual authority and
+`docs/characters/AME_MODEL_SHEET.md` owns Ame's identity/registration gate.
+Hand-reviewed records under `docs/source-assets/records/` preserve lifecycle,
+prompt fidelity, immutable ingredients, hashes, rights uncertainty, derivatives,
+and rollback. The generated `docs/source-assets/manifest.json` inventories those
+records plus every runtime/source image deterministically; it contains no
+generation timestamp and is not hand-edited.
+
+Candidate C's identity/construction is Human-approved, but the active runtime
+still selects historical Ame v01. The proposed `mgjrpg-02` rendering profile is
+a separate pre-volume gate. Its `storybook-local-contour-v1` contract derives
+each stable contour section from the nearest enclosed material, maps it through
+Maze's own deep-plum contour families, and reserves darkest ink for critical
+facial/occlusion/contrast detail. It forbids uniform black perimeters,
+pixel-by-pixel hue switching, halos, and low-contrast pale edges. Field cutouts
+receive no sticker cutline; semantic UI/reward signals may use a cream cutline;
+periodic terrain/hazards use material boundaries and seams without an enclosing
+actor contour. The adopted PPBA technique contributes no external pixel, prompt,
+palette, motif, layout, brand, or runtime dependency.
+
+`scripts/art_pipeline.py` is the safe entry point. `--check` is non-writing;
+`--manifest --write` is the explicit deterministic update; `--build` requires a
+record ID and profile, stages and validates output, refuses overwrite, and keeps
+unapproved derivatives beneath ignored `artifacts/art-proofs/`; `--proof`
+creates actual-size/context boards and an encoded/decoded inventory only there.
+The pipeline applies EXIF/profile handling where evidence exists,
+premultiplied-alpha resize, straight-alpha delivery, transparent-edge RGB
+dilation, periodic seam checks, clear-border checks, schema/hash coverage, and
+strict-v1 versus honest legacy warnings. New `mgjrpg-02` production records use
+schema v2 / `strict-v2`: the schema and builder bind family to treatment class,
+closed ordered reference roles/authority kinds, direct non-edit-of-edit lineage,
+selected immutable build source, and exact global recipe/review evidence.
+Existing release-number processors are
+retained unchanged as historical recipes until parity is separately proved.
+
+The ignored `artifacts/art-proofs/mgjrpg-02/v08/` packet is preserved as
+Human-rejected post-process evidence; it is not an art authority. The v11
+authored-options packet preserves the Human's family-specific narrowing: A for
+most core/current-family sprites, C for the traditional slime, sword lizard man,
+and green-tea-drinking skeleton, B future-enemy concepts except the A wholesome
+succubus, and the existing top-down flower-petal portal category. Future enemies
+must be re-authored through A's chunky, high-chroma material-contour grammar
+with only restrained B colour/shading influence.
+
+The current bounded-response packet is
+`artifacts/art-proofs/mgjrpg-02/v14/`. Its schema-aware validator binds four
+immutable generator originals, exact prompts and ordered reference roles, the
+locked Candidate C source, the prior preferred Direction B Ame, two independent
+fresh-base attempts, measured proof artifacts, and zero runtime/catalogue
+impact. Neither fresh Ame attempt is an edit of prior B or of the other; both
+drift Candidate C's locked construction, so prior B is the recommended fallback
+pending Human confirmation. The enemy hybrid remains direction evidence pending
+simplification, and the flower-pad hybrid confirms category rather than an
+approved master. Composite board cells remain non-separable concept evidence;
+opaque RGB boards do not pass production alpha or periodic-terrain seam QA.
+Until the Human explicitly accepts, narrows, or rejects the v14 recommendation,
+no Candidate C catalogue switch, broad static-family batch, retirement, or
+decoded runtime residency is authorized; public byte delta remains zero.
+
+Lifecycle is intentionally three-dimensional: runtime status (`active`,
+`dormant`, `deprecated`, `superseded`, `source-only`), source status
+(`source-backed`, `partial`, `legacy-runtime-only`), and approval status
+(`historical`, `candidate`, `pending-human`, `design-approved`, `approved`,
+`rejected`). `design-approved` records Human acceptance of identity and
+construction while remaining non-publishable. Only `approved`, with named
+runtime-publish evidence, exact prompt evidence, and reviewed rights, can enter
+new public output. Runtime selection never implies Human approval. A catalogue
+switch uses a new versioned URL and keeps its prior pointer and files for
+rollback; cleanup is a later proved-dead change.
 
 ## Testing strategy
 

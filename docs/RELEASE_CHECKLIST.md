@@ -17,6 +17,118 @@ Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
 
+## Unreleased Plan 03 art-foundation candidate
+
+- [x] Work began from accepted Plan 06 checkpoint
+  `ee176f52ab79e08e818fc919f44b7723f9fc9865`; its tracked tree was clean and
+  the unrelated Agent 10 `docs/plans/10-*` and `docs/plans/assets/` files were
+  left untouched. During final capture, a parallel doc-only playtest commit
+  advanced `main` to `ab20f28372c93e341b13e3cf2d2c94ea71703bb2`; its three
+  playtest documents contain no runtime change and remain outside this pass.
+- [x] `docs/ART_BIBLE.md` defines the static world grammar, palette/contrast,
+  lines, values, materials, perspective, proportions, motifs, family DNA,
+  optical icons, source profiles, registration, alpha, versions, budgets,
+  lighting/animation/performance handoffs, and rollback rules.
+- [x] `docs/characters/AME_MODEL_SHEET.md` records Candidate C as the
+  Human-approved design direction. It fixes golden-blonde/blue-eye swatches,
+  face/hair/costume landmarks, front/side/back construction, eight expressions,
+  pivot, safe zones, hand socket, secondary-motion envelopes, and proof sizes.
+- [x] Current `/assets/ame.png` remains the active historical v01 pointer. No
+  pending candidate, comparison, proof, or model-sheet study is in `public/`,
+  and no approval-dependent Ame family was produced.
+- [x] Candidate A, B, and C originals and both retained construction-study sets
+  are immutable source evidence. Exact available prompts/output IDs/reference
+  hashes are appended rather than rewriting historical prompt sections; unknown
+  generator model/version/seed and owner licence review remain explicit.
+- [x] The catalogue has a compatibility-preserving rich sprite contract for
+  current Ame and lock canaries, one object-identical lock-pair authority, and
+  measured static accessibility cues for all four hazards. Gameplay identity,
+  defaults, URLs, labels, fingerprints, and level-scoped preload behaviour are
+  unchanged.
+- [x] Structured source records use independent runtime/source/approval states;
+  the deterministic manifest inventories every current runtime image and source
+  asset without treating repository first-seen time as generation time.
+- [x] `npm run art:test` passed 51 tests; deterministic Candidate C derivatives
+  and proofs regenerated; a second candidate build refused overwrite; and
+  non-writing `npm run art:check` passed 126 records with zero errors and 398
+  explicit historical/pending warnings. All
+  Candidate C and wider-family canaries were inspected at source/actual size.
+- [x] Completed in-app-browser review of current gameplay and the source-only
+  Candidate C proof harness at 844x390, 960x540, and 1280x720; retain console and
+  screenshot evidence under ignored `artifacts/art-proofs/`.
+- [x] `npm run check` passed 400 tests across 34 files plus the production build
+  on its uncontended rerun; `npm run check:desktop`, the shared performance
+  contract/budget/evidence checks, scenario fixtures, final external inventory,
+  and `git diff --check` passed. The first contended web run is retained as a
+  rejected run because three solver tests exceeded timeouts; every completed
+  assertion passed, and the isolated failing files plus exact rerun passed.
+- [x] **Human/Ame:** approved Candidate C on 2026-09-03 after reviewing its face,
+  age, golden-blonde shoulder-brushing layers, clearly blue irises, costume,
+  silhouettes, expressions, registration, hand socket, and alpha/actual-size
+  proofs. Actual Human wording: “I've reviewed the images and comparison sheets
+  and I'm happy with the reccomendations.” Recorded outcome: Candidate C is the
+  canonical static Ame v02 design direction.
+- [x] The Human-supplied PPBA specification was inspected at exact commit
+  `dacc8cf644d24d56aae34ba757efb4fac5f9d341`. Its craft/process lessons and
+  explicit no-copy boundary are recorded in
+  `research/2026-09-03-ppba-art-craft-synthesis.md`; no external pixel, prompt,
+  identity, palette, UI skin, or runtime dependency was imported.
+- [x] Preserve the completed v08 comparison packet at
+  `artifacts/art-proofs/mgjrpg-02/v08/` as rejected decision evidence. The Human
+  rejected its near-black delivery-size post-process contours and substantially
+  unchanged historical interiors as a meaningful style choice; v08 is not a
+  rendering authority and must not seed later art.
+- [x] Archive the exact prompts, hashes, ordered reference roles, run record, and
+  twelve immutable generator-original sheets for the source-only authored
+  directions: A — Luminous Storybook Cel, B — Soft Jewel Gouache, and C — Chunky
+  Enamel Adventure. Candidate C remains the sole approved Ame identity and
+  construction authority; the rendering options may not change it.
+- [x] Build and validate the consolidated `v11` comparison packet at
+  `artifacts/art-proofs/mgjrpg-02/v11/`. Compare all three authored directions at
+  source and actual delivery sizes, including contour/background close-ups,
+  face preservation, alpha contamination, recognition, value grouping,
+  material truth, family coherence, and encoded/decoded cost. Do not treat a
+  cutout proof or sampler-sheet cell as a production master. The packet binds
+  12 generator originals and the seven-source comparison layout, passes the
+  authored-options integrity contract, and records that opaque RGB boards do
+  not prove production alpha or terrain seams.
+- [ ] Confirm the proposed `storybook-local-contour-v1` direction uses visibly
+  lighter/brighter material-local contours through Maze's warm-gold,
+  aubergine, blue-plum, russet-plum, leaf-plum, and cream-mauve families;
+  reserves darkest ink for critical detail/contrast; remains continuous at
+  authoritative delivered widths; and contains no uniform black edge, rainbow
+  fragmentation, halo, matte contamination, or field-sprite sticker cutline.
+  Confirm semantic UI uses clean cream sticker cutlines while terrain/hazards
+  use material boundaries/seams rather than enclosing actor outlines.
+- [x] Record the Human's `v11` narrowing exactly: Direction A for most core and
+  current-family sprites; Direction C for the traditional slime, sword lizard
+  man, and green-tea-drinking skeleton; Direction B future-enemy concepts except
+  Direction A for the wholesome succubus; future enemies re-authored with A's
+  chunky, high-chroma material-contour grammar and restrained B colour/shading;
+  and retained top-down flower-petal floor-pad teleporters rather than upright
+  portal doors.
+- [x] Record Ame's Direction B preference, the request for a fresh non-edit base
+  to avoid accumulated edit texture, and the explicitly permitted prior-B
+  fallback. The bounded source-only `v14` packet compares that prior B against
+  two independent fresh attempts; both drift Candidate C's locked construction,
+  so prior B is the art-direction recommendation. The enemy hybrid remains
+  direction evidence pending simplification, and the flower-pad hybrid confirms
+  category rather than production pixels.
+- [ ] Obtain explicit Human approval, narrowing, or rejection of the `v14`
+  recommendation before broad family production. Selecting a rendering grammar
+  does not approve checkerboard generator originals as runtime pixels. Do not
+  reopen Candidate C identity, relabel historical `mgjrpg-01` sources, publish a
+  candidate, switch a catalogue pointer, retire an old asset, or claim a runtime
+  byte/residency change at this gate. The current `public/` and decoded-runtime
+  art delta is exactly zero.
+- [ ] Produce an approved versioned runtime
+  derivative, obtain a public-byte allocation, switch the catalogue atomically,
+  and release dependent Plan 03 static work. Plan 05 animation still waits for
+  completed Plan 03 plus its UI, lighting, VFX, and controls predecessors.
+- [ ] Broad friend, cage, enemy, weapon, navigation, hazard, terrain, reward,
+  portrait, and story replacement phases remain gated; no old runtime file is
+  deleted in this candidate.
+
 ## Unreleased gameplay-systems candidate
 
 - [x] This accepted implementation candidate began from manager checkpoint

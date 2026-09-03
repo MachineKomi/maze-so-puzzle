@@ -1,0 +1,67 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "lava-v01-source",
+  "id": "lava",
+  "artVersion": 1,
+  "family": "hazard",
+  "runtimeStatus": "superseded",
+  "sourceStatus": "legacy-runtime-only",
+  "approvalStatus": "historical",
+  "validationProfile": "legacy-observed",
+  "recipeVersion": "pre-mgjrpg-unversioned",
+  "promptEvidence": {
+    "fidelity": "unknown",
+    "historyPath": "docs/AI_ASSET_PROMPTS.md",
+    "assetNamedInHistory": true,
+    "outputIds": [
+      "exec-c9e5a708-2bf4-4f4d-9107-4fe641b6da84.png"
+    ],
+    "notes": "The historical prompt document names this asset. Automated migration does not upgrade surrounding prose to an exact prompt; a human may classify it later.",
+    "historyHeading": "Tile prompts"
+  },
+  "sources": [],
+  "derivatives": [
+    {
+      "id": "legacy-runtime",
+      "path": "public/assets/lava.png",
+      "sha256": "79c2d2afb5683a2aa7d83f89a7023b100756611557bc16a041daa4cdf12e32d6",
+      "bytes": 362158,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "legacy-runtime",
+      "derivativeRevision": 1,
+      "runtimeStatus": "superseded",
+      "loadingPhase": "not-loaded-by-active-catalogue",
+      "encoder": {
+        "name": "unknown-historical-encoder",
+        "version": "unknown",
+        "options": {}
+      }
+    }
+  ],
+  "knownUnknowns": [
+    "Exact prompt fidelity has not been classified in this structured record.",
+    "Generation date and seed/parameters are unknown; repository first-seen is not a generation date.",
+    "Generator model and tool version are not established by repository evidence.",
+    "Historical approval predates the Art Bible and is not Human/Ame approval for a new model.",
+    "No repository-local immutable generator original or normalized master is linked."
+  ],
+  "rights": {
+    "originClaim": "docs/AI_ASSET_PROMPTS.md states that base artwork was generated for this project.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "This record preserves the historical claim without asserting a completed licence or third-party-material review."
+  },
+  "rollback": {
+    "method": "Restore this exact derivative by its recorded path and SHA-256; catalogue selection changes are reviewed separately."
+  },
+  "repositoryEvidence": {
+    "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+    "firstSeenAt": "2026-08-31T23:03:12+01:00",
+    "meaning": "repository-first-seen-not-generation-date"
+  }
+}

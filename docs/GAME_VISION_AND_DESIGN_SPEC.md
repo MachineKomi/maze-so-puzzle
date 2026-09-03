@@ -2,9 +2,9 @@
 
 Status: manager-reviewed product authority for the improvement programme
 
-Decision date: 2026-09-02
+Decision date: 2026-09-02; art-craft calibration added 2026-09-03
 
-Applies to: Plans 01–09 and their implementation work
+Applies to: Plans 01–13 and their implementation work
 
 ## 1. Purpose and authority
 
@@ -65,10 +65,84 @@ These are **Human decisions**.
 ### 4.2 Ame and the art direction
 
 - Ame must have **blonde hair and blue eyes** in every field sprite, portrait, story image, animation frame, promotional image, and derivative. These are identity facts, not palette suggestions.
-- Ame should be explored with slightly longer hair than the current sprite so she can more closely resemble the real Ame, while preserving the character the child already loves. The approved model sheet must settle the exact length and silhouette before broad asset or animation production.
+- Candidate C's approved shoulder-brushing, softly layered hair is slightly
+  longer than the historical runtime bob so Ame more closely resembles the real
+  Ame while preserving the character the child already loves. The model sheet
+  fixes its landmarks before broad asset or animation production.
 - The style remains clean, simple, chunky, cute, warm, and readable at small scale, with a somewhat stronger anime character language and polished fantasy-JRPG finish.
+- The Human-supplied PPBA pre-production specification is an approved
+  **craft-calibration source** for stronger silhouette massing, disciplined
+  detail, material rendering, contour logic, visual-layer separation, and
+  production consistency. It is adapted through Maze's own Art Bible rather
+  than transplanted: PPBA characters, world, palette, props, compositions,
+  prompts, UI skin, brand language, and pixels never become Maze canon.
+- The Human explicitly adopts PPBA's colour-aware outline *technique* as craft
+  for Maze's proposed `mgjrpg-02` / `storybook-local-contour-v1` rendering
+  profile. Each stable contour section follows the nearest enclosed Maze
+  material and becomes a darker, slightly richer member of Maze's established
+  deep-plum family: warm gold-plum, aubergine, blue-plum, russet-plum,
+  leaf-plum, or pale-material mauve as appropriate. The darkest ink is reserved
+  for eyes, mouth, deep occlusion, critical separation, or genuine contrast
+  need. Uniform black outlines, pixel-level rainbow switching, muddy pale edges,
+  and chromatic halos are not acceptable.
+- Characters, friends, enemies, weapons, items, props, cages, locks, doors,
+  portals, rewards, and semantic UI cutouts use that family-appropriate contour
+  treatment. Cream sticker
+  cutlines remain exclusive to semantic UI/reward signals. Terrain, walls,
+  liquids, and hazards instead use related material boundaries, values, patterns,
+  and seams and never receive enclosing character outlines. This direction
+  copies no PPBA pixel, prompt, palette, motif, layout, brand, or trade dress.
+- The intended relationship is shared quality and taste, not a shared or copied
+  look. Maze retains its own magical-girl storybook world, mint/lilac/coral/plum
+  identity, motif meanings, child-safe warmth, cast, and named inspirations.
 - The author's taste references are *Chillin' in Another World with Level 2 Super Cheat Powers*, *I've Been Killing Slimes for 300 Years and Maxed Out My Level*, *Ragnarök Online: New World*, *Idle Poring*, *Ragnarök M: Eternal Love*, and *Trails in the Sky*. These references communicate principles—bright readable characters, cosy fantasy, expressive faces, appealing chibi proportions, charming adventure, and clear handheld-RPG presentation. Do not copy a protected character, costume, logo, composition, prop, UI skin, or franchise-specific visual signature. Production prompts should translate the principles into original descriptive traits rather than request imitation.
 - Existing successful identity anchors may be refined, not casually discarded. Cohesion must not flatten the individual personality of Ame, friends, enemies, places, or rewards.
+- On 2026-09-03 the Human approved Plan 03's Candidate C as the canonical static
+  Ame v02 direction after reviewing its comparison, actual-size and model-study
+  proofs. Its golden-blonde shoulder-brushing layers, blue eyes and preserved
+  Ame identity are now visual canon. The candidate remains source-only until
+  Plan 03 produces, proves and atomically selects the versioned runtime
+  derivative; design approval is not runtime or whole-plan acceptance.
+- Candidate C's approved identity/construction is not reopened by rendering
+  calibration. Her warm young face, golden-blonde shoulder-length layered hair,
+  clearly blue irises, proportions, mint/lavender/backpack costume, silhouette,
+  pose, registration, and emotional character are immutable. On 2026-09-03 the
+  Human approved Fresh B-led 01 as Ame's static `mgjrpg-02` rendering choice
+  because it is clearest at her common small gameplay scale; Fresh B-led 02 is
+  appealing at source size but is not selected. This approves rendering craft,
+  not a replacement identity, cleaned cutout, runtime asset, or catalogue
+  pointer. Candidate C remains the sole construction authority.
+- The Human also approved the fresh low flower-petal Rose Heart teleporter
+  construction, subject to a brighter and clearer centre heart plus a truly
+  flat plain extraction matte, and approved the v03 Wholesome Succubus, Pocket
+  T-Rex, Kappa, and Treasure Mimic as concept/render-family references. Concept
+  boards must never be cropped into production masters; each isolated asset is
+  authored independently from its locked brief.
+- `mgjrpg-02` revision 4 now permits controlled family-by-family source
+  production. Each presented batch uses one lightweight named, single-scale
+  review page. After an explicit Human response, unlisted assets in that batch
+  are approved by default and named exceptions return as independent
+  generations in the next batch; silence is not approval. Rights, cleaned
+  derivatives, public bytes, catalogue/preload switches, runtime publication,
+  and retirement remain separate gates.
+- On 2026-09-03 the Human rejected the v08 deterministic contour-overlay packet
+  as a meaningful art-style decision: at gameplay size its local contours read
+  too close to black and its historical interiors remained materially
+  unchanged. Future `mgjrpg-02` work must be newly authored from the approved
+  family/identity briefs, with massing, three-value grouping, material paint and
+  brighter visibly chromatic local contours designed together. A recolour,
+  dilation or post-stroke of an old sprite is analytical evidence only and
+  cannot be offered as a replacement. Semantic UI options instead use clean
+  cream-cut sticker construction. Candidate C's identity approval remains
+  unchanged; only her rendering treatment is being compared.
+- The Human-directed future guardian roster is Tea-Time Skeleton, Classic
+  Slime, Lizard Sword Guard, Lizard Spear Guard, Wholesome Succubus, Pocket
+  T-Rex, Cultist (public label pending), Lamia, Soda Slime, Orc Chieftain,
+  Cyclops, Minotaur, Warrior Skeleton, Kappa, and Treasure Mimic. These are
+  future source identities, not shipped styles, placements or mechanics. They
+  remain kind Puzzlewild guardians under the universal Power and Polite Sword
+  rules. `docs/enemies/ENEMY_FAMILY_SHEET.md` owns their original design,
+  child-safety, sibling-construction and naming constraints.
 
 ### 4.3 Game design, gameplay, and challenge
 
@@ -151,6 +225,14 @@ These gates apply across specialist ownership.
 - Every revised or new authored level has stable content identity, a versioned migration policy, an ordinary solution, an exact perfect-rescue solution, and replayable solver evidence.
 - No ordinary authored solution requires an optional rescue unless the product author explicitly changes the global rule and the game clearly discloses that exception.
 - New static art and animation frames pass actual-size review; every depiction of Ame preserves blonde hair and blue eyes.
+- Across static families, the smallest supported view must share coherent
+  three-value grouping, focal contrast, material truth, perspective, and
+  detail-frequency grammar without erasing subject personality. Cutout actors,
+  items, props, and icons additionally require a readable silhouette, two to
+  four large colour masses, and family-appropriate local contours. Periodic
+  terrain and hazards instead require readable mass, material pattern,
+  boundary, edge, and seam hierarchy—not character-like enclosing contours. A
+  source-size-only resemblance is not acceptance.
 - Every important visual event has a reduced/static semantic equivalent and cancellable lifecycle.
 - Visual, input, save, and performance checks cover at least 1280×720 desktop/TV, 1024×768 tablet, 960×540 Tauri minimum, 844×390 phone landscape, and 568×320 minimum phone landscape, with physical-device gates recorded honestly.
 - Web and packaged Tauri builds pass the same game-rule and content tests; platform limitations are documented rather than hidden.

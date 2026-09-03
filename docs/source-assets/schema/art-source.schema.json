@@ -1,0 +1,788 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://maze-so-puzzle.invalid/schemas/art-source.schema.json",
+  "title": "Maze so Puzzle art source record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "recordId",
+    "id",
+    "artVersion",
+    "family",
+    "runtimeStatus",
+    "sourceStatus",
+    "approvalStatus",
+    "validationProfile",
+    "recipeVersion",
+    "promptEvidence",
+    "sources",
+    "derivatives",
+    "knownUnknowns",
+    "rights"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "enum": [1, 2] },
+    "recordId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-source$" },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "artVersion": { "type": "integer", "minimum": 1 },
+    "family": {
+      "enum": [
+        "character", "friend", "enemy", "weapon", "item", "cage",
+        "lock", "portal", "reward", "terrain", "dressing", "hazard",
+        "story", "navigation", "brand"
+      ]
+    },
+    "runtimeStatus": {
+      "enum": ["active", "dormant", "deprecated", "superseded", "source-only"]
+    },
+    "sourceStatus": {
+      "enum": ["source-backed", "partial", "legacy-runtime-only"]
+    },
+    "approvalStatus": {
+      "enum": ["historical", "candidate", "pending-human", "design-approved", "approved", "rejected"]
+    },
+    "validationProfile": { "enum": ["legacy-observed", "strict-v1", "strict-v2"] },
+    "recipeVersion": { "type": "string", "minLength": 1 },
+    "derivativeRecipeVersion": { "type": "string", "minLength": 1 },
+    "recipeEvidence": { "$ref": "#/$defs/recipeEvidence" },
+    "generationRuns": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/generationRun" }
+    },
+    "renderingContract": { "$ref": "#/$defs/renderingContract" },
+    "promptEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fidelity", "historyPath", "assetNamedInHistory", "outputIds", "notes"],
+      "properties": {
+        "fidelity": { "enum": ["exact", "template-substitution", "concise", "unknown"] },
+        "historyPath": { "type": "string", "pattern": "^docs/" },
+        "historyHeading": { "type": "string" },
+        "assetNamedInHistory": { "type": "boolean" },
+        "exactPrompt": { "type": "string", "minLength": 1 },
+        "promptFile": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": { "type": "string", "pattern": "^docs/" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        "outputIds": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^exec-[a-zA-Z0-9-]+\\.[a-zA-Z0-9]+$" },
+          "uniqueItems": true
+        },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "repositoryEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["firstSeenCommit", "firstSeenAt", "meaning"],
+      "properties": {
+        "firstSeenCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "firstSeenAt": { "type": "string", "format": "date-time" },
+        "meaning": { "const": "repository-first-seen-not-generation-date" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fileEvidence" }
+    },
+    "derivatives": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/derivative" }
+    },
+    "geometry": { "$ref": "#/$defs/geometry" },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourcePath", "operation", "profiles"],
+      "properties": {
+        "sourcePath": { "type": "string" },
+        "operation": { "enum": ["cutout-resize", "opaque-resize", "periodic"] },
+        "backgroundExtraction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode"],
+          "properties": {
+            "mode": { "enum": ["native-alpha", "edge-connected", "seeded-checkerboard", "outer-contour-barrier"] },
+            "recipeId": { "type": "string", "minLength": 1 },
+            "rgb": {
+              "type": "array",
+              "items": { "type": "integer", "minimum": 0, "maximum": 255 },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "tolerance": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "maximumChroma": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "barrierMaximumLuminance": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "barrierMinimumChroma": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "barrierClosingRadius": { "type": "integer", "minimum": 0, "maximum": 32 },
+            "exteriorTrimMinimumLuminance": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "exteriorTrimMaximumChroma": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "holeMaximumChroma": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "foregroundSeedPoints": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/point" },
+              "uniqueItems": true
+            },
+            "enclosedSeedPoints": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/point" },
+              "uniqueItems": true
+            },
+            "openingRadius": { "type": "integer", "minimum": 0, "maximum": 32 },
+            "closingRadius": { "type": "integer", "minimum": 0, "maximum": 64 },
+            "subjectGrowRadius": { "type": "integer", "minimum": 0, "maximum": 32 },
+            "holeGrowRadius": { "type": "integer", "minimum": 0, "maximum": 32 },
+            "maxEnclosedComponentPixels": { "type": "integer", "minimum": 1 }
+          },
+          "allOf": [
+            {
+              "if": { "properties": { "mode": { "const": "native-alpha" } }, "required": ["mode"] },
+              "then": {
+                "not": {
+                  "anyOf": [
+                    { "required": ["recipeId"] }, { "required": ["rgb"] },
+                    { "required": ["tolerance"] }, { "required": ["maximumChroma"] },
+                    { "required": ["barrierMaximumLuminance"] },
+                    { "required": ["barrierMinimumChroma"] },
+                    { "required": ["barrierClosingRadius"] },
+                    { "required": ["exteriorTrimMinimumLuminance"] },
+                    { "required": ["exteriorTrimMaximumChroma"] },
+                    { "required": ["holeMaximumChroma"] },
+                    { "required": ["foregroundSeedPoints"] },
+                    { "required": ["enclosedSeedPoints"] },
+                    { "required": ["openingRadius"] }, { "required": ["closingRadius"] },
+                    { "required": ["subjectGrowRadius"] }, { "required": ["holeGrowRadius"] },
+                    { "required": ["maxEnclosedComponentPixels"] }
+                  ]
+                }
+              }
+            },
+            {
+              "if": { "properties": { "mode": { "const": "edge-connected" } }, "required": ["mode"] },
+              "then": {
+                "required": ["rgb", "tolerance"],
+                "not": {
+                  "anyOf": [
+                    { "required": ["recipeId"] }, { "required": ["maximumChroma"] },
+                    { "required": ["barrierMaximumLuminance"] },
+                    { "required": ["barrierMinimumChroma"] },
+                    { "required": ["barrierClosingRadius"] },
+                    { "required": ["exteriorTrimMinimumLuminance"] },
+                    { "required": ["exteriorTrimMaximumChroma"] },
+                    { "required": ["holeMaximumChroma"] },
+                    { "required": ["foregroundSeedPoints"] },
+                    { "required": ["enclosedSeedPoints"] },
+                    { "required": ["openingRadius"] }, { "required": ["closingRadius"] },
+                    { "required": ["subjectGrowRadius"] }, { "required": ["holeGrowRadius"] },
+                    { "required": ["maxEnclosedComponentPixels"] }
+                  ]
+                }
+              }
+            },
+            {
+              "if": { "properties": { "mode": { "const": "seeded-checkerboard" } }, "required": ["mode"] },
+              "then": {
+                "required": [
+                  "recipeId", "maximumChroma", "foregroundSeedPoints", "enclosedSeedPoints",
+                  "openingRadius", "closingRadius", "subjectGrowRadius", "holeGrowRadius",
+                  "maxEnclosedComponentPixels"
+                ],
+                "not": {
+                  "anyOf": [
+                    { "required": ["rgb"] }, { "required": ["tolerance"] },
+                    { "required": ["barrierMaximumLuminance"] },
+                    { "required": ["barrierMinimumChroma"] },
+                    { "required": ["barrierClosingRadius"] },
+                    { "required": ["exteriorTrimMinimumLuminance"] },
+                    { "required": ["exteriorTrimMaximumChroma"] },
+                    { "required": ["holeMaximumChroma"] }
+                  ]
+                }
+              }
+            },
+            {
+              "if": { "properties": { "mode": { "const": "outer-contour-barrier" } }, "required": ["mode"] },
+              "then": {
+                "required": [
+                  "recipeId", "barrierMaximumLuminance", "barrierMinimumChroma",
+                  "barrierClosingRadius", "exteriorTrimMinimumLuminance",
+                  "exteriorTrimMaximumChroma", "holeMaximumChroma",
+                  "foregroundSeedPoints", "enclosedSeedPoints", "holeGrowRadius",
+                  "maxEnclosedComponentPixels"
+                ],
+                "not": {
+                  "anyOf": [
+                    { "required": ["rgb"] }, { "required": ["tolerance"] },
+                    { "required": ["maximumChroma"] }, { "required": ["openingRadius"] },
+                    { "required": ["closingRadius"] }, { "required": ["subjectGrowRadius"] }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "registration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["targetBox", "align", "alphaThreshold"],
+          "properties": {
+            "targetBox": { "$ref": "#/$defs/ltrbRect" },
+            "align": { "$ref": "#/$defs/point" },
+            "alphaThreshold": { "type": "integer", "minimum": 1, "maximum": 254 }
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/buildProfile" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "operation": { "const": "cutout-resize" } },
+            "required": ["operation"]
+          },
+          "then": { "required": ["backgroundExtraction"] }
+        },
+        {
+          "if": {
+            "properties": { "operation": { "enum": ["opaque-resize", "periodic"] } },
+            "required": ["operation"]
+          },
+          "then": { "not": { "required": ["backgroundExtraction"] } }
+        }
+      ]
+    },
+    "humanEdits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "description"],
+        "properties": {
+          "kind": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "script": { "type": "string" }
+        }
+      }
+    },
+    "designApprovalEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approvedBy", "approvedOn", "scope", "decision", "evidencePath"],
+      "properties": {
+        "approvedBy": { "type": "string", "minLength": 1 },
+        "approvedOn": { "type": "string", "format": "date" },
+        "scope": { "const": "identity-and-construction" },
+        "decision": { "type": "string", "minLength": 1 },
+        "evidencePath": { "type": "string", "pattern": "^docs/" }
+      }
+    },
+    "approvalEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approvedBy", "approvedAt", "scope", "evidencePath", "evidenceSha256"],
+      "properties": {
+        "approvedBy": { "type": "string", "minLength": 1 },
+        "approvedAt": { "type": "string", "format": "date-time" },
+        "scope": { "const": "runtime-publish" },
+        "evidencePath": { "type": "string", "pattern": "^docs/" },
+        "evidenceSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "knownUnknowns": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["originClaim", "licenceStatus", "notes"],
+      "properties": {
+        "originClaim": { "type": "string", "minLength": 1 },
+        "licenceStatus": { "enum": ["pending-owner-review", "reviewed"] },
+        "notes": { "type": "string", "minLength": 1 },
+        "reviewedBy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method"],
+      "properties": {
+        "method": { "type": "string", "minLength": 1 },
+        "previousPath": { "type": "string" },
+        "previousSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "schemaVersion": { "const": 1 } },
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "properties": {
+          "validationProfile": { "enum": ["legacy-observed", "strict-v1"] }
+        },
+        "not": {
+          "anyOf": [
+            { "required": ["recipeEvidence"] },
+            { "required": ["generationRuns"] },
+            { "required": ["renderingContract"] }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "schemaVersion": { "const": 2 } },
+        "required": ["schemaVersion"]
+      },
+      "then": {
+        "required": ["recipeEvidence", "generationRuns", "renderingContract"],
+        "properties": {
+          "validationProfile": { "const": "strict-v2" },
+          "promptEvidence": {
+            "required": ["fidelity"],
+            "properties": { "fidelity": { "const": "exact" } },
+            "anyOf": [
+              { "required": ["exactPrompt"] },
+              { "required": ["promptFile"] }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "approvalStatus": { "const": "design-approved" } },
+        "required": ["approvalStatus"]
+      },
+      "then": {
+        "required": ["designApprovalEvidence"],
+        "properties": {
+          "promptEvidence": {
+            "required": ["fidelity"],
+            "properties": { "fidelity": { "const": "exact" } },
+            "anyOf": [
+              { "required": ["exactPrompt"] },
+              { "required": ["promptFile"] }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "approvalStatus": { "const": "approved" } },
+        "required": ["approvalStatus"]
+      },
+      "then": {
+        "required": ["approvalEvidence"],
+        "properties": {
+          "promptEvidence": {
+            "required": ["fidelity"],
+            "properties": { "fidelity": { "const": "exact" } },
+            "anyOf": [
+              { "required": ["exactPrompt"] },
+              { "required": ["promptFile"] }
+            ]
+          },
+          "rights": {
+            "required": ["reviewedBy"],
+            "properties": { "licenceStatus": { "const": "reviewed" } }
+          }
+        }
+      }
+    },
+    {
+      "if": { "required": ["build"] },
+      "then": { "required": ["derivativeRecipeVersion"] }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": {
+            "enum": ["character", "friend", "enemy", "weapon", "item", "cage", "lock", "portal"]
+          }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "properties": {
+          "renderingContract": {
+            "properties": { "treatmentClass": { "const": "character-contour" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "const": "story" }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "properties": {
+          "renderingContract": {
+            "properties": { "treatmentClass": { "const": "story-illustration" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "enum": ["reward", "navigation", "brand"] }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "properties": {
+          "renderingContract": {
+            "properties": { "treatmentClass": { "const": "semantic-ui-cutout" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "enum": ["terrain", "dressing", "hazard"] }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "properties": {
+          "renderingContract": {
+            "properties": { "treatmentClass": { "const": "terrain-boundary" } }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "recipeEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recipeId", "path", "sha256"],
+      "properties": {
+        "recipeId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "path": { "type": "string", "pattern": "^docs/source-assets/recipes/[a-z0-9][a-z0-9.-]*\\.json$" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "generationRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runId", "generator", "model", "executedAt", "prompt",
+        "references", "outputs", "lineage", "notes"
+      ],
+      "properties": {
+        "runId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "generator": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "executedAt": { "type": "string", "format": "date-time" },
+        "prompt": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "sha256"],
+          "properties": {
+            "path": { "type": "string", "pattern": "^docs/" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        "references": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["order", "role", "authorityKind", "path", "sha256"],
+            "properties": {
+              "order": { "type": "integer", "minimum": 1 },
+              "role": {
+                "enum": [
+                  "edit-target", "identity-authority", "construction-authority",
+                  "rendering-authority", "family-authority", "material-authority",
+                  "palette-authority", "composition-authority", "optical-authority",
+                  "comparison-only", "negative-reference"
+                ]
+              },
+              "authorityKind": {
+                "enum": [
+                  "immutable-generator-original", "approved-source-master",
+                  "approved-model-sheet", "approved-rendering-anchor",
+                  "runtime-comparison", "comparison-only"
+                ]
+              },
+              "path": { "type": "string", "minLength": 1 },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["outputId", "path", "sha256", "bytes", "disposition", "reason"],
+            "properties": {
+              "outputId": { "type": "string", "minLength": 1 },
+              "path": { "type": "string", "pattern": "^docs/source-assets/" },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "bytes": { "type": "integer", "minimum": 1 },
+              "disposition": {
+                "enum": ["candidate", "selected", "rejected", "superseded", "assay-only"]
+              },
+              "reason": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "lineage": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["editOfEdit", "identityAuthorityEligible", "renderingAuthorityEligible"],
+          "properties": {
+            "editOfEdit": { "const": false },
+            "identityAuthorityEligible": { "type": "boolean" },
+            "renderingAuthorityEligible": { "type": "boolean" }
+          }
+        },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    },
+    "renderingContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profileId", "recipeId", "treatmentClass", "canaryReview"
+      ],
+      "properties": {
+        "profileId": { "const": "storybook-local-contour-v1" },
+        "recipeId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "treatmentClass": {
+          "enum": ["character-contour", "semantic-ui-cutout", "terrain-boundary", "story-illustration"]
+        },
+        "authoredContour": { "const": "material-local-color-aware" },
+        "authoredBoundary": { "const": "material-local-color-aware" },
+        "extractionRole": { "enum": ["alpha-matte-only", "not-applicable"] },
+        "stickerCutline": { "enum": ["forbidden", "semantic-cream-only"] },
+        "enclosingContour": { "enum": ["forbidden", "subject-local-only"] },
+        "canaryReview": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["reviewId", "path", "sha256"],
+          "properties": {
+            "reviewId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+            "path": { "type": "string", "pattern": "^docs/source-assets/reviews/[a-z0-9][a-z0-9.-]*\\.json$" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "treatmentClass": { "const": "character-contour" } },
+            "required": ["treatmentClass"]
+          },
+          "then": {
+            "required": ["authoredContour", "extractionRole", "stickerCutline"],
+            "properties": {
+              "extractionRole": { "const": "alpha-matte-only" },
+              "stickerCutline": { "const": "forbidden" }
+            },
+            "not": { "anyOf": [{ "required": ["authoredBoundary"] }, { "required": ["enclosingContour"] }] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "treatmentClass": { "const": "semantic-ui-cutout" } },
+            "required": ["treatmentClass"]
+          },
+          "then": {
+            "required": ["authoredContour", "extractionRole", "stickerCutline"],
+            "properties": {
+              "extractionRole": { "const": "alpha-matte-only" },
+              "stickerCutline": { "const": "semantic-cream-only" }
+            },
+            "not": { "anyOf": [{ "required": ["authoredBoundary"] }, { "required": ["enclosingContour"] }] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "treatmentClass": { "const": "terrain-boundary" } },
+            "required": ["treatmentClass"]
+          },
+          "then": {
+            "required": ["authoredBoundary", "extractionRole", "stickerCutline", "enclosingContour"],
+            "properties": {
+              "extractionRole": { "const": "not-applicable" },
+              "stickerCutline": { "const": "forbidden" },
+              "enclosingContour": { "const": "forbidden" }
+            },
+            "not": { "required": ["authoredContour"] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "treatmentClass": { "const": "story-illustration" } },
+            "required": ["treatmentClass"]
+          },
+          "then": {
+            "required": ["authoredBoundary", "extractionRole", "stickerCutline", "enclosingContour"],
+            "properties": {
+              "extractionRole": { "const": "not-applicable" },
+              "stickerCutline": { "const": "forbidden" },
+              "enclosingContour": { "const": "subject-local-only" }
+            },
+            "not": { "required": ["authoredContour"] }
+          }
+        }
+      ]
+    },
+    "fileEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes", "relationship", "evidence"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "relationship": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "string", "minLength": 1 }
+      }
+    },
+    "derivative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id", "path", "sha256", "bytes", "width", "height", "format",
+        "mode", "alphaMode", "decodedBytesUpperBound", "profile",
+        "derivativeRevision", "runtimeStatus", "loadingPhase", "encoder"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "path": { "type": "string", "pattern": "^(public|src-tauri|artifacts/art-proofs)/" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "format": { "enum": ["png", "webp", "jpg", "jpeg", "ico", "icns"] },
+        "mode": { "type": "string", "minLength": 1 },
+        "alphaMode": { "enum": ["opaque", "straight"] },
+        "decodedBytesUpperBound": { "type": "integer", "minimum": 4 },
+        "profile": { "type": "string", "minLength": 1 },
+        "derivativeRevision": { "type": "integer", "minimum": 1 },
+        "runtimeStatus": {
+          "enum": ["active", "dormant", "deprecated", "superseded", "source-only"]
+        },
+        "loadingPhase": { "type": "string", "minLength": 1 },
+        "encoder": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "version", "options"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "version": { "type": "string", "minLength": 1 },
+            "options": { "type": "object" }
+          }
+        }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "pivot", "visibleBounds", "safeInset"],
+      "properties": {
+        "class": { "type": "string", "minLength": 1 },
+        "pivot": { "$ref": "#/$defs/point" },
+        "visibleBounds": { "$ref": "#/$defs/rect" },
+        "safeInset": { "$ref": "#/$defs/insets" },
+        "faceBox": { "$ref": "#/$defs/rect" },
+        "gripPoint": { "$ref": "#/$defs/point" },
+        "forwardAxisDegrees": { "type": "number", "minimum": -360, "maximum": 360 }
+      }
+    },
+    "point": {
+      "type": "array",
+      "items": { "type": "number", "minimum": 0, "maximum": 1 },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "rect": {
+      "description": "Normalized [x, y, width, height].",
+      "type": "array",
+      "items": { "type": "number", "minimum": 0, "maximum": 1 },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "ltrbRect": {
+      "description": "Normalized [left, top, right, bottom] with left < right and top < bottom; ordering is additionally enforced by the pipeline validator.",
+      "type": "array",
+      "items": { "type": "number", "minimum": 0, "maximum": 1 },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "insets": {
+      "description": "Normalized [top, right, bottom, left] safe-zone insets.",
+      "type": "array",
+      "items": { "type": "number", "minimum": 0, "maximum": 1 },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "buildProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "outputPath", "width", "height", "format", "encoder"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "outputPath": { "type": "string" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "format": { "enum": ["png", "webp", "jpg", "jpeg"] },
+        "clearAlphaBelow": { "type": "integer", "minimum": 0, "maximum": 254 },
+        "edgeDilationPixels": { "type": "integer", "minimum": 0, "maximum": 16 },
+        "minimumAlphaComponentPixels": { "type": "integer", "minimum": 1 },
+        "maximumAlphaComponents": { "type": "integer", "minimum": 1 },
+        "maxEncodedBytes": { "type": "integer", "minimum": 1 },
+        "alphaBounds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["minimumTop", "baseline", "baselineTolerancePixels"],
+          "properties": {
+            "minimumTop": { "type": "number", "minimum": 0, "maximum": 1 },
+            "baseline": { "type": "number", "minimum": 0, "maximum": 1 },
+            "baselineTolerancePixels": { "type": "integer", "minimum": 0, "maximum": 16 }
+          }
+        },
+        "encoder": {
+          "type": "object",
+          "required": ["options"],
+          "properties": { "options": { "type": "object" } }
+        }
+      }
+    }
+  }
+}

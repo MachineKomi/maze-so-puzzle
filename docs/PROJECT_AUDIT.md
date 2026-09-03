@@ -34,6 +34,131 @@ interactive evidence.
 No production optimization or media change is claimed. Exact evidence classes
 and remaining hardware gates are in `PERFORMANCE_BUDGETS.md`.
 
+## Current Plan 03 art foundation: identity approved, rendering gate open
+
+This implementation began from accepted Plan 06 checkpoint
+`ee176f52ab79e08e818fc919f44b7723f9fc9865`. It does not revise the historical
+release evidence below. A concurrent doc-only playtest commit advanced `main`
+to `ab20f28372c93e341b13e3cf2d2c94ea71703bb2` during final evidence capture;
+the runtime tree is identical between those commits and those playtest files
+remain outside Plan 03. On 2026-09-03 the Human approved Candidate C as the
+canonical static Ame v02 design direction. It remains source/proof-only: the
+active runtime continues to use `/assets/ame.png` and no public art byte changed.
+Runtime promotion, live proof, the separate licence/rights review and remaining
+Plan 03 family gates are still open.
+
+On 2026-09-03 the Human additionally supplied the private PPBA pre-production
+specification as a craft reference. Its current authority was inspected at
+`dacc8cf644d24d56aae34ba757efb4fac5f9d341`; the exact source set and
+adopt/adapt/reject boundary are recorded in
+`research/2026-09-03-ppba-art-craft-synthesis.md`. The Art Bible, Plan 03,
+prompt authority, Ame model sheet, game vision, and roadmap now describe a
+proposed `mgjrpg-02` canary calibration. The PPBA craft transfer imported no
+asset or prompt and changed no Maze pixels or runtime. A contemporaneous
+Candidate C approval-state reconciliation updated metadata, schema, validation,
+proof-generation, source-record, and manifest contracts only; no `public/`
+asset, catalogue pointer, runtime byte, or package content changed. Broad
+production remains blocked on the consolidated canary decision.
+
+The Human then explicitly directed Maze to adopt PPBA's colour-aware contour
+*craft* within the proposed `mgjrpg-02` /
+`storybook-local-contour-v1` profile. Stable contour sections now derive from
+their nearest enclosed Maze material, darken/richen through Maze's deep-plum
+family, and reserve darkest ink for facial, occlusion, critical-separation, or
+accessibility need. Uniform black perimeters, pixel-level rainbow switching,
+halos, and muddy pale edges fail. Field cutouts receive no cream sticker edge;
+semantic UI/reward signals may; terrain/hazards use material boundaries and
+seams without enclosing actor contours. No PPBA pixel, prompt, palette, motif,
+layout, identity, brand, or runtime dependency was imported.
+
+The Human rejected the v08 comparison as meaningful style-choice evidence on
+2026-09-03. It is retained truthfully as a deterministic demonstration of the
+discarded post-process approach: its treatment left historical interiors
+substantially unchanged and its added contours read nearly black at delivery
+size. That rejection does not reopen Candidate C's approved identity. The v11
+packet then compared three independently authored rendering directions: A —
+Luminous Storybook Cel, B — Soft Jewel Gouache, and C — Chunky Enamel Adventure.
+The Human narrowed those options to A for most core/current-family sprites, C
+for the traditional slime, sword lizard man, and green-tea-drinking skeleton,
+and B concepts for future enemies except the A wholesome succubus. Future-enemy
+production must transfer those concepts into A's chunky clarity, high chroma,
+and material-local linework with restrained B colour/shading influence. Paired
+teleporters retain their top-down flower-petal floor-pad category rather than an
+upright portal-door design.
+
+For Ame, the Human preferred Direction B but requested one fresh, non-edit base
+because its source-size surface showed subtle accumulated AI-edit texture; the
+prior B candidate was explicitly allowed as fallback. The bounded v14 packet
+contains two independent fresh studies, neither derived from prior B or from the
+other. Both drift Candidate C's locked construction, so the current
+art-direction recommendation is to retain prior Direction B pending explicit
+Human confirmation. The v14 future-enemy hybrid is direction evidence pending
+simplification, and the flower-pad hybrid confirms category while requiring a
+quieter, shallower production pass. All remain source/proof-only.
+
+Candidate C's approved face, age, golden-blonde shoulder-length layered hair, blue
+eyes, proportions, costume, backpack, pose, silhouette, registration, and
+emotional identity are not under reconsideration. The current work is a
+source-only surface calibration. The active Ame pointer and every other runtime
+art URL remain unchanged, no old asset is retired, and the intended public and
+decoded-runtime byte delta for this gate is zero.
+
+| Area | Current evidence | Status |
+| --- | --- | --- |
+| Visual authority | `ART_BIBLE.md`, `characters/AME_MODEL_SHEET.md`, plus the PPBA craft-synthesis record | Original magical-girl JRPG grammar, static-family standards, golden-blonde/blue-eye Ame invariants, Maze-native colour-aware contour tokens and delivered-size widths, registration, optical-size, lighting/animation/performance handoffs, and approval rules are explicit |
+| Catalogue contract | Backwards-compatible rich metadata in `src/artCatalog.ts`; one object-identical authority per lock pair | Current IDs, URLs, defaults, preload membership, and gameplay fingerprints remain unchanged; Ame v01, lock motifs, hazard cues, geometry, source IDs, and versions are test-covered |
+| Provenance | 126 schema-validated records plus deterministic `docs/source-assets/manifest.json` | 125 historical runtime records and one source-only Ame v02 record awaiting runtime-publish/rights approval keep runtime, source, and release approval independent; Candidate C's design approval is recorded in the model sheet and game authority without inventing unknown dates, prompts, tools, seeds, or rights |
+| Pipeline | Pinned Pillow/jsonschema requirements; immutable-source preflight; named extraction/registration profiles; no-overwrite derivatives; deterministic proofs | Candidate C builds are source-only, WebP lossless, budgeted, hash-verified, and reproducible; a second build refuses overwrite rather than silently replacing evidence |
+| Visual canaries | v08 rejected-decision evidence, v11 authored A/B/C narrowing evidence, and the bounded source-only `v14` response packet | v08 is not an art authority. v11 records the Human's family-specific recipe. v14 compares prior Direction B Ame against two fresh independent attempts, plus an enemy-family hybrid and flower-floor-pad category study; it is pending Human and contains no production master. |
+| Runtime/performance | Shared Plan 07A inventory and feature allocation | Public runtime remains 89,394,012 B and catalog assets remain 139 / 89,330,098 B; source masters and ignored proofs add zero decoded runtime image memory |
+| Human gate | Separate identity, v11 narrowing, and v14 bounded-response evidence in `characters/AME_MODEL_SHEET.md` and the versioned review record | Candidate C identity/construction approved 2026-09-03 and remains locked. The recommended prior-B Ame fallback and narrowed family recipe still require explicit rendering-gate confirmation; runtime catalogue acceptance, broad family production, rights review, asset retirement and Plan 01 remain gated. |
+
+Earlier pre-v14 gate evidence was 51/51 art-pipeline tests, 23/23 focused catalogue/asset
+tests, 400/400 integrated tests across 34 files plus production build, locked
+desktop compile, periodic terrain/dressing checks, four performance scenario
+fixtures, and the shared deterministic budget check. The first full-suite run
+was rejected after three solver tests timed out under concurrent build/server
+load; all 397 completed assertions passed, the isolated files passed, and the
+uncontended exact rerun passed in full. `art:check` reports zero errors and 398
+explicit warnings: 374 suppressed legacy-gap/pending-rights warnings, 18 existing
+alpha-border findings, three unreferenced Phase-2 sources, one recovered-v01
+exact-prompt gap, one honest limitation on full semantic catalogue-to-record
+cross-validation, and one deliberate `mgjrpg-02` Human-gate warning.
+Those results remain predecessor evidence; they neither validate nor approve
+the current `v14` rendering recommendation.
+
+The v11 evidence remains separate: 12 immutable generator originals plus one
+seven-source deterministic comparison layout, exact prompt/run bindings, a
+34-file proof index, 60/60 art-pipeline tests, and `art:check` with zero errors
+and the same 398 disclosed warnings. The source set adds 22,908,808 encoded
+bytes and a 75,489,608-byte decoded upper bound to tracked production evidence;
+the ignored proof packet adds 7,025,018 encoded bytes. Public/runtime and
+catalogue-pointer deltas remain exactly zero. These checks make the choice
+auditable; they do not select a direction, approve opaque concept-board alpha,
+prove terrain periodicity, or authorise broad production.
+
+Current v14 evidence adds four immutable generator originals totaling 6,440,962
+encoded bytes and a 25,160,256-byte decoded-RGBA upper bound. Its ignored packet
+contains 48 hash-bound proof files plus its deterministic index, totaling
+8,847,297 encoded bytes; proof PNGs have a 62,134,064-byte decoded upper bound.
+The v14 selection and full art-pipeline suites pass 8/8 and 68/68 respectively;
+the recursive packet validator reports zero errors and the in-app browser loads
+all 36 packet images at 1280 x 720 without overflow or console diagnostics.
+These figures are source/review cost only. The v14 runtime asset count, active
+catalogue pointers, transfer bytes, and decoded runtime image residency all
+change by exactly zero. Evidence integrity does not imply Human approval.
+
+The final shared-tree check also preserves unrelated concurrent evidence
+honestly: focused catalogue/assets tests pass 23/23, the production build and
+locked desktop compile pass, while `npm run check` stops at 399/400 because the
+OST transition still references 13 deleted root-level MP3 paths. Performance
+contracts validate 11 scenarios and nine allocation owners; JS (120,894 B) and
+CSS (29,206 B) remain within their allocations, but current public bytes exceed
+the historical allocation by 48,994,642 B because of that same delivered OST.
+The current inventory is 167 runtime assets / 138,324,740 B and 172 dist files /
+138,927,331 B. These are pre-existing/concurrent audio findings, not Plan 03 art
+regressions and not authority to edit the OST in this task.
+
 ## Current gameplay-systems implementation candidate
 
 This candidate was implemented from manager checkpoint
