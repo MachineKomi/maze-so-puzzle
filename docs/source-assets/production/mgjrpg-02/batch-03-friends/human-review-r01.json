@@ -1,0 +1,25 @@
+{
+  "schema": "maze-art-generation-batch-review/v1",
+  "reviewId": "mgjrpg-02-batch-03-friends-human-review-r01",
+  "batchId": "mgjrpg-02-batch-03-friends",
+  "reviewedAt": "2026-09-03",
+  "reviewedBy": "Human project owner",
+  "scope": "source-design-and-rendering-approval through Red Panda",
+  "decision": "Approve the art director's preferred source for every ordinary-animal friend generated through and including Red Panda. Later species remain pending.",
+  "selectedRunIds": [
+    "batch-03-bunny-a",
+    "batch-03-fox-a",
+    "batch-03-kitten-a",
+    "batch-03-puppy-b",
+    "batch-03-duckling-a",
+    "batch-03-hedgehog-b",
+    "batch-03-fawn-a",
+    "batch-03-red-panda-a"
+  ],
+  "selectionBasis": "Best recognition, expression and silhouette at the 96 px proof scale; source-resolution finish remained acceptable.",
+  "approvalMeaning": "The selected sources may proceed through deterministic transparent-derivative QA and later family publication. This does not itself switch runtime catalogue pointers or retire old art.",
+  "runtimeImpactAtDecision": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0
+  }
+}

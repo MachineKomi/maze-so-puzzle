@@ -1,8 +1,8 @@
 {
   "schema": "maze-art-generation-batch/v1",
   "batchId": "mgjrpg-02-batch-01-r02",
-  "revision": 1,
-  "status": "pending-human-review",
+  "revision": 2,
+  "status": "reviewed",
   "recordedOn": "2026-09-03",
   "purpose": "Fresh blank-canvas replacements for the three exceptions named in the Human's first Batch 01 review. This record grants no runtime, catalogue, rights, or retirement approval.",
   "recipeEvidence": {
@@ -29,6 +29,12 @@
     "sha256": "de90b4554d8e0100a9859cde63033dd3320f8555ba1c18b72d83b9c5c43b90dc",
     "bytes": 62787,
     "fidelity": "exact-as-submitted"
+  },
+  "reviewEvidence": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/human-review-r02.json",
+    "sha256": "1060f07cab6ebf6ea2048ba8425ca11c40ed40a8866af46ba4c2d56c7210b1ed",
+    "bytes": 1939,
+    "scope": "source-design-and-rendering-approval"
   },
   "generator": {
     "provider": "OpenAI",
@@ -85,7 +91,7 @@
         "alphaMode": "opaque",
         "decodedBytesUpperBound": 6290064
       },
-      "disposition": { "status": "pending-human-batch-review", "reason": "Fresh Lamia replacement removes the rejected leaf motif and awaits explicit Human review." },
+      "disposition": { "status": "human-approved-source", "reason": "Human approved the corrected leaf-free Lamia source on 2026-09-03." },
       "lineage": { "freshCanvas": true, "previousBatchOutputUsed": false, "rejectedOutputUsedAsReference": false, "mayBecomeIdentityAuthority": false, "mayBecomeRenderingAuthority": false }
     },
     {
@@ -109,7 +115,7 @@
         "alphaMode": "opaque",
         "decodedBytesUpperBound": 6290064
       },
-      "disposition": { "status": "pending-human-batch-review", "reason": "Fresh Soda Slime replacement restores traditional slime construction and awaits explicit Human review." },
+      "disposition": { "status": "human-approved-source", "reason": "Human approved the corrected traditional soda-gel slime source on 2026-09-03." },
       "lineage": { "freshCanvas": true, "previousBatchOutputUsed": false, "rejectedOutputUsedAsReference": false, "mayBecomeIdentityAuthority": false, "mayBecomeRenderingAuthority": false }
     },
     {
@@ -133,8 +139,46 @@
         "alphaMode": "opaque",
         "decodedBytesUpperBound": 6290064
       },
-      "disposition": { "status": "pending-human-batch-review", "reason": "Fresh Minotaur replacement uses the requested traditional axe and awaits explicit Human review." },
+      "disposition": { "status": "human-approved-source", "reason": "Human approved the corrected axe-bearing Minotaur source on 2026-09-03." },
       "lineage": { "freshCanvas": true, "previousBatchOutputUsed": false, "rejectedOutputUsedAsReference": false, "mayBecomeIdentityAuthority": false, "mayBecomeRenderingAuthority": false }
+    }
+  ],
+  "approvedDerivatives": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/approved/enemy-lamia-v02-512.png",
+      "sha256": "a00f4e8941deef138fad7038f778487c7365bbce8a8bfcceffb307044e9487aa",
+      "bytes": 163227,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "sourceRunId": "batch-01-r02-lamia-matte-01"
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/approved/enemy-soda-slime-v02-512.png",
+      "sha256": "6bd109635b353fe7c138395c4c39b9cbb907acf8fe21493301fde37212cb2c79",
+      "bytes": 140316,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "sourceRunId": "batch-01-r02-soda-slime-matte-01"
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/approved/enemy-minotaur-v02-512.png",
+      "sha256": "a5d82b7264ed497448949d25447750c5ecfc58662c1d8235ac73ba8f34c043fb",
+      "bytes": 234047,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "sourceRunId": "batch-01-r02-minotaur-matte-01"
     }
   ],
   "nativeCanvasException": {
@@ -152,15 +196,16 @@
   "counts": {
     "runCount": 3,
     "rejectedBackgroundInvalidCount": 0,
-    "pendingHumanCandidateCount": 3,
+    "pendingHumanCandidateCount": 0,
+    "humanApprovedSourceCount": 3,
     "generatorOriginalEncodedBytes": 4318390,
     "generatorOriginalDecodedBytesUpperBound": 18870192
   },
   "reviewProtocol": {
-    "batchProofStatus": "pending",
+    "batchProofStatus": "human-approved-source",
     "decisionRule": "After an explicit Human response to the named r02 proof page, unlisted presented assets are approved by default and named exceptions are rejected for another independent run.",
     "silenceRule": "Silence, no response, or omission from the presented proof page is not approval.",
-    "candidateBoundary": "The three v02 matte candidates remain source-only until explicit review; technical derivative validation does not confer art approval."
+    "candidateBoundary": "The three v02 sources are Human-approved and remain source-only until rights, performance, catalogue, and runtime publication gates pass; technical derivative validation alone does not confer runtime approval."
   },
   "rights": {
     "originClaim": "Generated for Maze so Puzzle from the exact prompts and ordered approved-family references above; no named franchise, character, logo, living artist, or proprietary composition was requested.",

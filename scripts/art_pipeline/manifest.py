@@ -222,7 +222,7 @@ def build_manifest() -> tuple[dict[str, Any], list[str]]:
                         evidence,
                         owner=f"{owner}:referenceRegistry.{reference_id}",
                         errors=errors,
-                        allowed_root=ROOT / "docs" / "source-assets",
+                        allowed_root=ROOT,
                         require_bytes=True,
                     )
 

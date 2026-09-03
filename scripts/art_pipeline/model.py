@@ -547,7 +547,13 @@ def validate_generation_batch_shape(batch: Any, label: str) -> list[str]:
     if batch.get("status") not in {"pending-human-review", "reviewed"}:
         errors.append(f"{label}: unsupported batch status {batch.get('status')!r}")
 
-    def validate_evidence(evidence: Any, owner: str, *, require_bytes: bool = True) -> None:
+    def validate_evidence(
+        evidence: Any,
+        owner: str,
+        *,
+        require_bytes: bool = True,
+        allowed_prefixes: tuple[str, ...] = ("docs/",),
+    ) -> None:
         if not isinstance(evidence, dict):
             errors.append(f"{owner}: evidence must be an object")
             return
@@ -557,8 +563,15 @@ def validate_generation_batch_shape(batch: Any, label: str) -> list[str]:
         for field in sorted(required_fields - set(evidence)):
             errors.append(f"{owner}: evidence misses {field}")
         raw_path = evidence.get("path")
-        if not isinstance(raw_path, str) or not raw_path.startswith("docs/") or "\\" in raw_path:
-            errors.append(f"{owner}: path must be a repository-relative docs/ POSIX path")
+        if (
+            not isinstance(raw_path, str)
+            or not raw_path.startswith(allowed_prefixes)
+            or "\\" in raw_path
+        ):
+            joined = " or ".join(allowed_prefixes)
+            errors.append(
+                f"{owner}: path must be a repository-relative POSIX path under {joined}"
+            )
         digest = evidence.get("sha256")
         if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-f]{64}", digest):
             errors.append(f"{owner}: sha256 must be 64 lowercase hexadecimal characters")
@@ -586,7 +599,11 @@ def validate_generation_batch_shape(batch: Any, label: str) -> list[str]:
             for field in ("path", "sha256", "bytes", "authorityKind"):
                 if field not in evidence:
                     errors.append(f"{label}: reference {reference_id!r} misses {field}")
-            validate_evidence(evidence, f"{label}: reference {reference_id!r}")
+            validate_evidence(
+                evidence,
+                f"{label}: reference {reference_id!r}",
+                allowed_prefixes=("docs/", "public/"),
+            )
 
     runs = batch.get("runs")
     if not isinstance(runs, list) or not runs:
@@ -668,7 +685,13 @@ def validate_generation_batch_shape(batch: Any, label: str) -> list[str]:
 
         disposition = run.get("disposition")
         status = disposition.get("status") if isinstance(disposition, dict) else None
-        if status not in {"rejected-background-invalid", "pending-human-batch-review"}:
+        if status not in {
+            "rejected-background-invalid",
+            "pending-human-batch-review",
+            "human-approved-source",
+            "human-rejected-source",
+            "art-director-rejected-source",
+        }:
             errors.append(f"{owner}: unsupported disposition status {status!r}")
         else:
             dispositions[status] += 1
@@ -679,7 +702,11 @@ def validate_generation_batch_shape(batch: Any, label: str) -> list[str]:
         if not isinstance(lineage, dict):
             errors.append(f"{owner}: lineage must be an object")
         elif lineage.get("previousBatchOutputUsed") is not False:
-            errors.append(f"{owner}: a previous Batch output may not be used as authority")
+            approval = lineage.get("previousBatchOutputApprovalEvidence")
+            if not isinstance(approval, str) or not approval.startswith("docs/"):
+                errors.append(
+                    f"{owner}: previous Batch output may not be used without explicit docs/ approval evidence"
+                )
 
     for value, count in Counter(run_ids).items():
         if not value or count > 1:
@@ -703,6 +730,13 @@ def validate_generation_batch_shape(batch: Any, label: str) -> list[str]:
             "generatorOriginalEncodedBytes": encoded_bytes,
             "generatorOriginalDecodedBytesUpperBound": decoded_bytes,
         }
+        for optional_status, optional_field in (
+            ("human-approved-source", "humanApprovedSourceCount"),
+            ("human-rejected-source", "humanRejectedSourceCount"),
+            ("art-director-rejected-source", "artDirectorRejectedSourceCount"),
+        ):
+            if dispositions[optional_status] or optional_field in counts:
+                expected_counts[optional_field] = dispositions[optional_status]
         for field, expected in expected_counts.items():
             if counts.get(field) != expected:
                 errors.append(

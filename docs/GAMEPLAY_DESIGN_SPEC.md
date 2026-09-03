@@ -17,6 +17,21 @@ The invariant rules are:
 - Authored and generated mazes stay at or below 24×24; current Surprise Maze size bands remain deterministic.
 - Gold and Science Points are visible keepsakes and completion records, not promises of a shop or spendable economy.
 
+### Rescue-and-collect friend roster
+
+Friends are kind optional rescues during a maze and persistent collectable companions for the Friend Garden. “Friend” is the rules term: it includes ordinary animals and small, child-friendly mythic beings. Neither group is a combat reward, equipment class, required objective, or source of automatic maze solutions. Existing authored levels continue to use the current catalogue until their versioned content and save migrations explicitly opt into an expanded roster.
+
+The ordinary-animal family is Bunny, Fox, Kitten, Puppy, Duckling, Hedgehog, Fawn, Red Panda, Otter, Lamb, Capybara, Chinchilla, Alpaca, Penguin, and Koala.
+
+The planned mythic-friend family is Ripplecap Kappa Hatchling, Pitter-Patter Parasol, Mallowmusk Aroma Wisp, Lanternling, Breezeling Sylph, Griffin Cub, Emberbelly Dragonling, Cloudstep Pegasus Foal, Three-Tumble Cerberus Pup, Riddlekit Sphinx, Tidecurl Hippocamp Foal, Emberdown Phoenix Chick, Meadowstep Faunling, Minerva Moon-Owl, and Tessera Dolphin. These are original Maze so Puzzle interpretations of broad folklore, fantasy-JRPG, Greek, and Roman ideas. They must not reproduce franchise designs or turn cultural source material into horror caricature.
+
+Art and content rules for this roster:
+
+- Every friend needs a distinct stable ID, display name, source/provenance record, cage-safe face area, and readable 40/56/84 px silhouette before catalogue admission.
+- A mythic friend and a similarly named enemy remain separate identities. In particular, Ripplecap Kappa Hatchling is a garden companion and must not reuse the enemy Kappa's record, sprite, behaviour, or narrative role.
+- Lore cues stay species-specific. Do not distribute leaves, hearts, stars, gems, ribbons, or other motifs across the roster merely to make a design seem magical.
+- Feeding and care are affectionate garden presentation. They do not introduce hunger punishment, neglect states, injury, death, compulsory chores, or spend-to-maintain systems.
+
 ## Difficulty model and measurable rubric
 
 Difficulty is multidimensional. The maintained report in `src/game/metrics.ts` measures engine-derived ordinary and perfect routes, rescue cost, raw branch coordinates, required state changes, physical retraversal, longest non-event run, and route-activity density. Raw branches are not automatically meaningful decisions, and the analyzer reports prerequisite depth as unavailable until a counterfactual dependency analysis exists. Solver results are design evidence, not a substitute for child observation.

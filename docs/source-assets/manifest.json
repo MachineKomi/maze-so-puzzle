@@ -25,7 +25,7 @@
     },
     "promptHistory": {
       "path": "docs/AI_ASSET_PROMPTS.md",
-      "sha256": "9fd645b22704fa5a1c6447c4375cc87e6bec18844f0a2b1abf49945ef14c31c1"
+      "sha256": "066be8e7cc452041c4cf8c91056459fd41653044fd9f9676f07b3d4105ddd3d3"
     },
     "pipelineModules": [
       {
@@ -60,8 +60,8 @@
       },
       {
         "path": "scripts/art_pipeline/manifest.py",
-        "sha256": "6d0c757e36ae6d129b85129ecf451f761445749a9bf9d1629da1494f9b31b35c",
-        "bytes": 27712
+        "sha256": "93d5a1b20c4f3787bf907d5f6d1b8fe95ffad51eda92be582a1364c896d66443",
+        "bytes": 27685
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02.py",
@@ -90,8 +90,8 @@
       },
       {
         "path": "scripts/art_pipeline/model.py",
-        "sha256": "4aa8de1e7be92239d295dce8955aa4aae5860a3b03d76b3e614a997763c44ac4",
-        "bytes": 37973
+        "sha256": "7f6fa0c0dacd3dc7c806cbd1610ae13161015833430502fc804f0a3ff355d990",
+        "bytes": 39122
       },
       {
         "path": "scripts/art_pipeline/periodic.py",
@@ -104,14 +104,19 @@
         "bytes": 52127
       },
       {
+        "path": "scripts/art_pipeline/record_generation_batch.py",
+        "sha256": "582bfb2900e75cbe64a038e7cc339c12ecd7982181f810267fec2a193d7a05eb",
+        "bytes": 7519
+      },
+      {
         "path": "scripts/art_pipeline/tests/test_cutout.py",
         "sha256": "ff859bcc0c6c844cc1de3842846c804d34458002484b37c8b676280bb048cf1d",
         "bytes": 7828
       },
       {
         "path": "scripts/art_pipeline/tests/test_generation_batch.py",
-        "sha256": "e4540afc1868c0064fb6459a4d391dc5c628782827102905d957b4b1c6d0c1ec",
-        "bytes": 2939
+        "sha256": "cce581f9fce26dcafaed2ae4d658f1609fd42be04b6dea7c38e12cea76a2e115",
+        "bytes": 3625
       },
       {
         "path": "scripts/art_pipeline/tests/test_mgjrpg02_batch01.py",
@@ -165,8 +170,8 @@
       },
       {
         "path": "scripts/art_pipeline/validate.py",
-        "sha256": "7e4d84323650571d2f5fc6551a8b375cc2ea6016dc9c474f504bbd54b57d411d",
-        "bytes": 144733
+        "sha256": "ffdc875182a798f8c5e7962bfa790eb37be68841a84fe2769fa413f5ecdedf1b",
+        "bytes": 144869
       }
     ],
     "requirements": {
@@ -210,6 +215,38 @@
         "referencedBy": [
           "batch:mgjrpg-02-batch-01"
         ]
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-02/PROMPTS.md",
+        "sha256": "6312bf7a41a9978d8700ce28ea2da8b7f45dcde20874d324cee518009e90d60f",
+        "bytes": 25377,
+        "referencedBy": [
+          "batch:mgjrpg-02-batch-02"
+        ]
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/PROMPTS.md",
+        "sha256": "5bf63bda407f976b6ec41d5ce499e9e9fa7fcd05e5337db28d00db249226eb80",
+        "bytes": 64596,
+        "referencedBy": [
+          "batch:mgjrpg-02-batch-03-friends"
+        ]
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/PROMPTS.md",
+        "sha256": "e9e53f7039a7f0275b134a78d7c254ba04e08aa9ea4a1b6cddc197d46c3b2233",
+        "bytes": 40801,
+        "referencedBy": [
+          "batch:mgjrpg-02-batch-04-mythic-friends"
+        ]
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/PROMPTS.md",
+        "sha256": "5e79f0274ccaa2987007e4e5cdd62026c1684b124a13017184eeeb24d4e0ec0a",
+        "bytes": 25408,
+        "referencedBy": [
+          "batch:mgjrpg-02-batch-05-weapons"
+        ]
       }
     ],
     "generationBatches": [
@@ -235,11 +272,11 @@
       },
       {
         "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/run-record.json",
-        "sha256": "9e581172873d49bf98e326b85a111ff054bd02cfe57e1646b663e4f961e41d98",
-        "bytes": 9424,
+        "sha256": "c1765dea77b63b3231d93aa6238b05bc91caab3dbd87e81d0b46cece4117992b",
+        "bytes": 11062,
         "batchId": "mgjrpg-02-batch-01-r02",
-        "revision": 1,
-        "status": "pending-human-review",
+        "revision": 2,
+        "status": "reviewed",
         "promptFile": {
           "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/PROMPTS.md",
           "sha256": "de90b4554d8e0100a9859cde63033dd3320f8555ba1c18b72d83b9c5c43b90dc",
@@ -249,6 +286,86 @@
         "runCount": 3,
         "generatorOriginalEncodedBytes": 4318390,
         "generatorOriginalDecodedBytesUpperBound": 18870192,
+        "approvedDerivativeCount": 3,
+        "approvedDerivativeEncodedBytes": 537590,
+        "approvedDerivativeDecodedBytesUpperBound": 3145728
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-02/run-record.json",
+        "sha256": "4a9e2f735aba66dcff7b63f40cc30df1bf651a2c745ca183e40176bb70a00ba0",
+        "bytes": 28040,
+        "batchId": "mgjrpg-02-batch-02",
+        "revision": 1,
+        "status": "pending-human-review",
+        "promptFile": {
+          "path": "docs/source-assets/production/mgjrpg-02/batch-02/PROMPTS.md",
+          "fidelity": "exact-as-submitted-from-generation-transcript",
+          "sha256": "6312bf7a41a9978d8700ce28ea2da8b7f45dcde20874d324cee518009e90d60f",
+          "bytes": 25377
+        },
+        "runCount": 16,
+        "generatorOriginalEncodedBytes": 21644044,
+        "generatorOriginalDecodedBytesUpperBound": 100643916,
+        "approvedDerivativeCount": 0,
+        "approvedDerivativeEncodedBytes": 0,
+        "approvedDerivativeDecodedBytesUpperBound": 0
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/run-record.json",
+        "sha256": "8f006043d83c7804aef4134a18059143046253a9d2e8b79036b8634c5ea9e670",
+        "bytes": 59584,
+        "batchId": "mgjrpg-02-batch-03-friends",
+        "revision": 1,
+        "status": "pending-human-review",
+        "promptFile": {
+          "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/PROMPTS.md",
+          "fidelity": "exact-as-submitted-from-generation-transcript",
+          "sha256": "5bf63bda407f976b6ec41d5ce499e9e9fa7fcd05e5337db28d00db249226eb80",
+          "bytes": 64596
+        },
+        "runCount": 30,
+        "generatorOriginalEncodedBytes": 45110617,
+        "generatorOriginalDecodedBytesUpperBound": 188701920,
+        "approvedDerivativeCount": 8,
+        "approvedDerivativeEncodedBytes": 1750301,
+        "approvedDerivativeDecodedBytesUpperBound": 8388608
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/run-record.json",
+        "sha256": "219d97025dfa3f34693523598c808311dde148f9d34ae9484096d3dce7f14d60",
+        "bytes": 32950,
+        "batchId": "mgjrpg-02-batch-04-mythic-friends",
+        "revision": 1,
+        "status": "pending-human-review",
+        "promptFile": {
+          "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/PROMPTS.md",
+          "fidelity": "exact-as-submitted-from-generation-transcript",
+          "sha256": "e9e53f7039a7f0275b134a78d7c254ba04e08aa9ea4a1b6cddc197d46c3b2233",
+          "bytes": 40801
+        },
+        "runCount": 16,
+        "generatorOriginalEncodedBytes": 23924587,
+        "generatorOriginalDecodedBytesUpperBound": 100641024,
+        "approvedDerivativeCount": 0,
+        "approvedDerivativeEncodedBytes": 0,
+        "approvedDerivativeDecodedBytesUpperBound": 0
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/run-record.json",
+        "sha256": "c3ad64d2204e33fb01e99f3083bf9f58f014fafab3a0c4030a9870e554d91323",
+        "bytes": 23321,
+        "batchId": "mgjrpg-02-batch-05-weapons",
+        "revision": 1,
+        "status": "pending-human-review",
+        "promptFile": {
+          "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/PROMPTS.md",
+          "fidelity": "exact-as-submitted-from-generation-transcript",
+          "sha256": "5e79f0274ccaa2987007e4e5cdd62026c1684b124a13017184eeeb24d4e0ec0a",
+          "bytes": 25408
+        },
+        "runCount": 10,
+        "generatorOriginalEncodedBytes": 11984145,
+        "generatorOriginalDecodedBytesUpperBound": 62900640,
         "approvedDerivativeCount": 0,
         "approvedDerivativeEncodedBytes": 0,
         "approvedDerivativeDecodedBytesUpperBound": 0
@@ -416,13 +533,13 @@
     "runtimeImageCount": 125,
     "runtimeEncodedBytes": 39173427,
     "runtimeDecodedBytesUpperBound": 183011232,
-    "sourceImageCount": 156,
-    "sourceEncodedBytes": 228509640,
+    "sourceImageCount": 239,
+    "sourceEncodedBytes": 333460924,
     "unreferencedSourceImageCount": 3,
-    "generationBatchCount": 2,
-    "generationBatchOutputCount": 30,
-    "generationBatchEncodedBytes": 45637133,
-    "generationBatchDecodedBytesUpperBound": 188701920,
+    "generationBatchCount": 6,
+    "generationBatchOutputCount": 102,
+    "generationBatchEncodedBytes": 148300526,
+    "generationBatchDecodedBytesUpperBound": 641589420,
     "renderingRecipeFileCount": 1,
     "renderingRecipeBytes": 8645,
     "canaryReviewFileCount": 1,
@@ -6954,6 +7071,51 @@
       ]
     },
     {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/approved/enemy-lamia-v02-512.png",
+      "sha256": "a00f4e8941deef138fad7038f778487c7365bbce8a8bfcceffb307044e9487aa",
+      "bytes": 163227,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-01-r02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/approved/enemy-minotaur-v02-512.png",
+      "sha256": "a5d82b7264ed497448949d25447750c5ecfc58662c1d8235ac73ba8f34c043fb",
+      "bytes": 234047,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-01-r02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/approved/enemy-soda-slime-v02-512.png",
+      "sha256": "6bd109635b353fe7c138395c4c39b9cbb907acf8fe21493301fde37212cb2c79",
+      "bytes": 140316,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-01-r02"
+      ]
+    },
+    {
       "path": "docs/source-assets/production/mgjrpg-02/batch-01-r02/enemy-lamia-v02-matte-01-generator-original.png",
       "sha256": "7163f2c5d7b8a769462ef5c05202b90513f9ca35d0770412b1bd05473493bfff",
       "bytes": 1419835,
@@ -6996,6 +7158,1206 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-01-r02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/app-icon-star-v02-generator-original.png",
+      "sha256": "f6899cd5bb1fb53ead4664110e2703665c885e92266cb960c3dc6d4452a9dac0",
+      "bytes": 1475068,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-hole-v02-matte-01-generator-original.png",
+      "sha256": "71b409e80838b235c0956a12108ffa4397d0a481b737c94cbbcca96b6404a398",
+      "bytes": 1335430,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-hole-v03-matte-01-generator-original.png",
+      "sha256": "30d31e16602252dae4e91ef2fe4d35f913c41aeb28b1e760ada1668aebef8d39",
+      "bytes": 1570347,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-lava-v03-generator-original.png",
+      "sha256": "37339f9e4304f15a1862279427c126112851b1ee2010afb3adbc880be4421180",
+      "bytes": 1894476,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-poison-v02-generator-original.png",
+      "sha256": "e5d85701636423a91cd8caabe579ae5e0714bb0277bf4041258899d08a6e9ecd",
+      "bytes": 2049232,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-water-v03-generator-original.png",
+      "sha256": "31362aa9e6b651ddb6bbda5ffc3a033b7f2d2f8a56a028623ed926d445f33eb8",
+      "bytes": 2020380,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-book-v02-generator-original.png",
+      "sha256": "c6dbfa62aed74aa889de48841ac8bc37946e34d10d44332326bbb91841c01abd",
+      "bytes": 1133107,
+      "width": 1374,
+      "height": 1145,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6292920,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-help-v02-generator-original.png",
+      "sha256": "e3c50033e9d8dae4246141ef6db9cffbf972ca53808db9d289f95a071a8f2a68",
+      "bytes": 974927,
+      "width": 1205,
+      "height": 1305,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290100,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-home-v02-generator-original.png",
+      "sha256": "656cc841f8b701ea4031fa9d7df408e7696108c926e8b53c6716c95f9cdacd8c",
+      "bytes": 1739292,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-mazes-v02-generator-original.png",
+      "sha256": "857cafa76fdd0042a12d8ebe12a7a78c3ee25fd7182ce6dc4c7ffee6c42e7130",
+      "bytes": 1187769,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-mazes-v03-checker-rejected-generator-original.png",
+      "sha256": "10e134a2f9ce3db1e89dd9a00d9b52ac0da9373abcf4fa7c6d618abd045e1ec4",
+      "bytes": 1044834,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-mazes-v04-matte-01-generator-original.png",
+      "sha256": "bb17d72808818a9c3b21f55fcffcc27a26cec324443598159c5404b95f5ae0c2",
+      "bytes": 1126039,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-muted-v01-generator-original.png",
+      "sha256": "f9726ca5b3e98a3349ef77e4f1072b7e8799da93bfcca569c927c63a8e44e8b3",
+      "bytes": 1131132,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-restart-v02-generator-original.png",
+      "sha256": "5713c3b43f26bba7d046d7174151eab640f0da455a7b17bd89a4232dc0d7fc33",
+      "bytes": 1023967,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-sound-v02-generator-original.png",
+      "sha256": "e8a2d2460fd3f9c222e998da427cf6b76895e43f988c8aff7813f755a9aac374",
+      "bytes": 1058051,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-sound-v03-unselected-generator-original.png",
+      "sha256": "deaf9e5ec32b9c39844664c0c74b3c447deb012cb847969f23d9641a3dcddb58",
+      "bytes": 879993,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-02"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-bunny-v02-512.png",
+      "sha256": "7553bae834919486d19ea5c0ede5a0ca27ab766d1efc72b05fa16615622338b9",
+      "bytes": 189361,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-duckling-v02-512.png",
+      "sha256": "314f8caf5a8f81b12795f8dd87c3dd3005860cb0c9e35ddd7692a78a28b1d583",
+      "bytes": 175100,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-fawn-v02-512.png",
+      "sha256": "2ef2d08f940a68dd7c784336286727216dda42c6fde06ea7313029973b470531",
+      "bytes": 176721,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-fox-v02-512.png",
+      "sha256": "5bee37d8c36596fa8d3d25a056b68c64d3b71672e180c27940441e3cf256f74d",
+      "bytes": 261218,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-hedgehog-v02-512.png",
+      "sha256": "4a63adf9e09462be4479aa8eb53a1dd92e38a4ec62b7816f7ff1746035d7b820",
+      "bytes": 243574,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-kitten-v02-512.png",
+      "sha256": "1af17906a7c37a67a65d95c0277485a84c9ca0faf956ffbd89f06d670423343c",
+      "bytes": 216284,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-puppy-v02-512.png",
+      "sha256": "cddcbc3ea8c9047ac92297a49c40f2d7b9bf38e049140915c71505c40bce4dc1",
+      "bytes": 226079,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-red-panda-v02-512.png",
+      "sha256": "68796dd1c0f20148246fc065868e680aecd0b3659ef924ec7e36342e1e531470",
+      "bytes": 261964,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-alpaca-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "ee33ecaab8efe17afccb612a7fe4bf95a35cdc1cacce4cb0d5a552d3670f1585",
+      "bytes": 1329730,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-alpaca-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "a136eef50ec864ca0f3b9b48fe1d736dcef9ae425fa570ff7200a86caccb8c3f",
+      "bytes": 1365120,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-bunny-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "69a485fe79617a372195b2dbc02efcf370069c0d4f64acf6ff4c4f57f039752f",
+      "bytes": 1507253,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-bunny-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "fa929c35b962528ead3d57d6497b0383e73718d6a4967632adc451d16c306c3c",
+      "bytes": 1477180,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-capybara-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "363f29c5742aef003301ad7ab9b4157ab921913cf40a835163dd1cd5fa1790e1",
+      "bytes": 1527668,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-capybara-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "2c7d48181a56dbf42324956b5e360871633d4f7ec883071e7fcaabd1bd4c69db",
+      "bytes": 1640211,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-chinchilla-v02-candidate-a-rejected-two-tails-matte-01-generator-original.png",
+      "sha256": "05d45ff65945510bf8c9236a9ec9d2823aae06de543c76d262b7f99473acdb45",
+      "bytes": 1566175,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-chinchilla-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "8ae725cc8ff4e3cce0183095732328ff215ae5d9a17bc3574f39a90821b9e7b5",
+      "bytes": 1565647,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-duckling-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "5aebdf04b80e6355109dc022ee5b42c8020d061f56306fd61634ee8b77fd6a2d",
+      "bytes": 1497624,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-duckling-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "767990b53a374216e92bbb7c821ec692b5178312698c2340b9fbca2bc8e6a9a1",
+      "bytes": 1477510,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-fawn-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "2ebc29ae49c74e9bb6a8b69e26c70c013d7d8adc54cc625b54fc5a09ed933887",
+      "bytes": 1415066,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-fawn-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "38fac45076896702ac1723618b1a3e4577b83c3327344eea38ec8db1d81c1990",
+      "bytes": 1360810,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-fox-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "9aff680984e80613eda994343eeb0f55d89f2f8865a6e6504c9bfbb2aea48575",
+      "bytes": 1618587,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-fox-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "54a668a814f70350cc0149bf1656f0aaf441d677cef3b27c63a99456b76cab35",
+      "bytes": 1531942,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-hedgehog-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "00c39186e13fc46dd19b81690b88d3d9a891fecf22864009bfc30177a6d3042c",
+      "bytes": 1566246,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-hedgehog-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "d1789d8c0338384e11d7aab95bd4594d263608cd4184820987d00a00cb6faa07",
+      "bytes": 1519530,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-kitten-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "5c5eacf137a10e97a3019a5543eff55ca72c6d0ddf90a71805c49c9ee64beed2",
+      "bytes": 1529639,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-kitten-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "6705e73fff8c71533c0ef345451b467e1df5b66a47024ba2c5fb480c412cd9d5",
+      "bytes": 1506361,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-koala-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "5231bf3dff473a0f5eb4d357aa8c7c12802ef627c5c82977dac6c0e6fbec33de",
+      "bytes": 1583855,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-koala-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "6b12b70dab3a1db31a5e503180b11f06c9fce489c41d1b2c22356494a11fbfe5",
+      "bytes": 1508650,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-lamb-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "3ab3d272d6afb0bf76b8d10e953158f9e4f92994d20bf7676a1a4d682eeba791",
+      "bytes": 1514140,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-lamb-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "aa68398b5d6dac0d19416159352cc24e0f15b2a7682af0381897f4870e7ef6ef",
+      "bytes": 1438608,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-otter-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "df03d78479ae91bae72b723e9463cbbe49926fefda64892bfb00fa30429fbc96",
+      "bytes": 1422017,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-otter-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "3c767f5831dec4a278079312342255bada905a7ed20f7716cc9e8731888084a6",
+      "bytes": 1547388,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-penguin-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "ee2845402d6356d4d2c2f2cb72313833f8105140918e5734202189709178e03a",
+      "bytes": 1391344,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-penguin-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "f4cefc6258ca4e65d36107b434cdc36d74d50d86c718aa6f7763cdd14241554c",
+      "bytes": 1602668,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-puppy-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "04095745b6cedf3573347837683c24a09538c00490211ed82c1e98cb0eae38e7",
+      "bytes": 1446643,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-puppy-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "b2f5c9118805a8bdfe1a5072d1ed61c0f4b0e46f349920886531cb63a2e70258",
+      "bytes": 1479981,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-red-panda-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "532a603e92cf41bea363aa101d4930bbe0485e2adb81eb665a9c357884f21eb5",
+      "bytes": 1596597,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-red-panda-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "9fb9d922195bce000806f213920955b9d9f3ff0374c4977b5e14c430ae7d0611",
+      "bytes": 1576427,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-03-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-breezeling-sylph-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "01a61f54d9abe68be99fcb313de4e622c617d1b8f3a055850c9b6c2b207e70bd",
+      "bytes": 1301466,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-cloudstep-pegasus-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "58f3a1205fae7a1b3931a1ff505621a1d62f91de85168c429d811da29b0fb656",
+      "bytes": 1544799,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-emberbelly-dragonling-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "0a894905e73e661c49e51f6a266767dd71ac7adfd04b5182593f3f45434ecab6",
+      "bytes": 1475243,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-emberdown-phoenix-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "64a86545ae7fc2078f738574ac6c780e24e044f53c9e4997ef57138e17e754eb",
+      "bytes": 1460242,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-griffin-cub-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "a05a03bc0d0d565cdff45c8ed9cd3a0f8844793566f981e115f9d1aa40d9b5cf",
+      "bytes": 1512016,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-lanternling-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "75d2a1d6b7637d66dca00d9b6bb7d0dae487e7c4c6302372c99518ab964fc041",
+      "bytes": 1461330,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-mallowmusk-aroma-wisp-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "4ff09ea7d572027a5617eb4289fb02f29bdfaab1501ed97d1ba6b7bd43a2767a",
+      "bytes": 1477419,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-meadowstep-faunling-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "29eb52b18aa331d84e4b113328cbc2b60e660358f449a8ad577ec091f28371f9",
+      "bytes": 1478869,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-minerva-moon-owl-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "9ab92d0f8b32004212beaffa7ab7a22db8b43cfd826fa818de452a5479c35cd4",
+      "bytes": 1500758,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-pitter-patter-parasol-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "00cca9a354e66a759a139ba1bab209eaf2fac054832065d442361f2ceae1fd54",
+      "bytes": 1406682,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-riddlekit-sphinx-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "38e9e341b1a4979079882c72a325bb03752a7b7b8b368be676a467adb5466cb0",
+      "bytes": 1667657,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-ripplecap-kappa-v01-candidate-a-rejected-leaf-fringe-matte-01-generator-original.png",
+      "sha256": "3a39696fc0a779936a0fb66a6619515011f7b82cb196032ff1519faed3911653",
+      "bytes": 1581800,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-ripplecap-kappa-v01-candidate-b-matte-01-generator-original.png",
+      "sha256": "77add30619edd82f434c8d2dc6da87402892cd30263efa0543fa08b64c75cd93",
+      "bytes": 1400851,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-tessera-dolphin-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "185126e8dca75837cd2963978f9fb8c357d2c6e3ccfcf88a073601ab1ce1db43",
+      "bytes": 1496190,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-three-tumble-cerberus-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "815c5889b438306411044ebf9046ea6c67fb0b0e19b94cd50f06466e91036b82",
+      "bytes": 1744602,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-tidecurl-hippocamp-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "f691ad7d0fb83e79a5cb8b2ebd6af5b556a13bc8d25c0dc06ba55bc11bb07faf",
+      "bytes": 1414663,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-04-mythic-friends"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-bubble-bow-v02-candidate-a-rejected-ornament-drift-matte-01-generator-original.png",
+      "sha256": "aacb86b4d1a713e0be9b085ce9af938fb87c7fcb37b8e087fe36c84957b0a75f",
+      "bytes": 1273567,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-bubble-bow-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "f11399b30382162a8374738344c16cd867c2628beb3626efe9ddf945e4034ace",
+      "bytes": 1114925,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-comet-spear-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "9ce8e4f0260407580a64a26dd1f7c9b36e9cf6c28329f2b96f2df23b6ee3cddc",
+      "bytes": 1098904,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-cupcake-mace-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "a6ae12dfa571e3429d39114a559c09f32f8c0018a655dd719672a25077350860",
+      "bytes": 1222361,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-flower-sabre-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "c854627aea8fb6d770cc1a53694f50fa1afd208af794d367ef716f6608a2cc94",
+      "bytes": 1142765,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-leaf-blade-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "a6505ee3688cd521fee50f8fb34e11b2cd8d021fb0e5a44b713cfca0d79ff2f5",
+      "bytes": 1249269,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-moon-wand-v02-candidate-a-rejected-extra-star-matte-01-generator-original.png",
+      "sha256": "15497e84507a9ed2a226cc34215d9c74a5f94921c1e393f19bcc72c29b65f598",
+      "bytes": 1196856,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-moon-wand-v02-candidate-b-matte-01-generator-original.png",
+      "sha256": "c1fc091c86c71c42487ed7037cb016ffe763bf09a29557d7a810c98c95ac87dc",
+      "bytes": 1107150,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-star-sword-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "06eba53b2bfff6d679e22cdc64dda385a672bfc775cfc0560fcfeb9f0b1b6c0a",
+      "bytes": 1322260,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-sun-mallet-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "9f6d6cbf51ed68b67f7555462bd9ee2e176d98fd5f3811d2c24f599acb9f6645",
+      "bytes": 1256088,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-05-weapons"
       ]
     },
     {

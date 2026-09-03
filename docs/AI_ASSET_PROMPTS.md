@@ -1855,3 +1855,51 @@ retirement. During Plan 03, classify superseded files in the retirement ledger
 without moving or deleting runtime assets. Keep versioned rollback files until
 Plan 12 after all later consumers and catalogue pointers are final, and never
 place an archive beneath `public/assets`.
+
+## Plan 03 production batches 02–05 — forward-only source record
+
+The exact prompts, ordered reference roles, immutable generator output IDs,
+hashes, byte counts, dispositions, and rollback boundaries for current volume
+production live beside their source masters:
+
+- `docs/source-assets/production/mgjrpg-02/batch-02/` — navigation stickers,
+  app icon, water/lava/poison, rejected flat hole, and pending deep-hole v03.
+- `docs/source-assets/production/mgjrpg-02/batch-03-friends/` — independent
+  candidate pairs for all fifteen established animal friends. Human-selected
+  sources through Red Panda have approved 512 px derivatives; the remaining
+  species await bulk review.
+- `docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/` — original
+  yokai/fantasy/Greek-and-Roman-inspired collectible friends. The leaf-fringe
+  Kappa attempt is rejected evidence; the corrected water-cap Kappa and the
+  rest await bulk review.
+- `docs/source-assets/production/mgjrpg-02/batch-05-weapons/` — fresh
+  constructions for all eight held-weapon identities. The ornate Bubble Bow
+  and extra-star Moon Wand attempts are rejected evidence; their simplified
+  replacements and the other weapons await bulk review.
+
+Do not reconstruct a source from this summary. The adjacent `PROMPTS.md` files
+are the exact historical prompt authority, and each `run-record.json` binds
+those blocks to output bytes. New iterations append a run or batch; they never
+rewrite an old prompt or turn a rejected output into a rendering/identity
+reference.
+
+Reusable production constraints reinforced by these batches:
+
+- Begin on a blank canvas. Existing runtime art supplies semantic identity or
+  species/category landmarks only; approved `mgjrpg-02` sources supply rendering
+  craft only.
+- Use two to four large colour masses, three broad connected values, one clear
+  silhouette feature, restrained painterly variation, and bright continuous
+  material-local contours. Dark ink-plum is limited to tiny critical
+  separations.
+- Ordinary friends receive no arbitrary magical motif. Mythic friends receive
+  only folklore-defining landmarks, simplified until readable as pet-scale
+  companions. Friend and enemy Kappa designs differ in posture, expression,
+  scale, and role while both preserve the water-dish landmark.
+- A weapon gets one functional silhouette, one motif, at most one gem/core and
+  one ribbon/tassel, plus a visually clear cylindrical hand-grip segment. Added
+  motifs or filigree that compromise the named identity or held-size read are
+  rejection defects.
+- Every isolated source uses a literal uniform matte or genuine alpha. A
+  painted checkerboard is invalid. Field sprites receive no cream sticker
+  cutline; that cutline remains exclusive to semantic UI art.

@@ -1,0 +1,29 @@
+{
+  "schema": "maze-art-human-review/v1",
+  "batchId": "mgjrpg-02-batch-02",
+  "recordedOn": "2026-09-03",
+  "scope": "Source-master selection only; no runtime publication or retirement.",
+  "approved": [
+    "nav-home-v02",
+    "nav-help-v02",
+    "nav-muted-v01",
+    "nav-book-v02",
+    "nav-restart-v02",
+    "nav-sound-v03",
+    "nav-mazes-v04",
+    "hazard-water-v03",
+    "hazard-lava-v03",
+    "hazard-poison-v02",
+    "app-icon-star-v02"
+  ],
+  "rejectedOrUnselected": [
+    { "id": "nav-sound-v02", "reason": "Human preferred the later simplified speaker." },
+    { "id": "nav-mazes-v02", "reason": "Superseded by the simpler clean v04 route mark." },
+    { "id": "nav-mazes-v03", "reason": "Invalid checkerboard-like generated background." },
+    { "id": "hazard-hole-v02", "reason": "Human rejected the flat read; it does not look like a shaft descending into the ground." }
+  ],
+  "pending": [
+    { "id": "hazard-hole-v03", "reason": "Fresh deeper construction generated in response to the rejection; awaiting Human review." }
+  ],
+  "evidence": "Human approved the simplified speaker and all preferred generated work through Red Panda, while explicitly rejecting the flat hole and requesting a deeper replacement. Earlier direct approvals cover Home, Help, volume and mute icons."
+}

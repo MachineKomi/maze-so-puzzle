@@ -2518,13 +2518,16 @@ def _validate_generation_batch_documents(
                     field=f"referenceRegistry.{reference_id}.path",
                     errors=errors,
                 )
-                if reference_path is not None and not inside_root(reference_path, ROOT / "docs" / "source-assets"):
+                if reference_path is not None and not (
+                    inside_root(reference_path, ROOT / "docs" / "source-assets")
+                    or inside_root(reference_path, ROOT / "public" / "assets")
+                ):
                     errors.append(
                         _message(
                             "error",
                             "generation-batch-reference-root",
                             label,
-                            "generation references must stay under docs/source-assets",
+                            "generation references must stay under docs/source-assets or public/assets",
                         )
                     )
 

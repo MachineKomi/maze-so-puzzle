@@ -175,8 +175,9 @@ Future chapters can follow new loose threads without undoing the first arc:
 - A Science Point observatory may let collected curiosity light optional,
   celebratory constellations; Science is never spent, required, or used to gate
   story progress.
-- Rescued animal friends contribute different clue abilities without automating
-  maze solutions.
+- Rescued animal and mythic friends may contribute different clue abilities
+  without automating maze solutions. The maintained roster and its child-safe
+  collection rules live in `docs/GAMEPLAY_DESIGN_SPEC.md`.
 - Sprig practises weather magic and accidentally creates reversible ice paths,
   wind arrows, or cloud bridges.
 - The Friendship Crown opens optional challenge stories for perfect-rescue
