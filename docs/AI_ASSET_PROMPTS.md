@@ -1856,7 +1856,7 @@ without moving or deleting runtime assets. Keep versioned rollback files until
 Plan 12 after all later consumers and catalogue pointers are final, and never
 place an archive beneath `public/assets`.
 
-## Plan 03 production batches 02–05 — forward-only source record
+## Plan 03 production batches 02–06 — forward-only source record
 
 The exact prompts, ordered reference roles, immutable generator output IDs,
 hashes, byte counts, dispositions, and rollback boundaries for current volume
@@ -1876,6 +1876,10 @@ production live beside their source masters:
   constructions for all eight held-weapon identities. The ornate Bubble Bow
   and extra-star Moon Wand attempts are rejected evidence; their simplified
   replacements and the other weapons await bulk review.
+- `docs/source-assets/production/mgjrpg-02/batch-06-cages/` — fresh shared-anatomy
+  constructions for all four cage materials. Constraint failures and the
+  Storybook Wood attempt with a baked offset layer remain rejected evidence;
+  corrected three-bar, neutral-lighting candidates await bulk review.
 
 Do not reconstruct a source from this summary. The adjacent `PROMPTS.md` files
 are the exact historical prompt authority, and each `run-record.json` binds
@@ -1903,3 +1907,7 @@ Reusable production constraints reinforced by these batches:
 - Every isolated source uses a literal uniform matte or genuine alpha. A
   painted checkerboard is invalid. Field sprites receive no cream sticker
   cutline; that cutline remains exclusive to semantic UI art.
+- Cage openings are transparency, not dark recesses: bars may carry local form
+  shading and occlusion at their joinery, but no duplicate/drop-shadow layer
+  may sit behind them. All material variants preserve exactly three slim inner
+  bars, two outer posts, one top rail, one bottom rail, and one centered lock.
