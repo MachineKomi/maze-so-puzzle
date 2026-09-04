@@ -154,5 +154,5 @@
     "Plan 01 integration of the dormant layered hero and exact wordmark"
   ],
   "gitDiffCheck": "pass; both working-tree and staged-tree checks returned no whitespace errors before publication",
-  "publicationCommit": "ae3e421c2db4c24dfa7d527a18e6f7bac60df30f"
+  "publicationCommit": "ae3e4215c17eb5178e3b4dd066e0bd90d1a3b9db"
 }
