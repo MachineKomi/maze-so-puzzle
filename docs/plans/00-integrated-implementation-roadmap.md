@@ -546,6 +546,33 @@ and publish it with notes as a GitHub pre-release asset when GitHub publication 
 available. A failed CI, Vercel or desktop build is recorded honestly and fixed or
 deferred; no stale earlier binary is relabelled as the new checkpoint.
 
+### 5.13A Human-approved early movement-comfort checkpoint — 2026-09-04
+
+After Agent 01's current assignment is reviewed and checkpointed, and before
+the FP-UI1 build/deployment transaction, the root implements a bounded early
+slice of `PT-20260902-07`: keep precise tile-based gameplay while smoothly
+animating character travel and camera following. The Human reports that jerky
+held travel makes testing unpleasant and encourages slow individual steps,
+although play is not completely blocked. This explicitly advances camera/actor
+comfort work from Plan 07B without advancing its broad optimization/audio scope.
+
+Do not interrupt or expand the running Agent-01 assignment and do not start a
+concurrent runtime agent. Review its actual scene/motion seams first. Preserve
+engine grid/collision/solver/save truth, current cadence semantics, stationary
+door interactions, and pointer alignment. Compare coordinated travel/follow
+recipes through the existing harness; test holds, taps, turns, narrow gaps,
+reversals, camera clamping, release, overlays, cancellation, resize and reduced
+motion. Record performance evidence honestly and expose one documented travel
+contract for downstream lighting/VFX/controls/animation. Plan 07B consumes and
+requalifies this accepted work rather than repeating the refactor.
+
+FP-UI1 now includes the reviewed UI plus this reviewed movement slice, built
+from a clean committed/pushed checkpoint under the existing release safeguards.
+Human comfort acceptance is a preview playtest outcome, not an automated claim.
+If an Agent-01 preview has already been published, use an immediate separately
+versioned follow-up rather than replacing immutable artifacts. Agent 01's current
+no-build-publication instruction remains unchanged. Agent 04 follows this gate.
+
 ### 5.14 Final gameplay, progression and quality-of-life opportunity review
 
 Plan 14 is a **planning and Human-decision TODO**, not approval to add a

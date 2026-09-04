@@ -31,6 +31,19 @@ moved HEAD/state. Recorded starting commits are audit coordinates, not permissio
 to revert newer work. Web main includes corrections after the immutable v0.20.1
 release; do not assume the existing packaged desktop download includes them.
 
+## Subsequent Human scheduling decision — 2026-09-04
+
+After this handover, the Human authorized a root-owned movement-comfort slice
+after Agent 01 review and before FP-UI1: preserve precise tile-based gameplay,
+but smoothly animate both character travel and camera following. Jerky held
+movement makes testing less pleasant and encourages slow individual steps;
+it does not make the game totally unplayable. Roadmap section 5.13A and
+`PT-20260902-07` supersede the earlier Plan-07B-only scheduling. Leave Agent 01
+running untouched, review/checkpoint its result, implement/review this bounded
+slice, then build/deploy FP-UI1 and prepare Agent 04. If a preview has already
+shipped, publish an immediate separately versioned follow-up. Broad Plan-07B
+optimization remains later; family comfort still needs actual playtest evidence.
+
 ## Read and reconcile
 
 Read repository instructions, then:

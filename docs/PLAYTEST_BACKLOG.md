@@ -367,14 +367,43 @@ the distance between genuinely meaningful moments.
 - Impact: P0 — next-playtest gate
 - Delivery: Routed
 - Verification: Not retested
-- Primary owner: Plan 07B
+- Primary owner: Root-owned post-Plan-01 movement-comfort checkpoint; Plan 07B later requalifies the integrated result
 - Supporting owners: Plan 01 for isolated viewport/world/actor seams; Plan 08 for
   cross-input feel validation
-- Target gate: Plan 07B acceptance before a family candidate build
+- Target gate: Reviewed movement-comfort implementation before FP-UI1; Human comfort retest in that preview; integrated qualification in Plan 07B
 
 **Human evidence.** Movement looked and felt jerky across D-pad, touch, UI buttons
 and keyboard. Tauri felt somewhat easier but still looked bad. Comparing releases
 back to v0.5.0 strongly implicated the more active tile-following camera.
+
+**Human clarification — 2026-09-04, during Agent 01 execution.** The former
+static, whole-maze camera felt substantially smoother. The zoomed tile-following
+camera now feels jerky, hard to watch and almost nausea-inducing. Comfortable
+movement is therefore an explicit family acceptance concern, not cosmetic
+polish. The Human proposed comparing tile-based steps with smooth camera travel
+against smooth character-and-camera travel, while preserving satisfying corners
+and narrow gaps. This requests investigation, not approval to replace grid-based
+gameplay with free analogue collision/movement.
+
+**Human scheduling decision — 2026-09-04, subsequent clarification.** Play is
+not totally blocked, but the family avoids jerky held travel by stepping one
+tile at a time, making playtests slower and less pleasant. The Human authorizes
+precise tile-based gameplay with smoothly animated character travel and camera
+following in the next post-Agent-01 build. This supersedes the earlier deferral
+to Plan 07B: after reviewing and checkpointing Agent 01, the root owns one bounded
+movement-comfort implementation before building/deploying FP-UI1. Do not interrupt
+Agent 01 or start concurrent runtime work. If a preview has already shipped,
+deliver a separately versioned immediate follow-up; never overwrite its artifacts.
+Plan 07B retains broad optimization and later integrated qualification.
+
+Preserve grid legality, collision, cadence semantics, saves, solver truth and
+stationary doors; free analogue gameplay is not authorized. Reuse the accepted
+UI scene/motion seams and leave a clear travel contract for Plans 04/02/08/05.
+Validate straight holds, taps, corners/narrow gaps, reversals, camera edges,
+release/cancellation, pointer alignment and full/reduced motion before release.
+Include a brief comfort comparison against the static-camera first maze in the
+preview checklist. Human comfort acceptance remains pending until family retest;
+automated frame evidence alone cannot close it.
 
 **Current-checkpoint audit.** The source supports that hypothesis: the camera
 world and player layer independently animate layout-affecting `left`/`top` over

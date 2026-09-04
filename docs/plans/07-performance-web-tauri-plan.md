@@ -18,6 +18,16 @@ Run before Plan 06 or any visual/input implementation. Implement only the origin
 
 Do not optimize production code, delete/re-encode assets, alter save scheduling, change caching policy, or claim a speedup in 07A. Preserve the recorded 0.19.0 evidence as a labelled historical baseline and mark any still-contaminated cell honestly. Create the initial `docs/PERFORMANCE_BUDGETS.md` with provisional/baseline labels.
 
+### Human-approved early movement slice — 2026-09-04
+
+Roadmap section 5.13A advances `PT-20260902-07` camera/actor comfort work to a
+root-owned checkpoint after Agent 01 review and before FP-UI1. Preserve precise
+tile-based gameplay while smoothing character travel and camera following.
+This does not start Pass 07B or authorize concurrent work. At the later 07B
+return, consume the accepted travel contract and requalify it with final
+lighting, VFX, controls and animation; do not restore the historical motion
+implementation or duplicate its owner. Broad optimization and audio remain here.
+
 ### Pass 07B — final specialist execution
 
 Return after Plans 06, 03, root checkpoint 03M, 01, 04, 02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement Phases 1–7 against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.
