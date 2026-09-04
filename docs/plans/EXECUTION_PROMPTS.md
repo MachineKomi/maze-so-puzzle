@@ -114,7 +114,7 @@ stationary-door, deterministic reward, OST catalogue, preview-namespace and
 release-provenance contracts; also preserve its final-style Poggle/Sprig
 portraits, final-style Goblin and Violet Moon, complete generated and authored
 32-friend roster (Rainbow-Horn Unicorn in Maze 1 and Tea-Time Skeleton in Maze 2),
-repaired transparent Home hero,
+v04 transparent Home hero with the centred unicorn horn and guarded pale-edge cutout,
 separate minimal title screen, visible-player door sequence, portal-glyph
 cleanup and friend-ledger modes. Do not rebump the version, rebuild/publish a
 release, move the tag, or edit GitHub/Vercel release state; the root manager owns

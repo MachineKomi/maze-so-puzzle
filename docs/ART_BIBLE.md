@@ -79,6 +79,19 @@ legacy runtime files on Plan 12 rollback hold. The exact source, prompt, matte,
 hash and derivative evidence is in
 `docs/source-assets/publication/mgjrpg-02-post-v0201-active-refresh-map.json`.
 
+### Home hero bounded-correction authority
+
+The post-v0.20.1 v04 Home hero keeps the approved v03 composition and all
+character pixels outside one source-space horn/mane mask. A built-in ImageGen
+edit supplies the centred Rainbow-Horn Unicorn horn; the full generated frame
+is not a new identity or composition authority. Deterministic delivery clears
+the edge-connected white matte and exactly two measured enclosed background
+islands. The extraction tolerance is capped below the measured pale-outer-ear
+boundary so white fur, bone, paper, stars, and highlights remain foreground.
+Exact prompts, mask geometry, component guards, hashes, and rollback are in
+`docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md`
+and `docs/source-assets/publication/mgjrpg-02-home-hero-v04-correction-map.json`.
+
 ## Creative north star
 
 **Pocket-sized courage made visible.** This is a warm storybook maze where

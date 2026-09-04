@@ -1,0 +1,131 @@
+{
+  "schema": "maze-art-home-hero-v04-correction/v1",
+  "publicationId": "mgjrpg-02-home-hero-final-correction-v01",
+  "recordedOn": "2026-09-04",
+  "prompt": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md",
+    "sha256": "cf6f115a3a9b560b23000da368e19602d32525a6692aaa2d07bd1236714ee964",
+    "bytes": 4961
+  },
+  "decision": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v13/human-decision.json",
+    "sha256": "bfbb036865c62bbcb5f42b3b4f82834146abba57c628eca716605e7d9920bc82",
+    "bytes": 1237
+  },
+  "encoderEnvironment": {
+    "python": "3.14.3",
+    "pillow": "12.2.0",
+    "numpy": "2.5.2",
+    "libwebp": "1.6.0",
+    "zlib": "1.3.1.zlib-ng"
+  },
+  "hornTransfer": {
+    "roiPolygon": [
+      [
+        1064,
+        492
+      ],
+      [
+        1268,
+        492
+      ],
+      [
+        1304,
+        530
+      ],
+      [
+        1310,
+        588
+      ],
+      [
+        1290,
+        648
+      ],
+      [
+        1244,
+        678
+      ],
+      [
+        1160,
+        682
+      ],
+      [
+        1092,
+        666
+      ],
+      [
+        1058,
+        625
+      ],
+      [
+        1048,
+        558
+      ]
+    ],
+    "differenceThreshold": 10,
+    "dilationSize": 11,
+    "featherRadius": 2.5,
+    "maskBoundsLTRB": [
+      1042,
+      486,
+      1311,
+      688
+    ],
+    "maskNonZeroPixels": 37230,
+    "changedPixels": 34543,
+    "changedCanvasFraction": 0.02196654,
+    "changedPixelsOutsideMask": 0
+  },
+  "backgroundExtraction": {
+    "exteriorMode": "edge-connected",
+    "rgb": [
+      253,
+      253,
+      253
+    ],
+    "tolerance": 32,
+    "enclosedComponents": [
+      {
+        "seed": [
+          357,
+          712
+        ],
+        "pixelsCleared": 3567,
+        "boundsLTRB": [
+          319,
+          676,
+          393,
+          758
+        ]
+      },
+      {
+        "seed": [
+          153,
+          797
+        ],
+        "pixelsCleared": 1347,
+        "boundsLTRB": [
+          140,
+          744,
+          183,
+          829
+        ]
+      }
+    ]
+  },
+  "entry": {
+    "stableId": "home-hero-splash",
+    "artVersion": 4,
+    "recordId": "home-hero-splash-mgjrpg02-v04-source",
+    "sourceMaster": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-composited-white-master.png",
+    "transparentMaster": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-transparent-master.png",
+    "runtimePath": "public/assets/mgjrpg-02/brand/home-hero-splash-v04-front-door-1024-r01.webp",
+    "runtimeSha256": "4aa1b8b108269d1f58a3204330b0e7d7cda24f5db205a0d3e69cb5f92d012034",
+    "runtimeBytes": 712976,
+    "decodedBytesUpperBound": 3145728,
+    "previousPath": "/assets/mgjrpg-02/brand/home-hero-splash-v03-front-door-1024-r01.webp"
+  },
+  "rollback": {
+    "checkpoint": "556542e38f1e31a868a1ec6e382041db5ee887e6"
+  }
+}

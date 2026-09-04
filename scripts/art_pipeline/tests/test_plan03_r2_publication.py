@@ -97,7 +97,7 @@ class Plan03R2PublicationTests(unittest.TestCase):
         self.assertNotIn('className="title-vignette"', app)
         self.assertNotIn(".title-vignette", styles)
         self.assertIn("game-logo-v06-front-door-1024-r01.webp", catalogue)
-        self.assertIn("home-hero-splash-v03-front-door-1024-r01.webp", catalogue)
+        self.assertIn("home-hero-splash-v04-front-door-1024-r01.webp", catalogue)
         self.assertIn('className="front-door-screen"', app)
 
     def test_prior_front_door_files_remain_rollback_holds(self) -> None:

@@ -7,7 +7,7 @@ Plan 03 publication update: 2026-09-04
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-04 the integrated 0.20.1 suite passed 423 tests
+real-device testing. On 2026-09-04 the current post-0.20.1 baseline passed 424 tests
 across 38 files plus strict TypeScript and the Vite production build; art,
 performance-contract and locked desktop checks also passed. Browser QA covered
 the approved front door, contextual OST requests and recoverable completion
@@ -17,6 +17,15 @@ six-second launch smoke in an isolated preview data namespace. Physical-device
 touch/listening/feel, clean-machine installation, signing, qualified low-end
 performance and the broader manual walkthrough remain open. Older sections are
 kept as clearly labelled historical evidence.
+
+The reviewed post-release baseline now also activates Home hero v04. It retains
+the approved v03 composition outside a 2.20% guarded horn/mane transfer,
+centres Rainbow-Horn Unicorn's horn, removes exactly 4,914 pixels from the two
+trapped white background components, and uses a safer exterior-matte threshold
+that preserves the unicorn's pale outer ear. The new derivative and complete
+reconstruction evidence are in
+`source-assets/publication/mgjrpg-02-home-hero-v04-correction-map.json`; v03 is
+an undeleted rollback hold.
 
 Pass 07A measured product baseline commit
 `a34de2f783d2f11c2b543541b4f46ffdf8b13fe0`. It reproduces the 0.19.0 static

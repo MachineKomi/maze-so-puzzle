@@ -18,6 +18,21 @@ Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
 
+## Unreleased Home hero v04 bounded correction
+
+- [x] Preserve the approved v03 composition and transfer only the corrected
+  centred unicorn horn plus immediately adjacent mane through a guarded mask.
+- [x] Remove the two measured enclosed white background islands without
+  globally erasing intentional white fur, bone, paper, stars, or highlights.
+- [x] Verify the pale outer ear on dark and mint backgrounds and retain the
+  existing CSS separation glow.
+- [x] Publish a versioned 1024x768 lossless WebP and retain v03 as a Plan 12
+  rollback hold; overwrite or delete nothing.
+- [x] Pass the deterministic rebuild and focused alpha/provenance tests.
+- [x] Complete the full project, art, performance, desktop, and responsive
+  browser checks before handing the baseline to Agent 01.
+- [ ] Commit, push, and verify the deployed v04 asset path before Agent 01 starts.
+
 ## Playable 0.20.1 corrective FP-ART-OST checkpoint
 
 - [x] Runtime source committed and pushed as

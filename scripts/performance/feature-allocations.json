@@ -98,6 +98,20 @@
       "dependencies": "Immutable v0.20.1 release checkpoint, direct Human correction, mgjrpg-02 rendering contract, deterministic Batch 28 publisher, and Pass 07A allocation policy.",
       "notes": "The 600-byte JavaScript allowance leaves 41 bytes for deterministic compression variance. Public bytes equal the two exact lossless WebP derivatives and authorize no unrelated media. Their 524,288-byte decoded RGBA upper-bound sum is reported separately and is not a simultaneous-residency claim. The friend redistribution adds no runtime media and preserves every solver-validated ordinary/perfect route."
     },
+    {
+      "id": "art-post-v0201-home-hero-v04-bounded-correction",
+      "owner": "art",
+      "status": "approved",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 712976,
+      "reason": "The Human-requested Home hero v04 correction preserves the approved v03 composition outside one guarded horn/mane mask, centres Rainbow-Horn Unicorn's horn, and removes the two remaining enclosed white matte islands without eroding pale foreground materials. The candidate adds exactly one 712,976-byte versioned lossless WebP and no compressed JavaScript or CSS growth.",
+      "evidencePath": "docs/PERFORMANCE_BUDGETS.md#post-v0201-home-hero-v04-correction-allocation",
+      "reviewBy": "2026-10-04",
+      "rollbackPoint": "Restore the home-hero-splash catalogue pointer to /assets/mgjrpg-02/brand/home-hero-splash-v03-front-door-1024-r01.webp and retain every Batch 29 source, prompt, mask measurement and derivative until Plan 12.",
+      "dependencies": "Accepted additive checkpoint 556542e38f1e31a868a1ec6e382041db5ee887e6, direct Human screenshot correction, deterministic Batch 29 publisher, and Pass 07A allocation policy.",
+      "notes": "The 3,145,728-byte decoded RGBA upper bound is a per-file delivery bound, not an assertion of duplicate simultaneous residency. The allocation authorizes no unrelated media, audio, JavaScript or CSS growth."
+    },
     { "owner": "lighting", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include reference and low-end frame-time cohorts." },
     { "owner": "vfx", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include overlap stress and reduced-motion coverage." },
     { "owner": "animation", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include compositing/layer evidence and idle-cost checks." },

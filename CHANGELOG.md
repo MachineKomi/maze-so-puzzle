@@ -8,6 +8,10 @@ than promising long-term save or API compatibility.
 
 ### Changed
 
+- The Home hero now has a correctly centred Rainbow-Horn Unicorn horn and a
+  complete transparent cutout. Two trapped white background pockets are
+  removed while pale fur, bone, paper, stars, highlights, and the unicorn's
+  outer ear remain intact; the previous v03 art stays available for rollback.
 - Garden Goblin and Violet Moon now use freshly authored, transparent,
   registered `mgjrpg-02` sprites. This corrects the v0.20.1 audit's mistaken
   description of them as intentional legacy-art exceptions; the v0.20.1 tag

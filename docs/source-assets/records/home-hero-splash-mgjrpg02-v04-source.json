@@ -1,0 +1,232 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "home-hero-splash-mgjrpg02-v04-source",
+  "id": "home-hero-splash",
+  "artVersion": 4,
+  "family": "brand",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-home-hero-bounded-correction-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-29-home-hero-splash-v04-centred-horn",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "2026-09-04",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md",
+        "sha256": "cf6f115a3a9b560b23000da368e19602d32525a6692aaa2d07bd1236714ee964"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "edit-target",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-27-v0201-corrective-art/home-hero-splash-v03-alpha-correction-generator-original.png",
+          "sha256": "89ff598faf61d0118cd5447a5149b7f778c5890f650f329df1cf5b5ad2b87c71"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-75d90974-e6ac-4910-b0d5-9da045b09abd.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-centered-horn-generator-original.png",
+          "sha256": "cad86a60cd7f2547eb3013c2eafb983ed2270f88b76a31948f19dcd0c756c672",
+          "bytes": 2228180,
+          "disposition": "selected",
+          "reason": "The centred horn and immediately adjacent mane are transferred through the recorded deterministic mask; the full generated frame is not published."
+        },
+        {
+          "outputId": "exec-c19c9ebb-c7fa-48d9-a476-ee12ed49f4a2.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-rejected-checkerboard-generator-original.png",
+          "sha256": "203857c22996db7279ca1cba665e7679bac850cdcb69c74ed8d8f5426e9ccbf0",
+          "bytes": 2093129,
+          "disposition": "rejected",
+          "reason": "Opaque checkerboard and broader redraw drift; retained only as provenance evidence."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Exact prompts, output IDs, bounded transfer, and rejection rationale are preserved in Batch 29."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md",
+      "sha256": "cf6f115a3a9b560b23000da368e19602d32525a6692aaa2d07bd1236714ee964"
+    },
+    "outputIds": [
+      "exec-75d90974-e6ac-4910-b0d5-9da045b09abd.png",
+      "exec-c19c9ebb-c7fa-48d9-a476-ee12ed49f4a2.png"
+    ],
+    "notes": "Built-in image generation supplied the horn donor; all other publication work is deterministic."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-27-v0201-corrective-art/home-hero-splash-v03-alpha-correction-generator-original.png",
+      "sha256": "89ff598faf61d0118cd5447a5149b7f778c5890f650f329df1cf5b5ad2b87c71",
+      "bytes": 1965875,
+      "relationship": "approved v03 composition and identity authority",
+      "evidence": "Preserved pixel-for-pixel outside the bounded transfer mask."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-centered-horn-generator-original.png",
+      "sha256": "cad86a60cd7f2547eb3013c2eafb983ed2270f88b76a31948f19dcd0c756c672",
+      "bytes": 2228180,
+      "relationship": "selected bounded horn donor",
+      "evidence": "Only recorded mask pixels can enter the composite."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-rejected-checkerboard-generator-original.png",
+      "sha256": "203857c22996db7279ca1cba665e7679bac850cdcb69c74ed8d8f5426e9ccbf0",
+      "bytes": 2093129,
+      "relationship": "rejected opaque checkerboard output",
+      "evidence": "Never used as an edit target or runtime source."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-composited-white-master.png",
+      "sha256": "c72ec41ac503caf5b06f099ead8d9b13b05d35a0fb788889ce2b1e7940e5953a",
+      "bytes": 1888220,
+      "relationship": "deterministic bounded white-background composite",
+      "evidence": "Approved v03 frame plus recorded horn/mane transfer only."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-transparent-master.png",
+      "sha256": "d0d5f78cc0ee6dc94825a79d94fb82c8d930dbc2960160bc564c58ba4e476f11",
+      "bytes": 2111445,
+      "relationship": "deterministic transparent delivery master",
+      "evidence": "Exterior white matte and exactly two guarded enclosed components removed."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "front-door-hero-1024",
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v04-front-door-1024-r01.webp",
+      "sha256": "4aa1b8b108269d1f58a3204330b0e7d7cda24f5db205a0d3e69cb5f92d012034",
+      "bytes": 712976,
+      "width": 1024,
+      "height": 768,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "profile": "front-door-hero-1024",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0",
+        "options": {
+          "lossless": true,
+          "quality": 88,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "hero-splash",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0546875,
+      0.01171875,
+      0.91113281,
+      0.97005208
+    ],
+    "safeInset": [
+      0.01171875,
+      0.034179689999999985,
+      0.018229170000000017,
+      0.0546875
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-centered-horn-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "front-door-hero-1024",
+        "outputPath": "public/assets/mgjrpg-02/brand/home-hero-splash-v04-front-door-1024-r01.webp",
+        "width": 1024,
+        "height": 768,
+        "format": "webp",
+        "maxEncodedBytes": 1048576,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 88,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "edge-connected",
+      "rgb": [
+        253,
+        253,
+        253
+      ],
+      "tolerance": 32
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "bounded-generative-correction-and-deterministic-delivery-processing",
+      "description": "Transfer only the centred horn and minimum adjacent mane through a guarded mask; remove exterior and two named enclosed white matte regions; preserve intentional white materials; premultiplied resize and lossless WebP encode.",
+      "script": "scripts/art_pipeline/mgjrpg02_home_hero_v04_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project author",
+    "approvedAt": "2026-09-04T00:00:00+01:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v13/human-decision.json",
+    "evidenceSha256": "bfbb036865c62bbcb5f42b3b4f82834146abba57c628eca716605e7d9920bc82"
+  },
+  "knownUnknowns": [
+    "Generator model build and seed were not exposed by the built-in image generation response."
+  ],
+  "rights": {
+    "originClaim": "Created for Maze so Puzzle from project-owned prompts and internal references.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Human project author",
+    "notes": "No named living artist or proprietary character was requested."
+  },
+  "rollback": {
+    "method": "Restore the home-hero-splash catalogue pointer to /assets/mgjrpg-02/brand/home-hero-splash-v03-front-door-1024-r01.webp."
+  }
+}

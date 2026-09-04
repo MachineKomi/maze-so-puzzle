@@ -11,6 +11,9 @@ correction, not the immutable `v0.20.1` tag by itself. Consume the final-style
 Goblin and Violet Moon catalogue entries and the complete 32-species authored
 campaign roster (Unicorn in Maze 1; Tea-Time Skeleton in Maze 2). Do not restore
 the prior legacy pointers or hard-code UI around the former repeated roster.
+Consume Home hero v04 as the current front-door authority: its two trapped
+white matte islands are cleared and Rainbow-Horn Unicorn's horn is centred.
+Do not restore the v03 pointer or re-run broad chroma-key removal.
 
 ### Adopted product amendments
 

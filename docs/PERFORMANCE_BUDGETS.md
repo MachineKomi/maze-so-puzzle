@@ -407,6 +407,28 @@ prompt, derivative, measurement and rollback evidence is recorded in
 `docs/source-assets/publication/mgjrpg-02-post-v0201-active-refresh-map.json`.
 Superseded Goblin and Violet Moon files remain rollback holds for Plan 12.
 
+## Post-v0.20.1 Home hero v04 correction allocation
+
+This bounded source checkpoint builds on accepted additive baseline
+`556542e38f1e31a868a1ec6e382041db5ee887e6`. It publishes one versioned lossless
+WebP: the v03 composition with only the centred unicorn horn/mane correction,
+plus a guarded transparent cutout that removes the two remaining white matte
+islands without eroding pale foreground materials.
+
+| Deterministic measure | Accepted additive limit | Corrected candidate | Delta | Allocation |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, gzip level 9 | 134,518 B | 134,479 B | -39 B | 0 B |
+| CSS, gzip level 9 | 30,227 B | 30,177 B | -50 B | 0 B |
+| All public runtime files | 152,168,739 B | 152,881,715 B | +712,976 B | 712,976 B |
+| New versioned runtime art | 0 | 1 file / 712,976 B | +1 / +712,976 B | Same public allocation |
+| New decoded-image upper bound | 0 | 3,145,728 B | +3,145,728 B | Reported residency risk |
+
+The exact source, bounded transfer mask, alpha-component measurements,
+derivative hash, and rollback path are recorded in
+`docs/source-assets/publication/mgjrpg-02-home-hero-v04-correction-map.json`.
+The allocation authorizes no JavaScript, CSS, audio, or unrelated media growth.
+The v03 runtime file remains an undeleted Plan 12 rollback hold.
+
 ## Current resource inventory
 
 The reviewed static inventory is
