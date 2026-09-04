@@ -153,6 +153,6 @@
     "Signed installer/package and OS shell/taskbar icon inspection",
     "Plan 01 integration of the dormant layered hero and exact wordmark"
   ],
-  "gitDiffCheck": "pending final staged-tree check",
-  "commit": "recorded by the Git commit containing this report"
+  "gitDiffCheck": "pass; both working-tree and staged-tree checks returned no whitespace errors before publication",
+  "publicationCommit": "ae3e421c2db4c24dfa7d527a18e6f7bac60df30f"
 }
