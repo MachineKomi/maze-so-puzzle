@@ -61,10 +61,29 @@ def _prepare(
     size = (int(profile["width"]), int(profile["height"]))
     if operation == "cutout-resize":
         extraction = build.get("backgroundExtraction", {"mode": "native-alpha"})
+        extraction_mode = str(extraction.get("mode", "native-alpha"))
+        if extraction_mode == "flat-impossible-matte":
+            # The production matte solver was introduced with Batch 01 and is
+            # recorded parametrically in each strict-v2 source record. Importing
+            # it here keeps historical batch code and forward rebuilds bit-identical.
+            from mgjrpg02_batch01 import extract_uniform_matte
+
+            matte_rgb = extraction.get("rgb")
+            if not isinstance(matte_rgb, list) or len(matte_rgb) != 3:
+                raise ValueError("flat-impossible-matte requires an RGB triplet")
+            extracted, _measurement = extract_uniform_matte(
+                source,
+                matte_rgb,
+                clear_distance=float(extraction.get("clearDistance", 48)),
+                opaque_distance=float(extraction.get("opaqueDistance", 144)),
+                minimum_component_pixels=int(extraction.get("minimumComponentPixels", 1)),
+            )
+            source = extracted
+            extraction_mode = "native-alpha"
         return prepare_cutout(
             source,
             size,
-            extraction_mode=str(extraction.get("mode", "native-alpha")),
+            extraction_mode=extraction_mode,
             background_rgb=extraction.get("rgb"),
             background_tolerance=int(extraction.get("tolerance", 0)),
             clear_alpha_below=int(profile.get("clearAlphaBelow", 2)),
@@ -454,7 +473,7 @@ def _validate_mgjrpg02_staged_pixels(
                 "mgjrpg-02 terrain-boundary outputs require periodic or opaque-resize "
                 "builds; alpha cutout operations can create a forbidden actor-like enclosure"
             )
-        if rgba.getchannel("A").getextrema() != (255, 255):
+        if record.get("family") != "dressing" and rgba.getchannel("A").getextrema() != (255, 255):
             raise ValueError("mgjrpg-02 terrain-boundary outputs must be fully opaque")
 
 
@@ -537,6 +556,10 @@ def build_record(
             staged_path = Path(stage) / output_path.name
             with Image.open(source_path) as source:
                 prepared = _prepare(source, str(build["operation"]), profile, build)
+            if record.get("recipeVersion") == MGJRPG_02_RECIPE_ID:
+                from mgjrpg02_batch01 import normalize_visible_black
+
+                prepared, _normalized_black_pixels = normalize_visible_black(prepared)
             encoder = save_image(
                 prepared,
                 staged_path,

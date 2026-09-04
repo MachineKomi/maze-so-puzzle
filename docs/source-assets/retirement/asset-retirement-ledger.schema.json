@@ -17,7 +17,7 @@
   ],
   "properties": {
     "$schema": { "const": "./asset-retirement-ledger.schema.json" },
-    "schemaVersion": { "const": 1 },
+    "schemaVersion": { "const": 2 },
     "ledgerId": { "const": "plan03-static-art-retirement" },
     "createdAt": { "type": "string", "format": "date-time" },
     "lastAuditedAt": { "type": "string", "format": "date-time" },
@@ -111,7 +111,7 @@
         "path": { "type": "string", "minLength": 1 },
         "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "bytes": { "type": "integer", "minimum": 1 },
-        "kind": { "enum": ["partial-master", "runtime-sole-copy"] }
+        "kind": { "enum": ["source-master", "partial-master", "runtime-sole-copy"] }
       }
     },
     "reference": {
@@ -125,7 +125,10 @@
             "generated-manifest",
             "validator-classification",
             "processor-input",
-            "processor-output"
+            "processor-output",
+            "publication-map",
+            "publication-report",
+            "runtime-catalogue"
           ]
         },
         "path": { "type": "string", "minLength": 1 },
@@ -179,9 +182,23 @@
       ],
       "properties": {
         "entryId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
-        "assetPath": { "type": "string", "pattern": "^public/assets/[A-Za-z0-9._-]+$" },
-        "family": { "enum": ["cage", "terrain", "hazard"] },
-        "classification": { "const": "superseded-runtime-orphan-candidate" },
+        "assetPath": {
+          "type": "string",
+          "pattern": "^public/assets/(?:[A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+$"
+        },
+        "family": {
+          "enum": [
+            "character", "friend", "enemy", "weapon", "item", "cage",
+            "lock", "portal", "reward", "terrain", "dressing", "hazard",
+            "story", "navigation", "brand"
+          ]
+        },
+        "classification": {
+          "enum": [
+            "superseded-runtime-orphan-candidate",
+            "superseded-runtime-rollback-candidate"
+          ]
+        },
         "state": { "$ref": "#/$defs/state" },
         "eligibleForPlan12": { "type": "boolean" },
         "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
@@ -204,7 +221,10 @@
         "replacementPaths": {
           "type": "array",
           "minItems": 1,
-          "items": { "type": "string", "pattern": "^public/assets/[A-Za-z0-9._-]+$" },
+          "items": {
+            "type": "string",
+            "pattern": "^public/assets/(?:[A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+$"
+          },
           "uniqueItems": true
         },
         "preservation": {
@@ -218,7 +238,7 @@
             "gitRestore"
           ],
           "properties": {
-            "sourceStatus": { "enum": ["partial", "legacy-runtime-only"] },
+            "sourceStatus": { "enum": ["source-backed", "partial", "legacy-runtime-only"] },
             "sourceRecordPath": {
               "type": "string",
               "pattern": "^docs/source-assets/records/[a-z0-9-]+-source\\.json$"
@@ -234,7 +254,10 @@
               "additionalProperties": false,
               "required": ["path", "firstSeenCommit", "method"],
               "properties": {
-                "path": { "type": "string", "pattern": "^public/assets/[A-Za-z0-9._-]+$" },
+                "path": {
+                  "type": "string",
+                  "pattern": "^public/assets/(?:[A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+$"
+                },
                 "firstSeenCommit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
                 "method": { "type": "string", "minLength": 1 }
               }
@@ -248,7 +271,7 @@
         },
         "archiveRelativePath": {
           "type": "string",
-          "pattern": "^payload/public/assets/[A-Za-z0-9._-]+$"
+          "pattern": "^payload/public/assets/(?:[A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+$"
         },
         "retirementEvidence": {
           "type": "object",
@@ -294,6 +317,28 @@
                   "external-backup-confirmed",
                   "retired-from-runtime"
                 ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "classification": { "const": "superseded-runtime-rollback-candidate" }
+            },
+            "required": ["classification"]
+          },
+          "then": {
+            "properties": {
+              "state": { "const": "rollback-hold" },
+              "eligibleForPlan12": { "const": false },
+              "currentReferences": {
+                "contains": {
+                  "type": "object",
+                  "properties": { "kind": { "const": "publication-map" } },
+                  "required": ["kind"]
+                },
+                "minContains": 1
               }
             }
           }

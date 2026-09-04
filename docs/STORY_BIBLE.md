@@ -68,11 +68,12 @@ historical reference, not an immutable silhouette.
 
 The Human approved Candidate C as the canonical static Ame v02 design direction
 on 2026-09-03 after reviewing its comparison, actual-size, and model-study
-proofs. The source-only identity and construction are canon; the current runtime
-image remains historical v01 until Plan 03 proves and selects the versioned
-runtime derivative. Portrait, story, title, UI, animation, and promotional art
-must derive from the approved model sheet without treating design approval as
-automatic approval of their pixels, runtime integration, or rights review.
+proofs. Its identity and construction are canon. Plan 03's v6 publication now
+selects the approved versioned Ame v02 field sprite and portrait at runtime;
+the v01 images remain rollback history. New story, title, UI, animation, and
+promotional art must still derive from the approved model sheet and receive its
+own pixel, runtime, rights, and context review rather than inheriting approval
+automatically.
 
 ### Professor Poggle — Cartographer of Almost Everywhere
 

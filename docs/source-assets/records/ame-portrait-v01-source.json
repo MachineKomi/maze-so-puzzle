@@ -5,7 +5,7 @@
   "id": "ame-portrait",
   "artVersion": 1,
   "family": "story",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "legacy-runtime-only",
   "approvalStatus": "historical",
   "validationProfile": "legacy-observed",
@@ -35,7 +35,7 @@
       "decodedBytesUpperBound": 1048576,
       "profile": "legacy-runtime",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "story-or-level-entry",
       "encoder": {
         "name": "unknown-historical-encoder",

@@ -65,7 +65,7 @@ export const WEAPON_STYLE_IDS = [
   "leaf-blade",
   "sun-mallet",
   "comet-spear",
-  "bubble-bow",
+  "bubble-ring-blade",
   "cupcake-mace",
 ] as const;
 export type WeaponStyle = (typeof WEAPON_STYLE_IDS)[number];

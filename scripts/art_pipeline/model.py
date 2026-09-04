@@ -44,6 +44,7 @@ VALIDATION_PROFILES = {"legacy-observed", "strict-v1", "strict-v2"}
 PROMPT_FIDELITIES = {"exact", "template-substitution", "concise", "unknown"}
 ART_RECIPE_SCHEMA = "maze-art-recipe/v1"
 CANARY_REVIEW_SCHEMA = "maze-art-canary-review/v1"
+RIGHTS_PROVENANCE_REVIEW_SCHEMA = "maze-art-rights-provenance-review/v1"
 GENERATION_BATCH_SCHEMA = "maze-art-generation-batch/v1"
 MGJRPG_02_RECIPE_ID = "mgjrpg-02"
 MGJRPG_02_RENDERING_PROFILE = "storybook-local-contour-v1"
@@ -385,13 +386,20 @@ def validate_record_shape(record: dict[str, Any], label: str) -> list[str]:
                     errors.append(
                         f"mgjrpg-02 requires canary review {MGJRPG_02_REVIEW_ID}"
                     )
-                expected_treatment = MGJRPG_02_TREATMENT_BY_FAMILY.get(
-                    str(record.get("family", ""))
-                )
-                if rendering_contract.get("treatmentClass") != expected_treatment:
+                family = str(record.get("family", ""))
+                expected_treatment = MGJRPG_02_TREATMENT_BY_FAMILY.get(family)
+                actual_treatment = rendering_contract.get("treatmentClass")
+                treatment_matches = actual_treatment == expected_treatment
+                # Periodic liquid fields are terrain boundaries; transparent
+                # holes and spike sheets are ground-overlay cutouts. Both are
+                # hazards, but only the latter may use a subject-local contour.
+                if family == "hazard" and actual_treatment == "character-contour":
+                    treatment_matches = True
+                if not treatment_matches:
                     errors.append(
                         "mgjrpg-02 treatmentClass must be "
                         f"{expected_treatment!r} for family {record.get('family')!r}"
+                        + (" (or 'character-contour' for a transparent ground overlay)" if family == "hazard" else "")
                     )
         if isinstance(generation_runs, list):
             run_ids: list[str] = []
@@ -872,8 +880,57 @@ def validate_recipe_shape(recipe: Any, label: str) -> list[str]:
     return [f"{label}: {error}" for error in errors]
 
 
+def validate_rights_review_shape(review: Any, label: str) -> list[str]:
+    """Validate a technical rights/provenance review stored beside art reviews."""
+
+    errors: list[str] = []
+    if not isinstance(review, dict):
+        return [f"{label}: review must be an object"]
+    required_strings = (
+        "reviewId",
+        "reviewedAt",
+        "reviewedBy",
+        "licenceStatus",
+        "scope",
+        "conclusion",
+        "limitations",
+    )
+    if review.get("schema") != RIGHTS_PROVENANCE_REVIEW_SCHEMA:
+        errors.append(f"schema must be {RIGHTS_PROVENANCE_REVIEW_SCHEMA!r}")
+    for field in required_strings:
+        value = review.get(field)
+        if not isinstance(value, str) or not value.strip():
+            errors.append(f"{field} must be a nonempty string")
+    evidence = review.get("evidence")
+    required_evidence = {
+        "generationProvider",
+        "promptOwnership",
+        "referenceBoundary",
+        "forbiddenRequests",
+        "humanAuthority",
+    }
+    if not isinstance(evidence, dict):
+        errors.append("evidence must be an object")
+    else:
+        for field in sorted(required_evidence):
+            value = evidence.get(field)
+            if not isinstance(value, str) or not value.strip():
+                errors.append(f"evidence.{field} must be a nonempty string")
+    selected_source_count = review.get("selectedSourceCount")
+    if (
+        not isinstance(selected_source_count, int)
+        or isinstance(selected_source_count, bool)
+        or selected_source_count < 1
+    ):
+        errors.append("selectedSourceCount must be a positive integer")
+    return [f"{label}: {error}" for error in errors]
+
+
 def validate_review_shape(review: Any, label: str) -> list[str]:
-    """Validate the global canary decision fields while allowing additive evidence."""
+    """Validate canary or technical provenance reviews by declared schema."""
+
+    if isinstance(review, dict) and review.get("schema") == RIGHTS_PROVENANCE_REVIEW_SCHEMA:
+        return validate_rights_review_shape(review, label)
 
     errors: list[str] = []
     if not isinstance(review, dict):

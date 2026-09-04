@@ -48,6 +48,7 @@ import {
   movePlayer,
   pointsEqual,
 } from "./game/engine";
+import { heldWeaponStyle } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
 import { CURATED_LEVELS } from "./game/levels";
@@ -2770,7 +2771,7 @@ function App() {
                 >
                   <div className="battle-combatant battle-ame" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
                     <img className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    {game.hasSword && <img className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                    {game.hasSword && <img className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                   </div>
                   <div className="battle-combatant battle-enemy" style={cameraLayerStyle(battlePresentation.at, cameraWindow)}>
@@ -2860,7 +2861,7 @@ function App() {
                   <span className="portal-presentation-rings"><i /><i /><i /></span>
                   <div className="portal-presentation-body">
                     <img className="portal-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    {game.hasSword && <img className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                    {game.hasSword && <img className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "portal")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                   </div>
                   <span className="portal-presentation-sparkles">✦ <b>{resolvePortalArt(portalPresentation.pair).motif}</b> ✦</span>
@@ -2873,7 +2874,7 @@ function App() {
                 aria-hidden="true"
               >
                 <img className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                {game.hasSword && <img className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                {game.hasSword && <img className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
                 <span className="power-badge player-power">{displayedPower}</span>
               </div>
 
@@ -3050,7 +3051,7 @@ function App() {
                 setHelpOpen(true);
                 playSound("menu", muted);
               }}><img src={ASSETS.navHelp} alt="" /><span>Help</span></button>
-              <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={toggleSound}><img src={ASSETS.navSound} alt="" /><span>Sound</span></button>
+              <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={toggleSound}><img src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /><span>Sound</span></button>
               <button aria-pressed={restartArmed} className={restartArmed ? "restart-armed" : ""} onClick={armRestart}><img src={ASSETS.navRestart} alt="" /><span>{restartArmed ? "Again!" : "Restart"}</span></button>
             </footer>
           </aside>
@@ -3394,7 +3395,7 @@ function TitleScreen({
         aria-label={muted ? "Turn sound on" : "Turn sound off"}
         aria-pressed={!muted}
         onClick={onToggleSound}
-      ><img src={ASSETS.navSound} alt="" /></button>
+      ><img src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /></button>
 
       <div className="title-copy">
         <span className="title-eyebrow">A gentle adventure for Ame</span>
@@ -3516,7 +3517,7 @@ function AchievementsScreen({
           <p>Every star, stamp, and friend from the journey.</p>
         </div>
         <div className="book-header-actions">
-          <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={onToggleSound}><img src={ASSETS.navSound} alt="" /></button>
+          <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={onToggleSound}><img src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /></button>
           {activeRun && <button className="book-resume" onClick={onResume}><img src={ASSETS.goal} alt="" /> Resume</button>}
           <button onClick={onSurprise}><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /> New maze</button>
         </div>

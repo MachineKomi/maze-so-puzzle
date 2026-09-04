@@ -179,8 +179,9 @@ Turn the iPad sideways to play.
   always jumps straight to the opposite landing, so the centre controls both
   directions without turning or pathfinding mid-air.
 - The visual catalogue adds Otter, Lamb, and Capybara friends; Acorn Knight,
-  Bubble Dragon, and Candy Mimic enemies; plus Comet Spear, Bubble Bow, and
-  Cupcake Mace weapons.
+  Bubble Dragon, and Candy Mimic enemies; plus Comet Spear, Bubble Ring Blade,
+  and Cupcake Mace weapons. `bubble-bow` remains only a one-way historical
+  saved-content alias.
 
 - A hard 24×24 maximum for every maze. Procedural topology stays on readable odd
   sizes from 9×9 through 23×23, and authored levels are validated by the same

@@ -8,6 +8,14 @@ import type {
   TerrainThemeId,
   WeaponStyle,
 } from "./game/types";
+import { MGJRPG02_ART } from "./generated/mgjrpg02Art";
+
+/**
+ * Immutable, source-backed Plan 03 delivery records. Runtime catalogues below
+ * are semantic projections of this generated authority; filenames never
+ * decide identity, status, or ordering.
+ */
+export { MGJRPG02_ART };
 
 /** Small compatibility surface used by legacy catalogue families and consumers. */
 export interface ArtReference {
@@ -58,7 +66,9 @@ export type ArtGeometryClass =
   | "standing-portal-goal"
   | "floor-portal"
   | "ground-overlay"
-  | "icon";
+  | "icon"
+  | "periodic-tile"
+  | "portrait";
 
 export interface ArtGeometry {
   readonly class: ArtGeometryClass;
@@ -68,8 +78,43 @@ export interface ArtGeometry {
   /** Canonical reserved inset, ordered top, right, bottom, left. */
   readonly safeInset: NormalizedInsets;
   readonly faceBox?: NormalizedRect;
+  readonly eyeLine?: number;
+  readonly groundLine?: number;
+  readonly floatCenter?: NormalizedPoint;
+  readonly visualCenter?: NormalizedPoint;
   readonly gripPoint?: NormalizedPoint;
   readonly forwardAxisDegrees?: number;
+  /** Weapon canvas size relative to the registered Ame canvas. */
+  readonly heldScale?: number;
+  /** Clockwise CSS rotation applied after the approved source construction. */
+  readonly heldRotationDegrees?: number;
+  /** Local actor-stack order; Ame's body occupies layer 2. */
+  readonly zOrder?: number;
+  readonly baseline?: number;
+  readonly openBay?: NormalizedRect;
+  readonly motifBox?: NormalizedRect;
+  readonly apertureBox?: NormalizedRect;
+  readonly rimBox?: NormalizedRect;
+  readonly voidBox?: NormalizedRect;
+  readonly opticalBounds?: NormalizedRect;
+  readonly modifierBox?: NormalizedRect;
+  readonly tileFootprint?: NormalizedRect;
+  readonly stateFamilyId?: string;
+  readonly stateAnchorBox?: NormalizedRect;
+}
+
+export interface HeldWeaponGeometry extends ArtGeometry {
+  readonly class: "weapon";
+  readonly gripPoint: NormalizedPoint;
+  readonly forwardAxisDegrees: number;
+  readonly heldScale: number;
+  readonly heldRotationDegrees: number;
+  readonly zOrder: number;
+}
+
+export interface WeaponArt extends ArtReference {
+  readonly geometry: HeldWeaponGeometry;
+  readonly runtimeStatus: "active";
 }
 
 /**
@@ -108,6 +153,8 @@ export const TERRAIN_COLOR_FAMILIES = [
 export type TerrainColorFamily = (typeof TERRAIN_COLOR_FAMILIES)[number];
 
 export interface TerrainTextureArt extends ArtReference {
+  readonly sourceRecordId: string;
+  readonly runtimeStatus: Extract<RuntimeArtStatus, "active" | "dormant">;
   /** Width and height of one seamless image repeat, measured in maze tiles. */
   readonly periodTiles: number;
   readonly fallbackColor: string;
@@ -121,6 +168,8 @@ export interface TerrainTextureArt extends ArtReference {
 }
 
 export interface TerrainDressingArt extends ArtReference {
+  readonly sourceRecordId: string;
+  readonly runtimeStatus: "active";
   /** Width and height of the sparse transparent repeat, in maze tiles. */
   readonly periodTiles: number;
   /** Decorations should enrich the material without competing with gameplay. */
@@ -186,9 +235,9 @@ export function areTerrainTexturesCompatible(
     floor.visualLightness - wall.visualLightness >= MIN_TERRAIN_LIGHTNESS_DELTA;
 }
 
-const FLOORS = {
+export const FLOORS = {
   sunnyStone: {
-    src: "/assets/floor-v3.png",
+    ...MGJRPG02_ART["floor-sunny-stone"],
     label: "Sunny stone path",
     periodTiles: 3.4,
     fallbackColor: "#f8d991",
@@ -196,7 +245,7 @@ const FLOORS = {
     visualLightness: 81,
   },
   roseBrick: {
-    src: "/assets/floor-rose-brick-v1.png",
+    ...MGJRPG02_ART["floor-rose-brick"],
     label: "Rose courtyard bricks",
     periodTiles: 4.2,
     fallbackColor: "#efb8ad",
@@ -204,7 +253,7 @@ const FLOORS = {
     visualLightness: 82,
   },
   moonSlate: {
-    src: "/assets/floor-moon-slate-v1.png",
+    ...MGJRPG02_ART["floor-moon-slate"],
     label: "Moonlit slate",
     periodTiles: 3.8,
     fallbackColor: "#aeb9d8",
@@ -212,7 +261,7 @@ const FLOORS = {
     visualLightness: 69,
   },
   meadowGrass: {
-    src: "/assets/floor-meadow-grass-v1.png",
+    ...MGJRPG02_ART["floor-meadow-grass"],
     label: "Flower meadow grass",
     periodTiles: 3.6,
     fallbackColor: "#81c95d",
@@ -220,7 +269,7 @@ const FLOORS = {
     visualLightness: 73,
   },
   woodlandDirt: {
-    src: "/assets/floor-woodland-dirt-v1.png",
+    ...MGJRPG02_ART["floor-woodland-dirt"],
     label: "Woodland pebble trail",
     periodTiles: 3.8,
     fallbackColor: "#d9a36f",
@@ -228,7 +277,7 @@ const FLOORS = {
     visualLightness: 68,
   },
   pearlShell: {
-    src: "/assets/floor-pearl-shell-v1.png",
+    ...MGJRPG02_ART["floor-pearl-shell"],
     label: "Pearl shell mosaic",
     periodTiles: 4.1,
     fallbackColor: "#cfe6eb",
@@ -236,7 +285,7 @@ const FLOORS = {
     visualLightness: 83,
   },
   peachLeafstone: {
-    src: "/assets/floor-peach-leafstone-v1.png",
+    ...MGJRPG02_ART["floor-peach-leafstone"],
     label: "Peach leaf-stone path",
     periodTiles: 4.1,
     fallbackColor: "#f5c6af",
@@ -245,9 +294,9 @@ const FLOORS = {
   },
 } as const satisfies Readonly<Record<string, TerrainTextureArt>>;
 
-const WALLS = {
+export const WALLS = {
   lavenderStone: {
-    src: "/assets/wall-v3.png",
+    ...MGJRPG02_ART["wall-lavender-stone"],
     label: "Lavender stone wall",
     periodTiles: 3.4,
     fallbackColor: "#7775b6",
@@ -255,7 +304,7 @@ const WALLS = {
     visualLightness: 56,
   },
   sandstone: {
-    src: "/assets/wall-sandstone-v1.png",
+    ...MGJRPG02_ART["wall-golden-sandstone"],
     label: "Golden sandstone wall",
     periodTiles: 4.2,
     fallbackColor: "#e5af58",
@@ -263,7 +312,7 @@ const WALLS = {
     visualLightness: 83,
   },
   mossyRuin: {
-    src: "/assets/wall-mossy-ruin-v1.png",
+    ...MGJRPG02_ART["wall-mossy-ruin"],
     label: "Mossy storybook ruins",
     periodTiles: 4,
     fallbackColor: "#91a96e",
@@ -271,7 +320,7 @@ const WALLS = {
     visualLightness: 71,
   },
   darkDungeon: {
-    src: "/assets/wall-dark-dungeon-v1.png",
+    ...MGJRPG02_ART["wall-dark-dungeon"],
     label: "Moon-dark dungeon wall",
     periodTiles: 4,
     fallbackColor: "#3d3a63",
@@ -279,7 +328,7 @@ const WALLS = {
     visualLightness: 19,
   },
   hedge: {
-    src: "/assets/wall-hedge-v1.png",
+    ...MGJRPG02_ART["wall-hedge"],
     label: "Flowering garden hedge",
     periodTiles: 3.6,
     fallbackColor: "#3f9c55",
@@ -287,7 +336,7 @@ const WALLS = {
     visualLightness: 60,
   },
   amethystCrystal: {
-    src: "/assets/wall-amethyst-crystal-v1.png",
+    ...MGJRPG02_ART["wall-amethyst-crystal"],
     label: "Amethyst crystal wall",
     periodTiles: 4.1,
     fallbackColor: "#6d4a9b",
@@ -295,7 +344,7 @@ const WALLS = {
     visualLightness: 33,
   },
   berryBramble: {
-    src: "/assets/wall-berry-bramble-v1.png",
+    ...MGJRPG02_ART["wall-berry-bramble"],
     label: "Enchanted berry bramble",
     periodTiles: 4.1,
     fallbackColor: "#4c284d",
@@ -306,25 +355,25 @@ const WALLS = {
 
 export const TERRAIN_DRESSING_ART = {
   garden: {
-    src: "/assets/terrain-dressing-garden-v1.png",
+    ...MGJRPG02_ART["terrain-dressing-garden"],
     label: "Tiny garden flowers and moss",
     periodTiles: 13,
     opacity: 0.16,
   },
   vines: {
-    src: "/assets/terrain-dressing-vines-v1.png",
+    ...MGJRPG02_ART["terrain-dressing-vines"],
     label: "Soft ivy and moss",
     periodTiles: 13,
     opacity: 0.17,
   },
   crystal: {
-    src: "/assets/terrain-dressing-crystal-v1.png",
+    ...MGJRPG02_ART["terrain-dressing-crystal"],
     label: "Pearls and crystal glints",
     periodTiles: 14,
     opacity: 0.08,
   },
   autumn: {
-    src: "/assets/terrain-dressing-autumn-v1.png",
+    ...MGJRPG02_ART["terrain-dressing-autumn"],
     label: "Tiny leaves and acorn confetti",
     periodTiles: 14,
     opacity: 0.09,
@@ -335,6 +384,7 @@ export type HazardKind = Extract<TerrainKind, "water" | "lava" | "poison" | "hol
 
 export interface HazardArt extends ArtReference {
   readonly id: string;
+  readonly sourceRecordId: string;
   /** Null for a single-tile overlay rather than a periodic fill. */
   readonly periodTiles: number | null;
   /** Alpha-weighted mean sRGB colour of the inspected runtime asset. */
@@ -355,8 +405,8 @@ export interface HazardArt extends ArtReference {
  */
 export const HAZARD_ART = {
   water: {
+    ...MGJRPG02_ART["terrain-water"],
     id: "terrain-water",
-    src: "/assets/water-v2.png",
     label: "Sparkling water",
     periodTiles: 4.6,
     fallbackColor: "#4eddbf",
@@ -367,8 +417,8 @@ export const HAZARD_ART = {
     runtimeStatus: "active",
   },
   lava: {
+    ...MGJRPG02_ART["terrain-lava"],
     id: "terrain-lava",
-    src: "/assets/lava-v2.png",
     label: "Warm lava",
     periodTiles: 4.6,
     fallbackColor: "#fc834f",
@@ -379,8 +429,8 @@ export const HAZARD_ART = {
     runtimeStatus: "active",
   },
   poison: {
+    ...MGJRPG02_ART["terrain-poison"],
     id: "terrain-poison",
-    src: "/assets/terrain-poison-v1.png",
     label: "Purple poison",
     periodTiles: 4.2,
     fallbackColor: "#bb85e5",
@@ -391,8 +441,8 @@ export const HAZARD_ART = {
     runtimeStatus: "active",
   },
   hole: {
+    ...MGJRPG02_ART["ground-hole"],
     id: "ground-hole",
-    src: "/assets/ground-hole-v1.png",
     label: "Ground hole",
     periodTiles: null,
     fallbackColor: "#5f3f43",
@@ -508,93 +558,91 @@ export const TERRAIN_THEMES = {
   },
 } as const satisfies Readonly<Record<TerrainThemeId, TerrainThemeArt>>;
 
-/**
- * Current shipped Ame, retained as historical runtime art after Candidate C's
- * v2 identity/model-sheet design approval. The versioned v2 derivative,
- * live-context review, rights review, and catalogue switch remain pending.
- * Visible bounds were measured at alpha >= 8 on the 512 x 512 PNG.
- */
+/** Candidate C identity with the Human-approved Fresh B-led 01 rendering. */
 export const AME_ART = {
   id: "ame",
   family: "character",
   label: "Ame",
-  artVersion: 1,
-  recipeVersion: "pre-mgjrpg-unversioned",
-  src: "/assets/ame.png",
+  artVersion: MGJRPG02_ART.ame.artVersion,
+  recipeVersion: MGJRPG02_ART.ame.recipeVersion,
+  src: MGJRPG02_ART.ame.src,
   variants: [{
-    src: "/assets/ame.png",
-    width: 512,
-    height: 512,
-    format: "png",
+    src: MGJRPG02_ART.ame.src,
+    width: MGJRPG02_ART.ame.width,
+    height: MGJRPG02_ART.ame.height,
+    format: "webp",
     usage: "field",
-    minDisplayPx: 1,
-    maxDisplayPx: 512,
+    minDisplayPx: 40,
+    maxDisplayPx: 103,
   }],
   geometry: {
     class: "grounded-actor",
-    pivot: [0.5, 0.9],
-    visibleBounds: [0.23828125, 0.013671875, 0.51953125, 0.951171875],
-    safeInset: [0.08, 0.08, 0.06, 0.08],
-    gripPoint: [0.69, 0.607],
+    pivot: MGJRPG02_ART.ame.geometry.pivot,
+    visibleBounds: MGJRPG02_ART.ame.geometry.visibleBounds,
+    safeInset: MGJRPG02_ART.ame.geometry.safeInset,
+    faceBox: [0.39, 0.19, 0.25, 0.20],
+    eyeLine: 0.28,
+    groundLine: 0.90,
+    gripPoint: [0.66, 0.58],
     forwardAxisDegrees: 0,
   },
-  alphaMode: "straight",
+  alphaMode: MGJRPG02_ART.ame.alphaMode,
   view: "front-three-quarter",
-  lightProfile: "upper-left-soft",
+  lightProfile: "neutral-albedo",
   castsRuntimeShadow: true,
-  sourceRecordId: "ame-v01-source",
+  sourceRecordId: MGJRPG02_ART.ame.sourceRecordId,
   runtimeStatus: "active",
 } as const satisfies SpriteArt;
 
 export const WEAPON_ART = {
-  "star-sword": { src: "/assets/sword.png", label: "Star Sword" },
-  "flower-sabre": { src: "/assets/weapon-flower-sabre-v1.png", label: "Flower Sabre" },
-  "moon-wand": { src: "/assets/weapon-moon-wand-v1.png", label: "Moon Wand" },
-  "leaf-blade": { src: "/assets/weapon-leaf-blade-v1.png", label: "Leaf Blade" },
-  "sun-mallet": { src: "/assets/weapon-sun-mallet-v1.png", label: "Sun Mallet" },
-  "comet-spear": { src: "/assets/weapon-comet-spear-v1.png", label: "Comet Spear" },
-  "bubble-bow": { src: "/assets/weapon-bubble-bow-v1.png", label: "Bubble Bow" },
-  "cupcake-mace": { src: "/assets/weapon-cupcake-mace-v1.png", label: "Cupcake Mace" },
-} as const satisfies Readonly<Record<WeaponStyle, ArtReference>>;
+  "star-sword": MGJRPG02_ART["star-sword"],
+  "flower-sabre": MGJRPG02_ART["flower-sabre"],
+  "moon-wand": MGJRPG02_ART["moon-wand"],
+  "leaf-blade": MGJRPG02_ART["leaf-blade"],
+  "sun-mallet": MGJRPG02_ART["sun-mallet"],
+  "comet-spear": MGJRPG02_ART["comet-spear"],
+  "bubble-ring-blade": MGJRPG02_ART["bubble-ring-blade"],
+  "cupcake-mace": MGJRPG02_ART["cupcake-mace"],
+} as const satisfies Readonly<Record<WeaponStyle, WeaponArt>>;
 
 export const ENEMY_ART = {
   goblin: { src: "/assets/goblin.png", label: "Garden Goblin" },
-  "blueberry-slime": { src: "/assets/enemy-blueberry-slime-v1.png", label: "Blueberry Slime" },
-  "mushroom-imp": { src: "/assets/enemy-mushroom-imp-v1.png", label: "Mushroom Imp" },
-  "moon-bat": { src: "/assets/enemy-moon-bat-v1.png", label: "Moon Bat" },
-  "pebble-golem": { src: "/assets/enemy-pebble-golem-v1.png", label: "Pebble Golem" },
-  "acorn-knight": { src: "/assets/enemy-acorn-knight-v1.png", label: "Acorn Knight" },
-  "bubble-dragon": { src: "/assets/enemy-bubble-dragon-v1.png", label: "Bubble Dragon" },
-  "candy-mimic": { src: "/assets/enemy-candy-mimic-v1.png", label: "Candy Mimic" },
-  "cloud-gremlin": { src: "/assets/enemy-cloud-gremlin-v1.webp", label: "Cloud Gremlin" },
-  "pumpkin-sprite": { src: "/assets/enemy-pumpkin-sprite-v1.webp", label: "Pumpkin Sprite" },
-  "clockwork-crab": { src: "/assets/enemy-clockwork-crab-v1.webp", label: "Clockwork Crab" },
-  "jelly-sorcerer": { src: "/assets/enemy-jelly-sorcerer-v1.webp", label: "Jelly Sorcerer" },
+  "blueberry-slime": MGJRPG02_ART["blueberry-slime"],
+  "mushroom-imp": MGJRPG02_ART["mushroom-imp"],
+  "moon-bat": MGJRPG02_ART["moon-bat"],
+  "pebble-golem": MGJRPG02_ART["pebble-golem"],
+  "acorn-knight": MGJRPG02_ART["acorn-knight"],
+  "bubble-dragon": MGJRPG02_ART["bubble-dragon"],
+  "candy-mimic": MGJRPG02_ART["candy-mimic"],
+  "cloud-gremlin": MGJRPG02_ART["cloud-gremlin"],
+  "pumpkin-sprite": MGJRPG02_ART["pumpkin-sprite"],
+  "clockwork-crab": MGJRPG02_ART["clockwork-crab"],
+  "jelly-sorcerer": MGJRPG02_ART["jelly-sorcerer"],
 } as const satisfies Readonly<Record<EnemyStyle, ArtReference>>;
 
 export const ANIMAL_ART = {
-  bunny: { src: "/assets/animal-bunny.png", label: "Bunny" },
-  fox: { src: "/assets/animal-fox.png", label: "Fox" },
-  kitten: { src: "/assets/animal-kitten.png", label: "Kitten" },
-  puppy: { src: "/assets/animal-puppy-v1.png", label: "Puppy" },
-  duckling: { src: "/assets/animal-duckling-v1.png", label: "Duckling" },
-  hedgehog: { src: "/assets/animal-hedgehog-v1.png", label: "Hedgehog" },
-  fawn: { src: "/assets/animal-fawn-v1.png", label: "Fawn" },
-  "red-panda": { src: "/assets/animal-red-panda-v1.png", label: "Red Panda" },
-  otter: { src: "/assets/animal-otter-v1.png", label: "Otter" },
-  lamb: { src: "/assets/animal-lamb-v1.png", label: "Lamb" },
-  capybara: { src: "/assets/animal-capybara-v1.png", label: "Capybara" },
-  chinchilla: { src: "/assets/animal-chinchilla-v1.webp", label: "Chinchilla" },
-  alpaca: { src: "/assets/animal-alpaca-v1.webp", label: "Alpaca" },
-  penguin: { src: "/assets/animal-penguin-v1.webp", label: "Penguin" },
-  koala: { src: "/assets/animal-koala-v1.webp", label: "Koala" },
+  bunny: MGJRPG02_ART.bunny,
+  fox: MGJRPG02_ART.fox,
+  kitten: MGJRPG02_ART.kitten,
+  puppy: MGJRPG02_ART.puppy,
+  duckling: MGJRPG02_ART.duckling,
+  hedgehog: MGJRPG02_ART.hedgehog,
+  fawn: MGJRPG02_ART.fawn,
+  "red-panda": MGJRPG02_ART["red-panda"],
+  otter: MGJRPG02_ART.otter,
+  lamb: MGJRPG02_ART.lamb,
+  capybara: MGJRPG02_ART.capybara,
+  chinchilla: MGJRPG02_ART.chinchilla,
+  alpaca: MGJRPG02_ART.alpaca,
+  penguin: MGJRPG02_ART.penguin,
+  koala: MGJRPG02_ART.koala,
 } as const satisfies Readonly<Record<AnimalSpecies, ArtReference>>;
 
 export const CAGE_ART = {
-  "golden-heart": { src: "/assets/cage-golden-heart-front-v5.webp", label: "Golden Heart Cage" },
-  "storybook-wood": { src: "/assets/cage-storybook-wood-front-v5.webp", label: "Storybook Wooden Cage" },
-  "moon-silver": { src: "/assets/cage-moon-silver-front-v5.webp", label: "Moon Silver Cage" },
-  "garden-vine": { src: "/assets/cage-garden-vine-front-v5.webp", label: "Garden Vine Cage" },
+  "golden-heart": MGJRPG02_ART["golden-heart"],
+  "storybook-wood": MGJRPG02_ART["storybook-wood"],
+  "moon-silver": MGJRPG02_ART["moon-silver"],
+  "garden-vine": MGJRPG02_ART["garden-vine"],
 } as const satisfies Readonly<Record<CageStyle, ArtReference>>;
 
 export interface LockPairArt {
@@ -609,50 +657,44 @@ export interface LockPairArt {
   readonly door: SpriteArt;
 }
 
-function legacyLockSprite(
-  id: string,
-  label: string,
-  src: string,
-  kind: "key" | "door",
-  visibleBounds: NormalizedRect,
-  sourceRecordId = `${id}-v01-source`,
-): SpriteArt {
+type PublishedLockId =
+  | "key-rose-heart"
+  | "key-blue-star"
+  | "key-sunny-sun"
+  | "door-rose-heart"
+  | "door-blue-star"
+  | "door-sunny-sun";
+
+function publishedLockSprite(id: PublishedLockId, kind: "key" | "door"): SpriteArt {
+  const published = MGJRPG02_ART[id];
   const isDoor = kind === "door";
   return {
-    id,
+    id: published.id,
     family: "lock",
-    label,
-    artVersion: 1,
-    recipeVersion: "pre-mgjrpg-unversioned",
-    src,
+    label: published.label,
+    artVersion: published.artVersion,
+    recipeVersion: published.recipeVersion,
+    src: published.src,
     variants: [{
-      src,
-      width: 512,
-      height: 512,
-      format: "png",
+      src: published.src,
+      width: published.width,
+      height: published.height,
+      format: "webp",
       usage: "field",
-      minDisplayPx: 1,
-      maxDisplayPx: 512,
+      minDisplayPx: 40,
+      maxDisplayPx: 103,
     }],
-    geometry: {
-      class: isDoor ? "door-cage" : "item",
-      pivot: isDoor ? [0.5, 0.94] : [0.5, 0.55],
-      visibleBounds,
-      safeInset: isDoor ? [0.06, 0.06, 0.06, 0.06] : [0.1, 0.1, 0.1, 0.1],
-    },
-    alphaMode: "straight",
+    geometry: published.geometry,
+    alphaMode: published.alphaMode,
     view: isDoor ? "front" : "front-three-quarter",
-    lightProfile: "upper-left-soft",
+    lightProfile: "neutral-albedo",
     castsRuntimeShadow: true,
-    sourceRecordId,
+    sourceRecordId: published.sourceRecordId,
     runtimeStatus: "active",
   };
 }
 
-/**
- * Single source of runtime truth for key/door pairs. Visible bounds were
- * measured at alpha >= 8 on each current 512 x 512 PNG.
- */
+/** Single semantic source of runtime truth for matching key/door pairs. */
 export const LOCK_PAIR_ART = {
   red: {
     id: "red",
@@ -662,20 +704,8 @@ export const LOCK_PAIR_ART = {
     motifLabel: "Heart",
     motifToken: "heart",
     glyph: "♥",
-    key: legacyLockSprite(
-      "key-rose-heart",
-      "Rose Heart Key",
-      "/assets/key-rose-heart-v1.png",
-      "key",
-      [0.142578125, 0.021484375, 0.71484375, 0.94140625],
-    ),
-    door: legacyLockSprite(
-      "door-rose-heart",
-      "Rose Heart Door",
-      "/assets/door-rose-heart-v1.png",
-      "door",
-      [0.052734375, 0.00390625, 0.892578125, 0.96484375],
-    ),
+    key: publishedLockSprite("key-rose-heart", "key"),
+    door: publishedLockSprite("door-rose-heart", "door"),
   },
   blue: {
     id: "blue",
@@ -685,22 +715,8 @@ export const LOCK_PAIR_ART = {
     motifLabel: "Star",
     motifToken: "star",
     glyph: "★",
-    key: legacyLockSprite(
-      "key-blue-star",
-      "Blue Star Key",
-      "/assets/star-key.png",
-      "key",
-      [0.115234375, 0.025390625, 0.732421875, 0.935546875],
-      "key-blue-star-v01-source",
-    ),
-    door: legacyLockSprite(
-      "door-blue-star",
-      "Blue Star Door",
-      "/assets/star-door.png",
-      "door",
-      [0.076171875, 0.03125, 0.84765625, 0.935546875],
-      "door-blue-star-v01-source",
-    ),
+    key: publishedLockSprite("key-blue-star", "key"),
+    door: publishedLockSprite("door-blue-star", "door"),
   },
   yellow: {
     id: "yellow",
@@ -710,20 +726,8 @@ export const LOCK_PAIR_ART = {
     motifLabel: "Sun",
     motifToken: "sun",
     glyph: "☀",
-    key: legacyLockSprite(
-      "key-sunny-sun",
-      "Sunny Sun Key",
-      "/assets/key-sunny-sun-v1.png",
-      "key",
-      [0.115234375, 0.0078125, 0.771484375, 0.951171875],
-    ),
-    door: legacyLockSprite(
-      "door-sunny-sun",
-      "Sunny Sun Door",
-      "/assets/door-sunny-sun-v1.png",
-      "door",
-      [0.076171875, 0.00390625, 0.84765625, 0.96484375],
-    ),
+    key: publishedLockSprite("key-sunny-sun", "key"),
+    door: publishedLockSprite("door-sunny-sun", "door"),
   },
 } as const satisfies Readonly<Record<KeyColor, LockPairArt>>;
 
@@ -754,10 +758,136 @@ export const DOOR_ART = {
 } as const satisfies Readonly<Record<KeyColor, SpriteArt>>;
 
 export const PORTAL_ART = {
-  "rose-heart": { src: "/assets/portal-rose-heart-v1.png", label: "Rose Heart Portal", motif: "♥" },
-  "mint-clover": { src: "/assets/portal-mint-clover-v1.png", label: "Mint Clover Portal", motif: "♣" },
+  "rose-heart": { ...MGJRPG02_ART["rose-heart"], motif: "♥" },
+  "mint-clover": { ...MGJRPG02_ART["mint-clover"], motif: "four-leaf clover" },
   "violet-moon": { src: "/assets/portal-violet-moon-v1.png", label: "Violet Moon Portal", motif: "☾" },
 } as const satisfies Readonly<Record<PortalPairId, ArtReference & { readonly motif: string }>>;
+
+export const PICKUP_ART = {
+  potion: MGJRPG02_ART["power-potion"],
+  boots: MGJRPG02_ART["splash-boots"],
+  springBoots: MGJRPG02_ART["spring-boots"],
+  antidoteLeaf: MGJRPG02_ART["antidote-leaf"],
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "active" }>>;
+
+export const TREASURE_CATALOG_ART = {
+  "gold-bag": MGJRPG02_ART["gold-bag"],
+  "gold-chest": MGJRPG02_ART["gold-chest"],
+  "science-gears": MGJRPG02_ART["science-gears"],
+  "science-beaker": MGJRPG02_ART["science-beaker"],
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "active" }>>;
+
+export const GOAL_ART = MGJRPG02_ART.goal;
+
+export const STORY_ART = {
+  amePortrait: MGJRPG02_ART["ame-portrait"],
+  // Professor Poggle and Sprig were explicitly retained in this cutover.
+  professorPoggle: { src: "/assets/story-professor-poggle-v1.webp", label: "Professor Poggle" },
+  sprig: { src: "/assets/story-sprig-v1.webp", label: "Sprig" },
+} as const satisfies Readonly<Record<string, ArtReference>>;
+
+/**
+ * Approved catalogue-only art. These records are intentionally absent from
+ * gameplay unions, generator pools, level placement, progression, and balance.
+ */
+export const FUTURE_FRIEND_ART = {
+  "pitter-patter-parasol": MGJRPG02_ART["pitter-patter-parasol"],
+  lanternling: MGJRPG02_ART.lanternling,
+  "emberdown-phoenix": MGJRPG02_ART["emberdown-phoenix"],
+  "meadowstep-faunling": MGJRPG02_ART["meadowstep-faunling"],
+  "minerva-moon-owl": MGJRPG02_ART["minerva-moon-owl"],
+  "tessera-dolphin": MGJRPG02_ART["tessera-dolphin"],
+  "mallowmusk-aroma-wisp": MGJRPG02_ART["mallowmusk-aroma-wisp"],
+  "breezeling-sylph": MGJRPG02_ART["breezeling-sylph"],
+  "griffin-cub": MGJRPG02_ART["griffin-cub"],
+  "emberbelly-dragonling": MGJRPG02_ART["emberbelly-dragonling"],
+  "cloudstep-pegasus": MGJRPG02_ART["cloudstep-pegasus"],
+  "three-tumble-cerberus": MGJRPG02_ART["three-tumble-cerberus"],
+  "riddlekit-sphinx": MGJRPG02_ART["riddlekit-sphinx"],
+  "tidecurl-hippocamp": MGJRPG02_ART["tidecurl-hippocamp"],
+  "ripplecap-kappa": MGJRPG02_ART["ripplecap-kappa"],
+  "rainbow-horn-unicorn": MGJRPG02_ART["rainbow-horn-unicorn"],
+  "green-tea-skeleton": MGJRPG02_ART["green-tea-skeleton"],
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "dormant" }>>;
+
+export const FUTURE_ENEMY_ART = {
+  "classic-slime": MGJRPG02_ART["classic-slime"],
+  // Internal semantic ID is stable; Plan 09/Human review still owns the public label.
+  succubus: { ...MGJRPG02_ART.succubus, label: "Public label pending" },
+  kappa: MGJRPG02_ART.kappa,
+  cyclops: MGJRPG02_ART.cyclops,
+  lamia: MGJRPG02_ART.lamia,
+  "soda-slime": MGJRPG02_ART["soda-slime"],
+  minotaur: MGJRPG02_ART.minotaur,
+  "lizard-swordsman": MGJRPG02_ART["lizard-swordsman"],
+  "lizard-spearman": MGJRPG02_ART["lizard-spearman"],
+  "t-rex": MGJRPG02_ART["t-rex"],
+  "orc-chieftain": MGJRPG02_ART["orc-chieftain"],
+  "warrior-skeleton": MGJRPG02_ART["warrior-skeleton"],
+  cultist: MGJRPG02_ART.cultist,
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "dormant" }>>;
+
+export const FUTURE_PORTAL_ART = {
+  "sunny-diamond": { ...MGJRPG02_ART["sunny-diamond"], motif: "diamond bloom" },
+  "violet-spade-bloom": { ...MGJRPG02_ART["violet-spade-bloom"], motif: "spade bloom" },
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "dormant"; readonly motif: string }>>;
+
+export const FUTURE_ITEM_ART = {
+  "science-magnifying-glass": MGJRPG02_ART["science-magnifying-glass"],
+  "science-telescope": MGJRPG02_ART["science-telescope"],
+  "science-book": MGJRPG02_ART["science-book"],
+  "ice-skates": MGJRPG02_ART["ice-skates"],
+  "hard-leather-work-boots": MGJRPG02_ART["hard-leather-work-boots"],
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "dormant" }>>;
+
+export const FUTURE_HAZARD_ART = {
+  "floor-spikes-overlay": MGJRPG02_ART["floor-spikes-overlay"],
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "dormant" }>>;
+
+/**
+ * State-family view for future Mimic consumers. Candy's revealed state is the
+ * exact ENEMY_ART object (not a second catalogue authority or delivery copy).
+ */
+export const MIMIC_ART = {
+  "classic-mimic": {
+    revealed: MGJRPG02_ART["classic-mimic-revealed"],
+    closed: MGJRPG02_ART["classic-mimic-closed"],
+    "good-open": MGJRPG02_ART["classic-mimic-good-open"],
+  },
+  "candy-mimic": {
+    revealed: ENEMY_ART["candy-mimic"],
+    closed: MGJRPG02_ART["candy-mimic-closed"],
+    "good-open": MGJRPG02_ART["candy-mimic-good-open"],
+  },
+} as const;
+
+export const NAVIGATION_ART = {
+  "nav-home": MGJRPG02_ART["nav-home"],
+  "nav-mazes": MGJRPG02_ART["nav-mazes"],
+  "nav-book": MGJRPG02_ART["nav-book"],
+  "nav-help": MGJRPG02_ART["nav-help"],
+  "nav-sound": MGJRPG02_ART["nav-sound"],
+  "nav-muted": MGJRPG02_ART["nav-muted"],
+  "nav-restart": MGJRPG02_ART["nav-restart"],
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "active" }>>;
+
+export const ACHIEVEMENT_ART = {
+  "first-star": MGJRPG02_ART["reward-trail-sticker"],
+  "animal-friend": MGJRPG02_ART["reward-animal-friend-sticker"],
+  "surprise-sparkle": MGJRPG02_ART["reward-surprise-sparkle-sticker"],
+  "perfect-rescue-5": MGJRPG02_ART["reward-helping-paw-medal"],
+  "perfect-rescue-10": MGJRPG02_ART["reward-rainbow-rescue-medal"],
+  "perfect-rescue-15": MGJRPG02_ART["reward-golden-guardian-medal"],
+  "maze-explorer-5": MGJRPG02_ART["badge-pathfinder"],
+  "maze-explorer-10": MGJRPG02_ART["badge-maze-mapper"],
+  "maze-explorer-20": MGJRPG02_ART["badge-grand-explorer"],
+  "surprise-explorer-3": MGJRPG02_ART["badge-surprise-scout"],
+  "mighty-adventurer": MGJRPG02_ART["badge-mighty-adventurer"],
+  "twinkle-toes": MGJRPG02_ART["badge-twinkle-toes"],
+  "bunny-buddy-10": MGJRPG02_ART["badge-bunny-buddy"],
+  "fox-friend-10": MGJRPG02_ART["badge-fox-friend"],
+  "kitten-pal-10": MGJRPG02_ART["badge-kitten-pal"],
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "active" }>>;
 
 function hasOwn<T extends object>(catalog: T, key: PropertyKey): key is keyof T {
   return Object.hasOwn(catalog, key);
@@ -773,9 +903,13 @@ export function resolveTerrainTheme(
 
 export function resolveWeaponArt(
   style: unknown,
-): ArtReference {
-  return typeof style === "string" && hasOwn(WEAPON_ART, style)
-    ? WEAPON_ART[style]
+): WeaponArt {
+  // Compatibility for pre-publication snapshots and external level records.
+  // Bubble Bow is no longer a canonical gameplay identity and is not exposed
+  // as a second catalogue entry; it resolves one-way to the approved ring blade.
+  const canonicalStyle = style === "bubble-bow" ? "bubble-ring-blade" : style;
+  return typeof canonicalStyle === "string" && hasOwn(WEAPON_ART, canonicalStyle)
+    ? WEAPON_ART[canonicalStyle]
     : WEAPON_ART[DEFAULT_WEAPON_STYLE];
 }
 

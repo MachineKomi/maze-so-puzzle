@@ -5,7 +5,7 @@
   "id": "nav-book",
   "artVersion": 1,
   "family": "navigation",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "partial",
   "approvalStatus": "historical",
   "validationProfile": "legacy-observed",
@@ -43,7 +43,7 @@
       "decodedBytesUpperBound": 147456,
       "profile": "legacy-runtime",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "title-or-navigation",
       "encoder": {
         "name": "unknown-historical-encoder",

@@ -118,6 +118,132 @@ The two current 0.19.0 executables match their entries in
 0.19.0 verification source. This pass does not rewrite historical release
 documentation; use the actual artifact hashes and checksum manifest above.
 
+## Plan 03 art foundation static allocation evidence
+
+Plan 03 implementation and its functional baseline began at checkpoint
+`ee176f52ab79e08e818fc919f44b7723f9fc9865`. During final evidence capture a
+parallel task advanced `main` to doc-only commit
+`ab20f28372c93e341b13e3cf2d2c94ea71703bb2`; the intervening diff contains only
+three playtest documents and no runtime, package, public, performance-script, or
+Tauri change. The final build marker therefore records that concurrent HEAD plus
+the complete in-scope working tree, with runtime-input SHA-256
+`ca7bbd845557c02363b907e9a53849715e2d2195bedf2f67f62be0beb5d9eb30`
+and dist fingerprint SHA-256
+`26bbae4d47ff37676f131d840d4f39803410ea1b6819d2ddaaf049be95c38861`.
+
+| Deterministic measure | Accepted Plan 06 | Plan 03 gate | Delta | Allocation |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, gzip level 9 | 119,779 B | 120,894 B | +1,115 B | 1,150 B |
+| CSS, gzip level 9 | 29,206 B | 29,206 B | 0 B | 0 B |
+| All public runtime files | 89,394,012 B | 89,394,012 B | 0 B | 0 B |
+| Catalog assets (`public/assets`) | 139 / 89,330,098 B | 139 / 89,330,098 B | 0 files / 0 B | 0 B |
+| Dist | 144 / 89,929,629 B | 144 / 89,932,689 B | 0 files / +3,060 B | Report-only |
+
+The JavaScript growth is the compatibility-preserving rich metadata for current
+Ame, the three lock pairs, and the four hazard cues. The source-record schema,
+manifest, Pillow pipeline, model sheets, generator originals, and ignored proof
+derivatives are not browser imports and add zero public-runtime bytes or decoded
+runtime image memory. The 1,150 B ledger entry leaves 35 B over the exact
+measurement for compression variance and authorizes no CSS or public growth.
+
+The pending `mgjrpg-02` authored-direction gate adds source/proof evidence only:
+
+| Evidence | Files | Encoded bytes | RGBA decoded upper bound | Runtime effect |
+| --- | ---: | ---: | ---: | --- |
+| Direction A generator originals | 4 | 7,741,310 | 25,163,480 | None |
+| Direction B generator originals | 4 | 7,846,217 | 25,162,368 | None |
+| Direction C generator originals | 4 | 7,321,281 | 25,163,760 | None |
+| Deterministic identity/function comparator | 1 | 1,405,963 | 9,666,560 | None |
+| Ignored `v11` proof packet | 34 | 7,025,018 | 43,617,536 for 32 PNGs | None |
+
+The 12 generator originals total 22,908,808 encoded bytes and a 75,489,608-byte
+decoded upper bound. They are tracked provenance, never browser imports. These
+figures do not predict eventual runtime cost: selected isolated masters must be
+registered and encoded at actual delivery dimensions, measured on Web/Tauri/
+iPad/TV, and obtain a new Plan 07A allocation before any versioned catalogue
+switch. This gate changes `public/`, active catalogue pointers, transfer bytes,
+and runtime decoded residency by exactly zero.
+
+The Human's v11 narrowing and the bounded v14 response add only source/proof
+evidence:
+
+| v14 evidence | Files | Encoded bytes | RGBA decoded upper bound | Runtime effect |
+| --- | ---: | ---: | ---: | --- |
+| Fresh Ame, future-enemy, and flower-pad generator originals | 4 | 6,440,962 | 25,160,256 | None |
+| Ignored `v14` proof packet | 48 hash-bound files plus index | 8,847,297 | 62,134,064 for proof PNGs | None |
+
+The v14 comparison does not add an asset to `public/`, alter an active catalogue
+pointer, preload a candidate, or create browser decode residency. The prior
+Direction B Ame is recommended because both fresh independent bases drift
+Candidate C's locked construction; that recommendation remains pending Human
+confirmation. The future-enemy hybrid and flower-floor-pad study are concept
+evidence, not approved runtime masters. Expected Web, Tauri, iPad, and TV
+transfer/decode impact is therefore neutral with high confidence: the runtime
+art byte and decoded-image deltas are exactly zero. Any later production
+derivative must be measured at actual delivery size and receive a new Plan 07A
+allocation before catalogue publication.
+
+The reviewed external inventory is
+`C:\Users\hellb\AppData\Local\Temp\maze-so-puzzle-performance\plan03-human-gate-ee176f52-final\inventory.json`;
+its SHA-256 is
+`85600a8f23b4f277af20b8f6d87cdc0121a60827af109c0db8cb9ad7f39ddac5`.
+Candidate C remains source/proof-only and the active Ame URL remains
+`/assets/ame.png`, so no candidate preload or dual residency exists. No timing
+cohort was collected for this static foundation; timing gates remain
+report-only exactly as Plan 07A requires.
+
+## Plan 03 `mgjrpg-02` runtime-publication allocation
+
+This forward publication was measured in two isolated worktrees at exact
+starting commit `0fce05451b94f44d795805f8694bcebee2a9262a`. The before tree is that
+commit unchanged. The after tree contains only the intended Plan 03 catalogue,
+runtime derivatives, pipeline, and consumer changes; concurrent OST and other
+owners' documentation are absent. Both used the same installed dependency tree
+and `npm run build` command. The source-matched inventories are:
+
+- before: `C:\Users\hellb\AppData\Local\Temp\maze-so-puzzle-performance\0fce05451b94\inventory-2026-09-04T02-53-55.736Z.json`;
+- after: `C:\Users\hellb\AppData\Local\Temp\maze-so-puzzle-performance\0fce05451b94\inventory-2026-09-04T02-53-24.565Z.json`.
+
+| Deterministic measure | Turn-start `0fce054` | Plan 03 publication | Delta | Publication allocation |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, raw | 401,051 B | 474,820 B | +73,769 B | Report-only |
+| JavaScript, gzip level 9 | 120,894 B | 129,512 B | +8,618 B | 8,650 B |
+| JavaScript, Brotli | 103,375 B | 110,076 B | +6,701 B | Review gate |
+| CSS, raw | 136,583 B | 137,053 B | +470 B | Report-only |
+| CSS, gzip level 9 | 29,206 B | 29,314 B | +108 B | 128 B |
+| CSS, Brotli | 24,417 B | 24,450 B | +33 B | Review gate |
+| Catalog assets (`public/assets`) | 139 / 89,330,098 B | 283 / 98,696,832 B | +144 / +9,366,734 B | 9,366,734 B |
+| All public runtime files | 141 / 89,394,012 B | 285 / 98,760,746 B | +144 / +9,366,734 B | 9,366,734 B |
+| Runtime images | 125 / 39,173,427 B | 269 / 48,540,161 B | +144 / +9,366,734 B | Same public allocation |
+| RGBA decoded upper bound | 183,011,232 B | 290,949,024 B | +107,937,792 B | Reported residency risk |
+| Dist | 144 / 89,932,709 B | 288 / 99,373,682 B | +144 / +9,440,973 B | Report-only |
+
+The publication report splits the corrected 9,366,734-byte derivative set into
+100 active rows / 7,068,346 encoded bytes / 92,471,296 decoded bytes and 44
+dormant rows / 2,298,388 encoded bytes / 15,466,496 decoded bytes. Dormant art
+is not preloaded or placed, so the decoded figures are theoretical per-file
+RGBA sums rather than simultaneous residency claims. Static-literal inventory
+also cannot prove browser residency; the production-preview resource and memory
+checks remain the runtime evidence.
+
+The initial uncommitted output exposed a technical defect: four sparse terrain
+dressings had been passed through an RGB-only periodic helper. Their 591,406
+opaque bytes were rejected before commit and are hash-recorded in
+`source-assets/publication/mgjrpg-02-plan03-transparent-dressing-defect.json`.
+The smallest correction preserves the approved sources' straight alpha and
+clear seam gutters; the corrected four total 633,802 bytes. No approved source,
+design, prompt, or pre-existing runtime asset changed.
+
+With the existing Plan 06 and Plan 03 foundation allocations plus the new
+`art-plan03-mgjrpg02-runtime-publication` row, deterministic limits are 129,640
+gzip-9 JavaScript bytes, 29,363 gzip-9 CSS bytes, and exactly 98,760,746 public
+bytes. The clean publication tree measures 129,512 / 29,314 / 98,760,746 and
+passes. The transfer increase is the explicit Human-required replacement and
+future catalogue, is fully measured rather than hidden, and retains versioned
+rollback files. Later Plan 12 removal may recover superseded delivery weight
+only after every consumer and rollback hold is cleared.
+
+
 ## Current resource inventory
 
 The reviewed static inventory is

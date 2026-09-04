@@ -42,6 +42,10 @@ document and does not use client-side URL routing.
 
 ## Verify the deployment
 
+- For the Plan 03 static-art cutover, confirm the current catalogue and visible
+  weapon label use **Bubble Ring Blade**. The historical `bubble-bow` ID is a
+  one-way saved-content resolver alias only; it must not remain a selectable
+  current weapon family or public label.
 - Open the generated `vercel.app` URL on desktop, iPad Safari, and the target
   phone browser in landscape orientation. Check a notched device if one is
   available; the controls should stay inside its safe area.

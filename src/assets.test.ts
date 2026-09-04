@@ -64,6 +64,7 @@ afterEach(() => {
 describe("art preloading", () => {
   it("uses the current seamless terrain asset revisions", async () => {
     const { ASSETS } = await import("./assets");
+    const { MGJRPG02_ART } = await import("./artCatalog");
 
     expect({
       floor: ASSETS.floor,
@@ -73,14 +74,16 @@ describe("art preloading", () => {
       poison: ASSETS.poison,
       hole: ASSETS.hole,
       antidoteLeaf: ASSETS.antidoteLeaf,
+      boots: ASSETS.boots,
     }).toEqual({
-      floor: "/assets/floor-v3.png",
-      wall: "/assets/wall-v3.png",
-      water: "/assets/water-v2.png",
-      lava: "/assets/lava-v2.png",
-      poison: "/assets/terrain-poison-v1.png",
-      hole: "/assets/ground-hole-v1.png",
-      antidoteLeaf: "/assets/antidote-leaf-v1.png",
+      floor: MGJRPG02_ART["floor-sunny-stone"].src,
+      wall: MGJRPG02_ART["wall-lavender-stone"].src,
+      water: MGJRPG02_ART["terrain-water"].src,
+      lava: MGJRPG02_ART["terrain-lava"].src,
+      poison: MGJRPG02_ART["terrain-poison"].src,
+      hole: MGJRPG02_ART["ground-hole"].src,
+      antidoteLeaf: MGJRPG02_ART["antidote-leaf"].src,
+      boots: MGJRPG02_ART["splash-boots"].src,
     });
   });
 
@@ -102,8 +105,9 @@ describe("art preloading", () => {
     });
   });
 
-  it("exposes dedicated lock-pair assets while keeping blue legacy aliases", async () => {
+  it("exposes dedicated lock-pair assets while keeping blue compatibility aliases", async () => {
     const { ASSETS } = await import("./assets");
+    const { MGJRPG02_ART } = await import("./artCatalog");
 
     expect({
       legacyKey: ASSETS.key,
@@ -115,15 +119,26 @@ describe("art preloading", () => {
       sunnyKey: ASSETS.keySunnySun,
       sunnyDoor: ASSETS.doorSunnySun,
     }).toEqual({
-      legacyKey: "/assets/star-key.png",
-      legacyDoor: "/assets/star-door.png",
-      roseKey: "/assets/key-rose-heart-v1.png",
-      roseDoor: "/assets/door-rose-heart-v1.png",
-      blueKey: "/assets/star-key.png",
-      blueDoor: "/assets/star-door.png",
-      sunnyKey: "/assets/key-sunny-sun-v1.png",
-      sunnyDoor: "/assets/door-sunny-sun-v1.png",
+      legacyKey: MGJRPG02_ART["key-blue-star"].src,
+      legacyDoor: MGJRPG02_ART["door-blue-star"].src,
+      roseKey: MGJRPG02_ART["key-rose-heart"].src,
+      roseDoor: MGJRPG02_ART["door-rose-heart"].src,
+      blueKey: MGJRPG02_ART["key-blue-star"].src,
+      blueDoor: MGJRPG02_ART["door-blue-star"].src,
+      sunnyKey: MGJRPG02_ART["key-sunny-sun"].src,
+      sunnyDoor: MGJRPG02_ART["door-sunny-sun"].src,
     });
+  });
+
+  it("uses canonical ring-blade and paired sound-state assets", async () => {
+    const { ASSETS } = await import("./assets");
+    const { MGJRPG02_ART, NAVIGATION_ART, WEAPON_ART } = await import("./artCatalog");
+
+    expect(ASSETS.weaponBubbleRingBlade).toBe(WEAPON_ART["bubble-ring-blade"].src);
+    expect(ASSETS.weaponBubbleRingBlade).toBe(MGJRPG02_ART["bubble-ring-blade"].src);
+    expect(ASSETS.navSound).toBe(NAVIGATION_ART["nav-sound"].src);
+    expect(ASSETS.navMuted).toBe(NAVIGATION_ART["nav-muted"].src);
+    expect(ASSETS.navMuted).not.toBe(ASSETS.navSound);
   });
 
   it("loads common gameplay art plus only the supplied level's terrain and objects", async () => {
@@ -173,7 +188,6 @@ describe("art preloading", () => {
     expect(loadedSources).not.toContain(ASSETS.lava);
     expect(loadedSources).not.toContain(ASSETS.goblin);
     expect(loadedSources).not.toContain(ASSETS.sword);
-    expect(loadedSources).not.toContain(ASSETS.ameSword);
     expect(loadedSources).not.toContain(ASSETS.keyBlueStar);
     expect(loadedSources).not.toContain(ASSETS.doorBlueStar);
     expect(loadedSources).not.toContain(ASSETS.keySunnySun);
@@ -225,7 +239,6 @@ describe("art preloading", () => {
     expect(loadedSources).toContain(ASSETS.wall);
     expect(loadedSources).toContain(ASSETS.goblin);
     expect(loadedSources).toContain(ASSETS.sword);
-    expect(loadedSources).not.toContain(ASSETS.ameSword);
     expect(loadedSources).toContain(ASSETS.animalBunny);
     expect(loadedSources).toContain(ASSETS.animalCage);
     expect(loadedSources).not.toContain(ASSETS.enemyBlueberrySlime);
@@ -367,7 +380,7 @@ describe("art preloading", () => {
     expect(Object.keys(STICKER_ART)).toEqual(stickerIds);
     expect(Object.keys(MEDAL_ART)).toEqual(medalIds);
     expect(Object.keys(BADGE_ART)).toEqual(badgeIds);
-    expect(new Set(allArt)).toHaveLength(15);
+    expect(new Set(allArt).size).toBe(15);
     expect(allArt.every((source) => source.startsWith("/assets/"))).toBe(true);
   });
 });

@@ -1,0 +1,423 @@
+{
+  "schema": "maze-art-plan03-validation-report/v1",
+  "reportId": "mgjrpg-02-plan03-publication-validation-2026-09-04",
+  "recordedOn": "2026-09-04",
+  "startingCommit": "0fce05451b94f44d795805f8694bcebee2a9262a",
+  "scope": "Plan 03 mgjrpg-02 approved static-art publication and catalogue cutover",
+  "overallResult": "pass-with-warnings-and-external-hardware-gates",
+  "authority": {
+    "runtimeMap": "docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json",
+    "publicationReport": "docs/source-assets/publication/mgjrpg-02-plan03-publication-report.json",
+    "visualIntegrationReport": "docs/source-assets/publication/mgjrpg-02-plan03-visual-integration-report.json",
+    "humanDecision": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "retirementLedger": "docs/source-assets/retirement/asset-retirement-ledger.json",
+    "manifest": "docs/source-assets/manifest.json"
+  },
+  "artPipeline": [
+    {
+      "command": "npm run art:publish:mgjrpg02:check",
+      "result": "pass",
+      "checkedDerivatives": 144,
+      "failures": 0,
+      "deterministicByteMatch": true,
+      "writesPerformed": false
+    },
+    {
+      "command": "npm run art:test",
+      "result": "pass",
+      "framework": "Python unittest",
+      "testsPassed": 99,
+      "testsFailed": 0,
+      "durationSeconds": 431.432,
+      "coverageNotes": [
+        "publication-map joins and generated catalogue authority",
+        "source-record schema, hashes, prompts, ordered reference roles, and provenance",
+        "alpha borders, dimensions, registration, safe bounds, seams, and straight-alpha encoding",
+        "transparent periodic-dressing overlays",
+        "retirement-ledger totals, rollback paths, and no archive beneath public/assets"
+      ]
+    },
+    {
+      "command": "npm run art:manifest -- --write",
+      "result": "pass",
+      "recordCount": 270,
+      "runtimeImageCount": 269,
+      "runtimeEncodedBytes": 48540161,
+      "runtimeDecodedImageBytesUpperBound": 290949024,
+      "sourceAssetCount": 377,
+      "generationBatchCount": 23,
+      "generationOutputCount": 240
+    },
+    {
+      "command": "npm run art:check",
+      "result": "pass-with-warnings",
+      "errors": 0,
+      "warnings": 418,
+      "warningBreakdown": {
+        "legacy-alpha-border": 18,
+        "catalogue-crosscheck-limited": 1,
+        "historical-generation-batch-pending": 21,
+        "legacy-prompt-gap": 124,
+        "legacy-source-gap": 124,
+        "rights-pending": 126,
+        "strict-prompt-pending": 1,
+        "unreferenced-source": 3
+      },
+      "warningDisposition": {
+        "suppressedHistoricalWarnings": 374,
+        "remainingReportedWarnings": 44,
+        "newMgjrpg02AlphaBorderWarnings": 0,
+        "assessment": "The validator reports historical legacy/provenance debt and forward-record limitations; it reports no new mgjrpg-02 alpha-border regression and no validation error."
+      }
+    }
+  ],
+  "typescriptAndProductionBuild": {
+    "command": "npm run build",
+    "result": "pass",
+    "steps": [
+      "tsc -b",
+      "vite build",
+      "node scripts/performance/build-provenance.mjs"
+    ],
+    "viteModulesTransformed": 49,
+    "bundles": {
+      "javascript": {
+        "rawBytes": 474820,
+        "gzip9Bytes": 129512,
+        "brotliBytes": 110076
+      },
+      "css": {
+        "rawBytes": 137053,
+        "gzip9Bytes": 29314,
+        "brotliBytes": 24450
+      }
+    },
+    "buildProvenance": {
+      "runtimeInputsSha256": "c3778b0f39e6838ca1386cd6244ec260173768cb5f03e0ebef36bce739c40095",
+      "distFingerprintSha256": "7cda5e90c10b740dc7ea8251308b7812fc52d4cbb1ccd7e311d67f440b61dd41",
+      "runtimeInputsMatch": true,
+      "distMatches": true
+    }
+  },
+  "performance": {
+    "contractCommand": "npm run perf:check",
+    "contractResult": "pass",
+    "measuredAgainstLimits": {
+      "javascriptGzip9Bytes": {
+        "measured": 129512,
+        "limit": 129640,
+        "headroom": 128
+      },
+      "cssGzip9Bytes": {
+        "measured": 29314,
+        "limit": 29363,
+        "headroom": 49
+      },
+      "runtimePublicBytes": {
+        "measured": 98760746,
+        "limit": 98760746,
+        "headroom": 0
+      }
+    },
+    "inventoryCommand": "npm run perf:inventory",
+    "inventoryResult": "pass",
+    "candidateInventoryEvidence": "%TEMP%/maze-so-puzzle-performance/0fce05451b94/inventory-2026-09-04T03-46-21.492Z.json",
+    "candidate": {
+      "runtimeAssetCount": 283,
+      "runtimeAssetBytes": 98696832,
+      "runtimePublicCount": 285,
+      "runtimePublicBytes": 98760746,
+      "runtimeImageCount": 269,
+      "runtimeImageEncodedBytes": 48540161,
+      "runtimeImageDecodedBytesUpperBound": 290949024,
+      "distFileCount": 288,
+      "distBytes": 99373682
+    },
+    "exactStartingCommitEvidence": "%TEMP%/maze-so-puzzle-performance/0fce05451b94/inventory-2026-09-04T02-53-55.736Z.json",
+    "exactStartingCommit": {
+      "runtimeAssetCount": 139,
+      "runtimeAssetBytes": 89330098,
+      "runtimePublicCount": 141,
+      "runtimePublicBytes": 89394012,
+      "runtimeImageCount": 125,
+      "runtimeImageEncodedBytes": 39173427,
+      "runtimeImageDecodedBytesUpperBound": 183011232,
+      "distFileCount": 144,
+      "distBytes": 89932709,
+      "javascriptRawBytes": 401051,
+      "javascriptGzip9Bytes": 120894,
+      "javascriptBrotliBytes": 103375,
+      "cssRawBytes": 136583,
+      "cssGzip9Bytes": 29206,
+      "cssBrotliBytes": 24417
+    },
+    "delta": {
+      "runtimeAssetCount": 144,
+      "runtimeAssetBytes": 9366734,
+      "runtimePublicCount": 144,
+      "runtimePublicBytes": 9366734,
+      "runtimeImageCount": 144,
+      "runtimeImageEncodedBytes": 9366734,
+      "runtimeImageDecodedBytesUpperBound": 107937792,
+      "distFileCount": 144,
+      "distBytes": 9440973,
+      "javascriptRawBytes": 73769,
+      "javascriptGzip9Bytes": 8618,
+      "javascriptBrotliBytes": 6701,
+      "cssRawBytes": 470,
+      "cssGzip9Bytes": 108,
+      "cssBrotliBytes": 33
+    },
+    "allocationId": "art-plan03-mgjrpg02-runtime-publication",
+    "allocationStatus": "approved"
+  },
+  "automatedApplicationTests": {
+    "canonicalCommand": "npm run check",
+    "canonicalResult": "pass",
+    "filesPassed": 35,
+    "filesTotal": 35,
+    "testsPassed": 407,
+    "testsTotal": 407,
+    "testDurationSeconds": 53.16,
+    "buildResult": "pass",
+    "buildDetails": {
+      "typescript": "pass",
+      "viteModulesTransformed": 49,
+      "viteDurationSeconds": 1.46
+    },
+    "finalFullSuite": {
+      "command": "npm test",
+      "result": "pass",
+      "filesPassed": 35,
+      "filesTotal": 35,
+      "testsPassed": 407,
+      "testsTotal": 407,
+      "testsFailed": 0,
+      "durationSeconds": 54.15
+    },
+    "focusedChecks": [
+      {
+        "scope": "candidate portal statistics",
+        "command": "npx vitest run src/game/portalLevelStats.test.ts",
+        "result": "pass",
+        "testsPassed": 4,
+        "testsFailed": 0,
+        "durationSeconds": 3.76
+      },
+      {
+        "scope": "candidate curated campaign levels",
+        "command": "npx vitest run src/game/levels.test.ts",
+        "result": "pass",
+        "testsPassed": 64,
+        "testsFailed": 0,
+        "durationSeconds": 27.94
+      },
+      {
+        "scope": "untouched exact-starting-commit curated campaign levels",
+        "worktree": "%TEMP%/maze-plan03-before-0fce054",
+        "commit": "0fce05451b94f44d795805f8694bcebee2a9262a",
+        "command": "npx vitest run src/game/levels.test.ts",
+        "result": "pass",
+        "testsPassed": 64,
+        "testsFailed": 0,
+        "durationSeconds": 27.04
+      },
+      {
+        "scope": "candidate deterministic surprise generator",
+        "command": "npx vitest run src/game/generator.test.ts",
+        "result": "pass",
+        "testsPassed": 17,
+        "testsFailed": 0,
+        "durationSeconds": 40.35
+      }
+    ],
+    "earlierResourceContentionAttempt": {
+      "classification": "warning-resolved-by-final-clean-run",
+      "command": "npm test -- --testTimeout=120000 --hookTimeout=120000",
+      "result": "403-of-407-pass-with-four-fixed-per-test-timeouts",
+      "filesPassed": 33,
+      "filesTotal": 35,
+      "testsPassed": 403,
+      "testsTotal": 407,
+      "explanation": "During concurrent Rust/linker and validation load, the CLI timeout arguments did not override explicit 30-second and 10-second per-test limits. Later clean candidate runs passed all affected tests, and the final literal npm run check passed 407/407; there is no current automated-test failure.",
+      "fixedTimeoutFailures": [
+        {
+          "file": "src/game/generator.test.ts",
+          "test": "deterministic surprise mazes > varies later surprise sizes non-monotonically across the full unlocked band",
+          "fixedTimeoutSeconds": 30,
+          "observedDurationSeconds": 48.065
+        },
+        {
+          "file": "src/game/levels.test.ts",
+          "test": "curated campaign levels > varies authored Spring Boots puzzles across one, two, and three holes",
+          "fixedTimeoutSeconds": 10,
+          "observedDurationSeconds": 12.462
+        },
+        {
+          "file": "src/game/levels.test.ts",
+          "test": "curated campaign levels > Lanternlight Labyrinth only exposes underpowered combat when it is an intentional puzzle clue",
+          "fixedTimeoutSeconds": 10,
+          "observedDurationSeconds": 10.936
+        },
+        {
+          "file": "src/game/levels.test.ts",
+          "test": "curated campaign levels > Moonlit Friendship Quest only exposes underpowered combat when it is an intentional puzzle clue",
+          "fixedTimeoutSeconds": 10,
+          "observedDurationSeconds": 12.052
+        }
+      ],
+      "untouchedStartingCommitContentionReproduction": {
+        "worktree": "%TEMP%/maze-plan03-before-0fce054",
+        "commit": "0fce05451b94f44d795805f8694bcebee2a9262a",
+        "command": "npx vitest run src/game/generator.test.ts",
+        "result": "16-of-17-pass; the same fixed-30-second test timed out during contention",
+        "observedDurationSeconds": 35.498,
+        "regressionAssessment": "The same transient timeout at the untouched starting commit plus later clean candidate passes demonstrate host-resource contention, not a Plan 03 regression."
+      }
+    },
+    "currentAutomatedTestFailures": 0,
+    "currentResult": "pass"
+  },
+  "browserProductionPreview": {
+    "command": "npm run preview -- --host 127.0.0.1 --port 4176",
+    "previewUrl": "http://127.0.0.1:4176/?debug=mazes",
+    "result": "pass-with-external-hardware-gates",
+    "resourceAudit": {
+      "runtimeMapUrlsRequested": 144,
+      "http200": 144,
+      "failures": 0,
+      "encodedBytesReceived": 9366734,
+      "visibleBrokenImages": 0,
+      "warningOrErrorConsoleEntries": 0,
+      "legacyAssetUrlsObservedInSampledMaze": 0
+    },
+    "captureEvidence": [
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tv-1920-shiny-sword.png",
+        "viewport": [1920, 1080],
+        "sha256": "ca2b45f8d2806d5ee897dbcbe3ea75af8dfe5689ba9f41aeae923d1c48b7354a"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/ipad-1194-splashy-boots.png",
+        "viewport": [1194, 834],
+        "sha256": "213a15297c063c333d1084fcc825297ccde6db3f6def9a46bdac19d377953093"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/desktop-1280-wishing-woods.png",
+        "viewport": [1280, 720],
+        "sha256": "577a2fc195886402c057761a784cab849e583e436e4f1cd30c9386f42732ee35"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/phone-844-twilight-treasure.png",
+        "viewport": [844, 390],
+        "sha256": "23788231fb7d2220d29cda2427bd8f7d1f6e510adfeaa17d9ab1047f84d50e28"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/phone-568-moonlit-friendship.png",
+        "viewport": [568, 320],
+        "sha256": "c4df12ae9c7d5f2bb8daa443aa42bf03087a64dbd6e4d25c278ca452a3f441d5"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tablet-1024-rose-heart.png",
+        "viewport": [1024, 768],
+        "sha256": "72ac1528dd11dfab367f7b41478d3e3bd91c748112a37ac520e27c210e6daf21"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/desktop-1280-adventure-book.png",
+        "viewport": [1280, 720],
+        "sha256": "bf2c07861a066a852004eff2fef73e1f562d692fde3c7699e3c3774f8df8a82f"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/desktop-1280-adventure-book-badges.png",
+        "viewport": [1280, 720],
+        "sha256": "84cfffa230520cb9c0988f0a439c7454838351fc24481aa66cdd8ba5c7ad8b0c"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tv-1920-victory-rewards.png",
+        "viewport": [1920, 1080],
+        "bytes": 127872,
+        "sha256": "cd69baf4c5e2ff5108348aaa765368570f003a45cd8e0cb29f2aede38e67ee06"
+      },
+      {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tv-1920-adventure-book-unlocked-rewards.png",
+        "viewport": [1920, 1080],
+        "bytes": 137045,
+        "sha256": "13f7f8170fb183933870d2020a1cef19d303aa5556a207ba9b425c4d90545f95"
+      }
+    ],
+    "manualAssessment": {
+      "observedDefects": [],
+      "checked": [
+        "Ame field and portrait registration",
+        "ordinary friends, cages, enemies, weapons, keys, doors, teleporters, obstacles, pickups, rewards, floors, walls, water, lava, and navigation/sound stickers",
+        "small-size silhouette and colour-aware contour readability",
+        "terrain boundaries and visible seam behavior",
+        "Adventure Book lazy-loaded friends and all 15 sticker/medal/badge derivatives",
+        "normal non-tester six-step Little Star Trail completion, My First Maze and Twinkle Toes victory presentation, and the persisted mixed earned/locked Adventure Book shelf"
+      ],
+      "postInteractionWarningOrErrorConsoleEntries": 0,
+      "dormantAssetScope": "Dormant mythic friends, future enemies, Mimic states, spikes, ice equipment, and alternate flower pads have no authorised gameplay placement; their versioned URLs and catalogue records were validated without inventing mechanics."
+    }
+  },
+  "desktopAndTauri": {
+    "currentPlan03DesktopCompile": {
+      "command": "npm run check:desktop",
+      "result": "pass",
+      "cargoProfile": "dev",
+      "durationSeconds": 626,
+      "summary": "Finished the locked Rust/Tauri dev-profile compilation without errors."
+    },
+    "currentPlan03NativeBuild": {
+      "command": "npx tauri build --no-bundle --ci",
+      "result": "pass",
+      "cargoProfile": "release",
+      "durationSeconds": 694,
+      "artifact": "%TEMP%/maze-plan03-baseline-0fce054/src-tauri/target/release/maze-so-puzzle.exe",
+      "bundleScope": "no-bundle executable build"
+    },
+    "currentPlan03PackagedRuntime": {
+      "result": "pass-local",
+      "processResponsive": true,
+      "windowTitle": "Maze so Puzzle: For Ame to Solve!",
+      "interactionPath": "Launch native release executable, choose normal Continue, enter Rose Heart Roundabout",
+      "visuallyVerified": [
+        "versioned Ame",
+        "Rose Heart flower-pad portal",
+        "friend cage",
+        "science pickup",
+        "floor and wall materials",
+        "navigation and sound icons"
+      ],
+      "capture": {
+        "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tauri-1280-rose-heart.png",
+        "viewport": [1280, 720],
+        "bytes": 1001109,
+        "sha256": "bbd280b6d8fcd86ff625113d17d5808e3d86f56886c63f1ab306087e5d02164c"
+      },
+      "qualificationBoundary": "This is a local native-build and visual-interaction smoke, not a clean-machine installer/signing or qualified timing/memory cohort."
+    },
+    "qualifiedTauriPerformanceCohort": {
+      "result": "pending-hardware",
+      "existingEvidence": "docs/performance/evidence/pass-07a-tauri-pending.json",
+      "reason": "No current clean-host five-run WebView2 timing/memory cohort was performed; the local Plan 03 smoke must not be promoted into that performance claim."
+    },
+    "externalGates": [
+      "physical iPad touch and colour/feel review",
+      "TV-distance review on real display hardware",
+      "clean-machine Windows install, signing, and WebView2 cohort"
+    ]
+  },
+  "integrityConclusion": {
+    "plan03ArtRegressionFound": false,
+    "newBrokenResourceFound": false,
+    "newConsoleFailureFound": false,
+    "newBudgetViolationFound": false,
+    "currentAutomatedTestFailures": 0,
+    "earlierResourceContentionWarning": "Four fixed-timeout gameplay tests failed only under concurrent Rust/linker load; the same generator timeout reproduced at the untouched starting commit, and all affected candidate tests plus final npm run check subsequently passed.",
+    "notes": [
+      "All art-specific publication, provenance, catalogue, alpha, geometry, seam, and deterministic-regeneration gates pass.",
+      "The final literal npm run check, production TypeScript/Vite build, and performance contracts pass; the earlier contention-era gameplay timeouts remain recorded only as resolved diagnostic evidence.",
+      "Warnings and external-device gates are preserved explicitly; none is represented as a Plan 03 pass."
+    ]
+  }
+}

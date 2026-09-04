@@ -1,0 +1,227 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "spring-boots-mgjrpg02-v02-source",
+  "id": "spring-boots",
+  "artVersion": 2,
+  "family": "item",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-09-spring-boots-a",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/PROMPTS.md",
+        "sha256": "ccffb2a4198b0bb2b9d93ce7db4687750d6a57bbb076111cacc938e6d202b324"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "runtime-comparison",
+          "path": "public/assets/spring-boots-v1.png",
+          "sha256": "56ffaab04c73fbf0a7aa2fedb42e87246214273d40e49d9d5800dbf8e150cf08"
+        },
+        {
+          "order": 2,
+          "role": "rendering-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/portal-rose-heart-v02-512.png",
+          "sha256": "f7ac1c99fa1dd62fc5c4b602f4d78c998128b17d37f13c9da3d77f79f1f90ff2"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-9dcc2abe-3b36-4cf4-bca8-19f2de16f4aa.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-spring-boots-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "a48a7ca4f1d648b79318560db7bd69eadf2ef12cf595391c2fba1e89e144b3bf",
+          "bytes": 1539654,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/PROMPTS.md",
+      "sha256": "ccffb2a4198b0bb2b9d93ce7db4687750d6a57bbb076111cacc938e6d202b324"
+    },
+    "outputIds": [
+      "exec-9dcc2abe-3b36-4cf4-bca8-19f2de16f4aa.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-spring-boots-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "a48a7ca4f1d648b79318560db7bd69eadf2ef12cf595391c2fba1e89e144b3bf",
+      "bytes": 1539654,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-09-spring-boots-a in docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "spring-boots-prop-field-256-r01",
+      "path": "public/assets/mgjrpg-02/items/spring-boots-v02-prop-field-256-r01.webp",
+      "sha256": "0eefec3a8a77810c2df677f364510428d13094662184e78805665a55d53093ab",
+      "bytes": 57108,
+      "width": 256,
+      "height": 256,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "profile": "prop-field-256",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "item",
+    "pivot": [
+      0.5,
+      0.55
+    ],
+    "visibleBounds": [
+      0.078125,
+      0.0859375,
+      0.84375,
+      0.828125
+    ],
+    "safeInset": [
+      0.0859375,
+      0.078125,
+      0.0859375,
+      0.078125
+    ],
+    "visualCenter": [
+      0.48285471,
+      0.49606086
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-spring-boots-v02-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "prop-field-256",
+        "outputPath": "public/assets/mgjrpg-02/items/spring-boots-v02-prop-field-256-r01.webp",
+        "width": 256,
+        "height": 256,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 102400,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        7,
+        237,
+        11
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.08,
+        0.08,
+        0.92,
+        0.92
+      ],
+      "align": [
+        0.5,
+        0.5
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Colour-space normalization, alpha extraction where required, transparent-edge decontamination, aspect-preserving registration, resize, exact-black normalization, and WebP encoding only.",
+      "script": "scripts/art_pipeline/mgjrpg02_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project owner",
+    "approvedAt": "2026-09-04T00:26:48.234Z",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "evidenceSha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48"
+  },
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and ordered semantic/rendering references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Revert the catalogue pointer to the recorded prior URL; retain both versions until the Plan 12 retirement sweep.",
+    "previousPath": "/assets/spring-boots-v1.png",
+    "previousSha256": "56ffaab04c73fbf0a7aa2fedb42e87246214273d40e49d9d5800dbf8e150cf08"
+  }
+}

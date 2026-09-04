@@ -16,6 +16,7 @@ from cutout import alpha_component_sizes
 from manifest import compare_manifest
 from model import (
     CALIBRATION_ROOT,
+    CANARY_REVIEW_SCHEMA,
     MGJRPG_02_RECIPE_ID,
     MGJRPG_02_REVIEW_ID,
     MANIFEST_PATH,
@@ -481,6 +482,10 @@ def _catalog_source_record_ids(path: Path) -> list[str]:
         r'\bsourceRecordId\s*:\s*["\']([a-z0-9]+(?:-[a-z0-9]+)*-source)["\']',
         source,
     ))
+    invocation_count = len(re.findall(r"\blegacyLockSprite\s*\(", source))
+    declaration_count = len(re.findall(r"\bfunction\s+legacyLockSprite\s*\(", source))
+    if invocation_count == 0 and declaration_count == 0:
+        return sorted(values)
     default_count = len(re.findall(
         r"\bsourceRecordId\s*=\s*`\$\{id\}-v01-source`",
         source,
@@ -502,8 +507,6 @@ def _catalog_source_record_ids(path: Path) -> list[str]:
         re.DOTALL | re.VERBOSE,
     )
     matches = list(call_pattern.finditer(source))
-    invocation_count = len(re.findall(r"\blegacyLockSprite\s*\(", source))
-    declaration_count = len(re.findall(r"\bfunction\s+legacyLockSprite\s*\(", source))
     if len(matches) != invocation_count - declaration_count:
         raise ValueError(
             "could not resolve every legacyLockSprite catalogue call: "
@@ -2396,6 +2399,8 @@ def _validate_recipe_and_review_documents(
         if review_id in reviews:
             errors.append(_message("error", "duplicate-review-id", label, review_id))
         reviews[review_id] = (path, review)
+        if review.get("schema") != CANARY_REVIEW_SCHEMA:
+            continue
         recipe_path = _repo_path(
             review.get("recipePath"),
             owner=label,

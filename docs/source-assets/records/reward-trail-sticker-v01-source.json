@@ -5,7 +5,7 @@
   "id": "reward-trail-sticker",
   "artVersion": 1,
   "family": "reward",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "legacy-runtime-only",
   "approvalStatus": "historical",
   "validationProfile": "legacy-observed",
@@ -32,7 +32,7 @@
       "decodedBytesUpperBound": 1048576,
       "profile": "legacy-runtime",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "deferred-reward-or-adventure-book",
       "encoder": {
         "name": "unknown-historical-encoder",

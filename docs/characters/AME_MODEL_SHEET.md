@@ -1,19 +1,21 @@
 # Ame model sheet — v02 approved design direction
 
-Status: **IDENTITY/CONSTRUCTION AND `mgjrpg-02` STATIC RENDERING DIRECTION APPROVED — CLEANED RUNTIME DERIVATIVE PENDING**
+Status: **IDENTITY, CONSTRUCTION, STATIC RENDERING, AND VERSIONED RUNTIME DERIVATIVE APPROVED**
 
 Recommended static study: `ame-v02-candidate-c`
 
-Runtime selection: unchanged historical v01 at `public/assets/ame.png`
+Runtime selection: `public/assets/mgjrpg-02/characters/ame-v02-character-field-512-r01.webp`;
+historical `public/assets/ame.png` is retained for rollback
 
 Identity-source recipe: historical `mgjrpg-01`; approved rendering profile:
 `mgjrpg-02` revision 4 / `storybook-local-contour-v1`;
-cutout/registration recipe: `art-pipeline-v1`
+historical proof cutout/registration recipe: `art-pipeline-v1`; runtime
+derivative recipe: `mgjrpg-02-runtime-derivative-r01`
 
 Human/Ame design gate: **approved 2026-09-03**
 
 Human/Ame static rendering direction: **Fresh B-led 01 approved 2026-09-03;
-cleaned derivative and runtime publication not approved**
+production derivative authorized for runtime publication 2026-09-04**
 
 This sheet records one approved restrained evolution of the Ame the child
 already knows. It is deliberately not a redesign. Candidate C was selected
@@ -249,7 +251,11 @@ and cape/hair envelopes. Deliberate squash/stretch must be annotated per frame.
 
 Generated proof outputs are local review artifacts under ignored
 `artifacts/art-proofs/`; they are not runtime files and add zero public bytes.
-The proof index records hashes and exact sources.
+The proof index records hashes and exact sources. These bullets preserve the
+historical identity/rendering-gate proof contract; the published derivative's
+exact source, crop, alpha, encoder, byte count, hash, and rollback path are
+recorded by the Plan 03 runtime map and publication report rather than inferred
+from a proof filename.
 
 Required static proof:
 
@@ -270,9 +276,9 @@ Required static proof:
 - Browser captures at 844x390, 960x540, and 1280x720 of the source-only context
   harness, which presents exact 56/77/103 px canvases over meadow grass, moon
   slate, and rose brick. Separate live Shiny Sword captures verify the active
-  historical v01 scale. The harness does not switch the live catalogue or imply
-  runtime approval; full in-game multi-maze pointer review follows the versioned
-  derivative and catalogue-switch proposal.
+  historical v01 scale. The harness did not switch the live catalogue or imply
+  runtime approval; the later v6 publication record and deterministic derivative
+  report are the separate production authority.
 - One consolidated `mgjrpg-01` versus proposed `mgjrpg-02` rendering board that
   keeps Candidate C geometry registered exactly, shows source and
   512/256/103/84/77/64/56/40 px delivery views, and includes close contour crops
@@ -337,16 +343,19 @@ source contour was too wide and its semantic cream classifier overpainted
 interior details; it is evidence of iteration, not an approved or reusable
 authority.
 
-The canonical proof derivative locations are recorded in
+The canonical design-proof locations remain recorded in
 `docs/source-assets/records/ame-v02-source.json`; `npm run art:proof` rebuilds
 the historical Candidate-C boards and `npm run art:proof:mgjrpg02` rebuilds the
 historical rejected contour-assay packet. `npm run
-art:proof:mgjrpg02:selection` built the immutable v14 bounded response and now
+art:proof:mgjrpg02:selection` built the immutable v14 bounded response and
 refuses to overwrite it; any later proof change requires a declared revision
-bump. Runtime approval will
-require an actual in-game catalogue-pointer review after the versioned production
-derivative is ready; the completed design gate intentionally stopped before that
-switch.
+bump. The production derivative is a separate strict-v2 record selected by
+`docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json` and mapped
+by `docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json`. The
+publication report, not the older proof packet, is authority for its measured
+runtime file. The separate non-writing
+`npm run art:publish:mgjrpg02:check` command is authority for the byte-exact
+temporary rebuild result.
 
 ## Human/Ame approval checklist
 
@@ -420,10 +429,10 @@ the candidate is rejected rather than silently redesigning Ame.
 - [x] The Human selected Fresh B-led 01's colour-aware contour, broad-value, and
   small-scale rendering direction; this does not approve its opaque source
   background or a cleaned runtime derivative.
-- [ ] The production derivative preserves Candidate C's face, age,
+- [x] The production derivative preserves Candidate C's face, age,
   golden-blonde hair, blue-eye read, costume allocation, silhouette,
   registration, hand socket, and emotional character.
-- [ ] The cleaned 40–103 px derivative keeps a continuous silhouette without
+- [x] The cleaned 40–103 px derivative keeps a continuous silhouette without
   uniform black edging, muddy pale edges, chromatic halos, hue fragmentation,
   matte contamination, or accumulated texture.
 - [x] Fresh B-led 02 is retained as an unselected high-resolution comparison;
@@ -432,37 +441,39 @@ the candidate is rejected rather than silently redesigning Ame.
 - [x] The selected family recipe is frozen into approved recipe revision 4 with
   measured brighter contour targets; v08's dark r02 tokens remain rejected
   history and r03's pending state remains an immutable snapshot.
-- [ ] A separately versioned runtime derivative and catalogue-pointer proposal
-  pass their later public-byte, rights, live-context, and rollback gates.
+- [x] A separately versioned runtime derivative and catalogue pointer are bound
+  to strict-v2 source, approval, provenance/rights, byte, hash, and rollback
+  evidence across the Plan 03 strict-v2 record, runtime map, and publication
+  report.
 
-## Released by identity and recipe approval; derivative/runtime gates still open
+## Runtime publication and downstream boundary
 
-- Candidate C may now feed a controlled static rendering-production candidate
-  using Fresh B-led 01's craft reference. It may not be published through a
-  versioned runtime derivative until that cleaned candidate's identity,
-  alpha/actual-size, rights, live-context, byte-allocation, catalogue-switch,
-  and rollback gates pass; the v01 pointer remains active.
-- Controlled friend, cage, enemy, weapon, terrain, prop, and icon source batches
-  may proceed under recipe revision 4. Each batch still requires an explicit
-  Human response before approve-by-exception applies; silence is not approval.
-- Dependent Ame poses, expressions, story variants, and animation-ready variants
-  remain deferred until the canonical static derivative passes. Animation is
-  owned by Plan 05.
-- Plan 01 and Plan 05 still wait for manager acceptance of completed Plan 03;
-  this design decision alone is not a downstream implementation release.
-- The separate source licence/rights field remains open until independently
-  reviewed; visual approval does not fabricate that evidence.
+- Candidate C and Fresh B-led 01 remain immutable identity/construction and
+  rendering-craft authorities respectively; neither proof image is relabelled as
+  the active sprite. The independently authored production source and its
+  versioned derivative are identified by exact run ID and hash in the runtime
+  map.
+- The former `public/assets/ame.png` remains byte-for-byte available under
+  `rollback-hold`. A rollback restores the catalogue pointer; it does not
+  rewrite the approved design or delete the new source.
+- Static publication does not authorize new poses, expressions, story variants,
+  or animation-ready descendants. Animation remains owned by Plan 05.
+- The Plan 03 v6 decision and project-publication provenance/rights review are
+  scoped to the exact selected source map; they do not fabricate unknown history
+  for older assets or grant rights to unrelated material.
 
-### Pending portrait correction — Batch 20
+### Published portrait correction — Batch 20
 
-The active `public/assets/ame-portrait.png` remains historical runtime art and
+The former `public/assets/ame-portrait.png` remains historical rollback art and
 is not an identity authority: its irises read teal/green and its short-bob
-construction conflicts with approved Ame v02. A new blank-canvas portrait
-candidate is preserved at
+construction conflicts with approved Ame v02. The selected blank-canvas
+portrait source is preserved at
 `docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/ame-portrait-v02-candidate-a-generator-original.png`.
 Its ordered authorities are Candidate C identity/construction, Candidate C's
 turnaround landmarks, and Fresh B-led 01 rendering craft. The old portrait
 contributes framing only and is explicit negative evidence for eye colour and
-hair construction. The candidate is pending Human/Ame review; it changes no
-runtime pointer and must still pass blue-iris pixel, face-landmark, actual-size,
-rights, byte and catalogue gates.
+hair construction. Its approved runtime derivative is
+`public/assets/mgjrpg-02/story/ame-portrait-v02-story-portrait-512-r01.webp`;
+the v6 decision carries the Human's semantic approval, its strict-v2 record
+carries the provenance/rights and processing evidence, and the publication
+report records the derivative dimensions, bytes, hash, and rollback pointer.

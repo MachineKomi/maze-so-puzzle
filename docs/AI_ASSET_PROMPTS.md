@@ -1,15 +1,16 @@
 # AI art prompt set
 
-> **Current identity authority (2026-09-03):** this file preserves historical
+> **Current identity authority (2026-09-04):** this file preserves historical
 > prompts and production provenance; earlier wording such as “blonde bob” is not
 > a future design lock. Before generating or editing new art, read
 > `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/ART_BIBLE.md`, and
 > `docs/characters/AME_MODEL_SHEET.md`. Ame must have golden-blonde hair and
 > clearly blue irises in every depiction. Candidate C's shoulder-brushing,
 > softly layered hair and preserved mint/lavender adventure identity are the
-> approved static v02 design direction; the v01 runtime pointer remains active
-> until the versioned derivative and live-context gate pass. Never rewrite the
-> exact historical prompts below; append new versioned records instead.
+> approved static v02 design direction. Plan 03's v6 decision publishes the
+> approved versioned Ame field and portrait derivatives; v01 remains rollback
+> history. Never rewrite the exact historical prompts below; append new
+> versioned records instead.
 
 All base artwork in `public/assets/` was generated for this project with the
 built-in OpenAI image-generation tool. Runtime resizing, chroma removal, WebP
@@ -2076,3 +2077,63 @@ changes no public runtime file, catalogue pointer, unlock condition, preload,
 or retirement state. Its seventeen originals add 27,309,409 encoded source
 bytes and at most 106,931,088 decoded RGBA working bytes; runtime byte deltas
 remain zero until an explicit publication decision.
+
+## Plan 03 runtime-publication decision addendum v6 (2026-09-04)
+
+The Batch 20, Batch 21, and Batch 22 paragraphs above remain immutable records
+of their state when generated. They are not rewritten after review. The Human's
+later Plan 03 continuation records that the art-review and completeness gates
+are satisfied, that the latest approved production masters are authoritative,
+and that the approved catalogue should now be published without generating
+alternatives or reopening unchanged art-direction decisions. The normalized,
+forward-only decision is
+`docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json`; the exact
+source-to-derivative projection and measured result are
+`docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json` and
+`docs/source-assets/publication/mgjrpg-02-plan03-publication-report.json`. The
+map selects 144 exact runs: 100 active runtime rows and 44 dormant catalogue-only
+rows.
+
+Publication never changes a recorded prompt, output ID, source hash, generation
+disposition, or rejected candidate into a different historical fact. In
+particular, Batch 22 Animal Friend candidate A remains rejected for semantic
+collision with the three rescue medals, and Golden Guardian candidate A remains
+rejected for its ragged cream cutline. Their fresh candidate-B replacements are
+the selected sources. The publication record also preserves Batch 20 First Star
+optical v02 as superseded by Batch 22 First Star v03 rather than approving two
+competing reward authorities.
+
+The runtime projection has these semantic boundaries:
+
+- `green-tea-skeleton` is a formally catalogued rescue-and-collect friend and
+  never an enemy, Power encounter, or defeat target.
+- `bubble-ring-blade` replaces the former `bubble-bow` semantic weapon identity;
+  the new art must not be published behind a misleading bow/arrow name.
+- the approved Batch 15 Normal Boots drawing publishes as the current
+  `splash-boots` pickup identity and replaces `/assets/boots.png`; it is not a
+  second dormant footwear family.
+- the existing Violet Moon portal remains the active third gameplay pair;
+  Sunny Diamond and Violet Spade Bloom are catalogue-only dormant sources until
+  a separate content migration is approved.
+- the Ame-face app-icon source remains provisional for Plan 11, and all Batch 21
+  title background, home splash, and generated logo studies remain source-only.
+  Generated lettering is never exact wordmark authority.
+- dormant catalogue entries add no gameplay rule, level placement, preload, or
+  animation simply by being catalogued.
+
+Each selected source is built deterministically into a new versioned public
+derivative; existing public files are retained as rollback evidence. Runtime
+approval requires the strict-v2 source record, exact prompt and ordered-reference
+hashes, the v6 runtime-publish decision, the project provenance/rights review,
+measured derivative facts, and a rollback pointer. Superseded files remain in
+the Plan 12 retirement ledger as `rollback-hold`; Plan 03 does not move, delete,
+archive, or declare them retirement-eligible.
+
+The final corrected projection is 144 runtime WebPs / 9,366,734 encoded bytes /
+107,937,792 decoded-RGBA bytes as a theoretical all-files upper bound. Its 100
+active rows total 7,068,346 encoded bytes; its 44 dormant rows total 2,298,388
+encoded bytes and have no preload or placement. An initial uncommitted pipeline
+output flattened the four sparse dressing overlays through an RGB-only periodic
+helper. The rejected hashes and RGBA-preserving correction are recorded in
+`docs/source-assets/publication/mgjrpg-02-plan03-transparent-dressing-defect.json`;
+no approved generator original or prompt was changed.

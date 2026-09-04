@@ -1,0 +1,199 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "terrain-water-mgjrpg02-v03-source",
+  "id": "terrain-water",
+  "artVersion": 3,
+  "family": "hazard",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-02-hazard-water-v03",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-02/PROMPTS.md",
+        "sha256": "a02a6016e1a71a540ce2c162ba19622b6c0d7471ba422cbee086c3fd670eb1a6"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "family-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-family-transfer-generator-original.png",
+          "sha256": "2583f027d00d662dbd52e689eca99298a5d04c24322a976747a288277c356a76"
+        },
+        {
+          "order": 2,
+          "role": "comparison-only",
+          "authorityKind": "runtime-comparison",
+          "path": "public/assets/water-v2.png",
+          "sha256": "fffcc5abd39b27dce5a26cefc12c3160b9233aa3ea4abaa6615993c02ccf267d"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-cbbff5c7-1134-47f4-8291-0c7bf61a277e.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-water-v03-generator-original.png",
+          "sha256": "31362aa9e6b651ddb6bbda5ffc3a033b7f2d2f8a56a028623ed926d445f33eb8",
+          "bytes": 2020380,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-02/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "terrain-boundary",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredBoundary": "material-local-color-aware",
+    "extractionRole": "not-applicable",
+    "stickerCutline": "forbidden",
+    "enclosingContour": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-02/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/PROMPTS.md",
+      "sha256": "a02a6016e1a71a540ce2c162ba19622b6c0d7471ba422cbee086c3fd670eb1a6"
+    },
+    "outputIds": [
+      "exec-cbbff5c7-1134-47f4-8291-0c7bf61a277e.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-water-v03-generator-original.png",
+      "sha256": "31362aa9e6b651ddb6bbda5ffc3a033b7f2d2f8a56a028623ed926d445f33eb8",
+      "bytes": 2020380,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-02-hazard-water-v03 in docs/source-assets/production/mgjrpg-02/batch-02/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "terrain-water-terrain-periodic-1024-r01",
+      "path": "public/assets/mgjrpg-02/hazards/terrain-water-v03-terrain-periodic-1024-r01.webp",
+      "sha256": "931e4aed161c56ac5472fab5c15a59c0e5f97413b18736dadc3f214bfb4c194e",
+      "bytes": 214752,
+      "width": 1024,
+      "height": 1024,
+      "format": "webp",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 4194304,
+      "profile": "terrain-periodic-1024",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": false,
+          "quality": 94,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "ground-overlay",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "safeInset": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-02/hazard-water-v03-generator-original.png",
+    "operation": "periodic",
+    "profiles": [
+      {
+        "id": "terrain-periodic-1024",
+        "outputPath": "public/assets/mgjrpg-02/hazards/terrain-water-v03-terrain-periodic-1024-r01.webp",
+        "width": 1024,
+        "height": 1024,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 665600,
+        "encoder": {
+          "options": {
+            "lossless": false,
+            "quality": 94,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ]
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Colour-space normalization, alpha extraction where required, transparent-edge decontamination, aspect-preserving registration, resize, exact-black normalization, and WebP encoding only.",
+      "script": "scripts/art_pipeline/mgjrpg02_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project owner",
+    "approvedAt": "2026-09-04T00:26:48.234Z",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "evidenceSha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48"
+  },
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and ordered semantic/rendering references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Revert the catalogue pointer to the recorded prior URL; retain both versions until the Plan 12 retirement sweep.",
+    "previousPath": "/assets/water-v2.png",
+    "previousSha256": "fffcc5abd39b27dce5a26cefc12c3160b9233aa3ea4abaa6615993c02ccf267d"
+  }
+}

@@ -77,7 +77,7 @@ These are **Human decisions**.
   than transplanted: PPBA characters, world, palette, props, compositions,
   prompts, UI skin, brand language, and pixels never become Maze canon.
 - The Human explicitly adopts PPBA's colour-aware outline *technique* as craft
-  for Maze's proposed `mgjrpg-02` / `storybook-local-contour-v1` rendering
+  for Maze's current `mgjrpg-02` / `storybook-local-contour-v1` rendering
   profile. Each stable contour section follows the nearest enclosed Maze
   material and becomes a darker, slightly richer member of Maze's established
   deep-plum family: warm gold-plum, aubergine, blue-plum, russet-plum,
@@ -100,9 +100,9 @@ These are **Human decisions**.
 - On 2026-09-03 the Human approved Plan 03's Candidate C as the canonical static
   Ame v02 direction after reviewing its comparison, actual-size and model-study
   proofs. Its golden-blonde shoulder-brushing layers, blue eyes and preserved
-  Ame identity are now visual canon. The candidate remains source-only until
-  Plan 03 produces, proves and atomically selects the versioned runtime
-  derivative; design approval is not runtime or whole-plan acceptance.
+  Ame identity are now visual canon. Plan 03's v6 publication decision has
+  produced, proved, and atomically selected the versioned Ame v02 field and
+  portrait derivatives while preserving the v01 files as rollback authority.
 - Candidate C's approved identity/construction is not reopened by rendering
   calibration. Her warm young face, golden-blonde shoulder-length layered hair,
   clearly blue irises, proportions, mint/lavender/backpack costume, silhouette,
@@ -110,21 +110,33 @@ These are **Human decisions**.
   Human approved Fresh B-led 01 as Ame's static `mgjrpg-02` rendering choice
   because it is clearest at her common small gameplay scale; Fresh B-led 02 is
   appealing at source size but is not selected. This approves rendering craft,
-  not a replacement identity, cleaned cutout, runtime asset, or catalogue
-  pointer. Candidate C remains the sole construction authority.
+  not a replacement identity. The published cleaned derivative and catalogue
+  pointer remain governed by Candidate C as the sole construction authority.
 - The Human also approved the fresh low flower-petal Rose Heart teleporter
   construction, subject to a brighter and clearer centre heart plus a truly
   flat plain extraction matte, and approved the v03 Wholesome Succubus, Pocket
   T-Rex, Kappa, and Treasure Mimic as concept/render-family references. Concept
   boards must never be cropped into production masters; each isolated asset is
   authored independently from its locked brief.
-- `mgjrpg-02` revision 4 now permits controlled family-by-family source
-  production. Each presented batch uses one lightweight named, single-scale
+- `mgjrpg-02` revision 4 governed the completed controlled family-by-family
+  source production. Each presented batch used one lightweight named, single-scale
   review page. After an explicit Human response, unlisted assets in that batch
   are approved by default and named exceptions return as independent
-  generations in the next batch; silence is not approval. Rights, cleaned
-  derivatives, public bytes, catalogue/preload switches, runtime publication,
-  and retirement remain separate gates.
+  generations in the next batch; silence is not approval. The final v6 map
+  publishes the approved static catalogue through explicit rights, derivative,
+  byte, pointer, and rollback gates; physical retirement remains Plan 12 only.
+- The earlier Plan 03 authorization produced source-only Maze-native title,
+  home-splash, logo, and Ame-face icon studies. The v6 publication decision does
+  not promote them: Batch 21 has no final exact wordmark authority and platform
+  branding remains provisional. Plan 11 owns the final front-door selection,
+  exact lettering, platform optical set, and runtime integration, retaining good
+  approved work by default rather than imposing a regeneration quota.
+- The current title route is also the home/menu surface. The early title and
+  home-splash illustrations receive distinct responsive roles within that front
+  door or an explicit reserved disposition; they do not justify a redundant new
+  screen. Keep illustration, exact live title and logo separable. Generated
+  lettering is concept-only until “Maze so Puzzle” is reconstructed with exact
+  controlled lettering, checked at delivery sizes and explicitly approved.
 - On 2026-09-03 the Human rejected the v08 deterministic contour-overlay packet
   as a meaningful art-style decision: at gameplay size its local contours read
   too close to black and its historical interiors remained materially
@@ -138,16 +150,17 @@ These are **Human decisions**.
 - The Human-directed future guardian roster is Classic Slime, Lizard Sword
   Guard, Lizard Spear Guard, Wholesome Succubus, Pocket
   T-Rex, Cultist (public label pending), Lamia, Soda Slime, Orc Chieftain,
-  Cyclops, Minotaur, Warrior Skeleton, Kappa, and Treasure Mimic. These are
-  future source identities, not shipped styles, placements or mechanics. They
-  remain kind Puzzlewild guardians under the universal Power and Polite Sword
-  rules. `docs/enemies/ENEMY_FAMILY_SHEET.md` owns their original design,
+  Cyclops, Minotaur, Warrior Skeleton, Kappa, and Treasure Mimic. Their approved
+  runtime derivatives now have stable dormant catalogue identities, but no
+  placement, preload, mechanics, animation, progression, or balance is implied.
+  They remain kind Puzzlewild guardians under the universal Power and Polite
+  Sword rules. `docs/enemies/ENEMY_FAMILY_SHEET.md` owns their original design,
   child-safety, sibling-construction and naming constraints.
 
 - Tea-Time Skeleton is a Human-approved rescue-and-collect friend, not a
-  guardian or enemy. Preserve his approved green-tea sprite unchanged and route
-  his eventual catalogue/content work through friend rescue and Friend Garden
-  contracts. His toy-bone construction may still be a visual consistency
+  guardian or enemy. His approved green-tea sprite is catalogued under the
+  dormant friend identity `green-tea-skeleton`; later content admission remains
+  with friend rescue and Friend Garden contracts. His toy-bone construction may still be a visual consistency
   reference for Warrior Skeleton without implying shared gameplay taxonomy.
 
 ### 4.3 Game design, gameplay, and challenge

@@ -1,0 +1,234 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "classic-mimic-revealed-mgjrpg02-v01-source",
+  "id": "classic-mimic-revealed",
+  "artVersion": 1,
+  "family": "enemy",
+  "runtimeStatus": "dormant",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-01-treasure-mimic-matte-02",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-01/PROMPTS-r01.md",
+        "sha256": "efff5594028139a56d6fb40b3d886543794baf116db6d10d8acec286ef6170d9"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "construction-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v03/future-enemy-hybrid-01-generator-original.png",
+          "sha256": "eef19db39fc5c2289a1797f3baf8fae91ac0bbfd763717e0198bdd9a4c60983b"
+        },
+        {
+          "order": 2,
+          "role": "rendering-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/calibrations/mgjrpg-02/v02/direction-a-family-transfer-generator-original.png",
+          "sha256": "2583f027d00d662dbd52e689eca99298a5d04c24322a976747a288277c356a76"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-cc6ebfe2-c6b2-47cc-bb5a-588f8264fd48.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/enemy-treasure-mimic-v01-matte-02-generator-original.png",
+          "sha256": "04d378ced51d5c960b58d372bfea7284ec08a3a8150e599ecce72c167a16582e",
+          "bytes": 1544711,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-01/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-01/PROMPTS-r01.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01/PROMPTS-r01.md",
+      "sha256": "efff5594028139a56d6fb40b3d886543794baf116db6d10d8acec286ef6170d9"
+    },
+    "outputIds": [
+      "exec-cc6ebfe2-c6b2-47cc-bb5a-588f8264fd48.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-01/enemy-treasure-mimic-v01-matte-02-generator-original.png",
+      "sha256": "04d378ced51d5c960b58d372bfea7284ec08a3a8150e599ecce72c167a16582e",
+      "bytes": 1544711,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-01-treasure-mimic-matte-02 in docs/source-assets/production/mgjrpg-02/batch-01/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "classic-mimic-revealed-prop-field-256-r01",
+      "path": "public/assets/mgjrpg-02/enemies/classic-mimic-revealed-v01-prop-field-256-r01.webp",
+      "sha256": "705adecdf69a47bf43dc90ba3a99e540bbec09e943b0884981a1f7241c02374a",
+      "bytes": 54902,
+      "width": 256,
+      "height": 256,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "profile": "prop-field-256",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "not-loaded-by-active-catalogue",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "item",
+    "pivot": [
+      0.5,
+      0.921875
+    ],
+    "visibleBounds": [
+      0.109375,
+      0.078125,
+      0.78125,
+      0.84375
+    ],
+    "safeInset": [
+      0.078125,
+      0.109375,
+      0.078125,
+      0.109375
+    ],
+    "baseline": 0.921875,
+    "stateFamilyId": "classic-mimic",
+    "stateAnchorBox": [
+      0.078125,
+      0.078125,
+      0.84375,
+      0.84375
+    ],
+    "visualCenter": [
+      0.49959469,
+      0.48158249
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-01/enemy-treasure-mimic-v01-matte-02-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "prop-field-256",
+        "outputPath": "public/assets/mgjrpg-02/enemies/classic-mimic-revealed-v01-prop-field-256-r01.webp",
+        "width": 256,
+        "height": 256,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 102400,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        4,
+        223,
+        233
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.08,
+        0.08,
+        0.92,
+        0.92
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Colour-space normalization, alpha extraction where required, transparent-edge decontamination, aspect-preserving registration, resize, exact-black normalization, and WebP encoding only.",
+      "script": "scripts/art_pipeline/mgjrpg02_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project owner",
+    "approvedAt": "2026-09-04T00:26:48.234Z",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "evidenceSha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48"
+  },
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response.",
+    "Catalogue-only; gameplay mechanics and placement are not authorized by Plan 03."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from the exact prompts and ordered reference evidence bound above; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Revert the catalogue pointer to the recorded prior URL; retain both versions until the Plan 12 retirement sweep."
+  }
+}

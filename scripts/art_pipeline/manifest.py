@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from model import (
+    CANARY_REVIEW_SCHEMA,
     CALIBRATION_ROOT,
     MANIFEST_PATH,
     PROMPT_HISTORY_PATH,
@@ -156,6 +157,8 @@ def build_manifest() -> tuple[dict[str, Any], list[str]]:
             errors.append(f"{row['path']}: invalid review JSON: {exc}")
             continue
         errors.extend(validate_review_shape(review, str(row["path"])))
+        if review.get("schema") != CANARY_REVIEW_SCHEMA:
+            continue
         recipe_path = str(review.get("recipePath", ""))
         recipe_file = _resolve_recorded_path(recipe_path)
         if recipe_file is None or not recipe_file.is_file():

@@ -736,7 +736,7 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
   name: "Twilight Treasure Loop",
   objective: "Search the side trails for every tool, then unlock the twilight star!",
   terrainThemeId: "pearl-grotto",
-  weaponStyle: "bubble-bow",
+  weaponStyle: "bubble-ring-blade",
   enemyStyle: "mushroom-imp",
   enemyStylesByPower: {
     4: "clockwork-crab",

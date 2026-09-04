@@ -1,0 +1,213 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "ame-portrait-mgjrpg02-v02-source",
+  "id": "ame-portrait",
+  "artVersion": 2,
+  "family": "story",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-20-ame-portrait-v02",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/PROMPTS.md",
+        "sha256": "4eba5df3b0efe8abb24e85420980e04380844496db1433ccedca9ba372eb7af6"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "identity-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-generator-original.png",
+          "sha256": "b676c173d696d3b306db0b70589b50bf93f4db76352d87b7c390d16a1cf0ded1"
+        },
+        {
+          "order": 2,
+          "role": "construction-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/characters/ame/v02/ame-v02-candidate-c-turnaround-study.png",
+          "sha256": "22b312e19731718146e3a836afdf28884bec7210c49233a55090592cc275fe09"
+        },
+        {
+          "order": 3,
+          "role": "rendering-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/ame-static-v02-b-led-01-512.png",
+          "sha256": "069270d3be02de6659bb972b89b7712e0495117e070f1a7ab349a30052d16bca"
+        },
+        {
+          "order": 4,
+          "role": "comparison-only",
+          "authorityKind": "runtime-comparison",
+          "path": "public/assets/ame-portrait.png",
+          "sha256": "095f112b3a33a30ea12ee396bfed236520ee8b2ea01f122ef78d5078187bd896"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-c03bf4f5-0d67-45ed-bdb8-4dd1243b49fb.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/ame-portrait-v02-candidate-a-generator-original.png",
+          "sha256": "ceeadb2ad2b34810514a47ed6595f47e4641fe3c294cc13a73c54a10df7ff30b",
+          "bytes": 2201387,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "story-illustration",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredBoundary": "material-local-color-aware",
+    "extractionRole": "not-applicable",
+    "stickerCutline": "forbidden",
+    "enclosingContour": "subject-local-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/PROMPTS.md",
+      "sha256": "4eba5df3b0efe8abb24e85420980e04380844496db1433ccedca9ba372eb7af6"
+    },
+    "outputIds": [
+      "exec-c03bf4f5-0d67-45ed-bdb8-4dd1243b49fb.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/ame-portrait-v02-candidate-a-generator-original.png",
+      "sha256": "ceeadb2ad2b34810514a47ed6595f47e4641fe3c294cc13a73c54a10df7ff30b",
+      "bytes": 2201387,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-20-ame-portrait-v02 in docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "ame-portrait-story-portrait-512-r01",
+      "path": "public/assets/mgjrpg-02/story/ame-portrait-v02-story-portrait-512-r01.webp",
+      "sha256": "d07521c1532fa8a3900a7c54403ed4ffc63b9e6d07e1892098588ba0b2532827",
+      "bytes": 52346,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "story-portrait-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "story-or-level-entry",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": false,
+          "quality": 88,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "portrait",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ],
+    "safeInset": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-20-final-coverage/ame-portrait-v02-candidate-a-generator-original.png",
+    "operation": "opaque-resize",
+    "profiles": [
+      {
+        "id": "story-portrait-512",
+        "outputPath": "public/assets/mgjrpg-02/story/ame-portrait-v02-story-portrait-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 122880,
+        "encoder": {
+          "options": {
+            "lossless": false,
+            "quality": 88,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ]
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Colour-space normalization, alpha extraction where required, transparent-edge decontamination, aspect-preserving registration, resize, exact-black normalization, and WebP encoding only.",
+      "script": "scripts/art_pipeline/mgjrpg02_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project owner",
+    "approvedAt": "2026-09-04T00:26:48.234Z",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "evidenceSha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48"
+  },
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal references; no named franchise, character, logo, living artist, proprietary palette, UI layout or composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Revert the catalogue pointer to the recorded prior URL; retain both versions until the Plan 12 retirement sweep.",
+    "previousPath": "/assets/ame-portrait.png",
+    "previousSha256": "095f112b3a33a30ea12ee396bfed236520ee8b2ea01f122ef78d5078187bd896"
+  }
+}

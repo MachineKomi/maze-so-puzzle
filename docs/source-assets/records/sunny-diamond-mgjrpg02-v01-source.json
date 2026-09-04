@@ -1,0 +1,232 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "sunny-diamond-mgjrpg02-v01-source",
+  "id": "sunny-diamond",
+  "artVersion": 1,
+  "family": "portal",
+  "runtimeStatus": "dormant",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-13-portal-diamond-v01",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+        "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "construction-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/portal-rose-heart-v02-512.png",
+          "sha256": "f7ac1c99fa1dd62fc5c4b602f4d78c998128b17d37f13c9da3d77f79f1f90ff2"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-9d53535c-882d-4dcd-a3fb-60ff089274a1.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/portal-sunny-diamond-v01-candidate-a-matte-01-generator-original.png",
+          "sha256": "05c4e4cf9c4558950600d3ba018f406404f19bd03d50d96d68108cd4ab26460b",
+          "bytes": 1730311,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+      "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+    },
+    "outputIds": [
+      "exec-9d53535c-882d-4dcd-a3fb-60ff089274a1.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/portal-sunny-diamond-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "05c4e4cf9c4558950600d3ba018f406404f19bd03d50d96d68108cd4ab26460b",
+      "bytes": 1730311,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-13-portal-diamond-v01 in docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "sunny-diamond-structure-field-256-r01",
+      "path": "public/assets/mgjrpg-02/portals/sunny-diamond-v01-structure-field-256-r01.webp",
+      "sha256": "6f4d4941b6f318d1f5a5c64cd8b1ae3a1ac06488e9d8b4861b0a3e51bcf74ef8",
+      "bytes": 62492,
+      "width": 256,
+      "height": 256,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "profile": "structure-field-256",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "not-loaded-by-active-catalogue",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "floor-portal",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0390625,
+      0.1484375,
+      0.921875,
+      0.79296875
+    ],
+    "safeInset": [
+      0.1484375,
+      0.0390625,
+      0.05859375,
+      0.0390625
+    ],
+    "apertureBox": [
+      0.2890625,
+      0.3359375,
+      0.42578125,
+      0.38671875
+    ],
+    "motifBox": [
+      0.38671875,
+      0.3828125,
+      0.23046875,
+      0.2734375
+    ],
+    "tileFootprint": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/portal-sunny-diamond-v01-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "structure-field-256",
+        "outputPath": "public/assets/mgjrpg-02/portals/sunny-diamond-v01-structure-field-256-r01.webp",
+        "width": 256,
+        "height": 256,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 102400,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        10,
+        238,
+        15
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.04,
+        0.04,
+        0.96,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Colour-space normalization, alpha extraction where required, transparent-edge decontamination, aspect-preserving registration, resize, exact-black normalization, and WebP encoding only.",
+      "script": "scripts/art_pipeline/mgjrpg02_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project owner",
+    "approvedAt": "2026-09-04T00:26:48.234Z",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "evidenceSha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48"
+  },
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Revert the catalogue pointer to the recorded prior URL; retain both versions until the Plan 12 retirement sweep."
+  }
+}

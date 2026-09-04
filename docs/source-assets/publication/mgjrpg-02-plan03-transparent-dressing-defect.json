@@ -1,0 +1,85 @@
+{
+  "schema": "maze-art-runtime-derivative-defect/v1",
+  "defectId": "mgjrpg-02-plan03-transparent-dressing-r01",
+  "detectedOn": "2026-09-04",
+  "status": "corrected-before-commit",
+  "scope": "Four uncommitted Plan 03 dressing derivatives produced during the publication worktree run.",
+  "cause": "The shared Poisson periodic helper converts input to RGB. The initial dressing branch called that opaque-terrain helper despite the approved sources being sparse transparent overlays.",
+  "approvedSourceImpact": "none; immutable generator originals, approved designs, prompts, colours, construction, and proportions are unchanged",
+  "runtimeImpactIfUncorrected": "The opaque 512 px sheets would tint or cover their terrain repeat instead of layering sparse decoration.",
+  "rejectedDerivatives": [
+    {
+      "stableId": "terrain-dressing-garden",
+      "path": "public/assets/mgjrpg-02/terrain/terrain-dressing-garden-v02-dressing-periodic-512-r01.webp",
+      "sha256": "05bd86f2db1be0e88336b2488e2a73ea5d907f2aa03dbf8945e027c19c4dc4e9",
+      "bytes": 143888,
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "recordPath": "docs/source-assets/records/terrain-dressing-garden-mgjrpg02-v02-source.json",
+      "recordSha256": "e2206a65aee72683e46b17fdc2d50f75349ce1ea0a377d806966b75ed6795e12"
+    },
+    {
+      "stableId": "terrain-dressing-vines",
+      "path": "public/assets/mgjrpg-02/terrain/terrain-dressing-vines-v02-dressing-periodic-512-r01.webp",
+      "sha256": "f8af2b7c01422b022681ae9f8be5fdc9b894e96ed47a1e540f454945e1e9f081",
+      "bytes": 114060,
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "recordPath": "docs/source-assets/records/terrain-dressing-vines-mgjrpg02-v02-source.json",
+      "recordSha256": "546f49c88d1c13163d8a6214d81c61064d33db7fae4889558603a9e5c7052fb3"
+    },
+    {
+      "stableId": "terrain-dressing-crystal",
+      "path": "public/assets/mgjrpg-02/terrain/terrain-dressing-crystal-v02-dressing-periodic-512-r01.webp",
+      "sha256": "ba2af2aca39c0a22daa162fe835b133bf82b804a7e0b91eca14eacf2ee68c2ea",
+      "bytes": 175650,
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "recordPath": "docs/source-assets/records/terrain-dressing-crystal-mgjrpg02-v02-source.json",
+      "recordSha256": "04a7fbad110caec6bda2f303300c857468c582217052e1ccb361b72f6520773d"
+    },
+    {
+      "stableId": "terrain-dressing-autumn",
+      "path": "public/assets/mgjrpg-02/terrain/terrain-dressing-autumn-v02-dressing-periodic-512-r01.webp",
+      "sha256": "459c301bbfa73b725321e4ecb3e53de1f382deff828a14bc64b0dffa53546a98",
+      "bytes": 157808,
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "recordPath": "docs/source-assets/records/terrain-dressing-autumn-mgjrpg02-v02-source.json",
+      "recordSha256": "569ead10fa12c4bec72f1cc0737500e77f9018569328326ae88b8647b6f6c5d1"
+    }
+  ],
+  "smallestCorrection": "Preserve native RGBA while resizing the already transparent, clear-gutter sources; clear sub-threshold alpha, remove tiny components, dilate hidden edge colour, verify a clear seam gutter, and regenerate only these four uncommitted derivatives and records.",
+  "retentionDecision": "The rejected bytes are transient, uncommitted processing defects rather than approved art or rollback authorities. Their hashes remain in this defect record; they must not be packaged or entered in the Plan 12 asset-retirement ledger.",
+  "correctedDerivatives": [
+    {
+      "stableId": "terrain-dressing-garden",
+      "sha256": "4d5e324478345a3da2b02523125473b83f31ff21b309c8931ea536c91a5b310a",
+      "bytes": 154938,
+      "mode": "RGBA",
+      "alphaMode": "straight"
+    },
+    {
+      "stableId": "terrain-dressing-vines",
+      "sha256": "01ed2cfccfb60a16f99ca0b9ce393c0fbfaed55576534e537d7d5dc94f51b8a5",
+      "bytes": 128416,
+      "mode": "RGBA",
+      "alphaMode": "straight"
+    },
+    {
+      "stableId": "terrain-dressing-crystal",
+      "sha256": "9636fb69eba1ce7a7c26b6b78bb0c1d68ea5150ca966244122372fc250fd28f8",
+      "bytes": 181962,
+      "mode": "RGBA",
+      "alphaMode": "straight"
+    },
+    {
+      "stableId": "terrain-dressing-autumn",
+      "sha256": "6a4e5de5ea376c1eba29d5cdc984c836b1db5baeb81f677cc3cbc9cf1de60561",
+      "bytes": 168486,
+      "mode": "RGBA",
+      "alphaMode": "straight"
+    }
+  ],
+  "verification": "All four corrected outputs retain nontrivial straight alpha, have a clear seam gutter, and pass the publication seam contract. The full 144-file deterministic rebuild and application-level visual review remain the final gates."
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "maze-art-rights-provenance-review/v1",
+  "reviewId": "mgjrpg-02-rights-provenance-v01",
+  "reviewedAt": "2026-09-04T00:26:48.234Z",
+  "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+  "licenceStatus": "reviewed",
+  "scope": "The 144 exact immutable generator outputs selected by the Plan 03 runtime publication map.",
+  "evidence": {
+    "generationProvider": "OpenAI built-in image generation capability as recorded in each immutable batch ledger",
+    "promptOwnership": "Project-authored prompts preserved exactly in each batch PROMPTS.md",
+    "referenceBoundary": "Only Maze project sources, model sheets, rendering contracts, and comparison-only legacy runtime art are recorded; no external pixels are incorporated into derivatives.",
+    "forbiddenRequests": "Batch origin claims record no named franchise character, logo, living artist, proprietary palette, UI layout, or composition request.",
+    "humanAuthority": "The Human project owner explicitly directed publication and integration in the 2026-09-04 Plan 03 continuation."
+  },
+  "conclusion": "Reviewed for project runtime publication. The deterministic derivative pipeline alters crop, alpha, size, colour-space normalization, and encoding only; it does not synthesize or redesign content.",
+  "limitations": "This is a technical provenance review, not a legal opinion, trademark clearance, or platform-rating determination. Public labels for succubus and cultist remain separately gated.",
+  "selectedSourceCount": 144
+}

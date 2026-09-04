@@ -2,6 +2,7 @@
 
 Audit date: 2026-09-02
 Audited build: 0.19.0 web/Windows playable release
+Plan 03 publication update: 2026-09-04
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
@@ -34,7 +35,105 @@ interactive evidence.
 No production optimization or media change is claimed. Exact evidence classes
 and remaining hardware gates are in `PERFORMANCE_BUDGETS.md`.
 
-## Current Plan 03 art foundation: identity approved, rendering gate open
+## Current Plan 03 static-art publication
+
+On 2026-09-04 the Human closed the art-review and completeness gates and
+directed publication of the latest approved production masters without
+regenerating alternatives or reopening unchanged art decisions. The
+forward-only decision is
+`source-assets/calibrations/mgjrpg-02/v06/human-decision.json`; it hash-binds
+the explicit 144-row runtime map at
+`source-assets/publication/mgjrpg-02-plan03-runtime-map.json`. One hundred rows
+are active and 44 are dormant catalogue-only art. Dormant entries add no
+gameplay, placement, preload, animation, or progress behavior.
+
+Every selected source is joined by exact generation run ID to one new
+no-overwrite runtime derivative and strict-v2 source record. The measured
+per-file hashes, dimensions, alpha state, encoder facts, and totals are in
+`source-assets/publication/mgjrpg-02-plan03-publication-report.json`; the
+publisher's separate non-writing check rebuilds and byte-compares all selected
+derivatives. The generated runtime projection is
+`../src/generated/mgjrpg02Art.ts`. The general manifest remains generated
+rather than hand-edited. The separate technical
+project-publication provenance review is
+`source-assets/reviews/mgjrpg-02-rights-provenance-v01.json`; it expressly is
+not external legal advice, trademark clearance, or a public-label/rating
+decision.
+
+The publication map replaces 100 prior runtime art authorities. Their exact
+files remain in place and their former source records are marked superseded;
+all enter `source-assets/retirement/asset-retirement-ledger.json` as
+`rollback-hold`, with no Plan 12 eligibility. Together with 16 earlier orphan
+candidates, the ledger now holds 116 files / 37,066,556 encoded bytes /
+168,329,216 decoded-RGBA bytes. No file is deleted or moved. Rollback means
+restoring catalogue pointers and the one-way semantic resolver, not rewriting
+prompt history or discarding the approved sources.
+
+The semantic publication boundaries are explicit. `green-tea-skeleton` is a
+dormant rescue-and-collect friend and never an enemy. `bubble-ring-blade`
+replaces the misleading Bubble Bow weapon identity, while a one-way historical
+alias preserves old saved content; this art-semantic rename does not change the
+gameplay fingerprint or authored content revision. The approved Batch 15 Normal
+Boots source is published as the current `splash-boots` pickup and replaces the
+old boots delivery rather than creating a second dormant footwear family.
+Violet Moon remains the active third portal pair, while Sunny Diamond and
+Violet Spade Bloom are dormant. The platform app icon and every Batch 21 title,
+home, and generated
+logo study remain source-only for Plan 11; generated lettering is not wordmark
+authority. Batch 22's 15 selected premium achievement stickers use 256 px
+transparent WebP delivery, while their smaller PNGs remain proof-only.
+
+The final derivative set measures 9,366,734 encoded bytes and 107,937,792
+decoded-RGBA bytes as an all-files upper bound. Active rows account for
+7,068,346 / 92,471,296 bytes; dormant rows account for 2,298,388 / 15,466,496
+bytes. Relative to exact turn-start commit `0fce054`, runtime image count moves
+125 → 269, encoded image bytes 39,173,427 → 48,540,161, theoretical decoded
+bytes 183,011,232 → 290,949,024, and dist 144 / 89,932,709 → 288 /
+99,373,682. The scoped allocation and clean-tree comparison are in
+`PERFORMANCE_BUDGETS.md`.
+
+The audit caught one pre-commit processing defect rather than accepting its
+pixels: four sparse dressing overlays had been flattened by an RGB-only terrain
+helper. Their rejected hashes and the bounded RGBA-preserving correction are in
+`source-assets/publication/mgjrpg-02-plan03-transparent-dressing-defect.json`.
+All four corrected derivatives have nontrivial straight alpha and clear seam
+gutters; approved source art was not redesigned. The report also names 56
+non-Ame actor rows whose semantic face/eye/ground landmarks remain deliberately
+unfabricated. They are safe for the registered static catalogue and live review,
+but Plan 05 animation and automated cage-face masking must add manual landmark
+authority first.
+
+Production-preview inspection is recorded in
+`source-assets/publication/mgjrpg-02-plan03-visual-integration-report.json`.
+Ten actual-size captures cover 1920 × 1080 TV-class, 1280 × 720 desktop,
+1194 × 834 and 1024 × 768 tablet, 844 × 390 compact phone, and the supported
+568 × 320 minimum landscape presentation. A normal non-tester six-step finish
+also exercised the live completion reward, then verified My First Maze and
+Twinkle Toes as mixed earned/locked Adventure Book identities. Sampled live
+mazes and the scrolled Book showed zero visible broken images, legacy art URLs,
+or browser warning/error entries. A separate HTTP exercise returned 200 for
+every one of the 144 versioned runtime-map URLs and exactly 9,366,734 bytes. The publisher's
+temporary rebuild is byte-identical for all 144 outputs, and the focused
+lifecycle contract reconciles the 116-item ledger with the manifest and proves
+that no held file was moved, deleted, made reachable, or placed under a live
+public archive.
+
+The exact candidate passed `npm run check` with 407/407 tests across 35 files,
+strict TypeScript, and the production build; it also passed the shared
+performance contract, locked desktop compilation, and a no-bundle release
+build. The release executable stayed responsive and was inspected in Rose Heart
+Roundabout with the published Ame, portal, cage, science pickup, terrain, and
+navigation/sound art. An earlier full-suite attempt made during cold Rust/linker
+compilation exceeded four fixed gameplay-solver timeouts; the same generator
+case reproduced in the untouched starting commit under contention, and all
+affected files passed after that load ended. This chronology is retained in the
+validation report instead of being mistaken for an art regression.
+
+## Historical Plan 03 art foundation: identity approved, rendering gate open
+
+This section is retained verbatim as the 2026-09-03 pre-publication audit.
+Words such as “current,” “pending,” and “open” below describe that checkpoint
+and are superseded by the 2026-09-04 publication record above.
 
 This implementation began from accepted Plan 06 checkpoint
 `ee176f52ab79e08e818fc919f44b7723f9fc9865`. It does not revise the historical

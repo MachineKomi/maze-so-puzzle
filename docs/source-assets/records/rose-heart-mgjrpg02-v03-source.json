@@ -1,0 +1,234 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "rose-heart-mgjrpg02-v03-source",
+  "id": "rose-heart",
+  "artVersion": 3,
+  "family": "portal",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-13-portal-heart-v03",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+        "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "identity-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/portal-rose-heart-v02-512.png",
+          "sha256": "f7ac1c99fa1dd62fc5c4b602f4d78c998128b17d37f13c9da3d77f79f1f90ff2"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-7517ac1e-9f1e-445e-a36e-ed6b3c4d8145.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/portal-rose-heart-v03-candidate-a-matte-01-generator-original.png",
+          "sha256": "191a3f9c4d46adf8fa142f5dc2895aa2edf54d97f7447ff180702294389cc0b0",
+          "bytes": 1702071,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+      "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+    },
+    "outputIds": [
+      "exec-7517ac1e-9f1e-445e-a36e-ed6b3c4d8145.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/portal-rose-heart-v03-candidate-a-matte-01-generator-original.png",
+      "sha256": "191a3f9c4d46adf8fa142f5dc2895aa2edf54d97f7447ff180702294389cc0b0",
+      "bytes": 1702071,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-13-portal-heart-v03 in docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "rose-heart-structure-field-256-r01",
+      "path": "public/assets/mgjrpg-02/portals/rose-heart-v03-structure-field-256-r01.webp",
+      "sha256": "88d3a6c4641cb1080132ac3627fae3bab4837420cd21b6c03f30b310cd7d34e5",
+      "bytes": 59766,
+      "width": 256,
+      "height": 256,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "profile": "structure-field-256",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "floor-portal",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0390625,
+      0.16796875,
+      0.921875,
+      0.7734375
+    ],
+    "safeInset": [
+      0.16796875,
+      0.0390625,
+      0.05859375,
+      0.0390625
+    ],
+    "apertureBox": [
+      0.296875,
+      0.3671875,
+      0.41015625,
+      0.3515625
+    ],
+    "motifBox": [
+      0.34765625,
+      0.42578125,
+      0.30859375,
+      0.2421875
+    ],
+    "tileFootprint": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/portal-rose-heart-v03-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "structure-field-256",
+        "outputPath": "public/assets/mgjrpg-02/portals/rose-heart-v03-structure-field-256-r01.webp",
+        "width": 256,
+        "height": 256,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 102400,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        6,
+        248,
+        11
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.04,
+        0.04,
+        0.96,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Colour-space normalization, alpha extraction where required, transparent-edge decontamination, aspect-preserving registration, resize, exact-black normalization, and WebP encoding only.",
+      "script": "scripts/art_pipeline/mgjrpg02_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project owner",
+    "approvedAt": "2026-09-04T00:26:48.234Z",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "evidenceSha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48"
+  },
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Revert the catalogue pointer to the recorded prior URL; retain both versions until the Plan 12 retirement sweep.",
+    "previousPath": "/assets/portal-rose-heart-v1.png",
+    "previousSha256": "c884b498c37376e555519f28c6e250144c6e0a57d7aa095ea713257d98c72465"
+  }
+}

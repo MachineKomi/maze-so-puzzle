@@ -53,6 +53,13 @@ class Mgjrpg02StagedPixelTests(unittest.TestCase):
             record, {"operation": "opaque-resize"}, opaque
         )
 
+        # Sparse periodic dressings use alpha by design while retaining the
+        # terrain-boundary/no-enclosing-contour rendering contract.
+        dressing = {**record, "family": "dressing"}
+        _validate_mgjrpg02_staged_pixels(
+            dressing, {"operation": "periodic"}, transparent
+        )
+
     def test_legacy_recipe_does_not_acquire_mgjrpg02_pixel_rules(self) -> None:
         legacy = {
             "recipeVersion": "mgjrpg-01",

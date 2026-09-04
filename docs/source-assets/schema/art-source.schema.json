@@ -105,13 +105,13 @@
       "required": ["sourcePath", "operation", "profiles"],
       "properties": {
         "sourcePath": { "type": "string" },
-        "operation": { "enum": ["cutout-resize", "opaque-resize", "periodic"] },
+        "operation": { "enum": ["cutout-resize", "opaque-resize", "periodic", "periodic-transparent-overlay"] },
         "backgroundExtraction": {
           "type": "object",
           "additionalProperties": false,
           "required": ["mode"],
           "properties": {
-            "mode": { "enum": ["native-alpha", "edge-connected", "seeded-checkerboard", "outer-contour-barrier"] },
+            "mode": { "enum": ["native-alpha", "edge-connected", "seeded-checkerboard", "outer-contour-barrier", "flat-impossible-matte"] },
             "recipeId": { "type": "string", "minLength": 1 },
             "rgb": {
               "type": "array",
@@ -120,6 +120,9 @@
               "maxItems": 3
             },
             "tolerance": { "type": "integer", "minimum": 0, "maximum": 255 },
+            "clearDistance": { "type": "number", "minimum": 0 },
+            "opaqueDistance": { "type": "number", "exclusiveMinimum": 0 },
+            "minimumComponentPixels": { "type": "integer", "minimum": 1 },
             "maximumChroma": { "type": "integer", "minimum": 0, "maximum": 255 },
             "barrierMaximumLuminance": { "type": "integer", "minimum": 0, "maximum": 255 },
             "barrierMinimumChroma": { "type": "integer", "minimum": 0, "maximum": 255 },
@@ -151,7 +154,9 @@
                 "not": {
                   "anyOf": [
                     { "required": ["recipeId"] }, { "required": ["rgb"] },
-                    { "required": ["tolerance"] }, { "required": ["maximumChroma"] },
+                    { "required": ["tolerance"] }, { "required": ["clearDistance"] },
+                    { "required": ["opaqueDistance"] }, { "required": ["minimumComponentPixels"] },
+                    { "required": ["maximumChroma"] },
                     { "required": ["barrierMaximumLuminance"] },
                     { "required": ["barrierMinimumChroma"] },
                     { "required": ["barrierClosingRadius"] },
@@ -173,7 +178,9 @@
                 "required": ["rgb", "tolerance"],
                 "not": {
                   "anyOf": [
-                    { "required": ["recipeId"] }, { "required": ["maximumChroma"] },
+                    { "required": ["recipeId"] }, { "required": ["clearDistance"] },
+                    { "required": ["opaqueDistance"] }, { "required": ["minimumComponentPixels"] },
+                    { "required": ["maximumChroma"] },
                     { "required": ["barrierMaximumLuminance"] },
                     { "required": ["barrierMinimumChroma"] },
                     { "required": ["barrierClosingRadius"] },
@@ -200,6 +207,8 @@
                 "not": {
                   "anyOf": [
                     { "required": ["rgb"] }, { "required": ["tolerance"] },
+                    { "required": ["clearDistance"] }, { "required": ["opaqueDistance"] },
+                    { "required": ["minimumComponentPixels"] },
                     { "required": ["barrierMaximumLuminance"] },
                     { "required": ["barrierMinimumChroma"] },
                     { "required": ["barrierClosingRadius"] },
@@ -223,8 +232,35 @@
                 "not": {
                   "anyOf": [
                     { "required": ["rgb"] }, { "required": ["tolerance"] },
+                    { "required": ["clearDistance"] }, { "required": ["opaqueDistance"] },
+                    { "required": ["minimumComponentPixels"] },
                     { "required": ["maximumChroma"] }, { "required": ["openingRadius"] },
                     { "required": ["closingRadius"] }, { "required": ["subjectGrowRadius"] }
+                  ]
+                }
+              }
+            },
+            {
+              "if": { "properties": { "mode": { "const": "flat-impossible-matte" } }, "required": ["mode"] },
+              "then": {
+                "required": [
+                  "recipeId", "rgb", "clearDistance", "opaqueDistance",
+                  "minimumComponentPixels"
+                ],
+                "not": {
+                  "anyOf": [
+                    { "required": ["tolerance"] }, { "required": ["maximumChroma"] },
+                    { "required": ["barrierMaximumLuminance"] },
+                    { "required": ["barrierMinimumChroma"] },
+                    { "required": ["barrierClosingRadius"] },
+                    { "required": ["exteriorTrimMinimumLuminance"] },
+                    { "required": ["exteriorTrimMaximumChroma"] },
+                    { "required": ["holeMaximumChroma"] },
+                    { "required": ["foregroundSeedPoints"] },
+                    { "required": ["enclosedSeedPoints"] },
+                    { "required": ["openingRadius"] }, { "required": ["closingRadius"] },
+                    { "required": ["subjectGrowRadius"] }, { "required": ["holeGrowRadius"] },
+                    { "required": ["maxEnclosedComponentPixels"] }
                   ]
                 }
               }
@@ -257,7 +293,7 @@
         },
         {
           "if": {
-            "properties": { "operation": { "enum": ["opaque-resize", "periodic"] } },
+            "properties": { "operation": { "enum": ["opaque-resize", "periodic", "periodic-transparent-overlay"] } },
             "required": ["operation"]
           },
           "then": { "not": { "required": ["backgroundExtraction"] } }
@@ -467,7 +503,7 @@
       "if": {
         "properties": {
           "schemaVersion": { "const": 2 },
-          "family": { "enum": ["terrain", "dressing", "hazard"] }
+          "family": { "enum": ["terrain", "dressing"] }
         },
         "required": ["schemaVersion", "family"]
       },
@@ -477,6 +513,222 @@
             "properties": { "treatmentClass": { "const": "terrain-boundary" } }
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "const": "hazard" }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "properties": {
+          "renderingContract": {
+            "properties": { "treatmentClass": { "enum": ["terrain-boundary", "character-contour"] } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "const": "weapon" }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": {
+          "geometry": {
+            "required": [
+              "gripPoint", "forwardAxisDegrees", "heldScale",
+              "heldRotationDegrees", "zOrder"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "const": "cage" }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": {
+          "geometry": { "required": ["baseline", "openBay", "motifBox"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "const": "lock" },
+          "id": { "pattern": "^door-" }
+        },
+        "required": ["schemaVersion", "family", "id"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": {
+          "geometry": { "required": ["baseline", "motifBox"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "const": "portal" }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": {
+          "geometry": { "required": ["apertureBox", "motifBox"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "id": { "pattern": "^(rose-heart|mint-clover|sunny-diamond|violet-spade-bloom)$" }
+        },
+        "required": ["schemaVersion", "id"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": { "geometry": { "required": ["tileFootprint"] } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "id": { "const": "ground-hole" }
+        },
+        "required": ["schemaVersion", "id"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": {
+          "geometry": { "required": ["rimBox", "voidBox", "tileFootprint"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "id": { "const": "floor-spikes-overlay" }
+        },
+        "required": ["schemaVersion", "id"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": { "geometry": { "required": ["tileFootprint"] } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "family": { "enum": ["navigation", "reward"] }
+        },
+        "required": ["schemaVersion", "family"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": { "geometry": { "required": ["opticalBounds"] } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "id": { "const": "nav-muted" }
+        },
+        "required": ["schemaVersion", "id"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": { "geometry": { "required": ["modifierBox"] } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "id": {
+            "pattern": "^(classic-mimic-(revealed|closed|good-open)|candy-mimic(-closed|-good-open)?)$"
+          }
+        },
+        "required": ["schemaVersion", "id"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": {
+          "geometry": {
+            "required": ["baseline", "stateFamilyId", "stateAnchorBox"],
+            "properties": { "class": { "const": "item" } }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "geometry": {
+            "properties": { "class": { "const": "item" } },
+            "required": ["class"]
+          }
+        },
+        "required": ["schemaVersion", "geometry"]
+      },
+      "then": {
+        "properties": { "geometry": { "required": ["visualCenter"] } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "id": { "const": "ame" }
+        },
+        "required": ["schemaVersion", "id"]
+      },
+      "then": {
+        "required": ["geometry"],
+        "properties": {
+          "geometry": {
+            "required": ["faceBox", "eyeLine", "groundLine", "gripPoint"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schemaVersion": { "const": 2 },
+          "geometry": {
+            "properties": { "class": { "const": "floating-actor" } },
+            "required": ["class"]
+          }
+        },
+        "required": ["schemaVersion", "geometry"]
+      },
+      "then": {
+        "properties": { "geometry": { "required": ["floatCenter"] } }
       }
     }
   ],
@@ -502,7 +754,12 @@
         "runId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
         "generator": { "type": "string", "minLength": 1 },
         "model": { "type": "string", "minLength": 1 },
-        "executedAt": { "type": "string", "format": "date-time" },
+        "executedAt": {
+          "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "const": "unknown" }
+          ]
+        },
         "prompt": {
           "type": "object",
           "additionalProperties": false,
@@ -721,8 +978,26 @@
         "visibleBounds": { "$ref": "#/$defs/rect" },
         "safeInset": { "$ref": "#/$defs/insets" },
         "faceBox": { "$ref": "#/$defs/rect" },
+        "eyeLine": { "type": "number", "minimum": 0, "maximum": 1 },
+        "groundLine": { "type": "number", "minimum": 0, "maximum": 1 },
+        "floatCenter": { "$ref": "#/$defs/point" },
+        "visualCenter": { "$ref": "#/$defs/point" },
         "gripPoint": { "$ref": "#/$defs/point" },
-        "forwardAxisDegrees": { "type": "number", "minimum": -360, "maximum": 360 }
+        "forwardAxisDegrees": { "type": "number", "minimum": -360, "maximum": 360 },
+        "heldScale": { "type": "number", "exclusiveMinimum": 0, "maximum": 2 },
+        "heldRotationDegrees": { "type": "number", "minimum": -360, "maximum": 360 },
+        "zOrder": { "type": "integer", "minimum": -100, "maximum": 100 },
+        "baseline": { "type": "number", "minimum": 0, "maximum": 1 },
+        "openBay": { "$ref": "#/$defs/rect" },
+        "motifBox": { "$ref": "#/$defs/rect" },
+        "apertureBox": { "$ref": "#/$defs/rect" },
+        "rimBox": { "$ref": "#/$defs/rect" },
+        "voidBox": { "$ref": "#/$defs/rect" },
+        "opticalBounds": { "$ref": "#/$defs/rect" },
+        "modifierBox": { "$ref": "#/$defs/rect" },
+        "tileFootprint": { "$ref": "#/$defs/rect" },
+        "stateFamilyId": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "stateAnchorBox": { "$ref": "#/$defs/rect" }
       }
     },
     "point": {
@@ -781,8 +1056,8 @@
           "type": "object",
           "required": ["options"],
           "properties": { "options": { "type": "object" } }
+          }
         }
       }
     }
-  }
 }

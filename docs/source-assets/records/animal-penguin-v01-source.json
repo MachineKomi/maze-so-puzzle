@@ -5,7 +5,7 @@
   "id": "animal-penguin",
   "artVersion": 1,
   "family": "friend",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "partial",
   "approvalStatus": "historical",
   "validationProfile": "legacy-observed",
@@ -43,7 +43,7 @@
       "decodedBytesUpperBound": 1048576,
       "profile": "legacy-runtime",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "level-entry-warmup-or-first-use",
       "encoder": {
         "name": "unknown-historical-encoder",

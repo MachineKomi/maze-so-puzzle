@@ -296,16 +296,16 @@ button:focus-visible,
 
 .player-held-weapon {
   position: absolute;
-  z-index: 10;
-  right: -1%;
-  bottom: 5%;
-  width: 58%;
-  height: 58%;
+  z-index: var(--held-z);
+  left: var(--held-left);
+  top: var(--held-top);
+  width: var(--held-size);
+  height: var(--held-size);
   object-fit: contain;
   pointer-events: none;
   filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
-  transform: rotate(-7deg);
-  transform-origin: 50% 80%;
+  transform: rotate(var(--held-rotation));
+  transform-origin: var(--held-grip-x) var(--held-grip-y);
 }
 
 .player-sprite {
@@ -5628,15 +5628,15 @@ body,
 
 .battle-held-weapon {
   position: absolute;
-  z-index: 6;
-  right: -4%;
-  bottom: 3%;
-  width: 60%;
-  height: 60%;
+  z-index: var(--held-z);
+  left: var(--held-left);
+  top: var(--held-top);
+  width: var(--held-size);
+  height: var(--held-size);
   object-fit: contain;
   filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.3));
-  transform: rotate(-18deg);
-  transform-origin: 50% 82%;
+  transform: rotate(var(--held-rotation));
+  transform-origin: var(--held-grip-x) var(--held-grip-y);
   animation: battle-weapon-swish var(--battle-duration, 2220ms) ease-out both;
 }
 
@@ -5838,10 +5838,10 @@ body,
 }
 
 @keyframes battle-weapon-swish {
-  0%, 8%, 22%, 28%, 42%, 48%, 63% { transform: rotate(-18deg); }
-  15%, 34%, 54% { transform: rotate(34deg) scale(1.14); }
-  20%, 39%, 60% { transform: rotate(-34deg) scale(1.05); }
-  72%, 100% { transform: rotate(-7deg); }
+  0%, 8%, 22%, 28%, 42%, 48%, 63% { transform: rotate(var(--held-rotation)); }
+  15%, 34%, 54% { transform: rotate(calc(var(--held-rotation) + 52deg)) scale(1.14); }
+  20%, 39%, 60% { transform: rotate(calc(var(--held-rotation) - 16deg)) scale(1.05); }
+  72%, 100% { transform: rotate(calc(var(--held-rotation) + 11deg)); }
 }
 
 @keyframes battle-impact-star {
@@ -6419,6 +6419,7 @@ body,
   bottom: -1%;
   width: 92%;
   height: 92%;
+  z-index: 2;
 }
 
 .object-enemy {
@@ -6461,6 +6462,7 @@ body,
 .battle-ame .battle-sprite {
   width: 94%;
   height: 94%;
+  z-index: 2;
 }
 
 .battle-enemy .battle-sprite {
@@ -6550,17 +6552,19 @@ body,
   height: 94%;
   object-fit: contain;
   filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
+  z-index: 2;
 }
 
 .portal-presentation-weapon {
   position: absolute;
-  z-index: 6;
-  right: -1%;
-  bottom: 5%;
-  width: 58%;
-  height: 58%;
+  z-index: var(--held-z);
+  left: var(--held-left);
+  top: var(--held-top);
+  width: var(--held-size);
+  height: var(--held-size);
   object-fit: contain;
-  transform: rotate(-7deg);
+  transform: rotate(var(--held-rotation));
+  transform-origin: var(--held-grip-x) var(--held-grip-y);
   filter: drop-shadow(0 2px 2px rgba(55, 27, 62, 0.34));
 }
 

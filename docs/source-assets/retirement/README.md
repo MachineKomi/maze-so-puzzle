@@ -1,8 +1,21 @@
 # Static-art retirement ledger
 
 This directory records Plan 03 retirement **candidates**. It does not authorize
-moving or deleting any runtime file. The current 16 entries remain in
+moving or deleting any runtime file. The current 116 entries remain in
 `public/assets/`, are `rollback-hold`, and are ineligible for Plan 12 removal.
+Sixteen are earlier orphan candidates; 100 are the exact prior URLs retained by
+the Plan 03 v6 publication map. Together they account for 37,066,556 encoded
+bytes and a 168,329,216-byte decoded RGBA upper bound. Nineteen are the sole
+repository copy, 96 retain a partial master, and one is source-backed.
+Of the 100 publication transitions, 99 prior records were active; Golden
+Sandstone v01 was already dormant and is superseded by the still-dormant v02
+art authority. Superseding art authority does not promote dormant content.
+
+Ledger schema v2 expands the original cage/terrain/hazard-only audit to all
+static-art families and permits versioned replacement paths below
+`public/assets/mgjrpg-02/`. It also distinguishes an older unreferenced orphan
+candidate from an intentional publication rollback candidate. That distinction
+does not make either class eligible for removal.
 
 ## Lifecycle
 
@@ -117,8 +130,12 @@ and asset tests, production build, route checks, and the offline Tauri package
 check. Git history is secondary recovery evidence; the verified external payload
 is the primary Plan 12 rollback source.
 
-The current ledger was classified against checkpoint
-`ab20f28372c93e341b13e3cf2d2c94ea71703bb2` in a dirty shared worktree. Its
-empty `runtimeReferences` arrays report the read-only static audit result, not a
-complete dead-file proof. Non-runtime records, manifest entries, validator
-classifications, and processor dependencies remain listed explicitly.
+The current ledger was re-audited against checkpoint
+`0fce05451b94f44d795805f8694bcebee2a9262a` in a dirty shared worktree. The 100
+publication rollback rows join one-to-one to the runtime map's exact
+`previousPath` and `previousSha256` fields; the other 16 retain their earlier
+orphan classification. Empty `runtimeReferences` arrays are not a dead-file
+proof. Source records, generated manifests, publication-map rollback
+references, validator classifications, and processor dependencies remain
+listed explicitly, and Plan 12 must repeat reachability against the final clean
+commit and packaged application.

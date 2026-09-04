@@ -1,8 +1,9 @@
 # Puzzlewild enemy family sheet
 
-Status: Human-directed future art roster; source-only planning authority. No
-entry in this document is a shipped runtime style, campaign placement,
-animation state, combat rule, or approval of a generated candidate.
+Status: Human-approved Plan 03 visual roster. Current-enemy replacements are
+published through the versioned runtime catalogue; future enemies are formally
+catalogued as dormant art only. A dormant entry is not campaign placement,
+animation state, combat rule, public-label approval, or preload authority.
 
 ## Shared promise
 
@@ -22,25 +23,26 @@ Field enemies never receive a cream sticker cutline or baked cast shadow.
 
 Tea-Time Skeleton (`green-tea-skeleton`) was reclassified by the Human on
 2026-09-03 as a rescue-and-collect friend. Its approved sprite is unchanged,
-but it is excluded from this enemy roster and must never enter enemy catalogue,
-Power, encounter, or defeat flows. Warrior Skeleton may still share its
-toy-bone construction grammar.
+with an unclothed toy-bone body and a handleless Japanese tea cup. It is
+excluded from this enemy roster and must never enter enemy catalogue, Power,
+encounter, or defeat flows. Warrior Skeleton may still share its toy-bone
+construction grammar.
 
 | Planned ID | Child-facing working name | Construction and emotional contract | Hard exclusions |
 | --- | --- | --- | --- |
 | `classic-slime` | Classic Slime | Low rounded gel mass, broad face plane and simple generic fantasy-slime read with no accessory. | No franchise-specific droplet, face construction or colour dependency. |
-| `lizard-swordsman` | Lizard Sword Guard | Stout mint-scaled guardian, broad tail, coral scarf and blunt leaf-shaped practice sword held sideways. | No weapon toward camera, wounds or implied special attack. |
-| `lizard-spearman` | Lizard Spear Guard | Same eventual approved lizard anatomy and registration as the sword sibling; side-facing padded spear creates a clearly different diagonal/horizontal silhouette. | Not a separately improvised species; no reach or ranged mechanic implied. |
-| `succubus` | Wholesome Succubus | Compact lilac/plum night guardian with small rounded bat wings, curled horns, modest layered tunic/cape/leggings/boots and warm competitive expression. | No adult anatomy, cleavage, lingerie coding, exposed torso, glamour pose, seduction, kiss/charm magic or automatic heart clutter. Public label needs Human/rating review. |
-| `t-rex` | Pocket T-Rex | Large head, thick tail, tiny arms, planted oversized feet, blunt toy-like teeth and proud curiosity. | No predation, gore, chase pose or realistic threat. |
-| `cultist` | Public label pending | Overenthusiastic fictional Star Map follower with rounded hood, fully visible friendly face and one invented affiliation mark. | No real religion, hate mark, occult sigil, sacrifice, knife, faceless menace or ritual violence. Public label needs Human/rating review. |
-| `lamia` | Lamia | Fully clothed anime guardian above a broad readable coiled-serpent base; expressive face/hands and sparse scale pattern. | No pin-up curvature, sensual anatomy, constriction or hypnosis implication. |
-| `soda-slime` | Soda Slime | Fizzy coral/aqua gel mass with large internal bubbles and one bendy-straw silhouette accent. | No real brand, can/label trade dress, ingestion instruction or poison-green dependency. |
-| `orc-chieftain` | Orc Chieftain | Broad rounded green guardian; ceremonial mantle or crest and calm planted posture communicate leadership. | No skull trophies, rage, dehumanising caricature, pseudo-tribal stereotype or violence. |
-| `cyclops` | Cyclops | One large expressive eye, clear iris/catchlight and rounded body mass. | No veins, grotesque eyelids, body horror or dark socket. |
-| `minotaur` | Minotaur | Friendly labyrinth caretaker with short broad horns, rounded muzzle, planted hooves and one quiet maze-cloth affiliation cue. | No rage pose, nose ring, giant axe or suffering/labyrinth-victim implication. |
-| `warrior-skeleton` | Warrior Skeleton | Same eventual approved toy-bone anatomy as Tea-Time Skeleton, upright with a blunt training weapon and simple lavender tabard. | No separate bone grammar, realistic anatomy, broken bone or weapon aimed at camera. |
-| `kappa` | Kappa | Respectful rounded folklore construction with head dish, shell, gentle beak and water-guardian palette. | No crude folklore joke, mascot copying, caricature or drowning implication. |
+| `lizard-swordsman` | Lizard Sword Guard | Stout mint-scaled guardian, broad tail, coral scarf, bronze sword, and matching bronze shield. | No weapon toward camera, wounds, leaf-shaped practice weapon, or implied special attack. |
+| `lizard-spearman` | Lizard Spear Guard | Same approved lizard anatomy and registration as the sword sibling; a side-facing spear with an iron/steel tip creates a clearly different diagonal/horizontal silhouette. | Not a separately improvised species; no padded practice spear, reach, or ranged mechanic implied. |
+| `succubus` | Wholesome Succubus | Compact lilac/plum night guardian with small rounded bat wings, curled horns, heart-tipped tail and brooch, modest layered tunic/cape/leggings/boots, and a warm competitive expression. | No adult anatomy, cleavage, lingerie coding, exposed torso, glamour pose, seduction, kiss/charm magic, or extra heart clutter. Public label needs Human/rating review. |
+| `t-rex` | Pocket T-Rex | Dinosaur-only orange-red and cream construction with a long low blocky head, thick tail, tiny arms, planted oversized feet, rounded teeth, plum markings, and proud curiosity. | No clothing or accessory, predation, gore, chase pose, or realistic threat. |
+| `cultist` | Public label pending | Overenthusiastic fictional Star Map follower with a rounded hood; its nonhuman face plane is deliberately shadowed but emotionally readable through two warm luminous eyes and one tiny friendly mouth, with a single invented affiliation mark. | No real religion, hate mark, real occult sign, sacrifice, knife, realistic hidden-person menace, or ritual violence. Public label needs Human/rating review. |
+| `lamia` | Lamia | Fully clothed coral-and-lavender maze adventurer above one broad mint snake tail in a grounded S-curve, with an expressive face/hands, sparse scale planes, and a small rolled map. | No leaf or arbitrary botanical motif, pin-up curvature, sensual anatomy, constriction, or hypnosis implication. |
+| `soda-slime` | Soda Slime | One low rounded glossy cherry-coral soda-gel mound with large friendly eyes, a tiny mouth, and only a few pinprick fizz highlights. | No large decorative bubbles, straw, bottle, can, cap, label/trade dress, fruit, ingestion instruction, or background-colour dependency. |
+| `orc-chieftain` | Orc Chieftain | Broad rounded green guardian; ceremonial mantle or crest, calm planted posture, and a heavy metal hammer with a wooden handle communicate leadership. | No skull trophies, rage, weapon aimed at camera, gore, dehumanising caricature, or pseudo-tribal stereotype. |
+| `cyclops` | Cyclops | Young squat lavender stonemason with one large expressive sapphire eye, coral hair, cream work tunic, russet apron and boots, a small stone mallet resting safely on one shoulder, and one gold star buckle. | No veins, grotesque eyelids, body horror, dark socket, realistic giant, or swung/aimed weapon. |
+| `minotaur` | Minotaur | Friendly labyrinth caretaker with short broad horns, rounded muzzle, planted hooves, one quiet maze-cloth affiliation cue, and a child-readable old brass-and-iron axe with a wooden handle. | No rage pose, nose ring, weapon aimed at camera, gore, or suffering/labyrinth-victim implication. |
+| `warrior-skeleton` | Warrior Skeleton | Same approved toy-bone anatomy as Tea-Time Skeleton, upright and unclothed, with no shield and one busted iron sword. | No separate bone grammar, realistic anatomy, gore, clothing, shield, training weapon, or weapon aimed at camera. |
+| `kappa` | Kappa | Respectful rounded turquoise folklore construction with a water-filled head dish, spiral shell, gentle beak, navy scarf and heart clasp, one cucumber, and a small cucumber basket. | No crude folklore joke, mascot copying, caricature, drowning implication, or excess leaf/shell/basket detail. |
 | `classic-mimic` | Treasure Mimic | Treasure chest first, creature second: chunky warm wood, gold fittings, visibly living eye, plum lid-mouth and short grounded feet. | No hidden/reveal requirement, child emerging from chest, gore, saliva, tongue attack or needle teeth. |
 
 The existing Blueberry Slime, Jelly Sorcerer and Candy Mimic do not satisfy
@@ -81,14 +83,15 @@ art. The future-enemy default is therefore a new blank-canvas hybrid:
   future edit targets. Isolated approved sources must be authored independently
   after the rendering gate.
 
-The first rebuilt four-enemy board is preserved as source-only calibration at
+The first rebuilt four-enemy board is preserved as historical source-only
+calibration at
 `docs/source-assets/calibrations/mgjrpg-02/v03/future-enemy-hybrid-01-generator-original.png`.
-It remains pending Human review and requires isolated transparent masters later.
-The v14 art-direction review treats it as successful family-transfer evidence,
-not approved character construction: reduce Kappa's leaf/shell/basket frequency,
-reduce Mimic's teeth/rivets/plank seams, and restore the Human-selected Direction
-A Succubus silhouette and magical hand gesture. The existing board must never be
-cropped, cleaned, or edited into those masters.
+Its pending v14 state remains immutable history; the v6 publication decision
+selects later, independently generated isolated sources instead. The board is
+family-transfer evidence, not character construction: Kappa's
+leaf/shell/basket frequency is reduced, Mimic's teeth/rivets/plank seams are
+reduced, and Succubus uses the Human-selected Direction A silhouette and magical
+hand gesture. The board must never be cropped, cleaned, or edited into a master.
 
 ## Shared construction groups
 
@@ -108,25 +111,32 @@ cropped, cleaned, or edited into those masters.
 - **Folklore/object:** Kappa receives respectful folklore review. Treasure Mimic
   remains visibly alive because the game has no disguise/reveal mechanic.
 
-## Production and provenance sequence
+## Production, publication, and provenance state
 
-1. The historical rendering-direction gate compared Tea-Time Skeleton, Classic Slime,
-   Lizard Sword Guard, Wholesome Succubus, Pocket T-Rex and Treasure Mimic.
-2. After a rendering direction is approved, transfer-test Warrior Skeleton,
-   Soda Slime, Lizard Spear Guard, Cultist and Kappa.
-3. Produce Lamia, Orc Chieftain, Cyclops and Minotaur only after their relevant
-   shared family construction is approved.
-4. Each identity begins with exactly two independent runs from the same locked
-   brief. Candidates never see one another. Contact-sheet crops are not masters.
-5. Selected identities receive strict-v2 source records and transparent,
-   registered 256/512 derivatives. The coloured contour is authored in the
-   generator/source art; deterministic processing may cut out, register, resize
-   and encode, but must not synthesize the art direction.
+1. The historical rendering-direction gate compared Tea-Time Skeleton, Classic
+   Slime, Lizard Sword Guard, Wholesome Succubus, Pocket T-Rex, and Treasure
+   Mimic; its comparison-board cells remain evidence rather than crop masters.
+2. Each selected production identity is joined by exact run ID to an immutable
+   generator original and exact prompt/reference ledger. Rejected and
+   superseded attempts remain recorded and never become edit authorities.
+3. Selected identities receive strict-v2 source records and transparent,
+   registered versioned derivatives. The coloured contour is authored in the
+   source art; deterministic processing may cut out, register, resize, and
+   encode, but must not synthesize or redesign it.
+4. Existing gameplay enemy identities use the active `ENEMY_ART` projection.
+   The approved future roster is exposed only through `FUTURE_ENEMY_ART` with
+   dormant loading state. It is not inserted into `ENEMY_STYLE_IDS`,
+   `ENEMY_PERSONALITIES`, Surprise generation, or campaign levels.
+5. Any later dormant-to-active promotion is a separate Plan 09/content change:
+   it must choose a child-facing label where still gated, preserve old Surprise
+   seeds or version their contract, add Power/personality/placement data, update
+   content revisions as needed, and pass the gameplay suite.
 
-No IDs enter `ENEMY_STYLE_IDS`, `ENEMY_ART`, `ENEMY_PERSONALITIES`, Surprise
-generation, or campaign levels at this gate. Runtime inclusion requires an
-explicit visual-roster migration so old Surprise seeds do not silently change,
-plus Plan 09 placement and the existing gameplay/contracts test suite.
+The exact selected runs, lifecycle states, runtime URLs, hashes, and rollback
+paths are authoritative in
+`docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json` and its
+publication report. Green Tea Skeleton appears in the dormant friend catalogue,
+never in either active or future enemy projections.
 
 ## Review checklist
 

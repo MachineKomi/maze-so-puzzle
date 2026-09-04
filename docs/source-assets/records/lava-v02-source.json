@@ -5,7 +5,7 @@
   "id": "lava",
   "artVersion": 2,
   "family": "hazard",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "legacy-runtime-only",
   "approvalStatus": "historical",
   "validationProfile": "legacy-observed",
@@ -32,7 +32,7 @@
       "decodedBytesUpperBound": 4194304,
       "profile": "legacy-runtime",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "level-entry-warmup-or-first-use",
       "encoder": {
         "name": "unknown-historical-encoder",

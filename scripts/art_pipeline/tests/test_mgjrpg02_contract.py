@@ -15,6 +15,7 @@ sys.path.insert(0, str(PACKAGE))
 
 import builder
 import model
+import validate
 from builder import _validate_output_policy
 from model import (
     read_json,
@@ -22,6 +23,7 @@ from model import (
     validate_recipe_shape,
     validate_record_shape,
     validate_review_shape,
+    validate_rights_review_shape,
 )
 
 
@@ -46,6 +48,8 @@ class Mgjrpg02RecordContractTests(unittest.TestCase):
             "path": "docs/source-assets/recipes/mgjrpg-02.json",
             "sha256": "1" * 64,
         }
+        record["geometry"]["eyeLine"] = 0.28
+        record["geometry"]["groundLine"] = 0.90
         record["generationRuns"] = [
             {
                 "runId": "ame-v02-rendering-v01",
@@ -205,6 +209,40 @@ class Mgjrpg02RecordContractTests(unittest.TestCase):
             "scorecard": {"recognition": 5},
         }
         self.assertEqual(validate_review_shape(review, "review"), [])
+
+    def test_rights_provenance_review_is_validated_without_canary_fields(self) -> None:
+        review = {
+            "schema": "maze-art-rights-provenance-review/v1",
+            "reviewId": "mgjrpg-02-rights-provenance-v01",
+            "reviewedAt": "2026-09-04T00:26:48.234Z",
+            "reviewedBy": "Codex Plan 03 provenance audit",
+            "licenceStatus": "reviewed",
+            "scope": "Approved immutable sources.",
+            "evidence": {
+                "generationProvider": "Recorded provider.",
+                "promptOwnership": "Project-authored prompts.",
+                "referenceBoundary": "Project sources only.",
+                "forbiddenRequests": "No prohibited imitation request.",
+                "humanAuthority": "Human publication direction.",
+            },
+            "conclusion": "Technically reviewed.",
+            "limitations": "Not legal advice.",
+            "selectedSourceCount": 144,
+        }
+        self.assertEqual(validate_rights_review_shape(review, "rights"), [])
+        self.assertEqual(validate_review_shape(review, "rights"), [])
+        review["selectedSourceCount"] = 0
+        self.assertIn("positive integer", "\n".join(validate_review_shape(review, "rights")))
+
+    def test_catalogue_parser_accepts_generated_catalogue_without_legacy_lock_helper(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            catalogue = Path(directory) / "artCatalog.ts"
+            catalogue.write_text(
+                'const item = { sourceRecordId: "goal-v01-source" };\n'
+                'const generated = MGJRPG02_ART["door-blue-star"];\n',
+                encoding="utf-8",
+            )
+            self.assertEqual(validate._catalog_source_record_ids(catalogue), ["goal-v01-source"])
 
 
 class Mgjrpg02RuntimeGateTests(unittest.TestCase):

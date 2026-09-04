@@ -1,6 +1,7 @@
 # Release checklist
 
 Verification date: 2026-09-02
+Plan 03 publication update: 2026-09-04
 
 Use this checklist for the exact commit and artifacts that will be shared. A
 successful earlier build does not validate files produced after another source,
@@ -17,7 +18,79 @@ Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
 
-## Unreleased Plan 03 art-foundation candidate
+## Unreleased Plan 03 static-art publication
+
+- [x] The Human's 2026-09-04 continuation closes the art-review and completeness
+  gates and directs publication without alternative generations or reapproval
+  of unchanged artwork. The forward-only decision at
+  `source-assets/calibrations/mgjrpg-02/v06/human-decision.json` hash-binds the
+  exact runtime map.
+- [x] `source-assets/publication/mgjrpg-02-plan03-runtime-map.json` joins 144
+  selected immutable generation runs to stable semantic IDs, strict-v2 record
+  IDs, loading phases, and versioned public URLs: 100 active and 44 dormant.
+  Dormant catalogue rows add no gameplay, placement, preload, or animation.
+- [x] Run the no-overwrite publisher and its temporary-directory byte rebuild;
+  retain the measured per-file and aggregate result in
+  `source-assets/publication/mgjrpg-02-plan03-publication-report.json`.
+- [x] Regenerate `source-assets/manifest.json`, then pass `npm run art:test` and
+  non-writing `npm run art:check` with every strict-v2 record, recipe, prompt,
+  run, reference, approval, rights, derivative, and rollback hash intact. The
+  final run passed 99 art tests, 144/144 deterministic derivative rebuilds,
+  zero manifest errors, and zero `mgjrpg-02` alpha-border findings. The 418
+  non-blocking warnings are broken down in the validation report rather than
+  suppressed.
+- [x] The selected Plan 03 sources have a scoped technical project-publication
+  provenance review at
+  `source-assets/reviews/mgjrpg-02-rights-provenance-v01.json`. Its limitations
+  remain explicit: it is not external legal advice, trademark clearance,
+  permission for third-party reuse, or approval of gated public labels.
+- [x] All 100 exact prior-path source records and their matching derivatives are
+  marked `superseded`. The files remain byte-for-byte present and are recorded
+  in the Plan 12 ledger as `rollback-hold`; none is moved, deleted, archived, or
+  declared retirement-eligible by this pass. With 16 earlier candidates, the
+  ledger contains 116 files / 37,066,556 encoded bytes / 168,329,216 decoded
+  bytes and zero eligible entries.
+- [x] Batch 22 publishes exactly 15 approved 256 × 256 transparent WebP reward
+  derivatives. Animal Friend and Golden Guardian use the corrected candidate-B
+  sources; their rejected candidate-A runs remain immutable rejection evidence.
+  One runtime derivative per identity services the current 27–150 CSS-pixel
+  range; 91/64/52/48/32 px PNGs remain ignored proof assets.
+- [x] The Bubble Ring Blade replaces the Bubble Bow semantic weapon ID across
+  type, level content, catalogue, labels, assets, and tests. A one-way resolver
+  alias accepts the old ID in saved content; no content revision changes because
+  art-style identity is excluded from the gameplay fingerprint.
+- [x] The approved Batch 15 Normal Boots source publishes as the current
+  `splash-boots` pickup behind `PICKUP_ART.boots`, replacing `/assets/boots.png`;
+  it is not duplicated in the dormant future-item catalogue.
+- [x] Green Tea Skeleton is catalogued only as a dormant rescue friend. Violet
+  Moon remains the active third portal; Sunny Diamond and Violet Spade Bloom are
+  dormant. No future/dormant art is inserted into gameplay by publication.
+- [x] The current platform icons remain in place. The Ame-face app icon and all
+  Batch 21 title, home, and generated-logo concepts remain source-only for Plan
+  11; generated lettering is not exact wordmark authority.
+- [x] Exercise the Adventure Book's mixed unlocked/locked cards and a normal
+  non-tester victory reward at actual runtime size. My First Maze and Twinkle
+  Toes used the same published semantic identities on both surfaces, retained
+  clean cream cutlines and readable silhouettes, and produced no fallback,
+  broken request, or console warning/error. The deterministic proof suite owns
+  grayscale and 27–150 px optical-size assertions; physical TV-distance and
+  reduced-motion feel remain external gates.
+- [x] Pass strict TypeScript, the production build, `npm run perf:check`,
+  `npm run check:desktop`, and the native no-bundle Tauri build/launch smoke for
+  the exact candidate tree. The final literal `npm run check` passed all 407
+  tests across 35 files, TypeScript, and the Vite build after the cold Rust/link
+  work completed. An earlier concurrent-load attempt produced four fixed
+  10/30-second gameplay-solver timeouts, including the same generator timeout
+  in the unchanged starting commit; that resource-contention evidence remains
+  recorded rather than hidden. Physical iPad/TV, signing, qualified Tauri
+  performance, and clean-machine checks remain separate external gates. Exact evidence is in
+  `source-assets/publication/mgjrpg-02-plan03-validation-report.json`.
+
+## Historical Plan 03 art-foundation gate (superseded 2026-09-04)
+
+The checked and unchecked boxes in this subsection preserve the 2026-09-03
+pre-publication gate exactly. They are evidence of the sequence, not current
+release requirements; the publication checklist above is current.
 
 - [x] Work began from accepted Plan 06 checkpoint
   `ee176f52ab79e08e818fc919f44b7723f9fc9865`; its tracked tree was clean and
@@ -548,10 +621,14 @@ Earlier evidence is kept as historical release evidence.
 - [x] Archive the built-in ImageGen Spring Boots and ground-hole masters, retain
   their prompt records, and validate/downsample transparent runtime copies with
   `scripts/process_traversal_assets.py`.
-- [ ] Confirm every production image has known provenance and the game contains
-  no unlicensed third-party material.
-- [ ] Make the owner-approved licence decision before publishing source or
-  redistributable assets.
+- [x] Confirm every selected Plan 03 publication source has exact recorded
+  provenance and that its technical provenance review found no incorporated
+  third-party pixels or requested franchise, logo, living-artist, proprietary
+  palette, UI-layout, or composition dependency.
+- [ ] Before inviting external reuse or redistribution, the owner must still
+  choose and publish outward-facing source-code and asset licence terms. The v6
+  review authorizes the selected derivatives for this project's runtime; it is
+  not an open-content licence or third-party legal opinion.
 - [x] Review `git status --short` if the folder is under version control; preserve
   intentional local work and remove no user-owned files.
 - [ ] Start from a clean dependency install with `npm ci`.
@@ -752,6 +829,10 @@ Physical-device feel remains separate.
   once, including after a replay.
 - [ ] Each of the nine stat-driven badges unlocks at its documented threshold and
   new rewards appear once without duplicate fanfare.
+- [ ] For all nine badges and six completion/reward stickers, compare the
+  Adventure Book's locked and unlocked cards with the reward modal/victory use.
+  The same `ACHIEVEMENT_ART` identity must appear on every surface, stay legible
+  at the 27–150 CSS-pixel range, and never fall back to an old URL or emoji.
 
 ## 4. Windows 0.10.3 artifact test
 

@@ -89,34 +89,45 @@ state.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
    unavailable. Track roles and reserved music are documented in `docs/MUSIC.md`.
-17. `src/artCatalog.ts` maps stable typed visual IDs to runtime artwork, labels,
+17. `src/generated/mgjrpg02Art.ts` is the deterministic runtime projection of
+    the approved publication report; `src/artCatalog.ts` maps those stable typed
+    visual IDs to runtime artwork, labels, lifecycle state, measured geometry,
     material periods, dominant-colour families, compatibility rules, and
-    fallbacks. `ArtReference` preserves the small legacy consumer surface while
-    rich `SpriteArt` canaries add pixel revision, derivative, measured geometry,
-    light, alpha, runtime status, and source-record identity without importing
-    heavy provenance into the browser. `AME_ART` deliberately selects historical
-    v01 while the v02 Human candidate remains source-only. `LOCK_PAIR_ART` is the
-    single Rose Heart, Blue Star, and Sunny Sun authority; legacy key/door maps
-    are object-identical projections. Hazard records add period, measured colour
-    and lightness, static pattern, and reduced-motion cues. Gold/yellow floors
-    still cannot pair with green/sage walls, and gameplay/content fingerprints
-    remain independent of art revisions.
-18. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
+    fallbacks. `AME_ART` selects the published v02 field sprite. `LOCK_PAIR_ART`
+    is the single Rose Heart, Blue Star, and Sunny Sun authority; legacy key/door
+    maps are object-identical projections. Active and dormant catalogues remain
+    explicit, and dormant entries are not preloaded or placed. Hazard records add
+    period, measured colour/lightness, static pattern, and reduced-motion cues.
+    Gold/yellow floors still cannot pair with green/sage walls, and gameplay or
+    content fingerprints remain independent of art revisions.
+18. `src/heldWeaponPresentation.ts` resolves each approved weapon's measured
+    grip, forward axis, held scale, CSS rotation, and local z-order against Ame's
+    canonical hand socket for field, battle, and portal contexts. The renderer
+    receives per-weapon CSS variables; there is no universal transform that can
+    misregister the ring blade, spear, wand, or short weapons. This is static
+    registration only—Plan 05 owns future animation frames and timing.
+    The publication projection contains 144 versioned WebPs: 100 active and 44
+    dormant. It adds 9,366,734 encoded bytes and a 107,937,792-byte theoretical
+    decoded-RGBA upper bound. Dormant rows have no preload or gameplay consumer.
+    Fifty-six non-Ame actor records explicitly defer semantic face/eye/ground
+    landmarks; locked static pivots remain valid, while Plan 05 animation and
+    automated cage-face masking must wait for manual registration.
+19. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
     touch, keyboard, and D-pad controls: a 320 ms first pause, a smooth 260–160 ms
     repeat curve over 16 held steps, and reset-on-direction-change semantics.
-19. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
+20. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
     cardinal intent and applies the strict one-tile corner assist. The assisted
     destination must be safe, non-exit ordinary floor with no unresolved
     interaction. A previously resolved non-portal pickup square is eligible,
     but a pickup, rescue, treasure, hazard, unresolved object, portal, jump, or
     exit never is.
-20. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
+21. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
     has left and selects distinct visible footprints for rescued friends.
-21. `src/cameraMotion.ts` converts engine/world coordinates into one smoothly
+22. `src/cameraMotion.ts` converts engine/world coordinates into one smoothly
     translated full-maze render surface. The 6 × 6 camera clips that world rather
     than rebuilding a different set of local tiles every step, so terrain,
     objects, portal hops, and edge-following movement remain spatially coherent.
-22. `src/game/visualPersonality.ts` exhaustively maps every rescue species and
+23. `src/game/visualPersonality.ts` exhaustively maps every rescue species and
     enemy look to a lightweight CSS motion family, flourish glyph, and friendly
     character trait. This keeps personality presentation typed and testable
     without multiplying raster animation frames or network requests.
@@ -219,11 +230,14 @@ state.
   Spring Boots, Antidote Leaf, potion, and key events select their illustrated
   notice; one cancellable 1.85 s timer replaces any earlier notice and level
   changes or unmounts clear it. Reduced motion keeps the notice static.
-- Sticker, medal, and badge IDs map exhaustively through typed `STICKER_ART`,
-  `MEDAL_ART`, and `BADGE_ART` records. The Book and victory screen consume the
-  same catalogue, preventing earned rewards from falling back to emoji. Source
-  PNG masters remain in documentation while the runtime uses transparent
-  512 × 512 lossless WebP and native lazy decoding for below-fold cards.
+- Sticker, medal, and badge IDs map exhaustively through the typed
+  `ACHIEVEMENT_ART` projection. The Book, unlock fanfare, and victory screen
+  consume the same catalogue, preventing earned rewards from falling back to
+  emoji or drifting between surfaces. Immutable generator-original PNGs remain
+  outside `public/`; one registered 256 × 256 transparent WebP per achievement
+  services the current 27–150 CSS-pixel consumers, with native lazy decoding for
+  below-fold Book cards. The ignored 91/64/52/48/32 px PNGs are review proofs,
+  not duplicated runtime downloads.
 - The exploration minimap unions the current field of view with an immutable
   reveal set. Unvisited tiles remain masked; a new level starts a fresh map, and
   an unfinished authored run restores only a validated saved reveal set.
@@ -250,28 +264,46 @@ state.
 `docs/ART_BIBLE.md` is the static visual authority and
 `docs/characters/AME_MODEL_SHEET.md` owns Ame's identity/registration gate.
 Hand-reviewed records under `docs/source-assets/records/` preserve lifecycle,
-prompt fidelity, immutable ingredients, hashes, rights uncertainty, derivatives,
-and rollback. The generated `docs/source-assets/manifest.json` inventories those
-records plus every runtime/source image deterministically; it contains no
-generation timestamp and is not hand-edited.
+exact prompt and generation-run evidence, immutable ingredients, hashes,
+reviewed project-publication provenance, derivatives, and rollback. The
+generated `docs/source-assets/manifest.json` inventories those records plus
+every runtime/source image deterministically; it contains no generation
+timestamp and is not hand-edited.
 
-Candidate C's identity/construction is Human-approved, but the active runtime
-still selects historical Ame v01. The proposed `mgjrpg-02` rendering profile is
-a separate pre-volume gate. Its `storybook-local-contour-v1` contract derives
-each stable contour section from the nearest enclosed material, maps it through
-Maze's own deep-plum contour families, and reserves darkest ink for critical
-facial/occlusion/contrast detail. It forbids uniform black perimeters,
-pixel-by-pixel hue switching, halos, and low-contrast pale edges. Field cutouts
-receive no sticker cutline; semantic UI/reward signals may use a cream cutline;
-periodic terrain/hazards use material boundaries and seams without an enclosing
-actor contour. The adopted PPBA technique contributes no external pixel, prompt,
-palette, motif, layout, brand, or runtime dependency.
+The forward-only Human publication decision is
+`docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json`. Its exact
+run-ID projection is
+`docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json`, while
+`docs/source-assets/publication/mgjrpg-02-plan03-publication-report.json`
+contains measured source/runtime totals and per-file hashes. The map—not a
+filename guess—joins each immutable generation run to a stable semantic ID,
+one versioned delivery URL, lifecycle status, catalogue target, loading phase,
+and optional prior rollback URL. It contains 144 selected sources: 100 active
+runtime rows and 44 dormant catalogue-only rows. `src/generated/mgjrpg02Art.ts`
+is the generated runtime projection and must not be independently maintained.
 
-`scripts/art_pipeline.py` is the safe entry point. `--check` is non-writing;
-`--manifest --write` is the explicit deterministic update; `--build` requires a
-record ID and profile, stages and validates output, refuses overwrite, and keeps
-unapproved derivatives beneath ignored `artifacts/art-proofs/`; `--proof`
-creates actual-size/context boards and an encoded/decoded inventory only there.
+Candidate C remains Ame's identity/construction authority and Fresh B-led 01
+remains rendering-craft authority. The active `mgjrpg-02` Ame derivative is a
+separate production drawing checked against both rather than a relabelled proof.
+The `storybook-local-contour-v1` contract derives each stable contour section
+from the nearest enclosed material, maps it through Maze's own deep-plum contour
+families, and reserves darkest ink for critical facial, occlusion, and contrast
+detail. It forbids uniform black perimeters, pixel-by-pixel hue switching,
+halos, and low-contrast pale edges. Field cutouts receive no sticker cutline;
+semantic UI and achievement rewards may use a meaningful cream cutline;
+periodic terrain and hazards use material boundaries and seams without an
+enclosing actor contour. The adopted craft contributes no external pixel,
+prompt, palette, motif, layout, brand, or runtime dependency.
+
+`scripts/art_pipeline.py` remains the general safe entry point. `--check` is
+non-writing; `--manifest --write` is the explicit deterministic manifest
+update; `--build` requires a record ID and profile, stages and validates output,
+refuses overwrite, and keeps unapproved derivatives beneath ignored
+`artifacts/art-proofs/`; `--proof` creates actual-size/context boards and an
+encoded/decoded inventory only there. The Plan 03 publication utility is
+`scripts/art_pipeline/mgjrpg02_publish.py`: its explicit semantic map writes new
+no-overwrite URLs and strict-v2 records, and its check mode rebuilds derivatives
+in a temporary directory for byte comparison rather than mutating runtime files.
 The pipeline applies EXIF/profile handling where evidence exists,
 premultiplied-alpha resize, straight-alpha delivery, transparent-edge RGB
 dilation, periodic seam checks, clear-border checks, schema/hash coverage, and
@@ -279,32 +311,29 @@ strict-v1 versus honest legacy warnings. New `mgjrpg-02` production records use
 schema v2 / `strict-v2`: the schema and builder bind family to treatment class,
 closed ordered reference roles/authority kinds, direct non-edit-of-edit lineage,
 selected immutable build source, and exact global recipe/review evidence.
-Existing release-number processors are
-retained unchanged as historical recipes until parity is separately proved.
+Existing release-number processors are retained unchanged as historical recipes
+until parity is separately proved. The ignored v08, v11, and v14 packets remain
+decision history: v08 is rejected post-process evidence, v11 records the
+family-specific A/B/C narrowing, and v14 records the bounded response that led
+to recipe revision 4. The v6 publication decision advances the explicitly named
+production runs; it does not promote contact-sheet cells, rejected runs, proof
+derivatives, or edit-of-edit descendants.
 
-The ignored `artifacts/art-proofs/mgjrpg-02/v08/` packet is preserved as
-Human-rejected post-process evidence; it is not an art authority. The v11
-authored-options packet preserves the Human's family-specific narrowing: A for
-most core/current-family sprites, C for the traditional slime, sword lizard man,
-and green-tea-drinking skeleton, B future-enemy concepts except the A wholesome
-succubus, and the existing top-down flower-petal portal category. Future enemies
-must be re-authored through A's chunky, high-chroma material-contour grammar
-with only restrained B colour/shading influence.
-
-The current bounded-response packet is
-`artifacts/art-proofs/mgjrpg-02/v14/`. Its schema-aware validator binds four
-immutable generator originals, exact prompts and ordered reference roles, the
-locked Candidate C source, the prior preferred Direction B Ame, two independent
-fresh-base attempts, measured proof artifacts, and zero runtime/catalogue
-impact. Neither fresh Ame attempt is an edit of prior B or of the other; both
-drift Candidate C's locked construction, so prior B is the recommended fallback
-pending Human confirmation. The enemy hybrid remains direction evidence pending
-simplification, and the flower-pad hybrid confirms category rather than an
-approved master. Composite board cells remain non-separable concept evidence;
-opaque RGB boards do not pass production alpha or periodic-terrain seam QA.
-Until the Human explicitly accepts, narrows, or rejects the v14 recommendation,
-no Candidate C catalogue switch, broad static-family batch, retirement, or
-decoded runtime residency is authorized; public byte delta remains zero.
+Dormant rows in the publication map are formal catalogue entries only. They are
+not preloaded and add no enemy encounter, rescue placement, item rule, hazard,
+portal pair, animation, or campaign content. Green Tea Skeleton is a dormant
+rescue-and-collect friend and can never enter enemy, Power, or defeat flows. The
+Bubble Ring Blade is a semantic weapon migration from the former Bubble Bow,
+not merely a URL swap; its type, level content, catalogue identity, labels, and
+tests move together. A one-way resolver alias accepts historical `bubble-bow`
+save content as `bubble-ring-blade`; the authored level revision does not change
+because art-style identity is deliberately excluded from its gameplay
+fingerprint. The approved Batch 15 Normal Boots drawing is the active
+`splash-boots` pickup replacement for the old boots delivery, not a second
+dormant footwear family. Violet Moon remains the active third portal pair;
+Sunny Diamond and Violet Spade Bloom stay dormant. The platform app icon and all Batch 21
+title, home, and logo concepts remain source-only for Plan 11, so generated
+lettering never becomes exact wordmark authority.
 
 Lifecycle is intentionally three-dimensional: runtime status (`active`,
 `dormant`, `deprecated`, `superseded`, `source-only`), source status
@@ -312,10 +341,14 @@ Lifecycle is intentionally three-dimensional: runtime status (`active`,
 (`historical`, `candidate`, `pending-human`, `design-approved`, `approved`,
 `rejected`). `design-approved` records Human acceptance of identity and
 construction while remaining non-publishable. Only `approved`, with named
-runtime-publish evidence, exact prompt evidence, and reviewed rights, can enter
-new public output. Runtime selection never implies Human approval. A catalogue
-switch uses a new versioned URL and keeps its prior pointer and files for
-rollback; cleanup is a later proved-dead change.
+runtime-publish evidence, exact prompt evidence, and reviewed
+provenance/rights, can enter new public output. Runtime selection never implies
+Human approval. A catalogue switch uses a new versioned URL and keeps its prior
+pointer and file for rollback. Superseded URLs enter
+`docs/source-assets/retirement/asset-retirement-ledger.json` as
+`rollback-hold`; only Plan 12 may advance them after generated-path
+reachability, clean-clone browser/Tauri packaging, rollback-window,
+archive-hash, and external-backup evidence is complete.
 
 ## Testing strategy
 
@@ -340,7 +373,15 @@ and the full-reset storage allow-list.
 Every authored maze and sampled generated maze is run through the stateful
 solver. The current test count is recorded by the release checklist rather than
 hard-coded here; `npm run check` also completes strict TypeScript and the Vite
-production build. Dependency review,
+production build. Plan 03 adds a separate provenance chain: the publication
+check rebuilds every selected derivative in a temporary directory and
+byte-compares it, `npm run art:test` covers record/batch contracts, and
+`npm run art:check` validates strict-v2 publication evidence plus the regenerated
+manifest. Catalogue tests must prove active versus dormant loading, exact
+achievement coverage, the historical Bubble Bow resolver alias, and Green Tea
+Skeleton's friend-only taxonomy. Retirement-ledger validation proves all exact
+prior URLs remain rollback-held but deliberately does not claim reachability or
+deletion eligibility. Dependency review,
 public deployment, clean-machine installation, and real-device checks remain
 separate release gates; the locked Tauri build, packaging, version/hash checks,
 and portable launch smoke are complete for 0.19.0.

@@ -8,6 +8,13 @@ than promising long-term save or API compatibility.
 
 ### Added
 
+- A complete Human-approved `mgjrpg-02` static-art catalogue: refreshed Ame,
+  friends, enemies, weapons, cages, locks, portals, pickups, treasures, terrain,
+  hazards, navigation icons, and fifteen glossy achievement stickers, all with
+  versioned runtime files and reconstructable provenance.
+- Dormant catalogue-ready art for future mythic friends, guardians, Mimic chest
+  states, equipment, Science pickups, teleporter pads, and floor spikes. These
+  assets are not placed, preloaded, or given gameplay rules yet.
 - Stable authored-object identity, gameplay revisions/fingerprints, versioned
   campaign order, revision-scoped route history, and fail-closed active-run
   migration.
@@ -18,6 +25,15 @@ than promising long-term save or API compatibility.
 
 ### Changed
 
+- Ame now uses her approved v02 golden-blonde, blue-eyed field identity and
+  portrait. Active static art uses the brighter material-aware contour grammar,
+  clean sticker treatment for semantic UI, and right-sized WebP delivery.
+- The Bubble Bow visual identity is now the Bubble Ring Blade, with a one-way
+  compatibility alias for historical content. Held weapons use measured
+  per-weapon grip, scale, rotation, and layer registration rather than one
+  universal placement.
+- Muted controls now show their dedicated simplified muted-speaker sticker.
+  Existing title/platform branding remains unchanged for Plan 11 review.
 - Chapter 1 is now a complete 6×6 whole-board movement lesson. Later campaign
   edits reduce ordinary corridor endurance, while Chapters 13 and 15 become
   compact portal-inference puzzles.

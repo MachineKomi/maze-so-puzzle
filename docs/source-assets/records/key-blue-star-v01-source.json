@@ -5,7 +5,7 @@
   "id": "key-blue-star",
   "artVersion": 1,
   "family": "lock",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "legacy-runtime-only",
   "approvalStatus": "historical",
   "validationProfile": "legacy-observed",
@@ -35,7 +35,7 @@
       "decodedBytesUpperBound": 1048576,
       "profile": "legacy-runtime",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "level-entry-warmup-or-first-use",
       "encoder": {
         "name": "unknown-historical-encoder",

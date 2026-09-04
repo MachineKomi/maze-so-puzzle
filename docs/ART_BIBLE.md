@@ -1,14 +1,14 @@
 # Maze so Puzzle art bible
 
-Status: **implemented visual-system authority; Ame v02 Candidate C identity/construction and `mgjrpg-02` rendering recipe approved; controlled family source production active; runtime promotion separately gated**
+Status: **implemented visual-system authority; Human-approved `mgjrpg-02` static catalogue published through Plan 03; downstream lighting, animation, front-door branding, gameplay admission, and final retirement remain separately owned**
 
 Historical approved-identity recipe: `mgjrpg-01`
 
-Current production recipe: `mgjrpg-02` revision 4 (controlled family batches; per-asset derivative/runtime approval required)
+Current production recipe: `mgjrpg-02` revision 4 (`storybook-local-contour-v1`; approved and published for the Plan 03 static catalogue)
 
 Checkpoint inspected before implementation: `ee176f52ab79e08e818fc919f44b7723f9fc9865`
 
-Last reviewed: 2026-09-03
+Last reviewed: 2026-09-04
 
 This is the production authority for static art, graphic-design tokens, source
 records, and derivative QA. `docs/plans/03-magical-girl-art-direction.md` keeps
@@ -23,12 +23,49 @@ blue eyes, proportions, costume, backpack, silhouette, registration, or
 emotional character. The Human subsequently approved Fresh B-led 01 as Ame's
 static `mgjrpg-02` rendering choice because it is clearest at her common small
 field scale. That rendering reference does not replace Candidate C's identity
-or construction and is not itself approved runtime art: the v01 runtime pointer
-stays in place until Plan 03 creates and proves a versioned cleaned derivative
-in live context, records its own decision, completes rights and byte gates, and
-preserves rollback. Controlled family source production may proceed; dependent
-Ame poses, story variants, runtime publication, and animation remain separately
-gated. Animation is owned by Plan 05.
+or construction. Plan 03's forward-only v6 decision publishes the approved
+cleaned Ame v02 field derivative and matching portrait through versioned
+catalogue pointers while retaining the v01 files as rollback authorities.
+Dependent poses, story variants, and animation remain separately gated;
+animation is owned by Plan 05.
+
+## Plan 03 publication authority — 2026-09-04
+
+The Human closed the static-art review and completeness gates and authorized
+publication without reopening approved designs. The exact authority chain is
+the 144-row map at
+`docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json`, the
+forward-only decision at
+`docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json`, and the
+measured derivative report at
+`docs/source-assets/publication/mgjrpg-02-plan03-publication-report.json`.
+One hundred entries replace active runtime pointers and 44 are dormant,
+catalogue-only future art. Dormant entries add no placement, preload, mechanics,
+animation, progression, or balance.
+
+Every published entry has one immutable selected source, one versioned runtime
+derivative, one strict-v2 source record, explicit semantic identity, measured
+geometry, source/runtime hashes, encoder facts, loading intent, and rollback
+classification. The preceding 100 runtime files remain physically present and
+are `rollback-hold` candidates for Plan 12; Plan 03 moves or deletes none. The
+current platform icon and all Batch 21 title, splash, and generated-logo studies
+remain source-only for Plan 11 because no final exact wordmark/platform-branding
+decision promotes them here.
+
+The corrected delivery totals 9,366,734 encoded bytes and 107,937,792 decoded
+RGBA bytes as an all-files upper bound. Its 100 active entries account for
+7,068,346 encoded bytes; the 44 dormant entries account for 2,298,388 and are
+not preloaded. Four dressing overlays are explicitly straight-alpha periodic
+layers. Their initial uncommitted RGB-flattened derivatives were rejected and
+hash-recorded in
+`docs/source-assets/publication/mgjrpg-02-plan03-transparent-dressing-defect.json`;
+the approved source drawings were not altered.
+
+The publication report also carries 56 explicit non-Ame actor landmark deferrals.
+Alpha bounds are not invented as face, eye, or foot anatomy. Those static assets
+retain truthful canvas, pivot, and visible-bound registration for Plan 03, while
+Plan 05 animation and any automated cage-face masking remain blocked until the
+named manual landmarks are registered.
 
 ## Creative north star
 
@@ -56,6 +93,15 @@ an honest design-review record. They translate into bright readable characters,
 cosy optimistic fantasy, clean expressive anime faces, an affectionate ensemble,
 appealing SD/chibi proportions, legible fantasy objects, and warm story-led
 handheld-JRPG presentation.
+
+For interface review, the Human additionally points to recent *Kirby* games,
+*Mario Party Superstars*, *Super Mario Party Jamboree*, *Super Mario Bros.
+Wonder*, and *Trails in the Sky*. They are principles-only taste vocabulary:
+joyful authored framing, tactile layered surfaces, confident type hierarchy,
+large characterful imagery, readable couch-distance controls, and motion that
+supports a clear state change. Maze must express those qualities through its own
+storybook materials, motifs, palette, icon family, composition, and interaction
+language rather than borrowing any franchise's UI skin or trade dress.
 
 No franchise name or reference image enters a generation prompt. Never copy a
 protected character, costume, composition, logo, UI skin, signature prop, or
@@ -292,9 +338,10 @@ It found the missing Jelly Sorcerer and Power Potion production sources, the
 promised compact First Star and standing-goal treatments, and the active legacy
 Ame portrait's unacceptable teal-eye/short-bob mismatch. Batch 20 supplies fresh
 non-edit candidates for all five. They remain pending review and cannot replace
-runtime pointers. Existing Goblin, title, Poggle, Sprig, and large reward/badge
-art stay deliberately retained; a recipe label alone is not cause to redraw
-strong approved work.
+  runtime pointers. Existing Goblin, Poggle, Sprig, and large reward/badge art
+  stay deliberately retained; the historical title remains rollback/comparison
+  evidence while the Human-authorized front-door set is produced. A recipe label
+  alone is not cause to redraw strong approved work.
 
 The immutable selection packet is
 `artifacts/art-proofs/mgjrpg-02/v14/`. It includes source comparisons,
@@ -418,6 +465,34 @@ quiet.
 The relationship is “paper-cut signals over magical surfaces over painted
 world,” not “make everything a sticker” or “make everything translucent.”
 
+### Maze-native interface surface grammar
+
+The interface is authored game art, not a generic web dashboard decorated with
+sprites. Its primary magical-glass surface has a milky white or pearl,
+near-opaque body; a quiet centre behind text; a soft luminous inner rim; a
+material-local plum, lavender, mint, coral, or warm-gold outer edge and shallow
+shadow; and at most one sparse corner or edge ornament. It should feel like
+frosted storybook crystal or polished magical enamel rather than clear browser
+glass. Literal backdrop blur is optional implementation detail, never the
+identity: every surface has visually equivalent `full`, `lite`, and `static`
+recipes, and the persistent HUD never continuously blurs the moving maze.
+
+| State | Required authored change |
+| --- | --- |
+| Default | Quiet readable body, inner rim, clear edge, one stable focal hierarchy |
+| Hover | Small rim/edge or lift response; no layout shift and no meaning by motion alone |
+| Focus | Unmistakable keyboard/controller focus ring integrated outside the art edge |
+| Pressed | Brief inward value/position response with the label and icon still stable |
+| Selected | Persistent shape, plate, notch, or badge change as well as colour |
+| Disabled | Lower emphasis while preserving text, silhouette, and state comprehension |
+
+Dense text uses the most opaque quiet-centre recipe. Celebration, blocker, hint,
+story, and ordinary-dialog surfaces may share the material family but have typed
+silhouette/ornament variants; they are not the same generic rounded card repeated
+everywhere. Sticker icons sit on or break the rim deliberately. Large approved
+character, item, friend, enemy, and reward art may overlap the frame where it
+improves hierarchy, with reserved geometry so loading cannot move the controls.
+
 ## Family DNA cards
 
 ### Character and Ame
@@ -434,7 +509,10 @@ world,” not “make everything a sticker” or “make everything translucent.
 
 ### Friends
 
-- Preserve all 15 species and their colour/accessory identities.
+- Preserve the original fifteen species and every later Human-approved ordinary,
+  mythic, yokai, fantasy, Greek/Roman, unicorn, and reclassified friend identity;
+  `docs/GAMEPLAY_DESIGN_SPEC.md` owns the current rescue-and-collect roster. The
+  original count is a baseline, not a cap or permission to omit later approvals.
 - Share face construction, three-quarter camera, scale band, baseline, and
   grouped-fur recipe. Sitting/standing is an explicit species rule.
 - One accessory per friend; use a heart only for an actual bond/rescue message.
@@ -478,6 +556,14 @@ may guide Warrior Skeleton's bone grammar only.
   leaf. Currency and science use shape/value as well as colour.
 - Inventory use receives authored 24/32/48 px optical art, not merely a reduced
   384/512 illustration.
+- Each contextual item identity may expose three distinct delivery roles:
+  `field` for the maze, `optical` for compact inventory/status use, and
+  `presentation` for blockers, discoveries, rewards, or teaching moments. A
+  presentation rendition preserves the approved design at a larger physical
+  pixel target; it is not a nearest-neighbour enlargement of the field file.
+- Blocker presentation art is the dominant visual above short deterministic copy
+  such as “You need the Splash Boots.” Resolve only the named item, keep stable
+  geometry while it decodes, and retain a semantic icon/text fallback.
 
 ### Cages
 
@@ -540,20 +626,43 @@ may guide Warrior Skeleton's bone grammar only.
 
 - Use the same identity, motifs, palette, materials, and gentle upper-left form
   light at the richer 4.5–5.0-head tier. Use one shared bust crop and eye level.
-- Title/key art reserves 44% left copy-safe area and 8% outer safety. No baked UI
-  or dialogue text.
+- The front door uses separable assets: an opaque responsive title background
+  with recorded focal point/copy-safe rectangles, and a transparent home/hero
+  splash with safe bounds and a contain-first crop policy. They compose on the
+  application's existing combined title/home/menu surface; they do not imply a
+  redundant second startup screen.
+- Title/background variants preserve the approved focal subjects, a useful quiet
+  copy/menu region, and 8% outer safety across compact, iPad, desktop, and TV
+  crops. No baked UI or dialogue text.
+- Early Plan 03 art is valid final work once approved. Plan 11 audits it against
+  the final cast and runtime composition and retains it by default; Plan 11 has
+  no quota to regenerate attractive, coherent pixels.
 
 ### Navigation and brand
 
-- Author separate 16, 24, 32, and 48 px optical designs; a downsample is only a
-  proof, never an optical master. Subject fills about 80%, with 10% margin.
+- The measured current consumer set uses one 128 px lossless navigation
+  derivative for its 16–64 CSS-pixel range. Add genuinely authored 16/24/32/48
+  optical siblings only when actual-size testing demonstrates a recognition or
+  aliasing failure; do not ship redundant resolutions by default. Subject fills
+  about 80%, with 10% margin.
 - One literal metaphor: roof/door Home, path Mazes, open Book, question/spark
   Help, speaker/waves Sound, speaker/decisive slash Muted, circular-arrow Restart.
 - State uses at least two of shape, fill, outline, badge, pattern, and label.
   Modifier stays bottom-right and below 30% area. A single four-point sparkle or
   plum notch may sign the family only if it survives 16 px.
-- Brand keeps the star silhouette. Authored 16/32/64 px marks reduce the inner
-  galaxy and cloud/gold construction to two or three masses.
+- The Batch 13 simplified Ame-face app-icon study is the provisional preferred
+  source direction, not active platform branding. Plan 11 owns its final
+  promotion and platform optical set. Any promoted Ame-face icon must keep her
+  golden-blonde hair and blue eyes readable at delivery size, use at most one
+  tiny guiding-star accent, and simplify facial and costume masses deliberately
+  rather than mechanically shrinking the old galaxy-star illustration or a
+  presentation portrait.
+- Keep background illustration, transparent hero/splash art, non-text brand mark,
+  and the exact `Maze so Puzzle` wordmark independently addressable. Generated
+  letterforms are concept-only. A shipped wordmark is deliberately reconstructed
+  with controlled local type/vector/raster artwork, reads exactly at compact and
+  TV sizes, passes originality review, and is accompanied by a real semantic
+  heading in the application.
 
 ## Static asset contract
 
@@ -561,16 +670,18 @@ may guide Warrior Skeleton's bone grammar only.
 
 | Profile | Working master | Permitted derivatives | Alpha |
 | --- | --- | --- | --- |
-| Character field | 2048 square | 256/512 WebP | Straight |
-| Friend/enemy/prop | 1536 square | 256/512 WebP | Straight |
-| Structure | 2048 square | 256/512 WebP | Straight |
-| Reward | 1536 square | 256 plus 48/64 optical | Straight |
-| Navigation | 1024 design plus authored 16/24/32/48 masters at 4x | lossless WebP/PNG | Straight |
-| Story portrait | 1536 square | 256/512 lossy WebP after A/B | Opaque or straight |
-| Title/key art | 3840x2160 | 1920x1080 tuned WebP | Opaque |
-| Periodic terrain | 2048 square | 1024 PNG/lossless WebP | Opaque |
-| Dressing | 2048 square | 512/1024 lossless | Straight |
-| Ground overlay | 1536 square | 256/512 WebP | Straight |
+| Character field | immutable approved source, normally 1536–2048 square | one registered 512 lossless WebP for the current 40–103 px field consumer | Straight |
+| Friend/enemy/prop | immutable approved source, normally 1536 square | one registered 256 lossless WebP for current field/inventory consumers | Straight |
+| Structure | immutable approved source, normally 1536–2048 square | one registered 256 lossless WebP | Straight |
+| Reward | immutable approved source, normally 1536 square | one 256 lossless WebP; add authored optical siblings only when a measured consumer fails | Straight |
+| Navigation | immutable approved source, normally 1024+ square | one 128 lossless WebP for current 16–64 px CSS consumers; no redundant preloaded sizes | Straight |
+| Story portrait | immutable approved source, normally 1536 square | one 512 quality-reviewed lossy WebP | Opaque |
+| Front-door/title background | 3840x2160 | responsive tuned WebP sources selected from measured layout bands | Opaque |
+| Front-door hero/splash | Approved native composition, normally at least 2048 on the long axis | 512/1024/1536 WebP as justified by rendered size and DPR | Straight |
+| Exact brand lockup | Layered/lossless local reconstruction | approved compact and large WebP/PNG/SVG outputs | Straight or opaque by consumer |
+| Periodic terrain | immutable approved source, normally 1536–2048 square | one 1024 quality-94 lossy WebP after decoded seam and visual review | Opaque |
+| Dressing | immutable approved periodic RGBA source | one 512 lossless WebP | Straight |
+| Ground overlay | immutable approved source, normally 1536 square | one registered 256 lossless WebP | Straight |
 | App icon | 1024 square | platform set plus authored 16/32/64 | Platform |
 
 An immutable generator original is not renamed or altered. A normalized master
@@ -596,7 +707,31 @@ Coordinates are normalized. `safeInset` order is top, right, bottom, left.
 | Icon | `(0.50,0.50)` | `0.10` all sides | optical bounds, modifier |
 
 Bounds and anchors are measured from the actual derivative. They are not copied
-from defaults. Any approved geometry change bumps the art recipe.
+from defaults. Plan 03 requires canvas, pivot, bounds, safe inset, family-state,
+weapon, cage, structure, portal, tile, item-centre, and optical metadata needed
+by current static consumers. Semantic face/eyeline/foot landmarks that have no
+source-authoritative manual measurement are listed explicitly in the publication
+report and become mandatory before Plan 05 animation or automated cage masking;
+alpha bounds must not be relabelled as facial landmarks. Any approved geometry
+change bumps the art recipe.
+
+`faceBox`, `eyeLine`, semantic `groundLine`, and `floatCenter` are mandatory
+before an actor enters Plan 05 animation or automated cage masking. A static
+Plan 03 publication may omit only a landmark that has no truthful manual
+authority: the publication report must name the asset and missing fields under
+`deferredGeometry`, confirm that no current runtime consumer depends on them,
+and retain locked canvas/pivot/bounds plus live visual-review evidence. Alpha
+bounds must never be relabelled as facial or foot-contact landmarks merely to
+fill the schema. Ame is not exempt: her approved model sheet supplies her face,
+eye-line, ground-line, and hand-socket authority.
+
+Front-door and contextual-presentation records additionally declare derivative
+usage, authored-optical-versus-derived status, intended rendered-size/DPR band,
+focal point, copy-safe rectangle, and `contain` or approved-crop policy. Builders
+preserve aspect ratio: a mismatched source must use an explicit reviewed crop or
+contain operation, never a forced width-and-height distortion. Nine-slice/frame
+metadata is added only for a genuinely reviewed raster surface; Plan 01's
+code-native surface recipes remain the default.
 
 ### Transparency and colour handling
 
@@ -631,18 +766,23 @@ overwrite an approved file. Keep the preceding runtime version for one release.
 | --- | ---: |
 | 256 field cutout | 100 KiB |
 | 512 presentation cutout | 220 KiB |
+| 1024 presentation cutout | 480 KiB initial review ceiling |
+| 1536 presentation cutout | 700 KiB initial review ceiling |
 | 16–48 optical icon | 12 KiB |
 | 128 reward/badge | 45 KiB |
 | 256 reward/badge | 100 KiB |
 | 256 story portrait | 55 KiB |
 | 512 story portrait | 120 KiB |
 | 1024 periodic terrain | 650 KiB |
-| 1920x1080 title/key art | 350 KiB |
+| 1920x1080 front-door/title art | 350 KiB initial review ceiling |
 
 Report encoded bytes and decoded upper bound (`width * height * 4`) together.
-Lossless/near-lossless WebP is preferred for crisp transparent art after visual
-A/B; opaque story art uses tuned lossy WebP. Periodic WebP is permitted only
-when decoded edges remain exact and repeats pass. JPEG is opaque full-bleed only.
+Lossless WebP is used for crisp transparent field and semantic-UI art; the
+opaque portrait uses tuned lossy WebP. Opaque periodic terrain uses quality-94
+lossy WebP because the lossless Sunny Stone canary exceeded the 650 KiB ceiling;
+publication still requires the decoded edge delta to remain below the local
+texture allowance and the 3×3/5×5 repeat review to pass. The immutable PNG
+source remains the reconstruction authority. JPEG is opaque full-bleed only.
 
 ## Provenance and anti-drift workflow
 
@@ -708,6 +848,13 @@ Existing proof derivatives must be moved aside or deliberately removed before
 a rebuild—the builder never silently replaces one. The record, manifest, and
 proof-index hashes are the review identity, not an informal filename alone.
 
+### Historical pre-publication canary and lifecycle record
+
+The following slate records how the approved recipe and sources were reached.
+Its words such as “current,” “pending,” and “separately gated” describe their
+named 2026-09-03 checkpoints and are superseded for static publication by the
+v6 authority above; they remain truthful decision history.
+
 The `mgjrpg-02` calibration canary set is Ame Candidate C as the immutable
 identity/reference anchor; Fox and Alpaca; Goblin and Jelly Sorcerer; Moon Wand;
 the Rose Heart lock/key token, door, and portal; First Star; Home and Help;
@@ -764,8 +911,10 @@ approval.
   reason, evidence, review date, dependency, and rollback. Compression never
   substitutes for decoded-memory accounting or face/edge review.
 - **UI/VFX:** Plan 01 consumes semantic tokens and icon rules without changing
-  this source authority. Plan 02 consumes motif/palette semantics without adding
-  motif clutter. Feedback intensity rises deliberately from input acknowledgement
+  this source authority. It owns the responsive full/lite/static surface recipes,
+  typography implementation, typed dialog compositions, and contextual
+  presentation-art consumer. Plan 02 consumes motif/palette semantics without adding
+  motif clutter or using continuous animated blur. Feedback intensity rises deliberately from input acknowledgement
   to ordinary pickup/interaction, combat/rescue/blocker, mechanic or puzzle
   success, maze clear/story beat, and campaign milestone. Lower tiers never use
   the visual density of the tier above; reduced/static equivalents preserve the
@@ -795,10 +944,16 @@ the v08 contour transform:
 
 | Decision | Families | Priority |
 | --- | --- | --- |
-| Retain | Candidate C identity/construction, Fox, Goblin, First Star shelf art, title, Poggle/Sprig concepts, strongest enemies, useful dressings | P0–P3 |
+| Retain | Candidate C identity/construction, Fox, Goblin, First Star shelf art, historical title as rollback/comparison, Poggle/Sprig concepts, strongest enemies, useful dressings | P0–P3 |
 | Refine | Jelly Sorcerer, Rose Heart door/portal, Sunny Stone, poison, First Star optical siblings, portrait later, items, cages and selected outliers | P0–P2 |
 | Replace rendering | Rose Heart key optical art, Wishing Woods floor, Alpaca and later failing friends, Moon Wand and selected weapon outliers, Home/Help and navigation optical art, Wishing Woods hedge, water/lava masters, Storybook Wood cage | P0–P1 |
 | Retire only after proof | 16 superseded images, declaration-only Ame/rewards, dormant sandstone when authorized | P3 |
+
+The Human-authorized early title background, transparent home/hero splash, and
+exact reconstructed wordmark are new front-door production, not contradictions
+of the historical-title rollback row. Once individually approved and published,
+they enter Plan 11 as retain-by-default candidates subject to final-canon and
+live-composition audit.
 
 Nothing is retired by this foundation pass. The precise retain/refine/replace
 matrix and severity-ranked rationale remain in Plan 03 sections 5 and 8.

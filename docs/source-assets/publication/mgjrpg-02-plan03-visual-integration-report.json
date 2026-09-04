@@ -1,0 +1,123 @@
+{
+  "schema": "maze-art-visual-integration/v1",
+  "reportId": "mgjrpg-02-plan03-runtime-integration-2026-09-04",
+  "recordedOn": "2026-09-04",
+  "startingCommit": "0fce05451b94f44d795805f8694bcebee2a9262a",
+  "previewUrl": "http://127.0.0.1:4176/?debug=mazes",
+  "previewCommand": "npm run preview -- --host 127.0.0.1 --port 4176",
+  "authority": {
+    "runtimeMap": "docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json",
+    "publicationReport": "docs/source-assets/publication/mgjrpg-02-plan03-publication-report.json",
+    "humanDecision": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json"
+  },
+  "resourceAudit": {
+    "method": "HTTP GET every runtime-map publicUrl from the production preview, plus visible document-image natural-size checks",
+    "requested": 144,
+    "http200": 144,
+    "failures": 0,
+    "encodedBytesReceived": 9366734,
+    "visibleBrokenImages": 0,
+    "warningOrErrorConsoleEntries": 0,
+    "legacyAssetUrlsObservedInSampledMaze": 0,
+    "note": "Adventure Book images below the fold are lazy-loaded. They were scrolled into view before the visible broken-image assertion."
+  },
+  "captures": [
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tv-1920-shiny-sword.png",
+      "sha256": "ca2b45f8d2806d5ee897dbcbe3ea75af8dfe5689ba9f41aeae923d1c48b7354a",
+      "bytes": 230439,
+      "viewport": [1920, 1080],
+      "surface": "Shiny Sword maze",
+      "reviewed": ["Ame field registration", "ordinary friend/cage composite", "weapon and key optical size", "goal", "navigation icons"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/ipad-1194-splashy-boots.png",
+      "sha256": "213a15297c063c333d1084fcc825297ccde6db3f6def9a46bdac19d377953093",
+      "bytes": 135970,
+      "viewport": [1194, 834],
+      "surface": "Splashy Boots maze",
+      "reviewed": ["Ame and portrait", "Blueberry Slime", "Moon Wand", "Moonlit Moat material family", "cage strip", "navigation and muted-sound icons"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/desktop-1280-wishing-woods.png",
+      "sha256": "577a2fc195886402c057761a784cab849e583e436e4f1cd30c9386f42732ee35",
+      "bytes": 143164,
+      "viewport": [1280, 720],
+      "surface": "Wishing Woods maze",
+      "reviewed": ["Sunny Stone floor", "Wishing Woods wall", "lava boundary", "Sunny Sun door", "hole URL", "garden cage family", "small-size Ame"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/phone-844-twilight-treasure.png",
+      "sha256": "23788231fb7d2220d29cda2427bd8f7d1f6e510adfeaa17d9ab1047f84d50e28",
+      "bytes": 47255,
+      "viewport": [844, 390],
+      "surface": "Twilight Treasure Loop maze",
+      "reviewed": ["compact-phone silhouette readability", "Rose Heart door", "cages", "inventory slots", "navigation icons"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/phone-568-moonlit-friendship.png",
+      "sha256": "c4df12ae9c7d5f2bb8daa443aa42bf03087a64dbd6e4d25c278ca452a3f441d5",
+      "bytes": 28885,
+      "viewport": [568, 320],
+      "surface": "Moonlit Friendship Quest maze",
+      "reviewed": ["smallest supported landscape presentation", "Ame", "Mushroom Imp", "five-friend cage strip", "wall/floor separation"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tablet-1024-rose-heart.png",
+      "sha256": "72ac1528dd11dfab367f7b41478d3e3bd91c748112a37ac520e27c210e6daf21",
+      "bytes": 86928,
+      "viewport": [1024, 768],
+      "surface": "Rose Heart Roundabout maze",
+      "reviewed": ["flower-pad teleporter symbol", "floor/wall material contrast", "science pickup", "Ame registration"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/desktop-1280-adventure-book.png",
+      "sha256": "bf2c07861a066a852004eff2fef73e1f562d692fde3c7699e3c3774f8df8a82f",
+      "bytes": 88107,
+      "viewport": [1280, 720],
+      "surface": "Adventure Book rescue roll-call",
+      "reviewed": ["15 ordinary friend identities", "57-pixel friend rendering", "navigation", "no visible broken lazy image"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/desktop-1280-adventure-book-badges.png",
+      "sha256": "84cfffa230520cb9c0988f0a439c7454838351fc24481aa66cdd8ba5c7ad8b0c",
+      "bytes": 90311,
+      "viewport": [1280, 720],
+      "surface": "Adventure Book sticker, medal, and badge shelf",
+      "reviewed": ["all 15 reward derivatives at 69 CSS px", "locked-state silhouette", "cream cutline", "lazy-load completion"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tv-1920-victory-rewards.png",
+      "sha256": "cd69baf4c5e2ff5108348aaa765368570f003a45cd8e0cb29f2aede38e67ee06",
+      "bytes": 127872,
+      "viewport": [1920, 1080],
+      "surface": "Little Star Trail completion and new-reward modal",
+      "reviewed": ["normal non-tester completion", "goal and gold-bag reward art", "My First Maze sticker", "Twinkle Toes badge", "no fallback or clipping"]
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/runtime-integration/tv-1920-adventure-book-unlocked-rewards.png",
+      "sha256": "13f7f8170fb183933870d2020a1cef19d303aa5556a207ba9b425c4d90545f95",
+      "bytes": 137045,
+      "viewport": [1920, 1080],
+      "surface": "Adventure Book mixed unlocked and locked reward shelf",
+      "reviewed": ["earned Twinkle Toes badge", "locked reward treatment", "same semantic identity as completion modal", "clean cream cutline and small-size read"]
+    }
+  ],
+  "reviewResult": {
+    "status": "pass-with-downstream-gates",
+    "observedDefects": [],
+    "notes": [
+      "Published active art retained clean silhouettes, registration, cage fit, and colour-aware contour readability at the sampled actual sizes.",
+      "Periodic terrain and hazard imagery showed no visible seams in sampled live contexts; numerical seam and alpha checks remain automated pipeline authority.",
+      "A normal, non-tester six-step completion exercised the live reward modal and persisted My First Maze and Twinkle Toes into the Adventure Book; the same published reward identities remained readable in earned and locked treatments without fallback.",
+      "Dormant mythic friends, future enemies, Mimic states, spikes, ice equipment, and alternate flower pads have no authorised gameplay placement. Their versioned URLs and catalogue records were validated without inventing live mechanics.",
+      "Plan 04 owns directional lighting and contact grounding. Plan 05 owns animation frames and must resolve the publication report's deferred semantic actor landmarks before frame production or automated cage masking."
+    ]
+  },
+  "externalGates": [
+    "Physical iPad touch and colour/feel review",
+    "TV-distance review on real display hardware",
+    "Clean-machine Windows install, signing, and WebView2 cohort",
+    "Plan 11 title/home/logo/application-icon branding decision"
+  ]
+}
