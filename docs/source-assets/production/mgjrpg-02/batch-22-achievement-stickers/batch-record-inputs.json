@@ -1,0 +1,445 @@
+{
+  "schema": "maze-art-generation-ledger/v1",
+  "batchId": "mgjrpg-02-batch-22-achievement-stickers",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-04",
+  "purpose": "Create a fresh, cohesive premium Adventure Book achievement-sticker family covering every currently implemented sticker, medal, and badge while preserving each live reward's semantics and applying the approved mgjrpg-02 house style with clean glossy enamel, restrained holographic foil, pearlescent, metallic, and embroidered material treatments that remain legible across the shipped display scales.",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "revision": 4,
+    "path": "docs/source-assets/recipes/mgjrpg-02.json"
+  },
+  "decisionEvidence": {
+    "decisionId": "mgjrpg-02-human-source-review-v05",
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v05/human-decision.json",
+    "scope": "approved-source-and-rendering-references"
+  },
+  "promptFile": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/PROMPTS.md",
+    "fidelity": "exact-as-submitted-from-generation-transcript"
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in image generation capability",
+    "model": "not exposed by the tool response",
+    "seed": "not exposed by the tool response",
+    "nativeOutput": {
+      "dimensions": "per-run evidence",
+      "format": "png",
+      "mode": "per-run evidence",
+      "alphaMode": "per-run evidence"
+    }
+  },
+  "referenceRegistry": {
+    "mgjrpg-02-recipe": {
+      "path": "docs/source-assets/recipes/mgjrpg-02.json",
+      "authorityKind": "approved-rendering-contract"
+    },
+    "human-source-review-v05": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v05/human-decision.json",
+      "authorityKind": "approved-source-selection-evidence"
+    },
+    "legacy-reward-trail-sticker": {
+      "path": "public/assets/reward-trail-sticker.png",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-reward-animal-friend-sticker": {
+      "path": "public/assets/reward-animal-friend-sticker-v2.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-reward-surprise-sparkle-sticker": {
+      "path": "public/assets/reward-surprise-sparkle-sticker-v2.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-reward-helping-paw-medal": {
+      "path": "public/assets/reward-helping-paw-medal-v2.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-reward-rainbow-rescue-medal": {
+      "path": "public/assets/reward-rainbow-rescue-medal-v2.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-reward-golden-guardian-medal": {
+      "path": "public/assets/reward-golden-guardian-medal-v2.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-pathfinder": {
+      "path": "public/assets/badge-pathfinder-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-maze-mapper": {
+      "path": "public/assets/badge-maze-mapper-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-grand-explorer": {
+      "path": "public/assets/badge-grand-explorer-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-surprise-scout": {
+      "path": "public/assets/badge-surprise-scout-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-mighty-adventurer": {
+      "path": "public/assets/badge-mighty-adventurer-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-twinkle-toes": {
+      "path": "public/assets/badge-twinkle-toes-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-bunny-buddy": {
+      "path": "public/assets/badge-bunny-buddy-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-fox-friend": {
+      "path": "public/assets/badge-fox-friend-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "legacy-badge-kitten-pal": {
+      "path": "public/assets/badge-kitten-pal-v1.webp",
+      "authorityKind": "active-runtime-semantic-identity-reference-only"
+    },
+    "nav-home-v03": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/nav-home-v03-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "approved-semantic-sticker-craft-reference-only"
+    },
+    "weapon-moon-wand-v02": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-moon-wand-v02-candidate-b-matte-01-generator-original.png",
+      "authorityKind": "approved-enamel-gold-and-jewel-material-reference-only"
+    },
+    "friend-bunny-v02-approved-512": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-bunny-v02-512.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    },
+    "friend-fox-v02-approved-512": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-fox-v02-512.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    },
+    "friend-kitten-v02-approved-512": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/approved/friend-kitten-v02-512.png",
+      "authorityKind": "approved-friend-identity-and-rendering-reference"
+    }
+  },
+  "runDefaults": {
+    "generationMode": "fresh-reference-led-source-on-uniform-matte",
+    "lineage": {
+      "freshCanvas": true,
+      "previousBatchOutputUsed": false,
+      "rejectedOutputUsedAsReference": false,
+      "editOfEdit": false,
+      "sourceEditDepth": 0,
+      "mayBecomeIdentityAuthority": false,
+      "mayBecomeRenderingAuthority": false
+    }
+  },
+  "runs": [
+    {
+      "runId": "batch-22-reward-trail-sticker-v03",
+      "promptBlockId": "reward-trail-sticker-v03-candidate-a-matte-01",
+      "identityId": "reward-trail-sticker",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-trail-sticker", "role": "preserve the live First Star reward's star, boot and path semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-trail-sticker-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-02a46af9-27ab-4080-bec3-3e6132dc0ba9.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium First Star sticker candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-reward-animal-friend-sticker-v03-a",
+      "promptBlockId": "reward-animal-friend-sticker-v03-candidate-a-matte-01",
+      "identityId": "reward-animal-friend-sticker",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-animal-friend-sticker", "role": "preserve the live Animal Friend reward's bunny-face and affection semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity, landmark and expression authority"},
+        {"order": 3, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 4, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-animal-friend-sticker-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-350665fb-ed8d-4a43-8a2c-b73994d3b48c.png"
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reasonCode": "art-director-rejected-semantic-collision",
+        "reason": "Rejected after locked-size and 32 px internal QA because the single paw-and-heart motif collided semantically with the three rescue medals."
+      }
+    },
+    {
+      "runId": "batch-22-reward-animal-friend-sticker-v03-b",
+      "promptBlockId": "reward-animal-friend-sticker-v03-candidate-b-matte-01",
+      "identityId": "reward-animal-friend-sticker",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-animal-friend-sticker", "role": "semantic-only negative evidence for the old all-friends award; reject its single-paw focus, dense leaves, flowers, bows and clutter"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny species palette and facial-language identity only; draw all portrait art fresh"},
+        {"order": 4, "referenceId": "friend-fox-v02-approved-512", "role": "approved Fox species palette and facial-language identity only; draw all portrait art fresh"},
+        {"order": 5, "referenceId": "friend-kitten-v02-approved-512", "role": "approved Kitten species palette and facial-language identity only; draw all portrait art fresh"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-animal-friend-sticker-v03-candidate-b-matte-01-generator-original.png",
+        "outputId": "exec-371a9d8f-a91d-4753-8631-6b49a6d722ca.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Selected proof candidate after internal QA; the distinct Bunny, Fox and Kitten trio resolves the paw-medal semantic collision and awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-reward-surprise-sparkle-sticker-v03",
+      "promptBlockId": "reward-surprise-sparkle-sticker-v03-candidate-a-matte-01",
+      "identityId": "reward-surprise-sparkle-sticker",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-surprise-sparkle-sticker", "role": "preserve the live Surprise Sparkle reward's gift and sparkle semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-surprise-sparkle-sticker-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-6e7e716d-459b-4f8c-88c4-cc7a7333398a.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Surprise Sparkle sticker candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-reward-helping-paw-medal-v03",
+      "promptBlockId": "reward-helping-paw-medal-v03-candidate-a-matte-01",
+      "identityId": "reward-helping-paw-medal",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-helping-paw-medal", "role": "preserve the live Helping Paw medal's paw, heart and ribbon semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-helping-paw-medal-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-ad3372c0-479d-469f-a8c3-6d18e6d3db7b.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Helping Paw medal candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-reward-rainbow-rescue-medal-v03",
+      "promptBlockId": "reward-rainbow-rescue-medal-v03-candidate-a-matte-01",
+      "identityId": "reward-rainbow-rescue-medal",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-rainbow-rescue-medal", "role": "preserve the live Rainbow Rescue medal's rainbow, cloud and ribbon semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-rainbow-rescue-medal-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-f7483faa-b6a3-4802-b855-ff9bce6d633b.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Rainbow Rescue medal candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-reward-golden-guardian-medal-v03-a",
+      "promptBlockId": "reward-golden-guardian-medal-v03-candidate-a-matte-01",
+      "identityId": "reward-golden-guardian-medal",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-golden-guardian-medal", "role": "preserve the live Golden Guardian medal's shield, star and ribbon semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-golden-guardian-medal-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-d94f7eca-4bf1-44a9-a6b3-96b8750da578.png"
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reasonCode": "art-director-rejected-cutline-defect",
+        "reason": "Rejected after internal QA because the cream cutline is ragged and pinched at the shield-and-ribbon junctions."
+      }
+    },
+    {
+      "runId": "batch-22-reward-golden-guardian-medal-v03-b",
+      "promptBlockId": "reward-golden-guardian-medal-v03-candidate-b-matte-01",
+      "identityId": "reward-golden-guardian-medal",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-reward-golden-guardian-medal", "role": "preserve guardian shield, gold prestige, heart and paw semantics only; reject wings, wreath, gems, stars, bow, filigree and old construction"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction and smooth continuous cream cutline craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved gold, enamel and material-local chromatic contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-golden-guardian-medal-v03-candidate-b-matte-01-generator-original.png",
+        "outputId": "exec-55281269-70d6-44f2-94ad-7422770113d7.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Selected proof candidate after internal QA; the simplified connected shield-and-ribbon silhouette resolves the cutline defect and awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-pathfinder-v02",
+      "promptBlockId": "badge-pathfinder-v02-candidate-a-matte-01",
+      "identityId": "badge-pathfinder",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-pathfinder", "role": "preserve the live Pathfinder badge's compass and trail semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-pathfinder-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-9ccb864c-a73b-4a27-b014-362c4ae66e53.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Pathfinder badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-maze-mapper-v02",
+      "promptBlockId": "badge-maze-mapper-v02-candidate-a-matte-01",
+      "identityId": "badge-maze-mapper",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-maze-mapper", "role": "preserve the live Maze Mapper badge's folded map and marked-route semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-maze-mapper-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-d72b8bdb-c735-428a-ab03-0ee55a4edeb6.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Maze Mapper badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-grand-explorer-v02",
+      "promptBlockId": "badge-grand-explorer-v02-candidate-a-matte-01",
+      "identityId": "badge-grand-explorer",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-grand-explorer", "role": "preserve the live Grand Explorer badge's globe, compass and crown semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-grand-explorer-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-dc700a7c-4ed3-4413-8c9f-4d3527b4681a.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Grand Explorer badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-surprise-scout-v02",
+      "promptBlockId": "badge-surprise-scout-v02-candidate-a-matte-01",
+      "identityId": "badge-surprise-scout",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-surprise-scout", "role": "preserve the live Surprise Scout badge's gift and magnifier semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-surprise-scout-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-c252bbbb-e22c-4f39-a60f-a590371d7846.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Surprise Scout badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-mighty-adventurer-v02",
+      "promptBlockId": "badge-mighty-adventurer-v02-candidate-a-matte-01",
+      "identityId": "badge-mighty-adventurer",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-mighty-adventurer", "role": "preserve the live Mighty Adventurer badge's crossed sword, shield and star semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-mighty-adventurer-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-6aed7de2-4e08-4e70-9d2d-cd66fdb5514c.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Mighty Adventurer badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-twinkle-toes-v02",
+      "promptBlockId": "badge-twinkle-toes-v02-candidate-a-matte-01",
+      "identityId": "badge-twinkle-toes",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-twinkle-toes", "role": "preserve the live Twinkle Toes badge's boot and motion-sparkle semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 3, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-twinkle-toes-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-fd071c5d-2ed6-42b0-bd39-3f28fb210d97.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Twinkle Toes badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-bunny-buddy-v02",
+      "promptBlockId": "badge-bunny-buddy-v02-candidate-a-matte-01",
+      "identityId": "badge-bunny-buddy",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-bunny-buddy", "role": "preserve the live Bunny Buddy badge's bunny portrait and friendship semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "friend-bunny-v02-approved-512", "role": "approved Bunny identity, landmark and expression authority"},
+        {"order": 3, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 4, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-bunny-buddy-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-ee082a53-09dd-4580-9f7c-1cc66cae93e4.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Bunny Buddy badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-fox-friend-v02",
+      "promptBlockId": "badge-fox-friend-v02-candidate-a-matte-01",
+      "identityId": "badge-fox-friend",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-fox-friend", "role": "preserve the live Fox Friend badge's fox portrait and friendship semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "friend-fox-v02-approved-512", "role": "approved Fox identity, landmark and expression authority"},
+        {"order": 3, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 4, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-fox-friend-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-37305f68-7f26-49fe-8c6b-379b1fac34d0.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Fox Friend badge candidate awaits explicit Human batch review."}
+    },
+    {
+      "runId": "batch-22-badge-kitten-pal-v02",
+      "promptBlockId": "badge-kitten-pal-v02-candidate-a-matte-01",
+      "identityId": "badge-kitten-pal",
+      "orderedReferences": [
+        {"order": 1, "referenceId": "legacy-badge-kitten-pal", "role": "preserve the live Kitten Pal badge's kitten portrait and friendship semantics only; no pixel copying or rendering authority"},
+        {"order": 2, "referenceId": "friend-kitten-v02-approved-512", "role": "approved Kitten identity, landmark and expression authority"},
+        {"order": 3, "referenceId": "nav-home-v03", "role": "approved clean chunky sticker construction, cream cutline and optical-weight craft only"},
+        {"order": 4, "referenceId": "weapon-moon-wand-v02", "role": "approved enamel, gold, jewel and material-local contour craft only"}
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-kitten-pal-v02-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-2e14f491-e9f7-49c8-8caa-7d3739cccb42.png"
+      },
+      "disposition": {"status": "pending-human-batch-review", "reason": "Fresh premium Kitten Pal badge candidate awaits explicit Human batch review."}
+    }
+  ],
+  "nativeCanvasException": {
+    "appliesToEveryOutput": true,
+    "actual": "Every immutable generator original is a 1254x1254 opaque RGB PNG on a uniform chroma-green extraction matte.",
+    "canonicalPolicy": "After explicit Human source approval, canonical straight-alpha masters and documented small-scale optical derivatives use the established achievement delivery canvases and encodings.",
+    "exception": "Immutable generator originals remain native and are never rescaled or converted in place. Chroma extraction, edge cleanup, registration, resize, optical tuning, encoding, runtime publication, and catalogue changes occur only after source review."
+  },
+  "lineagePolicy": {
+    "identityReference": "Each current runtime achievement is semantic identity evidence only; approved Bunny, Fox, and Kitten sources additionally govern their named friend identities.",
+    "renderingAuthority": "Only the approved mgjrpg-02 recipe and Human-approved nav-home and moon-wand sources govern sticker construction, enamel, foil, jewel, contour, and value craft.",
+    "editOfEdit": "forbidden",
+    "boardCropAsMaster": "forbidden",
+    "pendingBatch20FirstStarSource": "not used as a reference or rendering authority"
+  },
+  "reviewProtocol": {
+    "batchProofStatus": "awaiting Human achievement-sticker family review",
+    "decisionRule": "Human reviews all fifteen selected proof candidates for semantic fidelity, coherent premium material hierarchy, cream cutline quality, matte separability, and legibility at 91, 64, 52, 40, and 32 pixels before any source is approved; the two internal-QA rejects remain recorded as immutable provenance but are not proof selections.",
+    "silenceRule": "Silence is not approval.",
+    "candidateBoundary": "Source approval does not extract alpha, create optical derivatives, switch runtime files, change catalogue pointers, or retire previous art."
+  },
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal approved or semantic-only references; no named franchise, character, logo, living artist, proprietary palette, UI layout, or composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "releaseStatus": "not-approved"
+  },
+  "runtimeImpact": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0,
+    "web": "none-source-only",
+    "tauri": "none-source-only",
+    "ipad": "none-source-only",
+    "tv": "none-source-only"
+  },
+  "rollback": {
+    "method": "Keep every immutable output and exact prompt. All current Adventure Book runtime files, source records, catalogue pointers, preload behavior, and platform packaging remain unchanged until explicit Human selection and a later publication gate.",
+    "runtimeRollbackRequired": false
+  }
+}

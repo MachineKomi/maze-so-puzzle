@@ -25,6 +25,16 @@ BATCH_PATH = (
     / "run-record.json"
 )
 
+BATCH_22_PATH = (
+    ROOT
+    / "docs"
+    / "source-assets"
+    / "production"
+    / "mgjrpg-02"
+    / "batch-22-achievement-stickers"
+    / "run-record.json"
+)
+
 
 class GenerationBatchProvenanceTests(unittest.TestCase):
     @classmethod
@@ -56,13 +66,125 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         self.assertIn("unknown referenceId", messages)
         self.assertIn("previous Batch output may not be used", messages)
 
+    def test_achievement_sticker_batch_records_every_live_reward_without_runtime_changes(self) -> None:
+        batch = read_json(BATCH_22_PATH)
+        self.assertEqual(validate_generation_batch_shape(batch, "batch-22"), [])
+        self.assertEqual(batch["batchId"], "mgjrpg-02-batch-22-achievement-stickers")
+        self.assertEqual(batch["status"], "pending-human-review")
+        self.assertEqual(batch["counts"]["runCount"], 17)
+        self.assertEqual(batch["counts"]["pendingHumanCandidateCount"], 15)
+        self.assertEqual(batch["counts"]["artDirectorRejectedSourceCount"], 2)
+        self.assertEqual(
+            {run["disposition"]["status"] for run in batch["runs"]},
+            {"pending-human-batch-review", "art-director-rejected-source"},
+        )
+        self.assertEqual(len({run["output"]["path"] for run in batch["runs"]}), 17)
+        self.assertEqual(len({run["output"]["outputId"] for run in batch["runs"]}), 17)
+        for run in batch["runs"]:
+            semantic_reference = run["orderedReferences"][0]["referenceId"]
+            self.assertEqual(semantic_reference, f"legacy-{run['identityId']}")
+            self.assertTrue(
+                batch["referenceRegistry"][semantic_reference]["path"].startswith(
+                    "public/assets/"
+                )
+            )
+        self.assertEqual(
+            {run["identityId"] for run in batch["runs"]},
+            {
+                "reward-trail-sticker",
+                "reward-animal-friend-sticker",
+                "reward-surprise-sparkle-sticker",
+                "reward-helping-paw-medal",
+                "reward-rainbow-rescue-medal",
+                "reward-golden-guardian-medal",
+                "badge-pathfinder",
+                "badge-maze-mapper",
+                "badge-grand-explorer",
+                "badge-surprise-scout",
+                "badge-mighty-adventurer",
+                "badge-twinkle-toes",
+                "badge-bunny-buddy",
+                "badge-fox-friend",
+                "badge-kitten-pal",
+            },
+        )
+        self.assertEqual(
+            {
+                reference_id: batch["referenceRegistry"][reference_id]["sha256"]
+                for reference_id in {
+                    "nav-home-v03",
+                    "weapon-moon-wand-v02",
+                    "friend-bunny-v02-approved-512",
+                    "friend-fox-v02-approved-512",
+                    "friend-kitten-v02-approved-512",
+                }
+            },
+            {
+                "nav-home-v03": "da31adb0827be0149fdad7e00da102d2e248c16a8f809a0e453a0a2e2797204c",
+                "weapon-moon-wand-v02": "c1fc091c86c71c42487ed7037cb016ffe763bf09a29557d7a810c98c95ac87dc",
+                "friend-bunny-v02-approved-512": "7553bae834919486d19ea5c0ede5a0ca27ab766d1efc72b05fa16615622338b9",
+                "friend-fox-v02-approved-512": "5bee37d8c36596fa8d3d25a056b68c64d3b71672e180c27940441e3cf256f74d",
+                "friend-kitten-v02-approved-512": "1af17906a7c37a67a65d95c0277485a84c9ca0faf956ffbd89f06d670423343c",
+            },
+        )
+        self.assertTrue(
+            all(
+                "batch-20-final-coverage" not in reference["path"]
+                for run in batch["runs"]
+                for reference in (
+                    batch["referenceRegistry"][ordered["referenceId"]]
+                    for ordered in run["orderedReferences"]
+                )
+            )
+        )
+        runs_by_id = {run["runId"]: run for run in batch["runs"]}
+        self.assertEqual(
+            {
+                run_id: runs_by_id[run_id]["disposition"]["reasonCode"]
+                for run_id in {
+                    "batch-22-reward-animal-friend-sticker-v03-a",
+                    "batch-22-reward-golden-guardian-medal-v03-a",
+                }
+            },
+            {
+                "batch-22-reward-animal-friend-sticker-v03-a": "art-director-rejected-semantic-collision",
+                "batch-22-reward-golden-guardian-medal-v03-a": "art-director-rejected-cutline-defect",
+            },
+        )
+        self.assertEqual(
+            {
+                run_id: runs_by_id[run_id]["disposition"]["status"]
+                for run_id in {
+                    "batch-22-reward-animal-friend-sticker-v03-b",
+                    "batch-22-reward-golden-guardian-medal-v03-b",
+                }
+            },
+            {
+                "batch-22-reward-animal-friend-sticker-v03-b": "pending-human-batch-review",
+                "batch-22-reward-golden-guardian-medal-v03-b": "pending-human-batch-review",
+            },
+        )
+        self.assertEqual(
+            batch["runtimeImpact"],
+            {
+                "runtimeAssetWrites": 0,
+                "cataloguePointerChanges": 0,
+                "runtimeEncodedByteDelta": 0,
+                "runtimeDecodedByteDelta": 0,
+                "web": "none-source-only",
+                "tauri": "none-source-only",
+                "ipad": "none-source-only",
+                "tv": "none-source-only",
+            },
+        )
+
     def test_repository_validator_hashes_every_batch_output_and_claims_sources(self) -> None:
         errors: list[dict[str, str]] = []
         warnings: list[dict[str, str]] = []
         owners: dict[str, list[str]] = defaultdict(list)
         _validate_generation_batch_documents(errors, warnings, owners)
         self.assertEqual(errors, [])
-        self.assertEqual(len(owners), 248)
+        self.assertEqual(len(owners), 265)
         owner_counts = {
             owner: sum(values == [owner] for values in owners.values())
             for owner in {
@@ -88,6 +210,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
                 "batch:mgjrpg-02-batch-19-teleporter-symbol-refinements",
                 "batch:mgjrpg-02-batch-20-final-coverage",
                 "batch:mgjrpg-02-batch-21-front-door-art",
+                "batch:mgjrpg-02-batch-22-achievement-stickers",
             }
         }
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-01"], 41)
@@ -112,9 +235,11 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-19-teleporter-symbol-refinements"], 3)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-20-final-coverage"], 6)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-21-front-door-art"], 10)
+        self.assertEqual(owner_counts["batch:mgjrpg-02-batch-22-achievement-stickers"], 17)
         self.assertEqual(
             [warning["code"] for warning in warnings],
             [
+                "generation-batch-pending",
                 "generation-batch-pending",
                 "generation-batch-pending",
                 "generation-batch-pending",

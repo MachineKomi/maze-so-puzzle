@@ -2038,3 +2038,41 @@ pointer, preload, title-screen text, gameplay, or retirement state. A Human
 source/treatment decision is required before deterministic alpha work,
 responsive crop definition, exact logo reconstruction, runtime derivatives, or
 publication.
+
+## Plan 03 Adventure Book achievement stickers — Batch 22
+
+The complete fifteen-piece Adventure Book shelf was regenerated from fresh
+canvases under
+`docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/`.
+Its adjacent `PROMPTS.md` is the exact prompt authority and `run-record.json`
+binds all seventeen immutable generator originals to their ordered semantic,
+rendering-craft, and character-identity references.
+
+The selected review set covers all three stickers, all three rescue medals,
+and all nine badges currently mapped by `STICKER_ART`, `MEDAL_ART`, and
+`BADGE_ART`. It uses one dominant symbol per reward, two-to-four large colour
+masses, bright material-local contours, one even cream cutline, broad
+three-value enamel shading, and deliberately low-frequency foil or holographic
+accents. The foil treatment is confined to a rim or inset segment; it must not
+become rainbow perimeter fringing, glitter noise, or microtexture that vanishes
+at the Book's 52 px logical shelf size.
+
+Two first-pass sources remain as truthful internal-QA rejection evidence:
+
+- Animal Friend candidate A reduced to the same paw-in-heart language as the
+  rescue medals, so candidate B replaces it with a readable Bunny/Fox/Kitten
+  group portrait.
+- Golden Guardian candidate A had ragged cream-cutline junctions around its
+  lower ribbon, so candidate B rebuilds the crown, shield, and single ribbon
+  tail as one clean connected silhouette.
+
+The deterministic review builder is
+`scripts/art_pipeline/mgjrpg02_achievement_stickers.py`. It estimates each
+uniform green matte independently, unblends spill, normalizes exact visible
+black to house ink-plum, registers a transparent 512 px candidate, and checks
+91/64/52/48/32 px optical derivatives including locked-state grayscale. These
+are source and proof assets only: Batch 22 remains `pending-human-review` and
+changes no public runtime file, catalogue pointer, unlock condition, preload,
+or retirement state. Its seventeen originals add 27,309,409 encoded source
+bytes and at most 106,931,088 decoded RGBA working bytes; runtime byte deltas
+remain zero until an explicit publication decision.
