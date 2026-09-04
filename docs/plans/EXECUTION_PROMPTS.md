@@ -107,6 +107,23 @@ and root checkpoint 03M have landed; consume their current performance harness,
 semantic view models, art tokens, safe bounds, assets, maintained gameplay
 contracts, and canonical `MusicTransportPort`.
 
+The accepted starting milestone is the pushed `v0.20.0` / `FP-ART-OST`
+checkpoint. Preserve its progress-v5, active-run-v3, recoverable completion,
+stationary-door, deterministic reward, OST catalogue, preview-namespace and
+release-provenance contracts. Do not rebump the version, rebuild/publish a
+release, move the tag, or edit GitHub/Vercel release state; the root manager owns
+the later `FP-UI1` transaction.
+
+Treat this as one sustained implementation assignment, not a new planning pass.
+Work through internal checkpoints in dependency order: (A) current-state/CSS and
+component inventory; (B) shell, MazeViewport, Bag, minimap and Big Maze geometry;
+(C) DialogShell, presentation art, Sound disclosure, motion/focus/preferences;
+(D) Maze-native materials, typography and state polish; (E) full proof matrix,
+documentation and tests. Keep working across those checkpoints without asking
+the Human to re-trigger each phase unless a genuinely subjective, irreversible
+choice cannot be resolved from the approved specs. Report the complete result
+only after the acceptance gates below are met or an evidenced blocker remains.
+
 Read completely before acting:
 
 1. docs/GAME_VISION_AND_DESIGN_SPEC.md
