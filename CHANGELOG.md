@@ -4,6 +4,21 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## Unreleased — post-0.20.1 Agent 01 baseline
+
+### Changed
+
+- Garden Goblin and Violet Moon now use freshly authored, transparent,
+  registered `mgjrpg-02` sprites. This corrects the v0.20.1 audit's mistaken
+  description of them as intentional legacy-art exceptions; the v0.20.1 tag
+  and packaged build remain immutable.
+- The existing sixteen authored mazes now collectively use all 32 active rescue
+  friends without changing their layouts or solution lengths. Maze 1 introduces
+  Rainbow-Horn Unicorn, Maze 2 introduces Tea-Time Skeleton, and later mazes
+  progressively introduce then thematically reunite the wider roster.
+- All affected authored levels carry new content revisions and gameplay
+  fingerprints so stale active runs fail closed while durable progress remains.
+
 ## 0.20.1 - 2026-09-04
 
 ### Added
@@ -23,7 +38,8 @@ than promising long-term save or API compatibility.
 - Professor Poggle and Sprig now use newly authored `mgjrpg-02` story portraits
   rather than the retained legacy renderings. An active-catalogue audit found
   no other genuine style gap: Goblin and Violet Moon remain intentional,
-  approved visual exceptions.
+  approved visual exceptions. This audit conclusion was corrected after release;
+  see the Unreleased post-v0.20.1 baseline above.
 - The Home hero was re-extracted from a clean generated source to repair its
   clipped chroma-key edge, with a restrained glow for separation from the
   environment.

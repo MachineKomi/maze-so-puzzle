@@ -67,6 +67,18 @@ retain truthful canvas, pivot, and visible-bound registration for Plan 03, while
 Plan 05 animation and any automated cage-face masking remain blocked until the
 named manual landmarks are registered.
 
+### Post-v0.20.1 active-family correction
+
+The Human subsequently clarified that Garden Goblin and Violet Moon were missed,
+not intentional exceptions to the final art direction. The additive v12 decision
+at `docs/source-assets/calibrations/mgjrpg-02/v12/human-decision.json` supersedes
+that interpretation without rewriting the immutable v0.20.1 release. Batch 28
+freshly re-authors both assets from blank-canvas family briefs, publishes
+registered alpha derivatives through the semantic catalogue, and places their
+legacy runtime files on Plan 12 rollback hold. The exact source, prompt, matte,
+hash and derivative evidence is in
+`docs/source-assets/publication/mgjrpg-02-post-v0201-active-refresh-map.json`.
+
 ## Creative north star
 
 **Pocket-sized courage made visible.** This is a warm storybook maze where
@@ -338,10 +350,12 @@ It found the missing Jelly Sorcerer and Power Potion production sources, the
 promised compact First Star and standing-goal treatments, and the active legacy
 Ame portrait's unacceptable teal-eye/short-bob mismatch. Batch 20 supplies fresh
 non-edit candidates for all five. They remain pending review and cannot replace
-  runtime pointers. Existing Goblin, Poggle, Sprig, and large reward/badge art
-  stay deliberately retained; the historical title remains rollback/comparison
-  evidence while the Human-authorized front-door set is produced. A recipe label
-  alone is not cause to redraw strong approved work.
+  runtime pointers. At that gate Poggle, Sprig, and large reward/badge art stayed
+  retained while the Human-authorized front-door set was produced. The later
+  Poggle/Sprig publication and Batch 28 correction supersede that incomplete
+  snapshot: Goblin's omission was not a deliberate retention. The historical
+  title remains rollback/comparison evidence. A recipe label alone is not cause
+  to redraw strong approved work, but a Human-identified coverage miss is.
 
 The immutable selection packet is
 `artifacts/art-proofs/mgjrpg-02/v14/`. It includes source comparisons,
@@ -882,7 +896,7 @@ accepted it as production direction, not as blanket approval of future pixels:
 
 | Recommendation | Canary families | Reason |
 | --- | --- | --- |
-| Retain current pixels | Candidate C identity/construction source; Fox; Goblin; First Star 512 px shelf art | Already reads strongly; do not trade identity or charm for a recipe label. Ame's rendering reference is selected, but her cleaned runtime derivative remains separately gated. |
+| Retain current pixels | Candidate C identity/construction source; Fox; First Star 512 px shelf art | Already reads strongly; do not trade identity or charm for a recipe label. Ame's rendering reference is selected, but her cleaned runtime derivative remains separately gated. The historical Goblin retention was later corrected as a coverage miss. |
 | Refine, geometry locked | Jelly Sorcerer; Rose Heart door and portal; Sunny Stone; poison; First Star 64/48/32 optical siblings | Reduce surface frequency and clarify local contours/material boundaries while preserving construction |
 | Replace rendering, identity/semantics locked | Alpaca; Moon Wand; Rose Heart key optical art; Home and Help optical icons; Wishing Woods floor and hedge; water and lava periodic masters | Current minimum-size silhouette, metaphor, edge, material frequency, or repeat behaviour cannot be solved by relabelling |
 
@@ -944,7 +958,7 @@ the v08 contour transform:
 
 | Decision | Families | Priority |
 | --- | --- | --- |
-| Retain | Candidate C identity/construction, Fox, Goblin, First Star shelf art, historical title as rollback/comparison, Poggle/Sprig concepts, strongest enemies, useful dressings | P0–P3 |
+| Retain | Candidate C identity/construction, Fox, First Star shelf art, historical title as rollback/comparison, Poggle/Sprig concepts, strongest enemies, useful dressings | P0–P3 |
 | Refine | Jelly Sorcerer, Rose Heart door/portal, Sunny Stone, poison, First Star optical siblings, portrait later, items, cages and selected outliers | P0–P2 |
 | Replace rendering | Rose Heart key optical art, Wishing Woods floor, Alpaca and later failing friends, Moon Wand and selected weapon outliers, Home/Help and navigation optical art, Wishing Woods hedge, water/lava masters, Storybook Wood cage | P0–P1 |
 | Retire only after proof | 16 superseded images, declaration-only Ame/rewards, dormant sandstone when authorized | P3 |

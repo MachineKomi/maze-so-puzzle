@@ -610,7 +610,7 @@ export const WEAPON_ART = {
 } as const satisfies Readonly<Record<WeaponStyle, WeaponArt>>;
 
 export const ENEMY_ART = {
-  goblin: { src: "/assets/goblin.png", label: "Garden Goblin" },
+  goblin: MGJRPG02_ART.goblin,
   "blueberry-slime": MGJRPG02_ART["blueberry-slime"],
   "mushroom-imp": MGJRPG02_ART["mushroom-imp"],
   "moon-bat": MGJRPG02_ART["moon-bat"],
@@ -781,7 +781,7 @@ export const DOOR_ART = {
 export const PORTAL_ART = {
   "rose-heart": { ...MGJRPG02_ART["rose-heart"], motif: "♥" },
   "mint-clover": { ...MGJRPG02_ART["mint-clover"], motif: "four-leaf clover" },
-  "violet-moon": { src: "/assets/portal-violet-moon-v1.png", label: "Violet Moon Portal", motif: "☾" },
+  "violet-moon": { ...MGJRPG02_ART["violet-moon"], motif: "crescent moon" },
 } as const satisfies Readonly<Record<PortalPairId, ArtReference & { readonly motif: string }>>;
 
 export const PICKUP_ART = {

@@ -3,11 +3,11 @@
   "schemaVersion": 2,
   "ledgerId": "plan03-static-art-retirement",
   "createdAt": "2026-09-03T14:25:14+01:00",
-  "lastAuditedAt": "2026-09-04T00:00:00+01:00",
+  "lastAuditedAt": "2026-09-04T20:30:00+01:00",
   "inspectedCheckpoint": {
-    "head": "bd47517cd25db63403eb296638b683e3d665c112",
+    "head": "4bca5322b6026e6a03a5b5a0f8e44aac1655d58a",
     "workingTreeDirty": true,
-    "notes": "The v0.20.1 corrective publication was audited from the accepted v0.20.0 checkpoint in a dirty working tree; no retirement or deletion was performed."
+    "notes": "The post-v0.20.1 corrective publication adds Goblin and Violet Moon to rollback hold after the Human clarified they were missed rather than intentional retentions; no retirement or deletion was performed."
   },
   "policy": {
     "ownerPlan": "Plan 12",
@@ -27,12 +27,12 @@
     "removalRule": "Copy and hash-verify outside public first; require external-backup confirmation and all per-entry evidence; remove only in a later family-isolated Plan 12 change."
   },
   "totals": {
-    "candidateCount": 130,
-    "encodedBytes": 39250502,
-    "decodedBytesUpperBound": 187160480,
+    "candidateCount": 132,
+    "encodedBytes": 39804281,
+    "decodedBytesUpperBound": 189257632,
     "plan12EligibleCount": 0,
-    "soleRepositoryCopyCount": 19,
-    "partialMasterCount": 99
+    "soleRepositoryCopyCount": 20,
+    "partialMasterCount": 100
   },
   "entries": [
     {
@@ -12261,6 +12261,90 @@
       "archiveRelativePath": "payload/public/assets/mgjrpg-02/brand/home-hero-splash-v02-front-door-1024-r01.webp",
       "retirementEvidence": {"catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false},
       "notes": "v0.20.1 replaces the visibly damaged v02 cutout with a clean v03 delivery; no file was moved or deleted."
+    },
+    {
+      "entryId": "post-v0201-goblin-v01-prior-runtime",
+      "assetPath": "public/assets/goblin.png",
+      "family": "enemy",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "793142291d8be5d0629e83f3776c167e80351d502a1dd9a35b20c7664b754473",
+      "bytes": 253571,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+      "lastVerifiedCheckpoint": "4bca5322b6026e6a03a5b5a0f8e44aac1655d58a",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {"kind": "source-record", "path": "docs/source-assets/records/goblin-v01-source.json", "detail": "The corrected lifecycle record marks the legacy v01 runtime sprite superseded.", "blocksRetirement": false},
+        {"kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "The generated inventory preserves the exact retained rollback file.", "blocksRetirement": false},
+        {"kind": "publication-map", "path": "docs/source-assets/publication/mgjrpg-02-post-v0201-active-refresh-map.json", "detail": "The post-v0.20.1 correction publishes the final-style v02 replacement.", "blocksRetirement": true}
+      ],
+      "replacementPaths": ["public/assets/mgjrpg-02/enemies/goblin-v02-enemy-field-256-r01.webp"],
+      "preservation": {
+        "sourceStatus": "legacy-runtime-only",
+        "sourceRecordPath": "docs/source-assets/records/goblin-v01-source.json",
+        "soleRepositoryCopy": true,
+        "rollbackSources": [
+          {"path": "public/assets/goblin.png", "sha256": "793142291d8be5d0629e83f3776c167e80351d502a1dd9a35b20c7664b754473", "bytes": 253571, "kind": "runtime-sole-copy"}
+        ],
+        "gitRestore": {"path": "public/assets/goblin.png", "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa", "method": "Recover the exact retained derivative from Git history and verify its SHA-256 before restoring the enemy pointer."}
+      },
+      "blockers": [
+        {"id": "final-catalogue-pointers-not-frozen", "detail": "Plan 01 and Plan 05 may still refine static-art consumers and actor geometry."},
+        {"id": "authoritative-reachability-proof-missing", "detail": "Plan 12 has not completed exhaustive runtime reachability proof."},
+        {"id": "generated-path-proof-missing", "detail": "Generated, test and preload path proof remains a Plan 12 gate."},
+        {"id": "rollback-window-not-expired", "detail": "The corrective replacement remains inside its mandatory rollback hold."},
+        {"id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline package proof belongs to Plan 12."},
+        {"id": "external-backup-not-confirmed", "detail": "No copy-first export and Human-confirmed external backup exists."}
+      ],
+      "archiveRelativePath": "payload/public/assets/goblin.png",
+      "retirementEvidence": {"catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false},
+      "notes": "The Human corrected the prior exception classification; final-style Goblin v02 is active and v01 remains an undeleted rollback hold."
+    },
+    {
+      "entryId": "post-v0201-violet-moon-v01-prior-runtime",
+      "assetPath": "public/assets/portal-violet-moon-v1.png",
+      "family": "portal",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "a2f65dfca40e1a88d0fe0372e4fac6ef7a53936f43c612c01a65e5629e5f3e4c",
+      "bytes": 300208,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "firstSeenCommit": "934a7db2fbe184a4ccc7aa417c9cb16438056c8c",
+      "lastVerifiedCheckpoint": "4bca5322b6026e6a03a5b5a0f8e44aac1655d58a",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {"kind": "source-record", "path": "docs/source-assets/records/portal-violet-moon-v01-source.json", "detail": "The corrected lifecycle record marks the legacy v01 runtime sprite superseded.", "blocksRetirement": false},
+        {"kind": "generated-manifest", "path": "docs/source-assets/manifest.json", "detail": "The generated inventory preserves the exact retained rollback file.", "blocksRetirement": false},
+        {"kind": "publication-map", "path": "docs/source-assets/publication/mgjrpg-02-post-v0201-active-refresh-map.json", "detail": "The post-v0.20.1 correction publishes the final-style v02 replacement.", "blocksRetirement": true}
+      ],
+      "replacementPaths": ["public/assets/mgjrpg-02/portals/violet-moon-v02-structure-field-256-r01.webp"],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/portal-violet-moon-v01-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {"path": "docs/source-assets/portal-violet-moon-v1.png", "sha256": "1d3d763fa2af227cd433e9b659f0e80dbc62c7583f9d6eb928e7f9f962532f38", "bytes": 1915293, "kind": "partial-master"}
+        ],
+        "gitRestore": {"path": "public/assets/portal-violet-moon-v1.png", "firstSeenCommit": "934a7db2fbe184a4ccc7aa417c9cb16438056c8c", "method": "Recover the exact retained derivative from Git history and verify its SHA-256 before restoring the portal pointer."}
+      },
+      "blockers": [
+        {"id": "final-catalogue-pointers-not-frozen", "detail": "Plan 01, Plan 02 and Plan 05 may still refine portal consumers and presentation."},
+        {"id": "authoritative-reachability-proof-missing", "detail": "Plan 12 has not completed exhaustive runtime reachability proof."},
+        {"id": "generated-path-proof-missing", "detail": "Generated, test and preload path proof remains a Plan 12 gate."},
+        {"id": "rollback-window-not-expired", "detail": "The corrective replacement remains inside its mandatory rollback hold."},
+        {"id": "clean-clone-route-and-package-proof-missing", "detail": "Clean-clone browser and offline package proof belongs to Plan 12."},
+        {"id": "external-backup-not-confirmed", "detail": "No copy-first export and Human-confirmed external backup exists."}
+      ],
+      "archiveRelativePath": "payload/public/assets/portal-violet-moon-v1.png",
+      "retirementEvidence": {"catalogueFrozen": false, "reachabilityPassed": false, "generatedPathsPassed": false, "rollbackWindowExpired": false, "cleanClonePassed": false, "browserRoutesPassed": false, "tauriOfflinePackagePassed": false, "archiveHashVerified": false, "externalBackupConfirmed": false},
+      "notes": "The Human corrected the prior exception classification; final-style Violet Moon v02 is active and v01 remains an undeleted rollback hold."
     }
   ]
 }

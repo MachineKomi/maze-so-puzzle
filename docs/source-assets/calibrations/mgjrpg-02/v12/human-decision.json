@@ -1,0 +1,39 @@
+{
+  "schema": "maze-art-human-decision/v1",
+  "decisionId": "mgjrpg-02-post-v0201-missed-active-refresh-v01",
+  "recordedOn": "2026-09-04",
+  "authority": "Human project author corrective direction",
+  "decision": "Garden Goblin and Violet Moon were missed during Plan 03; they are not intentional legacy-art retentions and must be freshly re-authored, published, and consumed in the accepted mgjrpg-02 art direction.",
+  "selectionPolicy": "The orchestrator may select compliant freshly authored outputs against the already-approved Art Bible and family anchors without a new pause because the Human explicitly requested implementation before Agent 01.",
+  "selected": [
+    {
+      "id": "goblin",
+      "runId": "batch-28-goblin-v02-matte",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/goblin-v02-generator-original.png",
+      "sourceSha256": "bf5a64ec6ebe18d6c8a201cc9315f38ababd841afdf367a21efccd4dd4e8b9bd",
+      "reason": "Fresh full-image authorship preserves the leafy Garden Goblin identity while matching the approved chunky enemy-family construction and brighter material-local contour contract."
+    },
+    {
+      "id": "violet-moon",
+      "runId": "batch-28-violet-moon-v02-matte",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/portal-violet-moon-v02-generator-original.png",
+      "sourceSha256": "0df8db4224e3a33c7bcff6ea8e6eef0c3bf0dc9db6eda134fd9ca2d1f286f259",
+      "reason": "Fresh full-image authorship makes Violet Moon a clear low five-petal sibling of Rose Heart and Mint Clover with one readable crescent motif."
+    }
+  ],
+  "rejected": [
+    {
+      "id": "goblin",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/goblin-v02-rejected-checkerboard-generator-original.png",
+      "sourceSha256": "c3924e098e3b7a65e960852e2cee5fc1285e92b5e5f2601c8562bf0c39ff77bf",
+      "reason": "Opaque baked checkerboard is not a production alpha source."
+    },
+    {
+      "id": "violet-moon",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/portal-violet-moon-v02-rejected-checkerboard-generator-original.png",
+      "sourceSha256": "a94cffcc7aac322ba7e81c48a1bfbc74d1597eebf24f871e2b9c27e68277f86d",
+      "reason": "Opaque baked checkerboard is not a production alpha source."
+    }
+  ],
+  "releaseHistory": "The v0.20.1 tag remains immutable. This decision explicitly supersedes only the earlier interpretation that these two assets were approved legacy exceptions."
+}

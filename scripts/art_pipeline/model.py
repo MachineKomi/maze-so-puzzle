@@ -110,6 +110,8 @@ SUPERSEDED_RUNTIME_IMAGES = {
     "cage-storybook-wood-v1.png",
     "floor-v2.png",
     "lava.png",
+    "goblin.png",
+    "portal-violet-moon-v1.png",
     "wall-v2.png",
     "water.png",
 }

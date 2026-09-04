@@ -370,6 +370,21 @@ describe("curated campaign levels", () => {
     expect([...new Set(campaignSpecies)].sort()).toEqual(
       [...AUTHORED_CAMPAIGN_ANIMAL_SPECIES].sort(),
     );
+    expect([...AUTHORED_CAMPAIGN_ANIMAL_SPECIES].sort()).toEqual(
+      [...ANIMAL_SPECIES].sort(),
+    );
+  });
+
+  it("opens the story with Ame's unicorn and introduces Tea-Time Skeleton early", () => {
+    const firstMazeFriends = CURATED_LEVELS[0]?.objects.flatMap((object) =>
+      object.kind === "animal" ? [object.species] : [],
+    );
+    const secondMazeFriends = CURATED_LEVELS[1]?.objects.flatMap((object) =>
+      object.kind === "animal" ? [object.species] : [],
+    );
+
+    expect(firstMazeFriends).toEqual(["rainbow-horn-unicorn"]);
+    expect(secondMazeFriends).toContain("green-tea-skeleton");
   });
 
   it("makes compact Lanternlight rooms rich, ordered, and rewarding to revisit", () => {

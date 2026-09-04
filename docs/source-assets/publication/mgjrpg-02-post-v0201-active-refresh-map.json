@@ -1,0 +1,193 @@
+{
+  "schema": "maze-art-post-v0201-active-refresh/v1",
+  "publicationId": "mgjrpg-02-post-v0201-active-refresh-v01",
+  "recordedOn": "2026-09-04",
+  "decisionPath": "docs/source-assets/calibrations/mgjrpg-02/v12/human-decision.json",
+  "decisionSha256": "eff41c2d4719600a5cececa8d1cddfa972293e726dc38b1c74c98e237d82c0ed",
+  "promptPath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/PROMPTS.md",
+  "promptSha256": "9859dc2932f1bdb6efdf1149ffa23f0718bf3512a21054735aab922c00d096a6",
+  "encoderEnvironment": {
+    "python": "3.14.3",
+    "pillow": "12.2.0",
+    "numpy": "2.5.2",
+    "libwebp": "1.6.0",
+    "zlib": "1.3.1.zlib-ng"
+  },
+  "supersedesV0201Interpretation": {
+    "report": "docs/source-assets/publication/mgjrpg-02-v0201-validation-report.json",
+    "field": "artAudit.approvedRetainedExceptions",
+    "correction": "Goblin and Violet Moon were missed and are now final-style active assets; v0.20.1 remains immutable."
+  },
+  "entries": [
+    {
+      "stableId": "goblin",
+      "label": "Garden Goblin",
+      "family": "enemy",
+      "artVersion": 2,
+      "recipeVersion": "mgjrpg-02",
+      "profile": "enemy-field-256",
+      "publicUrl": "/assets/mgjrpg-02/enemies/goblin-v02-enemy-field-256-r01.webp",
+      "runtimePath": "public/assets/mgjrpg-02/enemies/goblin-v02-enemy-field-256-r01.webp",
+      "recordId": "goblin-mgjrpg02-v02-source",
+      "runtimeStatus": "active",
+      "runtimeWidth": 256,
+      "runtimeHeight": 256,
+      "runtimeAlphaMode": "straight",
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9
+        ],
+        "visibleBounds": [
+          0.1484375,
+          0.05859375,
+          0.69921875,
+          0.8828125
+        ],
+        "safeInset": [
+          0.05859375,
+          0.15234375,
+          0.05859375,
+          0.1484375
+        ]
+      },
+      "sourceSha256": "bf5a64ec6ebe18d6c8a201cc9315f38ababd841afdf367a21efccd4dd4e8b9bd",
+      "runtimeSha256": "1288eefda2b7dd77a7a21b5e072a67d86edc91021ee58a4b348ef6ad07564ce1",
+      "runtimeBytes": 43128,
+      "decodedBytesUpperBound": 262144,
+      "previousPath": "/assets/goblin.png",
+      "matte": {
+        "rgb": [
+          245,
+          4,
+          247
+        ],
+        "channelStd": [
+          1.2329,
+          1.2503,
+          0.9699
+        ],
+        "maximumChannelStd": 1.2503,
+        "p99EuclideanResidual": 8.3066,
+        "cornerSamplePixels": 15376
+      },
+      "extractionMeasurement": {
+        "clearDistance": 48.0,
+        "opaqueDistance": 144.0,
+        "minimumComponentPixels": 3,
+        "keyDominanceThreshold": 96.0,
+        "keySpillPixelsRejected": 2694,
+        "fallbackBoundaryPixels": 102,
+        "exactBlackVisiblePixelsNormalized": 0,
+        "sourceDistancePercentiles": {
+          "50": 1.414,
+          "90": 306.493,
+          "95": 315.414,
+          "99": 323.501
+        }
+      },
+      "normalizedExactBlackPixels": 0
+    },
+    {
+      "stableId": "violet-moon",
+      "label": "Violet Moon Portal",
+      "family": "portal",
+      "artVersion": 2,
+      "recipeVersion": "mgjrpg-02",
+      "profile": "structure-field-256",
+      "publicUrl": "/assets/mgjrpg-02/portals/violet-moon-v02-structure-field-256-r01.webp",
+      "runtimePath": "public/assets/mgjrpg-02/portals/violet-moon-v02-structure-field-256-r01.webp",
+      "recordId": "violet-moon-mgjrpg02-v02-source",
+      "runtimeStatus": "active",
+      "runtimeWidth": 256,
+      "runtimeHeight": 256,
+      "runtimeAlphaMode": "straight",
+      "geometry": {
+        "class": "floor-portal",
+        "pivot": [
+          0.5,
+          0.5
+        ],
+        "visibleBounds": [
+          0.0390625,
+          0.1171875,
+          0.921875,
+          0.82421875
+        ],
+        "safeInset": [
+          0.1171875,
+          0.0390625,
+          0.05859375,
+          0.0390625
+        ],
+        "apertureBox": [
+          0.26953125,
+          0.3359375,
+          0.4609375,
+          0.39453125
+        ],
+        "motifBox": [
+          0.359375,
+          0.390625,
+          0.28125,
+          0.2734375
+        ],
+        "tileFootprint": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ]
+      },
+      "sourceSha256": "0df8db4224e3a33c7bcff6ea8e6eef0c3bf0dc9db6eda134fd9ca2d1f286f259",
+      "runtimeSha256": "92bf6c622e083dd40acc482b2cef4e5269b85c96764752b075439b5fcbe87376",
+      "runtimeBytes": 64268,
+      "decodedBytesUpperBound": 262144,
+      "previousPath": "/assets/portal-violet-moon-v1.png",
+      "matte": {
+        "rgb": [
+          3,
+          249,
+          3
+        ],
+        "channelStd": [
+          0.9661,
+          0.6912,
+          1.0006
+        ],
+        "maximumChannelStd": 1.0006,
+        "p99EuclideanResidual": 4.1231,
+        "cornerSamplePixels": 15376
+      },
+      "extractionMeasurement": {
+        "clearDistance": 48.0,
+        "opaqueDistance": 144.0,
+        "minimumComponentPixels": 3,
+        "keyDominanceThreshold": 96.0,
+        "keySpillPixelsRejected": 2379,
+        "fallbackBoundaryPixels": 0,
+        "exactBlackVisiblePixelsNormalized": 0,
+        "sourceDistancePercentiles": {
+          "50": 3.317,
+          "90": 319.08,
+          "95": 328.337,
+          "99": 355.168
+        }
+      },
+      "normalizedExactBlackPixels": 0
+    }
+  ],
+  "totals": {
+    "runtimeFiles": 2,
+    "runtimeEncodedBytes": 107396,
+    "runtimeDecodedBytesUpperBound": 524288
+  },
+  "rollback": {
+    "checkpoint": "4bca5322b6026e6a03a5b5a0f8e44aac1655d58a",
+    "paths": [
+      "/assets/goblin.png",
+      "/assets/portal-violet-moon-v1.png"
+    ]
+  }
+}

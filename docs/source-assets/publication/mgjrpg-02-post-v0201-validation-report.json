@@ -1,0 +1,95 @@
+{
+  "schema": "maze-art-post-v0201-validation/v1",
+  "recordedOn": "2026-09-04",
+  "baseCommit": "4bca5322b6026e6a03a5b5a0f8e44aac1655d58a",
+  "releasePolicy": "The v0.20.1 tag and release remain immutable; this is an additive source checkpoint for Agent 01.",
+  "scope": {
+    "regeneratedFamilies": [
+      "Garden Goblin",
+      "Violet Moon flower teleporter"
+    ],
+    "catalogueAudit": "Poggle and Sprig were already refreshed in v0.20.1. Goblin and Violet Moon were the remaining mistaken legacy exceptions in the v0.20.1 audit and now resolve to versioned mgjrpg-02 derivatives.",
+    "authoredFriendRoster": {
+      "activeSpecies": 32,
+      "coveredInExistingSixteenMazes": 32,
+      "allIntroducedByMaze": 12,
+      "maze1": [
+        "rainbow-horn-unicorn"
+      ],
+      "maze2": [
+        "green-tea-skeleton",
+        "fox"
+      ]
+    }
+  },
+  "deterministicArt": {
+    "batch28Publisher": {
+      "checked": 2,
+      "failures": 0
+    },
+    "originalPlan03Publisher": {
+      "checked": 144,
+      "failures": 0
+    },
+    "artTests": {
+      "passed": 111,
+      "failed": 0
+    },
+    "artValidator": {
+      "records": 291,
+      "runtimeImages": 290,
+      "sourceImages": 413,
+      "errors": 0,
+      "warnings": 420,
+      "newUnreferencedBatch28Sources": 0,
+      "historicalUnreferencedSources": 3
+    }
+  },
+  "applicationValidation": {
+    "vitest": {
+      "filesPassed": 38,
+      "testsPassed": 424,
+      "failed": 0
+    },
+    "scenarioFixtures": {
+      "passed": 4,
+      "failed": 0
+    },
+    "typescript": "passed",
+    "viteProductionBuild": "passed",
+    "cargoCheckLocked": "passed",
+    "solver": "Every authored ordinary and perfect route passed; Wishing Woods' optional kitten contract remains intact."
+  },
+  "performance": {
+    "compressedJsBytes": 134477,
+    "compressedJsLimit": 134518,
+    "compressedCssBytes": 30177,
+    "compressedCssLimit": 30227,
+    "runtimePublicBytes": 152168739,
+    "runtimePublicLimit": 152168739,
+    "newRuntimeArtBytes": 107396,
+    "newDecodedImageUpperBound": 524288,
+    "contract": "passed"
+  },
+  "derivativeVisualInspection": {
+    "goblin": "Transparent 256x256 derivative inspected at original pixels; clean silhouette, coloured material-local contours and no visible matte box.",
+    "violetMoon": "Transparent 256x256 derivative inspected at original pixels; low flower-pad silhouette, legible crescent motif and no visible matte box."
+  },
+  "browserIntegration": {
+    "engine": "Playwright production preview",
+    "viewport": "1280x720 CSS pixels",
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "checks": [
+      "Title-to-Home flow remained operational.",
+      "Maze 1 semantic board description identified the caged Rainbow-Horn Unicorn.",
+      "Maze 2 rescue ledger identified Tea-Time Skeleton and Fox.",
+      "The newly assigned friend portraits rendered without broken-image indicators."
+    ]
+  },
+  "externalGates": [
+    "Physical iPad and TV inspection remains downstream work.",
+    "A signed Windows installer and clean-machine verification remain release gates.",
+    "Timing thresholds remain report-only until clean-host cohorts are available."
+  ]
+}

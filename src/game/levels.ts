@@ -35,6 +35,8 @@ export interface AsciiLevelOptions {
   readonly contentRevision?: number;
   /** Explicit semantic IDs by `x,y`; recommended for repeated same-kind objects. */
   readonly objectIds?: Readonly<Record<string, string>>;
+  /** Override an authored animal token's species by `x,y` without changing map geometry. */
+  readonly animalSpeciesByCoordinate?: Readonly<Record<string, AnimalSpecies>>;
 }
 
 type WithoutId<T> = T extends { readonly id: string } ? Omit<T, "id"> : never;
@@ -88,14 +90,6 @@ const ANIMAL_SPECIES: Readonly<Record<string, AnimalSpecies>> = {
 };
 
 /**
- * Friends intentionally placed in the hand-authored 16-maze campaign today.
- * Plan 09 owns the authored introduction curve for the expanded friend roster.
- */
-export const AUTHORED_CAMPAIGN_ANIMAL_SPECIES = Object.freeze(
-  [...new Set(Object.values(ANIMAL_SPECIES))],
-) as readonly AnimalSpecies[];
-
-/**
  * Parses the compact authoring format used by the tutorial levels and tests.
  * Interactive characters always sit on ordinary floor terrain. Lowercase `o`
  * authors a ground hole, `%` authors poison, `j` places spring boots, and `l`
@@ -120,6 +114,7 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
 
   const terrain: TerrainKind[][] = [];
   const objects: LevelObject[] = [];
+  const consumedAnimalOverrides = new Set<string>();
   let start: Point | undefined;
   let exit: Point | undefined;
 
@@ -279,8 +274,14 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
         continue;
       }
 
-      const animalSpecies = ANIMAL_SPECIES[character];
-      if (animalSpecies !== undefined) {
+      const defaultAnimalSpecies = ANIMAL_SPECIES[character];
+      if (defaultAnimalSpecies !== undefined) {
+        const coordinate = `${x},${y}`;
+        const animalSpecies = options.animalSpeciesByCoordinate?.[coordinate]
+          ?? defaultAnimalSpecies;
+        if (options.animalSpeciesByCoordinate?.[coordinate] !== undefined) {
+          consumedAnimalOverrides.add(coordinate);
+        }
         addObject({
           kind: "animal",
           at,
@@ -299,6 +300,14 @@ export function parseAsciiLevel(options: AsciiLevelOptions): LevelDefinition {
 
   if (start === undefined || exit === undefined) {
     throw new Error(`Level "${options.id}" needs exactly one start and exit.`);
+  }
+
+  for (const coordinate of Object.keys(options.animalSpeciesByCoordinate ?? {})) {
+    if (!consumedAnimalOverrides.has(coordinate)) {
+      throw new Error(
+        `Level "${options.id}" maps animal species to non-animal coordinate ${coordinate}.`,
+      );
+    }
   }
 
   const objectsByCoordinate = new Map<string, LevelObject>(objects.map((object) => [
@@ -380,7 +389,7 @@ function parseAuthoredLevel(options: AuthoredAsciiLevelOptions): LevelDefinition
 }
 
 export const MOVEMENT_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "little-star-trail",
   name: "Little Star Trail",
   objective: "Follow the paths to the star!",
@@ -389,6 +398,9 @@ export const MOVEMENT_LEVEL = parseAuthoredLevel({
   enemyStyle: "goblin",
   cageStyle: "golden-heart",
   introducedMechanics: ["movement", "exit", "animal-rescue"],
+  animalSpeciesByCoordinate: {
+    "2,4": "rainbow-horn-unicorn",
+  },
   map: [
     "######",
     "#...E#",
@@ -400,7 +412,7 @@ export const MOVEMENT_LEVEL = parseAuthoredLevel({
 });
 
 export const SWORD_AND_KEY_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "shiny-sword",
   name: "Shiny Sword",
   objective: "Find the sword and Rose Heart Key!",
@@ -409,6 +421,10 @@ export const SWORD_AND_KEY_LEVEL = parseAuthoredLevel({
   enemyStyle: "goblin",
   cageStyle: "storybook-wood",
   introducedMechanics: ["sword", "enemy", "red-key", "red-door"],
+  animalSpeciesByCoordinate: {
+    "3,5": "green-tea-skeleton",
+    "7,5": "fox",
+  },
   map: [
     "###########",
     "#E#...1.#.#",
@@ -425,7 +441,7 @@ export const SWORD_AND_KEY_LEVEL = parseAuthoredLevel({
 });
 
 export const SPLASHY_BOOTS_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "splashy-boots",
   name: "Splashy Boots",
   objective: "Grow your Power and cross the water!",
@@ -434,6 +450,11 @@ export const SPLASHY_BOOTS_LEVEL = parseAuthoredLevel({
   enemyStyle: "blueberry-slime",
   cageStyle: "moon-silver",
   introducedMechanics: ["potion", "stronger-enemy", "boots", "water", "blue-key"],
+  animalSpeciesByCoordinate: {
+    "10,1": "bunny",
+    "11,1": "kitten",
+    "11,11": "puppy",
+  },
   map: [
     "#############",
     "#u.....~..dn#",
@@ -452,7 +473,7 @@ export const SPLASHY_BOOTS_LEVEL = parseAuthoredLevel({
 });
 
 export const TOASTY_TOES_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "toasty-toes",
   name: "Toasty Toes",
   objective: "Use everything to reach the star!",
@@ -462,6 +483,11 @@ export const TOASTY_TOES_LEVEL = parseAuthoredLevel({
   enemyStylesByPower: { 9: "pebble-golem" },
   cageStyle: "garden-vine",
   introducedMechanics: ["lava", "two-key-colors", "power-chain"],
+  animalSpeciesByCoordinate: {
+    "3,7": "red-panda",
+    "3,8": "otter",
+    "1,11": "lamb",
+  },
   map: [
     "#############",
     "#....9#...p.#",
@@ -480,7 +506,7 @@ export const TOASTY_TOES_LEVEL = parseAuthoredLevel({
 });
 
 export const RAINBOW_PICNIC_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "rainbow-picnic",
   name: "Rainbow Picnic",
   objective: "Pack your boots and open both rainbow gates!",
@@ -490,6 +516,11 @@ export const RAINBOW_PICNIC_LEVEL = parseAuthoredLevel({
   enemyStylesByPower: { 4: "pebble-golem" },
   cageStyle: "golden-heart",
   introducedMechanics: ["water", "two-key-colors", "power-chain"],
+  animalSpeciesByCoordinate: {
+    "9,9": "duckling",
+    "7,13": "hedgehog",
+    "13,13": "fawn",
+  },
   map: [
     "###############",
     "#...~~#...B...#",
@@ -510,7 +541,7 @@ export const RAINBOW_PICNIC_LEVEL = parseAuthoredLevel({
 });
 
 export const MOONBEAM_MOAT_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "moonbeam-moat",
   name: "Moonbeam Moat",
   objective: "Splash past the moonlit moat and its three gates!",
@@ -519,6 +550,11 @@ export const MOONBEAM_MOAT_LEVEL = parseAuthoredLevel({
   enemyStyle: "moon-bat",
   cageStyle: "moon-silver",
   introducedMechanics: ["water", "lava", "three-key-colors"],
+  animalSpeciesByCoordinate: {
+    "1,1": "capybara",
+    "1,4": "chinchilla",
+    "1,6": "alpaca",
+  },
   map: [
     "###############",
     "#q#..B#......@#",
@@ -539,7 +575,7 @@ export const MOONBEAM_MOAT_LEVEL = parseAuthoredLevel({
 });
 
 export const WISHING_WOODS_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "wishing-woods",
   objectIds: {
     "9,1": "wishing-woods-enemy-north-watch",
@@ -561,6 +597,11 @@ export const WISHING_WOODS_LEVEL = parseAuthoredLevel({
     "ground-holes",
     "required-backtracking",
   ],
+  animalSpeciesByCoordinate: {
+    "9,7": "pitter-patter-parasol",
+    "15,7": "kitten",
+    "3,9": "penguin",
+  },
   map: [
     "#################",
     "#r.......9..#~..#",
@@ -583,7 +624,7 @@ export const WISHING_WOODS_LEVEL = parseAuthoredLevel({
 });
 
 export const AMES_GRAND_PARADE_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "ames-grand-parade",
   objectIds: {
     "11,9": "ames-grand-parade-potion-north-garden",
@@ -608,6 +649,11 @@ export const AMES_GRAND_PARADE_LEVEL = parseAuthoredLevel({
     "required-backtracking",
     "perfect-rescue-challenge",
   ],
+  animalSpeciesByCoordinate: {
+    "1,1": "lanternling",
+    "15,7": "emberdown-phoenix",
+    "5,11": "meadowstep-faunling",
+  },
   map: [
     "#################",
     "#n#....~~....u.j#",
@@ -630,7 +676,7 @@ export const AMES_GRAND_PARADE_LEVEL = parseAuthoredLevel({
 });
 
 export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "springstep-sky-hollow",
   name: "Springstep Sky Hollow",
   objective: "Explore the side paths, then bounce across the starry holes!",
@@ -647,6 +693,11 @@ export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAuthoredLevel({
     "power-chain",
     "perfect-rescue-challenge",
   ],
+  animalSpeciesByCoordinate: {
+    "10,4": "minerva-moon-owl",
+    "1,11": "tessera-dolphin",
+    "7,17": "mallowmusk-aroma-wisp",
+  },
   map: [
     "###################",
     "#...#...oo........#",
@@ -671,7 +722,7 @@ export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAuthoredLevel({
 });
 
 export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "lanternlight-labyrinth",
   objectIds: {
     "2,1": "lanternlight-labyrinth-enemy-entry-imp",
@@ -711,6 +762,11 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAuthoredLevel({
     "come-back-stronger",
     "crossroad-jump",
   ],
+  animalSpeciesByCoordinate: {
+    "6,4": "breezeling-sylph",
+    "9,4": "griffin-cub",
+    "11,4": "emberbelly-dragonling",
+  },
   map: [
     "#######################",
     "#~1....E..#.....#.....#",
@@ -739,7 +795,7 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAuthoredLevel({
 });
 
 export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "twilight-treasure-loop",
   name: "Twilight Treasure Loop",
   objective: "Search the side trails for every tool, then unlock the twilight star!",
@@ -766,6 +822,12 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
     "four-friend-challenge",
     "three-hole-jump",
   ],
+  animalSpeciesByCoordinate: {
+    "13,1": "cloudstep-pegasus",
+    "5,17": "three-tumble-cerberus",
+    "1,19": "riddlekit-sphinx",
+    "11,19": "koala",
+  },
   map: [
     "#####################",
     "#.#..k..#...#zy9.x..#",
@@ -792,7 +854,7 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
 });
 
 export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "moonlit-friendship-quest",
   objectIds: {
     "21,1": "moonlit-friendship-quest-potion-north-vial",
@@ -827,6 +889,13 @@ export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAuthoredLevel({
     "miniboss-key-guardian",
     "five-friend-challenge",
   ],
+  animalSpeciesByCoordinate: {
+    "3,5": "tidecurl-hippocamp",
+    "11,9": "ripplecap-kappa",
+    "5,17": "penguin",
+    "9,19": "koala",
+    "13,19": "fawn",
+  },
   map: [
     "#######################",
     "#E.k#.......#...x...#p#",
@@ -855,7 +924,7 @@ export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAuthoredLevel({
 });
 
 export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "rose-heart-roundabout",
   objectIds: {
     "9,3": "rose-heart-roundabout-portal-east-garden",
@@ -873,6 +942,11 @@ export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAuthoredLevel({
     "required-return-trip",
     "off-route-prerequisites",
   ],
+  animalSpeciesByCoordinate: {
+    "4,5": "rainbow-horn-unicorn",
+    "9,9": "breezeling-sylph",
+    "10,9": "bunny",
+  },
   map: [
     "#############",
     "#ER...#.....#",
@@ -891,7 +965,7 @@ export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAuthoredLevel({
 });
 
 export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "clover-comeback-carnival",
   objectIds: {
     "15,1": "clover-comeback-carnival-portal-mint-north",
@@ -923,6 +997,12 @@ export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAuthoredLevel({
     "required-backtracking",
     "four-friend-challenge",
   ],
+  animalSpeciesByCoordinate: {
+    "1,3": "pitter-patter-parasol",
+    "7,13": "lanternling",
+    "1,15": "ripplecap-kappa",
+    "7,15": "cloudstep-pegasus",
+  },
   map: [
     "#################",
     "#@......#s..#..C#",
@@ -945,7 +1025,7 @@ export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAuthoredLevel({
 });
 
 export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "friendship-crown-vault",
   objectIds: {
     "6,1": "friendship-crown-vault-portal-rose-west",
@@ -983,6 +1063,13 @@ export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAuthoredLevel({
     "optional-power-route",
     "five-friend-challenge",
   ],
+  animalSpeciesByCoordinate: {
+    "4,3": "griffin-cub",
+    "14,5": "three-tumble-cerberus",
+    "3,6": "riddlekit-sphinx",
+    "1,11": "tidecurl-hippocamp",
+    "14,11": "emberdown-phoenix",
+  },
   map: [
     "#################",
     "#@.s..H.#H...~.r#",
@@ -1005,7 +1092,7 @@ export const FRIENDSHIP_CROWN_VAULT_LEVEL = parseAuthoredLevel({
 });
 
 export const RAINBOW_POWER_PARADE_LEVEL = parseAuthoredLevel({
-  contentRevision: 2,
+  contentRevision: 3,
   id: "rainbow-power-parade",
   name: "Rainbow Power Parade",
   objective: "Build Power 99, bring home the Sunny Key, and return for the Rainbow Guardian!",
@@ -1035,6 +1122,13 @@ export const RAINBOW_POWER_PARADE_LEVEL = parseAuthoredLevel({
     "science-collectibles",
     "five-friend-challenge",
   ],
+  animalSpeciesByCoordinate: {
+    "11,1": "rainbow-horn-unicorn",
+    "1,3": "green-tea-skeleton",
+    "4,6": "emberbelly-dragonling",
+    "13,11": "fox",
+    "3,13": "kitten",
+  },
   map: [
     "#################",
     "#EYZ###.#..q....#",
@@ -1074,6 +1168,13 @@ export const CURATED_LEVELS: readonly LevelDefinition[] = [
   FRIENDSHIP_CROWN_VAULT_LEVEL,
   RAINBOW_POWER_PARADE_LEVEL,
 ];
+
+/** Every friend intentionally placed across the hand-authored 16-maze campaign. */
+export const AUTHORED_CAMPAIGN_ANIMAL_SPECIES = Object.freeze(
+  [...new Set(CURATED_LEVELS.flatMap((level) => level.objects.flatMap((object) =>
+    object.kind === "animal" ? [object.species] : [],
+  )))],
+) as readonly AnimalSpecies[];
 
 export function getCuratedLevel(id: string): LevelDefinition | undefined {
   return CURATED_LEVELS.find((level) => level.id === id);

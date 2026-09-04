@@ -6,6 +6,12 @@ This addendum is execution authority and supersedes any conflicting recommendati
 
 Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-implementation-roadmap.md` first, then re-read this plan in full and inspect current `HEAD`. Execution is gated on completed Plan 07A instrumentation, Plan 06 semantic/gameplay foundations, Plan 03 art/catalogue/safe-bound contracts, and root checkpoint 03M's green compatibility/gameplay-contract baseline.
 
+The accepted execution base is current `main` after the additive post-v0.20.1
+correction, not the immutable `v0.20.1` tag by itself. Consume the final-style
+Goblin and Violet Moon catalogue entries and the complete 32-species authored
+campaign roster (Unicorn in Maze 1; Tea-Time Skeleton in Maze 2). Do not restore
+the prior legacy pointers or hard-code UI around the former repeated roster.
+
 ### Adopted product amendments
 
 - Preserve one recognisable landscape composition across TV, desktop, 960×540 Tauri, and iPad/tablet: square maze on the left, persistent information/control deck on the right, and the same section/action order everywhere. Track sizes may adapt, but primary-device controls must not jump between a special rail and deck or disappear into `More`.

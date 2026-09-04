@@ -184,15 +184,19 @@ Turn the iPad sideways to play.
   delivered context-specific title, story, maze, victory and Adventure Book
   pools; the Garden pool is ready for Plan 10.
 
-- Four new rescue friends bring the catalogue to 15 species: Chinchilla,
-  Alpaca, Penguin, and Koala. Each friend now carries a species personality into
-  cage, following, rescue, victory-dance, and Adventure Book presentations.
+- The active rescue catalogue now contains 32 ordinary and mythic friends.
+  Every species has at least one Solo-accessible rescue in the existing
+  sixteen-maze campaign: Rainbow-Horn Unicorn opens Maze 1, Tea-Time Skeleton
+  arrives in Maze 2, and later chapters introduce the remaining cast in small
+  groups before thematic reunions. Each friend carries a species personality
+  into cage, following, rescue, victory-dance, and Adventure Book presentations.
 - Cloud Gremlin, Pumpkin Sprite, Clockwork Crab, and Jelly Sorcerer expand the
   playful enemy cast to 12 looks, with distinct idle motion and magical
   flourishes rather than extra per-frame image downloads.
 - Pearl Grotto and Harvest Bramble add two coordinated terrain families and
-  sparse crystal or autumn dressing. All 12 compatible themes appear in the
-  authored campaign, alongside every friend and enemy style.
+  sparse crystal or autumn dressing. All 12 compatible themes and all 32 active
+  friend species appear in the authored campaign; Plan 09 owns the expanded
+  progressive enemy ecology.
 - Large mazes now mount only camera-visible object sprites during exploration.
   The Adventure Book lazily decodes portraits below its first shelf, keeping the
   opening download focused while the full-resolution art stays crisp on demand.

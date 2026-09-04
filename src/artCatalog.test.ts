@@ -413,13 +413,13 @@ describe("art catalog", () => {
       ...Object.values(FUTURE_HAZARD_ART),
       ...Object.values(ANIMAL_ART),
       ...Object.values(FUTURE_FRIEND_ART),
-      ...Object.values(ENEMY_ART).filter((entry) => entry !== ENEMY_ART.goblin),
+      ...Object.values(ENEMY_ART),
       ...Object.values(FUTURE_ENEMY_ART),
       ...Object.values(WEAPON_ART),
       ...Object.values(CAGE_ART),
       ...Object.values(KEY_ART),
       ...Object.values(DOOR_ART),
-      ...Object.values(PORTAL_ART).filter((entry) => entry !== PORTAL_ART["violet-moon"]),
+      ...Object.values(PORTAL_ART),
       ...Object.values(FUTURE_PORTAL_ART),
       GOAL_ART,
       ...Object.values(PICKUP_ART),
@@ -443,8 +443,8 @@ describe("art catalog", () => {
     const generatedEntries = Object.values(MGJRPG02_ART);
 
     expect(MGJRPG02_ART).toHaveProperty("ame");
-    expect(generatedSources.size).toBe(151);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(124);
+    expect(generatedSources.size).toBe(153);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(126);
     expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(27);
     expect(catalogueSources).toEqual(generatedSources);
   });

@@ -308,14 +308,22 @@ below is preserved and does not validate this later implementation candidate.
 The maintained design contract, complete experience matrix, route rubric, and
 family playtest protocol are in `GAMEPLAY_DESIGN_SPEC.md`.
 
-## Current 0.20.1 corrective FP-ART-OST preview status
+## Post-0.20.1 Agent 01 starting baseline
+
+| Area | Current evidence | Status |
+| --- | --- | --- |
+| Corrected active art | Batch 28 immutable sources, strict-v2 records, generated catalogue projection and lifecycle ledger | Fresh `mgjrpg-02` Garden Goblin and Violet Moon are active; the former files remain rollback holds; `mgjrpg-02-post-v0201-active-refresh-map.json` explicitly supersedes the mistaken exception classification |
+| Authored friend ecology | All sixteen level revisions/fingerprints plus exact union test | Every one of the 32 active species has a Solo-accessible authored rescue; Unicorn is Maze 1 and Tea-Time Skeleton is Maze 2; topology, difficulty and route lengths are unchanged |
+| Release history | `v0.20.1` tag and package evidence | Immutable and not moved; these source corrections form the reviewed starting point for Plan 01 rather than silently changing the released artifacts |
+
+## Historical 0.20.1 corrective FP-ART-OST preview status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
 | Automated gate | Full suite, TypeScript and production build | 423/423 tests passed; 111/111 art tests passed; art validation has zero errors; scenario and performance contracts pass |
-| Active art audit | Semantic catalogue, generated projection and live consumers | Poggle and Sprig were the only genuine legacy-style gaps and are replaced; Goblin and Violet Moon remain approved exceptions |
+| Active art audit | Semantic catalogue, generated projection and live consumers | Poggle and Sprig were replaced. The contemporaneous claim that Goblin and Violet Moon were approved exceptions was later corrected as a coverage miss; see the post-release baseline above |
 | Front door | Separate title route plus repaired Home hero | 1280x720 and 844x390 browser checks passed without overflow or console warnings/errors |
-| Friends/Book | Complete approved generated-friend pool plus bounded ledger | Surprise generation and the Book expose all 32 friends; authored-campaign placement remains owned by Plan 09 |
+| Friends/Book | Complete approved generated-friend pool plus bounded ledger | Surprise generation and the Book expose all 32 friends; the released build still had the old authored placements, which the post-release baseline supersedes |
 | Doors/portals | Visible-player stationary door sequence and flower-pad cleanup | Browser assertion confirmed Ame remains visible during opening; redundant portal glyph is absent |
 | Hosting | GitHub source commit `d6b11c0`; canonical Vercel production | Browser build run 33906290349 passed; hosted bundle `index-Dr4fqy07.js` reports 0.20.1 and all four corrective assets return HTTP 200 |
 | Desktop artifacts | Unsigned portable and NSIS setup | Both report 0.20.1, byte-match build outputs, and pass inventory; portable smoke passed; exact evidence is in `release/FP-ART-OST-v0.20.1-manifest.json` |

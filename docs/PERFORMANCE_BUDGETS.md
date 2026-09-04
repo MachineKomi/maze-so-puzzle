@@ -381,6 +381,32 @@ present as dormant Plan 03 runtime files, so their activation adds no new public
 bytes. No superseded art is removed; Plan 12 retains the copy-first retirement
 gate.
 
+## Post-v0.20.1 Goblin, Violet and authored-friend-roster allocation
+
+This additive source checkpoint preserves the immutable v0.20.1 release at
+`4bca5322b6026e6a03a5b5a0f8e44aac1655d58a`. It corrects two families that the
+v0.20.1 audit mistakenly treated as intentional retentions: Goblin and Violet
+Moon. Both now use freshly authored `mgjrpg-02` source art, deterministic
+impossible-matte extraction, straight alpha, gameplay registration and
+versioned runtime paths. The same checkpoint assigns every one of the 32 active
+friend species across the existing 16 authored story mazes without changing
+their topology, enemies, hazards, locks, rewards or solver-authoritative routes.
+
+| Deterministic measure | v0.20.1 limit | Corrected candidate | Delta | Allocation |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, gzip level 9 | 133,918 B | 134,477 B | +559 B | 600 B |
+| CSS, gzip level 9 | 30,227 B | 30,177 B | -50 B | 0 B |
+| All public runtime files | 152,061,343 B | 152,168,739 B | +107,396 B | 107,396 B |
+| New versioned runtime art | 0 | 2 files / 107,396 B | +2 / +107,396 B | Same public allocation |
+| New decoded-image upper bound | 0 | 524,288 B | +524,288 B | Reported residency risk |
+
+The allocation leaves 41 JS-gzip bytes for deterministic compression variance
+and no CSS or public-media headroom. The friend roster reuses already-delivered
+assets and therefore adds no encoded or decoded image cost. The exact source,
+prompt, derivative, measurement and rollback evidence is recorded in
+`docs/source-assets/publication/mgjrpg-02-post-v0201-active-refresh-map.json`.
+Superseded Goblin and Violet Moon files remain rollback holds for Plan 12.
+
 ## Current resource inventory
 
 The reviewed static inventory is

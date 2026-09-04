@@ -84,6 +84,20 @@
       "dependencies": "Human Plan 03-R2 decision v10, accepted Plan 03-R1 checkpoint 5af5ccb092cb7ed8f5b080dd5572eadcef217dc3 and Plan 07A allocation policy.",
       "notes": "The 128-byte JS and 64-byte CSS allowances leave 23 and 37 bytes respectively for deterministic compression variance. The exact public allocation covers three new versioned WebP files; 6,641,664 decoded RGBA bytes are a per-file upper-bound sum, not simultaneous residency. Existing v01/v05 files remain rollback material and are not deleted."
     },
+    {
+      "id": "art-post-v0201-goblin-violet-and-authored-friend-roster",
+      "owner": "art",
+      "status": "approved",
+      "compressedJsBytes": 600,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 107396,
+      "reason": "The Human-requested post-v0.20.1 correction replaces two mistakenly retained legacy families—Goblin and Violet Moon—with deterministic transparent mgjrpg-02 derivatives, and assigns all 32 already-published friends across the existing 16 authored story mazes. The complete candidate measures +559 gzip-9 JavaScript bytes, +0 CSS bytes, and exactly +107,396 public-runtime bytes over the accepted v0.20.1 ceiling.",
+      "evidencePath": "docs/PERFORMANCE_BUDGETS.md#post-v0201-goblin-violet-and-authored-friend-roster-allocation",
+      "reviewBy": "2026-10-04",
+      "rollbackPoint": "Restore the Goblin and Violet Moon catalogue pointers and prior level content revisions/friend assignments from v0.20.1 tag checkpoint 4bca5322b6026e6a03a5b5a0f8e44aac1655d58a. Keep the two versioned derivatives and immutable source evidence until Plan 12.",
+      "dependencies": "Immutable v0.20.1 release checkpoint, direct Human correction, mgjrpg-02 rendering contract, deterministic Batch 28 publisher, and Pass 07A allocation policy.",
+      "notes": "The 600-byte JavaScript allowance leaves 41 bytes for deterministic compression variance. Public bytes equal the two exact lossless WebP derivatives and authorize no unrelated media. Their 524,288-byte decoded RGBA upper-bound sum is reported separately and is not a simultaneous-residency claim. The friend redistribution adds no runtime media and preserves every solver-validated ordinary/perfect route."
+    },
     { "owner": "lighting", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include reference and low-end frame-time cohorts." },
     { "owner": "vfx", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include overlap stress and reduced-motion coverage." },
     { "owner": "animation", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include compositing/layer evidence and idle-cost checks." },

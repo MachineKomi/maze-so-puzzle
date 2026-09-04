@@ -390,6 +390,14 @@ The expansion should primarily showcase the final catalogue rather than demand e
 
 ### 10.2 Authored rescue ecology
 
+- Starting authority is the post-v0.20.1 sixteen-maze curve in
+  `GAMEPLAY_DESIGN_SPEC.md`: it already provides a Solo-accessible authored
+  rescue for every one of the 32 active species, with Rainbow-Horn Unicorn in
+  Maze 1 and Tea-Time Skeleton in Maze 2. Treat that as achieved coverage, not
+  work to defer. The 24-maze pass may redistribute later introductions around
+  inserted chapters for better pacing and habitats, but must preserve both
+  opening placements unless the Human explicitly changes them and must never
+  reduce complete authored coverage.
 - Assign each final rescue-and-collect species to at least one fixed authored
   cage/object across the 24 levels, using stable semantic IDs and content
   revisions. No campaign friend selection uses runtime randomness.

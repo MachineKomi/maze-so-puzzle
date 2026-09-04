@@ -1,0 +1,281 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "violet-moon-mgjrpg02-v02-source",
+  "id": "violet-moon",
+  "artVersion": 2,
+  "family": "portal",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-post-v0201-active-refresh-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-28-violet-moon-v02-matte",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/PROMPTS.md",
+        "sha256": "9859dc2932f1bdb6efdf1149ffa23f0718bf3512a21054735aab922c00d096a6"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "comparison-only",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/violet-moon-legacy-input.png",
+          "sha256": "a2f65dfca40e1a88d0fe0372e4fac6ef7a53936f43c612c01a65e5629e5f3e4c"
+        },
+        {
+          "order": 2,
+          "role": "construction-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/rose-heart-family-input.webp",
+          "sha256": "88d3a6c4641cb1080132ac3627fae3bab4837420cd21b6c03f30b310cd7d34e5"
+        },
+        {
+          "order": 3,
+          "role": "construction-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/mint-clover-family-input.webp",
+          "sha256": "6ceeeb472f321276a8452ac829fe664b19f3189674ccc1b4c6c7490ca52b63a0"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-b0af2c1e-cb12-4799-9c89-8be666490fab.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/portal-violet-moon-v02-generator-original.png",
+          "sha256": "0df8db4224e3a33c7bcff6ea8e6eef0c3bf0dc9db6eda134fd9ca2d1f286f259",
+          "bytes": 1775097,
+          "disposition": "selected",
+          "reason": "Selected under the Human's explicit corrective direction against the approved mgjrpg-02 family contract."
+        },
+        {
+          "outputId": "exec-f474f8e9-e6fb-442f-b56c-0ae77edc4e3a.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/portal-violet-moon-v02-rejected-checkerboard-generator-original.png",
+          "sha256": "a94cffcc7aac322ba7e81c48a1bfbc74d1597eebf24f871e2b9c27e68277f86d",
+          "bytes": 1588594,
+          "disposition": "rejected",
+          "reason": "The provider painted a checkerboard into opaque RGB; it is provenance evidence only."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Exact prompt intent and ordered reference roles are preserved in the batch prompt record."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/PROMPTS.md",
+      "sha256": "9859dc2932f1bdb6efdf1149ffa23f0718bf3512a21054735aab922c00d096a6"
+    },
+    "outputIds": [
+      "exec-b0af2c1e-cb12-4799-9c89-8be666490fab.png",
+      "exec-f474f8e9-e6fb-442f-b56c-0ae77edc4e3a.png"
+    ],
+    "notes": "Exact submitted prompt and provider output identifier are retained."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/portal-violet-moon-v02-generator-original.png",
+      "sha256": "0df8db4224e3a33c7bcff6ea8e6eef0c3bf0dc9db6eda134fd9ca2d1f286f259",
+      "bytes": 1775097,
+      "relationship": "selected immutable generator original",
+      "evidence": "Direct Human request for corrective generation and runtime publication."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/portal-violet-moon-v02-rejected-checkerboard-generator-original.png",
+      "sha256": "a94cffcc7aac322ba7e81c48a1bfbc74d1597eebf24f871e2b9c27e68277f86d",
+      "bytes": 1588594,
+      "relationship": "rejected first generator output",
+      "evidence": "Retained to prove the opaque checkerboard failure; never used as an edit target or runtime source."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/violet-moon-legacy-input.png",
+      "sha256": "a2f65dfca40e1a88d0fe0372e4fac6ef7a53936f43c612c01a65e5629e5f3e4c",
+      "bytes": 300208,
+      "relationship": "immutable comparison-only generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/rose-heart-family-input.webp",
+      "sha256": "88d3a6c4641cb1080132ac3627fae3bab4837420cd21b6c03f30b310cd7d34e5",
+      "bytes": 59766,
+      "relationship": "immutable construction-authority generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/mint-clover-family-input.webp",
+      "sha256": "6ceeeb472f321276a8452ac829fe664b19f3189674ccc1b4c6c7490ca52b63a0",
+      "bytes": 61438,
+      "relationship": "immutable construction-authority generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "violet-moon-structure-field-256-r01",
+      "path": "public/assets/mgjrpg-02/portals/violet-moon-v02-structure-field-256-r01.webp",
+      "sha256": "92bf6c622e083dd40acc482b2cef4e5269b85c96764752b075439b5fcbe87376",
+      "bytes": 64268,
+      "width": 256,
+      "height": 256,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "profile": "structure-field-256",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "level-entry-warmup-or-first-use",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "floor-portal",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0390625,
+      0.1171875,
+      0.921875,
+      0.82421875
+    ],
+    "safeInset": [
+      0.1171875,
+      0.0390625,
+      0.05859375,
+      0.0390625
+    ],
+    "apertureBox": [
+      0.26953125,
+      0.3359375,
+      0.4609375,
+      0.39453125
+    ],
+    "motifBox": [
+      0.359375,
+      0.390625,
+      0.28125,
+      0.2734375
+    ],
+    "tileFootprint": [
+      0.0,
+      0.0,
+      1.0,
+      1.0
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/portal-violet-moon-v02-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "structure-field-256",
+        "outputPath": "public/assets/mgjrpg-02/portals/violet-moon-v02-structure-field-256-r01.webp",
+        "width": 256,
+        "height": 256,
+        "format": "webp",
+        "maxEncodedBytes": 1048576,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        3,
+        249,
+        3
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.04,
+        0.04,
+        0.96,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Impossible-matte alpha recovery, hidden-RGB decontamination, aspect-preserving registration, resize and lossless WebP encoding only.",
+      "script": "scripts/art_pipeline/mgjrpg02_post_v0201_publish.py"
+    }
+  ],
+  "approvalEvidence": {
+    "approvedBy": "Human project author corrective direction with orchestrator contract review",
+    "approvedAt": "2026-09-04T00:00:00+01:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v12/human-decision.json",
+    "evidenceSha256": "eff41c2d4719600a5cececa8d1cddfa972293e726dc38b1c74c98e237d82c0ed"
+  },
+  "knownUnknowns": [
+    "Generator model build, seed and exact execution timestamp were not exposed.",
+    "Manual face and eye landmarks remain a Plan 05 registration gate; static alpha registration is authoritative here."
+  ],
+  "rights": {
+    "originClaim": "Created for Maze so Puzzle from project-owned prompts and internal references.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Human project author",
+    "notes": "No named living artist or proprietary character was requested."
+  },
+  "rollback": {
+    "method": "Restore the prior catalogue pointer to /assets/portal-violet-moon-v1.png."
+  }
+}

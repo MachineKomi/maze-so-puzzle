@@ -19,23 +19,46 @@ The invariant rules are:
 
 ### Rescue-and-collect friend roster
 
-Friends are kind optional rescues during a maze and persistent collectable companions for the Friend Garden. “Friend” is the rules term: it includes ordinary animals and small, child-friendly mythic beings. Neither group is a combat reward, equipment class, required objective, or source of automatic maze solutions. Existing authored levels continue to use the current catalogue until their versioned content and save migrations explicitly opt into an expanded roster.
+Friends are kind optional rescues during a maze and persistent collectable companions for the Friend Garden. “Friend” is the rules term: it includes ordinary animals and small, child-friendly mythic beings. Neither group is a combat reward, equipment class, required objective, or source of automatic maze solutions. The post-v0.20.1 authored-content revision places every one of the 32 active friend species in at least one Solo-accessible rescue across the existing sixteen-maze campaign; it changes identities only, not topology, balance, or route length.
 
 The ordinary-animal family is Bunny, Fox, Kitten, Puppy, Duckling, Hedgehog, Fawn, Red Panda, Otter, Lamb, Capybara, Chinchilla, Alpaca, Penguin, and Koala.
 
-The dormant catalogued mythic-friend family is Ripplecap Kappa Hatchling, Pitter-Patter Parasol, Mallowmusk Aroma Wisp, Lanternling, Breezeling Sylph, Griffin Cub, Emberbelly Dragonling, Cloudstep Pegasus Foal, Three-Tumble Cerberus Pup, Riddlekit Sphinx, Tidecurl Hippocamp Foal, Emberdown Phoenix Chick, Meadowstep Faunling, Minerva Moon-Owl, and Tessera Dolphin. These are original Maze so Puzzle interpretations of broad folklore, fantasy-JRPG, Greek, and Roman ideas. Catalogue presence supplies art identity only; it does not place them in a maze or implement Garden behaviour. They must not reproduce franchise designs or turn cultural source material into horror caricature.
+The active mythic-friend family is Ripplecap Kappa Hatchling, Pitter-Patter Parasol, Mallowmusk Aroma Wisp, Lanternling, Breezeling Sylph, Griffin Cub, Emberbelly Dragonling, Cloudstep Pegasus Foal, Three-Tumble Cerberus Pup, Riddlekit Sphinx, Tidecurl Hippocamp Foal, Emberdown Phoenix Chick, Meadowstep Faunling, Minerva Moon-Owl, and Tessera Dolphin. These are original Maze so Puzzle interpretations of broad folklore, fantasy-JRPG, Greek, and Roman ideas. They must not reproduce franchise designs or turn cultural source material into horror caricature.
 
-Tea-Time Skeleton (`green-tea-skeleton`) is also a dormant catalogued rescue-and-collect
+Tea-Time Skeleton (`green-tea-skeleton`) is an active rescue-and-collect
 friend. He is the courteous toy-ivory skeleton who sits peacefully with a
 traditional handleless cup of green tea and one steam curl. His approved sprite
 and gentle visual joke are unchanged; he is not an enemy, guardian, combat
-encounter, or Power check. Future authored content must place him in a
-friend rescue/care context and use friend persistence rather than enemy state.
+encounter, or Power check. He is introduced in Maze 2 and returns in the current
+finale, always through friend rescue/persistence rather than enemy state.
 
 Rainbow-Horn Unicorn (`rainbow-horn-unicorn`)—white fur, light-pink markings and
-mane, and a rainbow horn—is an additional dormant catalogued rescue-and-collect
-friend. Later gameplay and Garden work must consume this identity rather than
-inventing a competing species ID; no placement or mechanic is active yet.
+mane, and a rainbow horn—is the very first authored rescue friend in Maze 1.
+Later gameplay and Garden work must consume this identity rather than inventing
+a competing species ID.
+
+The current authored rescue curve is fixed as follows. It deliberately introduces
+the full roster in small readable groups by Maze 12, then uses thematic reunions
+rather than reverting to the former repeated Bunny/Fox/Kitten-heavy distribution.
+
+| Ch | Authored rescue candidates |
+| ---: | --- |
+| 1 | Rainbow-Horn Unicorn |
+| 2 | Tea-Time Skeleton; Fox |
+| 3 | Bunny; Kitten; Puppy |
+| 4 | Duckling; Hedgehog; Fawn |
+| 5 | Red Panda; Otter; Lamb |
+| 6 | Capybara; Chinchilla; Alpaca |
+| 7 | Pitter-Patter Parasol; Kitten; Penguin |
+| 8 | Lanternling; Emberdown Phoenix Chick; Meadowstep Faunling |
+| 9 | Minerva Moon-Owl; Tessera Dolphin; Mallowmusk Aroma Wisp |
+| 10 | Breezeling Sylph; Griffin Cub; Emberbelly Dragonling |
+| 11 | Cloudstep Pegasus Foal; Three-Tumble Cerberus Pup; Riddlekit Sphinx; Koala |
+| 12 | Tidecurl Hippocamp Foal; Ripplecap Kappa Hatchling; Penguin; Koala; Fawn |
+| 13 | Rainbow-Horn Unicorn; Breezeling Sylph; Bunny |
+| 14 | Pitter-Patter Parasol; Lanternling; Ripplecap Kappa Hatchling; Cloudstep Pegasus Foal |
+| 15 | Griffin Cub; Three-Tumble Cerberus Pup; Riddlekit Sphinx; Tidecurl Hippocamp Foal; Emberdown Phoenix Chick |
+| 16 | Rainbow-Horn Unicorn; Tea-Time Skeleton; Emberbelly Dragonling; Fox; Kitten |
 
 Art and content rules for this roster:
 
@@ -119,9 +142,11 @@ later tuning must version the table rather than silently changing a saved roll.
 ## Approved Plan 09 content-ecology direction (not yet implemented)
 
 The final Plan 03 catalogue is a content vocabulary, not proof that the game
-uses it well. Plan 09 owns a versioned 24-chapter ecology matrix and the
-generated-maze variety migration. Until that work lands, the current sixteen-
-maze placements and generator remain runtime authority.
+uses it well. The post-v0.20.1 correction establishes a complete baseline by
+using all 32 friend species in the current authored campaign. Plan 09 still owns
+the intentional 24-chapter introduction/reunion ecology, thematic tuning,
+generated-maze variety migration, and preservation of full Solo-accessible
+coverage as eight levels are inserted.
 
 ### Campaign scale, spatial variety, teaching and encounter rhythm
 
@@ -377,7 +402,7 @@ Hint tiers are Goal (remind the current need), Principle (state the rule), Direc
 
 | Ch | Puzzle intent and mechanic stage | Complexity / likely friction | Route quality and rescue role | Required-path hint emphasis |
 | ---: | --- | --- | --- | --- |
-| 1 | Introduce four-way movement, exit, and an optional friend | Very low; whole 6×6 board visible | Six inputs; friend is an equal-cost optional branch | Point toward the star; never mention the kitten as required |
+| 1 | Introduce four-way movement, exit, and an optional friend | Very low; whole 6×6 board visible | Six inputs; friend is an equal-cost optional branch | Point toward the star; never mention the unicorn as required |
 | 2 | Introduce weapon, equal-Power combat, key/door | Low; first ordered chain | Short changed-state chain; two rescue detours | Weapon, then fair enemy, then matching key/door |
 | 3 | Introduce potion growth, boots, water | Low-medium; two capability gates | Compact stateful route; three rescues add 16 | Name current missing capability before direction |
 | 4 | Apply reusable keys across multiple doors | Medium; colour/shape matching | Two loops, low dead travel | Identify the next required colour, not the nearest friend |
@@ -400,7 +425,7 @@ These are semantic hooks for the art, audio, lighting, VFX, animation, UI, and c
 
 | Ch | Learning habit | Fair “aha” | Wonder / surprise | Joke / payoff | Functional landmark | Optional discovery | Healthy replay reason | Later-track opportunities |
 | ---: | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Try a direction, observe | Star is only a few choices away | A friend waits beside the first path | “Tiny trail, enormous hero” beat | Start garden and visible star | First kitten | Rescue without extra distance | Gentle first-step sound; no fog; direction affordance |
+| 1 | Try a direction, observe | Star is only a few choices away | A unicorn waits beside the first path | “Tiny trail, enormous hero” beat | Start garden and visible star | First Rainbow-Horn Unicorn | Rescue without extra distance | Gentle first-step sound; no fog; direction affordance |
 | 2 | Read capability before blocker | Equal Power is enough | Weapon visibly changes Ame | Baddie’s confidence pops at equality | Sword nook / coloured door | Two side cages | Perfect route and faster key order | Power comparison audio; weapon hold pose; key motif UI |
 | 3 | Predict what equipment changes | Boots turn water into path | Splash crossing | Dry-socks quip | Boot shore | Three waterside friends | Fewer false starts | Crossing sound, hazard boundary, blocker icon |
 | 4 | Remember reusable keys | One key answers several doors | Picnic route unfolds | Sandwich-shaped detour copy | Picnic clearing | Three guests | Optimize door order | Key-return sparkle; readable junction landmarks |

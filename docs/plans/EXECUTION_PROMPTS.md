@@ -107,11 +107,14 @@ and root checkpoint 03M have landed; consume their current performance harness,
 semantic view models, art tokens, safe bounds, assets, maintained gameplay
 contracts, and canonical `MusicTransportPort`.
 
-The accepted starting milestone is the pushed `v0.20.1` corrective
-`FP-ART-OST` checkpoint. Preserve its progress-v5, active-run-v3, recoverable completion,
+The accepted starting milestone is current pushed `main`: the immutable
+`v0.20.1` `FP-ART-OST` checkpoint plus its reviewed additive post-release art
+and authored-friend correction. Preserve progress-v5, active-run-v3, recoverable completion,
 stationary-door, deterministic reward, OST catalogue, preview-namespace and
 release-provenance contracts; also preserve its final-style Poggle/Sprig
-portraits, complete generated friend roster, repaired transparent Home hero,
+portraits, final-style Goblin and Violet Moon, complete generated and authored
+32-friend roster (Rainbow-Horn Unicorn in Maze 1 and Tea-Time Skeleton in Maze 2),
+repaired transparent Home hero,
 separate minimal title screen, visible-player door sequence, portal-glyph
 cleanup and friend-ledger modes. Do not rebump the version, rebuild/publish a
 release, move the tag, or edit GitHub/Vercel release state; the root manager owns

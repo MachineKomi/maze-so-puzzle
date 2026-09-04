@@ -201,9 +201,12 @@ implemented, the 16-chapter matrix above remains shipped story authority.
 
 Tea-Time Skeleton belongs with the rescued friends instead. He is a courteous,
 quietly funny Puzzlewild resident who pauses for green tea even in an old
-dungeon. Ame rescues and befriends him; she never challenges, defeats, or moves
-past him through Power. Preserve the approved bare toy-ivory skeleton, friendly
-face, seated tea pose, handleless green-tea cup, and single steam curl.
+dungeon. Ame first rescues him in Maze 2 and can meet him again in the current
+finale; she never challenges, defeats, or moves past him through Power. Preserve
+the approved bare toy-ivory skeleton, friendly face, seated tea pose, handleless
+green-tea cup, and single steam curl. Rainbow-Horn Unicorn is the very first
+optional rescue in Maze 1, giving the opening trail an immediate magical-friend
+promise without making rescue mandatory for completion.
 
 Future chapters can follow new loose threads without undoing the first arc:
 
