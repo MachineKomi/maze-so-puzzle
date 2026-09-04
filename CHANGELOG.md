@@ -37,8 +37,10 @@ than promising long-term save or API compatibility.
   universal placement.
 - Navigation now uses the cohesive seven-icon premium utility-sticker family;
   Sound and Muted retain a decisive non-colour-only state difference. The title
-  environment and Ame platform icon are active, while Plan 01 still owns the
-  layered hero/wordmark composition and live semantic heading.
+  route now layers the approved environment, generated illustrated `Maze so
+  Puzzle` wordmark, and transparent Ame-and-friends hero group. The cream fade
+  and redundant eyebrow/subtitle are gone; the exact accessible heading remains
+  live text. The friendly green-tea skeleton is enlarged in the hero scene.
 - Chapter 1 is now a complete 6×6 whole-board movement lesson. Later campaign
   edits reduce ordinary corridor endurance, while Chapters 13 and 15 become
   compact portal-inference puzzles.

@@ -1,0 +1,184 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "home-hero-splash-mgjrpg02-v02-source",
+  "id": "home-hero-splash",
+  "artVersion": 2,
+  "family": "brand",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-plan03-r2-alpha-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-26-home-splash-v02-larger-tea-skeleton",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/PROMPTS.md",
+        "sha256": "c4d01d4ae8b8b183e2a3fdc8e11e6f998e4f2dd1c42fbc120e9695cca3c6a261"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "edit-target",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+          "sha256": "3f6917b2ae47fd4a0649d24c6301f1db2bfe1bf93c7c6144a567a13c09595ecf"
+        },
+        {
+          "order": 2,
+          "role": "rendering-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/recipes/mgjrpg-02.json",
+          "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-bd502011-9d01-4679-9894-71f8ce07072a.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-larger-tea-skeleton-generator-original.png",
+          "sha256": "f2a2388641a9aad2e06422e6b954526ad2767ae624cd3d23ee1370f2cd941194",
+          "bytes": 2198180,
+          "disposition": "selected",
+          "reason": "Human approved the larger friendly tea-skeleton correction and authorized runtime publication."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "One bounded object-scale edit of the approved generator original; Ame's model-sheet source remains her identity authority. Transparency is extracted deterministically from this green-matte output and is not generated."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/PROMPTS.md",
+      "sha256": "c4d01d4ae8b8b183e2a3fdc8e11e6f998e4f2dd1c42fbc120e9695cca3c6a261"
+    },
+    "outputIds": ["exec-bd502011-9d01-4679-9894-71f8ce07072a.png"],
+    "notes": "Exact prompt, ordered references and provider output ID are preserved."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-larger-tea-skeleton-generator-original.png",
+      "sha256": "f2a2388641a9aad2e06422e6b954526ad2767ae624cd3d23ee1370f2cd941194",
+      "bytes": 2198180,
+      "relationship": "Human-approved immutable green-matte generator original",
+      "evidence": "The Human approved the larger-skeleton composition and required programmatic matte extraction."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-transparent-master.png",
+      "sha256": "3c3ba0a9a1a2b20310e2774d45d7bef900abfe558c3abccaadc418fd9d628a25",
+      "bytes": 1751194,
+      "relationship": "deterministic transparent delivery master",
+      "evidence": "Built only by flat-matte alpha extraction and edge decontamination; no pixels were generatively repainted."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "front-door-hero-1024",
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v02-front-door-1024-r01.webp",
+      "sha256": "6c2e9c02dbe3c9db17dc9733b31f9997424329a1b81fd5c6b63a78f69c7bb680",
+      "bytes": 663752,
+      "width": 1024,
+      "height": 768,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "profile": "front-door-hero-1024",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {"lossless": true, "method": 6, "exact": true}
+      }
+    }
+  ],
+  "geometry": {
+    "class": "hero-splash",
+    "pivot": [0.5, 0.5],
+    "visibleBounds": [0.06542969, 0.02734375, 0.87011719, 0.94270833],
+    "safeInset": [0.02734375, 0.06445312, 0.02994792, 0.06542969]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-larger-tea-skeleton-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "front-door-hero-1024",
+        "outputPath": "public/assets/mgjrpg-02/brand/home-hero-splash-v02-front-door-1024-r01.webp",
+        "width": 1024,
+        "height": 768,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 4,
+        "maxEncodedBytes": 1048576,
+        "encoder": {"options": {"lossless": true, "method": 6, "exact": true}}
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [7, 233, 19],
+      "clearDistance": 48.0,
+      "opaqueDistance": 144.0,
+      "minimumComponentPixels": 96
+    }
+  },
+  "approvalEvidence": {
+    "approvedBy": "Human project author",
+    "approvedAt": "2026-09-04T00:00:00+01:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v10/human-decision.json",
+    "evidenceSha256": "7430178da2cbacbe8ca07e5a0540bdff0d9b34c3a0504d4851e0825039c224c5"
+  },
+  "knownUnknowns": [
+    "Physical iPad and television display QA remains a release-hardware gate; required responsive browser viewports are covered by production-preview captures."
+  ],
+  "rights": {
+    "originClaim": "Created for Maze so Puzzle from project-authored prompts and approved internal references; no named franchise, living artist or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "notes": "Human approved the source and bounded runtime publication.",
+    "reviewedBy": "Human project author"
+  },
+  "rollback": {
+    "method": "Restore the home-hero-splash catalogue pointer to public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp and remove the layered consumer in the same rollback."
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-green-matte-alpha-extraction",
+      "description": "Removed the prepared flat green matte, cleared residual matte-only boundary spill, resized and encoded without generative repainting.",
+      "script": "scripts/art_pipeline/mgjrpg02_plan03_r2_publish.py"
+    }
+  ]
+}

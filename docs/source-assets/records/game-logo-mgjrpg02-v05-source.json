@@ -5,7 +5,7 @@
   "id": "game-logo",
   "artVersion": 5,
   "family": "brand",
-  "runtimeStatus": "dormant",
+  "runtimeStatus": "superseded",
   "sourceStatus": "source-backed",
   "approvalStatus": "approved",
   "validationProfile": "strict-v2",
@@ -114,7 +114,7 @@
       "decodedBytesUpperBound": 2953216,
       "profile": "front-door-wordmark-1024",
       "derivativeRevision": 1,
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "superseded",
       "loadingPhase": "plan01-front-door-on-demand",
       "encoder": {
         "name": "Pillow WebP",
@@ -140,7 +140,7 @@
       "decodedBytesUpperBound": 737280,
       "profile": "front-door-wordmark-512",
       "derivativeRevision": 1,
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "superseded",
       "loadingPhase": "plan01-front-door-on-demand",
       "encoder": {
         "name": "Pillow WebP",
@@ -228,7 +228,7 @@
     "evidenceSha256": "6e467cea1f22303faa2e75ae13b878c7b3ea8489a1b0e1b916c12e968770de3b"
   },
   "knownUnknowns": [
-    "Plan 01 owns the live wordmark consumer; both right-sized variants remain dormant and are not preloaded."
+    "Superseded by the explicitly Human-promoted generated v06 wordmark; retained as the exact controlled-lettering rollback set until Plan 12."
   ],
   "rights": {
     "originClaim": "Created for Maze so Puzzle from project-authored prompts and approved internal references; no named franchise, living artist or proprietary composition was requested.",
@@ -237,7 +237,7 @@
     "reviewedBy": "Human project author"
   },
   "rollback": {
-    "method": "Remove the dormant Plan 01 pointer; no pre-R1 runtime wordmark existed."
+    "method": "Restore the game-logo catalogue pointers to public/assets/mgjrpg-02/brand/game-logo-v05-front-door-1024-r01.webp and game-logo-v05-front-door-512-r01.webp."
   },
   "humanEdits": [
     {

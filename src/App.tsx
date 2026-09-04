@@ -3378,7 +3378,31 @@ function TitleScreen({
           event.currentTarget.src = ASSETS.titleBackgroundFallback;
         }}
       />
-      <div className="title-vignette" aria-hidden="true" />
+      <img
+        className="title-logo"
+        src={ASSETS.gameLogo}
+        srcSet={`${ASSETS.gameLogoCompact} 512w, ${ASSETS.gameLogo} 1024w`}
+        sizes="(max-width: 640px) 33vw, 35vw"
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        onError={(event) => {
+          event.currentTarget.onerror = null;
+          event.currentTarget.srcset = "";
+          event.currentTarget.src = ASSETS.gameLogoFallback;
+        }}
+      />
+      <img
+        className="title-hero"
+        src={ASSETS.homeHeroSplash}
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        onError={(event) => {
+          event.currentTarget.onerror = null;
+          event.currentTarget.src = ASSETS.homeHeroSplashFallback;
+        }}
+      />
       <div className="title-fireflies" aria-hidden="true">
         {Array.from({ length: 12 }, (_, index) => (
           <i
@@ -3402,9 +3426,7 @@ function TitleScreen({
       ><img src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /></button>
 
       <div className="title-copy">
-        <span className="title-eyebrow">A gentle adventure for Ame</span>
-        <h1 id="game-title">Maze so <em>Puzzle!</em></h1>
-        <p className="title-subtitle">For Ame to Solve!</p>
+        <h1 id="game-title" className="sr-only">Maze so Puzzle</h1>
         <p className="title-welcome">Follow the paths, grow Ame's Power, and help every little friend find their way home.</p>
         {updatedMazeRestarted && (
           <p className="title-welcome" role="status">

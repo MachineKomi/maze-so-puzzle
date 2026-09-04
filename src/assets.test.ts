@@ -141,15 +141,17 @@ describe("art preloading", () => {
     expect(ASSETS.navMuted).not.toBe(ASSETS.navSound);
   });
 
-  it("projects the active title environment without preloading dormant Plan 01 layers", async () => {
+  it("projects the active layered title composition without eager catalogue preload", async () => {
     const { ASSETS } = await import("./assets");
     const { FRONT_DOOR_ART } = await import("./artCatalog");
 
     expect(ASSETS.titleBackground).toBe(FRONT_DOOR_ART.titleEnvironment.src);
     expect(ASSETS.titleBackgroundFallback).toBe("/assets/title-background-v1.webp");
     expect(ASSETS.homeHeroSplash).toBe(FRONT_DOOR_ART.homeHeroSplash.src);
+    expect(ASSETS.homeHeroSplashFallback).toBe(FRONT_DOOR_ART.homeHeroSplash.fallbackSrc);
     expect(ASSETS.gameLogo).toBe(FRONT_DOOR_ART.gameLogo.default.src);
     expect(ASSETS.gameLogoCompact).toBe(FRONT_DOOR_ART.gameLogo.compact.src);
+    expect(ASSETS.gameLogoFallback).toBe(FRONT_DOOR_ART.gameLogo.default.fallbackSrc);
   });
 
   it("loads common gameplay art plus only the supplied level's terrain and objects", async () => {

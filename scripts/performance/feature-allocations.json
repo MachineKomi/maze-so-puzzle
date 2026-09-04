@@ -70,6 +70,20 @@
       "dependencies": "Human Plan 03-R1 runtime-publication decision v09, accepted Plan 03 checkpoint 28946cbb04f45cb21cd51626914267ff4f71c375, source-review checkpoint d70c9c360683d2ed8f4f7d1cd172254bbda7b559, and Plan 07A allocation policy.",
       "notes": "The 900-byte JavaScript allowance leaves 55 bytes for deterministic compression variance. The exact public allocation covers 12 new versioned Web runtime files; 14,636,960 decoded RGBA bytes are a per-file upper-bound sum, not simultaneous residency. Nineteen platform outputs add 3,149,824 repository/package-source bytes and the controlled logo master adds 377,571 source-only bytes. No superseded file is removed."
     },
+    {
+      "id": "art-plan03-r2-generated-wordmark-and-home-composition",
+      "owner": "art",
+      "status": "approved",
+      "compressedJsBytes": 128,
+      "compressedCssBytes": 64,
+      "runtimePublicBytes": 1527888,
+      "reason": "Plan 03-R2 activates the Human-approved generated Maze so Puzzle wordmark and larger-tea-skeleton home splash through the existing title route. The approved green-matte originals are processed deterministically, without generative transparency editing. Against the exact accepted R1 checkpoint, the candidate measures +105 gzip-9 JavaScript bytes, +27 gzip-9 CSS bytes and exactly +1,527,888 versioned public-runtime bytes.",
+      "evidencePath": "docs/PERFORMANCE_BUDGETS.md#plan-03-r2-generated-wordmark-and-home-composition-allocation",
+      "reviewBy": "2026-10-04",
+      "rollbackPoint": "Restore the home hero pointer to v01 and both responsive logo pointers to controlled v05, then restore the pre-layered TitleScreen composition from checkpoint 5af5ccb092cb7ed8f5b080dd5572eadcef217dc3. Retain all versioned files until Plan 12.",
+      "dependencies": "Human Plan 03-R2 decision v10, accepted Plan 03-R1 checkpoint 5af5ccb092cb7ed8f5b080dd5572eadcef217dc3 and Plan 07A allocation policy.",
+      "notes": "The 128-byte JS and 64-byte CSS allowances leave 23 and 37 bytes respectively for deterministic compression variance. The exact public allocation covers three new versioned WebP files; 6,641,664 decoded RGBA bytes are a per-file upper-bound sum, not simultaneous residency. Existing v01/v05 files remain rollback material and are not deleted."
+    },
     { "owner": "lighting", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include reference and low-end frame-time cohorts." },
     { "owner": "vfx", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include overlap stress and reduced-motion coverage." },
     { "owner": "animation", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include compositing/layer evidence and idle-cost checks." },

@@ -2056,8 +2056,7 @@ button:focus-visible,
   isolation: isolate;
 }
 
-.title-background,
-.title-vignette {
+.title-background {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -2073,12 +2072,24 @@ button:focus-visible,
   animation: title-breathe 10s ease-in-out infinite alternate;
 }
 
-.title-vignette {
-  z-index: -2;
-  background:
-    linear-gradient(90deg, rgba(255, 248, 224, 0.97) 0%, rgba(255, 244, 215, 0.91) 28%, rgba(255, 239, 203, 0.48) 47%, transparent 65%),
-    linear-gradient(0deg, rgba(61, 38, 70, 0.23), transparent 28%),
-    radial-gradient(circle at 22% 47%, rgba(255, 255, 255, 0.63), transparent 34%);
+.title-logo {
+  position: absolute;
+  z-index: -1;
+  top: clamp(14px, 2.2cqh, 34px);
+  left: clamp(24px, 4.7cqw, 72px);
+  width: clamp(270px, 35cqw, 520px);
+  pointer-events: none;
+}
+
+.title-hero {
+  position: absolute;
+  z-index: -1;
+  right: clamp(-22px, -1.2cqw, -4px);
+  bottom: clamp(-22px, -2.4cqh, -7px);
+  width: min(55cqw, 760px);
+  max-height: 72cqh;
+  object-fit: contain;
+  object-position: right bottom;
   pointer-events: none;
 }
 
@@ -2086,7 +2097,7 @@ button:focus-visible,
   display: flex;
   width: min(48%, 620px);
   height: 100%;
-  padding: clamp(30px, 4.4cqw, 68px) clamp(24px, 4.7cqw, 72px);
+  padding: clamp(212px, 34cqh, 300px) clamp(24px, 4.7cqw, 72px) clamp(24px, 3cqh, 46px);
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
@@ -2100,24 +2111,6 @@ button:focus-visible,
   font-weight: 1000;
   letter-spacing: 0.17em;
   text-transform: uppercase;
-}
-
-.title-copy h1 {
-  max-width: 580px;
-  margin: clamp(4px, 0.8cqw, 11px) 0 0;
-  color: #50406b;
-  font-size: clamp(52px, 6.15cqw, 88px);
-  font-weight: 1000;
-  letter-spacing: -0.078em;
-  line-height: 0.82;
-  text-wrap: balance;
-  text-shadow: 0 3px 0 rgba(255, 255, 255, 0.9), 0 8px 22px rgba(91, 53, 91, 0.14);
-}
-
-.title-copy h1 em {
-  display: block;
-  color: #b3405e;
-  font-style: normal;
 }
 
 .title-subtitle {
@@ -2985,13 +2978,22 @@ button:focus-visible,
 }
 
 @container game-stage (max-height: 600px) {
-  .title-copy {
-    width: 50%;
-    padding: 22px 34px;
+  .title-logo {
+    top: 7px;
+    left: 28px;
+    width: min(28cqw, 250px);
   }
 
-  .title-copy h1 { font-size: 52px; }
-  .title-subtitle { margin-top: 7px; font-size: 18px; }
+  .title-hero {
+    width: min(49cqw, 540px);
+    max-height: 70cqh;
+  }
+
+  .title-copy {
+    width: 50%;
+    padding: 112px 34px 18px;
+  }
+
   .title-welcome { margin: 6px 0 10px 2px; font-size: 11px; }
   .title-play-button { min-height: 62px; padding-block: 7px; }
   .title-secondary-actions button { min-height: 38px; font-size: 10px; }
@@ -3012,6 +3014,26 @@ button:focus-visible,
   .maze-record-card { min-height: 64px; }
 
   .utility-row button { font-size: 7px; }
+}
+
+@container game-stage (max-width: 700px) {
+  .title-logo {
+    top: 5px;
+    left: 18px;
+    width: min(33cqw, 192px);
+  }
+
+  .title-hero {
+    right: -9px;
+    bottom: -7px;
+    width: 48cqw;
+    max-height: 66cqh;
+  }
+
+  .title-copy {
+    width: 54%;
+    padding: 94px 18px 12px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

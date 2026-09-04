@@ -2209,3 +2209,27 @@ restrained holographic band. Exact text is `Maze so Puzzle`; `so` is lowercase,
 smaller, and independently typeset. There is no subtitle or yellow route line.
 The unreviewed v04 technical draft that retained generated `Maze`/`Puzzle` edges
 was rejected before publication and hash-recorded beside the v05 master.
+
+## Plan 03-R2 deterministic green-matte publication addendum v10 (2026-09-04)
+
+This forward exception does not rewrite Batch 21, 24, 25, or R1 history. Human
+decision `docs/source-assets/calibrations/mgjrpg-02/v10/human-decision.json`
+promotes the exact Batch 24 generated Logo Candidate B and Batch 26 larger-tea-
+skeleton Home Splash v02 for the combined title/home route. Their run IDs are
+`batch-24-game-logo-v03-candidate-b-cleanup-edit-02` and
+`batch-26-home-splash-v02-larger-tea-skeleton`.
+
+Both selected files already use a uniform impossible green matte. Alpha must be
+extracted programmatically from those immutable pixels. Do not send either file
+through ImageGen for transparency, do not repaint edges, and do not use an
+edit-of-an-edit. The only authorized derivative operations are the recorded
+flat-matte alpha unblend, matte-only spill rejection, hidden-RGB dilation,
+component cleanup, Lanczos resize, and lossless WebP encoding in
+`scripts/art_pipeline/mgjrpg02_plan03_r2_publish.py`. Rejected transparency
+trials were never ingested into repository authority.
+
+The Human explicitly selects the generated visual lettering over controlled
+v05. Visible spelling is manually verified as `Maze so Puzzle`, with lowercase
+`so`, no subtitle, and no yellow route line; exact accessible live text remains
+the deterministic semantic fallback. The prior v05 files remain versioned
+rollback evidence until Plan 12.

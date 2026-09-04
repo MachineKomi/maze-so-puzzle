@@ -1,0 +1,158 @@
+{
+  "schema": "maze-art-plan03-r2-validation/v1",
+  "publicationId": "mgjrpg-02-plan03-r2-home-composition-v01",
+  "validatedOn": "2026-09-04",
+  "candidateBase": "5af5ccb092cb7ed8f5b080dd5572eadcef217dc3",
+  "humanDecision": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v10/human-decision.json",
+    "sha256": "7430178da2cbacbe8ca07e5a0540bdff0d9b34c3a0504d4851e0825039c224c5"
+  },
+  "sourceToRuntime": [
+    {
+      "stableId": "home-hero-splash",
+      "sourceRunId": "batch-26-home-splash-v02-larger-tea-skeleton",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-larger-tea-skeleton-generator-original.png",
+      "sourceSha256": "f2a2388641a9aad2e06422e6b954526ad2767ae624cd3d23ee1370f2cd941194",
+      "runtimePath": "public/assets/mgjrpg-02/brand/home-hero-splash-v02-front-door-1024-r01.webp",
+      "runtimeSha256": "6c2e9c02dbe3c9db17dc9733b31f9997424329a1b81fd5c6b63a78f69c7bb680",
+      "runtimeBytes": 663752,
+      "catalogueRecord": "home-hero-splash-mgjrpg02-v02-source"
+    },
+    {
+      "stableId": "game-logo",
+      "sourceRunId": "batch-24-game-logo-v03-candidate-b-cleanup-edit-02",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sourceSha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "runtimePath": "public/assets/mgjrpg-02/brand/game-logo-v06-front-door-1024-r01.webp",
+      "runtimeSha256": "9737321234be89d5eb3dc3d9556f8bb17214a437d3b451c24e088b00cda9893e",
+      "runtimeBytes": 662240,
+      "catalogueRecord": "game-logo-mgjrpg02-v06-source"
+    },
+    {
+      "stableId": "game-logo",
+      "sourceRunId": "batch-24-game-logo-v03-candidate-b-cleanup-edit-02",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sourceSha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "runtimePath": "public/assets/mgjrpg-02/brand/game-logo-v06-front-door-512-r01.webp",
+      "runtimeSha256": "801eb4958427dba607ec4e774310e96829e303eb8b1656e68795081615abdacb",
+      "runtimeBytes": 201896,
+      "catalogueRecord": "game-logo-mgjrpg02-v06-source"
+    }
+  ],
+  "processingAuthority": {
+    "script": "scripts/art_pipeline/mgjrpg02_plan03_r2_publish.py",
+    "recipe": "mgjrpg-02-plan03-r2-alpha-derivative-r01",
+    "input": "immutable uniform-green-matte generator originals",
+    "operations": [
+      "flat-impossible-matte alpha unblend",
+      "matte-only residual-spill rejection",
+      "small alpha-component cleanup",
+      "hidden-RGB edge dilation",
+      "Lanczos resize",
+      "lossless exact WebP encode"
+    ],
+    "generativeTransparencyUsed": false,
+    "rejectedTrialRepositoryFiles": 0,
+    "deterministicRebuild": "5/5 files byte-identical"
+  },
+  "catalogue": {
+    "activeBefore": 102,
+    "activeAfter": 105,
+    "dormantBefore": 47,
+    "dormantAfter": 44,
+    "totalEntries": 149,
+    "activePointers": {
+      "home-hero-splash": "/assets/mgjrpg-02/brand/home-hero-splash-v02-front-door-1024-r01.webp",
+      "game-logo-default": "/assets/mgjrpg-02/brand/game-logo-v06-front-door-1024-r01.webp",
+      "game-logo-compact": "/assets/mgjrpg-02/brand/game-logo-v06-front-door-512-r01.webp"
+    },
+    "fallbacks": {
+      "home-hero-splash": "/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp",
+      "game-logo-default": "/assets/mgjrpg-02/brand/game-logo-v05-front-door-1024-r01.webp",
+      "accessibleText": "Maze so Puzzle"
+    }
+  },
+  "performance": {
+    "baseline": "accepted Plan 03-R1 checkpoint 5af5ccb092cb7ed8f5b080dd5572eadcef217dc3",
+    "runtimeAssets": {
+      "before": {"count": 295, "encodedBytes": 100404905},
+      "after": {"count": 298, "encodedBytes": 101932793},
+      "delta": {"count": 3, "encodedBytes": 1527888}
+    },
+    "decodedImageBytesUpperBoundDelta": 6641664,
+    "bundle": {
+      "javascriptRawBytes": 479260,
+      "javascriptGzip9Bytes": 130462,
+      "javascriptGzip9Delta": 105,
+      "cssRawBytes": 137116,
+      "cssGzip9Bytes": 29341,
+      "cssGzip9Delta": 27
+    },
+    "dist": {
+      "before": {"count": 300, "encodedBytes": 101085696},
+      "after": {"count": 303, "encodedBytes": 102614173},
+      "delta": {"count": 3, "encodedBytes": 1528477}
+    },
+    "allocationId": "art-plan03-r2-generated-wordmark-and-home-composition",
+    "isolatedGate": "pass: JS 130462/130668; CSS 29341/29427; public 101996707/101996707"
+  },
+  "automated": [
+    {"command": "python scripts/art_pipeline/mgjrpg02_plan03_r2_publish.py --check", "result": "pass", "detail": "two transparent masters and three runtime derivatives reproduce byte-for-byte"},
+    {"command": "npm run art:test", "result": "pass", "detail": "111 tests passed, including six Plan 03-R2 source/alpha/catalogue/rollback tests"},
+    {"command": "npm run art:check", "result": "pass-with-historical-warnings", "detail": "0 errors; 420 unchanged historical warnings; no R2 alpha-border, provenance, rights, prompt or source warning"},
+    {"command": "npx vitest run src/artCatalog.test.ts src/assets.test.ts", "result": "pass", "detail": "29 focused catalogue/resolver tests passed"},
+    {"command": "npm run check (isolated exact R2 candidate)", "result": "pass", "detail": "35 test files; 409 tests; TypeScript and production build passed"},
+    {"command": "npm run perf:check (isolated exact R2 candidate)", "result": "pass", "detail": "11 scenarios, nine owners and three evidence files; all exact byte limits passed"},
+    {"command": "npm run perf:browser", "result": "pass", "detail": "production-preview browser baseline cohort passed"},
+    {"command": "npm run check:desktop", "result": "pass", "detail": "Cargo/Tauri desktop compilation passed"},
+    {"command": "npx tauri build --no-bundle", "result": "pass", "detail": "native release executable built"},
+    {"command": "hidden native launch smoke", "result": "pass", "detail": "process was responsive and exposed a non-zero native window handle before controlled termination"}
+  ],
+  "sharedTreeExceptions": [
+    {
+      "command": "npm run check",
+      "result": "external-failure",
+      "owner": "concurrent OST integration",
+      "detail": "408/409 tests passed; src/music.test.ts reports 13 legacy root MP3 paths removed by the concurrent OST working tree. The isolated exact R2 candidate passes all 409 tests."
+    },
+    {
+      "command": "npm run perf:check",
+      "result": "external-failure",
+      "owner": "concurrent OST integration",
+      "detail": "shared public bytes are 150,991,349 versus the R2 limit 101,996,707; the exact 48,994,642-byte difference is the concurrent six-pool OST delta. The isolated exact R2 candidate passes at the exact limit."
+    }
+  ],
+  "browser": {
+    "server": "production preview at http://127.0.0.1:4176",
+    "viewports": ["1920x1080", "1280x720", "1194x834", "1024x768", "960x540", "844x390", "568x320"],
+    "assertions": {
+      "brokenVisibleImages": 0,
+      "documentOverflow": false,
+      "accessibleHeading": "Maze so Puzzle",
+      "removedEyebrowAbsent": true,
+      "removedSubtitleAbsent": true,
+      "responsiveLogoSources": "1024 and 512 renditions selected by viewport/DPR",
+      "titleControls": "Choose a maze dialog opened and closed; Sound changed decisively between Turn sound off and Turn sound on",
+      "creamOverlayPresent": false,
+      "heroPlacement": "transparent bottom-right layer over the road/path"
+    },
+    "evidenceDirectory": "artifacts/art-proofs/mgjrpg-02/plan03-r2-home/",
+    "representativeScreenshots": ["title-home-1280x720-final.png", "title-home-568x320-final.png"]
+  },
+  "native": {
+    "executable": "src-tauri/target/release/maze-so-puzzle.exe",
+    "bytes": 159362560,
+    "sha256": "c113568a2635cbfc99e3e2bd41c5a04cc45d72a278d5a619eeb321473426f10e",
+    "launchSmoke": "responsive process with non-zero MainWindowHandle"
+  },
+  "retirement": {
+    "newRollbackHolds": 3,
+    "ledgerCandidateCount": 127,
+    "deletedOrMoved": 0,
+    "plan12Eligible": 0
+  },
+  "externalGates": [
+    "Physical iPad and television display inspection",
+    "Signed installer/package and OS shell inspection"
+  ]
+}

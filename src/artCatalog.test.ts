@@ -389,13 +389,13 @@ describe("art catalog", () => {
     expect(new Set(Object.values(ACHIEVEMENT_ART).map((entry) => entry.src)).size).toBe(15);
   });
 
-  it("keeps the current front door to one active background and Plan-01-ready dormant layers", () => {
+  it("publishes the approved layered front door through active semantic entries", () => {
     expect(FRONT_DOOR_ART.titleEnvironment.runtimeStatus).toBe("active");
     expect(FRONT_DOOR_ART.titleEnvironment.loadingPhase).toBe("title-critical");
     expect(FRONT_DOOR_ART.titleEnvironment.fallbackSrc).toBe("/assets/title-background-v1.webp");
-    expect(FRONT_DOOR_ART.homeHeroSplash.runtimeStatus).toBe("dormant");
-    expect(FRONT_DOOR_ART.gameLogo.default.runtimeStatus).toBe("dormant");
-    expect(FRONT_DOOR_ART.gameLogo.compact.runtimeStatus).toBe("dormant");
+    expect(FRONT_DOOR_ART.homeHeroSplash.runtimeStatus).toBe("active");
+    expect(FRONT_DOOR_ART.gameLogo.default.runtimeStatus).toBe("active");
+    expect(FRONT_DOOR_ART.gameLogo.compact.runtimeStatus).toBe("active");
     expect(FRONT_DOOR_ART.gameLogo.default.fallbackText).toBe("Maze so Puzzle");
     expect(FRONT_DOOR_ART.appIconAme.runtimeStatus).toBe("active");
   });
@@ -442,8 +442,8 @@ describe("art catalog", () => {
 
     expect(MGJRPG02_ART).toHaveProperty("ame");
     expect(generatedSources.size).toBe(149);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(102);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(47);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(105);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(44);
     expect(catalogueSources).toEqual(generatedSources);
   });
 

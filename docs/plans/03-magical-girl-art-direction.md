@@ -1916,3 +1916,32 @@ native Tauri build/launch smoke. The shared tree's only failures are the
 concurrent OST transition recorded in the validation report; the isolated R1
 candidate passes. The commit containing that report is the completed bounded
 Plan 03-R1 publication checkpoint.
+
+## 24. Plan 03-R2 generated wordmark and home composition — 2026-09-04
+
+Human decision v10 is a narrow forward correction on accepted R1 rollback
+anchor `5af5ccb092cb7ed8f5b080dd5572eadcef217dc3`. It does not reopen Ame,
+friends, enemies, terrain, icons, mechanics, or the `mgjrpg-02` recipe. It
+promotes exactly two illustrated sources: Batch 24 generated Logo Candidate B
+and Batch 26 Home Splash v02 with the friendly green-tea skeleton enlarged in
+the same lower-left position.
+
+Both immutable originals retain their authored flat green extraction matte.
+The R2 publisher removes that matte deterministically and creates two
+transparent masters plus three right-sized lossless WebPs. No generated
+transparency image, edge repaint, or edit-of-edit is accepted. The mapping is
+`docs/source-assets/publication/mgjrpg-02-plan03-r2-home-composition-map.json`.
+
+The existing combined title/home route now layers the active environment,
+responsive v06 wordmark, and v02 hero group. The left cream overlay is removed;
+the hero occupies the bottom-right path area; the visible text lines “A gentle
+adventure for Ame” and “For Ame to Solve!” are removed so the wordmark renders
+larger. The exact live `Maze so Puzzle` heading remains screen-reader text. This
+is a Human-authorized generated-lettering exception to the former controlled-
+v05 preference, not a retroactive alteration of R1 evidence.
+
+R2 adds three public files / 1,527,888 encoded bytes / 6,641,664 decoded-RGBA
+bytes as a per-file upper-bound sum. A named allocation covers the measured
++105 gzip-9 JavaScript bytes and +27 gzip-9 CSS bytes. Hero v01 and both v05 logo
+derivatives are superseded rollback holds; none is moved, archived, or deleted.
+Physical iPad and TV review remains a release-hardware gate.

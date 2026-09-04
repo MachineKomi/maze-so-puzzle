@@ -1025,3 +1025,28 @@ lessons, source paths, adaptation decisions, and explicit originality boundary
 are recorded in
 `docs/research/2026-09-03-ppba-art-craft-synthesis.md`. It is related-project
 production evidence, not third-party visual canon or permission to reuse assets.
+
+### Plan 03-R2 front-door composition exception — Human-approved (2026-09-04)
+
+Forward decision v10 promotes two exact green-matte sources: Batch 24 generated
+Logo Candidate B and Batch 26 Home Splash v02 with the friendly tea skeleton
+enlarged in place. Their designs are locked. Transparency is delivery
+processing, not an illustration pass: use only
+`flat-impossible-matte-alpha-unblend-v1`, matte-only edge decontamination,
+registration, resize, and encoding on the immutable originals. A generative
+transparency edit is forbidden because it creates an edit-of-edit texture and
+changes approved pixels.
+
+The visible wordmark is a deliberate Human exception to the prior controlled-
+glyph preference. Its exact displayed reading has been verified as **Maze so
+Puzzle**, with lowercase `so`, no subtitle, and no yellow route line. The app
+must retain that exact phrase as live accessible text even though the visual
+heading uses the approved illustration. The prior controlled v05 wordmark
+remains rollback evidence, not active visual authority.
+
+On the combined title/home route, the environment is the only opaque layer.
+The wordmark sits at upper left; the transparent Ame-and-friends group sits at
+bottom right over the path. Do not add a cream fade over the environment. Do
+not show the redundant lines “A gentle adventure for Ame” or “For Ame to
+Solve!”; the freed area belongs to a larger wordmark. Keep the welcome copy and
+controls live, responsive, and visually clear of both art layers.

@@ -53,6 +53,20 @@ growth and +845 gzip-9 JavaScript bytes. The shared inventory also reports the
 separate in-progress OST relocation; that unrelated growth is neither assigned
 to art nor treated as a clean R1 baseline.
 
+## Plan 03-R2 home composition publication
+
+Human decision v10 promotes the exact generated Logo B and larger-tea-skeleton
+Home Splash v02 through deterministic green-matte extraction. The existing
+combined title/home route now uses the illustrated `Maze so Puzzle` wordmark
+and transparent bottom-right hero over the active environment without the
+former cream overlay. Redundant eyebrow/subtitle copy is removed; the exact
+screen-reader heading remains.
+
+R2 adds three versioned runtime files / 1,527,888 encoded bytes / 6,641,664
+decoded bytes as a non-concurrent upper-bound sum. Hero v01 and both controlled
+logo v05 sizes remain rollback holds. No generative transparency output, old
+asset deletion, new route, or gameplay change is included.
+
 ## Current Plan 03 static-art publication
 
 On 2026-09-04 the Human closed the art-review and completeness gates and

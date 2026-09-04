@@ -889,10 +889,9 @@ export interface FrontDoorArtReference extends ArtReference {
 }
 
 /**
- * Front-door delivery authority. Only the environment is active in the current
- * combined title/home route. The layered hero and exact wordmark stay dormant
- * until Plan 01 supplies their responsive consumer; they are never preloaded by
- * merely importing this catalogue.
+ * Front-door delivery authority. The current combined title/home route loads
+ * one environment, one responsive wordmark rendition and the hero group. Mere
+ * catalogue import still performs no eager preload.
  */
 export const FRONT_DOOR_ART = {
   titleEnvironment: MGJRPG02_ART["title-environment"],
@@ -904,10 +903,10 @@ export const FRONT_DOOR_ART = {
   appIconAme: MGJRPG02_ART["app-icon-ame"],
 } as const satisfies {
   readonly titleEnvironment: FrontDoorArtReference & { readonly runtimeStatus: "active" };
-  readonly homeHeroSplash: FrontDoorArtReference & { readonly runtimeStatus: "dormant" };
+  readonly homeHeroSplash: FrontDoorArtReference & { readonly runtimeStatus: "active" };
   readonly gameLogo: {
-    readonly default: FrontDoorArtReference & { readonly runtimeStatus: "dormant" };
-    readonly compact: FrontDoorArtReference & { readonly runtimeStatus: "dormant" };
+    readonly default: FrontDoorArtReference & { readonly runtimeStatus: "active" };
+    readonly compact: FrontDoorArtReference & { readonly runtimeStatus: "active" };
   };
   readonly appIconAme: FrontDoorArtReference & { readonly runtimeStatus: "active" };
 };

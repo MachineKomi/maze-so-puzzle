@@ -1,0 +1,230 @@
+{
+  "schema": "maze-art-plan03-r2-publication/v1",
+  "publicationId": "mgjrpg-02-plan03-r2-home-composition-v01",
+  "recordedOn": "2026-09-04",
+  "derivativeRecipe": "mgjrpg-02-plan03-r2-alpha-derivative-r01",
+  "encoderEnvironment": {
+    "python": "3.14.3",
+    "pillow": "12.2.0",
+    "numpy": "2.5.2",
+    "libwebp": "1.6.0",
+    "zlib": "1.3.1.zlib-ng"
+  },
+  "entries": [
+    {
+      "stableId": "home-hero-splash",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-larger-tea-skeleton-generator-original.png",
+      "sourceSha256": "f2a2388641a9aad2e06422e6b954526ad2767ae624cd3d23ee1370f2cd941194",
+      "sourceBytes": 2198180,
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v02-front-door-1024-r01.webp",
+      "sha256": "6c2e9c02dbe3c9db17dc9733b31f9997424329a1b81fd5c6b63a78f69c7bb680",
+      "bytes": 663752,
+      "width": 1024,
+      "height": 768,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "colorMetadata": [],
+      "profile": "front-door-hero-1024",
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "displayRangeCssPx": [
+        320,
+        1024
+      ],
+      "processing": {
+        "matte": {
+          "rgb": [
+            7,
+            233,
+            19
+          ],
+          "channelStd": [
+            1.2501,
+            0.932,
+            1.92
+          ],
+          "maximumChannelStd": 1.92,
+          "p99EuclideanResidual": 6.4807,
+          "cornerSamplePixels": 11664
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 96,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 7472,
+          "fallbackBoundaryPixels": 860,
+          "exactBlackVisiblePixelsNormalized": 1166,
+          "sourceDistancePercentiles": {
+            "50": 141.764,
+            "90": 302.136,
+            "95": 311.262,
+            "99": 326.415
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 695
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.06542969,
+          0.02734375,
+          0.87011719,
+          0.94270833
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 32679
+      }
+    },
+    {
+      "stableId": "game-logo-1024",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sourceSha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "sourceBytes": 2002922,
+      "path": "public/assets/mgjrpg-02/brand/game-logo-v06-front-door-1024-r01.webp",
+      "sha256": "9737321234be89d5eb3dc3d9556f8bb17214a437d3b451c24e088b00cda9893e",
+      "bytes": 662240,
+      "width": 1024,
+      "height": 683,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 2797568,
+      "colorMetadata": [],
+      "profile": "front-door-wordmark-1024",
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "displayRangeCssPx": [
+        257,
+        1024
+      ],
+      "processing": {
+        "matte": {
+          "rgb": [
+            5,
+            223,
+            12
+          ],
+          "channelStd": [
+            1.2573,
+            1.5468,
+            2.4508
+          ],
+          "maximumChannelStd": 2.4508,
+          "p99EuclideanResidual": 7.8102,
+          "cornerSamplePixels": 10404
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 96,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2577,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 213.657,
+            "90": 323.88,
+            "95": 329.076,
+            "99": 344.433
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 1
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.02734375,
+          0.02635432,
+          0.9453125,
+          0.94582723
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 13043
+      }
+    },
+    {
+      "stableId": "game-logo-512",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sourceSha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "sourceBytes": 2002922,
+      "path": "public/assets/mgjrpg-02/brand/game-logo-v06-front-door-512-r01.webp",
+      "sha256": "801eb4958427dba607ec4e774310e96829e303eb8b1656e68795081615abdacb",
+      "bytes": 201896,
+      "width": 512,
+      "height": 341,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 698368,
+      "colorMetadata": [],
+      "profile": "front-door-wordmark-512",
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "displayRangeCssPx": [
+        96,
+        256
+      ],
+      "processing": {
+        "matte": {
+          "rgb": [
+            5,
+            223,
+            12
+          ],
+          "channelStd": [
+            1.2573,
+            1.5468,
+            2.4508
+          ],
+          "maximumChannelStd": 2.4508,
+          "p99EuclideanResidual": 7.8102,
+          "cornerSamplePixels": 10404
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 96,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2577,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 213.657,
+            "90": 323.88,
+            "95": 329.076,
+            "99": 344.433
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 1
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.02539062,
+          0.02346041,
+          0.94921875,
+          0.95307918
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 5291
+      }
+    }
+  ],
+  "totals": {
+    "runtimeFiles": 3,
+    "runtimeEncodedBytes": 1527888,
+    "runtimeDecodedBytesUpperBound": 6641664
+  },
+  "runtimeIntent": {
+    "home-hero-splash": "bottom-right title/home composition layer",
+    "game-logo": "visual wordmark replacing display heading while retaining an accessible live h1"
+  },
+  "rollback": {
+    "checkpoint": "5af5ccb092cb7ed8f5b080dd5572eadcef217dc3",
+    "paths": [
+      "public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp",
+      "public/assets/mgjrpg-02/brand/game-logo-v05-front-door-1024-r01.webp",
+      "public/assets/mgjrpg-02/brand/game-logo-v05-front-door-512-r01.webp"
+    ]
+  }
+}

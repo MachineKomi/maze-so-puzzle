@@ -39,6 +39,20 @@ Earlier evidence is kept as historical release evidence.
   separately owned and recorded. Commit/push evidence is the checkpoint that
   contains the R1 validation report.
 
+## Unreleased Plan 03-R2 home composition
+
+- [x] Record Human decision v10 for the exact Batch 24 generated Logo B and
+  Batch 26 larger-tea-skeleton Home Splash v02 sources.
+- [x] Extract alpha programmatically from each source's uniform green matte;
+  reject generative transparency edits and preserve the immutable source pixels.
+- [x] Publish three versioned responsive derivatives and activate their typed
+  front-door pointers atomically, retaining v01/v05 rollback files.
+- [x] Render the illustrated logo and transparent bottom-right hero on the
+  existing combined route; remove the cream overlay and redundant visible
+  eyebrow/subtitle while retaining the exact accessible heading.
+- [ ] Repeat physical iPad and television review; browser viewports and native
+  desktop checks are automation evidence, not substitutes for display hardware.
+
 ## Unreleased Plan 03 static-art publication
 
 - [x] The Human's 2026-09-04 continuation closes the art-review and completeness

@@ -338,13 +338,18 @@ lettering never becomes exact wordmark authority.
 Plan 03-R1 supersedes that last source-only snapshot for the explicitly approved
 front-door subset. Human decision v9 and
 `docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json` bind the
-seven premium navigation icons, selected title environment, Plan-01-ready home
-hero/wordmark, and Ame platform icon to versioned derivatives. `FRONT_DOOR_ART`
-holds active-versus-dormant loading metadata; `ASSETS.titleBackground` is the
-only current route seam changed and retains the legacy fallback. The logo's
-exact glyph edges are deterministic Fredoka/OFL masks, not ImageGen lettering.
-Neither importing the catalogue nor opening a menu preloads the dormant hero or
-wordmarks.
+seven premium navigation icons, selected title environment, initial dormant
+hero/wordmark, and Ame platform icon to versioned derivatives. Forward Human
+decision v10 then activates the generated v06 wordmark and larger-skeleton v02
+hero on the existing combined title/home route. The v10 publication map records
+their deterministic green-matte extraction and previous-path rollback.
+
+`FRONT_DOOR_ART` is the typed authority for the three active title layers.
+`ASSETS` projects one responsive logo rendition, one hero, and the environment;
+catalogue import itself performs no preload. The visual logo is aria-hidden and
+the exact live `Maze so Puzzle` h1 remains available to assistive technology.
+The generated-lettering promotion is an explicit Human exception; controlled
+v05 remains intact as rollback. The title composition adds no route or screen.
 
 Lifecycle is intentionally three-dimensional: runtime status (`active`,
 `dormant`, `deprecated`, `superseded`, `source-only`), source status

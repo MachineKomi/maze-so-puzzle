@@ -1,0 +1,76 @@
+{
+  "schema": "maze-art-runtime-publication/v1",
+  "publicationId": "mgjrpg-02-batch-26-plan03-r2-home-composition",
+  "revision": 1,
+  "status": "published",
+  "recordedOn": "2026-09-04",
+  "purpose": "Publish the Human-approved larger-tea-skeleton Home Splash and promoted generated Logo B on the existing combined title/home route.",
+  "rollbackAnchor": "5af5ccb092cb7ed8f5b080dd5572eadcef217dc3",
+  "decisionEvidence": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v10/human-decision.json",
+    "sha256": "7430178da2cbacbe8ca07e5a0540bdff0d9b34c3a0504d4851e0825039c224c5"
+  },
+  "promptEvidence": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/PROMPTS.md",
+    "sha256": "c4d01d4ae8b8b183e2a3fdc8e11e6f998e4f2dd1c42fbc120e9695cca3c6a261"
+  },
+  "approvedRuns": [
+    {
+      "runId": "batch-26-home-splash-v02-larger-tea-skeleton",
+      "outputId": "exec-bd502011-9d01-4679-9894-71f8ce07072a.png",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-larger-tea-skeleton-generator-original.png",
+      "sha256": "f2a2388641a9aad2e06422e6b954526ad2767ae624cd3d23ee1370f2cd941194",
+      "bytes": 2198180,
+      "lineage": "one bounded object-scale edit of approved Home Splash B; not an edit of an edit"
+    },
+    {
+      "runId": "batch-24-game-logo-v03-candidate-b-cleanup-edit-02",
+      "outputId": "exec-ead7cf0f-5d90-4ebc-9241-2474e49b1510.png",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "bytes": 2002922,
+      "lineage": "carried-forward Human-approved Batch 24 depth-one cleanup source"
+    }
+  ],
+  "derivativeRecipe": {
+    "id": "mgjrpg-02-plan03-r2-alpha-derivative-r01",
+    "script": "scripts/art_pipeline/mgjrpg02_plan03_r2_publish.py",
+    "mode": "flat-impossible-matte-alpha-unblend-v1",
+    "generativeRepaint": false,
+    "editOfEdit": false,
+    "resultMap": "docs/source-assets/publication/mgjrpg-02-plan03-r2-home-composition-map.json"
+  },
+  "transparentMasters": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-transparent-master.png",
+      "sha256": "3c3ba0a9a1a2b20310e2774d45d7bef900abfe558c3abccaadc418fd9d628a25",
+      "bytes": 1751194
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/game-logo-v06-transparent-master.png",
+      "sha256": "012eb71ae6cb832e1d2d0b679b44433ef73ed7418d54f3190b254093e1bd8103",
+      "bytes": 1836450
+    }
+  ],
+  "runtimeImpact": {
+    "runtimeFileCount": 3,
+    "runtimeEncodedBytes": 1527888,
+    "runtimeDecodedBytesUpperBound": 6641664,
+    "cataloguePointerChanges": 3
+  },
+  "rejectedProcessing": {
+    "kind": "generative-transparency-edit",
+    "repositoryFiles": 0,
+    "runtimeAuthority": false,
+    "reason": "Transparency trials were rejected and never ingested; prepared green mattes are removed programmatically."
+  },
+  "rollback": {
+    "checkpoint": "5af5ccb092cb7ed8f5b080dd5572eadcef217dc3",
+    "restorePaths": [
+      "public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp",
+      "public/assets/mgjrpg-02/brand/game-logo-v05-front-door-1024-r01.webp",
+      "public/assets/mgjrpg-02/brand/game-logo-v05-front-door-512-r01.webp"
+    ],
+    "supersededFilesDeleted": 0
+  }
+}

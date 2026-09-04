@@ -5,7 +5,7 @@
   "id": "home-hero-splash",
   "artVersion": 1,
   "family": "brand",
-  "runtimeStatus": "dormant",
+  "runtimeStatus": "superseded",
   "sourceStatus": "source-backed",
   "approvalStatus": "approved",
   "validationProfile": "strict-v2",
@@ -100,7 +100,7 @@
       "decodedBytesUpperBound": 3145728,
       "profile": "front-door-hero-1024",
       "derivativeRevision": 1,
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "superseded",
       "loadingPhase": "plan01-front-door-on-demand",
       "encoder": {
         "name": "Pillow WebP",
@@ -178,7 +178,7 @@
     "evidenceSha256": "6e467cea1f22303faa2e75ae13b878c7b3ea8489a1b0e1b916c12e968770de3b"
   },
   "knownUnknowns": [
-    "Plan 01 owns the responsive layered front-door consumer; this asset remains dormant and is not preloaded."
+    "Superseded by Human-approved v02 with a larger friendly tea skeleton; retained as the exact rollback source and runtime derivative until Plan 12."
   ],
   "rights": {
     "originClaim": "Created for Maze so Puzzle from project-authored prompts and approved internal references; no named franchise, living artist or proprietary composition was requested.",
@@ -187,6 +187,6 @@
     "reviewedBy": "Human project author"
   },
   "rollback": {
-    "method": "Remove the dormant Plan 01 pointer; the current combined title route continues using its single background."
+    "method": "Restore the home-hero-splash catalogue pointer to public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp."
   }
 }

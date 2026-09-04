@@ -91,10 +91,10 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-impleme
   separate overlay text/logo semantics. The current `title` surface already
   serves as Home: assign the illustrations distinct background/foreground or
   responsive roles, or explicitly reserve one, without adding a screen merely
-  to show both. Treat generated lettering as concept-only until the exact
-  “Maze so Puzzle” wordmark is reconstructed through controlled local type or
-  vector/raster lettering, passes spelling/legibility/optical checks and receives
-  Human approval. Plan 11 later audits rather than automatically replaces that
+  to show both. Plan 03-R2 Human decision v10 explicitly promotes the approved
+  generated wordmark as the visual-title exception after exact spelling,
+  legibility and responsive checks; retain exact `Maze so Puzzle` as live
+  accessible text. Plan 11 later audits rather than automatically replaces that
   set. After Plan-01 acceptance, produce the
   preferred Family Preview 1 unless the manager records a red or disproportionate
   packaging gate under `PT-20260903-26`.
@@ -1062,9 +1062,10 @@ Work:
 - Integrate the approved title illustration, home splash/hero and brand mark into
   distinct purposeful roles on the existing title/home route, or explicitly
   reserve an asset if a second placement adds clutter. Use responsive/focal/copy-
-  safe variants without distortion or double-loading. Keep the exact “Maze so
-  Puzzle” title as controlled application-rendered lettering and accessible live
-  text; generated lettering remains concept evidence only.
+  safe variants without distortion or double-loading. Keep the exact `Maze so
+  Puzzle` title as accessible live text. Human decision v10 makes the approved
+  generated v06 wordmark the current visual-title authority; controlled v05
+  remains the versioned rollback rather than the active display.
 - Make every earned Adventure Book achievement a semantic, input-parity detail
   action. Open a focused celebration surface with the correct on-demand
   presentation-scale sticker, its name and earned description; keep locked

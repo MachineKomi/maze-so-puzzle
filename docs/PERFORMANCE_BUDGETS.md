@@ -280,6 +280,38 @@ requires its audio owner's separate integration and budget decision. R1 keeps
 every prior navigation icon and title background in place for exact rollback;
 Plan 12 alone may remove them after its copy-first external-backup gate.
 
+## Plan 03-R2 generated wordmark and home-composition allocation
+
+Plan 03-R2 builds on accepted rollback anchor
+`5af5ccb092cb7ed8f5b080dd5572eadcef217dc3`. It promotes the exact
+Human-approved generated wordmark and larger-tea-skeleton home group into the
+existing combined title/home route. The two immutable sources retain their flat
+green extraction matte; `scripts/art_pipeline/mgjrpg02_plan03_r2_publish.py`
+removes that matte and creates the transparent masters and right-sized WebP
+derivatives without generative repainting.
+
+| Deterministic measure | Accepted Plan 03-R1 | Plan 03-R2 | Delta | R2 allocation |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, gzip level 9 | 130,357 B | 130,462 B | +105 B | 128 B |
+| CSS, gzip level 9 | 29,314 B | 29,341 B | +27 B | 64 B |
+| New versioned public files | 0 | 3 / 1,527,888 B | +3 / +1,527,888 B | 1,527,888 B |
+| New decoded-image upper bound | 0 | 6,641,664 B | +6,641,664 B | Reported residency risk |
+| Source-only generator original | 0 | 1 / 2,198,180 B | +1 / +2,198,180 B | Source-only |
+| Deterministic transparent masters | 0 | 2 / 3,587,644 B | +2 / +3,587,644 B | Source-only |
+
+The new exact limits are 130,668 gzip-9 JavaScript bytes, 29,427 gzip-9 CSS
+bytes and 101,996,707 public bytes. The title route requests one responsive logo
+rendition plus the hero group and retained environment; it does not preload both
+logo sizes. The visible lines “A gentle adventure for Ame” and “For Ame to
+Solve!” are removed so the approved visual wordmark can be larger, while the
+exact accessible heading remains live text.
+
+The shared worktree additionally contains the separately owned OST relocation.
+Its exact +48,994,642 public-byte delta remains outside this art allocation and
+continues to fail the shared performance gate until the audio owner lands its
+own measured allocation. No superseded art file is removed: hero v01 and both
+controlled-logo v05 sizes remain Plan 12 rollback candidates.
+
 ## Current resource inventory
 
 The reviewed static inventory is
