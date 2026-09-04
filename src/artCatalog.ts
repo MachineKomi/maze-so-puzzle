@@ -68,7 +68,11 @@ export type ArtGeometryClass =
   | "ground-overlay"
   | "icon"
   | "periodic-tile"
-  | "portrait";
+  | "portrait"
+  | "background"
+  | "hero-splash"
+  | "brand-wordmark"
+  | "app-icon";
 
 export interface ArtGeometry {
   readonly class: ArtGeometryClass;
@@ -870,6 +874,43 @@ export const NAVIGATION_ART = {
   "nav-muted": MGJRPG02_ART["nav-muted"],
   "nav-restart": MGJRPG02_ART["nav-restart"],
 } as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "active" }>>;
+
+export interface FrontDoorArtReference extends ArtReference {
+  readonly id: string;
+  readonly artVersion: number;
+  readonly runtimeStatus: RuntimeArtStatus;
+  readonly loadingPhase: "title-critical" | "plan01-front-door-on-demand" | "platform-shell";
+  readonly displayRangeCssPx: readonly [minimum: number, maximum: number];
+  readonly fit?: "cover" | "contain";
+  readonly focalPoint?: NormalizedPoint;
+  readonly copySafeRegion?: NormalizedRect;
+  readonly fallbackSrc?: string;
+  readonly fallbackText?: string;
+}
+
+/**
+ * Front-door delivery authority. Only the environment is active in the current
+ * combined title/home route. The layered hero and exact wordmark stay dormant
+ * until Plan 01 supplies their responsive consumer; they are never preloaded by
+ * merely importing this catalogue.
+ */
+export const FRONT_DOOR_ART = {
+  titleEnvironment: MGJRPG02_ART["title-environment"],
+  homeHeroSplash: MGJRPG02_ART["home-hero-splash"],
+  gameLogo: {
+    default: MGJRPG02_ART["game-logo-1024"],
+    compact: MGJRPG02_ART["game-logo-512"],
+  },
+  appIconAme: MGJRPG02_ART["app-icon-ame"],
+} as const satisfies {
+  readonly titleEnvironment: FrontDoorArtReference & { readonly runtimeStatus: "active" };
+  readonly homeHeroSplash: FrontDoorArtReference & { readonly runtimeStatus: "dormant" };
+  readonly gameLogo: {
+    readonly default: FrontDoorArtReference & { readonly runtimeStatus: "dormant" };
+    readonly compact: FrontDoorArtReference & { readonly runtimeStatus: "dormant" };
+  };
+  readonly appIconAme: FrontDoorArtReference & { readonly runtimeStatus: "active" };
+};
 
 export const ACHIEVEMENT_ART = {
   "first-star": MGJRPG02_ART["reward-trail-sticker"],

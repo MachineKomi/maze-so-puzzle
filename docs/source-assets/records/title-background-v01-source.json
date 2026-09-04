@@ -5,7 +5,7 @@
   "id": "title-background",
   "artVersion": 1,
   "family": "story",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "partial",
   "approvalStatus": "historical",
   "validationProfile": "legacy-observed",
@@ -41,7 +41,7 @@
       "decodedBytesUpperBound": 6293408,
       "profile": "legacy-runtime",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "title-or-navigation",
       "encoder": {
         "name": "unknown-historical-encoder",

@@ -12,6 +12,9 @@ than promising long-term save or API compatibility.
   friends, enemies, weapons, cages, locks, portals, pickups, treasures, terrain,
   hazards, navigation icons, and fifteen glossy achievement stickers, all with
   versioned runtime files and reconstructable provenance.
+- The approved early front-door set: an environment-only title background,
+  catalogue-ready transparent home hero and exact `Maze so Puzzle` wordmark,
+  plus Ame-face Web/Windows/Tauri application icons.
 - Dormant catalogue-ready art for future mythic friends, guardians, Mimic chest
   states, equipment, Science pickups, teleporter pads, and floor spikes. These
   assets are not placed, preloaded, or given gameplay rules yet.
@@ -32,8 +35,10 @@ than promising long-term save or API compatibility.
   compatibility alias for historical content. Held weapons use measured
   per-weapon grip, scale, rotation, and layer registration rather than one
   universal placement.
-- Muted controls now show their dedicated simplified muted-speaker sticker.
-  Existing title/platform branding remains unchanged for Plan 11 review.
+- Navigation now uses the cohesive seven-icon premium utility-sticker family;
+  Sound and Muted retain a decisive non-colour-only state difference. The title
+  environment and Ame platform icon are active, while Plan 01 still owns the
+  layered hero/wordmark composition and live semantic heading.
 - Chapter 1 is now a complete 6×6 whole-board movement lesson. Later campaign
   edits reduce ordinary corridor endurance, while Chapters 13 and 15 become
   compact portal-inference puzzles.

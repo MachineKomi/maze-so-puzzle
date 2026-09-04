@@ -243,6 +243,42 @@ future catalogue, is fully measured rather than hidden, and retains versioned
 rollback files. Later Plan 12 removal may recover superseded delivery weight
 only after every consumer and rollback hold is cleared.
 
+## Plan 03-R1 front-door and premium-utility publication allocation
+
+Plan 03-R1 builds on the accepted Plan 03 publication and source-review anchors
+`28946cbb04f45cb21cd51626914267ff4f71c375` and
+`d70c9c360683d2ed8f4f7d1cd172254bbda7b559`. Its deterministic publication
+report is
+`docs/source-assets/publication/mgjrpg-02-plan03-r1-publication-report.json`;
+the measured working-tree inventory is
+`C:\Users\hellb\AppData\Local\Temp\maze-plan03-r1-inventory.json`.
+
+| Deterministic measure | Accepted Plan 03 publication | Plan 03-R1 | Delta | R1 allocation |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, raw | 474,820 B | 478,754 B | +3,934 B | Report-only |
+| JavaScript, gzip level 9 | 129,512 B | 130,357 B | +845 B | 900 B |
+| JavaScript, Brotli | 110,076 B | 110,732 B | +656 B | Review gate |
+| CSS, raw | 137,053 B | 137,053 B | 0 B | 0 B |
+| CSS, gzip level 9 | 29,314 B | 29,314 B | 0 B | 0 B |
+| New versioned public files | 0 | 12 / 1,708,073 B | +12 / +1,708,073 B | 1,708,073 B |
+| New decoded-image upper bound | 0 | 14,636,960 B | +14,636,960 B | Reported residency risk |
+| Platform-icon outputs | 0 | 19 / 3,149,824 B | +19 / +3,149,824 B | Package/source report-only |
+| Controlled source master | 0 | 1 / 377,571 B | +1 / +377,571 B | Source-only |
+
+The active cutover is the seven-icon navigation family, environment-only title
+background, Web favicon, and Tauri icon bundle. The two exact wordmark sizes and
+transparent home hero are catalogued for a named Plan 01 consumer but remain
+dormant and unpreloaded. Adding this allocation raises the deterministic limits
+to 130,540 gzip-9 JavaScript bytes, 29,363 gzip-9 CSS bytes, and 100,468,819
+public bytes. The Plan 03-R1 code/art-only candidate measures 130,357 / 29,314 /
+100,468,819 and passes those limits.
+
+The shared worktree inventory also sees an unrelated in-progress OST relocation
+and therefore reports 149,463,461 public bytes. That +48,994,642-byte working
+tree delta is not attributed to R1, is not hidden by this allocation, and still
+requires its audio owner's separate integration and budget decision. R1 keeps
+every prior navigation icon and title background in place for exact rollback;
+Plan 12 alone may remove them after its copy-first external-backup gate.
 
 ## Current resource inventory
 

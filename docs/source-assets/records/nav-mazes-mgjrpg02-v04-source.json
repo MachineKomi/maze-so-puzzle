@@ -5,7 +5,7 @@
   "id": "nav-mazes",
   "artVersion": 4,
   "family": "navigation",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "source-backed",
   "approvalStatus": "approved",
   "validationProfile": "strict-v2",
@@ -102,7 +102,7 @@
       "decodedBytesUpperBound": 65536,
       "profile": "navigation-optical-128",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "title-or-navigation",
       "encoder": {
         "name": "Pillow WebP",

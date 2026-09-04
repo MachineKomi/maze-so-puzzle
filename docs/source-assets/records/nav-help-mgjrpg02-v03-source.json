@@ -5,12 +5,12 @@
   "id": "nav-help",
   "artVersion": 3,
   "family": "navigation",
-  "runtimeStatus": "source-only",
+  "runtimeStatus": "active",
   "sourceStatus": "source-backed",
-  "approvalStatus": "design-approved",
+  "approvalStatus": "approved",
   "validationProfile": "strict-v2",
   "recipeVersion": "mgjrpg-02",
-  "derivativeRecipeVersion": "proposed-mgjrpg-02-premium-utility-r01",
+  "derivativeRecipeVersion": "mgjrpg-02-plan03-r1-runtime-derivative-r01",
   "recipeEvidence": {
     "recipeId": "mgjrpg-02",
     "path": "docs/source-assets/recipes/mgjrpg-02.json",
@@ -19,7 +19,7 @@
   "generationRuns": [
     {
       "runId": "batch-23-nav-help-premium-utility-v03-a",
-      "generator": "OpenAI \u2014 Codex built-in image generation capability",
+      "generator": "OpenAI — Codex built-in image generation capability",
       "model": "not exposed by the tool response",
       "executedAt": "unknown",
       "prompt": {
@@ -111,7 +111,34 @@
       "evidence": "Human-approved fresh chroma-matte source; no runtime publication approval."
     }
   ],
-  "derivatives": [],
+  "derivatives": [
+    {
+      "id": "navigation-optical-128",
+      "path": "public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp",
+      "sha256": "6c8bf6b57c2e5bccab749a5b22818309d6687e1331fa08f8923f5e4a7fc73336",
+      "bytes": 10964,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "profile": "navigation-optical-128",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "on-consumer-render",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
   "geometry": {
     "class": "icon",
     "pivot": [
@@ -119,21 +146,21 @@
       0.5
     ],
     "visibleBounds": [
-      0.20703125,
+      0.2109375,
       0.0703125,
-      0.58789062,
+      0.5859375,
       0.859375
     ],
     "safeInset": [
-      0.07,
-      0.07,
-      0.07,
-      0.07
+      0.0703125,
+      0.203125,
+      0.0703125,
+      0.2109375
     ],
     "opticalBounds": [
-      0.20703125,
+      0.2109375,
       0.0703125,
-      0.58789062,
+      0.5859375,
       0.859375
     ]
   },
@@ -142,19 +169,21 @@
     "operation": "cutout-resize",
     "profiles": [
       {
-        "id": "source-review-512",
-        "outputPath": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-candidate-512.png",
-        "width": 512,
-        "height": 512,
-        "format": "png",
+        "id": "navigation-optical-128",
+        "outputPath": "public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp",
+        "width": 128,
+        "height": 128,
+        "format": "webp",
         "clearAlphaBelow": 3,
         "edgeDilationPixels": 4,
         "minimumAlphaComponentPixels": 4,
-        "maxEncodedBytes": 1048576,
+        "maxEncodedBytes": 131072,
         "encoder": {
           "options": {
-            "compress_level": 9,
-            "optimize": false
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
           }
         }
       }
@@ -200,17 +229,24 @@
     "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v08/human-decision.json"
   },
   "knownUnknowns": [
-    "Generator model build, seed, exact execution timestamp, and request envelope were not exposed by the built-in tool.",
-    "Runtime derivative profile, runtime-publish approval, encoded-byte allocation, and catalogue publication are pending."
+    "Generator model build, seed, exact execution timestamp and request envelope were not exposed by the built-in tool."
   ],
   "rights": {
     "originClaim": "Generated fresh for Maze so Puzzle from exact prompts and internal semantic/material references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
-    "licenceStatus": "pending-owner-review",
-    "notes": "Source-only Plan 03-R1 candidate; technical and owner rights review remains part of the later publication gate."
+    "licenceStatus": "reviewed",
+    "notes": "Human approved this original project-specific utility design and its bounded runtime publication.",
+    "reviewedBy": "Human project author"
   },
   "rollback": {
-    "method": "Keep the current active catalogue pointer and runtime derivative unchanged; the approved source candidate remains the rollback authority until a later versioned runtime publication.",
+    "method": "Atomically restore public/assets/mgjrpg-02/navigation/nav-help-v02-navigation-optical-128-r01.webp and all six sibling v01 publication pointers; keep this versioned derivative for evidence until Plan 12.",
     "previousPath": "public/assets/mgjrpg-02/navigation/nav-help-v02-navigation-optical-128-r01.webp",
     "previousSha256": "be242190bb5890ea07eeec5d8f200b73b5a9104f1fa2e1b5c2ef189e2e83c677"
+  },
+  "approvalEvidence": {
+    "approvedBy": "Human project author",
+    "approvedAt": "2026-09-04T00:00:00+01:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v09/human-decision.json",
+    "evidenceSha256": "6e467cea1f22303faa2e75ae13b878c7b3ea8489a1b0e1b916c12e968770de3b"
   }
 }

@@ -18,6 +18,27 @@ Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
 
+## Unreleased Plan 03-R1 publication
+
+- [x] Human decision v9 records exact approved run IDs, source paths, hashes and
+  bounded runtime authority; rejected gallery alternatives remain historical.
+- [x] Publish the seven navigation replacements atomically, activate the
+  environment-only title background with legacy fallback, and activate the Ame
+  Web/Tauri icon without changing bundle identity.
+- [x] Catalogue Home Splash B and exact 1024/512 `Maze so Puzzle` wordmarks as
+  dormant Plan-01-ready assets; do not preload or force them into the legacy
+  combined title route.
+- [x] Construct every final wordmark edge from vendored Fredoka/OFL glyph masks;
+  use generated Logo B only as material evidence. Verify lowercase `so`, no
+  subtitle and no yellow route line.
+- [x] Preserve the previous seven navigation files and title background as
+  rollback holds. Delete or archive none; Plan 12 eligibility remains false.
+- [x] Complete deterministic rebuild, art/catalogue/full checks, performance
+  checks, browser viewport matrix and native Tauri smoke. The exact R1 candidate
+  passes in isolation; the shared tree's concurrent OST path/byte failures are
+  separately owned and recorded. Commit/push evidence is the checkpoint that
+  contains the R1 validation report.
+
 ## Unreleased Plan 03 static-art publication
 
 - [x] The Human's 2026-09-04 continuation closes the art-review and completeness

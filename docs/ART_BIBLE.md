@@ -985,12 +985,13 @@ material craft:
   common perceived weight, baseline, cutline thickness, safe space, and no
   alias-driven loss of the functional silhouette.
 
-This complete seven-icon tier is **Human-approved at source level**. Candidate originals, rejected
+This complete seven-icon tier is **Human-approved and published**. Candidate originals, rejected
 checkerboard attempts, exact prompts, ordered references, measurements, and
 proposed publication paths are under
 `docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/`.
-No current runtime asset or catalogue pointer changes until a separate approval
-and byte-allocation publication gate.
+The seven semantic catalogue pointers advance atomically to their new versioned
+128 px lossless WebP derivatives. Every prior path remains a rollback hold for
+Plan 12; gameplay items and achievement stickers remain outside this tier.
 
 The deterministic R1 Logo Candidate A is Human-rejected and retained only as
 historical evidence. The approved replacement is generated Logo Candidate B
@@ -999,8 +1000,13 @@ plaque, mint magical-enamel `Puzzle`, gold foil, pearlescent highlights, and
 broad restrained holographic edge accents. It retains the strong Batch 21
 stacked silhouette while removing the yellow route line and subtitle. Exact
 prompts and its single depth-one technical cleanup are preserved; no
-edit-of-edit is accepted as authority. Runtime delivery and responsive lockups
-remain separately gated under Plan 11 and the performance allocation process.
+edit-of-edit is accepted as authority. Human decision v9 authorizes bounded
+publication. The runtime wordmark is a fully controlled Fredoka/SIL-OFL glyph-
+mask reconstruction: generated pixels contribute only low-frequency material
+evidence, while every `Maze so Puzzle` edge is deterministic. The responsive
+wordmarks and home hero remain dormant Plan-01-ready entries; the selected
+environment-only title background and Ame Web/Tauri icon are active. Plan 11
+still owns the final-release audit rather than reopening this accepted set.
 
 ## Research basis
 

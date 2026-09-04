@@ -12,6 +12,7 @@ import {
   DEFAULT_WEAPON_STYLE,
   DOOR_ART,
   ENEMY_ART,
+  FRONT_DOOR_ART,
   FLOORS,
   FUTURE_ENEMY_ART,
   FUTURE_FRIEND_ART,
@@ -381,9 +382,22 @@ describe("art catalog", () => {
       "nav-home", "nav-mazes", "nav-book", "nav-help", "nav-sound", "nav-muted", "nav-restart",
     ]);
     expect(Object.values(NAVIGATION_ART).every((entry) => entry.runtimeStatus === "active")).toBe(true);
+    expect(Object.values(NAVIGATION_ART).map((entry) => entry.artVersion)).toEqual([4, 5, 3, 3, 4, 3, 3]);
+    expect(new Set(Object.values(NAVIGATION_ART).map((entry) => entry.src)).size).toBe(7);
     expect(Object.values(ACHIEVEMENT_ART)).toHaveLength(15);
     expect(Object.values(ACHIEVEMENT_ART).every((entry) => entry.runtimeStatus === "active")).toBe(true);
     expect(new Set(Object.values(ACHIEVEMENT_ART).map((entry) => entry.src)).size).toBe(15);
+  });
+
+  it("keeps the current front door to one active background and Plan-01-ready dormant layers", () => {
+    expect(FRONT_DOOR_ART.titleEnvironment.runtimeStatus).toBe("active");
+    expect(FRONT_DOOR_ART.titleEnvironment.loadingPhase).toBe("title-critical");
+    expect(FRONT_DOOR_ART.titleEnvironment.fallbackSrc).toBe("/assets/title-background-v1.webp");
+    expect(FRONT_DOOR_ART.homeHeroSplash.runtimeStatus).toBe("dormant");
+    expect(FRONT_DOOR_ART.gameLogo.default.runtimeStatus).toBe("dormant");
+    expect(FRONT_DOOR_ART.gameLogo.compact.runtimeStatus).toBe("dormant");
+    expect(FRONT_DOOR_ART.gameLogo.default.fallbackText).toBe("Maze so Puzzle");
+    expect(FRONT_DOOR_ART.appIconAme.runtimeStatus).toBe("active");
   });
 
   it("projects every generated Plan 03 derivative through one semantic catalogue", () => {
@@ -416,15 +430,20 @@ describe("art catalog", () => {
       MIMIC_ART["candy-mimic"]["good-open"],
       ...Object.values(NAVIGATION_ART),
       ...Object.values(ACHIEVEMENT_ART),
+      FRONT_DOOR_ART.titleEnvironment,
+      FRONT_DOOR_ART.homeHeroSplash,
+      FRONT_DOOR_ART.gameLogo.default,
+      FRONT_DOOR_ART.gameLogo.compact,
+      FRONT_DOOR_ART.appIconAme,
     ];
     const catalogueSources = new Set(catalogued.map((entry) => entry.src));
     const generatedSources = new Set(Object.values(MGJRPG02_ART).map((entry) => entry.src));
     const generatedEntries = Object.values(MGJRPG02_ART);
 
     expect(MGJRPG02_ART).toHaveProperty("ame");
-    expect(generatedSources.size).toBe(144);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(100);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(44);
+    expect(generatedSources.size).toBe(149);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(102);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(47);
     expect(catalogueSources).toEqual(generatedSources);
   });
 

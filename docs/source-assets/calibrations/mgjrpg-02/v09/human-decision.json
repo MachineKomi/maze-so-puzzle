@@ -1,0 +1,102 @@
+{
+  "schema": "maze-art-human-decision/v1",
+  "decisionId": "mgjrpg-02-plan03-r1-runtime-publication-v09",
+  "recordedOn": "2026-09-04",
+  "recordedAt": "2026-09-04T00:00:00+01:00",
+  "status": "approved-for-runtime-publication",
+  "scope": "Bounded Plan 03-R1 premium utility, exact wordmark, front-door art and Ame application-icon publication",
+  "supersedesDecisionId": "mgjrpg-02-human-front-door-correction-v08",
+  "rollbackAnchors": {
+    "acceptedPlan03Static": "28946cbb04f45cb21cd51626914267ff4f71c375",
+    "plan03R1SourceReview": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559"
+  },
+  "approvedSources": [
+    {
+      "id": "nav-home",
+      "runId": "batch-23-nav-home-premium-utility-v04-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-home-v04-candidate-a-matte-01-generator-original.png",
+      "sha256": "543c8cb4c7e65d8e7a5c1ff3c58b8ec518b89c01e74fc8dc9aa0a07afb5afa3d",
+      "bytes": 1203879
+    },
+    {
+      "id": "nav-mazes",
+      "runId": "batch-23-nav-mazes-premium-utility-v05-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-mazes-v05-candidate-a-matte-01-generator-original.png",
+      "sha256": "598e6abf41ecccdbd659a1043bed7e83dbf3f59339c2b17ef80fbc9b3be27d39",
+      "bytes": 1359445
+    },
+    {
+      "id": "nav-book",
+      "runId": "batch-23-nav-book-premium-utility-v03-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-book-v03-candidate-a-matte-01-generator-original.png",
+      "sha256": "ec9d20ab891e3c424f3c1505d099f1254aab6ab68aa10bbd3bb2afd83ce59a39",
+      "bytes": 1377200
+    },
+    {
+      "id": "nav-help",
+      "runId": "batch-23-nav-help-premium-utility-v03-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-help-v03-candidate-a-matte-01-generator-original.png",
+      "sha256": "3a78bb05c663ccfdf4515a85ebc5021aae2a7c461a211147f8302f1486e6d94d",
+      "bytes": 1299781
+    },
+    {
+      "id": "nav-sound",
+      "runId": "batch-23-nav-sound-premium-utility-v04-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+      "sha256": "90b1ae474231f3a30e131422ed6ea96686f6056cd0f5f5e1e2f1dff8c08dca03",
+      "bytes": 1273532
+    },
+    {
+      "id": "nav-muted",
+      "runId": "batch-23-nav-muted-premium-utility-v03-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-muted-v03-candidate-a-matte-01-generator-original.png",
+      "sha256": "a14951fc21f983b8a6e3fac0af2fd7469a0a8f235deb66d4ccc88fcdec525acf",
+      "bytes": 1351452
+    },
+    {
+      "id": "nav-restart",
+      "runId": "batch-23-nav-restart-premium-utility-v03-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-restart-v03-candidate-a-matte-01-generator-original.png",
+      "sha256": "a94caeec7a4aa706ee8b2e68d83197aea942562c58005964f9fae1dfefdcbf37",
+      "bytes": 1325327
+    },
+    {
+      "id": "game-logo-material-concept",
+      "runId": "batch-24-game-logo-v03-candidate-b-cleanup-edit-02",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "bytes": 2002922,
+      "constraint": "Material and composition evidence only; runtime authority must reconstruct every glyph deterministically as exact Maze so Puzzle lettering."
+    },
+    {
+      "id": "title-environment",
+      "runId": "batch-21-title-background-environment-study-01",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
+      "sha256": "07d91060cf21639cfd8ebcae87d8ac8cb626a1617df177c860bd12fa6a31d896",
+      "bytes": 2199173
+    },
+    {
+      "id": "home-hero-splash",
+      "runId": "batch-21-home-splash-v01-b",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+      "sha256": "3f6917b2ae47fd4a0649d24c6301f1db2bfe1bf93c7c6144a567a13c09595ecf",
+      "bytes": 2152001
+    },
+    {
+      "id": "app-icon-ame",
+      "runId": "batch-13-app-icon-ame-v03",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "sha256": "4f470db1ae278fa749460df92a8b3010d7a2b9531e2c4487a0d85e8bf4609616",
+      "bytes": 1826973
+    }
+  ],
+  "approvedRenderingTier": "premium-utility-sticker-v1",
+  "publicationAuthorized": true,
+  "constraints": [
+    "Approval excludes rejected alternatives, superseded studies, malformed generated lettering and gallery-absent work.",
+    "The seven navigation identities publish atomically and retain their existing semantics and accessibility names.",
+    "The title environment may replace the existing single title-background seam; layered splash and exact wordmark remain Plan-01-ready until its front-door component exists.",
+    "No superseded runtime file may be deleted or moved before the Plan 12 copy-first retirement gate."
+  ],
+  "evidence": "Explicit Human approval in the Plan 03-R1 task on 2026-09-04: every newly recommended gallery candidate approved without exception and runtime publication authorized."
+}

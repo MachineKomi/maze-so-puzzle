@@ -3,11 +3,11 @@
   "schemaVersion": 2,
   "ledgerId": "plan03-static-art-retirement",
   "createdAt": "2026-09-03T14:25:14+01:00",
-  "lastAuditedAt": "2026-09-04T02:53:56+01:00",
+  "lastAuditedAt": "2026-09-04T00:00:00+01:00",
   "inspectedCheckpoint": {
-    "head": "0fce05451b94f44d795805f8694bcebee2a9262a",
+    "head": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
     "workingTreeDirty": true,
-    "notes": "Plan 03 publication audit in a shared dirty worktree. The v6 decision hash-binds 144 selected runs; 100 exact prior runtime paths join one-to-one to superseded source records and remain rollback-held. No asset was moved or deleted."
+    "notes": "Plan 03-R1 publication was isolated in a shared dirty tree; unrelated OST, Plan 10, backlog and roadmap work was preserved."
   },
   "policy": {
     "ownerPlan": "Plan 12",
@@ -27,12 +27,12 @@
     "removalRule": "Copy and hash-verify outside public first; require external-backup confirmation and all per-entry evidence; remove only in a later family-isolated Plan 12 change."
   },
   "totals": {
-    "candidateCount": 116,
-    "encodedBytes": 37066556,
-    "decodedBytesUpperBound": 168329216,
+    "candidateCount": 124,
+    "encodedBytes": 37423560,
+    "decodedBytesUpperBound": 175081376,
     "plan12EligibleCount": 0,
     "soleRepositoryCopyCount": 19,
-    "partialMasterCount": 96
+    "partialMasterCount": 97
   },
   "entries": [
     {
@@ -11208,6 +11208,774 @@
         "externalBackupConfirmed": false
       },
       "notes": "PICKUP_ART.boots previously used this active delivery. Publication replaces its art authority with public/assets/mgjrpg-02/items/splash-boots-v02-prop-field-256-r01.webp, whose catalogue state is active; the prior bytes remain an explicit rollback dependency."
+    },
+    {
+      "entryId": "plan03-r1-nav-home-prior-runtime",
+      "assetPath": "public/assets/mgjrpg-02/navigation/nav-home-v03-navigation-optical-128-r01.webp",
+      "family": "navigation",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "86dcea6ce623590ebcfbcb0b1484156fcee9fc4d5501dea9e5d299766e491233",
+      "bytes": 10784,
+      "width": 128,
+      "height": 128,
+      "decodedBytesUpperBound": 65536,
+      "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/nav-home-mgjrpg02-v03-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/navigation/nav-home-v04-navigation-optical-128-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-home-v04-navigation-optical-128-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "source-backed",
+        "sourceRecordPath": "docs/source-assets/records/nav-home-mgjrpg02-v03-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/nav-home-v03-candidate-a-matte-01-generator-original.png",
+            "sha256": "da31adb0827be0149fdad7e00da102d2e248c16a8f809a0e453a0a2e2797204c",
+            "bytes": 1074512,
+            "kind": "source-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/mgjrpg-02/navigation/nav-home-v03-navigation-optical-128-r01.webp",
+          "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/mgjrpg-02/navigation/nav-home-v03-navigation-optical-128-r01.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active nav-home delivery with public/assets/mgjrpg-02/navigation/nav-home-v04-navigation-optical-128-r01.webp; no file was moved or deleted."
+    },
+    {
+      "entryId": "plan03-r1-nav-mazes-prior-runtime",
+      "assetPath": "public/assets/mgjrpg-02/navigation/nav-mazes-v04-navigation-optical-128-r01.webp",
+      "family": "navigation",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "bff169d48e3b9d8105223696e91d751c1d0f42cc49d592d3a4f195498ebc6fe3",
+      "bytes": 13414,
+      "width": 128,
+      "height": 128,
+      "decodedBytesUpperBound": 65536,
+      "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/nav-mazes-mgjrpg02-v04-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/navigation/nav-mazes-v05-navigation-optical-128-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-mazes-v05-navigation-optical-128-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "source-backed",
+        "sourceRecordPath": "docs/source-assets/records/nav-mazes-mgjrpg02-v04-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-mazes-v04-matte-01-generator-original.png",
+            "sha256": "bb17d72808818a9c3b21f55fcffcc27a26cec324443598159c5404b95f5ae0c2",
+            "bytes": 1126039,
+            "kind": "source-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/mgjrpg-02/navigation/nav-mazes-v04-navigation-optical-128-r01.webp",
+          "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/mgjrpg-02/navigation/nav-mazes-v04-navigation-optical-128-r01.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active nav-mazes delivery with public/assets/mgjrpg-02/navigation/nav-mazes-v05-navigation-optical-128-r01.webp; no file was moved or deleted."
+    },
+    {
+      "entryId": "plan03-r1-nav-book-prior-runtime",
+      "assetPath": "public/assets/mgjrpg-02/navigation/nav-book-v02-navigation-optical-128-r01.webp",
+      "family": "navigation",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "b98bcb25be27612023340cb20dd1bee2bc40e0d6ac2d8604ab056cd03a995de9",
+      "bytes": 15048,
+      "width": 128,
+      "height": 128,
+      "decodedBytesUpperBound": 65536,
+      "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/nav-book-mgjrpg02-v02-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/navigation/nav-book-v03-navigation-optical-128-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-book-v03-navigation-optical-128-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "source-backed",
+        "sourceRecordPath": "docs/source-assets/records/nav-book-mgjrpg02-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-book-v02-generator-original.png",
+            "sha256": "c6dbfa62aed74aa889de48841ac8bc37946e34d10d44332326bbb91841c01abd",
+            "bytes": 1133107,
+            "kind": "source-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/mgjrpg-02/navigation/nav-book-v02-navigation-optical-128-r01.webp",
+          "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/mgjrpg-02/navigation/nav-book-v02-navigation-optical-128-r01.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active nav-book delivery with public/assets/mgjrpg-02/navigation/nav-book-v03-navigation-optical-128-r01.webp; no file was moved or deleted."
+    },
+    {
+      "entryId": "plan03-r1-nav-help-prior-runtime",
+      "assetPath": "public/assets/mgjrpg-02/navigation/nav-help-v02-navigation-optical-128-r01.webp",
+      "family": "navigation",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "be242190bb5890ea07eeec5d8f200b73b5a9104f1fa2e1b5c2ef189e2e83c677",
+      "bytes": 14240,
+      "width": 128,
+      "height": 128,
+      "decodedBytesUpperBound": 65536,
+      "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/nav-help-mgjrpg02-v02-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "source-backed",
+        "sourceRecordPath": "docs/source-assets/records/nav-help-mgjrpg02-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-help-v02-generator-original.png",
+            "sha256": "e3c50033e9d8dae4246141ef6db9cffbf972ca53808db9d289f95a071a8f2a68",
+            "bytes": 974927,
+            "kind": "source-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/mgjrpg-02/navigation/nav-help-v02-navigation-optical-128-r01.webp",
+          "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/mgjrpg-02/navigation/nav-help-v02-navigation-optical-128-r01.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active nav-help delivery with public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp; no file was moved or deleted."
+    },
+    {
+      "entryId": "plan03-r1-nav-sound-prior-runtime",
+      "assetPath": "public/assets/mgjrpg-02/navigation/nav-sound-v03-navigation-optical-128-r01.webp",
+      "family": "navigation",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "71549884c11e182b2d07f4858a4f8025b89fcffda49d0d3435fdb89b5a5b1af8",
+      "bytes": 13522,
+      "width": 128,
+      "height": 128,
+      "decodedBytesUpperBound": 65536,
+      "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/nav-sound-mgjrpg02-v03-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/navigation/nav-sound-v04-navigation-optical-128-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-sound-v04-navigation-optical-128-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "source-backed",
+        "sourceRecordPath": "docs/source-assets/records/nav-sound-mgjrpg02-v03-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-sound-v03-unselected-generator-original.png",
+            "sha256": "deaf9e5ec32b9c39844664c0c74b3c447deb012cb847969f23d9641a3dcddb58",
+            "bytes": 879993,
+            "kind": "source-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/mgjrpg-02/navigation/nav-sound-v03-navigation-optical-128-r01.webp",
+          "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/mgjrpg-02/navigation/nav-sound-v03-navigation-optical-128-r01.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active nav-sound delivery with public/assets/mgjrpg-02/navigation/nav-sound-v04-navigation-optical-128-r01.webp; no file was moved or deleted."
+    },
+    {
+      "entryId": "plan03-r1-nav-muted-prior-runtime",
+      "assetPath": "public/assets/mgjrpg-02/navigation/nav-muted-v02-navigation-optical-128-r01.webp",
+      "family": "navigation",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "a255cd07ffa9365360407673bf4629994dda6e1151fb65f10b27d0e07f04bb58",
+      "bytes": 14202,
+      "width": 128,
+      "height": 128,
+      "decodedBytesUpperBound": 65536,
+      "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/nav-muted-mgjrpg02-v02-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/navigation/nav-muted-v03-navigation-optical-128-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-muted-v03-navigation-optical-128-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "source-backed",
+        "sourceRecordPath": "docs/source-assets/records/nav-muted-mgjrpg02-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/nav-muted-v02-candidate-a-matte-01-generator-original.png",
+            "sha256": "f12ff93635b3247a903a906a011da7f65c278ecd5bd7e64d842c029343f119c9",
+            "bytes": 1169323,
+            "kind": "source-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/mgjrpg-02/navigation/nav-muted-v02-navigation-optical-128-r01.webp",
+          "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/mgjrpg-02/navigation/nav-muted-v02-navigation-optical-128-r01.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active nav-muted delivery with public/assets/mgjrpg-02/navigation/nav-muted-v03-navigation-optical-128-r01.webp; no file was moved or deleted."
+    },
+    {
+      "entryId": "plan03-r1-nav-restart-prior-runtime",
+      "assetPath": "public/assets/mgjrpg-02/navigation/nav-restart-v02-navigation-optical-128-r01.webp",
+      "family": "navigation",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "8687e16908796acdaeda211f90b34fe13d97dd7d65f5d6f1e36726507004dfd9",
+      "bytes": 19110,
+      "width": 128,
+      "height": 128,
+      "decodedBytesUpperBound": 65536,
+      "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/nav-restart-mgjrpg02-v02-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/navigation/nav-restart-v03-navigation-optical-128-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-restart-v03-navigation-optical-128-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "source-backed",
+        "sourceRecordPath": "docs/source-assets/records/nav-restart-mgjrpg02-v02-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-restart-v02-generator-original.png",
+            "sha256": "5713c3b43f26bba7d046d7174151eab640f0da455a7b17bd89a4232dc0d7fc33",
+            "bytes": 1023967,
+            "kind": "source-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/mgjrpg-02/navigation/nav-restart-v02-navigation-optical-128-r01.webp",
+          "firstSeenCommit": "28946cbb04f45cb21cd51626914267ff4f71c375",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/mgjrpg-02/navigation/nav-restart-v02-navigation-optical-128-r01.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active nav-restart delivery with public/assets/mgjrpg-02/navigation/nav-restart-v03-navigation-optical-128-r01.webp; no file was moved or deleted."
+    },
+    {
+      "entryId": "plan03-r1-title-background-prior-runtime",
+      "assetPath": "public/assets/title-background-v1.webp",
+      "family": "brand",
+      "classification": "superseded-runtime-rollback-candidate",
+      "state": "rollback-hold",
+      "eligibleForPlan12": false,
+      "sha256": "2c5e719cfcb3721efc787ecdbe1e27400b45aaf68e3e9d4c2d8d1ec82638042c",
+      "bytes": 256684,
+      "width": 1672,
+      "height": 941,
+      "decodedBytesUpperBound": 6293408,
+      "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+      "lastVerifiedCheckpoint": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+      "runtimeReferences": [],
+      "currentReferences": [
+        {
+          "kind": "source-record",
+          "path": "docs/source-assets/records/title-background-v01-source.json",
+          "detail": "Forward lifecycle record marks this exact derivative superseded while preserving source history.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "generated-manifest",
+          "path": "docs/source-assets/manifest.json",
+          "detail": "Generated inventory preserves this exact retained rollback file.",
+          "blocksRetirement": false
+        },
+        {
+          "kind": "publication-map",
+          "path": "docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json",
+          "detail": "Plan 03-R1 maps the active replacement to public/assets/mgjrpg-02/brand/title-environment-v01-front-door-1672-r01.webp.",
+          "blocksRetirement": true
+        }
+      ],
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/brand/title-environment-v01-front-door-1672-r01.webp"
+      ],
+      "preservation": {
+        "sourceStatus": "partial",
+        "sourceRecordPath": "docs/source-assets/records/title-background-v01-source.json",
+        "soleRepositoryCopy": false,
+        "rollbackSources": [
+          {
+            "path": "docs/source-assets/title-background-v1.png",
+            "sha256": "94cb1f63e2e3a4a7c36f697cc40617260c912a6fb8357267dc6ea9e7cea67d88",
+            "bytes": 2502491,
+            "kind": "partial-master"
+          }
+        ],
+        "gitRestore": {
+          "path": "public/assets/title-background-v1.webp",
+          "firstSeenCommit": "56ab83e1cc4fb57e75a0c04227d47e18cd2c1cfa",
+          "method": "Recover the exact retained derivative from Git history and verify its recorded SHA-256 before restoring the atomic pointer set."
+        }
+      },
+      "blockers": [
+        {
+          "id": "final-catalogue-pointers-not-frozen",
+          "detail": "Plan 01 and Plan 11 downstream front-door consumers are not yet final."
+        },
+        {
+          "id": "authoritative-reachability-proof-missing",
+          "detail": "Plan 12 has not completed exhaustive reachability proof across runtime, generated and packaged paths."
+        },
+        {
+          "id": "generated-path-proof-missing",
+          "detail": "Generated, test and preload path proof remains a Plan 12 gate."
+        },
+        {
+          "id": "rollback-window-not-expired",
+          "detail": "The Plan 03-R1 replacement remains inside its mandatory rollback hold."
+        },
+        {
+          "id": "clean-clone-route-and-package-proof-missing",
+          "detail": "Clean-clone browser and offline package proof belongs to Plan 12."
+        },
+        {
+          "id": "external-backup-not-confirmed",
+          "detail": "No copy-first export and Human-confirmed external backup exists."
+        }
+      ],
+      "archiveRelativePath": "payload/public/assets/title-background-v1.webp",
+      "retirementEvidence": {
+        "catalogueFrozen": false,
+        "reachabilityPassed": false,
+        "generatedPathsPassed": false,
+        "rollbackWindowExpired": false,
+        "cleanClonePassed": false,
+        "browserRoutesPassed": false,
+        "tauriOfflinePackagePassed": false,
+        "archiveHashVerified": false,
+        "externalBackupConfirmed": false
+      },
+      "notes": "Plan 03-R1 replaces this active title-background delivery with public/assets/mgjrpg-02/brand/title-environment-v01-front-door-1672-r01.webp; no file was moved or deleted."
     }
   ]
 }

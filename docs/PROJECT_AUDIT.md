@@ -35,6 +35,24 @@ interactive evidence.
 No production optimization or media change is claimed. Exact evidence classes
 and remaining hardware gates are in `PERFORMANCE_BUDGETS.md`.
 
+## Plan 03-R1 front-door and premium-utility publication
+
+Human decision v9 promotes exactly the reviewed seven premium navigation
+stickers, environment-only title background, Home Splash B, controlled exact
+wordmark and Ame-face icon. The 12-file Web map and 19-file platform-icon set
+are recorded at
+`source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json`. Navigation,
+title background, Web favicon and Tauri icon pointers are active; the layered
+home hero and 1024/512 wordmarks are dormant, unpreloaded Plan-01 consumers.
+Every prior file remains present for rollback and eight newly superseded paths
+enter the retirement ledger with zero Plan-12 eligibility.
+
+The R1 runtime set adds 1,708,073 encoded public bytes and 14,636,960 decoded
+RGBA bytes as a non-concurrent upper-bound sum. A named allocation covers that
+growth and +845 gzip-9 JavaScript bytes. The shared inventory also reports the
+separate in-progress OST relocation; that unrelated growth is neither assigned
+to art nor treated as a clean R1 baseline.
+
 ## Current Plan 03 static-art publication
 
 On 2026-09-04 the Human closed the art-review and completeness gates and

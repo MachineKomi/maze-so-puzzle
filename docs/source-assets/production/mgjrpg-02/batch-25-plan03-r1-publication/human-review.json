@@ -1,0 +1,25 @@
+{
+  "schema": "maze-art-source-review/v1",
+  "reviewedOn": "2026-09-04",
+  "reviewedBy": "Human",
+  "batchId": "mgjrpg-02-batch-25-plan03-r1-publication",
+  "decisionEvidence": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v09/human-decision.json",
+    "sha256": "6e467cea1f22303faa2e75ae13b878c7b3ea8489a1b0e1b916c12e968770de3b"
+  },
+  "approvedSourceIds": [
+    "nav-home",
+    "nav-mazes",
+    "nav-book",
+    "nav-help",
+    "nav-sound",
+    "nav-muted",
+    "nav-restart",
+    "game-logo",
+    "title-environment",
+    "home-hero-splash",
+    "app-icon-ame"
+  ],
+  "rejectedSourceIds": [],
+  "publicationAuthorized": true
+}

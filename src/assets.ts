@@ -10,6 +10,7 @@ import {
   DEFAULT_WEAPON_STYLE,
   DOOR_ART,
   ENEMY_ART,
+  FRONT_DOOR_ART,
   HAZARD_ART,
   GOAL_ART,
   KEY_ART,
@@ -33,7 +34,11 @@ import type { LevelDefinition, TerrainKind } from "./game/types";
 import type { BadgeId, RescueMedalId, StickerId } from "./progress";
 
 export const ASSETS = {
-  titleBackground: "/assets/title-background-v1.webp",
+  titleBackground: FRONT_DOOR_ART.titleEnvironment.src,
+  titleBackgroundFallback: FRONT_DOOR_ART.titleEnvironment.fallbackSrc,
+  homeHeroSplash: FRONT_DOOR_ART.homeHeroSplash.src,
+  gameLogo: FRONT_DOOR_ART.gameLogo.default.src,
+  gameLogoCompact: FRONT_DOOR_ART.gameLogo.compact.src,
   ame: AME_ART.src,
   portrait: STORY_ART.amePortrait.src,
   goblin: ENEMY_ART[DEFAULT_ENEMY_STYLE].src,

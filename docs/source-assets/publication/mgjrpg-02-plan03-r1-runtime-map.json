@@ -1,0 +1,1632 @@
+{
+  "schema": "maze-art-plan03-r1-publication/v1",
+  "publicationId": "mgjrpg-02-plan03-r1-publication-v01",
+  "generatedOn": "2026-09-04",
+  "decisionEvidence": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v09/human-decision.json",
+    "sha256": "6e467cea1f22303faa2e75ae13b878c7b3ea8489a1b0e1b916c12e968770de3b"
+  },
+  "derivativeRecipe": "mgjrpg-02-plan03-r1-runtime-derivative-r01",
+  "entries": [
+    {
+      "stableId": "nav-home",
+      "label": "Home",
+      "family": "navigation",
+      "artVersion": 4,
+      "runtimeStatus": "active",
+      "profile": "navigation-optical-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-home-v04-candidate-a-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/navigation/nav-home-v04-navigation-optical-128-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            5,
+            225,
+            11
+          ],
+          "channelStd": [
+            1.0314,
+            1.3242,
+            1.5828
+          ],
+          "maximumChannelStd": 1.5828,
+          "p99EuclideanResidual": 5.4772,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1593,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 3.317,
+            "90": 315.133,
+            "95": 333.062,
+            "99": 336.529
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.09375,
+          0.0703125,
+          0.8125,
+          0.859375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 770
+      },
+      "loadingPhase": "on-consumer-render",
+      "displayRangeCssPx": [
+        16,
+        64
+      ],
+      "sha256": "dede3280703fe03d267e9855505abbe518f525553c5f5f84ffbe451c245c6ba8",
+      "bytes": 10398,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "nav-mazes",
+      "label": "Mazes",
+      "family": "navigation",
+      "artVersion": 5,
+      "runtimeStatus": "active",
+      "profile": "navigation-optical-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-mazes-v05-candidate-a-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/navigation/nav-mazes-v05-navigation-optical-128-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            4,
+            227,
+            9
+          ],
+          "channelStd": [
+            1.0753,
+            1.3988,
+            1.9242
+          ],
+          "maximumChannelStd": 1.9242,
+          "p99EuclideanResidual": 6.7082,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2194,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 225.737,
+            "90": 325.123,
+            "95": 339.75,
+            "99": 345.059
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.0859375,
+          0.0703125,
+          0.8359375,
+          0.859375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 658
+      },
+      "loadingPhase": "on-consumer-render",
+      "displayRangeCssPx": [
+        16,
+        64
+      ],
+      "sha256": "b981f5b3e83bef6e6a86f1bbe1ec78df36171dbace8fc059bba6e21f1c376743",
+      "bytes": 17062,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "nav-book",
+      "label": "Adventure Book",
+      "family": "navigation",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "navigation-optical-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-book-v03-candidate-a-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/navigation/nav-book-v03-navigation-optical-128-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            4,
+            230,
+            5
+          ],
+          "channelStd": [
+            1.05,
+            1.2177,
+            0.9229
+          ],
+          "maximumChannelStd": 1.2177,
+          "p99EuclideanResidual": 5.3852,
+          "cornerSamplePixels": 12996
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2227,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 260.665,
+            "90": 337.477,
+            "95": 348.009,
+            "99": 353.662
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.0703125,
+          0.203125,
+          0.859375,
+          0.59375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 746
+      },
+      "loadingPhase": "on-consumer-render",
+      "displayRangeCssPx": [
+        16,
+        64
+      ],
+      "sha256": "52ee5cc1e7fccba0fba7772b0e6971b9fc9de4c033c44323ef085f260dbacd35",
+      "bytes": 12676,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "nav-help",
+      "label": "Help",
+      "family": "navigation",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "navigation-optical-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-help-v03-candidate-a-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            8,
+            232,
+            9
+          ],
+          "channelStd": [
+            0.9924,
+            0.9295,
+            0.9421
+          ],
+          "maximumChannelStd": 0.9924,
+          "p99EuclideanResidual": 4.6904,
+          "cornerSamplePixels": 14400
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1974,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.732,
+            "90": 332.713,
+            "95": 338.007,
+            "99": 347.813
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.2109375,
+          0.0703125,
+          0.5859375,
+          0.859375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 841
+      },
+      "loadingPhase": "on-consumer-render",
+      "displayRangeCssPx": [
+        16,
+        64
+      ],
+      "sha256": "6c8bf6b57c2e5bccab749a5b22818309d6687e1331fa08f8923f5e4a7fc73336",
+      "bytes": 10964,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "nav-sound",
+      "label": "Sound on",
+      "family": "navigation",
+      "artVersion": 4,
+      "runtimeStatus": "active",
+      "profile": "navigation-optical-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/navigation/nav-sound-v04-navigation-optical-128-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            11,
+            224,
+            17
+          ],
+          "channelStd": [
+            1.1484,
+            0.9999,
+            1.1775
+          ],
+          "maximumChannelStd": 1.1775,
+          "p99EuclideanResidual": 5.099,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1818,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.236,
+            "90": 326.255,
+            "95": 334.391,
+            "99": 337.856
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.0703125,
+          0.1484375,
+          0.859375,
+          0.703125
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 831
+      },
+      "loadingPhase": "on-consumer-render",
+      "displayRangeCssPx": [
+        16,
+        64
+      ],
+      "sha256": "6076d2f4cb8d78ecd5418eaf5486f10a09cb7e78c21f9948312eaacd9e6503b1",
+      "bytes": 13658,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "nav-muted",
+      "label": "Sound muted",
+      "family": "navigation",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "navigation-optical-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-muted-v03-candidate-a-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/navigation/nav-muted-v03-navigation-optical-128-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            4,
+            233,
+            8
+          ],
+          "channelStd": [
+            0.9288,
+            1.3732,
+            1.5012
+          ],
+          "maximumChannelStd": 1.5012,
+          "p99EuclideanResidual": 5.099,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1746,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 3.0,
+            "90": 302.964,
+            "95": 343.636,
+            "99": 345.789
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.0859375,
+          0.0703125,
+          0.8203125,
+          0.859375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 861
+      },
+      "loadingPhase": "on-consumer-render",
+      "displayRangeCssPx": [
+        16,
+        64
+      ],
+      "sha256": "6658b00821173e58cbce259ae66d5026817139ea194d80ff4a2a53f4d5d4322d",
+      "bytes": 14330,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "nav-restart",
+      "label": "Restart",
+      "family": "navigation",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "navigation-optical-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-restart-v03-candidate-a-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/navigation/nav-restart-v03-navigation-optical-128-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            8,
+            231,
+            14
+          ],
+          "channelStd": [
+            1.363,
+            1.2477,
+            1.8049
+          ],
+          "maximumChannelStd": 1.8049,
+          "p99EuclideanResidual": 6.9282,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2535,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.828,
+            "90": 330.386,
+            "95": 332.467,
+            "99": 335.955
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.0703125,
+          0.0703125,
+          0.859375,
+          0.859375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 1264
+      },
+      "loadingPhase": "on-consumer-render",
+      "displayRangeCssPx": [
+        16,
+        64
+      ],
+      "sha256": "26696c241249ab79c2073df337191a0a857986c61883bcd6c0457855920d6701",
+      "bytes": 16626,
+      "width": 128,
+      "height": 128,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "title-environment",
+      "label": "Puzzlewild title environment",
+      "family": "brand",
+      "artVersion": 1,
+      "runtimeStatus": "active",
+      "profile": "front-door-background-1672",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/brand/title-environment-v01-front-door-1672-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": false,
+          "quality": 88,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "borderVisiblePixels": 5226,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "title-critical",
+      "displayRangeCssPx": [
+        568,
+        1920
+      ],
+      "focalPoint": [
+        0.77,
+        0.42
+      ],
+      "copySafeRegion": [
+        0.03,
+        0.08,
+        0.42,
+        0.76
+      ],
+      "fit": "cover",
+      "sha256": "15e490ccf335b80f48bcbea20e2b955575b62de5270fe03ba14d158d714fd589",
+      "bytes": 215160,
+      "width": 1672,
+      "height": 941,
+      "format": "webp",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6293408,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "home-hero-splash",
+      "label": "Ame and friends home hero",
+      "family": "brand",
+      "artVersion": 1,
+      "runtimeStatus": "dormant",
+      "profile": "front-door-hero-1024",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            3,
+            247,
+            7
+          ],
+          "channelStd": [
+            0.8346,
+            0.6844,
+            1.0383
+          ],
+          "maximumChannelStd": 1.0383,
+          "p99EuclideanResidual": 3.3166,
+          "cornerSamplePixels": 11664
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 96,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 8998,
+          "fallbackBoundaryPixels": 824,
+          "exactBlackVisiblePixelsNormalized": 718,
+          "sourceDistancePercentiles": {
+            "50": 4.899,
+            "90": 308.644,
+            "95": 318.995,
+            "99": 335.103
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 134
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.05859375,
+          0.02994792,
+          0.8828125,
+          0.94010417
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 26378
+      },
+      "loadingPhase": "plan01-front-door-on-demand",
+      "displayRangeCssPx": [
+        320,
+        1024
+      ],
+      "focalPoint": [
+        0.57,
+        0.42
+      ],
+      "copySafeRegion": [
+        0.0,
+        0.0,
+        0.22,
+        0.28
+      ],
+      "fit": "contain",
+      "sha256": "9575548eb6b188cd762727d83bdb35d3ce88ad65171acbd408d54d34df2ade23",
+      "bytes": 644044,
+      "width": 1024,
+      "height": 768,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "game-logo-master",
+      "label": "Maze so Puzzle controlled wordmark master",
+      "family": "brand-source",
+      "artVersion": 5,
+      "runtimeStatus": "source-only",
+      "profile": "controlled-source-master",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-25-plan03-r1-publication/game-logo-v05-controlled-master.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.02089552,
+          0.02969247,
+          0.95820896,
+          0.94061506
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 17931
+      },
+      "loadingPhase": "source-only",
+      "displayRangeCssPx": [
+        0,
+        0
+      ],
+      "sha256": "021b0c41913c878f9f02adcb2343c0ff51ea26e3bd21d971738cd5d25d59a6ed",
+      "bytes": 377571,
+      "width": 1340,
+      "height": 943,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 5054480,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "game-logo-1024",
+      "label": "Maze so Puzzle wordmark",
+      "family": "brand",
+      "artVersion": 5,
+      "runtimeStatus": "dormant",
+      "profile": "front-door-wordmark-1024",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-25-plan03-r1-publication/game-logo-v05-controlled-master.png",
+      "path": "public/assets/mgjrpg-02/brand/game-logo-v05-front-door-1024-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.01855469,
+          0.02635229,
+          0.96289062,
+          0.94729542
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 23555
+      },
+      "loadingPhase": "plan01-front-door-on-demand",
+      "displayRangeCssPx": [
+        257,
+        1024
+      ],
+      "text": "Maze so Puzzle",
+      "fit": "contain",
+      "sha256": "f3a75b71378d22cf883df12b7267655da1fe27b5c058f4411ed8ad88e628e909",
+      "bytes": 273906,
+      "width": 1024,
+      "height": 721,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 2953216,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "game-logo-512",
+      "label": "Maze so Puzzle wordmark",
+      "family": "brand",
+      "artVersion": 5,
+      "runtimeStatus": "dormant",
+      "profile": "front-door-wordmark-512",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-25-plan03-r1-publication/game-logo-v05-controlled-master.png",
+      "path": "public/assets/mgjrpg-02/brand/game-logo-v05-front-door-512-r01.webp",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.015625,
+          0.02222222,
+          0.96875,
+          0.95555556
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 10453
+      },
+      "loadingPhase": "plan01-front-door-on-demand",
+      "displayRangeCssPx": [
+        96,
+        256
+      ],
+      "text": "Maze so Puzzle",
+      "fit": "contain",
+      "sha256": "de0e9ff238175671ebabf4961133800e7d477d3dbd249827034262824e3376e0",
+      "bytes": 113462,
+      "width": 512,
+      "height": 360,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 737280,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-16",
+      "label": "Ame application icon 16px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "platform-icon-16",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/16x16.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.125,
+          0.125,
+          0.75,
+          0.75
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        16,
+        16
+      ],
+      "sha256": "9197b1c5c915904089ba84fe4b5c1a92a4293889d7001c205c0f29aea15ead3d",
+      "bytes": 645,
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1024,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-32",
+      "label": "Ame application icon 32px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "platform-icon-32",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/32x32.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.0625,
+          0.0625,
+          0.875,
+          0.875
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        32,
+        32
+      ],
+      "sha256": "24e25b2eb148bbe7e92257a5a85e6baaa5f11ba8f32493e8adec5e4ef0200e29",
+      "bytes": 2590,
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 4096,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-48",
+      "label": "Ame application icon 48px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "platform-icon-48",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/48x48.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.04166667,
+          0.04166667,
+          0.91666667,
+          0.91666667
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        48,
+        48
+      ],
+      "sha256": "22318a6592ffa9a6d72ad91329dad539c8392dce3bf9465d5dee15df94258eee",
+      "bytes": 5793,
+      "width": 48,
+      "height": 48,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 9216,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-64",
+      "label": "Ame application icon 64px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "platform-icon-64",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/64x64.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.03125,
+          0.03125,
+          0.9375,
+          0.9375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        64,
+        64
+      ],
+      "sha256": "ece77389946bdc0846a06bdedbc83500cfd4d6ba8f325dc84f4f613bf2abb718",
+      "bytes": 9728,
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 16384,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-128",
+      "label": "Ame application icon 128px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "platform-icon-128",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/128x128.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.03125,
+          0.03125,
+          0.9375,
+          0.9375
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        128,
+        128
+      ],
+      "sha256": "fb06366b44d0f8a31e4b04beaeeabe03d6bf5fc71a819dace5b844652d7514cf",
+      "bytes": 33151,
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-256",
+      "label": "Ame application icon 256px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "platform-icon-256",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/256x256.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.03515625,
+          0.03515625,
+          0.9296875,
+          0.9296875
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        256,
+        256
+      ],
+      "sha256": "8d13cf9bbb2c3dc70979bdbcc3046a831843d75b52d21bd7d32dce7beb2745fb",
+      "bytes": 108694,
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-512",
+      "label": "Ame application icon 512px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "platform-icon-512",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/512x512.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.03515625,
+          0.03515625,
+          0.9296875,
+          0.9296875
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        512,
+        512
+      ],
+      "sha256": "0e31feba9f4ea40b87dd03422c22096eddf5959e29b02808ef5bb1d072cdf301",
+      "bytes": 365787,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-web",
+      "label": "Ame application icon",
+      "family": "brand",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "web-app-icon-512",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "public/assets/mgjrpg-02/brand/app-icon-ame-v03-web-512-r01.png",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "geometry": {
+        "visibleBounds": [
+          0.03515625,
+          0.03515625,
+          0.9296875,
+          0.9296875
+        ],
+        "borderVisiblePixels": 0,
+        "semiTransparentPixels": 0
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        16,
+        512
+      ],
+      "sha256": "0e31feba9f4ea40b87dd03422c22096eddf5959e29b02808ef5bb1d072cdf301",
+      "bytes": 365787,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-ico",
+      "label": "Ame Windows icon",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "windows-ico",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/icon.ico",
+      "encoder": {
+        "name": "Pillow ICO",
+        "version": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        },
+        "options": {
+          "sizes": [
+            16,
+            32,
+            48,
+            64,
+            128,
+            256
+          ]
+        }
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        16,
+        256
+      ],
+      "sha256": "d85a226b9757ff2d0c2b9df8fb767c82fdcba1a957dbbca3119ca23a351d67d2",
+      "bytes": 169606,
+      "width": 256,
+      "height": 256,
+      "format": "ico",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-icns",
+      "label": "Ame macOS icon",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "active",
+      "profile": "macos-icns",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/icon.icns",
+      "encoder": {
+        "name": "Pillow ICNS",
+        "version": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        },
+        "options": {}
+      },
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        16,
+        512
+      ],
+      "sha256": "892a0d7e95fea604742a11581e5936f89e7be13217e9d2f3a19325b4b58351fe",
+      "bytes": 2023815,
+      "width": 1024,
+      "height": 1024,
+      "format": "icns",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 4194304,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-30",
+      "label": "Ame Windows square logo 30px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-30",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square30x30Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        30,
+        30
+      ],
+      "sha256": "096759b4b4878e0ca67486bb7943b3f4e808356d908e5afa1b910e53da5918b1",
+      "bytes": 2286,
+      "width": 30,
+      "height": 30,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3600,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-44",
+      "label": "Ame Windows square logo 44px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-44",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square44x44Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        44,
+        44
+      ],
+      "sha256": "cae4d4603142bac32a0eb98c1caff1849db396b585c0365b7d65c9a7ba3b438e",
+      "bytes": 4887,
+      "width": 44,
+      "height": 44,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 7744,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-71",
+      "label": "Ame Windows square logo 71px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-71",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square71x71Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        71,
+        71
+      ],
+      "sha256": "8151cc82f9e3eb0cb15438ad2e0cddb3797dd6f86249d206a917638d5049a790",
+      "bytes": 11785,
+      "width": 71,
+      "height": 71,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 20164,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-89",
+      "label": "Ame Windows square logo 89px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-89",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square89x89Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        89,
+        89
+      ],
+      "sha256": "631e05a318ea7c64dfc711b58f1b7ec913dcc56134f7393d6b368bacb845f754",
+      "bytes": 17352,
+      "width": 89,
+      "height": 89,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 31684,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-107",
+      "label": "Ame Windows square logo 107px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-107",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square107x107Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        107,
+        107
+      ],
+      "sha256": "6827b1e383f9946632d194411da4e3ffc99a7c4792271f224b69b74bcd3bedac",
+      "bytes": 23618,
+      "width": 107,
+      "height": 107,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 45796,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-142",
+      "label": "Ame Windows square logo 142px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-142",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square142x142Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        142,
+        142
+      ],
+      "sha256": "7c01cf9016035c440e37ab47a9df0749a0147e19f71709a6c2431ba61077bc99",
+      "bytes": 39171,
+      "width": 142,
+      "height": 142,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 80656,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-150",
+      "label": "Ame Windows square logo 150px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-150",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square150x150Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        150,
+        150
+      ],
+      "sha256": "a104828f5245f0fb7d7cf045096480c2759a06aeb0acf98da3914d618acfb636",
+      "bytes": 43326,
+      "width": 150,
+      "height": 150,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 90000,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-284",
+      "label": "Ame Windows square logo 284px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-284",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square284x284Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        284,
+        284
+      ],
+      "sha256": "dd81ef9e4142548c9d168cc6735e7578ab66697b2af753bcb6eac31b9e71c18f",
+      "bytes": 130116,
+      "width": 284,
+      "height": 284,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 322624,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-square-310",
+      "label": "Ame Windows square logo 310px",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-square-310",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/Square310x310Logo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        310,
+        310
+      ],
+      "sha256": "5899e702a92a299a7f8a935e6d56e8678b47715fb30b9811589a933275c0697f",
+      "bytes": 151401,
+      "width": 310,
+      "height": 310,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 384400,
+      "colorMetadata": []
+    },
+    {
+      "stableId": "app-icon-ame-store",
+      "label": "Ame Windows Store logo",
+      "family": "platform-icon",
+      "artVersion": 3,
+      "runtimeStatus": "dormant",
+      "profile": "windows-store-50",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "path": "src-tauri/icons/ame-v03/StoreLogo.png",
+      "loadingPhase": "platform-shell",
+      "displayRangeCssPx": [
+        50,
+        50
+      ],
+      "sha256": "1736c8bf60dec5049a04b0b4a29867f8786c11d805e41c6d83e288d025921ef5",
+      "bytes": 6073,
+      "width": 50,
+      "height": 50,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 10000,
+      "colorMetadata": []
+    }
+  ],
+  "counts": {
+    "runtimeFileCount": 12,
+    "runtimeEncodedBytes": 1708073,
+    "runtimeDecodedBytesUpperBound": 14636960,
+    "platformFileCount": 19,
+    "platformEncodedBytes": 3149824,
+    "sourceMasterCount": 1,
+    "sourceMasterEncodedBytes": 377571
+  }
+}

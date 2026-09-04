@@ -56,6 +56,20 @@
       "dependencies": "Human v6 publication decision, deterministic 144-file rebuild, accepted Plan 07A allocation process, and the existing Plan 03 catalogue-contract allocation.",
       "notes": "The JS/CSS allowances leave 32 and 20 bytes respectively over the exact publication delta. The earlier catalogue-contract allocation retains its own 35-byte variance margin. Public bytes equal the exact encoded derivative total and authorize no unrelated media. Dormant rows are catalogued but not preloaded or placed. The 107,937,792-byte RGBA decoded upper-bound increase is reported separately and is not an assertion of simultaneous residency."
     },
+    {
+      "id": "art-plan03-r1-front-door-and-premium-utility-publication",
+      "owner": "art",
+      "status": "approved",
+      "compressedJsBytes": 900,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 1708073,
+      "reason": "Plan 03-R1 publishes the Human-approved seven-icon premium utility family, activates the selected environment-only title background and Ame Web/platform icon, and makes the approved exact wordmark and transparent home hero catalogue-ready for Plan 01 without preloading them. The final source-matched production build measures +845 gzip-9 JavaScript bytes, +0 CSS bytes and exactly +1,708,073 versioned public bytes over the accepted Plan 03 publication checkpoint.",
+      "evidencePath": "docs/PERFORMANCE_BUDGETS.md#plan-03-r1-front-door-and-premium-utility-publication-allocation",
+      "reviewBy": "2026-10-04",
+      "rollbackPoint": "Restore all seven navigation catalogue paths as one change, restore ASSETS.titleBackground to /assets/title-background-v1.webp, restore the previous Tauri icon list and Web favicon, and leave the dormant Plan-01-ready files unreachable. Keep every versioned file until the Plan 12 copy-first retirement gate.",
+      "dependencies": "Human Plan 03-R1 runtime-publication decision v09, accepted Plan 03 checkpoint 28946cbb04f45cb21cd51626914267ff4f71c375, source-review checkpoint d70c9c360683d2ed8f4f7d1cd172254bbda7b559, and Plan 07A allocation policy.",
+      "notes": "The 900-byte JavaScript allowance leaves 55 bytes for deterministic compression variance. The exact public allocation covers 12 new versioned Web runtime files; 14,636,960 decoded RGBA bytes are a per-file upper-bound sum, not simultaneous residency. Nineteen platform outputs add 3,149,824 repository/package-source bytes and the controlled logo master adds 377,571 source-only bytes. No superseded file is removed."
+    },
     { "owner": "lighting", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include reference and low-end frame-time cohorts." },
     { "owner": "vfx", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include overlap stress and reduced-motion coverage." },
     { "owner": "animation", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include compositing/layer evidence and idle-cost checks." },

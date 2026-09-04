@@ -1,0 +1,59 @@
+{
+  "schema": "maze-art-plan03-r1-publication-report/v1",
+  "publicationId": "mgjrpg-02-plan03-r1-publication-v01",
+  "generatedOn": "2026-09-04",
+  "rollbackAnchors": {
+    "static": "28946cbb04f45cb21cd51626914267ff4f71c375",
+    "sourceReview": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559"
+  },
+  "counts": {
+    "runtimeFileCount": 12,
+    "runtimeEncodedBytes": 1708073,
+    "runtimeDecodedBytesUpperBound": 14636960,
+    "platformFileCount": 19,
+    "platformEncodedBytes": 3149824,
+    "sourceMasterCount": 1,
+    "sourceMasterEncodedBytes": 377571
+  },
+  "activePointerChanges": {
+    "navigation": {
+      "nav-home": "/assets/mgjrpg-02/navigation/nav-home-v04-navigation-optical-128-r01.webp",
+      "nav-mazes": "/assets/mgjrpg-02/navigation/nav-mazes-v05-navigation-optical-128-r01.webp",
+      "nav-book": "/assets/mgjrpg-02/navigation/nav-book-v03-navigation-optical-128-r01.webp",
+      "nav-help": "/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp",
+      "nav-sound": "/assets/mgjrpg-02/navigation/nav-sound-v04-navigation-optical-128-r01.webp",
+      "nav-muted": "/assets/mgjrpg-02/navigation/nav-muted-v03-navigation-optical-128-r01.webp",
+      "nav-restart": "/assets/mgjrpg-02/navigation/nav-restart-v03-navigation-optical-128-r01.webp"
+    },
+    "titleBackground": "/assets/mgjrpg-02/brand/title-environment-v01-front-door-1672-r01.webp",
+    "webAppIcon": "/assets/mgjrpg-02/brand/app-icon-ame-v03-web-512-r01.png",
+    "tauriIcons": "src-tauri/icons/ame-v03/"
+  },
+  "plan01Ready": {
+    "gameLogo": [
+      "/assets/mgjrpg-02/brand/game-logo-v05-front-door-1024-r01.webp",
+      "/assets/mgjrpg-02/brand/game-logo-v05-front-door-512-r01.webp"
+    ],
+    "homeHeroSplash": "/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp",
+    "preloaded": false
+  },
+  "logoVerification": {
+    "exactText": "Maze so Puzzle",
+    "capitalization": "M/P uppercase; clearly smaller locally typeset lowercase so",
+    "subtitlePresent": false,
+    "yellowRouteLinePresent": false,
+    "font": "Fredoka",
+    "fontLicence": "SIL OFL 1.1",
+    "sourceMasterSha256": "021b0c41913c878f9f02adcb2343c0ff51ea26e3bd21d971738cd5d25d59a6ed"
+  },
+  "loadingContract": {
+    "title": "only selected title environment loads on title route",
+    "navigation": "icons load at their existing consumers",
+    "plan01Ready": "logo and hero remain dormant and are not preloaded"
+  },
+  "supersededFilesDeleted": 0,
+  "validation": {
+    "status": "passed for the isolated exact R1 candidate; shared-tree OST exceptions are external and recorded",
+    "report": "docs/source-assets/publication/mgjrpg-02-plan03-r1-validation-report.json"
+  }
+}

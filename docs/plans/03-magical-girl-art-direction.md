@@ -1879,3 +1879,40 @@ The Human explicitly approves generated Logo Candidate B and all seven Batch
 source-review gate only. Runtime derivatives, catalogue pointers, title-route
 integration, Tauri/platform icons, public bytes, performance allocation, and
 retirement remain unchanged and require the separate publication gate.
+
+## 23. Plan 03-R1 bounded publication — 2026-09-04
+
+Forward Human decision v9 explicitly promotes only the eleven reviewed source
+identities recorded at
+`docs/source-assets/calibrations/mgjrpg-02/v09/human-decision.json`: seven Batch
+23 utility stickers, the Batch 21 environment-only title layer and Home Splash
+B, the Batch 13 Ame-face icon, and Batch 24 Logo B as material/composition
+evidence. Rejected gallery alternatives, malformed lettering, checkerboards,
+and absent work remain excluded.
+
+The deterministic R1 publisher creates twelve versioned Web files, nineteen
+platform-icon files, and one controlled logo master. All seven navigation
+pointers switch together. The environment-only background replaces the current
+single title seam with a legacy fallback; the Web favicon and Tauri icon bundle
+advance to Ame v03. Home Splash B and the 1024/512 wordmarks are catalogued,
+dormant, and unpreloaded for Plan 01's future layered component. No new route,
+screen, gameplay rule, or title-layout work is included.
+
+The exact v05 wordmark uses locally licensed Fredoka masks for every letter;
+the generated Batch 24 source contributes only low-frequency material/value
+evidence. Exact text is `Maze so Puzzle`, with smaller lowercase `so`, no
+subtitle, and no yellow route line. A prior unreviewed v04 technical draft was
+rejected before publication because it retained generated word edges; its
+hashes remain in Batch 25's technical-rejection record.
+
+R1 adds 1,708,073 encoded public bytes and a 14,636,960-byte per-file decoded
+upper-bound sum, plus 3,149,824 bytes of platform outputs and 377,571 bytes for
+the source-only controlled master. Its named performance allocation, runtime
+map, source records, validation report, and rollback holds are authoritative.
+Eight previous runtime files are superseded but remain present and ineligible
+for Plan 12 removal. The exact R1 candidate passed deterministic rebuild,
+automated catalogue/art/full/performance checks, Web viewport inspection and a
+native Tauri build/launch smoke. The shared tree's only failures are the
+concurrent OST transition recorded in the validation report; the isolated R1
+candidate passes. The commit containing that report is the completed bounded
+Plan 03-R1 publication checkpoint.

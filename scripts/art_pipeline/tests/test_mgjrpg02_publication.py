@@ -63,7 +63,12 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
                 record = read_json(record_path)
                 self.assertEqual(record["validationProfile"], "strict-v2")
                 self.assertEqual(record["approvalStatus"], "approved")
-                self.assertEqual(record["runtimeStatus"], row["runtimeStatus"])
+                expected_status = (
+                    "superseded"
+                    if row["family"] == "navigation"
+                    else row["runtimeStatus"]
+                )
+                self.assertEqual(record["runtimeStatus"], expected_status)
                 self.assertEqual(validate_record_shape(record, row["recordId"]), [])
 
     def test_taxonomy_and_ring_blade_semantics_are_not_filename_aliases(self) -> None:

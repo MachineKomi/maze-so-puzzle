@@ -2183,3 +2183,29 @@ All Batch 23 candidates remain `pending-human`; runtime/public/catalogue deltas
 are exactly zero. The proposed publication map is non-operative and requires a
 later Human decision, versioned derivatives, previous-path rollback entries,
 measured feature allocation, runtime proof, and full validation before use.
+
+## Plan 03-R1 runtime-publication addendum v9 (2026-09-04)
+
+This forward record does not alter the exact Batch 13, 21, 22, 23, or 24
+generation prompts. Human decision
+`docs/source-assets/calibrations/mgjrpg-02/v09/human-decision.json` explicitly
+authorizes the reviewed seven premium utility sources, Batch 21 environment and
+Home Splash B, Batch 13 Ame-face icon, and Batch 24 Logo B material concept for
+bounded publication. It records every run ID, immutable source path, SHA-256,
+and byte count; rejected alternatives and malformed/checkerboard studies remain
+historical only.
+
+`scripts/art_pipeline/mgjrpg02_plan03_r1_publish.py` is the deterministic
+derivative recipe. It refuses differing overwrites, reconstructs in a temporary
+directory for byte comparison, performs matte extraction/edge dilation and
+family registration, and writes the exact source-to-runtime map at
+`docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json`.
+
+The approved generated logo is material and composition evidence, not glyph
+authority. Final v05 constructs all three exact strings from vendored Fredoka
+SemiBold glyph masks (SIL OFL 1.1), maps only broad lavender stone/mint enamel
+value character into those masks, and adds deterministic foil, pearl and one
+restrained holographic band. Exact text is `Maze so Puzzle`; `so` is lowercase,
+smaller, and independently typeset. There is no subtitle or yellow route line.
+The unreviewed v04 technical draft that retained generated `Maze`/`Puzzle` edges
+was rejected before publication and hash-recorded beside the v05 master.

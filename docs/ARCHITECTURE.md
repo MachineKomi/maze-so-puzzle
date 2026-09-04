@@ -335,6 +335,17 @@ Sunny Diamond and Violet Spade Bloom stay dormant. The platform app icon and all
 title, home, and logo concepts remain source-only for Plan 11, so generated
 lettering never becomes exact wordmark authority.
 
+Plan 03-R1 supersedes that last source-only snapshot for the explicitly approved
+front-door subset. Human decision v9 and
+`docs/source-assets/publication/mgjrpg-02-plan03-r1-runtime-map.json` bind the
+seven premium navigation icons, selected title environment, Plan-01-ready home
+hero/wordmark, and Ame platform icon to versioned derivatives. `FRONT_DOOR_ART`
+holds active-versus-dormant loading metadata; `ASSETS.titleBackground` is the
+only current route seam changed and retains the legacy fallback. The logo's
+exact glyph edges are deterministic Fredoka/OFL masks, not ImageGen lettering.
+Neither importing the catalogue nor opening a menu preloads the dormant hero or
+wordmarks.
+
 Lifecycle is intentionally three-dimensional: runtime status (`active`,
 `dormant`, `deprecated`, `superseded`, `source-only`), source status
 (`source-backed`, `partial`, `legacy-runtime-only`), and approval status

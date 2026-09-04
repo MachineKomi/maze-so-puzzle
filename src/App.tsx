@@ -3373,6 +3373,10 @@ function TitleScreen({
         aria-hidden="true"
         decoding="async"
         fetchPriority="high"
+        onError={(event) => {
+          event.currentTarget.onerror = null;
+          event.currentTarget.src = ASSETS.titleBackgroundFallback;
+        }}
       />
       <div className="title-vignette" aria-hidden="true" />
       <div className="title-fireflies" aria-hidden="true">

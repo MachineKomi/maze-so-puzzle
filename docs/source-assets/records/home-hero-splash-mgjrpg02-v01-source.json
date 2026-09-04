@@ -1,0 +1,192 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "home-hero-splash-mgjrpg02-v01-source",
+  "id": "home-hero-splash",
+  "artVersion": 1,
+  "family": "brand",
+  "runtimeStatus": "dormant",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-plan03-r1-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-21-home-splash-v01-b",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/PROMPTS.md",
+        "sha256": "bbdd6029d5fce09e1fbbe03bc10c91dc49a34d83d948405332e78af9ff78d7e3"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "rendering-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/recipes/mgjrpg-02.json",
+          "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-recorded-in-batch-ledger.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+          "sha256": "3f6917b2ae47fd4a0649d24c6301f1db2bfe1bf93c7c6144a567a13c09595ecf",
+          "bytes": 2152001,
+          "disposition": "selected",
+          "reason": "Explicit Human approval for bounded Plan 03-R1 runtime publication."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": true,
+        "renderingAuthorityEligible": true
+      },
+      "notes": "Exact ordered references and provider output ID remain in the immutable batch run record; this record binds the approved source to delivery derivatives."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/PROMPTS.md",
+      "sha256": "bbdd6029d5fce09e1fbbe03bc10c91dc49a34d83d948405332e78af9ff78d7e3"
+    },
+    "outputIds": [],
+    "notes": "Exact prompt and generation lineage are preserved in the batch prompt/run record."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+      "sha256": "3f6917b2ae47fd4a0649d24c6301f1db2bfe1bf93c7c6144a567a13c09595ecf",
+      "bytes": 2152001,
+      "relationship": "Human-approved immutable Home Splash B generator original",
+      "evidence": "Selected in v08 and explicitly approved for catalogue-ready Plan 01 use in v09."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "front-door-hero-1024",
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp",
+      "sha256": "9575548eb6b188cd762727d83bdb35d3ce88ad65171acbd408d54d34df2ade23",
+      "bytes": 644044,
+      "width": 1024,
+      "height": 768,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "profile": "front-door-hero-1024",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "plan01-front-door-on-demand",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "hero-splash",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.05859375,
+      0.02994792,
+      0.8828125,
+      0.94010417
+    ],
+    "safeInset": [
+      0.02994792,
+      0.05859375,
+      0.02994791,
+      0.05859375
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "front-door-hero-1024",
+        "outputPath": "public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-1024-r01.webp",
+        "width": 1024,
+        "height": 768,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 4,
+        "maxEncodedBytes": 1048576,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        3,
+        247,
+        7
+      ],
+      "clearDistance": 48.0,
+      "opaqueDistance": 144.0,
+      "minimumComponentPixels": 96
+    }
+  },
+  "approvalEvidence": {
+    "approvedBy": "Human project author",
+    "approvedAt": "2026-09-04T00:00:00+01:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v09/human-decision.json",
+    "evidenceSha256": "6e467cea1f22303faa2e75ae13b878c7b3ea8489a1b0e1b916c12e968770de3b"
+  },
+  "knownUnknowns": [
+    "Plan 01 owns the responsive layered front-door consumer; this asset remains dormant and is not preloaded."
+  ],
+  "rights": {
+    "originClaim": "Created for Maze so Puzzle from project-authored prompts and approved internal references; no named franchise, living artist or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "notes": "Human approved the source and bounded runtime publication.",
+    "reviewedBy": "Human project author"
+  },
+  "rollback": {
+    "method": "Remove the dormant Plan 01 pointer; the current combined title route continues using its single background."
+  }
+}

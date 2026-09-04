@@ -1,0 +1,25 @@
+{
+  "schema": "maze-art-technical-rejection/v1",
+  "recordedOn": "2026-09-04",
+  "status": "rejected-before-publication",
+  "reason": "The first post-approval deterministic draft replaced only the lowercase so plaque and retained generated Maze/Puzzle glyph edges. That did not satisfy the publication contract that every shipped letter use controlled exact glyph geometry. It was never catalogued, reviewed as a runtime candidate, committed, or published.",
+  "rejectedOutputs": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-25-plan03-r1-publication/game-logo-v04-controlled-master.png",
+      "sha256": "f58d084d46c21b06368e5df4668d8fe43e60543b2016f3f7df30d310751c324e",
+      "bytes": 1581322
+    },
+    {
+      "path": "public/assets/mgjrpg-02/brand/game-logo-v04-front-door-1024-r01.webp",
+      "sha256": "98db816b1f5c547a60560d9e0a9d0473fc2cddaa2d43306e949ad00bf35b59ba",
+      "bytes": 668452
+    },
+    {
+      "path": "public/assets/mgjrpg-02/brand/game-logo-v04-front-door-512-r01.webp",
+      "sha256": "2583a1b0db9505fd899eecc206b0be5a6792c2ea702df7bee679443c20835a04",
+      "bytes": 205938
+    }
+  ],
+  "replacementAuthority": "docs/source-assets/records/game-logo-mgjrpg02-v05-source.json",
+  "notes": "The Human-approved Batch 24 generated concept remains immutable material evidence. This rejection concerns only an unreviewed deterministic publication draft."
+}

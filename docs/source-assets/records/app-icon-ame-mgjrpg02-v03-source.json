@@ -1,0 +1,935 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "app-icon-ame-mgjrpg02-v03-source",
+  "id": "app-icon-ame",
+  "artVersion": 3,
+  "family": "brand",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "mgjrpg-02-plan03-r1-runtime-derivative-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-13-app-icon-ame-v03",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+        "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "rendering-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/recipes/mgjrpg-02.json",
+          "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-recorded-in-batch-ledger.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+          "sha256": "4f470db1ae278fa749460df92a8b3010d7a2b9531e2c4487a0d85e8bf4609616",
+          "bytes": 1826973,
+          "disposition": "selected",
+          "reason": "Explicit Human approval for bounded Plan 03-R1 runtime publication."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": true,
+        "renderingAuthorityEligible": true
+      },
+      "notes": "Exact ordered references and provider output ID remain in the immutable batch run record; this record binds the approved source to delivery derivatives."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+      "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+    },
+    "outputIds": [],
+    "notes": "Exact prompt and generation lineage are preserved in the batch prompt/run record."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "sha256": "4f470db1ae278fa749460df92a8b3010d7a2b9531e2c4487a0d85e8bf4609616",
+      "bytes": 1826973,
+      "relationship": "Human-approved immutable Ame-face application-icon source",
+      "evidence": "Ame identity and rounded-square composition approved in v09."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "platform-icon-16",
+      "path": "src-tauri/icons/ame-v03/16x16.png",
+      "sha256": "9197b1c5c915904089ba84fe4b5c1a92a4293889d7001c205c0f29aea15ead3d",
+      "bytes": 645,
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1024,
+      "profile": "platform-icon-16",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "platform-icon-32",
+      "path": "src-tauri/icons/ame-v03/32x32.png",
+      "sha256": "24e25b2eb148bbe7e92257a5a85e6baaa5f11ba8f32493e8adec5e4ef0200e29",
+      "bytes": 2590,
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 4096,
+      "profile": "platform-icon-32",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "platform-icon-48",
+      "path": "src-tauri/icons/ame-v03/48x48.png",
+      "sha256": "22318a6592ffa9a6d72ad91329dad539c8392dce3bf9465d5dee15df94258eee",
+      "bytes": 5793,
+      "width": 48,
+      "height": 48,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 9216,
+      "profile": "platform-icon-48",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "platform-icon-64",
+      "path": "src-tauri/icons/ame-v03/64x64.png",
+      "sha256": "ece77389946bdc0846a06bdedbc83500cfd4d6ba8f325dc84f4f613bf2abb718",
+      "bytes": 9728,
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 16384,
+      "profile": "platform-icon-64",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "platform-icon-128",
+      "path": "src-tauri/icons/ame-v03/128x128.png",
+      "sha256": "fb06366b44d0f8a31e4b04beaeeabe03d6bf5fc71a819dace5b844652d7514cf",
+      "bytes": 33151,
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "profile": "platform-icon-128",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "platform-icon-256",
+      "path": "src-tauri/icons/ame-v03/256x256.png",
+      "sha256": "8d13cf9bbb2c3dc70979bdbcc3046a831843d75b52d21bd7d32dce7beb2745fb",
+      "bytes": 108694,
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "profile": "platform-icon-256",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "platform-icon-512",
+      "path": "src-tauri/icons/ame-v03/512x512.png",
+      "sha256": "0e31feba9f4ea40b87dd03422c22096eddf5959e29b02808ef5bb1d072cdf301",
+      "bytes": 365787,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "platform-icon-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "web-app-icon-512",
+      "path": "public/assets/mgjrpg-02/brand/app-icon-ame-v03-web-512-r01.png",
+      "sha256": "0e31feba9f4ea40b87dd03422c22096eddf5959e29b02808ef5bb1d072cdf301",
+      "bytes": 365787,
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "web-app-icon-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-ico",
+      "path": "src-tauri/icons/ame-v03/icon.ico",
+      "sha256": "d85a226b9757ff2d0c2b9df8fb767c82fdcba1a957dbbca3119ca23a351d67d2",
+      "bytes": 169606,
+      "width": 256,
+      "height": 256,
+      "format": "ico",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 262144,
+      "profile": "windows-ico",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow ICO",
+        "version": "{\"libwebp\": \"1.6.0\", \"numpy\": \"2.5.2\", \"pillow\": \"12.2.0\", \"python\": \"3.14.3\", \"zlib\": \"1.3.1.zlib-ng\"}",
+        "options": {
+          "sizes": [
+            16,
+            32,
+            48,
+            64,
+            128,
+            256
+          ]
+        }
+      }
+    },
+    {
+      "id": "macos-icns",
+      "path": "src-tauri/icons/ame-v03/icon.icns",
+      "sha256": "892a0d7e95fea604742a11581e5936f89e7be13217e9d2f3a19325b4b58351fe",
+      "bytes": 2023815,
+      "width": 1024,
+      "height": 1024,
+      "format": "icns",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 4194304,
+      "profile": "macos-icns",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow ICNS",
+        "version": "{\"libwebp\": \"1.6.0\", \"numpy\": \"2.5.2\", \"pillow\": \"12.2.0\", \"python\": \"3.14.3\", \"zlib\": \"1.3.1.zlib-ng\"}",
+        "options": {}
+      }
+    },
+    {
+      "id": "windows-square-30",
+      "path": "src-tauri/icons/ame-v03/Square30x30Logo.png",
+      "sha256": "096759b4b4878e0ca67486bb7943b3f4e808356d908e5afa1b910e53da5918b1",
+      "bytes": 2286,
+      "width": 30,
+      "height": 30,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3600,
+      "profile": "windows-square-30",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-44",
+      "path": "src-tauri/icons/ame-v03/Square44x44Logo.png",
+      "sha256": "cae4d4603142bac32a0eb98c1caff1849db396b585c0365b7d65c9a7ba3b438e",
+      "bytes": 4887,
+      "width": 44,
+      "height": 44,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 7744,
+      "profile": "windows-square-44",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-71",
+      "path": "src-tauri/icons/ame-v03/Square71x71Logo.png",
+      "sha256": "8151cc82f9e3eb0cb15438ad2e0cddb3797dd6f86249d206a917638d5049a790",
+      "bytes": 11785,
+      "width": 71,
+      "height": 71,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 20164,
+      "profile": "windows-square-71",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-89",
+      "path": "src-tauri/icons/ame-v03/Square89x89Logo.png",
+      "sha256": "631e05a318ea7c64dfc711b58f1b7ec913dcc56134f7393d6b368bacb845f754",
+      "bytes": 17352,
+      "width": 89,
+      "height": 89,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 31684,
+      "profile": "windows-square-89",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-107",
+      "path": "src-tauri/icons/ame-v03/Square107x107Logo.png",
+      "sha256": "6827b1e383f9946632d194411da4e3ffc99a7c4792271f224b69b74bcd3bedac",
+      "bytes": 23618,
+      "width": 107,
+      "height": 107,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 45796,
+      "profile": "windows-square-107",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-142",
+      "path": "src-tauri/icons/ame-v03/Square142x142Logo.png",
+      "sha256": "7c01cf9016035c440e37ab47a9df0749a0147e19f71709a6c2431ba61077bc99",
+      "bytes": 39171,
+      "width": 142,
+      "height": 142,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 80656,
+      "profile": "windows-square-142",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-150",
+      "path": "src-tauri/icons/ame-v03/Square150x150Logo.png",
+      "sha256": "a104828f5245f0fb7d7cf045096480c2759a06aeb0acf98da3914d618acfb636",
+      "bytes": 43326,
+      "width": 150,
+      "height": 150,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 90000,
+      "profile": "windows-square-150",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-284",
+      "path": "src-tauri/icons/ame-v03/Square284x284Logo.png",
+      "sha256": "dd81ef9e4142548c9d168cc6735e7578ab66697b2af753bcb6eac31b9e71c18f",
+      "bytes": 130116,
+      "width": 284,
+      "height": 284,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 322624,
+      "profile": "windows-square-284",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-square-310",
+      "path": "src-tauri/icons/ame-v03/Square310x310Logo.png",
+      "sha256": "5899e702a92a299a7f8a935e6d56e8678b47715fb30b9811589a933275c0697f",
+      "bytes": 151401,
+      "width": 310,
+      "height": 310,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 384400,
+      "profile": "windows-square-310",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    },
+    {
+      "id": "windows-store-50",
+      "path": "src-tauri/icons/ame-v03/StoreLogo.png",
+      "sha256": "1736c8bf60dec5049a04b0b4a29867f8786c11d805e41c6d83e288d025921ef5",
+      "bytes": 6073,
+      "width": 50,
+      "height": 50,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 10000,
+      "profile": "windows-store-50",
+      "derivativeRevision": 1,
+      "runtimeStatus": "dormant",
+      "loadingPhase": "platform-shell",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow deterministic profile",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "app-icon",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.03515625,
+      0.03515625,
+      0.9296875,
+      0.9296875
+    ],
+    "safeInset": [
+      0.03515625,
+      0.03515625,
+      0.03515625,
+      0.03515625
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "platform-icon-16",
+        "outputPath": "src-tauri/icons/ame-v03/16x16.png",
+        "width": 16,
+        "height": 16,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "platform-icon-32",
+        "outputPath": "src-tauri/icons/ame-v03/32x32.png",
+        "width": 32,
+        "height": 32,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "platform-icon-48",
+        "outputPath": "src-tauri/icons/ame-v03/48x48.png",
+        "width": 48,
+        "height": 48,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "platform-icon-64",
+        "outputPath": "src-tauri/icons/ame-v03/64x64.png",
+        "width": 64,
+        "height": 64,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "platform-icon-128",
+        "outputPath": "src-tauri/icons/ame-v03/128x128.png",
+        "width": 128,
+        "height": 128,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 34175,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "platform-icon-256",
+        "outputPath": "src-tauri/icons/ame-v03/256x256.png",
+        "width": 256,
+        "height": 256,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 109718,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "platform-icon-512",
+        "outputPath": "src-tauri/icons/ame-v03/512x512.png",
+        "width": 512,
+        "height": 512,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 366811,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "web-app-icon-512",
+        "outputPath": "public/assets/mgjrpg-02/brand/app-icon-ame-v03-web-512-r01.png",
+        "width": 512,
+        "height": 512,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 366811,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-30",
+        "outputPath": "src-tauri/icons/ame-v03/Square30x30Logo.png",
+        "width": 30,
+        "height": 30,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-44",
+        "outputPath": "src-tauri/icons/ame-v03/Square44x44Logo.png",
+        "width": 44,
+        "height": 44,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-71",
+        "outputPath": "src-tauri/icons/ame-v03/Square71x71Logo.png",
+        "width": 71,
+        "height": 71,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-89",
+        "outputPath": "src-tauri/icons/ame-v03/Square89x89Logo.png",
+        "width": 89,
+        "height": 89,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 18376,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-107",
+        "outputPath": "src-tauri/icons/ame-v03/Square107x107Logo.png",
+        "width": 107,
+        "height": 107,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 24642,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-142",
+        "outputPath": "src-tauri/icons/ame-v03/Square142x142Logo.png",
+        "width": 142,
+        "height": 142,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 40195,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-150",
+        "outputPath": "src-tauri/icons/ame-v03/Square150x150Logo.png",
+        "width": 150,
+        "height": 150,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 44350,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-284",
+        "outputPath": "src-tauri/icons/ame-v03/Square284x284Logo.png",
+        "width": 284,
+        "height": 284,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 131140,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-square-310",
+        "outputPath": "src-tauri/icons/ame-v03/Square310x310Logo.png",
+        "width": 310,
+        "height": 310,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 152425,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      },
+      {
+        "id": "windows-store-50",
+        "outputPath": "src-tauri/icons/ame-v03/StoreLogo.png",
+        "width": 50,
+        "height": 50,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 3,
+        "minimumAlphaComponentPixels": 1,
+        "maxEncodedBytes": 16384,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "edge-connected",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "tolerance": 46
+    }
+  },
+  "approvalEvidence": {
+    "approvedBy": "Human project author",
+    "approvedAt": "2026-09-04T00:00:00+01:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v09/human-decision.json",
+    "evidenceSha256": "6e467cea1f22303faa2e75ae13b878c7b3ea8489a1b0e1b916c12e968770de3b"
+  },
+  "knownUnknowns": [
+    "Physical Windows taskbar/installer and macOS Finder inspection remain release gates; deterministic source-size proofs cover 16–512 px."
+  ],
+  "rights": {
+    "originClaim": "Created for Maze so Puzzle from project-authored prompts and approved internal references; no named franchise, living artist or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "notes": "Human approved the source and bounded runtime publication.",
+    "reviewedBy": "Human project author"
+  },
+  "rollback": {
+    "method": "Restore src-tauri/tauri.conf.json to the legacy icon list and retain both complete icon sets until Plan 12.",
+    "previousPath": "src-tauri/icons/icon.ico",
+    "previousSha256": "34ceadf6afd5d0e2950141932b04367761da09571ce6d2a78b1a0feb05324305"
+  }
+}

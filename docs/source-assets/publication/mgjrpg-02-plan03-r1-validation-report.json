@@ -1,0 +1,158 @@
+{
+  "schema": "maze-art-plan03-r1-validation/v1",
+  "publicationId": "mgjrpg-02-plan03-r1-publication-v01",
+  "validatedOn": "2026-09-04",
+  "candidateBase": "ed3bd593b9b9eb48d18684a1db54f62321e50be2",
+  "rollbackAnchors": {
+    "staticPublication": "28946cbb04f45cb21cd51626914267ff4f71c375",
+    "sourceReview": "d70c9c360683d2ed8f4f7d1cd172254bbda7b559",
+    "ancestryVerified": true
+  },
+  "automated": [
+    {
+      "command": "python scripts/art_pipeline/mgjrpg02_plan03_r1_publish.py --check",
+      "result": "pass",
+      "detail": "32 generated outputs reproduced byte-for-byte"
+    },
+    {
+      "command": "npm run art:test",
+      "result": "pass",
+      "detail": "105 tests passed"
+    },
+    {
+      "command": "npm run art:check",
+      "result": "pass-with-historical-warnings",
+      "detail": "0 errors; 420 warnings: 18 alpha-border legacy, 1 catalogue cross-check limited, 21 generation-batch pending, 124 legacy-prompt gaps, 124 legacy-source gaps, 128 rights pending, 1 strict-prompt pending, and 3 unreferenced source masters. No warning was introduced as an unexplained R1 regression."
+    },
+    {
+      "command": "npx vitest run src/artCatalog.test.ts src/assets.test.ts scripts/art_pipeline/tests/test_mgjrpg02_publication.py scripts/art_pipeline/tests/test_plan03_r1_publication.py",
+      "result": "pass",
+      "detail": "29 focused catalogue, resolver and publication tests passed"
+    },
+    {
+      "command": "npm run check (isolated exact R1 candidate)",
+      "result": "pass",
+      "detail": "35 test files; 409 tests; TypeScript and production build passed"
+    },
+    {
+      "command": "npm run perf:check (isolated exact R1 candidate)",
+      "result": "pass",
+      "detail": "11 scenarios, 9 allocation owners and 3 evidence files; gzip JS 130357/130540 bytes, gzip CSS 29314/29363 bytes, public 100468819/100468819 bytes"
+    },
+    {
+      "command": "npm run check:desktop (primary and isolated exact R1 candidate)",
+      "result": "pass",
+      "detail": "Cargo/Tauri desktop checks passed in both worktrees"
+    },
+    {
+      "command": "npx tauri build --no-bundle",
+      "result": "pass",
+      "detail": "release executable built at src-tauri/target/release/maze-so-puzzle.exe; 157833728 bytes; SHA-256 d637b5ca1db40ab680e176753273fb633c72809fd0c6f862bb67b847b59d6369"
+    },
+    {
+      "command": "hidden native launch smoke",
+      "result": "pass",
+      "detail": "release process remained responsive and created a non-zero native window handle before controlled termination"
+    }
+  ],
+  "sharedTreeExceptions": [
+    {
+      "command": "npm run check",
+      "result": "external-failure",
+      "owner": "concurrent OST integration",
+      "detail": "408/409 tests passed; src/music.test.ts reports 13 legacy MP3 paths removed by the concurrent OST working tree. The isolated R1 candidate passes all 409 tests."
+    },
+    {
+      "command": "npm run perf:check",
+      "result": "external-failure",
+      "owner": "concurrent OST integration",
+      "detail": "shared public bytes are 149463461 versus 100468819; the exact +48994642 bytes are the concurrent six-pool OST delta. The isolated R1 candidate passes at the exact R1 public limit."
+    }
+  ],
+  "inventory": {
+    "path": "C:\\Users\\hellb\\AppData\\Local\\Temp\\maze-plan03-r1-isolated-inventory.json",
+    "runtimeAssets": {
+      "count": 295,
+      "encodedBytes": 100404905,
+      "deltaFromAcceptedPlan03": {
+        "count": 12,
+        "encodedBytes": 1708073
+      }
+    },
+    "r1DecodedImageBytesUpperBound": 14636960,
+    "dist": {
+      "count": 300,
+      "encodedBytes": 101085696,
+      "deltaFromAcceptedPlan03": {
+        "count": 12,
+        "encodedBytes": 1712014
+      }
+    },
+    "releasePackages": {
+      "count": 0,
+      "note": "No installer package was emitted; the required no-bundle native release executable was built and smoke-launched. Physical installer and signed-package evidence remain a release/Plan 11 gate."
+    }
+  },
+  "browser": {
+    "server": "production preview at http://127.0.0.1:4176",
+    "titleViewports": [
+      "1920x1080",
+      "1280x720",
+      "1194x834",
+      "1024x768",
+      "960x540",
+      "844x390",
+      "568x320"
+    ],
+    "gameplayViewports": [
+      "1280x720",
+      "1194x834",
+      "844x390",
+      "568x320"
+    ],
+    "flows": [
+      "combined title/home route",
+      "normal gameplay navigation",
+      "Big Maze",
+      "Help",
+      "Adventure Book earned and locked achievements",
+      "Maze Select",
+      "Restart confirmation",
+      "Home return",
+      "Sound and Muted states"
+    ],
+    "assertions": {
+      "consoleWarningsOrErrors": 0,
+      "brokenVisibleImages": 0,
+      "publicRuntimeUrls": "12/12 HTTP 200; 1708073 bytes",
+      "titleDocumentOverflow": false,
+      "dormantHeroMounted": false,
+      "dormantLogoMounted": false,
+      "soundStateLabels": "Turn sound off / Turn sound on",
+      "achievementViews": "2 earned and 13 locked; all visible image resources decoded"
+    },
+    "evidenceDirectory": "artifacts/art-proofs/mgjrpg-02/plan03-r1-runtime/",
+    "screenshots": [
+      "title-1920x1080.png",
+      "title-1280x720.png",
+      "title-1194x834.png",
+      "title-1024x768.png",
+      "title-960x540.png",
+      "title-844x390.png",
+      "title-568x320.png",
+      "gameplay-1280x720.png",
+      "gameplay-1194x834.png",
+      "gameplay-844x390.png",
+      "gameplay-568x320.png",
+      "optical-proof.png"
+    ],
+    "opticalProof": "seven icons at 64/48/32/24/16 CSS pixels plus exact wordmark on light and dark grounds; 37/37 images decoded"
+  },
+  "externalGates": [
+    "Physical iPad, TV and compact-phone hardware inspection",
+    "Signed installer/package and OS shell/taskbar icon inspection",
+    "Plan 01 integration of the dormant layered hero and exact wordmark"
+  ],
+  "gitDiffCheck": "pending final staged-tree check",
+  "commit": "recorded by the Git commit containing this report"
+}
