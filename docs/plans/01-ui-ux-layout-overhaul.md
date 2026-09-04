@@ -4,7 +4,7 @@
 
 This addendum is execution authority and supersedes any conflicting recommendation below. The original status and baseline text describe the research pass; a later manager execution prompt authorizes implementation within this scope.
 
-Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-implementation-roadmap.md` first, then re-read this plan in full and inspect current `HEAD`. Execution is gated on completed Plan 07A instrumentation, Plan 06 semantic/gameplay foundations, and Plan 03 art/catalogue/safe-bound contracts.
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-implementation-roadmap.md` first, then re-read this plan in full and inspect current `HEAD`. Execution is gated on completed Plan 07A instrumentation, Plan 06 semantic/gameplay foundations, Plan 03 art/catalogue/safe-bound contracts, and root checkpoint 03M's green compatibility/gameplay-contract baseline.
 
 ### Adopted product amendments
 
@@ -17,6 +17,87 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-impleme
 - Eliminate accidental negative space around the minimap and maze. Big Maze uses all remaining width for a larger board or purposeful focus deck; it never reserves a hidden sidebar track.
 - Add 1920×1080 TV/couch and 1194×834 iPad coverage. Verify TV-safe margins, couch-readable focus/labels/controller glyphs, and consistent logical focus order.
 - Supply per-slot VFX anchors such as `bag:<semantic-slot-id>` plus a generic Bag fallback, not one fixed Bag coordinate.
+- Resolve every enemy, friend, item, weapon, cage, portal and environment label/
+  image through the final semantic catalogue. Do not freeze Plan-01 components
+  to the pre-Plan-03 roster with exhaustive UI switches or asset filenames;
+  unknown/dormant identities receive an explicit accessible fallback. The
+  five-friend HUD limit is the current per-maze display maximum, not the size of the
+  collectable species roster.
+- Drive the Bag from the typed level/equipment registry. It must fit all current
+  one-to-seven persistent slots and pass a synthetic larger-roster wrap fixture
+  so a later approved traversal capability does not require another UI
+  architecture. This is presentation headroom, not authorization to add rules.
+- Provide one shared catalogue-image primitive that selects an approved optical
+  rendition from semantic role, rendered size and DPR while respecting visible
+  bounds, safe inset, face box, pivot and aspect metadata. Add a test-only
+  integration rack for every UI-consumed family, longest labels, fallback and
+  smallest declared delivery size; it must not make production preload the
+  complete catalogue.
+- Keep the MazeViewport host capable of rendering Plan-04 named visual-region
+  layers in one world transform. The minimap remains topology-first and does not
+  reproduce detailed floor/wall textures merely because a level has multiple
+  regions; expose a quiet semantic region cue only when Plan 09 explicitly
+  marks it as puzzle-relevant.
+- Replace separate permanent audio buttons with one compact accessible Sound
+  disclosure in the canonical action order. It presents Mute/Unmute, Previous,
+  Next and Shuffle/Random, reserving Loop only if the Human approves it. This
+  plan owns disclosure/focus/geometry—not playback history or track selection.
+  Invoke only the `MusicTransportPort` frozen at checkpoint 03M; do not reach
+  into an audio element, recreate history, or assume Plan 07B has already landed.
+- Treat `PT-20260903-25` as a Plan-01 acceptance tranche, not optional polish.
+  The rebuilt shell must look like an authored Maze video-game interface from
+  the same visual world as the final sprites, rather than a generic clean web
+  dashboard with illustrated content. Reference games communicate joyful
+  hierarchy and console-grade finish only; do not reproduce their UI skins,
+  layouts, logos, type treatments, transitions or trade dress.
+- Implement a small tokenized surface/edge/ornament family from the final Art
+  Bible's “paper-cut signals over magical surfaces over painted world” model.
+  The leading treatment is softly frosted white/pearl magical glass with quiet
+  text centres, a luminous inner rim, controlled world tint/depth and sparse
+  storybook edge ornament. Avoid uniform repeated cards, default pills/forms,
+  excessive nested translucency and equal emphasis everywhere.
+- Provide full/lite/static recipes for every surface family. Literal
+  `backdrop-filter` or equivalent transmission is bounded to a measured small
+  number of static overlays in full quality; lite/static reproduce the same
+  material through opaque colour, gradients, borders and highlights. Never
+  continuously blur the moving maze behind the persistent HUD.
+- Freeze a compact, locally packaged typography system with Art-Bible approval,
+  licence provenance, exact real weights, no synthetic weights, required text/
+  arithmetic glyph coverage, stable figures where useful, fallback and byte/
+  loading policy. Test its expressive display/control voice and legible prose
+  treatment at couch distance, every minimum text size, 200% resize and the
+  text-spacing override; font personality never excuses reduced readability.
+- Extend the shared catalogue-image primitive with an explicit `presentation`
+  role. Contextual blocker feedback prominently displays the exact required
+  item's large approved rendition plus concise real text. Preserve the current
+  blocker interaction and migrate its direct 112px `itemSrc` field-image
+  coupling rather than adding another dialog/state. Too-strong guidance,
+  newly met friends/enemies, item details, Adventure Book, important rewards,
+  victory and selected story moments may use it when it adds recognition or
+  emotion. Routine HUD cells keep their optical renditions. Never upscale a
+  small field sprite as modal art.
+- Use one reusable semantic `CatalogueImage`/`PresentationArt` consumer and typed
+  dialog variants such as standard, blocker, hint, story, and celebration rather
+  than a boolean visual special case or hard-coded URL in each dialog. At the
+  960×540 reference stage, the blocker subject occupies at least 144 CSS px;
+  compact layouts preserve at least 96 CSS px unless measured available geometry
+  proves that impossible, in which case the UI spec records the reviewed band.
+- Presentation renditions load only for the visible or bounded-imminent surface,
+  reserve stable responsive geometry before decode and fall back to the correct
+  semantic optical art/text on missing or failed media. Opening one dialog must
+  not preload the complete presentation catalogue or block its primary action.
+- Integrate the individually approved Plan-03 title illustration, home splash
+  and logo as the first front-door set, preserving their crop/safe zones and
+  separate overlay text/logo semantics. The current `title` surface already
+  serves as Home: assign the illustrations distinct background/foreground or
+  responsive roles, or explicitly reserve one, without adding a screen merely
+  to show both. Treat generated lettering as concept-only until the exact
+  “Maze so Puzzle” wordmark is reconstructed through controlled local type or
+  vector/raster lettering, passes spelling/legibility/optical checks and receives
+  Human approval. Plan 11 later audits rather than automatically replaces that
+  set. After Plan-01 acceptance, produce the
+  preferred Family Preview 1 unless the manager records a red or disproportionate
+  packaging gate under `PT-20260903-26`.
 
 ### Shared ownership
 
@@ -32,9 +113,19 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-impleme
 
 ### Documentation and completion
 
-Create and maintain `docs/UI_UX_SPEC.md`. Update `docs/ARCHITECTURE.md`, the README device/layout description, `docs/PROJECT_AUDIT.md`, and `docs/RELEASE_CHECKLIST.md` only as the new layout becomes true. Remove obsolete fixed-stage claims when cutover is complete rather than leaving contradictory authorities.
+Create and maintain `docs/UI_UX_SPEC.md`, including the final UI material,
+shape, ornament, typography, state and presentation-rendition grammar. Update
+`docs/ARCHITECTURE.md`, the README device/layout description,
+`docs/PROJECT_AUDIT.md`, and `docs/RELEASE_CHECKLIST.md` only as the new layout
+becomes true. Remove obsolete fixed-stage claims when cutover is complete rather
+than leaving contradictory authorities.
 
-The implementation is not complete without automated geometry/state coverage, live screenshots for the shared viewport matrix, Normal/Big/dialog/controller-focus checks, full objective and inventory containment, no accidental card bands, no legacy override layer, and `npm run check` plus `npm run check:desktop` passing.
+The implementation is not complete without automated geometry/state coverage,
+live screenshots for the shared viewport matrix, a Human-reviewable styled
+component/state proof sheet, Normal/Big/dialog/controller-focus checks, exact
+blocker presentation art, font/contrast/quality-tier evidence, full objective
+and inventory containment, no accidental card bands, no legacy override layer,
+and `npm run check` plus `npm run check:desktop` passing.
 
 Status: planning and research only; no UI implementation is included in this change.
 
@@ -52,12 +143,14 @@ Application context: React 19 / Vite frontend shared with Tauri 2; Tauri default
 
 The UI should evolve from one uniformly scaled 960×540 application canvas to an adaptive DOM play shell while retaining a fixed-reference, square maze viewport and the existing gameplay coordinate model.
 
-The recommended direction is a **board-first adaptive command rail plus information deck**:
+The manager-adopted direction is a **board-first square maze plus one persistent information/control deck**. The three-zone command-rail concept below is retained only as research evidence:
 
 - Keep the 6×6 camera square, its global maze coordinates, its cell proportions, and rect-based pointer conversion.
 - Stop scaling the entire HUD, text, dialogs, and touch controls as part of the 960×540 scene.
-- At short desktop sizes, use the maze panel's current side space as a 152px command rail for view actions, steps, controls, and contextual feedback.
-- At tall tablet and phone sizes, remove that rail and let the information deck absorb those functions using real viewport CSS pixels.
+- At every primary landscape size, place view actions, steps, controls,
+  contextual feedback and status in the same right-hand deck and logical order.
+- At phone sizes, compact and wrap that deck without creating a separate rail or
+  removing essential actions.
 - In Big Maze, give the board the largest square that the actual viewport permits and turn all remaining width into an explicit focus deck. Never position the minimap outside a clipped maze panel.
 - Make Objective, Rescue, Bag, Power, and map orientation continuously visible. Keep currency compact. Move help content, item detail, utility navigation, and tester tools into deliberate contextual surfaces.
 - Replace the chronological 7,262-line stylesheet cascade with component-oriented styles and one declared cascade order. Do not append another late override section.
@@ -101,9 +194,9 @@ To satisfy the requirement that the repository diff contain only this plan, scre
 
 The evidence set contains:
 
-- Normal-mode screenshots for Mazes 1, 8, 12, 15, and 16 at all five required viewports, named `maze-{01|08|12|15|16}-{1280x720|960x540|1024x768|844x390|568x320}.png`.
-- Big Maze screenshots for Maze 12 at all five viewports, named `maze-12-big-{viewport}.png`.
-- Help-modal screenshots at all five viewports.
+- Historical normal-mode audit screenshots for Mazes 1, 8, 12, 15, and 16 at the five planning-time viewports, named `maze-{01|08|12|15|16}-{1280x720|960x540|1024x768|844x390|568x320}.png`; the adopted execution matrix later in this plan contains seven base viewports.
+- Historical Big Maze screenshots for Maze 12 at those five audit viewports, named `maze-12-big-{viewport}.png`.
+- Historical Help-modal screenshots at those five audit viewports.
 - Hint, tester-picker, and Maze 16 story-dialog screenshots at representative desktop and minimum-phone sizes.
 - Raw `measurements.json`, `variable-measurements.json`, and `modal-measurements.json` exports.
 
@@ -338,7 +431,7 @@ The play surface should allocate space according to how quickly a child needs th
 3. **Movement input and accepted-input feedback.** Keyboard and board gesture remain primary where available; an accessible on-screen alternative remains present.
 4. **Power.** Keep the number and visual identity visible, including three digits; do not truncate at 99.
 5. **Rescue progress.** Show `rescued / total` and all 1–5 friend states.
-6. **Persistent Bag state.** Show all 1–7 slots in stable order, including missing/found state.
+6. **Persistent Bag state.** Show every persistent slot declared by the current level in stable semantic order, including missing/found state; the shipped envelope is 1–7 and the layout is not capped there.
 7. **Orientation.** Keep a square minimap plus the player's position, explored amount, and actionable goal/marker state.
 8. **Current feedback.** Blocked reason, pickup, rescue, combat result, and route guidance must be perceivable visually and through the status region.
 
@@ -366,9 +459,12 @@ No continuously visible information may depend on hover. Contextual details must
 
 ## 7. Credible layout directions
 
-### Direction A — Adaptive command rail plus information deck (recommended)
+### Direction A — Adaptive command rail plus information deck (research option; superseded)
 
-Normal mode uses three conceptual zones: square board, a narrow command rail when width/height make it useful, and a content-sized information deck. On tall tablet and compact landscape screens, the rail disappears and its controls move into the deck. Big Maze uses a maximum square plus a wider focus deck.
+This was the research recommendation. The Human/manager decision now uses a
+square board plus one persistent information/control deck at every primary
+landscape size. The analysis below is retained as evidence only and must not be
+implemented as a third layout track.
 
 Benefits:
 
@@ -382,7 +478,7 @@ Benefits:
 Costs and risks:
 
 - Requires the deliberate stage-architecture migration described in Section 8.
-- Wide, tall, compact, and micro regimes need geometry tests rather than relying on one screenshot.
+- The adopted primary and compact regimes need geometry tests rather than relying on one screenshot.
 - VFX destinations coupled to the old HUD must switch to measured anchors.
 - At 568×320, visual rescue and Bag thumbnails must be compact non-interactive status cells; full labels move to one accessible detail surface.
 
@@ -446,69 +542,62 @@ Build the adaptive game surface behind a temporary development-only `data-layout
 
 ### 9.1 Shared shell rules
 
-- `PlayViewport` fills `100dvi × 100dvb`. Each logical edge takes the maximum of regime padding and its corresponding safe-area variable—for example, `padding-inline-start: max(var(--regime-padding), env(safe-area-inset-left, 0px))`; safe-area and regime padding are not added together. `--regime-padding` is 8px for wide/standard and 4px for compact/micro.
-- Landscape gameplay uses no document scroll at the five base target sizes. At 200% text resize, the HUD may scroll vertically in one dimension; the square board remains an essential two-dimensional region and stays usable.
+- `PlayViewport` fills `100dvi × 100dvb`. Each logical edge takes the maximum of regime padding and its corresponding safe-area variable—for example, `padding-inline-start: max(var(--regime-padding), env(safe-area-inset-left, 0px))`; safe-area and regime padding are not added together. `--regime-padding` begins at 8px for primary landscape and 4px for compact landscape, then may grow into TV-safe margin without changing topology.
+- Landscape gameplay uses no document scroll at the seven base target sizes. At 200% text resize, the deck may scroll vertically in one dimension; the square board remains an essential two-dimensional region and stays usable.
 - `PlayShell` is the query container: `container-type: size; container-name: play-shell`. Do not query the fixed scene.
-- Base gap is 12px on wide/tall, 8px on standard/compact, and 4px on micro.
+- Base gap is 8–12px in primary landscape and 4–8px in compact landscape.
 - The board is `aspect-ratio: 1`, `inline-size: var(--board-size)`, `block-size: var(--board-size)`, with equal `repeat(6, minmax(0, 1fr))` tracks. It is never stretched to fill a rectangular track.
 - Panel backgrounds may fill remaining space, but cards use `block-size: max-content` unless the content itself is an intentional scroll region.
 - Overlay feedback is constrained to the board or a named feedback row and must not intercept board input outside its own controls.
 
-### 9.2 Target geometry at the five required viewports
+### 9.2 Target geometry at the required viewports
 
-These are zero-safe-inset implementation baselines in rendered CSS pixels, with a ±2px tolerance for borders and rounding. They intentionally keep normal-mode tiles close to the current size while reallocating the old side rails.
+The manager-reviewed authority replaces the planning-era three-column and five-
+regime model. Use one canonical two-region topology at TV, desktop, Tauri and
+iPad/tablet sizes: the largest practical square board on the left and one
+persistent information/control deck on the right. Normal and Big modes vary the
+board/deck emphasis without introducing or reserving a separate command rail.
+The implementation must measure exact tracks from final content and safe bounds;
+the old `152px` rail and numeric table are historical evidence, not targets.
 
-| Viewport | Safe content box | Normal-mode tracks | Normal board / tile | Big-mode tracks | Big board rule |
-| --- | --- | --- | --- | --- | --- |
-| 1280×720 | 1264×704 after 8px outer padding | play `672 + 8 + 152 = 832`; outer gap 12; HUD 420 | 672 square; 112 per tile | board 704; gap 12; focus deck 548 | Fill available height; never smaller than Normal. |
-| 960×540 | 944×524 after 8px padding | play `504 + 8 + 152 = 664`; outer gap 8; HUD 272 | 504 square; 84 per tile | board 512; gap 8; focus deck 424 | Preserve current board scale while gaining a real side deck. |
-| 1024×768 | 1008×752 after 8px padding | board 648; gap 12; HUD 348; command rail folded into HUD | 648 square; 108 per tile | board 704; gap 12; focus deck 292 | Use tall viewport rather than retaining 96px letterbox bands. |
-| 844×390 | 836×382 after 4px padding | board 378; gap 8; HUD 450 | 378 square; 63 per tile | board 382; gap 8; focus deck 446 | Maximum-height square plus full compact deck. |
-| 568×320 | 560×312 after 4px padding | board 306; gap 4; HUD 250 | 306 square; 51 per tile | board 312; gap 4; focus deck 244 | Exact-height square; micro deck remains usable. |
+At 1920×1080, 1280×720, 1194×834, 1024×768 and 960×540, keep the same deck
+section/action order and expose ordinary utilities directly. At 844×390 and the
+568×320 emergency floor, retain the same board/deck relationship and logical
+order but permit tighter wrapping, one bounded deck scroller and `More` for
+secondary utilities. Do not move controls into a third track.
 
-Use four layout regimes selected from the actual `PlayShell`, not from UA/device labels:
+Regimes are selected from the actual `PlayShell`, not a device name:
 
-| Regime | Entry condition | Structure |
+| Regime | Purpose | Invariant structure |
 | --- | --- | --- |
-| `wide` | inline ≥1100px and block ≥600px | Board + 152px command rail + wide HUD. |
-| `standard-short` | inline ≥900px and block <600px | Board + 152px command rail + 272px HUD at the minimum envelope. |
-| `standard-tall` | inline ≥900px and block ≥600px but not `wide` | Board + HUD; rail functions move into HUD; board is vertically centred. |
-| `compact-landscape` | inline 640–899px | Maximum-height board + remaining HUD; cards use a two-column status area. |
-| `micro-landscape` | inline <640px or block ≤340px | Maximum-height board + 244–250px micro HUD with a 96px map, compact status cells, and 48px direction strip. |
+| `primary-landscape` | TV, desktop, Tauri and iPad/tablet | Square board + one persistent right deck; all ordinary actions in canonical order. |
+| `compact-landscape` | Playable phone fallback | Square board + one compact right deck; identical logical order, bounded wrapping/scroll and optional `More`. |
 
-Regime conditions should be expressed with size container queries. If a single discontinuity looks abrupt during implementation, interpolate only the board/HUD split with `clamp()`; do not interpolate target sizes below their minimums.
+Use size container queries and `clamp()` for track interpolation. Do not scale
+the HUD, make the board rectangular, hide required state, or shrink the minimap
+below the manager-approved targets merely to preserve an old board size.
 
-When safe-area insets are nonzero, subtract them before selecting a regime and apply this priority order: preserve 48/44px targets and the regime's minimum HUD width; preserve text sizes; reduce the square board; then reduce decorative gaps/padding to their stated minimum. Do not scale the HUD. Exact board targets in the table are waived by the inset amount, but containment, square geometry, and target-size criteria are not. If vertical safe space leaves less than the micro HUD's 302px content requirement, use a single bounded vertical HUD scroller with sticky 48px movement controls and a sticky Objective/Hint header; no content may clip or require horizontal scrolling.
+When safe-area insets are nonzero, subtract them before selecting a regime and apply this priority order: preserve 48/44px targets and the deck's minimum usable width; preserve text sizes; reduce the square board; then reduce decorative gaps/padding to their stated minimum. Do not scale the deck. Measured board targets may reduce by the inset amount, but containment, square geometry, and target-size criteria are not waived. If vertical safe space cannot contain the complete compact deck, use one bounded vertical deck scroller with sticky 48px movement controls and a sticky Objective/Hint header; no content may clip or require horizontal scrolling.
 
-### 9.3 Normal-mode wide/short wireframe
+### 9.3 Canonical landscape wireframe
 
 ```text
-┌──────────────────────────── PlayShell ──────────────────────────────┐
-│ ┌──────────── square MazeViewport ────────────┐ ┌─ Command ─┐ gap │
-│ │                                             │ │ Level/step │     │
-│ │                                             │ │ View/New   │     │
-│ │               6 × 6 board                   │ │ Story/Test │     │
-│ │                                             │ │  D-pad     │     │
-│ │                                             │ │ feedback   │     │
-│ └─────────────────────────────────────────────┘ └─────────────┘     │
-│                                              ┌──── HUD deck ──────┐ │
-│                                              │ Power + currencies │ │
-│                                              │ Full objective     │ │
-│                                              │ Map | Rescue/Bag   │ │
-│                                              │ Utility navigation │ │
-│                                              └────────────────────┘ │
-└─────────────────────────────────────────────────────────────────────┘
+┌────────────────────────── PlayShell ──────────────────────────┐
+│ ┌────────── square MazeViewport ──────────┐ ┌── Right deck ─┐ │
+│ │                                         │ │ Level / Power │ │
+│ │                                         │ │ Objective     │ │
+│ │              6 × 6 board                │ │ Large minimap │ │
+│ │                                         │ │ Friends / Bag │ │
+│ │                                         │ │ Controls      │ │
+│ │                                         │ │ Utilities     │ │
+│ └─────────────────────────────────────────┘ └───────────────┘ │
+└───────────────────────────────────────────────────────────────┘
 ```
 
-The visual grid is one row; the diagram separates the HUD vertically only for readability. In DOM order, put the board's descriptive/live status immediately after the board, then the HUD heading and sections, then controls/navigation.
-
-The 152px command rail uses existing functions and eliminates decorative side waste:
-
-- Level index/name may occupy two lines; the full name is never squeezed into a 10px pill.
-- Step count and Normal/Big state use compact labelled badges.
-- Big, New Maze, Story, and Tester (debug only) use a 2-column grid of at least 48px targets.
-- Movement buttons form a familiar cross: three 48px columns plus two 4px gaps = 152px. Board gestures and keyboard remain primary; this is the accessible alternative.
-- Current feedback can use the rail below the controls or a bottom board toast. Never reserve an empty fixed row when there is no message.
+In DOM order, put the board's descriptive/live status immediately after the
+board, then the deck heading and sections, controls and navigation. Level/step,
+view actions, movement, utilities and feedback all belong to the one deck or a
+named board overlay; no empty track is reserved when feedback is absent.
 
 ### 9.4 HUD deck anatomy
 
@@ -517,22 +606,20 @@ Use this consistent semantic order in every regime:
 1. `HudHeader`: level name, Power, currency totals, and `More` where utilities are collapsed.
 2. `ObjectiveCard`: full objective plus one 48px Hint button.
 3. `ExplorationStatus`: `MiniMapCard`, `RescueTracker`, and `AdventureBag`.
-4. `ControlDock`: only when the command rail is absent.
-5. `UtilityNav`: full row/grid on wide/standard or one 44px `More` disclosure on micro.
+4. `ControlDock`: always occupies its canonical place in the right deck.
+5. `UtilityNav`: full row/grid in primary landscape or one 44px `More` disclosure when the compact deck cannot contain secondary utilities.
 
-Suggested internal tracks:
+Size internal tracks from content rather than reusing the planning-era rail
+width. Give the minimap the largest square left after the Objective, all current
+friend states, the complete one-to-seven-slot Bag and required controls fit.
+The starting minimap targets in the manager addendum are acceptance floors, not
+fixed maxima. Bag cells use four columns where that preserves readable art and
+three columns when the measured deck is narrower; all seven slots wrap.
 
-| HUD width | Padding/content | Exploration status tracks | Bag grid | Utility behavior |
-| ---: | --- | --- | --- | --- |
-| 420px wide | 8px / 404px | `152px minmax(0, 1fr)`, 8px gap | 4 columns, 56px cells, 6px gaps; 7 slots wrap 4+3 | Six ≥44px controls can fit one row. |
-| 348–450px tall/compact | 8px / 332–434px | map 132–144px plus flexible details | 4 columns, 44–64px cells; 7 wrap 4+3 | One row when ≥396px; otherwise 3×2. |
-| 272px standard-short | 8px / 256px | `104px 144px`, 8px gap | 3 columns, 44px cells, 4px gaps; 7 wrap 3+3+1 | Move secondary utilities to `More`; direct rows remain ≥44px. |
-| 244–250px micro | 4px padding + 1px border per edge / 234–240px content | `96px 134–140px`, 4px gap | 4 columns, 30px non-interactive status cells; 7 wrap 4+3 | One 44px `More` button; detailed utilities in a sheet/dialog. |
-
-At micro width, use rows `44px minmax(48px, 78px) 120px 48px` with 4px gaps. The exact base maximum is `44 + 78 + 120 + 48 + 12 = 302px`, matching the 250px HUD's 302px content height after 4px padding and a 1px border on each block edge:
+At the 568×320 emergency floor, a representative compact arrangement is:
 
 ```text
-┌────────────────── 250px HUD ──────────────────┐
+┌────────────────── compact deck ───────────────┐
 │ Level + Power/currency                  More  │ 44
 │ Full objective (wrap; grows into spare space)│ ≥48
 │ ┌─ 96px map ─┐ ┌ five friends ─────────────┐ │
@@ -543,17 +630,17 @@ At micro width, use rows `44px minmax(48px, 78px) 120px 48px` with 4px gaps. The
 └───────────────────────────────────────────────┘
 ```
 
-The micro direction strip contains four 48×48 buttons with 4px gaps (204px total) and remains in a stable order with explicit accessible labels. A cross is preferable when space permits; the strip is the minimum-phone fallback. `More` lives in the header so it does not consume movement width.
+The compact direction strip contains four 48×48 buttons with 4px gaps and remains in a stable order with explicit accessible labels. A cross is preferable when space permits; the strip is the minimum-phone fallback. `More` lives in the header so it does not consume movement width.
 
-The 30px micro Bag thumbnails and compact rescue portraits are status indicators, not separate tiny buttons. The 140px status column budgets 32px for the friend count/portraits, 4px gap, a 16px visible Bag label, 4px gap, and two 30px Bag rows with a 4px row gap: `32 + 4 + 16 + 4 + 30 + 4 + 30 = 120px`. Within the rescue row, a 28px `0/5` count, 4px gap, five 20px contained portraits, and four 2px gaps use exactly 140px. Four 30px Bag columns with three 4px gaps use 132px, leaving 8px for centring. Their parent list remains semantically exposed. A single 44px “Bag details” / “Friends details” control in the contextual sheet provides named, operable rows. If individual slots become operable, they must instead expose non-overlapping ≥44px hit areas and the grid must be re-budgeted.
+Compact Bag thumbnails and rescue portraits are status indicators, not separate tiny buttons. Their parent lists remain semantically exposed. A single 44px “Bag details” / “Friends details” control in the contextual sheet provides named, operable rows. If individual slots become operable, they must instead expose non-overlapping ≥44px hit areas and the grid must be re-budgeted.
 
-The micro `MiniMapCard` budgets a 20px header containing “Map” plus exploration percentage, a 4px gap, and a 96px square: 120px total. It has no additional outer padding in this regime and uses an inset border so the square budget is unchanged. Its longer visible legend moves to `More` at micro width, while the concise screen-reader spatial status remains present. This is a documented micro variant of the normal heading/map/status card, not a flexible empty track.
+The smallest compact `MiniMapCard` combines “Map” and exploration percentage in one short header and may move its longer legend into `More`, while retaining concise screen-reader spatial status. Even there, the square uses all available safe space up to the competing required-content constraints and never leaves decorative bands above or below it.
 
 ### 9.5 Variable-content rules
 
 #### Objective
 
-- `block-size: auto; min-block-size: 56px` on normal layouts; 48px minimum in micro.
+- `block-size: auto; min-block-size: 56px` on primary layouts; 48px minimum at the smallest compact size.
 - No `white-space: nowrap`, `text-overflow: ellipsis`, `overflow: hidden`, or line clamp on objective text.
 - `overflow-wrap: anywhere` is a last-resort safeguard; authored words should normally wrap at spaces.
 - Allow the longest current 78-character objective plus the Hint target without overlap at each target width.
@@ -563,8 +650,8 @@ The micro `MiniMapCard` budgets a 20px header containing “Map” plus explorat
 #### Rescue tracker
 
 - Render a semantic list with 1–5 children and a visible `rescued / total` label.
-- Wide: `repeat(var(--friend-count), minmax(40px, 48px))` with 6–8px gaps.
-- Compact: distribute 1–5 cells with a 32px minimum visual cell; micro may use 24–28px non-interactive portraits plus a textual count.
+- Primary landscape: `repeat(var(--friend-count), minmax(40px, 48px))` with 6–8px gaps.
+- Compact: distribute 1–5 cells with a 32px minimum visual cell; the 568×320 fallback may use 24–28px non-interactive portraits plus a textual count.
 - Never force a 38/40px image into a 25.6px track. Each art image uses `max-inline-size: 100%; max-block-size: 100%; object-fit: contain` and remains wholly inside its cell.
 - Found/waiting state uses at least two cues: check/cage shape plus text/status; grayscale/opacity alone is insufficient.
 - Full animal names and status appear in the contextual Friends detail and screen-reader list.
@@ -572,18 +659,18 @@ The micro `MiniMapCard` budgets a 20px header containing “Map” plus explorat
 #### Adventure Bag
 
 - Derive a typed, stable `HudInventorySlot[]` view model from the level and game state.
-- Always render all 1–7 persistent slots, including missing items. Do not render potions/treasure as persistent slots.
+- Always render every persistent slot declared by the current level, including missing items. The current envelope is 1–7; do not render potions/treasure as persistent slots.
 - Display count as `found / total`, not `collectedObjectIds.length`.
 - Stable order: weapon, Splash Boots, Spring Boots, Antidote Leaf, Red Heart Key, Yellow Sun Key, Blue Star Key, omitting absent categories.
 - The Bag card is its own inline-size container. Use an explicit 3- or 4-column regime; never an inflexible grid wider than its content box.
-- Wide/compact use four columns so seven wraps 4+3. A 152px detail column uses three 44px columns with 4px gaps so seven wraps 3+3+1. The micro status area uses four 30–32px cells with 3–4px gaps and wraps 4+3.
+- Use four columns so seven wraps 4+3 when cells remain readable; use three columns so seven wraps 3+3+1 in a narrower measured deck. Never reserve or infer the removed 152px rail.
 - `overflow: visible` within the grid and `overflow: clip/hidden` only where decorative painting, not content, requires it. Geometry tests must prove children are contained before any ancestor clipping is allowed.
-- Pair icons with short visible labels when the card is wide enough. At compact/micro sizes, focus/tap opens a persistent detail containing full item name and found/missing status; do not rely on `title`.
+- Pair icons with short visible labels when the card is wide enough. At compact sizes, focus/tap opens a persistent detail containing full item name and found/missing status; do not rely on `title`.
 
 #### Minimap
 
 - `MiniMapCard` uses `grid-template-rows: max-content var(--map-size) max-content` and `block-size: max-content`.
-- Map sizes: 160px wide, 112–144px standard/compact, 96px micro; always `aspect-ratio: 1`. Micro combines the label and exploration percentage into its 20px header and exposes the longer visual legend contextually, as budgeted above.
+- Starting minimum map sizes are 192px at 1280×720/ordinary TV, 160–176px at 960×540 and normal iPad/tablet, 120–144px on ordinary landscape phones, and 96px only at 568×320; always `aspect-ratio: 1`. Larger viewports should grow the map when required content already fits. Compact mode may combine the label and exploration percentage and expose the longer visual legend contextually.
 - Header, square, and legend/status are adjacent. The card's block size may exceed their summed size only by its declared padding/gaps (acceptance tolerance below).
 - Show actionable state: Ame/current camera, exit if discovered, guided target, rescue/item/lock landmarks where already part of gameplay, and exploration percentage. Do not add decorative markers.
 - Pair marker color with shape/icon. Provide textual player position, remaining friends, exit discovery, and guided target. If map rotation is introduced by another track, default to fixed north or provide a setting.
@@ -598,7 +685,7 @@ The micro `MiniMapCard` budgets a 20px header containing “Map” plus explorat
 
 - Keep board gesture and keyboard descriptions concise after first movement; full instructions live in Help.
 - Frequent movement controls are 48px rendered; other direct controls are 44px rendered minimum.
-- Home, Mazes, Book, Help, Sound, and Restart remain available. Wide/compact may show the row; micro puts them in a `More` dialog/sheet with ≥44px rows.
+- Home, Mazes, Book, Help, Sound, and Restart remain available. Primary landscape shows them in the deck; compact landscape may put secondary utilities in a `More` dialog/sheet with ≥44px rows.
 - Restart preserves its armed/confirm behavior. Maze switching preserves the active-run confirmation rule.
 - Tester tools never displace production navigation. Under `?debug=mazes`, expose a separate disclosure containing Pick Maze and Skip; identify tester-preview status clearly.
 
@@ -620,7 +707,7 @@ Big Maze is a layout mode, not an absolute-positioning exception.
 - Big board size is `min(available block-size, available inline-size - focus-deck - gap)`.
 - It is never smaller than the corresponding Normal board. At a height-constrained viewport it may only gain a few pixels; it must still simplify chrome and use all remaining space deliberately.
 - The focus deck is an explicit second grid track. It contains all Priority 0 information and a compact exit from Big mode; no minimap is absolutely placed outside the board panel.
-- At 1280×720 target a 704px board and 548px deck. At 960×540 target a 512px board and 424px deck. At 1024×768, reduce the deck to 292px to permit a 704px board. At 844×390 and 568×320, the deck reuses the compact/micro HUD rules.
+- At 1280×720 target a 704px board and 548px deck. At 960×540 target a 512px board and 424px deck. At 1024×768, reduce the deck to 292px to permit a 704px board. At 844×390 and 568×320, the deck reuses the compact rules.
 - Feedback sits either in the focus deck or in a board-bottom toast with an 8px inset and no overlap with critical controls.
 - Escape exits Big Maze only when no modal or contextual surface is open. The Normal control is always a real ≥44px button.
 
@@ -630,11 +717,11 @@ Big Maze is a layout mode, not an absolute-positioning exception.
 - Default width: `min(560px, calc(100dvi - safe-left - safe-right - 16px))`; story may use `min(860px, ...)` when its illustration/copy needs it.
 - Maximum height: `calc(100dvb - safe-top - safe-bottom - 16px)`. Use a three-row grid: sticky/max-content header, single vertical-scrolling body, sticky/max-content footer.
 - Close and primary actions are at least 48px rendered. They always remain inside the visible card.
-- At micro size, tester/maze lists become one column with ≥44px rows. Two 122px-wide tester cards are not retained.
+- At the smallest compact size, tester/maze lists become one column with ≥44px rows. Two 122px-wide tester cards are not retained.
 - Opening moves focus to a meaningful heading or first action; Tab/Shift+Tab remain inside; Escape closes only the top layer; closing restores the invoker if it still exists.
 - Story uses the same shell. It does not close on arbitrary pointer-down and preserves Tab/modified-key behavior.
 - Background gameplay is `inert` and `aria-hidden`; the same centralized policy blocks keyboard, pointer, D-pad, and queued/repeating movement.
-- Non-modal item/friend details may use a popover on wide screens and a small sheet/dialog on micro. It is available on focus/tap, dismissible, and not hover-only.
+- Non-modal item/friend details may use a popover when space permits and a small sheet/dialog in compact mode. It is available on focus/tap, dismissible, and not hover-only.
 
 ## 10. React and DOM refactoring plan
 
@@ -649,13 +736,12 @@ Big Maze is a layout mode, not an absolute-positioning exception.
 | `PlayShell` | Select layout regime and expose CSS container. | No device sniffing; dimensions only. |
 | `MazeViewport` | Square board wrapper, board ref, accessible label/status references, feedback anchor. | Preserves current pointer/ref behavior and `role="application"` only if testing confirms it remains helpful. |
 | `MazeScene` | Current terrain, camera world, object/sprite layers, and presentation visuals. | Extract current lines 2652–2936 without changing game rules or art. |
-| `CommandRail` | Level/steps, view actions, optional debug actions, D-pad, compact feedback. | Present only in wide/standard-short regimes. |
 | `AdventureHud` | Semantic heading and ordered Priority 0/1 sections. | Layout-only; no raw level scanning in render. |
 | `HudHeader` | Level, Power, currency, More. | Supports long name, 3-digit Power, 4-digit wallets. |
 | `ObjectiveCard` | Full objective and Hint trigger. | Auto height; no clamp. |
 | `MiniMapCard` | Existing memoized minimap plus heading/legend/text status. | Max-content; one visual minimap instance per mode. |
 | `RescueTracker` | Semantic list, progress count, compact/detail representations. | 1–5 entries; all art contained. |
-| `AdventureBag` | Semantic list and wrapping slot grid. | 1–7 stable slots; `found/total`; focus/tap detail. |
+| `AdventureBag` | Semantic list and wrapping slot grid. | All level-declared stable slots; current 1–7 plus larger synthetic fixture; `found/total`; focus/tap detail. |
 | `MovementControls` | D-pad/cross/strip presentation over existing handlers. | Does not reimplement cadence; ≥48px targets. |
 | `UtilityNav` | Home, Mazes, Book, Help, Sound, Restart; responsive row/grid/More surface. | DOM order stays stable; preserves protected navigation. |
 | `DialogShell` | All modal focus, inert, Escape, scroll, and restore behavior. | Replace divergent Story shell; stack-aware top-layer handling. |
@@ -670,7 +756,6 @@ src/ui/game/
   PlayShell.tsx
   MazeViewport.tsx
   MazeScene.tsx
-  CommandRail.tsx
   AdventureHud.tsx
   ObjectiveCard.tsx
   MiniMapCard.tsx
@@ -680,7 +765,7 @@ src/ui/game/
   UtilityNav.tsx
   TesterTools.tsx
   hudModel.ts
-  interactionPolicy.ts
+  interactionState.ts
 src/ui/dialogs/
   DialogShell.tsx
   StoryDialog.tsx
@@ -700,18 +785,20 @@ Add a pure `buildAdventureHudModel(level, game, progress, options)` returning:
 - minimap textual status, including a guided-but-unseen target when gameplay says it has been marked;
 - debug and view-mode flags.
 
-This removes repeated object scanning from presentation components, makes the seven-slot contract unit-testable, and prevents count semantics from drifting again.
+This removes repeated object scanning from presentation components, makes the current seven-slot and future larger-roster wrapping contracts unit-testable, and prevents count semantics from drifting again.
 
-Add a pure `getInteractionPolicy(uiState)` returning at least:
+Add a pure narrow `getCurrentInputBlock(uiState)` compatibility selector
+returning only the UI-owned facts required before Plan 08 lands:
 
 - `gameplayInputAllowed`;
 - `backgroundInert`;
 - `topLayer`;
-- `escapeAction`;
-- `returnFocusTarget` strategy;
 - whether held keyboard/pointer/D-pad input must be cleared.
 
-Every movement entry point and modal effect uses this policy. No individual guard should carry its own partial list of booleans.
+Every current movement entry point uses this temporary blocker. Plan 08 later
+owns canonical `InputContext`, semantic actions, Escape/Back hierarchy, focus
+return strategy and `getInteractionPolicy()` by combining UI state with gameplay
+and presentation truth. No individual guard carries a private modal list.
 
 ### DOM semantics and order
 
@@ -836,7 +923,7 @@ Each phase is independently reviewable. No save schema or gameplay migration is 
 Work:
 
 - Preserve the current evidence set and add a documented measurement checklist.
-- Add pure fixtures/view-model expectations for 1–5 friends, 1–7 persistent Bag slots, the 78-character objective, 3-digit Power, four-digit currency, debug/non-debug controls, and every modal state.
+- Add pure fixtures/view-model expectations for 1–5 friends, every current 1–7 persistent Bag count plus a larger synthetic registry, the 78-character objective, 3-digit Power, four-digit currency, debug/non-debug controls, and every modal state.
 - Add an audit-only state selector or deterministic fixture harness under the exact debug query if needed; it must not ship production controls.
 - Extend `stageScale.test.ts` with explicit 960×540, safe-inset subtraction, 0.592/1.333 reference cases, and characterization of the legacy behavior before changing it.
 
@@ -849,14 +936,17 @@ Exit tests:
 
 Rollback: test-only revert; no runtime impact.
 
-### Phase 1 — View models, semantic components, and centralized input policy
+### Phase 1 — View models, semantic components, and centralized UI state
 
 Work:
 
-- Add `buildAdventureHudModel()` and `getInteractionPolicy()`.
+- Add `buildAdventureHudModel()`, typed `src/ui/interactionState.ts`, and the
+  narrow temporary current-input blocker; do not create Plan 08's policy/types.
 - Extract `GameScreen`, HUD sections, controls, and `DialogShell` while keeping legacy layout appearance for comparison.
 - Move Story onto `DialogShell`.
-- Route every movement path, held-input cleanup, background inertness, and Escape action through the policy.
+- Route current movement blocking, held-input cleanup and background inertness
+  through the narrow selector. Keep existing Escape behaviour until Plan 08
+  replaces it through the canonical semantic policy.
 - Correct Bag count semantics and establish stable key order.
 
 Affected files: `src/App.tsx`, proposed `src/ui/game/*`, `src/ui/dialogs/*`; `src/navigation.ts`, `src/pointerControls.ts`, and `src/movementControls.ts` should normally remain unchanged.
@@ -876,6 +966,14 @@ Rollback: switch `GameScreen` back to legacy render; state/view models are pure 
 Work:
 
 - Create the layered stylesheet structure and tokens.
+- Establish the authored-interface token layer here rather than as a terminal
+  override: Maze-native pearl/milky surfaces, luminous inner rims, material-
+  coloured borders, depth, highlight, focus and typography tokens. Implement
+  full, lite and static surface recipes whose hierarchy survives with
+  `backdrop-filter` disabled; never require continuously animated blur.
+- Build a development-only styled component rack covering panel, card, button,
+  icon button, dialog, menu, toast/notice, selected, focused, disabled, warning,
+  celebration and reduced/static states on representative bright/dark art.
 - Implement content-driven Objective, Rescue, Bag, map, controls, and dialogs under the new component root.
 - Eliminate the 4×40/136px Bag contradiction; implement 3/4-column wrapping.
 - Remove objective clamps and fixed row contradiction.
@@ -891,17 +989,19 @@ Exit tests:
 - All objective text is visible; all rescue art is contained.
 - Map card has no flexible empty middle track.
 - Shared dialog footer remains within card.
+- The component rack proves the full/lite/static recipes, text/focus contrast,
+  readable hierarchy and no transparent text region across representative art.
 - New game selectors contain zero `!important`.
 
 Rollback: use the separate legacy style entry/root. Do not mix old and new component rules.
 
-### Phase 3 — Adaptive normal-mode shell
+### Phase 3 — Canonical normal-mode shell
 
 Work:
 
 - Introduce actual-size `PlayViewport`/`PlayShell` and move gameplay HUD/dialogs out of the global scale transform.
-- Implement `wide`, `standard-short`, `standard-tall`, `compact-landscape`, and `micro-landscape` regimes.
-- Implement the 152px command rail and the target geometry table.
+- Implement the manager-approved `primary-landscape` and `compact-landscape`
+  regimes with one persistent information/control deck and measured geometry.
 - Scope `touch-action: none` to the board and preserve live-rect pointer math.
 - Update `stageScale.ts` to describe only legacy/title or scene-reference behavior; add a new pure layout calculation module if JavaScript is needed. Prefer CSS sizing for presentation.
 
@@ -926,16 +1026,90 @@ Work:
 - Implement `More`, item/friend detail, map legend, and debug-only Tester tools.
 - Ensure Normal/Big transitions preserve focus, current game state, and board input.
 
-Affected files: `GameScreen`, `PlayShell`, `AdventureHud`, `CommandRail`, `UtilityNav`, `TesterTools`, related CSS; remove all legacy `.big-maze*` positioning rules.
+Affected files: `GameScreen`, `PlayShell`, `AdventureHud`, `UtilityNav`,
+`TesterTools`, related CSS; remove all legacy `.big-maze*` positioning rules.
 
 Exit tests:
 
-- Target Big geometry at all five viewports.
+- Target Big geometry at all seven required viewports.
 - No blank reserved right column and no off-panel minimap.
 - All Priority 0 information remains visible.
 - Escape hierarchy and Normal control work with every modal open/closed combination.
 
 Rollback: disable Big-v2 layout only; Normal-v2 remains independently shippable.
+
+### Phase 4A — art-directed interface, contextual art, Sound, and front door
+
+Work:
+
+- Apply the approved authored-interface recipes to the extracted shell and
+  shared components. Preserve the same information topology while giving panels,
+  dialogs, buttons, focus states, notices and menus the polish of the final Maze
+  art family; do not imitate a named commercial game's exact layout or skin.
+- Evaluate the Art Bible's rounded display/body-font candidates, confirm licence
+  and redistribution, package the selected WOFF2 subsets locally with real used
+  weights, retain a metric-safe fallback, and verify numerals/operators at maze,
+  handheld and couch sizes. Do not fetch a remote font or synthesize weights.
+- Consume Plan 03's semantic presentation-art catalogue. Add one deterministic
+  resolver by usage and actual rendered physical-pixel need; in blocker dialogs,
+  place the exact required item above the short copy at >=144 logical px in the
+  960×540 reference layout and >=96px in compact layouts. Preserve aspect ratio,
+  safe bounds and a field-art fallback. Warm only the encountered item's needed
+  rendition, never the whole presentation catalogue.
+- Implement the single compact, accessible Sound disclosure in the canonical
+  action order and wire Mute/Unmute, Previous, Next and Shuffle solely through
+  checkpoint 03M's `MusicTransportPort`. Reserve Loop unless Human-approved.
+- Integrate the approved title illustration, home splash/hero and brand mark into
+  distinct purposeful roles on the existing title/home route, or explicitly
+  reserve an asset if a second placement adds clutter. Use responsive/focal/copy-
+  safe variants without distortion or double-loading. Keep the exact “Maze so
+  Puzzle” title as controlled application-rendered lettering and accessible live
+  text; generated lettering remains concept evidence only.
+- Make every earned Adventure Book achievement a semantic, input-parity detail
+  action. Open a focused celebration surface with the correct on-demand
+  presentation-scale sticker, its name and earned description; keep locked
+  rewards concealed behind their established locked treatment. Provide the
+  structural full/lite/static material hooks for Plan 02's bounded rainbow-
+  holographic shimmer, including a beautiful non-animated reduced-motion state.
+  Do not implement the separately scoped free-placement sticker book here.
+- Extend the shared browser scenarios with the front door, compact Sound menu,
+  and an exact-item blocker flow. Capture the styled component rack and runtime
+  states at the required viewport/DPR/effects matrix, including disabled blur,
+  reduced motion and static quality.
+
+Affected files: extracted UI/front-door/dialog/Sound components, layered style
+files and local font declarations/assets; typed catalogue/resolver and narrow
+preload helpers/tests where Plan 03 did not already supply them; shared browser
+fixtures; relevant Art/UI/Architecture/Performance documentation and allocation
+ledger.
+
+Exit tests:
+
+- The component rack and live UI read as one authored Maze-native game system in
+  full, lite and static profiles; dialog copy remains >=4.5:1 and visible focus
+  remains >=3:1 on the representative background set.
+- The blocker flow displays the correct large item without crop, distortion,
+  blank fallback, unrelated preloads or focus/input regressions at every required
+  viewport.
+- Keyboard, touch and pointer can open, operate and dismiss the one Sound
+  disclosure; calls match the 03M port conformance fake exactly, and stable
+  focus/action semantics are exposed for Plan 08 without implementing gamepad
+  polling here.
+- Title/background/splash/brand selection preserves focal subjects and copy-safe
+  regions, fetches only selected sources, retains exact semantic title text and
+  contains no unreviewed generated lettering.
+- Earned achievements open the correct large rendition without blurry thumbnail
+  scaling or whole-catalogue preload; locked achievements reveal no art/content;
+  pointer, touch and keyboard interaction, focus trap/return, Back/Cancel and
+  reduced-motion/static presentation all pass. Plan 08 can consume the same
+  semantic actions without simulated clicks.
+- Local fonts work offline in Web and Tauri, use only packaged real weights,
+  remain legible at 200% zoom and couch distance, and stay inside the approved
+  JS/CSS/runtime-asset allocation.
+
+Rollback: switch the authored theme, font, presentation resolver, Sound surface,
+or front-door composition independently to their declared fallback; retain the
+accessible structural shell and semantic title/action markup.
 
 ### Phase 5 — Accessibility, text scaling, dialog, and motion hardening
 
@@ -981,8 +1155,8 @@ Rollback: revert the phase before removing the development switch. Do not retain
 
 Use the existing Vitest setup for pure modules; do not add Playwright or a design system as part of this plan.
 
-- `hudModel.test.ts`: exact campaign slot/friend envelope; stable slot order; found/total semantics; max objective; Power 301; currencies; debug visibility.
-- `interactionPolicy.test.ts`: every modal/context state, including the dormant `lost` case; input clearing; top-layer Escape; Big mode only changes when no surface is above it.
+- `hudModel.test.ts`: exact current campaign slot/friend envelope plus a larger synthetic equipment registry; stable semantic slot order; found/total semantics; max objective; Power 301; currencies; debug visibility.
+- `interactionState.test.ts`: every modal/context state, including the dormant `lost` case; current input blocking/clearing and background inertness. Plan 08 later owns semantic Escape/Back and complete interaction-policy tests.
 - Extend `stageScale.test.ts`: explicit minimum, safe insets, legacy characterization, and new layout calculator if present.
 - Extend `pointerControls.test.ts`: normalized input at 568×320 and 1280×720 equivalents; no change to dead zone, hysteresis, hazards, doors, enemies, or corner assistance.
 - Keep `movementControls.test.ts` cadence values unchanged.
@@ -1043,11 +1217,18 @@ Save screenshots and JSON reports with commit, browser/WebView version, viewport
 
 | Viewport | Normal mode | Big mode | Modal/context coverage | Input/a11y emphasis |
 | --- | --- | --- | --- | --- |
+| 1920×1080 TV | All content extremes and the catalogue integration rack | Max-content states | Story, Help, Hint, completion, More and Sound disclosure | TV-safe margins, couch legibility, focus visibility and no decorative empty tracks. |
 | 1280×720 Tauri default | Mazes 1, 8, 12, 15, 16; all content extremes | Mazes 12, 15, 16 | Story, Help, Hint, blocker, too-strong, level/tester picker, switch/reset confirm, normal/tester completion, dormant loss handling | Keyboard, mouse hold/drag, full utility row, Tauri focus/inert. |
-| 960×540 logical/Tauri minimum | All representative mazes and max states | Mazes 12, 15, 16 | Every modal; long Help and 16-item tester list | Exact minimum geometry, target sizes, no clipping, focus rings. |
-| 1024×768 tablet | Mazes 1, 12, 16 | Mazes 12 and 16 | Story, Help, Hint, picker, completion | Tall regime, no old 96px letterbox, coarse pointer, 200% text. |
+| 1194×834 iPad landscape | All content extremes | Max-content states | Story, Help, Hint, picker, completion, Sound and item/friend details | Coarse pointer, safe area, touch ergonomics and identical deck order. |
+| 960×540 logical/Tauri minimum | All representative mazes and max states | Mazes 12, 15, 16 | Every modal; long Help and a synthetic 24-entry canonical campaign list | Exact minimum geometry, target sizes, no clipping, focus rings. |
+| 1024×768 tablet | Mazes 1, 12, 16 | Mazes 12 and 16 | Story, Help, Hint, picker, completion | Primary landscape, no old 96px letterbox, coarse pointer, 200% text. |
 | 844×390 landscape phone | Mazes 1, 8, 12, 15, 16 | Mazes 12 and 16 | Story, Help, Hint, tester, More/item detail | Compact touch targets, safe areas, board drag/cancel, focus not obscured. |
-| 568×320 minimum landscape phone | Mazes 1, 8, 12, 15, 16 | Mazes 12 and 16 | Every modal/context surface in its micro form | 48px movement strip, 44/48px actions, full Objective, 7-slot micro wrap, one-axis reflow. |
+| 568×320 minimum landscape phone | Mazes 1, 8, 12, 15, 16 | Mazes 12 and 16 | Every modal/context surface in its compact form | 48px movement strip, 44/48px actions, full Objective, 7-slot wrap, one-axis reflow. |
+
+Before Plan 09 exists, the listed current mazes provide reproducible fixtures.
+Also test a synthetic 24-entry canonical campaign picker and catalogue-driven
+content extremes so this UI does not bake in the current chapter or roster
+count; Plan 09 will replace synthetic rows with final stable IDs.
 
 For each viewport, repeat the most content-heavy Normal/Big cases with:
 
@@ -1064,15 +1245,17 @@ For each viewport, repeat the most content-heavy Normal/Big cases with:
 
 ### Geometry and content
 
-- **Zero clipped Bag items:** all 1–7 slots are visible, contained, and non-overlapping in Normal and Big modes at all five viewports. Maze 12/15 must show all seven. Grid and card have no unintended horizontal or vertical overflow.
+- **Zero clipped Bag items:** every level-declared slot is visible, contained, and non-overlapping in Normal and Big modes at all seven viewports. Maze 12/15 must show all seven current slots, and the synthetic larger registry must wrap or use one explicit bounded detail surface without loss. Grid and card have no unintended horizontal overflow.
 - **Correct Bag semantics:** count reads `found / total persistent slots`; potion/treasure collection cannot increase it. Slot order is stable across levels.
 - **Full objectives:** all five representative objectives, including Maze 16's 78 characters, render in full without ellipsis/clamp/overlap at base text size and remain available at 200% text resize.
 - **Contained rescues:** all 1–5 friend cells and their complete art remain inside the Rescue card; found/missing is perceivable without color.
-- **No empty minimap bands caused by oversized tracks:** card height is content-sized per the formula in Section 14; map remains square and adjacent to heading/status.
+- **No empty minimap bands caused by oversized tracks:** card height follows the variable-content contract in Section 9.5; map remains square and adjacent to heading/status.
 - **Zero unintended overflow or overlap:** body, PlayShell, board, HUD, and non-scroll cards satisfy `scrollWidth <= clientWidth` and `scrollHeight <= clientHeight` within 1px. Intentional scrollers are named, one-axis, keyboard usable, and visibly bounded.
 - **Square undistorted tiles:** board width and height differ by ≤1px; row/column track sizes are equal within 0.5px; tile/sprite art aspect ratio is preserved.
-- **Useful side space:** Normal short/wide side width is occupied by the command rail; Big mode has an explicit focus deck. No blank grid track remains from a hidden sidebar.
-- **Big means non-smaller:** Big board width/area is never less than Normal at the same viewport; target sizes in Section 9.2 are met within ±2px.
+- **Useful side space:** Normal and Big modes use one explicit right-hand deck;
+  no blank grid track remains from a hidden sidebar or removed command rail.
+- **Big means non-smaller:** Big board width/area is never less than Normal at
+  the same viewport; final measured targets in `UI_UX_SPEC.md` are met.
 
 ### Input and accessibility
 
@@ -1091,6 +1274,28 @@ For each viewport, repeat the most content-heavy Normal/Big cases with:
 
 ### Regression and quality
 
+- Human review of the styled component/state rack and live common-viewport
+  captures confirms a cohesive Maze-native video-game interface—not an unstyled
+  semantic shell or a generic dashboard with repeated rounded cards.
+- Every persistent/contextual surface resolves a documented material, edge,
+  ornament and state recipe. Full/lite/static modes retain hierarchy and
+  identity; text/control contrast is measured against the actual composited
+  background.
+- The shipped locally packaged fonts have licence/source records, exact real
+  weights, complete required glyph/arithmetic coverage, stable fallback and
+  measured load bytes. Headings, prose, buttons and counters pass smallest-size,
+  couch-distance, 200% resize and text-spacing checks without synthetic weight
+  or value-width jitter that harms Power readability.
+- Every blocker fixture resolves the exact semantic required item to a large
+  presentation rendition and real text. Delayed/missing/decode-failed art keeps
+  reserved geometry, usable actions and a correct optical fallback; no field
+  rendition is enlarged into visibly soft artwork and no dialog triggers
+  whole-catalogue loading.
+- Blocker presentation measures at least 144 CSS px in the 960×540 reference
+  stage and at least 96 CSS px in the compact proof (or the Human-reviewed final
+  bands recorded in `docs/UI_UX_SPEC.md`), without crop or distortion. The shared
+  browser/performance fixture proves one blocker requests only its own selected
+  rendition.
 - No warning/error browser logs at the full matrix.
 - Normal and Big mode mount one minimap visual each, not hidden duplicates.
 - Existing navigation, engine, solver, exploration, pointer, movement, story-skip, persistence, and reward tests pass.
@@ -1102,7 +1307,11 @@ For each viewport, repeat the most content-heavy Normal/Big cases with:
 
 ### Art agent
 
-- No new static art is required for layout approval.
+- Plan 01 does not generate or redesign static art. It consumes the accepted
+  Plan-03 front-door set, sticker icons, surface/type tokens and field/optical/
+  presentation catalogue. If a required presentation rendition is absent, use
+  the documented fallback and return the gap to Art rather than painting or
+  upscaling a substitute inside UI code.
 - Provide/confirm intrinsic safe bounds and intended aspect behavior for inventory items, friend/cage portraits, map markers, wallet icons, and nav art.
 - Layout will use `object-fit: contain`; any exception requiring crop must be explicit.
 - If compact labels need alternate pictograms, retain existing key color/shape semantics and avoid decorative-only symbols. Do not redesign sprites during this track.
@@ -1130,7 +1339,8 @@ For each viewport, repeat the most content-heavy Normal/Big cases with:
 - No changes to FOV size, movement cadence, engine rules, item acquisition, objective text, rescue optionality, key/door semantics, or win logic.
 - Approve only the presentation-level stable key ordering and corrected `found/total persistent slots` count.
 - Expose a clean item/rescue view model if ownership is shared, but keep engine state authoritative.
-- Review centralized `getInteractionPolicy()` so every current and future modal blocks input consistently.
+- Review typed UI/top-overlay state and the narrow current-input blocker; Plan 08
+  later owns the centralized cross-source `getInteractionPolicy()` contract.
 
 ### Performance agent
 
@@ -1152,7 +1362,7 @@ For each viewport, repeat the most content-heavy Normal/Big cases with:
 | --- | --- | --- |
 | Adaptive shell changes scene coordinates accidentally | Broken pointer/VFX alignment | Keep engine/global coordinates unchanged; retain live-rect pointer mapping; isolate `MazeScene`; add scale-extreme tests. |
 | New CSS loads alongside legacy cascade | Another override layer and unpredictable regressions | Separate roots/style entry points during development; delete migrated legacy selectors in the same phase; final single source of truth. |
-| Minimum-phone HUD becomes too dense | Legibility/target regression | Use exact 250px micro budget, non-interactive compact status cells, 48px movement strip, contextual details/More, actual bounds assertions. |
+| Minimum-phone deck becomes too dense | Legibility/target regression | Use content-measured compact status cells, a 48px movement strip, contextual details/More, one bounded scroller and actual bounds assertions. |
 | Big mode hides important state to maximize board | Puzzle planning worsens | Priority 0 contract is non-negotiable; use explicit focus deck; Big board may grow only as available space permits. |
 | Objective/card growth steals board space | Smaller or unstable play area | Board track is fixed by regime first; HUD absorbs content and may use one-axis scroll only at zoom/extreme text settings. |
 | Saved progress/preferences migration | Settings loss | Layout has no save migration. If persistent motion setting is added, use a backward-compatible optional field/default. |
@@ -1166,13 +1376,13 @@ For each viewport, repeat the most content-heavy Normal/Big cases with:
 
 Expected implementation touch points, subject to keeping each phase narrow:
 
-- `src/App.tsx`: shrink to orchestration, connect extracted game UI, central interaction policy, measured VFX anchors.
+- `src/App.tsx`: shrink to orchestration, connect extracted game UI, typed UI state/current-input blocker, measured VFX anchors.
 - `src/main.tsx`: import the new layered stylesheet entry.
 - `src/stageScale.ts` and `src/stageScale.test.ts`: narrow legacy responsibility and/or add actual PlayShell layout calculation tests.
 - `src/navigation.ts`: no behavior change expected; retain tests.
 - `src/pointerControls.ts`: no behavior change expected; extend scale-extreme tests and update stale comments if present.
 - `src/movementControls.ts`: no behavior change expected; retain cadence tests.
-- `src/ui/game/*`: new play/HUD components and pure view model/policy.
+- `src/ui/game/*`: new play/HUD components, pure view model and typed UI interaction state.
 - `src/ui/dialogs/*`: common dialog and Story integration.
 - `src/styles/*`: new tokens, viewport, maze, HUD, controls, dialogs, screens, motion.
 - `src/styles.css`: progressively remove migrated legacy rules, then delete or reduce to a temporary legacy import.
@@ -1187,8 +1397,8 @@ No package dependency is required for the proposed implementation. If the team l
 The overhaul is complete only when:
 
 1. the adaptive shell decision and new component/CSS architecture have replaced the legacy game cascade;
-2. every measurable criterion in Section 16 passes at all five target viewports;
-3. the state matrix covers 1–5 rescues, 1–7 Bag slots, longest objective, Power 301, tester controls, every modal, Normal, and Big;
+2. every measurable criterion in Section 16 passes at all seven target viewports;
+3. the state matrix covers 1–5 rescues, every current 1–7 Bag count plus a larger synthetic registry, longest objective, Power 301, tester controls, every modal, Normal, and Big;
 4. current input/gameplay behavior remains covered and unchanged;
 5. art, lighting, VFX, animation, gameplay, performance, and Tauri dependencies have signed off on their interfaces;
 6. browser, Tauri, 200% text, reduced-motion, keyboard, coarse-pointer, and physical-device evidence is recorded; and

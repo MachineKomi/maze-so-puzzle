@@ -5,9 +5,15 @@
 - Current accepted implementation checkpoint at triage:
   `ee176f52ab79e08e818fc919f44b7723f9fc9865`
 - Source intakes:
-  [`playtests/2026-09-02-wishlist-and-issues.md`](playtests/2026-09-02-wishlist-and-issues.md)
+  [`playtests/2026-09-02-wishlist-and-issues.md`](playtests/2026-09-02-wishlist-and-issues.md),
+  [`playtests/2026-09-03-continuous-context-music.md`](playtests/2026-09-03-continuous-context-music.md),
+  [`playtests/2026-09-03-ost-delivery-art-approval-and-asset-retirement.md`](playtests/2026-09-03-ost-delivery-art-approval-and-asset-retirement.md),
+  [`playtests/2026-09-03-mimic-surprise-and-reward-showers.md`](playtests/2026-09-03-mimic-surprise-and-reward-showers.md),
+  [`playtests/2026-09-03-compact-bgm-transport-controls.md`](playtests/2026-09-03-compact-bgm-transport-controls.md),
+  [`playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md`](playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md),
+  [`playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md`](playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md),
   and
-  [`playtests/2026-09-03-continuous-context-music.md`](playtests/2026-09-03-continuous-context-music.md)
+  [`playtests/2026-09-04-achievement-showcase-and-sticker-book.md`](playtests/2026-09-04-achievement-showcase-and-sticker-book.md)
 
 ## 1. Purpose and authority
 
@@ -70,7 +76,7 @@ A card may need more than one platform/input row before it is considered done.
 
 ## 3. Evidence synthesis
 
-The intake contains seven especially strong evidence and product-direction
+The intake contains fourteen especially strong evidence and product-direction
 clusters:
 
 | Theme | Direct evidence | Working implication |
@@ -82,6 +88,13 @@ clusters:
 | Emotional readability | Human direction requests familiar anime/JRPG emotional shorthand and a larger expressive Ame portrait; the current HUD portrait is fixed | Build an original, event-driven portrait reaction language that reinforces rather than replaces semantic feedback |
 | Release onboarding | Amelia has already learned the rules, but the Human wants first-time players of all ages and experience levels to receive clearer introductions | Teach genuinely new rule families through short guided discovery, then fade support into recall and mastery |
 | Music continuity and identity | Human reports intermittent silence and is replacing every placeholder with a purpose-made OST grouped by activity | Use one typed music context, bounded predictive loading and overlap transitions so enabled foreground play remains continuous and contextually correct |
+| Asset lifecycle and package hygiene | Human identified superseded cage art and other old assets that should not remain indefinitely | Separate pointer replacement from evidence-based retirement; preserve sources and rollback material while removing only proven-unreachable delivery copies |
+| Reward spectacle and playful surprise | Human wants chests, victories and rescues to produce tactile showers of visible rewards, with some closed chests revealing a Mimic | Separate deterministic reward/reveal truth from cancellable presentation; reuse one bounded loot-shower grammar without turning chance into a progression requirement or paid pressure loop |
+| Player-controlled music navigation | Human wants Previous, Next and Shuffle/Random without adding permanent UI clutter | Put transport and Mute/Unmute in one compact Sound disclosure; keep selection, history and fallback inside the active contextual playlist |
+| Roster and world-theme variety | Human wants every final enemy and friend type used meaningfully, progressive authored introductions, varied generated encounters, fixed crafted campaign environments and compatible multi-section themes | Add a versioned content-ecology contract and exact coverage evidence; distinguish deliberate variety from random clutter and protect approved but missed consumers from cleanup |
+| Authored game-interface craft | Human wants the interface to share the beauty and specificity of the final sprite art rather than read as a clean generic web application | Make the Maze-native material, shape, typography, sticker-signal and presentation-art system an explicit Plan-01 acceptance gate with accessible performance tiers |
+| Frequent family-playable milestones | Human wants Amelia to experience meaningful improvements before the whole programme ends, without wasteful packaging after every plan | Create only a small set of green, reproducible family-preview checkpoints; prefer the first after Plan 01 and preserve honest non-release labels |
+| Achievement pride and cosmetic expression | Human wants earned stickers to be admired at presentation scale, and later arranged personally in a sticker book | Ship a focused, accessible achievement showcase first; treat free-placement persistence as a separately approved cosmetic feature rather than hidden polish scope |
 
 This is high-value target-family evidence, but it is one family rather than a
 broad usability sample. Current-build reproduction and broader device coverage
@@ -92,7 +105,7 @@ remain necessary where called out below.
 | ID | Short name | Impact | Delivery | Verification | Primary route |
 |---|---|---|---|---|---|
 | `PT-20260902-01` | Interaction celebration queue | P1 | Routed | Not retested | Plans 01 and 02 |
-| `PT-20260902-02` | Stationary door opening | P0 | Needs decision | Not retested | Gameplay contract, then Plans 02 and 08 |
+| `PT-20260902-02` | Stationary door opening | P0 | Routed | Not retested | Root 03M contract, then Plans 02 and 08 |
 | `PT-20260902-03` | Combat gain count-up | P1 | Routed | Not retested | Plan 02, using Plan 01 notice system |
 | `PT-20260902-04` | Rainbow Power Parade topology | P1 | Candidate | Automated | Family retest, then Plan 09 only if needed |
 | `PT-20260902-05` | Escalating Power-99 presentation | P1 | Routed | Not retested | Plan 02; Plans 01 and 07B support |
@@ -100,9 +113,9 @@ remain necessary where called out below.
 | `PT-20260902-07` | Smooth camera/play feel | P0 | Routed | Not retested | Plan 07B; Plans 01 and 08 support |
 | `PT-20260902-08` | Anchored touch joystick | P0 | Routed | Not retested | Plan 08; Plan 01 control surface |
 | `PT-20260902-09` | Strong-enemy teaching | P0 | Routed | Not retested | Plan 01 with gameplay-owned suggestions |
-| `PT-20260902-10` | Completion choices | P0 | Needs decision | Not retested | Gameplay contract, Plan 01/08; Plan 10 extension |
+| `PT-20260902-10` | Completion choices | P0 | Routed | Not retested | Root 03M contract, Plan 01/08; Plan 10 extension |
 | `PT-20260902-11` | More and optional battles | P1 | Routed | Not retested | Plan 09 |
-| `PT-20260902-12` | Varied, smaller level portfolio | P0 | Routed | Automated | Plan 09 revision; generator sub-epic |
+| `PT-20260902-12` | Varied, smaller level portfolio | P0 | Routed | Automated | Plan 09 authored and generated-topology phases |
 | `PT-20260902-13` | Remove portal glyph clutter | P2 | Routed | Not retested | Plan 02 |
 | `PT-20260902-14` | Spikes and ice traversal | Epic | Needs decision | Not retested | Dedicated mechanics specification |
 | `PT-20260902-15` | Richer materials and obstacle VFX | P1 | Routed | Not retested | Plans 04 and 02; Plan 07B qualifies |
@@ -110,7 +123,15 @@ remain necessary where called out below.
 | `PT-20260902-17` | World and lore enrichment | P1 | Routed | Not retested | Plan 09; Plans 10 and 11 consume canon |
 | `PT-20260902-18` | Expressive portrait and emotion marks | P1 | Routed | Not retested | Plans 03, 01 and 02; Plans 05/07B support |
 | `PT-20260902-19` | Guided mechanic-introduction trails | P0 | Routed | Not retested | Plan 09 design gate; Plans 01/08 support |
-| `PT-20260903-20` | Continuous contextual original OST | P0 | Routed | Not retested | Music-controller slice in Plan 07B; Plans 01/02/08/10 support |
+| `PT-20260903-20` | Continuous contextual original OST | P0 | Routed | Not retested | Root 03M catalogue/port, then Plan 07B; Plans 01/02/08/10 support |
+| `PT-20260903-21` | Verified retirement of superseded runtime assets | P1 | Routed | Not retested | Plan 03 classification; Plan 07B tooling; final Plan 12 sweep |
+| `PT-20260903-22` | Mimic reveal and magnetic reward showers | P1 | Routed | Not retested | Gameplay contract/Plan 09 plus Plans 02/03/05/07B; Plan 13 fallback |
+| `PT-20260903-23` | Compact contextual BGM controls | P1 | Routed; Loop needs decision | Not retested | Root 03M port, Plan 01 surface, Plan 07B controller, Plan 08 input parity |
+| `PT-20260903-24` | Meaningful enemy, friend and terrain variety | P1 | Routed | Not retested | Plan 09 campaign/generator; Plans 03/04/07B/10/13/12 support |
+| `PT-20260903-25` | Art-directed game UI and presentation-scale imagery | P1 | Routed | Not retested | Plan 01; Plans 03/02/07B/11 support |
+| `PT-20260903-26` | Early front-door art and family-preview builds | P1 | Routed | Not retested | Plan 03 + root/release manager; Plans 01/07B/11 support |
+| `PT-20260904-27` | Earned-achievement holographic showcase | P1 | Routed | Not retested | Plan 01 interaction; Plan 02 effect; Plans 07B/08 qualify |
+| `PT-20260904-28` | Personal achievement sticker book | P2 | Needs decision | Not retested | Plan 14 opportunity review or explicit follow-on plan |
 
 ## 5. Backlog items
 
@@ -165,9 +186,9 @@ viewports.
 
 - Type: Gameplay contract, presentation and input
 - Impact: P0 — next-playtest gate
-- Delivery: Needs decision
+- Delivery: Routed
 - Verification: Not retested
-- Primary owner: Narrow manager/gameplay contract before Plan 02
+- Primary owner: Root checkpoint 03M before Plan 01
 - Supporting owners: Plan 02 choreography; Plan 08 held-input semantics
 - Dependencies: Engine, solver, hints, metrics, session fixtures and performance
   scenarios must agree on the new transition
@@ -201,9 +222,11 @@ player layer. This produces the reported disappear/teleport sequence.
 - Cover adjacent-door and every supported composite transition in engine, solver,
   hint, metrics, save/session, controls and presentation tests.
 
-**Decision required.** This Human direction supersedes Plan 08's earlier neutral-
-after-door assumption. The manager must publish the exact stationary-interaction
-and controlled-hold contract before presentation work begins.
+**Adopted contract.** This Human direction supersedes Plan 08's earlier neutral-
+after-door assumption. Checkpoint 03M publishes the exact stationary interaction:
+the opening input commits one door event without movement, and only a later
+eligible cadence step of the same still-held direction may enter after the
+presentation lock clears. A discrete or released input never continues.
 
 ### PT-20260902-03 — Combat Power-gain count-up
 
@@ -451,9 +474,9 @@ find more Power.
 
 - Type: Progression, save semantics, modal UX and controls
 - Impact: P0 — next-playtest gate
-- Delivery: Needs decision
+- Delivery: Routed
 - Verification: Not retested
-- Primary owner: Manager/gameplay contract, then Plan 01
+- Primary owner: Root checkpoint 03M, then Plan 01
 - Supporting owners: Plan 08 controls; Plan 10 adds Friend Garden destination
 - Target gate: Semantic contract before Plan 01; Friend Garden slice before Plan
   10 acceptance
@@ -490,11 +513,12 @@ implemented as three superficial buttons.
 - Plan 10 may add **Take a break in the Friend Garden** without removing the three
   core choices or unexpectedly taking default focus.
 
-**Decision required.** The Human phrasing requests staying at the star. Before
-Plan 01, specify whether the resumable state safely permits Ame to occupy an
-inert exit tile or returns her to the approach tile without feeling like lost
-movement. Also define exactly when victory audio/presentation and durable rewards
-occur. The decision must preserve the outcomes above.
+**Adopted contract.** Star contact creates a persisted pending-completion state.
+Stay leaves Ame on the exit tile and disarms that exit until she steps off, so it
+does not reopen immediately. Next commits durable completion/rewards/unlocks
+exactly once; Restart awards nothing. Reload restores the pending choice. Each
+new pending-completion ID may present victory once, but presentation is never the
+durable commit authority. Checkpoint 03M lands and tests this before Plan 01.
 
 ### PT-20260902-11 — More battles and optional encounter rooms
 
@@ -535,8 +559,8 @@ accidentally bypass the intended potion, enemy or route-order puzzle.
 - Delivery: Routed
 - Verification: Partly automated; family evidence required
 - Primary owner: Plan 09 for authored content
-- Supporting work: Dedicated generator-variety sub-epic; Plans 01/07B enforce
-  viewport and performance limits
+- Supporting work: Plan 09's bounded generated-topology sub-phase; Plans 01/07B
+  enforce viewport and performance limits
 - Target gate: Plan 09 plan revision before its execution
 
 **Human decision.** Use more relaxing, simple, strange, room-based and reasoning-
@@ -554,10 +578,15 @@ longer satisfy the latest direction.
 
 - Revise Plan 09's eight level briefs, final 24-level pacing matrix and size
   budgets before implementation.
-- Provisional manager guardrail for design review: no more than six of 24 authored
-  chapters exceed 16×16 and no more than two exceed 19×19. Treat this as a
-  measurable interpretation of “rare,” subject to Human/family review rather
-  than immutable canon.
+- Manager guardrail for design review: no more than four of 24 authored chapters
+  may exceed 16 tiles on either axis, including inherited levels. Chapter 24 is
+  the sole default new exception; trading that exception requires an explicit
+  Phase-0 portfolio decision and Human/family evidence. Every exception remains
+  subject to the absolute 24×24 cap.
+- If the current nine-of-sixteen audit still holds, Plan 09 must compact at least
+  six inherited levels under content revisions before adding the eight new maps;
+  this is an implementation phase with migration, solver/Hint, route-metric and
+  family-play evidence, not a report-only recommendation.
 - Avoid consecutive large chapters unless a documented pacing reason and family
   test support them.
 - Every level over 16×16 contains at least two meaningful open rooms plus a hub,
@@ -679,8 +708,8 @@ ice and glinting sharpness of spikes without tanking performance.
 - Impact: P1 — high value
 - Delivery: Routed
 - Verification: Not retested
-- Primary owners: Plan 09 for authored placement; generator-variety sub-epic for
-  procedural invariants; Plan 01 for minimap filtering
+- Primary owners: Plan 09 for authored placement and its bounded generated-
+  topology sub-phase for procedural invariants; Plan 01 for minimap filtering
 - Supporting owners: Plans 02/03 for feedback/assets; Plan 07B for object budget
 - Target gate: Plans 01 and 09 acceptance
 
@@ -698,7 +727,9 @@ The minimap currently renders optional treasure objects.
 - Define a graph-level **true terminal branch** so multiple corners of one room do
   not count as multiple dead ends.
 - Every true terminal branch in authored levels and broad deterministic generated
-  cohorts ends in an optional Gold/Science collectible or approved equivalent.
+  cohorts ends in a small optional collectible: Gold, Science, a chest/bag that
+  resolves to one of those currencies, or another explicitly approved optional
+  collectible that is durably credited and visibly cleared from the world.
 - Required objects do not displace the promised endpoint reward. Add a distinct
   single-Gold-Star collectible if needed; never reuse the exit star ambiguously.
 - These rewards are never required and never selected by Required Path hints.
@@ -923,15 +954,18 @@ the teaching pocket directly.
 - Impact: P0 — release gate
 - Delivery: Routed
 - Verification: Not retested
-- Primary owner: Bounded music-controller/navigation slice at the start of Plan
-  07B, followed by Plan 07B loading/performance qualification
+- Primary owners: Root checkpoint 03M for delivered-catalogue compatibility and
+  the canonical `MusicTransportPort`; Plan 07B for the complete contextual
+  controller, continuity, loading and performance qualification
 - Supporting owners: Plan 01 for typed screen/overlay context; Plan 02 for SFX/BGM
   coexistence; Plan 08 for browser/controller activation; Plan 09 for campaign
   integration; Plan 10 for the Friend Garden context
-- Dependencies: Human-authored final MP3 pools and provenance; final app-context
-  state model; performance feature allocation
-- Target gate: Core five present contexts during Plan 07B, Garden wiring during
-  Plan 10, and all final originals qualified before release acceptance
+- Dependencies: Delivered Human-authored MP3 pools; track-level provenance,
+  mastering and listening qualification; final app-context state model;
+  approved performance feature allocation and rebaseline
+- Target gate: No missing OST URL and green port/current-adapter conformance at
+  03M; core five present contexts during Plan 07B; Garden wiring during Plan 10;
+  all final originals qualified before release acceptance
 
 **Human decision.** Once music is enabled, normal foreground play should always
 have context-appropriate BGM: title/home from `title`, story pop-ups from `story`,
@@ -941,28 +975,41 @@ Randomly select from the matching MP3 folder, transition with smooth fades or
 crossfades, and prepare likely next tracks early enough that loading never causes
 an audible silent gap.
 
-All music currently in the repository is placeholder material from other
-projects. The Human is creating a brand-new original Maze so Puzzle OST; every
-current MP3 is therefore non-shipping unless the Human later expressly retains
-one.
+The old flat music set was placeholder material from other projects and is
+non-shipping. On 2026-09-03 the Human delivered the candidate original Maze so
+Puzzle OST in its six intended physical folders and removed the old root files.
+Delivery does not by itself prove catalogue integration, mastering, rights or
+platform playback.
 
-**Current-checkpoint audit.** Confirmed open. `public/assets/ost/` is currently a
-flat set of 14 MP3s totalling about 50.2 MB. `src/music.ts` hard-codes a title
-track and one maze shuffle bag, owns one looping `HTMLAudioElement`, sets
-`preload="none"`, and disposes the audible element before a replacement is ready.
-There is no standby lane, readiness gate, fade/crossfade, same-pool end-of-track
-succession or failed-track recovery. Title and Adventure Book share one track;
-story overlays retain maze music; the completion screen never selects victory
-music; Garden does not yet exist. A failed replacement can leave persistent
-silence.
+**Current-checkpoint audit.** Confirmed delivered but not integrated. The six
+physical pools contain 42 parseable MP3s / 99,151,313 bytes / about 68m25s:
+`title` 6, `story` 6, `maze` 14, `victory` 4, `garden` 6 and
+`adventure-book` 6. There are no root-level MP3s, non-MP3 files, exact SHA-256
+duplicates or case collisions. All six pools are nonempty. The `B` alternates
+share embedded titles with their base compositions, so catalogue IDs/display
+labels must distinguish them; Victory numbering has no `2` and must not be
+treated as an ordered sequence.
+
+`src/music.ts`, `src/music.test.ts` and `docs/MUSIC.md` still bind the deleted
+14-file flat placeholder catalogue. All 42 delivered tracks are presently
+unreferenced, and an existing `dist/` remains stale with the old files. A focused
+music test correctly fails its catalogue assertion (16/17 tests pass); a fresh
+runtime would request missing old URLs. The player still owns one looping
+`HTMLAudioElement`, sets `preload="none"`, and disposes the audible element before
+a replacement is ready. There is no standby lane, readiness gate,
+fade/crossfade, same-pool succession or failed-track recovery.
+
+The delivered OST is +28 files / +48,994,642 bytes versus the placeholder set.
+That deliberate content increase needs an approved audio allocation and
+performance rebaseline; it is not permission to discard Human tracks to preserve
+the historical media total. Predictive preparation must remain bounded rather
+than eagerly loading all 42 files.
 
 **Folder and catalogue contract.**
 
-- The final logical BGM pools are exactly `title`, `story`, `maze`, `victory`,
-  `garden`, and `adventure-book`. The Human's physical folder wording
-  `adventure book` is preserved until the actual folders arrive; record an
-  explicit mapping rather than silently renaming it. A URL-safe
-  `adventure-book` physical folder is a recommendation, not assumed approval.
+- The final logical and delivered physical BGM pools are exactly `title`,
+  `story`, `maze`, `victory`, `garden`, and `adventure-book`. Preserve these
+  approved URL-safe slugs.
 - Produce a build-time validated manifest/catalogue. A static browser or bundled
   Tauri app must not depend on runtime directory listing.
 - Every MP3 belongs to exactly one BGM pool or is explicitly catalogued as a
@@ -1070,12 +1117,762 @@ silence.
   true; their current claims that the placeholders are the shipped soundtrack
   must not survive final release acceptance.
 
-**Scope boundary.** Plan 02 does not own BGM policy. Plan 07B consumes the typed
-UI, SFX and activation seams and implements/qualifies the controller as a bounded
-audio slice. Plan 10 adds only the Garden context hook. If the final tracks arrive
-after those owner passes, the closure/release-polish plan must perform catalogue
-replacement and full media qualification; the card cannot become `Accepted`
-while any non-approved placeholder ships.
+**Scope boundary.** Plan 02 does not own BGM policy. Root checkpoint 03M owns
+only the stable delivered catalogue, valid current adapter and transport port;
+it does not claim continuous contextual playback. Plan 07B consumes the typed
+UI, SFX and activation seams and implements/qualifies the full controller behind
+that port. Plan 10 adds only the Garden context hook. The card cannot become
+`Accepted` while any placeholder ships, any delivered file is silently omitted,
+current source points at a deleted URL, or a consumer bypasses the port.
+
+### PT-20260903-21 — Verified retirement of superseded runtime assets
+
+- Type: Asset lifecycle, repository hygiene and release packaging
+- Impact: P1 — mandatory release-hygiene gate
+- Delivery: Routed
+- Verification: Not retested
+- Primary owners: Plan 03 for art-family classification/source retention; Plan
+  07B for authoritative reachability and package tooling; final Plan 12 for the
+  post-feature sweep
+- Dependencies: Final catalogue pointers from Plans 03, 05, 09, 10 and 11;
+  expired rollback windows; lifecycle/tombstone schema; clean-clone and packaged
+  Tauri evidence
+- Target gate: Plan 07B proves/classifies candidates and may optimize active
+  representations without archiving/removing runtime files; after Plan 13 closes
+  all pointer-producing work, Plan 12 alone runs the final two-stage sweep before
+  root release-candidate qualification
+
+**Human decision.** Old unused and superseded assets should leave runtime and
+the repository after a safe archive handoff rather than accumulating
+indefinitely. Superseded animal-cage versions are a concrete example. This is a
+request for rigorous lifecycle management, not blanket permission to remove
+every file that a text search does not find and not authorization for direct
+deletion before the Human confirms the external backup.
+
+**Current-checkpoint audit.** Plan 03's manifest currently marks 16 superseded
+runtime images totalling 4,708,989 bytes and four deprecated images totalling
+1,164,630 bytes. Active cages point only to the v5 WebPs. Five superseded images
+are legacy-runtime-only sole copies with no separate source record; 11 older
+cages have retained partial masters. Some deprecated rewards are also sole-copy.
+The current art validator expects every recorded derivative path to exist, so it
+cannot yet distinguish an intentional retirement from accidental corruption.
+
+**Lifecycle and preservation contract.**
+
+- Extend the asset manifest with explicit `active`, `reserved`, `dormant`,
+  `deprecated`, `superseded` and `retired` lifecycle semantics. A retired
+  tombstone records its old path, exact hash/bytes, replacement, owner/reason,
+  first/last known commit, retirement date and tested restore procedure.
+- Preserve original/source masters, prompts, model sheets, provenance/rights
+  records, proof sheets and Git history. A legacy runtime file that is the only
+  surviving copy remains preserved unless the Human explicitly includes it in
+  the externally backed-up retirement set.
+- Keep the immediately preceding approved runtime revision through its declared
+  rollback window. Dormant, reserved and future-plan assets are not retirement
+  candidates merely because the current runtime does not request them.
+- The original OST is explicitly excluded from generic image/orphan cleanup.
+  Placeholder-audio retirement belongs to `PT-20260903-20` and uses the same
+  reachability/package-proof discipline.
+
+**Reachability and archive-first retirement contract.**
+
+- Generate one authoritative inventory that covers TS/TSX/CSS/static imports,
+  catalogue and manifest pointers, `import.meta.glob`, generated theme/level
+  paths, story/tester routes, preload lists, Tauri/app icons, tests and the
+  performance feature-allocation/reservation ledger.
+- Classify every candidate individually. Old cages are expected candidates, not
+  pre-approved removals. Never use a wildcard, filename age, missing plain-text
+  hit or visual similarity as sole proof.
+- Switch and qualify replacement pointers first. After the rollback window and
+  after Plan 13, **copy** each individually proven candidate into a hash-verified,
+  ignored non-runtime handoff archive outside `public/`, `dist/`, and all package
+  inputs while retaining the repository/runtime source. An archive under
+  `public/assets` is invalid because it still ships.
+- Record the archive manifest, tombstones and restore drill, then pause. Only
+  after the Human confirms that the archive was copied to external storage may
+  the root manager authorize a separate family-isolated repository-removal
+  commit whose inverse is obvious.
+- Make validators accept a well-formed retired tombstone while continuing to
+  fail a missing active/deprecated derivative.
+
+**Acceptance evidence.**
+
+- From a clean clone, run full tests, `art:check`, production build, generated
+  inventory, every authored/generated/theme/story/tester/preload route and the
+  supported browser viewport matrix with no missing request or fallback.
+- Build and exercise the offline packaged Tauri app. Scan `dist`, executable and
+  packages by basename and exact hash to prove retired delivery bytes are absent
+  and required assets remain present.
+- Record before/after source-runtime/dist/package file counts, encoded bytes and
+  package hashes. Explain every retained candidate, archived candidate and
+  separately authorized repository removal.
+- Perform an exact-SHA rollback drill from the handoff archive that the Human
+  confirms was externally backed up and prove the restored derivative matches
+  its tombstone.
+- Keep cleanup separate from replacement generation and keep the archive-handoff
+  checkpoint separate from repository removal so a visual regression can be
+  rolled back without reconstructing an unrelated bulk removal.
+
+### PT-20260903-22 — Mimic reveal and magnetic reward showers
+
+- Type: Cross-system gameplay, reward and presentation feature
+- Impact: P1 — high-value delight and encounter-variety feature
+- Delivery: Routed
+- Verification: Not retested
+- Primary owners: Root gameplay contract and Plan 09 for deterministic rules,
+  balance, persistence, solver semantics and placement; Plan 02 for the reusable
+  presentation and audio choreography
+- Supporting owners: Plan 03 for production art; Plan 05 for bounded chest/Mimic
+  frames; Plan 07B for performance/audio qualification; Plan 10 for later co-op
+  recipient semantics
+- Dependencies: Stable semantic object IDs and active-run fingerprints; typed
+  committed reward outcomes; final chest/Mimic/reward art; Plan 02 presentation
+  lifetime and cancellation; explicit Gold/Science balance ranges
+- Target gate: Static art in Plan 03, reusable presentation in Plan 02, optional
+  frames in Plan 05, gameplay/content integration in Plan 09, and Plan 13 only
+  for compatible unresolved polish
+
+**Human decision.** Every approved Mimic family starts as its matching closed
+chest. The first bump triggers a
+single chest-strike/opening beat, then reveals either a good chest 65% of the
+time or a Mimic 35% of the time. A good chest awards a random bounded amount of
+either Gold Stars or Science Parts. A Mimic reveals its Power and immediately
+uses the ordinary combat/too-strong rules. Ordinary chests never retaliate.
+
+Good chests spray reward sprites outward with simple semi-random 2D physics,
+currency-coloured particle trails and no wall/object collision, then pull the
+sprites into Ame magnetically with satisfying collection audio. Reuse this
+celebration for ordinary Gold chests and bags. Every rescued friend releases a
+bounded Gold-Star reward; every defeated enemy releases Gold Stars and Science
+in addition to the existing Power result.
+
+**Current-checkpoint audit.** The current engine has fixed-amount `treasure`
+objects and one `treasure-collected` event. `App.tsx` presents a single chest or
+Science image with eight short-lived symbol motes flying toward a wallet. The
+current `candy-mimic` is an ordinary visible enemy style, not a disguised-chest
+state machine. Enemy defeat and friend rescue do not currently grant the new
+currency drops. The content fingerprint includes treasure currency/amount, but
+there is no persisted weighted reveal, reward-drop table or resolved Mimic
+outcome. This therefore requires gameplay/save/solver work, not only VFX.
+
+**Gameplay and determinism contract.**
+
+- Define one versioned `MimicFamilyId` registry (or final canonical equivalent).
+  Every final approved family—including Treasure and Candy when both pass Plan
+  03—cross-resolves three geometry-compatible identities: closed chest, benign
+  open reward chest and revealed enemy. Families change art/personality, not the
+  65/35 rule or reward/combat semantics.
+- Represent the disguised chest with a stable semantic object identity and an
+  explicit unresolved/resolved state. Its outcome and amounts are derived from
+  a documented deterministic run seed plus object ID, or persisted directly;
+  save/resume, repeated bumps and overlay/navigation churn cannot reroll it.
+- Implement the probability as an auditable 65 reward buckets / 35 Mimic
+  buckets rather than a flaky statistical test. Deterministic seed cohorts cover
+  both outcomes and boundary buckets.
+- On a reward result, choose Gold or Science through a documented deterministic
+  rule and credit an amount inside explicit positive min/max bounds. On a Mimic
+  result, reveal the authored enemy style and Power before resolving the normal
+  comparison, battle, or picture-led too-strong guidance.
+- Player position and control follow the stationary interaction contract: Ame
+  strikes from the originating tile, the chest resolves once, and held movement
+  cannot teleport her through the object or replay the interaction across the
+  presentation lock.
+- Currency/Power/rescue state commits exactly once before presentation becomes
+  authoritative. Every resolved semantic ID prevents duplicate drops after
+  resume, revisit, cancellation or rapid input.
+- Mimics and random rewards remain optional to the ordinary solution. Neither
+  reveal branch may make a required route unsolvable, and hints must not promise
+  an unknown/random reward as the required answer. Solver fixtures exercise the
+  reward branch, beatable-Mimic branch and too-strong-Mimic branch.
+- Freeze named reward ranges and drop tables in `GAMEPLAY_DESIGN_SPEC.md` before
+  implementation. Enemy drops preserve the existing Power equation while adding
+  bounded Gold and Science; rescue drops preserve optional-rescue semantics.
+- In the new content/generator version, Candy Mimic no longer appears as an
+  always-visible ordinary `EnemyStyle`. Revise its existing authored placement
+  into the Candy disguised-object family, preserve durable completion/reward
+  history under the level revision, and retain the old interpretation only for
+  pinned historical generator/content reconstruction.
+- Give every Mimic-family registry entry explicit `campaignEligible` and
+  `generatedEligible` dispositions. Under the new generated-content version,
+  Surprise generation may place at most one generated-eligible disguised Mimic
+  and only in a solver-proven optional chest/treasure slot; zero remains a common
+  valid outcome. Family selection and the committed 65/35 reveal use deterministic
+  streams isolated from topology, required rewards, ordinary enemy composition
+  and solution truth. Seed cohorts cover every eligible family and both reveal
+  branches without turning either into a required path.
+
+**Reusable presentation contract.**
+
+- Consume a typed, already-committed reward outcome. The effect never computes
+  currency, chance, enemy Power or gameplay eligibility.
+- The chest strike/open, reveal, outward ballistic spray, short coloured trails,
+  magnetic homing, exact amount/count-up feedback and collection audio form one
+  cancellable timeline with named semantic anchors.
+- Reward sprites are visual representatives, not necessarily one DOM/canvas
+  object per credited unit. Cap and pool them; large rewards communicate exact
+  totals through text while preserving a generous-looking bounded burst.
+- Particles ignore maze collision and other objects as requested. Their seeded
+  visual variation is reproducible in tests but may vary between distinct
+  events. It cannot change gameplay truth.
+- Rapid sequential rewards join the shared interaction-celebration queue from
+  `PT-20260902-01`; they may overlap only within the bounded Plan-02 policy and
+  must remain readable rather than becoming visual/audio clutter.
+- Reduced motion uses a short contained burst or static reveal plus immediate
+  credited-count feedback; it removes long ballistic travel and magnet motion.
+  Muted/backgrounded/navigation-cancelled runs remain correct and leak no timer,
+  sound, sprite or presentation lock.
+
+**Art, animation and content requirements.**
+
+- Plan 03 supplies a coherent closed, benign-open and revealed-enemy triplet for
+  every approved Mimic family plus Gold/Science pickup art, with shared per-family
+  construction, trustworthy alpha, pivots, safe bounds and actual-size proofs. A
+  checkerboard is never baked into pixels.
+- Plan 05 may add a small closed → struck → open/reveal sequence and a playful
+  Mimic wake/lunge while preserving static fallback and exact registration.
+- Plan 09 places each approved Mimic family sparingly enough to preserve surprise, mixes them with
+  trustworthy ordinary chests, and records encounter/reward pacing in the
+  24-level matrix. Generated mazes require the same solvability and deterministic
+  identity rules before receiving Mimics.
+- Plan 10 may redirect or split only the visual homing destination for the
+  collecting player. Shared rewards credit once and the solo Ame behaviour
+  remains the default contract.
+
+**Acceptance evidence.**
+
+- Unit/property tests prove the exact 65/35 bucket contract, bounded reward
+  amounts, both currencies, stable save/resume outcomes and exactly-once credit.
+- Registry/asset tests cover every approved Mimic family's three-state mapping,
+  geometry/registration compatibility, shared mechanics and absence from the new
+  ordinary enemy-style pool.
+- Solver and migration fixtures cover every reveal branch without making random
+  rewards required or corrupting old active runs/progress.
+- Browser tests trigger normal chest, Gold bag, reward Mimic, beatable Mimic,
+  too-strong Mimic, friend rescue and enemy defeat under rapid-input,
+  cancellation, reduced-motion and level-transition conditions.
+- Performance stress covers the maximum allowed simultaneous/queued burst on
+  web and Tauri with no unbounded nodes, retained timers, decoded-resource leak,
+  frame-time cliff or SFX clipping. Lower tiers preserve meaning and exact totals.
+- Human/Amelia playtesting confirms the reveal reads before combat, the 35%
+  surprise feels funny rather than unfair, the loot shower feels satisfying,
+  and reward pacing does not make ordinary exploration or quiet moments noisy.
+- No paid purchase, monetized random outcome, repeatable reload exploit, or
+  coercive reward loop is introduced.
+
+### PT-20260903-23 — Compact contextual BGM controls
+
+- Type: Music UX, transport and cross-input accessibility
+- Impact: P1 — high-value quality of life
+- Delivery: Routed; Loop needs decision
+- Verification: Not retested
+- Primary owners: Root checkpoint 03M for the canonical transport port,
+  conformance fake and conservative current adapter; Plan 01 for the compact
+  disclosure surface; Plan 07B for final contextual history, selection,
+  transitions, fallback and media qualification; Plan 08 for semantic actions
+  and controller/keyboard/touch/pointer parity
+- Supporting owners: Plan 02 for BGM/SFX coexistence; Plan 10 for the Garden
+  music context; Plan 13 for compatible residual polish only
+- Dependencies: `PT-20260903-20` delivered static catalogue and transport port;
+  Plan 01 focusable overlay topology; Plan 08 input-context policy
+- Target gate: Port/current-adapter conformance in 03M, UI surface in Plan 01,
+  semantic controller operation in Plan 08, final contextual transport and
+  audible qualification in Plan 07B
+
+**Human outcome.** Players can request Previous, Next or Shuffle/Random within
+the music pool for the current screen or activity. Mute/Unmute and all music
+transport actions live inside one compact Sound control rather than becoming a
+new row of permanent buttons. Loop is an attractive possibility, but remains an
+explicit Human decision.
+
+**Transport contract.**
+
+- The active typed context is a hard boundary. Maze controls select only Maze
+  tracks; title, story, victory, Garden and Adventure Book use their own pools.
+  A context transition overrides transport history and any possible loop.
+- `Previous` traverses actual valid listening history in the active context,
+  not filename or asset order. It is visibly disabled or accessibly announced
+  as unavailable when no prior eligible track exists.
+- `Next` advances through the contextual selector and its no-immediate-repeat
+  policy. `Shuffle/Random` selects a different playable track when at least two
+  exist. Empty, one-track and failed-candidate cases have explicit fallbacks and
+  never manufacture an avoidable silence gap.
+- Manual choices enter the same history/shuffle state as automatic completion.
+  They must not fork a second music controller or bypass preload, crossfade,
+  fallback, visibility, activation or lifecycle rules from `20`.
+- Rapid commands cancel or supersede the pending transition deterministically:
+  no overlapping tracks beyond the intentional crossfade, double-owned player,
+  stale timer, phantom history entry or late start after the context has changed.
+- Loop, if approved, applies only to the current track and current context. The
+  Human must choose whether it is session-only or persistent; implementation
+  may reserve UI space but may not silently choose either policy.
+
+**Compact UI and input contract.**
+
+- Keep one persistent Sound affordance in the canonical cross-device action
+  order. It opens an accessible popover/menu or compact sheet with Mute/Unmute,
+  Previous, Next and Shuffle/Random, plus Loop only after approval.
+- Do not add a permanent transport strip or persistent Now Playing panel. The
+  closed control communicates muted/playing state without relying on colour;
+  every expanded action has an accessible name, current/disabled state and a
+  large enough touch/focus target.
+- TV, desktop, iPad and compact-phone layouts preserve the same logical option
+  order. The surface supports pointer, touch, keyboard and controller; Back/
+  Cancel closes it and gameplay input cannot leak through while it is open.
+- Plan 01 owns only presentation/focus state. Plan 07B owns transport truth.
+  Plan 08 dispatches typed actions instead of simulating clicks or reading icons.
+
+**Acceptance evidence.**
+
+- Unit/model tests cover history and pool boundaries, repeat avoidance, missing
+  candidates, zero/one/two/many-track pools, manual versus natural progression,
+  rapid commands, mute/unmute and context changes.
+- Browser integration proves one disclosure surface, focus return, correct
+  disabled/pressed announcements, input isolation and stable layout at every
+  required viewport. Controller-only Tauri testing exercises every action.
+- Audible web and packaged-Tauri tests confirm smooth manual crossfades, correct
+  current-pool selection, no overlap or unintended silence, clean background/
+  foreground behaviour and honest user-activation handling.
+- Human/family testing confirms the control is easy to discover but does not
+  clutter the HUD, and that repeated skipping feels immediate and predictable.
+
+### PT-20260903-24 — Meaningful enemy, friend and terrain variety
+
+- Type: Authored campaign ecology, deterministic generation and catalogue
+  integration
+- Impact: P1 — high value and a mandatory Plan-09 content-acceptance gate
+- Delivery: Routed
+- Verification: Not retested
+- Source intake:
+  [`playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md`](playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md)
+- Primary owner: Plan 09 for authored campaign placement, content-use evidence
+  and its bounded generated-topology phase
+- Supporting owners: Plan 03 for final catalogue/integration intent; Plan 04 for
+  bounded multi-region terrain rendering; Plan 07B for loading/performance; Plan
+  10 for Friend Garden and ordinary-Duo consumption; Plan 13 for closure/consumer
+  verification, then Plan 12 for lifecycle/archive verification
+- Dependencies: Final Human-approved Plan-03 art catalogue and content-
+  integration manifest; stable semantic object IDs; versioned generated-content identity; terrain
+  compatibility metadata; final 24-chapter design packets
+- Target gate: Content-integration manifest at Plan 03; render seam in Plan 04;
+  authored/generated content and coverage in Plan 09; Garden consumption in Plan
+  10; closure/consumer verification in Plan 13; lifecycle/archive verification
+  in Plan 12
+
+**Human decision.** Use the complete final gameplay-art library purposefully.
+Across the story campaign, gradually introduce new enemy types as the journey
+progresses. Include some coherent family or themed-subset mazes, some mixed-
+roster mazes, and explore a late broad-roster showcase. Every final enemy type
+and rescue-friend type should receive a meaningful authored-campaign
+opportunity. Surprise Mazes do not need that progression, but should vary
+between repeated, subset and mixed encounters. Campaign floor/wall choices are
+fixed and art-directed per chapter; generated combinations must be compatible.
+Clearly separated portal/puzzle regions may use distinct harmonious or
+intentional contrasting terrain treatments so they feel like different places.
+
+**Current-checkpoint audit.** The existing vision asks for intelligent use of
+the full library, and Plan 09 requests an adjacency report, but neither currently
+guarantees final-roster coverage or a progressive introduction curve. Authored
+levels already select one fixed terrain theme. Generated visual selection uses a
+separate deterministic stream and a validated complete terrain theme, which are
+strong foundations, but currently chooses one enemy style for the entire maze.
+Authored style overrides are keyed primarily by Power rather than semantic enemy
+object ID, so they cannot reliably express arbitrary mixed same-Power groups.
+The current level/render contract exposes one terrain theme for the whole map
+and cannot yet assign distinct visual themes to portal-separated regions.
+
+**Content-eligibility and identity contract.**
+
+- Plan 03 supplies a versioned content-integration manifest with stable semantic
+  identity, lifecycle, proposed content role, intended owner/consumer and
+  loading intent. Plan 09 then creates the separate typed gameplay-content
+  registry and freezes `campaignEligible`/`generatedEligible` for final enemy
+  styles, rescue-friend species and environment recipes. Source masters, proofs,
+  rejected candidates, optical renditions, superseded assets and explicitly
+  future/dormant concepts do not count as missing gameplay use.
+- Every final Human-approved identity intended for gameplay enters that registry
+  as eligible by default. Exclusion requires explicit Human deferral, not a
+  manager convenience; a roster that violates the debut-density budget returns
+  for a pacing/roster decision instead of losing a type silently.
+- Give every eligible enemy/friend stable type-level `EnemyStyle` /
+  `AnimalSpecies` identity (or explicitly renamed, versioned final equivalents) independent of
+  filename, array position, Power value or one-character map token. Individual
+  authored placements keep separate level-scoped semantic `LevelObject.id` values and
+  coordinates. Add theme, family, generated-eligibility, loading and intended-
+  consumer metadata without making visual tags a gameplay rule or letting an
+  object insertion renumber a roster type. Mimic keeps a separately typed
+  disguised-object identity.
+- Campaign and generated selection use semantic object IDs and independent
+  deterministic presentation streams. Adding or reordering art cannot perturb
+  maze topology, reward truth, Power arithmetic or an existing versioned seed.
+- An approved gameplay-eligible asset with no promised consumer is an
+  integration defect or explicit Human deferral, not an orphan. It cannot be
+  retired merely to make a reachability or package report pass.
+
+**Authored campaign contract.**
+
+- Across the final 24 chapters, every gameplay-eligible enemy style appears in
+  at least one purposeful encounter and every final rescue-friend species has at
+  least one stable, Solo-accessible authored rescue placement. Placement is
+  fixed for that content revision and does not reroll on reload.
+- The final roster reconciliation explicitly includes the Human-requested
+  unicorn under Plan 03's published public name/species ID; do not invent a
+  parallel identity from planning prose.
+- Introduce enemy types progressively. Give a newcomer a readable first
+  encounter before relying on it in a later mixture; after introduction, reuse
+  it in coherent families, contrasting pairs and broader groups. A skeleton-and-
+  lizard chapter is one valid themed example. Visual identity does not silently
+  add attacks, reach, status effects or solver rules; ordinary guardians retain
+  the universal Power and Polite Sword contract.
+- Friend assignments are deliberately authored. Some chapters may rescue a
+  coherent ordinary, mythic, yokai, fantasy, Greek/Roman or environmental group;
+  others may provide a cheerful mixture. Every friend remains optional for
+  ordinary completion, and Required Path never treats roster coverage as a
+  prerequisite.
+- Use Chapter 24 as the preferred readable all-roster festival, after every type
+  has a meaningful interactive debut by Chapter 23. Begin with no more than
+  twelve interactive guardians and render remaining types as unmistakable non-
+  colliding festival cameos outside combat/solver state. Raise that bound only
+  with solver, route, density, loading, performance and family-play evidence;
+  never create checklist stuffing, forced combat or a Power gauntlet.
+- Every final approved Mimic family—including Treasure and Candy when both pass
+  Plan 03—uses the single PT22 disguised-object mechanic, not an ordinary enemy
+  skin, and Plan 09 owns implementation/placement. A missing dependency returns
+  to its named owner or an explicit Human deferral gate rather than silently
+  making a family ineligible or substituting an always-visible guardian.
+- Every chapter design packet records fixed enemy/friend assignments, first-
+  introduction status, encounter profile, authored terrain region(s), intended
+  thematic logic and neighbour comparison. Coverage does not excuse an asset
+  placed without gameplay, narrative, spatial or emotional purpose.
+
+**Generated-content and environment contract.**
+
+- Versioned Surprise generation deterministically chooses one feasible
+  `single-style`, `themed-ensemble` or `mixed-ensemble` profile with the exact
+  count/family semantics maintained in the Gameplay spec and Plan 09. One-enemy
+  Gentle mazes use `single-style`; an infeasible multi-style mode is never drawn
+  and silently degraded. A broad deterministic cohort must reach every generated-
+  eligible family without requiring every seed to contain everything.
+- Mimics use their own versioned family registry rather than those ordinary
+  enemy modes. Each family has an explicit `generatedEligible` disposition; a
+  new generated-content version may place at most one in a solver-proven optional
+  chest/treasure slot, with zero as a normal result. Its family/outcome streams
+  are isolated from topology, required rewards, ordinary enemy composition and
+  solution truth, and cohort evidence reaches every eligible family plus both
+  65/35 reveal branches.
+- Rescue friends use a separate seeded selection without duplicates. Because
+  species affects content identity and future Garden outcomes, its eligible pool
+  and algorithm have their own generated-content version and feed the gameplay
+  fingerprint rather than being treated as visual-only presentation.
+- Keep layout/reward PRNG streams independent from enemy/environment
+  presentation selection and from friend-content selection.
+  Generator catalogue growth must not change a prior seed unless an explicit
+  generator/content version does so with corresponding identity and tests.
+  Current generated active runs are not persisted; preserve historical golden
+  seeds, records and debug reconstruction without inventing resume migration.
+- Every authored chapter declares one fixed `EnvironmentManifest` containing a
+  required base/default complete recipe and one to four complete named region
+  assignments. A single-region chapter assigns its sole region the base recipe;
+  clearly separated sections, especially teleporter-linked islands, may use
+  additional regions. Every cell belongs to exactly one region, and visual
+  recipes change presentation only—not collision, reachability or portal rules.
+  Reject an empty manifest, an uncovered/overlapping cell or more than four
+  regions. Stable semantic region IDs may
+  support landmark/Hint language, but texture/colour is never the sole clue; a
+  hint-significant semantic map is content-versioned separately from its visual
+  recipe. Avoid per-tile patchwork.
+- Generated mazes choose only complete validated environment recipes from the
+  shared Art/Lighting catalogue. A recipe may encode an approved floor/wall
+  pairing, but generation never draws those two halves independently into an
+  unreviewed clash.
+- Multi-region rendering preserves world-space texture anchoring, wall topology,
+  seams, one resolved level-wide lighting direction, object contrast, minimap readability, reduced/
+  static truth and bounded DOM/decode work.
+
+**Acceptance evidence.**
+
+- Produce a 24-row campaign content-use/adjacency matrix and a generated-cohort
+  report covering every eligible enemy, friend and terrain family, first
+  introduction, themed/mixed profile, neighbour repetition and intended use.
+  Reconcile every other gameplay-facing weapon, cage, key/door, portal,
+  treasure/Science, traversal-item, hazard and dressing family from Plan 03's
+  integration manifest to a real consumer or explicit disposition.
+- Validators fail missing eligible campaign coverage, unknown semantic IDs,
+  invalid generated pools, incompatible terrain pairs, uncovered/overlapping
+  visual regions and accidental filename/Power/array-order identity.
+- Solver and counterfactual tests prove increased encounter variety does not
+  bypass intended prerequisites or make optional combat required. All friend
+  placements preserve zero-rescue ordinary and exact-all-rescue routes.
+- Browser/Tauri evidence covers first encounters, themed and mixed chapters, the
+  broad-roster prototype, representative generated profiles, and every multi-
+  region theme at the required viewports, motion/quality modes and input paths.
+- Loading/performance tests prove current-screen loading rather than title-time
+  preload of the full roster; qualify worst-case encoded/decoded memory, DOM,
+  frame work, transition, offline package and rollback behaviour.
+- Human/family play confirms the introduction curve is legible, themed sets feel
+  intentional, mixed sets feel surprising rather than noisy, friends remain
+  appealing optional discoveries, and different portal regions genuinely feel
+  distinct without becoming confusing.
+
+### PT-20260903-25 — Art-directed game UI and presentation-scale imagery
+
+- Type: Interface art direction, typography, catalogue integration and
+  cross-device presentation
+- Impact: P1 — high-value polish and a mandatory Plan-01 quality gate
+- Delivery: Routed
+- Verification: Not retested
+- Source intake:
+  [`playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md`](playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md)
+- Primary owner: Plan 01 for the UI material/shape/type system, responsive
+  surfaces, contextual art slots, semantic controls and final composition
+- Supporting owners: Plan 03 for approved art, presentation renditions, logo and
+  Art-Bible tokens; Plan 02 for bounded surface transitions and delight; Plan
+  07B for loading/decode/render qualification; Plan 11 for final brand review
+- Dependencies: Accepted Plan-03 runtime catalogue and Art Bible; semantic
+  interaction/item identities; shared motion and quality modes; common viewport
+  matrix
+- Target gate: Plan 01 acceptance, with downstream visual/performance
+  qualification in Plans 02 and 07B
+
+**Human decision.** The finished interface must look like a polished, authored
+video-game UI from the same world as the final sprites—not a clean web dashboard
+with game images placed on top. Recent Kirby, Mario Party, Trails in the Sky,
+and Super Mario Bros. Wonder interfaces communicate the desired joy, hierarchy,
+readability and console-game finish at a principles level only; Maze retains an
+original material, shape, layout, icon, typography and motion identity.
+
+**Required visual system.**
+
+- Implement the Art Bible's “paper-cut signals over magical surfaces over
+  painted world” hierarchy as a small, coherent Maze-native surface family.
+  A leading treatment is softly frosted white/pearl magical glass with a bright
+  inner rim, gentle world colour, material depth and sparse storybook ornament.
+  Do not copy a reference game's panel, logo, silhouette or trade dress.
+- Keep dense text centres quiet and sufficiently opaque. Avoid repeated generic
+  cards, default web pills/forms, equal emphasis, excessive nested glass and
+  decorative gradients without semantic purpose.
+- Full quality may use a bounded, measured backdrop treatment on a small number
+  of static overlays. Lite/static recipes reproduce the material with opaque
+  colour, gradients, borders and precomposed highlights. The moving maze is not
+  continuously re-blurred behind every panel.
+- Use the approved sticker-style icons as literal semantic signals. Controls
+  remain real buttons with readable focus, selected, pressed, disabled and
+  default states that never depend on gloss, animation, sound, hue or hover.
+
+**Typography and large-art requirements.**
+
+- Freeze a compact, locally packaged, licence-recorded type system: a rounded
+  expressive display/control face and either its legible text cut or one quiet
+  companion for prose. Disable synthetic weights; test required glyphs,
+  arithmetic, stable/tabular figures where needed, fallback, byte/loading cost,
+  couch distance, smallest supported size, 200% resize and text spacing.
+- The catalogue resolver distinguishes field/optical and presentation
+  renditions. It never enlarges a small field sprite into fuzzy modal artwork.
+- Preserve the existing blocker mechanic and exact text/image behavior; its
+  current 112px direct `itemSrc` is the migration baseline, not a reason to add
+  a second dialog or gameplay state. Replace URL/field-image coupling with
+  semantic rendition selection and an art-directed responsive composition.
+- Blocker feedback prominently displays the exact required item's large
+  presentation rendition with concise real text such as “You need the Splash
+  Boots.” Too-strong guidance, new friends/enemies, item details, Adventure Book,
+  important rewards, victory and selected story moments may use large art when
+  it improves recognition or emotion; routine HUD cells remain restrained.
+- Load presentation art only for the visible or bounded-imminent surface. A
+  missing or failed rendition falls back to the correct semantic optical image
+  and text without layout shift, broken boxes or blocking the action.
+
+**Acceptance evidence.**
+
+- Human review across TV, desktop, iPad, Tauri minimum and phone agrees the UI
+  feels authored for Maze rather than like a generic web application.
+- A component/state proof sheet covers every surface material, button/focus
+  state, typography tier, sticker family, blocker/item presentation, maximum
+  text/content case and full/lite/static recipe.
+- Contrast, colour independence, motion preference, 200% text, controller/
+  keyboard/touch focus and all existing geometry gates pass on the painted UI,
+  not only on an unstyled semantic shell.
+- Loading evidence proves large renditions and literal blur do not produce
+  title-time catalogue preload, interaction stalls, frame cliffs, unbounded
+  decoded memory or a broken offline/Tauri fallback.
+
+### PT-20260903-26 — Early front-door art and family-preview builds
+
+- Type: Front-door visual identity and development/release process
+- Impact: P1 — high-value family feedback without making every handoff a release
+- Delivery: Routed
+- Verification: Not retested
+- Source intake:
+  [`playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md`](playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md)
+- Primary owners: Active Plan 03 for the initial title illustration, home splash
+  and logo; root/release manager for selecting and producing preview checkpoints
+- Supporting owners: Plan 01 for front-door integration and the preferred first
+  family build; Plan 07B for reproducible artifact/performance tooling; Plan 11
+  for final-canon brand audit rather than automatic replacement
+- Dependencies: Human-approved front-door sources and derivatives; clean reviewed
+  checkpoint; passing save/solver/input/build smoke gates; recoverable artifact
+  provenance
+- Target gate: Optional post-Plan-03/03M Art Preview when its current art and
+  asset/audio URL set is cheap and green—without waiting for Plan-07B's final
+  contextual controller; preferred Family Preview 1 after Plan 01; later
+  previews only at named milestones
+
+**Human decision.** Generate the title-screen illustration, home-screen splash
+art and game logo now in the approved Maze house style so they can appear in an
+early playable build. Plan 11 later evaluates these assets against the final
+campaign, alternative Player 1, Ponchi, Melty and Friend Garden canon; it may
+retain, extend or selectively replace them and is not required to redo good work.
+
+**Front-door boundary.** The current `title` route already acts as the home/menu
+surface; there is no separate Home screen. Plan 01 gives the two illustrations
+distinct roles within the existing front door or reserves one deliberately—it
+does not add navigation solely to show another image. Keep artwork, exact live
+title text and logo separable. AI-generated lettering is concept evidence only;
+the final “Maze so Puzzle” wordmark is reconstructed with exact controlled
+lettering, spelling/legibility checks, accessible live text and Human approval.
+
+**Preview policy.**
+
+- Do not package every plan. Every accepted plan gets a committed/pushed source
+  checkpoint; packaged decision points are `FP-ART` (optional after Plan 03 and
+  root checkpoint 03M),
+  `FP-UI1` (preferred after Plan 01), `FP-CORE2` (after Plan 07B),
+  `FP-CAMPAIGN` (after Plan 09), required isolated `FP-P10-GREYBOX`,
+  `FP-COOP` (after Plan 10), and `RC-01` after Plan 11, Plan 13 closure, Plan 12
+  archive-first hygiene, and root final qualification.
+- Build only from a clean checkout/worktree of a reviewed, committed and pushed
+  exact checkpoint, never the shared dirty tree. Required
+  evidence is proportionate focused tests, `npm run check`, desktop compilation,
+  production web build, and a title → story → maze → save/reopen smoke journey.
+  A known-broken save, solver, input, asset or migration state cannot become a
+  family preview merely because the artwork is exciting.
+- Prefer the lowest-friction useful artifact. A Windows portable Tauri build is
+  sufficient for an internal family preview when an installer/signing exercise
+  adds no learning. Record exact commit and application/content versions,
+  SHA-256, build tools/host, included milestone, known issues and rollback.
+- The default family-preview bundle is one immutable SHA-named unsigned portable
+  executable, a machine-readable manifest, SHA-256 checksum and short `PLAYTEST`
+  note covering launch path, target journey, known issues, save/profile scope and
+  rollback. Give a rebuild an explicit revision suffix; never overwrite evidence.
+- Treat the generated artifact manifest/checksum file as hash authority. A stale
+  prose “expected hash” example cannot override it.
+- Keep binaries and transient screenshots out of runtime/source-control delivery
+  unless an explicit release policy says otherwise. Label previews honestly:
+  they do not claim public release, signing, store, low-end, hardware,
+  accessibility or final performance qualification.
+- Every non-RC preview uses a clearly labelled isolated profile/storage namespace
+  or a verified backup/restore procedure. Prototype or newer-schema data must not
+  contaminate the ordinary Tauri/WebView profile or undermine rollback to the
+  last accepted build. `FP-P10-GREYBOX` is always disposable and isolated.
+- Skip a checkpoint when it is red, disproportionately expensive, or about to be
+  invalidated by the next plan; record the reason so a preview is never forgotten
+  by accident.
+
+**Acceptance evidence.**
+
+- Plan 03's approved front-door sources have clean derivatives, catalogue IDs,
+  source/provenance records, responsive crop/safe zones, text/logo separation,
+  rollback pointers and real title/home integration.
+- Every produced preview has a compact manifest, hashes, known-issues note and
+  smoke result tied to one immutable commit; every skipped named opportunity has
+  an explicit reason.
+- Amelia can launch the artifact through the documented path and complete the
+  chosen representative journey without development tooling.
+
+### PT-20260904-27 — Earned-achievement holographic showcase
+
+- Type: Reward presentation, Adventure Book UX, motion and accessibility
+- Impact: P1 — high value
+- Delivery: Routed
+- Verification: Not retested
+- Source intake:
+  [`playtests/2026-09-04-achievement-showcase-and-sticker-book.md`](playtests/2026-09-04-achievement-showcase-and-sticker-book.md)
+- Primary owner: Plan 01 for the Adventure Book interaction, presentation
+  surface, focus and responsive layout
+- Supporting owners: Plan 02 for the bounded holographic-shimmer recipe; Plan
+  07B for decode/frame/memory qualification; Plan 08 for controller parity;
+  Plan 13 for closure only if a bounded integration remainder survives
+- Dependencies: Published high-resolution achievement renditions and stable
+  achievement earned/locked truth from the approved art/catalogue contract
+- Target gate: Plan 01 acceptance, with final visual/performance qualification
+  in Plans 02 and 07B
+
+**Human outcome.** Selecting an already-earned achievement lets the player
+admire a large version of its lovely sticker in a dedicated celebration view.
+The reward receives an authored rainbow holographic shimmer that complements
+its existing foil/enamel materials and feels special rather than like a generic
+CSS sheen.
+
+**Acceptance slices.**
+
+- An earned achievement is a semantic button and opens one modal/detail surface
+  containing the correct presentation-scale catalogue rendition, achievement
+  name and earned description. It never enlarges a small thumbnail through
+  visibly soft browser scaling.
+- A locked achievement cannot reveal the full sticker or hidden descriptive
+  content. Selecting it retains the established locked-state explanation.
+- The full-motion recipe uses a restrained moving rainbow/foil highlight that
+  respects the sticker's authored shape and material masks; it must not wash out
+  the illustration, text, contour or cream cutline.
+- Reduced-motion receives a beautiful static/very-low-motion iridescent state,
+  not a diminished blank card. Lite/static rendering tiers remain visually
+  intentional on constrained devices.
+- Pointer, touch, keyboard and controller can open, inspect and close the same
+  surface. Focus is trapped and restored correctly; Back/Cancel closes it;
+  gameplay actions cannot leak through.
+- The large rendition loads on demand or through bounded contextual preparation.
+  Opening and repeated browsing do not preload the whole reward catalogue,
+  retain abandoned decoded images, create a frame-time cliff or require network
+  access in the packaged app.
+- Screen-reader output announces the earned achievement and description once;
+  the shimmer itself adds no noisy live-region or redundant semantic content.
+
+**Evidence.** Visual/browser checks cover earned and locked rewards, rapid
+browsing, compact phone, iPad, desktop and TV layouts, reduced motion, keyboard
+and controller focus, offline packaged delivery, and a measured worst-case
+holographic effect cohort. Human/family review confirms that the presentation
+feels rewarding and gives the artwork room to be enjoyed.
+
+### PT-20260904-28 — Personal achievement sticker book
+
+- Type: Optional cosmetic collection/customisation feature
+- Impact: P2 — desirable future feature
+- Delivery: Needs decision
+- Verification: Not retested
+- Source intake:
+  [`playtests/2026-09-04-achievement-showcase-and-sticker-book.md`](playtests/2026-09-04-achievement-showcase-and-sticker-book.md)
+- Primary route: Plan 14 opportunity review, followed by a separately approved
+  feature plan if promoted
+- Supporting owners if promoted: Plan 01 interaction language; Plan 08
+  controller cursor; persistence/migration owner; Plans 07B/RC-01 qualification
+- Dependencies: Accepted `PT-20260904-27`, stable achievement identities, and a
+  Human-approved placement/persistence scope
+- Target gate: explicit Human accept/defer/reject decision; not a hidden Plan-13
+  mop-up task
+
+**Human idea.** Offer an optional two-page sticker book where the player can
+place, admire and rearrange earned achievement stickers. When a sticker is
+earned, the game may ask whether the player would like to add it, then let them
+choose its position by touch/pointer or an analogue-stick/controller cursor.
+
+**Scope guardrails for a later specification.**
+
+- The book is purely cosmetic. Sticker position, overlap and participation do
+  not affect rewards, achievement truth, progression or campaign completion.
+- Only earned stickers can be placed. The authoritative achievement record stays
+  separate from layout state, so a corrupt/reset layout cannot revoke rewards.
+- A promoted v1 must explicitly decide page count, placement bounds, overlap,
+  ordering/layering, rotation/scaling (default recommendation: defer both),
+  duplicate policy (default: one instance per earned achievement), undo/reset,
+  save schema/migration and what happens when a catalogue rendition changes.
+- Touch/pointer direct manipulation and controller cursor placement must express
+  the same affordances and valid result. There is always a deterministic,
+  accessible auto-place/default-placement route for players who do not want or
+  cannot use free positioning.
+- The post-award invitation is optional and non-blocking; declining it never
+  loses the sticker, which remains available in the book's unplaced tray.
+- Do not implement this inside Plan 01, Plan 11 or Plan 13 merely because those
+  plans touch the Adventure Book or reward art. The persistent spatial editor is
+  material feature scope and needs its own acceptance, migration, input and
+  performance plan if Plan 14 recommends promotion.
 
 ## 6. Programme integration and gates
 
@@ -1084,41 +1881,115 @@ not permission for simultaneous implementation in the shared worktree.
 
 1. **Current Plan 03:** do not interrupt its active art implementation. Its final
    Art Bible, Ame model sheet and catalog may naturally supply typography,
-   material and expression tokens, but `18` must not expand its in-flight scope.
-2. **Manager gameplay gate before Plan 01:** settle `PT-20260902-10` pending-win,
-   reward/save and Stay-location semantics. Decide whether `PT-20260902-02` is
-   landed as a narrow gameplay follow-up at the same checkpoint.
+   material and expression tokens. It may produce the chest/Mimic/reward static
+   family already inside its approved art scope for `22`, but must not implement
+   the Mimic game rule or loot choreography; `18` must not otherwise expand its
+   in-flight scope. Before completion, publish `24`'s content-integration
+   manifest: stable final enemy/friend/theme IDs, proposed content roles,
+   lifecycle, intended downstream owner and loading intent. Plan 03 does not
+   place content or decide final campaign/generated eligibility; Plan 09 owns
+   that typed registry.
+   It may also complete the Human-requested initial title illustration, home
+   splash and logo under `26`, plus presentation renditions required by `25`,
+   provided each asset passes the same individual approval, provenance,
+   derivative, catalogue, byte and runtime-publication gates as the rest of its
+   slate. This does not cancel Plan 11's final-canon review.
+2. **Root checkpoint 03M before Plan 01:** restore a green runtime against the
+   delivered OST, freeze the canonical `MusicTransportPort` and current/fake
+   adapter, and prove no deleted media URL remains. At the same bounded
+   checkpoint, settle `PT-20260902-10` pending-win/reward/save/Stay-location,
+   land `PT-20260902-02`'s stationary door transition contract, and freeze
+   `22`'s typed committed-reward outcome, deterministic reveal identity, exact
+   balance tables and exactly-once ownership. UI/VFX and runtime Mimic placement
+   remain with their scheduled owners.
 3. **Plan 01:** implement `01`, `09`, the UI half of `10`, the minimap half of
    `16`, the larger portrait/reaction gutter for `18`, the typed screen/overlay
-   music-context seam for `20`, and layout/transform/control seams for `05`, `07`
-   and `08`.
-4. **Plan 04:** consume `15`; do not invent ice/spike visuals while `14` is
-   undecided.
+   music-context seam for `20`, the single compact Sound disclosure for `23`,
+   the earned-achievement detail/showcase interaction for `27`, and layout/
+   transform/control seams for `05`, `07` and `08`. Do not absorb `28`'s
+   persistent free-placement sticker book into this layout overhaul.
+   Make `25` an explicit visual-quality tranche rather than deferring the
+   authored surface/type/presentation-art system as post-layout polish. Integrate
+   the approved `26` front door. After acceptance, the root manager evaluates
+   and normally produces Family Preview 1.
+4. **Plan 04:** consume `15` and provide `24`'s bounded multi-region terrain-
+   theme/rendering seam without changing gameplay topology. Do not invent ice/
+   spike visuals while `14` is undecided.
 5. **Plan 02:** implement the presentation halves of `01`, `02`, `03`, `05`,
    `13`, `15` and the portrait-first reaction system in `18`, consuming—not
    redefining—the engine, art, UI and lighting contracts. Preserve an explicit
    SFX/BGM mixing and cancellation seam for `20`; do not take ownership of BGM
-   navigation policy.
+   navigation policy. Implement `22`'s bounded reusable reward burst, trails,
+   homing, count feedback, chest/reveal choreography and SFX as presentation of
+   an already-committed typed outcome; never own its 65/35 or economy rules.
 6. **Plan 08:** implement `08`, controller parity for `10`, the controlled held-
    input continuation approved for `02`, and the honest browser/controller audio-
-   activation route required by `20`.
+   activation route required by `20`. Add semantic, controller-complete
+   navigation for every `23` Sound action and prevent movement leaking through
+   its open surface.
 7. **Plan 05:** provide animation assets/recipes needed by the accepted `01`,
    `03`, `11` and `15` outcomes. It may add field-sprite parity for `18` only
-   after portrait-first v1 is stable. Ice spin remains conditional on `14`.
-8. **Plan 07B:** first implement the bounded music-controller/navigation slice in
-   `20`; then make `07` a non-negotiable measured play-feel outcome and qualify
-   music plus the continuous/stacked effects and assets from `01`, `05`, `15`
-   and `18`.
+   after portrait-first v1 is stable. It may add the bounded chest/Mimic reveal
+   frames for `22` after static art and presentation timing freeze. Ice spin
+   remains conditional on `14`.
+8. **Plan 07B:** replace or extend the 03M current adapter behind the unchanged
+    `MusicTransportPort` with `20`'s full contextual controller, including `23`'s
+    history, Previous/Next/Shuffle transport, rapid-command handling and any
+    subsequently approved Loop policy; then make `07` a non-negotiable measured
+    play-feel outcome and qualify music plus the
+   continuous/stacked effects and assets from `01`, `05`, `15`, `18`, and `22`.
+   Reserve and qualify `24`'s final roster/theme loading and decoded/package
+   costs without eagerly loading the complete catalogue at title.
+   Rebaseline the final UI material recipes, presentation renditions and early
+   front-door assets from `25`/`26`; maintain the preview-artifact manifest/hash
+   convention without converting internal previews into release claims.
 9. **Plan 09:** revise its plan before execution for `04`, `06`, `11`, `12`,
-   `16`, `17` and the guided teaching lifecycle in `19`; this includes changing
-   planning-era map-size, order and onboarding assumptions. Consume the `maze`
-   music pool/context without binding chapters to filenames.
+   `16`, `17`, `22`, `24` and the guided teaching lifecycle in `19`; this
+   includes changing planning-era map-size, order and onboarding assumptions.
+   Implement and place the deterministic Mimic/reward/drop gameplay from `22`,
+   consuming the earlier presentation contract. Make `24` a named bounded phase:
+   authored introduction/placement, fixed per-level/region themes, exact
+   campaign-use evidence, and deterministic generated single/subset/mixed
+   variety. Consume the `maze` music pool/context without binding chapters to
+   filenames.
 10. **Plan 10:** add the Friend Garden completion destination from `10`, wire the
-    `garden` music context from `20`, and ensure future traversal rules cannot be
-    bypassed by co-op.
-11. **Plan 11 — Final Key Art, Branding & Front-Door Presentation:** consume the
-    final character catalog and accepted 24-chapter/Friend Garden canon. It must
-    not invent gameplay or lore that contradicts `17`.
+     `garden` music context from `20`, and ensure future traversal rules cannot be
+     bypassed by co-op. Extend `22` only with exactly-once shared reward ownership
+     and the correct visual homing recipient; do not create duplicate drops.
+     Consume `24`'s final versioned roster/ecology: ordinary Duo preserves every
+     authored encounter/friend/theme assignment, and every final friend is
+     Garden-eligible only after its authored Solo rescue. Recalculate full-roster
+     Egg completion cadence before migration.
+11. **Plan 11 — Final Key Art, Branding & Front-Door Presentation:** execute
+     `docs/plans/11-final-key-art-branding-front-door-presentation-plan.md` and consume the
+     final character catalog and accepted 24-chapter/Friend Garden canon. Use a
+     curated representative final cast and world selection, not an every-asset
+     completeness sheet. It must not invent gameplay or lore that contradicts
+     `17` or `24`. Audit Plan 03's early `26` front-door set first and retain it
+     when it still represents the final game; create only missing variants or
+     bounded replacements justified by the final cast/canon.
+12. **Plan 13 — Backlog Closure & Release Polish:** filter the ledger after Plan
+     11; implement compatible bounded leftovers and leave true epics as separately
+     approved work. `22` may contribute only residual tuning or polish here, not
+     a late unreviewed reward/economy system. Close `24` from exact coverage
+     evidence; return a missing mandatory content tranche to Plan 09 or an
+     explicit Human defer gate rather than cramming it into polish. Declare when
+     no further pointer-producing work remains.
+13. **Plan 12 — Final Asset Retirement & Package Hygiene:** only after that Plan
+     13 declaration, rerun the authoritative asset/package inventory. Close `21`
+     through the two-stage non-runtime archive → Human external-backup
+     confirmation → separately authorized repository-removal workflow. Preserve
+     source authority and sole copies and do not fold new visual design into
+     cleanup. An approved `24` gameplay asset missing its promised consumer is an
+     integration defect or explicit Human deferral, never an orphan by default.
+14. **RC-01 — Root integrated qualification:** build from the clean reviewed
+     post-Plan-12 checkpoint and rerun the final solver, migration, content,
+     viewport, controller, accessibility, audio, performance, Tauri/offline and
+     package matrix before any release-candidate claim.
+15. **Plan 14 opportunity review:** include `28` as an explicit cosmetic-
+    expression opportunity and compare it against the already-shipped `27`
+    showcase. Promotion requires a separate Human-approved feature plan; a
+    planning decision changes no runtime or save data.
 
 ### Decisions that must not be deferred into a specialist's implementation
 
@@ -1129,9 +2000,33 @@ not permission for simultaneous implementation in the shared worktree.
 - `PT-20260902-19`: default to the hybrid teaching-pocket model inside the fixed
   24 chapters; any extra chapters or separate tutorial campaign need Human
   approval.
-- `PT-20260903-20`: preserve the Human's actual folder spelling when the OST
-  arrives or record an explicit approved mapping; do not silently assume the
-  recommended `adventure-book` physical slug.
+- `PT-20260903-20`: the delivered physical and logical folder slug is
+  `adventure-book`; preserve it and do not derive IDs or ordering from filenames
+  or embedded titles.
+- `PT-20260903-21`: a sole-copy archival policy and rollback-window expiry must
+  be decided from evidence before archive handoff; no repository removal occurs
+  until the Human confirms external backup. An old-looking filename is never
+  sufficient authority.
+- `PT-20260903-22`: freeze Gold/Science ranges, enemy/rescue drop tables,
+  deterministic run/object reveal semantics and exactly-once save behaviour
+  before presentation or content owners implement against it.
+- `PT-20260903-23`: decide whether Loop ships and, if so, whether its state is
+  session-only or persisted. Previous/Next/Shuffle and the single compact Sound
+  disclosure are already approved requirements.
+- `PT-20260903-24`: final `campaignEligible`/`generatedEligible` roster
+  membership, any deliberate campaign/generator exclusion, and the disposition
+  of a literal all-enemy showcase must be explicit before Plan 09 freezes its 24
+  content packets.
+- `PT-20260903-25`: the exact surface/type recipe may be refined through
+  implementation canaries, but “generic clean web UI” is not an acceptable
+  fallback definition of done. Any font-licence or literal-blur cost issue is
+  solved through another Maze-native recipe, not by dropping art direction.
+- `PT-20260903-26`: the manager decides whether each named preview opportunity
+  is green and worthwhile. Plan 11 must review rather than reflexively replace
+  the early title/logo/splash set.
+- `PT-20260904-28`: decide after the integrated product whether a persistent
+  two-page free-placement sticker book earns its input, accessibility, save and
+  migration complexity. Until then it is not Plan-01/11/13 implementation scope.
 
 ## 7. Evidence log
 
@@ -1145,21 +2040,44 @@ superseded tests; they are useful provenance.
 | 2026-09-02 | 04 | `ee176f52ab79e08e818fc919f44b7723f9fc9865` | Solver and authored-map evidence from Plan 06 | Current 17×17 room/hub candidate; 61 ordinary / 77 perfect inputs | Candidate; awaiting Family-tested |
 | 2026-09-02 | 18–19 | `ee176f52ab79e08e818fc919f44b7723f9fc9865` plus active Plan 03 planning artifacts | Human design addendum and read-only source/plan audit | Existing portrait/onboarding seams and gaps recorded | Captured, triaged and routed |
 | 2026-09-03 | 20 | `ee176f52ab79e08e818fc919f44b7723f9fc9865` | Human music direction plus read-only soundtrack/controller audit | Flat placeholder catalogue, single disposable non-preloading player, and missing Story/Victory/Garden contexts confirmed | Captured, triaged and routed |
+| 2026-09-03 | 20 | working tree at `ab20f28372c93e341b13e3cf2d2c94ea71703bb2` | Read-only filesystem, frame and SHA-256 audit; focused Vitest | 42 candidate original MP3s / 99,151,313 B / about 68m25s across all six pools; no exact duplicates; current source still targets 14 deleted placeholders; focused music suite 16/17 | Delivery dependency met; integration/qualification remain Routed |
+| 2026-09-03 | 21 | working tree at `ab20f28372c93e341b13e3cf2d2c94ea71703bb2` | Human request plus read-only art-manifest/plan audit | 16 superseded and 4 deprecated runtime-image records; active cages use v5; sole-copy and validator-lifecycle risks identified | Captured, triaged and routed |
+| 2026-09-03 | 22 | working tree at `ab20f28372c93e341b13e3cf2d2c94ea71703bb2` | Human feature request plus read-only gameplay/presentation audit | Existing fixed treasure event/flight and visible Candy Mimic do not implement disguised reveal, deterministic weighted outcome or enemy/rescue drops | Captured, triaged and routed |
+| 2026-09-03 | 23 | working tree at `ab20f28372c93e341b13e3cf2d2c94ea71703bb2` | Human feature request plus music/UI ownership audit | Contextual transport belongs to the shared music controller; one compact Sound disclosure avoids permanent HUD-button growth | Captured, triaged and routed; Loop needs decision |
+| 2026-09-03 | 24 | working tree after Plan-03 source production | Human feature request plus read-only campaign/generator/catalogue/Garden/lifecycle audit | Generic full-library intent exists, but no exact final-roster campaign coverage, introduction curve, generated encounter-profile variety or multi-region terrain contract exists | Captured, triaged and routed |
+| 2026-09-03 | 25 | working tree during Plan-03 source production | Human UI-art-direction clarification plus repository Art/UI/performance synthesis | Art Bible contains useful surface/type/optical principles, but Plan 01 did not yet make authored game-interface finish or large contextual presentation art an acceptance gate | Captured, triaged and routed |
+| 2026-09-03 | 26 | working tree during Plan-03 source production | Human delivery request plus roadmap/release audit | Front-door art was scheduled late and no low-rework family-preview milestone policy existed | Captured, triaged and routed |
+| 2026-09-04 | 27–28 | working tree after Plan-03 static publication | Direct Human feature request plus manager scope/routing review | Earned stickers need an admiration-scale reward moment; free placement adds meaningful persistence and input scope beyond a viewer | 27 captured/triaged/routed; 28 captured and held at Human decision |
 
 ## 8. Closure and mop-up rule
 
 At each specialist acceptance checkpoint, update only the cards genuinely touched
-by that change and attach exact evidence. After Plan 11, filter the ledger for all
-items that are neither `Accepted` nor intentionally `Deferred`, then create a
-bounded closure plan from the remaining compatible work.
+by that change and attach exact evidence. After Plan 11, filter the ledger and
+execute bounded Plan 13 closure. Once Plan 13 records that no pointer-producing
+work remains, perform Plan 12's archive-first package-hygiene sweep, then the
+root `RC-01` qualification.
 
-Provisional filename:
+Provisional filenames:
 
-`docs/plans/12-playtest-backlog-closure-and-release-polish.md`
+`docs/plans/13-playtest-backlog-closure-and-release-polish.md`
+
+`docs/plans/12-asset-retirement-and-package-hygiene.md`
 
 If the spikes/ice epic (`PT-20260902-14`) is promoted, it receives its own feature
-plan and the closure plan moves to the next unused number. A large mechanics or
-generator rewrite must not be disguised as a polish mop-up. If the Human's final
-OST arrives after Plan 07B/10, the closure plan begins with the bounded catalogue
-replacement and full `PT-20260903-20` media qualification; placeholders can never
-be waved through as a documentation-only leftover.
+plan and later plan numbers move to the next unused slots. A large mechanics or
+generator rewrite must not be disguised as a polish mop-up. A missing mandatory
+`PT-20260903-24` campaign/generated-content tranche returns to Plan 09 or an
+explicit Human defer gate; it cannot be reclassified as cleanup or quietly
+closed by retiring the unconsumed asset. The final OST has now arrived before
+Plan 07B/10. Root checkpoint 03M owns its bounded catalogue cutover, valid
+current adapter and canonical transport port; Plan 07B owns full contextual
+continuity, preparation/crossfade, mastering, performance, listening and
+platform qualification. Placeholders can never be waved through as a
+documentation-only leftover.
+The same closure sweep must account for `PT-20260903-25` as a Plan-01 quality
+gate and `PT-20260903-26` as explicit produced-or-skipped preview evidence; it
+must not defer either merely because functional controls and release packaging
+already work.
+It must also verify that `PT-20260904-27` shipped or was explicitly returned to
+its owning plan. `PT-20260904-28` is not a mop-up obligation: it remains a
+Plan-14 decision unless the Human promotes it through a separately scoped plan.

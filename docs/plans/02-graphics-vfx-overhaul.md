@@ -4,7 +4,7 @@
 
 This addendum is execution authority and supersedes any conflict in the planning body. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and the implementation-time Art Bible, UI/UX spec, Lighting spec, and Gameplay spec before changing code.
 
-Execution begins only after Plans 07A, 06, 03, 01, and 04 are accepted. Re-resolve every symbol against current `HEAD`; consume the landed scene/render/anchor contracts rather than independently refactoring `MazeTerrain`, `App.tsx`, styles, or input state.
+Execution begins only after Plans 07A, 06, 03, root checkpoint 03M, 01, and 04 are accepted. Re-resolve every symbol against current `HEAD`; consume the landed scene/render/anchor and 03M completion/door/Mimic/reward contracts rather than independently refactoring `MazeTerrain`, `App.tsx`, styles, gameplay state, or input state.
 
 ### Adopted product amendments
 
@@ -13,10 +13,36 @@ Execution begins only after Plans 07A, 06, 03, 01, and 04 are accepted. Re-resol
 - Variation must create wonder and intelligent reuse, not noise: use fewer, larger, purposeful anime-readable shapes, one dominant silhouette, controlled accent motifs, and finite release. Do not satisfy variety with particle count.
 - Preserve exact Power conservation, engine-event order, accessible outcome, abort/cancellation, and final reconciliation. The current 2,220ms combat duration is a measured starting recipe, not an immutable product rule; tune it with gameplay and child-readability evidence when a shorter cadence is clearer and more fun.
 - Use revisioned measured anchors supplied by UI, including `bag:<semantic-slot-id>` with a generic Bag fallback. No fixed screen coordinate survives responsive layout.
+- Every transient clone resolves the appropriate runtime rendition and geometry
+  from the final semantic catalogue. Contact origins, feet, faces, grips, cage
+  openings, reward bursts and homing targets use declared bounds/pivots/sockets,
+  never a generic 512px centre, filename branch or per-character CSS exception.
+- Resolve `VfxFlavor` through typed material, personality and motif tags with a
+  complete generic fallback. In a multi-region level, derive floor/wall/material
+  context from the semantic event coordinate; do not use one level-wide theme
+  for an effect occurring in another portal region.
+- Expand the test-only readability/integration rack across every final enemy,
+  friend, weapon, item, cage, portal/chest state, Science pickup and terrain
+  family. Shared semantic recipes are preferred; catalogue coverage does not
+  require bespoke particles for every sprite and must not preload the full art
+  library in production.
 - The presentation director owns run identity, absolute time, abort/final state, sound/VFX cues, and a presentation-busy lease. It requests that controls stop/neutral-gate input; it does not independently clear each device's private queues.
 - Use the Plan-04 terrain/render seam. Lighting owns topology, wall/depth geometry, global light, masks, gutter, and grounding nodes. VFX owns assigned moving hazard material layers, local emission, particles, transient effects, and step sparkle styling.
 - Import resolved `MotionMode = "full" | "reduced"` from Plan 01's canonical `src/motion.ts`; do not redefine it in `src/vfx/types.ts` or add another preference. Keep `VfxQuality = "full" | "lite" | "static"` independent: static is a forced quality/semantic fallback, not a third motion preference or an accidental frozen frame. This addendum supersedes the duplicate type declaration in the illustrative body below.
 - Treat resource budgets as provisional allocations until Plan 07B measures the integrated build. Preserve the authored emotional beat in full/lite/static recipes.
+- Include every approved Mimic family's registered closed chest, good open chest
+  and revealed enemy plus Gold/Science reward sprays without pre-reveal leakage,
+  while leaving the shared deterministic 65/35
+  outcome, exact drop tables and exactly-once credit to the 03M/Plan-09 gameplay
+  owner. Door choreography begins only after the stationary open event commits;
+  goal/victory choreography never commits pending completion. Consume Plan 03's original anime
+  emotion-mark assets and Plan 01 portrait anchors in the typed reaction system.
+- Consume Plan 01's final `PT-20260903-25` surface/type/state tokens and large
+  contextual-art slots. This plan may add bounded open/close, focus, reveal and
+  celebration choreography, but it does not restyle panels, swap fonts or create
+  another glass system. Never animate backdrop blur or continuously filter the
+  moving maze; full/lite/static recipes preserve the same authored UI hierarchy
+  and blocker/item recognition.
 
 ### Documentation and completion
 
@@ -531,7 +557,7 @@ Keep engine types and outcomes unchanged. Add a presentation-only subsystem:
 
 | File | Responsibility |
 |---|---|
-| `src/vfx/types.ts` | `VfxKind`, `VfxChannel`, `MotionMode`, `VfxQuality`, `CancellationReason`, `VfxPlan`, `VfxCue`, `VfxFrame`, `EffectBudget`, anchor and sound-handle contracts. |
+| `src/vfx/types.ts` | `VfxKind`, `VfxChannel`, `VfxQuality`, `CancellationReason`, `VfxPlan`, `VfxCue`, `VfxFrame`, `EffectBudget`, anchor and sound-handle contracts; imports canonical `MotionMode` from `src/motion.ts`. |
 | `src/vfx/catalog.ts` | Exhaustive semantic motifs, palette tokens, timing envelopes, intensity tiers, static recipes, particle/filter/node budgets, and quality fallbacks by effect kind. |
 | `src/vfx/presentationPlanner.ts` | Convert immutable `GameEvent[]` plus level/terrain context into one typed sequence; explicitly sequence jump→rescue, jump→door, jump→portal, pickup-on-landing, and other composites. |
 | `src/vfx/presentationDirector.ts` | Sole run scheduler, monotonic run id, channel ownership, abort scope, cue dispatch, sound handles, lock lease, final-state reconciliation, and performance marks. |
@@ -563,7 +589,7 @@ export type VfxChannel =
   | "stage-flight"
   | "modal";
 
-export type MotionMode = "full" | "reduced";
+import type { MotionMode } from "../motion";
 export type VfxQuality = "full" | "lite" | "static";
 
 export type CancellationReason =
@@ -938,6 +964,9 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 
 - Add `src/vfx/effects/GoalVictoryEffect.tsx`.
 - Modify completion presentation in `src/App.tsx` and migrate/delete relevant CSS.
+- Implement the bounded material-aware rainbow holographic shimmer for Plan 01's
+  earned-achievement showcase. Treat approved foil/enamel masks and sticker
+  contours as art authority; do not apply a generic full-rectangle gradient.
 - Complete catalog coverage tests that require every `VfxKind` to define full/lite/static forms.
 - Add live-media-query listener tests and reduced-motion browser projects.
 
@@ -945,6 +974,10 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 
 - Goal entry completes before modal without changing win timing/logic.
 - Confetti/rays/sparkles are finite and remove their nodes; reward sound aligns with reveal.
+- The earned-achievement shimmer preserves illustration/contour legibility,
+  uses no continuously animated blur/filter chain, stops and releases its owner
+  on close or rapid selection change, and has intentional lite and static/
+  reduced-motion forms.
 - Reduced motion has no accidental frozen confetti/ring stacks, travel, shake, spin, depth pan, or animated blur.
 - Switching preference during every blocking effect follows the cancellation matrix.
 - All semantic copy, final rewards, focus behavior, and announcements remain correct.
@@ -981,7 +1014,7 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 | Desktop Chromium | 960×540, 1280×720, 1920×1080; DPR 1 and 2 where available | Baseline pixels, filter bounds, sound marks, keyboard/pointer, Big mode |
 | Tauri / WebView2 | configured 1280×720 default and 960×540 minimum | SVG masks/blends, audio cancellation on minimize, focus, DPI, package build |
 | Tablet | 1024×768 and 1194×834 landscape; DPR 1/2 | touch/pointer steering, item contour, notice occlusion, stage anchors |
-| Landscape phone | 667×375, 740×360, 844×390 | smallest effect silhouette, particle shedding, text/board competition, orientation transitions |
+| Landscape phone | 568×320 emergency floor, 667×375, 740×360, 844×390 | smallest effect silhouette, particle shedding, text/board competition, orientation transitions |
 | Portrait phone | 390×844 | orientation guidance only; no hidden running VFX/sound/input behind it |
 | Reduced motion | OS emulation before load and preference change during each effect | curated static result, shortened lifetime, no motion-only information |
 | Lite/static quality | every viewport | semantic parity and budget fallback |
