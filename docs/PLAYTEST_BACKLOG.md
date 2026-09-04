@@ -1732,9 +1732,10 @@ lettering, spelling/legibility checks, accessible live text and Human approval.
 **Preview policy.**
 
 - Do not package every plan. Every accepted plan gets a committed/pushed source
-  checkpoint; packaged decision points are `FP-ART` (optional after Plan 03 and
-  root checkpoint 03M),
-  `FP-UI1` (preferred after Plan 01), `FP-CORE2` (after Plan 07B),
+  checkpoint whose GitHub CI and resulting Vercel production deployment are
+  verified. Required portable-build decision points are `FP-ART-OST` (after Plan
+  03 and root checkpoint 03M),
+  `FP-UI1` (after Plan 01), `FP-CORE2` (after Plan 07B),
   `FP-CAMPAIGN` (after Plan 09), required isolated `FP-P10-GREYBOX`,
   `FP-COOP` (after Plan 10), and `RC-01` after Plan 11, Plan 13 closure, Plan 12
   archive-first hygiene, and root final qualification.
@@ -1762,9 +1763,9 @@ lettering, spelling/legibility checks, accessible live text and Human approval.
   or a verified backup/restore procedure. Prototype or newer-schema data must not
   contaminate the ordinary Tauri/WebView profile or undermine rollback to the
   last accepted build. `FP-P10-GREYBOX` is always disposable and isolated.
-- Skip a checkpoint when it is red, disproportionately expensive, or about to be
-  invalidated by the next plan; record the reason so a preview is never forgotten
-  by accident.
+- Defer a required checkpoint only when it is red or packaging would risk
+  artifact/data integrity; record the blocker and exact retry point. Imminent
+  later improvements alone do not justify skipping it.
 
 **Acceptance evidence.**
 

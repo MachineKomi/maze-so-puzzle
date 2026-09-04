@@ -20,15 +20,38 @@ Do not optimize production code, delete/re-encode assets, alter save scheduling,
 
 ### Pass 07B — final specialist execution
 
-Return after Plans 06, 03, 01, 04, 02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement Phases 1–7 against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.
+Return after Plans 06, 03, root checkpoint 03M, 01, 04, 02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement Phases 1–7 against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.
 
-Also read `docs/plans/09-campaign-expansion-24-mazes-plan.md` before final media/package work. An asset, cue, semantic fixture, or capacity explicitly reserved there is planned reachability, not an orphan. Keep each approved reservation in an owner/reason/expected-use/byte/expiry ledger, include it in the 24-level forecast, and revisit it during root's final qualification; this is not permission to retain unrelated speculative files indefinitely.
+- Begin with a fresh inventory after final Plan-03 runtime publication and root
+  checkpoint 03M's delivered 42-track catalogue/current-adapter cutover. Consume
+  its canonical `MusicTransportPort` and conformance suite; implement the full
+  contextual controller behind that boundary rather than replacing the port or
+  making UI/Controls migrate again. Recount and hash the actual catalogue,
+  playlists, `public/assets`, `dist`, portable, and installer outputs; the
+  historical 139-file/89,330,098-byte baseline and 17-file candidate list below
+  are evidence about v0.19.0, not inputs to deletion or loading code. If the
+  delivered track count differs from 42 at execution, stop and reconcile
+  `docs/MUSIC.md` and the playlist manifest rather than silently normalizing it.
+- Build an exact dependency closure for each resolved level: player; concrete enemy, friend, cage, held-prop/weapon, pickup, key, door, portal, hazard, goal, dressing, VFX, and animation dependencies; plus every floor/wall/dressing/material used by its visual regions. The generated-level path first resolves its concrete cast and region/theme recipe, then loads that closure only—never every candidate family that the generator could have selected.
+- Deduplicate immutable URLs across the current region and only the bounded neighboring/transition region needed for an imminent camera or portal seam. Region loading must not duplicate a shared floor/wall/dressing, and it must not warm the whole regional or terrain catalogue.
+- Choose image renditions from measured maximum rendered CSS size multiplied by the supported DPR for each real consumer. Source dimensions, nominal importance, and master size are not delivery-size proxies; Book/presentation enlargement and TV/iPad sharpness remain explicit consumers.
+- Qualify `PT-20260903-25` as product value, not disposable decoration: locally
+  packaged typography, field/optical/presentation rendition selection, the
+  early title/logo/home-splash set, and full/lite/static Maze-native UI surface
+  recipes. Measure any bounded literal backdrop treatment separately. Remove
+  redundant blur/preload/decode work or choose a cheaper equivalent magical-
+  surface recipe before weakening the authored interface into generic cards.
+- Keep music preparation bounded to the current contextual track plus at most one selected likely-next track for the pending context transition. Do not preload or decode every track in the active playlist, every screen playlist, or the full OST. Rapid navigation cancels stale speculative work and preserves continuous fade behavior through the already-prepared current stream.
+- Derive a covering/pairwise visual and performance matrix from current campaign, catalogue, region, effect, animation, input, viewport, and quality metadata. Do not require an infeasible full Cartesian product, and do not replace coverage with a hand-picked happy path; record uncovered tuples and the pairwise generator/seed.
+- Plan 07B may prove reachability, generate retirement candidates, and optimize assets that remain active, but it does not move/delete final superseded assets. Plan 12 is the final retirement/archive owner. Regenerate the obsolete 17-file list from current manifests and hand the evidence ledger to Plan 12.
+
+Also read `docs/plans/09-campaign-expansion-24-mazes-plan.md`, the accepted Plan-10 co-op/Friend-Garden plan, and the roadmap's Plan-11/12 contracts before final media/package work. An asset, cue, semantic fixture, or capacity explicitly reserved by those later owners is planned reachability, not an orphan. Keep each approved reservation in an owner/reason/expected-use/byte/expiry ledger, include it in the forecast, and revisit it during root's final qualification; this is not permission to retain unrelated speculative files indefinitely.
 
 Add 1280×800 Steam Deck and 1920×1080 TV/60Hz profiles, controller polling/normalization and action-to-next-paint latency, suspend/resume/focus/Bluetooth reconnect/Steam Input scenarios, and the delivery route actually chosen by Plan 08. Do not infer Windows WebView2 evidence applies to Linux/SteamOS.
 
 Protect the large minimap, clear static semantics, signature wonder beats, animation, VFX, music, and sound as product requirements. Optimize static/dynamic layers, loading, representation, and redundant work before shrinking or removing the experience. Full/lite/static modes preserve the authored emotional and semantic beat.
 
-Re-evaluate every orphan/deletion candidate against the final Art Bible and VFX/audio use. A currently unused friendship cue may be deliberately reserved; either qualify a real use or prove it dead. Never delete it solely because the old call graph lacks a consumer.
+Re-evaluate every orphan/retirement candidate against the final Art Bible and VFX/audio use. A currently unused friendship cue may be deliberately reserved; either qualify a real use or prove it dead. Never classify it solely because the old call graph lacks a consumer, and leave final archive/removal to Plan 12.
 
 ### Moving baselines and final scope
 
@@ -37,6 +60,11 @@ Re-evaluate every orphan/deletion candidate against the final Art Bible and VFX/
 - The 25% media/package reduction remains a quality-qualified goal, not authority to degrade art or audio.
 - Plan 07B qualifies the integrated current campaign. Root Plan 09 must rerun the relevant 24-level/24-card Book performance and final release matrix after expansion.
 - All level scenarios resolve current campaign entries by stable ID and derive checkpoints through engine-replayed transitions.
+- Leave reproducible commands, smoke coverage and a compact manifest template
+  for an Integrated Interaction Preview after 07B. The root manager rebuilds
+  and hashes that preview from the reviewed committed checkpoint; a dirty-tree
+  profiling artifact is evidence only and is never handed to the family as the
+  named preview.
 
 Update `docs/PERFORMANCE_BUDGETS.md`, architecture/delivery docs, project audit, release checklist, and package provenance with reproducible evidence. Never mix development, profiling, headless, headed, browser, Tauri, or SteamOS populations without an explicit bridge cohort.
 
@@ -59,7 +87,7 @@ The first optimization increment should not be a renderer rewrite, a Rust rewrit
 3. move active-run validation/serialization off the 160 ms held-movement cadence while preserving crash-safe checkpoints;
 4. make camera and actor travel use isolated transform-owning wrappers, subject to paint/layer traces;
 5. stop instantiating and fetching water, lava, and poison SVG resources on levels that do not contain them;
-6. verify and remove the 17 high-confidence static orphan candidates, then quality-test audio and oversized-image reductions family by family;
+6. regenerate and prove a current retirement-candidate ledger for Plan 12, then quality-test active audio and oversized-image reductions family by family;
 7. add explicit static-host caching for hashed code and versioned media without introducing a service worker or weakening Tauri offline behavior.
 
 The current baselines in the brief are substantially correct. A fresh release-mode Vite build reproduced the existing local ignored `dist` byte for byte: one 384,157 B JavaScript chunk, one 136,287 B CSS chunk, and 139 runtime media assets occupying 89,330,098 B. The current locally staged Windows portable executable is 97,871,360 B and the NSIS installer is 91,784,124 B. Media is the dominant lever: runtime media is 91.27% of the portable executable, whereas raw JavaScript plus CSS is 0.58% of `dist`.
@@ -142,8 +170,12 @@ The curated skills catalogue was searched for exact matches for web performance,
 
 | Profile ID | Viewport | CPU | Network | Use |
 |---|---:|---:|---:|---|
+| `REF-1920` | 1920×1080 | Native, host-idle | Local loopback or recorded production network | TV/couch presentation profile; not proof of a television browser |
+| `REF-1280-DECK` | 1280×800 | Native, host-idle | Same cohort as comparison | Steam Deck-sized browser profile; not proof of SteamOS hardware |
 | `REF-1280` | 1280×720 | Native, host-idle | Local loopback or recorded production network | Primary web/Tauri 60 Hz reference |
+| `REF-1194` | 1194×834 | Native, host-idle | Same cohort as comparison | iPad landscape geometry profile; physical-device evidence remains separate |
 | `REF-1024` | 1024×768 | Native, host-idle | Same cohort as comparison | Tablet/desktop layout |
+| `REF-960` | 960×540 | Native, host-idle | Same cohort as comparison | Configured Tauri minimum and compact desktop profile |
 | `REF-844` | 844×390 | Native, host-idle | Same cohort as comparison | Large phone landscape |
 | `REF-568` | 568×320 | Native, host-idle | Same cohort as comparison | Minimum phone landscape |
 | `LOW-568` | 568×320 | CDP 4× CPU slowdown | 150 ms RTT, 1.6 Mbit/s down, 0.75 Mbit/s up | Defined low-end laboratory profile |
@@ -258,7 +290,7 @@ Title-to-first-playable was attempted but timed out at 60 seconds under host sat
 | Repeated transitions/restarts/music/hide-show | Source lifecycle audit | No completed stress or retained-heap cohort. |
 | Tauri start/idle/play/resize/save/reopen | One diagnostic process/start smoke; rejected fresh/warm attempts | No valid timing, memory, gameplay, resize, save/reopen, or clean-install baseline. |
 
-## 5. Resource inventory
+## 5. Historical v0.19.0 resource inventory
 
 ### 5.1 Whole-runtime aggregate inventory
 
@@ -285,11 +317,11 @@ This is a complete aggregate byte/type/dimension inventory and a source-derived 
 | Achievement above-fold art | 12 images | 3,365,294 | 12 MiB | Load on Book/open-achievement intent, not initial title. |
 | Adventure Book long surface | 30 image cards plus records | Route-dependent | Bound decoded strong references if future animation multiplies frames | Preserve native lazy loading; virtualize only if traces show scroll/heap harm. |
 | Current music | 1 selected MP3 | 3–5.5 MB typical | Stream/buffer depends on media pipeline | `preload="none"`, gesture gated, one active player; cancel obsolete transition work. |
-| High-confidence static orphan candidates | 17 files | 5,381,630 | 16 MiB for the image subset | Remove from `public/` only after generated-path and offline package tests prove them unreachable. |
+| Historical high-confidence static orphan candidates | 17 files | 5,381,630 | 16 MiB for the image subset | Evidence seed only. Regenerate after final Plan-03/OST publication; Plan 07B classifies and Plan 12 owns archive/removal. |
 
 The source contains 122 unique hard-coded `/assets/` URLs (109 image, 13 MP3) against 139 packaged media files. The 17-file difference is fully accounted for by one unused cue and 16 legacy PNGs. This does not replace a future generated-URL manifest test, but the static result is high confidence because representative names also appear in the portable executable binary.
 
-The exact proposed removal set is:
+The exact historical candidate set was:
 
 - `public/assets/ost/cue_new_friend_new_horizon_v04.mp3`;
 - `animal-cage.png`, `floor-v2.png`, `wall-v2.png`, `water.png`, and `lava.png`;
@@ -297,7 +329,7 @@ The exact proposed removal set is:
 - `cage-golden-heart-front-v2.png`, `cage-garden-vine-front-v2.png`, `cage-moon-silver-front-v2.png`, and `cage-storybook-wood-front-v2.png`;
 - `cage-garden-vine-front-v4.png`, `cage-storybook-wood-front-v4.png`, `cage-moon-silver-front-v4.png`, and `cage-golden-heart-front-v4.png`.
 
-Do not delete them during implementation until a machine-readable reference manifest covers `src/assets.ts`, `src/artCatalog.ts`, CSS URLs, story/tester data, generated style IDs, documentation exceptions, the production preview, and the offline executable.
+Do not treat this list as a current removal set. Regenerate it from the final machine-readable reference manifest covering catalogue resolvers, CSS URLs, story/tester data, concrete generated selectors, visual-region recipes, animation/VFX/audio manifests, reservations, documentation exceptions, the production preview, and the offline executable. Plan 07B records proof and recommendation; Plan 12 owns any later archive/removal.
 
 ## 6. Hypothesis results
 
@@ -326,7 +358,7 @@ Additional confirmed hypothesis: the SVG `<defs>` at `src/App.tsx:684-692` emits
 | P1 | Large minimap reconciliation scales to 529 tiles per relevant commit. | Observed count + source-confirmed rerender path / high | One tile per terrain cell; new Set/object identities and accessibility scans during movement. | Web/Tauri 23×23 play; low-end CPU | Marker lag, accessibility text drift, visual map errors if static/dynamic layers split incorrectly. |
 | P1 | Camera and player position animate geometry properties. | Source-confirmed / high mechanism, medium measured impact | `left`/`top` transitions invite layout/paint; permanent `will-change` can reserve layers. | All gameplay; WebView/GPU-sensitive devices | Transform conflicts with hop/combat/rescue/jump/portal/door layers; blur raster surfaces may become large. |
 | P1 | Unused hazard resources load on every maze. | Observed / high | Unconditional SVG pattern `<image>` elements. | Web transition transfer/decode; Tauri runtime cache | Missing pattern when a mixed or generated level changes dynamically. |
-| P1 | Seventeen high-confidence static orphan candidates ship everywhere. | Static source scan / high candidate confidence; deletion unproven | Vite copies `public/` wholesale; 5,381,630 B has no runtime source literal and representative names are present in the PE. Binary presence proves packaging, not unreachability. | Web deployment storage; portable/installer | A missed generated path; prove through manifest/routes/offline before removal; restore is simple if removed alone. |
+| P1 | The historical inventory identified seventeen possible static orphans; final candidates are unknown until rebaseline. | Static v0.19.0 source scan / high historical candidate confidence; current retirement unproven | Vite copies `public/` wholesale; the former 5,381,630 B lacked runtime source literals. Final art, OST, regions, VFX, animation, and reservations can change reachability. | Web deployment storage; portable/installer | A missed generated/region path; regenerate proof and hand candidates to Plan 12 rather than deleting here. |
 | P1 | Static deployment revalidates immutable candidates. | Observed live headers / high | No `vercel.json` header policy; even hashed JS/versioned media use `max-age=0, must-revalidate`. | Hosted web cold/warm navigation and level changes | Stale content if HTML gets immutable caching; cache policy must distinguish HTML. |
 | P1 | Level entry can compete across images, reward warmup, and music. | Source-confirmed scheduling / medium | Eager `Image.src`, idle reward fallback, gesture-started audio occur around entry. | Hosted web most visible; Tauri disk still incurs decode/media startup | Pop-in or late music if over-deferred; autoplay policy failures. |
 | P1 | Continuous filters/masks/blends can repaint large SVG/scene surfaces. | Source inventory / medium | Full-board material loops, wall blur/blend, title blur/fireflies, animated item filters, modal backdrop effects. | GPU/browser/WebView specific | Removing delight or damaging material legibility; compositor promotion can increase memory. |
@@ -371,18 +403,19 @@ Tests must kill/close the page at every point in the debounce window, reload old
 
 ### 8.4 Assets, images, and loading
 
-- Add a generated asset manifest with path, owner, route/level, reachability, encoded bytes, dimensions/duration, expected rendered size, hash, preload tier, and offline requirement. Report-only first, then fail on new unowned/orphan bytes.
-- After the generated manifest proves them unreachable, remove the 17 static candidates as a standalone rollback unit. Expected `public/assets` floor is 83,948,468 B, a 6.02% reduction, before re-encoding.
-- Record rendered CSS size and DPR before resizing any family. Trial the 17 1024² terrain/hazard textures and icon-sized 512² art separately. Verify seams, alpha fringes, masks, repeating patterns, Book/modal reuse, DPR2, and 200% zoom.
-- Decode only first-visible art before the “playable” mark. Queue nonvisible level art with bounded concurrency; cancel obsolete entry/restart work. Use `HTMLImageElement.decode()` as readiness, not as evidence that memory has been reclaimed.
+- Add a generated asset manifest with path, owner, route/level/region, reachability, encoded bytes, dimensions/duration, measured maximum rendered CSS size/DPR, hash, preload tier, and offline requirement. Report-only first, then fail on new unowned bytes or unexplained candidate reachability.
+- Regenerate the retirement-candidate ledger from the final manifests and give Plan 12 exact proof/rollback records; Plan 07B does not archive or delete those files.
+- Record maximum rendered CSS size and DPR for every real consumer before resizing any active family. Prioritize measured over-delivery rather than historical source-dimension buckets. Verify region seams, alpha fringes, masks, repeating patterns, Book/modal reuse, TV/iPad, DPR2, and 200% zoom.
+- Resolve the current level—including concrete generated cast and every visual region—before building its dependency closure. Decode only first-visible art before the “playable” mark; queue bounded current/nearby-region dependencies with URL deduplication and cancel obsolete entry/restart work. Use `HTMLImageElement.decode()` as readiness, not as evidence that memory has been reclaimed.
 - Ship one runtime encoding per use wherever possible. Keeping old and new formats as permanent fallbacks erases Tauri size gains. If two sizes are justified for title versus modal reuse, the transfer/package crossover must be documented.
 
 ### 8.5 Audio
 
-The 34.5-minute soundtrack is the largest byte class and should use streaming `<audio>`, not full-file Web Audio decode. Preserve `preload="none"`, gesture-gated start, mute semantics, failure isolation, and one current music player.
+The historical 34.5-minute soundtrack has been replaced by the delivered contextual 42-track OST and must be freshly inventoried. Continue to use streaming `<audio>`, not full-file Web Audio decode. Preserve gesture-gated start, mute semantics, failure isolation, one current music player, and at most one bounded likely-next track prepared for the pending context transition.
 
 - Instrument request start/abort/range bytes, media ready state, time-to-audible, loop boundary, media-process memory, and dispose completion.
 - Fix same-gesture title-to-maze track competition only if a trace confirms a title request begins and is abandoned.
+- Verify that every title/story/maze/victory/garden/Adventure Book transition fades without silence while never preloading an entire contextual playlist. Previous/next/shuffle/loop actions may change selection state, but speculative loading remains current + one likely-next and stale work is cancelled.
 - Transcode from verified owner-held source exports if they are supplied, using a pinned encoder/settings matrix. No WAV, FLAC, AIFF, or other lossless audio master is present in the audited repository. If owner-held sources are unavailable, label every trial as lossy-to-lossy re-encoding and apply a stricter listening/quality gate. Blind or level-matched ABX/listening trials cover all tracks, headphones/laptop speakers, quiet intros, bass-heavy tracks, loops, and fades.
 - Test a single broadly supported result against the documented release matrix, including Edge/Chrome, iPad Safari, and the installed WebView2. `canPlayType` is only a capability hint; actual decode and offline package tests are required.
 - Never keep MP3 plus its replacement inside the portable package as a permanent fallback. Restore the prior mapping/hashes if compatibility or quality fails.
@@ -418,17 +451,17 @@ Authored scenario selection uses the production-accessible tester route `/?debug
 
 | ID | Scenario and deterministic setup | Primary outputs | Required profiles |
 |---|---|---|---|
-| `S01` | Cold title: new context/profile, cleared cache/storage, navigate to production build, do not interact. | Lighthouse navigation, LCP element/time, FCP, CLS, TBT, long tasks, transfer/request waterfall, title TTI, decode, JS parse/eval, renderer/process memory. | All four viewports; native and `LOW-568`; five valid runs each. |
-| `S02` | Warm title: same engine/profile and warm HTTP cache, controlled reload. | Same as `S01`, with cache-hit/revalidation bytes and warm TTI. | All four viewports; five valid runs. |
-| `S03` | Title to first playable level 1. Begin from isolated title; activate once; first directional action after unlock. | Gesture-to-playable, art/audio waterfall, decode, first-input latency, entry long tasks, terrain/minimap commits, abandoned requests. | All four viewports plus `LOW-568`; five native / three low-end runs. |
+| `S01` | Cold title: new context/profile, cleared cache/storage, navigate to production build, do not interact. | Lighthouse navigation, LCP element/time, FCP, CLS, TBT, long tasks, transfer/request waterfall, title TTI, decode, JS parse/eval, renderer/process memory. | Functional/visual shell at all eight reference viewports; five-run timing at `REF-1920`, `REF-1280`, `REF-960`, `REF-568`, and `LOW-568`. |
+| `S02` | Warm title: same engine/profile and warm HTTP cache, controlled reload. | Same as `S01`, with cache-hit/revalidation bytes and warm TTI. | Functional/visual shell at all eight reference viewports; five-run timing at the same bounded `S01` profiles. |
+| `S03` | Title to first playable level 1. Begin from isolated title; activate once; first directional action after unlock. | Gesture-to-playable, art/audio waterfall, decode, first-input latency, entry long tasks, terrain/minimap commits, abandoned requests. | Functional first-playable at all eight reference viewports; five native / three low-end runs over the reproducible §13 covering subset including `REF-960`. |
 | `S04` | True held movement in level 10, 23×23: real keydown for 12 s, keyup in `finally`, presentation-aware route runner, minimap/reveal active. Also run deterministic repeated inputs to distinguish repeat policy from browser key repeat. | Frame intervals, main-thread slices, React commits, terrain/minimap renders, style/layout/paint/raster, storage calls/duration, long tasks, event latency, dropped/extra moves. | `REF-1280`, `REF-568`, `LOW-568`; three 30 s runs plus one 10 min soak. |
-| `S05` | Large mazes: level 10 (23×23, high DOM) and level 12 (23×23, poison/all core materials). Idle 10 s, traverse, reveal, resize, open/close modal. | Terrain-model time, SVG nodes/path bytes, minimap work, active animations, paint/raster/GPU layers, heap and process working set. | All four viewports visual/functional; `REF-1280` and `LOW-568` timed. |
+| `S05` | Large mazes: level 10 (23×23, high DOM) and level 12 (23×23, poison/all core materials). Idle 10 s, traverse, reveal, resize, open/close modal. | Terrain-model time, SVG nodes/path bytes, minimap work, active animations, paint/raster/GPU layers, heap and process working set. | All eight reference viewports visual/functional; `REF-1280`, `REF-960`, and `LOW-568` timed. |
 | `S06` | Material/ambient states: water visible at level 8 opening; lava visible at level 7 opening; enter poison in level 12 through solver-owned target-event BFS (audit route `LLUUUUUUUURRLLUURRRRUUULLLLUUUURLDDRRRRRRDDDDDDLLDDDULLDDDDRRRDDRRU`, poison first visible at the checkpoint ending `...LLDDD`); level 16 for harvest ambience, explicit left light, shadows, 19 enemies and dense objects. | Per-material frame/paint/raster cost, filter/mask/blend surfaces, image decode, GPU layer/memory, reduced/full/static recipe comparison. | `REF-1280`, `REF-568`, `LOW-568`, and packaged Tauri at 1280×720; three runs/state. |
 | `S07` | Presentations: combat level 16 `RR`; rescue level 2 `LLUUUU`; portal level 13 `RRDDLLDDRRRRUUUUUUUU`; door level 2 `LLUURRUUUULLUULLLDDDDDDDDLLUUL`; jump level 14 solver route; treasure/reward flight level 15 `RR`; completion level 1 `LLLLUURRRRUUUULLDDLLLLDDDD`. Wait for the canonical presentation gate between inputs. | Cue-to-first-frame, input lock duration, frame/long tasks, transient DOM/layers, sound/visual skew, cleanup after complete/cancel/hide/restart, exact gameplay outcome. | `REF-1280`, `REF-568`, reduced motion, Tauri; repeat each at least three times. |
-| `S08` | Adventure Book: open from title and gameplay, wait for above-fold images, scroll top→bottom→top at controlled wheel/touch rate, switch away/back. | Open latency, scroll frame time, lazy requests/decode, DOM/heap, retained images/listeners, focus/accessibility. | All viewports; timed at `REF-1280` and `LOW-568`; three runs. |
+| `S08` | Adventure Book: open from title and gameplay, wait for above-fold images, scroll top→bottom→top at controlled wheel/touch rate, switch away/back. | Open latency, scroll frame time, lazy requests/decode, DOM/heap, retained images/listeners, focus/accessibility. | All eight reference viewports functional; timed at `REF-1280`, `REF-960`, and `LOW-568`; three runs. |
 | `S09` | Transition stress: 25 cycles of level entry, two moves, restart/confirm, music change, Home, Book, hide/show; then 10 minutes of effect/transition cycling. | Request cancellation, Audio/Media process count, JS heap/DOM/listeners, renderer private bytes, retained objects, storage integrity, stale timers/animations, working-set plateau. | Headed Edge and packaged Tauri; three complete 10 min runs. |
 | `S10` | Surprise generation: fixed seed corpus including worst accepted/rejected candidates; title intent to maze, cancel/back during generation. | Main-thread blocking, solver states/attempts, TTI, cancellation, deterministic output, worker transfer cost if trialled. | `REF-1280`, `LOW-568`, Tauri; 30 seeds and worst case. |
-| `S11` | Tauri startup: cold/warm title, title→playable, idle, held play, resize repeatedly, save/close/resume, reopen, offline. | Process-to-window/paint/interactive, WebView child creation, ETW disk/CPU/GPU, per-process WS/private bytes, renderer heap, save durability, blank-window interval. | Installed and portable release, actual 1280×720 and 1024×768; five valid cold and warm runs after host-idle gate. |
+| `S11` | Tauri startup: cold/warm title, title→playable, idle, held play, resize repeatedly, save/close/resume, reopen, offline. | Process-to-window/paint/interactive, WebView child creation, ETW disk/CPU/GPU, per-process WS/private bytes, renderer heap, save durability, blank-window interval. | Installed and portable release, actual 1280×720, 1024×768 and configured 960×540 minimum; five valid cold and warm runs after host-idle gate. |
 
 Long routes must be generated/replayed by the existing deterministic solver (`src/game/solver.ts:184-271`) and verified through `movePlayer`; the strings above are audit anchors, not hand-maintained test authority. Reuse replay/event helpers in `src/game/levels.test.ts:159-218`, Lantern assertions at `:499-548`, Rainbow Power density at `:680-695`, and synthetic engine fixtures for treasure, portal, door, poison, and jump in `src/game/engine.test.ts`.
 
@@ -450,15 +483,15 @@ Lighthouse navigation cannot measure real INP for later gameplay and TBT is not 
 
 ### 9.3 Instrumentation map
 
-| Concern | Exact symbols |
+| Concern | Stable symbols/owners to resolve at execution |
 |---|---|
-| React commits | `App` (`src/App.tsx:1086`), `MazeTerrain` (`:630`), `MiniMap` (`:898`), `AchievementsScreen` (`:3473`) |
-| Movement / exploration | `attemptMove` (`src/App.tsx:1685`), `movePlayer` (`src/game/engine.ts:102`), `revealVisibleTiles` (`src/game/exploration.ts:123`), `getCameraWindow` (`:67`) |
-| Terrain | `fullLevelWindow` (`src/App.tsx:575`), `createRoundedCellUnionPath` (`src/game/terrainGeometry.ts:310`), `createRoundedTerrainPath` (`:346`) |
-| Persistence | App effect (`src/App.tsx:1345-1357`), `sanitizeActiveRunSnapshot` (`src/session.ts:381`), `createActiveRunSnapshot` (`:406`), `writeActiveRun` (`:443`), `writePlayerProgress` (`src/progress.ts:846`) |
-| Loading/audio | `enterLevel` (`src/App.tsx:2285`), `resumeRun` (`:2303`), `preloadLevelArt` (`src/assets.ts:226`), `preloadRewardArt` (`:282`), `configureMusic` (`src/music.ts:205`), `startMusicFromUserGesture` (`:226`) |
-| Presentations | `beginBattlePresentation` (`src/App.tsx:1439`), rescue (`:1499`), jump (`:1524`), portal (`:1562`), door (`:1580`) |
-| Visibility/lifecycle | `setMusicPageHidden` (`src/music.ts:290`), `disposeMusic` (`:333`), resize observers/listeners (`src/App.tsx:1184-1213`) |
+| React commits | `App`, `MazeTerrain`, `MiniMap`, `AchievementsScreen` or their accepted extracted successors |
+| Movement / exploration | `attemptMove`, `movePlayer`, `revealVisibleTiles`, `getCameraWindow` |
+| Terrain | `fullLevelWindow` or accepted stable render-model successor; `createRoundedCellUnionPath`; `createRoundedTerrainPath` |
+| Persistence | active-run checkpoint owner; `sanitizeActiveRunSnapshot`; `createActiveRunSnapshot`; `writeActiveRun`; `writePlayerProgress` |
+| Loading/audio | `enterLevel`; `resumeRun`; final level-art dependency collector; reward-art preloader; contextual playlist/transport owner; trusted-gesture start boundary |
+| Presentations | final `PresentationDirector` event/run IDs for combat, rescue, jump, portal, door, and reward sequences |
+| Visibility/lifecycle | music page-visibility/disposal owner; accepted resize measurement owner; application lifecycle provider |
 
 Prefer DevTools/React hooks without source changes for characterization. When implementation starts, guarded `performance.mark/measure` calls may be added behind a development/test flag; production must not emit unbounded logs, object details, player state, or seeds.
 
@@ -499,7 +532,7 @@ Every phase is independently reviewable and reversible. The order deliberately m
 
 **Expected benefit:** eliminate all `MazeTerrain` rerenders caused only by HUD/modal/presentation/player commits; reduce large-maze minimap work from a 529-cell React reconciliation per move to changed reveal cells plus a few markers; remove three unused hazard image requests on no-hazard levels. The actual millisecond benefit is accepted only from `S04`–`S06` traces.
 
-**Exit tests:** path strings and screenshots are bit/visual equivalent for all 16 authored levels and generated hazard combinations; terrain render counter remains unchanged through 100 non-terrain commits; minimap text/markers/reveal are exact; no 404/missing SVG pattern; all four viewports/reduced motion; p95/worst frame and long-task budgets pass.
+**Exit tests:** path strings and screenshots are bit/visual equivalent for every entry in the execution-time canonical campaign order and a catalogue-derived covering set of generated hazard/region combinations; terrain render counter remains unchanged through 100 non-terrain commits; minimap text/markers/reveal are exact; no 404/missing SVG pattern; all required viewports/reduced motion; p95/worst frame and long-task budgets pass.
 
 **Rollback:** land stable window/model, conditional patterns, exploration identity, and minimap split in separate commits/flags. Retain current components as a flag-selected fallback until the full matrix passes.
 
@@ -507,7 +540,7 @@ Every phase is independently reviewable and reversible. The order deliberately m
 
 ### Phase 2 — Make persistence asynchronous in cadence, synchronous in correctness
 
-**Files/symbols:** `src/App.tsx:1345-1357`; `src/session.ts::sanitizeActiveRunSnapshot`, `createActiveRunSnapshot`, `writeActiveRun`, removal; `src/progress.ts`; visibility/Tauri-close integration; session/progress tests.
+**Files/symbols:** the current active-run checkpoint owner; `src/session.ts::sanitizeActiveRunSnapshot`, `createActiveRunSnapshot`, `writeActiveRun`, removal; `src/progress.ts`; visibility/Tauri-close integration; session/progress tests. Resolve these by exported symbol/owned effect, not the research snapshot's source lines.
 
 **Actions:** cache invariant validation, mark revisions dirty, debounce ordinary movement checkpoints, flush on semantic milestones and lifecycle events, and avoid repeated no-op `removeItem`. Keep strict parse/migration validation on every read and atomic last-known-good semantics.
 
@@ -541,34 +574,36 @@ Every phase is independently reviewable and reversible. The order deliberately m
 
 - apply correct immutable/static cache headers while keeping HTML revalidated;
 - conditionally mount/request the portrait orientation image only when the portrait guide can be shown; preserve fast guidance on live rotation;
-- derive the first-playable critical art set, decode it with bounded concurrency, defer/cancel nonvisible reward/achievement work, and ensure one selected track starts per gesture;
+- derive the first-playable critical art set from the exact resolved-level dependency closure, including every active visual region and only the concrete generated cast; decode it with bounded concurrency, deduplicate shared current/nearby-region URLs, defer/cancel nonvisible reward/achievement work, and ensure one selected track starts per gesture;
+- choose exactly one rendition per consumer from its measured maximum rendered CSS size × supported DPR; retain separately justified enlarged Book/presentation renditions and do not infer delivery size from source/master dimensions;
+- prepare only the current contextual BGM stream plus at most one selected likely-next track for the pending transition. Cancel stale next-track work on rapid navigation and never warm a playlist or the 42-track OST wholesale;
 - trial a title-background preload because the discovery audit confirmed React delays initial discovery, but accept it only if clean `S01` improves LCP without delaying code/CSS;
 - dynamically import Book and generator/solver on intent or measured idle; split tester/presentations only if bundle attribution shows material parse/eval benefit.
 
 **Expected benefit:** eliminate needless revalidation for hashed/versioned resources; remove one 440,678 B request and 1,048,576 B one-copy decoded surface from required landscape title loads by not mounting the portrait-only image there; reduce title-to-playable contention and optional title parse/evaluation without increasing first-use latency beyond budget. The source-predictable landscape-title floor after only that conditional mount is seven unique images / 1,036,997 encoded B. The portrait asset remains packaged for portrait guidance, and package bytes are expected to remain nearly unchanged from loading/code splitting.
 
-**Exit tests:** cold/warm hosted and local cohorts; cache-header assertions; landscape waterfall proves seven title images / no portrait request; live landscape↔portrait rotation shows the guide without a broken/late image; offline Tauri; no full library request from title; no image flash; gesture/autoplay matrix; rapid cancel/restart; chunk load failures produce a recoverable UI; static hosting serves every lazy chunk at a direct URL.
+**Exit tests:** cold/warm hosted and local cohorts; cache-header assertions; landscape waterfall proves the current catalogue-derived title allow-list and no portrait request; live landscape↔portrait rotation shows the guide without a broken/late image; offline Tauri; generated levels request only the resolved cast/region closure; shared assets are requested once across current/nearby regions; measured rendition choice is sharp at every real consumer/DPR; no full library or playlist request from title; current + at most one likely-next BGM request; no image flash or silent transition gap; gesture/autoplay matrix; rapid cancel/restart; chunk load failures produce a recoverable UI; static hosting serves every lazy chunk at a direct URL.
 
 **Rollback:** cache rules, art sequencing, music sequencing, Book split, and generator split land separately. A lazy boundary reverts to its static import without data/schema changes.
 
 **Dependencies:** hosting owner for headers; audio owner for gesture sequencing; generated-maze owner for deterministic async API/cancellation.
 
-### Phase 5 — Prove/remove static media candidates, then optimize image and audio families
+### Phase 5 — Prove/classify retirement candidates, then optimize active image and audio families
 
-**Files/symbols:** the 17 exact `public/assets/` files in section 5; `src/assets.ts`; `src/artCatalog.ts`; `src/music.ts::MUSIC_TRACKS`/`MAZE_MUSIC_TRACKS`; `docs/MUSIC.md`; deterministic art/audio processing scripts; provenance metadata.
+**Files/symbols:** the regenerated current asset/reachability inventory; final `src/assets.ts`/art catalogue resolvers; final contextual music playlist/transport symbols; `docs/MUSIC.md`; deterministic art/audio processing scripts; provenance metadata; Plan-12 retirement ledger. The historical 17 names in section 5 are not an execution list.
 
 **Actions:**
 
-1. Prove the 17 static candidates unreachable through the generated-path/route/offline gate, then remove only that set. Expected runtime asset floor if all qualify: 83,948,468 B.
-2. Trial right-sized/encoded image families from preserved masters, beginning with 1024² terrain/hazard sources and icon-sized 512² assets whose maximum rendered size is known.
-3. Trial soundtrack bitrates/codecs from verified owner-held source exports if supplied, with blind listening and cross-engine compatibility. If only the runtime MP3s are available, record the explicit second-generation-loss decision and use the stricter gate. Ship one qualified runtime encoding, not a dual fallback.
-4. Rebuild and measure final `dist`, portable, and NSIS bytes after every family; installer deltas are not inferred from source deltas.
+1. Regenerate candidate reachability from final static routes, generated selectors after concrete cast resolution, visual-region recipes, animation/VFX manifests, source records, rollback windows, and Plan-09/10/11 reservations. Prove and classify candidates, but hand final archive/removal to Plan 12.
+2. Trial right-sized/encoded active image families from preserved masters, prioritizing the largest measured mismatch between maximum rendered CSS size × DPR and delivered pixels. Include multi-region seams and enlarged Book/presentation consumers; do not assume every 1024² terrain or 512² icon is oversized.
+3. Trial soundtrack bitrates/codecs from verified owner-held source exports if supplied, with blind listening and cross-engine compatibility. If only runtime MP3s are available, record the explicit second-generation-loss decision and use the stricter gate. Ship one qualified runtime encoding, not a dual fallback, while keeping runtime preparation at current + one bounded likely-next track.
+4. Rebuild and measure final `dist`, portable, and NSIS bytes after every active-family optimization; installer deltas are not inferred from source deltas. Report proven Plan-12 candidate bytes separately and do not book them as achieved savings.
 
-**Expected benefit:** once the manifest confirms all candidates, 5,381,630 B (6.02%) runtime-asset reduction; then at least 16,950,895 additional runtime bytes to meet the 25% media target. A true 25% portable reduction needs 24,467,840 B total. On a one-for-one planning proxy, candidate removal would leave 19,086,210 B, but Tauri resource packing/alignment must be rebuilt: the authoritative remainder is `rebuilt portable bytes − 73,403,520`. No untested audio/image saving is booked in advance.
+**Expected benefit:** establish the measured quality/size frontier for the final Plan-03 catalogue and 42-track OST, reduce active delivery where evidence supports it, and give Plan 12 a current auditable retirement ledger. Historical 5,381,630-byte candidate savings and 25% package arithmetic are comparison context only; no deletion or untested audio/image saving is booked in advance.
 
-**Exit tests:** generated URL/reachability gate; all authored/generated themes; seam/alpha/sharpness screenshots at all viewports, DPR1/2, 200% zoom; image decode/GPU/process memory; all tracks and loop/fade/listening matrix across the documented browser matrix including iPad Safari; Tauri offline; artifact hash/size; no removed name in `dist` or executable.
+**Exit tests:** generated URL/reachability gate after concrete cast/region resolution; catalogue-derived pairwise authored/generated material/region/family coverage; seam/alpha/sharpness screenshots at all required viewports, DPR1/2, and 200% zoom; image decode/GPU/process memory; every track validated plus pairwise contextual transition/loop/fade/listening coverage across the documented browser matrix including iPad Safari; Tauri offline; artifact hash/size; Plan-12 candidate ledger reproduces from current manifests and contains no false orphan.
 
-**Rollback:** one commit/manifest per media family with exact old/new hashes. Restore a family independently if visual/audio quality or compatibility fails. Never overwrite verified source exports; the existing runtime MP3s remain recoverable by exact hash during the rollback window.
+**Rollback:** one optimization manifest per active media family with exact old/new hashes. Restore a family independently if visual/audio quality or compatibility fails. Candidate classification changes no runtime file, so Plan 12 can reject any candidate without undoing performance work. Never overwrite verified source exports; existing runtime tracks remain recoverable by exact hash during the rollback window.
 
 **Dependencies:** art/audio owner approvals, a listening panel, preserved image source assets, pinned encoder versions, documented supported browsers, and either delivery of owner-held audio source exports or an explicit approval to evaluate second-generation lossy encodes.
 
@@ -592,9 +627,20 @@ Every phase is independently reviewable and reversible. The order deliberately m
 
 **Actions:** promote stable report-only checks to required CI/release gates; publish baseline history; require owner/evidence/expiry for every exception; remove old-path flags only after one released rollback window. Tight timing gates run on dedicated hardware; ordinary CI enforces deterministic resource, bundle, correctness, screenshot, and smoke budgets.
 
+After acceptance, hand the exact clean, committed and pushed SHA to the root
+release manager for the required `FP-CORE2` transaction: verify GitHub CI and
+the Vercel production deployment, then create, smoke, hash and publish the
+versioned portable Windows preview and its compact evidence packet as GitHub
+pre-release assets. Plan 07 supplies reproducible tooling and evidence; it does
+not silently publish or relabel artifacts itself.
+
 **Expected benefit:** prevent silent regression and remove permanent dual paths/duplicate bytes after the optimized path is proven; no direct millisecond saving is booked for CI itself.
 
 **Exit tests:** two successive clean hardware cohorts reproduce the accepted thresholds; deterministic gates pass on a clean clone; one deliberately over-budget fixture fails each gate with an actionable report; release rollback drill succeeds before compatibility flags are removed.
+
+`FP-CORE2` is published from the accepted SHA or the root records the exact red
+gate and retry point; a missing hardware-only qualification remains plainly
+separate from deterministic build/deployment correctness.
 
 **Rollback:** demote one noisy hardware threshold to report-only with a documented owner/expiry while keeping deterministic gates; restore one compatibility flag from the prior release if a production-only correctness regression appears. Never globally disable the suite to unblock an unrelated release.
 
@@ -618,8 +664,8 @@ Exact bytes are authoritative; decimal/IEC formatting is presentational. “Not 
 | Retained heap after stress | Not valid | ≤10% unexplained growth after forced-GC-equivalent start/end checkpoints; no increasing slope across three cycles | Ten-minute `S09`, JS heap plus DOM/listener/OS process views |
 | Tauri cold interactive | One diagnostic 2,320.2 ms window-ready, not valid TTI | Median ≤2,000 ms; worst of five ≤2,500 ms | Quiet reference machine, release, process→interactive |
 | Tauri warm interactive | Rejected cohort | Median ≤1,000 ms; worst of five ≤1,500 ms | Same machine/profile, controlled close/relaunch |
-| Runtime assets | 89,330,098 B / 139 files | ≤66,997,573 B; all reachable or allow-listed | `public/assets` and built `dist` manifest |
-| High-confidence static orphan candidates | 5,381,630 B / 17 files | 0 B / 0 runtime files after generated-path proof | Generated reachability test |
+| Runtime assets | Historical v0.19.0: 89,330,098 B / 139 files; final Plan-03 + 42-track OST rebaseline required | Recalculate the quality-qualified target from the accepted integrated baseline; every file is reachable, time-bounded rollback, approved reservation, or a Plan-12 candidate | `public/assets` and built `dist` manifest |
+| Retirement candidates | Historical v0.19.0: 5,381,630 B / 17 files; obsolete list | Regenerated proof ledger with zero false or unexplained candidates; no deletion credited in Plan 07B | Generated reachability test and Plan-12 handoff |
 | Portable executable | 97,871,360 B, unsigned | Pre-signing stretch ≤73,403,520 B; if quality frontier blocks this, approved measured alternative must still meet media target and explain measured non-`dist` package overhead | Final unsigned, locally staged release output; report any later signature bytes separately |
 | NSIS installer | 91,784,124 B, unsigned; clean-machine install unverified | Pre-signing stretch ≤68,838,093 B, measured independently; clean-machine install must also pass | Final unsigned installer output; establish a like-for-like signed baseline if signing begins |
 | JS gzip-9 | 115,820 B | ≤115,820 B absent approved feature budget; per-entry and total reports | Node-pinned standardized compression plus actual hosted encoding |
@@ -687,7 +733,7 @@ No VFX-attributable long task may exceed 50 ms; effect construction target is �
 
 ### 12.7 Audio
 
-- One current long music stream; no full-track `decodeAudioData`; no full OST warmup; no retry loop on autoplay failure.
+- One current long music stream plus at most one bounded selected likely-next track; no full-track `decodeAudioData`; no playlist/full-OST warmup; stale prefetch cancels; no retry loop on autoplay failure.
 - Preserve mute, gesture trust, hide/show pause, loop/fade, unsupported-media fallback, and the 24-voice synthesized-SFX cap.
 - Audio/VFX dispatch skew target ≤16.7 ms, hard limit 25 ms in deterministic presentation tests; it must not delay authoritative gameplay state.
 
@@ -699,7 +745,7 @@ No VFX-attributable long task may exceed 50 ms; effect construction target is �
 - Asset manifest: URL resolution, dimensions/duration/hash, owner/tier, no unexpected orphan, no missing dynamic asset, exact byte budgets.
 - Bundle report: raw/gzip/Brotli by entry and dynamic chunk; fail unapproved JS/CSS growth.
 - Deterministic scenario unit tests: terrain model equality, minimap reveal/marker parity, persistence scheduling/flush, transform final positions, loading cancellation, audio player lifecycle.
-- Playwright functional/visual smoke at 1280×720, 1024×768, 844×390, 568×320; full and reduced motion; cold title request allow-list; no console errors/404s; Book and every presentation fixture.
+- Playwright shell/first-playable functional smoke across the shared matrix—1920×1080 TV, 1280×800 Deck profile, 1280×720, 1194×834, 1024×768, 960×540, 844×390 and 568×320—with deeper state/effect combinations selected by the reproducible covering matrix; full and reduced motion; cold title request allow-list; no console errors/404s; Book and every presentation fixture across the cohort rather than necessarily every fixture at every size.
 - Static-host direct navigation/chunk load and Tauri `frontendDist` build verification.
 
 ### 13.2 Dedicated nightly or pre-release hardware
@@ -708,13 +754,13 @@ No VFX-attributable long task may exceed 50 ms; effect construction target is �
 - `S03`–`S10` headed Edge user flows with frame/long-task/Event Timing/React profile lanes.
 - Ten-minute heap/DOM/listener/media/process soak with forced-GC checkpoints and comparison snapshots.
 - Windows Tauri installed/portable cold/warm start, idle, sustained play, resize, save/resume/reopen, offline, installer upgrade/uninstall, and actual WebView version.
-- Package hash/size comparison and binary scan proving removed assets are absent.
+- Package hash/size comparison, duplicate/replacement scan, and a reproducible retirement-candidate ledger for Plan 12; do not claim candidate bytes removed in Plan 07B.
 - Trend dashboard by commit; alert on statistically and practically significant regressions, not one noisy run.
 
 ### 13.3 Manual release matrix
 
-- Full, lite, static/reduced motion at all four viewports; DPR1/2 and 200% zoom; keyboard, pointer/touch, and controller when available.
-- All 16 authored levels and representative generated seeds; water/lava/poison/holes; all theme/light directions; dense Rainbow Power and both 23×23 levels.
+- Full, lite and static quality crossed with full/reduced motion across the shared TV/Deck/desktop/Tauri/tablet/phone viewport matrix; use a reproducible covering set for DPR1/2, 200% zoom, keyboard, pointer/touch and controller rather than an infeasible full Cartesian product.
+- Every level in the execution-time canonical campaign order plus a reproducible pairwise covering set of generated casts/regions; water/lava/poison/holes; active material/light combinations; dense Rainbow Power and current large-maze stress fixtures.
 - Combat, rescue, jump, portal, door, treasure/reward, completion; complete and cancel through Home/restart/hide/resize.
 - Book top/bottom scroll and image sharpness; title/level art pop-in; offline Tauri from a clean app profile.
 - Blind/level-matched audio comparison, loop/fade, mute/unmute, speakers/headphones, each supported browser and WebView2.
@@ -762,7 +808,7 @@ Research was checked on 2026-09-02 against primary/official documentation. Sourc
 ### 15.4 Vite 8 and static assets
 
 - Vite 8 uses Rolldown/Oxc and Lightning CSS, with current Node requirements and modern browser defaults described by the release. Project versions satisfy the recorded build; future baselines must pin them because bundle output can change across Vite releases ([Vite 8 announcement](https://vite.dev/blog/announcing-vite8)).
-- Vite's default build can split CSS and module-preload dynamic imports; `public/` files are copied to the output unchanged and retain their names. Dynamic imports and lazy globs are valid feature boundaries; manual chunks require care around side effects. This explains why 17 unreachable `public/assets` files still ship and why route-level imports, not public-asset tricks, are the right code split ([Vite build options](https://vite.dev/config/build-options), [static asset handling](https://vite.dev/guide/assets), [production build guide](https://vite.dev/guide/build)).
+- Vite's default build can split CSS and module-preload dynamic imports; `public/` files are copied to the output unchanged and retain their names. Dynamic imports and lazy globs are valid feature boundaries; manual chunks require care around side effects. This explains why the historical source scan found 17 packaged candidate files without literal consumers and why route-level imports, not public-asset tricks, are the right code split; final reachability must still be regenerated ([Vite build options](https://vite.dev/config/build-options), [static asset handling](https://vite.dev/guide/assets), [production build guide](https://vite.dev/guide/build)).
 - Project inference: immutable caching is safe for hashed code and genuinely content-versioned media, but never for `index.html`; cache correctness depends on filename/content discipline, not Vite alone.
 
 ### 15.5 Tauri 2 and WebView2
@@ -798,6 +844,10 @@ This optimization program is complete only when:
 
 - two clean, repeated production cohorts establish every numeric baseline in section 11 and raw artifacts are reproducible from their manifests;
 - all P0/P1 redundant-work findings are either fixed and verified or rejected by stronger trace evidence with a written rationale;
+- the final Plan-03 runtime catalogue and delivered 42-track contextual OST have a fresh, hash-locked baseline, and all historical counts/candidate lists are clearly non-authoritative;
+- each authored/generated level load is derived from its exact concrete cast and region dependency closure, image rendition selection is supported by measured CSS-size × DPR evidence, shared current/nearby-region URLs deduplicate, and music preparation never exceeds current + one likely-next track;
+- a reproducible catalogue-derived pairwise coverage manifest records its inputs, seed, covered pairs, and any explicit gaps; no full Cartesian claim is implied;
+- the regenerated retirement-candidate ledger is handed to Plan 12 with proof and rollback data, and no candidate deletion is credited to Plan 07B;
 - the web and Tauri scenario matrix passes correctness, accessibility, reduced motion, visual/audio quality, save integrity, and offline requirements;
 - Lighthouse, interaction, frame, long-task, heap, startup, asset/package, JS/CSS, and initial-load budgets pass without comparing unlike modes;
 - the title fetches no unrelated level/Book/reward library or nonselected music, and rapid transitions leave no stale image/audio/presentation work;

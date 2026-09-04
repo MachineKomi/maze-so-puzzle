@@ -1138,6 +1138,11 @@ Work:
 - Remove dead CSS and obsolete comments; re-count `!important` and duplicate selectors.
 - Rebaseline screenshots and update architecture/audit/release documentation with current evidence, explicitly distinguishing page overflow from nested content containment.
 - Run full unit/build/audit/Tauri smoke and physical-device checks.
+- Hand the accepted, clean, committed and pushed checkpoint to the root release
+  manager for the roadmap's required `FP-UI1` transaction: GitHub CI, Vercel
+  production deployment/smoke, versioned portable Windows build, manifest/hash/
+  playtest note and GitHub pre-release assets. The UI agent does not publish or
+  relabel a build itself.
 
 Affected files: `src/styles.css` deletion/reduction, `src/styles/*`, `docs/ARCHITECTURE.md`, `docs/PROJECT_AUDIT.md`, `docs/RELEASE_CHECKLIST.md`; test/evidence files.
 
@@ -1146,6 +1151,8 @@ Exit tests:
 - Full project check passes.
 - New UI CSS is the only active game layout implementation.
 - Viewport/state acceptance matrix is signed off in browser and Tauri.
+- `FP-UI1` is either published from the exact accepted SHA or has an explicit
+  red-gate blocker and retry point recorded by the root release manager.
 
 Rollback: revert the phase before removing the development switch. Do not retain an undocumented half-legacy cascade.
 

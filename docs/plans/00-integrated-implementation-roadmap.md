@@ -456,29 +456,43 @@ exact “Maze so Puzzle” wordmark is reconstructed with controlled local type 
 vector/raster lettering, checked for spelling and delivery-size legibility, and
 explicitly approved.
 
-Every accepted plan first receives a source checkpoint: reviewed changes committed
-and pushed with evidence, but no promise of a packaged executable. Family previews
-are rarer learning artifacts, not a release after every plan:
+Every accepted plan first receives a source checkpoint: reviewed changes are
+committed and pushed to GitHub `main` with evidence. That push must be observed
+through GitHub CI and the connected Vercel production deployment, followed by a
+short canonical-URL smoke test; “pushed” alone is not deployment evidence.
+Portable desktop builds remain rarer learning artifacts rather than a release
+after every plan. Executables stay out of Git history and, when a downloadable
+build is produced, are uploaded as immutable GitHub pre-release assets alongside
+their manifest, SHA-256 and playtest note:
 
-1. **`FP-ART` — optional Art Preview after Plan 03 and checkpoint 03M** only when
-   runtime art/front door and every currently selected asset/audio URL/fallback
-   are green and packaging will not delay Plan 01. The final contextual OST
-   controller remains Plan 07B; the valid delivered catalogue/current adapter is
-   a 03M prerequisite.
-2. **`FP-UI1` — Family Preview 1 after Plan 01** is the preferred early build, combining
+1. **`FP-ART-OST` — Art & OST Preview after Plan 03 and checkpoint 03M** is the
+   next required build opportunity. It contains every accepted refreshed asset
+   whose semantic consumer already exists in v0.19.0, the accepted front door,
+   and all six delivered OST pools through 03M's valid catalogue/current adapter.
+   Dormant/new enemies, friends, Mimics, hazards and other sprites remain
+   catalogue-ready until their owning gameplay plan implements them. The full
+   contextual history/crossfade controller remains Plan 07B. The anticipated
+   application version is the next unused version after 0.19.0 (normally 0.20.0),
+   resolved only after the final accepted commit is known.
+2. **`FP-UI1` — Family Preview 1 after Plan 01** is a required build when the
+   accepted UI checkpoint is green, combining
    approved static/front-door art with the rebuilt UI.
-3. **`FP-CORE2` — Integrated Interaction Preview after Plan 07B** includes lighting, VFX,
+3. **`FP-CORE2` — Integrated Interaction Preview after Plan 07B** is a required
+   green-checkpoint build and includes lighting, VFX,
    controls, limited animation, music and the performance-qualified package.
-4. **`FP-CAMPAIGN` — Campaign Preview after Plan 09** exercises the 24-maze campaign.
+4. **`FP-CAMPAIGN` — Campaign Preview after Plan 09** is a required
+   green-checkpoint build exercising the 24-maze campaign.
 5. **`FP-P10-GREYBOX` — Plan-10 greybox family gate** uses an explicitly disposable, isolated
    profile/storage namespace before production co-op migration, followed by a
-   **`FP-COOP` — Co-op Preview** only after Plan 10 acceptance.
+   **`FP-COOP` — Co-op Preview** is required after green Plan 10 acceptance.
 6. **`RC-01` — release candidate after Plans 11, 13, then 12** contains final
    branding, backlog closure and verified asset hygiene and is qualified by the
    root release manager rather than inferred from Plan 07B's earlier forecast.
 
-The root/release manager may skip a named opportunity when it is red,
-disproportionately expensive or about to be invalidated, but records why. Every
+The root/release manager may defer a required build only when its checkpoint is
+red or packaging would risk data/artifact integrity, and records the exact blocker
+and next retry point. “About to be improved again” is not sufficient by itself
+to skip `FP-ART-OST`, `FP-UI1`, `FP-CORE2`, `FP-CAMPAIGN`, or `FP-COOP`. Every
 produced preview comes from a clean checkout/worktree of one reviewed, committed
 and pushed checkpoint—never the shared dirty tree—and records application/
 content versions, exact commit, artifact SHA-256, build
@@ -501,6 +515,15 @@ for a release candidate unless a specific risk justifies them earlier.
 A generated artifact manifest/checksum file is hash authority over prose
 examples. A preview never claims public release, signing, store readiness or unperformed
 hardware, accessibility, low-end, performance or family coverage.
+
+For each named build, the root/release manager—not the specialist agent—owns the
+release transaction: reconcile and bump the next unused application/content
+version across package/Tauri/UI authority, run the proportionate clean-checkout
+gate, commit and push `main`, wait for GitHub CI and Vercel, smoke the canonical
+web deployment, build the portable Windows artifact, verify its launch and hash,
+and publish it with notes as a GitHub pre-release asset when GitHub publication is
+available. A failed CI, Vercel or desktop build is recorded honestly and fixed or
+deferred; no stale earlier binary is relabelled as the new checkpoint.
 
 ### 5.14 Final gameplay, progression and quality-of-life opportunity review
 
