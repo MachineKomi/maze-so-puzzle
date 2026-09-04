@@ -507,6 +507,20 @@ Cage style can change particle shape accents, but not the readable split silhoue
 
 The win melody's bright contact aligns with 150–350 ms rather than beginning independently. Reduced motion shows the static final goal seal, final Power, and announcement for 180 ms before the modal.
 
+**Living goal aperture (`PT-20260904-29`).** Before contact, preserve the
+approved complete goal sprite and animate only a registered centre-aperture
+layer behind its front rim. Use the catalogue `apertureBox`; compare a compact
+authored feathered-alpha spiral against a code-native SVG/CSS mask in the Phase
+0 rack and keep the clearer/lighter option. The full recipe rotates calmly in
+the visually inward direction, breathes around its centre without translation,
+and may recycle a small fixed pool of curved/tangential particles that shrink or
+fade into the centre. Ambient goal motion is one owner and yields to the
+committed contact timeline above—never two simultaneous pulses or particle
+systems. Lite reduces cadence/particles; static and reduced-motion retain a
+beautiful luminous spiral with no rotation, travel, scaling or animated blur.
+Hidden/offscreen, route-change, completion and cancellation paths release every
+owner/node. The static star remains fully identifiable without colour or motion.
+
 **Completion modal:** rays run once over about 2.4 s; confetti runs one finite 2.6–3.4 s pass and unmounts; reward art settles after 480 ms; the reward sound lands on that visual reveal instead of 40+ ms later. Saved friends may keep one low-intensity idle owner from the sprite plan, but VFX sparkles stop. Reduced motion uses a composed static hero/reward/friend frame with no confetti strip or rotating ray.
 
 ### 7.12 Sound synchronization and tone
@@ -973,6 +987,10 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 **Acceptance**
 
 - Goal entry completes before modal without changing win timing/logic.
+- Before entry, the goal aperture reads as a slow inward magical spiral at every
+  shipped tile scale without moving the star's registered silhouette, spilling
+  beyond its aperture, or competing with actors/items; goal contact cancels it
+  cleanly into the stronger entry recipe.
 - Confetti/rays/sparkles are finite and remove their nodes; reward sound aligns with reveal.
 - The earned-achievement shimmer preserves illustration/contour legibility,
   uses no continuously animated blur/filter chain, stops and releases its owner

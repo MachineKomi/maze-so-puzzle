@@ -12,8 +12,9 @@
   [`playtests/2026-09-03-compact-bgm-transport-controls.md`](playtests/2026-09-03-compact-bgm-transport-controls.md),
   [`playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md`](playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md),
   [`playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md`](playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md),
+  [`playtests/2026-09-04-achievement-showcase-and-sticker-book.md`](playtests/2026-09-04-achievement-showcase-and-sticker-book.md),
   and
-  [`playtests/2026-09-04-achievement-showcase-and-sticker-book.md`](playtests/2026-09-04-achievement-showcase-and-sticker-book.md)
+  [`playtests/2026-09-04-living-goal-portal-spiral.md`](playtests/2026-09-04-living-goal-portal-spiral.md)
 
 ## 1. Purpose and authority
 
@@ -76,7 +77,7 @@ A card may need more than one platform/input row before it is considered done.
 
 ## 3. Evidence synthesis
 
-The intake contains fourteen especially strong evidence and product-direction
+The intake contains fifteen especially strong evidence and product-direction
 clusters:
 
 | Theme | Direct evidence | Working implication |
@@ -95,6 +96,7 @@ clusters:
 | Authored game-interface craft | Human wants the interface to share the beauty and specificity of the final sprite art rather than read as a clean generic web application | Make the Maze-native material, shape, typography, sticker-signal and presentation-art system an explicit Plan-01 acceptance gate with accessible performance tiers |
 | Frequent family-playable milestones | Human wants Amelia to experience meaningful improvements before the whole programme ends, without wasteful packaging after every plan | Create only a small set of green, reproducible family-preview checkpoints; prefer the first after Plan 01 and preserve honest non-release labels |
 | Achievement pride and cosmetic expression | Human wants earned stickers to be admired at presentation scale, and later arranged personally in a sticker book | Ship a focused, accessible achievement showcase first; treat free-placement persistence as a separately approved cosmetic feature rather than hidden polish scope |
+| Living objective landmark | The existing goal-star spiral already reads as a portal, but its static centre does not fully sell that magical function | Preserve the approved star and add one restrained layered inward-spiral/glow/particle recipe with clear reduced/static forms |
 
 This is high-value target-family evidence, but it is one family rather than a
 broad usability sample. Current-build reproduction and broader device coverage
@@ -132,6 +134,7 @@ remain necessary where called out below.
 | `PT-20260903-26` | Early front-door art and family-preview builds | P1 | Routed | Not retested | Plan 03 + root/release manager; Plans 01/07B/11 support |
 | `PT-20260904-27` | Earned-achievement holographic showcase | P1 | Routed | Not retested | Plan 01 interaction; Plan 02 effect; Plans 07B/08 qualify |
 | `PT-20260904-28` | Personal achievement sticker book | P2 | Needs decision | Not retested | Plan 14 opportunity review or explicit follow-on plan |
+| `PT-20260904-29` | Living goal-portal spiral | P1 | Routed | Not retested | Plan 02; Plan 07B qualifies; Plan 13 fallback |
 
 ## 5. Backlog items
 
@@ -1875,6 +1878,63 @@ choose its position by touch/pointer or an analogue-stick/controller cursor.
   material feature scope and needs its own acceptance, migration, input and
   performance plan if Plan 14 recommends promotion.
 
+### PT-20260904-29 — Living goal-portal spiral
+
+- Type: World landmark, ambient VFX and goal presentation
+- Impact: P1 — high-value visual polish
+- Delivery: Routed
+- Verification: Not retested
+- Source intake:
+  [`playtests/2026-09-04-living-goal-portal-spiral.md`](playtests/2026-09-04-living-goal-portal-spiral.md)
+- Primary owner: Plan 02 goal/VFX family
+- Supporting owners: Plan 03 catalogue/geometry authority if a separate aperture
+  rendition is required; Plan 07B for continuous-effect and decoded-memory
+  qualification; Plan 13 for bounded residual tuning only
+- Dependencies: Published approved goal sprite and aperture geometry; Plan 02
+  presentation director, quality tier and motion-mode contracts
+- Target gate: Plan 02 acceptance and Plan 07B qualification
+
+**Human outcome.** The beautiful spiral in the objective star should feel like
+a living portal: it rotates slowly as though spiralling inward, softly glows and
+breathes with the star, and may pull a few magical particles into its centre.
+
+**Acceptance slices.**
+
+- Preserve the approved static goal sprite, silhouette, aperture and gameplay
+  semantics. Build the motion as a registered layer rather than regenerating or
+  continuously transforming the complete star.
+- First inspect the published `apertureBox` and source layers. Prefer a small
+  separate authored feathered-alpha aperture only if it materially outperforms a
+  code-native SVG/CSS mask; never crop a lossy runtime derivative and promote it
+  as new source authority.
+- The spiral turns in the visually inward direction at a calm ambient cadence.
+  Its glow and scale breathing remain centred, do not make the star wobble or
+  translate, and stay subordinate to items, actors and the committed goal-entry
+  event.
+- If particles are used, keep a small fixed pool. They follow short curved/
+  tangential paths toward the centre, fade before convergence, remain clipped to
+  the aperture/declared safe region, and create no collision or gameplay state.
+- The overlay sits behind the star's front rim/contour and cannot spill as a
+  square texture, obscure the central read, alias badly at small tiles, or imply
+  that ordinary paired teleporters share the objective's behaviour.
+- Full, lite and static recipes are explicit. Reduced motion disables continuous
+  rotation, scale pulsing and particle travel while retaining a composed,
+  luminous spiral; forced-colour/non-motion recognition still comes from the
+  static goal silhouette and semantics.
+- Pause/unmount/cancellation is deterministic when the goal leaves view, the
+  level completes, a blocking presentation supersedes it, the route changes or
+  the document is hidden. No timer, animation owner, particle node or decoded
+  overlay is retained afterward.
+- Plan 02's goal-entry choreography temporarily takes ownership: ambient motion
+  resolves cleanly into the stronger entry/ring/release effect and does not
+  double pulse, double announce or delay the gameplay-owned win commit.
+
+**Evidence.** The effect rack and live mazes cover smallest/largest gameplay
+scales, bright/dark terrain, camera movement, full/lite/static and reduced
+motion, goal entry/cancellation, hidden/visible lifecycle and a continuous idle
+stress cohort. Human/family review confirms that the centre reads as magical,
+inviting and inward-moving rather than distracting, nauseating or like a hazard.
+
 ## 6. Programme integration and gates
 
 The existing programme remains sequential. These are execution-prompt addenda,
@@ -1923,6 +1983,8 @@ not permission for simultaneous implementation in the shared worktree.
    navigation policy. Implement `22`'s bounded reusable reward burst, trails,
    homing, count feedback, chest/reveal choreography and SFX as presentation of
    an already-committed typed outcome; never own its 65/35 or economy rules.
+   Implement `29` as the ambient member of the existing goal family, with the
+   stronger committed goal-entry recipe taking ownership on completion.
 6. **Plan 08:** implement `08`, controller parity for `10`, the controlled held-
    input continuation approved for `02`, and the honest browser/controller audio-
    activation route required by `20`. Add semantic, controller-complete
@@ -2049,6 +2111,7 @@ superseded tests; they are useful provenance.
 | 2026-09-03 | 25 | working tree during Plan-03 source production | Human UI-art-direction clarification plus repository Art/UI/performance synthesis | Art Bible contains useful surface/type/optical principles, but Plan 01 did not yet make authored game-interface finish or large contextual presentation art an acceptance gate | Captured, triaged and routed |
 | 2026-09-03 | 26 | working tree during Plan-03 source production | Human delivery request plus roadmap/release audit | Front-door art was scheduled late and no low-rework family-preview milestone policy existed | Captured, triaged and routed |
 | 2026-09-04 | 27–28 | working tree after Plan-03 static publication | Direct Human feature request plus manager scope/routing review | Earned stickers need an admiration-scale reward moment; free placement adds meaningful persistence and input scope beyond a viewer | 27 captured/triaged/routed; 28 captured and held at Human decision |
+| 2026-09-04 | 29 | working tree during Plan-03-R1 publication | Direct Human feature request plus goal-art/VFX ownership audit | Published goal geometry already exposes a central aperture; the visual can be layered without changing gameplay or regenerating the complete star | Captured, triaged and routed |
 
 ## 8. Closure and mop-up rule
 
@@ -2082,3 +2145,6 @@ already work.
 It must also verify that `PT-20260904-27` shipped or was explicitly returned to
 its owning plan. `PT-20260904-28` is not a mop-up obligation: it remains a
 Plan-14 decision unless the Human promotes it through a separately scoped plan.
+`PT-20260904-29` belongs to Plan 02's goal family and Plan 07B's continuous-
+effect qualification; Plan 13 may tune a landed bounded recipe but must not
+invent a replacement goal renderer late in closure.
