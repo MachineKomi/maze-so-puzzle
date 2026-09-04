@@ -2137,3 +2137,49 @@ output flattened the four sparse dressing overlays through an RGB-only periodic
 helper. The rejected hashes and RGBA-preserving correction are recorded in
 `docs/source-assets/publication/mgjrpg-02-plan03-transparent-dressing-defect.json`;
 no approved generator original or prompt was changed.
+
+## Plan 03-R1 premium utility and exact-logo review addendum v7 (2026-09-04)
+
+This is a forward record after the accepted Plan 03 publication checkpoint; it
+does not rewrite Batch 13, Batch 21, Batch 22, or v6 publication history. The
+Human selected these exact front-door sources for later publication gates:
+
+- `batch-21-title-background-v02-a` / Title Candidate A;
+- `batch-21-home-splash-v01-b` / Home Splash Candidate B;
+- `batch-21-title-background-environment-study-01` / the layerable
+  environment-only study;
+- `batch-13-app-icon-ame-v03` / the Ame-face application-icon candidate.
+
+The normalized decision, exact paths, hashes, scope limits, and preserved
+rejections are in
+`docs/source-assets/calibrations/mgjrpg-02/v07/human-decision.json`. It selects
+sources; it does not approve runtime derivatives, responsive crops, platform
+icons, catalogue changes, or performance allocation. Batch 21 Logo Candidate A
+is approved only as compositional/material starting evidence.
+
+Batch 23 generated exactly seven fresh semantic utility candidates—Home,
+Mazes, Book, Help, Sound, Muted, and Restart—from blank canvases. The current
+published icon was Image 1 and supplied semantic/silhouette evidence only.
+Approved Batch 22 First Star and Pathfinder sources were Images 2 and 3 and
+supplied premium material and optical authority. Four initial native-alpha
+requests painted checkerboards; those files remain immutable rejected
+provenance and were never used as references. The seven review candidates use
+flat impossible green mattes suitable for deterministic alpha unblend.
+
+The exact shared prompts, subject blocks, invocation index, output IDs, ordered
+roles, hashes, and rejection reasons are preserved in
+`docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/`.
+The deterministic review builder creates transparent 512 px comparisons and
+intrinsic 64/48/32/24/16 px proofs without writing to `public/`.
+
+The logo candidate uses no ImageGen lettering. Its exact `Maze`, lowercase
+`so`, and `Puzzle` strings are locally typeset with the vendored SIL-OFL Fredoka
+SemiBold glyph geometry and composited through deterministic enamel, foil,
+iridescent, pearlescent, contour, cutline, and depth masks. The yellow maze-route
+line is absent. Font source, hash, licence, and upstream provenance live in
+`docs/source-assets/fonts/fredoka/`.
+
+All Batch 23 candidates remain `pending-human`; runtime/public/catalogue deltas
+are exactly zero. The proposed publication map is non-operative and requires a
+later Human decision, versioned derivatives, previous-path rollback entries,
+measured feature allocation, runtime proof, and full validation before use.

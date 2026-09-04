@@ -1,0 +1,177 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "game-logo-mgjrpg02-v02-source",
+  "id": "game-logo",
+  "artVersion": 2,
+  "family": "brand",
+  "runtimeStatus": "source-only",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "pending-human",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "proposed-plan11-branding-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-23-game-logo-v02-deterministic-a",
+      "generator": "Local deterministic Pillow mask compositor",
+      "model": "not applicable",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
+        "sha256": "b54151e104ee6dbc5295f6fb4162500ccf12b7b1b91958523740b6ad34dbd7ae"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "composition-authority",
+          "authorityKind": "immutable-generator-original",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/game-logo-concept-v01-candidate-a-alpha-attempt-01-generator-original.png",
+          "sha256": "259f3b954db4b44698c1daeac8da2755dc20592536a30f2c9ed8ee36d1e1c55e"
+        },
+        {
+          "order": 2,
+          "role": "construction-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/fonts/fredoka/Fredoka-wdth-wght.ttf",
+          "sha256": "2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8"
+        },
+        {
+          "order": 3,
+          "role": "material-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-trail-sticker-v03-candidate-a-matte-01-generator-original.png",
+          "sha256": "86c26fa4ff32ead97c6711a39abc9ca2c8ba5fdfad461b3b9f47671e1aacd13d"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "deterministic-local-game-logo-v02-candidate-a.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
+          "sha256": "c1bb1d32dbd49eae065b660aa23d8e30350b76deaeea08ab20b132324b5c6500",
+          "bytes": 124875,
+          "disposition": "selected",
+          "reason": "Exact-lettering deterministic refinement selected by art-direction QA for Human review; runtime publication remains unapproved."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "The Batch 21 image is composition/material evidence only. No generated glyph pixels or yellow route-line pixels are reused."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
+      "sha256": "b54151e104ee6dbc5295f6fb4162500ccf12b7b1b91958523740b6ad34dbd7ae"
+    },
+    "outputIds": [],
+    "notes": "No generated lettering is authoritative. The exact strings and deterministic local construction are preserved in the script and prompt record."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
+      "sha256": "c1bb1d32dbd49eae065b660aa23d8e30350b76deaeea08ab20b132324b5c6500",
+      "bytes": 124875,
+      "relationship": "pending-human deterministic exact-lettering logo master",
+      "evidence": "Locally typeset and composited source-only candidate."
+    },
+    {
+      "path": "docs/source-assets/fonts/fredoka/Fredoka-wdth-wght.ttf",
+      "sha256": "2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8",
+      "bytes": 159184,
+      "relationship": "OFL glyph-geometry source",
+      "evidence": "Fredoka SemiBold supplies exact glyph geometry; local licence and provenance are preserved."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/game-logo-concept-v01-candidate-a-alpha-attempt-01-generator-original.png",
+      "sha256": "259f3b954db4b44698c1daeac8da2755dc20592536a30f2c9ed8ee36d1e1c55e",
+      "bytes": 1703284,
+      "relationship": "human-approved composition-and-material starting-point reference only",
+      "evidence": "Batch 21 source pixels, generated lettering, yellow route line, and checkerboard are not reused or approved."
+    }
+  ],
+  "derivatives": [],
+  "geometry": {
+    "class": "brand-wordmark",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.05,
+      0.05,
+      0.9,
+      0.9
+    ],
+    "safeInset": [
+      0.05,
+      0.05,
+      0.05,
+      0.05
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "source-review-logo",
+        "outputPath": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/logo-candidate-a.png",
+        "width": 1200,
+        "height": 721,
+        "format": "png",
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "native-alpha"
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-exact-lettering-and-material-construction",
+      "description": "Fredoka SemiBold glyph masks, exact project title strings, broad cel-value gradients, metallic rim, restrained iridescent bands, pearlescent highlights, colour-aware contours, cream cutline, and dimensional lower planes are composed locally. No generated glyph pixels are used.",
+      "script": "scripts/art_pipeline/mgjrpg02_plan03_r1_review.py"
+    }
+  ],
+  "knownUnknowns": [
+    "Human source approval, responsive brand lockups, runtime delivery profiles, platform derivatives, and performance allocation are pending."
+  ],
+  "rights": {
+    "originClaim": "Project-authored deterministic lettering and material construction using the SIL-OFL-licensed Fredoka glyph geometry; Batch 21 is composition/material reference only.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "Font licence and upstream provenance are retained under docs/source-assets/fonts/fredoka. Plan 11 remains final branding owner."
+  },
+  "rollback": {
+    "method": "No runtime logo pointer exists. Remove the unapproved v02 source record and candidate to return to the accepted Plan 03 anchor; retain the historical Batch 21 concept unchanged."
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "schema": "maze-art-proposed-publication-map/v1",
+  "mapId": "plan03-r1-premium-ui-front-door-proposed-v01",
+  "generatedOn": "2026-09-04",
+  "status": "proposal-only-no-runtime-files-or-pointer-changes",
+  "performanceHeadroom": "zero; every non-zero publication delta requires a measured named feature allocation",
+  "entries": [
+    {
+      "stableId": "nav-home",
+      "catalogueTarget": "NAVIGATION_ART.home",
+      "currentRecord": "docs/source-assets/records/nav-home-mgjrpg02-v03-source.json",
+      "currentRuntimePath": "public/assets/mgjrpg-02/navigation/nav-home-v03-navigation-optical-128-r01.webp",
+      "currentRuntimeSha256": "86dcea6ce623590ebcfbcb0b1484156fcee9fc4d5501dea9e5d299766e491233",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-home-v04-candidate-a-matte-01-generator-original.png",
+      "candidateSourceSha256": "543c8cb4c7e65d8e7a5c1ff3c58b8ec518b89c01e74fc8dc9aa0a07afb5afa3d",
+      "proposedRecordId": "nav-home-mgjrpg02-v04-source",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-home-v04-navigation-optical-128-r01.webp",
+      "profile": "navigation-optical-128",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "nav-mazes",
+      "catalogueTarget": "NAVIGATION_ART.mazes",
+      "currentRecord": "docs/source-assets/records/nav-mazes-mgjrpg02-v04-source.json",
+      "currentRuntimePath": "public/assets/mgjrpg-02/navigation/nav-mazes-v04-navigation-optical-128-r01.webp",
+      "currentRuntimeSha256": "bff169d48e3b9d8105223696e91d751c1d0f42cc49d592d3a4f195498ebc6fe3",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-mazes-v05-candidate-a-matte-01-generator-original.png",
+      "candidateSourceSha256": "598e6abf41ecccdbd659a1043bed7e83dbf3f59339c2b17ef80fbc9b3be27d39",
+      "proposedRecordId": "nav-mazes-mgjrpg02-v05-source",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-mazes-v05-navigation-optical-128-r01.webp",
+      "profile": "navigation-optical-128",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "nav-book",
+      "catalogueTarget": "NAVIGATION_ART.book",
+      "currentRecord": "docs/source-assets/records/nav-book-mgjrpg02-v02-source.json",
+      "currentRuntimePath": "public/assets/mgjrpg-02/navigation/nav-book-v02-navigation-optical-128-r01.webp",
+      "currentRuntimeSha256": "b98bcb25be27612023340cb20dd1bee2bc40e0d6ac2d8604ab056cd03a995de9",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-book-v03-candidate-a-matte-01-generator-original.png",
+      "candidateSourceSha256": "ec9d20ab891e3c424f3c1505d099f1254aab6ab68aa10bbd3bb2afd83ce59a39",
+      "proposedRecordId": "nav-book-mgjrpg02-v03-source",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-book-v03-navigation-optical-128-r01.webp",
+      "profile": "navigation-optical-128",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "nav-help",
+      "catalogueTarget": "NAVIGATION_ART.help",
+      "currentRecord": "docs/source-assets/records/nav-help-mgjrpg02-v02-source.json",
+      "currentRuntimePath": "public/assets/mgjrpg-02/navigation/nav-help-v02-navigation-optical-128-r01.webp",
+      "currentRuntimeSha256": "be242190bb5890ea07eeec5d8f200b73b5a9104f1fa2e1b5c2ef189e2e83c677",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-help-v03-candidate-a-matte-01-generator-original.png",
+      "candidateSourceSha256": "3a78bb05c663ccfdf4515a85ebc5021aae2a7c461a211147f8302f1486e6d94d",
+      "proposedRecordId": "nav-help-mgjrpg02-v03-source",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp",
+      "profile": "navigation-optical-128",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "nav-sound",
+      "catalogueTarget": "NAVIGATION_ART.sound",
+      "currentRecord": "docs/source-assets/records/nav-sound-mgjrpg02-v03-source.json",
+      "currentRuntimePath": "public/assets/mgjrpg-02/navigation/nav-sound-v03-navigation-optical-128-r01.webp",
+      "currentRuntimeSha256": "71549884c11e182b2d07f4858a4f8025b89fcffda49d0d3435fdb89b5a5b1af8",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+      "candidateSourceSha256": "90b1ae474231f3a30e131422ed6ea96686f6056cd0f5f5e1e2f1dff8c08dca03",
+      "proposedRecordId": "nav-sound-mgjrpg02-v04-source",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-sound-v04-navigation-optical-128-r01.webp",
+      "profile": "navigation-optical-128",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "nav-muted",
+      "catalogueTarget": "NAVIGATION_ART.muted",
+      "currentRecord": "docs/source-assets/records/nav-muted-mgjrpg02-v02-source.json",
+      "currentRuntimePath": "public/assets/mgjrpg-02/navigation/nav-muted-v02-navigation-optical-128-r01.webp",
+      "currentRuntimeSha256": "a255cd07ffa9365360407673bf4629994dda6e1151fb65f10b27d0e07f04bb58",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-muted-v03-candidate-a-matte-01-generator-original.png",
+      "candidateSourceSha256": "a14951fc21f983b8a6e3fac0af2fd7469a0a8f235deb66d4ccc88fcdec525acf",
+      "proposedRecordId": "nav-muted-mgjrpg02-v03-source",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-muted-v03-navigation-optical-128-r01.webp",
+      "profile": "navigation-optical-128",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "nav-restart",
+      "catalogueTarget": "NAVIGATION_ART.restart",
+      "currentRecord": "docs/source-assets/records/nav-restart-mgjrpg02-v02-source.json",
+      "currentRuntimePath": "public/assets/mgjrpg-02/navigation/nav-restart-v02-navigation-optical-128-r01.webp",
+      "currentRuntimeSha256": "8687e16908796acdaeda211f90b34fe13d97dd7d65f5d6f1e36726507004dfd9",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-restart-v03-candidate-a-matte-01-generator-original.png",
+      "candidateSourceSha256": "a94caeec7a4aa706ee8b2e68d83197aea942562c58005964f9fae1dfefdcbf37",
+      "proposedRecordId": "nav-restart-mgjrpg02-v03-source",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-restart-v03-navigation-optical-128-r01.webp",
+      "profile": "navigation-optical-128",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "title-background",
+      "consumer": "ASSETS.titleBackground",
+      "currentRuntimePath": "public/assets/title-background-v1.webp",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-a-generator-original.png",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/title-background-v02-front-door-1920-r01.webp",
+      "status": "human-source-selected-publication-deferred",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "home-hero-splash",
+      "consumer": "planned Plan 01 home surface",
+      "currentRuntimePath": null,
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-r01.webp",
+      "status": "human-source-selected-publication-deferred",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "title-environment-layer",
+      "consumer": "planned layerable Plan 11 front-door composition",
+      "currentRuntimePath": null,
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/title-environment-v01-front-door-r01.webp",
+      "status": "human-source-selected-publication-deferred",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "app-icon-ame",
+      "consumer": "Plan 11 platform branding",
+      "currentRuntimePath": null,
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "proposedRuntimePath": null,
+      "status": "human-source-selected-platform-derivatives-deferred",
+      "requiresNamedFeatureAllocation": true
+    },
+    {
+      "stableId": "game-logo",
+      "consumer": "planned Plan 11 front-door brand lockup",
+      "currentRuntimePath": null,
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/game-logo-v02-front-door-r01.webp",
+      "status": "pending-human-source-review-no-file-created",
+      "requiresNamedFeatureAllocation": true
+    }
+  ],
+  "rollbackPolicy": "Version every derivative, retain every current path and hash, and do not delete or move superseded assets before the Plan 12 copy-first archive/external-backup gate."
+}

@@ -1811,3 +1811,42 @@ face/eye/ground landmark sets before producing animation frames or automating
 cage-face masking. Plan 11 owns the exact logo/title/home/application-icon
 decision; Batch 21 remains source-only. Plan 12 alone may archive or delete the
 recorded retirement candidates after every consumer and pointer is final.
+
+## 21. Plan 03-R1 bounded visual-polish gate — 2026-09-04
+
+The Human accepted commit `28946cbb04f45cb21cd51626914267ff4f71c375`
+as the clean static-publication rollback anchor and authorized one bounded
+source-only extension before root checkpoint 03M or Agent 01. It does not reopen
+the approved sprite catalogue, Ame identity, enemies, friends, terrain,
+mechanics, or `mgjrpg-02` direction.
+
+Forward decision v7 selects the exact Batch 21 Title Candidate A, Home Splash
+Candidate B, environment-only layer, and Batch 13 Ame-face application icon. It
+also limits Batch 21 Logo Candidate A approval to its composition/material
+starting direction. Checkerboard/opaque studies, generated lettering, yellow
+route line, runtime publication, responsive crops, and platform derivatives
+remain unapproved.
+
+The R1 production batch contains:
+
+- one deterministic exact-lettering logo refinement with the route line
+  removed, lowercase `so`, no subtitle, locally licensed font provenance, and
+  restrained enamel/foil/iridescent construction;
+- seven fresh premium utility candidates for the complete active semantic
+  navigation boundary: Home, Mazes, Book, Help, Sound, Muted, and Restart;
+- four rejected checkerboard-contaminated alpha attempts retained only as
+  immutable provenance;
+- exact prompts, ordered-reference hashes, strict-v2 source-only records,
+  intrinsic 64/48/32/24/16 px proof derivatives, measured source cost, and a
+  non-operative versioned publication proposal.
+
+The concise Human review page is
+`artifacts/art-proofs/mgjrpg-02/plan03-r1-review/index.html`. The art director
+recommends Logo Candidate A and the coherent complete seven-icon Candidate A
+family. This section records a **pending Human review gate**, not approval.
+`public/assets`, runtime source files, catalogue pointers, preload behaviour,
+Tauri icons, and performance allocations are unchanged. After explicit Human
+approval, publication remains a separate reviewed phase with new versioned
+derivatives, zero-headroom feature allocation, previous-path rollback records,
+runtime-scale proof, checks, commit, and push. No Plan 12 retirement action is
+authorized here.

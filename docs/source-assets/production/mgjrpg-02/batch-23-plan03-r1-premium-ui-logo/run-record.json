@@ -1,0 +1,725 @@
+{
+  "schema": "maze-art-generation-batch/v1",
+  "batchId": "mgjrpg-02-batch-23-plan03-r1-premium-ui-logo",
+  "revision": 1,
+  "status": "pending-human-review",
+  "recordedOn": "2026-09-04",
+  "purpose": "Record exact forward front-door selections, create one deterministic exact-lettering logo refinement, and generate a fresh premium seven-icon semantic utility family for a bounded Human review gate without runtime publication.",
+  "rollbackAnchor": "28946cbb04f45cb21cd51626914267ff4f71c375",
+  "promptFile": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
+    "fidelity": "exact-shared-block-plus-exact-subject-block",
+    "sha256": "b54151e104ee6dbc5295f6fb4162500ccf12b7b1b91958523740b6ad34dbd7ae",
+    "bytes": 11230
+  },
+  "decisionEvidence": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "scope": "approved mgjrpg-02 runtime and Batch 22 reference authority",
+    "sha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48",
+    "bytes": 56655
+  },
+  "forwardDecisionEvidence": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v07/human-decision.json",
+    "scope": "front-door selections and logo starting direction",
+    "sha256": "6cd1ccc8d226d55616fe2050f544f6b4101ff85fd154ea8d0fff1bb334df04e9",
+    "bytes": 3799
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in image generation capability",
+    "model": "not exposed by the tool response",
+    "seed": "not exposed by the tool response"
+  },
+  "lineagePolicy": {
+    "freshCanvas": true,
+    "editOfEdit": "forbidden",
+    "currentIcons": "semantic and silhouette comparison only",
+    "batch22": "approved material and optical authority",
+    "checkerboardAttempts": "rejected provenance only",
+    "logo": "exact deterministic local lettering; Batch 21 composition/material starting point only"
+  },
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "revision": 4,
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+    "bytes": 8645
+  },
+  "nativeCanvasException": {
+    "appliesToEveryOutput": true,
+    "actual": "Every ImageGen utility original is a 1254x1254 opaque RGB PNG. Seven selected review sources use a uniform chroma-green matte; four rejected alpha attempts instead painted an opaque checkerboard.",
+    "canonicalPolicy": "Immutable originals remain native. Only ignored review proofs are extracted before Human approval; versioned runtime derivatives require a later publication gate.",
+    "exception": "Source canvases are not runtime delivery canvases and are never converted or resized in place."
+  },
+  "referenceRegistry": {
+    "mgjrpg-02-recipe": {
+      "path": "docs/source-assets/recipes/mgjrpg-02.json",
+      "authorityKind": "approved-rendering-contract",
+      "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+      "bytes": 8645
+    },
+    "batch22-first-star-craft": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-trail-sticker-v03-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "approved-premium-material-reference",
+      "sha256": "86c26fa4ff32ead97c6711a39abc9ca2c8ba5fdfad461b3b9f47671e1aacd13d",
+      "bytes": 1551189
+    },
+    "batch22-pathfinder-craft": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-pathfinder-v02-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "approved-premium-material-reference",
+      "sha256": "2909655eec2802762500c0253927163e34228fe94fda989071cf5935de61b1d2",
+      "bytes": 1475938
+    },
+    "human-runtime-publication-v06": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+      "authorityKind": "approved-reference-and-runtime-publication-decision",
+      "sha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48",
+      "bytes": 56655
+    },
+    "human-front-door-forward-v07": {
+      "path": "docs/source-assets/calibrations/mgjrpg-02/v07/human-decision.json",
+      "authorityKind": "forward-front-door-selection-decision",
+      "sha256": "6cd1ccc8d226d55616fe2050f544f6b4101ff85fd154ea8d0fff1bb334df04e9",
+      "bytes": 3799
+    },
+    "nav-home-current-semantic": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/nav-home-v03-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "active-approved-semantic-and-silhouette-reference-only",
+      "sha256": "da31adb0827be0149fdad7e00da102d2e248c16a8f809a0e453a0a2e2797204c",
+      "bytes": 1074512
+    },
+    "nav-mazes-current-semantic": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-mazes-v04-matte-01-generator-original.png",
+      "authorityKind": "active-approved-semantic-and-silhouette-reference-only",
+      "sha256": "bb17d72808818a9c3b21f55fcffcc27a26cec324443598159c5404b95f5ae0c2",
+      "bytes": 1126039
+    },
+    "nav-book-current-semantic": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-book-v02-generator-original.png",
+      "authorityKind": "active-approved-semantic-and-silhouette-reference-only",
+      "sha256": "c6dbfa62aed74aa889de48841ac8bc37946e34d10d44332326bbb91841c01abd",
+      "bytes": 1133107
+    },
+    "nav-help-current-semantic": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-help-v02-generator-original.png",
+      "authorityKind": "active-approved-semantic-and-silhouette-reference-only",
+      "sha256": "e3c50033e9d8dae4246141ef6db9cffbf972ca53808db9d289f95a071a8f2a68",
+      "bytes": 974927
+    },
+    "nav-sound-current-semantic": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-sound-v03-unselected-generator-original.png",
+      "authorityKind": "active-approved-semantic-and-silhouette-reference-only",
+      "sha256": "deaf9e5ec32b9c39844664c0c74b3c447deb012cb847969f23d9641a3dcddb58",
+      "bytes": 879993
+    },
+    "nav-muted-current-semantic": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/nav-muted-v02-candidate-a-matte-01-generator-original.png",
+      "authorityKind": "active-approved-semantic-and-silhouette-reference-only",
+      "sha256": "f12ff93635b3247a903a906a011da7f65c278ecd5bd7e64d842c029343f119c9",
+      "bytes": 1169323
+    },
+    "nav-restart-current-semantic": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-restart-v02-generator-original.png",
+      "authorityKind": "active-approved-semantic-and-silhouette-reference-only",
+      "sha256": "5713c3b43f26bba7d046d7174151eab640f0da455a7b17bd89a4232dc0d7fc33",
+      "bytes": 1023967
+    }
+  },
+  "runs": [
+    {
+      "generationMode": "fresh-reference-led-native-alpha-attempt",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-home-premium-utility-alpha-attempt-01",
+      "promptBlockId": "nav-home-native-alpha-attempt-01",
+      "identityId": "nav-home",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-home-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-home-v04-alpha-attempt-01-generator-original.png",
+        "outputId": "exec-20fc3d8f-08fc-4c3a-a780-338c3ec0a53f.png",
+        "sha256": "f58ea9313cb736963c3882cea1e336ec19c3e5db483503f8d80e215586008a87",
+        "bytes": 1008118,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "rejected-background-invalid",
+        "reason": "The tool painted an opaque checkerboard instead of genuine alpha; retained as provenance only and never used as a source or reference."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-source-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-home-premium-utility-v04-a",
+      "promptBlockId": "nav-home-premium-utility-candidate-a-matte-01",
+      "identityId": "nav-home",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-home-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-home-v04-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-a276d9d4-0bfc-4022-901c-4619262bc690.png",
+        "sha256": "543c8cb4c7e65d8e7a5c1ff3c58b8ec518b89c01e74fc8dc9aa0a07afb5afa3d",
+        "bytes": 1203879,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-native-alpha-attempt",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-mazes-premium-utility-alpha-attempt-01",
+      "promptBlockId": "nav-mazes-native-alpha-attempt-01",
+      "identityId": "nav-mazes",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-mazes-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-mazes-v05-alpha-attempt-01-generator-original.png",
+        "outputId": "exec-f07cea77-cbb9-4816-afb0-1f52a93bc800.png",
+        "sha256": "b82044fc6c2a7889705176d9e092a5955a9098321b3654353d8ba0a4eaafa8f7",
+        "bytes": 1283809,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "rejected-background-invalid",
+        "reason": "The tool painted an opaque checkerboard instead of genuine alpha; retained as provenance only and never used as a source or reference."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-source-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-mazes-premium-utility-v05-a",
+      "promptBlockId": "nav-mazes-premium-utility-candidate-a-matte-01",
+      "identityId": "nav-mazes",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-mazes-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-mazes-v05-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-6571705b-62e5-41a9-8692-240f73449dda.png",
+        "sha256": "598e6abf41ecccdbd659a1043bed7e83dbf3f59339c2b17ef80fbc9b3be27d39",
+        "bytes": 1359445,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-native-alpha-attempt",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-book-premium-utility-alpha-attempt-01",
+      "promptBlockId": "nav-book-native-alpha-attempt-01",
+      "identityId": "nav-book",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-book-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-book-v03-alpha-attempt-01-generator-original.png",
+        "outputId": "exec-6784f4c4-d364-4b05-a994-2047a5e4164c.png",
+        "sha256": "ec70bcc166b9497a9c7e0e48443e18bb7a879cd96eade29ed1f21ae5d6520c53",
+        "bytes": 1323861,
+        "width": 1369,
+        "height": 1149,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6291924
+      },
+      "disposition": {
+        "status": "rejected-background-invalid",
+        "reason": "The tool painted an opaque checkerboard instead of genuine alpha; retained as provenance only and never used as a source or reference."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-source-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-book-premium-utility-v03-a",
+      "promptBlockId": "nav-book-premium-utility-candidate-a-matte-01",
+      "identityId": "nav-book",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-book-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-book-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-f9c5665d-0ea9-4ba6-a0b0-a031604a3891.png",
+        "sha256": "ec9d20ab891e3c424f3c1505d099f1254aab6ab68aa10bbd3bb2afd83ce59a39",
+        "bytes": 1377200,
+        "width": 1374,
+        "height": 1145,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6292920
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-native-alpha-attempt",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-help-premium-utility-alpha-attempt-01",
+      "promptBlockId": "nav-help-native-alpha-attempt-01",
+      "identityId": "nav-help",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-help-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-help-v03-alpha-attempt-01-generator-original.png",
+        "outputId": "exec-e9274a47-929f-4766-bddf-94c54b81767e.png",
+        "sha256": "4707dae3f865207da0ca5470d3b3a0271e3e6eadd2c74eda494b9ad508df2f55",
+        "bytes": 1182214,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "rejected-background-invalid",
+        "reason": "The tool painted an opaque checkerboard instead of genuine alpha; retained as provenance only and never used as a source or reference."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-source-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-help-premium-utility-v03-a",
+      "promptBlockId": "nav-help-premium-utility-candidate-a-matte-01",
+      "identityId": "nav-help",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-help-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-help-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-8d995571-7620-48a3-83fb-bd66f2868817.png",
+        "sha256": "3a78bb05c663ccfdf4515a85ebc5021aae2a7c461a211147f8302f1486e6d94d",
+        "bytes": 1299781,
+        "width": 1213,
+        "height": 1296,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6288192
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-source-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-sound-premium-utility-v04-a",
+      "promptBlockId": "nav-sound-premium-utility-candidate-a-matte-01",
+      "identityId": "nav-sound",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-sound-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-569817d0-deac-4669-b4a1-c20bb2ad9fe9.png",
+        "sha256": "90b1ae474231f3a30e131422ed6ea96686f6056cd0f5f5e1e2f1dff8c08dca03",
+        "bytes": 1273532,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-source-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-muted-premium-utility-v03-a",
+      "promptBlockId": "nav-muted-premium-utility-candidate-a-matte-01",
+      "identityId": "nav-muted",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-muted-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-muted-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-7a30d2f3-ebc1-4724-8be3-934c8a7c3f6c.png",
+        "sha256": "a14951fc21f983b8a6e3fac0af2fd7469a0a8f235deb66d4ccc88fcdec525acf",
+        "bytes": 1351452,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate."
+      }
+    },
+    {
+      "generationMode": "fresh-reference-led-source-on-uniform-matte",
+      "lineage": {
+        "freshCanvas": true,
+        "previousBatchOutputUsed": true,
+        "previousBatchOutputApprovalEvidence": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+        "rejectedOutputUsedAsReference": false,
+        "editOfEdit": false,
+        "sourceEditDepth": 0,
+        "mayBecomeIdentityAuthority": false,
+        "mayBecomeRenderingAuthority": false
+      },
+      "runId": "batch-23-nav-restart-premium-utility-v03-a",
+      "promptBlockId": "nav-restart-premium-utility-candidate-a-matte-01",
+      "identityId": "nav-restart",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "nav-restart-current-semantic",
+          "role": "semantic meaning and broad silhouette only; no pixel reuse or rendering authority"
+        },
+        {
+          "order": 2,
+          "referenceId": "batch22-first-star-craft",
+          "role": "approved premium glossy enamel, foil, holographic segment, cream cutline, and material-aware contour craft"
+        },
+        {
+          "order": 3,
+          "referenceId": "batch22-pathfinder-craft",
+          "role": "approved small-scale optical hierarchy and restrained premium material craft"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-restart-v03-candidate-a-matte-01-generator-original.png",
+        "outputId": "exec-42f14134-4988-4ddf-a83d-850f1a5dcaf8.png",
+        "sha256": "a94caeec7a4aa706ee8b2e68d83197aea942562c58005964f9fae1dfefdcbf37",
+        "bytes": 1325327,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGB",
+        "alphaMode": "opaque",
+        "decodedBytesUpperBound": 6290064
+      },
+      "disposition": {
+        "status": "pending-human-batch-review",
+        "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate."
+      }
+    }
+  ],
+  "logoConstruction": {
+    "output": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
+      "sha256": "c1bb1d32dbd49eae065b660aa23d8e30350b76deaeea08ab20b132324b5c6500",
+      "bytes": 124875,
+      "relationship": "pending-human deterministic logo master",
+      "evidence": "Exact local lettering and deterministic material masks."
+    },
+    "font": {
+      "path": "docs/source-assets/fonts/fredoka/Fredoka-wdth-wght.ttf",
+      "sha256": "2ba02e68b152868aef9ba28e24b3648c7d457fe6f25c761f2c2c53fb61a73fc8",
+      "bytes": 159184,
+      "relationship": "OFL glyph geometry",
+      "evidence": "SemiBold named variation; licence retained."
+    },
+    "script": "scripts/art_pipeline/mgjrpg02_plan03_r1_review.py",
+    "text": "Maze so Puzzle",
+    "routeLinePresent": false
+  },
+  "runtimeImpact": {
+    "runtimeAssetWrites": 0,
+    "cataloguePointerChanges": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0
+  },
+  "review": {
+    "page": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/index.html",
+    "recommendation": "Logo Candidate A plus the complete seven-icon R1 Candidate A family",
+    "silenceRule": "Silence is not approval.",
+    "publicationAuthorized": false
+  },
+  "reviewProtocol": {
+    "batchProofStatus": "awaiting Human Plan 03-R1 logo and utility-family review",
+    "decisionRule": "Human reviews exact logo wording/material balance and the complete seven-icon family at source comparison and 64/48/32/24/16 intrinsic sizes before any publication.",
+    "silenceRule": "Silence is not approval.",
+    "candidateBoundary": "Source approval does not create runtime files, change catalogue pointers, generate platform icons, retire current assets, or allocate performance bytes."
+  },
+  "rights": {
+    "originClaim": "Generated or deterministically constructed for Maze so Puzzle from exact prompts and internal approved or semantic-only references; no named franchise, character, logo, living artist, proprietary palette, UI layout, or composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "releaseStatus": "not-approved"
+  },
+  "rollback": {
+    "method": "Keep all current runtime files and catalogue pointers. Remove only unapproved Batch 23 source records/candidates and ignored proofs to return to the accepted Plan 03 anchor.",
+    "runtimeRollbackRequired": false
+  },
+  "counts": {
+    "runCount": 11,
+    "rejectedBackgroundInvalidCount": 4,
+    "pendingHumanCandidateCount": 7,
+    "humanApprovedSourceCount": 0,
+    "humanRejectedSourceCount": 0,
+    "artDirectorRejectedSourceCount": 0,
+    "generatorOriginalEncodedBytes": 13988618,
+    "generatorOriginalDecodedBytesUpperBound": 69193548
+  }
+}

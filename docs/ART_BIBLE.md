@@ -958,6 +958,48 @@ live-composition audit.
 Nothing is retired by this foundation pass. The precise retain/refine/replace
 matrix and severity-ranked rationale remain in Plan 03 sections 5 and 8.
 
+### Plan 03-R1 premium utility tier — source-review proposal (2026-09-04)
+
+The accepted Plan 03 runtime publication remains the rollback authority at
+`28946cbb04f45cb21cd51626914267ff4f71c375`. Plan 03-R1 does not reopen
+`mgjrpg-02`, Ame, world sprites, achievement art, or terrain. It proposes one
+quieter premium utility tier derived from the approved Batch 22 achievement
+material craft:
+
+- the complete semantic utility set is exactly Home, Mazes, Book, Help, Sound,
+  Muted, and Restart; no transport, gameplay-item, key, door, portal, character,
+  portrait, or inventory identity is inferred into this family;
+- every symbol is freshly authored around one literal action silhouette, at
+  most one supporting motif, two to four large colour masses, and broad
+  three-value modelling;
+- each uses bright material-local chromatic contours, one complete cream-white
+  outer sticker cutline, glossy enamel, one controlled warm-metal element, and
+  one broad restrained iridescent segment;
+- utility icons remain one prestige step quieter than achievement stickers:
+  no glitter field, rainbow noise, micro-facets, filigree, text, internal cream
+  outlines, or decoration that weakens recognition;
+- Sound and Muted share one speaker construction. Muted removes all waves and
+  adds a thick coral diagonal slash extending beyond the speaker, so state is
+  independent of colour;
+- optical approval is required at intrinsic 64, 48, 32, 24, and 16 px with
+  common perceived weight, baseline, cutline thickness, safe space, and no
+  alias-driven loss of the functional silhouette.
+
+This tier is **pending Human source review**. Candidate originals, rejected
+checkerboard attempts, exact prompts, ordered references, measurements, and
+proposed publication paths are under
+`docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/`.
+No current runtime asset or catalogue pointer changes until a separate approval
+and byte-allocation publication gate.
+
+The same gate proposes one exact-lettered logo. Batch 21 Logo Candidate A is
+composition and material evidence only. Final candidate lettering is locally
+typeset from the exact string “Maze so Puzzle” using the vendored SIL-OFL
+Fredoka SemiBold glyph geometry and deterministic project-authored material
+masks. Lowercase `so`, absent subtitle, and absent yellow route line are
+machine-reconstructable facts. Generated glyphs, checkerboard pixels, and the
+Batch 21 route-line pixels are not carried forward.
+
 ## Research basis
 
 The evidence register and access date (2026-09-02) are preserved in Plan 03

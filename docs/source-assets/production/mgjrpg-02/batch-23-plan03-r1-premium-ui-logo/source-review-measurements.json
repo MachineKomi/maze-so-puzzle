@@ -1,0 +1,1200 @@
+{
+  "schema": "maze-plan03-r1-source-review/v1",
+  "generatedOn": "2026-09-04",
+  "rollbackAnchor": "28946cbb04f45cb21cd51626914267ff4f71c375",
+  "scope": "source-only; no runtime/public/catalogue publication",
+  "frontDoorSelections": [
+    {
+      "label": "Title Candidate A",
+      "runId": "batch-21-title-background-v02-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-a-generator-original.png",
+      "preview": "front-door-01.jpg",
+      "sourceSha256": "0c9782af4090f3e7d4a7702ebfcbfff20c451c83eadd2b2cfa9d0633b78714bf"
+    },
+    {
+      "label": "Home Splash Candidate B",
+      "runId": "batch-21-home-splash-v01-b",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+      "preview": "front-door-02.jpg",
+      "sourceSha256": "3f6917b2ae47fd4a0649d24c6301f1db2bfe1bf93c7c6144a567a13c09595ecf"
+    },
+    {
+      "label": "Environment-only layer",
+      "runId": "batch-21-title-background-environment-study-01",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
+      "preview": "front-door-03.jpg",
+      "sourceSha256": "07d91060cf21639cfd8ebcae87d8ac8cb626a1617df177c860bd12fa6a31d896"
+    },
+    {
+      "label": "Ame-face application-icon candidate",
+      "runId": "batch-13-app-icon-ame-v03",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "preview": "front-door-04.jpg",
+      "sourceSha256": "4f470db1ae278fa749460df92a8b3010d7a2b9531e2c4487a0d85e8bf4609616"
+    }
+  ],
+  "recommendedLogo": {
+    "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
+    "sha256": "c1bb1d32dbd49eae065b660aa23d8e30350b76deaeea08ab20b132324b5c6500",
+    "bytes": 124875,
+    "width": 1361,
+    "height": 818,
+    "mode": "RGBA",
+    "text": "Maze so Puzzle",
+    "routeLinePresent": false,
+    "construction": "deterministic local typesetting and mask compositing"
+  },
+  "recommendedIconFamily": [
+    {
+      "id": "nav-home",
+      "label": "Home",
+      "version": 4,
+      "source": "nav-home-v04-candidate-a-matte-01-generator-original.png",
+      "current": "public/assets/mgjrpg-02/navigation/nav-home-v03-navigation-optical-128-r01.webp",
+      "runId": "batch-23-nav-home-premium-utility",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-home-v04-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "543c8cb4c7e65d8e7a5c1ff3c58b8ec518b89c01e74fc8dc9aa0a07afb5afa3d",
+      "sourceBytes": 1203879,
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "candidate512": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-home-candidate-512.png",
+        "sha256": "c0a9fd1753083e814be92679fce0f3c8edd7af1e8cf1257784bdcc306f4a0712",
+        "bytes": 167994,
+        "width": 512,
+        "height": 512,
+        "decodedBytesUpperBound": 1048576,
+        "visibleBounds": [
+          48,
+          36,
+          464,
+          476
+        ],
+        "semiTransparentPixels": 3155,
+        "exactBlackVisiblePixels": 0
+      },
+      "currentProof": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-home-current.png",
+        "sha256": "c567e4acd894db49a285afdb9a8d199b17fed4b7cece03b8d7ebfcfb366bfd6a",
+        "bytes": 15347,
+        "width": 128,
+        "height": 128,
+        "decodedBytesUpperBound": 65536,
+        "visibleBounds": [
+          14,
+          6,
+          115,
+          122
+        ],
+        "semiTransparentPixels": 793,
+        "exactBlackVisiblePixels": 0
+      },
+      "optical": {
+        "64": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-home-candidate-64.png",
+          "sha256": "8a812ad80335b0da24caf19359c650b39f38684d06876d077b8de65d41fc9a9b",
+          "bytes": 5248,
+          "width": 64,
+          "height": 64,
+          "decodedBytesUpperBound": 16384,
+          "visibleBounds": [
+            6,
+            4,
+            59,
+            60
+          ],
+          "semiTransparentPixels": 371,
+          "exactBlackVisiblePixels": 0
+        },
+        "48": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-home-candidate-48.png",
+          "sha256": "c637cc85286646cdb208a69df94a7bd747221b6754ef246b78cebb298a7030ae",
+          "bytes": 3503,
+          "width": 48,
+          "height": 48,
+          "decodedBytesUpperBound": 9216,
+          "visibleBounds": [
+            4,
+            3,
+            44,
+            45
+          ],
+          "semiTransparentPixels": 271,
+          "exactBlackVisiblePixels": 0
+        },
+        "32": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-home-candidate-32.png",
+          "sha256": "d2c195df46a5f88652d52ef713afd0c52ff6eff2ac7c6aa3aaa1a590f128ace2",
+          "bytes": 1847,
+          "width": 32,
+          "height": 32,
+          "decodedBytesUpperBound": 4096,
+          "visibleBounds": [
+            3,
+            2,
+            29,
+            30
+          ],
+          "semiTransparentPixels": 154,
+          "exactBlackVisiblePixels": 0
+        },
+        "24": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-home-candidate-24.png",
+          "sha256": "15eecefc9de4b2f86aea06fc80a97d049057b54d4d2d23e4ee9ac39ba0868645",
+          "bytes": 1233,
+          "width": 24,
+          "height": 24,
+          "decodedBytesUpperBound": 2304,
+          "visibleBounds": [
+            2,
+            2,
+            21,
+            22
+          ],
+          "semiTransparentPixels": 102,
+          "exactBlackVisiblePixels": 0
+        },
+        "16": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-home-candidate-16.png",
+          "sha256": "46e8c8882e0b0b90ad87f0edfe1202cea41323569673243f2e145bf96fea6d4c",
+          "bytes": 757,
+          "width": 16,
+          "height": 16,
+          "decodedBytesUpperBound": 1024,
+          "visibleBounds": [
+            1,
+            1,
+            14,
+            15
+          ],
+          "semiTransparentPixels": 64,
+          "exactBlackVisiblePixels": 0
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            5,
+            225,
+            11
+          ],
+          "channelStd": [
+            1.0314,
+            1.3242,
+            1.5828
+          ],
+          "maximumChannelStd": 1.5828,
+          "p99EuclideanResidual": 5.4772,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1593,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 3.317,
+            "90": 315.133,
+            "95": 333.062,
+            "99": 336.529
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      }
+    },
+    {
+      "id": "nav-mazes",
+      "label": "Mazes",
+      "version": 5,
+      "source": "nav-mazes-v05-candidate-a-matte-01-generator-original.png",
+      "current": "public/assets/mgjrpg-02/navigation/nav-mazes-v04-navigation-optical-128-r01.webp",
+      "runId": "batch-23-nav-mazes-premium-utility",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-mazes-v05-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "598e6abf41ecccdbd659a1043bed7e83dbf3f59339c2b17ef80fbc9b3be27d39",
+      "sourceBytes": 1359445,
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "candidate512": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-mazes-candidate-512.png",
+        "sha256": "48558a036d5c3a7608db86e032abbfef8411e6a7bd8e5e67e190a6a16aee77e8",
+        "bytes": 239591,
+        "width": 512,
+        "height": 512,
+        "decodedBytesUpperBound": 1048576,
+        "visibleBounds": [
+          42,
+          36,
+          471,
+          476
+        ],
+        "semiTransparentPixels": 3352,
+        "exactBlackVisiblePixels": 0
+      },
+      "currentProof": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-mazes-current.png",
+        "sha256": "ad6207215eab9432615ec142861ace320c3280985866798d9936c100ec6b7fd3",
+        "bytes": 18489,
+        "width": 128,
+        "height": 128,
+        "decodedBytesUpperBound": 65536,
+        "visibleBounds": [
+          10,
+          6,
+          119,
+          122
+        ],
+        "semiTransparentPixels": 881,
+        "exactBlackVisiblePixels": 0
+      },
+      "optical": {
+        "64": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-mazes-candidate-64.png",
+          "sha256": "95096f8e6fbeea4f7eb0fce3c0319a56f397f92b03c253162b9f4f76120defec",
+          "bytes": 7403,
+          "width": 64,
+          "height": 64,
+          "decodedBytesUpperBound": 16384,
+          "visibleBounds": [
+            4,
+            4,
+            59,
+            60
+          ],
+          "semiTransparentPixels": 280,
+          "exactBlackVisiblePixels": 0
+        },
+        "48": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-mazes-candidate-48.png",
+          "sha256": "a8218a0828ac02ddd7134aa91c6dec1a4628be9416c3d70cd5922abc366cb690",
+          "bytes": 4651,
+          "width": 48,
+          "height": 48,
+          "decodedBytesUpperBound": 9216,
+          "visibleBounds": [
+            3,
+            3,
+            44,
+            45
+          ],
+          "semiTransparentPixels": 219,
+          "exactBlackVisiblePixels": 0
+        },
+        "32": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-mazes-candidate-32.png",
+          "sha256": "616da07b705fcb9bca191072eabd803c3ecbf18bf867a1f9d2ba3bfe65ef170f",
+          "bytes": 2371,
+          "width": 32,
+          "height": 32,
+          "decodedBytesUpperBound": 4096,
+          "visibleBounds": [
+            2,
+            2,
+            29,
+            30
+          ],
+          "semiTransparentPixels": 132,
+          "exactBlackVisiblePixels": 0
+        },
+        "24": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-mazes-candidate-24.png",
+          "sha256": "e8dc40051b092f65e39ec503a074c42e7608ca92f12c6017cc8f395661dc44d8",
+          "bytes": 1459,
+          "width": 24,
+          "height": 24,
+          "decodedBytesUpperBound": 2304,
+          "visibleBounds": [
+            2,
+            2,
+            22,
+            22
+          ],
+          "semiTransparentPixels": 82,
+          "exactBlackVisiblePixels": 0
+        },
+        "16": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-mazes-candidate-16.png",
+          "sha256": "f104e176e0abc2ae019fd0376cb41d69cf6839cd9ae5150b2de16514d25a376e",
+          "bytes": 814,
+          "width": 16,
+          "height": 16,
+          "decodedBytesUpperBound": 1024,
+          "visibleBounds": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "semiTransparentPixels": 54,
+          "exactBlackVisiblePixels": 0
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            4,
+            227,
+            9
+          ],
+          "channelStd": [
+            1.0753,
+            1.3988,
+            1.9242
+          ],
+          "maximumChannelStd": 1.9242,
+          "p99EuclideanResidual": 6.7082,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2194,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 225.737,
+            "90": 325.123,
+            "95": 339.75,
+            "99": 345.059
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      }
+    },
+    {
+      "id": "nav-book",
+      "label": "Book",
+      "version": 3,
+      "source": "nav-book-v03-candidate-a-matte-01-generator-original.png",
+      "current": "public/assets/mgjrpg-02/navigation/nav-book-v02-navigation-optical-128-r01.webp",
+      "runId": "batch-23-nav-book-premium-utility",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-book-v03-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "ec9d20ab891e3c424f3c1505d099f1254aab6ab68aa10bbd3bb2afd83ce59a39",
+      "sourceBytes": 1377200,
+      "sourceDimensions": [
+        1374,
+        1145
+      ],
+      "candidate512": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-book-candidate-512.png",
+        "sha256": "c9bc8aea389d4979a75674be5354acbab8b719d5998b4ab788860accf191255b",
+        "bytes": 168559,
+        "width": 512,
+        "height": 512,
+        "decodedBytesUpperBound": 1048576,
+        "visibleBounds": [
+          36,
+          104,
+          476,
+          408
+        ],
+        "semiTransparentPixels": 3395,
+        "exactBlackVisiblePixels": 0
+      },
+      "currentProof": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-book-current.png",
+        "sha256": "3149f5ee52be6e2f772038a5b832e80e8374999cc987be8d691693fd068f95b6",
+        "bytes": 19194,
+        "width": 128,
+        "height": 128,
+        "decodedBytesUpperBound": 65536,
+        "visibleBounds": [
+          6,
+          24,
+          122,
+          104
+        ],
+        "semiTransparentPixels": 7197,
+        "exactBlackVisiblePixels": 0
+      },
+      "optical": {
+        "64": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-book-candidate-64.png",
+          "sha256": "9d4aba0b35a443876fd771496946cb200956256f9e8fe6db31b6c92cc4934b6c",
+          "bytes": 5359,
+          "width": 64,
+          "height": 64,
+          "decodedBytesUpperBound": 16384,
+          "visibleBounds": [
+            4,
+            12,
+            60,
+            51
+          ],
+          "semiTransparentPixels": 348,
+          "exactBlackVisiblePixels": 0
+        },
+        "48": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-book-candidate-48.png",
+          "sha256": "b134b2f72d154cc518bc278e1639283301499ebeb62cbe8494208be0f39edc9a",
+          "bytes": 3283,
+          "width": 48,
+          "height": 48,
+          "decodedBytesUpperBound": 9216,
+          "visibleBounds": [
+            3,
+            9,
+            45,
+            38
+          ],
+          "semiTransparentPixels": 266,
+          "exactBlackVisiblePixels": 0
+        },
+        "32": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-book-candidate-32.png",
+          "sha256": "24fab7981b856ba621032bc79123b56d9deacfcaabe130b8443800db5d42a802",
+          "bytes": 1738,
+          "width": 32,
+          "height": 32,
+          "decodedBytesUpperBound": 4096,
+          "visibleBounds": [
+            2,
+            6,
+            30,
+            25
+          ],
+          "semiTransparentPixels": 166,
+          "exactBlackVisiblePixels": 0
+        },
+        "24": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-book-candidate-24.png",
+          "sha256": "a1b391f7fae17adde87d4cfdc814467abd524908896e63be3920518bee02105d",
+          "bytes": 1081,
+          "width": 24,
+          "height": 24,
+          "decodedBytesUpperBound": 2304,
+          "visibleBounds": [
+            2,
+            5,
+            22,
+            19
+          ],
+          "semiTransparentPixels": 107,
+          "exactBlackVisiblePixels": 0
+        },
+        "16": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-book-candidate-16.png",
+          "sha256": "f09567adffe2c8e575f43d3767608c932ff227c00ab785559af3d8dadb5339d3",
+          "bytes": 649,
+          "width": 16,
+          "height": 16,
+          "decodedBytesUpperBound": 1024,
+          "visibleBounds": [
+            1,
+            3,
+            15,
+            13
+          ],
+          "semiTransparentPixels": 69,
+          "exactBlackVisiblePixels": 0
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            4,
+            230,
+            5
+          ],
+          "channelStd": [
+            1.05,
+            1.2177,
+            0.9229
+          ],
+          "maximumChannelStd": 1.2177,
+          "p99EuclideanResidual": 5.3852,
+          "cornerSamplePixels": 12996
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2227,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 260.665,
+            "90": 337.477,
+            "95": 348.009,
+            "99": 353.662
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      }
+    },
+    {
+      "id": "nav-help",
+      "label": "Help",
+      "version": 3,
+      "source": "nav-help-v03-candidate-a-matte-01-generator-original.png",
+      "current": "public/assets/mgjrpg-02/navigation/nav-help-v02-navigation-optical-128-r01.webp",
+      "runId": "batch-23-nav-help-premium-utility",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-help-v03-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "3a78bb05c663ccfdf4515a85ebc5021aae2a7c461a211147f8302f1486e6d94d",
+      "sourceBytes": 1299781,
+      "sourceDimensions": [
+        1213,
+        1296
+      ],
+      "candidate512": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-candidate-512.png",
+        "sha256": "090291219d64bfd425b51c4d4d2d77f2956a1ed79a65f8e754755492a02d6200",
+        "bytes": 145706,
+        "width": 512,
+        "height": 512,
+        "decodedBytesUpperBound": 1048576,
+        "visibleBounds": [
+          106,
+          36,
+          407,
+          476
+        ],
+        "semiTransparentPixels": 3526,
+        "exactBlackVisiblePixels": 0
+      },
+      "currentProof": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-current.png",
+        "sha256": "b43d01d9d63a88a740bc268e7188f22cba672984063ff0ba8ed8780b49ac092d",
+        "bytes": 19212,
+        "width": 128,
+        "height": 128,
+        "decodedBytesUpperBound": 65536,
+        "visibleBounds": [
+          22,
+          6,
+          105,
+          122
+        ],
+        "semiTransparentPixels": 6096,
+        "exactBlackVisiblePixels": 0
+      },
+      "optical": {
+        "64": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-candidate-64.png",
+          "sha256": "1a70f4946743571ebf7fc8b64c9aeb02e0d2cae3f89560e0b7d57aa2b2fa81ed",
+          "bytes": 5209,
+          "width": 64,
+          "height": 64,
+          "decodedBytesUpperBound": 16384,
+          "visibleBounds": [
+            13,
+            4,
+            51,
+            60
+          ],
+          "semiTransparentPixels": 404,
+          "exactBlackVisiblePixels": 0
+        },
+        "48": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-candidate-48.png",
+          "sha256": "a5afdff44f7c85adac3615ee397a13e7880901f88b1f91ef018a24e0e9773546",
+          "bytes": 3361,
+          "width": 48,
+          "height": 48,
+          "decodedBytesUpperBound": 9216,
+          "visibleBounds": [
+            9,
+            3,
+            38,
+            45
+          ],
+          "semiTransparentPixels": 297,
+          "exactBlackVisiblePixels": 0
+        },
+        "32": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-candidate-32.png",
+          "sha256": "06c6b276255ea8a855a11d612e79ccdebfeeee87a43ccf698716eef57e7fdabc",
+          "bytes": 1794,
+          "width": 32,
+          "height": 32,
+          "decodedBytesUpperBound": 4096,
+          "visibleBounds": [
+            6,
+            2,
+            25,
+            30
+          ],
+          "semiTransparentPixels": 180,
+          "exactBlackVisiblePixels": 0
+        },
+        "24": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-candidate-24.png",
+          "sha256": "8e6a60f0cfdf7371ae123c9d44765c6f0d2e6469d06af9b3a26c24a7ee48ce90",
+          "bytes": 1163,
+          "width": 24,
+          "height": 24,
+          "decodedBytesUpperBound": 2304,
+          "visibleBounds": [
+            5,
+            2,
+            19,
+            22
+          ],
+          "semiTransparentPixels": 117,
+          "exactBlackVisiblePixels": 0
+        },
+        "16": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-help-candidate-16.png",
+          "sha256": "6e6063234e3b46e40b928307553f238d431b68466b5cdf98a812b332b021b67d",
+          "bytes": 712,
+          "width": 16,
+          "height": 16,
+          "decodedBytesUpperBound": 1024,
+          "visibleBounds": [
+            3,
+            1,
+            13,
+            15
+          ],
+          "semiTransparentPixels": 65,
+          "exactBlackVisiblePixels": 0
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            8,
+            232,
+            9
+          ],
+          "channelStd": [
+            0.9924,
+            0.9295,
+            0.9421
+          ],
+          "maximumChannelStd": 0.9924,
+          "p99EuclideanResidual": 4.6904,
+          "cornerSamplePixels": 14400
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1974,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.732,
+            "90": 332.713,
+            "95": 338.007,
+            "99": 347.813
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      }
+    },
+    {
+      "id": "nav-sound",
+      "label": "Sound",
+      "version": 4,
+      "source": "nav-sound-v04-candidate-a-matte-01-generator-original.png",
+      "current": "public/assets/mgjrpg-02/navigation/nav-sound-v03-navigation-optical-128-r01.webp",
+      "runId": "batch-23-nav-sound-premium-utility",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "90b1ae474231f3a30e131422ed6ea96686f6056cd0f5f5e1e2f1dff8c08dca03",
+      "sourceBytes": 1273532,
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "candidate512": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-candidate-512.png",
+        "sha256": "4078115fe3aac86090dec4208ee781147ec1541175e11774fd1edf54495591c1",
+        "bytes": 175591,
+        "width": 512,
+        "height": 512,
+        "decodedBytesUpperBound": 1048576,
+        "visibleBounds": [
+          36,
+          77,
+          476,
+          435
+        ],
+        "semiTransparentPixels": 3521,
+        "exactBlackVisiblePixels": 0
+      },
+      "currentProof": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-current.png",
+        "sha256": "a045ba5a11079d02851ee6f043a06f702a52bddbc22ba8dff7bb8c2af315ddb5",
+        "bytes": 18444,
+        "width": 128,
+        "height": 128,
+        "decodedBytesUpperBound": 65536,
+        "visibleBounds": [
+          6,
+          21,
+          122,
+          107
+        ],
+        "semiTransparentPixels": 6680,
+        "exactBlackVisiblePixels": 0
+      },
+      "optical": {
+        "64": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-candidate-64.png",
+          "sha256": "50399f71a728911831daf567746ef691b5a06af992865d35005a71ef31e19926",
+          "bytes": 6448,
+          "width": 64,
+          "height": 64,
+          "decodedBytesUpperBound": 16384,
+          "visibleBounds": [
+            4,
+            9,
+            60,
+            55
+          ],
+          "semiTransparentPixels": 389,
+          "exactBlackVisiblePixels": 0
+        },
+        "48": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-candidate-48.png",
+          "sha256": "0120a96f3cf82cb446020465755a658547351ea30f594cc4c7a413cbf4390407",
+          "bytes": 3925,
+          "width": 48,
+          "height": 48,
+          "decodedBytesUpperBound": 9216,
+          "visibleBounds": [
+            3,
+            7,
+            45,
+            41
+          ],
+          "semiTransparentPixels": 277,
+          "exactBlackVisiblePixels": 0
+        },
+        "32": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-candidate-32.png",
+          "sha256": "0d28433a5fca718a2394eded61c5d0e6ac8989e326cac0f022db640af461549f",
+          "bytes": 2070,
+          "width": 32,
+          "height": 32,
+          "decodedBytesUpperBound": 4096,
+          "visibleBounds": [
+            2,
+            4,
+            30,
+            27
+          ],
+          "semiTransparentPixels": 174,
+          "exactBlackVisiblePixels": 0
+        },
+        "24": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-candidate-24.png",
+          "sha256": "e9df01285915ec18c106bf68585fd20ef249c9282418117cc8cf57ada33a95a3",
+          "bytes": 1309,
+          "width": 24,
+          "height": 24,
+          "decodedBytesUpperBound": 2304,
+          "visibleBounds": [
+            2,
+            4,
+            22,
+            20
+          ],
+          "semiTransparentPixels": 118,
+          "exactBlackVisiblePixels": 0
+        },
+        "16": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-candidate-16.png",
+          "sha256": "07848b12f0fa73a8f985d1efedbf0af71d0f8c7591c18b0604ec49b2f03a542f",
+          "bytes": 762,
+          "width": 16,
+          "height": 16,
+          "decodedBytesUpperBound": 1024,
+          "visibleBounds": [
+            1,
+            3,
+            15,
+            14
+          ],
+          "semiTransparentPixels": 69,
+          "exactBlackVisiblePixels": 0
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            11,
+            224,
+            17
+          ],
+          "channelStd": [
+            1.1484,
+            0.9999,
+            1.1775
+          ],
+          "maximumChannelStd": 1.1775,
+          "p99EuclideanResidual": 5.099,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1818,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.236,
+            "90": 326.255,
+            "95": 334.391,
+            "99": 337.856
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      }
+    },
+    {
+      "id": "nav-muted",
+      "label": "Muted",
+      "version": 3,
+      "source": "nav-muted-v03-candidate-a-matte-01-generator-original.png",
+      "current": "public/assets/mgjrpg-02/navigation/nav-muted-v02-navigation-optical-128-r01.webp",
+      "runId": "batch-23-nav-muted-premium-utility",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-muted-v03-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "a14951fc21f983b8a6e3fac0af2fd7469a0a8f235deb66d4ccc88fcdec525acf",
+      "sourceBytes": 1351452,
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "candidate512": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-muted-candidate-512.png",
+        "sha256": "7f7c9fe019e386709b4aafc66d4043c8409e2b56b82d5e4afd2581d3f3e5346d",
+        "bytes": 208214,
+        "width": 512,
+        "height": 512,
+        "decodedBytesUpperBound": 1048576,
+        "visibleBounds": [
+          46,
+          36,
+          466,
+          476
+        ],
+        "semiTransparentPixels": 3747,
+        "exactBlackVisiblePixels": 0
+      },
+      "currentProof": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-muted-current.png",
+        "sha256": "dfcedbaafea14d84ca4a1270e23e20b8ee0afbcb23ce5e55034ce37cb6e65cf2",
+        "bytes": 21904,
+        "width": 128,
+        "height": 128,
+        "decodedBytesUpperBound": 65536,
+        "visibleBounds": [
+          9,
+          6,
+          119,
+          122
+        ],
+        "semiTransparentPixels": 940,
+        "exactBlackVisiblePixels": 0
+      },
+      "optical": {
+        "64": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-muted-candidate-64.png",
+          "sha256": "436167cc35eec539051a8508f23c7c49eb0b4afcbba8edaf393262f5e0d308c3",
+          "bytes": 7196,
+          "width": 64,
+          "height": 64,
+          "decodedBytesUpperBound": 16384,
+          "visibleBounds": [
+            6,
+            4,
+            59,
+            60
+          ],
+          "semiTransparentPixels": 427,
+          "exactBlackVisiblePixels": 0
+        },
+        "48": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-muted-candidate-48.png",
+          "sha256": "d11b84875f985a363bfa060c697f6e55c7904e568d378c0ff8f250d5fd400f1b",
+          "bytes": 4535,
+          "width": 48,
+          "height": 48,
+          "decodedBytesUpperBound": 9216,
+          "visibleBounds": [
+            4,
+            3,
+            44,
+            45
+          ],
+          "semiTransparentPixels": 306,
+          "exactBlackVisiblePixels": 0
+        },
+        "32": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-muted-candidate-32.png",
+          "sha256": "758bfa8c1de4e547634ccb15973cedf2e65d108493b6aa34f8d6013f5c375865",
+          "bytes": 2284,
+          "width": 32,
+          "height": 32,
+          "decodedBytesUpperBound": 4096,
+          "visibleBounds": [
+            2,
+            2,
+            29,
+            30
+          ],
+          "semiTransparentPixels": 193,
+          "exactBlackVisiblePixels": 0
+        },
+        "24": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-muted-candidate-24.png",
+          "sha256": "756e50253613206f38c44e054525045d1f3b829f233b6998d2c813de4cd5d0a3",
+          "bytes": 1464,
+          "width": 24,
+          "height": 24,
+          "decodedBytesUpperBound": 2304,
+          "visibleBounds": [
+            2,
+            2,
+            21,
+            22
+          ],
+          "semiTransparentPixels": 124,
+          "exactBlackVisiblePixels": 0
+        },
+        "16": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-muted-candidate-16.png",
+          "sha256": "1abb58b5295b4f749cba3e70f5838b3a575282d3f3080033f5faaf57bfbe0e3f",
+          "bytes": 843,
+          "width": 16,
+          "height": 16,
+          "decodedBytesUpperBound": 1024,
+          "visibleBounds": [
+            1,
+            1,
+            14,
+            15
+          ],
+          "semiTransparentPixels": 80,
+          "exactBlackVisiblePixels": 0
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            4,
+            233,
+            8
+          ],
+          "channelStd": [
+            0.9288,
+            1.3732,
+            1.5012
+          ],
+          "maximumChannelStd": 1.5012,
+          "p99EuclideanResidual": 5.099,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1746,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 3.0,
+            "90": 302.964,
+            "95": 343.636,
+            "99": 345.789
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      }
+    },
+    {
+      "id": "nav-restart",
+      "label": "Restart",
+      "version": 3,
+      "source": "nav-restart-v03-candidate-a-matte-01-generator-original.png",
+      "current": "public/assets/mgjrpg-02/navigation/nav-restart-v02-navigation-optical-128-r01.webp",
+      "runId": "batch-23-nav-restart-premium-utility",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-restart-v03-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "a94caeec7a4aa706ee8b2e68d83197aea942562c58005964f9fae1dfefdcbf37",
+      "sourceBytes": 1325327,
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "candidate512": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-restart-candidate-512.png",
+        "sha256": "56049f0c0ffb34f4a547fa79034c18f5d168c71f9b38753ef4cfe895c25cd97c",
+        "bytes": 201813,
+        "width": 512,
+        "height": 512,
+        "decodedBytesUpperBound": 1048576,
+        "visibleBounds": [
+          36,
+          36,
+          475,
+          476
+        ],
+        "semiTransparentPixels": 5250,
+        "exactBlackVisiblePixels": 0
+      },
+      "currentProof": {
+        "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-restart-current.png",
+        "sha256": "d63063216e01a73cc27b40dbd51de7a23b92366bff5a93e2fdc406631b3910b9",
+        "bytes": 24922,
+        "width": 128,
+        "height": 128,
+        "decodedBytesUpperBound": 65536,
+        "visibleBounds": [
+          10,
+          6,
+          119,
+          122
+        ],
+        "semiTransparentPixels": 8109,
+        "exactBlackVisiblePixels": 0
+      },
+      "optical": {
+        "64": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-restart-candidate-64.png",
+          "sha256": "d78c452b07a775dd03cb0b7d599728539eda0b66aa7faf961848e101f68cfa93",
+          "bytes": 7754,
+          "width": 64,
+          "height": 64,
+          "decodedBytesUpperBound": 16384,
+          "visibleBounds": [
+            4,
+            4,
+            60,
+            60
+          ],
+          "semiTransparentPixels": 625,
+          "exactBlackVisiblePixels": 0
+        },
+        "48": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-restart-candidate-48.png",
+          "sha256": "9a7cd6bcff8b0a2e7f0339201d77c5440ad77f7c19584de9ff6feb3587cf2264",
+          "bytes": 4946,
+          "width": 48,
+          "height": 48,
+          "decodedBytesUpperBound": 9216,
+          "visibleBounds": [
+            3,
+            3,
+            45,
+            45
+          ],
+          "semiTransparentPixels": 452,
+          "exactBlackVisiblePixels": 0
+        },
+        "32": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-restart-candidate-32.png",
+          "sha256": "31493b62897e631d1458287d8e8f8456cb24592b446f2f7708d48273c6228378",
+          "bytes": 2448,
+          "width": 32,
+          "height": 32,
+          "decodedBytesUpperBound": 4096,
+          "visibleBounds": [
+            2,
+            2,
+            30,
+            30
+          ],
+          "semiTransparentPixels": 292,
+          "exactBlackVisiblePixels": 0
+        },
+        "24": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-restart-candidate-24.png",
+          "sha256": "e336984f220bc68d952d230db31b71f719e242b67c2f9f9895313164fc461b0a",
+          "bytes": 1536,
+          "width": 24,
+          "height": 24,
+          "decodedBytesUpperBound": 2304,
+          "visibleBounds": [
+            2,
+            2,
+            22,
+            22
+          ],
+          "semiTransparentPixels": 200,
+          "exactBlackVisiblePixels": 0
+        },
+        "16": {
+          "path": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-restart-candidate-16.png",
+          "sha256": "f3bedd4f17907ccbd7b5fdd9343de33e7f84eb3262bcf67b03357ab2b09003d0",
+          "bytes": 899,
+          "width": 16,
+          "height": 16,
+          "decodedBytesUpperBound": 1024,
+          "visibleBounds": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "semiTransparentPixels": 106,
+          "exactBlackVisiblePixels": 0
+        }
+      },
+      "processing": {
+        "matte": {
+          "rgb": [
+            8,
+            231,
+            14
+          ],
+          "channelStd": [
+            1.363,
+            1.2477,
+            1.8049
+          ],
+          "maximumChannelStd": 1.8049,
+          "p99EuclideanResidual": 6.9282,
+          "cornerSamplePixels": 15376
+        },
+        "extraction": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 64,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2535,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.828,
+            "90": 330.386,
+            "95": 332.467,
+            "99": 335.955
+          }
+        },
+        "exactBlackVisiblePixelsNormalized": 0
+      }
+    }
+  ],
+  "counts": {
+    "icons": 7,
+    "logoCandidates": 1,
+    "frontDoorSelections": 4,
+    "candidateSourceEncodedBytes": 9315491,
+    "candidateSourceDecodedBytesUpperBound": 48484624,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0
+  },
+  "reviewPage": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/index.html",
+  "policy": {
+    "currentPointersChanged": false,
+    "publicAssetsChanged": false,
+    "runtimeDerivativesGenerated": false,
+    "platformIconsGenerated": false,
+    "massPublicationAuthorized": false
+  }
+}

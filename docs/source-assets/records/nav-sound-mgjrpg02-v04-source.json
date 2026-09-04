@@ -1,0 +1,200 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "nav-sound-mgjrpg02-v04-source",
+  "id": "nav-sound",
+  "artVersion": 4,
+  "family": "navigation",
+  "runtimeStatus": "source-only",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "pending-human",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "proposed-mgjrpg-02-premium-utility-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-23-nav-sound-premium-utility-v04-a",
+      "generator": "OpenAI \u2014 Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
+        "sha256": "b54151e104ee6dbc5295f6fb4162500ccf12b7b1b91958523740b6ad34dbd7ae"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "runtime-comparison",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-02/nav-sound-v03-unselected-generator-original.png",
+          "sha256": "deaf9e5ec32b9c39844664c0c74b3c447deb012cb847969f23d9641a3dcddb58"
+        },
+        {
+          "order": 2,
+          "role": "material-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/reward-trail-sticker-v03-candidate-a-matte-01-generator-original.png",
+          "sha256": "86c26fa4ff32ead97c6711a39abc9ca2c8ba5fdfad461b3b9f47671e1aacd13d"
+        },
+        {
+          "order": 3,
+          "role": "optical-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-pathfinder-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "2909655eec2802762500c0253927163e34228fe94fda989071cf5935de61b1d2"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-569817d0-deac-4669-b4a1-c20bb2ad9fe9.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+          "sha256": "90b1ae474231f3a30e131422ed6ea96686f6056cd0f5f5e1e2f1dff8c08dca03",
+          "bytes": 1273532,
+          "disposition": "selected",
+          "reason": "Fresh blank-canvas premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate; not publication-approved."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Fresh canvas. Image 1 supplied semantic/silhouette evidence only; Images 2 and 3 supplied approved Batch 22 material and optical craft. Generator model, seed, and timestamp were not exposed."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
+      "sha256": "b54151e104ee6dbc5295f6fb4162500ccf12b7b1b91958523740b6ad34dbd7ae"
+    },
+    "outputIds": [
+      "exec-569817d0-deac-4669-b4a1-c20bb2ad9fe9.png"
+    ],
+    "notes": "Exact shared and subject blocks, their concatenation order, output IDs, and ordered input roles are preserved in the batch prompt and run records."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+      "sha256": "90b1ae474231f3a30e131422ed6ea96686f6056cd0f5f5e1e2f1dff8c08dca03",
+      "bytes": 1273532,
+      "relationship": "pending-human premium utility generator original",
+      "evidence": "Fresh chroma-matte candidate selected by art-direction QA for review; no runtime publication approval."
+    }
+  ],
+  "derivatives": [],
+  "geometry": {
+    "class": "icon",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0703125,
+      0.15039062,
+      0.859375,
+      0.69921875
+    ],
+    "safeInset": [
+      0.07,
+      0.07,
+      0.07,
+      0.07
+    ],
+    "opticalBounds": [
+      0.0703125,
+      0.15039062,
+      0.859375,
+      0.69921875
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/nav-sound-v04-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "source-review-512",
+        "outputPath": "artifacts/art-proofs/mgjrpg-02/plan03-r1-review/assets/nav-sound-candidate-512.png",
+        "width": 512,
+        "height": 512,
+        "format": "png",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 4,
+        "maxEncodedBytes": 1048576,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        11,
+        224,
+        17
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 64
+    },
+    "registration": {
+      "targetBox": [
+        0.07,
+        0.07,
+        0.93,
+        0.93
+      ],
+      "align": [
+        0.5,
+        0.5
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "review-proof-only-deterministic-processing",
+      "description": "Uniform matte alpha unblend, decontamination, registration, and optical-size proof generation only; no runtime derivative exists.",
+      "script": "scripts/art_pipeline/mgjrpg02_plan03_r1_review.py"
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, exact execution timestamp, and request envelope were not exposed by the built-in tool.",
+    "Human source approval, runtime derivative profile, encoded-byte allocation, and catalogue publication are pending."
+  ],
+  "rights": {
+    "originClaim": "Generated fresh for Maze so Puzzle from exact prompts and internal semantic/material references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "Source-only Plan 03-R1 candidate; technical and owner rights review remains part of the later publication gate."
+  },
+  "rollback": {
+    "method": "Keep the current active catalogue pointer and runtime derivative unchanged; remove only the unapproved R1 candidate record and proof artifacts to return to the accepted Plan 03 anchor.",
+    "previousPath": "public/assets/mgjrpg-02/navigation/nav-sound-v03-navigation-optical-128-r01.webp",
+    "previousSha256": "71549884c11e182b2d07f4858a4f8025b89fcffda49d0d3435fdb89b5a5b1af8"
+  }
+}
