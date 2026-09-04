@@ -31,7 +31,11 @@ Earlier evidence is kept as historical release evidence.
 - [x] Pass the deterministic rebuild and focused alpha/provenance tests.
 - [x] Complete the full project, art, performance, desktop, and responsive
   browser checks before handing the baseline to Agent 01.
-- [ ] Commit, push, and verify the deployed v04 asset path before Agent 01 starts.
+- [x] Commit and push runtime checkpoint
+  `b0eb8a85d6f5220c2f12f29e7897315a5a6ad07c`; GitHub Browser build run
+  `33919601983` passed, the canonical Vercel asset returned HTTP 200 with the
+  exact 712,976-byte length, and deployed bundle `index-oXTJve_V.js` points to
+  v04 with v03 retained only as fallback.
 
 ## Playable 0.20.1 corrective FP-ART-OST checkpoint
 

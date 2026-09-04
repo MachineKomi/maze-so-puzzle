@@ -26,6 +26,10 @@ that preserves the unicorn's pale outer ear. The new derivative and complete
 reconstruction evidence are in
 `source-assets/publication/mgjrpg-02-home-hero-v04-correction-map.json`; v03 is
 an undeleted rollback hold.
+GitHub Browser build run `33919601983` passed for runtime checkpoint
+`b0eb8a85d6f5220c2f12f29e7897315a5a6ad07c`; the canonical Vercel asset
+returned HTTP 200 with its exact 712,976-byte length and deployed bundle
+`index-oXTJve_V.js` selects v04 while retaining v03 only as fallback.
 
 Pass 07A measured product baseline commit
 `a34de2f783d2f11c2b543541b4f46ffdf8b13fe0`. It reproduces the 0.19.0 static

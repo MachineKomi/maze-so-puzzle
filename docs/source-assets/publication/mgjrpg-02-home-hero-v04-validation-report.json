@@ -2,6 +2,7 @@
   "schema": "maze-art-home-hero-v04-validation/v1",
   "validatedOn": "2026-09-04",
   "baseCheckpoint": "556542e38f1e31a868a1ec6e382041db5ee887e6",
+  "publishedCheckpoint": "b0eb8a85d6f5220c2f12f29e7897315a5a6ad07c",
   "publicationMap": "docs/source-assets/publication/mgjrpg-02-home-hero-v04-correction-map.json",
   "runtimeAsset": {
     "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v04-front-door-1024-r01.webp",
@@ -27,6 +28,16 @@
     "consoleWarnings": 0,
     "pageOverflowObserved": false
   },
+  "deployment": {
+    "githubBrowserBuildRun": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33919601983",
+    "githubConclusion": "success",
+    "canonicalSite": "https://maze-so-puzzle.vercel.app/",
+    "deployedBundle": "https://maze-so-puzzle.vercel.app/assets/index-oXTJve_V.js",
+    "bundleSelectsV04": true,
+    "bundleRetainsV03Fallback": true,
+    "runtimeAssetStatus": 200,
+    "runtimeAssetBytes": 712976
+  },
   "checks": [
     {"command": "python scripts/art_pipeline/mgjrpg02_home_hero_v04_publish.py --check", "result": "pass", "detail": "3/3 deterministic files byte-identical"},
     {"command": "npm test -- --no-file-parallelism", "result": "pass", "detail": "424/424 tests across 38 files"},
@@ -51,7 +62,6 @@
   ],
   "pendingExternalGates": [
     "Physical iPad, television and phone inspection",
-    "Clean-host deployment fetch after push",
     "Clean Windows packaged-build qualification"
   ]
 }
