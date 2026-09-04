@@ -277,3 +277,12 @@ new Home hero, progress-v5/Stay flow and delivered OST catalogue. Direct HEAD
 requests for all 42 soundtrack files succeeded. This verifies deployment and
 static reachability, not physical-device listening, mastering, crossfade or
 low-end performance quality.
+
+Playable build 0.20.1 was pushed to GitHub `main` as runtime source commit
+`d6b11c026ead3d75565e10490c10307a5a14cfd0` on 2026-09-04. GitHub Browser
+build run 33906290349 completed successfully. The canonical index and
+`index-Dr4fqy07.js` returned HTTP 200; the bundle reports 0.20.1 and references
+the refreshed Poggle/Sprig portraits, repaired Home hero and separate title
+environment. Direct HEAD requests for all four corrective art paths succeeded.
+This verifies deployment and static reachability, not the pending physical
+iPad/TV/phone, clean-machine installation or qualified performance gates.

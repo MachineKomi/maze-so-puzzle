@@ -6,7 +6,7 @@
 
 A gentle, browser-first fantasy maze game for young players, with an optional
 Windows desktop build powered by Tauri 2. This README describes the playable
-0.20.0 Art & OST Preview, which remains an active prototype. Its automated
+0.20.1 corrective Art & OST Preview, which remains an active prototype. Its automated
 browser gate and refreshed unsigned Windows packaging are verified. The
 verified source is deployed through the canonical Vercel site; physical-device
 family play-testing remains a separate gate.
@@ -61,27 +61,27 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.20.0 Art & OST
+The current verified desktop artifacts are the unsigned 0.20.1 corrective Art & OST
 Preview:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.20.0-portable.exe`
-  (159,363,584 bytes; SHA-256
-  `3821393D28BFB35C3A09E0B4D9910033ECF90ABC7BFEC4941BAE107623124700`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.20.0-setup.exe`
-  (153,558,591 bytes; SHA-256
-  `599C1CE95C9172B969AFCC8949801C38A7157B80CC9A107D747206B959FC346B`).
+- Portable test copy: `release/Maze-so-Puzzle-0.20.1-portable.exe`
+  (160,436,224 bytes; SHA-256
+  `1FF30C2D5F58A60A2D4FAD44443A1D61D5A3B7DF66D4A96E86858E725D2B8777`).
+- NSIS installer test copy: `release/Maze-so-Puzzle-0.20.1-setup.exe`
+  (154,642,433 bytes; SHA-256
+  `09208147AE5FFB7DED0640257B6978ADB9A79210619E469F821D9D055757F143`).
   Executables are deliberately
   excluded from source history and should be attached to a GitHub Release.
 - Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
   (this mutable path byte-matches the staged portable copy).
 - Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.20.0_x64-setup.exe` (byte-matches the staged
+  Puzzle - For Ame to Solve!_0.20.1_x64-setup.exe` (byte-matches the staged
   setup copy).
-- Both executables report file/product version 0.20.0. The portable app remained
+- Both executables report file/product version 0.20.1. The portable app remained
   responsive for a six-second smoke launch and showed the correct game title.
   This family preview uses the separate
   `com.ame.mazesopuzzle.preview` desktop data namespace.
-- The verified 0.20.0 hashes and retained archive hashes are recorded in
+- The verified 0.20.1 hashes and retained archive hashes are recorded in
   [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
   out of Git history and can be published separately as GitHub Release assets.
 
@@ -115,7 +115,7 @@ Preview:
 
 ## Tester preview mode
 
-On the title screen, click or tap the small **Playable build 0.20.0** label to
+On the Home screen, click or tap the small **Playable build 0.20.1** label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -130,7 +130,16 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.20.0
+## Included in playable build 0.20.1
+
+- A separate illustrated title screen now precedes Home. Professor Poggle and
+  Sprig use final-style story portraits, and the repaired Home hero has clean
+  transparency plus a restrained separation glow.
+- All approved ordinary and mythic friends are available to generated mazes and
+  the Adventure Book. The friend ledger uses denser cards, larger portraits,
+  bounded scrolling, and explicit Expand/Default/Collapse controls.
+- Flower teleporters no longer carry redundant emoji labels. Door magic is
+  longer and richer while Ame remains visible on her origin tile throughout.
 
 - The approved `mgjrpg-02` static-art catalogue now supplies Ame, items,
   friends, enemies, terrain, rewards and premium sticker-style navigation.
@@ -481,8 +490,8 @@ migrations, current-state reachability, progressive hints, route-quality
 metrics, fixed Surprise seeds, complete friend/enemy personality maps, scoped
 large-maze object mounting, and below-fold portrait lazy loading.
 
-The 0.20.0 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.20.0, and are size-checked and
+The 0.20.1 Tauri portable executable and NSIS installer byte-match their final
+build outputs, report file/product version 0.20.1, and are size-checked and
 SHA-256 hashed. The portable app also passed a responsive six-second launch
 smoke with the correct title. Clean-machine installation, signing, and
 physical-device checks remain separate release gates. The release source is
@@ -498,7 +507,7 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.20.0 Windows test installer is unsigned, so Windows SmartScreen
+The current 0.20.1 Windows test installer is unsigned, so Windows SmartScreen
 may show a warning. Any future broadly distributed Windows release should be
 code-signed.
 

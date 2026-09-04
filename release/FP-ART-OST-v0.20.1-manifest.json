@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "milestone": "FP-ART-OST-CORRECTIVE",
+  "releaseType": "family-playtest-preview",
+  "version": "0.20.1",
+  "runtimeSourceCommit": "d6b11c026ead3d75565e10490c10307a5a14cfd0",
+  "releaseTag": "v0.20.1",
+  "applicationDataNamespace": "com.ame.mazesopuzzle.preview",
+  "artifacts": [
+    {
+      "name": "Maze-so-Puzzle-0.20.1-portable.exe",
+      "bytes": 160436224,
+      "sha256": "1ff30c2d5f58a60a2d4fad44443a1d61d5a3b7df66d4a96e86858e725d2b8777",
+      "sourceMatches": "src-tauri/target/release/maze-so-puzzle.exe"
+    },
+    {
+      "name": "Maze-so-Puzzle-0.20.1-setup.exe",
+      "bytes": 154642433,
+      "sha256": "09208147ae5ffb7ded0640257b6978adb9a79210619e469f821d9d055757f143",
+      "sourceMatches": "src-tauri/target/release/bundle/nsis/Maze so Puzzle - For Ame to Solve!_0.20.1_x64-setup.exe"
+    }
+  ],
+  "toolchain": {
+    "os": "Microsoft Windows 11 Home 10.0.26200 build 26200",
+    "node": "24.13.1",
+    "npm": "11.8.0",
+    "rustc": "1.96.0",
+    "cargo": "1.96.0",
+    "tauriCli": "2.11.4"
+  },
+  "verification": {
+    "npmCheck": "423/423 tests, strict TypeScript and production build passed",
+    "artTests": "111/111 passed",
+    "artValidation": "passed with zero errors and 420 classified non-blocking warnings",
+    "performanceContracts": "passed all deterministic contracts and budgets",
+    "scenarioFixtures": "4/4 passed",
+    "desktopCompilation": "cargo check --locked passed",
+    "desktopBuild": "portable executable and NSIS bundle passed and report 0.20.1",
+    "portableLaunchSmoke": "responsive after six seconds with the expected window title",
+    "browserJourney": "title, Home, Adventure Book modes, Poggle/Sprig stories, portal cleanup and visible-player door interaction passed at 1280x720 and 844x390 with zero console warnings/errors",
+    "githubCi": "Browser build run 33906290349 passed for the runtime source commit",
+    "vercel": "canonical index and bundle index-Dr4fqy07.js returned 200 and exposed 0.20.1 plus all four corrective asset paths"
+  },
+  "externalGatesPending": [
+    "physical iPad, television and phone family review",
+    "clean-machine NSIS installation",
+    "code signing and SmartScreen reputation",
+    "qualified low-end and Tauri performance cohorts",
+    "complete all-level Human playthrough"
+  ]
+}

@@ -1,17 +1,17 @@
 # Project audit
 
 Audit date: 2026-09-04
-Audited build: 0.20.0 FP-ART-OST web/Windows playable preview
+Audited build: 0.20.1 corrective FP-ART-OST web/Windows playable preview
 Plan 03 publication update: 2026-09-04
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-04 the integrated 0.20.0 suite passed 423 tests
+real-device testing. On 2026-09-04 the integrated 0.20.1 suite passed 423 tests
 across 38 files plus strict TypeScript and the Vite production build; art,
 performance-contract and locked desktop checks also passed. Browser QA covered
 the approved front door, contextual OST requests and recoverable completion
-flow without console errors. Unsigned 0.20.0 portable and setup artifacts were
+flow without console errors. Unsigned 0.20.1 portable and setup artifacts were
 built and byte-verified, and the portable executable passed a responsive
 six-second launch smoke in an isolated preview data namespace. Physical-device
 touch/listening/feel, clean-machine installation, signing, qualified low-end
@@ -308,7 +308,19 @@ below is preserved and does not validate this later implementation candidate.
 The maintained design contract, complete experience matrix, route rubric, and
 family playtest protocol are in `GAMEPLAY_DESIGN_SPEC.md`.
 
-## Current 0.20.0 FP-ART-OST preview status
+## Current 0.20.1 corrective FP-ART-OST preview status
+
+| Area | Current evidence | Status |
+| --- | --- | --- |
+| Automated gate | Full suite, TypeScript and production build | 423/423 tests passed; 111/111 art tests passed; art validation has zero errors; scenario and performance contracts pass |
+| Active art audit | Semantic catalogue, generated projection and live consumers | Poggle and Sprig were the only genuine legacy-style gaps and are replaced; Goblin and Violet Moon remain approved exceptions |
+| Front door | Separate title route plus repaired Home hero | 1280x720 and 844x390 browser checks passed without overflow or console warnings/errors |
+| Friends/Book | Complete approved generated-friend pool plus bounded ledger | Surprise generation and the Book expose all 32 friends; authored-campaign placement remains owned by Plan 09 |
+| Doors/portals | Visible-player stationary door sequence and flower-pad cleanup | Browser assertion confirmed Ame remains visible during opening; redundant portal glyph is absent |
+| Hosting | GitHub source commit `d6b11c0`; canonical Vercel production | Browser build run 33906290349 passed; hosted bundle `index-Dr4fqy07.js` reports 0.20.1 and all four corrective assets return HTTP 200 |
+| Desktop artifacts | Unsigned portable and NSIS setup | Both report 0.20.1, byte-match build outputs, and pass inventory; portable smoke passed; exact evidence is in `release/FP-ART-OST-v0.20.1-manifest.json` |
+
+## Historical 0.20.0 FP-ART-OST preview status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
@@ -340,33 +352,33 @@ family playtest protocol are in `GAMEPLAY_DESIGN_SPEC.md`.
 ## Historical 0.18.0 release status
 
 The 0.18.0 clearer-rewards release remains recorded in the changelog and
-release checklist. It is superseded by the current 0.20.0 preview.
+release checklist. It is superseded by the current 0.20.1 preview.
 
 ## Historical 0.17.0 release status
 
 The 0.17.0 illustrated-keepsake release remains recorded in the changelog and
-release checklist. It is superseded by the current 0.20.0 preview.
+release checklist. It is superseded by the current 0.20.1 preview.
 
 ## Historical 0.14.0 release status
 
 The 0.14.0 compact-room and procedural-scrapbook release remains recorded in
-the changelog and release checklist. It is superseded by the current 0.20.0 preview.
+the changelog and release checklist. It is superseded by the current 0.20.1 preview.
 
 ## Historical 0.13.0 release status
 
 The 0.13.0 Puzzlewild read-together story release remains recorded in the
-changelog and release checklist. It is superseded by the current 0.20.0 preview.
+changelog and release checklist. It is superseded by the current 0.20.1 preview.
 
 ## Historical 0.12.0 release status
 
 The 0.12.0 exploration-reward, prerequisite-help, lighting, and Power-99 release
 remains recorded in the changelog and release checklist. It is superseded by
-the current 0.20.0 preview rather than deleted.
+the current 0.20.1 preview rather than deleted.
 
 ## Historical 0.10.3 release status
 
 The 0.10.3 browser and Windows evidence remains in the release checklist and
-changelog. It is superseded by the current 0.20.0 preview rather than deleted.
+changelog. It is superseded by the current 0.20.1 preview rather than deleted.
 
 ## Historical 0.10.2 release status
 
