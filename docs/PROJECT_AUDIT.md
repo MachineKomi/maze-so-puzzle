@@ -1,23 +1,22 @@
 # Project audit
 
-Audit date: 2026-09-02
-Audited build: 0.19.0 web/Windows playable release
+Audit date: 2026-09-04
+Audited build: 0.20.0 FP-ART-OST web/Windows playable preview
 Plan 03 publication update: 2026-09-04
 
 This is a housekeeping snapshot for the current playable prototype. It records
 what was actually checked, separates product choices from defects, and keeps the
 remaining work ordered by risk. It is not a substitute for clean-machine and
-real-device testing. On 2026-09-02 the integrated 0.19.0 suite passed 316 tests
-across 27 files plus strict TypeScript and the Vite production build. The npm
-production audit reports zero vulnerabilities; `npm ls` is clean, and
-`cargo check --locked` passes. Browser QA at desktop, iPad, and phone aspect
-ratios found the illustrated Book and UI readable with no document overflow or
-console errors. Unsigned 0.19.0 portable and setup artifacts were built and
-byte-verified, and the portable executable passed a five-second launch smoke.
-Physical-device touch/listening/feel,
-clean-machine installation, signing, and the broader manual production
-walkthrough also remain open. Older sections are kept as clearly labelled
-historical evidence.
+real-device testing. On 2026-09-04 the integrated 0.20.0 suite passed 423 tests
+across 38 files plus strict TypeScript and the Vite production build; art,
+performance-contract and locked desktop checks also passed. Browser QA covered
+the approved front door, contextual OST requests and recoverable completion
+flow without console errors. Unsigned 0.20.0 portable and setup artifacts were
+built and byte-verified, and the portable executable passed a responsive
+six-second launch smoke in an isolated preview data namespace. Physical-device
+touch/listening/feel, clean-machine installation, signing, qualified low-end
+performance and the broader manual walkthrough remain open. Older sections are
+kept as clearly labelled historical evidence.
 
 Pass 07A measured product baseline commit
 `a34de2f783d2f11c2b543541b4f46ffdf8b13fe0`. It reproduces the 0.19.0 static
@@ -290,7 +289,7 @@ The current inventory is 167 runtime assets / 138,324,740 B and 172 dist files /
 138,927,331 B. These are pre-existing/concurrent audio findings, not Plan 03 art
 regressions and not authority to edit the OST in this task.
 
-## Current gameplay-systems implementation candidate
+## Accepted Plan 06 gameplay-systems checkpoint (pre-03M evidence)
 
 This candidate was implemented from manager checkpoint
 `555cdd622a98bd77585f2e60f1096712392d71b3`; the historical 0.19.0 evidence
@@ -309,7 +308,18 @@ below is preserved and does not validate this later implementation candidate.
 The maintained design contract, complete experience matrix, route rubric, and
 family playtest protocol are in `GAMEPLAY_DESIGN_SPEC.md`.
 
-## Current 0.19.0 release status
+## Current 0.20.0 FP-ART-OST preview status
+
+| Area | Current evidence | Status |
+| --- | --- | --- |
+| Automated gate | Full suite, TypeScript and production build | 423/423 tests passed; art validation has zero errors; performance contracts pass |
+| Static art | Approved `mgjrpg-02` publication and Plan 03-R2 front door | Refreshed active consumers render; dormant catalogue art remains unplaced until its gameplay owner |
+| Soundtrack | 42 delivered originals in six semantic pools | All hosted URLs pass; five current contexts are wired, Garden is reserved for Plan 10, and Plan 07B owns final crossfades/prefetch/listening |
+| Completion/doors | Pending win, exactly-once progress receipt and stationary door contracts | Automated tests pass; browser Chapter 1 Stay/re-entry/Next journey passed |
+| Hosting | GitHub source commit `45dfda2`; canonical Vercel production | Browser build run 33897322239 passed; hosted bundle reports 0.20.0 and all 42 OST paths respond |
+| Desktop artifacts | Unsigned portable and NSIS setup | Both report 0.20.0 and byte-match build outputs; portable smoke passed; exact evidence is in `release/FP-ART-OST-v0.20.0-manifest.json` |
+
+## Historical 0.19.0 release status
 
 | Area | Current evidence | Status |
 | --- | --- | --- |
@@ -330,33 +340,33 @@ family playtest protocol are in `GAMEPLAY_DESIGN_SPEC.md`.
 ## Historical 0.18.0 release status
 
 The 0.18.0 clearer-rewards release remains recorded in the changelog and
-release checklist. It is superseded by the current 0.19.0 gate.
+release checklist. It is superseded by the current 0.20.0 preview.
 
 ## Historical 0.17.0 release status
 
 The 0.17.0 illustrated-keepsake release remains recorded in the changelog and
-release checklist. It is superseded by the current 0.19.0 gate.
+release checklist. It is superseded by the current 0.20.0 preview.
 
 ## Historical 0.14.0 release status
 
 The 0.14.0 compact-room and procedural-scrapbook release remains recorded in
-the changelog and release checklist. It is superseded by the current 0.19.0 gate.
+the changelog and release checklist. It is superseded by the current 0.20.0 preview.
 
 ## Historical 0.13.0 release status
 
 The 0.13.0 Puzzlewild read-together story release remains recorded in the
-changelog and release checklist. It is superseded by the current 0.19.0 gate.
+changelog and release checklist. It is superseded by the current 0.20.0 preview.
 
 ## Historical 0.12.0 release status
 
 The 0.12.0 exploration-reward, prerequisite-help, lighting, and Power-99 release
 remains recorded in the changelog and release checklist. It is superseded by
-the current 0.19.0 gate rather than deleted.
+the current 0.20.0 preview rather than deleted.
 
 ## Historical 0.10.3 release status
 
 The 0.10.3 browser and Windows evidence remains in the release checklist and
-changelog. It is superseded by the current 0.19.0 gate rather than deleted.
+changelog. It is superseded by the current 0.20.0 preview rather than deleted.
 
 ## Historical 0.10.2 release status
 

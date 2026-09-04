@@ -1,6 +1,6 @@
 # Release checklist
 
-Verification date: 2026-09-02
+Verification date: 2026-09-04
 Plan 03 publication update: 2026-09-04
 
 Use this checklist for the exact commit and artifacts that will be shared. A
@@ -17,6 +17,35 @@ setup builds were built, hashed, byte-compared, versioned, and smoke-tested.
 Physical-device touch/listening/feel, accessibility, clean-machine installation,
 signing, and the broader manual play-through remain deliberately unclaimed.
 Earlier evidence is kept as historical release evidence.
+
+## Playable 0.20.0 FP-ART-OST checkpoint
+
+- [x] Runtime source committed and pushed as
+  `45dfda27c9f7c60b1dd8c42fd0f9e06e1801f58c`.
+- [x] `npm run check`: 423/423 tests across 38 files, strict TypeScript and the
+  Vite production build passed.
+- [x] `npm run art:test`: 111/111 passed; non-writing art validation reports
+  zero errors and 420 already-classified non-blocking warnings.
+- [x] Performance contracts/budgets and `cargo check --locked` passed.
+- [x] Browser QA at 1280x720 covered the approved front door, story/maze/victory
+  audio requests, Chapter 1 completion, **Stay here**, exit rearming, and the
+  exactly-once **Next maze** commit with zero console warnings/errors.
+- [x] GitHub Browser build run
+  [33897322239](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33897322239)
+  passed for the runtime source commit.
+- [x] The canonical Vercel index and `index-CwB1ah1Q.js` returned HTTP 200 and
+  exposed build 0.20.0, the new OST catalogue, Home hero, progress v5 and Stay
+  flow. All 42 hosted MP3 paths returned a successful HEAD response.
+- [x] Tauri/NSIS build passed. Both staged artifacts byte-match their final
+  build outputs and report file/product version 0.20.0.
+- [x] The portable build remained live and responsive for six seconds with the
+  expected window title. It uses the isolated
+  `com.ame.mazesopuzzle.preview` application-data namespace.
+- [x] Exact sizes, hashes, toolchain, gates and known limitations are recorded
+  in `release/FP-ART-OST-v0.20.0-manifest.json`; the family journey is in the
+  adjacent playtest note.
+- [ ] Physical iPad/TV/phone review, clean-machine installer test, signing,
+  low-end/Tauri qualification and complete campaign playthrough remain pending.
 
 ## Unreleased Plan 03-R1 publication
 

@@ -268,3 +268,12 @@ and colour/motif door-burst contracts. Local production-browser checks at
 1280×720 and 1024×768 exercised live hazards, the Blue Star Key glow, and a
 single 18-particle Blue Star Door opening with no document overflow or browser
 warning/error logs. Earlier release paragraphs remain historical evidence.
+
+Playable build 0.20.0 FP-ART-OST was pushed to GitHub `main` as runtime source
+commit `45dfda27c9f7c60b1dd8c42fd0f9e06e1801f58c` on 2026-09-04. GitHub Browser
+build run 33897322239 completed successfully. The canonical index and
+`index-CwB1ah1Q.js` returned HTTP 200; the bundle reports 0.20.0 and contains the
+new Home hero, progress-v5/Stay flow and delivered OST catalogue. Direct HEAD
+requests for all 42 soundtrack files succeeded. This verifies deployment and
+static reachability, not physical-device listening, mastering, crossfade or
+low-end performance quality.

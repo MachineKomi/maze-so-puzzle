@@ -216,6 +216,11 @@ Plan 08 implements shared browser/Tauri controller support and a tested Steam De
 
 ### 5.9 Root compatibility and gameplay-contract checkpoint (03M)
 
+**Completed 2026-09-04.** Runtime source commit
+`45dfda27c9f7c60b1dd8c42fd0f9e06e1801f58c` implements and tests this
+checkpoint. The `FP-ART-OST` v0.20.0 browser/Windows preview records its release
+evidence under `release/`.
+
 After Plan 03 is accepted and pushed, the root manager performs one bounded
 compatibility/contract interlude before issuing the Plan-01 prompt. It is not a
 new specialist redesign phase. It restores an honest green shared baseline and
@@ -260,10 +265,10 @@ a root-reviewed committed and pushed checkpoint.
 
 The Human-delivered original soundtrack is now present in six approved physical
 pools under `public/assets/ost/`: `title`, `story`, `maze`, `victory`, `garden`
-and `adventure-book`. Its 42 MP3s are content authority, but the current player
-and tests still reference the removed flat placeholder catalogue. Checkpoint
-03M must restore a valid catalogue/current adapter with no missing URL. Plan 07B
-then rebaselines the deliberate media increase and implements/qualifies the full
+and `adventure-book`. Its 42 MP3s are content authority. Checkpoint 03M replaced
+the removed flat placeholder catalogue with the valid catalogue/current adapter
+and proved every deployed URL. Plan 07B then rebaselines the deliberate media
+increase and implements/qualifies the full
 contextual controller behind the frozen port; neither owner may preserve an
 obsolete byte target by silently omitting Human tracks.
 
