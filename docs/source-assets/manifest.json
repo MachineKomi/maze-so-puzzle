@@ -84,9 +84,14 @@
         "bytes": 42291
       },
       {
+        "path": "scripts/art_pipeline/mgjrpg02_plan03_r1_logo_revision.py",
+        "sha256": "730e0201f77333b28420a4849847e47fc499a078b0a51f36b2b490f6f21645b4",
+        "bytes": 37426
+      },
+      {
         "path": "scripts/art_pipeline/mgjrpg02_plan03_r1_review.py",
-        "sha256": "9caadc07e8453877ecee92e056dbfb1d339451d98eb03144010330ccdeb9b4a9",
-        "bytes": 58224
+        "sha256": "312be29e4589484970603cc21bcaf6e5dab9f322f2261890fa0b364d9376c65b",
+        "bytes": 58786
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02_publish.py",
@@ -130,8 +135,8 @@
       },
       {
         "path": "scripts/art_pipeline/tests/test_generation_batch.py",
-        "sha256": "ea34121109f25fa50a171ebc0e579f52682c43cc325c0d721505e645e8f2faeb",
-        "bytes": 14982
+        "sha256": "8601717e92225be760b8a0eb4a12dd6ec1a2838714d097e1edfc565b40c2b140",
+        "bytes": 14194
       },
       {
         "path": "scripts/art_pipeline/tests/test_mgjrpg02_achievement_stickers.py",
@@ -567,6 +572,15 @@
           "nav-muted-mgjrpg02-v03-source",
           "nav-restart-mgjrpg02-v03-source",
           "nav-sound-mgjrpg02-v04-source"
+        ]
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/PROMPTS.md",
+        "sha256": "77058a39dd544c01a912ab628cfc151003b482b93d6ff5ec052142345893ecff",
+        "bytes": 8747,
+        "referencedBy": [
+          "batch:mgjrpg-02-batch-24-plan03-r1-logo-revision",
+          "game-logo-mgjrpg02-v03-source"
         ]
       }
     ],
@@ -1033,11 +1047,11 @@
       },
       {
         "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/run-record.json",
-        "sha256": "18377b906d3528746fbbb0519288e17e80793effc0a9e5675464be046013fcfe",
-        "bytes": 32105,
+        "sha256": "895c2ec8cded6d79462ee3b38a2f3f3726be92e851d66631653c062aa95fc38e",
+        "bytes": 32729,
         "batchId": "mgjrpg-02-batch-23-plan03-r1-premium-ui-logo",
         "revision": 1,
-        "status": "pending-human-review",
+        "status": "reviewed",
         "promptFile": {
           "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/PROMPTS.md",
           "fidelity": "exact-shared-block-plus-exact-subject-block",
@@ -1047,6 +1061,26 @@
         "runCount": 11,
         "generatorOriginalEncodedBytes": 13988618,
         "generatorOriginalDecodedBytesUpperBound": 69193548,
+        "approvedDerivativeCount": 0,
+        "approvedDerivativeEncodedBytes": 0,
+        "approvedDerivativeDecodedBytesUpperBound": 0
+      },
+      {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/run-record.json",
+        "sha256": "e1c281264c82646dd9ddcef543af6abb37e2d4750cfbf787ae8e5e7f55c916b1",
+        "bytes": 11050,
+        "batchId": "mgjrpg-02-batch-24-plan03-r1-logo-revision",
+        "revision": 1,
+        "status": "reviewed",
+        "promptFile": {
+          "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/PROMPTS.md",
+          "fidelity": "exact",
+          "sha256": "77058a39dd544c01a912ab628cfc151003b482b93d6ff5ec052142345893ecff",
+          "bytes": 8747
+        },
+        "runCount": 3,
+        "generatorOriginalEncodedBytes": 6035634,
+        "generatorOriginalDecodedBytesUpperBound": 18874368,
         "approvedDerivativeCount": 0,
         "approvedDerivativeEncodedBytes": 0,
         "approvedDerivativeDecodedBytesUpperBound": 0
@@ -1226,27 +1260,32 @@
         "path": "docs/source-assets/calibrations/mgjrpg-02/v07/human-decision.json",
         "sha256": "6cd1ccc8d226d55616fe2050f544f6b4101ff85fd154ea8d0fff1bb334df04e9",
         "bytes": 3799
+      },
+      {
+        "path": "docs/source-assets/calibrations/mgjrpg-02/v08/human-decision.json",
+        "sha256": "eb445e290287e84c0a45ae8ebbd28e8dee02b30dc8e0fc53a60d032b64ea54a8",
+        "bytes": 4877
       }
     ]
   },
   "summary": {
-    "recordCount": 278,
+    "recordCount": 279,
     "runtimeImageCount": 269,
     "runtimeEncodedBytes": 48540161,
     "runtimeDecodedBytesUpperBound": 290949024,
-    "sourceImageCount": 389,
-    "sourceEncodedBytes": 564014828,
+    "sourceImageCount": 392,
+    "sourceEncodedBytes": 570050462,
     "unreferencedSourceImageCount": 3,
-    "generationBatchCount": 24,
-    "generationBatchOutputCount": 251,
-    "generationBatchEncodedBytes": 378729555,
-    "generationBatchDecodedBytesUpperBound": 1578827880,
+    "generationBatchCount": 25,
+    "generationBatchOutputCount": 254,
+    "generationBatchEncodedBytes": 384765189,
+    "generationBatchDecodedBytesUpperBound": 1597702248,
     "renderingRecipeFileCount": 1,
     "renderingRecipeBytes": 8645,
     "canaryReviewFileCount": 2,
     "canaryReviewBytes": 19395,
-    "calibrationAuthorityFileCount": 31,
-    "calibrationAuthorityBytes": 31950184,
+    "calibrationAuthorityFileCount": 32,
+    "calibrationAuthorityBytes": 31955061,
     "sourceStatusCounts": [
       {
         "name": "legacy-runtime-only",
@@ -1258,7 +1297,7 @@
       },
       {
         "name": "source-backed",
-        "count": 154
+        "count": 155
       }
     ],
     "approvalStatusCounts": [
@@ -1268,15 +1307,15 @@
       },
       {
         "name": "design-approved",
-        "count": 1
+        "count": 9
       },
       {
         "name": "historical",
         "count": 125
       },
       {
-        "name": "pending-human",
-        "count": 8
+        "name": "rejected",
+        "count": 1
       }
     ]
   },
@@ -4037,7 +4076,7 @@
     },
     {
       "path": "docs/source-assets/records/game-logo-mgjrpg02-v02-source.json",
-      "sha256": "229b72dccc85b0c7b1118ce46d22e2ac33d0665ffbc10c7c7f3cc9afe5687186",
+      "sha256": "97fe0399a01338c4ecc6d52f1ebebd90d965527a8aa2e41fb7cad2cd635b6a07",
       "recordId": "game-logo-mgjrpg02-v02-source",
       "schemaVersion": 2,
       "id": "game-logo",
@@ -4045,7 +4084,7 @@
       "family": "brand",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "rejected",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -4057,6 +4096,30 @@
       "generationRunCount": 1,
       "derivativeRecipeVersion": "proposed-plan11-branding-r01",
       "sourceCount": 3,
+      "derivativeCount": 0
+    },
+    {
+      "path": "docs/source-assets/records/game-logo-mgjrpg02-v03-source.json",
+      "sha256": "9c541b491df4f94c6c221d96242ce2897fb5cec3b05b26d9a60e5ba3ce03f232",
+      "recordId": "game-logo-mgjrpg02-v03-source",
+      "schemaVersion": 2,
+      "id": "game-logo",
+      "artVersion": 3,
+      "family": "brand",
+      "runtimeStatus": "source-only",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "design-approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 3,
+      "derivativeRecipeVersion": "proposed-plan11-branding-r02",
+      "sourceCount": 6,
       "derivativeCount": 0
     },
     {
@@ -5037,7 +5100,7 @@
     },
     {
       "path": "docs/source-assets/records/nav-book-mgjrpg02-v03-source.json",
-      "sha256": "4b9866ccf37660ea1d3963429a53328557347079758e736904e63afe3f62a46f",
+      "sha256": "164c8a73273ddacaffa136cbd8d4f7e178b4c5b8890fa4d2b6ea97aeae5ec702",
       "recordId": "nav-book-mgjrpg02-v03-source",
       "schemaVersion": 2,
       "id": "nav-book",
@@ -5045,7 +5108,7 @@
       "family": "navigation",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "design-approved",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -5105,7 +5168,7 @@
     },
     {
       "path": "docs/source-assets/records/nav-help-mgjrpg02-v03-source.json",
-      "sha256": "20d21c2576cd89f8144a756e3fa7c9c8d1e6f0a68513d1f49a5db329de9b5b32",
+      "sha256": "b299e10b812015978e28e11027065048690adbc8ffbae6bc3c32fe01a098b1cc",
       "recordId": "nav-help-mgjrpg02-v03-source",
       "schemaVersion": 2,
       "id": "nav-help",
@@ -5113,7 +5176,7 @@
       "family": "navigation",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "design-approved",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -5173,7 +5236,7 @@
     },
     {
       "path": "docs/source-assets/records/nav-home-mgjrpg02-v04-source.json",
-      "sha256": "329065499302956f50f013d497db3d193ffccc2140df61af38d45b56495c11e6",
+      "sha256": "568748025f974bfa79c2eef502003b34e0ca247598da136bbfbf3faa80103dfe",
       "recordId": "nav-home-mgjrpg02-v04-source",
       "schemaVersion": 2,
       "id": "nav-home",
@@ -5181,7 +5244,7 @@
       "family": "navigation",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "design-approved",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -5241,7 +5304,7 @@
     },
     {
       "path": "docs/source-assets/records/nav-mazes-mgjrpg02-v05-source.json",
-      "sha256": "cc5637dd69dacb9d82030b8443350597e488534974ad94135b4dc7941d873d97",
+      "sha256": "6e3051090e3181f4216afb55953d49b61089420b962470924c82854491c138a6",
       "recordId": "nav-mazes-mgjrpg02-v05-source",
       "schemaVersion": 2,
       "id": "nav-mazes",
@@ -5249,7 +5312,7 @@
       "family": "navigation",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "design-approved",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -5309,7 +5372,7 @@
     },
     {
       "path": "docs/source-assets/records/nav-muted-mgjrpg02-v03-source.json",
-      "sha256": "2887d5a99b521c5116624958cff436e20021bced3d249e6d36cd85fb7cdc9178",
+      "sha256": "da681268feebd091868ec22dcbe3161e6bf4bc1c17f558b1e4d8ae22ae901ad0",
       "recordId": "nav-muted-mgjrpg02-v03-source",
       "schemaVersion": 2,
       "id": "nav-muted",
@@ -5317,7 +5380,7 @@
       "family": "navigation",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "design-approved",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -5357,7 +5420,7 @@
     },
     {
       "path": "docs/source-assets/records/nav-restart-mgjrpg02-v03-source.json",
-      "sha256": "06a927c31a6353924d57b53685a5b8f43af59a1e9e4d8ac28111b1fc76b5fdf6",
+      "sha256": "b8a39e85f5605d7539819f2a4ad99a4f7f68a0a9a4e08da98682ac11de1375cf",
       "recordId": "nav-restart-mgjrpg02-v03-source",
       "schemaVersion": 2,
       "id": "nav-restart",
@@ -5365,7 +5428,7 @@
       "family": "navigation",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "design-approved",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -5425,7 +5488,7 @@
     },
     {
       "path": "docs/source-assets/records/nav-sound-mgjrpg02-v04-source.json",
-      "sha256": "a2e1f7b683c57f9257a02b4a27e636aa63ae9f43756d54a94f04137d216d6e1e",
+      "sha256": "cae6da0ef26353319d62372af9168af025f0219fdc5002aac5e8505a52e53351",
       "recordId": "nav-sound-mgjrpg02-v04-source",
       "schemaVersion": 2,
       "id": "nav-sound",
@@ -5433,7 +5496,7 @@
       "family": "navigation",
       "runtimeStatus": "source-only",
       "sourceStatus": "source-backed",
-      "approvalStatus": "pending-human",
+      "approvalStatus": "design-approved",
       "validationProfile": "strict-v2",
       "artRecipeVersion": "mgjrpg-02",
       "recipeEvidence": {
@@ -16828,7 +16891,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-21-front-door-art",
-        "game-logo-mgjrpg02-v02-source"
+        "game-logo-mgjrpg02-v02-source",
+        "game-logo-mgjrpg02-v03-source"
       ]
     },
     {
@@ -17043,7 +17107,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-maze-mapper-mgjrpg02-v02-source",
-        "batch:mgjrpg-02-batch-22-achievement-stickers"
+        "batch:mgjrpg-02-batch-22-achievement-stickers",
+        "game-logo-mgjrpg02-v03-source"
       ]
     },
     {
@@ -17075,7 +17140,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-pathfinder-mgjrpg02-v02-source",
-        "batch:mgjrpg-02-batch-22-achievement-stickers"
+        "batch:mgjrpg-02-batch-22-achievement-stickers",
+        "game-logo-mgjrpg02-v03-source"
       ]
     },
     {
@@ -17421,6 +17487,54 @@
       "referencedBy": [
         "batch:mgjrpg-02-batch-23-plan03-r1-premium-ui-logo",
         "nav-sound-mgjrpg02-v04-source"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "bytes": 2002922,
+      "width": 1536,
+      "height": 1024,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6291456,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-24-plan03-r1-logo-revision",
+        "game-logo-mgjrpg02-v03-source"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-lowercase-edit-01-generator-original.png",
+      "sha256": "caccbf6a04226e570c4e8295c933ad2ff0e94de71ff6f4ff9a357217d7e74403",
+      "bytes": 2008348,
+      "width": 1536,
+      "height": 1024,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6291456,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-24-plan03-r1-logo-revision",
+        "game-logo-mgjrpg02-v03-source"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-matte-01-generator-original.png",
+      "sha256": "3dc9e80afaf4005d4d4df87b8cf8c632c1e4093a88946748e0f365fc7e96e7df",
+      "bytes": 2024364,
+      "width": 1536,
+      "height": 1024,
+      "format": "png",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6291456,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:mgjrpg-02-batch-24-plan03-r1-logo-revision",
+        "game-logo-mgjrpg02-v03-source"
       ]
     },
     {

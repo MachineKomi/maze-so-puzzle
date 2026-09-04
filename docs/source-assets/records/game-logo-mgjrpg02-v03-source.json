@@ -1,0 +1,288 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "game-logo-mgjrpg02-v03-source",
+  "id": "game-logo",
+  "artVersion": 3,
+  "family": "brand",
+  "runtimeStatus": "source-only",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "design-approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "proposed-plan11-branding-r02",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-24-game-logo-v03-candidate-b-matte-01",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/PROMPTS.md",
+        "sha256": "77058a39dd544c01a912ab628cfc151003b482b93d6ff5ec052142345893ecff"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "composition-authority",
+          "authorityKind": "immutable-generator-original",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/game-logo-concept-v01-candidate-a-alpha-attempt-01-generator-original.png",
+          "sha256": "259f3b954db4b44698c1daeac8da2755dc20592536a30f2c9ed8ee36d1e1c55e"
+        },
+        {
+          "order": 2,
+          "role": "material-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-pathfinder-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "2909655eec2802762500c0253927163e34228fe94fda989071cf5935de61b1d2"
+        },
+        {
+          "order": 3,
+          "role": "material-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-maze-mapper-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "020cc737ebc3189fb71f79d874718eded00a9f9d9f8cb08041f389d93fe025bf"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-1c029032-219a-46ef-806b-778ab626c5e3.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-matte-01-generator-original.png",
+          "sha256": "3dc9e80afaf4005d4d4df87b8cf8c632c1e4093a88946748e0f365fc7e96e7df",
+          "bytes": 2024364,
+          "disposition": "superseded",
+          "reason": "Retained as the fresh generated base for one bounded lowercase-plaque edit."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Fresh re-authoring; no Batch 23 deterministic pixels were used."
+    },
+    {
+      "runId": "batch-24-game-logo-v03-candidate-b-lowercase-edit-01",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/PROMPTS.md",
+        "sha256": "77058a39dd544c01a912ab628cfc151003b482b93d6ff5ec052142345893ecff"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "edit-target",
+          "authorityKind": "immutable-generator-original",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-matte-01-generator-original.png",
+          "sha256": "3dc9e80afaf4005d4d4df87b8cf8c632c1e4093a88946748e0f365fc7e96e7df"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-c68cd98c-1ad6-4ef0-a988-f8120173ecfe.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-lowercase-edit-01-generator-original.png",
+          "sha256": "caccbf6a04226e570c4e8295c933ad2ff0e94de71ff6f4ff9a357217d7e74403",
+          "bytes": 2008348,
+          "disposition": "superseded",
+          "reason": "Retained as technical evidence; internal green/black generation gaps remained visible after extraction."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Single bounded text correction from the fresh generator original; source edit depth one."
+    },
+    {
+      "runId": "batch-24-game-logo-v03-candidate-b-cleanup-edit-02",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/PROMPTS.md",
+        "sha256": "77058a39dd544c01a912ab628cfc151003b482b93d6ff5ec052142345893ecff"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "edit-target",
+          "authorityKind": "immutable-generator-original",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-matte-01-generator-original.png",
+          "sha256": "3dc9e80afaf4005d4d4df87b8cf8c632c1e4093a88946748e0f365fc7e96e7df"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-ead7cf0f-5d90-4ebc-9241-2474e49b1510.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+          "sha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+          "bytes": 2002922,
+          "disposition": "selected",
+          "reason": "Human-approved generated Logo Candidate B; runtime publication remains a separate gate."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "One combined lowercase and internal-gap correction from the fresh generator original; source edit depth one. The lowercase-only edit was not used as a reference."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/PROMPTS.md",
+      "sha256": "77058a39dd544c01a912ab628cfc151003b482b93d6ff5ec052142345893ecff"
+    },
+    "outputIds": [
+      "exec-1c029032-219a-46ef-806b-778ab626c5e3.png",
+      "exec-c68cd98c-1ad6-4ef0-a988-f8120173ecfe.png",
+      "exec-ead7cf0f-5d90-4ebc-9241-2474e49b1510.png"
+    ],
+    "notes": "Exact generation and bounded correction prompts are preserved verbatim."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "bytes": 2002922,
+      "relationship": "human-approved generated logo master",
+      "evidence": "Human-approved premium generated Logo Candidate B; runtime publication remains deferred."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-lowercase-edit-01-generator-original.png",
+      "sha256": "caccbf6a04226e570c4e8295c933ad2ff0e94de71ff6f4ff9a357217d7e74403",
+      "bytes": 2008348,
+      "relationship": "superseded lowercase-only technical evidence",
+      "evidence": "Retained immutably; not used as a reference for the recommended candidate."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-matte-01-generator-original.png",
+      "sha256": "3dc9e80afaf4005d4d4df87b8cf8c632c1e4093a88946748e0f365fc7e96e7df",
+      "bytes": 2024364,
+      "relationship": "immutable fresh generated parent",
+      "evidence": "Sole parent of both bounded depth-one corrections."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/game-logo-concept-v01-candidate-a-alpha-attempt-01-generator-original.png",
+      "sha256": "259f3b954db4b44698c1daeac8da2755dc20592536a30f2c9ed8ee36d1e1c55e",
+      "bytes": 1703284,
+      "relationship": "approved composition reference",
+      "evidence": "Batch 21 stacked construction only; no route-line requirement."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-pathfinder-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "2909655eec2802762500c0253927163e34228fe94fda989071cf5935de61b1d2",
+      "bytes": 1475938,
+      "relationship": "approved material reference",
+      "evidence": "Batch 22 premium craft only."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-22-achievement-stickers/badge-maze-mapper-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "020cc737ebc3189fb71f79d874718eded00a9f9d9f8cb08041f389d93fe025bf",
+      "bytes": 1304472,
+      "relationship": "approved material reference",
+      "evidence": "Batch 22 premium craft only."
+    }
+  ],
+  "derivatives": [],
+  "geometry": {
+    "class": "brand-wordmark",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.04,
+      0.04,
+      0.92,
+      0.92
+    ],
+    "safeInset": [
+      0.04,
+      0.04,
+      0.04,
+      0.04
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "source-review-logo",
+        "outputPath": "artifacts/art-proofs/mgjrpg-02/plan03-r1-logo-revision/assets/logo-v03-candidate-b-transparent.png",
+        "width": 1456,
+        "height": 1001,
+        "format": "png",
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        5,
+        223,
+        12
+      ],
+      "clearDistance": 72.0,
+      "opaqueDistance": 210.0,
+      "minimumComponentPixels": 128
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "bounded-generated-text-correction",
+      "description": "One ImageGen edit changes only the central coral-plaque word to exact lowercase 'so'; no edit-of-edit lineage.",
+      "script": "scripts/art_pipeline/mgjrpg02_plan03_r1_logo_revision.py"
+    }
+  ],
+  "designApprovalEvidence": {
+    "approvedBy": "Human project author",
+    "approvedOn": "2026-09-04",
+    "scope": "identity-and-construction",
+    "decision": "The Human approved generated Logo Candidate B as the Maze so Puzzle logo source direction; runtime publication remains a separate gate.",
+    "evidencePath": "docs/source-assets/calibrations/mgjrpg-02/v08/human-decision.json"
+  },
+  "knownUnknowns": [
+    "Responsive lockups, runtime delivery profiles, platform derivatives, runtime-publish approval, rights review, and performance allocation remain pending."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from internal approved composition and material references; no named franchise, living artist, proprietary logo, or copied badge layout was requested.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "Plan 11 remains final branding owner."
+  },
+  "rollback": {
+    "method": "No runtime logo pointer exists. Preserve rejected v02 history and remove only unapproved v03 source records/candidates to return to the pushed R1 checkpoint."
+  }
+}

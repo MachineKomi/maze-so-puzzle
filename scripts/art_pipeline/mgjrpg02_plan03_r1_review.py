@@ -35,6 +35,7 @@ PROOF = ROOT / "artifacts/art-proofs/mgjrpg-02/plan03-r1-review"
 PROOF_ASSETS = PROOF / "assets"
 FONT_PATH = ROOT / "docs/source-assets/fonts/fredoka/Fredoka-wdth-wght.ttf"
 LOGO_PATH = BATCH / "game-logo-v02-candidate-a-deterministic-master.png"
+HUMAN_REVIEW = BATCH / "human-review-r02.json"
 
 SIZES = (64, 48, 32, 24, 16)
 REGISTRATION = {
@@ -126,19 +127,14 @@ ALPHA_REJECTS = {
 
 FRONT_DOOR = (
     {
-        "label": "Title Candidate A",
-        "runId": "batch-21-title-background-v02-a",
-        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-a-generator-original.png",
+        "label": "Environment-only title layer",
+        "runId": "batch-21-title-background-environment-study-01",
+        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
     },
     {
         "label": "Home Splash Candidate B",
         "runId": "batch-21-home-splash-v01-b",
         "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
-    },
-    {
-        "label": "Environment-only layer",
-        "runId": "batch-21-title-background-environment-study-01",
-        "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
     },
     {
         "label": "Ame-face application-icon candidate",
@@ -481,10 +477,10 @@ def build_html(front_door: list[dict[str, object]], logo: dict[str, object]) -> 
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Plan 03-R1 Human review</title>
 <style>
 :root{{font-family:Inter,ui-rounded,system-ui,sans-serif;color:#3d2948;background:#ede6db}}*{{box-sizing:border-box}}body{{margin:0}}main{{max-width:1220px;margin:auto;padding:24px}}h1{{margin:0 0 6px}}h2{{margin-top:34px}}p{{color:#725f78;max-width:82ch}}code{{display:block;font-size:11px;color:#76546f;margin-top:4px;overflow-wrap:anywhere}}small{{display:block;font-size:10px;color:#806e7f;margin-top:5px;overflow-wrap:anywhere}}.front-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}}figure{{margin:0}}.front-card,.icon-card,.logo-card{{background:#fff8eb;border:1px solid #d8c7d4;border-radius:18px;padding:12px;box-shadow:0 3px 0 #d7ccd1}}.front-card img{{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:11px;background:#d9cfcb}}figcaption{{padding-top:8px}}.logo-card{{background:linear-gradient(135deg,#fff8eb,#dce8e3 52%,#44324d)}}.logo-card img{{display:block;width:min(100%,850px);height:auto;margin:auto}}.icon-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}}.icon-card h3{{margin:0 0 10px}}.compare{{display:grid;grid-template-columns:1fr 1fr;gap:9px}}.compare figure{{text-align:center;background:#efe7dd;border-radius:12px;padding:8px}}.compare img{{width:128px;height:128px;object-fit:contain}}.compare figcaption{{font-size:12px;font-weight:700}}.actual-strip{{display:flex;align-items:flex-end;justify-content:center;gap:13px;min-height:84px;margin-top:10px;padding:8px;background:#493950;border-radius:11px}}.actual{{display:grid;justify-items:center;gap:4px}}.actual img{{object-fit:contain}}.actual b{{font-size:10px;color:#f9eadb}}.decision{{background:#f9e0a6;border-left:5px solid #d99738;padding:12px 14px;border-radius:10px}}@media(max-width:600px){{main{{padding:14px}}.icon-grid{{grid-template-columns:1fr}}.actual-strip{{gap:8px}}}}
-</style></head><body><main><h1>Plan 03-R1 · Human review gate</h1><p class="decision"><strong>Recommendation:</strong> exact-lettered Logo Candidate A and the complete seven-icon R1 Candidate A family. Nothing on this page is published to runtime.</p>
-<h2>Recorded forward front-door selections</h2><p>These four exact sources—not every Batch 21 or Batch 13 study—are the approved front-door selections carried forward.</p><section class="front-grid">{front_cards}</section>
-<h2>Refined exact-lettering logo</h2><p>Exact text “Maze so Puzzle”; lowercase “so”; no subtitle; no yellow route line. Fredoka SemiBold is locally typeset under the SIL Open Font License, then material masks are deterministically composited.</p><figure class="logo-card"><img src="assets/logo-candidate-a.png" alt="Maze so Puzzle exact-lettering logo candidate"><figcaption><strong>Recommended · Logo Candidate A</strong><code>{html.escape(str(logo['path']))}</code></figcaption></figure>
-<h2>Premium utility sticker family</h2><p>Each candidate was generated fresh from blank canvas. Current icons supplied only semantic/silhouette evidence; approved Batch 22 achievements supplied material authority. The intrinsic PNGs below are the requested actual sizes.</p><section class="icon-grid">{''.join(icon_cards)}</section>
+</style></head><body><main><h1>Plan 03-R1 · Human review record</h1><p class="decision"><strong>Decision:</strong> all seven R1 Candidate A navigation icons are Human-approved source designs. The deterministic Logo Candidate A below is rejected and superseded by approved generated Logo Candidate B on the linked revision page. Nothing on this page is published to runtime.</p>
+<h2>Recorded forward front-door selections</h2><p>These three exact sources—not every Batch 21 or Batch 13 study—are the approved front-door selections carried forward: the environment-only title layer, Home Splash Candidate B, and the Ame-face application-icon candidate.</p><section class="front-grid">{front_cards}</section>
+<h2>Rejected deterministic logo history</h2><p>Exact text “Maze so Puzzle”; lowercase “so”; no subtitle; no yellow route line. This deterministic Fredoka study is retained only as rejected review evidence because its construction and material finish did not meet the Human’s quality bar.</p><figure class="logo-card"><img src="assets/logo-candidate-a.png" alt="Rejected Maze so Puzzle deterministic logo candidate"><figcaption><strong>Rejected · Logo Candidate A</strong><code>{html.escape(str(logo['path']))}</code><a href="../plan03-r1-logo-revision/index.html">Open approved generated Logo Candidate B</a></figcaption></figure>
+<h2>Approved premium utility sticker family</h2><p>Each candidate was generated fresh from blank canvas. Current icons supplied only semantic/silhouette evidence; approved Batch 22 achievements supplied material authority. The intrinsic PNGs below are the requested actual sizes. All seven are Human-approved source designs; runtime publication remains separate.</p><section class="icon-grid">{''.join(icon_cards)}</section>
 </main></body></html>"""
     (PROOF / "index.html").write_text(document, encoding="utf-8", newline="\n")
 
@@ -518,7 +514,7 @@ def file_evidence(path: Path, relationship: str, evidence: str) -> dict[str, obj
 def build_source_metadata(report: dict[str, object]) -> None:
     prompt_path = BATCH / "PROMPTS.md"
     prompt_hash = sha256(prompt_path)
-    decision_path = ROOT / "docs/source-assets/calibrations/mgjrpg-02/v07/human-decision.json"
+    decision_path = ROOT / "docs/source-assets/calibrations/mgjrpg-02/v08/human-decision.json"
     approved_reference_decision_path = ROOT / "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json"
     recipe_path = ROOT / "docs/source-assets/recipes/mgjrpg-02.json"
     canary_path = ROOT / "docs/source-assets/reviews/mgjrpg-02-canary-v01.json"
@@ -613,7 +609,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
                 "sha256": sha256(candidate),
                 "bytes": candidate.stat().st_size,
                     "disposition": "selected",
-                "reason": "Fresh blank-canvas premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate; not publication-approved.",
+                "reason": "Human-approved fresh blank-canvas premium utility source; runtime publication remains a separate gate.",
             }
         )
         generation_run = {
@@ -702,8 +698,8 @@ def build_source_metadata(report: dict[str, object]) -> None:
                 "orderedReferences": ordered_batch_references,
                 "output": generator_fact(candidate, OUTPUT_IDS[stable_id]),
                 "disposition": {
-                    "status": "pending-human-batch-review",
-                    "reason": "Fresh premium utility candidate selected by art-direction QA for the Plan 03-R1 Human review gate.",
+                    "status": "human-approved-source",
+                    "reason": "Human approved the complete seven-icon premium utility family; runtime publication remains a separate gate.",
                 },
             }
         )
@@ -736,7 +732,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
             "family": "navigation",
             "runtimeStatus": "source-only",
             "sourceStatus": "source-backed",
-            "approvalStatus": "pending-human",
+            "approvalStatus": "design-approved",
             "validationProfile": "strict-v2",
             "recipeVersion": "mgjrpg-02",
             "derivativeRecipeVersion": "proposed-mgjrpg-02-premium-utility-r01",
@@ -770,8 +766,8 @@ def build_source_metadata(report: dict[str, object]) -> None:
             "sources": [
                 file_evidence(
                     candidate,
-                    "pending-human premium utility generator original",
-                    "Fresh chroma-matte candidate selected by art-direction QA for review; no runtime publication approval.",
+                    "human-approved premium utility generator original",
+                    "Human-approved fresh chroma-matte source; no runtime publication approval.",
                 )
             ],
             "derivatives": [],
@@ -814,9 +810,16 @@ def build_source_metadata(report: dict[str, object]) -> None:
                     "script": "scripts/art_pipeline/mgjrpg02_plan03_r1_review.py",
                 }
             ],
+            "designApprovalEvidence": {
+                "approvedBy": "Human project author",
+                "approvedOn": "2026-09-04",
+                "scope": "identity-and-construction",
+                "decision": "The Human approved all seven Batch 23 premium navigation icons as a coherent source family; runtime publication remains a separate gate.",
+                "evidencePath": repo_path(decision_path),
+            },
             "knownUnknowns": [
                 "Generator model build, seed, exact execution timestamp, and request envelope were not exposed by the built-in tool.",
-                "Human source approval, runtime derivative profile, encoded-byte allocation, and catalogue publication are pending.",
+                "Runtime derivative profile, runtime-publish approval, encoded-byte allocation, and catalogue publication are pending.",
             ],
             "rights": {
                 "originClaim": "Generated fresh for Maze so Puzzle from exact prompts and internal semantic/material references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
@@ -824,7 +827,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
                 "notes": "Source-only Plan 03-R1 candidate; technical and owner rights review remains part of the later publication gate.",
             },
             "rollback": {
-                "method": "Keep the current active catalogue pointer and runtime derivative unchanged; remove only the unapproved R1 candidate record and proof artifacts to return to the accepted Plan 03 anchor.",
+                "method": "Keep the current active catalogue pointer and runtime derivative unchanged; the approved source candidate remains the rollback authority until a later versioned runtime publication.",
                 "previousPath": str(old_derivative["path"]),
                 "previousSha256": str(old_derivative["sha256"]),
             },
@@ -845,7 +848,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
                 "proposedRecordId": record["recordId"],
                 "proposedRuntimePath": f"public/assets/mgjrpg-02/navigation/{stable_id}-v{int(icon['version']):02d}-navigation-optical-128-r01.webp",
                 "profile": "navigation-optical-128",
-                "status": "pending-human-source-review-no-file-created",
+                "status": "human-source-approved-publication-deferred",
                 "requiresNamedFeatureAllocation": True,
             }
         )
@@ -861,7 +864,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
         "family": "brand",
         "runtimeStatus": "source-only",
         "sourceStatus": "source-backed",
-        "approvalStatus": "pending-human",
+        "approvalStatus": "rejected",
         "validationProfile": "strict-v2",
         "recipeVersion": "mgjrpg-02",
         "derivativeRecipeVersion": "proposed-plan11-branding-r01",
@@ -907,7 +910,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
                         "sha256": sha256(LOGO_PATH),
                         "bytes": LOGO_PATH.stat().st_size,
                         "disposition": "selected",
-                        "reason": "Exact-lettering deterministic refinement selected by art-direction QA for Human review; runtime publication remains unapproved.",
+                        "reason": "Selected within Batch 23 for Human review, then explicitly rejected for programmer-art flatness, clipping/construction errors, and inadequate material craft.",
                     }
                 ],
                 "lineage": {
@@ -940,7 +943,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
             "notes": "No generated lettering is authoritative. The exact strings and deterministic local construction are preserved in the script and prompt record.",
         },
         "sources": [
-            file_evidence(LOGO_PATH, "pending-human deterministic exact-lettering logo master", "Locally typeset and composited source-only candidate."),
+            file_evidence(LOGO_PATH, "Human-rejected deterministic exact-lettering logo master", "Preserved as rejected source-only history; never published."),
             file_evidence(font_file, "OFL glyph-geometry source", "Fredoka SemiBold supplies exact glyph geometry; local licence and provenance are preserved."),
             file_evidence(logo_concept, "human-approved composition-and-material starting-point reference only", "Batch 21 source pixels, generated lettering, yellow route line, and checkerboard are not reused or approved."),
         ],
@@ -974,7 +977,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
             }
         ],
         "knownUnknowns": [
-            "Human source approval, responsive brand lockups, runtime delivery profiles, platform derivatives, and performance allocation are pending.",
+            "The deterministic Logo Candidate A is rejected; generated Logo Candidate B is tracked separately as game-logo-mgjrpg02-v03-source.",
         ],
         "rights": {
             "originClaim": "Project-authored deterministic lettering and material construction using the SIL-OFL-licensed Fredoka glyph geometry; Batch 21 is composition/material reference only.",
@@ -982,7 +985,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
             "notes": "Font licence and upstream provenance are retained under docs/source-assets/fonts/fredoka. Plan 11 remains final branding owner.",
         },
         "rollback": {
-            "method": "No runtime logo pointer exists. Remove the unapproved v02 source record and candidate to return to the accepted Plan 03 anchor; retain the historical Batch 21 concept unchanged."
+            "method": "No runtime logo pointer exists. Preserve this rejected v02 source as review history and use the generated v03 record as the approved source authority."
         },
     }
     json_write(ROOT / "docs/source-assets/records/game-logo-mgjrpg02-v02-source.json", logo_record)
@@ -991,7 +994,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
         "schema": "maze-art-generation-batch/v1",
         "batchId": "mgjrpg-02-batch-23-plan03-r1-premium-ui-logo",
         "revision": 1,
-        "status": "pending-human-review",
+        "status": "reviewed",
         "recordedOn": "2026-09-04",
         "purpose": "Record exact forward front-door selections, create one deterministic exact-lettering logo refinement, and generate a fresh premium seven-icon semantic utility family for a bounded Human review gate without runtime publication.",
         "rollbackAnchor": "28946cbb04f45cb21cd51626914267ff4f71c375",
@@ -1013,6 +1016,11 @@ def build_source_metadata(report: dict[str, object]) -> None:
             "sha256": sha256(decision_path),
             "bytes": decision_path.stat().st_size,
         },
+        "reviewEvidence": file_evidence(
+            HUMAN_REVIEW,
+            "Human source review",
+            "All seven premium navigation sources approved; deterministic Logo Candidate A rejected; publication remains separate.",
+        ),
         "generator": {
             "provider": "OpenAI",
             "interface": "Codex built-in image generation capability",
@@ -1057,14 +1065,15 @@ def build_source_metadata(report: dict[str, object]) -> None:
         },
         "review": {
             "page": report["reviewPage"],
-            "recommendation": "Logo Candidate A plus the complete seven-icon R1 Candidate A family",
-            "silenceRule": "Silence is not approval.",
+            "recommendation": "Generated Logo Candidate B (Batch 24) plus the complete seven-icon R1 Candidate A family",
+            "humanDecision": "All seven navigation icons approved; deterministic Logo Candidate A rejected.",
+            "silenceRule": "Not applicable; explicit Human decisions are recorded.",
             "publicationAuthorized": False,
         },
         "reviewProtocol": {
-            "batchProofStatus": "awaiting Human Plan 03-R1 logo and utility-family review",
-            "decisionRule": "Human reviews exact logo wording/material balance and the complete seven-icon family at source comparison and 64/48/32/24/16 intrinsic sizes before any publication.",
-            "silenceRule": "Silence is not approval.",
+            "batchProofStatus": "Human reviewed: all seven premium utility sources approved; deterministic Logo Candidate A rejected",
+            "decisionRule": "Runtime publication remains separate and requires versioned derivatives, catalogue pointers, allocation, and runtime-scale proof.",
+            "silenceRule": "Not applicable; explicit Human decisions are recorded in calibration v08.",
             "candidateBoundary": "Source approval does not create runtime files, change catalogue pointers, generate platform icons, retire current assets, or allocate performance bytes.",
         },
         "rights": {
@@ -1073,14 +1082,14 @@ def build_source_metadata(report: dict[str, object]) -> None:
             "releaseStatus": "not-approved",
         },
         "rollback": {
-            "method": "Keep all current runtime files and catalogue pointers. Remove only unapproved Batch 23 source records/candidates and ignored proofs to return to the accepted Plan 03 anchor.",
+            "method": "Keep all current runtime files and catalogue pointers. Preserve approved Batch 23 icon sources and rejected Logo Candidate A as review/rollback evidence.",
             "runtimeRollbackRequired": False,
         },
         "counts": {
             "runCount": len(batch_run_rows),
             "rejectedBackgroundInvalidCount": 4,
-            "pendingHumanCandidateCount": 7,
-            "humanApprovedSourceCount": 0,
+            "pendingHumanCandidateCount": 0,
+            "humanApprovedSourceCount": 7,
             "humanRejectedSourceCount": 0,
             "artDirectorRejectedSourceCount": 0,
             "generatorOriginalEncodedBytes": sum(int(row["output"]["bytes"]) for row in batch_run_rows),
@@ -1091,15 +1100,6 @@ def build_source_metadata(report: dict[str, object]) -> None:
 
     proposed.extend(
         [
-            {
-                "stableId": "title-background",
-                "consumer": "ASSETS.titleBackground",
-                "currentRuntimePath": "public/assets/title-background-v1.webp",
-                "candidateSource": FRONT_DOOR[0]["path"],
-                "proposedRuntimePath": "public/assets/mgjrpg-02/brand/title-background-v02-front-door-1920-r01.webp",
-                "status": "human-source-selected-publication-deferred",
-                "requiresNamedFeatureAllocation": True,
-            },
             {
                 "stableId": "home-hero-splash",
                 "consumer": "planned Plan 01 home surface",
@@ -1113,7 +1113,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
                 "stableId": "title-environment-layer",
                 "consumer": "planned layerable Plan 11 front-door composition",
                 "currentRuntimePath": None,
-                "candidateSource": FRONT_DOOR[2]["path"],
+                "candidateSource": FRONT_DOOR[0]["path"],
                 "proposedRuntimePath": "public/assets/mgjrpg-02/brand/title-environment-v01-front-door-r01.webp",
                 "status": "human-source-selected-publication-deferred",
                 "requiresNamedFeatureAllocation": True,
@@ -1122,7 +1122,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
                 "stableId": "app-icon-ame",
                 "consumer": "Plan 11 platform branding",
                 "currentRuntimePath": None,
-                "candidateSource": FRONT_DOOR[3]["path"],
+                "candidateSource": FRONT_DOOR[2]["path"],
                 "proposedRuntimePath": None,
                 "status": "human-source-selected-platform-derivatives-deferred",
                 "requiresNamedFeatureAllocation": True,
@@ -1133,7 +1133,7 @@ def build_source_metadata(report: dict[str, object]) -> None:
                 "currentRuntimePath": None,
                 "candidateSource": repo_path(LOGO_PATH),
                 "proposedRuntimePath": "public/assets/mgjrpg-02/brand/game-logo-v02-front-door-r01.webp",
-                "status": "pending-human-source-review-no-file-created",
+                "status": "human-rejected-source-never-published",
                 "requiresNamedFeatureAllocation": True,
             },
         ]

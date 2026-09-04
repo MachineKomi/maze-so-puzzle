@@ -1,0 +1,93 @@
+{
+  "schema": "maze-art-human-decision/v1",
+  "decisionId": "mgjrpg-02-human-front-door-correction-v08",
+  "recordedOn": "2026-09-04",
+  "status": "forward-selection-correction-recorded",
+  "scope": "Plan 03-R1 title/home pairing correction and logo rejection/revision gate",
+  "supersedesDecisionId": "mgjrpg-02-human-front-door-forward-decision-v07",
+  "rollbackAnchor": "28946cbb04f45cb21cd51626914267ff4f71c375",
+  "withdrawnSelections": [
+    {
+      "label": "Title Candidate A",
+      "runId": "batch-21-title-background-v02-a",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-a-generator-original.png",
+      "sha256": "0c9782af4090f3e7d4a7702ebfcbfff20c451c83eadd2b2cfa9d0633b78714bf",
+      "bytes": 2327584,
+      "relationship": "withdrawn forward selection",
+      "evidence": "Human identified the boot/fox spatial collision and withdrew this selection."
+    }
+  ],
+  "consideredNotSelected": [
+    {
+      "label": "Title Candidate B",
+      "runId": "batch-21-title-background-v02-b",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-b-generator-original.png",
+      "sha256": "8fb3fe4a8ae70c9d2c764898b486e8e5f797fc7d02218ca605749681e4655a42",
+      "bytes": 2094316,
+      "relationship": "considered but not selected",
+      "evidence": "Human preferred its error-free character arrangement but rejected the straight, overly simple maze path."
+    }
+  ],
+  "approvedFrontDoorPair": [
+    {
+      "label": "Environment-only title layer",
+      "runId": "batch-21-title-background-environment-study-01",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
+      "sha256": "07d91060cf21639cfd8ebcae87d8ac8cb626a1617df177c860bd12fa6a31d896",
+      "bytes": 2199173,
+      "relationship": "selected title/background layer",
+      "evidence": "Human chose the environment-only study as the title/front-door environment direction."
+    },
+    {
+      "label": "Home Splash Candidate B",
+      "runId": "batch-21-home-splash-v01-b",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+      "sha256": "3f6917b2ae47fd4a0649d24c6301f1db2bfe1bf93c7c6144a567a13c09595ecf",
+      "bytes": 2152001,
+      "relationship": "selected home hero and companion composition",
+      "evidence": "Human chose Home Splash B to pair with the environment-only study."
+    }
+  ],
+  "carriedForwardSelection": {
+    "label": "Ame-face application-icon candidate",
+    "runId": "batch-13-app-icon-ame-v03",
+    "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+    "sha256": "4f470db1ae278fa749460df92a8b3010d7a2b9531e2c4487a0d85e8bf4609616",
+    "bytes": 1826973,
+    "relationship": "selected application-icon source direction",
+    "evidence": "No platform derivatives or runtime branding publication are authorized."
+  },
+  "logoDecision": {
+    "rejected": {
+      "recordId": "game-logo-mgjrpg02-v02-source",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
+      "sha256": "c1bb1d32dbd49eae065b660aa23d8e30350b76deaeea08ab20b132324b5c6500",
+      "bytes": 124875,
+      "relationship": "Human-rejected Plan 03-R1 Logo Candidate A",
+      "evidence": "Rejected for programmer-art flatness, clipping/construction errors, and material quality far below the Batch 21 and Batch 22 references."
+    },
+    "humanApproved": {
+      "recordId": "game-logo-mgjrpg02-v03-source",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "sha256": "0bb022a9d2d8a176f5b0b02dfe5039249b264832097faaf4d2e2444a1a386bb1",
+      "bytes": 2002922,
+      "relationship": "Human-approved generated Logo Candidate B",
+      "evidence": "Fresh generated premium material construction with one bounded depth-one cleanup edit; runtime publication remains separate."
+    }
+  },
+  "utilityIconDecision": {
+    "status": "human-approved-complete-family",
+    "ids": [
+      "nav-home",
+      "nav-mazes",
+      "nav-book",
+      "nav-help",
+      "nav-sound",
+      "nav-muted",
+      "nav-restart"
+    ],
+    "scope": "Batch 23 premium utility source candidates; runtime derivatives and catalogue publication remain separate."
+  },
+  "publicationAuthorized": false,
+  "evidence": "Human correction and logo feedback in the Plan 03-R1 task on 2026-09-04; recorded forward without rewriting v07 or Batch 21 history."
+}

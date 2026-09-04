@@ -16,7 +16,7 @@
       "proposedRecordId": "nav-home-mgjrpg02-v04-source",
       "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-home-v04-navigation-optical-128-r01.webp",
       "profile": "navigation-optical-128",
-      "status": "pending-human-source-review-no-file-created",
+      "status": "human-source-approved-publication-deferred",
       "requiresNamedFeatureAllocation": true
     },
     {
@@ -30,7 +30,7 @@
       "proposedRecordId": "nav-mazes-mgjrpg02-v05-source",
       "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-mazes-v05-navigation-optical-128-r01.webp",
       "profile": "navigation-optical-128",
-      "status": "pending-human-source-review-no-file-created",
+      "status": "human-source-approved-publication-deferred",
       "requiresNamedFeatureAllocation": true
     },
     {
@@ -44,7 +44,7 @@
       "proposedRecordId": "nav-book-mgjrpg02-v03-source",
       "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-book-v03-navigation-optical-128-r01.webp",
       "profile": "navigation-optical-128",
-      "status": "pending-human-source-review-no-file-created",
+      "status": "human-source-approved-publication-deferred",
       "requiresNamedFeatureAllocation": true
     },
     {
@@ -58,7 +58,7 @@
       "proposedRecordId": "nav-help-mgjrpg02-v03-source",
       "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-help-v03-navigation-optical-128-r01.webp",
       "profile": "navigation-optical-128",
-      "status": "pending-human-source-review-no-file-created",
+      "status": "human-source-approved-publication-deferred",
       "requiresNamedFeatureAllocation": true
     },
     {
@@ -72,7 +72,7 @@
       "proposedRecordId": "nav-sound-mgjrpg02-v04-source",
       "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-sound-v04-navigation-optical-128-r01.webp",
       "profile": "navigation-optical-128",
-      "status": "pending-human-source-review-no-file-created",
+      "status": "human-source-approved-publication-deferred",
       "requiresNamedFeatureAllocation": true
     },
     {
@@ -86,7 +86,7 @@
       "proposedRecordId": "nav-muted-mgjrpg02-v03-source",
       "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-muted-v03-navigation-optical-128-r01.webp",
       "profile": "navigation-optical-128",
-      "status": "pending-human-source-review-no-file-created",
+      "status": "human-source-approved-publication-deferred",
       "requiresNamedFeatureAllocation": true
     },
     {
@@ -100,16 +100,7 @@
       "proposedRecordId": "nav-restart-mgjrpg02-v03-source",
       "proposedRuntimePath": "public/assets/mgjrpg-02/navigation/nav-restart-v03-navigation-optical-128-r01.webp",
       "profile": "navigation-optical-128",
-      "status": "pending-human-source-review-no-file-created",
-      "requiresNamedFeatureAllocation": true
-    },
-    {
-      "stableId": "title-background",
-      "consumer": "ASSETS.titleBackground",
-      "currentRuntimePath": "public/assets/title-background-v1.webp",
-      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-a-generator-original.png",
-      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/title-background-v02-front-door-1920-r01.webp",
-      "status": "human-source-selected-publication-deferred",
+      "status": "human-source-approved-publication-deferred",
       "requiresNamedFeatureAllocation": true
     },
     {
@@ -145,7 +136,7 @@
       "currentRuntimePath": null,
       "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
       "proposedRuntimePath": "public/assets/mgjrpg-02/brand/game-logo-v02-front-door-r01.webp",
-      "status": "pending-human-source-review-no-file-created",
+      "status": "human-rejected-source-never-published",
       "requiresNamedFeatureAllocation": true
     }
   ],

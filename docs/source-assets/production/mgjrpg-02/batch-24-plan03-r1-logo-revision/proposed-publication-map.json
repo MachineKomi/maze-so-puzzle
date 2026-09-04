@@ -1,0 +1,37 @@
+{
+  "schema": "maze-art-proposed-publication-map/v1",
+  "generatedOn": "2026-09-04",
+  "status": "proposal-only-no-files-created",
+  "entries": [
+    {
+      "stableId": "title-environment-layer",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/title-environment-v01-front-door-r01.webp",
+      "status": "human-source-selected-publication-deferred"
+    },
+    {
+      "stableId": "home-hero-splash",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/home-hero-splash-v01-candidate-b-matte-01-generator-original.png",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/home-hero-splash-v01-front-door-r01.webp",
+      "status": "human-source-selected-publication-deferred"
+    },
+    {
+      "stableId": "app-icon-ame",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
+      "proposedRuntimePath": null,
+      "status": "human-source-selected-platform-derivatives-deferred"
+    },
+    {
+      "stableId": "game-logo",
+      "candidateSource": "docs/source-assets/production/mgjrpg-02/batch-24-plan03-r1-logo-revision/game-logo-v03-candidate-b-cleanup-edit-02-generator-original.png",
+      "proposedRuntimePath": "public/assets/mgjrpg-02/brand/game-logo-v03-front-door-r01.webp",
+      "status": "human-source-approved-publication-deferred"
+    }
+  ],
+  "performance": {
+    "currentPublicMediaHeadroom": 0,
+    "runtimeEncodedByteDelta": 0,
+    "runtimeDecodedByteDelta": 0,
+    "publicationRequiresNamedFeatureAllocation": true
+  }
+}

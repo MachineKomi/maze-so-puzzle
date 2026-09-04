@@ -5,11 +5,11 @@
   "scope": "source-only; no runtime/public/catalogue publication",
   "frontDoorSelections": [
     {
-      "label": "Title Candidate A",
-      "runId": "batch-21-title-background-v02-a",
-      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-candidate-a-generator-original.png",
+      "label": "Environment-only title layer",
+      "runId": "batch-21-title-background-environment-study-01",
+      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
       "preview": "front-door-01.jpg",
-      "sourceSha256": "0c9782af4090f3e7d4a7702ebfcbfff20c451c83eadd2b2cfa9d0633b78714bf"
+      "sourceSha256": "07d91060cf21639cfd8ebcae87d8ac8cb626a1617df177c860bd12fa6a31d896"
     },
     {
       "label": "Home Splash Candidate B",
@@ -19,17 +19,10 @@
       "sourceSha256": "3f6917b2ae47fd4a0649d24c6301f1db2bfe1bf93c7c6144a567a13c09595ecf"
     },
     {
-      "label": "Environment-only layer",
-      "runId": "batch-21-title-background-environment-study-01",
-      "path": "docs/source-assets/production/mgjrpg-02/batch-21-front-door-art/title-background-v02-environment-only-study-01-generator-original.png",
-      "preview": "front-door-03.jpg",
-      "sourceSha256": "07d91060cf21639cfd8ebcae87d8ac8cb626a1617df177c860bd12fa6a31d896"
-    },
-    {
       "label": "Ame-face application-icon candidate",
       "runId": "batch-13-app-icon-ame-v03",
       "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/app-icon-ame-v03-candidate-a-generator-original.png",
-      "preview": "front-door-04.jpg",
+      "preview": "front-door-03.jpg",
       "sourceSha256": "4f470db1ae278fa749460df92a8b3010d7a2b9531e2c4487a0d85e8bf4609616"
     }
   ],
@@ -1183,7 +1176,7 @@
   "counts": {
     "icons": 7,
     "logoCandidates": 1,
-    "frontDoorSelections": 4,
+    "frontDoorSelections": 3,
     "candidateSourceEncodedBytes": 9315491,
     "candidateSourceDecodedBytesUpperBound": 48484624,
     "runtimeEncodedByteDelta": 0,

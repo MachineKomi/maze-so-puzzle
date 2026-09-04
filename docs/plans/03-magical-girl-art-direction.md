@@ -1850,3 +1850,32 @@ approval, publication remains a separate reviewed phase with new versioned
 derivatives, zero-headroom feature allocation, previous-path rollback records,
 runtime-scale proof, checks, commit, and push. No Plan 12 retirement action is
 authorized here.
+
+## 22. Plan 03-R1 Human correction and source approval — 2026-09-04
+
+Forward decision v8 supersedes only the affected selection claims in v7; it
+does not rewrite Batch 13, 21, 22, or 23 history. Title Candidate A is
+withdrawn after Human review identified the boot/fox spatial collision. Title
+Candidate B was considered but not selected because its path reads as a simple
+straight route rather than a maze. The selected front-door pairing is now the
+Batch 21 environment-only title layer plus Home Splash Candidate B. The
+Ame-face application-icon source direction remains selected, with platform
+derivatives and publication still deferred.
+
+The Human rejected deterministic Logo Candidate A for programmer-art
+flatness, clipping/construction errors, and material craft below the approved
+reference bar. Batch 24 preserves that rejection and creates generated Logo
+Candidate B from the stronger Batch 21 stacked composition and Batch 22
+achievement-sticker material authority. The selected generated source uses
+chunky lavender maze-stone, mint magical enamel, coral `so` plaque, warm gold
+foil, pearlescent highlights, broad restrained holographic edge colour, a
+continuous cream cutline, no yellow route line, and no subtitle. Its final
+source is one bounded depth-one cleanup from a fresh generator original; the
+superseded lowercase-only edit was never used as a reference.
+
+The Human explicitly approves generated Logo Candidate B and all seven Batch
+23 premium utility-icon sources: `nav-home`, `nav-mazes`, `nav-book`,
+`nav-help`, `nav-sound`, `nav-muted`, and `nav-restart`. Approval closes the
+source-review gate only. Runtime derivatives, catalogue pointers, title-route
+integration, Tauri/platform icons, public bytes, performance allocation, and
+retirement remain unchanged and require the separate publication gate.

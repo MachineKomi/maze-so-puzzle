@@ -7,7 +7,7 @@
   "family": "brand",
   "runtimeStatus": "source-only",
   "sourceStatus": "source-backed",
-  "approvalStatus": "pending-human",
+  "approvalStatus": "rejected",
   "validationProfile": "strict-v2",
   "recipeVersion": "mgjrpg-02",
   "derivativeRecipeVersion": "proposed-plan11-branding-r01",
@@ -56,7 +56,7 @@
           "sha256": "c1bb1d32dbd49eae065b660aa23d8e30350b76deaeea08ab20b132324b5c6500",
           "bytes": 124875,
           "disposition": "selected",
-          "reason": "Exact-lettering deterministic refinement selected by art-direction QA for Human review; runtime publication remains unapproved."
+          "reason": "Selected within Batch 23 for Human review, then explicitly rejected for programmer-art flatness, clipping/construction errors, and inadequate material craft."
         }
       ],
       "lineage": {
@@ -96,8 +96,8 @@
       "path": "docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/game-logo-v02-candidate-a-deterministic-master.png",
       "sha256": "c1bb1d32dbd49eae065b660aa23d8e30350b76deaeea08ab20b132324b5c6500",
       "bytes": 124875,
-      "relationship": "pending-human deterministic exact-lettering logo master",
-      "evidence": "Locally typeset and composited source-only candidate."
+      "relationship": "Human-rejected deterministic exact-lettering logo master",
+      "evidence": "Preserved as rejected source-only history; never published."
     },
     {
       "path": "docs/source-assets/fonts/fredoka/Fredoka-wdth-wght.ttf",
@@ -164,7 +164,7 @@
     }
   ],
   "knownUnknowns": [
-    "Human source approval, responsive brand lockups, runtime delivery profiles, platform derivatives, and performance allocation are pending."
+    "The deterministic Logo Candidate A is rejected; generated Logo Candidate B is tracked separately as game-logo-mgjrpg02-v03-source."
   ],
   "rights": {
     "originClaim": "Project-authored deterministic lettering and material construction using the SIL-OFL-licensed Fredoka glyph geometry; Batch 21 is composition/material reference only.",
@@ -172,6 +172,6 @@
     "notes": "Font licence and upstream provenance are retained under docs/source-assets/fonts/fredoka. Plan 11 remains final branding owner."
   },
   "rollback": {
-    "method": "No runtime logo pointer exists. Remove the unapproved v02 source record and candidate to return to the accepted Plan 03 anchor; retain the historical Batch 21 concept unchanged."
+    "method": "No runtime logo pointer exists. Preserve this rejected v02 source as review history and use the generated v03 record as the approved source authority."
   }
 }

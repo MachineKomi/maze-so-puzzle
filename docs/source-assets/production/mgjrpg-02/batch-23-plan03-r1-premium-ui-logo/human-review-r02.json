@@ -1,0 +1,23 @@
+{
+  "schema": "maze-art-source-review/v1",
+  "reviewedOn": "2026-09-04",
+  "reviewedBy": "Human",
+  "batchId": "mgjrpg-02-batch-23-plan03-r1-premium-ui-logo",
+  "decisionEvidence": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v08/human-decision.json",
+    "sha256": "eb445e290287e84c0a45ae8ebbd28e8dee02b30dc8e0fc53a60d032b64ea54a8"
+  },
+  "approvedSourceIds": [
+    "nav-home",
+    "nav-mazes",
+    "nav-book",
+    "nav-help",
+    "nav-sound",
+    "nav-muted",
+    "nav-restart"
+  ],
+  "rejectedSourceIds": [
+    "game-logo-mgjrpg02-v02-source"
+  ],
+  "publicationAuthorized": false
+}

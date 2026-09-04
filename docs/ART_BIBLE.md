@@ -958,7 +958,7 @@ live-composition audit.
 Nothing is retired by this foundation pass. The precise retain/refine/replace
 matrix and severity-ranked rationale remain in Plan 03 sections 5 and 8.
 
-### Plan 03-R1 premium utility tier — source-review proposal (2026-09-04)
+### Plan 03-R1 premium utility tier — Human-approved source direction (2026-09-04)
 
 The accepted Plan 03 runtime publication remains the rollback authority at
 `28946cbb04f45cb21cd51626914267ff4f71c375`. Plan 03-R1 does not reopen
@@ -985,20 +985,22 @@ material craft:
   common perceived weight, baseline, cutline thickness, safe space, and no
   alias-driven loss of the functional silhouette.
 
-This tier is **pending Human source review**. Candidate originals, rejected
+This complete seven-icon tier is **Human-approved at source level**. Candidate originals, rejected
 checkerboard attempts, exact prompts, ordered references, measurements, and
 proposed publication paths are under
 `docs/source-assets/production/mgjrpg-02/batch-23-plan03-r1-premium-ui-logo/`.
 No current runtime asset or catalogue pointer changes until a separate approval
 and byte-allocation publication gate.
 
-The same gate proposes one exact-lettered logo. Batch 21 Logo Candidate A is
-composition and material evidence only. Final candidate lettering is locally
-typeset from the exact string “Maze so Puzzle” using the vendored SIL-OFL
-Fredoka SemiBold glyph geometry and deterministic project-authored material
-masks. Lowercase `so`, absent subtitle, and absent yellow route line are
-machine-reconstructable facts. Generated glyphs, checkerboard pixels, and the
-Batch 21 route-line pixels are not carried forward.
+The deterministic R1 Logo Candidate A is Human-rejected and retained only as
+historical evidence. The approved replacement is generated Logo Candidate B
+under Batch 24: chunky lavender maze-stone `Maze`, a small coral `so` enamel
+plaque, mint magical-enamel `Puzzle`, gold foil, pearlescent highlights, and
+broad restrained holographic edge accents. It retains the strong Batch 21
+stacked silhouette while removing the yellow route line and subtitle. Exact
+prompts and its single depth-one technical cleanup are preserved; no
+edit-of-edit is accepted as authority. Runtime delivery and responsive lockups
+remain separately gated under Plan 11 and the performance allocation process.
 
 ## Research basis
 

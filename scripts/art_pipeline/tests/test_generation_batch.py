@@ -184,7 +184,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         owners: dict[str, list[str]] = defaultdict(list)
         _validate_generation_batch_documents(errors, warnings, owners)
         self.assertEqual(errors, [])
-        self.assertEqual(len(owners), 276)
+        self.assertEqual(len(owners), 279)
         owner_counts = {
             owner: sum(values == [owner] for values in owners.values())
             for owner in {
@@ -212,6 +212,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
                 "batch:mgjrpg-02-batch-21-front-door-art",
                 "batch:mgjrpg-02-batch-22-achievement-stickers",
                 "batch:mgjrpg-02-batch-23-plan03-r1-premium-ui-logo",
+                "batch:mgjrpg-02-batch-24-plan03-r1-logo-revision",
             }
         }
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-01"], 41)
@@ -238,32 +239,10 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-21-front-door-art"], 10)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-22-achievement-stickers"], 17)
         self.assertEqual(owner_counts["batch:mgjrpg-02-batch-23-plan03-r1-premium-ui-logo"], 11)
+        self.assertEqual(owner_counts["batch:mgjrpg-02-batch-24-plan03-r1-logo-revision"], 3)
         self.assertEqual(
             [warning["code"] for warning in warnings],
-            [
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-                "generation-batch-pending",
-            ],
+            ["generation-batch-pending"] * 21,
         )
 
     def test_final_static_source_coverage_audit_closes_only_named_gaps(self) -> None:
