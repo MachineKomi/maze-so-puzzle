@@ -1,0 +1,185 @@
+# Orchestrator handover — Sol to Astra
+
+Prepared 2026-09-04. This is a dated handover, not a replacement for the live
+roadmap, specifications, source, or subsequent Human decisions.
+
+## Immediate state and next action
+
+The Human is moving orchestration into a fresh Codex task in `C:\maze-game`.
+**Agent 01 is already running** the existing task's execution prompt,
+`docs/plans/EXECUTION_PROMPTS.md`, section **4. Agent 01 — UI/UX and cross-device
+layout overhaul**. Do not start it again, launch another runtime implementation,
+or edit its working files while it runs. The Human will bring its completion
+report to the new orchestrator. Review that report and the actual implementation
+before accepting it or issuing a bounded follow-up to the same specialist task.
+
+At handover inspection:
+
+- Branch: `main`; HEAD and the local `origin/main` tracking ref both resolved to
+  `6493110795d83bd799481e0efa5a5fd228360098` before this handover document.
+- Working changes: `src/App.tsx`, untracked `src/motion.ts`, and `src/ui/`.
+  These are live specialist work, not abandoned changes to clean up.
+- `package.json` version: `0.20.1`.
+- Recent checkpoints: `556542e` final art/authored friend roster;
+  `b0eb8a8` corrected Home hero cutout/unicorn horn;
+  `6493110` recorded the Home hero v04 deployment.
+- Repository: https://github.com/MachineKomi/maze-so-puzzle
+- Web app: https://maze-so-puzzle.vercel.app/
+
+Recheck all of this on arrival. The handover commit and Agent 01's work may have
+moved HEAD/state. Recorded starting commits are audit coordinates, not permission
+to revert newer work. Web main includes corrections after the immutable v0.20.1
+release; do not assume the existing packaged desktop download includes them.
+
+## Read and reconcile
+
+Read repository instructions, then:
+
+1. `docs/GAME_VISION_AND_DESIGN_SPEC.md`.
+2. `docs/plans/00-integrated-implementation-roadmap.md`, including later addenda.
+3. `docs/plans/EXECUTION_PROMPTS.md` and the complete Plan 01 with its addendum.
+4. `docs/PLAYTEST_BACKLOG.md` and relevant `docs/playtests/` records.
+5. Relevant current gameplay, art, music, performance, architecture, audit,
+   release and story documentation, plus actual source/tests/publication records.
+
+Desired behaviour follows current Human decisions and the vision/spec. Actual
+behaviour must be verified in code and tests. Historical prose is not proof.
+In particular, the roadmap's operating rules still contain an obsolete
+"Current programme stop: Plan 03 is still active source production/review"
+paragraph. Plan 03 publication and subsequent corrective checkpoints have
+landed; Agent 01 is authorized and active. Reconcile stale status language at
+the next safe documentation checkpoint rather than reopening old approval gates.
+
+## Programme sequence
+
+Completed foundations: Plan 07A measurement infrastructure; Plan 06 gameplay,
+content identity, hints and migration work; Plan 03 static art and publication;
+root 03M compatibility/OST work; v0.20.0/v0.20.1 previews and later corrections.
+These are not claims that all future hardware/performance gates have passed.
+
+Remaining order, using plan IDs rather than execution-prompt section numbers:
+
+1. **01 — UI/UX:** active now; review before releasing any successor.
+2. **04 — Lighting/wall depth:** owns terrain topology/render-model and regions.
+3. **02 — Graphics/VFX:** consumes lighting/scene/UI seams; owns presentation
+   direction, effect timing/cancellation and reward-shower presentation.
+4. **08 — Controls/Xbox/Steam Deck:** owns normalized input and controller policy.
+5. **05 — Limited sprite animation:** consumes final art, VFX and input contracts.
+6. **07B — Integrated performance/audio/delivery optimization.**
+7. **09 — Root campaign expansion/content ecology:** 16 to 24 mazes, four inserted
+   into the existing journey and four after its former end.
+8. **10 — Optional couch co-op and Friend Garden:** approved implementation plan,
+   but greybox/family acceptance precedes costly production and permanent changes.
+9. **11 — Final branding/front-door audit:** retain good approved early art.
+10. **13 — Backlog closure and release polish.**
+11. **12 — Final asset retirement/package hygiene:** intentionally after Plan 13.
+12. **RC-01 — Root integrated release-candidate qualification.**
+13. **14 — Planning-only gameplay/progression/QoL opportunity review:** persistent
+    XP/levels, sprinting and limited wall hopping are hypotheses, not approved scope.
+14. **15 — Final transferable process retrospective:** write the single canonical
+    `docs/REUSABLE_AGENTIC_GAME_DEV_PLAYBOOK.md` after all accepted follow-on work.
+
+Read the actual roadmap gates before each transition. Do not substitute this
+summary for a specialist's complete execution prompt.
+
+## Agent 01 acceptance and handoff
+
+Its prompt requests one sustained implementation with internal phases, not a
+fresh planning-only pass. It must leave a reviewable tree, evidence and pending
+gates; **it must not commit, push, bump versions or publish a release** under its
+current prompt. The root reviews and owns that checkpoint and `FP-UI1` release.
+
+Review especially:
+
+- An authored, gorgeous game UI, not a generic clean web dashboard: final sticker
+  icons, restrained pearl/frosted surfaces, licensed rounded readable typography,
+  appropriate large presentation art, and full/lite/static material variants.
+- Shared desktop/TV/iPad landscape topology, maze left and information deck
+  right; generous minimap; no wasted bands, clipped Bag, hidden objectives or
+  overflow with maximum equipment/friends. Phones are secondary but playable.
+- Semantic catalogue/rendition reuse, bounded media loading, accessible fallback,
+  DialogShell and focus surfaces, one Sound disclosure through MusicTransportPort,
+  neutral motion preference, stable VFX anchors and maintainable CSS layers.
+- `src/ui/interactionState.ts` owns UI/top-overlay truth. Agent 08, not Agent 01,
+  owns InputContext/InputAction/InputSource, `src/inputContext.ts`, controller
+  polling and the canonical semantic input policy. Avoid rival implementations.
+- Preserve two-stage title then Home, approved illustrated logo, v04 transparent
+  Home hero, current portraits/portal art, full friend catalogue/ledger modes,
+  stationary visible-player doors, save compatibility and gameplay legality.
+- Story UI may provide a typed short multi-turn host; Plan 09 owns later story
+  cast/canon review and content, not Agent 01.
+- Actual screenshots/geometry and interactions across 1920x1080, 1280x720,
+  1194x834, 1024x768, 960x540, 844x390 and 568x320; max content, Normal/Big,
+  dialogs, focus, reduced motion, quality tiers and text resizing.
+
+Audit the diff and reproduce proportionate checks. Do not accept "tests passed"
+as proof of visual quality or complete scope. Return a precise bounded follow-up
+if necessary. Once accepted, commit/push a named checkpoint, produce the planned
+family preview from a clean committed state, verify delivery, then provide the
+updated Agent 04 execution prompt for the Human to run in its existing task.
+
+## Important Human decisions to preserve
+
+- Ame must remain recognizably young, blonde and blue-eyed. Approved construction
+  and final rendering records win over rejected calibration boards. Style is
+  clean, chunky, readable anime/JRPG with bright material-local coloured contours,
+  restrained painterly shading and beautiful sticker UI; no dark-outline retrofit.
+- Poggle, Sprig, Goblin and Violet Moon were corrected into the final style.
+  Goblin/Violet Moon were omissions, not permanent legacy retention decisions.
+- All 32 friends now have authored rescues across the existing 16 mazes as well
+  as generated eligibility. Unicorn is rescued in Maze 1; Tea-Time Skeleton in
+  Maze 2. The tea-drinking skeleton is a friend, never an enemy.
+- The current Home hero v04 corrects residual white pockets and the unicorn horn.
+  Preserve its guarded pale edges; do not return to the earlier damaging cutout.
+- Plan 09 must use the final eligible assets purposefully: progressive enemy
+  introductions, thematic and mixed casts, friend variety, authored harmonious
+  fixed terrain pairs and meaningful regions; seeded variety in generated play.
+- Puzzles should be intuitive, solvable, varied and rewarding for children,
+  with rooms, optional battles/rescues, teaching and breaks from big mazes.
+- New OST is original contextual music, not the old placeholder files. Consume
+  the existing transport contract; later owners qualify continuous transitions,
+  preloading, Previous/Next/Shuffle and shared sound controls.
+- Co-op is optional, single-player remains default. Follow final Plan 10 rather
+  than resurrecting discarded pitches. Family testing must check that item
+  stealing/keep-away causes shared laughter rather than sibling distress.
+- Backlog ideas include Mimic surprise/reward showers, rotating objective-star
+  spiral, emotions/expressive portraits, achievement inspection/holographic
+  shimmer, optional sticker book, short VN dialogue and exploratory voice acting.
+  Preserve their owners/gates in the backlog; do not implement everything early.
+- Keep physical-device, family-playtest, signing and clean-host timing gates
+  honest. Browser emulation/cargo compilation are not physical iPad/TV proof.
+
+## Working and release rules
+
+- The Human normally copy-pastes prompts to the existing specialist tasks and
+  returns outputs. Orchestrate; do not create/trigger replacement tasks without
+  authorization. Only one runtime implementation agent at a time.
+- Protect all concurrent changes. Review exact paths/hunks; never blanket-stage,
+  reset, overwrite, or commit the active agent's partial work as a checkpoint.
+- Commit and push every meaningful accepted checkpoint. A local commit alone
+  is not off-laptop backup. Check remote agreement and report truthful status.
+- Preserve immutable release tags/artifacts. A main push can trigger deployment,
+  but verify CI/deployment and distinguish source, web and packaged versions.
+- Family previews are explicitly planned: FP-UI1 after Agent 01, then later
+  FP-CORE2, FP-CAMPAIGN and FP-COOP at the roadmap's acceptance gates.
+- Use existing art/provenance, performance and browser harnesses. Retain named
+  S01-S11 scenarios, deterministic engine routes, budgets and allocation evidence.
+  Never hide failures by weakening gates or calling contaminated timing qualified.
+- This older laptop has shown solver timeouts under parallel load. If reproduced,
+  distinguish contention from regressions and report exact commands; a passing
+  serial suite does not mean the default parallel command passed.
+- Retirement is copy-first, hash-verified and outside runtime delivery, with the
+  Human's explicit external-backup confirmation before repository removals.
+  Superseded art may still be rollback authority. Never delete it speculatively.
+- The Human plans to restart Codex but deliberately is NOT updating it because
+  an update prevented launch on another laptop. Do not repeat the update reminder.
+- Keep durable decisions, prompts, evidence and lessons in the repo so a future
+  orchestrator can continue without this chat. Do not promise old chat history or
+  ignored local artifacts will be reconstructed by cloning Git alone.
+
+## First reply in the new task
+
+After read-only orientation, briefly confirm the real current state and that
+Agent 01 remains the active specialist. If its output has not arrived, ask the
+Human to share it when ready; do not start the next implementation prematurely.
+If it has arrived, review and proceed with the checkpoint workflow above.
