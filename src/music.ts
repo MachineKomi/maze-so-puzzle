@@ -1,39 +1,17 @@
-/** Suno-generated tracks shipped from `public/assets/ost/` in both builds. */
+import { DEFAULT_MAZE_TRACK, DEFAULT_TITLE_TRACK, MUSIC_POOLS } from "./musicCatalogue";
+
+/** Transitional aliases retained only for the current v0.19 player call sites. */
 export const MUSIC_TRACKS = {
-  title: "/assets/ost/bgm_harbour_morning_v04.mp3",
-  earlyStory: "/assets/ost/bgm_tiles_in_the_sun_v04.mp3",
-  laterStory: "/assets/ost/bgm_little_champions_v04.mp3",
-  surprise: "/assets/ost/BG_Music_01_PixelSkywayRally.mp3",
-  arena: "/assets/ost/bgm_arena_overdrive_v04.mp3",
-  dungeon: "/assets/ost/Dungeon - Teeth Beneath the Temple.mp3",
-  gallop: "/assets/ost/Iron Heart Gallop.mp3",
-  sanctuary: "/assets/ost/Sanctuary - Warm Stone After Midnight.mp3",
-  shore: "/assets/ost/Shore - Saltfire Horizon.mp3",
-  throatBass: "/assets/ost/Throat Bass.mp3",
-  hardBass: "/assets/ost/Violent Hard Bass Throat Step.mp3",
-  hardBassOne: "/assets/ost/Violent Hard Bass Throat Step (1).mp3",
-  hardBassTwo: "/assets/ost/Violent Hard Bass Throat Step (2).mp3",
+  title: DEFAULT_TITLE_TRACK.url,
 } as const;
 
 /**
  * Full-length songs that are safe to loop during a maze. The short
  * `cue_new_friend...` file in the OST folder is deliberately excluded.
  */
-export const MAZE_MUSIC_TRACKS: readonly string[] = Object.freeze([
-  MUSIC_TRACKS.earlyStory,
-  MUSIC_TRACKS.laterStory,
-  MUSIC_TRACKS.surprise,
-  MUSIC_TRACKS.arena,
-  MUSIC_TRACKS.title,
-  MUSIC_TRACKS.dungeon,
-  MUSIC_TRACKS.gallop,
-  MUSIC_TRACKS.sanctuary,
-  MUSIC_TRACKS.shore,
-  MUSIC_TRACKS.throatBass,
-  MUSIC_TRACKS.hardBass,
-  MUSIC_TRACKS.hardBassOne,
-  MUSIC_TRACKS.hardBassTwo,
-]);
+export const MAZE_MUSIC_TRACKS: readonly string[] = Object.freeze(
+  MUSIC_POOLS.maze.map((candidate) => candidate.url),
+);
 
 export type MazeMusicKey = string | number;
 
@@ -148,7 +126,7 @@ export function createMusicRunSeed(): string {
   return `ame-${Date.now().toString(36)}-${fallbackRunSeedSequence.toString(36)}`;
 }
 
-export const DEFAULT_MUSIC_TRACK_URL = MUSIC_TRACKS.earlyStory;
+export const DEFAULT_MUSIC_TRACK_URL = DEFAULT_MAZE_TRACK.url;
 export const DEFAULT_MUSIC_VOLUME = 0.22;
 
 export interface MusicOptions {

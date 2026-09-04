@@ -49,34 +49,21 @@ afterEach(() => {
 });
 
 describe("background music", () => {
-  it("exposes every full OST song as maze BGM but excludes the short friend cue", async () => {
-    const { MAZE_MUSIC_TRACKS, MUSIC_TRACKS } = await import("./music");
+  it("exposes the complete delivered maze pool", async () => {
+    const { MAZE_MUSIC_TRACKS } = await import("./music");
 
-    expect(MAZE_MUSIC_TRACKS).toHaveLength(13);
-    expect(MAZE_MUSIC_TRACKS).toContain(MUSIC_TRACKS.arena);
-    expect(MAZE_MUSIC_TRACKS).toEqual(expect.arrayContaining([
-      MUSIC_TRACKS.dungeon,
-      MUSIC_TRACKS.gallop,
-      MUSIC_TRACKS.sanctuary,
-      MUSIC_TRACKS.shore,
-      MUSIC_TRACKS.throatBass,
-      MUSIC_TRACKS.hardBass,
-      MUSIC_TRACKS.hardBassOne,
-      MUSIC_TRACKS.hardBassTwo,
-    ]));
+    expect(MAZE_MUSIC_TRACKS).toHaveLength(14);
     expect(MAZE_MUSIC_TRACKS.every((track) => track.endsWith(".mp3"))).toBe(true);
-    expect(MAZE_MUSIC_TRACKS.some((track) => track.includes("cue_new_friend"))).toBe(false);
 
-    const ostFiles = import.meta.glob("../public/assets/ost/*.mp3", {
+    const ostFiles = import.meta.glob("../public/assets/ost/maze/*.mp3", {
       eager: true,
       import: "default",
       query: "?url",
     });
-    const fullLengthFiles = Object.keys(ostFiles)
+    const deliveredMazeFiles = Object.keys(ostFiles)
       .map((sourcePath) => sourcePath.replace("../public", ""))
-      .filter((sourcePath) => !sourcePath.includes("/cue_"))
       .sort();
-    expect([...MAZE_MUSIC_TRACKS].sort()).toEqual(fullLengthFiles);
+    expect([...MAZE_MUSIC_TRACKS].sort()).toEqual(deliveredMazeFiles);
   });
 
   it("shuffles every song once per cycle without immediate repeats", async () => {
@@ -144,7 +131,7 @@ describe("background music", () => {
 
     const audio = audioInstances[0];
     expect(audio?.src).toBe(DEFAULT_MUSIC_TRACK_URL);
-    expect(DEFAULT_MUSIC_TRACK_URL).toBe("/assets/ost/bgm_tiles_in_the_sun_v04.mp3");
+    expect(DEFAULT_MUSIC_TRACK_URL).toBe("/assets/ost/maze/MsP Maze Moonlit Friendship Quest.mp3");
     expect(audio?.loop).toBe(true);
     expect(audio?.preload).toBe("none");
     expect(audio?.volume).toBe(0.22);

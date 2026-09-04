@@ -44,10 +44,10 @@ export function progressionStateSignature(
   statefulCollectibleIds: ReadonlySet<string>,
 ): string {
   // Engine-owned arrays are kept sorted. Equipment and reusable keys already
-  // have canonical capability fields, and an opened reusable-key door cannot
-  // change future reachability. Only potions need their individual collection
-  // identity retained: equal current Power can otherwise hide an uncollected
-  // potion that changes a later route.
+  // have canonical capability fields. Door identity is retained because door
+  // opening is now its own stationary interaction before traversal. Only
+  // potions need individual collectible identity: equal current Power can
+  // otherwise hide an uncollected potion that changes a later route.
   const progressionCollectibles = state.collectedObjectIds.filter((id) => (
     statefulCollectibleIds.has(id)
   ));
@@ -63,6 +63,7 @@ export function progressionStateSignature(
     progressionCollectibles.join(","),
     includeAnimals ? state.rescuedAnimalIds.join(",") : "",
     state.defeatedEnemyIds.join(","),
+    state.openedDoorIds.join(","),
     state.status,
   ].join("|");
 }

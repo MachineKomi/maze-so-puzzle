@@ -74,6 +74,7 @@ export function createInitialGameState(level: LevelDefinition): GameState {
     openedDoorIds: [],
     goldStarsCollected: 0,
     sciencePointsCollected: 0,
+    exitArmed: true,
     status: "playing",
     steps: 0,
   };
@@ -205,11 +206,17 @@ export function movePlayer(
       });
     }
     openedDoorIds = addSorted(openedDoorIds, object.id);
-    events.push({
-      type: "door-opened",
-      objectId: object.id,
-      color: object.color,
-    });
+    // Opening is a stationary interaction. The original input commits the door
+    // exactly once but cannot also move Ame into its tile.
+    return {
+      state: { ...state, openedDoorIds },
+      moved: false,
+      events: [{
+        type: "door-opened",
+        objectId: object.id,
+        color: object.color,
+      }],
+    };
   }
 
   if (object?.kind === "enemy" && !defeatedEnemyIds.includes(object.id)) {
@@ -363,7 +370,11 @@ export function movePlayer(
   }
 
   const nextSteps = state.steps + 1;
-  const won = pointsEqual(target, level.exit);
+  const leftDisarmedExit = !state.exitArmed
+    && pointsEqual(state.position, level.exit)
+    && !pointsEqual(target, level.exit);
+  const armedForTarget = state.exitArmed || leftDisarmedExit;
+  const won = armedForTarget && pointsEqual(target, level.exit);
   const nextState: GameState = {
     ...state,
     position: target,
@@ -379,6 +390,7 @@ export function movePlayer(
     openedDoorIds,
     goldStarsCollected,
     sciencePointsCollected,
+    exitArmed: won ? false : armedForTarget,
     status: won ? "won" : "playing",
     steps: nextSteps,
   };
@@ -389,4 +401,17 @@ export function movePlayer(
   }
 
   return { state: nextState, moved: true, events };
+}
+
+/** Return from the pending completion choice without retriggering on the exit tile. */
+export function stayAfterPendingCompletion(level: LevelDefinition, state: GameState): GameState {
+  if (
+    state.levelId !== level.id
+    || state.status !== "won"
+    || !pointsEqual(state.position, level.exit)
+    || state.exitArmed
+  ) {
+    throw new Error("Stay here requires the current level's pending exit state.");
+  }
+  return { ...state, status: "playing", exitArmed: false };
 }

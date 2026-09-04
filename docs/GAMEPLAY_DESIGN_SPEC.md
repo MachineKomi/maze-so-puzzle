@@ -44,6 +44,288 @@ Art and content rules for this roster:
 - Lore cues stay species-specific. Do not distribute leaves, hearts, stars, gems, ribbons, or other motifs across the roster merely to make a design seem magical.
 - Feeding and care are affectionate garden presentation. They do not introduce hunger punishment, neglect states, injury, death, compulsory chores, or spend-to-maintain systems.
 
+## Implemented root-checkpoint 03M interaction contracts
+
+These Human decisions are implemented authority from the bounded 03M checkpoint
+between Plans 03 and 01. `engine.ts`, `session.ts`, `progress.ts`,
+`rewardRules.ts`, and their focused tests are runtime authority.
+
+### Exit choice and durable completion
+
+- Entering the exit creates a recoverable pending-completion state; it does not
+  yet bank rewards, clear the active run, or advance campaign progress.
+- The choice always offers **Stay here**, **Next maze**, and **Restart**. Stay is
+  focused/default while any friend remains; Next is focused/default after every
+  friend is rescued. Copy never describes optional friends as failure.
+- **Stay here** returns control with Ame on the exit tile and the entire run
+  intact. That exit instance is disarmed until Ame leaves its tile, then rearms;
+  staying cannot instantly reopen the choice or duplicate presentation.
+- **Next maze** commits completion, rewards, records and unlocks exactly once,
+  clears the active run at the documented durable boundary, then navigates.
+  Plan 10 may add **Take a break** as another post-commit destination without
+  removing the core three choices or taking default focus unexpectedly.
+- **Restart** uses the normal safe confirmation and awards nothing. Save/reload
+  while the choice is open restores the same pending choice and active run; it
+  neither fabricates completion nor loses collected state.
+- Victory presentation may acknowledge each newly created pending-completion ID
+  once, but presentation is not persistence authority. Held input is quarantined
+  across entry and exit from the choice.
+
+### Stationary keyed-door interaction
+
+- A legal move attempt into a closed matching door commits that semantic door as
+  open while Ame remains logically and visibly on the origin tile. The reusable
+  key is not consumed.
+- The door-open presentation and audio complete from that stable origin. A tap
+  never teleports Ame into the former door tile. Save/cancel/navigation after the
+  committed event restores an open door and the origin position.
+- Once the presentation lock clears, a later input—or the next eligible cadence
+  step of a still-held direction after neutral/lock rules permit it—may move into
+  the now-passable tile. The original input cannot both open and traverse.
+
+### Committed Mimic and reward tables
+
+- Every disguised Mimic uses one stable semantic object ID and one isolated,
+  auditable 65-good / 35-Mimic bucket result. The outcome and any reward amount
+  commit no later than first legal contact and cannot reroll across save/resume,
+  repeated input, presentation cancellation or versioned reconstruction.
+- 03M must add one explicit versioned table for good-chest Gold/Science choice
+  and ranges, ordinary chest/bag rewards, guaranteed rescue Gold, and enemy Gold/
+  Science drops. Values must be positive, bounded, age-appropriate, and justified
+  against current campaign totals; no later presentation or level owner invents
+  amounts locally.
+- Gameplay credit and resolved-object state commit exactly once before visual
+  shower authority. Plan 02 presents the result; Plan 09 implements/places the
+  disguised encounter and solver/content migration; Plan 10 may change only the
+  visual homing recipient while preserving single shared credit.
+
+`REWARD_RULES_VERSION = 1` freezes these future-content values:
+
+| Event | Gold | Science | Selection |
+| --- | ---: | ---: | --- |
+| Good disguised chest | 8–14 | 3–5 | 70% Gold / 30% Science after the independent 65% good-chest result |
+| Ordinary Gold bag / chest | 3 / 8 | — | Fixed existing treasure values |
+| Ordinary Science gears / beaker | — | 2 / 4 | Fixed existing treasure values |
+| Friend rescue drop | 2–4 | — | Deterministic amount from run + object identity |
+| Defeated enemy drops | 1–3 | 1–2 | Both deterministic channels |
+
+The good-chest Gold range brackets the existing eight-star chest and remains
+below a typical current first-clear reward (10 completion + 5 first-clear + 3
+per rescued friend, with 6 more for a perfect rescue). Science remains scarcer.
+Enemy and rescue drops are deliberately small positive acknowledgements. These
+tables are contract-only until Plan 09 introduces their objects and persistence;
+later tuning must version the table rather than silently changing a saved roll.
+
+## Approved Plan 09 content-ecology direction (not yet implemented)
+
+The final Plan 03 catalogue is a content vocabulary, not proof that the game
+uses it well. Plan 09 owns a versioned 24-chapter ecology matrix and the
+generated-maze variety migration. Until that work lands, the current sixteen-
+maze placements and generator remain runtime authority.
+
+### Campaign scale, spatial variety, teaching and encounter rhythm
+
+- The normal authored level is at most 16 tiles on either axis. Across the final
+  24 chapters no more than four may exceed 16, including inherited levels; each
+  is a named, family-tested set piece with rooms/spokes, event-gap/retraversal
+  evidence and a reason it cannot deliver the same puzzle more compactly. If the
+  current nine-of-sixteen audit still holds and Chapter 24 keeps the sole default
+  new exception, revise and compact at least six inherited maps under their
+  stable IDs with content-revision, save, solver/Hint and family-play evidence.
+- Every authored/generated level above 16 on either axis has at least two
+  recognisable open rooms with meaningful optional or functional content plus a
+  hub, spoke, loop, garden or puzzle-chamber relationship. Avoid consecutive
+  large authored chapters unless a recorded pacing reason and successful family
+  test support the adjacency.
+- Plan-09 levels normally keep the longest meaningful-event gap at or below 24
+  directional inputs and neutral retraversal at or below 15%. A 25–30-input gap
+  needs a named design reason and targeted evidence; anything above 30 needs
+  redesign or an explicit successful family-tested exception.
+- Never ship three corridor-dominant levels consecutively. Mix compact puzzle
+  rooms, hubs, loops, spokes, portal islands, open tableaux and occasional true
+  labyrinths. Rebuild Rainbow Power Parade under a content revision if the
+  integrated form still reads as a single snaking corridor.
+- A **true terminal branch** is a graph branch whose traversable route ends and
+  offers no onward route except backtracking; multiple terminal cells in one
+  open room count as one branch. Every such branch contains a small optional
+  collectible: Gold, Science, a chest/bag resolving to one of those currencies,
+  or another explicitly approved optional collectible that is durably credited
+  and visibly cleared. A clue, required tool, friend, enemy, shortcut, joke or
+  vista may coexist but never displaces that collectible. All optional Gold,
+  Science, chest, bag and equivalent treasure markers remain absent from the
+  minimap so a cleared dead end becomes a memory aid.
+- Include enjoyable optional low-Power battle rooms and varied encounter groups
+  without making combat or currency grind necessary for ordinary completion.
+  Start with at least four of the eight new Plan-09 chapters containing an
+  optional encounter room/branch; tune only from recorded family evidence. Each
+  new or materially revised level packet records required/optional encounter
+  counts, route spacing and the intended Power chain, reconciled to authored
+  objects and engine-derived routes.
+- Introduce a genuinely new rule through question → nearby visible answer →
+  short application, with no forced modal for a player who acts correctly. Keep
+  blocker and answer within one stable 6×6 view (or a documented equally legible
+  composition), with first successful use reachable within 12 directional
+  inputs unless Phase 0 records and validates a stricter or better equivalent.
+  Every teaching pocket also includes one real choice, one clearly optional
+  friend/reward branch, an appealing story/visual beat, a satisfying ordinary
+  route, cross-input parity and non-reading/non-colour/reduced/static clue parity.
+  Equivalent equipment families reuse that literacy rather than each receiving
+  a separate tutorial level.
+- Freeze generated sizes so at least 90% of the declared seed cohort is <=16 on
+  either axis. Every larger result must include meaningful room/event structure
+  and pass the same event-gap and terminal-branch rules.
+- Version and exercise at least three deterministic generated topology families:
+  classic labyrinth, room-and-spoke, and loop/garden/chamber. Topology-family
+  selection uses an isolated deterministic stream and participates in generation
+  fingerprints, golden seeds, distribution evidence, solver and Hint coverage.
+
+### Campaign guardians
+
+- Plan 09 creates one exhaustive typed gameplay-content eligibility registry
+  (expected `src/game/contentRoster.ts`) keyed by stable type-level `EnemyStyle`
+  / `AnimalSpecies` identities (or explicitly renamed, versioned final equivalents). It owns
+  campaign/generated eligibility and encounter-family tags separately from the
+  art catalogue's `active`, `dormant`, `deprecated` and `superseded` runtime-file
+  lifecycle. Exclusions require an owner, reason and review gate.
+- Individual authored encounters/rescues retain separate level-scoped semantic
+  `LevelObject.id` values and coordinates. Object insertion/reordering cannot alter the
+  type registry. Each approved Mimic family has a distinct disguised-object
+  family identity rather than masquerading as an ordinary `EnemyStyle`.
+- Every final Human-approved gameplay enemy identity and rescue-and-collect
+  friend species is eligible by default. An exclusion requires explicit Human
+  deferral and a return gate; an overfull debut curve is escalated as a pacing or
+  roster decision rather than resolved by silently omitting content.
+- Every final enemy identity marked campaign-eligible in that registry appears
+  in at least one meaningful, reachable story-maze interaction. Source variants,
+  optical sizes, frames and superseded files do not count as separate types and
+  are not placed to inflate coverage.
+- Give every type a readable spotlight or small-ensemble appearance before a
+  late all-roster showcase. A fallback sprite, unreachable object, one-frame
+  glimpse, or sole appearance inside the showcase does not satisfy this rule.
+- Introduce new silhouettes progressively. After the first combat lesson, an
+  ordinary chapter should introduce no more than two unseen types and should
+  stage their first appearance away from simultaneous rule/UI overload. All
+  eligible types debut by Chapter 23; Chapter 24 is the preferred all-roster
+  festival candidate if its roomed design passes pacing and performance gates.
+  It uses no more than twelve interactive guardians, while any other enemy types
+  appear as non-colliding presentational cameos outside `EnemyObject`, combat,
+  reachability and solver state. Normally no more than six enemy actors share the
+  6×6 camera; a higher bounded scene needs measured approval.
+- Alternate tightly themed ensembles with mixed casts. A skeleton-and-lizard
+  ruin/guard ensemble is preferred for final Chapter 13,
+  `lanternlight-labyrinth`, whose Lantern Ruins/monster-room identity supports
+  the theme. Enemy variety never creates an undocumented mechanic: ordinary
+  guardians retain the universal Power rule.
+- Mimic is one distinct disguised-object mechanic, not an `EnemyStyle` promise.
+  A versioned Mimic-family registry maps every final approved family—including
+  Treasure and Candy when both pass Plan 03—to stable closed, good-open and
+  revealed-enemy art identities. Every family uses the same committed seeded
+  65/35 result and required routes remain solvable under either good-chest or
+  enemy outcome. Plan 09 migrates the current always-visible Candy Mimic out of
+  ordinary enemy placement under a content revision while preserving durable
+  progress and historical generated versions. An unmet predecessor contract
+  returns to its owner or an explicit Human deferral gate; an always-visible
+  guardian cannot stand in for the mechanic, and art lifecycle does not express
+  mechanic readiness.
+
+### Campaign friends
+
+- Each final rescue-and-collect species appears as a fixed, stable-ID authored
+  rescue at least once across the 24 chapters. No species depends exclusively
+  on Surprise seeds, Friend Eggs, co-op or a future mode.
+- Early chapters favour familiar animals. Mythic friends arrive progressively
+  in fitting habitats or story contexts. Some levels deliberately group related
+  friends; others mix species for surprise. The final choice is authored and
+  remains stable across restart/replay.
+- Repeated species are allowed when they earn recognition, humour or thematic
+  cohesion. Coverage never makes rescue mandatory: ordinary solutions still
+  rescue zero and perfect solutions still rescue exactly every friend present.
+
+### Authored environments and regions
+
+- Every campaign level declares one fixed `EnvironmentManifest` chosen for mood,
+  landmarking, object/hazard contrast and campaign adjacency. It contains a
+  required base/default complete recipe and one to four complete named region
+  assignments; a single-region level assigns its sole region the base recipe.
+  It never rerolls its floor or wall on load.
+- A complete recipe binds floor, wall and optional dressings/treatments. One resolved
+  level-wide light source/profile governs every region and compatible scene cue;
+  regions do not introduce independent light directions. Catalogue hue/lightness
+  checks are necessary but do not replace actual-size Human/art review.
+- A level may use two to four named visual regions for spatially separated rooms,
+  islands, quadrants or portal destinations. Each terrain tile resolves
+  to exactly one region; each region uses a valid recipe; boundaries are
+  intentional and world-anchored. A visual recipe never alters collision,
+  movement or reachability. A stable semantic region ID may support landmark
+  names and Hint/Direction language, but texture/colour is never the only clue.
+  When a region ID or boundary informs a hint, objective or story instruction,
+  the semantic map is content-versioned and included in gameplay identity; its
+  assigned visual recipe remains presentation metadata.
+- Detailed materials remain off the minimap unless a quiet region cue is proven
+  to help the puzzle without competing with topology, portals or blockers.
+
+### Generated-maze content and visual ecology
+
+- Generated enemy/environment presentation is a pure deterministic function of
+  the seed, topology/rules generation version and presentation-roster version,
+  using random streams isolated from topology, object placement, Power and
+  rewards.
+- Enemy selection supports exact versioned modes. `single-style` repeats one
+  eligible style. With `N` enemy slots, `themed-ensemble` uses
+  2–`min(4,N)` distinct styles from one tagged family. `mixed-ensemble` uses two
+  distinct styles from two families at `N=2`, or 3–`min(6,N)` distinct styles
+  spanning at least two families at `N>=3`. A no-enemy maze makes no composition
+  draw; a one-enemy gentle maze is forced to `single-style`. Draw from feasible
+  modes and stable-ID-sorted versioned pools rather than silently degrading a
+  selected mode. Seed cohorts prevent starvation or domination of a family.
+- Mimics are selected through the separate versioned `MimicFamilyId` registry,
+  not the ordinary `EnemyStyle` pool. Each approved family explicitly declares
+  `generatedEligible`. A new generated-content version may place no more than
+  one disguised Mimic per maze and only in a solver-proven optional chest/
+  treasure slot; zero Mimics is common. Deterministic family and 65/35 outcome
+  streams are isolated from topology, required rewards, ordinary enemy
+  composition and solution truth. Declared seed cohorts exercise every eligible
+  family and both outcome branches without requiring either to solve a maze.
+- Friend selection is deterministic and without replacement inside one maze,
+  with thematic and mixed groups drawn from the full generated-eligible roster,
+  independent of campaign debut progression. Because species changes gameplay
+  identity and Garden outcomes, the eligible friend roster/algorithm has a
+  separate generated-content version and its resolved species feed the gameplay
+  fingerprint; it is not visual-only presentation.
+- A generated maze selects one complete validated environment recipe from a
+  stable eligible pool. It never combines arbitrary floor/wall files merely
+  because each is independently valid.
+- Current generated active runs are deliberately not persisted. Version and test
+  historical golden seeds, generated records and deterministic debug
+  reconstruction across topology/rules, generated-content and presentation-
+  roster versions; do not claim active-run migration/resume support.
+
+### Coverage ledger and acceptance
+
+The 24-row ecology matrix records enemy debut and repeats, friend rescues,
+weapons, cages, pickups/treasures, hazards, portals, environment regions,
+lighting/VFX/animation opportunities and adjacency. UI-only, Garden-only,
+co-op-only and branding assets remain with their owning plans; a campaign asset
+with no placement needs an explicit gameplay-eligibility disposition, reason,
+owner and review gate, plus an art-lifecycle update only when relevant.
+Plan 03's final integration manifest is reconciled across every gameplay-facing
+weapon, cage, key/door, portal, treasure/Science, traversal-item, hazard,
+environment and dressing family as well as enemies/friends. Each receives a
+deliberate consumer or an explicit disposition; optical/animation derivatives
+and fallback rendering do not count as distinct meaningful use.
+
+Automated validation must prove roster coverage, debut-before-showcase order,
+the Chapter 24 interactive/cameo separation and density bounds, fixed/valid
+  authored one-to-four-region manifests, complete region assignment, one resolved light, generated mode
+semantics including the one-enemy fallback, historical seed reconstruction,
+friend-content fingerprints, catalogue reachability and unchanged ordinary/
+  perfect solver truth. Multi-region rendering groups geometry by recipe/region
+  rather than creating one DOM/SVG node per tile. It deduplicates each required
+  URL and loads it at most once inside the current plus bounded-imminent
+  neighbouring/portal-region dependency closure; it never eagerly preloads every
+  level region. Human review still decides whether
+combinations are attractive, readable, memorable and appropriately paced.
+
 ## Difficulty model and measurable rubric
 
 Difficulty is multidimensional. The maintained report in `src/game/metrics.ts` measures engine-derived ordinary and perfect routes, rescue cost, raw branch coordinates, required state changes, physical retraversal, longest non-event run, and route-activity density. Raw branches are not automatically meaningful decisions, and the analyzer reports prerequisite depth as unavailable until a counterfactual dependency analysis exists. Solver results are design evidence, not a substitute for child observation.
@@ -71,21 +353,21 @@ The baseline is the reviewed Plan 06 audit. “After” is the current engine-de
 | Ch | Maze | Size | Before ordinary/perfect | After ordinary/perfect | Raw branches / required changes | Physical retraversal / non-event run | Design reading |
 | ---: | --- | --- | ---: | ---: | ---: | ---: | --- |
 | 1 | Little Star Trail | 6×6 | 26 / 34 | 6 / 6 | 2 / 0 | 0% / 6 | Whole-board movement prototype; no camera stack |
-| 2 | Shiny Sword | 11×11 | 37 / 53 | 37 / 53 | 5 / 4 | 0% / 7 | Weapon → fair fight → reusable key |
-| 3 | Splashy Boots | 13×13 | 64 / 80 | 64 / 80 | 4 / 7 | 0% / 13 | Potion/Power and water traversal |
-| 4 | Rainbow Picnic | 15×15 | 80 / 92 | 80 / 92 | 7 / 9 | 0% / 13 | Two reusable-key loops |
-| 5 | Toasty Toes | 13×13 | 69 / 77 | 69 / 77 | 5 / 10 | 0% / 9 | Lava recall and Power ordering |
-| 6 | Moonbeam Moat | 15×15 | 92 / 104 | 92 / 104 | 3 / 11 | 0% / 13 | Three-colour route planning |
-| 7 | Wishing Woods | 17×17 | 117 / 150 | 117 / 150 | 8 / 13 | 3% / 15 | Optional strong-guardian rescue |
-| 8 | Ame’s Grand Parade | 17×17 | 120 / 140 | 120 / 140 | 8 / 15 | 2% / 14 | Mixed-mechanic recall |
-| 9 | Springstep Sky Hollow | 19×19 | 193 / 217 | 181 / 195 | 14 / 8 | 35% / 42 | Spring Boots unlock a state-gated hole shortcut; still a child-test focus |
-| 10 | Lanternlight Labyrinth | 23×23 | 173 / 216 | 149 / 204 | 17 / 9 | 30% / 48 | Room shortcut reduces ordinary endurance; rescue room remains substantial |
-| 11 | Twilight Treasure Loop | 21×21 | 235 / 245 | 201 / 211 | 12 / 14 | 24% / 24 | Exit follows the blue-door chain; dense prerequisites remain the challenge |
-| 12 | Moonlit Friendship Quest | 23×23 | 231 / 241 | 161 / 171 | 13 / 14 | 17% / 20 | Cross-map shortcut preserves leaf/tool/key ordering |
-| 13 | Rose Heart Roundabout | 13×13 | 105 / 117 | 28 / 42 | 13 / 2 | 18% / 11 | Compact two-portal literacy and one key gate |
-| 14 | Clover Comeback Carnival | 17×17 | 103 / 177 | 103 / 177 | 10 / 8 | 20% / 27 | Portal/Power comeback with expensive optional mastery |
-| 15 | Friendship Crown Vault | 17×17 | 231 / 260 | 44 / 56 | 35 / 9 | 0% / 9 | Three-pair relay; all three reusable-key doors required; five rescues optional |
-| 16 | Rainbow Power Parade | 17×17 | 411 / 411 | 61 / 77 | 39 / 11 | 2% / 9 | Power-99 loop, Sunny Key return, compact optional rooms |
+| 2 | Shiny Sword | 11×11 | 37 / 53 | 38 / 54 | 6 / 4 | 0% / 8 | Weapon → fair fight → reusable key |
+| 3 | Splashy Boots | 13×13 | 64 / 80 | 65 / 81 | 5 / 7 | 0% / 13 | Potion/Power and water traversal |
+| 4 | Rainbow Picnic | 15×15 | 80 / 92 | 82 / 94 | 8 / 9 | 0% / 13 | Two reusable-key loops |
+| 5 | Toasty Toes | 13×13 | 69 / 77 | 71 / 79 | 7 / 10 | 0% / 9 | Lava recall and Power ordering |
+| 6 | Moonbeam Moat | 15×15 | 92 / 104 | 95 / 107 | 6 / 11 | 0% / 14 | Three-colour route planning |
+| 7 | Wishing Woods | 17×17 | 117 / 150 | 120 / 153 | 11 / 13 | 3% / 16 | Optional strong-guardian rescue |
+| 8 | Ame’s Grand Parade | 17×17 | 120 / 140 | 123 / 143 | 11 / 15 | 2% / 15 | Mixed-mechanic recall |
+| 9 | Springstep Sky Hollow | 19×19 | 193 / 217 | 182 / 196 | 14 / 8 | 35% / 42 | Spring Boots unlock a state-gated hole shortcut; still a child-test focus |
+| 10 | Lanternlight Labyrinth | 23×23 | 173 / 216 | 150 / 205 | 18 / 9 | 29% / 48 | Room shortcut reduces ordinary endurance; rescue room remains substantial |
+| 11 | Twilight Treasure Loop | 21×21 | 235 / 245 | 204 / 214 | 14 / 14 | 24% / 24 | Exit follows the blue-door chain; dense prerequisites remain the challenge |
+| 12 | Moonlit Friendship Quest | 23×23 | 231 / 241 | 164 / 174 | 16 / 14 | 16% / 20 | Cross-map shortcut preserves leaf/tool/key ordering |
+| 13 | Rose Heart Roundabout | 13×13 | 105 / 117 | 29 / 43 | 13 / 2 | 17% / 11 | Compact two-portal literacy and one key gate |
+| 14 | Clover Comeback Carnival | 17×17 | 103 / 177 | 104 / 178 | 10 / 8 | 20% / 27 | Portal/Power comeback with expensive optional mastery |
+| 15 | Friendship Crown Vault | 17×17 | 231 / 260 | 47 / 59 | 37 / 9 | 0% / 9 | Three-pair relay; all three reusable-key doors required; five rescues optional |
+| 16 | Rainbow Power Parade | 17×17 | 411 / 411 | 62 / 78 | 40 / 11 | 2% / 9 | Power-99 loop, Sunny Key return, compact optional rooms |
 
 Chapters 9 and 10 remain the principal endurance risks. Both are below baseline and have functional shortcuts, but their physical retraversal and non-event runs require direct child testing before any claim that the friction is solved.
 
@@ -105,7 +387,7 @@ Hint tiers are Goal (remind the current need), Principle (state the rule), Direc
 | 8 | Recall mixed mechanics without a new rule | Medium-high | Stable 120-input mastery course | Re-anchor to the next required state change |
 | 9 | Introduce Spring Boots and complete-hole-run jump | High; current endurance risk | State-gated shortcut, 14 rescue inputs | Principle tier explains “straight across the whole run” |
 | 10 | Read rooms and return through a shortcut | High; room orientation and rescue cost | Ordinary 149; optional room drives most perfect cost | Name functional room/landmark, not raw coordinates alone |
-| 11 | Deep prerequisite chain and changed exit meaning | High; 201 inputs but frequent events | Fourteen required state changes, four optional friends | Next prerequisite only; avoid revealing later chain |
+| 11 | Deep prerequisite chain and changed exit meaning | High; 204 inputs but frequent events | Fourteen required state changes, four optional friends | Next prerequisite only; avoid revealing later chain |
 | 12 | Combine leaf, poison, boots, Spring Boots, keys | High but denser than baseline | 70 ordinary inputs removed; rescues cost 10 | Engine route ensures leaf precedes poison and boots precede hazards |
 | 13 | Introduce persistent portal pairs in a compact board | Medium; novel topology | 28 ordinary / 42 perfect | Explain matching flower pair, then next step through it |
 | 14 | Apply three portal pairs to a comeback Power route | High; expensive perfect detours | Ordinary remains purposeful; rescue mastery is optional | Distinguish “come back stronger” from “wrong way” |
@@ -182,8 +464,8 @@ Replay reasons are explicit but non-coercive: rescue every friend, improve the c
 
 - Every level has a positive `contentRevision` and deterministic `gameplayFingerprint` over gameplay-relevant structure.
 - Authored objects receive semantic IDs based on level, kind, and intrinsic qualifier. Every repeated semantic role must declare explicit coordinate-to-ID mappings, and a golden campaign identity test binds all authored revisions to fingerprints. IDs are never intended as display order.
-- Active runs use schema v2 and require an exact level ID, revision, and fingerprint. A mismatch fails closed by removing only the stale active run, preserves durable progress, and shows a non-modal explanation. Storage failures are surfaced rather than claiming a save or reset succeeded.
-- Progress uses schema v4 with campaign order version 2 and stable `unlockedLevelIds`. Legacy numeric unlocks migrate through historical order. Counts are compatibility/display caches and are clamped to the current campaign length.
+- Active runs use schema v3 and require a stable run ID plus an exact level ID, revision, and fingerprint. They persist both ordinary play and the pending exit choice. A mismatch fails closed by removing only the stale active run, preserves durable progress, and shows a non-modal explanation. Storage failures are surfaced rather than claiming a save or reset succeeded.
+- Progress uses schema v5 with campaign order version 2, stable `unlockedLevelIds`, and a bounded completion-receipt ledger for exactly-once exit commits. Legacy numeric/v2/v3/v4 saves migrate through historical order. Counts are compatibility/display caches and are clamped to the current campaign length.
 - Current-layout route records store revision/fingerprint. On fingerprint change, the previous step best becomes labelled historical evidence and cannot compete with the revised route.
 - Map editing order: establish IDs/revision tests; edit map; increment revision; update fingerprint-derived expectations, solver routes, metric report, scenarios, story/docs; exercise legacy and current saves. Never silently reuse a revision for changed gameplay.
 

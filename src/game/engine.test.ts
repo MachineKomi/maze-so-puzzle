@@ -4,6 +4,7 @@ import {
   isObjectResolved,
   movePlayer,
   restartLevel,
+  stayAfterPendingCompletion,
 } from "./engine";
 import { parseAsciiLevel } from "./levels";
 
@@ -43,6 +44,21 @@ describe("immutable movement", () => {
     expect(result.state.steps).toBe(1);
     expect(before.position).toEqual({ x: 1, y: 1 });
     expect(before.steps).toBe(0);
+  });
+
+  it("disarms a pending exit until Ame leaves it, then rearms it", () => {
+    const testLevel = level("exit-choice", "#@.E....#");
+    const besideExit = movePlayer(testLevel, createInitialGameState(testLevel), "right").state;
+    const pending = movePlayer(testLevel, besideExit, "right").state;
+
+    expect(pending).toMatchObject({ status: "won", exitArmed: false, position: testLevel.exit });
+    const stayed = stayAfterPendingCompletion(testLevel, pending);
+    expect(stayed).toMatchObject({ status: "playing", exitArmed: false, position: testLevel.exit });
+
+    const left = movePlayer(testLevel, stayed, "right").state;
+    expect(left).toMatchObject({ status: "playing", exitArmed: true });
+    const returned = movePlayer(testLevel, left, "left").state;
+    expect(returned).toMatchObject({ status: "won", exitArmed: false, position: testLevel.exit });
   });
 
   it("leaves state unchanged when a wall blocks movement", () => {
@@ -194,12 +210,17 @@ describe("keys, doors, potions and boots", () => {
     state = movePlayer(matchingLevel, state, "right").state;
     state = movePlayer(matchingLevel, state, "right").state;
     const opened = movePlayer(matchingLevel, state, "right");
-    expect(opened.moved).toBe(true);
+    expect(opened.moved).toBe(false);
+    expect(opened.state.position).toEqual(state.position);
+    expect(opened.state.steps).toBe(state.steps);
     expect(opened.state.keys).toEqual(["red"]);
     expect(opened.state.openedDoorIds).toHaveLength(1);
     expect(opened.events[0]).toMatchObject({ type: "door-opened", color: "red" });
 
-    const back = movePlayer(matchingLevel, opened.state, "left").state;
+    const entered = movePlayer(matchingLevel, opened.state, "right");
+    expect(entered.moved).toBe(true);
+    expect(entered.state.position.x).toBe(state.position.x + 1);
+    const back = movePlayer(matchingLevel, entered.state, "left").state;
     const crossedAgain = movePlayer(matchingLevel, back, "right");
     expect(crossedAgain.events.some((event) => event.type === "door-opened")).toBe(false);
   });

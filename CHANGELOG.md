@@ -4,7 +4,7 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## Unreleased
+## 0.20.0 - 2026-09-04
 
 ### Added
 
@@ -25,6 +25,12 @@ than promising long-term save or API compatibility.
   plus reproducible route-quality and route-activity campaign metrics.
 - A maintained gameplay design specification with the sixteen-level progression
   and experience/asset-opportunity matrices and a family playtest protocol.
+- The complete 42-track original soundtrack catalogue in six typed context
+  pools, plus the shared transport boundary for future compact music controls.
+- Recoverable pending maze completion with Stay here, Next maze, and safe
+  Restart choices, backed by exactly-once completion receipts.
+- Versioned deterministic 65% good-chest / 35% Mimic resolution and bounded
+  future reward/drop tables for later content and VFX phases.
 
 ### Changed
 
@@ -52,6 +58,13 @@ than promising long-term save or API compatibility.
 - Pointer corner assistance may land only on safe, non-exit ordinary floor
   without a new interaction. Gold and Science text now describes keepsakes
   rather than implying a future shop.
+- Opening a matching keyed door is now a stationary interaction: its magic plays
+  while Ame remains on the origin tile, and only a later input crosses it.
+- Maze completion no longer banks rewards immediately. Players who missed a
+  friend default to Stay here and can continue from the goal tile; players with
+  every friend default to Next maze.
+- Title, story entry, maze, victory, and Adventure Book playback now resolve to
+  delivered OST pools; the Garden pool is ready for its later screen.
 
 ## 0.19.0 - 2026-09-02
 

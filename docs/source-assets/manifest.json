@@ -100,8 +100,8 @@
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02_plan03_r2_publish.py",
-        "sha256": "2016eb5b1ad83d944711cd9dff2b2a9e01b1b462a98ebfecbd217937b5f4ee12",
-        "bytes": 9373
+        "sha256": "5274013c79b86a3ea93d33fd774ad446a888dfd9be2e2a840a9076f2fb3b43ef",
+        "bytes": 9464
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02_publish.py",

@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { createInitialGameState, movePlayer } from "./game/engine";
+import { createInitialGameState, movePlayer, stayAfterPendingCompletion } from "./game/engine";
 import { CURATED_LEVELS, parseAsciiLevel } from "./game/levels";
 import { solveLevel } from "./game/solver";
 import type { GameState, LevelDefinition } from "./game/types";
 import {
   ACTIVE_RUN_STORAGE_KEY,
   LEGACY_ACTIVE_RUN_STORAGE_KEY,
+  VERSION_TWO_ACTIVE_RUN_STORAGE_KEY,
   clearActiveRun,
   createActiveRunSnapshot,
   readActiveRun,
@@ -45,7 +46,9 @@ function progressedPlayingState(level: LevelDefinition): GameState {
   for (const direction of solution.directions.slice(0, -1)) {
     const result = movePlayer(level, state, direction);
     expect(
-      result.moved || result.events.some((event) => event.type === "enemy-defeated"),
+      result.moved || result.events.some(
+        (event) => event.type === "enemy-defeated" || event.type === "door-opened",
+      ),
     ).toBe(true);
     expect(result.state).not.toBe(state);
     state = result.state;
@@ -56,7 +59,8 @@ function progressedPlayingState(level: LevelDefinition): GameState {
 
 function rawSnapshot(level: LevelDefinition, game: GameState = createInitialGameState(level)): ActiveRunSnapshot {
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
+    runId: "run-test-session-0001",
     levelId: level.id,
     contentRevision: level.contentRevision,
     gameplayFingerprint: level.gameplayFingerprint,
@@ -85,6 +89,7 @@ describe("active run persistence", () => {
       Array.from({ length: 300 }, (_, index) => [`state-${index}`, 1]),
     );
     const snapshot = createActiveRunSnapshot({
+      runId: "run-test-session-0002",
       mode: "normal",
       level,
       game: createInitialGameState(level),
@@ -188,7 +193,8 @@ describe("active run persistence", () => {
     }));
 
     expect(readActiveRun([level], storage)).toMatchObject({
-      schemaVersion: 2,
+      schemaVersion: 3,
+      runId: expect.stringMatching(/^migrated-/),
       levelId: level.id,
       contentRevision: 1,
       gameplayFingerprint: level.gameplayFingerprint,
@@ -196,6 +202,26 @@ describe("active run persistence", () => {
       hintUsesByState: {},
     });
     expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
+  });
+
+  it("migrates a valid schema-v2 active run with a stable derived run ID", () => {
+    const storage = new MemoryStorage();
+    const level = storyLevel(1);
+    const prior = {
+      ...rawSnapshot(level),
+      schemaVersion: 2,
+      runId: undefined,
+    };
+    storage.setItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
+
+    const migrated = readActiveRun(CURATED_LEVELS, storage);
+    expect(migrated).toMatchObject({
+      schemaVersion: 3,
+      levelId: level.id,
+      runId: expect.stringMatching(/^migrated-/),
+    });
+    expect(storage.getItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
   });
 
@@ -371,6 +397,7 @@ describe("active run persistence", () => {
     const game = progressedPlayingState(level);
 
     expect(writeActiveRun({
+      runId: "run-test-session-0003",
       mode: "normal",
       level,
       game,
@@ -378,7 +405,8 @@ describe("active run persistence", () => {
     }, storage)).toBe(true);
 
     expect(readActiveRun(CURATED_LEVELS, storage)).toEqual({
-      schemaVersion: 2,
+      schemaVersion: 3,
+      runId: "run-test-session-0003",
       levelId: level.id,
       contentRevision: level.contentRevision,
       gameplayFingerprint: level.gameplayFingerprint,
@@ -386,6 +414,23 @@ describe("active run persistence", () => {
       revealedTiles: [`${game.position.x},${game.position.y}`, `${level.start.x},${level.start.y}`],
       hintUsesByState: {},
     });
+  });
+
+  it("round-trips the pending exit choice and the disarmed Stay-here state", () => {
+    const level = parseAsciiLevel({
+      id: "pending-exit-save",
+      name: "Pending Exit Save",
+      objective: "Test",
+      map: ["#####", "#@.E#", "#...#", "#...#", "#####"],
+    });
+    let game = movePlayer(level, createInitialGameState(level), "right").state;
+    game = movePlayer(level, game, "right").state;
+    expect(game.status).toBe("won");
+
+    const pending = sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level]);
+    expect(pending?.game).toEqual(game);
+    const stayed = stayAfterPendingCompletion(level, game);
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(level, stayed), [level])?.game).toEqual(stayed);
   });
 
   it("fails closed and removes malformed JSON or the wrong schema", () => {
@@ -463,7 +508,8 @@ describe("active run persistence", () => {
     const game = progressedPlayingState(level);
     const duplicate = <T,>(values: readonly T[]): T[] => [...values].reverse().flatMap((value) => [value, value]);
     const sanitized = sanitizeActiveRunSnapshot({
-      schemaVersion: 2,
+      schemaVersion: 3,
+      runId: "run-test-session-0004",
       levelId: level.id,
       contentRevision: level.contentRevision,
       gameplayFingerprint: level.gameplayFingerprint,
@@ -500,6 +546,7 @@ describe("active run persistence", () => {
     storage.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(rawSnapshot(level)));
     storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, "stale legacy run");
     expect(writeActiveRun({
+      runId: "run-test-session-0005",
       mode: "tester",
       level,
       game: createInitialGameState(level),
@@ -510,6 +557,7 @@ describe("active run persistence", () => {
 
     const generated = { ...level, id: "generated-test", source: "generated" as const };
     expect(createActiveRunSnapshot({
+      runId: "run-test-session-0006",
       mode: "normal",
       level: generated,
       game: { ...createInitialGameState(generated), levelId: generated.id },
@@ -532,12 +580,14 @@ describe("active run persistence", () => {
     expect(() => readActiveRun(CURATED_LEVELS, broken)).not.toThrow();
     expect(readActiveRun(CURATED_LEVELS, broken)).toBeNull();
     expect(() => writeActiveRun({
+      runId: "run-test-session-0007",
       mode: "normal",
       level,
       game: createInitialGameState(level),
       revealedTiles: [],
     }, broken)).not.toThrow();
     expect(writeActiveRun({
+      runId: "run-test-session-0008",
       mode: "normal",
       level,
       game: createInitialGameState(level),

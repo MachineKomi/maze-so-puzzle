@@ -1,11 +1,49 @@
 # Music
 
-Maze so Puzzle ships its Suno-generated soundtrack as MP3 files in
-`public/assets/ost/`. Vite copies that directory into the browser production
-bundle and the bundle embedded by Tauri. Playback does not use a streaming
-service, Suno API, account, or runtime download from a third-party host.
+## 2026-09-04 original-OST integration status
 
-## Track catalogue
+The Human-delivered candidate original soundtrack is now present under
+`public/assets/ost/` in six context pools:
+
+| Pool | Tracks | Encoded bytes |
+| --- | ---: | ---: |
+| `title` | 6 | 14,769,828 |
+| `story` | 6 | 10,800,507 |
+| `maze` | 14 | 35,434,983 |
+| `victory` | 4 | 6,448,205 |
+| `adventure-book` | 6 | 18,165,975 |
+| `garden` | 6 | 13,531,815 |
+| **Total** | **42** | **99,151,313** |
+
+Checkpoint **03M** integrates the delivery. `src/musicCatalogue.ts` is the
+authoritative 42-track catalogue: every track has a stable semantic ID and one
+of the six pool IDs, every URL is covered against the files in `public/`, and
+the old root-level placeholder paths have been retired. The conservative current
+player now uses delivered title and shuffled Maze music; story entry, victory,
+and Adventure Book use their matching pools. Garden is catalogued and dormant
+until Plan 10 creates that screen.
+
+`src/musicTransport.ts` defines the canonical `MusicTransportPort`, deterministic
+fake, and current-player adapter for context/current-track state, mute,
+Previous, Next and Shuffle. Loop remains deliberately unavailable pending a
+Human policy choice. Plan 01 must bind its compact Sound disclosure only to this
+port, and Plan 08 must bind semantic input actions only to the same port.
+
+This compatibility step makes no claim of gapless context switching, predictive
+loading, mastering, or final platform listening. Track-level provenance/rights,
+duration, loudness/peak, crossfade, failure fallback and browser/Tauri listening
+evidence remain Plan-07B gates.
+
+The final controller must use a validated static catalogue; randomly select
+within the matching pool; keep enabled foreground playback continuous after the
+first permitted gesture; and prepare at most the bounded next candidate rather
+than eagerly downloading or decoding all 42 tracks. Vite/Tauri playback remains
+local and must not introduce a streaming service or runtime third-party account.
+
+The historical section below describes the pre-cutover v0.19.0 placeholder
+implementation for migration context. It is not runtime authority.
+
+## Historical v0.19.0 placeholder track catalogue
 
 | File | Current role |
 | --- | --- |
@@ -31,7 +69,7 @@ both catalogues and their tests in the same change. The short friendship cue is
 deliberately absent from the looping playlist and should be added only to a
 future one-shot event controller.
 
-## Playback behavior
+## Historical v0.19.0 playback behavior
 
 - Music uses one reusable `HTMLAudioElement`, loops, plays inline, and defaults
   to 22% volume so the short gameplay cues remain clear.

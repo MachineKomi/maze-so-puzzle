@@ -4,7 +4,9 @@ Status: manager-reviewed product authority for the improvement programme
 
 Decision date: 2026-09-02; art-craft calibration added 2026-09-03
 
-Applies to: Plans 01–13 and their implementation work
+Applies to: Plans 01–15, the root compatibility and release-candidate
+checkpoints, their implementation work, and any explicitly approved follow-on
+work created by Plan 14
 
 ## 1. Purpose and authority
 
@@ -61,6 +63,32 @@ These are **Human decisions**.
 - Unused space on either side of the large maze view must become purposeful board or information space.
 - The play composition should be near-identical across TV, desktop, iPad, and phone: the same information hierarchy, section order, labels, capabilities, and visual relationships. Responsive geometry may compact, wrap, or move a stable section only when required to keep the game usable; it must not create a different feature set or a device-specific puzzle experience.
 - iPad, desktop, and TV are optimized first. Phone remains functionally complete and playable even when its compact presentation cannot be equally spacious.
+- The finished interface must look like a polished, authored video-game UI from
+  the same world as the approved sprites—not a generic clean web dashboard with
+  themed images. Carry the Art Bible's paper-cut signals, magical surfaces,
+  painted-world hierarchy, shape language, colour discipline and delightful
+  specificity through HUD groups, menus, dialogs, prompts, focus and transitions.
+- A leading Maze-native surface language is luminous milky/pearl magical glass:
+  softly frosted bodies, quiet opaque text centres, bright inner rims, gentle
+  world colour, controlled depth and sparse storybook ornament. This is a
+  material direction, not permission to stack translucent cards or continuously
+  blur the moving maze. Full/lite/static recipes must retain the same hierarchy,
+  contrast and identity.
+- Kirby, recent Mario Party games, Trails in the Sky, and Super Mario Bros.
+  Wonder are taste references for joyful polish, expressive hierarchy,
+  readability and crafted console-game presentation only. Maze must retain its
+  own panel shapes, layout, icons, typography, logo, transitions and trade dress.
+- Typography is deliberately art-directed and locally packaged: a warm rounded
+  display/control voice plus a highly legible text treatment, with documented
+  licence, exact weights, glyph/arithmetic coverage, stable figures where useful,
+  fallback, byte cost, couch-distance legibility and 200% resize behaviour.
+- Use large approved presentation renditions when a contextual moment can afford
+  them. In particular, a blocker dialog prominently shows the exact required
+  item's beautiful large image plus short real text. Preserve the existing
+  blocker interaction and improve its semantic asset resolution/composition
+  rather than creating a duplicate flow. Never blur a field sprite by enlarging
+  it; never preload the whole presentation catalogue to support one visible
+  dialog.
 
 ### 4.2 Ame and the art direction
 
@@ -156,12 +184,16 @@ These are **Human decisions**.
   They remain kind Puzzlewild guardians under the universal Power and Polite
   Sword rules. `docs/enemies/ENEMY_FAMILY_SHEET.md` owns their original design,
   child-safety, sibling-construction and naming constraints.
-
 - Tea-Time Skeleton is a Human-approved rescue-and-collect friend, not a
   guardian or enemy. His approved green-tea sprite is catalogued under the
   dormant friend identity `green-tea-skeleton`; later content admission remains
   with friend rescue and Friend Garden contracts. His toy-bone construction may still be a visual consistency
   reference for Warrior Skeleton without implying shared gameplay taxonomy.
+- Treasure Mimic and the existing Candy Mimic are distinct visual chest
+  families but share the single PT22 disguised-chest rule: matching closed and
+  benign-open states, then a committed 65% reward / 35% revealed-guardian result.
+  Once that feature lands, Candy Mimic does not remain an always-visible ordinary
+  enemy except through an explicit Human deferral or pinned historical version.
 
 ### 4.3 Game design, gameplay, and challenge
 
@@ -171,6 +203,9 @@ These are **Human decisions**.
 - Required objectives and optional rescues/rewards must be unambiguous. Optional play must not be secretly required or presented as failure when skipped.
 - Hints should be progressive and on demand: remind, orient, narrow, then reveal only when requested. A Path hint must not prioritize an optional rescue.
 - The game should make intelligent, varied use of its full library of art, sound, music, characters, terrain, hazards, items, lighting, animation, and effects. Variety should come from meaningful combinations and pacing, not indiscriminate simultaneous clutter.
+- The authored campaign should reveal its guardian cast like a welcoming JRPG journey: begin with a small recognisable vocabulary, introduce new enemy silhouettes gradually in readable encounters, alternate memorable themed ensembles with surprising mixed casts, and eventually earn a late all-roster celebration. Every final Human-approved guardian intended for gameplay is campaign-eligible by default and receives a meaningful interactive use before that celebration; exclusion requires an explicit Human deferral, and art-file lifecycle state alone never decides gameplay eligibility. The celebration may use a bounded interactive guardian set plus non-colliding cameos so completeness does not become clutter, preload waste, solver explosion, or a combat gauntlet.
+- Every final rescue-and-collect friend species receives at least one fixed authored campaign rescue. Story-maze friends are curated for habitat, lore, pacing and occasional delightful contrast; generated-maze friends may vary through deterministic themed or mixed selections. No friend is available only through lucky procedural generation, co-op, or an Egg.
+- Each story maze has a fixed art-directed floor/wall environment. Clearly separated rooms, islands or portal destinations may use distinct compatible regions so they feel like different places, while generated mazes choose deterministic variety only from complete validated non-clashing environment recipes. Named regions may reinforce landmark and Hint language, but texture or colour is never the sole clue; one resolved level-wide light source still governs every region.
 - Each chapter should contain at least one memorable beat of wonder, surprise, humour, discovery, or emotional payoff. A surprise must remain legible and mechanically fair.
 - The experience should be engaging and encourage healthy voluntary replay through mastery, curiosity, expression, discovery, and warm rewards. It must not use coercive retention, monetization pressure, punishment, or manipulative compulsion.
 - Educational value should emerge from habits of thought—directions, comparison, prediction, decomposition, observation, revision, and perseverance—rather than worksheet-like interruption.
@@ -201,6 +236,17 @@ These are **Human decisions**.
 - The web app should load only what its current screen needs, become useful quickly, respond immediately, and remain smooth on the primary devices and a defined low-end profile.
 - Performance work should remove invisible or redundant work before reducing visible charm. Art, music, lighting, effects, and animation may be right-sized or quality-tiered only with perceptual and semantic parity.
 - No optimization may weaken engine determinism, save integrity, accessibility, reduced-motion behaviour, or controller correctness.
+- Give Amelia meaningful opportunities to play improvements before the complete
+  programme ends, but package only green, low-rework milestones rather than every
+  specialist handoff. The preferred first family preview follows Plan 01 so it
+  combines final static/front-door art with the rebuilt interface; an earlier
+  post-Plan-03-and-03M Art Preview is optional when runtime art plus the current
+  asset/audio catalogue are already green and cheap to package.
+- A family preview comes from one reviewed, committed and pushed checkpoint and
+  records exact versions, commit, artifact hash, build environment, included
+  milestone, known issues, smoke journey and rollback. It is not a claim of
+  public release, signing, store readiness, complete performance qualification,
+  or physical-device/accessibility coverage.
 
 ## 5. Experience pillars and design tests
 
@@ -242,6 +288,8 @@ These gates apply across specialist ownership.
 - The primary target layouts make the minimap visibly generous and eliminate accidental empty bands/tracks.
 - Every supported input source is inert behind the topmost modal or presentation lock and cannot replay a stale held action.
 - Every revised or new authored level has stable content identity, a versioned migration policy, an ordinary solution, an exact perfect-rescue solution, and replayable solver evidence.
+- The final 24-chapter ecology matrix accounts for every gameplay-eligible enemy and friend identity, records first introductions and repeat ensembles, assigns fixed authored environment recipes/regions, and gives every excluded final catalogue identity an explicit owner, reason and review gate rather than silently stranding approved work.
+- Generated enemy/theme presentation and friend-content selection are deterministic and versioned independently from topology/rules generation and from each other. Friend species belongs to gameplay identity; enemy skin and complete environment recipe remain presentation. Every selected recipe is catalogue-valid and visually reviewed, and changing either eligible roster cannot silently reinterpret a historical golden seed, record, maze or reward truth. Generated active runs are not currently persisted, so no specification may claim resume migration for them unless a later save contract introduces it.
 - No ordinary authored solution requires an optional rescue unless the product author explicitly changes the global rule and the game clearly discloses that exception.
 - New static art and animation frames pass actual-size review; every depiction of Ame preserves blonde hair and blue eyes.
 - Across static families, the smallest supported view must share coherent
@@ -276,7 +324,8 @@ The improvement programme uses these durable documents:
 
 - `docs/GAME_VISION_AND_DESIGN_SPEC.md` — human product authority and shared acceptance.
 - `docs/plans/00-integrated-implementation-roadmap.md` — execution sequence, ownership, gates, and handoffs.
-- `docs/plans/01-...` through `09-...` — specialist and campaign implementation detail.
+- `docs/plans/01-...` through `15-...` — specialist, campaign, closure,
+  retirement, opportunity-review and process-retrospective detail.
 - `docs/STORY_BIBLE.md` — shipped narrative canon and educational arc; update when story content changes.
 - `docs/ARCHITECTURE.md` — shipped technical authority; update when a new architecture replaces the old one.
 - `docs/AI_ASSET_PROMPTS.md` and source records — exact asset provenance, not a substitute for the art bible.

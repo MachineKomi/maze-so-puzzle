@@ -1,8 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Maze so Puzzle - For Ame to Solve!",
-  "version": "0.19.0",
-  "identifier": "com.ame.mazesopuzzle",
+  "version": "0.20.0",
+  "identifier": "com.ame.mazesopuzzle.preview",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://127.0.0.1:1420",

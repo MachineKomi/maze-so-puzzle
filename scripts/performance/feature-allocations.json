@@ -101,7 +101,35 @@
       "notes": "The allocation leaves 61 JavaScript bytes and 29 CSS bytes beyond the source-matched measurement for compression variance only. It authorizes no runtime asset growth; every later feature needs its own measured allocation."
     },
     { "owner": "controls", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Preserve held cadence, focus semantics, and controller responsiveness." },
-    { "owner": "audio", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Report title, level-entry, music-change, and offline behavior." },
+    {
+      "id": "audio-03m-six-pool-original-ost",
+      "owner": "audio",
+      "status": "approved",
+      "compressedJsBytes": 700,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 48994642,
+      "reason": "Checkpoint 03M replaces the deleted placeholder soundtrack with the Human-delivered 42-track original OST, catalogues every file under one of six stable contexts, and adds the canonical transport port/current adapter without eagerly decoding the catalogue. The public-byte delta is exact; the JS allowance shares the measured 03M aggregate with its gameplay allocation.",
+      "evidencePath": "docs/PERFORMANCE_BUDGETS.md#checkpoint-03m-and-fp-art-ost-static-allocation",
+      "reviewBy": "2026-10-04",
+      "rollbackPoint": "Restore the pre-delivery placeholder files and v0.19 music catalogue only as one coordinated rollback. Keep the MusicTransportPort API if any downstream Plan 01 or Plan 08 consumer has landed; Plan 07B must instead optimize behind it.",
+      "dependencies": "Human-delivered six-pool OST, accepted Plan 03-R2 checkpoint 7180fbffa778bd4d2df65eb40e9376b8fe2104ee, and Pass 07A allocation policy.",
+      "notes": "42 MP3s total 99,151,313 bytes and replace 50,156,671 bytes of placeholders, for exactly +48,994,642 runtime-public bytes. Final mastering, preload/crossfade behavior, retained-media qualification and package optimization remain Plan 07B."
+    },
+    {
+      "id": "gameplay-03m-pending-exit-door-and-reward-contracts",
+      "owner": "gameplay",
+      "status": "approved",
+      "compressedJsBytes": 800,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Checkpoint 03M implements recoverable pending completion, bounded exactly-once receipts, stationary keyed-door interaction, and versioned deterministic Mimic/reward/drop contracts. Together with the audio seam, the complete v0.20 candidate measures 1,278 gzip-9 JavaScript bytes above all earlier allocations.",
+      "evidencePath": "docs/PERFORMANCE_BUDGETS.md#checkpoint-03m-and-fp-art-ost-static-allocation",
+      "reviewBy": "2026-10-04",
+      "rollbackPoint": "Before external distribution, revert the 03M engine/session/progress/reward contract as one batch. After distribution, retain v5 progress and v3 active-run readers and evolve forward; never strand saved pending exits or remove receipt deduplication.",
+      "dependencies": "Human-approved 03M contracts, accepted Plan 06 gameplay checkpoint, and accepted Plan 03-R2 checkpoint 7180fbffa778bd4d2df65eb40e9376b8fe2104ee.",
+      "notes": "The combined 1,500-byte JS allowance for 03M audio/gameplay leaves 222 bytes above the exact measured aggregate. It authorizes no CSS or additional runtime media."
+    },
+    { "owner": "audio", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Plan 07B must rebaseline and qualify the integrated OST; do not omit Human tracks or eagerly prepare the full library. Report title, story, maze, victory, Adventure Book, Garden, music-change, failure, offline, retained-resource, and package behavior." },
     { "owner": "campaign", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "New levels need loading-phase and reachability evidence." }
   ]
 }

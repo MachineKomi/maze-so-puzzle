@@ -2,13 +2,23 @@
 
 ## 0. Manager-reviewed execution addendum
 
-Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, and VFX specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, 01, 04, and 02, and before Plan 05 animation.
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, and VFX specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, root checkpoint 03M, 01, 04, and 02, and before Plan 05 animation.
 
 ### Ownership and architecture amendments
 
 - Controls owns pure input intent, input-source normalization, semantic actions, held cadence, neutral/release gates, gamepad polling/ownership/deadzones, controller prompts, and focus navigation.
 - UI owns overlay state, DialogShell/game-menu markup, stable focusable semantic IDs/groups, scroll containers, layout, and visual focus treatment. Gameplay owns legal action semantics. Controls consumes both; it does not invent a parallel modal/menu UI.
 - Controls owns canonical `src/inputContext.ts`, structured `InputContext`, `InputAction`/`InputSource`, and `getInteractionPolicy()`. The policy consumes Plan 01's typed `src/ui/interactionState.ts` top-overlay/focus truth, Plan 02's presentation-busy lease, and Plan 06's gameplay-legality truth. It does not duplicate or mutate their source state. This supersedes any original wording that also assigns `getInteractionPolicy()` to UI.
+- Consume Plan 01's single Sound-menu disclosure and the root-frozen
+  `MusicTransportPort` landed at checkpoint 03M; do not create another audio
+  panel or player. Controls defines semantic Sound actions (`open`,
+  `toggle-mute`, `previous-track`, `next-track`, `shuffle-track`, and approved
+  `toggle-loop`) rather than simulating clicks or inferring behavior from
+  icon/text. Test them against the canonical fake and current adapter. `back`/close
+  removes only that overlay and returns focus to the exact stable invoker when
+  it still exists, otherwise to the screen's declared safe default.
+- Entering or leaving the Sound menu clears held movement/navigation, increments the input/context generation, and requires a neutral/new edge before any action. The opening A press can only open it; it cannot also mute or change track. While the menu is topmost, every gameplay action is blocked and only Sound-menu navigation/transport/back actions are eligible. Plan 07B later replaces or extends the current adapter behind the same port and verifies contextual selection, audible transport, prefetch, fades, and failure isolation; Plan 08 proves the unchanged semantic controller contract without depending on Plan 07B landing first.
+- Derive maze/tester lists from the canonical campaign order and stable campaign IDs. No controller focus graph, test, copy, or acceptance gate may assume a fixed sixteen-level campaign; newly inserted Plan-09 levels become reachable without changing controls code.
 - Model context as structured state—screen, top overlay/focus scope, presentation lock, and controller status—not a flat union that loses the underlying story/dialog/victory state. A disconnect/reconnect must restore the correct underlying context.
 - Make held scheduling modality-neutral after intent normalization. Keyboard, on-screen buttons, and gamepad share cadence/neutral gates; free-form board pointer/touch steering alone retains the pointer-specific safe corner assist.
 - Consume Plan 02's presentation-busy lease and cancellation boundaries. A controller hold is dropped and neutral-gated across combat, rescue, jump, portal, door, victory, navigation, overlay, blur, hidden, disconnect, and reconnect; no catch-up or queued replay.
@@ -178,17 +188,18 @@ Controller focus/prompts/reconnect/haptics ─> absent
 
 | Context | Current controls and focus | Current keyboard/pointer behavior | Controller target and current blocker |
 |---|---|---|---|
-| **Title** | Sound; Begin/Continue; Choose maze; Book; Surprise; Reset; secret version/tester. Play is force-focused although Sound is first in DOM. | Native Tab/Shift+Tab and Enter/Space; pointer clicks. | Default Begin/Continue. D-pad/stick traverse the visual grid; A activates; View opens Book. No current controller source. |
+| **Title** | Sound; Begin/Continue; Choose maze; Book; Surprise; Reset; secret version/tester. Play is force-focused although Sound is first in DOM. | Native Tab/Shift+Tab and Enter/Space; pointer clicks. | Default Begin/Continue. D-pad/stick traverse the visual grid; A on Sound opens the shared Sound menu; View opens Book. No current controller source. |
 | **Story** | One Start button, auto-focused; card/backdrop. | Start, pointer anywhere, or almost any key dismisses. | A advances/starts; X skips; B closes/skips; scroll controls if overflow. Opening input is quarantined. |
 | **Gameplay: Normal** | Optional tester picker; Story; Big; New maze; board; Hint; on-screen directions; Home/Mazes/Book/Help/Sound/Restart. Board is force-focused. | Arrow/WASD move; pointer/touch steer; arrows can hold. Tab reaches HUD/actions; header controls sit before board. | D-pad/left stick move. Y Hint, X Story, View Book, Menu game menu. A is intentionally unbound during free movement because interactions are movement-driven. |
 | **Gameplay: Big Maze** | Compact status, tester/story/Normal/New, board, map. Sidebar utilities are hidden. | Movement still works; Escape exits Big only when no higher surface. | Same movement and shortcuts. B exits Big; Menu always exposes Resume, view mode, Home, Mazes, Book, Help, Sound, Restart. |
-| **Game menu (new P0 surface)** | Does not exist. | Utilities are individual buttons, and some disappear in Big. | Safe default Resume; declarative actions for Normal/Big, Hint, Story, Mazes, Book, Help, Sound, Restart, Home. Menu/B close. Input is paused/blocked while open; game-design owns whether simulation is described as “pause.” |
+| **Game menu (new P0 surface)** | Does not exist. | Utilities are individual buttons, and some disappear in Big. | Safe default Resume; declarative actions for Normal/Big, Hint, Story, Mazes, Book, Help, Sound, Restart, Home. Sound opens the one shared Sound menu; Menu/B close. Input is paused/blocked while open; game-design owns whether simulation is described as “pause.” |
+| **Sound menu** | Shared UI surface supplied by Plan 01; no controller behavior yet. | Mute plus contextual previous/next/shuffle and approved loop controls; exact visual layout remains UI-owned. | Opening action is separate from transport. D-pad/stick move focus; A issues the focused semantic Sound action; B closes exactly this menu and restores its stable invoker. No move/hint/story/global shortcut leaks through, and the opening edge cannot activate the default item. |
 | **Hint** | Close X first; Got it. | Modal trap; Escape/X/Got it closes and restores trigger. | Default Got it; A acknowledges; B closes; no opening-edge fall-through. |
 | **Help** | Close X first; long instructions; Let’s explore. | Modal scroll. At 720p content/action overflows initial view. | Default Let’s explore; D-pad focus; right stick or triggers scroll; B closes; focus stays visible. |
 | **Missing item** | Close X; explanatory copy; acknowledgement. | Auto-opens after blocked move, clears some held input, returns to board. | Default acknowledgement; A or B closes; all movement is cleared and neutral-gated. |
 | **Too strong** | One acknowledgement; no X/Escape close. | Auto-opens after encounter and clears hold. | A acknowledges; B performs the same safe close. No haptic-only information. |
 | **Choose maze** | X; unlocked authored levels; Surprise. Scrollable list. | Modal trap and Escape. Choosing another run may open protected confirmation. | Default current/first unlocked maze, not X. D-pad/stick navigate; A chooses; B closes; triggers page-scroll. |
-| **Tester picker** | X; all 16 story levels; Back. Scrollable list. | Modal trap; tester runs suppress story, progress writes, and rewards. | Same picker rules. Current maze gets default focus; all 16 entries and Back are reachable. Debug-only visibility remains UI-plan owned. |
+| **Tester picker** | X; every entry from canonical campaign order; Back. Scrollable list. | Modal trap; tester runs suppress story, progress writes, and rewards. | Same picker rules. Current maze gets default focus; every canonical campaign entry and Back are reachable by stable ID. Debug-only visibility remains UI-plan owned. |
 | **Different-maze confirmation** | X; Keep this maze; Start the new maze. | First focus is X. | Safe default Keep this maze. A executes only after neutral gate; B cancels. |
 | **Reset-progress confirmation** | X; Keep my adventure; Yes, reset everything. | First focus is X; destructive action is adjacent. | Safe default Keep my adventure. Destructive action requires explicit navigation plus a new A edge after neutral; never a long hold as the only method. |
 | **Restart confirmation (replace armed state)** | Current Restart becomes Again! for 2.2s. | Second click/activation restarts. | Open a real confirmation with Keep playing default and Restart maze secondary. It follows modal generation/release rules for every modality. |
@@ -237,7 +248,13 @@ Every transition increments an input-generation number, clears transient movemen
 | **src/pointerControls.ts** | Keep pointer/touch steering and corner assist, but call it only for free-form board steering. |
 | **src/styles.css** or UI-plan **src/styles/controls.css** | Explicit controller focus state, prompt badges, connection/reconnect status. UI/UX owns sizing/placement. |
 
-The UI plan currently proposes **DialogShell**, **UtilityNav**, **GameScreen**, **TesterTools**, a layered CSS tree, and **getInteractionPolicy()**. Do not create a competing policy or dialog shell. Controls owns the types and state transitions; UI owns the responsive component/layout implementation and consumes stable IDs such as **data-control-id**, **data-focus-group**, and optional neighbour overrides.
+The accepted UI plan supplies **DialogShell**, **UtilityNav**, **GameScreen**,
+**TesterTools**, a layered CSS tree, typed `src/ui/interactionState.ts`, stable
+focusable IDs/groups and a narrow pre-controller input blocker. Do not create a
+competing dialog shell or UI state model. Controls owns canonical
+`src/inputContext.ts`, `getInteractionPolicy()`, semantic input types/actions,
+controller navigation state and optional neighbour overrides; it consumes the
+UI IDs/state and replaces the narrow blocker only after cross-input parity tests.
 
 ### Core types
 
@@ -257,6 +274,7 @@ export type InputContext =
   | "gameplay"
   | "gameplay-presentation"
   | "game-menu"
+  | "sound-menu"
   | "help"
   | "hint"
   | "missing-item"
@@ -279,6 +297,16 @@ export type InputAction =
   | { type: "book" }
   | { type: "hint" }
   | { type: "story" }
+  | {
+      type: "sound-menu";
+      action:
+        | "open"
+        | "toggle-mute"
+        | "previous-track"
+        | "next-track"
+        | "shuffle-track"
+        | "toggle-loop";
+    }
   | { type: "page"; direction: "previous" | "next" }
   | { type: "section"; direction: "previous" | "next" };
 
@@ -311,6 +339,8 @@ export type ResetReason =
 ~~~
 
 **gamepadControls.ts** returns semantic intents and connection/status changes. It accepts snapshots and time as inputs. It never calls React setters, DOM methods, audio, persistence, or the game engine.
+
+The `sound-menu` action is resolved only against the current structured context. `open` is valid from a visible registered Sound control; transport actions are valid only while the Sound menu is topmost. Closing uses the ordinary `back` action so the context owner can restore the captured semantic invoker. If loop is not part of the accepted music UI at execution time, `toggle-loop` remains unsupported and is neither registered nor prompted; controls must not create an invisible capability.
 
 **useGamepadControls.ts** owns all browser side effects. It keeps raw samples, prior button states, latch state, repeat timers, active controller, and generation in refs. It calls React only when a discrete action, connection state, prompt mode, or focus ID changes.
 
@@ -453,6 +483,7 @@ The invariant rules are: **A confirms**, **B closes/backtracks one layer**, **Me
 | Gameplay Normal | Move Ame | No action | Open game menu | Read chapter | Hint | Open Book | Open game menu | No action | No action |
 | Gameplay Big | Move Ame | No action | Return to Normal | Read chapter | Hint | Open Book | Open game menu | No action | No action |
 | Game menu | Move focus | Activate item | Resume/close | As labelled only | As labelled only | Open Book if enabled | Resume/close | Change explicit menu tabs only if added | Scroll |
+| Sound menu | Move focus | Issue focused mute/previous/next/shuffle/approved-loop action | Close and restore Sound invoker | No action | No action | No action | No action | No action | Scroll only if the responsive surface genuinely overflows |
 | Help/Hint/Missing | Move focus | Acknowledge/activate | Close | No action | No action | No action | No action | No action | Page/scroll |
 | Too strong | Move focus (one action) | Acknowledge | Acknowledge/close | No action | No action | No action | No action | No action | Scroll if required |
 | Maze/tester picker | Navigate list/grid | Select | Close/back | No action | No action | No action | No action | Previous/next logical list section/page | Page/continuous scroll |
@@ -467,6 +498,7 @@ Context-sensitive actions are limited to their named domain:
 - X always concerns story: open it during play, skip it while it is open.
 - View always concerns the Adventure Book: open it, or return from it.
 - Shoulder/trigger actions exist only where the visible prompt names a section/page/scroll affordance.
+- The Sound control always opens the shared menu; it never directly toggles mute. Its opening edge is quarantined, transport commands are semantic actions valid only in the topmost Sound context, and B restores the originating Sound control without exposing a gameplay edge.
 - Guide/Xbox, stick clicks, and unprompted buttons never carry essential behavior.
 
 ## 11. Controller navigation, prompts, and input-mode switching
@@ -641,7 +673,7 @@ Because parallel plans are changing App/layout boundaries, every implementation 
 
 Work:
 
-- Reinspect **App.tsx**, the UI plan's **DialogShell/getInteractionPolicy**, current tests, and all concurrent changes.
+- Reinspect **App.tsx**, the UI-owned **DialogShell/interactionState/getCurrentInputBlock**, the Controls-owned **getInteractionPolicy**, current tests, and all concurrent changes.
 - Establish **src/inputContext.ts** as the single input/top-layer contract, with controls owning types/state and UI owning markup/layout.
 - Add failing regressions for movement behind level/reset pickers and stale input crossing presentations.
 - Encode the chosen assist policy: pointer/touch board steering only; discrete directions exact.
@@ -827,6 +859,8 @@ Files that should not need gameplay changes:
 - geometry scoring, explicit neighbours, ordered lists, edge non-wrap;
 - safe default and last-focus restoration;
 - Book section/page actions and scroll target;
+- Sound-menu open edge cannot activate its default item; each registered semantic transport action dispatches exactly once only in the topmost Sound context; B restores the captured invoker or safe default; move/hint/story/menu actions cannot leak through;
+- maze/tester focus registration enumerates canonical campaign order and stable IDs, including an inserted-level fixture, without a fixed count;
 - input-mode jitter filters and controller return rules.
 
 **Corner/fairness**
@@ -897,7 +931,7 @@ Add 4K60 as a scaling/latency stress case, not the minimum supported output. Che
 - Begin/Continue, title grid, picker, tester picker where enabled.
 - Read/advance/skip Story.
 - Normal and Big Maze; D-pad and stick taps; long holds; rapid direction changes; exact diagonals; near-threshold drift.
-- Hint, Help, game menu, Home, Mazes, Book, Sound, Restart.
+- Hint, Help, game menu, Home, Mazes, Book, Sound-menu open/close, mute, previous, next, shuffle, approved loop, and Restart. Verify focus returns to each originating Sound control and no gameplay action leaks while the menu is topmost.
 - Book focus navigation, section jumps, page/continuous scroll from top and bottom.
 - Every confirmation with A held while opening; confirm no fall-through.
 - Missing item, too-strong enemy, rescue/pickup/presentation locks.
@@ -919,7 +953,7 @@ Add 4K60 as a scaling/latency stress case, not the minimum supported output. Che
 - Browser/PWA/service-worker update with existing save.
 - Normal exit, forced Steam exit, Deck reboot, suspend, browser update.
 - Verify no private/kiosk profile is ephemeral.
-- Verify sound mute state, cold audio activation behavior, HDMI output, and silent fallback.
+- Verify Sound-menu state/focus restoration, mute, previous/next/shuffle/approved-loop semantics, cold audio activation behavior, HDMI output, and silent fallback. Plan 08 may leave physical audibility rows pending, but mocked/controller journeys must still prove exactly one typed command per new button edge.
 - For Tauri, verify separate local storage path and no implied migration from browser origin.
 
 Hardware evidence is mandatory because mocked CI cannot prove USB/Bluetooth drivers, Flatpak permissions, Steam Input virtualization, WebView host delivery, transport-specific mapping, rumble, or television latency.
@@ -982,7 +1016,7 @@ Controller ID, active index, raw states, focus history, input mode, and repeat s
 
 ## 20. Coordination with the other seven plans
 
-1. **UI/UX layout:** owns PlayShell/HUD geometry, command/focus deck, More surface, target sizes, DialogShell markup, and responsive styles. Controls supplies **InputContext**, stable focus IDs/groups, game-menu action requirements, prompt view model, and controller focus state. Land one shared interaction policy.
+1. **UI/UX layout:** owns PlayShell/HUD geometry, the persistent information/control deck, More surface, target sizes, DialogShell markup, typed UI/top-overlay state, base stable focus IDs/groups, and responsive styles. Controls supplies canonical **InputContext/getInteractionPolicy**, game-menu action requirements, optional navigation-neighbour metadata, prompt view model, and controller focus state. Land one shared semantic policy over the UI-owned state.
 2. **Game design:** owns gameplay rules/difficulty and the language of “pause.” Controls fixes the direct-input assist policy to exact cardinal movement; game design signs off on the documented pointer-only exception and no queued move across presentations.
 3. **Performance:** owns measured CPU/battery/render budgets. Controls provides poll/action/commit instrumentation and enforces no idle React commits.
 4. **VFX:** owns visual feedback. It exposes semantic start/end/cancel events; controls clears/neutral-gates at presentation boundaries and may request haptic hooks without dictating visuals.
@@ -998,7 +1032,8 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 
 - [ ] Given the application has been opened from its supported Steam shortcut, an Xbox controller alone can expose/connect, focus Begin/Continue, and complete every major flow.
 - [ ] No essential action requires hover, touch, mouse, keyboard, trackpad, or Deck touchscreen.
-- [ ] Title, maze selection, tester selection, Story, Normal/Big gameplay, Hint, Help, game menu, Home, Mazes, Book, Sound, Restart, confirmations, feedback, victory, rewards, Next, Replay, Return Home, and Reset are controller-complete.
+- [ ] Title, maze selection, tester selection, Story, Normal/Big gameplay, Hint, Help, game menu, Home, Mazes, Book, the complete shared Sound menu, Restart, confirmations, feedback, victory, rewards, Next, Replay, Return Home, and Reset are controller-complete.
+- [ ] Sound opens through a distinct semantic action; mute/previous/next/shuffle/approved-loop each dispatch exactly once only while that menu is topmost; B restores the exact stable invoker or declared safe fallback; the opening/closing edge never activates a transport or gameplay action.
 - [ ] Every controller-navigable element has a clearly visible, on-screen focus state suitable for television viewing.
 - [ ] B removes exactly one topmost layer; A confirms; displayed prompts always match the action.
 
@@ -1017,6 +1052,7 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 - [ ] Modal confirmations cannot be activated by the same button press that opened them.
 - [ ] Reset and Restart default to the safe action and require explicit selection/new A edge for destructive action.
 - [ ] No gameplay input reaches the maze behind a modal, Story, picker, game menu, victory, reconnect layer, or presentation.
+- [ ] No gameplay or global shortcut reaches the maze behind the Sound menu; opening/closing it clears held input, changes generation, and requires a neutral/new edge.
 - [ ] Blur, hidden, modal/context transition, navigation, disconnect, controller swap, and presentation start/end clear input; returning never replays a held move.
 - [ ] Wired/Bluetooth connect, active disconnect, replacement, and reconnect are graceful and never corrupt/save unintended state.
 - [ ] Multiple pads use deterministic first-deliberate ownership and never double-dispatch.
@@ -1045,7 +1081,9 @@ These do not block pure shared-app implementation, but block a release claim:
 
 - **Delivery owner:** confirm the exact current Chrome Flatpak application ID and whether **/run/udev:ro** is required on the chosen SteamOS channel.
 - **Audio owner + hardware QA:** determine whether each qualified browser/webview starts current Web Audio from controller-only navigation; document silent fallback where it does not.
-- **UI/controls owners:** agree merge order and exact location of **InputContext/getInteractionPolicy**, DialogShell, game menu, and stable control IDs.
+- **UI/controls integration:** verify canonical `src/inputContext.ts` and
+  `getInteractionPolicy()` consume—not duplicate—UI-owned DialogShell,
+  `src/ui/interactionState.ts`, game-menu markup and stable control IDs.
 - **Game-design owner:** sign off the explicit pointer/touch-only corner assist correction.
 - **Performance owner:** replace the provisional 0.5ms p95 polling target with measured Deck evidence.
 - **Release owner:** decide whether offline PWA is required for launch or a hosted connection is acceptable.

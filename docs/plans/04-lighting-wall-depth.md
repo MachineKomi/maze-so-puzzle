@@ -2,15 +2,33 @@
 
 ## 0. Manager-reviewed execution addendum
 
-Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Art Bible, UI/UX spec, and this complete plan before implementation. Execution is gated on Plans 07A, 06, 03, and 01. This addendum supersedes conflicting planning details.
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Art Bible, UI/UX spec, and this complete plan before implementation. Execution is gated on Plans 07A, 06, 03, root checkpoint 03M, and 01. This addendum supersedes conflicting planning details.
 
 ### Adopted integration requirements
 
 - Final Plan-03 art/material metadata is a hard dependency. Lighting owns runtime illumination, topology, wall depth, highlights, contact/cast shadows, and theme calibration; it does not independently repaint materials or change the catalogue's visual language.
+- Resolve wall response through catalogue-defined, versioned material-profile IDs. The lighting implementation must enumerate the accepted catalogue/region recipes at execution time; it must not preserve a closed hard-coded union or switch on theme names, asset filenames, or campaign position.
 - Static character art retains soft neutral form shading. Runtime lighting grounds opaque sprites with separate contact/cast surfaces; it does not pretend to relight their internal pixels. VFX owns local magical glows/flashes in assigned layers.
+- Resolve entity grounding from art-owned metadata: runtime-shadow eligibility, grounded/floating/flush mode, normalized ground pivot, physical height class or coefficient, and emissive policy. Unknown entries use the declared geometry-class fallback and a diagnostic; no filename, label, species, or enemy-name switch may determine a shadow.
 - Hazards are flush surfaces: they may receive a restrained wall cast shadow through the approved receiver mask, but water, lava, poison, portals, and other flat emissive fields do not cast wall-like shadows themselves.
 - Consume the Plan-01 MazeViewport host, scene slots, CSS layer names, and transform hierarchy. Do not hard-code a legacy `.game-stage` or introduce a competing layer system.
 - Establish the one shared cached `MazeTerrain` extraction, boundary topology, world mask, gutter, and compositing order. Lighting owns wall/topology/grounding layers; Plan 02 later attaches moving material/emissive/transient layers to this seam.
+- Make that render model catalogue- and region-aware before Plan 09. A level may
+  resolve each tile to a stable named visual region whose valid environment
+  recipe supplies floor, wall, dressing and material calibration. Region masks,
+  texture origins and transitions are world-coordinate cached presentation data;
+  they never fork terrain collision or solver topology. A single-region level
+  remains the zero-cost/default contract. The seam accepts exactly one fixed
+  `EnvironmentManifest` with a required base/default complete recipe and one to
+  four complete named region assignments; reject empty, uncovered, overlapping
+  or more-than-four-region manifests.
+- Provide synthetic two-region, portal-island and quadrant fixtures proving
+  complete assignment, connected-wall transitions, camera/portal continuity,
+  gutter coverage and safe fallback to the declared base recipe. Do not fill the
+  campaign matrix here: Plan 09 authors fixed regions after this seam lands.
+- Preserve one resolved maze-wide light in this version. Regions may use their
+  own material-response calibration but do not invent independent light vectors;
+  multiple unrelated light sources need a later explicit scene-light contract.
 - Create dedicated shadow and sparkle nodes/wrappers. Fix the current `.player-layer::before` collision structurally so VFX can style sparkle without taking grounding ownership.
 - Preserve explicit varied authored light angles and deterministic generated bearings. New curated levels, including Plan 09, must set intentional light metadata rather than depend on title/order hashes.
 - Aim for materially more believable three-dimensional walls while preserving clean anime-JRPG stylization, path readability, and the authoritative collision silhouette. Photorealistic grime, heavy darkness, and corridor-obscuring extrusion are out of scope.
@@ -20,7 +38,7 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementa
 
 Create and maintain `docs/LIGHTING_AND_DEPTH_SPEC.md` unless the accepted Art Bible already contains an unambiguous owned section, in which case update that and record the decision. Update `docs/ARCHITECTURE.md`, catalogue material metadata, audit, and release visual evidence when implementation ships.
 
-Completion requires cardinal/diagonal/continuous direction proofs, every active material, camera seams, fractional/DPR rendering, dedicated entity grounding, hazard receiver behavior, full/medium/low tiers, reduced/contrast modes, TV/desktop/iPad/phone, packaged WebView, cache/rebuild counts, and all full project gates.
+Completion requires cardinal/diagonal/continuous direction proofs, every active material, single- and multi-region camera/portal seams, fractional/DPR rendering, dedicated entity grounding, hazard receiver behavior, full/medium/low tiers, reduced/contrast modes, TV/desktop/iPad/phone, packaged WebView, cache/rebuild counts, and all full project gates.
 
 Status: planning and research only
 
@@ -76,7 +94,7 @@ The implementation must preserve these invariants:
 2. Wall height is a view-space convention. It does not rotate when the scene light rotates.
 3. Highlight, shade, and cast vectors come from one resolved light. No layer may invent its own directional convention.
 4. Contact occlusion is short-range and mostly light-independent. Cast shadows are directional and height-dependent. They must be represented separately.
-5. Terrain lighting is generated in world coordinates and cached per level/theme/light tuple. Camera movement must translate the already-built world; it must not rebuild or re-anchor wall shading.
+5. Terrain lighting is generated in world coordinates and cached per level content revision, visual-region assignment revision, material-profile revision, resolved light, and quality tier. Camera movement must translate the already-built world; it must not rebuild or re-anchor wall shading.
 6. Hazards remain flush gameplay surfaces. Portals remain emissive/flat unless an object-specific height class explicitly says otherwise.
 7. The renderer must have a deterministic low-quality fallback that preserves boundary contrast and grounding without blurred filters.
 
@@ -639,7 +657,7 @@ entity root (grid/world position)
   sprite and state effects
 ```
 
-Use semantic caster classes or data:
+Use catalogue geometry classes as validated fallbacks, with per-entry grounding metadata as the authority:
 
 | Caster class | Height coefficient | Examples |
 | --- | ---: | --- |
@@ -647,6 +665,22 @@ Use semantic caster classes or data:
 | low | 0.20-0.30 | keys, stars, treasure |
 | character | 0.45-0.60 | player, enemies, followers |
 | tall | 0.65-0.80 | cages, doors, substantial goal frame |
+
+```ts
+type EntityGroundingMode = "grounded" | "floating" | "flush";
+
+interface EntityGroundingMetadata {
+  readonly castsRuntimeShadow: boolean;
+  readonly groundingMode: EntityGroundingMode;
+  readonly groundPivot01: readonly [x: number, y: number];
+  readonly heightClass: "flat" | "low" | "character" | "tall";
+  readonly heightCoefficient?: number;
+  readonly baseLift01?: number;
+  readonly emissive: boolean;
+}
+```
+
+The final Plan-03 catalogue may use different field/type names; consume its canonical equivalents rather than introduce a parallel schema. Validate normalized pivots and numeric bounds. `castsRuntimeShadow: false`, `groundingMode: "flush"`, or an art-approved emissive policy suppresses the directional cast while preserving any explicitly approved contact cue. A floating entry begins from `baseLift01` and still projects onto its declared ground pivot. Catalogue validation must prove that every active geometry class has a complete static fallback, so a newly added friend, enemy, item, cage, portal, or hazard never becomes an empty or ungrounded special case.
 
 Values are art coefficients, not collision heights. Resolve them explicitly:
 
@@ -666,11 +700,16 @@ Start with `entityHeightScaleTiles = 0.24` and `maxEntityLiftTiles = 0.18`, then
 
 ### 10.1 Catalog contract
 
-Extend `TerrainThemeArt` with a validated `lighting` reference or override containing `wall`, `entity`, and `hazardShadowReceiverAlpha`. Prefer named presets plus small overrides over duplicating a full object in every theme.
+Extend the final terrain/region catalogue with a validated `lighting` reference or override containing a versioned material-profile ID, entity defaults, and `hazardShadowReceiverAlpha`. Prefer named profiles plus small validated overrides over duplicating a full object in every theme. Profile membership is data owned by the catalogue and may grow without modifying a TypeScript union or the lighting resolver.
 
 ```ts
+type MaterialLightingProfileId = string & {
+  readonly __materialLightingProfileId: unique symbol;
+};
+
 interface WallLightingCalibration {
-  readonly material: "stone" | "dark-stone" | "foliage" | "crystal" | "bramble";
+  readonly profileId: MaterialLightingProfileId;
+  readonly revision: number;
   readonly wallHeightTiles: number;
   readonly bevelWidthTiles: number;
   readonly bevelSlope: number;
@@ -702,7 +741,7 @@ interface ThemeLightingCalibration {
 }
 ```
 
-Validate and clamp numeric values in one resolver. Do not use `mix-blend-mode` as a foundational effect; explicit translucent colors are more predictable across WebView2 and browser compositors. Filters should explicitly request sRGB where used.
+Validate and clamp numeric values in one resolver. Every active terrain recipe and every region override must resolve a known profile ID/revision; an unknown or invalid profile falls back to the explicitly declared base-recipe profile and emits one deduplicated diagnostic. Do not use `mix-blend-mode` as a foundational effect; explicit translucent colors are more predictable across WebView2 and browser compositors. Filters should explicitly request sRGB where used.
 
 ### 10.2 Starting calibration matrix
 
@@ -824,9 +863,9 @@ Both absolute and paired relative build caps must pass; phase 0 supplies the aut
 Memoize:
 
 1. occupancy-to-topology by stable wall-grid identity/dimensions/radius;
-2. topology-to-static geometry by topology identity plus material calibration;
-3. topology-to-light bucket paths by topology identity plus normalized light/elevation plus quality tier;
-4. entity CSS variables by resolved light and theme.
+2. topology-to-static geometry by topology identity plus visual-region assignment revision and material-profile ID/revision;
+3. topology-to-light bucket paths by topology identity plus region/material revision, normalized light/elevation, and quality tier;
+4. entity CSS variables by resolved light, material-profile revision, and validated grounding metadata.
 
 Do not include camera row/column in any terrain-lighting key. Avoid a fresh `fullLevelWindow(level)` object: memoize the full window or let `MazeTerrain` accept stable level dimensions directly. Image readiness may invalidate texture paint, but not topology.
 
@@ -909,7 +948,7 @@ Each phase should land independently behind explicit flags. No phase may combine
 
 Work:
 
-- Capture production-build screenshots of all sixteen curated levels at their start camera and every unique terrain family at representative interior/edge cameras.
+- Enumerate the canonical campaign order, active terrain catalogue, and region recipes at execution time; capture every authored level at its start camera and every active material profile/region transition at representative interior/edge cameras. Record the resulting IDs and revisions in the proof manifest instead of asserting a fixed count.
 - Add synthetic fixture grids for a single block, long edge, L, U, stair, one-tile notch, ring/hole, nested island, diagonal contacts, one-tile corridor, maximum solid, maze-like, stripes, and checkerboard.
 - Record current renderer DOM counts, geometry call counts, camera-transition traces, full-world filter bounds, and memory/process evidence.
 - Establish development flags: `wallLighting=legacy|v2` and `lightingQuality=high|medium|low`. Default remains legacy.
@@ -1041,7 +1080,7 @@ Work:
 
 - Add dedicated contact and cast elements/wrappers for physical board entities.
 - Move walk/bob/jump transforms into a sprite-only wrapper.
-- Introduce semantic caster heights and a theme cast calibration.
+- Consume validated catalogue grounding metadata and geometry-class fallback heights plus the resolved material-profile entity calibration; do not introduce name-based caster switches.
 - Remove or reclassify fixed downward sprite shadows that currently imply a second light.
 - Separate portal/goal glow from grounding.
 - Add a one-tile visual culling halo or previous/next window union for the 120 ms camera transition.
@@ -1049,7 +1088,7 @@ Work:
 
 Tests:
 
-- player contact/cast visible in idle and each move-direction class;
+- player contact/cast visible in idle and each move-direction class, plus one fixture for every active catalogue grounding/geometry class;
 - no pseudo-element is shared by step sparkle and cast shadow;
 - object/character casts use the same vector/sign as wall cast;
 - flat portal field has no tall cast;
@@ -1072,16 +1111,16 @@ Depends on: phases 3 and 4.
 
 Work:
 
-- Add validated named material presets to `artCatalog.ts`.
-- Tune dark dungeon, berry/bramble, pale/mossy stone, hedge, lavender stone, and crystal against the same shape/angle matrix.
-- Include unused pale sandstone as a regression fixture.
-- Review every curated level's intended source bearing. Add explicit continuous metadata only after art-direction approval; stop relying on the fallback for approved levels.
+- Add validated, versioned material profiles to the art-owned catalogue contract.
+- Enumerate and tune every active material-profile ID and region override against the same shape/angle matrix. Dark dungeon, berry/bramble, pale/mossy stone, hedge, lavender stone, and crystal are risk examples, not a closed implementation list.
+- Include any catalogue-declared retained/unassigned material profile as a regression fixture without making it a runtime level dependency.
+- Review every entry in canonical campaign order for its intended source bearing. Add explicit continuous metadata only after art-direction approval; stop relying on the fallback for approved levels.
 - Tune the neutral contour and final composite readability at supported DPRs.
 
 Tests:
 
-- all themes have valid bounded calibration;
-- no active theme silently uses an arbitrary default;
+- all active material profiles and region overrides have valid bounded calibration;
+- no active catalogue entry silently uses an arbitrary default;
 - final screenshots in color, grayscale, deuteranopia/protanopia/tritanopia simulations;
 - essential boundary cue reaches the agreed contrast margin at sampled worst-case adjacencies;
 - intrinsic/baked texture lighting exceptions are explicitly declared.
@@ -1094,7 +1133,7 @@ Exit gates:
 
 Rollback:
 
-- revert individual theme preset/bearing entries without changing geometry. Each preset has a neutral safe default.
+- revert individual material-profile/region-override/bearing entries without changing geometry. Each catalogue recipe declares a neutral safe fallback profile.
 
 ### Phase 6 — Camera, cross-engine, and performance hardening
 
@@ -1197,7 +1236,7 @@ Mount representative terrains and assert:
 - quality flags select deterministic markup;
 - camera changes do not change wall/topology path strings or invoke geometry again.
 
-For entities, assert dedicated nodes/layers, semantic height mapping, no pseudo-element selector overlap, portal policy, and removal of contradictory directional sprite filters.
+For entities, assert dedicated nodes/layers, catalogue grounding-metadata resolution, every active geometry-class fallback, normalized pivot/height behavior, grounded/floating/flush and emissive policies, no pseudo-element selector overlap, portal policy, and removal of contradictory directional sprite filters. Add a fixture proving that changing an asset filename or display label cannot change lighting behavior.
 
 ### 15.4 Visual regression matrix
 
@@ -1205,8 +1244,8 @@ Use an explicit layered/pairwise matrix rather than the full Cartesian product.
 
 Canonical exhaustive sweep — production Chromium, 1280 by 720, DPR 1, high tier:
 
-- all twelve unique terrain themes and all sixteen curated levels at least once;
-- every theme against the eight 45-degree bearings and 22.5, 67.5, 123, and 359.9 degrees in diagnostic fixtures;
+- every entry in the execution-time canonical campaign order and every active catalogue material profile/region recipe at least once, with IDs and revisions recorded in the manifest;
+- every active material profile against the eight 45-degree bearings and 22.5, 67.5, 123, and 359.9 degrees in diagnostic fixtures, using a catalogue-derived covering set rather than a hard-coded theme count;
 - dark dungeon, berry/bramble, pale/mossy, hedge, crystal, and lavender close-ups;
 - water/lava/poison together;
 - holes/nested loops;
@@ -1221,7 +1260,7 @@ Tier sweep:
 
 Cross-engine/responsive sweep:
 
-- create a checked-in test manifest or generated covering array over packaged WebView2 plus supported browser engines, viewports 960 by 540, 1280 by 720, 1194 by 834, and 844 by 390, DPR 1, 1.25, 1.5, and 2, and high/medium/low;
+- create a checked-in test manifest or generated covering array over packaged WebView2 plus supported browser engines; the shared viewports 1920 by 1080, 1280 by 800, 1280 by 720, 1194 by 834, 1024 by 768, 960 by 540, 844 by 390, and 568 by 320; DPR 1, 1.25, 1.5, and 2; and high/medium/low;
 - require every dimension value and every pair of values to occur at least once, rather than multiplying every value by every scene;
 - include each of the six sentinels at least once per engine and each viewport at least once per tier;
 - run grayscale and common color-vision simulations over all six sentinels on the canonical view;
@@ -1301,7 +1340,7 @@ Core boundary, direction, grounding, camera, and performance criteria apply at e
 
 ### 16.5 Performance and fallback
 
-- Geometry is built once per stable level/theme/light/tier tuple and zero times per ordinary camera move.
+- Geometry is built once per stable level-content/region-assignment/material-profile revision/light/tier tuple and zero times per ordinary camera move. Changing any region or material revision invalidates only the affected cached render model; changing a filename or label invalidates nothing.
 - DOM/filter/path counts and trace budgets in section 12 pass in production web and packaged WebView2.
 - Medium/low selection is stable within a level and causes no visible mid-move pop.
 - Low tier preserves source/cast direction, path contour, contact grounding, and hazard readability without relying on blur/filter support.
@@ -1373,7 +1412,7 @@ Implementation is complete only when:
 - every phase exit gate is documented with evidence;
 - all current tests and new pure/render tests pass;
 - `git diff --check` passes;
-- the full visual matrix has been reviewed, including every terrain family and camera route;
+- the catalogue-derived visual matrix has been reviewed, including every active material profile, authored region recipe/transition, geometry-class grounding fallback, and representative camera route;
 - source, bevel, cast, and entity direction are demonstrably coherent at cardinal, diagonal, and continuous test angles;
 - exact traversability contours remain readable with no texture seam or camera-edge artifact;
 - high or an approved lower tier meets web and packaged-WebView budgets;

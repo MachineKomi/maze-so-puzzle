@@ -13,6 +13,7 @@ import {
   STICKER_LABELS,
   VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY,
   VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY,
+  VERSION_FOUR_PLAYER_PROGRESS_STORAGE_KEY,
   writePlayerProgress,
   type LevelCompletionInput,
   type ProgressStorage,
@@ -64,7 +65,7 @@ describe("player progress migration and persistence", () => {
     const second = createDefaultPlayerProgress();
 
     expect(first).toEqual({
-      schemaVersion: 4,
+      schemaVersion: 5,
       unlockedLevelCount: 1,
       campaignOrderVersion: 2,
       unlockedLevelIds: ["little-star-trail"],
@@ -83,6 +84,7 @@ describe("player progress migration and persistence", () => {
       perfectRescueMazeCount: 0,
       currentPerfectRescueStreak: 0,
       bestPerfectRescueStreak: 0,
+      completionReceipts: [],
     });
     expect(first.stickers).not.toBe(second.stickers);
     expect(first.bestResultsByLevel).not.toBe(second.bestResultsByLevel);
@@ -97,7 +99,7 @@ describe("player progress migration and persistence", () => {
   ])("migrates a v1 value %j", (stored, expectedUnlocked) => {
     const migrated = migratePlayerProgress(stored);
 
-    expect(migrated.schemaVersion).toBe(4);
+    expect(migrated.schemaVersion).toBe(5);
     expect(migrated.unlockedLevelCount).toBe(expectedUnlocked);
     expect(migrated.gold).toBe(0);
   });
@@ -113,7 +115,7 @@ describe("player progress migration and persistence", () => {
     };
 
     expect(loaded.unlockedLevelCount).toBe(4);
-    expect(copied).toMatchObject({ schemaVersion: 4, unlockedLevelCount: 4 });
+    expect(copied).toMatchObject({ schemaVersion: 5, unlockedLevelCount: 4 });
   });
 
   it("prefers a valid v2 save and sanitizes unsafe values", () => {
@@ -142,7 +144,7 @@ describe("player progress migration and persistence", () => {
     const loaded = readPlayerProgress(storage);
 
     expect(loaded).toMatchObject({
-      schemaVersion: 4,
+      schemaVersion: 5,
       unlockedLevelCount: 1,
       gold: 14,
       stickers: ["animal-friend"],
@@ -169,7 +171,7 @@ describe("player progress migration and persistence", () => {
       bestRescuedSpecies: [],
     });
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 4 });
+      .toMatchObject({ schemaVersion: 5 });
   });
 
   it("migrates v2 species and generated history conservatively", () => {
@@ -194,7 +196,7 @@ describe("player progress migration and persistence", () => {
     });
 
     expect(migrated).toMatchObject({
-      schemaVersion: 4,
+      schemaVersion: 5,
       totalMazesCompleted: 1,
       totalCompletions: 2,
       generatedCompletions: 0,
@@ -318,13 +320,13 @@ describe("player progress migration and persistence", () => {
 
     expect(readPlayerProgress(storage).unlockedLevelCount).toBe(6);
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 4, unlockedLevelCount: 6 });
+      .toMatchObject({ schemaVersion: 5, unlockedLevelCount: 6 });
 
     storage.values.set(PLAYER_PROGRESS_STORAGE_KEY, "{broken");
     storage.values.set(VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY, "{broken");
     expect(readPlayerProgress(storage).unlockedLevelCount).toBe(4);
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 4, unlockedLevelCount: 4 });
+      .toMatchObject({ schemaVersion: 5, unlockedLevelCount: 4 });
   });
 
   it("preserves unknown future campaign identity through sanitize, apply, and storage", () => {
@@ -401,7 +403,7 @@ describe("player progress migration and persistence", () => {
     expect(readPlayerProgress(null)).toEqual(createDefaultPlayerProgress());
   });
 
-  it("round-trips a v4 save", () => {
+  it("round-trips a v5 save", () => {
     const storage = new MemoryStorage();
     const progress = applyLevelCompletion(
       createDefaultPlayerProgress(),
@@ -410,6 +412,32 @@ describe("player progress migration and persistence", () => {
 
     expect(writePlayerProgress(progress, storage)).toBe(true);
     expect(readPlayerProgress(storage)).toEqual(progress);
+  });
+
+  it("credits one completion receipt exactly once across a resumed commit", () => {
+    const input = completion("little-star-trail", 0, 3, {
+      completionId: "completion:run-test-exactly-once",
+      bonusGold: 4,
+      sciencePoints: 2,
+    });
+    const first = applyLevelCompletion(createDefaultPlayerProgress(), input);
+    const resumed = applyLevelCompletion(first, input);
+
+    expect(resumed).toEqual(first);
+    expect(first.totalCompletions).toBe(1);
+    expect(first.completionReceipts).toEqual(["completion:run-test-exactly-once"]);
+  });
+
+  it("migrates v4 saves without inventing receipts", () => {
+    const storage = new MemoryStorage();
+    storage.values.set(VERSION_FOUR_PLAYER_PROGRESS_STORAGE_KEY, JSON.stringify({
+      schemaVersion: 4,
+      unlockedLevelCount: 3,
+    }));
+
+    const loaded = readPlayerProgress(storage);
+    expect(loaded).toMatchObject({ schemaVersion: 5, unlockedLevelCount: 3 });
+    expect(loaded.completionReceipts).toEqual([]);
   });
 
   it("round-trips a five-friend rescue target without truncating it", () => {

@@ -20,8 +20,9 @@ import {
   migrateCampaignAccess,
 } from "./campaign";
 
-export const PLAYER_PROGRESS_SCHEMA_VERSION = 4 as const;
-export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v4";
+export const PLAYER_PROGRESS_SCHEMA_VERSION = 5 as const;
+export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v5";
+export const VERSION_FOUR_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v4";
 export const VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v3";
 export const VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v2";
 export const LEGACY_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v1";
@@ -249,6 +250,8 @@ export interface PlayerProgress {
   /** Consecutive first-time maze completions on which every friend was rescued. */
   readonly currentPerfectRescueStreak: number;
   readonly bestPerfectRescueStreak: number;
+  /** Bounded durable receipts prevent a resumed pending exit from crediting twice. */
+  readonly completionReceipts: readonly string[];
 }
 
 export interface LevelRewardInput {
@@ -277,6 +280,8 @@ export interface CalculatedLevelReward {
 }
 
 export interface LevelCompletionInput {
+  /** Stable active-run ID used for exactly-once durable credit. */
+  readonly completionId?: string;
   readonly levelId: string;
   readonly source: ProgressLevelSource;
   /** Zero-based for story mazes; pass -1 for generated mazes. */
@@ -329,6 +334,22 @@ export const RESCUE_MILESTONES: readonly Readonly<{
 ];
 
 const MEDAL_IDS = RESCUE_MILESTONES.map((milestone) => milestone.id);
+const MAX_COMPLETION_RECEIPTS = 512;
+
+function safeCompletionId(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const id = value.trim();
+  return id.length >= 8 && id.length <= 180 && /^[a-zA-Z0-9:-]+$/.test(id) ? id : null;
+}
+
+function sanitizeCompletionReceipts(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  const receipts = value.flatMap((candidate) => {
+    const id = safeCompletionId(candidate);
+    return id ? [id] : [];
+  });
+  return [...new Set(receipts)].slice(-MAX_COMPLETION_RECEIPTS);
+}
 
 function emptyRescueTotals(): Record<AnimalSpecies, number> {
   const totals = {} as Record<AnimalSpecies, number>;
@@ -486,6 +507,7 @@ export function createDefaultPlayerProgress(unlockedLevelCount = 1): PlayerProgr
     perfectRescueMazeCount: 0,
     currentPerfectRescueStreak: 0,
     bestPerfectRescueStreak: 0,
+    completionReceipts: [],
   };
 }
 
@@ -593,6 +615,7 @@ function sanitizeRescueTotals(value: unknown): Record<AnimalSpecies, number> {
 function sanitizeProgressObject(
   value: Record<string, unknown>,
   includeVersionThreeFields: boolean,
+  includeCompletionReceipts = false,
 ): PlayerProgress {
   const bestResultsByLevel = sanitizeBestResults(
     ownValue(value, "bestResultsByLevel"),
@@ -726,6 +749,9 @@ function sanitizeProgressObject(
     perfectRescueMazeCount,
     currentPerfectRescueStreak,
     bestPerfectRescueStreak,
+    completionReceipts: includeCompletionReceipts
+      ? sanitizeCompletionReceipts(ownValue(value, "completionReceipts"))
+      : [],
   };
 }
 
@@ -735,6 +761,10 @@ function sanitizeVersionTwo(value: Record<string, unknown>): PlayerProgress {
 
 function sanitizeVersionThree(value: Record<string, unknown>): PlayerProgress {
   return sanitizeProgressObject(value, true);
+}
+
+function sanitizeVersionFive(value: Record<string, unknown>): PlayerProgress {
+  return sanitizeProgressObject(value, true, true);
 }
 
 /**
@@ -763,7 +793,11 @@ export function migratePlayerProgress(value: unknown): PlayerProgress {
   if (!isRecord(value)) return createDefaultPlayerProgress();
 
   const schemaVersion = ownValue(value, "schemaVersion");
-  if (schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION || schemaVersion === 3) {
+  if (schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION) {
+    return sanitizeVersionFive(value);
+  }
+
+  if (schemaVersion === 4 || schemaVersion === 3) {
     return sanitizeVersionThree(value);
   }
 
@@ -836,6 +870,8 @@ export function applyLevelCompletion(
   input: LevelCompletionInput,
 ): PlayerProgress {
   const current = migratePlayerProgress(progress);
+  const completionId = safeCompletionId(input.completionId);
+  if (completionId && current.completionReceipts.includes(completionId)) return current;
   const levelId = safeLevelId(input.levelId);
   const rescueTarget = totalRescueCount(input.totalRescueCount);
   const rescuedCount = rescuedCountForTarget(input.rescuedCount, rescueTarget);
@@ -1031,6 +1067,9 @@ export function applyLevelCompletion(
       current.bestPerfectRescueStreak,
       currentPerfectRescueStreak,
     ),
+    completionReceipts: completionId
+      ? [...current.completionReceipts, completionId].slice(-MAX_COMPLETION_RECEIPTS)
+      : current.completionReceipts,
   };
 }
 
@@ -1042,7 +1081,7 @@ function browserStorage(): ProgressStorage | null {
   }
 }
 
-/** Save a sanitized v4 snapshot. Returns false instead of throwing on failure. */
+/** Save a sanitized v5 snapshot. Returns false instead of throwing on failure. */
 export function writePlayerProgress(
   progress: PlayerProgress,
   storage: ProgressStorage | null | undefined = undefined,
@@ -1062,8 +1101,8 @@ export function writePlayerProgress(
 }
 
 /**
- * Read v4 progress, falling back through v3, v2 and the released numeric v1 save.
- * Successful legacy migrations are transparently copied to the v4 key. Every
+ * Read v5 progress, falling back through v4, v3, v2 and the released numeric v1 save.
+ * Successful legacy migrations are transparently copied to the v5 key. Every
  * storage and parsing failure returns a fresh default.
  */
 export function readPlayerProgress(
@@ -1073,21 +1112,36 @@ export function readPlayerProgress(
   if (target === null) return createDefaultPlayerProgress();
 
   try {
-    const storedV3 = target.getItem(PLAYER_PROGRESS_STORAGE_KEY);
-    if (storedV3 !== null) {
+    const storedV5 = target.getItem(PLAYER_PROGRESS_STORAGE_KEY);
+    if (storedV5 !== null) {
       try {
-        const parsed = JSON.parse(storedV3) as unknown;
+        const parsed = JSON.parse(storedV5) as unknown;
         if (isRecord(parsed) && (
           parsed.schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION
+          || parsed.schemaVersion === 4
           || parsed.schemaVersion === 3
           || parsed.schemaVersion === 2
         )) {
           const migrated = migratePlayerProgress(parsed);
-          if (parsed.schemaVersion === 2) writePlayerProgress(migrated, target);
+          if (parsed.schemaVersion !== PLAYER_PROGRESS_SCHEMA_VERSION) writePlayerProgress(migrated, target);
           return migrated;
         }
       } catch {
         // A usable legacy save may still be present below.
+      }
+    }
+
+    const priorV4 = target.getItem(VERSION_FOUR_PLAYER_PROGRESS_STORAGE_KEY);
+    if (priorV4 !== null) {
+      try {
+        const parsed = JSON.parse(priorV4) as unknown;
+        if (isRecord(parsed) && parsed.schemaVersion === 4) {
+          const migrated = migratePlayerProgress(parsed);
+          writePlayerProgress(migrated, target);
+          return migrated;
+        }
+      } catch {
+        // Continue to older released formats.
       }
     }
 

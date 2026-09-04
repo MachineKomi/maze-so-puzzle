@@ -8,15 +8,18 @@ import type {
   Point,
 } from "./game/types";
 
-/** Durable normal-run snapshots. Completion rewards remain in `progress.ts`. */
-export const ACTIVE_RUN_SCHEMA_VERSION = 2 as const;
-export const ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v2";
+/** Durable normal-run snapshots, including a recoverable pending exit choice. */
+export const ACTIVE_RUN_SCHEMA_VERSION = 3 as const;
+export const ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v3";
+export const VERSION_TWO_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v2";
 export const LEGACY_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v1";
 
 export type ActiveRunMode = "normal" | "tester";
 
 export interface ActiveRunSnapshot {
   readonly schemaVersion: typeof ACTIVE_RUN_SCHEMA_VERSION;
+  /** Stable for this attempt and reused as the exactly-once completion receipt. */
+  readonly runId: string;
   readonly levelId: string;
   readonly contentRevision: number;
   readonly gameplayFingerprint: string;
@@ -26,6 +29,7 @@ export interface ActiveRunSnapshot {
 }
 
 export interface ActiveRunInput {
+  readonly runId: string;
   readonly mode: ActiveRunMode;
   readonly level: LevelDefinition;
   readonly game: GameState;
@@ -61,6 +65,24 @@ const COLLECTABLE_KINDS: readonly ObjectKind[] = [
 const TILE_KEY_PATTERN = /^(0|[1-9]\d*),(0|[1-9]\d*)$/;
 const MAX_SAVED_HINT_USES_PER_STATE = 4;
 const MAX_SAVED_HINT_STATES = 256;
+const RUN_ID_PATTERN = /^(?:run|migrated)-[a-zA-Z0-9-]{8,160}$/;
+
+export function createActiveRunId(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return `run-${crypto.randomUUID()}`;
+  }
+  return `run-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 14)}`;
+}
+
+function migratedRunId(value: unknown): string {
+  const source = JSON.stringify(value);
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < source.length; index += 1) {
+    hash ^= source.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return `migrated-${(hash >>> 0).toString(16).padStart(8, "0")}`;
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -206,7 +228,11 @@ function maximumMovementStride(level: LevelDefinition): number {
 
 function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | null {
   if (!isRecord(value)) return null;
-  if (ownValue(value, "levelId") !== level.id || ownValue(value, "status") !== "playing") return null;
+  const status = ownValue(value, "status");
+  if (
+    ownValue(value, "levelId") !== level.id
+    || (status !== "playing" && status !== "won")
+  ) return null;
 
   const position = sanitizePoint(ownValue(value, "position"));
   const power = ownValue(value, "power");
@@ -221,6 +247,7 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   const rawHasAntidoteLeaf = ownValue(value, "hasAntidoteLeaf");
   const rawGoldStarsCollected = ownValue(value, "goldStarsCollected");
   const rawSciencePointsCollected = ownValue(value, "sciencePointsCollected");
+  const rawExitArmed = ownValue(value, "exitArmed");
   // Levels containing Spring Boots changed topology in 0.9. An older snapshot
   // cannot prove which side of the new hole gate it belongs on, so discard only
   // that active run while preserving the player's separate campaign progress.
@@ -243,6 +270,7 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   const hasAntidoteLeaf = rawHasAntidoteLeaf === undefined ? false : rawHasAntidoteLeaf;
   const goldStarsCollected = rawGoldStarsCollected === undefined ? 0 : rawGoldStarsCollected;
   const sciencePointsCollected = rawSciencePointsCollected === undefined ? 0 : rawSciencePointsCollected;
+  const exitArmed = rawExitArmed === undefined ? true : rawExitArmed;
   if (
     !position
     || !isSafeNonNegativeInteger(power)
@@ -253,12 +281,20 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     || typeof hasAntidoteLeaf !== "boolean"
     || !isSafeNonNegativeInteger(goldStarsCollected)
     || !isSafeNonNegativeInteger(sciencePointsCollected)
+    || typeof exitArmed !== "boolean"
   ) {
     return null;
   }
 
   const terrain = level.terrain[position.y]?.[position.x];
-  if (!terrain || terrain === "wall" || terrain === "hole" || pointsEqual(position, level.exit)) return null;
+  const onExit = pointsEqual(position, level.exit);
+  if (
+    !terrain
+    || terrain === "wall"
+    || terrain === "hole"
+    || (status === "won" && (!onExit || exitArmed))
+    || (status === "playing" && onExit !== !exitArmed)
+  ) return null;
 
   const objectIds = level.objects.map((object) => object.id);
   const objectsById = new Map(level.objects.map((object) => [object.id, object] as const));
@@ -359,7 +395,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     openedDoorIds,
     goldStarsCollected,
     sciencePointsCollected,
-    status: "playing",
+    exitArmed,
+    status,
     steps,
   };
 }
@@ -399,6 +436,8 @@ export function sanitizeActiveRunSnapshot(
   curatedLevels: readonly LevelDefinition[],
 ): ActiveRunSnapshot | null {
   if (!isRecord(value) || ownValue(value, "schemaVersion") !== ACTIVE_RUN_SCHEMA_VERSION) return null;
+  const runId = ownValue(value, "runId");
+  if (typeof runId !== "string" || !RUN_ID_PATTERN.test(runId)) return null;
   const levelId = ownValue(value, "levelId");
   if (typeof levelId !== "string" || levelId.length === 0 || levelId !== levelId.trim()) return null;
   const matches = curatedLevels.filter((level) => level.id === levelId && level.source === "curated");
@@ -428,6 +467,7 @@ export function sanitizeActiveRunSnapshot(
 
   return {
     schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
+    runId,
     levelId,
     contentRevision: level.contentRevision,
     gameplayFingerprint: level.gameplayFingerprint,
@@ -451,6 +491,7 @@ export function createActiveRunSnapshot(input: ActiveRunInput): ActiveRunSnapsho
   );
   return sanitizeActiveRunSnapshot({
     schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
+    runId: input.runId,
     levelId: input.level.id,
     contentRevision: input.level.contentRevision,
     gameplayFingerprint: input.level.gameplayFingerprint,
@@ -490,11 +531,13 @@ export function writeActiveRun(
   const snapshot = createActiveRunSnapshot(input);
   if (!snapshot) {
     safelyRemove(target);
+    safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
     safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
     return false;
   }
   try {
     target.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(snapshot));
+    safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
     safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
     return true;
   } catch {
@@ -514,7 +557,7 @@ function referencesUpdatedContent(
   const schemaVersion = ownValue(value, "schemaVersion");
   return schemaVersion === 1
     ? level.contentRevision !== 1
-    : schemaVersion === ACTIVE_RUN_SCHEMA_VERSION
+    : (schemaVersion === 2 || schemaVersion === ACTIVE_RUN_SCHEMA_VERSION)
       && (
         ownValue(value, "contentRevision") !== level.contentRevision
         || ownValue(value, "gameplayFingerprint") !== level.gameplayFingerprint
@@ -551,6 +594,36 @@ export function readActiveRunResult(
       }
     }
 
+    const versionTwoStored = target.getItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
+    if (versionTwoStored !== null) {
+      try {
+        const prior = JSON.parse(versionTwoStored) as unknown;
+        if (isRecord(prior) && ownValue(prior, "schemaVersion") === 2) {
+          const migrated = sanitizeActiveRunSnapshot({
+            ...prior,
+            schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
+            runId: migratedRunId(prior),
+          }, curatedLevels);
+          if (migrated) {
+            try {
+              target.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(migrated));
+              safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
+            } catch {
+              // Keep the valid v2 source intact and still resume it in memory.
+            }
+            return { snapshot: migrated, discardedUpdatedRun: false };
+          }
+          const discardedUpdatedRun = referencesUpdatedContent(prior, curatedLevels);
+          safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
+          if (discardedUpdatedRun) return { snapshot: null, discardedUpdatedRun: true };
+        } else {
+          safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
+        }
+      } catch {
+        safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
+      }
+    }
+
     const legacyStored = target.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY);
     if (legacyStored === null) return { snapshot: null, discardedUpdatedRun: false };
     try {
@@ -573,6 +646,7 @@ export function readActiveRunResult(
       const migrated = sanitizeActiveRunSnapshot({
         ...legacy,
         schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
+        runId: migratedRunId(legacy),
         contentRevision: level.contentRevision,
         gameplayFingerprint: level.gameplayFingerprint,
         hintUsesByState: {},
@@ -613,6 +687,7 @@ export function clearActiveRun(
   if (target === null) return false;
   const currentRemoved = safelyRemove(target);
   try {
+    target.removeItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
     target.removeItem(LEGACY_ACTIVE_RUN_STORAGE_KEY);
   } catch {
     return false;

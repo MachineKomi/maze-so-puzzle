@@ -16,17 +16,17 @@ describe("campaign route-quality metrics", () => {
       expect(metric.prerequisiteDepth).toBeNull();
     }
     expect(CURATED_LEVELS.slice(8).map((level) => report[level.id]!.ordinaryMoves))
-      .toEqual([181, 149, 201, 161, 28, 103, 44, 61]);
+      .toEqual([182, 150, 204, 164, 29, 104, 47, 62]);
     expect(CURATED_LEVELS.slice(8).map((level) => report[level.id]!.perfectMoves))
-      .toEqual([195, 204, 211, 171, 42, 177, 56, 77]);
+      .toEqual([196, 205, 214, 174, 43, 178, 59, 78]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.rawBranchPoints))
-      .toEqual([2, 5, 4, 7, 5, 3, 8, 8, 14, 17, 12, 13, 13, 10, 35, 39]);
+      .toEqual([2, 6, 5, 8, 7, 6, 11, 11, 14, 18, 14, 16, 13, 10, 37, 40]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.meaningfulStateChanges))
       .toEqual([0, 4, 7, 9, 10, 11, 13, 15, 8, 9, 14, 14, 2, 8, 9, 11]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.retraversalMoves))
       .toEqual([0, 0, 0, 0, 0, 0, 4, 2, 64, 44, 49, 27, 5, 21, 0, 1]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.longestQuietRun))
-      .toEqual([6, 7, 13, 13, 9, 13, 15, 14, 42, 48, 24, 20, 11, 27, 9, 9]);
+      .toEqual([6, 8, 13, 13, 9, 14, 16, 15, 42, 48, 24, 20, 11, 27, 9, 9]);
     expect(Math.max(...CURATED_LEVELS.slice(8).map((level) => report[level.id]!.ordinaryMoves)))
       .toBeLessThanOrEqual(210);
     expect(Math.max(...CURATED_LEVELS.slice(8).map((level) => report[level.id]!.longestQuietRun)))

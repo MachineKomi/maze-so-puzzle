@@ -95,27 +95,36 @@ apologises, and learns that a very small rainbow is an acceptable sneeze.
 
 Visual asset: public/assets/story-sprig-v1.webp.
 
-## Future Puzzlewild guardians — art identity only
+## Future Puzzlewild guardians — Plan 09 gameplay roster
 
-The Human-directed future visual roster includes Classic Slime, paired Lizard
-Sword and Spear Guards, Wholesome Succubus, Pocket
+The Human-directed future gameplay roster includes Classic Slime, paired
+Lizard Sword and Spear Guards, Wholesome Succubus, Pocket
 T-Rex, a fictional Star Map Cultist whose public label remains pending, Lamia,
-Soda Slime, Orc Chieftain, Cyclops, Minotaur, Warrior Skeleton, Kappa, and a
-visibly alive Treasure Mimic. They expand the world's comic fantasy range; they
+Soda Slime, Orc Chieftain, Cyclops, Minotaur, Warrior Skeleton, Kappa, and the
+Treasure and Candy Mimic chest families. They expand the world's comic fantasy range; they
 are not villains, sources of suffering, or permission to introduce new attacks.
 
-Every future enemy remains an enthusiastic guardian under the Polite Sword Rule.
+Every one remains an enthusiastic guardian under the Polite Sword Rule.
 Weapons, horns, wings, coils, size, bubbles and teeth communicate personality
 and challenge silhouette only. They do not imply damage, weapon reach, charm,
-chase, constriction, drowning, poison, sacrifice or status effects. The Mimic
-must look alive immediately because no disguise/reveal mechanic exists. The
+chase, constriction, drowning, poison, sacrifice or status effects. Under
+`PT-20260903-22`, each approved Mimic family first appears as its matching closed
+chest. Its first interaction commits one deterministic, save-stable result: a
+good reward chest 65% of the time or the visible Mimic guardian 35% of the time.
+The family changes the chest's look and personality, not those rules. Until that
+exact gameplay contract is implemented, each closed/open/enemy art triplet
+remains reserved or dormant and must not be substituted with an always-visible
+encounter. The
 Succubus and Cultist need explicit Human review of child-facing names as well as
 art. Exact visual and safety construction lives in
 `docs/enemies/ENEMY_FAMILY_SHEET.md`.
 
-This section is future-facing. It neither assigns these guardians to the
-current chapters nor adds them to runtime generation; Plan 09 owns later
-placement and pacing.
+This section is future-facing and does not claim the guardians are in the
+current sixteen chapters. Plan 09 owns their versioned runtime admission,
+progressive first encounters, purposeful placement and later themed/mixed use
+across the final twenty-four chapters and deterministic Surprise generation.
+Every final gameplay-eligible enemy type receives a meaningful authored-campaign
+opportunity without acquiring a new mechanic merely because its art differs.
 
 ## Educational design
 
@@ -179,12 +188,17 @@ face, seated tea pose, handleless green-tea cup, and single steam curl.
 Future chapters can follow new loose threads without undoing the first arc:
 
 - Poggle's “Useful for Somewhere Else” map leads to a seasonal maze island.
-- A Science Point observatory may let collected curiosity light optional,
-  celebratory constellations; Science is never spent, required, or used to gate
-  story progress.
-- Rescued animal and mythic friends may contribute different clue abilities
-  without automating maze solutions. The maintained roster and its child-safe
-  collection rules live in `docs/GAMEPLAY_DESIGN_SPEC.md`.
+- A Science Point observatory may let lifetime collected curiosity light
+  optional celebratory constellations; current Solo campaign play does not spend
+  Science, require it, or use it to gate story progress. Plan 10 may add its
+  separately approved optional Garden Egg exchange with a durable available/
+  spent ledger, but that exchange grants no maze Power and never gates the story.
+- Rescued animal and mythic friends may contribute different narrative
+  personalities, reactions or clue flavour. Gameplay clue abilities are a
+  speculative separately approved feature, not Plan 10 v1: Friend Garden
+  residents confer no maze Power, equipment, hint, traversal or automatic-solve
+  benefit. The maintained roster and its child-safe collection rules live in
+  `docs/GAMEPLAY_DESIGN_SPEC.md`.
 - Sprig practises weather magic and accidentally creates reversible ice paths,
   wind arrows, or cloud bridges.
 - The Friendship Crown opens optional challenge stories for perfect-rescue

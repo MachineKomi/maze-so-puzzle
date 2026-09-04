@@ -34,7 +34,12 @@ state.
    fit-without-stretching calculation. `App.tsx` observes the safe viewport and
    scales one fixed canvas; CSS container queries and units size every internal
    screen against that canvas rather than the physical device.
-6. `src/game/engine.ts` applies one immutable movement or interaction step.
+6. `src/game/engine.ts` applies one immutable movement or interaction step. A
+   matching keyed door opens in place before a later traversal input. Entering
+   the goal creates a pending `won` state; Stay returns to a disarmed goal tile,
+   which rearms only after Ame leaves it.
+   `src/game/rewardRules.ts` separately freezes deterministic version-1 Mimic,
+   rescue, enemy, and chest tables for later content consumers.
 7. Authored levels come from `src/game/levels.ts`; surprise levels come from the
    deterministic generator in `src/game/generator.ts`. The generator selects a
    seeded odd size from unlocked 9–23 bands, grows solver-safe connected
@@ -67,24 +72,27 @@ state.
    rounded SVG paths in stable world coordinates, including holes, diagonal
    contacts, and the camera gutter used by the renderer.
 12. `src/campaign.ts` owns versioned campaign order/history and ID-based access
-    migration. `src/progress.ts` stores sanitized schema-v4 progress, stable
-    unlocked story IDs, and revision-scoped route records in browser
-    `localStorage`; old best steps remain explicitly historical after a map edit.
-13. `src/session.ts` validates and stores a schema-v2 snapshot for an unfinished
-    normal authored run, including revision, fingerprint, reveal state, and
-    progressive-hint state. It fails closed on changed content, reports that
-    narrow restart case to the player, and rejects tester, generated, corrupt,
-    inconsistent, and completed states.
+    migration. `src/progress.ts` stores sanitized schema-v5 progress, stable
+    unlocked story IDs, revision-scoped route records, and a bounded completion-
+    receipt ledger in browser `localStorage`; old best steps remain explicitly
+    historical after a map edit and a resumed pending exit cannot bank twice.
+13. `src/session.ts` validates and stores a schema-v3 snapshot for a normal
+    authored run, including stable run ID, revision, fingerprint, reveal state,
+    progressive-hint state, and recoverable pending completion. It fails closed
+    on changed content, reports that narrow restart case to the player, and
+    rejects tester, generated, corrupt, and inconsistent states.
 14. `src/resetProgress.ts` provides the UI-independent full-reset boundary. It
     removes only the current, v3, v2, legacy, and active-run Maze so Puzzle keys,
     isolates each storage failure, and returns both a fresh default value and an
     honest durability result so the UI does not claim a partial reset succeeded.
 15. `src/sound.ts` synthesizes short interaction and fanfare cues with the Web
     Audio API; those effects require no recorded audio files.
-16. `src/music.ts` selects and safely loops the locally shipped MP3 soundtrack.
-   A session-scoped deterministic shuffle bag cycles through all thirteen full
-   tracks on maze transitions and avoids an immediate repeat; the short
-   friendship cue is excluded. The title theme starts from the first permitted
+16. `src/musicCatalogue.ts` assigns all 42 locally shipped MP3s stable IDs in
+   six context pools. `src/musicTransport.ts` freezes the UI/input-facing
+   transport port and supplies a deterministic fake plus current-player adapter.
+   `src/music.ts` remains the conservative one-player playback implementation;
+   a session-scoped shuffle bag cycles through the fourteen Maze tracks and
+   avoids an immediate repeat. The title theme starts from the first permitted
    home-screen gesture rather than attempting prohibited autoplay.
    Playback begins only from a user gesture, follows the shared mute control,
    pauses while the page or app is hidden, and degrades harmlessly when media is
@@ -187,9 +195,10 @@ state.
   synchronized between devices.
 - Full reset is an explicit destructive UI flow available from the title and
   Adventure Book. After confirmation, `resetProgress.ts` deletes only
-  `maze-so-puzzle-progress-v4`, `maze-so-puzzle-progress-v3`,
+  `maze-so-puzzle-progress-v5`, `maze-so-puzzle-progress-v4`, `maze-so-puzzle-progress-v3`,
   `maze-so-puzzle-progress-v2`, `maze-so-puzzle-progress-v1`,
-  `maze-so-puzzle-active-run-v2`, and `maze-so-puzzle-active-run-v1`; unrelated
+  `maze-so-puzzle-active-run-v3`, `maze-so-puzzle-active-run-v2`, and
+  `maze-so-puzzle-active-run-v1`; unrelated
   origin storage is intentionally preserved, and the app reloads Story Maze 1.
 - Camera coordinates affect presentation only. Movement, collision, combat,
   collection, and solving continue to operate in global level coordinates.

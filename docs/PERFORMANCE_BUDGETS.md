@@ -183,6 +183,22 @@ art byte and decoded-image deltas are exactly zero. Any later production
 derivative must be measured at actual delivery size and receive a new Plan 07A
 allocation before catalogue publication.
 
+### Pending original-OST intake (not an accepted allocation)
+
+On 2026-09-03 the Human delivered 42 candidate-original MP3s in the six approved
+context pools under `public/assets/ost/`. They total 99,151,313 bytes and about
+4,105.32 seconds. Relative to the 14-file / 50,156,671-byte historical
+placeholder set, this is +28 files / +48,994,642 bytes. The old root files are
+deleted in the working tree, while the current player and tests still reference
+them; this is an open catalogue transition, not an accepted runtime baseline.
+
+Plan 07B must create the explicit audio allocation, regenerate source-matched
+inventories after catalogue integration, and qualify loading/residency/package
+behaviour. The old 89,330,098-byte catalog target remains historical evidence
+and must not be enforced by silently omitting Human tracks. Only bounded
+predictive preparation is authorized; the full 42-track library must not be
+eagerly downloaded or decoded.
+
 The reviewed external inventory is
 `C:\Users\hellb\AppData\Local\Temp\maze-so-puzzle-performance\plan03-human-gate-ee176f52-final\inventory.json`;
 its SHA-256 is
@@ -311,6 +327,33 @@ Its exact +48,994,642 public-byte delta remains outside this art allocation and
 continues to fail the shared performance gate until the audio owner lands its
 own measured allocation. No superseded art file is removed: hero v01 and both
 controlled-logo v05 sizes remain Plan 12 rollback candidates.
+
+## Checkpoint 03M and FP-ART-OST static allocation
+
+Checkpoint 03M accepts the Human-delivered soundtrack as product content and
+restores a coherent runnable baseline after Plan 03-R2. All 42 MP3s are mapped
+to stable IDs in six non-empty pools; the old 14 placeholder files totalled
+50,156,671 bytes and the delivered pools total 99,151,313 bytes. The exact
+replacement delta is therefore 48,994,642 public bytes. Catalogue validation
+checks every repository path, while runtime loading remains one conservative
+audio element rather than eager decode of the library.
+
+The same checkpoint adds pending-exit recovery/exactly-once receipts,
+stationary keyed-door semantics, and deterministic future Mimic/reward tables.
+Against all previously allocated work, the complete v0.20.0 candidate measures:
+
+| Deterministic measure | Plan 03-R2 limit | v0.20.0 candidate | 03M allocation | Final limit |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, gzip level 9 | 130,668 B | 131,946 B | 1,500 B shared audio/gameplay | 132,168 B |
+| CSS, gzip level 9 | 29,427 B | 29,341 B | 0 B | 29,427 B |
+| All public runtime files | 101,996,707 B | 150,991,349 B | 48,994,642 B audio | 150,991,349 B |
+
+The JavaScript allocation leaves 222 bytes above the exact measured aggregate
+for deterministic compression variance and is split 700 audio / 800 gameplay in
+the ledger. It authorizes no CSS or unrelated media growth. Plan 07B must
+rebaseline encoded transfer, streamed/decode residency, context transitions,
+mastering, package size and physical listening; this static acceptance is not a
+performance or gapless-playback claim.
 
 ## Current resource inventory
 

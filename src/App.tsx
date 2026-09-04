@@ -47,6 +47,7 @@ import {
   isObjectResolved,
   movePlayer,
   pointsEqual,
+  stayAfterPendingCompletion,
 } from "./game/engine";
 import { heldWeaponStyle } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
@@ -90,6 +91,7 @@ import {
   writePlayerProgress,
   type BadgeId,
   type CalculatedLevelReward,
+  type LevelCompletionInput,
   type PlayerProgress,
   type RescueMedalId,
   type StickerId,
@@ -110,12 +112,18 @@ import {
   setMusicPageHidden,
   startMusicFromUserGesture,
 } from "./music";
+import { MUSIC_POOLS } from "./musicCatalogue";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
 import { getStoryRescueRecordDisplay } from "./rescueRecords";
 import { cameraWorldStyle, worldLayerStyle } from "./cameraMotion";
 import { getJumpPresentationMotion } from "./jumpPresentation";
 import { resetAllGameProgressResult } from "./resetProgress";
-import { clearActiveRun, readActiveRunResult, writeActiveRun } from "./session";
+import {
+  clearActiveRun,
+  createActiveRunId,
+  readActiveRunResult,
+  writeActiveRun,
+} from "./session";
 import {
   normalizedBoardPoint,
   pointerIntentFromTileOffset,
@@ -189,7 +197,7 @@ const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
 const DOOR_OPEN_PRESENTATION_MS = 860;
 const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.19.0";
+const BUILD_VERSION = "0.20.0";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -209,6 +217,7 @@ interface Feedback {
 }
 
 interface CompletionCelebration {
+  readonly completionId: string;
   readonly reward: CalculatedLevelReward;
   readonly newStickerIds: readonly StickerId[];
   readonly newMedalIds: readonly RescueMedalId[];
@@ -997,6 +1006,90 @@ function describeGeneratedRecord(levelId: string): string {
   return `${Number.isFinite(size) ? `${size} × ${size} · ` : ""}${difficulty[0]?.toUpperCase()}${difficulty.slice(1)}`;
 }
 
+function completionInputFor(
+  level: LevelDefinition,
+  game: GameState,
+  campaignIndex: number,
+  completionId: string,
+): LevelCompletionInput {
+  const animalObjects = level.objects.filter(
+    (object): object is Extract<LevelObject, { kind: "animal" }> => object.kind === "animal",
+  );
+  const rescuedSpecies = animalObjects
+    .filter((object) => game.rescuedAnimalIds.includes(object.id))
+    .map((object) => object.species);
+  return {
+    completionId,
+    levelId: level.id,
+    source: level.source,
+    campaignIndex,
+    rescuedCount: rescuedSpecies.length,
+    totalRescueCount: animalObjects.length,
+    rescuedSpecies,
+    steps: game.steps,
+    power: game.power,
+    contentRevision: level.contentRevision,
+    gameplayFingerprint: level.gameplayFingerprint,
+    bonusGold: game.goldStarsCollected,
+    sciencePoints: game.sciencePointsCollected,
+  };
+}
+
+function pendingCompletionFor(
+  level: LevelDefinition,
+  game: GameState,
+  progress: PlayerProgress,
+  campaignIndex: number,
+  runId: string,
+  testerRun: boolean,
+): CompletionCelebration {
+  const completionId = `completion:${runId}`;
+  const input = completionInputFor(level, game, campaignIndex, completionId);
+  const rescuedSpecies = input.rescuedSpecies ?? [];
+  if (testerRun) {
+    return {
+      completionId,
+      reward: {
+        levelId: level.id,
+        gold: 0,
+        goldBreakdown: { completion: 0, firstCompletion: 0, animalRescue: 0, perfectRescue: 0 },
+        stickerIds: [],
+      },
+      newStickerIds: [],
+      newMedalIds: [],
+      newBadgeIds: [],
+      rescuedSpecies,
+      totalGold: progress.gold,
+      bonusGold: game.goldStarsCollected,
+      sciencePoints: game.sciencePointsCollected,
+      testerRun: true,
+    };
+  }
+
+  const firstCompletion = progress.bestResultsByLevel[level.id] === undefined;
+  const reward = calculateLevelReward({
+    levelId: level.id,
+    source: level.source,
+    campaignIndex,
+    rescuedCount: rescuedSpecies.length,
+    totalRescueCount: input.totalRescueCount,
+    firstCompletion,
+  });
+  const projected = applyLevelCompletion(progress, input);
+  return {
+    completionId,
+    reward,
+    newStickerIds: projected.stickers.filter((id) => !progress.stickers.includes(id)),
+    newMedalIds: projected.medals.filter((id) => !progress.medals.includes(id)),
+    newBadgeIds: projected.badges.filter((id) => !progress.badges.includes(id)),
+    rescuedSpecies,
+    totalGold: projected.gold,
+    bonusGold: game.goldStarsCollected,
+    sciencePoints: game.sciencePointsCollected,
+    testerRun: false,
+  };
+}
+
 function App() {
   const [mazeMusicPicker] = useState(() => createMazeMusicPicker(createMusicRunSeed(), {
     previousTrackUrl: MUSIC_TRACKS.title,
@@ -1014,6 +1107,7 @@ function App() {
   const [bigMaze, setBigMaze] = useState(false);
   const [level, setLevel] = useState<LevelDefinition>(initialLevel);
   const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
+  const [runId, setRunId] = useState(() => initialRun?.runId ?? createActiveRunId());
   const [playerTrail, setPlayerTrail] = useState<readonly Point[]>(() => [
     initialRun?.game.position ?? initialLevel.start,
   ]);
@@ -1159,6 +1253,11 @@ function App() {
   const explorationMode = isExplorationLevel(level);
   const testerRun = runMode === "tester";
   const testerToolsEnabled = testerToolsRequested || testerRun;
+
+  useEffect(() => {
+    if (game.status !== "won" || completion !== null) return;
+    setCompletion(pendingCompletionFor(level, game, progress, campaignIndex, runId, testerRun));
+  }, [campaignIndex, completion, game, level, progress, runId, testerRun]);
   const unlockedLevelIds = new Set(progress.unlockedLevelIds);
   const unlockedStoryLevels = CURATED_LEVELS.filter((candidate) => unlockedLevelIds.has(candidate.id));
   const cameraWindow = useMemo(() => {
@@ -1232,7 +1331,7 @@ function App() {
     [level],
   );
   const mazeStatus = useMemo(() => describeMazePosition(level, game), [game, level]);
-  const runInProgress = hasActiveRun && game.status === "playing";
+  const runInProgress = hasActiveRun && (game.status === "playing" || game.status === "won");
   const displayedPower = presentedPower ?? game.power;
   const displayedGold = progress.gold + (game.status === "playing" ? game.goldStarsCollected : 0);
   const displayedScience = progress.sciencePoints + (game.status === "playing" ? game.sciencePointsCollected : 0);
@@ -1256,7 +1355,7 @@ function App() {
 
   useEffect(() => {
     if (runMode === "tester") return;
-    if (!hasActiveRun || level.source !== "curated" || game.status !== "playing") {
+    if (!hasActiveRun || level.source !== "curated") {
       const cleared = clearActiveRun();
       setSaveWarning((current) => cleared && current === "run"
         ? null
@@ -1264,6 +1363,7 @@ function App() {
       return;
     }
     const saved = writeActiveRun({
+      runId,
       mode: "normal",
       level,
       game,
@@ -1273,7 +1373,7 @@ function App() {
     setSaveWarning((current) => saved && current === "run"
       ? null
       : !saved && current !== "progress" ? "run" : current);
-  }, [game, hasActiveRun, hintUsesByState, level, revealedTiles, runMode]);
+  }, [game, hasActiveRun, hintUsesByState, level, revealedTiles, runId, runMode]);
 
   const clearDpadHold = useCallback(() => {
     dpadHoldDirection.current = null;
@@ -1584,6 +1684,7 @@ function App() {
     setTreasurePresentation(null);
     setLevel(nextLevel);
     setGame(createInitialGameState(nextLevel));
+    setRunId(createActiveRunId());
     setPlayerTrail([nextLevel.start]);
     setRevealedTiles(isExplorationLevel(nextLevel)
       ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)
@@ -1816,78 +1917,22 @@ function App() {
     else setBumpPulse((value) => value + 1);
 
     if (result.state.status === "won") {
-      const resultAnimalObjects = level.objects.filter(
-        (object): object is Extract<LevelObject, { kind: "animal" }> => object.kind === "animal",
+      const pending = pendingCompletionFor(
+        level,
+        result.state,
+        progress,
+        campaignIndex,
+        runId,
+        testerRun,
       );
-      const resultRescuedSpecies = resultAnimalObjects
-        .filter((object) => result.state.rescuedAnimalIds.includes(object.id))
-        .map((object) => object.species);
-      if (testerRun) {
-        setCompletion({
-          reward: {
-            levelId: level.id,
-            gold: 0,
-            goldBreakdown: { completion: 0, firstCompletion: 0, animalRescue: 0, perfectRescue: 0 },
-            stickerIds: [],
-          },
-          newStickerIds: [],
-          newMedalIds: [],
-          newBadgeIds: [],
-          rescuedSpecies: resultRescuedSpecies,
-          totalGold: progress.gold,
-          bonusGold: result.state.goldStarsCollected,
-          sciencePoints: result.state.sciencePointsCollected,
-          testerRun: true,
-        });
-      } else {
-        const firstCompletion = progress.bestResultsByLevel[level.id] === undefined;
-        const reward = calculateLevelReward({
-          levelId: level.id,
-          source: level.source,
-          campaignIndex,
-          rescuedCount: resultRescuedSpecies.length,
-          totalRescueCount: resultAnimalObjects.length,
-          firstCompletion,
-        });
-        const nextProgress = applyLevelCompletion(progress, {
-          levelId: level.id,
-          source: level.source,
-          campaignIndex,
-          rescuedCount: resultRescuedSpecies.length,
-          totalRescueCount: resultAnimalObjects.length,
-          rescuedSpecies: resultRescuedSpecies,
-          steps: result.state.steps,
-          power: result.state.power,
-          contentRevision: level.contentRevision,
-          gameplayFingerprint: level.gameplayFingerprint,
-          bonusGold: result.state.goldStarsCollected,
-          sciencePoints: result.state.sciencePointsCollected,
-        });
-        const newStickerIds = nextProgress.stickers.filter((id) => !progress.stickers.includes(id));
-        const newMedalIds = nextProgress.medals.filter((id) => !progress.medals.includes(id));
-        const newBadgeIds = nextProgress.badges.filter((id) => !progress.badges.includes(id));
-        setProgress(nextProgress);
-        const progressSaved = writePlayerProgress(nextProgress);
-        setSaveWarning((current) => progressSaved && current === "progress"
-          ? null
-          : !progressSaved ? "progress" : current);
-        setCompletion({
-          reward,
-          newStickerIds,
-          newMedalIds,
-          newBadgeIds,
-          rescuedSpecies: resultRescuedSpecies,
-          totalGold: nextProgress.gold,
-          bonusGold: result.state.goldStarsCollected,
-          sciencePoints: result.state.sciencePointsCollected,
-          testerRun: false,
-        });
-        if (newStickerIds.length > 0 || newMedalIds.length > 0 || newBadgeIds.length > 0) {
-          rewardSoundTimer.current = window.setTimeout(() => {
-            playSound(newBadgeIds.length > 0 ? "stamp" : "reward", mutedRef.current);
-            rewardSoundTimer.current = undefined;
-          }, presentationDuration + 520);
-        }
+      setCompletion(pending);
+      configureMusic({ trackUrl: MUSIC_POOLS.victory[0]!.url });
+      if (!mutedRef.current) void startMusicFromUserGesture();
+      if (pending.newStickerIds.length > 0 || pending.newMedalIds.length > 0 || pending.newBadgeIds.length > 0) {
+        rewardSoundTimer.current = window.setTimeout(() => {
+          playSound(pending.newBadgeIds.length > 0 ? "stamp" : "reward", mutedRef.current);
+          rewardSoundTimer.current = undefined;
+        }, presentationDuration + 520);
       }
     }
 
@@ -1899,13 +1944,15 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, level, modalOpen, muted, progress, schedulePresentationTimer, screen, showMapNotice, testerRun]);
+  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, level, modalOpen, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
   const dismissStory = useCallback(() => {
     setStoryOpen(false);
+    configureMusic({ trackUrl: musicTrackForLevel(level) });
+    if (!mutedRef.current) void startMusicFromUserGesture();
     playSound("select", mutedRef.current);
     window.setTimeout(() => boardRef.current?.focus(), 0);
-  }, []);
+  }, [level, musicTrackForLevel]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -2221,12 +2268,17 @@ function App() {
   ) => {
     preloadLevelArt(nextLevel);
     preloadRewardArt();
-    configureMusic({ trackUrl: musicTrackForLevel(nextLevel) });
+    const opensStory = mode === "normal"
+      && nextLevel.source === "curated"
+      && storyForLevel(nextLevel.id) !== undefined;
+    configureMusic({
+      trackUrl: opensStory ? MUSIC_POOLS.story[0]!.url : musicTrackForLevel(nextLevel),
+    });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
     setRunMode(mode);
     loadLevel(nextLevel);
-    setStoryOpen(mode === "normal" && nextLevel.source === "curated");
+    setStoryOpen(opensStory);
     setHasActiveRun(true);
     setScreen("game");
     playSound(sound, muted);
@@ -2234,20 +2286,15 @@ function App() {
 
   const resumeRun = () => {
     preloadLevelArt(level);
-    configureMusic({ trackUrl: musicTrackForLevel(level) });
+    configureMusic({
+      trackUrl: game.status === "won" ? MUSIC_POOLS.victory[0]!.url : musicTrackForLevel(level),
+    });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
     setPendingAdventure(null);
     setStoryOpen(false);
     setScreen("game");
     playSound("select", muted);
-  };
-
-  const replayLevel = () => {
-    playSound("select", muted);
-    setHasActiveRun(true);
-    setStoryOpen(false);
-    loadLevel(level);
   };
 
   const openStory = (trigger?: HTMLElement) => {
@@ -2404,8 +2451,9 @@ function App() {
     inputUnlockTimer.current = undefined;
     inputLocked.current = false;
     preloadAchievementArt();
-    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
-    configureMusic({ trackUrl: MUSIC_TRACKS.title });
+    const bookTrack = MUSIC_POOLS["adventure-book"][0]!.url;
+    mazeMusicPicker.noteTrackStarted(bookTrack);
+    configureMusic({ trackUrl: bookTrack });
     setMusicMuted(muted);
     if (!muted) void startMusicFromUserGesture();
     setHelpOpen(false);
@@ -2443,12 +2491,39 @@ function App() {
     }
   };
 
+  const stayHere = () => {
+    if (game.status !== "won") return;
+    setGame(stayAfterPendingCompletion(level, game));
+    setCompletion(null);
+    configureMusic({ trackUrl: musicTrackForLevel(level) });
+    setMusicMuted(muted);
+    if (!muted) void startMusicFromUserGesture();
+    playSound("select", muted);
+    window.setTimeout(() => boardRef.current?.focus(), 0);
+  };
+
   const nextLevel = () => {
     if (testerRun) {
       const nextIndex = campaignIndex >= 0 ? (campaignIndex + 1) % CURATED_LEVELS.length : 0;
       enterLevel(CURATED_LEVELS[nextIndex]!, "select", "tester");
       return;
     }
+    if (game.status !== "won" || !completion) return;
+    const nextProgress = applyLevelCompletion(
+      progress,
+      completionInputFor(level, game, campaignIndex, completion.completionId),
+    );
+    const progressSaved = writePlayerProgress(nextProgress);
+    setSaveWarning((current) => progressSaved && current === "progress"
+      ? null
+      : !progressSaved ? "progress" : current);
+    if (!progressSaved) return;
+    setProgress(nextProgress);
+    const runCleared = clearActiveRun();
+    setSaveWarning((current) => runCleared && current === "run"
+      ? null
+      : !runCleared && current !== "progress" ? "run" : current);
+    setCompletion(null);
     if (campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length) {
       enterLevel(CURATED_LEVELS[campaignIndex + 1]!);
     } else {
@@ -2485,6 +2560,11 @@ function App() {
     ...completion.newMedalIds.map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id), kind: "New medal" })),
     ...completion.newBadgeIds.map((id) => ({ id, label: BADGE_LABELS[id].label, art: badgeArt(id), kind: "New badge" })),
   ] : [];
+  const allFriendsRescued = completion !== null
+    && completion.rescuedSpecies.length === animalObjects.length;
+  const nextMazeLabel = completion?.testerRun
+    ? "Next test maze"
+    : campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze";
   const treasureFlightStyle = treasurePresentation ? (() => {
     const startX = 18 + ((treasurePresentation.at.x - cameraWindow.left + 0.5) / cameraWindow.width) * 626;
     const startY = 42 + ((treasurePresentation.at.y - cameraWindow.top + 0.5) / cameraWindow.height) * 438;
@@ -3173,8 +3253,20 @@ function App() {
               </div>
             )}
             <div className="modal-actions">
-              <button className="primary-button" onClick={nextLevel}>{completion.testerRun ? "Next test maze" : campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze"} <span>→</span></button>
-              <button className="secondary-button" onClick={replayLevel}>Play again</button>
+              {allFriendsRescued ? (
+                <>
+                  <button className="primary-button" onClick={nextLevel}>{nextMazeLabel} <span>→</span></button>
+                  <button className="secondary-button" onClick={stayHere}>Stay here</button>
+                </>
+              ) : (
+                <>
+                  <button className="primary-button" onClick={stayHere}>Stay here</button>
+                  <button className="secondary-button" onClick={nextLevel}>{nextMazeLabel} <span>→</span></button>
+                </>
+              )}
+              <button className="secondary-button" aria-pressed={restartArmed} onClick={armRestart}>
+                {restartArmed ? "Yes, restart" : "Restart"}
+              </button>
             </div>
           </Modal>
         )}
