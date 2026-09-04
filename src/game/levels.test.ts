@@ -6,6 +6,7 @@ import {
 import { createInitialGameState, movePlayer } from "./engine";
 import {
   CURATED_LEVELS,
+  AUTHORED_CAMPAIGN_ANIMAL_SPECIES,
   LANTERNLIGHT_LABYRINTH_LEVEL,
   MOONLIT_FRIENDSHIP_QUEST_LEVEL,
   MOVEMENT_LEVEL,
@@ -366,7 +367,9 @@ describe("curated campaign levels", () => {
     expect([...new Set(weaponStyles)].sort()).toEqual([...WEAPON_STYLE_IDS].sort());
     expect([...new Set(enemyStyles)].sort()).toEqual([...ENEMY_STYLE_IDS].sort());
     expect([...new Set(cageStyles)].sort()).toEqual([...CAGE_STYLE_IDS].sort());
-    expect([...new Set(campaignSpecies)].sort()).toEqual([...ANIMAL_SPECIES].sort());
+    expect([...new Set(campaignSpecies)].sort()).toEqual(
+      [...AUTHORED_CAMPAIGN_ANIMAL_SPECIES].sort(),
+    );
   });
 
   it("makes compact Lanternlight rooms rich, ordered, and rewarding to revisit", () => {

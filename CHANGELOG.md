@@ -4,6 +4,43 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.20.1 - 2026-09-04
+
+### Added
+
+- A distinct illustrated title screen now appears before Home, with the large
+  `Maze so Puzzle` logo, Play, and Exit actions. Home remains the practical
+  adventure hub after Play.
+- Seventeen approved fantasy, folklore, mythic, and magical rescue friends are
+  now active in the generated-maze friend pool and the Adventure Book,
+  including Green Tea Skeleton and Rainbow Horn Unicorn. Authored campaign
+  placement remains deliberately curated by the later campaign-expansion plan.
+- The Adventure Book friend ledger now supports bounded scrolling plus explicit
+  Expand, Default, and Collapse modes.
+
+### Changed
+
+- Professor Poggle and Sprig now use newly authored `mgjrpg-02` story portraits
+  rather than the retained legacy renderings. An active-catalogue audit found
+  no other genuine style gap: Goblin and Violet Moon remain intentional,
+  approved visual exceptions.
+- The Home hero was re-extracted from a clean generated source to repair its
+  clipped chroma-key edge, with a restrained glow for separation from the
+  environment.
+- Friend cards are narrower and denser while their sprites are larger, so the
+  expanded rescue roster uses the Book much more efficiently.
+- Door opening lasts slightly longer, uses a richer layered chime, keeps Ame
+  visible on her origin tile, and still requires a later input to cross.
+- Flower teleporters rely on their own clear colour and suit artwork; the
+  redundant white emoji/text pair marker has been removed.
+
+### Planning
+
+- The story backlog now includes a cast review, short two-to-three-turn
+  visual-novel-style interludes with fast skip, and a separate later exploration
+  of consent-safe generated voice acting. These are documented future tasks,
+  not enabled in this build.
+
 ## 0.20.0 - 2026-09-04
 
 ### Added

@@ -355,6 +355,32 @@ rebaseline encoded transfer, streamed/decode residency, context transitions,
 mastering, package size and physical listening; this static acceptance is not a
 performance or gapless-playback claim.
 
+## v0.20.1 corrective art, front door and friend-roster allocation
+
+The bounded v0.20.1 patch builds on the accepted FP-ART-OST checkpoint
+`bd47517cd25db63403eb296638b683e3d665c112`. It publishes final-style story
+portraits for Professor Poggle and Sprig, a repaired Home hero cutout and a
+separate illustrated title-front-door background. It also activates the 17
+already delivered mythic/fantasy friends for generated mazes and Adventure Book
+discovery, while Plan 09 retains authority over their crafted campaign ecology.
+
+| Deterministic measure | v0.20.0 limit | v0.20.1 candidate | Delta | Allocation |
+| --- | ---: | ---: | ---: | ---: |
+| JavaScript, gzip level 9 | 132,168 B | 133,886 B | +1,718 B | 1,750 B |
+| CSS, gzip level 9 | 29,427 B | 30,177 B | +750 B | 800 B |
+| All public runtime files | 150,991,349 B | 152,061,343 B | +1,069,994 B | 1,069,994 B |
+| New versioned runtime art | 0 | 4 files / 1,069,994 B | +4 / +1,069,994 B | Same public allocation |
+| New decoded-image upper bound | 0 | 11,536,288 B | +11,536,288 B | Reported residency risk |
+
+The UI/runtime delta also covers the new Play/Exit title surface, persistent
+visibility of Ame while a stationary keyed door opens, the longer layered door
+cue, removal of redundant portal glyphs, and the compact scroll/expand/collapse
+friend ledger. The complete candidate leaves 32 JS-gzip and 50 CSS-gzip bytes
+of deterministic variance headroom. The 17 promoted friend images were already
+present as dormant Plan 03 runtime files, so their activation adds no new public
+bytes. No superseded art is removed; Plan 12 retains the copy-first retirement
+gate.
+
 ## Current resource inventory
 
 The reviewed static inventory is

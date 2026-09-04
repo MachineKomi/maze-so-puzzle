@@ -33,6 +33,10 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
         )
         cls.mapping = read_json(cls.map_path)
         cls.report = read_json(cls.report_path)
+        corrective = read_json(
+            ROOT / "docs/source-assets/publication/mgjrpg-02-v0201-corrective-map.json"
+        )
+        cls.promoted_friends = set(corrective["friendPromotion"]["ids"])
 
     def test_exact_approved_projection_has_one_semantic_authority_per_source(self) -> None:
         rows = self.mapping["entries"]
@@ -66,6 +70,8 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
                 expected_status = (
                     "superseded"
                     if row["family"] == "navigation"
+                    else "active"
+                    if row["stableId"] in self.promoted_friends
                     else row["runtimeStatus"]
                 )
                 self.assertEqual(record["runtimeStatus"], expected_status)
@@ -75,6 +81,10 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
         rows = {row["stableId"]: row for row in self.mapping["entries"]}
         self.assertEqual(rows["green-tea-skeleton"]["family"], "friend")
         self.assertEqual(rows["green-tea-skeleton"]["runtimeStatus"], "dormant")
+        green_tea_record = read_json(
+            ROOT / "docs/source-assets/records/green-tea-skeleton-mgjrpg02-v03-source.json"
+        )
+        self.assertEqual(green_tea_record["runtimeStatus"], "active")
         self.assertEqual(rows["bubble-ring-blade"]["catalogueTarget"], "WEAPON_ART.bubble-ring-blade")
         self.assertFalse(any(row["stableId"] == "bubble-bow" for row in rows.values()))
         self.assertEqual(rows["splash-boots"]["catalogueTarget"], "PICKUP_ART.boots")

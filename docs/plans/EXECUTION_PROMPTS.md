@@ -107,10 +107,13 @@ and root checkpoint 03M have landed; consume their current performance harness,
 semantic view models, art tokens, safe bounds, assets, maintained gameplay
 contracts, and canonical `MusicTransportPort`.
 
-The accepted starting milestone is the pushed `v0.20.0` / `FP-ART-OST`
-checkpoint. Preserve its progress-v5, active-run-v3, recoverable completion,
+The accepted starting milestone is the pushed `v0.20.1` corrective
+`FP-ART-OST` checkpoint. Preserve its progress-v5, active-run-v3, recoverable completion,
 stationary-door, deterministic reward, OST catalogue, preview-namespace and
-release-provenance contracts. Do not rebump the version, rebuild/publish a
+release-provenance contracts; also preserve its final-style Poggle/Sprig
+portraits, complete generated friend roster, repaired transparent Home hero,
+separate minimal title screen, visible-player door sequence, portal-glyph
+cleanup and friend-ledger modes. Do not rebump the version, rebuild/publish a
 release, move the tag, or edit GitHub/Vercel release state; the root manager owns
 the later `FP-UI1` transaction.
 
@@ -139,7 +142,7 @@ Make `PT-20260903-25` a real implementation and acceptance tranche. The result m
 
 Use literal backdrop blur/transmission only on a measured bounded number of static overlays in full quality. Lite/static modes must retain the same material identity through opaque colour, gradients, borders and highlights, and the persistent HUD must not continuously re-blur the moving maze. Freeze a compact locally packaged type system with Art-Bible approval, licence provenance, exact real weights/no synthesis, required alphabet/punctuation/arithmetic glyphs, stable figures where useful, fallback, subset/loading cost, couch/minimum-size legibility, 200% resize and text-spacing evidence.
 
-Extend one shared `CatalogueImage`/`PresentationArt` primitive to choose `field`, optical/icon, or `presentation` art by semantic role, rendered size and DPR. Preserve the current blocker mechanic while replacing its direct 112px `itemSrc` field-image coupling: typed blocker dialogs prominently show the exact required item's large approved presentation rendition plus concise real text. Target at least 144 CSS px for the subject at 960x540 and 96 CSS px at the compact proof, or freeze a better Human-reviewed band in the UI spec. Use large art selectively for too-strong guidance, newly met friends/enemies, item details, Adventure Book, important rewards, victory and selected story beats. Reserve geometry and load only visible/bounded-imminent art; delayed/missing/decode-failed media falls back to correct optical art/text without blocking. Never stretch a field sprite or preload the presentation catalogue. Integrate Plan 03's approved early title illustration, home splash and exact reconstructed logo into the existing combined title/home surface with purposeful responsive roles and no art-only navigation state.
+Extend one shared `CatalogueImage`/`PresentationArt` primitive to choose `field`, optical/icon, or `presentation` art by semantic role, rendered size and DPR. Preserve the current blocker mechanic while replacing its direct 112px `itemSrc` field-image coupling: typed blocker dialogs prominently show the exact required item's large approved presentation rendition plus concise real text. Target at least 144 CSS px for the subject at 960x540 and 96 CSS px at the compact proof, or freeze a better Human-reviewed band in the UI spec. Use large art selectively for too-strong guidance, newly met friends/enemies, item details, Adventure Book, important rewards, victory and selected story beats. Reserve geometry and load only visible/bounded-imminent art; delayed/missing/decode-failed media falls back to correct optical art/text without blocking. Never stretch a field sprite or preload the presentation catalogue. Preserve and refine v0.20.1's two-stage front door: minimal title with the alternate illustration, large exact logo and Play/Exit; then Home with the approved transparent hero and navigation/progress actions. Do not collapse it or add a third art-only screen.
 
 Bind the single Sound disclosure only to checkpoint 03M's canonical
 `MusicTransportPort`; do not access audio elements directly, duplicate track
@@ -150,6 +153,12 @@ Use one recognisable landscape topology on TV, desktop, 960x540 Tauri, and iPad/
 Make the minimap a genuinely large first-class puzzle tool: remeasure and target at least 192px at 1280x720/ordinary TV, 160-176px at 960x540 and normal iPad/tablet, 120-144px on ordinary landscape phones, and 96px only at 568x320. Use more space where feasible. No blank map bands. Big Maze must turn every remaining region into board or purposeful focus deck.
 
 Create the shared DialogShell, semantic focus IDs/groups, overlay markup, CSS import/layer manifest, MazeViewport scene slots, and revisioned VFX anchors including bag:<semantic-slot-id>. Create canonical neutral src/motion.ts with MotionPreference=system|full|reduced and resolved MotionMode=full|reduced plus the one provider. Persist it in a small presentation/accessibility preference store outside campaign progress and active-run state; Reset Progress preserves it, and Agent 08 will extend that same store for haptics/input choices. Forced static presentation is a separate quality/fallback path, not a third preference.
+
+Make the Story variant a reusable multi-turn dialogue host for
+`PT-20260904-30`: typed speaker/portrait/line, Advance, Skip, focus trap/return,
+input blocking and screen-reader behavior. It must be ready for ordinary
+two-to-three-turn interludes without Plan 01 rewriting the current story; Plan
+09 owns cast/canon review and final dialogue content.
 
 Centralize typed UI/top-overlay truth in src/ui/interactionState.ts and use a narrow current-input blocking selector so every existing source is inert behind the top layer. Do not create InputContext, InputAction, InputSource, src/inputContext.ts, or getInteractionPolicy(); Agent 08 owns that canonical semantic policy and will consume your UI state/focus surfaces plus gameplay legality and the VFX busy lease. This supersedes similarly named illustrative work in the original plan. Do not implement gamepad polling, wall topology, VFX choreography, or sprite frames here.
 

@@ -7,6 +7,7 @@ export type SoundName =
   | "power"
   | "powerTick"
   | "unlock"
+  | "doorOpen"
   | "rescue"
   | "friendRescue"
   | "jump"
@@ -80,6 +81,15 @@ const melodies: Readonly<Record<SoundName, readonly MelodyNote[]>> = {
   power: [[520, 0, 0.07], [660, 0.07, 0.07], [820, 0.14, 0.11]],
   powerTick: [[620, 0, 0.065, 0.022, "triangle", 920]],
   unlock: [[410, 0, 0.07], [610, 0.08, 0.13]],
+  doorOpen: [
+    [196, 0, 0.18, 0.025, "triangle", 392],
+    [523, 0.06, 0.12, 0.023, "sine", 784],
+    [659, 0.18, 0.13, 0.026, "triangle", 988],
+    [784, 0.31, 0.15, 0.027, "triangle", 1175],
+    [1047, 0.46, 0.18, 0.03, "sine", 1568],
+    [1568, 0.68, 0.22, 0.022, "sine", 1047],
+    [2093, 0.84, 0.28, 0.019, "sine", 1319],
+  ],
   rescue: [[659, 0, 0.08], [784, 0.07, 0.1], [1047, 0.15, 0.18]],
   friendRescue: [
     [523, 0, 0.08, 0.024, "triangle", 659],

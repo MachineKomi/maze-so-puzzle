@@ -1,0 +1,18 @@
+{
+  "schema": "maze-art-human-decision/v1",
+  "decisionId": "mgjrpg-02-v0201-corrective-publication",
+  "recordedOn": "2026-09-04",
+  "authority": "Human project author",
+  "status": "approved-for-bounded-runtime-publication",
+  "scope": [
+    "Regenerate Professor Poggle and Sprig story portraits in the final approved art direction.",
+    "Repair the visibly chopped Home hero cutout while preserving its approved composition.",
+    "Use one existing alternate title illustration for a separate Play/Exit title screen.",
+    "Promote the already approved additional friends into the implemented rescue roster."
+  ],
+  "constraints": [
+    "Preserve rollback assets; do not delete historical art.",
+    "Do not promote the dormant future enemy roster in this checkpoint.",
+    "Plan 09 remains authoritative for authored-campaign friend ecology and introduction order."
+  ]
+}

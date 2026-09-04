@@ -38,6 +38,23 @@ export const ANIMAL_SPECIES = [
   "alpaca",
   "penguin",
   "koala",
+  "pitter-patter-parasol",
+  "lanternling",
+  "emberdown-phoenix",
+  "meadowstep-faunling",
+  "minerva-moon-owl",
+  "tessera-dolphin",
+  "mallowmusk-aroma-wisp",
+  "breezeling-sylph",
+  "griffin-cub",
+  "emberbelly-dragonling",
+  "cloudstep-pegasus",
+  "three-tumble-cerberus",
+  "riddlekit-sphinx",
+  "tidecurl-hippocamp",
+  "ripplecap-kappa",
+  "rainbow-horn-unicorn",
+  "green-tea-skeleton",
 ] as const;
 export type AnimalSpecies = (typeof ANIMAL_SPECIES)[number];
 export const ANIMALS_PER_LEVEL = 3;

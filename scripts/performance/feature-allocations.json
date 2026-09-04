@@ -129,6 +129,20 @@
       "dependencies": "Human-approved 03M contracts, accepted Plan 06 gameplay checkpoint, and accepted Plan 03-R2 checkpoint 7180fbffa778bd4d2df65eb40e9376b8fe2104ee.",
       "notes": "The combined 1,500-byte JS allowance for 03M audio/gameplay leaves 222 bytes above the exact measured aggregate. It authorizes no CSS or additional runtime media."
     },
+    {
+      "id": "ui-v0201-corrective-art-front-door-and-friend-roster",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 1750,
+      "compressedCssBytes": 800,
+      "runtimePublicBytes": 1069994,
+      "reason": "The Human-requested v0.20.1 corrective checkpoint adds a distinct title front door, repairs the Home hero alpha edge, keeps Ame visible through keyed-door presentation, lengthens the door cue, removes redundant portal glyphs, compacts the Adventure Book friend ledger, publishes final-style Poggle and Sprig portraits, and activates 17 already-published friends for generated mazes and discovery. Against the accepted v0.20.0 allocation ceiling, the complete candidate measures +1,718 gzip-9 JavaScript bytes, +750 gzip-9 CSS bytes, and exactly +1,069,994 public-runtime bytes.",
+      "evidencePath": "docs/PERFORMANCE_BUDGETS.md#v0201-corrective-art-front-door-and-friend-roster-allocation",
+      "reviewBy": "2026-10-04",
+      "rollbackPoint": "Restore the v0.20.0 App screen union and Home-only entry, prior story portrait and hero catalogue pointers, 15-friend gameplay union, portal pair labels, door timing/sound and Adventure Book layout from checkpoint bd47517cd25db63403eb296638b683e3d665c112. Keep the four versioned runtime files and immutable source records until Plan 12.",
+      "dependencies": "Accepted v0.20.0 FP-ART-OST checkpoint bd47517cd25db63403eb296638b683e3d665c112, Human v11 bounded publication decision, and Pass 07A allocation policy.",
+      "notes": "The allocation leaves 32 JavaScript and 50 CSS gzip bytes for deterministic compression variance. The exact public allocation covers four versioned WebP files; their 11,536,288-byte decoded RGBA upper-bound sum is reported separately and is not a simultaneous-residency claim. Additional friends reuse already-delivered dormant bytes and do not add public files. Plan 09 owns authored-campaign placement."
+    },
     { "owner": "audio", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Plan 07B must rebaseline and qualify the integrated OST; do not omit Human tracks or eagerly prepare the full library. Report title, story, maze, victory, Adventure Book, Garden, music-change, failure, offline, retained-resource, and package behavior." },
     { "owner": "campaign", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "New levels need loading-phase and reachability evidence." }
   ]

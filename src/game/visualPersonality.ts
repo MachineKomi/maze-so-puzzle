@@ -33,6 +33,23 @@ export const ANIMAL_PERSONALITIES: Readonly<Record<AnimalSpecies, AnimalPersonal
   alpaca: { motion: "prance", flourish: "❀", greeting: "Proudly leads the parade" },
   penguin: { motion: "waddle", flourish: "❉", greeting: "Waddles wherever friends go" },
   koala: { motion: "snuggle", flourish: "☁", greeting: "Sleepy, sweet, and steadfast" },
+  "pitter-patter-parasol": { motion: "waddle", flourish: "❉", greeting: "Pitter-patter, rain or shine" },
+  lanternling: { motion: "sway", flourish: "✦", greeting: "A tiny light for the way" },
+  "emberdown-phoenix": { motion: "prance", flourish: "✦", greeting: "Warm sparks and brave feathers" },
+  "meadowstep-faunling": { motion: "prance", flourish: "❀", greeting: "Dances where flowers grow" },
+  "minerva-moon-owl": { motion: "sway", flourish: "✦", greeting: "A very wise little hoot" },
+  "tessera-dolphin": { motion: "hop", flourish: "❉", greeting: "Leaps through moonlit ripples" },
+  "mallowmusk-aroma-wisp": { motion: "sway", flourish: "☁", greeting: "A funny puff with a kind heart" },
+  "breezeling-sylph": { motion: "sway", flourish: "❀", greeting: "A giggle on the breeze" },
+  "griffin-cub": { motion: "prance", flourish: "✦", greeting: "Proud paws, tiny wings" },
+  "emberbelly-dragonling": { motion: "waddle", flourish: "✦", greeting: "A warm and rumbly friend" },
+  "cloudstep-pegasus": { motion: "prance", flourish: "☁", greeting: "Trots on little clouds" },
+  "three-tumble-cerberus": { motion: "scamper", flourish: "♥", greeting: "Three times the tail wags" },
+  "riddlekit-sphinx": { motion: "sway", flourish: "✦", greeting: "Knows a tiny clever riddle" },
+  "tidecurl-hippocamp": { motion: "sway", flourish: "❉", greeting: "Carries a pocket of sea breeze" },
+  "ripplecap-kappa": { motion: "waddle", flourish: "❉", greeting: "A cucumber-loving ripple pal" },
+  "rainbow-horn-unicorn": { motion: "prance", flourish: "✦", greeting: "Makes every path more magical" },
+  "green-tea-skeleton": { motion: "sway", flourish: "♪", greeting: "Tea tastes better with friends" },
 };
 
 export const ENEMY_PERSONALITIES: Readonly<Record<EnemyStyle, EnemyPersonality>> = {

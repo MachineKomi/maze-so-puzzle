@@ -1,0 +1,155 @@
+{
+  "schema": "maze-art-v0201-corrective-publication/v1",
+  "publicationId": "mgjrpg-02-v0201-corrective-v01",
+  "recordedOn": "2026-09-04",
+  "derivativeRecipe": "mgjrpg-02-v0201-corrective-derivative-r01",
+  "encoderEnvironment": {
+    "python": "3.14.3",
+    "pillow": "12.2.0",
+    "numpy": "2.5.2",
+    "libwebp": "1.6.0",
+    "zlib": "1.3.1.zlib-ng"
+  },
+  "entries": [
+    {
+      "id": "story-professor-poggle-story-portrait-512-r01",
+      "path": "public/assets/mgjrpg-02/story/story-professor-poggle-v02-story-portrait-512-r01.webp",
+      "sha256": "7a80015b336e6186a3b9dbb83bff656861e2fc2f504345fa68468d3669c21cc0",
+      "bytes": 56846,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "story-portrait-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "story-or-level-entry",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0",
+        "options": {
+          "lossless": false,
+          "quality": 88,
+          "method": 6,
+          "exact": true
+        }
+      }
+    },
+    {
+      "id": "story-sprig-story-portrait-512-r01",
+      "path": "public/assets/mgjrpg-02/story/story-sprig-v02-story-portrait-512-r01.webp",
+      "sha256": "36ee0f065d40b406ee55ceb9d63afdfaafcf2ec5c41ad71141dbd76b8691ca8e",
+      "bytes": 39678,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "story-portrait-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "story-or-level-entry",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0",
+        "options": {
+          "lossless": false,
+          "quality": 88,
+          "method": 6,
+          "exact": true
+        }
+      }
+    },
+    {
+      "id": "front-door-hero-1024",
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v03-front-door-1024-r01.webp",
+      "sha256": "70bae194c1f0c52b0a6c05a25a738ee5a4c426164d415510bb2603a646dba8fe",
+      "bytes": 714624,
+      "width": 1024,
+      "height": 768,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "profile": "front-door-hero-1024",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0",
+        "options": {
+          "lossless": true,
+          "quality": 88,
+          "method": 6,
+          "exact": true
+        }
+      }
+    },
+    {
+      "id": "title-intro-background-1672",
+      "path": "public/assets/mgjrpg-02/brand/title-intro-environment-v01-front-door-1672-r01.webp",
+      "sha256": "d55ba8d61cab45af2111ee1951aeb4c759e6810195597dc6dfddf52bdfefd302",
+      "bytes": 258846,
+      "width": 1672,
+      "height": 941,
+      "format": "webp",
+      "mode": "RGB",
+      "alphaMode": "opaque",
+      "decodedBytesUpperBound": 6293408,
+      "profile": "front-door-background-1672",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0",
+        "options": {
+          "lossless": false,
+          "quality": 88,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "totals": {
+    "runtimeFiles": 4,
+    "runtimeEncodedBytes": 1069994,
+    "runtimeDecodedBytesUpperBound": 11536288
+  },
+  "friendPromotion": {
+    "count": 17,
+    "ids": [
+      "pitter-patter-parasol",
+      "lanternling",
+      "emberdown-phoenix",
+      "meadowstep-faunling",
+      "minerva-moon-owl",
+      "tessera-dolphin",
+      "mallowmusk-aroma-wisp",
+      "breezeling-sylph",
+      "griffin-cub",
+      "emberbelly-dragonling",
+      "cloudstep-pegasus",
+      "three-tumble-cerberus",
+      "riddlekit-sphinx",
+      "tidecurl-hippocamp",
+      "ripplecap-kappa",
+      "rainbow-horn-unicorn",
+      "green-tea-skeleton"
+    ],
+    "campaignPlacementOwner": "Plan 09"
+  },
+  "rollback": {
+    "checkpoint": "bd47517cd25db63403eb296638b683e3d665c112",
+    "paths": [
+      "/assets/story-professor-poggle-v1.webp",
+      "/assets/story-sprig-v1.webp",
+      "/assets/mgjrpg-02/brand/home-hero-splash-v02-front-door-1024-r01.webp"
+    ]
+  }
+}

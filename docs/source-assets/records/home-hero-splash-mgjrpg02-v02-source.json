@@ -5,7 +5,7 @@
   "id": "home-hero-splash",
   "artVersion": 2,
   "family": "brand",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "source-backed",
   "approvalStatus": "approved",
   "validationProfile": "strict-v2",
@@ -81,7 +81,9 @@
       "path": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/PROMPTS.md",
       "sha256": "c4d01d4ae8b8b183e2a3fdc8e11e6f998e4f2dd1c42fbc120e9695cca3c6a261"
     },
-    "outputIds": ["exec-bd502011-9d01-4679-9894-71f8ce07072a.png"],
+    "outputIds": [
+      "exec-bd502011-9d01-4679-9894-71f8ce07072a.png"
+    ],
     "notes": "Exact prompt, ordered references and provider output ID are preserved."
   },
   "sources": [
@@ -114,20 +116,37 @@
       "decodedBytesUpperBound": 3145728,
       "profile": "front-door-hero-1024",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "title-critical",
       "encoder": {
         "name": "Pillow WebP",
         "version": "Pillow 12.2.0; libwebp 1.6.0",
-        "options": {"lossless": true, "method": 6, "exact": true}
+        "options": {
+          "lossless": true,
+          "method": 6,
+          "exact": true
+        }
       }
     }
   ],
   "geometry": {
     "class": "hero-splash",
-    "pivot": [0.5, 0.5],
-    "visibleBounds": [0.06542969, 0.02734375, 0.87011719, 0.94270833],
-    "safeInset": [0.02734375, 0.06445312, 0.02994792, 0.06542969]
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.06542969,
+      0.02734375,
+      0.87011719,
+      0.94270833
+    ],
+    "safeInset": [
+      0.02734375,
+      0.06445312,
+      0.02994792,
+      0.06542969
+    ]
   },
   "build": {
     "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-26-plan03-r2-home-composition/home-hero-splash-v02-larger-tea-skeleton-generator-original.png",
@@ -143,13 +162,23 @@
         "edgeDilationPixels": 4,
         "minimumAlphaComponentPixels": 4,
         "maxEncodedBytes": 1048576,
-        "encoder": {"options": {"lossless": true, "method": 6, "exact": true}}
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "method": 6,
+            "exact": true
+          }
+        }
       }
     ],
     "backgroundExtraction": {
       "mode": "flat-impossible-matte",
       "recipeId": "flat-impossible-matte-alpha-unblend-v1",
-      "rgb": [7, 233, 19],
+      "rgb": [
+        7,
+        233,
+        19
+      ],
       "clearDistance": 48.0,
       "opaqueDistance": 144.0,
       "minimumComponentPixels": 96

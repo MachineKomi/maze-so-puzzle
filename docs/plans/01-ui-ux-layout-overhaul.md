@@ -86,12 +86,12 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md` and `docs/plans/00-integrated-impleme
   reserve stable responsive geometry before decode and fall back to the correct
   semantic optical art/text on missing or failed media. Opening one dialog must
   not preload the complete presentation catalogue or block its primary action.
-- Integrate the individually approved Plan-03 title illustration, home splash
-  and logo as the first front-door set, preserving their crop/safe zones and
-  separate overlay text/logo semantics. The current `title` surface already
-  serves as Home: assign the illustrations distinct background/foreground or
-  responsive roles, or explicitly reserve one, without adding a screen merely
-  to show both. Plan 03-R2 Human decision v10 explicitly promotes the approved
+- Preserve and refine the v0.20.1 two-stage front door: the minimal illustrated
+  title screen owns the large logo plus Play/Exit, while the Home surface owns
+  Continue, maze/book/progress actions and the transparent hero group. Preserve
+  crop/safe zones, semantic focus, responsive behavior, fast loading, and a
+  clear Back/Home model; do not collapse the two surfaces or add another
+  redundant art-only screen. Plan 03-R2 Human decision v10 explicitly promotes the approved
   generated wordmark as the visual-title exception after exact spelling,
   legibility and responsive checks; retain exact `Maze so Puzzle` as live
   accessible text. Plan 11 later audits rather than automatically replaces that
@@ -1060,9 +1060,8 @@ Work:
   action order and wire Mute/Unmute, Previous, Next and Shuffle solely through
   checkpoint 03M's `MusicTransportPort`. Reserve Loop unless Human-approved.
 - Integrate the approved title illustration, home splash/hero and brand mark into
-  distinct purposeful roles on the existing title/home route, or explicitly
-  reserve an asset if a second placement adds clutter. Use responsive/focal/copy-
-  safe variants without distortion or double-loading. Keep the exact `Maze so
+  their established distinct v0.20.1 title and Home roles. Use responsive/focal/
+  copy-safe variants without distortion or double-loading. Keep the exact `Maze so
   Puzzle` title as accessible live text. Human decision v10 makes the approved
   generated v06 wordmark the current visual-title authority; controlled v05
   remains the versioned rollback rather than the active display.
@@ -1077,6 +1076,11 @@ Work:
   and an exact-item blocker flow. Capture the styled component rack and runtime
   states at the required viewport/DPR/effects matrix, including disabled blur,
   reduced motion and static quality.
+- Move the current story surface onto the shared DialogShell as a reusable
+  dialogue sequence host with semantic speaker/portrait/line, Advance, Skip and
+  focus restoration. It must support two-to-three-turn content without Plan 01
+  rewriting the current chapter scripts; Plan 09 owns the cast/canon/dialogue
+  content review in `PT-20260904-30`.
 
 Affected files: extracted UI/front-door/dialog/Sound components, layered style
 files and local font declarations/assets; typed catalogue/resolver and narrow

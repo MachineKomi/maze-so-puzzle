@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   ACHIEVEMENT_ART,
+  ADDITIONAL_FRIEND_ART,
   AME_ART,
   ANIMAL_ART,
   CAGE_ART,
@@ -348,9 +349,8 @@ describe("art catalog", () => {
     for (const pair of PORTAL_PAIR_IDS) expect(resolvePortalArt(pair)).toBe(PORTAL_ART[pair]);
   });
 
-  it("keeps approved future art catalogued but outside gameplay ID unions", () => {
+  it("activates additional friends while keeping later mechanics catalogued and dormant", () => {
     const dormantEntries = [
-      ...Object.values(FUTURE_FRIEND_ART),
       ...Object.values(FUTURE_ENEMY_ART),
       ...Object.values(FUTURE_PORTAL_ART),
       ...Object.values(FUTURE_ITEM_ART),
@@ -363,11 +363,13 @@ describe("art catalog", () => {
       WALLS.sandstone,
     ];
 
-    expect(dormantEntries).toHaveLength(44);
+    expect(Object.values(ADDITIONAL_FRIEND_ART)).toHaveLength(17);
+    expect(Object.values(ADDITIONAL_FRIEND_ART).every((entry) => entry.runtimeStatus === "active")).toBe(true);
+    expect(dormantEntries).toHaveLength(27);
     expect(dormantEntries.every((entry) => entry.runtimeStatus === "dormant")).toBe(true);
-    expect(FUTURE_FRIEND_ART["green-tea-skeleton"].family).toBe("friend");
+    expect(ADDITIONAL_FRIEND_ART["green-tea-skeleton"].family).toBe("friend");
     expect(Object.hasOwn(FUTURE_ENEMY_ART, "green-tea-skeleton")).toBe(false);
-    expect(Object.hasOwn(ANIMAL_ART, "green-tea-skeleton")).toBe(false);
+    expect(Object.hasOwn(ANIMAL_ART, "green-tea-skeleton")).toBe(true);
     expect(Object.hasOwn(ENEMY_ART, "classic-slime")).toBe(false);
     expect(Object.hasOwn(PORTAL_ART, "sunny-diamond")).toBe(false);
     expect(PICKUP_ART.boots).toBe(MGJRPG02_ART["splash-boots"]);
@@ -403,7 +405,7 @@ describe("art catalog", () => {
   it("projects every generated Plan 03 derivative through one semantic catalogue", () => {
     const catalogued = [
       AME_ART,
-      STORY_ART.amePortrait,
+      ...Object.values(STORY_ART),
       ...Object.values(FLOORS),
       ...Object.values(WALLS),
       ...Object.values(TERRAIN_DRESSING_ART),
@@ -441,9 +443,9 @@ describe("art catalog", () => {
     const generatedEntries = Object.values(MGJRPG02_ART);
 
     expect(MGJRPG02_ART).toHaveProperty("ame");
-    expect(generatedSources.size).toBe(149);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(105);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(44);
+    expect(generatedSources.size).toBe(151);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(124);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(27);
     expect(catalogueSources).toEqual(generatedSources);
   });
 

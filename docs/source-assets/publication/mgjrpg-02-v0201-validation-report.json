@@ -1,0 +1,76 @@
+{
+  "schema": "maze-corrective-validation/v1",
+  "version": "0.20.1",
+  "date": "2026-09-04",
+  "startingCommit": "bd47517cd25db63403eb296638b683e3d665c112",
+  "scope": [
+    "active art-style coverage audit",
+    "Professor Poggle and Sprig story portrait publication",
+    "Home hero alpha correction",
+    "separate title screen",
+    "stationary visible-player door presentation correction",
+    "redundant teleporter glyph removal",
+    "complete approved generated-friend activation",
+    "bounded Adventure Book friend ledger"
+  ],
+  "artAudit": {
+    "genuineLegacyGapsReplaced": [
+      "story-professor-poggle",
+      "story-sprig"
+    ],
+    "approvedRetainedExceptions": [
+      "enemy-goblin",
+      "portal-violet-moon"
+    ],
+    "unreviewedActiveStyleGaps": []
+  },
+  "publishedRuntimeArt": {
+    "files": 4,
+    "encodedBytes": 1069994,
+    "decodedBytesUpperBound": 11536288,
+    "map": "docs/source-assets/publication/mgjrpg-02-v0201-corrective-map.json",
+    "deterministicRebuild": "4/4 byte-identical"
+  },
+  "automatedChecks": {
+    "artTest": "111/111 passed",
+    "artCheck": "passed with zero errors and 420 classified non-blocking warnings",
+    "application": "423/423 tests, strict TypeScript and production build passed",
+    "performance": "contracts, allocation ledger and deterministic byte budgets passed",
+    "scenarioFixtures": "4/4 passed",
+    "desktopCompilation": "cargo check --locked passed",
+    "gitDiffCheck": "passed"
+  },
+  "browserChecks": {
+    "viewports": [
+      "1280x720",
+      "844x390"
+    ],
+    "surfaces": [
+      "title screen",
+      "Home",
+      "Adventure Book default and collapsed friend ledger",
+      "Professor Poggle story portrait",
+      "Sprig story portrait",
+      "flower teleporters",
+      "door-opening player visibility"
+    ],
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "doorAssertion": "door presentation active while Ame player layer remains visible on the origin tile"
+  },
+  "performanceAtValidation": {
+    "compressedJavascriptBytes": 133887,
+    "compressedJavascriptLimit": 133918,
+    "compressedCssBytes": 30177,
+    "compressedCssLimit": 30227,
+    "runtimePublicBytes": 152061343,
+    "runtimePublicLimit": 152061343
+  },
+  "externalGatesPending": [
+    "physical iPad, television and phone family review",
+    "clean-machine NSIS installation",
+    "code signing and SmartScreen reputation",
+    "qualified low-end and Tauri performance cohorts",
+    "complete Human campaign playthrough"
+  ]
+}

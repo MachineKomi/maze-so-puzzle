@@ -109,7 +109,7 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 | 1 | **07A — Performance Phase 0 only** | Runs before tracked implementation changes so the programme has an uncontaminated, reproducible before-state. It adds the shared browser/performance harness, asset/bundle inventory, reporting, scenario fixtures, and provisional non-regressive gates. It performs no product optimization and removes no media. | Clean baseline manifest/reports, one shared browser harness, named semantic scenarios, current asset/package inventory, historical 0.19.0 baseline, and a feature-allocation ledger ready for later owners. |
 | 2 | **06 — Game design, gameplay UX, mechanics** | Establishes stable content identity, revisions/migrations, engine-consistent reachability, required-versus-optional semantics, progression metrics, scalable campaign contracts, and the revised 16-maze rule/content baseline. Presentation owners should not infer these from old `App.tsx` conditions. | Gameplay spec, stable semantic events/view models, campaign-length-safe foundations, solver and migration evidence, revised story/design authority. |
 | 3 | **03 — Art direction and graphic design** | Consumes the gameplay semantics and freezes the static visual identity before layout, lighting, effects, or animation depend on it. This is where blonde/blue-eyed Ame and the approved hair silhouette become canonical, and where the first approved title/logo/home-splash set can be readied for an early family preview. | Art Bible, PPBA-informed adopt/adapt/reject record, explicitly Human/Ame-approved model sheet and canonical static Ame sprite, Human-reviewed rendering-recipe/canary decision, asset/catalogue/source contract, final static art/tokens including required presentation renditions and approved early front-door art, actual-size proofs, provenance/byte evidence, and a versioned content-integration manifest assigning every approved final asset a semantic ID, lifecycle, proposed content role, intended consumer/owner and loading intent. Plan 09 separately decides final gameplay eligibility. A pending rendering canary, identity study or unclassified approved asset does not release Plan 01. |
-| 4 | **03M — Root compatibility and gameplay-contract checkpoint** | The delivered 42-track OST has replaced the old files before the final contextual controller exists, and several presentation-critical gameplay decisions need one authoritative seam before UI/VFX/controls consume them. | A bounded current-player catalogue cutover to real delivered files with no missing URL; canonical `MusicTransportPort` semantics and current adapter; maintained completion-choice, stationary-door, and committed Mimic/reward/drop contracts plus focused tests; full checks green; root-reviewed commit pushed. This is compatibility/contract work, not the Plan-07B contextual mix. |
+| 4 | **03M + v0.20.1 corrective root checkpoint** | The delivered 42-track OST, published art and presentation-critical gameplay decisions need one authoritative green seam before UI/VFX/controls consume them. The corrective slice closes missed Poggle/Sprig portraits, repairs the Home hero alpha, establishes the separate minimal title screen, activates the complete approved friend roster for generated play/Book, and fixes bounded door/portal/Book issues reported from v0.20.0. | Valid real-OST catalogue and `MusicTransportPort`; maintained completion/Mimic contracts; two-stage title/Home baseline; no legacy story portrait consumer; complete generated friend roster; stationary visible-player door sequence; redundant portal glyph removed; compact friend ledger; v0.20.1 web/Windows preview evidence; full checks green; root-reviewed commit pushed. This remains bounded compatibility/correction work, not the Plan-01 overhaul or Plan-07B contextual mix. |
 | 5 | **01 — UI/UX and layout** | Can now build around real gameplay priorities and final asset safe bounds. It establishes the stable cross-device shell, large minimap, DialogShell, focusable markup, compact Sound disclosure, CSS layer manifest, motion preference, measured UI/VFX anchors, and the authored Maze-native surface/type/presentation-art system. | UI/UX spec, primary-device topology, all-content geometry tests, stable semantic IDs/anchors, styled component/state proof, licensed typography and full/lite/static surface recipes, large contextual-art slots/fallbacks, integrated early front door, dialog/focus surfaces including one accessible Sound menu, and extensions to the shared browser harness. Its accepted checkpoint is the preferred Family Preview 1 gate. |
 | 6 | **04 — Lighting and wall depth** | Uses final art materials and the final MazeViewport/scene slots. It creates the single terrain topology/render-model seam, coherent light resolver, wall layers, grounding wrappers, and bounded presentation-only multi-theme region support before effects attach to them. | Lighting spec, resolved-light API, cached topology/render model, validated one-to-four-region terrain-theme seam over one gameplay topology, world masks/layer tokens, dedicated contact/cast/sparkle surfaces, tier evidence. |
 | 7 | **02 — Graphics and VFX** | Consumes final art tokens/assets, terrain/light layers, UI anchors, and gameplay events. It owns the shared presentation director, cancellation, semantic effect grammar, hazard motion, varied flourishes, and the reusable bounded reward-shower presentation from `PT-20260903-22`. | VFX Bible, presentation-director contract, anchor/timing/cancellation APIs, effect variants, deterministic visual-only reward burst/homing recipes, reduced/static recipes, sound/lifecycle evidence. |
@@ -220,6 +220,14 @@ Plan 08 implements shared browser/Tauri controller support and a tested Steam De
 `45dfda27c9f7c60b1dd8c42fd0f9e06e1801f58c` implements and tests this
 checkpoint. The `FP-ART-OST` v0.20.0 browser/Windows preview records its release
 evidence under `release/`.
+
+**Corrective continuation 2026-09-04.** The Human's v0.20.0 review authorized a
+bounded v0.20.1 patch before Plan 01: final-style Poggle/Sprig portraits, repaired
+Home-hero alpha, a distinct minimal title screen, additional rescue friends in
+generated play and the Adventure Book, door continuity/timing/SFX, removal of
+redundant portal glyphs, and a denser expandable friend ledger. This patch does
+not pre-empt Plan 01's architecture/layout overhaul or Plan 09's authored
+campaign ecology. Its final commit/release evidence is recorded when published.
 
 After Plan 03 is accepted and pushed, the root manager performs one bounded
 compatibility/contract interlude before issuing the Plan-01 prompt. It is not a
@@ -453,13 +461,12 @@ the active Plan-03 production slate after their individual Human approval. Plan
 Garden canon and retains good work by default; it creates only missing variants
 or bounded replacements justified by the final product.
 
-The current `title` route is already the home/menu surface. Plan 01 assigns the
-two illustrations distinct responsive background/foreground roles or explicitly
-reserves one; it does not add an extra screen solely to display art. Illustration
-and wordmark remain separable. Generated lettering is concept-only until the
-exact “Maze so Puzzle” wordmark is reconstructed with controlled local type or
-vector/raster lettering, checked for spelling and delivery-size legibility, and
-explicitly approved.
+v0.20.1 separates the minimal title and Home/menu surfaces. Plan 01 preserves
+that two-stage information architecture while rebuilding its responsive shell,
+focus behavior and materials: the title owns large logo plus Play/Exit; Home
+owns Continue, maze/book/progress actions and the transparent hero group.
+Illustration and wordmark remain separable, exact accessible title text remains
+present, and no third art-only screen is added.
 
 Every accepted plan first receives a source checkpoint: reviewed changes are
 committed and pushed to GitHub `main` with evidence. That push must be observed
@@ -479,6 +486,8 @@ their manifest, SHA-256 and playtest note:
    contextual history/crossfade controller remains Plan 07B. The anticipated
    application version is the next unused version after 0.19.0 (normally 0.20.0),
    resolved only after the final accepted commit is known.
+   The bounded v0.20.1 corrective preview supersedes v0.20.0 for family testing
+   once its release is green; v0.20.0 remains immutable rollback evidence.
 2. **`FP-UI1` — Family Preview 1 after Plan 01** is a required build when the
    accepted UI checkpoint is green, combining
    approved static/front-door art with the rebuilt UI.
@@ -567,6 +576,13 @@ The opportunity set must include—but must not anchor exclusively on:
   large progression economy; and
 - the “do nothing systemic” option, with targeted polish instead, so persistent
   progression must earn its complexity rather than win by assumption.
+
+The review also includes `PT-20260904-31` as a separate narrative/audio
+opportunity: compare text-only interludes, sparse vocal reactions and fully
+voiced short lines, including consent/rights, child safety, accessibility,
+subtitles, audio mixing, offline packaging, failure fallback and content cost.
+It must not generate or ship voices. An explicit Human-approved follow-on plan
+is required for implementation.
 
 Every pitch must explain player value, target-age comprehension, persistence and
 migration, controls/co-op behaviour, content cost, performance, accessibility,

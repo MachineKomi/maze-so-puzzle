@@ -76,7 +76,12 @@ class Plan03R2PublicationTests(unittest.TestCase):
             record = read_json(ROOT / "docs/source-assets/records" / record_name)
             with self.subTest(record=record_name):
                 self.assertEqual(validate_record_shape(record, record["recordId"]), [])
-                self.assertEqual(record["runtimeStatus"], "active")
+                expected_status = (
+                    "superseded"
+                    if record_name == "home-hero-splash-mgjrpg02-v02-source.json"
+                    else "active"
+                )
+                self.assertEqual(record["runtimeStatus"], expected_status)
                 self.assertEqual(record["build"]["backgroundExtraction"]["mode"], "flat-impossible-matte")
                 self.assertIn("without generative repainting", record["humanEdits"][0]["description"])
 
@@ -92,7 +97,8 @@ class Plan03R2PublicationTests(unittest.TestCase):
         self.assertNotIn('className="title-vignette"', app)
         self.assertNotIn(".title-vignette", styles)
         self.assertIn("game-logo-v06-front-door-1024-r01.webp", catalogue)
-        self.assertIn("home-hero-splash-v02-front-door-1024-r01.webp", catalogue)
+        self.assertIn("home-hero-splash-v03-front-door-1024-r01.webp", catalogue)
+        self.assertIn('className="front-door-screen"', app)
 
     def test_prior_front_door_files_remain_rollback_holds(self) -> None:
         ledger = read_json(ROOT / "docs/source-assets/retirement/asset-retirement-ledger.json")

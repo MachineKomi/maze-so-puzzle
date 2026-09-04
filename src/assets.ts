@@ -34,6 +34,7 @@ import type { LevelDefinition, TerrainKind } from "./game/types";
 import type { BadgeId, RescueMedalId, StickerId } from "./progress";
 
 export const ASSETS = {
+  titleIntroBackground: FRONT_DOOR_ART.titleIntroEnvironment.src,
   titleBackground: FRONT_DOOR_ART.titleEnvironment.src,
   titleBackgroundFallback: FRONT_DOOR_ART.titleEnvironment.fallbackSrc,
   homeHeroSplash: FRONT_DOOR_ART.homeHeroSplash.src,

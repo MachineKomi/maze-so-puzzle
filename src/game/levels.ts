@@ -88,6 +88,14 @@ const ANIMAL_SPECIES: Readonly<Record<string, AnimalSpecies>> = {
 };
 
 /**
+ * Friends intentionally placed in the hand-authored 16-maze campaign today.
+ * Plan 09 owns the authored introduction curve for the expanded friend roster.
+ */
+export const AUTHORED_CAMPAIGN_ANIMAL_SPECIES = Object.freeze(
+  [...new Set(Object.values(ANIMAL_SPECIES))],
+) as readonly AnimalSpecies[];
+
+/**
  * Parses the compact authoring format used by the tutorial levels and tests.
  * Interactive characters always sit on ordinary floor terrain. Lowercase `o`
  * authors a ground hole, `%` authors poison, `j` places spring boots, and `l`

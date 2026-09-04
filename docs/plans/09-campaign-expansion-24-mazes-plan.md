@@ -32,7 +32,7 @@ At execution time, do not assume the repository still resembles the planning bas
 6. `docs/PLAYTEST_BACKLOG.md`, especially `PT-20260902-04`,
    `PT-20260902-06`, `PT-20260902-11`, `PT-20260902-12`,
    `PT-20260902-16`, `PT-20260902-19`, `PT-20260903-22`, and
-   `PT-20260903-24`; these are execution contracts, not optional background notes.
+   `PT-20260903-24`, and `PT-20260904-30`; these are execution contracts, not optional background notes.
 7. Current levels, story, engine, solver, progress, session, navigation, achievements, rewards, assets/catalogue, audio, presentation, UI, and tests.
 
 Before authoring a tile, verify that the following predecessor gates really exist and pass:
@@ -137,6 +137,13 @@ These constraints derive from Human decisions and predecessor contracts.
 - One resolved level-wide light source/profile governs every region and scene
   cue. Region theming must not create conflicting per-region light directions.
 - No copyrighted reference is copied. All new story, layouts, names, combinations, and presentation are original to Puzzlewild.
+- Before final chapter scripting, produce a cast disposition covering every
+  current and proposed story character: retain, refine, replace, or add, with a
+  distinct narrative/teaching/comic function and any downstream art need. Then
+  implement the accepted chapter interludes through Plan 01's story shell.
+  Ordinary sequences stay at two or three concise turns, may give Ame a reply,
+  and remain quickly advanceable, skippable, replayable, input-parity and
+  non-blocking. Do not generate or ship voice acting here.
 
 ## 4. Canonical 24-chapter order
 

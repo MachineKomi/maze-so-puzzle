@@ -159,12 +159,13 @@ These are **Human decisions**.
   branding remains provisional. Plan 11 owns the final front-door selection,
   exact lettering, platform optical set, and runtime integration, retaining good
   approved work by default rather than imposing a regeneration quota.
-- The current title route is also the home/menu surface. The early title and
-  home-splash illustrations receive distinct responsive roles within that front
-  door or an explicit reserved disposition; they do not justify a redundant new
-  screen. Keep illustration, exact live title and logo separable. Generated
-  lettering is concept-only until “Maze so Puzzle” is reconstructed with exact
-  controlled lettering, checked at delivery sizes and explicitly approved.
+- v0.20.1 establishes a deliberate two-stage front door: a minimal illustrated
+  title screen with the large exact logo and Play/Exit actions, followed by the
+  existing Home/menu screen with Continue, maze selection, Adventure Book and
+  progress actions. The two surfaces use distinct approved illustrations and
+  must remain fast, responsive, accessible and free of redundant repeated copy.
+  Keep illustration, exact live title and logo separable; the logo retains
+  accessible live `Maze so Puzzle` text even when the visual wordmark is used.
 - On 2026-09-03 the Human rejected the v08 deterministic contour-overlay packet
   as a meaningful art-style decision: at gameplay size its local contours read
   too close to black and its historical interiors remained materially
@@ -205,6 +206,12 @@ These are **Human decisions**.
 - The game should make intelligent, varied use of its full library of art, sound, music, characters, terrain, hazards, items, lighting, animation, and effects. Variety should come from meaningful combinations and pacing, not indiscriminate simultaneous clutter.
 - The authored campaign should reveal its guardian cast like a welcoming JRPG journey: begin with a small recognisable vocabulary, introduce new enemy silhouettes gradually in readable encounters, alternate memorable themed ensembles with surprising mixed casts, and eventually earn a late all-roster celebration. Every final Human-approved guardian intended for gameplay is campaign-eligible by default and receives a meaningful interactive use before that celebration; exclusion requires an explicit Human deferral, and art-file lifecycle state alone never decides gameplay eligibility. The celebration may use a bounded interactive guardian set plus non-colliding cameos so completeness does not become clutter, preload waste, solver explosion, or a combat gauntlet.
 - Every final rescue-and-collect friend species receives at least one fixed authored campaign rescue. Story-maze friends are curated for habitat, lore, pacing and occasional delightful contrast; generated-maze friends may vary through deterministic themed or mixed selections. No friend is available only through lucky procedural generation, co-op, or an Egg.
+- Before Plan 09 freezes the expanded campaign, review the story cast and record
+  which characters are retained, refined, replaced, or added. Story interludes
+  should usually be two or three short VN-style dialogue turns, optionally
+  including Ame's reply, with obvious fast advance/skip/replay behavior and no
+  reading requirement that blocks maze play. Optional generated voice acting is
+  an evidence-led Plan-14 opportunity, not approved production scope.
 - Each story maze has a fixed art-directed floor/wall environment. Clearly separated rooms, islands or portal destinations may use distinct compatible regions so they feel like different places, while generated mazes choose deterministic variety only from complete validated non-clashing environment recipes. Named regions may reinforce landmark and Hint language, but texture or colour is never the sole clue; one resolved level-wide light source still governs every region.
 - Each chapter should contain at least one memorable beat of wonder, surprise, humour, discovery, or emotional payoff. A surprise must remain legible and mechanically fair.
 - The experience should be engaging and encourage healthy voluntary replay through mastery, curiosity, expression, discovery, and warm rewards. It must not use coercive retention, monetization pressure, punishment, or manipulative compulsion.

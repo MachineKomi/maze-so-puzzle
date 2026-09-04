@@ -83,7 +83,9 @@ files corridors under Sandwiches, or prepares an excellent plan for somewhere
 else. He models an important truth: knowledgeable people still make mistakes,
 and correcting one can be funny rather than embarrassing.
 
-Visual asset: public/assets/story-professor-poggle-v1.webp.
+Current visual authority:
+`public/assets/mgjrpg-02/story/story-professor-poggle-v02-story-portrait-512-r01.webp`.
+The v01 portrait remains rollback history.
 
 ### Sprig — Apprentice Sneeze-Dragon
 
@@ -93,7 +95,25 @@ but he is never shamed for it. He is curious, impulsive, snack-motivated, and
 often voices the tempting first answer. By the finale he prepares responsibly,
 apologises, and learns that a very small rainbow is an acceptable sneeze.
 
-Visual asset: public/assets/story-sprig-v1.webp.
+Current visual authority:
+`public/assets/mgjrpg-02/story/story-sprig-v02-story-portrait-512-r01.webp`.
+The v01 portrait remains rollback history.
+
+### Cast and compact-interlude review
+
+The current three-character cast remains canon at v0.20.1, but is not assumed
+to be the final complete story ensemble. Before the 24-chapter script and final
+key art are frozen, Plan 09 must record a retain/refine/replace/add disposition
+for each story role. Additional characters earn inclusion through a distinct
+narrative, teaching, comic, or world-building function—not roster size alone.
+
+Future story presentation may use short visual-novel-style exchanges rather
+than only one-speaker cards. A normal interlude is two or three concise turns,
+may let Ame answer, and remains quickly advanceable/skippable and replayable.
+This is a warmer delivery of the same puzzle adventure, not a long-form visual
+novel or a reading gate. Exact implementation and final lines belong to Plan 09;
+Plan 01 supplies the accessible presentation shell. Optional generated voice
+acting remains a Plan-14 study and is not current canon or approved media scope.
 
 ## Future Puzzlewild guardians — Plan 09 gameplay roster
 

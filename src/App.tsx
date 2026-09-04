@@ -177,6 +177,23 @@ const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
   alpaca: "Alpaca",
   penguin: "Penguin",
   koala: "Koala",
+  "pitter-patter-parasol": "Pitter-Patter Parasol",
+  lanternling: "Lanternling",
+  "emberdown-phoenix": "Emberdown Phoenix",
+  "meadowstep-faunling": "Meadowstep Faunling",
+  "minerva-moon-owl": "Minerva Moon Owl",
+  "tessera-dolphin": "Tessera Dolphin",
+  "mallowmusk-aroma-wisp": "Mallowmusk Aroma Wisp",
+  "breezeling-sylph": "Breezeling Sylph",
+  "griffin-cub": "Griffin Cub",
+  "emberbelly-dragonling": "Emberbelly Dragonling",
+  "cloudstep-pegasus": "Cloudstep Pegasus",
+  "three-tumble-cerberus": "Three-Tumble Cerberus",
+  "riddlekit-sphinx": "Riddlekit Sphinx",
+  "tidecurl-hippocamp": "Tidecurl Hippocamp",
+  "ripplecap-kappa": "Ripplecap Kappa",
+  "rainbow-horn-unicorn": "Rainbow-Horn Unicorn",
+  "green-tea-skeleton": "Tea-Time Skeleton",
 };
 
 const STORY_SPEAKER_LABELS: Readonly<Record<StorySpeaker, string>> = {
@@ -195,9 +212,9 @@ const MOVE_CADENCE_MS = 64;
 const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
-const DOOR_OPEN_PRESENTATION_MS = 860;
-const REDUCED_PRESENTATION_MS = 140;
-const BUILD_VERSION = "0.20.0";
+const DOOR_OPEN_PRESENTATION_MS = 1_320;
+const REDUCED_PRESENTATION_MS = 180;
+const BUILD_VERSION = "0.20.1";
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -229,7 +246,7 @@ interface CompletionCelebration {
   readonly testerRun: boolean;
 }
 
-type AppScreen = "title" | "game" | "achievements";
+type AppScreen = "front-door" | "title" | "game" | "achievements";
 type RunMode = "normal" | "tester";
 
 interface PendingAdventure {
@@ -1099,7 +1116,7 @@ function App() {
   const initialLevel = initialRun
     ? CURATED_LEVELS.find((candidate) => candidate.id === initialRun.levelId) ?? CURATED_LEVELS[0]!
     : CURATED_LEVELS[0]!;
-  const [screen, setScreen] = useState<AppScreen>("title");
+  const [screen, setScreen] = useState<AppScreen>("front-door");
   const [hasActiveRun, setHasActiveRun] = useState(initialRun !== null);
   const [pendingAdventure, setPendingAdventure] = useState<PendingAdventure | null>(null);
   const [testerPickerOpen, setTesterPickerOpen] = useState(debugMazeQueryEnabled);
@@ -1189,6 +1206,7 @@ function App() {
   const presentationSequence = useRef(0);
   const treasureTimer = useRef<number | undefined>(undefined);
   const modalReturnFocus = useRef<HTMLElement | null>(null);
+  const frontDoorPlayRef = useRef<HTMLButtonElement>(null);
   const titlePlayRef = useRef<HTMLButtonElement>(null);
   const achievementsHeadingRef = useRef<HTMLHeadingElement>(null);
   const mutedRef = useRef(muted);
@@ -1232,7 +1250,7 @@ function App() {
   );
 
   useEffect(() => {
-    if (screen !== "title" || muted) return undefined;
+    if ((screen !== "front-door" && screen !== "title") || muted) return undefined;
     mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
     configureMusic({ trackUrl: MUSIC_TRACKS.title });
     setMusicMuted(false);
@@ -1615,7 +1633,7 @@ function App() {
       at: door.at,
       doorSrc: resolveDoorArt(event.color).src,
     });
-    playSound("unlock", mutedRef.current);
+    playSound("doorOpen", mutedRef.current);
     schedulePresentationTimer(sequence, () => setDoorOpeningPresentation(null), Math.max(100, duration - 25));
     return duration;
   }, [clearPresentationWork, schedulePresentationTimer]);
@@ -1655,7 +1673,8 @@ function App() {
 
   useEffect(() => {
     const focusTimer = window.setTimeout(() => {
-      if (screen === "title") titlePlayRef.current?.focus();
+      if (screen === "front-door") frontDoorPlayRef.current?.focus();
+      else if (screen === "title") titlePlayRef.current?.focus();
       else if (screen === "achievements") achievementsHeadingRef.current?.focus();
       else boardRef.current?.focus();
     }, 0);
@@ -2423,6 +2442,15 @@ function App() {
     if (nextStory) enterLevel(nextStory, "title");
   };
 
+  const enterHome = () => {
+    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
+    configureMusic({ trackUrl: MUSIC_TRACKS.title });
+    setMusicMuted(muted);
+    if (!muted) void startMusicFromUserGesture();
+    setScreen("title");
+    playSound("title", muted);
+  };
+
   const showTitle = () => {
     cancelPresentations();
     clearHeldInput();
@@ -2597,7 +2625,13 @@ function App() {
               : "This maze couldn’t be saved on this device. You can keep playing, but closing the game may restart this maze."}
           </p>
         )}
-        {screen === "title" ? (
+        {screen === "front-door" ? (
+          <FrontDoorScreen
+            playRef={frontDoorPlayRef}
+            muted={muted}
+            onPlay={enterHome}
+          />
+        ) : screen === "title" ? (
           <TitleScreen
             progress={progress}
             updatedMazeRestarted={initialRunResult.discardedUpdatedRun}
@@ -2750,9 +2784,6 @@ function App() {
                     {object.kind === "treasure" && <span className="item-amount treasure-amount">+{object.amount}</span>}
                     {(object.kind === "key" || object.kind === "door") && (
                       <span className={`object-color-name color-name-${object.color}`}>{KEY_MOTIF_LABELS[object.color]}</span>
-                    )}
-                    {object.kind === "portal" && (
-                      <span className={`portal-pair-name portal-name-${object.pair}`}>{resolvePortalArt(object.pair).motif}</span>
                     )}
                   </div>
                 ))}
@@ -2949,7 +2980,7 @@ function App() {
               )}
 
               <div
-                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation || doorOpeningPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
+                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
                 style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
               >
@@ -3420,6 +3451,63 @@ function App() {
   );
 }
 
+interface FrontDoorScreenProps {
+  readonly playRef: React.RefObject<HTMLButtonElement | null>;
+  readonly muted: boolean;
+  readonly onPlay: () => void;
+}
+
+function FrontDoorScreen({ playRef, muted, onPlay }: FrontDoorScreenProps) {
+  const [exitNotice, setExitNotice] = useState(false);
+
+  const requestExit = () => {
+    playSound("menu", muted);
+    window.close();
+    window.setTimeout(() => setExitNotice(true), 180);
+  };
+
+  return (
+    <section className="front-door-screen" aria-labelledby="front-door-title">
+      <img
+        className="front-door-background"
+        src={ASSETS.titleIntroBackground}
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        fetchPriority="high"
+      />
+      <div className="front-door-shade" aria-hidden="true" />
+      <div className="front-door-content">
+        <h1 id="front-door-title" className="sr-only">Maze so Puzzle</h1>
+        <img
+          className="front-door-logo"
+          src={ASSETS.gameLogo}
+          srcSet={`${ASSETS.gameLogoCompact} 512w, ${ASSETS.gameLogo} 1024w`}
+          sizes="(max-width: 760px) 58vw, 43vw"
+          alt=""
+          aria-hidden="true"
+          decoding="async"
+        />
+        <div className="front-door-actions">
+          <button ref={playRef} className="front-door-play" onClick={onPlay}>
+            <img src={ASSETS.goal} alt="" />
+            <span>Play</span>
+          </button>
+          <button className="front-door-exit" onClick={requestExit}>
+            Exit
+          </button>
+        </div>
+        {exitNotice && (
+          <p className="front-door-exit-note" role="status">
+            Your browser keeps this tab open. It is safe to close it whenever you are ready.
+          </p>
+        )}
+      </div>
+      <span className="front-door-version">v{BUILD_VERSION}</span>
+    </section>
+  );
+}
+
 interface TitleScreenProps {
   readonly progress: PlayerProgress;
   readonly updatedMazeRestarted: boolean;
@@ -3588,6 +3676,7 @@ function AchievementsScreen({
   onRequestReset,
   onToggleSound,
 }: AchievementsScreenProps) {
+  const [friendLedgerMode, setFriendLedgerMode] = useState<"default" | "expanded" | "collapsed">("default");
   const solvedIds = Object.keys(progress.bestResultsByLevel);
   const classifiedRescues = ANIMAL_SPECIES.reduce(
     (total, species) => total + progress.rescuesBySpecies[species],
@@ -3628,7 +3717,7 @@ function AchievementsScreen({
     <section className="achievements-screen" aria-labelledby="adventure-book-title" inert={blocked ? true : undefined} aria-hidden={blocked || undefined}>
       <div className="book-sparkles" aria-hidden="true">✦　·　✧　·　✦</div>
       <header className="book-header">
-        <button className="book-back" onClick={onHome}><span aria-hidden="true">←</span> Title</button>
+        <button className="book-back" onClick={onHome}><span aria-hidden="true">←</span> Home</button>
         <div>
           <span>Ame's keepsake shelf</span>
           <h1 ref={headingRef} tabIndex={-1} id="adventure-book-title">Adventure Book</h1>
@@ -3652,7 +3741,37 @@ function AchievementsScreen({
         </section>
 
         <section className="friend-ledger" aria-labelledby="friend-ledger-title">
-          <div className="book-section-heading"><div><span>Rescue roll-call</span><h2 id="friend-ledger-title">Little friends helped</h2></div><b>{progress.totalAnimalsRescued} total</b></div>
+          <div className="book-section-heading">
+            <div><span>Rescue roll-call</span><h2 id="friend-ledger-title">Little friends helped</h2></div>
+            <div className="friend-ledger-tools">
+              <b>{progress.totalAnimalsRescued} total</b>
+              <div className="friend-ledger-view-buttons" aria-label="Friend section size">
+                <button
+                  className={friendLedgerMode === "expanded" ? "active" : ""}
+                  type="button"
+                  aria-pressed={friendLedgerMode === "expanded"}
+                  onClick={() => setFriendLedgerMode("expanded")}
+                >Expand</button>
+                <button
+                  className={friendLedgerMode === "default" ? "active" : ""}
+                  type="button"
+                  aria-pressed={friendLedgerMode === "default"}
+                  onClick={() => setFriendLedgerMode("default")}
+                >Default</button>
+                <button
+                  className={friendLedgerMode === "collapsed" ? "active" : ""}
+                  type="button"
+                  aria-pressed={friendLedgerMode === "collapsed"}
+                  onClick={() => setFriendLedgerMode("collapsed")}
+                >Collapse</button>
+              </div>
+            </div>
+          </div>
+          <div
+            id="friend-ledger-content"
+            className={`friend-ledger-viewport friend-ledger-${friendLedgerMode}`}
+            hidden={friendLedgerMode === "collapsed"}
+          >
           <div className="friend-ledger-grid">
             {ANIMAL_SPECIES.map((species) => (
               <article key={species}>
@@ -3663,6 +3782,7 @@ function AchievementsScreen({
             {unclassifiedRescues > 0 && (
               <article className="past-rescues"><img src={ASSETS.rewardAnimalFriendSticker} alt="" /><span><strong>Earlier friends</strong><b>{unclassifiedRescues}</b><small>before the roll-call began</small></span></article>
             )}
+          </div>
           </div>
         </section>
 

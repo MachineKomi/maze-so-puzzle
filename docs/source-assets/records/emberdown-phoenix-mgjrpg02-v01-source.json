@@ -5,7 +5,7 @@
   "id": "emberdown-phoenix",
   "artVersion": 1,
   "family": "friend",
-  "runtimeStatus": "dormant",
+  "runtimeStatus": "active",
   "sourceStatus": "source-backed",
   "approvalStatus": "approved",
   "validationProfile": "strict-v2",
@@ -116,8 +116,8 @@
       "decodedBytesUpperBound": 262144,
       "profile": "friend-field-256",
       "derivativeRevision": 1,
-      "runtimeStatus": "dormant",
-      "loadingPhase": "not-loaded-by-active-catalogue",
+      "runtimeStatus": "active",
+      "loadingPhase": "level-selected-or-adventure-book-lazy",
       "encoder": {
         "name": "Pillow WebP",
         "version": "Pillow 12.2.0; libwebp 1.6.0",
@@ -215,7 +215,8 @@
   },
   "knownUnknowns": [
     "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response.",
-    "Catalogue-only rescue friend; never an enemy."
+    "Catalogue-only rescue friend; never an enemy.",
+    "Authored-campaign placement remains a Plan 09 ecology decision; v0.20.1 enables generated-maze rescue and Adventure Book discovery."
   ],
   "rights": {
     "originClaim": "Generated for Maze so Puzzle from broad folklore archetypes and the original Maze so Puzzle rendering contract; no named franchise, character, logo, living artist, or proprietary composition was requested.",

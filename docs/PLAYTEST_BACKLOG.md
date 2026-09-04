@@ -13,6 +13,7 @@
   [`playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md`](playtests/2026-09-03-campaign-asset-ecology-and-world-theming.md),
   [`playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md`](playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md),
   [`playtests/2026-09-04-achievement-showcase-and-sticker-book.md`](playtests/2026-09-04-achievement-showcase-and-sticker-book.md),
+  [`playtests/2026-09-04-story-cast-vn-and-voice.md`](playtests/2026-09-04-story-cast-vn-and-voice.md),
   and
   [`playtests/2026-09-04-living-goal-portal-spiral.md`](playtests/2026-09-04-living-goal-portal-spiral.md)
 
@@ -77,7 +78,7 @@ A card may need more than one platform/input row before it is considered done.
 
 ## 3. Evidence synthesis
 
-The intake contains fifteen especially strong evidence and product-direction
+The intake contains seventeen especially strong evidence and product-direction
 clusters:
 
 | Theme | Direct evidence | Working implication |
@@ -97,6 +98,8 @@ clusters:
 | Frequent family-playable milestones | Human wants Amelia to experience meaningful improvements before the whole programme ends, without wasteful packaging after every plan | Create only a small set of green, reproducible family-preview checkpoints; prefer the first after Plan 01 and preserve honest non-release labels |
 | Achievement pride and cosmetic expression | Human wants earned stickers to be admired at presentation scale, and later arranged personally in a sticker book | Ship a focused, accessible achievement showcase first; treat free-placement persistence as a separately approved cosmetic feature rather than hidden polish scope |
 | Living objective landmark | The existing goal-star spiral already reads as a portal, but its static centre does not fully sell that magical function | Preserve the approved star and add one restrained layered inward-spiral/glow/particle recipe with clear reduced/static forms |
+| Compact character storytelling | The Human wants a stronger cast/world review and short back-and-forth exchanges rather than isolated monologues | Review canon before Plan 11 and use bounded two-to-three-turn, fully skippable VN-style interludes without displacing maze play |
+| Optional voiced guidance | The Human would like to explore generated voices for story and tutorial moments later | Treat voice as a planning-only opportunity until script, consent/rights, accessibility, audio, package and Human-value gates justify a separate implementation plan |
 
 This is high-value target-family evidence, but it is one family rather than a
 broad usability sample. Current-build reproduction and broader device coverage
@@ -135,6 +138,8 @@ remain necessary where called out below.
 | `PT-20260904-27` | Earned-achievement holographic showcase | P1 | Routed | Not retested | Plan 01 interaction; Plan 02 effect; Plans 07B/08 qualify |
 | `PT-20260904-28` | Personal achievement sticker book | P2 | Needs decision | Not retested | Plan 14 opportunity review or explicit follow-on plan |
 | `PT-20260904-29` | Living goal-portal spiral | P1 | Routed | Not retested | Plan 02; Plan 07B qualifies; Plan 13 fallback |
+| `PT-20260904-30` | Cast review and compact VN interludes | P1 | Routed | Not retested | Plan 01 shell; Plan 09 canon/content; Plan 11 consumes |
+| `PT-20260904-31` | AI-generated voice-acting exploration | Epic | Needs decision | Not retested | Plan 14 opportunity review; explicit follow-on only |
 
 ## 5. Backlog items
 
@@ -1935,6 +1940,69 @@ motion, goal entry/cancellation, hidden/visible lifecycle and a continuous idle
 stress cohort. Human/family review confirms that the centre reads as magical,
 inviting and inward-moving rather than distracting, nauseating or like a hazard.
 
+### PT-20260904-30 — Cast review and compact VN interludes
+
+- Type: Narrative design, story UX and accessibility
+- Impact: P1 — high value
+- Delivery: Routed
+- Verification: Not retested
+- Primary owners: Plan 09 for canon, script and campaign integration; Plan 01
+  for the reusable accessible presentation shell
+- Supporting owner: Plan 11 consumes the final cast and chapter canon
+- Dependencies: Final gameplay arc, Art Bible/model sheets, semantic input/focus
+  contracts, current story migration/replay behavior
+- Target gate: Plan 09 acceptance, with Plan 11 using the accepted cast
+
+**Human outcome.** Review the current cast deliberately and decide who should be
+retained, refined, replaced, or joined by new story characters. Replace or
+extend one-way story cards with warm VN-style exchanges when that materially
+improves character and world: ordinarily two or three short turns, often
+including Ame, with no long exposition.
+
+**Acceptance slices.**
+
+- Produce a cast disposition and role/voice matrix before rewriting chapters.
+  Preserve approved identities unless a documented narrative problem earns a
+  change; new characters need a distinct function rather than roster size alone.
+- Define typed speaker, portrait/expression, line, advance, skip, replay and
+  completion semantics. Dialogue progress is not campaign progress and cannot
+  strand or corrupt an active maze.
+- A typical interlude is two or three dialogue turns. Longer exceptions require
+  a named story reason and Human approval; no required reading quiz gates play.
+- Tap/click/confirm advances one turn; an obvious Skip action exits the whole
+  interlude after at most a few inputs. Keyboard, touch, pointer and controller
+  remain equivalent, with no movement leaking beneath the story layer.
+- Text remains available independent of portraits, animation or future audio;
+  screen readers announce each line once, and reduced/static presentation keeps
+  every meaning.
+- First-time, replay, Continue, reset, completion and rapid-skip paths are tested.
+  Story remains replayable from an appropriate surface without duplicating
+  rewards or altering maze state.
+
+### PT-20260904-31 — AI-generated voice-acting exploration
+
+- Type: Audio/narrative opportunity; potential release and rights epic
+- Impact: Epic — Human decision required
+- Delivery: Needs decision
+- Verification: Not retested
+- Primary owner: Plan 14 planning-only opportunity review
+- Dependencies: Accepted cast, final dialogue/tutorial scripts, subtitle and
+  audio-context architecture, rights/consent policy, package/performance evidence
+- Target gate: explicit Human-approved follow-on plan or documented defer
+
+**Human outcome.** Later explore whether generated character voices would make
+the compact story exchanges and selected tutorial moments warmer and more
+accessible.
+
+**Decision study requirements.** Compare at least a text-only baseline, sparse
+character vocal reactions, and fully voiced short lines. Evaluate family appeal,
+clarity, pronunciation, consistency, child safety, performer/voice-likeness
+consent, commercial rights, disclosure, subtitles/transcripts, dialogue/BGM/SFX
+mixing, mute and independent volume behavior, offline/Tauri/web delivery,
+download size, caching and failure fallback. Do not generate final voices,
+publish media, or bind save data during the study. Only an explicit Human choice
+may authorize a separately scoped implementation.
+
 ## 6. Programme integration and gates
 
 The existing programme remains sequential. These are execution-prompt addenda,
@@ -1971,7 +2039,9 @@ not permission for simultaneous implementation in the shared worktree.
    persistent free-placement sticker book into this layout overhaul.
    Make `25` an explicit visual-quality tranche rather than deferring the
    authored surface/type/presentation-art system as post-layout polish. Integrate
-   the approved `26` front door. After acceptance, the root manager evaluates
+   the approved `26` front door, and establish `30`'s reusable multi-turn story
+   shell/advance/skip/focus semantics without rewriting chapter dialogue. After
+   acceptance, the root manager evaluates
    and normally produces Family Preview 1.
 4. **Plan 04:** consume `15` and provide `24`'s bounded multi-region terrain-
    theme/rendering seam without changing gameplay topology. Do not invent ice/
@@ -2014,7 +2084,9 @@ not permission for simultaneous implementation in the shared worktree.
    authored introduction/placement, fixed per-level/region themes, exact
    campaign-use evidence, and deterministic generated single/subset/mixed
    variety. Consume the `maze` music pool/context without binding chapters to
-   filenames.
+   filenames. Implement `30` only after a documented cast/canon review: keep
+   interludes normally to two or three turns, preserve fast skip/replay, and
+   update the 24-chapter story arc before Plan 11 consumes it.
 10. **Plan 10:** add the Friend Garden completion destination from `10`, wire the
      `garden` music context from `20`, and ensure future traversal rules cannot be
      bypassed by co-op. Extend `22` only with exactly-once shared reward ownership
@@ -2028,7 +2100,8 @@ not permission for simultaneous implementation in the shared worktree.
      final character catalog and accepted 24-chapter/Friend Garden canon. Use a
      curated representative final cast and world selection, not an every-asset
      completeness sheet. It must not invent gameplay or lore that contradicts
-     `17` or `24`. Audit Plan 03's early `26` front-door set first and retain it
+     `17`, `24`, or the accepted cast/canon from `30`. Audit Plan 03's early `26`
+     front-door set first and retain it
      when it still represents the final game; create only missing variants or
      bounded replacements justified by the final cast/canon.
 12. **Plan 13 — Backlog Closure & Release Polish:** filter the ledger after Plan
@@ -2051,7 +2124,9 @@ not permission for simultaneous implementation in the shared worktree.
      package matrix before any release-candidate claim.
 15. **Plan 14 opportunity review:** include `28` as an explicit cosmetic-
     expression opportunity and compare it against the already-shipped `27`
-    showcase. Promotion requires a separate Human-approved feature plan; a
+    showcase. Include `31` as a separate voice-acting feasibility/options study
+    after scripts and cast are stable. Promotion of either requires a separate
+    Human-approved feature plan; a
     planning decision changes no runtime or save data.
 
 ### Decisions that must not be deferred into a specialist's implementation
@@ -2112,6 +2187,7 @@ superseded tests; they are useful provenance.
 | 2026-09-03 | 26 | working tree during Plan-03 source production | Human delivery request plus roadmap/release audit | Front-door art was scheduled late and no low-rework family-preview milestone policy existed | Captured, triaged and routed |
 | 2026-09-04 | 27–28 | working tree after Plan-03 static publication | Direct Human feature request plus manager scope/routing review | Earned stickers need an admiration-scale reward moment; free placement adds meaningful persistence and input scope beyond a viewer | 27 captured/triaged/routed; 28 captured and held at Human decision |
 | 2026-09-04 | 29 | working tree during Plan-03-R1 publication | Direct Human feature request plus goal-art/VFX ownership audit | Published goal geometry already exposes a central aperture; the visual can be layered without changing gameplay or regenerating the complete star | Captured, triaged and routed |
+| 2026-09-04 | 30–31 | v0.20.1 corrective checkpoint | Direct Human feature request plus narrative/audio ownership review | Current story is a sequence of single-speaker cards; cast review and compact dialogue belong before final-canon art, while generated voice requires a separate rights/accessibility/value decision | 30 captured/triaged/routed; 31 captured and held at Human decision |
 
 ## 8. Closure and mop-up rule
 
@@ -2148,3 +2224,7 @@ Plan-14 decision unless the Human promotes it through a separately scoped plan.
 `PT-20260904-29` belongs to Plan 02's goal family and Plan 07B's continuous-
 effect qualification; Plan 13 may tune a landed bounded recipe but must not
 invent a replacement goal renderer late in closure.
+`PT-20260904-30` belongs to Plan 09's canon/campaign tranche after Plan 01 lands
+the reusable shell; Plan 11 consumes its accepted cast. `PT-20260904-31` is not
+implementation scope for Plan 13 and remains a Plan-14 decision until the Human
+approves a separate voice plan.

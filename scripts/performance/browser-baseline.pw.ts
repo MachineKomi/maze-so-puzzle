@@ -210,10 +210,10 @@ async function newMeasuredContext(browser: Browser, cacheDisabled: boolean) {
 
 async function titleSample(page: Page): Promise<BrowserSample> {
   await page.goto("/?performance-cohort=title", { waitUntil: "domcontentloaded" });
-  const button = page.getByRole("button", { name: /Begin adventure/i });
+  const button = page.getByRole("button", { name: /^Play$/i });
   await expect(button).toBeVisible();
   const ready = await page.evaluate(() => performance.now());
-  return collectSample(page, ready, { role: "button", name: "Begin adventure" });
+  return collectSample(page, ready, { role: "button", name: "Play" });
 }
 
 async function selectTesterLevel(page: Page, level: LevelDefinition): Promise<void> {
@@ -389,10 +389,10 @@ test("production-preview browser baseline cohort", async ({ browser, browserName
     await cdp.send("Network.setCacheDisabled", { cacheDisabled: false });
     for (let iteration = 0; iteration < runCount; iteration += 1) {
       await page.reload({ waitUntil: "domcontentloaded" });
-      const button = page.getByRole("button", { name: /Begin adventure/i });
+      const button = page.getByRole("button", { name: /^Play$/i });
       await expect(button).toBeVisible();
       const ready = await page.evaluate(() => performance.now());
-      warmSamples.push(await collectSample(page, ready, { role: "button", name: "Begin adventure" }));
+      warmSamples.push(await collectSample(page, ready, { role: "button", name: "Play" }));
     }
     await context.close();
   }
@@ -410,9 +410,12 @@ test("production-preview browser baseline cohort", async ({ browser, browserName
   for (let iteration = 0; iteration < runCount; iteration += 1) {
     const { context, page } = await newMeasuredContext(browser, false);
     await page.goto("/?performance-cohort=entry", { waitUntil: "domcontentloaded" });
+    const frontDoorPlay = page.getByRole("button", { name: /^Play$/i });
+    await expect(frontDoorPlay).toBeVisible();
+    const start = performance.now();
+    await frontDoorPlay.click();
     const button = page.getByRole("button", { name: /Begin adventure/i });
     await expect(button).toBeVisible();
-    const start = performance.now();
     await button.click();
     const startMaze = page.getByRole("button", { name: /Start the maze/i });
     await expect(startMaze).toBeVisible();
@@ -514,6 +517,7 @@ test("production-preview browser baseline cohort", async ({ browser, browserName
   for (let iteration = 0; iteration < runCount; iteration += 1) {
     const { context, page } = await newMeasuredContext(browser, false);
     await page.goto("/?performance-cohort=book", { waitUntil: "domcontentloaded" });
+    await page.getByRole("button", { name: /^Play$/i }).click();
     const open = page.getByRole("button", { name: /Ame's adventure book/i });
     await expect(open).toBeVisible();
     const start = performance.now();

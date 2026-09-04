@@ -640,6 +640,23 @@ export const ANIMAL_ART = {
   alpaca: MGJRPG02_ART.alpaca,
   penguin: MGJRPG02_ART.penguin,
   koala: MGJRPG02_ART.koala,
+  "pitter-patter-parasol": MGJRPG02_ART["pitter-patter-parasol"],
+  lanternling: MGJRPG02_ART.lanternling,
+  "emberdown-phoenix": MGJRPG02_ART["emberdown-phoenix"],
+  "meadowstep-faunling": MGJRPG02_ART["meadowstep-faunling"],
+  "minerva-moon-owl": MGJRPG02_ART["minerva-moon-owl"],
+  "tessera-dolphin": MGJRPG02_ART["tessera-dolphin"],
+  "mallowmusk-aroma-wisp": MGJRPG02_ART["mallowmusk-aroma-wisp"],
+  "breezeling-sylph": MGJRPG02_ART["breezeling-sylph"],
+  "griffin-cub": MGJRPG02_ART["griffin-cub"],
+  "emberbelly-dragonling": MGJRPG02_ART["emberbelly-dragonling"],
+  "cloudstep-pegasus": MGJRPG02_ART["cloudstep-pegasus"],
+  "three-tumble-cerberus": MGJRPG02_ART["three-tumble-cerberus"],
+  "riddlekit-sphinx": MGJRPG02_ART["riddlekit-sphinx"],
+  "tidecurl-hippocamp": MGJRPG02_ART["tidecurl-hippocamp"],
+  "ripplecap-kappa": MGJRPG02_ART["ripplecap-kappa"],
+  "rainbow-horn-unicorn": MGJRPG02_ART["rainbow-horn-unicorn"],
+  "green-tea-skeleton": MGJRPG02_ART["green-tea-skeleton"],
 } as const satisfies Readonly<Record<AnimalSpecies, ArtReference>>;
 
 export const CAGE_ART = {
@@ -785,16 +802,15 @@ export const GOAL_ART = MGJRPG02_ART.goal;
 
 export const STORY_ART = {
   amePortrait: MGJRPG02_ART["ame-portrait"],
-  // Professor Poggle and Sprig were explicitly retained in this cutover.
-  professorPoggle: { src: "/assets/story-professor-poggle-v1.webp", label: "Professor Poggle" },
-  sprig: { src: "/assets/story-sprig-v1.webp", label: "Sprig" },
+  professorPoggle: MGJRPG02_ART["story-professor-poggle"],
+  sprig: MGJRPG02_ART["story-sprig"],
 } as const satisfies Readonly<Record<string, ArtReference>>;
 
 /**
- * Approved catalogue-only art. These records are intentionally absent from
- * gameplay unions, generator pools, level placement, progression, and balance.
+ * Additional approved friends introduced to generated mazes in v0.20.1.
+ * Plan 09 still owns their authored-campaign ecology and introduction curve.
  */
-export const FUTURE_FRIEND_ART = {
+export const ADDITIONAL_FRIEND_ART = {
   "pitter-patter-parasol": MGJRPG02_ART["pitter-patter-parasol"],
   lanternling: MGJRPG02_ART.lanternling,
   "emberdown-phoenix": MGJRPG02_ART["emberdown-phoenix"],
@@ -812,7 +828,10 @@ export const FUTURE_FRIEND_ART = {
   "ripplecap-kappa": MGJRPG02_ART["ripplecap-kappa"],
   "rainbow-horn-unicorn": MGJRPG02_ART["rainbow-horn-unicorn"],
   "green-tea-skeleton": MGJRPG02_ART["green-tea-skeleton"],
-} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "dormant" }>>;
+} as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "active" }>>;
+
+/** Compatibility export for pre-v0.20.1 catalogue tooling. */
+export const FUTURE_FRIEND_ART = ADDITIONAL_FRIEND_ART;
 
 export const FUTURE_ENEMY_ART = {
   "classic-slime": MGJRPG02_ART["classic-slime"],
@@ -878,6 +897,8 @@ export const NAVIGATION_ART = {
 export interface FrontDoorArtReference extends ArtReference {
   readonly id: string;
   readonly artVersion: number;
+  readonly recipeVersion?: string;
+  readonly sourceRecordId?: string;
   readonly runtimeStatus: RuntimeArtStatus;
   readonly loadingPhase: "title-critical" | "plan01-front-door-on-demand" | "platform-shell";
   readonly displayRangeCssPx: readonly [minimum: number, maximum: number];
@@ -889,11 +910,25 @@ export interface FrontDoorArtReference extends ArtReference {
 }
 
 /**
- * Front-door delivery authority. The current combined title/home route loads
- * one environment, one responsive wordmark rendition and the hero group. Mere
- * catalogue import still performs no eager preload.
+ * Front-door delivery authority. v0.20.1 gives the minimal title and full Home
+ * surfaces distinct illustration roles. Mere catalogue import still performs
+ * no eager preload.
  */
 export const FRONT_DOOR_ART = {
+  titleIntroEnvironment: {
+    id: "title-intro-environment",
+    label: "Ame welcomes friends to the Puzzlewild",
+    artVersion: 1,
+    recipeVersion: "mgjrpg-02",
+    sourceRecordId: "title-intro-environment-mgjrpg02-v01-source",
+    src: "/assets/mgjrpg-02/brand/title-intro-environment-v01-front-door-1672-r01.webp",
+    runtimeStatus: "active",
+    loadingPhase: "title-critical",
+    displayRangeCssPx: [568, 1920],
+    fit: "cover",
+    focalPoint: [0.76, 0.48],
+    copySafeRegion: [0.02, 0.05, 0.46, 0.84],
+  },
   titleEnvironment: MGJRPG02_ART["title-environment"],
   homeHeroSplash: MGJRPG02_ART["home-hero-splash"],
   gameLogo: {
@@ -902,6 +937,7 @@ export const FRONT_DOOR_ART = {
   },
   appIconAme: MGJRPG02_ART["app-icon-ame"],
 } as const satisfies {
+  readonly titleIntroEnvironment: FrontDoorArtReference & { readonly runtimeStatus: "active" };
   readonly titleEnvironment: FrontDoorArtReference & { readonly runtimeStatus: "active" };
   readonly homeHeroSplash: FrontDoorArtReference & { readonly runtimeStatus: "active" };
   readonly gameLogo: {

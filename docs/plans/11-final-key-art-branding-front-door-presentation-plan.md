@@ -6,7 +6,7 @@ Owner: final-branding specialist under root integration/release-manager review
 
 Prepared: 2026-09-03
 
-Primary intake: `PT-20260903-25`, `PT-20260903-26`, and
+Primary intake: `PT-20260903-25`, `PT-20260903-26`, `PT-20260904-30`, and
 `docs/plans/00-integrated-implementation-roadmap.md`
 
 ## 1. Outcome
@@ -56,7 +56,7 @@ Before changing pixels, verify:
 
 - Plans 01–10 and both Plan-07 passes are accepted or have an explicit manager
   disposition;
-- the current title/home route, catalogue, rendition resolver, source-record
+- the current separate title and Home routes, catalogue, rendition resolver, source-record
   schema, performance budgets, motion/quality modes, and offline packaging
   behavior are real and testable;
 - the final 24-maze campaign and Plan-10 feature set are represented by stable
@@ -79,8 +79,8 @@ paths through the current architecture documentation:
 1. The latest direct Human decisions and approvals.
 2. `docs/GAME_VISION_AND_DESIGN_SPEC.md`.
 3. `docs/plans/00-integrated-implementation-roadmap.md` and this plan.
-4. `docs/PLAYTEST_BACKLOG.md`, especially `PT-20260903-25` and
-   `PT-20260903-26`, plus their linked source intake.
+4. `docs/PLAYTEST_BACKLOG.md`, especially `PT-20260903-25`,
+   `PT-20260903-26`, and `PT-20260904-30`, plus their linked source intake.
 5. `docs/ART_BIBLE.md`, `docs/AI_ASSET_PROMPTS.md`, every approved final
    character/enemy/friend model or family sheet, and the Plan-03 source,
    derivative, manifest, review, lifecycle, and rollback records.
@@ -106,8 +106,13 @@ These are requirements, not prompts to reopen settled taste:
 - Plan-03 front-door and presentation assets are retained unless the audit
   proves a concrete defect. “Plan 11 exists,” novelty, or a desire to use new
   generation compute is not a defect.
-- The current `title` route is already the combined title/home/menu surface.
-  Do not add another screen solely to display a second illustration.
+- Preserve the accepted two-stage front door unless final evidence earns a
+  change: minimal illustrated title with large logo and Play/Exit, followed by
+  the Home/menu surface with Continue, navigation/progress and hero art. Do not
+  add a third screen solely to display another illustration.
+- Final key art consumes Plan 09's accepted story-cast disposition and compact
+  interlude canon. It must not depict rejected/replaced cast members or invent
+  a narrative role merely to justify a candidate composition.
 - Title illustration, transparent home/hero splash, exact wordmark, and live
   semantic title remain separable layers with explicit responsive roles.
 - The visible name is exactly **Maze so Puzzle**. Generated lettering may guide
