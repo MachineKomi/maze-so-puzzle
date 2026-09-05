@@ -39,11 +39,22 @@ slice began during publication.
 
 ### Latest queue authorization and audio/hole additions — 2026-09-05
 
+Later in the same session, the Human supplied
+[physical v0.22.1 web feedback](../user-playtests/v0221-playtest-feedback.md): phone
+movement is smooth, while eighth-generation iPad movement fails from Maze 2;
+menus, stationary effects and music are responsive. Minimum graphics/motion
+settings later gave only slight relief. **[V22-PERF-02A](V22-PERF-02-moving-camera-isolation.md)
+now precedes V22-PLAY-01.** The tiny ART-HOTFIX-01 candidate is independently
+pushed on `codex/tessera-field-hotfix` at `c724c95`; its final art-manifest
+integration must not delay the movement experiment. Isolate moving
+scene/camera cost first; do not use Chill pace to conceal lag. Unspecified exact
+Quality/Motion settings remain an optional clarification, not a restart gate.
+
 The Human has explicitly asked development to continue while playtesting is
 deferred. Missing affected-device feedback remains open evidence rather than a
 blanket execution stop. Preserve the fixed v0.22.1 artifacts for comparison;
 review each subsequent candidate and keep its changes identifiable. The current
-next step is ART-HOTFIX-01, then V22-PLAY-01 and V22-UI-01 as scoped. Actual
+next step is ART-HOTFIX-01, then V22-PERF-02, V22-PLAY-01 and V22-UI-01 as scoped. Actual
 regressions still warrant correction before dependent presentation work.
 
 [AUDIO-01](AUDIO-01-readiness-and-sound-design.md) advances bounded BGM/SFX
@@ -210,7 +221,7 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 | 5A | **MOVE-01 — Root travel/camera comfort, then FP-UI1** | Implements the Human's advanced movement request against the accepted UI seam before lighting/VFX attach. Keeps exact tile rules while coordinating smooth actor/camera travel. | Accepted travel/coordinate/cancellation contract, route and frame evidence, clean reviewed/pushed checkpoint, and required verified FP-UI1 playable release with family comfort still honestly pending. See `MOVE-01-smooth-travel-and-camera.md`. |
 | 5B | **[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md) — sustained play and live input** | The v0.22.0 Human playtest found a primary-device blocker after the broad UI improved. Astra profiles and corrects evidenced hot-path work, truthful Lite relief, held-success continuation, fresh blocker explanations and selection safety; Sol reviews before promotion. | Exact fresh/sustained input/follower/persistence evidence; preserved Full visuals; a useful Lite scene matrix; green continuation/blocker/finale tests; reviewed v0.22.1 preview; affected-iPad Human result or an honestly routed renderer-isolation return. |
 | 5C | **ART-HOTFIX-01 — Tessera field-alpha repair** | May proceed while Human tests are pending under the latest authorization; preserve the immutable v0.22.1 comparison. Derive a new versioned 256px field rendition from the approved alpha-recovery master. | Versioned derivative/catalogue/provenance/allocation update; alpha and actual-size proof; cage, follower, Book/victory consumer checks; independent review. |
-| 5D | **V22-PLAY-01 — pace and stationary-contact correction** | Implements the Human's three-speed accessibility/play-feel choice and makes cage rescue follow the established stationary door/combat interaction principle before VFX/animation consume timing. | Chill/Regular/Zippy preference across current input sources with persistence and Zippy stress evidence; engine/solver/reachability/content-identity/save fixtures for stationary exactly-once rescue; family tuning gate. |
+| 5D | **[V22-PLAY-01](V22-PLAY-01-pace-and-stationary-rescue.md) — pace and stationary-contact correction** | Implements the Human's three-speed accessibility/play-feel choice and makes cage rescue follow the established stationary door/combat interaction principle before VFX/animation consume timing. | Chill/Regular/Zippy preference across current input sources with persistence and Zippy stress evidence; engine/solver/reachability/content-identity/save fixtures for stationary exactly-once rescue; family tuning gate. |
 | 5E | **[V22-UI-01](V22-UI-01-short-height-and-reward.md) — short-height and reward correction** | Starts only after 5B and any required renderer-isolation tranche are reviewed and accepted; ART-HOTFIX-01/V22-PLAY-01 land as separate seams first. Sol preserves the successful primary UI while fixing phone fit and completing the requested Bestiary, pad, Book, pickup and no-scroll victory work; Astra reviews input/performance safety. | Short-landscape normal-text geometry and interaction matrix; preserved desktop/iPad reference; exact Bestiary/lore/pad/pickup/victory acceptance; focused family feedback. |
 | 5F | **[AUDIO-01A](AUDIO-01-readiness-and-sound-design.md) — readiness/continuity** | Advances the bounded current-plus-one preparation, confirmed handover and synthesized-SFX readiness portion of 07B before broad presentation work. | Cold/warm/context/held-win/failure evidence, bounded streams/voices, canonical transport compatibility, truthful audibility limits and independent review. |
 | 5G | **[V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) — one-tile crossings/ditches** | Establishes revised jump rules, safe existing/generated maps and clean connected pit art before lighting/effects/animation depend on them. | Solver/hint/save/content-revision agreement; preserved dividing strips; approved joined art/topology/alpha; all-direction/motion/pace evidence. |

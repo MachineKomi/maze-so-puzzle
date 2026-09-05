@@ -11,8 +11,12 @@ The v0.22.0 Human/Opus review is reconciled. Read the independent
 The v0.22.1 V22-PERF1 preview is published from
 `8442b79db11a59e23f23c59f213116e7b8f54592`. The Human's affected-iPad comparison
 remains outstanding; their latest instruction permits safe development meanwhile.
-**Sol implements ART-HOTFIX-01; Astra reviews and evaluates Human results when
-available.** See the [publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
+**ART-HOTFIX-01 candidate `c724c95` is pushed on its isolated branch. Astra now
+implements [V22-PERF-02A](V22-PERF-02-moving-camera-isolation.md); Sol reviews
+read-only.** The newly received [physical feedback](../user-playtests/v0221-playtest-feedback.md)
+now prioritizes Astra's V22-PERF-02 movement/camera isolation before the prepared
+PLAY-A/PLAY-B seams: phone smooth, eighth-generation iPad movement poor from
+Maze 2 despite responsive menus/interaction effects/BGM. See the [publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
 and [playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md). Read Sol's
 [R1 acceptance](../reviews/2026-09-05-sol-v22-perf01-r1-review.md) and the
 [R1 response](../reviews/2026-09-05-v22-perf01-r1-response.md).
@@ -74,8 +78,13 @@ Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the 
 
 The latest Human instruction permits progress while tomorrow's playtest is
 pending. Start the bounded ART-HOTFIX-01 candidate from the approved corrected
-Tessera source, independently review it, then advance the scoped V22-PLAY-01
-seams. Missing Human performance feedback alone does not halt independent work;
+Tessera source and independently review it. That bounded candidate is now pushed;
+finish its publication integration separately without delaying
+[V22-PERF-02A](V22-PERF-02-moving-camera-isolation.md) in response to the failed
+iPad movement run. Afterwards advance
+[V22-PLAY-01](V22-PLAY-01-pace-and-stationary-rescue.md): Sol implements PLAY-A
+pace first; Astra independently reviews it before PLAY-B stationary rescue.
+Missing Human performance feedback alone does not halt independent work;
 keep real engineering dependencies and one runtime writer. Record exact new
 builds and preserve immutable v0.22.1 for later comparison.
 

@@ -64,15 +64,35 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
+**New physical feedback, 2026-09-05:** the Human's
+[v0.22.1 web playtest](user-playtests/v0221-playtest-feedback.md) reports buttery
+smooth movement on their phone, but severe movement lag on an eighth-generation
+iPad from Maze 2 onward, despite smooth Maze 1, menus, stationary interaction
+animations and prompt BGM. The iPad has 32GB storage, not a reported RAM value.
+The later [minimum-settings follow-up](user-playtests/2026-09-05-v0221-graphics-minimum-follow-up.md)
+reports only slight relief; phone model is Samsung S25 Plus or similar. Exact
+OS/browser/named Quality/Motion settings are not yet recorded. This failed
+observed iPad run now prioritizes **V22-PERF-02 movement/camera isolation before
+V22-PLAY-01**. The bounded Tessera candidate is pushed at
+`c724c954fd302d22f391d25e88ab467301ac047c` on `codex/tessera-field-hotfix`;
+Astra inspected its repaired field pixels and exact one-row catalogue change,
+but canonical manifest/publication integration remains pending. It must not delay
+the independent [PERF-02A coordinate experiment](plans/V22-PERF-02-moving-camera-isolation.md).
+Do not wait
+for another reproduction before investigating, blame device age, declare all
+mobile devices qualified, or treat Chill pace as the performance remedy.
+
 **Latest Human authorization, 2026-09-05:** playtesting is deferred until the
 Human has time tomorrow; continue safe implementation in the meantime. Missing
 device feedback is an open acceptance row, not a blanket stop on subsequent
 work. Do not mark those rows passed or alter the immutable v0.22.1 comparison.
 Keep one runtime writer, evidence-based sequencing and real dependency checks.
-Current bounded next implementation is **ART-HOTFIX-01**, Sol candidate/Astra
-review, from the approved Tessera alpha-recovery master. Then prepare the
-V22-PLAY-01 seams against the current accepted runtime. Further performance
-diagnosis can proceed if needed; the iPad result will inform its prioritization.
+The **ART-HOTFIX-01** Sol candidate is backed up, visually reviewed by Astra and
+awaiting final publication integration from the approved recovery master.
+**Astra is now the sole runtime writer for V22-PERF-02A**; Sol reviews read-only.
+V22-PERF-02 now takes
+the next runtime slot. The [V22-PLAY-01 brief](plans/V22-PLAY-01-pace-and-stationary-rescue.md)
+is prepared for the following separately reviewed pace and rescue seams.
 
 Every response ends with links to [PLAYTEST_CHECKLIST](PLAYTEST_CHECKLIST.md)
 and [HUMAN_DECISIONS](HUMAN_DECISIONS.md). Keep build-specific tests cumulative
@@ -80,8 +100,8 @@ and track real questions without requiring answers to routine implementation
 choices. Current feedback is preserved in the
 [audio/hole intake](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 
-**Outstanding Human evidence: affected-iPad v0.22.1 comparison; Astra evaluates
-the result when supplied.** Publication is complete. Follow the
+**Received Human evidence: affected-iPad v0.22.1 movement remains poor; settings-
+specific comparison is still outstanding.** Publication is complete. Follow the
 [playtest note](../release/V22-PERF1-v0.22.1-PLAYTEST.md) on the affected iPad in
 the same ordinary 23×23 maze with about five followers: Full quality + Full
 motion fresh and sustained, then Lite + Full, then Lite + Reduced. Record model,
@@ -102,8 +122,10 @@ for publication and no physical-iPad success is inferred.
 
 - **ART-HOTFIX-01**, then **V22-PLAY-01** pace/stationary-rescue work may proceed
   as separately reviewable seams under the latest Human authorization.
-- Continued **Lite + Reduced** stutter routes to the already-scoped
-  **V22-PERF-02** renderer/filter/follower/resource isolation.
+- The newly reported Maze-2-onward movement failure routes directly to
+  **V22-PERF-02** movement/camera/renderer isolation; the as-yet-unspecified
+  Quality/Motion setting does not prevent investigation. The controlled
+  Full/Lite/Motion comparison remains useful follow-up evidence.
 - **V22-UI-01 and Agent 04 retain engineering/dependency and PT36 gates**;
   pending family feedback alone does not stop safe preparation/implementation.
   Tessera, Chill/Regular/Zippy,
@@ -148,7 +170,7 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. The accepted v0.22.1 performance/input preview is published; gather the affected-iPad Full/Lite/Motion evidence when available. Meanwhile perform the small Tessera field-alpha hotfix and V22-PLAY-01 pace/stationary-rescue slice as independently reviewable seams, then V22-UI-01 short-height/Book/pad/pickup/victory work. Preserve open physical rows and fix actual regressions before dependent work. Resolve root PT36 attachment preflight before 04.
+1. The accepted v0.22.1 performance/input preview is published; the Human's eighth-generation iPad test still fails movement from Maze 2. Finish the in-flight Tessera field-alpha checkpoint, then prioritize V22-PERF-02 movement/camera isolation. V22-PLAY-01 pace/stationary rescue follows as separately reviewed seams, then V22-UI-01 short-height/Book/pad/pickup/victory work. Preserve the remaining settings-specific/device rows and fix actual regressions before dependent work. Resolve root PT36 attachment preflight before 04.
 2. **AUDIO-01A** bounded music/SFX readiness, then **V22-HOLE-01** single-width
    crossings and joined ditch art; then **04** lighting, wall depth and terrain
    topology/regions. The Human's deferred feedback does not alone stop these

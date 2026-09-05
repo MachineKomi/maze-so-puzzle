@@ -8,8 +8,9 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- [v0.22.1 Windows preview](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1)
-  — fixed comparison download, with the original playtest instructions.
+- [Download the v0.22.1 Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.1/Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe)
+  — this desktop build is available. Its [release page](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1)
+  contains the original playtest instructions and checksums.
 - [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
 
 You do not need to complete everything in one sitting. The affected iPad movement
@@ -26,9 +27,34 @@ to create a cold test; preserving your progress is more important.
 
 ## Specific checks and results
 
+### Received — Human's quick v0.22.1 web test, 2026-09-05
+
+Original feedback: [v0221-playtest-feedback.md](user-playtests/v0221-playtest-feedback.md),
+preserved without editing. Phone: movement felt buttery smooth and improved;
+music prompt; known compact-phone UI issues remain. Eighth-generation iPad,
+32GB **storage**: Maze 1 smooth; movement severely laggy from Maze 2, including
+single steps. Menus, door/battle/rescue/pickup presentation and BGM were reported
+responsive. Windows was not tested because the Human had not found its download.
+
+Later clarification: minimum graphics/motion settings helped only slightly;
+the iPad movement remained poor. The phone is a Samsung S25 Plus or similar.
+See the [follow-up record](user-playtests/2026-09-05-v0221-graphics-minimum-follow-up.md).
+This is meaningful physical evidence, not a blanket mobile pass. Exact iPadOS,
+browser/home-screen mode and named Quality/Motion values were not supplied. The
+iPad movement gate **failed this observed run**; prioritize V22-PERF-02 camera/
+moving-scene isolation. Do not ask the Human to reproduce the already-reported
+failure before implementation can proceed.
+
 ### P1 — Movement on the affected iPad (highest value)
 
-In the same large maze with about five followers, compare:
+For the next corrected candidate, begin with Maze 2 (Shiny Sword), not only a
+late 23×23 level: ordinary straight movement, frequent turns and a single tap.
+Report whether the maze scrolling and Ame's movement now feel coordinated. If
+convenient, compare early edge-clamped movement with movement where the scenery
+scrolls. Optional short route from a fresh Maze-2 start: Left, Left, Up, Up
+stays in the clamped-camera area; the next Up starts scenery scrolling. Compare
+Down/Up there if convenient. Do not reset an existing run just to perform this.
+Then, in the same large maze with about five followers, compare:
 
 - [ ] Full quality + Full motion, first entering and after several minutes.
 - [ ] Lite quality + Full motion.
@@ -38,7 +64,8 @@ Report each as smooth/responsive, better but still stuttering, or poor. Notice
 straight holds, frequent turns and whether it worsens as you play through mazes.
 Include iPad model, iPadOS, browser/home-screen app, charging/Low Power Mode and
 rough play duration. A short natural session is useful; a longer session can
-come later. Pending — no physical acceptance claimed.
+come later. v0.22.1's reported iPad run failed; the individual settings comparison
+and any successor-build acceptance remain pending.
 
 ### P2 — Holding through interactions
 
@@ -62,9 +89,10 @@ here. Pending.
 - [ ] At victory, was music ready as the scene appeared? Was the win sound heard?
   Does a held movement finishing the maze behave differently from a single tap?
 
-Phone v0.22.0 prompt playback is recorded as positive; its cause is unknown.
-Remembered laptop victory silence remains an open issue. No audio fix is claimed
-in v0.22.1. AUDIO-01A will add a build-specific comparison when it ships.
+Phone v0.22.0 prompt playback and the new v0.22.1 phone/iPad prompt playback are
+recorded as positive; the cause remains unknown. Remembered laptop victory silence
+remains an open issue. No audio-code fix is claimed in v0.22.1. AUDIO-01A will
+add a build-specific comparison when it ships.
 
 ### P4 — Laptop comparison and ordinary recovery
 
