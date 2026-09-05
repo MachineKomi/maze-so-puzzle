@@ -64,6 +64,30 @@ Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the 
 
 ## Current. Astra — v0.22.0 sustained performance and held-input correction
 
+The Human has issued the execution prompt below. Astra's candidate is on
+`codex/v22-perf-01-astra`; do not start a duplicate execution. Read the
+[candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md) for current
+checks and measurement status. After Astra finishes, the next turn is:
+
+```text
+# Sol:
+
+Independently review Astra's exact V22-PERF-01 candidate on
+codex/v22-perf-01-astra. Read JOINT_ORCHESTRATION_STATE, the candidate receipt,
+scope contract, compact evidence and exact base-to-candidate diff. Verify HEAD
+and origin before relying on the handoff. Review read-only: do not alter runtime,
+merge main, version, release or deploy during this turn.
+
+Challenge input-source ownership, success-chain suspension and current-direction
+resumption, cancellation/blockers, scene binding lifecycle, unchanged Full
+composition, truthful Lite coverage and the 650-byte candidate allocation.
+Check that measured comparisons use frozen sources and matched legal states;
+keep desktop timing report-only and physical iPad/Tauri gates open. Distinguish
+measured work reductions from unproven device/FPS improvement. Report accepted
+parts, concrete defects and the exact next action. If ready, recommend promotion
+and the v0.22.1 affected-device preview; do not silently perform them.
+```
+
 Use **GPT-6 Astra, XHIGH** in this joint task and send:
 
 ```text

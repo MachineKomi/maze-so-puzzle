@@ -8,12 +8,18 @@ The joint review of the complete v0.22.0 playtest, 51 images and final Opus pack
 is complete. Read the independent [Astra](../reviews/2026-09-05-astra-v0220-review.md)
 and [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments plus the
 [reconciled 88-row ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The next slice is the build-ready
+The active candidate slice is
 [V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md): Astra writes and
 Sol reviews. It precedes Sol-owned phone/Book/pad/pickup/victory refinement and
 preserves the praised desktop/iPad UI. Claude's broad architecture, 9–15 FOV,
 economy and HUD/minimap redesign proposals are not adopted. Agent 04 stays held
 for these gates and PT36. Preserve 09 → 10 → 11. **Only one runtime writer**.
+
+V22-PERF-01's [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md)
+records green deterministic/input checks and in-progress matched performance
+evidence on `codex/v22-perf-01-astra`. Next is Sol's independent review of the
+exact completed candidate; no merge, v0.22.1 release or successor plan is
+authorized merely by that branch existing.
 
 Status: manager-reviewed execution authority
 

@@ -1,5 +1,43 @@
 # UI / UX implementation specification
 
+## V22-PERF-01 candidate interaction and quality contract
+
+This candidate preserves the praised Full-quality geometry, six-tile view,
+approved art and 160 ms ordinary travel. It is not Human/device acceptance.
+Keyboard, fixed-pad and board gestures retain live identity during successful
+door/combat/rescue/portal/jump presentations, including a chained presentation.
+Steering/release still update that identity; attempts remain suspended until the
+whole lock ends and a fresh 160 ms cadence begins. No presentation action queue
+is replayed. The newest deliberate input source takes ownership and clears older
+source gestures; two adapters cannot resume competing directions. Blocker/modal, blur/hidden, resize, cancellation and level boundaries
+still clear input. Every fresh missing-capability/underpowered attempt explains
+the requirement once; a continuously blocked hold cannot reopen it.
+
+Board taps remain player-relative. After the 6 CSS-pixel drag threshold, the
+visible touch-down origin owns direction, with an 8-pixel neutral region and
+axis hysteresis. Pointer coordinates update the guide without App commits.
+The bounded perpendicular drag offset retains the existing safe corner choice;
+it grants no new collision or obstacle bypass.
+Control/HUD labels and images do not select/drag/call out; story/help/Book prose,
+real fields, deliberate scrolling and keyboard/assistive access remain intact.
+
+Lite is now a named scene recipe, separate from Motion Reduced and Static:
+
+| Cost | Lite treatment | Preserved |
+| --- | --- | --- |
+| Ambient field-object/friend/goal motion and flourishes | Stop ambient loops and hide decorative flourishes | Engine travel, follower route/order, bounded success acting |
+| Live field-image filters and ellipse blur | Remove field drop-shadows; use unfiltered radial-gradient grounding | Approved image pixels, silhouettes, numbers and semantic colours |
+| Wall-depth SVG blur | Unfiltered existing depth path | Topology, offset, texture and highlight |
+| Water/lava/poison decorative overlays | Hide overlays and stop their pattern animations | Base hazard textures, masks, contours and equipment rules |
+| Active board-joystick backdrop blur | Remove backdrop blur | Visible anchor, arrow and immediate steering |
+
+Full/Static art and motion recipes are unchanged. Desktop isolation supports
+ambient-work reduction, not a claim that each removed filter improved frame
+time on this host. Affected-iPad Full/Lite testing remains decisive. The tester
+finale explicitly offers **Surprise test maze**, remains unbanked and preserves
+the normal saved profile; ordinary/replay finales keep the existing generated
+next-maze path.
+
 **Latest Human-directed correction, 2026-09-05:** UI-03 supersedes the historical Big/Normal mode, concealed locked achievement artwork, horizontal arrows, thin default type and reversed Home composition below. Current implementation and review are in `plans/UI-03-fp-ui1-correction.md` and its 61-row intake. Schema 6 adds truthful guardian discovery. The earlier v0.21 engineering checkpoint was rejected by Human playtest; it is not current visual acceptance.
 
 **v0.22.0 Human acceptance update, 2026-09-05:** the corrected desktop/iPad

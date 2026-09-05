@@ -16,6 +16,8 @@ interface TravelInput {
   readonly position: Point;
   readonly camera: CameraWindow;
   readonly followers: readonly {id:string;point:Point}[];
+  /** Changes only when a replacement actor or camera-anchored node mounts. */
+  readonly bindingKey: string;
   readonly runKey: string;
   readonly enabled: boolean;
   readonly discontinuity: boolean;
@@ -109,7 +111,10 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       prior.input.discontinuity!==input.discontinuity || !input.enabled || document.hidden;
     if(boundary) { cancelFrame(); leader.current=new TileTraveller(input.position,now); followers.current.clear(); }
     else leader.current!.retarget(input.position,now,input.durationMs);
-    const nodes=Array.from(board.querySelectorAll<HTMLElement>("[data-follower-id]"));
+    const discover=!prior || prior.board!==board || prior.input.runKey!==input.runKey ||
+      prior.input.bindingKey!==input.bindingKey ||
+      prior.input.followers.map(f=>f.id).join(":")!==input.followers.map(f=>f.id).join(":");
+    const nodes=discover ? Array.from(board.querySelectorAll<HTMLElement>("[data-follower-id]")) : prior.followers.map(f=>f.node);
     const boundFollowers=input.followers.flatMap(f=>{
       const node=nodes.find(n=>n.dataset.followerId===f.id);
       if(!node) return [];
@@ -119,10 +124,10 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       return [{...f,node}];
     });
     for(const id of followers.current.keys()) if(!boundFollowers.some(f=>f.id===id)) followers.current.delete(id);
-    binding.current={input,board,world:board.querySelector<HTMLElement>(".camera-world")!,
-      player:board.querySelector<HTMLElement>(".player-layer")!,
-      replacement:board.querySelector<HTMLElement>('[data-travel-actor="replacement"]'),
-      anchors:Array.from(board.querySelectorAll<HTMLElement>("[data-travel-camera-anchor]")),followers:boundFollowers,
+    binding.current={input,board,world:discover ? board.querySelector<HTMLElement>(".camera-world")! : prior.world,
+      player:discover ? board.querySelector<HTMLElement>(".player-layer")! : prior.player,
+      replacement:discover ? board.querySelector<HTMLElement>('[data-travel-actor="replacement"]') : prior.replacement,
+      anchors:discover ? Array.from(board.querySelectorAll<HTMLElement>("[data-travel-camera-anchor]")) : prior.anchors,followers:boundFollowers,
       width:prior?.board===board ? prior.width : board.clientWidth,
       height:prior?.board===board ? prior.height : board.clientHeight};
     if(prior?.board!==board) {
@@ -138,7 +143,8 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       observer.current.observe(board);
     }
     paint(now);
-  });
+  },[input.boardRef,input.grid,input.position,input.camera,input.followers,input.bindingKey,input.runKey,
+    input.enabled,input.discontinuity,input.durationMs,input.onGeometryReset,cancelFrame,paint,settle]);
 
   useLayoutEffect(()=>{
     const hide=()=>{ if(document.hidden) settle(); };

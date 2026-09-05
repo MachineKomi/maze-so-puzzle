@@ -81,6 +81,15 @@ export function pointerIntentFromTileOffset(
   };
 }
 
+/** Anchored drag steering is independent of both Ame and camera translation.
+ * The 8px neutral region remains usable on scaled touchscreens. */
+export function pointerIntentFromDrag(
+  origin: Point, current: Point, previousDirection: Direction | null,
+): PointerIntent | null {
+  const intent = pointerIntentFromTileOffset((current.x-origin.x)/40, (current.y-origin.y)/40, .20, previousDirection);
+  return intent ? {direction:intent.direction,lateralOffset:Math.max(-1,Math.min(1,intent.lateralOffset))} : null;
+}
+
 function stepFrom(point: Point, direction: Direction): Point {
   const delta = DIRECTION_DELTAS[direction];
   return { x: point.x + delta.x, y: point.y + delta.y };

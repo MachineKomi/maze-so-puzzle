@@ -1,6 +1,9 @@
 # V22-PERF-01 — sustained play and live-input correction
 
-Status: build-ready joint correction brief; runtime implementation pending
+Status: Astra candidate implemented on `codex/v22-perf-01-astra`; deterministic
+gates passed, sustained evidence in progress; Sol review and Human acceptance
+pending. The [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md)
+owns measured status; this brief remains the unchanged acceptance contract.
 
 Owner: **GPT-6 Astra**
 Independent reviewer: **GPT-5.6 Sol**

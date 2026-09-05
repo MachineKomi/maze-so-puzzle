@@ -16,13 +16,24 @@ export function ThumbPad({ onMove, startHold, steerHold, stopHold, suggested, en
   stopHold: (event: PointerEvent<HTMLElement>) => void;
   suggested: Direction | null; enabled?: boolean;
 }) {
+  const pad = useRef<HTMLDivElement>(null);
   const gesture = useRef<{id:number; x:number; y:number; startX:number; startY:number; width:number; height:number; dragging:boolean; direction:Direction|null} | null>(null);
   const [direction, setDirection] = useState<Direction | null>(null);
   const [dragging, setDragging] = useState(false);
-  const reset = () => { gesture.current=null; setDirection(null); setDragging(false); };
+  const reset = () => {
+    const id = gesture.current?.id;
+    gesture.current=null; setDirection(null); setDragging(false);
+    if (id !== undefined && pad.current?.hasPointerCapture(id)) pad.current.releasePointerCapture(id);
+  };
   useEffect(() => { if (!enabled) reset(); }, [enabled]);
-  useEffect(() => { window.addEventListener("blur",reset); return () => window.removeEventListener("blur",reset); }, []);
-  return <div className="dpad thumb-pad" role="group" aria-label="Directional thumb pad: tap arrows or drag to steer"
+  useEffect(() => {
+    const hidden = () => { if (document.hidden) reset(); };
+    window.addEventListener("blur",reset);
+    window.addEventListener("resize",reset);
+    document.addEventListener("visibilitychange",hidden);
+    return () => { window.removeEventListener("blur",reset); window.removeEventListener("resize",reset); document.removeEventListener("visibilitychange",hidden); };
+  }, []);
+  return <div ref={pad} className="dpad thumb-pad" role="group" aria-label="Directional thumb pad: tap arrows or drag to steer"
     data-steering={dragging || undefined} data-direction={direction ?? undefined}
     onPointerDown={event => {
       if (!enabled || !event.isPrimary || event.button !== 0) return;

@@ -3,9 +3,44 @@ import { createInitialGameState, movePlayer } from "./game/engine";
 import type { LevelDefinition, LevelObject, TerrainKind } from "./game/types";
 import {
   normalizedBoardPoint,
+  pointerIntentFromDrag,
   pointerIntentFromTileOffset,
   resolvePointerMoveDirection,
 } from "./pointerControls";
+
+describe("anchored board drag", () => {
+  it("steers from touch-down rather than the moving player", () => {
+    const origin = {x:80,y:600};
+    expect(pointerIntentFromDrag(origin,{x:110,y:600},null)).toEqual({direction:"right",lateralOffset:0});
+    expect(pointerIntentFromDrag(origin,{x:80,y:570},"right")).toEqual({direction:"up",lateralOffset:0});
+    expect(pointerIntentFromDrag(origin,{x:50,y:600},"up")).toEqual({direction:"left",lateralOffset:0});
+  });
+  it("goes neutral on returning to the anchor, without retaining the old direction", () => {
+    expect(pointerIntentFromDrag({x:80,y:600},{x:83,y:606},"right")).toBeNull();
+    expect(pointerIntentFromDrag({x:80,y:600},{x:80,y:600},"left")).toBeNull();
+  });
+  it("uses modest axis hysteresis but accepts deliberate turns", () => {
+    expect(pointerIntentFromDrag({x:0,y:0},{x:25,y:27},"right")?.direction).toBe("right");
+    expect(pointerIntentFromDrag({x:0,y:0},{x:25,y:35},"right")?.direction).toBe("down");
+  });
+  it("preserves the anchored diagonal preference between two safe wall-corner branches", () => {
+    const level = makeLevel(["#####", "#...#", "#.###", "#...#", "#####"]);
+    const state = createInitialGameState(level);
+    const origin = { x: 80, y: 600 };
+    const up = pointerIntentFromDrag(origin, { x: 116, y: 580 }, "right")!;
+    const down = pointerIntentFromDrag(origin, { x: 116, y: 620 }, "right")!;
+    expect(up.direction).toBe("right");
+    expect(down.direction).toBe("right");
+    expect(up.lateralOffset).toBeLessThan(0);
+    expect(down.lateralOffset).toBeGreaterThan(0);
+    expect(resolvePointerMoveDirection(level, state, up.direction, up.lateralOffset, "down")).toBe("up");
+    expect(resolvePointerMoveDirection(level, state, down.direction, down.lateralOffset, "up")).toBe("down");
+  });
+  it("caps long drags without losing their perpendicular steering sign", () => {
+    expect(pointerIntentFromDrag({x:0,y:0},{x:200,y:-100},"right")).toEqual({direction:"right", lateralOffset:-1});
+    expect(pointerIntentFromDrag({x:0,y:0},{x:100,y:200},"down")).toEqual({direction:"down", lateralOffset:1});
+  });
+});
 
 function makeLevel(
   rows: readonly string[],

@@ -473,8 +473,8 @@ Acceptance: portal and multi-hole fixtures must prove that reachability, next st
 
 ## Feedback, recovery, and input assists
 
-- The first capability collision uses immediate HUD feedback. The second repeat adds a persistent directional marker. A modal explanation is reserved for the third repeat at the same unresolved blocker. Resolving it clears the repetition.
-- The first encounter with a stronger enemy may explain Power comparison. Repeats remain safe and use HUD feedback rather than reopening the same modal loop.
+- V22-04/09 supersedes the earlier first/third-bump policy: every fresh deliberate capability or underpowered collision opens its actionable explanation. A continuously held blocked gesture is cleared so it cannot flood dialogs. The second capability repeat still adds a persistent marker; resolving the blocker clears its repetition.
+- Eligible success presentations pause repeat clocks while retaining genuine live input, observing steering/release, then resume on a fresh 160 ms cadence without replaying queued actions. Blockers, real modals, blur/hidden, resize, cancellation and level changes require fresh input. These are V22-PERF-01 candidate semantics, pending independent and affected-device acceptance.
 - Corner assistance can resolve only to non-exit ordinary floor that is empty or contains a previously resolved non-portal object. It cannot finish a maze, collect an item, rescue a friend, open a door, enter a hazard, start combat, take a portal, or trigger a Spring-Boots jump. Every accepted assist still becomes one ordinary engine input.
 - Help and hints are always on demand. Nothing times out, and no action sequence requires speed.
 - Leaving for Home or the Adventure Book preserves a validated authored run; choosing a different maze retains the existing confirmation boundary.

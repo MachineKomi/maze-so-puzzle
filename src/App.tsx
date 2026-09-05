@@ -127,6 +127,7 @@ import {
 } from "./session";
 import {
   normalizedBoardPoint,
+  pointerIntentFromDrag,
   pointerIntentFromTileOffset,
   resolvePointerMoveDirection,
   type PointerIntent,
@@ -235,6 +236,7 @@ interface ActiveBoardPointer {
   readonly boardHeight: number;
   current: PointerPoint;
   direction: Direction | null;
+  dragging: boolean;
 }
 
 interface TouchCursor {
@@ -737,6 +739,12 @@ function App() {
   const appFrameRef = useRef<HTMLElement>(null);
   const boardRef = useRef<HTMLDivElement>(null);
   const inputLocked = useRef(false);
+  // Presentation locks pause repeat clocks, not the live physical gesture.
+  const presentationSuspended = useRef(false);
+  const heldInputGeneration = useRef(0);
+  const heldInputSource = useRef<"keyboard" | "board" | "pad" | null>(null);
+  const resumeHeldInputRef = useRef<() => void>(() => undefined);
+  const scheduleKeyboardRepeatRef = useRef<(delay: number) => void>(() => undefined);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
   const queuedMove = useRef<QueuedMoveIntent | null>(null);
   const attemptMoveRef = useRef<(direction: Direction, lateralOffset?: number) => void>(() => undefined);
@@ -753,14 +761,13 @@ function App() {
   const activeBoardPointer = useRef<ActiveBoardPointer | null>(null);
   const pointerHoldTimer = useRef<number | undefined>(undefined);
   const pointerHoldCadence = useRef<HeldMoveCadence>(IDLE_HELD_MOVE_CADENCE);
-  const [touchCursor, setTouchCursor] = useState<TouchCursor | null>(null);
+  const touchCursorRef = useRef<HTMLDivElement>(null);
   const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
   const rewardSoundTimer = useRef<number | undefined>(undefined);
   const mapPickupTimer = useRef<number | undefined>(undefined);
   const mapPickupSequence = useRef(0);
   const blockerBumps = useRef(new Map<string, number>());
-  const strongEnemyBumps = useRef(new Map<string, number>());
   const presentationTimers = useRef(new Set<number>());
   const presentationSequence = useRef(0);
   const treasureTimer = useRef<number | undefined>(undefined);
@@ -809,16 +816,19 @@ function App() {
       : game.position;
     return getCameraWindow(level, cameraFocus, DEFAULT_FOV_SIZE);
   }, [explorationMode, game.position, jumpPresentation, level, worldWindow]);
+  const fullMapTiles = useMemo(() => new Set(level.terrain.flatMap((row, y) =>
+    row.map((_, x) => toTileKey({ x, y })))), [level]);
   const currentViewTiles = useMemo(
     () => explorationMode
       ? new Set(getVisibleTileKeys(level, game.position, DEFAULT_FOV_SIZE))
-      : new Set<TileKey>(),
-    [explorationMode, game.position, level],
+      : fullMapTiles,
+    [explorationMode, game.position, level, fullMapTiles],
   );
   const activeObjects = useMemo(
     () => level.objects.filter((object) => !isObjectResolved(object, game)),
-    [game, level],
+    [game.collectedObjectIds, game.defeatedEnemyIds, game.openedDoorIds, game.rescuedAnimalIds, level],
   );
+  const minimapObjects = useMemo(() => activeObjects.filter(object => object.kind !== "treasure"), [activeObjects]);
   const animalObjects = useMemo(
     () => level.objects.filter(
       (object): object is Extract<LevelObject, { kind: "animal" }> => object.kind === "animal",
@@ -843,6 +853,7 @@ function App() {
       return animal ? [{animal,point}] : [];
     });
   }, [animalObjects, procession, rescuePresentation?.objectId, jumpPresentation, portalPresentation]);
+  const travelFollowers = useMemo(() => followerPlacements.map(({animal, point}) => ({id: animal.id, point})), [followerPlacements]);
   const objectKinds = useMemo(() => new Set(level.objects.map((object) => object.kind)), [level]);
   const mazeStatus = useMemo(() => describeMazePosition(level, game), [game, level]);
   const runInProgress = hasActiveRun && (game.status === "playing" || game.status === "won");
@@ -906,6 +917,19 @@ function App() {
     if (!saved) { setSaveWarning("progress"); setUnsupportedProfile(hasUnsupportedProgressProfile()); }
   }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, progress]);
 
+  const setTouchCursor = useCallback((cursor: TouchCursor | null) => {
+    const node = touchCursorRef.current;
+    if (!node) return;
+    node.hidden = cursor === null;
+    if (!cursor) return;
+    node.classList.toggle("active", cursor.direction !== null);
+    node.style.setProperty("--touch-origin-x", `${cursor.origin.x * 100}%`);
+    node.style.setProperty("--touch-origin-y", `${cursor.origin.y * 100}%`);
+    node.style.setProperty("--touch-cursor-x", `${cursor.current.x * 100}%`);
+    node.style.setProperty("--touch-cursor-y", `${cursor.current.y * 100}%`);
+    node.lastElementChild!.textContent = cursor.direction ? DIRECTION_ICONS[cursor.direction] : "✦";
+  }, []);
+
   const clearDpadHold = useCallback(() => {
     dpadHoldDirection.current = null;
     dpadHoldPointerId.current = null;
@@ -917,7 +941,9 @@ function App() {
   }, []);
 
   const clearBoardPointer = useCallback((preserveTap = false) => {
+    const pointerId = activeBoardPointer.current?.pointerId;
     activeBoardPointer.current = null;
+    if (pointerId !== undefined && boardRef.current?.hasPointerCapture(pointerId)) boardRef.current.releasePointerCapture(pointerId);
     if (!preserveTap || queuedMove.current?.repeated) queuedMove.current = null;
     pointerHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
     setTouchCursor(null);
@@ -925,9 +951,11 @@ function App() {
       window.clearTimeout(pointerHoldTimer.current);
       pointerHoldTimer.current = undefined;
     }
-  }, []);
+  }, [setTouchCursor]);
 
   const clearHeldInput = useCallback(() => {
+    heldInputGeneration.current++;
+    heldInputSource.current = null;
     heldKeys.current.clear();
     heldKeyOrder.current = [];
     queuedMove.current = null;
@@ -941,9 +969,34 @@ function App() {
     clearBoardPointer();
   }, [clearBoardPointer, clearDpadHold]);
 
+  const beginInputSource = useCallback((source: "keyboard" | "board" | "pad") => {
+    if (heldInputSource.current === source) return;
+    // A deliberate source takeover must not leave an older physical gesture
+    // eligible to resume later. Keep only the gameplay corner-assist history.
+    const previousDirection = lastMovedDirection.current;
+    clearHeldInput();
+    lastMovedDirection.current = previousDirection;
+    heldInputSource.current = source;
+  }, [clearHeldInput]);
+
+  const suspendHeldRepeat = useCallback(() => {
+    presentationSuspended.current = true;
+    heldInputGeneration.current++;
+    queuedMove.current = null;
+    for (const timer of [heldKeyTimer, pointerHoldTimer, dpadHoldTimer]) {
+      if (timer.current !== undefined) window.clearTimeout(timer.current);
+      timer.current = undefined;
+    }
+    heldKeyCadence.current = pointerHoldCadence.current = dpadHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
+  }, []);
+
   const sceneTravel = useSceneTravel({
     boardRef, grid:level, position:game.position, camera:cameraWindow,
-    followers:followerPlacements.map(({animal,point})=>({id:animal.id,point})),
+    followers:travelFollowers,
+    bindingKey:[screen, battlePresentation && isInsideWindow(battlePresentation.at,cameraWindow) ? battlePresentation.objectId : "",
+      rescuePresentation && isInsideWindow(rescuePresentation.at,cameraWindow) ? rescuePresentation.objectId : "",
+      doorOpeningPresentation && isInsideWindow(doorOpeningPresentation.at,cameraWindow) ? doorOpeningPresentation.objectId : "",
+      !!jumpPresentation, !!portalPresentation, mapPickupToast?.id, treasurePresentation?.id].join(":"),
     runKey:`${runId}:${travelEpoch.current}`,
     enabled:screen==="game" && !modalOpen && preferences.quality!=="static",
     discontinuity:jumpPresentation!==null || portalPresentation!==null,
@@ -970,6 +1023,7 @@ function App() {
   }, []);
 
   const cancelPresentations = useCallback(() => {
+    presentationSuspended.current = false;
     clearPresentationWork();
     setBattlePresentation(null);
     setRescuePresentation(null);
@@ -1253,7 +1307,6 @@ function App() {
     setBlockerHint(null);
     setGuidedObjectId(null);
     blockerBumps.current.clear();
-    strongEnemyBumps.current.clear();
     setPendingAdventure(null);
     setFeedback({ icon: ASSETS.goal, text: nextLevel.objective, tone: "plain", sound: "step" });
     setRestartArmed(false);
@@ -1272,6 +1325,7 @@ function App() {
       queuedMove.current = null;
       return;
     }
+    if (presentationSuspended.current) return;
     if (inputLocked.current) {
       queuedMove.current = { direction: requestedDirection, lateralOffset, travelDurationMs:proposedTravelDuration, repeated };
       return;
@@ -1303,7 +1357,7 @@ function App() {
         const nextHint = { ...hintSeed, count };
         modalReturnFocus.current = boardRef.current;
         clearHeldInput();
-        if (count >= 3) setBlockerHint(nextHint);
+        setBlockerHint(nextHint);
         if (count >= 2) setGuidedObjectId(nextHint.itemId);
       }
     }
@@ -1375,7 +1429,6 @@ function App() {
     }
     let presentationDuration = 0;
     if (defeatedEvent) {
-      clearHeldInput();
       const enemy = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "enemy" }> => (
           object.kind === "enemy" && object.id === defeatedEvent.objectId
@@ -1408,25 +1461,15 @@ function App() {
           object.kind === "enemy" && object.id === tooStrongEvent.objectId
         ),
       );
-      const priorBumps = strongEnemyBumps.current.get(tooStrongEvent.objectId) ?? 0;
-      strongEnemyBumps.current.set(tooStrongEvent.objectId, priorBumps + 1);
       // Every safe collision requires a fresh deliberate press. Otherwise one
       // held input floods the live region and bump audio at accelerated cadence.
       clearHeldInput();
-      if (enemy && priorBumps === 0) {
+      if (enemy) {
         const art = resolveEnemyArt(enemy.style);
         setTooStrongEncounter({ event: tooStrongEvent, enemySrc: art.src, enemyLabel: art.label });
-      } else if (enemy) {
-        setFeedback({
-          icon: resolveEnemyArt(enemy.style).src,
-          text: `${resolveEnemyArt(enemy.style).label}: ${tooStrongEvent.enemyPower} Power. Ame is safe at ${tooStrongEvent.playerPower}; explore, then return.`,
-          tone: "plain",
-          sound: "bump",
-        });
       }
       playSound("bump", mutedRef.current);
     } else if (rescuedEvent) {
-      clearHeldInput();
       const animal = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "animal" }> => (
           object.kind === "animal" && object.id === rescuedEvent.objectId
@@ -1448,10 +1491,8 @@ function App() {
     } else if (jumpedEvent && !openedDoorEvent) {
       presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
     } else if (portalEvent) {
-      clearHeldInput();
       presentationDuration = beginPortalPresentation(portalEvent);
     } else if (openedDoorEvent) {
-      clearHeldInput();
       const door = level.objects.find(
         (object): object is Extract<LevelObject, { kind: "door" }> => (
           object.kind === "door" && object.id === openedDoorEvent.objectId
@@ -1471,6 +1512,7 @@ function App() {
         presentationDuration = beginDoorOpeningPresentation(openedDoorEvent, door);
       }
     }
+    if (presentationDuration > 0) suspendHeldRepeat();
     if (!defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && !portalEvent && !openedDoorEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
       playSound(nextFeedback.sound, muted);
       if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
@@ -1502,6 +1544,12 @@ function App() {
     inputUnlockTimer.current = window.setTimeout(() => {
       inputLocked.current = false;
       inputUnlockTimer.current = undefined;
+      if (presentationDuration > 0) {
+        presentationSuspended.current = false;
+        queuedMove.current = null;
+        resumeHeldInputRef.current();
+        return;
+      }
       const nextMove = queuedMove.current;
       queuedMove.current = null;
       if (nextMove) {
@@ -1510,7 +1558,7 @@ function App() {
         attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
       }
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
+  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, suspendHeldRepeat, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
   const dismissStory = useCallback(() => {
     setStoryOpen(false);
@@ -1531,7 +1579,12 @@ function App() {
 
     const scheduleHeldMove = (delay: number) => {
       if (heldKeyTimer.current !== undefined) window.clearTimeout(heldKeyTimer.current);
+      heldKeyTimer.current = undefined;
+      if (presentationSuspended.current || heldKeys.current.size === 0) return;
+      const generation = heldInputGeneration.current;
       heldKeyTimer.current = window.setTimeout(() => {
+        heldKeyTimer.current = undefined;
+        if (presentationSuspended.current || generation !== heldInputGeneration.current) return;
         const keyId = heldKeyOrder.current.at(-1);
         const direction = keyId ? heldKeys.current.get(keyId) : undefined;
         if (!direction) {
@@ -1544,9 +1597,10 @@ function App() {
         nextTravelDuration.current=cadenceStep.nextDelayMs;
         nextMoveRepeated.current=true;
         attemptMoveRef.current(direction);
-        scheduleHeldMove(cadenceStep.nextDelayMs);
+        if (generation === heldInputGeneration.current) scheduleHeldMove(cadenceStep.nextDelayMs);
       }, delay);
     };
+    scheduleKeyboardRepeatRef.current = scheduleHeldMove;
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (modalOpen) return;
@@ -1559,9 +1613,11 @@ function App() {
       if (event.repeat) return;
       const keyId = event.code || event.key;
       if (heldKeys.current.has(keyId)) return;
+      beginInputSource("keyboard");
       heldKeys.current.set(keyId, direction);
       heldKeyOrder.current = [...heldKeyOrder.current.filter((item) => item !== keyId), keyId];
       heldKeyCadence.current = beginHeldMoveCadence(direction);
+      if (presentationSuspended.current) return;
       attemptMoveRef.current(direction);
       scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
     };
@@ -1570,15 +1626,18 @@ function App() {
       const direction = directionForKey(event.key);
       if (!direction) return;
       const keyId = event.code || event.key;
+      if (!heldKeys.current.has(keyId)) return;
       heldKeys.current.delete(keyId);
       heldKeyOrder.current = heldKeyOrder.current.filter((item) => item !== keyId);
       const fallbackKey = heldKeyOrder.current.at(-1);
       const fallbackDirection = fallbackKey ? heldKeys.current.get(fallbackKey) : undefined;
       if (fallbackDirection) {
         heldKeyCadence.current = beginHeldMoveCadence(fallbackDirection);
-        nextMoveRepeated.current = true;
-        attemptMoveRef.current(fallbackDirection);
-        scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
+        if (!presentationSuspended.current) {
+          nextMoveRepeated.current = true;
+          attemptMoveRef.current(fallbackDirection);
+          scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
+        }
       } else {
         if (heldKeyTimer.current !== undefined) {
           window.clearTimeout(heldKeyTimer.current);
@@ -1597,14 +1656,16 @@ function App() {
     window.addEventListener("keydown", onKeyDown, { passive: false });
     window.addEventListener("keyup", onKeyUp);
     window.addEventListener("blur", clearHeldInput);
+    window.addEventListener("resize", clearHeldInput);
     document.addEventListener("visibilitychange", onVisibilityChange);
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("blur", clearHeldInput);
+      window.removeEventListener("resize", clearHeldInput);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
+  }, [beginInputSource, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => {
     if (inputBlock.clearHeldInput || game.status !== "playing") {
@@ -1641,21 +1702,34 @@ function App() {
 
   pointerDirectionRef.current = moveDirectionFromPointer;
 
+  const boardPointerIntent = useCallback((pointer: ActiveBoardPointer): PointerIntent | null => {
+    if (!pointer.dragging) return pointerDirectionRef.current(pointer.current.x, pointer.current.y, pointer.direction);
+    // Once dragged, the visible touch-down anchor owns direction; Ame and the
+    // moving camera must never drag the joystick's neutral point away.
+    return pointerIntentFromDrag(pointer.origin, pointer.current, pointer.direction);
+  }, []);
+
+  const paintBoardPointer = useCallback((pointer: ActiveBoardPointer) => {
+    if (pointer.pointerType !== "touch") return;
+    const rect = {left:pointer.boardLeft,top:pointer.boardTop,width:pointer.boardWidth,height:pointer.boardHeight};
+    setTouchCursor({origin:normalizedBoardPoint(pointer.origin.x,pointer.origin.y,rect),
+      current:normalizedBoardPoint(pointer.current.x,pointer.current.y,rect),direction:pointer.direction});
+  }, [setTouchCursor]);
+
   const schedulePointerHoldRepeat = useCallback((delay: number) => {
     if (pointerHoldTimer.current !== undefined) window.clearTimeout(pointerHoldTimer.current);
+    pointerHoldTimer.current = undefined;
+    if (presentationSuspended.current || !activeBoardPointer.current) return;
+    const generation = heldInputGeneration.current;
     const repeat = () => {
+      pointerHoldTimer.current = undefined;
+      if (presentationSuspended.current || generation !== heldInputGeneration.current) return;
       const pointer = activeBoardPointer.current;
-      const intent = pointer
-        ? pointerDirectionRef.current(pointer.current.x, pointer.current.y, pointer.direction)
-        : null;
+      const intent = pointer ? boardPointerIntent(pointer) : null;
       const direction = intent?.direction ?? null;
       if (pointer) {
         pointer.direction = direction;
-        if (pointer.pointerType === "touch") {
-          setTouchCursor((cursor) => cursor && cursor.direction !== direction
-            ? { ...cursor, direction }
-            : cursor);
-        }
+        paintBoardPointer(pointer);
       }
       if (!intent) {
         queuedMove.current = null;
@@ -1668,10 +1742,11 @@ function App() {
       nextTravelDuration.current=cadenceStep.nextDelayMs;
         nextMoveRepeated.current=true;
       attemptMoveRef.current(intent.direction, intent.lateralOffset);
-      pointerHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
+      if (!presentationSuspended.current && generation === heldInputGeneration.current && activeBoardPointer.current === pointer)
+        pointerHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
     pointerHoldTimer.current = window.setTimeout(repeat, delay);
-  }, []);
+  }, [boardPointerIntent,paintBoardPointer]);
 
   const onBoardPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     const pointer = activeBoardPointer.current;
@@ -1681,24 +1756,15 @@ function App() {
 
     event.preventDefault();
     const current = { x: event.clientX, y: event.clientY };
-    const intent = pointerDirectionRef.current(current.x, current.y, pointer.direction);
+    pointer.current = current;
+    if (Math.hypot(current.x-pointer.origin.x,current.y-pointer.origin.y) >= 6) pointer.dragging = true;
+    const intent = boardPointerIntent(pointer);
     const direction = intent?.direction ?? null;
     const directionChanged = direction !== pointer.direction;
     pointer.current = current;
     pointer.direction = direction;
-    if (pointer.pointerType === "touch") {
-      const boardRect = {
-        left: pointer.boardLeft,
-        top: pointer.boardTop,
-        width: pointer.boardWidth,
-        height: pointer.boardHeight,
-      };
-      setTouchCursor({
-        origin: normalizedBoardPoint(pointer.origin.x, pointer.origin.y, boardRect),
-        current: normalizedBoardPoint(current.x, current.y, boardRect),
-        direction,
-      });
-    }
+    paintBoardPointer(pointer);
+    if (presentationSuspended.current) return;
     if (!directionChanged) return;
     if (pointerHoldTimer.current !== undefined) {
       window.clearTimeout(pointerHoldTimer.current);
@@ -1718,6 +1784,7 @@ function App() {
     if (!inputBlock.gameplayInputAllowed) return;
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
+    beginInputSource("board");
     clearBoardPointer();
     const borderRect = event.currentTarget.getBoundingClientRect();
     const rect={left:borderRect.left+event.currentTarget.clientLeft,top:borderRect.top+event.currentTarget.clientTop,
@@ -1735,6 +1802,7 @@ function App() {
       boardHeight: rect.height,
       current: origin,
       direction,
+      dragging: false,
     };
     activeBoardPointer.current = pointer;
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -1742,7 +1810,7 @@ function App() {
       const localOrigin = normalizedBoardPoint(origin.x, origin.y, rect);
       setTouchCursor({ origin: localOrigin, current: localOrigin, direction });
     }
-    if (!direction) return;
+    if (!direction || presentationSuspended.current) return;
     pointerHoldCadence.current = beginHeldMoveCadence(direction);
     attemptMoveRef.current(direction, intent?.lateralOffset);
     schedulePointerHoldRepeat(HELD_MOVE_INITIAL_DELAY_MS);
@@ -1760,7 +1828,12 @@ function App() {
 
   const scheduleDpadRepeat = useCallback((delay: number) => {
     if (dpadHoldTimer.current !== undefined) window.clearTimeout(dpadHoldTimer.current);
+    dpadHoldTimer.current = undefined;
+    if (presentationSuspended.current || !dpadHoldDirection.current) return;
+    const generation = heldInputGeneration.current;
     const repeat = () => {
+      dpadHoldTimer.current = undefined;
+      if (presentationSuspended.current || generation !== heldInputGeneration.current) return;
       const direction = dpadHoldDirection.current;
       if (!direction) {
         dpadHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
@@ -1772,7 +1845,8 @@ function App() {
       nextTravelDuration.current=cadenceStep.nextDelayMs;
         nextMoveRepeated.current=true;
       attemptMoveRef.current(direction);
-      dpadHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
+      if (!presentationSuspended.current && generation === heldInputGeneration.current && dpadHoldDirection.current)
+        dpadHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
     dpadHoldTimer.current = window.setTimeout(repeat, delay);
   }, []);
@@ -1781,11 +1855,12 @@ function App() {
     if (!inputBlock.gameplayInputAllowed) return;
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
+    beginInputSource("pad");
     clearDpadHold();
     dpadHoldDirection.current = direction;
     dpadHoldPointerId.current = event.pointerId;
     dpadHoldCadence.current = direction ? beginHeldMoveCadence(direction) : IDLE_HELD_MOVE_CADENCE;
-    if (direction) {
+    if (direction && !presentationSuspended.current) {
       attemptMoveRef.current(direction);
       scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
     }
@@ -1796,7 +1871,7 @@ function App() {
     if (dpadHoldTimer.current !== undefined) window.clearTimeout(dpadHoldTimer.current);
     dpadHoldDirection.current = direction;
     queuedMove.current = null;
-    if (direction) {
+    if (direction && !presentationSuspended.current) {
       dpadHoldCadence.current = beginHeldMoveCadence(direction);
       attemptMoveRef.current(direction);
       scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
@@ -1812,6 +1887,15 @@ function App() {
     if (event.type !== "pointerup" || (queuedMove.current?.direction === releasedDirection && queuedMove.current.repeated)) {
       queuedMove.current = null;
     }
+  };
+
+  resumeHeldInputRef.current = () => {
+    if (!inputBlock.gameplayInputAllowed || game.status !== "playing" || document.hidden) return;
+    // No saved action queue and no catch-up burst. Read the still-live inputs
+    // only after the entire (possibly chained) presentation has completed.
+    if (heldInputSource.current === "keyboard") scheduleKeyboardRepeatRef.current(HELD_MOVE_INITIAL_DELAY_MS);
+    else if (heldInputSource.current === "board") schedulePointerHoldRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+    else if (heldInputSource.current === "pad") scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
   };
 
   const armRestart = () => {
@@ -2062,8 +2146,9 @@ function App() {
 
   const nextLevel = () => {
     if (testerRun) {
-      const nextIndex = campaignIndex >= 0 ? (campaignIndex + 1) % CURATED_LEVELS.length : 0;
-      enterLevel(CURATED_LEVELS[nextIndex]!, "select", "tester");
+      const next = campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length
+        ? CURATED_LEVELS[campaignIndex + 1]! : makeSurprise();
+      enterLevel(next, "select", "tester");
       return;
     }
     if (game.status !== "won" || !completion) return;
@@ -2116,8 +2201,8 @@ function App() {
   const allFriendsRescued = completion !== null
     && completion.rescuedSpecies.length === animalObjects.length;
   const nextMazeLabel = completion?.testerRun
-    ? "Next test maze"
-    : campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze";
+    ? campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length ? "Next test maze" : "Surprise test maze"
+    : campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze";
   const treasureFlightStyle = useMemo(() => {
     if(!treasurePresentation) return undefined;
     const board = boardRef.current;
@@ -2312,19 +2397,16 @@ function App() {
                 )}
               </div>
 
-              {touchCursor && (
                 <div
-                  className={`touch-joystick${touchCursor.direction ? " active" : ""}`}
+                  ref={touchCursorRef}
+                  hidden
+                  className="touch-joystick"
                   aria-hidden="true"
                   style={{
                     position: "absolute",
                     zIndex: 40,
                     inset: 0,
                     pointerEvents: "none",
-                    "--touch-origin-x": `${touchCursor.origin.x * 100}%`,
-                    "--touch-origin-y": `${touchCursor.origin.y * 100}%`,
-                    "--touch-cursor-x": `${touchCursor.current.x * 100}%`,
-                    "--touch-cursor-y": `${touchCursor.current.y * 100}%`,
                   } as CSSProperties}
                 >
                   <i
@@ -2334,9 +2416,8 @@ function App() {
                   <i
                     className="touch-joystick-cursor"
                     style={{ position: "absolute", left: "var(--touch-cursor-x)", top: "var(--touch-cursor-y)", transform: "translate(-50%, -50%)" }}
-                  >{touchCursor.direction ? DIRECTION_ICONS[touchCursor.direction] : "✦"}</i>
+                  >✦</i>
                 </div>
-              )}
 
               {doorOpeningPresentation && isInsideWindow(doorOpeningPresentation.at, cameraWindow) && (
                 <div
@@ -2536,8 +2617,8 @@ function App() {
             power={displayedPower} gold={displayedGold} science={displayedScience} steps={game.steps}
             tester={testerRun} suggested={suggestedMoveDirection}
             map={<MiniMap level={level} position={game.position} camera={cameraWindow}
-              revealed={revealedTiles} currentView={explorationMode ? currentViewTiles : new Set(level.terrain.flatMap((row,y) => row.map((_,x) => toTileKey({x,y}))))}
-              objects={activeObjects.filter(object => object.kind !== "treasure")} highlightedObjectId={guidedObjectId} />}
+              revealed={revealedTiles} currentView={currentViewTiles}
+              objects={minimapObjects} highlightedObjectId={guidedObjectId} />}
             onHint={openHint} onDetail={openArtDetail} onMove={attemptMove} onRead={clearHeldInput} startHold={startDpadHold} steerHold={steerDpadHold} stopHold={stopDpadHold} enabled={inputBlock.gameplayInputAllowed}
             feedback={feedback.sound !== "step" && feedback.sound !== "select" && <p className={`feedback-bar tone-${feedback.tone}`}><CatalogueImage src={feedback.icon} alt="" /><span>{feedback.text}</span></p>}
             actions={utilityActions}

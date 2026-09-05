@@ -309,6 +309,20 @@
       "rollbackPoint": "Before external distribution, revert the UI03 runtime batch to fef5e56 only as a coordinated rollback while retaining all immutable art. After distribution, retain schema6 discovery and forward-schema readers and evolve the presentation forward; never delete or downgrade saved Book/active-run data. An art-only rollback uses its separate ledger entry.",
       "dependencies": "Human UI03 correction and parallel-work authorization; exact-root review of the61-row intake; approved-source actor/Home publication under a separate public-byte allocation; actual production and native release checks.",
       "notes": "New JS ceiling 152557. Candidate CSS 23099 remains below 30227 with no allocation. Public ceiling 164988031 includes the separately approved 8008395 art bytes. No dependency added. The Book mounts one page, contextual large art loads on demand, and scene animation does not continuously rerender React. The bounded HUD observer runs on layout changes, not each movement frame. This static allocation is not timing, physical-device or family acceptance."
+    },
+    {
+      "id": "controls-v22-perf01-live-input-and-scene-work",
+      "owner": "controls",
+      "status": "approved",
+      "compressedJsBytes": 650,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra execution-manager authorizes 650 gzip9 JS bytes for this bounded candidate: live-source takeover and presentation suspension, anchored drag with preserved safe corner hint, imperative cursor and semantically cached scene bindings including Static mount invalidation. Locked candidate-v3 measures153118 against prior152557, a561-byte deficit;89 bytes cover bounded toolchain/cross-platform compression variation only. This allocation does not authorize promotion or claim Sol/Human acceptance.",
+      "evidencePath": "docs/reviews/2026-09-05-v22-perf01-candidate.md",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Before merge, discard/revert the complete V22-PERF-01 runtime slice back to461cab02b065a1d0f654c49189ed24108c22c5a8. Preserve all art, engine, schema6 progress and schema3 active saves. Cursor/map/binding changes, live input changes and Lite CSS are documented separate inspection seams; never restore only half of a repeat-suspension/source-takeover contract.",
+      "dependencies": "Human-authorized V22-PERF-01 scope; frozen v0.22.0 production baseline; current-engine legal normal-save fixture matrix; independent Sol candidate review before main/release; affected-iPad test remains open.",
+      "notes": "JS ceiling153207; no CSS/public allocation. Public164988031 unchanged. Candidate tests/counters and external report hashes belong in the linked receipt. Diagnostic counter builds and Playwright packages are not shipped; no repository dependency/lockfile or persistence durability change. Retain report-only timing classification."
     }
   ]
 }

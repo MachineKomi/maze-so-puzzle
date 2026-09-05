@@ -7,12 +7,12 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- Branch: `main`. Astra's review landed at `db1139cb792db2d67b54e1f82d653dd8186a13a6`; Sol independently inspected that clean pushed state. The Sol reconciliation checkpoint is discoverable with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`. Runtime and release remain unchanged.
+- Candidate branch: `codex/v22-perf-01-astra`, based on clean pushed `main` at `461cab02b065a1d0f654c49189ed24108c22c5a8`. Astra is implementing the Human-authorized V22-PERF-01 correction. The public runtime/release is unchanged; this branch is not promotion authority. See the [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) for exact evidence and progress.
 - Frozen UI-03 / FP-UI1 runtime: `68e303da680d5aec0ba71154949c5a2a0d1697ae`, **v0.22.0**.
 - Engineering disposition: reviewed, technically verified, committed, pushed and published.
 - Human disposition: **POSITIVE, WITH OPEN CORRECTIONS**. Full v0.22.0 feedback and 51 cross-device images have now been independently reviewed by Astra and Sol. The Human reports a huge improvement and likes the desktop/iPad composition; sustained iPad performance, phone scaling and interrupted holds prevent full FP-UI1 acceptance. No blanket defect closure or Amelia/family qualification is claimed.
 - v0.21.0 was Human-rejected despite earlier engineering passes. v0.20.1 is the prior comparison baseline, not a claim of universal device qualification.
-- No runtime candidate or specialist implementation is active. The joint review changes documentation only and assigns the next bounded writer.
+- V22-PERF-01 candidate is active: runtime/input/static gates are green after the documented serial solver rerun; matched performance measurements are in progress. Sol's independent review and physical affected-iPad acceptance remain pending. No other specialist runtime writer is active.
 - This document's handoff commit is discoverable with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`; the transfer capsule gives its exact SHA. Intake HEAD above is deliberately not the future commit containing this file.
 - On arrival, inspect `git status --short --branch`, HEAD, remote and active ownership. Do not infer a clean tree from this dated receipt.
 
@@ -36,11 +36,19 @@ The transfer push may create a newer documentation deployment/CI run. Check thos
 
 ## 3. Active work and next decision gate
 
-**Immediate next task: GPT-6 Astra — XHIGH executes the bounded
-[V22-PERF-01](plans/V22-PERF-01-sustained-play-and-live-input.md) candidate.**
+**Current task: GPT-6 Astra finishes the bounded
+[V22-PERF-01](plans/V22-PERF-01-sustained-play-and-live-input.md) candidate evidence.**
 Astra is the sole runtime writer; Sol is the later independent reviewer. The
 candidate is preserved on a recoverable `codex/` branch and is not merged,
 versioned, released or deployed to production before review.
+
+The [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) records the
+75-pass/two-unavailable-fixture browser matrix, 493 serial project tests,
+unchanged Full layout proof, locked desktop compile and explicitly rejected
+diagnostics. Longer matched cohorts are still running at this checkpoint. Next
+turn is **Sol HIGH, independent read-only candidate review**, not another
+implementation or release. Physical iPad, Tauri timing and family gates cannot
+be closed by desktop emulation.
 
 - The [Astra assessment](reviews/2026-09-05-astra-v0220-review.md),
   [Sol assessment](reviews/2026-09-05-sol-v0220-review.md) and

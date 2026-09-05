@@ -12,6 +12,13 @@ using the pure orthogonal `TileTraveller` in `src/tileTravel.ts`. It writes CSS
 `translate` through refs, caches ResizeObserver content geometry and exposes a
 rendered scene snapshot to pointer/effect consumers; it never writes engine or
 save state. Sprite poses keep `transform`. Camera clamp/FOV remain unchanged.
+The V22-PERF-01 candidate caches scene node bindings by run, follower identities
+and the explicit presentation/notice binding key; unrelated React commits do not
+rescan the board. Coordinate-only touch guides write through one local DOM ref,
+not App state. Minimap landmarks and full-map tile membership are memoized by
+their semantic inputs. Normal-save normalization, serialization and write timing
+remain synchronous and unchanged; diagnostic counters exist only in external
+instrumented builds, never the shipped bundle.
 UI-03 gives ordinary taps and repeats the same 160 ms cadence and samples the
 actual callback time, avoiding the former fast-first-step/startup-pause split.
 Stable run-local follower identities consume repeated legal
@@ -305,17 +312,20 @@ alpha pockets; the separately reviewed Tessera repair is contextual-only.
   origin storage is intentionally preserved, and the app reloads Story Maze 1.
 - Camera coordinates affect presentation only. Movement, collision, combat,
   collection, and solving continue to operate in global level coordinates.
-- Primary mouse and touch input begins only on the maze board. Pressing moves one
-  tile immediately; holding repeats; dragging continuously recalculates the
-  dominant direction; release, cancellation, recentering, modal entry, blur, or
-  visibility loss clears queued pointer input. Pointer-only corner assistance
-  can take one safe perpendicular floor step around an immediately intended wall
-  but cannot follow a wall or bypass a hazard, door, or enemy. Keyboard and D-pad
-  controls remain independent.
-- Capability blockers escalate without modal loops: first contact uses HUD
-  feedback, the second repeat adds a marker, and only the third repeat may open
-  the explanatory modal. Strong-enemy explanation opens once per encounter;
-  later safe contacts stay in HUD feedback.
+- Primary mouse/touch begins on the board or fixed thumb pad. Pressing a
+  direction attempts one tile; holding repeats. Board drags become origin-relative
+  after6px, with8px neutral and a bounded perpendicular corner hint. The newest
+  deliberate input source clears earlier source gestures, so successful
+  presentation completion cannot restart competing clocks. Keyboard chords
+  within one source still use the most recently pressed held direction.
+  Release, cancellation, neutral, modal entry, blur/hidden and resize clear the
+  applicable intent. Shared safe corner assistance may take one perpendicular
+  ordinary-floor step, never bypassing hazards or unresolved interactions.
+- Capability blockers show HUD feedback and an explanatory modal on every fresh
+  deliberate attempt; the second repeat also adds a marker. Strong-enemy
+  explanations likewise reopen on fresh attempts. A continuously held blocked
+  gesture is cleared to prevent a dialog flood. This supersedes the historical
+  first/third-bump policy.
 - Terrain geometry is a connected cell union rendered through SVG. Globally
   aligned `userSpaceOnUse` patterns keep the floor, wall, water, lava, and poison art in
   world coordinates as the camera moves. Boundary tracing resolves diagonal
