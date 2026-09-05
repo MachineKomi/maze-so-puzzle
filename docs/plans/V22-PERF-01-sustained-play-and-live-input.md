@@ -1,10 +1,33 @@
 # V22-PERF-01 — sustained play and live-input correction
 
 Status: Astra candidate implemented on `codex/v22-perf-01-astra`; bounded checks
-and measurements recorded. One recovery timeout, mixed sustained timing and task
-attribution remain unresolved. Sol review is next; no full engineering or Human
-acceptance is claimed. The [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md)
-owns measured status; this brief remains the unchanged acceptance contract.
+and measurements recorded. Sol's independent
+[candidate review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md)
+returned one P1 chained-presentation unlock race and one P2 stale ThumbPad
+reverse-takeover state. Astra owns a narrow R1 correction before a short Sol
+re-review. One recovery timeout, mixed sustained timing and task attribution also
+remain unresolved; no full engineering or Human acceptance is claimed. The
+[candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md) owns measured
+status; this brief remains the acceptance contract.
+
+## R1 review return — 2026-09-05
+
+The candidate's redundant-work reduction, anchored drag, truthful Lite mode,
+ordinary held-success continuation, blocker behavior, scene binding and tester
+finale are accepted in direction. Before promotion:
+
+1. final-phase completion—not an original nominal aggregate timer—must own
+   unlock/resume for delayed jump-to-battle/rescue/door chains, generation-guarded
+   against cancellation and supersession;
+2. reverse source takeover must reset ThumbPad's component gesture, highlight and
+   pointer capture as well as App-level repeat state; and
+3. deterministic tests must stall a real jump-to-rescue handoff and exercise
+   reverse ThumbPad takeover without weakening healthy continuation coverage.
+
+R1 must not change cadence, Full/Lite recipes, performance optimizations, engine
+content, media, save schema or version. The new Human requests for pace modes,
+stationary cage rescue, Tessera repair and Alex are routed separately and cannot
+be smuggled into this measured diff.
 
 Owner: **GPT-6 Astra**
 Independent reviewer: **GPT-5.6 Sol**

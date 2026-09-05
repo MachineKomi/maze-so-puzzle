@@ -106,6 +106,37 @@ between Plans 03 and 01. `engine.ts`, `session.ts`, `progress.ts`,
   step of a still-held direction after neutral/lock rules permit it—may move into
   the now-passable tile. The original input cannot both open and traverse.
 
+### Accepted follow-up: stationary cage rescue
+
+This Human-approved contract is pending `V22-PLAY-01`; current runtime/tests still
+move Ame into an unresolved cage tile and are not authority for the desired rule.
+
+- A legal contact with an unresolved cage commits the semantic friend rescue and
+  reward exactly once while Player 1 remains logically and visibly on the adjacent
+  origin tile. The interaction returns no movement and increments no movement step.
+- The cage resolves and the friend emerges from the cage tile. Follower-history
+  initialization must not place the new friend inside the stationary player.
+- After the complete presentation, a later input—or a direction which is still
+  genuinely held and eligible under the shared continuation rules—may enter the
+  cleared tile or move elsewhere. No input queued during presentation is replayed.
+- Loose keys, equipment, potions, Gold and Science remain ordinary walk-over
+  pickups. Doors, combat, portals, Spring-Boot jumps and chests/Mimics retain their
+  own explicit contact semantics. A jump landing cannot remotely resolve a cage.
+- The implementation must update engine events, solver/reachability, hints/metrics,
+  content fingerprints/revisions, active-run reconstruction and route fixtures as
+  one rules change. Recompute perfect-rescue routes and prevent old best-step
+  records from being presented as comparable where the gameplay fingerprint moved.
+
+### Accepted follow-up: player movement pace
+
+`V22-PLAY-01` adds **Chill**, **Regular** and **Zippy** as presentation/input-cadence
+preferences, not gameplay rules. All three resolve the same sequence of legal
+single-tile engine transitions for the same semantic inputs. They cannot change
+collision, step counts, Power, rewards, puzzle state, reachability or solver
+results, and cannot catch up through interaction locks. Regular is default; exact
+timings remain subject to Human/family tuning. Plan 08 consumes the same policy for
+controllers and Plan 07B treats Zippy as the input/save/render stress case.
+
 ### Committed Mimic and reward tables
 
 - Every disguised Mimic uses one stable semantic object ID and one isolated,

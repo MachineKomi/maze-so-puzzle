@@ -15,6 +15,14 @@ desktop pickup feedback and friend-led no-scroll victory remain binding follow-u
 work. These outcomes do not authorize a 9–15-tile FOV, broad HUD/minimap redesign,
 new economy or baked directional shadows in canonical art.
 
+**v0.22.0 follow-up authority, 2026-09-05:** reducing effects/movement on the
+affected iPad helped, but remained short of the smooth responsive target; laptop
+web and Tauri are broadly comparable and also not consistently buttery. Add
+Chill/Regular/Zippy movement pace choices, make cage rescues stationary at the
+adjacent tile, repair Tessera Dolphin's field-alpha extraction, and plan Alex as
+an equal optional Player 1 while Ame remains default. These requirements are
+separate from the measured V22-PERF-01 candidate and do not establish its cause.
+
 Status: manager-reviewed product authority for the improvement programme
 
 Decision date: 2026-09-02; art-craft calibration added 2026-09-03
@@ -108,6 +116,12 @@ These are **Human decisions**.
 ### 4.2 Ame and the art direction
 
 - Ame must have **blonde hair and blue eyes** in every field sprite, portrait, story image, animation frame, promotional image, and derivative. These are identity facts, not palette suggestions.
+- Ame remains the default Player 1. Alex is an approved future optional Player-1
+  direction for the Human's son: an age-appropriate boy with blue eyes and blonde
+  to slightly brown-blonde hair. His precise design, canon and runtime selection
+  require a later Human model-sheet gate. He receives the same capabilities,
+  campaign, rewards and difficulty; beginner comfort comes from pace settings,
+  never a gendered or weakened ruleset.
 - Candidate C's approved shoulder-brushing, softly layered hair is slightly
   longer than the historical runtime bob so Ame more closely resembles the real
   Ame while preserving the character the child already loves. The model sheet
@@ -252,6 +266,15 @@ These are **Human decisions**.
 - After the game is open, every normal player journey must be completable with an Xbox controller alone: title, story, maze selection, gameplay, Hint, Help, Adventure Book, menus, confirmations, victory, replay, and return.
 - Television play through Steam Deck with an external wired or Bluetooth Xbox controller is a primary scenario.
 - D-pad and left-stick movement must resolve to the same cardinal game actions as other direct inputs, with predictable tap, hold, release, diagonal, deadzone, focus, disconnect, and reconnect behaviour.
+- Players can choose exactly three movement paces: **Chill**, **Regular** and
+  **Zippy**. Regular is the default; exact timings are family-tuned. Pace affects
+  presentation and held-repeat rhythm across every direct input, not legal moves,
+  puzzle rules, step counts or solver truth, and is distinct from Motion and
+  Surface Quality.
+- Contact interactions follow one legible principle: doors, battles and cages
+  resolve while Player 1 remains on the adjacent origin tile; only a subsequent
+  or still-genuinely-held eligible step enters the cleared tile. Ordinary loose
+  consumables remain walk-over pickups. Presentation never replays queued moves.
 - Controller support must be implemented in the shared web application and must not fork game rules. Steam Input should expose a standard gamepad rather than depend on mouse/keyboard emulation for the supported route.
 - A/B semantics, focus location, prompts, safe destructive confirmations, and controller scrolling must remain consistent and visible at couch distance.
 - Hardware-dependent claims require real-device evidence. Missing hardware may defer a release claim, but not deterministic implementation and mocked integration coverage.

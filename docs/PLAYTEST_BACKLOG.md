@@ -17,7 +17,8 @@ now has independent [Astra](reviews/2026-09-05-astra-v0220-review.md) and
 [Sol](reviews/2026-09-05-sol-v0220-review.md) assessment. The
 [reconciled 88-row ledger](reviews/2026-09-05-sol-astra-opus5-v4-disposition.md)
 routes [V22-PERF-01](plans/V22-PERF-01-sustained-play-and-live-input.md) first,
-then the Sol-owned [V22-UI-01](plans/V22-UI-01-short-height-and-reward.md)
+then bounded field-art/play-feel seams and the Sol-owned
+[V22-UI-01](plans/V22-UI-01-short-height-and-reward.md)
 short-height/Book/pad/pickup/victory tranche. Agent 04 remains
 held; no implementation is claimed by these review documents.
 No blanket closure of the 61 earlier rows or family/performance gates is implied.
@@ -27,9 +28,11 @@ V22-PERF-01 implementation is now a candidate on `codex/v22-perf-01-astra`.
 The [receipt](reviews/2026-09-05-v22-perf01-candidate.md) records held-success,
 fresh blocker, selection and tester-final-flow regression checks plus hot-path
 and Lite changes. Local comparisons and Full/Lite sustained samples are recorded,
-but a recovery timeout remains unexplained and Full sustained timing is mixed;
-task attribution and Sol review are still open. No Human card is closed; the public v0.22.0 build is unchanged,
-and affected-iPad testing still determines whether V22-UI-01 can begin.
+but a recovery timeout remains unexplained and Full sustained timing is mixed.
+Sol's [candidate review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md)
+requires a narrow chained-presentation unlock and ThumbPad takeover correction
+before promotion. No Human card is closed; the public v0.22.0 build is unchanged,
+and affected-iPad testing still determines whether successor work can begin.
 
 **Historical Human rejection, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;
 many regressions/bugs and missed requirements reported. PT25 and affected UI
@@ -56,7 +59,9 @@ engineering evidence, not successful family/UI acceptance.
   and
   [`playtests/2026-09-05-adjustable-camera-zoom.md`](playtests/2026-09-05-adjustable-camera-zoom.md),
   [`playtests/2026-09-05-v0201-wishlist.md`](playtests/2026-09-05-v0201-wishlist.md),
-  [`playtests/2026-09-05-02-room-variety-and-mechanics.md`](playtests/2026-09-05-02-room-variety-and-mechanics.md)
+  [`playtests/2026-09-05-02-room-variety-and-mechanics.md`](playtests/2026-09-05-02-room-variety-and-mechanics.md),
+  and
+  [`user-playtests/2026-09-05-v0220-follow-up.md`](user-playtests/2026-09-05-v0220-follow-up.md)
 
 ## 1. Purpose and authority
 
@@ -142,6 +147,14 @@ decision; the exploration itself must not be deferred wholesale to Plan 14.
 The prior 17-item intake remains in force. The active-task guard applies to future
 concurrent specialists; Agent 01 is no longer an active writer.
 
+The **v0.22.0 follow-up** adds PT45–48. It corrects the performance record: the
+affected iPad became somewhat smoother when effects/movement settings were turned
+down, but remained inadequate; laptop web and Tauri were broadly comparable and
+still not consistently buttery. It also makes three movement paces and stationary
+cage rescue binding near-term work, confirms a bounded Tessera field-alpha defect,
+and establishes Alex as an approved future optional Player 1 subject to model/
+canon/runtime gates. These changes are excluded from the measured V22-PERF-01 diff.
+
 The cards below preserve dated family/triage evidence. A paragraph labelled
 "Current-checkpoint audit" means the checkpoint inspected when that card was
 written, not an assertion about today's worktree. The following reviewed slices
@@ -165,6 +178,10 @@ supersede stale descriptions without closing their unimplemented successors:
 | 36 | Read-only metadata trace confirms the authored rear ordering is faithfully consumed; no visual correction or acceptance claimed | P1 / Routed / Not retested. Root bounded canonical attachment review before Agent04 held-grounding acceptance; Plan05 consumes accepted result |
 | 38 | UI-03 removes Ame's pronounced travel hop and avoids scale animation in victory signatures | Plan 05 full actor-cycle crispness/animation; Plans 04/02 transform discipline and 07B sampling qualification |
 | 42/43/44 | Human puzzle-depth, difficulty, room/maze variety and intuitive-mechanic requests are captured and routed | Plan 09 design/content work; selected new rules require a concrete approved contract; no UI-03 closure claim |
+| 45 | Human-approved three-pace intent; no runtime implementation | V22-PLAY-01 tuning/implementation; Plan 08 parity; Plan 07B Zippy qualification |
+| 46 | Alex approved as a future optional Player-1 direction; exact model/runtime absent | ALT-P1-01 Human art/canon gate and equal selected-lead implementation before 08/05/09/10/11 |
+| 47 | Current 256px Tessera field alpha defect confirmed; approved corrected presentation/master exists | ART-HOTFIX-01 versioned field derivative/publication and actual-consumer proof |
+| 48 | Current engine/test explicitly move Ame into a rescued cage tile | V22-PLAY-01 stationary engine/solver/save/presentation contract before 02/05 |
 
 Do not substitute this table for exact source/tests. Evidence is carried from
 accepted records, not freshly rerun in this documentation review. Before a card
@@ -2603,6 +2620,85 @@ Family retest and later Plan05/08/10 non-regression remain open.
   or other Plan-14 systems. Close the exploration only with its recorded Human
   disposition; do not silently defer it wholesale until after the campaign.
 
+### PT-20260905-45 — Three selectable movement paces
+
+- Type/impact: Accessibility, comfort and play-feel; P1.
+- Delivery: Accepted requirement; implementation and family tuning pending.
+  Verification: direct Human evidence, not current-build implementation.
+- Source: `user-playtests/2026-09-05-v0220-follow-up.md`.
+- Owner/gate: early `V22-PLAY-01` after the accepted performance/device baseline;
+  Plan 08 consumes the preference for controller parity and Plan 07B qualifies it.
+- Acceptance: expose exactly **Chill**, **Regular** and **Zippy** through an
+  easy-to-find compact preference. Regular is default and may be a little slower
+  than v0.22.0; Zippy is faster; Chill is deliberately calm but still acknowledges
+  each input immediately. Tune exact timing through Human/family comparison rather
+  than freezing guessed milliseconds in this backlog.
+- The setting changes actor/camera presentation and held-repeat cadence only. It
+  never changes legal tiles, step counts, interactions, puzzle state, rewards,
+  solver output or collision. Apply it to keyboard, board drag, ThumbPad/fixed pad
+  and later controllers; no mode may queue catch-up through a presentation.
+- Persist pace as a comfort preference independently of campaign progress and
+  Reset Progress. Keep it distinct from Motion and Surface Quality, announce it
+  accessibly, and exercise save-write/input pressure at Zippy as the worst case.
+
+### PT-20260905-46 — Alex as optional alternate Player 1
+
+- Type/impact: Character, representation and player selection; Epic/P1.
+- Delivery: Future direction approved; exact character art/canon and implementation
+  remain Human-gated. Verification: not implemented.
+- Source: `user-playtests/2026-09-05-v0220-follow-up.md`.
+- Owner/gate: dedicated `ALT-P1-01` after current presentation foundations and
+  before Plans 08/05/09/10 consume a single-character assumption. Plan 11 may
+  depict Alex only after the complete gate passes.
+- Ame remains the canonical default. Alex is an age-appropriate boy with blue
+  eyes and blonde to slightly brown-blonde hair; the exact shade, hair shape,
+  outfit, personality, relationship, poses and name treatment require a Human
+  model/canon decision using the established art pipeline.
+- Alex has equal capabilities, content, rewards, movement rules, inputs, co-op
+  compatibility and difficulty. Chill pace supplies beginner comfort; do not
+  encode gendered difficulty or a weaker Alex ruleset.
+- Acceptance includes stable selected-lead identity in preferences/sessions/saves,
+  safe legacy migration to Ame, generic lead-player rendering/dialogue/animation/
+  input seams, complete fallback and asset-loading policy, actual-size/device
+  proof, and no false Alex depiction before he exists in the runtime.
+
+### PT-20260905-47 — Tessera Dolphin field-alpha repair
+
+- Type/impact: Confirmed live field-art extraction defect; P0 bounded correction.
+- Delivery: Routed to `ART-HOTFIX-01`. Verification: current-file inspection.
+- Source: `user-playtests/2026-09-05-v0220-follow-up.md`.
+- Current evidence: the active 256px field derivative loses coral tail/flipper
+  anatomy, while the versioned 512px presentation r02 and existing bounded alpha-
+  recovery source demonstrate the approved character correctly. The prior repair
+  was contextual-only; this field consumer was missed.
+- Acceptance: derive a new versioned 256px field asset from the approved corrected
+  master, update semantic catalogue/source/provenance/retirement/allocation data,
+  and prove alpha edges/readability in cage, free/follower and victory/Book paths
+  at actual sizes. Do not edit the damaged runtime file in place, regenerate the
+  character, or reinterpret this as a broad art pass. Land after the exact
+  performance preview is measured so public-byte changes do not contaminate it.
+
+### PT-20260905-48 — Stationary adjacent cage rescue
+
+- Type/impact: Core interaction consistency and presentation correctness; P0.
+- Delivery: Accepted requirement; routed to `V22-PLAY-01` before Plan 02/05.
+  Verification: current engine/test audit confirms v0.22.0 still moves into cage.
+- Source: `user-playtests/2026-09-05-v0220-follow-up.md`.
+- Acceptance: contact with an unresolved cage commits the rescue/reward exactly
+  once while Player 1 stays on the adjacent origin tile (`moved: false`, no step
+  increment). The cage resolves and the friend emerges at its tile without being
+  initialized inside the player. A later input—or an eligible direction which is
+  still genuinely held after the complete presentation—may enter the cleared tile
+  or turn away. Never replay queued movement.
+- Ordinary loose keys/equipment/potions/Gold/Science remain walk-over pickups.
+  Doors and combat retain their stationary rules; chests/Mimics retain their own
+  planned strike contract. Audit Spring-Boot landing behavior so it cannot rescue
+  a cage nonsensically from range.
+- Update engine events, solver/reachability, hints/metrics, gameplay fingerprints/
+  revisions, active-run reconstruction, route fixtures and follower presentation
+  together. Recompute perfect-rescue route metrics; do not compare affected old
+  best-step records as though the interaction grammar were unchanged.
+
 ## 6. Programme integration and gates
 
 **2026-09-05 intake routing.** The complete 17-item crosswalk lives in
@@ -2622,6 +2718,13 @@ a bounded mechanics comparison and Human disposition during Plan-09 preflight,
 before dependent map freeze; implementing a selected new rule needs its own
 approved contract and qualified dependency seam. Plan 14 revisits only explicitly
 deferred ideas. See `playtests/2026-09-05-02-room-variety-and-mechanics.md`.
+
+**v0.22.0 follow-up.** PT45 and PT48 form two separately reviewable phases of
+`V22-PLAY-01` after the exact performance preview/device baseline; PT47 is a tiny
+independent `ART-HOTFIX-01` publication correction. PT46 receives dedicated
+`ALT-P1-01` before controller/animation/campaign/co-op work, preventing a late
+Ame-only retrofit while keeping Ame default. Plans 08/10 must consume the selected
+lead and P1 pace rather than invent separate policies. None enters V22-PERF-01-R1.
 
 The existing programme remains sequential. These are execution-prompt addenda,
 not permission for simultaneous implementation in the shared worktree.
@@ -2832,6 +2935,7 @@ superseded tests; they are useful provenance.
 | 2026-09-05 | 07 | `47bfff4` Human scheduling decision | Direct family report and plan review | Holds are unpleasant, encouraging slower individual steps; root MOVE-01 now precedes FP-UI1 | Routed to root; implementation/comfort still pending |
 | 2026-09-05 | All pending cards | `47bfff4`, Agent 01 active candidate excluded from acceptance | Planning-only cross-plan review | Roadmap ownership, concrete later execution plans, short family journeys and dependency return gates refined | No UI/art-budget/hardware/family approval inferred |
 | 2026-09-05 | 32 | UI handoff candidate at `47bfff4`; no zoom implementation | Direct Human request and read-only exploration/plan audit | Routed 4–7 tile framing with default 6 to future Plan 08; one-tile steps including 5 are the adopted UX proposal. Existing reveal rules and MOVE-01 remain intact; Plan 07B requalifies | Captured, triaged and routed; excluded from FP-UI1 |
+| 2026-09-05 | 45–48 | v0.22.0 runtime `68e303d`; V22-PERF-01 candidate excluded | Direct Human laptop/iPad/family feedback plus read-only source/art audit | Reduced effects/motion helped iPad but remained inadequate; three paces and Alex requested; Tessera field alpha and moving cage-rescue behavior confirmed in current consumers/tests | Captured, triaged and routed; no candidate/release closure inferred |
 
 ## 8. Closure and mop-up rule
 

@@ -1,5 +1,16 @@
 # Controls, Xbox Controller, and Steam Deck Plan
 
+**Human follow-up dependency, 2026-09-05:** before this plan executes,
+`V22-PLAY-01` will establish one shared three-mode Player-1 pace policy—**Chill,
+Regular and Zippy**—and stationary adjacent cage-rescue semantics. Consume that
+accepted policy for keyboard, board drag, ThumbPad, D-pad and stick rather than
+copying a fixed cadence or inventing controller-only speed. Pace is separate from
+Motion, Surface Quality, camera zoom and any later Courier flight preference;
+Zippy is the performance stress case. `ALT-P1-01` also establishes the selected
+lead-player seam: Ame remains default, while an approved implemented Alex must
+receive identical controller capability and focus access. This plan does not
+design Alex or make him a difficulty mode.
+
 **Latest Human continuation override, v0.22.0 feedback, 2026-09-05:**
 [V22-04/09](../reviews/2026-09-05-astra-v0220-review.md) supersede the old
 door-only exception and first/third-bump explanatory policies. This is a desired
@@ -15,13 +26,14 @@ rather than rebuilding or weakening it.
 
 **Latest Human-directed correction, 2026-09-05:** UI-03 advances the anchored bottom-right hybrid D-pad, legal tap/hold/drag input and cancellation. Big/Normal is removed permanently. PT32 remains a separate future 4–7 tile camera view preference, default 6 (two tiles closer/one farther). Preserve the new pad while implementing controllers, device hints and remaining control scope.
 
-**Current movement/layout contract for the next fresh task:** ordinary first,
+**Historical fixed-cadence baseline, superseded after V22-PLAY-01:** ordinary first,
 isolated-tap and repeated steps all use the shared `STEP_TRAVEL_MS = 160` in
 `src/movementControls.ts`. Input commits one legal cardinal move; the existing
 travel owner presents it smoothly and samples at the actual callback time,
 never a future scheduled deadline. A late callback may attempt one due move,
 then schedules from its actual time without catch-up. Preserve this measured
-contract until root accepts a deliberate change; gentle acceleration remains a
+contract until the reviewed three-pace predecessor lands; do not preserve 160 ms
+by copying it into the controller layer. Gentle acceleration remains a
 Human-permitted option, not a reason to restore the old first-step timing split.
 The board uses maximum useful layout space at the existing six-tile camera span.
 There is no Normal/Big state, toggle or Back layer. PT32's future 4/5/6/7 view

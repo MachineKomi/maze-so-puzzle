@@ -247,6 +247,18 @@ Meaningful pickup/rescue/Power/blocker/completion announcements are polite and a
 
 Motion preference key: `maze-so-puzzle-presentation-v1`, separate from progress-v5 and active-run-v3. Preference system|full|reduced resolves to full|reduced. Quality full|lite|static is separate, not a third motion preference. System changes resolve through matchMedia and html data attributes before paint. Reduced/static remove nonessential animation/transition; reset leaves preferences untouched. Storage failures retain usable current-session settings and display a warning.
 
+Movement pace is a separate comfort preference with exactly three player-facing
+choices: **Chill**, **Regular** and **Zippy**. Regular is the default; exact
+cadences remain a family-tuning decision, with Regular expected to be slightly
+slower than v0.22.0 and Zippy faster. The control belongs in the existing compact
+comfort/settings disclosure rather than becoming permanent maze chrome. It uses
+real text plus a clear selected state, is keyboard/touch/controller accessible,
+persists independently of progress, and survives Reset Progress. It must not be
+conflated with Motion or Surface Quality: pace controls legal-step presentation
+and held-repeat cadence, Motion controls nonessential animation, and Quality
+controls rendering cost. Every pace acknowledges a tap immediately and preserves
+identical tile, interaction, puzzle, step-count and solver outcomes.
+
 Sound has Mute/Unmute, Previous, Next, Shuffle and no Loop. It reads/subscribes to MusicTransportPort snapshots, invokes that port and its user-gesture start, never audio elements/history. Gameplay/menu contextual transport remains owned by the existing adapter. The narrow correction applies selected title URL even on same-context/fresh gesture, synchronizes mute on adapter replacement, and reuses createMazeMusicPicker's shuffled no-repeat maze bag across entries/returns/manual selection. Previous is disabled across its existing context boundary. Port signatures remain unchanged; music.ts is unchanged. Actual native media URL and displayed snapshot are tested; no crossfade, preload or Loop policy is added.
 
 Earned Book detail uses correct semantic art/name/description, on-demand presentation and normal focus restoration. Locked keepsakes expose only mystery/locked copy, not hidden sticker content. No free-placement sticker book. Story turns are local presentation state, never campaign progress; Advance/Skip/Escape cannot duplicate rewards or move Ame. Existing chapters retain their single authored turn; DEV rack proves three turns.

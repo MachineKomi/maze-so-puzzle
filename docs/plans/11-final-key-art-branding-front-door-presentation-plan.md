@@ -179,7 +179,8 @@ These are requirements, not prompts to reopen settled taste:
   rendering grammar;
 - turning all gameplay sprites into presentation art or filling a perceived
   catalogue quota;
-- adding an unapproved Alex/alternative Player-1 character, Courier, friend,
+- designing or adding the approved-future but not-yet-implemented Alex/alternative
+  Player-1 character, Courier, friend,
   enemy, location, feature, or release-platform claim;
 - copying the layout, logo, composition, or brand signature of a reference
   game; or
@@ -272,11 +273,11 @@ Build a final-canon availability ledger before composing anything:
 - Ponchi and Melty may appear only if Plan 10 shipped both, their originality and
   actual-size model-sheet gates passed, and the chosen composition truthfully
   represents optional couch co-op or the Garden.
-- An alternative Player-1 character—currently discussed as **Alex**—may appear
-  only if, by Plan 11, that exact character, name, model sheet, runtime role,
-  story relationship, and release scope have explicit Human approval and are
-  implemented. Otherwise Alex is absent from final art and copy; this plan does
-  not create or imply him.
+- **Alex is approved future product scope**, not merely an unapproved idea. He may
+  appear only if ALT-P1-01 has already delivered his Human-approved exact design,
+  name/model sheet, runtime selected-lead role, story relationship and release
+  scope. Otherwise Alex remains absent from final art and copy. Plan 11 consumes
+  and truthfully depicts an implemented Alex; it never designs or implements him.
 - Friends may be represented by a small emotionally coherent selection. Prefer
   final story/Garden relevance, silhouette variety, and composition rhythm over
   roster completeness.
@@ -633,7 +634,7 @@ duplicate final UI state, or mix archive cleanup into this checkpoint.
 | Risk | Prevention | Rollback |
 | --- | --- | --- |
 | Late polish destroys approved charm | Retain-first ledger; defect required; Human gates | Repoint the complete catalogue/front-door bundle to the accepted Plan-03 set |
-| Key art promises an unshipped cast or mode | Final-canon availability ledger; no speculative Alex/co-op/Garden | Remove the unshipped layer/copy and return to the last truthful composition |
+| Key art promises an unshipped cast or mode | Final-canon availability ledger; no depiction of Alex/co-op/Garden before its approved runtime scope exists | Remove the unshipped layer/copy and return to the last truthful composition |
 | Every character is forced into one noisy image | Curated emotional promise and explicit no-completeness rule | Restore the simpler retained composition |
 | A changed logo contains ambiguous or wrong letters | Exact spelling/delivery proof against the approved source, semantic heading and Human revision gate | Restore the approved v06 visual mark and exact live title |
 | Wide art fails 4:3 or compact screens | Protected regions, crop anchors, optical variants, real viewport proof | Select the last passing crop/variant or reserve the hero layer |

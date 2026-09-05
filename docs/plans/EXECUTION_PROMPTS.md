@@ -8,9 +8,11 @@ The v0.22.0 Human/Opus review is reconciled. Read the independent
 [Astra](../reviews/2026-09-05-astra-v0220-review.md) and
 [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
 [88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The current task is **GPT-5.6 Sol — HIGH** independently reviewing Astra's
-[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md) candidate. Runtime
-review is read-only; preserve the verdict in a documentation-only checkpoint.
+The current task is **GPT-6 Astra — HIGH** completing the narrow
+V22-PERF-01-R1 correctness return required by Sol's independent
+[candidate review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md).
+Preserve the performance implementation and change only the two returned input
+ownership defects plus focused evidence.
 Do not restart Agent 01, start Agent 04
 or automatically adopt Opus proposals. Preserve the praised desktop/iPad UI.
 Only one runtime writer; blocking device/family feedback and PT36 remain open.
@@ -63,12 +65,55 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. Sol — independent V22-PERF-01 candidate review
+## Current. Astra — V22-PERF-01-R1 correctness return
 
-The Human has issued the execution prompt below. Astra's candidate is on
-`codex/v22-perf-01-astra`; do not start a duplicate execution. Read the
-[candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md) for current
-checks, completed measurements and unresolved gates. The next turn is:
+Sol's review returned one P1 chained-presentation timing race and one P2 stale
+ThumbPad takeover state. Astra continues as sole runtime writer on the existing
+`codex/v22-perf-01-astra` candidate. The next turn is:
+
+```text
+# Astra:
+
+Continue on `codex/v22-perf-01-astra` at the exact pushed documentation
+checkpoint. Read `docs/JOINT_ORCHESTRATION_STATE.md`, the complete
+`docs/reviews/2026-09-05-sol-v22-perf01-candidate-review.md`, the candidate
+receipt and the V22-PERF-01 contract. Verify HEAD, branch, origin and a clean
+working tree before editing. You remain the sole runtime writer; Sol will perform
+a short independent diff/test review afterward.
+
+Make only this V22-PERF-01-R1 correctness return:
+
+1. Make the actual completion of the final phase in every chained
+   jump-to-battle/rescue/door presentation own movement unlock and eligible-held
+   resumption. A delayed handoff must not allow the old nominal aggregate timer
+   to unlock input while phase two is still active. Guard final completion with
+   the existing presentation/input generation so cancellation, hidden-page,
+   level/run change or a superseding presentation cannot resurrect input.
+2. On reverse source takeover away from ThumbPad, reset the component-owned
+   gesture, highlighted direction and pointer capture as well as App-level repeat
+   state. Preserve ordinary same-source holds and terminal release/cancel paths.
+3. Add deterministic coverage for a deliberately stalled real jump-to-rescue
+   handoff and reverse ThumbPad takeover. Retain healthy jump chains; simple
+   door/combat/rescue; reduced-motion timing; release/steer-during-presentation;
+   and no-catch-up behavior.
+
+Do not change performance optimizations, Full/Lite recipes, cadence or add the
+new Chill/Regular/Zippy preference. Do not change cage-rescue engine semantics,
+Tessera art, Alex, phone/Book UI, content, media, dependencies, save schemas or
+version. Do not repeat broad contaminated performance cohorts unless the narrow
+fix itself invalidates a recorded contract; run the focused input suites and the
+serial locked project/performance/desktop checks required by the existing brief.
+
+Update the candidate receipt/review response with exact evidence, commit and push
+the candidate branch, and report the new runtime and tip SHAs plus complete diff
+and tests. Do not merge to main, version, release, tag or deploy.
+```
+
+Then switch to **GPT-5.6 Sol — HIGH** for a short independent R1 diff-and-test
+review. Previously issued execution prompts below are history; do not start a
+duplicate run.
+
+### Completed Sol review prompt (history)
 
 ```text
 # Sol:
@@ -98,7 +143,7 @@ assertion. Specify the smallest further investigation or explicit preview gate;
 do not replay every previous test or broaden the implementation automatically.
 ```
 
-Previously issued execution prompt (history; do not start a duplicate run):
+### Completed Astra candidate prompt (history)
 
 ```text
 # Astra:
@@ -129,8 +174,7 @@ experiments, tests and remaining physical-device gates. If evidence does not
 support a safe improvement, stop honestly with the exact next isolation gate.
 ```
 
-Then switch to **GPT-5.6 Sol — HIGH** for independent candidate review. The
-historical numbered specialist prompts below are retained for provenance and
+The historical numbered specialist prompts below are retained for provenance and
 later plan execution; none is the current task.
 
 ## 1. Agent 07A — performance foundation and clean baseline only

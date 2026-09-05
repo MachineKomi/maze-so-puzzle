@@ -18,7 +18,15 @@
 
 ## 0. Executive implementation decision
 
-Maze so Puzzle will gain an optional two-player couch mode in which Player 1 remains Ame and owns the route, camera, Bag, guardians, rescues, exit, story, and shared menus. Player 2 chooses **Ponchi** or **Melty**, flies inside Ame's current camera, collects lost mail, marks points of interest with limited postal pings, carries one real maze pickup, delivers it or playfully keeps it away, and operates aerial mechanisms in a separate six-route cooperative campaign. The existing Solo Adventure remains the default, complete, intended puzzle experience.
+Maze so Puzzle will gain an optional two-player couch mode in which Player 1 is
+the selected ground lead—**Ame by default, or Alex only after ALT-P1-01 has been
+approved and implemented**—and owns the route, camera, Bag, guardians, rescues,
+exit, story, and shared menus. Player 2 chooses **Ponchi** or **Melty**, flies
+inside Player 1's current camera, collects lost mail, marks points of interest
+with limited postal pings, carries one real maze pickup, delivers it or playfully
+keeps it away, and operates aerial mechanisms in a separate six-route cooperative
+campaign. The existing Solo Adventure remains the default, complete, intended
+puzzle experience.
 
 The shared reward is a **Friend Garden** available in Solo or Duo. Delivered mail earns Friend Eggs; Solo players may also exchange earned Science Points for Eggs. Eggs disclose a bounded, non-monetized reward bag and can hatch rescued friend species without duplicates, fruit, toys, or Science. Ame and the Courier can hatch Eggs, feed and gently carry friends, jostle fruit from a tree, and play with three fixed toys. There are no needs, punishments, races, breeding, paid rewards, daily timers, or failure states.
 
@@ -62,6 +70,14 @@ Planning-era roster counts, catalogue IDs, and asset assumptions never override
 the final versioned Plan-09 content roster or current source. Where this plan
 specifies co-op/Garden behavior for that roster, adapt the behavior to stable
 final IDs rather than retaining a stale count.
+
+**Selected-lead and pace dependency, 2026-09-05:** consume ALT-P1-01's stable
+selected Player-1 identity and V22-PLAY-01/Plan-08's Chill/Regular/Zippy ground
+pace. Do not hard-code Ame into rules, persistence, camera ownership, role swap or
+copy where the semantic owner is Player 1; character-specific story lines may
+still name the actual selected lead. P1 cage rescue remains stationary at the
+adjacent origin tile. Courier flight speed is a separate P2 preference/tuning
+domain and must not overwrite or reuse P1's three ground-pace setting.
 
 **2026-09-05 v0.20.1 wishlist reconciliation:** consume the pending PT22
 designer-configurable, solvability-safe Mimic and richer defeat-reward contract,
@@ -434,7 +450,7 @@ On P2 disconnect, confirmed P2 **Leave**, or P1 **End Duo**, freeze at the next 
 
 Secure Satchel preserves run mail until normal victory, then processes all `carriedByCourier` and `droppedAt` objects in stable object-ID order through the location-independent canonical Ame pickup resolver. Every item on the Plan 10 portable allow-list must be valid through this recovery path, including a key taken from behind its own door. Each object transitions exactly once. An unexpected future/invalid object type is corrupt state: keep the game paused and require a validated run restart or an explicit migration repair. Never return such an item to an authored origin unless the ordinary recovery solver proves Ame can currently reach it.
 
-On P1 disconnect, Seat 2 gets authority only inside the constrained recovery surface: reconnect/reassign Ame, bind the remaining device to Ame and continue Solo through the same recovery, save and return home, or restart. P2 never silently inherits Ame, camera control, story control, or shared-menu authority.
+On P1 disconnect, Seat 2 gets authority only inside the constrained recovery surface: reconnect/reassign the selected lead, bind the remaining device to Player 1 and continue Solo through the same recovery, save and return home, or restart. P2 never silently inherits Player 1, camera control, story control, or shared-menu authority.
 
 Dedicated Duo routes never offer Continue Solo. A missing seat permits reconnect/reassign, reset current Duo room, or save and return to the Duo map.
 
@@ -609,7 +625,10 @@ Role swap is a transaction, not a token exchange. Freeze gameplay, return all he
 
 ### 9.4 Movement tuning and semantic actions
 
-P1 remains exact cardinal grid movement. Plan 10 adds `Interact` to the final semantic action set; it is used for Snatch, Garden interactions, and Duo ground mechanisms. Solo remains movement-driven unless a separately approved Solo interaction requires it.
+P1 remains exact cardinal grid movement and uses the accepted shared three-mode
+ground pace. Plan 10 adds `Interact` to the final semantic action set; it is used
+for Snatch, Garden interactions, and Duo ground mechanisms. Solo remains
+movement-driven unless a separately approved Solo interaction requires it.
 
 Initial P2 tuning targets for the greybox, subject to family test:
 
@@ -635,7 +654,7 @@ Controller P2 mapping:
 
 If P2 sends mutually exclusive cargo commands on one tick, Interact wins over Drop; Ping may coexist. P1 movement plus Interact first moves/resolves consequences, then tests the buffered Interact from the new Ame cell.
 
-Context targeting is pure, highlighted before confirmation, and stable by distance then semantic object ID. P1 priority is offered/snatchable cargo, then a Duo ground mechanism, then the current Garden target. P2 while holding prioritizes Offer to Ame, then a mechanism accepting that cargo; Drop remains a separate action. P2 while empty prioritizes an explicit aerial mechanism, then portable Take, then Garden interaction, with Postmark Boop last. Mail collection remains automatic and never steals Interact. Inside the Garden, an already held object's action wins, followed by Egg, friend, fruit, toy, and tree targets, using stable distance/ID ties. Tests cover every ambiguous overlap.
+Context targeting is pure, highlighted before confirmation, and stable by distance then semantic object ID. P1 priority is offered/snatchable cargo, then a Duo ground mechanism, then the current Garden target. P2 while holding prioritizes Offer to Player 1, then a mechanism accepting that cargo; Drop remains a separate action. P2 while empty prioritizes an explicit aerial mechanism, then portable Take, then Garden interaction, with Postmark Boop last. Mail collection remains automatic and never steals Interact. Inside the Garden, an already held object's action wins, followed by Egg, friend, fruit, toy, and tree targets, using stable distance/ID ties. Tests cover every ambiguous overlap.
 
 ### 9.5 Mouse flight and pointer ownership
 
@@ -1542,7 +1561,7 @@ Unless a dedicated-route row explicitly overrides it through its validated mecha
 | Existing element | Ordinary Special Delivery Duo | Special Delivery Routes | Friend Garden / Solo consequence |
 |---|---|---|---|
 | Ame movement | Existing exact grid transition | Existing grid transition plus validated ground mechanisms | Existing grid-style Garden movement; no campaign effect |
-| Camera boundary | P1 alone moves camera; P2 clamps to inset | Same; rooms may use authored framing | Same; Garden follows Ame |
+| Camera boundary | P1 alone moves camera; P2 clamps to inset | Same; rooms may use authored framing | Same; Garden follows the selected lead |
 | Normal walls | P2 flies through/over | Fly-through unless tagged postal ward/headwind | Garden boundaries clamp; dressing is non-destructive |
 | Closed doors | P2 flies through; cannot open door | Route definition may use a specific validated mechanism | No doors grant campaign state |
 | Fog/unrevealed cells | P2 cannot render, reveal, inspect, Ping into, or interact | Same | Garden uses normal scene visibility; no campaign reveal |
@@ -1568,7 +1587,7 @@ Unless a dedicated-route row explicitly overrides it through its validated mecha
 | Surprise Mazes | No Courier mail/Garden detour in v1; do not advertise Duo overlay until separately validated | Not part of route map | Garden still accessible from home |
 | Save/reload | Persist rules state, not hardware/flight; reclaim seats | Persist room checkpoint; requires two seats | Persist durable roster/economy, not transient AI/positions |
 | P2 disconnect | Pause; reconnect, Secure Satchel Solo, or restart | Reconnect, room reset, or save-return | Clean held object; Garden may continue Solo |
-| P1 disconnect | P2 gets constrained recovery only; may bind remaining input to Ame and continue Solo | Constrained recovery; never continue route Solo | Remaining player may claim Ame after safe cleanup |
+| P1 disconnect | P2 gets constrained recovery only; may bind remaining input to the selected lead and continue Solo | Constrained recovery; never continue route Solo | Remaining player may claim the selected lead after safe cleanup |
 | Role swap | Between mazes or from Garden, never mid-puzzle | Between routes/validated checkpoints only | Supported after all held objects are safely returned |
 
 ## 21. System ownership and expected file surface
