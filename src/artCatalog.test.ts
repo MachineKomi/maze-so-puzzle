@@ -349,6 +349,20 @@ describe("art catalog", () => {
     for (const pair of PORTAL_PAIR_IDS) expect(resolvePortalArt(pair)).toBe(PORTAL_ART[pair]);
   });
 
+  it("routes every Tessera field consumer through the repaired versioned derivative", () => {
+    const tessera = MGJRPG02_ART["tessera-dolphin"];
+    expect(tessera.src).toBe("/assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r02.webp");
+    expect(tessera.sourceRecordId).toBe("tessera-dolphin-field-alpha-recovery-r02-source");
+    expect(ANIMAL_ART["tessera-dolphin"]).toBe(tessera);
+    expect(ADDITIONAL_FRIEND_ART["tessera-dolphin"]).toBe(tessera);
+    expect(resolveAnimalArt("tessera-dolphin")).toBe(tessera);
+    expect(tessera.runtimeStatus).toBe("active");
+    expect(tessera.artVersion).toBe(1);
+    expect(tessera.profile).toBe("friend-field-256");
+    expect(tessera.geometry.pivot).toEqual([0.5, 0.84]);
+    expect(tessera.geometry.visibleBounds).toEqual([0.14453125, 0.078125, 0.7109375, 0.86328125]);
+  });
+
   it("activates additional friends while keeping later mechanics catalogued and dormant", () => {
     const dormantEntries = [
       ...Object.values(FUTURE_ENEMY_ART),

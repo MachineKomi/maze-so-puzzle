@@ -7,8 +7,8 @@ import { UI_TESSERA_PRESENTATION_CANDIDATE } from "../generated/uiTesseraPresent
 
 const presentationVariants: Readonly<Record<string, RuntimeArtVariant>> = {
   ...UI_PRESENTATION_CANDIDATES, ...UI_REWARD_PRESENTATION_CANDIDATES, ...UI_ACTOR_PRESENTATION_CANDIDATES,
-  // The source-reproduced r01 had inherited coral-alpha damage. Root reviewed
-  // r02 separately; its recovered fins replace only contextual presentation.
+  // Contextual Tessera keeps the separately approved 512px recovery. The field
+  // catalogue now carries its own registered 256px derivative from that master.
   ...UI_TESSERA_PRESENTATION_CANDIDATE,
 };
 

@@ -14,6 +14,8 @@ docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json text eol=crlf
 docs/source-assets/publication/ui01-*.json text eol=crlf
 docs/source-assets/publication/ui01-reward-derivative-authority.json text eol=lf
 docs/source-assets/records/*-ui01-presentation-candidate-r01-source.json text eol=crlf
+docs/source-assets/publication/tessera-field-alpha-hotfix-*.json text eol=lf
+docs/source-assets/records/tessera-dolphin-field-alpha-recovery-r02-source.json text eol=lf
 public/assets/fonts/* -text
 
 # Immutable FP-UI1 release attachments are verified against downloaded bytes.

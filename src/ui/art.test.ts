@@ -56,3 +56,13 @@ it("keeps earned reward optical delivery while supplying sharp 200px DPR2 detail
     expect(detail.geometry?.class).toBe("icon");
   }
 });
+
+it("uses repaired Tessera field pixels and retains the approved contextual presentation", () => {
+  const art = resolveUiArt("tessera-dolphin")!;
+  const repairedField = "/assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r02.webp";
+  const repairedPresentation = "/assets/mgjrpg-02/presentation/tessera-dolphin-v01-presentation-512-r02.webp";
+  expect(art.src).toBe(repairedField);
+  expect(selectArtRendition(art, "optical", 64, 1).src).toBe(repairedField);
+  expect(selectArtRendition(art, "field", 256, 1).src).toBe(repairedField);
+  expect(selectArtRendition(art, "presentation", 200, 2).src).toBe(repairedPresentation);
+});
