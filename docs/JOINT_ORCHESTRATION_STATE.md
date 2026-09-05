@@ -13,7 +13,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - Frozen v0.22.0 engineering disposition: reviewed, technically verified, committed, pushed and published. This does not describe acceptance of the later V22-PERF-01 candidate.
 - Human disposition: **POSITIVE, WITH OPEN CORRECTIONS**. Full v0.22.0 feedback and 51 cross-device images have now been independently reviewed by Astra and Sol. The Human reports a huge improvement and likes the desktop/iPad composition; sustained iPad performance, phone scaling and interrupted holds prevent full FP-UI1 acceptance. Lowering effects/movement settings on iPad helped but remained inadequate; laptop web and Tauri are broadly comparable and still not consistently buttery. No blanket defect closure or Amelia/family qualification is claimed.
 - v0.21.0 was Human-rejected despite earlier engineering passes. v0.20.1 is the prior comparison baseline, not a claim of universal device qualification.
-- Sol's independent [V22-PERF-01 candidate review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md) returned **REVISE BEFORE PROMOTION**. Astra's R1 corrects its delayed-chain unlock and stale ThumbPad takeover defects and returns production-browser evidence for independent re-review. Sol has not yet accepted R1 or its additional 100-byte candidate JS allocation. Full sustained performance remains unqualified. No merge, version, release or deployment is authorized yet.
+- Sol's independent [V22-PERF-01 R1 review](reviews/2026-09-05-sol-v22-perf01-r1-review.md) is **ACCEPT FOR v0.22.1 PREVIEW PROMOTION**. The delayed-chain unlock and stale ThumbPad takeover defects are closed; Sol independently passed all ten R1 browser cases, eight focused unit cases, static contracts and evidence hashes, and accepted the explicit 650→750-byte candidate allocation. Full sustained performance and physical-device success remain unqualified. Astra now owns a bounded clean promotion/publication transaction; this review itself did not merge, version, release or deploy.
 - This document's handoff commit is discoverable with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`; the transfer capsule gives its exact SHA. Intake HEAD above is deliberately not the future commit containing this file.
 - On arrival, inspect `git status --short --branch`, HEAD, remote and active ownership. Do not infer a clean tree from this dated receipt.
 
@@ -37,14 +37,14 @@ The transfer push may create a newer documentation deployment/CI run. Check thos
 
 ## 3. Active work and next decision gate
 
-**Current task: GPT-5.6 Sol — HIGH independently reviews V22-PERF-01-R1
-on `codex/v22-perf-01-astra`.** Read the original
-[Sol review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md),
-[R1 response](reviews/2026-09-05-v22-perf01-r1-response.md) and exact return diff.
-Review runtime read-only; verify actual final-phase ownership, cancellation,
-same-source/reverse-takeover behavior, regression evidence and the bounded
-650-to-750-byte allocation. Preserve a documentation-only verdict and next action;
-do not merge, version, release, deploy or begin another runtime slice.
+**Current task: GPT-6 Astra — HIGH performs the accepted V22-PERF-01-R1
+v0.22.1 preview promotion/publication.** Read Sol's
+[acceptance](reviews/2026-09-05-sol-v22-perf01-r1-review.md) and execute the exact
+current prompt in [EXECUTION_PROMPTS](plans/EXECUTION_PROMPTS.md). Use a clean
+isolated checkout and retain the accepted runtime unchanged apart from coordinated
+version metadata. Publish only after clean-source, locked browser/native/static
+checks pass; record immutable artifacts and public verification. Do not begin
+pace/rescue, Tessera, phone/Book/UI, Alex, Agent 04 or deeper performance work.
 
 The [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) records the
 75-pass/two-unavailable-fixture browser matrix plus two final Lite supplements,
@@ -71,10 +71,9 @@ Physical iPad, Tauri timing and family gates cannot be closed by desktop emulati
 - It does **not** change phone/Book layout, FOV, cadence, terrain architecture,
   persistence durability, content, art/media, controller architecture or broad
   effects. Full quality preserves the praised v0.22.0 visuals.
-- Sol found one P1 timing race and one P2 pad-reset gap. Astra has returned R1;
-  Sol now performs the short diff/test review. Only an accepted checkpoint is
-  promoted to `main`; then CI/Vercel and a clearly labelled v0.22.1 web/Windows
-  performance-input preview are prepared for the Human's affected-iPad test.
+- Sol found one P1 timing race and one P2 pad-reset gap; R1 closes both and is
+  accepted for promotion. Astra now prepares CI/Vercel and a clearly labelled
+  v0.22.1 web/Windows performance-input preview for the Human's affected-iPad test.
 - If sustained performance remains poor, Astra owns one deeper isolated
   renderer/filter/follower/resource tranche before Sol starts responsive UI.
   Otherwise Sol owns [V22-UI-01](plans/V22-UI-01-short-height-and-reward.md)
@@ -113,7 +112,7 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. Sol reviews the returned V22-PERF-01-R1. Publish only the accepted v0.22.1 performance/input preview and obtain the affected-iPad Full/Lite/Motion evidence. If green, perform the small Tessera field-alpha hotfix and V22-PLAY-01 pace/stationary-rescue slice as independently reviewable seams, then execute V22-UI-01 for short-height/Book/pad/pickup/victory corrections and obtain the focused family retest. These slices bring bounded 07/08/01/interaction work forward without rewriting the programme. Resolve root PT36 attachment preflight before 04.
+1. Astra publishes the accepted v0.22.1 performance/input preview, then obtain the affected-iPad Full/Lite/Motion evidence. If green, perform the small Tessera field-alpha hotfix and V22-PLAY-01 pace/stationary-rescue slice as independently reviewable seams, then execute V22-UI-01 for short-height/Book/pad/pickup/victory corrections and obtain the focused family retest. These slices bring bounded 07/08/01/interaction work forward without rewriting the programme. Resolve root PT36 attachment preflight before 04.
 2. **04** lighting, wall depth, terrain topology/regions.
 3. **02** VFX, effect lifecycle, feedback and reward showers; then **remaining UI-02** polish. UI-03 already delivered Book/tab/detail/focus/victory foundations; reconcile residual work rather than rebuilding them.
 4. **ALT-P1-01** Human-gated Alex model/canon and equal optional lead-player integration.
@@ -185,5 +184,5 @@ Use an isolated checkout for historical source; never reset shared main/user wor
 - The Human governs vision, final family/visual/play-feel acceptance and material scope choices. The models lead routine implementation and tell the Human the next useful action. Claude is an occasional bounded independent reviewer, not an implementation resource or mandatory reviewer of every output.
 - Before a handoff, update this state, owned backlog/evidence and the joint ledger, inspect exact diffs, run proportionate checks, commit/push a meaningful reviewed checkpoint and verify remote agreement. Preserve unrelated work and immutable release/source-art records.
 - Use existing harnesses; do not weaken tests to hide failures. Run expensive browser/art/solver/build work serially on this memory-constrained host and distinguish host contention from product regressions.
-- Responses identify the active model (`# Astra:` or `# Sol:`) and end with a prominent next-model/reasoning handoff. The next owner is **Astra — HIGH** for the narrow V22-PERF-01-R1 correctness return specified in the Sol review. Do not create/resume historical specialist tasks.
+- Responses identify the active model (`# Astra:` or `# Sol:`) and end with a prominent next-model/reasoning handoff. The next owner is **Astra — HIGH** for the accepted R1's bounded v0.22.1 promotion/publication prompt. Do not create/resume historical specialist tasks.
 - The independent Human/Opus review is complete. No runtime or Agent 04 launch occurred during either documentation turn. A fresh task can resume from this file without reconstructing the conversation.

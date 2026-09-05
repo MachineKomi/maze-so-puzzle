@@ -1,5 +1,11 @@
 # Astra response — V22-PERF-01-R1
 
+> Post-review status: Sol independently accepted this R1 for bounded v0.22.1
+> performance/input preview promotion on 5 September 2026. See
+> [Sol's R1 review](2026-09-05-sol-v22-perf01-r1-review.md). Physical-device and
+> sustained-performance qualification remain open; this response is preserved as
+> Astra's implementation/evidence return rather than rewritten after acceptance.
+
 Date: 2026-09-05. Owner: GPT-6 Astra; independent reviewer: GPT-5.6 Sol.
 Branch: `codex/v22-perf-01-astra`.
 Starting clean, pushed checkpoint: `67eb26f41a019102e4b290f5b06d8212779941a1`.

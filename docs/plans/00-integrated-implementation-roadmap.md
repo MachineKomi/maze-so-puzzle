@@ -9,9 +9,10 @@ is complete. Read the independent [Astra](../reviews/2026-09-05-astra-v0220-revi
 and [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments plus the
 [reconciled 88-row ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
 The active candidate slice is
-[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md): Sol returned one
-narrow correctness revision; Astra has returned [R1](../reviews/2026-09-05-v22-perf01-r1-response.md)
-for a short independent Sol re-review.
+[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md): Astra's narrow
+[R1](../reviews/2026-09-05-v22-perf01-r1-response.md) closes Sol's two returned
+input defects and is now [accepted](../reviews/2026-09-05-sol-v22-perf01-r1-review.md)
+for a bounded v0.22.1 preview promotion.
 It precedes affected-iPad qualification, the bounded Dolphin/pace/rescue work,
 and Sol-owned phone/Book/pad/pickup/victory refinement, while
 preserving the praised desktop/iPad UI. Claude's broad architecture, 9–15 FOV,
@@ -22,10 +23,11 @@ V22-PERF-01's [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md)
 records focused input/static checks and completed, report-only performance
 comparisons on `codex/v22-perf-01-astra`. An unexplained recovery timeout, mixed
 Full sustained timing and missing task attribution remain open. Sol's
-[independent review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md)
-requires actual final-phase unlock ownership and complete ThumbPad reset before
-promotion; no merge, v0.22.1 release or successor plan is authorized merely by
-that branch existing.
+[original review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md)
+required actual final-phase unlock ownership and complete ThumbPad reset; the R1
+review accepts both for promotion. No successor feature plan is authorized merely
+by the candidate existing; clean v0.22.1 publication and affected-iPad evidence
+remain the current gate.
 
 Status: manager-reviewed execution authority
 

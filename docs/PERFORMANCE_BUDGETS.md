@@ -22,10 +22,11 @@ Candidate checkpoint: V22-PERF-01-R1 has 153,261 gzip9 JS / 23,512 gzip9 CSS /
 under a 650-byte allocation. The two input-ownership corrections add 143 bytes,
 exceeding that ceiling by 54. Astra explicitly extends the candidate allocation
 to 750 bytes: JS ceiling 153,307, 46 bytes remaining; CSS/public ceilings are
-unchanged. Sol must review the R1 increment before promotion; it is not device
+unchanged. Sol's [independent R1 review](reviews/2026-09-05-sol-v22-perf01-r1-review.md)
+accepts the bounded correctness increment for preview promotion; it is not device
 or performance acceptance. See the [R1 response](reviews/2026-09-05-v22-perf01-r1-response.md).
-This is an execution-manager allocation pending Sol's candidate review, not
-Human visual acceptance or release approval. The measured receipt is
+This is a candidate-specific allocation, not Human visual acceptance or a broader
+release-growth allowance. The measured receipt is
 [V22-PERF-01 candidate](reviews/2026-09-05-v22-perf01-candidate.md).
 
 ## Root MOVE-01 allocation — 2026-09-05

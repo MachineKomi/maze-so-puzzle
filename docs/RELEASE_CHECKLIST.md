@@ -57,9 +57,12 @@ focused Human/device feedback and root PT36 preflight.
   was published on 2026-09-05 at 10:51:24 UTC. All four unauthenticated public
   downloads matched length and SHA-256 at 10:52:59.744 UTC; see the
   [public verification receipt](../release/FP-UI1-v0.22.0-release-verification.json).
-- [ ] Complete and independently review V22-PERF-01, plus any required second
-  renderer-isolation tranche; obtain focused affected-iPad performance/input
-  evidence rather than inferring success from desktop emulation.
+- [x] Complete and independently review V22-PERF-01-R1 input correctness. Sol's
+  exact-source review accepts runtime `91678d1` and its bounded allocation for a
+  v0.22.1 preview after ten independent browser and eight focused unit passes.
+- [ ] Publish and verify the exact v0.22.1 web/portable performance-input preview,
+  then obtain affected-iPad Full/Lite/Motion evidence. A second renderer-isolation
+  tranche remains conditional on that result; desktop emulation cannot close it.
 - [ ] Complete and independently review V22-UI-01 after the performance gate;
   obtain focused desktop/iPad/phone fit and reward-flow feedback.
 - [ ] Obtain the remaining family/device feedback. Only Human acceptance of those

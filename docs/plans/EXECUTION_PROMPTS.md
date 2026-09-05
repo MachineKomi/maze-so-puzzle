@@ -8,11 +8,13 @@ The v0.22.0 Human/Opus review is reconciled. Read the independent
 [Astra](../reviews/2026-09-05-astra-v0220-review.md) and
 [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
 [88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The current task is **GPT-5.6 Sol — HIGH** independently reviewing Astra's narrow
-V22-PERF-01-R1 correctness return required by Sol's original
-[candidate review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md).
-Read the [R1 response](../reviews/2026-09-05-v22-perf01-r1-response.md).
-Runtime is read-only for this review; preserve a documentation-only verdict.
+The current task is **GPT-6 Astra — HIGH** promoting and publishing the
+independently accepted V22-PERF-01-R1 as a tightly bounded v0.22.1
+performance/input preview. Read Sol's
+[R1 acceptance](../reviews/2026-09-05-sol-v22-perf01-r1-review.md) and the
+[R1 response](../reviews/2026-09-05-v22-perf01-r1-response.md).
+Use a clean isolated checkout and preserve the accepted runtime except for
+coordinated version metadata and release evidence.
 Do not restart Agent 01, start Agent 04
 or automatically adopt Opus proposals. Preserve the praised desktop/iPad UI.
 Only one runtime writer; blocking device/family feedback and PT36 remain open.
@@ -65,7 +67,88 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. Sol — V22-PERF-01-R1 independent review
+## Current. Astra — v0.22.1 V22-PERF1 preview publication
+
+```text
+# Astra:
+
+Publish the independently accepted V22-PERF-01-R1 as the bounded v0.22.1
+performance/input preview. Read `docs/JOINT_ORCHESTRATION_STATE.md`,
+`docs/reviews/2026-09-05-sol-v22-perf01-r1-review.md`, the R1 response/evidence,
+V22-PERF-01 contract, release checklist and family-preview packaging contract.
+
+First verify the exact pushed review tip, candidate branch, origin and remote
+main. The accepted runtime is
+`91678d1a7f97055dc2f167f8a3e7106226817306`; the later Sol handoff must be
+documentation-only. Do all release work in a fresh isolated branch/worktree from
+the accepted pushed history with `npm ci` and locked Cargo. The current working
+directory's ignored Playwright junctions are not release inputs. If remote main
+is no longer the recorded ancestor or any clean-source/hash premise fails, stop
+and reconcile rather than overwriting another writer.
+
+This transaction may:
+
+1. Advance version metadata coherently from 0.22.0 to 0.22.1 in `package.json`,
+   `package-lock.json`, `src/ui/version.ts`, `src-tauri/Cargo.toml`, the root
+   package row in `src-tauri/Cargo.lock`, and `src-tauri/tauri.conf.json`.
+   Preserve `com.ame.mazesopuzzle.preview.fpui1` so the intended comparison can
+   resume the existing preview profile. Do not change save schemas or content.
+2. Commit the versioned runtime separately, record its full SHA, then build and
+   validate from an exact clean checkout of that SHA. Apart from those version
+   fields, it must contain byte-for-byte R1 runtime source. Do not optimize,
+   refactor or add Chill/Regular/Zippy, stationary rescue, Tessera, Alex,
+   phone/Book/victory work, FOV, lighting/VFX, dependencies or assets.
+3. Fast-forward `main` only after all local locked gates pass. Verify exact-source
+   GitHub CI and the Vercel deployment; do not infer deployment identity from a
+   successful push. Compare canonical HTML/JS/CSS and the displayed v0.22.1 with
+   the clean local build, then run the focused normal saved-run/input journeys.
+4. Build one immutable unsigned x64 Windows portable from that runtime SHA using
+   the proven no-installer family-preview workflow. Name it
+   `Maze-so-Puzzle-0.22.1-V22-PERF1-<sha7>-locked-portable.exe`. Verify PE/file/
+   product version, source/stage/final byte identity, SHA-256, responsive launch,
+   Title→Home→ordinary saved maze, held movement, a successful interaction, close/
+   reopen/resume, and the 960×540 minimum. Keep earlier binaries untouched. Do
+   not emit an installer unless a concrete blocker makes it necessary.
+5. Create immutable `V22-PERF1-v0.22.1-manifest.json`, `PLAYTEST.md` and
+   `SHA256SUMS.txt`; add a later publication receipt rather than rewriting a
+   frozen pre-upload manifest. Record tool versions, exact commits, bytes/hashes,
+   static budgets, tests, CI/Vercel/native evidence, rejected attempts and every
+   remaining qualification boundary. Commit/push the documentation separately.
+6. Tag the exact versioned runtime SHA `v0.22.1`, publish a GitHub **prerelease**
+   with only the locked portable, manifest, playtest note and checksum file, then
+   independently download all four public assets and verify bytes/SHA-256/tag.
+   Confirm local main, origin/main and all intended documentation are backed up.
+
+Required gates include the serial full project/build check, `npm run perf:check`,
+scenario fixtures, full production input suite, unchanged shared browser cohort,
+locked desktop compile, production dependency audit and `git diff --check`.
+Do not repeat broad contaminated performance cohorts or claim the affected iPad
+is fixed. Preserve Full visuals, truthful Lite behavior, the two unavailable
+authored jump-door/combat fixture skips and all original timeout/tail/attribution
+limits. A failed gate produces an honest non-publication report, not a weakened
+threshold or a renamed pass.
+
+The playtest note must make this comparison easy and short. Ask the Human to use
+the affected iPad and the same large 23×23 ordinary maze with approximately five
+followers, recording iPad model/iPadOS/browser or PWA, charging and Low Power
+Mode, duration/maze transitions and responsiveness for: (A) Full quality + Full
+motion fresh and after sustained play, (B) Lite + Full, and (C) Lite + Reduced.
+Also ask them to hold/steer/release through door, battle, rescue and jump where
+encountered, and try pad→keyboard/mouse takeover on desktop. Say plainly that
+v0.22.1 is a performance/input preview—not the phone/Book/victory, pace, rescue or
+Tessera update—and that better is not enough: report whether each mode feels
+responsive and smooth.
+
+After successful publication, update joint state, roadmap and release checklist
+with exact public evidence. Do not begin the next runtime slice in this turn.
+Report the canonical web URL, GitHub release/portable link, runtime/release/docs
+SHAs, complete changed files, verification results and honest open gates. The next
+decision comes from the Human's affected-iPad result: green routes to
+ART-HOTFIX-01 then V22-PLAY-01; continued Lite+Reduced stutter routes to the
+already-scoped V22-PERF-02 isolation. Agent 04 and V22-UI-01 remain held.
+```
+
+### Completed Sol R1 review prompt (history)
 
 ```text
 # Sol:
