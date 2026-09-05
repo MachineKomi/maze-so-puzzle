@@ -12,6 +12,13 @@ using the pure orthogonal `TileTraveller` in `src/tileTravel.ts`. It writes CSS
 `translate` through refs, caches ResizeObserver content geometry and exposes a
 rendered scene snapshot to pointer/effect consumers; it never writes engine or
 save state. Sprite poses keep `transform`. Camera clamp/FOV remain unchanged.
+PERF-02A fixes the full-world layout origin at `0%,0%`; this owner paints the
+absolute sampled camera translation as percentages of the full-world box, so
+layout resizes cannot temporarily reuse stale world-pixel offsets. Actor/replacement/notice planes still use
+their camera-relative compensation; follower art still inherits the world plane.
+First-mount layout-effect paint and resize/Static settling establish the crop.
+This removes per-step world layout rebasing, not the potentially expensive moving
+surface itself. Physical iPad efficacy remains a separate test.
 The V22-PERF-01 candidate caches scene node bindings by run, follower identities
 and the explicit presentation/notice binding key; unrelated React commits do not
 rescan the board. Coordinate-only touch guides write through one local DOM ref,

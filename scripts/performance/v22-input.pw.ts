@@ -5,6 +5,7 @@ import { resolve } from "node:path";
 import { tmpdir } from "node:os";
 import { createHash } from "node:crypto";
 import { movePlayer } from "../../src/game/engine";
+import { getCameraWindow } from "../../src/game/exploration";
 import { CURATED_LEVELS } from "../../src/game/levels";
 import { advanceFollowerProcession, createFollowerProcession, followerTargets } from "../../src/game/followerTrail";
 import { DIRECTIONS, DIRECTION_DELTAS, type Direction, type GameState } from "../../src/game/types";
@@ -604,21 +605,40 @@ for (const kind of SUCCESS_EVENTS) {
         const world = board.querySelector<HTMLElement>(".camera-world")!;
         const player = board.querySelector<HTMLElement>(".player-layer")!;
         const cols = Number((board as HTMLElement).style.getPropertyValue("--grid-size"));
-        const camera = { x: -parseFloat(world.style.left) * cols / 100, y: -parseFloat(world.style.top) * cols / 100 };
-        const translation = (node: HTMLElement) => (node.style.translate || "0px 0px").split(" ").map(value => parseFloat(value) || 0);
+        const translation = (node: HTMLElement) => {
+          // CSSOM may omit a zero Y component ("0px" means "0px 0px").
+          const values = (node.style.translate || "0px").split(" ");
+          return [parseFloat(values[0]!) || 0, parseFloat(values[1] ?? "0") || 0];
+        };
+        const cellX = board.clientWidth / cols, cellY = board.clientHeight / cols;
+        const worldTranslation = (world.style.translate || "0px").split(" ");
+        const worldTiles = (axis: number, size: number, cell: number) => {
+          const value = worldTranslation[axis] ?? "0px";
+          return parseFloat(value) * (value.endsWith("%") ? size / 100 : 1 / cell);
+        };
+        const playerTranslation = translation(player);
+        // Measure the composed offset, not the old left/top-only implementation.
+        const camera = { x: -parseFloat(world.style.left) * cols / 100 - worldTiles(0, grid.width, cellX),
+          y: -parseFloat(world.style.top) * cols / 100 - worldTiles(1, grid.height, cellY) };
         return {
           camera,
-          player: { x: parseFloat(player.style.left) * cols / 100 + camera.x, y: parseFloat(player.style.top) * cols / 100 + camera.y },
+          worldOrigin: { left: world.style.left, top: world.style.top },
+          player: { x: parseFloat(player.style.left) * cols / 100 + camera.x + playerTranslation[0]! / cellX,
+            y: parseFloat(player.style.top) * cols / 100 + camera.y + playerTranslation[1]! / cellY },
           followers: [...board.querySelectorAll<HTMLElement>("[data-follower-id]")].map(node => ({
             id: node.dataset.followerId!, point: { x: parseFloat(node.style.left) * grid.width / 100, y: parseFloat(node.style.top) * grid.height / 100 },
           })),
-          translations: [world, player, ...board.querySelectorAll<HTMLElement>("[data-follower-id]")].map(translation),
+          translations: [player, ...board.querySelectorAll<HTMLElement>("[data-follower-id]")].map(translation),
         };
       }, { width: fixture.level.width, height: fixture.level.height });
       // Browser CSSOM serializes percentage values to finite significant digits.
       // 0.0001 tile is below 0.02px here; game coordinates remain exact integers.
       expect(Math.abs(actual.player.x - state.position.x)).toBeLessThanOrEqual(.0001);
       expect(Math.abs(actual.player.y - state.position.y)).toBeLessThanOrEqual(.0001);
+      const camera = getCameraWindow(fixture.level, state.position);
+      expect(Math.abs(actual.camera.x - camera.left)).toBeLessThanOrEqual(.0001);
+      expect(Math.abs(actual.camera.y - camera.top)).toBeLessThanOrEqual(.0001);
+      expect(actual.worldOrigin).toEqual({ left: "0%", top: "0%" });
       const expected = followerTargets(procession);
       expect(actual.followers.map(follower => follower.id)).toEqual(expected.map(follower => follower.id));
       for (let index = 0; index < expected.length; index++) {

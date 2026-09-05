@@ -2,6 +2,7 @@ import { useCallback, useLayoutEffect, useRef, type RefObject } from "react";
 import type { CameraWindow, GridSize } from "../../game/exploration";
 import type { Point } from "../../game/types";
 import { TileTraveller, travelCamera } from "../../tileTravel";
+import { cameraWorldTranslation } from "../../cameraMotion";
 
 export interface SceneTravelSnapshot {
   readonly position: Point;
@@ -63,7 +64,9 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     const dx=(b.input.camera.left-camera.left)*cellX;
     const dy=(b.input.camera.top-camera.top)*cellY;
     const translate=(node:HTMLElement,x:number,y:number)=>{node.style.translate=`${x.toFixed(5)}px ${y.toFixed(5)}px`;};
-    translate(b.world,dx,dy);
+    // Percentages use the full-world box, so even pre-ResizeObserver layout
+    // changes keep the crop correct. Actors/anchors still need the pixel delta.
+    b.world.style.translate=cameraWorldTranslation(b.input.grid,camera);
     translate(b.player,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     if(b.replacement) translate(b.replacement,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     for(const node of b.anchors) translate(node,dx,dy);

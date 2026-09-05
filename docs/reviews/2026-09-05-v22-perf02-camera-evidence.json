@@ -1,0 +1,237 @@
+{
+  "schema": "maze-camera-experiment-evidence/v1",
+  "at": "2026-09-05T22:38:39.863Z",
+  "sourceBase": "05c8da441f9fb4a42692bd5485204c3148e7a321",
+  "runtimeDiffSha256": "fc7da198eda769bd47024060be1bdac2519a151cfde0edff3232e1a15ab0561c",
+  "classification": "candidate v0.22.2; desktop functional geometry and report-only timing; not iPad efficacy",
+  "tools": {
+    "node": "v24.13.1",
+    "platform": "win32"
+  },
+  "sourceFiles": [
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/src/cameraMotion.ts",
+      "bytes": 1382,
+      "sha256": "4f432b58694282515a5677c1c50a7979a00bd45a70ae6a186ee38f169a39ac73"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/src/ui/game/useSceneTravel.ts",
+      "bytes": 8469,
+      "sha256": "bddd28df83934956053740fdd8030320a3b0a97e7ad95207ad53eef0bdf0d3d6"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/src/cameraMotion.test.ts",
+      "bytes": 3241,
+      "sha256": "84763914e9db2dfec0e8712b023f9c665cfac239ce3103e96c964837a3250aa1"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/scripts/performance/v22-input.pw.ts",
+      "bytes": 42644,
+      "sha256": "c3cf100a6bdaeaa850bcd10969b2ccb4bedc10203f158a3965b1ea29db9edff2"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/src/ui/version.ts",
+      "bytes": 116,
+      "sha256": "fd0e804a22a85c3e57103c899111d70d93cbb1789809593f2877c405655f0d12"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/package.json",
+      "bytes": 3031,
+      "sha256": "99bf4a6d3af211809a895bd365e5e6f59c45db73617fbf9842e5daf554e8bac4"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/package-lock.json",
+      "bytes": 63378,
+      "sha256": "f6901271d6346caa1ea944d2eebfb655be21eeab2d59a0ebe17b3503db0fb8d8"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/src-tauri/Cargo.toml",
+      "bytes": 425,
+      "sha256": "44f113269730fc0d6442b2384a46cb2a1a74651aeac4222fe0e293f14ff2d3c4"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/src-tauri/Cargo.lock",
+      "bytes": 114664,
+      "sha256": "4a308766ccc851c939fb5e2958f85128cbf969d769e5f60d4f04d763b28a73f1"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/src-tauri/tauri.conf.json",
+      "bytes": 1638,
+      "sha256": "ebdd3faf391866fa6b7b4c5b60001c9a39e6277476a5cd54648e924399874299"
+    }
+  ],
+  "entries": [
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/dist/index.html",
+      "bytes": 1090,
+      "sha256": "c05bf6d1fa9461dd0e19a59c5990db016d72c06b3e8b8e0e408dde1bf5f82b37"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/dist/assets/index-Crk0m1JT.js",
+      "bytes": 563765,
+      "sha256": "22507ba86f72b08ce949e8b300d68de9f47845b6e9d7fe6580d2d473573c6965"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-v22-perf02-camera-origin/dist/assets/index-B5gBig9q.css",
+      "bytes": 116102,
+      "sha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1"
+    }
+  ],
+  "build": {
+    "schema": "maze-performance-build-provenance/v1",
+    "generatedAtUtc": "2026-09-05T22:32:24.023Z",
+    "commit": "05c8da441f9fb4a42692bd5485204c3148e7a321",
+    "runtimeInputsSha256": "ff09c518255224aba88c071408cc3b759c4dfc477e57f7df5be2cfcee0f268fd",
+    "distFingerprintSha256": "90f84853b9d983b092ac1ff6bf613e58f7004600173c1fa55d4308e503bc40b7",
+    "buildCommand": "npm run build"
+  },
+  "artifacts": [
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/baseline-geometry-r2.json",
+      "bytes": 32391,
+      "sha256": "298f076d2f7cf17886932f775a2985b98c88a6c7af32a05000987d5dc95c40d8"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-geometry-r2.json",
+      "bytes": 32162,
+      "sha256": "e5bae895bcf4051851b600dae8312e7feaae34107d886dc37e13ff141dfd2889"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/baseline-scroll1.json",
+      "bytes": 6015,
+      "sha256": "695d8091bf2c52ea3277fcbc2020657ee5088aff263533d88bfcd165e0955328"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-scroll1.json",
+      "bytes": 6079,
+      "sha256": "6254d0a4f50cde6353624c4c7185342290f9b9b7f883af75766c28743e1ec4b4"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/visual/summary.json",
+      "bytes": 123058,
+      "sha256": "04422b9a7e435c4e8500714230eb3732bf6dd0360e94577af626dc17371d1794"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/input/playwright-results.json",
+      "bytes": 152115,
+      "sha256": "0a357db6467b6ed65f12125a503d1a51a596180749eba4fda0b20f27512fc50c"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/input-geometry-r2/playwright-results.json",
+      "bytes": 23176,
+      "sha256": "dd2bffa3479a41bec0ebbf2c5e2cd50d0d80515c309aecdcbe224aae0398ca05"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-percent-mount.json",
+      "bytes": 31759,
+      "sha256": "6aa5769b4aa08a3a035642a78fc582b019709dd6808d1631eab4624698b98343"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-percent-geometry.json",
+      "bytes": 31698,
+      "sha256": "9833dfb006dc636775ea64b586660ae2142688d7ce516665049c14efe1cedb0c"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-percent-scroll.json",
+      "bytes": 5982,
+      "sha256": "a612f7d1efe18b9abcd04d899b0d7164b166a5facaea25838319962e8269c94f"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/input-percent/playwright-results.json",
+      "bytes": 45717,
+      "sha256": "384afa8f7c72c05f14ea6ab49d64543dd0e2d14fcf7c047cf69141728a8d66ed"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/input-percent-hidden-r2/playwright-results.json",
+      "bytes": 3858,
+      "sha256": "f32da40d75a6a59da8ebf0c249fdb7a657661cd379f03eaaa8d906b058711e24"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/first-paint/summary.json",
+      "bytes": 75537,
+      "sha256": "18f79b0d78878b9a68b469ecd90d48b6904a8634b58932382a81072808854ec9"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/geometry-probe.js",
+      "bytes": 3583,
+      "sha256": "7c72f0a86a149ea0c6b9759fc2dddd0c23a547c1f941f615019a771bcf20ef42"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/geometry-percent-probe.js",
+      "bytes": 3882,
+      "sha256": "f1f6f98ce2454f4e342c737e9cf4db43a2190663dffb9f1ce7c2d63d4a810c45"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/scroll-probe.js",
+      "bytes": 2459,
+      "sha256": "0f11dcc0e87e8001ce13b75e0c0e59dda5f0792473afc4439029d12e69217e4e"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/mount-probe.js",
+      "bytes": 5665,
+      "sha256": "8f9a94d432039b4c5e25297eb0cb33e1472a02334b1c140d05964b432f4430e0"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/first-paint.mjs",
+      "bytes": 5730,
+      "sha256": "a4fc1616cac6f4bbea8a70ef7799c55c480c21014b5a9603e7f9a2ba499f6fe2"
+    }
+  ],
+  "input": {
+    "preliminary": {
+      "startTime": "2026-09-05T22:17:23.895Z",
+      "duration": 375110.902,
+      "expected": 82,
+      "skipped": 2,
+      "unexpected": 5,
+      "flaky": 0
+    },
+    "geometryCorrected": {
+      "startTime": "2026-09-05T22:24:07.859Z",
+      "duration": 42508.695999999996,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "finalTargeted": {
+      "startTime": "2026-09-05T22:34:14.584Z",
+      "duration": 154279.413,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "isolatedClockRetry": {
+      "startTime": "2026-09-05T22:37:27.033Z",
+      "duration": 7431.567,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "finalGeometry": {
+    "movingSamples": 76,
+    "violations": 0,
+    "mountSamples": 96,
+    "mountViolations": 0
+  },
+  "finalScroll": {
+    "elapsedMs": 4451,
+    "layoutChanges": 0,
+    "styleMutations": 213,
+    "delta": {
+      "LayoutCount": 285,
+      "RecalcStyleCount": 345,
+      "LayoutDuration": 0.041246000000000005,
+      "RecalcStyleDuration": 0.252617,
+      "ScriptDuration": 0.183931,
+      "TaskDuration": 1.452004
+    },
+    "p50": 16.69999998807907,
+    "p95": 20.099999964237213,
+    "p99": 23.30000001192093,
+    "above50ms": 0
+  }
+}
