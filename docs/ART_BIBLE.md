@@ -646,6 +646,13 @@ may guide Warrior Skeleton's bone grammar only.
 - Lava: coral/orange plus directional S-flow and bright cores.
 - Poison: violet plus spot/bubble pattern and a non-green secondary cue.
 - Hole: near-plum void, broken radial rim, high-value inner edge.
+- Latest Human direction (2026-09-05, PT49) requests a cleaner replacement:
+  broad simple rim/inner wall and plum depth, restrained material-coloured edges,
+  fewer rocky microdetails. Neighbouring holes become one connected ditch with
+  exposed-edge rims only. V22-HOLE-01 owns the bounded new source/derivative set
+  and Human review; the current v04 remains runtime/rollback authority meanwhile.
+  Cardinal isolated/end/straight/elbow/T/+ cases need valid joins; rotated pieces
+  must not rotate a baked directional light. Plan 04 consumes the same footprint.
 - Each differs from safe floor and every other hazard in hue, luminance, and
   pattern/edge. Still and reduced-motion reads are mandatory on every floor.
 

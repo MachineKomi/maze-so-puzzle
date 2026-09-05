@@ -9,9 +9,10 @@ The v0.22.0 Human/Opus review is reconciled. Read the independent
 [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
 [88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
 The v0.22.1 V22-PERF1 preview is published from
-`8442b79db11a59e23f23c59f213116e7b8f54592`. The current gate is the **Human's
-affected-iPad comparison**, followed by **GPT-6 Astra — HIGH** evaluating the
-result. See the [publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
+`8442b79db11a59e23f23c59f213116e7b8f54592`. The Human's affected-iPad comparison
+remains outstanding; their latest instruction permits safe development meanwhile.
+**Sol implements ART-HOTFIX-01; Astra reviews and evaluates Human results when
+available.** See the [publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
 and [playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md). Read Sol's
 [R1 acceptance](../reviews/2026-09-05-sol-v22-perf01-r1-review.md) and the
 [R1 response](../reviews/2026-09-05-v22-perf01-r1-response.md).
@@ -69,7 +70,28 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. Human — affected-iPad v0.22.1 comparison
+## Current. Root — continue safe work; accumulate Human checks
+
+The latest Human instruction permits progress while tomorrow's playtest is
+pending. Start the bounded ART-HOTFIX-01 candidate from the approved corrected
+Tessera source, independently review it, then advance the scoped V22-PLAY-01
+seams. Missing Human performance feedback alone does not halt independent work;
+keep real engineering dependencies and one runtime writer. Record exact new
+builds and preserve immutable v0.22.1 for later comparison.
+
+Read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md) and
+[V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) before selecting their
+turns: after queued play/UI work, AUDIO-01A then V22-HOLE-01 precede Plan 04.
+Plan 02 must deliver the existing CR-AUDIO creative trials using the shared
+readiness seam; 07B qualifies/finishes rather than recreates it. Plans 04/02/05/09
+consume the single-width rule and connected hole footprint; old successful
+two/three-hole requirements are superseded after the coordinated cutover.
+
+End every response with [PLAYTEST_CHECKLIST](../PLAYTEST_CHECKLIST.md) and
+[HUMAN_DECISIONS](../HUMAN_DECISIONS.md). Update build-specific outstanding
+checks and concrete questions without inventing approval from silence.
+
+### Pending Human evidence — affected-iPad v0.22.1 comparison
 
 Use the [published preview](https://maze-so-puzzle.vercel.app/) and
 [playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md). Compare Full+Full
@@ -77,10 +99,10 @@ fresh and sustained, Lite+Full, and Lite+Reduced on the affected iPad in the sam
 ordinary 23×23 maze with about five followers. Record the device/environment,
 duration/transitions, responsiveness/smoothness and held/steered/released input.
 
-**Next model: Astra — HIGH** evaluates that evidence. Green routes to
-ART-HOTFIX-01 then V22-PLAY-01; continued Lite+Reduced stutter routes to the
-already-scoped V22-PERF-02 isolation. V22-UI-01 and Agent 04 remain held. Do not
-repeat publication or start another feature solely because this checkpoint exists.
+**Astra — HIGH** evaluates the evidence when supplied. Continued Lite+Reduced
+stutter raises the already-scoped V22-PERF-02 isolation priority. The latest
+Human authorization allows safe queued work meanwhile; do not infer a physical
+pass or restart publication of the already frozen preview.
 
 ### Completed Astra — v0.22.1 V22-PERF1 preview publication (history)
 

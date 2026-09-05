@@ -23,6 +23,16 @@ adjacent tile, repair Tessera Dolphin's field-alpha extraction, and plan Alex as
 an equal optional Player 1 while Ame remains default. These requirements are
 separate from the measured V22-PERF-01 candidate and do not establish its cause.
 
+**Audio and hole-crossing follow-up, 2026-09-05:** music and effects should be
+ready at their intended transition/contact; victory must retain its audible
+impact. The phone's improved v0.22.0 playback has no established cause and does
+not close the v0.22.1 device gate. AUDIO-01 makes readiness and sound-design
+ownership explicit. Restrict ordinary Spring-Boot jumps to one hole tile along
+the movement axis while retaining long, one-tile-wide dividing trenches and
+directional crossings. Cleaner hole art should join neighbouring pits into a
+ditch. V22-HOLE-01 owns the coordinated rules, map, save and art change; current
+multi-hole behavior remains shipped history until that plan lands.
+
 Status: manager-reviewed product authority for the improvement programme
 
 Decision date: 2026-09-02; art-craft calibration added 2026-09-03

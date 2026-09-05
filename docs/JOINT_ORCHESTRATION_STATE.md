@@ -64,8 +64,24 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Current task: Human affected-iPad v0.22.1 comparison; Astra — HIGH evaluates
-the result.** Publication is complete. Follow the
+**Latest Human authorization, 2026-09-05:** playtesting is deferred until the
+Human has time tomorrow; continue safe implementation in the meantime. Missing
+device feedback is an open acceptance row, not a blanket stop on subsequent
+work. Do not mark those rows passed or alter the immutable v0.22.1 comparison.
+Keep one runtime writer, evidence-based sequencing and real dependency checks.
+Current bounded next implementation is **ART-HOTFIX-01**, Sol candidate/Astra
+review, from the approved Tessera alpha-recovery master. Then prepare the
+V22-PLAY-01 seams against the current accepted runtime. Further performance
+diagnosis can proceed if needed; the iPad result will inform its prioritization.
+
+Every response ends with links to [PLAYTEST_CHECKLIST](PLAYTEST_CHECKLIST.md)
+and [HUMAN_DECISIONS](HUMAN_DECISIONS.md). Keep build-specific tests cumulative
+and track real questions without requiring answers to routine implementation
+choices. Current feedback is preserved in the
+[audio/hole intake](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
+
+**Outstanding Human evidence: affected-iPad v0.22.1 comparison; Astra evaluates
+the result when supplied.** Publication is complete. Follow the
 [playtest note](../release/V22-PERF1-v0.22.1-PLAYTEST.md) on the affected iPad in
 the same ordinary 23×23 maze with about five followers: Full quality + Full
 motion fresh and sustained, then Lite + Full, then Lite + Reduced. Record model,
@@ -84,12 +100,13 @@ attribution, repeated single-corridor soaks, multi-maze/music/resource retention
 and timed Tauri/WebView2. No broad contaminated performance cohorts were repeated
 for publication and no physical-iPad success is inferred.
 
-- Green affected-device evidence routes to **ART-HOTFIX-01**, then
-  **V22-PLAY-01** pace/stationary-rescue work as separately reviewable seams.
+- **ART-HOTFIX-01**, then **V22-PLAY-01** pace/stationary-rescue work may proceed
+  as separately reviewable seams under the latest Human authorization.
 - Continued **Lite + Reduced** stutter routes to the already-scoped
   **V22-PERF-02** renderer/filter/follower/resource isolation.
-- **V22-UI-01 and Agent 04 remain held** through the applicable performance,
-  responsive/family acceptance and PT36 gates. Tessera, Chill/Regular/Zippy,
+- **V22-UI-01 and Agent 04 retain engineering/dependency and PT36 gates**;
+  pending family feedback alone does not stop safe preparation/implementation.
+  Tessera, Chill/Regular/Zippy,
   stationary rescue, Alex, phone/Book/victory and later feature work did not enter
   this release transaction. Preserve the programme, especially 09 → 10 → 11.
 
@@ -114,6 +131,14 @@ for publication and no physical-iPad success is inferred.
 - Campaign growth is 16→24 (four inserted, four later), with purposeful asset ecology, harmonious floor/wall pairings, deeper intuitive solvable puzzles, varied rooms, optional decisions and gentle teaching. New mechanics require design/solver/family gates; wishlist wording is not immediate runtime authorization.
 - Mimic surprise must never create an unsolvable route. Loot colours/sound, room variety, difficulty icons, original cute spooky cast and other wishlist details remain owned by their backlog cards/plans.
 - Preserve the original contextual OST and existing music transport. Optional co-op keeps single-player default; greybox/family review must show shared laughter rather than sibling distress before costly production.
+- AUDIO-01A advances bounded preparation/continuity and SFX readiness before
+  Plan 04 after queued V22 corrections. Plan 02 owns the reconciled Claude sound
+  palette/variation/mix trials; 07B qualifies the integrated result. Prompt phone
+  v0.22.0 playback has no established cause and is not evidence of an audio fix.
+- V22-HOLE-01 restricts crossing depth to one hole tile along the movement axis,
+  preserving long one-tile-wide dividing trenches and T/+ path choices. Produce
+  cleaner joined ditch art with truthful cardinal adjacency and safe landings;
+  rules/content/saves and presentation must change together before 04/02/05/09.
 - Persistent XP, sprinting, wall hopping and other Plan 14 opportunities are hypotheses, not approved systems. Asset retirement requires copy-first/hash-verified external backup and Human confirmation before removal.
 - Future specialists use fresh tasks/current prompts; do not restart old Agent 01 tasks. Do not repeat the earlier Codex-update reminder; the Human deliberately held that update.
 
@@ -123,8 +148,11 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. The accepted v0.22.1 performance/input preview is published; obtain the affected-iPad Full/Lite/Motion evidence. If green, perform the small Tessera field-alpha hotfix and V22-PLAY-01 pace/stationary-rescue slice as independently reviewable seams, then execute V22-UI-01 for short-height/Book/pad/pickup/victory corrections and obtain the focused family retest. These slices bring bounded 07/08/01/interaction work forward without rewriting the programme. Resolve root PT36 attachment preflight before 04.
-2. **04** lighting, wall depth, terrain topology/regions.
+1. The accepted v0.22.1 performance/input preview is published; gather the affected-iPad Full/Lite/Motion evidence when available. Meanwhile perform the small Tessera field-alpha hotfix and V22-PLAY-01 pace/stationary-rescue slice as independently reviewable seams, then V22-UI-01 short-height/Book/pad/pickup/victory work. Preserve open physical rows and fix actual regressions before dependent work. Resolve root PT36 attachment preflight before 04.
+2. **AUDIO-01A** bounded music/SFX readiness, then **V22-HOLE-01** single-width
+   crossings and joined ditch art; then **04** lighting, wall depth and terrain
+   topology/regions. The Human's deferred feedback does not alone stop these
+   independent steps; retain actual safety/dependency/engineering review gates.
 3. **02** VFX, effect lifecycle, feedback and reward showers; then **remaining UI-02** polish. UI-03 already delivered Book/tab/detail/focus/victory foundations; reconcile residual work rather than rebuilding them.
 4. **ALT-P1-01** Human-gated Alex model/canon and equal optional lead-player integration.
 5. **08** normalized input, controllers/Xbox/Steam Deck and bounded zoom.
@@ -190,12 +218,22 @@ Use an isolated checkout for historical source; never reset shared main/user wor
 
 ## 9. Sol–Astra collaboration protocol
 
-- The Human manually switches **GPT-5.6 Sol / GPT-6 Astra** in one shared task. Repository records, not either model's hidden context, carry decisions and evidence.
+- The Human can switch **GPT-5.6 Sol / GPT-6 Astra** in this shared task. Under
+  their continuing self-organization authorization, an explicitly selected actual
+  Sol/Astra model may also take a bounded delegated turn. Record model, scope and
+  reviewed evidence; never label a same-model audit as the other model's opinion.
+  Repository records carry decisions across tasks/devices.
 - Both models own the product outcome. Sol's proposed next emphasis is player experience/UI; Astra's is performance/input/technical risk. These are task assignments, not permanent restrictions or claims of inherent model superiority.
-- Use **one proposes → the other independently challenges → reconcile → name one writer**. The Human's latest turn explicitly selected Astra first, then Sol. Do not require two full planning rounds for routine fixes. Record disagreements and their resolution; never manufacture consensus or substitute subagents for the other model's review.
-- **Only one runtime writer.** Before work, agree one execution owner and explicit paths; the other reviewer is read-only and adversarial. Subagents may help with bounded independent read-only/documentation work; they do not stand in for the manually switched model's joint assessment.
+- Use **one proposes → the other independently challenges → reconcile → name one writer**. Do not require two full planning rounds for routine fixes. Record disagreements and their resolution; review actual returned code/evidence before asserting consensus.
+- **Only one runtime writer.** Name the execution owner and paths; other agents
+  review read-only or work on separately owned documentation. ART-HOTFIX-01 is an
+  actual GPT-5.6 Sol isolated candidate with parent Astra review, not an invented
+  Sol assessment. The latest Human instruction permits this work while they sleep.
 - The Human governs vision, final family/visual/play-feel acceptance and material scope choices. The models lead routine implementation and tell the Human the next useful action. Claude is an occasional bounded independent reviewer, not an implementation resource or mandatory reviewer of every output.
 - Before a handoff, update this state, owned backlog/evidence and the joint ledger, inspect exact diffs, run proportionate checks, commit/push a meaningful reviewed checkpoint and verify remote agreement. Preserve unrelated work and immutable release/source-art records.
 - Use existing harnesses; do not weaken tests to hide failures. Run expensive browser/art/solver/build work serially on this memory-constrained host and distinguish host contention from product regressions.
-- Responses identify the active model (`# Astra:` or `# Sol:`) and end with a prominent next-model/reasoning handoff. The next gate is **Human affected-iPad testing**, then **Astra — HIGH** to evaluate the evidence and select the already-scoped route. Publication is complete. Do not create/resume historical specialist tasks.
+- Responses identify the active model (`# Astra:` or `# Sol:`), name the next
+  owner/action, and end with the cumulative playtest and Human-decision links.
+  Continue safe queued work while physical results are pending; Astra evaluates
+  them when supplied. Do not create/resume historical specialist tasks.
 - The independent Human/Opus review is complete. No runtime or Agent 04 launch occurred during either documentation turn. A fresh task can resume from this file without reconstructing the conversation.

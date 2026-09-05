@@ -48,6 +48,19 @@ resource work before Plan 04; it does not silently expand this tranche.
 
 ### Pass 07B — final specialist execution
 
+**2026-09-05 readiness advancement:**
+[AUDIO-01](AUDIO-01-readiness-and-sound-design.md) advances only the bounded
+current-plus-one preparation, confirmed-playback handover and synthesized-SFX
+readiness slice to root AUDIO-01A after the queued V22 corrections, before 04.
+It owns PT20's new phone/desktop follow-up; the latest Human instruction permits
+safe progress while physical playtest rows remain pending. Earlier blanket
+"audio remains here" language is superseded for that slice. 07B consumes and
+qualifies it, completing remaining controller/history/fallback/mastering work
+without duplicating its MusicTransportPort or forcing UI/controller migration.
+Record first versus warm track, suspended resume, both tapped and held exit,
+request/readiness/play state and actual audibility. The positive phone v0.22.0
+observation has no verified cause; do not count it as a passed 07B cohort.
+
 Return after Plans 06, 03, root checkpoint 03M, 01, root MOVE-01, 04, 02, UI-02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement the contextual audio and measured optimization phases against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.
 
 - Begin with a fresh inventory after final Plan-03 runtime publication and root

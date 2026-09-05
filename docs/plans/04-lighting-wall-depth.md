@@ -6,6 +6,17 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementa
 
 ### Execution refinement — 2026-09-05
 
+**PT49 predecessor:** [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md)
+lands the Human's cleaner connected pit art and single-width crossing contract.
+Consume its cardinal occupancy/boundary data for receiver exclusion, interior
+depth and exposed rims, extending the shared terrain model rather than creating
+another adjacency cache. Rotated pieces must not rotate baked light direction;
+validate isolated/end/straight/elbow/T/+ joins, diagonal separation, camera edges
+and cross-floor readability. Hole topology is presentation of the authoritative
+tiles and cannot grant a jump or change its landing. Pending physical feedback
+is not a blanket execution stop under the latest Human authorization; actual
+accepted predecessor code, PT36 attachment truth and bounded review still apply.
+
 Make the maze feel like a small, inviting place whose paths are easier to read.
 The valuable result is coherent wall form, stable grounding and recognizable
 materials; extra darkness, filter count or geometric complexity is not success.

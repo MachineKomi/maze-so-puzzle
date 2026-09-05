@@ -8,6 +8,13 @@ This track is deliberately late. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `do
 
 ### Execution refinement — 2026-09-05
 
+**PT49 consumer:** [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md)
+supersedes multi-hole jump successes/timings after its coordinated cutover.
+Animate one-hole crossings using the accepted travel/events and live-input
+completion owner, including all three pace modes, reduced motion and eligible
+portal landings. Preserve joined ditch art and follower continuity; do not
+restore long jumps to match historical animation examples below.
+
 The job is **recognizable acting that rewards attention**, with an equally good
 static game when an optional frame is unavailable. Smooth tile travel already
 lands before FP-UI1; frame animation is not its prerequisite or replacement.

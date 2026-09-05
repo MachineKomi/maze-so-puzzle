@@ -10,6 +10,22 @@ Execution begins only after Plans 07A, 06, 03, root checkpoint 03M, 01, the Huma
 
 ### Execution refinement — 2026-09-05
 
+**Audio and holes follow-up:** read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md)
+and [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md). The early audio
+readiness seam is a predecessor; this plan owns the joint CR-AUDIO-01–06/03a
+creative cue/mix trials: coherent magical timbres, restrained material footsteps,
+bounded pickup-chain variation, headroom listening and optional subtle ducking.
+Record a compact cue/mix comparison and accepted results in MUSIC/VFX authority.
+Use its ready SFX context, cancellation handles and music gain seam; expire stale
+cues after suspension, preserve mute/voice limits, and distinguish dispatch skew
+from audible contact timing. Plan 07B later qualifies the integrated result.
+
+V22-HOLE-01's accepted one-tile crossing/event contract supersedes old multi-hole
+timing/trail requirements below. Read its final source and scene boundaries;
+do not reintroduce long jumps or a separate hole renderer. A long connected ditch
+is still crossed across one tile of width. Shared jump/portal/contact cancellation
+remains required even when multi-hole successes disappear from the campaign.
+
 The experience target is **a clear decision, a satisfying response, then room to
 think**. The Human reports that jerky camera following encourages slow individual
 steps and makes testing less pleasant. Preserve the accepted smooth actor/camera
@@ -637,7 +653,12 @@ owner/node. The static star remains fully identifiable without colour or motion.
 
 Visual and audio cues share the same `VfxCue.atMs`; App code does not maintain a second set of `setTimeout` offsets. At 60 Hz, target dispatch skew is ≤16.7 ms and hard acceptance is ≤25 ms on reference devices. Hidden-page cancellation never tries to “catch up” missed impacts.
 
-Extend `src/sound.ts` so every scheduled sequence returns a handle with `cancel({ fadeMs })`. Registered oscillators route through a per-sequence gain node and the existing 24-voice global cap remains. Cancellation fades over about 10–25 ms to avoid clicks; mute and unsupported-audio behavior remains failure-safe.
+Consume AUDIO-01A's minimal ready/cancel/gain interface and extend `src/sound.ts`
+for the full cue choreography, with each scheduled sequence returning a handle
+with `cancel({ fadeMs })`. Registered oscillators route through a per-sequence
+gain node and the existing 24-voice global cap remains. Cancellation fades over
+about 10–25 ms to avoid clicks; mute and unsupported-audio behavior remains
+failure-safe. Reconcile actual landed APIs before adding a handle type.
 
 Tone vocabulary:
 

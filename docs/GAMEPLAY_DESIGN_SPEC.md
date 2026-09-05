@@ -137,6 +137,22 @@ results, and cannot catch up through interaction locks. Regular is default; exac
 timings remain subject to Human/family tuning. Plan 08 consumes the same policy for
 controllers and Plan 07B treats Zippy as the input/save/render stress case.
 
+### Accepted follow-up: single-width hole crossings
+
+The 2026-09-05 Human [follow-up](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md)
+supersedes multi-hole jumping as the desired rule. Current runtime still supports
+complete runs; [V22-HOLE-01](plans/V22-HOLE-01-single-crossings-and-ditches.md)
+must change rules/content/saves together before this is described as implemented.
+
+Spring Boots cross exactly one hole tile in the chosen cardinal direction to an
+eligible non-hole landing. A second hole along that axis prevents the jump.
+Connected rows may divide a room and be crossed at their one-tile width; they
+are not multi-tile jump exceptions. One pit at a T/+ floor junction remains
+useful. Connected T/+ ditch centres need not be crossable; their arms may be.
+Hints, equipment copy, authored/generated routes, rule fingerprints, session
+validation and presentation must agree. Preserve durable progress and historical
+records when revising affected maps/rules; no rendering-only legality change.
+
 ### Committed Mimic and reward tables
 
 - Every disguised Mimic uses one stable semantic object ID and one isolated,
@@ -500,7 +516,11 @@ For a current game state:
 4. Key the replay ladder by a stable state signature; persist only a bounded map of tier counts.
 5. If the state is invalid or no required solution exists, give a safe recovery message and never fabricate a coordinate.
 
-Acceptance: portal and multi-hole fixtures must prove that reachability, next step, and hint text agree with engine transitions; Required Path must finish with zero rescues on every authored level.
+Acceptance: portal and current multi-hole fixtures prove agreement with the
+shipped engine. At V22-HOLE-01 cutover, replace successful multi-hole expectations
+with one-hole successes and two/three-hole rejections, preserving perpendicular
+ditch crossings. Reachability, next step and hint text must agree with the new
+engine; Required Path still finishes with zero rescues on every authored level.
 
 ## Feedback, recovery, and input assists
 

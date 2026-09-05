@@ -31,6 +31,15 @@ Neither refinement expands the currently running UI task or FP-UI1.
 
 ### UI-02 consumer contract — PT37/35/34
 
+**PT49 rule predecessor:** consume the implemented and reviewed
+[V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) revision, safe existing
+maps and generator policy. Later campaign/generated content uses single-hole
+crossing depth; long dividing strips remain useful through one-tile perpendicular
+crossings. A pit at a T/+ path junction need not become a multi-cell hole cluster.
+Use the shared ditch art/topology without creating a renderer or reviving old
+multi-hole teaching. Preserve AUDIO-01's prepared cue/track boundary in new
+story/victory transitions; Plan 09 requalifies the expanded content closure.
+
 UI-02 lands after 02/before 08 and owns the Book interface/discovery foundation.
 Consume its five tabs, selected-card viewer, encounter entry IDs, root-reviewed
 migration and current lore. This plan completes final 24-maze/friend/guardian
@@ -107,7 +116,9 @@ These constraints derive from Human decisions and predecessor contracts.
   that could depend on a new rule. Exploration is authorized; implementation of
   a particular mechanic is not implied. A deferred/no-new-rule decision leaves
   this plan's existing-vocabulary campaign viable.
-- Keep equal-Power wins, harmless stronger guardians, reusable matching keys, Boots/Leaf traversal gates, complete straight Spring jumps, persistent portal pairs, optional rescues, and deterministic content.
+- Keep equal-Power wins, harmless stronger guardians, reusable matching keys,
+  Boots/Leaf gates, V22-HOLE-01 single-width straight Spring jumps, persistent
+  portal pairs, optional rescues and deterministic content.
 - Every new maze passes ordinary zero-rescue and exact-all-rescue solver modes.
 - Every reachable valid player state should remain completable where practical; any intentional exception requires a documented fairness proof, short safe recovery, and clear disclosure.
 - No required blind choice, hidden irreversible trap, soft lock, resource grind, or fact available only in transient story copy.
@@ -1083,7 +1094,9 @@ Do not put campaign ordering, story identity, or unlock truth in CSS or filename
   0 records a family-evidenced adjustment, and required fights retain fair,
   readable purpose.
 - Ordinary zero-rescue and exact-all-rescue solution for every authored level.
-- Tier-4 current-state Hint route replays through the engine across representative and exhaustive feasible states, including portals and one/two/three-hole jumps.
+- Tier-4 current-state Hint routes replay through the engine across representative
+  and exhaustive feasible states, including portals, successful one-hole jumps,
+  blocked two/three-hole runs and perpendicular crossings of long dividing strips.
 - No soft lock or undisclosed irreversible state in reachable-state fixtures.
 - Per-level metric budgets and documented exceptions.
 - Campaign ecology/adjacency coverage: every campaign-eligible enemy has a real

@@ -24,15 +24,14 @@ held; no implementation is claimed by these review documents.
 No blanket closure of the 61 earlier rows or family/performance gates is implied.
 Only one runtime writer; Agent 04 remains held under the canonical gates.
 
-V22-PERF-01 implementation is now a candidate on `codex/v22-perf-01-astra`.
-The [receipt](reviews/2026-09-05-v22-perf01-candidate.md) records held-success,
-fresh blocker, selection and tester-final-flow regression checks plus hot-path
-and Lite changes. Local comparisons and Full/Lite sustained samples are recorded,
-but a recovery timeout remains unexplained and Full sustained timing is mixed.
-Sol's [candidate review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md)
-requires a narrow chained-presentation unlock and ThumbPad takeover correction
-before promotion. No Human card is closed; the public v0.22.0 build is unchanged,
-and affected-iPad testing still determines whether successor work can begin.
+V22-PERF-01-R1 is published as **v0.22.1 V22-PERF1** following Sol's
+[acceptance](reviews/2026-09-05-sol-v22-perf01-r1-review.md). Its corrected input
+behavior and Lite work remain subject to affected-iPad testing; mixed sustained
+timing and the earlier recovery timeout remain open. The latest phone audio
+observation explicitly reports v0.22.0 and does not close that gate. See the
+[audio/hole intake](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md):
+PT20 gains an early bounded AUDIO-01A delivery step, and new PT49 owns simplified
+single-width crossings and connected ditch art. Both are planned future work.
 
 **Historical Human rejection, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;
 many regressions/bugs and missed requirements reported. PT25 and affected UI
@@ -61,7 +60,8 @@ engineering evidence, not successful family/UI acceptance.
   [`playtests/2026-09-05-v0201-wishlist.md`](playtests/2026-09-05-v0201-wishlist.md),
   [`playtests/2026-09-05-02-room-variety-and-mechanics.md`](playtests/2026-09-05-02-room-variety-and-mechanics.md),
   and
-  [`user-playtests/2026-09-05-v0220-follow-up.md`](user-playtests/2026-09-05-v0220-follow-up.md)
+  [`user-playtests/2026-09-05-v0220-follow-up.md`](user-playtests/2026-09-05-v0220-follow-up.md),
+  [`user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md`](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md)
 
 ## 1. Purpose and authority
 
@@ -168,7 +168,7 @@ supersede stale descriptions without closing their unimplemented successors:
 | 08 | UI-03 supplies the bottom-right hybrid directional/drag pad, pointer cancellation and keyboard repeat guards; browser input evidence | Physical iPad/thumb reach; Plan 08 canonical input/controller parity and any newly evidenced corrections |
 | 10 | Recoverable pending exit and exactly-once save boundary retained; UI-03 supplies current Next/Stay/Restart presentation and reliable Enter | Family comprehension; Plan 08 input parity; Plan 10 Garden destination |
 | 13 | Redundant portal glyph removed in `d6b11c0`; recorded browser evidence | Root verifies preservation in Plan 01/02; no duplicate removal task |
-| 20/23 | All 42 original tracks catalogued, six pools and canonical MusicTransportPort/current adapter; UI-03 retains Sound & Comfort and adds quick mute | Plan 08 input parity; 07B continuous contextual adapter/listening; Plan 10 Garden. Compact quick mute remains inside More |
+| 20/23 | All 42 original tracks catalogued, six pools and canonical MusicTransportPort/current adapter; UI-03 retains Sound & Comfort and quick mute | AUDIO-01A advances bounded preparation/continuity; 02 creative sound; 07B completes/qualifies integrated audio; 08 input parity; 10 Garden |
 | 24 | All 32 friends have authored Solo rescues; union/intro tests and `556542e` | Plan 09 final enemy/friend ecology, teaching/scale remediation, generated families and 24-chapter themes |
 | 25 | UI-03 implements landscape composition, larger art/text, stable HUD/dialog geometry and presentation renditions; exact art/budget/browser evidence in root review | Family visual/readability acceptance, explicit compact/enlarged-text tradeoffs, later Plan 02 effects and 07B device qualification |
 | 26 | UI-03 restores artwork-aware title/Home placement, preserves approved identity and performs authorized v05 alpha cleanup; `68e303d` corrects the withheld native Home composition | Root replacement-native verification and FP-UI1 publication; family acceptance; later named previews and Plan 11 retain-first audit |
@@ -182,6 +182,7 @@ supersede stale descriptions without closing their unimplemented successors:
 | 46 | Alex approved as a future optional Player-1 direction; exact model/runtime absent | ALT-P1-01 Human art/canon gate and equal selected-lead implementation before 08/05/09/10/11 |
 | 47 | Current 256px Tessera field alpha defect confirmed; approved corrected presentation/master exists | ART-HOTFIX-01 versioned field derivative/publication and actual-consumer proof |
 | 48 | Current engine/test explicitly move Ame into a rescued cage tile | V22-PLAY-01 stationary engine/solver/save/presentation contract before 02/05 |
+| 49 | Human requests one-hole crossing depth, preserved dividing trenches and cleaner joined hole art; current engine supports multi-hole runs | V22-HOLE-01 rules/content/art seam before 04; 02/05/09 consume it; no implementation yet |
 
 Do not substitute this table for exact source/tests. Evidence is carried from
 accepted records, not freshly rerun in this documentation review. Before a card
@@ -2699,7 +2700,42 @@ Family retest and later Plan05/08/10 non-regression remain open.
   together. Recompute perfect-rescue route metrics; do not compare affected old
   best-step records as though the interaction grammar were unchanged.
 
+### PT-20260905-49 — Single-width jumps and clean connected ditches
+
+- Type/priority: Rules/content clarity plus visual refinement; P1.
+- Delivery: Captured, routed, implementation pending. Source:
+  [Human follow-up](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
+- Owner: root [V22-HOLE-01](plans/V22-HOLE-01-single-crossings-and-ditches.md),
+  after reviewed engineering predecessors and queued play/UI seams, before 04.
+  The Human permits safe work while physical playtesting remains pending.
+  Plans 02/05/09 consume the accepted event/content/topology contract.
+- A jump crosses exactly one hole tile along its input axis; the next tile must
+  be an eligible non-hole landing. Reject two/three-hole-long crossings. Preserve
+  long dividing trenches with one-tile perpendicular crossings and single pits
+  at T/+ path junctions. Connected T/+ trenches may have uncrossable thick centres.
+- Redraw the pit cleanly in the approved chunky material-coloured style. Join
+  cardinal neighbours into a continuous ditch with no internal rims/floor seams.
+  Rotated caps/straights are a reuse suggestion; cover isolated/elbow/T/+ topology
+  with the smallest proven set or shared boundary composition. Diagonals stay
+  separate; art/masks agree with logical occupancy beyond camera bounds.
+- Audit and repair existing maps/generation with solver, hint, session-distance,
+  rule fingerprint/revision and migration changes; retain durable progress and
+  historical bests. Never restrict the engine alone and strand an existing maze.
+- Inspect real jumping/followers in every pace/motion mode, valid portal landings,
+  release/held cancellation, terrain/light/DPR and all cardinal adjacency cases.
+  Human artwork review and independent code review precede publication.
+
 ## 6. Programme integration and gates
+
+**Audio/hole follow-up, 2026-09-05.** PT20's existing preparation/crossfade and
+SFX-readiness requirements gain explicit [AUDIO-01](plans/AUDIO-01-readiness-and-sound-design.md)
+ownership. AUDIO-01A moves a bounded readiness/continuity implementation ahead
+of Plan 04, after reviewed engineering predecessors and queued Tessera/play/UI
+corrections; pending Human device feedback alone does not stop safe execution;
+Plan 02 owns the reconciled Claude palette/variation/ducking trials, and 07B
+finishes/qualifies the integrated controller. PT49 follows AUDIO-01A before 04
+as a separate rules/content/art seam. The positive v0.22.0 phone report is not a
+v0.22.1 or cold-start audio pass. No runtime change accompanies this intake.
 
 **2026-09-05 intake routing.** The complete 17-item crosswalk lives in
 `playtests/2026-09-05-v0201-wishlist.md`. Preserve active Agent 01. Root MOVE-01

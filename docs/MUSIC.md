@@ -1,5 +1,24 @@
 # Music
 
+## Readiness follow-up — 2026-09-05 (planned)
+
+The Human reports promptly switching music on a phone still displaying v0.22.0,
+and recalls delayed desktop victory music. Neither v0.22.1 nor this documentation
+turn changes the music/SFX code or OST. Cache/session warmth is a hypothesis;
+the actual cause is unmeasured. The current adapter still stops its old player
+before requesting a replacement with `preload="none"`; victory context exists,
+but timely audibility is not guaranteed. SFX are synthesized locally and need
+explicit AudioContext activation/readiness, not a downloaded-sample preload.
+
+[AUDIO-01](plans/AUDIO-01-readiness-and-sound-design.md) advances bounded current+
+one-next-track preparation, confirmed-playback handover and SFX readiness to an
+early root checkpoint after the queued v0.22 correction gates and before Plan 04.
+The canonical transport/UI stays shared. Plan 02 owns coherent sound design,
+controlled footsteps/pickup variation and measured mix/ducking trials; Plan 07B
+completes and qualifies the integrated audio system and delivery. These are
+explicitly pending requirements; see the [Human intake](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md)
+and existing PT20/23 for scope and acceptance.
+
 ## 2026-09-04 original-OST integration status
 
 The Human-delivered candidate original soundtrack is now present under
@@ -32,7 +51,8 @@ port, and Plan 08 must bind semantic input actions only to the same port.
 This compatibility step makes no claim of gapless context switching, predictive
 loading, mastering, or final platform listening. Track-level provenance/rights,
 duration, loudness/peak, crossfade, failure fallback and browser/Tauri listening
-evidence remain Plan-07B gates.
+evidence remain open; AUDIO-01A now advances bounded readiness/continuity and
+Plan 07B retains final mastering/platform qualification.
 
 The final controller must use a validated static catalogue; randomly select
 within the matching pool; keep enabled foreground playback continuous after the
@@ -117,9 +137,11 @@ For a quick controller regression check, run:
 npm test -- --run src/music.test.ts
 ```
 
-The tests compare the thirteen-track catalogue with the actual OST directory,
+The historical v0.19.0 tests compared the thirteen-track catalogue with its OST directory,
 cover exclusion of the short cue, complete shuffle cycles, immediate-repeat
 avoidance, deterministic run seeds, gesture-only
 startup, looping configuration, mute state, page-visibility pause/resume races,
 rejected or unavailable media, stop/reuse, disposal, server-side safety, and
-custom track configuration.
+custom track configuration. Current verification must also run catalogue and
+transport tests against the delivered 42-track/six-pool authority above; this
+historical list is not the current catalogue count or a listening acceptance claim.
