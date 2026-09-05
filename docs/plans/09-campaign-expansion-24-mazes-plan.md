@@ -9,6 +9,11 @@ Prepared: 2026-09-02
 
 Current planning baseline: 16 authored story mazes at manager baseline commit `5eed837`
 
+Planning refinement: 2026-09-05. Reconcile that dated baseline with the accepted
+32-friend authored coverage and the post-Agent-01 movement-comfort checkpoint.
+This plan remains pending; chapter names, sketches and teaching hypotheses below
+are not evidence of implemented or family-approved content.
+
 ## 1. Outcome
 
 Expand the campaign to 24 authored, story-backed mazes:
@@ -31,8 +36,10 @@ At execution time, do not assume the repository still resembles the planning bas
 5. Current `README.md`, `docs/ARCHITECTURE.md`, `docs/AI_ASSET_PROMPTS.md`, `docs/PROJECT_AUDIT.md`, and `docs/RELEASE_CHECKLIST.md`.
 6. `docs/PLAYTEST_BACKLOG.md`, especially `PT-20260902-04`,
    `PT-20260902-06`, `PT-20260902-11`, `PT-20260902-12`,
-   `PT-20260902-16`, `PT-20260902-19`, `PT-20260903-22`, and
-   `PT-20260903-24`, and `PT-20260904-30`; these are execution contracts, not optional background notes.
+   `PT-20260902-16`, `PT-20260902-17`, `PT-20260902-19`,
+   `PT-20260903-22`, `PT-20260903-24`, and `PT-20260904-30`; these are execution
+   contracts, not optional background notes. Consume `PT-20260902-07`'s accepted
+   movement/camera comfort evidence when measuring route fatigue.
 7. Current levels, story, engine, solver, progress, session, navigation, achievements, rewards, assets/catalogue, audio, presentation, UI, and tests.
 
 Before authoring a tile, verify that the following predecessor gates really exist and pass:
@@ -264,15 +271,90 @@ event or discovery.
 
 Every chapter must include one quiet-enough planning interval around its important clue and one release/payoff. Avoid placing maximum visual effect, dense objective text, new rule, five rescue choices, and complicated map topology in the same first reveal.
 
+### 7.1 Author the child's discovery, then prove the route
+
+Consume the Human's 2026-09-05 quality reaffirmation in the vision. Name the
+reasoning opportunity and where a later chapter recombines it, so progress
+invites transfer rather than memorizing an answer. Compare play in Plan 08's
+default/close/wide camera views without changing clues, reveal or legal routes.
+
+Add these concise fields to the existing 24-row learning/ecology matrix and
+per-level packet, not to a parallel design ledger:
+
+- **Question:** what can the player see that invites a plan? Describe the scene,
+  not an adult's explanation of it.
+- **Inference:** what relationship can the child notice, predict or remember?
+  Name one main reasoning demand and distinguish it from walking distance.
+- **Information after trying:** what does a plausible unsuccessful attempt teach,
+  where is the safe next action, and which Hint tier restores progress?
+- **Payoff:** how does ordinary completion acknowledge that understanding, and
+  what distinct optional discovery rewards curiosity without grading it?
+- **Rhythm:** quiet observation → choice/attempt → readable consequence → relief.
+  Record a likely natural stopping point and the neighbouring chapter's contrast.
+
+Review at least one plausible wrong turn, answer-first route, optional-branch
+skip and return after interruption for every new or materially revised level.
+A solver-perfect optimum alone does not demonstrate these experiences. Required
+clues remain inspectable in the current world or existing Help/Hint surfaces;
+no new objective may rely on remembered dialogue or on catching a camera pan.
+Measure travel in the accepted smooth-motion build as well as directional
+inputs: record continuous held traversal, camera-edge/portal transitions and
+time spent merely returning. Faster rendering cannot excuse empty walking.
+
+Use the eight briefs as a small palette of authored moments: a familiar landmark
+becoming useful from the other side, a previously blocked short loop opening,
+a readable landing prediction paying off, or a returning friend in a surprising
+habitat. These are composition options using established rules and approved
+assets. They do not authorize a new landmark system, ability, quest, cutscene,
+collectible or character. Any such proposal returns through the existing Human
+scope gate; XP, sprinting, wall hopping, sticker books and voices remain Plan 14.
+
+### 7.2 Formative evidence that improves the design
+
+Use brief sessions with a willing stopping point. Cover each new/revised map
+across the programme without asking Ame to play all 24 in one sitting. Start
+with the inherited first-use lesson and a compact changed-state/portal example;
+resolve their largest clarity or comfort failure before producing many maps
+with the same pattern. Preserve the fixed four-insert/four-append order unless
+the established placement decision gate records a justified change.
+
+Record raw attempts and the kind of support given: unaided exploration,
+requested Hint tier, parent question, navigation instruction or adult takeover.
+Parent co-play is a valid experience; it cannot also count as independent
+discovery evidence. PT19's percentage targets are directional hypotheses until
+the sample is meaningful; report numerators, denominators and observations for
+small family cohorts, with no invented general-child success claim. A repeated
+blocked inference or discomfort returns the smallest affected packet for
+revision, even when aggregate solver or completion metrics pass.
+
 ## 8. Narrative and educational expansion
 
-Update the Story Bible from 16 to 24 entries. Each new chapter retains the established compact read-together contract:
+Update the Story Bible from 16 to 24 entries after the PT30 cast disposition.
+The historical two-paragraph, one-speaker cards are the source material, not a
+parallel mandatory runtime format. Use Plan 01's accepted story host:
 
-- two intro paragraphs, approximately 35–80 words together where practical;
-- one speaker and an original funny quotation;
-- one plainly named Puzzle Power;
-- one optional child/adult `tryThis` prompt; and
-- one warm, funny, or wondrous victory outro.
+- ordinarily two or three concise dialogue turns across roughly 35–80 words
+  total where practical; a useful shorter exchange is welcome;
+- one small character disagreement, surprise or joke that serves the chapter;
+  Ame may notice, reply or revise a thought instead of always receiving a lecture;
+- one plainly named Puzzle Power and optional child/adult `tryThis` prompt,
+  available without becoming another required screen or spoken-answer test; and
+- one warm victory outro that remains truthful with zero optional rescues,
+  skipped treasure or Hint use. Claim specific rescues only from committed
+  results; generic “all five friends came home” text is wrong on an ordinary run.
+
+Longer interludes require the existing named story reason and Human approval.
+Advance is one fresh action per turn; Skip exits the whole exchange; replay
+changes neither rewards nor maze state. Preserve the accepted Continue/resume
+policy so interruption does not replay compulsory story. No auto-advance timer,
+reading test, new voice-production dependency or story-only clue is introduced.
+
+The cast review preserves the approved visual identities and asks what each
+speaker contributes: Poggle can model correction without shame, Sprig can voice
+a tempting first guess, and Ame can supply the observation that moves play
+forward. These are existing-character functions, not replacement-art briefs.
+New cast proposals must name an unmet function and their art/copy/loading cost
+before Human review; one good exchange with the current cast is sufficient.
 
 Renumber all existing entries from canonical order or derive display numbering so it cannot drift. Preserve each existing chapter's emotional meaning while updating transitions where an insertion changes adjacency.
 
@@ -516,6 +598,9 @@ The expansion should primarily showcase the final catalogue rather than demand e
 
 - Rebaseline current campaign order, metrics, story, asset pacing, controller flow, Book capacity, and performance.
 - Confirm all predecessor contracts and fix missing foundations first.
+- Bound any missing foundation as a separately reviewable predecessor repair,
+  with owner, affected acceptance rows and rollback. Close that repair before
+  map authoring; do not absorb an unbounded UI/render/solver overhaul here.
 - Add/freeze the exhaustive typed gameplay-content eligibility registry by
   stable ID, independently of art lifecycle. Produce the 24-row ecology/debut/
   region matrix, explicit exclusions, encounter-family tags, exact generated
@@ -540,6 +625,15 @@ The expansion should primarily showcase the final catalogue rather than demand e
 
 Exit: design packets meet this plan and the current gameplay spec; no topology has changed.
 
+The review packet calls out decisions still requiring the Human: final eligible
+roster/exclusions, unresolved child-facing guardian names, any cast addition or
+replacement, changed insertion role/order, and a proposed exception to an
+existing Human gate. Accepted art is not re-presented for approval. Root may
+resolve ordinary layout/composition choices within this plan, but must not
+convert a missing decision into implicit permission. Lock the teaching and
+roster matrix before authoring; refine individual room sketches using formative
+play evidence rather than treating a speculative ASCII map as immutable.
+
 ### Phase 1 — campaign order, generated composition versions, and migration
 
 - Add/finalize eight stable entries and versioned canonical order without maps going live to normal users until migration tests pass.
@@ -555,6 +649,12 @@ Exit: design packets meet this plan and the current gameplay spec; no topology h
 - Add generated Mimic placement only under the new generated-content version.
   Historical versions retain their prior Candy-Mimic interpretation; they are
   never silently re-read through the new disguised-object registry.
+- Keep campaign migration and generated-topology/composition work separately
+  reviewable inside this phase. First prove migration against test-only entries;
+  then prove one seed per topology family before widening the frozen cohort.
+  Record cohort/solver workload and runtime so validation stays reproducible on
+  the actual host. Do not silently drop slow seeds or weaken completeness when
+  adding roster variety increases search cost.
 
 Exit: the full campaign migration matrix passes with placeholder/test definitions
 behind a development boundary; the new generated topology version exercises all
@@ -663,6 +763,10 @@ Do not put campaign ordering, story identity, or unlock truth in CSS or filename
 
 - Exactly 24 unique stable campaign IDs in the canonical order.
 - Exactly one complete Story entry per campaign ID, with derived/correct chapter order and all compact-copy fields.
+- PT30 cast/turn metadata and first-time/rapid-skip/replay/Continue paths agree
+  with the accepted story host. Zero-rescue, partial-rescue and exact-perfect
+  outcomes produce truthful optionality and outro copy; story replay never
+  reapplies rewards or changes an active route.
 - Structural validation and absolute-size bounds for every map.
 - No more than four authored levels exceed 16 tiles on either axis; every one is
   named in the exception ledger and passes its room/spoke, event-gap and
@@ -742,6 +846,9 @@ Do not put campaign ordering, story identity, or unlock truth in CSS or filename
   revised inherited level.
 - Ame-and-parent co-play as a primary qualitative reference, with broader child/accessibility checks where available.
 - Record goal comprehension, required/optional understanding, predictions, aha, confusion, blocker recovery, Hint tier, parental nudge/takeover, fun/difficulty/pride, surprise, laughter, favourite beat, voluntary replay, and desire to continue.
+- Attach section 7's question/inference/recovery/payoff evidence to each new or
+  materially revised packet. Record held-movement comfort and natural stopping
+  points; a refusal to continue is useful feedback, never a failed child test.
 - Verify no new level's memorable quality depends solely on reading, hue, motion, sound, haptics, or a large display.
 - Verify controller-only navigation across all 24 records and every new chapter flow.
 - Verify actual-size art, minimap clues, objective fit, and Bag/friend maximum states at the common viewport matrix.
@@ -811,10 +918,14 @@ Plan 09 is complete only when:
     uses the frozen optional-battle and measurable first-use-teaching contracts
     without grind or forced instruction, with per-level encounter counts,
     spacing and intended Power chains reconciled to the shipped maps; and
-13. the reviewed final commit is pushed and recoverable, with no temporary evidence, placeholder IDs, stale compatibility route, or unrelated change left behind.
+13. the reviewed final commit is pushed and recoverable, with no temporary evidence, placeholder IDs, stale compatibility route, or unrelated change left behind;
 14. the accepted SHA is handed to the root release manager for the required
     `FP-CAMPAIGN` transaction: GitHub CI and Vercel production deployment/smoke,
     followed by a versioned portable Windows build, launch smoke, manifest,
     SHA-256, playtest note and GitHub pre-release publication. A red gate is
     recorded with its exact retry point; the level-design agent does not publish
     or relabel artifacts itself.
+15. short cast-led interludes and ordinary-completion copy pass PT30's truthful,
+    skippable/replayable contract; every new/revised chapter's intended discovery,
+    recovery and payoff has concrete design and family evidence with sample
+    limits disclosed rather than inferred from solver success.

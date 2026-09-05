@@ -6,6 +6,11 @@ Owner: final-branding specialist under root integration/release-manager review
 
 Prepared: 2026-09-03
 
+Planning reconciliation: 2026-09-05. The two-stage title/Home, Human-approved
+generated v06 visual wordmark and v0.20.1/post-release art are established inputs.
+This review changes future execution requirements, not their approval status or
+current runtime pointers.
+
 Primary intake: `PT-20260903-25`, `PT-20260903-26`, `PT-20260904-30`, and
 `docs/plans/00-integrated-implementation-roadmap.md`
 
@@ -14,8 +19,10 @@ Primary intake: `PT-20260903-25`, `PT-20260903-26`, `PT-20260904-30`, and
 Finish Maze so Puzzle's front-door presentation against the **actual final
 game**, while preserving strong work already completed.
 
-Plan 03 is expected to have delivered an early title illustration, transparent
-home/hero splash, exact logo/wordmark, and selected presentation renditions.
+Plan 03 and the accepted corrective checkpoints have delivered an early title
+illustration, transparent home/hero splash, exact logo/wordmark, and selected
+presentation renditions. The corrected v04 Home hero is the starting cutout;
+preserve its pale edges and corrected unicorn horn.
 Those are the starting authority and are **retained by default**. Plan 11 first
 audits how they read after the 24-maze campaign, Solo experience, optional couch
 co-op, Ponchi/Melty, Friend Garden, final UI, animation, VFX, lighting, controls,
@@ -106,22 +113,28 @@ These are requirements, not prompts to reopen settled taste:
 - Plan-03 front-door and presentation assets are retained unless the audit
   proves a concrete defect. “Plan 11 exists,” novelty, or a desire to use new
   generation compute is not a defect.
-- Preserve the accepted two-stage front door unless final evidence earns a
-  change: minimal illustrated title with large logo and Play/Exit, followed by
+- Preserve the accepted two-stage front door: minimal illustrated title with
+  large logo and Play/Exit, followed by
   the Home/menu surface with Continue, navigation/progress and hero art. Do not
-  add a third screen solely to display another illustration.
+  add a third screen solely to display another illustration. Evidence of a
+  navigation problem may support a separate Human decision; it does not authorize
+  this branding specialist to merge the routes.
 - Final key art consumes Plan 09's accepted story-cast disposition and compact
   interlude canon. It must not depict rejected/replaced cast members or invent
   a narrative role merely to justify a candidate composition.
 - Title illustration, transparent home/hero splash, exact wordmark, and live
   semantic title remain separable layers with explicit responsive roles.
-- The visible name is exactly **Maze so Puzzle**. Generated lettering may guide
-  a concept but is never final spelling authority. The released wordmark must be
-  reconstructed with controlled local type, vector, or raster lettering,
-  reviewed character by character, and paired with a real semantic heading.
+- The visible name is exactly **Maze so Puzzle**. Human decision v10 approved
+  the generated v06 visual wordmark after exact-spelling and delivery checks.
+  Preserve that exact approved source, pixels, optical derivatives and provenance;
+  do not require re-typesetting or vector reconstruction. Real accessible
+  `Maze so Puzzle` text remains spelling/semantic authority. Any future changed
+  lettering receives its own character-by-character delivery proof and Human
+  approval; plausible generated text alone is not sufficient evidence.
 - A logo image never replaces accessible text. Decorative duplicates are hidden
-  from assistive technology; the page keeps exactly one correctly structured,
-  localized-ready product-name heading.
+  from assistive technology; each active route keeps exactly one correctly
+  structured, localized-ready product-name heading. Inactive routes must not
+  remain in the accessible focus or announcement tree.
 - The final look follows Maze's approved clean, chunky, cel-painterly magical-
   girl storybook/JRPG grammar, brighter material-local colour-aware contours,
   and sticker-signal-over-magical-surface hierarchy. Taste references communicate
@@ -145,7 +158,7 @@ These are requirements, not prompts to reopen settled taste:
   transparent home/hero splash, exact logo/wordmark, and brand-critical
   presentation renditions;
 - final composition, crop, copy-safe, optical-size, and device variants required
-  by the implemented combined title/home surface;
+  by the implemented separate title and Home surfaces;
 - front-door brand consistency with the accepted final cast, campaign, Garden,
   co-op, UI material system, and story tone;
 - source/provenance, catalogue, lifecycle, byte/loading, accessibility,
@@ -160,7 +173,8 @@ These are requirements, not prompts to reopen settled taste:
 - redesigning the campaign, co-op rules, Friend Garden, persistence, controls,
   navigation architecture, UI information hierarchy, music system, VFX, or
   animation;
-- creating a separate Home route to make room for art;
+- merging the accepted title and Home routes, or adding a new route to make room
+  for art;
 - replacing approved character construction, costumes, personalities, names, or
   rendering grammar;
 - turning all gameplay sprites into presentation art or filling a perceived
@@ -206,15 +220,15 @@ filenames in this plan.
 
 | Group | Intended role | Required final properties |
 | --- | --- | --- |
-| Title illustration | Opaque atmospheric/key-art layer for the combined title/home surface | Honest final world and tone; responsive crop and copy-safe zones; no baked UI, logo, generated text, or required semantic instruction |
-| Home/hero splash | Transparent foreground or deliberately composited hero layer within that same surface | Clean registered alpha; safe overlap with menu/focus; model-sheet-accurate cast; separable from background and wordmark |
-| Logo/wordmark | Exact recognisable “Maze so Puzzle” brand mark | Exact controlled lettering; spelling and punctuation proof; optical variants; transparent delivery; semantic live heading remains authoritative |
+| Title illustration | Opaque atmospheric/key-art layer for the minimal title route | Honest final world and tone; responsive crop and copy-safe zones; no baked UI, logo, generated text, or required semantic instruction |
+| Home/hero splash | Transparent foreground hero layer on the separate Home/menu route, above its own approved environment | Clean registered alpha; safe overlap with menu/focus; model-sheet-accurate cast; separable from background and wordmark |
+| Logo/wordmark | Exact recognisable “Maze so Puzzle” brand mark | Retained approved v06 visual lettering; source and spelling proof; optical variants; transparent delivery; semantic live heading remains authoritative |
 | Presentation renditions | Larger contextual art used by blocker, story, reward, Book, victory, friend/enemy reveal, or other approved Plan-01 slots | Same semantic identity as field/optical art; consumer-specific crop and geometry; no fuzzy upscaling; visible/imminent-only loading; text/optical fallback |
 
-The title illustration and home/hero splash must have distinct implemented roles
-or one receives an explicit reserved/not-used disposition. Do not stack both
-merely because both exist. Do not duplicate a character accidentally by placing
-the same figure in background and transparent hero layers.
+The title illustration and Home hero already have distinct approved route roles.
+Audit those consumers; absence from the other route is not grounds to reserve or
+retire either. Do not duplicate a character accidentally within a route by
+placing the same figure in both its background and transparent hero layers.
 
 ### 8.2 Retain/refine/replace test
 
@@ -228,7 +242,7 @@ For each group and each shipped variant, assign one disposition with evidence:
   required delivery/integration gate without re-authoring. State why refinement
   is insufficient and preserve the previous authority for rollback.
 - **Reserve:** a good approved asset has no honest, non-redundant consumer in the
-  current combined surface. Keep its source/provenance but do not load it.
+  current supported surfaces. Keep its source/provenance but do not load it.
 
 A refine/replace decision requires at least one objective finding:
 
@@ -279,7 +293,8 @@ Plan 01's implemented layout and semantic action order remain authoritative.
 Plan 11 adjusts art framing and brand integration around them rather than moving
 controls ad hoc.
 
-Define one composition map for the existing combined title/home surface:
+Define linked composition maps for the existing title and Home surfaces, each
+with its own art/loading roles and action hierarchy:
 
 - focal subject bounds and protected face/body regions;
 - exact wordmark box plus the independent semantic heading;
@@ -292,6 +307,19 @@ Define one composition map for the existing combined title/home surface:
 - static/reduced-motion behavior for any parallax, glint, entrance, or ambient
   treatment; and
 - semantic image alternative/fallback behavior.
+
+The title promises a welcoming maze adventure; Home helps a returning family
+choose the next thing to do. Review that promise through the first actual maze:
+the approved Ame, friendly guardians, puzzle clarity and warmth should feel like
+the same game. A modest crop or reduced ornament earns preference over a new
+illustration when it solves the observed issue. Optional co-op/Garden messaging
+belongs around its real Home entry, with Solo still the obvious default.
+
+Record cold launch → title → Home → fresh Solo and Continue → resumed maze as
+separate short journeys. No holding-to-skip introduction, forced spectacle,
+repeated unskippable greeting or new story gate may be added. Returning from a
+maze or Book follows the accepted navigation contract, never an extra title-art
+tour. This is an integration test, not a request for new navigation features.
 
 Use art direction—not unreadable baked text—to create copy space. Wide screens
 may reveal more painted environment; narrow screens may crop peripheral scenery,
@@ -319,9 +347,11 @@ message; do not leave an accidental broken crop.
 
 The wordmark is a designed asset but the product name remains data/text.
 
-- Reconstruct every letter of **Maze so Puzzle** using a locally controlled,
-  licence-compatible process. Preserve source/editable authority and deterministic
-  exports.
+- Verify every letter of the retained v06 **Maze so Puzzle** wordmark against
+  its approved generated source and deterministic exports. If an approved change
+  is required, preserve the exact source/process and any editable authority that
+  actually exists; never invent a vector source or require one for unchanged
+  approved art. Do not remake sound lettering merely to complete a phase.
 - Keep the wordmark separate from illustration and hero splash. Do not bake it
   into every background size.
 - Provide only the optical variants proven necessary—for example, full-size,
@@ -336,8 +366,10 @@ The wordmark is a designed asset but the product name remains data/text.
 - If the visual wordmark is absent, delayed, failed, or disabled, the semantic
   heading and menu remain stable and complete without layout shift.
 
-Generated imagery containing plausible title text is rejected as runtime
-lettering. It may be retained only as explicitly labelled concept evidence.
+The approved generated v06 mark is runtime authority, not a rejected concept.
+New or changed generated lettering stays candidate-only until its exact spelling,
+delivery legibility, source/provenance and Human approval gates pass. A generic
+rule against generated text cannot retroactively revoke the accepted mark.
 
 ## 11. Accessibility, motion, and input
 
@@ -415,7 +447,7 @@ authorization.
 ### Phase 0 — re-audit implemented truth
 
 - Complete the read-first gate and baseline record.
-- Inventory the combined title/home states for fresh, resumable, completed,
+- Inventory the separate title and Home states for fresh, resumable, completed,
   Solo, Duo-available, Garden-locked/unlocked, offline, load-failure, and any
   final tester/development boundary that can appear in a production build.
 - Inventory the final approved cast/features and exact active Plan-03 asset
@@ -447,8 +479,8 @@ to Phase 4 after confirming integration evidence.
   contours, original Maze construction, and copy-safe/crop requirements from
   the outset.
 - Review candidates at intended integrated and actual delivery sizes. Do not
-  promote composite-board crops, opaque checkerboard artifacts, generated
-  lettering, or approximate character construction.
+  promote composite-board crops, opaque checkerboard artifacts, unapproved or
+  misspelled lettering, or approximate character construction.
 
 **Human Gate 11B:** approve each changed source and exact wordmark revision.
 Unapproved work remains source/proof-only and cannot alter runtime pointers.
@@ -467,8 +499,9 @@ semantic fallback.
 
 ### Phase 4 — front-door and presentation integration
 
-- Integrate retained and changed assets into the existing combined title/home
-  layout through the Plan-01 surface, typography, focus, and responsive tokens.
+- Integrate retained and changed assets into the existing separate title and
+  Home layouts through the Plan-01 surface, typography, focus, and responsive
+  tokens.
 - Keep background, transparent hero layer, exact wordmark, semantic heading,
   menus, and state copy separable.
 - Verify every front-door state, crop regime, motion/quality mode, input source,
@@ -505,11 +538,12 @@ Plan 11 is complete only when:
    has a traceable Retain/Refine/Replace/Reserve disposition;
 2. every non-Retain disposition cites a concrete final defect and every changed
    source has explicit Human approval—zero changes is an allowed outcome;
-3. the combined title/home route remains one surface with distinct, non-
-   redundant art roles and unchanged semantic/navigation ownership;
-4. the exact **Maze so Puzzle** wordmark is controlled and approved, illustration
-   layers contain no authoritative generated lettering, and one real semantic
-   title remains correct with images disabled;
+3. the separate title and Home routes retain their distinct, non-redundant art
+   roles, primary-action order and unchanged semantic/navigation ownership;
+4. the exact **Maze so Puzzle** wordmark retains its approved v06 source/pixels
+   or an explicitly approved revision, illustration layers do not replace the
+   separate wordmark, and one real semantic title remains correct with images
+   disabled;
 5. all depicted cast and features match final shipped canon; Ponchi, Melty,
    Garden, co-op, and any alternative Player 1 appear only when their final
    approval and implementation justify them;
@@ -601,7 +635,7 @@ duplicate final UI state, or mix archive cleanup into this checkpoint.
 | Late polish destroys approved charm | Retain-first ledger; defect required; Human gates | Repoint the complete catalogue/front-door bundle to the accepted Plan-03 set |
 | Key art promises an unshipped cast or mode | Final-canon availability ledger; no speculative Alex/co-op/Garden | Remove the unshipped layer/copy and return to the last truthful composition |
 | Every character is forced into one noisy image | Curated emotional promise and explicit no-completeness rule | Restore the simpler retained composition |
-| Generated logo contains ambiguous or wrong letters | Controlled reconstruction plus semantic heading and spelling tests | Fall back to approved live title treatment and previous exact optical |
+| A changed logo contains ambiguous or wrong letters | Exact spelling/delivery proof against the approved source, semantic heading and Human revision gate | Restore the approved v06 visual mark and exact live title |
 | Wide art fails 4:3 or compact screens | Protected regions, crop anchors, optical variants, real viewport proof | Select the last passing crop/variant or reserve the hero layer |
 | Art hides focus or real text | Plan-01 exclusion zones and contrast/scrim tokens | Disable the conflicting decorative layer without changing navigation |
 | New media slows startup or bloats Tauri | Visible-only loading, responsive delivery, Plan-07 budgets | Roll back pointers/preload and use the retained optimized derivative |

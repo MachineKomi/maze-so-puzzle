@@ -4,7 +4,45 @@
 
 This addendum is execution authority and supersedes any conflict in the planning body. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and the implementation-time Art Bible, UI/UX spec, Lighting spec, and Gameplay spec before changing code.
 
-Execution begins only after Plans 07A, 06, 03, root checkpoint 03M, 01, and 04 are accepted. Re-resolve every symbol against current `HEAD`; consume the landed scene/render/anchor and 03M completion/door/Mimic/reward contracts rather than independently refactoring `MazeTerrain`, `App.tsx`, styles, gameplay state, or input state.
+Execution begins only after Plans 07A, 06, 03, root checkpoint 03M, 01, the Human-approved pre-FP-UI1 movement-comfort checkpoint, and 04 are accepted. Re-resolve every symbol against current `HEAD`; consume the landed scene/render/anchor and 03M completion/door/Mimic/reward contracts rather than independently refactoring `MazeTerrain`, `App.tsx`, styles, gameplay state, or input state.
+
+### Execution refinement — 2026-09-05
+
+The experience target is **a clear decision, a satisfying response, then room to
+think**. The Human reports that jerky camera following encourages slow individual
+steps and makes testing less pleasant. Preserve the accepted smooth actor/camera
+travel: it owns world translation, camera sampling, culling envelope and retarget
+rules. VFX consumes its rendered position/contact/lifecycle seam; it never adds a
+second step tween or camera easing. Routine hits, blocked responses and pickups
+do not punch, scale, shake or flash the board. Local actor/prop accents may add
+tactility while leaving the background and tile boundaries stable.
+
+Before broad recipes, record a compact consumer preflight: semantic event and
+already-committed outcome; current scene/anchor owner; source-record ID and exact
+rendition; required pivot, face, grip, cage bay, chest-state or goal-aperture
+landmark; static fallback; loading tier; and evidence/return owner. Confirm actual
+exports and assets instead of treating a plan's type example as shipped data.
+Missing portrait expressions, presentation art or registration return to root's
+bounded art dependency gate by exact ID/consumer; a placeholder keeps development
+possible but cannot close that mandatory result. Approved static identities and
+styles remain closed. Do not enlarge field art or reopen whole art families.
+
+Prove the system with one representative sequence before multiplying effects:
+pickup receipt → keyed stationary door → rescue → encounter Power result, plus
+jump→portal cancellation. Each must have readable full/lite/static frames,
+exactly-once semantics and bounded cleanup. Then expand shared recipes across the
+catalogue. Begin with the families players actually meet; use the catalogue rack
+for breadth and a covering set for cross-device pixels. The flavor matrix names
+an existing material/motif variation and a quiet fallback, not a bespoke effect
+quota per chapter. Plan 09 chooses the final authored chapter mix.
+
+Re-run the accepted FP-UI1 sustained-travel route with maximum supported effects,
+corners, reversals, camera edges and five followers. The new work must preserve
+visual position continuity, input responsiveness and the shared performance
+gates. Keep child/family comfort evidence separate from frame-time evidence.
+Complete the required semantic/reaction/reward families before optional raster
+experiments; no new renderer, full-roster animation, or extra gameplay enters
+this track.
 
 ### Adopted product amendments
 
@@ -121,9 +159,9 @@ Implementation is accepted only if all of the following remain true:
 3. Existing input locking is preserved for a presentation's declared lifetime. Cancellation must release the lock in a `finally`-equivalent path and must never replay queued input in the wrong level.
 4. Existing accessible names, live-region meaning, and arithmetic remain available. Decorative VFX remains `aria-hidden`.
 5. Restart, Home/Mazes/Book navigation, level change, visibility loss, and unmount cancel old presentation work before new work can render or sound.
-6. Reduced motion retains trigger, location, item/effect identity, outcome, Power delta, sound/announcement policy, and final state. It removes travel, looping, shake, spin, parallax, animated blur, and large scale changes.
+6. Reduced motion retains trigger, location, item/effect identity, outcome, Power delta, sound/announcement policy, and final state. It removes decorative VFX travel, looping, shake, spin, parallax, animated blur, and large scale changes. Ordinary actor/camera movement retains the accepted MOVE comfort policy; a VFX quality/motion selector cannot globally disable or replace that travel.
 7. Tauri/WebView2 and browser builds use the same semantic event and timing configuration. No desktop-only outcome path is introduced.
-8. The 6×6 camera, terrain coordinates, pointer mapping, solver, fog discovery, and gameplay timings are not redesigned by this track.
+8. The accepted camera/travel contract, terrain coordinates, pointer mapping, solver, fog discovery, and gameplay cadence are not redesigned by this track. A presentation timing refinement remains bounded by root review and its typed plan.
 9. VFX cannot assume fixed HUD coordinates. UI supplies measured named anchors for wallet/bag destinations.
 10. Character transforms have a single owner at a time. VFX can wrap or decorate a sprite, but it cannot replace the sprite-animation system.
 
@@ -205,7 +243,7 @@ The values below are initial token families, not final asset recolours. Art and 
 | Warning / blocked | cream + coral edge; never blood red | stop-shaped ring, short compression, persistent target outline |
 | Victory | full friendly spectrum, with white/gold reserved for the result hold | radiant ring, crown/star marker, rescued-friend accents |
 
-Critical borders and icons target at least a 3:1 contrast relationship with immediately adjacent terrain where practical. A paired contour—one dark, one light—should replace a single universal glow for critical pickups. Water/lava/poison remain distinguishable in grayscale through motion axis, edge structure, pattern, and sound.
+Critical borders and icons target at least a 3:1 contrast relationship with immediately adjacent terrain where practical. Preserve approved material-local sprite contours: do not retrofit a universal dark/white perimeter or cream sticker halo onto field art. When needed, separate a semantic pickup marker or short backing accent from the sprite; cream cutlines remain for approved UI/reward signals. Water/lava/poison remain distinguishable in grayscale through edge structure and pattern even with sound and motion disabled.
 
 ### 5.4 Timing families
 
@@ -215,10 +253,10 @@ Critical borders and icons target at least a 3:1 contrast relationship with imme
 | Micro response | 90–260 ms | `cubic-bezier(.2,.8,.3,1)` out, then soft settle | Step spark, blocked compression, contact key pose, small counter acknowledgement |
 | Pickup | 520–760 ms local effect; notice may remain 1.4–1.85 s | quick lift, curved transfer, 120–180 ms result hold | Items, keys, potions, leaf, currencies |
 | Traversal / release | 460–900 ms | anticipatory ease-in, fast middle, overshoot-free ease-out | Jump, portal, door, rescue |
-| Combat set piece | preserve 2220 ms | three distinct anticipation/contact/recovery beats | Three hits, exact transfer, victory release |
+| Combat set piece | begin with accepted typed duration; 2220 ms is historical baseline | distinct anticipation/contact/recovery beats | Exact transfer, readable contact and victory release; tune cadence as one reviewed recipe |
 | Major victory | 1.8–3.4 s finite flourish, then static | broad ease-out with a calm result hold | Goal and completion; no indefinite high-energy confetti |
 
-Contact uses a maximum one-frame-equivalent white core; it must not become a full-board flash longer than 50 ms. Recovery particles lose value, opacity, speed, and density as they dissipate.
+Contact may use a tiny local light core; no full-board white flash is required or enabled by default. Recovery particles lose value, opacity, speed, and density as they dissipate.
 
 ### 5.5 Intensity tiers
 
@@ -228,7 +266,7 @@ Contact uses a maximum one-frame-equivalent white core; it must not become a ful
 | **1 Guidance** | hint, blocked feedback, step, common currency | ≤1.1 tiles | 0–4 | short cue; no board transform |
 | **2 Acquisition/action** | item/key/potion pickup, jump landing, door unlock | ≤1.8 tiles | 6–18 | clear transient; local punch only |
 | **3 Encounter/release** | combat contacts, rescue, portal | ≤2.5 tiles; one bounded board tint allowed | 12–32 | staged sound; camera remains spatially truthful |
-| **4 Major result** | final combat release, goal/victory | board-wide opacity-only veil for ≤2 frames, then local | 24–48 finite | fullest chord; no shake by default; static result remains |
+| **4 Major result** | goal/victory, major chapter reward | local result plus a calm contained modal composition | within the shared stage-wide cap | fullest bounded chord; stable board/camera; static result remains |
 
 ### 5.6 Layering, occlusion, and camera rules
 
@@ -382,24 +420,24 @@ At any elapsed time, `frame(plan, elapsedMs)` must deterministically describe th
 
 ### 7.5 Combat, exact Power transfer, and victory release
 
-Keep the current 2220 ms lock duration and established impacts while replacing the duplicate long CSS timeline. The engine outcome is already final; presentation copies begin with `powerBefore` and `enemyPower` and converge to the engine state.
+Begin with the accepted typed duration and impacts while replacing any remaining duplicate CSS timeline. The following 2220 ms table is a characterization/tuning starting point, not an obligation to retain that dwell. Any cadence change updates one typed plan and its evidence together, preserves clear Power comparison and release, and never stretches held-movement recovery. The engine outcome is already final; presentation copies begin with `powerBefore` and `enemyPower` and converge to the engine state.
 
 | Time | Target picture | Numeric / sound cue |
 |---:|---|---|
 | 0–120 | Quiet establish. Dim unrelated idle glows by about 20%. Show a short directional ribbon/weapon line and both Power badges. No board movement. | No number change. Optional very soft readiness tick only for stronger encounters. |
 | 120–295 | Hit 1 anticipation and readable forward arc. Ame compresses slightly; enemy braces with a friendly squash, not fear/pain. | At 295 ms, renamed `attack-whoosh` cue (current `clash` timing, impact−35). |
-| **330** | Hit 1: compact four-point contact star, 6–8 short sparks, local 1.025× punch. Direction must read when paused. | `contact-spark`; no final arithmetic yet. |
+| **330** | Hit 1: compact four-point contact star and 6–8 short sparks. Optional tiny actor-local compression; board/camera stay still. Direction must read when paused. | `contact-spark`; no final arithmetic yet. |
 | 350–630 | Recovery 1. Enemy rebounds a small distance; first exact transfer steps travel on one curved bead path. | `contact-body` at 375; `power-start` at 350; each `power-tick` updates both badges atomically. |
 | 570–725 | Hit 2 anticipation is shorter and uses the opposite/raised arc so geometry is not repeated. | `attack-whoosh` at 725. |
-| **760** | Hit 2: wider crescent plus 8–10 sparks; local 1.032× punch. | Spark at 760; body at 805; exact transfer continues 780–1060. |
+| **760** | Hit 2: wider crescent plus 8–10 sparks; actor-local response remains inside its owned wrapper. | Spark at 760; body at 805; exact transfer continues 780–1060. |
 | 1020–1165 | Hit 3 gets the clearest 180 ms anticipation: gathering star at the weapon, enemy outline, slight audio lift. | `attack-whoosh` at 1165. |
-| **1200** | Hit 3: strongest but still local contact star/ribbon, 10–12 finite sparks, maximum 1.046× board punch. Full-board white is ≤50 ms and opacity-only. | Spark at 1200; body at 1245. |
+| **1200** | Hit 3: strongest local contact star/ribbon and 10–12 finite sparks. Emphasize anticipation and silhouette; no board punch or full-board white flash. | Spark at 1200; body at 1245. |
 | 1220–1730 | Final transfer. Up to six visible steps for the clash, as today. If one visual bead represents a multi-point step, label or size it without implying one bead equals one point; the two exact numbers are authoritative. | Every step uses the plan's exact `playerPower`/`enemyPower`; sum remains constant. |
 | 1730–1900 | Enemy relaxes into a soft star/petal silhouette and scoots/dissolves. No fall, wound, shatter, or prolonged distress. Ambient effects remain subordinated. | A quiet release breath; no extra Power mutation. |
-| **1900–2220** | Warm victory ring behind Ame, a few upward stars, final `powerAfter` held, enemy absent. The post-combat `+N` badge is folded into this hold or starts only if it adds unique information. | `victory` chord at 1900; accessible arithmetic remains exact. |
+| **1900–2220** | Warm victory ring behind Ame, a few upward stars, final `powerAfter` held, enemy absent. Start the PT-20260902-03 gain receipt here or at the accepted result cue: `+0` rises monotonically to exact `+N`, then holds in the shared notice queue without extending the combat lock. | `victory` chord at 1900; accessible arithmetic remains exact and speaks once. |
 | 2220 | Remove copies, reveal ordinary final engine state, release this run's input lock. | Cleanup must be idempotent. |
 
-Sparks are created per contact cue and removed after 220–320 ms; 12 spark nodes do not persist for the whole sequence. Transfer motes use transform along a bounded curve, not `top/left`. Contact scale and tint are applied to the smallest board subtree that preserves the punch.
+Sparks are created per contact cue and removed after 220–320 ms; 12 spark nodes do not persist for the whole sequence. Transfer motes use transform along a bounded curve, not `top/left`. Contact accents stay on owned actor/prop wrappers; they never transform the board, camera or the smooth-travel wrapper. Gain count-up is duration-based, bounded independently of amount, and reduced motion shows final `+N` immediately with the same readable hold.
 
 **Reduced-motion combat (180 ms):** render a static side-by-side tableau at 0 ms with one contact star and a short dashed Power ribbon. At 35 ms show the transfer identity, at 60 ms atomically swap to final numbers, at 95 ms replace the enemy with a friendly star/petal result seal, and hold until 180 ms. There is no lunge, recoil, moving bead, shake, spin, blur, or board flash. Sound and accessible arithmetic keep their semantic cues.
 
@@ -411,7 +449,7 @@ All pickups use a source-anchored presentation clone because the engine removes 
 
 | Time | Common beat |
 |---:|---|
-| 0–80 | Hold source silhouette with paired dark/light contour; suppress its idle loop. |
+| 0–80 | Hold the approved source silhouette and, only if needed, a separate semantic backing accent; suppress its idle loop. |
 | 80–220 | Lift no more than 0.18 tile and open one category-shaped ring. |
 | 180–420 | Convert to the category marker or a short bounded bead/ribbon path. Routine items do not fly across the entire stage. |
 | 420–620 | Result seal near Ame and a synchronized bag/HUD slot acknowledgement if that anchor is visible. |
@@ -423,12 +461,12 @@ All pickups use a source-anchored presentation clone because the engine removes 
 | Splash Boots | Two tiny crescent footprint marks, then a blue ripple seal. | Two soft taps; ripple on second. | Boots + paired footprints; no bob. |
 | Spring Boots | Compress/expand ring twice, with `×1/×2/×3` jump capability explained by UI copy, not motion alone. | Rounded boing + short chime. | Boots + concentric spring ring. |
 | Antidote leaf | Leaf curl closes into a shield/meniscus break; one nearby poison bubble may part only if poison is in camera. | Soft leaf sweep + hollow confirmation. | Leaf + static protective outline. |
-| Key | Heart/star/sun motif expands once and stamps the bag slot; matching doors may get one non-travelling acknowledgement if visible. | Motif-specific three-note contour; final note at stamp. | Key silhouette, large motif, paired contour. |
+| Key | Heart/star/sun motif expands once and stamps the bag slot; matching doors may get one non-travelling acknowledgement if visible. | Motif-specific three-note contour; final note at stamp. | Approved key silhouette and separate large semantic motif. |
 | Potion | Exactly `amount` is printed. Up to six Power beads travel a short path from bottle to Ame's local Power badge; a bead step can represent more than one only when labelled. | Arpeggio ticks align with exact plan steps; local/HUD final number together. | Bottle + `+N` + final Power, no travel. |
-| Small currency | Two to four tokens form one short curve to a measured wallet anchor only when the wallet is visible; otherwise use local seal + wallet pulse. | Arrival ping occurs when wallet total changes visually. | Currency icon + exact amount + static wallet outline. |
-| Treasure | Preserve the satisfying source-to-wallet story but use measured source/destination rectangles, a 720–900 ms transform-only Bézier wrapper, at most eight motes, and wallet receipt at arrival—not at launch. Cancel if either anchor invalidates. | Launch sparkle, optional midpoint shimmer, wallet ping at arrival. | Source chest + exact amount, immediate final wallet, held receipt badge; no flight. |
+| Small currency | Two to four representative tokens use section 7.13's short outward spray and magnetic homing into the collecting actor's rendered anchor; a separate wallet pulse acknowledges the already-credited total. | Bounded collection ping aligns with actor arrival; no additional credit or per-unit voice. | Currency icon + exact amount + stable actor-local receipt and final wallet. |
+| Treasure / Gold bag | Use section 7.13's source→bounded spray→collecting-actor recipe, initially 720–900 ms with at most eight representative sprites inside the shared cap. The chest stays the source/reveal art; currency sprites home into Ame. Follow the rendered actor while valid, then use a static receipt on invalidation. | Launch sparkle and bounded collection cues at actor arrival; wallet acknowledgement is separate and does not imply delayed credit. | Source chest/bag + exact amount, immediate final wallet and held receipt; no flight. |
 
-Every item receives a paired contour token. A Phase 0 “readability rack” renders every weapon, boot, leaf, key, potion, currency, treasure, portal, door motif, cage, and goal over every floor/wall/hazard theme at all three tile-size bands. It is reviewed in colour, grayscale, protan/deutan/tritan simulation, and reduced motion. Simulation supplements rather than replaces user testing.
+Every item retains its approved local-material contour and receives any needed semantic accent through a separately owned effect layer. A Phase 0 “readability rack” renders every weapon, boot, leaf, key, potion, currency, treasure, portal, door motif, cage, and goal over the catalogue-derived covering set of floor/wall/hazard themes at the three tile-size bands. Include every family and worst-case bright/dark adjacency; expand failed combinations, not every unrelated Cartesian product. Review colour, grayscale, protan/deutan/tritan simulation, and reduced motion. Simulation supplements rather than replaces user testing.
 
 ### 7.7 Door opening
 
@@ -498,7 +536,7 @@ Cage style can change particle shape accents, but not the readable split silhoue
 
 **Feedback hierarchy:** the accessible status is immediate and authoritative. During a blocking set piece, the visual bar uses a quieter “in progress” or hidden duplicate variant so it does not visually announce the final image early. At the semantic completion cue it may show the friendly final copy. Never defer or suppress the screen-reader outcome to match animation.
 
-**Goal arrival:** add a 900 ms world-space result before the completion modal:
+**Goal arrival:** use a bounded world-space result before the existing completion-choice surface; 900 ms is the initial recipe below. Read the landed 03M pending-completion/Stay/Next contract first. Presentation cannot commit completion, grant rewards, force Next, or remove the player's choice:
 
 - 0–150 ms: hold Ame and goal together; suppress goal idle loop;
 - 150–350 ms: goal ring opens behind both and the exit motif becomes the dominant shape;
@@ -536,6 +574,67 @@ Tone vocabulary:
 - Power ticks ascend without becoming a slot-machine cascade;
 - portal has intake/bridge/arrival; door has latch/charge/release; rescue has latch/release/landing;
 - Tier 4 reserves the fullest chord and broadest frequency span.
+
+### 7.13 Committed rewards and Mimic reveals
+
+`PT-20260903-22` needs one reusable committed-outcome recipe, usable by ordinary
+Gold bags/chests now and by the gameplay owner's later Mimic/drop events. Freeze
+the seam from actual 03M types; use test fixtures for outcomes that are not yet
+reachable. A fixture is interface proof, not evidence of shipped Mimic gameplay.
+
+1. Read the exact source, currency and credited amount from the immutable outcome.
+   A reward visual never chooses chance, computes drops or credits a wallet.
+2. For a disguised chest, keep its family-identical closed state through the
+   strike. Neither labels, requests/preloads, marks, sounds nor the open-state
+   selection expose which branch was resolved before the reveal cue. Ame remains
+   on the approach tile. A revealed guardian's identity/Power is readable before
+   the ordinary battle or too-strong sequence; do not stack two locks or skip the
+   readable reveal to meet an arbitrary duration.
+3. For a reward, emit a capped seeded group of representative Gold/Science
+   sprites, a short collision-free outward spray, then homing into the collecting
+   actor's **rendered** anchor. Shared wallet/notice feedback acknowledges the
+   exact credited total. The Human's magnetic destination is Ame; a subsequent
+   small wallet acknowledgement is separate from the old chest-to-wallet flight.
+4. Reserve the event's nodes before starting. Large rewards use exact text and
+   grouped sprites; never one node, voice or timer per unit. Routine rewards
+   finish quickly, while rare chest/rescue milestones can spend more of the same
+   finite budget. The later chapter pacing matrix controls frequency.
+5. On move/retarget, homing follows the accepted rendered actor without restarting
+   the spray. On anchor invalidation, hide, route change or cancellation, collapse
+   to one exact static receipt and final wallet truth. Reduced motion shows the
+   reveal/amount result without ballistic travel. No second credit or catch-up
+   collection cue occurs.
+
+Include normal bag/chest, good Mimic, beatable/too-strong Mimic, enemy drop and
+rescue drop in deterministic fixture coverage; requalify actual campaign cases
+when Plan 09 activates them. Expose a typed recipient anchor so Plan 10 can use
+the collecting seat without changing solo credit semantics.
+
+### 7.14 Reactions and concurrent-result hierarchy
+
+Implement `PT-20260902-18` portrait-first using explicit committed-event intents,
+the approved expression/mark catalogue and Plan 01's portrait/reaction gutter.
+The required neutral, happy/proud, worried, surprised, relieved and playfully
+annoyed states need actual approved renditions; construction-study panels cannot
+be cropped into production. Resolve any missing IDs through the preflight return
+gate before claiming the feature complete. A shared canonical portrait plus a
+semantic mark is the accessible interim fallback.
+
+The pure resolver chooses one finite portrait reaction. Rescue/success can
+supersede a repeated-block decoration; repeated bumps coalesce and never make Ame
+seem angry at the child. Expression and symbol layers remain separate. They do
+not add speech, mood saves, inferred sentiment or timers in individual portraits.
+Mute and reduced/static mode retain the same event interpretation.
+
+Use the already-landed PT-20260902-01 notice queue for all meaningful results.
+Three quick results keep semantic order and remain simultaneously readable;
+ordinary movement generates none. Exact Power/currency receipts and rescue names
+are never dropped to preserve a decorative flourish. Let portrait marks and
+secondary particles coalesce first. Freeze a queue/node/voice budget and overflow
+policy that retains every distinct result, and stress the actual maximum batch.
+While one result owns attention, subordinate ambient materials, goal motion and
+idle actors; restore their quiet state on every completion/cancel path. Notices
+avoid Ame, the next blocker and essential HUD at the smallest accepted layout.
 
 ## 8. Rendering decision matrix
 
@@ -585,7 +684,7 @@ Keep engine types and outcomes unchanged. Add a presentation-only subsystem:
 | `src/vfx/effects/PortalEffect.tsx` | From/cut/to timeline. |
 | `src/vfx/effects/DoorEffect.tsx` | Lock motif and deterministic burst. |
 | `src/vfx/effects/PickupEffect.tsx` | Shared pickup envelope and category variants. |
-| `src/vfx/effects/TreasureEffect.tsx` | Measured world-to-HUD flight and static receipt. |
+| `src/vfx/effects/TreasureEffect.tsx` | Shared source/spray-to-rendered-collecting-actor reward recipe, separate wallet acknowledgement and static receipt. |
 | `src/vfx/effects/GoalVictoryEffect.tsx` | Goal arrival and finite completion flourish. |
 | `src/vfx.css` | Extracted, namespaced VFX tokens, layers, primitives, local envelopes, material styles, and one reduced-motion/static block. |
 
@@ -654,7 +753,7 @@ Use discriminated payloads rather than `unknown` in production. Exhaustive `swit
 
 - **`blocking`:** combat, rescue, jump, portal, door, and typed composites. Exactly one sequence owns one input-lock lease. A follow-up is part of the same sequence, not another competing timer.
 - **`notice`:** pickup, Power and feedback notices. Replacement/queue policy is explicit and independently cancellable.
-- **`stage-flight`:** treasure/currency to measured UI anchors. It never owns gameplay input.
+- **`stage-flight`:** bounded decorative transfers with explicit source/recipient anchors. Currency/reward sprites home into the collecting actor under section 7.13; equipment acknowledgements may use the measured Bag slot. Wallet acknowledgement is separate from reward homing. This channel never owns gameplay input.
 - **`modal`:** finite victory flourish tied to modal lifetime.
 - **`ambient`:** materials and gentle object affordances. Paused or downgraded while hidden and subordinated during Tier 3/4 effects.
 
@@ -707,7 +806,7 @@ The cutover is behavior-neutral before it is aesthetic:
 4. Collapse each repeated selector into one base plus named variants. `.map-pickup-toast`, for example, becomes `.vfx-notice`, `.vfx-notice--pickup`, and `.vfx-notice--power`, each defined once.
 5. Prefix new classes/keyframes/custom properties with `vfx-` or `--vfx-`. Scope material and transient styles beneath `.game-stage`.
 6. Give cast shadow, step spark, aura, and status badge distinct elements. Lighting keeps the ground shadow; VFX stops claiming `.player-layer::before`.
-7. Replace effect-related `left/top` transitions with an authoritative logical position plus a transform-interpolated visual wrapper.
+7. Remove remaining effect-owned layout-position animation. Reuse the accepted smooth-travel wrapper for ordinary movement; only event-local effects get their own nested transform/opacity layer.
 8. Put all VFX static/reduced rules in one final media block and mirror it with `[data-vfx-motion="reduced"]`. The OS preference and any future explicit setting select the same typed mode.
 9. Permit zero `!important` declarations in `src/vfx.css`. Add a duplicate-selector and specificity check. If Stylelint is accepted, use `declaration-no-important` and standard duplicate-selector rules; otherwise add a small repository script.
 10. Delete superseded keyframes/selectors in the same pull request as each effect cutover. `git grep` must prove no orphaned class/keyframe references.
@@ -772,7 +871,7 @@ Quality selection can be explicit (`full`, `lite`, `static`) and may be chosen b
 4. fade/cancel registered sound handles;
 5. remove transient DOM/classes and reset ambient subordination;
 6. reconcile every displayed number and object to the already-authoritative engine state;
-7. clear queued pointer/key/D-pad work that belongs to the old context; and
+7. request the canonical input policy to stop/neutral-gate the old context; the input owner alone clears its private held/queued device work; and
 8. release only the lock lease owned by each canceled run, in `finally`.
 
 The operation is idempotent. It does not roll back an engine event and does not fire a completion cue.
@@ -788,7 +887,7 @@ The operation is idempotent. It does not roll back an engine event and does not 
 | Component unmount | Synchronous director disposal and listener removal. | Cancel all sequence handles. | Zero callbacks/setState after unmount; all leases released. |
 | Motion preference changes to reduced during a run | Abort full-motion plan; render the effect's static final semantic recipe for at most the reduced duration, then clean. | Retain only result/confirmation cues not already played; never replay contact. | Engine outcome unchanged; lock releases no later than the reduced replacement plan. |
 | Motion preference changes to full during a reduced run | Finish current static recipe. | No replay. | Full mode applies to the next run. |
-| Measured HUD anchor disappears/resizes during stage flight | Cancel travel, show local static receipt if screen remains, and retain final wallet total. | Skip/cancel arrival travel cue; optional local confirmation only once. | No input lock; currency is never lost or double-counted. |
+| Transfer recipient anchor invalidates during a flight | Cancel decorative travel, show the exact local static receipt if the screen remains, and retain final inventory/wallet truth. Normal actor movement updates the rendered homing target and does not itself invalidate it; a missing HUD anchor suppresses only its separate acknowledgement. | Skip/cancel the abandoned arrival cue; optional local confirmation only once. | No input lock; rewards are never lost or double-counted. |
 | Superseding notice | Old notice exits immediately or through ≤90 ms opacity only; replacement enters with unique run key. | No old delayed cue. | Accessible announcement policy avoids duplicate speech. |
 
 ### 12.3 Accessibility announcements during cancellation
@@ -805,13 +904,13 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 
 **Files**
 
-- Add `playwright.config.ts`.
-- Add `tests/vfx/vfx-fixtures.ts`, `tests/vfx/vfx-visual.spec.ts`, `tests/vfx/vfx-lifecycle.spec.ts`, and `tests/vfx/vfx-readability.spec.ts`.
+- Extend the existing `scripts/performance/playwright.config.mjs` and its fixture/route helpers; preserve S01–S11 naming and the accepted browser projects.
+- Add VFX fixture, visual, lifecycle and readability cases in that shared harness. The body’s `tests/vfx/*` names are illustrative responsibilities, not a second test tree/config requirement.
 - Add `scripts/check-vfx-css.mjs` for duplicate owned selectors, missing keyframes, forbidden `!important`, and orphaned `vfx-` references.
 - Modify `package.json`, `package-lock.json`, and `.github/workflows/ci.yml` for the test commands.
 - A development-only `src/vfx/VfxLab.tsx` may be reachable only through an explicit debug/test entry; it must not ship as normal navigation or mutate campaign progress.
 
-**Dependency:** add **`@playwright/test` as the only required new development dependency**. Pin the selected version in `package-lock.json`. No runtime dependency, particle library, animation framework, canvas engine, or image package is needed.
+**Dependency:** reuse the landed pinned browser and unit toolchain. No second Playwright installation/configuration, runtime dependency, particle library, animation framework, canvas engine, or image package is needed.
 
 **Characterization cases**
 
@@ -888,21 +987,21 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 
 **Rollback:** revert the import and moved-rule deletion together. Never leave both old and extracted declarations active.
 
-### Phase 3 — Terrain render model and environmental materials
+### Phase 3 — Consume terrain render model and refine environmental materials
 
-**Purpose:** make the renderer cheap enough for better material language, then land one hazard family at a time.
+**Purpose:** attach one hazard family at a time to Plan 04's accepted cached renderer. Requalify its costs; do not repeat its extraction or topology work.
 
 **Files**
 
 - Add `src/vfx/MaterialEffects.tsx` and material catalog entries.
-- Modify `MazeTerrain` in `src/App.tsx`; extraction to `src/game/MazeTerrain.tsx` is allowed if coordinated with art/lighting plans.
-- Modify or add pure helpers in `src/game/terrainGeometry.ts` only for render geometry, never traversability.
+- Consume the actual extracted `MazeTerrain`/render-model exports and assigned slots from Plan 04; the old App line references are historical.
+- Request any genuinely missing geometry through the Plan-04 owner with a focused fixture. VFX does not fork boundary tracing, region masks, gutter or traversability.
 - Extend `src/game/terrainGeometry.test.ts`, `tests/vfx/vfx-visual.spec.ts`, and performance traces.
 
 **Order / rollback points**
 
-1. Memoize `fullLevelWindow(level)` and per-level connected path/mask data; clip paint to camera+gutter. **Rollback A:** geometry-only commit.
-2. Introduce named shared bank/depth primitives with current look. **Rollback B.**
+1. Verify cached paths/masks and the accepted swept camera envelope survive VFX ticks; return a failing terrain dependency before layering more effects. **Rollback A:** keep the accepted static material recipe.
+2. Attach named bank/material primitives through the accepted slots with unchanged semantic boundaries. **Rollback B.**
 3. Land water. **Rollback C:** catalog selects current/static water recipe.
 4. Land lava. **Rollback D:** per-material static fallback.
 5. Land poison. **Rollback E:** per-material static fallback.
@@ -933,11 +1032,13 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 
 1. Local blocked feedback and finite guided marker.
 2. Shared pickup envelope + category variants.
-3. Measured-anchor currency/treasure flight, blocked until the UI anchor contract exists.
+3. Currency/treasure spray and homing into the accepted rendered-actor anchor, with independent measured-wallet acknowledgement; equipment receipts consume the UI Bag anchors.
 4. Jump landing composition and tail cleanup.
 5. Portal departure/cut/arrival and jump→portal sequence.
 6. Door latch/charge/release sound split and transform-only deterministic particles.
 7. Rescue latch/release/landing sound split and curated static form.
+8. Committed reward/Mimic fixture recipes and exact receipt queue from section 7.13.
+9. Portrait reactions and concurrent-result priority from section 7.14, using actual approved expression/mark renditions.
 
 **Acceptance per checkpoint**
 
@@ -961,7 +1062,7 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
 
 **Acceptance**
 
-- Impacts remain 330/760/1200 ms unless a separately approved timing change updates one typed plan and all tests.
+- Impacts use the accepted typed plan. A root-reviewed cadence refinement updates that plan, boundary tests and readable comparison/result evidence together; the historical 330/760/1200 ms values are not copied as a second authority.
 - At every test millisecond, `playerPower + enemyPower` equals the conserved total; completion exactly matches engine Power.
 - Sound/contact skew ≤25 ms; each cue dispatches once.
 - Direction reads paused; contacts escalate through shape/timing, not only more particles.
@@ -996,7 +1097,7 @@ Each phase is a separately reviewable checkpoint. Do not combine a lifecycle rew
   uses no continuously animated blur/filter chain, stops and releases its owner
   on close or rapid selection change, and has intentional lite and static/
   reduced-motion forms.
-- Reduced motion has no accidental frozen confetti/ring stacks, travel, shake, spin, depth pan, or animated blur.
+- Reduced VFX has no accidental frozen confetti/ring stacks, decorative flight, shake, spin, depth pan, or animated blur; ordinary actor/camera travel still follows the accepted MOVE comfort policy.
 - Switching preference during every blocking effect follows the cancellation matrix.
 - All semantic copy, final rewards, focus behavior, and announcements remain correct.
 
@@ -1067,7 +1168,7 @@ Pause via the Web Animations API and/or deterministic plan clock, not arbitrary 
 - Jump: source hold, launch, apex, descent, landing, cleanup for one/two/three holes; each material landing; reduced result.
 - Portal: 0/120/220/260/480/695/720 ms; both pair directions; reduced cut.
 - Door: 0/100/260/420/700/835/860 ms for heart/star/sun; reduced open threshold.
-- Treasure: source, peak, midpoint, measured arrival, wallet receipt, anchor invalidation, reduced receipt.
+- Treasure: source/reveal, outward spray, homing, moving-actor arrival, separate wallet acknowledgement, anchor invalidation and reduced exact receipt.
 - Goal/victory: goal hold/ring/release/cleanup, modal reveal at 480 ms, finite ray/confetti end, static reduced composition.
 
 Screenshot thresholds must tolerate documented antialiasing variance while failing on missing primary shapes, clipped tails, wrong layer order, stale objects, shifted anchors, duplicate notices, or accidental moving-state snapshots.
@@ -1126,7 +1227,7 @@ These are interface contracts, not permission for VFX to redesign another track'
 
 **VFX requires:**
 
-- semantic light/dark ink tokens for paired contours;
+- semantic light/dark tokens for separate effect/marker accents, preserving the approved material-local sprite contour and UI-only cream cutline policy;
 - approved water/lava/poison value hierarchy and the right to apply non-destructive colour treatment to effect-only duplicates;
 - intrinsic safe bounds for every item, portal, cage, door, goal, friend, and enemy used in a transient clone;
 - review of the readability rack over every terrain family; and
@@ -1154,7 +1255,7 @@ These are interface contracts, not permission for VFX to redesign another track'
 **VFX requires:** semantic pose intents—`anticipate`, `contact`, `recoil`, `recover`, `celebrate`—or a no-op fallback; stable visual attachment points for hand/feet/centre; and a transform-ownership hierarchy:
 
 1. world-position wrapper (camera/game);
-2. presentation travel/recoil wrapper (VFX, only while it owns the beat);
+2. event-specific jump/portal/recoil wrapper (VFX, only during its declared presentation lease; it requests the accepted travel system's handoff and reconciles to that system on complete/cancel, never writes a competing ordinary-move tween);
 3. pose/frame wrapper (sprite system);
 4. aura/contact siblings (VFX).
 
@@ -1288,6 +1389,9 @@ The overhaul is complete only when all statements below are true.
 - Each high-priority effect has one dominant shape, clear anticipation/contact/recovery, finite dissipation, and a child-safe tone.
 - Portal shows departure and arrival; jump→portal is sequenced; the door and rescue tails are not clipped; goal gets a local result before modal.
 - Full, lite, and static recipes preserve the same semantic trigger, location, identity, numbers, and result.
+- Three rapid results retain their order and exact amounts in the shared queue; the post-combat gain counts monotonically from `+0` to exact `+N` and holds without lengthening the lock. Reduced mode holds final `+N` immediately.
+- Approved portrait-expression/mark states pass finite priority, repeated-bump, cancellation and static checks. Missing mandatory expression art is a named return gate, never silently accepted as a fallback-only implementation.
+- Normal rewards use the shared spray→collecting-actor recipe; Mimic/drop fixtures preserve pre-reveal secrecy, exact credit and readable reveal before encounter. Later Plan-09 reachability is tracked separately from this interface acceptance.
 
 ### Sound and timing
 
@@ -1301,6 +1405,7 @@ The overhaul is complete only when all statements below are true.
 - `MazeTerrain` render data is memoized and off-camera material paint is bounded.
 - `src/vfx.css` has no `!important`, duplicate owned selector, orphaned keyframe, or appended V-number override.
 - Cast shadow, step sparkle, sprite pose, and VFX transform each have one owner.
+- The accepted sustained-travel comfort route remains stable with effects enabled: no new camera/board punch, second movement tween, catch-up trail, shadow detachment or delayed held-input recovery.
 - The repository adds no runtime VFX library and no unapproved/generated asset.
 
 ### Cross-platform signoff

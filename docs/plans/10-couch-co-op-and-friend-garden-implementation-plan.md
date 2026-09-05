@@ -4,6 +4,10 @@
 >
 > **Prepared:** 2026-09-03
 >
+> **Planning reconciliation:** 2026-09-05; predecessor completion, camera,
+> reward and music seams are consumed explicitly below. No runtime change or
+> production approval is implied by this refinement.
+>
 > **Product direction:** Puzzlewild Post — Special Delivery Duo, Special Delivery Routes, and the Friend Garden
 >
 > **Plan state:** implementation-ready planning; dormant behind the post–Plan 09 gate
@@ -82,10 +86,12 @@ The product direction is approved. These are production gates, not invitations t
 - Human/Amelia approval of the greybox family playtest before production content.
 - Human originality and actual-size art approval for Ponchi and Melty before either is activated in runtime.
 - Final audit of post–Plan 09 Science supply, replay farming, the exact expanded
-  rescue roster, and the working **5 Science per Egg** price. At the current
-  planning point the intended roster is approximately 31 friends; derive the
-  final count from versioned authority and obtain a Human decision on reasonable
-  Solo/Duo full-roster Egg cadence before durable Garden migration.
+  rescue roster, and the working **5 Science per Egg** price. The accepted
+  post-v0.20.1 baseline has 32 authored-rescue species; derive the final count
+  from versioned Plan-09 authority and obtain a Human decision on reasonable
+  Solo/Duo full-roster Egg cadence before durable Garden migration. The earlier
+  approximately-31 estimate is historical and must not drive price, capacity or
+  completion promises.
 - Validator/solver approval before any dedicated Duo route is considered shippable.
 - Physical two-controller and Steam Deck evidence before platform claims.
 - Final family testing showing that optional mischief produces shared amusement more often than distress.
@@ -102,6 +108,9 @@ At the beginning of Plan 10—not from this September 2026 snapshot—the implem
 6. The completed Plans 01–09 and their acceptance evidence where their contracts are consumed.
 7. Current source and tests for engine transitions, levels, solver, reachability, hints, campaign, progress, session, reset, input context, controller polling, viewport/camera, presentation, assets, audio, VFX, animation, and performance.
 8. Every final authored maze through the debug/test routes, including early, middle, portal, Spring, poison, large/fogged, penultimate, and final campaign cases.
+9. Routed `PT-20260902-07`, `PT-20260902-10`, `PT-20260903-20`,
+   `PT-20260903-22`, `PT-20260903-23`, `PT-20260903-24` and
+   `PT-20260903-26` slices and their accepted predecessor evidence.
 
 Record a new execution-baseline commit, package version, test count, schema versions, level roster, rescue roster, Science supply, asset budgets, and known working-tree state. Never assume the version numbers or paths named in this planning snapshot are still current.
 
@@ -236,6 +245,17 @@ effectiveAmeReveal =
 - During modal or presentation locks, P2 docks near Ame, both seats' held input clears, and every continuous timer freezes. No intent replays after unlock.
 - When overlapping Ame, a guardian, required object, clue, or objective, P2 and cargo become partially translucent with a high-contrast outline. P2 has no collision with Ame and cannot physically block her.
 
+Consume the accepted character/camera smoothing contract rather than creating a
+second follow filter. Document the logical camera/reveal rectangle used by rules
+and the displayed world-to-screen transform used by both actors, cargo, effects
+and pointer hit tests. A display-only eased edge cannot make unrevealed objects
+interactable. Capture a transfer's normalized P2 position at its defined rules
+boundary; do not compound screen-position remapping once per eased display
+frame. Test held cardinal travel, corners, reversals, wall stops, camera clamps,
+Spring completion, portals and fatigue perches with both actors visible. Smooth
+Solo motion is a predecessor invariant; P2 must not reintroduce background judder
+or force Ame to take isolated steps to keep the view comfortable.
+
 ### 6.3 Lost mail overlay
 
 Mail is a Plan 10 overlay with stable IDs and its own revision/fingerprint. It is not inserted into the Solo `LevelDefinition`, does not exist in Solo, and never alters Solo collision, solver validity, content identity, or save compatibility.
@@ -267,6 +287,15 @@ combinedMail = savedMailRemainder + deliveredThisMaze
 eggsAwarded  = floor(combinedMail / 15)
 newRemainder = combinedMail mod 15
 ```
+
+Here and throughout this plan, a durable completion means the final committed
+leave decision under 03M/Plan 01, not first star contact or the end of a victory
+effect. Pending completion retains Stay/Next/Restart, their rescue-dependent
+default, the active snapshot and exactly-once presentation identity. Stay banks
+no mail, closes no cargo and grants no completion refresh; it resumes that same
+run. Next, or the approved post-commit Garden destination, applies the complete
+reward transaction once. Restart awards nothing. Tests exercise each choice
+with cargo, collected mail, skipped optional friends and a reload while pending.
 
 Track delivery by level, duration, and replay ordinal. If the shortest two mazes produce more than half of all mail Eggs in observed family play, or families farm them despite preferring other levels, rebalance their repeat yield without changing already-earned rewards.
 
@@ -307,8 +336,20 @@ atOrigin | carriedByCourier | droppedAt(cell) | resolvedByAme | closedUnclaimed
 - Drop chooses the nearest revealed, walkable, non-hazard, unoccupied, non-objective floor cell within one tile; equal candidates use stable distance then row/column ordering. If none exists, Drop fails and cargo stays held.
 - Ame wins a same-tick origin-pickup race. Lifecycle/pause resolves before either player; Ame's movement and resulting base consequences resolve before P2 Take.
 - Offer, Snatch, direct Ame pickup, and explicit recovery all call the same exactly-once pickup function. No second copy of item arithmetic is allowed.
-- At victory, unresolved `carriedByCourier` and `droppedAt` objects become `closedUnclaimed` and grant nothing. Restart/abandon returns all authored pickups. Garden detour and active save preserve disposition.
+- At committed completion, unresolved `carriedByCourier` and `droppedAt`
+  objects become `closedUnclaimed` and grant nothing; star contact/Stay does not
+  close them. Restart/abandon returns all authored pickups. Garden detour and
+  active save preserve disposition.
 - P2 may therefore fetch a key from behind its own door, carry Boots over their hazard, rescue optional Science, or steal the sword. This is an intentional ordinary-Duo rule, not a solver bug.
+
+Consume final Plan-09/PT22 object taxonomy explicitly. A disguised Mimic chest,
+revealed guardian, resolved shell or cosmetic reward particle is not a portable
+Gold/Science pickup merely because it depicts treasure. Ame remains the reveal/
+combat authority and the committed family/outcome never rerolls on join, cargo
+interaction or recovery. Only a real unresolved object admitted by the final
+portable-pickup contract may be carried. Reward showers may redirect or split
+their visual homing endpoint between the collecting actors, but consume one
+shared committed reward and never create collectible physics or a second award.
 
 ### 6.6 Cargo fatigue: fair mischief contract
 
@@ -557,7 +598,10 @@ Initial P2 tuning targets for the greybox, subject to family test:
 - about `18` tiles/second² acceleration and `24` tiles/second² braking;
 - low/standard/high speed preferences with equivalent reachability;
 - D-pad opposing inputs cancel; combined cardinals form a normalized diagonal; any held D-pad direction deterministically overrides analogue stick flight until all D-pad directions release; and
-- cargo applies the separate 85% multiplier before fatigue phase multipliers.
+- cargo uses section 6.6's absolute phase speeds relative to unloaded normal
+  flight: 85%, 65%, guided landing, 0%, then 45%/65% recovery. Do not apply an
+  additional 85% multiplier to those percentages. Player speed preference
+  determines unloaded speed first; both Couriers use the same arithmetic.
 
 Controller P2 mapping:
 
@@ -653,6 +697,13 @@ Postal wards/headwinds may block or slow P2 where ordinary walls do not. They re
 The Garden unlocks once the profile has both a first curated Adventure completion and at least one successfully rescued friend species. Its first visit introduces one Welcome Egg, which therefore always has an eligible no-duplicate Friend result. If a player completes a maze before making a rescue, home shows a gentle locked teaser pointing toward the first rescue rather than instantiating an Egg that stalls on its third crack. It uses the familiar app shell and viewport; the main maze surface swaps to one large, open, maze-like garden map.
 
 - **Visit Friend Garden** is available from home after unlock.
+- The pending-completion surface also offers **Take a break in the Friend
+  Garden** when the already earned or proposed completion state satisfies Garden
+  access. It preserves Stay/Next/Restart and their default focus. Choosing it
+  commits the same completion/reward/mail transaction as Next, then enters the
+  Garden; that completed run is not also resumable through Return to Route.
+  Garden entry from Pause remains a distinct saved-run detour and commits no
+  maze completion. Failed saves/commits stay on the recoverable source surface.
 - A resumable curated Solo or ordinary-Duo maze may enter via Pause. The exact active run saves first; maze cargo docks and is inert in the Garden.
 - **Return to Route** restores maze state, mode, mail, cargo, and live in-memory seats. If P2 is absent, show ordinary recovery before unpausing.
 - A cold reload restores state but not device claims. Players explicitly reclaim seats.
@@ -711,6 +762,17 @@ validates the final Plan-09 coverage contract; it does not conceal a missing
 authored rescue by making that species independently Egg-eligible.
 
 The UI may disclose the remaining category mix. It must not use rarity tiers, jackpots, paid currency, near-miss staging, countdowns, daily streaks, FOMO, or premium Eggs.
+
+Reserve concrete friend/toy identities against both committed ownership and
+all other live Egg reservations. Three partially cracked Eggs cannot reserve
+the same resident or toy. If a Friend card has no eligible unreserved species,
+pin that card/category and its place in the bag while leaving its species
+unassigned; a later eligible rescue binds it deterministically, in Egg-ID order,
+before commitment. A bound identity never rerolls. The waiting third crack is a
+clearly explained rest state; it cannot block Leave Garden, other Garden care,
+or returning to Adventure. First-crack preload is possible only once an exact
+reward is bound. Test depleted eligible pools, three simultaneous reservations,
+new rescue arrival and reload, without adding duplicates or changing bag odds.
 
 ### 11.5 Science-funded Solo Eggs
 
@@ -806,7 +868,14 @@ The migration must:
 - initialize Courier choice safely without requiring a device; and
 - extend explicit Reset Progress storage/key coverage and tests.
 
-Garden validation failure may reset only the Garden/economy extension with clear recovery copy. It must never delete campaign completion, rescues, canonical Science discoveries, or records.
+Garden validation failure quarantines the invalid extension and preserves its
+raw recovery record while hiding unsafe writers. It must never delete campaign
+completion, rescues, canonical Science discoveries, records or valid committed
+Garden rewards. Validate/repair individual fields or transactions against their
+durable receipts. Never zero `scienceSpentOnEggs` while retaining minted Eggs or
+residents: that would recreate spendable Science. A destructive Garden reset or
+compensating economy migration requires the existing explicit Human recovery
+decision, with a concrete preserved-state report first.
 
 Each curated level has one shared completion summary—first-completed transaction/mode, completion count, unlock/rescue/reward facts, and any campaign-wide canonical flags—plus independent optional `soloBest` and `duoBest` records. A first completion in either mode applies shared progression rewards exactly once and never overwrites the other mode's best. Historical records migrate only to `soloBest`; a later Duo result cannot degrade it, and a later Solo result cannot overwrite `duoBest`.
 
@@ -956,13 +1025,27 @@ Every new semantic event supports the final independent cross-product of `Motion
 
 Rules own all timing. Effects have bounded nodes, finite cleanup, no animated blur/filter/shadow, no rapid flashes, and one dominant readable shape. Routine mail/cargo effects should stay inside final pickup-effect ceilings. Egg hatch is one normal set piece, not a reward spectacle designed to mimic a commercial loot box.
 
-Reduced motion replaces travel, bounce, puff, spin, shake, and hatch arcs with state swaps, short fades where permitted, and static endpoint markers. It never changes flight reach, Ping duration, fatigue, catch radius, crack count, reward, or mechanism timing.
+Reduced motion replaces decorative travel, bounce, puff, spin, shake, and hatch
+arcs with state swaps, short fades where permitted, and static endpoint markers.
+It preserves continuously legible rules position for direct Courier flight and
+the physical fatigue landing: suppress decorative bob/trails without concealing
+where the actor and catchable cargo are during the same legal trajectory. It
+never changes flight reach, Ping duration, fatigue, catch radius, crack count,
+reward, or mechanism timing.
 
 ### 13.8 Audio and haptics
 
 Optional redundant cues may include letter flutter/stamp, Ping stamp, satchel rustle, handoff/snatch pop, gentle fatigue puff, recovery chirp, Egg tap/crack/hatch chime, fruit plop, feeding chirp, and soft toy responses. Ponchi uses original chirps/postal nonsense and never franchise vocabulary.
 
 All sounds use the final cancellable sound-run lifecycle and global voice budget. No rule requires audio. Haptics remain feature-detected, per-seat/preferences-aware, subtle, and nonessential; a failure or unavailable actuator cannot block either player.
+
+Wire the final `garden` music context through Plan 07B's existing contextual
+controller and `MusicTransportPort`. Reuse the single Plan-01 Sound disclosure,
+Previous/Next/Shuffle semantics, activation/readiness and return-history rules;
+add no Garden-specific player or per-scene audio ownership. Garden detour,
+committed-victory entry, Home entry and return all need ready/fallback/cancel
+evidence, with Egg/care SFX inside the same mix/voice budget. No new original OST
+production is implied where the approved Garden pool already exists.
 
 ### 13.9 Asset pipeline and loading
 
@@ -1072,6 +1155,14 @@ The slice must test the riskiest social loop—**a useful item in P2's hands, co
 
 It begins only after Phase 1 and Plan 09 closure. Use placeholder shapes and final system assets already in the repository. Do not wait for or commission Ponchi/Melty production art.
 
+Package the technically green slice as the root-owned `FP-P10-GREYBOX` preview
+through the roadmap's isolated delivery contract. Its disposable profile/storage
+namespace is visibly distinct from the family's real saves; it must never apply
+prototype rewards or migrations to them. The preview note names the experiment,
+controls, exact build/hash, synthetic-state limits and restoration path. Root
+publishes and verifies it; an implementation agent supplies the reviewable
+checkpoint and evidence only.
+
 ### 17.2 Representative content
 
 Select one final mid-campaign maze with:
@@ -1112,7 +1203,10 @@ It may not fake the real item pickup resolver, camera/reveal predicate, fixed fa
 Use Amelia and a parent as the primary creative session, then repeat with at least one additional parent/child or sibling pair before production approval.
 
 1. Give only the one-line promise and a small control card. Do not teach the intended joke.
-2. Play the ordinary maze for 5–7 minutes. The adult playing Courier should once help sincerely and once take a tempting key without saying whether it will be returned.
+2. Play the ordinary maze for 5–7 minutes. Begin with sincere delivery/cooperation.
+   If the child is comfortable trying harmless keep-away, the adult may take one
+   tempting key and let the child choose to negotiate, pursue or stop. Do not
+   manufacture distress or repeat an unwanted joke to satisfy a data quota.
 3. Let Ame negotiate, chase, catch during fatigue, or use a handoff. Do not force recovery unless needed.
 4. Play the cooperative greybox room for 3–5 minutes.
 5. Visit the Garden, crack one Egg, release fruit, and feed the friend.
@@ -1136,6 +1230,16 @@ Proceed to production only if:
 - no player reports “P2 ruined it” as the dominant impression in either required family session;
 - Garden interactions are understood without fear of hurting, neglecting, or losing a friend; and
 - at least one player asks to hatch another Egg or play another maze.
+
+These are local continuation criteria, not population-level success claims.
+Report each pairing's counts and observations separately; an enjoyable average
+cannot conceal distress for one role. A meaningful P2 choice is a discovery,
+communication, voluntary delivery/catch decision or mechanism action that the
+player understands. Raw movement, compulsory pursuit and repeated decorative
+Boops/Pings do not satisfy the engagement quota. Quiet shared observation may be
+valuable: annotate it before deciding whether idle time represents exclusion.
+Respect a request to stop immediately. Choosing to finish a pleasant session is
+not evidence that the game needs more reward pressure.
 
 ### 18.3 Stop/change thresholds
 
@@ -1161,8 +1265,8 @@ Do not proceed unchanged if:
 | Fatigue makes pursuit funny and fair | Keep it as sole standard catch closure; retain only visual return-address trail |
 | Catch still requires excessive motor precision | Approve/tune optional Auto-snatch or Catch Assist; never widen standard range silently |
 | P2 engages only in the Duo room | Prioritize dedicated routes; do not claim the overlay alone is shippable |
-| Garden creates “one more maze” desire | Preserve reward cadence and simple care scope |
-| Garden creates farming/reward anxiety | Slow Egg cadence and strengthen direct/disclosed reward presentation |
+| Garden prompts a voluntary return while players can leave happily | Preserve the tested reward cadence and simple care scope |
+| Garden creates farming/reward anxiety | Diagnose slow access, waiting Eggs, repetitive optimal routes and confusing disclosure separately; take a bounded cadence/disclosure proposal to the existing Human economy gate, then retest. Do not automatically slow rewards or increase grind |
 | Camera clamp is the main frustration | Tune docking/framing before adding any P2 verbs or production content |
 
 The largest remaining uncertainty is social, not technical: **does stealing a useful item produce warm, negotiated mischief often enough to justify the frustration it can produce?** The forced-fatigue key scene is the cheapest honest test.
@@ -1209,9 +1313,13 @@ Plan 09 accepted
   current platform status.
 - Model time and completions required for first Friend, several meaningful
   Garden visits, and the exact full roster through Solo Science and ordinary-Duo
-  mail. Recalculate against the approximately 31 intended friends at this
-  planning point and the exact final roster at execution; do not extrapolate the
-  planning-snapshot cadence or create a hidden grind.
+  mail. Start from the accepted 32-species baseline and derive the exact final
+  Plan-09 roster at execution; do not extrapolate historical estimates or create
+  a hidden grind. Show no-rescue/first-rescue, casual selective rescues, all-rescue,
+  returning-complete, lowest-yield Solo and shortest-level replay cases. Separate
+  the time to rescue a species from the time to make it resident; one cannot
+  hide the other's bottleneck. Include waiting/reserved Eggs, overflow, completed
+  toys and the no-friend-left bag conversion in the supply model.
 - Reconcile the approved Science spend exception and co-op-only route exception in maintained product authority without editing Plans 01–09.
 - Pin Plan 10 rules/content version identifiers and local feature boundaries.
 
@@ -1266,6 +1374,9 @@ Plan 09 accepted
 
 - Human records **continue**, **revise and retest**, or **defer Plan 10**.
 - No production character, 24-overlay authoring, profile economy migration, or six-route content begins without continue.
+- Record the chosen behaviour and exact acceptance changes in one continuation
+  note. The decision table supplies proposals, not autonomous authorization to
+  remove approved cargo, either Courier, the Garden or the six-route scope.
 
 ### Phase 4 — Production ordinary-Duo core and input (`XL`)
 
@@ -1304,6 +1415,9 @@ Plan 09 accepted
 
 - Author/validate stable mail overlays for all final curated mazes after layout freeze.
 - Add home Add-a-Courier, in-maze join, role choice, P2 HUD, mail meter, result conversion, Duo records, End Duo/recovery, onboarding, and clear Solo/Duo mode language.
+- Preserve pending completion and add its post-commit Garden destination;
+  exercise Stay/Next/Restart/Garden without consuming cargo/mail on contact or
+  changing the established rescue-dependent default.
 - Add completion-only banking, replay attribution, the exact `first curated completion AND first rescued species` Garden/Welcome-Egg trigger and onboarding teaser, and no-Surprise-mail behavior.
 - Run each overlay through automated validators and geometry/play audits at final viewports using approved proxy bounds. Placeholder/proxy art cannot satisfy final visual acceptance.
 
@@ -1338,6 +1452,8 @@ Plan 09 accepted
   all six MotionMode × VfxQuality combinations, and solo parity. Allocate every
   final species a deterministic size-safe home waypoint, interaction bounds and
   one of the three shared personality presets.
+- Bind Garden BGM context and return history through the existing transport;
+  verify Sound actions, failed decode/readiness, pause/resume and cancellation.
 - Run exact-final-roster geometry/crowding/loading/decode and six-mover
   performance checks plus enter/exit, reload, reset, and care-safety tests.
 
@@ -1354,6 +1470,13 @@ Plan 09 accepted
 - Implement shared runtime/solver mechanisms first: stamp pair, relay/sorting flap, headwind/ward, wall anchors, checkpoints, and Reset Duo Room.
 - Complete exact finite validator, solver, and role-aware hint ladder.
 - Only after reducer/solver acceptance, author the six route packets in teaching order with stable content IDs and route records.
+- Prove and family-play one concise room for each mechanism family before
+  expanding it into finished routes. For each room, name what Ame notices/does,
+  what the Courier notices/does, what they communicate, and how either recovers
+  from a wrong guess. Watching the other player solve everything is not an
+  essential role; repeated simultaneous timing is not a substitute for joint
+  reasoning. Reuse the three approved families in new relationships before
+  requesting more verbs or mechanism art.
 - Conduct design, accessibility, recovery, performance, and family playpasses on every reachable mechanism state.
 
 **Exit gate**
@@ -1368,6 +1491,10 @@ Plan 09 accepted
 - Run the full automated, migration, content, solver, visual, accessibility, performance, art-pipeline, web, Tauri, and hardware matrix.
 - Repeat family sessions on production content with child-as-Ame, child-as-Courier, two-child, and role-swap pairings where available.
 - Tune mail/Science/Egg cadence from observed behavior without changing earned state.
+- Return material cadence changes to the existing Human economy gate; version
+  future rules explicitly and preserve partially consumed bag order, concrete
+  reservations and committed spend/rewards. A late tuning pass cannot bypass
+  the Phase-0 economy decision.
 - Finalize maintained specs, controls guide, README, architecture, release checklist, test evidence, originality records, and rollback runbook.
 - Stage flags in the order ordinary Duo → Garden → Duo Routes, with explicit go/no-go for each.
 
@@ -1521,6 +1648,9 @@ During Plan 10 implementation, update maintained product authority and guides, b
 - Base gameplay fingerprint changes invalidate/review only affected Duo overlays; mail revision does not invalidate Solo sessions.
 - Reveal/collect/save/reload/restart/victory/replay and Garden-detour state.
 - Completion-only banking and exact `floor/mod 15` boundaries at 0, 14, 15, 16, multiple Eggs, and transaction retry.
+- Pending star/Stay/Restart awards no mail or fruit refresh; Next and Take a
+  break share one durable commit. Cargo remains live on Stay; Garden detour and
+  committed Garden destination retain distinct save/return semantics.
 - Surprise Mazes instantiate no mail or resumable Duo state.
 
 ### 23.4 Solver and route coverage
@@ -1555,6 +1685,10 @@ During Plan 10 implementation, update maintained product authority and guides, b
 - No duplicate resident/toy; every final stable friend ID is eligible only after
   an authored Solo-accessible rescue; ordinary/mythic families have identical
   chronology rules; no-eligible Friend wait; post-roster conversions.
+- Concurrent first cracks reserve distinct unowned/unreserved friend/toy IDs;
+  pending unbound Friend cards bind once in stable Egg order after a rescue.
+  Three waiting Eggs, reload and a full nest never block safe Garden exit or
+  care, reroll a bound reward, duplicate ownership or imply neglect.
 - Garden/Welcome Egg unlock only after both first curated completion and first rescued species; Welcome Egg consumes the first Friend card and cannot begin ineligible. No consecutive non-Friend while eligible.
 - One ready fruit per refresh, no stacking/duplication, correct eligible completion sources.
 - All exact-final-roster residents visible without unsafe overlap or clipping,
@@ -1606,6 +1740,13 @@ During Plan 10 implementation, update maintained product authority and guides, b
 | Schema crash duplicates rewards | Atomic profile transaction, stable operation IDs, retry ledger | Disable writers; retain readers and repair from ledger |
 | Plan 10 regresses Solo startup/performance | Wrapper architecture, code splitting, chosen-only assets, flags | Disable `duoCore` entry points; keep readers/sanitizers |
 | Six routes delay the whole feature | Reducer/solver before content; modular release gates | Release ordinary Duo/Garden first, keep `duoRoutes` off |
+
+The rollback column describes technical containment and proposals for the Human,
+not permission to declare a smaller feature set complete. Turning off an unsafe
+surface preserves data immediately, but shipping without approved cargo, either
+Courier, Garden, or the six routes needs an explicit scope decision with revised
+copy and Definition of Done. No mitigation silently replaces the approved Egg
+bag or standard fatigue policy.
 
 ### 24.2 Kill-switch hierarchy
 
@@ -1673,6 +1814,11 @@ Plan 10 is complete only when all of the following are true.
 
 - Both MotionMode values across all three VfxQuality values, plus non-colour, non-audio, D-pad, keyboard/mouse, reconnect, and motor-assist paths, communicate identical rules.
 - The required family sessions pass the agreed engagement, no-soft-lock, fair-catch, no-tears, cooperation, role-swap, and Garden-care thresholds.
+- Both roles retain understandable agency and comfortable camera travel;
+  meaningful-choice evidence excludes busywork, unwanted pursuit and raw input
+  spam. Economy evidence reports access to first/multiple/full-roster residents
+  separately for casual Solo and Duo, including waiting-Egg recovery and healthy
+  stopping, under the Human-approved final cadence.
 - No platform, controller, Steam Deck, haptic, performance, or originality claim exceeds recorded evidence.
 - All unverified physical rows remain labeled unverified rather than inferred from mocks.
 

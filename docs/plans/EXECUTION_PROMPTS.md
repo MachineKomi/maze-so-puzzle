@@ -4,6 +4,27 @@ Status: manager-reviewed copy/paste runbook
 
 Prepared: 2026-09-02
 
+Future-task reconciliation: 2026-09-05. Agent 01's existing section-4 assignment
+has stopped with an unaccepted candidate; use `AGENT01-review-follow-up.md`
+in that same task for the root-reviewed correction. The original prompt remains
+history. Plan 03/03M and corrective art checkpoints
+are accepted; historical prompts below are not instructions to reopen them.
+After UI acceptance, root executes MOVE-01 and publishes FP-UI1 before Agent 04.
+The later prompts consume the final accepted travel/UI APIs, not candidate
+exports seen while Agent 01 is running. Section numbers are not plan IDs.
+
+Before starting any future prompt, root supplies the accepted SHA, owned paths,
+actual dependency APIs, required art/landmark/rendition availability, budget
+status and owned backlog slices. Read roadmap §5.13B and the dated refinement in
+the relevant plan. Resolve gaps concretely before broad production. Use the
+existing specialist task; do not start another runtime owner in parallel.
+
+Future Plan 08 also implements PT32 camera view 4/5/6/7 (default 6) under its dated
+addendum; 07B requalifies the actual expanded visible/paint workload. It does
+not enter the present UI return or MOVE-01/FP-UI1 scope. All future prompts
+consume the vision's reaffirmed fun, learning-through-play and responsiveness
+criteria, not a new quota of quizzes, effects, assets or progression systems.
+
 Use these prompts in the order shown. Run only one implementation agent at a time. After each agent finishes, have the root manager inspect the diff, run/confirm the gates, resolve defects, commit, and push a clean checkpoint before starting the next prompt.
 
 Plan 07 intentionally runs twice: a measurement-only pre-pass first and the optimization/qualification pass last. Plan 09 remains reserved for the root manager after every specialist checkpoint is accepted.
@@ -172,13 +193,26 @@ Verify 1920x1080 TV, 1280x720, 1194x834 and 1024x768 iPad/tablet, 960x540, 844x3
 Do not commit or push. Finish with outcome, changed files, before/after geometry table/screenshots, styled component/state proof, typography/licence/byte record, presentation-art loading/fallback evidence, accessibility/input evidence, CSS-debt delta, tests, known physical-device gates, rollback notes, and git status. Identify the clean post-review commands and smoke path for the root manager to produce preferred Family Preview 1 from the committed checkpoint; do not package a dirty-tree build as that preview.
 ```
 
+## 4A. Root — MOVE-01 and FP-UI1
+
+After Agent 01's complete review and checkpoint, execute
+`docs/plans/MOVE-01-smooth-travel-and-camera.md`. Keep authoritative grid movement
+and cadence while coordinating rendered actor/camera travel; do not implement
+Plan 08's joystick or advance broad Plan 07B scope. Resolve UI presentation-art,
+geometry and allocation gaps before accepting the UI. Review/checkpoint MOVE-01,
+then run the roadmap's clean-source FP-UI1 transaction and
+`docs/playtests/FP-UI1-checklist.md`. Only then issue Agent 04's prompt.
+
 ## 5. Agent 04 — lighting, wall depth, and shared terrain scene seam
 
 ```text
 You are our dedicated senior stylized-lighting engineer, technical artist, and SVG rendering architect. You are expert in top-down 2.5D form, connected terrain geometry, edge normals, bevels, ambient/contact occlusion, cast shadows, material calibration, camera continuity, SVG masks/filters, accessibility, and WebView performance. You have excellent judgment about making flat art feel dimensional without obscuring a puzzle.
 
 Execute the manager-reviewed Plan 04 against current HEAD. Plans 07A, 06, 03,
-root checkpoint 03M, and 01 have landed. Use their final art/material records,
+root checkpoint 03M, 01 and MOVE-01 have landed, and FP-UI1 has been delivered.
+Consume the accepted travel/settle/cancel contract; do not reimplement or retime
+camera/actor travel. Requalify its sustained-travel comfort route with lighting
+enabled. Use the final art/material records,
 MazeViewport scene slots, CSS layers, semantic IDs, and test harness.
 
 Read completely before acting: docs/GAME_VISION_AND_DESIGN_SPEC.md; docs/plans/00-integrated-implementation-roadmap.md; docs/plans/04-lighting-wall-depth.md with its addendum; and the current Gameplay, Art, UI/UX, and Performance specs plus Architecture/source/tests.
@@ -204,7 +238,11 @@ Run pure geometry/direction/cache tests, exhaustive topology fixtures, DOM/layer
 You are our dedicated senior game VFX director and presentation-systems engineer. You are expert in clean anime/JRPG effect design, child-friendly combat juice, environmental materials, particles, SVG/CSS/Web Animations, sound-picture synchronization, typed timelines, cancellation, reduced motion, and browser performance. You have excellent taste: effects should make meaning delightful, never bury it.
 
 Execute the manager-reviewed Plan 02 against current HEAD. Plans 07A, 06, 03,
-root checkpoint 03M, 01, and 04 have landed. Consume their gameplay events,
+root checkpoint 03M, 01, MOVE-01 and 04 have landed. Preserve MOVE-01's sole
+camera/actor travel ownership and explicit event handoff; effects must not
+restart ordinary travel or reintroduce board shake that defeats its comfort.
+Read the plan's current asset/reaction preflight and interaction hierarchy.
+Consume their gameplay events,
 03M pending-completion/stationary-door/Mimic/reward contracts, Art Bible
 tokens/assets, UI anchors/canonical src/motion.ts/layer manifest, and shared
 terrain/light/grounding seam. Import MotionMode from src/motion.ts; keep
@@ -235,7 +273,11 @@ Do not commit or push. Finish with outcome, changed files, effect/variation matr
 You are our dedicated senior game-controls, accessibility, and Steam Deck integration engineer. You are expert in the Web Gamepad API, Xbox conventions, input normalization, deterministic repeat/deadzone logic, spatial focus, modal safety, controller prompts, Steam Input, browser/Tauri constraints, Bluetooth lifecycle, couch UX, and automated input testing. You have excellent judgment about predictable child-friendly controls.
 
 Execute the manager-reviewed Plan 08 against current HEAD. Plans 07A, 06, 03,
-root checkpoint 03M, 01, 04, and 02 have landed. Consume the actual UI focus
+root checkpoint 03M, 01, MOVE-01, 04, and 02 have landed. Implement PT08's
+anchored board drag and hybrid cardinal thumb pad as well as controller input.
+Preserve MOVE-01 travel, current cadence semantics and stationary-door eligible
+held continuation; do not apply a blanket release gate to that one allowed
+continuation. Consume the actual UI focus
 topology/DialogShell/game menu, gameplay legality, canonical
 `MusicTransportPort`, and PresentationDirector busy/cancel contract. Do not
 invent a parallel UI or presentation system.
@@ -263,10 +305,15 @@ Do not commit or push. Finish with outcome, changed files, mapping/prompt table,
 
 ## 8. Agent 05 — limited sprite animation from final art and systems
 
+Execution supplement: MOVE-01 is an accepted predecessor. Use the actual
+campaign/catalogue and registered landmarks for the first acting canary;
+Unicorn/Tea-Time Skeleton supersede the historical kitten-first assumption.
+Preserve travel transforms and prove ordinary held-motion comfort with animation.
+
 ```text
 You are our dedicated senior limited-animation director, sprite systems engineer, and character acting specialist. You are expert in economical anime animation, strong held poses, expression continuity, registration/pivots, weapon sockets, typed animation manifests, isolated rendering clocks, image decode/cache policy, reduced motion, and event-driven game acting. You have excellent taste: every frame must have a job.
 
-Execute the manager-reviewed Plan 05 against current HEAD. This is intentionally the last feature track. Plans 07A, 06, 03, root checkpoint 03M, 01, 04, 02, and 08 have landed. Use their final Ame model/static sprite, art pipeline, layout sizes, grounding wrappers, PresentationDirector timeline/pose intents, canonical src/motion.ts contract, stationary interaction/reward semantics, and controller/input-lock lifecycle. Import resolved MotionMode from src/motion.ts; do not restore the obsolete illustrative src/vfx/types.ts import.
+Execute the manager-reviewed Plan 05 against current HEAD. This is the last presentation specialist before 07B; campaign/co-op/branding remain later. Plans 07A, 06, 03, root checkpoint 03M, 01, MOVE-01, 04, 02, and 08 have landed. Use their final Ame model/static sprite, art pipeline, layout sizes, grounding wrappers, PresentationDirector timeline/pose intents, canonical src/motion.ts contract, stationary interaction/reward semantics, and controller/input-lock lifecycle. Import resolved MotionMode from src/motion.ts; do not restore the obsolete illustrative src/vfx/types.ts import.
 
 Read completely before acting: docs/GAME_VISION_AND_DESIGN_SPEC.md; docs/plans/00-integrated-implementation-roadmap.md; docs/plans/05-limited-sprite-animation.md with its addendum; all current subsystem specs and source/provenance records; Architecture and Performance Budgets.
 
@@ -286,6 +333,11 @@ Do not commit or push. Finish with outcome, changed files, exact shipped frame/d
 ```
 
 ## 9. Agent 07B — integrated optimization and release qualification
+
+Execution supplement: MOVE-01 already owns ordinary character/camera travel.
+Rebaseline and qualify it with all later systems, optimizing only demonstrated
+problems behind the same boundary. Follow the revised Plan-07 audio phases and
+two-lane transport semantics; do not replay its historical pre-07A harness work.
 
 ```text
 Great. Now return to your Plan-07 performance work as our senior game performance and platform optimization engineer. The repository has intentionally moved substantially since your 07A baseline: gameplay, art, UI, lighting, VFX, controller support, and limited animation have landed sequentially. Do not restore old structures or optimize against stale line numbers.
@@ -323,3 +375,98 @@ Do not commit, push, deploy, or publish. Finish with: outcome; changed files; ex
 ## 10. Root manager — Plan 09
 
 Do not copy a specialist prompt for this phase. After the reviewed Agent-07B checkpoint is committed and pushed, the root manager executes `docs/plans/09-campaign-expansion-24-mazes-plan.md`, then performs the final 24-level integration, performance, controller, migration, Tauri, documentation, commit, and push gates.
+
+Apply the current chapter question/inference/recovery/payoff review, narrative
+truth and exact content-ecology requirements. Complete required FP-CAMPAIGN and
+record family findings before handing the accepted campaign to Plan 10.
+
+## 11. Agent 10 — optional couch co-op and Friend Garden
+
+```text
+Execute the complete manager-reviewed
+docs/plans/10-couch-co-op-and-friend-garden-implementation-plan.md against the
+accepted Plan-09/FP-CAMPAIGN checkpoint. Read the vision, integrated roadmap,
+current Gameplay/Story/Controls/UI/VFX/Animation/Lighting/Music/Performance specs,
+final roster/content-use evidence, backlog and save contracts first. Historical
+Plan-10 pitches are decision history, not competing implementation authority.
+
+Preserve Solo as default, authored ordinary-Duo placements, exact final friend
+eligibility, single shared reward ownership and MOVE-01 travel. Preflight the
+accepted cast/art/seat APIs and required greybox/progress profile isolation.
+Implement the plan's disposable greybox first, covering both players' agency,
+item/possession interactions, camera comfort, interruption and recovery. Compare
+shared laughter against frustration or one player being excluded. Prepare a
+concrete FP-P10-GREYBOX candidate and family journey for root packaging. Pause
+dependent production/migrations at the explicit Human/family gate; finish safe
+independent evidence and design details while it is pending. Do not treat silence
+or automated tests as approval.
+
+After the recorded gate, continue the plan's bounded implementation. Recalculate
+Egg cadence from the final roster and obtain its explicit Human decision before
+freezing production persistence. Keep concurrency/reservations, corrupt-save
+recovery, deterministic co-op routes, controller seats, Garden context/loading,
+solo return and accessibility exact. Never make rewards depend on disruptive
+teasing or solve reward anxiety by increasing grind.
+
+Update the owned co-op/Garden spec and affected shared docs when true. Use the
+existing tests/harness, exact migrations and solver/content cases; reproduce
+physical/family claims only where actually tested. Run focused checks, full
+project, desktop, performance and diff checks. Report exact changed files,
+evidence, pending gates and rollback. Do not commit/push, bump versions or publish;
+root reviews and owns FP-P10-GREYBOX and FP-COOP release transactions.
+```
+
+## 12. Agent 11 — final front-door and branding audit
+
+```text
+Execute docs/plans/11-final-key-art-branding-front-door-presentation-plan.md
+after accepted Plan 10 and FP-COOP. Read the vision, roadmap, final story/cast,
+Art Bible/model sheets, current title/Home/UI catalogue, source/provenance,
+backlog and performance/loading/release contracts.
+
+Audit the actual front door first. Preserve separate title then Home, exact live
+accessible title, approved v06 visual wordmark and guarded v04 transparent hero.
+Record retain/refine/replace by consumer and actual final-canon need. Existing
+successful approved work is the default; no fresh-art quota or automatic logo
+reconstruction. Use a curated representative cast, not a completeness sheet.
+
+For justified new art, follow the existing source/approval/derivative/provenance
+pipeline. Preflight formats, crop/copy-safe bounds, optical/platform sizes and
+loading cost before broad production. Show real context and actual-size evidence
+at the named Human approval gates. Do not invent new canon, menu architecture
+or unapproved characters to decorate a missing feature.
+
+Integrate only approved assets with semantic fallbacks and bounded loading.
+Update affected owned/shared docs, run art/catalogue checks, responsive/focus/
+reduced/static proofs, full project, desktop/performance and diff checks. Report
+retained/refined/replaced assets, provenance/bytes, evidence, rollback and pending
+Human/platform gates. Do not commit/push, bump versions or publish; root reviews
+the checkpoint before Plan 13.
+```
+
+## 13. Root or Human-triggered specialist — Plan 13 closure
+
+Execute `docs/plans/13-playtest-backlog-closure-and-release-polish.md` after
+accepted Plan 11. Produce an exact card/slice disposition report, fix bounded
+reproduced integration defects, return missing mandatory content to its owner,
+and declare the final consumer/pointer freeze only when true. A specialist
+leaves a reviewable uncommitted tree; root reviews/checkpoints and verifies
+CI/web deployment. New gameplay remains a separate Human gate.
+
+## 14. Root — Plan 12 retirement
+
+Execute `docs/plans/12-asset-retirement-and-package-hygiene.md` after the Plan-13
+freeze. Complete the individually verified copy-first archive and restore proof
+before asking for external-backup confirmation. Stop dependent removal until
+the Human confirms that exact batch. Re-audit any intervening pointer changes;
+then make reviewed family-isolated removal checkpoints and package/restore checks.
+
+## 15. Root — RC-01, Plan 14 and final Plan 15
+
+Execute `docs/plans/RC-01-integrated-release-qualification.md` against the clean
+post-hygiene candidate. After preserving the qualified candidate, complete the
+planning-only review in
+`docs/plans/14-gameplay-progression-and-qol-opportunity-review.md`. New experiments
+or systems require explicit Human-approved plans and requalification. Finally
+execute `docs/plans/15-process-retrospective-execution-plan.md`, writing the one
+canonical reusable playbook after all accepted follow-on work is complete.

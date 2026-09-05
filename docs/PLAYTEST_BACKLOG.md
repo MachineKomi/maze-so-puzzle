@@ -2,7 +2,7 @@
 
 - Status: living manager-owned intake, routing and acceptance ledger
 - Created: 2026-09-02
-- Current accepted implementation checkpoint at triage:
+- Historical accepted implementation checkpoint at initial triage:
   `ee176f52ab79e08e818fc919f44b7723f9fc9865`
 - Source intakes:
   [`playtests/2026-09-02-wishlist-and-issues.md`](playtests/2026-09-02-wishlist-and-issues.md),
@@ -14,8 +14,9 @@
   [`playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md`](playtests/2026-09-03-art-directed-ui-and-playable-checkpoints.md),
   [`playtests/2026-09-04-achievement-showcase-and-sticker-book.md`](playtests/2026-09-04-achievement-showcase-and-sticker-book.md),
   [`playtests/2026-09-04-story-cast-vn-and-voice.md`](playtests/2026-09-04-story-cast-vn-and-voice.md),
+  [`playtests/2026-09-04-living-goal-portal-spiral.md`](playtests/2026-09-04-living-goal-portal-spiral.md),
   and
-  [`playtests/2026-09-04-living-goal-portal-spiral.md`](playtests/2026-09-04-living-goal-portal-spiral.md)
+  [`playtests/2026-09-05-adjustable-camera-zoom.md`](playtests/2026-09-05-adjustable-camera-zoom.md)
 
 ## 1. Purpose and authority
 
@@ -46,6 +47,66 @@ current accepted checkpoint until the current-build audit and retest fields say
 so.
 
 ## 2. Workflow
+
+### Current reconciliation — 2026-09-05
+
+Accepted source baseline: post-v0.20.1 corrections through `b0eb8a8`; current
+HEAD `47bfff4` at review also contains orchestration documentation. Agent 01 has
+now stopped with an unaccepted candidate. Root's completed review returns exact
+corrections through `plans/AGENT01-review-follow-up.md`; details and verification
+are in `reviews/2026-09-05-plan01-review.md`. No new UI/playable release is claimed.
+
+The cards below preserve dated family/triage evidence. A paragraph labelled
+"Current-checkpoint audit" means the checkpoint inspected when that card was
+written, not an assertion about today's worktree. The following accepted slices
+supersede stale descriptions without closing their unimplemented successors:
+
+| Card | Accepted slice / evidence | Still open and next owner |
+| --- | --- | --- |
+| 02 | Stationary engine door and visible-origin correction; Gameplay spec and `d6b11c0` release record | Plan 02 final choreography; Plan 08 eligible held continuation; physical retest |
+| 04 | Plan 06 candidate and historical route metrics | Plan 09 must re-audit/rebuild if the finale still feels like a snake corridor; family evidence cannot be inferred from a solver |
+| 07 | Human advanced coordinated tile-based travel before FP-UI1; `47bfff4` | Root MOVE-01, family comfort retest, downstream non-regression and 07B qualification |
+| 10 | Recoverable pending exit, Stay/Next/Restart and exactly-once save boundary; 03M/Gameplay spec | Plan 01 presentation/defaults; 08 input; 10 Garden destination |
+| 13 | Redundant portal glyph removed in `d6b11c0`; recorded browser evidence | Root verifies preservation in Plan 01/02; no duplicate removal task |
+| 20/23 | All 42 original tracks catalogued, six pools and canonical MusicTransportPort/current adapter; 03M/Music spec | Plan 01 Sound, 08 input parity, 07B continuous contextual adapter/listening, 10 Garden |
+| 24 | All 32 friends have authored Solo rescues; union/intro tests and `556542e` | Plan 09 final enemy/friend ecology, teaching/scale remediation, generated families and 24-chapter themes |
+| 25 | Approved UI grammar and sources | Plan 01 candidate review, mandatory presentation rendition and budget disposition; later VFX/performance |
+| 26 | Approved two-stage title/Home, v06 visual wordmark and v04 hero; v0.20.0/.1 immutable previews plus later web corrections | Root FP-UI1 after UI + MOVE-01, later named previews; Plan 11 retain-first audit |
+| 27/30 | Approved interaction/story-shell requirements | Plan 01 candidate structure; 02 shimmer; 09 cast/content; physical/Human review |
+
+Do not substitute this table for exact source/tests. Evidence is carried from
+accepted records, not freshly rerun in this documentation review. Before a card
+closes, list its required slices, actual checkpoint, verification method and
+remaining Human/device gates. Completed code, shipped web, packaged artifact and
+Family-tested are distinct facts.
+
+### Review-candidate dependencies, not new feature scope
+
+Agent 01's completed candidate `UI_UX_SPEC.md` reports `ART-UI-PRESENTATION`,
+`BUDGET-UI01` and `PHONE-SIMULTANEITY`. Root must inspect the finished evidence
+before deciding any of them. Art returns specify exact approved sources,
+semantic IDs, consumer size/DPR and publication steps. A 44px touch target is
+required for an operable control; compact noninteractive friend/Bag indicators
+already have a smaller-status-cell route in Plan 01. Test that approved route
+before declaring the geometry impossible or requesting a product waiver.
+Budget requests supply exact measured deltas and justification; root reviews
+them separately from whether a build technically runs. None of these reports
+permits silently narrowing mandatory acceptance or reopening approved art style.
+
+Root review approved the bounded existing UI/font request (4500 gzip9 JS,
+0 CSS,43795 public bytes), for the same-task correction to apply/recheck.
+Additional derivative/code growth remains separately measured/reviewed.
+Root returned phone geometry, current-adapter audio parity, responsive fallback,
+dialog keyboard scrolling, art delivery and teaching-response checks. These are
+existing acceptance corrections, not new feature cards or an accepted UI tranche.
+
+Plan 02 also preflights PT18's neutral, happy/proud, worried, surprised, relieved
+and playfully annoyed portrait renditions. The published neutral portrait and
+construction-expression study alone do not supply six production states. Name
+missing source/rendition IDs and consumer geometry for a bounded root/art return;
+keep the approved Ame identity closed. PT03's `+0 → +N` gain receipt remains
+distinct from combat Power transfer, and PT22's magnetic collection destination
+is Ame's rendered anchor, with a separate exact wallet acknowledgement.
 
 ### Delivery status
 
@@ -78,7 +139,7 @@ A card may need more than one platform/input row before it is considered done.
 
 ## 3. Evidence synthesis
 
-The intake contains seventeen especially strong evidence and product-direction
+The intake contains eighteen especially strong evidence and product-direction
 clusters:
 
 | Theme | Direct evidence | Working implication |
@@ -100,6 +161,7 @@ clusters:
 | Living objective landmark | The existing goal-star spiral already reads as a portal, but its static centre does not fully sell that magical function | Preserve the approved star and add one restrained layered inward-spiral/glow/particle recipe with clear reduced/static forms |
 | Compact character storytelling | The Human wants a stronger cast/world review and short back-and-forth exchanges rather than isolated monologues | Review canon before Plan 11 and use bounded two-to-three-turn, fully skippable VN-style interludes without displacing maze play |
 | Optional voiced guidance | The Human would like to explore generated voices for story and tutorial moments later | Treat voice as a planning-only opportunity until script, consent/rights, accessibility, audio, package and Human-value gates justify a separate implementation plan |
+| Comfortable personal framing | Human requests two tiles less or one tile more than the default camera span | Offer a bounded future camera preference with larger sprites or more map context; preserve the accepted travel, reveal, input and performance contracts |
 
 This is high-value target-family evidence, but it is one family rather than a
 broad usability sample. Current-build reproduction and broader device coverage
@@ -112,16 +174,16 @@ remain necessary where called out below.
 | `PT-20260902-01` | Interaction celebration queue | P1 | Routed | Not retested | Plans 01 and 02 |
 | `PT-20260902-02` | Stationary door opening | P0 | Routed | Not retested | Root 03M contract, then Plans 02 and 08 |
 | `PT-20260902-03` | Combat gain count-up | P1 | Routed | Not retested | Plan 02, using Plan 01 notice system |
-| `PT-20260902-04` | Rainbow Power Parade topology | P1 | Candidate | Automated | Family retest, then Plan 09 only if needed |
+| `PT-20260902-04` | Rainbow Power Parade topology | P1 | Candidate | Automated | Plan 09 mandatory re-audit/remediation as needed; family retest |
 | `PT-20260902-05` | Escalating Power-99 presentation | P1 | Routed | Not retested | Plan 02; Plans 01 and 07B support |
 | `PT-20260902-06` | Long-corridor variety | P1 | Routed | Not retested | Plan 09 and generator quality work |
-| `PT-20260902-07` | Smooth camera/play feel | P0 | Routed | Not retested | Plan 07B; Plans 01 and 08 support |
+| `PT-20260902-07` | Smooth camera/play feel | P0 | Routed | Not retested | Root MOVE-01 before FP-UI1; Plan 07B requalifies; 01/08 support |
 | `PT-20260902-08` | Anchored touch joystick | P0 | Routed | Not retested | Plan 08; Plan 01 control surface |
 | `PT-20260902-09` | Strong-enemy teaching | P0 | Routed | Not retested | Plan 01 with gameplay-owned suggestions |
 | `PT-20260902-10` | Completion choices | P0 | Routed | Not retested | Root 03M contract, Plan 01/08; Plan 10 extension |
 | `PT-20260902-11` | More and optional battles | P1 | Routed | Not retested | Plan 09 |
 | `PT-20260902-12` | Varied, smaller level portfolio | P0 | Routed | Automated | Plan 09 authored and generated-topology phases |
-| `PT-20260902-13` | Remove portal glyph clutter | P2 | Routed | Not retested | Plan 02 |
+| `PT-20260902-13` | Remove portal glyph clutter | P2 | Accepted | Manager-tested | v0.20.1 recorded removal; preserve in 01/02 |
 | `PT-20260902-14` | Spikes and ice traversal | Epic | Needs decision | Not retested | Dedicated mechanics specification |
 | `PT-20260902-15` | Richer materials and obstacle VFX | P1 | Routed | Not retested | Plans 04 and 02; Plan 07B qualifies |
 | `PT-20260902-16` | Rewarded dead ends; quiet minimap | P1 | Routed | Not retested | Plan 09/generator plus Plan 01 |
@@ -140,6 +202,7 @@ remain necessary where called out below.
 | `PT-20260904-29` | Living goal-portal spiral | P1 | Routed | Not retested | Plan 02; Plan 07B qualifies; Plan 13 fallback |
 | `PT-20260904-30` | Cast review and compact VN interludes | P1 | Routed | Not retested | Plan 01 shell; Plan 09 canon/content; Plan 11 consumes |
 | `PT-20260904-31` | AI-generated voice-acting exploration | Epic | Needs decision | Not retested | Plan 14 opportunity review; explicit follow-on only |
+| `PT-20260905-32` | Adjustable camera zoom: 4–7 tiles | P1 | Routed | Not retested | Future Plan 08 after accepted UI/MOVE-01/04/02; Plan 07B requalifies |
 
 ## 5. Backlog items
 
@@ -642,17 +705,19 @@ longer satisfy the latest direction.
 
 - Type: Visual decluttering
 - Impact: P2 — polish
-- Delivery: Routed
-- Verification: Not retested
-- Primary owner: Plan 02
+- Delivery: Accepted (v0.20.1 removal)
+- Verification: Manager-tested (recorded v0.20.1 browser evidence; no new family claim)
+- Primary owner: Root correction completed; Plan 02 preserves it
 - Supporting owners: Plan 03 art contract; Plan 01 minimap/accessibility check
-- Target gate: Plan 02 acceptance
+- Target gate: Preserve at Plan 01/02 review; do not repeat the completed removal
 
 **Human decision.** Remove the small white emoji/glyph floating over maze
 portals; the rendered motif and colour already make it feel redundant.
 
-**Current-checkpoint audit.** Confirmed open. The runtime renders a separate white
-pair-name motif over each portal.
+**Historical triage audit.** A separate white pair-name motif was rendered over
+each portal. `d6b11c0` removed it; the v0.20.1 release and Project Audit record
+browser verification at 1280×720 and 844×390. This reconciliation carries that
+accepted evidence forward and does not claim a fresh complete motion/device pass.
 
 **Acceptance slices.**
 
@@ -984,6 +1049,12 @@ response; at least 75% who predict the mechanic before its second use; and at
 least 70% of Hint users who resume before the final Step hint. Skilled/returning
 players should encounter no forced explanatory modal and should be able to clear
 the teaching pocket directly.
+
+These percentages are design hypotheses, not meaningful acceptance statistics
+from one family's playtest. Record actual participant/opportunity counts, prompt
+level, observed inference and recovery, returning/new-player context and examples.
+Do not require repeated uncomfortable or tiring play to fill a numerical quota.
+Root evaluates the evidence and sample limits before claiming teaching success.
 
 ### PT-20260903-20 — Continuous contextual original OST
 
@@ -1758,13 +1829,14 @@ early playable build. Plan 11 later evaluates these assets against the final
 campaign, alternative Player 1, Ponchi, Melty and Friend Garden canon; it may
 retain, extend or selectively replace them and is not required to redo good work.
 
-**Front-door boundary.** The current `title` route already acts as the home/menu
-surface; there is no separate Home screen. Plan 01 gives the two illustrations
-distinct roles within the existing front door or reserves one deliberately—it
-does not add navigation solely to show another image. Keep artwork, exact live
-title text and logo separable. AI-generated lettering is concept evidence only;
-the final “Maze so Puzzle” wordmark is reconstructed with exact controlled
-lettering, spelling/legibility checks, accessible live text and Human approval.
+**Current front-door boundary.** v0.20.1 superseded the original combined-screen
+proposal: preserve the minimal title with Play/Exit, then Home with Continue,
+navigation/progress and the transparent hero. Human decision v10 approved the
+v06 generated visual wordmark after exact-spelling/delivery checks; exact live
+accessible `Maze so Puzzle` text remains. Home hero v04 supersedes v03 after
+the guarded cutout/horn correction. These approvals are closed. Plan 11 audits
+this accepted set; it does not require re-typesetting the mark or collapsing
+the screens merely because an older intake proposed that.
 
 **Preview policy.**
 
@@ -2008,6 +2080,12 @@ including Ame, with no long exposition.
   Story remains replayable from an appropriate surface without duplicating
   rewards or altering maze state.
 
+**Narrative truth refinement — 2026-09-05.** Outro copy must describe the actual
+result: ordinary zero/partial-rescue completion is still a proud success and
+must not claim every friend came home. A perfect-rescue celebration may add its
+earned acknowledgement. Cast/reunion writing cannot retroactively deny an
+earlier victory or turn optional rescues into an implied failure.
+
 ### PT-20260904-31 — AI-generated voice-acting exploration
 
 - Type: Audio/narrative opportunity; potential release and rights epic
@@ -2032,12 +2110,88 @@ download size, caching and failure fallback. Do not generate final voices,
 publish media, or bind save data during the study. Only an explicit Human choice
 may authorize a separately scoped implementation.
 
+### PT-20260905-32 — Adjustable camera zoom
+
+- Type: Camera framing, comfort and accessibility preference
+- Impact: P1 — high value
+- Delivery: Routed; future implementation, excluded from MOVE-01 and FP-UI1
+- Verification: Not retested
+- Primary owner: Plan 08 for the preference, semantic controls and integration
+- Supporting owners: UI's accepted menu/scene geometry; MOVE-01's sole travel
+  owner; Plan 07B for integrated performance and rendition qualification
+- Dependencies: Accepted Plans 01, MOVE-01, 04 and 02; current exploration rules
+- Target gate: Plan 08 functional acceptance, then Plan 07B qualification and
+  family comfort/readability evidence
+
+**Human outcome.** Let the player choose larger gameplay sprites or a little
+more map context. From the current default span of six tiles, zoom in by two
+tiles or out by one: the requested endpoints are 4 and 7, with Default = 6 tiles
+along each side of the current square camera. Use one-tile steps 4/5/6/7 as the
+adopted control proposal; the intermediate five-tile choice is a routine UX
+refinement, not an extra Human requirement. These are total-span changes, not
+a change on each edge. Default remains selected for a new or invalid preference.
+The request is
+for a future implementation plan; the next UI/travel preview does not need it.
+
+**Current source evidence.** `src/game/exploration.ts` has
+`DEFAULT_FOV_SIZE = 6`; both camera selection and reveal helpers accept a size.
+That shared parameter is a potential integration trap: a display preference
+must not silently change exploration, saved revealed tiles or puzzle truth.
+This intake records requirements, not a completed zoom feature.
+
+**Acceptance slices.**
+
+- Use one compact Camera view row in the accepted game menu, with Zoom in,
+  Default and Zoom out actions plus the current descriptive selection. Step
+  between 4/5/6/7, disable the relevant limit action and make reset to 6 obvious.
+  Keep the HUD, Bag, minimap and text
+  at their established sizes; this is gameplay camera zoom, not browser zoom or
+  another Big mode. No permanent button cluster, pinch gesture or controller
+  chord is required. Keyboard, pointer/touch and controller can select every
+  choices through the same surface and safely return to play.
+- Preserve legal tile movement, held cadence, solver/rewards and the existing
+  exploration/reveal policy. Zooming out can show more already-available map
+  context; unrevealed tiles remain concealed. Prove that known terrain and
+  objects beyond the default crop actually appear at Wide, rather than adding
+  an empty decorative band. Selecting a mode must not reveal
+  tiles or remove fog, nor may zooming in erase exploration. Any later proposal
+  to enlarge the discovery window is an explicit gameplay decision.
+- Parameterize the accepted MOVE-01 camera/scene geometry without another
+  interpolation owner. Keep Ame in view, clamp to map edges and tiny/narrow maps,
+  preserve tile/sprite aspect ratio and the same stable odd/even centring rule.
+  Where the level is smaller than the selected span, retain the stored choice
+  and use a documented effective clamp. Normal/Big, resize, DPR changes and
+  platform aspect differences never silently overwrite the preference.
+- Recompute camera bounds, culling gutters, fog masks, lighting, effect anchors
+  and pointer hit geometry together. A menu selection clears any held input and
+  follows the accepted neutral/new-edge return policy. It cannot cause movement,
+  select an underlying tile or restart a completed presentation. Reduced motion
+  uses a comfortable nonanimated change; any full-motion transition belongs to
+  the accepted camera owner and has bounded duration without overshoot.
+- Store the validated enum as a local display preference separate from campaign
+  progress, surviving restart and Reset Progress. Handle missing/invalid data and
+  storage failure safely. Do not promise browser-to-Tauri preference transfer or
+  introduce a progress-schema migration for zoom.
+- Prove 4/5/6/7 on large, small and narrow mazes, at corners/edges and near fog,
+  with menu/open-close, travel, portal/jump, restart, resume and layout changes.
+  Compare the same route and reveal history across choices. Cover all required
+  viewport geometries, Normal/Big and a representative DPR/motion/input set.
+  Demonstrate no extra engine move, save reward, discovery or stale hit target.
+- Plan 07B measures Wide's larger visible workload and Close's larger rendered
+  sprites/filters at DPR 1/2 against the current allocations and travel baseline.
+  Derive rendition demand from actual consumer geometry; do not preload the
+  catalogue, regenerate approved art or degrade responsiveness to add zoom.
+  Family checks ask whether a child can find/reset the choice, read sprites and
+  plan a route comfortably. Zoom is not a substitute for fixing camera stutter.
+
 ## 6. Programme integration and gates
 
 The existing programme remains sequential. These are execution-prompt addenda,
 not permission for simultaneous implementation in the shared worktree.
 
-1. **Current Plan 03:** do not interrupt its active art implementation. Its final
+1. **Accepted Plan 03 foundation:** the following production obligations are
+   retained as historical context and bounded missing-consumer return criteria,
+   not an instruction to restart art or reopen approvals. Its final
    Art Bible, Ame model sheet and catalog may naturally supply typography,
    material and expression tokens. It may produce the chest/Mimic/reward static
    family already inside its approved art scope for `22`, but must not implement
@@ -2052,7 +2206,7 @@ not permission for simultaneous implementation in the shared worktree.
    provided each asset passes the same individual approval, provenance,
    derivative, catalogue, byte and runtime-publication gates as the rest of its
    slate. This does not cancel Plan 11's final-canon review.
-2. **Root checkpoint 03M before Plan 01:** restore a green runtime against the
+2. **Accepted root checkpoint 03M before Plan 01:** preserve the green runtime against the
    delivered OST, freeze the canonical `MusicTransportPort` and current/fake
    adapter, and prove no deleted media URL remains. At the same bounded
    checkpoint, settle `PT-20260902-10` pending-win/reward/save/Stay-location,
@@ -2070,8 +2224,9 @@ not permission for simultaneous implementation in the shared worktree.
    authored surface/type/presentation-art system as post-layout polish. Integrate
    the approved `26` front door, and establish `30`'s reusable multi-turn story
    shell/advance/skip/focus semantics without rewriting chapter dialogue. After
-   acceptance, the root manager evaluates
-   and normally produces Family Preview 1.
+   acceptance, root executes `MOVE-01-smooth-travel-and-camera.md`, then produces
+   required FP-UI1 from the accepted UI + travel checkpoints. Plan 01's current
+   assignment stays frozen; new findings receive bounded follow-ups after review.
 4. **Plan 04:** consume `15` and provide `24`'s bounded multi-region terrain-
    theme/rendering seam without changing gameplay topology. Do not invent ice/
    spike visuals while `14` is undecided.
@@ -2088,7 +2243,9 @@ not permission for simultaneous implementation in the shared worktree.
    input continuation approved for `02`, and the honest browser/controller audio-
    activation route required by `20`. Add semantic, controller-complete
    navigation for every `23` Sound action and prevent movement leaking through
-   its open surface.
+   its open surface. Add `32` as a bounded camera preference after the accepted
+   input/scene contracts, preserving MOVE-01 and exploration rules; do not pull
+   it forward into the UI/travel preview.
 7. **Plan 05:** provide animation assets/recipes needed by the accepted `01`,
    `03`, `11` and `15` outcomes. It may add field-sprite parity for `18` only
    after portrait-first v1 is stable. It may add the bounded chest/Mimic reveal
@@ -2097,11 +2254,13 @@ not permission for simultaneous implementation in the shared worktree.
 8. **Plan 07B:** replace or extend the 03M current adapter behind the unchanged
     `MusicTransportPort` with `20`'s full contextual controller, including `23`'s
     history, Previous/Next/Shuffle transport, rapid-command handling and any
-    subsequently approved Loop policy; then make `07` a non-negotiable measured
-    play-feel outcome and qualify music plus the
+    subsequently approved Loop policy; then requalify accepted MOVE-01 `07`
+    as a non-negotiable measured play-feel outcome and qualify music plus the
    continuous/stacked effects and assets from `01`, `05`, `15`, `18`, and `22`.
    Reserve and qualify `24`'s final roster/theme loading and decoded/package
-   costs without eagerly loading the complete catalogue at title.
+   costs without eagerly loading the complete catalogue at title. Qualify `32`
+   at 4/5/6/7 spans: Wide's visible workload and Close's rendition/paint cost must
+   preserve the accepted movement, fog and frame-budget baseline.
    Rebaseline the final UI material recipes, presentation renditions and early
    front-door assets from `25`/`26`; maintain the preview-artifact manifest/hash
    convention without converting internal previews into release claims.
@@ -2158,7 +2317,14 @@ not permission for simultaneous implementation in the shared worktree.
     Human-approved feature plan; a
     planning decision changes no runtime or save data.
 
-### Decisions that must not be deferred into a specialist's implementation
+### Human decisions and dependency gates
+
+The already-frozen 03M door, exit and reward rules listed below are constraints
+to consume, not unanswered questions. Only the explicitly unresolved items
+(Loop, spike/ice scope, Egg cadence, roster exclusions, new persistent features
+and external backup) need a new Human decision. Root assembles concrete options
+and evidence before requesting one; routine implementation details stay with
+their owner.
 
 - `PT-20260902-02`: stationary door transition and held continuation semantics.
 - `PT-20260902-10`: pending completion, save/reward boundary and Stay position.
@@ -2217,6 +2383,10 @@ superseded tests; they are useful provenance.
 | 2026-09-04 | 27–28 | working tree after Plan-03 static publication | Direct Human feature request plus manager scope/routing review | Earned stickers need an admiration-scale reward moment; free placement adds meaningful persistence and input scope beyond a viewer | 27 captured/triaged/routed; 28 captured and held at Human decision |
 | 2026-09-04 | 29 | working tree during Plan-03-R1 publication | Direct Human feature request plus goal-art/VFX ownership audit | Published goal geometry already exposes a central aperture; the visual can be layered without changing gameplay or regenerating the complete star | Captured, triaged and routed |
 | 2026-09-04 | 30–31 | v0.20.1 corrective checkpoint | Direct Human feature request plus narrative/audio ownership review | Current story is a sequence of single-speaker cards; cast review and compact dialogue belong before final-canon art, while generated voice requires a separate rights/accessibility/value decision | 30 captured/triaged/routed; 31 captured and held at Human decision |
+| 2026-09-05 | 02/10/13/20/23/24/26 | Accepted 03M/v0.20.1/post-release records through `b0eb8a8`; planning HEAD `47bfff4` | Documentation/source reconciliation; no runtime suite rerun | Completed door/exit/OST/front-door/friend slices distinguished from future presentation, ecology and qualification | 13 recorded Accepted/Manager-tested from v0.20.1 evidence; remaining cards retain open slices |
+| 2026-09-05 | 07 | `47bfff4` Human scheduling decision | Direct family report and plan review | Holds are unpleasant, encouraging slower individual steps; root MOVE-01 now precedes FP-UI1 | Routed to root; implementation/comfort still pending |
+| 2026-09-05 | All pending cards | `47bfff4`, Agent 01 active candidate excluded from acceptance | Planning-only cross-plan review | Roadmap ownership, concrete later execution plans, short family journeys and dependency return gates refined | No UI/art-budget/hardware/family approval inferred |
+| 2026-09-05 | 32 | UI handoff candidate at `47bfff4`; no zoom implementation | Direct Human request and read-only exploration/plan audit | Routed 4–7 tile framing with default 6 to future Plan 08; one-tile steps including 5 are the adopted UX proposal. Existing reveal rules and MOVE-01 remain intact; Plan 07B requalifies | Captured, triaged and routed; excluded from FP-UI1 |
 
 ## 8. Closure and mop-up rule
 
@@ -2226,7 +2396,7 @@ execute bounded Plan 13 closure. Once Plan 13 records that no pointer-producing
 work remains, perform Plan 12's archive-first package-hygiene sweep, then the
 root `RC-01` qualification.
 
-Provisional filenames:
+Execution plans:
 
 `docs/plans/13-playtest-backlog-closure-and-release-polish.md`
 
@@ -2257,3 +2427,7 @@ invent a replacement goal renderer late in closure.
 the reusable shell; Plan 11 consumes its accepted cast. `PT-20260904-31` is not
 implementation scope for Plan 13 and remains a Plan-14 decision until the Human
 approves a separate voice plan.
+`PT-20260905-32` is an authorized future Plan-08 deliverable with Plan-07B
+qualification. Plan 13 may tune a landed zoom control, but a missing preference
+or changed reveal policy returns to its owning plan rather than being silently
+closed as optional polish.

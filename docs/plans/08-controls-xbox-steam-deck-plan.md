@@ -2,11 +2,11 @@
 
 ## 0. Manager-reviewed execution addendum
 
-Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, and VFX specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, root checkpoint 03M, 01, 04, and 02, and before Plan 05 animation.
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, and VFX specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, root checkpoint 03M, 01, root movement checkpoint MOVE-01, 04, and 02, and before Plan 05 animation.
 
 ### Ownership and architecture amendments
 
-- Controls owns pure input intent, input-source normalization, semantic actions, held cadence, neutral/release gates, gamepad polling/ownership/deadzones, controller prompts, and focus navigation.
+- Controls owns pure input intent, input-source normalization, semantic actions, held cadence, neutral/release gates, anchored board-touch steering, the hybrid thumb-pad interaction, gamepad polling/ownership/deadzones, controller prompts, and focus navigation. MOVE-01 owns accepted camera/actor travel; Controls sends discrete cardinal attempts and never interpolates world positions or changes collision into analogue movement.
 - UI owns overlay state, DialogShell/game-menu markup, stable focusable semantic IDs/groups, scroll containers, layout, and visual focus treatment. Gameplay owns legal action semantics. Controls consumes both; it does not invent a parallel modal/menu UI.
 - Controls owns canonical `src/inputContext.ts`, structured `InputContext`, `InputAction`/`InputSource`, and `getInteractionPolicy()`. The policy consumes Plan 01's typed `src/ui/interactionState.ts` top-overlay/focus truth, Plan 02's presentation-busy lease, and Plan 06's gameplay-legality truth. It does not duplicate or mutate their source state. This supersedes any original wording that also assigns `getInteractionPolicy()` to UI.
 - Consume Plan 01's single Sound-menu disclosure and the root-frozen
@@ -20,8 +20,128 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementa
 - Entering or leaving the Sound menu clears held movement/navigation, increments the input/context generation, and requires a neutral/new edge before any action. The opening A press can only open it; it cannot also mute or change track. While the menu is topmost, every gameplay action is blocked and only Sound-menu navigation/transport/back actions are eligible. Plan 07B later replaces or extends the current adapter behind the same port and verifies contextual selection, audible transport, prefetch, fades, and failure isolation; Plan 08 proves the unchanged semantic controller contract without depending on Plan 07B landing first.
 - Derive maze/tester lists from the canonical campaign order and stable campaign IDs. No controller focus graph, test, copy, or acceptance gate may assume a fixed sixteen-level campaign; newly inserted Plan-09 levels become reachable without changing controls code.
 - Model context as structured state—screen, top overlay/focus scope, presentation lock, and controller status—not a flat union that loses the underlying story/dialog/victory state. A disconnect/reconnect must restore the correct underlying context.
-- Make held scheduling modality-neutral after intent normalization. Keyboard, on-screen buttons, and gamepad share cadence/neutral gates; free-form board pointer/touch steering alone retains the pointer-specific safe corner assist.
-- Consume Plan 02's presentation-busy lease and cancellation boundaries. A controller hold is dropped and neutral-gated across combat, rescue, jump, portal, door, victory, navigation, overlay, blur, hidden, disconnect, and reconnect; no catch-up or queued replay.
+- Make held scheduling modality-neutral after intent normalization. Keyboard, hybrid pad, anchored joystick and gamepad share cadence/neutral gates; only the explicitly retained free-board tap/steering mode receives safe corner assist.
+- Consume Plan 02's presentation-busy lease and cancellation boundaries. A controller hold is dropped and neutral-gated across combat, rescue, jump, portal, victory, navigation, overlay, blur, hidden, disconnect, and reconnect; no catch-up or queued replay. The Human-approved stationary-door continuation is the sole bounded exception, specified below: it revalidates a still-live hold after successful completion and never replays an opening action.
+
+### Programme refinement — 2026-09-05
+
+This pass is planning only while Agent 01 remains active. Its current UI modules
+are useful draft evidence, not an accepted contract. Reconcile the accepted
+checkpoint on entry. Plan 07A's shared harness already exists; extend
+`scripts/performance/` and its pinned ephemeral Playwright setup rather than
+creating another runner, lockfile change, or approval gate for existing tooling.
+
+The player outcome is effortless, comfortable direction: a deliberate tap is
+predictable, a corridor hold does not require repeated tapping, a corner never
+steals direction, and reading a menu never moves Ame. Ship the touch and digital
+input repairs as P0 with controller support; do not let the long platform
+research below hide `PT-20260902-08`.
+
+Implement in this bounded order: accepted-contract audit → one semantic policy
+and input-generation reset → anchored board gesture/hybrid pad → standard
+gamepad adapter → complete focus journeys → hardware qualification. Reuse
+UI-owned menu, restart, completion and achievement-detail surfaces. Missing
+mandatory UI contracts return to their owner with an exact gap; Controls does
+not grow a parallel interface. Haptics stays optional and cannot postpone P0.
+
+**Stationary-door continuation.** The door-opening attempt commits `moved:
+false` and leaves Ame visible at the origin throughout the effect. Retain only
+a candidate live-hold token containing source identity (including pointer/pad
+generation), direction, level/run identity, door event and presentation
+generation. Observe releases during the lock. After successful completion,
+revalidate every field against current input and policy, then permit at most
+one normal due cadence attempt; schedule from the current time without catch-up.
+A tap, release, direction/source change, other interaction, cancel, blur, hidden,
+navigation, reconnect or new level invalidates it. Chained/composite
+presentations need an explicit eligible terminal door event; absent that proof,
+use the ordinary neutral gate. There is no generic queued movement.
+
+**MOVE-01 compatibility.** Polling and gesture code own intent, the engine owns
+integer grid results, and the accepted travel owner owns displayed actor/camera
+coordinates. Do not restart an accepted travel tween on unchanged input, wait
+for drawing/decoding to authorize a legal action, create a second follow clock,
+or alter held cadence to hide frame stalls. Test input-to-attempt,
+attempt-to-first-visible-travel and endpoint separately. Use the accepted scene
+coordinate snapshot for board hit testing; raw pointer input must not repeatedly
+measure layout or read a CSS transform back as gameplay truth.
+
+**Completion and Book.** Consume 03M's recoverable pending exit choice: Stay
+here / Next maze / Restart, with Stay default when friends remain and Next
+otherwise. B performs the documented safe Stay action, never banks rewards or
+silently returns Home. Only explicit Next crosses the durable completion
+boundary. Any additional post-commit Home action must already be authorized by
+Gameplay. Earned-achievement detail opens from its stable Book item and B closes
+only the viewer; locked rewards remain concealed. Compact story dialogue uses
+the accepted advance/skip/replay actions, not an unrestricted any-key handler.
+
+**Acceptance packet.** Return a requirement-to-evidence map for touch, direct
+cardinals, door continuation, MOVE-01 parity, all current UI journeys, polling
+cost and lifecycle. Record hardware rows as passed, failed, or pending with a
+reproducible checklist. Shared-app implementation may be accepted with explicit
+unavailable hardware rows; a Steam Deck/TV/controller-audio support claim cannot.
+Root owns commit/push, versioning and public preview/deployment transactions.
+
+### Human-authorized future camera preference — 2026-09-05
+
+`PT-20260905-32` adds a bounded implementation tranche to this plan. It does not
+extend Agent 01 or root MOVE-01, and is excluded from FP-UI1. Read the exact
+intake `../playtests/2026-09-05-adjustable-camera-zoom.md` and backlog card.
+
+**Outcome and controls.** Support camera spans from 4 through 7 tiles with
+default 6 along each side of the current square camera. The endpoints and default
+are Human-requested; one-tile steps including 5 are the adopted UX proposal.
+The offsets are total span changes, not per-edge changes. Put one compact
+Camera view row in the accepted game menu: Zoom in, Default and Zoom out, with
+the current descriptive selection, disabled limit actions and stable focus IDs.
+Keep the rest of the UI at its established size. Keyboard, pointer/touch and
+controller use the same actions; no pinch, chord, extra HUD cluster or new
+overlay is required. Fresh/invalid preferences select Default.
+
+**Ownership and truth.** Controls owns selection and a validated local display
+preference; the accepted MOVE-01 owner consumes its span through the scene
+geometry contract. Do not create another travel loop or give gamepad polling
+camera-transform ownership. `src/game/exploration.ts` currently shares an
+optional size across camera and reveal helpers: separate display framing from
+discovery at the call boundary. Preserve existing reveal rules and saved
+exploration; a wider camera may include still-concealed tiles. Prove known map
+terrain and objects beyond the default crop are visible at Wide, rather than
+simply adding blank borders. Zooming never
+calls a larger reveal window, changes collision/cadence or updates rewards.
+Wider discovery requires a separate explicit gameplay decision.
+
+**Geometry and lifecycle.** Retain the current stable odd/even centring policy,
+clamp to world edges and small/narrow maps, keep Ame visible and preserve tile
+and sprite aspect ratio. Document effective dimensions when either map axis
+is smaller than the selected span, without overwriting the stored choice.
+Reconcile Normal/Big and any accepted nonsquare viewport policy; changing
+device aspect must not stretch tiles or create a device-specific rule set.
+Resize/camera selection updates bounds, fog, culling gutters, lighting/effect
+anchors and pointer geometry as one scene snapshot. The menu already blocks
+movement: changing or leaving it clears holds and requires the accepted new
+edge. Never move the player, replay an event or let the selection hit the board.
+Reduced motion changes the view without a zoom tween. Any full-motion change
+uses the accepted camera owner's bounded recipe and is checked for comfort.
+
+**Preference and cost.** Store an enum separately from campaign progress and
+retain it through restart/Reset Progress. Missing, invalid or unwritable
+storage falls back safely; no progress-schema migration or cross-host sync is
+implied. Measure all four spans with the existing harness before acceptance:
+Wide increases visible content while Close increases consumer pixel size. Use
+the existing semantic rendition resolver and bounded loading; do not preload
+the catalogue or regenerate approved art automatically. Return any exact
+rendition/budget gap to its owner. Plan 07B requalifies the integrated geometry,
+effects, motion and decoded/paint costs against the accepted travel baseline.
+
+**Execution and proof.** In Phase 0 freeze camera/reveal fixtures; after the
+semantic input and UI-menu integration in Phase 3, implement one 4/5/6/7 canary
+and then extend to the common viewport matrix. Test edges, narrow/tiny maps,
+travel interruption, portal/jump, fog boundaries, Normal/Big, resize, restart,
+resume, storage failure and safe return to gameplay. The same committed route
+must retain identical legal moves, rewards and reveal history across zoom
+choices. Add keyboard/touch/mock-controller selection journeys and compare
+pointer hit positions after every change; hardware and family comfort rows
+remain honestly pending until exercised. Publish the span/preference API and
+proof in `docs/CONTROLS_AND_STEAM_DECK.md` for Plan 07B and later content owners.
 
 ### Product and platform amendments
 
@@ -80,9 +200,11 @@ The application has good keyboard, pointer, touch, and on-screen direction input
 
 ### P1 goals
 
+- Implement the Human-authorized 4–7 camera framing range, default 6, from
+  `PT-20260905-32`, preserving MOVE-01 and existing exploration rules.
 - Add feature-detected, user-adjustable haptics with a complete no-haptics path.
-- Add Playwright browser integration coverage once a repository test dependency is approved.
-- Make the hosted app installable/offline-capable as a separately scoped PWA packaging task.
+- Reuse the mandatory existing browser harness for deeper device-boundary coverage; no second test framework is needed.
+- Explore installable/offline PWA packaging only after a separate Human scope decision; it is not an implied deliverable here.
 
 ### Non-goals
 
@@ -102,7 +224,12 @@ The application has good keyboard, pointer, touch, and on-screen direction input
 - As a player who switches between controller, keyboard, touch, and mouse, the current prompts and focus recover without changing game state.
 - As a player whose controller sleeps or disconnects, movement stops immediately and a replacement/reconnected standard controller can safely resume.
 
-## 3. Evidence and audit record
+## 3. Historical 2026-09-02 evidence and audit record
+
+Sections 3–5 retain the research snapshot for comparison. Source-line references,
+old UI inventories and then-missing infrastructure describe `c6b6628`, not the
+accepted implementation at execution. Current source and the manager addendum
+supersede them; resolved defects are regression fixtures, not rebuild tasks.
 
 ### Repository and test evidence
 
@@ -176,7 +303,7 @@ Controller focus/prompts/reconnect/haptics ─> absent
 | **src/styles.css:65-74** | Current focus treatment is a 3px teal **:focus-visible** outline. Programmatic controller focus cannot rely on browser focus-visible heuristics alone. |
 | **src-tauri** | Bare Tauri shell; Windows WebView2/NSIS only, 1280×720 default, 960×540 minimum. No native gamepad plugin or Linux bundle/CI path. |
 
-### Existing correctness defects to resolve before adding a fourth input source
+### Historical correctness findings to recheck before adding a fourth input source
 
 1. **No canonical modal gate.** **modalOpen** includes level/reset pickers and result states, but **attemptMove**, the keyboard eligibility check, and the held-input clearing effect use different boolean subsets. Arrow/WASD can move behind some inert dialogs. Controller integration must first derive one **InputContext** and **gameplayInputAllowed** policy.
 2. **Corner-assist authority is contradictory.** Project documentation and this brief call it pointer-only, but **attemptMove** currently routes keyboard and on-screen directions through the same resolver. The target decision is explicit: free-form board steering (mouse/touch) retains corner assist; discrete keyboard, controller, and on-screen buttons issue exact cardinals without assist. This restores the documented contract and makes direct-input fairness predictable.
@@ -203,7 +330,7 @@ Controller focus/prompts/reconnect/haptics ─> absent
 | **Different-maze confirmation** | X; Keep this maze; Start the new maze. | First focus is X. | Safe default Keep this maze. A executes only after neutral gate; B cancels. |
 | **Reset-progress confirmation** | X; Keep my adventure; Yes, reset everything. | First focus is X; destructive action is adjacent. | Safe default Keep my adventure. Destructive action requires explicit navigation plus a new A edge after neutral; never a long hold as the only method. |
 | **Restart confirmation (replace armed state)** | Current Restart becomes Again! for 2.2s. | Second click/activation restarts. | Open a real confirmation with Keep playing default and Restart maze secondary. It follows modal generation/release rules for every modality. |
-| **Victory/rewards** | Next maze/test maze/Surprise default; Play again. Normal victory also shows reward breakdown/new rewards. No X/Escape return. | A focused action works by keyboard; background inert. | Default Next. D-pad reaches Replay and a visible Return Home action; A activates; B returns Home as labelled. View/other global shortcuts are suppressed while this top layer is active. |
+| **Victory/rewards** | Historical Next/Replay flow, superseded by 03M pending completion. | Current Gameplay spec owns durable choices and safe defaults. | Stay here / Next maze / Restart; B safely stays. Consume accepted defaults and exactly-once Next; suppress unrelated shortcuts. |
 | **Adventure Book** | Title; Sound; conditional Resume; New maze; focusable 1,656px scroll region at 720p; unlocked record buttons; Make Surprise; Reset. Initial focus is non-action H1. | Native scroll/Tab/click. | Default Resume if valid, else New maze, else Title. B/View returns to prior screen. D-pad navigates controls, LB/RB jumps sections, LT/RT pages, right stick scrolls. Focused records auto-scroll into view. |
 | **Rotate message** | Status only. | No action. | Remains status-only; controller prompts must not suggest an action. |
 
@@ -223,7 +350,7 @@ Game/board
  ├─ Mazes/New ─> Picker/Confirm ─> board or new run
  ├─ View/Book ─> Book ─> board
  ├─ blocked/strong ─> Feedback ─> board
- └─ win ─> Victory ─> next Story/new Game, Replay, or Title
+ └─ exit ─> Pending completion ─> Stay, Next via durable commit, or safe Restart
 ~~~
 
 Every transition increments an input-generation number, clears transient movement/repeat state, establishes a declared focus default, and refuses actions from the previous generation. Closing restores the invoker by stable control ID when it still exists, otherwise the context fallback.
@@ -266,10 +393,15 @@ export type InputSource =
   | "keyboard"
   | "board-pointer"
   | "board-touch"
-  | "onscreen-direction";
+  | "anchored-joystick"
+  | "onscreen-direction"
+  | "thumb-pad";
 
-export type InputContext =
+// Names for domain/action routing only; this is not the complete app state.
+export type InputDomain =
+  | "front-door"
   | "title"
+  | "home"
   | "story"
   | "gameplay"
   | "gameplay-presentation"
@@ -284,9 +416,19 @@ export type InputContext =
   | "switch-confirm"
   | "restart-confirm"
   | "reset-confirm"
-  | "victory"
+  | "pending-completion"
   | "book"
+  | "achievement-detail"
   | "controller-disconnected";
+
+export interface InputContext {
+  readonly ui: UiInteractionState; // imported from the accepted UI owner
+  readonly domain: InputDomain; // derived from ui and the locks below
+  readonly presentationLease: PresentationLease | null; // accepted Plan-02 type
+  readonly controllerStatus: "absent" | "arming" | "active" | "disconnected";
+  readonly focusScopeId: string;
+  readonly generation: number;
+}
 
 export type InputAction =
   | { type: "move"; direction: Direction; phase: "edge" | "repeat"; source: InputSource }
@@ -388,7 +530,7 @@ The W3C standard layout supplies stable positions for recognized devices, with a
 2. Register **gamepadconnected**, **gamepaddisconnected**, **window.blur**, **window.focus**, and **document.visibilitychange** exactly once; StrictMode cleanup must be symmetrical.
 3. While visible/focused with no exposed standard pad, use an advisory 4Hz discovery probe plus connection events. This accounts for browsers that expose a preconnected controller only after a button/axis gesture [R1][R2].
 4. With one or more exposed pads, run one RAF loop and call **getGamepads()** once per frame. Fetch the current object by index every poll; do not retain an event's Gamepad object as current state.
-5. Stop RAF and clear all raw/held/repeat/haptic state on blur, hidden, teardown, or unsupported permissions. RAF is normally suspended in background tabs, but explicit clearing prevents stale holds.
+5. Stop RAF and the discovery timer, and clear all raw/held/repeat/haptic state on blur, hidden, teardown, or unsupported permissions. RAF is normally suspended in background tabs, but explicit clearing prevents stale holds.
 6. On focus/visible return, re-enumerate, seed current states, and require neutral before actions. Never calculate catch-up repeats from elapsed hidden time.
 7. Catch **SecurityError** from permissions policy and expose a diagnostic status. Hosted production should serve HTTPS and may send **Permissions-Policy: gamepad=(self)** after validating its hosting configuration [R3].
 
@@ -404,17 +546,17 @@ The Gamepad specification intentionally returns no exposed pads before a gamepad
 
 ### Multiple controllers
 
-- Enumerate all pads but support one active player.
+- Enumerate all pads but support one active player in this tranche. Keep identity/normalization reusable by Plan 10's later two-seat registry, without implementing joining, seat routing or co-op now.
 - With no owner, the first standard pad that produces deliberate input after a neutral sample wins. If multiple qualify in the same poll, the lowest current index wins.
 - Ownership is sticky while connected; drift or input on another pad cannot steal it.
 - Represent ownership as **{ index, connectionGeneration }**, never a persisted identity.
-- On active disconnect: clear movement/actions/haptics immediately; open a non-destructive reconnect layer; preserve the game/session; do not let another pad's pre-held state act.
+- On active disconnect: clear movement/actions/haptics immediately; expose UI-owned non-destructive reconnect status over the preserved context; do not let another pad's pre-held state act. Keyboard/touch remain usable and can deliberately dismiss that status/take over without pretending a controller reconnected. Disconnecting an inactive pad never blocks the active input source.
 - A reconnected or replacement standard pad claims through neutral plus deliberate input. Its claim press dismisses/acknowledges ownership only when it arrived held; the next press resumes. Restore the last valid focus, otherwise the context fallback.
 - Test a physical/virtual duplicate pair under Steam Input. A second enumerated entry must not double-dispatch.
 
 ### Clearing table
 
-Every item below increments the context/input generation and clears button edges, stick/D-pad latch, movement/UI repeat, prior direction, queued controller action, and pending haptic:
+Every item below increments the context/input generation and clears button edges, stick/D-pad latch, movement/UI repeat, prior direction, queued controller action, and pending haptic. The only retained information at a qualifying stationary-door lock is the separately validated live-hold token from the addendum; it is not a queued action:
 
 - blur or **document.visibilityState === "hidden"**;
 - entry to or exit from any modal, story, game menu, picker, feedback, or victory layer;
@@ -426,6 +568,51 @@ Every item below increments the context/input generation and clears button edges
 Keyboard, pointer, touch, and on-screen held state should be cleared through this same policy. This fixes the existing background-movement gap rather than creating a gamepad-only workaround.
 
 ## 9. Maze movement algorithm
+
+### Anchored board gesture and hybrid thumb pad — P0
+
+`PT-20260902-08` requires a real gesture state machine, not only a corrected
+guide graphic. Store raw active pointer, immutable client-space anchor,
+down-time/geometry snapshot and gesture generation in refs; publish only a
+changed semantic direction/status. Idle pointer samples cause no App commit.
+
+- Board press begins pending. A release within the documented CSS-pixel slop
+  emits one tap attempt relative to Ame using the accepted scene mapping. Once
+  displacement crosses slop, classify it as a drag, consume tap eligibility,
+  and derive every direction from current pointer minus the original anchor.
+  A drag cannot also emit a speculative pointer-down tap or pointer-up step.
+- Choose and record a bounded slop/deadzone from real finger trials; keep it in
+  CSS pixels with normalized pad geometry, rather than scaling it with an
+  unrelated world sprite. Touch near an edge must still have useful range.
+- Camera following, Ame moving and crossing camera clamps never move the
+  joystick origin. The displayed anchor/knob uses exactly the same coordinates
+  as intent. Capture the primary pointer, ignore additional pointers, and clear
+  on `lostpointercapture`, `pointercancel`, blur, hidden, overlay, geometry
+  invalidation or teardown. Resizing/rotation cancels rather than rebases a hold.
+- The UI-owned rounded-square pad has four named, keyboard-accessible cardinal
+  targets. A dedicated-region press may step immediately and then hold using
+  the shared cadence; dragging it changes the same hold's anchored direction,
+  never produces a second initial action, and does not become free movement.
+  Its logical targets and accessible labels remain available without dragging.
+- Deferred board taps versus immediate dedicated-pad presses is a **proposed
+  interaction resolution**, not Human-accepted feel. In the pad trial, explicitly
+  test a drag that begins in one region and rolls toward another: the first step
+  must match a deliberate press rather than surprise the player. Physical iPad
+  and family validation decide whether this tradeoff works. If it fails,
+  present a bounded gesture-classification alternative and its response-time
+  cost; do not quietly change shared digital cadence or mark PT08 accepted.
+- Dedicated-pad and anchored-joystick directions are exact cardinal inputs.
+  Only the deliberately retained free-board tap/steering mode may use the
+  documented safe corner assist. Keep this policy explicit in `InputSource`.
+- Use one source-ownership rule across keyboard, gamepad and captured pointer
+  holds: a deliberate modality takeover clears the previous hold; concurrent
+  timers never add repeat rates. Compatibility mouse events cannot duplicate
+  a touch action. Browser scrolling/zoom outside movement surfaces still works.
+
+Cover pending tap, drag slop crossing, distant-from-Ame origin, camera movement,
+thumb-pad hold-to-drag, reversal, narrow corners, capture loss, second finger and
+overlay cancellation. A physical landscape iPad comparison is the comfort gate;
+desktop emulation proves geometry and events only.
 
 ### Digital edge and hold
 
@@ -446,7 +633,7 @@ The following values are implementation starting points, not platform mandates. 
 - compare **abs(x)** and **abs(y)**; if their difference exceeds 0.12, choose the larger;
 - inside the 0.12 tie band, keep the currently latched direction;
 - with no latch, use the axis that crossed the activation threshold first; if both first cross in the same sample, use a documented vertical tie-break;
-- a perpendicular rolled-stick change must beat the current axis by 0.15 for two consecutive polls, then emits one immediate edge and restarts cadence;
+- a perpendicular rolled-stick change must beat the current axis by 0.15 for a short elapsed-time qualification, initially 25ms, then emits one edge and restarts cadence; record/tune this on hardware rather than requiring two polls whose duration changes at 40/60/90Hz;
 - an intentional opposite-direction reversal at or beyond 0.55 may switch after one sample because its sign change is unambiguous.
 
 The resolver returns zero or one cardinal direction per sample. It never returns a diagonal and never emits two moves for the two axes.
@@ -461,16 +648,16 @@ The resolver returns zero or one cardinal direction per sample. It never returns
 ### Presentation and modal behavior
 
 - Free gameplay is the only context in which controller movement can dispatch.
-- During the short 64ms moved and 45ms bump gates, scheduler time continues but cannot generate catch-up moves; the next normal due time may attempt.
-- Rescue, combat, door, portal, jump, story, modal, navigation, victory, and reconnect transitions clear controller movement and require neutral. Inputs during those locks are dropped, not queued.
-- Holding the stick across unlock does not move Ame. The player must return to neutral, then deliberately move again.
+- During accepted short move/bump gates, scheduler time continues but cannot generate catch-up moves; the next normal due time may attempt. Resolve durations from the accepted MOVE-01/gameplay contract, not historical 64ms/45ms literals.
+- Rescue, combat, portal, jump, story, modal, navigation, victory, and reconnect transitions clear controller movement and require neutral. Inputs during those locks are dropped, not queued. A successfully completed stationary door alone may use the live-hold continuation token in the manager addendum; release or invalidation cancels it.
+- Holding the stick across an ordinary presentation unlock does not move Ame. The player must return to neutral, then deliberately move again, except for that exact door contract.
 - Modal entry clears existing keyboard, pointer, touch, and on-screen holds too; opening a picker can no longer allow background Arrow/WASD movement.
 
 ### Corner assistance and fairness
 
 Controller input receives **no corner assistance**. D-pad, left stick after cardinal resolution, keyboard, and on-screen directional buttons all express an exact cardinal choice and go directly to **movePlayer** through **attemptMove**.
 
-Only free-form pointer/touch steering on the maze board keeps the existing one-tile, wall-only corner assist, because that modality asks the app to infer intent from a continuous point. This is fair by intent class: every discrete cardinal source has identical collision/rule/cadence behavior, while imprecise direct steering retains its small usability aid. Update tests and architecture documentation so the behavior can no longer drift accidentally.
+Only the explicitly retained free-board tap/steering mode keeps the existing one-tile, wall-only corner assist, because that mode asks the app to infer intent from a world point. Anchored joystick and dedicated-pad directions join keyboard and controller as exact cardinals. Update source-specific tests and architecture documentation so the policy cannot drift accidentally; requalify the MOVE-01 corner/comfort scenarios without changing the engine.
 
 ## 10. Xbox mapping by context
 
@@ -478,7 +665,8 @@ The invariant rules are: **A confirms**, **B closes/backtracks one layer**, **Me
 
 | Context | D-pad / left stick | A | B | X | Y | View | Menu | LB/RB | LT/RT / right stick |
 |---|---|---|---|---|---|---|---|---|---|
-| Title | Move focus | Activate | No action at root | No action | No action | Open Book | No action | No action | Scroll only if a responsive title surface overflows |
+| Front door | Move focus among accepted Play/Exit actions | Activate | No unadvertised browser-close action | No action | No action | No action | No action | No action | Only if the accepted surface overflows |
+| Home | Move focus | Activate | Return to front door only if an accepted visible action exists | No action | No action | Open Book | No action | No action | Scroll only if the accepted Home surface overflows |
 | Story | Focus/page direction if needed | Advance; final page starts maze | Skip/close to game | Skip story | No action | No action | No action | Previous/next page if stories later paginate | Page/continuous scroll when card overflows |
 | Gameplay Normal | Move Ame | No action | Open game menu | Read chapter | Hint | Open Book | Open game menu | No action | No action |
 | Gameplay Big | Move Ame | No action | Return to Normal | Read chapter | Hint | Open Book | Open game menu | No action | No action |
@@ -488,7 +676,8 @@ The invariant rules are: **A confirms**, **B closes/backtracks one layer**, **Me
 | Too strong | Move focus (one action) | Acknowledge | Acknowledge/close | No action | No action | No action | No action | No action | Scroll if required |
 | Maze/tester picker | Navigate list/grid | Select | Close/back | No action | No action | No action | No action | Previous/next logical list section/page | Page/continuous scroll |
 | Switch/Restart/Reset confirm | Select safe/destructive action | Activate after release gate | Cancel/keep | No action | No action | No action | No action | No action | Scroll if required |
-| Victory | Select Next/Replay/Home | Activate | Return Home | No action | No action | No action while modal is topmost | No action while modal is topmost | Move reward pages only if UI later paginates | Scroll rewards |
+| Pending completion | Select Stay here/Next maze/Restart | Activate selected action | Stay here, without committing rewards | No action | No action | No action while modal is topmost | No action while modal is topmost | Only accepted UI affordances | Scroll rewards |
+| Earned-achievement detail | Navigate registered viewer controls | Activate | Close only viewer; restore exact Book invoker | No action | No action | No action while viewer is topmost | No action | Only accepted UI affordances | Scroll if needed |
 | Adventure Book | Navigate actionable controls/records | Activate | Return to prior screen | No action | No action | Return to prior screen | Open game menu when a run exists | Previous/next Book section | Page up/down; right stick continuous scroll |
 | Reconnect layer | No game action | Acknowledge after controller is armed | No game action | No game action | No game action | No game action | No game action | No game action | No game action |
 
@@ -521,14 +710,15 @@ On focus change, call **focus({ preventScroll: true })**, then scroll the neares
 
 ### Safe defaults
 
-- Title: Continue/Begin.
+- Front door: Play. Home: Continue/Begin.
 - Story: Start/Continue.
 - Gameplay: board logical movement focus.
 - Game menu: Resume.
 - Informational feedback: acknowledgement action.
 - Picker: current maze, else first enabled maze.
 - Switch/Restart/Reset: safe cancel/keep action.
-- Victory: Next.
+- Pending completion: Stay here while any friend remains, otherwise Next maze; Restart enters the shared safe confirmation.
+- Earned-achievement detail: declared safe close control, restoring its exact Book invoker and scroll position.
 - Book: Resume when valid; otherwise New maze; otherwise Title.
 - Reconnect: non-action status until a pad is armed, then restore the prior valid control.
 
@@ -583,7 +773,7 @@ Therefore:
 - controller semantic actions may request the existing audio-start function, but failure remains nonfatal and must not loop/retry every RAF;
 - never claim that controller A unlocks Web Audio, fullscreen, or popups in every hosted browser;
 - test cold launch, muted/unmuted state, HDMI audio, browser autoplay policy, PWA, Gaming Mode, WebView2, and WebKitGTK on real hardware;
-- if the primary browser cannot start audio from controller-only input, the game remains fully playable silently and the release note is honest. A wrapper autoplay policy may be investigated separately without weakening web security.
+- if the primary browser cannot start audio from controller-only input, preserve a playable silent fallback but leave the fully qualified couch-audio route pending. Record a proven one-time setup gesture or seek a separately approved delivery solution; silence is not evidence that the primary audiovisual experience passed. A wrapper autoplay policy may be investigated separately without weakening web security.
 
 ### Haptics (P1, never a ship blocker)
 
@@ -674,12 +864,14 @@ Because parallel plans are changing App/layout boundaries, every implementation 
 Work:
 
 - Reinspect **App.tsx**, the UI-owned **DialogShell/interactionState/getCurrentInputBlock**, the Controls-owned **getInteractionPolicy**, current tests, and all concurrent changes.
-- Establish **src/inputContext.ts** as the single input/top-layer contract, with controls owning types/state and UI owning markup/layout.
-- Add failing regressions for movement behind level/reset pickers and stale input crossing presentations.
+- Establish **src/inputContext.ts** as the single derived input policy; Controls owns semantic input state, while UI retains screen/overlay/focus-scope truth and Plan 02 retains its presentation lease.
+- Reproduce historical picker/presentation defects first. Keep predecessor fixes and their regression coverage; add only missing source/context cases.
 - Encode the chosen assist policy: pointer/touch board steering only; discrete directions exact.
 - Capture screen/focus IDs and a controller-only journey fixture.
+- Freeze separate camera-framing and exploration-reveal fixtures for PT32;
+  record the accepted span/scene-coordinate API and existing preference store.
 
-Dependencies: existing Vitest only.<br>
+Dependencies: existing Vitest and shared Plan-07A browser fixtures.<br>
 Rollback: test-only and pure-policy changes can be reverted without state migration.<br>
 Exit: every current top layer maps to exactly one context; no movement behind any top layer.
 
@@ -690,6 +882,7 @@ Work:
 - Add **gamepadControls.ts/test.ts**.
 - Implement standard mapping, normalization, neutral gate, button edges, active ownership, stick latch, D-pad arbitration, gameplay/UI repeat clocks, and reset reasons.
 - Reuse/export **movementControls.ts** cadence rather than copy values.
+- Implement the pure anchored-gesture/hybrid-pad state machine from section 9 and source-aware assistance policy before browser integration. Keep raw geometry separate from semantic attempts.
 
 Dependencies: none.<br>
 Rollback: module is unreferenced until Phase 2.<br>
@@ -703,6 +896,7 @@ Work:
 - Implement events, discovery probe, RAF, current snapshots, visibility/focus cleanup, StrictMode-safe teardown, and errors/status.
 - Route output through typed **InputAction**, then into existing navigation handlers and **attemptMove** with explicit **InputSource**.
 - Consolidate all modality clearing under the canonical policy.
+- Integrate anchored board steering and the UI-owned hybrid pad, exclusive hold ownership, and the exact stationary-door continuation token. Re-run accepted MOVE-01 straight/corner/release/edge cases across the affected input sources.
 - Add a temporary internal feature switch or isolated hook mount so controller input can be disabled without reverting unrelated refactors.
 
 Dependencies: browser Gamepad API only.<br>
@@ -713,13 +907,16 @@ Exit: mocked unit/browser harness can connect, arm, move, clear, disconnect, and
 
 Work:
 
-- Add **controllerNavigation.ts**, stable control IDs/groups, defaults, remembered focus, auto-scroll, and explicit modal generation.
+- Add **controllerNavigation.ts**, consuming UI-owned stable control IDs/groups and adding optional neighbours, remembered focus, auto-scroll, and explicit input generation.
 - Add controller prompt view models and accessible Xbox badges.
-- Add the game menu and a real restart confirmation.
+- Wire the accepted game menu and safe restart confirmation. Where a required control is missing, request a bounded UI contract repair rather than creating a second menu or confirmation.
 - Make title, Story, Normal/Big gameplay, Help, Hint, feedback, both pickers, switch/reset/restart confirmations, victory, and Book complete.
-- Add visible Return Home on victory.
+- Preserve the 03M pending completion choices and durable reward boundary; integrate achievement-detail and story dialogue navigation through their existing stable actions.
 - Update board/help accessible copy to name controller controls.
 - Add explicit controller focus CSS in the UI plan's current style structure.
+- Add PT32's Camera view row to the same game menu and integrate Close/Default/
+  Wide through the accepted travel/scene owner. Prove a representative 4/5/6/7
+  canary before widening coverage; preserve discovery and progression truth.
 
 Dependencies: UI plan's component/DialogShell landing order. No package dependency.<br>
 Rollback: controller surfaces are behind the hook/feature switch; retain stable semantic IDs for keyboard tests.<br>
@@ -727,17 +924,17 @@ Exit: scripted controller-only journey has no dead end at 720p/800p/1080p, and a
 
 ### Phase 4 — Automated browser boundary
 
-Preferred option:
+Extend the existing `scripts/performance/playwright.config.mjs`, stable semantic
+scenario fixtures and production-build provenance checks. Add an init-script
+Gamepad mock and touch-gesture/controller journey cases in that harness. Use
+its documented pinned ephemeral Playwright installation; do not introduce a
+second configuration/framework or casually add a persistent dependency.
 
-- Add **@playwright/test** as a dev dependency only after approval.
-- Add **playwright.config.ts**, **tests/controller.e2e.ts**, and an init-script gamepad mock.
-- Run Chromium in CI; keep pure Vitest as the broad state-machine suite.
+Pure Vitest covers the broad state machines; browser coverage is mandatory for
+focus, capture, event isolation and real DOM wiring. Raw evidence remains
+outside runtime delivery with compact hash-linked summaries.
 
-Alternative: Vitest Browser Mode with **@vitest/browser-playwright**, but do not add both initially.
-
-The user-scoped Codex Playwright skill installed during planning is tooling guidance, not a repository dependency.
-
-Rollback: remove the optional integration lane without changing runtime controller code; unit/manual gates remain.<br>
+Rollback: disable the runtime adapter if browser parity fails; retain regression evidence and working keyboard/touch paths rather than deleting the acceptance lane.<br>
 Exit: browser boundary verifies polling, focus, prompts, flow safety, scroll, and reconnect with no hardware.
 
 ### Phase 5 — Optional haptics
@@ -757,8 +954,7 @@ Work:
 
 - Document production Chrome/Edge Flatpak IDs, permissions, launch flags, Steam Input layout, and persistent profile.
 - Run the complete primary-route hardware checklist and store versioned evidence.
-- Only then decide whether to add manifest/service-worker PWA work.
-- If the web route fails a release requirement, qualify Linux Tauri AppImage as the one fallback.
+- If a release requirement needs PWA or native packaging, present the observed failure and a bounded option to the Human/root owner. Neither service-worker work nor a Linux pipeline starts implicitly from a failed test.
 - Keep Proton exploratory.
 
 Dependencies: physical Steam Deck, Xbox controllers, television/dock, production HTTPS host. Linux Tauri additionally needs Linux CI/WebKitGTK/AppImage build dependencies.<br>
@@ -825,7 +1021,7 @@ Files that should not need gameplay changes:
 - 0.12 tie band retains latch;
 - exact first-sample diagonal uses vertical tie-break;
 - threshold-crossing order wins;
-- perpendicular roll needs 0.15 advantage for two polls;
+- perpendicular roll qualifies by elapsed time with 0.15 advantage at 40/60/90Hz, and never double-dispatches;
 - opposite reversal is responsive;
 - at most one cardinal output per poll.
 
@@ -866,7 +1062,9 @@ Files that should not need gameplay changes:
 **Corner/fairness**
 
 - controller, keyboard, and on-screen exact cardinals receive no assist;
-- board mouse/touch retains current safe wall-only assist;
+- only the documented free-board mode retains safe wall-only assist; anchored joystick and hybrid pad produce exact cardinals;
+- board pending-tap/drag classification, immutable guide/intent anchor, exclusive cross-source hold, capture cancellation and compatibility mouse events never add an unintended move;
+- stationary-door taps remain on origin; a genuine unchanged hold permits at most one eligible post-open attempt, and every cancellation invalidates it;
 - engine output and one-action semantics are unchanged.
 
 **Haptics**
@@ -898,7 +1096,7 @@ Browser scenarios:
 - Help/Book/pickers page and auto-scroll with focus visible;
 - protected switch, restart, and reset cannot receive opening A;
 - missing-item and too-strong feedback acknowledge safely;
-- scripted level-one win reaches rewards, Next, Replay, Home;
+- scripted exit reaches pending completion; Stay preserves position/run, Next banks once, Restart safely confirms without rewards; earned detail returns to the precise Book focus/scroll;
 - disconnect during movement/modal/Book stops actions; replacement reconnect restores;
 - controller → mouse/touch/keyboard → controller changes prompts/focus correctly;
 - idle and unchanged polling causes zero whole-App React commits;
@@ -914,6 +1112,8 @@ Record for every run: Deck LCD/OLED model; SteamOS channel/build; Steam client; 
 
 | Route | Mode | Controller | Display | Status |
 |---|---|---|---|---|
+| Windows hosted Edge/Chrome | Normal browser | Xbox USB + Bluetooth | Desktop/TV | Shared-app hardware gate; separate from Deck |
+| Windows Tauri portable/installed | Native WebView2 | Xbox USB + Bluetooth | Desktop/TV | Shared-app hardware gate; no browser equivalence claim |
 | Chrome hosted/browser shortcut | Gaming Mode | Xbox USB | Deck 1280×800 and TV 720p/1080p60 | Primary release gate |
 | Chrome hosted/browser shortcut | Gaming Mode | Xbox Bluetooth | Deck and TV 720p/1080p60 | Primary release gate |
 | Installed Chrome PWA, if packaged | Gaming Mode | Xbox USB + Bluetooth | Deck and TV | PWA gate |
@@ -935,7 +1135,7 @@ Add 4K60 as a scaling/latency stress case, not the minimum supported output. Che
 - Book focus navigation, section jumps, page/continuous scroll from top and bottom.
 - Every confirmation with A held while opening; confirm no fall-through.
 - Missing item, too-strong enemy, rescue/pickup/presentation locks.
-- Victory rewards, Next, Replay, Return Home.
+- Pending completion, Stay here, Next maze, safe Restart and save/reopen while pending; earned-achievement detail and return to its Book item.
 - Reset-progress safe default and explicit destructive selection.
 - Xbox Guide/Steam and Quick Access overlays; return without stuck/replayed input.
 - Suspend/resume on title, gameplay, story, Book, and confirmation.
@@ -1032,7 +1232,8 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 
 - [ ] Given the application has been opened from its supported Steam shortcut, an Xbox controller alone can expose/connect, focus Begin/Continue, and complete every major flow.
 - [ ] No essential action requires hover, touch, mouse, keyboard, trackpad, or Deck touchscreen.
-- [ ] Title, maze selection, tester selection, Story, Normal/Big gameplay, Hint, Help, game menu, Home, Mazes, Book, the complete shared Sound menu, Restart, confirmations, feedback, victory, rewards, Next, Replay, Return Home, and Reset are controller-complete.
+- [ ] Separate title and Home, maze/tester selection, compact Story dialogue, Normal/Big gameplay, Hint, Help, game menu, Book and earned-detail viewer, the complete Sound menu, Restart, confirmations, feedback, pending completion and Reset are controller-complete against the accepted UI inventory.
+- [ ] Stay here / Next maze / Restart use Gameplay's default focus and exactly-once durable boundaries. B safely stays without rewards; returning from a viewer/menu restores its exact valid invoker and scroll context.
 - [ ] Sound opens through a distinct semantic action; mute/previous/next/shuffle/approved-loop each dispatch exactly once only while that menu is topmost; B restores the exact stable invoker or declared safe fallback; the opening/closing edge never activates a transport or gameplay action.
 - [ ] Every controller-navigable element has a clearly visible, on-screen focus state suitable for television viewing.
 - [ ] B removes exactly one topmost layer; A confirms; displayed prompts always match the action.
@@ -1045,7 +1246,9 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 - [ ] Stick drift below the deadzone never moves Ame or changes prompts.
 - [ ] A diagonal produces at most one deterministic cardinal direction and never a double move.
 - [ ] Direction changes are immediate under the specified arbitration and reset repeat timing.
-- [ ] Controller, keyboard, and on-screen directions have identical exact-cardinal engine behavior; pointer/touch board steering alone receives documented corner assist.
+- [ ] Controller, keyboard, hybrid pad and anchored joystick have identical exact-cardinal engine behavior; only the explicitly retained free-board mode receives documented corner assist.
+- [ ] Board tap/anchored drag and hybrid-pad tap/hold/drag satisfy PT08 without duplicate moves, moving anchors or camera-relative drift; physical iPad evidence is recorded honestly.
+- [ ] MOVE-01 actor/camera travel remains comfortable under normalized keyboard, touch, pad and controller attempts; no cadence change, second interpolation clock or frame-rate App publication is introduced.
 
 ### Safety and lifecycle
 
@@ -1056,9 +1259,22 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 - [ ] Blur, hidden, modal/context transition, navigation, disconnect, controller swap, and presentation start/end clear input; returning never replays a held move.
 - [ ] Wired/Bluetooth connect, active disconnect, replacement, and reconnect are graceful and never corrupt/save unintended state.
 - [ ] Multiple pads use deterministic first-deliberate ownership and never double-dispatch.
+- [ ] The stationary-door exception revalidates one still-live same-source/direction/run/generation hold after successful completion. Release, cancellation or any other context change prevents continuation; taps never traverse automatically.
+- [ ] Controller disconnect never traps keyboard/touch users or discards the underlying dialog/story/Book state.
 
 ### Compatibility and performance
 
+- [ ] All spans 4/5/6/7, default 6, are reachable with keyboard, touch/pointer and
+  controller in the existing game menu, with visible selection, safe focus
+  return and no gameplay leakage. Default selection and stored/clamped behavior
+  match PT32 without resizing the HUD or replacing Big mode.
+- [ ] Zoom preserves identical legal moves/rewards/reveal history, correct
+  pointer/effect geometry, edge/small-map clamps and MOVE-01 comfort across
+  Normal/Big, responsive sizes and motion modes. Preference reload/reset/error
+  paths are proven separately from campaign saves.
+- [ ] Existing shared-harness measurements cover all four spans and report
+  visible workload, rendition/decoded/paint cost and input/travel regressions;
+  Plan 07B receives exact evidence for final integrated requalification.
 - [ ] Keyboard, pointer, touch, and on-screen direction controls continue to work.
 - [ ] Existing movement, pointer, navigation, engine, session, story, audio, and progress tests remain green.
 - [ ] Controller polling causes no continuous whole-application React rerenders and zero idle polling commits.
@@ -1084,7 +1300,7 @@ These do not block pure shared-app implementation, but block a release claim:
 - **UI/controls integration:** verify canonical `src/inputContext.ts` and
   `getInteractionPolicy()` consume—not duplicate—UI-owned DialogShell,
   `src/ui/interactionState.ts`, game-menu markup and stable control IDs.
-- **Game-design owner:** sign off the explicit pointer/touch-only corner assist correction.
+- **Game-design/root owner:** verify the explicit free-board-only corner assist policy against accepted MOVE-01/Gameplay tests; changed rule semantics require a Human decision, but the existing exact-cardinal direction is already adopted.
 - **Performance owner:** replace the provisional 0.5ms p95 polling target with measured Deck evidence.
 - **Release owner:** decide whether offline PWA is required for launch or a hosted connection is acceptable.
 - **Tauri owner:** if fallback qualification starts, define Linux CI baseline, AppImage support policy, WebKitGTK/libmanette evidence, and browser-to-webview save migration.

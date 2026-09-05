@@ -2,7 +2,51 @@
 
 ## 0. Manager-reviewed execution addendum
 
-Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Art Bible, UI/UX spec, and this complete plan before implementation. Execution is gated on Plans 07A, 06, 03, root checkpoint 03M, and 01. This addendum supersedes conflicting planning details.
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Art Bible, UI/UX spec, and this complete plan before implementation. Execution is gated on Plans 07A, 06, 03, root checkpoint 03M, 01, and the Human-approved movement-comfort checkpoint before FP-UI1. This addendum supersedes conflicting planning details.
+
+### Execution refinement — 2026-09-05
+
+Make the maze feel like a small, inviting place whose paths are easier to read.
+The valuable result is coherent wall form, stable grounding and recognizable
+materials; extra darkness, filter count or geometric complexity is not success.
+Begin with the accepted FP-UI1 movement baseline and one compact comparison rack:
+a pale wall, dark wall, foliage/crystal, a one-tile corridor and mixed hazards.
+Prove signed bevels, an internal side face, a restrained cast and actor contact
+together before tuning every material. If a detail disappears at actual tile
+size, reduce it before allocating more paths, filters or authored assets.
+
+Preflight the actual catalogue, source records and scene exports. For each
+consumed geometry class/material recipe, record the exact ID/revision, pivot or
+base landmark, shadow eligibility, neutral/light profile, material-profile
+fallback and representative proof. A declared field is not evidence that its
+value fits the approved actor: overlay the ground/base on real sprites,
+including grounded, floating, coiled, tiny, large and chest-shaped examples.
+Missing geometry/material metadata returns by exact ID to root/art authority;
+derive and validate metadata from approved sources without reopening their style
+or changing their pixels. Complete this bounded seam before broad calibration.
+
+The accepted smooth-travel system owns actor translation, camera position,
+retargeting and its visual culling interval. Lighting must consume that live
+contract, including the full swept viewport during rapid holds/turns. Historical
+120 ms CSS transitions in the audit are not a duration to restore. Shadows follow
+the same rendered world position as their actor and share its ground-plane
+projection through jump/portal handoffs; they cannot snap to the logical target
+while the actor is still travelling. Rendering a halo must not reveal hidden
+objects, enemies or unexplored terrain through fog.
+
+Regions create landmarks through harmonious material contrast, never false
+collision edges. Freeze a tiny complete base-recipe/two-region example, then the
+existing four-region ceiling and invalid-input fixtures. Do not author all
+campaign regions here. Hand Plan 09 documented recipe/region IDs, fallback rules,
+seam examples and measured cost so it can place purposeful places with no new
+renderer work. All regions share one light.
+
+Requalify the FP-UI1 sustained-travel route with lighting on: holds, corners,
+reversals, outer edges, five followers, portal cuts and Normal/Big layout changes.
+No new judder, texture crawl, caster pop or visible corridor narrowing is
+accepted. Full/lower tiers must preserve that evidence and the same route truth.
+Use the existing shared harness and budget ledger; a later Plan 07B pass does
+not defer an attributable regression or waive this checkpoint's gates.
 
 ### Adopted integration requirements
 
@@ -642,7 +686,7 @@ The stack has a constant number of compound paths. Wall dressing moves below lig
 | Cages/doors/goal objects | Give explicit medium/tall caster classes. Emissive goal effects remain separate from grounding. Do not infer height from sprite pixel dimensions. |
 | Characters/enemies/followers | Use dedicated contact and cast elements beneath the sprite, sharing the resolved vector. The sprite animation transform must not own either shadow pseudo-element. |
 | Jumping/airborne states | Animation may provide a normalized `--entity-lift`. Contact opacity/scale falls as lift rises; cast remains on the floor and may lengthen modestly. The lighting system supplies the formula; animation owns the time curve. |
-| Camera transitions | Retain entities from the union of previous and next windows, or use a one-tile visual-culling halo, until the 120 ms transition completes. Do not change gameplay visibility/reveal logic. |
+| Camera transitions | Consume the accepted travel system's swept viewport/retarget envelope and lifetime. A fixed previous/next pair or one-tile halo is sufficient only if proved for the maximum legal in-flight travel, cast reach and rapid turn sequence. Keep exploration/reveal masking independent. |
 | Foreground overlap | Preserve current gameplay-first z-order. Do not hide characters behind tall walls in this project. Apparent wall height is internal to the wall footprint. |
 
 ### 9.1 Entity grounding contract
@@ -650,7 +694,7 @@ The stack has a constant number of compound paths. Wall dressing moves below lig
 Each physical entity wrapper should contain independent layers in this order:
 
 ```text
-entity root (grid/world position)
+entity root (accepted rendered world/ground-plane position)
   contact shadow (symmetric, tight, light-independent)
   cast shadow (directional, resolved light + semantic height)
   sprite motion wrapper (walk/bob/jump animation)
@@ -812,7 +856,7 @@ Valve's illustrative rendering study for Team Fortress 2 uses controlled luminan
 
 Chrome's analysis of animated blur shows that cost grows with blur radius and raster area and that caching/layer behavior must be measured on representative devices. This plan does not animate blur radius; the hypothesis that translating its cached filtered SVG surface will still be a meaningful raster/compositing risk must be tested rather than inferred as fact. That uncertainty supports a single small-radius padded filter and a no-blur fallback. [Animating a Blur, Chrome for Developers](https://developer.chrome.com/blog/animated-blur).
 
-Microsoft's performance tooling exposes main-thread, frame, raster, paint, and GPU evidence needed to distinguish geometry cost from compositing cost. The implementation should profile the actual 120 ms camera transition rather than infer performance from React render counts. [Microsoft Edge DevTools Performance tool reference](https://learn.microsoft.com/en-us/microsoft-edge/devtools/performance/reference).
+Microsoft's performance tooling exposes main-thread, frame, raster, paint, and GPU evidence needed to distinguish geometry cost from compositing cost. Profile the accepted camera-travel implementation (120 ms was the original audit baseline), including sustained retargeting, rather than infer performance from React render counts. [Microsoft Edge DevTools Performance tool reference](https://learn.microsoft.com/en-us/microsoft-edge/devtools/performance/reference).
 
 Tauri 2 currently uses Microsoft Edge WebView2 on Windows, WKWebView on macOS, and WebKitGTK on Linux, while the exact installed webview version can vary by device. The Windows acceptance gate must therefore run in packaged WebView2 as well as a desktop browser, and graceful fallback cannot depend on a single Chromium revision. [Tauri process model](https://v2.tauri.app/concept/process-model/); [Tauri webview versions](https://v2.tauri.app/reference/webview-versions/).
 
@@ -844,7 +888,7 @@ These are implementation gates. Phase 0 must record the legacy baseline on the s
 | Topology-stage regression vs same-fixture legacy baseline, p95 | ≤ max(1 ms, 1.25×) | ≤ max(2 ms, 1.5×) | phase-0 paired benchmark |
 | Complete high-geometry regression vs same-fixture legacy baseline, p95 | ≤ max(2 ms, 2×) | ≤ max(5 ms, 3×) | phase-0 paired benchmark |
 | Warm cache hit | ≤ 0.10 ms | ≤ 0.25 ms | repeated stable key |
-| Rebuilds during a settled 120 ms camera move | 0 | 0 | counters and React profiler |
+| Rebuilds during accepted camera travel, including retargeted holds | 0 | 0 | counters and React profiler |
 | Additional terrain SVG draw elements | ≤ 20 | ≤ 14 in medium/low | DOM assertion |
 | Bevel response buckets | ≤ 5 | 3 medium, 2 signed low | DOM/path assertion |
 | Representative total wall-lighting `d` data, including base top | ≤ 128 KiB and ≤ max(16 KiB, 6× legacy wall `d` bytes) | ≤ 96 KiB and ≤ max(16 KiB, 5×) | UTF-8 serialized bytes, paired fixture |
@@ -934,7 +978,7 @@ Do not create a parallel collision geometry type. Rendering topology is derived 
 
 No runtime dependency is required for the recommended implementation.
 
-Prefer existing Vitest and browser tooling for pure/unit coverage. If deterministic mid-transition screenshots cannot be produced with the current stack, propose Playwright as one pinned **development-only** dependency in phase 0, with a separate review of install size, CI browser provisioning, and existing project conventions. Do not add Canvas/WebGL, geometry, color, or filter libraries in version 1.
+Reuse existing Vitest and the landed `scripts/performance/playwright.config.mjs` browser harness, deterministic routes and screenshot controls. Extend its fixtures instead of creating a second Playwright stack. Resolve a genuinely missing capture capability through the shared harness owner with a bounded change. Do not add Canvas/WebGL, geometry, color, or filter libraries in version 1.
 
 ### 13.4 Skill search outcome
 
@@ -952,7 +996,7 @@ Work:
 - Add synthetic fixture grids for a single block, long edge, L, U, stair, one-tile notch, ring/hole, nested island, diagonal contacts, one-tile corridor, maximum solid, maze-like, stripes, and checkerboard.
 - Record current renderer DOM counts, geometry call counts, camera-transition traces, full-world filter bounds, and memory/process evidence.
 - Establish development flags: `wallLighting=legacy|v2` and `lightingQuality=high|medium|low`. Default remains legacy.
-- Decide whether the existing test stack can freeze/capture fractional camera offsets; request a pinned development-only visual dependency only if it cannot.
+- Extend the shared deterministic test clock/capture seam to freeze fractional accepted travel offsets and repeated retargets; keep this in the existing browser harness.
 
 Files/tests:
 
@@ -1079,11 +1123,11 @@ Depends on: phase 1; can begin after phase 3 geometry stabilizes.
 Work:
 
 - Add dedicated contact and cast elements/wrappers for physical board entities.
-- Move walk/bob/jump transforms into a sprite-only wrapper.
+- Consume the accepted travel wrapper. Keep actor translation and its ground-plane shadow projection together; move only secondary bob/lift into a sprite-only wrapper if that seam is still absent.
 - Consume validated catalogue grounding metadata and geometry-class fallback heights plus the resolved material-profile entity calibration; do not introduce name-based caster switches.
 - Remove or reclassify fixed downward sprite shadows that currently imply a second light.
 - Separate portal/goal glow from grounding.
-- Add a one-tile visual culling halo or previous/next window union for the 120 ms camera transition.
+- Extend the accepted visual culling envelope only by the measured caster/blur reach; test its lifetime through held-move retargets rather than restoring a 120 ms timer.
 - Keep the normalized `--entity-lift` contract in `App.tsx`/`styles.css` only; `src/jumpPresentation.ts` and its timing tests remain animation-owned unless that owner separately approves an API change.
 
 Tests:
@@ -1094,6 +1138,7 @@ Tests:
 - flat portal field has no tall cast;
 - jump lift changes scale/opacity without moving the ground anchor incorrectly;
 - culling halo affects render presence only, never exploration or gameplay state.
+- Shadows share the actor's rendered coordinates at every sampled frame of holds, turns, reversals, stops and jump/portal handoffs; culled-but-unrevealed actors cannot leak through fog.
 
 Exit gates:
 
@@ -1287,7 +1332,8 @@ Real-transition filmstrip:
 2. Capture at transition start, approximately 25%, 50%, 75%, and settled state from within the page animation clock, not from slow external command timing.
 3. Include moves where walls, holes, hazards, wall dressing, and entity shadows enter/leave each camera edge.
 4. Inspect for clipped blur, one-frame pattern reset, entity/shadow pop, double paint, or empty gutter.
-5. Run the perimeter route and a central route on the largest level, plus instant portal relocation if it bypasses normal camera transition.
+5. Run the perimeter route and a central route on the largest level, plus portal relocation through the accepted cut/handoff policy.
+6. Reuse the accepted FP-UI1 route with continuous held input, fast direction changes, five followers and Normal/Big changes. Sample the full swept viewport, not only the original source/target pair; compare actor and shadow registration at the same render timestamp.
 
 The full-world model should need no terrain gutter today. The explicit future crop-gutter formula in section 9 becomes mandatory before any optimization changes that assumption.
 
@@ -1334,7 +1380,7 @@ Core boundary, direction, grounding, camera, and performance criteria apply at e
 
 - No wall/floor texture seam, phase jump, or lighting-bucket change occurs because the camera moves.
 - No clipped shadow/blur rectangle, empty strip, false exposed edge, or new rounded cap appears at any viewport edge.
-- No entity or its contact/cast shadow pops during the 120 ms camera transition.
+- No entity or its contact/cast shadow pops or detaches during accepted camera travel, rapid retargeting, stops or presentation handoff.
 - Settled adjacent views reproduce the same world-space terrain pixels within the protocol tolerance.
 - Large connected walls and multi-loop/hole scenes remain continuous.
 
@@ -1359,7 +1405,7 @@ Core boundary, direction, grounding, camera, and performance criteria apply at e
 | Pale themes wash out | boundary contrast/family review fails | weaker highlight, stronger colored shade/side, explicit contour | neutral pale preset |
 | Intrinsically shaded texture contradicts light | highlight baked on wrong side | catalog declaration, reduce directional gain, request neutral art on next asset pass | theme opt-out |
 | Hole/hazard masks receive wrong shading | shadow floods pit or muddies hazard | post-blur weighted receiver mask and render tests | set hazard weight to zero; holes always remain excluded |
-| Entity culling pops during camera motion | transition filmstrip | one-tile halo or previous/next union | render all objects for current max levels |
+| Entity culling pops during camera motion | transition filmstrip/held retarget route | accepted swept viewport plus measured caster reach, with unchanged fog/reveal mask | render the necessary bounded visual set through the existing reveal mask |
 | Player animation reuses shadow surface | computed opacity/animation conflict | dedicated elements and ownership contract | disable entity v2 |
 | Generated seeds relight unexpectedly | snapshot diff without version change | explicit in-memory version, v1 adapter, independent salt; persist only if future replay exists | default back to v1 |
 | Cross-engine filter/color variation | Firefox/WebKit/WebView snapshots diverge | explicit units/bounds/sRGB, geometry rather than lighting filter for bevel | medium/low geometry-only |
@@ -1374,6 +1420,7 @@ Core boundary, direction, grounding, camera, and performance criteria apply at e
 | VFX/hazards | resolved `toLight`/`cast` read-only data if an effect genuinely needs it; wall/receiver mask contract | ownership of hazard motion, particles, emission, portal glow; do not add a second cast vector or wall-height bevel to flush hazards | phases 3-5 mixed-hazard/portal scenes |
 | UI/accessibility | guaranteed neutral maze contour and quality-tier behavior; final composite captures | HUD remains outside terrain filters; review path/goal readability, contrast modes, CVD/grayscale; no HUD restyle in this scope | phase 5 and final matrix |
 | Animation | dedicated grounding layers and `--entity-lift` input contract | owns walk/bob/jump timing only inside sprite wrapper; cannot reuse contact/cast pseudo-elements or replace cast direction | phase 4 idle/move/jump states |
+| Root movement-comfort checkpoint | grounding/cast reach and render-only visibility needs | owns smooth actor/camera travel, retargeting, interpolation sample and cancellation; no second lighting-owned position tween | phase 0 baseline and phases 4/6 held-route requalification |
 | Performance/platform | counters, flags, deterministic routes, tier feature matrix, pathological fixtures | owns device matrix, production/WebView traces, acceptable memory methodology, tier policy; may veto a filter but not silently change art semantics | phases 0, 3, 6, rollout |
 | Level design/generator | explicit bearing/elevation schema, stable v1/v2 deterministic selection | reviews mood/composition of authored angles; gameplay/layout seed remains independent | phases 1 and 5 |
 
@@ -1403,7 +1450,7 @@ flowchart LR
     P6 -.->|budget failure| T["Medium / low tier"]
 ```
 
-The critical path is baseline → resolved light → topology → wall stack → theme calibration → hardening. Entity grounding can proceed in parallel after the resolver contract is frozen, but it should not be art-tuned until the wall cast/contrast is stable.
+The critical path is baseline/preflight → resolved light → topology → representative wall/grounding slice → catalogue/region calibration → hardening. Grounding can be reasoned about independently after the resolver freezes, but only the authorized specialist edits runtime files; this graph does not authorize a concurrent implementation agent. Tune it after wall cast/contrast and accepted travel registration are stable.
 
 ## 20. Definition of done
 
@@ -1415,6 +1462,8 @@ Implementation is complete only when:
 - the catalogue-derived visual matrix has been reviewed, including every active material profile, authored region recipe/transition, geometry-class grounding fallback, and representative camera route;
 - source, bevel, cast, and entity direction are demonstrably coherent at cardinal, diagonal, and continuous test angles;
 - exact traversability contours remain readable with no texture seam or camera-edge artifact;
+- actor/shadow registration and the accepted FP-UI1 movement-comfort route remain stable under sustained input; visual halos preserve fog and discovery truth;
+- Plan 09 receives a validated base/multi-region recipe example, ID/revision and fallback contract, seam evidence and measured cost; campaign region authoring remains with Plan 09;
 - high or an approved lower tier meets web and packaged-WebView budgets;
 - low tier is a viable filter-free fallback;
 - curated saved-session compatibility, generated-seed determinism, and rollback switches are exercised;

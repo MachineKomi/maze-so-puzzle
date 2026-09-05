@@ -6,6 +6,23 @@ Prepared: 2026-09-02
 
 Planning baseline: `5eed837` (`Add expert implementation research plans`)
 
+Planning reconciliation: 2026-09-05, at `47bfff4`, while Agent 01 continues its
+uncommitted assignment. This review changes future execution instructions only;
+it does not accept the UI candidate, reopen art approvals or trigger an agent.
+The review record is `2026-09-05-programme-review.md`.
+
+Latest checkpoint review: Agent 01 stopped on 2026-09-05 with a candidate,
+not an accepted UI. Root review found mandatory art/phone gaps plus audio/image
+fallback regressions. `../reviews/2026-09-05-plan01-review.md` and
+`AGENT01-review-follow-up.md` own the bounded return. No MOVE-01 or FP-UI1 release
+starts before that prerequisite is accepted. The shared planning checkpoint may
+now be backed up separately; the candidate's runtime files remain uncommitted.
+
+Current sequence: **01 review → MOVE-01 → FP-UI1 → 04 → 02 → 08 → 05 → 07B /
+FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
+RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
+specialist tasks from root-prepared prompts. Only one runtime owner runs at once.
+
 Current programme shape: a measurement-only performance pre-pass; sequential
 feature execution through the 24-maze campaign and couch co-op/Friend Garden;
 final key art; backlog closure and release polish; an archive-first asset-
@@ -37,7 +54,13 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 
 ## 3. Operating rules for sequential execution
 
-- Only one implementation agent runs at a time.
+- Only one runtime implementation agent runs at a time. Planning reviewers may
+  work concurrently on explicitly disjoint future-plan files. Freeze the running
+  task's prompt, plan and implementation documents for its assignment; candidate
+  code/specs are observations, never new accepted API authority. Queue necessary
+  changes for its final review. Do not change shared HEAD, stage its work or run
+  competing build/performance loads while that task is active. Commit/push the
+  independently reviewed planning changes at the next safe manager checkpoint.
 - Before each agent starts, the manager reviews the preceding diff, resolves failures, commits a named checkpoint, pushes it, and gives the next agent a clean current `HEAD`.
 - An execution agent must not reset, discard, or overwrite predecessor work. It must adapt the plan to current symbols and reuse contracts already landed.
 - An execution agent should work through bounded phases and keep rollback seams until its full acceptance matrix passes.
@@ -57,8 +80,8 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 - Plan 03's source/catalogue contracts, Art Bible, reproducible pipeline and
   Human-reviewed `mgjrpg-02` production grammar are established. Candidate C
   remains Ame's identity/construction authority; the Human selected the clearer
-  B-led 01 small-scale rendering direction and is reviewing the remaining
-  production-source batches by approval-by-default and rejection-by-exception.
+  B-led 01 small-scale rendering direction and closed the production-source
+  batch review before the accepted runtime publication.
   The v08 perimeter-retrofit packet remains rejected process evidence; authored-
   from-scratch chromatic local contours, chunky massing and restrained painterly
   shading are the binding craft direction. Paired teleporters retain their
@@ -75,30 +98,18 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
   grammar must be authored into new interior massing, values, and material
   painting with visibly lighter chromatic edges; post-stroking old pixels does
   not satisfy Plan 03.
-- Current programme stop: Plan 03 is still active source production/review, not
-  an accepted runtime checkpoint. Source-batch commits do not release Plan 01.
-  After the Human closes the remaining candidate exceptions, Plan 03 must create
-  clean transparent/registered/right-sized runtime derivatives, atomically
-  publish approved catalogue pointers, prove the refreshed art in the actual
-  game at delivery sizes, reconcile provenance/model/family/lifecycle records,
-  complete the integration manifest below, run the full art/build/desktop/
-  performance/visual gates, and commit and push the reviewed checkpoint. Final
-  asset retirement remains Plan 12 work rather than a bulk Plan-03 deletion.
-- The Human has queued an initial Maze-native title illustration, home-screen
-  splash and game logo inside the remaining Plan-03 art work so the next useful
-  family preview can have a coherent front door. After individual approval,
-  these follow the same clean-derivative, responsive safe-zone, catalogue,
-  provenance, budget, runtime-proof and rollback gates as every other Plan-03
-  family. Plan 11 becomes a final-canon audit/refinement gate and must retain
-  good early work rather than regenerating it by default.
-- Plan 03 does not release Plan 01 until its final approved production slate is
-  accompanied by a versioned content-integration manifest. For every approved
-  asset, that manifest records the stable semantic ID, lifecycle state,
-  proposed content role, intended Plan owner/consumer, loading intent, and any
-  explicit Human deferral. Source studies, proofs, rejected alternatives and
-  presentation-only art must be distinguishable from candidate gameplay art.
-  Plan 09—not the art lifecycle—freezes final campaign/generated eligibility in
-  the separate typed gameplay-content registry.
+- Plan 03 publication, 03M and the corrective art/friend checkpoints are
+  accepted foundations. Agent 01 is authorized and active. The approved v06
+  visual wordmark, two-stage title/Home, v04 transparent Home hero and final
+  Goblin/Violet Moon remain current authority; all 32 friends have authored
+  rescues. Preserve their versioned source/provenance and rollback records.
+- A downstream missing rendition or unregistered landmark is a bounded
+  dependency return, not permission to reopen approved designs or declare the
+  whole art phase incomplete. Name the semantic ID, consumer, size/geometry,
+  existing approved source, owner and acceptance gate before authoring anything.
+  A semantic fallback keeps development usable but cannot silently waive a
+  mandatory presentation-art criterion. Plan 09 still owns final 24-chapter
+  gameplay eligibility/ecology; Plan 11 audits good early branding by default.
 - No agent adds one of the eight Plan-09 campaign mazes early.
 - No plan may introduce analytics, paid infrastructure, monetization, remote asset dependence, or a copied franchise design.
 
@@ -110,7 +121,8 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 | 2 | **06 — Game design, gameplay UX, mechanics** | Establishes stable content identity, revisions/migrations, engine-consistent reachability, required-versus-optional semantics, progression metrics, scalable campaign contracts, and the revised 16-maze rule/content baseline. Presentation owners should not infer these from old `App.tsx` conditions. | Gameplay spec, stable semantic events/view models, campaign-length-safe foundations, solver and migration evidence, revised story/design authority. |
 | 3 | **03 — Art direction and graphic design** | Consumes the gameplay semantics and freezes the static visual identity before layout, lighting, effects, or animation depend on it. This is where blonde/blue-eyed Ame and the approved hair silhouette become canonical, and where the first approved title/logo/home-splash set can be readied for an early family preview. | Art Bible, PPBA-informed adopt/adapt/reject record, explicitly Human/Ame-approved model sheet and canonical static Ame sprite, Human-reviewed rendering-recipe/canary decision, asset/catalogue/source contract, final static art/tokens including required presentation renditions and approved early front-door art, actual-size proofs, provenance/byte evidence, and a versioned content-integration manifest assigning every approved final asset a semantic ID, lifecycle, proposed content role, intended consumer/owner and loading intent. Plan 09 separately decides final gameplay eligibility. A pending rendering canary, identity study or unclassified approved asset does not release Plan 01. |
 | 4 | **03M + v0.20.1 + post-release corrective root checkpoint** | The delivered 42-track OST, published art and presentation-critical gameplay decisions need one authoritative green seam before UI/VFX/controls consume them. The v0.20.1 slice closes missed Poggle/Sprig portraits, repairs the Home hero alpha, establishes the separate minimal title screen, activates the complete approved friend roster for generated play/Book, and fixes bounded door/portal/Book issues. The additive post-release correction replaces mistakenly retained Goblin/Violet Moon pixels and gives all 32 friends authored rescues before Agent 01. | Valid real-OST catalogue and `MusicTransportPort`; maintained completion/Mimic contracts; two-stage title/Home baseline; no legacy active-art consumer for Poggle, Sprig, Goblin or Violet Moon; complete generated and authored friend roster with Unicorn in Maze 1 and Tea-Time Skeleton in Maze 2; stationary visible-player door sequence; redundant portal glyph removed; compact friend ledger; immutable v0.20.1 evidence plus post-release correction record; full checks green; root-reviewed commit pushed. This remains bounded compatibility/correction work, not the Plan-01 overhaul or Plan-07B contextual mix. |
-| 5 | **01 — UI/UX and layout** | Can now build around real gameplay priorities and final asset safe bounds. It establishes the stable cross-device shell, large minimap, DialogShell, focusable markup, compact Sound disclosure, CSS layer manifest, motion preference, measured UI/VFX anchors, and the authored Maze-native surface/type/presentation-art system. | UI/UX spec, primary-device topology, all-content geometry tests, stable semantic IDs/anchors, styled component/state proof, licensed typography and full/lite/static surface recipes, large contextual-art slots/fallbacks, integrated early front door, dialog/focus surfaces including one accessible Sound menu, and extensions to the shared browser harness. Its accepted checkpoint is the preferred Family Preview 1 gate. |
+| 5 | **01 — UI/UX and layout** | Can now build around real gameplay priorities and final asset safe bounds. It establishes the stable cross-device shell, large minimap, DialogShell, focusable markup, compact Sound disclosure, CSS layer manifest, motion preference, measured UI/VFX anchors, and the authored Maze-native surface/type/presentation-art system. | UI/UX spec, primary-device topology, all-content geometry tests, stable semantic IDs/anchors, styled component/state proof, licensed typography and full/lite/static surface recipes, large contextual-art slots/fallbacks, integrated early front door, dialog/focus surfaces including one accessible Sound menu, and extensions to the shared browser harness. Root reviews/checkpoints this before MOVE-01. |
+| 5A | **MOVE-01 — Root travel/camera comfort, then FP-UI1** | Implements the Human's advanced movement request against the accepted UI seam before lighting/VFX attach. Keeps exact tile rules while coordinating smooth actor/camera travel. | Accepted travel/coordinate/cancellation contract, route and frame evidence, clean reviewed/pushed checkpoint, and required verified FP-UI1 playable release with family comfort still honestly pending. See `MOVE-01-smooth-travel-and-camera.md`. |
 | 6 | **04 — Lighting and wall depth** | Uses final art materials and the final MazeViewport/scene slots. It creates the single terrain topology/render-model seam, coherent light resolver, wall layers, grounding wrappers, and bounded presentation-only multi-theme region support before effects attach to them. | Lighting spec, resolved-light API, cached topology/render model, validated one-to-four-region terrain-theme seam over one gameplay topology, world masks/layer tokens, dedicated contact/cast/sparkle surfaces, tier evidence. |
 | 7 | **02 — Graphics and VFX** | Consumes final art tokens/assets, terrain/light layers, UI anchors, and gameplay events. It owns the shared presentation director, cancellation, semantic effect grammar, hazard motion, varied flourishes, and the reusable bounded reward-shower presentation from `PT-20260903-22`. | VFX Bible, presentation-director contract, anchor/timing/cancellation APIs, effect variants, deterministic visual-only reward burst/homing recipes, reduced/static recipes, sound/lifecycle evidence. |
 | 8 | **08 — Controls, Xbox controller, Steam Deck** | Uses the actual UI focus topology, final presentation-lock contract, and root-frozen music transport port. It normalizes all input sources, implements controller navigation/gameplay—including every compact Sound action—and proves no stale input crosses an effect or overlay. | Controls/Steam Deck spec, shared input policy/action dispatcher, gamepad implementation, controller prompts/focus/scrolling, semantic music-transport conformance against the current/fake adapter, deterministic tests and honest hardware checklist. |
@@ -177,12 +189,11 @@ continuous and high-contrast at delivered size. `ink-900` is for eyes, mouths,
 deep occlusion, critical separation, and genuine accessibility need—not a
 default perimeter.
 
-The v08 post-process packet is retained only as rejected decision evidence. The
-v11 A/B/C packet is the Human's narrowing evidence; v14 is the bounded
-source-only response and current rendering gate. Candidate C's
-identity/construction remains locked throughout. Human confirmation of the
-recommended Ame fallback and revised family recipe, versioned runtime
-publication, and broad family production are still separate, unmet gates.
+The v08 post-process packet remains rejected decision evidence. Later approved
+production/publication supersedes the historical v11/v14 calibration stop.
+Candidate C's identity and the selected B-led 01 rendering remain closed
+decisions. New derivatives/poses receive their own bounded provenance and
+actual-size checks; they do not require repeating the settled style selection.
 
 ### 5.4 Static versus runtime lighting
 
@@ -495,9 +506,11 @@ their manifest, SHA-256 and playtest note:
    resolved only after the final accepted commit is known.
    The bounded v0.20.1 corrective preview supersedes v0.20.0 for family testing
    once its release is green; v0.20.0 remains immutable rollback evidence.
-2. **`FP-UI1` — Family Preview 1 after Plan 01** is a required build when the
-   accepted UI checkpoint is green, combining
-   approved static/front-door art with the rebuilt UI.
+2. **`FP-UI1` — Family Preview 1 after Plan 01 and MOVE-01** is a required build
+   when both checkpoints are green, combining approved static/front-door art,
+   the rebuilt UI and smooth coordinated actor/camera travel. Use
+   `../playtests/FP-UI1-checklist.md`; an incomplete UI prerequisite remains a
+   return gate rather than becoming movement work.
 3. **`FP-CORE2` — Integrated Interaction Preview after Plan 07B** is a required
    green-checkpoint build and includes lighting, VFX,
    controls, limited animation, music and the performance-qualified package.
@@ -572,6 +585,77 @@ Human comfort acceptance is a preview playtest outcome, not an automated claim.
 If an Agent-01 preview has already been published, use an immediate separately
 versioned follow-up rather than replacing immutable artifacts. Agent 01's current
 no-build-publication instruction remains unchanged. Agent 04 follows this gate.
+
+The bounded execution plan is `MOVE-01-smooth-travel-and-camera.md`. It is the
+first consumer of the accepted UI scene seams and the travel authority that
+later presentation/input plans consume. A source-only checkpoint is not a
+family preview; the release manifest ties the reviewed movement result to the
+actual versioned web/portable artifact.
+
+### 5.13B Experience and efficient delivery contract — 2026-09-05
+
+Every pending owner identifies the player-visible result before implementing:
+what becomes easier to understand, more comfortable, more surprising, or more
+rewarding. Review one representative, difficult slice early, then expand only
+after it proves the contract. Do not commission a full asset family or tune all
+24 chapters before the shared mechanism works.
+
+- Protect the child's attention. Stable clues, immediate input acknowledgement
+  and current choices take precedence over ambient decoration. Repeated events
+  retain readable exact feedback without repeatedly spending a finale's visual
+  scale, dwell or sound emphasis. Optional celebration must not make a familiar
+  corridor slower to traverse; gameplay-owned interaction locks remain intact.
+- Make teaching actionable: show a truthful next possibility, allow the child
+  to try, and let Help narrow progressively. Do not let asset completeness or
+  story exposition crowd the first encounter. Plan 09 uses room-scale choices,
+  anticipation, changed-state returns and relaxed chapters to vary rhythm.
+- Apply the Human's 2026-09-05 quality reaffirmation in the vision: beautiful
+  sights/sound, comfortable responsive travel and reasoning through play form
+  one acceptance story. Plan 09 names each chapter's learning opportunity and
+  later recombination; quizzes, grinding and unsupported educational claims
+  cannot replace interesting puzzle design.
+- Prototype reuse before expansion: one light/region seam in 04, one complete
+  event/cancel path in 02, one controller journey in 08, a registered acting
+  canary in 05, and one revised teaching/reunion pair in 09. These are internal
+  checkpoints inside the same assignment, not automatic extra Human prompts.
+- Before each start, root supplies a dependency packet: accepted SHA; current
+  exported APIs; exact required assets and metadata; allocation status; owned
+  backlog slices; unavailable device/approval gates; and changed-file ownership.
+  Missing required art/landmarks/budget authority gets a specific return path
+  before broad production. A candidate cannot approve its own resource growth.
+- Use the existing harness. Cover all required viewports and critical
+  cancellation/save/input paths, then use explicit covering/pairwise cases for
+  decorative combinations. Record uncovered cases and why; never claim a full
+  Cartesian matrix from a small sweep. Re-run evidence invalidated by changes,
+  not identical expensive suites without new risk.
+- Keep technical acceptance, Human taste/comfort, family learning and platform
+  qualification separate. Family sessions are short voluntary journeys with
+  observed counts and examples, not a compulsory test laboratory. Percentage
+  targets in old cards are hypotheses unless a sample and protocol support them.
+  Discomfort ends that exercise; it is already actionable evidence.
+- At each named preview, ask for one main learning outcome and one regression
+  journey. Root owns technical checks; the family reports comprehension, fun,
+  comfort and friction. Mandatory co-op/retirement Human gates remain blocking.
+  Missing hardware can qualify a preview's claims but cannot erase a failed
+  safety, save, legality or required-content gate.
+- A new mechanic, economy, content roster or persistent editor remains a Human
+  decision. Creative improvements within an approved plan earn their complexity
+  through the smallest useful comparison. Plan 14 evaluates genuinely new scope.
+
+### 5.13C Future adjustable camera view — 2026-09-05
+
+Human-requested `PT-20260905-32` is assigned to Plan 08 after accepted UI,
+MOVE-01, lighting and VFX. The default span is six tiles; permit two fewer
+(four, larger sprites) or one extra (seven, wider context). One-tile steps
+4/5/6/7 are the adopted controls proposal. This is future work, outside FP-UI1.
+
+Use the accepted menu and travel owner, with consistent keyboard/touch/controller
+actions and separately stored display preferences. Wide must show additional
+known terrain/objects; discovery/fog, puzzle legality and saves remain unchanged.
+Read the precise intake at `../playtests/2026-09-05-adjustable-camera-zoom.md`.
+Plan 08 proves geometry, small-map/edge clamps, input, motion and anchors; 07B
+qualifies wider visible content and larger-sprite paint/rendition costs. Later
+campaign/co-op qualification includes all supported camera spans.
 
 ### 5.14 Final gameplay, progression and quality-of-life opportunity review
 
@@ -699,6 +783,7 @@ implicit Plan-15 scope.
 | Canonical structured `InputContext`, `InputAction`/`InputSource`, `src/inputContext.ts`, `getInteractionPolicy()`, raw input normalization, semantic actions, held cadence, controller ownership/deadzones, neutral gates, focus navigation | Plan 08 | Consumes Plan-01 UI/top-overlay state, Plan-02 busy lease, and Plan-06 gameplay legality. Pointer steering alone owns pointer-specific corner assistance. |
 | Terrain boundary topology, cached render model, world masks/gutter, resolved maze light, wall/depth layers, contact/cast grounding surfaces and bounded presentation-only terrain regions | Plan 04 | Art provides albedo/material intent; Plan 09 assigns fixed compatible region themes over one topology; VFX supplies motion/emission in assigned layers; UI hosts the scene. |
 | Presentation director, run lifetime, abort/cancellation, effect/audio cue timing, transient VFX, hazard material motion, presentation-busy lease | Plan 02 | Controls consumes lock boundaries; animation consumes absolute run time/pose intent; gameplay state is already committed. |
+| Ordinary actor travel, camera following, visual-coordinate snapshot, bounded retargeting and travel cancellation | Root MOVE-01 | UI supplies viewport geometry; 04 preserves gutters/grounding, 02 coordinates special-event travel without competing writes, 08 emits discrete intent, 05 owns inner poses, and 07B requalifies the integrated result. |
 | Optional sprite frames, animation manifest/selector, isolated renderer, frame decode/cache, pose/body/weapon atomic fallback | Plan 05 | Consumes art identity/geometry and VFX timing; never owns engine outcome, outer travel, or base-art fallback history. |
 | Browser/performance harness governance, trace method, global budgets/quality policy, generated asset inventory, final caching/package/release evidence | Plan 07 | Plan 07A establishes the shared harness; all later agents extend it rather than add rivals. Plan 07B requalifies the integrated product. |
 | Delivered BGM catalogue and canonical `MusicTransportPort`/fake/current-adapter semantics | Root checkpoint 03M | Plan 01 binds one compact Sound disclosure and Plan 08 binds semantic cross-input operation without accessing audio internals. |
@@ -773,6 +858,11 @@ Freeze or version:
 - automated viewport/state fixtures.
 
 ### After Plan 04
+
+MOVE-01 must already have frozen its travel API, elapsed-time basis, visual
+coordinate snapshot, transform ownership, corner/edge/retarget behavior and
+settle/cancel rules before Plan 04 starts. Keep comfort observations separate
+from lab timing evidence and preserve the FP-UI1 comparison routes.
 
 Freeze or version:
 

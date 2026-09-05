@@ -2,7 +2,55 @@
 
 ## 0. Manager-reviewed execution addendum
 
-This track is deliberately late. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the final Art Bible/Ame model sheet, UI/UX spec, Lighting spec, VFX Bible, Controls spec, this plan in full, and current code before changing anything. Execution is blocked until Plans 07A, 06, 03, root checkpoint 03M, 01, 04, 02, and 08 are accepted.
+This track is deliberately late. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the final Art Bible/Ame model sheet, UI/UX spec, Lighting spec, VFX Bible, Controls spec, this plan in full, and current code before changing anything. Execution is blocked until Plans 07A, 06, 03, root checkpoint 03M, 01, the pre-FP-UI1 movement-comfort checkpoint, 04, 02, and 08 are accepted.
+
+### Execution refinement — 2026-09-05
+
+The job is **recognizable acting that rewards attention**, with an equally good
+static game when an optional frame is unavailable. Smooth tile travel already
+lands before FP-UI1; frame animation is not its prerequisite or replacement.
+Consume the accepted rendered-position, travel progress/direction, ground-plane,
+retarget and cancellation contract. Do not reintroduce a 120 ms step tween,
+restart camera easing on each frame, or add a bob that restores the reported
+jerkiness. A held route must keep flowing while purposeful drawings change;
+contact/pose phase follows the accepted travel instead of forcing movement to
+wait for a clip. Reduced mode preserves its accepted travel/comfort policy.
+
+Before any new frame production, make one small actor/held-prop preflight with
+the exact published source-record/rendition IDs, immutable identity references,
+registration space, pivot/ground line, face/eye landmarks, relevant hand sockets,
+safe inset **order**, source version, consumer sizes, static composition and
+approved byte allocation. Project the landmarks over the actual approved
+runtime derivative and source: record any inconsistency as a bounded metadata
+or derivative return to root, not a reason to reopen Candidate C, B-led 01 or
+the completed art catalogue. Static approval is closed; new poses still need
+their own acting/identity and registration proof. Missing fields are not licence
+to infer sockets from filenames or generic canvas centres.
+
+First prove one valuable Ame action plus its canonical armed fallback with the
+smallest useful frame set. Expand to a friend/guardian only when current campaign
+visibility and acting value justify it. Maze 1 now rescues Unicorn and Maze 2
+Tea-Time Skeleton; the old kitten-first rationale is historical. Neither these
+friends nor any other family receives a mandatory frame quota. Candidate tables
+and exact millisecond maps below are research examples: the decision ledger and
+accepted presentation markers determine the shipped cast, frames and timings.
+Phases 3–5 are candidate extensions, not automatic completion requirements or a
+hidden full-roster production pass.
+
+Reuse published stills, art pipeline/lock, image queue, motion provider, browser
+harness and presentation clock. Add only the minimal optional-frame adaptation
+they lack. Do not migrate all static catalogue consumers or replace approved
+neutral art merely to exercise a generalized manifest. Register a selected
+one-shot's body/weapon availability once; late decode never changes it mid-beat.
+Measure the real current frame dimensions—Ame's published field is 512, many
+others are 256—rather than assuming all files cost one cache unit.
+
+Before acceptance, rerun the FP-UI1 sustained-travel route with the accepted
+lighting/VFX/controls stack and optional frames enabled/disabled: holds, corners,
+reversals, five followers, stops and presentation handoffs. Require no foot/weapon
+pop, ghost pose, camera judder, input delay or decode competition with first play.
+If the acting gain is not visible at the smallest actual size, defer the drawing
+instead of making the game busier.
 
 ### Final dependencies and identity rules
 
@@ -48,18 +96,23 @@ Completion is the accepted bounded tranche, not the number of possible animated 
 
 **Scope owner:** sprite animation manifests, frame selection, state/event presentation mapping, renderer behavior, registration metadata, frame assets, preload policy, and motion fallbacks
 
-**Not authorized by this plan:** production-frame generation, runtime integration, gameplay changes, VFX redesign, wall-lighting changes, or HUD/layout redesign
+**Historical research-scope boundary (2026-09-02):** that planning task authorized
+only this document, not frame production or runtime integration. Future Plan-05
+implementation becomes authorized through its Human-triggered execution prompt
+after the roadmap dependencies and frame-review gates are satisfied. It may then
+edit the bounded implementation/source/evidence paths specified here; gameplay,
+VFX redesign, wall-lighting and HUD/layout redesign remain outside its ownership.
 
 ## 1. Executive decision
 
-Build a small, optional, typed animation layer on top of the existing `SpriteArt.src` contract. Keep `src` as the guaranteed static fallback; add an `animationId` only to art that has an approved family manifest. Render a fixed 512 × 512 virtual canvas, switch discrete lossless WebP frames inside an isolated sprite component, and derive frames from absolute elapsed time rather than incrementing a counter in `App`.
+Build a small, optional, typed animation layer on top of the accepted catalogue's canonical static contract. Keep that still as the guaranteed fallback; add an `animationId` only to art that has an approved family manifest. Use the art-owned normalized registration space and measured rendition for each selected family, switch discrete lossless WebP frames inside an isolated sprite component, and derive frames from absolute elapsed time rather than incrementing a counter in `App`.
 
 The candidate first tranche is intentionally narrow and must be reduced further when evidence does not justify a frame:
 
 - Ame: neutral/idle breath, blink, alternating steps, blocked reaction, a three-pose combat vocabulary, and one reusable joy pose.
-- Kitten: worried-in-cage and release/joy, because kitten rescue appears in the first story maze.
-- Goblin: contact reaction and friendly surrender, because goblin is the first enemy family.
-- Existing comet spear and star sword overlays: registered through explicit weapon grip/body hand-socket metadata; unsupported body/weapon pairs retain the current neutral overlay presentation.
+- One high-visibility friend candidate: hopeful-in-cage and release/joy if the acting survives the real cage and board scale; select by current authored placements, not the historical kitten-first assumption.
+- One high-visibility guardian candidate: contact reaction and friendly release if it materially improves the accepted VFX sequence; do not automatically choose the historical Goblin example.
+- Current approved held props: consume their explicit grip/axis/scale/order metadata and prove per-pose hand compatibility; unsupported body/prop pairs retain the canonical neutral composition.
 - No multi-frame object family is assumed. Current static/CSS presentation remains the fallback for cages, treasure, keys, portals, goals, pickups, and every unselected family until character animation proves the pipeline and budgets; a chest/Mimic reveal may enter the tranche only if its measured semantic value exceeds a lower-priority character frame.
 
 The selected tranche ships no 512 presentation duplicate without a separately approved proof. Only the exact current-level dependency subset is eligible for loading, and the tranche must remain behind a kill switch until its actual-size art review, timing review, family-playtest review, and transfer/decode/performance budgets pass. The final file and drawing counts are outputs of that gate, not entry criteria.
@@ -78,7 +131,10 @@ Concurrent planning work appeared during the audit. At the authoring checkpoint,
 - `docs/plans/07-performance-web-tauri-plan.md`
 - `docs/plans/08-controls-xbox-steam-deck-plan.md`
 
-Those files were not modified by this work. The final command transcript and exact final status are recorded in section 23. This plan must remain the only file changed by the sprite-animation work itself.
+Those files were not modified by the historical planning task. Its final command
+transcript and status are recorded in section 23; its one-file restriction
+applied to that research task only. A later authorized execution prompt activates
+the bounded implementation/file map and review gates in this plan.
 
 Planning-only tooling wrote no repository assets. Two ImageGen assay results remained in the user-scoped generated-image store, browser testing used a temporary local Vite server and test-mode game session, and the asset format comparisons/contact calculations ran read-only or in memory.
 
@@ -108,7 +164,7 @@ Planning-only tooling wrote no repository assets. Two ImageGen assay results rem
 2. Existing presentation clocks remain authoritative. A frame marker may aid visual synchronization and tests, but must never trigger a gameplay mutation.
 3. `SpriteArt.src` remains valid and sufficient for feature disable, soft rollback, and any animation-layer manifest/frame/decode failure. Reduced motion may deliberately select a more meaningful manifest static frame. If the canonical art URL itself fails and no live rollout fallback remains, the renderer shows its code-native neutral silhouette placeholder; it never emits a broken-image glyph or empty box.
 4. Outer world placement/motion and inner frame registration stay in separate DOM layers so a frame swap cannot fight the tile-position transform.
-5. Frame changes never cause the 3,800-line `App.tsx` or the maze grid to rerender at animation cadence.
+5. Frame changes never cause the accepted game-screen/maze-grid owner to rerender at animation cadence; old App line counts do not define the integration target.
 6. Board sprites remain decorative (`alt=""`, `aria-hidden="true"`); existing labels and live-region text continue to communicate game state.
 
 ## 4. Current-state inventory
@@ -191,9 +247,9 @@ The closest reusable precedent is `scripts/process_portal_assets.py`: it normali
 - Reduced-motion CSS already collapses or disables many loops and supplies usable set-piece endpoints. The new frame system must preserve that strength rather than relying on fast frame cycling.
 - Styles are layered through accumulated overrides. New code should consolidate migrated sprite rules under one inner-renderer block instead of adding another broad transform override.
 
-## 5. Opportunity matrix and rollout priority
+## 5. Candidate opportunity matrix and rollout priority
 
-Scores use 5 as highest. “Ready” means the current game already emits an unambiguous presentation signal; it does not authorize changing gameplay.
+Scores use 5 as highest. This matrix records the original proposal; its “MVP” labels are candidates to re-score, not a mandatory tranche. Signal availability, first appearances and the blocked/portal defects must be checked against accepted current source. No entry authorizes changing gameplay or repeating work already delivered by VFX/movement.
 
 | Family/state | Visibility | Reuse | Emotional value | Signal readiness | Art/system cost | Decision |
 |---|---:|---:|---:|---:|---:|---|
@@ -268,11 +324,14 @@ All files below are future candidates; none should be produced during this plann
 | Goblin | `goblin.hit` | Benign surprise/recoil at contact, never injury | New drawing. |
 | Goblin | `goblin.surrender` | Friendly hands-down/peaceful defeat | New drawing. |
 
-The first story maze contains the kitten; the next introduces goblin combat with the comet spear. This gives the vertical slice immediate first-session visibility rather than hiding the investment in late content.
+The original proposal used Kitten and Goblin as example IDs. Current authored
+rescues start with Unicorn and Tea-Time Skeleton. Replace the example selection
+with the frozen decision ledger before generating frames or wiring manifests;
+use stable catalogue/level IDs and actual reachable encounters as evidence.
 
 ### 7.2 Exact clip timing
 
-Durations are authored per step in milliseconds. Boundaries are half-open: a step owns `startMs <= elapsedMs < endMs`. The final instant of a one-shot resolves to its declared exit/static frame.
+Durations are authored per step in milliseconds. Boundaries are half-open: a step owns `startMs <= elapsedMs < endMs`. The final instant of a one-shot resolves to its declared exit/static frame. The following historical clip table illustrates timing/acting roles; at execution derive all movement and presentation boundaries from the already-accepted travel/director contracts. Do not restore its 64/45/120 ms gates, 2220 ms combat dwell or old rescue cues after those owners have changed them.
 
 | Clip | Exact sequence | Total / trigger | Full-mode behavior | Reduced/static behavior |
 |---|---|---:|---|---|
@@ -292,7 +351,8 @@ Durations are authored per step in milliseconds. Boundaries are half-open: a ste
 | `goblin.combat` | Exact segment map below; hit for 50/50/60 contact windows | 2,220 ms once per battle presentation ID | Uses the same authoritative elapsed time as Ame; surrender begins only after transfer at 1,730 ms and is hidden at victory 1,900 ms. | hit/contact tableau 95; hidden behind the result seal for 85. |
 | `goblin.surrender` | surrender hold | 1,730–1,900 ms | Friendly release pose only during the director-owned relax/scoot interval; it is absent at victory. | not separately played. |
 
-The combat clip must total exactly 2,220 ms:
+The historical combat mapping below totals 2,220 ms. The implemented mapping must
+instead total the current director's exported duration and use its exact markers:
 
 | Interval (ms) | Ame frame | Goblin frame | Existing semantic anchor |
 |---:|---|---|---|
@@ -312,7 +372,13 @@ The combat clip must total exactly 2,220 ms:
 | 1,730–1,900 | combat-recover | surrender + director-owned scoot/dissolve | Transfer is complete; friendly release interval. |
 | 1,900–2,220 | joy | hidden; director-owned result seal/ring may remain | Existing victory cue; enemy copy is absent. |
 
-Reduced combat is exact: at 0–95 ms Ame holds `combat-contact` and goblin holds `hit` under Plan 02’s static contact/transfer tableau; at 95–180 ms Ame holds `joy` and goblin resolves to hidden while the VFX-owned result seal replaces it. Static sprite quality uses the same two semantic holds (no cycling or spatial motion), because hiding a defeated copy at the director’s result marker is state reconciliation, not decorative animation.
+In the historical reduced-combat example, 0–95 ms holds contact and 95–180 ms
+holds the result; derive the actual boundaries from the accepted director.
+Static sprite quality uses meaningful pose holds at that director's markers
+without sprite-owned cycling or spatial transforms. It does not force the
+director into reduced motion: its independently selected full/reduced event
+choreography remains authoritative. Hiding a defeated copy at the result marker
+is state reconciliation, not a new animation outcome.
 
 `src/combatPresentation.ts` plus the Plan-02 director screenplay remain the source of those timestamps. Derive 1,730 from the final clash `transferEndMs` and 1,900/95 from the exported `victory` cue; do not copy them as disconnected CSS magic numbers. Plan 02 owns outer dissolve/result-seal visibility, while the sprite mapping owns only pose/hidden selection at those markers.
 
@@ -320,9 +386,9 @@ Reduced combat is exact: at 0–95 ms Ame holds `combat-contact` and goblin hold
 
 ### 7.3 MVP success rationale
 
-- Ame receives visible life on every level and readable feedback for the currently missing blocked reaction.
+- Ame receives visible life where an added drawing improves the already-accepted movement/blocked/VFX response.
 - The same small pose vocabulary covers movement, pickups, combat, rescue, and victory.
-- Kitten and goblin prove friend/enemy manifests and the first two story mazes instead of hiding the investment in late content.
+- Selected friend/guardian consumers prove reuse in actual reachable early encounters; the historical Kitten/Goblin examples do not fix the shipped cast.
 - Combat proves exact event synchronization and layered weapon attachment.
 - No new object frames are justified until the character slice meets its art and performance gates.
 
@@ -330,7 +396,11 @@ Reduced combat is exact: at 0–95 ms Ame holds `combat-contact` and goblin hold
 
 ### 8.1 Catalogue compatibility
 
-The current inspected catalogue needs one enduring sprite-animation field plus one temporary rollout field. If Plan 03's richer art catalogue lands first, add them to its resolved schema and expose them through the resolver contract below rather than preserving the minimal shape as a competing authority:
+The accepted catalogue already owns source, geometry, rendition selection and
+rollback. Animation adds only an optional manifest reference where needed. The
+following original minimal-schema sketch records a possible art-owned migration
+adapter; it is **not** a requirement to add `rolloutFallback`, replace the richer
+published `SpriteArt`, or introduce animation-owned URL/version policy:
 
 ```ts
 export interface SpriteRolloutFallback {
@@ -352,17 +422,36 @@ export interface SpriteArt {
 }
 ```
 
-On the inspected schema, `src` is always the canonical static fallback. `animationId` points into a compile-time registry; it is not a URL and it is never constructed from user/game data. If Plan 03’s richer `variants` schema lands, add these fields to its resolved-art result rather than create a second catalogue. Unanimated art remains first-class.
+The canonical `src` remains the static fallback. `animationId` points into a
+compile-time registry; it is not a URL constructed from user/game data. Consume
+the published `variants`, geometry and source records through their current
+resolver; unanimated art remains first-class.
 
-`expiresBeforeAppVersion` is a parsed three-part app version, never a date/free-form tag. For a migration introduced in release `V`, set it to the immediately following planned release version. A tiny build-time helper accepts only `^\d+\.\d+\.\d+$`, parses three base-10 integer components, and compares tuples; invalid/prerelease strings fail closed, with no runtime dependency. The old URL is permitted only while `package.json.version < expiresBeforeAppVersion`; CI fails at equality or above until the active fallback declaration is removed and the physical file is recorded as a typed Plan-12 retirement candidate. Unit tests cover invalid input and major/minor/patch boundaries. Physical archive/removal waits for Plan 12's Human-confirmed handoff.
+If a separately approved art migration actually needs a temporary URL fallback,
+root/art defines its exact lifetime, metadata, validation and Plan-12 disposition
+in the canonical resolver. Animation consumes that result. Do not build a semver
+fallback subsystem for an optional-frame addition that leaves the still intact.
 
 The historical snapshot lacked a canonical player-art record. Plan 03 now owns that migration: at execution resolve Ame and any selected friend/enemy through its final catalogue API, extend those records only with the accepted optional animation reference, and test the resolver before any renderer migration. Do not create a second character constant or assume exactly three selected catalogue records.
 
-For an animated entry, prefer a registered neutral derivative that overlays the pre-migration `SpriteArt.src` within ±1 source pixel and produces no more than 0.25 CSS-pixel movement at the measured board size. That tolerance applies only when the existing composition can also meet the art-owned safe inset. If Plan 03 requires a visible reframe/rescale, art direction and UI approve the intentional migration at actual size and record the exception to the overlay tolerance; do not violate the safe zone to preserve a bad crop. Phase 2 atomically makes the approved neutral field rendition the entry’s new `src` **and** the manifest fallback, so feature-off/static mode does not fetch old and new neutral files. The previous URL may live only in `rolloutFallback`, is fetched only after an actual `src` error, and expires after one verified release. Soft rollback disables the feature and keeps the new approved still. Hard rollback is an atomic Phase-2 content reversal: restore prior catalogue URLs, remove animation IDs/registry entries, and remove or explicitly time-box all now-unreachable frame/source/inventory declarations. After legacy cleanup, restore the old files from the tagged prior release as part of that same rollback. CI must fail an expired fallback or both old/new active representations. This time-boxed migration reconciles reliable rollout with the performance plan’s prohibition on permanent old+new media.
+Reuse the exact approved neutral URL as the manifest fallback; do not emit a
+duplicate neutral or republish it for registration convenience. New frames lock
+to that composition and art-owned safe inset. If an unavoidable reframe is
+proposed, return its precise before/after actual-size proof, bytes and affected
+consumers to root/art before changing a pointer. Soft rollback disables optional
+frames. Hard rollback removes their selected manifest references and classifies
+unused outputs through the existing inventory/Plan-12 rules; it does not delete
+approved source history or add a parallel legacy URL lifetime.
 
 ### 8.2 Manifest types
 
-Durations belong to clip steps, not frame files, so one drawing can be held for different durations in different actions. The following contract is shown together for review; in implementation `SpriteAnimationId`, `SpriteRolloutFallback`, `Normalized*`, `Resolved*Geometry`, and `ResolvedSpriteArt` live with the art-owned resolver in `src/artCatalog.ts`. Frame/clip/manifest types live under `src/animation/types.ts` and import that one-way art output, avoiding an art↔animation module cycle. The planned API is:
+Durations belong to clip steps, not frame files, so one drawing can serve
+different actions. The following combined API is a design sketch. Import current
+art-owned geometry/rendition/family types instead of redeclaring them, and adapt
+only missing animation fields. In particular the published inset order is
+top/right/bottom/left, weapon angle names use `Degrees`, and z-order is numeric;
+preserve those contracts rather than copying incompatible examples. Frame/clip
+types import one-way art output, avoiding an art↔animation cycle. The sketch is:
 
 ```ts
 import type { Direction, WeaponStyle } from "../game/types";
@@ -378,7 +467,7 @@ export type SpriteClipId = string & { readonly __spriteClipId: unique symbol };
 
 export type NormalizedPoint = readonly [x: number, y: number];
 export type NormalizedRect = readonly [x: number, y: number, width: number, height: number];
-export type NormalizedInsets = readonly [left: number, top: number, right: number, bottom: number];
+export type NormalizedInsets = readonly [top: number, right: number, bottom: number, left: number];
 
 /** Reuse Plan 03's art-owned family vocabulary; do not introduce an animation enum. */
 export type ArtFamily =
@@ -718,7 +807,13 @@ export interface ResolvedSpriteFrame {
 
 `SpriteRenderer` owns a fixed inner registration box. The outer `player-layer`, `world-object-layer`, battle transform, follower transform, or UI slot continues to own position and spatial motion. The renderer emits one body `<img>` (or its terminal code-native placeholder) plus an optional weapon `<img>`; both are selected and transformed from one immutable frame result before commit. The result's complete `geometry` is the only renderer input for pivot, bounds, safe inset, and display scale: animated frames receive manifest/frame geometry, canonical stills receive `ResolvedSpriteArt.geometry`, and rollout stills receive their independent fallback geometry.
 
-`ResolvedSpriteArt` is the exact boundary, not an intersection with whichever catalogue happens to exist. Art/catalogue owns the final equivalent of `resolveSpriteArt(id, context): ResolvedSpriteArt` in `src/artCatalog.ts`; resolve its actual exported symbol at execution. Canonical `src` uses the art-owned natural size and geometry; any time-bounded rollout URL uses its own fallback geometry, so a permitted neutral reframe cannot misregister the legacy still. Extend the final Plan-03 geometry only through its versioned owner when a required display/socket field is genuinely absent. Until art-owned values and source records are approved for every reachable held prop, the renderer may not replace that prop's static overlay. Animation imports the resolved type and cannot synthesize geometry in components or CSS.
+The **accepted art resolver's actual output** is the boundary; the illustrative
+`ResolvedSpriteArt` name/shape above is not authority to redesign it. Canonical
+stills and any art-owned migration fallback carry their own approved geometry.
+Extend geometry through its owner only when a required new action socket is
+absent. Before migrating a consumer, verify every reachable held prop keeps its
+current source-backed neutral composition. Animation cannot synthesize geometry
+in components/CSS or downgrade approved props to a guessed legacy path.
 
 The required pure selector is:
 
@@ -744,7 +839,16 @@ State interpretation is deterministic: an optional manifest frame is selectable 
 
 ### 8.4 Deterministic fallback ladder
 
-Resolve in this exact order. If `featureEnabled` is false, record `feature-disabled` and jump directly to step 7 without inspecting a manifest or scheduling an optional decode:
+The compatibility sketch below applies only where its branches exist in the
+accepted art resolver; it does not require the historical rollout subsystem.
+Prefer the minimal selected-frame → complete canonical static composition →
+canonical semantic error fallback path. Freeze body/weapon availability at the
+start of each one-shot, and keep that selected path until it completes or aborts.
+Missing optional frames never add requests or delays to feature-off mode.
+
+For supported branches resolve in this order. If `featureEnabled` is false,
+record `feature-disabled` and jump directly to step 7 without inspecting a
+manifest or scheduling an optional decode:
 
 1. If the manifest is absent/invalid, record `missing-manifest` and go to step 7. Otherwise validate the requested clip. A missing/invalid clip records `missing-clip` and leaves only the manifest fallback candidate for step 5. For a valid clip, resolve `directionMap[request.facing]` **before** looking up its variant; retain the returned `mirrorX` only if that source-facing variant exists.
 2. If the mapped variant does not exist, record `missing-direction` and try the clip's `fallbackFacing` with `mirrorX: false`; a fallback is never implicitly mirrored. If neither exists, leave only the manifest fallback candidate for step 5.
@@ -753,7 +857,7 @@ Resolve in this exact order. If `featureEnabled` is false, record `feature-disab
 5. Build and walk a finite body-candidate list in this order: selected semantic frame's requested rendition, that frame's field rendition, the variant's meaningful `staticFrameId` requested/field rendition if distinct, then manifest `fallbackFrameId` requested/field rendition if distinct. Missing metadata records `missing-rendition`/`missing-frame`; an unrequested/loading URL records `asset-not-ready`; a failed URL records `decode-failed`. Missing clip/direction starts at the manifest fallback candidate. There is no recursive retry.
 6. Only after an available body frame is selected, resolve weapon attachment. A pending approved weapon requires that frame's `handSocket`; if absent, record `missing-weapon-socket` and continue through the remaining static/manifest candidates from step 5. The first available candidate with a socket produces `kind: "attached"`. If every candidate lacks a valid socket, go to step 7 and return canonical Ame with `legacy-static-overlay`. An incompatible/legacy weapon returns the already-selected neutral body plus its legacy overlay. Never omit an acquired weapon because socket data is missing, and never synthesize a socket.
 7. Use the art-owned canonical static URL (`SpriteArt.src` in the inspected schema) after an exhausted manifest candidate list, missing/invalid manifest, incompatible terminal data, or feature disable. It carries canonical natural size/geometry. In migrated families this is the same approved neutral rendition, so normal operation never loads duplicate neutral media; an armed fallback uses `legacy-static-overlay`.
-8. If and only if that canonical `src` errors during the one-release migration window, try `rolloutFallback.src` once using the rollout record's own natural size/geometry.
+8. Only if the accepted art resolver already exposes an eligible migration fallback after canonical failure, consume it once with its own metadata. Otherwise proceed directly to the canonical semantic error fallback; do not introduce a new URL lifetime here.
 9. If canonical art and the permitted rollout URL are absent, expired, or failed, return `ResolvedSpriteBody.kind = "code-placeholder"`: a stable, namespaced CSS neutral silhouette using canonical geometry. It is decorative on the board, adds no changing text, and leaves the existing semantic label/live region authoritative. Preserve the legacy static weapon overlay for an acquired weapon unless that weapon URL itself failed; the existing game already owns that final prop failure behavior.
 
 An `img.onerror` marks only that URL `failed` for the current loader generation and reruns the pure selector: an animation frame moves to canonical `src`, canonical moves to the error-only rollout URL, and rollout moves to the code placeholder. It reports a deduplicated development diagnostic and never recursively retries a broken URL. The structural silhouette underlay prevents an empty box while a canonical/rollout image is loading and stays as the terminal result after both fail.
@@ -798,9 +902,15 @@ Add a pure `resolveSpritePlayback` adapter between `App` presentation state and 
 
 Within the board-player slot, the adapter’s visual priority is active combat/rescue/jump/portal/door presentation, then blocked, pickup, step, blink, idle. “Armed” modifies any compatible body frame rather than winning priority. Victory belongs to the completion UI slot, not the board arbitration stack.
 
-The current event branch explicitly serializes jump + rescue and jump + door; preserve those sequences. Current `HEAD` drops portal-arrival visuals when jump and portal coincide, so feature-off characterization must lock that baseline until the Plan-02 composite is integrated. In Stage 3, consume Plan 02's director-owned jump-landing→portal-departure run exactly: jump reaches its landing contact on the destination tile, then portal departure begins from that landing tile, with each engine event and announcement occurring once and in the existing gameplay order. The sprite adapter selects frames inside that run; it neither emits a second event nor changes ordering. `level-won` continues to use the current modal gate.
+Preserve the accepted Plan-02 composite arbitration with animation both enabled
+and disabled. The original audit's jump+portal omission is historical defect
+evidence, not a feature-off behavior to restore after VFX acceptance. Consume the
+director-owned landing→departure run exactly: jump reaches its landing contact,
+then departure begins there, with each event and announcement once in the same
+gameplay order. Static fallback supports that sequence even if jump/portal poses
+are deferred. `level-won` retains the landed 03M completion-choice gate.
 
-Animation must not create, lengthen, or release input locks. It consumes the canonical `InputContext`/`getInteractionPolicy` contract when that concurrent controls/gameplay work lands. Step and blocked clips may outlive the existing 64/45 ms gates and may be visually superseded; combat/rescue locks are PresentationDirector-owned.
+Animation must not create, lengthen, or release input locks. It consumes the accepted `InputContext`/`getInteractionPolicy` and travel contracts. A local reaction may outlive the current gate and be visually superseded; its duration never delays accepted held movement. Combat/rescue locks remain PresentationDirector-owned.
 
 State machines are a good model for separating idle/walk/action identity from playback progress, but the game state remains authoritative ([Unity, state machine basics](https://docs.unity3d.com/6000.0/Documentation/Manual/StateMachineBasics.html), [Godot, `AnimatedSprite2D`](https://docs.godotengine.org/en/stable/classes/class_animatedsprite2d.html); accessed 2026-09-02).
 
@@ -817,9 +927,9 @@ State machines are a good model for separating idle/walk/action identity from pl
 Use this nesting/layer contract after re-reading the implementation-phase `HEAD`:
 
 ```text
-entity root                         gameplay: tile/world position
+entity root                         accepted travel: rendered world/ground-plane position
 ├─ contact/cast shadow siblings     lighting
-├─ presentation transform wrapper   PresentationDirector/VFX: travel, recoil, arrival
+├─ event presentation wrapper       VFX: leased jump/portal/recoil, coordinated travel handoff
 │  └─ sprite secondary motion       animation: approved idle/step personality only
 │     └─ registration box           animation: normalized pivot and fixed scale
 │        ├─ weapon slot, if behind   ResolvedWeaponGeometry chooses z-order; animation attaches
@@ -828,7 +938,7 @@ entity root                         gameplay: tile/world position
 └─ aura/contact-effect siblings      VFX
 ```
 
-- Jump/travel exposes normalized `--entity-lift`; lighting consumes it for shadow response. Animation does not draw or animate the cast shadow.
+- The owning travel/event presentation supplies normalized `--entity-lift` and ground-plane projection; lighting consumes them for shadow response. Animation selects poses inside that sample and does not add a spatial clock, draw a cast shadow, or take over a special presentation's travel lease.
 - Never use a body/shadow pseudo-element as a sprite-animation surface; current pseudo collisions are a known cascade problem.
 - `visualPersonality` may animate only the namespaced secondary-motion wrapper and only when its compatibility table permits. Movement, blocked, combat, rescue, jump, and portal suppress ambient bob/squash so two systems never transform the same element.
 - Structural registration/body/weapon/fallback rules live in animation-owned `src/styles/sprite-animation.css`, imported in the UI-declared cascade. Per Plan 01, every `@keyframes`, `animation`, transition, and secondary-motion declaration lives in UI-owned `src/styles/motion.css`; animation contributes namespaced rules there through UI review. Do not append a late global block to `src/styles.css` or write into VFX-owned `src/vfx.css`.
@@ -853,7 +963,7 @@ Modern multiplexed delivery weakens the old “one request at all costs” sprit
 ### 11.1 Coordinate and scale contract
 
 - Canonical geometry uses art-owned normalized 0..1 coordinates. Origin is top-left; +x right, +y down. Generated proof reports may project them into 512-registration and rendition pixels, but those projections are not editable authority.
-- MVP registration space: untrimmed logical 512 × 512. Default encoded field rendition: 256 × 256. A consumer chooses one rendition; it never downloads both.
+- Registration space and field rendition follow the selected family's accepted art geometry and actual consumer size. The historical 512 logical / 256 encoded proposal is not a compulsory neutral-art migration. A consumer chooses one rendition; it never downloads both.
 - World pivot: one art-approved bottom-center ground/foot point locked for the whole family version. All frames render this normalized pivot at the same CSS point.
 - Family display scale: one value independent of each frame’s alpha bounds. Never fit each frame to its own content box.
 - Baseline tolerance: ground-contact landmark within ±1 pixel in the 512 registration projection (±0.5 encoded field pixel).
@@ -863,21 +973,39 @@ Modern multiplexed delivery weakens the old “one request at all costs” sprit
 - Transparent encoder gutter: normalized minimum `8/512` on every edge for body-only frames, equivalent to four pixels at field-256 and eight at presentation-512. This catches interpolation/edge contamination but never weakens the larger art safe inset. Reject clipped hair, limbs, recoil, or weapon and process neutral through the same registration transform as every pose.
 - Review composites: checkerboard, white, near-black, warm floor, cool floor, and all actual-size targets in section 11.3.
 
-The current Ame alpha reaches logical y=7, so it fails the encoder gutter by one registration pixel **and** fails Plan 03’s stronger top safe inset. Phase 0 must choose one art-approved result for all v01 frames: reframe/rescale into the canonical safe zone and accept the documented visual migration, or record an exact legacy `safeInset` exception plus crop envelope in the shared source record. A one-pixel nudge alone is not sufficient. Do not mix differently registered derivatives inside one clip.
+The original audit's Ame y=7 measurement applies to historical v01 pixels, not
+the accepted v02 runtime derivative. Preserve that measurement as historical
+evidence only. Phase 0 reads the published source record and projects its actual
+bounds/insets/landmarks; any new pose's registration must match the accepted
+neutral composition. A new reframe is a bounded separate derivative decision,
+not a prerequisite implied by the old measurement.
 
-The two candidate first-tranche weapon overlays also fail the nominal 8% all-edge weapon inset at current runtime resolution: Star Sword's measured nonzero-alpha bounds are `(48, 17)–(463, 495)` in its 512 image and Comet Spear's are `(28, 4)–(505, 508)`. Phase 0 must create/complete their art-owned source records and either approve a non-destructive re-registration or record an exact per-weapon legacy safe-inset/content-envelope exception. Each exception includes source/runtime hash, measured bounds, approved rotated extents, compatible Ame poses, and clipping proofs at every section-11.3 size/DPR. It does not waive the hard final encoder gutter for newly emitted derivatives and does not silently weaken the whole weapon family; any derivative must earn its place in the accepted evidence-led tranche and measured budget.
+Historical Star Sword bounds `(48, 17)–(463, 495)` and Comet Spear bounds
+`(28, 4)–(505, 508)` describe their old 512 images. Current published props have
+source-backed geometry; do not restore those files or mark current props
+legacy-only from these numbers. Measure the accepted weapon plus new pose at
+the required sizes. Record each action-compatible rotated extent/socket proof
+and any exact new exception through the art owner; the existing neutral held
+composition remains the fallback for unsupported poses.
 
 ### 11.2 Pivot and weapon attachment
 
-Each body frame that may display a weapon declares an animation-owned normalized `handSocket`. The art catalogue’s resolved record owns `gripPoint`, `forwardAxisDeg`, `heldScale`, `heldRotationDeg`, and `zOrder`. Weapon and socket angles use CSS convention—0° points right and positive rotation is clockwise—and are distinct from lighting azimuth. The renderer computes a single transform that:
+Each body frame that may display a weapon declares an animation-owned normalized `handSocket`. The art catalogue's resolved record owns `gripPoint`, `forwardAxisDegrees`, `heldScale`, `heldRotationDegrees`, and numeric `zOrder` (or their accepted successors). Weapon and socket angles use CSS convention—0° points right and positive rotation is clockwise—and are distinct from lighting azimuth. The renderer computes a single transform that:
 
 1. places the weapon grip on the body socket;
-2. rotates by `socket.axisDeg - weapon.forwardAxisDeg + weapon.heldRotationDeg`;
+2. rotates by `socket.axisDeg - weapon.forwardAxisDegrees + weapon.heldRotationDegrees`;
 3. applies `weapon.heldScale`;
 4. applies the single art-owned weapon-family z-order (never a per-frame override); and
 5. applies any approved whole-composite mirror after attachment.
 
-Body and weapon update atomically from the same `ResolvedSpriteFrame`. A clip lists compatible weapon styles. MVP acceptance requires actual-size composites for comet spear in Shiny Sword and star sword in the first level/tester. Every currently reachable weapon still needs an art-resolver record before its render site migrates: the two action-compatible weapons receive approved geometry, while the other six are explicitly `legacy-static-only`. Those six deliberately resolve action requests to neutral Ame plus `legacy-static-overlay` (the exact pre-migration neutral placement)—or remain on the pre-migration outer-overlay site until that resolver record exists. A compatible clip's static and canonical neutral frames must have approved sockets; missing data fails manifest validation, while the runtime terminal defense retains the legacy overlay. No path guesses a socket or silently hides an acquired weapon.
+Body and weapon update atomically from the same selected frame. A clip lists
+its proven compatible props; current neutral geometry remains valid for all
+other props. Prove the shortest, longest, widest and behind-body examples needed
+by each migrated consumer, including Bubble Ring Blade where reachable. Do not
+reclassify the other published weapons as `legacy-static-only` simply because
+the historical tranche named two. Every action-compatible frame needs a valid
+socket/extent proof; a missing one selects the complete accepted neutral body
+and held prop, never a guessed attachment or invisible acquired weapon.
 
 ### 11.3 Silhouette and acting review
 
@@ -954,7 +1082,7 @@ Conclusion: prompt-only ImageGen editing is not a reliable pixel-identity produc
 
 That result is consistent with OpenAI’s own note that precise editing is improved but remains imperfect and with research treating cross-pose character identity as a distinct hard problem ([OpenAI, 2025](https://openai.com/index/new-chatgpt-images-is-here/), [The Chosen One, 2023](https://arxiv.org/abs/2311.10093); accessed 2026-09-02).
 
-### 12.2 Phase-0 identity-source gate
+### 12.2 Published-source gate and historical recovery evidence
 
 The following recovered hashes are historical audit evidence only. Final Plan-03 approved source records are now authoritative; do not locate, copy, regenerate from, or republish a user-scoped historical candidate unless the art owner explicitly records a current source gap and approval.
 
@@ -964,19 +1092,25 @@ The audit recovered a 1254 × 1254 RGBA high-resolution Ame source in the user-s
 9abf1df3d5b4f383a4d66d8e9f39f05f867caa0bfe1962f5a1e9f5d44647f498
 ```
 
-It is not currently checked in. Before any production generation:
-
-1. Locate the file by hash, visually compare it to `public/assets/ame.png` and the current portrait, and have art direction approve it as a legacy identity source. The shared art plan targets 2048 character masters and 1536 friend/enemy masters; 1254 is evidence, not automatic permission. Art direction must approve a documented legacy-resolution exception or reconstruct a compliant master without identity drift.
-2. Copy it during the implementation phase into the immutable `ame-v01-original.png` evidence slot specified above; never reference the user path from a manifest or script.
-3. Record the original hash and exact deterministic crop/scale/cleanup that produces the separately approved normalized `ame-v01-master.png` and `ame.neutral`.
-4. If it fails identity review, stop and reconstruct/approve a master first. Do not generate poses from only the 512 runtime file and hope to reconcile them later.
+The original audit proposed recovering that historical file. Plan 03's accepted
+source-backed v02 publication supersedes the recovery task. Start from
+`docs/characters/AME_MODEL_SHEET.md`, the current `ame` catalogue entry and its
+exact source record; preserve Candidate C construction and selected B-led 01
+rendering. Do not recover, recopy or regenerate v01 merely to satisfy the old
+proposal. For a selected new actor, trace published derivative → source record →
+approved source/identity references, check hashes and projected landmarks, then
+add only the required pose input. A missing current source or landmark returns
+that family to root/art; independent static/pipeline work may continue.
 
 Two more 1254 × 1254 RGBA candidates were recoverable in the user-scoped store:
 
 - kitten: 1,324,815 bytes, SHA-256 `49caaadfd9cbe7d6429d2f9f88d6c549fa971b0223fd23bd67626a1365d46f34`;
 - goblin: 1,349,899 bytes, SHA-256 `5bce3fb83488db8c94164ea4d5d154a38da3a64374667060fd974a9539602ba7`.
 
-Each receives the same locate-by-hash, current-runtime comparison, archive, art approval, and 1536-master gate. Goblin still has no checked-in same-stem master; this candidate is evidence, not an approved or durable dependency. If any candidate fails identity review, reconstruct and approve a compliant master before its family proceeds.
+These hashes remain historical assay evidence, not selected production inputs.
+Published Kitten/Goblin records and later accepted corrections supersede the
+old missing-master assumptions. Verify the actual selected actor's source
+instead of treating same-stem filenames or these hashes as a production gate.
 
 ### 12.3 Reliable authoring sequence
 
@@ -1097,7 +1231,7 @@ The collector also receives consumption context (`field` or `presentation`) and 
 - **Per-rendition transfer:** field-256 ≤100 KiB; optional presentation-512 ≤220 KiB, matching the shared art plan. Oversize needs an explicit quality proof and performance approval.
 - **Eager/Tier-1 transfer:** at most 1.0 MiB of animation files above current static level art before or during the first likely interaction.
 - **Cumulative one-level animation transfer:** at most 1.5 MiB after every animation-supported action in that level has occurred; never load unrelated family/direction/rendition files.
-- **Total MVP animation pack:** at most 1.6 MiB encoded for the 16 field renditions. The earlier approximately 2.8 MiB estimate was a conservative 512-pixel measurement; real 256 outputs, not extrapolation, decide acceptance.
+- **Total bounded animation pack:** at most 1.6 MiB of new encoded media. The original 16-file list and approximately 2.8 MiB 512-pixel estimate are historical planning inputs, not quotas or authority to force every output to 256. Actual selected dimensions/bytes decide whether a drawing fits.
 - **Strong decoded animation cache:** at most 16 field-equivalent units. A 256 RGBA frame costs one unit (256 KiB); a 512 frame costs four. This caps CPU RGBA at 4 MiB and should be budgeted as about 8 MiB with a comparable GPU/compositor copy.
 - **Global animation decode concurrency:** two; Tier 2 may use at most one of those slots after Tier 1 drains.
 - **No App/grid animation render budget:** frame ticks update only mounted sprite renderers. Dev instrumentation must show zero maze-grid commits caused by an idle blink/step frame swap.
@@ -1107,7 +1241,13 @@ Decoded memory is driven by dimensions, not compressed bytes (`width × height �
 
 When the strong-reference cap is exceeded, evict least-recently-used decoded records with `refCount === 0`; dropping the `Image` reference permits browser reclamation but does not pretend to clear the HTTP cache or prove browser/GPU reclamation. Visible/current frames are pinned. Plans 05 and 07 now share the 16-field-equivalent-unit/4 MiB CPU/~8 MiB CPU+GPU animation cap; it is a maximum, not permission to raise the measured six-tile working set. The performance owner’s measured renderer/process plateau and combined VFX/lighting/UI trace are authoritative. Version/hash URLs can receive long immutable cache headers in deployed builds ([MDN Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control); accessed 2026-09-02).
 
-The pack also participates in the performance plan’s global release ledger: total runtime assets must remain at or below 66,997,573 bytes, the active-still/media reduction target remains at least 25%, every family growing more than 5% needs an offset or explicit performance exception, and `dist`/portable/NSIS package totals must pass. Runtime JavaScript (current gzip freeze 115,820 bytes) and CSS (29,107 bytes) need an approved feature allocation or demonstrated offset before enablement; generated manifest data counts, while dev-only `jsdom` does not. Sprite-local caps cannot waive any global limit.
+The pack also participates in the **current accepted** global release ledger and
+feature allocations: runtime media, active-still reduction, per-family growth,
+JavaScript/CSS gzip, `dist`, portable and installer totals must pass. The original
+66,997,573 media / 115,820 JS / 29,107 CSS byte figures are dated baseline evidence,
+not authority to replace a newer allocation. Generated manifest data counts.
+Request any necessary offset/exception with exact baseline/delta and rollback
+before enablement; sprite-local caps cannot waive a global gate.
 
 ### 13.4 Visibility and lifecycle
 
@@ -1144,9 +1284,17 @@ Consume the single UI/accessibility preference provider defined by the concurren
 
 `SpriteQuality = "animated" | "static"` is separate, stable availability/performance policy. Feature disable or asset failure is a third, legacy fallback path. Do not auto-downgrade quality after a slow frame; performance owns a stable device/release decision.
 
-The current app samples the media query only at event start. The shared provider subscribes to changes and cleans up the listener. UI owns the control surface, but a persistent Full/Reduced control is a Phase-2 gate for automatic idle/breath/blink loops. Until that surface exists, `allowAmbientAnimation` is false and only bounded interaction/set-piece clips may run.
+The original audit sampled the media query only at event start; execution
+consumes the accepted live shared provider instead. UI owns its listener and
+control surface. Verify the persistent Full/Reduced control before automatic
+idle/breath/blink loops; if that surface is unavailable, `allowAmbientAnimation`
+is false and only bounded interaction/set-piece clips may run.
 
-Every clip variant requires `full`, a meaningful `staticFrameId`, and an explicit `reduced` definition when reduced behavior is timed. Do not rely on the current global `0.001ms` CSS rule to race through frames. Keep that rule as a defensive net while selecting intentional frames in JavaScript.
+Every clip variant requires `full`, a meaningful `staticFrameId`, and an explicit
+`reduced` definition when reduced behavior is timed. Do not rely on the historical
+global `0.001ms` CSS rule to race through frames. Scope sprite suppression to its
+owned frame/secondary-motion layers; UI owns shared CSS policy, and no blanket
+rule may override accepted MOVE travel or the director's special-event handoff.
 
 ### 14.2 Exact MVP fallback table
 
@@ -1156,13 +1304,23 @@ Every clip variant requires `full`, a meaningful `staticFrameId`, and an explici
 | Step | 72 ms contact + 48 ms neutral | Semantic armed/neutral result immediately; reduced spatial policy comes from shared provider | Armed/neutral state frame; no cycling | Canonical still/current weapon overlay. |
 | Blocked | 80 ms blocked + settle | Blocked key pose for at most 120 ms, no translate/scale, then neutral | Blocked state frame for the bounded acknowledgement, then neutral | Canonical neutral; existing message/sound still communicates block. |
 | Pickup/armed | Exact weapon/potion clip, then persistent result | Immediate persistent semantic result only | Persistent armed/power result frame | Canonical Ame still + current weapon overlay. |
-| Combat | Exact multi-pose 2,220 ms map | 0–95 ms: Ame contact + goblin hit; 95–180 ms: Ame joy + goblin hidden behind the result seal; no cycling/lunge | The same two semantic holds and hidden result at 95 ms, without spatial motion | Current reduced composition using canonical stills. |
-| Rescue | Timed joy/release frames plus director set piece | Freed joy result held for the director’s 140 ms replacement; no hop/cage travel | Freed joy tableau | Current reduced endpoint using canonical static art. |
+| Combat | Exact selected pose map using accepted director markers | Meaningful contact/result holds at accepted reduced markers, with no sprite-owned cycling/lunge | Meaningful pose holds; director still owns its independently selected full/reduced choreography | Canonical stills inside the director's selected full/reduced presentation. |
+| Rescue | Timed joy/release frames plus director set piece | Freed joy result during the director's reduced recipe; no sprite-owned hop | Meaningful freed pose; director owns cage/travel choreography | Canonical stills inside the director's selected full/reduced presentation. |
 | Victory | Joy hold inside the UI/VFX-owned finite completion plan | Joy hold | Joy hold | Existing completion UI. |
 
-Reduced/static mode freezes ambient breathing, blink, creature waddle/bob/sway, follower dance, portal cycling, treasure shimmer, and nonessential scale/translate/rotate. It preserves meaning through an intentional semantic hold—armed, blocked, rescued, arrived, surrendered, or victorious—or the finite combat contact→result reconciliation defined above. Suppressed frames are not preloaded.
+Reduced/static sprite selection stops its own breathing, blink, waddle/bob/sway,
+dance and nonessential secondary transforms while retaining meaningful pose
+holds. It does not switch VFX quality, cancel portal/treasure choreography or
+disable ordinary actor/camera movement. VFX owns special-event reduced recipes
+and travel handoff; MOVE owns normal travel comfort in both motion modes. Static
+sprite quality can therefore coexist with smooth full-mode travel and VFX.
+Suppressed optional frames are not preloaded.
 
-The table assumes canonical `src` is valid. A canonical URL failure tries the unexpired rollout URL once, then shows the same code-native neutral silhouette in every motion/quality mode. This last-resort renderer shape is not an animation frame and triggers no timer or download.
+The table's timings are illustrative; use current accepted director markers and
+selected actor IDs. It assumes canonical `src` is valid. A canonical URL failure
+uses the art resolver's existing eligible fallback, if any, then its semantic
+error representation. That last-resort shape is not an animation frame and adds
+no timer or speculative download.
 
 This follows `prefers-reduced-motion` guidance and WCAG’s requirement that interaction-triggered nonessential motion be disableable ([MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion), [W3C WCAG 2.3.3](https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html); accessed 2026-09-02). No clip may flash more than three times per second. Automatic ambient loops stay disabled until the persistent control satisfies the pause/reduction requirement ([W3C WCAG 2.2.2](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html); accessed 2026-09-02).
 
@@ -1176,10 +1334,10 @@ Create these focused suites under `src/animation/`:
 |---|---|
 | `manifest.test.ts` | Unique manifest/frame/clip IDs and exact family/catalogue-key/art-ID cross-resolution; valid 512 registration and 256 field rendition; every referenced rendition exists; every timed-step duration is a positive finite integer; loops cannot contain hidden steps; hidden once-steps use only the `result` marker and a valid hidden/frame exit; every clip has meaningful static/full and valid reduced playback; expected duration equals step sum; hash/encoded/decoded bytes, source record, owner, route/authored/generated-selector reachability, base tier, CSS-size/DPR and offline metadata present; generated selectors exhaustively match finite generator catalogues; normalized pivot/socket/bounds, Plan-03 safe inset or exact approved legacy exception, alpha≥8 bounds, 2–4 px RGB dilation ring, alpha fringe and hard gutter valid; ambient interruption references/ranges valid; explicit four-direction resolution; compatible weapon IDs/registration classes are valid and every compatible action/static fallback frame has a socket; global inventory finds no dynamic omission/orphan. |
 | `selectSpriteFrame.test.ts` | Loop modulo and negative-time clamp; long delayed timestamp skips missed frames; once/hold plus frame/hidden exit behavior; explicit static semantic playback; reduced/static selection; deterministic seeded idle/blink schedule; blink resumes the preserved host epoch; no reset when props rerender with same `playbackId`; reset on new `playbackId`; direction map precedes variant lookup; fallback never inherits an implicit mirror; typed asset-state/feature flag inputs and ordered `fallbackPath`; selected canonical/rollout/frame geometry reaches the immutable result; missing action socket retries static socket then ends at canonical + legacy overlay; hidden result produces no image request. |
-| `combatSpriteMapping.test.ts` | Exact frame at 329/330, 379/380, 559/560, 759/760, 809/810, 1,199/1,200, 1,259/1,260, 1,499/1,500, 1,729/1,730, 1,899/1,900, and 2,219/2,220 ms; goblin remains neutral through 1,729 and cannot pre-announce surrender; surrender begins at imported transfer end and goblin is hidden from imported victory cue; reduced boundaries are exact at 94/95 and 179/180; contact never precedes an exported impact; total remains equal to `COMBAT_VICTORY_DURATION_MS`; reduced map equals the exported reduced duration. |
-| `rescueSpriteMapping.test.ts` | Ame joy at the shared 150 ms rescue cue; kitten remains worried at `FRIEND_RELEASE_JOY_AT_MS - 1` and changes exactly at the imported constant; visible sequence totals 870 ms while director run remains 900 ms; reduced/static select freed joy with no hop/cage travel. |
+| `combatSpriteMapping.test.ts` | Test one millisecond before, exactly at and after each accepted director contact, transfer-end, release, hidden-result and completion marker. No selected guardian pre-announces surrender or persists after its result cue. Full/reduced duration matches the exported plan; historical 330/760/1200/1730/1900 boundaries apply only if still current. |
+| `rescueSpriteMapping.test.ts` | Selected actor expression changes at the shared accepted release/joy marker, never before the semantic release. Test marker−1/marker/marker+1 and cleanup. Full/reduced/static preserve rescued identity and result without adding a cage/sound/input lifetime. |
 | `fallback.test.ts` | Iterate every active catalogue geometry class and migrated consumer; absent `animationId`/manifest always resolves its canonical static art and geometry with no filename switch, broken request, or empty box. Also cover missing clip → manifest fallback then canonical if needed, with a distinct reason; missing requested direction → declared unmirrored fallback; incompatible, static-only, and missing-socket weapons → neutral/static compatibility path with distinct reasons; missing presentation rendition → same frame's field rendition; missing active frame → clip static; missing clip static → manifest fallback; pending versus failed frame → `asset-not-ready` versus `decode-failed`; frame error → canonical `src`; canonical error → one unexpired rollout fallback attempt using the rollout source's own natural size/geometry; missing/expired/invalid-version rollout → `rollout-ineligible` + code-native silhouette; failed rollout → `rollout-src-failed` + silhouette; no recursion; feature-off bypasses manifest/decode and requests no legacy duplicate on the normal path; `fallbackPath` is exact and empty for direct success; same inputs always resolve identically. |
-| `presentationAdapter.test.ts` | Move parity only increments on success; blocked uses requested direction; exact `sword-collected`/`potion-collected` mappings; armed composes without stealing priority; active presentation priority; jump/rescue and jump/door current serialization; feature-off characterizes current jump+portal omission; Stage-3 Plan-02 composite lands jump then begins portal departure from that tile with each event/announcement once and unchanged gameplay order; reload facing defaults to down; level-won still waits on current gate; adapter cannot mutate/extend `InputContext` or interaction policy. |
+| `presentationAdapter.test.ts` | Accepted travel progress/direction/occurrence determines step acting; blocked uses requested direction; weapon/potion mappings and armed priority remain correct. Accepted jump/rescue, jump/door and jump→portal compositions remain identical with frames enabled/disabled, with events/announcements once and unchanged gameplay order. Reload facing and 03M completion choice remain intact; adapter cannot mutate/extend `InputContext`, cadence or travel policy. |
 | `assetLoader.test.ts` | Concurrent dedupe; resolve only after `decode()`; reject/fallback; one bounded retry; priority order; sprite jobs occupy at most two shared-queue slots and Tier 2 never overlaps undrained sprite Tier 1; cancelling one subscriber leaves another live; stale load-attempt generation cannot notify; zero-demand late decode drops strong ref; LRU protects referenced/visible frames; rendition-unit accounting; hidden/modal-obscured state pauses background queue. |
 | `spritePolicy.test.ts` | Consumes/mocks the shared provider; explicit Full/Reduced overrides system; live media-query change; static quality remains separate; no automatic quality downgrade; suppressed clips produce no preload candidates; shared-listener cleanup remains provider-owned. |
 | `animationClock.test.ts` | One earliest ambient/local deadline; canonical `PresentationClockSnapshot` with numeric run ID/signal equality advances projected elapsed at a later paint without a React rerender; absolute-time catch-up; hidden/modal-obscured ambient rebase; page hide aborts a local pickup/power visual to its declared exit and it cannot resume until a new `playbackId`; director abort resolves final and never resumes; subscriber removal cancels its local timer/rAF/controller. |
@@ -1188,7 +1346,11 @@ Use fake monotonic time and a fake `Image`/`decode()` implementation; do not mak
 
 ### 15.2 Component lifecycle and accessibility
 
-The repository currently uses Vitest’s Node environment and has no DOM test dependency. Add `jsdom` as a pinned development dependency. Use React’s `createRoot`/`act`; Testing Library is optional and should not be added unless it provides a demonstrated need.
+At execution inspect the accepted unit/browser harness. Reuse its component or
+real-browser lifecycle coverage; add a pinned DOM test dependency only if a
+specific untestable lifecycle case justifies it. The original `jsdom` suggestion
+is not a mandatory installation. No second browser configuration or generic
+animation framework is required.
 
 Required `SpriteRenderer.test.tsx` cases:
 
@@ -1225,14 +1387,14 @@ No snapshot test can substitute for the actual-size identity/acting review.
 
 ## 16. Implementation phases, files, gates, and rollback
 
-### Phase 0 — freeze contracts and recover masters
+### Phase 0 — freeze selected contracts and verify published masters
 
 **Work**
 
 - Approve this scope, state names, exact MVP pose list, timing map, and ownership contracts.
 - Resolve every selected tranche candidate against the final Plan-03 canonical source/master, model or family sheet, pivot/landmark overlay, geometry record, and provenance. Do not recover superseded historical pixels merely because the original proposal named them.
-- Create/complete art-owned source records for current `/assets/sword.png` (`star-sword`) and `/assets/weapon-comet-spear-v1.png` (`comet-spear`). When an original is unavailable, mark Star Sword as an explicit legacy-runtime-only source, hash the runtime evidence, record the provenance gap, and block destructive regeneration until a master is approved.
-- Measure and approve ground pivot, display scale, content envelope, Ame body sockets, and comet-spear/star-sword grips/axes/scales/rotations/z-orders; record their measured safe-inset exceptions or approve re-registration, including rotated clipping proofs. Register all other currently reachable weapons as `legacy-static-only` before migrating their render sites.
+- Verify the current published held-prop source records, neutral grip/axis/scale/order and consumer mappings. Historical `/assets/sword.png` and `weapon-comet-spear-v1.png` are rollback evidence, not this production input.
+- Overlay ground pivot, face/eye/body landmarks, content envelope, accepted neutral socket and selected pose sockets over the exact current sources. Prove selected action/prop combinations and the unchanged canonical fallback for every other prop reachable at migrated sites. Missing action compatibility is not missing static approval.
 - Define the animation extension to the shared art source-record schema and pipeline without generating runtime frames or a second manifest.
 
 **Future affected files**
@@ -1249,7 +1411,7 @@ No snapshot test can substitute for the actual-size identity/acting review.
 
 - Art direction approves the final identity master/model or family sheet and child-friendly pose thumbnails for every selected actor.
 - Art direction records any legacy-resolution/safe-inset exception or approves identity-safe reconstruction; it separately approves exact geometry for every action-compatible held prop in the selected tranche.
-- Animation engineering signs off pivots/sockets, 512 registration, Plan-03 safe insets or explicit family exception, alpha thresholds/dilation, and the hard encoder gutter.
+- Animation engineering signs off pivots/sockets, the actual art-owned registration space, TRBL safe insets or exact family exception, alpha thresholds/dilation, and the hard encoder gutter.
 - Art/catalogue resolves source records and complete static compatibility geometry for every currently reachable held-prop/weapon ID. Only the evidence-approved subset receives action registration; every other reachable entry takes the tested canonical static path.
 - If a selected source does not reproduce its approved actor faithfully, Phase 0 stops for that family and the candidate is repaired, replaced with a lower-risk candidate, or deferred. Deferral is valid when the remaining tranche still proves the architecture and acting hypothesis.
 
@@ -1295,7 +1457,7 @@ No snapshot test can substitute for the actual-size identity/acting review.
 
 **Dependencies/gate**
 
-- Add only the pinned `jsdom` development dependency.
+- Reuse the accepted unit/browser harness; any necessary new development dependency follows the focused evidence rule in section 15.2.
 - No runtime library is required; React and browser primitives are sufficient.
 - Canonical `MotionMode` from `src/motion.ts`, plus cancellation reasons,
   `PresentationClockSnapshot`, and document-visibility lifecycle types from their
@@ -1306,7 +1468,7 @@ No snapshot test can substitute for the actual-size identity/acting review.
   numeric run ID and signal exactly match `PresentationRun`; the director owns
   the monotonic origin, abort, final recipe, and lock release, while animation
   only projects the read-only snapshot to paint time.
-- Re-read `HEAD`: pure selector/loader modules may land before the UI extraction, but DOM migration must target the accepted `MazeScene`/game-screen owner and declared stylesheet layers rather than competing with simultaneous `App.tsx` restructuring.
+- Re-read `HEAD`: every migration targets accepted `MazeScene`/game-screen exports, travel/grounding wrappers and stylesheet layers after upstream acceptance. This plan does not authorize simultaneous runtime restructuring or rebuilding a passed dependency.
 - Before any player/battle render site migrates, every held-prop/weapon ID reachable at that site resolves a complete art-owned source record and geometry; only the decision-ledger subset is action-approved, and all others must take the tested neutral/static path.
 
 **Acceptance**
@@ -1328,7 +1490,7 @@ No snapshot test can substitute for the actual-size identity/acting review.
 - For each selected final Plan-03 catalogue record, atomically add the approved `animationId`. Do not republish or silently replace its approved canonical still unless a separately reviewed derivative migration requires the existing one-release rollback protocol.
 - Replace only the render consumers needed by the accepted tranche, while proving every migrated geometry class has a complete canonical static path.
 - Connect current-level tiered preload/decode, the performance-owned runtime inventory/shared queue, top-layer pausing, and dev telemetry.
-- Retain current CSS outer movement/combat/rescue transforms where they do not duplicate the new inner pose job.
+- Retain accepted movement/combat/rescue transform ownership; ordinary travel comes from its shared rendered-position contract, never a restored legacy CSS step transition.
 
 **Future affected files**
 
@@ -1346,7 +1508,7 @@ No snapshot test can substitute for the actual-size identity/acting review.
 
 **Acceptance**
 
-- Exact timing for every selected section-7 clip; no outcome or input-cadence change.
+- Exact mapping to accepted travel/director markers for every selected clip; no outcome or input-cadence change and no reintroduction of historical hard-coded timing.
 - Every reachable held prop resolves approved geometry; action-approved entries compose atomically and all others deterministically use the canonical neutral/static overlay.
 - Field renditions ≤100 KiB, no unproved presentation renditions, ≤1.6 MiB total pack, ≤1.0 MiB eager/Tier-1 transfer, ≤1.5 MiB cumulative one-level transfer, and ≤16 field-equivalent decoded units.
 - Missing any one animation URL, enabling reduced/static mode, hiding the tab, and changing level mid-action all end in the correct semantic static state.
@@ -1358,13 +1520,13 @@ No snapshot test can substitute for the actual-size identity/acting review.
 
 - Enable by the exported `SPRITE_ANIMATION_V1_ENABLED` kill switch after tester approval. Soft rollback is one flag change and retains canonical catalogue stills. Hard rollback unregisters only the selected manifests, animation IDs and active source declarations—or carries a release-owner-approved dormant allow-list with an explicit expiry. Physical runtime frames become typed Plan-12 candidates and are not deleted during rollback. If a separately approved canonical-still migration occurred, restore its exact prior pointer/files from the tagged release in the same rollback. The inventory must pass in that change; no permanent active duplicate or unclassified orphan is accepted.
 
-### Phase 3 — traversal, followers, and important objects
+### Phase 3 — candidate extension: traversal, followers, and important objects
 
 **Work**
 
-- Add Ame jump, landing, portal-arrival, armed/pickup refinements; friend follower step and victory dance; cage open; goal completion; one portal family; and the highest-value pickup/treasure contacts.
+- Select only an evidence-justified subset of Ame jump/landing/arrival, follower movement, victory acting or object contact candidates after the bounded tranche's review. No automatic cage/goal/portal/treasure frame set is required.
 - Derive follower facing from presentation trail deltas without adding gameplay state.
-- Integrate `src/jumpPresentation.ts`, portal/rescue presentation records, and completion UI slots through adapters. For coincident jump+portal, consume Plan 02's one director-owned landing→departure composite: characterize the current omission only in feature-off tests, preserve engine event/announcement order and cardinality, and never synthesize a second portal occurrence.
+- Integrate accepted jump/portal/rescue records and completion slots through adapters. Coincident jump+portal already consumes Plan 02's one landing→departure composite with frames enabled or disabled; never restore the old omission or synthesize another occurrence.
 
 **Future affected files**
 
@@ -1384,7 +1546,7 @@ No snapshot test can substitute for the actual-size identity/acting review.
 
 - Disable per-family manifest entries. Each migrated site retains `src`; current CSS/object effects remain the fallback.
 
-### Phase 4 — breadth and story acting
+### Phase 4 — candidate extension: breadth and story acting
 
 **Work**
 
@@ -1405,7 +1567,7 @@ No snapshot test can substitute for the actual-size identity/acting review.
 
 - Family-level removal is independent; never require global manifest/atlas rollback.
 
-### Phase 5 — measured optimization only
+### Phase 5 — candidate extension: measured optimization only
 
 **Work**
 
@@ -1440,20 +1602,20 @@ These contracts were reconciled against the concurrent Plans 01 (UI), 02 (VFX), 
 | Risk | Impact | Mitigation / rollback trigger |
 |---|---|---|
 | AI identity drift | Beautiful but inconsistent Ame/friends across poses. | Immutable master + model sheet + pose construction, no chained generations, human cleanup, mask invariants, actual-size/onion-skin gate. Reject rather than average incompatible frames. |
-| Missing source provenance | Future edits cannot reproduce current identity. | Phase-0 SHA archive is a hard gate. No production pose work from runtime-only files if the recovered master fails. |
+| Missing source provenance | Future edits cannot reproduce current identity. | Preflight exact published source/identity hashes and landmarks; return only the affected family. Historical recovery candidates do not displace accepted sources. |
 | Frame jitter | Feet/head/weapon pop at every swap. | Locked canvas/pivot/scale, ±1 px baseline, sockets/grips, onion skin and automated geometry check. Family version bump for contract changes. |
 | Weapon disconnect or clipping | Combat looks worse than static art. | Explicit compatible-pair matrix; unsupported pairs use neutral/current overlay. Review all compatible frames across the section-11 size/DPR matrix. |
 | Duplicate animation clocks | Combat visuals drift from numbers/audio/VFX. | Absolute shared presentation timestamp; adapter imports existing plans; no gameplay callback/independent CSS percentages. |
 | React render storm | Idle animation rerenders the maze. | Isolated renderer/shared deadline scheduler; profiler gate of zero App/grid commits. Feature flag off on failure. |
 | Decode/memory growth | Pressure from many frames or accidental 512 rendition duplication. | Tiered current-level loads, 16-field-equivalent-unit LRU, one rendition per consumer, no catalogue preload, immutable URLs, aggregate telemetry gate. Reduce frame breadth before resolution/quality. |
 | Slow/missing asset | Broken image or late action pop. | Static image paints first, decode readiness, deterministic ladder, prewarm likely action, deduplicated error, one bounded retry. |
-| Permanent duplicate fallback | Old PNG and new neutral WebP silently grow every package. | Canonical neutral replaces `src`; old URL is error-only for one release, then its active declaration expires and it enters Plan 12's archive-first handoff. Repository removal requires Human-confirmed external backup. Soft and hard rollback are distinct. |
+| Permanent duplicate fallback | Optional frames silently duplicate accepted stills and grow every package. | Reuse the exact canonical neutral URL. Any genuinely required pointer migration belongs to the art resolver with its approved rollback/disposition; no animation-owned legacy system. Physical retirement still requires Plan-12 external-backup approval. |
 | Hidden-tab replay | Old contacts/release beats replay on return. | Director aborts transient to semantic final and releases lock; ambient alone rebases; aborted one-shot never resumes. |
-| Reduced-motion regression | Rapid cycling or spatial motion persists. | Manifest static/reduced frame required, live preference, no suppressed preload, current CSS global rule retained as defense. |
+| Reduced-motion regression | Sprite-owned cycling/secondary motion persists, or suppression breaks comfortable world travel. | Meaningful static/reduced frames, live shared preference and no suppressed preload; scoped sprite rules preserve MOVE policy and VFX event ownership. |
 | CSS transform conflict | Inner pose alignment competes with movement/VFX. | Strict outer-position/inner-registration ownership and targeted CSS consolidation; do not append another global override layer. |
 | Direction/mirror identity error | Flower, backpack, handedness, or light flips incorrectly. | `mirrorX` explicit per family/direction; MVP is non-mirrored default view. |
 | Atlas over-optimization | Larger files, coupled failures, all-frame decode. | Discrete default; measured ≥15% family-local threshold; stable semantic IDs permit instant URL rollback. |
-| Event combinations | A valid portal/rescue visual is silently dropped or duplicated. | Characterize current feature-off arbitration, then consume Plan 02's approved jump-landing→portal-departure composite in Stage 3. Assert event/announcement cardinality and unchanged gameplay order; animation never invents either event. |
+| Event combinations | A valid portal/rescue visual is silently dropped or duplicated. | Preserve accepted Plan-02 composition with optional frames enabled/disabled from the first migrated consumer. Assert event/announcement cardinality and unchanged gameplay order; static fallback never restores a fixed historical defect. |
 | Scope creep | Frames start redesigning VFX, light, UI, or outcomes. | Coordination table, clean unbaked assets, independent rollback/acceptance owners. |
 
 ## 19. Exact affected-file map and dependencies
@@ -1486,7 +1648,7 @@ This is the consolidated implementation map; phases above define when each entry
 | `docs/source-assets/{characters,friends,enemies}/**` | Approved masters, model sheets, pose inputs, cleaned source frames, and source records. |
 | final Plan-03 held-prop/weapon source records | Evidence/master records, hashes, geometry, exact safe-inset exception or re-registration decision, and rotated clipping proofs for the action-approved subset; every other reachable entry retains complete canonical static compatibility. |
 | `public/assets/sprites/**` | Immutable content-hashed lossless WebP runtime frames. |
-| `package.json` and lockfile | Shared `art:check`/targeted animation check command and pinned `jsdom` development dependency. |
+| `package.json` and lockfile | Reuse shared art/browser/unit commands; add a targeted animation command or development dependency only for an evidenced gap. |
 | `.github/workflows/ci.yml` | Run the locked derivative/hash check in the Windows job; keep Ubuntu on platform-neutral manifest/URL/build checks until cross-platform byte identity is proven. |
 
 No new runtime dependency is planned. Optional ImageMagick/FFmpeg tools remain user-scoped/ephemeral and cannot be a build or CI prerequisite.
@@ -1501,15 +1663,17 @@ The bounded first tranche is complete only when all of the following are true:
 - Every reachable held prop has a hash-locked art-owned record and complete geometry. The action-approved subset has exact safe-inset/re-registration evidence; all others resolve through a tested canonical static path, so no pose uses guessed geometry.
 - Every frame passes its Plan-03 safe inset (or approved family-wide legacy exception), strict encoder gutter, alpha≥8 bounds/fringe, and 2–4 px transparent-RGB dilation policy after final resize.
 - Section-7 frame boundaries derive from the current presentation plans and all timing boundary tests pass.
-- Canonical `SpriteArt.src` works with the feature disabled and after every simulated manifest/frame/decode failure; the prior URL is requested only after canonical failure and is removed after one verified release; dual URL failure produces the stable code-native silhouette.
+- Canonical static art works with the feature disabled and after every simulated optional manifest/frame/decode failure. No duplicate neutral is loaded. Canonical failure uses only the accepted art-owned fallback/error path, with no animation-specific URL lifetime.
 - Sprite presentation imports `MotionMode` only from `src/motion.ts` and
   `PresentationClockSnapshot` from the final VFX/presentation owner; numeric run
   ID/signal equality and a later-paint elapsed projection are tested, and no
   sprite receives director cancel/lock methods.
 - Gameplay outcomes, event order, input cadence, audio/VFX semantics, and victory gating are byte-for-behavior equivalent with animation enabled/disabled.
-- MVP feature-off tests preserve current jump+portal characterization. The Plan-02 landing→departure feature-on contract remains a Stage-3 acceptance gate, not a prerequisite for declaring the Phase-2 MVP complete.
+- Animation enabled/disabled both preserve Plan 02's accepted jump-landing→portal-departure sequence and the 03M completion-choice gate; deferring optional traversal poses does not waive this static-composition integration check.
 - Frame ticks produce zero App/maze-grid commits.
-- Every field rendition is ≤100 KiB; eager/Tier-1 transfer is ≤1.0 MiB, cumulative one-level transfer is ≤1.5 MiB, the accepted tranche is ≤1.6 MiB in total, and the strong decoded animation cache is ≤16 field-equivalent units.
+- The preflight records actual source/rendition/landmark/prop identities; no approved still is replaced, reclassified as legacy-only or newly reapproved merely to implement optional frames.
+- The accepted sustained-movement route passes with frames on/off after lighting/VFX/controls integration, with continuous actor/camera travel, stable feet/props/grounding and no added held-input latency.
+- Every new field-256 rendition is ≤100 KiB; other sizes require their accepted art-profile allocation. Eager/Tier-1 transfer is ≤1.0 MiB, cumulative one-level transfer is ≤1.5 MiB, new tranche media is ≤1.6 MiB total, and strong decoded animation cache is ≤16 field-equivalent units (a 512 frame costs four). Canonical static files are reused and retain their accepted allocations.
 - Page hide, level switch, navigation, unmount, Strict Mode, slow decode, and late decode cannot replay a stale action or update an unmounted renderer.
 - Obscuring modals pause board ambience/postcritical preloads and closing them rebases without catch-up.
 - Reduced/static modes select meaningful poses, stop nonessential loops/spatial motion, and do not request suppressed frames.

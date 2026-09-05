@@ -245,10 +245,10 @@ These are **Human decisions**.
 - No optimization may weaken engine determinism, save integrity, accessibility, reduced-motion behaviour, or controller correctness.
 - Give Amelia meaningful opportunities to play improvements before the complete
   programme ends, but package only green, low-rework milestones rather than every
-  specialist handoff. The preferred first family preview follows Plan 01 so it
-  combines final static/front-door art with the rebuilt interface; an earlier
-  post-Plan-03-and-03M Art Preview is optional when runtime art plus the current
-  asset/audio catalogue are already green and cheap to package.
+  specialist handoff. The next FP-UI1 preview follows accepted Plan 01 and the
+  Human-authorized MOVE-01 checkpoint, combining final static/front-door art,
+  rebuilt UI and coordinated smooth actor/camera travel. Earlier Art/OST previews
+  are delivered history; the roadmap owns the remaining required gates.
 - A family preview comes from one reviewed, committed and pushed checkpoint and
   records exact versions, commit, artifact hash, build environment, included
   milestone, known issues, smoke journey and rollback. It is not a claim of
@@ -288,6 +288,29 @@ UI, characters, terrain, VFX, light, motion, sound, copy, and controls should fe
 **Design test:** if motion and colour are removed, do silhouette, position, text, shape, and static composition still tell the truth?
 
 ## 6. Shared acceptance requirements
+
+### Human quality reaffirmation — 2026-09-05
+
+The Human's ambition is outstanding edutainment that is also an exceptionally
+fun, satisfying and rewarding game. Treat beautiful art, contextual sound,
+responsive input, comfortable movement and interesting puzzle design as one
+experience. Neither spectacle nor educational copy substitutes for an enjoyable
+action and a discoverable relationship.
+
+Plan 09 records the reasoning each level invites: noticing patterns, spatial
+orientation, predicting consequences, comparing Power/quantities, remembering
+a useful relationship or sequencing a plan. Teach through safe attempts and
+readable consequences; required clues stay inspectable, hints support discovery,
+and optional parent conversation is welcome. Avoid mandatory quizzes, reading
+tests, timer pressure or reward farming as a substitute for learning through play.
+Check transfer by recombining a familiar rule in a later puzzle, not by claiming
+educational effectiveness from completion counts alone. Family observations are
+formative evidence, not proof of population-wide learning outcomes.
+
+Every owner preserves the connection between action and feedback. Measure input
+latency, frame pacing, event-opening stalls and load/recovery separately; judge
+comfort, clarity, surprise and satisfaction through actual play. Finite expressive
+beats should make important moments memorable without making routine play slower.
 
 These gates apply across specialist ownership.
 

@@ -3,6 +3,24 @@
 Prepared 2026-09-04. This is a dated handover, not a replacement for the live
 roadmap, specifications, source, or subsequent Human decisions.
 
+## Latest manager review — 2026-09-05
+
+Agent 01 has finished and stopped. Its 57-file candidate remains unaccepted and
+uncommitted. Root found required phone/presentation-art gaps, initial title/maze
+playlist regressions, responsive-logo fallback and keyboard-scroll evidence gaps.
+See `docs/reviews/2026-09-05-plan01-review.md` and the ready same-task prompt at
+`docs/plans/AGENT01-review-follow-up.md`. The Human starts that follow-up; root
+has not triggered it or any successor. The current bounded UI/font allocation
+is approved in the review, for the follow-up to apply and remeasure; extra art
+bytes still require exact evidence and root review.
+
+The root planning backlog/refinements and this review are eligible for a separate
+documentation checkpoint now that Agent 01 is stopped. Preserve all candidate
+runtime/spec changes. MOVE-01 and FP-UI1 remain blocked on accepted UI, including
+the reported regressions; there is no new playable build yet. The new PT32 zoom
+range is future Plan 08 work. Feedback/next-specialist instructions live in
+`docs/playtests/FP-UI1-feedback-template.md`.
+
 ## Immediate state and next action
 
 The Human is moving orchestration into a fresh Codex task in `C:\maze-game`.
@@ -46,6 +64,22 @@ optimization remains later; family comfort still needs actual playtest evidence.
 
 ## Read and reconcile
 
+### Planning reconciliation — 2026-09-05
+
+At `47bfff4`, the Human requested a review/refinement of all pending plans while
+Agent 01 continued. Root and disjoint planning reviewers updated future plans,
+roadmap and backlog, added the bounded MOVE-01 plan/FP-UI1 checklist and the
+previously roadmap-only final execution briefs. The record is
+`docs/plans/2026-09-05-programme-review.md`. These are planning changes, not
+acceptance of Agent 01's candidate or any pending art/budget/device gate.
+
+Do not change shared HEAD, stage active work or run competing build/performance
+loads while Agent 01 runs: the earlier documentation commits triggered its
+checkpoint guard. It was authorized to resume against `47bfff4` preserving
+those changes. Keep the active Plan 01 and section-4 prompt frozen; back up the
+reviewed planning checkpoint at the next safe manager boundary. Root's next
+runtime action remains review of the completed candidate, then MOVE-01/FP-UI1.
+
 Read repository instructions, then:
 
 1. `docs/GAME_VISION_AND_DESIGN_SPEC.md`.
@@ -57,11 +91,10 @@ Read repository instructions, then:
 
 Desired behaviour follows current Human decisions and the vision/spec. Actual
 behaviour must be verified in code and tests. Historical prose is not proof.
-In particular, the roadmap's operating rules still contain an obsolete
-"Current programme stop: Plan 03 is still active source production/review"
-paragraph. Plan 03 publication and subsequent corrective checkpoints have
-landed; Agent 01 is authorized and active. Reconcile stale status language at
-the next safe documentation checkpoint rather than reopening old approval gates.
+The 2026-09-05 review removed the roadmap's obsolete Plan-03 production stop.
+Plan 03 publication and subsequent corrective checkpoints remain accepted;
+Agent 01 is authorized and active. Historical art-process paragraphs never
+reopen a subsequent explicit approval.
 
 ## Programme sequence
 
@@ -73,6 +106,8 @@ These are not claims that all future hardware/performance gates have passed.
 Remaining order, using plan IDs rather than execution-prompt section numbers:
 
 1. **01 — UI/UX:** active now; review before releasing any successor.
+   **Then root MOVE-01 and required FP-UI1:** smooth actor/camera presentation
+   with exact tile rules, followed by a verified playable build.
 2. **04 — Lighting/wall depth:** owns terrain topology/render-model and regions.
 3. **02 — Graphics/VFX:** consumes lighting/scene/UI seams; owns presentation
    direction, effect timing/cancellation and reward-shower presentation.
@@ -127,8 +162,8 @@ Review especially:
 
 Audit the diff and reproduce proportionate checks. Do not accept "tests passed"
 as proof of visual quality or complete scope. Return a precise bounded follow-up
-if necessary. Once accepted, commit/push a named checkpoint, produce the planned
-family preview from a clean committed state, verify delivery, then provide the
+if necessary. Once accepted, commit/push a named checkpoint, implement and review
+MOVE-01, produce FP-UI1 from a clean committed state, verify delivery, then provide the
 updated Agent 04 execution prompt for the Human to run in its existing task.
 
 ## Important Human decisions to preserve
@@ -173,7 +208,7 @@ updated Agent 04 execution prompt for the Human to run in its existing task.
   is not off-laptop backup. Check remote agreement and report truthful status.
 - Preserve immutable release tags/artifacts. A main push can trigger deployment,
   but verify CI/deployment and distinguish source, web and packaged versions.
-- Family previews are explicitly planned: FP-UI1 after Agent 01, then later
+- Family previews are explicitly planned: FP-UI1 after Agent 01 and MOVE-01, then later
   FP-CORE2, FP-CAMPAIGN and FP-COOP at the roadmap's acceptance gates.
 - Use existing art/provenance, performance and browser harnesses. Retain named
   S01-S11 scenarios, deterministic engine routes, budgets and allocation evidence.
