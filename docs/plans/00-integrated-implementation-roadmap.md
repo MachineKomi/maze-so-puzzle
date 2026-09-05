@@ -4,6 +4,14 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
+**Latest Human result, 2026-09-06:** v0.22.2 scrolling still stutters on iPad
+while clamped-camera character motion is smooth. Resume PERF-02 moving-terrain/
+filter isolation without asking to retest the same failure. Separate Tessera
+and PLAY-A may advance, with no camera-fix claim and distinct successor builds.
+PT15/Plan04 receives smaller family-calibrated material/dressing repeats;
+PT06/PT12/Plan09 receives Lanternlight's praised exploration and return planning
+as a compact, richer-content reference. [Full intake](../PLAYTEST_BACKLOG.md).
+
 **Current delivery, 2026-09-06:** PERF-02A is published as **v0.22.2 V22-CAMERA1**
 at `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`, with actual Sol independent review,
 web/Windows functional checks and verified public downloads. See its

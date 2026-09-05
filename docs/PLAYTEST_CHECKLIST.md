@@ -70,9 +70,15 @@ rough play duration. A short natural session is useful; a longer session can
 come later. v0.22.1's reported iPad run failed; the individual settings comparison
 and any successor-build acceptance remain pending.
 
-v0.22.2 outcome: **awaiting Human feedback**. Desktop geometry and native
-save/reopen pass; neither proves physical iPad performance. It is fine to report
-only “better / unchanged / worse” before doing any longer comparisons.
+v0.22.2 outcome received 2026-09-06: **camera smoothness remains unfulfilled**.
+Human reports no obvious regression and possibly slight improvement; Ame and
+animations are buttery smooth while the camera is clamped, but scrolling still
+stutters on iPad. Desktop browser does not show that symptom. Possible thin lines
+are uncertain, not a confirmed regression. [Verbatim feedback](user-playtests/v0222-playtest-feedback.md).
+No other checklist item is implicitly passed. Do not repeat this failed build
+just for us: the next useful P1 comparison needs an identified successor or
+bounded diagnostic. Next isolate moving terrain/filters at unchanged camera,
+FOV and cadence. Pace is a separate comfort feature, not a claimed camera repair.
 
 ### P2 — Holding through interactions
 

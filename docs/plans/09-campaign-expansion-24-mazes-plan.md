@@ -5,6 +5,15 @@ Plans 01–08, UI-02, and both Plan-07 passes are accepted
 
 Owner: root integration agent
 
+Human refinement, 2026-09-06: use Lanternlight Labyrinth as a positive reference
+for exploration, distinct spaces, return-after-growing-stronger encounters and
+intuitive but thoughtful puzzle solving. Preserve those qualities; prefer a
+slightly more compact footprint and richer intentional pickups/loot along quiet
+stretches. Apply the lesson to authored and generated small mazes without
+flattening them into corridors or cluttering every tile. Keep solvability,
+interesting experimentation, variety, surprise and clear mechanics together.
+Source: [v0.22.2 feedback](../user-playtests/v0222-playtest-feedback.md), PT06/PT12.
+
 Prepared: 2026-09-02
 
 Current planning baseline: 16 authored story mazes at manager baseline commit `5eed837`

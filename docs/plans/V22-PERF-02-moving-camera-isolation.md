@@ -16,6 +16,36 @@ it need not delay this movement investigation or contaminate its A/B comparison.
 
 ## New evidence and purpose
 
+### Physical v0.22.2 result — 2026-09-06
+
+[Human feedback](../user-playtests/v0222-playtest-feedback.md): no obvious
+regression, perhaps slightly better, but iPad scrolling still stutters while
+clamped-camera actor/animation movement is buttery smooth. The gate remains
+unfulfilled; older pending language above is pre-feedback release history.
+Possible thin lines are uncertain; related moving-line reports predate v0.22.2.
+
+Next run baseline → probe → baseline on the existing Maze-2 route:
+
+1. Temporarily hide only terrain SVG, preserving world geometry, simple world
+   markers, actor, gameplay and camera coordinates.
+2. Separately disable inline floor treatment and inline wall treatment. Lite
+   leaves them active; diagnostic overrides must beat inline styles.
+3. Separately remove wall-depth blur (if active) and highlight blending.
+4. If indicated, replace floor then wall texture with existing solid fallback
+   fills. Decoded images may remain, so this is not a memory-reduction result.
+   Compare source resolution at fixed repeat scale only if sampling matters.
+
+Keep geometry-readback separate from timing cohorts; record settings, board
+pixels/DPR, input and sampled coordinates. No per-frame console or forced-layout
+reads in timing runs. Keep baseline cadence even when PLAY-A becomes ready.
+Desktop measurements cannot close the physical-iPad gate.
+
+Source findings: Maze2 moves an 11×11 terrain SVG through a six-tile view; base
+images are 1024px with 4.2/4-tile repeats. It has no dressing or hazards. Other
+dressings are 512px but repeat over 13–14 tiles, explaining oversized decoration
+without explaining Maze2's failure. Required resolution depends on physical
+board pixels/DPR. Appearance calibration remains a separate PT15 change.
+
 The [Human's saved feedback](../user-playtests/v0221-playtest-feedback.md) reports:
 phone movement is buttery smooth; eighth-generation iPad (32GB storage) Maze 1
 is smooth but movement from Maze 2 is severely laggy, even a single step. Menus,
