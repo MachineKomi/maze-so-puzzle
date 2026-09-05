@@ -112,24 +112,31 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Current next action, 2026-09-06:** PERF-02A's first physical P1 result is
-received: scrolling still stutters. Tessera integration is accepted and backed
-up on `codex/v22-tessera-integration`: art acceptance `f6d54e1`, merged-feedback
-checkpoint `a653a7b2fcf8730fe5d011c080591d499da9f068`. Art136/136, global0errors,
-game501/501, build/performance gates and selected browser consumers passed.
-This is not yet a new deployed build; main/runtime v0.22.2 remain intact.
-**Actual Sol is now sole runtime writer for PLAY-A** in that isolated worktree;
-Astra reviews and performs external diagnostic-only camera investigation.
-Approved PLAY-A growth cap: +700JSgzip9, zero CSS/public/dependencies; baseline
-JS153284, CSS23512, public165031011. Stop for review if exceeded. No PLAY-B,
-version bump or main runtime publication before root reviews the candidate.
-Do not claim its percentage-coordinate change improves frame delivery merely
-because it removes world left/top rebasing. If it remains poor, Astra resumes
-the next isolated moving-surface/terrain-cost probe from PERF-02 before broader
-rendering work. While that physical result is pending, root can finish the
-separate Tessera manifest/publication integration, then appoint actual Sol as
-the sole PLAY-A pace writer with Astra review; PLAY-B stationary rescue follows.
-Keep each seam/build distinguishable and every existing gate below open.
+**Current next action, 2026-09-06:** **Astra is sole runtime owner**, following
+actual Sol's explicit PLAY-A handback. Clean pushed candidate branch
+`codex/v22-tessera-integration` at
+`c766228ff25064c1df973bfb9b2bd2940ca86fce`, worktree
+`C:/GameDev/maze-game-v22-tessera-integration`, contains accepted Tessera art
+(`f6d54e1`) and pace runtime (`07897d9`). [Astra acceptance](reviews/2026-09-06-play-a-astra-acceptance.md)
+records source, visual, exact browser-evidence and independently rerun static/
+15-test review. Sol's full project502/502, pace6/6, inherited5/5 and UI1/1 pass;
+JS153514, CSS23510, public165031011, exact +230JS allocation. These are not yet
+deployed or physical-device accepted; main/runtime v0.22.2 remain intact.
+
+Merge latest main documentation into that isolated branch, then implement
+**AUDIO-01V** (independent Music/SFX levels) as a bounded Astra seam with Sol
+review. Preserve the current intended default mix and prove effective gain;
+no blanket cue amplification. Publish a properly versioned web/Windows successor
+after its own packaging gates; do not deploy unversioned candidate runtime.
+If audio cannot finish within a bounded checkpoint, ship accepted art/pace
+separately with explicit exclusions. PLAY-B and V22-UI-01 remain separate work.
+
+PERF-02A's physical P1 still fails. [PERF-02B desktop probes](reviews/2026-09-06-perf02b-moving-terrain-review.md)
+completed15/15 with no reproduced fault. One world-layer hint is a candidate for
+further DPR/large-world/resource/seam checks, not a published iPad fix. All raw
+timings are contaminated/report-only. Keep each seam/build distinguishable and
+every existing device/family gate open. The older queue paragraphs below are
+history, not a competing writer assignment.
 
 **New physical feedback, 2026-09-05:** the Human's
 [v0.22.1 web playtest](user-playtests/v0221-playtest-feedback.md) reports buttery
