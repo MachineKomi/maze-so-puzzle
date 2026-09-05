@@ -52,6 +52,13 @@ so.
 
 ### Current reconciliation — 2026-09-05
 
+Latest evidence supersedes the dated paragraphs below: UI and the complete
+planning/wishlist intake are pushed as `372e7d9`. MOVE-01 passed 461 project tests,
+43 browser checks and static/desktop gates. PT07 travel and PT40 followers are
+implemented candidates for FP-UI1; neither has earned Family-tested status.
+See `reviews/2026-09-05-move01-review.md`. PT43/44 remain Plan09 design work and
+PT32 remains future Plan08 zoom. FP-UI1 does not promise the whole wishlist.
+
 Accepted source baseline: post-v0.20.1 corrections through `b0eb8a8`; current
 HEAD `47bfff4` at the earlier review also contained orchestration documentation.
 Agent 01 initially stopped with an unaccepted candidate. Root's review returned exact
@@ -199,7 +206,7 @@ remain necessary where called out below.
 | `PT-20260902-04` | Rainbow Power Parade topology | P1 | Candidate | Automated | Plan 09 mandatory re-audit/remediation as needed; family retest |
 | `PT-20260902-05` | Escalating Power-99 presentation | P1 | Routed | Not retested | Plan 02; Plans 01 and 07B support |
 | `PT-20260902-06` | Long-corridor variety | P1 | Routed | Not retested | Plan 09 and generator quality work |
-| `PT-20260902-07` | Smooth camera/play feel | P0 | Routed | Not retested | Root MOVE-01 before FP-UI1; Plan 07B requalifies; 01/08 support |
+| `PT-20260902-07` | Smooth camera/play feel | P0 | Candidate | Automated | Root MOVE-01; FP-UI1 comfort retest; Plan 07B requalifies |
 | `PT-20260902-08` | Anchored touch joystick | P0 | Routed | Not retested | Plan 08; Plan 01 control surface |
 | `PT-20260902-09` | Strong-enemy teaching | P0 | Routed | Not retested | Plan 01 with gameplay-owned suggestions |
 | `PT-20260902-10` | Completion choices | P0 | Routed | Not retested | Root 03M contract, Plan 01/08; Plan 10 extension |
@@ -232,7 +239,7 @@ remain necessary where called out below.
 | `PT-20260905-37` | Book pages, Bestiary and lore cards | P1 | Routed | Not retested | UI-02 with root discovery/save review; Plan 09 final content |
 | `PT-20260905-38` | Crisp sprites throughout programmatic motion | P1 | Routed | Not retested | Plan 05; 04/02 transform discipline and 07B qualification |
 | `PT-20260905-39` | Bounded six-sprite style review | P1 | Routed; visual decision pending | Not retested | Root art return before affected Plan 05 production |
-| `PT-20260905-40` | Followers stay on the actual corridor trail | P1 | Routed | Not retested | Root MOVE-01 bounded cosmetic trail correction; 05/10 consume |
+| `PT-20260905-40` | Followers stay on the actual corridor trail | P1 | Candidate | Automated | Root MOVE-01; FP-UI1 retest; 05/10 consume |
 | `PT-20260905-41` | Original cute spooky friend additions | P1 | Routed; cast/art decision pending | Not retested | Plan 09 cast proposal, Human approval; Plan 10 roster cadence |
 | `PT-20260905-42` | Deeper puzzles and Surprise difficulty choice | P1 | Routed | Not retested | Plan 09 authored/generated design and UI; final qualification |
 | `PT-20260905-43` | Monster/treasure rooms and maze profiles | P1 | Routed | Not retested | Plan 09 authored/generated content; Plan 10 supply audit |
@@ -459,6 +466,12 @@ the distance between genuinely meaningful moments.
   all-friend perfect routes and performance bounds.
 
 ### PT-20260902-07 — Smooth camera and movement feel
+
+**Root update, 2026-09-05:** Candidate / Automated supersedes the original status
+fields below. Coordinated elapsed-time travel replaces per-tile CSS easing while
+preserving exact engine steps, FOV and cadence. Clock, route, viewport, touch,
+effect and lifecycle evidence is in `reviews/2026-09-05-move01-review.md`.
+FP-UI1 family comfort and Plan07B device qualification remain open.
 
 - Type: Play-feel investigation and rendering architecture
 - Impact: P0 — next-playtest gate
@@ -2383,6 +2396,12 @@ This intake records requirements, not a completed zoom feature.
   No sprite is marked rejected merely by capturing this request.
 
 ### PT-20260905-40 — Followers stay on the actual corridor trail
+
+**Root update, 2026-09-05:** Candidate / Automated supersedes the original status
+fields below. Stable slots and repeated legal breadcrumbs replace camera-selected
+locations. Tests include five friends on the real Moonlit Friendship Quest route,
+offscreen positions, reversals and jump/portal gathering. See the MOVE review.
+Family retest and later Plan05/08/10 non-regression remain open.
 
 - Type/impact: Cosmetic follower-path continuity defect; P1.
 - Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 14.

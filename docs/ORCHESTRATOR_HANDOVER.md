@@ -3,6 +3,23 @@
 Prepared 2026-09-04. This is a dated handover, not a replacement for the live
 roadmap, specifications, source, or subsequent Human decisions.
 
+## Current root movement checkpoint — 2026-09-05
+
+UI acceptance is committed/pushed as `372e7d983b00ae6ea929ef51fd78988fec0b9672`,
+including the full planning/wishlist intake. Root completed MOVE-01: coordinated
+orthogonal actor/camera travel, displayed pointer geometry and stable off-camera
+corridor followers. All 461 project tests, 43 shared browser checks, locked
+desktop compilation, art validation and static performance gates passed.
+`reviews/2026-09-05-move01-review.md` and `UI_UX_SPEC.md` own the new contract.
+Root checkpoints this slice, then builds FP-UI1 v0.21.0 from a clean source SHA
+with a separate Windows save profile and verified publication/native journeys.
+Human comfort remains pending. Agent04 waits for preview feedback; no specialist
+is running. Older candidate/running paragraphs below are dated history.
+
+The UI Linux CI failed its budget by four JS bytes despite passing tests/build
+and desktop; that run remains recorded as failed. The reviewed MOVE allocation
+accounts for platform variance. Final source CI must pass before release.
+
 ## Latest root UI engineering acceptance — 2026-09-05
 
 Agent 01 has now stopped with its six-correction return at `09413c1`; read

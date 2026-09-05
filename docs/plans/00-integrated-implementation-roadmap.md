@@ -2,6 +2,13 @@
 
 Status: manager-reviewed execution authority
 
+Latest execution, 2026-09-05: UI is accepted/pushed as `372e7d9`. Root MOVE-01
+passed 461 project tests, 43 browser checks and static/desktop gates.
+`../reviews/2026-09-05-move01-review.md` records the new travel/follower contract.
+Root checkpoints MOVE, then delivers FP-UI1 v0.21.0; family comfort remains
+pending. Older candidate/running paragraphs below are historical. Agent04 waits
+for preview feedback; `AGENT04-after-FP-UI1.md` is the held next-task prompt.
+
 Prepared: 2026-09-02
 
 Planning baseline: `5eed837` (`Add expert implementation research plans`)
@@ -22,7 +29,7 @@ allocation and final project/art/performance checks; Git backup precedes MOVE-01
 Preserve the original assignment as history. See the complete 17-item v0.20.1 intake at
 `../playtests/2026-09-05-v0201-wishlist.md` and §5.13D below.
 
-Current sequence: **01 review → MOVE-01 → FP-UI1 → 04 → 02 → UI-02 → 08 → 05 → 07B /
+Current sequence: **01 accepted → MOVE-01 checkpoint → FP-UI1 → 04 → 02 → UI-02 → 08 → 05 → 07B /
 FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
 RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
 specialist tasks from root-prepared prompts. Only one runtime owner runs at once.

@@ -2,6 +2,12 @@
 
 Status: manager-reviewed copy/paste runbook
 
+Latest root state, 2026-09-05: UI accepted/pushed at `372e7d9`; MOVE-01 completed
+with 461 project tests and 43 browser checks. Root delivers FP-UI1 before the
+Human triggers Agent04. `AGENT04-after-FP-UI1.md` is the held next prompt; its
+accepted source SHA and family gate must be resolved before execution.
+Historical assignments below do not restart completed agents.
+
 Prepared: 2026-09-02
 
 Future-task reconciliation: 2026-09-05. Agent 01's existing section-4 assignment

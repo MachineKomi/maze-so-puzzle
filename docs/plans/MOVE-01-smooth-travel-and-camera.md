@@ -1,8 +1,11 @@
 # MOVE-01 — comfortable character travel and camera following
 
-Status: Human-authorized implementation, pending accepted Plan 01. Owner: root.
+Status: root implementation and automated verification complete after accepted
+UI `372e7d9`; checkpoint/delivery next. Owner: root. Implementation/evidence:
+`../reviews/2026-09-05-move01-review.md`.
 Prepared 2026-09-05 from the Human's follow-up and `PT-20260902-07`.
-No implementation or comfort acceptance is claimed by this plan.
+The original requirements remain below. Family comfort is not inferred from
+implementation or automated verification.
 
 ## Outcome and boundaries
 

@@ -1,0 +1,1896 @@
+{
+  "schemaVersion": 1,
+  "classification": "Root MOVE01 engineering review; candidate runtime fingerprint retained; timing report-only; Human/device qualification pending",
+  "recordedAt": "2026-09-05T03:46:56.045Z",
+  "baseCommit": "372e7d983b00ae6ea929ef51fd78988fec0b9672",
+  "archiveRoot": "C:/Users/hellb/Documents/Maze so Puzzle/review-evidence/2026-09-05-move01",
+  "fileCount": 377,
+  "totalBytes": 220436193,
+  "files": [
+    {
+      "path": "build-provenance.json",
+      "bytes": 382,
+      "sha256": "f8ab7068351cdd9d00efface0b14e6f7060f124e9a806b5d2c50ef9a908f14f4"
+    },
+    {
+      "path": "logs/maze-move01-final-check.log",
+      "bytes": 899,
+      "sha256": "b374a5bb7c62a0036b170b3c19a6f07aa9860032ae7bcafd85515ec304f34813"
+    },
+    {
+      "path": "logs/maze-move01-full-final.log",
+      "bytes": 5665,
+      "sha256": "0b8dd9d89f495aa253becc62031848c1e9420453f2ece88db1d87e5f25060451"
+    },
+    {
+      "path": "logs/maze-move01-interactions-r1.log",
+      "bytes": 3765,
+      "sha256": "1cc5638c879c96d6cf728d96cce95ae597561592ac5261d457d064fff188ffd9"
+    },
+    {
+      "path": "logs/maze-move01-matrix-r3.log",
+      "bytes": 3582,
+      "sha256": "d0f67dac272edb2339fbeec4e6699c73797f93ec0a60d1c2f33eeabb3df483d7"
+    },
+    {
+      "path": "logs/maze-move01-static-final.log",
+      "bytes": 14336,
+      "sha256": "93013bcd3ad730c49d5cfef1696a3c5dd1841a164de93e20b84c31fca18c06d0"
+    },
+    {
+      "path": "logs/maze-move01-touch-r4.log",
+      "bytes": 839,
+      "sha256": "4529e72caf50f17b70eb5605ccbb4b2e2ac5edd3b5d60c6a144e1e2d6a777c07"
+    },
+    {
+      "path": "maze-move01-after-r1/movement/after-lanternlight-labyrinth-end.png",
+      "bytes": 763476,
+      "sha256": "b418764508d8998fe1f0bbed4ec0ed50454fc5bdf2f32929e0ba6ec060b24ee5"
+    },
+    {
+      "path": "maze-move01-after-r1/movement/after-lanternlight-labyrinth.json",
+      "bytes": 42028,
+      "sha256": "cea3a4f7aa7ca5714cb6df57b77a30ec96979493e100ebefaeee95d64241cdf0"
+    },
+    {
+      "path": "maze-move01-after-r1/movement/after-rainbow-power-parade-end.png",
+      "bytes": 766718,
+      "sha256": "e58c8c6d94057fef1b924bb315b7bad84918bcaf2af95a5a2244a5d2acf7bb5a"
+    },
+    {
+      "path": "maze-move01-after-r1/movement/after-rainbow-power-parade.json",
+      "bytes": 38624,
+      "sha256": "e04600d0b48734b3dc91cb8a73684d90d277a9fcf9e7fcd7b514ed81187072e4"
+    },
+    {
+      "path": "maze-move01-after-r1/movement/after-twilight-treasure-loop-end.png",
+      "bytes": 852790,
+      "sha256": "78bf1daf64870b37af4bf0345378a8ee716f412c6c20459975abffd99925c279"
+    },
+    {
+      "path": "maze-move01-after-r1/movement/after-twilight-treasure-loop.json",
+      "bytes": 64153,
+      "sha256": "ed7e3ddfc7bac127687e818256d76039170cc690d2565a0c6f9e8be72d75bda2"
+    },
+    {
+      "path": "maze-move01-after-r1/playwright-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "maze-move01-after-r1/playwright-report.json",
+      "bytes": 5257,
+      "sha256": "8a917ec062cc5a5fd138f8f12519b45df256005179ed32becc2a3775b1faacfd"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/movement/before-lanternlight-labyrinth-end.png",
+      "bytes": 747917,
+      "sha256": "2a298fe1622a0a4590a28d16fa652f50e5e508b5f96d15d12383a41e4e2a8a2f"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/movement/before-lanternlight-labyrinth.json",
+      "bytes": 37603,
+      "sha256": "4ff2ba32eae77e719d26d19cfd82b535669ab8585eb7abcc1077eb8c1121b52e"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/movement/before-rainbow-power-parade-end.png",
+      "bytes": 766862,
+      "sha256": "3ab8d0f1e60827bae7e02f4444809f37ee04fd4ab23eb132fb92aefd685f6e62"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/movement/before-rainbow-power-parade.json",
+      "bytes": 34483,
+      "sha256": "362dbf88d921e385bf8217ac501b7103d52277acf5e33bac0d4d93ae98b98eee"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/movement/before-twilight-treasure-loop-end.png",
+      "bytes": 829796,
+      "sha256": "5effa52bd21e4c785c1668530083ff2d96b1fd1ac9bef3e9d12883dcfe07dade"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/movement/before-twilight-treasure-loop.json",
+      "bytes": 56051,
+      "sha256": "cbed36ebda4276fc5d54a9be7c66ecb961a42380d70f5df6779407d6b1650df2"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/playwright-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "maze-move01-before-372e7d9/playwright-report.json",
+      "bytes": 5260,
+      "sha256": "79bf3b678d9dd47c5a72ff0850bcf5cf55494aade1b7e9596c30f2dc401f9b95"
+    },
+    {
+      "path": "maze-move01-full-final/artifact-manifest.json",
+      "bytes": 506,
+      "sha256": "752c81f995cb7e35ca17507356db314230b3c333f482290535553c5061002f47"
+    },
+    {
+      "path": "maze-move01-full-final/browser-cohort.json",
+      "bytes": 53557,
+      "sha256": "da80adcd58e9375ad596e5d4c21323e423b77ba513920a0b234306812939d7eb"
+    },
+    {
+      "path": "maze-move01-full-final/inventory.json",
+      "bytes": 326929,
+      "sha256": "6e9934b78aabbf2b6122055b0f2e47adabe2e7e3f74091e446715d5a3cfef8cd"
+    },
+    {
+      "path": "maze-move01-full-final/movement/after-lanternlight-labyrinth-end.png",
+      "bytes": 763498,
+      "sha256": "0071b4c9d5e95a165560088bd11aadf175c74e787a0978ece5905ea4b4b0a961"
+    },
+    {
+      "path": "maze-move01-full-final/movement/after-lanternlight-labyrinth.json",
+      "bytes": 40172,
+      "sha256": "29546b287e8a811d45ee175af58990a9327441d14e23fd0a6acea49e1778d910"
+    },
+    {
+      "path": "maze-move01-full-final/movement/after-rainbow-power-parade-end.png",
+      "bytes": 766950,
+      "sha256": "0184decb5e25838c3b8e0f84ecf2c320b7a3f06492a38b5afdf6001aabab4ea3"
+    },
+    {
+      "path": "maze-move01-full-final/movement/after-rainbow-power-parade.json",
+      "bytes": 37695,
+      "sha256": "165e162d7e82a66d1beffa6649293075fb1f08f4bf30e7be9c3d657cff5f016d"
+    },
+    {
+      "path": "maze-move01-full-final/movement/after-twilight-treasure-loop-end.png",
+      "bytes": 852677,
+      "sha256": "0bbe661794119bd02c2c46642acad99f505ac558e6b22648caf0ef0163be7382"
+    },
+    {
+      "path": "maze-move01-full-final/movement/after-twilight-treasure-loop.json",
+      "bytes": 67505,
+      "sha256": "ba93ea9f3d164464d471180b1972e3fe3da7f6ff17c68baf7638de3e20be48e5"
+    },
+    {
+      "path": "maze-move01-full-final/movement/five-friends-reversed.png",
+      "bytes": 457050,
+      "sha256": "3b0430131988febed328c62b4af122f691df39b5c895391aedf2c2bee39558d8"
+    },
+    {
+      "path": "maze-move01-full-final/movement/five-friends.json",
+      "bytes": 163695,
+      "sha256": "a7ea1ec95450362f1ab59d55c133ae9e76d0bf997a3387a4916e38fb538c7cf7"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-door-opened.json",
+      "bytes": 2739,
+      "sha256": "d51d7251d0aabaf89ee640aad9c73a116729234c27206421729c2e084f04058b"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-door-opened.png",
+      "bytes": 704621,
+      "sha256": "8c3dab15525c068d9506ac3fdf5b78462bc7dc6c5c52ab4498dc95f3dcac17d4"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-enemy-defeated.json",
+      "bytes": 1548,
+      "sha256": "73a5e6dbf0c3a769e5acbf4aecaa4b4118001ac5d5c43e6d36d82dceb6c92e7b"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-enemy-defeated.png",
+      "bytes": 751784,
+      "sha256": "5a107109f192b0ea8d8608e8a5d57a918fcc1cd400e20f79e2818f4adc4fcc3e"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-hole-jumped.json",
+      "bytes": 3109,
+      "sha256": "0c182045a556c9701c65520c6ccb35acf5a18fb6f4fdfe1538944774bceaf3e2"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-hole-jumped.png",
+      "bytes": 710021,
+      "sha256": "42b95c37538a38f0a73a2323cf9c92a3d091421520d92f85359baa4eb8fdb7d8"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-portal-warped.json",
+      "bytes": 2365,
+      "sha256": "f7336d94a201d1adb5af908bc015a419e3ac00ac1fcf3d82d652091dfc7a3d65"
+    },
+    {
+      "path": "maze-move01-full-final/movement/interaction-portal-warped.png",
+      "bytes": 682985,
+      "sha256": "a31d4866542ad82182958d34c1ed15198942bb69e03072bf2a954cabd646ed01"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1024-768-big.png",
+      "bytes": 699220,
+      "sha256": "43ddf86a4a328f4a462eefc907eeb6570e5250ec83ae92971fdd5f783591f817"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1024-768-normal.png",
+      "bytes": 698593,
+      "sha256": "b2300ff815d4e3fe438c5695518fc5c5db3ddd5d01927108c9e5d074a138d917"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1024-768.json",
+      "bytes": 3009,
+      "sha256": "b2fea15af9d1bb0db1beb353557dd0bb1344340de91e904a6e2cdb95ba3b03ff"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1194-834-big.png",
+      "bytes": 956521,
+      "sha256": "63223127e0afbe31a832140da9604f148fbb429ddd7c8d4bd74107137ad2d363"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1194-834-normal.png",
+      "bytes": 930297,
+      "sha256": "9c1842250f38662f6d7531f150426e95b9d58dbbf36a30b8c9849287101425ee"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1194-834.json",
+      "bytes": 3007,
+      "sha256": "3b6e25515b9e4ab76787ba6b510a05fe5981cdbee7857d4e5de536e24719409f"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1280-720-big.png",
+      "bytes": 782766,
+      "sha256": "c26ddda2e0abb61a9bd29802b5178152056fffd7b5e43e14ab3b0fd1f42378bc"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1280-720-normal.png",
+      "bytes": 769422,
+      "sha256": "e52f14cf652da77d6fc577a6db7c6b61f2b4755c6b1884c0624e9a2380f6dcd8"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1280-720.json",
+      "bytes": 2999,
+      "sha256": "49a235b52d65ca4403000f9eb0334e2203cc6912c91ad7bb8a95cdc7423b31ab"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1920-1080-big.png",
+      "bytes": 1557101,
+      "sha256": "7b2809c7b7a9c8ace4f7b9668c270e4b8768f8c2381e761fe567599958c2c17c"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1920-1080-normal.png",
+      "bytes": 1515304,
+      "sha256": "c3f1660bfa5ad0cf51f66d766af39487e1cb33c4c8682fb8dd958d8adf23a44f"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-1920-1080.json",
+      "bytes": 2929,
+      "sha256": "06ba0026f1cf9249565124a81d9f67e8a93bea53c66af11ad3cd0155b9c7b424"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-568-320-big.png",
+      "bytes": 159773,
+      "sha256": "98c881a0d3038a4aeac7904a6c5045fb7f5988f8f56519ce77d9ff838b4e29c5"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-568-320-normal.png",
+      "bytes": 159802,
+      "sha256": "d52fc49121285a17dd1cf76bde047433751917fa94ef19b067fa12bcd1abfcb9"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-568-320.json",
+      "bytes": 3021,
+      "sha256": "423830de423227197ce6fcf0ec0279c9c1c89ddd3b25cd78b04a3d35d6ac55a0"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-844-390-big.png",
+      "bytes": 275413,
+      "sha256": "c34c1eb41c87d51c212a6739b25fa49f7e5027f357324ea660b8667b128d7489"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-844-390-normal.png",
+      "bytes": 263848,
+      "sha256": "8870dde1789dad1da4a3e80bbff4941b58f4ffc25652ad9601ccd99d93934575"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-844-390.json",
+      "bytes": 3012,
+      "sha256": "113fbe3ddadf9a0f83a7d7d04e4b3802c7f8c13f7098433714557503a339192f"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-960-540-big.png",
+      "bytes": 489495,
+      "sha256": "5e87e822fc48ac23539178f3490d43f6ba084d81f1f6d1eed9c27d1b8cc85f4d"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-960-540-normal.png",
+      "bytes": 480405,
+      "sha256": "2113be7df720eeaed375e102fa8b6051800a9ff7fd54789799ae35d3272f5c02"
+    },
+    {
+      "path": "maze-move01-full-final/movement/matrix-960-540.json",
+      "bytes": 3011,
+      "sha256": "c96b9e040d4ef91ac2c5d46fa0e2aad73ae58a962dd4995495e7583dabb30863"
+    },
+    {
+      "path": "maze-move01-full-final/movement/ordinary-resume-restart.png",
+      "bytes": 809438,
+      "sha256": "d1840e1b2bbb787f94db1b97204446be686f4ff5545fda6ee5739e87c8e86f78"
+    },
+    {
+      "path": "maze-move01-full-final/movement/touch-dpr2-1194.png",
+      "bytes": 3362728,
+      "sha256": "7728027fa3a9d054f87e66a2a66e0878f81bb733c1a0d8291d242eae32495c8d"
+    },
+    {
+      "path": "maze-move01-full-final/movement/touch-dpr2-568.png",
+      "bytes": 496291,
+      "sha256": "77d762b2f8d13b4c0b602243886e19dc90a005a6229739e0d6c8b783f607dcfc"
+    },
+    {
+      "path": "maze-move01-full-final/playwright-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "maze-move01-full-final/playwright-report.json",
+      "bytes": 47508,
+      "sha256": "b443d4951af7af6f2123b1a2a869ee8c9d6b8fa231e4c342b357854492182d60"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/actual-music-contexts.json",
+      "bytes": 1480,
+      "sha256": "acec2a8835ba945c89824de55b34d0c0397e1ce4bffa6bd6e15faa69814e8b0b"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-568-0-big.png",
+      "bytes": 152282,
+      "sha256": "fd09357ec263090aff6401b932a370fbc7b5a8d6d9c7eb84f9546eab7b5c7809"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-568-0-normal.png",
+      "bytes": 152243,
+      "sha256": "5fab68d9299ad031412074746c72c11ff6fdfb8d895a2f6bf2b04c58645d55ec"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-568-12-big.png",
+      "bytes": 143812,
+      "sha256": "2004418783ccf35ec3b6a6ec618f0c0be3f1c8159a52536a4e6404af6b93b40c"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-568-12-normal.png",
+      "bytes": 143817,
+      "sha256": "94230fb14d9c2aa0d99a6984c385dbb6cf6a234ce253e0b1203cef66fcec1227"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-844-0-big.png",
+      "bytes": 254635,
+      "sha256": "8545daec484c2eb7c9af40f28f5d7c1647a507c722db059c69c8c98512351286"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-844-0-normal.png",
+      "bytes": 246339,
+      "sha256": "ce67fa07cb623afa7528cc6c56a7beb474a73dafd0a92c898cc3025eceb55c4d"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-844-12-big.png",
+      "bytes": 247260,
+      "sha256": "2853ae62c2d809c7cb8c58a55c09be11251a9648f62cfc7e193cdfbb430fcb26"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-844-12-normal.png",
+      "bytes": 221680,
+      "sha256": "08302ba0496c0af4900ec6938c82948fb6a668a3f9fe56089853ccdc0be26edd"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/compact-geometry.json",
+      "bytes": 203086,
+      "sha256": "3b679bef6dcfc4fda989bfc57197555c8c597994bcaef2dd0f395af61d9ae73f"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-actual-media-URL-across-live-contexts-and-Sound-snapshot.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-cold-presentation-candidates-and-actual-size-alpha-proofs.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-compact-200-percent-named-reader-keeps-objective-and-movement-access.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-compact-simultaneous-geometry.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-delayed-presentation-decode-and-semantic-fallback.json",
+      "bytes": 267,
+      "sha256": "13d0e979c1ab6ba31a9cc695aa8e2551bef9f682dea9e8f030c3a764e924a9be"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-long-dialog-native-keyboard-reading-and-exact-return.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-power-latency-and-engine-cost.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/console-UI-review-responsive-logo-failures-retain-title-and-actions.json",
+      "bytes": 956,
+      "sha256": "be56f95cbfec21ec0939d20de4cf6e0a856df17b0cb79f8df5dd0f72f31468f8"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/keyboard-read-end-help-568.png",
+      "bytes": 120887,
+      "sha256": "5bf992993c4c4762306d3d5de55d8112541b7f79e0144190854cdd037151fe46"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/keyboard-read-end-help-960.png",
+      "bytes": 347586,
+      "sha256": "4c8ebc8453640521f77da3218c9d3461a41274a86e2c97bb0d1b7f24a45ae07d"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/keyboard-read-end-story-568.png",
+      "bytes": 124070,
+      "sha256": "ea50298f16e0aae53a962f38180d6e0354b2d4900949edc319d92252bb289157"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/keyboard-read-end-story-960.png",
+      "bytes": 288220,
+      "sha256": "7f0a1d63858574cc7295a6b545fcafaf700da7419fd41b76785dd0d044aca965"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-1280-all.json",
+      "bytes": 330,
+      "sha256": "5cc39e49d05244b224bb85d080c1057dbaa27a8b538e036aabf94514b2847b59"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-1280-all.png",
+      "bytes": 920524,
+      "sha256": "60154e5dc1b7c7dee27a6a025b5b57266f9778f79c8813c21414811a5ee630d7"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-1280-both.json",
+      "bytes": 260,
+      "sha256": "2202acf34d3eaa5b1ee45ea0c7bbdd1a5c2766dbfc6c712e01feec511902d8da"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-1280-both.png",
+      "bytes": 1189757,
+      "sha256": "ea7f6be4ee631939e3e2899cfa8a68cf9cfb76ca56eaf9d3c45bc5e8962388ad"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-1280-selected.json",
+      "bytes": 121,
+      "sha256": "5582036b4266c84dfea83e918232623ec52730ac636601d494afb31baae52e27"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-1280-selected.png",
+      "bytes": 1189757,
+      "sha256": "ea7f6be4ee631939e3e2899cfa8a68cf9cfb76ca56eaf9d3c45bc5e8962388ad"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-568-all.json",
+      "bytes": 399,
+      "sha256": "c3190f0e870e88484d81ca8ee049a3d7d9daaac26fe05d2d6d7cc1eac7a91874"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-568-all.png",
+      "bytes": 203706,
+      "sha256": "8a3fa51def0480bd39e7c015fe7e3faa8bc5ec20ea34b6dc3277061f654cfd76"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-568-both.json",
+      "bytes": 329,
+      "sha256": "4a25b3c2481920b797d66012dc7548344705b7d70206d366a37ca13d7cf3779a"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-568-both.png",
+      "bytes": 284454,
+      "sha256": "f660e287efd7bcc9a5bdf4270d8274a08f593181c5be1df9607db9b10b2b29f7"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-568-selected.json",
+      "bytes": 120,
+      "sha256": "79bfc4c988b4165b3b6b2aaac662bfcf20979a5e87f9f966f858db60e4b19537"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/logo-568-selected.png",
+      "bytes": 290607,
+      "sha256": "690af8c7f9f825da715ad864c019010fdacb0d11bb45ecd60d3d37e29b2f9807"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/power-latency-maze12.png",
+      "bytes": 518867,
+      "sha256": "eee69c00f4b68606ee9283e12c83adae407f12af1a5b0d4f3e7a4ec69bbbdbc2"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/power-latency-maze15.png",
+      "bytes": 561332,
+      "sha256": "d7bad595bb6ac1e4211cc14e3095426f5891c06b609dcddf6692e7cfbb7a1c2a"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/power-latency-maze16.png",
+      "bytes": 557731,
+      "sha256": "6ad43a2a876199396f411ccc434b7699c7f63833718408d9b3a04551188ab36f"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/power-latency-maze7.png",
+      "bytes": 651755,
+      "sha256": "200ccc2e65010fe2581a18c0e867fb7b128719f742fa6d940415af8d46049c01"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/power-latency.json",
+      "bytes": 22246,
+      "sha256": "35e7ae32e8cc18b9e44b41b1ba994b62adf6d56f4f5c3428ab3d81cf1228bcf6"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-568-dpr1.png",
+      "bytes": 121742,
+      "sha256": "71c3a40e4f60691222457cae71408489c15670e57e3413a07bf8c3a2891b51a3"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-568-dpr2.png",
+      "bytes": 383880,
+      "sha256": "3113bb78414b077f51094e074f2f3b8f1d897d91b04a15c2709d88f72584d7d8"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-960-dpr1.png",
+      "bytes": 285628,
+      "sha256": "fc31f14dece30e83f2015b25ae7e80e459975a40718d6c2985bcfc5eca4648ee"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-960-dpr2.png",
+      "bytes": 864759,
+      "sha256": "8a5ce5ab9d3bb4304b9352273de0abe995ee610434d6ba84de143194f4cef590"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-all.json",
+      "bytes": 348,
+      "sha256": "5532191e6b4fa26d1673f902c7d76ef0340fc606b75851785fc2f485790e23aa"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-all.png",
+      "bytes": 688299,
+      "sha256": "07e677d83bd6c7d8d1015f1b8e12a9d3896ad18d1eef4d370975c3efe1698fe9"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-alpha-128.html",
+      "bytes": 16230654,
+      "sha256": "d3a0d08f1fc6ff167c21769f832bcc0661dafdc001af46ed82efc7be0f34633b"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-alpha-128.png",
+      "bytes": 849326,
+      "sha256": "b1f5e3ea55de82032d97cb74fd8e7812e82afe51323735bd2a305344b42926b4"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-alpha-200.html",
+      "bytes": 16230654,
+      "sha256": "61a446f4ed0263ba485404f0f2dc8f5ec43f5111c26219dc01d845de8d286e3a"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-alpha-200.png",
+      "bytes": 1699277,
+      "sha256": "eebf01b63777337de1451f90a065a20f2361589a2ee959fe1a213a3603621f63"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-delay.json",
+      "bytes": 49,
+      "sha256": "5c2fdd04578f76af543b41beaea892362897943aad0fef360c53df00868f9472"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-delay.png",
+      "bytes": 861871,
+      "sha256": "88f123889badb5fd7f47d1868a8614672feafeab74b9d1908f491b6d4ee2e3a8"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-presentation.json",
+      "bytes": 132,
+      "sha256": "feb8ee17633950a7792bb279482d7f54df7a40f7b8de0263d61898959ab77dc3"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-presentation.png",
+      "bytes": 782789,
+      "sha256": "8b5a45416f4c4db68326887f91da9bcced4bdb5e635dbbd4f811f51661922a07"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/presentation-selection.json",
+      "bytes": 49538,
+      "sha256": "250789f53cbc5e866e615d1c206110ef7dbd8d32727763b799fb3a42fd9b5617"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/reader-568-big.png",
+      "bytes": 123504,
+      "sha256": "6a01603691cb8b704f3ca330bd77c78e86db105b4bd111494a9062da2784bdae"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/reader-568-normal.png",
+      "bytes": 123520,
+      "sha256": "d899f0702f9132824cefe750f4e618466ccef8796385daec8a09f852a10d5cd4"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/reader-844-big.png",
+      "bytes": 233747,
+      "sha256": "9f67f07248b3188ee012a91b267359d4b71157a1edf49827a8b720c23bae0fa5"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/reader-844-normal.png",
+      "bytes": 209667,
+      "sha256": "c4793bfed77be435af0e3d5647657b38db10b6165f952bb960ef5df8967761eb"
+    },
+    {
+      "path": "maze-move01-full-final/ui-review/source-build.json",
+      "bytes": 1153,
+      "sha256": "d863fc487c7bd22e40d39eec100a18d5638c78804d2e3b18e5d481d149ae53ab"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze1-big.png",
+      "bytes": 736927,
+      "sha256": "50e4aa4d72ae620b479756e526b3a986e413b085f0d4344708fb19c0a5a3fb4f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze1-normal.png",
+      "bytes": 729248,
+      "sha256": "77ba61cd02a444c0edd4a3f3df9c6aa9ae646e91e9400371ca1a3fa471674c2d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze12-big.png",
+      "bytes": 636696,
+      "sha256": "a307a7bbf1754712df67dda3f62edea4bae6a7718a98ca6b1a0791ee8a1cd7b2"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze12-normal.png",
+      "bytes": 636078,
+      "sha256": "6e3e7624b3400116da7931502bde66b809cb1b1d0bf294b47e2eef3741a8f772"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze15-big.png",
+      "bytes": 637077,
+      "sha256": "d1381bdb02179b0007141184782f04ea6d04b11a1c3d56f106858632e8a1e44e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze15-normal.png",
+      "bytes": 636261,
+      "sha256": "63c61c953ae0d914fb61c87c7c896d9091d11dce46674f8cdf115547f29bf44a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze16-big.png",
+      "bytes": 729628,
+      "sha256": "a1945a94073cdb56eb25fdce62728e650f3820820ad648a7b20566492f5a8ec8"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze16-normal.png",
+      "bytes": 729655,
+      "sha256": "e8dc1e7007dc1020069691382a476ad6ab87f66682447ee1838a4e989492bb04"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze8-big.png",
+      "bytes": 677590,
+      "sha256": "0916c38c2b445aa4dfb3dd5af863f1192ff42ae13a550baa56d7d98c6738cfa4"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1024x768-maze8-normal.png",
+      "bytes": 676667,
+      "sha256": "0a31104429db7a13b891c8405b4bd136b02669ce6f5867d21997f9ed0d7f1fda"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze1-big.png",
+      "bytes": 1035834,
+      "sha256": "2290daf0b2549ec5592bed4a35a1072165db86e351e26b96ecfd801996734b9a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze1-normal.png",
+      "bytes": 992259,
+      "sha256": "045455a8210a2d0d9d79e8df1150ff0c61144d63f73ce4b281942aaf79afd6f1"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze12-big.png",
+      "bytes": 815128,
+      "sha256": "444ca5cd92255c55a390d170ecdf51806c191da942d221cea834d7ea16b6d79b"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze12-normal.png",
+      "bytes": 819945,
+      "sha256": "fcba8caaddac60a83ababac3783a710d5d1f70cfe9a22b08511d1b68f7bcce5e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze15-big.png",
+      "bytes": 819878,
+      "sha256": "3f629a98863efd5f3c88a566248ff999574fd5a43aee1deb120f403904a87659"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze15-normal.png",
+      "bytes": 824601,
+      "sha256": "7eafb5bed1344f3ad319aa78d5adc974a041c09bf6fc5d93e0e7c3e6974e659a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze16-big.png",
+      "bytes": 966617,
+      "sha256": "f2fad5ba914372f8f22b4132e79afb7215b9b9c51e35d8b99de31fb636e3b2ea"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze16-normal.png",
+      "bytes": 971958,
+      "sha256": "468d095173610458b69d30be2a637b2ece6727eeb439a2e1c74f6769d4fe6614"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze8-big.png",
+      "bytes": 931750,
+      "sha256": "3fd9b8d9d4d03a58e5a33195eed5ed01ce7f7d3f47d6336ce626f3637b2d5bce"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1194x834-maze8-normal.png",
+      "bytes": 903538,
+      "sha256": "ee0a74d2fba6a99ba44285c806b8ce2d50d8fe4bd149571119c2083f1b56955d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze1-big.png",
+      "bytes": 856197,
+      "sha256": "a0a0f0732eed852050b28a0fefaada8229931fd93ca136997876f1e6913bfd9a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze1-normal.png",
+      "bytes": 803677,
+      "sha256": "17939666ccfa1ae3a9ddce73cbb809e14ecae27b6e2ac2b7961ae1a3257cbb27"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze12-big.png",
+      "bytes": 708587,
+      "sha256": "93d5357e1ad4b8c36c4db990af7b7c772dee815befb54f69d7aa02f720bae5d7"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze12-normal.png",
+      "bytes": 681746,
+      "sha256": "c018e260f975f2e0fe4894c6bb9bfcb70a05ca4e386d08a36d58593fdaa3c2c0"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze15-big.png",
+      "bytes": 715110,
+      "sha256": "7ba89d9efbbb5c39ed369da7676210056c4abe4acf0db998476b2767bfee2a62"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze15-normal.png",
+      "bytes": 685836,
+      "sha256": "acbe6d8a243e8160c490dbc0974e7058e762a8faf402a0954537bb590fd4dfa2"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze16-big.png",
+      "bytes": 814250,
+      "sha256": "3e2ac0a166d6248460d7ee48ffad2b04d3003b38dcb2abf164027d78cf6509ef"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze16-normal.png",
+      "bytes": 788888,
+      "sha256": "712a94d4b7d7bf0c0176874e0862ca049bb6364dbc5b84c2d9fcb7571c09ecea"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze8-big.png",
+      "bytes": 756674,
+      "sha256": "9bdbe46ce8032d568349508d68841b090475ae5882206b764478f953286b8f69"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1280x720-maze8-normal.png",
+      "bytes": 744623,
+      "sha256": "cb135775ea387920c6ab54286bb17d62dd6cd753923a64f830878b9c0b1ba7be"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze1-big.png",
+      "bytes": 1744236,
+      "sha256": "19528caa91f779c1ee4088a978cd5d63295cbf81342cf6447221d549973d395e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze1-normal.png",
+      "bytes": 1701470,
+      "sha256": "35c4394a01b7115d34439cf5778c0f95b99750e119f86a22226fbf9bd34328ac"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze12-big.png",
+      "bytes": 1349702,
+      "sha256": "7b8c71385bb9d0f44b6575d75b58e5a25d4b425ed4e8253056f83a92580dc431"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze12-normal.png",
+      "bytes": 1201166,
+      "sha256": "4d7c2d574a4275127095589bf1d9467790d25766b6896db31b3cad7d33247049"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze15-big.png",
+      "bytes": 1361823,
+      "sha256": "a3da8f586038817d2f89f7b5f4cb02524e34bc364cd67a6274f66a8abbc562c5"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze15-normal.png",
+      "bytes": 1254282,
+      "sha256": "9da0e1aebacd3bf3f6ae3bd2846228fa38e7171e222bc4fcf338e59419a57887"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze16-big.png",
+      "bytes": 1613510,
+      "sha256": "2704470df72e07e8754160e4dd3c16f549b6d2c8f555383afddec7d9e0ec9353"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze16-normal.png",
+      "bytes": 1575869,
+      "sha256": "a5c3cd5260bdb00d9fe7f6a00ca6123edac48baa9df1faed2bc8c7c260c156d8"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze8-big.png",
+      "bytes": 1557623,
+      "sha256": "0c9da637502a72428d71eb85ceb23532d83c515ad5c42537610e27a666d71872"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/1920x1080-maze8-normal.png",
+      "bytes": 1536196,
+      "sha256": "c1049d23c1c9b5bd3cf28249ceedd42017c2cb5f55ebc7d62ec65e40af95d426"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/200percent-text-spacing-dialog.png",
+      "bytes": 288715,
+      "sha256": "9f5e67a532a70b4d1fd07b72e2a6998cbbfda1f7fc34bada364c551d5974d38f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/200percent-text-spacing-play.png",
+      "bytes": 438978,
+      "sha256": "73ef2ec14a364a458f8e56ead3d100e40c2d7a8d8f5e713e879d78f4aef7fc66"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze1-big.png",
+      "bytes": 157960,
+      "sha256": "59842a15bb3d17bf295c6aea9c89190243b12a8b9ee0f5462b7e6abfc5398a80"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze1-normal.png",
+      "bytes": 155018,
+      "sha256": "368a8ed56d9238cfc8c095fff562fa57a31cdefd8822bafc814dad130a88835d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze12-big.png",
+      "bytes": 152306,
+      "sha256": "8efbdf50c0b9cbc3fe0d5ebb70b528a8159b3431a04c2f584a7634b1a3e2234c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze12-normal.png",
+      "bytes": 152250,
+      "sha256": "b20980a665e32a38a5eee73672884911c9a7321d7ad32f16d3c3607fd273e704"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze15-big.png",
+      "bytes": 153427,
+      "sha256": "4645bd202b5d7e5e707b630e5c2134c82dac883cdf20d63dc039222127aeb924"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze15-normal.png",
+      "bytes": 153304,
+      "sha256": "e0ae5465742970c2e5742ebde58d974a20974adb3eaa2d8b7c5d8e6e43ae8185"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze16-big.png",
+      "bytes": 164725,
+      "sha256": "8b08c2463a50a2a89245727603efa0041c42308e10e30d6de87a8697bdbbb66c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze16-normal.png",
+      "bytes": 164810,
+      "sha256": "d318b55760a6955464e5cf31cd488c91a9f24592de179e1033f1e592ab4ec18c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze8-big.png",
+      "bytes": 153904,
+      "sha256": "cf27a9b28528073c676b02de60d275dc81605228863e57f1efbed8a198111e32"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/568x320-maze8-normal.png",
+      "bytes": 153794,
+      "sha256": "6b0b0146ae331d3f359bc93ed3ffe392f101353d71ceea58e6bedcaff28c1af1"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze1-big.png",
+      "bytes": 282245,
+      "sha256": "0a7b1c717dd005cd1e661ec6d3c20f68191d393833b0d2c5cda6330cdf8d4dda"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze1-normal.png",
+      "bytes": 263007,
+      "sha256": "31f81ed7bd3ac9e2375bf12eae8960e60e00cc0f5aebcd205bbee65677c822f9"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze12-big.png",
+      "bytes": 254714,
+      "sha256": "acb15368c4b7d177ae65c25146c36a908508513165b7b7f0b380c721705f1a64"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze12-normal.png",
+      "bytes": 246341,
+      "sha256": "89d0fe542b8f5ad9234290aa3e8aefdccb34449d98e3f71619eb3167a9f81bd4"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze15-big.png",
+      "bytes": 258533,
+      "sha256": "818ce96e5c9d915f03f4dd10d7c81dacce40c2bdc486ed85d2c859a372964743"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze15-normal.png",
+      "bytes": 251467,
+      "sha256": "a237b9d96bd0cdc0aadd565e51903b9bf22b33169fc58faa6fee6ec4d5c4202c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze16-big.png",
+      "bytes": 280833,
+      "sha256": "70e2cb1411f28d42f5639477c75ec6a03c172f7e50e6dbc7f9cce988fa5b41dc"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze16-normal.png",
+      "bytes": 272214,
+      "sha256": "0910e1cced54d68f6172c7874c6a42ac22126f1e692fa567512eebe18f9f5a8d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze8-big.png",
+      "bytes": 268736,
+      "sha256": "f9e60795a3cb4d17f5e301168080c446439641cf3cdfb5a8ea4c3f22eae35be0"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/844x390-maze8-normal.png",
+      "bytes": 255221,
+      "sha256": "028102aff12b6b3dca592551f4416050d10fb056841adbfb49488183cd36b681"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze1-big.png",
+      "bytes": 519111,
+      "sha256": "acf3f825950321a92aee019247ccc659d91c29d3635eff9137e1a9467e19ca88"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze1-normal.png",
+      "bytes": 482226,
+      "sha256": "3d315cfbbfcc92b2872c1cc3579f1d458cc686d2713f113583cfc09ef984a746"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze12-big.png",
+      "bytes": 459443,
+      "sha256": "66e0356927589a5bb758b1c44a3b4cddb95b497deec820b3eaa406b0ec0c4068"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze12-normal.png",
+      "bytes": 442921,
+      "sha256": "c9323d4b21841658d2d94464a1c5ef1fd263c3aa36997cb36cac33b8767eac31"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze15-big.png",
+      "bytes": 464363,
+      "sha256": "f31fa45a243dd7c5a158543dc3aff5dedaecf85f232e2f9f18023abc916d0e15"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze15-normal.png",
+      "bytes": 444165,
+      "sha256": "adff78682c6804e24826410f09a5e2ce25dce71e2945fd3f2e826ab291dc292d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze16-big.png",
+      "bytes": 517717,
+      "sha256": "f907dd1ab14b2a1228cf0cbd9fe443356e77ccea5e68993823ce94beab28c768"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze16-normal.png",
+      "bytes": 497293,
+      "sha256": "1d4f96d43f78d61bbf35cbd6cdb7b8bcddd44420efd73f57e7a64eca55f9e633"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze8-big.png",
+      "bytes": 473176,
+      "sha256": "e28b20cce58ed02a0da308e64419d41bbed6ef6a0301b73eaf40b72332d8880b"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/960x540-maze8-normal.png",
+      "bytes": 464032,
+      "sha256": "60e16f180376f3939da055146c1fb426b568cbece859b9da8015a8d2cb5bc9c9"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/book-1024x768.png",
+      "bytes": 288123,
+      "sha256": "268c2522936859823354fc600e410346985fe62dfd2e6fa80cc04893fbb42a54"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/book-1194x834.png",
+      "bytes": 326069,
+      "sha256": "11d104f0c9195cca4b9b6d95379158adedc8ff5e3d37194ebcac3b9435364e62"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/book-1280x720.png",
+      "bytes": 285140,
+      "sha256": "d156c95f5d82ac3e94893f7c61f94144c2d4c2fe8d9b0802ff11d315477b0e04"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/book-1920x1080.png",
+      "bytes": 424244,
+      "sha256": "ef062290c5ac80c2791575b08121969d0939745d5a11977ca4a224ab19e36279"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/book-568x320.png",
+      "bytes": 77450,
+      "sha256": "b0241d9654643714e5e970dedc544fd38facb9d46b4accec06a40eb5f196dc30"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/book-844x390.png",
+      "bytes": 106939,
+      "sha256": "abeb1ff963a2681df0403025e1a48f9409279d810d8cc50c920d97ac677ea6ab"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/book-960x540.png",
+      "bytes": 157587,
+      "sha256": "469b1f41a926aaacefe5c806354b1398c59f5d1e61c5c4ca90f1a05f29b016df"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/catalogue-family-proof.png",
+      "bytes": 149468,
+      "sha256": "d4c9eba72eb7b317ce4ad881cac5438e17d20fc4e28912f9909f9c6e11f40e0a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-catalogue-fallback-and-DEV-only-integration-proof.json",
+      "bytes": 161,
+      "sha256": "f7ecfd82a7080f4dd2e4979ff9a617027aa3bab415f1f994156fcaaddf7f3912"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-complete-dialog-geometry-extreme-content-DPR2-and-text-resizing.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-front-door-Home-hero-v04-Book-all-modal-sizes-and-text-spacing.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-geometry-1024x768-authored-maximums-Normal-and-Big.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-geometry-1194x834-authored-maximums-Normal-and-Big.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-geometry-1280x720-authored-maximums-Normal-and-Big.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-geometry-1920x1080-authored-maximums-Normal-and-Big.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-geometry-568x320-authored-maximums-Normal-and-Big.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-geometry-844x390-authored-maximums-Normal-and-Big.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-geometry-960x540-authored-maximums-Normal-and-Big.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-Human-reviewable-proof-sheets.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-input-parity-keyboard-pointer-touch-on-screen-controls-and-cancellation.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-legal-perfect-route-preserves-pending-completion-and-focus-defaults.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-motion-quality-safe-area-and-responsive-focus-invariants.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-ordinary-completion-exactly-once-reward-earned-Book-detail-and-safe-maze-switch.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-overlays-focus-inertness-held-input-safe-return-and-Sound-preferences.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/console-UI-Sound-port-conformance-and-legal-too-strong-teaching.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/correct-equipment-presentation-candidate.png",
+      "bytes": 539546,
+      "sha256": "508f1777fa32a176a0068e3b6daee8210a014ba2ead5244524827678ada9495d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/dialog-proof-blocker.png",
+      "bytes": 417733,
+      "sha256": "7c1587c6a149ef5d293f77c56033b1c823516a245db260680c20e1cbcf6936b4"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/dialog-proof-celebration.png",
+      "bytes": 434960,
+      "sha256": "f14625b0c88d52d7de572f7e2a4c9e3a9bc6c57373e156983f79ae97ecd01e48"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/dialog-proof-hint.png",
+      "bytes": 426294,
+      "sha256": "c8b1636e6e160ea3886dc91b30eecd734b68b97a0f46f431ede4fece93bf8c7d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/dialog-proof-standard.png",
+      "bytes": 427213,
+      "sha256": "98c1ed372318399cfdaf867ba1bbbf485ee5ae4369f067a9736374141bc90b11"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/dialog-proof-story.png",
+      "bytes": 469648,
+      "sha256": "ba540c35675684c0b5a4a2c679508ba0b28cb279931e284098bb2c351bde1d96"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/earned-keepsake-presentation.png",
+      "bytes": 265622,
+      "sha256": "d9856994b0b3b3efb838b6e0f26651f04d0a3fa9f16fa1f9065a2109116539c8"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/earned-touch-844.png",
+      "bytes": 180066,
+      "sha256": "32881d449e92b4c8f115c0fb19f36bbabaa5bdf00dfc8cc3b969f85a7a516b3a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/extreme-text-1024x768.png",
+      "bytes": 108949,
+      "sha256": "4e71dee4c2043ec49c52d63c365b85b6c9efb83ed18b947273dd46fb5b0623e2"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/extreme-text-1194x834.png",
+      "bytes": 149042,
+      "sha256": "71134cd699cb2c5dff19e40fccf3c7d6f0c8552ffe0852eaea8009a5db5cdaf7"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/extreme-text-1280x720.png",
+      "bytes": 131313,
+      "sha256": "0da8cecf575e16208754c944f225ff690f480a8019a5fdb7b42e0c6e37e64f6e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/extreme-text-1920x1080.png",
+      "bytes": 224244,
+      "sha256": "26368939eefb1dfff97c61e85b19d5f87a8405a12c3fe1e55300973d03130209"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/extreme-text-568x320.png",
+      "bytes": 46096,
+      "sha256": "6529c08513f00b955bd23ef61a3ea6258ef310856d4e2ae8e71fbc6a5539f0f3"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/extreme-text-844x390.png",
+      "bytes": 51672,
+      "sha256": "035ff7eaaafb46e4dc18aa2f3ec9ed985b7cbf50b997ec0d78f06c775f79532c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/extreme-text-960x540.png",
+      "bytes": 70594,
+      "sha256": "f1f4ed62fd389dc7edaf410bab61b74c216535135528d20fdee4417e4d7840d8"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/failed-media-correct-text-fallback.png",
+      "bytes": 485993,
+      "sha256": "0439a749f090528fcec30318bf874ffb849843efedf75b420082d56ca9e75eaa"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/fallback-text-proof.html",
+      "bytes": 2899536,
+      "sha256": "31c32b2609f7fecc8d727684c93a90ea4180b4c9750e49213f3567b14efda9f9"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/fallback-text-proof.png",
+      "bytes": 1090365,
+      "sha256": "7d6e67c4e443be5c36c15fc74236330e06800b297a5d3a53351b992eb65727b2"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/geometry-1024x768.json",
+      "bytes": 85217,
+      "sha256": "be4ea1346ad546a537bd37d53f213759f5c4e43e7ef4a557b1ba1abca915f96c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/geometry-1194x834.json",
+      "bytes": 85889,
+      "sha256": "42a67ab46458f9be6fe35978a6510b3121356c135bcaebfa5f07af9d9ee60066"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/geometry-1280x720.json",
+      "bytes": 85809,
+      "sha256": "68aee146b6f1cb89bbdb18b3923ea66e7592c7d259177f92e5362510146b101a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/geometry-1920x1080.json",
+      "bytes": 83998,
+      "sha256": "7ae0d6efd78d1e5c438c8d55fb145a8927cd2befa2993d68c03614de5d77bbd3"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/geometry-568x320.json",
+      "bytes": 49925,
+      "sha256": "d43179b58d4416ba0d753c9a88dcd72345c5ae6f731482e6d810f70978dd92be"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/geometry-844x390.json",
+      "bytes": 49996,
+      "sha256": "410949c250d7e4ae733748777545b97772ce1d237203a451a8b2159c59faed19"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/geometry-960x540.json",
+      "bytes": 86859,
+      "sha256": "5108164a2682f105939e89687a08720fdc14d24f17d9f12119d5fec470a11ef5"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/hint-focus-960.png",
+      "bytes": 296406,
+      "sha256": "6cc8907f594899eef342ba66ee1526b0837a8d21926b86d1245ff99d2cd9daaa"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/home-1024x768.png",
+      "bytes": 1016547,
+      "sha256": "eb23fa9b7941513544d83ee96e31e89d85e93efc14c2e28da513c6e03da09c22"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/home-1194x834.png",
+      "bytes": 1265093,
+      "sha256": "82417803a2a614f7c115daa8ea5ac079fdce8ecb4ecf37958bc66f84251613b1"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/home-1280x720.png",
+      "bytes": 1157743,
+      "sha256": "22153f916d0add7d997987cbd09a600852408260b55a9dbf98dbfe37e079a759"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/home-1920x1080.png",
+      "bytes": 2375125,
+      "sha256": "18e6dc378d6cd5f3d72bba78df762f3d702fa6c610f909b6c299de0627f41fdb"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/home-568x320.png",
+      "bytes": 222224,
+      "sha256": "8930464f71ab31db7b81009b7bd49ed58aec4e52f2e2b78d9c44e2a494ed451f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/home-844x390.png",
+      "bytes": 367706,
+      "sha256": "c946ba3b3d710b8b140648af884e9d1b18ef07263455ecf339b079e139dc301e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/home-960x540.png",
+      "bytes": 666933,
+      "sha256": "adedd24e2ecd7ea3c405ef46219732df997651761bbc72aaae8c38c57d29e1a4"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/input-keyboard-844.png",
+      "bytes": 263285,
+      "sha256": "8d11f9722f83d075b89d470b25ef315bb3387c041113507ddc96ff8768a40940"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/input-onscreen-844.png",
+      "bytes": 263284,
+      "sha256": "12685fddd384c6e181154f6969f25a79cb7d40702e7e3f6e8d4a277f98a48e42"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/input-onscreen-keyboard-844.png",
+      "bytes": 268951,
+      "sha256": "5d7d070967cd8aa8373b09e888492d609fc12ef92b1e67f08637057c2d696041"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/input-pointer-844.png",
+      "bytes": 263285,
+      "sha256": "8d11f9722f83d075b89d470b25ef315bb3387c041113507ddc96ff8768a40940"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/input-touch-844.png",
+      "bytes": 263284,
+      "sha256": "9f1d6ad9acfdc354899466cf5ee6be97971853de1c21b01ebe028105e6d97fef"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/ipad-dpr2.png",
+      "bytes": 2356249,
+      "sha256": "d76907dfe2ef2f9f4d3b35d9825f108dd46216022558914fa23de5915183cfc6"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/item-fallback-dpr2.png",
+      "bytes": 1801854,
+      "sha256": "6ccf355d55c8b3c1c42ca774e45f11076ba838bb47f09ab5b34692d338420606"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/layout-proof.html",
+      "bytes": 5575290,
+      "sha256": "5c7a1e407721e7fa9523ca7b916328a9fb5b1a23ffedf152d3caf3a13eefaf57"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/layout-proof.png",
+      "bytes": 1476545,
+      "sha256": "f3cc7a2d6f8fbd6ee22929f99f28d46eb8f5316eabb76b6e4af7c21411793d7e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/materials-proof.html",
+      "bytes": 3939119,
+      "sha256": "986b89e89d3747bf3d2606712a12d7e0b5b84570b3b3fcc8a658dd2cab562cc9"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/materials-proof.png",
+      "bytes": 841819,
+      "sha256": "5c2d3decd1ce299357caf431eef2f33e15add3b77838583f2f75095ffb31ea43"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/on-demand-dialog-images.json",
+      "bytes": 102,
+      "sha256": "ecb4a8a02bbbcc9e2d557f2ebeb0a2fc05d2ebd10ee5a88203cc1c06459fbd5f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/optional-friend-missing-safe-stay.png",
+      "bytes": 297301,
+      "sha256": "49f01faa014f0bfdd9813e73257b73fd4e363bfca48da5c2cd95d9d7b4c6c848"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/perfect-completion.png",
+      "bytes": 301990,
+      "sha256": "4e60837518e9046c0a711cc0a41b1fab1b8fb7e14c492e759fa1b720b3309169"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/phone-safe-area.png",
+      "bytes": 212996,
+      "sha256": "1061b022cc032de8ff839489d9ba743487f6ab1a57e11025f879df7e4887a43f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/presentation-gaps.json",
+      "bytes": 22951,
+      "sha256": "c27db71f5725bbdb379cbe476ff335b815470b3d4c15c5285e7949a7d74ff82e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-0-568.png",
+      "bytes": 111607,
+      "sha256": "5839178e4bcb83d6794064c684ea6015f0569dfd5ef08be1359826d7bf9fc57c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-0-960.png",
+      "bytes": 263465,
+      "sha256": "77d0dfd5864a72cb11768e6e13c54cc8745f676676b386957cc25cc6f2bc3b48"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-1-568.png",
+      "bytes": 121527,
+      "sha256": "4ba2ca8e824edf38141d167e04fe91c324ca93f423e1e2a40c8c4ca63a26b19c"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-1-960.png",
+      "bytes": 284891,
+      "sha256": "c289733b71c2176e386dd5e5fbff53f8f1c01429a37c44452daa6c985496412e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-2-568.png",
+      "bytes": 122446,
+      "sha256": "4c0fb551b42087ea57cb7f30f1cf36c4badc5351831fa123715abf2a28280212"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-2-960.png",
+      "bytes": 287547,
+      "sha256": "3de0e41661cfeedb9e456e59af4e7eedb0ee3f330db34f25fcdb0b9bd9e64896"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-3-568.png",
+      "bytes": 118744,
+      "sha256": "a80a424b6a6d8652eb4998ac453b38e4fef26621a5a0041793546f7529511f22"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-3-960.png",
+      "bytes": 279288,
+      "sha256": "bf4c50f53619db990deee9f17147c29237bc75d2d2892bac0d73bb5c27384126"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-4-568.png",
+      "bytes": 114997,
+      "sha256": "bfc1d963c4781978705dc5a747f5543151969e7769ff5f802cd2354f5c93bc77"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-4-960.png",
+      "bytes": 270805,
+      "sha256": "ac919d8bb205f5ef77f3c372fd5677f26ff7c99aa638f33d7798e7d20812c775"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-5-568.png",
+      "bytes": 115194,
+      "sha256": "c9c85e3e5d759a211a3551d07cd62a71b0dfb6f7c2065bcc6a0b1d4488223e3a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-5-960.png",
+      "bytes": 272154,
+      "sha256": "24b72ae4bef1d61abcc6d65d2beffea125e3d2f121f10d4bd35e50218c967fb2"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-6-568.png",
+      "bytes": 115660,
+      "sha256": "6593bdf64364ec9daebf695ac061345730b480d08849aaa52929b8aa6c49ae8a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/required-item-6-960.png",
+      "bytes": 273376,
+      "sha256": "089d36e13952dcfc4c217a5e9c4388cd2a0d0f4476ffe3735b07d12a22e3d6ac"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/reset-safe-default.png",
+      "bytes": 408392,
+      "sha256": "c7dd8c546e5ed973dd77bd599888f06a31e96715c50aac5521744ff978465e9f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/safe-maze-switch.png",
+      "bytes": 349843,
+      "sha256": "a2f5a7e39edeabd1e4f1e6c9bf73f1387ff0a1c6bc1612891d50d05de3a445b0"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/sound-comfort-960.png",
+      "bytes": 285287,
+      "sha256": "75d696006bd2a28686a5455600bdf6c6f1f4e0230c2ca137d65f5d7513000c49"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/sound-port-conformance.png",
+      "bytes": 114889,
+      "sha256": "4e1d79d514ec852b8724679d9c6405a631687ad8d1dc5d118480e7fc29cc13fc"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/source-state.json",
+      "bytes": 732,
+      "sha256": "e45d607b74a32fef529a49f8768ee624fe1dcaefbe735820265d341c146619f7"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/story-1024x768.png",
+      "bytes": 557701,
+      "sha256": "9ab37068624e8900b76936d8daa9625a079aefb243e76c8be17ba042cf083a70"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/story-1194x834.png",
+      "bytes": 725322,
+      "sha256": "d7e37ee0fc057176224a8da31119c998896c8291ed23e6cb6cb3d8e2bd0caea1"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/story-1280x720.png",
+      "bytes": 650489,
+      "sha256": "c581dc94518873a4ad0333a8783ffba0896c61009cbafc894040c4b1c75cdf23"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/story-1920x1080.png",
+      "bytes": 1271410,
+      "sha256": "27e39e89db5fdf745c8d90b4c605bd3505bf48cf1226bb6906a39aa4e2087aef"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/story-568x320.png",
+      "bytes": 168368,
+      "sha256": "8b87f15960ed04c308d596e8b8c417ad27d3ea6de92ac69756bc1c83fe3783ff"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/story-844x390.png",
+      "bytes": 262147,
+      "sha256": "9fd19328e2d9a020956da5adf23f96d9f2d6240222e4ba4580fed0bda09dcc03"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/story-960x540.png",
+      "bytes": 404092,
+      "sha256": "b0330e73599deb0a0d8dc1fb0769ddd84f7c297fa44d07ed352710baacc6230a"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/styled-proof-full.png",
+      "bytes": 151904,
+      "sha256": "863848a6c94568234b73dbb08e014fb5ed308f17def2f8062d5bb7be6c844d38"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/styled-proof-lite.png",
+      "bytes": 150104,
+      "sha256": "9b1711b35f69cf056230d4ef9925b16d643912773fa45ba42b90a9177e237187"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/styled-proof-static.png",
+      "bytes": 149521,
+      "sha256": "20c35fc27aa96b4d32127a0d6bae28756b2902b67d5b9f9735b2a2f348bbf253"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/three-turn-story-host.png",
+      "bytes": 333131,
+      "sha256": "f8f88303c40dd2d0e63eb224547c2b6b70a1ba98c9149d35ebf75bb98814b13b"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/title-1024x768.png",
+      "bytes": 1101641,
+      "sha256": "ad62e217a67096bcb9331f7f31f350a8bb12150f63ec726b728c7ba6abad5f93"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/title-1194x834.png",
+      "bytes": 1337150,
+      "sha256": "906079715de342dcc3f860e11a3cb342ac34647b3e19600b327f08b2f33333ad"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/title-1280x720.png",
+      "bytes": 1244786,
+      "sha256": "01d87ce4e28d22379e0daa3457d3908b13e8ed2490e69cddde8e2fcc9ca2f995"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/title-1920x1080.png",
+      "bytes": 2413607,
+      "sha256": "94f0fe77cdaaed0cbc279e223a8298101e16c70eb55e38f90174026a305bfa9e"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/title-568x320.png",
+      "bytes": 291054,
+      "sha256": "e20da138ad0449cb103abce5381fdcefc8619fed7ed2a749c2966502aa252143"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/title-844x390.png",
+      "bytes": 530341,
+      "sha256": "ad68d024ac888033507ec6d751600b1c9a86c0b6aa03b825eb6ee0017cc401e6"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/title-960x540.png",
+      "bytes": 755434,
+      "sha256": "6faec0646142d66e33b650ff7810fb0dff1c0c5092624e23b6c66a8e817907a0"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/too-strong-engine-opportunities.png",
+      "bytes": 340503,
+      "sha256": "815d065908ce61e254cff1e9c4212dd16dce0fede9848224ccbb914c32491055"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/tv-focus-visible.png",
+      "bytes": 1199949,
+      "sha256": "e07f73ee121193c1f1d624a70f856bb89425fa470c0b7782f9795c11f3b95b4d"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/tv-full-full.png",
+      "bytes": 1202546,
+      "sha256": "26d022e360c8e2ac21903b9c0b038311866a2250790d9bf2d3ae62cc6046863f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/tv-full-lite.png",
+      "bytes": 1200322,
+      "sha256": "2b011c4aa3929043bf7a859ec35aa7e71dc3589eac4bec456664b8ebbe7a6f63"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/tv-full-static.png",
+      "bytes": 1200461,
+      "sha256": "fbd226b1478ac788669809582193b0359866f64102dcf3ad51f17d0c2e34ebb0"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/tv-reduced-full.png",
+      "bytes": 1204313,
+      "sha256": "2629e652b562f56c1afa559bf57063b204b85043e9847bec96eb163169719a1f"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/tv-reduced-lite.png",
+      "bytes": 1201262,
+      "sha256": "5219ed722c1648492601e761198e0e0bfeb6d2fbe42b1da3d7e6332f0eaed944"
+    },
+    {
+      "path": "maze-move01-full-final/ui01/tv-reduced-static.png",
+      "bytes": 1200487,
+      "sha256": "a751042159dfc9d8b4046daddd1949d13189f4d7019e808b10df4c30ddafe048"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/five-friends-reversed.png",
+      "bytes": 457050,
+      "sha256": "3b0430131988febed328c62b4af122f691df39b5c895391aedf2c2bee39558d8"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/five-friends.json",
+      "bytes": 163695,
+      "sha256": "a7ea1ec95450362f1ab59d55c133ae9e76d0bf997a3387a4916e38fb538c7cf7"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-door-opened.json",
+      "bytes": 2739,
+      "sha256": "617d31387a8534f5efc22dee1032033ca431d9def52c5816638cfc938bc99d06"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-door-opened.png",
+      "bytes": 710396,
+      "sha256": "b7e7a6e04dfbdffdaf06a9cd685e08ceba5dfcbaa3b47d61e430b6e1bb353dcf"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-enemy-defeated.json",
+      "bytes": 1549,
+      "sha256": "376fdd63c91a17bd1b09c0d6b05cfeebc7e76850ddc44151a4e86f50c7fb5c1b"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-enemy-defeated.png",
+      "bytes": 751701,
+      "sha256": "346c74b5258f4c28e05b0e21e55a1a082ee9d5ef8d115a10f2633ea8090ccccd"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-hole-jumped.json",
+      "bytes": 3109,
+      "sha256": "8499a233ffdb533d4e847935d9cc34dd82a63ed7bdf1a4c306a0e9b83e79cbff"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-hole-jumped.png",
+      "bytes": 706879,
+      "sha256": "89f10acba78e1b59034574c7526ce18bf230709c069ec9f501ea99c536a1f7fc"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-portal-warped.json",
+      "bytes": 2365,
+      "sha256": "49a5a1d2e9f3660782f0aa140fec8b6345e0d7279952c5462ee553b94458b6d5"
+    },
+    {
+      "path": "maze-move01-interactions-r1/movement/interaction-portal-warped.png",
+      "bytes": 683076,
+      "sha256": "0db2d5a9ba4cd554c0d08103a11bcd35737cbb8de91931bfc9e0651f09f95eff"
+    },
+    {
+      "path": "maze-move01-interactions-r1/playwright-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "1acb46f886ab20a7798080d9e5b2deddf30c19d9f339c388bb7913a3b3ccae33"
+    },
+    {
+      "path": "maze-move01-interactions-r1/playwright-artifacts/movement-review.pw.ts-MOVE-21abb-nd-hidden-page-cancellation/error-context.md",
+      "bytes": 11561,
+      "sha256": "b8f3516b1d30b8bb9cf3c3aba03609f263921d54f778d0e854323fcf3e79e892"
+    },
+    {
+      "path": "maze-move01-interactions-r1/playwright-artifacts/movement-review.pw.ts-MOVE-21abb-nd-hidden-page-cancellation/test-failed-1.png",
+      "bytes": 1155996,
+      "sha256": "5c74c9cc001c1c525c002616bd0ec903fb8b0417a9e8bbb738cd8f2f94e5dbe0"
+    },
+    {
+      "path": "maze-move01-interactions-r1/playwright-report.json",
+      "bytes": 12608,
+      "sha256": "8b28436ed5f4db1e563fdc31cb816d655c5012debc855e2673e7f66abde3afce"
+    },
+    {
+      "path": "maze-move01-matrix-r2/movement/matrix-1194-834-normal.png",
+      "bytes": 930160,
+      "sha256": "33f87d14a4259deadbdc940e1cb864c4b367bf2b0330bbe7904c6ab102155938"
+    },
+    {
+      "path": "maze-move01-matrix-r2/movement/matrix-1280-720-normal.png",
+      "bytes": 769510,
+      "sha256": "bf05b4047043b20c6994161b31362af4941a62d5b2a690701e10a90707374b96"
+    },
+    {
+      "path": "maze-move01-matrix-r2/movement/matrix-1920-1080-normal.png",
+      "bytes": 1515241,
+      "sha256": "a7499a9676092a15267404b4f4507b9893a2ef35226e1807b1d31c8121424da3"
+    },
+    {
+      "path": "maze-move01-matrix-r2/playwright-artifacts/movement-review.pw.ts-MOVE-06811-t-and-cancellation-1280x720/error-context.md",
+      "bytes": 15027,
+      "sha256": "4f6bc643711b8cd28f4176de2ef1c7c75357ad7be7e3fa3e0a928deca3c7f20d"
+    },
+    {
+      "path": "maze-move01-matrix-r2/playwright-artifacts/movement-review.pw.ts-MOVE-06811-t-and-cancellation-1280x720/test-failed-1.png",
+      "bytes": 770079,
+      "sha256": "e17a9c1103038d64222d7189bb06cedc6450174995914eb8e757afbed790d84b"
+    },
+    {
+      "path": "maze-move01-matrix-r2/playwright-artifacts/movement-review.pw.ts-MOVE-e8464--and-cancellation-1920x1080/error-context.md",
+      "bytes": 15028,
+      "sha256": "21fbf5bc1f1fc689e4ce02a0ec24dc87a276bb3dbccb04a37e217475be3c3ff4"
+    },
+    {
+      "path": "maze-move01-matrix-r2/playwright-artifacts/movement-review.pw.ts-MOVE-e8464--and-cancellation-1920x1080/test-failed-1.png",
+      "bytes": 1510686,
+      "sha256": "d4374ba976ce2a09510530bb1a428784d319972b35b67e2c484b71e97b0aa035"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1024-768-big.png",
+      "bytes": 699198,
+      "sha256": "6cde4e697eef9e2f7843acf6fca008feb193874184bd0493826909c0ca595454"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1024-768-normal.png",
+      "bytes": 698555,
+      "sha256": "baea5b576a04d0c2cb7caaa3a660a5d3f8a40a14b9e84b1410f245bcf7646747"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1024-768.json",
+      "bytes": 3009,
+      "sha256": "ceb32e55074bed19430722eb17adc29f37a4899739f9b02e195a1301763d08d7"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1194-834-big.png",
+      "bytes": 956531,
+      "sha256": "c6fb6cad4e96d581b91d23222928c743fe59f3ca820909d0ef374ed8e13b00b5"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1194-834-normal.png",
+      "bytes": 930231,
+      "sha256": "9519b43cdc380c341502db8aa501d1b777ae9b6bd67580cb1f58ab868e0a8be3"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1194-834.json",
+      "bytes": 3009,
+      "sha256": "55b6d99d3b5af760adc2f0455fc33c34f162aedeb8d760d60e28e9adc4637df7"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1280-720-big.png",
+      "bytes": 782758,
+      "sha256": "e23238307ec3ab970b5152a205f3f840e20a1c7c07d7f3d503fcd3bfa18e8b05"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1280-720-normal.png",
+      "bytes": 769367,
+      "sha256": "e23f4799389f3f5f889935b3639a44a17f0188a73a9d8647796e6155337f3c51"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1280-720.json",
+      "bytes": 2996,
+      "sha256": "5162aa52936919e36f98948793b5319dd887e508686e99254d581ca86afbcd6b"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1920-1080-big.png",
+      "bytes": 1557069,
+      "sha256": "0eddfabfb3cc2b7f6a36190db63da385b5b55ddadff9da19195dc67cfa751870"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1920-1080-normal.png",
+      "bytes": 1515274,
+      "sha256": "93552e2c223a0adfbbb3202ea19b5625b360469e7194bf4a32f205f7a0ca3085"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-1920-1080.json",
+      "bytes": 2929,
+      "sha256": "17fa4f5105a03efbae4da0b54cb30dbcca870cb26b07ded2f9fd08531532e383"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-568-320-big.png",
+      "bytes": 159771,
+      "sha256": "9f038e347bd56ef133dd2c1f4276b38d038e3c4d575172059bb42a408cac1d4e"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-568-320-normal.png",
+      "bytes": 159799,
+      "sha256": "a6438f2e998212e2dc6c7e9ba37a7708420593070058e7009527b3c5bea3999e"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-568-320.json",
+      "bytes": 3019,
+      "sha256": "0dc61482c871cc5c84aec991cc3e3ddbddcaded78f03c989f7b4d02c356096ce"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-844-390-big.png",
+      "bytes": 275425,
+      "sha256": "1f949cbeec3da12239b62588114b28c725f28d20ed506712f16ed30e552ac554"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-844-390-normal.png",
+      "bytes": 263851,
+      "sha256": "f1ee57a96512ee34b6bde311ccc5ee84694fbcc0317725584ebd7b1b6d61db1a"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-844-390.json",
+      "bytes": 3013,
+      "sha256": "1fe8992f40975494819818d6df0ce169ab00d8b528ed6f29314c032b7360c547"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-960-540-big.png",
+      "bytes": 489500,
+      "sha256": "354c734ea267a0e3ca433f07f779e479b33e9a00c2ee400a11fbcc3f95c91fe7"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-960-540-normal.png",
+      "bytes": 480467,
+      "sha256": "91ab326a7e19ffac1b716aeaeb45f52ffa2910170d99962d9c03de571359102d"
+    },
+    {
+      "path": "maze-move01-matrix-r3/movement/matrix-960-540.json",
+      "bytes": 3007,
+      "sha256": "b6a12afdbf5972ef1326064b83478c55730e57938cac481fd6cea2638a3f8342"
+    },
+    {
+      "path": "maze-move01-matrix-r3/playwright-artifacts/.last-run.json",
+      "bytes": 96,
+      "sha256": "1f0edd4d82d7e0aa39ebd0f8059b83fdc022c1bf2629ae25b304ce3b55bf6029"
+    },
+    {
+      "path": "maze-move01-matrix-r3/playwright-artifacts/movement-review.pw.ts-MOVE-bd100-h-reduced-static-and-resize/error-context.md",
+      "bytes": 13210,
+      "sha256": "747ab4236cf95f195c5ade07f6a50eb8f952b827f201b9be44a5e4cce57690c4"
+    },
+    {
+      "path": "maze-move01-matrix-r3/playwright-artifacts/movement-review.pw.ts-MOVE-bd100-h-reduced-static-and-resize/test-failed-1.png",
+      "bytes": 3335655,
+      "sha256": "8ff8f8661decc903ba22639ed878e43093c8051b91eee465f11abfb9d8dc7967"
+    },
+    {
+      "path": "maze-move01-matrix-r3/playwright-report.json",
+      "bytes": 14768,
+      "sha256": "91c218d576e1fec823d22817dbacc9845a21c1bdd42eb98dafbf2fe8db277d34"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-39-21-824Z/tileTravel.ts",
+      "bytes": 3860,
+      "sha256": "b68a7f2dbe954d83d28cefd679e26f0021e0210dc6ff3688a1d03682989988cb"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-39-36-263Z/comparison.json",
+      "bytes": 4533605,
+      "sha256": "c8a4166f809f549837e8d2a8f2e362ffc495c49a2ed13cf2a642d0985a7cb686"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-39-36-263Z/comparison.md",
+      "bytes": 5503,
+      "sha256": "be2d778a926115fad0d913d6b1d6d4b8dbd843f1c769ec70b448f63df505a953"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-39-36-263Z/movementControls.ts",
+      "bytes": 2086,
+      "sha256": "bf9ed53c19043aa3b52dbc5eb4e1e83d296884f7ae809a56ca5cf359ddcc6b6b"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-39-36-263Z/tileTravel.ts",
+      "bytes": 3860,
+      "sha256": "b68a7f2dbe954d83d28cefd679e26f0021e0210dc6ff3688a1d03682989988cb"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-40-34-212Z/comparison.json",
+      "bytes": 4533640,
+      "sha256": "93abde3ac2cd8f085448c1da07434a4b508caa32452a41279c8311ecb77b1d9c"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-40-34-212Z/comparison.md",
+      "bytes": 5503,
+      "sha256": "aceefd3abd92b6a1273bbde28167f8e4cc9e38e0eb0b8b53451c084f98485f76"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-40-34-212Z/movementControls.ts",
+      "bytes": 2086,
+      "sha256": "bf9ed53c19043aa3b52dbc5eb4e1e83d296884f7ae809a56ca5cf359ddcc6b6b"
+    },
+    {
+      "path": "maze-move01-recipes/2026-09-05T03-40-34-212Z/tileTravel.ts",
+      "bytes": 3860,
+      "sha256": "b68a7f2dbe954d83d28cefd679e26f0021e0210dc6ff3688a1d03682989988cb"
+    },
+    {
+      "path": "maze-move01-touch-r4/movement/touch-dpr2-1194.png",
+      "bytes": 3362728,
+      "sha256": "7728027fa3a9d054f87e66a2a66e0878f81bb733c1a0d8291d242eae32495c8d"
+    },
+    {
+      "path": "maze-move01-touch-r4/movement/touch-dpr2-568.png",
+      "bytes": 496291,
+      "sha256": "77d762b2f8d13b4c0b602243886e19dc90a005a6229739e0d6c8b783f607dcfc"
+    },
+    {
+      "path": "maze-move01-touch-r4/playwright-artifacts/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "path": "maze-move01-touch-r4/playwright-report.json",
+      "bytes": 3152,
+      "sha256": "c1f37be8492aae727661766cd5aa6159e2dc3ccacb1c7ed12fda99e1797557b3"
+    }
+  ]
+}

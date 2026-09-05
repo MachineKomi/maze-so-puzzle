@@ -7,6 +7,16 @@ state.
 
 ## Runtime flow
 
+MOVE-01 adds one presentation-only travel owner in `src/ui/game/useSceneTravel.ts`,
+using the pure orthogonal `TileTraveller` in `src/tileTravel.ts`. It writes CSS
+`translate` through refs, caches ResizeObserver content geometry and exposes a
+rendered scene snapshot to pointer/effect consumers; it never writes engine or
+save state. Sprite poses keep `transform`. Camera clamp/FOV and held input cadence
+remain unchanged. Stable run-local follower identities consume repeated legal
+breadcrumbs from `src/game/followerTrail.ts`, independent of camera visibility.
+The exact boundaries and verification are in
+`reviews/2026-09-05-move01-review.md` and `UI_UX_SPEC.md`.
+
 1. `src/main.tsx` mounts the React application.
 2. `src/App.tsx` owns screen navigation and presents the title, Adventure Book,
    maze board, side panel, dialogs, rewards, accessibility descriptions, and the

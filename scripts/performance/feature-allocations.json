@@ -267,6 +267,20 @@
       "rollbackPoint": "Remove reward rendition bindings and restore approved 256px presentation fallback; retain immutable sources and all versioned files until Plan12 copy-first retirement. Recheck responsive loading and earned detail after any rollback.",
       "dependencies": "Hash-bound ui01-reward-presentation-approval.json; source/optical reproduction and actual-size alpha review; accepted equipment allocation; responsive browser evidence for all29 identities.",
       "notes": "Final ceiling142207 gzip9 JS /30227 CSS /156979636 public bytes. Exact decoded reward upper-bound sum15728640 is not simultaneous residency. Physical/Human and hardware timing remain pending."
+    },
+    {
+      "id": "controls-move01-coordinated-travel-and-corridor-followers",
+      "owner": "controls",
+      "status": "approved",
+      "compressedJsBytes": 2400,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Root authorizes the bounded MOVE-01 presentation clock, swept camera visibility, visual pointer coordinates and stable corridor followers. Reviewed candidate measures 144528 gzip9 JS bytes, 2321 above the accepted UI ceiling; 79 bytes are reserved only for toolchain/platform and release-version compression variation. UI checkpoint Linux CI already demonstrated a 4-byte difference from Windows. No unrelated feature reserve, CSS or media growth is authorized.",
+      "evidencePath": "docs/reviews/2026-09-05-move01-review.md",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Revert the complete MOVE-01 source and integration checkpoint to accepted UI 372e7d983b00ae6ea929ef51fd78988fec0b9672, restoring its CSS travel owner and follower implementation together. Retain save readers and all approved media; do not retain two competing travel owners.",
+      "dependencies": "Accepted Plan01 UI, root-owned MOVE-01 authorization and PT40 cosmetic follow correction; unchanged engine, save, six-tile view and held cadence. The final Linux CI gate and native/WebView journey must pass before release.",
+      "notes": "Total JS ceiling144607. Candidate CSS16238 is 40 bytes below UI; public156979636 is unchanged. Timing remains report-only; family comfort and physical device qualification remain explicit playtest gates."
     }
   ]
 }

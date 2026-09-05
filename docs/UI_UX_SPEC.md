@@ -161,6 +161,33 @@ Root's 09413c1 decision approves `ui-plan01-physical-shell-font`: 4,500 gzip9 JS
 
 ## Scene, coordinates, layers and downstream travel handoff
 
+### Root MOVE-01 contract (supersedes the historical CSS-travel inventory below)
+
+The reviewed UI prerequisite is372e7d9. Root's subsequent implementation uses
+`useSceneTravel`/`TileTraveller` as the sole ordinary travel owner. Its frame
+loop writes individual CSS `translate` on the world, player, replacement battle
+actor, tagged camera anchors and stable follower nodes. Local sprite `transform`
+and presentation clocks remain with their owners. The old120ms camera/player
+and78ms follower positional transitions are removed.
+
+Consumers read the ref snapshot `{position,camera,cameraEnvelope,contentSize,
+followers}`. Content size excludes the board border; pointer origins add
+`clientLeft/clientTop` to the event-time board rectangle. No frame loop measures
+layout. Culling includes the swept pending camera envelope and new logical view;
+fog eligibility remains authoritative. Treasure flight origins capture the
+rendered camera once at the event; the single anchored notice clips against the
+board rather than disappearing at a logical-camera boundary.
+
+Taps112ms; held durations retain260→160ms input cadence and320ms startup pause;
+remaining presentation lag≤280ms after retarget. Path corners are orthogonal.
+Modal/navigation/blur/hidden/resize/unmount settles/cancels; run/portal/jump
+boundaries reset. Reduced retains smooth essential travel; Static settles at
+once. Followers retain stable breadcrumb slots offscreen and gather at explicit
+discontinuities, hiding through jump/portal effects. Engine/save/FOV unchanged.
+See `reviews/2026-09-05-move01-review.md` for exact rules, evidence and pending
+Human comfort. Later04/02/05/08/07B must consume this owner, not revive the
+historical CSS owner described in the original Plan01 handoff.
+
 - Authoritative engine positions, collision, solver, fog/revealed tiles, stationary doors, goal rearm, completion receipts, saves and pointer cardinal intent remain integer GLOBAL tiles.
 - `src/cameraMotion.ts::worldLayerStyle` maps tile x/y to full-level percentages. `cameraWorldStyle` sizes full world by level / camera width and offsets by -camera.left/top / camera width. These files are unchanged.
 - `ui/game/sceneGeometry::cameraLayerStyle` maps actor/transient tile to viewport percentage via (point − camera origin) / camera size. `cameraNoticeStyle` adds centre/.18-tile text anchoring. These are extracted existing formulas.

@@ -63,7 +63,9 @@ import {
   type CameraWindow,
   type TileKey,
 } from "./game/exploration";
-import { getVisibleFollowerPoints, recordFollowerStep } from "./game/followerTrail";
+import { advanceFollowerProcession, createFollowerProcession, followerTargets } from "./game/followerTrail";
+import { useSceneTravel } from "./ui/game/useSceneTravel";
+import { TAP_TRAVEL_MS } from "./tileTravel";
 import { getProgressiveHint, hintStateKey } from "./game/hints";
 import { getRequiredPath } from "./game/reachability";
 import { animalPersonality, enemyPersonality } from "./game/visualPersonality";
@@ -240,6 +242,7 @@ interface TouchCursor {
 interface QueuedMoveIntent {
   readonly direction: Direction;
   readonly lateralOffset: number;
+  readonly travelDurationMs: number;
 }
 
 interface BattlePresentation {
@@ -304,6 +307,7 @@ interface TreasurePresentation {
   readonly currency: "gold" | "science";
   readonly amount: number;
   readonly at: Point;
+  readonly cameraAtStart: CameraWindow;
 }
 
 function prefersReducedMotion(): boolean {
@@ -666,9 +670,12 @@ function App() {
   const [level, setLevel] = useState<LevelDefinition>(initialLevel);
   const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
   const [runId, setRunId] = useState(() => initialRun?.runId ?? createActiveRunId());
-  const [playerTrail, setPlayerTrail] = useState<readonly Point[]>(() => [
-    initialRun?.game.position ?? initialLevel.start,
-  ]);
+  const [procession, setProcession] = useState(() => createFollowerProcession(
+    initialRun?.game.position ?? initialLevel.start, initialRun?.game.rescuedAnimalIds,
+  ));
+  const travelDuration = useRef(TAP_TRAVEL_MS);
+  const nextTravelDuration = useRef(TAP_TRAVEL_MS);
+  const travelEpoch = useRef(0);
   const [runMode, setRunMode] = useState<RunMode>("normal");
   const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(
     () => isExplorationLevel(initialLevel)
@@ -793,13 +800,6 @@ function App() {
     () => level.objects.filter((object) => !isObjectResolved(object, game)),
     [game, level],
   );
-  const worldObjects = useMemo(
-    () => activeObjects.filter((object) => (
-      object.id !== battlePresentation?.objectId
-      && (!explorationMode || isInsideWindow(object.at, cameraWindow))
-    )),
-    [activeObjects, battlePresentation?.objectId, cameraWindow, explorationMode],
-  );
   const animalObjects = useMemo(
     () => level.objects.filter(
       (object): object is Extract<LevelObject, { kind: "animal" }> => object.kind === "animal",
@@ -817,23 +817,13 @@ function App() {
   const mazeLight = lightVector(level);
   const levelStory = useMemo(() => storyForLevel(level.id), [level.id]);
   const followerPlacements = useMemo(() => {
-    const rescuedAnimals = game.rescuedAnimalIds.flatMap((animalId) => {
-      if (animalId === rescuePresentation?.objectId) return [];
-      const animal = animalObjects.find((candidate) => candidate.id === animalId);
-      return animal ? [animal] : [];
+    if(jumpPresentation || portalPresentation) return [];
+    return followerTargets(procession).flatMap(({id,point}) => {
+      if (id === rescuePresentation?.objectId) return [];
+      const animal=animalObjects.find(candidate=>candidate.id===id);
+      return animal ? [{animal,point}] : [];
     });
-    const availableTrail = getVisibleFollowerPoints(
-      playerTrail,
-      game.position,
-      cameraWindow,
-      rescuedAnimals.length,
-    );
-
-    return rescuedAnimals.flatMap((animal, index) => {
-      const point = availableTrail[index];
-      return point ? [{ animal, point }] : [];
-    });
-  }, [animalObjects, cameraWindow, game.position, game.rescuedAnimalIds, playerTrail, rescuePresentation?.objectId]);
+  }, [animalObjects, procession, rescuePresentation?.objectId, jumpPresentation, portalPresentation]);
   const objectKinds = useMemo(() => new Set(level.objects.map((object) => object.kind)), [level]);
   const mazeStatus = useMemo(() => describeMazePosition(level, game), [game, level]);
   const runInProgress = hasActiveRun && (game.status === "playing" || game.status === "won");
@@ -916,6 +906,28 @@ function App() {
     clearDpadHold();
     clearBoardPointer();
   }, [clearBoardPointer, clearDpadHold]);
+
+  const sceneTravel = useSceneTravel({
+    boardRef, grid:level, position:game.position, camera:cameraWindow,
+    followers:followerPlacements.map(({animal,point})=>({id:animal.id,point})),
+    runKey:`${runId}:${travelEpoch.current}`,
+    enabled:screen==="game" && !modalOpen && preferences.quality!=="static",
+    discontinuity:jumpPresentation!==null || portalPresentation!==null,
+    durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
+  });
+
+  const worldObjects = useMemo(() => {
+    // Keep the complete painted/pending path plus the newly committed view.
+    // Visibility still comes from authoritative exploration, not this gutter.
+    const envelope=sceneTravel.current.cameraEnvelope;
+    const left=Math.floor(Math.min(envelope.left,cameraWindow.left))-1;
+    const top=Math.floor(Math.min(envelope.top,cameraWindow.top))-1;
+    const right=Math.ceil(Math.max(envelope.right,cameraWindow.right))+1;
+    const bottom=Math.ceil(Math.max(envelope.bottom,cameraWindow.bottom))+1;
+    return activeObjects.filter(object=>object.id!==battlePresentation?.objectId &&
+      (!explorationMode || (revealedTiles.has(toTileKey(object.at)) &&
+        object.at.x>=left && object.at.x<=right && object.at.y>=top && object.at.y<=bottom)));
+  }, [activeObjects,battlePresentation?.objectId,cameraWindow,explorationMode,revealedTiles]);
 
   const clearPresentationWork = useCallback(() => {
     presentationSequence.current += 1;
@@ -1193,7 +1205,7 @@ function App() {
     setLevel(nextLevel);
     setGame(createInitialGameState(nextLevel));
     setRunId(createActiveRunId());
-    setPlayerTrail([nextLevel.start]);
+    setProcession(createFollowerProcession(nextLevel.start));
     setRevealedTiles(isExplorationLevel(nextLevel)
       ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)
       : new Set());
@@ -1213,6 +1225,8 @@ function App() {
   }, [cancelPresentations, clearHeldInput]);
 
   const attemptMove = useCallback((requestedDirection: Direction, lateralOffset = 0) => {
+    const proposedTravelDuration=nextTravelDuration.current;
+    nextTravelDuration.current=TAP_TRAVEL_MS;
     const unavailable = (
       !inputBlock.gameplayInputAllowed
       || game.status !== "playing"
@@ -1222,7 +1236,7 @@ function App() {
       return;
     }
     if (inputLocked.current) {
-      queuedMove.current = { direction: requestedDirection, lateralOffset };
+      queuedMove.current = { direction: requestedDirection, lateralOffset, travelDurationMs:proposedTravelDuration };
       return;
     }
     queuedMove.current = null;
@@ -1235,6 +1249,9 @@ function App() {
       lastMovedDirection.current,
     );
     const result = movePlayer(level, game, direction);
+    travelDuration.current=proposedTravelDuration;
+    const travelDiscontinuity=result.events.some(event=>event.type==="hole-jumped" || event.type==="portal-warped");
+    if(travelDiscontinuity) travelEpoch.current++;
     const tooStrongEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "enemy-too-strong" }> => event.type === "enemy-too-strong",
     );
@@ -1269,7 +1286,7 @@ function App() {
     }
     if (result.moved) {
       lastMovedDirection.current = direction;
-      setPlayerTrail((trail) => recordFollowerStep(trail, game.position));
+      setProcession(current=>advanceFollowerProcession(current,result.state.position,result.state.rescuedAnimalIds,travelDiscontinuity));
     }
     if (result.moved && explorationMode) {
       setRevealedTiles((revealed) => revealVisibleTiles(
@@ -1311,6 +1328,7 @@ function App() {
           currency: treasureEvent.currency,
           amount: treasureEvent.amount,
           at: treasure.at,
+          cameraAtStart:sceneTravel.current.camera,
         });
         treasureTimer.current = window.setTimeout(() => {
           setTreasurePresentation(null);
@@ -1449,7 +1467,10 @@ function App() {
       inputUnlockTimer.current = undefined;
       const nextMove = queuedMove.current;
       queuedMove.current = null;
-      if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
+      if (nextMove) {
+        nextTravelDuration.current=nextMove.travelDurationMs;
+        attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
+      }
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
   }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
@@ -1482,6 +1503,7 @@ function App() {
         }
         const cadenceStep = advanceHeldMoveCadence(heldKeyCadence.current, direction);
         heldKeyCadence.current = cadenceStep.cadence;
+        nextTravelDuration.current=cadenceStep.nextDelayMs;
         attemptMoveRef.current(direction);
         scheduleHeldMove(cadenceStep.nextDelayMs);
       }, delay);
@@ -1571,12 +1593,14 @@ function App() {
   }, [clearPresentationWork]);
 
   const moveDirectionFromPointer = useCallback((clientX: number, clientY: number, previousDirection: Direction | null = null): PointerIntent | null => {
-    const rect = boardRef.current?.getBoundingClientRect();
-    if (!rect) return null;
-    const cellWidth = rect.width / cameraWindow.width;
-    const cellHeight = rect.height / cameraWindow.height;
-    const centerX = rect.left + (game.position.x - cameraWindow.left + 0.5) * cellWidth;
-    const centerY = rect.top + (game.position.y - cameraWindow.top + 0.5) * cellHeight;
+    const board=boardRef.current;
+    if (!board) return null;
+    const rect=board.getBoundingClientRect();
+    const visual=sceneTravel.current;
+    const cellWidth = visual.contentSize.width / cameraWindow.width;
+    const cellHeight = visual.contentSize.height / cameraWindow.height;
+    const centerX = rect.left+board.clientLeft + (visual.position.x - visual.camera.left + 0.5) * cellWidth;
+    const centerY = rect.top+board.clientTop + (visual.position.y - visual.camera.top + 0.5) * cellHeight;
     return pointerIntentFromTileOffset(
       (clientX - centerX) / cellWidth,
       (clientY - centerY) / cellHeight,
@@ -1611,6 +1635,7 @@ function App() {
       }
       const cadenceStep = advanceHeldMoveCadence(pointerHoldCadence.current, intent.direction);
       pointerHoldCadence.current = cadenceStep.cadence;
+      nextTravelDuration.current=cadenceStep.nextDelayMs;
       attemptMoveRef.current(intent.direction, intent.lateralOffset);
       pointerHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
@@ -1663,7 +1688,9 @@ function App() {
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
     clearBoardPointer();
-    const rect = event.currentTarget.getBoundingClientRect();
+    const borderRect = event.currentTarget.getBoundingClientRect();
+    const rect={left:borderRect.left+event.currentTarget.clientLeft,top:borderRect.top+event.currentTarget.clientTop,
+      width:sceneTravel.current.contentSize.width,height:sceneTravel.current.contentSize.height};
     const origin = { x: event.clientX, y: event.clientY };
     const intent = pointerDirectionRef.current(origin.x, origin.y);
     const direction = intent?.direction ?? null;
@@ -1711,6 +1738,7 @@ function App() {
       }
       const cadenceStep = advanceHeldMoveCadence(dpadHoldCadence.current, direction);
       dpadHoldCadence.current = cadenceStep.cadence;
+      nextTravelDuration.current=cadenceStep.nextDelayMs;
       attemptMoveRef.current(direction);
       dpadHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
@@ -2049,15 +2077,19 @@ function App() {
   const nextMazeLabel = completion?.testerRun
     ? "Next test maze"
     : campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze";
-  const treasureFlightStyle = treasurePresentation ? (() => {
+  const treasureFlightStyle = useMemo(() => {
+    if(!treasurePresentation) return undefined;
     const board = boardRef.current;
     const target = appFrameRef.current?.querySelector<HTMLElement>(`[data-ui-anchor="${treasurePresentation.currency}"]`);
     const shell = appFrameRef.current?.querySelector<HTMLElement>(".play-shell");
     if (!board || !target || !shell) return undefined;
-    return measuredFlight(board.getBoundingClientRect(), target.getBoundingClientRect(), shell.getBoundingClientRect(),
-      (treasurePresentation.at.x - cameraWindow.left + .5) / cameraWindow.width,
-      (treasurePresentation.at.y - cameraWindow.top + .5) / cameraWindow.height) as CSSProperties;
-  })() : undefined;
+    const borderRect=board.getBoundingClientRect();
+    const contentRect={left:borderRect.left+board.clientLeft,top:borderRect.top+board.clientTop,
+      width:sceneTravel.current.contentSize.width,height:sceneTravel.current.contentSize.height};
+    return measuredFlight(contentRect, target.getBoundingClientRect(), shell.getBoundingClientRect(),
+      (treasurePresentation.at.x - treasurePresentation.cameraAtStart.left + .5) / treasurePresentation.cameraAtStart.width,
+      (treasurePresentation.at.y - treasurePresentation.cameraAtStart.top + .5) / treasurePresentation.cameraAtStart.height) as CSSProperties;
+  }, [treasurePresentation]);
   const openSound = (trigger?: HTMLElement) => {
     modalReturnFocus.current = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
     clearHeldInput();
@@ -2220,6 +2252,7 @@ function App() {
                     {followerPlacements.map(({ animal, point }) => (
                       <div
                         className="pet-follower"
+                        data-follower-id={animal.id}
                         data-animal-motion={animalPersonality(animal.species).motion}
                         data-flourish={animalPersonality(animal.species).flourish}
                         style={worldLayerStyle(point, level)}
@@ -2262,6 +2295,7 @@ function App() {
                 <div
                   data-scene-slot="effects"
                   className={`door-opening-presentation door-magic-${doorOpeningPresentation.color}`}
+                  data-travel-camera-anchor=""
                   data-key-color={doorOpeningPresentation.color}
                   data-sfx-cue="colour-lock-chime-and-magic-burst"
                   style={{
@@ -2309,17 +2343,18 @@ function App() {
                     "--power-flight-y": `${(battlePresentation.from.y - battlePresentation.at.y) * 100}%`,
                   } as CSSProperties}
                 >
-                  <div className="battle-combatant battle-ame" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
+                  <div className="battle-combatant battle-ame" data-travel-actor="replacement" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
                     <CatalogueImage usage="field" className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
                     {game.hasSword && <CatalogueImage usage="field" className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                   </div>
-                  <div className="battle-combatant battle-enemy" style={cameraLayerStyle(battlePresentation.at, cameraWindow)}>
+                  <div className="battle-combatant battle-enemy" data-travel-camera-anchor="" style={cameraLayerStyle(battlePresentation.at, cameraWindow)}>
                     <CatalogueImage usage="field" className="battle-sprite" src={battlePresentation.enemySrc} alt="" draggable={false} />
                     <span className="power-badge enemy-power">{presentedEnemyPower ?? battlePresentation.enemyPower}</span>
                   </div>
                   <div
                     className="battle-impact"
+                    data-travel-camera-anchor=""
                     style={cameraLayerStyle({
                       x: (battlePresentation.from.x + battlePresentation.at.x) / 2,
                       y: (battlePresentation.from.y + battlePresentation.at.y) / 2,
@@ -2332,6 +2367,7 @@ function App() {
                   </div>
                   <span
                     className="battle-power-transfer"
+                    data-travel-camera-anchor=""
                     style={cameraLayerStyle(battlePresentation.at, cameraWindow)}
                   >
                     {Array.from({ length: Math.max(3, battlePresentation.clashCount * 2) }, (_, index) => (
@@ -2348,6 +2384,7 @@ function App() {
                 <div
                   data-scene-slot="effects"
                   className="rescue-presentation"
+                  data-travel-camera-anchor=""
                   data-animal-motion={animalPersonality(rescuePresentation.species).motion}
                   data-flourish={animalPersonality(rescuePresentation.species).flourish}
                   data-sfx-cue="cage-pop-and-friend-cheer"
@@ -2369,6 +2406,7 @@ function App() {
                 <div
                   data-scene-slot="effects"
                   className="jump-presentation"
+                  data-travel-camera-anchor=""
                   data-sfx-cue="spring-boots-boing"
                   data-hole-count={jumpPresentation.holeCount}
                   style={{
@@ -2396,6 +2434,7 @@ function App() {
                 <div
                   data-scene-slot="effects"
                   className={`portal-presentation portal-${portalPresentation.pair}`}
+                  data-travel-camera-anchor=""
                   style={cameraLayerStyle(portalPresentation.to, cameraWindow)}
                   data-sfx-cue="magic-flower-whoosh"
                   aria-hidden="true"
@@ -2422,9 +2461,10 @@ function App() {
                 <span className="power-badge player-power">{displayedPower}</span>
               </div>
 
-              {mapPickupToast && (!mapPickupToast.at || isInsideWindow(mapPickupToast.at, cameraWindow)) && (
+              {mapPickupToast && (
                 <div
                   className={`map-pickup-toast notice-${mapPickupToast.kind ?? "pickup"}${mapPickupToast.at ? " notice-anchored" : ""}`}
+                  data-travel-camera-anchor={mapPickupToast.at ? "" : undefined}
                   key={mapPickupToast.id}
                   role="status"
                   aria-live="polite"

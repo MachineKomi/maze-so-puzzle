@@ -1,5 +1,15 @@
 # Performance budgets and evidence contract
 
+## Root MOVE-01 allocation — 2026-09-05
+
+`reviews/2026-09-05-move01-review.md` records the travel/follower candidate and
+report-only comparisons. Gzip9 JS144528/CSS16238/public156979636; the reviewed
+controls allocation of 2400 JS / 0 CSS / 0 public bytes sets JS ceiling144607.
+Of this, 2321 is measured feature growth and 79 is bounded platform/release-version
+compression variation. UI Linux CI measured142211 JS versus Windows142207 and
+failed by4 bytes; that historical run is not relabelled passed. Final source CI
+must pass. No timing threshold is promoted and no runtime media is added.
+
 Status: Pass 07A measurement infrastructure, 2026-09-02. Timing thresholds are
 provisional and report-only. Deterministic fixture and byte non-regression
 checks are active.

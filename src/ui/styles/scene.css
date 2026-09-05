@@ -25,18 +25,15 @@
   z-index: 9;
   overflow: visible;
   animation: none;
-  transition: left 120ms cubic-bezier(0.2, 0.72, 0.25, 1),
-    top 120ms cubic-bezier(0.2, 0.72, 0.25, 1);
-  will-change: left, top;
+  /* MOVE-01 owns translate; pose keyframes retain transform. */
+  transition: none;
 }
 .camera-world {
   position: absolute;
   z-index: 0;
   overflow: visible;
   pointer-events: none;
-  transition: left 120ms cubic-bezier(0.2, 0.72, 0.25, 1),
-    top 120ms cubic-bezier(0.2, 0.72, 0.25, 1);
-  will-change: left, top;
+  transition: none;
 }
 .maze-board.portal-active .camera-world {
   transition: none;
@@ -623,8 +620,7 @@
   place-items: end center;
   overflow: visible;
   pointer-events: none;
-  transition: left 78ms ease-out,
-    top 78ms ease-out;
+  transition: none;
 }
 .pet-follower-image {
   object-fit: contain;

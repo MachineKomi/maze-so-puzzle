@@ -1,52 +1,45 @@
-import type { CameraWindow } from "./exploration";
 import type { Point } from "./types";
 
 export const MAX_FOLLOWER_TRAIL_LENGTH = 24;
 
-function pointKey(point: Point): string {
-  return `${point.x},${point.y}`;
+export interface FollowerProcession {
+  readonly trail: readonly Point[];
+  readonly steps: number;
+  readonly slots: readonly { readonly id: string; readonly joinedAt: number }[];
 }
 
-function pointsEqual(left: Point, right: Point): boolean {
-  return left.x === right.x && left.y === right.y;
+export function createFollowerProcession(point: Point, ids: readonly string[] = []): FollowerProcession {
+  return {trail:[point],steps:0,slots:ids.map(id=>({id,joinedAt:0}))};
 }
 
-function isInsideWindow(point: Point, camera: CameraWindow): boolean {
-  return point.x >= camera.left
-    && point.x <= camera.right
-    && point.y >= camera.top
-    && point.y <= camera.bottom;
-}
-
-/** Record the square Ame just left, keeping a short loop-free breadcrumb trail. */
+/** Preserve repeated visits: removing them can cut across a different corridor. */
 export function recordFollowerStep(
   trail: readonly Point[],
-  previousPosition: Point,
+  point: Point,
 ): readonly Point[] {
-  return [
-    previousPosition,
-    ...trail.filter((point) => !pointsEqual(point, previousPosition)),
-  ].slice(0, MAX_FOLLOWER_TRAIL_LENGTH);
+  return [point,...trail].slice(0,MAX_FOLLOWER_TRAIL_LENGTH);
 }
 
-/** Pick distinct visible footprints for rescued pets, nearest friend first. */
-export function getVisibleFollowerPoints(
-  trail: readonly Point[],
-  playerPosition: Point,
-  camera: CameraWindow,
-  count: number,
-): readonly Point[] {
-  const seen = new Set<string>();
-  const result: Point[] = [];
+/** Run-local cosmetic history only; engine IDs remain authoritative and sorted. */
+export function advanceFollowerProcession(
+  current: FollowerProcession, point: Point, ids: readonly string[], discontinuity=false,
+): FollowerProcession {
+  const order=[...current.slots.map(s=>s.id),...ids.filter(id=>!current.slots.some(s=>s.id===id))];
+  if (discontinuity) return createFollowerProcession(point,order);
+  const previous=current.trail[0]!;
+  const moved=point.x!==previous.x || point.y!==previous.y;
+  const steps=current.steps+(moved ? 1 : 0);
+  return {
+    trail:moved ? recordFollowerStep(current.trail,point) : current.trail,
+    steps,
+    slots:order.map(id=>current.slots.find(slot=>slot.id===id) ?? {id,joinedAt:steps}),
+  };
+}
 
-  for (const point of trail) {
-    if (result.length >= count) break;
-    if (pointsEqual(point, playerPosition) || !isInsideWindow(point, camera)) continue;
-    const key = pointKey(point);
-    if (seen.has(key)) continue;
-    seen.add(key);
-    result.push(point);
-  }
-
-  return result;
+/** Assign identity before clipping. New/resumed friends gather, then unspool. */
+export function followerTargets(current: FollowerProcession): readonly {id:string;point:Point}[] {
+  return current.slots.map((slot,index)=>({
+    id:slot.id,
+    point:current.trail[Math.min(index+1,current.steps-slot.joinedAt)] ?? current.trail.at(-1)!,
+  }));
 }
