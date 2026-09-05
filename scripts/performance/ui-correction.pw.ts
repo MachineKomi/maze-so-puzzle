@@ -65,9 +65,11 @@ async function startRecording(page: Page, lightweight = false) {
       const box = element.getBoundingClientRect();
       return { x: box.x, y: box.y, width: box.width, height: box.height };
     };
-    const translate = (element: HTMLElement) => {
+    const translate = (element: HTMLElement, reference = { width: 0, height: 0 }) => {
       const values = (light ? element.style.translate : getComputedStyle(element).translate).split(" ");
-      return { x: parseFloat(values[0]!) || 0, y: parseFloat(values[1]!) || 0 };
+      const pixels = (value: string | undefined, dimension: number) =>
+        (parseFloat(value ?? "0") || 0) * (value?.endsWith("%") ? dimension / 100 : 1);
+      return { x: pixels(values[0], reference.width), y: pixels(values[1], reference.height) };
     };
     let fixed: {size:number;board:Rectangle;hud:Rectangle}|undefined;
     const sample = (frameTime?: number) => {
@@ -79,7 +81,12 @@ async function startRecording(page: Page, lightweight = false) {
         const cols = Number(board.style.getPropertyValue("--grid-size"));
         fixed ??= {size:(parseFloat(getComputedStyle(board).width)-board.clientLeft*2)/cols,board:rect(board),hud:rect(hud)};
         const size = light ? fixed.size : (parseFloat(getComputedStyle(board).width) - board.clientLeft * 2) / cols;
-        const w = translate(world), p = translate(player);
+        // Individual translate percentages use the full world's own box, not
+        // the viewport. Keep pixel probes compatible with the fixed-origin world.
+        const w = translate(world, {
+          width: parseFloat(world.style.width) * cols * size / 100,
+          height: parseFloat(world.style.height) * cols * size / 100,
+        }), p = translate(player);
         const logicalCamera = { x: -parseFloat(world.style.left) * cols / 100, y: -parseFloat(world.style.top) * cols / 100 };
         const logical = { x: parseFloat(player.style.left) * cols / 100 + logicalCamera.x, y: parseFloat(player.style.top) * cols / 100 + logicalCamera.y };
         const at = performance.now();

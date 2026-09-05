@@ -1,0 +1,540 @@
+{
+  "schema": "maze-family-preview-manifest/v1",
+  "version": "0.22.2",
+  "preview": "V22-CAMERA1",
+  "status": "TECHNICALLY_VERIFIED_EXPERIMENTAL_CAMERA_PREVIEW",
+  "preparedAtUtc": "2026-09-05T23:02:08.496Z",
+  "runtimeSourceCommit": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+  "acceptedRuntimeCommit": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+  "reviewAuthority": {
+    "model": "GPT-5.6 Sol High",
+    "reviewedSource": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "decision": "Approved bounded experimental promotion subject to completed native/delivery gates; physical iPad efficacy remains open",
+    "record": "docs/reviews/2026-09-05-v22-perf02-camera-preview.md",
+    "finalReview": "Actual delegated Sol source/evidence and release-contract reviews recorded in later publication receipt; no invented separate review commit"
+  },
+  "recordedMainBeforePromotion": "05c8da441f9fb4a42692bd5485204c3148e7a321",
+  "packagingDocumentationCommit": "Recorded by the later immutable publication receipt.",
+  "content": "No engine/content/fingerprint/art/audio/input-cadence or save change. Existing progress schema v6 and active-run v3 are unchanged.",
+  "portable": {
+    "file": "Maze-so-Puzzle-0.22.2-V22-CAMERA1-820ed39-locked-portable.exe",
+    "bytes": 173379584,
+    "sha256": "e6753a7a62ad2f6f8525154b578b3ac3068342b52f795779f01d2391288ea7e9",
+    "fileVersion": "0.22.2",
+    "productVersion": "0.22.2",
+    "machine": "0x8664",
+    "architecture": "x86-64",
+    "mzAndPeSignaturesVerified": true,
+    "signatureStatus": "NotSigned",
+    "sourceStageFinal": [
+      {
+        "path": "C:/GameDev/maze-game-v0221-release/src-tauri/target/release/maze-so-puzzle.exe",
+        "bytes": 173379584,
+        "sha256": "e6753a7a62ad2f6f8525154b578b3ac3068342b52f795779f01d2391288ea7e9"
+      },
+      {
+        "path": "C:/GameDev/maze-game-qa/releases/v0222/Maze-so-Puzzle-0.22.2-V22-CAMERA1-820ed39-locked-portable.exe",
+        "bytes": 173379584,
+        "sha256": "e6753a7a62ad2f6f8525154b578b3ac3068342b52f795779f01d2391288ea7e9"
+      },
+      {
+        "path": "C:/GameDev/maze-game-v22-perf02-camera-origin/release/Maze-so-Puzzle-0.22.2-V22-CAMERA1-820ed39-locked-portable.exe",
+        "bytes": 173379584,
+        "sha256": "e6753a7a62ad2f6f8525154b578b3ac3068342b52f795779f01d2391288ea7e9"
+      }
+    ],
+    "installerEmitted": false
+  },
+  "build": {
+    "command": "node node_modules/@tauri-apps/cli/tauri.js build --no-bundle --ci -- --locked",
+    "dependencyPreparation": "Isolated npm ci checkout; locked Cargo; reused prior native target build cache, not prior frozen release artifacts; serial build jobs=1",
+    "toolVersions": {
+      "node": "v24.13.1",
+      "npm": "11.8.0",
+      "cargo": "1.96.0",
+      "rustc": "1.96.0",
+      "playwright": "1.62.1 external, no repository dependency changes"
+    },
+    "provenance": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-05T22:43:55.405Z",
+      "commit": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+      "runtimeInputsSha256": "8dc7519bfbd91fa24ea3e4b0df962df37b75a03ca6de3aa5331e5d56766d7b17",
+      "distFingerprintSha256": "b7a3a502949f4644c840b81830e94b57dad5dd9bcfeb2dc4ac01dc7d884e30fe",
+      "buildCommand": "npm run build"
+    },
+    "cleanSource": true,
+    "sources": [
+      {
+        "path": "docs/ARCHITECTURE.md",
+        "bytes": 41577,
+        "sha256": "23d19d521a75d3affbf1e587b9cb4073b98db82a81fb8375718150c7e9fbb29f"
+      },
+      {
+        "path": "docs/UI_UX_SPEC.md",
+        "bytes": 44064,
+        "sha256": "3b9ddf4532dbdc945f2fcdcb0a8cf05e1eae30536532698b413cf1dd3fbaf80f"
+      },
+      {
+        "path": "docs/reviews/2026-09-05-v22-perf02-camera-evidence.json",
+        "bytes": 8696,
+        "sha256": "950580c62fa63390951d48d38005970ca52427077e8ac48feee077cd9b0b14f0"
+      },
+      {
+        "path": "docs/reviews/2026-09-05-v22-perf02-camera-preview.md",
+        "bytes": 6502,
+        "sha256": "8862f78580bb7b7e6d9688e98692e85e7ba12df28af60f51c84699f847272714"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 63378,
+        "sha256": "f6901271d6346caa1ea944d2eebfb655be21eeab2d59a0ebe17b3503db0fb8d8"
+      },
+      {
+        "path": "package.json",
+        "bytes": 3031,
+        "sha256": "99bf4a6d3af211809a895bd365e5e6f59c45db73617fbf9842e5daf554e8bac4"
+      },
+      {
+        "path": "scripts/performance/v22-input.pw.ts",
+        "bytes": 42644,
+        "sha256": "c3cf100a6bdaeaa850bcd10969b2ccb4bedc10203f158a3965b1ea29db9edff2"
+      },
+      {
+        "path": "src-tauri/Cargo.lock",
+        "bytes": 114664,
+        "sha256": "4a308766ccc851c939fb5e2958f85128cbf969d769e5f60d4f04d763b28a73f1"
+      },
+      {
+        "path": "src-tauri/Cargo.toml",
+        "bytes": 409,
+        "sha256": "c8f6022f820dbe1ae95abd4b05a99f65d451bacbc98974ccb1310b04e164f380"
+      },
+      {
+        "path": "src-tauri/tauri.conf.json",
+        "bytes": 1638,
+        "sha256": "ebdd3faf391866fa6b7b4c5b60001c9a39e6277476a5cd54648e924399874299"
+      },
+      {
+        "path": "src/cameraMotion.test.ts",
+        "bytes": 3241,
+        "sha256": "84763914e9db2dfec0e8712b023f9c665cfac239ce3103e96c964837a3250aa1"
+      },
+      {
+        "path": "src/cameraMotion.ts",
+        "bytes": 1382,
+        "sha256": "4f432b58694282515a5677c1c50a7979a00bd45a70ae6a186ee38f169a39ac73"
+      },
+      {
+        "path": "src/ui/game/useSceneTravel.ts",
+        "bytes": 8469,
+        "sha256": "bddd28df83934956053740fdd8030320a3b0a97e7ad95207ad53eef0bdf0d3d6"
+      },
+      {
+        "path": "src/ui/version.ts",
+        "bytes": 116,
+        "sha256": "fd0e804a22a85c3e57103c899111d70d93cbb1789809593f2877c405655f0d12"
+      }
+    ],
+    "entryHtml": "Committed LF bytes verified before native build; canonical raw HTML/JS/CSS compared to the same final dist without normalization",
+    "staticBudgets": {
+      "jsGzip9Bytes": 153274,
+      "jsLimit": 153307,
+      "jsHeadroom": 33,
+      "cssGzip9Bytes": 23512,
+      "cssLimit": 30227,
+      "publicDeliveryBytes": 164988031,
+      "publicLimit": 164988031,
+      "newAllocation": false
+    }
+  },
+  "checks": {
+    "project": {
+      "command": "npm test -- --maxWorkers=1",
+      "passed": 499,
+      "files": 49,
+      "durationSeconds": 100.68,
+      "evidence": "Observed successful exact-frozen-source command output in orchestrator task; no standalone raw project JSON report was emitted"
+    },
+    "typescriptAndProductionBuild": "passed",
+    "performanceContracts": "passed",
+    "desktop": "cargo check --locked and optimized no-bundle native build passed",
+    "productionAudit": "0 vulnerabilities",
+    "diffCheck": "passed",
+    "input": "Final selected run 18 passes / 1 Playwright clock-setup failure; unchanged isolated rerun 1/1 pass. Not a single 19/19 run.",
+    "cameraGeometry": "96 mount/return/resize samples and 76 moving samples, zero sampled violations; 20-step final route zero world left/top mutations.",
+    "visual": "24 baseline/candidate title/Home/five-follower-maze captures across four viewports; geometry regression check, not pixel equivalence or device qualification.",
+    "canonical": {
+      "startTime": "2026-09-05T23:01:00.925Z",
+      "duration": 30705.063,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "canonicalObserverCorrection": "First canonical run5/6: old observer read percentage world offsets as pixels. Corrected test-only percentage conversion, unchanged assertion tolerances/runtime; complete rerun6/6. Corrected observer hash recorded above and committed separately from frozen runtime."
+  },
+  "ci": {
+    "runId": 33997389203,
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33997389203",
+    "headSha": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 101390186898,
+        "name": "verify",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33997389203/job/101390186898"
+      },
+      {
+        "id": 101390186964,
+        "name": "desktop",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33997389203/job/101390186964"
+      }
+    ]
+  },
+  "web": {
+    "canonicalUrl": "https://maze-so-puzzle.vercel.app/",
+    "verifiedAtUtc": "2026-09-05T23:01:37.382Z",
+    "allBytesMatch": true,
+    "files": [
+      {
+        "path": "/",
+        "status": 200,
+        "bytes": 1070,
+        "sha256": "2fe4549b873375130cd75fbc0ec69fc564f6d83bc8fec0094dee36b6026c740f",
+        "localSha256": "2fe4549b873375130cd75fbc0ec69fc564f6d83bc8fec0094dee36b6026c740f",
+        "match": true
+      },
+      {
+        "path": "/assets/index-Crk0m1JT.js",
+        "status": 200,
+        "bytes": 563765,
+        "sha256": "22507ba86f72b08ce949e8b300d68de9f47845b6e9d7fe6580d2d473573c6965",
+        "localSha256": "22507ba86f72b08ce949e8b300d68de9f47845b6e9d7fe6580d2d473573c6965",
+        "match": true
+      },
+      {
+        "path": "/assets/index-B5gBig9q.css",
+        "status": 200,
+        "bytes": 116102,
+        "sha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "localSha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "match": true
+      }
+    ],
+    "statuses": [
+      {
+        "id": 53612131445,
+        "state": "success",
+        "context": "Vercel",
+        "url": "https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/2BdmrPnd1rho9P1Agcj9WJHxgaLR"
+      }
+    ],
+    "deployments": [
+      {
+        "id": 6286775028,
+        "sha": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+        "environment": "Production",
+        "statuses": [
+          {
+            "id": 17881518034,
+            "state": "success",
+            "url": "https://maze-so-puzzle-l2nsn6luo-jasons-projects-6714ffa7.vercel.app"
+          }
+        ]
+      },
+      {
+        "id": 6286627501,
+        "sha": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+        "environment": "Preview",
+        "statuses": [
+          {
+            "id": 17881136341,
+            "state": "success",
+            "url": "https://maze-so-puzzle-47j5s0pyh-jasons-projects-6714ffa7.vercel.app"
+          }
+        ]
+      }
+    ]
+  },
+  "native": {
+    "status": "pass",
+    "source": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "version": "152.0.4191.62",
+    "profile": "new isolated synthetic test profile, no user profile copied or edited",
+    "normalExitTwice": true,
+    "records": [
+      {
+        "name": "01-native-title",
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle\nPlay\nExit\nv0.22.2",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "geometry": {
+          "origin": [
+            "0%",
+            "0%"
+          ],
+          "camera": [
+            5,
+            4
+          ],
+          "player": [
+            7,
+            6
+          ],
+          "steps": "5 steps"
+        }
+      },
+      {
+        "name": "02-native-maze2",
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\nHEART\n2\n\nAme is at column 8, row 7. Up: caged fox. Right: wall. Down: open path. Left: wall.\n\nFind the sword and Rose Heart Key!\nStory maze 2 of 16\nShiny Sword\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n5 steps\nRight now\n\nFind the sword and Rose Heart Key!\n\nHint\nMy map\n35%\nNow\nExplored\nMystery\n\nAme is at column 8, row 7. The exit has not been discovered yet. Discovered landmarks: caged fox at column 8, row 6; comet spear at column 10, row 6; rose heart key at column 6, row 8.\n\nFriends\n0/2\nOptional\nAdventure bag\n0/2\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "geometry": {
+          "origin": [
+            "0%",
+            "0%"
+          ],
+          "camera": [
+            5,
+            5
+          ],
+          "player": [
+            7,
+            7
+          ],
+          "steps": "6 steps"
+        }
+      },
+      {
+        "geometry": {
+          "origin": [
+            "0%",
+            "0%"
+          ],
+          "camera": [
+            5,
+            4
+          ],
+          "player": [
+            7,
+            6
+          ],
+          "steps": "7 steps"
+        }
+      },
+      {
+        "geometry": {
+          "origin": [
+            "0%",
+            "0%"
+          ],
+          "camera": [
+            5,
+            5
+          ],
+          "player": [
+            7,
+            7
+          ],
+          "steps": "8 steps"
+        }
+      },
+      {
+        "name": "03-native-scrolling",
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\nHEART\n2\n\nAme is at column 8, row 8. Up: open path. Right: open path. Down: open path. Left: wall.\n\nFind the sword and Rose Heart Key!\nStory maze 2 of 16\nShiny Sword\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n8 steps\nRight now\n\nFind the sword and Rose Heart Key!\n\nHint\nMy map\n35%\nNow\nExplored\nMystery\n\nAme is at column 8, row 8. The exit has not been discovered yet. Discovered landmarks: caged fox at column 8, row 6; comet spear at column 10, row 6; rose heart key at column 6, row 8.\n\nFriends\n0/2\nOptional\nAdventure bag\n0/2\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "normalOsWindowClose": true
+      },
+      {
+        "geometry": {
+          "origin": [
+            "0%",
+            "0%"
+          ],
+          "camera": [
+            5,
+            5
+          ],
+          "player": [
+            7,
+            7
+          ],
+          "steps": "8 steps"
+        }
+      },
+      {
+        "name": "04-native-reopened",
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\nHEART\n2\n\nAme is at column 8, row 8. Up: open path. Right: open path. Down: open path. Left: wall.\n\nFind the sword and Rose Heart Key!\nStory maze 2 of 16\nShiny Sword\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n8 steps\nRight now\n\nFind the sword and Rose Heart Key!\n\nHint\nMy map\n35%\nNow\nExplored\nMystery\n\nAme is at column 8, row 8. The exit has not been discovered yet. Discovered landmarks: caged fox at column 8, row 6; comet spear at column 10, row 6; rose heart key at column 6, row 8.\n\nFriends\n0/2\nOptional\nAdventure bag\n0/2\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "normalOsWindowClose": true
+      }
+    ],
+    "errors": [],
+    "limits": [
+      "No native timing qualification",
+      "No physical iPad/Safari evidence",
+      "Unchanged minimum-window configuration not requalified in this smoke",
+      "No signing/installer/clean-machine qualification"
+    ],
+    "closeMethod": "Normal OS Alt+F4 through observed Computer Use window selection, twice; not the title Exit button",
+    "titleExit": "Not qualified: closes web content but leaves native window. Both failed attempts retained; separate follow-up accepted by Sol as nonblocking for this camera experiment."
+  },
+  "profile": {
+    "identifier": "com.ame.mazesopuzzle.preview.fpui1",
+    "smokeIsolation": "New synthetic WebView2 profile; no Human profile copied or modified",
+    "privateRawProfilePublished": false
+  },
+  "evidence": [
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/portable-stage.json",
+      "bytes": 1253,
+      "sha256": "5738658a9c8fa37a622b84214b6e4b9cbdd2cfb3c19c870e8d4502cbc591b64f"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/native-summary.json",
+      "bytes": 4513,
+      "sha256": "27a3c0721011dbe96be9fd1894fb4ef94964387736820aa77dbe80358e2dbc44"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/native-attempt01.json",
+      "bytes": 555,
+      "sha256": "1e137b4ea40ef800b7764f641ac2002a13516ddda788f90cb57a7fccce6f4fef"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/native-attempt02.json",
+      "bytes": 581,
+      "sha256": "1e86d05812c1db47b89836d5451f234ce6438a9014b6bef44b40c6f107850fa6"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/web-verification.json",
+      "bytes": 31623,
+      "sha256": "5c93b0011445c947dd8ef059534adda13c9c76ad8c05e73054e6400ef981cf9a"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/canonical/playwright-results.json",
+      "bytes": 12775,
+      "sha256": "3b1c6eecbc378647afe7677e7c5be7f65090d7634e0d74b6c716d5dbc780ffd3"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/canonical-r2/playwright-results.json",
+      "bytes": 8655,
+      "sha256": "0f1b0a4a03cf74f6e0aafad05fe498a15f68893bf56021fc785c83189a456ebc"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/canonical-r2/ui-correction/first-tap-frames.json",
+      "bytes": 29263,
+      "sha256": "a08d1db4ef6094c152298fca3bf7b3c86278a678575a522b8d30f9ae83044ee0"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/canonical-r2/ui-correction/first-hold-frames.json",
+      "bytes": 69509,
+      "sha256": "009974b11f350bb151d0dfc2d570402451c26ce1226b14c095578c957a8d6565"
+    },
+    {
+      "path": "C:/maze-game/scripts/performance/ui-correction.pw.ts",
+      "bytes": 53799,
+      "sha256": "e29c27516efd018ad6e6fd189d3ffec67d30ad3038b2c29f989e4767f138c260"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/native-smoke.mjs",
+      "bytes": 7370,
+      "sha256": "fbe44b93184294529380d92565f4352b874deafa0733f3a251820ae8923c5f0e"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/01-native-title.png",
+      "bytes": 1446233,
+      "sha256": "9aed7739696268a3c4e2d8493825a422388f263d66548618b028bb64ea17bb60"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/02-native-maze2.png",
+      "bytes": 779118,
+      "sha256": "021cc04ab71ca4e10183034d2e574d49fff6c693e794e0fd1bd923ee4818ac65"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/03-native-scrolling.png",
+      "bytes": 773085,
+      "sha256": "e67f36e96886a9828bd7b9fd0bc13d803c59e0b959183ca1e0b2746b172187a6"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0222/04-native-reopened.png",
+      "bytes": 772095,
+      "sha256": "965fbb57e6715d777e72e284659bf8fa6058b2df4cc858fc5a5c007fddf93d2e"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-percent-mount.json",
+      "bytes": 31759,
+      "sha256": "6aa5769b4aa08a3a035642a78fc582b019709dd6808d1631eab4624698b98343"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-percent-geometry.json",
+      "bytes": 31698,
+      "sha256": "9833dfb006dc636775ea64b586660ae2142688d7ce516665049c14efe1cedb0c"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/candidate-percent-scroll.json",
+      "bytes": 5982,
+      "sha256": "a612f7d1efe18b9abcd04d899b0d7164b166a5facaea25838319962e8269c94f"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/input-percent/playwright-results.json",
+      "bytes": 45717,
+      "sha256": "384afa8f7c72c05f14ea6ab49d64543dd0e2d14fcf7c047cf69141728a8d66ed"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/input-percent-hidden-r2/playwright-results.json",
+      "bytes": 3858,
+      "sha256": "f32da40d75a6a59da8ebf0c249fdb7a657661cd379f03eaaa8d906b058711e24"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/output/playwright/perf02/visual-percent/summary.json",
+      "bytes": 123248,
+      "sha256": "fef08b83711987ea1af324c15243a550621fb6ba4f355440eceb6c42fd5a9472"
+    }
+  ],
+  "retainedLimitations": [
+    "Minimum graphics helped the physical iPad only slightly in v0.22.1. No v0.22.2 iPad result yet.",
+    "Measured LayoutCount did not improve; busy-host frame timings are report-only and do not prove iPad benefit.",
+    "Earlier route/parser/clock/solver-contention failures are retained in the source review; no test timeouts or geometry tolerances increased.",
+    "Pace modes, stationary rescues, Tessera repair, phone UI and audio readiness are not included.",
+    "No sustained native timing, signing, installer, offline, clean-machine, physical iPad/TV/controller or family acceptance.",
+    "Title Exit leaves an empty native window; normal OS window close/save/reopen verified. Separate UI-NATIVE-EXIT-01 follow-up, not fixed here."
+  ],
+  "publication": {
+    "status": "FROZEN_BEFORE_GITHUB_UPLOAD",
+    "tag": "v0.22.2",
+    "tagTarget": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "releaseUrl": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.2",
+    "assetCount": 4,
+    "note": "Later receipt binds documentation commit and independently verified downloads; do not rewrite this manifest."
+  },
+  "rollback": {
+    "runtime": "8442b79db11a59e23f23c59f213116e7b8f54592",
+    "release": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1",
+    "instructions": "Close preview normally before switching; preserve private profile backup and immutable artifacts. Canonical URL moves; coordinate reviewed redeploy/revert, never reset shared history."
+  }
+}
