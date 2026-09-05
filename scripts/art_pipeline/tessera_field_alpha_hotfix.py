@@ -47,7 +47,11 @@ OLD_RUNTIME_SHA256 = "33ca2f6baeba27d42f0a331f3b973dff43d4fa9e8da6325b0d026a4ad4
 RUNTIME = Path("public/assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r02.webp")
 RECORD_ID = "tessera-dolphin-field-alpha-recovery-r02-source"
 RECORD = ROOT / f"docs/source-assets/records/{RECORD_ID}.json"
-REPORT = ROOT / "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-candidate.json"
+CANDIDATE_REPORT = ROOT / "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-candidate.json"
+CANDIDATE_REPORT_SHA256 = "4b2fee38e93a1a54f993796dfb505df8cf4ce5b80fa3857e22c7e04548496966"
+APPROVAL = ROOT / "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-approval.json"
+APPROVAL_SHA256 = "9ddbe7e3b38acc8919635954691e42cc6d0d5fafe8c0214a21260e3e3b944db1"
+REPORT = ROOT / "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-publication.json"
 PROOF = ROOT / "artifacts/art-proofs/art-hotfix-01/tessera-field-r01-r02-actual-size.png"
 AUTHORED_CAGE = ROOT / "public/assets/mgjrpg-02/cages/moon-silver-v02-structure-field-256-r01.webp"
 AUTHORED_CAGE_SHA256 = "c386a763ea4b215ece1abcf2d73bd851a2de204decbbb713cfd7f3fc83517942"
@@ -69,6 +73,8 @@ def write_json_lf(path: Path, value: dict) -> None:
 def verify_inputs() -> None:
     checks = (
         (AUTHORITY, AUTHORITY_SHA256, None),
+        (APPROVAL, APPROVAL_SHA256, None),
+        (CANDIDATE_REPORT, CANDIDATE_REPORT_SHA256, None),
         (RECOVERY_APPROVAL, RECOVERY_APPROVAL_SHA256, None),
         (MASTER, MASTER_SHA256, MASTER_BYTES),
         (ROOT / OLD_RUNTIME, OLD_RUNTIME_SHA256, 44362),
@@ -178,7 +184,7 @@ def build_record(facts: dict, geometry: dict, encoder: dict) -> dict:
     record.update(
         recordId=RECORD_ID,
         runtimeStatus="active",
-        approvalStatus="candidate",
+        approvalStatus="approved",
         derivativeRecipeVersion="tessera-bounded-coral-alpha-recovery-field-r02",
         geometry=geometry,
     )
@@ -229,10 +235,17 @@ def build_record(facts: dict, geometry: dict, encoder: dict) -> dict:
         "script": SCRIPT,
         "description": "Re-register the exact approved bounded alpha-recovery delivery master at the established 256px friend-field target, then apply the existing low-alpha cleanup, component filter, hidden-RGB dilation, visible-black normalization and lossless WebP encoding. No classification, painting, generation, or identity change.",
     }]
-    record.pop("approvalEvidence", None)
+    approval = read_json(APPROVAL)
+    record["approvalEvidence"] = {
+        "approvedBy": approval["approvedBy"],
+        "approvedAt": approval["approvedAt"],
+        "scope": "runtime-publish",
+        "evidencePath": APPROVAL.relative_to(ROOT).as_posix(),
+        "evidenceSha256": APPROVAL_SHA256,
+    }
     record["knownUnknowns"] = [
         *record["knownUnknowns"],
-        "Affected-iPad and family observations are deferred acceptance evidence, not a development or release blocker under the latest Human direction; this source record establishes deterministic candidate provenance only.",
+        "Root approved the exact repaired field derivative for a versioned successor. Affected-iPad and family observations remain separate pending acceptance evidence.",
     ]
     record["rollback"] = {
         "method": "Revert the generated catalogue pointer to the retained r01 field URL. Preserve both versioned files and both records until the authorized retirement sweep.",
@@ -261,10 +274,14 @@ def build_report(facts: dict, geometry: dict, comparison: dict, record_sha256: s
         "geometry": geometry,
     }
     return {
-        "schema": "maze-art-hotfix-candidate/v1",
+        "schema": "maze-art-hotfix-publication/v1",
         "hotfixId": HOTFIX_ID,
-        "preparedOn": "2026-09-05",
-        "status": "candidate-root-review",
+        "preparedOn": "2026-09-06",
+        "status": "root-approved-integration",
+        "approvalPath": APPROVAL.relative_to(ROOT).as_posix(),
+        "approvalSha256": APPROVAL_SHA256,
+        "candidateReportPath": CANDIDATE_REPORT.relative_to(ROOT).as_posix(),
+        "candidateReportSha256": CANDIDATE_REPORT_SHA256,
         "baseCommit": BASE_COMMIT,
         "authorityPath": AUTHORITY.relative_to(ROOT).as_posix(),
         "authoritySha256": AUTHORITY_SHA256,
@@ -294,7 +311,7 @@ def build_report(facts: dict, geometry: dict, comparison: dict, record_sha256: s
         "environment": encoder_environment(),
         "catalogueOverride": override,
         "proofPath": PROOF.relative_to(ROOT).as_posix(),
-        "integrationGate": "Root source/image review and promotion remain pending. Affected-iPad and family observations are deferred acceptance evidence, not development or release blockers under the latest Human direction.",
+        "integrationGate": "Exact derivative approved by root. See separate integration review for build/consumer checks and release receipt for public availability. Affected-iPad and family observations remain pending; v0.22.2 is unchanged.",
     }
 
 
@@ -366,6 +383,9 @@ def run(write: bool) -> dict:
         facts = image_facts(staged_runtime)
         facts.pop("colorMetadata", None)
         facts.update(sha256=sha256_file(staged_runtime), bytes=staged_runtime.stat().st_size)
+        approved_runtime = read_json(APPROVAL)["runtime"]
+        if facts["sha256"] != approved_runtime["sha256"] or facts["bytes"] != approved_runtime["bytes"]:
+            raise ValueError("Reconstructed field pixels differ from the root-approved derivative")
         geometry = geometry_for(runtime)
         with Image.open(ROOT / OLD_RUNTIME) as opened:
             opened.load()

@@ -7,7 +7,7 @@
   "family": "friend",
   "runtimeStatus": "active",
   "sourceStatus": "source-backed",
-  "approvalStatus": "candidate",
+  "approvalStatus": "approved",
   "validationProfile": "strict-v2",
   "recipeVersion": "mgjrpg-02",
   "derivativeRecipeVersion": "tessera-bounded-coral-alpha-recovery-field-r02",
@@ -217,11 +217,18 @@
       "description": "Re-register the exact approved bounded alpha-recovery delivery master at the established 256px friend-field target, then apply the existing low-alpha cleanup, component filter, hidden-RGB dilation, visible-black normalization and lossless WebP encoding. No classification, painting, generation, or identity change."
     }
   ],
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human repair and publication delegation",
+    "approvedAt": "2026-09-06",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-approval.json",
+    "evidenceSha256": "9ddbe7e3b38acc8919635954691e42cc6d0d5fafe8c0214a21260e3e3b944db1"
+  },
   "knownUnknowns": [
     "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response.",
     "Catalogue-only rescue friend; never an enemy.",
     "Post-v0.20.1 authored placement now gives this species at least one Solo-accessible rescue in the existing sixteen-maze campaign; Plan 09 owns the expanded 24-maze progression and thematic ecology refinement.",
-    "Affected-iPad and family observations are deferred acceptance evidence, not a development or release blocker under the latest Human direction; this source record establishes deterministic candidate provenance only."
+    "Root approved the exact repaired field derivative for a versioned successor. Affected-iPad and family observations remain separate pending acceptance evidence."
   ],
   "rights": {
     "originClaim": "Generated for Maze so Puzzle from broad folklore archetypes and the original Maze so Puzzle rendering contract; no named franchise, character, logo, living artist, or proprietary composition was requested.",

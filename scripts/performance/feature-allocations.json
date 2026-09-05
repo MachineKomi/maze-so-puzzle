@@ -332,7 +332,7 @@
       "compressedCssBytes": 0,
       "runtimePublicBytes": 42980,
       "reason": "Astra approves the exact additive public-byte cost of one versioned 42,980-byte lossless 256px Tessera Dolphin field derivative reconstructed from the already approved bounded alpha-recovery master. The accepted r01 remains immutable rollback evidence; the selected field transfer decreases by 1,382 bytes.",
-      "evidencePath": "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-candidate.json",
+      "evidencePath": "docs/reviews/2026-09-06-art-hotfix-01-astra-integration.md",
       "reviewBy": "2026-10-05",
       "rollbackPoint": "Revert only Tessera Dolphin's generated field catalogue row to /assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r01.webp and its original sourceRecordId. Preserve both versioned field files, approved recovery masters and provenance records until the authorized retirement sweep.",
       "dependencies": "Human ART-HOTFIX-01 repair authorization, approved bounded alpha-recovery master and proof, accepted 9418ee catalogue checkpoint, and Astra exact allocation approval; final source/image promotion review remains separate.",

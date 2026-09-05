@@ -1,0 +1,29 @@
+{
+  "schema": "maze-art-hotfix-publication-decision/v1",
+  "hotfixId": "ART-HOTFIX-01",
+  "approvedBy": "Astra root orchestrator under Human repair and publication delegation",
+  "approvedAt": "2026-09-06",
+  "scope": "runtime-publish",
+  "decision": "Approve Sol's exact Tessera 256px field derivative. Independent review confirms restored coral fins and tail, unchanged identity and registration, and legible cage/follower compositions. This approves technical integration into a separately versioned successor; it does not change the immutable v0.22.2 release or claim affected-iPad or family acceptance.",
+  "candidateCommit": "c724c954fd302d22f391d25e88ab467301ac047c",
+  "candidateReport": {
+    "path": "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-candidate.json",
+    "sha256": "4b2fee38e93a1a54f993796dfb505df8cf4ce5b80fa3857e22c7e04548496966"
+  },
+  "runtime": {
+    "path": "public/assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r02.webp",
+    "sha256": "0fa2cd354705e591c3f70fa0f50e050cf3c0e50e78bb6e54fe31b0be0ca4c156",
+    "bytes": 42980
+  },
+  "masterSha256": "1e7a7f8d3a687bb27d5473eef9eff961b0affbf766403ade5bcc2051f02f1f0d",
+  "reviewedProof": {
+    "path": "artifacts/art-proofs/art-hotfix-01/tessera-field-r01-r02-actual-size.png",
+    "sha256": "695ef83d345e36b1f8b7852746c5173d37fe41590f8ad52cf524619f0e98bef7"
+  },
+  "limits": [
+    "No source RGB editing, reclassification, generation or identity redesign.",
+    "Keep the prior r01 field file and every historical publication receipt.",
+    "Public inventory grows by 42980 bytes for the rollback hold; selected field transfer falls by 1382 bytes and selected decoded size is unchanged.",
+    "Global manifest, deterministic reconstruction and runtime consumer checks are separate engineering gates before release."
+  ]
+}

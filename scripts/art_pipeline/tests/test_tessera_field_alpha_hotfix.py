@@ -37,6 +37,15 @@ class TesseraFieldAlphaHotfixTests(unittest.TestCase):
         self.assertEqual(self.record["geometry"]["safeInset"], prior["geometry"]["safeInset"])
         self.assertEqual(self.record["geometry"]["pivot"], prior["geometry"]["pivot"])
 
+    def test_publication_preserves_candidate_and_binds_root_approval(self) -> None:
+        self.assertEqual(sha256_file(hotfix.CANDIDATE_REPORT), hotfix.CANDIDATE_REPORT_SHA256)
+        self.assertEqual(hotfix.read_json(hotfix.CANDIDATE_REPORT)["status"], "candidate-root-review")
+        self.assertEqual(self.record["approvalStatus"], "approved")
+        self.assertEqual(self.record["approvalEvidence"]["scope"], "runtime-publish")
+        self.assertEqual(self.record["approvalEvidence"]["evidenceSha256"], sha256_file(hotfix.APPROVAL))
+        self.assertEqual(self.report["status"], "root-approved-integration")
+        self.assertEqual(self.report["sourceRecord"]["sha256"], sha256_file(hotfix.RECORD))
+
     def test_repaired_alpha_and_generated_catalogue_are_current(self) -> None:
         comparison = self.report["alphaComparison"]
         self.assertEqual(comparison["oldAlphaBoundsLTRB"], comparison["newAlphaBoundsLTRB"])
