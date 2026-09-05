@@ -34,6 +34,14 @@ iPad/desktop-browser review, not full-checklist acceptance.
 
 Routed requirements, not implementations or closed acceptance gates.
 
+**Later same-session clarification:** [annotated Lanternlight example](user-playtests/2026-09-06-lanternlight-spatial-clarification.md)
+supersedes a blanket shrinking rule. 20×20+ room-rich levels can be excellent;
+the problem is repetitive winding traversal, not map area. Plan09/gameplay spec
+remove the former four-over-16 quota and mandatory shrink count while retaining
+the 24×24 technical ceiling, solvability and pacing/performance checks. Rooms,
+wide connections, visible-but-not-yet-reachable discoveries and portal/door
+relationships should dominate; dense traditional mazes are occasional variants.
+
 **UI-NATIVE-EXIT-01 — title Exit leaves an empty Windows window.** During
 v0.22.2 packaging, the unchanged `FrontDoorScreen` `window.close()` path closed
 the web content/CDP page but left the native window/process alive. Normal OS
