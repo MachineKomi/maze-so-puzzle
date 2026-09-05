@@ -16,6 +16,16 @@ it need not delay this movement investigation or contaminate its A/B comparison.
 
 ## New evidence and purpose
 
+### PERF-02B external desktop isolation — 2026-09-06
+
+[Reviewed results](../reviews/2026-09-06-perf02b-moving-terrain-review.md): 15/15
+restored rows and 120 legal moves, with no reproduced iPad-like fault. Terrain,
+filter and fill probes were inconclusive on this shared laptop. A single world
+layer hint reduced recorded paint work and produced one extra Chrome layer;
+candidate-only evidence, not Safari efficacy or measured GPU cost. Next bounded
+experiment requires DPR/large-world/resource/seam checks and independent review.
+No runtime hint or source-resolution reduction was published by this diagnostic.
+
 ### Physical v0.22.2 result — 2026-09-06
 
 [Human feedback](../user-playtests/v0222-playtest-feedback.md): no obvious
