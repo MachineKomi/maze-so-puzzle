@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type PointerEvent, type ButtonHTMLAttributes } from "react";
+import { useContext, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type PointerEvent, type ButtonHTMLAttributes, type RefObject } from "react";
 import { ThumbPad } from "./ThumbPad";
 import { FRIEND_BOOK_LORE } from "../../bookLore";
 import { CompactPlayContext } from "./PlayShell";
@@ -16,7 +16,7 @@ function StatusCell({ compact, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
   return compact ? <span className={props.className} role="img" aria-label={props["aria-label"]}>{props.children}</span> : <button {...props} />;
 }
 
-export function AdventureHud({ model, name, chapter, power, gold, science, steps, map, actions, onMore, onHint, onDetail, onMove, onRead, startHold, steerHold, stopHold, enabled, suggested, tester, feedback }: {
+export function AdventureHud({ model, name, chapter, power, gold, science, steps, map, actions, onMore, onHint, onDetail, onMove, onRead, startHold, steerHold, stopHold, resetPadGesture, enabled, suggested, tester, feedback }: {
   model: AdventureHudModel; name: string; chapter: string; power: number; gold: number; science: number; steps: number;
   map: ReactNode; actions: readonly UtilityAction[]; onHint: (trigger: HTMLButtonElement) => void;
   onMore: (trigger: HTMLButtonElement) => void;
@@ -24,6 +24,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
   onDetail: (detail: ArtDetail, trigger: HTMLButtonElement) => void; onMove: (direction: Direction) => void;
   startHold: (event: PointerEvent<HTMLElement>, direction: Direction | null) => void;
   steerHold?: (event: PointerEvent<HTMLElement>, direction: Direction | null) => void;
+  resetPadGesture?: RefObject<(() => void) | null>;
   stopHold: (event: PointerEvent<HTMLElement>) => void; enabled?: boolean; suggested: Direction | null; tester: boolean; feedback: ReactNode;
 }) {
   const compact = useContext(CompactPlayContext);
@@ -121,7 +122,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
     </div>
     <div className="deck-feedback" aria-live="off">{feedback}</div>
     <div className="deck-controls">
-    <section className="controls-card" aria-label="Movement buttons" data-focus-group="movement"><ThumbPad onMove={onMove} startHold={startHold} steerHold={steerHold ?? (()=>{})} stopHold={stopHold} suggested={suggested} enabled={enabled} /><p>Arrows · WASD<br /><span>Tap, hold or drag</span></p></section>
+    <section className="controls-card" aria-label="Movement buttons" data-focus-group="movement"><ThumbPad onMove={onMove} startHold={startHold} steerHold={steerHold ?? (()=>{})} stopHold={stopHold} suggested={suggested} enabled={enabled} resetGestureRef={resetPadGesture} /><p>Arrows · WASD<br /><span>Tap, hold or drag</span></p></section>
     {!compact && <nav className="utility-row" aria-label="Game" data-focus-group="utilities">{actions.map(action => <button key={action.id} data-focus-id={action.id} aria-pressed={action.pressed} onClick={e => action.run(e.currentTarget)}>{action.art && <CatalogueImage art={action.art} alt="" />}<span>{action.label}</span></button>)}</nav>}
     </div>
   </aside>;

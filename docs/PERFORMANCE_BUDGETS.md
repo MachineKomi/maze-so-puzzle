@@ -17,9 +17,13 @@ reference. Lite must document the exact measured scene costs removed or
 substituted. Physical-iPad success remains a Human gate, and a missing cohort is
 pending rather than inferred from desktop emulation.
 
-Candidate checkpoint: V22-PERF-01 v4 has 153,118 gzip9 JS / 23,512 gzip9 CSS /
-164,988,031 public bytes. Astra's named 650-byte candidate JS allocation raises
-the JS ceiling to 153,207 (89 bytes remaining); CSS/public ceilings are unchanged.
+Candidate checkpoint: V22-PERF-01-R1 has 153,261 gzip9 JS / 23,512 gzip9 CSS /
+164,988,031 public bytes. The reviewed original candidate had 153,118 JS bytes
+under a 650-byte allocation. The two input-ownership corrections add 143 bytes,
+exceeding that ceiling by 54. Astra explicitly extends the candidate allocation
+to 750 bytes: JS ceiling 153,307, 46 bytes remaining; CSS/public ceilings are
+unchanged. Sol must review the R1 increment before promotion; it is not device
+or performance acceptance. See the [R1 response](reviews/2026-09-05-v22-perf01-r1-response.md).
 This is an execution-manager allocation pending Sol's candidate review, not
 Human visual acceptance or release approval. The measured receipt is
 [V22-PERF-01 candidate](reviews/2026-09-05-v22-perf01-candidate.md).

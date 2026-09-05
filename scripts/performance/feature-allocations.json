@@ -314,15 +314,15 @@
       "id": "controls-v22-perf01-live-input-and-scene-work",
       "owner": "controls",
       "status": "approved",
-      "compressedJsBytes": 650,
+      "compressedJsBytes": 750,
       "compressedCssBytes": 0,
       "runtimePublicBytes": 0,
-      "reason": "Astra execution-manager authorizes 650 gzip9 JS bytes for this bounded candidate: live-source takeover and presentation suspension, anchored drag with preserved safe corner hint, imperative cursor and semantically cached scene bindings including Static mount invalidation. Locked candidate-v3 measures153118 against prior152557, a561-byte deficit;89 bytes cover bounded toolchain/cross-platform compression variation only. This allocation does not authorize promotion or claim Sol/Human acceptance.",
-      "evidencePath": "docs/reviews/2026-09-05-v22-perf01-candidate.md",
+      "reason": "Astra execution-manager authorizes 750 gzip9 JS bytes for this bounded candidate, subject to independent Sol review before promotion. Original candidate-v3 required561 bytes above152557 under a650 allowance. R1 adds143 bytes for final-phase-only guarded completion and physical ThumbPad takeover reset:153261 total,704 above the original ceiling. The additional100 allowance covers the54-byte overrun plus46 bytes of compression headroom, not new features. No Sol/Human acceptance or performance qualification is implied.",
+      "evidencePath": "docs/reviews/2026-09-05-v22-perf01-r1-response.md",
       "reviewBy": "2026-10-05",
       "rollbackPoint": "Before merge, discard/revert the complete V22-PERF-01 runtime slice back to461cab02b065a1d0f654c49189ed24108c22c5a8. Preserve all art, engine, schema6 progress and schema3 active saves. Cursor/map/binding changes, live input changes and Lite CSS are documented separate inspection seams; never restore only half of a repeat-suspension/source-takeover contract.",
       "dependencies": "Human-authorized V22-PERF-01 scope; frozen v0.22.0 production baseline; current-engine legal normal-save fixture matrix; independent Sol candidate review before main/release; affected-iPad test remains open.",
-      "notes": "JS ceiling153207; no CSS/public allocation. Public164988031 unchanged. Candidate tests/counters and external report hashes belong in the linked receipt. Diagnostic counter builds and Playwright packages are not shipped; no repository dependency/lockfile or persistence durability change. Retain report-only timing classification."
+      "notes": "R1 JS ceiling153307 (previous153207); no CSS/public allocation. Public164988031 unchanged. Candidate tests/counters and external report hashes belong in the linked receipt. Diagnostic counter builds and Playwright packages are not shipped; no repository dependency/lockfile or persistence durability change. Retain report-only timing classification."
     }
   ]
 }

@@ -4,8 +4,8 @@ Status: Astra candidate implemented on `codex/v22-perf-01-astra`; bounded checks
 and measurements recorded. Sol's independent
 [candidate review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md)
 returned one P1 chained-presentation unlock race and one P2 stale ThumbPad
-reverse-takeover state. Astra owns a narrow R1 correction before a short Sol
-re-review. One recovery timeout, mixed sustained timing and task attribution also
+reverse-takeover state. Astra's [R1 return](../reviews/2026-09-05-v22-perf01-r1-response.md)
+is ready for a short independent Sol re-review. One recovery timeout, mixed sustained timing and task attribution also
 remain unresolved; no full engineering or Human acceptance is claimed. The
 [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md) owns measured
 status; this brief remains the acceptance contract.

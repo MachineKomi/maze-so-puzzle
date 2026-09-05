@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useImperativeHandle, useRef, useState, type PointerEvent, type RefObject } from "react";
 import type { Direction } from "../../game/types";
 
 const arrows = { up: "▲", left: "◀", right: "▶", down: "▼" } as const;
@@ -9,12 +9,13 @@ export function thumbDirection(x: number, y: number, previous: Direction | null)
   if ((previous === "up" || previous === "down") && Math.abs(y) > Math.abs(x) * .8) return y < 0 ? "up" : "down";
   return Math.abs(x) > Math.abs(y) ? x < 0 ? "left" : "right" : y < 0 ? "up" : "down";
 }
-export function ThumbPad({ onMove, startHold, steerHold, stopHold, suggested, enabled = true }: {
+export function ThumbPad({ onMove, startHold, steerHold, stopHold, suggested, enabled = true, resetGestureRef }: {
   onMove: (direction: Direction) => void;
   startHold: (event: PointerEvent<HTMLElement>, direction: Direction | null) => void;
   steerHold: (event: PointerEvent<HTMLElement>, direction: Direction | null) => void;
   stopHold: (event: PointerEvent<HTMLElement>) => void;
   suggested: Direction | null; enabled?: boolean;
+  resetGestureRef?: RefObject<(() => void) | null>;
 }) {
   const pad = useRef<HTMLDivElement>(null);
   const gesture = useRef<{id:number; x:number; y:number; startX:number; startY:number; width:number; height:number; dragging:boolean; direction:Direction|null} | null>(null);
@@ -23,8 +24,12 @@ export function ThumbPad({ onMove, startHold, steerHold, stopHold, suggested, en
   const reset = () => {
     const id = gesture.current?.id;
     gesture.current=null; setDirection(null); setDragging(false);
+    pad.current?.style.removeProperty("--stick-x");
+    pad.current?.style.removeProperty("--stick-y");
     if (id !== undefined && pad.current?.hasPointerCapture(id)) pad.current.releasePointerCapture(id);
   };
+  // App source takeover must revoke this component's physical gesture too.
+  useImperativeHandle(resetGestureRef, () => reset, []);
   useEffect(() => { if (!enabled) reset(); }, [enabled]);
   useEffect(() => {
     const hidden = () => { if (document.hidden) reset(); };

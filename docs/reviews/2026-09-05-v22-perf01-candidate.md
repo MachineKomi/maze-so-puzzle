@@ -1,5 +1,11 @@
 # V22-PERF-01 — Astra candidate receipt
 
+Historical original-candidate receipt. Sol's
+[independent review](2026-09-05-sol-v22-perf01-candidate-review.md) returned two
+input-ownership corrections. The [R1 response](2026-09-05-v22-perf01-r1-response.md)
+records their implementation and current review checkpoint. Metrics and rejected
+attempts below belong to the original candidate and are not rewritten as R1 data.
+
 Status: implementation and bounded local evidence recorded for **Sol's independent
 review** on `codex/v22-perf-01-astra`. Sustained-performance acceptance remains
 OPEN: one unexplained recovery timeout, mixed long-run timing and unattributed

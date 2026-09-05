@@ -7,12 +7,12 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- Candidate branch: `codex/v22-perf-01-astra`, based on clean pushed `main` at `461cab02b065a1d0f654c49189ed24108c22c5a8`. Runtime candidate `a92257a2ecb234c314b00ddaafb15c4d206771c2` is implemented; later commits preserve evidence/handoff only. The public runtime/release is unchanged; this branch is not promotion authority. See the [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) and [hash-bound evidence](reviews/v22-perf01-evidence.json).
+- Candidate branch: `codex/v22-perf-01-astra`, based on clean pushed `main` at `461cab02b065a1d0f654c49189ed24108c22c5a8`. Original runtime candidate `a92257a2ecb234c314b00ddaafb15c4d206771c2` has a narrow R1 input-ownership correction; the [R1 response](reviews/2026-09-05-v22-perf01-r1-response.md) owns its exact checkpoint and evidence. The public runtime/release is unchanged; this branch is not promotion authority. Preserve the original [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) and [performance evidence](reviews/v22-perf01-evidence.json) as historical measurements.
 - Frozen UI-03 / FP-UI1 runtime: `68e303da680d5aec0ba71154949c5a2a0d1697ae`, **v0.22.0**.
 - Frozen v0.22.0 engineering disposition: reviewed, technically verified, committed, pushed and published. This does not describe acceptance of the later V22-PERF-01 candidate.
 - Human disposition: **POSITIVE, WITH OPEN CORRECTIONS**. Full v0.22.0 feedback and 51 cross-device images have now been independently reviewed by Astra and Sol. The Human reports a huge improvement and likes the desktop/iPad composition; sustained iPad performance, phone scaling and interrupted holds prevent full FP-UI1 acceptance. Lowering effects/movement settings on iPad helped but remained inadequate; laptop web and Tauri are broadly comparable and still not consistently buttery. No blanket defect closure or Amelia/family qualification is claimed.
 - v0.21.0 was Human-rejected despite earlier engineering passes. v0.20.1 is the prior comparison baseline, not a claim of universal device qualification.
-- Sol's independent [V22-PERF-01 candidate review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md) is complete with a **REVISE BEFORE PROMOTION** verdict. The candidate's redundant-work, anchored-drag, truthful-Lite and ordinary held-continuation work is accepted in direction, but a stalled jump-to-battle/rescue/door handoff can release input before its real final phase completes; reverse source takeover can also leave stale ThumbPad capture/visual state. Full sustained performance remains unqualified. Astra owns one narrow R1 correctness return on the existing candidate branch; no merge, version, release or deployment is authorized yet.
+- Sol's independent [V22-PERF-01 candidate review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md) returned **REVISE BEFORE PROMOTION**. Astra's R1 corrects its delayed-chain unlock and stale ThumbPad takeover defects and returns production-browser evidence for independent re-review. Sol has not yet accepted R1 or its additional 100-byte candidate JS allocation. Full sustained performance remains unqualified. No merge, version, release or deployment is authorized yet.
 - This document's handoff commit is discoverable with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`; the transfer capsule gives its exact SHA. Intake HEAD above is deliberately not the future commit containing this file.
 - On arrival, inspect `git status --short --branch`, HEAD, remote and active ownership. Do not infer a clean tree from this dated receipt.
 
@@ -36,13 +36,14 @@ The transfer push may create a newer documentation deployment/CI run. Check thos
 
 ## 3. Active work and next decision gate
 
-**Current task: GPT-6 Astra — HIGH performs the narrow V22-PERF-01-R1
-correctness return on `codex/v22-perf-01-astra`.** Read the dated
-[Sol review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md) and change only
-actual final-phase completion/unlock ownership, ThumbPad reverse-takeover reset,
-and their focused regression evidence. Preserve the measured performance work,
-Full/Lite recipes, cadence, content, art/media, save schema and version. Commit
-and push the candidate branch; do not merge, version, release or deploy.
+**Current task: GPT-5.6 Sol — HIGH independently reviews V22-PERF-01-R1
+on `codex/v22-perf-01-astra`.** Read the original
+[Sol review](reviews/2026-09-05-sol-v22-perf01-candidate-review.md),
+[R1 response](reviews/2026-09-05-v22-perf01-r1-response.md) and exact return diff.
+Review runtime read-only; verify actual final-phase ownership, cancellation,
+same-source/reverse-takeover behavior, regression evidence and the bounded
+650-to-750-byte allocation. Preserve a documentation-only verdict and next action;
+do not merge, version, release, deploy or begin another runtime slice.
 
 The [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) records the
 75-pass/two-unavailable-fixture browser matrix plus two final Lite supplements,
@@ -50,7 +51,9 @@ The [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) records the
 36+36 short rows and sustained Full/Lite samples. Neutral touch jitter drops
 App/MiniMap commits and repeated scene scans to zero; actual moves still save
 synchronously. Timing is report-only and mixed. Challenge the unexplained recovery
-timeout, worst tails, missing task attribution and 650-byte allocation explicitly.
+timeout, worst tails and missing task attribution explicitly. The original
+650-byte allocation was accepted for that candidate only; R1's separate increase
+and unchanged CSS/public bytes are recorded in its response.
 Physical iPad, Tauri timing and family gates cannot be closed by desktop emulation.
 
 - The [Astra assessment](reviews/2026-09-05-astra-v0220-review.md),
@@ -67,8 +70,8 @@ Physical iPad, Tauri timing and family gates cannot be closed by desktop emulati
 - It does **not** change phone/Book layout, FOV, cadence, terrain architecture,
   persistence durability, content, art/media, controller architecture or broad
   effects. Full quality preserves the praised v0.22.0 visuals.
-- Sol found one P1 timing race and one P2 pad-reset gap. After Astra's narrow R1
-  return, Sol performs a short diff/test review. Only that accepted checkpoint is
+- Sol found one P1 timing race and one P2 pad-reset gap. Astra has returned R1;
+  Sol now performs the short diff/test review. Only an accepted checkpoint is
   promoted to `main`; then CI/Vercel and a clearly labelled v0.22.1 web/Windows
   performance-input preview are prepared for the Human's affected-iPad test.
 - If sustained performance remains poor, Astra owns one deeper isolated
@@ -109,7 +112,7 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. Astra completes V22-PERF-01-R1 and Sol performs its short review. Publish only the accepted v0.22.1 performance/input preview and obtain the affected-iPad Full/Lite/Motion evidence. If green, perform the small Tessera field-alpha hotfix and V22-PLAY-01 pace/stationary-rescue slice as independently reviewable seams, then execute V22-UI-01 for short-height/Book/pad/pickup/victory corrections and obtain the focused family retest. These slices bring bounded 07/08/01/interaction work forward without rewriting the programme. Resolve root PT36 attachment preflight before 04.
+1. Sol reviews the returned V22-PERF-01-R1. Publish only the accepted v0.22.1 performance/input preview and obtain the affected-iPad Full/Lite/Motion evidence. If green, perform the small Tessera field-alpha hotfix and V22-PLAY-01 pace/stationary-rescue slice as independently reviewable seams, then execute V22-UI-01 for short-height/Book/pad/pickup/victory corrections and obtain the focused family retest. These slices bring bounded 07/08/01/interaction work forward without rewriting the programme. Resolve root PT36 attachment preflight before 04.
 2. **04** lighting, wall depth, terrain topology/regions.
 3. **02** VFX, effect lifecycle, feedback and reward showers; then **remaining UI-02** polish. UI-03 already delivered Book/tab/detail/focus/victory foundations; reconcile residual work rather than rebuilding them.
 4. **ALT-P1-01** Human-gated Alex model/canon and equal optional lead-player integration.

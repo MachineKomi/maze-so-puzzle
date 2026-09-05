@@ -10,10 +10,11 @@ and [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments plus the
 [reconciled 88-row ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
 The active candidate slice is
 [V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md): Sol returned one
-narrow correctness revision and Astra now owns R1 before a short Sol re-review.
+narrow correctness revision; Astra has returned [R1](../reviews/2026-09-05-v22-perf01-r1-response.md)
+for a short independent Sol re-review.
 It precedes affected-iPad qualification, the bounded Dolphin/pace/rescue work,
 and Sol-owned phone/Book/pad/pickup/victory refinement, while
-preserves the praised desktop/iPad UI. Claude's broad architecture, 9–15 FOV,
+preserving the praised desktop/iPad UI. Claude's broad architecture, 9–15 FOV,
 economy and HUD/minimap redesign proposals are not adopted. Agent 04 stays held
 for these gates and PT36. Preserve 09 → 10 → 11. **Only one runtime writer**.
 

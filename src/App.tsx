@@ -743,6 +743,7 @@ function App() {
   const presentationSuspended = useRef(false);
   const heldInputGeneration = useRef(0);
   const heldInputSource = useRef<"keyboard" | "board" | "pad" | null>(null);
+  const resetPadGesture = useRef<(() => void) | null>(null);
   const resumeHeldInputRef = useRef<() => void>(() => undefined);
   const scheduleKeyboardRepeatRef = useRef<(delay: number) => void>(() => undefined);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
@@ -974,6 +975,7 @@ function App() {
     // A deliberate source takeover must not leave an older physical gesture
     // eligible to resume later. Keep only the gameplay corner-assist history.
     const previousDirection = lastMovedDirection.current;
+    if (heldInputSource.current === "pad") resetPadGesture.current?.();
     clearHeldInput();
     lastMovedDirection.current = previousDirection;
     heldInputSource.current = source;
@@ -1045,6 +1047,17 @@ function App() {
     }, delay);
     presentationTimers.current.add(timer);
   }, []);
+
+  const finishPresentationAfter = useCallback((duration: number) => {
+    // Only the actual final phase owns completion; superseding/canceling the
+    // presentation invalidates this timer through the presentation sequence.
+    schedulePresentationTimer(presentationSequence.current, () => {
+      inputLocked.current = false;
+      presentationSuspended.current = false;
+      queuedMove.current = null;
+      resumeHeldInputRef.current();
+    }, duration);
+  }, [schedulePresentationTimer]);
 
   const showMapNotice = useCallback((
     notice: Omit<MapPickupToast, "id">,
@@ -1119,8 +1132,9 @@ function App() {
         prefersReducedMotion() ? 900 : 1_550,
       );
     }, Math.max(100, duration - 30));
+    finishPresentationAfter(duration);
     return duration;
-  }, [clearPresentationWork, schedulePresentationTimer, showMapNotice]);
+  }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer, showMapNotice]);
 
   const beginRescuePresentation = useCallback((
     event: Extract<GameEvent, { type: "animal-rescued" }>,
@@ -1144,12 +1158,14 @@ function App() {
     if (duration === REDUCED_PRESENTATION_MS) playSound("friendRescue", mutedRef.current);
     else schedulePresentationTimer(sequence, () => playSound("friendRescue", mutedRef.current), 150);
     schedulePresentationTimer(sequence, () => setRescuePresentation(null), Math.max(100, duration - 30));
+    finishPresentationAfter(duration);
     return duration;
-  }, [clearPresentationWork, schedulePresentationTimer]);
+  }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer]);
 
   const beginJumpPresentation = useCallback((
     event: Extract<GameEvent, { type: "hole-jumped" }>,
     landingSound: SoundName,
+    continues = false,
   ): number => {
     clearPresentationWork();
     const sequence = presentationSequence.current;
@@ -1182,8 +1198,9 @@ function App() {
       );
     }
     schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
+    if (!continues) finishPresentationAfter(duration);
     return duration;
-  }, [clearPresentationWork, schedulePresentationTimer]);
+  }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer]);
 
   const beginPortalPresentation = useCallback((
     event: Extract<GameEvent, { type: "portal-warped" }>,
@@ -1200,8 +1217,9 @@ function App() {
     setPortalPresentation({ pair: event.pair, from: event.from, to: event.to });
     playSound("portal", mutedRef.current);
     schedulePresentationTimer(sequence, () => setPortalPresentation(null), Math.max(100, duration - 25));
+    finishPresentationAfter(duration);
     return duration;
-  }, [clearPresentationWork, schedulePresentationTimer]);
+  }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer]);
 
   const beginDoorOpeningPresentation = useCallback((
     event: Extract<GameEvent, { type: "door-opened" }>,
@@ -1224,8 +1242,9 @@ function App() {
     });
     playSound("doorOpen", mutedRef.current);
     schedulePresentationTimer(sequence, () => setDoorOpeningPresentation(null), Math.max(100, duration - 25));
+    finishPresentationAfter(duration);
     return duration;
-  }, [clearPresentationWork, schedulePresentationTimer]);
+  }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer]);
 
   useEffect(() => {
     mutedRef.current = muted;
@@ -1435,7 +1454,7 @@ function App() {
         ),
       );
       if (enemy && jumpedEvent) {
-        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump");
+        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump", true);
         const jumpSequence = presentationSequence.current;
         const battleDuration = createCombatVictoryPlan({
           powerBefore: defeatedEvent.powerBefore,
@@ -1476,7 +1495,7 @@ function App() {
         ),
       );
       if (animal && jumpedEvent) {
-        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump");
+        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump", true);
         const jumpSequence = presentationSequence.current;
         const rescueDuration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : RESCUE_PRESENTATION_MS;
         schedulePresentationTimer(
@@ -1499,7 +1518,7 @@ function App() {
         ),
       );
       if (door && jumpedEvent) {
-        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump");
+        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump", true);
         const jumpSequence = presentationSequence.current;
         const doorDuration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : DOOR_OPEN_PRESENTATION_MS;
         schedulePresentationTimer(
@@ -1541,15 +1560,11 @@ function App() {
     }
 
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
+    inputUnlockTimer.current = undefined;
+    if (presentationDuration > 0) return;
     inputUnlockTimer.current = window.setTimeout(() => {
       inputLocked.current = false;
       inputUnlockTimer.current = undefined;
-      if (presentationDuration > 0) {
-        presentationSuspended.current = false;
-        queuedMove.current = null;
-        resumeHeldInputRef.current();
-        return;
-      }
       const nextMove = queuedMove.current;
       queuedMove.current = null;
       if (nextMove) {
@@ -1557,7 +1572,7 @@ function App() {
         nextMoveRepeated.current=nextMove.repeated;
         attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
       }
-    }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
+    }, result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS);
   }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, suspendHeldRepeat, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
   const dismissStory = useCallback(() => {
@@ -2615,7 +2630,7 @@ function App() {
           <AdventureHud model={hudModel} name={level.name}
             chapter={isSurprise ? "Surprise maze" : `Story maze ${campaignIndex + 1} of ${CURATED_LEVELS.length}`}
             power={displayedPower} gold={displayedGold} science={displayedScience} steps={game.steps}
-            tester={testerRun} suggested={suggestedMoveDirection}
+            tester={testerRun} suggested={suggestedMoveDirection} resetPadGesture={resetPadGesture}
             map={<MiniMap level={level} position={game.position} camera={cameraWindow}
               revealed={revealedTiles} currentView={currentViewTiles}
               objects={minimapObjects} highlightedObjectId={guidedObjectId} />}

@@ -51,7 +51,7 @@ async function trace(page: Page): Promise<Sample[]> {
 async function saveEvidence(page: Page, info: TestInfo, fixture?: InputFixture) {
   const samples = await trace(page);
   const prefix = fixture ? JSON.stringify(fixture.prefix) : "";
-  const report = { test: info.title, status: info.status, viewport: page.viewportSize(), inputObservation: "production browser; DOM presentation and semantic step mutations",
+  const report = { test: info.title, verdict: "See playwright-results.json; captured before the runner assigns final status", viewport: page.viewportSize(), inputObservation: "production browser; DOM presentation and semantic step mutations",
     visibilityProbe: info.title.endsWith("after hidden") ? "Synthetic visibility getters and event exercise the bound cancellation handlers; physical backgrounding remains a device gate." : undefined,
     fixture: fixture ? { levelId: fixture.level.id, contentRevision: fixture.level.contentRevision, gameplayFingerprint: fixture.level.gameplayFingerprint,
       prefix: fixture.prefix, prefixSha256: createHash("sha256").update(prefix).digest("hex"), before: fixture.before, direction: fixture.direction,
@@ -423,6 +423,94 @@ for (const chained of ["door-opened", "enemy-defeated", "animal-rescued"] as con
     } finally { await controls.release(); await saveEvidence(page, info, fixture!); }
   });
 }
+
+for (const motion of ["full", "reduced"] as const) for (const action of ["held", "released", "hidden"] as const) {
+  test(`R1 stalled jump-rescue ${motion} ${action} waits for the actual final phase`, async ({ page }, info) => {
+    const fixture = findInputFixture(events => events.some(event => event.type === "hole-jumped") && events.some(event => event.type === "animal-rescued"), { differentDirectionContinuation: true });
+    expect(fixture, "The delayed-handoff regression requires a real authored jump-rescue route").toBeTruthy();
+    await loadSaved(page, fixture!, `r1-stalled-${motion}-${action}`, undefined, { motion, quality: "full" });
+    const time = new Date("2026-09-05T12:00:00Z");
+    await page.clock.install({ time });
+    await page.clock.pauseAt(time);
+    await page.evaluate(() => (window as TraceWindow).__v22Input?.stop());
+    await record(page);
+    const controls = await driver(page, "keyboard");
+    const direction = continuationDirections(fixture!).find(candidate => candidate !== fixture!.direction)!;
+    try {
+      await controls.start(fixture!.direction);
+      await expect(page.locator(".jump-presentation")).toHaveCount(1);
+      await controls.steer(direction);
+      // Clock.fastForward fires overdue callbacks once at the advanced time,
+      // reproducing a blocked event loop across both original phase deadlines.
+      // Phase two must receive its full duration from its actual late start.
+      await page.clock.fastForward(5000);
+      await expect(page.locator(".rescue-presentation")).toHaveCount(1);
+      await expectUiRouteState(page, fixture!.result.state);
+      if (action === "released") await controls.release();
+      if (action === "hidden") await page.evaluate(() => {
+        Object.defineProperty(document, "visibilityState", { configurable: true, get: () => "hidden" });
+        Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
+        document.dispatchEvent(new Event("visibilitychange"));
+      });
+      await page.clock.runFor(HELD_MOVE_INITIAL_DELAY_MS);
+      await expectUiRouteState(page, fixture!.result.state);
+      const duration = motion === "reduced" ? 180 : 900;
+      await page.clock.runFor(duration - HELD_MOVE_INITIAL_DELAY_MS);
+      await expect(page.locator(busySelector)).toHaveCount(0);
+      await page.clock.runFor(HELD_MOVE_INITIAL_DELAY_MS - 1);
+      await expectUiRouteState(page, fixture!.result.state);
+      await page.clock.runFor(1);
+      const next = action === "held" ? movePlayer(fixture!.level, fixture!.result.state, direction).state : fixture!.result.state;
+      await expectUiRouteState(page, next);
+      await controls.release();
+      await page.clock.runFor(HELD_MOVE_INITIAL_DELAY_MS * 3);
+      await expectUiRouteState(page, next);
+      if (action === "held") assertFreshResume(await trace(page), fixture!.result.state.steps);
+    } finally { await controls.release(); await saveEvidence(page, info, fixture!); }
+  });
+}
+
+test.describe("R1 reverse ThumbPad takeover", () => {
+  test.use({ hasTouch: true });
+  for (const source of ["keyboard", "board-drag"] as const) for (const termination of ["touchEnd", "touchCancel"] as const) {
+    test(`${source} releases the old pad capture and visible gesture before ${termination}`, async ({ page, context }, info) => {
+      const fixture = successFixture("door-opened", true);
+      await loadSaved(page, fixture, `r1-reverse-${source}`);
+      const pad = page.locator(".thumb-pad");
+      const box = (await page.getByRole("button", { name: `Move ${fixture.direction}`, exact: true }).boundingBox())!;
+      const touch = await context.newCDPSession(page);
+      const controls = await driver(page, source);
+      let touching = false;
+      try {
+        await touch.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: box.x + box.width / 2, y: box.y + box.height / 2, id: 1, radiusX: 1, radiusY: 1, force: 1 }] });
+        touching = true;
+        await waitForPresentation(page);
+        await touch.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x: box.x + box.width / 2 + 8, y: box.y + box.height / 2, id: 1, radiusX: 1, radiusY: 1, force: 1 }] });
+        const pointerId = await page.evaluate(() => (window as TraceWindow).__v22Input!.pointerId!);
+        await expect(pad).toHaveAttribute("data-direction", fixture.direction);
+        await expect(pad).toHaveAttribute("data-steering", "true");
+        expect(await pad.evaluate((node, id) => node.hasPointerCapture(id), pointerId)).toBe(true);
+        const direction = continuationDirections(fixture).find(candidate => candidate !== fixture.direction)!;
+        await controls.start(direction);
+        await expect(pad).not.toHaveAttribute("data-direction");
+        await expect(pad).not.toHaveAttribute("data-steering");
+        expect(await pad.evaluate((node, id) => node.hasPointerCapture(id), pointerId)).toBe(false);
+        // The displaced physical thumb is still down; its eventual end must not
+        // clear the new source or create an old-source fallback move.
+        await touch.send("Input.dispatchTouchEvent", { type: termination, touchPoints: [] });
+        touching = false;
+        const next = movePlayer(fixture.level, fixture.result.state, direction);
+        await waitForStep(page, next.state.steps);
+        await controls.release();
+        await expectStill(page, next.state);
+        assertFreshResume(await trace(page), fixture.result.state.steps);
+      } finally {
+        if (touching) await touch.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+        await controls.release(); await touch.detach(); await saveEvidence(page, info, fixture);
+      }
+    });
+  }
+});
 
 for (const replay of [false, true]) {
   test(`V22 input final normal ${replay ? "replay" : "first completion"} truthfully starts Surprise`, async ({ page }, info) => {

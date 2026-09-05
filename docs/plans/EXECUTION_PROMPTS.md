@@ -8,11 +8,11 @@ The v0.22.0 Human/Opus review is reconciled. Read the independent
 [Astra](../reviews/2026-09-05-astra-v0220-review.md) and
 [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
 [88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The current task is **GPT-6 Astra — HIGH** completing the narrow
-V22-PERF-01-R1 correctness return required by Sol's independent
+The current task is **GPT-5.6 Sol — HIGH** independently reviewing Astra's narrow
+V22-PERF-01-R1 correctness return required by Sol's original
 [candidate review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md).
-Preserve the performance implementation and change only the two returned input
-ownership defects plus focused evidence.
+Read the [R1 response](../reviews/2026-09-05-v22-perf01-r1-response.md).
+Runtime is read-only for this review; preserve a documentation-only verdict.
 Do not restart Agent 01, start Agent 04
 or automatically adopt Opus proposals. Preserve the praised desktop/iPad UI.
 Only one runtime writer; blocking device/family feedback and PT36 remain open.
@@ -65,7 +65,38 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. Astra — V22-PERF-01-R1 correctness return
+## Current. Sol — V22-PERF-01-R1 independent review
+
+```text
+# Sol:
+
+Review Astra's exact pushed R1 on codex/v22-perf-01-astra. Verify HEAD, origin,
+working tree and the runtime SHA in docs/reviews/2026-09-05-v22-perf01-r1-response.md.
+Read JOINT_ORCHESTRATION_STATE, your original candidate review, the R1 response,
+its compact evidence and the diff from 67eb26f41a019102e4b290f5b06d8212779941a1.
+
+Runtime is read-only. Check that intermediate jump phases cannot unlock input,
+actual final-phase completion is cancellation/sequence guarded, and eligible live
+input resumes only on fresh cadence. Challenge reverse pad takeover (local
+gesture/highlight/offset/capture reset, delayed old release/cancel, same-source
+holds) and the real-route delayed-clock tests. Review the explicit +100-byte
+candidate allocation: R1 adds143 gzip9 bytes, exceeding the old limit by54;
+new JS limit153307 leaves46 bytes. No CSS/media growth or new feature is claimed.
+
+Run proportionate focused checks; do not repeat the broad contaminated timing
+cohorts. Preserve the original Full-performance limitations, missing authored
+jump-door/combat fixtures, affected-iPad and Tauri/family gates. Do not infer
+physical smoothness from these deterministic input tests.
+
+Record an independent verdict in the repo, reconcile current joint status and
+execution prompts, and commit/push that documentation-only checkpoint on this
+candidate branch. Do not merge, version, tag, release, deploy, reopen Agent01/04,
+or implement pace/rescue/art/UI work. If accepted, explicitly hand the next turn
+to Astra for the bounded v0.22.1 preview promotion/publication and affected-iPad
+test instructions. If not, return only concrete remaining blockers.
+```
+
+### Executed Astra R1 prompt (history)
 
 Sol's review returned one P1 chained-presentation timing race and one P2 stale
 ThumbPad takeover state. Astra continues as sole runtime writer on the existing

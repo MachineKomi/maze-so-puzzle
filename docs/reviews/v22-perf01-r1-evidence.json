@@ -1,0 +1,1049 @@
+{
+  "schema": "maze-v22-perf01-r1-review/v1",
+  "generatedAtUtc": "2026-09-05T20:03:29.120Z",
+  "branch": "codex/v22-perf-01-astra",
+  "startingCheckpoint": "67eb26f41a019102e4b290f5b06d8212779941a1",
+  "originalRuntime": "a92257a2ecb234c314b00ddaafb15c4d206771c2",
+  "acceptance": "Astra correctness return; independent Sol review and all original physical/performance gates remain open",
+  "buildProvenance": {
+    "schema": "maze-performance-build-provenance/v1",
+    "generatedAtUtc": "2026-09-05T20:00:06.261Z",
+    "commit": "67eb26f41a019102e4b290f5b06d8212779941a1",
+    "runtimeInputsSha256": "341d49f93cd3d319c352b5ec14fee1b3810e53433e0fbf05a563d572016c4eee",
+    "distFingerprintSha256": "e3378365b47b261d656a6cad0fac3e9251d41782594e938cdefe404b37d07f65",
+    "buildCommand": "npm run build"
+  },
+  "files": [
+    {
+      "path": "src/App.tsx",
+      "bytes": 140214,
+      "sha256": "4e116801b6862d47163aecfb83cb00c0121cd1c3a02edb99ee919dc3ad2350c9"
+    },
+    {
+      "path": "src/ui/game/AdventureHud.tsx",
+      "bytes": 12088,
+      "sha256": "51366c5b159260a8af2e8ca122393ffd5c599a4958a8c1269708155bbbf4e78c"
+    },
+    {
+      "path": "src/ui/game/ThumbPad.tsx",
+      "bytes": 5403,
+      "sha256": "ea8824baeef2072dd91b0821be0cf442822c21794f67e360b53d718f09a390f2"
+    },
+    {
+      "path": "scripts/performance/v22-input.pw.ts",
+      "bytes": 40737,
+      "sha256": "ecbc095f9dfec47f298cb6eb925cd6d4792520551b14fb4ef35d6bd3d761b8b1"
+    },
+    {
+      "path": "scripts/performance/v22-input.config.mjs",
+      "bytes": 1265,
+      "sha256": "51652e64ad641572d75c4ac384399c0d100cb8c8c41684a2c7662762b3354358"
+    },
+    {
+      "path": "package.json",
+      "bytes": 3032,
+      "sha256": "7e87d64a9684f113ccebfd63a84adb1a877a88bed10d011426adf95a127364cd"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 63380,
+      "sha256": "0c04605089e70268f45bc0b79992fef22ac3dc35e9e523ace84bca5aef2802cb"
+    },
+    {
+      "path": "src-tauri/Cargo.lock",
+      "bytes": 114666,
+      "sha256": "eb14b70dd566bb9cef5da70656c77d43c6fee13bdc64dd98c8df9a33cdaba3b8"
+    }
+  ],
+  "runs": [
+    {
+      "disposition": "red",
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-red-4186/playwright-results.json",
+        "bytes": 20723,
+        "sha256": "ba4f8d3e15d29184874c2e760e68ea5336bb1e6fdc179dce3cb64304e39edc6d"
+      },
+      "stats": {
+        "startTime": "2026-09-05T19:45:23.939Z",
+        "duration": 55182.226,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      "runnerVersion": "1.62.1",
+      "reviewCases": [
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full held waits for the actual final phase",
+          "status": "unexpected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "failed",
+              "durationMs": 11165,
+              "error": "Error: expect(received).toEqual(expected) // deep equality "
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > keyboard releases the old pad capture and visible gesture",
+          "status": "unexpected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "failed",
+              "durationMs": 18709,
+              "error": "Error: expect(locator).not.toHaveAttribute() failed "
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > board-drag releases the old pad capture and visible gesture",
+          "status": "unexpected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "failed",
+              "durationMs": 18454,
+              "error": "Error: expect(locator).not.toHaveAttribute() failed "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "disposition": "rejected-first-fix",
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-focused-green/playwright-results.json",
+        "bytes": 23230,
+        "sha256": "254e4477fd956ae8233c806d7aded0f3302feca5dc582d15652e63eb6c650b82"
+      },
+      "stats": {
+        "startTime": "2026-09-05T19:50:38.055Z",
+        "duration": 45795.719000000005,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "runnerVersion": "1.62.1",
+      "reviewCases": [
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full held waits for the actual final phase",
+          "status": "unexpected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "failed",
+              "durationMs": 12257,
+              "error": "Error: expect(received).toEqual(expected) // deep equality "
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full released waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 5719
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full hidden waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1592
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced held waits for the actual final phase",
+          "status": "unexpected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "failed",
+              "durationMs": 8313,
+              "error": "Error: expect(received).toEqual(expected) // deep equality "
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced released waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 4099
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced hidden waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 992
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > keyboard releases the old pad capture and visible gesture",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2918
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > board-drag releases the old pad capture and visible gesture",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2897
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "disposition": "focused-corrected",
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-focused-green2/playwright-results.json",
+        "bytes": 14512,
+        "sha256": "b5cc1358f2115342b18f0bb23a76d651232ce5bcbf5dfe5c952613b76c98ecd4"
+      },
+      "stats": {
+        "startTime": "2026-09-05T19:52:31.624Z",
+        "duration": 19471.701,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "runnerVersion": "1.62.1",
+      "reviewCases": [
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full held waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 5081
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full released waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1279
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full hidden waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1271
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced held waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1057
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced released waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1227
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced hidden waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 987
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > keyboard releases the old pad capture and visible gesture",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2776
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > board-drag releases the old pad capture and visible gesture",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2800
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "disposition": "final-input",
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/playwright-results.json",
+        "bytes": 147512,
+        "sha256": "6b5dcead88b455ad34bc63a56a676bd7b9c4dd207f06e78f43db8a5df2224e52"
+      },
+      "stats": {
+        "startTime": "2026-09-05T19:53:45.168Z",
+        "duration": 254145.631,
+        "expected": 87,
+        "skipped": 2,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "runnerVersion": "1.62.1",
+      "reviewCases": [
+        {
+          "title": "v22-input.pw.ts > V22 input chained jump and door-opened has no intermediate unlock",
+          "status": "skipped",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "No current authored perfect-route prefix reaches a combined hole-jumped + door-opened transition; no synthetic save is substituted.",
+              "location": {
+                "file": "C:\\maze-game\\scripts\\performance\\v22-input.pw.ts",
+                "line": 406,
+                "column": 10
+              }
+            }
+          ],
+          "results": [
+            {
+              "status": "skipped",
+              "durationMs": 275
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > V22 input chained jump and enemy-defeated has no intermediate unlock",
+          "status": "skipped",
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "No current authored perfect-route prefix reaches a combined hole-jumped + enemy-defeated transition; no synthetic save is substituted.",
+              "location": {
+                "file": "C:\\maze-game\\scripts\\performance\\v22-input.pw.ts",
+                "line": 406,
+                "column": 10
+              }
+            }
+          ],
+          "results": [
+            {
+              "status": "skipped",
+              "durationMs": 222
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full held waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1172
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full released waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1121
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue full hidden waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1094
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced held waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1135
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced released waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1122
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 stalled jump-rescue reduced hidden waits for the actual final phase",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 1012
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > keyboard releases the old pad capture and visible gesture before touchEnd",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 3013
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > keyboard releases the old pad capture and visible gesture before touchCancel",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 3062
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > board-drag releases the old pad capture and visible gesture before touchEnd",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2959
+            }
+          ]
+        },
+        {
+          "title": "v22-input.pw.ts > R1 reverse ThumbPad takeover > board-drag releases the old pad capture and visible gesture before touchCancel",
+          "status": "expected",
+          "annotations": [],
+          "results": [
+            {
+              "status": "passed",
+              "durationMs": 2932
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "disposition": "shared-browser",
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-shared-final/playwright-results.json",
+        "bytes": 3215,
+        "sha256": "da5aa653b7402f6a1f9c096d7e588bae0ffca76eb960824acb2940f976f34a1b"
+      },
+      "stats": {
+        "startTime": "2026-09-05T20:00:25.326Z",
+        "duration": 68872.25099999999,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "runnerVersion": "1.62.1",
+      "reviewCases": []
+    }
+  ],
+  "unit": {
+    "artifact": {
+      "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-project-tests.json",
+      "bytes": 193234,
+      "sha256": "4230b749a5ca3701f26d7f4de6a0b176dace5fbae0ba28d51a22b5de00fa2b1d"
+    },
+    "files": 49,
+    "passed": 493,
+    "failed": 0,
+    "success": true
+  },
+  "inventory": {
+    "artifact": {
+      "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-inventory.json",
+      "bytes": 368729,
+      "sha256": "f3048928150249a84f3aa658fa367e9c3345c5a0e0a59826b60c1a20bd4e0212"
+    },
+    "acceptance": "accepted-static-evidence",
+    "rejectionReasons": []
+  },
+  "sharedArtifacts": [
+    {
+      "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-shared-final/browser-cohort.json",
+      "bytes": 53818,
+      "sha256": "6177958ec7377c71f2389c69c980096f32dd20f702d93c2fdb2def4b361e3f42"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-shared-final/artifact-manifest.json",
+      "bytes": 512,
+      "sha256": "291745baac4d3b6d8d58f0df69ad5ec2759dc1108c891a5d0f9b392000d7c7c1"
+    }
+  ],
+  "size": {
+    "gzip9Js": 153261,
+    "originalCandidateGzip9Js": 153118,
+    "previousCeiling": 153207,
+    "ceiling": 153307,
+    "gzip9Css": 23512,
+    "publicDelivery": 164988031
+  },
+  "regressionTraces": [
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/board-drag-releases-the-old-pad-capture-and-visible-gesture-before-touchCancel.json",
+        "bytes": 3605,
+        "sha256": "61a5c47cb800358b98173f0779bbb976dc090fe67673c7b64153b56680bfc057"
+      },
+      "test": "board-drag releases the old pad capture and visible gesture before touchCancel",
+      "fixture": {
+        "levelId": "rose-heart-roundabout",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-b83edf75",
+        "prefixSha256": "5a1f10e2bc95d211ba5780094c0b4ce93472201988b4a563f880653166631882"
+      },
+      "samples": [
+        {
+          "at": 481.5999999642372,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 586.1999999880791,
+          "steps": 40,
+          "presentation": [
+            "door-opening-presentation door-magic-red"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 1879.699999988079,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 2077.7999999523163,
+          "steps": 41,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/board-drag-releases-the-old-pad-capture-and-visible-gesture-before-touchEnd.json",
+        "bytes": 3591,
+        "sha256": "a253c730762cb5d87e0f4d315a839d5100d08b114b1d981cc13a8acc50dc2d9f"
+      },
+      "test": "board-drag releases the old pad capture and visible gesture before touchEnd",
+      "fixture": {
+        "levelId": "rose-heart-roundabout",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-b83edf75",
+        "prefixSha256": "5a1f10e2bc95d211ba5780094c0b4ce93472201988b4a563f880653166631882"
+      },
+      "samples": [
+        {
+          "at": 511.80000001192093,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 632.3999999761581,
+          "steps": 40,
+          "presentation": [
+            "door-opening-presentation door-magic-red"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 1927.5,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 2127.399999976158,
+          "steps": 41,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/keyboard-releases-the-old-pad-capture-and-visible-gesture-before-touchCancel.json",
+        "bytes": 3576,
+        "sha256": "beba124db518e553473cd9055877e46da42585c0674436637e128f46d631b89b"
+      },
+      "test": "keyboard releases the old pad capture and visible gesture before touchCancel",
+      "fixture": {
+        "levelId": "rose-heart-roundabout",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-b83edf75",
+        "prefixSha256": "5a1f10e2bc95d211ba5780094c0b4ce93472201988b4a563f880653166631882"
+      },
+      "samples": [
+        {
+          "at": 605.5,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 697,
+          "steps": 40,
+          "presentation": [
+            "door-opening-presentation door-magic-red"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 1994.699999988079,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 2190.899999976158,
+          "steps": 41,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/keyboard-releases-the-old-pad-capture-and-visible-gesture-before-touchEnd.json",
+        "bytes": 3599,
+        "sha256": "c4edf9527bf8a64e1bd42d2c68ae90f28cb0eac9a63ec32e7419c3afe0607cf4"
+      },
+      "test": "keyboard releases the old pad capture and visible gesture before touchEnd",
+      "fixture": {
+        "levelId": "rose-heart-roundabout",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-b83edf75",
+        "prefixSha256": "5a1f10e2bc95d211ba5780094c0b4ce93472201988b4a563f880653166631882"
+      },
+      "samples": [
+        {
+          "at": 539.3999999761581,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 646.1999999880791,
+          "steps": 40,
+          "presentation": [
+            "door-opening-presentation door-magic-red"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 1941.199999988079,
+          "steps": 40,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 2142.599999964237,
+          "steps": 41,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/R1-stalled-jump-rescue-full-held-waits-for-the-actual-final-phase.json",
+        "bytes": 7098,
+        "sha256": "1a4b9ce3c316d8396933e630489176b6fadcc570bca20383dd7314b96f57f57e"
+      },
+      "test": "R1 stalled jump-rescue full held waits for the actual final phase",
+      "fixture": {
+        "levelId": "lanternlight-labyrinth",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-93c18f9e",
+        "prefixSha256": "4b8cac13d0bcd800bdd0181c4deb6e7693dc008954af8e58c024b1be515b90bb"
+      },
+      "samples": [
+        {
+          "at": 0,
+          "steps": 195,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 0,
+          "steps": 196,
+          "presentation": [
+            "jump-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [
+            "rescue-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5900,
+          "steps": 196,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 6060,
+          "steps": 197,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/R1-stalled-jump-rescue-full-hidden-waits-for-the-actual-final-phase.json",
+        "bytes": 7002,
+        "sha256": "3441d82250ad361f86d8d7b7301287a772785375056dd6c44a4042300c2a80a9"
+      },
+      "test": "R1 stalled jump-rescue full hidden waits for the actual final phase",
+      "fixture": {
+        "levelId": "lanternlight-labyrinth",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-93c18f9e",
+        "prefixSha256": "4b8cac13d0bcd800bdd0181c4deb6e7693dc008954af8e58c024b1be515b90bb"
+      },
+      "samples": [
+        {
+          "at": 0,
+          "steps": 195,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 0,
+          "steps": 196,
+          "presentation": [
+            "jump-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [
+            "rescue-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/R1-stalled-jump-rescue-full-released-waits-for-the-actual-final-phase.json",
+        "bytes": 7004,
+        "sha256": "426b818664a5ead38077e00c62f393faa7097df1e37d65fc3bcbb8f288033f93"
+      },
+      "test": "R1 stalled jump-rescue full released waits for the actual final phase",
+      "fixture": {
+        "levelId": "lanternlight-labyrinth",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-93c18f9e",
+        "prefixSha256": "4b8cac13d0bcd800bdd0181c4deb6e7693dc008954af8e58c024b1be515b90bb"
+      },
+      "samples": [
+        {
+          "at": 0,
+          "steps": 195,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 0,
+          "steps": 196,
+          "presentation": [
+            "jump-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [
+            "rescue-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5900,
+          "steps": 196,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/R1-stalled-jump-rescue-reduced-held-waits-for-the-actual-final-phase.json",
+        "bytes": 7101,
+        "sha256": "b2ed7ebec70806659a049e1d0b5a5b73b9af06992706c577133ddb81ae4f6c14"
+      },
+      "test": "R1 stalled jump-rescue reduced held waits for the actual final phase",
+      "fixture": {
+        "levelId": "lanternlight-labyrinth",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-93c18f9e",
+        "prefixSha256": "4b8cac13d0bcd800bdd0181c4deb6e7693dc008954af8e58c024b1be515b90bb"
+      },
+      "samples": [
+        {
+          "at": 0,
+          "steps": 195,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 0,
+          "steps": 196,
+          "presentation": [
+            "jump-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [
+            "rescue-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5160,
+          "steps": 196,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 5340,
+          "steps": 197,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/R1-stalled-jump-rescue-reduced-hidden-waits-for-the-actual-final-phase.json",
+        "bytes": 7103,
+        "sha256": "16c1de877d8d6debefe403f0fd6b8d90106b1f27955195a33e9fd919754a72e2"
+      },
+      "test": "R1 stalled jump-rescue reduced hidden waits for the actual final phase",
+      "fixture": {
+        "levelId": "lanternlight-labyrinth",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-93c18f9e",
+        "prefixSha256": "4b8cac13d0bcd800bdd0181c4deb6e7693dc008954af8e58c024b1be515b90bb"
+      },
+      "samples": [
+        {
+          "at": 0,
+          "steps": 195,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 0,
+          "steps": 196,
+          "presentation": [
+            "jump-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [
+            "rescue-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    },
+    {
+      "artifact": {
+        "path": "C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-input-final/v22-input/R1-stalled-jump-rescue-reduced-released-waits-for-the-actual-final-phase.json",
+        "bytes": 7007,
+        "sha256": "534d13d930ace03942d76e3905d9439750b150200a4e97b4de9e790fc1d35f19"
+      },
+      "test": "R1 stalled jump-rescue reduced released waits for the actual final phase",
+      "fixture": {
+        "levelId": "lanternlight-labyrinth",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-93c18f9e",
+        "prefixSha256": "4b8cac13d0bcd800bdd0181c4deb6e7693dc008954af8e58c024b1be515b90bb"
+      },
+      "samples": [
+        {
+          "at": 0,
+          "steps": 195,
+          "presentation": [],
+          "dialog": null
+        },
+        {
+          "at": 0,
+          "steps": 196,
+          "presentation": [
+            "jump-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5000,
+          "steps": 196,
+          "presentation": [
+            "rescue-presentation"
+          ],
+          "dialog": null
+        },
+        {
+          "at": 5160,
+          "steps": 196,
+          "presentation": [],
+          "dialog": null
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Clock/DOM lifecycle is not physical display latency or FPS",
+    "Hidden-page R1 probe uses synthetic visibility; existing real-time suite also tests restored visibility",
+    "No real authored jump-door/jump-combat fixture found; two tests skipped",
+    "No broad performance cohort repeated; original timeout, mixed tails and unattributed tasks remain open",
+    "No physical iPad/Safari or timed Tauri evidence",
+    "Historical per-test status written in finally is provisional; runner verdicts above are authoritative"
+  ],
+  "checks": {
+    "serialProject": {
+      "command": "npm test -- --no-file-parallelism --reporter=default --reporter=json --outputFile=C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-project-tests.json",
+      "passed": 493,
+      "files": 49,
+      "includesScenarioFixtures": 4
+    },
+    "build": {
+      "command": "npm run build",
+      "passed": true,
+      "lockedVite": "8.2.2",
+      "lockedRolldown": "1.2.6",
+      "warning": "Existing >500 kB bundle warning; no threshold changed"
+    },
+    "performanceContract": {
+      "command": "npm run perf:check",
+      "passed": true,
+      "scenarios": 11,
+      "allocationOwners": 9,
+      "storedEvidenceFiles": 3
+    },
+    "desktop": {
+      "command": "npm run check:desktop",
+      "passed": true,
+      "kind": "cargo check --locked",
+      "durationSeconds": 15.33,
+      "notTimedNativePlay": true
+    }
+  }
+}

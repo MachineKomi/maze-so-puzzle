@@ -115,3 +115,12 @@ production preview only, with no competing development server. The shared config
 runs the unchanged six-scenario/five-sample browser cohort. The visual script
 compares Title/Home/maze at four viewports; exact geometry and pixel results are
 reported separately, and the screenshots still require visual inspection.
+
+For the narrow R1 return, set `MAZE_PERF_PORT=4186` if the default 4174 is in use;
+never stop another project's server to claim the port. `--grep "R1 "` selects
+the delayed real jump-rescue and reverse touch-pad takeover regressions. Clock
+fast-forward is a deterministic delayed-callback probe, not a performance sample.
+The final runner's `playwright-results.json` owns test verdicts; per-test lifecycle
+attachments are captured before that verdict is assigned. See the
+[R1 response](../../docs/reviews/2026-09-05-v22-perf01-r1-response.md) for rejected
+attempts, locked-toolchain preparation and evidence boundaries.
