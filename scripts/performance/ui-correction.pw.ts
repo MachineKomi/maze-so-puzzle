@@ -208,6 +208,93 @@ test.afterEach(async ({}, info) => {
   expect(pageErrors).toEqual([]);
 });
 
+for (const saved of [false, true]) {
+  test(`UI03 Home ${saved ? "saved Continue" : "fresh adventure"} keeps every menu action and progress label readable`, async ({ page }) => {
+    test.setTimeout(120_000);
+    const level = CURATED_LEVELS.find(candidate => candidate.name === "Splashy Boots")!;
+    let game = createInitialGameState(level);
+    // A valid engine-produced 35-step snapshot reproduces the native Continue
+    // subtitle. Seeded progress is a presentation fixture, not reward evidence.
+    while (game.steps < 35) {
+      const next = DIRECTIONS.map(direction => movePlayer(level, game, direction)).find(result => result.moved && !result.state.won);
+      expect(next).toBeTruthy();
+      game = next!.state;
+    }
+    const snapshot = createActiveRunSnapshot({ runId:"run-home-layout-regression", mode:"normal", level, game, revealedTiles:[] });
+    expect(snapshot).not.toBeNull();
+    const progress = { ...createDefaultPlayerProgress(CURATED_LEVELS.length), gold:51, totalAnimalsRescued:3,
+      bestResultsByLevel:Object.fromEntries(CURATED_LEVELS.slice(0,2).map((completed,index) => [completed.id, {
+        completions:1, bestSteps:35, bestPower:2, bestRescuedCount:index + 1, totalRescueCount:index + 1,
+        perfectRescue:true, source:"curated" as const, bestRescuedSpecies:[],
+        contentRevision:completed.contentRevision, gameplayFingerprint:completed.gameplayFingerprint,
+      }])),
+    };
+    await page.addInitScript(({ saved, progressKey, runKey, progress, snapshot }) => {
+      localStorage.clear();
+      if (saved) {
+        localStorage.setItem(progressKey, JSON.stringify(progress));
+        localStorage.setItem(runKey, JSON.stringify(snapshot));
+      }
+    }, { saved, progressKey:PLAYER_PROGRESS_STORAGE_KEY, runKey:ACTIVE_RUN_STORAGE_KEY, progress, snapshot });
+    const records = [];
+    for (const [width,height] of [[1920,1080],[1280,720],[1194,834],[1024,768],[960,540],[844,390],[568,320]]) {
+      await page.setViewportSize({ width:width!, height:height! });
+      await ordinaryHome(page);
+      await page.evaluate(() => document.fonts.ready);
+      const copy = page.locator(".title-copy");
+      await expect(page.locator(".title-play-button")).toContainText(saved ? "Splashy Boots · 35 steps" : "A lovely first maze awaits");
+      await expect(page.locator(".title-progress b")).toHaveText(saved ? ["2","3","51"] : ["0","0","0"]);
+      await assertNoScroll(copy);
+      const geometry = await page.evaluate(() => {
+        const box = (selector: string) => document.querySelector(selector)!.getBoundingClientRect().toJSON();
+        return { copy:box(".title-copy"), logo:box(".title-logo"), hero:box(".title-hero"),
+          progress:[...document.querySelectorAll(".title-progress b,.title-progress small")].map(element => element.getBoundingClientRect().toJSON()),
+          controls:[...document.querySelectorAll(".title-copy button,.title-sound-controls button")].map(element => element.getBoundingClientRect().toJSON()),
+        };
+      });
+      expect(geometry.logo.height).toBeGreaterThan(0);
+      expect(geometry.logo.x + geometry.logo.width / 2).toBeLessThan(width! / 2);
+      expect(geometry.hero.x + geometry.hero.width / 2).toBeGreaterThan(width! / 2);
+      for (const box of [...geometry.progress,...geometry.controls]) {
+        expect(box.top).toBeGreaterThanOrEqual(0);
+        expect(box.bottom).toBeLessThanOrEqual(height! + 1);
+      }
+      for (const box of geometry.progress) {
+        expect(box.top).toBeGreaterThanOrEqual(geometry.copy.top);
+        expect(box.bottom).toBeLessThanOrEqual(geometry.copy.bottom);
+        expect(box.left).toBeGreaterThanOrEqual(geometry.copy.left);
+        expect(box.right).toBeLessThanOrEqual(geometry.copy.right);
+      }
+      for (const box of geometry.controls) {
+        expect(box.width).toBeGreaterThanOrEqual(48);
+        expect(box.height).toBeGreaterThanOrEqual(48);
+      }
+      await evidence(page, `home-${saved ? "saved" : "fresh"}-${width}`, geometry);
+      await page.addStyleTag({ content:"html {font-size:200%;} p,button,h2 {line-height:1.5;letter-spacing:.12em;word-spacing:.16em;} p {margin-bottom:2em;}" });
+      for (const selector of [".title-copy", ".title-actions", ".title-secondary-actions", ".title-progress"]) {
+        const extent = await page.locator(selector).evaluate(element => ({ width:element.clientWidth, scroll:element.scrollWidth }));
+        expect(extent.scroll, `${selector} at 200%`).toBeLessThanOrEqual(extent.width + 1);
+      }
+      for (const button of await copy.getByRole("button").all()) {
+        await button.focus();
+        await expect(button).toBeFocused();
+        const bounds = await button.evaluate(element => ({ button:element.getBoundingClientRect().toJSON(), reader:element.closest(".title-copy")!.getBoundingClientRect().toJSON() }));
+        expect(bounds.reader.top).toBeGreaterThanOrEqual(0);
+        expect(bounds.reader.bottom).toBeLessThanOrEqual(height! + 1);
+        expect(bounds.button.top).toBeGreaterThanOrEqual(bounds.reader.top - 1);
+        expect(bounds.button.bottom).toBeLessThanOrEqual(bounds.reader.bottom + 1);
+      }
+      await copy.evaluate(element => { element.scrollTop = element.scrollHeight; });
+      const reading = await page.locator(".title-progress").evaluate(element => ({ progress:element.getBoundingClientRect().toJSON(), reader:element.closest(".title-copy")!.getBoundingClientRect().toJSON() }));
+      expect(reading.progress.top).toBeGreaterThanOrEqual(reading.reader.top);
+      expect(reading.progress.bottom).toBeLessThanOrEqual(reading.reader.bottom);
+      records.push({ width, height, normal:geometry, enlarged:reading });
+      await evidence(page, `home-${saved ? "saved" : "fresh"}-${width}-200percent`, reading);
+    }
+    await writeFile(resolve(output, `home-${saved ? "saved" : "fresh"}-geometry.json`), JSON.stringify(records, null, 2));
+  });
+}
+
 for (const viewport of [{ width: 1920, height: 1080 }, { width: 1194, height: 834 }, { width: 1024, height: 768 }, { width: 960, height: 540 }, { width: 844, height: 390 }, { width: 568, height: 320 }]) {
   test(`UI03 landscape maximizes a stable square board at ${viewport.width}x${viewport.height}`, async ({ page }) => {
     await page.setViewportSize(viewport);

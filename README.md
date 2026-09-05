@@ -105,23 +105,20 @@ Preview:
   the safe perpendicular floor tile, with a little touch-wobble tolerance. It
   never follows a wall, pathfinds, enters a hazard or hole, collects an object,
   rescues a friend, enters a portal, or routes around a door or enemy.
-- On-screen arrows: touch- and mouse-friendly movement.
-- Holding touch, mouse, keyboard, or an on-screen arrow moves once immediately,
-  waits 320 ms so a child can release after one square, then accelerates
-  smoothly from 260 ms to a capped 160 ms repeat over 16 held steps. Changing
-  direction resets the acceleration, and a 120 ms visual ease keeps each grid
-  step readable.
-- The uncommitted Plan 01 UI candidate uses real CSS pixels: square maze left, responsive information/control
-  deck right, with the same section order on TV, desktop, Tauri and tablet.
-  Short landscape phones use 28px noninteractive status cells and accessible
-  grouped details in More. Normal-text Bag/friend statuses fit together; enlarged
-  text uses one named reader with fixed Objective/Hint and movement access.
-  Board/pad gestures are isolated; surrounding UI retains
-  browser scrolling and text enlargement. See [UI/UX specification](docs/UI_UX_SPEC.md)
-  for measured targets, review evidence and pending physical-device gates.
-- Big Maze: use available room for a non-smaller square board, keeping the same
-  full right-hand deck and focus order. Press Escape or Normal to leave Big mode
-  when no dialog is open.
+- Bottom-right thumb pad: tap an arrow for one square, hold to continue, or drag
+  within the pad to steer. Mouse and touch use the same control.
+- Ordinary first taps and held steps use the same 160 ms travel interval. Ame
+  and the camera move smoothly along the legal tile path; presentation lag stays
+  bounded when inputs arrive quickly. Late callbacks use their actual time and
+  never replay a burst of missed moves.
+- The UI-03 landscape layout uses real CSS pixels: a square maze on the left and
+  an information/control deck on the right. Compact landscape phones keep
+  essential controls available and group secondary actions and details in More.
+  Board/pad gestures are isolated; surrounding UI retains scrolling and text
+  enlargement. See the [UI-03 correction plan](docs/plans/UI-03-fp-ui1-correction.md)
+  for the layout contract and remaining physical-device and Human checks.
+- The board always fills its maximum useful square without changing the camera
+  span. There is no Big/Normal toggle or separate board-size mode.
 - Any maze wider or taller than 6 tiles uses a player-centred 6 x 6 exploration
   view. Its minimap reveals the current view immediately and remembers every
   square Ame has already explored while keeping the rest hidden.

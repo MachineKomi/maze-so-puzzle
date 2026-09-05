@@ -14,7 +14,7 @@ session is enough. The remaining family-quality decision belongs to you and Ame.
 
 1. **Title and Home.** Logo/actions belong on the left; the Home cast belongs on
    the right-hand path. Check the larger buttons, readable rounded type, warm
-   surfaces and one-action speaker mute. The sliders open Sound & Comfort.
+   surfaces and one-action speaker mute. The settings icon opens Sound & Comfort.
 2. **Movement.** In a scrolling maze, tap once after waiting, tap several times,
    then hold. Try corners, reversals and the outside edge of the maze. Each first
    step should be smooth, with no flash, camera jerk or pronounced Ame hop.

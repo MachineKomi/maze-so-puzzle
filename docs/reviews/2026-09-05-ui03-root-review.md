@@ -155,6 +155,34 @@ not certify blur/compositing or low-end performance.
 
 ## Release and next owner
 
+### Native candidate rejection and Home correction
+
+The first clean candidate, `2f8fa6a927618885f2b34ff170046961d2d9c08c`, passed
+GitHub verify/desktop and produced a versioned portable. Root's actual WebView2
+journey then exposed clipped Home progress labels and a scrollbar at the default
+1280×720 client size with a saved Continue subtitle. That portable is preserved
+as a **withheld attempt**, not a published release. Passing browser checks did
+not cover this exact composition and did not override the native finding.
+
+Home now sizes its menu row from content and gives the logo the remaining space.
+The narrowest landscape composition uses a little more menu width and smaller
+gaps, retaining 48px actions. Root inspected the corrected 1920×1080,1280×720 and
+568×320 screenshots. Both new production regression tests passed in28.2s (r9):
+fresh and valid engine-produced saved35-step states across seven landscapes,
+each at normal size and200% text plus spacing. Normal menus have no scrolling
+or clipped labels; enlarged text remains accessible through the bounded reader.
+TypeScript/Vite and static gates passed again:152,377 gzip9 JS,23,130 CSS,
+164,988,031 public bytes. No other runtime source changed in this correction.
+
+Before replacing the candidate, root verified native save migration/resume,
+one keyboard step (35→36), Hint movement isolation, Sound & Comfort, a large
+Puppy card, Book/Bestiary, story replay/Enter with unchanged36-step run, and the
+960×540 minimum client layout. The earlier resize attempts did not change the
+height and are not minimum-layout evidence; `15-supported-minimum-960x540`
+is the successful capture. All raw native captures remain under the private
+release-evidence directory. Replacement-source native Home and release receipts
+are still required below.
+
 The intended immutable preview is **v0.22.0 FP-UI1**. Its manifest and PLAYTEST
 note will identify the clean source, Windows bytes, web deployment, CI and
 verified journeys. Existing v0.20.1/v0.21.0 files remain untouched. The Windows

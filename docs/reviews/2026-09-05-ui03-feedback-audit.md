@@ -6,6 +6,12 @@ This is an independent implementation-to-feedback map for all 61 rows in the [Hu
 
 ## Evidence used
 
+Native follow-up: the first `2f8fa6a` portable exposed Home counter clipping at
+1280×720 and was withheld. A bounded CSS correction passed both new r9 production
+Home tests (fresh/saved across seven landscapes at normal and200% text),28.2s.
+The root review records this failed candidate and the native journeys; the final
+release must use the corrected source and separately verified portable.
+
 All local browser evidence referenced below is under `C:/Users/hellb/Documents/Maze so Puzzle/review-evidence/`.
 
 | Reference | Actual evidence and scope |
