@@ -7,6 +7,8 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Latest physical result, 2026-09-06:** [Human v0.22.2 feedback](user-playtests/v0222-playtest-feedback.md) reports no obvious regression, perhaps slight improvement, but scrolling still stutters on iPad. Character/animation movement is smooth while the camera stays clamped; desktop browser does not exhibit the same symptom. The iPad gate is **not passed**. Possible thin lines need investigation, not a fabricated regression verdict. Older “awaiting P1” statements below record pre-feedback publication state. Astra owns next moving-terrain/filter isolation; Sol's independent pace slice stays separate. Texture-scale and Lanternlight level-design steer is routed in backlog/roadmap.
+
 - **Published current preview: v0.22.2 V22-CAMERA1**, runtime/tag `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`. Astra implemented fixed-origin, resize-safe percentage camera translation; actual GPT-5.6 Sol High independently approved source, geometry, final test observer and disclosed native Exit exception. It is a controlled experiment, **not a proven physical-iPad fix**. No pace, FOV, engine/content/save, art, audio or dependency change. Frozen attachment/test-observer checkpoint: `b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c`. [Current receipt](../release/V22-CAMERA1-v0.22.2-release-verification.json).
 - **Prior immutable preview: v0.22.1 V22-PERF1**, runtime/tag source `8442b79db11a59e23f23c59f213116e7b8f54592`. This is the independently accepted R1 runtime `91678d1a7f97055dc2f167f8a3e7106226817306` with only seven coordinated version fields changed across six files.
 - Sol's pushed review checkpoint is `c19128b7a45bc2179370bf55cfc8ab5851dbf008`; its [R1 verdict](reviews/2026-09-05-sol-v22-perf01-r1-review.md) accepts preview promotion, not sustained performance or physical-device success. Original [candidate](reviews/2026-09-05-v22-perf01-candidate.md), [R1 response](reviews/2026-09-05-v22-perf01-r1-response.md), rejected attempts and hash-bound measurements remain history.
@@ -103,8 +105,11 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Current next action, 2026-09-06:** PERF-02A is published; no runtime writer is
-currently in flight. Ask for P1 on **v0.22.2, Maze 2 on the affected iPad**.
+**Current next action, 2026-09-06:** PERF-02A's first physical P1 result is
+received: scrolling still stutters. Astra is completing separate Tessera
+integration on `codex/v22-tessera-integration`; main/runtime v0.22.2 stay intact.
+Actual Sol completed read-only PLAY-A preflight and awaits sole-writer handoff.
+The next performance lane is controlled moving-terrain/filter isolation.
 Do not claim its percentage-coordinate change improves frame delivery merely
 because it removes world left/top rebasing. If it remains poor, Astra resumes
 the next isolated moving-surface/terrain-cost probe from PERF-02 before broader

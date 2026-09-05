@@ -1,0 +1,17 @@
+# Feedback on v0222
+
+Turns out I wasn't asleep lol but I've left these queued prompts to pop. 
+
+I quickly play tested v0.22.2 on ipad - I don't think there is any regression - and it might be slightly better - but there is still some ugly lag and stuttering or jerkyness to the camera movement. It's definitely not the character movement or animation - if I stay in the corner of a maze so the camera isn't moving then the character movement looks and feels buttery smooth - as does the animation - its just the camera movement on ipad that still is lagging or something is wrong with it so it looks and feels bad. I think slowing the character down (movement speed options) will help. 
+
+This might be a smooth brain shot in the dark - but is it maybe the resolution of the background and wall textures is too high and its rendering that large texture moving that is causing it to chug or... I don't know - its just weird that we have lovely high resolution character and friend sprites and they move around just fine but then try moving the camera and the whole thing feels off - and then it has to be a performance or ipad specific issue because nothing like that on desktop or mobile. 
+
+Might have seen some weird artefacting like some strange little lines appearing but maybe that is just ipad being weird but if anything you did might have introduced that kind of artefacting worth investigating. 
+
+Anyway that is the feedback so far on v0.22.2 I didn't really test for anything else beyond performance on ipad vs the web-app on desktop (in browser)
+
+Sort of related but not really - feedback - in many mazes (not all but many) I usually think that the textures for the walls and floor are scaled too big, like they should be scaled down a bit and then repeated more - because the bricks just look weirdly big sometimes for a wall etc. same for the leaves. And in almost all cases the faded transparent overlay is way way too big. 
+
+Also - I want to praise Lanternlight Labyrinth - one of the best mazes in terms of exploration and interesting puzzles and enemies you can't defeat and have to come back to. Really like a lot about this maze. I think it could be nearly perfect if it was just a bit smaller (slightly) and had some more pickups and drops and loot and stuff going on because a lot of it feels a bit empty and boring - but in general its got some really nice interesting spaces and level design and a bit of puzzlely ness to it which I like. More of that sort of thing in level design - and more and better and cleverer - I really want to see how much challenge and interest and variety and delight and surprise we can pack into small mazes while keeping all of the mechanics really clear and intuitive - and solvable even if the solution isn't always straight forward or obvious and sometimes requires a bit of thought or experimentation and perserverance. 
+
+Feedback on v0.22.2 is saved here - sorry if there was other stuff you wanted feedback on that I've ignored I will provide playtest feedback against your full list of things you want tested when I can. 

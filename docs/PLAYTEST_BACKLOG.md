@@ -6,6 +6,42 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### v0.22.2 physical feedback and design steer
+
+[Verbatim Human record](user-playtests/v0222-playtest-feedback.md). Limited quick
+iPad/desktop-browser review, not full-checklist acceptance.
+
+- **PERF-02:** no obvious regression, perhaps slightly better, but scrolling
+  still stutters. Clamped-camera actor/animation motion is smooth. Isolate moving
+  terrain, remaining inline floor/wall filters, depth/blend and texture sampling
+  at unchanged camera/FOV/cadence. Source resolution is a hypothesis, not an
+  established cause. Chill must not conceal this open gate.
+- **PT33:** possible thin moving lines, uncertain observation. Compare fractional
+  and settled positions against v0.22.1 and earlier moving-line reports; do not
+  assume a new regression or add blanket overlap/pixel snapping.
+- **PT15 / Plan04:** wall/floor bricks and leaves often look too big, and faint
+  dressing overlays almost always do. Calibrate smaller world-space repeat
+  periods per family using approved textures at gameplay scale. Visual scale is
+  distinct from source resolution and decoded memory. Freeze performance
+  comparisons first; check seams/shimmer and explicitly update old scale-test
+  limits. New generated artwork is not required just to change repetition.
+- **PT06/PT12 / Plan09:** Lanternlight Labyrinth is a strong positive reference
+  for exploration, interesting spaces and returning to stronger enemies later.
+  Preserve that puzzle structure; aim slightly smaller with more intentional
+  pickups/loot and fewer empty stretches. Across authored/generated small mazes,
+  pursue surprise, variety and thoughtful experimentation with clear mechanics
+  and guaranteed solvability, not just straight corridors or arbitrary density.
+
+Routed requirements, not implementations or closed acceptance gates.
+
+**Later same-session clarification:** [annotated Lanternlight example](user-playtests/2026-09-06-lanternlight-spatial-clarification.md)
+supersedes a blanket shrinking rule. 20×20+ room-rich levels can be excellent;
+the problem is repetitive winding traversal, not map area. Plan09/gameplay spec
+remove the former four-over-16 quota and mandatory shrink count while retaining
+the 24×24 technical ceiling, solvability and pacing/performance checks. Rooms,
+wide connections, visible-but-not-yet-reachable discoveries and portal/door
+relationships should dominate; dense traditional mazes are occasional variants.
+
 **UI-NATIVE-EXIT-01 — title Exit leaves an empty Windows window.** During
 v0.22.2 packaging, the unchanged `FrontDoorScreen` `window.close()` path closed
 the web content/CDP page but left the native window/process alive. Normal OS

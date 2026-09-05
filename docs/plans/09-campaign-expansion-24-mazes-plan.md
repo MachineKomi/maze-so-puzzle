@@ -5,6 +5,15 @@ Plans 01–08, UI-02, and both Plan-07 passes are accepted
 
 Owner: root integration agent
 
+Human refinement, 2026-09-06: use Lanternlight Labyrinth as a positive reference
+for exploration, distinct spaces, return-after-growing-stronger encounters and
+intuitive but thoughtful puzzle solving. Preserve those qualities; prefer a
+slightly more compact footprint and richer intentional pickups/loot along quiet
+stretches. Apply the lesson to authored and generated small mazes without
+flattening them into corridors or cluttering every tile. Keep solvability,
+interesting experimentation, variety, surprise and clear mechanics together.
+Source: [v0.22.2 feedback](../user-playtests/v0222-playtest-feedback.md), PT06/PT12.
+
 Prepared: 2026-09-02
 
 Current planning baseline: 16 authored story mazes at manager baseline commit `5eed837`
@@ -122,20 +131,21 @@ These constraints derive from Human decisions and predecessor contracts.
 - Every new maze passes ordinary zero-rescue and exact-all-rescue solver modes.
 - Every reachable valid player state should remain completable where practical; any intentional exception requires a documented fairness proof, short safe recovery, and clear disclosure.
 - No required blind choice, hidden irreversible trap, soft lock, resource grind, or fact available only in transient story copy.
-- Absolute authored dimensions remain at or below 24×24, but the normal authored
-  range is at most 16 tiles on either axis. Across the final 24 chapters, no more
-  than four levels may exceed 16 on either axis, including inherited levels.
-  Every exception must be a named set piece with room/spoke variety, event-gap
-  and retraversal evidence, and a recorded reason it could not deliver the same
-  puzzle at a smaller size. Audit and compact inherited outliers as needed; size
-  is not difficulty.
+- Absolute authored dimensions remain at or below 24×24. The 2026-09-06 Human
+  clarification welcomes 20×20+ room-rich levels: remove the earlier fixed
+  four-over-16 quota and mandatory inherited-map shrink count. Audit spatial
+  interest, orientation, meaningful traversal and solver/performance cost instead
+  of treating area as difficulty or fatigue. Compact where it removes boring
+  travel, not where it destroys useful rooms or spatial relationships. Preserve
+  [the annotated Lanternlight lesson](../user-playtests/2026-09-06-lanternlight-spatial-clarification.md).
 - Every authored or generated level above 16 on either axis contains at least
   two recognisable open rooms with meaningful optional or functional content,
   plus a hub, spoke, loop, garden or puzzle-chamber relationship. Avoid
   consecutive large authored chapters unless a documented pacing reason and a
   successful family test support the adjacency.
 - Event gaps should normally remain at or below 24 directional inputs, and neutral retraversal should normally remain at or below 15%. A gap of 25–30 inputs requires a named design reason and targeted evidence; anything above 30 requires redesign or an explicit successful family-tested exception.
-- Never allow more than two corridor-dominant/traditional mazes consecutively.
+- Make dense traditional winding mazes occasional exceptions with a distinct
+  enjoyable twist, not the default. Never allow more than two consecutively.
   Deliberately alternate room puzzles, hubs, loops, spokes, portal islands,
   compact teaching/application spaces and occasional labyrinths. A long winding
   route must open into meaningful rooms or events rather than repeat empty bends.
@@ -958,11 +968,11 @@ historical seed, record or campaign access is reinterpreted.
 
 ### Phase 2 — inherited-campaign remediation
 
-- Apply content revisions—not new IDs—to every inherited chapter that must change
-  to meet the final portfolio. The current audit reports nine of sixteen above
-  16×16; if that remains true and Chapter 24 keeps the sole default new exception,
-  compact at least six inherited levels so the final campaign has no more than
-  four exceptions. Re-audit after each revision rather than assuming the count.
+- Apply content revisions—not new IDs—to inherited chapters requiring a spatial
+  or pacing revision. Do not compact a prescribed number solely because they
+  exceed 16×16. Review Lanternlight's praised open/varied sections separately from
+  its dense winding sections; preserve discoveries and return-planning while
+  reducing low-interest navigation. Re-audit routes, saves and solver cost.
 - Rebuild `rainbow-power-parade` if it still reads as a snaking corridor, using
   rooms, spokes, route-order choices and meaningful event cadence while
   preserving its stable ID, victory role and fair Power-sequence purpose.
@@ -1063,12 +1073,12 @@ Do not put campaign ordering, story identity, or unlock truth in CSS or filename
   outcomes produce truthful optionality and outro copy; story replay never
   reapplies rewards or changes an active route.
 - Structural validation and absolute-size bounds for every map.
-- No more than four authored levels exceed 16 tiles on either axis; every one is
-  named in the exception ledger and passes its room/spoke, event-gap and
-  retraversal justification. No two are consecutive without the recorded pacing
-  reason and successful family evidence. At least 90% of the frozen generated
-  seed cohort is <=16, and every larger authored/generated result has at least
-  two meaningful open rooms plus a hub/spoke/loop/garden/chamber relationship.
+- Authored/generated size cohorts report meaningful-event gaps, neutral
+  retraversal, room relationships, orientation and solver/performance cost. No
+  fixed small-map percentage overrides the Human's room-rich large-level steer.
+  Every result above16 has at least two meaningful rooms and a hub/spoke/loop/
+  garden/chamber relationship. Adjacent large chapters still need pacing review;
+  dense traditional labyrinths remain exceptional, not the baseline generator.
 - The topology portfolio contains no run of three corridor-dominant chapters and
   satisfies the per-four-chapter variety contract. Rainbow Power Parade has a
   room/branch/order structure rather than one snaking route.

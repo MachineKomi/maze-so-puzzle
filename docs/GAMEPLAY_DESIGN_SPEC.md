@@ -197,13 +197,14 @@ coverage as eight levels are inserted.
 
 ### Campaign scale, spatial variety, teaching and encounter rhythm
 
-- The normal authored level is at most 16 tiles on either axis. Across the final
-  24 chapters no more than four may exceed 16, including inherited levels; each
-  is a named, family-tested set piece with rooms/spokes, event-gap/retraversal
-  evidence and a reason it cannot deliver the same puzzle more compactly. If the
-  current nine-of-sixteen audit still holds and Chapter 24 keeps the sole default
-  new exception, revise and compact at least six inherited maps under their
-  stable IDs with content-revision, save, solver/Hint and family-play evidence.
+- Human clarification, 2026-09-06: prefer interesting spatial variety over a
+  blanket small-map quota. Compact levels remain useful, but 20×20+ room-rich
+  layouts are welcome within the existing 24×24 technical ceiling. Retire the
+  earlier four-over-16 quota and mandatory six-map shrink instruction. Evaluate
+  meaningful traversal, event gaps, return-planning, orientation and solver cost,
+  not raw dimensions. Preserve Lanternlight's green-annotated room/corridor mix;
+  reduce its red-annotated repetitive winding rather than shrinking blindly.
+  [Human example](user-playtests/2026-09-06-lanternlight-spatial-clarification.md).
 - Every authored/generated level above 16 on either axis has at least two
   recognisable open rooms with meaningful optional or functional content plus a
   hub, spoke, loop, garden or puzzle-chamber relationship. Avoid consecutive
@@ -213,7 +214,9 @@ coverage as eight levels are inserted.
   directional inputs and neutral retraversal at or below 15%. A 25–30-input gap
   needs a named design reason and targeted evidence; anything above 30 needs
   redesign or an explicit successful family-tested exception.
-- Never ship three corridor-dominant levels consecutively. Mix compact puzzle
+- Traditional dense corridor mazes are occasional exceptions, each with a
+  distinct enjoyable idea; they are not the default topology. Never ship three
+  corridor-dominant levels consecutively. Mix compact puzzle
   rooms, hubs, loops, spokes, portal islands, open tableaux and occasional true
   labyrinths. Rebuild Rainbow Power Parade under a content revision if the
   integrated form still reads as a single snaking corridor.
