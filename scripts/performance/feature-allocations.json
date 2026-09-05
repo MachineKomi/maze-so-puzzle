@@ -323,6 +323,20 @@
       "rollbackPoint": "Before merge, discard/revert the complete V22-PERF-01 runtime slice back to461cab02b065a1d0f654c49189ed24108c22c5a8. Preserve all art, engine, schema6 progress and schema3 active saves. Cursor/map/binding changes, live input changes and Lite CSS are documented separate inspection seams; never restore only half of a repeat-suspension/source-takeover contract.",
       "dependencies": "Human-authorized V22-PERF-01 scope; frozen v0.22.0 production baseline; current-engine legal normal-save fixture matrix; independent Sol candidate review before main/release; affected-iPad test remains open.",
       "notes": "R1 JS ceiling153307 (previous153207); no CSS/public allocation. Public164988031 unchanged. Candidate tests/counters and external report hashes belong in the linked receipt. Diagnostic counter builds and Playwright packages are not shipped; no repository dependency/lockfile or persistence durability change. Retain report-only timing classification."
+    },
+    {
+      "id": "art-hotfix-01-tessera-field-alpha-repair",
+      "owner": "art",
+      "status": "approved",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 42980,
+      "reason": "Astra approves the exact additive public-byte cost of one versioned 42,980-byte lossless 256px Tessera Dolphin field derivative reconstructed from the already approved bounded alpha-recovery master. The accepted r01 remains immutable rollback evidence; the selected field transfer decreases by 1,382 bytes.",
+      "evidencePath": "docs/source-assets/publication/tessera-field-alpha-hotfix-r02-candidate.json",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Revert only Tessera Dolphin's generated field catalogue row to /assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r01.webp and its original sourceRecordId. Preserve both versioned field files, approved recovery masters and provenance records until the authorized retirement sweep.",
+      "dependencies": "Human ART-HOTFIX-01 repair authorization, approved bounded alpha-recovery master and proof, accepted 9418ee catalogue checkpoint, and Astra exact allocation approval; final source/image promotion review remains separate.",
+      "notes": "Public inventory grows exactly 42,980 bytes because r01 is retained. The theoretical decoded-inventory upper-bound grows 262,144 bytes, but the active field working set remains one 256px RGBA image and does not double. Selected encoded delivery changes from 44,362 to 42,980 bytes. JavaScript/CSS measurements remain within existing ceilings and this allocation authorizes no non-art growth."
     }
   ]
 }

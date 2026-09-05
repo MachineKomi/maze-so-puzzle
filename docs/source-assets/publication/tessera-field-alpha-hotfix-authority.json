@@ -1,0 +1,21 @@
+{
+  "schema": "maze-art-hotfix-authority/v1",
+  "hotfixId": "ART-HOTFIX-01",
+  "date": "2026-09-05",
+  "authorizedBy": "Human project owner",
+  "scope": "development-candidate",
+  "decision": "Continue the narrowly scoped Tessera Dolphin 256px field-alpha repair while affected-iPad playtesting is deferred until tomorrow. Device acceptance remains pending and is not inferred by this development authorization.",
+  "sourceAuthority": {
+    "path": "docs/source-assets/production/tessera-alpha-recovery/recovered-delivery-master.png",
+    "sha256": "1e7a7f8d3a687bb27d5473eef9eff961b0affbf766403ade5bcc2051f02f1f0d",
+    "approvalPath": "docs/source-assets/publication/ui-correction-tessera-recovery-approval.json",
+    "approvalSha256": "de29471ef0877bd69e229551c822476a4999e773c877d471bd011863140eee8d"
+  },
+  "constraints": [
+    "Derive a new versioned 256px field rendition from the already approved corrected alpha master.",
+    "Use the existing approved friend-field registration and deterministic delivery processing; do not resize the 512px contextual rendition as a shortcut.",
+    "Do not regenerate, repaint, redesign, or otherwise change Tessera Dolphin's approved character identity or source RGB.",
+    "Preserve the r01 field asset and all historical publication receipts as rollback evidence.",
+    "Root independently reviews the candidate before promotion; affected-iPad and family observations remain open acceptance evidence, not development or release blockers under the latest Human direction."
+  ]
+}

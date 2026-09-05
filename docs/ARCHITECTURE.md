@@ -86,8 +86,11 @@ Book and associated active-run bytes untouched, including during startup.
 
 Large actor and reward art loads for the mounted contextual viewer. Catalogue
 imports contain metadata, not image preloads. Existing optical/field projections
-remain unchanged. UI-03's Home v05 changes only the two explicitly authorized
-alpha pockets; the separately reviewed Tessera repair is contextual-only.
+remain unchanged except Tessera Dolphin's forward-only r02 field pointer, derived
+from the same approved bounded alpha-recovery master and the exact r01 field
+registration while retaining r01 for rollback. UI-03's Home v05 changes only the
+two explicitly authorized alpha pockets; Tessera's separately reviewed 512px
+contextual rendition remains distinct from the repaired 256px field derivative.
 
 1. `src/main.tsx` mounts the React application.
 2. `src/App.tsx` owns screen navigation and presents the title, Adventure Book,
@@ -426,6 +429,10 @@ encoded/decoded inventory only there. The Plan 03 publication utility is
 `scripts/art_pipeline/mgjrpg02_publish.py`: its explicit semantic map writes new
 no-overwrite URLs and strict-v2 records, and its check mode rebuilds derivatives
 in a temporary directory for byte comparison rather than mutating runtime files.
+`scripts/art_pipeline/tessera_field_alpha_hotfix.py` is the narrow ART-HOTFIX-01
+forward overlay: it pins the approved recovery master and accepted catalogue
+checkpoint, reuses the established field registration, changes exactly Tessera's
+generated row, and writes only versioned r02/provenance outputs.
 The09413c1 review follow-up grants this same Agent01 task a narrow exception:
 `ui_presentation_candidates.py` may prepare14 deterministic512px equipment
 candidates from approved originals. It reproduces approved optical bytes first,
