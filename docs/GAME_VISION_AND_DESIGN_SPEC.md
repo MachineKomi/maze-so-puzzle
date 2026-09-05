@@ -2,6 +2,19 @@
 
 **Latest Human-directed correction, 2026-09-05:** The latest Human comparison requests a warm, picture-led, tactile landscape interface with substantial readable type, large canonical art, authored left-copy/right-cast front-door composition, proper Book pages and joyful victories. UI-03 and its 61-row intake are the current correction authority. Landscape remains primary; portrait uses a safe rotate invitation. A first-step flash/camera jerk is unacceptable even when later held motion is smoother.
 
+**v0.22.0 Human playtest authority, 2026-09-05:** preserve the now-praised
+desktop/iPad Title, Home, maze/minimap/HUD, warm type, Book, sound access, story
+portraits and hybrid touch pad. The preview is not yet accepted: sustained
+large-maze iPad play must remain smooth, Lite must provide real scene relief,
+short-height phone landscape should keep approximately the same composition at
+smaller optical sizes, and a genuine held direction must resume after successful
+doors/battles/rescues without catch-up or post-release movement. Every fresh
+deliberate failed requirement explains itself once; one continuous blocked hold
+does not flood. The requested Bestiary states, embedded pad chevrons, larger
+desktop pickup feedback and friend-led no-scroll victory remain binding follow-up
+work. These outcomes do not authorize a 9–15-tile FOV, broad HUD/minimap redesign,
+new economy or baked directional shadows in canonical art.
+
 Status: manager-reviewed product authority for the improvement programme
 
 Decision date: 2026-09-02; art-craft calibration added 2026-09-03

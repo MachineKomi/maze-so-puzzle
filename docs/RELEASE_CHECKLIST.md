@@ -9,8 +9,11 @@ and its complete UC-01–UC-61 audit, then the new immutable release manifest.
 Final runtime source: `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
 Completed technical checks, including the accepted bounded modal-cost and
 Static-sequence reviews and public release verification, are recorded below.
-FP-UI1 is ready for family playtesting. Human family/device acceptance remains
-pending; the fresh Agent 04 task is held for family feedback and root PT36 preflight.
+FP-UI1 received strongly positive Human visual feedback but remains conditionally
+unaccepted because sustained iPad performance, held-input continuity and phone
+short-height fit are open. Agent 04 is held behind reviewed acceptance of
+V22-PERF-01 (including any required renderer-isolation tranche), V22-UI-01,
+focused Human/device feedback and root PT36 preflight.
 
 - [x] Capture and implement the detailed Human correction, retaining approved
   identities and original source/rollback files.
@@ -54,9 +57,14 @@ pending; the fresh Agent 04 task is held for family feedback and root PT36 prefl
   was published on 2026-09-05 at 10:51:24 UTC. All four unauthenticated public
   downloads matched length and SHA-256 at 10:52:59.744 UTC; see the
   [public verification receipt](../release/FP-UI1-v0.22.0-release-verification.json).
-- [ ] Obtain family/device feedback. Only Human acceptance clears the next
-  fresh Agent 04 task, together with root's PT36 attachment preflight; it never
-  follows automatically from automated passes.
+- [ ] Complete and independently review V22-PERF-01, plus any required second
+  renderer-isolation tranche; obtain focused affected-iPad performance/input
+  evidence rather than inferring success from desktop emulation.
+- [ ] Complete and independently review V22-UI-01 after the performance gate;
+  obtain focused desktop/iPad/phone fit and reward-flow feedback.
+- [ ] Obtain the remaining family/device feedback. Only Human acceptance of those
+  correction gates clears the fresh Agent 04 task together with root's PT36
+  attachment preflight; it never follows automatically from automated passes.
 
 The `2f8fa6a` Home-clipping candidate and the first `68e303d` package with
 unlocked installed minifier versions are withheld and preserved. Their earlier

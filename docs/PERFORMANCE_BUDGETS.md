@@ -1,5 +1,22 @@
 # Performance budgets and evidence contract
 
+## V22-PERF-01 correction rule — 2026-09-05
+
+The build-ready pre-Plan-04 correction is
+`docs/plans/V22-PERF-01-sustained-play-and-live-input.md`. The frozen v0.22.0
+measures 152,379 gzip9 JS, 23,130 CSS and 164,988,031 public bytes against
+ceilings 152,557 / 30,227 / 164,988,031. The 178-byte JS difference is existing
+headroom, not blanket feature allocation; public delivery has none.
+
+The candidate adds no public asset. Any compressed-code growth is offset or
+receives a named measured allocation with evidence. Its performance work is
+accepted through matched fresh/sustained input/follower/persistence cohorts,
+mechanical render/binding counters and frame-tail/long-task evidence—not CSS
+occurrence counts or FPS alone. Full quality preserves the v0.22.0 visual
+reference. Lite must document the exact measured scene costs removed or
+substituted. Physical-iPad success remains a Human gate, and a missing cohort is
+pending rather than inferred from desktop emulation.
+
 ## Root MOVE-01 allocation — 2026-09-05
 
 `reviews/2026-09-05-move01-review.md` records the travel/follower candidate and

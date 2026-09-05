@@ -2,6 +2,22 @@
 
 **Latest Human-directed correction, 2026-09-05:** UI-03 supersedes the historical Big/Normal mode, concealed locked achievement artwork, horizontal arrows, thin default type and reversed Home composition below. Current implementation and review are in `plans/UI-03-fp-ui1-correction.md` and its 61-row intake. Schema 6 adds truthful guardian discovery. The earlier v0.21 engineering checkpoint was rejected by Human playtest; it is not current visual acceptance.
 
+**v0.22.0 Human acceptance update, 2026-09-05:** the corrected desktop/iPad
+visual system is a praised regression baseline, but the physical phone evidence
+reopens the short-height normal-text fit claims below. At normal text the compact
+gameplay deck must not require document/deck scrolling or leave the completed
+board area black while core HUD controls remain below it. Preserve the existing
+square board and landscape topology; solve coordinated height, minima and
+optical sizing without shrinking accessible hit targets. The build-ready
+`plans/V22-PERF-01-sustained-play-and-live-input.md` runs first so layout changes
+do not contaminate the performance baseline. The following Sol-owned
+`plans/V22-UI-01-short-height-and-reward.md` tranche must also deliver the exact Human-requested Bestiary
+states, open pad chevrons, current generated dimensions, lore navigation, Book
+optics, larger desktop pickup feedback and a no-scroll friend-led victory whose
+celebration remains visibly alive. See the independent Astra/Sol reviews and
+the reconciled ledger. Do not apply Bestiary hiding to Friends, add filler to
+the stable feedback band or reopen the broadly accepted HUD/minimap design.
+
 ## Current UI-03 landscape geometry — 2026-09-05
 
 This section supersedes the older Plan 01 geometry and phone-cell dimensions

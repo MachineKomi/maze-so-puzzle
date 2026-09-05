@@ -4,24 +4,22 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-The latest Human instruction gives **Astra the first review, then Sol**. Astra's
-[v0.22.0 assessment](../reviews/2026-09-05-astra-v0220-review.md) and
-[88-row current ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md)
-are ready for **Sol — HIGH** to challenge independently against the complete
-Human feedback, both imported Opus reports and 51 external screenshots.
-Sol should record positions and reconcile a narrow next correction brief/owner;
-do not restart a historical Agent 01 assignment or automatically adopt all Opus
-recommendations. Proposed first work is bounded performance/live-input repair,
-then phone/Book/celebration refinement, preserving the praised desktop/iPad UI.
-No runtime or Agent 04 launch occurred during Astra's review. One runtime writer;
-the other model reviews read-only. Blocking family feedback and PT36 remain open.
+The v0.22.0 Human/Opus review is reconciled. Read the independent
+[Astra](../reviews/2026-09-05-astra-v0220-review.md) and
+[Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
+[88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
+The current task is **GPT-6 Astra — XHIGH** executing
+[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md), with Sol later
+reviewing the exact candidate read-only. Do not restart Agent 01, start Agent 04
+or automatically adopt Opus proposals. Preserve the praised desktop/iPad UI.
+Only one runtime writer; blocking device/family feedback and PT36 remain open.
 
 Status: manager-reviewed copy/paste runbook
 
-Historical pre-correction root state, 2026-09-05: UI accepted/pushed at `372e7d9`; MOVE-01 completed
-with 461 project tests and 43 browser checks. Root delivers FP-UI1 before the
-Human triggers Agent04. `AGENT04-after-FP-UI1.md` is the held next prompt; its
-accepted source SHA and family gate must be resolved before execution.
+Historical pre-correction root state, 2026-09-05: UI was accepted/pushed at
+`372e7d9`; MOVE-01 completed with 461 project tests and 43 browser checks. Root
+subsequently delivered FP-UI1. `AGENT04-after-FP-UI1.md` remains a held future
+prompt; its accepted source SHA and current gates must be resolved before execution.
 Historical assignments below do not restart completed agents.
 
 Prepared: 2026-09-02
@@ -34,7 +32,8 @@ delivery gates and final453 project/121 art tests; checkpoint/push precedes
 MOVE-01 and FP-UI1. Human/device qualification remains pending. The original assignment remains
 history. Plan 03/03M and corrective art checkpoints
 are accepted; historical prompts below are not instructions to reopen them.
-After UI acceptance, root executes MOVE-01 and publishes FP-UI1 before Agent 04.
+After UI acceptance, root executed MOVE-01 and published FP-UI1 before the now
+current V22 correction gates; Agent 04 did not start.
 The later prompts consume the final accepted travel/UI APIs, not candidate
 exports from the unaccepted candidate. Section numbers are not plan IDs.
 
@@ -62,6 +61,43 @@ Use these prompts in the dependency order shown. Future specialist tasks are fre
 Plan 07 intentionally runs twice: a measurement-only pre-pass first and the optimization/qualification pass last. Plan 09 remains reserved for the root manager after every specialist checkpoint is accepted.
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
+
+## Current. Astra — v0.22.0 sustained performance and held-input correction
+
+Use **GPT-6 Astra, XHIGH** in this joint task and send:
+
+```text
+# Astra:
+
+Execute the current build-ready V22-PERF-01 correction from
+docs/plans/V22-PERF-01-sustained-play-and-live-input.md. You are the sole runtime
+writer; Sol will independently review your exact candidate afterward.
+
+Read every authority named by the brief, inspect clean HEAD/origin and preserve
+the praised v0.22.0 desktop/iPad Full-quality visual baseline. Characterize
+matched large-maze routes across keyboard, fixed pad and board drag, 0/2/5
+followers, fresh/sustained sessions, Full/Lite and separate Motion settings.
+Include synchronous active-run persistence as an isolated measured suspect, but
+do not change save durability or schema.
+
+Implement only the evidence-backed hot-path, truthful Lite, eligible held-success
+continuation, fresh deliberate blocker, scoped selection, finale reproduction and
+any required production-visible final-maze navigation correction authorized by
+the brief. Do not alter authored maze/campaign content, phone/Book responsive
+layout, FOV, cadence, terrain architecture, assets/media, controller architecture,
+persistence scheduling or broad VFX.
+
+Work through independent rollback seams and run the complete specified checks
+serially. Do not merge to main, version, tag, publish a release or deploy the
+canonical site. Preserve a green candidate on a recoverable codex/ branch and
+push it, then report exact SHA/branch, complete diff, measurements, rejected
+experiments, tests and remaining physical-device gates. If evidence does not
+support a safe improvement, stop honestly with the exact next isolation gate.
+```
+
+Then switch to **GPT-5.6 Sol — HIGH** for independent candidate review. The
+historical numbered specialist prompts below are retained for provenance and
+later plan execution; none is the current task.
 
 ## 1. Agent 07A — performance foundation and clean baseline only
 

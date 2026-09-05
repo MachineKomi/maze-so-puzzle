@@ -13,8 +13,13 @@ Book/lore/control optics, pickup/victory impact and lower-priority polish.
 These are binding Human outcomes with implementation pending, not 20 duplicate
 specialist plans. Existing PT cards remain owners; V22-04/09 supersede conflicting
 old neutral/first-or-third-bump policies. Full feedback plus 51 external images
-has Astra's assessment; Sol's independent turn is next. See the
-[88-row advisory ledger](reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
+now has independent [Astra](reviews/2026-09-05-astra-v0220-review.md) and
+[Sol](reviews/2026-09-05-sol-v0220-review.md) assessment. The
+[reconciled 88-row ledger](reviews/2026-09-05-sol-astra-opus5-v4-disposition.md)
+routes [V22-PERF-01](plans/V22-PERF-01-sustained-play-and-live-input.md) first,
+then the Sol-owned [V22-UI-01](plans/V22-UI-01-short-height-and-reward.md)
+short-height/Book/pad/pickup/victory tranche. Agent 04 remains
+held; no implementation is claimed by these review documents.
 No blanket closure of the 61 earlier rows or family/performance gates is implied.
 Only one runtime writer; Agent 04 remains held under the canonical gates.
 

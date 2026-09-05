@@ -2,6 +2,14 @@
 
 **Latest Human-directed correction, 2026-09-05:** UI-03 now implements the five-page Book, discovered bestiary, large cards, visible grey locked achievements, restrained focus and no-scroll victory layout before the corrected FP-UI1. Do not repeat or undo these slices. After Human playtest, this plan owns only remaining Book polish and newly evidenced defects. Read `UI-03-fp-ui1-correction.md` first.
 
+**v0.22.0 split, 2026-09-05:** the Human found that phone victory does scroll,
+the Bestiary's repeated unknown cards feel unfinished and several Book/pad/reward
+details need correction. The pre-04
+[V22-UI-01](V22-UI-01-short-height-and-reward.md) owns those exact requested
+outcomes after V22-PERF-01. Preserve whatever it accepts. This later post-Plan-02
+UI-02 keeps only effect-integrated verification and residual evidence-backed
+polish; do not book the same Bestiary/victory work twice.
+
 Status: core slices promoted into UI-03; remaining polish follows family evidence.
 Prepared: 2026-09-05. Owner: a fresh UI specialist task, started by the Human
 from a root-prepared prompt after Plan 02; root reviews persistence semantics,

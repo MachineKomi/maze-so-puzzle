@@ -28,6 +28,24 @@ return, consume the accepted travel contract and requalify it with final
 lighting, VFX, controls and animation; do not restore the historical motion
 implementation or duplicate its owner. Broad optimization and audio remain here.
 
+### V22-PERF-01 bounded correction before Plan 04 — 2026-09-05
+
+The positive v0.22.0 playtest exposed one blocking exception to the later 07B
+sequence: large-maze play on the affected iPad can deteriorate toward
+unplayability, and Lite does not currently provide meaningful scene relief. The
+joint Astra/Sol review therefore advances only
+`V22-PERF-01-sustained-play-and-live-input.md` before Plan 04.
+
+Astra owns the candidate and Sol reviews it. Reuse 07A fixtures to compare input
+surfaces, 0/2/5 followers and fresh/sustained sessions; include synchronous
+active-run serialization/write as an instrumented cohort without changing its
+durability. Stabilize only evidenced MiniMap/cursor/travel-binding hot paths and
+deliver a named, measured Lite scene recipe while preserving Full visuals. This
+does not authorize persistence batching, renderer replacement, media/loading,
+audio, package work or the remaining 07B phases. If the bounded work does not
+materially help, a separate isolation result decides terrain/filter/follower/
+resource work before Plan 04; it does not silently expand this tranche.
+
 ### Pass 07B — final specialist execution
 
 Return after Plans 06, 03, root checkpoint 03M, 01, root MOVE-01, 04, 02, UI-02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement the contextual audio and measured optimization phases against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.

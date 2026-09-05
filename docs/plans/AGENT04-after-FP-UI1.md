@@ -3,7 +3,11 @@
 Prepared 2026-09-05. This is the next specialist's execution prompt, not a start
 instruction or evidence that its prerequisites have passed.
 
-**HOLD: family acceptance and root PT36 preflight are not yet recorded.**
+**HOLD: V22-PERF-01, V22-UI-01, family acceptance and root PT36 preflight are
+not yet recorded.** The v0.22.0 Human playtest is positive but found a sustained
+iPad blocker, short-height phone failure and held-input defect. Complete the two
+jointly assigned correction tranches in `JOINT_ORCHESTRATION_STATE.md` before
+filling this prompt's accepted source fields.
 The published technical preview is UI-03 v0.22.0 from source
 `68e303da680d5aec0ba71154949c5a2a0d1697ae`:
 `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`, **173,378,560 bytes**,

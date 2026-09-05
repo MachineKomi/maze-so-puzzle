@@ -4,15 +4,16 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-The latest Human turn assigns **Astra first, Sol second** for joint review of
-the complete v0.22.0 playtest and final Opus pack. Astra has reviewed the Human
-feedback, 51 images and both current reports; [its assessment](../reviews/2026-09-05-astra-v0220-review.md)
-and [88-row ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md) await Sol's
-independent challenge. The proposed next slice brings bounded performance/input
-repairs forward, then phone/Book polish, preserving the praised desktop/iPad UI.
-This is not approval of Claude's broad architecture, FOV or economy changes.
-Agent 04 stays held for blocking feedback, sequencing and PT36. Preserve the
-remaining sequence, especially 09 → 10 → 11. **Only one runtime writer**.
+The joint review of the complete v0.22.0 playtest, 51 images and final Opus pack
+is complete. Read the independent [Astra](../reviews/2026-09-05-astra-v0220-review.md)
+and [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments plus the
+[reconciled 88-row ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
+The next slice is the build-ready
+[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md): Astra writes and
+Sol reviews. It precedes Sol-owned phone/Book/pad/pickup/victory refinement and
+preserves the praised desktop/iPad UI. Claude's broad architecture, 9–15 FOV,
+economy and HUD/minimap redesign proposals are not adopted. Agent 04 stays held
+for these gates and PT36. Preserve 09 → 10 → 11. **Only one runtime writer**.
 
 Status: manager-reviewed execution authority
 
@@ -43,7 +44,7 @@ allocation and final project/art/performance checks; Git backup precedes MOVE-01
 Preserve the original assignment as history. See the complete 17-item v0.20.1 intake at
 `../playtests/2026-09-05-v0201-wishlist.md` and §5.13D below.
 
-Current sequence: **01/MOVE-01 engineering history → UI-03 corrected FP-UI1 publication → joint review, Human playtest and root PT36 preflight → 04 → 02 → remaining UI-02 → 08 → 05 → 07B /
+Current sequence: **01/MOVE-01 engineering history → UI-03 corrected FP-UI1 publication → V22-PERF-01 / v0.22.1 affected-device test → V22-UI-01 / family test → root PT36 preflight → 04 → 02 → remaining UI-02 → 08 → 05 → 07B /
 FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
 RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
 fresh specialist tasks from root-prepared prompts. Root may delegate independent read-only/documentation
@@ -166,6 +167,8 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 | 4 | **03M + v0.20.1 + post-release corrective root checkpoint** | The delivered 42-track OST, published art and presentation-critical gameplay decisions need one authoritative green seam before UI/VFX/controls consume them. The v0.20.1 slice closes missed Poggle/Sprig portraits, repairs the Home hero alpha, establishes the separate minimal title screen, activates the complete approved friend roster for generated play/Book, and fixes bounded door/portal/Book issues. The additive post-release correction replaces mistakenly retained Goblin/Violet Moon pixels and gives all 32 friends authored rescues before Agent 01. | Valid real-OST catalogue and `MusicTransportPort`; maintained completion/Mimic contracts; two-stage title/Home baseline; no legacy active-art consumer for Poggle, Sprig, Goblin or Violet Moon; complete generated and authored friend roster with Unicorn in Maze 1 and Tea-Time Skeleton in Maze 2; stationary visible-player door sequence; redundant portal glyph removed; compact friend ledger; immutable v0.20.1 evidence plus post-release correction record; full checks green; root-reviewed commit pushed. This remains bounded compatibility/correction work, not the Plan-01 overhaul or Plan-07B contextual mix. |
 | 5 | **01 — UI/UX and layout** | Can now build around real gameplay priorities and final asset safe bounds. It establishes the stable cross-device shell, large minimap, DialogShell, focusable markup, compact Sound disclosure, CSS layer manifest, motion preference, measured UI/VFX anchors, and the authored Maze-native surface/type/presentation-art system. | UI/UX spec, primary-device topology, all-content geometry tests, stable semantic IDs/anchors, styled component/state proof, licensed typography and full/lite/static surface recipes, large contextual-art slots/fallbacks, integrated early front door, dialog/focus surfaces including one accessible Sound menu, and extensions to the shared browser harness. Root reviews/checkpoints this before MOVE-01. |
 | 5A | **MOVE-01 — Root travel/camera comfort, then FP-UI1** | Implements the Human's advanced movement request against the accepted UI seam before lighting/VFX attach. Keeps exact tile rules while coordinating smooth actor/camera travel. | Accepted travel/coordinate/cancellation contract, route and frame evidence, clean reviewed/pushed checkpoint, and required verified FP-UI1 playable release with family comfort still honestly pending. See `MOVE-01-smooth-travel-and-camera.md`. |
+| 5B | **[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md) — sustained play and live input** | The v0.22.0 Human playtest found a primary-device blocker after the broad UI improved. Astra profiles and corrects evidenced hot-path work, truthful Lite relief, held-success continuation, fresh blocker explanations and selection safety; Sol reviews before promotion. | Exact fresh/sustained input/follower/persistence evidence; preserved Full visuals; a useful Lite scene matrix; green continuation/blocker/finale tests; reviewed v0.22.1 preview; affected-iPad Human result or an honestly routed renderer-isolation return. |
+| 5C | **[V22-UI-01](V22-UI-01-short-height-and-reward.md) — short-height and reward correction** | Starts only after 5B and any required second renderer-isolation tranche are reviewed and accepted. Sol preserves the successful primary UI while fixing phone fit and completing the requested Bestiary, pad, Book, pickup and no-scroll victory work; Astra reviews input/performance safety. | Short-landscape normal-text geometry and interaction matrix; preserved desktop/iPad reference; exact Bestiary/lore/pad/pickup/victory acceptance; focused family feedback. |
 | 6 | **04 — Lighting and wall depth** | Uses final art materials and the final MazeViewport/scene slots. It creates the single terrain topology/render-model seam, coherent light resolver, wall layers, grounding wrappers, and bounded presentation-only multi-theme region support before effects attach to them. | Lighting spec, resolved-light API, cached topology/render model, validated one-to-four-region terrain-theme seam over one gameplay topology, world masks/layer tokens, dedicated contact/cast/sparkle surfaces, tier evidence. |
 | 7 | **02 — Graphics and VFX** | Consumes final art tokens/assets, terrain/light layers, UI anchors, and gameplay events. It owns the shared presentation director, cancellation, semantic effect grammar, hazard motion, varied flourishes, and the reusable bounded reward-shower presentation from `PT-20260903-22`. | VFX Bible, presentation-director contract, anchor/timing/cancellation APIs, effect variants, deterministic visual-only reward burst/homing recipes, reduced/static recipes, sound/lifecycle evidence. |
 | 7A | **UI-02 — Fresh specialist: remaining Book, focus and victory polish** | Preserves the bounded Book/bestiary/cards, focus and victory work promoted into UI-03 for the corrected FP-UI1. After Human playtest and Plan 02's celebration work, addresses remaining evidence-backed polish before 08 qualifies navigation. Root reviews any necessary encounter/save changes. | Preserve the five accessible Book pages, schema6 encounter-earned bestiary and conservative migration, large art/lore cards, grey locked achievements, restrained focus, ordinary no-scroll victory, individual dances and stable control IDs. Review only remaining defects or agreed polish with budget/geometry evidence; do not rebuild the completed core. See `UI-02-adventure-book-and-focus-polish.md`. |
@@ -766,6 +769,40 @@ FP-UI1 remains the accepted UI plus bounded travel checkpoint. Later wishlist
 slices qualify through FP-CORE2/FP-CAMPAIGN as their dependencies land. Plan 13
 must verify explicit closure/return/approved deferral for every new card, and
 RC-01 requalifies final content added after 07B. No fix is accepted by this plan.
+
+### 5.13E v0.22.0 performance/input and short-height correction — 2026-09-05
+
+The Human's v0.22.0 playtest is positive but blocks programme progression on
+sustained iPad frame pacing, short-height phone fit and held input erased by
+successful interactions. The complete intake is V22-01–20 in the Astra review;
+the independent Sol review and reconciled ledger define what was adopted,
+adapted, tested later or rejected from Claude's advice.
+
+The correction is deliberately split. First, Astra executes
+`V22-PERF-01-sustained-play-and-live-input.md` with Sol as read-only reviewer.
+It preserves Full-quality visuals and exact game state while profiling input
+surfaces, followers, fresh/sustained sessions and synchronous persistence;
+stabilizes only evidenced render/binding work; makes Lite meaningfully cheaper;
+and corrects held-success, fresh-blocker and selection lifecycles. It may not
+change FOV, responsive layout, persistence durability, terrain architecture,
+content, media or broad VFX. A failed local/device result routes to one isolated
+renderer/filter/follower/resource tranche, not an optimistic completion claim.
+
+Only after that performance correction, including any required second isolation
+tranche, is reviewed and accepted does Sol own V22-UI-01, with Astra reviewing
+performance and input. Keep the square-board landscape topology. Phone gameplay
+fits core board/HUD/map/feedback/Hint/More/pad at normal text without document or
+deck scroll; collection bodies may scroll inside a stable Book. Deliver the
+Human's Bestiary states, open chevrons, generated dimensions, lore navigation,
+Book optics, larger desktop pickup and no-scroll friend-led victory with ongoing
+bounded celebration. Do not shrink the liked phone pickup, apply Bestiary hiding
+to Friends, add filler to the quiet feedback band, or enlarge good iPad shared
+components before the phone rule passes.
+
+The affected older-iPad matched-route playtest is the performance acceptance
+gate; broader phone/iPad/desktop family review closes the UI tranche. These
+corrections bring only necessary portions of Plans 07/08/01 forward. They do not
+start Plan 04 or disturb the later 09 → 10 → 11 dependency chain.
 
 ### 5.14 Final gameplay, progression and quality-of-life opportunity review
 

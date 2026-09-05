@@ -7,7 +7,11 @@ behaviour correction, **not a claim of implementation**. Preserve live held inte
 through eligible successful in-maze interactions; observe steering and release
 while attempts are suspended. Failed requirements explain on every fresh deliberate
 attempt, never by repeatedly reopening from one continuous blocked hold. Root's
-bounded pre-04 repair and this later controller pass must share that contract.
+bounded pre-04 repair is now the build-ready
+[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md): Astra implements
+the current keyboard/fixed-pad/board-pointer correction and Sol reviews it.
+This later controller pass consumes the accepted live-intent/suspension contract
+rather than rebuilding or weakening it.
 
 **Latest Human-directed correction, 2026-09-05:** UI-03 advances the anchored bottom-right hybrid D-pad, legal tap/hold/drag input and cancellation. Big/Normal is removed permanently. PT32 remains a separate future 4–7 tile camera view preference, default 6 (two tiles closer/one farther). Preserve the new pad while implementing controllers, device hints and remaining control scope.
 
