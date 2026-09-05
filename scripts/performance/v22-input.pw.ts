@@ -218,6 +218,53 @@ for (const preferences of [
   });
 }
 
+test.describe("V22 live touch joystick production styles", () => {
+  test.use({ hasTouch: true });
+
+  for (const quality of ["full", "lite"] as const) {
+    test(`${quality} keeps a visible neutral touch and computes the intended backdrop`, async ({ page, context }, info) => {
+      const fixture = successFixture("door-opened");
+      await loadSaved(page, fixture, `live-touch-${quality}`, undefined, { motion: "full", quality });
+      await expect(page.locator("html")).toHaveAttribute("data-quality", quality);
+      await expect(page.locator(".game-stage")).toHaveAttribute("data-quality", quality);
+      const point = await page.locator(".player-layer").evaluate(node => {
+        const box = node.getBoundingClientRect();
+        return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
+      });
+      const touch = await context.newCDPSession(page);
+      let held = false;
+      try {
+        // CDP dispatches actual browser touch/pointer events, not a hidden-node
+        // style probe or JavaScript-created PointerEvent. One-pixel jitter stays neutral.
+        await touch.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ ...point, id: 1, radiusX: 1, radiusY: 1, force: 1 }] });
+        held = true;
+        await expect(page.locator(".touch-joystick")).toBeVisible();
+        await touch.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [{ x: point.x + 1, y: point.y + 1, id: 1, radiusX: 1, radiusY: 1, force: 1 }] });
+        await expect(page.locator(".touch-joystick-origin")).toBeVisible();
+        const computed = await page.locator(".touch-joystick-origin").evaluate(node => ({
+          backdropFilter: getComputedStyle(node).backdropFilter,
+          joystickHidden: (node.parentElement as HTMLElement).hidden,
+          playerFilter: getComputedStyle(document.querySelector(".player-sprite")!).filter,
+        }));
+        await info.attach("live-touch-computed-styles", { body: JSON.stringify({ quality, computed }), contentType: "application/json" });
+        expect(computed.joystickHidden).toBe(false);
+        expect(computed.backdropFilter).toBe(quality === "lite" ? "none" : "blur(2px)");
+        if (quality === "lite") expect(computed.playerFilter).toBe("none");
+        else expect(computed.playerFilter).toContain("drop-shadow(");
+        await expectStill(page, fixture.before);
+        await touch.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+        held = false;
+        await expect(page.locator(".touch-joystick")).toBeHidden();
+        await expectStill(page, fixture.before);
+      } finally {
+        if (held) await touch.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+        await touch.detach();
+        await saveEvidence(page, info, fixture);
+      }
+    });
+  }
+});
+
 test("V22 Static mounts and reenters with working first board taps and exact settled geometry", async ({ page }, info) => {
   const fixture = successFixture("door-opened");
   await loadSaved(page, fixture, "static-first-tap", undefined, { motion: "full", quality: "static" });

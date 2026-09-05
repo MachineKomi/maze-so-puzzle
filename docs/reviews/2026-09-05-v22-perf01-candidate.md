@@ -75,6 +75,29 @@ will be attached below at the completed candidate checkpoint.
    493 tests across 49 files in 80.10 seconds; the subsequent production build
    passed. No solver/engine content changed in this tranche.
 
+10. The longer v3 matrix caught a production-only Lite mismatch: the authored
+    standard-then-prefixed declaration minified to **only** WebKit `none`, leaving
+    the standard scene `blur(2px)` active. That candidate run stopped after 20/36
+    completed raw rows; its partial/rejected receipt is retained, with no invented
+    final summary. V4 uses one standard source declaration; the build emits both
+    standard and prefixed `none`. A live trusted-touch computed-style regression
+    now guards this. Baseline36 rows remain valid; final candidate rows are rerun.
+
+The backed-up runtime checkpoint before that one-property correction is
+`5e244b3d52c46ee9528e9e08d07ee1630b250944`. V3 and V4 production JavaScript
+are byte-identical (SHA-256
+`7e63d0ee061cd7083a3b1d73e2c0743fa58434a30168dcf6ef770ea80d27f5d1`),
+so v3 input/counter evidence still describes the final JS. Full/Static CSS is
+unchanged; only Lite's joystick override changed. Final V4 CSS is 23,512 gzip9
+bytes, one byte above V3 and within the unchanged CSS ceiling.
+The V4 live-touch supplement passed **2/2** in 29.1 seconds, requiring visible
+held cursor, actual standard blur/none, Full/Lite player filter distinction,
+neutral zero-movement and hidden cursor after release. Evidence:
+`input-v4-lite/playwright-results.json`, SHA-256
+`0695fddc48fbc5059ba9c295d04a5067c531635858a4b4337ae8c4c1133bde29`.
+This is 75 prior passes plus two supplemental passes and two prior fixture skips,
+not a claimed new full 79-case rerun.
+
 ## Completed candidate-v3 checks
 
 - Input/browser: **75 passed, two explicit fixture skips, zero failures** in
@@ -109,9 +132,9 @@ will be attached below at the completed candidate checkpoint.
 
 ## Static allocation
 
-Locked candidate-v3 measures **153,118 gzip9 JS / 23,511 gzip9 CSS /
+Locked final candidate-v4 measures **153,118 gzip9 JS / 23,512 gzip9 CSS /
 164,988,031 public bytes**. Compared with frozen v0.22.0, that is +739 JS,
-+381 CSS and zero public bytes. The previous JS headroom was178; the measured
++382 CSS and zero public bytes. The previous JS headroom was178; the measured
 deficit is561. Astra authorizes a named650-byte candidate allocation, leaving89
 bytes for bounded cross-platform/toolchain variation, not new features. CSS
 uses its existing ceiling. The [allocation ledger](../../scripts/performance/feature-allocations.json)
