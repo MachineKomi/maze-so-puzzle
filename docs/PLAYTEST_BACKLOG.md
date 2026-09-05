@@ -1,5 +1,12 @@
 # Maze so Puzzle — playtest backlog
 
+**Latest Human result, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;
+many regressions/bugs and missed requirements reported. PT25 and affected UI
+slices remain open pending concrete feedback. Root paused for discussion;
+Agent04 and GitHub prerelease publication are held. Details:
+`playtests/2026-09-05-fp-ui1-initial-rejection.md`. Automated passes below are
+engineering evidence, not successful family/UI acceptance.
+
 - Status: living manager-owned intake, routing and acceptance ledger
 - Created: 2026-09-02
 - Historical accepted implementation checkpoint at initial triage:

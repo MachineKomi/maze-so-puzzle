@@ -1,5 +1,13 @@
 # Orchestrator handover — Sol to Astra
 
+**STOP / latest Human decision, 2026-09-05:** initial v0.21.0 playtest rejects the
+overall UI, reporting many regressions and missed specific requirements. Root
+stopped release/implementation work for discussion. UI/family acceptance is
+blocked; Agent04 must not start. Canonical web already serves v0.21.0; the local
+portable exists, but no GitHub v0.21.0 prerelease/tag/assets were published.
+Read `playtests/2026-09-05-fp-ui1-initial-rejection.md` before acting. Earlier
+engineering acceptance and automated passes below do not override this decision.
+
 Prepared 2026-09-04. This is a dated handover, not a replacement for the live
 roadmap, specifications, source, or subsequent Human decisions.
 

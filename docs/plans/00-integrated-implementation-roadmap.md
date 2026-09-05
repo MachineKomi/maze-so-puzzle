@@ -1,5 +1,11 @@
 # Integrated implementation roadmap through final convergence
 
+**Latest gate, 2026-09-05: HOLD.** The Human rejects the overall FP-UI1/v0.21.0 UI
+after initial playtesting, reporting many regressions and missed requirements.
+Root stopped for discussion; Agent04 and GitHub prerelease publication are held.
+See `../playtests/2026-09-05-fp-ui1-initial-rejection.md`. Do not infer acceptance
+from the successful automated/engineering checkpoints below.
+
 Status: manager-reviewed execution authority
 
 Latest execution, 2026-09-05: UI is accepted/pushed as `372e7d9`. Root MOVE-01
