@@ -48,6 +48,50 @@ Consider who might prefer a fresh fair puzzle over a stronger persistent avatar.
 Do not interpret per-maze inventory reset as a defect solely because it resembles
 another genre. Durable recognition may solve the feeling at far lower rule cost.
 
+## 2026-09-05 v0.20.1 wishlist boundary
+
+The Human's reward fantasy in
+`docs/playtests/2026-09-05-v0201-wishlist.md` includes a possible later shower of
+glowing, holographic-rainbow XP crystals that home into the moving player with a
+subtle, satisfying sound. Record this as a presentation preference for the XP
+option, conditional on a separately approved persistent-progression design.
+Plan 02 may deliver Gold/Science showers now through its own scheduled work;
+it must not invent an XP balance, drop source, spending rule or permanent Power
+advantage merely to fill a visual channel.
+
+If XP is shortlisted, compare the value of a durable mastery/collection record
+with a new currency, and specify credit timing, migration, per-source caps,
+replay/farming rules, co-op attribution and visual/audio budgets before an
+experiment. Crystal arrival must remain cosmetic, exactly-once reward credit
+must precede the effect, and homing must track the moving collector without
+prolonging input locks. Full/reduced/static treatments must communicate the same
+award without noisy repeated chimes or large particle populations.
+
+PT22's safer designer-owned Mimics and richer Gold/Science defeat rewards,
+PT41's selected original cute/spooky friends, and PT42's satisfying harder
+puzzles with explicit generated difficulty already belong to Plan 09. Do not
+defer those approved programme requirements to this opportunity review or treat
+them as reasons to introduce persistent combat advantage. Evaluate any further
+progression against the final game after those improvements are qualified.
+
+## Additional wishlist 20260905-02 — preserve the early mechanics decision
+
+Read `docs/playtests/2026-09-05-02-room-variety-and-mechanics.md` and Plan 09's
+PT43/44 dispositions. Monster/treasure rooms and monster/treasure whole-maze
+profiles are Plan-09 content delivery. The bounded comparison of intuitive new
+mechanics happens during Plan-09 design preflight, before dependent maps freeze;
+it is not work to postpone wholesale until this late opportunity review.
+
+Use this stage to reconsider only explicitly deferred/unselected hypotheses in
+light of the accepted game's actual challenge, comprehension and replay evidence.
+Retain the original reason for each deferral and state what new observation
+would justify revisiting it. Compare any proposed new mechanic with removing
+friction or making richer use of existing rules. Early mention or a promising
+paper puzzle is not runtime approval; PT14 spikes/ice and any new switch/push/
+traversal idea still need an explicit scoped specification and Human decision.
+No late new-rule proposal may silently invalidate accepted campaign, save,
+solver/Hint, input or release qualification.
+
 ## Decision gates
 
 Shortlist at most three product experiments with an explicit value/risk reason;

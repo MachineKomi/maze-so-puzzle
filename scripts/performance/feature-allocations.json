@@ -23,11 +23,36 @@
       "reviewBy",
       "rollbackPoint"
     ],
-    "allowedStatus": ["unallocated", "requested", "approved", "expired", "repaid"]
+    "allowedStatus": [
+      "unallocated",
+      "requested",
+      "approved",
+      "expired",
+      "repaid"
+    ]
   },
   "allocations": [
-    { "owner": "ui", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Request an explicit feature budget before growth." },
-    { "owner": "art", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Encoded and decoded-memory deltas must both be reported." },
+    {
+      "id": "ui-plan01-physical-shell-font",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 4500,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 43795,
+      "reason": "Root explicitly approved this bounded existing allocation on 2026-09-05 in docs/reviews/2026-09-05-plan01-review.md and docs/plans/AGENT01-review-follow-up.md, committed at 09413c1. Reviewed candidate growth was 4,459 gzip9 JS bytes, with 14,435 CSS bytes saved, plus 39,408 WOFF2 and 4,387 OFL bytes. The 4,500 JS cap includes only 41 bytes of variance above that measurement; it does not approve further correction or art growth.",
+      "evidencePath": "docs/UI_UX_SPEC.md#typography--allocation",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Root may decline the request and selectively roll back the uncommitted Plan-01 UI/font changes using runtime checkpoint 6493110795d83bd799481e0efa5a5fd228360098 as reference; preserve later orchestration documents, approved art pointers and all progress schemas. Font rollback removes only the new WOFF2/OFL delivery files and requalifies the existing local/system fallback; it does not alone repay the JS delta.",
+      "notes": "Approved ceilings after this decision: 139,018 gzip9 JS / 30,227 CSS / 152,925,510 public bytes. Root's approval is not whole-UI acceptance or timing/hardware qualification. Corrected candidate and presentation derivatives are remeasured separately; additional growth remains a new request, never silently covered by this decision."
+    },
+    {
+      "owner": "art",
+      "status": "unallocated",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "notes": "Encoded and decoded-memory deltas must both be reported."
+    },
     {
       "id": "art-plan03-catalogue-contract",
       "owner": "art",
@@ -91,7 +116,7 @@
       "compressedJsBytes": 600,
       "compressedCssBytes": 0,
       "runtimePublicBytes": 107396,
-      "reason": "The Human-requested post-v0.20.1 correction replaces two mistakenly retained legacy families—Goblin and Violet Moon—with deterministic transparent mgjrpg-02 derivatives, and assigns all 32 already-published friends across the existing 16 authored story mazes. The complete candidate measures +559 gzip-9 JavaScript bytes, +0 CSS bytes, and exactly +107,396 public-runtime bytes over the accepted v0.20.1 ceiling.",
+      "reason": "The Human-requested post-v0.20.1 correction replaces two mistakenly retained legacy families\u2014Goblin and Violet Moon\u2014with deterministic transparent mgjrpg-02 derivatives, and assigns all 32 already-published friends across the existing 16 authored story mazes. The complete candidate measures +559 gzip-9 JavaScript bytes, +0 CSS bytes, and exactly +107,396 public-runtime bytes over the accepted v0.20.1 ceiling.",
       "evidencePath": "docs/PERFORMANCE_BUDGETS.md#post-v0201-goblin-violet-and-authored-friend-roster-allocation",
       "reviewBy": "2026-10-04",
       "rollbackPoint": "Restore the Goblin and Violet Moon catalogue pointers and prior level content revisions/friend assignments from v0.20.1 tag checkpoint 4bca5322b6026e6a03a5b5a0f8e44aac1655d58a. Keep the two versioned derivatives and immutable source evidence until Plan 12.",
@@ -112,9 +137,30 @@
       "dependencies": "Accepted additive checkpoint 556542e38f1e31a868a1ec6e382041db5ee887e6, direct Human screenshot correction, deterministic Batch 29 publisher, and Pass 07A allocation policy.",
       "notes": "The 3,145,728-byte decoded RGBA upper bound is a per-file delivery bound, not an assertion of duplicate simultaneous residency. The allocation authorizes no unrelated media, audio, JavaScript or CSS growth."
     },
-    { "owner": "lighting", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include reference and low-end frame-time cohorts." },
-    { "owner": "vfx", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include overlap stress and reduced-motion coverage." },
-    { "owner": "animation", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Include compositing/layer evidence and idle-cost checks." },
+    {
+      "owner": "lighting",
+      "status": "unallocated",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "notes": "Include reference and low-end frame-time cohorts."
+    },
+    {
+      "owner": "vfx",
+      "status": "unallocated",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "notes": "Include overlap stress and reduced-motion coverage."
+    },
+    {
+      "owner": "animation",
+      "status": "unallocated",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "notes": "Include compositing/layer evidence and idle-cost checks."
+    },
     {
       "id": "gameplay-plan06-engine-hints-and-save-identity",
       "owner": "gameplay",
@@ -128,7 +174,14 @@
       "rollbackPoint": "Before distribution, revert the whole Plan 06 batch to checkpoint 555cdd622a98bd77585f2e60f1096712392d71b3 as one coordinated content/schema change. After distribution, retain backward-compatible schema readers and instead split or compact solver-backed hint code under Pass 07B before reducing this allocation.",
       "notes": "The allocation leaves 61 JavaScript bytes and 29 CSS bytes beyond the source-matched measurement for compression variance only. It authorizes no runtime asset growth; every later feature needs its own measured allocation."
     },
-    { "owner": "controls", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Preserve held cadence, focus semantics, and controller responsiveness." },
+    {
+      "owner": "controls",
+      "status": "unallocated",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "notes": "Preserve held cadence, focus semantics, and controller responsiveness."
+    },
     {
       "id": "audio-03m-six-pool-original-ost",
       "owner": "audio",
@@ -171,7 +224,49 @@
       "dependencies": "Accepted v0.20.0 FP-ART-OST checkpoint bd47517cd25db63403eb296638b683e3d665c112, Human v11 bounded publication decision, and Pass 07A allocation policy.",
       "notes": "The allocation leaves 32 JavaScript and 50 CSS gzip bytes for deterministic compression variance. The exact public allocation covers four versioned WebP files; their 11,536,288-byte decoded RGBA upper-bound sum is reported separately and is not a simultaneous-residency claim. Additional friends reuse already-delivered dormant bytes and do not add public files. Plan 09 owns authored-campaign placement."
     },
-    { "owner": "audio", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "Plan 07B must rebaseline and qualify the integrated OST; do not omit Human tracks or eagerly prepare the full library. Report title, story, maze, victory, Adventure Book, Garden, music-change, failure, offline, retained-resource, and package behavior." },
-    { "owner": "campaign", "status": "unallocated", "compressedJsBytes": 0, "compressedCssBytes": 0, "runtimePublicBytes": 0, "notes": "New levels need loading-phase and reachability evidence." }
+    {
+      "owner": "audio",
+      "status": "unallocated",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "notes": "Plan 07B must rebaseline and qualify the integrated OST; do not omit Human tracks or eagerly prepare the full library. Report title, story, maze, victory, Adventure Book, Garden, music-change, failure, offline, retained-resource, and package behavior."
+    },
+    {
+      "owner": "campaign",
+      "status": "unallocated",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "notes": "New levels need loading-phase and reachability evidence."
+    },
+    {
+      "id": "ui-plan01-review-correction-and-presentation",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 2522,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 1367574,
+      "reason": "Root approved the exact returned correction and fourteen approved-source equipment presentation allocation on 2026-09-05 after code, actual-size alpha, provenance and responsive-delivery review. Adds 2522 gzip9 JS and 1367574 public bytes to the earlier approved ceiling, with no CSS increase or reserve.",
+      "evidencePath": "docs/reviews/2026-09-05-plan01-return-review.md",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Root may disable candidate presentation bindings and retire only these 14 new files after review, retaining immutable approved originals and optical fallbacks. Scoped corrected-code removal/splitting needs fresh UI/input proof; never restore synchronous search or known clipping/fallback bugs to repay bytes.",
+      "dependencies": "Accepted 09413c1 follow-up authority; hash-bound ui01-presentation-approval.json records fourteen technical delivery approvals and four exact per-file exceptions. Earlier UI/font allocation is separate.",
+      "notes": "Root approval covers these exact static bytes, not Human/device/timing qualification. Fifteen reward renditions and their responsive selection correction have a separate allocation."
+    },
+    {
+      "id": "ui-plan01-earned-reward-dpr2-closeout",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 667,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 2686552,
+      "reason": "Root completed the fifteen missing approved-source earned-reward DPR2 renditions and compact first-render selection. Exact static delta over the corrected Agent01 candidate, with no reserve; no source identity or field sprite change.",
+      "evidencePath": "docs/reviews/2026-09-05-plan01-return-review.md",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Remove reward rendition bindings and restore approved 256px presentation fallback; retain immutable sources and all versioned files until Plan12 copy-first retirement. Recheck responsive loading and earned detail after any rollback.",
+      "dependencies": "Hash-bound ui01-reward-presentation-approval.json; source/optical reproduction and actual-size alpha review; accepted equipment allocation; responsive browser evidence for all29 identities.",
+      "notes": "Final ceiling142207 gzip9 JS /30227 CSS /156979636 public bytes. Exact decoded reward upper-bound sum15728640 is not simultaneous residency. Physical/Human and hardware timing remain pending."
+    }
   ]
 }

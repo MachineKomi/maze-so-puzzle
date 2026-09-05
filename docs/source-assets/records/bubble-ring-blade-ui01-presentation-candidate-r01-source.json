@@ -1,0 +1,222 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "bubble-ring-blade-ui01-presentation-candidate-r01-source",
+  "id": "bubble-ring-blade",
+  "artVersion": 1,
+  "family": "weapon",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-13-ring-blade-v01",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+        "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "identity-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-bubble-bow-v02-candidate-b-matte-01-generator-original.png",
+          "sha256": "f11399b30382162a8374738344c16cd867c2628beb3626efe9ddf945e4034ace"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-5fe9874c-ff7b-4597-80f3-8c52e3de3c87.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/weapon-bubble-ring-blade-v01-candidate-a-matte-01-generator-original.png",
+          "sha256": "9acccef0fe2211ccf3d3d149f39018d5ef1a1fb78082051c596f3f7bf898bcfb",
+          "bytes": 1267713,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/PROMPTS.md",
+      "sha256": "d755d1f081043fefc9fc291987601d0b240fd5a36422a21a17e9b413ec5f48d3"
+    },
+    "outputIds": [
+      "exec-5fe9874c-ff7b-4597-80f3-8c52e3de3c87.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/weapon-bubble-ring-blade-v01-candidate-a-matte-01-generator-original.png",
+      "sha256": "9acccef0fe2211ccf3d3d149f39018d5ef1a1fb78082051c596f3f7bf898bcfb",
+      "bytes": 1267713,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-13-ring-blade-v01 in docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "bubble-ring-blade-prop-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/bubble-ring-blade-v01-presentation-512-r01.webp",
+      "sha256": "f575b5d0c39d7f78786f1c4716c036c1ea97d84111cf13e5513ea316bfe242f0",
+      "bytes": 123658,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "prop-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "weapon",
+    "pivot": [
+      0.5,
+      0.55
+    ],
+    "visibleBounds": [
+      0.091796875,
+      0.080078125,
+      0.818359375,
+      0.83984375
+    ],
+    "safeInset": [
+      0.080078125,
+      0.08984375,
+      0.080078125,
+      0.091796875
+    ],
+    "gripPoint": [
+      0.5,
+      0.836
+    ],
+    "forwardAxisDegrees": -90.0,
+    "heldScale": 0.576,
+    "heldRotationDegrees": 35.0,
+    "zOrder": 1
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/weapon-bubble-ring-blade-v01-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "prop-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/bubble-ring-blade-v01-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 123658,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        12,
+        240,
+        9
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.08,
+        0.08,
+        0.92,
+        0.92
+      ],
+      "align": [
+        0.5,
+        0.5
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Same approved extraction and normalized registration at 512px; optical output first rebuilt byte-exactly. No redraw or source changes.",
+      "script": "scripts/art_pipeline/ui_presentation_candidates.py"
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Remove this candidate catalogue extension from UI; unchanged approved optical URLs remain the fallback. Retain source and derivative until root retirement authority."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human UI review and publication delegation",
+    "approvedAt": "2026-09-05T02:32:35.4546433+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui01-presentation-approval.json",
+    "evidenceSha256": "73a25eb060409f8dc2779cbcd2a46da5eabe3ef35eea9f7ea17b3bd37a6d6d50"
+  }
+}

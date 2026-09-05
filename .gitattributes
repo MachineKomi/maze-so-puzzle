@@ -6,3 +6,12 @@
 *.icns binary
 *.exe binary
 *.mp3 binary
+
+# These reviewed artifacts are hashed as bytes. Preserve their recorded line
+# endings through checkout; do not reinterpret an approval as normalized text.
+docs/plans/AGENT01-review-follow-up.md text eol=lf
+docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json text eol=crlf
+docs/source-assets/publication/ui01-*.json text eol=crlf
+docs/source-assets/publication/ui01-reward-derivative-authority.json text eol=lf
+docs/source-assets/records/*-ui01-presentation-candidate-r01-source.json text eol=crlf
+public/assets/fonts/* -text

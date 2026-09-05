@@ -49,6 +49,42 @@ afterEach(() => {
 });
 
 describe("background music", () => {
+  it("resynchronizes mute as well as URL when a disposed adapter is replaced", async () => {
+    installAudio();
+    const {createCurrentMusicTransport}=await import("./musicTransport");
+    const old=createCurrentMusicTransport();await old.startFromUserGesture();old.setMuted(true);old.dispose();
+    const fresh=createCurrentMusicTransport();await fresh.startFromUserGesture();
+    expect(audioInstances.at(-1)?.muted).toBe(fresh.getSnapshot().muted);expect(fresh.getSnapshot().muted).toBe(false);
+    fresh.dispose();
+  });
+  it("keeps the actual transport media URL aligned from fresh title through every current UI context", async () => {
+    installAudio();
+    const { createCurrentMusicTransport } = await import("./musicTransport");
+    const { musicTrackById } = await import("./musicCatalogue");
+    const port = createCurrentMusicTransport();
+    port.setContext("title");
+    expect(audioInstances).toHaveLength(0);
+    for (const context of ["title", "story", "maze", "adventure-book", "maze", "victory", "maze", "title"] as const) {
+      port.setContext(context);
+      await port.startFromUserGesture();
+      expect(audioInstances.at(-1)?.src).toBe(musicTrackById(port.getSnapshot().currentTrackId)?.url);
+      expect(port.getSnapshot().context).toBe(context);
+      const audio = audioInstances.at(-1);
+      port.setMuted(true); expect(audio?.muted).toBe(true);
+      port.setMuted(false); expect(audio?.muted).toBe(false);
+      await port.startFromUserGesture();expect(audioInstances.at(-1)).toBe(audio);
+    }
+    port.dispose();
+  });
+
+  it("applies title even when the first gesture precedes an explicit context call", async () => {
+    installAudio();
+    const { createCurrentMusicTransport } = await import("./musicTransport");
+    const { DEFAULT_TITLE_TRACK } = await import("./musicCatalogue");
+    const port = createCurrentMusicTransport();
+    await port.startFromUserGesture();expect(audioInstances.at(-1)?.src).toBe(DEFAULT_TITLE_TRACK.url);port.dispose();
+  });
+
   it("exposes the complete delivered maze pool", async () => {
     const { MAZE_MUSIC_TRACKS } = await import("./music");
 

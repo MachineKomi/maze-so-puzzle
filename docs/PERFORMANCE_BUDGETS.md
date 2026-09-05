@@ -12,6 +12,56 @@ those classes without a new reviewed artifact manifest.
 
 ## Evidence classes
 
+### Plan 01 root return and earned-reward closeout — 2026-09-05
+
+This later root decision supersedes the requested-only status in the historical
+candidate section below. Root approves exactly 2,522 gzip9 JS / 0 CSS / 1,367,574
+public bytes for the six corrections and fourteen equipment renditions, plus
+667 JS / 0 CSS / 2,686,552 public bytes for fifteen reward DPR2 renditions and
+compact initial image selection. The separate ledger entries have no reserve.
+
+Measured totals: 142,207 gzip9 JS / 16,278 CSS / 156,979,636 public bytes.
+Approved ceilings: 142,207 / 30,227 / 156,979,636. Per-file limits and hash-bound
+technical publication approvals are separate from this aggregate allocation.
+The [root return review](reviews/2026-09-05-plan01-return-review.md) records
+source/image checks, responsive loading, hashes, rollback and remaining gates.
+These are static delivery and engineering decisions; Human/device/comfort and
+clean-host timing qualification remain pending.
+
+### Plan 01 approved base allocation and correction request — 2026-09-05
+
+Root approved `ui-plan01-physical-shell-font` in the review follow-up at
+09413c1: 4,500 gzip9 JS, 0 CSS and 43,795 public bytes. The reviewed prior candidate
+was 138,938 JS / 15,742 CSS gzip9 (combined 9,976 bytes below the original baseline).
+The approved ceilings are 139,018 JS / 30,227 CSS / 152,925,510 public. Other ledger
+entries and checker limits are unchanged.
+
+The corrected candidate adds 14 approved-source 512 px presentation files:
+1,367,574 encoded and 14,680,064 theoretical decoded bytes, not simultaneous
+residency. Four inherited 102,400-byte per-file limits fail. Final JS is 141,540,
+CSS 16,278 gzip9 and all public delivery 154,293,084 raw bytes. The new
+requested-only allocation is 2,522 gzip9 JS / 0 CSS / 1,367,574 public bytes;
+the unchanged guard fails those two categories. Exact final gzip9/Brotli/raw
+bytes, hashes, incremental request, rationale, rollback and checker results
+are in [UI review evidence](UI_UX_REVIEW_EVIDENCE.md). Neither CSS savings nor
+source-art approval grants new delivery/allocation authority.
+
+The unchanged local font contributes 39,408-byte WOFF2 and 4,387-byte OFL text.
+[UI typography](UI_UX_SPEC.md#typography--allocation) records source hashes,
+genuine 300–700 weights, 320-codepoint cmap, explicit ≤/≥ fallback and swap policy.
+Image inventory is now larger; audio delivery is unchanged. No memory/device
+claim is inferred from file bytes. Vite's 500 kB advisory is retained.
+
+Power-search evidence separates DEV synchronous/sliced CPU and admission
+counts from production input→modal commit/frame opportunity. It found real
+render-path delay and motivated deferred cancellable suggestions; exact
+Power/Required Path remains immediate. All host timings are report-only:
+dirty runtime and no host attestation. Physical/low-end/retained resources,
+full listening and clean-build qualification stay open. Root owns MOVE-01
+after UI review; Plan 07B requalifies that slice rather than duplicating it.
+
+### Classification
+
 | Class | Meaning | May support a release claim? |
 | --- | --- | --- |
 | Historical 0.19.0 | Evidence recorded for the released 0.19.0 artifact/source pair. It is useful for continuity, not a current-HEAD timing baseline. | Only for the named 0.19.0 artifact. |

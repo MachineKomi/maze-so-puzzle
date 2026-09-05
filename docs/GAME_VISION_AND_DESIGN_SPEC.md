@@ -187,12 +187,16 @@ These are **Human decisions**.
   child-safety, sibling-construction and naming constraints.
 - Tea-Time Skeleton is a Human-approved rescue-and-collect friend, not a
   guardian or enemy. His approved green-tea sprite is catalogued under the
-  dormant friend identity `green-tea-skeleton`; later content admission remains
-  with friend rescue and Friend Garden contracts. His toy-bone construction may still be a visual consistency
+  friend identity `green-tea-skeleton`; subsequent accepted checkpoints gave all
+  32 friends authored rescues, with Tea-Time Skeleton in Maze 2. Later Garden
+  eligibility still follows its rescue contract. His toy-bone construction may still be a visual consistency
   reference for Warrior Skeleton without implying shared gameplay taxonomy.
 - Treasure Mimic and the existing Candy Mimic are distinct visual chest
   families but share the single PT22 disguised-chest rule: matching closed and
-  benign-open states, then a committed 65% reward / 35% revealed-guardian result.
+  benign-open states, then a committed versioned outcome. The original v1
+  65% reward / 35% revealed-guardian contract remains historical/save authority;
+  the Human's 2026-09-05 update requires designer-controlled safe placement and
+  probability policies for new content, as defined below and in PT22/Plan 09.
   Once that feature lands, Candy Mimic does not remain an always-visible ordinary
   enemy except through an explicit Human deferral or pinned historical version.
 
@@ -289,7 +293,68 @@ UI, characters, terrain, VFX, light, motion, sound, copy, and controls should fe
 
 ## 6. Shared acceptance requirements
 
+### Human v0.20.1 playtest direction — 2026-09-05
+
+The complete 17-point source crosswalk is
+`playtests/2026-09-05-v0201-wishlist.md`. These are desired future behaviours,
+not claims about the active UI candidate. The roadmap sequences delivery.
+
+- Materials must have clear floor/wall/overlay jobs, coherent scale beside Ame
+  and deliberately paired palettes/materials. Wall top/front/side lighting and
+  grounding must sell convincing depth. More textures are useful only when they
+  fill named visual roles; do not use floor-looking textures on walls.
+- Preserve the charm of cute movement while keeping sprites crisp throughout
+  the acting cycle. Followers follow the actual corridor trail off camera;
+  screen visibility must not teleport or reassign them. Equipment must read as
+  deliberately held, including the ring weapon. Poison should bubble at a
+  pleasing varied pace rather than form synchronised racing columns.
+- Focus should be restrained, beautiful and tailored to component/input method,
+  while remaining clear for keyboard/controller users. Mouse/touch interaction
+  should not leave a distracting whole-maze keyboard ring.
+- Victory should be more delightful, with distinctive small friend dances, and
+  its popup must never scroll: everything remains visible. Preserve readable
+  text, usable controls and exact completion semantics. Any extreme geometry
+  conflict needs a concrete Human layout decision, not silent clipping/shrinking.
+- Adventure Book has distinct **Mazes, Friends, Bestiary, Stats, Achievements**
+  pages. Friends/encountered enemies open beautiful large crisp lore cards with
+  original Maze flavour and story. Bestiary discovery is earned through actual
+  encounters, not asset loading or invented historical progress. Inspiration
+  from creature encyclopedias and JRPG book tabs means craft and pleasure, not
+  copied content, artwork or interface styling.
+- Mimic probability and Power/placement policy are designer-controlled and
+  versioned. No possible required outcome may break a maze. Optional Mimics can
+  invite returning stronger, but a legal attainable resource route must exist
+  without their own loot. Reveals are stable and legible before combat; defeated
+  Mimics always award more loot than comparable ordinary chests under a defined
+  currency-aware comparison. No hidden reroll or power change after reveal.
+- Reward sprays follow the moving collector with subtle, satisfying sound and
+  restrained gold/Science sparkle, independent of exact-once wallet credit.
+  Repeated large showers must remain pleasant and performant. Rainbow XP crystal
+  presentation is recorded for a future approved progression design, not early
+  authorization to add persistent XP or levels.
+- Post-tutorial campaign and generated play should demand richer reasoning,
+  meaningful divergent choices and some perseverance, while teaching intuitively
+  and preserving solvability. Surprise setup gains Easy/Medium/Hard plus Surprise
+  me difficulty selection, clear with icons and labels before fluent reading.
+  Bigger maps, grind, arbitrary chance or an automatic item corridor do not
+  substitute for satisfying puzzles. Keep hints supportive and experimentation safe.
+- The Human requests a bounded current-art review of `moon-bat`, `pebble-golem`,
+  `hedgehog`, `alpaca`, `rainbow-horn-unicorn`, `penguin`. Review retain/refine
+  candidates against the approved clean chunky material-local contour style;
+  do not presume six rejections or reopen unrelated approvals. A few original
+  cute spooky friend proposals are welcome for later Human cast/art selection.
+  Preserve the current 32 friends and the tea-drinking skeleton's friendly role.
+
 ### Human quality reaffirmation — 2026-09-05
+
+**Additional Human direction, wishlist 20260905-02:** introduce recognisable
+monster rooms, treasure rooms, monster-focused mazes and treasure-focused mazes
+to create purposeful variety. Combine existing intuitive rules into satisfying
+route/resource choices before adding complexity. Explore further mechanics that
+make puzzling richer and more challenging while remaining clear, enjoyable and
+recoverable; friction, nuisance repetition and obscure exceptions fail the brief.
+PT43/44 and Plan 09 own content profiles and early comparison. Specific new rules
+remain proposals until the Human selects an implementation specification.
 
 The Human's ambition is outstanding edutainment that is also an exceptionally
 fun, satisfying and rewarding game. Treat beautiful art, contextual sound,

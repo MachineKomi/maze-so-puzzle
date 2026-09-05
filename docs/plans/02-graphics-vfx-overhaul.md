@@ -44,6 +44,76 @@ Complete the required semantic/reaction/reward families before optional raster
 experiments; no new renderer, full-roster animation, or extra gameplay enters
 this track.
 
+### Human playtest refinement — v0.20.1, 2026-09-05
+
+Source: [numbered playtest intake](../playtests/2026-09-05-v0201-wishlist.md),
+items 4, 8, 12 and 16. Apply these when this sequential track starts; they do
+not expand or interrupt Agent 01's running assignment.
+
+- `PT-20260905-35`: provide bounded decorative slots, content/maximum-extents
+  metadata and a finite celebration timeline to the existing completion host.
+  The subsequent UI-02 checkpoint owns its final no-scroll composition, with
+  every result, rescued friend and action visible together. Supply maximum
+  supported content and long-name fixtures for phone landscape, TV/Deck,
+  Normal/Big and 200% accessibility checks. Do not clip overflowing decoration
+  into essential content, change DialogShell geometry or reduce accessible
+  text/targets to make an effect fit. UI-02 must return a measured impossible
+  geometry tradeoff to the Human rather than quietly substitute pages or a
+  truncated summary. This plan delivers the dance/timeline portion; final
+  no-scroll acceptance remains open until UI-02 verifies the complete host.
+- Give each friend a recognisable small celebratory movement/dance through a
+  deterministic profile derived from its identity/personality metadata. Reuse
+  restrained primitives but distinguish rhythm, direction, pose emphasis or
+  gesture, rather than assigning every friend the same synchronized bounce.
+  This plan owns the finite completion-only dance wrapper and its shared clock;
+  it does not take ordinary follower travel or board idle-pose ownership.
+  Review the complete present roster in a catalogue rack and actual five-friend
+  completion combinations. No effect may obscure the result or delay Continue.
+  Reduced/static forms retain the joyful composition. Plan 05 may add selected
+  richer drawings later; no full-roster multi-frame quota is implied.
+- `PT-20260903-22`: consume the currently accepted committed-result contract,
+  remain probability-agnostic, and requalify when Plan 09 implements new policies.
+  The accepted rewardRules v1 65/35 contract is historical authority, not a
+  future universal authoring constraint. Do not depend on Plan 09 running early.
+  The director never
+  rolls chance, changes enemy Power, decides route eligibility or grants loot.
+  It presents the already-committed result, including an optional readable
+  close-up surprise reveal using an approved presentation rendition. A large
+  mimic sprite can expand inside a stable scene; do not jerk or zoom the camera.
+  A reveal remains understandable without motion and does not leak an outcome
+  before encounter. If large art is absent, return the exact consumer to root.
+- Gold and Science burst outward then home to the collecting actor's current
+  rendered position while ordinary movement can continue. Follow turns and
+  camera edges without endpoint jumps. Visual arrival may acknowledge the
+  already-committed receipt; wallet truth is independent of arrival. Defeated
+  Mimics always have richer loot than an ordinary chest
+  under the accepted gameplay table; particle count never determines that table.
+  Preserve gold glow/sparkle and the canonical Science palette/shape cues; use
+  the Human's blue/green Science preference only where consistent with the
+  accepted palette, resolving any mismatch through art authority. Holographic
+  rainbow XP crystals remain a Plan-14 progression proposal until explicitly
+  approved; do not add XP state or misleading XP rewards during this track.
+  Credit exactly once regardless of arrival, cancellation or offscreen effects.
+  Cluster/coalesce pickup sounds with bounded simultaneous voices and a measured
+  quiet mix; a dense mixed spray must sound satisfying over music on repeated
+  collection, rather than louder or more insistent for each particle. Keep the
+  existing nonblocking receipt and cancellation behavior.
+- `PT-20260902-15`: poison needs slower, irregular, viscous motion. Adjacent
+  poison cells and large connected pools must not emit rows of bubbles racing
+  along the same path. Use bounded deterministic variation in size, spacing,
+  phase, life and modest trajectory, stable across camera moves and region
+  changes; never regenerate randomness per render or create a timer per cell.
+  The historical two-family timing below is a starting recipe, not proof of
+  natural variation. Inspect single cells, narrow strips and broad pools over
+  complete cycles. Static/reduced poison stays distinctive with irregular
+  bubble silhouettes and clear banks; total work remains bounded by the shared
+  material budget rather than unbounded per-tile particles.
+- `PT-20260905-38`: local effect/dance scale must preserve crisp approved art
+  at its maximum CSS size times DPR. Capture neutral and deformed extremes;
+  constrain softening introduced here before acceptance, then hand comparable
+  evidence to Plan 05 and 07B. Do not hide a sampling defect with sharpening,
+  nearest-neighbour rendering, camera snapping or stronger outline filters.
+
 ### Adopted product amendments
 
 - Final Art Bible tokens and material rules replace the provisional hex palette in this plan. VFX may derive bounded effect values but may not create a competing world palette.
@@ -70,8 +140,8 @@ this track.
 - Treat resource budgets as provisional allocations until Plan 07B measures the integrated build. Preserve the authored emotional beat in full/lite/static recipes.
 - Include every approved Mimic family's registered closed chest, good open chest
   and revealed enemy plus Gold/Science reward sprays without pre-reveal leakage,
-  while leaving the shared deterministic 65/35
-  outcome, exact drop tables and exactly-once credit to the 03M/Plan-09 gameplay
+  while leaving the versioned deterministic authored outcome policy,
+  exact drop tables and exactly-once credit to the 03M/Plan-09 gameplay
   owner. Door choreography begins only after the stationary open event commits;
   goal/victory choreography never commits pending completion. Consume Plan 03's original anime
   emotion-mark assets and Plan 01 portrait anchors in the typed reaction system.

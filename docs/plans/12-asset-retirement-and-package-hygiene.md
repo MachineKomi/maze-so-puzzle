@@ -11,6 +11,12 @@ final content-use report, performance inventories, current art/source catalogues
 `../source-assets/retirement/README.md` and its ledger/schema completely.
 Historical counts and apparent filename age do not prove retirement eligibility.
 
+Include UI-02's selected Book/card renditions, final bestiary/Mimic entry aliases,
+PT39's six-art review dispositions and any Human-approved PT41 additions in the
+consumer join. An undiscovered entry is an on-demand consumer, not proof its
+approved art is unused. Keep historical role/source dependencies distinct from
+active preload intent; a new revision does not waive rollback provenance.
+
 No new artwork or gameplay is in scope. This plan does not authorize removing
 masters, exact prompts, rights/provenance, proof sheets, Git history or sole
 surviving copies. Only individually evidenced delivery copies are candidates.

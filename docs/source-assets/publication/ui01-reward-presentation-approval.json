@@ -1,0 +1,149 @@
+{
+  "schema": "maze-ui-presentation-approval/v1",
+  "approvedBy": "Astra root orchestrator under Human UI review and publication delegation",
+  "approvedAt": "2026-09-05T02:40:54.9828333+00:00",
+  "scope": "runtime-publish",
+  "candidateReportSha256": "2c295159a13d970bb904cc11818679f99483a1e0c4bb31e5c61be005ff6d5f8f",
+  "decision": "Technical delivery approval of fifteen deterministic 512px earned-reward renditions from previously approved Batch22 originals. Root inspected the alpha proof; independent art reviewer inspected every individual512px file. No clipping, matte leakage, damaged pale details or registration issue found. All116 cold equipment/reward role-size-DPR selections, delayed/failure fallback and real earned-Book transaction checks passed. This does not claim Human/device acceptance or alter identities.",
+  "proofPath": "C:/Users/hellb/AppData/Local/Temp/maze-ui01-astra-media-20260905-r2/ui-review/presentation-alpha-200.png",
+  "proofSha256": "eebf01b63777337de1451f90a065a20f2361589a2ee959fe1a213a3603621f63",
+  "runtimeBytes": 2686552,
+  "perFileDecision": "Approve each listed exact file size as its512px delivery ceiling. Preserve existing256px optical/presentation outputs and inherited ceilings. Compact/DPR1 views retain smaller sufficient delivery;512px is on-demand for200CSSpx/DPR2. Aggregate allocation is separate.",
+  "entries": [
+    {
+      "id": "reward-trail-sticker",
+      "path": "public/assets/mgjrpg-02/presentation/reward-trail-sticker-v03-presentation-512-r01.webp",
+      "sha256": "c71aaefa0fb76122f942bddf87ebb7ebaffbeddd9cdc766bb4f983b86c86c550",
+      "bytes": 172254,
+      "sourceSha256": "86c26fa4ff32ead97c6711a39abc9ca2c8ba5fdfad461b3b9f47671e1aacd13d",
+      "candidateRecordSha256": "f85657b9cd000bbaadddc3f412200e7fdc9ac19dfe3945d6099ac5e3c394656b",
+      "maxEncodedBytes": 172254
+    },
+    {
+      "id": "reward-animal-friend-sticker",
+      "path": "public/assets/mgjrpg-02/presentation/reward-animal-friend-sticker-v03-presentation-512-r01.webp",
+      "sha256": "e7f9074404f0e9275c00e2aab216f3aea5593ac81c644e8b3cbeaba83b25ffe0",
+      "bytes": 191552,
+      "sourceSha256": "dd126da21d1a3d75838e651bac298cf1f970c5882d98729bda090849cb98000b",
+      "candidateRecordSha256": "0503b6bb36e1c99876b32d05860f81bc75225c031ee7a0a55e25a4e9c58d532d",
+      "maxEncodedBytes": 191552
+    },
+    {
+      "id": "reward-surprise-sparkle-sticker",
+      "path": "public/assets/mgjrpg-02/presentation/reward-surprise-sparkle-sticker-v03-presentation-512-r01.webp",
+      "sha256": "2eeeb0f5107d2375788fc1c8b8a1e6d64cb6c3fe8f7418d65c0708ed28f99b4c",
+      "bytes": 172768,
+      "sourceSha256": "f6895bbda59013b49a56451e66d0b967e8958605f08b58ce61be7e17585de141",
+      "candidateRecordSha256": "480f889ff023d6e834acaf4c2dcee829b975a965329ef438c2643af1ca1234df",
+      "maxEncodedBytes": 172768
+    },
+    {
+      "id": "reward-helping-paw-medal",
+      "path": "public/assets/mgjrpg-02/presentation/reward-helping-paw-medal-v03-presentation-512-r01.webp",
+      "sha256": "c35910bda639f0061fd8d9af738acd6ccbf5321efb69920e42cdb2a52ca11d2e",
+      "bytes": 178350,
+      "sourceSha256": "1fcae4bcec149b82d3923fe242106d4d00ecff6528d10c874b2da64b337a4459",
+      "candidateRecordSha256": "2d81eef8a5230c26f7745acf99562b77dfbd6bfdcd4fc82de5371fdafe5fd977",
+      "maxEncodedBytes": 178350
+    },
+    {
+      "id": "reward-rainbow-rescue-medal",
+      "path": "public/assets/mgjrpg-02/presentation/reward-rainbow-rescue-medal-v03-presentation-512-r01.webp",
+      "sha256": "4e2ee85fa79889ab20f9504dc63ff071debfa2962ffff10d7f440c16cd5e495c",
+      "bytes": 166104,
+      "sourceSha256": "3a6a15314aa5d5b63c03ed68d8ed87b4b6170039441d7c8fbe32c0b4eb5b003a",
+      "candidateRecordSha256": "2f7ecbcf88c6c8ef5f805be8ceba50d743cadcb41d415ab2ff12c418a0dfedc2",
+      "maxEncodedBytes": 166104
+    },
+    {
+      "id": "reward-golden-guardian-medal",
+      "path": "public/assets/mgjrpg-02/presentation/reward-golden-guardian-medal-v03-presentation-512-r01.webp",
+      "sha256": "f53f65cea458989c10f43432fd07f4b4a62c9ab060af7cb7dccfc236e3ee25a3",
+      "bytes": 142228,
+      "sourceSha256": "aaa7ecb0a3832d886f8f80feb779dfc2183a9fc65e5f6ab0a52ca1ac3d548b3f",
+      "candidateRecordSha256": "459a07db8a0a43e62ac9bd3f22d1c1ff2cfd9f187f8374ac9a96133ed8ff9323",
+      "maxEncodedBytes": 142228
+    },
+    {
+      "id": "badge-pathfinder",
+      "path": "public/assets/mgjrpg-02/presentation/badge-pathfinder-v02-presentation-512-r01.webp",
+      "sha256": "1083a7dd712c3906e5f9a264d639e3cc259eb119c0bb89e5caf18698aab95c3d",
+      "bytes": 176158,
+      "sourceSha256": "2909655eec2802762500c0253927163e34228fe94fda989071cf5935de61b1d2",
+      "candidateRecordSha256": "5ce8cb62a66f6ecd604fedd00f6928e94b96e5a0ed0b5212169e0961d3d3f28d",
+      "maxEncodedBytes": 176158
+    },
+    {
+      "id": "badge-maze-mapper",
+      "path": "public/assets/mgjrpg-02/presentation/badge-maze-mapper-v02-presentation-512-r01.webp",
+      "sha256": "30abb13e1101d0288df5709f0602b53bfecfa254ce628b980264092b71658830",
+      "bytes": 176754,
+      "sourceSha256": "020cc737ebc3189fb71f79d874718eded00a9f9d9f8cb08041f389d93fe025bf",
+      "candidateRecordSha256": "e2d7fe0d3f8d810ce84fbde7df1ad24cb38d22bf045ce98684a4c1e9e517e4c4",
+      "maxEncodedBytes": 176754
+    },
+    {
+      "id": "badge-grand-explorer",
+      "path": "public/assets/mgjrpg-02/presentation/badge-grand-explorer-v02-presentation-512-r01.webp",
+      "sha256": "0c293898af240b6ee29ca3ffeff0a760cc785ad8eb64a0a31689ddd3a8362239",
+      "bytes": 180318,
+      "sourceSha256": "0e1f532490e1e508e9680e61d14f8859f100202da4e332278d56432ea5cb2e9a",
+      "candidateRecordSha256": "9447a1e997e60184e21573297a19df54d8ed828727c62ef398e218796643a0d4",
+      "maxEncodedBytes": 180318
+    },
+    {
+      "id": "badge-surprise-scout",
+      "path": "public/assets/mgjrpg-02/presentation/badge-surprise-scout-v02-presentation-512-r01.webp",
+      "sha256": "70a252cd6d26c0deb85a8505ed5ae894c31939a62840dbdd6e37c4a1a41a271b",
+      "bytes": 171526,
+      "sourceSha256": "a0239a6bde820fda7a5f0fd97e1e53ac2483582e5050d350852754cfadaae820",
+      "candidateRecordSha256": "0e9c18f92b2f57b232f3d0e0d0702dbb2065492280f29071a451055100516730",
+      "maxEncodedBytes": 171526
+    },
+    {
+      "id": "badge-mighty-adventurer",
+      "path": "public/assets/mgjrpg-02/presentation/badge-mighty-adventurer-v02-presentation-512-r01.webp",
+      "sha256": "764e67ebf1ef4ad94569b443aeac23f739775f29b9cdd1f7a0f9ab53fa9a264d",
+      "bytes": 165372,
+      "sourceSha256": "96ecde0e8974fb314382ed260416986709ae55aa31383b46169327428fbe8ac7",
+      "candidateRecordSha256": "88dd8f49878ddd885ecd9246b10cbfd13077f70d7062ea9e434e54a9d0a4fafe",
+      "maxEncodedBytes": 165372
+    },
+    {
+      "id": "badge-twinkle-toes",
+      "path": "public/assets/mgjrpg-02/presentation/badge-twinkle-toes-v02-presentation-512-r01.webp",
+      "sha256": "84ce403dc76f88b3acb08f40912ee03276ac01456fffda782815d980f9f0ea24",
+      "bytes": 190144,
+      "sourceSha256": "63c2323c5f69c0b2c0a936c8eb03174c06d55c9d60a0c97ace38ede1e9767fd9",
+      "candidateRecordSha256": "95c740a87f81215ed35681ef0fab82636654de504e98c1982ca47607481e1bb3",
+      "maxEncodedBytes": 190144
+    },
+    {
+      "id": "badge-bunny-buddy",
+      "path": "public/assets/mgjrpg-02/presentation/badge-bunny-buddy-v02-presentation-512-r01.webp",
+      "sha256": "5299d8e3b944dbff4732c709ea343579bc6aabd63473c765ed65d3e7a185116a",
+      "bytes": 194008,
+      "sourceSha256": "359cf4713ca481db03f7f50e05bb7c7cdcd55f5231702b681de324a4fc88a54b",
+      "candidateRecordSha256": "d877aa083c2e30528aa039a134cce16bf6ec099cf3714db008c5eedffaff6b56",
+      "maxEncodedBytes": 194008
+    },
+    {
+      "id": "badge-fox-friend",
+      "path": "public/assets/mgjrpg-02/presentation/badge-fox-friend-v02-presentation-512-r01.webp",
+      "sha256": "3dc29d90668f707d57e87e7dfa1f8f954981b7be5ef90de3006d6002f07c6218",
+      "bytes": 179394,
+      "sourceSha256": "cd7e9ed2b164e6216241482ea0de4c84097386955b63b5cb97228c446d137bb6",
+      "candidateRecordSha256": "3c6cc15b35ce3a22113093ccd64ea1fac898ff8c69a89f9c3b3e39bffd0593a3",
+      "maxEncodedBytes": 179394
+    },
+    {
+      "id": "badge-kitten-pal",
+      "path": "public/assets/mgjrpg-02/presentation/badge-kitten-pal-v02-presentation-512-r01.webp",
+      "sha256": "252e853eb2771059d95eaffec7579fe9e9cb5628952293229a2cb7084cc29954",
+      "bytes": 229622,
+      "sourceSha256": "f0f3368b236defa1dda8f573c292a2ba6661dc84fc19b550ac7aee6a0c3b7531",
+      "candidateRecordSha256": "ee10d6dca933c5b6e599799e3e4c93e56b540da9b34a16174f0d28a3286c7a0b",
+      "maxEncodedBytes": 229622
+    }
+  ]
+}

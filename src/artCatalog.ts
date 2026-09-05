@@ -54,6 +54,8 @@ export interface RuntimeArtVariant {
   readonly usage: RuntimeArtUsage;
   readonly minDisplayPx: number;
   readonly maxDisplayPx: number;
+  /** Rendition-specific measured bounds; base field sockets remain unchanged. */
+  readonly geometry?: ArtGeometry;
 }
 
 export type ArtGeometryClass =

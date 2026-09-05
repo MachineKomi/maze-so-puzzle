@@ -30,10 +30,11 @@ state.
 4. `src/combatPresentation.ts` builds a pure deterministic victory timeline:
    three clashes, semantic sound cues, exact conserved Power-transfer steps,
    final enemy Power `0`, and a short reduced-motion handoff.
-5. `src/stageScale.ts` defines the 960 × 540 logical stage and its pure
-   fit-without-stretching calculation. `App.tsx` observes the safe viewport and
-   scales one fixed canvas; CSS container queries and units size every internal
-   screen against that canvas rather than the physical device.
+5. `src/ui/game/PlayShell.tsx` measures the safe physical content box and calls
+   `layout.ts` for a square left board and right information/control deck.
+   `stageScale.ts` remains a tested legacy helper, not a runtime UI transform.
+   `docs/UI_UX_SPEC.md` owns measured geometry, material, focus, motion and
+   scene/anchor contracts. The styles entry is one named-layer manifest.
 6. `src/game/engine.ts` applies one immutable movement or interaction step. A
    matching keyed door opens in place before a later traversal input. Entering
    the goal creates a pending `won` state; Stay returns to a disarmed goal tile,
@@ -185,12 +186,38 @@ state.
   meaningful game state, and the active run persists that bounded replay state.
   Its solver route always avoids optional animals.
 - The browser build uses only local static assets from `public/`.
-- All landscape screens share one 960 × 540 logical canvas. A `ResizeObserver`
-  fits that canvas inside the safe viewport with a single uniform scale, so its
-  aspect ratio, panel order, and relative sizing cannot diverge between desktop,
-  iPad, phone, Safari, or installed-web-app chrome. Extra space is deliberately
-  letterboxed. Only the portrait rotate prompt and pointer-specific interaction
-  semantics remain viewport media behaviour.
+- All primary landscape devices share board-left/deck-right topology, with real
+  CSS-pixel text/targets and content-sized map/friend/bag sections. Big keeps the
+  same deck. Short phones use 28px noninteractive status cells with More details
+  at44/48px. Normal-text statuses fit together;200%/extreme content uses one
+  labelled reader with Objective/Hint and movement docked outside it. Portrait
+  is an emergency fallback, not a qualified primary mode.
+- `src/ui/interactionState.ts` exposes typed screen/top-overlay truth and a narrow
+  current-input blocker. DialogShell owns focus/inert/restore. Plan08 later owns
+  canonical inputContext/getInteractionPolicy; no competing taxonomy is added.
+- `src/motion.ts` and PresentationProvider own system/full/reduced preference,
+  resolved full/reduced and independent full/lite/static quality. The additive
+  presentation storage key is separate from progress and survives Reset.
+- `src/ui/art.ts` / CatalogueImage resolve semantic variants by role, size and
+  DPR, including the14 root-authorized512px equipment candidates pending proof
+  and allocation approval. Optical sources and scene geometry remain unchanged.
+  Actual currentSrc failures clear responsive candidates; missing/failed
+  presentation uses the same identity's64px optical/name fallback. Additional
+  earned-reward DPR2 resolution remains an explicit return in UI_UX_SPEC.
+- StoryDialog is a typed multi-turn host; canonical chapter text is unchanged.
+  SoundDialog uses MusicTransportPort only. Earned Book keepsakes open accessible
+  on-demand detail; locked art stays concealed.
+- DialogShell's labelled body is a native keyboard-scrollable region inside
+  the focus trap. Invoker capture precedes the inert commit. Power guidance
+  paints exact feedback first, then drains the shared engine-witness iterator
+  in cancellable4ms slices with a2048-state total bound and snapshot validation.
+- The current music adapter now applies initial title/mute state to the real
+  player and preserves the existing shuffled/no-repeat maze picker. Port
+  signatures and music.ts remain unchanged; this is not Plan07B's full engine.
+- Root owns coordinated smooth camera/actor travel after UI review and before
+  FP-UI1 (roadmap §5.13A / PT-20260902-07). Current cameraMotion formulas and
+  travel timing remain; UI_UX_SPEC records world/actor/effect coordinates,
+  data-scene-slot hooks and revision-1 measured VFX destination anchors.
 - Progress belongs to the current browser or Tauri WebView profile. It is not
   synchronized between devices.
 - Full reset is an explicit destructive UI flow available from the title and
@@ -313,6 +340,13 @@ encoded/decoded inventory only there. The Plan 03 publication utility is
 `scripts/art_pipeline/mgjrpg02_publish.py`: its explicit semantic map writes new
 no-overwrite URLs and strict-v2 records, and its check mode rebuilds derivatives
 in a temporary directory for byte comparison rather than mutating runtime files.
+The09413c1 review follow-up grants this same Agent01 task a narrow exception:
+`ui_presentation_candidates.py` may prepare14 deterministic512px equipment
+candidates from approved originals. It reproduces approved optical bytes first,
+never overwrites those pixels, and writes explicitly candidate records. Generic
+unapproved-runtime-output and inherited per-file byte gates stay red until root
+reviews them. This exception does not make the general publisher accept
+unapproved art, nor authorize generation or broader catalogue changes.
 The pipeline applies EXIF/profile handling where evidence exists,
 premultiplied-alpha resize, straight-alpha delivery, transparent-edge RGB
 dilation, periodic seam checks, clear-border checks, schema/hash coverage, and

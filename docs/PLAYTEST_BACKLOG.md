@@ -16,7 +16,9 @@
   [`playtests/2026-09-04-story-cast-vn-and-voice.md`](playtests/2026-09-04-story-cast-vn-and-voice.md),
   [`playtests/2026-09-04-living-goal-portal-spiral.md`](playtests/2026-09-04-living-goal-portal-spiral.md),
   and
-  [`playtests/2026-09-05-adjustable-camera-zoom.md`](playtests/2026-09-05-adjustable-camera-zoom.md)
+  [`playtests/2026-09-05-adjustable-camera-zoom.md`](playtests/2026-09-05-adjustable-camera-zoom.md),
+  [`playtests/2026-09-05-v0201-wishlist.md`](playtests/2026-09-05-v0201-wishlist.md),
+  [`playtests/2026-09-05-02-room-variety-and-mechanics.md`](playtests/2026-09-05-02-room-variety-and-mechanics.md)
 
 ## 1. Purpose and authority
 
@@ -51,10 +53,28 @@ so.
 ### Current reconciliation — 2026-09-05
 
 Accepted source baseline: post-v0.20.1 corrections through `b0eb8a8`; current
-HEAD `47bfff4` at review also contains orchestration documentation. Agent 01 has
-now stopped with an unaccepted candidate. Root's completed review returns exact
+HEAD `47bfff4` at the earlier review also contained orchestration documentation.
+Agent 01 initially stopped with an unaccepted candidate. Root's review returned exact
 corrections through `plans/AGENT01-review-follow-up.md`; details and verification
 are in `reviews/2026-09-05-plan01-review.md`. No new UI/playable release is claimed.
+
+**Latest Human update, same date:** Agent 01 has finished its existing correction.
+Root's prior documentation checkpoint is `09413c1`; root accepted the reviewed
+UI engineering checkpoint with final453 project/121 art tests and closed static
+publication/allocation gates. Checkpoint/push precedes MOVE-01 and FP-UI1.
+The new 17-point **v0.20.1** wishlist is fully cross-referenced in
+`playtests/2026-09-05-v0201-wishlist.md`: it extends 15/22/24 and adds 33–42.
+These are future requirements and reported symptoms, not failures assigned
+retroactively to Agent 01. All remain unverified against its final candidate.
+One bounded UI-02 return after 02/before 08 owns Book/focus/victory composition.
+Planning changes wait for the next safe manager checkpoint before Git backup.
+
+The additional **20260905-02** wishlist adds PT43's monster/treasure rooms and
+whole-maze variety to Plan 09, plus PT44's bounded intuitive-mechanics comparison
+before dependent map freeze. New-rule implementation remains a concrete Human
+decision; the exploration itself must not be deferred wholesale to Plan 14.
+The prior 17-item intake remains in force. The active-task guard applies to future
+concurrent specialists; Agent 01 is no longer an active writer.
 
 The cards below preserve dated family/triage evidence. A paragraph labelled
 "Current-checkpoint audit" means the checkpoint inspected when that card was
@@ -139,7 +159,7 @@ A card may need more than one platform/input row before it is considered done.
 
 ## 3. Evidence synthesis
 
-The intake contains eighteen especially strong evidence and product-direction
+The intake contains twenty especially strong evidence and product-direction
 clusters:
 
 | Theme | Direct evidence | Working implication |
@@ -162,6 +182,8 @@ clusters:
 | Compact character storytelling | The Human wants a stronger cast/world review and short back-and-forth exchanges rather than isolated monologues | Review canon before Plan 11 and use bounded two-to-three-turn, fully skippable VN-style interludes without displacing maze play |
 | Optional voiced guidance | The Human would like to explore generated voices for story and tutorial moments later | Treat voice as a planning-only opportunity until script, consent/rights, accessibility, audio, package and Human-value gates justify a separate implementation plan |
 | Comfortable personal framing | Human requests two tiles less or one tile more than the default camera span | Offer a bounded future camera preference with larger sprites or more map context; preserve the accepted travel, reveal, input and performance contracts |
+| Recognisable encounter and reward destinations | Human asks for monster/treasure rooms and monster/treasure mazes | Give rooms and whole mazes distinct authored/generated rhythms using current rules, with safe optional rewards and bounded density |
+| Intuitive new-rule opportunities | Human asks to explore mechanics that deepen puzzles without confusion or annoyance | Compare a bounded shortlist before Plan-09 map freeze, retain an existing-rules alternative and require an explicit contract before adopting a new mechanic |
 
 This is high-value target-family evidence, but it is one family rather than a
 broad usability sample. Current-build reproduction and broader device coverage
@@ -203,6 +225,18 @@ remain necessary where called out below.
 | `PT-20260904-30` | Cast review and compact VN interludes | P1 | Routed | Not retested | Plan 01 shell; Plan 09 canon/content; Plan 11 consumes |
 | `PT-20260904-31` | AI-generated voice-acting exploration | Epic | Needs decision | Not retested | Plan 14 opportunity review; explicit follow-on only |
 | `PT-20260905-32` | Adjustable camera zoom: 4–7 tiles | P1 | Routed | Not retested | Future Plan 08 after accepted UI/MOVE-01/04/02; Plan 07B requalifies |
+| `PT-20260905-33` | Faint moving dark viewport edge | P1 | Routed | Not retested | Plan 04 diagnosis/fix; root MOVE-01 observes regression |
+| `PT-20260905-34` | Beautiful modality-aware focus | P1 | Routed | Not retested | UI-02 appearance, Plan 08 input policy |
+| `PT-20260905-35` | No-scroll victory and individual friend dances | P1 | Routed | Not retested | Plan 02 choreography, UI-02 composition, Plan 05 optional frames |
+| `PT-20260905-36` | Bubble Ring Blade held layering | P1 | Routed | Not retested | Root art/metadata preflight for 04; Plan 05 consumes |
+| `PT-20260905-37` | Book pages, Bestiary and lore cards | P1 | Routed | Not retested | UI-02 with root discovery/save review; Plan 09 final content |
+| `PT-20260905-38` | Crisp sprites throughout programmatic motion | P1 | Routed | Not retested | Plan 05; 04/02 transform discipline and 07B qualification |
+| `PT-20260905-39` | Bounded six-sprite style review | P1 | Routed; visual decision pending | Not retested | Root art return before affected Plan 05 production |
+| `PT-20260905-40` | Followers stay on the actual corridor trail | P1 | Routed | Not retested | Root MOVE-01 bounded cosmetic trail correction; 05/10 consume |
+| `PT-20260905-41` | Original cute spooky friend additions | P1 | Routed; cast/art decision pending | Not retested | Plan 09 cast proposal, Human approval; Plan 10 roster cadence |
+| `PT-20260905-42` | Deeper puzzles and Surprise difficulty choice | P1 | Routed | Not retested | Plan 09 authored/generated design and UI; final qualification |
+| `PT-20260905-43` | Monster/treasure rooms and maze profiles | P1 | Routed | Not retested | Plan 09 authored/generated content; Plan 10 supply audit |
+| `PT-20260905-44` | Intuitive new-mechanic exploration | Epic | Routed exploration; new rules need decision | Not retested | Plan 09 design preflight; selected rule needs approved spec; Plan 14 revisits deferred ideas |
 
 ## 5. Backlog items
 
@@ -777,6 +811,21 @@ generic polish mop-up.
 
 ### PT-20260902-15 — Richer material, obstacle, key and door effects
 
+**2026-09-05 extension (v0.20.1 wishlist 1/6/7/9/16).** Plan 04 must assign
+explicit floor/wall/overlay roles, native repeat scale and validated harmonious
+pairings. A texture that reads as floor cannot serve as a wall merely because
+the renderer accepts it. Include **Springstep Sky Hollow** as the reported bad
+pairing fixture; Plan 09 applies the approved pair rules to every authored and
+generated theme. Preserve convincing wall top/front/side separation, grounded
+depth and one coherent light direction across full/lite/static modes. Request
+new textures only for named missing roles after auditing approved materials.
+
+Plan 02 must slow and vary poison bubbling: per-tile/region seeded start phase,
+rise path, size and lifetime should break synchronised columns while keeping
+the hazard recognisable. Test adjacent patches, close/wide future framing and
+reduced/static modes with bounded particle and audio cost. These requests are
+not established fixes in the current UI candidate.
+
 - Type: Lighting, material motion and event VFX
 - Impact: P1 — high value
 - Delivery: Routed
@@ -1340,12 +1389,35 @@ cannot yet distinguish an intentional retirement from accidental corruption.
   frames in Plan 05, gameplay/content integration in Plan 09, and Plan 13 only
   for compatible unresolved polish
 
-**Human decision.** Every approved Mimic family starts as its matching closed
+**Original Human decision, 2026-09-03 (probability superseded prospectively below).** Every approved Mimic family starts as its matching closed
 chest. The first bump triggers a
 single chest-strike/opening beat, then reveals either a good chest 65% of the
 time or a Mimic 35% of the time. A good chest awards a random bounded amount of
 either Gold Stars or Science Parts. A Mimic reveals its Power and immediately
 uses the ordinary combat/too-strong rules. Ordinary chests never retaliate.
+
+**Latest Human decision, 2026-09-05, wishlist 8.** Designer-controlled versioned
+placement/policy profiles replace a mandatory global 65/35 rule for future
+content. Preserve accepted `rewardRules` v1 and pinned historical runs. The
+complete clarification is in `playtests/2026-09-05-v0201-wishlist.md`.
+Required-route chests may be guaranteed benign; any randomized blocker needs a
+solver witness for every permitted outcome using resources reachable before
+it. Optional Mimics may initially exceed current Power but must be beatable
+from attainable resources elsewhere, excluding their own reward and any route
+behind them. Use the real combat comparison and a legal resource route, not an
+optimistic sum. Keep the first generated rollout optional-only and at most one.
+
+A defeated Mimic always gives superior loot to its comparable normal chest:
+Plan 09 freezes currency-aware bounds/comparison that prove the promise, with
+no naive conversion of unlike currencies. No reroll or post-reveal difficulty
+rescaling. The large reveal is legible before combat, optionally using a short
+sprite beat; full camera zoom is a proposal, not mandatory movement scope.
+Gold/Science rewards must home to the moving collector after control resumes,
+with exact-once credit independent of arrival. Gold sparkles gold; Science uses
+the accepted semantic palette (blue/green if consistent). Bounded varied soft
+collection audio must remain pleasant across dense consecutive showers. Rainbow
+XP crystals are a future visual reservation only, conditional on approved
+persistent progression after Plan 14.
 
 Good chests spray reward sprites outward with simple semi-random 2D physics,
 currency-coloured particle trails and no wall/object collision, then pull the
@@ -1368,15 +1440,15 @@ outcome. This therefore requires gameplay/save/solver work, not only VFX.
 - Define one versioned `MimicFamilyId` registry (or final canonical equivalent).
   Every final approved family—including Treasure and Candy when both pass Plan
   03—cross-resolves three geometry-compatible identities: closed chest, benign
-  open reward chest and revealed enemy. Families change art/personality, not the
-  65/35 rule or reward/combat semantics.
+  open reward chest and revealed enemy. Families change art/personality; all
+  placement profiles consume one versioned probability/reward/combat mechanic.
 - Represent the disguised chest with a stable semantic object identity and an
   explicit unresolved/resolved state. Its outcome and amounts are derived from
   a documented deterministic run seed plus object ID, or persisted directly;
   save/resume, repeated bumps and overlay/navigation churn cannot reroll it.
-- Implement the probability as an auditable 65 reward buckets / 35 Mimic
-  buckets rather than a flaky statistical test. Deterministic seed cohorts cover
-  both outcomes and boundary buckets.
+- Implement each approved policy with auditable integer buckets including
+  guaranteed-benign endpoints; test exact boundaries rather than flaky observed
+  frequency. Preserve the 65/35 v1 fixture for historical reconstruction.
 - On a reward result, choose Gold or Science through a documented deterministic
   rule and credit an amount inside explicit positive min/max bounds. On a Mimic
   result, reveal the authored enemy style and Power before resolving the normal
@@ -1404,7 +1476,7 @@ outcome. This therefore requires gameplay/save/solver work, not only VFX.
   `generatedEligible` dispositions. Under the new generated-content version,
   Surprise generation may place at most one generated-eligible disguised Mimic
   and only in a solver-proven optional chest/treasure slot; zero remains a common
-  valid outcome. Family selection and the committed 65/35 reveal use deterministic
+  valid outcome. Family selection and the committed versioned policy outcome use deterministic
   streams isolated from topology, required rewards, ordinary enemy composition
   and solution truth. Seed cohorts cover every eligible family and both reveal
   branches without turning either into a required path.
@@ -1448,7 +1520,7 @@ outcome. This therefore requires gameplay/save/solver work, not only VFX.
 
 **Acceptance evidence.**
 
-- Unit/property tests prove the exact 65/35 bucket contract, bounded reward
+- Unit/property tests prove the exact selected policy and historical v1 bucket contracts, bounded reward
   amounts, both currencies, stable save/resume outcomes and exactly-once credit.
 - Registry/asset tests cover every approved Mimic family's three-state mapping,
   geometry/registration compatibility, shared mechanics and absence from the new
@@ -1461,7 +1533,7 @@ outcome. This therefore requires gameplay/save/solver work, not only VFX.
 - Performance stress covers the maximum allowed simultaneous/queued burst on
   web and Tauri with no unbounded nodes, retained timers, decoded-resource leak,
   frame-time cliff or SFX clipping. Lower tiers preserve meaning and exact totals.
-- Human/Amelia playtesting confirms the reveal reads before combat, the 35%
+- Human/Amelia playtesting confirms the reveal reads before combat, the configured
   surprise feels funny rather than unfair, the loot shower feels satisfying,
   and reward pacing does not make ordinary exploration or quiet moments noisy.
 - No paid purchase, monetized random outcome, repeatable reload exploit, or
@@ -1544,6 +1616,16 @@ explicit Human decision.
   clutter the HUD, and that repeated skipping feels immediate and predictable.
 
 ### PT-20260903-24 — Meaningful enemy, friend and terrain variety
+
+**2026-09-05 extension, wishlist 1/7/9/15/17.** Consume PT15's typed floor/wall
+roles, repeat scales and validated pair library rather than independently
+randomising images. Springstep Sky Hollow is an explicit reported regression
+fixture. PT41 adds a bounded original cute-spooky cast proposal; preserve all
+32 approved friends and the early Unicorn/Skeleton rescues, and derive later
+coverage/Garden cadence from the actual final approved roster. PT42 requires
+meaningful divergent choices and user-selected Surprise difficulty, not just
+more decorative regions, enemies, map area or walking. These future slices
+do not revoke completed art or existing friend-rescue acceptance.
 
 - Type: Authored campaign ecology, deterministic generation and catalogue
   integration
@@ -1666,7 +1748,7 @@ and cannot yet assign distinct visual themes to portal-separated regions.
   chest/treasure slot, with zero as a normal result. Its family/outcome streams
   are isolated from topology, required rewards, ordinary enemy composition and
   solution truth, and cohort evidence reaches every eligible family plus both
-  65/35 reveal branches.
+  every permitted versioned-policy reveal branch, retaining historical v1 fixtures.
 - Rescue friends use a separate seeded selection without duplicates. Because
   species affects content identity and future Garden outcomes, its eligible pool
   and algorithm have their own generated-content version and feed the gameplay
@@ -2184,7 +2266,249 @@ This intake records requirements, not a completed zoom feature.
   Family checks ask whether a child can find/reset the choice, read sprites and
   plan a route comfortably. Zoom is not a substitute for fixing camera stutter.
 
+### PT-20260905-33 — Faint moving dark viewport edge
+
+- Type/impact: Visual defect; P1. Delivery: Routed. Verification: Not retested.
+- Source: v0.20.1 wishlist item 2; viewport/input unknown.
+- Owner/gate: Plan 04 diagnosis and correction; root MOVE-01 records whether its
+  travel change reproduces or changes the symptom. Plan 07B requalifies.
+- Report: faint dark line about 25% from the left of the main maze view,
+  moving/fading in Rainbow Power Parade and Twilight Treasure Loop.
+- Acceptance: reproduce with stable IDs `rainbow-power-parade` and
+  `twilight-treasure-loop`, capture stationary/held/turning/edge-clamped views,
+  separate camera, fog/culling, terrain, light-mask and ambient-decoration
+  hypotheses. No detached line, exposed gutter or moving seam across Normal/Big,
+  DPR 1/2 and quality/motion modes. Prove any identified layer correction without
+  removing intended light/depth or changing discovery. Cause remains unknown.
+
+### PT-20260905-34 — Beautiful modality-aware focus
+
+- Type/impact: Interaction appearance and accessibility; P1.
+- Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 3.
+- Owner/gate: UI-02 visual tokens/component treatment; Plan 08 canonical input
+  modality, controller navigation and final qualification.
+- Acceptance: replace the heavy uniform green ring with restrained but clear
+  component-specific focus. Distinguish selection/hover/pressed/focus. Mouse or
+  touch activation should not leave an inappropriate keyboard ring around the
+  whole maze. Keyboard/controller navigation must remain unmistakable, visible
+  and unclipped, including the board input region, forced colours and couch
+  use. Switching modality must not lose focus or alter gameplay. Trying to move
+  is not the sole accessible indication of the active region. Current UI-01
+  evidence may close a proven slice later; the frozen assignment is unchanged.
+
+### PT-20260905-35 — No-scroll victory and individual friend dances
+
+- Type/impact: Completion composition and delight; P1.
+- Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 4.
+- Owners: Plan 02 celebration timeline and distinctive programmatic dance
+  profiles; UI-02 final composition; Plan 05 optional additional sprite frames.
+- Acceptance: the victory popup never scrolls and all of its content remains
+  visible. Measure maximum friends, long legitimate text/reward states,
+  generated/tester/finale contexts, safe areas, Normal/Big and enlarged text.
+  No clipping, unreadable shrinking or undersized controls. If minimum-phone
+  geometry at 200% conflicts, root presents an actual layout/constraint to the
+  Human; paging or hidden details cannot silently waive simultaneous visibility.
+  Keep Stay/Next/Restart and exact-once completion semantics from PT10. Each
+  species has a recognisable small dance signature, not just the same loop with
+  a different start time. Motion is bounded/staggered and reduced/static modes
+  retain the celebration and rescue truth. Test Plan 10's later Garden action.
+
+### PT-20260905-36 — Bubble Ring Blade held layering
+
+- Type/impact: Held-prop composition defect; P1.
+- Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 5.
+- Owner/gate: root's bounded approved-art metadata return before Plan 04's held
+  grounding proof; Plan 05 consumes the accepted attachment.
+- Read-only lead: `bubble-ring-blade` declares held `zOrder: 1`, versus `3` for
+  the other seven weapons. This matches a plausible mechanism, not visual proof.
+- Acceptance: compare the actual ring/hand/body composition in every supported
+  facing, idle/travel/combat, at field and presentation sizes. Correct canonical
+  held metadata/registration through its provenance workflow if confirmed;
+  avoid name-specific CSS or an unconditional z-index that breaks mirroring or
+  hand/body occlusion. Preserve Ame and the approved weapon identity.
+
+### PT-20260905-37 — Book pages, Bestiary and lore cards
+
+- Type/impact: Persistent discovery and collection UI; P1.
+- Delivery: Routed. Verification: Not retested. Source: wishlist items 10/11.
+- Owner/gate: `plans/UI-02-adventure-book-and-focus-polish.md` after 02/before 08;
+  root reviews encounter/save semantics, 08 input parity, 09 final lore/coverage.
+- Acceptance: five distinct destinations in order **Mazes, Friends, Bestiary,
+  Stats, Achievements**. Use original beautiful book styling, labels plus clear
+  icons, accessible tab semantics and preserved page/card return state. No one
+  long combined page. Page-local reading may scroll; victory's separate no-scroll
+  rule does not ban readable Book pagination/scrolling.
+- Friends and encountered enemies open a large, crisp approved rendition with
+  original world-appropriate lore/story. Decode only the selected/nearby needed
+  art, use semantic IDs and honest fallbacks, preserve spoiler/earned-achievement
+  rules and existing friend access. No sticker-placement editor.
+- Encounter records derive from legitimate discovered/revealed gameplay, never
+  camera zoom, catalogue preload, hidden enemies or tester previews. Disguised
+  Mimics become known only after reveal; today's visible Candy Mimic counts on
+  legitimate exposure and migrates through a stable entry alias in Plan 09.
+  Persist deduplicated stable species IDs even
+  without victory; migrate old saves without inventing encounters. Preserve
+  progress/reward receipts, reset semantics, unknown future IDs and safe storage
+  failure. Unsupported future profiles must not be overwritten by encounter
+  writes. Empty/partial/full ledgers, reload and final 24-maze coverage need proof.
+
+### PT-20260905-38 — Crisp sprites throughout programmatic motion
+
+- Type/impact: Animation visual quality; P1.
+- Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 12.
+- Owner/gate: Plan 05 sampling/pose integration; 04/02 prevent competing nested
+  scaling; 07B qualifies actual quality and performance.
+- Acceptance: compare full animation cycles, not just neutral stills, for Ame,
+  friends and enemies at real field sizes, DPR 1/2, Normal/Big, future zoom and
+  full/reduced/static settings. Audit rendition/decode scale, parent transforms,
+  resampling and filter cost. Keep cute stretching/acting while preventing
+  persistent softness or shimmer. Do not globally apply pixel-art nearest-
+  neighbour rendering to the approved painted style, sharpen blindly or preload
+  large masters. Record selected recipe, worst-frame crops and byte/frame costs.
+
+### PT-20260905-39 — Bounded six-sprite style review
+
+- Type/impact: Targeted art-direction review; P1.
+- Delivery: Routed; visual decision pending. Verification: Not retested.
+- Source: v0.20.1 wishlist item 13, explicitly tentative correction request.
+- Owner/gate: root coordinates a bounded return to the existing art specialist
+  before affected Plan 05 frame production; Human reviews actual candidates.
+- Exact scope: `moon-bat`, `pebble-golem`, `hedgehog`, `alpaca`,
+  `rainbow-horn-unicorn`, `penguin`. First compare current approved art at actual
+  field and card scales against clean chunky massing, material-local chromatic
+  contours and restrained shading. Propose retain/refine per identity with proof.
+  Do not infer a request for new identity, a universal outline retrofit or
+  reapproval of the rest of the catalogue. Any approved correction preserves
+  provenance, canonical IDs, source rollback, pivots/alpha and consumer mapping.
+  No sprite is marked rejected merely by capturing this request.
+
+### PT-20260905-40 — Followers stay on the actual corridor trail
+
+- Type/impact: Cosmetic follower-path continuity defect; P1.
+- Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 14.
+- Owner/gate: root MOVE-01 bounded trail correction after accepted UI; Plan 05
+  consumes positions/poses and Plan 10 preserves Solo/Duo semantics.
+- Read-only lead: repeated coordinates are removed and camera-visible trail
+  points selected before friend identities are assigned. Diagnose against the
+  final accepted UI; camera culling must not decide a friend's world position.
+- Acceptance: stable friend identity follows ordered actual committed corridor
+  breadcrumbs, including offscreen portions, loops and reversals. Never snap
+  into an adjacent disconnected path to stay in view. Special jump/portal/level
+  discontinuities have explicit safe presentation rules; no interpolation through
+  walls. Preserve bounded history/memory and existing rescue/gameplay/save truth.
+  Test zero through five followers, short/long paths, revisits, edge clamping,
+  restart/resume and future zoom. Camera motion alone cannot rearrange followers.
+  If repair requires new gameplay AI/pathfinding, split a named root prerequisite
+  before affected animation rather than silently enlarging MOVE-01 or assigning
+  logical navigation to Plan 05. Human comfort remains a playtest gate.
+
+### PT-20260905-41 — Original cute spooky friend additions
+
+- Type/impact: Cast/content expansion proposal; P1.
+- Delivery: Routed; cast/art decision pending. Verification: Not retested.
+- Source: wishlist item 15. Owner: Plan 09 bounded cast proposal with root/art
+  coordination; 10 consumes final eligibility/cadence; 11 final cast audit.
+- Acceptance: propose a few memorable, warm, mildly spooky original friends,
+  using Tea-Time Skeleton's kindness as a tonal reference. Historical motifs
+  and niche-JRPG taste may inspire new ideas, not copied characters/names/sprites.
+  Each proposal has personality, simple lore, distinctive silhouette, encounter
+  role and reason to join this world. Human selects identities before costly art.
+  Preserve the accepted 32 friends, Skeleton's friend role and early rescues.
+  Approved additions require semantic IDs, sources/renditions, Book entry, rescue
+  placement, generated eligibility and Garden/Science supply audit. No arbitrary
+  target count or automatic regeneration of existing friends.
+
+### PT-20260905-42 — Deeper puzzles and Surprise difficulty choice
+
+- Type/impact: Puzzle design, generated content and difficulty UX; P1.
+- Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 17.
+- Owner/gate: Plan 09 with PT04/06/12/19; final controller/performance regression
+  consumes 08/07B infrastructure and FP-CAMPAIGN includes Human difficulty evidence.
+- Acceptance: preserve gentle tutorial teaching, then require observable
+  reasoning about route order, resources, connections or revisiting a known
+  obstacle. Specify each level's meaningful question, alternatives, clues,
+  recovery/hint ladder and satisfying payoff. An obvious automatic item chain,
+  more floor area or a long empty wrong branch does not count as harder puzzling.
+  Prove intuitive rules, ordinary/perfect solvability, useful optional routes
+  and safe experimentation; assess actual child choices/perseverance with short
+  playtests rather than claiming fun from solver length alone.
+- Surprise setup offers **Easy, Medium, Hard**, using distinguishable icons plus
+  readable names; **Surprise me** chooses among eligible difficulties, separately
+  from random layout. Do not rely on text/colour alone. Version the difficulty
+  policy and include chosen/resolved difficulty in deterministic identity and
+  feedback. Respect learned-rule availability; disclose unavailable choices and
+  do not label a capped easy maze Hard. Never mutate/reroll an active maze when
+  changing a future preference. Test each tier across topology families, seeds,
+  saved preferences/historical reconstruction and input modes. Preserve supported
+  authored save/resume; generated active-run resume is not newly authorized.
+  Harder means richer reasoning, not grind or chance.
+
+### PT-20260905-43 — Monster/treasure rooms and maze profiles
+
+- Type/impact: Encounter, exploration and content variety; P1.
+- Delivery: Routed. Verification: Not retested.
+- Source: additional wishlist 20260905-02, item 1, in
+  `playtests/2026-09-05-02-room-variety-and-mechanics.md`.
+- Owner/gate: Plan 09, extending PT11/12/24/42; Plan 10 consumes final reward
+  supply and roster. Use existing rules and approved art through current APIs.
+- Acceptance: deliver recognisable **monster rooms, treasure rooms, monster
+  mazes and treasure mazes**, with purposeful layouts, readable entrances/exits,
+  different encounter/discovery rhythms and meaningful route choices. Include
+  authored examples and declared generated-profile seed coverage; whole-maze
+  profiles must differ in play, not only title, skin or object count. Keep room,
+  topology and difficulty profiles distinct and version gameplay-affecting
+  generation changes without reinterpreting historical seeds.
+- Monster spaces use fair attainable-Power planning, optional encounters and
+  safe returns. No new arena lock, mandatory kill-all rule, repetitive gauntlet,
+  grind or random-loot requirement. Treasure spaces reward discovery and useful
+  branching; Gold/Science remain optional and every Mimic obeys PT22. Preserve
+  ordinary/perfect solver routes, teaching, small-map/event-gap limits, and
+  approved rewards. Freeze bounded density and reward supply, test repeated
+  showers/audio/actor costs, and feed changed Science yield into Plan 10.
+
+### PT-20260905-44 — Intuitive new-mechanic exploration
+
+- Type/impact: Puzzle-system opportunity; Epic, with bounded early exploration.
+- Delivery: Routed exploration; new rules need decision. Verification: Not retested.
+- Source: additional wishlist 20260905-02, item 2, in
+  `playtests/2026-09-05-02-room-variety-and-mechanics.md`.
+- Owner/gate: root Plan 09 design preflight **before dependent maps freeze**;
+  selected mechanics need an explicit Human-approved specification and owner.
+  Plan 14 may reconsider ideas explicitly deferred at that early decision.
+- Acceptance: compare a small, materially different candidate set with stronger
+  use of existing rules. Each candidate states its intuitive action/consequence,
+  fun/learning benefit, one teaching pocket and later combination, likely
+  annoyance/confusion, safe recovery, and engine/solver/hint/save/control/art/
+  performance costs. Use cheap paper/static prototypes before proposing runtime
+  scope. Present concrete accept/defer/reject choices, including no new rule.
+- Additional mechanics must deepen understandable decisions rather than add
+  rote chores, precision timing, ambiguous hidden state or reset-heavy traps.
+  A chosen rule receives ordinary/perfect reachability, supported save migration,
+  deterministic generation and input/accessibility contracts before adoption;
+  dependent maps and earlier consumers are requalified. Existing PT14 spikes/
+  ice remain unapproved, and this card does not authorize persistent XP, powers
+  or other Plan-14 systems. Close the exploration only with its recorded Human
+  disposition; do not silently defer it wholesale until after the campaign.
+
 ## 6. Programme integration and gates
+
+**2026-09-05 intake routing.** The complete 17-item crosswalk lives in
+`playtests/2026-09-05-v0201-wishlist.md`. Preserve active Agent 01. Root MOVE-01
+owns PT40's bounded cosmetic trail repair; 04 owns PT15/33 and consumes root's
+PT36 metadata disposition; 02 owns poison/reward/dance presentation; new UI-02
+after 02/before 08 owns PT34/35/37; 05 owns PT38 and consumes Human disposition
+of PT39; 07B qualifies their integrated cost. Plan 09 owns PT22's new safe policy,
+PT41 cast decisions, PT42 puzzle/difficulty and final Book content. Plan 13
+cannot discard these mandatory requested features as a catch-all future idea.
+Candidate art/new cast production, new mechanics and persistent XP retain their
+stated Human decision gates. None of this claims every wishlist item ships in FP-UI1.
+
+**Additional wishlist 20260905-02.** PT43 adds monster/treasure room and whole-
+maze profiles to Plan 09's existing encounter/topology/ecology work. PT44 requires
+a bounded mechanics comparison and Human disposition during Plan-09 preflight,
+before dependent map freeze; implementing a selected new rule needs its own
+approved contract and qualified dependency seam. Plan 14 revisits only explicitly
+deferred ideas. See `playtests/2026-09-05-02-room-variety-and-mechanics.md`.
 
 The existing programme remains sequential. These are execution-prompt addenda,
 not permission for simultaneous implementation in the shared worktree.
@@ -2236,7 +2560,7 @@ not permission for simultaneous implementation in the shared worktree.
    SFX/BGM mixing and cancellation seam for `20`; do not take ownership of BGM
    navigation policy. Implement `22`'s bounded reusable reward burst, trails,
    homing, count feedback, chest/reveal choreography and SFX as presentation of
-   an already-committed typed outcome; never own its 65/35 or economy rules.
+   an already-committed typed outcome; never own its probability or economy rules.
    Implement `29` as the ambient member of the existing goal family, with the
    stronger committed goal-entry recipe taking ownership on completion.
 6. **Plan 08:** implement `08`, controller parity for `10`, the controlled held-
@@ -2276,8 +2600,10 @@ not permission for simultaneous implementation in the shared worktree.
    interludes normally to two or three turns, preserve fast skip/replay, and
    update the 24-chapter story arc before Plan 11 consumes it.
 10. **Plan 10:** add the Friend Garden completion destination from `10`, wire the
-     `garden` music context from `20`, and ensure future traversal rules cannot be
-     bypassed by co-op. Extend `22` only with exactly-once shared reward ownership
+     `garden` music context from `20`, and preserve Ame's legal traversal and
+     separately recorded Solo completion. Accepted ordinary-Duo cargo delivery
+     may cross walls/doors/hazards under Plan 10's explicit rules; do not silently
+     revoke that permission or count it as a Solo solution. Extend `22` only with exactly-once shared reward ownership
      and the correct visual homing recipient; do not create duplicate drops.
      Consume `24`'s final versioned roster/ecology: ordinary Duo preserves every
      authored encounter/friend/theme assignment, and every final friend is
@@ -2319,12 +2645,17 @@ not permission for simultaneous implementation in the shared worktree.
 
 ### Human decisions and dependency gates
 
-The already-frozen 03M door, exit and reward rules listed below are constraints
-to consume, not unanswered questions. Only the explicitly unresolved items
-(Loop, spike/ice scope, Egg cadence, roster exclusions, new persistent features
-and external backup) need a new Human decision. Root assembles concrete options
-and evidence before requesting one; routine implementation details stay with
-their owner.
+Accepted 03M door/exit rules and historical v1 reward behavior are constraints
+to consume, not unanswered questions. PT22's later designer-controlled Mimic
+policy supersedes v1 prospectively only after its versioned Plan09 implementation
+and verification. Outstanding Human gates include Loop, spike/ice scope, Egg
+cadence, roster exclusions, new persistent features, external backup, the six
+bounded sprite reviews (PT39), new cast (PT41), and selected new mechanics (PT44).
+A demonstrated no-scroll/large-text accessibility conflict needs concrete
+options before a Human tradeoff; routine layout choices need no new gate.
+This list is non-exhaustive: each current card/plan retains its explicit gates.
+Root assembles concrete options and evidence before requesting decisions;
+routine implementation details stay with their owner.
 
 - `PT-20260902-02`: stationary door transition and held continuation semantics.
 - `PT-20260902-10`: pending completion, save/reward boundary and Stay position.
@@ -2368,6 +2699,7 @@ superseded tests; they are useful provenance.
 
 | Date | Card | Build/commit | Device/input | Evidence | Result/status change |
 |---|---|---|---|---|---|
+| 2026-09-05 | 15/22/24/33–42 | Human played v0.20.1; planning HEAD `09413c1`, active UI candidate | Direct Human report; device/input not supplied; read-only code/planning audit | All 17 numbered requests captured; follower selection and ring metadata are diagnostic leads, dark-line cause unknown; UI-02 and future owners specified | Routed/Not retested; art/cast gates explicit; no runtime/build acceptance |
 | 2026-09-02 | 01–17 | v0.19.0 and earlier comparisons | Family play; iPad, Tauri, keyboard/D-pad/touch/UI buttons as identified in source note | Human intake normalized in `docs/playtests/2026-09-02-wishlist-and-issues.md` | Captured |
 | 2026-09-02 | 01–17 | `ee176f52ab79e08e818fc919f44b7723f9fc9865` | Read-only source/plan audit | Current mechanism and initial routing audit | Triaged/routed as recorded above |
 | 2026-09-02 | 04 | `ee176f52ab79e08e818fc919f44b7723f9fc9865` | Solver and authored-map evidence from Plan 06 | Current 17×17 room/hub candidate; 61 ordinary / 77 perfect inputs | Candidate; awaiting Family-tested |

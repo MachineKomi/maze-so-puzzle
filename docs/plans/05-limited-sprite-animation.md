@@ -2,7 +2,7 @@
 
 ## 0. Manager-reviewed execution addendum
 
-This track is deliberately late. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the final Art Bible/Ame model sheet, UI/UX spec, Lighting spec, VFX Bible, Controls spec, this plan in full, and current code before changing anything. Execution is blocked until Plans 07A, 06, 03, root checkpoint 03M, 01, the pre-FP-UI1 movement-comfort checkpoint, 04, 02, and 08 are accepted.
+This track is deliberately late. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the final Art Bible/Ame model sheet, UI/UX spec, Lighting spec, VFX Bible, Controls spec, this plan in full, and current code before changing anything. Execution is blocked until Plans 07A, 06, 03, root checkpoint 03M, 01, the pre-FP-UI1 movement-comfort checkpoint, 04, 02, UI-02, and 08 are accepted.
 
 ### Execution refinement — 2026-09-05
 
@@ -51,6 +51,62 @@ reversals, five followers, stops and presentation handoffs. Require no foot/weap
 pop, ghost pose, camera judder, input delay or decode competition with first play.
 If the acting gain is not visible at the smallest actual size, defer the drawing
 instead of making the game busier.
+
+### Human playtest refinement — v0.20.1, 2026-09-05
+
+Source: [numbered playtest intake](../playtests/2026-09-05-v0201-wishlist.md),
+items 4, 5, 12, 13 and 14. This is future work after the accepted upstream
+checkpoints, including UI-02; Agent 01's active assignment remains unchanged.
+
+- `PT-20260905-38`: keep the appealing programmatic personality motion while
+  correcting the reported blur during stretch/warp/scale. Compare identical
+  neutral and moving sprites at actual board, follower and completion sizes,
+  with DPR 1/2 and the maximum scale reached by each selected animation. Sample
+  a full cycle and the softest intermediate frames, not just the sharp endpoint.
+  Resolve image rendition against maximum rendered size times DPR, inspect
+  nested transform/filter rasterization and source-alpha edges, then fix the
+  measured cause. Static and optional-frame fallbacks need the same proof.
+  Prefer appropriate resolution, stable registration and restrained deformation
+  over a universal sharpening/outline treatment or forced nearest-neighbour
+  pixels. Do not sacrifice accepted continuous travel by snapping positions to
+  integers; perceived edge quality and motion comfort are separate evidence.
+  Plan 04 supplies any early lighting/sampling observations, Plan 02 owns its
+  own effect-scale regressions, and 07B requalifies the integrated render stack.
+- `PT-20260905-35`: consume Plan 02's distinctive per-friend programmatic
+  celebration profiles and finite timeline plus UI-02's final no-scroll host.
+  The unique small dance is required before optional drawings. Additional
+  sprite frames remain a bounded candidate tranche chosen for readable acting
+  value. Preserve every friend's identity and personality without manufacturing
+  a full-roster frame quota or a second clock/wrapper writing the same dance.
+  Show all required results, friends and actions together without scroll; new
+  poses must remain inside UI-02's accepted bounds in every phase. If this is
+  incompatible with accessible size requirements, return the exact regression
+  to the UI/root owner for Human resolution, rather than hide content or scale
+  it down silently. Reduced/static modes retain the celebratory composition.
+- `PT-20260905-36`: before body/weapon compatibility is frozen, consume root's
+  reviewed `bubble-ring-blade` grip/scale/order decision from the bounded art
+  preflight. The existing source's `zOrder: 1` is a current metadata choice,
+  not permanent approval to keep the ring behind Ame after this Human report.
+  Prove the accepted static foreground/hand relationship through each selected
+  pose, including cancellation and fallback. Changes live in art-owned geometry
+  and regenerated consumers; do not introduce a ring-name CSS or frame override.
+- `PT-20260905-39`: only `moon-bat`, `pebble-golem`, `hedgehog`, `alpaca`,
+  `rainbow-horn-unicorn` and `penguin` are candidates for the Human-requested
+  bounded still-art comparison. Root records each reviewed keep/correct outcome
+  before this plan freezes that family's source. Any chosen correction must
+  retain identity and the accepted clean chunky art language with local chroma/
+  material-aware contours, then pass actual-size and source/derivative proof.
+  Do not generate replacements or reinterpret the whole catalogue here. Other
+  static approvals remain closed. A kept still is a valid resolved outcome;
+  optional frames derive only from the exact current accepted source.
+- `PT-20260905-40`: root MOVE-01 owns follower corridor/path correctness.
+  Consume stable identity-to-world-trail positions even when a friend is outside
+  the current camera; visibility culling may suppress its pixels but must not
+  reassign its breadcrumb or pull it through walls into view. This plan only
+  derives pose/facing from that accepted travel contract. Recheck long corridors,
+  tight turns, reversing/backtracking, loops, five friends, camera clamps,
+  portals/jumps and rescue insertion. Return incorrect trail behavior to root
+  rather than conceal it with a long tween or add follower pathfinding here.
 
 ### Final dependencies and identity rules
 

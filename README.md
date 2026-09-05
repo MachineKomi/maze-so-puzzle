@@ -103,12 +103,17 @@ Preview:
   smoothly from 260 ms to a capped 160 ms repeat over 16 held steps. Changing
   direction resets the acceleration, and a 120 ms visual ease keeps each grid
   step readable.
-- The complete interface uses a fixed 960 × 540 logical canvas and scales
-  uniformly into the device safe area. Desktop and iPad keep the same relative
-  composition; extra-wide phones letterbox instead of stretching or rearranging
-  cards. Touch play prevents page panning and pinch-zoom.
-- Big Maze: enlarge the board while keeping a compact Power, rescue, and item
-  HUD; press `Escape` or Normal to return to the full side panel.
+- The uncommitted Plan 01 UI candidate uses real CSS pixels: square maze left, responsive information/control
+  deck right, with the same section order on TV, desktop, Tauri and tablet.
+  Short landscape phones use 28px noninteractive status cells and accessible
+  grouped details in More. Normal-text Bag/friend statuses fit together; enlarged
+  text uses one named reader with fixed Objective/Hint and movement access.
+  Board/pad gestures are isolated; surrounding UI retains
+  browser scrolling and text enlargement. See [UI/UX specification](docs/UI_UX_SPEC.md)
+  for measured targets, review evidence and pending physical-device gates.
+- Big Maze: use available room for a non-smaller square board, keeping the same
+  full right-hand deck and focus order. Press Escape or Normal to leave Big mode
+  when no dialog is open.
 - Any maze wider or taller than 6 tiles uses a player-centred 6 x 6 exploration
   view. Its minimap reveals the current view immediately and remembers every
   square Ame has already explored while keeping the rest hidden.
@@ -130,7 +135,17 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Included in playable build 0.20.1
+## Uncommitted Plan 01 review candidate
+
+The working tree contains an adaptive UI for title, play, Adventure Book,
+tester picker and dialogs, plus named CSS ownership, Sound/comfort controls,
+earned-keepsake inspection and fourteen approved-source presentation candidates.
+This is not the published0.20.1 build or FP-UI1. Root review, incremental byte/art
+allocation, physical-device and Human acceptance remain open. See
+[UI specification](docs/UI_UX_SPEC.md) and [review return](docs/UI_UX_REVIEW_EVIDENCE.md).
+No version, package or publication transaction was performed by this task.
+
+## Included in playable build 0.20.1 (released baseline)
 
 - A separate illustrated title screen now precedes Home. Professor Poggle and
   Sprig use final-style story portraits, and the repaired Home hero has clean
@@ -267,10 +282,6 @@ Turn the iPad sideways to play.
   the bottom navigation uses six original transparent picture icons instead of
   emoji glyphs.
 
-- One stable 16:9 visual system for title, play, Adventure Book, tester picker,
-  dialogs, and victory celebrations. Its tested scaling contract covers desktop,
-  classic and modern iPads, and landscape phones down to 568 × 320 without
-  document overflow or panel intersections.
 - Count-aware victory friend cards keep rescued pets large and dancing on iPad
   and desktop. One to three friends receive roomy centred cards; groups of four
   or five remain together in a readable row.

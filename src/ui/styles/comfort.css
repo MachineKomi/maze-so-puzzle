@@ -1,0 +1,14 @@
+/* One resolved motion authority; surface quality is independent of motion preference. */
+:root:is([data-motion="reduced"],[data-quality="static"]) *,
+:root:is([data-motion="reduced"],[data-quality="static"]) *::before,
+:root:is([data-motion="reduced"],[data-quality="static"]) *::after {
+ animation: none; transition: none; scroll-behavior: auto;
+}
+:root[data-quality="lite"] { --surface-depth: var(--rim),0 2px 0 #8f76902b; --button-depth: inset 0 1px 0 #fff,0 1px 0 #907c9738; }
+:root[data-quality="static"] { --surface-depth: var(--rim); --button-depth: none; }
+@media (forced-colors: active) {
+ button, .modal-card, .objective-card, .maze-board { border: 2px solid CanvasText; }
+ :focus-visible { outline: 3px solid Highlight; box-shadow: none; }
+ .inventory-slot.missing img { opacity: 1; }
+}
+@media (prefers-contrast: more) { :root { --edge: #715b7c; --muted-ink: #44324f; } }

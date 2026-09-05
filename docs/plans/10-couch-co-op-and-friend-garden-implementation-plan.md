@@ -43,6 +43,12 @@ Special Delivery Routes ───────────> mail + route completi
 
 ### 1.1 Authority order for Plan 10
 
+Consume UI-02's Book/discovery/cards, focus and final victory composition plus
+MOVE-01's PT40 follower trail. The Courier's explicitly camera-bounded flight
+does not apply to rescued friends: their world corridor history remains valid
+off camera. New Garden actions and final roster rewards must preserve measured
+no-scroll victory and controller/card return; requalify them with actual content.
+
 When Plan 10 executes, resolve conflicts in this order:
 
 1. The Human's latest explicit instructions, including the appearance and fatigue decisions recorded in this plan.
@@ -56,6 +62,15 @@ Planning-era roster counts, catalogue IDs, and asset assumptions never override
 the final versioned Plan-09 content roster or current source. Where this plan
 specifies co-op/Garden behavior for that roster, adapt the behavior to stable
 final IDs rather than retaining a stale count.
+
+**2026-09-05 v0.20.1 wishlist reconciliation:** consume the pending PT22
+designer-configurable, solvability-safe Mimic and richer defeat-reward contract,
+PT41's Human-selected original cute/spooky friends, and PT42's meaningful puzzle
+difficulty/Surprise Maze choice from Plan 09 and
+`docs/playtests/2026-09-05-v0201-wishlist.md`. These do not authorize early co-op
+implementation or changes to the running Agent-01 task. Re-audit final reward
+versions, actual Science supply and roster size when Plan 10 starts; a dated
+65/35 probability or 32-species snapshot cannot override accepted new content.
 
 ### 1.2 Explicit supersessions
 
@@ -350,6 +365,12 @@ interaction or recovery. Only a real unresolved object admitted by the final
 portable-pickup contract may be carried. Reward showers may redirect or split
 their visual homing endpoint between the collecting actors, but consume one
 shared committed reward and never create collectible physics or a second award.
+The homing target follows that actor's current scene position while play
+continues; leaving view, actor movement, pause, seat loss and navigation use the
+shared bounded cleanup/fallback contract without losing or duplicating credit.
+P2 cannot change a Mimic's configured chance, committed Power, reward minimum or
+the solver safety proof by carrying a nearby item or changing seats. Test the
+new PT22 policy version alongside pinned historical receipts.
 
 ### 6.6 Cargo fatigue: fair mischief contract
 
@@ -1320,6 +1341,17 @@ Plan 09 accepted
   the time to rescue a species from the time to make it resident; one cannot
   hide the other's bottleneck. Include waiting/reserved Eggs, overflow, completed
   toys and the no-friend-left bag conversion in the supply model.
+- Include PT22's guaranteed richer Mimic payouts, chance/Power policies and all
+  replayable Science sources in that supply model. Re-run it for the actual
+  PT41-approved roster additions rather than assuming an unchanged 32-species
+  campaign, multiplying an old estimate, or funding new friends through grind.
+  Preserve bound Egg identities and existing durable discoveries across roster
+  versions; new eligibility cannot reroll an already reserved reward.
+- Carry PT42's selected/resolved difficulty and learned-rule contract through
+  ordinary Duo entry/exit and shared menu focus. Separate Duo records remain
+  truthful about permissive cargo play. Neither joining nor leaving may reroll
+  the current Surprise Maze or its Mimic policy; Solo solver/challenge evidence
+  remains distinct from a deliberately easier cargo-assisted route.
 - Reconcile the approved Science spend exception and co-op-only route exception in maintained product authority without editing Plans 01–09.
 - Pin Plan 10 rules/content version identifiers and local feature boundaries.
 

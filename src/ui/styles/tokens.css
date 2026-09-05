@@ -1,0 +1,11 @@
+:root {
+ --ink: #44324f; --muted-ink: #63516f; --focus: #007f86;
+ --plum: #4c2d5d; --deep-plum: #34203f; --violet: #7856a9; --lilac: #c7a9e5;
+ --soft-lilac: #eee4f7; --cream: #fff9e9; --paper: #fffdf5; --peach: #ffd7bd;
+ --coral: #ee826f; --mint: #a8dfc8; --teal: #42aaa7; --gold: #f5bf4f; --sky: #73c9e6;
+ --pearl: #fffaf3; --edge: #cbbace; --rim: inset 0 0 0 1px #fffdf9,inset 0 2px 0 #fff;
+ --surface-depth: var(--rim),0 3px 0 #8f76902b,0 7px 15px #48305112;
+ --button-depth: inset 0 1px 0 #fff,0 2px 0 #907c9738;
+ --safe-top: env(safe-area-inset-top,0px); --safe-right: env(safe-area-inset-right,0px);
+ --safe-bottom: env(safe-area-inset-bottom,0px); --safe-left: env(safe-area-inset-left,0px);
+}

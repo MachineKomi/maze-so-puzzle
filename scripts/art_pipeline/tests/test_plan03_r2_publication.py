@@ -87,18 +87,26 @@ class Plan03R2PublicationTests(unittest.TestCase):
 
     def test_title_route_uses_visual_logo_with_exact_live_heading(self) -> None:
         app = (ROOT / "src/App.tsx").read_text(encoding="utf-8")
-        styles = (ROOT / "src/styles.css").read_text(encoding="utf-8")
+        home = (ROOT / "src/ui/screens/HomeScreen.tsx").read_text(encoding="utf-8")
+        front_door = (ROOT / "src/ui/screens/FrontDoorScreen.tsx").read_text(encoding="utf-8")
+        screens = app + home + front_door
+        styles = (ROOT / "src/styles.css").read_text(encoding="utf-8") + "".join(
+            path.read_text(encoding="utf-8") for path in (ROOT / "src/ui/styles").glob("*.css")
+        )
         catalogue = (ROOT / "src/generated/mgjrpg02Art.ts").read_text(encoding="utf-8")
-        self.assertIn('<h1 id="game-title" className="sr-only">Maze so Puzzle</h1>', app)
-        self.assertNotIn("A gentle adventure for Ame", app)
-        self.assertNotIn("For Ame to Solve!</p>", app)
-        self.assertIn('className="title-logo"', app)
-        self.assertIn('className="title-hero"', app)
-        self.assertNotIn('className="title-vignette"', app)
+        self.assertIn("<FrontDoorScreen", app)
+        self.assertIn("<TitleScreen", app)
+        self.assertIn('<h1 id="game-title" className="sr-only">Maze so Puzzle</h1>', home)
+        self.assertIn('<h1 id="front-door-title" className="sr-only">Maze so Puzzle</h1>', front_door)
+        self.assertNotIn("A gentle adventure for Ame", screens)
+        self.assertNotIn("For Ame to Solve!</p>", screens)
+        self.assertIn('className="title-logo"', home)
+        self.assertIn('className="title-hero"', home)
+        self.assertNotIn('className="title-vignette"', screens)
         self.assertNotIn(".title-vignette", styles)
         self.assertIn("game-logo-v06-front-door-1024-r01.webp", catalogue)
         self.assertIn("home-hero-splash-v04-front-door-1024-r01.webp", catalogue)
-        self.assertIn('className="front-door-screen"', app)
+        self.assertIn('className="front-door-screen"', front_door)
 
     def test_prior_front_door_files_remain_rollback_holds(self) -> None:
         ledger = read_json(ROOT / "docs/source-assets/retirement/asset-retirement-ledger.json")

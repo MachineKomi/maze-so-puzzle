@@ -5,13 +5,16 @@ Status: manager-reviewed copy/paste runbook
 Prepared: 2026-09-02
 
 Future-task reconciliation: 2026-09-05. Agent 01's existing section-4 assignment
-has stopped with an unaccepted candidate; use `AGENT01-review-follow-up.md`
-in that same task for the root-reviewed correction. The original prompt remains
+initially stopped with an unaccepted candidate; `AGENT01-review-follow-up.md`
+is the root-reviewed correction in that same task. **The Human now reports that
+return is finished.** Root accepted its UI engineering checkpoint with reviewed
+delivery gates and final453 project/121 art tests; checkpoint/push precedes
+MOVE-01 and FP-UI1. Human/device qualification remains pending. The original assignment remains
 history. Plan 03/03M and corrective art checkpoints
 are accepted; historical prompts below are not instructions to reopen them.
 After UI acceptance, root executes MOVE-01 and publishes FP-UI1 before Agent 04.
 The later prompts consume the final accepted travel/UI APIs, not candidate
-exports seen while Agent 01 is running. Section numbers are not plan IDs.
+exports from the unaccepted candidate. Section numbers are not plan IDs.
 
 Before starting any future prompt, root supplies the accepted SHA, owned paths,
 actual dependency APIs, required art/landmark/rendition availability, budget
@@ -24,6 +27,12 @@ addendum; 07B requalifies the actual expanded visible/paint workload. It does
 not enter the present UI return or MOVE-01/FP-UI1 scope. All future prompts
 consume the vision's reaffirmed fun, learning-through-play and responsiveness
 criteria, not a new quota of quizzes, effects, assets or progression systems.
+
+The later 17-item v0.20.1 wishlist is captured in
+`docs/playtests/2026-09-05-v0201-wishlist.md`, with routing in roadmap §5.13D.
+Future owners read its relevant acceptance cards and their updated plan addenda.
+UI-02 is inserted after 02/before 08 for Book/bestiary/cards, focus and victory
+composition. This does not amend the section-4 prompt or its running return.
 
 Use these prompts in the order shown. Run only one implementation agent at a time. After each agent finishes, have the root manager inspect the diff, run/confirm the gates, resolve defects, commit, and push a clean checkpoint before starting the next prompt.
 
@@ -203,6 +212,13 @@ geometry and allocation gaps before accepting the UI. Review/checkpoint MOVE-01,
 then run the roadmap's clean-source FP-UI1 transaction and
 `docs/playtests/FP-UI1-checklist.md`. Only then issue Agent 04's prompt.
 
+Include the bounded PT40 cosmetic trail review in MOVE-01: assign stable friend
+world positions before visibility filtering and preserve offscreen corridor
+history. Observe PT33's reported dark edge; do not invent its cause. The full
+wishlist is not an FP-UI1 prerequisite. Before 04's held-sprite proof, root
+prepares PT36's exact ring attachment metadata disposition. PT39's six-identity
+art review is a separate bounded return before affected Plan-05 frame production.
+
 ## 5. Agent 04 — lighting, wall depth, and shared terrain scene seam
 
 ```text
@@ -267,13 +283,51 @@ Run typed timeline/cancellation/sound tests, paused/grayscale/readability rack, 
 Do not commit or push. Finish with outcome, changed files, effect/variation matrix, timeline changes, semantic and reduced-mode evidence, performance/resource deltas, tests, rollback/tier notes, pending hardware/listening gates, and git status.
 ```
 
+## 6A. Returning UI specialist — UI-02 Book, focus and victory
+
+This is a **future** return after accepted Plan 02, not an instruction to
+expand Agent 01's completed correction retrospectively. Root supplies the
+accepted SHA, concrete data/art/scene APIs and owned paths at that boundary;
+the Human normally starts the existing specialist task.
+
+```text
+Execute docs/plans/UI-02-adventure-book-and-focus-polish.md completely after
+the reviewed Plan-02 checkpoint. Read the vision, roadmap, v0.20.1 intake and
+PT34/35/37, current UI/Gameplay/Art/VFX specs, progress/reset contracts and Plan08.
+Confirm the accepted SHA and owned paths; preserve unrelated changes.
+
+Reuse the accepted UI shell, catalogue and director. Implement Mazes/Friends/
+Bestiary/Stats/Achievements pages, legitimate encounter discovery with a
+root-reviewed conservative migration, beautiful selected-entry lore cards,
+restrained component focus and final no-scroll victory composition. Plan02
+owns the friend dances/lifecycle; Plan08 owns canonical input/modality and later
+controller qualification. Preserve current visible Candy Mimic discovery and a
+stable alias into Plan09's later family; do not invent past encounters or write
+over unsupported future profiles. No new currencies, sticker editor or rival
+input/progress system.
+
+Preflight exact presentation-rendition sizes, selected-card loading, source
+provenance and bytes. Verify Book page/card return, discovery/reset/save failure,
+earned/hidden content, full dense victory geometry, keyboard/touch, enlarged
+text, quality/motion and future control IDs. No hidden overflow or unreadable
+shrinking may satisfy the Human's no-scroll requirement; present a concrete
+geometry conflict to root if one remains. Complete independent work first.
+
+Run the meaningful focused/shared checks required by the plan. Update actual
+UI/architecture/gameplay documentation and evidence only when implemented.
+Do not commit, push, change versions or publish. Return the exact diff scope,
+commands/results, migration and art/budget evidence, geometry/state proofs,
+pending Human/device gates, rollback and Git status for root review. Plan08
+starts only after root accepts and backs up this checkpoint.
+```
+
 ## 7. Agent 08 — controls, Xbox controller, and Steam Deck couch play
 
 ```text
 You are our dedicated senior game-controls, accessibility, and Steam Deck integration engineer. You are expert in the Web Gamepad API, Xbox conventions, input normalization, deterministic repeat/deadzone logic, spatial focus, modal safety, controller prompts, Steam Input, browser/Tauri constraints, Bluetooth lifecycle, couch UX, and automated input testing. You have excellent judgment about predictable child-friendly controls.
 
 Execute the manager-reviewed Plan 08 against current HEAD. Plans 07A, 06, 03,
-root checkpoint 03M, 01, MOVE-01, 04, and 02 have landed. Implement PT08's
+root checkpoint 03M, 01, MOVE-01, 04, 02, and UI-02 have landed. Implement PT08's
 anchored board drag and hybrid cardinal thumb pad as well as controller input.
 Preserve MOVE-01 travel, current cadence semantics and stationary-door eligible
 held continuation; do not apply a blanket release gate to that one allowed
@@ -379,6 +433,20 @@ Do not copy a specialist prompt for this phase. After the reviewed Agent-07B che
 Apply the current chapter question/inference/recovery/payoff review, narrative
 truth and exact content-ecology requirements. Complete required FP-CAMPAIGN and
 record family findings before handing the accepted campaign to Plan 10.
+
+Also implement PT22's versioned designer-controlled safe Mimics, PT41's bounded
+original cast proposal/approved production, and PT42's substantive puzzle curve
+and Easy/Medium/Hard/Surprise me setup. Consume UI-02's existing Book discovery,
+card/lore and focus contracts; finish final roster coverage and Candy-family
+discovery migration without redesigning the Book. Requalify the added setup
+controls, no-scroll victory content and actual loading/solver/performance costs.
+
+Include PT43's monster/treasure rooms and whole-maze profiles within the existing
+24-level programme and generated profiles. Complete PT44's bounded comparison
+of intuitive mechanics before dependent maps freeze; obtain the Human's concrete
+selection before implementing a new rule. Existing-rule composition remains the
+baseline. Do not defer this early comparison wholesale to Plan 14 or treat every
+candidate mechanic as approved scope.
 
 ## 11. Agent 10 — optional couch co-op and Friend Garden
 

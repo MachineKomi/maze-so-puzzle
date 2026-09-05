@@ -1,0 +1,1886 @@
+{
+  "schema": "maze-ui-presentation-candidate/v1",
+  "authority": "docs/plans/AGENT01-review-follow-up.md",
+  "authoritySha256": "9be739a4590128313d60666004ea5d8f35b725d7d4cd243f9a6485b8e6c39707",
+  "sourceMapSha256": "40306f773c9eaffce9d014cf97068a24d326edbe01668bf319fab84d91c6068a",
+  "approvalStatus": "candidate",
+  "preparedOn": "2026-09-05",
+  "environment": {
+    "python": "3.14.3",
+    "pillow": "12.2.0",
+    "numpy": "2.5.2",
+    "libwebp": "1.6.0",
+    "zlib": "1.3.1.zlib-ng"
+  },
+  "runtimeBytes": 1367574,
+  "decodedBytesUpperBound": 14680064,
+  "gate": "Root art proof and allocation approval required; unapproved-runtime-output remains an intentional unwaived art gate.",
+  "entries": [
+    {
+      "id": "star-sword",
+      "label": "Star Sword",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "star-sword-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-star-sword-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "06eba53b2bfff6d679e22cdc64dda385a672bfc775cfc0560fcfeb9f0b1b6c0a",
+      "sourceBytes": 1322260,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/star-sword-v02-prop-field-256-r01.webp",
+      "opticalSha256": "72ff0a3210403dbc9e07a5391ae787f97787fa522c5bce5140e2468f90e2a58f",
+      "opticalReproduced": true,
+      "candidateRecordId": "star-sword-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/star-sword-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/star-sword-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 83348,
+      "sha256": "76b804a14a3ad59f637ca60d6eabe3022f5d4ccad55b0542b435a266578b64c7",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          65,
+          41,
+          447,
+          471
+        ],
+        "normalizedLTRB": [
+          0.126953125,
+          0.080078125,
+          0.873046875,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 21,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.126953125,
+          0.080078125,
+          0.74609375,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.126953125,
+          0.080078125,
+          0.126953125
+        ],
+        "gripPoint": [
+          0.344,
+          0.73
+        ],
+        "forwardAxisDegrees": -50.0,
+        "heldScale": 0.637,
+        "heldRotationDegrees": -5.0,
+        "zOrder": 3
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          2,
+          248,
+          12
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1544,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.414,
+            "90": 252.978,
+            "95": 292.899,
+            "99": 341.175
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "flower-sabre",
+      "label": "Flower Sabre",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "flower-sabre-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-flower-sabre-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "c854627aea8fb6d770cc1a53694f50fa1afd208af794d367ef716f6608a2cc94",
+      "sourceBytes": 1142765,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/flower-sabre-v02-prop-field-256-r01.webp",
+      "opticalSha256": "568ec2b71fdcc1287ae855444b1ce606c342b970419fe329c5deddb02763ae6b",
+      "opticalReproduced": true,
+      "candidateRecordId": "flower-sabre-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/flower-sabre-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/flower-sabre-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 66694,
+      "sha256": "6081a454a7d9e125df9ed1089734c6062891d1d339287fad90dabb316b7592db",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          45,
+          41,
+          467,
+          471
+        ],
+        "normalizedLTRB": [
+          0.087890625,
+          0.080078125,
+          0.912109375,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 25,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.087890625,
+          0.080078125,
+          0.82421875,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.087890625,
+          0.080078125,
+          0.087890625
+        ],
+        "gripPoint": [
+          0.262,
+          0.809
+        ],
+        "forwardAxisDegrees": -48.0,
+        "heldScale": 0.546,
+        "heldRotationDegrees": -7.0,
+        "zOrder": 3
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          5,
+          247,
+          12
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1131,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.732,
+            "90": 244.34,
+            "95": 308.561,
+            "99": 317.531
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "moon-wand",
+      "label": "Moon Wand",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "moon-wand-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-moon-wand-v02-candidate-b-matte-01-generator-original.png",
+      "sourceSha256": "c1fc091c86c71c42487ed7037cb016ffe763bf09a29557d7a810c98c95ac87dc",
+      "sourceBytes": 1107150,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/moon-wand-v02-prop-field-256-r01.webp",
+      "opticalSha256": "f830a6a14adb8de645ba162072bd8667b2c2c6c5768b3a0c4c276e5b28e40b55",
+      "opticalReproduced": true,
+      "candidateRecordId": "moon-wand-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/moon-wand-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/moon-wand-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 54230,
+      "sha256": "6bc5d49e33af8226422a7fade5d18a05e62c10ae53f25c023618a68cc2d0cab8",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          113,
+          41,
+          398,
+          471
+        ],
+        "normalizedLTRB": [
+          0.220703125,
+          0.080078125,
+          0.77734375,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 41,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.220703125,
+          0.080078125,
+          0.556640625,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.22265625,
+          0.080078125,
+          0.220703125
+        ],
+        "gripPoint": [
+          0.336,
+          0.773
+        ],
+        "forwardAxisDegrees": -64.0,
+        "heldScale": 0.678,
+        "heldRotationDegrees": 9.0,
+        "zOrder": 3
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          3,
+          249,
+          4
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1656,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.414,
+            "90": 285.247,
+            "95": 335.979,
+            "99": 345.498
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "leaf-blade",
+      "label": "Leaf Blade",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "leaf-blade-mgjrpg02-v03-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/weapon-leaf-blade-v03-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "08706e71e36e8880e7bd6431275b6f981f4715b8ecdd5b1695f940ad7bab5a27",
+      "sourceBytes": 1301948,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/leaf-blade-v03-prop-field-256-r01.webp",
+      "opticalSha256": "96ef164474989f70cfdc44d7fc34ce9066dfe3c3f95ea665eb4aabdbf7130c9b",
+      "opticalReproduced": true,
+      "candidateRecordId": "leaf-blade-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/leaf-blade-v03-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/leaf-blade-v03-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 79978,
+      "sha256": "79f2c4e63117b092e936423ecc5f74bb562616a1ee4c6499c47c3e4c708e9541",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          65,
+          41,
+          447,
+          471
+        ],
+        "normalizedLTRB": [
+          0.126953125,
+          0.080078125,
+          0.873046875,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 24,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.126953125,
+          0.080078125,
+          0.74609375,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.126953125,
+          0.080078125,
+          0.126953125
+        ],
+        "gripPoint": [
+          0.34,
+          0.758
+        ],
+        "forwardAxisDegrees": -46.0,
+        "heldScale": 0.624,
+        "heldRotationDegrees": -9.0,
+        "zOrder": 3
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          4,
+          242,
+          6
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1706,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.414,
+            "90": 233.311,
+            "95": 259.842,
+            "99": 334.737
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "sun-mallet",
+      "label": "Sun Mallet",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "sun-mallet-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-sun-mallet-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "9f6d6cbf51ed68b67f7555462bd9ee2e176d98fd5f3811d2c24f599acb9f6645",
+      "sourceBytes": 1256088,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/sun-mallet-v02-prop-field-256-r01.webp",
+      "opticalSha256": "ecc3b8e26e7e91689d211a109be730d9f8fee36219c010427818d26c0456c1de",
+      "opticalReproduced": true,
+      "candidateRecordId": "sun-mallet-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/sun-mallet-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/sun-mallet-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 101622,
+      "sha256": "20067a9ef7844651e0c95d80b71e7834c310442711f9338652e50390dada84c2",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          51,
+          41,
+          462,
+          471
+        ],
+        "normalizedLTRB": [
+          0.099609375,
+          0.080078125,
+          0.90234375,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 26,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.080078125,
+          0.802734375,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.09765625,
+          0.080078125,
+          0.099609375
+        ],
+        "gripPoint": [
+          0.336,
+          0.789
+        ],
+        "forwardAxisDegrees": -62.0,
+        "heldScale": 0.57,
+        "heldRotationDegrees": 7.0,
+        "zOrder": 3
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          3,
+          248,
+          9
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1346,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.449,
+            "90": 260.657,
+            "95": 278.408,
+            "99": 293.029
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "comet-spear",
+      "label": "Comet Spear",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "comet-spear-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-comet-spear-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "9ce8e4f0260407580a64a26dd1f7c9b36e9cf6c28329f2b96f2df23b6ee3cddc",
+      "sourceBytes": 1098904,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/comet-spear-v02-prop-field-256-r01.webp",
+      "opticalSha256": "7ed174bb9260a28e80f30a2f600ed849737ddf0cb4d555ebd3bee59f23b94967",
+      "opticalReproduced": true,
+      "candidateRecordId": "comet-spear-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/comet-spear-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/comet-spear-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 45586,
+      "sha256": "ef6867def2e428a88aaa1324052487f750661264de23c9f072c9ecd1946ceb8f",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          65,
+          41,
+          447,
+          471
+        ],
+        "normalizedLTRB": [
+          0.126953125,
+          0.080078125,
+          0.873046875,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 24,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.126953125,
+          0.080078125,
+          0.74609375,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.126953125,
+          0.080078125,
+          0.126953125
+        ],
+        "gripPoint": [
+          0.32,
+          0.809
+        ],
+        "forwardAxisDegrees": -54.0,
+        "heldScale": 0.583,
+        "heldRotationDegrees": -1.0,
+        "zOrder": 3
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          3,
+          249,
+          3
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1599,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.414,
+            "90": 221.444,
+            "95": 295.396,
+            "99": 331.773
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "bubble-ring-blade",
+      "label": "Bubble Ring Blade",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "bubble-ring-blade-mgjrpg02-v01-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-13-ui-portals-equipment/weapon-bubble-ring-blade-v01-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "9acccef0fe2211ccf3d3d149f39018d5ef1a1fb78082051c596f3f7bf898bcfb",
+      "sourceBytes": 1267713,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/bubble-ring-blade-v01-prop-field-256-r01.webp",
+      "opticalSha256": "1f27483d669b9f59aaafa2e420179a5d208b5b09333444dbc507ad1a0b2c5685",
+      "opticalReproduced": true,
+      "candidateRecordId": "bubble-ring-blade-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/bubble-ring-blade-v01-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/bubble-ring-blade-v01-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "bytes": 123658,
+      "sha256": "f575b5d0c39d7f78786f1c4716c036c1ea97d84111cf13e5513ea316bfe242f0",
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.091796875,
+          0.080078125,
+          0.818359375,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.08984375,
+          0.080078125,
+          0.091796875
+        ],
+        "gripPoint": [
+          0.5,
+          0.836
+        ],
+        "forwardAxisDegrees": -90.0,
+        "heldScale": 0.576,
+        "heldRotationDegrees": 35.0,
+        "zOrder": 1
+      },
+      "alphaBounds": {
+        "pixelsLTRB": [
+          47,
+          41,
+          466,
+          471
+        ],
+        "normalizedLTRB": [
+          0.091796875,
+          0.080078125,
+          0.91015625,
+          0.919921875
+        ]
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          12,
+          240,
+          9
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1564,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.414,
+            "90": 278.659,
+            "95": 298.104,
+            "99": 340.403
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [
+        "bubble-ring-blade: 123658 bytes exceeds 102400 byte ceiling"
+      ],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "cupcake-mace",
+      "label": "Cupcake Mace",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "cupcake-mace-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-05-weapons/weapon-cupcake-mace-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "a6ae12dfa571e3429d39114a559c09f32f8c0018a655dd719672a25077350860",
+      "sourceBytes": 1222361,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/weapons/cupcake-mace-v02-prop-field-256-r01.webp",
+      "opticalSha256": "a66b3e43ac11fedfbd1c2d5cc54b93b10c59deab042929e464e6f72d42eea14e",
+      "opticalReproduced": true,
+      "candidateRecordId": "cupcake-mace-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/cupcake-mace-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/cupcake-mace-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 71806,
+      "sha256": "1923368a5acb7801b2c1e0f616688e6a2cb32924b1e65e8fde53f08a0d4282ef",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          63,
+          41,
+          450,
+          471
+        ],
+        "normalizedLTRB": [
+          0.123046875,
+          0.080078125,
+          0.87890625,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 20,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "weapon",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.123046875,
+          0.080078125,
+          0.755859375,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.12109375,
+          0.080078125,
+          0.123046875
+        ],
+        "gripPoint": [
+          0.324,
+          0.809
+        ],
+        "forwardAxisDegrees": -52.0,
+        "heldScale": 0.61,
+        "heldRotationDegrees": -3.0,
+        "zOrder": 3
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          3,
+          249,
+          3
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1612,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.414,
+            "90": 274.352,
+            "95": 297.397,
+            "99": 324.133
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "key-rose-heart",
+      "label": "Rose Heart Key",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "key-rose-heart-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-rose-heart-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "164a2d85ec3ab33c59736cfd4931aa7db1a0e88d413d0258fa3538cd1cebf5ba",
+      "sourceBytes": 1269601,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/locks/key-rose-heart-v02-prop-field-256-r01.webp",
+      "opticalSha256": "9a27377ce50aee0f67049892f5b1c08c96dad0f2b84eb2e14ed0a8044592bfaa",
+      "opticalReproduced": true,
+      "candidateRecordId": "key-rose-heart-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/key-rose-heart-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/key-rose-heart-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 85020,
+      "sha256": "f7f49ad82f94f82db2277aa539f4db1dd4e52016a6ab6813fb714717e8c2dcb0",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          45,
+          41,
+          466,
+          471
+        ],
+        "normalizedLTRB": [
+          0.087890625,
+          0.080078125,
+          0.91015625,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 33,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.087890625,
+          0.080078125,
+          0.822265625,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.08984375,
+          0.080078125,
+          0.087890625
+        ],
+        "visualCenter": [
+          0.46298195,
+          0.45436928
+        ]
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          4,
+          248,
+          11
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1601,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.414,
+            "90": 306.003,
+            "95": 325.394,
+            "99": 336.283
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "key-sunny-sun",
+      "label": "Sunny Sun Key",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "key-sunny-sun-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-sunny-sun-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "7d45328238bdfa543ac4941ad8dc59816f954234924b8f52ab8b0d6270e787eb",
+      "sourceBytes": 1290964,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/locks/key-sunny-sun-v02-prop-field-256-r01.webp",
+      "opticalSha256": "58ed46ff0f230dd96b9f9ad24b34e31d6b5520bbb89c339df622998e8fdf5047",
+      "opticalReproduced": true,
+      "candidateRecordId": "key-sunny-sun-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/key-sunny-sun-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/key-sunny-sun-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 94874,
+      "sha256": "3848ceb829499e2854f85a502327985f68e7a75cb5b6891d7a831057e9744218",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          71,
+          41,
+          441,
+          471
+        ],
+        "normalizedLTRB": [
+          0.138671875,
+          0.080078125,
+          0.861328125,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 53,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.138671875,
+          0.080078125,
+          0.72265625,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.138671875,
+          0.080078125,
+          0.138671875
+        ],
+        "visualCenter": [
+          0.48026058,
+          0.46320885
+        ]
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          2,
+          248,
+          6
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1599,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.236,
+            "90": 260.342,
+            "95": 288.867,
+            "99": 333.26
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "key-blue-star",
+      "label": "Blue Star Key",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "key-blue-star-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-blue-star-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "4339e7e61f180fba24bf76c4153d2401e78c059fa8623290a9a933256b752b16",
+      "sourceBytes": 1263937,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/locks/key-blue-star-v02-prop-field-256-r01.webp",
+      "opticalSha256": "839ca48f754e1ab07a7a6eede8a97d3540b02704edd1c25a5851ea06fb22ea80",
+      "opticalReproduced": true,
+      "candidateRecordId": "key-blue-star-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/key-blue-star-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/key-blue-star-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 97474,
+      "sha256": "1d2336880413ff57b8702a3264c2e83ecf1fffbd89ed4dd355f4f42b9ce4843c",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          67,
+          41,
+          444,
+          471
+        ],
+        "normalizedLTRB": [
+          0.130859375,
+          0.080078125,
+          0.8671875,
+          0.919921875
+        ]
+      },
+      "alphaComponentCount": 41,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.130859375,
+          0.080078125,
+          0.736328125,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.1328125,
+          0.080078125,
+          0.130859375
+        ],
+        "visualCenter": [
+          0.48245562,
+          0.47277938
+        ]
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          4,
+          248,
+          8
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1490,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.236,
+            "90": 251.416,
+            "95": 257.818,
+            "99": 293.104
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "splash-boots",
+      "label": "Splash Boots",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "splash-boots-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/item-normal-boots-v02-generator-original.png",
+      "sourceSha256": "fd76524bfd6d1d6233a2a0bcc7351af642b2351ab45e7487297c91af8c000e20",
+      "sourceBytes": 1192696,
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/items/splash-boots-v02-prop-field-256-r01.webp",
+      "opticalSha256": "ffbd1da77e377d663b3bde2b7d8b5960f024129c8289ae47dd32b50741ab8676",
+      "opticalReproduced": true,
+      "candidateRecordId": "splash-boots-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/splash-boots-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/splash-boots-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "bytes": 162478,
+      "sha256": "4e110c9545cb2edaa508beaa13a788f77c7c949f42d47573811c7863dd25dd78",
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.080078125,
+          0.119140625,
+          0.83984375,
+          0.759765625
+        ],
+        "safeInset": [
+          0.119140625,
+          0.080078125,
+          0.12109375,
+          0.080078125
+        ],
+        "visualCenter": [
+          0.52958949,
+          0.50715853
+        ]
+      },
+      "alphaBounds": {
+        "pixelsLTRB": [
+          41,
+          61,
+          471,
+          450
+        ],
+        "normalizedLTRB": [
+          0.080078125,
+          0.119140625,
+          0.919921875,
+          0.87890625
+        ]
+      },
+      "extraction": {
+        "mode": "native-alpha"
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [
+        "splash-boots: 162478 bytes exceeds 102400 byte ceiling"
+      ],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "spring-boots",
+      "label": "Spring Boots",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "spring-boots-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-spring-boots-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "a48a7ca4f1d648b79318560db7bd69eadf2ef12cf595391c2fba1e89e144b3bf",
+      "sourceBytes": 1539654,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/items/spring-boots-v02-prop-field-256-r01.webp",
+      "opticalSha256": "0eefec3a8a77810c2df677f364510428d13094662184e78805665a55d53093ab",
+      "opticalReproduced": true,
+      "candidateRecordId": "spring-boots-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/spring-boots-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/spring-boots-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "bytes": 182130,
+      "sha256": "67d0ff0ec61d8d375776656bb47f5fe8c8719a92092252d03dbed81de27aa703",
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.080078125,
+          0.087890625,
+          0.83984375,
+          0.82421875
+        ],
+        "safeInset": [
+          0.087890625,
+          0.080078125,
+          0.087890625,
+          0.080078125
+        ],
+        "visualCenter": [
+          0.4829395,
+          0.49609988
+        ]
+      },
+      "alphaBounds": {
+        "pixelsLTRB": [
+          41,
+          45,
+          471,
+          467
+        ],
+        "normalizedLTRB": [
+          0.080078125,
+          0.087890625,
+          0.919921875,
+          0.912109375
+        ]
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          7,
+          237,
+          11
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 2177,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 2.236,
+            "90": 294.212,
+            "95": 307.397,
+            "99": 326.559
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [
+        "spring-boots: 182130 bytes exceeds 102400 byte ceiling"
+      ],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    },
+    {
+      "id": "antidote-leaf",
+      "label": "Antidote Leaf",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "antidote-leaf-mgjrpg02-v02-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-antidote-leaf-v02-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "213d2198a999d14c23e4fb17936c64cf1302002223e02a8e2114b5966208fd2e",
+      "sourceBytes": 1395926,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/items/antidote-leaf-v02-prop-field-256-r01.webp",
+      "opticalSha256": "a12bca72f95d3603dfdd3d11aee8a506fec49d4085dd824059650a0273f079e6",
+      "opticalReproduced": true,
+      "candidateRecordId": "antidote-leaf-ui01-presentation-candidate-r01-source",
+      "path": "public/assets/mgjrpg-02/presentation/antidote-leaf-v02-presentation-512-r01.webp",
+      "src": "/assets/mgjrpg-02/presentation/antidote-leaf-v02-presentation-512-r01.webp",
+      "usage": "presentation",
+      "profile": "prop-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "bytes": 118676,
+      "sha256": "761355b38004faf9b20450e6dba2981fdd1dd24f059a52955d5016b9f163012f",
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55
+        ],
+        "visibleBounds": [
+          0.166015625,
+          0.080078125,
+          0.666015625,
+          0.83984375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.16796875,
+          0.080078125,
+          0.166015625
+        ],
+        "visualCenter": [
+          0.50684657,
+          0.46904416
+        ]
+      },
+      "alphaBounds": {
+        "pixelsLTRB": [
+          85,
+          41,
+          426,
+          471
+        ],
+        "normalizedLTRB": [
+          0.166015625,
+          0.080078125,
+          0.83203125,
+          0.919921875
+        ]
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          12,
+          236,
+          8
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 1706,
+          "fallbackBoundaryPixels": 0,
+          "exactBlackVisiblePixelsNormalized": 0,
+          "sourceDistancePercentiles": {
+            "50": 1.732,
+            "90": 169.856,
+            "95": 246.619,
+            "99": 319.883
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.08,
+          0.08,
+          0.92,
+          0.92
+        ],
+        "align": [
+          0.5,
+          0.5
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [
+        "antidote-leaf: 118676 bytes exceeds 102400 byte ceiling"
+      ],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 167.96875,
+      "visibleSubjectAt128": 107.5
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "antidote-leaf-ui01-presentation-candidate-r01-source",
+  "id": "antidote-leaf",
+  "artVersion": 2,
+  "family": "item",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-09-antidote-leaf-a",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/PROMPTS.md",
+        "sha256": "ccffb2a4198b0bb2b9d93ce7db4687750d6a57bbb076111cacc938e6d202b324"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "runtime-comparison",
+          "path": "public/assets/antidote-leaf-v1.png",
+          "sha256": "8b0f3c147ab1271be405f9e12187ace6913445d5c0bbe1e3a8320b918df1da51"
+        },
+        {
+          "order": 2,
+          "role": "rendering-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/portal-rose-heart-v02-512.png",
+          "sha256": "f7ac1c99fa1dd62fc5c4b602f4d78c998128b17d37f13c9da3d77f79f1f90ff2"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-e510eb99-dc4d-49a6-8751-a64d5d661944.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-antidote-leaf-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "213d2198a999d14c23e4fb17936c64cf1302002223e02a8e2114b5966208fd2e",
+          "bytes": 1395926,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/PROMPTS.md",
+      "sha256": "ccffb2a4198b0bb2b9d93ce7db4687750d6a57bbb076111cacc938e6d202b324"
+    },
+    "outputIds": [
+      "exec-e510eb99-dc4d-49a6-8751-a64d5d661944.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-antidote-leaf-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "213d2198a999d14c23e4fb17936c64cf1302002223e02a8e2114b5966208fd2e",
+      "bytes": 1395926,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-09-antidote-leaf-a in docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "antidote-leaf-prop-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/antidote-leaf-v02-presentation-512-r01.webp",
+      "sha256": "761355b38004faf9b20450e6dba2981fdd1dd24f059a52955d5016b9f163012f",
+      "bytes": 118676,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "prop-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "item",
+    "pivot": [
+      0.5,
+      0.55
+    ],
+    "visibleBounds": [
+      0.166015625,
+      0.080078125,
+      0.666015625,
+      0.83984375
+    ],
+    "safeInset": [
+      0.080078125,
+      0.16796875,
+      0.080078125,
+      0.166015625
+    ],
+    "visualCenter": [
+      0.50684657,
+      0.46904416
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-09-item-refresh/item-antidote-leaf-v02-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "prop-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/antidote-leaf-v02-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 118676,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        12,
+        236,
+        8
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.08,
+        0.08,
+        0.92,
+        0.92
+      ],
+      "align": [
+        0.5,
+        0.5
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Same approved extraction and normalized registration at 512px; optical output first rebuilt byte-exactly. No redraw or source changes.",
+      "script": "scripts/art_pipeline/ui_presentation_candidates.py"
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and ordered semantic/rendering references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Remove this candidate catalogue extension from UI; unchanged approved optical URLs remain the fallback. Retain source and derivative until root retirement authority."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human UI review and publication delegation",
+    "approvedAt": "2026-09-05T02:32:35.4546433+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui01-presentation-approval.json",
+    "evidenceSha256": "73a25eb060409f8dc2779cbcd2a46da5eabe3ef35eea9f7ea17b3bd37a6d6d50"
+  }
+}

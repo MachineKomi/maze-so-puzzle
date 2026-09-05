@@ -1,14 +1,17 @@
+import { MazeTerrain, lightVector } from "./ui/game/MazeTerrain";
+import { MiniMap } from "./ui/game/MiniMap";
+import { cameraLayerStyle, cameraNoticeStyle, isInsideWindow } from "./ui/game/sceneGeometry";
+import { describeObject } from "./ui/game/descriptions";
+import { FrontDoorScreen } from "./ui/screens/FrontDoorScreen";
+import { TitleScreen } from "./ui/screens/HomeScreen";
+import { AchievementsScreen } from "./ui/screens/AdventureBook";
 import {
-  memo,
   useCallback,
   useEffect,
-  useId,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
   type CSSProperties,
-  type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import {
@@ -17,9 +20,7 @@ import {
   MEDAL_ART,
   STICKER_ART,
   TREASURE_ART,
-  preloadAchievementArt,
   preloadLevelArt,
-  preloadRewardArt,
 } from "./assets";
 import {
   combatPowerNotice,
@@ -38,7 +39,6 @@ import {
   resolvePortalArt,
   resolveTerrainTheme,
   resolveWeaponArt,
-  type TerrainRenderTreatment,
 } from "./artCatalog";
 import {
   createInitialGameState,
@@ -53,7 +53,6 @@ import { heldWeaponStyle } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
 import { CURATED_LEVELS } from "./game/levels";
-import { createRoundedTerrainPath } from "./game/terrainGeometry";
 import {
   DEFAULT_FOV_SIZE,
   getCameraWindow,
@@ -82,7 +81,6 @@ import {
 } from "./game/types";
 import {
   ACHIEVEMENT_LABELS,
-  BADGE_IDS,
   BADGE_LABELS,
   STICKER_LABELS,
   applyLevelCompletion,
@@ -97,24 +95,21 @@ import {
   type StickerId,
 } from "./progress";
 import { playSound, type SoundName } from "./sound";
-import {
-  calculateStageScale,
-  LOGICAL_STAGE_HEIGHT,
-  LOGICAL_STAGE_WIDTH,
-} from "./stageScale";
-import {
-  MUSIC_TRACKS,
-  configureMusic,
-  createMazeMusicPicker,
-  createMusicRunSeed,
-  disposeMusic,
-  setMusicMuted,
-  setMusicPageHidden,
-  startMusicFromUserGesture,
-} from "./music";
-import { MUSIC_POOLS } from "./musicCatalogue";
+import { createCurrentMusicTransport } from "./musicTransport";
+import { setMusicPageHidden } from "./music";
+import { CatalogueImage, PresentationArt } from "./ui/CatalogueImage";
+import { resolveUiArt, type UiArt } from "./ui/art";
+import { DialogShell as Modal } from "./ui/dialogs/DialogShell";
+import { StoryDialog } from "./ui/dialogs/StoryDialog";
+import { SoundDialog } from "./ui/SoundDialog";
+import { usePresentation } from "./ui/PresentationProvider";
+import { getCurrentInputBlock, type UiInteractionState } from "./ui/interactionState";
+import { PlayShell } from "./ui/game/PlayShell";
+import { usePowerGuidance } from "./ui/game/usePowerGuidance";
+import { MazeViewport, measuredFlight } from "./ui/game/MazeViewport";
+import { AdventureHud, type ArtDetail } from "./ui/game/AdventureHud";
+import { buildAdventureHudModel } from "./ui/game/hudModel";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
-import { getStoryRescueRecordDisplay } from "./rescueRecords";
 import { cameraWorldStyle, worldLayerStyle } from "./cameraMotion";
 import { getJumpPresentationMotion } from "./jumpPresentation";
 import { resetAllGameProgressResult } from "./resetProgress";
@@ -142,9 +137,7 @@ import {
   type CombatPresentationCueKind,
 } from "./combatPresentation";
 import {
-  shouldDismissStoryForKey,
   storyForLevel,
-  type StoryLore,
   type StorySpeaker,
 } from "./story";
 
@@ -161,40 +154,7 @@ function lockPairLabel(color: KeyColor): string {
   return `${COLOR_LABELS[color]} ${KEY_MOTIF_LABELS[color]}`;
 }
 
-const ANIMAL_LABELS: Record<AnimalSpecies, string> = {
-  bunny: "Bunny",
-  fox: "Fox",
-  kitten: "Kitten",
-  puppy: "Puppy",
-  duckling: "Duckling",
-  hedgehog: "Hedgehog",
-  fawn: "Fawn",
-  "red-panda": "Red panda",
-  otter: "Otter",
-  lamb: "Lamb",
-  capybara: "Capybara",
-  chinchilla: "Chinchilla",
-  alpaca: "Alpaca",
-  penguin: "Penguin",
-  koala: "Koala",
-  "pitter-patter-parasol": "Pitter-Patter Parasol",
-  lanternling: "Lanternling",
-  "emberdown-phoenix": "Emberdown Phoenix",
-  "meadowstep-faunling": "Meadowstep Faunling",
-  "minerva-moon-owl": "Minerva Moon Owl",
-  "tessera-dolphin": "Tessera Dolphin",
-  "mallowmusk-aroma-wisp": "Mallowmusk Aroma Wisp",
-  "breezeling-sylph": "Breezeling Sylph",
-  "griffin-cub": "Griffin Cub",
-  "emberbelly-dragonling": "Emberbelly Dragonling",
-  "cloudstep-pegasus": "Cloudstep Pegasus",
-  "three-tumble-cerberus": "Three-Tumble Cerberus",
-  "riddlekit-sphinx": "Riddlekit Sphinx",
-  "tidecurl-hippocamp": "Tidecurl Hippocamp",
-  "ripplecap-kappa": "Ripplecap Kappa",
-  "rainbow-horn-unicorn": "Rainbow-Horn Unicorn",
-  "green-tea-skeleton": "Tea-Time Skeleton",
-};
+const ANIMAL_LABELS = Object.fromEntries(ANIMAL_SPECIES.map(species => [species, resolveAnimalArt(species).label])) as Record<AnimalSpecies, string>;
 
 const STORY_SPEAKER_LABELS: Readonly<Record<StorySpeaker, string>> = {
   ame: "Ame",
@@ -214,7 +174,7 @@ const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
 const DOOR_OPEN_PRESENTATION_MS = 1_320;
 const REDUCED_PRESENTATION_MS = 180;
-const BUILD_VERSION = "0.20.1";
+
 const DEBUG_MAZE_QUERY = "mazes";
 
 const COMBAT_CUE_SOUNDS: Readonly<Record<CombatPresentationCueKind, SoundName>> = {
@@ -306,7 +266,7 @@ interface BlockerHint {
   readonly count: number;
   readonly itemId: string;
   readonly itemName: string;
-  readonly itemSrc: string;
+  readonly itemArt: UiArt;
   readonly message: string;
 }
 
@@ -347,8 +307,8 @@ interface TreasurePresentation {
 }
 
 function prefersReducedMotion(): boolean {
-  return typeof window !== "undefined"
-    && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  return document.documentElement.dataset.motion === "reduced"
+    || document.documentElement.dataset.quality === "static";
 }
 
 function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feedback {
@@ -463,31 +423,9 @@ function enemyLabelForEvent(level: LevelDefinition, objectId: string): string {
   return resolveEnemyArt(object?.kind === "enemy" ? object.style : undefined).label;
 }
 
-function keyFor(point: Point): string {
-  return `${point.x},${point.y}`;
-}
-
 function targetFor(state: GameState, direction: Direction): Point {
   const delta = DIRECTION_DELTAS[direction];
   return { x: state.position.x + delta.x, y: state.position.y + delta.y };
-}
-
-function describeObject(object: LevelObject): string {
-  switch (object.kind) {
-    case "enemy": return `${resolveEnemyArt(object.style).label.toLowerCase()} with Power ${object.power}`;
-    case "sword": return resolveWeaponArt(object.style).label.toLowerCase();
-    case "boots": return "protective boots";
-    case "spring-boots": return "spring boots";
-    case "antidote-leaf": return "antidote leaf";
-    case "potion": return `Power potion worth ${object.amount}`;
-    case "key": return resolveKeyArt(object.color).label.toLowerCase();
-    case "door": return `${resolveDoorArt(object.color).label.toLowerCase()}, locked`;
-    case "animal": return `caged ${ANIMAL_LABELS[object.species].toLowerCase()}`;
-    case "portal": return `${resolvePortalArt(object.pair).label.toLowerCase()} magic flower`;
-    case "treasure": return object.currency === "gold"
-      ? `${object.amount} bonus Gold Stars`
-      : `${object.amount} Science Points`;
-  }
 }
 
 function describeMazePosition(level: LevelDefinition, state: GameState): string {
@@ -572,7 +510,7 @@ function blockerHintFor(
     count,
     itemId: object.id,
     itemName,
-    itemSrc: spriteFor(object),
+    itemArt: resolveUiArt(spriteFor(object))!,
     message: `You need the ${itemName} to ${action}.`,
   };
 }
@@ -596,401 +534,10 @@ function fullLevelWindow(level: LevelDefinition): CameraWindow {
   };
 }
 
-function isInsideWindow(point: Point, camera: CameraWindow): boolean {
-  return point.x >= camera.left
-    && point.x <= camera.right
-    && point.y >= camera.top
-    && point.y <= camera.bottom;
-}
-
-function cameraLayerStyle(point: Point, camera: CameraWindow): CSSProperties {
-  return {
-    left: `${((point.x - camera.left) / camera.width) * 100}%`,
-    top: `${((point.y - camera.top) / camera.height) * 100}%`,
-    width: `${100 / camera.width}%`,
-    height: `${100 / camera.height}%`,
-  };
-}
-
-function cameraNoticeStyle(point: Point, camera: CameraWindow): CSSProperties {
-  return {
-    left: `${((point.x - camera.left + 0.5) / camera.width) * 100}%`,
-    top: `${((point.y - camera.top + 0.18) / camera.height) * 100}%`,
-  };
-}
-
 function debugMazeQueryEnabled(): boolean {
   if (typeof window === "undefined") return false;
   return new URLSearchParams(window.location.search).get("debug") === DEBUG_MAZE_QUERY;
 }
-
-function terrainTreatmentFilter(treatment: TerrainRenderTreatment): string {
-  return `brightness(${treatment.brightness}) saturate(${treatment.saturation}) contrast(${treatment.contrast})`;
-}
-
-function lightVector(level: LevelDefinition): { readonly x: number; readonly y: number } {
-  const fallback = (["top", "right", "bottom", "left"] as const)[
-    [...level.id].reduce((sum, character) => sum + character.charCodeAt(0), 0) % 4
-  ] ?? "top";
-  switch (level.lightDirection ?? fallback) {
-    case "top": return { x: 0, y: 1 };
-    case "right": return { x: -1, y: 0 };
-    case "bottom": return { x: 0, y: -1 };
-    case "left": return { x: 1, y: 0 };
-  }
-}
-
-const MazeTerrain = memo(function MazeTerrain({
-  level,
-  camera,
-}: {
-  readonly level: LevelDefinition;
-  readonly camera: CameraWindow;
-}) {
-  const patternPrefix = useId().replace(/:/g, "");
-  const theme = resolveTerrainTheme(level.terrainThemeId);
-  const floorPatternId = `${patternPrefix}-floor`;
-  const wallPatternId = `${patternPrefix}-wall`;
-  const waterPatternId = `${patternPrefix}-water`;
-  const lavaPatternId = `${patternPrefix}-lava`;
-  const poisonPatternId = `${patternPrefix}-poison`;
-  const waterFxPatternId = `${patternPrefix}-water-fx`;
-  const lavaFxPatternId = `${patternPrefix}-lava-fx`;
-  const poisonFxPatternId = `${patternPrefix}-poison-fx`;
-  const hazardInsetFilterId = `${patternPrefix}-hazard-inset`;
-  const waterMaskId = `${patternPrefix}-water-mask`;
-  const lavaMaskId = `${patternPrefix}-lava-mask`;
-  const poisonMaskId = `${patternPrefix}-poison-mask`;
-  const floorDressingPatternId = `${patternPrefix}-floor-dressing`;
-  const wallDressingPatternId = `${patternPrefix}-wall-dressing`;
-  const wallDepthFilterId = `${patternPrefix}-wall-depth`;
-  const shadow = lightVector(level);
-  const walls = createRoundedTerrainPath(level, camera, "wall", 0.13);
-  const water = createRoundedTerrainPath(level, camera, "water", 0.16);
-  const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
-  const poison = createRoundedTerrainPath(level, camera, "poison", 0.16);
-  const holes: Point[] = [];
-  for (let y = camera.top; y <= camera.bottom; y += 1) {
-    for (let x = camera.left; x <= camera.right; x += 1) {
-      const point = { x, y };
-      if (getTerrainAt(level, point) === "hole") holes.push(point);
-    }
-  }
-
-  return (
-    <>
-      <svg
-        className="maze-terrain-svg"
-        viewBox={`${camera.left} ${camera.top} ${camera.width} ${camera.height}`}
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <defs>
-          <pattern id={floorPatternId} patternUnits="userSpaceOnUse" width={theme.floor.periodTiles} height={theme.floor.periodTiles}>
-            <rect width={theme.floor.periodTiles} height={theme.floor.periodTiles} fill={theme.floor.fallbackColor} />
-            <image href={theme.floor.src} x="0" y="0" width={theme.floor.periodTiles} height={theme.floor.periodTiles} preserveAspectRatio="none" />
-          </pattern>
-          <pattern id={wallPatternId} patternUnits="userSpaceOnUse" width={theme.wall.periodTiles} height={theme.wall.periodTiles}>
-            <rect width={theme.wall.periodTiles} height={theme.wall.periodTiles} fill={theme.wall.fallbackColor} />
-            <image href={theme.wall.src} x="0" y="0" width={theme.wall.periodTiles} height={theme.wall.periodTiles} preserveAspectRatio="none" />
-          </pattern>
-          <pattern id={waterPatternId} patternUnits="userSpaceOnUse" width="4.6" height="4.6">
-            <image href={ASSETS.water} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
-          </pattern>
-          <pattern id={lavaPatternId} patternUnits="userSpaceOnUse" width="4.6" height="4.6">
-            <image href={ASSETS.lava} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
-          </pattern>
-          <pattern id={poisonPatternId} patternUnits="userSpaceOnUse" width="4.2" height="4.2">
-            <image href={ASSETS.poison} x="0" y="0" width="4.2" height="4.2" preserveAspectRatio="none" />
-          </pattern>
-          <pattern id={waterFxPatternId} patternUnits="userSpaceOnUse" width="1.8" height="1.8">
-            <g className="water-ripple-marks">
-              <path d="M.16 .42 C.38 .27 .68 .27 .91 .42 S1.43 .57 1.66 .4" />
-              <path d="M.06 1.16 C.3 1.02 .57 1.02 .8 1.16 S1.3 1.31 1.57 1.15" />
-              <path d="M.5 1.57 C.68 1.48 .91 1.48 1.08 1.57" />
-            </g>
-          </pattern>
-          <pattern id={lavaFxPatternId} patternUnits="userSpaceOnUse" width="1.75" height="1.75">
-            <g className="lava-shimmer-marks">
-              <circle cx=".34" cy=".42" r=".18" />
-              <circle cx="1.32" cy="1.16" r=".25" />
-              <path d="M.18 1.42 C.55 1.1 .7 1.66 1.02 1.39 S1.48 1.22 1.7 1.45" />
-            </g>
-          </pattern>
-          <pattern id={poisonFxPatternId} patternUnits="userSpaceOnUse" width="1.55" height="1.55">
-            <g className="poison-bubble-marks">
-              <circle className="poison-bubble bubble-a" cx=".3" cy="1.3" r=".09" />
-              <circle className="poison-bubble bubble-b" cx=".88" cy=".92" r=".12" />
-              <circle className="poison-bubble bubble-c" cx="1.3" cy="1.4" r=".065" />
-              <circle className="poison-bubble bubble-d" cx="1.18" cy=".42" r=".05" />
-            </g>
-          </pattern>
-          <filter
-            id={hazardInsetFilterId}
-            x={camera.left - 0.2}
-            y={camera.top - 0.2}
-            width={camera.width + 0.4}
-            height={camera.height + 0.4}
-            filterUnits="userSpaceOnUse"
-            colorInterpolationFilters="sRGB"
-          >
-            <feMorphology in="SourceGraphic" operator="erode" radius="0.055" result="inset" />
-            <feGaussianBlur in="inset" stdDeviation="0.022" />
-          </filter>
-          <filter id={wallDepthFilterId} x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="0.055" />
-          </filter>
-          {water.d && (
-            <mask
-              id={waterMaskId}
-              x={camera.left - 0.2}
-              y={camera.top - 0.2}
-              width={camera.width + 0.4}
-              height={camera.height + 0.4}
-              maskUnits="userSpaceOnUse"
-              maskContentUnits="userSpaceOnUse"
-            >
-              <path d={water.d} fill="white" fillRule={water.fillRule} filter={`url(#${hazardInsetFilterId})`} />
-            </mask>
-          )}
-          {lava.d && (
-            <mask
-              id={lavaMaskId}
-              x={camera.left - 0.2}
-              y={camera.top - 0.2}
-              width={camera.width + 0.4}
-              height={camera.height + 0.4}
-              maskUnits="userSpaceOnUse"
-              maskContentUnits="userSpaceOnUse"
-            >
-              <path d={lava.d} fill="white" fillRule={lava.fillRule} filter={`url(#${hazardInsetFilterId})`} />
-            </mask>
-          )}
-          {poison.d && (
-            <mask
-              id={poisonMaskId}
-              x={camera.left - 0.2}
-              y={camera.top - 0.2}
-              width={camera.width + 0.4}
-              height={camera.height + 0.4}
-              maskUnits="userSpaceOnUse"
-              maskContentUnits="userSpaceOnUse"
-            >
-              <path d={poison.d} fill="white" fillRule={poison.fillRule} filter={`url(#${hazardInsetFilterId})`} />
-            </mask>
-          )}
-          {theme.floorDressing && (
-            <pattern
-              id={floorDressingPatternId}
-              patternUnits="userSpaceOnUse"
-              width={theme.floorDressing.periodTiles}
-              height={theme.floorDressing.periodTiles}
-            >
-              <image
-                href={theme.floorDressing.src}
-                x="0"
-                y="0"
-                width={theme.floorDressing.periodTiles}
-                height={theme.floorDressing.periodTiles}
-                preserveAspectRatio="none"
-              />
-            </pattern>
-          )}
-          {theme.wallDressing && (
-            <pattern
-              id={wallDressingPatternId}
-              patternUnits="userSpaceOnUse"
-              width={theme.wallDressing.periodTiles}
-              height={theme.wallDressing.periodTiles}
-            >
-              <image
-                href={theme.wallDressing.src}
-                x="0"
-                y="0"
-                width={theme.wallDressing.periodTiles}
-                height={theme.wallDressing.periodTiles}
-                preserveAspectRatio="none"
-              />
-            </pattern>
-          )}
-        </defs>
-
-        <rect
-          className="terrain-floor"
-          x={camera.left}
-          y={camera.top}
-          width={camera.width}
-          height={camera.height}
-          fill={`url(#${floorPatternId})`}
-          style={{ filter: terrainTreatmentFilter(theme.floorTreatment) }}
-        />
-        {theme.floorDressing && (
-          <rect
-            className="terrain-floor-dressing"
-            x={camera.left}
-            y={camera.top}
-            width={camera.width}
-            height={camera.height}
-            fill={`url(#${floorDressingPatternId})`}
-            opacity={theme.floorDressing.opacity}
-          />
-        )}
-        {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} mask={`url(#${waterMaskId})`} />}
-        {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} mask={`url(#${lavaMaskId})`} />}
-        {poison.d && <path className="terrain-poison" d={poison.d} fill={`url(#${poisonPatternId})`} fillRule={poison.fillRule} mask={`url(#${poisonMaskId})`} />}
-        {water.d && <path className="terrain-water-fx" d={water.d} fill={`url(#${waterFxPatternId})`} fillRule={water.fillRule} mask={`url(#${waterMaskId})`} />}
-        {lava.d && <path className="terrain-lava-fx" d={lava.d} fill={`url(#${lavaFxPatternId})`} fillRule={lava.fillRule} mask={`url(#${lavaMaskId})`} />}
-        {poison.d && <path className="terrain-poison-fx" d={poison.d} fill={`url(#${poisonFxPatternId})`} fillRule={poison.fillRule} mask={`url(#${poisonMaskId})`} />}
-        {walls.d && (
-          <path
-            className="terrain-wall-depth"
-            d={walls.d}
-            fill="#332b58"
-            fillRule={walls.fillRule}
-            opacity="0.34"
-            transform={`translate(${shadow.x * 0.10} ${shadow.y * 0.10})`}
-            filter={`url(#${wallDepthFilterId})`}
-          />
-        )}
-        {walls.d && (
-          <path
-            className="terrain-wall"
-            d={walls.d}
-            fill={`url(#${wallPatternId})`}
-            fillRule={walls.fillRule}
-            style={{ filter: terrainTreatmentFilter(theme.wallTreatment) }}
-          />
-        )}
-        {walls.d && (
-          <path
-            className="terrain-wall-highlight"
-            d={walls.d}
-            fill="none"
-            fillRule={walls.fillRule}
-            stroke="rgba(255,255,255,0.45)"
-            strokeWidth="0.045"
-            transform={`translate(${shadow.x * -0.025} ${shadow.y * -0.025})`}
-          />
-        )}
-        {walls.d && theme.wallDressing && (
-          <path
-            className="terrain-wall-dressing"
-            d={walls.d}
-            fill={`url(#${wallDressingPatternId})`}
-            fillRule={walls.fillRule}
-            opacity={theme.wallDressing.opacity}
-          />
-        )}
-      </svg>
-      {holes.map((hole) => (
-        <div className="terrain-hole-layer" style={cameraLayerStyle(hole, camera)} key={keyFor(hole)} aria-hidden="true">
-          <img src={ASSETS.hole} alt="" draggable={false} />
-        </div>
-      ))}
-      {isInsideWindow(level.exit, camera) && (
-        <div className="goal-layer" style={cameraLayerStyle(level.exit, camera)} aria-hidden="true">
-          <img className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />
-        </div>
-      )}
-    </>
-  );
-});
-
-interface MiniMapProps {
-  readonly level: LevelDefinition;
-  readonly position: Point;
-  readonly camera: CameraWindow;
-  readonly revealed: ReadonlySet<TileKey>;
-  readonly currentView: ReadonlySet<TileKey>;
-  readonly objects: readonly LevelObject[];
-  readonly newExplorer?: boolean;
-  readonly compact?: boolean;
-  readonly highlightedObjectId?: string | null;
-}
-
-const MiniMap = memo(function MiniMap({
-  level,
-  position,
-  camera,
-  revealed,
-  currentView,
-  objects,
-  newExplorer = false,
-  compact = false,
-  highlightedObjectId = null,
-}: MiniMapProps) {
-  const visibleObjectByTile = useMemo(() => new Map(
-    objects.map((object) => [toTileKey(object.at), object] as const),
-  ), [objects]);
-  const exploredCount = useMemo(() => new Set([...revealed, ...currentView]).size, [currentView, revealed]);
-  const exploredPercent = Math.round((exploredCount / (level.width * level.height)) * 100);
-  const guidedObject = highlightedObjectId
-    ? objects.find((object) => object.id === highlightedObjectId)
-    : undefined;
-
-  return (
-    <section
-      className={`maze-map-card${compact ? " compact-map" : ""}`}
-      aria-label={`Exploration map. ${exploredCount} of ${level.width * level.height} tiles revealed, ${exploredPercent} percent.${guidedObject ? ` Guided marker: ${describeObject(guidedObject)} at column ${guidedObject.at.x + 1}, row ${guidedObject.at.y + 1}.` : ""}`}
-    >
-      <div className="maze-map-heading"><img src={ASSETS.navMazes} alt="" /><strong>My map</strong><small>{exploredPercent}%</small></div>
-      <div
-        className="maze-minimap"
-        style={{
-          gridTemplateColumns: `repeat(${level.width}, minmax(0, 1fr))`,
-          gridTemplateRows: `repeat(${level.height}, minmax(0, 1fr))`,
-        }}
-        aria-hidden="true"
-      >
-        {level.terrain.flatMap((row, y) => row.map((terrain, x) => {
-          const point = { x, y };
-          const tileKey = toTileKey(point);
-          const inView = currentView.has(tileKey);
-          const seen = inView || revealed.has(tileKey);
-          const candidate = visibleObjectByTile.get(tileKey);
-          const guided = candidate?.id === highlightedObjectId;
-          const object = seen || guided ? candidate : undefined;
-          const isPlayer = pointsEqual(position, point);
-          const isExit = seen && pointsEqual(level.exit, point);
-          return (
-            <i
-              key={tileKey}
-              className={`minimap-tile ${seen ? `map-${terrain} ${inView ? "in-view" : "remembered"}` : "map-fog"}`}
-            >
-              {isExit && <b className="map-marker marker-exit" />}
-              {object && <b className={`map-marker marker-${object.kind}${object.kind === "door" || object.kind === "key" ? ` marker-${object.color}` : object.kind === "portal" ? ` marker-${object.pair}` : ""}${guided ? " guided-marker" : ""}`} />}
-              {isPlayer && <b className="map-player" />}
-            </i>
-          );
-        }))}
-        <span
-          className="map-camera-frame"
-          style={{
-            left: `${(camera.left / level.width) * 100}%`,
-            top: `${(camera.top / level.height) * 100}%`,
-            width: `${(camera.width / level.width) * 100}%`,
-            height: `${(camera.height / level.height) * 100}%`,
-          }}
-        />
-      </div>
-      {newExplorer
-        ? <div className="maze-map-nudge"><img src={ASSETS.goal} alt="" /> Walk to reveal the maze!</div>
-        : <div className="maze-map-key"><span><i className="key-current" />Now</span><span><i className="key-seen" />Explored</span><span><i className="key-fog" />Mystery</span></div>}
-      <p className="sr-only">
-        Ame is at column {position.x + 1}, row {position.y + 1}.
-        {pointsEqual(level.exit, position) || currentView.has(toTileKey(level.exit)) || revealed.has(toTileKey(level.exit))
-          ? ` The sparkling exit is at column ${level.exit.x + 1}, row ${level.exit.y + 1}.`
-          : " The exit has not been discovered yet."}
-        {objects.some((object) => currentView.has(toTileKey(object.at)) || revealed.has(toTileKey(object.at)))
-          ? ` Discovered landmarks: ${objects
-            .filter((object) => currentView.has(toTileKey(object.at)) || revealed.has(toTileKey(object.at)))
-            .map((object) => `${describeObject(object)} at column ${object.at.x + 1}, row ${object.at.y + 1}`)
-            .join("; ")}.`
-          : " No unresolved landmarks have been discovered yet."}
-      </p>
-    </section>
-  );
-});
 
 function stickerArt(id: StickerId): string {
   return STICKER_ART[id];
@@ -1013,14 +560,6 @@ function surpriseSettings(progress: PlayerProgress): { size: number; difficulty:
   const size = sizes[Math.min(sizes.length - 1, chapter - 1)] ?? 9;
   const difficulty: MazeDifficulty = chapter >= 5 ? "adventure" : chapter >= 3 ? "growing" : "gentle";
   return { size, difficulty };
-}
-
-function describeGeneratedRecord(levelId: string): string {
-  const match = /-(movement|gentle|growing|adventure)-(\d+)$/.exec(levelId);
-  if (match === null) return "Procedural maze";
-  const difficulty = match[1] ?? "surprise";
-  const size = Number(match[2]);
-  return `${Number.isFinite(size) ? `${size} × ${size} · ` : ""}${difficulty[0]?.toUpperCase()}${difficulty.slice(1)}`;
 }
 
 function completionInputFor(
@@ -1108,9 +647,11 @@ function pendingCompletionFor(
 }
 
 function App() {
-  const [mazeMusicPicker] = useState(() => createMazeMusicPicker(createMusicRunSeed(), {
-    previousTrackUrl: MUSIC_TRACKS.title,
-  }));
+  const [musicTransport] = useState(createCurrentMusicTransport);
+  const { motion, preferences } = usePresentation();
+  const [soundOpen, setSoundOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [artDetail, setArtDetail] = useState<ArtDetail | null>(null);
   const [initialRunResult] = useState(() => readActiveRunResult(CURATED_LEVELS));
   const initialRun = initialRunResult.snapshot;
   const initialLevel = initialRun
@@ -1171,11 +712,6 @@ function App() {
   const [presentedPower, setPresentedPower] = useState<number | null>(null);
   const [presentedEnemyPower, setPresentedEnemyPower] = useState<number | null>(null);
   const appFrameRef = useRef<HTMLElement>(null);
-  const [stageScale, setStageScale] = useState(() => (
-    typeof window === "undefined"
-      ? 1
-      : calculateStageScale(window.innerWidth, window.innerHeight)
-  ));
   const boardRef = useRef<HTMLDivElement>(null);
   const inputLocked = useRef(false);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
@@ -1212,59 +748,18 @@ function App() {
   const mutedRef = useRef(muted);
   const [testerToolsRequested] = useState(debugMazeQueryEnabled);
 
-  useLayoutEffect(() => {
-    const frame = appFrameRef.current;
-    if (!frame) return undefined;
-
-    const updateStageScale = () => {
-      const styles = window.getComputedStyle(frame);
-      const horizontalPadding = Number.parseFloat(styles.paddingLeft)
-        + Number.parseFloat(styles.paddingRight);
-      const verticalPadding = Number.parseFloat(styles.paddingTop)
-        + Number.parseFloat(styles.paddingBottom);
-      const availableWidth = Math.max(0, frame.clientWidth - horizontalPadding);
-      const availableHeight = Math.max(0, frame.clientHeight - verticalPadding);
-      const nextScale = calculateStageScale(availableWidth, availableHeight);
-
-      setStageScale((currentScale) => (
-        Math.abs(currentScale - nextScale) < 0.0001 ? currentScale : nextScale
-      ));
-    };
-
-    updateStageScale();
-    const resizeObserver = new ResizeObserver(updateStageScale);
-    resizeObserver.observe(frame);
-    window.addEventListener("resize", updateStageScale);
-    window.visualViewport?.addEventListener("resize", updateStageScale);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateStageScale);
-      window.visualViewport?.removeEventListener("resize", updateStageScale);
-    };
-  }, []);
-
-  const musicTrackForLevel = useCallback(
-    (nextLevel: LevelDefinition) => mazeMusicPicker.trackForMaze(nextLevel.id),
-    [mazeMusicPicker],
-  );
-
+  useEffect(() => musicTransport.subscribe(snapshot => setMuted(snapshot.muted)), [musicTransport]);
   useEffect(() => {
-    if ((screen !== "front-door" && screen !== "title") || muted) return undefined;
-    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
-    configureMusic({ trackUrl: MUSIC_TRACKS.title });
-    setMusicMuted(false);
-
-    const beginTitleMusic = () => {
-      void startMusicFromUserGesture();
-    };
-    window.addEventListener("pointerdown", beginTitleMusic, { capture: true, once: true });
-    window.addEventListener("keydown", beginTitleMusic, { capture: true, once: true });
+    if (screen !== "front-door" && screen !== "title") return;
+    musicTransport.setContext("title");
+    const beginTitleMusic = () => { void musicTransport.startFromUserGesture(); };
+    window.addEventListener("pointerdown", beginTitleMusic, { once: true });
+    window.addEventListener("keydown", beginTitleMusic, { once: true });
     return () => {
-      window.removeEventListener("pointerdown", beginTitleMusic, true);
-      window.removeEventListener("keydown", beginTitleMusic, true);
+      window.removeEventListener("pointerdown", beginTitleMusic);
+      window.removeEventListener("keydown", beginTitleMusic);
     };
-  }, [mazeMusicPicker, muted, screen]);
+  }, [musicTransport, screen]);
 
   const campaignIndex = CURATED_LEVELS.findIndex((candidate) => candidate.id === level.id);
   const isSurprise = campaignIndex === -1;
@@ -1321,10 +816,6 @@ function App() {
   const terrainTheme = resolveTerrainTheme(level.terrainThemeId);
   const mazeLight = lightVector(level);
   const levelStory = useMemo(() => storyForLevel(level.id), [level.id]);
-  const rescuedSpecies = useMemo(
-    () => animalObjects.filter((object) => game.rescuedAnimalIds.includes(object.id)).map((object) => object.species),
-    [animalObjects, game.rescuedAnimalIds],
-  );
   const followerPlacements = useMemo(() => {
     const rescuedAnimals = game.rescuedAnimalIds.flatMap((animalId) => {
       if (animalId === rescuePresentation?.objectId) return [];
@@ -1344,10 +835,6 @@ function App() {
     });
   }, [animalObjects, cameraWindow, game.position, game.rescuedAnimalIds, playerTrail, rescuePresentation?.objectId]);
   const objectKinds = useMemo(() => new Set(level.objects.map((object) => object.kind)), [level]);
-  const keyColors = useMemo(
-    () => [...new Set(level.objects.flatMap((object) => object.kind === "key" ? [object.color] : []))],
-    [level],
-  );
   const mazeStatus = useMemo(() => describeMazePosition(level, game), [game, level]);
   const runInProgress = hasActiveRun && (game.status === "playing" || game.status === "won");
   const displayedPower = presentedPower ?? game.power;
@@ -1358,18 +845,20 @@ function App() {
     || jumpPresentation !== null
     || portalPresentation !== null
     || doorOpeningPresentation !== null;
-  const modalOpen = resetProgressOpen
-    || testerPickerOpen
-    || levelPickerOpen
-    || pendingAdventure !== null
-    || storyOpen
-    || (screen === "game" && (
-      helpOpen
-      || hintOpen
-      || blockerHint !== null
-      || tooStrongEncounter !== null
-      || (game.status !== "playing" && !presentationActive)
-    ));
+  const uiState: UiInteractionState = {
+    screen,
+    topOverlay: resetProgressOpen ? "reset" : testerPickerOpen ? "tester"
+      : levelPickerOpen ? "maze-picker" : pendingAdventure ? "switch"
+      : moreOpen ? "more" : soundOpen ? "sound" : artDetail ? "detail" : storyOpen ? "story"
+      : screen !== "game" ? null : helpOpen ? "help" : hintOpen ? "hint"
+      : blockerHint ? "blocker" : tooStrongEncounter ? "too-strong"
+      : presentationActive ? null : game.status === "won" ? "completion"
+      : game.status === "lost" ? "lost" : null,
+  };
+  const inputBlock = getCurrentInputBlock(uiState);
+  const modalOpen = inputBlock.backgroundInert;
+  const hudModel = useMemo(() => buildAdventureHudModel(level, game), [level, game]);
+  const powerGuidance = usePowerGuidance(level, game, tooStrongEncounter?.event.objectId);
 
   useEffect(() => {
     if (runMode === "tester") return;
@@ -1725,8 +1214,7 @@ function App() {
 
   const attemptMove = useCallback((requestedDirection: Direction, lateralOffset = 0) => {
     const unavailable = (
-      screen !== "game"
-      || modalOpen
+      !inputBlock.gameplayInputAllowed
       || game.status !== "playing"
     );
     if (unavailable) {
@@ -1945,8 +1433,8 @@ function App() {
         testerRun,
       );
       setCompletion(pending);
-      configureMusic({ trackUrl: MUSIC_POOLS.victory[0]!.url });
-      if (!mutedRef.current) void startMusicFromUserGesture();
+      musicTransport.setContext("victory");
+      if (!mutedRef.current) void musicTransport.startFromUserGesture();
       if (pending.newStickerIds.length > 0 || pending.newMedalIds.length > 0 || pending.newBadgeIds.length > 0) {
         rewardSoundTimer.current = window.setTimeout(() => {
           playSound(pending.newBadgeIds.length > 0 ? "stamp" : "reward", mutedRef.current);
@@ -1963,15 +1451,14 @@ function App() {
       queuedMove.current = null;
       if (nextMove) attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
-  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, level, modalOpen, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
+  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
   const dismissStory = useCallback(() => {
     setStoryOpen(false);
-    configureMusic({ trackUrl: musicTrackForLevel(level) });
-    if (!mutedRef.current) void startMusicFromUserGesture();
+    musicTransport.setContext("maze");
+    if (!mutedRef.current) void musicTransport.startFromUserGesture();
     playSound("select", mutedRef.current);
-    window.setTimeout(() => boardRef.current?.focus(), 0);
-  }, [level, musicTrackForLevel]);
+  }, [level, musicTransport]);
 
   attemptMoveRef.current = attemptMove;
 
@@ -2001,27 +1488,19 @@ function App() {
     };
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (storyOpen) {
-        if (shouldDismissStoryForKey(event)) {
-          event.preventDefault();
-          dismissStory();
-        }
-        return;
-      }
       if (modalOpen) return;
       if (
         event.key === "Escape"
         && screen === "game"
         && bigMaze
-        && !helpOpen
-        && !hintOpen
-        && tooStrongEncounter === null
         && game.status === "playing"
       ) {
         event.preventDefault();
         setBigMaze(false);
         return;
       }
+      if (event.defaultPrevented) return;
+      if (event.target instanceof HTMLElement && event.target.closest("input, select, textarea, a, [contenteditable='true']")) return;
       const direction = directionForKey(event.key);
       if (!direction || screen !== "game" || modalOpen || game.status !== "playing") return;
       if (event.ctrlKey || event.metaKey || event.altKey) return;
@@ -2076,10 +1555,10 @@ function App() {
   }, [bigMaze, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => {
-    if (screen !== "game" || modalOpen || game.status !== "playing") {
+    if (inputBlock.clearHeldInput || game.status !== "playing") {
       clearHeldInput();
     }
-  }, [clearHeldInput, game.status, modalOpen, screen]);
+  }, [clearHeldInput, game.status, inputBlock.clearHeldInput]);
 
   useEffect(() => () => {
     clearPresentationWork();
@@ -2088,7 +1567,7 @@ function App() {
     if (pointerHoldTimer.current !== undefined) window.clearTimeout(pointerHoldTimer.current);
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     if (rewardSoundTimer.current !== undefined) window.clearTimeout(rewardSoundTimer.current);
-    disposeMusic();
+    musicTransport.dispose();
   }, [clearPresentationWork]);
 
   const moveDirectionFromPointer = useCallback((clientX: number, clientY: number, previousDirection: Direction | null = null): PointerIntent | null => {
@@ -2180,6 +1659,7 @@ function App() {
   };
 
   const onBoardPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!inputBlock.gameplayInputAllowed) return;
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
     clearBoardPointer();
@@ -2238,6 +1718,7 @@ function App() {
   }, []);
 
   const startDpadHold = (event: ReactPointerEvent<HTMLButtonElement>, direction: Direction) => {
+    if (!inputBlock.gameplayInputAllowed) return;
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
     clearDpadHold();
@@ -2286,15 +1767,12 @@ function App() {
     mode: RunMode = "normal",
   ) => {
     preloadLevelArt(nextLevel);
-    preloadRewardArt();
     const opensStory = mode === "normal"
       && nextLevel.source === "curated"
       && storyForLevel(nextLevel.id) !== undefined;
-    configureMusic({
-      trackUrl: opensStory ? MUSIC_POOLS.story[0]!.url : musicTrackForLevel(nextLevel),
-    });
-    setMusicMuted(muted);
-    if (!muted) void startMusicFromUserGesture();
+    musicTransport.setContext(opensStory ? "story" : "maze");
+    musicTransport.setMuted(muted);
+    if (!muted) void musicTransport.startFromUserGesture();
     setRunMode(mode);
     loadLevel(nextLevel);
     setStoryOpen(opensStory);
@@ -2305,11 +1783,9 @@ function App() {
 
   const resumeRun = () => {
     preloadLevelArt(level);
-    configureMusic({
-      trackUrl: game.status === "won" ? MUSIC_POOLS.victory[0]!.url : musicTrackForLevel(level),
-    });
-    setMusicMuted(muted);
-    if (!muted) void startMusicFromUserGesture();
+    musicTransport.setContext(game.status === "won" ? "victory" : "maze");
+    musicTransport.setMuted(muted);
+    if (!muted) void musicTransport.startFromUserGesture();
     setPendingAdventure(null);
     setStoryOpen(false);
     setScreen("game");
@@ -2443,10 +1919,9 @@ function App() {
   };
 
   const enterHome = () => {
-    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
-    configureMusic({ trackUrl: MUSIC_TRACKS.title });
-    setMusicMuted(muted);
-    if (!muted) void startMusicFromUserGesture();
+        musicTransport.setContext("title");
+    musicTransport.setMuted(muted);
+    if (!muted) void musicTransport.startFromUserGesture();
     setScreen("title");
     playSound("title", muted);
   };
@@ -2457,10 +1932,9 @@ function App() {
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
     inputUnlockTimer.current = undefined;
     inputLocked.current = false;
-    mazeMusicPicker.noteTrackStarted(MUSIC_TRACKS.title);
-    configureMusic({ trackUrl: MUSIC_TRACKS.title });
-    setMusicMuted(muted);
-    if (!muted) void startMusicFromUserGesture();
+        musicTransport.setContext("title");
+    musicTransport.setMuted(muted);
+    if (!muted) void musicTransport.startFromUserGesture();
     setHelpOpen(false);
     setHintOpen(false);
     setStoryOpen(false);
@@ -2478,12 +1952,9 @@ function App() {
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
     inputUnlockTimer.current = undefined;
     inputLocked.current = false;
-    preloadAchievementArt();
-    const bookTrack = MUSIC_POOLS["adventure-book"][0]!.url;
-    mazeMusicPicker.noteTrackStarted(bookTrack);
-    configureMusic({ trackUrl: bookTrack });
-    setMusicMuted(muted);
-    if (!muted) void startMusicFromUserGesture();
+    musicTransport.setContext("adventure-book");
+    musicTransport.setMuted(muted);
+    if (!muted) void musicTransport.startFromUserGesture();
     setHelpOpen(false);
     setHintOpen(false);
     setTooStrongEncounter(null);
@@ -2509,23 +1980,13 @@ function App() {
     showTitle();
   };
 
-  const toggleSound = () => {
-    const nextMuted = !muted;
-    setMuted(nextMuted);
-    setMusicMuted(nextMuted);
-    if (!nextMuted) {
-      void startMusicFromUserGesture();
-      playSound("title", false);
-    }
-  };
-
   const stayHere = () => {
     if (game.status !== "won") return;
     setGame(stayAfterPendingCompletion(level, game));
     setCompletion(null);
-    configureMusic({ trackUrl: musicTrackForLevel(level) });
-    setMusicMuted(muted);
-    if (!muted) void startMusicFromUserGesture();
+    musicTransport.setContext("maze");
+    musicTransport.setMuted(muted);
+    if (!muted) void musicTransport.startFromUserGesture();
     playSound("select", muted);
     window.setTimeout(() => boardRef.current?.focus(), 0);
   };
@@ -2578,11 +2039,6 @@ function App() {
     )
     : null,
   [game, hintOpen, hintUsesByState, currentHintKey, level]);
-  const ownedCollectibles = [
-    ...progress.stickers.slice(-3).map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id) })),
-    ...progress.medals.slice(-2).map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id) })),
-    ...progress.badges.slice(-2).map((id) => ({ id, label: BADGE_LABELS[id].label, art: badgeArt(id) })),
-  ];
   const newCollectibles = completion ? [
     ...completion.newStickerIds.map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id), kind: "New sticker" })),
     ...completion.newMedalIds.map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id), kind: "New medal" })),
@@ -2594,30 +2050,41 @@ function App() {
     ? "Next test maze"
     : campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze";
   const treasureFlightStyle = treasurePresentation ? (() => {
-    const startX = 18 + ((treasurePresentation.at.x - cameraWindow.left + 0.5) / cameraWindow.width) * 626;
-    const startY = 42 + ((treasurePresentation.at.y - cameraWindow.top + 0.5) / cameraWindow.height) * 438;
-    const targetX = treasurePresentation.currency === "gold" ? 735 : 850;
-    const targetY = 30;
-    return {
-      left: `${startX}px`,
-      top: `${startY}px`,
-      "--treasure-fly-x": `${targetX - startX}px`,
-      "--treasure-fly-y": `${targetY - startY}px`,
-    } as CSSProperties;
+    const board = boardRef.current;
+    const target = appFrameRef.current?.querySelector<HTMLElement>(`[data-ui-anchor="${treasurePresentation.currency}"]`);
+    const shell = appFrameRef.current?.querySelector<HTMLElement>(".play-shell");
+    if (!board || !target || !shell) return undefined;
+    return measuredFlight(board.getBoundingClientRect(), target.getBoundingClientRect(), shell.getBoundingClientRect(),
+      (treasurePresentation.at.x - cameraWindow.left + .5) / cameraWindow.width,
+      (treasurePresentation.at.y - cameraWindow.top + .5) / cameraWindow.height) as CSSProperties;
   })() : undefined;
+  const openSound = (trigger?: HTMLElement) => {
+    modalReturnFocus.current = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
+    clearHeldInput();
+    setSoundOpen(true);
+  };
+  const openArtDetail = (detail: ArtDetail, trigger: HTMLElement) => {
+    modalReturnFocus.current = trigger;
+    clearHeldInput();
+    setArtDetail(detail);
+  };
+
+  const utilityActions: import("./ui/game/AdventureHud").UtilityAction[] = [
+              { id: "home", label: "Home", art: ASSETS.navHome, run: showTitle },
+              { id: "mazes", label: "Mazes", art: ASSETS.navMazes, run: openLevelPicker },
+              { id: "book", label: "Book", art: ASSETS.navBook, run: showAchievements },
+              { id: "help", label: "Help", art: ASSETS.navHelp, run: trigger => { modalReturnFocus.current = trigger; setHelpOpen(true); } },
+              { id: "sound", label: "Sound", art: muted ? ASSETS.navMuted : ASSETS.navSound, run: openSound },
+              { id: "restart", label: restartArmed ? "Again!" : "Restart", art: ASSETS.navRestart, pressed: restartArmed, run: armRestart },
+              ...(levelStory ? [{ id: "story", label: "Story", art: ASSETS.navBook, run: openStory }] : []),
+              { id: "big-maze", label: bigMaze ? "Normal" : "Big maze", pressed: bigMaze, run: toggleBigMaze },
+              ...(testerToolsEnabled ? [{ id: "tester", label: "Pick maze", art: ASSETS.navMazes, run: openTesterPicker }] : []),
+  ];
 
   return (
     <main ref={appFrameRef} className="app-frame">
-      <div
-        className="game-stage-slot"
-        style={{ "--stage-scale": stageScale } as CSSProperties}
-      >
-        <section
-          className={`game-stage screen-${screen}`}
-          aria-label="Maze so Puzzle game"
-          data-logical-size={`${LOGICAL_STAGE_WIDTH}x${LOGICAL_STAGE_HEIGHT}`}
-          style={screen === "game" ? { touchAction: "none", userSelect: "none", WebkitUserSelect: "none" } : undefined}
-        >
+      <div className="game-stage-slot">
+        <section className={`game-stage screen-${screen}`} aria-label="Maze so Puzzle game" data-motion={motion} data-quality={preferences.quality}>
         {saveWarning && (
           <p className="save-warning" role="alert">
             {saveWarning === "progress"
@@ -2630,13 +2097,14 @@ function App() {
             playRef={frontDoorPlayRef}
             muted={muted}
             onPlay={enterHome}
+            blocked={modalOpen}
           />
         ) : screen === "title" ? (
           <TitleScreen
             progress={progress}
             updatedMazeRestarted={initialRunResult.discardedUpdatedRun}
             activeRun={runInProgress ? { name: level.name, steps: game.steps } : null}
-            blocked={pendingAdventure !== null || resetProgressOpen || testerPickerOpen || levelPickerOpen}
+            blocked={modalOpen}
             muted={muted}
             playRef={titlePlayRef}
             onPlay={runInProgress ? resumeRun : continueStory}
@@ -2645,14 +2113,14 @@ function App() {
             onChooseMaze={(trigger) => openLevelPicker(trigger)}
             onRequestReset={openResetProgress}
             onOpenTester={openTesterPicker}
-            onToggleSound={toggleSound}
+            onToggleSound={() => openSound()}
           />
         ) : screen === "achievements" ? (
           <AchievementsScreen
             progress={progress}
             unlockedLevelIds={progress.unlockedLevelIds}
             activeRun={runInProgress ? { levelId: level.id, name: level.name, steps: game.steps } : null}
-            blocked={pendingAdventure !== null || resetProgressOpen || testerPickerOpen || levelPickerOpen}
+            blocked={modalOpen}
             headingRef={achievementsHeadingRef}
             muted={muted}
             onHome={showTitle}
@@ -2660,7 +2128,8 @@ function App() {
             onPlayLevel={requestEnterLevel}
             onSurprise={() => requestEnterLevel(makeSurprise())}
             onRequestReset={openResetProgress}
-            onToggleSound={toggleSound}
+            onToggleSound={() => openSound()}
+            onDetail={openArtDetail}
           />
         ) : (
           <>
@@ -2668,61 +2137,19 @@ function App() {
         <div className="ambient-star star-one" aria-hidden="true">✦</div>
         <div className="ambient-star star-two" aria-hidden="true">✧</div>
 
-        <div className={`game-layout${bigMaze ? " big-maze" : ""}`} inert={modalOpen ? true : undefined} aria-hidden={modalOpen || undefined}>
+        <PlayShell big={bigMaze} blocked={modalOpen}>
           {treasurePresentation && (
             <div className={`treasure-flight treasure-flight-${treasurePresentation.currency}`} style={treasureFlightStyle} aria-hidden="true">
-              <img src={treasurePresentation.currency === "gold" ? ASSETS.treasureGoldChest : ASSETS.treasureScienceGears} alt="" />
+              <CatalogueImage src={treasurePresentation.currency === "gold" ? ASSETS.treasureGoldChest : ASSETS.treasureScienceGears} alt="" />
               {Array.from({ length: 8 }, (_, index) => <i key={index} style={{ "--mote": index } as CSSProperties}>{treasurePresentation.currency === "gold" ? "★" : "✦"}</i>)}
               <b>+{treasurePresentation.amount}</b>
             </div>
           )}
-          <section className="maze-panel" aria-label={`${level.name} maze`}>
-            <div className="maze-topline">
-              <div>
-                <span className="level-kicker">{isSurprise ? `${level.width} × ${level.height} surprise maze` : `Story maze ${campaignIndex + 1} of ${CURATED_LEVELS.length}${explorationMode ? ` · ${level.width} × ${level.height}` : ""}`}</span>
-                <h2>{level.name}</h2>
-              </div>
-              <div className="maze-topline-actions">
-                {bigMaze && (
-                  <div
-                    className="big-maze-hud"
-                    aria-label={`${level.name}. Power ${displayedPower}. ${rescuedSpecies.length} of ${animalObjects.length} friends rescued. ${game.hasSword ? `${weaponArt.label} found.` : objectKinds.has("sword") ? `${weaponArt.label} not found.` : ""} ${game.hasBoots ? "Splash boots found." : objectKinds.has("boots") ? "Splash boots not found." : ""} ${game.hasSpringBoots ? "Spring boots found." : objectKinds.has("spring-boots") ? "Spring boots not found." : ""} ${game.hasAntidoteLeaf ? "Antidote leaf found." : objectKinds.has("antidote-leaf") ? "Antidote leaf not found." : ""} ${game.keys.length} of ${keyColors.length} keys found.`}
-                  >
-                    <strong>{level.name}</strong>
-                    <span><img src={ASSETS.potion} alt="" /> {displayedPower}</span>
-                    <span><img src={ASSETS.rewardAnimalFriendSticker} alt="" /> {rescuedSpecies.length}/{animalObjects.length}</span>
-                    {objectKinds.has("sword") && <span className={game.hasSword ? "found" : "missing"} title={game.hasSword ? `${weaponArt.label} found` : `${weaponArt.label} not found`}><img src={weaponArt.src} alt="" /></span>}
-                    {objectKinds.has("boots") && <span className={game.hasBoots ? "found" : "missing"} title={game.hasBoots ? "Splash boots found" : "Splash boots not found"}><img src={ASSETS.boots} alt="" /></span>}
-                    {objectKinds.has("spring-boots") && <span className={game.hasSpringBoots ? "found" : "missing"} title={game.hasSpringBoots ? "Spring boots found" : "Spring boots not found"}><img src={ASSETS.springBoots} alt="" /></span>}
-                    {objectKinds.has("antidote-leaf") && <span className={game.hasAntidoteLeaf ? "found" : "missing"} title={game.hasAntidoteLeaf ? "Antidote leaf found" : "Antidote leaf not found"}><img src={ASSETS.antidoteLeaf} alt="" /></span>}
-                    {keyColors.length > 0 && <span className={game.keys.length === keyColors.length ? "found" : "missing"}><img src={ASSETS.key} alt="" /> {game.keys.length}/{keyColors.length}</span>}
-                  </div>
-                )}
-                {explorationMode && <span className="exploration-view-pill" title="Ame explores six tiles at a time"><img src={ASSETS.navMazes} alt="" /> 6 × 6 view</span>}
-                {testerToolsEnabled && (
-                  <button
-                    className="tester-skip-button"
-                    onClick={openTesterPicker}
-                    title="Open the tester maze picker"
-                    aria-label={`Open tester maze picker. Current maze ${campaignIndex >= 0 ? campaignIndex + 1 : "is a surprise"} of ${CURATED_LEVELS.length}. Tester rewards and progress are off.`}
-                  ><img src={ASSETS.navMazes} alt="" /><span>Pick maze</span></button>
-                )}
-                {levelStory && (
-                  <button
-                    className="story-replay-button"
-                    onClick={(event) => openStory(event.currentTarget)}
-                    aria-label={"Read chapter " + levelStory.chapter + ": " + levelStory.title}
-                    title="Read this maze's story"
-                  ><img src={ASSETS.navBook} alt="" /><span>Story</span></button>
-                )}
-                <button className="big-maze-button" aria-pressed={bigMaze} onClick={toggleBigMaze} title="Make the maze larger">{bigMaze ? "↙ Normal" : "⛶ Big maze"}</button>
-                <button className="surprise-button" onClick={() => requestEnterLevel(makeSurprise())} title="Make a new solvable maze"><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /> New maze</button>
-                <div className="step-pill" aria-label={`${game.steps} ${game.steps === 1 ? "step" : "steps"}`}><img src={ASSETS.boots} alt="" />{game.steps}</div>
-              </div>
-            </div>
-
+          <MazeViewport name={level.name}>
             <div
               ref={boardRef}
+              data-focus-id="maze-board"
+              data-scene-slot="board"
               className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}${portalPresentation ? " portal-active" : ""}${doorOpeningPresentation ? " door-opening-active" : ""}`}
               data-terrain-theme={terrainTheme.id}
               style={{
@@ -2751,7 +2178,7 @@ function App() {
               onLostPointerCapture={finishBoardPointer}
               onContextMenu={(event) => event.preventDefault()}
             >
-              <div className="camera-world" style={cameraWorldStyle(level, cameraWindow)} aria-hidden="true">
+              <div className="camera-world" data-scene-slot="world" style={cameraWorldStyle(level, cameraWindow)} aria-hidden="true">
                 <MazeTerrain level={level} camera={fullLevelWindow(level)} />
 
                 {worldObjects.map((object) => (
@@ -2773,11 +2200,11 @@ function App() {
                         className="animal-stack"
                         data-flourish={animalPersonality(object.species).flourish}
                       >
-                        <img className="animal-sprite" src={animalArt(object.species)} alt="" draggable={false} />
-                        <img className="animal-cage" src={resolveCageArt(object.cageStyle).src} alt="" draggable={false} />
+                        <CatalogueImage usage="field" className="animal-sprite" src={animalArt(object.species)} alt="" draggable={false} />
+                        <CatalogueImage usage="field" className="animal-cage" src={resolveCageArt(object.cageStyle).src} alt="" draggable={false} />
                       </div>
                     ) : (
-                      <img className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
+                      <CatalogueImage usage="field" className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
                     )}
                     {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
                     {object.kind === "potion" && <span className="item-amount">+{object.amount}</span>}
@@ -2798,7 +2225,7 @@ function App() {
                         style={worldLayerStyle(point, level)}
                         key={animal.id}
                       >
-                        <img src={animalArt(animal.species)} alt="" draggable={false} />
+                        <CatalogueImage usage="field" src={animalArt(animal.species)} alt="" draggable={false} />
                       </div>
                     ))}
                   </div>
@@ -2833,6 +2260,7 @@ function App() {
 
               {doorOpeningPresentation && isInsideWindow(doorOpeningPresentation.at, cameraWindow) && (
                 <div
+                  data-scene-slot="effects"
                   className={`door-opening-presentation door-magic-${doorOpeningPresentation.color}`}
                   data-key-color={doorOpeningPresentation.color}
                   data-sfx-cue="colour-lock-chime-and-magic-burst"
@@ -2845,7 +2273,7 @@ function App() {
                   aria-hidden="true"
                 >
                   <span className="door-opening-halo" />
-                  <img className="door-opening-sprite" src={doorOpeningPresentation.doorSrc} alt="" draggable={false} />
+                  <CatalogueImage usage="field" className="door-opening-sprite" src={doorOpeningPresentation.doorSrc} alt="" draggable={false} />
                   <b className="door-opening-motif">{LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].symbols[0]}</b>
                   <span className="door-opening-particles">
                     {createDoorBurstParticles(doorOpeningPresentation.color).map((particle, index) => (
@@ -2865,6 +2293,7 @@ function App() {
 
               {battlePresentation && isInsideWindow(battlePresentation.at, cameraWindow) && (
                 <div
+                  data-scene-slot="effects"
                   className="battle-presentation battle-won"
                   data-sfx-cue="three-clashes-power-transfer-and-victory"
                   aria-hidden="true"
@@ -2881,12 +2310,12 @@ function App() {
                   } as CSSProperties}
                 >
                   <div className="battle-combatant battle-ame" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
-                    <img className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    {game.hasSword && <img className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
+                    <CatalogueImage usage="field" className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    {game.hasSword && <CatalogueImage usage="field" className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                   </div>
                   <div className="battle-combatant battle-enemy" style={cameraLayerStyle(battlePresentation.at, cameraWindow)}>
-                    <img className="battle-sprite" src={battlePresentation.enemySrc} alt="" draggable={false} />
+                    <CatalogueImage usage="field" className="battle-sprite" src={battlePresentation.enemySrc} alt="" draggable={false} />
                     <span className="power-badge enemy-power">{presentedEnemyPower ?? battlePresentation.enemyPower}</span>
                   </div>
                   <div
@@ -2917,6 +2346,7 @@ function App() {
 
               {rescuePresentation && isInsideWindow(rescuePresentation.at, cameraWindow) && (
                 <div
+                  data-scene-slot="effects"
                   className="rescue-presentation"
                   data-animal-motion={animalPersonality(rescuePresentation.species).motion}
                   data-flourish={animalPersonality(rescuePresentation.species).flourish}
@@ -2924,9 +2354,9 @@ function App() {
                   style={cameraLayerStyle(rescuePresentation.at, cameraWindow)}
                   aria-hidden="true"
                 >
-                  <img className="rescue-presentation-pet" src={animalArt(rescuePresentation.species)} alt="" draggable={false} />
-                  <span className="rescue-cage-half cage-half-left"><img src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
-                  <span className="rescue-cage-half cage-half-right"><img src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
+                  <CatalogueImage usage="field" className="rescue-presentation-pet" src={animalArt(rescuePresentation.species)} alt="" draggable={false} />
+                  <span className="rescue-cage-half cage-half-left"><CatalogueImage usage="field" src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
+                  <span className="rescue-cage-half cage-half-right"><CatalogueImage usage="field" src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
                   <span className="rescue-happy-burst">
                     {Array.from({ length: 7 }, (_, index) => (
                       <i style={{ "--heart-index": index } as CSSProperties} key={index}>{index % 2 ? "✦" : "♥"}</i>
@@ -2937,6 +2367,7 @@ function App() {
 
               {jumpPresentation && (
                 <div
+                  data-scene-slot="effects"
                   className="jump-presentation"
                   data-sfx-cue="spring-boots-boing"
                   data-hole-count={jumpPresentation.holeCount}
@@ -2952,9 +2383,9 @@ function App() {
                 >
                   <i className="jump-presentation-shadow" />
                   <div className="jump-presentation-body">
-                    <img className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    <img className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} />
-                    {game.hasSword && <img className="jump-presentation-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                    <CatalogueImage usage="field" className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    <CatalogueImage usage="field" className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} />
+                    {game.hasSword && <CatalogueImage usage="field" className="jump-presentation-weapon" src={weaponArt.src} alt="" draggable={false} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                     <i className="jump-spring-squash" />
                   </div>
@@ -2963,16 +2394,17 @@ function App() {
 
               {portalPresentation && (
                 <div
+                  data-scene-slot="effects"
                   className={`portal-presentation portal-${portalPresentation.pair}`}
                   style={cameraLayerStyle(portalPresentation.to, cameraWindow)}
                   data-sfx-cue="magic-flower-whoosh"
                   aria-hidden="true"
                 >
-                  <img className="portal-presentation-pad" src={resolvePortalArt(portalPresentation.pair).src} alt="" draggable={false} />
+                  <CatalogueImage usage="field" className="portal-presentation-pad" src={resolvePortalArt(portalPresentation.pair).src} alt="" draggable={false} />
                   <span className="portal-presentation-rings"><i /><i /><i /></span>
                   <div className="portal-presentation-body">
-                    <img className="portal-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    {game.hasSword && <img className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "portal")} />}
+                    <CatalogueImage usage="field" className="portal-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    {game.hasSword && <CatalogueImage usage="field" className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "portal")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                   </div>
                   <span className="portal-presentation-sparkles">✦ <b>{resolvePortalArt(portalPresentation.pair).motif}</b> ✦</span>
@@ -2980,12 +2412,13 @@ function App() {
               )}
 
               <div
+                data-scene-slot="actors"
                 className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
                 style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
               >
-                <img className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                {game.hasSword && <img className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
+                <CatalogueImage usage="field" className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                {game.hasSword && <CatalogueImage usage="field" className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
                 <span className="power-badge player-power">{displayedPower}</span>
               </div>
 
@@ -2998,178 +2431,39 @@ function App() {
                   aria-atomic="true"
                   style={mapPickupToast.at ? cameraNoticeStyle(mapPickupToast.at, cameraWindow) : undefined}
                 >
-                  {mapPickupToast.icon && <img src={mapPickupToast.icon} alt="" />}
+                  {mapPickupToast.icon && <CatalogueImage src={mapPickupToast.icon} alt="" />}
                   <strong>{mapPickupToast.text}</strong>
                 </div>
               )}
             </div>
 
-            {explorationMode && bigMaze && (
-              <div className="big-maze-minimap">
-                <MiniMap
-                  level={level}
-                  position={game.position}
-                  camera={cameraWindow}
-                  revealed={revealedTiles}
-                  currentView={currentViewTiles}
-                  objects={activeObjects}
-                  newExplorer={game.steps === 0}
-                  highlightedObjectId={guidedObjectId}
-                  compact
-                />
-              </div>
-            )}
-
             <p className="sr-only" id="maze-status">{mazeStatus}</p>
 
-            <div className={`feedback-bar tone-${feedback.tone}`} aria-live={mapPickupToast ? "off" : "polite"} aria-atomic="true">
-              <img className="feedback-icon" src={feedback.icon} alt="" />
+            <div className="sr-only" data-scene-slot="feedback" aria-live={mapPickupToast || feedback.sound === "step" || feedback.sound === "select" ? "off" : "polite"} aria-atomic="true">
+              <CatalogueImage className="feedback-icon" src={feedback.icon} alt="" />
               <span>{feedback.text}</span>
             </div>
-          </section>
-
-          <aside className="sidebar" aria-label="Ame and adventure bag">
-            <div className="brand-and-wallet">
-              <div className={`wallet-pill${treasurePresentation?.currency === "gold" ? " receiving-treasure" : ""}`} title="Gold Stars found in mazes and earned from victories.">
-                <img className="wallet-pouch" src={ASSETS.coinPouch} alt="" />
-                <span className="wallet-copy"><small>Gold Stars</small><strong>{displayedGold}</strong></span>
-              </div>
-              <div className={`wallet-pill science-wallet${treasurePresentation?.currency === "science" ? " receiving-treasure" : ""}`} title="Science Points found while exploring curious side paths.">
-                <img className="wallet-pouch" src={ASSETS.treasureScienceGears} alt="" />
-                <span className="wallet-copy"><small>Science</small><strong>{displayedScience}</strong></span>
-              </div>
-            </div>
-
-            <section
-              className={`hero-card${battlePresentation ? " power-rising" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
-              style={battlePresentation
-                ? { "--battle-duration": `${battlePresentation.durationMs}ms` } as CSSProperties
-                : undefined}
-            >
-              <div className="portrait-wrap">
-                <img src={ASSETS.portrait} alt="Ame, a smiling blonde adventurer with a lavender backpack" />
-                <span className="portrait-spark sparkle-a" aria-hidden="true">✦</span>
-                <span className="portrait-spark sparkle-b" aria-hidden="true">✧</span>
-              </div>
-              <div className="hero-copy">
-                <span className="tiny-label">Ame's Power</span>
-                <strong className="big-power">{displayedPower}</strong>
-                <span className="power-help">Match or beat wins!</span>
-              </div>
-            </section>
-
-            <div className={`adventure-dashboard${explorationMode ? " exploration-dashboard" : ""}`}>
-              {explorationMode && !bigMaze && (
-                <MiniMap
-                  level={level}
-                  position={game.position}
-                  camera={cameraWindow}
-                  revealed={revealedTiles}
-                  currentView={currentViewTiles}
-                  objects={activeObjects}
-                  newExplorer={game.steps === 0}
-                  highlightedObjectId={guidedObjectId}
-                />
-              )}
-              <div className="adventure-details">
-                <section className="objective-card">
-                  <img className="objective-icon" src={ASSETS.goal} alt="" />
-                  <div>
-                    <span className="tiny-label">Right now</span>
-                    <strong>{level.objective}</strong>
-                    {levelStory && <small className="puzzle-power-line">Puzzle power: {levelStory.puzzlePower}</small>}
-                  </div>
-                  <button
-                    className="objective-hint-button"
-                    onClick={(event) => openHint(event.currentTarget)}
-                    aria-label="Show a gentle hint for this maze"
-                    title="Show a gentle hint"
-                  ><img src={ASSETS.navHelp} alt="" /><b>Hint</b></button>
-                </section>
-
-                <section className="rescue-card" aria-label={`${rescuedSpecies.length} of ${animalObjects.length} animal friends rescued`}>
-                  <div className="rescue-heading">
-                    <div><span className="tiny-label">Optional adventure</span><strong>Rescue the friends</strong></div>
-                    <span className="rescue-count">{rescuedSpecies.length}/{animalObjects.length}</span>
-                  </div>
-                  <div className={`rescue-list rescue-count-${Math.min(5, animalObjects.length)}`}>
-                    {animalObjects.map((animal) => {
-                      const rescued = game.rescuedAnimalIds.includes(animal.id);
-                      return (
-                        <div className={`rescue-friend ${rescued ? "rescued" : ""}`} key={animal.id} aria-label={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`} title={`${ANIMAL_LABELS[animal.species]}: ${rescued ? "rescued" : "waiting in the maze"}`}>
-                          <div className="rescue-icon">
-                            <img src={animalArt(animal.species)} alt="" decoding="async" />
-                            {!rescued && <img className="cage-mini" src={resolveCageArt(animal.cageStyle).src} alt="" />}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
-
-                <section className="bag-card" aria-label="Adventure bag">
-                  <div className="section-heading">
-                    <div><strong>Adventure bag</strong></div>
-                    <span className="bag-count">{game.collectedObjectIds.length}</span>
-                  </div>
-                  <div className="inventory-grid">
-                    {objectKinds.has("sword") && <InventorySlot label={weaponArt.label} image={weaponArt.src} found={game.hasSword} />}
-                    {objectKinds.has("boots") && <InventorySlot label="Splash boots" image={ASSETS.boots} found={game.hasBoots} />}
-                    {objectKinds.has("spring-boots") && <InventorySlot label="Spring boots" image={ASSETS.springBoots} found={game.hasSpringBoots} />}
-                    {objectKinds.has("antidote-leaf") && <InventorySlot label="Antidote leaf" image={ASSETS.antidoteLeaf} found={game.hasAntidoteLeaf} />}
-                    {keyColors.map((color) => (
-                      <InventorySlot key={color} label={resolveKeyArt(color).label} image={resolveKeyArt(color).src} found={game.keys.includes(color)} />
-                    ))}
-                    {!objectKinds.has("sword") && !objectKinds.has("boots") && !objectKinds.has("spring-boots") && !objectKinds.has("antidote-leaf") && keyColors.length === 0 && (
-                      <div className="empty-bag"><img src={ASSETS.coinPouch} alt="" /><strong>Bag ready!</strong></div>
-                    )}
-                  </div>
-                  {ownedCollectibles.length > 0 && (
-                    <div className="collection-strip owned-collection" aria-label="Ame's stickers, medals, and badges">
-                      {ownedCollectibles.map((item) => (
-                        <div className="collection-item owned" key={item.id} title={item.label}><img src={item.art} alt={item.label} /></div>
-                      ))}
-                    </div>
-                  )}
-                </section>
-              </div>
-            </div>
-
-            <section className="controls-card">
-              <div className="controls-copy">
-                <span className="tiny-label">{firstMoveNudge ? "Your first step" : "Move one square"}</span>
-                <strong>
-                  {firstMoveNudge
-                    ? <>Try the glowing {suggestedMoveDirection ? DIRECTION_ICONS[suggestedMoveDirection] : "arrow"} button!</>
-                    : <><span className="desktop-controls-copy">Arrow keys · WASD · click, hold or drag</span><span className="touch-controls-copy">Touch, hold or drag on the maze</span></>}
-                </strong>
-              </div>
-              <div className="dpad" aria-label="Movement buttons">
-                <button className={`dpad-up${suggestedMoveDirection === "up" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "up")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("up"); }} aria-label="Move up">▲</button>
-                <button className={`dpad-left${suggestedMoveDirection === "left" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "left")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("left"); }} aria-label="Move left">◀</button>
-                <span className="dpad-center" aria-hidden="true">✦</span>
-                <button className={`dpad-right${suggestedMoveDirection === "right" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "right")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("right"); }} aria-label="Move right">▶</button>
-                <button className={`dpad-down${suggestedMoveDirection === "down" ? " suggested-move" : ""}`} onPointerDown={(event) => startDpadHold(event, "down")} onPointerUp={stopDpadHold} onPointerCancel={stopDpadHold} onLostPointerCapture={stopDpadHold} onClick={(event) => { if (event.detail === 0) attemptMove("down"); }} aria-label="Move down">▼</button>
-              </div>
-            </section>
-
-            <footer className="utility-row">
-              <button onClick={showTitle}><img src={ASSETS.navHome} alt="" /><span>Home</span></button>
-              <button onClick={(event) => openLevelPicker(event.currentTarget)}><img src={ASSETS.navMazes} alt="" /><span>Mazes</span></button>
-              <button onClick={showAchievements}><img src={ASSETS.navBook} alt="" /><span>Book</span></button>
-              <button onClick={(event) => {
-                modalReturnFocus.current = event.currentTarget;
-                setHelpOpen(true);
-                playSound("menu", muted);
-              }}><img src={ASSETS.navHelp} alt="" /><span>Help</span></button>
-              <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={toggleSound}><img src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /><span>Sound</span></button>
-              <button aria-pressed={restartArmed} className={restartArmed ? "restart-armed" : ""} onClick={armRestart}><img src={ASSETS.navRestart} alt="" /><span>{restartArmed ? "Again!" : "Restart"}</span></button>
-            </footer>
-          </aside>
-        </div>
+          </MazeViewport>
+          <AdventureHud model={hudModel} name={level.name}
+            chapter={isSurprise ? "Surprise maze" : `Story maze ${campaignIndex + 1} of ${CURATED_LEVELS.length}`}
+            power={displayedPower} gold={displayedGold} science={displayedScience} steps={game.steps}
+            tester={testerRun} suggested={suggestedMoveDirection}
+            map={<MiniMap level={level} position={game.position} camera={cameraWindow}
+              revealed={revealedTiles} currentView={explorationMode ? currentViewTiles : new Set(level.terrain.flatMap((row,y) => row.map((_,x) => toTileKey({x,y}))))}
+              objects={activeObjects.filter(object => object.kind !== "treasure")} highlightedObjectId={guidedObjectId} />}
+            onHint={openHint} onDetail={openArtDetail} onMove={attemptMove} onRead={clearHeldInput} startHold={startDpadHold} stopHold={stopDpadHold}
+            feedback={feedback.sound !== "step" && feedback.sound !== "select" && <p className={`feedback-bar tone-${feedback.tone}`}><CatalogueImage src={feedback.icon} alt="" /><span>{feedback.text}</span></p>}
+            actions={utilityActions}
+            onMore={trigger => { modalReturnFocus.current = trigger; clearHeldInput(); setMoreOpen(true); }}
+          />
+        </PlayShell>
 
         {storyOpen && levelStory && (
-          <StoryInterlude lore={levelStory} onBegin={dismissStory} />
+          <StoryDialog title={`Chapter ${levelStory.chapter}: ${levelStory.title}`}
+            returnFocus={modalReturnFocus.current} onBegin={dismissStory}
+            turns={[{ id: `chapter-${levelStory.chapter}`, speaker: STORY_SPEAKER_LABELS[levelStory.speaker], portrait: storySpeakerArt(levelStory.speaker),
+              line: <>{levelStory.intro.map(paragraph => <p key={paragraph}>{paragraph}</p>)}<blockquote>“{levelStory.quote}”</blockquote></> }]}
+            learning={<div className="story-thinking-strip"><strong>Puzzle power: {levelStory.puzzlePower}</strong><p>{levelStory.tryThis}</p></div>} />
         )}
 
         {helpOpen && (
@@ -3191,9 +2485,10 @@ function App() {
         )}
 
         {hintOpen && currentHint && (
-          <Modal title="A little hint" onClose={closeHint} returnFocus={modalReturnFocus.current}>
+          <Modal title="A little hint" variant="hint" onClose={closeHint} returnFocus={modalReturnFocus.current}>
+            <p className="hint-objective"><strong>Right now:</strong> {hudModel.objective}</p>
             <div className="hint-card">
-              <img className="hint-spark" src={ASSETS.navHelp} alt="" />
+              <CatalogueImage className="hint-spark" src={ASSETS.navHelp} alt="" />
               <p>{currentHint.text}</p>
               <small>Hint {currentHint.tier + 1} of 4 · ask again for a little more help</small>
             </div>
@@ -3202,13 +2497,13 @@ function App() {
         )}
 
         {blockerHint && (
-          <Modal title="You need something!" onClose={closeBlockerHint} returnFocus={modalReturnFocus.current}>
+          <Modal title="You need something!" variant="blocker" onClose={closeBlockerHint} returnFocus={modalReturnFocus.current}>
             <div className="blocker-hint-card">
-              <img src={blockerHint.itemSrc} alt={blockerHint.itemName} />
+              <PresentationArt art={blockerHint.itemArt} label={blockerHint.itemName} />
               <div>
                 <strong>{blockerHint.message}</strong>
                 <p>{blockerHint.count >= 3
-                  ? "I’ve marked it with a pulsing sparkle on your map!"
+                  ? "I’ve marked it with a sparkle on your map!"
                   : "Try another path and come back when you find it."}</p>
               </div>
             </div>
@@ -3217,12 +2512,12 @@ function App() {
         )}
 
         {game.status === "won" && completion && !presentationActive && (
-          <Modal title="Maze solved!" celebratory returnFocus={modalReturnFocus.current}>
+          <Modal title="Maze solved!" variant="celebration" returnFocus={modalReturnFocus.current}>
             <div className="celebration-burst" aria-hidden="true">
               {Array.from({ length: 12 }, (_, index) => <i className="confetti-piece" style={{ "--i": index } as CSSProperties} key={index} />)}
             </div>
             <div className="win-summary">
-              <img className="win-star-art" src={ASSETS.goal} alt="A sparkling golden star portal" />
+              <CatalogueImage className="win-star-art" src={ASSETS.goal} alt="A sparkling golden star portal" />
               <div><strong>Wonderful, Ame!</strong><span>The star was found in {game.steps} {game.steps === 1 ? "step" : "steps"}.</span></div>
             </div>
             <div
@@ -3241,16 +2536,16 @@ function App() {
                     key={animal.id}
                     title={animalPersonality(animal.species).greeting}
                   >
-                    <img src={animalArt(animal.species)} alt={ANIMAL_LABELS[animal.species]} decoding="async" />
+                    <CatalogueImage src={animalArt(animal.species)} alt={ANIMAL_LABELS[animal.species]} decoding="async" />
                     <span>{rescued ? animalPersonality(animal.species).greeting : "Next time"}</span>
                   </div>
                 );
               })}
             </div>
-            {animalObjects.length > 0 && completion.rescuedSpecies.length === animalObjects.length && <div className="perfect-banner"><img src={ASSETS.rewardAnimalFriendSticker} alt="" /> Perfect rescue! Every friend is safe!</div>}
+            {animalObjects.length > 0 && completion.rescuedSpecies.length === animalObjects.length && <div className="perfect-banner"><CatalogueImage src={ASSETS.rewardAnimalFriendSticker} alt="" /> Perfect rescue! Every friend is safe!</div>}
             {levelStory && (
               <div className="story-outro-card">
-                <img src={storySpeakerArt(levelStory.speaker)} alt="" />
+                <CatalogueImage src={storySpeakerArt(levelStory.speaker)} alt="" />
                 <div>
                   <small>Chapter {levelStory.chapter} complete · {levelStory.puzzlePower}</small>
                   <p>{levelStory.outro}</p>
@@ -3259,12 +2554,12 @@ function App() {
             )}
             {completion.testerRun ? (
               <div className="tester-preview-banner" role="status">
-                <img src={ASSETS.navMazes} alt="" />
+                <CatalogueImage src={ASSETS.navMazes} alt="" />
                 <div><strong>Tester preview complete</strong><small>Nothing was saved and rewards stayed unchanged.</small></div>
               </div>
             ) : (
               <div className="reward-panel">
-                <img className="reward-pouch" src={ASSETS.coinPouch} alt="A pouch of gold star coins" />
+                <CatalogueImage className="reward-pouch" src={ASSETS.coinPouch} alt="A pouch of gold star coins" />
                 <div className="reward-copy">
                   <span>Maze reward</span>
                   <strong>+{completion.reward.gold} gold stars</strong>
@@ -3277,7 +2572,7 @@ function App() {
               <div className="collection-strip reward-new" aria-label="New rewards">
                 {newCollectibles.map((item) => (
                   <div className="collection-pop" key={item.id}>
-                    <img className="modal-reward-art" src={item.art} alt="" />
+                    <CatalogueImage className="modal-reward-art" src={item.art} alt="" />
                     <div><small>{item.kind}</small><strong>{item.label}</strong></div>
                   </div>
                 ))}
@@ -3303,21 +2598,33 @@ function App() {
         )}
 
         {tooStrongEncounter && (
-          <Modal title="Too strong!" returnFocus={modalReturnFocus.current}>
-            <img className="modal-art too-strong-enemy-art" src={tooStrongEncounter.enemySrc} alt={`A friendly ${tooStrongEncounter.enemyLabel.toLowerCase()}`} />
+          <Modal title="Too strong!" variant="blocker" onClose={dismissTooStrongEncounter} returnFocus={modalReturnFocus.current} footer={<div className="modal-actions"><button className="primary-button" onClick={dismissTooStrongEncounter}>I’ll go get stronger.</button><button onClick={() => { dismissTooStrongEncounter(); openHint(document.querySelector<HTMLElement>(".maze-board")!); }}>Show Required Path</button></div>}>
+            <div className="encounter-overview"><PresentationArt art={tooStrongEncounter.enemySrc} label={tooStrongEncounter.enemyLabel} compact />
             <div className="power-equation too-strong-equation" aria-label={`Ame has Power ${tooStrongEncounter.event.playerPower}, which is less than ${tooStrongEncounter.enemyLabel} with Power ${tooStrongEncounter.event.enemyPower}`}>
               <span className="power-side ame-side"><small>Ame</small><strong>{tooStrongEncounter.event.playerPower}</strong></span>
               <b aria-hidden="true">&lt;</b>
               <span className="power-side enemy-side"><small>{tooStrongEncounter.enemyLabel}</small><strong>{tooStrongEncounter.event.enemyPower}</strong></span>
-            </div>
+            </div></div>
             <p className="modal-lead">Ame stayed safely one square away. Find more Power, then come back!</p>
-            <button className="primary-button too-strong-action" onClick={dismissTooStrongEncounter}>I’ll go get stronger.</button>
+            <div className="power-opportunities" data-search-state={powerGuidance ? "complete" : "pending"} data-search-exhausted={powerGuidance?.exhausted} aria-busy={!powerGuidance}>{powerGuidance?.opportunities.map(object => <article key={object.id} data-opportunity-id={object.id}><CatalogueImage src={spriteFor(object)} alt={object.kind === "enemy" ? resolveEnemyArt(object.style).label : "Power Potion"} displayPx={64} /><strong>{object.kind === "enemy" ? "Fight weaker monsters" : "Find a Power Potion"}</strong><p>{object.kind === "enemy" ? `${resolveEnemyArt(object.style).label} · Power ${object.power}` : "A helpful potion is still in this maze."}</p></article>)}</div>
           </Modal>
         )}
 
           </>
         )}
 
+        {moreOpen && <Modal title="More adventures" onClose={() => setMoreOpen(false)} returnFocus={modalReturnFocus.current}>
+          <h3>{level.name}</h3><p>{hudModel.objective}</p>
+          <div className="more-actions">{utilityActions.map(action => <button key={action.id} data-focus-id={action.id} aria-pressed={action.pressed} onClick={event => { if (action.id !== "restart") setMoreOpen(false); action.run((modalReturnFocus.current ?? event.currentTarget) as HTMLButtonElement); }}>{action.art && <CatalogueImage art={action.art} alt="" />}<span>{action.label}</span></button>)}</div>
+          <h3>Bag details</h3><div className="more-actions">{hudModel.slots.map(slot => <button key={slot.id} data-focus-id={`bag:${slot.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:slot.art,label:slot.label,description:`${slot.found ? "Found." : "Still to find."} ${slot.description}`},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={slot.art} alt="" /><span>{slot.label} · {slot.found ? "Found" : "Not found"}</span></button>)}</div>
+          <h3>Friends details · optional</h3><div className="more-actions">{hudModel.friends.map(friend => <button key={friend.id} data-focus-id={`friend:${friend.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:friend.art as import("./ui/art").UiArt,label:friend.label,description:friend.rescued ? "Safe with Ame!" : "Waiting in the maze. Friends are optional."},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={friend.art as import("./ui/art").UiArt} alt="" /><span>{friend.label} · {friend.rescued ? "Rescued" : "Waiting"}</span></button>)}</div>
+        </Modal>}
+        {soundOpen && <SoundDialog transport={musicTransport} onClose={() => setSoundOpen(false)} returnFocus={modalReturnFocus.current} />}
+        {artDetail && <Modal title={artDetail.label} variant="celebration" onClose={() => setArtDetail(null)} returnFocus={modalReturnFocus.current}>
+          <PresentationArt art={artDetail.art} label={artDetail.label} /><p className="modal-lead">{artDetail.description}</p>
+          <button className="primary-button" onClick={() => setArtDetail(null)}>Back to the adventure</button>
+        </Modal>}
+        {screen === "game" && game.status === "lost" && <Modal title="Let's try again" onClose={() => loadLevel(level)}><p>A fresh start is ready.</p><button className="primary-button" onClick={() => loadLevel(level)}>Restart</button></Modal>}
         {levelPickerOpen && (
           <Modal title="Choose a maze" onClose={closeLevelPicker} returnFocus={modalReturnFocus.current}>
             <p className="modal-lead level-picker-lead">Replay any unlocked story maze and bring home friends you missed.</p>
@@ -3401,7 +2708,7 @@ function App() {
             onClose={closePendingAdventure}
             returnFocus={modalReturnFocus.current}
           >
-            <img className="modal-art" src={ASSETS.portrait} alt="Ame smiling with her adventure backpack" />
+            <CatalogueImage className="modal-art" src={ASSETS.portrait} alt="Ame smiling with her adventure backpack" />
             <p className="modal-lead">
               <strong>{level.name}</strong> is waiting at {game.steps} {game.steps === 1 ? "step" : "steps"}.
               Starting <strong>{pendingAdventure.level.name}</strong> will restart this run.
@@ -3427,7 +2734,7 @@ function App() {
             onClose={closeResetProgress}
             returnFocus={modalReturnFocus.current}
           >
-            <img className="modal-art" src={ASSETS.portrait} alt="Ame smiling with her adventure backpack" />
+            <CatalogueImage className="modal-art" src={ASSETS.portrait} alt="Ame smiling with her adventure backpack" />
             <p className="modal-lead">
               This will forget every maze record, gold star, Science Point, rescued friend, sticker, medal, badge, and the current maze.
               You’ll begin again from Story Maze 1. This cannot be undone.
@@ -3443,7 +2750,7 @@ function App() {
       </div>
 
       <div className="rotate-message" role="status">
-        <img src={ASSETS.portrait} alt="" />
+        <CatalogueImage src={ASSETS.portrait} alt="" />
         <strong>Turn me sideways</strong>
         <span>Ame's maze likes landscape mode.</span>
       </div>
@@ -3451,599 +2758,8 @@ function App() {
   );
 }
 
-interface FrontDoorScreenProps {
-  readonly playRef: React.RefObject<HTMLButtonElement | null>;
-  readonly muted: boolean;
-  readonly onPlay: () => void;
-}
-
-function FrontDoorScreen({ playRef, muted, onPlay }: FrontDoorScreenProps) {
-  const [exitNotice, setExitNotice] = useState(false);
-
-  const requestExit = () => {
-    playSound("menu", muted);
-    window.close();
-    window.setTimeout(() => setExitNotice(true), 180);
-  };
-
-  return (
-    <section className="front-door-screen" aria-labelledby="front-door-title">
-      <img
-        className="front-door-background"
-        src={ASSETS.titleIntroBackground}
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        fetchPriority="high"
-      />
-      <div className="front-door-shade" aria-hidden="true" />
-      <div className="front-door-content">
-        <h1 id="front-door-title" className="sr-only">Maze so Puzzle</h1>
-        <img
-          className="front-door-logo"
-          src={ASSETS.gameLogo}
-          srcSet={`${ASSETS.gameLogoCompact} 512w, ${ASSETS.gameLogo} 1024w`}
-          sizes="(max-width: 760px) 58vw, 43vw"
-          alt=""
-          aria-hidden="true"
-          decoding="async"
-        />
-        <div className="front-door-actions">
-          <button ref={playRef} className="front-door-play" onClick={onPlay}>
-            <img src={ASSETS.goal} alt="" />
-            <span>Play</span>
-          </button>
-          <button className="front-door-exit" onClick={requestExit}>
-            Exit
-          </button>
-        </div>
-        {exitNotice && (
-          <p className="front-door-exit-note" role="status">
-            Your browser keeps this tab open. It is safe to close it whenever you are ready.
-          </p>
-        )}
-      </div>
-      <span className="front-door-version">v{BUILD_VERSION}</span>
-    </section>
-  );
-}
-
-interface TitleScreenProps {
-  readonly progress: PlayerProgress;
-  readonly updatedMazeRestarted: boolean;
-  readonly activeRun: { readonly name: string; readonly steps: number } | null;
-  readonly blocked: boolean;
-  readonly muted: boolean;
-  readonly playRef: React.RefObject<HTMLButtonElement | null>;
-  readonly onPlay: () => void;
-  readonly onSurprise: () => void;
-  readonly onAchievements: () => void;
-  readonly onChooseMaze: (trigger: HTMLElement) => void;
-  readonly onRequestReset: (trigger: HTMLElement) => void;
-  readonly onOpenTester: () => void;
-  readonly onToggleSound: () => void;
-}
-
-function TitleScreen({
-  progress,
-  updatedMazeRestarted,
-  activeRun,
-  blocked,
-  muted,
-  playRef,
-  onPlay,
-  onSurprise,
-  onAchievements,
-  onChooseMaze,
-  onRequestReset,
-  onOpenTester,
-  onToggleSound,
-}: TitleScreenProps) {
-  const solvedIds = Object.keys(progress.bestResultsByLevel);
-  const storySolved = CURATED_LEVELS.filter((level) => solvedIds.includes(level.id)).length;
-  const hasProgress = solvedIds.length > 0 || progress.gold > 0 || progress.sciencePoints > 0 || progress.unlockedLevelCount > 1;
-  const nextStoryNumber = getNextStoryIndex(progress, CURATED_LEVELS.map((storyLevel) => storyLevel.id)) + 1;
-
-  return (
-    <section className="title-screen" aria-labelledby="game-title" inert={blocked ? true : undefined} aria-hidden={blocked || undefined}>
-      <img
-        className="title-background"
-        src={ASSETS.titleBackground}
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        fetchPriority="high"
-        onError={(event) => {
-          event.currentTarget.onerror = null;
-          event.currentTarget.src = ASSETS.titleBackgroundFallback;
-        }}
-      />
-      <img
-        className="title-logo"
-        src={ASSETS.gameLogo}
-        srcSet={`${ASSETS.gameLogoCompact} 512w, ${ASSETS.gameLogo} 1024w`}
-        sizes="(max-width: 640px) 33vw, 35vw"
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        onError={(event) => {
-          event.currentTarget.onerror = null;
-          event.currentTarget.srcset = "";
-          event.currentTarget.src = ASSETS.gameLogoFallback;
-        }}
-      />
-      <img
-        className="title-hero"
-        src={ASSETS.homeHeroSplash}
-        alt=""
-        aria-hidden="true"
-        decoding="async"
-        onError={(event) => {
-          event.currentTarget.onerror = null;
-          event.currentTarget.src = ASSETS.homeHeroSplashFallback;
-        }}
-      />
-      <div className="title-fireflies" aria-hidden="true">
-        {Array.from({ length: 12 }, (_, index) => (
-          <i
-            key={index}
-            style={{
-              "--firefly-x": `${7 + index * 7.2}%`,
-              "--firefly-y": `${8 + index * 7}%`,
-              "--firefly-size": `${3 + (index % 3) * 2}px`,
-              "--firefly-speed": `${3.5 + (index % 4) * 0.7}s`,
-              "--firefly-delay": `${index * -0.31}s`,
-            } as CSSProperties}
-          />
-        ))}
-      </div>
-
-      <button
-        className="title-sound"
-        aria-label={muted ? "Turn sound on" : "Turn sound off"}
-        aria-pressed={!muted}
-        onClick={onToggleSound}
-      ><img src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /></button>
-
-      <div className="title-copy">
-        <h1 id="game-title" className="sr-only">Maze so Puzzle</h1>
-        <p className="title-welcome">Follow the paths, grow Ame's Power, and help every little friend find their way home.</p>
-        {updatedMazeRestarted && (
-          <p className="title-welcome" role="status">
-            This maze was updated, so Ame restarted it. Your Adventure Book is safe.
-          </p>
-        )}
-
-        <div className="title-actions">
-          <button ref={playRef} className="title-play-button" onClick={onPlay}>
-            <span aria-hidden="true"><img src={ASSETS.goal} alt="" /></span>
-            <span>
-              <strong>{activeRun || hasProgress ? "Continue" : "Begin adventure"}</strong>
-              <small>{activeRun ? `${activeRun.name} · ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : hasProgress ? `Story maze ${nextStoryNumber} awaits` : "A lovely first maze awaits"}</small>
-            </span>
-          </button>
-          <div className="title-secondary-actions">
-            <button onClick={(event) => onChooseMaze(event.currentTarget)}><img src={ASSETS.navMazes} alt="" /> Choose a maze</button>
-            <button onClick={onAchievements}><img src={ASSETS.navBook} alt="" /> Ame's adventure book</button>
-            <button onClick={onSurprise}><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /> Surprise maze</button>
-            <button style={{ gridColumn: "1 / -1" }} onClick={(event) => onRequestReset(event.currentTarget)}><img src={ASSETS.navRestart} alt="" /> Reset progress</button>
-          </div>
-        </div>
-
-        <div className="title-progress" aria-label="Saved adventure progress">
-          <span><b>{storySolved}</b><small>story stars</small></span>
-          <span><b>{progress.totalAnimalsRescued}</b><small>friends helped</small></span>
-          <span><b>{progress.gold}</b><small>gold stars</small></span>
-        </div>
-      </div>
-
-      <button
-        className="title-version"
-        onClick={onOpenTester}
-        aria-label={`Playable build ${BUILD_VERSION}. Open the secret tester maze picker.`}
-        title="Secret tester maze picker"
-      >Playable build {BUILD_VERSION} <img src={ASSETS.navMazes} alt="" /></button>
-    </section>
-  );
-}
-
-interface AchievementsScreenProps {
-  readonly progress: PlayerProgress;
-  readonly unlockedLevelIds: readonly string[];
-  readonly activeRun: { readonly levelId: string; readonly name: string; readonly steps: number } | null;
-  readonly blocked: boolean;
-  readonly headingRef: React.RefObject<HTMLHeadingElement | null>;
-  readonly muted: boolean;
-  readonly onHome: () => void;
-  readonly onResume: () => void;
-  readonly onPlayLevel: (level: LevelDefinition) => void;
-  readonly onSurprise: () => void;
-  readonly onRequestReset: (trigger: HTMLElement) => void;
-  readonly onToggleSound: () => void;
-}
-
-function AchievementsScreen({
-  progress,
-  unlockedLevelIds,
-  activeRun,
-  blocked,
-  headingRef,
-  muted,
-  onHome,
-  onResume,
-  onPlayLevel,
-  onSurprise,
-  onRequestReset,
-  onToggleSound,
-}: AchievementsScreenProps) {
-  const [friendLedgerMode, setFriendLedgerMode] = useState<"default" | "expanded" | "collapsed">("default");
-  const solvedIds = Object.keys(progress.bestResultsByLevel);
-  const classifiedRescues = ANIMAL_SPECIES.reduce(
-    (total, species) => total + progress.rescuesBySpecies[species],
-    0,
-  );
-  const unclassifiedRescues = Math.max(0, progress.totalAnimalsRescued - classifiedRescues);
-  const surpriseResults = Object.entries(progress.bestResultsByLevel)
-    .filter(([, result]) => result.source === "generated");
-  const recentSurpriseResults = surpriseResults.slice(-6).reverse();
-  const collectibles = [
-    ...(["first-star", "animal-friend", "surprise-sparkle"] as const).map((id) => ({
-      id,
-      label: STICKER_LABELS[id].label,
-      description: STICKER_LABELS[id].description,
-      art: stickerArt(id),
-      owned: progress.stickers.includes(id),
-      kind: "Sticker",
-    })),
-    ...(["perfect-rescue-5", "perfect-rescue-10", "perfect-rescue-15"] as const).map((id) => ({
-      id,
-      label: ACHIEVEMENT_LABELS[id].label,
-      description: ACHIEVEMENT_LABELS[id].description,
-      art: medalArt(id),
-      owned: progress.medals.includes(id),
-      kind: "Medal",
-    })),
-    ...BADGE_IDS.map((id) => ({
-      id,
-      label: BADGE_LABELS[id].label,
-      description: BADGE_LABELS[id].description,
-      art: badgeArt(id),
-      owned: progress.badges.includes(id),
-      kind: "Badge",
-    })),
-  ];
-
-  return (
-    <section className="achievements-screen" aria-labelledby="adventure-book-title" inert={blocked ? true : undefined} aria-hidden={blocked || undefined}>
-      <div className="book-sparkles" aria-hidden="true">✦　·　✧　·　✦</div>
-      <header className="book-header">
-        <button className="book-back" onClick={onHome}><span aria-hidden="true">←</span> Home</button>
-        <div>
-          <span>Ame's keepsake shelf</span>
-          <h1 ref={headingRef} tabIndex={-1} id="adventure-book-title">Adventure Book</h1>
-          <p>Every star, stamp, and friend from the journey.</p>
-        </div>
-        <div className="book-header-actions">
-          <button aria-label={muted ? "Turn sound on" : "Turn sound off"} aria-pressed={!muted} onClick={onToggleSound}><img src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /></button>
-          {activeRun && <button className="book-resume" onClick={onResume}><img src={ASSETS.goal} alt="" /> Resume</button>}
-          <button onClick={onSurprise}><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /> New maze</button>
-        </div>
-      </header>
-
-      <div className="book-scroll" role="region" aria-label="Adventure book pages" tabIndex={0}>
-        <section className="book-stats" aria-label="Adventure totals">
-          <article><img src={ASSETS.goal} alt="" /><span><b>{progress.totalMazesCompleted}</b><small>mazes solved</small></span></article>
-          <article><img src={ASSETS.coinPouch} alt="" /><span><b>{progress.gold}</b><small>gold stars</small></span></article>
-          <article><img src={ASSETS.rewardAnimalFriendSticker} alt="" /><span><b>{progress.totalAnimalsRescued}</b><small>friends helped</small></span></article>
-          <article><img src={ASSETS.rewardHelpingPawMedal} alt="" /><span><b>{progress.perfectRescueMazeCount}</b><small>perfect rescues</small></span></article>
-          <article><img src={ASSETS.rewardTrailSticker} alt="" /><span><b>{progress.totalCompletions}</b><small>happy finishes</small></span></article>
-          <article><img src={ASSETS.rewardSurpriseSparkleSticker} alt="" /><span><b>{progress.generatedMazesCompleted}</b><small>surprise stars</small></span></article>
-        </section>
-
-        <section className="friend-ledger" aria-labelledby="friend-ledger-title">
-          <div className="book-section-heading">
-            <div><span>Rescue roll-call</span><h2 id="friend-ledger-title">Little friends helped</h2></div>
-            <div className="friend-ledger-tools">
-              <b>{progress.totalAnimalsRescued} total</b>
-              <div className="friend-ledger-view-buttons" aria-label="Friend section size">
-                <button
-                  className={friendLedgerMode === "expanded" ? "active" : ""}
-                  type="button"
-                  aria-pressed={friendLedgerMode === "expanded"}
-                  onClick={() => setFriendLedgerMode("expanded")}
-                >Expand</button>
-                <button
-                  className={friendLedgerMode === "default" ? "active" : ""}
-                  type="button"
-                  aria-pressed={friendLedgerMode === "default"}
-                  onClick={() => setFriendLedgerMode("default")}
-                >Default</button>
-                <button
-                  className={friendLedgerMode === "collapsed" ? "active" : ""}
-                  type="button"
-                  aria-pressed={friendLedgerMode === "collapsed"}
-                  onClick={() => setFriendLedgerMode("collapsed")}
-                >Collapse</button>
-              </div>
-            </div>
-          </div>
-          <div
-            id="friend-ledger-content"
-            className={`friend-ledger-viewport friend-ledger-${friendLedgerMode}`}
-            hidden={friendLedgerMode === "collapsed"}
-          >
-          <div className="friend-ledger-grid">
-            {ANIMAL_SPECIES.map((species) => (
-              <article key={species}>
-                <img src={animalArt(species)} alt="" loading="lazy" decoding="async" />
-                <span><strong>{ANIMAL_LABELS[species]}</strong><b>{progress.rescuesBySpecies[species]}</b><small>recorded rescues</small></span>
-              </article>
-            ))}
-            {unclassifiedRescues > 0 && (
-              <article className="past-rescues"><img src={ASSETS.rewardAnimalFriendSticker} alt="" /><span><strong>Earlier friends</strong><b>{unclassifiedRescues}</b><small>before the roll-call began</small></span></article>
-            )}
-          </div>
-          </div>
-        </section>
-
-        <section className="badge-shelf" aria-labelledby="badge-shelf-title">
-          <div className="book-section-heading"><div><span>Sticker, medal and badge shelf</span><h2 id="badge-shelf-title">Ame's shiny collection</h2></div><b>{collectibles.filter((item) => item.owned).length}/{collectibles.length}</b></div>
-          <div className="badge-grid">
-            {collectibles.map((item) => (
-              <article className={`badge-card ${item.owned ? "earned" : "locked"}`} key={item.id}>
-                <div className="badge-art-wrap">
-                  <img src={item.art} alt="" loading="lazy" decoding="async" />
-                </div>
-                <div><small>{item.owned ? `Earned ${item.kind}` : `Locked ${item.kind}`}</small><strong>{item.label}</strong><p>{item.description}</p></div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="maze-records" aria-labelledby="maze-records-title">
-          <div className="book-section-heading"><div><span>Story map</span><h2 id="maze-records-title">Maze records</h2></div><b>{CURATED_LEVELS.filter((item) => solvedIds.includes(item.id)).length}/{CURATED_LEVELS.length} cleared</b></div>
-          <div className="maze-record-grid">
-            {CURATED_LEVELS.map((storyLevel, index) => {
-              const result = progress.bestResultsByLevel[storyLevel.id];
-              const currentResult = result && hasCurrentGameplay(
-                storyLevel,
-                result.contentRevision ?? 0,
-                result.gameplayFingerprint ?? "",
-              ) ? result : undefined;
-              const locked = !unlockedLevelIds.includes(storyLevel.id);
-              const rescueCount = currentResult?.bestRescuedCount ?? 0;
-              const documentedSpecies = currentResult?.bestRescuedSpecies ?? [];
-              const earlierBest = [
-                result?.historicalBestSteps,
-                !currentResult ? result?.bestSteps : undefined,
-              ].filter((steps): steps is number => typeof steps === "number")
-                .reduce<number | undefined>((best, steps) => best === undefined ? steps : Math.min(best, steps), undefined);
-              const storySpecies = storyLevel.objects.flatMap((object) => (
-                object.kind === "animal" ? [object.species] : []
-              ));
-              const { documentedStorySpecies, hasUnknownRescues } = getStoryRescueRecordDisplay(
-                storySpecies,
-                rescueCount,
-                documentedSpecies,
-              );
-              const isActive = activeRun?.levelId === storyLevel.id;
-              return (
-                <button
-                  className={`maze-record-card ${result ? "cleared" : "open"}${isActive ? " active-run" : ""}`}
-                  key={storyLevel.id}
-                  disabled={locked}
-                  onClick={() => isActive ? onResume() : onPlayLevel(storyLevel)}
-                  aria-label={`${storyLevel.name}. ${locked ? "Locked" : isActive ? `Current maze, ${activeRun.steps} ${activeRun.steps === 1 ? "step" : "steps"}` : currentResult ? `Cleared on this layout, best ${currentResult.bestSteps ?? 0} steps, ${rescueCount} friends rescued${hasUnknownRescues ? ", some friend details came from an earlier version" : ""}` : result ? "Cleared on an earlier maze version; this layout has no record yet" : "Ready to play"}`}
-                >
-                  <span className="record-number">{locked ? "◆" : isActive ? "▶" : index + 1}</span>
-                  <span className="record-copy">
-                    <strong>{locked ? "A mystery maze" : storyLevel.name}</strong>
-                    <small>{locked ? "Keep adventuring to unlock" : isActive ? "Current maze · tap to resume" : `${storyLevel.width} × ${storyLevel.height}`}</small>
-                    {!locked && <em className="record-skill">{storyForLevel(storyLevel.id)?.puzzlePower}</em>}
-                  </span>
-                  <span className="record-best">{currentResult
-                    ? <><b>{currentResult.bestSteps ?? "—"}</b><small>best {currentResult.bestSteps === 1 ? "step" : "steps"}{earlierBest !== undefined && earlierBest !== null ? ` · earlier ${earlierBest}` : ""}</small></>
-                    : result
-                      ? <><b>New</b><small>layout · earlier {earlierBest ?? "—"}</small></>
-                      : locked
-                        ? <><img className="record-lock-art" src={ASSETS.doorBlueStar} alt="" /><small>locked</small></>
-                        : <><b>New</b><small>ready</small></>}</span>
-                  <span className="record-friends" aria-hidden="true">
-                    {storySpecies.map((species) => (
-                      <img
-                        className={documentedStorySpecies.includes(species) ? "saved" : hasUnknownRescues ? "saved-unknown" : ""}
-                        key={species}
-                        src={animalArt(species)}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    ))}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="surprise-records" aria-labelledby="surprise-records-title">
-          <div className="book-section-heading">
-            <div><span>Procedural scrapbook</span><h2 id="surprise-records-title">Surprise Maze memories</h2></div>
-            <b>{progress.generatedMazesCompleted} unique</b>
-          </div>
-          <div className="surprise-explainer">
-            <img className="surprise-explainer-star" src={ASSETS.rewardSurpriseSparkleSticker} alt="" />
-            <div>
-              <strong>Freshly made, not a hidden fixed list</strong>
-              <p>Surprise Mazes are generated from a new seed, so there can always be another one. The Book remembers completed adventures while the button makes a fresh puzzle.</p>
-            </div>
-            <button onClick={onSurprise}>Make a Surprise Maze</button>
-          </div>
-          {recentSurpriseResults.length > 0 && (
-            <div className="surprise-record-grid" aria-label="Recent completed Surprise Maze records">
-              {recentSurpriseResults.map(([levelId, result], index) => (
-                <article key={levelId}>
-                  <img src={index === 0 ? ASSETS.rewardTrailSticker : ASSETS.rewardSurpriseSparkleSticker} alt="" />
-                  <div><strong>Surprise memory</strong><small>{describeGeneratedRecord(levelId)}</small></div>
-                  <div><b>{result.bestSteps ?? "—"}</b><small>best steps</small></div>
-                  <div><b>{result.bestRescuedCount}/{result.totalRescueCount}</b><small>friends</small></div>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
-
-        <section className="maze-records" aria-labelledby="reset-progress-title">
-          <div className="book-section-heading">
-            <div><span>New beginning</span><h2 id="reset-progress-title">Reset the adventure</h2></div>
-            <button className="secondary-button" onClick={(event) => onRequestReset(event.currentTarget)}><img src={ASSETS.navRestart} alt="" /> Reset progress</button>
-          </div>
-        </section>
-      </div>
-    </section>
-  );
-}
-
-interface InventorySlotProps {
-  readonly label: string;
-  readonly image: string;
-  readonly found: boolean;
-}
-
-function InventorySlot({ label, image, found }: InventorySlotProps) {
-  return (
-    <div
-      className={`inventory-slot ${found ? "found" : "missing"}`}
-      aria-label={`${label}: ${found ? "found" : "not found"}`}
-      title={`${label}: ${found ? "found" : "not found"}`}
-    >
-      <div className="slot-image"><img src={image} alt="" /></div>
-    </div>
-  );
-}
-
 function HelpStep({ image, title, copy }: { readonly image: string; readonly title: string; readonly copy: string }) {
-  return <div className="help-step"><img src={image} alt="" /><div><strong>{title}</strong><p>{copy}</p></div></div>;
-}
-
-function StoryInterlude({
-  lore,
-  onBegin,
-}: {
-  readonly lore: StoryLore;
-  readonly onBegin: () => void;
-}) {
-  const speakerLabel = STORY_SPEAKER_LABELS[lore.speaker];
-
-  return (
-    <div
-      className="story-backdrop"
-      role="presentation"
-      onPointerDown={(event) => {
-        if (event.isPrimary && event.button === 0) onBegin();
-      }}
-    >
-      <section
-        className="story-card"
-        role="dialog"
-        aria-modal="true"
-        aria-label={"Chapter " + lore.chapter + ": " + lore.title}
-      >
-        <div className="story-sparkles" aria-hidden="true"><i>✦</i><i>✧</i><i>★</i><i>✦</i></div>
-        <div className="story-chapter-ribbon">
-          <span>Read-together story</span>
-          <b>Chapter {lore.chapter}</b>
-        </div>
-        <div className="story-body">
-          <div className="story-speaker">
-            <img src={storySpeakerArt(lore.speaker)} alt={speakerLabel} />
-            <span>{speakerLabel}</span>
-          </div>
-          <div className="story-copy">
-            <span className="story-eyebrow">The Puzzlewild Star Map</span>
-            <h2>{lore.title}</h2>
-            {lore.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            <blockquote>“{lore.quote}”</blockquote>
-          </div>
-        </div>
-        <div className="story-thinking-strip">
-          <span className="story-thinking-icon" aria-hidden="true">✦</span>
-          <div><small>Puzzle power</small><strong>{lore.puzzlePower}</strong></div>
-          <p>{lore.tryThis}</p>
-        </div>
-        <button
-          className="story-start-button"
-          autoFocus
-          onPointerDown={(event) => event.stopPropagation()}
-          onClick={onBegin}
-        >
-          <span aria-hidden="true">★</span>
-          Start the maze
-        </button>
-        <small className="story-skip-note">Tap anywhere, or press any key, to start right away.</small>
-      </section>
-    </div>
-  );
-}
-
-interface ModalProps {
-  readonly title: string;
-  readonly children: React.ReactNode;
-  readonly onClose?: () => void;
-  readonly celebratory?: boolean;
-  readonly returnFocus?: HTMLElement | null;
-}
-
-function Modal({ title, children, onClose, celebratory = false, returnFocus }: ModalProps) {
-  const dialogRef = useRef<HTMLElement>(null);
-  const titleId = useId();
-
-  useEffect(() => {
-    const previousFocus = returnFocus
-      ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
-    const dialog = dialogRef.current;
-    if (!dialog) return undefined;
-    const firstControl = dialog.querySelector<HTMLElement>("button:not([disabled]), [href], [tabindex]:not([tabindex='-1'])");
-    (firstControl ?? dialog).focus();
-    return () => {
-      if (previousFocus?.isConnected) previousFocus.focus();
-    };
-  }, [returnFocus]);
-
-  const onDialogKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
-    if (event.key === "Escape" && onClose) {
-      event.preventDefault();
-      onClose();
-      return;
-    }
-    if (event.key !== "Tab") return;
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-    const controls = [...dialog.querySelectorAll<HTMLElement>("button:not([disabled]), [href], [tabindex]:not([tabindex='-1'])")];
-    const first = controls[0];
-    const last = controls.at(-1);
-    if (!first || !last) {
-      event.preventDefault();
-      dialog.focus();
-    } else if (event.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && (document.activeElement === last || !dialog.contains(document.activeElement))) {
-      event.preventDefault();
-      first.focus();
-    }
-  };
-
-  return (
-    <div className="modal-backdrop" role="presentation">
-      <section ref={dialogRef} className={`modal-card${celebratory ? " celebratory" : ""}`} role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1} onKeyDown={onDialogKeyDown}>
-        {onClose && <button className="modal-close" onClick={onClose} aria-label={`Close ${title}`}>×</button>}
-        <span className="modal-star" aria-hidden="true">✦</span>
-        <h2 id={titleId}>{title}</h2>
-        {children}
-      </section>
-    </div>
-  );
+  return <div className="help-step"><CatalogueImage src={image} alt="" /><div><strong>{title}</strong><p>{copy}</p></div></div>;
 }
 
 export default App;

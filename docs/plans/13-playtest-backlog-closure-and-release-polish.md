@@ -17,6 +17,16 @@ assets; old card audits identify what to retest, not what still reproduces.
 
 ## Work sequence
 
+The 2026-09-05 v0.20.1 intake's complete 17-item crosswalk is mandatory input.
+Reconcile extended PT15/22/24 and PT33–42 individually. Book/bestiary/tabs and
+no-scroll victory are UI-02 implementation commitments, not Plan-14 ideas.
+Configured Mimic safety/reward guarantees and actual puzzle difficulty belong
+to Plan 09. Six-sprite/new-friend candidates require their recorded Human
+retain/refine/add/defer decisions; do not infer wholesale art rejection or
+quietly retire approved missing consumers. XP remains separately decision-gated.
+New defects discovered on FP-UI1/CORE2/CAMPAIGN extend the evidence, never erase
+the old-build observations or automatically prove these cards accepted.
+
 1. **Reconcile before editing.** Give every backlog card and required slice a
    disposition: Accepted, Deferred with explicit authority/return point,
    Superseded with replacement, or Declined by Human. Keep delivery separate

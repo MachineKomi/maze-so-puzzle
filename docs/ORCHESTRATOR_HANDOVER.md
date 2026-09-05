@@ -3,7 +3,52 @@
 Prepared 2026-09-04. This is a dated handover, not a replacement for the live
 roadmap, specifications, source, or subsequent Human decisions.
 
-## Latest manager review — 2026-09-05
+## Latest root UI engineering acceptance — 2026-09-05
+
+Agent 01 has now stopped with its six-correction return at `09413c1`; read
+`docs/UI_UX_REVIEW_EVIDENCE.md` completely. Root independently reproduced all
+452 tests and the matching TypeScript/Vite build. Read-only code review found
+no further defect in those corrections. Fourteen equipment derivatives received
+root technical delivery approval with exact per-file ceilings; their immutable
+candidate snapshot and separate approval JSON remain recorded. Root completed
+the fifteen missing 512px earned-reward renditions from approved Batch22 sources
+and approved exact delivery allocations in `docs/reviews/2026-09-05-plan01-return-review.md`.
+All 29 derivatives reproduced exactly; 453 project and 121 art tests, production
+build, locked Cargo, static performance contracts/budgets and diff checks passed.
+Root accepts the UI engineering checkpoint for MOVE-01 and FP-UI1 preparation.
+No new playable release, WebView journey or Human/device qualification is claimed
+yet. After the safe UI commit/push, root starts MOVE-01; the family preview is next.
+
+The 20260905-02 additions are captured in the dated room-variety/mechanics intake
+and PT43/44, with Plan-09 profiles and early proposal comparison; new mechanics
+need Human selection before rules or dependent maps are built. All prior root
+planning changes and Agent-01 candidate files are preserved. The earlier
+active-task guard below describes history; there is no active Agent-01 writer.
+
+## Earlier Human update and planning intake — 2026-09-05
+
+**Agent 01 is running its existing review follow-up.** The older stopped-state
+paragraph below describes the earlier review boundary. Root's separate planning
+checkpoint was committed/pushed as `09413c1`; do not change HEAD, stage, commit
+or push again while the task runs. Preserve its active files and frozen prompt;
+do not run competing builds/tests or start another runtime owner.
+
+The Human's 17-point v0.20.1 wishlist is captured in
+`docs/playtests/2026-09-05-v0201-wishlist.md`, with existing backlog 15/22/24
+extended and new cards 33–42. Future plans now include typed harmonious materials,
+dark-edge diagnosis, bounded cosmetic follower correction in root MOVE-01,
+ring attachment review, sharper acting, varied poison/rewards, safe configurable
+Mimics, deeper puzzles/difficulty selection and original spooky-friend proposals.
+New **UI-02 after 02/before 08** owns Book tabs/bestiary/cards, restrained focus
+and no-scroll victory composition. Plan 02 owns friend-dance choreography.
+The six named sprite reviews are a new bounded Human request, not permission
+to reopen all approved art. XP remains Plan-14 decision-gated.
+
+These are planning changes awaiting the next safe manager backup. They neither
+interrupt Agent 01 nor promise the entire wishlist in FP-UI1. Wait for the Human's
+completion output, review the actual candidate, then follow UI → MOVE-01 → FP-UI1.
+
+## Earlier manager review — 2026-09-05
 
 Agent 01 has finished and stopped. Its 57-file candidate remains unaccepted and
 uncommitted. Root found required phone/presentation-art gaps, initial title/maze
@@ -105,12 +150,14 @@ These are not claims that all future hardware/performance gates have passed.
 
 Remaining order, using plan IDs rather than execution-prompt section numbers:
 
-1. **01 — UI/UX:** active now; review before releasing any successor.
+1. **01 — UI/UX:** root engineering acceptance recorded; checkpoint before MOVE-01.
    **Then root MOVE-01 and required FP-UI1:** smooth actor/camera presentation
    with exact tile rules, followed by a verified playable build.
 2. **04 — Lighting/wall depth:** owns terrain topology/render-model and regions.
 3. **02 — Graphics/VFX:** consumes lighting/scene/UI seams; owns presentation
    direction, effect timing/cancellation and reward-shower presentation.
+   **Then UI-02:** returning UI specialist adds the newly requested Book,
+   bestiary/cards, focus finish and no-scroll victory composition before 08.
 4. **08 — Controls/Xbox/Steam Deck:** owns normalized input and controller policy.
 5. **05 — Limited sprite animation:** consumes final art, VFX and input contracts.
 6. **07B — Integrated performance/audio/delivery optimization.**

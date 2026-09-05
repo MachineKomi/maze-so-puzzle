@@ -1,0 +1,140 @@
+{
+  "schema": "maze-ui-presentation-approval/v1",
+  "approvedBy": "Astra root orchestrator under Human UI review and publication delegation",
+  "approvedAt": "2026-09-05T02:32:35.4546433+00:00",
+  "scope": "runtime-publish",
+  "candidateReportSha256": "dcf6a2eb08f7e0eb8b103a711dbd7d2b2d6fa2d2eeeab67be952314da258e1f4",
+  "decision": "Technical delivery approval of fourteen deterministic 512px renditions from previously Human-approved originals. Root and independent art reviewer inspected cream/dark/checker proofs and source/optical/output identity. This does not claim fresh Human visual/device acceptance or alter any approved identity.",
+  "proofPath": "C:/Users/hellb/AppData/Local/Temp/maze-ui01-root-return-20260905-r1/ui-review/presentation-alpha-200.png",
+  "proofSha256": "f81937a1eab7207452e6f4fdae7b1abeb2e8842a03c3edc4902dd6b98a6f955c",
+  "runtimeBytes": 1367574,
+  "perFileDecision": "Approve exact inherited-cap exceptions for Bubble Ring Blade 123658, Splash Boots 162478, Spring Boots 182130 and Antidote Leaf 118676 bytes. Other files retain 102400-byte caps. Aggregate allocation is separately reviewed.",
+  "entries": [
+    {
+      "id": "star-sword",
+      "path": "public/assets/mgjrpg-02/presentation/star-sword-v02-presentation-512-r01.webp",
+      "sha256": "76b804a14a3ad59f637ca60d6eabe3022f5d4ccad55b0542b435a266578b64c7",
+      "bytes": 83348,
+      "sourceSha256": "06eba53b2bfff6d679e22cdc64dda385a672bfc775cfc0560fcfeb9f0b1b6c0a",
+      "candidateRecordSha256": "ee3c1d7f23a526feb501d4140997a07960814b53bea2b9b51a3839e71e1c6b54",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "flower-sabre",
+      "path": "public/assets/mgjrpg-02/presentation/flower-sabre-v02-presentation-512-r01.webp",
+      "sha256": "6081a454a7d9e125df9ed1089734c6062891d1d339287fad90dabb316b7592db",
+      "bytes": 66694,
+      "sourceSha256": "c854627aea8fb6d770cc1a53694f50fa1afd208af794d367ef716f6608a2cc94",
+      "candidateRecordSha256": "645a27528ae588b6beee4eff0462b229e3b7c2c906535e4ca2a9f2d8c60999d9",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "moon-wand",
+      "path": "public/assets/mgjrpg-02/presentation/moon-wand-v02-presentation-512-r01.webp",
+      "sha256": "6bc5d49e33af8226422a7fade5d18a05e62c10ae53f25c023618a68cc2d0cab8",
+      "bytes": 54230,
+      "sourceSha256": "c1fc091c86c71c42487ed7037cb016ffe763bf09a29557d7a810c98c95ac87dc",
+      "candidateRecordSha256": "a55a6d68ce821a5d76c5b625ef04aeed598776dc6be2582358ab31e37efc0d0d",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "leaf-blade",
+      "path": "public/assets/mgjrpg-02/presentation/leaf-blade-v03-presentation-512-r01.webp",
+      "sha256": "79f2c4e63117b092e936423ecc5f74bb562616a1ee4c6499c47c3e4c708e9541",
+      "bytes": 79978,
+      "sourceSha256": "08706e71e36e8880e7bd6431275b6f981f4715b8ecdd5b1695f940ad7bab5a27",
+      "candidateRecordSha256": "32e6807a53d43ac6842cb58444a8aceef27fcece2d57c685b85e3e2f10cc4f68",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "sun-mallet",
+      "path": "public/assets/mgjrpg-02/presentation/sun-mallet-v02-presentation-512-r01.webp",
+      "sha256": "20067a9ef7844651e0c95d80b71e7834c310442711f9338652e50390dada84c2",
+      "bytes": 101622,
+      "sourceSha256": "9f6d6cbf51ed68b67f7555462bd9ee2e176d98fd5f3811d2c24f599acb9f6645",
+      "candidateRecordSha256": "e0a37b9ef2092b62acd8093ae815e47778a323487421890884fc5fb62410608e",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "comet-spear",
+      "path": "public/assets/mgjrpg-02/presentation/comet-spear-v02-presentation-512-r01.webp",
+      "sha256": "ef6867def2e428a88aaa1324052487f750661264de23c9f072c9ecd1946ceb8f",
+      "bytes": 45586,
+      "sourceSha256": "9ce8e4f0260407580a64a26dd1f7c9b36e9cf6c28329f2b96f2df23b6ee3cddc",
+      "candidateRecordSha256": "801bbcc7c5f007815b973482ba657352327abb160d0eb68fc77b56692383dc89",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "bubble-ring-blade",
+      "path": "public/assets/mgjrpg-02/presentation/bubble-ring-blade-v01-presentation-512-r01.webp",
+      "sha256": "f575b5d0c39d7f78786f1c4716c036c1ea97d84111cf13e5513ea316bfe242f0",
+      "bytes": 123658,
+      "sourceSha256": "9acccef0fe2211ccf3d3d149f39018d5ef1a1fb78082051c596f3f7bf898bcfb",
+      "candidateRecordSha256": "f777f633bcf84db1a07c1fdc048e2c83543c4e133fecfb6652b33232eae5485a",
+      "maxEncodedBytes": 123658
+    },
+    {
+      "id": "cupcake-mace",
+      "path": "public/assets/mgjrpg-02/presentation/cupcake-mace-v02-presentation-512-r01.webp",
+      "sha256": "1923368a5acb7801b2c1e0f616688e6a2cb32924b1e65e8fde53f08a0d4282ef",
+      "bytes": 71806,
+      "sourceSha256": "a6ae12dfa571e3429d39114a559c09f32f8c0018a655dd719672a25077350860",
+      "candidateRecordSha256": "afb956e4e12f4ae1e9b9f6fb6ec16223665bbd45a5b9b70ff899c7575fb96798",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "key-rose-heart",
+      "path": "public/assets/mgjrpg-02/presentation/key-rose-heart-v02-presentation-512-r01.webp",
+      "sha256": "f7f49ad82f94f82db2277aa539f4db1dd4e52016a6ab6813fb714717e8c2dcb0",
+      "bytes": 85020,
+      "sourceSha256": "164a2d85ec3ab33c59736cfd4931aa7db1a0e88d413d0258fa3538cd1cebf5ba",
+      "candidateRecordSha256": "867d1a5ec45a9ed43ac63db2a82a950b5f461902b1cca76742cc6598bf861883",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "key-sunny-sun",
+      "path": "public/assets/mgjrpg-02/presentation/key-sunny-sun-v02-presentation-512-r01.webp",
+      "sha256": "3848ceb829499e2854f85a502327985f68e7a75cb5b6891d7a831057e9744218",
+      "bytes": 94874,
+      "sourceSha256": "7d45328238bdfa543ac4941ad8dc59816f954234924b8f52ab8b0d6270e787eb",
+      "candidateRecordSha256": "a43a55689271b3d964a03cb1528080c82a9020e533f0cb3384c2ff7854a86d94",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "key-blue-star",
+      "path": "public/assets/mgjrpg-02/presentation/key-blue-star-v02-presentation-512-r01.webp",
+      "sha256": "1d2336880413ff57b8702a3264c2e83ecf1fffbd89ed4dd355f4f42b9ce4843c",
+      "bytes": 97474,
+      "sourceSha256": "4339e7e61f180fba24bf76c4153d2401e78c059fa8623290a9a933256b752b16",
+      "candidateRecordSha256": "47d98919bc2394c67e4ab53042b3f594f282f717d2d570dab029d4ace01e5254",
+      "maxEncodedBytes": 102400
+    },
+    {
+      "id": "splash-boots",
+      "path": "public/assets/mgjrpg-02/presentation/splash-boots-v02-presentation-512-r01.webp",
+      "sha256": "4e110c9545cb2edaa508beaa13a788f77c7c949f42d47573811c7863dd25dd78",
+      "bytes": 162478,
+      "sourceSha256": "fd76524bfd6d1d6233a2a0bcc7351af642b2351ab45e7487297c91af8c000e20",
+      "candidateRecordSha256": "7afdaa478820ac68dbe821f1d91d0598f6c86680e394d017b14fa3625ea1ab77",
+      "maxEncodedBytes": 162478
+    },
+    {
+      "id": "spring-boots",
+      "path": "public/assets/mgjrpg-02/presentation/spring-boots-v02-presentation-512-r01.webp",
+      "sha256": "67d0ff0ec61d8d375776656bb47f5fe8c8719a92092252d03dbed81de27aa703",
+      "bytes": 182130,
+      "sourceSha256": "a48a7ca4f1d648b79318560db7bd69eadf2ef12cf595391c2fba1e89e144b3bf",
+      "candidateRecordSha256": "6d68eca1a528572103542fd6441ce5dab8a8e2cb5dc1d9f969918184054da6fc",
+      "maxEncodedBytes": 182130
+    },
+    {
+      "id": "antidote-leaf",
+      "path": "public/assets/mgjrpg-02/presentation/antidote-leaf-v02-presentation-512-r01.webp",
+      "sha256": "761355b38004faf9b20450e6dba2981fdd1dd24f059a52955d5016b9f163012f",
+      "bytes": 118676,
+      "sourceSha256": "213d2198a999d14c23e4fb17936c64cf1302002223e02a8e2114b5966208fd2e",
+      "candidateRecordSha256": "a163dd7e3464fbe6ea2f6b89f2c6c19add03cb635ea3d97614d788b8ad542d47",
+      "maxEncodedBytes": 118676
+    }
+  ]
+}

@@ -1,5 +1,59 @@
 # Project audit
 
+## Root UI engineering checkpoint — 2026-09-05
+
+The [later root review](reviews/2026-09-05-plan01-return-review.md) accepts the
+six-correction UI checkpoint for MOVE-01/FP-UI1 preparation. Root completed and
+approved 15 reward renditions, approved all29 presentation records and exact
+allocations, and verified 453 project /121 art tests plus static gates. Raw
+evidence has a hash-verified local archive. Physical/Human and packaged WebView
+checks remain explicit; the older candidate report below is historical.
+
+## Plan 01 bounded review correction — 2026-09-05 (not a release)
+
+The preserved candidate is based on authorized main
+`09413c175c5776044e4ab5dd6eddf31804d33d34`. The 25 intervening files since 47bfff4
+are documentation-only; root planning/review documents remain untouched.
+Current authority is [UI_UX_SPEC](UI_UX_SPEC.md), with exact checks, hashes,
+allocation, evidence and return gates in [review evidence](UI_UX_REVIEW_EVIDENCE.md).
+Older fixed-stage release checks below do not qualify this cutover.
+
+The physical-pixel board/deck, content-height map, wrapping Bag, extracted
+screens/dialogs, Sound, independent motion/quality, earned Book and story host
+remain. Corrections use 28 px noninteractive compact statuses and accessible More
+details, a 200% text reader with fixed Objective/Hint/movement access, true
+responsive-image failure handling, and native dialog keyboard reading.
+App is 2,765 lines versus 4,049; CSS is a 9-line layer manifest plus 2,359 owned
+lines versus 7,521, with 123 !important declarations reduced to zero.
+
+The narrow root follow-up adds 14 deterministic 512 px candidates from approved
+equipment masters (original optical bytes reproduced exactly), and repairs
+initial title/mute and shuffled maze selection through the unchanged music
+port. No source artwork, old optical pointer, authored placement, engine/save
+rule, version or release state was restored/changed. Optional Power suggestions
+now run in cancellable approximately 4 ms slices after exact feedback's initial
+paint opportunity, with one indivisible engine transition per yield boundary.
+
+Root approved the existing 4,500 gzip9 JS / 0 CSS / 43,795 public allocation only.
+Additional corrected-code/presentation bytes and four per-file art overruns
+remain explicit requests; candidate art validation is not waived. Fifteen
+earned-reward DPR2 renditions remain an exact downstream return. Current
+automated results and root's earlier 9/default and 3/single-worker solver
+timeouts are separately recorded, not conflated with the earlier 444-test pass.
+Physical/Human/assistive and clean-host timing qualification remain pending.
+
+Final correction checks: 452 project tests plus strict TS/Vite, locked Cargo,
+115 art-pipeline tests and 26 browser checks pass. The unchanged budget guard
+fails by 2,522 gzip9 JS and 1,367,574 public bytes. Art validation fails only
+the 14 unapproved candidates and four per-file ceilings (18 errors, 420
+historical warnings); root must review those gates. Static inventory matches
+the final source/dist hashes; browser timings remain contaminated-report-only.
+
+Root reviews/checkpoints UI, then owns MOVE-01 smooth actor/camera travel before
+FP-UI1 under roadmap §5.13A/PT-20260902-07. No package or publication was made.
+
+## Historical released baseline — 2026-09-04
+
 Audit date: 2026-09-04
 Audited build: 0.20.1 corrective FP-ART-OST web/Windows playable preview
 Plan 03 publication update: 2026-09-04

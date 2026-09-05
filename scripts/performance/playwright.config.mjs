@@ -18,7 +18,7 @@ process.env.MAZE_PERF_EVIDENCE_DIR = evidenceRoot;
 
 export default defineConfig({
   testDir: import.meta.dirname,
-  testMatch: "browser-baseline.pw.ts",
+  testMatch: ["browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts"],
   fullyParallel: false,
   workers: 1,
   retries: 0,
@@ -37,16 +37,23 @@ export default defineConfig({
       executablePath: process.env.MAZE_PERF_EDGE_PATH,
     },
     headless: true,
+    actionTimeout: 15_000,
+    navigationTimeout: 30_000,
     serviceWorkers: "block",
     reducedMotion: "no-preference",
     trace: "off",
     screenshot: "only-on-failure",
     video: "off",
   },
-  webServer: {
+  webServer: [{
     command: "npm run preview -- --host 127.0.0.1 --port 4173 --strictPort",
     url: "http://127.0.0.1:4173",
     reuseExistingServer: false,
     timeout: 30_000,
-  },
+  }, {
+    command: "npm run dev -- --host 127.0.0.1 --port 1421 --strictPort",
+    url: "http://127.0.0.1:1421",
+    reuseExistingServer: false,
+    timeout: 30_000,
+  }],
 });

@@ -1,5 +1,52 @@
 # Release checklist
 
+## Root UI checkpoint disposition — 2026-09-05
+
+[Root return review](reviews/2026-09-05-plan01-return-review.md) supersedes the
+then-open candidate art/allocation rows below. All29 renditions reproduced,
+453 project/121 art tests and the exact approved static budgets passed. Root
+accepted the UI engineering checkpoint for MOVE-01, then FP-UI1. This is not a
+playable release: exact clean-source web/portable journeys, versioned artifacts
+and the documented Human/device checks remain required at their preview gates.
+
+## Plan 01 correction return gates — 2026-09-05
+
+This uncommitted candidate at authorized 09413c1 is **not FP-UI1**.
+[UI_UX_SPEC](UI_UX_SPEC.md) defines contracts; [review evidence](UI_UX_REVIEW_EVIDENCE.md)
+records exact current commands, hashes, proof paths and failed/pending gates.
+Historical checked fixed-stage rows below are not new-shell acceptance.
+
+- [x] Preserve final Goblin/Violet Moon, 32 authored friend placements,
+  Unicorn Maze 1, Tea-Time Skeleton Maze 2 and guarded Home hero v04.
+- [x] Physical-pixel layout, square tiles/content-height map, compact 28 px
+  noninteractive statuses, accessible details, 48 px movement/Hint, primary
+  topology and 200% named reader/dock implementation.
+- [x] Responsive currentSrc failure chain; native labelled dialog body/trap;
+  title/mute/shuffled-maze transport repair through the unchanged port.
+- [x] Fourteen deterministic presentation candidates, source/hash/alpha/
+  registration and optical byte-parity evidence; no generation/upscaled fields.
+- [x] Exact Power/Required Path before optional cancellable engine-witness search.
+- [x] Root's existing UI/font allowance recorded as approved, tied to 09413c1.
+- [x] Final project check: 452 tests / 43 files, strict TS and Vite; locked Cargo
+  and no-unused TS pass. Art unit tests: 115 pass. Browser: 26 pass, with
+  196 PNGs and expected fault-injection errors individually accounted for.
+- [x] Final static inventory matches source/dist; six evidence schemas pass.
+  Preserve red byte guard (2,522 JS / 1,367,574 public excess) and red art guard
+  (14 unapproved candidates + four per-file overruns). No limit weakened.
+- [ ] Root accepts corrected UI against the final automated/browser report.
+  Default project, locked Cargo, shared browser, art and byte commands have
+  distinct exact results there; failed gates are never summarized as “all green”.
+- [ ] Root approves 14 candidate art proofs, four inherited per-file overruns and
+  the additional corrected-code/public allocation; byte/art guards stay active.
+- [ ] Root resolves the exact 15 earned-reward 200 px/DPR2 rendition return.
+- [ ] Human material/type/comprehension, actual iPad/Safari and WebView2 touch/
+  keyboard/offline/font/OS scaling; TV couch/controller, screen-reader speech,
+  low-end/retained-resource and qualified clean-host timing.
+- [ ] Root reviews/checkpoints UI, implements/reviews MOVE-01, then owns the
+  versioned FP-UI1 commit/build/publication. No dirty-tree distributable here.
+
+## Historical release evidence
+
 Verification date: 2026-09-04
 Plan 03 publication update: 2026-09-04
 

@@ -2,7 +2,7 @@
 
 ## 0. Manager-reviewed execution addendum
 
-Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, and VFX specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, root checkpoint 03M, 01, root movement checkpoint MOVE-01, 04, and 02, and before Plan 05 animation.
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, VFX and UI-02 Book/focus specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, root checkpoint 03M, 01, root movement checkpoint MOVE-01, 04, 02, and UI-02, and before Plan 05 animation. `UI-02-adventure-book-and-focus-polish.md` owns the bounded intervening UI return; this does not expand Agent 01's running assignment.
 
 ### Ownership and architecture amendments
 
@@ -80,6 +80,50 @@ cost and lifecycle. Record hardware rows as passed, failed, or pending with a
 reproducible checklist. Shared-app implementation may be accepted with explicit
 unavailable hardware rows; a Steam Deck/TV/controller-audio support claim cannot.
 Root owns commit/push, versioning and public preview/deployment transactions.
+
+### Final Book, victory and focus consumer — 2026-09-05 wishlist
+
+Read `UI-02-adventure-book-and-focus-polish.md` and the accepted implementation
+report for `PT-20260905-34`, `35` and `37`. UI-02 runs after 02 and before this
+plan so Controls qualifies the actual final interaction surfaces. UI-02 owns
+Book/victory composition and visual focus; Plan 02 owns celebration recipes;
+this plan owns semantic input and modality truth. Do not build another Book,
+reintroduce the old combined long page or recreate a completion dialog here.
+
+- Navigate all five Book tabs — Mazes, Friends, Bestiary, Stats, Achievements —
+  using their accepted native semantic actions and stable IDs. Keep current tab,
+  focused entry and page-local reading position through detail/Sound overlays.
+  Native keyboard tab behaviour and controller navigation must agree on which
+  panel is active; inactive panels never enter the focus graph.
+- Every discovered guardian and available friend card is controller-operable.
+  B closes the card and returns to its exact stable entry; if that entry has
+  disappeared, use the accepted page fallback. A later B leaves the Book through
+  the documented route. Undiscovered identities and locked achievements remain
+  concealed; focus discovery must not expose hidden card names or art.
+- Page-local Book reading uses the accepted bounded scroller or pagination.
+  Tab navigation, reading and card dismissal never issue maze movement. Reset
+  remains a separate protected action, and browsing never changes encounter,
+  currency, reward or campaign truth.
+- Consume UI-02's component-specific focus attributes/tokens. Programmatic
+  controller focus is explicit and couch-visible; pointer/touch does not leave
+  the same persistent board-navigation ring. Switching source updates treatment
+  without losing focus or activating/moving anything. Preserve keyboard focus,
+  forced-colours and actual-surface contrast rather than replacing the ring with
+  a faint decorative glow. No second modality detector is introduced.
+- Qualify UI-02's no-scroll completion composition, exact Stay/Next defaults and
+  safe B behaviour with all available controls visible. Controller scrolling
+  cannot conceal an unresolved victory layout defect. Plan 02/05 dance playback
+  neither steals focus nor commits the pending completion transaction.
+- Extend the shared controller-only journey with empty/partial/full Book states,
+  open-card disconnect/reconnect, layered Sound, input-source switching,
+  maximum rewards and dense completion. Keep physical rows honestly pending.
+
+Plan 09 later completes the final roster, lore and 24-chapter data. Its root
+acceptance must repeat tab/card navigation, discovery/reset and return-focus
+journeys using those exact data, including longest copy and an encounter earned
+during ordinary play. It consumes these interfaces without hard-coded roster
+counts or another input system. Plan 10 additionally proves the Garden
+completion destination without displacing Stay/Next/Restart or their defaults.
 
 ### Human-authorized future camera preference — 2026-09-05
 

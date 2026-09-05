@@ -48,6 +48,61 @@ accepted. Full/lower tiers must preserve that evidence and the same route truth.
 Use the existing shared harness and budget ledger; a later Plan 07B pass does
 not defer an attributable regression or waive this checkpoint's gates.
 
+### Human playtest refinement — v0.20.1, 2026-09-05
+
+Source: [numbered playtest intake](../playtests/2026-09-05-v0201-wishlist.md),
+items 1, 2, 5, 6, 7, 9, 12 and 13. These are observations about v0.20.1 and
+future acceptance requirements, not claims that the running Plan-01 candidate
+has been reproduced or reviewed. Do not interrupt that task or edit its files.
+
+- `PT-20260902-15` and `PT-20260903-24`: give every floor texture, wall texture
+  and overlay a declared receiver/job and validate recipes against that role.
+  A valid floor/wall ID pairing is necessary but does not prove visual clarity:
+  the Human reports both surfaces read as floors in `springstep-sky-hollow`.
+  Its current `springstep-hollow` recipe already selects separate floor and wall
+  catalogue entries; inspect the actual composite before claiming swapped URLs.
+  World-anchored repeat scale must make masonry, grass, leaves and seams feel
+  plausible beside Ame at the real tile size. Compare approved harmonious
+  pairs, including bright/bright and low-contrast cases, at rest and in travel.
+  Show recognisable floor versus raised wall in colour and grayscale without
+  relying only on hue or an added dark outline. Keep dressing on its declared
+  receiver and preserve the walkable boundary at every scale and quality tier.
+- Improve depth with coherent signed bevels, internal faces, contact/cast and
+  material response already owned here. Evaluate representative pairs before
+  requesting more texture production. If existing approved art cannot fulfil a
+  specific material role, return an exact recipe/source/consumer request to
+  root's bounded art gate; this plan cannot independently repaint the catalogue.
+  Hand Plan 09 a reviewed pair/scale matrix, incompatibilities and complete
+  fallback recipes so authored and generated variety uses intentional pairs.
+- `PT-20260905-33`: investigate the faint dark vertical edge reported roughly
+  one quarter of the way from the viewport's left side, drifting/fading during
+  play in `rainbow-power-parade` and `twilight-treasure-loop`. Cause is unknown.
+  Reproduce with fixed route, camera position, viewport/DPR and animation phase;
+  isolate terrain filters/masks, camera clipping, light/shadow and decorative
+  overlays one at a time. Record the responsible layer only after a controlled
+  comparison. Require settled and intermediate-frame evidence across horizontal
+  and vertical travel, reversals, clamped edges, Normal/Big and reduced/static
+  modes. A paused good frame alone cannot close this moving artifact. Root
+  observes the same route during MOVE-01; an attributable early regression is
+  handled there, while this plan owns the unresolved terrain/lighting repair.
+- `PT-20260905-36`: preflight the art-owned held composition for
+  `bubble-ring-blade`. The current source record deliberately publishes
+  `zOrder: 1`, while the seven other weapons publish `3`; this is evidence for
+  a targeted comparison, not evidence that the Human likes that layering.
+  Root's art return owns any approved grip/scale/order metadata correction and
+  regenerated consumers. Compare readable foreground placement in the existing
+  static body, movement and combat compositions before freezing Plan-05 sockets.
+  Do not patch a weapon-name CSS exception or change its identity here.
+- `PT-20260905-38`/`39`: retain actual-size evidence of any sprite softening
+  during scale/warp motion, distinguishing texture sampling from new lighting
+  blur. Plan 05 owns the motion correction; 07B qualifies integrated sampling.
+  The Human's six candidate art reviews are `moon-bat`, `pebble-golem`,
+  `hedgehog`, `alpaca`, `rainbow-horn-unicorn` and `penguin`. Only those exact
+  identities enter root's bounded comparison/correction gate if the Human
+  chooses a replacement; other accepted art remains closed. Apply accepted
+  metadata/rendition changes to the lighting rack without making a new global
+  art approval round or concealing the source issue under a lighting filter.
+
 ### Adopted integration requirements
 
 - Final Plan-03 art/material metadata is a hard dependency. Lighting owns runtime illumination, topology, wall depth, highlights, contact/cast shadows, and theme calibration; it does not independently repaint materials or change the catalogue's visual language.

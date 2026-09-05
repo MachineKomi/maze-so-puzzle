@@ -14,6 +14,30 @@ function exerciseTransport() {
 }
 
 describe("MusicTransportPort", () => {
+  it("retains the full shuffled maze bag across successive, revisited, generated and returning entries", () => {
+    const port = createMusicTransportFake();
+    const played: string[] = [];
+    for (let entry = 0; entry < MUSIC_POOLS.maze.length * 3; entry++) {
+      if (entry % 3 === 0) port.setContext("story");
+      if (entry % 3 === 1) port.setContext("victory");
+      played.push(port.setContext("maze").currentTrackId);
+    }
+    for (let start = 0; start < played.length; start += MUSIC_POOLS.maze.length) {
+      expect(new Set(played.slice(start,start + MUSIC_POOLS.maze.length))).toEqual(new Set(MUSIC_POOLS.maze.map(t=>t.id)));
+    }
+    played.slice(1).forEach((id,index)=>expect(id).not.toBe(played[index]));
+  });
+  it("does not replay the sole bag entry already heard through manual transport", () => {
+    const reference = createMusicTransportFake();
+    const cycle = MUSIC_POOLS.maze.map(()=>reference.setContext("maze").currentTrackId);
+    const port = createMusicTransportFake();
+    cycle.slice(0,-1).forEach(()=>port.setContext("maze"));
+    for(let i=0;i<MUSIC_POOLS.maze.length&&port.getSnapshot().currentTrackId!==cycle.at(-1);i++) port.next();
+    expect(port.getSnapshot().currentTrackId).toBe(cycle.at(-1));
+    port.setContext("story");
+    expect(port.setContext("maze").currentTrackId).not.toBe(cycle.at(-1));
+    for(let i=0;i<42;i++) {const manual=port.shuffle().currentTrackId;expect(port.setContext("maze").currentTrackId).not.toBe(manual);}
+  });
   it("provides deterministic context-bounded transport semantics", () => {
     const first = exerciseTransport();
     const second = exerciseTransport();
@@ -33,6 +57,7 @@ describe("MusicTransportPort", () => {
     const unsubscribe = transport.subscribe((snapshot) => observed.push(snapshot.currentTrackId));
     expect(transport.previous().canPrevious).toBe(false);
     transport.setContext("story");
+    expect(transport.getSnapshot().canPrevious).toBe(false);
     transport.next();
     unsubscribe();
     transport.next();

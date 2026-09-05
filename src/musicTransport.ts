@@ -4,11 +4,14 @@ import {
   MUSIC_CONTEXTS,
   MUSIC_POOLS,
   musicTrackById,
+  musicTrackByUrl,
   type MusicContext,
   type MusicTrackDefinition,
 } from "./musicCatalogue";
 import {
   configureMusic,
+  createMazeMusicPicker,
+  createMusicRunSeed,
   disposeMusic,
   setMusicMuted,
   startMusicFromUserGesture,
@@ -58,11 +61,16 @@ class MusicTransportAdapter implements MusicTransportPort {
   private currentTrackId = DEFAULT_TITLE_TRACK.id;
   private muted = false;
   private shuffleSequence = 0;
+  private mazeEntry = 0;
+  private lastMazeTrackId: string | undefined;
+  private readonly mazePicker;
   private readonly history: string[] = [DEFAULT_TITLE_TRACK.id];
   private historyIndex = 0;
   private readonly listeners = new Set<(snapshot: MusicTransportSnapshot) => void>();
 
-  constructor(private readonly effects: MusicTransportEffects = {}) {}
+  constructor(private readonly effects: MusicTransportEffects = {}, seed = "transport-test") {
+    this.mazePicker = createMazeMusicPicker(seed);
+  }
 
   getSnapshot(): MusicTransportSnapshot {
     const pool = MUSIC_POOLS[this.context];
@@ -70,7 +78,7 @@ class MusicTransportAdapter implements MusicTransportPort {
       context: this.context,
       currentTrackId: this.currentTrackId,
       muted: this.muted,
-      canPrevious: this.historyIndex > 0,
+      canPrevious: this.historyIndex > 0 && musicTrackById(this.history[this.historyIndex-1]!)?.context === this.context,
       canNext: pool.length > 1,
       canShuffle: pool.length > 1,
       loopAvailable: false,
@@ -90,6 +98,7 @@ class MusicTransportAdapter implements MusicTransportPort {
 
   private select(track: MusicTrackDefinition, addToHistory = true): MusicTransportSnapshot {
     this.currentTrackId = track.id;
+    if (track.context === "maze") { this.lastMazeTrackId = track.id; this.mazePicker.noteTrackStarted(track.url); }
     if (addToHistory) {
       this.history.splice(this.historyIndex + 1);
       if (this.history[this.history.length - 1] !== track.id) this.history.push(track.id);
@@ -102,7 +111,15 @@ class MusicTransportAdapter implements MusicTransportPort {
   setContext(context: MusicContext): MusicTransportSnapshot {
     const current = musicTrackById(this.currentTrackId);
     this.context = context;
-    if (current?.context === context) return this.publish();
+    // Each explicit maze context is an entry/revisit, as in the original picker.
+    if (context === "maze") {
+      const entry = ++this.mazeEntry;
+      let track = musicTrackByUrl(this.mazePicker.trackForMaze(entry))!;
+      // Manual transport may already have played the bag's sole remaining item.
+      if (track.id === this.lastMazeTrackId && MUSIC_POOLS.maze.length > 1) track = musicTrackByUrl(this.mazePicker.trackForMaze(entry))!;
+      return this.select(track);
+    }
+    if (current?.context === context) return this.select(current, false);
     return this.select(MUSIC_POOLS[context][0]!);
   }
 
@@ -139,6 +156,8 @@ class MusicTransportAdapter implements MusicTransportPort {
   }
 
   async startFromUserGesture(): Promise<boolean> {
+    this.effects.selectTrack?.(musicTrackById(this.currentTrackId)!);
+    this.effects.setMuted?.(this.muted);
     return this.effects.start?.() ?? true;
   }
 
@@ -158,7 +177,7 @@ export function createCurrentMusicTransport(): MusicTransportPort {
     setMuted: setMusicMuted,
     start: startMusicFromUserGesture,
     dispose: disposeMusic,
-  });
+  }, createMusicRunSeed());
 }
 
 export const CURRENT_MUSIC_TRANSPORT = createCurrentMusicTransport();

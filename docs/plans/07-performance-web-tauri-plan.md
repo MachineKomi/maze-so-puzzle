@@ -30,7 +30,7 @@ implementation or duplicate its owner. Broad optimization and audio remain here.
 
 ### Pass 07B — final specialist execution
 
-Return after Plans 06, 03, root checkpoint 03M, 01, root MOVE-01, 04, 02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement the contextual audio and measured optimization phases against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.
+Return after Plans 06, 03, root checkpoint 03M, 01, root MOVE-01, 04, 02, UI-02, 08, and 05 are accepted. Re-read every shipped subsystem spec, rebaseline the integrated product, then implement the contextual audio and measured optimization phases against current contracts. Consume Plan-06 save/campaign revisions and stable IDs; do not layer a second migration or use obsolete hand-written routes.
 
 - Begin with a fresh inventory after final Plan-03 runtime publication and root
   checkpoint 03M's delivered 42-track catalogue/current-adapter cutover. Consume
@@ -63,12 +63,58 @@ Protect the large minimap, clear static semantics, signature wonder beats, anima
 
 Re-evaluate every orphan/retirement candidate against the final Art Bible and VFX/audio use. A currently unused friendship cue may be deliberately reserved; either qualify a real use or prove it dead. Never classify it solely because the old call graph lacks a consumer, and leave final archive/removal to Plan 12.
 
+### Human playtest qualification additions — v0.20.1, 2026-09-05
+
+Source: [numbered playtest intake](../playtests/2026-09-05-v0201-wishlist.md).
+The reported build is v0.20.1. Qualify actual accepted future fixes rather than
+counting a planning entry or an Agent-01 candidate as a pass. These additions do
+not authorize concurrent performance runs on the active specialist's host.
+
+- Retain reproducible routes through `rainbow-power-parade` and
+  `twilight-treasure-loop` for `PT-20260905-33`. Require root/Plan-04's resolved
+  disposition and evidence before integrated closure, then sample settled and
+  moving frames at fractional positions/DPR to detect a returning dark edge.
+  `springstep-sky-hollow` remains the explicit floor/wall-readability regression
+  scene for `PT-20260902-15`/`PT-20260903-24`; sample all accepted role/pair/scale
+  recipes and require convincing raised walls without corridor narrowing.
+- `PT-20260905-38`: record maximum actual CSS size times DPR, selected source
+  resolution, effective scale and render/filter chain for the sprite consumers
+  in the covering matrix. Inspect a full programmatic/optional-frame cycle and
+  its softest intermediate frames beside the neutral still. A sharp endpoint
+  or satisfactory average FPS does not prove crisp animation. Fix measured
+  sampling/decode redundancy while preserving identity, readable outlines and
+  MOVE-01's continuous travel; no global nearest-neighbour or pixel-snapped
+  movement workaround. Include approved six-identity corrections if root/Human
+  selected them, without reopening other stills or warming the whole catalogue.
+- `PT-20260905-40`: retain root's identity-preserving offcamera follower route
+  fixtures. Culling and cache optimization must not change assigned world-trail
+  positions, squeeze every friend into the viewport, or cut corridors during
+  loops/reversals. Test five friends, rescue insertion and jump/portal handling
+  with final lighting/VFX/poses. Repair violations through the accepted root
+  travel/trail seam; this is not authority for a second follower subsystem.
+- `PT-20260902-15` poison and `PT-20260903-22` reward sprays need dense-scene
+  qualification. Adjacent poison cells retain varied slow phases/paths with
+  bounded work. Gold/Science homing targets the moving collecting actor and
+  preserves exactly-once receipt when hidden, cancelled or coalesced. Measure
+  node/voice/paint bounds and repeated pickup listening over music; more loot
+  must not create louder, incessant per-particle audio. Future rainbow XP remains
+  behind Plan 14 and its later explicit progression approval.
+- `PT-20260905-35`: consume Plan 02's distinctive finite friend dances and
+  UI-02's no-scroll victory composition. Verify maximum content plus actual
+  animated extents at the shared device/zoom matrix, preserving readable text,
+  usable targets and every result/action. Do not make the budget pass by hiding
+  content, freezing all friend personality or shrinking accessible text. A
+  geometry conflict returns to root/Human with measured candidates. Qualify
+  the accepted tabbed Book and detail cards by selected-page request/decode
+  closure and rapid navigation cleanup; do not preload every entry to make
+  opening a card appear fast. Root Plan 09 requalifies its final roster/content.
+
 ### Moving baselines and final scope
 
 - Keep separate budgets for critical-path transfer, active six-tile decoded working set, steady-state render/input cost, and total offline package.
 - Approved richer features may change old exact byte totals. Require measured value, allocation, and offsets where practical; do not fail them blindly against one historical gzip number.
 - The 25% media/package reduction remains a quality-qualified goal, not authority to degrade art or audio.
-- Plan 07B qualifies the integrated current campaign. Root Plan 09 must rerun the relevant 24-level/24-card Book performance and final release matrix after expansion.
+- Plan 07B qualifies the integrated current campaign. Root Plan 09 must rerun the relevant 24-level and catalogue-derived tabbed Book/card performance and final release matrix after expansion.
 - All level scenarios resolve current campaign entries by stable ID and derive checkpoints through engine-replayed transitions.
 - Leave reproducible commands, smoke coverage and a compact manifest template
   for an Integrated Interaction Preview after 07B. The root manager rebuilds
@@ -928,7 +974,7 @@ No VFX-attributable long task may exceed 50 ms; effect construction target is �
 - Full, lite and static quality crossed with full/reduced motion across the shared TV/Deck/desktop/Tauri/tablet/phone viewport matrix; use a reproducible covering set for DPR1/2, 200% zoom, keyboard, pointer/touch and controller rather than an infeasible full Cartesian product.
 - Every level in the execution-time canonical campaign order plus a reproducible pairwise covering set of generated casts/regions; water/lava/poison/holes; active material/light combinations; dense Rainbow Power and current large-maze stress fixtures.
 - Combat, rescue, jump, portal, door, treasure/reward, completion; complete and cancel through Home/restart/hide/resize.
-- Book top/bottom scroll and image sharpness; title/level art pop-in; offline Tauri from a clean app profile.
+- Every accepted Book tab, its pagination or section-local scrolling where designed, friend/enemy detail opening/closing and image sharpness; no return to one combined long page. Also title/level art pop-in and offline Tauri from a clean app profile.
 - Blind/level-matched audio comparison, loop/fade, mute/unmute, speakers/headphones, each supported browser and WebView2.
 - Save kill matrix: close/crash/hide at pre-debounce, mid-debounce, post-checkpoint, during presentation, on completion, and during migration/quota failure.
 

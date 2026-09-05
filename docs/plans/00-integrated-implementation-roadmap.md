@@ -15,10 +15,14 @@ Latest checkpoint review: Agent 01 stopped on 2026-09-05 with a candidate,
 not an accepted UI. Root review found mandatory art/phone gaps plus audio/image
 fallback regressions. `../reviews/2026-09-05-plan01-review.md` and
 `AGENT01-review-follow-up.md` own the bounded return. No MOVE-01 or FP-UI1 release
-starts before that prerequisite is accepted. The shared planning checkpoint may
-now be backed up separately; the candidate's runtime files remain uncommitted.
+starts before that prerequisite is accepted. That planning/review checkpoint was
+backed up as `09413c1`. **Latest Human update: Agent 01 has finished its existing
+return.** Root accepted the UI engineering checkpoint after closing publication,
+allocation and final project/art/performance checks; Git backup precedes MOVE-01.
+Preserve the original assignment as history. See the complete 17-item v0.20.1 intake at
+`../playtests/2026-09-05-v0201-wishlist.md` and §5.13D below.
 
-Current sequence: **01 review → MOVE-01 → FP-UI1 → 04 → 02 → 08 → 05 → 07B /
+Current sequence: **01 review → MOVE-01 → FP-UI1 → 04 → 02 → UI-02 → 08 → 05 → 07B /
 FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
 RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
 specialist tasks from root-prepared prompts. Only one runtime owner runs at once.
@@ -31,6 +35,22 @@ candidate convergence; a final product-opportunity/specification review; then a
 root-authored transferable process playbook
 
 ## 1. Outcome
+
+**Latest return, 2026-09-05:** Agent 01 has stopped after its six bounded
+corrections. Root independently reproduced 452 tests and the matching production
+build, with no new code defect found in the focused review. Root completed the
+fifteen returned reward renditions, reviewed all29 publication records and exact
+allocations, and passed final453 project/121 art tests and static gates. The UI
+engineering checkpoint is accepted for MOVE-01/preview preparation; Human/device
+qualification remains pending. Neither MOVE-01 nor FP-UI1 is yet delivered.
+
+The additional wishlist `../playtests/2026-09-05-02-room-variety-and-mechanics.md`
+adds PT43 monster/treasure rooms and whole-maze profiles to Plan 09. PT44 brings
+a bounded intuitive-mechanics comparison into its early design preflight, before
+dependent maps freeze. New rules require an explicit Human-selected specification
+and solver/save/input contract; monster density, random mandatory loot or walking
+length cannot substitute for a puzzle. Plan 14 revisits deferred candidates;
+it does not postpone the whole comparison until after the campaign is built.
 
 This roadmap turns the specialist plans and later Human-directed feature work
 into one programme. It resolves overlapping ownership, records the Human
@@ -125,6 +145,7 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 | 5A | **MOVE-01 — Root travel/camera comfort, then FP-UI1** | Implements the Human's advanced movement request against the accepted UI seam before lighting/VFX attach. Keeps exact tile rules while coordinating smooth actor/camera travel. | Accepted travel/coordinate/cancellation contract, route and frame evidence, clean reviewed/pushed checkpoint, and required verified FP-UI1 playable release with family comfort still honestly pending. See `MOVE-01-smooth-travel-and-camera.md`. |
 | 6 | **04 — Lighting and wall depth** | Uses final art materials and the final MazeViewport/scene slots. It creates the single terrain topology/render-model seam, coherent light resolver, wall layers, grounding wrappers, and bounded presentation-only multi-theme region support before effects attach to them. | Lighting spec, resolved-light API, cached topology/render model, validated one-to-four-region terrain-theme seam over one gameplay topology, world masks/layer tokens, dedicated contact/cast/sparkle surfaces, tier evidence. |
 | 7 | **02 — Graphics and VFX** | Consumes final art tokens/assets, terrain/light layers, UI anchors, and gameplay events. It owns the shared presentation director, cancellation, semantic effect grammar, hazard motion, varied flourishes, and the reusable bounded reward-shower presentation from `PT-20260903-22`. | VFX Bible, presentation-director contract, anchor/timing/cancellation APIs, effect variants, deterministic visual-only reward burst/homing recipes, reduced/static recipes, sound/lifecycle evidence. |
+| 7A | **UI-02 — Returning UI specialist: Book, focus and victory** | Implements the newly requested Book tabs/bestiary/cards and final victory composition after 02 supplies celebration recipes, before 08 qualifies their navigation. Root reviews the bounded encounter/save contract. | Five accessible Book pages, encounter-earned bestiary with conservative migration, selected-card presentation art/lore, restrained modality-ready focus, measured no-scroll victory, stable control IDs and reviewed budget/geometry evidence. See `UI-02-adventure-book-and-focus-polish.md`. Not part of the current Agent-01 task or FP-UI1 promise. |
 | 8 | **08 — Controls, Xbox controller, Steam Deck** | Uses the actual UI focus topology, final presentation-lock contract, and root-frozen music transport port. It normalizes all input sources, implements controller navigation/gameplay—including every compact Sound action—and proves no stale input crosses an effect or overlay. | Controls/Steam Deck spec, shared input policy/action dispatcher, gamepad implementation, controller prompts/focus/scrolling, semantic music-transport conformance against the current/fake adapter, deterministic tests and honest hardware checklist. |
 | 9 | **05 — Limited sprite animation** | Runs only after final static character art, grounding wrappers, VFX timelines, UI sizes, motion provider, and controller lock semantics exist. It adds purposeful frames—including an approved bounded chest/Mimic reveal where it fits the tranche—without becoming another identity or timing system. | Animation spec, bounded first frame tranche, typed manifest/renderer, atomic fallback/decode behaviour, on-model actual-size and integration evidence. |
 | 10 | **07B — Performance Phases 1–7** | The original performance agent returns to re-baseline and optimize the combined product against 07A. It implements the full contextual BGM controller behind the frozen transport port and owns final pre-campaign budgets, media decisions, delivery caching, Tauri/Steam Deck profiles, package provenance, and release evidence. It reads Plan 09 before retirement-candidate classification and forecasts its approved roster/theme reservations without title-time full-catalogue preload; Plan 12 alone performs final retirement. | Reproducible before/after reports, qualified contextual Previous/Next/Shuffle history and transitions, optimized pre-campaign web/Tauri build, package provenance, regression gates, a time-bounded Plan-09 content/asset reservation ledger and 24-level/generated forecast, updated release evidence, and no unexplained quality loss. |
@@ -331,12 +352,15 @@ laundered into an "orphan" merely because implementation is incomplete.
 geometry-compatible closed/good-open/revealed triplet for every approved Mimic
 family—including Treasure and Candy when approved—plus Gold/Science art, without
 implementing game rules.
-Before Plan 02, the root manager freezes the typed committed-reward outcome,
-auditable 65% reward / 35% Mimic buckets, bounded drop tables, semantic object
-identity, and exactly-once save/resume contract in the Gameplay Design Spec.
+Root 03M established the typed committed-reward contract and historical v1
+65% reward / 35% Mimic rule. Preserve that contract/version as evidence of
+current behaviour. **The 2026-09-05 Human update prospectively replaces a fixed
+global chance with designer-controlled, versioned encounter policies in Plan 09.**
+Plan 02 presents committed results without depending on a specific probability.
 
 One versioned Mimic-family registry maps those visual triplets onto a shared
-mechanic; no family gets a separate probability or economy. Plan 02 implements
+mechanic; authored policy profiles use one probability/economy implementation,
+not per-family bespoke rules. Plan 02 implements
 one cancellable, bounded presentation: a chest strike/reveal,
 short collision-free ballistic spray with coloured trails, magnetic homing to
 Ame, exact amount feedback, and satisfying audio. It consumes already-committed
@@ -352,7 +376,7 @@ For Surprise Mazes, Plan 09 gives each family an explicit
 `generatedEligible` disposition and introduces placement only in a new
 generated-content version. A generated maze may contain at most one disguised
 Mimic, only in a solver-proven optional chest/treasure slot; zero is common.
-Family selection and the committed 65/35 result use deterministic streams
+Family selection and the committed versioned policy result use deterministic streams
 isolated from topology, required rewards, ordinary enemy composition and
 solution truth. Historical versions keep their prior interpretation.
 
@@ -361,6 +385,18 @@ repeated bumps, and non-monetized. Reward state commits once regardless of
 animation cancellation; a large credited amount may use a capped number of
 visual sprites. Full acceptance and routing live in
 `docs/PLAYTEST_BACKLOG.md#pt-20260903-22--mimic-reveal-and-magnetic-reward-showers`.
+
+The initial generated rollout remains optional-only. Authored required-route
+chests can be guaranteed benign; randomized required blockers need proof that
+every permitted branch is beatable using a valid resource route available before
+the encounter. Optional Mimics may require returning stronger, but their own
+reward or resources behind them cannot be the witness. Freeze Power at the
+documented run boundary; do not reroll/rescale revealed opponents. Defeated
+Mimics always exceed comparable ordinary chest loot under an explicit
+currency-aware comparison. Gold/Science showers track the moving collector after
+input resumes with bounded soft audio and exact-once credit independent of
+arrival. Holographic rainbow XP remains conditional on a future approved Plan-14
+progression design. No accepted historical run or reward receipt is reinterpreted.
 
 ### 5.12 Content ecology, authored themes and generated variety
 
@@ -433,9 +469,9 @@ eligibility follows the completed Solo-rescue contract. Plan 11 uses a curated
 representative cast in branding rather than turning key art into a completeness
 sheet. Plans 12 and 13 may not hide a missing mandatory consumer through
 retirement or polish; the tranche returns to Plan 09 or an explicit Human defer
-gate. Plan 14 may explore future bestiary, ecology or progression opportunities,
-but cannot defer or redefine the mandatory `PT-20260903-24` integration already
-owned by Plan 09.
+gate. The basic bestiary/cards/tabs are now authorized UI-02/PT37 scope, with
+Plan 09 final content coverage. Plan 14 may explore further ecology or progression
+opportunities but cannot defer this feature or the mandatory PT24 integration.
 
 ### 5.13 Art-directed UI, early front door, and family-preview builds
 
@@ -657,6 +693,51 @@ Plan 08 proves geometry, small-map/edge clamps, input, motion and anchors; 07B
 qualifies wider visible content and larger-sprite paint/rendition costs. Later
 campaign/co-op qualification includes all supported camera spans.
 
+### 5.13D v0.20.1 wishlist integration — 2026-09-05
+
+The Human supplied 17 observations/requests while Agent 01 was running. The
+intake crosswalk preserves all numbering, build context, named mazes and the
+difference between reported symptoms and confirmed current implementation.
+Extend existing PT15/22/24 and add PT33–42; do not retroactively expand the frozen
+UI assignment or call old-build symptoms fresh candidate failures.
+
+| Slice | Single implementation owner / dependency gate |
+| --- | --- |
+| Floor/wall/overlay roles, character-relative texture scale, harmonious pairs, convincing wall lighting; dark-line PT33 | 04 owns validated material/topology/render recipes and diagnosis. 09 selects only valid authored/generated pairs. Springstep Sky Hollow, Rainbow Power Parade and Twilight Treasure Loop are explicit fixtures. New textures require a named material gap, not blanket replacement. |
+| Bubble Ring Blade PT36 | Root's bounded art-metadata preflight before 04's held grounding acceptance; correct canonical attachment if verified, not a per-name CSS patch. |
+| Offcamera follower path PT40 | Root MOVE-01 covers bounded cosmetic breadcrumb identity/order/culling correctness. World trail assignment precedes visibility. 05 consumes positions, never invents navigation. Split genuinely broader gameplay work into a named root prerequisite; keep the initial preview bounded. |
+| Poison variation, moving-collector loot, distinctive friend dances | 02 owns seeded bounded presentation, per-species code-motion recipes, lifecycle and audio cues. 07B qualifies actual density/cost/listening. 05 may add a small approved frame tranche. |
+| Book/bestiary/cards PT37, focus appearance PT34, no-scroll victory composition PT35 | New UI-02 after 02, before 08. Root reviews discovery/migration; 08 supplies canonical input/modality policy; 09 supplies final lore and roster coverage. Completion rewards still commit through the existing single receipt. |
+| Animation sharpness PT38; six-sprite review PT39 | 05 proves crisp full-cycle acting; 04/02 preserve transform discipline and 07B tests sampled frames. Root arranges the explicitly requested six-identity art review before affected frame production. Human judges retain/refine candidates. Unaffected art approvals remain closed. |
+| Safe configurable Mimics PT22, cute-spooky friends PT41, deeper puzzles/difficulty PT42 | 09 owns rules/content/cast proposals and Easy/Medium/Hard/Surprise me selection. All possible encounters remain solvable and versioned. New friends need Human identity/art selection and final-roster consumer coverage. 10 re-audits Garden reward supply/cadence and shared rewards. |
+
+UI-02 is one bounded return to the existing UI specialist when the Human starts
+it, not another concurrent runtime task. Its basic bestiary is no longer a
+Plan-14 idea; the sticker-placement editor and persistent XP still are gated.
+Victory must never scroll and must show all its contents. In an extreme
+small-screen/enlarged-text conflict, require measured geometry and an explicit
+Human resolution; hiding content, clipping or unreadable scaling is not approval.
+
+PT39's scope is exactly `moon-bat`, `pebble-golem`, `hedgehog`, `alpaca`,
+`rainbow-horn-unicorn`, `penguin`. This new Human request authorizes a bounded
+review, not six automatic replacements or a reopened whole-catalogue gate.
+PT41 requires original warm spooky personalities, preserving all current 32
+friends and early Unicorn/Skeleton rescues. Any approved addition gets a
+canonical ID, lore card, authored rescue, generated disposition, loading budget
+and Garden eligibility before it can be considered integrated.
+
+PT42 defines difficulty by reasoning, alternatives, clue use and safe recovery,
+not corridor length or random failure. Generated difficulty is chosen explicitly
+with recognisable icons and labels, or drawn from the eligible set by Surprise
+me. Persist the resolved tier/policy in deterministic identity; never reroll an
+active maze or quietly label a capped easy maze Hard. Preserve gradual teaching,
+ordinary/perfect-route proofs and final family evidence.
+
+FP-UI1 remains the accepted UI plus bounded travel checkpoint. Later wishlist
+slices qualify through FP-CORE2/FP-CAMPAIGN as their dependencies land. Plan 13
+must verify explicit closure/return/approved deferral for every new card, and
+RC-01 requalifies final content added after 07B. No fix is accepted by this plan.
+
 ### 5.14 Final gameplay, progression and quality-of-life opportunity review
 
 Plan 14 is a **planning and Human-decision TODO**, not approval to add a
@@ -774,6 +855,12 @@ implicit Plan-15 scope.
 
 ## 6. Single-owner contract table
 
+The 2026-09-05 additions supplement the established owners below: UI-02 owns
+Book tabs/cards, the root-reviewed encounter record and victory composition;
+08 owns modality/navigation; MOVE-01 owns cosmetic follower trail truth before
+culling. Plan 09 owns new versioned Mimic policy and difficulty/content, while
+03M remains the historical v1 contract owner. See §5.13D for scoped art returns.
+
 | Contract | Owner | Consumers and boundaries |
 |---|---|---|
 | Product decisions and programme sequence | Root manager / game-vision + roadmap | Every agent consumes; only Human authority changes locked product decisions. |
@@ -884,6 +971,15 @@ Freeze or version:
 - VFX layer ownership and flavor selection; and
 - full/lite/static effect recipes.
 
+### After UI-02
+
+- Five Book tab/card focus identities, return semantics and accessible reading order.
+- Root-reviewed versioned encounter/discovery schema, conservative migration,
+  hidden/Mimic/tester rules and final-roster extension seam for 09.
+- Selected-card rendition/lore loading contract and future content reservations.
+- Measured no-scroll victory content/geometry and 02-owned dance slots.
+- Component focus tokens; 08 owns canonical modality transitions and navigation.
+
 ### After Plan 08
 
 Freeze or version:
@@ -905,6 +1001,11 @@ Freeze or version:
 - per-level frame loading/cache budget.
 
 ## 8. Documentation deliverables
+
+UI-02 updates the maintained UI spec and root-reviewed gameplay/progress contract
+with Book discovery/aliases/migration, card/lore/rendition loading, focus tokens,
+victory geometry and control IDs. Its reviewed implementation evidence and PT34/
+35/37 slices join the same backlog and budgets; do not create another status ledger.
 
 | Plan | Durable documentation it creates/owns during implementation | Existing authority it updates when true |
 |---|---|---|

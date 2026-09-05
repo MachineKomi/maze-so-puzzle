@@ -75,6 +75,42 @@ from the previous tile or accumulate an ever-growing presentation queue.
 
 ## Acceptance and evidence
 
+### Bounded follower correctness extension — 2026-09-05
+
+The v0.20.1 wishlist/PT40 asks for followers to stay on Ame's actual corridor
+trail even off camera. Include a bounded cosmetic breadcrumb repair alongside
+the travel integration. This is explicitly root-owned; Plan 05 still owns only
+poses and may not introduce navigation. Do not begin while Agent 01 runs.
+
+Inspect `src/game/followerTrail.ts` and the final renderer at the accepted UI
+checkpoint. The read-only lead is that repeated coordinates are removed and
+camera-visible points are selected before rescued friend indices are assigned.
+Preserve ordered committed path history and each friend's stable identity/slot
+before camera culling. Going offscreen changes visibility, not world position.
+Repeated visits/reversals cannot shortcut a trail across an unrelated corridor.
+Keep storage bounded by the required follower distance; no per-frame pathfinder.
+
+Define explicit discontinuities for rescue start, portals, jumps, restart and
+level/resume boundaries. Ordinary travel follows legal breadcrumbs; never tween
+through walls or fabricate legal engine steps. Preserve existing save, collision,
+reward and rescued-friend semantics. Zero through five followers, long offscreen
+trails, loops, reversal and edge clamping require identity/route assertions plus
+browser evidence. Camera/resize/future zoom changes alone cannot rearrange the
+procession. Feed the same world-position snapshot into lighting/VFX/pose consumers.
+
+If a repair needs new gameplay AI, new reachability rules or a broad save schema,
+record a named root prerequisite before affected animation with exact remaining
+scope, rather than silently expanding MOVE-01 or delaying FP-UI1 for the entire
+wishlist. The Human's latest request authorizes this bounded correction, not
+analogue movement or a second follower travel clock.
+
+Also observe PT33's reported dark line in Rainbow Power Parade and Twilight
+Treasure Loop across the before/after camera route. Correct a demonstrated
+travel regression here; otherwise preserve an exact fixture for Plan 04's
+layer/material diagnosis. An animated decoration is a hypothesis, not a cause.
+
+### Required travel evidence
+
 Use pure clock/coordinate tests for intermediate turns, reversal, clamping,
 retargeting, frame-rate independence and cancellation. Reuse current engine,
 pointer, held-input, door, pending-completion and save tests. Test actual browser

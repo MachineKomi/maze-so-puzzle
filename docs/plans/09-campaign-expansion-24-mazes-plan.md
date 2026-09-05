@@ -1,7 +1,7 @@
 # Plan 09 — expand the authored campaign from 16 to 24 mazes
 
 Status: manager-authored implementation plan; execute only after checkpoint 03M,
-Plans 01–08, and both Plan-07 passes are accepted
+Plans 01–08, UI-02, and both Plan-07 passes are accepted
 
 Owner: root integration agent
 
@@ -13,6 +13,45 @@ Planning refinement: 2026-09-05. Reconcile that dated baseline with the accepted
 32-friend authored coverage and the post-Agent-01 movement-comfort checkpoint.
 This plan remains pending; chapter names, sketches and teaching hypotheses below
 are not evidence of implemented or family-approved content.
+
+Wishlist refinement: 2026-09-05, based on Human playtesting of **v0.20.1** in
+`docs/playtests/2026-09-05-v0201-wishlist.md`. PT22 now requires designer-owned,
+solvability-safe Mimic policies rather than one mandatory probability for every
+future placement. PT41 adds a bounded proposal for original cute/spooky friends;
+PT42 strengthens actual puzzle reasoning and adds a player-facing Surprise Maze
+difficulty choice. These are pending Plan-09 requirements, not claims about the
+running Agent-01 candidate or changes to accepted historical rules/save data.
+
+Additional wishlist refinement: **20260905-02** in
+`docs/playtests/2026-09-05-02-room-variety-and-mechanics.md`. PT43 adds deliberate
+monster/treasure rooms and whole-maze profiles. PT44 requires bounded exploration
+of intuitive new mechanics in this plan's design preflight, before dependent
+maps freeze; any selected new rule still needs its own Human-approved contract.
+Neither refinement expands the currently running UI task or FP-UI1.
+
+### UI-02 consumer contract — PT37/35/34
+
+UI-02 lands after 02/before 08 and owns the Book interface/discovery foundation.
+Consume its five tabs, selected-card viewer, encounter entry IDs, root-reviewed
+migration and current lore. This plan completes final 24-maze/friend/guardian
+content and true discoverability through those APIs; it does not build a rival
+Book or infer encounters from a catalogue/completion list. Every admitted friend
+or enemy gets original canonical flavour, correct rendition, loading disposition
+and actual consumer evidence. Displayed lore remains distinct from exact gameplay
+facts. Cosmetic festival cameos never award encounter/combat credit by accident.
+
+When Candy Mimic moves from a visible ordinary enemy to the disguised family,
+migrate UI-02's previously earned entry through its stable alias without losing
+or duplicating discovery. Preserve historical ordinary-enemy reconstruction.
+Unrevealed new disguised chests do not expose family entries. Resolve all final
+EnemyStyle/MimicFamilyId mappings, including omitted historical defaults.
+
+Recheck Book tabs/cards and Plan-08 controller return with the final roster;
+test current maximum and longest lore cases with selected-page media loading.
+Requalify UI-02's no-scroll victory with actual 24-chapter outros/rewards and
+Plan-02/05 friend dances. New content cannot quietly invalidate geometry, focus,
+save safety or the Plan-07B performance evidence. Record the updated tests and
+FP-CAMPAIGN findings before Plan 10 consumes the result.
 
 ## 1. Outcome
 
@@ -37,7 +76,9 @@ At execution time, do not assume the repository still resembles the planning bas
 6. `docs/PLAYTEST_BACKLOG.md`, especially `PT-20260902-04`,
    `PT-20260902-06`, `PT-20260902-11`, `PT-20260902-12`,
    `PT-20260902-16`, `PT-20260902-17`, `PT-20260902-19`,
-   `PT-20260903-22`, `PT-20260903-24`, and `PT-20260904-30`; these are execution
+   `PT-20260903-22`, `PT-20260903-24`, `PT-20260904-30`,
+   `PT-20260905-41`, `PT-20260905-42`, `PT-20260905-43`, and
+   `PT-20260905-44`; these are execution
    contracts, not optional background notes. Consume `PT-20260902-07`'s accepted
    movement/camera comfort evidence when measuring route fatigue.
 7. Current levels, story, engine, solver, progress, session, navigation, achievements, rewards, assets/catalogue, audio, presentation, UI, and tests.
@@ -62,6 +103,10 @@ These constraints derive from Human decisions and predecessor contracts.
 
 - Preserve existing level IDs and earned durable results.
 - Keep the established engine-rule vocabulary unless the Human explicitly approves a separate mechanic specification. Default: add no new engine mechanic.
+- Complete PT44's bounded comparison and Human disposition before freezing maps
+  that could depend on a new rule. Exploration is authorized; implementation of
+  a particular mechanic is not implied. A deferred/no-new-rule decision leaves
+  this plan's existing-vocabulary campaign viable.
 - Keep equal-Power wins, harmless stronger guardians, reusable matching keys, Boots/Leaf traversal gates, complete straight Spring jumps, persistent portal pairs, optional rescues, and deterministic content.
 - Every new maze passes ordinary zero-rescue and exact-all-rescue solver modes.
 - Every reachable valid player state should remain completable where practical; any intentional exception requires a documented fairness proof, short safe recovery, and clear disclosure.
@@ -327,6 +372,112 @@ small family cohorts, with no invented general-child success claim. A repeated
 blocked inference or discomfort returns the smallest affected packet for
 revision, even when aggregate solver or completion metrics pass.
 
+### 7.3 Meaningful challenge rather than an obvious delivery route (PT42)
+
+The Human's v0.20.1 observation is that improved rooms and variety still too often
+leave a single obvious route with every required tool lying along it. Audit all
+sixteen inherited chapters as well as the eight additions for that specific
+failure. A branching floor plan alone is not proof of a puzzle.
+
+For every post-tutorial teaching/application/mastery packet, identify the actual
+decision, at least one plausible alternative, the visible evidence that helps
+the player choose, and the consequence or new information after trying. Count
+prerequisite-order choices, purposeful revisits, route comparisons, landing
+predictions and combined rules; do not count empty dead ends, repetitive
+blocker collisions, longer walking or a key placed directly before its door as
+additional reasoning. Deliberate decompression/celebration chapters may be easy,
+but must be labelled in the pacing ledger rather than disguised as mastery.
+
+Phase 0 freezes a per-band decision/combination rubric and representative Easy,
+Medium and Hard generated packets before mass production. Medium and Hard need
+meaningfully different reasoning demands using the learned rule vocabulary;
+extra size, guardian count or travel time alone cannot raise a difficulty label.
+Prove ordinary and perfect routes, then observe whether a player can form and
+revise a plan, make progress after a safe mistake and feel a satisfying payoff.
+Perseverance should resolve an understandable question, with the existing Hint
+ladder available; guessing, grinding and adult explanation are not substitutes.
+
+### 7.4 Monster and treasure rooms and mazes (PT43)
+
+Extend PT11/12/24/42's single campaign/ecology ledger with deliberate room and
+whole-maze profiles. Deliver all four Human-requested forms through the existing
+24-chapter portfolio and new Surprise generation version. Recompose inherited
+or proposed chapters where appropriate; this is not an instruction to add four
+more campaign slots or a separate arena mode.
+
+| Form | Intended experience | What makes it more than increased object density |
+| --- | --- | --- |
+| Monster room | A compact, legible guardian encounter with a useful choice and enjoyable payoff. | Position, Power information, optional approach/return and a coherent cast create a small planning moment. |
+| Treasure room | The pleasure of finding an inviting cache or reward nook. | The approach, discovery and optional branching give the reward a reason to be there; the contents are not the required solution. |
+| Monster maze | A whole chapter/Surprise result whose main rhythm is guardian-led planning and satisfying encounters. | Distinct rooms, attainable-Power order choices, purposeful required encounters where appropriate, optional battles and quiet intervals replace a kill-all corridor. |
+| Treasure maze | A whole chapter/Surprise result about branching discovery and rewarding exploration. | Landmarks, loops, optional caches and a coherent exploration question vary the route; an ordinary exit remains available without collecting every treasure. |
+
+Phase 0 names authored examples of each form and freezes the generated-profile
+coverage/weights. Room profiles may coexist in a maze, but an occasional chest
+inside a normal chapter does not qualify as a treasure-led whole maze. Record
+the intended decisions, ordinary/perfect routes, discovery/reward rhythm,
+required/optional encounter count, Power supply and distinguishing family
+feedback. Preserve normal mixed/quiet chapters and difficulty alternation.
+
+Monster rooms/mazes retain equal-Power wins, harmless stronger guardians and
+safe return. No new arena lock, all-enemies-defeated exit condition, compulsory
+random reward, resource farming or repetitive gauntlet is introduced. Treasure
+remains optional, rewards use the accepted table/version, and every Mimic passes
+PT22's required/optional and joint-outcome proof. Respect current actor-density,
+room size, event-gap, minimap-disclosure and solver-budget limits rather than
+creating an exception merely because the label is Monster or Treasure.
+
+Keep room/maze profile separate from topology family, environment theme and
+Easy/Medium/Hard. A monster maze need not be Hard; a treasure maze can ask an
+interesting question. Generated profile selection and resulting placements,
+Power and reward data are gameplay content, with deterministic versioned streams
+and fingerprint identity; they are not presentation-only skins. Cover every
+feasible profile/difficulty/topology combination across declared seeds, with
+explicit reasons for infeasible combinations and no silent profile fallback.
+Audit reward totals and repeated-shower audio/visual performance, then give
+Plan 10 the actual resulting Science supply before its Egg-cadence decision.
+
+### 7.5 Intuitive mechanics exploration before dependent map freeze (PT44)
+
+Run a bounded design comparison now in Phase 0, not after finishing all maps.
+The Human wants deeper, intuitive fun without annoyance or confusion. Start by
+showing what stronger combinations of current keys, Power, portals and traversal
+can achieve; compare a small set of materially different new-rule hypotheses.
+Do not assume adding a rule is inherently better than composing existing ones.
+
+The following are starting hypotheses, **not approved mechanics**:
+
+| Candidate | Intuitive promise and later puzzle opportunity | Main cost or reason to reject |
+| --- | --- | --- |
+| Existing-rule composition | A visible gate/portal/Power relationship makes choosing an order satisfying without another rule to learn. | Reject the particular layout if it is still an automatic item-delivery chain; use this as the no-new-mechanic comparison. |
+| Clearly paired reversible switch and gate | One deliberate action changes an unmistakably linked gate; later choices compare open routes. | Adds switch state, remote-cause explanation and reachability cases. Reject hidden/offscreen-only feedback, required timers or trapping reversals. |
+| One movable object with safe undo | Push a plainly pushable object to make a short route relationship click. | Adds position/search state, collision and undo persistence. Reject tedious reset loops, ambiguous push rules or accidental permanent traps. |
+| Short predictable ice slide | A visible slide-to-stop rule supports a satisfying landing prediction. | Reopens the still-undecided PT14 proposal; requires a separate traversal/solver/control contract. Reject precision timing, hidden stops or frustrating overshoot. |
+
+The root may refine or replace these hypotheses during the comparison. For each
+candidate, provide one compact teaching pocket, one later combination, a likely
+wrong guess and its safe recovery, the expected fun/learning benefit, and a
+concrete rejection signal. Use paper layouts, state diagrams or static mockups
+first. Assess action vocabulary, clue visibility, non-reading/non-colour and
+reduced/static communication, touch/controller intent, engine state growth,
+solver/Hint cost, deterministic seeds, saves/rollback, art/VFX and performance.
+Avoid mandatory reaction timing or extra repeated inputs masquerading as depth.
+
+Present a small shortlist with an explicit existing-rules-only option for the
+Human's accept/defer/reject decision. Selection is not proof of play quality: a
+new rule needs a separately scoped approved specification, implementation owner,
+bounded prototype/qualification and learning evidence before dependent campaign
+adoption. Name any earlier rendering, controls or persistence contract that must
+be requalified. Keep unaffected design work moving, but do not freeze or produce
+many maps around an undecided mechanic. Preserve chapter IDs and the approved
+24-slot structure unless the existing order/role decision gate changes them.
+
+Record every disposition and rationale in this plan's design packet. Explicitly
+deferred ideas may return in Plan 14 against the final game's evidence. PT14
+spikes/ice, friend powers, persistent XP and other new systems do not become
+approved because this comparison mentions them; do not defer the entire PT44
+exploration to the late opportunity review instead.
+
 ## 8. Narrative and educational expansion
 
 Update the Story Bible from 16 to 24 entries after the PT30 cast disposition.
@@ -461,14 +612,67 @@ The expansion should primarily showcase the final catalogue rather than demand e
   cosmetic `EnemyStyle` entries. Create one versioned family mapping—covering
   Treasure and Candy when both pass Plan 03—from stable family ID to closed,
   good-open and revealed-enemy art IDs. Every family uses the same disguised-
-  chest gameplay object and committed seeded 65% good-chest/35% enemy result;
-  no placement may gate solvability or required Power under either branch.
+  chest gameplay object and a committed seeded outcome under the versioned
+  designer policy below; no permitted outcome may make an ordinary or perfect
+  route unsolvable.
   Migrate `twilight-treasure-loop`'s current always-visible Candy Mimic under a
   content revision, preserving durable progress and retaining historical
   generator/content-version reconstruction. If a required presentation/save
   contract has not landed, return it to its owner or obtain explicit Human
   deferral; do not silently exclude a family, substitute an always-visible
   guardian to make coverage pass, or use art lifecycle as mechanic readiness.
+
+#### Designer-owned Mimic safety and reward policy (PT22, 2026-09-05)
+
+This section prospectively supersedes the mandatory 65/35 requirement for new
+Plan-09 content. `REWARD_RULES_VERSION = 1`, its exact buckets/tables and any
+historical content reconstruction remain pinned and tested. Introduce a new
+version for configurable outcomes, power and improved defeat loot; do not edit
+old saved receipts or silently reinterpret an existing seed/object identity.
+Update the maintained gameplay specification when this new contract lands.
+
+- Each authored encounter declares its stable identity, family, outcome policy,
+  bounded Mimic probability, Power policy and reward-table version. A guaranteed
+  good chest is a legitimate author choice, including on a required path. A
+  fixed probability may remain a documented default, but never constrains every
+  placement. Invalid policies fail validation instead of silently clamping.
+- Resolve outcome, Power and reward once from isolated deterministic channels
+  no later than first legal contact. Freeze the receipt across retry, leave/
+  return, presentation cancellation and supported save/resume. Do not rescale a
+  revealed Mimic every time Ame returns or let VFX/animation draw gameplay RNG.
+- A required-path Mimic is permitted only with an engine-replayed proof that
+  Ame can attain sufficient Power before crossing it, without using its own
+  reward or an item behind it. Otherwise author a guaranteed-good chest or move
+  the encounter. Preserve the existing equal-Power-wins rule: “strong enough”
+  means Ame's Power is at least the Mimic's, not a new strict-greater rule.
+- An optional Mimic may initially be stronger than Ame when a readable, safe
+  return route reaches sufficient attainable Power elsewhere. Prove that route
+  with the encounter unresolved, not from a sum of all items in the map. A
+  nominally optional chest cannot trap a required key or an exact-perfect
+  rescue. Joint outcome combinations must remain safe, including mutually
+  dependent encounters; independent one-chest tests are insufficient.
+- Every defeated Mimic grants a guaranteed richer reward than its declared
+  ordinary-chest comparator, within a new bounded table. Phase 0 names that
+  comparator and an auditable same-currency or explicitly defined mixed-reward
+  guarantee, including the minimum roll; larger particles alone do not qualify.
+  Audit campaign totals and later Plan-10 Science supply before freezing values.
+  Ordinary enemy drops do not become the Mimic defeat table by accident.
+- Commit object resolution and the complete reward exactly once before the
+  corresponding presentation starts. A benign chest credits on its accepted
+  resolution; Mimic defeat loot credits only after actual victory. Revealing an
+  underpowered Mimic commits its identity/Power/outcome, never unearned loot.
+  Consume Plan 02's bounded large reveal and loot shower,
+  with Gold and Science travelling toward the moving collector after play
+  resumes. Particle arrival, cancellation, off-camera travel and repeated input
+  never award extra currency or delay an already committed award. XP crystals
+  remain a Plan-14 option requiring a separately approved progression system.
+
+Boundary fixtures cover guaranteed-good, guaranteed-Mimic and mixed policies;
+probability boundaries; underpowered first contact and later return; required
+and optional placements; all permitted joint outcomes; richer minimum rewards;
+receipt persistence; and unchanged v1 reconstruction. Generated Mimics retain
+the at-most-one, optional-slot constraint unless a later explicit decision
+changes that separate scope rule.
 
 ### 10.2 Authored rescue ecology
 
@@ -494,6 +698,28 @@ The expansion should primarily showcase the final catalogue rather than demand e
   smuggled into Required Path or ordinary completion. Plan 10's Garden/Egg system
   consumes this complete rescue roster and may never become the only route to a
   species.
+
+#### Original cute and spooky additions (PT41, 2026-09-05)
+
+Prepare a small, bounded cast proposal before final roster freeze, responding
+to the Human's affection for Tea-Time Skeleton and for unusual old-JRPG and
+historical charm. New friends should be welcoming, funny or gently mysterious;
+each needs a distinct silhouette, personality, habitat and encounter/lore role,
+not merely a recolour or an extra checklist entry. Homages draw on broad moods,
+folklore/history and playful situations; names, designs, sprites and lore are
+original to Puzzlewild. References such as Madou Monogatari are taste direction,
+not instructions to reproduce another game's characters or presentation.
+
+Present the proposed identities, scope, art needs and intended authored rescue
+placements for Human selection before producing new art. A wishlist request
+does not approve an invented species list. Preserve the achieved 32-species
+coverage and the opening Unicorn/Skeleton placements. Derive all totals from
+the eventual approved stable-ID roster; neither cap it at 32 nor invent a new
+fixed count. For selected additions, close approved art/provenance and decode
+budgets before placement, then update authored rescue coverage, generated
+eligibility, Book lore/encounter consumers and historical content versions.
+Plan 10 must re-audit Egg cadence, eligibility and Garden capacity against that
+actual final roster before any durable Garden migration.
 
 ### 10.3 Fixed authored environments and multi-region places
 
@@ -528,6 +754,34 @@ The expansion should primarily showcase the final catalogue rather than demand e
 
 ### 10.4 Deterministic Surprise Maze composition
 
+- Add the PT42 player-facing **Easy / Medium / Hard** choice and a separate
+  **Surprise me** difficulty toggle through the established shared UI and Plan-08
+  action/focus contracts. Use a consistent increasing-shape/count icon grammar
+  plus short labels and accessible names; the distinction must be understandable
+  without reading or colour alone. Test that interpretation with the Human.
+  Surprise me varies the eligible difficulty as well as producing a fresh maze;
+  turning it off restores the explicit choice. Do not label existing internal
+  `movement / gentle / growing / adventure` tiers as an equivalent UI feature.
+- Keep reasoning difficulty separate from map dimensions and from rule
+  eligibility. Phase 0 defines a versioned mapping from each requested level of
+  challenge to puzzle/decision budgets and the player's learned-rule set. Easy
+  remains available to returning players; Hard is not just a longer route.
+  Clearly explain any unavailable rule-dependent option rather than silently
+  selecting an easier result, and never surprise a new player with an untaught
+  required mechanic. Preserve a suitable movement-only onboarding profile.
+- Freeze the selected difficulty, eligibility snapshot and generation versions
+  for each newly created maze, including Surprise me's deterministic difficulty
+  draw in a stream isolated from topology, content, rewards and presentation.
+  An existing maze does not change when the preference is edited, replayed or
+  inspected. Record the resolved difficulty in debug/feedback reconstruction and
+  content identity so the same published identity cannot mean different puzzles.
+  Persist only the new preference needed by the agreed UI contract; current
+  generated active runs are still not persisted unless separately approved.
+- Validate distributions and reasoning packets across every eligible difficulty
+  and topology family, including fresh/returning profiles, explicit choices,
+  Surprise me on/off, default recovery, keyboard/touch/controller parity and
+  historical seed reconstruction. Bounded generation failure must be explained
+  and recoverable; it cannot secretly change difficulty to make a test pass.
 - Introduce a versioned `TopologyFamilyId` contract with at least three genuinely
   different route grammars: `classic-labyrinth`, `room-and-spoke`, and
   `loop-garden-chamber` (names may change once, before publication). Select the
@@ -561,12 +815,17 @@ The expansion should primarily showcase the final catalogue rather than demand e
   `generatedEligible` metadata. In the new generated-content version, permit at
   most one disguised Mimic per Surprise Maze, only by assigning a solver-proven
   optional chest/treasure slot; a zero-Mimic result is normal. Select the family
-  and commit its 65/35 outcome through deterministic streams isolated from
+  and commit its versioned designer-policy outcome through deterministic streams isolated from
   topology, required reward placement, ordinary enemy composition and solution
   truth. Freeze the bounded placement frequency in Phase 0 rather than letting
   catalogue size change it implicitly.
 - Choose one complete validated environment recipe through the art catalogue.
   Never pair arbitrary floor and wall files, even when both are valid alone.
+  Consume Plans 04/02's explicit floor, wall-face, wall-top and overlay roles,
+  world-scale treatment and approved harmonious pairings. Review the resulting
+  scale against Ame at default/close/wide zoom, including Springstep Sky Hollow;
+  two compatible colours cannot justify a floor-looking wall. Regional variety
+  must retain those roles, intentional lighting and readable hazards.
 - Freeze a generated-size distribution in Phase 0 whose declared seed cohort
   produces at least 90% of mazes at no more than 16 tiles on either axis. Any
   generated result above 16 must use room/hub/open-space grammar, pass the same
@@ -597,6 +856,11 @@ The expansion should primarily showcase the final catalogue rather than demand e
 ### Phase 0 — integrated audit and design freeze
 
 - Rebaseline current campaign order, metrics, story, asset pacing, controller flow, Book capacity, and performance.
+- Complete PT44's bounded mechanics comparison and record the Human's explicit
+  disposition before freezing dependent design packets. A selected new mechanic
+  receives a named separate specification/owner and prerequisite qualification;
+  do not silently broaden the campaign implementation. A no-new-rule/deferred
+  disposition keeps the existing-rule design route available.
 - Confirm all predecessor contracts and fix missing foundations first.
 - Bound any missing foundation as a separately reviewable predecessor repair,
   with owner, affected acceptance rows and rollback. Close that repair before
@@ -622,13 +886,27 @@ The expansion should primarily showcase the final catalogue rather than demand e
   stable-6×6/12-input teaching threshold or a measured, family-supported
   replacement. Rework the Rainbow Power Parade packet if it still describes a
   snaking corridor.
+- Add PT43's monster-room, treasure-room, monster-maze and treasure-maze examples
+  to the same authored/ecology matrix. Freeze the independent room/maze-profile
+  definitions, generated weights/feasible combinations, actor/reward limits and
+  comparison scenes that prove different play rather than changed labels.
+- Freeze PT22 encounter-policy schema, safety proofs, richer defeat-table
+  comparator/limits and receipt migration; PT41's Human-selected original cast
+  and final roster dependencies; and PT42's challenge rubric, difficulty-choice
+  UI, learned-rule mapping and deterministic selection/failure behavior. Keep
+  these product decisions separate from the historical v1 and generated-version
+  fixtures they must preserve.
 
-Exit: design packets meet this plan and the current gameplay spec; no topology has changed.
+Exit: design packets meet this plan and the current gameplay spec; PT43 has its
+named content/coverage contract and PT44 has a recorded Human disposition with
+any selected-mechanic prerequisite explicitly gated. No live campaign topology
+has changed, and no dependent map relies on an undecided rule.
 
 The review packet calls out decisions still requiring the Human: final eligible
 roster/exclusions, unresolved child-facing guardian names, any cast addition or
-replacement, changed insertion role/order, and a proposed exception to an
-existing Human gate. Accepted art is not re-presented for approval. Root may
+replacement, PT44's selected new-rule proposal, changed insertion role/order,
+and a proposed exception to an existing Human gate. Accepted art is not
+re-presented for approval. Root may
 resolve ordinary layout/composition choices within this plan, but must not
 convert a missing decision into implicit permission. Lock the teaching and
 roster matrix before authoring; refine individual room sketches using formative
@@ -649,6 +927,12 @@ play evidence rather than treating a speculative ASCII map as immutable.
 - Add generated Mimic placement only under the new generated-content version.
   Historical versions retain their prior Candy-Mimic interpretation; they are
   never silently re-read through the new disguised-object registry.
+- Introduce PT22's new policy/reward version and immutable encounter receipts
+  behind the same development boundary, with all permitted-outcome safety and
+  old-v1 fixtures passing before real placement. Add PT42's requested/resolved
+  difficulty identity and preference mapping without changing an active maze;
+  integrate its selector through the existing UI/control contracts before the
+  final campaign family test.
 - Keep campaign migration and generated-topology/composition work separately
   reviewable inside this phase. First prove migration against test-only entries;
   then prove one seed per topology family before widening the frozen cohort.
@@ -828,12 +1112,34 @@ Do not put campaign ordering, story identity, or unlock truth in CSS or filename
   seed reconstruction; and strict separation from topology/rules/reward PRNG
   streams.
 - Every final approved Mimic family cross-resolves closed/good-open/revealed art,
-  exercises the exact shared 65/35 buckets and all reward/combat branches, never
+  exercises its new versioned designer-policy boundaries and all permitted
+  reward/combat branches, preserves the historical v1 65/35 buckets, never
   enters ordinary enemy-style composition in the new version, and preserves the
   historical Candy Mimic generator/level interpretation only under its pinned
   historical content version. Generated tests prove the at-most-one optional-
   slot rule, the frozen placement frequency, every `generatedEligible` family,
   zero-Mimic seeds, and isolation from topology, required rewards and solutions.
+- PT22 fixtures prove attainable Power before required encounters and safe
+  return to optional ones, joint-outcome ordinary/perfect solvability, a richer
+  guaranteed minimum defeat reward, immutable encounter receipts and exactly-once
+  credit independently of the reveal/shower or moving homing target.
+- PT41's selected new friends have Human-approved original identities, approved
+  art, stable species IDs and authored Solo rescues; all accepted baseline
+  species remain covered, counts derive from the final roster and Plan-10
+  economy/capacity consumers receive its exact version.
+- PT42's explicit and Surprise me selections retain readable non-reading cues,
+  eligibility and deterministic difficulty identity; authored and generated
+  decision packets prove meaningful alternatives and information beyond mere
+  route length. No difficulty setting silently changes a running maze.
+- PT43's four requested forms have named authored examples and generated-profile
+  coverage with deterministic identity, feasible difficulty/topology combinations,
+  ordinary/perfect solvability, bounded actor/reward/shower cost and documented
+  Plan-10 Science-supply consequences. No profile adds a kill-all exit rule or
+  relies on a random reward to progress.
+- PT44 has a concrete comparison and recorded Human accept/defer/reject outcome.
+  Any adopted new rule has its approved specification, owner, teaching/recovery
+  evidence, solver/Hint contract, save/version tests and requalified predecessor
+  interfaces before dependent maps go live. Undecided PT14 mechanics remain out.
 - Fresh/partial/full/legacy/inconsistent/active-run campaign-order migrations.
 - Continue, Next, Book totals, Maze Select, achievements, reward bands, tester isolation, and reset allow-list use canonical order/count.
 - Static/reduced/full presentation and asset availability.
@@ -856,6 +1162,12 @@ Do not put campaign ordering, story identity, or unlock truth in CSS or filename
   dead end, room/open level, portal-island level, and one justified >16 set piece.
   Record whether each feels clear and rewarding rather than instructional,
   repetitive, empty or exhausting.
+- Compare PT43's monster and treasure rooms and whole-maze profiles: can players
+  describe the different attraction and make a useful route choice, and do the
+  rewards/battles remain pleasant across repeated visits? If PT44 selects a new
+  rule, observe first prediction, safe mistake/recovery and later transfer before
+  deploying the same rule throughout the campaign. Record confusion or annoyance
+  plainly rather than accepting a candidate solely because its solver passes.
 - Review at least one enemy debut, the skeleton/lizard ensemble, several mixed
   casts, the all-roster festival, one thematic and one mixed friend group, every
   authored environment family, and each multi-region portal transition. Confirm

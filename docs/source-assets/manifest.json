@@ -225,8 +225,8 @@
       },
       {
         "path": "scripts/art_pipeline/tests/test_plan03_r2_publication.py",
-        "sha256": "70d3b8b03ae13196a0a501065260b4adb5a5f349c1e2e60c689b11a0744274d5",
-        "bytes": 5619
+        "sha256": "2875e5322b4329d80c8a0112b4d6156f431d86af93abce3317eb4ec452d3471f",
+        "bytes": 6172
       },
       {
         "path": "scripts/art_pipeline/tests/test_proofs.py",
@@ -237,6 +237,16 @@
         "path": "scripts/art_pipeline/tests/test_provenance.py",
         "sha256": "7a1b851c14589f6d8c99edfcf9df14869b5afbd27fc3a9e2f0bacaff66f8970d",
         "bytes": 6911
+      },
+      {
+        "path": "scripts/art_pipeline/tests/test_ui_presentation_approval.py",
+        "sha256": "ec00c7283365b42872afcf40034eda0bdc348ecb52c700fa9e124aa02ae459e7",
+        "bytes": 3884
+      },
+      {
+        "path": "scripts/art_pipeline/ui_presentation_candidates.py",
+        "sha256": "bb6d8a8fce3f07695732d2de78a4165891bae6575626c15b0244755c6c3f82b2",
+        "bytes": 17462
       },
       {
         "path": "scripts/art_pipeline/validate.py",
@@ -252,8 +262,8 @@
     "runtimeContracts": [
       {
         "path": "src/artCatalog.ts",
-        "sha256": "5ee01d90af63626b1fcce141e5e4866b71d45ae88efe062987645d90f82e61d2",
-        "bytes": 36160
+        "sha256": "5b991c42c6c2501be3481ffdaf86202afa6557f5db035449ffa9179fb82abedc",
+        "bytes": 36277
       },
       {
         "path": "src/assets.ts",
@@ -351,11 +361,17 @@
         "referencedBy": [
           "batch:mgjrpg-02-batch-05-weapons",
           "comet-spear-mgjrpg02-v02-source",
+          "comet-spear-ui01-presentation-candidate-r01-source",
           "cupcake-mace-mgjrpg02-v02-source",
+          "cupcake-mace-ui01-presentation-candidate-r01-source",
           "flower-sabre-mgjrpg02-v02-source",
+          "flower-sabre-ui01-presentation-candidate-r01-source",
           "moon-wand-mgjrpg02-v02-source",
+          "moon-wand-ui01-presentation-candidate-r01-source",
           "star-sword-mgjrpg02-v02-source",
-          "sun-mallet-mgjrpg02-v02-source"
+          "star-sword-ui01-presentation-candidate-r01-source",
+          "sun-mallet-mgjrpg02-v02-source",
+          "sun-mallet-ui01-presentation-candidate-r01-source"
         ]
       },
       {
@@ -378,8 +394,11 @@
           "door-rose-heart-mgjrpg02-v02-source",
           "door-sunny-sun-mgjrpg02-v02-source",
           "key-blue-star-mgjrpg02-v02-source",
+          "key-blue-star-ui01-presentation-candidate-r01-source",
           "key-rose-heart-mgjrpg02-v02-source",
-          "key-sunny-sun-mgjrpg02-v02-source"
+          "key-rose-heart-ui01-presentation-candidate-r01-source",
+          "key-sunny-sun-mgjrpg02-v02-source",
+          "key-sunny-sun-ui01-presentation-candidate-r01-source"
         ]
       },
       {
@@ -399,9 +418,11 @@
         "bytes": 5350,
         "referencedBy": [
           "antidote-leaf-mgjrpg02-v02-source",
+          "antidote-leaf-ui01-presentation-candidate-r01-source",
           "batch:mgjrpg-02-batch-09-item-refresh",
           "science-gears-mgjrpg02-v02-source",
-          "spring-boots-mgjrpg02-v02-source"
+          "spring-boots-mgjrpg02-v02-source",
+          "spring-boots-ui01-presentation-candidate-r01-source"
         ]
       },
       {
@@ -451,8 +472,10 @@
           "app-icon-ame-mgjrpg02-v03-source",
           "batch:mgjrpg-02-batch-13-ui-portals-equipment",
           "bubble-ring-blade-mgjrpg02-v01-source",
+          "bubble-ring-blade-ui01-presentation-candidate-r01-source",
           "golden-heart-mgjrpg02-v03-source",
           "leaf-blade-mgjrpg02-v03-source",
+          "leaf-blade-ui01-presentation-candidate-r01-source",
           "nav-home-mgjrpg02-v03-source",
           "nav-muted-mgjrpg02-v02-source",
           "rose-heart-mgjrpg02-v03-source",
@@ -501,7 +524,8 @@
           "science-book-mgjrpg02-v01-source",
           "science-magnifying-glass-mgjrpg02-v01-source",
           "science-telescope-mgjrpg02-v01-source",
-          "splash-boots-mgjrpg02-v02-source"
+          "splash-boots-mgjrpg02-v02-source",
+          "splash-boots-ui01-presentation-candidate-r01-source"
         ]
       },
       {
@@ -585,21 +609,36 @@
         "bytes": 52881,
         "referencedBy": [
           "badge-bunny-buddy-mgjrpg02-v02-source",
+          "badge-bunny-buddy-ui01-presentation-candidate-r01-source",
           "badge-fox-friend-mgjrpg02-v02-source",
+          "badge-fox-friend-ui01-presentation-candidate-r01-source",
           "badge-grand-explorer-mgjrpg02-v02-source",
+          "badge-grand-explorer-ui01-presentation-candidate-r01-source",
           "badge-kitten-pal-mgjrpg02-v02-source",
+          "badge-kitten-pal-ui01-presentation-candidate-r01-source",
           "badge-maze-mapper-mgjrpg02-v02-source",
+          "badge-maze-mapper-ui01-presentation-candidate-r01-source",
           "badge-mighty-adventurer-mgjrpg02-v02-source",
+          "badge-mighty-adventurer-ui01-presentation-candidate-r01-source",
           "badge-pathfinder-mgjrpg02-v02-source",
+          "badge-pathfinder-ui01-presentation-candidate-r01-source",
           "badge-surprise-scout-mgjrpg02-v02-source",
+          "badge-surprise-scout-ui01-presentation-candidate-r01-source",
           "badge-twinkle-toes-mgjrpg02-v02-source",
+          "badge-twinkle-toes-ui01-presentation-candidate-r01-source",
           "batch:mgjrpg-02-batch-22-achievement-stickers",
           "reward-animal-friend-sticker-mgjrpg02-v03-source",
+          "reward-animal-friend-sticker-ui01-presentation-candidate-r01-source",
           "reward-golden-guardian-medal-mgjrpg02-v03-source",
+          "reward-golden-guardian-medal-ui01-presentation-candidate-r01-source",
           "reward-helping-paw-medal-mgjrpg02-v03-source",
+          "reward-helping-paw-medal-ui01-presentation-candidate-r01-source",
           "reward-rainbow-rescue-medal-mgjrpg02-v03-source",
+          "reward-rainbow-rescue-medal-ui01-presentation-candidate-r01-source",
           "reward-surprise-sparkle-sticker-mgjrpg02-v03-source",
-          "reward-trail-sticker-mgjrpg02-v03-source"
+          "reward-surprise-sparkle-sticker-ui01-presentation-candidate-r01-source",
+          "reward-trail-sticker-mgjrpg02-v03-source",
+          "reward-trail-sticker-ui01-presentation-candidate-r01-source"
         ]
       },
       {
@@ -1375,10 +1414,10 @@
     ]
   },
   "summary": {
-    "recordCount": 292,
-    "runtimeImageCount": 291,
-    "runtimeEncodedBytes": 53666488,
-    "runtimeDecodedBytesUpperBound": 327433952,
+    "recordCount": 321,
+    "runtimeImageCount": 320,
+    "runtimeEncodedBytes": 57720614,
+    "runtimeDecodedBytesUpperBound": 357842656,
     "sourceImageCount": 417,
     "sourceEncodedBytes": 602095980,
     "unreferencedSourceImageCount": 3,
@@ -1403,13 +1442,13 @@
       },
       {
         "name": "source-backed",
-        "count": 168
+        "count": 197
       }
     ],
     "approvalStatusCounts": [
       {
         "name": "approved",
-        "count": 164
+        "count": 193
       },
       {
         "name": "design-approved",
@@ -1470,15 +1509,15 @@
     },
     {
       "name": "item",
-      "count": 25,
-      "bytes": 2768777,
-      "decodedBytesUpperBound": 11468800
+      "count": 28,
+      "bytes": 3232061,
+      "decodedBytesUpperBound": 14614528
     },
     {
       "name": "lock",
-      "count": 12,
-      "bytes": 2134643,
-      "decodedBytesUpperBound": 7864320
+      "count": 15,
+      "bytes": 2412011,
+      "decodedBytesUpperBound": 11010048
     },
     {
       "name": "navigation",
@@ -1494,9 +1533,9 @@
     },
     {
       "name": "reward",
-      "count": 33,
-      "bytes": 6193522,
-      "decodedBytesUpperBound": 22806528
+      "count": 48,
+      "bytes": 8880074,
+      "decodedBytesUpperBound": 38535168
     },
     {
       "name": "story",
@@ -1512,17 +1551,17 @@
     },
     {
       "name": "weapon",
-      "count": 16,
-      "bytes": 1473700,
-      "decodedBytesUpperBound": 10485760
+      "count": 24,
+      "bytes": 2100622,
+      "decodedBytesUpperBound": 18874368
     }
   ],
   "runtimeByStatus": [
     {
       "name": "active",
-      "count": 127,
-      "bytes": 10462585,
-      "decodedBytesUpperBound": 119826240
+      "count": 156,
+      "bytes": 14516711,
+      "decodedBytesUpperBound": 150234944
     },
     {
       "name": "deprecated",
@@ -1552,9 +1591,9 @@
     },
     {
       "name": "webp",
-      "count": 203,
-      "bytes": 21691876,
-      "decodedBytesUpperBound": 181681888
+      "count": 232,
+      "bytes": 25746002,
+      "decodedBytesUpperBound": 212090592
     }
   ],
   "records": [
@@ -2079,6 +2118,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/antidote-leaf-ui01-presentation-candidate-r01-source.json",
+      "sha256": "8b51046c75c3c0a7439e8a0651127c96f6c09b1a434d57c47cee77937d86aa7e",
+      "recordId": "antidote-leaf-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "antidote-leaf",
+      "artVersion": 2,
+      "family": "item",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/antidote-leaf-v01-source.json",
       "sha256": "12ec2606047d89775b9883e42d3b5823e7acfe95f5ac4a6fa534ec4f6a6b1446",
       "recordId": "antidote-leaf-v01-source",
@@ -2147,6 +2210,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/badge-bunny-buddy-ui01-presentation-candidate-r01-source.json",
+      "sha256": "cd624eb136753586c70f2666467e8b8b99dd87b35bba9d0f143e1dac71116168",
+      "recordId": "badge-bunny-buddy-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-bunny-buddy",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/badge-bunny-buddy-v01-source.json",
       "sha256": "0db46ee4ff4fa065daa15ed0cd1400279a56900336f5e574f1fec7b7a1861f9c",
       "recordId": "badge-bunny-buddy-v01-source",
@@ -2187,6 +2274,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/badge-fox-friend-ui01-presentation-candidate-r01-source.json",
+      "sha256": "20f19f2847182819126f5b1535986c8314e70da35a6536b9a3f486a95769ca90",
+      "recordId": "badge-fox-friend-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-fox-friend",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -2235,6 +2346,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/badge-grand-explorer-ui01-presentation-candidate-r01-source.json",
+      "sha256": "76e48ba813d80655179068d4205f76bb8dce7000b54bb8690939929f8101e797",
+      "recordId": "badge-grand-explorer-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-grand-explorer",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/badge-grand-explorer-v01-source.json",
       "sha256": "b8a86e003f3775aa40a6417cc306974dbc00a91980f23dc2e2b9a8eb7adc6eec",
       "recordId": "badge-grand-explorer-v01-source",
@@ -2275,6 +2410,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/badge-kitten-pal-ui01-presentation-candidate-r01-source.json",
+      "sha256": "1fa6cca1781e00093edfdfabad69956aeca07c2015ae8699f33d7a515b37b725",
+      "recordId": "badge-kitten-pal-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-kitten-pal",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -2323,6 +2482,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/badge-maze-mapper-ui01-presentation-candidate-r01-source.json",
+      "sha256": "ed3a5a9771e631d23b6bbf182180269dab6e78fb024a2eea195b90d1ab9419cc",
+      "recordId": "badge-maze-mapper-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-maze-mapper",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/badge-maze-mapper-v01-source.json",
       "sha256": "e82c3b904bcff74c5a5802059ea24ab348be7e51fa6f0633b12d5ff4e83c4851",
       "recordId": "badge-maze-mapper-v01-source",
@@ -2363,6 +2546,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/badge-mighty-adventurer-ui01-presentation-candidate-r01-source.json",
+      "sha256": "f37ad4d4cb70b444712d41b6f411e7cca3027572146982677c34242fd7d5bdc2",
+      "recordId": "badge-mighty-adventurer-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-mighty-adventurer",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -2411,6 +2618,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/badge-pathfinder-ui01-presentation-candidate-r01-source.json",
+      "sha256": "0760aa7aa6dea0ac0d37c70abd79d8d080dc111530c84e116f499e842dd83e3b",
+      "recordId": "badge-pathfinder-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-pathfinder",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/badge-pathfinder-v01-source.json",
       "sha256": "aa57cebfcf8921077f1e427ebfbd5eb4ffd85137b4667d0e684a9b2ec2240a74",
       "recordId": "badge-pathfinder-v01-source",
@@ -2455,6 +2686,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/badge-surprise-scout-ui01-presentation-candidate-r01-source.json",
+      "sha256": "7b1d25b137ad460e8c63e86756c946f30a5bc917ca90442e13948d3b97716ff1",
+      "recordId": "badge-surprise-scout-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-surprise-scout",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/badge-surprise-scout-v01-source.json",
       "sha256": "be36446c6ac44c1c3f2c898bc450ce45a2f5969293454513775f86155a2f741b",
       "recordId": "badge-surprise-scout-v01-source",
@@ -2495,6 +2750,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/badge-twinkle-toes-ui01-presentation-candidate-r01-source.json",
+      "sha256": "b4decd097c5c8005df66141291913634f24edd93f08528f211d25205345df1a1",
+      "recordId": "badge-twinkle-toes-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "badge-twinkle-toes",
+      "artVersion": 2,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -2631,6 +2910,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/bubble-ring-blade-ui01-presentation-candidate-r01-source.json",
+      "sha256": "97b198268d6750f4b83c69a8b71d4c19690d02769c858a994fcd4a17c984df3f",
+      "recordId": "bubble-ring-blade-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "bubble-ring-blade",
+      "artVersion": 1,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -3291,6 +3594,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/comet-spear-ui01-presentation-candidate-r01-source.json",
+      "sha256": "15aae4dc34a5dfca494c1d2283e3133fe15306de0765168f07afd621c698c3e6",
+      "recordId": "comet-spear-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "comet-spear",
+      "artVersion": 2,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/cultist-mgjrpg02-v03-source.json",
       "sha256": "507588318369d1ffbb5c1d7916c83f083a6996ffdae9109f25631b760b80a741",
       "recordId": "cultist-mgjrpg02-v03-source",
@@ -3335,6 +3662,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/cupcake-mace-ui01-presentation-candidate-r01-source.json",
+      "sha256": "c3d1103d1bc3e956be393a9dc188ccb9b6a9d33c7190087d973caef382069027",
+      "recordId": "cupcake-mace-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "cupcake-mace",
+      "artVersion": 2,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -4187,6 +4538,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/flower-sabre-ui01-presentation-candidate-r01-source.json",
+      "sha256": "357e38e8742cfc807a050b92d2c336d28af43a1116fc039b9076b1321ab170e3",
+      "recordId": "flower-sabre-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "flower-sabre",
+      "artVersion": 2,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/fox-mgjrpg02-v02-source.json",
       "sha256": "0c67fa59def2c09b6c5ffbadb2612f66fd6a83de96f8aeec506b8befe0c0fbd8",
       "recordId": "fox-mgjrpg02-v02-source",
@@ -4823,6 +5198,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/key-blue-star-ui01-presentation-candidate-r01-source.json",
+      "sha256": "37b1251a93771e9a5b9b0bc4cf6bf9a92fa65a07f76dca47e15f958d0c69fee6",
+      "recordId": "key-blue-star-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "key-blue-star",
+      "artVersion": 2,
+      "family": "lock",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/key-blue-star-v01-source.json",
       "sha256": "1166c58673c84a9f3310773b0a847aaffd3bf8932acb97f7df98463d97fb5849",
       "recordId": "key-blue-star-v01-source",
@@ -4867,6 +5266,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/key-rose-heart-ui01-presentation-candidate-r01-source.json",
+      "sha256": "83222e5b671f0eaf3abf356a4104bcdab68e70f1e82191777eed4061d8117012",
+      "recordId": "key-rose-heart-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "key-rose-heart",
+      "artVersion": 2,
+      "family": "lock",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/key-rose-heart-v01-source.json",
       "sha256": "064b074c1ccb8c3a1a1b0d4c0f3acdb9303e14780b3caf31bdd50a170eb7a645",
       "recordId": "key-rose-heart-v01-source",
@@ -4907,6 +5330,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/key-sunny-sun-ui01-presentation-candidate-r01-source.json",
+      "sha256": "5c3086260cf7fcdafc8592fe559a5419acdba3662d0678a089aa5e123346cd3c",
+      "recordId": "key-sunny-sun-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "key-sunny-sun",
+      "artVersion": 2,
+      "family": "lock",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -5111,6 +5558,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/leaf-blade-ui01-presentation-candidate-r01-source.json",
+      "sha256": "525427b19865459d875b194eaded3340a45e2f8c0511498bb3b508ad140f58ee",
+      "recordId": "leaf-blade-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "leaf-blade",
+      "artVersion": 3,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -5351,6 +5822,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/moon-wand-ui01-presentation-candidate-r01-source.json",
+      "sha256": "53cb34a016c9e490325ebca0b15389fd24ed5d2ea0028a37ad5126aef942f0a8",
+      "recordId": "moon-wand-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "moon-wand",
+      "artVersion": 2,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -6179,6 +6674,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/reward-animal-friend-sticker-ui01-presentation-candidate-r01-source.json",
+      "sha256": "423e2479eb2baa798c10108c64d9bef2852aa21ed5737f0c65f62945271b6309",
+      "recordId": "reward-animal-friend-sticker-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "reward-animal-friend-sticker",
+      "artVersion": 3,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/reward-animal-friend-sticker-v02-source.json",
       "sha256": "2c246451a99652ee6d4fc981974914ab515f923ea3bd780f12dccfc2a12cc9ab",
       "recordId": "reward-animal-friend-sticker-v02-source",
@@ -6243,6 +6762,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/reward-golden-guardian-medal-ui01-presentation-candidate-r01-source.json",
+      "sha256": "fadbd0464dd603021c4ce0b88753cb9dbe3654cf5b409264d5854a84666e7658",
+      "recordId": "reward-golden-guardian-medal-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "reward-golden-guardian-medal",
+      "artVersion": 3,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/reward-golden-guardian-medal-v02-source.json",
       "sha256": "d72762a68932dc8acf92001a25ac27a24a4ac06b6b232881c8b2ade4fb2f692a",
       "recordId": "reward-golden-guardian-medal-v02-source",
@@ -6287,6 +6830,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/reward-helping-paw-medal-ui01-presentation-candidate-r01-source.json",
+      "sha256": "3fb76c96e52ffd5924fd872e3c5ce69ed089e56e73e900b7538974962d9f75c5",
+      "recordId": "reward-helping-paw-medal-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "reward-helping-paw-medal",
+      "artVersion": 3,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/reward-helping-paw-medal-v02-source.json",
       "sha256": "4a36fd61776d6611cca79f8ddb25e9b6ef1a27a4c5197f108e5faa32a306f16d",
       "recordId": "reward-helping-paw-medal-v02-source",
@@ -6327,6 +6894,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/reward-rainbow-rescue-medal-ui01-presentation-candidate-r01-source.json",
+      "sha256": "16f062de30568a0cbf13eb712bcc4fa9b8d534c249e5e41754e545265dd6ad00",
+      "recordId": "reward-rainbow-rescue-medal-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "reward-rainbow-rescue-medal",
+      "artVersion": 3,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -6415,6 +7006,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/reward-surprise-sparkle-sticker-ui01-presentation-candidate-r01-source.json",
+      "sha256": "fa28d2b035726fe56f37988b4587a44f996f3389fe91fd5960a0749f5e26a184",
+      "recordId": "reward-surprise-sparkle-sticker-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "reward-surprise-sparkle-sticker",
+      "artVersion": 3,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/reward-surprise-sparkle-sticker-v02-source.json",
       "sha256": "f0a497d4d733d143df2a504c7863e68176859dad20704ad7c5013387f30a073c",
       "recordId": "reward-surprise-sparkle-sticker-v02-source",
@@ -6455,6 +7070,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/reward-trail-sticker-ui01-presentation-candidate-r01-source.json",
+      "sha256": "6130c2439844ac92307658c7ed2007ab5130009214387db287b92e074117fef5",
+      "recordId": "reward-trail-sticker-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "reward-trail-sticker",
+      "artVersion": 3,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -6719,6 +7358,30 @@
       "derivativeCount": 1
     },
     {
+      "path": "docs/source-assets/records/splash-boots-ui01-presentation-candidate-r01-source.json",
+      "sha256": "83976e87ed60e4481f6d92a024d350dba0921caf85824e42cdf2aded17490fab",
+      "recordId": "splash-boots-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "splash-boots",
+      "artVersion": 2,
+      "family": "item",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
       "path": "docs/source-assets/records/spring-boots-mgjrpg02-v02-source.json",
       "sha256": "c0e7b104e130ce940d881bbccef7a1723d215736ef2ff30cc495bed7a13fa665",
       "recordId": "spring-boots-mgjrpg02-v02-source",
@@ -6739,6 +7402,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/spring-boots-ui01-presentation-candidate-r01-source.json",
+      "sha256": "223384c68f726d09c536a962cb604a330f42937cec49e72291419f4fbac7eeb4",
+      "recordId": "spring-boots-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "spring-boots",
+      "artVersion": 2,
+      "family": "item",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -6783,6 +7470,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/star-sword-ui01-presentation-candidate-r01-source.json",
+      "sha256": "15aec44a84e62919528274d45cfcb9a41762969f75034f1ded3047730c337679",
+      "recordId": "star-sword-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "star-sword",
+      "artVersion": 2,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -6943,6 +7654,30 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "mgjrpg-02-runtime-derivative-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/sun-mallet-ui01-presentation-candidate-r01-source.json",
+      "sha256": "75b72731d347f9fe65187ac8dd162b600e6e70198b4ba47157b4089e17c0ab18",
+      "recordId": "sun-mallet-ui01-presentation-candidate-r01-source",
+      "schemaVersion": 2,
+      "id": "sun-mallet",
+      "artVersion": 2,
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "approved",
+      "validationProfile": "strict-v2",
+      "artRecipeVersion": "mgjrpg-02",
+      "recipeEvidence": {
+        "recipeId": "mgjrpg-02",
+        "path": "docs/source-assets/recipes/mgjrpg-02.json",
+        "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+      },
+      "renderingProfile": "storybook-local-contour-v1",
+      "generationRunCount": 1,
+      "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -11222,6 +11957,470 @@
       "recordId": "violet-spade-bloom-mgjrpg02-v02-source",
       "family": "portal",
       "runtimeStatus": "dormant",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/antidote-leaf-v02-presentation-512-r01.webp",
+      "sha256": "761355b38004faf9b20450e6dba2981fdd1dd24f059a52955d5016b9f163012f",
+      "bytes": 118676,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "antidote-leaf-ui01-presentation-candidate-r01-source",
+      "family": "item",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-bunny-buddy-v02-presentation-512-r01.webp",
+      "sha256": "5299d8e3b944dbff4732c709ea343579bc6aabd63473c765ed65d3e7a185116a",
+      "bytes": 194008,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-bunny-buddy-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-fox-friend-v02-presentation-512-r01.webp",
+      "sha256": "3dc29d90668f707d57e87e7dfa1f8f954981b7be5ef90de3006d6002f07c6218",
+      "bytes": 179394,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-fox-friend-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-grand-explorer-v02-presentation-512-r01.webp",
+      "sha256": "0c293898af240b6ee29ca3ffeff0a760cc785ad8eb64a0a31689ddd3a8362239",
+      "bytes": 180318,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-grand-explorer-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-kitten-pal-v02-presentation-512-r01.webp",
+      "sha256": "252e853eb2771059d95eaffec7579fe9e9cb5628952293229a2cb7084cc29954",
+      "bytes": 229622,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-kitten-pal-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-maze-mapper-v02-presentation-512-r01.webp",
+      "sha256": "30abb13e1101d0288df5709f0602b53bfecfa254ce628b980264092b71658830",
+      "bytes": 176754,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-maze-mapper-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-mighty-adventurer-v02-presentation-512-r01.webp",
+      "sha256": "764e67ebf1ef4ad94569b443aeac23f739775f29b9cdd1f7a0f9ab53fa9a264d",
+      "bytes": 165372,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-mighty-adventurer-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-pathfinder-v02-presentation-512-r01.webp",
+      "sha256": "1083a7dd712c3906e5f9a264d639e3cc259eb119c0bb89e5caf18698aab95c3d",
+      "bytes": 176158,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-pathfinder-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-surprise-scout-v02-presentation-512-r01.webp",
+      "sha256": "70a252cd6d26c0deb85a8505ed5ae894c31939a62840dbdd6e37c4a1a41a271b",
+      "bytes": 171526,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-surprise-scout-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/badge-twinkle-toes-v02-presentation-512-r01.webp",
+      "sha256": "84ce403dc76f88b3acb08f40912ee03276ac01456fffda782815d980f9f0ea24",
+      "bytes": 190144,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "badge-twinkle-toes-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/bubble-ring-blade-v01-presentation-512-r01.webp",
+      "sha256": "f575b5d0c39d7f78786f1c4716c036c1ea97d84111cf13e5513ea316bfe242f0",
+      "bytes": 123658,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "bubble-ring-blade-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/comet-spear-v02-presentation-512-r01.webp",
+      "sha256": "ef6867def2e428a88aaa1324052487f750661264de23c9f072c9ecd1946ceb8f",
+      "bytes": 45586,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "comet-spear-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/cupcake-mace-v02-presentation-512-r01.webp",
+      "sha256": "1923368a5acb7801b2c1e0f616688e6a2cb32924b1e65e8fde53f08a0d4282ef",
+      "bytes": 71806,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "cupcake-mace-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/flower-sabre-v02-presentation-512-r01.webp",
+      "sha256": "6081a454a7d9e125df9ed1089734c6062891d1d339287fad90dabb316b7592db",
+      "bytes": 66694,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "flower-sabre-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/key-blue-star-v02-presentation-512-r01.webp",
+      "sha256": "1d2336880413ff57b8702a3264c2e83ecf1fffbd89ed4dd355f4f42b9ce4843c",
+      "bytes": 97474,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "key-blue-star-ui01-presentation-candidate-r01-source",
+      "family": "lock",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/key-rose-heart-v02-presentation-512-r01.webp",
+      "sha256": "f7f49ad82f94f82db2277aa539f4db1dd4e52016a6ab6813fb714717e8c2dcb0",
+      "bytes": 85020,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "key-rose-heart-ui01-presentation-candidate-r01-source",
+      "family": "lock",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/key-sunny-sun-v02-presentation-512-r01.webp",
+      "sha256": "3848ceb829499e2854f85a502327985f68e7a75cb5b6891d7a831057e9744218",
+      "bytes": 94874,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "key-sunny-sun-ui01-presentation-candidate-r01-source",
+      "family": "lock",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/leaf-blade-v03-presentation-512-r01.webp",
+      "sha256": "79f2c4e63117b092e936423ecc5f74bb562616a1ee4c6499c47c3e4c708e9541",
+      "bytes": 79978,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "leaf-blade-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/moon-wand-v02-presentation-512-r01.webp",
+      "sha256": "6bc5d49e33af8226422a7fade5d18a05e62c10ae53f25c023618a68cc2d0cab8",
+      "bytes": 54230,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "moon-wand-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/reward-animal-friend-sticker-v03-presentation-512-r01.webp",
+      "sha256": "e7f9074404f0e9275c00e2aab216f3aea5593ac81c644e8b3cbeaba83b25ffe0",
+      "bytes": 191552,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "reward-animal-friend-sticker-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/reward-golden-guardian-medal-v03-presentation-512-r01.webp",
+      "sha256": "f53f65cea458989c10f43432fd07f4b4a62c9ab060af7cb7dccfc236e3ee25a3",
+      "bytes": 142228,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "reward-golden-guardian-medal-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/reward-helping-paw-medal-v03-presentation-512-r01.webp",
+      "sha256": "c35910bda639f0061fd8d9af738acd6ccbf5321efb69920e42cdb2a52ca11d2e",
+      "bytes": 178350,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "reward-helping-paw-medal-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/reward-rainbow-rescue-medal-v03-presentation-512-r01.webp",
+      "sha256": "4e2ee85fa79889ab20f9504dc63ff071debfa2962ffff10d7f440c16cd5e495c",
+      "bytes": 166104,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "reward-rainbow-rescue-medal-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/reward-surprise-sparkle-sticker-v03-presentation-512-r01.webp",
+      "sha256": "2eeeb0f5107d2375788fc1c8b8a1e6d64cb6c3fe8f7418d65c0708ed28f99b4c",
+      "bytes": 172768,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "reward-surprise-sparkle-sticker-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/reward-trail-sticker-v03-presentation-512-r01.webp",
+      "sha256": "c71aaefa0fb76122f942bddf87ebb7ebaffbeddd9cdc766bb4f983b86c86c550",
+      "bytes": 172254,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "reward-trail-sticker-ui01-presentation-candidate-r01-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/splash-boots-v02-presentation-512-r01.webp",
+      "sha256": "4e110c9545cb2edaa508beaa13a788f77c7c949f42d47573811c7863dd25dd78",
+      "bytes": 162478,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "splash-boots-ui01-presentation-candidate-r01-source",
+      "family": "item",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/spring-boots-v02-presentation-512-r01.webp",
+      "sha256": "67d0ff0ec61d8d375776656bb47f5fe8c8719a92092252d03dbed81de27aa703",
+      "bytes": 182130,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "spring-boots-ui01-presentation-candidate-r01-source",
+      "family": "item",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/star-sword-v02-presentation-512-r01.webp",
+      "sha256": "76b804a14a3ad59f637ca60d6eabe3022f5d4ccad55b0542b435a266578b64c7",
+      "bytes": 83348,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "star-sword-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
+      "approvalStatus": "approved"
+    },
+    {
+      "path": "public/assets/mgjrpg-02/presentation/sun-mallet-v02-presentation-512-r01.webp",
+      "sha256": "20067a9ef7844651e0c95d80b71e7834c310442711f9338652e50390dada84c2",
+      "bytes": 101622,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "recordId": "sun-mallet-ui01-presentation-candidate-r01-source",
+      "family": "weapon",
+      "runtimeStatus": "active",
       "approvalStatus": "approved"
     },
     {
@@ -15802,7 +17001,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-05-weapons",
-        "comet-spear-mgjrpg02-v02-source"
+        "comet-spear-mgjrpg02-v02-source",
+        "comet-spear-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -15818,7 +17018,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-05-weapons",
-        "cupcake-mace-mgjrpg02-v02-source"
+        "cupcake-mace-mgjrpg02-v02-source",
+        "cupcake-mace-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -15834,7 +17035,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-05-weapons",
-        "flower-sabre-mgjrpg02-v02-source"
+        "flower-sabre-mgjrpg02-v02-source",
+        "flower-sabre-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -15880,7 +17082,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-05-weapons",
-        "moon-wand-mgjrpg02-v02-source"
+        "moon-wand-mgjrpg02-v02-source",
+        "moon-wand-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -15896,7 +17099,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-05-weapons",
-        "star-sword-mgjrpg02-v02-source"
+        "star-sword-mgjrpg02-v02-source",
+        "star-sword-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -15912,7 +17116,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-05-weapons",
-        "sun-mallet-mgjrpg02-v02-source"
+        "sun-mallet-mgjrpg02-v02-source",
+        "sun-mallet-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -16128,7 +17333,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-07-locks-doors",
-        "key-blue-star-mgjrpg02-v02-source"
+        "key-blue-star-mgjrpg02-v02-source",
+        "key-blue-star-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -16144,7 +17350,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-07-locks-doors",
-        "key-rose-heart-mgjrpg02-v02-source"
+        "key-rose-heart-mgjrpg02-v02-source",
+        "key-rose-heart-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -16160,7 +17367,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-07-locks-doors",
-        "key-sunny-sun-mgjrpg02-v02-source"
+        "key-sunny-sun-mgjrpg02-v02-source",
+        "key-sunny-sun-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -16239,6 +17447,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "antidote-leaf-mgjrpg02-v02-source",
+        "antidote-leaf-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-09-item-refresh"
       ]
     },
@@ -16255,7 +17464,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-09-item-refresh",
-        "spring-boots-mgjrpg02-v02-source"
+        "spring-boots-mgjrpg02-v02-source",
+        "spring-boots-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -16759,7 +17969,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-13-ui-portals-equipment",
-        "bubble-ring-blade-mgjrpg02-v01-source"
+        "bubble-ring-blade-mgjrpg02-v01-source",
+        "bubble-ring-blade-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -16775,7 +17986,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-13-ui-portals-equipment",
-        "leaf-blade-mgjrpg02-v03-source"
+        "leaf-blade-mgjrpg02-v03-source",
+        "leaf-blade-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -17127,7 +18339,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-15-chests-pickups-hazards",
-        "splash-boots-mgjrpg02-v02-source"
+        "splash-boots-mgjrpg02-v02-source",
+        "splash-boots-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -17823,6 +19036,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-bunny-buddy-mgjrpg02-v02-source",
+        "badge-bunny-buddy-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers"
       ]
     },
@@ -17839,6 +19053,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-fox-friend-mgjrpg02-v02-source",
+        "badge-fox-friend-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers"
       ]
     },
@@ -17855,6 +19070,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-grand-explorer-mgjrpg02-v02-source",
+        "badge-grand-explorer-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers"
       ]
     },
@@ -17871,6 +19087,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-kitten-pal-mgjrpg02-v02-source",
+        "badge-kitten-pal-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers"
       ]
     },
@@ -17887,6 +19104,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-maze-mapper-mgjrpg02-v02-source",
+        "badge-maze-mapper-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers",
         "game-logo-mgjrpg02-v03-source"
       ]
@@ -17904,6 +19122,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-mighty-adventurer-mgjrpg02-v02-source",
+        "badge-mighty-adventurer-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers"
       ]
     },
@@ -17920,6 +19139,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-pathfinder-mgjrpg02-v02-source",
+        "badge-pathfinder-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers",
         "game-logo-mgjrpg02-v03-source"
       ]
@@ -17937,6 +19157,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-surprise-scout-mgjrpg02-v02-source",
+        "badge-surprise-scout-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers"
       ]
     },
@@ -17953,6 +19174,7 @@
       "colorMetadata": [],
       "referencedBy": [
         "badge-twinkle-toes-mgjrpg02-v02-source",
+        "badge-twinkle-toes-ui01-presentation-candidate-r01-source",
         "batch:mgjrpg-02-batch-22-achievement-stickers"
       ]
     },
@@ -17984,7 +19206,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-22-achievement-stickers",
-        "reward-animal-friend-sticker-mgjrpg02-v03-source"
+        "reward-animal-friend-sticker-mgjrpg02-v03-source",
+        "reward-animal-friend-sticker-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -18015,7 +19238,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-22-achievement-stickers",
-        "reward-golden-guardian-medal-mgjrpg02-v03-source"
+        "reward-golden-guardian-medal-mgjrpg02-v03-source",
+        "reward-golden-guardian-medal-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -18031,7 +19255,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-22-achievement-stickers",
-        "reward-helping-paw-medal-mgjrpg02-v03-source"
+        "reward-helping-paw-medal-mgjrpg02-v03-source",
+        "reward-helping-paw-medal-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -18047,7 +19272,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-22-achievement-stickers",
-        "reward-rainbow-rescue-medal-mgjrpg02-v03-source"
+        "reward-rainbow-rescue-medal-mgjrpg02-v03-source",
+        "reward-rainbow-rescue-medal-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -18063,7 +19289,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-22-achievement-stickers",
-        "reward-surprise-sparkle-sticker-mgjrpg02-v03-source"
+        "reward-surprise-sparkle-sticker-mgjrpg02-v03-source",
+        "reward-surprise-sparkle-sticker-ui01-presentation-candidate-r01-source"
       ]
     },
     {
@@ -18079,7 +19306,8 @@
       "colorMetadata": [],
       "referencedBy": [
         "batch:mgjrpg-02-batch-22-achievement-stickers",
-        "reward-trail-sticker-mgjrpg02-v03-source"
+        "reward-trail-sticker-mgjrpg02-v03-source",
+        "reward-trail-sticker-ui01-presentation-candidate-r01-source"
       ]
     },
     {

@@ -1,0 +1,225 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "key-blue-star-ui01-presentation-candidate-r01-source",
+  "id": "key-blue-star",
+  "artVersion": 2,
+  "family": "lock",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui01-approved-source-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-07-key-blue-star-a",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/PROMPTS.md",
+        "sha256": "140daa31335e8bf4b47d5e8ce8dc3a1d510149b96301d6ebaf99e450c8f664b8"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "runtime-comparison",
+          "path": "public/assets/star-key.png",
+          "sha256": "ef9dae2c22ad5030e77916f44f19e04ad09dc8a41ef14317e0f66e07fc4ee691"
+        },
+        {
+          "order": 2,
+          "role": "family-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/portal-rose-heart-v02-512.png",
+          "sha256": "f7ac1c99fa1dd62fc5c4b602f4d78c998128b17d37f13c9da3d77f79f1f90ff2"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-3cc861ed-3ca9-44be-bb1a-87ad2459ee7c.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-blue-star-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "4339e7e61f180fba24bf76c4153d2401e78c059fa8623290a9a933256b752b16",
+          "bytes": 1263937,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/PROMPTS.md",
+      "sha256": "140daa31335e8bf4b47d5e8ce8dc3a1d510149b96301d6ebaf99e450c8f664b8"
+    },
+    "outputIds": [
+      "exec-3cc861ed-3ca9-44be-bb1a-87ad2459ee7c.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-blue-star-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "4339e7e61f180fba24bf76c4153d2401e78c059fa8623290a9a933256b752b16",
+      "bytes": 1263937,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-07-key-blue-star-a in docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "key-blue-star-prop-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/key-blue-star-v02-presentation-512-r01.webp",
+      "sha256": "1d2336880413ff57b8702a3264c2e83ecf1fffbd89ed4dd355f4f42b9ce4843c",
+      "bytes": 97474,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "prop-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "item",
+    "pivot": [
+      0.5,
+      0.55
+    ],
+    "visibleBounds": [
+      0.130859375,
+      0.080078125,
+      0.736328125,
+      0.83984375
+    ],
+    "safeInset": [
+      0.080078125,
+      0.1328125,
+      0.080078125,
+      0.130859375
+    ],
+    "visualCenter": [
+      0.48245562,
+      0.47277938
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-07-locks-doors/key-blue-star-v02-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "prop-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/key-blue-star-v02-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "clearAlphaBelow": 3,
+        "edgeDilationPixels": 4,
+        "minimumAlphaComponentPixels": 2,
+        "maxEncodedBytes": 102400,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        4,
+        248,
+        8
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.08,
+        0.08,
+        0.92,
+        0.92
+      ],
+      "align": [
+        0.5,
+        0.5
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "description": "Same approved extraction and normalized registration at 512px; optical output first rebuilt byte-exactly. No redraw or source changes.",
+      "script": "scripts/art_pipeline/ui_presentation_candidates.py"
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and ordered semantic/rendering references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Remove this candidate catalogue extension from UI; unchanged approved optical URLs remain the fallback. Retain source and derivative until root retirement authority."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human UI review and publication delegation",
+    "approvedAt": "2026-09-05T02:32:35.4546433+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui01-presentation-approval.json",
+    "evidenceSha256": "73a25eb060409f8dc2779cbcd2a46da5eabe3ef35eea9f7ea17b3bd37a6d6d50"
+  }
+}

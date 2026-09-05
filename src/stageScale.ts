@@ -1,3 +1,5 @@
+/** Legacy fixed-stage reference only. The live shell uses ui/game/layout.ts;
+ * engine tiles, camera coordinates and pointer cadence are independent of this helper. */
 export const LOGICAL_STAGE_WIDTH = 960;
 export const LOGICAL_STAGE_HEIGHT = 540;
 export const LOGICAL_STAGE_ASPECT_RATIO = LOGICAL_STAGE_WIDTH / LOGICAL_STAGE_HEIGHT;

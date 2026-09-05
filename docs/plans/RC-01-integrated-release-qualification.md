@@ -36,6 +36,18 @@ once on the final candidate, repeat after fixes only as affected risk requires.
 
 ## Release transaction
 
+The v0.20.1 wishlist adds final regression cases to the matrix: all five Book
+pages/cards and encounter/reset/migration truth (including legacy Candy aliases
+and unsupported future-profile protection); no-scroll dense victory with actual
+friend dances and Garden action; modality-appropriate focus; offcamera follower
+identity/corridor continuity; ring attachment and full-cycle sprite sharpness;
+typed harmonious terrain and the three named visual-defect mazes; dense varied
+poison and moving-collector reward/audio; every allowed Mimic policy branch and
+richer-loot comparator; Easy/Medium/Hard/Surprise me identity, learned-rule
+eligibility and real puzzle evidence. Use the established covering matrix,
+not another exhaustive cross-product. No generated active-run resume is implied
+where the accepted platform contract does not support it.
+
 1. Resolve next unused version and intended release status. Reconcile package,
    Tauri, app display, content versions and profile namespace. Commit/push the
    reviewed candidate before building distributables; exact SHA is hash authority.
