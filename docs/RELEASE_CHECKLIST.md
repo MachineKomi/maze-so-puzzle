@@ -6,24 +6,68 @@ The current release work follows the Human's rejection of v0.21.0 and subsequent
 authorization to implement UI-03. The historical Plan01/MOVE approvals below do
 not qualify the new preview. Use [the current root review](reviews/2026-09-05-ui03-root-review.md)
 and its complete UC-01–UC-61 audit, then the new immutable release manifest.
+Final runtime source: `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
+Completed technical checks, including the accepted bounded modal-cost and
+Static-sequence reviews and public release verification, are recorded below.
+FP-UI1 is ready for family playtesting. Human family/device acceptance remains
+pending; the fresh Agent 04 task is held for family feedback and root PT36 preflight.
 
 - [x] Capture and implement the detailed Human correction, retaining approved
   identities and original source/rollback files.
 - [x] Review exact art delivery and bounded alpha masks; no reopened identity vote.
-- [ ] Finish current geometry/fallback/input regression checks and inspect the
-  actual composed screens and first-tap/held movement.
-- [ ] Pass final project/build, locked desktop, art, static bytes/contracts and
-  production dependency checks for the release inputs.
-- [ ] Record engineering disposition, commit reviewed explicit paths, build the
-  versioned portable from a clean source, and verify source/stage hashes/version.
-- [ ] Verify exact-source CI and Vercel; inspect served code/assets and ordinary
-  browser/save journey. Verify native journeys separately from compilation.
-- [ ] Publish a prerelease with the portable, manifest, PLAYTEST and checksum
-  files; download and compare every asset before declaring it ready.
+- [x] Finish current geometry/fallback/input checks and inspect composed screens
+  and first-tap/held movement. R6's62/63 observation failure was closed by all5
+  r7 interaction/save passes; all17 r8 UI checks and both r9 Home cases passed.
+  The final locked browser cohort passed6 journeys in46.8s.
+- [x] Pass final project/build, locked desktop, art, static bytes/contracts and
+  production dependency checks. The locked project run passed488 tests in55.85s;
+  the prior131 Python/art tests remain valid on unchanged relevant inputs.
+  Final gzip9 JS152,379 / CSS23,130 / public164,988,031 bytes pass their budgets.
+- [x] Commit the reviewed runtime, build the versioned portable with locked
+  dependencies, and verify its source/stage identity and PE version0.22.0.
+  Final file: `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`,
+  173,378,560 bytes, SHA256
+  `b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
+- [x] Verify exact-source CI33958357582 (`verify` and `desktop`) and latest Vercel
+  success; canonical JS/CSS match the locked local build byte-for-byte and all47
+  new art files match their ledger hashes. Canonical browser/save journeys
+  passed6/6 in52.0s; see the separate deployment identity receipt.
+- [x] Root observed the final locked native Title/Home, Hint/Escape, close/reopen
+  with the38-step run preserved, and the960×540 minimum layout. This is actual
+  Windows WebView2 evidence, separate from compilation and browser emulation.
+- [x] Record and accept the UC-13 actual-modal blur/no-blur comparison in the
+  [final modal review](reviews/2026-09-05-ui03-final-modal-cost.md). All twelve
+  measured windows had 16.8–16.9ms rAF p95, no interval above 50ms and no observed
+  long tasks. The traced DPR2 pair differed by 33.209ms renderer task CPU over
+  approximately 2.514s. This is a bounded one-host observation, not GPU timing
+  or universal filter-budget qualification; Plan07B retains device qualification.
+- [x] Watch and accept the actual ordinary Static-quality victory sequence for
+  UC-29: 241 rAF samples, zero active victory animations and four byte-identical
+  captures. Root inspected 1194×834 and 568×320 content fit and accepted the
+  twelve stationary colored confetti tips without a runtime change. The compact
+  content treatment and Human visual/comfort review remain explicit.
+- [x] Inspect the meaningful maze-picker close control in normal, hover and
+  keyboard states for UC-10: 48px circle, centered 20px mark span with equal
+  14px offsets, and working Escape. Evidence is in the same final modal review.
+- [x] Publish a prerelease with the portable, manifest, PLAYTEST and checksum
+  files and download/compare every asset. [Release 383217101](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+  was published on 2026-09-05 at 10:51:24 UTC. All four unauthenticated public
+  downloads matched length and SHA-256 at 10:52:59.744 UTC; see the
+  [public verification receipt](../release/FP-UI1-v0.22.0-release-verification.json).
 - [ ] Obtain family/device feedback. Only Human acceptance clears the next
-  fresh Agent04 task; it never follows automatically from automated passes.
+  fresh Agent 04 task, together with root's PT36 attachment preflight; it never
+  follows automatically from automated passes.
 
-## Root UI checkpoint disposition — 2026-09-05
+The `2f8fa6a` Home-clipping candidate and the first `68e303d` package with
+unlocked installed minifier versions are withheld and preserved. Their earlier
+passes and failed comparisons remain historical evidence; neither filename is
+the final handoff. Physical iPad/Safari, controller/couch, screen-reader speech,
+family comfort and qualified low-end timing remain unqualified. The final root
+review and manifest own the detailed evidence. The later public verification
+receipt closes publication; the uploaded manifest's pre-publication status is
+its truthful freeze-time record. Uploaded manifest, PLAYTEST and checksums stay frozen.
+
+## Historical root UI checkpoint disposition — 2026-09-05
 
 [Root return review](reviews/2026-09-05-plan01-return-review.md) supersedes the
 then-open candidate art/allocation rows below. All29 renditions reproduced,
@@ -32,7 +76,7 @@ accepted the UI engineering checkpoint for MOVE-01, then FP-UI1. This is not a
 playable release: exact clean-source web/portable journeys, versioned artifacts
 and the documented Human/device checks remain required at their preview gates.
 
-## Plan 01 correction return gates — 2026-09-05
+## Historical Plan 01 correction return gates — 2026-09-05
 
 This uncommitted candidate at authorized 09413c1 is **not FP-UI1**.
 [UI_UX_SPEC](UI_UX_SPEC.md) defines contracts; [review evidence](UI_UX_REVIEW_EVIDENCE.md)

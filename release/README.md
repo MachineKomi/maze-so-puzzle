@@ -1,19 +1,52 @@
 # Windows test builds
 
-**Current work: v0.22.0 FP-UI1 UI-03 correction.** Its final immutable manifest,
-PLAYTEST note and source-qualified portable are being prepared. Do not use the
-historical “current 0.20.1” wording below as the release state for UI-03. The
-v0.21.0 draft remains withheld following Human rejection and must not be published.
-See `../docs/reviews/2026-09-05-ui03-root-review.md` for current verification.
+**Current preview: v0.22.0 FP-UI1 UI-03 correction, ready for family playtesting.**
+Its source is `68e303da680d5aec0ba71154949c5a2a0d1697ae`. The
+[GitHub prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+is published and all four public downloads match their tested local bytes.
+See the [publication receipt](FP-UI1-v0.22.0-release-verification.json) and
+[current root review](../docs/reviews/2026-09-05-ui03-root-review.md).
 
-This folder documents convenience copies of Windows x64 artifacts staged for
-local play testing. Executables are deliberately excluded from source history;
-publish the current pair as GitHub Release assets when a downloadable desktop
-build is wanted. Version 0.20.1 is the current verified corrective Art & OST Preview. Its
-Tauri build, staging, portable smoke launch, source-to-stage comparison, and
-hashes completed successfully on 2026-09-04.
+This folder documents Windows x64 artifacts and retained comparison archives.
+Executables are deliberately excluded from source history. The verified
+FP-UI1 GitHub Release handoff contains these four assets:
 
-## Current 0.20.1 test files
+- `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`
+- [FP-UI1-v0.22.0-manifest.json](FP-UI1-v0.22.0-manifest.json)
+- [FP-UI1-v0.22.0-PLAYTEST.md](FP-UI1-v0.22.0-PLAYTEST.md)
+- [FP-UI1-v0.22.0-SHA256SUMS.txt](FP-UI1-v0.22.0-SHA256SUMS.txt)
+
+The portable is **173,378,560 bytes**, SHA-256
+`b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
+The immutable manifest froze before upload; its later publication outcome is
+recorded in the separate receipt. An NSIS installer is not part of this handoff.
+
+FP-UI1 uses the separate application-data namespace
+`com.ame.mazesopuzzle.preview.fpui1`. The older 0.20.1 preview used
+`com.ame.mazesopuzzle.preview`; ordinary older builds used their own profile.
+Do not infer profile migration or shared progress from the executable's folder.
+
+The Human-rejected v0.21.0 draft and superseded v0.22.0 candidate from `2f8fa6a`
+remain withheld and must not be published as FP-UI1. Neither is presented here
+as a public release. The earlier same-source
+`Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-portable.exe` is also withheld after an
+installed Rolldown mismatch prevented exact locked-build provenance. `npm ci`
+restored Rolldown 1.2.6 without a lockfile change; the replacement has the
+distinct `-locked-portable.exe` filename. Check the exact filename and finalized
+manifest/checksum, not only the displayed 0.22.0 version.
+
+Canonical-web entry JavaScript/CSS now matches the clean locked build byte for
+byte. All 47 new art delivery files (8,008,395 bytes) returned HTTP 200 with
+matching local hashes, and six canonical-web journeys passed. The locked
+portable passed actual native Title/Home, Hint, single movement, close/reopen
+and minimum 960×540 checks. Clean-machine installation, code signing, offline
+qualification and physical-device coverage are not claimed. Family visual,
+comprehension and comfort acceptance remains the next gate.
+
+## Historical 0.20.1 comparison files
+
+The following archived corrective Art & OST Preview checks completed on
+2026-09-04. They do not describe the current executable or release state.
 
 - `Maze-so-Puzzle-0.20.1-portable.exe` - standalone application executable,
   160,436,224 bytes. It remained running and responsive with the correct title
@@ -22,9 +55,11 @@ hashes completed successfully on 2026-09-04.
   built and staged but has not been clean-machine installed during this pass.
 
 `SHA256SUMS.txt` contains their staged hashes plus retained 0.19.0, 0.18.0, 0.17.0, 0.16.1, 0.16.0, 0.15.0, 0.14.0, 0.13.0, 0.12.0, 0.11.0, 0.10.3, 0.10.2, 0.10.1, 0.10.0, 0.9.1, 0.9.0, 0.8.0, 0.7.1, 0.5.1,
-0.5.0, 0.4.0, 0.3.0, and 0.2.0 archive hashes. The current files include the locally
+0.5.0, 0.4.0, 0.3.0, and 0.2.0 archive hashes. These historical files include the locally
 bundled soundtrack.
-The staged files match their final Tauri build sources byte-for-byte.
+The archived staging comparison matched their Tauri outputs at that checkpoint.
+Mutable paths under `src-tauri/target/release` have since been reused for new
+builds and are not evidence that an archive still matches the current output.
 
 The 0.20.1 desktop preview uses the separate
 `com.ame.mazesopuzzle.preview` application-data namespace so it does not
@@ -115,8 +150,9 @@ overwrite the ordinary profile used by older builds.
 
 - These files are intended for Windows x64 and use the Microsoft Edge WebView2
   runtime supplied by or installed on Windows.
-- The current artifacts are unsigned. Windows SmartScreen may show a warning,
-  especially when a file was downloaded or copied from another computer.
+- Historical preview artifacts were unsigned. FP-UI1 signing status must be
+  recorded in the finalized manifest; Windows SmartScreen can warn about an
+  unsigned file downloaded or copied from another computer.
 - Do not bypass an unexpected warning for a file whose source or checksum you
   cannot verify.
 - Saved game data belongs to the app's WebView profile; it is not stored next to
@@ -124,20 +160,22 @@ overwrite the ordinary profile used by older builds.
 - Rebuilding the app does not automatically refresh these convenience copies.
   They must be copied from the final Tauri output and hashed again.
 
-Verify the current files in PowerShell with:
+After root finalizes the FP-UI1 handoff, verify its portable in PowerShell with:
 
 ```powershell
-Get-FileHash .\Maze-so-Puzzle-0.20.1-portable.exe -Algorithm SHA256
-Get-FileHash .\Maze-so-Puzzle-0.20.1-setup.exe -Algorithm SHA256
+Get-FileHash .\Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe -Algorithm SHA256
 ```
 
-Expected hashes are:
+Compare the result with [FP-UI1-v0.22.0-SHA256SUMS.txt](FP-UI1-v0.22.0-SHA256SUMS.txt)
+and [FP-UI1-v0.22.0-manifest.json](FP-UI1-v0.22.0-manifest.json). Those expected
+values are pending measurement and finalization. Use only the finalized records
+for comparison.
+
+Historical 0.20.1 hashes, retained for comparison, are:
 
 - portable: `1FF30C2D5F58A60A2D4FAD44443A1D61D5A3B7DF66D4A96E86858E725D2B8777`
 - installer: `09208147AE5FFB7DED0640257B6978ADB9A79210619E469F821D9D055757F143`
 
-The package is unsigned unless the owner completes code signing and repeats the
-artifact tests.
-
-For source-build commands and controls, see `..\README.md`. For the complete
-verification process, see `..\docs\RELEASE_CHECKLIST.md`.
+For source-build commands and controls, see the [project README](../README.md).
+For the complete verification process, see the
+[release checklist](../docs/RELEASE_CHECKLIST.md).

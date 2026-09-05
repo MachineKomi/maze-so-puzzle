@@ -3,19 +3,39 @@
 Prepared 2026-09-05. This is the next specialist's execution prompt, not a start
 instruction or evidence that its prerequisites have passed.
 
-**HOLD until root records FP-UI1 family acceptance; root fills source SHA below.**
+**HOLD: family acceptance and root PT36 preflight are not yet recorded.**
+The published technical preview is UI-03 v0.22.0 from source
+`68e303da680d5aec0ba71154949c5a2a0d1697ae`:
+`Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`, **173,378,560 bytes**,
+SHA-256 `b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
+Locked project checks passed 488 tests in 55.85 seconds; unchanged art/Python
+retains its 131-test pass. CI run 33958357582 passed both jobs, canonical web
+passed six journeys in 52 seconds and locked local passed six in 46.8 seconds.
+Strict served JS/CSS byte identity and all 47 presentation-art HTTP/hash checks
+are verified. The exact locked portable passed native Title/Home, saved
+37→38-step travel, Hint/Escape, normal close/reopen and resume at 38, and
+unclipped 960×540 essential controls with position preserved on resize
+(captures 30–37). The prerelease and four public downloads are verified in
+`../../release/FP-UI1-v0.22.0-release-verification.json`.
+See `../reviews/2026-09-05-ui03-root-review.md` for evidence and remaining limits.
+This technical candidate identity is **not** the accepted post-playtest baseline;
+root may need a later reviewed source if the family finds blocking feedback.
+
 Root completes these fields after reviewing the playtest and any fixes, then the
 Human may copy the prompt into a **new, clean Agent 04 task**, with this current
 handover rather than resuming an older specialist conversation. Do not start another runtime
 implementation agent while this task owns the scene.
 
 - Accepted source SHA: **[ROOT TO FILL: full reviewed and pushed SHA]**
-- FP-UI1 version, immutable release and build manifest: **[ROOT TO FILL]**
+- FP-UI1 version: **v0.22.0**, [immutable prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0),
+  [publication receipt](../../release/FP-UI1-v0.22.0-release-verification.json),
+  [frozen manifest](../../release/FP-UI1-v0.22.0-manifest.json).
 - Family acceptance and resolved blocking feedback: **[ROOT TO FILL: evidence]**
 - Accepted MOVE-01 contract/review: **[ROOT TO FILL: final evidence]**
 - Accepted UI-03 correction, row disposition and travel review: **[ROOT TO FILL]**
 - PT36 Bubble Ring Blade metadata disposition: **[ROOT TO FILL: accepted
-  correction or reviewed retained composition; identify any remaining gate]**
+  correction or reviewed retained composition and linked idle/travel/combat
+  evidence; unresolved attachment composition keeps the preflight held]**
 
 ```text
 You are Agent 04, our senior stylized-lighting engineer, technical artist and
@@ -24,7 +44,9 @@ This is a fresh task. Do not inherit or resume an earlier Agent 04 conversation.
 
 START GATE AND AUTHORITY
 
-HOLD until root records FP-UI1 family acceptance; root fills source SHA above.
+HOLD until root records FP-UI1's immutable publication receipt, family acceptance
+with blocking feedback resolved, and the PT36 attachment metadata disposition.
+Root fills the accepted post-playtest source SHA and all evidence fields above.
 Proceed only against that reviewed checkpoint and its recorded release/review
 evidence. Inspect HEAD and the working tree before editing; preserve all user
 and concurrent work. Report an unresolved source/ownership mismatch to root
@@ -174,7 +196,9 @@ IMPLEMENTATION AND MATERIAL GATES
    if MOVE-01 already resolved it and reproduce its regression test.
 
 8. Consume root's accepted PT36 ring/hand/body metadata disposition before
-   freezing held grounding. The historical bubble-ring-blade zOrder difference
+   freezing held grounding. A technically verified UI-03 release does not close
+   this preflight; its linked disposition must be present and applicable to the
+   actual source. The historical bubble-ring-blade zOrder difference
    is a diagnostic lead, not permission to set a magic z-index. Compare idle,
    travel/combat, supported facing and field/presentation sizes; no weapon-name
    CSS exception. Return unresolved composition to root's art metadata owner.

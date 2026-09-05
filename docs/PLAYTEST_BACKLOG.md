@@ -1,11 +1,17 @@
 # Maze so Puzzle — playtest backlog
 
-**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the61-row
-Human correction. Project488, art131, build/locked desktop/static gates passed;
-full browser r6 passed62/63, its observer race passed the5-case r7 retest, and
-all17 final UI/proof cases passed in r8. Exact results/limits are in
+**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the 61-row
+Human correction. Locked project 488, unchanged art 131, build/locked desktop/static
+gates passed. The final locked Windows portable passed Title/Home, Hint, single
+movement, normal close/reopen/resume and minimum 960×540 layout checks.
+Both canonical web and locked local production passed six focused journeys;
+CI run 33958357582 passed verify and desktop. Full browser r6 passed 62/63,
+its observer race passed the five-case r7 retest, all 17 UI/proof cases passed
+in r8, and both fresh/saved Home cases passed in r9. Exact results/limits are in
 `docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
-Root now owns clean-source portable/web publication. Family feedback and the
+The [v0.22.0 prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+is published; all four public downloads match the frozen artifacts. The receipt
+is `../release/FP-UI1-v0.22.0-release-verification.json`. Family feedback and the
 fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
 
 **Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
@@ -23,7 +29,7 @@ fresh tasks with current prompts. Earlier STOP/candidate/active-Agent01 paragrap
 below are history, not current execution instructions.
 
 
-**Latest Human result, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;
+**Historical Human rejection, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;
 many regressions/bugs and missed requirements reported. PT25 and affected UI
 slices remain open pending concrete feedback. Root paused for discussion;
 Agent04 and GitHub prerelease publication are held. Details:
@@ -82,12 +88,33 @@ so.
 
 ### Current reconciliation — 2026-09-05
 
-Latest evidence supersedes the dated paragraphs below: UI and the complete
-planning/wishlist intake are pushed as `372e7d9`. MOVE-01 passed 461 project tests,
-43 browser checks and static/desktop gates. PT07 travel and PT40 followers are
-implemented candidates for FP-UI1; neither has earned Family-tested status.
-See `reviews/2026-09-05-move01-review.md`. PT43/44 remain Plan09 design work and
-PT32 remains future Plan08 zoom. FP-UI1 does not promise the whole wishlist.
+Current runtime checkpoint is `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
+UI-03 implements the corrected landscape shell, five Book pages, bestiary and
+large lore cards, schema-6 discovery persistence, restrained focus, story/victory
+interaction, hybrid thumb pad and coordinated first-tap/held travel. The earlier
+`372e7d9` UI/MOVE-01 checkpoint and its test counts are historical evidence;
+they do not describe the current candidate. The first v0.22.0 native candidate,
+`2f8fa6a927618885f2b34ff170046961d2d9c08c`, was withheld after root found Home
+label clipping with a saved Continue subtitle. The replacement runtime corrects
+that composition and has focused browser evidence. The next same-source portable
+was also withheld because installed Rolldown differed from the lockfile. After
+`npm ci`, the distinct `68e303d-locked-portable.exe` passed native and canonical
+byte-parity checks; its SHA-256 is
+`b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
+Publication and public-download checks passed; the next gate is family playtesting. See
+`reviews/2026-09-05-ui03-root-review.md` for exact test cohorts and limitations.
+
+Implementation and browser evidence do not confer Family-tested status.
+Corrected FP-UI1 family visual/comfort acceptance still gates fresh Agent04.
+UI-02 owns only remaining evidence-backed polish after Plan02, not a repeat of
+the implemented Book/focus/victory core. Plan08 retains controller/input parity
+and PT32's future zoom preference; Plan09 retains final content, puzzle/difficulty
+work and PT43/44's room/mechanics exploration. UI-03 does not close the whole
+wishlist or authorize new gameplay mechanics.
+
+**Historical reconciliation before UI-03:** the next paragraphs preserve the
+Agent01 and MOVE-01 handoffs. Their then-current HEAD, ownership and publication
+statements are superseded by the current checkpoint and owner table above/below.
 
 Accepted source baseline: post-v0.20.1 corrections through `b0eb8a8`; current
 HEAD `47bfff4` at the earlier review also contained orchestration documentation.
@@ -95,7 +122,7 @@ Agent 01 initially stopped with an unaccepted candidate. Root's review returned 
 corrections through `plans/AGENT01-review-follow-up.md`; details and verification
 are in `reviews/2026-09-05-plan01-review.md`. No new UI/playable release is claimed.
 
-**Latest Human update, same date:** Agent 01 has finished its existing correction.
+**Historical Human update, same date:** Agent 01 has finished its existing correction.
 Root's prior documentation checkpoint is `09413c1`; root accepted the reviewed
 UI engineering checkpoint with final453 project/121 art tests and closed static
 publication/allocation gates. Checkpoint/push precedes MOVE-01 and FP-UI1.
@@ -115,21 +142,27 @@ concurrent specialists; Agent 01 is no longer an active writer.
 
 The cards below preserve dated family/triage evidence. A paragraph labelled
 "Current-checkpoint audit" means the checkpoint inspected when that card was
-written, not an assertion about today's worktree. The following accepted slices
+written, not an assertion about today's worktree. The following reviewed slices
 supersede stale descriptions without closing their unimplemented successors:
 
-| Card | Accepted slice / evidence | Still open and next owner |
+| Card | Implemented slice / evidence | Still open and next owner |
 | --- | --- | --- |
 | 02 | Stationary engine door and visible-origin correction; Gameplay spec and `d6b11c0` release record | Plan 02 final choreography; Plan 08 eligible held continuation; physical retest |
 | 04 | Plan 06 candidate and historical route metrics | Plan 09 must re-audit/rebuild if the finale still feels like a snake corridor; family evidence cannot be inferred from a solver |
-| 07 | Human advanced coordinated tile-based travel before FP-UI1; `47bfff4` | Root MOVE-01, family comfort retest, downstream non-regression and 07B qualification |
-| 10 | Recoverable pending exit, Stay/Next/Restart and exactly-once save boundary; 03M/Gameplay spec | Plan 01 presentation/defaults; 08 input; 10 Garden destination |
+| 07/40 | UI-03 corrects first-tap/held travel on the shared 160ms clock, removes the pronounced hop and preserves legal corridor following; root review records first-step and 17 MOVE checks | Family comfort/physical-device retest; Plans 04/02/05 preserve travel and trail contracts; 07B qualifies integrated performance |
+| 08 | UI-03 supplies the bottom-right hybrid directional/drag pad, pointer cancellation and keyboard repeat guards; browser input evidence | Physical iPad/thumb reach; Plan 08 canonical input/controller parity and any newly evidenced corrections |
+| 10 | Recoverable pending exit and exactly-once save boundary retained; UI-03 supplies current Next/Stay/Restart presentation and reliable Enter | Family comprehension; Plan 08 input parity; Plan 10 Garden destination |
 | 13 | Redundant portal glyph removed in `d6b11c0`; recorded browser evidence | Root verifies preservation in Plan 01/02; no duplicate removal task |
-| 20/23 | All 42 original tracks catalogued, six pools and canonical MusicTransportPort/current adapter; 03M/Music spec | Plan 01 Sound, 08 input parity, 07B continuous contextual adapter/listening, 10 Garden |
+| 20/23 | All 42 original tracks catalogued, six pools and canonical MusicTransportPort/current adapter; UI-03 retains Sound & Comfort and adds quick mute | Plan 08 input parity; 07B continuous contextual adapter/listening; Plan 10 Garden. Compact quick mute remains inside More |
 | 24 | All 32 friends have authored Solo rescues; union/intro tests and `556542e` | Plan 09 final enemy/friend ecology, teaching/scale remediation, generated families and 24-chapter themes |
-| 25 | Approved UI grammar and sources | Plan 01 candidate review, mandatory presentation rendition and budget disposition; later VFX/performance |
-| 26 | Approved two-stage title/Home, v06 visual wordmark and v04 hero; v0.20.0/.1 immutable previews plus later web corrections | Root FP-UI1 after UI + MOVE-01, later named previews; Plan 11 retain-first audit |
-| 27/30 | Approved interaction/story-shell requirements | Plan 01 candidate structure; 02 shimmer; 09 cast/content; physical/Human review |
+| 25 | UI-03 implements landscape composition, larger art/text, stable HUD/dialog geometry and presentation renditions; exact art/budget/browser evidence in root review | Family visual/readability acceptance, explicit compact/enlarged-text tradeoffs, later Plan 02 effects and 07B device qualification |
+| 26 | UI-03 restores artwork-aware title/Home placement, preserves approved identity and performs authorized v05 alpha cleanup; `68e303d` corrects the withheld native Home composition | Root replacement-native verification and FP-UI1 publication; family acceptance; later named previews and Plan 11 retain-first audit |
+| 27/30 | UI-03 implements earned-art inspection, circular story portraits, selection-safe surface/Enter advancement and coherent single/multi-turn actions | Plan 02 showcase effects; Plan 09 final cast/content; physical/Human comprehension and Plan 08 input parity |
+| 28/32 | UI-03 preserves achievement state and the maximized six-tile board; neither sticker placement nor adjustable zoom was introduced | PT28 needs its separate Human feature decision; Plan 08 owns PT32's future 4/5/6/7 tile preference, default 6 |
+| 34/35/37 | UI-03 implements modality-aware focus, finite confetti and 32 friend dances, five Book pages, large cards, grey locked art and schema-6 legitimate encounter persistence with legacy/future-profile guards | Family visual/comprehension review and explicit compact/enlarged-text victory differences; UI-02 only remaining evidenced polish; Plan 02 lifecycle, Plan 05 authored frames, Plan 08 controller access and Plan 09 final lore/content |
+| 36 | Read-only metadata trace confirms the authored rear ordering is faithfully consumed; no visual correction or acceptance claimed | P1 / Routed / Not retested. Root bounded canonical attachment review before Agent04 held-grounding acceptance; Plan05 consumes accepted result |
+| 38 | UI-03 removes Ame's pronounced travel hop and avoids scale animation in victory signatures | Plan 05 full actor-cycle crispness/animation; Plans 04/02 transform discipline and 07B sampling qualification |
+| 42/43/44 | Human puzzle-depth, difficulty, room/maze variety and intuitive-mechanic requests are captured and routed | Plan 09 design/content work; selected new rules require a concrete approved contract; no UI-03 closure claim |
 
 Do not substitute this table for exact source/tests. Evidence is carried from
 accepted records, not freshly rerun in this documentation review. Before a card
@@ -236,8 +269,8 @@ remain necessary where called out below.
 | `PT-20260902-04` | Rainbow Power Parade topology | P1 | Candidate | Automated | Plan 09 mandatory re-audit/remediation as needed; family retest |
 | `PT-20260902-05` | Escalating Power-99 presentation | P1 | Routed | Not retested | Plan 02; Plans 01 and 07B support |
 | `PT-20260902-06` | Long-corridor variety | P1 | Routed | Not retested | Plan 09 and generator quality work |
-| `PT-20260902-07` | Smooth camera/play feel | P0 | Candidate | Automated | Root MOVE-01; FP-UI1 comfort retest; Plan 07B requalifies |
-| `PT-20260902-08` | Anchored touch joystick | P0 | Routed | Not retested | Plan 08; Plan 01 control surface |
+| `PT-20260902-07` | Smooth camera/play feel | P0 | UI-03 candidate | Browser reviewed; Human pending | Root UI-03 travel correction; FP-UI1 comfort retest; Plan 07B requalifies |
+| `PT-20260902-08` | Anchored touch joystick | P0 | UI-03 candidate | Browser input checks; physical iPad pending | Root UI-03 hybrid pad; Plan 08 remaining input/controller parity |
 | `PT-20260902-09` | Strong-enemy teaching | P0 | Routed | Not retested | Plan 01 with gameplay-owned suggestions |
 | `PT-20260902-10` | Completion choices | P0 | Routed | Not retested | Root 03M contract, Plan 01/08; Plan 10 extension |
 | `PT-20260902-11` | More and optional battles | P1 | Routed | Not retested | Plan 09 |
@@ -573,6 +606,13 @@ not proof that one particular replacement will feel best.
   this card.
 
 ### PT-20260902-08 — Anchored touch joystick and hybrid thumb pad
+
+**UI-03 update, 2026-09-05:** The bottom-right hybrid directional/drag pad,
+anchored steering and cancellation/release guards are implemented and covered
+by the root review's browser input cases, including secondary-touch cancellation
+and held-Enter suppression. The older open-mechanism audit below is history.
+Physical iPad/thumb reach and Plan08's canonical input/controller parity remain
+pending; browser evidence does not close the Human play-feel gate.
 
 - Type: Touch-control bug and input UX
 - Impact: P0 — next-playtest gate
@@ -2370,8 +2410,16 @@ This intake records requirements, not a completed zoom feature.
 - Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 5.
 - Owner/gate: root's bounded approved-art metadata return before Plan 04's held
   grounding proof; Plan 05 consumes the accepted attachment.
-- Read-only lead: `bubble-ring-blade` declares held `zOrder: 1`, versus `3` for
-  the other seven weapons. This matches a plausible mechanism, not visual proof.
+- Read-only UI-03 preflight: canonical source/publisher metadata declares held
+  `zOrder: 1`, versus `3` for the other seven weapons; Ame occupies layer `2`.
+  `src/heldWeaponPresentation.ts` faithfully supplies this order to field, battle
+  and portal CSS. The rear placement is therefore authored metadata, not an
+  incidental UI-03 layer override. This is not visual acceptance: historical
+  publication and tests retaining `1` do not resolve the Human's complaint.
+  Use Twilight Treasure Loop as an authored fixture for root's bounded canonical
+  attachment review. It remains P1 / Routed / Not retested and does not block
+  UI-03 publication; its disposition is required before Agent04 accepts held
+  grounding, and Plan05 consumes the accepted result.
 - Acceptance: compare the actual ring/hand/body composition in every supported
   facing, idle/travel/combat, at field and presentation sizes. Correct canonical
   held metadata/registration through its provenance workflow if confirmed;

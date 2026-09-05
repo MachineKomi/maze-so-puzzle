@@ -1,0 +1,119 @@
+{
+  "schema": "maze-family-preview-publication-receipt/v1",
+  "status": "PUBLISHED_AND_PUBLIC_DOWNLOADS_VERIFIED",
+  "version": "0.22.0",
+  "preview": "FP-UI1",
+  "runtimeSourceCommit": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+  "release": {
+    "id": 383217101,
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0",
+    "tag": "v0.22.0",
+    "prerelease": true,
+    "publishedAtUtc": "2026-09-05T10:51:24Z"
+  },
+  "verifiedAtUtc": "2026-09-05T10:52:59.744Z",
+  "verificationMethod": "Downloaded each of the four public release URLs without authentication; compared length and SHA-256 with the frozen local stage. Helper also resolved the tag to the runtime SHA and rechecked exact-source CI/Vercel before publication.",
+  "assets": [
+    {
+      "name": "Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe",
+      "assetId": 545711223,
+      "bytes": 173378560,
+      "sha256": "b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329",
+      "updatedAt": "2026-09-05T10:48:59Z",
+      "digest": "sha256:b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329",
+      "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.0/Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe"
+    },
+    {
+      "name": "FP-UI1-v0.22.0-manifest.json",
+      "assetId": 545712522,
+      "bytes": 15950,
+      "sha256": "e5085834955c18719c1a8c6e2b5f68d695269f31be01515e0a8bef8b9142edea",
+      "updatedAt": "2026-09-05T10:49:00Z",
+      "digest": "sha256:e5085834955c18719c1a8c6e2b5f68d695269f31be01515e0a8bef8b9142edea",
+      "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.0/FP-UI1-v0.22.0-manifest.json"
+    },
+    {
+      "name": "FP-UI1-v0.22.0-PLAYTEST.md",
+      "assetId": 545712528,
+      "bytes": 4725,
+      "sha256": "623076c1f621cbc76dcc15cc633edd7496d6ac0497c0a5a0296c15b8cdac18a7",
+      "updatedAt": "2026-09-05T10:49:00Z",
+      "digest": "sha256:623076c1f621cbc76dcc15cc633edd7496d6ac0497c0a5a0296c15b8cdac18a7",
+      "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.0/FP-UI1-v0.22.0-PLAYTEST.md"
+    },
+    {
+      "name": "FP-UI1-v0.22.0-SHA256SUMS.txt",
+      "assetId": 545712535,
+      "bytes": 311,
+      "sha256": "2663d90f6c9ab6c236d48f0d610d4c69b2dc41ab3485037a1a9708efd2264e0a",
+      "updatedAt": "2026-09-05T10:49:01Z",
+      "digest": "sha256:2663d90f6c9ab6c236d48f0d610d4c69b2dc41ab3485037a1a9708efd2264e0a",
+      "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.0/FP-UI1-v0.22.0-SHA256SUMS.txt"
+    }
+  ],
+  "canonicalWeb": {
+    "url": "https://maze-so-puzzle.vercel.app/",
+    "status": "VERIFIED",
+    "verifiedAtUtc": "2026-09-05T10:00:29.617Z",
+    "entries": [
+      {
+        "path": "/assets/index-Bz1ouk-F.js",
+        "bytes": 560456,
+        "sha256": "be0404490edfaae2014123004406f2c5a667c90eaa77c60f7d6cb91992d98fca"
+      },
+      {
+        "path": "/assets/index-Cp1EBgrO.css",
+        "bytes": 114786,
+        "sha256": "feeef6beaa31c77a48743b589dd89b322624ab5570f960b3305f7142a5f1722c"
+      }
+    ],
+    "artFiles": 47,
+    "artBytes": 8008395
+  },
+  "ci": {
+    "runId": 33958357582,
+    "runNumber": 94,
+    "attempt": 1,
+    "sourceCommit": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582",
+    "jobs": [
+      {
+        "name": "verify",
+        "id": 101285675460,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582/job/101285675460"
+      },
+      {
+        "name": "desktop",
+        "id": 101285675558,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582/job/101285675558"
+      }
+    ],
+    "evidence": "web/deployment.json records successful exact-source CI snapshots before and after asset verification."
+  },
+  "native": {
+    "status": "PASS",
+    "artifactSha256": "b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329",
+    "evidence": {
+      "file": "native-locked-summary.json",
+      "bytes": 13576,
+      "sha256": "dc43b61642901aae2da2a6b4d9672ce2df3a70a47ed5ce1735ef8e7134b33ff8"
+    }
+  },
+  "humanAcceptance": "PENDING: family visual/comprehension/comfort and physical-device checks",
+  "nextSpecialist": "Fresh Agent 04 remains held for family feedback resolution and root PT36 attachment preflight.",
+  "frozenManifestNote": "The immutable manifest correctly records publication as pending at its pre-upload freeze. This later receipt supplies the actual transaction outcome.",
+  "limitations": [
+    "Physical iPad/Safari touch reach and comfort, controller/Steam Deck use, TV/couch readability and screen-reader speech remain pending.",
+    "Native snapshots and browser emulation do not establish physical-device performance, input latency, sustained thermal behavior or sickness-free movement.",
+    "Timing remains report-only; static budgets and functional passes are not qualified remote/native/low-end frame-pacing evidence.",
+    "Compact landscape uses deliberate disclosure and reduced decoration; enlarged text can use bounded accessible scrolling. Family readability/comprehension review remains required.",
+    "Earlier withheld binaries/captures do not verify the locked portable.",
+    "Relative evidence names identify retained files. This manifest does not publish raw contents or imply every evidence file is a release attachment."
+  ]
+}

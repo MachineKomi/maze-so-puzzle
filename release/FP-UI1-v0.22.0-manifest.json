@@ -1,0 +1,318 @@
+{
+  "schema": "maze-family-preview-manifest/v1",
+  "version": "0.22.0",
+  "preview": "FP-UI1",
+  "status": "TECHNICALLY_VERIFIED_FOR_FAMILY_PLAYTEST",
+  "draft": false,
+  "preparedAtUtc": "2026-09-05T10:19:30.841Z",
+  "runtimeSourceCommit": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+  "portable": {
+    "file": "Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe",
+    "bytes": 173378560,
+    "sha256": "b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329",
+    "fileVersion": "0.22.0",
+    "productVersion": "0.22.0",
+    "format": "Windows PE",
+    "architecture": "x86-64",
+    "machine": "0x8664",
+    "mzAndPeSignaturesVerified": true,
+    "independentlyHashed": true
+  },
+  "build": {
+    "dependencyPreparation": "npm ci",
+    "dependencyEvidence": "Root executed npm ci without changing the lockfile; independent readback confirms installed and locked Rolldown 1.2.6.",
+    "rolldown": {
+      "locked": "1.2.6",
+      "installed": "1.2.6"
+    },
+    "provenance": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-05T10:01:23.292Z",
+      "commit": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+      "runtimeInputsSha256": "c4c79737b0828b0e7e5e9a10a7318c8b828f507507dbd82c997dd54cf80b5817",
+      "distFingerprintSha256": "395a36626977796b26bc7acae60014d8686ed43ee0a33e916f071316eb170856",
+      "buildCommand": "npm run build"
+    },
+    "staticBudgets": {
+      "jsGzip9Bytes": 152379,
+      "cssGzip9Bytes": 23130,
+      "publicDeliveryBytes": 164988031,
+      "evidenceClass": "Root-reported successful locked-build static gates",
+      "note": "Compressed budgets and whole public delivery; not the raw HTTP entry sizes."
+    }
+  },
+  "web": {
+    "canonicalUrl": "https://maze-so-puzzle.vercel.app/",
+    "status": "VERIFIED",
+    "verifiedAtUtc": "2026-09-05T10:00:29.617Z",
+    "identityMode": "strict-local-entry-byte-parity",
+    "indexHtml": {
+      "bytes": 1070,
+      "sha256": "694c8b204d8f4ae08b4bb547ef5092dfbb8cb1e9cbeb355b4415b8aadef9c812"
+    },
+    "servedEntries": [
+      {
+        "path": "/assets/index-Bz1ouk-F.js",
+        "bytes": 560456,
+        "sha256": "be0404490edfaae2014123004406f2c5a667c90eaa77c60f7d6cb91992d98fca"
+      },
+      {
+        "path": "/assets/index-Cp1EBgrO.css",
+        "bytes": 114786,
+        "sha256": "feeef6beaa31c77a48743b589dd89b322624ab5570f960b3305f7142a5f1722c"
+      }
+    ],
+    "entryVerification": "Independent local file hashes match served-entry hashes in the receipt. Receipt checks HTTP status, content type, byte counts and hashes before and after art delivery.",
+    "artDelivery": {
+      "files": 47,
+      "bytes": 8008395,
+      "ledgerSha256": "ec50fe27ae29be5437f2defaca3a670c84be36a136254e42c0c409a4b1c81cc5",
+      "ledgerSourceIdentity": {
+        "localRawSha256": "ec50fe27ae29be5437f2defaca3a670c84be36a136254e42c0c409a4b1c81cc5",
+        "committedRawSha256": "7bd4c6345b474870838de2b7e9a56cd5534feb60b984df97244f1cb7ee8e4c11",
+        "lfNormalizedSha256": "7bd4c6345b474870838de2b7e9a56cd5534feb60b984df97244f1cb7ee8e4c11",
+        "allowedCheckoutTransformation": "CRLF/LF only"
+      },
+      "evidence": {
+        "file": "web/art-delivery.json",
+        "bytes": 26595,
+        "sha256": "3198dafa45fdeedfa32309c7642257c740597e8e775b4e66cb17297a9031281b"
+      }
+    },
+    "evidence": {
+      "file": "web/deployment.json",
+      "bytes": 34633,
+      "sha256": "ced543ffa7757858e677fae28620692ef0cdeb3ae66b4815cf6b038ca78f0653"
+    },
+    "timingLimit": "Canonical functional smoke is recorded separately. Reused movement-sampler build fields are local reference provenance, not independent remote provenance. This report binds actual canonical bytes to that clean local build; it makes no qualified remote, native or low-end timing claim."
+  },
+  "ci": {
+    "runId": 33958357582,
+    "runNumber": 94,
+    "attempt": 1,
+    "sourceCommit": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582",
+    "jobs": [
+      {
+        "name": "verify",
+        "id": 101285675460,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582/job/101285675460"
+      },
+      {
+        "name": "desktop",
+        "id": 101285675558,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582/job/101285675558"
+      }
+    ],
+    "evidence": "web/deployment.json records successful exact-source CI snapshots before and after asset verification."
+  },
+  "verification": {
+    "project": {
+      "passed": 488,
+      "durationSeconds": 55.85,
+      "environment": "locked dependencies",
+      "evidenceClass": "root-observed command result",
+      "note": "No independent project-suite log is embedded; root supplied this exact result."
+    },
+    "art": {
+      "passed": 131,
+      "evidenceClass": "prior full Python/art suite on unchanged relevant inputs",
+      "note": "Retained prior result, not a rerun caused by npm restoration. Root confirms relevant Python/art inputs unchanged."
+    },
+    "browserCohorts": [
+      {
+        "name": "locked local production",
+        "startTime": "2026-09-05T10:07:49.47Z",
+        "durationSeconds": 46.793,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "globalErrors": 0,
+        "tests": [
+          "MOVE ordinary save, Book, reload, restart and hidden-page cancellation",
+          "UI03 Home fresh adventure keeps every menu action and progress label readable",
+          "UI03 Home saved Continue keeps every menu action and progress label readable",
+          "UI03 first tap and held first tile animate instead of flashing or pausing before repeat",
+          "UI03 Book has five real pages, readable grey locked keepsakes and no undiscovered enemy images",
+          "UI03 ordinary story, celebration and bestiary discovery survive reload without tester banking"
+        ],
+        "evidence": {
+          "file": "locked-browser/report.json",
+          "bytes": 8879,
+          "sha256": "2b5db38d1ed4970dc7891bab6b6ddf7cff947196fab8ab9146c9bcf1309d984a"
+        },
+        "identityNote": "Current locked local production cohort."
+      },
+      {
+        "name": "canonical deployed web",
+        "startTime": "2026-09-05T09:41:37.705Z",
+        "durationSeconds": 52.006,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "globalErrors": 0,
+        "tests": [
+          "MOVE ordinary save, Book, reload, restart and hidden-page cancellation",
+          "UI03 Home fresh adventure keeps every menu action and progress label readable",
+          "UI03 Home saved Continue keeps every menu action and progress label readable",
+          "UI03 first tap and held first tile animate instead of flashing or pausing before repeat",
+          "UI03 Book has five real pages, readable grey locked keepsakes and no undiscovered enemy images",
+          "UI03 ordinary story, celebration and bestiary discovery survive reload without tester banking"
+        ],
+        "evidence": {
+          "file": "web/report.json",
+          "bytes": 8756,
+          "sha256": "f22ed929c6510f237ee602dd3d83409e9466ce14c49f6b061f2073998dcf1a28"
+        },
+        "identityNote": "Journey predates strict locked-build byte-parity receipt. Remote identity comes from web/deployment.json, not local build fields in sampler output."
+      }
+    ],
+    "native": {
+      "status": "PASS",
+      "artifactSha256": "b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329",
+      "scope": "Observed locked Windows portable smoke and saved-run journey",
+      "evidence": {
+        "file": "native-locked-summary.json",
+        "bytes": 13576,
+        "sha256": "dc43b61642901aae2da2a6b4d9672ce2df3a70a47ed5ce1735ef8e7134b33ff8"
+      },
+      "checks": [
+        {
+          "id": "locked-title-version",
+          "result": "PASS",
+          "captures": [
+            "30-locked-title"
+          ],
+          "summary": "Native title shows Play, Exit and v0.22.0 from the locked executable."
+        },
+        {
+          "id": "locked-saved-home",
+          "result": "PASS",
+          "captures": [
+            "31-locked-home"
+          ],
+          "summary": "Root observes corrected menu with all progress labels visible and no clipping. Text confirms saved 37-step Continue and counters 2 story stars, 3 friends helped, 51 gold."
+        },
+        {
+          "id": "resume-and-one-down",
+          "result": "PASS",
+          "captures": [
+            "31-locked-home",
+            "32-locked-resume-and-single-step-38"
+          ],
+          "summary": "Root resumes the 37-step run and sends one Down input. Recorded result is one added step with currency, rescued friend and equipment preserved."
+        },
+        {
+          "id": "hint-presentation",
+          "result": "PASS",
+          "captures": [
+            "33-locked-hint-modal"
+          ],
+          "summary": "Root and independent saved-image review see readable Hint 2, heavily frosted backdrop and one Got it! action with no duplicate in-game X. Native text contains the full hint and one acknowledgement button."
+        },
+        {
+          "id": "escape-restores-unchanged-run",
+          "result": "PASS",
+          "captures": [
+            "33-locked-hint-modal",
+            "34-locked-hint-return-unchanged-38"
+          ],
+          "summary": "Root presses Escape; text-only native capture returns to identical 38-step state.",
+          "limit": "Capture 34 intentionally contains no screenshot; valid for accessible text/state, not an additional visual proof."
+        },
+        {
+          "id": "normal-close-and-reopen",
+          "result": "PASS",
+          "captures": [
+            "34-locked-hint-return-unchanged-38",
+            "35-locked-reopen-home-38",
+            "36-locked-reopen-resume-38"
+          ],
+          "summary": "Root closes normally, confirms removal from native window inventory, relaunches the exact locked EXE and observes its title/version. New window Home offers Continue at 38 steps with unchanged saved counters; resumed position and state match."
+        },
+        {
+          "id": "supported-minimum-client",
+          "result": "PASS",
+          "captures": [
+            "37-locked-supported-minimum-960x540"
+          ],
+          "summary": "Root and independent saved-image review see the full board, Power/Gold/Science, objective, three friend slots, three bag slots, minimap, directional thumb pad, Hint and More without visible clipping. Position remains column 4, row 6 after resize.",
+          "limit": "The compact view does not expose the step counter. The capture verifies its visible position/counters, not an independently re-read hidden step value."
+        }
+      ],
+      "captureCount": 8,
+      "evidenceFileCount": 15,
+      "note": "Includes valid text-only capture 34; no screenshot is invented for it. Root native actions and timestamped captures are distinguished from snapshot inference. See the public-safe summary for exact file hashes and limitations."
+    },
+    "finalModalObservation": {
+      "status": "PASS_BOUNDED_ENGINEERING_REVIEW",
+      "report": "https://github.com/MachineKomi/maze-so-puzzle/blob/main/docs/reviews/2026-09-05-ui03-final-modal-cost.md",
+      "evidence": {
+        "file": "review-evidence/ui03-final-modal-cost/measurement.json",
+        "bytes": 112080,
+        "sha256": "962d1322c72d3a642237eddb9a4ecc136308b931bd191821bd1b2ac7425c9794"
+      },
+      "modal": "Twelve 2.5-second windows on the actual Hint modal, blur/none comparison at 1920 DPR1 and1194 DPR2. rAF p95 16.8–16.9ms; no sampled interval above50ms or observed long task. Traced pair renderer-task difference33.209ms over~2.514s is a bounded CPU observation, not GPU duration or universal allowance.",
+      "staticVictory": "Actual ordinary six-step victory,241 rAF observations acrossfour seconds,zero active animations,four byte-identical captures. Whole ordinary1194 body and compact568 body fit. Twelve confetti nodes retain stationary clipped colored tips; no falling confetti. Root inspected and accepted bounded composition.",
+      "roundClose": "Actual maze-picker 48px close control with centered20px span,normal/hover/keyboard appearance and Escape verified.",
+      "limits": "One Windows Edge host, emulated viewport/DPR, short settled-modal windows. No physical-iPad, GPU-time, entry-latency, battery or thermal qualification. Family quality judgment remains pending."
+    }
+  },
+  "withheldAttempts": [
+    {
+      "file": "Maze-so-Puzzle-0.22.0-FP-UI1-2f8fa6a-portable.exe",
+      "sourceCommit": "2f8fa6a927618885f2b34ff170046961d2d9c08c",
+      "sha256": "277f80d143c1a7a274dc585aa9668a251dd69a917cc61e8649cc50cde55368b9",
+      "status": "WITHHELD",
+      "reason": "Native Home clipping with saved Continue subtitle; corrected in 68e303d."
+    },
+    {
+      "file": "Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-portable.exe",
+      "sourceCommit": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+      "sha256": "9141082b10ca86275259ba16c2c0ffeeec8f9beb0f1e6b1a7ef10b8931ed959d",
+      "status": "WITHHELD",
+      "reason": "Installed Rolldown 1.2.7 differed from locked 1.2.6 and canonical JS bytes. Replaced by distinct locked artifact; earlier observations remain candidate evidence.",
+      "evidence": {
+        "file": "68e303d-unlocked-build-provenance.json",
+        "bytes": 382,
+        "sha256": "1f601352b6644e3102b8ed57b461764130947631ef471c5c2698a003e90fa269"
+      }
+    }
+  ],
+  "acceptance": {
+    "nativeFinalization": "PASS",
+    "releaseAssetUploadAndDownloadVerification": "Pending at manifest freeze; outcome recorded separately in the publication receipt",
+    "familyVisualAndComfort": "pending",
+    "freshAgent04": "held until family preview acceptance",
+    "noAutomaticSpecialistStart": true
+  },
+  "limitations": [
+    "Technically verified for family playtest. This manifest freezes before upload; consult the separate publication receipt for the later release/download outcome. Human acceptance remains pending.",
+    "Physical iPad/Safari touch reach and comfort, controller/Steam Deck use, TV/couch readability and screen-reader speech remain pending.",
+    "Native snapshots and browser emulation do not establish physical-device performance, input latency, sustained thermal behavior or sickness-free movement.",
+    "Timing remains report-only; static budgets and functional passes are not qualified remote/native/low-end frame-pacing evidence.",
+    "Compact landscape uses deliberate disclosure and reduced decoration; enlarged text can use bounded accessible scrolling. Family readability/comprehension review remains required.",
+    "Earlier withheld binaries/captures do not verify the locked portable.",
+    "Relative evidence names identify retained files. This manifest does not publish raw contents or imply every evidence file is a release attachment."
+  ],
+  "publicSafety": {
+    "containsLocalUserPaths": false,
+    "containsPrivateProfileData": false,
+    "containsRawCaptureBodies": false,
+    "evidenceConvention": "Relative evidence filenames, bytes and SHA-256 hashes only. Observations summarized without raw accessibility/profile data."
+  },
+  "finalizedAtUtc": "2026-09-05T10:46:49.002Z",
+  "releaseAssetPublication": {
+    "status": "PENDING_AT_MANIFEST_FREEZE",
+    "receipt": "https://github.com/MachineKomi/maze-so-puzzle/blob/main/release/FP-UI1-v0.22.0-release-verification.json",
+    "gate": "Root separately uploads/downloads all four release assets and verifies their bytes. The later receipt records that transaction; this immutable pre-upload manifest cannot contain its own subsequent download result."
+  }
+}

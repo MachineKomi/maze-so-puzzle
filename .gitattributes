@@ -15,3 +15,8 @@ docs/source-assets/publication/ui01-*.json text eol=crlf
 docs/source-assets/publication/ui01-reward-derivative-authority.json text eol=lf
 docs/source-assets/records/*-ui01-presentation-candidate-r01-source.json text eol=crlf
 public/assets/fonts/* -text
+
+# Immutable FP-UI1 release attachments are verified against downloaded bytes.
+release/FP-UI1-v0.22.0-manifest.json -text
+release/FP-UI1-v0.22.0-PLAYTEST.md -text
+release/FP-UI1-v0.22.0-SHA256SUMS.txt -text

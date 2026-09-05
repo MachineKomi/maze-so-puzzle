@@ -1,12 +1,45 @@
 # Orchestrator handover — Sol to Astra
 
-**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the61-row
-Human correction. Project488, art131, build/locked desktop/static gates passed;
-full browser r6 passed62/63, its observer race passed the5-case r7 retest, and
-all17 final UI/proof cases passed in r8. Exact results/limits are in
-`docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
-Root now owns clean-source portable/web publication. Family feedback and the
-fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
+**Current FP-UI1 — 2026-09-05: v0.22.0 PUBLISHED AND VERIFIED; family gate HOLD.**
+UI-03 v0.22.0 implements the 61-row Human correction. Its frozen runtime source is
+`68e303da680d5aec0ba71154949c5a2a0d1697ae`; subsequent documentation receipts do
+not change that build identity.
+
+- Portable: `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`
+- SHA-256: `b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`
+- Size: **173,378,560 bytes**. Check the exact filename and manifest/checksum;
+  the displayed v0.22.0 version alone cannot distinguish withheld candidates.
+
+Locked project verification passed **488 tests in 55.85 seconds**; the unchanged
+Python/art pipeline's prior **131-test** pass remains applicable. Both jobs in
+[CI run 33958357582](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582)
+succeeded. Canonical web passed all **6 journeys in 52 seconds**; the locked local
+build passed the same **6 in 46.8 seconds**. Strict served JS/CSS byte identity
+and all **47 presentation-art HTTP/hash checks** are verified. The exact locked
+portable passed native verification: 1280×720 Title/Home, saved 37-step resume
+and single Down to 38, Hint/Escape without another move, normal close/reopen
+and resume at 38, and 960×540 essential controls without clipping or position
+changes on resize (captures 30–37).
+[The prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+was published at 10:51:24 UTC; all four unauthenticated public downloads matched
+their frozen local bytes at 10:52:59 UTC. The later receipt is
+`release/FP-UI1-v0.22.0-release-verification.json`. Bounded actual-modal cost,
+Static victory and round-X checks also passed; see the final modal review.
+
+Earlier r6 passed 62/63; its observer race passed the five-case r7 retest, all
+17 UI/proof cases passed in r8, and both Home regression cases passed in r9.
+The first `2f8fa6a` portable was withheld for actual native Home clipping. The
+same-source `68e303d` candidate without `-locked-` was withheld for installed
+Rolldown mismatch; `npm ci` restored locked 1.2.6 without changing the lockfile.
+These failures and the qualified timing/device limits remain recorded in
+`docs/reviews/2026-09-05-ui03-root-review.md`; they are not erased by later passes.
+
+The web and Windows preview are ready for playtesting. Human/family visual, comprehension and
+comfort acceptance remains **HOLD**. Agent 04 starts only in a **fresh task**
+after that feedback is reviewed and blockers are resolved. Root must also
+record PT36's ring attachment metadata disposition before releasing its held
+grounding preflight. The prepared `docs/plans/AGENT04-after-FP-UI1.md` remains held;
+technical checks do not fill its post-playtest accepted-source fields.
 
 **Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
 v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
@@ -33,7 +66,7 @@ engineering acceptance and automated passes below do not override this decision.
 Prepared 2026-09-04. This is a dated handover, not a replacement for the live
 roadmap, specifications, source, or subsequent Human decisions.
 
-## Current root movement checkpoint — 2026-09-05
+## Historical pre-UI-03 root movement checkpoint — 2026-09-05
 
 UI acceptance is committed/pushed as `372e7d983b00ae6ea929ef51fd78988fec0b9672`,
 including the full planning/wishlist intake. Root completed MOVE-01: coordinated
@@ -50,7 +83,7 @@ The UI Linux CI failed its budget by four JS bytes despite passing tests/build
 and desktop; that run remains recorded as failed. The reviewed MOVE allocation
 accounts for platform variance. Final source CI must pass before release.
 
-## Latest root UI engineering acceptance — 2026-09-05
+## Historical Plan 01 UI engineering acceptance — 2026-09-05
 
 Agent 01 has now stopped with its six-correction return at `09413c1`; read
 `docs/UI_UX_REVIEW_EVIDENCE.md` completely. Root independently reproduced all
@@ -113,7 +146,7 @@ the reported regressions; there is no new playable build yet. The new PT32 zoom
 range is future Plan 08 work. Feedback/next-specialist instructions live in
 `docs/playtests/FP-UI1-feedback-template.md`.
 
-## Immediate state and next action
+## Historical original handover state and next action
 
 The Human is moving orchestration into a fresh Codex task in `C:\maze-game`.
 **Agent 01 is already running** the existing task's execution prompt,
@@ -293,9 +326,10 @@ updated Agent 04 execution prompt for the Human to run in a fresh task.
 
 ## Working and release rules
 
-- The Human normally copy-pastes prompts to the existing specialist tasks and
-  returns outputs. Orchestrate; do not create/trigger replacement tasks without
-  authorization. Only one runtime implementation agent at a time.
+- The Human normally starts future specialists in **fresh tasks** using root's
+  current prompts and returns their outputs. Do not resume older specialist
+  conversations. Root may coordinate disjoint subagents under the later explicit
+  parallel-work authorization; never assign competing owners to runtime files.
 - Protect all concurrent changes. Review exact paths/hunks; never blanket-stage,
   reset, overwrite, or commit the active agent's partial work as a checkpoint.
 - Commit and push every meaningful accepted checkpoint. A local commit alone

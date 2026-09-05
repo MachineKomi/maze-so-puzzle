@@ -1,12 +1,33 @@
 # Sequential specialist execution prompts
 
-**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the61-row
-Human correction. Project488, art131, build/locked desktop/static gates passed;
-full browser r6 passed62/63, its observer race passed the5-case r7 retest, and
-all17 final UI/proof cases passed in r8. Exact results/limits are in
-`docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
-Root now owns clean-source portable/web publication. Family feedback and the
-fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
+**Current FP-UI1 — 2026-09-05: v0.22.0 PUBLISHED AND VERIFIED; family gate HOLD.**
+UI-03 v0.22.0's runtime source is `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
+The published portable is `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`,
+**173,378,560 bytes**, SHA-256
+`b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
+Check exact filename and manifest/checksum; withheld builds also display v0.22.0.
+
+Locked project verification passed **488 tests in 55.85 seconds**; prior
+**131-test** art verification applies to the unchanged Python/art pipeline.
+Both jobs in [CI run 33958357582](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582)
+succeeded. Canonical web passed all **6 journeys in 52 seconds**; locked local
+passed all **6 in 46.8 seconds**. Strict served JS/CSS identity and all **47
+presentation-art HTTP/hash checks** are verified. Native checks passed on the
+exact locked portable: Title/Home, saved 37→38-step travel, Hint/Escape, normal
+close/reopen and resume at 38, and unclipped 960×540 essentials with position
+preserved on resize (captures 30–37). The
+[prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+is published; all four public downloads matched at 10:52:59 UTC. The receipt is
+`../../release/FP-UI1-v0.22.0-release-verification.json`. Bounded modal-cost,
+Static victory and centered-X observations passed too. The failed r6 observation,
+successful r7/r8/r9 retests and withheld Home/toolchain candidates remain in
+`docs/reviews/2026-09-05-ui03-root-review.md`; timing and device limits stay qualified.
+
+Agent 04 remains **HOLD** until root reviews family
+visual/comprehension/comfort feedback, resolves blocking findings and supplies
+PT36's ring attachment metadata disposition for the held grounding preflight.
+Use `AGENT04-after-FP-UI1.md` in a **fresh task**, with root's post-playtest accepted
+SHA. Do not restart Agent 01, repeat MOVE-01 or infer Human acceptance from tests.
 
 **Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
 v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
@@ -33,7 +54,7 @@ Historical assignments below do not restart completed agents.
 
 Prepared: 2026-09-02
 
-Future-task reconciliation: 2026-09-05. Agent 01's existing section-4 assignment
+Historical pre-UI-03 task reconciliation: 2026-09-05. Agent 01's existing section-4 assignment
 initially stopped with an unaccepted candidate; `AGENT01-review-follow-up.md`
 is the root-reviewed correction in that same task. **The Human now reports that
 return is finished.** Root accepted its UI engineering checkpoint with reviewed
@@ -232,7 +253,15 @@ Verify 1920x1080 TV, 1280x720, 1194x834 and 1024x768 iPad/tablet, 960x540, 844x3
 Do not commit or push. Finish with outcome, changed files, before/after geometry table/screenshots, styled component/state proof, typography/licence/byte record, presentation-art loading/fallback evidence, accessibility/input evidence, CSS-debt delta, tests, known physical-device gates, rollback notes, and git status. Identify the clean post-review commands and smoke path for the root manager to produce preferred Family Preview 1 from the committed checkpoint; do not package a dirty-tree build as that preview.
 ```
 
-## 4A. Root — MOVE-01 and FP-UI1
+## 4A. Root — historical MOVE-01, then corrected FP-UI1 delivery
+
+The MOVE-01 implementation instructions below describe the completed
+pre-UI-03 checkpoint. Do not execute that slice again. The corrected locked
+UI-03 preview identified above is published and verified; the current action
+is to collect the corrected FP-UI1 family feedback. Release the fresh
+Agent 04 prompt only after root records that acceptance, resolved blockers and
+the PT36 metadata preflight disposition. The older next-step wording below is
+retained as the original sequence, superseded by this current gate.
 
 After Agent 01's complete review and checkpoint, execute
 `docs/plans/MOVE-01-smooth-travel-and-camera.md`. Keep authoritative grid movement
@@ -250,6 +279,11 @@ prepares PT36's exact ring attachment metadata disposition. PT39's six-identity
 art review is a separate bounded return before affected Plan-05 frame production.
 
 ## 5. Agent 04 — lighting, wall depth, and shared terrain scene seam
+
+**HOLD.** `AGENT04-after-FP-UI1.md` is the current fresh-task handoff and supplies
+the exact accepted source, immutable publication receipts, family acceptance and
+root-owned PT36 metadata disposition. All must be filled before execution. The
+general scope below remains applicable; it does not bypass those gates.
 
 ```text
 You are our dedicated senior stylized-lighting engineer, technical artist, and SVG rendering architect. You are expert in top-down 2.5D form, connected terrain geometry, edge normals, bevels, ambient/contact occlusion, cast shadows, material calibration, camera continuity, SVG masks/filters, accessibility, and WebView performance. You have excellent judgment about making flat art feel dimensional without obscuring a puzzle.
@@ -313,12 +347,14 @@ Run typed timeline/cancellation/sound tests, paused/grayscale/readability rack, 
 Do not commit or push. Finish with outcome, changed files, effect/variation matrix, timeline changes, semantic and reduced-mode evidence, performance/resource deltas, tests, rollback/tier notes, pending hardware/listening gates, and git status.
 ```
 
-## 6A. Returning UI specialist — UI-02 Book, focus and victory
+## 6A. Fresh UI specialist — remaining UI-02 Book, focus and victory polish
 
 This is a **future** return after accepted Plan 02, not an instruction to
 expand Agent 01's completed correction retrospectively. Root supplies the
 accepted SHA, concrete data/art/scene APIs and owned paths at that boundary;
-the Human normally starts the existing specialist task.
+the Human starts a fresh specialist task. Preserve the Book pages, bestiary,
+cards, focus and victory foundations already implemented by UI-03; the later
+return addresses only remaining agreed polish and integration with Plan 02.
 
 ```text
 Execute docs/plans/UI-02-adventure-book-and-focus-polish.md completely after

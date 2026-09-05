@@ -1,7 +1,7 @@
 # UI-03 — root integration and release review
 
-Date: 2026-09-05. **Engineering correction accepted for clean-source packaging; publication and
-Human acceptance remain separate gates.** This report supersedes the engineering assessment of
+Date: 2026-09-05. **v0.22.0 FP-UI1 is published and technically verified for family
+playtesting. Human acceptance remains open.** This report supersedes the engineering assessment of
 v0.21.0 for current UI work. The Human rejected that build's visual result, and
 its earlier automated passes remain historical evidence, not family acceptance.
 
@@ -183,8 +183,27 @@ is the successful capture. All raw native captures remain under the private
 release-evidence directory. Replacement-source native Home and release receipts
 are still required below.
 
-The intended immutable preview is **v0.22.0 FP-UI1**. Its manifest and PLAYTEST
-note will identify the clean source, Windows bytes, web deployment, CI and
+### Locked-toolchain provenance correction
+
+The corrected `68e303d` candidate then passed native Home,37-step save/reopen
+and six canonical-web journeys. Strict entry-byte comparison nevertheless found
+a seven-byte JavaScript difference (CSS was identical). Investigation found
+local installed Rolldown1.2.7/Oxc0.148.0 versus committed lock1.2.6/0.147.0;
+the source was clean but installed build dependencies were not lock-identical.
+The differing Boolean rewrites were not used as a waiver. Root withheld that
+portable as well, preserved its bytes and observations, ran `npm ci`, and
+restored the exact committed toolchain without changing the lockfile.
+
+The final handoff uses the distinct
+`Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe` filename. Previous
+source-qualified candidate files remain untouched. Release qualification requires
+the locked rebuild, exact local/canonical JS/CSS parity, current native checks
+and downloaded release-asset comparison. The initial mismatch diagnostic remains
+in `web/entry-mismatch-2026-09-05T09-48-15-651Z.json`; earlier passing observations
+remain candidate evidence rather than false lockfile provenance.
+
+The immutable preview is **v0.22.0 FP-UI1**. Its frozen manifest and PLAYTEST
+note identify the clean source, Windows bytes, web deployment, CI and
 verified journeys. Existing v0.20.1/v0.21.0 files remain untouched. The Windows
 FP-UI1 profile is retained and remains separate from the older v0.20.1 profile.
 
@@ -193,3 +212,77 @@ screen-reader speech, controller/couch use and qualified low-end timing remain
 Human/device checks. This report does not claim perfection or Human acceptance.
 After feedback passes, root records that evidence and completes the prepared
 fresh Agent04 lighting prompt. No specialist starts automatically.
+
+### Final locked artifact and native result
+
+The release runtime is `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
+After `npm ci`, the final 488 project tests passed in 55.85s. The locked local
+production browser cohort passed all six focused journeys in 46.793s; the
+canonical deployment passed the same six in 52.006s. These supplement r6/r7/r8
+and the r9 Home regressions rather than pretending the earlier failures did
+not happen. Locked optimized Cargo packaging completed in 3m08s.
+
+The final portable is 173,378,560 bytes, SHA-256
+`b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`, with
+PE file/product version 0.22.0. Its distinct `-locked-portable.exe` name is
+mandatory: neither withheld candidate is interchangeable with it.
+
+Root inspected the actual locked Windows title and saved Home at 1280×720,
+resumed a 37-step run, and made one Down input to 38 steps. Hint displayed the
+readable frosted card with one acknowledgement; Escape returned to the same
+position and counters. A normal close/reopen retained all observed progress,
+inventory and rescue state at 38 steps. Resizing the final executable to the
+supported 960×540 client retained the board, objective, status art, map, thumb
+pad, Hint and More without clipping or a position change. Captures 30–37 and
+the locked native summary bind these observations to this exact artifact.
+Snapshot evidence proves settled results; browser movement sampling supplies
+the separate timing evidence. No physical iPad or native frame-time guarantee
+is inferred from these checks.
+
+Exact-source CI run [33958357582](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582)
+passed both verify and desktop. Canonical entry JS/CSS is byte-identical to the
+locked production build, and all 47 new art delivery files passed HTTP/hash
+checks. Final gzip9 is **152,379 JS / 23,130 CSS / 164,988,031 public bytes**;
+the JS ceiling leaves 178 bytes. The earlier section records r6's measurement.
+
+The frozen manifest, playtest note and checksums identify the release. The
+later [publication receipt](../../release/FP-UI1-v0.22.0-release-verification.json)
+records GitHub publication and all four public-download hash comparisons.
+
+### Final bounded modal and Static review
+
+The last acceptance review identified UC-13's missing actual-modal cost
+comparison and UC-29's separately observed Static victory. Both were completed
+before the manifest froze. The [dedicated report](2026-09-05-ui03-final-modal-cost.md)
+records twelve 2.5-second actual Hint windows at desktop and iPad-sized DPR2
+dimensions, with blur and no-blur controls. P95 frame intervals were 16.8–16.9ms;
+none exceeded 50ms and no long task was observed. The traced pair's additional
+33.209ms of renderer task CPU over approximately 2.514s is an observed host
+delta, not an isolated GPU duration or universal performance budget.
+
+The real ordinary Static victory had zero active animations across 241 samples
+over four seconds; four images were byte-identical. Root inspected the 1194px
+and 568px results: the declared content and controls fit. Twelve stationary
+clipped confetti tips remain as decoration and are explicitly accepted for
+this preview; there is no falling confetti in Static. Root also inspected the
+meaningful maze-picker X, centered in its round 48px control. These bounded
+checks close the missing engineering observations; family and physical-device
+qualification remain separate.
+
+### Published handoff
+
+[v0.22.0 FP-UI1](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+was published as a prerelease at **2026-09-05 10:51:24 UTC**, release ID
+383217101, tag resolved to the exact runtime commit above. At **10:52:59 UTC**,
+root downloaded all four public URLs without authentication and matched their
+lengths and SHA-256 values to the frozen local stage. The source CI and latest
+Vercel success were rechecked before publication. The Windows portable,
+manifest, PLAYTEST and checksum file are the exact four release attachments.
+The separate receipt records the later transaction so the immutable manifest
+can honestly retain its pre-upload freeze state.
+
+The web and Windows builds are ready for the family checklist. Report feedback
+in this existing Astra task; a passing session should name the device, input,
+comfort/clarity verdict and any untested checks. Root reviews that evidence and
+PT36's held attachment preflight before releasing the fresh Agent 04 prompt.
+No later specialist has been started by this publication.

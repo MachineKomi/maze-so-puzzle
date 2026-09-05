@@ -1,9 +1,11 @@
 # UI-03 — Human-directed FP-UI1 correction
 
-Status: engineering correction verified for clean-source packaging, 2026-09-05.
-See `../reviews/2026-09-05-ui03-root-review.md` and the61-row audit. Publication
-and Human family acceptance are separate pending gates. Root owns runtime integration and
-release. The detailed v0.20.1/v0.21.0 comparison supersedes the preceding STOP
+Status: published and verified; ready for family playtesting, 2026-09-05.
+Runtime source: `68e303da680d5aec0ba71154949c5a2a0d1697ae` (v0.22.0).
+See `../reviews/2026-09-05-ui03-root-review.md`, the 61-row audit and the
+[public release receipt](../../release/FP-UI1-v0.22.0-release-verification.json).
+Human family/device acceptance remains pending. Root owns runtime integration
+and release. The detailed v0.20.1/v0.21.0 comparison supersedes the preceding STOP
 for discussion; v0.21.0 remains a rejected Human UI result. Automated passes
 never promote that build to visual or family acceptance.
 
@@ -105,8 +107,9 @@ browser emulation, model calculations and automated checks.
 The first integrated candidate passed 486 project tests and TypeScript/Vite. The
 first new browser sweep passed nine of fifteen cases and correctly rejected
 full-content iPad/minimum-window overflow, a held-travel discontinuity, and the
-longest five-friend victory composition. These failures are being corrected;
-this paragraph is progress evidence, not release acceptance. Original comparison
+longest five-friend victory composition. Those failures were rejected and
+corrected in the subsequent cohorts recorded below; the failed attempt remains
+historical evidence. Original comparison
 screenshots are archived byte-exactly under the local review evidence directory.
 
 Home v05 clears the two authorized pockets with 579 alpha-only source changes.
@@ -114,12 +117,55 @@ Forty-four approved-source 512px actor derivatives support large contextual card
 Visual inspection found Tessera's pre-existing coral-fin alpha loss; a separately
 masked source-derived r02 repair replaces only its new contextual rendition.
 Original approved field pixels remain unchanged. Exact-byte technical decisions
-and the separate 8,008,395-byte public allocation request are recorded in
+and the separately approved 8,008,395-byte public allocation are recorded in
 `../source-assets/publication/ui-correction-art-delivery-request.json`. No character
 identity or historical Human art decision was reopened.
 
 The new Book uses schema 6 with truthful normal-play guardian discoveries, empty
 legacy discovery migration, preserved reward receipts, tester isolation and a
 read-only guard for future schemas. Future owners must preserve these contracts.
-The intended next preview is **0.22.0**: it is a new immutable correction build,
-not an overwrite of either comparison binary. It is not built or deployed yet.
+The **0.22.0** correction is built from reviewed source
+`68e303da680d5aec0ba71154949c5a2a0d1697ae` with restored locked npm dependencies.
+R6's 62/63 result retains its setup-observer failure; all five relevant r7
+interaction/save cases passed after that observer correction, and all17 r8 UI
+checks passed. Native testing then rejected Home clipping in candidate `2f8fa6a`;
+the two r9 Home tests passed after the bounded CSS correction. A later strict
+comparison caught an installed minifier/lock mismatch in the first `68e303d`
+package. Both candidate binaries and failed evidence remain preserved.
+
+The final locked run passed488 project tests in55.85s. The prior131 Python/art
+test result is retained on unchanged relevant inputs, not claimed as a new run.
+Final gzip9 sizes are152,379 JS /23,130 CSS bytes; public delivery is164,988,031
+bytes. Six locked local browser journeys passed in46.8s and the same six
+canonical-web journeys passed in52.0s. Exact-source CI33958357582 passed both
+required jobs; canonical JS/CSS are byte-identical to the locked build and all47
+art delivery hashes passed. Root observed final native Title/Home, Hint/Escape,
+close/reopen with the38-step run preserved, and the960×540 minimum layout.
+
+The final portable is
+`Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`; other same-version
+candidate filenames are withheld. [GitHub prerelease v0.22.0](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+was published at 10:51:24 UTC on 2026-09-05. All four unauthenticated public
+downloads matched the frozen stage by length and SHA-256 at 10:52:59.744 UTC;
+the public release receipt records release ID 383217101 and exact asset identity.
+The frozen uploaded manifest's pre-publication status is historical; this later
+receipt records completion without rewriting the uploaded manifest or notes.
+
+The [accepted final modal review](../reviews/2026-09-05-ui03-final-modal-cost.md)
+closes the bounded UC-13 backdrop comparison, UC-29 watched Static sequence and
+UC-10 meaningful round-close inspection. Twelve actual-modal blur/no-blur windows
+had 16.8–16.9ms rAF p95, no intervals above 50ms and no observed long tasks. The
+traced DPR2 pair's 33.209ms renderer task CPU delta over approximately 2.514s is
+an observed browser comparison, not GPU cost or a universal filter allowance.
+The ordinary Static victory had zero active animations across 241 rAF samples
+and four byte-identical captures; root accepted its 1194/568 compositions,
+including twelve stationary colored confetti tips and the documented compact
+content treatment. The meaningful 48px close control's 20px mark was centered
+in normal, hover and keyboard captures. No runtime change was needed.
+
+Plan07B retains qualified target-hardware performance. Human family acceptance,
+physical iPad/Safari, controller/couch, screen-reader speech and qualified low-end
+timing remain pending. The fresh Agent 04 task stays on hold until family
+feedback is accepted/resolved and root records the PT36 attachment preflight.
+See the root review and release checklist for receipts; none of these technical
+passes starts Agent 04 automatically.

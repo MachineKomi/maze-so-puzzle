@@ -1,25 +1,29 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current correction is **v0.22.0 FP-UI1 (UI-03)**, under final verification.
+The current correction is **v0.22.0 FP-UI1 (UI-03)**, ready for family playtesting.
 It responds to the Human's v0.21.0 UI review with authored landscape screens,
 larger picture-led tools, a five-page Adventure Book and coherent smooth travel.
+The release runtime source is `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
 See the [current root review](docs/reviews/2026-09-05-ui03-root-review.md) and
-[family checklist](docs/playtests/FP-UI1-checklist.md). The 0.20.1 packaging notes
-below describe retained historical comparison files until the new release note
-and immutable artifact manifest are finalized.
+[family checklist](docs/playtests/FP-UI1-checklist.md). The frozen
+[artifact manifest](release/FP-UI1-v0.22.0-manifest.json),
+[build playtest note](release/FP-UI1-v0.22.0-PLAYTEST.md) and
+[checksums](release/FP-UI1-v0.22.0-SHA256SUMS.txt) identify the
+[published preview](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0).
+All four public downloads matched the tested local files; the
+[publication receipt](release/FP-UI1-v0.22.0-release-verification.json) records
+that later transaction. Retained 0.20.1 files are historical comparison builds.
 
 [![Browser build](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml/badge.svg)](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml)
 
 ![Ame and her animal friends beside a magical storybook maze](public/assets/title-background-v1.webp)
 
-A gentle, browser-first fantasy maze game for young players, with an optional
-Windows desktop build powered by Tauri 2. This README describes the playable
-0.20.1 corrective Art & OST Preview, which remains an active prototype. Its automated
-browser gate and refreshed unsigned Windows packaging are verified. The
-verified source is deployed through the canonical Vercel site; physical-device
-family play-testing remains a separate gate.
+A browser-first fantasy puzzle adventure for all ages, with an optional Windows
+desktop build powered by Tauri 2. The current UI-03 preview has verified web,
+artifact and native journeys. Family playtesting, physical-device
+qualification and the remaining programme are separate from automated checks.
 
-![The previous 0.4.0 Little Star Trail build, with Ame's maze on the left and her picture-led adventure panel on the right](docs/screenshots/gameplay-v0.4.0.png)
+![The verified v0.22.0 Windows build: steady maze, larger picture-led adventure deck and bottom-right thumb pad](docs/screenshots/gameplay-v0.22.0-windows.jpg)
 
 ## Requirements
 
@@ -29,8 +33,13 @@ family play-testing remains a separate gate.
 
 ## Play the browser build
 
-The current public build is available at
-[maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/).
+The canonical browser address is
+[maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/). Root's current
+comparison confirms exact entry JavaScript/CSS byte identity with the clean
+locked build. All 47 new art delivery files (8,008,395 bytes) returned HTTP 200
+and matched their local hashes; six canonical-web journeys passed. The locked
+Windows artifact passed native Title/Home, Hint, single movement, close/reopen
+and minimum-layout checks. The release is ready for family feedback.
 
 ```powershell
 npm ci
@@ -69,29 +78,43 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The current verified desktop artifacts are the unsigned 0.20.1 corrective Art & OST
-Preview:
+The published FP-UI1 Windows handoff contains four files:
 
-- Portable test copy: `release/Maze-so-Puzzle-0.20.1-portable.exe`
-  (160,436,224 bytes; SHA-256
-  `1FF30C2D5F58A60A2D4FAD44443A1D61D5A3B7DF66D4A96E86858E725D2B8777`).
-- NSIS installer test copy: `release/Maze-so-Puzzle-0.20.1-setup.exe`
-  (154,642,433 bytes; SHA-256
-  `09208147AE5FFB7DED0640257B6978ADB9A79210619E469F821D9D055757F143`).
-  Executables are deliberately
-  excluded from source history and should be attached to a GitHub Release.
-- Original standalone build output: `src-tauri/target/release/maze-so-puzzle.exe`
-  (this mutable path byte-matches the staged portable copy).
-- Original installer output: `src-tauri/target/release/bundle/nsis/Maze so
-  Puzzle - For Ame to Solve!_0.20.1_x64-setup.exe` (byte-matches the staged
-  setup copy).
-- Both executables report file/product version 0.20.1. The portable app remained
-  responsive for a six-second smoke launch and showed the correct game title.
-  This family preview uses the separate
-  `com.ame.mazesopuzzle.preview` desktop data namespace.
-- The verified 0.20.1 hashes and retained archive hashes are recorded in
-  [`release/SHA256SUMS.txt`](release/SHA256SUMS.txt). Executable test builds stay
-  out of Git history and can be published separately as GitHub Release assets.
+- `release/Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`
+- [FP-UI1 artifact manifest](release/FP-UI1-v0.22.0-manifest.json)
+- [FP-UI1 playtest instructions](release/FP-UI1-v0.22.0-PLAYTEST.md)
+- [FP-UI1 SHA-256 checksums](release/FP-UI1-v0.22.0-SHA256SUMS.txt)
+
+Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.0/Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe).
+It is 173,378,560 bytes; SHA-256
+`b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
+Executables stay out of Git history; the portable and three release records
+form the verified GitHub Release asset set. The rejected v0.21.0 draft and the
+superseded v0.22.0 candidate from `2f8fa6a` remain withheld.
+
+The earlier same-source `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-portable.exe`
+is also withheld: its installed Rolldown version differed from the committed
+lockfile. `npm ci` restored Rolldown 1.2.6 without changing that lockfile.
+The `-locked-portable.exe` suffix distinguishes the replacement; a displayed
+version of 0.22.0 alone is insufficient to identify the verified artifact.
+
+This FP-UI1 build uses `com.ame.mazesopuzzle.preview.fpui1`, separate from the
+older preview profile `com.ame.mazesopuzzle.preview`. Saved progress belongs to
+the selected WebView profile, not the executable's folder. The local build
+commands above do not by themselves establish the final release profile or
+artifact identity. `src-tauri/target/release/maze-so-puzzle.exe` is a mutable
+build output; never infer that it still matches a previously staged file.
+
+Historical 0.20.1 comparison copies remain archived:
+
+- `release/Maze-so-Puzzle-0.20.1-portable.exe`: 160,436,224 bytes; SHA-256
+  `1FF30C2D5F58A60A2D4FAD44443A1D61D5A3B7DF66D4A96E86858E725D2B8777`.
+- `release/Maze-so-Puzzle-0.20.1-setup.exe`: 154,642,433 bytes; SHA-256
+  `09208147AE5FFB7DED0640257B6978ADB9A79210619E469F821D9D055757F143`.
+
+Their historical hashes and older archive records are in
+[release/SHA256SUMS.txt](release/SHA256SUMS.txt). Their earlier six-second smoke
+launch and build comparisons do not qualify the current FP-UI1 candidate.
 
 ## Controls
 
@@ -125,7 +148,7 @@ Preview:
 
 ## Tester preview mode
 
-On the Home screen, click or tap the small **Playable build 0.20.1** label to
+On the Home screen, click or tap the small **Playable build** version label to
 open the secret tester maze picker. The same picker opens automatically when the
 exact query `?debug=mazes` is appended to the game URL. It gives direct access to
 every authored maze, including locked ones, and labels each maze's dimensions
@@ -140,17 +163,35 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Uncommitted Plan 01 review candidate
+## Current UI-03 correction
 
-The working tree contains an adaptive UI for title, play, Adventure Book,
-tester picker and dialogs, plus named CSS ownership, Sound/comfort controls,
-earned-keepsake inspection and fourteen approved-source presentation candidates.
-This is not the published0.20.1 build or FP-UI1. Root review, incremental byte/art
-allocation, physical-device and Human acceptance remain open. See
-[UI specification](docs/UI_UX_SPEC.md) and [review return](docs/UI_UX_REVIEW_EVIDENCE.md).
-No version, package or publication transaction was performed by this task.
+- Title and Home use the paintings' intended left-side menu space and right-side
+  cast. Home allocates menu height before the logo, including fresh and saved
+  Continue states; ordinary landscape progress labels remain visible together.
+- Landscape gameplay keeps the square board stable while the map and collection
+  pictures share the deck's remaining height. Large primary art and the compact
+  More surface serve distinct space constraints; enlarged text retains readable
+  scrolling rather than silently clipping content.
+- The Adventure Book has Mazes, Friends, Bestiary, Stats and Achievements pages,
+  large contextual art/lore cards and greyed real artwork for locked keepsakes.
+  Bestiary entries record actual normal-play encounters.
+- Rounded story portraits, deliberate Enter/body-click progression, celebratory
+  friend dances and confetti, restrained focus treatment, quick mute and the
+  separate Sound and comfort panel address the v0.21.0 review.
+- First taps and held steps share precise tile rules and smooth 160ms visual
+  travel. The bottom-right thumb pad supports tap, hold and drag steering.
 
-## Included in playable build 0.20.1 (released baseline)
+The [UI specification](docs/UI_UX_SPEC.md),
+[UI-03 root review](docs/reviews/2026-09-05-ui03-root-review.md) and
+[FP-UI1 playtest note](release/FP-UI1-v0.22.0-PLAYTEST.md) distinguish implementation,
+measured evidence and remaining Human/device gates. Packaging, native
+verification and publication are complete; family acceptance remains open.
+
+## Historical 0.20.1 baseline notes
+
+The following accumulated development notes describe the retained comparison
+baseline and its earlier changes. Some details were subsequently replaced by
+UI-03; they are historical context, not the current interface or release status.
 
 - A separate illustrated title screen now precedes Home. Professor Poggle and
   Sprig use final-style story portraits, and the repaired Home hero has clean
@@ -460,7 +501,7 @@ Core engine modules live in `src/game/`; UI input helpers live in `src/`:
 - `session.ts`: revision/fingerprint-safe active-run persistence.
 - `pointerControls.ts`: tile-relative pointer intent and the strict one-tile,
   non-exit/no-new-interaction corner-assist rule.
-- `movementControls.ts`: the shared held-input acceleration curve and cadence
+- `movementControls.ts`: the shared first/held-step cadence
   state used by touch, mouse, keyboard/WASD, and on-screen arrows.
 
 ## Verification
@@ -496,9 +537,9 @@ The current validation result is recorded in `docs/RELEASE_CHECKLIST.md` rather
 than frozen here. Coverage includes Spring Boots and single- or
 multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
-dominant-colour theme compatibility, thirteen-track per-maze music selection, the
+dominant-colour theme compatibility, context-specific soundtrack selection, the
 6 x 6 even camera, variable 9–23 room-aware generation, solver-safe connected hazards,
-pointer intent/corner assistance, the slower eased held-input cadence, variable
+pointer intent/corner assistance, the shared 160ms first/held travel cadence, variable
 1–5 friend totals, immutable strong-enemy warnings, poison/antidote traversal
 and migration, theme lightness and colour compatibility, transparent terrain
 dressing, rescued-pet trails, persistent minimap reveal, dedicated Rose Heart,
@@ -510,13 +551,12 @@ migrations, current-state reachability, progressive hints, route-quality
 metrics, fixed Surprise seeds, complete friend/enemy personality maps, scoped
 large-maze object mounting, and below-fold portrait lazy loading.
 
-The 0.20.1 Tauri portable executable and NSIS installer byte-match their final
-build outputs, report file/product version 0.20.1, and are size-checked and
-SHA-256 hashed. The portable app also passed a responsive six-second launch
-smoke with the correct title. Clean-machine installation, signing, and
-physical-device checks remain separate release gates. The release source is
-pushed to GitHub `main`, whose connected Vercel project deploys the canonical
-site automatically.
+The final FP-UI1 artifact record will identify the exact source, portable bytes,
+SHA-256 and native checks. A build succeeding or `main` being pushed does not
+establish a verified executable or deployed browser version. Clean-machine
+installation, signing, offline qualification and physical-device checks are not
+claimed by this pending handoff. The earlier 0.20.1 package checks remain
+historical evidence only.
 
 The browser matrix, remaining release gates, and Windows artifact
 record are kept in
@@ -527,9 +567,8 @@ package after any later source or version change with:
 npm run desktop:build
 ```
 
-The current 0.20.1 Windows test installer is unsigned, so Windows SmartScreen
-may show a warning. Any future broadly distributed Windows release should be
-code-signed.
+Historical Windows preview packages were unsigned. Signing and distribution
+status for FP-UI1 must come from its finalized manifest and playtest note.
 
 ## Project documentation
 

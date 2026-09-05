@@ -1,10 +1,25 @@
 # FP-UI1 — family playtest checklist
 
-Current scope: UI-03 corrects the rejected v0.21.0 preview. Root supplies the new
-version, exact source SHA, verified Windows/web links and technical results in
-its release PLAYTEST note. A previous build or previous automated pass does not
+Current scope: UI-03 corrects the rejected v0.21.0 preview. The published release
+PLAYTEST note supplies the version, exact source SHA, verified Windows/web links
+and technical results. A previous build or previous automated pass does not
 qualify this correction. Controller overhaul, final lighting/VFX/animation,
 expanded campaign puzzles and adjustable camera zoom remain later work.
+
+Technical handoff, 2026-09-05: v0.22.0 runtime source
+`68e303da680d5aec0ba71154949c5a2a0d1697ae` has verified locked-build, canonical-web
+and native journeys. The [published v0.22.0 preview](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
+is ready for this playtest; all four public downloads passed length/hash checks
+on 2026-09-05 at 10:52:59.744 UTC in the [verification receipt](../../release/FP-UI1-v0.22.0-release-verification.json).
+Use `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe` from that release,
+or the [verified web build](https://maze-so-puzzle.vercel.app/). Earlier
+same-version candidate files are withheld. Technical verification does not replace the family checks below or
+qualify physical iPad/Safari, controller/couch or screen-reader use.
+
+Root also accepted the [bounded modal, Static celebration and close-button
+review](../reviews/2026-09-05-ui03-final-modal-cost.md) on the locked build.
+Those browser observations support this handoff; they do not decide whether
+the appearance and motion feel right to your family.
 
 Use `FP-UI1-feedback-template.md` to reply in the existing Astra task. Report an
 issue immediately; you need not finish the checklist. A short comfortable
@@ -46,6 +61,7 @@ session is enough. The remaining family-quality decision belongs to you and Ame.
 
 Record device, OS/browser, input, build, maze and motion setting; one liked
 moment, any confusing moment, and comfortable / tolerable / uncomfortable.
+For Windows, include the complete portable filename from the release note.
 A result on one device does not qualify every platform. Pause any check that
 feels uncomfortable.
 
@@ -57,6 +73,7 @@ feels uncomfortable.
 | Landscape iPad and desktop, then a narrow landscape phone | Same information hierarchy in deliberately composed layouts; compact phones move secondary actions into More |
 | Rotate to portrait and back | Clear landscape invitation, no moving underneath it, same run when restored |
 | Sound & Comfort | Immediate mute; Previous/Next/Shuffle follow the current music context; choices fit the screen |
+| Static Surface quality | Complete an ordinary maze: the celebration stays still, including small colored confetti tips at its top. Are its rewards, story and actions clear and does it still feel rewarding? |
 | Ordinary exit with a friend remaining | Stay safely resumes the same run; choosing to leave has the intended meaning |
 | Restart twice; cancel/timeout after one press | First press is a clear reversible confirmation; only deliberate second press restarts |
 | Larger text / OS scaling | Important content remains readable and reachable; scrolling is allowed for enlarged-text accessibility, never clipped |
@@ -71,8 +88,9 @@ Do not reset a profile to diagnose a possible save problem.
 
 If all tested journeys pass, reply with the build/device/input, comfort and
 clarity observations, and “FP-UI1 playtest passed.” Untested journeys stay
-untested. Root records your evidence and resolves remaining required gates,
-then supplies the completed Agent 04 prompt for a **fresh task**. A passing
+untested. Root records your evidence, resolves feedback and required gates,
+and completes the PT36 attachment preflight before supplying the final Agent 04
+prompt for a **fresh task**. That task remains on hold until then. A passing
 playtest does not automatically launch another specialist.
 
 If anything regresses, send a short reproduction in this Astra task using the
