@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-05",
+  "externalRoot": "C:/GameDev/maze-game-qa/playtests/v0220",
+  "backup": "Human reports Google Drive backup; not independently verified; no private Drive URL provided.",
+  "reviewer": "Astra",
+  "imagesInspected": 51,
+  "counts": {
+    "desktop": 14,
+    "ipad": 18,
+    "mobile": 19
+  },
+  "limits": [
+    "iPad files are camera photographs, not CSS-pixel screenshots; perspective, reflections and browser chrome affect interpretation.",
+    "Raster dimensions do not establish device model, CSS viewport, DPR, visualViewport, power state or frame timing.",
+    "desktop-home.jpg and ipad-home.jpg show Title; desktop-title.jpg and ipad-title.jpg show Home. Original filenames are preserved.",
+    "Screenshots support composition/visibility findings, not causes of motion stutter or claims of measured frame rates.",
+    "The adjacent external v0220-playtest-feedback.md is not an image; the canonical Human source is preserved in docs/user-playtests/."
+  ],
+  "files": [
+    {
+      "name": "desktop-adventurebook-achievements.jpg",
+      "bytes": 248466,
+      "width": 1919,
+      "height": 994,
+      "sha256": "8fd2449c8736d98743a4edabd3623d5d4f2a3adcc6758811c80ae2e7e7239830"
+    },
+    {
+      "name": "desktop-adventurebook-beastiary.jpg",
+      "bytes": 222709,
+      "width": 1919,
+      "height": 998,
+      "sha256": "dc6537fd668600fed553d493681e498e5ec6359bef66040eaab0b9fc674a4912"
+    },
+    {
+      "name": "desktop-adventurebook-friends.jpg",
+      "bytes": 263370,
+      "width": 1919,
+      "height": 1002,
+      "sha256": "84853b1762c1f5ac1d7a97a592eb416f07aa45825d599608e5c51f3ce9d458fe"
+    },
+    {
+      "name": "desktop-adventurebook-maze.jpg",
+      "bytes": 225734,
+      "width": 1919,
+      "height": 1000,
+      "sha256": "387e89680b3a539ada62f39cee7149a2c0a05d6af869fd8d1cf07902771dfd09"
+    },
+    {
+      "name": "desktop-adventurebook-stats.jpg",
+      "bytes": 193799,
+      "width": 1919,
+      "height": 993,
+      "sha256": "f51bcdd37d18f211768f7155a6392fdf035ca86d87b623edbfb9cf6540e9462e"
+    },
+    {
+      "name": "desktop-help.jpg",
+      "bytes": 160343,
+      "width": 1914,
+      "height": 1001,
+      "sha256": "5c06b129c11f24dea80ca683c7e67bbc9055bd372e2de7b6de08a9cb65cc175e"
+    },
+    {
+      "name": "desktop-hint.jpg",
+      "bytes": 126524,
+      "width": 1909,
+      "height": 999,
+      "sha256": "c58650aa3d783b4fb7fc9684238d913e1e4701613f24e4369c72e7563cd6a265"
+    },
+    {
+      "name": "desktop-home.jpg",
+      "bytes": 468168,
+      "width": 1917,
+      "height": 997,
+      "sha256": "224fd0032b679737ebf01e43feb07749d7a21f57987ff2d58aa2841ed66d02f7"
+    },
+    {
+      "name": "desktop-maze-large.jpg",
+      "bytes": 406603,
+      "width": 1916,
+      "height": 1000,
+      "sha256": "a3196ccab335617070bf0013bae946858f84e3d5cc8be2cfdb175c8403032f63"
+    },
+    {
+      "name": "desktop-maze-small.jpg",
+      "bytes": 307772,
+      "width": 1917,
+      "height": 1004,
+      "sha256": "a95c1d6c6926cd80f5aafc6b657188ba8e18a65f315ad2b5a64e5f4b89764325"
+    },
+    {
+      "name": "desktop-settings.jpg",
+      "bytes": 145138,
+      "width": 1919,
+      "height": 1002,
+      "sha256": "4fd45e0edd91ad663337ea48f595de11e580a6a23a3e42b3729ad207f7030d16"
+    },
+    {
+      "name": "desktop-story-card.jpg",
+      "bytes": 171202,
+      "width": 1912,
+      "height": 997,
+      "sha256": "52053cc69708c796eb4ce1367462c18ea3d9b62964a2d5bedc2844fd4d5c923e"
+    },
+    {
+      "name": "desktop-title.jpg",
+      "bytes": 490802,
+      "width": 1919,
+      "height": 1000,
+      "sha256": "73f005d1735a63c7525581e5d7b4e7c4522da59018160848a62a61e33e92636b"
+    },
+    {
+      "name": "desktop-victory.jpg",
+      "bytes": 154923,
+      "width": 1910,
+      "height": 999,
+      "sha256": "2f42359c65251f195dda87962664202c41847b0bd565d105a29094d997310bef"
+    },
+    {
+      "name": "ipad-adv-book-maze.jpg",
+      "bytes": 4059807,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "30018a05bb3185bd6b2d9640019a53cbcffe270b9877d272ba6f372705ab6b0b"
+    },
+    {
+      "name": "ipad-advbook-achivements.jpg",
+      "bytes": 4485113,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "d850d20857fe8ea2e8e6dcc01e189edea048a60fa9a24e1888b4211ce6c45c8f"
+    },
+    {
+      "name": "ipad-advbook-beast.jpg",
+      "bytes": 4023113,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "1bf095fe2612a7a996f91bea6003da0dfe223d5378ae9b3c66e24e26909c1992"
+    },
+    {
+      "name": "ipad-advbook-friends.jpg",
+      "bytes": 4429762,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "31c6f49ea96be5e11796873b452ae3fc86dd182d6ae6ccf520df1e1663e754fd"
+    },
+    {
+      "name": "ipad-advbook-stats.jpg",
+      "bytes": 4476398,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "6b8366fa737d84247b3aa8e3d1ffa20399283f623bcddf11353ca990fd0a0300"
+    },
+    {
+      "name": "ipad-beast-card.jpg",
+      "bytes": 3796829,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "aba2dbb8b745968de4685751dd2d6b5f000315bf23a0bd8329ee27d3801eeb19"
+    },
+    {
+      "name": "ipad-friend-card.jpg",
+      "bytes": 3879523,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "1bc5a5d6a3096371da4b68c214f2b8dfb4ad4acf0c14da4f55d2d21807781a33"
+    },
+    {
+      "name": "ipad-home.jpg",
+      "bytes": 4231743,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "88120191d815159dbc4b90c021e86d32703d08e6b6b192d2690d2131d6c783bb"
+    },
+    {
+      "name": "ipad-maze-picker.jpg",
+      "bytes": 3944480,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "c6c71c94100e4f4087e85575f85b631ec8585e0e27284b37746d0da10c8601d9"
+    },
+    {
+      "name": "ipad-maze03.jpg",
+      "bytes": 4077174,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "ace5a60d671ad9e456bfff49af392c27cf748ddf28876abd4c08939f7ab09d89"
+    },
+    {
+      "name": "ipad-mazechange.jpg",
+      "bytes": 3832522,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "a57deb5122ccd99f618de2fc1ecb1ccb2a9f2e8d4983a67c61b7ae2316cb2857"
+    },
+    {
+      "name": "ipad-mazeui01.jpg",
+      "bytes": 3984575,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "2e0311a45254d8822c71d9f56c392fbd437db3de1d7b091dc5a967bc62045dc0"
+    },
+    {
+      "name": "ipad-mazeui02.jpg",
+      "bytes": 3891128,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "27ecb1619a7ef9012fa9eb1999f455c10747b49506eb8c92ede691ade36956c4"
+    },
+    {
+      "name": "ipad-settings.jpg",
+      "bytes": 3792060,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "c9ecdab8f67488648552e86702279b30067523db12f5cd3cc64f54518a8308cb"
+    },
+    {
+      "name": "ipad-story02.jpg",
+      "bytes": 3738649,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "a9fd5d24376302a596f76b5ec087741532c1c3a7887ea4e3cad6b62c31b13ebc"
+    },
+    {
+      "name": "ipad-storyui01.jpg",
+      "bytes": 3714881,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "e41fe1c4a2c3868fb192741328c2fdcdbc05b95e6d8744640f8cb2e6144381ba"
+    },
+    {
+      "name": "ipad-title.jpg",
+      "bytes": 4061606,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "8cbaa319fd78cf5600e040e3782c486e6a91997fdb0a1205f027249a453649a0"
+    },
+    {
+      "name": "ipad-victory.jpg",
+      "bytes": 4022878,
+      "width": 4000,
+      "height": 3000,
+      "sha256": "467f56da87d6c3650d0e170d5ccead4d44f659a3fd8e2521bc324bd69cbb8d15"
+    },
+    {
+      "name": "mobile-achievements.jpg",
+      "bytes": 745685,
+      "width": 2340,
+      "height": 936,
+      "sha256": "96ef4eb09825d9965fbf8454b8dd04fd6d02577927c1319354b1bf814ad29db2"
+    },
+    {
+      "name": "mobile-advbook-friends.jpg",
+      "bytes": 759917,
+      "width": 2340,
+      "height": 936,
+      "sha256": "c73966a96f94c2401ca8b39bc61ffadb8f4e944a1e81c6229a1e1655791dba4d"
+    },
+    {
+      "name": "mobile-advbook-mazes.jpg",
+      "bytes": 708777,
+      "width": 2340,
+      "height": 936,
+      "sha256": "af76273add199085b3fdd3cde484c0f838d301131079d05ddcb15e79cb09a438"
+    },
+    {
+      "name": "mobile-beastiary.jpg",
+      "bytes": 664673,
+      "width": 2340,
+      "height": 936,
+      "sha256": "a2dd3af062fd7d65b8098abf3a8d6861472b0a2ea34b6f872681fef25961ab4c"
+    },
+    {
+      "name": "mobile-collapsed-options.jpg",
+      "bytes": 614768,
+      "width": 2340,
+      "height": 936,
+      "sha256": "ba2d9e7aafd7a15b22b3b221d169934b8cbbefcd0c4592268bd7a0bf52189cb7"
+    },
+    {
+      "name": "mobile-collapsed-options02.jpg",
+      "bytes": 669443,
+      "width": 2340,
+      "height": 936,
+      "sha256": "e934a9d34633c62c91448feae66ad79cfa09f79e26889908d68c39bb1fc4d533"
+    },
+    {
+      "name": "mobile-collapsed-options03.jpg",
+      "bytes": 638470,
+      "width": 2340,
+      "height": 936,
+      "sha256": "7db644371ca13c677486d6dc22ed158bbcfb052c0ae2406351b2864ac90df1b4"
+    },
+    {
+      "name": "mobile-friend-card.jpg",
+      "bytes": 625699,
+      "width": 2340,
+      "height": 936,
+      "sha256": "092a038899d9f05198e91a7898b8c144e40ac298cda2edef788be63e0cc95f85"
+    },
+    {
+      "name": "mobile-home.jpg",
+      "bytes": 1231669,
+      "width": 2340,
+      "height": 936,
+      "sha256": "aa6361850cfc9909a1f263fe9e4ec50c3c4f7f0564c404ce1f39d3145ee7ea11"
+    },
+    {
+      "name": "mobile-home02.jpg",
+      "bytes": 1247324,
+      "width": 2340,
+      "height": 936,
+      "sha256": "1ed4436743ebcb4d44d1ea538ca53635262c40a3ac1dfdd397d53a70679237ac"
+    },
+    {
+      "name": "mobile-maze01.jpg",
+      "bytes": 1072090,
+      "width": 2340,
+      "height": 936,
+      "sha256": "9ccc8e8f17a67f2871360bb3eb84be6022d3203b24adca1800f2623b24c7b0c6"
+    },
+    {
+      "name": "mobile-maze02.jpg",
+      "bytes": 1002747,
+      "width": 2340,
+      "height": 936,
+      "sha256": "8a1039876263f2bfe949ab5ea4cb80d4e06a43b810f8511e2d2392b6b5556281"
+    },
+    {
+      "name": "mobile-maze03.jpg",
+      "bytes": 861501,
+      "width": 2340,
+      "height": 936,
+      "sha256": "a71cc68acbebe5e7ca10050ad8e8213182ae7a97e26a8484404867c50ef1f0bd"
+    },
+    {
+      "name": "mobile-maze04.jpg",
+      "bytes": 964675,
+      "width": 2340,
+      "height": 936,
+      "sha256": "10d66c163a0182879a8e1a424ba69a69c084ec4685de5e32f9d9f0be73243555"
+    },
+    {
+      "name": "mobile-settings.jpg",
+      "bytes": 601414,
+      "width": 2340,
+      "height": 936,
+      "sha256": "02302e25ac224ce02fd33819cc530b87afc5a6a64cfe3a0f7267829671d085e7"
+    },
+    {
+      "name": "mobile-stats.jpg",
+      "bytes": 681865,
+      "width": 2340,
+      "height": 936,
+      "sha256": "82706452c0d41bfdfd8d1c0108b797b4e9a588ac7978b5002e88092bfed321a3"
+    },
+    {
+      "name": "mobile-story-card.jpg",
+      "bytes": 905347,
+      "width": 2340,
+      "height": 936,
+      "sha256": "f257bd9679ec98ca688fd87f4a7424655e10978c75f892b4387ed15ec4d945fc"
+    },
+    {
+      "name": "mobile-title.jpg",
+      "bytes": 1362461,
+      "width": 2340,
+      "height": 936,
+      "sha256": "efc7d7da084f01aceaf9a9265bc05524d410890dd1554916bc435a2fd2208e47"
+    },
+    {
+      "name": "mobile-victory.jpg",
+      "bytes": 612588,
+      "width": 2340,
+      "height": 936,
+      "sha256": "b03fa6559610f2ba0bd3f8ddb7fda14a9aca0f33783c65d5bab7ae74af92beac"
+    }
+  ]
+}

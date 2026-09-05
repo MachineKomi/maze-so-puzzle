@@ -7,10 +7,10 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- Branch: `main`. Clean intake HEAD/remote: `f1166b0e7dd5d25b50e74abe1f539e3e7cd18d63`.
+- Branch: `main`. This review's intake HEAD: `5f7f8c957f1b42095d96248eae3eb77d038768a9`. Only the supplied `docs/user-playtests/` was untracked on entry; source and release were unchanged.
 - Frozen UI-03 / FP-UI1 runtime: `68e303da680d5aec0ba71154949c5a2a0d1697ae`, **v0.22.0**.
 - Engineering disposition: reviewed, technically verified, committed, pushed and published.
-- Human disposition: **STILL UNDER REVIEW**. Initial feedback says “HUGE improvement”; detailed iPad, phone and desktop screenshots/findings are being gathered. This is encouraging feedback, not full acceptance, defect closure or Amelia/family qualification.
+- Human disposition: **POSITIVE, WITH OPEN CORRECTIONS**. Full v0.22.0 feedback and 51 cross-device images have now been reviewed by Astra. The Human reports a huge improvement and likes the desktop/iPad composition; sustained iPad performance, phone scaling and interrupted holds prevent full FP-UI1 acceptance. No blanket defect closure or Amelia/family qualification is claimed.
 - v0.21.0 was Human-rejected despite earlier engineering passes. v0.20.1 is the prior comparison baseline, not a claim of universal device qualification.
 - No runtime candidate or specialist implementation is active. This transfer changes documentation only.
 - This document's handoff commit is discoverable with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`; the transfer capsule gives its exact SHA. Intake HEAD above is deliberately not the future commit containing this file.
@@ -36,12 +36,14 @@ The transfer push may create a newer documentation deployment/CI run. Check thos
 
 ## 3. Active work and next decision gate
 
-**Immediate next task:** Sol and Astra jointly review the final Opus 5 pack. Sol performs the first product/intent/evidence assessment; Astra then challenges it technically; Sol reconciles the positions for Human approval. No Opus proposal is implemented merely because it appears in the review.
+**Immediate next task: GPT-5.6 Sol — HIGH independently challenges Astra's first assessment.** The Human explicitly gave Astra the first turn, superseding the earlier Sol-first capsule. Astra's read-only review and documentation intake are complete; Sol's position and joint dispositions remain pending. No Opus proposal is implemented merely because it appears in a review.
 
-- Human is finishing detailed cross-device playtesting and may supply an updated Claude review. Import any later review as a separate attributed snapshot.
-- Start from the [initial Human feedback](playtests/2026-09-05-fp-ui1-v022-initial-human-feedback.md), [exact imported Opus pack](reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review.md), [provenance](reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review-provenance.json) and [pending joint ledger](reviews/2026-09-05-sol-astra-opus5-disposition.md).
-- The supplied “final pack” is **v3, third pass**, and states `HEAD fef5e56 + the full uncommitted UI-03 working tree; package.json version 0.22.0`. It did not identify final committed `68e303d`. Every current-code claim requires re-verification. Its self-described code-only analysis does not establish play feel or physical-device quality.
-- **Agent 04 is HOLD.** Joint review comes first; family acceptance/blocking feedback and root PT36 ring-attachment metadata disposition also precede releasing its grounding preflight. No Opus-driven implementation or roadmap change is authorized by this transfer.
+- Read the [complete Human feedback](user-playtests/v0220-playtest-feedback.md), [Astra assessment and 20 acceptance slices](reviews/2026-09-05-astra-v0220-review.md), [current 88-row ledger](reviews/2026-09-05-sol-astra-opus5-v4-disposition.md), [Opus v4](reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review-v4.md), [focused response](reviews/external/2026-09-05-claude-opus5-v0220-feedback-response.md), [provenance](reviews/external/2026-09-05-v0220-review-pack-provenance.json) and [51-image external manifest](reviews/external/2026-09-05-v0220-screenshot-manifest.json).
+- Current Opus v4 names `5f7f8c9`; the earlier v3/fef/uncommitted warning belongs only to the retained historical snapshot. Code claims were selectively reverified. Physical-device cause/timing remains unmeasured in this turn.
+- Astra proposes a bounded performance/live-input correction first, then short-height UI/Book/celebration refinements. Proposed writers: Astra for the first slice, Sol for the UI slice; the other reviews read-only. Sol may challenge these assignments and scope. No runtime owner is active yet.
+- Human V22-04/09 override the old successful-interaction neutral gate and first/third-bump explanation policy. The controls plan now states the new desired lifecycle; implementation is pending. Other Claude-derived spec/sequence changes await reconciliation, not automatic adoption.
+- Sol should record substantive positions, reconcile a narrow next brief for already-requested fixes and name the next writer. Escalate material product choices, not routine engineering decisions. Further Claude review is optional/bounded, not a per-output dependency.
+- **Agent 04 remains HOLD** for blocking feedback, joint sequencing and PT36 attachment preflight. A bounded renderer/performance decision precedes further lighting cost. Preserve the remaining programme, particularly 09 → 10 → 11; do not move co-op beyond the release candidate.
 
 ## 4. Binding Human decisions and experience to preserve
 
@@ -50,6 +52,7 @@ The transfer push may create a newer documentation deployment/CI run. Check thos
 - Preserve two-stage Title/Home: large logo/actions use the background's left negative space, cast belongs on the right path. Keep approved logo/cast identities and correct cutouts.
 - Maximize the existing maze area; **no Big/Normal toggle**. Future zoom is separately scoped: **4/5/6/7 visible tiles, default 6**, Plan 08/PT32, with 07B workload requalification.
 - First tap and held movement must both look smooth and feel responsive; gentle acceleration is allowed. No first-tile flash/camera jerk or old hopping gait. Retain precise tile legality unless a later reviewed decision changes it. No full analog rewrite has been agreed.
+- Latest V22-04/09: keep genuinely held direction through eligible successful interactions, observing release/steering while paused; never replay queued moves. Failed requirements explain on each fresh deliberate attempt, not once per enemy or only on the third bump. One continuous blocked gesture must not flood modals. Menus, cancellation, blur, hidden pages, disconnects and level changes still clear safely.
 - Keep large readable art/type, Ame's Power portrait, useful minimap, cages/faded inventory becoming full colour without tick badges, stable HUD/feedback bounds and the bottom-right tap/hold/drag thumb pad.
 - Preserve Book pages, large friend/guardian details, grey real locked achievement art, restrained modality-aware focus, round story portraits, clear primary actions/Enter progression, joyful bounded victory and motion preferences.
 - Pickup amounts should be discovered on collection, not advertised in tiny tile-corner labels. Preserve readable post-pickup arithmetic and puzzle-critical enemy/player/gate information.
@@ -68,7 +71,7 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. Finish FP-UI1 family disposition and root PT36 attachment preflight; resolve blockers.
+1. Reconcile the [Astra follow-up proposal](reviews/2026-09-05-astra-v0220-review.md) with Sol; resolve FP-UI1 performance/input/phone blockers and obtain a focused family retest. These slices bring part of 07/08/01 forward without rewriting the whole programme. Resolve root PT36 attachment preflight before 04.
 2. **04** lighting, wall depth, terrain topology/regions.
 3. **02** VFX, effect lifecycle, feedback and reward showers; then **remaining UI-02** polish. UI-03 already delivered Book/tab/detail/focus/victory foundations; reconcile residual work rather than rebuilding them.
 4. **08** normalized input, controllers/Xbox/Steam Deck and bounded zoom.
@@ -97,9 +100,9 @@ Open risks/gates:
 
 | Area | Current unresolved boundary |
 | --- | --- |
-| Product/visual/family | Detailed Human findings, iPad/desktop/phone screenshots, Amelia/family comfort, comprehension, delight and final acceptance pending. Positive overall feedback does not close individual rows. |
+| Product/visual/family | Detailed Human findings and 51 images received and Astra-reviewed. Desktop/iPad presentation is strongly positive; V22 correction slices, physical sustained comfort and final family acceptance remain open. |
 | Movement/input | Physical touch, single taps/holds/corners, long follower chains and comfort still require family evidence; controller/Steam Deck, couch/TV and screen-reader speech remain unqualified. Plan 08 owns the future canonical input policy. |
-| Architecture | Preserve current scene/coordinate/layer/motion seams, effect cancellation and single writer. Opus architecture assertions are unverified against the final SHA. Avoid simultaneous hub-file changes. |
+| Architecture | Current Opus claims have Astra-side code checks and explicit corrections; Sol assessment remains pending. Preserve scene/coordinate/layer/motion seams, effect cancellation and one writer. No speculative full clock/renderer/hub rewrite is approved. |
 | Performance | Tiny remaining JS budget/full public allocation; bounded timing only. Terrain/effects/zoom/animation need integrated low-end sustained measurement before 07B qualification. |
 | Solver/content | More mechanics, procedural loops/difficulty and Mimic RNG must preserve solver tractability and solvability. No code-review suggestion is automatically good family puzzle design. |
 | PT36 visuals | Ring attachment currently uses layer 1 vs actor 2/other weapons 3; root must review canonical attachment metadata/composition before Agent 04 grounding. Do not infer a renderer defect or fix by weapon-name CSS. |
@@ -109,7 +112,7 @@ Open risks/gates:
 
 Read in this order, then only the relevant owned plan/backlog slices:
 
-1. This state, [Human feedback](playtests/2026-09-05-fp-ui1-v022-initial-human-feedback.md), [Opus provenance](reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review-provenance.json) and [joint ledger](reviews/2026-09-05-sol-astra-opus5-disposition.md).
+1. This state, [complete Human feedback](user-playtests/v0220-playtest-feedback.md), [Astra review](reviews/2026-09-05-astra-v0220-review.md), [current source provenance](reviews/external/2026-09-05-v0220-review-pack-provenance.json), [current joint ledger](reviews/2026-09-05-sol-astra-opus5-v4-disposition.md), both linked complete Opus reports and the external screenshots. The earlier initial-feedback/v3 records remain history.
 2. [Vision](GAME_VISION_AND_DESIGN_SPEC.md), [roadmap](plans/00-integrated-implementation-roadmap.md), [execution prompts](plans/EXECUTION_PROMPTS.md), [owned backlog](PLAYTEST_BACKLOG.md).
 3. [Architecture](ARCHITECTURE.md), [gameplay specification](GAMEPLAY_DESIGN_SPEC.md), [Story Bible](STORY_BIBLE.md), [Art Bible](ART_BIBLE.md), [UI contracts](UI_UX_SPEC.md), [performance budgets](PERFORMANCE_BUDGETS.md).
 4. [UI-03 plan](plans/UI-03-fp-ui1-correction.md), [61-row Human intake](playtests/2026-09-05-v021-ui-correction-intake.md), [feedback audit](reviews/2026-09-05-ui03-feedback-audit.md), [root review](reviews/2026-09-05-ui03-root-review.md), [modal-cost review](reviews/2026-09-05-ui03-final-modal-cost.md), [dialog review](reviews/2026-09-05-ui03-dialog-review.md), [inspiration research](reviews/2026-09-05-ui-inspiration-research.md).
@@ -133,12 +136,11 @@ Use an isolated checkout for historical source; never reset shared main/user wor
 ## 9. Sol–Astra collaboration protocol
 
 - The Human manually switches **GPT-5.6 Sol / GPT-6 Astra** in one shared task. Repository records, not either model's hidden context, carry decisions and evidence.
-- **Sol:** Human intent, product/creative direction, experience preservation, visual judgment and orchestration synthesis.
-- **Astra:** architecture, technical challenge, performance, migrations, validation and implementation-risk analysis.
-- Major decisions: **Sol proposes → Astra challenges → Sol reconciles → Human decides**. Record meaningful disagreement, uncertainty and the actual Human decision in the ledger; never manufacture consensus.
+- Both models own the product outcome. Sol's proposed next emphasis is player experience/UI; Astra's is performance/input/technical risk. These are task assignments, not permanent restrictions or claims of inherent model superiority.
+- Use **one proposes → the other independently challenges → reconcile → name one writer**. The Human's latest turn explicitly selected Astra first, then Sol. Do not require two full planning rounds for routine fixes. Record disagreements and their resolution; never manufacture consensus or substitute subagents for the other model's review.
 - **Only one runtime writer.** Before work, agree one execution owner and explicit paths; the other reviewer is read-only and adversarial. Subagents may help with bounded independent read-only/documentation work; they do not stand in for the manually switched model's joint assessment.
-- The Human alone approves visual quality, play feel, family experience and material scope changes. Independent Claude analysis is advisory and may be requested for a fresh perspective; it does not adopt a roadmap.
+- The Human governs vision, final family/visual/play-feel acceptance and material scope choices. The models lead routine implementation and tell the Human the next useful action. Claude is an occasional bounded independent reviewer, not an implementation resource or mandatory reviewer of every output.
 - Before a handoff, update this state, owned backlog/evidence and the joint ledger, inspect exact diffs, run proportionate checks, commit/push a meaningful reviewed checkpoint and verify remote agreement. Preserve unrelated work and immutable release/source-art records.
 - Use existing harnesses; do not weaken tests to hide failures. Run expensive browser/art/solver/build work serially on this memory-constrained host and distinguish host contention from product regressions.
 - Responses identify the active model (`# Astra:` or `# Sol:`) and end with a prominent next-model/reasoning handoff. The Human requested **Sol — HIGH** next. Do not switch models or create/resume specialist tasks implicitly.
-- Review the complete imported Opus pack next through the pending ledger; no Agent 04/runtime tranche begins during this documentation checkpoint.
+- Sol now reviews the complete current pack against Astra's positions and defines the next bounded correction/owner. No runtime or Agent 04 launch occurred during Astra's documentation checkpoint. A fresh task can resume from this file without reconstructing either prior conversation.

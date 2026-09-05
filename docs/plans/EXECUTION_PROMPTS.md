@@ -4,12 +4,17 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-The immediate joint task is reviewing the final Opus pack: Sol assesses first,
-Astra challenges, Sol reconciles, Human decides. No runtime tranche or Agent 04
-starts during this documentation/review handoff. **Only one runtime writer**;
-the other agreed model reviews read-only. Current v0.22.0 family feedback and
-root PT36 disposition remain open before any Agent 04 launch. Future specialist
-tasks are fresh and require a current root-owned prompt with resolved gates.
+The latest Human instruction gives **Astra the first review, then Sol**. Astra's
+[v0.22.0 assessment](../reviews/2026-09-05-astra-v0220-review.md) and
+[88-row current ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md)
+are ready for **Sol — HIGH** to challenge independently against the complete
+Human feedback, both imported Opus reports and 51 external screenshots.
+Sol should record positions and reconcile a narrow next correction brief/owner;
+do not restart a historical Agent 01 assignment or automatically adopt all Opus
+recommendations. Proposed first work is bounded performance/live-input repair,
+then phone/Book/celebration refinement, preserving the praised desktop/iPad UI.
+No runtime or Agent 04 launch occurred during Astra's review. One runtime writer;
+the other model reviews read-only. Blocking family feedback and PT36 remain open.
 
 Status: manager-reviewed copy/paste runbook
 

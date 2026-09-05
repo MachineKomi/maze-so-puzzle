@@ -4,12 +4,18 @@
 release/acceptance and execution state. This backlog owns intake, routing and
 acceptance slices; earlier dated status paragraphs are historical evidence.
 
-The [initial v0.22.0 Human feedback](playtests/2026-09-05-fp-ui1-v022-initial-human-feedback.md)
-reports a huge overall improvement and fewer issues, especially on iPad/desktop.
-Detailed cross-device findings are still being gathered: **under review**, not
-blanket closure of the 61 correction rows or other backlog cards. Do not invent
-new defect diagnoses from this general report. The next shared task is joint
-review of the final Opus pack; its recommendations remain advisory/unadopted.
+The [complete v0.22.0 Human feedback](user-playtests/v0220-playtest-feedback.md)
+reports a huge improvement, especially on iPad/desktop, with specific remaining
+defects and refinements. [V22-01–20](reviews/2026-09-05-astra-v0220-review.md)
+is the current complete intake/acceptance routing: sustained performance, phone
+scale, held-input continuity, fresh blocker explanations, selection prevention,
+Book/lore/control optics, pickup/victory impact and lower-priority polish.
+These are binding Human outcomes with implementation pending, not 20 duplicate
+specialist plans. Existing PT cards remain owners; V22-04/09 supersede conflicting
+old neutral/first-or-third-bump policies. Full feedback plus 51 external images
+has Astra's assessment; Sol's independent turn is next. See the
+[88-row advisory ledger](reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
+No blanket closure of the 61 earlier rows or family/performance gates is implied.
 Only one runtime writer; Agent 04 remains held under the canonical gates.
 
 **Historical Human rejection, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;

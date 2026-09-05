@@ -23,3 +23,8 @@ release/FP-UI1-v0.22.0-SHA256SUMS.txt -text
 
 # Independent review snapshots retain the author's exact bytes, including EOL.
 docs/reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review.md -text
+docs/reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review-v4.md -text
+docs/reviews/external/2026-09-05-claude-opus5-v0220-feedback-response.md -text
+# Verbatim Human transcript includes CRLF and original trailing spaces; preserve
+# these source bytes without exempting authored specifications from linting.
+docs/user-playtests/v0220-playtest-feedback.md -text whitespace=cr-at-eol,-blank-at-eol

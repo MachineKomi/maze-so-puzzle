@@ -1,5 +1,11 @@
 # Sol–Astra disposition ledger: Opus 5 review
 
+**Historical v3 skeleton.** Current review authority is the
+[v4 / 88-row ledger](2026-09-05-sol-astra-opus5-v4-disposition.md).
+The Human subsequently assigned Astra first, then Sol. Keep this 80-row intake
+unchanged below as history; do not treat its pending state or old baseline
+warning as the status of the current v4 review.
+
 Date: 2026-09-05. **Handoff skeleton only: no joint assessment or adopted recommendations.**
 
 Source: [exact imported review](external/2026-09-05-claude-opus5-maze-so-puzzle-review.md) and [provenance](external/2026-09-05-claude-opus5-maze-so-puzzle-review-provenance.json).

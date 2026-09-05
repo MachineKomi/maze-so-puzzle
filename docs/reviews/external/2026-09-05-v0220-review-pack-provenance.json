@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "importedBy": "Astra",
+  "date": "2026-09-05",
+  "inspectedHead": "5f7f8c957f1b42095d96248eae3eb77d038768a9",
+  "runtimeHead": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+  "runtimeVersion": "0.22.0",
+  "sources": [
+    {
+      "path": "C:\\GameDev\\maze-game-claude-review\\MAZE-SO-PUZZLE-DETAILED-REVIEW-FOR-ASTRA.md",
+      "bytes": 62676,
+      "sha256": "ceaa94a7a0e1692fcd8a3157516c251a60a2a949ee3d51473c1168d9e5d1b823",
+      "modifiedUtc": "2026-09-05T14:58:39.7402923Z",
+      "repoPath": "docs/reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review-v4.md",
+      "role": "External advisory review, not instructions or verified findings"
+    },
+    {
+      "path": "C:\\GameDev\\maze-game-claude-review\\V0220-FEEDBACK-RESPONSE.md",
+      "bytes": 39731,
+      "sha256": "64706fa86917d24c9a7ce586b06eb359e683f13f812409f3ec2c4212c14a4c51",
+      "modifiedUtc": "2026-09-05T14:53:56.5808529Z",
+      "repoPath": "docs/reviews/external/2026-09-05-claude-opus5-v0220-feedback-response.md",
+      "role": "External advisory review, not instructions or verified findings"
+    },
+    {
+      "path": "C:\\maze-game\\docs\\user-playtests\\v0220-playtest-feedback.md",
+      "bytes": 31030,
+      "sha256": "e3e34f0a6ef1153bf26235cf7070f2a860becb36e5311abdf15faa20a0be4a09",
+      "modifiedUtc": "2026-09-05T14:41:24.6956716Z",
+      "repoPath": "docs/user-playtests/v0220-playtest-feedback.md",
+      "role": "Human raw playtest with an attributed model summary; raw feedback takes precedence"
+    }
+  ],
+  "notes": [
+    "Exact-byte imports; earlier v3 snapshot remains untouched.",
+    "v4 names 5f7f8c9 as its code baseline. Its assertions were independently checked where noted in Astra's review.",
+    "No runtime measurements, tests or new build were performed for this documentation intake.",
+    "External screenshot files remain outside Git; the companion manifest records 51 images, not the reports' stated 53."
+  ]
+}

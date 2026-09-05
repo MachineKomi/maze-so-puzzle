@@ -4,11 +4,15 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-The Human's 2026-09-05 transfer directs **joint Sol–Astra review of the final
-Opus pack before any new runtime tranche**. Family feedback is in progress;
-Agent 04 remains held for the joint decision process, family disposition and
-root PT36 attachment preflight. No Opus recommendation or sequence revision
-is adopted by this handoff. **Only one runtime writer** under the joint protocol.
+The latest Human turn assigns **Astra first, Sol second** for joint review of
+the complete v0.22.0 playtest and final Opus pack. Astra has reviewed the Human
+feedback, 51 images and both current reports; [its assessment](../reviews/2026-09-05-astra-v0220-review.md)
+and [88-row ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md) await Sol's
+independent challenge. The proposed next slice brings bounded performance/input
+repairs forward, then phone/Book polish, preserving the praised desktop/iPad UI.
+This is not approval of Claude's broad architecture, FOV or economy changes.
+Agent 04 stays held for blocking feedback, sequencing and PT36. Preserve the
+remaining sequence, especially 09 → 10 → 11. **Only one runtime writer**.
 
 Status: manager-reviewed execution authority
 

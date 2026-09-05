@@ -1,5 +1,14 @@
 # Controls, Xbox Controller, and Steam Deck Plan
 
+**Latest Human continuation override, v0.22.0 feedback, 2026-09-05:**
+[V22-04/09](../reviews/2026-09-05-astra-v0220-review.md) supersede the old
+door-only exception and first/third-bump explanatory policies. This is a desired
+behaviour correction, **not a claim of implementation**. Preserve live held intent
+through eligible successful in-maze interactions; observe steering and release
+while attempts are suspended. Failed requirements explain on every fresh deliberate
+attempt, never by repeatedly reopening from one continuous blocked hold. Root's
+bounded pre-04 repair and this later controller pass must share that contract.
+
 **Latest Human-directed correction, 2026-09-05:** UI-03 advances the anchored bottom-right hybrid D-pad, legal tap/hold/drag input and cancellation. Big/Normal is removed permanently. PT32 remains a separate future 4–7 tile camera view preference, default 6 (two tiles closer/one farther). Preserve the new pad while implementing controllers, device hints and remaining control scope.
 
 **Current movement/layout contract for the next fresh task:** ordinary first,
@@ -35,7 +44,7 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementa
 - Derive maze/tester lists from the canonical campaign order and stable campaign IDs. No controller focus graph, test, copy, or acceptance gate may assume a fixed sixteen-level campaign; newly inserted Plan-09 levels become reachable without changing controls code.
 - Model context as structured state—screen, top overlay/focus scope, presentation lock, and controller status—not a flat union that loses the underlying story/dialog/victory state. A disconnect/reconnect must restore the correct underlying context.
 - Make held scheduling modality-neutral after intent normalization. Keyboard, hybrid pad, anchored joystick and gamepad share cadence/neutral gates; only the explicitly retained free-board tap/steering mode receives safe corner assist.
-- Consume Plan 02's presentation-busy lease and cancellation boundaries. A controller hold is dropped and neutral-gated across combat, rescue, jump, portal, victory, navigation, overlay, blur, hidden, disconnect, and reconnect; no catch-up or queued replay. The Human-approved stationary-door continuation is the sole bounded exception, specified below: it revalidates a still-live hold after successful completion and never replays an opening action.
+- Consume Plan 02's presentation-busy lease and cancellation boundaries. Successful combat, rescue, stationary door, jump and same-run portal presentations suspend attempts while retaining eligible physical held intent; on completion revalidate the current source, direction, run and context before normal cadence resumes. Victory, navigation, actual modal/overlay entry, blur, hidden, disconnect, reconnect, release/cancel and level changes clear safely and require a fresh edge. No catch-up or queued replay. Failed encounters follow the fresh-deliberate-attempt explanation gate, not successful continuation.
 
 ### Programme refinement — 2026-09-05
 
@@ -59,17 +68,22 @@ UI-owned menu, restart, completion and achievement-detail surfaces. Missing
 mandatory UI contracts return to their owner with an exact gap; Controls does
 not grow a parallel interface. Haptics stays optional and cannot postpone P0.
 
-**Stationary-door continuation.** The door-opening attempt commits `moved:
-false` and leaves Ame visible at the origin throughout the effect. Retain only
-a candidate live-hold token containing source identity (including pointer/pad
-generation), direction, level/run identity, door event and presentation
-generation. Observe releases during the lock. After successful completion,
-revalidate every field against current input and policy, then permit at most
-one normal due cadence attempt; schedule from the current time without catch-up.
-A tap, release, direction/source change, other interaction, cancel, blur, hidden,
-navigation, reconnect or new level invalidates it. Chained/composite
-presentations need an explicit eligible terminal door event; absent that proof,
-use the ordinary neutral gate. There is no generic queued movement.
+**Successful-interaction continuation.** Keep physical input identity separate
+from the repeat timer and presentation lock. Observe releases, cancellation and
+steering throughout successful combat/rescue/door/jump/portal presentations.
+After all eligible presentation locks complete, revalidate live source generation,
+current direction, level/run and gameplay context, then permit at most one normal
+due attempt, scheduled from current time without catch-up. A changed direction
+uses current intent, never the old stored direction. Taps are not continued.
+Release/cancel, source loss, blur, hidden, actual modal/navigation/victory,
+disconnect/reconnect and level change invalidate continuation. Chained effects
+must finish with successful same-run eligibility; no intermediate unlock dispatch.
+The stationary door still commits `moved: false` and keeps Ame visible at origin
+throughout; continuation is a later legal attempt, never an opening replay.
+Blocked requirements instead require a fresh deliberate attempt before another
+explanation; dismissing a modal while the old gesture is held must not flood it.
+Test all input adapters, steering/release during each effect, cancellation and
+focus/context transitions. There is no generic queued movement.
 
 **MOVE-01 compatibility.** Polling and gesture code own intent, the engine owns
 integer grid results, and the accepted travel owner owns displayed actor/camera
@@ -90,7 +104,7 @@ only the viewer; locked rewards remain concealed. Compact story dialogue uses
 the accepted advance/skip/replay actions, not an unrestricted any-key handler.
 
 **Acceptance packet.** Return a requirement-to-evidence map for touch, direct
-cardinals, door continuation, MOVE-01 parity, all current UI journeys, polling
+cardinals, successful-interaction continuation, MOVE-01 parity, all current UI journeys, polling
 cost and lifecycle. Record hardware rows as passed, failed, or pending with a
 reproducible checklist. Shared-app implementation may be accepted with explicit
 unavailable hardware rows; a Steam Deck/TV/controller-audio support claim cannot.
@@ -369,7 +383,7 @@ Controller focus/prompts/reconnect/haptics ─> absent
 
 1. **No canonical modal gate.** **modalOpen** includes level/reset pickers and result states, but **attemptMove**, the keyboard eligibility check, and the held-input clearing effect use different boolean subsets. Arrow/WASD can move behind some inert dialogs. Controller integration must first derive one **InputContext** and **gameplayInputAllowed** policy.
 2. **Corner-assist authority is contradictory.** Project documentation and this brief call it pointer-only, but **attemptMove** currently routes keyboard and on-screen directions through the same resolver. The target decision is explicit: free-form board steering (mouse/touch) retains corner assist; discrete keyboard, controller, and on-screen buttons issue exact cardinals without assist. This restores the documented contract and makes direct-input fairness predictable.
-3. **Presentation carry-over is underspecified.** The current latest-only **queuedMove** can survive short locks and some presentations. Controller holds must never replay after a rescue, combat, door, portal, jump, modal, or route transition.
+3. **Presentation carry-over needs explicit state ownership.** The historical latest-only **queuedMove** could survive locks. Never replay queued attempts; eligible live held intent may instead continue after successful in-maze interactions under the latest manager contract. Actual modal or route transitions clear it.
 4. **Book focus starts on an invisible non-action heading.** **Adventure Book** receives focus at an H1 with **tabIndex=-1**, while controller needs a safe actionable default and persistent focus indicator.
 5. **Restart is a timing-based two-activation control.** The 2.2-second “Restart/Again!” state is weak for a controller and vulnerable to naïve repeated activation. Replace it with the same safe confirmation architecture used elsewhere.
 
@@ -623,16 +637,16 @@ The Gamepad specification intentionally returns no exposed pads before a gamepad
 
 ### Clearing table
 
-Every item below increments the context/input generation and clears button edges, stick/D-pad latch, movement/UI repeat, prior direction, queued controller action, and pending haptic. The only retained information at a qualifying stationary-door lock is the separately validated live-hold token from the addendum; it is not a queued action:
+Every cancellation boundary below increments the context/input generation and clears button edges, stick/D-pad latch, movement/UI repeat, prior direction, queued controller action, and pending haptic. Successful in-maze presentation locks are a separate suspension category, not cancellation:
 
 - blur or **document.visibilityState === "hidden"**;
-- entry to or exit from any modal, story, game menu, picker, feedback, or victory layer;
+- entry to or exit from an actual modal, story, game menu, picker, blocking explanation, or victory layer (not a nonmodal HUD message or eligible successful effect);
 - screen/route navigation, level load, restart, reset, Home, Book, tester swap;
 - active controller disconnect, reconnect generation, or controller swap;
-- start and end of a gameplay presentation lock;
+- cancellation/failure of a gameplay presentation or an incompatible context change;
 - unmount/teardown.
 
-Keyboard, pointer, touch, and on-screen held state should be cleared through this same policy. This fixes the existing background-movement gap rather than creating a gamepad-only workaround.
+Keyboard, pointer, touch, and on-screen held state use the same cancellation policy. Successful combat/rescue/door/jump/portal locks pause repeat scheduling while input adapters still observe direction/release. Resume only current live intent after all eligible locks finish; no old deadline catch-up or queued replay. Modal dismissal does not rearm a still-held blocked gesture. This protects background movement without requiring a new press after every successful interaction.
 
 ## 9. Maze movement algorithm
 
@@ -717,8 +731,8 @@ The resolver returns zero or one cardinal direction per sample. It never returns
 
 - Free gameplay is the only context in which controller movement can dispatch.
 - During accepted short move/bump gates, scheduler time continues but cannot generate catch-up moves; the next normal due time may attempt. Resolve durations from the accepted MOVE-01/gameplay contract, not historical 64ms/45ms literals.
-- Rescue, combat, portal, jump, story, modal, navigation, victory, and reconnect transitions clear controller movement and require neutral. Inputs during those locks are dropped, not queued. A successfully completed stationary door alone may use the live-hold continuation token in the manager addendum; release or invalidation cancels it.
-- Holding the stick across an ordinary presentation unlock does not move Ame. The player must return to neutral, then deliberately move again, except for that exact door contract.
+- Successful rescue/combat/portal/jump/door effects suspend repeat attempts but retain eligible live intent under the manager contract above. Story, actual modal, navigation, victory and reconnect clear and require a fresh neutral/edge. Release/cancel always cancels continuation; attempted moves are never queued.
+- Holding the stick across an eligible successful presentation resumes normal movement in its currently resolved direction, once all locks end and current source/run/context still match. Failed blockers rearm only on fresh deliberate intent, not merely because a held gesture outlasted the explanation.
 - Modal entry clears existing keyboard, pointer, touch, and on-screen holds too; opening a picker can no longer allow background Arrow/WASD movement.
 
 ### Corner assistance and fairness
@@ -963,7 +977,7 @@ Work:
 - Implement events, discovery probe, RAF, current snapshots, visibility/focus cleanup, StrictMode-safe teardown, and errors/status.
 - Route output through typed **InputAction**, then into existing navigation handlers and **attemptMove** with explicit **InputSource**.
 - Consolidate all modality clearing under the canonical policy.
-- Integrate anchored board steering and the UI-owned hybrid pad, exclusive hold ownership, and the exact stationary-door continuation token. Re-run accepted MOVE-01 straight/corner/release/edge cases across the affected input sources.
+- Integrate anchored board steering and the UI-owned hybrid pad, exclusive hold ownership, and the successful-interaction live-intent contract. Re-run accepted MOVE-01 straight/corner/release/edge cases and interaction steering/cancel cases across the affected input sources.
 - Add a temporary internal feature switch or isolated hook mount so controller input can be disabled without reverting unrelated refactors.
 
 Dependencies: browser Gamepad API only.<br>
@@ -1110,7 +1124,7 @@ Files that should not need gameplay changes:
 - index reuse increments generation;
 - reconnect held press quarantined;
 - swap requires neutral;
-- blur, hidden, navigation, modal entry/exit, presentation start/end, and teardown clear all state;
+- blur, hidden, navigation, actual modal entry/exit, incompatible/cancelled presentation and teardown clear input state; eligible successful presentation start/end suspend and revalidate live intent rather than erasing it;
 - permission/API errors leave other input working.
 
 **Input context/focus**
@@ -1132,7 +1146,7 @@ Files that should not need gameplay changes:
 - controller, keyboard, and on-screen exact cardinals receive no assist;
 - only the documented free-board mode retains safe wall-only assist; anchored joystick and hybrid pad produce exact cardinals;
 - board pending-tap/drag classification, immutable guide/intent anchor, exclusive cross-source hold, capture cancellation and compatibility mouse events never add an unintended move;
-- stationary-door taps remain on origin; a genuine unchanged hold permits at most one eligible post-open attempt, and every cancellation invalidates it;
+- stationary-door taps remain at origin; successful door/combat/rescue/jump/portal presentations permit only current live held intent at fresh normal cadence, with no queued or stale-direction action; release/cancel during any lock prevents later movement;
 - engine output and one-action semantics are unchanged.
 
 **Haptics**
@@ -1287,7 +1301,7 @@ Controller ID, active index, raw states, focus history, input mode, and repeat s
 1. **UI/UX layout:** owns PlayShell/HUD geometry, the persistent information/control deck, More surface, target sizes, DialogShell markup, typed UI/top-overlay state, base stable focus IDs/groups, and responsive styles. Controls supplies canonical **InputContext/getInteractionPolicy**, game-menu action requirements, optional navigation-neighbour metadata, prompt view model, and controller focus state. Land one shared semantic policy over the UI-owned state.
 2. **Game design:** owns gameplay rules/difficulty and the language of “pause.” Controls fixes the direct-input assist policy to exact cardinal movement; game design signs off on the documented pointer-only exception and no queued move across presentations.
 3. **Performance:** owns measured CPU/battery/render budgets. Controls provides poll/action/commit instrumentation and enforces no idle React commits.
-4. **VFX:** owns visual feedback. It exposes semantic start/end/cancel events; controls clears/neutral-gates at presentation boundaries and may request haptic hooks without dictating visuals.
+4. **VFX:** owns visual feedback. It exposes semantic start/end/cancel events; controls suspends eligible live intent during successful in-maze effects, cancels on incompatible boundaries, and may request haptic hooks without dictating visuals.
 5. **Animation:** owns motion timing/flourish. Controls requires deterministic input-lock lifetime, reduced-motion parity, cancellation, and no stale replay.
 6. **Audio:** retains trusted user-activation, mute, and failure-isolation contracts. Controls may request audio but cannot manufacture trusted activation from Gamepad polling.
 7. **Delivery/release:** owns PWA manifest/service worker, Steam shortcut artwork/packaging, Linux CI/AppImage, and release evidence. Controls defines Gamepad/Steam Input requirements and runs the controller hardware matrix; packaging does not fork controller behavior.
@@ -1327,10 +1341,10 @@ do not recreate the historical placement or mode.
 - [ ] Reset and Restart default to the safe action and require explicit selection/new A edge for destructive action.
 - [ ] No gameplay input reaches the maze behind a modal, Story, picker, game menu, victory, reconnect layer, or presentation.
 - [ ] No gameplay or global shortcut reaches the maze behind the Sound menu; opening/closing it clears held input, changes generation, and requires a neutral/new edge.
-- [ ] Blur, hidden, modal/context transition, navigation, disconnect, controller swap, and presentation start/end clear input; returning never replays a held move.
+- [ ] Blur, hidden, actual modal/context transition, navigation, disconnect, controller swap and cancelled/incompatible presentations clear input; returning never replays stale intent. Eligible successful in-maze effects suspend rather than erase live intent.
 - [ ] Wired/Bluetooth connect, active disconnect, replacement, and reconnect are graceful and never corrupt/save unintended state.
 - [ ] Multiple pads use deterministic first-deliberate ownership and never double-dispatch.
-- [ ] The stationary-door exception revalidates one still-live same-source/direction/run/generation hold after successful completion. Release, cancellation or any other context change prevents continuation; taps never traverse automatically.
+- [ ] Successful door/combat/rescue/jump/portal continuation revalidates the still-live source/run/generation and current direction after all locks end. Steering is observed during the effect; release/cancel prevents movement; taps never traverse automatically. Every fresh deliberate failed attempt explains again, but a continuous blocked hold cannot flood modals.
 - [ ] Controller disconnect never traps keyboard/touch users or discards the underlying dialog/story/Book state.
 
 ### Compatibility and performance
