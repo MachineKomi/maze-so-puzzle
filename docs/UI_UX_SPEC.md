@@ -1,5 +1,22 @@
 # UI / UX implementation specification
 
+## V22-PLAY-01 PLAY-A pace contract
+
+Sound & comfort exposes one labelled, keyboard-operable cycle control with the
+visible values Chill, Regular and Zippy. Regular is the default. The preference
+persists beside Motion and Surface quality under the existing comfort key, not
+inside campaign progress; legacy/malformed/unknown pace reads as Regular, denied
+storage still applies in memory, and Reset Progress preserves it.
+
+Each fresh keyboard, board or ThumbPad gesture acknowledges immediately. A
+successful accepted step then owns both its captured 320/200/120 ms travel and
+the next held-admission boundary. Opening Sound clears held input without
+settling that captured segment; changing pace applies only to a later fresh
+step. Motion/quality and special presentations retain independent durations.
+Short layouts keep the footer fixed and the body scrollable; the pace legend is
+visible at the first fold and its 44px-plus button remains reachable without
+shrinking the maze or ThumbPad.
+
 ## V22-PERF-01 candidate interaction and quality contract
 
 This candidate preserves the praised Full-quality geometry, six-tile view,

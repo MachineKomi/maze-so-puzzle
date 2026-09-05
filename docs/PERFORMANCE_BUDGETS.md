@@ -1,5 +1,21 @@
 # Performance budgets and evidence contract
 
+## V22-PLAY-01 PLAY-A pace allocation — 2026-09-06
+
+Against accepted Tessera checkpoint `a653a7b`, the bounded PLAY-A candidate
+measures 153,514 gzip9 JS, 23,510 gzip9 CSS and 165,031,011 public bytes:
+**+230 JS, -2 CSS and +0 public**. Astra approved an initial maximum of 700 JS
+bytes; only the exact 230-byte measured increment is allocated under
+`controls-v22-play01-pace`. The JS ceiling becomes 153,537, preserving the
+inherited 23-byte margin; CSS/public ceilings remain 30,227 / 165,031,011.
+
+The allocation covers the three-value comfort preference, labelled cycle
+control and shared accepted-step cadence. It adds no dependency, media or
+decoded inventory and authorizes no PLAY-B, audio, camera or unrelated work.
+Desktop timing and geometry checks do not establish family comfort or affected-
+iPad efficacy. Exact implementation and evidence are in the
+[PLAY-A candidate review](reviews/2026-09-06-v22-play01-pace-candidate.md).
+
 ## V22-PERF-01 correction rule — 2026-09-05
 
 The build-ready pre-Plan-04 correction is

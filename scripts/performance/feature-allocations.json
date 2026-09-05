@@ -337,6 +337,20 @@
       "rollbackPoint": "Revert only Tessera Dolphin's generated field catalogue row to /assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r01.webp and its original sourceRecordId. Preserve both versioned field files, approved recovery masters and provenance records until the authorized retirement sweep.",
       "dependencies": "Human ART-HOTFIX-01 repair authorization, approved bounded alpha-recovery master and proof, accepted 9418ee catalogue checkpoint, and Astra exact allocation approval; final source/image promotion review remains separate.",
       "notes": "Public inventory grows exactly 42,980 bytes because r01 is retained. The theoretical decoded-inventory upper-bound grows 262,144 bytes, but the active field working set remains one 256px RGBA image and does not double. Selected encoded delivery changes from 44,362 to 42,980 bytes. JavaScript/CSS measurements remain within existing ceilings and this allocation authorizes no non-art growth."
+    },
+    {
+      "id": "controls-v22-play01-pace",
+      "owner": "controls",
+      "status": "approved",
+      "compressedJsBytes": 230,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra authorized at most 700 gzip9 JavaScript bytes for the bounded PLAY-A three-pace policy. The final production candidate measures exactly +230 gzip9 JavaScript bytes, -2 CSS bytes and no public growth over accepted Tessera checkpoint a653a7b: one persisted comfort value, one labelled cycle control and shared 320/200/120ms admission/travel cadence for keyboard, board and ThumbPad.",
+      "evidencePath": "docs/reviews/2026-09-06-v22-play01-pace-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete PLAY-A pace commit to accepted Tessera checkpoint a653a7b2fcf8730fe5d011c080591d499da9f068. Preserve ART-HOTFIX-01 files/records, schema6 campaign progress, schema3 active runs and the v0.22.2 camera translation; the additive pace field needs no save migration or asset rollback.",
+      "dependencies": "Accepted Tessera integration a653a7b, Human continuation authority, build-ready V22-PLAY-01 brief, existing V22-PERF-01 input ownership and PERF-02A single scene-travel owner; independent Astra candidate review remains required before promotion.",
+      "notes": "New JS ceiling 153537 retains the inherited 23-byte margin; measured candidate is 153514. CSS is 23510 under the unchanged 30227 ceiling; public remains 165031011. No media, decoded inventory, dependency, engine, save-schema, camera or special-presentation change. Family comfort and affected-iPad efficacy remain pending."
     }
   ]
 }

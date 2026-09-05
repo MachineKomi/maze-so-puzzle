@@ -714,8 +714,8 @@ desktop emulation proves geometry and events only.
 ### Digital edge and hold
 
 - A D-pad rising edge or left-stick direction activation immediately calls **attemptMove(direction, source)** exactly once.
-- Holding the same direction uses the current shared **STEP_TRAVEL_MS = 160** for initial and repeated ordinary steps. The old 320ms delay and 260ms-to-160ms curve are historical and must not be restored.
-- Releasing before the first repeat leaves one committed square with the same smooth 160ms travel as a held first step. Do not snap its presentation on ordinary release.
+- Holding the same direction consumes PLAY-A's selected **Chill 320 / Regular 200 / Zippy 120 ms** policy for initial and repeated ordinary steps. Do not copy a fixed cadence or restore the old 260-to-160 ms curve in the controller layer.
+- Releasing before the first repeat leaves one committed square with the same selected smooth travel as a held first step. Do not snap its presentation on ordinary release.
 - A late RAF may emit at most one due repeat and then schedule from “now.” It never emits a burst to catch up.
 - Sample travel at the actual callback timestamp. A future due time is scheduling metadata, never the time used to advance the actor/camera sample.
 - A direction change emits one immediate attempt and restarts the held cadence.

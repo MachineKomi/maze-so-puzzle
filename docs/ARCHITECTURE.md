@@ -26,8 +26,9 @@ not App state. Minimap landmarks and full-map tile membership are memoized by
 their semantic inputs. Normal-save normalization, serialization and write timing
 remain synchronous and unchanged; diagnostic counters exist only in external
 instrumented builds, never the shipped bundle.
-UI-03 gives ordinary taps and repeats the same 160 ms cadence and samples the
-actual callback time, avoiding the former fast-first-step/startup-pause split.
+PLAY-A gives ordinary taps and repeats one selected 320/200/120 ms
+Chill/Regular/Zippy cadence and samples the actual callback time, avoiding both
+the former fast-first-step/startup-pause split and late-callback catch-up.
 Stable run-local follower identities consume repeated legal
 breadcrumbs from `src/game/followerTrail.ts`, independent of camera visibility.
 The exact boundaries and verification are in
@@ -213,9 +214,11 @@ contextual rendition remains distinct from the repaired 256px field derivative.
     Fifty-six non-Ame actor records explicitly defer semantic face/eye/ground
     landmarks; locked static pivots remain valid, while Plan 05 animation and
     automated cage-face masking must wait for manual registration.
-19. `src/movementControls.ts` owns the shared held-input cadence used by pointer,
-    touch, keyboard, and D-pad controls: a 320 ms first pause, a smooth 260–160 ms
-    repeat curve over 16 held steps, and reset-on-direction-change semantics.
+19. `src/movementControls.ts` owns the shared ordinary-step policy used by
+    pointer, touch, keyboard, and D-pad controls: Chill 320 ms, default Regular
+    200 ms or Zippy 120 ms for both accepted-step travel and held scheduling.
+    First input remains immediate; direction changes reset bookkeeping and late
+    callbacks never catch up.
 20. `src/pointerControls.ts` converts mouse/touch positions into tile-relative
     cardinal intent and applies the strict one-tile corner assist. The assisted
     destination must be safe, non-exit ordinary floor with no unresolved
