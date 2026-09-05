@@ -1,0 +1,35 @@
+{
+  "snapshot": "docs/reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review.md",
+  "originalPath": "C:\\GameDev\\maze-game-claude-review\\MAZE-SO-PUZZLE-DETAILED-REVIEW-FOR-ASTRA.md",
+  "title": "Maze so Puzzle — independent design & engineering review (v3)",
+  "version": "v3 / third pass",
+  "authorAsStated": "Claude Opus 5, independent read-only review",
+  "recipientAsStated": "GPT6 Astra (orchestrator) and the specialist agents",
+  "reviewDateAsStated": "2026-09-05 (third pass)",
+  "reviewedStateVerbatim": "HEAD `fef5e56` + the full uncommitted UI-03 working tree; `package.json` version `0.22.0`",
+  "importDateUtc": "2026-09-05",
+  "sourceLastWriteTimeUtc": "2026-09-05T07:52:08Z",
+  "bytes": 90464,
+  "sha256": "579a462714c278f170292db04fb430342e7dd042a565be9a580b65bae54d2204",
+  "copyMethod": "Exact file-byte copy, no text decoding, rewriting, normalization or added header; source and destination SHA-256 verified. Git -text attribute preserves snapshot bytes.",
+  "authority": "Independent advisory analysis requested by the Human as the final feedback pack for joint review; not Human authority, acceptance, an adopted roadmap or implementation authorization.",
+  "jointReviewStatus": "Pending. No recommendation accepted, rejected, implemented or verified against current code during this import.",
+  "finalUiCorrectionSource": "68e303da680d5aec0ba71154949c5a2a0d1697ae",
+  "repositoryHeadAtIntake": "f1166b0e7dd5d25b50e74abe1f539e3e7cd18d63",
+  "scopeWarning": "The author states an earlier HEAD plus an uncommitted working tree, not the final committed/published UI correction. All current-code claims require re-verification; labels such as Verified and Measured belong to the author's stated review context.",
+  "authorEvidenceLimit": "The author states that they have never played the game, watched Ame play or seen it on an iPad.",
+  "inventory": {
+    "ledgerIdentifiers": 80,
+    "mainAndSubsectionIdentifiers": 74,
+    "letterSuffixedQuickWinIdentifiers": 6,
+    "expandedAbbreviatedIdentifiers": ["CR-DESIGN-06", "CR-DESIGN-07"],
+    "absentIdentifier": "CR-PERF-08",
+    "roadmap": "Sections 1 and 11 do not assign an independent roadmap CR identifier. The ledger uses explicitly non-CR source locators."
+  },
+  "unresolvedSourceMetadataDiscrepancies": [
+    "The header says one finding retired; the body says Retired in v3: none.",
+    "The three-new-item list names CR-UI-16, CR-FEEL-06 and CR-RISK-10; separately headed CR-FEEL-01b also says new in v3."
+  ],
+  "immutabilityPolicy": "Do not edit this imported snapshot in place. Preserve later external revisions as distinct attributed snapshots with their own hashes. Dispositions belong in the joint ledger.",
+  "ledger": "docs/reviews/2026-09-05-sol-astra-opus5-disposition.md"
+}

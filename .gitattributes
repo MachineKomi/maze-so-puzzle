@@ -20,3 +20,6 @@ public/assets/fonts/* -text
 release/FP-UI1-v0.22.0-manifest.json -text
 release/FP-UI1-v0.22.0-PLAYTEST.md -text
 release/FP-UI1-v0.22.0-SHA256SUMS.txt -text
+
+# Independent review snapshots retain the author's exact bytes, including EOL.
+docs/reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review.md -text

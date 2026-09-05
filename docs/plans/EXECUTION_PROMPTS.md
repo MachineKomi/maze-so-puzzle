@@ -1,48 +1,15 @@
 # Sequential specialist execution prompts
 
-**Current FP-UI1 — 2026-09-05: v0.22.0 PUBLISHED AND VERIFIED; family gate HOLD.**
-UI-03 v0.22.0's runtime source is `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
-The published portable is `Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`,
-**173,378,560 bytes**, SHA-256
-`b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
-Check exact filename and manifest/checksum; withheld builds also display v0.22.0.
+Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
+selecting a prompt. It owns current checkpoints, Human gates and collaboration
+rules; dated assignments below preserve historical context, not launch authority.
 
-Locked project verification passed **488 tests in 55.85 seconds**; prior
-**131-test** art verification applies to the unchanged Python/art pipeline.
-Both jobs in [CI run 33958357582](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582)
-succeeded. Canonical web passed all **6 journeys in 52 seconds**; locked local
-passed all **6 in 46.8 seconds**. Strict served JS/CSS identity and all **47
-presentation-art HTTP/hash checks** are verified. Native checks passed on the
-exact locked portable: Title/Home, saved 37→38-step travel, Hint/Escape, normal
-close/reopen and resume at 38, and unclipped 960×540 essentials with position
-preserved on resize (captures 30–37). The
-[prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
-is published; all four public downloads matched at 10:52:59 UTC. The receipt is
-`../../release/FP-UI1-v0.22.0-release-verification.json`. Bounded modal-cost,
-Static victory and centered-X observations passed too. The failed r6 observation,
-successful r7/r8/r9 retests and withheld Home/toolchain candidates remain in
-`docs/reviews/2026-09-05-ui03-root-review.md`; timing and device limits stay qualified.
-
-Agent 04 remains **HOLD** until root reviews family
-visual/comprehension/comfort feedback, resolves blocking findings and supplies
-PT36's ring attachment metadata disposition for the held grounding preflight.
-Use `AGENT04-after-FP-UI1.md` in a **fresh task**, with root's post-playtest accepted
-SHA. Do not restart Agent 01, repeat MOVE-01 or infer Human acceptance from tests.
-
-**Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
-v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
-movement and deliver a new, separately versioned playable preview. Read
-`docs/plans/UI-03-fp-ui1-correction.md` and
-`docs/playtests/2026-09-05-v021-ui-correction-intake.md` (61 acceptance rows).
-Landscape is primary; maximize the existing board without Big/Normal; preserve
-smooth first-tap/held travel (gentle acceleration allowed). Advance bounded Book
-pages/cards, grey locked achievement art, focus/victory, hybrid thumb pad and
-travel acting into this correction. Root integrates disjoint fresh implementation/review agents under the
-Human’s subsequent explicit parallel-work authorization.
-Agent04 still waits for corrected preview feedback. Future specialists start in
-fresh tasks with current prompts. Earlier STOP/candidate/active-Agent01 paragraphs
-below are history, not current execution instructions.
-
+The immediate joint task is reviewing the final Opus pack: Sol assesses first,
+Astra challenges, Sol reconciles, Human decides. No runtime tranche or Agent 04
+starts during this documentation/review handoff. **Only one runtime writer**;
+the other agreed model reviews read-only. Current v0.22.0 family feedback and
+root PT36 disposition remain open before any Agent 04 launch. Future specialist
+tasks are fresh and require a current root-owned prompt with resolved gates.
 
 Status: manager-reviewed copy/paste runbook
 
@@ -70,8 +37,8 @@ Before starting any future prompt, root supplies the accepted SHA, owned paths,
 actual dependency APIs, required art/landmark/rendition availability, budget
 status and owned backlog slices. Read roadmap §5.13B and the dated refinement in
 the relevant plan. Resolve gaps concretely before broad production. Use a fresh specialist task after root supplies the current accepted checkpoint.
-The Human authorizes disjoint subagent work coordinated by root; do not create
-competing owners for the same runtime files.
+The current joint protocol permits one runtime writer; other agents may review
+read-only or handle independent documentation. Agree ownership before execution.
 
 Future Plan 08 also implements PT32 camera view 4/5/6/7 (default 6) under its dated
 addendum; 07B requalifies the actual expanded visible/paint workload. It does
@@ -85,7 +52,7 @@ Future owners read its relevant acceptance cards and their updated plan addenda.
 UI-02 is inserted after 02/before 08 for Book/bestiary/cards, focus and victory
 composition. This does not amend the section-4 prompt or its running return.
 
-Use these prompts in the dependency order shown. Future specialist tasks are fresh; root assigns disjoint subagent ownership when helpful. After each agent finishes, have the root manager inspect the diff, run/confirm the gates, resolve defects, commit, and push a clean checkpoint before starting the next prompt.
+Use these prompts in the dependency order shown. Future specialist tasks are fresh; root assigns one runtime writer and read-only review ownership. After each agent finishes, have the root manager inspect the diff, run/confirm the gates, resolve defects, commit, and push a clean checkpoint before starting the next prompt.
 
 Plan 07 intentionally runs twice: a measurement-only pre-pass first and the optimization/qualification pass last. Plan 09 remains reserved for the root manager after every specialist checkpoint is accepted.
 

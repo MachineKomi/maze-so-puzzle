@@ -160,16 +160,18 @@ overwrite the ordinary profile used by older builds.
 - Rebuilding the app does not automatically refresh these convenience copies.
   They must be copied from the final Tauri output and hashed again.
 
-After root finalizes the FP-UI1 handoff, verify its portable in PowerShell with:
+Verify the published FP-UI1 portable in PowerShell with:
 
 ```powershell
 Get-FileHash .\Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe -Algorithm SHA256
 ```
 
 Compare the result with [FP-UI1-v0.22.0-SHA256SUMS.txt](FP-UI1-v0.22.0-SHA256SUMS.txt)
-and [FP-UI1-v0.22.0-manifest.json](FP-UI1-v0.22.0-manifest.json). Those expected
-values are pending measurement and finalization. Use only the finalized records
-for comparison.
+and [FP-UI1-v0.22.0-manifest.json](FP-UI1-v0.22.0-manifest.json). These expected
+values are finalized and match the published assets; the subsequent
+[publication receipt](FP-UI1-v0.22.0-release-verification.json) records the
+independent public-download verification. Human playtest acceptance remains
+separate; see the [canonical joint state](../docs/JOINT_ORCHESTRATION_STATE.md).
 
 Historical 0.20.1 hashes, retained for comparison, are:
 

@@ -1,33 +1,16 @@
 # Maze so Puzzle — playtest backlog
 
-**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the 61-row
-Human correction. Locked project 488, unchanged art 131, build/locked desktop/static
-gates passed. The final locked Windows portable passed Title/Home, Hint, single
-movement, normal close/reopen/resume and minimum 960×540 layout checks.
-Both canonical web and locked local production passed six focused journeys;
-CI run 33958357582 passed verify and desktop. Full browser r6 passed 62/63,
-its observer race passed the five-case r7 retest, all 17 UI/proof cases passed
-in r8, and both fresh/saved Home cases passed in r9. Exact results/limits are in
-`docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
-The [v0.22.0 prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
-is published; all four public downloads match the frozen artifacts. The receipt
-is `../release/FP-UI1-v0.22.0-release-verification.json`. Family feedback and the
-fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
+[JOINT_ORCHESTRATION_STATE.md](JOINT_ORCHESTRATION_STATE.md) owns current
+release/acceptance and execution state. This backlog owns intake, routing and
+acceptance slices; earlier dated status paragraphs are historical evidence.
 
-**Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
-v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
-movement and deliver a new, separately versioned playable preview. Read
-`docs/plans/UI-03-fp-ui1-correction.md` and
-`docs/playtests/2026-09-05-v021-ui-correction-intake.md` (61 acceptance rows).
-Landscape is primary; maximize the existing board without Big/Normal; preserve
-smooth first-tap/held travel (gentle acceleration allowed). Advance bounded Book
-pages/cards, grey locked achievement art, focus/victory, hybrid thumb pad and
-travel acting into this correction. Root integrates disjoint fresh implementation/review agents under the
-Human’s subsequent explicit parallel-work authorization.
-Agent04 still waits for corrected preview feedback. Future specialists start in
-fresh tasks with current prompts. Earlier STOP/candidate/active-Agent01 paragraphs
-below are history, not current execution instructions.
-
+The [initial v0.22.0 Human feedback](playtests/2026-09-05-fp-ui1-v022-initial-human-feedback.md)
+reports a huge overall improvement and fewer issues, especially on iPad/desktop.
+Detailed cross-device findings are still being gathered: **under review**, not
+blanket closure of the 61 correction rows or other backlog cards. Do not invent
+new defect diagnoses from this general report. The next shared task is joint
+review of the final Opus pack; its recommendations remain advisory/unadopted.
+Only one runtime writer; Agent 04 remains held under the canonical gates.
 
 **Historical Human rejection, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;
 many regressions/bugs and missed requirements reported. PT25 and affected UI

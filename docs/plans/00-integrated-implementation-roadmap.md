@@ -1,57 +1,14 @@
 # Integrated implementation roadmap through final convergence
 
-**Current FP-UI1 — 2026-09-05: v0.22.0 PUBLISHED AND VERIFIED; family gate HOLD.**
-UI-03 v0.22.0's frozen runtime source is
-`68e303da680d5aec0ba71154949c5a2a0d1697ae`. Its published portable is
-`Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe` (**173,378,560 bytes**),
-SHA-256 `b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
-The filename and manifest/checksum, not the version alone, identify this build.
+Current operating state, release evidence and collaboration rules live in
+[JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
+owns programme dependencies; dated checkpoint paragraphs below are history.
 
-Locked project checks passed **488 tests in 55.85 seconds**; the unchanged
-Python/art pipeline retains its prior **131-test** pass. Both jobs in
-[CI run 33958357582](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33958357582)
-succeeded. Canonical web and locked local each passed all **6 journeys**, in
-**52 seconds** and **46.8 seconds** respectively. Served JS/CSS byte identity and
-all **47 presentation-art HTTP/hash checks** are verified. The exact locked
-portable passed native Title/Home, saved 37→38-step travel, Hint/Escape,
-close/reopen and resume at 38, plus 960×540 layout/resize checks without clipping
-or position changes (captures 30–37). The
-[immutable prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
-is published; all four public asset downloads matched at 10:52:59 UTC.
-See `../../release/FP-UI1-v0.22.0-release-verification.json` and the final
-modal-cost/Static review. The next action is family playtesting.
-The withheld `2f8fa6a` native Home candidate and same-source non-locked candidate
-remain historical failures, not alternate downloads. The latter's installed
-Rolldown mismatch was resolved with `npm ci` restoring locked 1.2.6 unchanged.
-See `../reviews/2026-09-05-ui03-root-review.md` for the r6 62/63 failure, r7 five-case
-retest, r8 17-case proof pass, r9 two-case Home pass and qualified timing/device limits.
-
-**Agent 04 remains HOLD** until root reviews the family's
-visual/comprehension/comfort feedback and resolves blocking findings. Root must
-also record PT36's exact ring attachment metadata disposition before its held
-grounding preflight is released. Only then populate the accepted-source fields
-in `AGENT04-after-FP-UI1.md` and give the Human a **fresh specialist task** prompt.
-
-**Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
-v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
-movement and deliver a new, separately versioned playable preview. Read
-`docs/plans/UI-03-fp-ui1-correction.md` and
-`docs/playtests/2026-09-05-v021-ui-correction-intake.md` (61 acceptance rows).
-Landscape is primary; maximize the existing board without Big/Normal; preserve
-smooth first-tap/held travel (gentle acceleration allowed). Advance bounded Book
-pages/cards, grey locked achievement art, focus/victory, hybrid thumb pad and
-travel acting into this correction. Root integrates disjoint fresh implementation/review agents under the
-Human’s subsequent explicit parallel-work authorization.
-Agent04 still waits for corrected preview feedback. Future specialists start in
-fresh tasks with current prompts. Earlier STOP/candidate/active-Agent01 paragraphs
-below are history, not current execution instructions.
-
-
-**Historical gate before UI-03 authorization, 2026-09-05: HOLD.** The Human rejects the overall FP-UI1/v0.21.0 UI
-after initial playtesting, reporting many regressions and missed requirements.
-Root stopped for discussion; Agent04 and GitHub prerelease publication are held.
-See `../playtests/2026-09-05-fp-ui1-initial-rejection.md`. Do not infer acceptance
-from the successful automated/engineering checkpoints below.
+The Human's 2026-09-05 transfer directs **joint Sol–Astra review of the final
+Opus pack before any new runtime tranche**. Family feedback is in progress;
+Agent 04 remains held for the joint decision process, family disposition and
+root PT36 attachment preflight. No Opus recommendation or sequence revision
+is adopted by this handoff. **Only one runtime writer** under the joint protocol.
 
 Status: manager-reviewed execution authority
 
@@ -82,11 +39,11 @@ allocation and final project/art/performance checks; Git backup precedes MOVE-01
 Preserve the original assignment as history. See the complete 17-item v0.20.1 intake at
 `../playtests/2026-09-05-v0201-wishlist.md` and §5.13D below.
 
-Current sequence: **01/MOVE-01 engineering history → UI-03 corrected FP-UI1 publication → Human playtest and root PT36 preflight → 04 → 02 → remaining UI-02 → 08 → 05 → 07B /
+Current sequence: **01/MOVE-01 engineering history → UI-03 corrected FP-UI1 publication → joint review, Human playtest and root PT36 preflight → 04 → 02 → remaining UI-02 → 08 → 05 → 07B /
 FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
 RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
-fresh specialist tasks from root-prepared prompts. Root may delegate disjoint
-subtasks under the Human-authorized parallel-work policy; specialist checkpoints
+fresh specialist tasks from root-prepared prompts. Root may delegate independent read-only/documentation
+subtasks; only one runtime writer is permitted under the joint protocol. Specialist checkpoints
 still follow this dependency sequence.
 
 Current programme shape: a measurement-only performance pre-pass; sequential
