@@ -2,6 +2,7 @@
   "schema": "maze-v22-perf01-r1-review/v1",
   "generatedAtUtc": "2026-09-05T20:03:29.120Z",
   "branch": "codex/v22-perf-01-astra",
+  "runtimeCheckpoint": "91678d1a7f97055dc2f167f8a3e7106226817306",
   "startingCheckpoint": "67eb26f41a019102e4b290f5b06d8212779941a1",
   "originalRuntime": "a92257a2ecb234c314b00ddaafb15c4d206771c2",
   "acceptance": "Astra correctness return; independent Sol review and all original physical/performance gates remain open",

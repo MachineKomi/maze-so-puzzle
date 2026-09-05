@@ -89,6 +89,14 @@ There is no CSS/public allocation or broader optimization in this return.
 
 ## Final checks and checkpoint
 
+Runtime/checkpoint commit: `91678d1a7f97055dc2f167f8a3e7106226817306`,
+`fix(input): give final presentations exclusive unlock ownership`, pushed to
+`origin/codex/v22-perf-01-astra`. It contains all 15 listed R1 files. The following
+documentation-only handoff records that exact identity; discover its tip with
+`git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md` and verify origin.
+Remote main remained `461cab02b065a1d0f654c49189ed24108c22c5a8`; no main push,
+PR, tag, release, package or deployment action was performed.
+
 - Serial project check: **493/493 tests across 49 files**, including the four
   semantic scenario fixtures. Executed `npm test -- --no-file-parallelism` with
   default and JSON reporters, followed by `npm run build`: the complete normal
