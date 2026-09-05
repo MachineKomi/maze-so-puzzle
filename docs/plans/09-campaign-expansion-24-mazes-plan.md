@@ -847,8 +847,8 @@ actual final roster before any durable Garden migration.
   scale against Ame at default/close/wide zoom, including Springstep Sky Hollow;
   two compatible colours cannot justify a floor-looking wall. Regional variety
   must retain those roles, intentional lighting and readable hazards.
-- Freeze a generated-size distribution in Phase 0 whose declared seed cohort
-  produces at least 90% of mazes at no more than 16 tiles on either axis. Any
+- Freeze a generated-size/topology distribution in Phase 0 with representative
+  small and room-rich larger cohorts, not a mandatory <=16 percentage. Any
   generated result above 16 must use room/hub/open-space grammar, pass the same
   event-gap and terminal-branch-payoff rules as authored levels, and remain under
   the absolute 24×24 cap. Do not equate a larger draw with a harder maze.
@@ -897,9 +897,9 @@ actual final roster before any durable Garden migration.
 - Review provisional names/IDs once; freeze IDs before any persisted/tested build.
 - Audit all existing and proposed dimensions, topology grammar, terminal-branch
   payoffs, event gaps, optional-battle rhythm and first-use teaching pockets.
-  Freeze the maximum-four authored >16 exceptions, the no-three-consecutive-
-  corridor rule, the no-consecutive-large default plus exception evidence, the
-  generated >=90% <=16 distribution, and a campaign-wide portfolio ledger.
+  Freeze a varied authored/generated size-and-topology portfolio, the
+  no-three-consecutive-corridor rule and justified pacing for adjacent large
+  levels. Dense traditional mazes must remain occasional special variations.
   Freeze the two-open-room-plus-spatial-relation contract for every large
   authored/generated level and the three-or-more versioned generated topology
   families, selection weights and seed cohorts; the exact optional-encounter
@@ -1244,8 +1244,8 @@ Plan 09 is complete only when:
 9. the 24-card Book/Select/Continue/victory flow works across the full viewport and input matrix;
 10. full web and desktop checks pass, relevant Tauri/package/performance evidence is refreshed, and unavailable physical hardware checks are plainly labelled;
 11. Story Bible, Gameplay spec, Architecture, README, audit, release, changelog/version, and any asset provenance all match the shipped source; and
-12. the final campaign honours the <=16 default and maximum-four large-level
-    exception cap and the evidenced no-consecutive-large default; every large
+12. the final campaign honours spatial variety and meaningful traversal rather
+    than the superseded <=16 quota, with evidence for adjacent large levels; every large
     level passes the two-open-room-plus-spatial-relation contract; the campaign
     never places three corridor-dominant levels consecutively,
     gives every true terminal branch its own optional collectible in addition to

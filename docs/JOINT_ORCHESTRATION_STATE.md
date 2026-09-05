@@ -106,10 +106,16 @@ is claimed. Raw evidence and private profile copies remain external under
 ## 3. Active work and next decision gate
 
 **Current next action, 2026-09-06:** PERF-02A's first physical P1 result is
-received: scrolling still stutters. Astra is completing separate Tessera
-integration on `codex/v22-tessera-integration`; main/runtime v0.22.2 stay intact.
-Actual Sol completed read-only PLAY-A preflight and awaits sole-writer handoff.
-The next performance lane is controlled moving-terrain/filter isolation.
+received: scrolling still stutters. Tessera integration is accepted and backed
+up on `codex/v22-tessera-integration`: art acceptance `f6d54e1`, merged-feedback
+checkpoint `a653a7b2fcf8730fe5d011c080591d499da9f068`. Art136/136, global0errors,
+game501/501, build/performance gates and selected browser consumers passed.
+This is not yet a new deployed build; main/runtime v0.22.2 remain intact.
+**Actual Sol is now sole runtime writer for PLAY-A** in that isolated worktree;
+Astra reviews and performs external diagnostic-only camera investigation.
+Approved PLAY-A growth cap: +700JSgzip9, zero CSS/public/dependencies; baseline
+JS153284, CSS23512, public165031011. Stop for review if exceeded. No PLAY-B,
+version bump or main runtime publication before root reviews the candidate.
 Do not claim its percentage-coordinate change improves frame delivery merely
 because it removes world left/top rebasing. If it remains poor, Astra resumes
 the next isolated moving-surface/terrain-cost probe from PERF-02 before broader
