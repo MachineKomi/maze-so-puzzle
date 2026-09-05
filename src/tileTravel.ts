@@ -1,9 +1,8 @@
 import type { Point } from "./game/types";
 import type { CameraWindow, GridSize } from "./game/exploration";
-import { STEP_TRAVEL_MS } from "./movementControls";
+import { DEFAULT_STEP_TRAVEL_MS } from "./movementControls";
 
-export const TAP_TRAVEL_MS = STEP_TRAVEL_MS;
-export const MAX_TRAVEL_LAG_MS = 280;
+export const MAX_TRAVEL_LAG_MS = 320;
 const EPSILON = 1e-8;
 const distance = (a: Point, b: Point) => Math.abs(a.x-b.x)+Math.abs(a.y-b.y);
 const equal = (a: Point, b: Point) => distance(a,b) < EPSILON;
@@ -14,7 +13,7 @@ export class TileTraveller {
   target: Point;
   private pending: Point[] = [];
   private time: number;
-  private speed = 1 / TAP_TRAVEL_MS;
+  private speed = 1 / DEFAULT_STEP_TRAVEL_MS;
 
   constructor(point: Point, now: number) { this.point=point; this.target=point; this.time=now; }
   get moving(): boolean { return this.pending.length>0; }
@@ -46,7 +45,7 @@ export class TileTraveller {
     }
     return this.point;
   }
-  retarget(target: Point, now: number, durationMs=TAP_TRAVEL_MS): void {
+  retarget(target: Point, now: number, durationMs=DEFAULT_STEP_TRAVEL_MS): void {
     this.sample(now);
     if (equal(target,this.target)) return;
     // Portals/jumps/reset are explicit discontinuities, never a diagonal tween.

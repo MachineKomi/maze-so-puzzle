@@ -183,6 +183,9 @@ test("UI overlays: focus, inertness, held input, safe return and Sound preferenc
   await screen(page,"hint-focus-960");await page.keyboard.press("Escape");await expect(trigger).toBeFocused();
   await page.keyboard.press("ArrowLeft");await expectUiRouteState(page,movePlayer(CURATED_LEVELS[11]!,createInitialGameState(CURATED_LEVELS[11]!),"left").state);
   await action(page,"sound");
+  await expect(page.getByRole("button",{name:"Movement pace: Regular. Change pace"})).toBeVisible();
+  await page.getByRole("button",{name:"Movement pace: Regular. Change pace"}).click();
+  await expect(page.getByRole("button",{name:"Movement pace: Zippy. Change pace"})).toBeVisible();
   await page.getByLabel("Reduced",{exact:true}).check();await page.getByLabel("lite",{exact:true}).check();
   await expect(page.locator("html")).toHaveAttribute("data-motion","reduced");await expect(page.locator("html")).toHaveAttribute("data-quality","lite");
   await page.locator('[data-focus-id="sound:mute"]').click();await page.locator('[data-focus-id="sound:next"]').click();await page.locator('[data-focus-id="sound:previous"]').click();await page.locator('[data-focus-id="sound:shuffle"]').click();
@@ -190,7 +193,7 @@ test("UI overlays: focus, inertness, held input, safe return and Sound preferenc
   await page.keyboard.press("Escape");await expect(page.locator('[data-focus-id="more"]')).toBeFocused();
   await action(page,"home");await page.getByRole("button",{name:"Reset progress",exact:true}).click();
   await screen(page,"reset-safe-default");await expect(page.getByRole("button",{name:"Keep my adventure"})).toBeFocused();await page.getByRole("button",{name:"Yes, reset everything"}).click();
-  const preference=await page.evaluate(()=>JSON.parse(localStorage.getItem("maze-so-puzzle-presentation-v1")!));expect(preference).toEqual({motion:"reduced",quality:"lite"});
+  const preference=await page.evaluate(()=>JSON.parse(localStorage.getItem("maze-so-puzzle-presentation-v1")!));expect(preference).toEqual({motion:"reduced",quality:"lite",pace:"zippy"});
 });
 
 test("UI front door, approved Home hero, Book, all modal sizes and text spacing",async({page})=>{

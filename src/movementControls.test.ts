@@ -1,42 +1,41 @@
 import { describe, expect, it } from "vitest";
 import {
-  HELD_MOVE_INITIAL_DELAY_MS,
-  HELD_MOVE_FASTEST_REPEAT_MS,
+  DEFAULT_STEP_TRAVEL_MS,
   IDLE_HELD_MOVE_CADENCE,
-  STEP_TRAVEL_MS,
+  MOVEMENT_PACE_MS,
   advanceHeldMoveCadence,
   beginHeldMoveCadence,
   heldMoveRepeatDelay,
+  movementStepDuration,
 } from "./movementControls";
-import { TAP_TRAVEL_MS } from "./tileTravel";
 
 describe("held movement cadence", () => {
-  it("hands the first animated tile into the repeat without a keyboard-repeat pause", () => {
-    expect(HELD_MOVE_INITIAL_DELAY_MS).toBe(TAP_TRAVEL_MS);
-    expect(HELD_MOVE_INITIAL_DELAY_MS).toBe(heldMoveRepeatDelay(0));
-    expect(STEP_TRAVEL_MS).toBe(160);
+  it("maps exactly three named paces onto one ordinary-step policy", () => {
+    expect(MOVEMENT_PACE_MS).toEqual({ chill: 320, regular: 200, zippy: 120 });
+    expect(DEFAULT_STEP_TRAVEL_MS).toBe(MOVEMENT_PACE_MS.regular);
   });
 
-  it("uses the reviewed first-step and cruising cadence without a flash-then-crawl ramp", () => {
-    const delays = Array.from({ length: 21 }, (_, index) => heldMoveRepeatDelay(index));
-    expect(delays.every(delay => delay === STEP_TRAVEL_MS)).toBe(true);
-    expect(delays.every(delay => delay >= HELD_MOVE_FASTEST_REPEAT_MS)).toBe(true);
+  it("hands each selected first tile into repeats with no acceleration ramp", () => {
+    for (const pace of ["chill", "regular", "zippy"] as const) {
+      const delays = Array.from({ length: 21 }, (_, index) => heldMoveRepeatDelay(index, pace));
+      expect(delays.every(delay => delay === movementStepDuration(pace))).toBe(true);
+    }
   });
 
   it("resets directional bookkeeping at a turn without a slow restart", () => {
     let cadence = beginHeldMoveCadence("right");
     for (let index = 0; index < 8; index += 1) {
-      cadence = advanceHeldMoveCadence(cadence, "right").cadence;
+      cadence = advanceHeldMoveCadence(cadence, "right", "regular").cadence;
     }
-    const continuing = advanceHeldMoveCadence(cadence, "right");
-    const turned = advanceHeldMoveCadence(cadence, "up");
+    const continuing = advanceHeldMoveCadence(cadence, "right", "zippy");
+    const turned = advanceHeldMoveCadence(cadence, "up", "zippy");
     expect(turned.nextDelayMs).toBe(continuing.nextDelayMs);
     expect(turned.cadence).toEqual({ direction: "up", repeatCount: 1 });
   });
 
   it("starts predictably from the shared idle state", () => {
-    expect(advanceHeldMoveCadence(IDLE_HELD_MOVE_CADENCE, "left")).toEqual({
-      cadence: { direction: "left", repeatCount: 1 }, nextDelayMs: STEP_TRAVEL_MS,
+    expect(advanceHeldMoveCadence(IDLE_HELD_MOVE_CADENCE, "left", "chill")).toEqual({
+      cadence: { direction: "left", repeatCount: 1 }, nextDelayMs: MOVEMENT_PACE_MS.chill,
     });
   });
 });

@@ -4,6 +4,9 @@ import { musicTrackById } from "../musicCatalogue";
 import { usePresentation } from "./PresentationProvider";
 import { DialogShell } from "./dialogs/DialogShell";
 
+const PACE_VALUES = ["chill", "regular", "zippy"] as const;
+const PACE_LABELS = { chill: "Chill", regular: "Regular", zippy: "Zippy" } as const;
+
 export function SoundDialog({ transport, onClose, returnFocus }: { transport: MusicTransportPort; onClose: () => void; returnFocus: HTMLElement | null }) {
   const [snapshot, setSnapshot] = useState(() => transport.getSnapshot());
   const presentation = usePresentation();
@@ -22,6 +25,7 @@ export function SoundDialog({ transport, onClose, returnFocus }: { transport: Mu
     </section>
     <fieldset><legend>Motion</legend><div className="preference-options">{(["system", "full", "reduced"] as const).map(value => <label key={value}><input type="radio" name="motion" value={value} checked={presentation.preferences.motion === value} onChange={() => presentation.update({ motion: value })} />{value === "system" ? "Use device setting" : value === "full" ? "Full" : "Reduced"}</label>)}</div></fieldset>
     <fieldset><legend>Surface quality</legend><div className="preference-options">{(["full", "lite", "static"] as const).map(value => <label key={value}><input type="radio" name="quality" value={value} checked={presentation.preferences.quality === value} onChange={() => presentation.update({ quality: value })} />{value}</label>)}</div></fieldset>
+    <fieldset><legend>Movement pace</legend><button type="button" data-focus-id="comfort:pace" aria-label={`Movement pace: ${PACE_LABELS[presentation.preferences.pace]}. Change pace`} onClick={() => { const index=PACE_VALUES.indexOf(presentation.preferences.pace); presentation.update({pace:PACE_VALUES[(index+1)%PACE_VALUES.length]!}); }}>{PACE_LABELS[presentation.preferences.pace]} <span aria-hidden="true">→</span></button></fieldset>
     <p className="sound-persistence">These comfort settings stay when you reset your adventure.</p>
     {presentation.saveFailed && <p role="alert">This device could not save comfort settings. They still apply while the game is open.</p>}
     </div>

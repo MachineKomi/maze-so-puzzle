@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { getCameraWindow } from "./game/exploration";
-import { MAX_TRAVEL_LAG_MS, TAP_TRAVEL_MS, TileTraveller, travelCamera } from "./tileTravel";
+import { DEFAULT_STEP_TRAVEL_MS, MOVEMENT_PACE_MS } from "./movementControls";
+import { MAX_TRAVEL_LAG_MS, TileTraveller, travelCamera } from "./tileTravel";
 
 describe("committed tile presentation",()=>{
   it("animates the first tap and a repeated tile through the same intermediate positions",()=>{
     const tap=new TileTraveller({x:3,y:3},0);
     tap.retarget({x:4,y:3},0);
-    const repeated=new TileTraveller({x:2,y:3},-TAP_TRAVEL_MS);
-    repeated.retarget({x:3,y:3},-TAP_TRAVEL_MS);
+    const repeated=new TileTraveller({x:2,y:3},-DEFAULT_STEP_TRAVEL_MS);
+    repeated.retarget({x:3,y:3},-DEFAULT_STEP_TRAVEL_MS);
     repeated.retarget({x:4,y:3},0);
     for(const time of [16,40,80,120]) {
       const single=tap.sample(time), held=repeated.sample(time);
@@ -17,8 +18,17 @@ describe("committed tile presentation",()=>{
       expect(travelCamera({width:15,height:15},single,getCameraWindow({width:15,height:15},{x:4,y:3})).left)
         .toBeCloseTo(single.x-2,8);
     }
-    expect(tap.sample(TAP_TRAVEL_MS)).toEqual({x:4,y:3});
-    expect(repeated.sample(TAP_TRAVEL_MS)).toEqual({x:4,y:3});
+    expect(tap.sample(DEFAULT_STEP_TRAVEL_MS)).toEqual({x:4,y:3});
+    expect(repeated.sample(DEFAULT_STEP_TRAVEL_MS)).toEqual({x:4,y:3});
+  });
+  it("preserves a captured Chill tile without the lag bound accelerating it",()=>{
+    const t=new TileTraveller({x:0,y:0},0);
+    t.retarget({x:1,y:0},0,MOVEMENT_PACE_MS.chill);
+    expect(t.sample(160).x).toBeCloseTo(.5,8);
+    expect(t.sample(319).x).toBeLessThan(1);
+    expect(t.sample(320)).toEqual({x:1,y:0});
+    t.retarget({x:2,y:0},320,MOVEMENT_PACE_MS.zippy);
+    expect(t.sample(440)).toEqual({x:2,y:0});
   });
   it("keeps corners, acknowledges early reversal, and lands exactly",()=>{
     const t=new TileTraveller({x:1,y:1},0);
@@ -46,10 +56,9 @@ describe("committed tile presentation",()=>{
       target=n%2 ? {...target,x:target.x+1} : {...target,y:target.y+1};
       t.retarget(target,n*64);
       expect(t.remainingMs).toBeLessThanOrEqual(MAX_TRAVEL_LAG_MS+.001);
-      // Deliberately oversupply at 64ms (normal input now commits at 160ms).
-      // A 192ms recovery window approaches three tiles; retain the time and
-      // cardinal-path bounds while allowing floating-point equality here.
-      expect(t.pendingDistance).toBeLessThanOrEqual(3+1e-8);
+      // Deliberately oversupply at 64ms (all production modes commit more
+      // slowly). Retain a bound derived from the configured recovery window.
+      expect(t.pendingDistance).toBeLessThanOrEqual(Math.ceil(MAX_TRAVEL_LAG_MS/64)+1e-8);
       expect(Number.isInteger(t.point.x)||Number.isInteger(t.point.y)).toBe(true);
     }
     expect(t.sample(65000)).toEqual(target);

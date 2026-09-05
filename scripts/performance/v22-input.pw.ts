@@ -11,8 +11,8 @@ import { advanceFollowerProcession, createFollowerProcession, followerTargets } 
 import { DIRECTIONS, DIRECTION_DELTAS, type Direction, type GameState } from "../../src/game/types";
 import { applyLevelCompletion, createDefaultPlayerProgress, PLAYER_PROGRESS_STORAGE_KEY } from "../../src/progress";
 import { ACTIVE_RUN_STORAGE_KEY } from "../../src/session";
-import { HELD_MOVE_INITIAL_DELAY_MS } from "../../src/movementControls";
-import { PRESENTATION_PREFERENCES_KEY, type PresentationPreferences } from "../../src/motion";
+import { DEFAULT_STEP_TRAVEL_MS, MOVEMENT_PACE_MS } from "../../src/movementControls";
+import { PRESENTATION_PREFERENCES_KEY, type MovementPace, type PresentationPreferences } from "../../src/motion";
 import { deriveRoute, expectUiRouteState, keyForDirection, readUiRouteState, replayRouteStep, selectTesterLevel } from "./gameplay-browser";
 import { SUCCESS_EVENTS, continuationDirections, deliberateBlockerFixture, finalMazeFixture, findInputFixture, isOrdinaryMove, savedFixture, successFixture, type InputFixture } from "./v22-input-fixtures";
 
@@ -135,7 +135,7 @@ async function waitForPresentation(page: Page) {
   await expect(page.locator(busySelector).first()).toBeVisible();
 }
 
-async function expectStill(page: Page, expected: GameState, delay = HELD_MOVE_INITIAL_DELAY_MS * 3) {
+async function expectStill(page: Page, expected: GameState, delay = DEFAULT_STEP_TRAVEL_MS * 3) {
   await page.waitForTimeout(delay);
   await expectUiRouteState(page, expected);
 }
@@ -156,7 +156,7 @@ function assertFreshResume(samples: readonly Sample[], interactionSteps: number)
   expect(firstContinuation!.presentation, "No action may slip through a chained presentation").toHaveLength(0);
   // Removal is observed after the callback. The 20ms tolerance accommodates a
   // delayed observer delivery; upper-bound latency is recorded, not hardware-qualified.
-  expect(firstContinuation!.at - ended.at, "Resume must restart the normal first-step cadence").toBeGreaterThanOrEqual(HELD_MOVE_INITIAL_DELAY_MS - 20);
+  expect(firstContinuation!.at - ended.at, "Resume must restart the normal first-step cadence").toBeGreaterThanOrEqual(DEFAULT_STEP_TRAVEL_MS - 20);
   for (const sample of samples.filter(candidate => candidate.presentation.length > 0)) expect(sample.steps).toBe(interactionSteps);
 }
 
@@ -195,9 +195,9 @@ for (const takeover of ["held", "released"] as const) {
 }
 
 for (const preferences of [
-  { motion: "reduced", quality: "full" },
-  { motion: "full", quality: "lite" },
-  { motion: "full", quality: "static" },
+  { motion: "reduced", quality: "full", pace: "regular" },
+  { motion: "full", quality: "lite", pace: "regular" },
+  { motion: "full", quality: "static", pace: "regular" },
 ] as const) {
   test(`V22 input ${preferences.quality} quality ${preferences.motion} motion success keeps normal held cadence`, async ({ page }, info) => {
     const fixture = successFixture("door-opened");
@@ -219,13 +219,108 @@ for (const preferences of [
   });
 }
 
+for (const [pace, source] of [
+  ["chill", "fixed-pad"],
+  ["regular", "board-drag"],
+  ["zippy", "keyboard"],
+] as const satisfies readonly (readonly [MovementPace, Source])[]) {
+  test(`PLAY-A ${pace} gives ${source} an immediate first step and one shared held cadence`, async ({ page }, info) => {
+    const fixture=findInputFixture(events=>events.length===1 && events[0]?.type==="moved", {sameDirectionContinuation:true})!;
+    const preferences: PresentationPreferences={motion:"full",quality:"full",pace};
+    await loadSaved(page,fixture,`play-a-${pace}-${source}`,undefined,preferences);
+    const start=new Date("2026-09-06T00:00:00Z");
+    await page.clock.install({time:start});await page.clock.pauseAt(start);
+    const controls=await driver(page,source);
+    const first=fixture.result.state;
+    const second=movePlayer(fixture.level,first,fixture.direction).state;
+    try {
+      await controls.start(fixture.direction);
+      await expectUiRouteState(page,first);
+      await page.clock.runFor(MOVEMENT_PACE_MS[pace]-1);
+      await expectUiRouteState(page,first);
+      await page.clock.runFor(1);
+      await expectUiRouteState(page,second);
+      await controls.release();
+      await page.clock.runFor(MOVEMENT_PACE_MS[pace]*3);
+      await expectUiRouteState(page,second);
+    } finally {await controls.release();await saveEvidence(page,info,fixture);}
+  });
+}
+
+test("PLAY-A late held callback attempts once without a catch-up burst",async({page},info)=>{
+  const fixture=findInputFixture(events=>events.length===1 && events[0]?.type==="moved", {sameDirectionContinuation:true})!;
+  await loadSaved(page,fixture,"play-a-late",undefined,{motion:"full",quality:"full",pace:"zippy"});
+  const start=new Date("2026-09-06T00:00:00Z");
+  await page.clock.install({time:start});await page.clock.pauseAt(start);
+  const controls=await driver(page,"keyboard");
+  const first=fixture.result.state;
+  const second=movePlayer(fixture.level,first,fixture.direction).state;
+  try {
+    await controls.start(fixture.direction);await expectUiRouteState(page,first);
+    await page.clock.fastForward(MOVEMENT_PACE_MS.zippy*5);
+    await expectUiRouteState(page,second);
+    await controls.release();
+  } finally {await controls.release();await saveEvidence(page,info,fixture);}
+});
+
+test("PLAY-A rapid taps retain at most one intent and obey Chill admission",async({page},info)=>{
+  const fixture=findInputFixture(events=>events.length===1 && events[0]?.type==="moved", {sameDirectionContinuation:true})!;
+  await loadSaved(page,fixture,"play-a-rapid-taps",undefined,{motion:"full",quality:"full",pace:"chill"});
+  const start=new Date("2026-09-06T00:00:00Z");
+  await page.clock.install({time:start});await page.clock.pauseAt(start);
+  const key=keyForDirection[fixture.direction];
+  const first=fixture.result.state;
+  const second=movePlayer(fixture.level,first,fixture.direction).state;
+  try {
+    await page.keyboard.press(key);await expectUiRouteState(page,first);
+    for(let index=0;index<6;index++) await page.keyboard.press(key);
+    await page.clock.runFor(MOVEMENT_PACE_MS.chill-1);await expectUiRouteState(page,first);
+    await page.clock.runFor(1);await expectUiRouteState(page,second);
+    await page.clock.runFor(MOVEMENT_PACE_MS.chill*3);await expectUiRouteState(page,second);
+  } finally {await page.keyboard.up(key);await saveEvidence(page,info,fixture);}
+});
+
+test("PLAY-A pace change lets the captured tile finish and requires fresh input",async({page},info)=>{
+  const fixture=findInputFixture(events=>events.length===1 && events[0]?.type==="moved", {sameDirectionContinuation:true})!;
+  const start=new Date("2026-09-06T00:00:00Z");
+  await page.clock.install({time:start});
+  await loadSaved(page,fixture,"play-a-mid-travel",undefined,{motion:"full",quality:"full",pace:"chill"});
+  await page.clock.pauseAt(new Date("2026-09-06T00:01:00Z"));
+  const key=keyForDirection[fixture.direction];
+  const first=fixture.result.state;
+  const second=movePlayer(fixture.level,first,fixture.direction).state;
+  try {
+    await page.keyboard.down(key);await expectUiRouteState(page,first);
+    await page.clock.runFor(80);
+    await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","moving");
+    await page.locator('[data-focus-id="sound"]:visible').click();
+    await expect(page.getByRole("dialog",{name:"Sound & comfort"})).toBeVisible();
+    await page.getByRole("button",{name:"Movement pace: Chill. Change pace"}).click();
+    await page.getByRole("button",{name:"Movement pace: Regular. Change pace"}).click();
+    await expect(page.getByRole("button",{name:"Movement pace: Zippy. Change pace"})).toBeVisible();
+    await page.keyboard.up(key);
+    await page.clock.runFor(239);
+    await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","moving");
+    await page.clock.runFor(21);
+    await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
+    await page.getByRole("button",{name:"Back to the adventure"}).click();
+    await page.clock.runFor(MOVEMENT_PACE_MS.chill*2);
+    await expectUiRouteState(page,first);
+    await page.keyboard.press(key);await expectUiRouteState(page,second);
+    await page.clock.runFor(MOVEMENT_PACE_MS.zippy-1);
+    await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","moving");
+    await page.clock.runFor(21);
+    await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
+  } finally {await page.keyboard.up(key);await saveEvidence(page,info,fixture);}
+});
+
 test.describe("V22 live touch joystick production styles", () => {
   test.use({ hasTouch: true });
 
   for (const quality of ["full", "lite"] as const) {
     test(`${quality} keeps a visible neutral touch and computes the intended backdrop`, async ({ page, context }, info) => {
       const fixture = successFixture("door-opened");
-      await loadSaved(page, fixture, `live-touch-${quality}`, undefined, { motion: "full", quality });
+      await loadSaved(page, fixture, `live-touch-${quality}`, undefined, { motion: "full", quality, pace: "regular" });
       await expect(page.locator("html")).toHaveAttribute("data-quality", quality);
       await expect(page.locator(".game-stage")).toHaveAttribute("data-quality", quality);
       const point = await page.locator(".player-layer").evaluate(node => {
@@ -268,7 +363,7 @@ test.describe("V22 live touch joystick production styles", () => {
 
 test("V22 Static mounts and reenters with working first board taps and exact settled geometry", async ({ page }, info) => {
   const fixture = successFixture("door-opened");
-  await loadSaved(page, fixture, "static-first-tap", undefined, { motion: "full", quality: "static" });
+  await loadSaved(page, fixture, "static-first-tap", undefined, { motion: "full", quality: "static", pace: "regular" });
   const tap = async (direction: Direction) => {
     const point = await page.locator(".player-layer").evaluate((node, delta) => {
       const box = node.getBoundingClientRect();
@@ -389,7 +484,7 @@ for (const blocked of ["power", "capability"] as const) for (const source of ["k
       for (let attempt = 0; attempt < 3; attempt++) {
         await controls.start(fixture!.direction);
         await expect(page.getByRole("dialog", { name: blocked === "power" ? "Too strong!" : "You need something!" })).toBeVisible();
-        await page.waitForTimeout(HELD_MOVE_INITIAL_DELAY_MS * 3);
+        await page.waitForTimeout(DEFAULT_STEP_TRAVEL_MS * 3);
         await expectUiRouteState(page, fixture!.result.state);
         await page.keyboard.press("Escape");
         await expect(page.getByRole("dialog")).toHaveCount(0);
@@ -429,7 +524,7 @@ for (const motion of ["full", "reduced"] as const) for (const action of ["held",
   test(`R1 stalled jump-rescue ${motion} ${action} waits for the actual final phase`, async ({ page }, info) => {
     const fixture = findInputFixture(events => events.some(event => event.type === "hole-jumped") && events.some(event => event.type === "animal-rescued"), { differentDirectionContinuation: true });
     expect(fixture, "The delayed-handoff regression requires a real authored jump-rescue route").toBeTruthy();
-    await loadSaved(page, fixture!, `r1-stalled-${motion}-${action}`, undefined, { motion, quality: "full" });
+    await loadSaved(page, fixture!, `r1-stalled-${motion}-${action}`, undefined, { motion, quality: "full", pace: "regular" });
     const time = new Date("2026-09-05T12:00:00Z");
     await page.clock.install({ time });
     await page.clock.pauseAt(time);
@@ -453,18 +548,18 @@ for (const motion of ["full", "reduced"] as const) for (const action of ["held",
         Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
         document.dispatchEvent(new Event("visibilitychange"));
       });
-      await page.clock.runFor(HELD_MOVE_INITIAL_DELAY_MS);
+      await page.clock.runFor(DEFAULT_STEP_TRAVEL_MS);
       await expectUiRouteState(page, fixture!.result.state);
       const duration = motion === "reduced" ? 180 : 900;
-      await page.clock.runFor(duration - HELD_MOVE_INITIAL_DELAY_MS);
+      await page.clock.runFor(duration - DEFAULT_STEP_TRAVEL_MS);
       await expect(page.locator(busySelector)).toHaveCount(0);
-      await page.clock.runFor(HELD_MOVE_INITIAL_DELAY_MS - 1);
+      await page.clock.runFor(DEFAULT_STEP_TRAVEL_MS - 1);
       await expectUiRouteState(page, fixture!.result.state);
       await page.clock.runFor(1);
       const next = action === "held" ? movePlayer(fixture!.level, fixture!.result.state, direction).state : fixture!.result.state;
       await expectUiRouteState(page, next);
       await controls.release();
-      await page.clock.runFor(HELD_MOVE_INITIAL_DELAY_MS * 3);
+      await page.clock.runFor(DEFAULT_STEP_TRAVEL_MS * 3);
       await expectUiRouteState(page, next);
       if (action === "held") assertFreshResume(await trace(page), fixture!.result.state.steps);
     } finally { await controls.release(); await saveEvidence(page, info, fixture!); }
@@ -531,7 +626,7 @@ for (const replay of [false, true]) {
       await expect(page.locator(".level-kicker")).toContainText("Surprise maze");
       await expect(page.getByRole("region", { name: `${CURATED_LEVELS[0]!.name} maze` })).toHaveCount(0);
       const state = await readUiRouteState(page);
-      await page.waitForTimeout(HELD_MOVE_INITIAL_DELAY_MS * 3);
+      await page.waitForTimeout(DEFAULT_STEP_TRAVEL_MS * 3);
       expect(await readUiRouteState(page)).toEqual(state);
     } finally { await page.keyboard.up(keyForDirection[fixture.direction]); await saveEvidence(page, info, fixture); }
   });

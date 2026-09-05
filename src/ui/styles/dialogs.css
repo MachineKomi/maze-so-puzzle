@@ -68,7 +68,7 @@ fieldset { margin: 0; border: 1px solid #c5afc9; border-radius: 12px; min-width:
 .preference-options input { width: 24px; height: 24px; accent-color: #77528d; }
 .modal-card:has(.sound-layout) { width: min(920px,100%); }
 .sound-layout { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 14px; align-items: stretch; }
-.sound-player { grid-row: 1 / 3; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 18px; border: 2px solid #fffaf0; border-radius: 24px; background: linear-gradient(135deg,#fff0c9,#f6e8f7 70%,#e6f4ec); box-shadow: 0 3px 0 #b8a2ba30; }
+.sound-player { grid-row: 1 / 4; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 18px; border: 2px solid #fffaf0; border-radius: 24px; background: linear-gradient(135deg,#fff0c9,#f6e8f7 70%,#e6f4ec); box-shadow: 0 3px 0 #b8a2ba30; }
 .sound-track { font-weight: 600; overflow-wrap: anywhere; }
 .sound-controls button { min-height: 48px; padding: 8px; }
 .sound-layout fieldset { padding: 8px 12px 10px; border-color: #d5bddb; background: #fffbf4a6; }

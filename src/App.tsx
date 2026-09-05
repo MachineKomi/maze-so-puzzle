@@ -67,7 +67,6 @@ import {
 } from "./game/exploration";
 import { advanceFollowerProcession, createFollowerProcession, followerTargets } from "./game/followerTrail";
 import { useSceneTravel } from "./ui/game/useSceneTravel";
-import { TAP_TRAVEL_MS } from "./tileTravel";
 import { getProgressiveHint, hintStateKey } from "./game/hints";
 import { getRequiredPath } from "./game/reachability";
 import { animalPersonality, enemyPersonality } from "./game/visualPersonality";
@@ -133,10 +132,11 @@ import {
   type PointerIntent,
 } from "./pointerControls";
 import {
-  HELD_MOVE_INITIAL_DELAY_MS,
+  DEFAULT_STEP_TRAVEL_MS,
   IDLE_HELD_MOVE_CADENCE,
   advanceHeldMoveCadence,
   beginHeldMoveCadence,
+  movementStepDuration,
   type HeldMoveCadence,
 } from "./movementControls";
 import {
@@ -175,7 +175,6 @@ function storySpeakerArt(speaker: StorySpeaker): string {
   return ASSETS.portrait;
 }
 
-const MOVE_CADENCE_MS = TAP_TRAVEL_MS;
 const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
@@ -681,9 +680,9 @@ function App() {
   const [procession, setProcession] = useState(() => createFollowerProcession(
     initialRun?.game.position ?? initialLevel.start, initialRun?.game.rescuedAnimalIds,
   ));
-  const travelDuration = useRef(TAP_TRAVEL_MS);
-  const nextTravelDuration = useRef(TAP_TRAVEL_MS);
-  const nextMoveRepeated = useRef(false);
+  const travelDuration = useRef(DEFAULT_STEP_TRAVEL_MS);
+  const selectedTravelDuration = useRef(movementStepDuration(preferences.pace));
+  selectedTravelDuration.current = movementStepDuration(preferences.pace);
   const travelEpoch = useRef(0);
   const [runMode, setRunMode] = useState<RunMode>("normal");
   const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(
@@ -748,7 +747,7 @@ function App() {
   const scheduleKeyboardRepeatRef = useRef<(delay: number) => void>(() => undefined);
   const inputUnlockTimer = useRef<number | undefined>(undefined);
   const queuedMove = useRef<QueuedMoveIntent | null>(null);
-  const attemptMoveRef = useRef<(direction: Direction, lateralOffset?: number) => void>(() => undefined);
+  const attemptMoveRef = useRef<(direction: Direction, lateralOffset?: number, travelDurationMs?: number, repeated?: boolean) => void>(() => undefined);
   const pointerDirectionRef = useRef<(clientX: number, clientY: number, previousDirection?: Direction | null) => PointerIntent | null>(() => null);
   const lastMovedDirection = useRef<Direction | null>(null);
   const heldKeys = useRef(new Map<string, Direction>());
@@ -1000,7 +999,9 @@ function App() {
       doorOpeningPresentation && isInsideWindow(doorOpeningPresentation.at,cameraWindow) ? doorOpeningPresentation.objectId : "",
       !!jumpPresentation, !!portalPresentation, mapPickupToast?.id, treasurePresentation?.id].join(":"),
     runKey:`${runId}:${travelEpoch.current}`,
-    enabled:screen==="game" && !modalOpen && preferences.quality!=="static",
+    // Sound may change pace while a tile is in flight. Input is inert and held
+    // intent is cleared, but the already-captured segment must finish normally.
+    enabled:screen==="game" && (!modalOpen || soundOpen) && preferences.quality!=="static",
     discontinuity:jumpPresentation!==null || portalPresentation!==null,
     durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
   });
@@ -1331,11 +1332,8 @@ function App() {
     setRestartArmed(false);
   }, [cancelPresentations, clearHeldInput]);
 
-  const attemptMove = useCallback((requestedDirection: Direction, lateralOffset = 0) => {
-    const proposedTravelDuration=nextTravelDuration.current;
-    const repeated=nextMoveRepeated.current;
-    nextTravelDuration.current=TAP_TRAVEL_MS;
-    nextMoveRepeated.current=false;
+  const attemptMove = useCallback((requestedDirection: Direction, lateralOffset = 0,
+    proposedTravelDuration=selectedTravelDuration.current, repeated=false) => {
     const unavailable = (
       !inputBlock.gameplayInputAllowed
       || game.status !== "playing"
@@ -1568,11 +1566,9 @@ function App() {
       const nextMove = queuedMove.current;
       queuedMove.current = null;
       if (nextMove) {
-        nextTravelDuration.current=nextMove.travelDurationMs;
-        nextMoveRepeated.current=nextMove.repeated;
-        attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
+        attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset, nextMove.travelDurationMs, nextMove.repeated);
       }
-    }, result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS);
+    }, result.moved ? proposedTravelDuration : BUMP_CADENCE_MS);
   }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, suspendHeldRepeat, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
   const dismissStory = useCallback(() => {
@@ -1607,11 +1603,10 @@ function App() {
           heldKeyTimer.current = undefined;
           return;
         }
-        const cadenceStep = advanceHeldMoveCadence(heldKeyCadence.current, direction);
+        const pace=preferences.pace;
+        const cadenceStep = advanceHeldMoveCadence(heldKeyCadence.current, direction, pace);
         heldKeyCadence.current = cadenceStep.cadence;
-        nextTravelDuration.current=cadenceStep.nextDelayMs;
-        nextMoveRepeated.current=true;
-        attemptMoveRef.current(direction);
+        attemptMoveRef.current(direction, 0, cadenceStep.nextDelayMs, true);
         if (generation === heldInputGeneration.current) scheduleHeldMove(cadenceStep.nextDelayMs);
       }, delay);
     };
@@ -1634,7 +1629,7 @@ function App() {
       heldKeyCadence.current = beginHeldMoveCadence(direction);
       if (presentationSuspended.current) return;
       attemptMoveRef.current(direction);
-      scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
+      scheduleHeldMove(selectedTravelDuration.current);
     };
 
     const onKeyUp = (event: KeyboardEvent) => {
@@ -1649,9 +1644,8 @@ function App() {
       if (fallbackDirection) {
         heldKeyCadence.current = beginHeldMoveCadence(fallbackDirection);
         if (!presentationSuspended.current) {
-          nextMoveRepeated.current = true;
-          attemptMoveRef.current(fallbackDirection);
-          scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
+          attemptMoveRef.current(fallbackDirection, 0, selectedTravelDuration.current, true);
+          scheduleHeldMove(selectedTravelDuration.current);
         }
       } else {
         if (heldKeyTimer.current !== undefined) {
@@ -1680,7 +1674,7 @@ function App() {
       window.removeEventListener("resize", clearHeldInput);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [beginInputSource, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
+  }, [beginInputSource, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, preferences.pace, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => {
     if (inputBlock.clearHeldInput || game.status !== "playing") {
@@ -1752,16 +1746,15 @@ function App() {
         pointerHoldTimer.current = undefined;
         return;
       }
-      const cadenceStep = advanceHeldMoveCadence(pointerHoldCadence.current, intent.direction);
+      const pace=preferences.pace;
+      const cadenceStep = advanceHeldMoveCadence(pointerHoldCadence.current, intent.direction, pace);
       pointerHoldCadence.current = cadenceStep.cadence;
-      nextTravelDuration.current=cadenceStep.nextDelayMs;
-        nextMoveRepeated.current=true;
-      attemptMoveRef.current(intent.direction, intent.lateralOffset);
+      attemptMoveRef.current(intent.direction, intent.lateralOffset, cadenceStep.nextDelayMs, true);
       if (!presentationSuspended.current && generation === heldInputGeneration.current && activeBoardPointer.current === pointer)
         pointerHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
     pointerHoldTimer.current = window.setTimeout(repeat, delay);
-  }, [boardPointerIntent,paintBoardPointer]);
+  }, [boardPointerIntent,paintBoardPointer,preferences.pace]);
 
   const onBoardPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     const pointer = activeBoardPointer.current;
@@ -1792,7 +1785,7 @@ function App() {
     }
     pointerHoldCadence.current = beginHeldMoveCadence(direction);
     attemptMoveRef.current(direction, intent?.lateralOffset);
-    schedulePointerHoldRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+    schedulePointerHoldRepeat(selectedTravelDuration.current);
   };
 
   const onBoardPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -1828,7 +1821,7 @@ function App() {
     if (!direction || presentationSuspended.current) return;
     pointerHoldCadence.current = beginHeldMoveCadence(direction);
     attemptMoveRef.current(direction, intent?.lateralOffset);
-    schedulePointerHoldRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+    schedulePointerHoldRepeat(selectedTravelDuration.current);
   };
 
   const finishBoardPointer = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -1855,16 +1848,15 @@ function App() {
         dpadHoldTimer.current = undefined;
         return;
       }
-      const cadenceStep = advanceHeldMoveCadence(dpadHoldCadence.current, direction);
+      const pace=preferences.pace;
+      const cadenceStep = advanceHeldMoveCadence(dpadHoldCadence.current, direction, pace);
       dpadHoldCadence.current = cadenceStep.cadence;
-      nextTravelDuration.current=cadenceStep.nextDelayMs;
-        nextMoveRepeated.current=true;
-      attemptMoveRef.current(direction);
+      attemptMoveRef.current(direction, 0, cadenceStep.nextDelayMs, true);
       if (!presentationSuspended.current && generation === heldInputGeneration.current && dpadHoldDirection.current)
         dpadHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
     dpadHoldTimer.current = window.setTimeout(repeat, delay);
-  }, []);
+  }, [preferences.pace]);
 
   const startDpadHold = (event: ReactPointerEvent<HTMLElement>, direction: Direction | null) => {
     if (!inputBlock.gameplayInputAllowed) return;
@@ -1877,7 +1869,7 @@ function App() {
     dpadHoldCadence.current = direction ? beginHeldMoveCadence(direction) : IDLE_HELD_MOVE_CADENCE;
     if (direction && !presentationSuspended.current) {
       attemptMoveRef.current(direction);
-      scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+      scheduleDpadRepeat(selectedTravelDuration.current);
     }
   };
 
@@ -1889,7 +1881,7 @@ function App() {
     if (direction && !presentationSuspended.current) {
       dpadHoldCadence.current = beginHeldMoveCadence(direction);
       attemptMoveRef.current(direction);
-      scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+      scheduleDpadRepeat(selectedTravelDuration.current);
     }
   };
 
@@ -1908,9 +1900,9 @@ function App() {
     if (!inputBlock.gameplayInputAllowed || game.status !== "playing" || document.hidden) return;
     // No saved action queue and no catch-up burst. Read the still-live inputs
     // only after the entire (possibly chained) presentation has completed.
-    if (heldInputSource.current === "keyboard") scheduleKeyboardRepeatRef.current(HELD_MOVE_INITIAL_DELAY_MS);
-    else if (heldInputSource.current === "board") schedulePointerHoldRepeat(HELD_MOVE_INITIAL_DELAY_MS);
-    else if (heldInputSource.current === "pad") scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+    if (heldInputSource.current === "keyboard") scheduleKeyboardRepeatRef.current(selectedTravelDuration.current);
+    else if (heldInputSource.current === "board") schedulePointerHoldRepeat(selectedTravelDuration.current);
+    else if (heldInputSource.current === "pad") scheduleDpadRepeat(selectedTravelDuration.current);
   };
 
   const armRestart = () => {
@@ -2803,7 +2795,7 @@ function App() {
           <h3>Bag details</h3><div className="more-actions">{hudModel.slots.map(slot => <button key={slot.id} data-focus-id={`bag:${slot.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:slot.art,label:slot.label,description:`${slot.found ? "Found." : "Still to find."} ${slot.description}`},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={slot.art} alt="" /><span>{slot.label} · {slot.found ? "Found" : "Not found"}</span></button>)}</div>
           <h3>Friends details · optional</h3><div className="more-actions">{hudModel.friends.map(friend => <button key={friend.id} data-focus-id={`friend:${friend.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:friend.art as import("./ui/art").UiArt,label:friend.label,description:`${FRIEND_BOOK_LORE[friend.species ?? "bunny"]} ${friend.rescued ? "Safe with Ame!" : "Waiting in the maze. You can always return to help."}`},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={friend.art as import("./ui/art").UiArt} alt="" /><span>{friend.label} · {friend.rescued ? "Rescued" : "Waiting"}</span></button>)}</div>
         </Modal>}
-        {soundOpen && <SoundDialog transport={musicTransport} onClose={() => setSoundOpen(false)} returnFocus={modalReturnFocus.current} />}
+        {soundOpen && <SoundDialog transport={musicTransport} onClose={() => { clearHeldInput(); setSoundOpen(false); }} returnFocus={modalReturnFocus.current} />}
         {artDetail && <Modal title={artDetail.label} variant="celebration" onClose={() => setArtDetail(null)} returnFocus={modalReturnFocus.current}>
           <PresentationArt art={artDetail.art} label={artDetail.label} /><p className="modal-lead">{artDetail.description}</p>
           <button className="primary-button" onClick={() => setArtDetail(null)}>Back to the adventure</button>

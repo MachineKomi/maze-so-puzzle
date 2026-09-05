@@ -8,9 +8,13 @@ it("resolves explicit motion independently of OS and quality", () => {
 it("handles malformed and denied preference storage without touching progress", () => {
   const values = new Map<string,string>();
   const storage = { getItem:(key:string) => values.get(key) ?? null, setItem:(key:string,value:string) => { values.set(key,value); } };
-  expect(writePresentationPreferences({motion:"reduced",quality:"lite"},storage)).toBe(true);
+  expect(writePresentationPreferences({motion:"reduced",quality:"lite",pace:"zippy"},storage)).toBe(true);
   expect([...values.keys()]).toEqual([PRESENTATION_PREFERENCES_KEY]);
-  expect(readPresentationPreferences(storage)).toEqual({motion:"reduced",quality:"lite"});
+  expect(readPresentationPreferences(storage)).toEqual({motion:"reduced",quality:"lite",pace:"zippy"});
+  values.set(PRESENTATION_PREFERENCES_KEY,JSON.stringify({motion:"full",quality:"static"}));
+  expect(readPresentationPreferences(storage)).toEqual({motion:"full",quality:"static",pace:"regular"});
+  values.set(PRESENTATION_PREFERENCES_KEY,JSON.stringify({motion:"reduced",quality:"lite",pace:"turbo"}));
+  expect(readPresentationPreferences(storage)).toEqual({motion:"reduced",quality:"lite",pace:"regular"});
   values.set(PRESENTATION_PREFERENCES_KEY,"not-json");
   expect(readPresentationPreferences(storage)).toEqual(DEFAULT_PRESENTATION_PREFERENCES);
   expect(writePresentationPreferences(DEFAULT_PRESENTATION_PREFERENCES,{setItem:() => { throw Error("denied"); }})).toBe(false);

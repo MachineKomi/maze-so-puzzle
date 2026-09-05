@@ -1,4 +1,5 @@
 import type { Direction } from "./game/types";
+import type { MovementPace } from "./motion";
 
 /**
  * Input commits exact squares; presentation spends the same time travelling
@@ -6,12 +7,16 @@ import type { Direction } from "./game/types";
  * keyboard-style repeat pause. A future acceleration curve must preserve this
  * continuous handoff and be judged in actual play, not by delay values alone.
  */
-export const STEP_TRAVEL_MS = 160;
-export const HELD_MOVE_INITIAL_DELAY_MS = STEP_TRAVEL_MS;
+export const MOVEMENT_PACE_MS: Readonly<Record<MovementPace, number>> = {
+  chill: 320,
+  regular: 200,
+  zippy: 120,
+};
+export const DEFAULT_STEP_TRAVEL_MS = MOVEMENT_PACE_MS.regular;
 
-export const HELD_MOVE_START_REPEAT_MS = STEP_TRAVEL_MS;
-export const HELD_MOVE_FASTEST_REPEAT_MS = 160;
-export const HELD_MOVE_ACCELERATION_STEPS = 16;
+export function movementStepDuration(pace: MovementPace): number {
+  return MOVEMENT_PACE_MS[pace];
+}
 
 export interface HeldMoveCadence {
   readonly direction: Direction | null;
@@ -24,8 +29,8 @@ export const IDLE_HELD_MOVE_CADENCE: HeldMoveCadence = {
 };
 
 /** Returns the delay after a repeated move. `repeatCount` is zero based. */
-export function heldMoveRepeatDelay(_repeatCount: number): number {
-  return STEP_TRAVEL_MS;
+export function heldMoveRepeatDelay(_repeatCount: number, pace: MovementPace): number {
+  return movementStepDuration(pace);
 }
 
 /**
@@ -36,6 +41,7 @@ export function heldMoveRepeatDelay(_repeatCount: number): number {
 export function advanceHeldMoveCadence(
   cadence: HeldMoveCadence,
   requestedDirection: Direction,
+  pace: MovementPace,
 ): { readonly cadence: HeldMoveCadence; readonly nextDelayMs: number } {
   const repeatCount = cadence.direction === requestedDirection
     ? cadence.repeatCount
@@ -45,7 +51,7 @@ export function advanceHeldMoveCadence(
       direction: requestedDirection,
       repeatCount: repeatCount + 1,
     },
-    nextDelayMs: heldMoveRepeatDelay(repeatCount),
+    nextDelayMs: heldMoveRepeatDelay(repeatCount, pace),
   };
 }
 

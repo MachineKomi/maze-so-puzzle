@@ -251,8 +251,8 @@ const frameChecks = models.map((model) => {
 });
 const candidateRows = results.filter((r) => r.model === "candidate");
 const invariants = {
-  candidateLagAtMost280Ms: candidateRows.every((r) => r.maxLagAfterAcceptedTargetMs <= MAX_TRAVEL_LAG_MS + EPSILON),
-  candidateAllExactSettlesAtMost280Ms: candidateRows.every((r) => r.lastTargetExactSettleMs !== null && r.lastTargetExactSettleMs <= MAX_TRAVEL_LAG_MS),
+  candidateLagWithinConfiguredBound: candidateRows.every((r) => r.maxLagAfterAcceptedTargetMs <= MAX_TRAVEL_LAG_MS + EPSILON),
+  candidateAllExactSettlesWithinConfiguredBound: candidateRows.every((r) => r.lastTargetExactSettleMs !== null && r.lastTargetExactSettleMs <= MAX_TRAVEL_LAG_MS),
   candidateNoPathCutting: candidateRows.every((r) => r.maxDistanceFromCommittedSegmentsTiles < EPSILON),
   candidateCameraAlwaysInBounds: candidateRows.every((r) => r.maxCameraBoundsErrorTiles < EPSILON),
   allClockModelsFrameScheduleInvariant: frameChecks.every((r) => r.maxCommonProbeDifferenceTiles < 1e-7),
