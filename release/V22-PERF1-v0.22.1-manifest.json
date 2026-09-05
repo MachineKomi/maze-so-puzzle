@@ -1,0 +1,673 @@
+{
+  "schema": "maze-family-preview-manifest/v1",
+  "version": "0.22.1",
+  "preview": "V22-PERF1",
+  "status": "TECHNICALLY_VERIFIED_PERFORMANCE_INPUT_PREVIEW",
+  "preparedAtUtc": "2026-09-05T20:59:04.003Z",
+  "runtimeSourceCommit": "8442b79db11a59e23f23c59f213116e7b8f54592",
+  "acceptedRuntimeCommit": "91678d1a7f97055dc2f167f8a3e7106226817306",
+  "reviewCommit": "c19128b7a45bc2179370bf55cfc8ab5851dbf008",
+  "recordedMainBeforePromotion": "461cab02b065a1d0f654c49189ed24108c22c5a8",
+  "packagingDocumentationCommit": "Recorded by the later publication receipt; this pre-upload manifest remains immutable.",
+  "content": "Existing authored campaign content revisions and gameplay fingerprints unchanged; save schemas remain progress-v5 / active-run-v3.",
+  "portable": {
+    "file": "Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe",
+    "bytes": 173379584,
+    "sha256": "8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c",
+    "fileVersion": "0.22.1",
+    "productVersion": "0.22.1",
+    "format": "Windows PE",
+    "machine": "0x8664",
+    "architecture": "x86-64",
+    "mzAndPeSignaturesVerified": true,
+    "signatureStatus": "NotSigned",
+    "sourceStageFinal": [
+      {
+        "sha256": "8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c",
+        "path": "C:/GameDev/maze-game-v0221-release/src-tauri/target/release/maze-so-puzzle.exe",
+        "bytes": 173379584
+      },
+      {
+        "sha256": "8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c",
+        "path": "C:/GameDev/maze-game-qa/releases/v0221/Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe",
+        "bytes": 173379584
+      },
+      {
+        "sha256": "8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c",
+        "path": "C:/GameDev/maze-game-v0221-release/release/Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe",
+        "bytes": 173379584
+      }
+    ],
+    "installerEmitted": false
+  },
+  "build": {
+    "command": "node node_modules/@tauri-apps/cli/tauri.js build --no-bundle --ci -- --locked",
+    "dependencyPreparation": "Fresh isolated worktree; npm ci; locked cargo check and optimized build",
+    "toolVersions": {
+      "vite": "8.2.2",
+      "rolldown": "1.2.6",
+      "vitest": "4.1.11",
+      "typescript": "7.0.2",
+      "@tauri-apps/cli": "2.11.4",
+      "node": "v24.13.1",
+      "npm": "11.8.0",
+      "cargo": "1.96.0 (30a34c682 2026-05-25)",
+      "rustc": "1.96.0 (ac68faa20 2026-05-25)",
+      "git": "git version 2.55.0.windows.2",
+      "playwright": "1.62.1 (external test tooling)"
+    },
+    "host": {
+      "os": "Windows 11 Home 10.0.26200",
+      "cpu": "11th Gen Intel Core i7-1165G7 @ 2.80GHz",
+      "edge": "152.0.4191.62",
+      "webView2": "152.0.4191.62",
+      "qualification": "Active development host; all timing report-only"
+    },
+    "sourceIntegrity": {
+      "at": "2026-09-05T20:48:42.917Z",
+      "runtime": "8442b79db11a59e23f23c59f213116e7b8f54592",
+      "accepted": "91678d1a7f97055dc2f167f8a3e7106226817306",
+      "review": "c19128b7a45bc2179370bf55cfc8ab5851dbf008",
+      "clean": true,
+      "versionOnlyRuntimeDifference": true,
+      "unchangedContentAndMedia": true,
+      "changedRuntimeFiles": [
+        "package-lock.json",
+        "package.json",
+        "src-tauri/Cargo.lock",
+        "src-tauri/Cargo.toml",
+        "src-tauri/tauri.conf.json",
+        "src/ui/version.ts"
+      ],
+      "files": [
+        {
+          "path": "package-lock.json",
+          "bytes": 63378,
+          "sha256": "b020ee0ef50b2924597eecbe6ad0e5db02ec00b527954a938b5af18aea0d2ea9"
+        },
+        {
+          "path": "package.json",
+          "bytes": 3031,
+          "sha256": "4069b24d3aa007b571b8e922e016e0757b79b97d6974c664f9fa8d8b0e83e506"
+        },
+        {
+          "path": "src-tauri/Cargo.lock",
+          "bytes": 114664,
+          "sha256": "5f7b81d5ecd569d021b26dc1a91a10879659b71abd00a7477d3b2b3fc0825d5c"
+        },
+        {
+          "path": "src-tauri/Cargo.toml",
+          "bytes": 409,
+          "sha256": "8fa3e4ec461e8a89bc15e44d0d1a6f0da947f3cbb66a52860ffadc3a04fe0628"
+        },
+        {
+          "path": "src-tauri/tauri.conf.json",
+          "bytes": 1638,
+          "sha256": "ed9d69c9f79af732b52b5c3ba9b2df49c6e4bd0073cf7fa3d3993b7cb31a0396"
+        },
+        {
+          "path": "src/ui/version.ts",
+          "bytes": 116,
+          "sha256": "a4f08560faf55263bf1b8806ed66ff526697d14423f7ce154b0b0f62a4d03258"
+        }
+      ],
+      "installedPackages": {
+        "vite": "8.2.2",
+        "rolldown": "1.2.6",
+        "vitest": "4.1.11",
+        "typescript": "7.0.2",
+        "@tauri-apps/cli": "2.11.4"
+      },
+      "externalBrowserRunner": "1.62.1 via external resolver; no added release dependencies",
+      "gitVersion": "git version 2.55.0.windows.2",
+      "node": "v24.13.1"
+    },
+    "provenance": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-05T20:36:52.758Z",
+      "commit": "8442b79db11a59e23f23c59f213116e7b8f54592",
+      "runtimeInputsSha256": "aa4de2d033e64a00ea9062f3d0f9fbc7c44e8530f0d48bd5ce40979111f805d4",
+      "distFingerprintSha256": "cd798cf5c887178691dcdec211e853ea7ba270baf1f5688fbf96580729b2bd4f",
+      "buildCommand": "npm run build"
+    },
+    "staticBudgets": {
+      "jsGzip9Bytes": 153261,
+      "jsLimit": 153307,
+      "jsHeadroom": 46,
+      "cssGzip9Bytes": 23512,
+      "cssLimit": 30227,
+      "publicDeliveryBytes": 164988031,
+      "publicLimit": 164988031,
+      "allocation": "Sol accepted 750-byte candidate JS allocation; no additional release allocation"
+    },
+    "webReference": {
+      "checkout": "Second fresh detached worktree at the exact runtime SHA and npm ci. Entry HTML and release-checklist checkout line endings restored explicitly to their committed LF bytes; identical Git objects and clean status verified. Full serial check/build/perf gates rerun.",
+      "path": "C:/GameDev/maze-game-v0221-webreference",
+      "provenance": {
+        "schema": "maze-performance-build-provenance/v1",
+        "generatedAtUtc": "2026-09-05T20:56:57.596Z",
+        "commit": "8442b79db11a59e23f23c59f213116e7b8f54592",
+        "runtimeInputsSha256": "f83bec2836ac16a9c43ae1eb5b0eba4c97050ec80ba50dc0078456920bfd2a32",
+        "distFingerprintSha256": "a56b0954d45a289fe86db81fd85d969a174500b3cc9a2f278f103e386df5d830",
+        "buildCommand": "npm run build"
+      },
+      "projectTestsPassed": 493,
+      "staticGates": "passed",
+      "runtimeJavaScriptAndCssMatchNativeBuildByteForByte": true
+    },
+    "htmlCheckoutIdentity": {
+      "native": {
+        "bytes": 1090,
+        "sha256": "7765d22ce1f594b954d502d917bf2e457d99e64024100e47d302304a83468d88",
+        "sourceCheckout": "Windows CRLF"
+      },
+      "canonicalReference": {
+        "bytes": 1070,
+        "sha256": "1cbf3cbdab0c22d294ddb2f65721e915ecbcaa422dccf64aa9040e7d067212b8",
+        "sourceCheckout": "Committed LF"
+      },
+      "difference": "Only CR line terminators differ. Canonical HTML/JS/CSS are compared as exact raw bytes to the clean LF reference; the native binary remains the original immutable clean Windows build."
+    }
+  },
+  "checks": {
+    "project": {
+      "passed": 493,
+      "files": 49,
+      "durationSeconds": 56.28,
+      "scenarioFixtures": 4
+    },
+    "input": {
+      "startTime": "2026-09-05T20:26:25.178Z",
+      "duration": 243348.84100000001,
+      "expected": 87,
+      "skipped": 2,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "shared": {
+      "startTime": "2026-09-05T20:33:03.805Z",
+      "duration": 66229.492,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "canonical": {
+      "startTime": "2026-09-05T20:57:16.439Z",
+      "duration": 75423.60299999999,
+      "expected": 26,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "desktop": "cargo check --locked passed",
+    "productionAudit": "0 vulnerabilities",
+    "diffCheck": "passed",
+    "visualScope": "Accepted Full/Lite runtime preserved byte-for-byte as Git objects, excluding coordinated version metadata",
+    "webReferenceProject": {
+      "passed": 493,
+      "failed": 0,
+      "files": 49
+    },
+    "documentationEol": "Packaging attributes retain LF for RELEASE_CHECKLIST.md, preserving the existing documentation test without editing its assertion."
+  },
+  "ci": {
+    "runId": 33991271551,
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33991271551",
+    "headSha": "8442b79db11a59e23f23c59f213116e7b8f54592",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 101373826857,
+        "name": "desktop",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33991271551/job/101373826857"
+      },
+      {
+        "id": 101373827057,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33991271551/job/101373827057"
+      }
+    ]
+  },
+  "web": {
+    "canonicalUrl": "https://maze-so-puzzle.vercel.app/",
+    "verifiedAtUtc": "2026-09-05T20:57:03.166Z",
+    "allBytesMatch": true,
+    "files": [
+      {
+        "path": "/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 1070,
+        "sha256": "1cbf3cbdab0c22d294ddb2f65721e915ecbcaa422dccf64aa9040e7d067212b8",
+        "localSha256": "1cbf3cbdab0c22d294ddb2f65721e915ecbcaa422dccf64aa9040e7d067212b8",
+        "match": true
+      },
+      {
+        "path": "/assets/index-DFSTcLiu.js",
+        "status": 200,
+        "contentType": "application/javascript; charset=utf-8",
+        "bytes": 563683,
+        "sha256": "b729083bd940e6f48b45687c47a6d81133e21601d4dcc90c6ea1b3416f25569b",
+        "localSha256": "b729083bd940e6f48b45687c47a6d81133e21601d4dcc90c6ea1b3416f25569b",
+        "match": true
+      },
+      {
+        "path": "/assets/index-B5gBig9q.css",
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 116102,
+        "sha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "localSha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "match": true
+      }
+    ],
+    "vercelStatuses": [
+      {
+        "id": 53609530882,
+        "state": "success",
+        "context": "Vercel",
+        "targetUrl": "https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/6XHZa3JELH5SKtUoGc1j2X8Src4c",
+        "createdAt": "2026-09-05T20:50:41Z"
+      }
+    ],
+    "deployments": [
+      {
+        "id": 6285663984,
+        "sha": "8442b79db11a59e23f23c59f213116e7b8f54592",
+        "environment": "Production",
+        "statuses": [
+          {
+            "id": 17878766409,
+            "state": "success",
+            "environment": "Production",
+            "environmentUrl": "https://maze-so-puzzle-38c2xilzc-jasons-projects-6714ffa7.vercel.app",
+            "createdAt": "2026-09-05T20:50:41Z"
+          }
+        ]
+      },
+      {
+        "id": 6285381715,
+        "sha": "8442b79db11a59e23f23c59f213116e7b8f54592",
+        "environment": "Preview",
+        "statuses": [
+          {
+            "id": 17878079704,
+            "state": "success",
+            "environment": "Preview",
+            "environmentUrl": "https://maze-so-puzzle-m4gg2dw3v-jasons-projects-6714ffa7.vercel.app",
+            "createdAt": "2026-09-05T20:20:13Z"
+          }
+        ]
+      }
+    ]
+  },
+  "native": {
+    "status": "pass",
+    "method": "Real production Windows WebView2 connected through local CDP; hidden normal launch, screenshot/DOM/semantic observations; no runtime hook",
+    "fixture": {
+      "level": "lanternlight-labyrinth",
+      "prefix": [
+        "left",
+        "left",
+        "left",
+        "left",
+        "up",
+        "up",
+        "right",
+        "right",
+        "right"
+      ],
+      "direction": "right"
+    },
+    "finalState": {
+      "steps": 10,
+      "position": {
+        "x": 5,
+        "y": 13
+      }
+    },
+    "journeys": [
+      "01-title",
+      "02-existing-profile-home",
+      "03-existing-profile-resume",
+      "04-normal-solver-checkpoint",
+      "05-successful-battle-held",
+      "06-held-resume-released",
+      "07-reopened-home",
+      "08-reopened-saved-run",
+      "verified native resize",
+      "09-minimum"
+    ],
+    "evidence": [
+      {
+        "path": "native/01-title.json",
+        "bytes": 256,
+        "sha256": "f23efff282809428bdf8205a4825603a1a102c43ba18e73e32b152acfeda5337"
+      },
+      {
+        "path": "native/01-title.png",
+        "bytes": 1446059,
+        "sha256": "2740f428698bb9af459ab1f909f43be1aaa4d09c9eed8dd903fa6609dbbb907f"
+      },
+      {
+        "path": "native/02-existing-profile-home.json",
+        "bytes": 528,
+        "sha256": "6deae5e1b43dc978bdaa0eddb84c1a932da7ac0b30cba71f2e8ceb5941aa4b9f"
+      },
+      {
+        "path": "native/02-existing-profile-home.png",
+        "bytes": 1201272,
+        "sha256": "e0e1df5f3a17371550e3603301d4bad303d729e623b59f9929a90ebd9797950b"
+      },
+      {
+        "path": "native/03-existing-profile-resume.json",
+        "bytes": 1445,
+        "sha256": "8acc0d3eabf5c0068001db9baad5129b18d2452ab701d52fe321d98cfba69993"
+      },
+      {
+        "path": "native/03-existing-profile-resume.png",
+        "bytes": 544883,
+        "sha256": "4ba0aa12fdd3744546ea58294df234abb38125bd7a263b2f33a384a87280cdad"
+      },
+      {
+        "path": "native/04-normal-solver-checkpoint.json",
+        "bytes": 957,
+        "sha256": "2f2b449760ffd11374742ce14ba0e60db8bda896d21f2ade18a9ca9f22c49e37"
+      },
+      {
+        "path": "native/04-normal-solver-checkpoint.png",
+        "bytes": 883302,
+        "sha256": "581ddf06763fd3d215c5c20e458f3ba7e8ef6afd3c9ac2b6517b3250f13f941f"
+      },
+      {
+        "path": "native/05-successful-battle-held.json",
+        "bytes": 946,
+        "sha256": "022948cdb1feedf5a8371f316ddc7ee1eb26a8785e0ae58c9f58cc197f2770c8"
+      },
+      {
+        "path": "native/05-successful-battle-held.png",
+        "bytes": 889502,
+        "sha256": "ae573c889f4e4e781d3df06d2b0c201228801979add4d26bc7e36adbd7182a67"
+      },
+      {
+        "path": "native/06-held-resume-released.json",
+        "bytes": 887,
+        "sha256": "29be540732d794c32d1faa5801ef75f67ff89427b4410020d08d3f7476f775d8"
+      },
+      {
+        "path": "native/06-held-resume-released.png",
+        "bytes": 882895,
+        "sha256": "72b0655f79102727781271407277ea1b866b9bb86088bdfe1b50d6a30a07aff6"
+      },
+      {
+        "path": "native/07-reopened-home.json",
+        "bytes": 521,
+        "sha256": "32f466aec5edb66c08b2e84e19abfba37a50aa6a79df1958fbca5b6462d6bb70"
+      },
+      {
+        "path": "native/07-reopened-home.png",
+        "bytes": 1200715,
+        "sha256": "a35f22190bc3d187f19c5f48b6bc98c29a699a37c48c9cc6e1cdf4e2ae8702b4"
+      },
+      {
+        "path": "native/08-reopened-saved-run.json",
+        "bytes": 880,
+        "sha256": "4f0cbc35ec118d69101f43420dd073ec57746a37c8513d76a3e3dae726b6aad4"
+      },
+      {
+        "path": "native/08-reopened-saved-run.png",
+        "bytes": 879761,
+        "sha256": "f3373b20f1aebd0fde3b69e0434368f315ebb0dd8f2e5a4399752120637a7a36"
+      },
+      {
+        "path": "native/09-minimum.json",
+        "bytes": 740,
+        "sha256": "f1bcba914330757a15b132795c782874b52532a152d5493ce715458a9c073c2c"
+      },
+      {
+        "path": "native/09-minimum.png",
+        "bytes": 502034,
+        "sha256": "b67aa7f284a1ceedf73536f6d7c8ce38d7985dcab925737f4286cc8a67cceede"
+      },
+      {
+        "path": "native/summary.json",
+        "bytes": 8563,
+        "sha256": "6dc7e283fde38b4fcf794c04f0dc0adfcaa6486a62c5907c1b6d2ac8e08460e1"
+      }
+    ],
+    "qualification": "Functional smoke only; no Tauri timing, offline, signing, installer or clean-machine claim"
+  },
+  "profile": {
+    "identifier": "com.ame.mazesopuzzle.preview.fpui1",
+    "compatiblePreview": "v0.22.0 FP-UI1",
+    "smokeIsolation": "Verified private copy of existing preview WebView profile. Original files were independently hash-compared after smoke and remain unchanged.",
+    "copiedFiles": 334,
+    "copiedBytes": 31636399,
+    "privateRawProfilePublished": false
+  },
+  "rejectedAttempts": [
+    {
+      "scope": "Clean checkout project checks",
+      "result": "492/493 twice: existing LF-literal documentation test encountered Windows CRLF; first checkout-index attempt left the file unchanged. Restored only checkout line endings to committed LF, verified identical Git blob, focused 2/2 and final full 493/493 passed. No test was weakened."
+    },
+    {
+      "scope": "External browser-tool setup",
+      "result": "Initial loader preflights were corrected for Windows file URLs and ESM/CJS resolution; no release dependencies changed."
+    },
+    {
+      "scope": "First shared cohort",
+      "result": "Journey assertions completed, then external @playwright/test/package.json metadata resolution failed. Added external NODE_PATH and reran unchanged cohort in fresh output: 1/1 pass."
+    },
+    {
+      "scope": "Release source-integrity helper",
+      "result": "Initial helper incorrectly normalized third-party base64 0.22.1. Restricted Cargo normalization to maze-so-puzzle root row; exact-source assertion passed without source changes."
+    },
+    {
+      "scope": "Native launcher setup",
+      "result": "First external test collection lacked a type:module package marker. Added it only to the external harness; no app was tested or changed in that attempt. Actual native smoke then passed 1/1 in 24.5 seconds."
+    },
+    {
+      "scope": "Strict canonical HTML comparison",
+      "result": "Initial production snapshot matched JS/CSS but Windows CRLF-checkout HTML differed from Vercel LF HTML. Kept native artifact immutable, built/tested a second clean LF checkout at the same SHA, and required exact raw canonical HTML/JS/CSS parity. No normalized-byte pass was substituted."
+    },
+    {
+      "scope": "Web-reference checkout EOL",
+      "result": "The worktree creation still produced Windows CRLF despite the temporary autocrlf override, causing the same documentation check to fail 492/493. Explicitly restored entry HTML and checklist to committed LF bytes, verified identical Git objects/clean status, then reran unchanged full checks. The failed reference report is retained."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/source-integrity.json",
+      "bytes": 1751,
+      "sha256": "6d3312b84f56c9f8f22da45e348d254de77f0527a8843e79c47942377e25e11b"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/project-tests.json",
+      "bytes": 195447,
+      "sha256": "f515e457918e11c772666ea635b8e6761861d8873f50f64ee78c5c4eb43e368f"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/project-tests-lf-checkout.json",
+      "bytes": 195436,
+      "sha256": "3195df39141e7011bbe15c15ebc3a8448e7dd635234bbe21cb3cc5a4d1a87448"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/project-tests-final.json",
+      "bytes": 194330,
+      "sha256": "798f3ebb53a4c439574171ea2d0827cc51994a20f41a7176bcdbe9415fec9247"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/project-check-final.log",
+      "bytes": 1490,
+      "sha256": "8199c923db22cc391f5b022925446bc499f46d446c102f332931dd2238cd5f08"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/build.log",
+      "bytes": 959,
+      "sha256": "03b4dccffe07edcb47981f4de1eaaef3963623105c995d0abfa14f2214ac3fb7"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/perf-check.log",
+      "bytes": 1162,
+      "sha256": "2db634fafd620d4a068672271bca277d63e6ef75be79554aadb3362a3d9982b1"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/audit.log",
+      "bytes": 25,
+      "sha256": "4b02d4a3c23d969c46bd2041360f80bfcb1fe760d9db864009acdd710f9de601"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/input/playwright-results.json",
+      "bytes": 146121,
+      "sha256": "4c8592ba3d9ee9587e28d9f08101977d21330189a9ab9b540a79cc9ad358d092"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/shared/playwright-results.json",
+      "bytes": 6372,
+      "sha256": "b3dd36196e2211826cc2c04dad7ded77af28396ead05f3004bf67eef63ec7469"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/shared-final/playwright-results.json",
+      "bytes": 3298,
+      "sha256": "366e1b7ff86b9b9aa5b0cde25d95c40a4002de7429662e42c305c4d7a1bfe80e"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/shared-final/browser-cohort.json",
+      "bytes": 53205,
+      "sha256": "497e81f9436d06e0e216b7d15b0ef776e17a549b1d7b91c3d43ce46a8d2225c3"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/desktop-check.log",
+      "bytes": 8020,
+      "sha256": "173be1fd66f3a02b70e8e381d2d0b6a6a40e1a252513728f079958b6846400a7"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/native-build.log",
+      "bytes": 9430,
+      "sha256": "168aae9610f62a7e20baa7d02ac7bafb314d4c8d84a626e549c447ccd7e0effc"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/portable-stage.json",
+      "bytes": 1236,
+      "sha256": "851ce41f711d8cc84b88b370b2a4de9e541493a5e41bc7e6dcd6eedf30bf0f06"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/native-results.json",
+      "bytes": 3039,
+      "sha256": "581fd1fbe48a12657a1f4f221b6b0f863c848b126980a40c728f96aadd6dabd5"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/native/summary.json",
+      "bytes": 8563,
+      "sha256": "6dc7e283fde38b4fcf794c04f0dc0adfcaa6486a62c5907c1b6d2ac8e08460e1"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/canonical/playwright-results.json",
+      "bytes": 38731,
+      "sha256": "b52c22edefbfbb306a95de71c94863f39893bac55cc6bc76e6e4e8c846ce1375"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/web-verification.json",
+      "bytes": 31758,
+      "sha256": "c16c10d09739e9cd0026a9175817f9c6b0c72b2b9fd12287e00b377a4199b5cb"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/playwright-loader.mjs",
+      "bytes": 639,
+      "sha256": "d72eb91f5c5dbc668cb6318e63d7eee11a8251caa93c7da2186479b91abef737"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/native.pw.ts",
+      "bytes": 6315,
+      "sha256": "7690cf9d2ac5c43bc989578be8510473d12ef97fed416cbd77991fde58ceee60"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/resize-native.ps1",
+      "bytes": 1798,
+      "sha256": "ba2bb4ffa7631e2c2b62ba4145d8db449d1d363c8ec34ef86e20cf11760c392a"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/canonical.config.mjs",
+      "bytes": 454,
+      "sha256": "048c9567cf8d3e4b5cc69373d64499f7f411f235dc2a5c8f109c6f3f85ea2087"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/webref-npm-ci.log",
+      "bytes": 148,
+      "sha256": "d537a7a60c99a46be17979e9cf6ff5e2783780bbf417eedd2c00fdc9315c37cf"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/webref-project-tests.json",
+      "bytes": 195762,
+      "sha256": "114239d4ccc9ed181f00583f6abd838d6d1318aed5c3c1a9e83ba0be8a32665d"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/webref-project-tests-final.json",
+      "bytes": 194602,
+      "sha256": "bee3dca48162032285e36e3dc52dec0c8ed720de5dc6cd9c2cdb1d7c89131208"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/webref-build.log",
+      "bytes": 964,
+      "sha256": "89c98c21ce73fd0a2adba2e98be3294e1b6c89a482939468e45b0e3e8f51c905"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/webref-perf.log",
+      "bytes": 1177,
+      "sha256": "a2590744f5b7bf198abbe99f85ec3ba2d7a7a6fd17130830af4b97aecafd4a7a"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/native-test.log",
+      "bytes": 356,
+      "sha256": "268769975ef38d030dbd625134e3b33da556f79dc199d2f43aa4a82e303d2e85"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/native-test-run2.log",
+      "bytes": 358,
+      "sha256": "ddf91bfef4eb987cf7df7f1ba780df3cedb5fe77cd8f15d3115aa13516c99d3b"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/native-results-setup.json",
+      "bytes": 2045,
+      "sha256": "876ebaca4ae2dac831fa8f54fb7c815b77c8c8b7fb0c133e46149259739562f1"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/profile-unchanged.log",
+      "bytes": 81,
+      "sha256": "f41b7f4706e674e8e4a1c0914a5cb30946ab458b07da315d4dc671d7d79484b2"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0221/canonical-version/result.json",
+      "bytes": 239,
+      "sha256": "793b8849b2df263330a647ce1edc4acfc89e39367a2144cb2ca0e8358103a7c0"
+    }
+  ],
+  "publication": {
+    "status": "FROZEN_BEFORE_GITHUB_UPLOAD",
+    "tag": "v0.22.1",
+    "tagTarget": "8442b79db11a59e23f23c59f213116e7b8f54592",
+    "releaseUrl": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1",
+    "assetCount": 4,
+    "note": "Later publication receipt binds packaging documentation SHA and independently downloaded public asset bytes; do not rewrite this manifest."
+  },
+  "openGates": [
+    "Affected physical iPad/Safari fresh/sustained Full+Full, Lite+Full, Lite+Reduced comparison in the same large 23x23 maze with about five followers.",
+    "Full sustained performance remains mixed/report-only: original unexplained recovery timeout, worse Full p95/p99, occasional tails and missing >50ms causal attribution remain open.",
+    "Existing soaks cover one corridor in one maze; multi-maze music/resource retention and timed Tauri/WebView2 remain unqualified.",
+    "Two authored jump-door/jump-combat fixtures remain unavailable; actual jump-rescue coverage does not fabricate those variants.",
+    "Phone/Book/victory, pace modes, stationary rescue, Tessera and Alex are separate future work.",
+    "Human/family acceptance, clean-machine install, signing, offline, controller/TV/Steam Deck and accessibility speech qualification remain open.",
+    "Agent 04 and V22-UI-01 remain held. Green device comparison routes to ART-HOTFIX-01 then V22-PLAY-01; continued Lite+Reduced stutter routes to V22-PERF-02."
+  ],
+  "rollback": {
+    "portable": "Retain immutable v0.22.0 FP-UI1 68e303d portable; close preview before switching; same profile namespace and unchanged schemas; preserve profile backup.",
+    "web": "Redeploy prior verified runtime 68e303da680d5aec0ba71154949c5a2a0d1697ae after coordination; canonical URL moves. No shared-history reset.",
+    "source": "Use a separate reviewed revert transaction; do not overwrite main, frozen evidence or prior binaries."
+  }
+}

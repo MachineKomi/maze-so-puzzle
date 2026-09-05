@@ -21,6 +21,14 @@ release/FP-UI1-v0.22.0-manifest.json -text
 release/FP-UI1-v0.22.0-PLAYTEST.md -text
 release/FP-UI1-v0.22.0-SHA256SUMS.txt -text
 
+# Freeze V22-PERF1 attachments exactly as uploaded and independently downloaded.
+release/V22-PERF1-v0.22.1-manifest.json -text
+release/V22-PERF1-v0.22.1-PLAYTEST.md -text
+release/V22-PERF1-v0.22.1-SHA256SUMS.txt -text
+
+# The documentation consistency contract intentionally checks an LF-wrapped phrase.
+docs/RELEASE_CHECKLIST.md text eol=lf
+
 # Independent review snapshots retain the author's exact bytes, including EOL.
 docs/reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review.md -text
 docs/reviews/external/2026-09-05-claude-opus5-maze-so-puzzle-review-v4.md -text
