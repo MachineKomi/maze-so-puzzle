@@ -1,5 +1,28 @@
 # Maze so Puzzle — playtest backlog
 
+**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the61-row
+Human correction. Project488, art131, build/locked desktop/static gates passed;
+full browser r6 passed62/63, its observer race passed the5-case r7 retest, and
+all17 final UI/proof cases passed in r8. Exact results/limits are in
+`docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
+Root now owns clean-source portable/web publication. Family feedback and the
+fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
+
+**Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
+v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
+movement and deliver a new, separately versioned playable preview. Read
+`docs/plans/UI-03-fp-ui1-correction.md` and
+`docs/playtests/2026-09-05-v021-ui-correction-intake.md` (61 acceptance rows).
+Landscape is primary; maximize the existing board without Big/Normal; preserve
+smooth first-tap/held travel (gentle acceleration allowed). Advance bounded Book
+pages/cards, grey locked achievement art, focus/victory, hybrid thumb pad and
+travel acting into this correction. Root integrates disjoint fresh implementation/review agents under the
+Human’s subsequent explicit parallel-work authorization.
+Agent04 still waits for corrected preview feedback. Future specialists start in
+fresh tasks with current prompts. Earlier STOP/candidate/active-Agent01 paragraphs
+below are history, not current execution instructions.
+
+
 **Latest Human result, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;
 many regressions/bugs and missed requirements reported. PT25 and affected UI
 slices remain open pending concrete feedback. Root paused for discussion;
@@ -240,10 +263,10 @@ remain necessary where called out below.
 | `PT-20260904-31` | AI-generated voice-acting exploration | Epic | Needs decision | Not retested | Plan 14 opportunity review; explicit follow-on only |
 | `PT-20260905-32` | Adjustable camera zoom: 4–7 tiles | P1 | Routed | Not retested | Future Plan 08 after accepted UI/MOVE-01/04/02; Plan 07B requalifies |
 | `PT-20260905-33` | Faint moving dark viewport edge | P1 | Routed | Not retested | Plan 04 diagnosis/fix; root MOVE-01 observes regression |
-| `PT-20260905-34` | Beautiful modality-aware focus | P1 | Routed | Not retested | UI-02 appearance, Plan 08 input policy |
-| `PT-20260905-35` | No-scroll victory and individual friend dances | P1 | Routed | Not retested | Plan 02 choreography, UI-02 composition, Plan 05 optional frames |
+| `PT-20260905-34` | Beautiful modality-aware focus | P1 | UI-03 candidate | Browser reviewed; Human pending | Root UI-03; UI-02 remaining polish; Plan08 input policy |
+| `PT-20260905-35` | No-scroll victory and individual friend dances | P1 | UI-03 candidate | Normal landscape checked; explicit compact/text differences | Root UI-03; Plan02 broader lifecycle, UI-02 remaining polish, Plan05 frames |
 | `PT-20260905-36` | Bubble Ring Blade held layering | P1 | Routed | Not retested | Root art/metadata preflight for 04; Plan 05 consumes |
-| `PT-20260905-37` | Book pages, Bestiary and lore cards | P1 | Routed | Not retested | UI-02 with root discovery/save review; Plan 09 final content |
+| `PT-20260905-37` | Book pages, Bestiary and lore cards | P1 | UI-03 candidate | Browser/save checks; Human pending | Root UI-03 schema6 and pages; UI-02 remaining polish; Plan09 final content |
 | `PT-20260905-38` | Crisp sprites throughout programmatic motion | P1 | Routed | Not retested | Plan 05; 04/02 transform discipline and 07B qualification |
 | `PT-20260905-39` | Bounded six-sprite style review | P1 | Routed; visual decision pending | Not retested | Root art return before affected Plan 05 production |
 | `PT-20260905-40` | Followers stay on the actual corridor trail | P1 | Candidate | Automated | Root MOVE-01; FP-UI1 retest; 05/10 consume |
@@ -2019,8 +2042,10 @@ CSS sheen.
   containing the correct presentation-scale catalogue rendition, achievement
   name and earned description. It never enlarges a small thumbnail through
   visibly soft browser scaling.
-- A locked achievement cannot reveal the full sticker or hidden descriptive
-  content. Selecting it retains the established locked-state explanation.
+- **UI-03 Human supersession:** a locked achievement shows recognizable grey
+  real artwork and its earning goal. The earlier concealment requirement is
+  historical. Earned cards gain colour and the large admiration surface;
+  undiscovered bestiary identities retain their separate mystery treatment.
 - The full-motion recipe uses a restrained moving rainbow/foil highlight that
   respects the sticker's authored shape and material masks; it must not wash out
   the illustration, text, contour or cream cutline.
@@ -2214,6 +2239,8 @@ may authorize a separately scoped implementation.
 
 ### PT-20260905-32 — Adjustable camera zoom
 
+**UI-03 update, 2026-09-05:** Current UI-03 contract: Big/Normal is removed; this later zoom feature still uses the 4/5/6/7 enum, default6, independently of layout. All future tests use the maximized landscape shell. No zoom is included in v0.22.0.
+
 - Type: Camera framing, comfort and accessibility preference
 - Impact: P1 — high value
 - Delivery: Routed; future implementation, excluded from MOVE-01 and FP-UI1
@@ -2262,7 +2289,7 @@ This intake records requirements, not a completed zoom feature.
   interpolation owner. Keep Ame in view, clamp to map edges and tiny/narrow maps,
   preserve tile/sprite aspect ratio and the same stable odd/even centring rule.
   Where the level is smaller than the selected span, retain the stored choice
-  and use a documented effective clamp. Normal/Big, resize, DPR changes and
+  and use a documented effective clamp. maximized landscape layout, resize, DPR changes and
   platform aspect differences never silently overwrite the preference.
 - Recompute camera bounds, culling gutters, fog masks, lighting, effect anchors
   and pointer hit geometry together. A menu selection clears any held input and
@@ -2277,7 +2304,7 @@ This intake records requirements, not a completed zoom feature.
 - Prove 4/5/6/7 on large, small and narrow mazes, at corners/edges and near fog,
   with menu/open-close, travel, portal/jump, restart, resume and layout changes.
   Compare the same route and reveal history across choices. Cover all required
-  viewport geometries, Normal/Big and a representative DPR/motion/input set.
+  viewport geometries, maximized landscape layout and a representative DPR/motion/input set.
   Demonstrate no extra engine move, save reward, discovery or stale hit target.
 - Plan 07B measures Wide's larger visible workload and Close's larger rendered
   sprites/filters at DPR 1/2 against the current allocations and travel baseline.
@@ -2297,11 +2324,13 @@ This intake records requirements, not a completed zoom feature.
 - Acceptance: reproduce with stable IDs `rainbow-power-parade` and
   `twilight-treasure-loop`, capture stationary/held/turning/edge-clamped views,
   separate camera, fog/culling, terrain, light-mask and ambient-decoration
-  hypotheses. No detached line, exposed gutter or moving seam across Normal/Big,
+  hypotheses. No detached line, exposed gutter or moving seam across maximized landscape layout,
   DPR 1/2 and quality/motion modes. Prove any identified layer correction without
   removing intended light/depth or changing discovery. Cause remains unknown.
 
 ### PT-20260905-34 — Beautiful modality-aware focus
+
+**UI-03 update, 2026-09-05:** UI-03 now implements the restrained focus appearance and component/modality behavior. Browser evidence is in the UI-03 root review; controller/couch and Human judgment remain. UI-02 consumes this implementation rather than rebuilding it.
 
 - Type/impact: Interaction appearance and accessibility; P1.
 - Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 3.
@@ -2318,13 +2347,15 @@ This intake records requirements, not a completed zoom feature.
 
 ### PT-20260905-35 — No-scroll victory and individual friend dances
 
+**UI-03 update, 2026-09-05:** UI-03 now implements the ordinary no-scroll victory composition, finite confetti and32 individual dance signatures. The current root/dialog reviews explicitly show short-phone omissions of decoration and accessible reading overflow at enlarged text. Those concrete differences await Human disposition; do not claim literal all-content/no-scroll at every text setting. Plan02/05 extend the accepted result.
+
 - Type/impact: Completion composition and delight; P1.
 - Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 4.
 - Owners: Plan 02 celebration timeline and distinctive programmatic dance
   profiles; UI-02 final composition; Plan 05 optional additional sprite frames.
 - Acceptance: the victory popup never scrolls and all of its content remains
   visible. Measure maximum friends, long legitimate text/reward states,
-  generated/tester/finale contexts, safe areas, Normal/Big and enlarged text.
+  generated/tester/finale contexts, safe areas, maximized landscape layout and enlarged text.
   No clipping, unreadable shrinking or undersized controls. If minimum-phone
   geometry at 200% conflicts, root presents an actual layout/constraint to the
   Human; paging or hidden details cannot silently waive simultaneous visibility.
@@ -2348,6 +2379,8 @@ This intake records requirements, not a completed zoom feature.
   hand/body occlusion. Preserve Ame and the approved weapon identity.
 
 ### PT-20260905-37 — Book pages, Bestiary and lore cards
+
+**UI-03 update, 2026-09-05:** UI-03 now supplies the five Book pages, large lore cards and schema6 bestiary ledger. Legitimate normal-play exposure persists; tester/catalogue loading does not. Legacy saves receive no invented encounters, and future schemas/active-run bytes are protected. UI-02 owns only remaining polish; Plan09 owns final content.
 
 - Type/impact: Persistent discovery and collection UI; P1.
 - Delivery: Routed. Verification: Not retested. Source: wishlist items 10/11.
@@ -2374,12 +2407,14 @@ This intake records requirements, not a completed zoom feature.
 
 ### PT-20260905-38 — Crisp sprites throughout programmatic motion
 
+**UI-03 update, 2026-09-05:** UI-03 removes Ame’s pronounced travel hop and gives victory signatures translation/rotation only. Full field-actor animation-cycle crispness across all enemies/friends remains Plan05 work; do not describe this bounded change as all sprite animation completed.
+
 - Type/impact: Animation visual quality; P1.
 - Delivery: Routed. Verification: Not retested. Source: v0.20.1 wishlist item 12.
 - Owner/gate: Plan 05 sampling/pose integration; 04/02 prevent competing nested
   scaling; 07B qualifies actual quality and performance.
 - Acceptance: compare full animation cycles, not just neutral stills, for Ame,
-  friends and enemies at real field sizes, DPR 1/2, Normal/Big, future zoom and
+  friends and enemies at real field sizes, DPR 1/2, maximized landscape layout, future zoom and
   full/reduced/static settings. Audit rendition/decode scale, parent transforms,
   resampling and filter cost. Keep cute stretching/acting while preventing
   persistent softness or shimmer. Do not globally apply pixel-art nearest-
@@ -2403,6 +2438,8 @@ This intake records requirements, not a completed zoom feature.
   No sprite is marked rejected merely by capturing this request.
 
 ### PT-20260905-40 — Followers stay on the actual corridor trail
+
+**UI-03 update, 2026-09-05:** UI-03 retests the accepted corridor trail with the corrected shared160ms first/held travel clock. R4 passed five-friend turns, reversals and off-camera following; broader hardware/Human observation remains.
 
 **Root update, 2026-09-05:** Candidate / Automated supersedes the original status
 fields below. Stable slots and repeated legal breadcrumbs replace camera-selected

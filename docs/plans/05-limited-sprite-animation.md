@@ -1,5 +1,7 @@
 # Plan 05 — Limited Sprite Animation System
 
+**Latest Human-directed correction, 2026-09-05:** UI-03 removes the rapid whole-Ame tile hop and supplies restrained travel acting plus simple distinct victory gestures. Preserve equally smooth first taps/holds and independent actor/camera transforms. This plan still owns approved sprite sequences and the remaining crispness/acting programme; assess actual displayed motion before changing the baseline.
+
 ## 0. Manager-reviewed execution addendum
 
 This track is deliberately late. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the final Art Bible/Ame model sheet, UI/UX spec, Lighting spec, VFX Bible, Controls spec, this plan in full, and current code before changing anything. Execution is blocked until Plans 07A, 06, 03, root checkpoint 03M, 01, the pre-FP-UI1 movement-comfort checkpoint, 04, 02, UI-02, and 08 are accepted.

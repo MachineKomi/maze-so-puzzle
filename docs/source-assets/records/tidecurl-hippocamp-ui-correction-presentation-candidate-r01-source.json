@@ -1,0 +1,217 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "tidecurl-hippocamp-ui-correction-presentation-candidate-r01-source",
+  "id": "tidecurl-hippocamp",
+  "artVersion": 2,
+  "family": "friend",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui-correction-approved-actor-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-14-hippocamp-edge-v02",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/PROMPTS.md",
+        "sha256": "b0d0ef50675dd84262275cb29a406cc43a5b5adb3198d1047e06810ec442236a"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "comparison-only",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-tidecurl-hippocamp-v01-candidate-a-matte-01-generator-original.png",
+          "sha256": "f691ad7d0fb83e79a5cb8b2ebd6af5b556a13bc8d25c0dc06ba55bc11bb07faf"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-33855ae4-c8e9-4b74-8ba3-4ede1ed8dc71.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/friend-tidecurl-hippocamp-v02-edge-refine-a-matte-01-generator-original.png",
+          "sha256": "1f4c530e4375c4aeae8ab3b2a3b07f2bb53647030118f6e62bc382e7c3edcd85",
+          "bytes": 1534151,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/PROMPTS.md",
+      "sha256": "b0d0ef50675dd84262275cb29a406cc43a5b5adb3198d1047e06810ec442236a"
+    },
+    "outputIds": [
+      "exec-33855ae4-c8e9-4b74-8ba3-4ede1ed8dc71.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/friend-tidecurl-hippocamp-v02-edge-refine-a-matte-01-generator-original.png",
+      "sha256": "1f4c530e4375c4aeae8ab3b2a3b07f2bb53647030118f6e62bc382e7c3edcd85",
+      "bytes": 1534151,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-14-hippocamp-edge-v02 in docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "tidecurl-hippocamp-friend-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/tidecurl-hippocamp-v02-presentation-512-r01.webp",
+      "sha256": "21b7c5c082f17dcdefae32cda36549eb81d1551eb220d018dc270ae5744f27cf",
+      "bytes": 122764,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "friend-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "floating-actor",
+    "pivot": [
+      0.5,
+      0.84
+    ],
+    "visibleBounds": [
+      0.228515625,
+      0.080078125,
+      0.541015625,
+      0.859375
+    ],
+    "safeInset": [
+      0.080078125,
+      0.23046875,
+      0.060546875,
+      0.228515625
+    ],
+    "floatCenter": [
+      0.50960325,
+      0.51434223
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/friend-tidecurl-hippocamp-v02-edge-refine-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "friend-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/tidecurl-hippocamp-v02-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "maxEncodedBytes": 122764,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        226,
+        5,
+        178
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.1,
+        0.08,
+        0.9,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "script": "scripts/art_pipeline/ui_actor_presentation_candidates.py",
+      "description": "Rebuilt approved optical bytes exactly, then applied the same approved source extraction and family registration at 512px. No generated redraw, source alteration or optical upscale."
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response.",
+    "Catalogue-only rescue friend; never an enemy.",
+    "Post-v0.20.1 authored placement now gives this species at least one Solo-accessible rescue in the existing sixteen-maze campaign; Plan 09 owns the expanded 24-maze progression and thematic ecology refinement."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Remove the actor presentation extension from the UI catalogue. Original approved optical assets and their records remain unchanged and available."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+    "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui-correction-actor-presentation-approval.json",
+    "evidenceSha256": "6a959f164c00c21b2f5291114b94fd2818a5393a2c18806fc7ac8a3662cae4ea"
+  }
+}

@@ -281,6 +281,34 @@
       "rollbackPoint": "Revert the complete MOVE-01 source and integration checkpoint to accepted UI 372e7d983b00ae6ea929ef51fd78988fec0b9672, restoring its CSS travel owner and follower implementation together. Retain save readers and all approved media; do not retain two competing travel owners.",
       "dependencies": "Accepted Plan01 UI, root-owned MOVE-01 authorization and PT40 cosmetic follow correction; unchanged engine, save, six-tile view and held cadence. The final Linux CI gate and native/WebView journey must pass before release.",
       "notes": "Total JS ceiling144607. Candidate CSS16238 is 40 bytes below UI; public156979636 is unchanged. Timing remains report-only; family comfort and physical device qualification remain explicit playtest gates."
+    },
+    {
+      "id": "art-ui03-large-actor-cards-and-alpha-corrections",
+      "owner": "art",
+      "status": "approved",
+      "compressedJsBytes": 0,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 8008395,
+      "reason": "Root inspected all four 208px light/dark actor proof pages, both Home pocket comparisons and the Tessera recovery comparison. Approve exact additive delivery for 44 immutable-source actor renditions, Home v05 WebP/PNG, and the separately masked Tessera r02 repair. Tessera r01 is retained dormant; only r02 is selected for contextual display. This is technical rendition/alpha approval, not a new character identity approval.",
+      "evidencePath": "docs/source-assets/publication/ui-correction-art-delivery-request.json",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Restore Home pointer to v04 and remove the UI actor/Tessera presentation extensions from src/ui/art.ts, preserving schema6 progress and all versioned files. Restore no historical UI layout. Retire nothing until Plan12 authority.",
+      "dependencies": "Human UI03 correction, explicit precise-alpha pipeline choice, hash-bound root publication decisions, and all approved immutable sources.",
+      "notes": "47 new public files total 8,008,395 bytes. Home successful WebP does not fetch its PNG fallback; actor512 assets load for a mounted contextual viewer rather than as a warmup batch. Decoded sums in source reports are upper bounds across files, not concurrent residency. Root separately measures/allocates bundled JavaScript. Standard art:check and native/web delivery must still pass."
+    },
+    {
+      "id": "ui-ui03-family-interface-and-interaction-correction",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 7950,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Root approves the bounded Human-directed UI03 correction: five Book pages and original lore, truthful schema6 discovery with future-profile protection, stable presentation fallback and native DPR signals, quick mute, anchored thumb pad, first-step cadence/clock correction, dialog/input safeguards and real remaining-height HUD fitting. The final r6 production candidate measures 152377 gzip9 JS bytes, 7770 above the prior 144607 ceiling. The initial 7100 allowance was insufficient after final overflow and fallback corrections; the reviewed 7950 allocation leaves 180 bytes for cross-platform compression variation, not unrelated future work.",
+      "evidencePath": "docs/reviews/2026-09-05-ui03-root-review.md",
+      "reviewBy": "2026-10-05",
+      "rollbackPoint": "Before external distribution, revert the UI03 runtime batch to fef5e56 only as a coordinated rollback while retaining all immutable art. After distribution, retain schema6 discovery and forward-schema readers and evolve the presentation forward; never delete or downgrade saved Book/active-run data. An art-only rollback uses its separate ledger entry.",
+      "dependencies": "Human UI03 correction and parallel-work authorization; exact-root review of the61-row intake; approved-source actor/Home publication under a separate public-byte allocation; actual production and native release checks.",
+      "notes": "New JS ceiling 152557. Candidate CSS 23099 remains below 30227 with no allocation. Public ceiling 164988031 includes the separately approved 8008395 art bytes. No dependency added. The Book mounts one page, contextual large art loads on demand, and scene animation does not continuously rerender React. The bounded HUD observer runs on layout changes, not each movement frame. This static allocation is not timing, physical-device or family acceptance."
     }
   ]
 }

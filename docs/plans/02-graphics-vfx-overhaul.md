@@ -1,5 +1,7 @@
 # Graphics and VFX overhaul plan
 
+**Latest Human-directed correction, 2026-09-05:** UI-03 advances bounded victory confetti/friend dances and removes whole-board combat scaling. Preserve its motion preferences, stable scene geometry and joyful static fallback. This plan still owns the richer coordinated VFX programme; do not reintroduce camera punches or use timing reductions to erase delight without evidence.
+
 ## 0. Manager-reviewed execution addendum
 
 This addendum is execution authority and supersedes any conflict in the planning body. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and the implementation-time Art Bible, UI/UX spec, Lighting spec, and Gameplay spec before changing code.

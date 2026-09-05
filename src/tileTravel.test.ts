@@ -1,8 +1,25 @@
 import { describe, expect, it } from "vitest";
 import { getCameraWindow } from "./game/exploration";
-import { MAX_TRAVEL_LAG_MS, TileTraveller, travelCamera } from "./tileTravel";
+import { MAX_TRAVEL_LAG_MS, TAP_TRAVEL_MS, TileTraveller, travelCamera } from "./tileTravel";
 
 describe("committed tile presentation",()=>{
+  it("animates the first tap and a repeated tile through the same intermediate positions",()=>{
+    const tap=new TileTraveller({x:3,y:3},0);
+    tap.retarget({x:4,y:3},0);
+    const repeated=new TileTraveller({x:2,y:3},-TAP_TRAVEL_MS);
+    repeated.retarget({x:3,y:3},-TAP_TRAVEL_MS);
+    repeated.retarget({x:4,y:3},0);
+    for(const time of [16,40,80,120]) {
+      const single=tap.sample(time), held=repeated.sample(time);
+      expect(single).toEqual(held);
+      expect(single.x).toBeGreaterThan(3);
+      expect(single.x).toBeLessThan(4);
+      expect(travelCamera({width:15,height:15},single,getCameraWindow({width:15,height:15},{x:4,y:3})).left)
+        .toBeCloseTo(single.x-2,8);
+    }
+    expect(tap.sample(TAP_TRAVEL_MS)).toEqual({x:4,y:3});
+    expect(repeated.sample(TAP_TRAVEL_MS)).toEqual({x:4,y:3});
+  });
   it("keeps corners, acknowledges early reversal, and lands exactly",()=>{
     const t=new TileTraveller({x:1,y:1},0);
     t.retarget({x:2,y:1},0,160); t.retarget({x:2,y:2},64,160);
@@ -29,7 +46,10 @@ describe("committed tile presentation",()=>{
       target=n%2 ? {...target,x:target.x+1} : {...target,y:target.y+1};
       t.retarget(target,n*64);
       expect(t.remainingMs).toBeLessThanOrEqual(MAX_TRAVEL_LAG_MS+.001);
-      expect(t.pendingDistance).toBeLessThan(3);
+      // Deliberately oversupply at 64ms (normal input now commits at 160ms).
+      // A 192ms recovery window approaches three tiles; retain the time and
+      // cardinal-path bounds while allowing floating-point equality here.
+      expect(t.pendingDistance).toBeLessThanOrEqual(3+1e-8);
       expect(Number.isInteger(t.point.x)||Number.isInteger(t.point.y)).toBe(true);
     }
     expect(t.sample(65000)).toEqual(target);

@@ -1,0 +1,211 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "fawn-ui-correction-presentation-candidate-r01-source",
+  "id": "fawn",
+  "artVersion": 3,
+  "family": "friend",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui-correction-approved-actor-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-14-fawn-edge-v03",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/PROMPTS.md",
+        "sha256": "b0d0ef50675dd84262275cb29a406cc43a5b5adb3198d1047e06810ec442236a"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "comparison-only",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-03-friends/friend-fawn-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "2ebc29ae49c74e9bb6a8b69e26c70c013d7d8adc54cc625b54fc5a09ed933887"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-a61aff1c-d5ac-42eb-9666-41d156f3fe3f.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/friend-fawn-v03-edge-refine-a-matte-01-generator-original.png",
+          "sha256": "82103f1fc2dcd6a53f87b551e8f10bb747cb20caaef458bbe916c278ad0a03fe",
+          "bytes": 1404142,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/PROMPTS.md",
+      "sha256": "b0d0ef50675dd84262275cb29a406cc43a5b5adb3198d1047e06810ec442236a"
+    },
+    "outputIds": [
+      "exec-a61aff1c-d5ac-42eb-9666-41d156f3fe3f.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/friend-fawn-v03-edge-refine-a-matte-01-generator-original.png",
+      "sha256": "82103f1fc2dcd6a53f87b551e8f10bb747cb20caaef458bbe916c278ad0a03fe",
+      "bytes": 1404142,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-14-fawn-edge-v03 in docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "fawn-friend-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/fawn-v03-presentation-512-r01.webp",
+      "sha256": "5047d92387c298af92ab0107590d2ce623fa28d0017966a279da2e2d0f80f52d",
+      "bytes": 121740,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "friend-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "grounded-actor",
+    "pivot": [
+      0.5,
+      0.9
+    ],
+    "visibleBounds": [
+      0.16015625,
+      0.080078125,
+      0.6796875,
+      0.859375
+    ],
+    "safeInset": [
+      0.080078125,
+      0.16015625,
+      0.060546875,
+      0.16015625
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-14-friend-edge-refinements/friend-fawn-v03-edge-refine-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "friend-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/fawn-v03-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "maxEncodedBytes": 121740,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        9,
+        231,
+        21
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.1,
+        0.08,
+        0.9,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "script": "scripts/art_pipeline/ui_actor_presentation_candidates.py",
+      "description": "Rebuilt approved optical bytes exactly, then applied the same approved source extraction and family registration at 512px. No generated redraw, source alteration or optical upscale."
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Remove the actor presentation extension from the UI catalogue. Original approved optical assets and their records remain unchanged and available."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+    "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui-correction-actor-presentation-approval.json",
+    "evidenceSha256": "6a959f164c00c21b2f5291114b94fd2818a5393a2c18806fc7ac8a3662cae4ea"
+  }
+}

@@ -1,6 +1,29 @@
 # Integrated implementation roadmap through final convergence
 
-**Latest gate, 2026-09-05: HOLD.** The Human rejects the overall FP-UI1/v0.21.0 UI
+**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the61-row
+Human correction. Project488, art131, build/locked desktop/static gates passed;
+full browser r6 passed62/63, its observer race passed the5-case r7 retest, and
+all17 final UI/proof cases passed in r8. Exact results/limits are in
+`docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
+Root now owns clean-source portable/web publication. Family feedback and the
+fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
+
+**Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
+v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
+movement and deliver a new, separately versioned playable preview. Read
+`docs/plans/UI-03-fp-ui1-correction.md` and
+`docs/playtests/2026-09-05-v021-ui-correction-intake.md` (61 acceptance rows).
+Landscape is primary; maximize the existing board without Big/Normal; preserve
+smooth first-tap/held travel (gentle acceleration allowed). Advance bounded Book
+pages/cards, grey locked achievement art, focus/victory, hybrid thumb pad and
+travel acting into this correction. Root integrates disjoint fresh implementation/review agents under the
+Human’s subsequent explicit parallel-work authorization.
+Agent04 still waits for corrected preview feedback. Future specialists start in
+fresh tasks with current prompts. Earlier STOP/candidate/active-Agent01 paragraphs
+below are history, not current execution instructions.
+
+
+**Historical gate before UI-03 authorization, 2026-09-05: HOLD.** The Human rejects the overall FP-UI1/v0.21.0 UI
 after initial playtesting, reporting many regressions and missed requirements.
 Root stopped for discussion; Agent04 and GitHub prerelease publication are held.
 See `../playtests/2026-09-05-fp-ui1-initial-rejection.md`. Do not infer acceptance
@@ -8,7 +31,7 @@ from the successful automated/engineering checkpoints below.
 
 Status: manager-reviewed execution authority
 
-Latest execution, 2026-09-05: UI is accepted/pushed as `372e7d9`. Root MOVE-01
+Historical pre-correction execution, 2026-09-05: UI was accepted/pushed as `372e7d9`. Root MOVE-01
 passed 461 project tests, 43 browser checks and static/desktop gates.
 `../reviews/2026-09-05-move01-review.md` records the new travel/follower contract.
 Root checkpoints MOVE, then delivers FP-UI1 v0.21.0; family comfort remains
@@ -35,10 +58,12 @@ allocation and final project/art/performance checks; Git backup precedes MOVE-01
 Preserve the original assignment as history. See the complete 17-item v0.20.1 intake at
 `../playtests/2026-09-05-v0201-wishlist.md` and §5.13D below.
 
-Current sequence: **01 accepted → MOVE-01 checkpoint → FP-UI1 → 04 → 02 → UI-02 → 08 → 05 → 07B /
+Current sequence: **01/MOVE-01 engineering history → UI-03 corrected FP-UI1 → Human playtest → 04 → 02 → remaining UI-02 → 08 → 05 → 07B /
 FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
 RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
-specialist tasks from root-prepared prompts. Only one runtime owner runs at once.
+fresh specialist tasks from root-prepared prompts. Root may delegate disjoint
+subtasks under the Human-authorized parallel-work policy; specialist checkpoints
+still follow this dependency sequence.
 
 Current programme shape: a measurement-only performance pre-pass; sequential
 feature execution through the 24-maze campaign and couch co-op/Friend Garden;
@@ -49,7 +74,7 @@ root-authored transferable process playbook
 
 ## 1. Outcome
 
-**Latest return, 2026-09-05:** Agent 01 has stopped after its six bounded
+**Historical Plan 01 return before UI-03, 2026-09-05:** Agent 01 stopped after its six bounded
 corrections. Root independently reproduced 452 tests and the matching production
 build, with no new code defect found in the focused review. Root completed the
 fifteen returned reward renditions, reviewed all29 publication records and exact

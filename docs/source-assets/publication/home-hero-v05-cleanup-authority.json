@@ -1,0 +1,17 @@
+{
+  "schema": "maze-root-bounded-alpha-scope/v1",
+  "date": "2026-09-05",
+  "owner": "Astra root orchestrator",
+  "humanRequest": "Remove the two remaining small white background pockets in Ame's hair and the skeleton's arm while preserving the approved Home composition and corrected unicorn horn.",
+  "humanMethodChoice": "Use precise alpha-mask cleanup",
+  "methodQuestion": "For the two remaining white pockets in the Home artwork, may I use the repository's precise alpha-mask cleanup pipeline? It can remove just those enclosed pockets while preserving every other pixel.",
+  "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-transparent-master.png",
+  "sourceSha256": "d0d5f78cc0ee6dc94825a79d94fb82c8d930dbc2960160bc564c58ba4e476f11",
+  "allowedEdits": "Set alpha to zero only for the two exact four-connected opaque matte components. All RGB values, every other alpha value, original source bytes, and approved character geometry must remain identical. Produce a new v05 master and delivery filenames; never overwrite v04.",
+  "matteClassifier": {"rgb": [253, 253, 253], "maximumAbsoluteChannelDistance": 32},
+  "components": [
+    {"name": "hair pocket", "seed": [980, 199], "pixelCount": 417, "boundsLTRB": [969, 169, 987, 225]},
+    {"name": "forearm pocket", "seed": [387, 770], "pixelCount": 162, "boundsLTRB": [382, 749, 398, 780]}
+  ],
+  "publicationGate": "Root reviews the exact alpha-only difference and delivery proof before changing the Home catalogue pointer. This is a bounded technical correction, not new identity artwork."
+}

@@ -116,16 +116,45 @@ const blockingPresentationSelector = [
   ".door-opening-presentation",
 ].join(", ");
 const blockingEventTypes = new Set(["enemy-defeated", "animal-rescued", "hole-jumped", "portal-warped", "door-opened"]);
+interface RoutePresentationObservation {
+  readonly armedAt: number;
+  seenAt: number | null;
+  observer: MutationObserver | null;
+}
+type RoutePresentationWindow = Window & { __routePresentation?: RoutePresentationObservation };
 
 export async function replayRouteStep(page: Page, step: DerivedRouteStep): Promise<void> {
   await expectUiRouteState(page, step.before);
-  await page.keyboard.press(keyForDirection[step.direction]);
-  await expectUiRouteState(page, step.result.state);
-  if (step.result.events.some((event) => blockingEventTypes.has(event.type))) {
-    const presentation = page.locator(blockingPresentationSelector);
-    await expect.poll(async () => presentation.count(), { timeout: 1_500 }).toBeGreaterThan(0);
-    await expect.poll(async () => presentation.count(), { timeout: 8_000 }).toBe(0);
+  const blocking = step.result.events.some((event) => blockingEventTypes.has(event.type));
+  if (blocking) await page.evaluate(selector => {
+    const state: RoutePresentationObservation = { armedAt:performance.now(), seenAt:null, observer:null };
+    // Reduced rescue art lasts150ms. Record its insertion before input so
+    // cross-process semantic polling cannot miss a valid completed effect.
+    state.observer = new MutationObserver(records => {
+      const inserted = records.some(record => [...record.addedNodes].some(node =>
+        node instanceof Element && (node.matches(selector) || node.querySelector(selector) !== null)));
+      if (inserted && state.seenAt === null) state.seenAt = performance.now();
+    });
+    state.observer.observe(document.body, { childList:true, subtree:true });
+    (window as RoutePresentationWindow).__routePresentation = state;
+  }, blockingPresentationSelector);
+  try {
+    await page.keyboard.press(keyForDirection[step.direction]);
+    await expectUiRouteState(page, step.result.state);
+    if (blocking) {
+      await expect.poll(() => page.evaluate(() => {
+        const state = (window as RoutePresentationWindow).__routePresentation;
+        return state !== undefined && state.seenAt !== null && state.seenAt >= state.armedAt;
+      }), { timeout:1_500 }).toBe(true);
+      await expect.poll(() => page.locator(blockingPresentationSelector).count(), { timeout:8_000 }).toBe(0);
+    }
+    await page.waitForTimeout(90);
+    await expectUiRouteState(page, step.result.state);
+  } finally {
+    if (blocking) await page.evaluate(() => {
+      const host = window as RoutePresentationWindow;
+      host.__routePresentation?.observer?.disconnect();
+      delete host.__routePresentation;
+    });
   }
-  await page.waitForTimeout(90);
-  await expectUiRouteState(page, step.result.state);
 }

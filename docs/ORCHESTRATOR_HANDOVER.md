@@ -1,6 +1,28 @@
 # Orchestrator handover — Sol to Astra
 
-**STOP / latest Human decision, 2026-09-05:** initial v0.21.0 playtest rejects the
+**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the61-row
+Human correction. Project488, art131, build/locked desktop/static gates passed;
+full browser r6 passed62/63, its observer race passed the5-case r7 retest, and
+all17 final UI/proof cases passed in r8. Exact results/limits are in
+`docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
+Root now owns clean-source portable/web publication. Family feedback and the
+fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
+
+**Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
+v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
+movement and deliver a new, separately versioned playable preview. Read
+`docs/plans/UI-03-fp-ui1-correction.md` and
+`docs/playtests/2026-09-05-v021-ui-correction-intake.md` (61 acceptance rows).
+Landscape is primary; maximize the existing board without Big/Normal; preserve
+smooth first-tap/held travel (gentle acceleration allowed). Advance bounded Book
+pages/cards, grey locked achievement art, focus/victory, hybrid thumb pad and
+travel acting into this correction. Root integrates disjoint fresh implementation/review agents under the
+Human’s subsequent explicit parallel-work authorization. Agent04 still waits for the corrected preview feedback. Future
+specialists start in fresh tasks with current prompts. Earlier STOP/candidate/
+active-Agent01 paragraphs below are history, not current execution instructions.
+
+
+**Historical STOP before the subsequent UI-03 authorization, 2026-09-05:** initial v0.21.0 playtest rejects the
 overall UI, reporting many regressions and missed specific requirements. Root
 stopped release/implementation work for discussion. UI/family acceptance is
 blocked; Agent04 must not start. Canonical web already serves v0.21.0; the local
@@ -236,7 +258,7 @@ Audit the diff and reproduce proportionate checks. Do not accept "tests passed"
 as proof of visual quality or complete scope. Return a precise bounded follow-up
 if necessary. Once accepted, commit/push a named checkpoint, implement and review
 MOVE-01, produce FP-UI1 from a clean committed state, verify delivery, then provide the
-updated Agent 04 execution prompt for the Human to run in its existing task.
+updated Agent 04 execution prompt for the Human to run in a fresh task.
 
 ## Important Human decisions to preserve
 

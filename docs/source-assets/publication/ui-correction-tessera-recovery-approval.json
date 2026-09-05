@@ -1,0 +1,34 @@
+{
+  "schema": "maze-ui-presentation-approval/v1",
+  "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+  "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+  "scope": "runtime-publish",
+  "candidateReportSha256": "bbf92d8607e346427e5f5bbef5cd3fbf576269a00667fda9fd28c00c370c1c0d",
+  "decision": "Root inspected the original/old/recovered silhouette on light and dark. Approve the bounded recovery of the source-authored coral fins and mouth. The immutable original RGB is preserved; existing optical256 bytes remain unchanged. Only new contextual presentation uses this r02 derivative.",
+  "proofs": [
+    {
+      "path": "docs/source-assets/production/tessera-alpha-recovery/comparison-proof.png",
+      "sha256": "449d25e464af26385f7372c9db21e159fdbb558d189bb5cc7865b244ea8c58d5",
+      "bytes": 454091
+    },
+    {
+      "path": "docs/source-assets/production/tessera-alpha-recovery/exact-restored-alpha-mask.png",
+      "sha256": "490bd5da7becd788ac7de1e1af0ad0bcb59fe2251e1f6caa2843136f72d291fb",
+      "bytes": 7646
+    }
+  ],
+  "runtimeBytes": 132588,
+  "aggregateAllocation": "Root approved combined additive public-media allocation of8,008,395bytes; root owns the performance-budget update. No CSS allocation; actual JS gzip9 measured after integration.",
+  "entries": [
+    {
+      "id": "tessera-dolphin",
+      "path": "public/assets/mgjrpg-02/presentation/tessera-dolphin-v01-presentation-512-r02.webp",
+      "sha256": "853924fefb37fb6499b3f8cf90e3de69a95027dcb1d1e2c3f51bdf5bd144124e",
+      "bytes": 132588,
+      "sourceSha256": "185126e8dca75837cd2963978f9fb8c357d2c6e3ccfcf88a073601ab1ce1db43",
+      "candidateRecordSha256": "47b78b1c823fa8f96491ea89e691d8b5ab09fc151b2a297b39d1680829f09f74",
+      "maxEncodedBytes": 132588,
+      "runtimeStatus": "active"
+    }
+  ]
+}

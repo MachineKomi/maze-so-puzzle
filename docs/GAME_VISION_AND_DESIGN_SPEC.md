@@ -1,5 +1,7 @@
 # Maze so Puzzle — game vision and design authority
 
+**Latest Human-directed correction, 2026-09-05:** The latest Human comparison requests a warm, picture-led, tactile landscape interface with substantial readable type, large canonical art, authored left-copy/right-cast front-door composition, proper Book pages and joyful victories. UI-03 and its 61-row intake are the current correction authority. Landscape remains primary; portrait uses a safe rotate invitation. A first-step flash/camera jerk is unacceptable even when later held motion is smoother.
+
 Status: manager-reviewed product authority for the improvement programme
 
 Decision date: 2026-09-02; art-craft calibration added 2026-09-03

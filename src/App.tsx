@@ -49,6 +49,8 @@ import {
   pointsEqual,
   stayAfterPendingCompletion,
 } from "./game/engine";
+import { enemyDiscoveriesForView } from "./game/discovery";
+import { FRIEND_BOOK_LORE } from "./bookLore";
 import { heldWeaponStyle } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
@@ -88,6 +90,8 @@ import {
   applyLevelCompletion,
   calculateLevelReward,
   readPlayerProgress,
+  recordEnemyDiscoveries,
+  hasUnsupportedProgressProfile,
   writePlayerProgress,
   type BadgeId,
   type CalculatedLevelReward,
@@ -170,7 +174,7 @@ function storySpeakerArt(speaker: StorySpeaker): string {
   return ASSETS.portrait;
 }
 
-const MOVE_CADENCE_MS = 64;
+const MOVE_CADENCE_MS = TAP_TRAVEL_MS;
 const BUMP_CADENCE_MS = 45;
 const RESCUE_PRESENTATION_MS = 900;
 const PORTAL_PRESENTATION_MS = 720;
@@ -243,6 +247,7 @@ interface QueuedMoveIntent {
   readonly direction: Direction;
   readonly lateralOffset: number;
   readonly travelDurationMs: number;
+  readonly repeated: boolean;
 }
 
 interface BattlePresentation {
@@ -656,7 +661,9 @@ function App() {
   const [soundOpen, setSoundOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [artDetail, setArtDetail] = useState<ArtDetail | null>(null);
-  const [initialRunResult] = useState(() => readActiveRunResult(CURATED_LEVELS));
+  const [initialRunResult] = useState(() => hasUnsupportedProgressProfile()
+    ? { snapshot: null, discardedUpdatedRun: false }
+    : readActiveRunResult(CURATED_LEVELS));
   const initialRun = initialRunResult.snapshot;
   const initialLevel = initialRun
     ? CURATED_LEVELS.find((candidate) => candidate.id === initialRun.levelId) ?? CURATED_LEVELS[0]!
@@ -666,7 +673,6 @@ function App() {
   const [pendingAdventure, setPendingAdventure] = useState<PendingAdventure | null>(null);
   const [testerPickerOpen, setTesterPickerOpen] = useState(debugMazeQueryEnabled);
   const [levelPickerOpen, setLevelPickerOpen] = useState(false);
-  const [bigMaze, setBigMaze] = useState(false);
   const [level, setLevel] = useState<LevelDefinition>(initialLevel);
   const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
   const [runId, setRunId] = useState(() => initialRun?.runId ?? createActiveRunId());
@@ -675,6 +681,7 @@ function App() {
   ));
   const travelDuration = useRef(TAP_TRAVEL_MS);
   const nextTravelDuration = useRef(TAP_TRAVEL_MS);
+  const nextMoveRepeated = useRef(false);
   const travelEpoch = useRef(0);
   const [runMode, setRunMode] = useState<RunMode>("normal");
   const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(
@@ -697,6 +704,14 @@ function App() {
   const [movePulse, setMovePulse] = useState(0);
   const [bumpPulse, setBumpPulse] = useState(0);
   const [muted, setMuted] = useState(false);
+  const [portrait, setPortrait] = useState(() => window.matchMedia("(orientation: portrait)").matches);
+  const [pageVisible, setPageVisible] = useState(() => document.visibilityState === "visible");
+  useEffect(() => {
+    const query=window.matchMedia("(orientation: portrait)");
+    const update=()=>setPortrait(query.matches);
+    query.addEventListener("change",update);
+    return ()=>query.removeEventListener("change",update);
+  }, []);
   const [helpOpen, setHelpOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
   const [hintUsesByState, setHintUsesByState] = useState<Readonly<Record<string, number>>>(() => initialRun?.hintUsesByState ?? {});
@@ -708,6 +723,7 @@ function App() {
   const [saveWarning, setSaveWarning] = useState<"run" | "progress" | null>(null);
   const [tooStrongEncounter, setTooStrongEncounter] = useState<TooStrongEncounter | null>(null);
   const [progress, setProgress] = useState<PlayerProgress>(readPlayerProgress);
+  const [unsupportedProfile, setUnsupportedProfile] = useState(hasUnsupportedProgressProfile);
   const [completion, setCompletion] = useState<CompletionCelebration | null>(null);
   const [restartArmed, setRestartArmed] = useState(false);
   const [battlePresentation, setBattlePresentation] = useState<BattlePresentation | null>(null);
@@ -780,8 +796,11 @@ function App() {
   }, [campaignIndex, completion, game, level, progress, runId, testerRun]);
   const unlockedLevelIds = new Set(progress.unlockedLevelIds);
   const unlockedStoryLevels = CURATED_LEVELS.filter((candidate) => unlockedLevelIds.has(candidate.id));
+  // Terrain spans the fixed world. Keep this prop stable so MazeTerrain's memo
+  // can retain its paths and masks while only the camera translation moves.
+  const worldWindow = useMemo(() => fullLevelWindow(level), [level]);
   const cameraWindow = useMemo(() => {
-    if (!explorationMode) return fullLevelWindow(level);
+    if (!explorationMode) return worldWindow;
     const cameraFocus = jumpPresentation
       ? {
           x: Math.round((jumpPresentation.from.x + jumpPresentation.to.x) / 2),
@@ -789,7 +808,7 @@ function App() {
         }
       : game.position;
     return getCameraWindow(level, cameraFocus, DEFAULT_FOV_SIZE);
-  }, [explorationMode, game.position, jumpPresentation, level]);
+  }, [explorationMode, game.position, jumpPresentation, level, worldWindow]);
   const currentViewTiles = useMemo(
     () => explorationMode
       ? new Set(getVisibleTileKeys(level, game.position, DEFAULT_FOV_SIZE))
@@ -845,13 +864,15 @@ function App() {
       : presentationActive ? null : game.status === "won" ? "completion"
       : game.status === "lost" ? "lost" : null,
   };
-  const inputBlock = getCurrentInputBlock(uiState);
+  const currentInputBlock = getCurrentInputBlock(uiState);
+  const inputBlock = { ...currentInputBlock, gameplayInputAllowed: currentInputBlock.gameplayInputAllowed && !portrait,
+    backgroundInert: currentInputBlock.backgroundInert || portrait, clearHeldInput: currentInputBlock.clearHeldInput || portrait };
   const modalOpen = inputBlock.backgroundInert;
   const hudModel = useMemo(() => buildAdventureHudModel(level, game), [level, game]);
   const powerGuidance = usePowerGuidance(level, game, tooStrongEncounter?.event.objectId);
 
   useEffect(() => {
-    if (runMode === "tester") return;
+    if (runMode === "tester" || hasUnsupportedProgressProfile()) return;
     if (!hasActiveRun || level.source !== "curated") {
       const cleared = clearActiveRun();
       setSaveWarning((current) => cleared && current === "run"
@@ -872,6 +893,19 @@ function App() {
       : !saved && current !== "progress" ? "run" : current);
   }, [game, hasActiveRun, hintUsesByState, level, revealedTiles, runId, runMode]);
 
+  useEffect(() => {
+    if (screen !== "game" || modalOpen || !pageVisible || document.hidden || runMode === "tester" || !hasActiveRun) return;
+    const visible = enemyDiscoveriesForView(level, game.position, game.defeatedEnemyIds);
+    // Current-run defeat receipts are direct encounter evidence, including a
+    // guardian removed from the visible object layer during its celebration.
+    const met = level.objects.flatMap(object => object.kind === "enemy" && game.defeatedEnemyIds.includes(object.id) ? [object.style ?? "goblin"] : []);
+    const next = recordEnemyDiscoveries(progress, [...visible,...met]);
+    if (next === progress) return;
+    setProgress(next);
+    const saved=writePlayerProgress(next);
+    if (!saved) { setSaveWarning("progress"); setUnsupportedProfile(hasUnsupportedProgressProfile()); }
+  }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, progress]);
+
   const clearDpadHold = useCallback(() => {
     dpadHoldDirection.current = null;
     dpadHoldPointerId.current = null;
@@ -882,9 +916,9 @@ function App() {
     }
   }, []);
 
-  const clearBoardPointer = useCallback(() => {
+  const clearBoardPointer = useCallback((preserveTap = false) => {
     activeBoardPointer.current = null;
-    queuedMove.current = null;
+    if (!preserveTap || queuedMove.current?.repeated) queuedMove.current = null;
     pointerHoldCadence.current = IDLE_HELD_MOVE_CADENCE;
     setTouchCursor(null);
     if (pointerHoldTimer.current !== undefined) {
@@ -1152,6 +1186,7 @@ function App() {
   useEffect(() => {
     const syncMusicVisibility = () => {
       const hidden = document.visibilityState !== "visible";
+      setPageVisible(!hidden);
       setMusicPageHidden(hidden);
       if (hidden) {
         cancelPresentations();
@@ -1226,7 +1261,9 @@ function App() {
 
   const attemptMove = useCallback((requestedDirection: Direction, lateralOffset = 0) => {
     const proposedTravelDuration=nextTravelDuration.current;
+    const repeated=nextMoveRepeated.current;
     nextTravelDuration.current=TAP_TRAVEL_MS;
+    nextMoveRepeated.current=false;
     const unavailable = (
       !inputBlock.gameplayInputAllowed
       || game.status !== "playing"
@@ -1236,7 +1273,7 @@ function App() {
       return;
     }
     if (inputLocked.current) {
-      queuedMove.current = { direction: requestedDirection, lateralOffset, travelDurationMs:proposedTravelDuration };
+      queuedMove.current = { direction: requestedDirection, lateralOffset, travelDurationMs:proposedTravelDuration, repeated };
       return;
     }
     queuedMove.current = null;
@@ -1469,6 +1506,7 @@ function App() {
       queuedMove.current = null;
       if (nextMove) {
         nextTravelDuration.current=nextMove.travelDurationMs;
+        nextMoveRepeated.current=nextMove.repeated;
         attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset);
       }
     }, presentationDuration || (result.moved ? MOVE_CADENCE_MS : BUMP_CADENCE_MS));
@@ -1504,6 +1542,7 @@ function App() {
         const cadenceStep = advanceHeldMoveCadence(heldKeyCadence.current, direction);
         heldKeyCadence.current = cadenceStep.cadence;
         nextTravelDuration.current=cadenceStep.nextDelayMs;
+        nextMoveRepeated.current=true;
         attemptMoveRef.current(direction);
         scheduleHeldMove(cadenceStep.nextDelayMs);
       }, delay);
@@ -1511,16 +1550,6 @@ function App() {
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (modalOpen) return;
-      if (
-        event.key === "Escape"
-        && screen === "game"
-        && bigMaze
-        && game.status === "playing"
-      ) {
-        event.preventDefault();
-        setBigMaze(false);
-        return;
-      }
       if (event.defaultPrevented) return;
       if (event.target instanceof HTMLElement && event.target.closest("input, select, textarea, a, [contenteditable='true']")) return;
       const direction = directionForKey(event.key);
@@ -1547,6 +1576,7 @@ function App() {
       const fallbackDirection = fallbackKey ? heldKeys.current.get(fallbackKey) : undefined;
       if (fallbackDirection) {
         heldKeyCadence.current = beginHeldMoveCadence(fallbackDirection);
+        nextMoveRepeated.current = true;
         attemptMoveRef.current(fallbackDirection);
         scheduleHeldMove(HELD_MOVE_INITIAL_DELAY_MS);
       } else {
@@ -1556,7 +1586,7 @@ function App() {
         }
         heldKeyCadence.current = IDLE_HELD_MOVE_CADENCE;
       }
-      if (queuedMove.current?.direction === direction) {
+      if (queuedMove.current?.direction === direction && queuedMove.current.repeated) {
         queuedMove.current = null;
       }
     };
@@ -1574,7 +1604,7 @@ function App() {
       window.removeEventListener("blur", clearHeldInput);
       document.removeEventListener("visibilitychange", onVisibilityChange);
     };
-  }, [bigMaze, clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
+  }, [clearHeldInput, dismissStory, game.status, helpOpen, hintOpen, modalOpen, pendingAdventure, screen, storyOpen, testerPickerOpen, tooStrongEncounter]);
 
   useEffect(() => {
     if (inputBlock.clearHeldInput || game.status !== "playing") {
@@ -1636,6 +1666,7 @@ function App() {
       const cadenceStep = advanceHeldMoveCadence(pointerHoldCadence.current, intent.direction);
       pointerHoldCadence.current = cadenceStep.cadence;
       nextTravelDuration.current=cadenceStep.nextDelayMs;
+        nextMoveRepeated.current=true;
       attemptMoveRef.current(intent.direction, intent.lateralOffset);
       pointerHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
@@ -1721,7 +1752,7 @@ function App() {
     const pointer = activeBoardPointer.current;
     if (!pointer || pointer.pointerId !== event.pointerId) return;
     event.preventDefault();
-    clearBoardPointer();
+    clearBoardPointer(event.type === "pointerup");
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
@@ -1739,30 +1770,46 @@ function App() {
       const cadenceStep = advanceHeldMoveCadence(dpadHoldCadence.current, direction);
       dpadHoldCadence.current = cadenceStep.cadence;
       nextTravelDuration.current=cadenceStep.nextDelayMs;
+        nextMoveRepeated.current=true;
       attemptMoveRef.current(direction);
       dpadHoldTimer.current = window.setTimeout(repeat, cadenceStep.nextDelayMs);
     };
     dpadHoldTimer.current = window.setTimeout(repeat, delay);
   }, []);
 
-  const startDpadHold = (event: ReactPointerEvent<HTMLButtonElement>, direction: Direction) => {
+  const startDpadHold = (event: ReactPointerEvent<HTMLElement>, direction: Direction | null) => {
     if (!inputBlock.gameplayInputAllowed) return;
     if (!event.isPrimary || event.button !== 0) return;
     event.preventDefault();
     clearDpadHold();
     dpadHoldDirection.current = direction;
     dpadHoldPointerId.current = event.pointerId;
-    dpadHoldCadence.current = beginHeldMoveCadence(direction);
-    event.currentTarget.setPointerCapture(event.pointerId);
-    attemptMoveRef.current(direction);
-    scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+    dpadHoldCadence.current = direction ? beginHeldMoveCadence(direction) : IDLE_HELD_MOVE_CADENCE;
+    if (direction) {
+      attemptMoveRef.current(direction);
+      scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+    }
   };
 
-  const stopDpadHold = (event: ReactPointerEvent<HTMLButtonElement>) => {
+  const steerDpadHold = (event: ReactPointerEvent<HTMLElement>, direction: Direction | null) => {
+    if (dpadHoldPointerId.current !== event.pointerId || dpadHoldDirection.current === direction) return;
+    if (dpadHoldTimer.current !== undefined) window.clearTimeout(dpadHoldTimer.current);
+    dpadHoldDirection.current = direction;
+    queuedMove.current = null;
+    if (direction) {
+      dpadHoldCadence.current = beginHeldMoveCadence(direction);
+      attemptMoveRef.current(direction);
+      scheduleDpadRepeat(HELD_MOVE_INITIAL_DELAY_MS);
+    }
+  };
+
+  const stopDpadHold = (event: ReactPointerEvent<HTMLElement>) => {
     if (dpadHoldPointerId.current !== event.pointerId) return;
     const releasedDirection = dpadHoldDirection.current;
     clearDpadHold();
-    if (queuedMove.current?.direction === releasedDirection) {
+    // A completed quick tap may wait for the current legal step. A canceled
+    // capture is no longer an instruction, even if it began as a quick tap.
+    if (event.type !== "pointerup" || (queuedMove.current?.direction === releasedDirection && queuedMove.current.repeated)) {
       queuedMove.current = null;
     }
   };
@@ -1914,11 +1961,6 @@ function App() {
     });
   };
 
-  const toggleBigMaze = () => {
-    setBigMaze((value) => !value);
-    playSound("select", muted);
-  };
-
   const requestEnterLevel = (nextLevel: LevelDefinition, sound: "select" | "title" = "select") => {
     if (runInProgress && nextLevel.id === level.id) {
       resumeRun();
@@ -1969,7 +2011,6 @@ function App() {
     setBlockerHint(null);
     setTooStrongEncounter(null);
     setTesterPickerOpen(false);
-    setBigMaze(false);
     setScreen("title");
     playSound("menu", muted);
   };
@@ -1986,7 +2027,6 @@ function App() {
     setHelpOpen(false);
     setHintOpen(false);
     setTooStrongEncounter(null);
-    setBigMaze(false);
     setScreen("achievements");
     playSound("achievement", muted);
   };
@@ -2001,6 +2041,7 @@ function App() {
       return;
     }
     setProgress(resetResult.progress);
+    setUnsupportedProfile(false);
     setRunMode("normal");
     setHasActiveRun(false);
     setResetProgressOpen(false);
@@ -2034,9 +2075,9 @@ function App() {
     setSaveWarning((current) => progressSaved && current === "progress"
       ? null
       : !progressSaved ? "progress" : current);
-    if (!progressSaved) return;
+    if (!progressSaved && !hasUnsupportedProgressProfile()) return;
     setProgress(nextProgress);
-    const runCleared = clearActiveRun();
+    const runCleared = hasUnsupportedProgressProfile() ? true : clearActiveRun();
     setSaveWarning((current) => runCleared && current === "run"
       ? null
       : !runCleared && current !== "progress" ? "run" : current);
@@ -2090,6 +2131,10 @@ function App() {
       (treasurePresentation.at.x - treasurePresentation.cameraAtStart.left + .5) / treasurePresentation.cameraAtStart.width,
       (treasurePresentation.at.y - treasurePresentation.cameraAtStart.top + .5) / treasurePresentation.cameraAtStart.height) as CSSProperties;
   }, [treasurePresentation]);
+  const toggleMuted = () => {
+    musicTransport.setMuted(!muted);
+    if (muted) void musicTransport.startFromUserGesture();
+  };
   const openSound = (trigger?: HTMLElement) => {
     modalReturnFocus.current = trigger ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
     clearHeldInput();
@@ -2106,20 +2151,22 @@ function App() {
               { id: "mazes", label: "Mazes", art: ASSETS.navMazes, run: openLevelPicker },
               { id: "book", label: "Book", art: ASSETS.navBook, run: showAchievements },
               { id: "help", label: "Help", art: ASSETS.navHelp, run: trigger => { modalReturnFocus.current = trigger; setHelpOpen(true); } },
+              { id: "mute", label: muted ? "Unmute" : "Mute", art: muted ? ASSETS.navMuted : ASSETS.navSound, run: toggleMuted },
               { id: "sound", label: "Sound", art: muted ? ASSETS.navMuted : ASSETS.navSound, run: openSound },
               { id: "restart", label: restartArmed ? "Again!" : "Restart", art: ASSETS.navRestart, pressed: restartArmed, run: armRestart },
-              ...(levelStory ? [{ id: "story", label: "Story", art: ASSETS.navBook, run: openStory }] : []),
-              { id: "big-maze", label: bigMaze ? "Normal" : "Big maze", pressed: bigMaze, run: toggleBigMaze },
+              ...(levelStory ? [{ id: "story", label: "Story", art: ASSETS.storySprig, run: openStory }] : []),
               ...(testerToolsEnabled ? [{ id: "tester", label: "Pick maze", art: ASSETS.navMazes, run: openTesterPicker }] : []),
   ];
 
   return (
     <main ref={appFrameRef} className="app-frame">
-      <div className="game-stage-slot">
+      <div className="game-stage-slot" inert={portrait || undefined} aria-hidden={portrait || undefined}>
         <section className={`game-stage screen-${screen}`} aria-label="Maze so Puzzle game" data-motion={motion} data-quality={preferences.quality}>
-        {saveWarning && (
+        {(saveWarning || unsupportedProfile) && (
           <p className="save-warning" role="alert">
-            {saveWarning === "progress"
+            {unsupportedProfile
+              ? "This Adventure Book was saved by a newer version. You can play here, but this session will not change that saved adventure."
+              : saveWarning === "progress"
               ? "Ame’s Adventure Book couldn’t be saved on this device. Keep the game open and try another maze after checking storage access."
               : "This maze couldn’t be saved on this device. You can keep playing, but closing the game may restart this maze."}
           </p>
@@ -2146,6 +2193,7 @@ function App() {
             onRequestReset={openResetProgress}
             onOpenTester={openTesterPicker}
             onToggleSound={() => openSound()}
+            onToggleMuted={toggleMuted}
           />
         ) : screen === "achievements" ? (
           <AchievementsScreen
@@ -2161,6 +2209,7 @@ function App() {
             onSurprise={() => requestEnterLevel(makeSurprise())}
             onRequestReset={openResetProgress}
             onToggleSound={() => openSound()}
+            onToggleMuted={toggleMuted}
             onDetail={openArtDetail}
           />
         ) : (
@@ -2169,7 +2218,7 @@ function App() {
         <div className="ambient-star star-one" aria-hidden="true">✦</div>
         <div className="ambient-star star-two" aria-hidden="true">✧</div>
 
-        <PlayShell big={bigMaze} blocked={modalOpen}>
+        <PlayShell blocked={modalOpen}>
           {treasurePresentation && (
             <div className={`treasure-flight treasure-flight-${treasurePresentation.currency}`} style={treasureFlightStyle} aria-hidden="true">
               <CatalogueImage src={treasurePresentation.currency === "gold" ? ASSETS.treasureGoldChest : ASSETS.treasureScienceGears} alt="" />
@@ -2211,7 +2260,7 @@ function App() {
               onContextMenu={(event) => event.preventDefault()}
             >
               <div className="camera-world" data-scene-slot="world" style={cameraWorldStyle(level, cameraWindow)} aria-hidden="true">
-                <MazeTerrain level={level} camera={fullLevelWindow(level)} />
+                <MazeTerrain level={level} camera={worldWindow} />
 
                 {worldObjects.map((object) => (
                   <div
@@ -2239,8 +2288,6 @@ function App() {
                       <CatalogueImage usage="field" className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
                     )}
                     {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
-                    {object.kind === "potion" && <span className="item-amount">+{object.amount}</span>}
-                    {object.kind === "treasure" && <span className="item-amount treasure-amount">+{object.amount}</span>}
                     {(object.kind === "key" || object.kind === "door") && (
                       <span className={`object-color-name color-name-${object.color}`}>{KEY_MOTIF_LABELS[object.color]}</span>
                     )}
@@ -2491,7 +2538,7 @@ function App() {
             map={<MiniMap level={level} position={game.position} camera={cameraWindow}
               revealed={revealedTiles} currentView={explorationMode ? currentViewTiles : new Set(level.terrain.flatMap((row,y) => row.map((_,x) => toTileKey({x,y}))))}
               objects={activeObjects.filter(object => object.kind !== "treasure")} highlightedObjectId={guidedObjectId} />}
-            onHint={openHint} onDetail={openArtDetail} onMove={attemptMove} onRead={clearHeldInput} startHold={startDpadHold} stopHold={stopDpadHold}
+            onHint={openHint} onDetail={openArtDetail} onMove={attemptMove} onRead={clearHeldInput} startHold={startDpadHold} steerHold={steerDpadHold} stopHold={stopDpadHold} enabled={inputBlock.gameplayInputAllowed}
             feedback={feedback.sound !== "step" && feedback.sound !== "select" && <p className={`feedback-bar tone-${feedback.tone}`}><CatalogueImage src={feedback.icon} alt="" /><span>{feedback.text}</span></p>}
             actions={utilityActions}
             onMore={trigger => { modalReturnFocus.current = trigger; clearHeldInput(); setMoreOpen(true); }}
@@ -2509,7 +2556,7 @@ function App() {
         {helpOpen && (
           <Modal title="How to help Ame" onClose={closeHelp} returnFocus={modalReturnFocus.current}>
             <div className="help-grid">
-              <HelpStep image={ASSETS.boots} title="Move" copy="Press, hold or drag on the maze—or tap an arrow. One square at a time." />
+              <HelpStep image={BADGE_ART["twinkle-toes"]} title="Move" copy="Press, hold or drag on the maze—or tap an arrow. One square at a time." />
               <HelpStep image={weaponArt.src} title="Find a weapon" copy="Then baddies can scoot." />
               <HelpStep image={ASSETS.potion} title="Check Power" copy="Match or beat a baddie. Its Power joins Ame!" />
               <HelpStep image={ASSETS.key} title="Match keys" copy="Keys open doors with the same colour and shape." />
@@ -2571,6 +2618,7 @@ function App() {
                 return (
                   <div
                     className={`rescued-result ${rescued ? "rescued" : ""}`}
+                    data-species={animal.species}
                     data-animal-motion={animalPersonality(animal.species).motion}
                     data-flourish={animalPersonality(animal.species).flourish}
                     key={animal.id}
@@ -2657,7 +2705,7 @@ function App() {
           <h3>{level.name}</h3><p>{hudModel.objective}</p>
           <div className="more-actions">{utilityActions.map(action => <button key={action.id} data-focus-id={action.id} aria-pressed={action.pressed} onClick={event => { if (action.id !== "restart") setMoreOpen(false); action.run((modalReturnFocus.current ?? event.currentTarget) as HTMLButtonElement); }}>{action.art && <CatalogueImage art={action.art} alt="" />}<span>{action.label}</span></button>)}</div>
           <h3>Bag details</h3><div className="more-actions">{hudModel.slots.map(slot => <button key={slot.id} data-focus-id={`bag:${slot.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:slot.art,label:slot.label,description:`${slot.found ? "Found." : "Still to find."} ${slot.description}`},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={slot.art} alt="" /><span>{slot.label} · {slot.found ? "Found" : "Not found"}</span></button>)}</div>
-          <h3>Friends details · optional</h3><div className="more-actions">{hudModel.friends.map(friend => <button key={friend.id} data-focus-id={`friend:${friend.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:friend.art as import("./ui/art").UiArt,label:friend.label,description:friend.rescued ? "Safe with Ame!" : "Waiting in the maze. Friends are optional."},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={friend.art as import("./ui/art").UiArt} alt="" /><span>{friend.label} · {friend.rescued ? "Rescued" : "Waiting"}</span></button>)}</div>
+          <h3>Friends details · optional</h3><div className="more-actions">{hudModel.friends.map(friend => <button key={friend.id} data-focus-id={`friend:${friend.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:friend.art as import("./ui/art").UiArt,label:friend.label,description:`${FRIEND_BOOK_LORE[friend.species ?? "bunny"]} ${friend.rescued ? "Safe with Ame!" : "Waiting in the maze. You can always return to help."}`},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={friend.art as import("./ui/art").UiArt} alt="" /><span>{friend.label} · {friend.rescued ? "Rescued" : "Waiting"}</span></button>)}</div>
         </Modal>}
         {soundOpen && <SoundDialog transport={musicTransport} onClose={() => setSoundOpen(false)} returnFocus={modalReturnFocus.current} />}
         {artDetail && <Modal title={artDetail.label} variant="celebration" onClose={() => setArtDetail(null)} returnFocus={modalReturnFocus.current}>

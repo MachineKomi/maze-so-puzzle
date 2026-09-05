@@ -7,6 +7,8 @@ import { createInitialGameState, movePlayer } from "../../src/game/engine";
 import { progressionStateSignature, solveLevel } from "../../src/game/solver";
 import { buildAdventureHudModel } from "../../src/ui/game/hudModel";
 import { UI_ART } from "../../src/ui/art";
+import { ASSETS } from "../../src/assets";
+import { PLAYER_PROGRESS_STORAGE_KEY } from "../../src/progress";
 import type { Direction } from "../../src/game/types";
 import { deriveRoute, heldSegment, replayRouteStep, expectUiRouteState, readUiRouteState } from "./gameplay-browser";
 
@@ -61,8 +63,8 @@ test("UI Sound port conformance and legal too-strong teaching",async({page})=>{
 test("UI complete dialog geometry, extreme content, DPR2 and text resizing",async({page,browser})=>{
   for(const [width,height] of sizes) {
     await page.setViewportSize({width,height});await pick(page,12);
-    for(const big of [false,true]) {
-      if(big)await action(page,"big-maze");
+    {
+      await expect(page.locator('[data-focus-id="big-maze"]')).toHaveCount(0);
       for(const id of ["hint","help","sound","bag:boots","mazes","tester"]) {
         const trigger=page.locator(`[data-focus-id="${id}"]:visible`);
         if(!await trigger.isVisible())await page.locator('[data-focus-id="more"]').click();
@@ -72,7 +74,7 @@ test("UI complete dialog geometry, extreme content, DPR2 and text resizing",asyn
         expect(measure.sw).toBeLessThanOrEqual(measure.cw);expect(measure.body).toBe(true);
         await page.keyboard.press("Escape");
         await expect(page.getByRole("dialog")).toHaveCount(0);
-        expect(await page.locator(".play-shell").getAttribute("data-mode")).toBe(big?"big":"normal");
+        expect(await page.locator(".play-shell").getAttribute("data-mode")).toBe("maximized");
       }
     }
     await page.goto("http://127.0.0.1:1421/?ui-proof");await page.getByLabel("Extreme content").check();await page.getByLabel("Equipment count").selectOption("12");
@@ -86,7 +88,12 @@ test("UI complete dialog geometry, extreme content, DPR2 and text resizing",asyn
     for(const variant of ["standard","blocker","hint","story","celebration","turns"]) {
       await page.getByRole("button",{name:`${variant} proof`,exact:true}).click();
       const rect=await page.getByRole("dialog").boundingBox();expect(rect!.height).toBeLessThanOrEqual(height);expect(rect!.width).toBeLessThanOrEqual(width);
-      const close=page.locator('[data-focus-id="dialog-close"]');await expect(close).toBeInViewport();await close.click();
+      // Acknowledgements and stories use their footer action without a duplicate X.
+      await expect(page.locator(".dialog-footer")).toBeInViewport();
+      await expect(page.locator('[data-focus-id="dialog-close"]')).toHaveCount(0);
+      await page.keyboard.press("Escape");
+      await expect(page.getByRole("dialog")).toHaveCount(0);
+      await expect(page.getByRole("button",{name:`${variant} proof`,exact:true})).toBeFocused();
     }
   }
   const context=await browser.newContext({viewport:{width:1194,height:834},deviceScaleFactor:2,baseURL:"http://127.0.0.1:4173"});
@@ -119,33 +126,39 @@ async function screen(page:Page,name:string) {
 async function geometry(page:Page) {
   return page.evaluate(() => {
     const bounds = (e:Element) => {const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};
-    const elements = Object.fromEntries([".maze-board",".maze-panel",".adventure-hud",".objective-card",".maze-map-card",".maze-minimap",".inventory-grid",".rescue-list"].map(selector=>{
+    const elements = Object.fromEntries([".maze-board",".maze-panel",".adventure-hud",".objective-card",".maze-map-card",".maze-map-heading",".maze-minimap",".inventory-grid",".rescue-list"].map(selector=>{
       const e=document.querySelector<HTMLElement>(selector)!;return [selector,{...bounds(e),scrollWidth:e.scrollWidth,clientWidth:e.clientWidth,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight}];
     }));
     const targets = [...document.querySelectorAll<HTMLElement>(".adventure-hud button")].filter(e=>e.getClientRects().length).map(e=>({...bounds(e),id:e.dataset.focusId,font:getComputedStyle(e).fontSize}));
     return {elements,targets,bag:[...document.querySelectorAll(".inventory-slot")].map(bounds),friends:[...document.querySelectorAll(".rescue-friend")].map(bounds),rootOverflow:document.documentElement.scrollWidth>innerWidth,objectiveFont:getComputedStyle(document.querySelector(".objective-card p")!).fontSize,stageTransform:getComputedStyle(document.querySelector(".game-stage")!).transform};
   });
 }
-for (const [width,height] of sizes) test(`UI geometry ${width}x${height}: authored maximums Normal and Big`,async({page})=>{
+for (const [width,height] of sizes) test(`UI geometry ${width}x${height}: authored maximums in maximized landscape`,async({page})=>{
   await page.setViewportSize({width,height});
   const records:unknown[]=[];
   for (const maze of selectedMazes) {
     await pick(page,maze);
     const expected=buildAdventureHudModel(CURATED_LEVELS[maze-1]!,createInitialGameState(CURATED_LEVELS[maze-1]!));
-    let normal=0;
-    for(const mode of ["normal","big"]){
-      if(mode==="big") await action(page,"big-maze");
+    {
+      const mode="maximized";
+      await expect(page.locator(".play-shell")).toHaveAttribute("data-mode",mode);
+      await expect(page.locator('[data-focus-id="big-maze"]')).toHaveCount(0);
       await page.locator(".adventure-hud").evaluate(e=>e.scrollTop=0);
       await page.waitForTimeout(100);
       const g=await geometry(page);records.push({width,height,maze,mode,...g});
       await screen(page,`${width}x${height}-maze${maze}-${mode}`);
-      const board=g.elements[".maze-board"]!,deck=g.elements[".adventure-hud"]!,map=g.elements[".maze-minimap"]!,mapCard=g.elements[".maze-map-card"]!;
+      const board=g.elements[".maze-board"]!,deck=g.elements[".adventure-hud"]!,map=g.elements[".maze-minimap"]!,mapCard=g.elements[".maze-map-card"]!,mapHeading=g.elements[".maze-map-heading"]!;
       expect(Math.abs(board.width-board.height)).toBeLessThan(.1);
       expect(board.right).toBeLessThanOrEqual(deck.x);
       expect(g.stageTransform).toBe("none");expect(g.rootOverflow).toBe(false);
-      if(mode==="normal")normal=board.width;else expect(board.width).toBeGreaterThanOrEqual(normal);
-      expect(map.width).toBeGreaterThanOrEqual(width>=1280?192:width>=960?160:width>=844?120:96);
-      expect(map.y-mapCard.y).toBeLessThan(32);
+      // Short landscape uses its authored compact deck, including 960×540.
+      expect(map.width).toBeGreaterThanOrEqual(width<650?96:height<600?128:width>=1280?192:160);
+      // UI03 deliberately enlarges the heading art to 30px. Measure empty
+      // space around its real box, rather than treating that artwork as waste.
+      expect(mapHeading.y-mapCard.y).toBeGreaterThanOrEqual(0);
+      expect(mapHeading.y-mapCard.y).toBeLessThanOrEqual(4);
+      expect(map.y-mapHeading.bottom).toBeGreaterThanOrEqual(0);
+      expect(map.y-mapHeading.bottom).toBeLessThanOrEqual(8);
       expect(mapCard.bottom-map.bottom).toBeLessThan(55);
       expect(g.bag).toHaveLength(expected.bagTotal);expect(g.friends).toHaveLength(expected.rescueTotal);
       for(const item of [...g.bag,...g.friends]) {expect(item.x).toBeGreaterThanOrEqual(deck.x);expect(item.right).toBeLessThanOrEqual(deck.right);expect(item.y).toBeGreaterThanOrEqual(deck.y);expect(item.bottom).toBeLessThanOrEqual(deck.bottom);expect(item.bottom).toBeLessThanOrEqual(height);}
@@ -169,21 +182,21 @@ test("UI overlays: focus, inertness, held input, safe return and Sound preferenc
   for(let i=0;i<12;i++){await page.keyboard.press(i%2?"Shift+Tab":"Tab");expect(await page.evaluate(()=>!!document.activeElement?.closest('[role="dialog"]'))).toBe(true);}
   await screen(page,"hint-focus-960");await page.keyboard.press("Escape");await expect(trigger).toBeFocused();
   await page.keyboard.press("ArrowLeft");await expectUiRouteState(page,movePlayer(CURATED_LEVELS[11]!,createInitialGameState(CURATED_LEVELS[11]!),"left").state);
-  await page.locator('[data-focus-id="sound"]').click();
+  await action(page,"sound");
   await page.getByLabel("Reduced",{exact:true}).check();await page.getByLabel("lite",{exact:true}).check();
   await expect(page.locator("html")).toHaveAttribute("data-motion","reduced");await expect(page.locator("html")).toHaveAttribute("data-quality","lite");
   await page.locator('[data-focus-id="sound:mute"]').click();await page.locator('[data-focus-id="sound:next"]').click();await page.locator('[data-focus-id="sound:previous"]').click();await page.locator('[data-focus-id="sound:shuffle"]').click();
   await expect(page.getByRole("button",{name:/loop/i})).toHaveCount(0);await screen(page,"sound-comfort-960");
-  await page.keyboard.press("Escape");await expect(page.locator('[data-focus-id="sound"]')).toBeFocused();
-  await page.locator('[data-focus-id="home"]').click();await page.getByRole("button",{name:"Reset progress",exact:true}).click();
+  await page.keyboard.press("Escape");await expect(page.locator('[data-focus-id="more"]')).toBeFocused();
+  await action(page,"home");await page.getByRole("button",{name:"Reset progress",exact:true}).click();
   await screen(page,"reset-safe-default");await expect(page.getByRole("button",{name:"Keep my adventure"})).toBeFocused();await page.getByRole("button",{name:"Yes, reset everything"}).click();
   const preference=await page.evaluate(()=>JSON.parse(localStorage.getItem("maze-so-puzzle-presentation-v1")!));expect(preference).toEqual({motion:"reduced",quality:"lite"});
 });
 
-test("UI front door, Home hero v04, Book, all modal sizes and text spacing",async({page})=>{
+test("UI front door, approved Home hero, Book, all modal sizes and text spacing",async({page})=>{
   for(const [width,height]of sizes){
     await page.setViewportSize({width,height});await page.goto("/");await page.evaluate(()=>localStorage.clear());await page.reload();await page.getByRole("button",{name:"Play",exact:true}).waitFor();await screen(page,`title-${width}x${height}`);
-    await page.getByRole("button",{name:"Play",exact:true}).click();await expect(page.locator(".title-hero")).toHaveAttribute("src",/home-hero-splash-v04/);await screen(page,`home-${width}x${height}`);
+    await page.getByRole("button",{name:"Play",exact:true}).click();await expect(page.locator(".title-hero")).toHaveAttribute("src",ASSETS.homeHeroSplash);await screen(page,`home-${width}x${height}`);
     await page.getByRole("button",{name:/Begin adventure/}).click();await screen(page,`story-${width}x${height}`);
     const dialog=page.getByRole("dialog");const box=await dialog.boundingBox();expect(box!.height).toBeLessThanOrEqual(height);expect(box!.width).toBeLessThanOrEqual(width);
     await page.getByRole("button",{name:"Start the maze",exact:true}).click();
@@ -221,6 +234,8 @@ test("UI catalogue fallback and DEV-only integration proof",async({page})=>{
   await page.locator('[aria-label="Complete semantic catalogue"] img').evaluateAll(images=>Promise.all(images.map(image=>(image as HTMLImageElement).decode().catch(()=>{}))));
   await page.screenshot({path:resolve(output,"catalogue-family-proof.png"),fullPage:true});
   await writeFile(resolve(output,"presentation-gaps.json"),JSON.stringify(UI_ART.filter(art=>!art.variants?.some(v=>v.usage==="presentation")).map(art=>({id:art.id,family:art.family,src:art.src,width:art.width,height:art.height})),null,2));
+  // Isolate the presentation request budget from the compact More sheet's utility images.
+  await page.setViewportSize({width:1280,height:720});
   await page.goto("/?debug=mazes");await page.getByRole("button",{name:/Test story maze 12:/}).click();
   await page.waitForLoadState("networkidle"); // isolate this dialog from level-entry requests
   const requested:string[]=[];page.on("request",request=>{if(request.resourceType()==="image")requested.push(request.url());});
@@ -299,8 +314,9 @@ test("UI ordinary completion, exactly-once reward, earned Book detail and safe m
   for(const step of route)await replayRouteStep(page,step);
   await expect(page.getByRole("button",{name:"Stay here",exact:true})).toBeFocused();await screen(page,"optional-friend-missing-safe-stay");
   await page.getByRole("button",{name:/^Next maze/}).evaluate((button:HTMLButtonElement)=>{button.click();button.click();});
-  const progress=await page.evaluate(()=>JSON.parse(localStorage.getItem("maze-so-puzzle-progress-v5")!));expect(progress.totalCompletions).toBe(1);
-  await page.getByRole("button",{name:"Start the maze"}).click();await page.locator('[data-focus-id="book"]').click();
+  const progress=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),PLAYER_PROGRESS_STORAGE_KEY);expect(progress.totalCompletions).toBe(1);
+  await page.getByRole("button",{name:"Start the maze"}).click();await action(page,"book");
+  await page.getByRole("tab",{name:"Achievements",exact:true}).click();
   const earned=page.locator(".badge-card.earned").first();await earned.click();await expect(page.locator(".presentation-art")).toHaveAttribute("data-presentation-available","true");await screen(page,"earned-keepsake-presentation");await page.keyboard.press("Escape");await expect(earned).toBeFocused();
   await page.keyboard.press("Enter");await expect(page.getByRole("dialog")).toBeVisible();await page.keyboard.press("Escape");await expect(earned).toBeFocused();
   await page.setViewportSize({width:844,height:390});await earned.scrollIntoViewIfNeeded();
@@ -308,20 +324,20 @@ test("UI ordinary completion, exactly-once reward, earned Book detail and safe m
   await touch.send("Input.dispatchTouchEvent",{type:"touchStart",touchPoints:[{x:target.x+target.width/2,y:target.y+target.height/2}]});await touch.send("Input.dispatchTouchEvent",{type:"touchEnd",touchPoints:[]});await touch.detach();
   await expect(page.getByRole("dialog")).toBeVisible();await screen(page,"earned-touch-844");await page.keyboard.press("Escape");await expect(earned).toBeFocused();
   await page.setViewportSize({width:960,height:540});
-  await pick(page,12);await page.locator(".maze-board").focus();await page.keyboard.press("ArrowLeft");await page.locator('[data-focus-id="mazes"]').click();await page.locator(".level-picker-list button").first().click();
+  await pick(page,12);await page.locator(".maze-board").focus();await page.keyboard.press("ArrowLeft");await action(page,"mazes");await page.locator(".level-picker-list button").first().click();
   await expect(page.getByRole("heading",{name:"Start a different maze?"})).toBeVisible();await expect(page.getByRole("button",{name:"Keep this maze"})).toBeFocused();await screen(page,"safe-maze-switch");await page.keyboard.press("Escape");await expect(page.locator(".maze-board")).toBeVisible();
 });
 
 
 test("UI Human-reviewable proof sheets",async({page})=>{
   const groups:Record<string,string[]>={
-    "layout-proof":sizes.map(([w,h])=>`${w}x${h}-maze12-normal`),
+    "layout-proof":sizes.map(([w,h])=>`${w}x${h}-maze12-maximized`),
     "materials-proof":["styled-proof-full","styled-proof-lite","styled-proof-static","dialog-proof-blocker","earned-keepsake-presentation","three-turn-story-host","sound-comfort-960","tv-focus-visible"],
     "fallback-text-proof":["required-item-1-960","required-item-1-568","failed-media-correct-text-fallback","200percent-text-spacing-play","200percent-text-spacing-dialog","phone-safe-area","too-strong-engine-opportunities"]
   };
   for(const [name,stems]of Object.entries(groups)) {
     const cards=await Promise.all(stems.map(async stem=>`<figure><img src="data:image/png;base64,${(await readFile(resolve(output,stem+".png"))).toString("base64")}"><figcaption>${stem}</figcaption></figure>`));
-    const html=`<!doctype html><meta charset="utf-8"><title>Plan 01 ${name}</title><style>*{box-sizing:border-box}body{margin:0;padding:24px;background:#f6efe8;color:#44324f;font:16px system-ui}h1{font-size:28px}main{display:grid;grid-template-columns:1fr 1fr;gap:20px}figure{margin:0;background:white;padding:8px;border:1px solid #cab9d0;border-radius:12px}img{display:block;width:100%;height:350px;object-fit:contain}figcaption{padding:8px;overflow-wrap:anywhere}</style><h1>Plan 01 · ${name}</h1><p>Dirty candidate at 09413c1 · Edge browser evidence, not device or Human acceptance. Art and allocation gates remain open. Full-size originals are adjacent.</p><main>${cards.join("")}</main>`;
+    const html=`<!doctype html><meta charset="utf-8"><title>Plan 01 ${name}</title><style>*{box-sizing:border-box}body{margin:0;padding:24px;background:#f6efe8;color:#44324f;font:16px system-ui}h1{font-size:28px}main{display:grid;grid-template-columns:1fr 1fr;gap:20px}figure{margin:0;background:white;padding:8px;border:1px solid #cab9d0;border-radius:12px}img{display:block;width:100%;height:350px;object-fit:contain}figcaption{padding:8px;overflow-wrap:anywhere}</style><h1>Plan 01 · ${name}</h1><p>Current UI correction candidate · browser evidence, not device or Human acceptance. Exact source identity is recorded in source-state.json. Full-size originals are adjacent.</p><main>${cards.join("")}</main>`;
     await writeFile(resolve(output,name+".html"),html);await page.setViewportSize({width:1600,height:1100});await page.setContent(html);
     await page.locator("img").evaluateAll(images=>Promise.all(images.map(image=>(image as HTMLImageElement).decode())));
     await page.screenshot({path:resolve(output,name+".png"),fullPage:true});

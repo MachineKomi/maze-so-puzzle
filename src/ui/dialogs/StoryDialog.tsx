@@ -9,8 +9,10 @@ export function StoryDialog({ title, turns, onBegin, returnFocus, learning }: {
   const [index, setIndex] = useState(0);
   const turn = turns[index];
   const final = index >= turns.length - 1;
+  const advance = () => final ? onBegin() : setIndex(value => value + 1);
   return <DialogShell title={title} variant="story" onClose={onBegin} returnFocus={returnFocus}
-    footer={<div className="modal-actions"><button className="primary-button" data-focus-id="story-advance" onClick={() => final ? onBegin() : setIndex(index + 1)}>{final ? "Start the maze" : "Next"}</button><button data-focus-id="story-skip" onClick={onBegin}>Skip story</button></div>}>
+    onAdvance={advance} advanceOnBodyClick
+    footer={<div className="modal-actions"><button className="primary-button" data-focus-id="story-advance" onClick={advance}>{final ? "Start the maze" : "Next"}</button>{!final && <button data-focus-id="story-skip" onClick={onBegin}>Skip to maze</button>}</div>}>
     {turn && <div className="story-body" aria-live="polite" aria-atomic="true"><div className="story-speaker"><PresentationArt art={turn.portrait} label={turn.speaker} /><strong>{turn.speaker}</strong></div><div className="story-copy" data-turn-id={turn.id}>{turn.line}</div></div>}
     {learning}
     {turns.length > 1 && <p className="dialog-progress">{index + 1} of {turns.length}</p>}

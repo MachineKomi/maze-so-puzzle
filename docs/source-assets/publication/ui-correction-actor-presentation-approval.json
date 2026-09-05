@@ -1,0 +1,474 @@
+{
+  "schema": "maze-ui-presentation-approval/v1",
+  "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+  "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+  "scope": "runtime-publish",
+  "candidateReportSha256": "652dfb668d38c99772e1ebd5d562e43ea196aeac6510ac1dd0b18325e45bb638",
+  "decision": "Root inspected all four light/dark proof pages. Approve 43 clean deterministic actor renditions for visible contextual use. Tessera Dolphin r01 is an exact historical reproduction with an inherited coral-alpha defect; approve its provenance only, keep it dormant, and require the separately reviewed r02 override. No new identity approval is claimed.",
+  "proofs": [
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-light-01.png",
+      "sha256": "2e36204dd6ad053091db0381928ecdf32804f98cbcb134b9f32a355d8dd5f748",
+      "bytes": 826558
+    },
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-light-02.png",
+      "sha256": "eef511bca1730bd8f69bcc79b0ff2a78911804a0a6297d78262e6ff6d8ed615d",
+      "bytes": 886122
+    },
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-dark-01.png",
+      "sha256": "7eeb5d9a0a1432a4d698662e9b716e41d7ae36dc47a59fbe6eaaeb37cc190efe",
+      "bytes": 801937
+    },
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-dark-02.png",
+      "sha256": "688e05440fd7d3b9ecc9e15dd919f56f31c0c41f6c46fef0bff2e2971bdb1d73",
+      "bytes": 869600
+    }
+  ],
+  "runtimeBytes": 6150950,
+  "aggregateAllocation": "Root approved combined additive public-media allocation of8,008,395bytes; root owns the performance-budget update. No CSS allocation; actual JS gzip9 measured after integration.",
+  "entries": [
+    {
+      "id": "bunny",
+      "path": "public/assets/mgjrpg-02/presentation/bunny-v02-presentation-512-r01.webp",
+      "sha256": "a21e6ed58c4ef3e486695ed66c67c57b3f9f52bf7f97de68c02ff54960064998",
+      "bytes": 127196,
+      "sourceSha256": "69a485fe79617a372195b2dbc02efcf370069c0d4f64acf6ff4c4f57f039752f",
+      "candidateRecordSha256": "f4eb9b25623465cd54104d9044e4c37f374d7875d475f2b3e1f79058b0e6dd6c",
+      "maxEncodedBytes": 127196,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "fox",
+      "path": "public/assets/mgjrpg-02/presentation/fox-v02-presentation-512-r01.webp",
+      "sha256": "3a81182958825b49ab5e637ba8fd5a6b20449db7b94729581f6bc35a5dd2b0c3",
+      "bytes": 164534,
+      "sourceSha256": "9aff680984e80613eda994343eeb0f55d89f2f8865a6e6504c9bfbb2aea48575",
+      "candidateRecordSha256": "df0db8a84df52f851cf55cd92040fa67701b46a287bb78582e6bb47c94c3e0c2",
+      "maxEncodedBytes": 164534,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "kitten",
+      "path": "public/assets/mgjrpg-02/presentation/kitten-v02-presentation-512-r01.webp",
+      "sha256": "c0a6ddb707665365fd3e66ad935de953ebe31738f1e3813a9ff1089104c6ce56",
+      "bytes": 142364,
+      "sourceSha256": "5c5eacf137a10e97a3019a5543eff55ca72c6d0ddf90a71805c49c9ee64beed2",
+      "candidateRecordSha256": "04a9a5f8f5cdc6908f119ec704bede028cdff5594b1491dbce50fbbf053bdd5c",
+      "maxEncodedBytes": 142364,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "puppy",
+      "path": "public/assets/mgjrpg-02/presentation/puppy-v02-presentation-512-r01.webp",
+      "sha256": "ba0123738e76801660ba21c873834f35f0ee99d0fa706db7297b77b173ca0cbd",
+      "bytes": 149682,
+      "sourceSha256": "b2f5c9118805a8bdfe1a5072d1ed61c0f4b0e46f349920886531cb63a2e70258",
+      "candidateRecordSha256": "f2015c79e9ea4c1845002c0c359bd8e9ebd2ac2228613a2e0ed118dc7c1f2fae",
+      "maxEncodedBytes": 149682,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "duckling",
+      "path": "public/assets/mgjrpg-02/presentation/duckling-v02-presentation-512-r01.webp",
+      "sha256": "ced8b0396b8bf097ac3ae95d29ac932126b660b48abe8baf89b638dd8a813169",
+      "bytes": 120026,
+      "sourceSha256": "5aebdf04b80e6355109dc022ee5b42c8020d061f56306fd61634ee8b77fd6a2d",
+      "candidateRecordSha256": "3f6e47cb713e8fdd174f844d939e7c196a6cd7494c035be0e8f1207814a51622",
+      "maxEncodedBytes": 120026,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "hedgehog",
+      "path": "public/assets/mgjrpg-02/presentation/hedgehog-v02-presentation-512-r01.webp",
+      "sha256": "e9c478ac2eba41c94bd5c1e7146ddeba968510c3fdfd7c485edabfd253005084",
+      "bytes": 149416,
+      "sourceSha256": "d1789d8c0338384e11d7aab95bd4594d263608cd4184820987d00a00cb6faa07",
+      "candidateRecordSha256": "ab777e0ed7a9c0e2e4d82e3d72636d57f1491dfcff1475307ce77b2697784754",
+      "maxEncodedBytes": 149416,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "otter",
+      "path": "public/assets/mgjrpg-02/presentation/otter-v02-presentation-512-r01.webp",
+      "sha256": "6f0aef5bd8d0693807a371b13987dc001df2810c6a3404923754e03877a7062a",
+      "bytes": 128490,
+      "sourceSha256": "df03d78479ae91bae72b723e9463cbbe49926fefda64892bfb00fa30429fbc96",
+      "candidateRecordSha256": "f7cf6a1cf9d3409f1bb337bdc10ea12929a19e514a3085c3cdfaca3c46cf2178",
+      "maxEncodedBytes": 128490,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "lamb",
+      "path": "public/assets/mgjrpg-02/presentation/lamb-v02-presentation-512-r01.webp",
+      "sha256": "ab0581408d6987c5f954b14201c7efe63a96b7877b956c8ae932177e2da0e2d1",
+      "bytes": 134216,
+      "sourceSha256": "3ab3d272d6afb0bf76b8d10e953158f9e4f92994d20bf7676a1a4d682eeba791",
+      "candidateRecordSha256": "218307352b97cdc446d14731aad45429a30e6374f4c4d7021673fe564805904e",
+      "maxEncodedBytes": 134216,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "alpaca",
+      "path": "public/assets/mgjrpg-02/presentation/alpaca-v02-presentation-512-r01.webp",
+      "sha256": "6afd84a346c38230f19f46c1db39ebd8635b7129d7125564e56179ea3b4aa679",
+      "bytes": 94570,
+      "sourceSha256": "ee33ecaab8efe17afccb612a7fe4bf95a35cdc1cacce4cb0d5a552d3670f1585",
+      "candidateRecordSha256": "97220d76cd8cfd0ba1bfcbb4d3d69bb32f3d701d6911811af0e07aa127c6b8c7",
+      "maxEncodedBytes": 102400,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "penguin",
+      "path": "public/assets/mgjrpg-02/presentation/penguin-v02-presentation-512-r01.webp",
+      "sha256": "ca4f5d5f1d110829dc901fef93aee894f8259afff7e7432a4d0a40c9a6534425",
+      "bytes": 116772,
+      "sourceSha256": "ee2845402d6356d4d2c2f2cb72313833f8105140918e5734202189709178e03a",
+      "candidateRecordSha256": "8c5f0234356408b8b542bd3035d53661be8969f0613c4403490877d808a020f8",
+      "maxEncodedBytes": 116772,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "fawn",
+      "path": "public/assets/mgjrpg-02/presentation/fawn-v03-presentation-512-r01.webp",
+      "sha256": "5047d92387c298af92ab0107590d2ce623fa28d0017966a279da2e2d0f80f52d",
+      "bytes": 121740,
+      "sourceSha256": "82103f1fc2dcd6a53f87b551e8f10bb747cb20caaef458bbe916c278ad0a03fe",
+      "candidateRecordSha256": "900160421d229de38616872221317078baa1282705497225731afa1380a36ead",
+      "maxEncodedBytes": 121740,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "red-panda",
+      "path": "public/assets/mgjrpg-02/presentation/red-panda-v03-presentation-512-r01.webp",
+      "sha256": "94990aa0a52508194e83a64ade302a7448804fa3fcb1590d8725c374afbe4d1f",
+      "bytes": 150556,
+      "sourceSha256": "0c518b0251cf31dfb90b36f92542bc574282f608dcff7b9e0bc300c4125ee945",
+      "candidateRecordSha256": "8d8183b88fc84dc1e89ab43b961af3697ae7ce6470aa20a2bdbab5bb6501bdef",
+      "maxEncodedBytes": 150556,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "capybara",
+      "path": "public/assets/mgjrpg-02/presentation/capybara-v03-presentation-512-r01.webp",
+      "sha256": "eaaf865445cda4f9ba4f247d6af2af97d298d3008204d753b223c1e852b870eb",
+      "bytes": 143872,
+      "sourceSha256": "27d3bf88021ad165f3a2f44bcc1403907fc23d887f52709c57c286b4d46c515e",
+      "candidateRecordSha256": "a870bd98a0f8c1bd057632ede7b8686b430707b076de0df18dbe401560405d63",
+      "maxEncodedBytes": 143872,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "chinchilla",
+      "path": "public/assets/mgjrpg-02/presentation/chinchilla-v03-presentation-512-r01.webp",
+      "sha256": "723b54db582a4d2739295de2f1345a64e9f41c5b50ba7405146cf5cb8f2da941",
+      "bytes": 148492,
+      "sourceSha256": "bc0e479f13a0a4b5ca42f798bd3f861ad9521a817bb531974a6d17736922124c",
+      "candidateRecordSha256": "6726e66e9ca2e51e8b141a1768c9af21007e765505e6ff339932ebfb14f594ba",
+      "maxEncodedBytes": 148492,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "koala",
+      "path": "public/assets/mgjrpg-02/presentation/koala-v03-presentation-512-r01.webp",
+      "sha256": "f0f24629ea44b4fd054e4a99837a64590d7e82c2ca0486590c1669a577909f44",
+      "bytes": 140108,
+      "sourceSha256": "1dc36f2e9f90a83e3114358f02415fe0271e1ee0fc488b07ccfb5f072a746155",
+      "candidateRecordSha256": "04c71d94d34d00745d8db5e6457c8186f0f85522d39fab2445e0ad799b312f0f",
+      "maxEncodedBytes": 140108,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "pitter-patter-parasol",
+      "path": "public/assets/mgjrpg-02/presentation/pitter-patter-parasol-v01-presentation-512-r01.webp",
+      "sha256": "7437957c2f07acca6b5d619fee9a0c938ca7a07a4ec91d189ac4fbc0450ad158",
+      "bytes": 128110,
+      "sourceSha256": "00cca9a354e66a759a139ba1bab209eaf2fac054832065d442361f2ceae1fd54",
+      "candidateRecordSha256": "b312c8987cc88a292e32467d1aa4a2bcbdf1273394c40704743c2d8108bbc28b",
+      "maxEncodedBytes": 128110,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "lanternling",
+      "path": "public/assets/mgjrpg-02/presentation/lanternling-v01-presentation-512-r01.webp",
+      "sha256": "938ddd3faa508c897e01540551dfafa2a37188efe0c3452cc5d8af5be98f7fbe",
+      "bytes": 116638,
+      "sourceSha256": "75d2a1d6b7637d66dca00d9b6bb7d0dae487e7c4c6302372c99518ab964fc041",
+      "candidateRecordSha256": "880f028a1f203f4f04b9e88f963dee11e8e5967eac0fa34317cb37d9406c75bd",
+      "maxEncodedBytes": 116638,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "emberdown-phoenix",
+      "path": "public/assets/mgjrpg-02/presentation/emberdown-phoenix-v01-presentation-512-r01.webp",
+      "sha256": "43efe9e78e75c4a83563f17fdf5cf0fb61c2f5defe3cd979f1210d7d5df5391e",
+      "bytes": 147190,
+      "sourceSha256": "64a86545ae7fc2078f738574ac6c780e24e044f53c9e4997ef57138e17e754eb",
+      "candidateRecordSha256": "bd235c0135b4929e5ea60b981948c0502e3d3ddc24290964872911b322ba257a",
+      "maxEncodedBytes": 147190,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "meadowstep-faunling",
+      "path": "public/assets/mgjrpg-02/presentation/meadowstep-faunling-v01-presentation-512-r01.webp",
+      "sha256": "8d53ed77dce3352e1f177cd9efc3139bdce2da3ba86a1c9a30825e14e65a4436",
+      "bytes": 137710,
+      "sourceSha256": "29eb52b18aa331d84e4b113328cbc2b60e660358f449a8ad577ec091f28371f9",
+      "candidateRecordSha256": "af13a07b5c464ec0532a7e78da21d84760e01dc396329c74b4ec32769c7cf490",
+      "maxEncodedBytes": 137710,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "minerva-moon-owl",
+      "path": "public/assets/mgjrpg-02/presentation/minerva-moon-owl-v01-presentation-512-r01.webp",
+      "sha256": "b4312eb58f9a642ebc8a878d2cc08fe62bc4c4678dbcd90f0ce8818065e3781e",
+      "bytes": 143040,
+      "sourceSha256": "9ab92d0f8b32004212beaffa7ab7a22db8b43cfd826fa818de452a5479c35cd4",
+      "candidateRecordSha256": "1d367ad8efa4e8befd82ad542b745627ac37c76da1259f7d594399b8bee8ff31",
+      "maxEncodedBytes": 143040,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "tessera-dolphin",
+      "path": "public/assets/mgjrpg-02/presentation/tessera-dolphin-v01-presentation-512-r01.webp",
+      "sha256": "1eb4ce790b45eb664088cbf06810e51c9dba33d23020be20226171df4551f393",
+      "bytes": 131092,
+      "sourceSha256": "185126e8dca75837cd2963978f9fb8c357d2c6e3ccfcf88a073601ab1ce1db43",
+      "candidateRecordSha256": "4a68f640dcc24f6272bc854a5ec248cffa9af900d280ab9db4670cece80e2c0c",
+      "maxEncodedBytes": 131092,
+      "runtimeStatus": "dormant"
+    },
+    {
+      "id": "mallowmusk-aroma-wisp",
+      "path": "public/assets/mgjrpg-02/presentation/mallowmusk-aroma-wisp-v02-presentation-512-r01.webp",
+      "sha256": "162146ef03b3b885e714025d53cd8556b46e0889aeb8f4918cc57174ba51217a",
+      "bytes": 129340,
+      "sourceSha256": "c13006dedf8c240e388bf4a98825b7db6a6a2fba0a9c442a31a38b1fc3fb5ea5",
+      "candidateRecordSha256": "a99890f2c394a079162e6eb11d84b42dc2f658d19d0ab30ab3d1a591e91e34cc",
+      "maxEncodedBytes": 129340,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "breezeling-sylph",
+      "path": "public/assets/mgjrpg-02/presentation/breezeling-sylph-v02-presentation-512-r01.webp",
+      "sha256": "3c984c305bfdd28c53888bbbec44574a032306347010bea520125b73c41aceca",
+      "bytes": 119134,
+      "sourceSha256": "5765cbdf1df3a1741f746ca5544e58fa522fb3b823d90f2f5e60904a3a5de9f6",
+      "candidateRecordSha256": "a1262399008899e72343051015db2c3b0209751de9efae1e8ee2fc34215a193b",
+      "maxEncodedBytes": 119134,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "griffin-cub",
+      "path": "public/assets/mgjrpg-02/presentation/griffin-cub-v02-presentation-512-r01.webp",
+      "sha256": "7fb73e9a5c09ca89e41fb6497d68bc31eb8d425564a1352e6bee2c712a6a43ac",
+      "bytes": 184600,
+      "sourceSha256": "8485f002a1ef513f0a7071798f86a8fe13dd72afefc69710f8dbe5cdf3945626",
+      "candidateRecordSha256": "06b7ac00c861245bf4c0a99a4ab3c45835dd52c23c33b90f3b92b1e084486dd7",
+      "maxEncodedBytes": 184600,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "emberbelly-dragonling",
+      "path": "public/assets/mgjrpg-02/presentation/emberbelly-dragonling-v02-presentation-512-r01.webp",
+      "sha256": "94500c27e9c030a82348c81538451b4f32485990a040b57cfc4bd9410fecc1e6",
+      "bytes": 126706,
+      "sourceSha256": "c675320adf8e591a638b2fabda01b81cfab5b1d9180629ba1285f0866f56c80b",
+      "candidateRecordSha256": "5edb66d51f326520f720dcb3a75f0c6bb66fb050ae45dddb618235cfcb3b0e97",
+      "maxEncodedBytes": 126706,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "cloudstep-pegasus",
+      "path": "public/assets/mgjrpg-02/presentation/cloudstep-pegasus-v02-presentation-512-r01.webp",
+      "sha256": "4bee2a0c2a787fca7d5721d8169fe894449deb0b9d47b7a743d334f4a86da454",
+      "bytes": 154302,
+      "sourceSha256": "b97a28408acb98c92484bb311c293d9f19a17cba897d7bb6b8d92fbe2c2bb6c2",
+      "candidateRecordSha256": "2676a177c86f1174cbe06cd70b57390bc3834d93bd1ced89ecdeba48a8a11105",
+      "maxEncodedBytes": 154302,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "three-tumble-cerberus",
+      "path": "public/assets/mgjrpg-02/presentation/three-tumble-cerberus-v02-presentation-512-r01.webp",
+      "sha256": "4a51187280bcde7558887c1886068823aab871d31422e9e0f1208a542c5122af",
+      "bytes": 147406,
+      "sourceSha256": "2aa56e5aafeb6d96215beb00d2c713eff9694ef5ed1b9de5a7bba2e53215ca7f",
+      "candidateRecordSha256": "8f93f883c79e979c869abda147e4d0c6825f40bcbc7ebba003a3841b2c9264de",
+      "maxEncodedBytes": 147406,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "riddlekit-sphinx",
+      "path": "public/assets/mgjrpg-02/presentation/riddlekit-sphinx-v02-presentation-512-r01.webp",
+      "sha256": "d5fead09ae7c9dc7ff24b130476c0ee404a567585eec51b386d2d80cbeaba3aa",
+      "bytes": 162062,
+      "sourceSha256": "1e9914697d69bb5779154ce14d29f8cb760d8f8d7504f7451e5c10d47955d553",
+      "candidateRecordSha256": "8a9f3204c1c744bdb0e284f0c8853edb1408b0da50ffe121f98643dce819429e",
+      "maxEncodedBytes": 162062,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "tidecurl-hippocamp",
+      "path": "public/assets/mgjrpg-02/presentation/tidecurl-hippocamp-v02-presentation-512-r01.webp",
+      "sha256": "21b7c5c082f17dcdefae32cda36549eb81d1551eb220d018dc270ae5744f27cf",
+      "bytes": 122764,
+      "sourceSha256": "1f4c530e4375c4aeae8ab3b2a3b07f2bb53647030118f6e62bc382e7c3edcd85",
+      "candidateRecordSha256": "fe02ab5369f5b79a3064227ccf94db7f9dca12936a04ad2169ccd645f62c3da2",
+      "maxEncodedBytes": 122764,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "ripplecap-kappa",
+      "path": "public/assets/mgjrpg-02/presentation/ripplecap-kappa-v02-presentation-512-r01.webp",
+      "sha256": "a36969140c0e6df8c5716bc66780d846b43ae03efedb8229bc32b3dce41e6784",
+      "bytes": 138862,
+      "sourceSha256": "9391577653dd2383aff2f49c13110e6cad7f4435f84eacf00443679f67d36c9c",
+      "candidateRecordSha256": "b30ecea05967f0d983d6b7d5e483bee212be187bb03d48081e2e4c305a520fca",
+      "maxEncodedBytes": 138862,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "rainbow-horn-unicorn",
+      "path": "public/assets/mgjrpg-02/presentation/rainbow-horn-unicorn-v01-presentation-512-r01.webp",
+      "sha256": "fc7e76eb8eeed1110445a78a4b26078cc8144bea24f96bab7ae6959fdc8f809a",
+      "bytes": 121478,
+      "sourceSha256": "34fbabb74e5ed304a32bc2b2bc560c04ca88475be4b0d8a0a67c05d7aca94b79",
+      "candidateRecordSha256": "f6659dbe0429991a9ef2b258790a44e311711f16cf99d8bbdb6be11499f1ca9c",
+      "maxEncodedBytes": 121478,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "green-tea-skeleton",
+      "path": "public/assets/mgjrpg-02/presentation/green-tea-skeleton-v03-presentation-512-r01.webp",
+      "sha256": "e61a1e102338800b37cdb3cef9b1527b3800693a1e126c4857f6825d2c77c04c",
+      "bytes": 148614,
+      "sourceSha256": "c09c2b94fee6dff14a423fd62f5b8d60ad06d25e3055d458fc46a851a0f50821",
+      "candidateRecordSha256": "98481e885dcc3a1f57f60afec3e47869c0c566ac7e38fbb3aca40d9ecd926da4",
+      "maxEncodedBytes": 148614,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "blueberry-slime",
+      "path": "public/assets/mgjrpg-02/presentation/blueberry-slime-v03-presentation-512-r01.webp",
+      "sha256": "5330ed6b4d42f18687e4148ee25f2da4a6869432d256f15f1a6eb9b49c107ba9",
+      "bytes": 131622,
+      "sourceSha256": "f3abdb8ae6a8245f39e2c181bda62eb9c9308a0a8662303cb421bc21e0ad822d",
+      "candidateRecordSha256": "07fe43f82c43adf4e2dccd43504be35129945ebe046bfcb317ab758103fbd969",
+      "maxEncodedBytes": 131622,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "mushroom-imp",
+      "path": "public/assets/mgjrpg-02/presentation/mushroom-imp-v02-presentation-512-r01.webp",
+      "sha256": "bb2a41500b82d64074cc8e2bac39e5beacd323b5ce12ba1497ef035dfa284d56",
+      "bytes": 119242,
+      "sourceSha256": "1d30882c116267780e0a029a1fa7f7dd75209d9a3f0ee42a8a661231edb54e64",
+      "candidateRecordSha256": "86cd12976bfa58ff1f6a512886d41f0b44a541b96674690459ece552de6d4b78",
+      "maxEncodedBytes": 119242,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "moon-bat",
+      "path": "public/assets/mgjrpg-02/presentation/moon-bat-v02-presentation-512-r01.webp",
+      "sha256": "6106241e50fc0f152fa924aec3515c16ed77be5f409834394c44b668c3ef105c",
+      "bytes": 91220,
+      "sourceSha256": "4ee7132d6cd0e9683691cc173bd56e7716b1c74ae3c4b78b9f2708906d5d449e",
+      "candidateRecordSha256": "a05c0d8033b5f2a660f81d44f81da1b7dd4eeddcec4d77a9e1b7920d4651cafe",
+      "maxEncodedBytes": 102400,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "pebble-golem",
+      "path": "public/assets/mgjrpg-02/presentation/pebble-golem-v02-presentation-512-r01.webp",
+      "sha256": "791462d23c54b2c23597a67ca1eabe510099fc1082e189c28329afb2c7c3984f",
+      "bytes": 184984,
+      "sourceSha256": "f482658f525abe77c4caccea7b72c80306e6607bdf7d9f498d7792b6b4e292c6",
+      "candidateRecordSha256": "af6c534847c230353cfaea977e110722e80c93355b4d6ec3cfb69d07fa77a728",
+      "maxEncodedBytes": 184984,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "acorn-knight",
+      "path": "public/assets/mgjrpg-02/presentation/acorn-knight-v02-presentation-512-r01.webp",
+      "sha256": "7cba0c2c9b98c1638337f0d9b348cb1fcaf8dfd0b7c67255d9bb3b7bb516d22b",
+      "bytes": 143658,
+      "sourceSha256": "c8c0dc2feafa81e6076e32cefe3bd7a01e53823bfd6544e33281920c495e8cec",
+      "candidateRecordSha256": "9a223bf044ee897c3741a8d4608dbbb45f7bde15794bb345b48707719600a32a",
+      "maxEncodedBytes": 143658,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "bubble-dragon",
+      "path": "public/assets/mgjrpg-02/presentation/bubble-dragon-v02-presentation-512-r01.webp",
+      "sha256": "f6b31720f272727a3760f7aba55537ad38909ca1ddc910d72d84a1ca2d3af935",
+      "bytes": 160846,
+      "sourceSha256": "82aa4ab37322be5cc9f72f7e1f884b61d8bb28e7100a6f26a50b1216aa624358",
+      "candidateRecordSha256": "f668a2cd0ea5e718191939992ab6b403e2842693beea7f1c4cf5c23619c8c48f",
+      "maxEncodedBytes": 160846,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "candy-mimic",
+      "path": "public/assets/mgjrpg-02/presentation/candy-mimic-v02-presentation-512-r01.webp",
+      "sha256": "a522a7b083b9c3c0ecb4b6b7dbf89abcb74ecb2901cce2c87a5f472fa970f7ee",
+      "bytes": 191316,
+      "sourceSha256": "48f80ed146cfdb45ad06c9ede4e913289b326bb6df853a04d7df2a05c438b5bf",
+      "candidateRecordSha256": "abf99e9377f256b2003c0da532432f908bcf28e92de15e52fb3335f8cd203610",
+      "maxEncodedBytes": 191316,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "cloud-gremlin",
+      "path": "public/assets/mgjrpg-02/presentation/cloud-gremlin-v02-presentation-512-r01.webp",
+      "sha256": "957c5b11cd0352b8f1bec339b2d874f604621f31f95304ee5ad3130cca781ead",
+      "bytes": 154504,
+      "sourceSha256": "c2698c5912084dad2fdcd77b715d4678b52f575f4157c1612b8301d46b776c67",
+      "candidateRecordSha256": "fe0817b4ec8860e1d9f2eaa4069abe2c59abb1d41857786c0e4ed940d5092118",
+      "maxEncodedBytes": 154504,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "pumpkin-sprite",
+      "path": "public/assets/mgjrpg-02/presentation/pumpkin-sprite-v02-presentation-512-r01.webp",
+      "sha256": "0be744e9a5d044e2d15c280c86e264e74c7193a8f11d3dd86338f37d38b16d6f",
+      "bytes": 158102,
+      "sourceSha256": "a3e7a274d8a869e0ca3306db91f83a622eeed557c91b4fbb401f217c6cc6e506",
+      "candidateRecordSha256": "6b00c1b24c6f11968ddeb23c72a1f6de5f9e4bf78d295259b17999b0dbe93a6e",
+      "maxEncodedBytes": 158102,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "clockwork-crab",
+      "path": "public/assets/mgjrpg-02/presentation/clockwork-crab-v02-presentation-512-r01.webp",
+      "sha256": "df7e7b6c9dda510a0c5c7cd73dc7cf1e9fc7b161e0b23da06ca16243a55fb4bc",
+      "bytes": 151672,
+      "sourceSha256": "548b5d3bc55e3b954731c6280acf146fdaf3d40ef4fd4aa91b81a94e506d1e57",
+      "candidateRecordSha256": "4c65d6ae6cd56f61720121c7ea1d6cfdaa786d80668eeda02cc79d58333453c9",
+      "maxEncodedBytes": 151672,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "jelly-sorcerer",
+      "path": "public/assets/mgjrpg-02/presentation/jelly-sorcerer-v02-presentation-512-r01.webp",
+      "sha256": "5d9438421fd3c9663235c366f2e6697b503822c90667ab2fc8571209eff0f67c",
+      "bytes": 147914,
+      "sourceSha256": "9c667ab9641cd1299ad50f2b79739cee5f17813538c522edf78b47f0d60e6dbd",
+      "candidateRecordSha256": "f1e3d3dd5654b698a75ba484d90898acb38641a41a10b52deeedd7abd290b834",
+      "maxEncodedBytes": 147914,
+      "runtimeStatus": "active"
+    },
+    {
+      "id": "goblin",
+      "path": "public/assets/mgjrpg-02/presentation/goblin-v02-presentation-512-r01.webp",
+      "sha256": "0682307878f8e173f9f715da722b3c2a5ae83376b9714888caf688e009b92b5f",
+      "bytes": 124788,
+      "sourceSha256": "bf5a64ec6ebe18d6c8a201cc9315f38ababd841afdf367a21efccd4dd4e8b9bd",
+      "candidateRecordSha256": "980abb0ea17ebf390118e4affc3c8c6cdd107618b4b6f2bd4539c27c20de54e3",
+      "maxEncodedBytes": 124788,
+      "runtimeStatus": "active"
+    }
+  ]
+}

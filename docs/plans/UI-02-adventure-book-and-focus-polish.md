@@ -1,17 +1,20 @@
 # UI-02 — Adventure Book, focus and victory polish
 
-Status: Human-authorized future implementation; not started or accepted.
-Prepared: 2026-09-05. Owner: the returning UI specialist, started by the Human
+**Latest Human-directed correction, 2026-09-05:** UI-03 now implements the five-page Book, discovered bestiary, large cards, visible grey locked achievements, restrained focus and no-scroll victory layout before the corrected FP-UI1. Do not repeat or undo these slices. After Human playtest, this plan owns only remaining Book polish and newly evidenced defects. Read `UI-03-fp-ui1-correction.md` first.
+
+Status: core slices promoted into UI-03; remaining polish follows family evidence.
+Prepared: 2026-09-05. Owner: a fresh UI specialist task, started by the Human
 from a root-prepared prompt after Plan 02; root reviews persistence semantics,
-acceptance, checkpoint and release evidence. Only one runtime owner runs at once.
+acceptance, checkpoint and release evidence. Root assigns disjoint ownership if
+the Human authorizes parallel work; never overlap active runtime files.
 
 Source: `../playtests/2026-09-05-v0201-wishlist.md`, items 3, 4, 10 and 11;
 `PT-20260905-34` (focus), `PT-20260905-35` (victory), and
 `PT-20260905-37` (Book tabs, bestiary and lore cards).
 
-This future return does not amend Agent 01's running assignment, reopen its
-accepted predecessors, promise these features in FP-UI1, or wait for Plan 14.
-The Human has requested this scope for the pending implementation programme.
+The earlier statement that this scope would wait until after FP-UI1 is superseded
+by UI-03. Agent01 is finished. Consume the corrected preview's actual code and
+family feedback; do not start by rebuilding its Book, discovery store or dialogs.
 
 ## Outcome and execution gate
 
@@ -35,9 +38,9 @@ second UI framework, input system, animation scheduler or progress store.
 
 | Work | Owner and boundary |
 |---|---|
-| Book tabs, card viewer, visual focus and final victory composition | UI-02. Preserve existing UI semantics, stage geometry and approved art. |
-| Encounter ledger, migration and persistence integration | UI-02 implements one bounded data slice; root reviews the semantic/migration contract before wide UI integration. No reward or puzzle-rule changes. |
-| Victory celebration, species dance recipes and lifecycle | Plan 02 owns programmatic celebration and its director. UI-02 composes those accepted recipes inside the final popup and verifies their real geometry. |
+| Book tabs, card viewer, visual focus and final victory composition | UI-03 implements the core; UI-02 owns remaining evidence-backed polish. Preserve its semantics, stage geometry and approved art. |
+| Encounter ledger, migration and persistence integration | UI-03 supplies schema6, legitimate encounters, legacy migration and future-profile protection. UI-02 preserves these readers and asks root to review any necessary evolution. No reward or puzzle-rule changes. |
+| Victory celebration, species dance recipes and lifecycle | UI-03 supplies finite confetti and32 authored signatures. Plan02 evolves its broader director/lifecycle without restoring synchronized generic dances; UI-02 verifies composition. |
 | Optional authored victory frames | Plan 05, using accepted species identity and the same director. No second completion trigger. |
 | Canonical input normalization, controller navigation and modality truth | Plan 08. UI-02 supplies stable native actions, tab/card focus IDs and visual tokens; existing pointer/keyboard behaviour remains usable before 08. |
 | Final guardian/friend roster, introductions and lore completeness | Plan 09, consuming the UI-02 schema/card template and updating content through stable IDs. |
@@ -72,8 +75,10 @@ composition, ornaments and interaction styling must remain original Maze work.
   versus historical-layout records. Preserve generated records and known versus
   unclassified rescue history. Stats and reset remain available without placing
   destructive reset beside routine card-selection actions.
-- Empty, partly discovered and complete pages should feel intentional. Locked
-  achievements retain their existing concealment. Undiscovered bestiary entries
+- Empty, partly discovered and complete pages should feel intentional. The
+  former locked-achievement concealment rule is superseded by UI-03: display
+  recognizable grey real achievement art and its earning goal, with colourful
+  earned cards. Undiscovered bestiary entries
   use a consistent mystery treatment and never leak hidden names/lore through
   alt text, accessible names, tooltips, filter results or eager asset requests.
 

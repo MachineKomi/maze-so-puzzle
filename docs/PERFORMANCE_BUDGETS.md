@@ -666,3 +666,49 @@ npm run perf:tauri -- -Executable C:\build\maze-so-puzzle.exe -Output C:\evidenc
 
 The Playwright install is ephemeral and must not change `package.json`,
 `package-lock.json`, or Cargo manifests.
+
+## UI-03 contextual art and bounded alpha correction allocation
+
+Root technical review on 2026-09-05 accepts exactly **8,008,395 additional public
+bytes** for 47 forward-only delivery files. The hash-bound decisions and complete
+file list are in `source-assets/publication/ui-correction-art-delivery-request.json`.
+The four actor proof sheets were inspected on light/dark surfaces at 208px; the
+Home proof isolates 579 removed alpha pixels with no other source pixel changes.
+A separate source-alpha repair restores Tessera’s coral fins/mouth. Its original
+reproduction remains dormant and the corrected r02 is selected for large cards.
+Original optical files and all closed identity approvals are preserved.
+
+The allocation raises the aggregate public ceiling from 156,979,636 to
+**164,988,031 bytes**, with no new CSS allowance. Bundled JavaScript is measured
+and reviewed separately. Metadata imports do not fetch all presentation images:
+conditional Book pages use existing lazy field images, and 512px variants are
+selected for the mounted contextual viewer. No shared warmup batch was enlarged.
+The Home PNG is a failure fallback and is not fetched after successful WebP.
+The approval does not claim qualified timing, actual device sharpness, family
+acceptance or simultaneous residency of all decoded files.
+
+## UI-03 interface and interaction correction allocation
+
+Root approves **7,950 gzip9 JavaScript bytes**, no CSS and no media, for the
+Human-directed UI-03 correction. The final r6 v0.22.0 production candidate measures
+152,377 JS and 23,099 CSS bytes using Node gzip level 9. JavaScript is 7,770 bytes
+over the earlier 144,607 ceiling; 180 bytes cover small platform/compression
+variation, not unrelated future features. The initial 7,100 allowance was
+insufficient after the reviewed native DPR recovery and busy-maze height fitting
+corrections. The new ceiling is **152,557 JS / 30,227 CSS / 164,988,031 public
+bytes**. The public portion is the independently reviewed art allocation above.
+
+This covers the five-page Book/lore and schema6 discovery, guarded future-profile
+startup, stable image fallback/DPR demand, quick sound controls, anchored pad and
+coherent first-step/dialog behavior. No dependency was added. Preserve the
+schema6 and active-run readers after external distribution; never repay bytes
+by restoring a known save-loss, fallback loop or first-step jerk.
+
+The review and final exact-source measurements belong to
+`reviews/2026-09-05-ui03-root-review.md`. The initial full-frame motion inspector
+materially distorted headless timings on this8GB host (a132ms inspector callback
+inside a242ms task, plus forced layout). Correctness sampling now reads inline
+travel styles without per-frame layout or Chrome tracing; geometry has separate
+bounded checks. Heavy tracing is opt-in diagnostic. Callback intervals remain
+recorded, and neither a functional pass nor this byte allocation claims clean
+hardware frame-time or Human comfort qualification.

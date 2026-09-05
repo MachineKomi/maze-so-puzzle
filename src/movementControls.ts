@@ -1,14 +1,15 @@
 import type { Direction } from "./game/types";
 
 /**
- * A held input still moves once immediately, then pauses long enough that a
- * young player can release after a single square. Sustained movement eases up
- * to corridor speed over the next few steps instead of jumping straight to
- * full speed.
+ * Input commits exact squares; presentation spends the same time travelling
+ * the first square as every repeated square. No fast first hop followed by a
+ * keyboard-style repeat pause. A future acceleration curve must preserve this
+ * continuous handoff and be judged in actual play, not by delay values alone.
  */
-export const HELD_MOVE_INITIAL_DELAY_MS = 320;
+export const STEP_TRAVEL_MS = 160;
+export const HELD_MOVE_INITIAL_DELAY_MS = STEP_TRAVEL_MS;
 
-export const HELD_MOVE_START_REPEAT_MS = 260;
+export const HELD_MOVE_START_REPEAT_MS = STEP_TRAVEL_MS;
 export const HELD_MOVE_FASTEST_REPEAT_MS = 160;
 export const HELD_MOVE_ACCELERATION_STEPS = 16;
 
@@ -23,18 +24,8 @@ export const IDLE_HELD_MOVE_CADENCE: HeldMoveCadence = {
 };
 
 /** Returns the delay after a repeated move. `repeatCount` is zero based. */
-export function heldMoveRepeatDelay(repeatCount: number): number {
-  const progress = Math.min(
-    1,
-    Math.max(0, repeatCount) / HELD_MOVE_ACCELERATION_STEPS,
-  );
-  // Smoothstep keeps the first few repeats gentle and avoids a sudden speed
-  // change as the cadence reaches its cruising rate.
-  const easedProgress = progress * progress * (3 - 2 * progress);
-  return Math.round(
-    HELD_MOVE_START_REPEAT_MS
-      + (HELD_MOVE_FASTEST_REPEAT_MS - HELD_MOVE_START_REPEAT_MS) * easedProgress,
-  );
+export function heldMoveRepeatDelay(_repeatCount: number): number {
+  return STEP_TRAVEL_MS;
 }
 
 /**

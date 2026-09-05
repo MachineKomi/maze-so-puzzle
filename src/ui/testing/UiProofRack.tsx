@@ -28,7 +28,18 @@ export default function UiProofRack() {
   const initial = buildAdventureHudModel(level,createInitialGameState(level),registry);
   const model = extremes ? {...initial, objective: "Find the sparkling star after gathering the reusable keys, Splash Boots, Spring Boots and Antidote Leaf. Friends and treasures are optional adventures; you may return for everyone whenever you feel ready. ".repeat(2), friends: Array.from({length:5},(_,index)=>({...initial.friends[index%initial.friends.length]!,id:`proof-friend-${index}`,rescued:index%2===0})), rescueTotal:5, rescued:3, slots:initial.slots.map((slot,index)=>({...slot,found:index%2===0})), bagFound:Math.ceil(initial.slots.length/2)} : initial;
   return <main className="ui-proof-rack" style={{height:"100dvh",overflow:"auto",padding:24,background:"#eaddf0"}}>
-    <div inert={dialog !== null || undefined}>
+    <style>{`
+      .ui-proof-layout { display:grid; grid-template-columns:minmax(0,.65fr) minmax(480px,1fr); gap:24px; align-items:start; }
+      .ui-proof-controls { min-width:0; }
+      .ui-proof-hud-host { width:100%; height:max(672px,calc(100dvh - 48px)); --map-size:192px; }
+      .ui-proof-catalogue { grid-column:1/-1; }
+      @media(max-width:1050px) {
+        .ui-proof-layout { grid-template-columns:minmax(0,1fr); }
+        .ui-proof-hud-host { width:min(640px,100%); height:800px; }
+      }
+    `}</style>
+    <div className="ui-proof-layout" inert={dialog !== null || undefined}>
+      <section className="ui-proof-controls" aria-label="Component proof controls">
       <h1>Maze interface · styled component and catalogue proof</h1>
       <p>Test-only: real components, current approved identities, explicit fallback when large art is absent.</p>
       <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBlock:16}}>
@@ -45,10 +56,14 @@ export default function UiProofRack() {
         <button className="primary-button">Begin adventure</button><button>Secondary action</button><button aria-pressed>Selected</button><button disabled>Locked</button><button autoFocus>Focus-visible proof</button>
         <p>Aa Bb Cc · 0123456789 · + − × ÷ = &lt; &gt; ≤ ≥ · Power 12 + 4 = 16</p>
       </section>
-      <section style={{width:"min(460px,100%)",height:600,"--map-size":"164px"} as React.CSSProperties}>
-        <AdventureHud model={model} name="Moonlit Friendship Quest" chapter="Synthetic wrapping proof" power={999} gold={9999} science={9999} steps={100} map={<div className="maze-map-card"><strong>My map</strong><div className="maze-minimap" /></div>} actions={[]} onHint={()=>setDialog("hint")} onMore={()=>setDialog("standard")} onDetail={()=>setDialog("blocker")} onMove={()=>{}} startHold={()=>{}} stopHold={()=>{}} tester={false} suggested="left" feedback={null} />
       </section>
-      {showCatalogue && <section aria-label="Complete semantic catalogue" style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:12,marginTop:24}}>{UI_ART.map((art,index)=><article key={`${art.id}-${index}`} style={{padding:12,border:"1px solid #b49cc2",borderRadius:16,background:"#fff8ed"}}><div style={{display:"flex",alignItems:"end",gap:8}}>{([24,44,96] as const).map(size=><figure key={size} style={{margin:0}}><CatalogueImage art={art} usage={size===44?"field":"optical"} displayPx={size} alt={art.label} style={{width:size,height:size}} /><figcaption style={{fontSize:12}}>{size}px</figcaption></figure>)}</div><strong>{art.label}</strong><p>{art.family} · {art.geometry?.class ?? "legacy fallback"}</p><code>{art.id}</code></article>)}</section>}
+      {/* A primary reference needs a real deck-sized parent and map variable.
+          The rack scrolls at small viewports; production compact geometry is
+          exercised through PlayShell in the real-maze suite. */}
+      <section className="ui-proof-hud-host" aria-label="Primary HUD component reference">
+        <AdventureHud model={model} name="Moonlit Friendship Quest" chapter="Synthetic wrapping proof" power={extremes ? 999 : 2} gold={extremes ? 9999 : 81} science={extremes ? 9999 : 40} steps={100} map={<div className="maze-map-card"><strong>My map</strong><div className="maze-minimap" /></div>} actions={[]} onHint={()=>setDialog("hint")} onMore={()=>setDialog("standard")} onDetail={()=>setDialog("blocker")} onMove={()=>{}} startHold={()=>{}} stopHold={()=>{}} tester={false} suggested="left" feedback={null} />
+      </section>
+      {showCatalogue && <section className="ui-proof-catalogue" aria-label="Complete semantic catalogue" style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:12,marginTop:24}}>{UI_ART.map((art,index)=><article key={`${art.id}-${index}`} style={{padding:12,border:"1px solid #b49cc2",borderRadius:16,background:"#fff8ed"}}><div style={{display:"flex",alignItems:"end",gap:8}}>{([24,44,96] as const).map(size=><figure key={size} style={{margin:0}}><CatalogueImage art={art} usage={size===44?"field":"optical"} displayPx={size} alt={art.label} style={{width:size,height:size}} /><figcaption style={{fontSize:12}}>{size}px</figcaption></figure>)}</div><strong>{art.label}</strong><p>{art.family} · {art.geometry?.class ?? "legacy fallback"}</p><code>{art.id}</code></article>)}</section>}
     </div>
     {dialog === "sound" ? <SoundDialog transport={transport} onClose={()=>setDialog(null)} returnFocus={null} /> : dialog === "turns" ? <StoryDialog title="Dialogue host · three-turn fixture" turns={[
       {id:"first",speaker:"Ame",portrait:STORY_ART.amePortrait.src,line:"First fixture turn. This does not replace campaign dialogue."},

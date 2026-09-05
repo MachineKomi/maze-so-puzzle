@@ -1,8 +1,8 @@
 # FP-UI1 feedback
 
-Build status: pending accepted UI return, MOVE-01 and verified publication.
-Use the exact version/SHA and download/web link supplied in the release note.
-Do not assume an old v0.20.1 download contains these improvements.
+Build status: UI-03 correction of the rejected v0.21.0 preview is in verification.
+Use the exact new version/SHA and download/web link supplied in its release note.
+The older v0.20.1 and v0.21.0 builds do not contain the UI-03 corrections.
 
 ## Where to send feedback
 
@@ -17,7 +17,7 @@ Build/version:
 Windows portable or web:
 Device, OS/browser, input method:
 Maze name/number; ordinary run or tester:
-Normal/Big; motion setting:
+Window size/orientation; motion and surface-quality settings:
 What I did (short steps):
 What happened:
 What I expected:
@@ -42,11 +42,14 @@ run in the isolated preview profile for those checks.
   and clarity observations, and “FP-UI1 playtest passed.” Untested rows stay
   untested; one device does not qualify every platform.
 - Root records that evidence, resolves required remaining gates and supplies
-  the final Agent 04 lighting/wall-depth prompt. The Human starts that existing
+  the final Agent 04 lighting/wall-depth prompt. The Human starts a fresh
   specialist task; a passing preview does not automatically trigger it.
 - If issues appear, root reproduces and routes them, reviews the correction and
   provides a new immutable build when needed. Retest the affected journey and
   a short regression route; earlier passing observations stay recorded.
 
-The main checklist is `FP-UI1-checklist.md`. Root technical/release checks precede
-the family handoff; this template does not certify the pending candidate.
+The main checklist is `FP-UI1-checklist.md`; the new release note supplies the
+short UI-03 route. Root technical/release checks precede the family handoff;
+this template does not certify the pending candidate. Big/Normal was deliberately
+removed; landscape layouts use the maximum useful board at the existing
+six-tile camera view.

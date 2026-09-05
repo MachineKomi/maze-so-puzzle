@@ -1,5 +1,92 @@
 # UI / UX implementation specification
 
+**Latest Human-directed correction, 2026-09-05:** UI-03 supersedes the historical Big/Normal mode, concealed locked achievement artwork, horizontal arrows, thin default type and reversed Home composition below. Current implementation and review are in `plans/UI-03-fp-ui1-correction.md` and its 61-row intake. Schema 6 adds truthful guardian discovery. The earlier v0.21 engineering checkpoint was rejected by Human playtest; it is not current visual acceptance.
+
+## Current UI-03 landscape geometry — 2026-09-05
+
+This section supersedes the older Plan 01 geometry and phone-cell dimensions
+preserved below. It describes the final source submitted for the production
+integration run, **not a passed production run or Human/device acceptance**.
+
+`PlayShell` measures the safe-area content box; `calculatePlayLayout` uses
+physical CSS pixels. Primary and compact landscape share one maximized square
+board on the left and one deck on the right. There is no Big/Normal switch and
+no camera-zoom change. Compact applies below 600px content height or 800px
+content width; emergency applies below 650px content width. Deck minimums are
+480–520px primary (40% of content width clamped to that interval), 440px compact
+and 352px emergency. The board uses the remaining width after the 8px gap (4px
+emergency), capped by available height. Existing shell padding and safe insets
+remain authoritative. Portrait presents the rotate invitation.
+
+The deck's header, objective, fixed 48px primary feedback region and control
+area consume their real content heights. The overview receives the remaining
+height. `AdventureHud` owns one bounded `ResizeObserver` for this fit: it watches
+the overview, header, objective, controls and both collection headings. It runs
+once on attachment and then on observed geometry changes, disconnecting on
+cleanup. Friend/bag count changes reattach the observer. It reads layout only
+in this geometry path, writes local CSS custom properties, and never reads
+layout on the movement animation clock or changes engine/save/camera state.
+
+For primary layout, map chrome is the measured heading/legend space around the
+square minimap. The map is capped by the overview's remaining height. Candidate
+collection column counts are evaluated against actual equipment width, heading
+heights/margins, the 16px group gap and 6px cell gaps. Cells are capped at 112px
+and never fall below 48px interactive size. If the ideal map leaves cells below
+64px, surplus map width is progressively traded for collection width until
+64px is possible or the map floor is reached: 192px at window widths at least
+1280px, otherwise 164px. Thus a dense iPad maze can have a smaller map than a
+sparse one; **map enlargement is not universal**. Primary controls omit their
+redundant keyboard-caption line at heights 601–800px to preserve usable art
+space while keeping every control.
+
+Compact layout keeps the 152px thumb pad anchored at the bottom right, with
+48px direction buttons, Hint and More. Short landscape uses full-width labelled
+Friends and Bag picture rows above the map/pad region; taller compact layouts
+retain their two collection columns. Compact summaries are noninteractive
+`role="img"` spans; the More surface supplies named full-size inspection actions.
+The map caps itself against the remaining overview height and collection
+shelf, retaining its 128px floor (96px emergency). At 568×320, the authored
+352px deck leaves an approximately 204px board, or 188px with 12px safe insets.
+The emergency summary strip uses 24px pictures, compact labels and text-only
+Power/Gold/Science counters; its full objective remains 16px. Those deliberate
+emergency differences do not reduce primary iPad/desktop art sizes. Compact
+feedback uses the existing map notice instead of a separate deck notice row.
+
+At enlarged primary text, collection fitting gives way to the bounded readable
+deck overflow. Compact Objective & Hint and movement retain their existing
+docked reader contract. Counter chips now retain their full intrinsic number
+width, their images do not shrink, and whole chips wrap to subsequent rows;
+tabular digits must not overlap the next chip. Accessible reading overflow at
+200% is distinct from normal-text simultaneous visibility.
+
+Final bounded DEV observations (`http://127.0.0.1:1422`, source before the root
+production run): all 50 cases—mazes 1/8/12/15/16 at 1920×1080, 1280×720,
+1194×834, 1024×768, 960×540, 844×390 and 568×320, plus 12px safe insets on the
+three compact targets—had no horizontal/vertical deck overflow, no collection
+rectangle overlap with the pad, uncovered compact summary corners and targets
+at least 48px. No page errors were observed. Seven synthetic 200% text-spacing
+cases had equal scroll/client widths for the HUD, counters, objective, friends
+and bag. These are scoped geometry observations, not physical-device,
+performance, whole-product visual or production-release qualification.
+
+| Dense maze 12 viewport | Square map | Collection cell | Interpretation |
+| --- | ---: | ---: | --- |
+| 1920×1080 | 380px | 92px | Primary desktop |
+| 1280×720 | 192px | 57px | Primary height constraint |
+| 1194×834 | 164px | 62px | Primary iPad art/map tradeoff |
+| 1024×768 | 164px | 54px | Primary iPad height constraint |
+| 960×540 | 192px | 48px | Compact summary; same at 12px insets |
+| 844×390 | 128px | 44px | Compact summary; same at 12px insets |
+| 568×320 | 96px | 24px | Emergency summary; same at 12px insets |
+
+Exact rectangles are in
+`C:/Users/hellb/Documents/Maze so Puzzle/review-evidence/2026-09-05-ui03-dialogs/hud-final-geometry.json`;
+text extents are in adjacent `hud-final-enlarged.json`. Actual-view screenshots
+are `hud-final-1920-0.png`, `hud-final-1194-0.png`, `hud-final-844-12.png` and
+`hud-final-568-12.png`. Root reviewed the 1194/1920 dense tradeoff; Human visual
+and physical-device review remain pending. The integrated production result
+must be recorded separately by root.
+
 Plan 01, 2026-09-05. **Root engineering checkpoint accepted; FP-UI1 and Human/device
 qualification pending.**
 

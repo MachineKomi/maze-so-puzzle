@@ -5,5 +5,6 @@
 @import "./ui/styles/shell.css" layer(shell);
 @import "./ui/styles/hud.css" layer(hud);
 @import "./ui/styles/screens.css" layer(screens);
+@import "./ui/styles/book.css" layer(screens);
 @import "./ui/styles/dialogs.css" layer(dialogs);
 @import "./ui/styles/comfort.css" layer(comfort);

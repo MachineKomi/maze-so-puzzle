@@ -472,12 +472,9 @@
   box-shadow: 0 0 15px rgba(255, 215, 88, 0.72);
   pointer-events: none;
 }
-.player-layer.move-a {
-  animation: ame-hop-a 76ms ease-out;
-}
-.player-layer.move-b {
-  animation: ame-hop-b 76ms ease-out;
-}
+/* Travel carries the actor and Power steadily; a small sprite-only sway adds life. */
+:root[data-motion="full"] .maze-board[data-travel-state="moving"] .player-sprite { animation: ame-travel-sway 640ms ease-in-out infinite; }
+@keyframes ame-travel-sway { 0%,100% { rotate: -1deg; } 50% { rotate: 1deg; } }
 .player-layer.move-a::before {
   animation: step-spark-a 260ms ease-out;
 }
@@ -652,10 +649,7 @@
 .player-layer.presentation-hidden {
   visibility: hidden;
 }
-.maze-board.battle-active {
-  transform-origin: var(--battle-focus-x, 50%) var(--battle-focus-y, 50%);
-  animation: battle-camera-punch var(--battle-duration, 2220ms) cubic-bezier(0.25, 0.72, 0.3, 1) both;
-}
+/* The viewport is a stable window. Battle acting belongs to its inner layers. */
 .battle-presentation {
   position: absolute;
   z-index: 24;

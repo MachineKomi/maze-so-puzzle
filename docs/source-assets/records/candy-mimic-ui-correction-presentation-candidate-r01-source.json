@@ -1,0 +1,230 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "candy-mimic-ui-correction-presentation-candidate-r01-source",
+  "id": "candy-mimic",
+  "artVersion": 2,
+  "family": "enemy",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui-correction-approved-actor-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-08-candy-mimic-a",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/PROMPTS.md",
+        "sha256": "a11a7a7ce1d985bf80c48521c40777406936d87fc7c436292d42d019f960ea93"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "runtime-comparison",
+          "path": "public/assets/enemy-candy-mimic-v1.png",
+          "sha256": "dac508a079956f93a45aa554c928e236de89ad191959ff29a7142a1d7c59d84a"
+        },
+        {
+          "order": 2,
+          "role": "construction-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-01/approved/enemy-treasure-mimic-v01-512.png",
+          "sha256": "8e106bb66b4f4e1a5125430986e7507d795338525f63b25c9b4912f277166c8e"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-1b361e10-1fa8-4aa1-a967-163a16914698.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/enemy-candy-mimic-v02-candidate-a-matte-01-generator-original.png",
+          "sha256": "48f80ed146cfdb45ad06c9ede4e913289b326bb6df853a04d7df2a05c438b5bf",
+          "bytes": 1424375,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/PROMPTS.md",
+      "sha256": "a11a7a7ce1d985bf80c48521c40777406936d87fc7c436292d42d019f960ea93"
+    },
+    "outputIds": [
+      "exec-1b361e10-1fa8-4aa1-a967-163a16914698.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/enemy-candy-mimic-v02-candidate-a-matte-01-generator-original.png",
+      "sha256": "48f80ed146cfdb45ad06c9ede4e913289b326bb6df853a04d7df2a05c438b5bf",
+      "bytes": 1424375,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-08-candy-mimic-a in docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "candy-mimic-enemy-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/candy-mimic-v02-presentation-512-r01.webp",
+      "sha256": "a522a7b083b9c3c0ecb4b6b7dbf89abcb74ecb2901cce2c87a5f472fa970f7ee",
+      "bytes": 191316,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "enemy-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "item",
+    "pivot": [
+      0.5,
+      0.94140625
+    ],
+    "visibleBounds": [
+      0.078125,
+      0.060546875,
+      0.841796875,
+      0.87890625
+    ],
+    "safeInset": [
+      0.060546875,
+      0.080078125,
+      0.060546875,
+      0.078125
+    ],
+    "baseline": 0.94140625,
+    "stateFamilyId": "candy-mimic",
+    "stateAnchorBox": [
+      0.0703125,
+      0.05859375,
+      0.859375,
+      0.8828125
+    ],
+    "visualCenter": [
+      0.50673052,
+      0.48874863
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-08-enemy-refresh/enemy-candy-mimic-v02-candidate-a-matte-01-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "enemy-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/candy-mimic-v02-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "maxEncodedBytes": 191316,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        9,
+        244,
+        15
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.07,
+        0.06,
+        0.93,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "script": "scripts/art_pipeline/ui_actor_presentation_candidates.py",
+      "description": "Rebuilt approved optical bytes exactly, then applied the same approved source extraction and family registration at 512px. No generated redraw, source alteration or optical upscale."
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and ordered semantic/rendering references; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Remove the actor presentation extension from the UI catalogue. Original approved optical assets and their records remain unchanged and available."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+    "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui-correction-actor-presentation-approval.json",
+    "evidenceSha256": "6a959f164c00c21b2f5291114b94fd2818a5393a2c18806fc7ac8a3662cae4ea"
+  }
+}

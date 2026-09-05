@@ -43,16 +43,18 @@ class HomeHeroV04PublicationTests(unittest.TestCase):
             # Pale outer-ear fur was lost by the old v03 tolerance. It must stay.
             self.assertEqual(alpha.getpixel((1275, 635)), 255)
 
-    def test_runtime_pointer_and_strict_record_are_current(self) -> None:
+    def test_reviewed_v04_is_preserved_and_forward_home_pointer_is_current(self) -> None:
         self.assertEqual(validate_record_shape(self.record, self.record["recordId"]), [])
-        self.assertEqual(self.record["runtimeStatus"], "active")
+        self.assertEqual(self.record["runtimeStatus"], "superseded")
+        self.assertEqual(self.record["approvalStatus"], "approved")
         self.assertEqual(self.record["artVersion"], 4)
         runtime = ROOT / self.report["entry"]["runtimePath"]
         self.assertTrue(runtime.is_file())
         self.assertEqual(sha256_file(runtime), self.report["entry"]["runtimeSha256"])
         catalogue = (ROOT / "src/generated/mgjrpg02Art.ts").read_text(encoding="utf-8")
-        self.assertIn("home-hero-splash-v04-front-door-1024-r01.webp", catalogue)
-        self.assertIn("home-hero-splash-mgjrpg02-v04-source", catalogue)
+        self.assertIn("home-hero-splash-v05-front-door-1024-r01.webp", catalogue)
+        self.assertIn("home-hero-splash-mgjrpg02-v05-source", catalogue)
+        self.assertIn("home-hero-splash-v05-front-door-1024-r01.png", catalogue)
 
     def test_previous_runtime_remains_a_rollback_hold(self) -> None:
         previous = read_json(

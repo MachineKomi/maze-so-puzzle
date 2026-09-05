@@ -1,0 +1,202 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "pumpkin-sprite-ui-correction-presentation-candidate-r01-source",
+  "id": "pumpkin-sprite",
+  "artVersion": 2,
+  "family": "enemy",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui-correction-approved-actor-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-17-pumpkin-sprite",
+      "generator": "OpenAI — Codex built-in image generation capability",
+      "model": "not exposed by the tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/PROMPTS.md",
+        "sha256": "b4df618aa23d156b0cb79faead0af8f0abc1e9f51b65469ea2bfb8fe7c23c654"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "family-authority",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/recipes/mgjrpg-02.json",
+          "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-aa8d333d-07b3-4360-9a9b-e71a53470319.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/enemy-pumpkin-sprite-v02-generator-original.png",
+          "sha256": "a3e7a274d8a869e0ca3306db91f83a622eeed557c91b4fbb401f217c6cc6e506",
+          "bytes": 1051727,
+          "disposition": "selected",
+          "reason": "Selected by the forward-only v06 Human runtime-publication decision."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Batch ledger recorded on 2026-09-03; exact execution time was not exposed. Original ordered-role prose remains immutable in docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/run-record.json."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/PROMPTS.md",
+      "sha256": "b4df618aa23d156b0cb79faead0af8f0abc1e9f51b65469ea2bfb8fe7c23c654"
+    },
+    "outputIds": [
+      "exec-aa8d333d-07b3-4360-9a9b-e71a53470319.png"
+    ],
+    "notes": "Exact submitted prompt block is preserved in the hashed batch prompt file."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/enemy-pumpkin-sprite-v02-generator-original.png",
+      "sha256": "a3e7a274d8a869e0ca3306db91f83a622eeed557c91b4fbb401f217c6cc6e506",
+      "bytes": 1051727,
+      "relationship": "selected immutable generator original",
+      "evidence": "Exact run batch-17-pumpkin-sprite in docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/run-record.json plus v06 runtime publication decision."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "pumpkin-sprite-enemy-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/pumpkin-sprite-v02-presentation-512-r01.webp",
+      "sha256": "0be744e9a5d044e2d15c280c86e264e74c7193a8f11d3dd86338f37d38b16d6f",
+      "bytes": 158102,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "enemy-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "grounded-actor",
+    "pivot": [
+      0.5,
+      0.9
+    ],
+    "visibleBounds": [
+      0.08203125,
+      0.060546875,
+      0.833984375,
+      0.87890625
+    ],
+    "safeInset": [
+      0.060546875,
+      0.083984375,
+      0.060546875,
+      0.08203125
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-17-enemy-catalogue-completion/enemy-pumpkin-sprite-v02-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "enemy-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/pumpkin-sprite-v02-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "maxEncodedBytes": 158102,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "native-alpha"
+    },
+    "registration": {
+      "targetBox": [
+        0.07,
+        0.06,
+        0.93,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "script": "scripts/art_pipeline/ui_actor_presentation_candidates.py",
+      "description": "Rebuilt approved optical bytes exactly, then applied the same approved source extraction and family registration at 512px. No generated redraw, source alteration or optical upscale."
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed, and exact execution timestamp were not exposed by the image-generation tool response."
+  ],
+  "rights": {
+    "originClaim": "Generated for Maze so Puzzle from exact prompts and internal specifications; no named franchise, character, logo, living artist, or proprietary composition was requested.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Codex Plan 03 provenance audit under Human project-owner publication direction",
+    "notes": "Technical provenance review: docs/source-assets/reviews/mgjrpg-02-rights-provenance-v01.json. Not external legal advice."
+  },
+  "rollback": {
+    "method": "Remove the actor presentation extension from the UI catalogue. Original approved optical assets and their records remain unchanged and available."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+    "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui-correction-actor-presentation-approval.json",
+    "evidenceSha256": "6a959f164c00c21b2f5291114b94fd2818a5393a2c18806fc7ac8a3662cae4ea"
+  }
+}

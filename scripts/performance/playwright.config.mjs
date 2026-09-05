@@ -18,7 +18,7 @@ process.env.MAZE_PERF_EVIDENCE_DIR = evidenceRoot;
 
 export default defineConfig({
   testDir: import.meta.dirname,
-  testMatch: ["browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts"],
+  testMatch: ["browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts", "ui-correction.pw.ts"],
   fullyParallel: false,
   workers: 1,
   retries: 0,

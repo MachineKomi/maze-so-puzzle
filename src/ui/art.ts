@@ -2,8 +2,14 @@ import { MGJRPG02_ART, FRONT_DOOR_ART, type ArtGeometry, type ArtReference, type
 import { UI_PRESENTATION_CANDIDATES } from "../generated/uiPresentationArt";
 import { UI_REWARD_PRESENTATION_CANDIDATES } from "../generated/uiRewardPresentationArt";
 
+import { UI_ACTOR_PRESENTATION_CANDIDATES } from "../generated/uiActorPresentationArt";
+import { UI_TESSERA_PRESENTATION_CANDIDATE } from "../generated/uiTesseraPresentationArt";
+
 const presentationVariants: Readonly<Record<string, RuntimeArtVariant>> = {
-  ...UI_PRESENTATION_CANDIDATES, ...UI_REWARD_PRESENTATION_CANDIDATES,
+  ...UI_PRESENTATION_CANDIDATES, ...UI_REWARD_PRESENTATION_CANDIDATES, ...UI_ACTOR_PRESENTATION_CANDIDATES,
+  // The source-reproduced r01 had inherited coral-alpha damage. Root reviewed
+  // r02 separately; its recovered fins replace only contextual presentation.
+  ...UI_TESSERA_PRESENTATION_CANDIDATE,
 };
 
 export interface UiArt extends ArtReference {

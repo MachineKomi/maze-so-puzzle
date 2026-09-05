@@ -1,64 +1,81 @@
 # FP-UI1 — family playtest checklist
 
-Status: prepared 2026-09-05; build, release URL and results not yet available.
-Scope: reviewed Plan 01 UI plus MOVE-01 coordinated character/camera travel.
-Controller overhaul, final VFX/animation, gapless OST qualification and 24 mazes
-are later work. This checklist does not imply those features already ship.
+Current scope: UI-03 corrects the rejected v0.21.0 preview. Root supplies the new
+version, exact source SHA, verified Windows/web links and technical results in
+its release PLAYTEST note. A previous build or previous automated pass does not
+qualify this correction. Controller overhaul, final lighting/VFX/animation,
+expanded campaign puzzles and adjustable camera zoom remain later work.
 
-Root fills in the exact version, source SHA, download/web link, isolated profile
-and known issues here or in the linked release PLAYTEST note before handoff.
-Root performs technical checks first. Family testing is voluntary; one short
-session and a few useful observations are more valuable than exhausting a matrix.
+Use `FP-UI1-feedback-template.md` to reply in the existing Astra task. Report an
+issue immediately; you need not finish the checklist. A short comfortable
+session is enough. The remaining family-quality decision belongs to you and Ame.
 
-Use `FP-UI1-feedback-template.md` to report results in the existing Astra task.
-If all tested rows pass, send the exact build/device/input and comfort verdict;
-root records acceptance and prepares Agent 04 after remaining required gates.
-Report any issue immediately with short reproduction steps. Future adjustable
-camera zoom (PT32, Plan 08) is not expected in this preview.
+## First session: feel and clarity
 
-## First session: comfort and clarity
+1. **Title and Home.** Logo/actions belong on the left; the Home cast belongs on
+   the right-hand path. Check the larger buttons, readable rounded type, warm
+   surfaces and one-action speaker mute. The sliders open Sound & Comfort.
+2. **Movement.** In a scrolling maze, tap once after waiting, tap several times,
+   then hold. Try corners, reversals and the outside edge of the maze. Each first
+   step should be smooth, with no flash, camera jerk or pronounced Ame hop.
+   Does holding feel comfortable enough that you no longer avoid it?
+3. **Play surface.** The board is always the largest useful square at the same
+   six-tile view; Big/Normal is gone. Collect a potion, meet a wall and fight a
+   guardian. Neither board nor tools should jump or pulse in size. Amounts are
+   revealed after collection, not printed beside uncollected rewards.
+4. **Picture-led tools.** Find Ame's Power, Gold, Science, map, friends and bag.
+   Are they legible at your usual distance? Waiting friends are caged, missing
+   equipment faded, acquired art in full colour with no little tick badges.
+   Tap a friend or item for its larger card (More holds details on small phones).
+5. **Thumb control.** On iPad/touch, use the bottom-right pad: tap its arrows,
+   hold, and drag within it. Release and change direction. It should follow your
+   intent and always stop when released or when a dialog opens.
+6. **Stories and help.** Circular portraits, clear teaching copy, one Start on a
+   one-turn story. Tap its non-control body or press Enter after clicking the
+   text. Open Hint/Help and return to the same run. Keyboard focus should be
+   clear but restrained, without a thick green ring.
+7. **A lovely finish.** Complete an ordinary maze. Look for confetti and the
+   friends' different celebrations, clear rewards and visible continuation.
+   Press Enter after clicking an inert area. If you deliberately focus Stay or
+   Restart, Enter should respect that choice. Try Reduced motion if preferred.
+8. **The Book.** Visit Mazes, Friends, Bestiary, Stats and Achievements. Inspect
+   a large friend card and an encountered guardian. Locked achievements show
+   grey real art and their goals; earned cards become colourful keepsakes.
+9. **Return later.** Close and reopen the new preview. Continue the same ordinary
+   run and check that rewards/progress were neither lost nor duplicated.
 
-1. Open the title, enter Home, and begin or continue. Are the actions obvious?
-2. In Maze 1, try taps and a hold. In a scrolling maze, repeat a straight hold,
-   a corner, a reversal and travel near an outside edge. Does the background
-   feel comfortable? Can you hold naturally instead of taking isolated steps?
-   Try Reduced motion if useful. Stop that check if uncomfortable.
-3. Explain the current objective in your own words. Find Power, the minimap,
-   Bag and waiting/rescued friends. Do labels read at your usual distance?
-4. Meet a blocker or stronger guardian. What could you do next? Use a Hint only
-   when wanted; asking an adult for help is welcome, never counted as failure.
-5. End at a natural stopping point. Reopen and continue the same progress.
+Record device, OS/browser, input, build, maze and motion setting; one liked
+moment, any confusing moment, and comfortable / tolerable / uncomfortable.
+A result on one device does not qualify every platform. Pause any check that
+feels uncomfortable.
 
-Record the device, input, build and maze; what happened; what was expected;
-whether an adult intervened; and one liked moment or frustrating moment.
-Comfort can be recorded as comfortable / tolerable / uncomfortable plus a note.
-No percentage or broad population claim comes from one family's session.
-
-## Optional second session: busy UI and recovery
-
-Tester access is for layout, content and movement checks. Tester runs deliberately
-suppress ordinary persistence/rewards. Use an ordinary run in the isolated preview
-profile for exit choices, reward accounting and save/reopen checks below.
+## Optional short second session
 
 | Journey | Observe |
 | --- | --- |
-| Mazes 12/15 through safe tester access or normal progress | Seven Bag slots, five friends, full objective; no missing content or awkward scrolling on the intended primary device |
-| Normal ↔ Big | Board never gets smaller; useful map and actions remain available |
-| Help/Hint/Sound, then close | Clear close action; no movement behind the surface; keyboard focus returns |
-| Sound | Mute, Previous, Next and Shuffle work within the current context; unavailable actions are explained |
-| Adventure Book | Earned achievement opens large and clear; locked reward stays concealed; friend catalogue remains usable |
-| Story | Easy advance/skip/replay; no accidental maze movement or lost progress |
-| Ordinary run: exit with a friend remaining | Stay is the safe choice; same run resumes intact |
-| Ordinary run: Next/Restart and save/reopen | Rewards are not duplicated; restart warns appropriately; ordinary saves remain protected |
+| Mazes 12/15 via tester access, and a five-friend maze | All actual Bag/friend content remains available; nothing important is clipped on your main device |
+| Landscape iPad and desktop, then a narrow landscape phone | Same information hierarchy in deliberately composed layouts; compact phones move secondary actions into More |
+| Rotate to portrait and back | Clear landscape invitation, no moving underneath it, same run when restored |
+| Sound & Comfort | Immediate mute; Previous/Next/Shuffle follow the current music context; choices fit the screen |
+| Ordinary exit with a friend remaining | Stay safely resumes the same run; choosing to leave has the intended meaning |
+| Restart twice; cancel/timeout after one press | First press is a clear reversible confirmation; only deliberate second press restarts |
+| Larger text / OS scaling | Important content remains readable and reachable; scrolling is allowed for enlarged-text accessibility, never clipped |
 
-## Root handoff checklist
+Tester runs deliberately do not bank ordinary rewards or save their run. Use an
+ordinary run in the preview profile for the save/reward/exit-choice checks.
+The new Windows preview keeps the FP-UI1 profile used by v0.21.0 and migrates its
+Book discovery data safely; it remains separate from the older v0.20.1 app profile.
+Do not reset a profile to diagnose a possible save problem.
 
-- All mandatory UI/art/geometry and MOVE-01 gates are accepted or have an explicit
-  Human decision; do not use family testing to conceal a known implementation gap.
-- Verify primary-device geometry and compact-phone behavior, 200% text, focus,
-  input isolation, large-art load/failure paths, font/media budget and regressions.
-- Smoke the exact web and portable build through title → story → maze → save →
-  reopen; record artifact hash/profile and truthful hardware limitations.
-- Publish one prioritized feedback list after the session. Route defects to the
-  owning phase; preserve likes as well as failures. Add new features only through
-  a separately recorded Human decision.
+## After playtest
+
+If all tested journeys pass, reply with the build/device/input, comfort and
+clarity observations, and “FP-UI1 playtest passed.” Untested journeys stay
+untested. Root records your evidence and resolves remaining required gates,
+then supplies the completed Agent 04 prompt for a **fresh task**. A passing
+playtest does not automatically launch another specialist.
+
+If anything regresses, send a short reproduction in this Astra task using the
+feedback template. Root reproduces it, records ownership, corrects and verifies
+it, and supplies a new immutable preview when needed. Keep the build/version
+with the report so later agents do not confuse old and new evidence.

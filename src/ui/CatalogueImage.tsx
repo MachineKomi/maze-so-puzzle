@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type ImgHTMLAttributes } from "react";
+import { useLayoutEffect, useRef, useState, useSyncExternalStore, type ImgHTMLAttributes } from "react";
 import type { RuntimeArtUsage } from "../artCatalog";
 import { resolveUiArt, selectArtRendition, type UiArt } from "./art";
 
@@ -12,7 +12,7 @@ interface CatalogueImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 // publish; scrolling/travel never reads layout or changes rendition state.
 const sizeListeners = new WeakMap<Element, (size: number) => void>();
 let sizeObserver: ResizeObserver | undefined;
-function observeImageSize(element: HTMLImageElement, listener: (size: number) => void) {
+function observeImageSize(element: Element, listener: (size: number) => void) {
   sizeObserver ??= new ResizeObserver(entries => {
     for (const entry of entries) {
       const size = Math.max(entry.contentRect.width, entry.contentRect.height);
@@ -22,12 +22,61 @@ function observeImageSize(element: HTMLImageElement, listener: (size: number) =>
   sizeListeners.set(element, listener); sizeObserver.observe(element);
   return () => { sizeObserver?.unobserve(element); sizeListeners.delete(element); };
 }
+// Shared native signals cover both CSS resizing and a display-density change
+// with unchanged CSS dimensions. No timer, polling or per-image event listeners.
+const dprListeners = new Set<() => void>();
+let dprQuery: MediaQueryList | undefined;
+let dprObserver: ResizeObserver | undefined;
+const readDpr = () => typeof window === "undefined" ? 1 : window.devicePixelRatio;
+const serverDpr = () => 1;
+let observedDpr = readDpr();
+function watchDpr() {
+  dprQuery?.removeEventListener("change", publishDpr);
+  dprQuery = undefined;
+  if (dprListeners.size && typeof window !== "undefined" && typeof window.matchMedia === "function") {
+    dprQuery = window.matchMedia(`(resolution: ${readDpr()}dppx)`);
+    dprQuery.addEventListener("change", publishDpr);
+  }
+}
+function publishDpr() {
+  const next = readDpr();
+  if (next === observedDpr) return;
+  observedDpr = next;
+  watchDpr();
+  for (const listener of dprListeners) listener();
+}
+function subscribeDpr(listener: () => void) {
+  dprListeners.add(listener);
+  if (dprListeners.size === 1) {
+    observedDpr = readDpr();
+    watchDpr();
+    window.addEventListener("resize", publishDpr);
+    window.addEventListener("pageshow", publishDpr);
+    if (typeof ResizeObserver !== "undefined") {
+      dprObserver = new ResizeObserver(publishDpr);
+      // A content-box observer alone misses density-only changes. Older
+      // engines retain the shared resize + resolution-query fallbacks.
+      try { dprObserver.observe(document.documentElement, { box: "device-pixel-content-box" }); }
+      catch { dprObserver.observe(document.documentElement); }
+    }
+  }
+  return () => {
+    dprListeners.delete(listener);
+    if (!dprListeners.size) {
+      watchDpr();
+      window.removeEventListener("resize", publishDpr);
+      window.removeEventListener("pageshow", publishDpr);
+      dprObserver?.disconnect(); dprObserver = undefined;
+    }
+  };
+}
 /** Single image boundary. Legacy semantic URL projections resolve back to records. */
 export function CatalogueImage({ art: identity, src, fallbackSrc, usage = "optical", displayPx = 48, alt = "", onError, ...props }: CatalogueImageProps) {
   const element = useRef<HTMLImageElement>(null);
   const [renderedSize, setRenderedSize] = useState(displayPx);
+  const dpr = useSyncExternalStore(subscribeDpr, readDpr, serverDpr);
   const art = resolveUiArt(identity ?? src ?? "");
-  const selected = art ? selectArtRendition(art, usage, renderedSize, typeof window === "undefined" ? 1 : window.devicePixelRatio) : undefined;
+  const selected = art ? selectArtRendition(art, usage, renderedSize, dpr) : undefined;
   const [failed, setFailed] = useState<readonly string[]>([]);
   const requested = selected?.src ?? src;
   const absolute = (url: string) => typeof document === "undefined" ? url : new URL(url, document.baseURI).href;
@@ -36,8 +85,15 @@ export function CatalogueImage({ art: identity, src, fallbackSrc, usage = "optic
   // After any responsive failure use bounded explicit URLs, never the failed set.
   const responsive = failed.length === 0;
   useLayoutEffect(() => {
-    if (element.current && typeof ResizeObserver !== "undefined") return observeImageSize(element.current, setRenderedSize);
-  }, [resolved]);
+    if (!element.current || typeof ResizeObserver === "undefined") return;
+    // A capped optical fallback must not shrink its own rendition demand and
+    // oscillate back into a large presentation. The authored frame still
+    // follows real layout changes; field/optical images observe themselves.
+    const target = usage === "presentation"
+      ? element.current.closest('[data-art-anchor="presentation"]') ?? element.current
+      : element.current;
+    return observeImageSize(target, setRenderedSize);
+  }, [resolved, usage]);
   const fallback = resolved !== requested || selected?.fallback;
   const geometry = resolved === selected?.src ? selected?.geometry ?? art?.geometry : art?.geometry;
   const opticalFallback = usage === "presentation" && resolved !== requested;

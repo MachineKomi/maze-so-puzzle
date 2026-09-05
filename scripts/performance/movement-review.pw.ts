@@ -104,9 +104,10 @@ for(const [width,height] of [[1920,1080],[1280,720],[1194,834],[1024,768],[960,5
     const opposite:Record<Direction,Direction>={up:"down",down:"up",left:"right",right:"left"};
     const records=[];
     await page.setViewportSize({width:width!,height:height!});
-    for(const big of [false,true]) {
+    {
       await selectTesterLevel(page,level);
-      if(big) await action(page,"big-maze");
+      await expect(page.locator(".play-shell")).toHaveAttribute("data-mode","maximized");
+      await expect(page.locator('[data-focus-id="big-maze"]')).toHaveCount(0);
       await page.locator(".maze-board").focus();
       await page.keyboard.press(keyForDirection[direction]);
       await page.waitForTimeout(70);
@@ -127,8 +128,8 @@ for(const [width,height] of [[1920,1080],[1280,720],[1194,834],[1024,768],[960,5
       await page.keyboard.press("Escape");
       await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
       await page.waitForTimeout(350);await expectUiRouteState(page,after);
-      records.push({big,mid,stopped,after:await travelState(page)});
-      await page.screenshot({path:resolve(output,`matrix-${width}-${height}-${big?"big":"normal"}.png`)});
+      records.push({mode:"maximized",mid,stopped,after:await travelState(page)});
+      await page.screenshot({path:resolve(output,`matrix-${width}-${height}-maximized.png`)});
     }
     await writeFile(resolve(output,`matrix-${width}-${height}.json`),JSON.stringify(records,null,2));
   });

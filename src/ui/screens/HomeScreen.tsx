@@ -4,6 +4,7 @@ import { CURATED_LEVELS } from "../../game/levels";
 import type { PlayerProgress } from "../../progress";
 import { getNextStoryIndex } from "../../navigation";
 import { CatalogueImage } from "../CatalogueImage";
+import { QuickSoundControl } from "../QuickSoundControl";
 import { BUILD_VERSION } from "../version";
 
 interface TitleScreenProps {
@@ -20,6 +21,7 @@ interface TitleScreenProps {
   readonly onRequestReset: (trigger: HTMLElement) => void;
   readonly onOpenTester: () => void;
   readonly onToggleSound: () => void;
+  readonly onToggleMuted?: () => void;
 }
 
 export function TitleScreen({
@@ -36,6 +38,7 @@ export function TitleScreen({
   onRequestReset,
   onOpenTester,
   onToggleSound,
+  onToggleMuted,
 }: TitleScreenProps) {
   const solvedIds = Object.keys(progress.bestResultsByLevel);
   const storySolved = CURATED_LEVELS.filter((level) => solvedIds.includes(level.id)).length;
@@ -86,12 +89,7 @@ export function TitleScreen({
         ))}
       </div>
 
-      <button
-        className="title-sound"
-        aria-label="Open Sound and comfort"
-        aria-pressed={!muted}
-        onClick={onToggleSound}
-      ><CatalogueImage src={muted ? ASSETS.navMuted : ASSETS.navSound} alt="" /></button>
+      <QuickSoundControl className="title-sound-controls" muted={muted} onToggleMuted={onToggleMuted} onOpenSettings={onToggleSound} />
 
       <div className="title-copy">
         <h1 id="game-title" className="sr-only">Maze so Puzzle</h1>

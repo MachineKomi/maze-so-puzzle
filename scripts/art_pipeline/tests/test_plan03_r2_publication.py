@@ -105,7 +105,8 @@ class Plan03R2PublicationTests(unittest.TestCase):
         self.assertNotIn('className="title-vignette"', screens)
         self.assertNotIn(".title-vignette", styles)
         self.assertIn("game-logo-v06-front-door-1024-r01.webp", catalogue)
-        self.assertIn("home-hero-splash-v04-front-door-1024-r01.webp", catalogue)
+        # UI03 explicitly promotes the bounded v05 alpha correction; v04 remains immutable rollback art.
+        self.assertIn("home-hero-splash-v05-front-door-1024-r01.webp", catalogue)
         self.assertIn('className="front-door-screen"', front_door)
 
     def test_prior_front_door_files_remain_rollback_holds(self) -> None:

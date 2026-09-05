@@ -1,5 +1,28 @@
 # Release checklist
 
+## Current UI-03 correction — v0.22.0
+
+The current release work follows the Human's rejection of v0.21.0 and subsequent
+authorization to implement UI-03. The historical Plan01/MOVE approvals below do
+not qualify the new preview. Use [the current root review](reviews/2026-09-05-ui03-root-review.md)
+and its complete UC-01–UC-61 audit, then the new immutable release manifest.
+
+- [x] Capture and implement the detailed Human correction, retaining approved
+  identities and original source/rollback files.
+- [x] Review exact art delivery and bounded alpha masks; no reopened identity vote.
+- [ ] Finish current geometry/fallback/input regression checks and inspect the
+  actual composed screens and first-tap/held movement.
+- [ ] Pass final project/build, locked desktop, art, static bytes/contracts and
+  production dependency checks for the release inputs.
+- [ ] Record engineering disposition, commit reviewed explicit paths, build the
+  versioned portable from a clean source, and verify source/stage hashes/version.
+- [ ] Verify exact-source CI and Vercel; inspect served code/assets and ordinary
+  browser/save journey. Verify native journeys separately from compilation.
+- [ ] Publish a prerelease with the portable, manifest, PLAYTEST and checksum
+  files; download and compare every asset before declaring it ready.
+- [ ] Obtain family/device feedback. Only Human acceptance clears the next
+  fresh Agent04 task; it never follows automatically from automated passes.
+
 ## Root UI checkpoint disposition — 2026-09-05
 
 [Root return review](reviews/2026-09-05-plan01-return-review.md) supersedes the

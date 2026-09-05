@@ -2,13 +2,16 @@
 @font-face { font-family: Fredoka; src: url("/assets/fonts/fredoka-ui.woff2") format("woff2"); font-style: normal; font-weight: 300 700; font-display: swap; }
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { width: 100%; height: 100%; margin: 0; }
-body { overflow: hidden; color: var(--ink); background: var(--deep-plum); font-family: Fredoka,"Trebuchet MS",system-ui,sans-serif; font-size: 1rem; line-height: 1.35; font-synthesis: none; }
+body { overflow: hidden; color: var(--ink); background: var(--deep-plum); font-family: Fredoka,"Trebuchet MS",system-ui,sans-serif; font-size: 1rem; font-weight: 500; line-height: 1.35; font-synthesis: none; }
 button, input, select { font: inherit; }
-button { color: inherit; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; min-height: 44px; min-width: 44px; padding: 8px 12px; border: 1px solid var(--edge); border-radius: 12px; background: var(--pearl); box-shadow: var(--button-depth); }
+button { color: inherit; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; min-height: 44px; min-width: 44px; padding: 8px 12px; border: 2px solid #fffaf2; border-radius: 20px; background: linear-gradient(145deg,#fffdf5,#f0eaf7); box-shadow: var(--button-depth); }
 button, a, input, select, [tabindex] { scroll-margin: 8px; overflow-wrap: anywhere; }
-:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; box-shadow: 0 0 0 6px #fff8ed; }
+:focus-visible { outline: 2px solid #765394; outline-offset: 3px; }
+.maze-board:focus-visible { outline: 2px solid #ba9bdd; outline-offset: -7px; }
+.dialog-body:focus-visible { outline: 2px solid #a28caf; outline-offset: -4px; }
+@media (forced-colors: active) { :focus-visible { outline: 2px solid Highlight; } }
 h1, h2, h3, p { margin: 0; }
-h1, h2, h3, strong, b { font-weight: 600; }
+h1, h2, h3, strong, b { font-weight: 650; }
 small { font-size: 0.875rem; }
 h1 { font-size: 1.75rem; } h2 { font-size: 1.375rem; } h3 { font-size: 1rem; }
 ul { margin: 0; padding: 0; list-style: none; }
@@ -17,9 +20,9 @@ img { display: block; max-width: 100%; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 button:hover:not(:disabled) { background-color: #fff; border-color: #807097; }
 button:active:not(:disabled) { box-shadow: inset 0 2px 3px #44364b26; }
-button[aria-pressed="true"] { background: #e1f4eb; border-color: #35826e; }
+button[aria-pressed="true"] { background: linear-gradient(140deg,#e9d9ff,#e9eafb); border-color: #8a6bab; }
 button:disabled { cursor: default; color: #76687d; background: #efebef; box-shadow: none; }
-.primary-button { min-height: 48px; background: linear-gradient(175deg,#fff0a8,#f8cf80); color: #4d3548; border-color: #ab7950; }
+.primary-button { min-height: 48px; background: linear-gradient(155deg,#bf4c79,#90406e 65%,#754480); color: #fffdf4; border-color: #fff3d1; font-weight: 600; box-shadow: inset 0 2px 0 #ffffff55,0 4px 0 #704868,0 7px 12px #49345824; }
 .secondary-button { min-height: 48px; }
 .art-fallback { display: grid; place-items: center; width: 100%; height: 100%; border: 1px dashed var(--edge); border-radius: 12px; background: #f1e9f1; color: #5c4966; font-size: 0.875rem; }
 @media (min-width: 1600px) and (min-height: 900px) { html { font-size: 20px; } }

@@ -397,9 +397,14 @@ test("production-preview browser baseline cohort", async ({ browser, browserName
     const start = performance.now();
     await open.click();
     await expect(page.getByRole("heading", { name: "Adventure Book" })).toBeVisible();
+    await expect(page.getByRole("tab")).toHaveCount(5);
+    await expect(page.getByRole("tab", { name: "Mazes", exact: true })).toHaveAttribute("aria-selected", "true");
+    await expect(page.getByRole("tabpanel")).toHaveCount(1);
+    // The Book opens a single authored page; wheel the page rather than the old whole-book document.
+    await page.getByRole("tabpanel").hover();
     await page.mouse.wheel(0, 2_000);
     const ready = performance.now() - start;
-    bookSamples.push(await collectSample(page, ready, { heading: "Adventure Book", action: "open-and-scroll" }));
+    bookSamples.push(await collectSample(page, ready, { heading: "Adventure Book", action: "open-mazes-page-and-scroll", bookLayout: "five-tabs-single-panel" }));
     await context.close();
   }
   rows.push({

@@ -1,5 +1,19 @@
 # Controls, Xbox Controller, and Steam Deck Plan
 
+**Latest Human-directed correction, 2026-09-05:** UI-03 advances the anchored bottom-right hybrid D-pad, legal tap/hold/drag input and cancellation. Big/Normal is removed permanently. PT32 remains a separate future 4–7 tile camera view preference, default 6 (two tiles closer/one farther). Preserve the new pad while implementing controllers, device hints and remaining control scope.
+
+**Current movement/layout contract for the next fresh task:** ordinary first,
+isolated-tap and repeated steps all use the shared `STEP_TRAVEL_MS = 160` in
+`src/movementControls.ts`. Input commits one legal cardinal move; the existing
+travel owner presents it smoothly and samples at the actual callback time,
+never a future scheduled deadline. A late callback may attempt one due move,
+then schedules from its actual time without catch-up. Preserve this measured
+contract until root accepts a deliberate change; gentle acceleration remains a
+Human-permitted option, not a reason to restore the old first-step timing split.
+The board uses maximum useful layout space at the existing six-tile camera span.
+There is no Normal/Big state, toggle or Back layer. PT32's future 4/5/6/7 view
+preference changes framing, not the HUD layout or gameplay/reveal rules.
+
 ## 0. Manager-reviewed execution addendum
 
 Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, VFX and UI-02 Book/focus specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, root checkpoint 03M, 01, root movement checkpoint MOVE-01, 04, 02, and UI-02, and before Plan 05 animation. `UI-02-adventure-book-and-focus-polish.md` owns the bounded intervening UI return; this does not expand Agent 01's running assignment.
@@ -25,9 +39,10 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementa
 
 ### Programme refinement — 2026-09-05
 
-This pass is planning only while Agent 01 remains active. Its current UI modules
-are useful draft evidence, not an accepted contract. Reconcile the accepted
-checkpoint on entry. Plan 07A's shared harness already exists; extend
+Historical context: this paragraph was written while Agent 01 was active.
+That assignment is finished; UI-03 and the latest reviewed checkpoint now
+control the UI/movement baseline. Start in a fresh task and reconcile root's
+accepted checkpoint on entry. Plan 07A's shared harness already exists; extend
 `scripts/performance/` and its pinned ephemeral Playwright setup rather than
 creating another runner, lockfile change, or approval gate for existing tooling.
 
@@ -157,8 +172,8 @@ Wider discovery requires a separate explicit gameplay decision.
 clamp to world edges and small/narrow maps, keep Ame visible and preserve tile
 and sprite aspect ratio. Document effective dimensions when either map axis
 is smaller than the selected span, without overwriting the stored choice.
-Reconcile Normal/Big and any accepted nonsquare viewport policy; changing
-device aspect must not stretch tiles or create a device-specific rule set.
+Preserve UI-03's single maximized board and deliberate landscape regimes;
+changing device aspect must not stretch tiles or create a device-specific rule set.
 Resize/camera selection updates bounds, fog, culling gutters, lighting/effect
 anchors and pointer geometry as one scene snapshot. The menu already blocks
 movement: changing or leaving it clears holds and requires the accepted new
@@ -179,7 +194,7 @@ effects, motion and decoded/paint costs against the accepted travel baseline.
 **Execution and proof.** In Phase 0 freeze camera/reveal fixtures; after the
 semantic input and UI-menu integration in Phase 3, implement one 4/5/6/7 canary
 and then extend to the common viewport matrix. Test edges, narrow/tiny maps,
-travel interruption, portal/jump, fog boundaries, Normal/Big, resize, restart,
+travel interruption, portal/jump, fog boundaries, maximized landscape, resize, restart,
 resume, storage failure and safe return to gameplay. The same committed route
 must retain identical legal moves, rewards and reveal history across zoom
 choices. Add keyboard/touch/mock-controller selection journeys and compare
@@ -285,6 +300,9 @@ supersede them; resolved defects are regression fixtures, not rebuild tasks.
 
 ### In-app browser audit
 
+This is the historical pre-UI-03 audit. Its Normal/Big observations and old
+screen geometry document the comparison build, not controls to recreate.
+
 The unmodified Vite app was inspected with the requested in-app browser at 1920×1080 and 1280×720, using fresh origins to avoid depending on existing saved state. DOM/ARIA state, initial focus, focus restoration, keyboard activation, Escape behavior, long-surface scrolling, maze movement, and all reachable state transitions were checked.
 
 Observed states included:
@@ -329,7 +347,7 @@ Controller focus/prompts/reconnect/haptics ─> absent
 | **src/App.tsx:1086-3350** | App owns screen state, modal booleans, every input source, focus, navigation, audio calls, presentation locks, and most markup. It is the integration point, not the right place for raw Gamepad parsing. |
 | **AppScreen**, **src/App.tsx:219** | Only **title**, **game**, and **achievements** are first-class screens. Modals and presentations are independent booleans, causing fragmented input gates. |
 | Input refs, **src/App.tsx:1150-1168** | Board focus, lock/queue, keyboard hold, on-screen hold, and board-pointer hold are separate mutable systems. |
-| **src/movementControls.ts:9-63** | Shared held-move authority: immediate edge, 320ms initial delay, then a smooth 260ms-to-160ms repeat curve over 16 repeats; direction change resets cadence. Reuse it for controller gameplay. |
+| **src/movementControls.ts:9-63** | Historical audit: immediate edge, 320ms delay and 260ms-to-160ms repeat curve. UI-03 supersedes these timings with shared 160ms ordinary first/repeated steps and actual-callback sampling; consume current exports, never copy the historical values. |
 | Keyboard effect, **src/App.tsx:1980-2078** | Arrow/WASD edges move immediately; browser repeat is ignored; most-recent held key wins; release falls back to the previous held key. Blur/hidden clears. Native Tab/Enter/Space handle UI. |
 | Pointer steering, **src/App.tsx:2096-2223** | Pointer intent is relative to Ame, steps immediately on press/direction change, and then uses shared cadence. |
 | On-screen directions, **src/App.tsx:2225-2261** | Pointer capture/hold uses shared cadence. Keyboard-generated button click steps once. |
@@ -357,13 +375,18 @@ Controller focus/prompts/reconnect/haptics ─> absent
 
 ## 5. Interactive inventory and target focus behavior
 
+The current-controls columns preserve the original audit. UI-03 supersedes its
+two gameplay modes, duplicate close controls and old Book composition. The
+current gameplay/menu rows below and the accepted semantic UI inventory govern
+controller integration; historical names do not authorize reintroducing them.
+
 | Context | Current controls and focus | Current keyboard/pointer behavior | Controller target and current blocker |
 |---|---|---|---|
 | **Title** | Sound; Begin/Continue; Choose maze; Book; Surprise; Reset; secret version/tester. Play is force-focused although Sound is first in DOM. | Native Tab/Shift+Tab and Enter/Space; pointer clicks. | Default Begin/Continue. D-pad/stick traverse the visual grid; A on Sound opens the shared Sound menu; View opens Book. No current controller source. |
 | **Story** | One Start button, auto-focused; card/backdrop. | Start, pointer anywhere, or almost any key dismisses. | A advances/starts; X skips; B closes/skips; scroll controls if overflow. Opening input is quarantined. |
-| **Gameplay: Normal** | Optional tester picker; Story; Big; New maze; board; Hint; on-screen directions; Home/Mazes/Book/Help/Sound/Restart. Board is force-focused. | Arrow/WASD move; pointer/touch steer; arrows can hold. Tab reaches HUD/actions; header controls sit before board. | D-pad/left stick move. Y Hint, X Story, View Book, Menu game menu. A is intentionally unbound during free movement because interactions are movement-driven. |
-| **Gameplay: Big Maze** | Compact status, tester/story/Normal/New, board, map. Sidebar utilities are hidden. | Movement still works; Escape exits Big only when no higher surface. | Same movement and shortcuts. B exits Big; Menu always exposes Resume, view mode, Home, Mazes, Book, Help, Sound, Restart. |
-| **Game menu (new P0 surface)** | Does not exist. | Utilities are individual buttons, and some disappear in Big. | Safe default Resume; declarative actions for Normal/Big, Hint, Story, Mazes, Book, Help, Sound, Restart, Home. Sound opens the one shared Sound menu; Menu/B close. Input is paused/blocked while open; game-design owns whether simulation is described as “pause.” |
+| **Gameplay: maximized** | UI-03's board, portrait/counters, map, collection shelves and anchored thumb pad. Primary landscape exposes utilities; compact landscape has More. No board-size toggle. | Exact keyboard/pad steps; shared 160ms ordinary tap/held travel; free-board pointer assistance remains separately bounded. | D-pad/left stick move. Y Hint, X Story, View Book, Menu/B game menu. A is intentionally unbound during free movement because interactions are movement-driven. |
+| **Gameplay: Big Maze — historical only** | The old separate view mode is removed by UI-03. | No current Normal/Big transition or Escape-to-Normal behavior. | No controller action recreates the removed mode. |
+| **Game menu (P0 controller integration)** | Consume the accepted utility/More actions and UI-owned menu seam. | Existing utilities retain their semantics across landscape regimes. | Safe default Resume; declarative actions for Hint, Story, Mazes, Book, Help, Sound, Restart and Home, plus the future PT32 Camera view row. Sound opens the shared Sound menu; Menu/B close. Input is blocked while open; game-design owns whether simulation is described as “pause.” |
 | **Sound menu** | Shared UI surface supplied by Plan 01; no controller behavior yet. | Mute plus contextual previous/next/shuffle and approved loop controls; exact visual layout remains UI-owned. | Opening action is separate from transport. D-pad/stick move focus; A issues the focused semantic Sound action; B closes exactly this menu and restores its stable invoker. No move/hint/story/global shortcut leaks through, and the opening edge cannot activate the default item. |
 | **Hint** | Close X first; Got it. | Modal trap; Escape/X/Got it closes and restores trigger. | Default Got it; A acknowledges; B closes; no opening-edge fall-through. |
 | **Help** | Close X first; long instructions; Let’s explore. | Modal scroll. At 720p content/action overflows initial view. | Default Let’s explore; D-pad focus; right stick or triggers scroll; B closes; focus stays visible. |
@@ -661,9 +684,10 @@ desktop emulation proves geometry and events only.
 ### Digital edge and hold
 
 - A D-pad rising edge or left-stick direction activation immediately calls **attemptMove(direction, source)** exactly once.
-- Holding the same direction then uses **HELD_MOVE_INITIAL_DELAY_MS = 320** and the existing 260ms-to-160ms curve from **movementControls.ts**.
-- A release before 320ms is a one-square tap.
+- Holding the same direction uses the current shared **STEP_TRAVEL_MS = 160** for initial and repeated ordinary steps. The old 320ms delay and 260ms-to-160ms curve are historical and must not be restored.
+- Releasing before the first repeat leaves one committed square with the same smooth 160ms travel as a held first step. Do not snap its presentation on ordinary release.
 - A late RAF may emit at most one due repeat and then schedule from “now.” It never emits a burst to catch up.
+- Sample travel at the actual callback timestamp. A future due time is scheduling metadata, never the time used to advance the actor/camera sample.
 - A direction change emits one immediate attempt and restarts the held cadence.
 - D-pad and stick never both emit in one sample; D-pad owns the sample while any D-pad direction is active.
 
@@ -712,8 +736,7 @@ The invariant rules are: **A confirms**, **B closes/backtracks one layer**, **Me
 | Front door | Move focus among accepted Play/Exit actions | Activate | No unadvertised browser-close action | No action | No action | No action | No action | No action | Only if the accepted surface overflows |
 | Home | Move focus | Activate | Return to front door only if an accepted visible action exists | No action | No action | Open Book | No action | No action | Scroll only if the accepted Home surface overflows |
 | Story | Focus/page direction if needed | Advance; final page starts maze | Skip/close to game | Skip story | No action | No action | No action | Previous/next page if stories later paginate | Page/continuous scroll when card overflows |
-| Gameplay Normal | Move Ame | No action | Open game menu | Read chapter | Hint | Open Book | Open game menu | No action | No action |
-| Gameplay Big | Move Ame | No action | Return to Normal | Read chapter | Hint | Open Book | Open game menu | No action | No action |
+| Gameplay: maximized | Move Ame | No action | Open game menu | Read chapter | Hint | Open Book | Open game menu | No action | No action |
 | Game menu | Move focus | Activate item | Resume/close | As labelled only | As labelled only | Open Book if enabled | Resume/close | Change explicit menu tabs only if added | Scroll |
 | Sound menu | Move focus | Issue focused mute/previous/next/shuffle/approved-loop action | Close and restore Sound invoker | No action | No action | No action | No action | No action | Scroll only if the responsive surface genuinely overflows |
 | Help/Hint/Missing | Move focus | Acknowledge/activate | Close | No action | No action | No action | No action | No action | Page/scroll |
@@ -727,7 +750,7 @@ The invariant rules are: **A confirms**, **B closes/backtracks one layer**, **Me
 
 Context-sensitive actions are limited to their named domain:
 
-- B always removes the topmost layer. Big Maze is a view layer, so B returns to Normal; Normal gameplay's next layer is the game menu.
+- B closes the topmost dialog/menu; in unobstructed gameplay it opens the game menu. The historical Big-to-Normal Back layer no longer exists.
 - X always concerns story: open it during play, skip it while it is open.
 - View always concerns the Adventure Book: open it, or return from it.
 - Shoulder/trigger actions exist only where the visible prompt names a section/page/scroll affordance.
@@ -954,7 +977,7 @@ Work:
 - Add **controllerNavigation.ts**, consuming UI-owned stable control IDs/groups and adding optional neighbours, remembered focus, auto-scroll, and explicit input generation.
 - Add controller prompt view models and accessible Xbox badges.
 - Wire the accepted game menu and safe restart confirmation. Where a required control is missing, request a bounded UI contract repair rather than creating a second menu or confirmation.
-- Make title, Story, Normal/Big gameplay, Help, Hint, feedback, both pickers, switch/reset/restart confirmations, victory, and Book complete.
+- Make title, Story, maximized gameplay in both landscape regimes, Help, Hint, feedback, both pickers, switch/reset/restart confirmations, victory, and Book complete.
 - Preserve the 03M pending completion choices and durable reward boundary; integrate achievement-detail and story dialogue navigation through their existing stable actions.
 - Update board/help accessible copy to name controller controls.
 - Add explicit controller focus CSS in the UI plan's current style structure.
@@ -1052,7 +1075,8 @@ Files that should not need gameplay changes:
 - neutral arms exactly once;
 - A/B/X/Y/Menu/View rising edges fire once until release;
 - D-pad/stick tap emits one move;
-- hold begins at 320ms and follows the exact shared repeat curve;
+- the first repeat is due at the shared 160ms interval, matching first-step travel; later ordinary repeats use the same current export;
+- actual callback sampling never advances travel to a future scheduled time;
 - direction change emits one immediate step and resets cadence;
 - frame delay emits one repeat, never catch-up bursts;
 - face buttons never repeat.
@@ -1136,7 +1160,7 @@ Browser scenarios:
 - cold title: exposure press consumed, A begins, Story A starts;
 - D-pad and stick taps move exactly one grid coordinate;
 - held movement follows cadence; diagonal/drift do not leak;
-- controller opens Hint, Story, Book, game menu, Big/Normal;
+- controller opens Hint, Story, Book and game menu, then selects the future PT32 camera spans without recreating Normal/Big;
 - Help/Book/pickers page and auto-scroll with focus visible;
 - protected switch, restart, and reset cannot receive opening A;
 - missing-item and too-strong feedback acknowledge safely;
@@ -1174,7 +1198,7 @@ Add 4K60 as a scaling/latency stress case, not the minimum supported output. Che
 - Preconnected pad, connect after launch, first button exposure, first axis exposure.
 - Begin/Continue, title grid, picker, tester picker where enabled.
 - Read/advance/skip Story.
-- Normal and Big Maze; D-pad and stick taps; long holds; rapid direction changes; exact diagonals; near-threshold drift.
+- Maximized primary/compact landscape and all future PT32 spans; D-pad and stick taps; long holds; rapid direction changes; exact diagonals; near-threshold drift.
 - Hint, Help, game menu, Home, Mazes, Book, Sound-menu open/close, mute, previous, next, shuffle, approved loop, and Restart. Verify focus returns to each originating Sound control and no gameplay action leaks while the menu is topmost.
 - Book focus navigation, section jumps, page/continuous scroll from top and bottom.
 - Every confirmation with A held while opening; confirm no fall-through.
@@ -1268,7 +1292,10 @@ Controller ID, active index, raw states, focus history, input mode, and repeat s
 6. **Audio:** retains trusted user-activation, mute, and failure-isolation contracts. Controls may request audio but cannot manufacture trusted activation from Gamepad polling.
 7. **Delivery/release:** owns PWA manifest/service worker, Steam shortcut artwork/packaging, Linux CI/AppImage, and release evidence. Controls defines Gamepad/Steam Input requirements and runs the controller hardware matrix; packaging does not fork controller behavior.
 
-The inspected concurrent UI plan also proposes moving tester tools behind **?debug=mazes**, replacing whole-stage gameplay scaling, and giving Big Maze a focus deck. This plan depends only on stable semantic controls and scroll containers, not their final placement.
+Historical UI-plan notes proposed a Big Maze focus deck. UI-03 instead removes
+the two-mode distinction and supplies the maximized landscape composition.
+Consume current tester visibility, stable semantic controls and scroll containers;
+do not recreate the historical placement or mode.
 
 ## 21. Acceptance criteria
 
@@ -1276,7 +1303,7 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 
 - [ ] Given the application has been opened from its supported Steam shortcut, an Xbox controller alone can expose/connect, focus Begin/Continue, and complete every major flow.
 - [ ] No essential action requires hover, touch, mouse, keyboard, trackpad, or Deck touchscreen.
-- [ ] Separate title and Home, maze/tester selection, compact Story dialogue, Normal/Big gameplay, Hint, Help, game menu, Book and earned-detail viewer, the complete Sound menu, Restart, confirmations, feedback, pending completion and Reset are controller-complete against the accepted UI inventory.
+- [ ] Separate title and Home, maze/tester selection, compact Story dialogue, maximized primary/compact landscape gameplay, Hint, Help, game menu, Book and earned-detail viewer, the complete Sound menu, Restart, confirmations, feedback, pending completion and Reset are controller-complete against the accepted UI inventory.
 - [ ] Stay here / Next maze / Restart use Gameplay's default focus and exactly-once durable boundaries. B safely stays without rewards; returning from a viewer/menu restores its exact valid invoker and scroll context.
 - [ ] Sound opens through a distinct semantic action; mute/previous/next/shuffle/approved-loop each dispatch exactly once only while that menu is topmost; B restores the exact stable invoker or declared safe fallback; the opening/closing edge never activates a transport or gameplay action.
 - [ ] Every controller-navigable element has a clearly visible, on-screen focus state suitable for television viewing.
@@ -1286,7 +1313,7 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 
 - [ ] D-pad Up/Down/Left/Right taps each attempt exactly one maze square.
 - [ ] Left-stick cardinal taps each attempt exactly one maze square.
-- [ ] Held movement uses the shared 320ms/260→160ms cadence and is smooth/predictable.
+- [ ] Ordinary first taps and held/repeated steps use the current shared 160ms interval and remain equally smooth. Actual callback sampling never substitutes a future deadline or creates a catch-up burst; historical 320ms/260→160ms timing is not restored.
 - [ ] Stick drift below the deadzone never moves Ame or changes prompts.
 - [ ] A diagonal produces at most one deterministic cardinal direction and never a double move.
 - [ ] Direction changes are immediate under the specified arbitration and reset repeat timing.
@@ -1311,10 +1338,10 @@ The inspected concurrent UI plan also proposes moving tester tools behind **?deb
 - [ ] All spans 4/5/6/7, default 6, are reachable with keyboard, touch/pointer and
   controller in the existing game menu, with visible selection, safe focus
   return and no gameplay leakage. Default selection and stored/clamped behavior
-  match PT32 without resizing the HUD or replacing Big mode.
+  match PT32 without resizing the HUD or reintroducing the removed Big/Normal modes.
 - [ ] Zoom preserves identical legal moves/rewards/reveal history, correct
   pointer/effect geometry, edge/small-map clamps and MOVE-01 comfort across
-  Normal/Big, responsive sizes and motion modes. Preference reload/reset/error
+  primary/compact landscape sizes and motion modes. Preference reload/reset/error
   paths are proven separately from campaign saves.
 - [ ] Existing shared-harness measurements cover all four spans and report
   visible workload, rendition/decoded/paint cost and input/travel regressions;

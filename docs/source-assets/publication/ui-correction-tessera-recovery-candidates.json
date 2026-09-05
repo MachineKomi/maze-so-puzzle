@@ -1,0 +1,273 @@
+{
+  "schema": "maze-ui-presentation-candidate/v1",
+  "preparedOn": "2026-09-05",
+  "approvalStatus": "candidate",
+  "authority": "docs/source-assets/publication/ui-correction-tessera-recovery-authority.json",
+  "authoritySha256": "cd9884bac21da14af1416bbee7f82e206e664250d82bc894a35bf5ddacd0bb40",
+  "priorCandidateReportSha256": "652dfb668d38c99772e1ebd5d562e43ea196aeac6510ac1dd0b18325e45bb638",
+  "environment": {
+    "python": "3.14.3",
+    "pillow": "12.2.0",
+    "numpy": "2.5.2",
+    "libwebp": "1.6.0",
+    "zlib": "1.3.1.zlib-ng"
+  },
+  "runtimeBytes": 132588,
+  "measurement": {
+    "matteRgb": [
+      241,
+      4,
+      155
+    ],
+    "originalClassifier": "single-red-key",
+    "correctedClassifier": "dual-channel-magenta-within-four-guarded-regions",
+    "regionsLTRB": [
+      [
+        300,
+        625,
+        480,
+        805
+      ],
+      [
+        660,
+        565,
+        970,
+        860
+      ],
+      [
+        350,
+        720,
+        560,
+        950
+      ],
+      [
+        460,
+        930,
+        830,
+        1220
+      ]
+    ],
+    "restoredAlphaPixels": 81468,
+    "restorationBoundsLTRB": [
+      313,
+      594,
+      942,
+      1201
+    ],
+    "changedPixelsOutsideMask": 0,
+    "changedOriginalRgbPixels": 0,
+    "deliveryColor": "Unchanged original extraction outside the recovered mask. Inside it, original opaque source colors and the established local matte decontamination supply delivery RGB; no generated or painted color.",
+    "opaqueRecoveredPixels": 81144
+  },
+  "evidence": [
+    {
+      "path": "docs/source-assets/production/tessera-alpha-recovery/approved-rgb-corrected-alpha-master.png",
+      "sha256": "f52fa42a86c0f8e8c3dbd7fe161943228214874a883cede84959680fbae9e475",
+      "bytes": 1588755
+    },
+    {
+      "path": "docs/source-assets/production/tessera-alpha-recovery/recovered-delivery-master.png",
+      "sha256": "1e7a7f8d3a687bb27d5473eef9eff961b0affbf766403ade5bcc2051f02f1f0d",
+      "bytes": 883603
+    },
+    {
+      "path": "docs/source-assets/production/tessera-alpha-recovery/old-extraction.png",
+      "sha256": "f0030f50a599c06b5e911868ef62304fafe122ba3898228161b002583706b989",
+      "bytes": 780330
+    },
+    {
+      "path": "docs/source-assets/production/tessera-alpha-recovery/comparison-proof.png",
+      "sha256": "449d25e464af26385f7372c9db21e159fdbb558d189bb5cc7865b244ea8c58d5",
+      "bytes": 454091
+    },
+    {
+      "path": "docs/source-assets/production/tessera-alpha-recovery/exact-restored-alpha-mask.png",
+      "sha256": "490bd5da7becd788ac7de1e1af0ad0bcb59fe2251e1f6caa2843136f72d291fb",
+      "bytes": 7646
+    }
+  ],
+  "entries": [
+    {
+      "id": "tessera-dolphin",
+      "label": "Tessera Dolphin",
+      "family": "friend",
+      "approvalStatus": "candidate",
+      "sourceRecordId": "tessera-dolphin-mgjrpg02-v01-source",
+      "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-04-mythic-friends/friend-tessera-dolphin-v01-candidate-a-matte-01-generator-original.png",
+      "sourceSha256": "185126e8dca75837cd2963978f9fb8c357d2c6e3ccfcf88a073601ab1ce1db43",
+      "sourceBytes": 1496190,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "opticalUrl": "/assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r01.webp",
+      "opticalSha256": "33ca2f6baeba27d42f0a331f3b973dff43d4fa9e8da6325b0d026a4ad404e9d2",
+      "opticalReproduced": true,
+      "candidateRecordId": "tessera-dolphin-ui-correction-alpha-recovery-r02-source",
+      "path": "public/assets/mgjrpg-02/presentation/tessera-dolphin-v01-presentation-512-r02.webp",
+      "src": "/assets/mgjrpg-02/presentation/tessera-dolphin-v01-presentation-512-r02.webp",
+      "usage": "presentation",
+      "profile": "friend-presentation-512",
+      "minDisplayPx": 96,
+      "maxDisplayPx": 256,
+      "bytes": 132588,
+      "sha256": "853924fefb37fb6499b3f8cf90e3de69a95027dcb1d1e2c3f51bdf5bd144124e",
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "colorMetadata": [],
+      "alphaBounds": {
+        "pixelsLTRB": [
+          75,
+          41,
+          438,
+          481
+        ],
+        "normalizedLTRB": [
+          0.146484375,
+          0.080078125,
+          0.85546875,
+          0.939453125
+        ]
+      },
+      "alphaComponentCount": 105,
+      "smallestAlphaComponentPixels": 2,
+      "seamMetrics": null,
+      "geometry": {
+        "class": "floating-actor",
+        "pivot": [
+          0.5,
+          0.84
+        ],
+        "visibleBounds": [
+          0.146484375,
+          0.080078125,
+          0.708984375,
+          0.859375
+        ],
+        "safeInset": [
+          0.080078125,
+          0.14453125,
+          0.060546875,
+          0.146484375
+        ],
+        "floatCenter": [
+          0.52373815,
+          0.46141922
+        ]
+      },
+      "extraction": {
+        "mode": "flat-impossible-matte",
+        "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+        "rgb": [
+          241,
+          4,
+          155
+        ],
+        "clearDistance": 48,
+        "opaqueDistance": 144,
+        "minimumComponentPixels": 3,
+        "measurement": {
+          "clearDistance": 48.0,
+          "opaqueDistance": 144.0,
+          "minimumComponentPixels": 3,
+          "keyDominanceThreshold": 96.0,
+          "keySpillPixelsRejected": 73061,
+          "fallbackBoundaryPixels": 6766,
+          "exactBlackVisiblePixelsNormalized": 166,
+          "sourceDistancePercentiles": {
+            "50": 3.317,
+            "90": 265.287,
+            "95": 268.712,
+            "99": 273.85
+          }
+        }
+      },
+      "registration": {
+        "targetBox": [
+          0.1,
+          0.08,
+          0.9,
+          0.94
+        ],
+        "align": [
+          0.5,
+          1.0
+        ],
+        "alphaThreshold": 3
+      },
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        },
+        "environment": {
+          "python": "3.14.3",
+          "pillow": "12.2.0",
+          "numpy": "2.5.2",
+          "libwebp": "1.6.0",
+          "zlib": "1.3.1.zlib-ng"
+        }
+      },
+      "validationErrors": [
+        "132588 bytes exceeds inherited 102400 byte ceiling"
+      ],
+      "inheritedPerFileCeiling": 102400,
+      "visibleSubjectAt200": 171.875,
+      "visibleSubjectAt256": 220.0,
+      "alphaRecovery": {
+        "matteRgb": [
+          241,
+          4,
+          155
+        ],
+        "originalClassifier": "single-red-key",
+        "correctedClassifier": "dual-channel-magenta-within-four-guarded-regions",
+        "regionsLTRB": [
+          [
+            300,
+            625,
+            480,
+            805
+          ],
+          [
+            660,
+            565,
+            970,
+            860
+          ],
+          [
+            350,
+            720,
+            560,
+            950
+          ],
+          [
+            460,
+            930,
+            830,
+            1220
+          ]
+        ],
+        "restoredAlphaPixels": 81468,
+        "restorationBoundsLTRB": [
+          313,
+          594,
+          942,
+          1201
+        ],
+        "changedPixelsOutsideMask": 0,
+        "changedOriginalRgbPixels": 0,
+        "deliveryColor": "Unchanged original extraction outside the recovered mask. Inside it, original opaque source colors and the established local matte decontamination supply delivery RGB; no generated or painted color.",
+        "opaqueRecoveredPixels": 81144
+      }
+    }
+  ]
+}

@@ -5,15 +5,19 @@ import { CURATED_LEVELS } from "../../game/levels";
 import { createInitialGameState } from "../../game/engine";
 
 describe("physical play layout", () => {
-  for (const [w,h,mapMin] of [[1920,1080,192],[1280,720,192],[1194,834,160],[1024,768,160],[960,540,160],[844,390,120],[568,320,96]]) {
+  for (const [w,h,mapMin] of [[1920,1080,192],[1280,720,192],[1194,834,160],[1024,768,160],[960,540,128],[844,390,120],[568,320,96]]) {
     it(`keeps square board and useful map at ${w}×${h}`, () => {
-      const normal = calculatePlayLayout(w! - 16,h! - 16,false);
-      const big = calculatePlayLayout(w! - 16,h! - 16,true);
-      expect(normal.board + normal.deck + normal.gap).toBe(w! - 16);
-      expect(big.board).toBeGreaterThanOrEqual(normal.board);
-      expect(normal.map).toBeGreaterThanOrEqual(mapMin!);
-      // Emergency deck gives status cells real space before spending on board.
-      expect(normal.board).toBeGreaterThan(w! < 650 ? 240 : 250);
+      const layout = calculatePlayLayout(w! - 16,h! - 16);
+      expect(layout.board + layout.deck + layout.gap).toBe(w! - 16);
+      expect(layout.board).toBeLessThanOrEqual(h! - 16);
+      // Legacy callers cannot select a deliberately smaller play area.
+      expect(calculatePlayLayout(w! - 16,h! - 16,false)).toEqual(layout);
+      expect(calculatePlayLayout(w! - 16,h! - 16,true)).toEqual(layout);
+      expect(layout.map).toBeGreaterThanOrEqual(mapMin!);
+      expect(layout.compact).toBe(h! - 16 < 600 || w! - 16 < 800);
+      // Reviewed 568px composition reserves its 352px deck for the full
+      // objective, collection strip and 152px thumb pad (48px directions).
+      expect(layout.board).toBeGreaterThan(w! < 650 ? 190 : 250);
     });
   }
   it("has deterministic finite fallbacks", () => {

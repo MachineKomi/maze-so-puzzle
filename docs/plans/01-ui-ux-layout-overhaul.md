@@ -1,5 +1,7 @@
 # UI/UX and Layout Overhaul Plan
 
+**Latest Human-directed correction, 2026-09-05:** The completed Plan-01 engineering checkpoint failed Human visual/UX playtest. UI-03 is the authorized correction and supersedes conflicting historical layout/visibility choices here. Read `UI-03-fp-ui1-correction.md` and the full comparison intake before proposing further UI work.
+
 ## 0. Manager-reviewed execution addendum
 
 This addendum is execution authority and supersedes any conflicting recommendation below. The original status and baseline text describe the research pass; a later manager execution prompt authorizes implementation within this scope.

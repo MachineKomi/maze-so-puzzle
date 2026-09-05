@@ -12,6 +12,7 @@ import { UI_PRESENTATION_CANDIDATES } from "../../src/generated/uiPresentationAr
 import { UI_REWARD_PRESENTATION_CANDIDATES } from "../../src/generated/uiRewardPresentationArt";
 import { MGJRPG02_ART } from "../../src/generated/mgjrpg02Art";
 import { MUSIC_CATALOGUE } from "../../src/musicCatalogue";
+import { createDefaultPlayerProgress, PLAYER_PROGRESS_STORAGE_KEY } from "../../src/progress";
 
 const output = resolve(process.env.MAZE_PERF_EVIDENCE_DIR!, "ui-review");
 let messages:string[]=[];
@@ -112,8 +113,10 @@ test("UI review power latency and engine cost", async ({ page }) => {
 });
 
 test("UI review compact 200 percent named reader keeps objective and movement access",async({page})=>{
-  for(const [width,height]of [[844,390],[568,320]])for(const mode of ["normal","big"]) {
-    await page.setViewportSize({width,height});await pick(page,12);if(mode==="big")await openUiAction(page,"big-maze");
+  for(const [width,height]of [[960,540],[844,390],[568,320]]) {
+    const mode="maximized";
+    await page.setViewportSize({width,height});await pick(page,12);
+    await expect(page.locator(".play-shell")).toHaveAttribute("data-mode",mode);
     const objective=await page.locator(".objective-card p").innerText();
     await page.addStyleTag({content:':root{--safe-top:12px;--safe-bottom:12px;--safe-left:12px;--safe-right:12px} html{font-size:200%} p,button,h2 {line-height:1.5;letter-spacing:.12em;word-spacing:.16em;} p {margin-bottom:2em}'});
     const reader=page.getByRole("region",{name:"Full objective and adventure status",exact:true});await expect(reader).toBeVisible();
@@ -144,14 +147,14 @@ export async function openUiAction(page: Page, id: string) {
 }
 test("UI review compact simultaneous geometry", async ({ page }) => {
   const records = [];
-  for (const [width, height] of [[844,390],[568,320]]) for (const inset of [0,12]) {
+  for (const [width, height] of [[960,540],[844,390],[568,320]]) for (const inset of [0,12]) {
     await page.setViewportSize({width,height});
     for (const maze of [1,8,12,15,16]) {
       await pick(page, maze);
       if (inset) await page.addStyleTag({content:`:root {--safe-top:12px;--safe-bottom:12px;--safe-left:12px;--safe-right:12px;}`});
       await expect(page.locator(".play-shell")).toHaveAttribute("data-layout","compact-landscape");
-      for (const mode of ["normal","big"]) {
-        if (mode === "big") await openUiAction(page,"big-maze");
+      {
+        const mode="maximized";
         await expect(page.locator(".play-shell")).toHaveAttribute("data-mode",mode);
         const geometry = await page.evaluate(() => {
           const box = (e: Element) => e.getBoundingClientRect().toJSON();
@@ -209,7 +212,7 @@ test("UI review responsive logo failures retain title and actions", async ({ bro
     await expect(page.getByRole("button",{name:"Exit",exact:true})).toBeInViewport();
     await page.screenshot({path:resolve(output,`logo-${width}-${failure}.png`)});
     await page.getByRole("button",{name:"Play",exact:true}).click();
-    await expect(page.locator(".title-hero")).toHaveAttribute("src",/home-hero-splash-v04/);
+    await expect(page.locator(".title-hero")).toHaveAttribute("src",ASSETS.homeHeroSplash);
     expect(failed.length).toBeLessThanOrEqual(blocked.length*2);
     await writeFile(resolve(output,`logo-${width}-${failure}.json`),JSON.stringify({failed,expectedInjectedErrors:failed.length},null,2));
     await context.close();
@@ -238,7 +241,7 @@ test("UI review long dialog native keyboard reading and exact return", async ({ 
     await page.keyboard.press("Shift+Tab");expect(await page.evaluate(()=>!!document.activeElement?.closest('[role="dialog"]'))).toBe(true);
     await page.keyboard.press("Escape");
     if(fixture==="story") await expect(page.getByRole("button",{name:"story proof",exact:true})).toBeFocused();
-    else await expect(page.locator(`[data-focus-id="${width===568?"more":"help"}"]`)).toBeFocused();
+    else await expect(page.locator('[data-focus-id="more"]')).toBeFocused();
   }
 });
 
@@ -277,7 +280,7 @@ test("UI review cold presentation candidates and actual-size alpha proofs", asyn
       const data=(await readFile(resolve("public",variant.src.slice(1)))).toString("base64");
       for(const background of ["cream","dark","checker"])cards.push(`<figure class="${background}"><img width="${size}" height="${size}" src="data:image/webp;base64,${data}"><figcaption>${id}<br>${size}px · ${background}</figcaption></figure>`);
     }
-    const html=`<!doctype html><meta charset="utf-8"><title>UI01 candidate alpha proof ${size}px</title><style>*{box-sizing:border-box}body{margin:0;padding:16px;background:#efe7f1;font:14px system-ui}main{display:grid;grid-template-columns:repeat(7,${size+16}px);gap:8px}figure{margin:0;padding:8px;display:grid;justify-items:center;border:1px solid #aa93b3}.cream{background:#fff8ed}.dark{background:#30263f;color:white}.checker{background:conic-gradient(#ddd 25%,white 0 50%,#ddd 0 75%,white 0) 0 0/16px 16px}img{display:block;max-width:none}figcaption{font-size:11px;margin-top:8px;background:#fff9ef;color:#30263f;padding:3px}</style><h1>Unapproved delivery candidates · ${size} actual CSS pixels</h1><p>Approved immutable masters, same alpha/registration at 512px. Root proof and allocation gates remain open. No source or optical output changed.</p><main>${cards.join("")}</main>`;
+    const html=`<!doctype html><meta charset="utf-8"><title>UI01 candidate alpha proof ${size}px</title><style>*{box-sizing:border-box}body{margin:0;padding:16px;background:#efe7f1;font:14px system-ui}main{display:grid;grid-template-columns:repeat(7,${size+16}px);gap:8px}figure{margin:0;padding:8px;display:grid;justify-items:center;border:1px solid #aa93b3}.cream{background:#fff8ed}.dark{background:#30263f;color:white}.checker{background:conic-gradient(#ddd 25%,white 0 50%,#ddd 0 75%,white 0) 0 0/16px 16px}img{display:block;max-width:none}figcaption{font-size:11px;margin-top:8px;background:#fff9ef;color:#30263f;padding:3px}</style><h1>Equipment and keepsake renditions · ${size} actual CSS pixels</h1><p>Current delivery from approved masters, shown against light, dark and checkerboard surfaces. This sheet records alpha and registration; release acceptance is recorded separately.</p><main>${cards.join("")}</main>`;
     await writeFile(resolve(output,`presentation-alpha-${size}.html`),html);
     await page.setViewportSize({width:7*(size+24)+32,height:1000});await page.setContent(html);
     await page.locator("img").evaluateAll(images=>Promise.all(images.map(e=>(e as HTMLImageElement).decode())));
@@ -308,5 +311,121 @@ test("UI review delayed presentation decode and semantic fallback", async ({ bro
     await page.screenshot({path:resolve(output,`presentation-${failure}.png`)});
     await writeFile(resolve(output,`presentation-${failure}.json`),JSON.stringify({failed,expectedInjectedErrors:failed.length},null,2));
     await page.keyboard.press("Escape");await expect(page.getByRole("button",{name:"blocker proof",exact:true})).toBeFocused();await context.close();
+  }
+});
+
+test("UI review earned reward failures keep a stable fallback across size and DPR changes", async ({ browser }) => {
+  const large = UI_REWARD_PRESENTATION_CANDIDATES["reward-trail-sticker"].src;
+  const optical = MGJRPG02_ART["reward-trail-sticker"].src;
+  for (const failure of ["presentation", "all"] as const) {
+    const context = await browser.newContext({ viewport: { width: 960, height: 540 }, deviceScaleFactor: 2 });
+    try {
+      const page = await context.newPage(); watch(page);
+      const failed: string[] = [], presentationRequests: string[] = [];
+      // Explicit synthetic earned-Book fixture; this test makes no reward or
+      // gameplay acceptance claim and never reads a user's saved profile.
+      await page.addInitScript(({ key, progress }) => localStorage.setItem(key, JSON.stringify(progress)), {
+        key: PLAYER_PROGRESS_STORAGE_KEY,
+        progress: { ...createDefaultPlayerProgress(), stickers: ["first-star"] },
+      });
+      page.on("request", request => {
+        const path = new URL(request.url()).pathname;
+        if (path.includes("/presentation/")) presentationRequests.push(path);
+      });
+      await page.route("**/*reward-trail-sticker*.webp", route => {
+        const path = new URL(route.request().url()).pathname;
+        if (path === large || (failure === "all" && path === optical)) {
+          failed.push(path); return route.abort();
+        }
+        return route.continue();
+      });
+      await page.goto("http://127.0.0.1:4173/");
+      await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: "Ame's adventure book", exact: true }).click();
+      await page.getByRole("tab", { name: "Achievements", exact: true }).click();
+      expect(presentationRequests).toEqual([]);
+      const earned = page.locator('[data-focus-id="achievement:first-star"]');
+      await earned.click();
+      const frame = page.locator(".presentation-art");
+      if (failure === "all") {
+        await expect(frame.getByRole("img", { name: "My First Maze", exact: true })).toHaveClass(/art-fallback/);
+        expect(failed).toContain(optical);
+      } else {
+        const image = frame.getByRole("img", { name: "My First Maze", exact: true });
+        await expect(image).toHaveAttribute("data-art-role", "optical");
+        await image.evaluate((element: HTMLImageElement) => element.decode());
+        const samples = await image.evaluate(async (element: HTMLImageElement) => {
+          const frames = [];
+          for (let index = 0; index < 32; index++) {
+            await new Promise<void>(done => requestAnimationFrame(() => done()));
+            frames.push({ width: element.getBoundingClientRect().width, role: element.dataset.artRole, src: new URL(element.currentSrc).pathname, natural: element.naturalWidth });
+          }
+          return frames;
+        });
+        expect(samples).toEqual(Array.from({ length: 32 }, () => ({ width: 64, role: "optical", src: optical, natural: 256 })));
+        // Real compact layout now needs only the available 256px rendition.
+        await page.setViewportSize({ width: 568, height: 320 });
+        await expect(image).toHaveAttribute("data-art-role", "presentation");
+        await expect.poll(() => image.evaluate(element => element.getBoundingClientRect().width)).toBe(128);
+        await page.setViewportSize({ width: 960, height: 540 });
+        await expect(image).toHaveAttribute("data-art-role", "optical");
+        await expect.poll(() => image.evaluate(element => element.getBoundingClientRect().width)).toBe(64);
+        // Edge's raw CDP density-only override silently changes devicePixelRatio:
+        // our recorded probe received no resolution/resize/physical-box event.
+        // Pair density with a real 1px viewport change, keeping the authored
+        // 200px presentation frame unchanged. No fake dispatched events or
+        // runtime polling are used to compensate for that emulation limitation.
+        await page.evaluate(() => {
+          const events: unknown[] = [];
+          const query = matchMedia(`(resolution: ${devicePixelRatio}dppx)`);
+          const record = (source: string) => events.push({ source, at: performance.now(), dpr: devicePixelRatio, queryMatches: query.matches, width: innerWidth, height: innerHeight });
+          const resize = () => record("window-resize");
+          const resolution = () => record("resolution-change");
+          const observer = new ResizeObserver(entries => {
+            record("device-pixel-box");
+            events.push(...entries.map(entry => ({ cssWidth: entry.contentRect.width, deviceWidth: entry.devicePixelContentBoxSize?.[0]?.inlineSize })));
+          });
+          window.addEventListener("resize", resize); query.addEventListener("change", resolution);
+          try { observer.observe(document.documentElement, { box: "device-pixel-content-box" }); }
+          catch { record("device-pixel-box-unsupported"); }
+          record("before-density-change");
+          (window as any).__rewardDprDelivery = { events, record, cleanup: () => { window.removeEventListener("resize", resize); query.removeEventListener("change", resolution); observer.disconnect(); } };
+        });
+        const cdp = await context.newCDPSession(page);
+        try {
+          for (const dpr of [1, 2]) {
+            await expect.poll(() => frame.evaluate(element => element.getBoundingClientRect().width)).toBe(200);
+            const eventStart = await page.evaluate(() => (window as any).__rewardDprDelivery.events.length);
+            const width = dpr === 1 ? 961 : 960;
+            await cdp.send("Emulation.setDeviceMetricsOverride", { width, height: 540, deviceScaleFactor: dpr, mobile: false });
+            await expect.poll(() => page.evaluate(() => devicePixelRatio)).toBe(dpr);
+            await page.evaluate(() => (window as any).__rewardDprDelivery.record("after-density-change"));
+            await expect.poll(() => page.evaluate(({ eventStart, dpr, width }) =>
+              (window as any).__rewardDprDelivery.events.slice(eventStart).some((event: { source?: string; dpr?: number; width?: number }) =>
+                event.source === "window-resize" && event.dpr === dpr && event.width === width), { eventStart, dpr, width })).toBe(true);
+            await expect.poll(() => frame.evaluate(element => element.getBoundingClientRect().width)).toBe(200);
+            await expect(image).toHaveAttribute("data-art-role", dpr === 1 ? "presentation" : "optical");
+            await expect.poll(() => image.evaluate(element => element.getBoundingClientRect().width)).toBe(dpr === 1 ? 200 : 64);
+          }
+        } finally {
+          const delivery = await page.evaluate(() => {
+            const probe = (window as any).__rewardDprDelivery;
+            probe.record("finished"); probe.cleanup(); delete (window as any).__rewardDprDelivery;
+            return probe.events;
+          });
+          await writeFile(resolve(output, "reward-dpr-event-delivery.json"), JSON.stringify({
+            mode: "CDP density with a native 1px viewport notification; presentation frame remains 200 CSS pixels",
+            limitation: "A prior density-only CDP probe changed devicePixelRatio without emitting any resolution, window resize or physical-pixel box signal. This check does not claim that silent protocol-only mutation represents native display delivery.",
+            events: delivery,
+          }, null, 2));
+          await cdp.detach();
+        }
+        await writeFile(resolve(output, "reward-fallback-stability.json"), JSON.stringify({ samples, failed, presentationRequests }, null, 2));
+      }
+      expect(presentationRequests).toEqual([large]);
+      expect(failed.filter(path => path === large)).toHaveLength(1);
+      await page.getByRole("button", { name: "Back to the adventure", exact: true }).click();
+      await expect(earned).toBeFocused();
+    } finally { await context.close(); }
   }
 });

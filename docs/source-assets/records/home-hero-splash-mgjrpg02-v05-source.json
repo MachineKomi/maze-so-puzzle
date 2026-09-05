@@ -1,0 +1,283 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "home-hero-splash-mgjrpg02-v05-source",
+  "id": "home-hero-splash",
+  "artVersion": 5,
+  "family": "brand",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "home-hero-exact-alpha-pockets-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-29-home-hero-splash-v04-centred-horn",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "2026-09-04",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md",
+        "sha256": "cf6f115a3a9b560b23000da368e19602d32525a6692aaa2d07bd1236714ee964"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "edit-target",
+          "authorityKind": "approved-source-master",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-27-v0201-corrective-art/home-hero-splash-v03-alpha-correction-generator-original.png",
+          "sha256": "89ff598faf61d0118cd5447a5149b7f778c5890f650f329df1cf5b5ad2b87c71"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-75d90974-e6ac-4910-b0d5-9da045b09abd.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-centered-horn-generator-original.png",
+          "sha256": "cad86a60cd7f2547eb3013c2eafb983ed2270f88b76a31948f19dcd0c756c672",
+          "bytes": 2228180,
+          "disposition": "selected",
+          "reason": "The centred horn and immediately adjacent mane are transferred through the recorded deterministic mask; the full generated frame is not published."
+        },
+        {
+          "outputId": "exec-c19c9ebb-c7fa-48d9-a476-ee12ed49f4a2.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-rejected-checkerboard-generator-original.png",
+          "sha256": "203857c22996db7279ca1cba665e7679bac850cdcb69c74ed8d8f5426e9ccbf0",
+          "bytes": 2093129,
+          "disposition": "rejected",
+          "reason": "Opaque checkerboard and broader redraw drift; retained only as provenance evidence."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Exact prompts, output IDs, bounded transfer, and rejection rationale are preserved in Batch 29."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "semantic-ui-cutout",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "semantic-cream-only"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/PROMPTS.md",
+      "sha256": "cf6f115a3a9b560b23000da368e19602d32525a6692aaa2d07bd1236714ee964"
+    },
+    "outputIds": [
+      "exec-75d90974-e6ac-4910-b0d5-9da045b09abd.png",
+      "exec-c19c9ebb-c7fa-48d9-a476-ee12ed49f4a2.png"
+    ],
+    "notes": "Built-in image generation supplied the horn donor; all other publication work is deterministic."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-27-v0201-corrective-art/home-hero-splash-v03-alpha-correction-generator-original.png",
+      "sha256": "89ff598faf61d0118cd5447a5149b7f778c5890f650f329df1cf5b5ad2b87c71",
+      "bytes": 1965875,
+      "relationship": "approved v03 composition and identity authority",
+      "evidence": "Preserved pixel-for-pixel outside the bounded transfer mask."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-centered-horn-generator-original.png",
+      "sha256": "cad86a60cd7f2547eb3013c2eafb983ed2270f88b76a31948f19dcd0c756c672",
+      "bytes": 2228180,
+      "relationship": "selected bounded horn donor",
+      "evidence": "Only recorded mask pixels can enter the composite."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-rejected-checkerboard-generator-original.png",
+      "sha256": "203857c22996db7279ca1cba665e7679bac850cdcb69c74ed8d8f5426e9ccbf0",
+      "bytes": 2093129,
+      "relationship": "rejected opaque checkerboard output",
+      "evidence": "Never used as an edit target or runtime source."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-composited-white-master.png",
+      "sha256": "c72ec41ac503caf5b06f099ead8d9b13b05d35a0fb788889ce2b1e7940e5953a",
+      "bytes": 1888220,
+      "relationship": "deterministic bounded white-background composite",
+      "evidence": "Approved v03 frame plus recorded horn/mane transfer only."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-transparent-master.png",
+      "sha256": "d0d5f78cc0ee6dc94825a79d94fb82c8d930dbc2960160bc564c58ba4e476f11",
+      "bytes": 2111445,
+      "relationship": "deterministic transparent delivery master",
+      "evidence": "Exterior white matte and exactly two guarded enclosed components removed."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-30-home-hero-pocket-cleanup/home-hero-splash-v05-transparent-master.png",
+      "sha256": "bdbb4b9dc8aa33d1b034c57515889f9bdf2edc61b797bd61143d6240f6049cc5",
+      "bytes": 2111485,
+      "relationship": "deterministic v05 transparent delivery master",
+      "evidence": "Only 579 alpha values changed; every RGB value and every pixel outside the two guarded components is identical."
+    }
+  ],
+  "derivatives": [
+    {
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v05-front-door-1024-r01.webp",
+      "sha256": "c435305b4aee5a93fc709ef5930dbeea4ecee2fb792c0d10b6fa4d7f76f3edae",
+      "bytes": 713330,
+      "width": 1024,
+      "height": 768,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "id": "home-hero-v05-1024-webp",
+      "profile": "front-door-hero-1024-webp",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "title-critical",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    },
+    {
+      "path": "public/assets/mgjrpg-02/brand/home-hero-splash-v05-front-door-1024-r01.png",
+      "sha256": "fd7eae925cc80fe52f0539d7078453e5e103be1ec50683caefa2c6d59765117d",
+      "bytes": 1011527,
+      "width": 1024,
+      "height": 768,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 3145728,
+      "id": "home-hero-v05-1024-png",
+      "profile": "front-door-hero-1024-png",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "responsive-image-fallback-only",
+      "encoder": {
+        "name": "Pillow PNG (zlib)",
+        "version": "Pillow 12.2.0; zlib 1.3.1.zlib-ng",
+        "options": {
+          "compress_level": 9,
+          "optimize": false
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "hero-splash",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.0546875,
+      0.01171875,
+      0.91113281,
+      0.97005208
+    ],
+    "safeInset": [
+      0.01171875,
+      0.034179689999999985,
+      0.018229170000000017,
+      0.0546875
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-29-home-hero-final-correction/home-hero-splash-v04-centered-horn-generator-original.png",
+    "operation": "cutout-resize",
+    "backgroundExtraction": {
+      "mode": "edge-connected",
+      "rgb": [
+        253,
+        253,
+        253
+      ],
+      "tolerance": 32
+    },
+    "profiles": [
+      {
+        "id": "front-door-hero-1024-webp",
+        "outputPath": "public/assets/mgjrpg-02/brand/home-hero-splash-v05-front-door-1024-r01.webp",
+        "width": 1024,
+        "height": 768,
+        "format": "webp",
+        "maxEncodedBytes": 1048576,
+        "clearAlphaBelow": 0,
+        "edgeDilationPixels": 0,
+        "minimumAlphaComponentPixels": 1,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      },
+      {
+        "id": "front-door-hero-1024-png",
+        "outputPath": "public/assets/mgjrpg-02/brand/home-hero-splash-v05-front-door-1024-r01.png",
+        "width": 1024,
+        "height": 768,
+        "format": "png",
+        "maxEncodedBytes": 1048576,
+        "clearAlphaBelow": 0,
+        "edgeDilationPixels": 0,
+        "minimumAlphaComponentPixels": 1,
+        "encoder": {
+          "options": {
+            "compress_level": 9,
+            "optimize": false
+          }
+        }
+      }
+    ]
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "script": "scripts/art_pipeline/home_hero_v05_cleanup.py",
+      "description": "Human-selected precise alpha-mask cleanup: clear exactly 417 hair-pocket and 162 forearm-pocket opaque matte pixels in the approved v04 transparent master; preserve all RGB and all other alpha; premultiplied downsample to 1024x768; lossless WebP and PNG fallback. Reproduce with this dedicated script, not the generic raw-generator build; candidate report records actual v04 input and v05 output hashes."
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build and seed were not exposed by the built-in image generation response."
+  ],
+  "rights": {
+    "originClaim": "Created for Maze so Puzzle from project-owned prompts and internal references.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Human project author",
+    "notes": "No named living artist or proprietary character was requested."
+  },
+  "rollback": {
+    "method": "Restore the Home hero catalogue to the unchanged v04 WebP. Both approved v04 source and runtime remain untouched."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+    "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/home-hero-v05-cleanup-approval.json",
+    "evidenceSha256": "74205bdd4c39c7d0ee163aa0808b84c16232818dfa3d1bf8f560c2b8fe1ff813"
+  }
+}

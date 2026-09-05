@@ -1,8 +1,31 @@
 # Sequential specialist execution prompts
 
+**UI-03 engineering checkpoint — 2026-09-05:** v0.22.0 implements the61-row
+Human correction. Project488, art131, build/locked desktop/static gates passed;
+full browser r6 passed62/63, its observer race passed the5-case r7 retest, and
+all17 final UI/proof cases passed in r8. Exact results/limits are in
+`docs/reviews/2026-09-05-ui03-root-review.md` (repository-relative path).
+Root now owns clean-source portable/web publication. Family feedback and the
+fresh Agent04 gate remain pending; this is not Human visual/comfort acceptance.
+
+**Latest Human direction — UI-03 authorized, 2026-09-05:** the detailed
+v0.20.1/v0.21.0 comparison now authorizes root to correct the rejected UI and
+movement and deliver a new, separately versioned playable preview. Read
+`docs/plans/UI-03-fp-ui1-correction.md` and
+`docs/playtests/2026-09-05-v021-ui-correction-intake.md` (61 acceptance rows).
+Landscape is primary; maximize the existing board without Big/Normal; preserve
+smooth first-tap/held travel (gentle acceleration allowed). Advance bounded Book
+pages/cards, grey locked achievement art, focus/victory, hybrid thumb pad and
+travel acting into this correction. Root integrates disjoint fresh implementation/review agents under the
+Human’s subsequent explicit parallel-work authorization.
+Agent04 still waits for corrected preview feedback. Future specialists start in
+fresh tasks with current prompts. Earlier STOP/candidate/active-Agent01 paragraphs
+below are history, not current execution instructions.
+
+
 Status: manager-reviewed copy/paste runbook
 
-Latest root state, 2026-09-05: UI accepted/pushed at `372e7d9`; MOVE-01 completed
+Historical pre-correction root state, 2026-09-05: UI accepted/pushed at `372e7d9`; MOVE-01 completed
 with 461 project tests and 43 browser checks. Root delivers FP-UI1 before the
 Human triggers Agent04. `AGENT04-after-FP-UI1.md` is the held next prompt; its
 accepted source SHA and family gate must be resolved before execution.
@@ -25,8 +48,9 @@ exports from the unaccepted candidate. Section numbers are not plan IDs.
 Before starting any future prompt, root supplies the accepted SHA, owned paths,
 actual dependency APIs, required art/landmark/rendition availability, budget
 status and owned backlog slices. Read roadmap §5.13B and the dated refinement in
-the relevant plan. Resolve gaps concretely before broad production. Use the
-existing specialist task; do not start another runtime owner in parallel.
+the relevant plan. Resolve gaps concretely before broad production. Use a fresh specialist task after root supplies the current accepted checkpoint.
+The Human authorizes disjoint subagent work coordinated by root; do not create
+competing owners for the same runtime files.
 
 Future Plan 08 also implements PT32 camera view 4/5/6/7 (default 6) under its dated
 addendum; 07B requalifies the actual expanded visible/paint workload. It does
@@ -40,7 +64,7 @@ Future owners read its relevant acceptance cards and their updated plan addenda.
 UI-02 is inserted after 02/before 08 for Book/bestiary/cards, focus and victory
 composition. This does not amend the section-4 prompt or its running return.
 
-Use these prompts in the order shown. Run only one implementation agent at a time. After each agent finishes, have the root manager inspect the diff, run/confirm the gates, resolve defects, commit, and push a clean checkpoint before starting the next prompt.
+Use these prompts in the dependency order shown. Future specialist tasks are fresh; root assigns disjoint subagent ownership when helpful. After each agent finishes, have the root manager inspect the diff, run/confirm the gates, resolve defects, commit, and push a clean checkpoint before starting the next prompt.
 
 Plan 07 intentionally runs twice: a measurement-only pre-pass first and the optimization/qualification pass last. Plan 09 remains reserved for the root manager after every specialist checkpoint is accepted.
 

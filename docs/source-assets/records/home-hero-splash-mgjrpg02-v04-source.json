@@ -5,7 +5,7 @@
   "id": "home-hero-splash",
   "artVersion": 4,
   "family": "brand",
-  "runtimeStatus": "active",
+  "runtimeStatus": "superseded",
   "sourceStatus": "source-backed",
   "approvalStatus": "approved",
   "validationProfile": "strict-v2",
@@ -139,7 +139,7 @@
       "decodedBytesUpperBound": 3145728,
       "profile": "front-door-hero-1024",
       "derivativeRevision": 1,
-      "runtimeStatus": "active",
+      "runtimeStatus": "superseded",
       "loadingPhase": "title-critical",
       "encoder": {
         "name": "Pillow WebP",

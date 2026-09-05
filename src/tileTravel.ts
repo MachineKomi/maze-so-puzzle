@@ -1,7 +1,8 @@
 import type { Point } from "./game/types";
 import type { CameraWindow, GridSize } from "./game/exploration";
+import { STEP_TRAVEL_MS } from "./movementControls";
 
-export const TAP_TRAVEL_MS = 112;
+export const TAP_TRAVEL_MS = STEP_TRAVEL_MS;
 export const MAX_TRAVEL_LAG_MS = 280;
 const EPSILON = 1e-8;
 const distance = (a: Point, b: Point) => Math.abs(a.x-b.x)+Math.abs(a.y-b.y);

@@ -1,0 +1,28 @@
+{
+  "schema": "maze-actor-presentation-proof/v1",
+  "candidateReportSha256": "652dfb668d38c99772e1ebd5d562e43ea196aeac6510ac1dd0b18325e45bb638",
+  "displayPx": 208,
+  "reviewStatus": "root-visual-review-pending",
+  "proofs": [
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-light-01.png",
+      "sha256": "2e36204dd6ad053091db0381928ecdf32804f98cbcb134b9f32a355d8dd5f748",
+      "bytes": 826558
+    },
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-light-02.png",
+      "sha256": "eef511bca1730bd8f69bcc79b0ff2a78911804a0a6297d78262e6ff6d8ed615d",
+      "bytes": 886122
+    },
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-dark-01.png",
+      "sha256": "7eeb5d9a0a1432a4d698662e9b716e41d7ae36dc47a59fbe6eaaeb37cc190efe",
+      "bytes": 801937
+    },
+    {
+      "path": "docs/source-assets/production/ui-correction-actor-presentation/actor-presentation-dark-02.png",
+      "sha256": "688e05440fd7d3b9ecc9e15dd919f56f31c0c41f6c46fef0bff2e2971bdb1d73",
+      "bytes": 869600
+    }
+  ]
+}

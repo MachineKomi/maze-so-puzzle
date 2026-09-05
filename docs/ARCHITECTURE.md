@@ -7,15 +7,80 @@ state.
 
 ## Runtime flow
 
-MOVE-01 adds one presentation-only travel owner in `src/ui/game/useSceneTravel.ts`,
+UI-03 retains one presentation-only travel owner in `src/ui/game/useSceneTravel.ts`,
 using the pure orthogonal `TileTraveller` in `src/tileTravel.ts`. It writes CSS
 `translate` through refs, caches ResizeObserver content geometry and exposes a
 rendered scene snapshot to pointer/effect consumers; it never writes engine or
-save state. Sprite poses keep `transform`. Camera clamp/FOV and held input cadence
-remain unchanged. Stable run-local follower identities consume repeated legal
+save state. Sprite poses keep `transform`. Camera clamp/FOV remain unchanged.
+UI-03 gives ordinary taps and repeats the same 160 ms cadence and samples the
+actual callback time, avoiding the former fast-first-step/startup-pause split.
+Stable run-local follower identities consume repeated legal
 breadcrumbs from `src/game/followerTrail.ts`, independent of camera visibility.
 The exact boundaries and verification are in
-`reviews/2026-09-05-move01-review.md` and `UI_UX_SPEC.md`.
+`reviews/2026-09-05-move01-review.md`, the superseding
+`plans/UI-03-fp-ui1-correction.md` and `UI_UX_SPEC.md`.
+
+The play shell authors primary and compact landscape arrangements around a
+maximum useful square board and a legible deck. Big/Normal is removed; the
+six-tile camera is independent of layout. Portrait presents a safe rotate
+invitation. The anchored thumb pad shares cardinal legality and cancellation
+with keyboard/board input. Story surfaces support deliberate body/header taps
+and Enter, while modal isolation, text selection and held-key guards prevent
+leaked or duplicate actions. Terrain receives a stable memoized full-world window;
+ordinary steps must not regenerate its compound paths just because the camera moves.
+
+`AdventureHud` fits the map and collection art to the overview height remaining
+after the real header, objective, fixed primary feedback row and controls. Its
+single bounded `ResizeObserver` watches those geometry owners plus both
+collection headings; attachment/count changes initialize it and cleanup
+disconnects it. Geometry callbacks measure map chrome, heading height/margins
+and available equipment width, then evaluate collection column counts with
+the existing group/cell gaps. Only local CSS custom properties are written.
+This observer does not run on the travel clock, write React gameplay state,
+or influence engine, saves or camera coordinates.
+
+Primary collection controls stay at least 48px and can grow to 112px. When an
+ideal map prevents 64px cells, map width is reduced only as far as necessary or
+to its 192px desktop / 164px tablet floor. Dense maze 12 measured 92px art/380px
+map at 1920×1080 and 62px art/164px map at 1194×834; 1280×720 and 1024×768 remained
+height-constrained at 57px and 54px art respectively. This is an explicit map/art
+tradeoff, not a claim that every map or icon is larger at every size.
+
+Compact landscape begins below 600px content height or 800px width. Its normal
+deck minimum is 440px; emergency width below 650px reserves 352px. A 568×320 view
+therefore has an approximately 204px square board (188px with 12px safe insets),
+a 96px map and 24px noninteractive status summaries. Short landscape uses two
+full-width labelled collection rows to avoid extra rows covering the pad.
+The 152px bottom-right pad retains 48px direction buttons; Hint, More and the
+inspection actions inside More retain 48px targets. Emergency text-only
+currency counters and tiny status pictures are authored space tradeoffs,
+not the primary iPad/desktop treatment. The full emergency objective is 16px.
+
+At enlarged text, whole counter chips wrap with intrinsic number width and
+nonshrinking art. Primary fitting yields to its bounded deck reader; compact
+retains its named reader with Hint and movement outside. Normal-text fitting
+and accessible reading overflow are separate contracts. Before the final
+production run, 50 scoped DEV geometry cases across five real mazes/seven
+landscape targets and compact safe insets had zero deck overflow, no status/pad
+rectangle overlap and no page errors; compact summary corners were uncovered
+and all controls were at least 48px. Seven synthetic 200%/text-spacing cases had
+no horizontal overflow in HUD/counters/objective/friend/bag containers. See
+`UI_UX_SPEC.md` for exact dimensions and external evidence paths. These
+observations do not claim the pending integrated production run passed, nor
+replace physical-device, performance or Human visual acceptance.
+
+The Adventure Book mounts one of five semantic pages. Schema 6 adds only
+`discoveredEnemyIds`, copied forward from older progress with an empty truthful
+discovery ledger. Normal visible/defeated guardians qualify; hidden objects,
+tester play, portrait and modal-paused scenes do not. The existing receipt,
+currency, layout-history and rescue data remain authoritative. A newer schema
+under the current key opens a temporary read-only session and leaves both its
+Book and associated active-run bytes untouched, including during startup.
+
+Large actor and reward art loads for the mounted contextual viewer. Catalogue
+imports contain metadata, not image preloads. Existing optical/field projections
+remain unchanged. UI-03's Home v05 changes only the two explicitly authorized
+alpha pockets; the separately reviewed Tessera repair is contextual-only.
 
 1. `src/main.tsx` mounts the React application.
 2. `src/App.tsx` owns screen navigation and presents the title, Adventure Book,
@@ -196,12 +261,13 @@ The exact boundaries and verification are in
   meaningful game state, and the active run persists that bounded replay state.
   Its solver route always avoids optional animals.
 - The browser build uses only local static assets from `public/`.
-- All primary landscape devices share board-left/deck-right topology, with real
-  CSS-pixel text/targets and content-sized map/friend/bag sections. Big keeps the
-  same deck. Short phones use 28px noninteractive status cells with More details
-  at44/48px. Normal-text statuses fit together;200%/extreme content uses one
-  labelled reader with Objective/Hint and movement docked outside it. Portrait
-  is an emergency fallback, not a qualified primary mode.
+- All primary landscape devices share the maximized board-left/deck-right
+  topology, real CSS-pixel text/targets and remaining-height map/collection fit.
+  Big/Normal is removed. Compact summaries are noninteractive; the 568px
+  emergency composition uses 24px status pictures with 48px More/detail actions.
+  Normal-text statuses fit together; 200%/extreme content retains one labelled
+  reader with Objective/Hint and movement docked outside it. Portrait presents
+  the rotate invitation rather than a second primary game layout.
 - `src/ui/interactionState.ts` exposes typed screen/top-overlay truth and a narrow
   current-input blocker. DialogShell owns focus/inert/restore. Plan08 later owns
   canonical inputContext/getInteractionPolicy; no competing taxonomy is added.

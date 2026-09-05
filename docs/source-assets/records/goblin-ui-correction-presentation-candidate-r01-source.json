@@ -1,0 +1,291 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 2,
+  "recordId": "goblin-ui-correction-presentation-candidate-r01-source",
+  "id": "goblin",
+  "artVersion": 2,
+  "family": "enemy",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "approved",
+  "validationProfile": "strict-v2",
+  "recipeVersion": "mgjrpg-02",
+  "derivativeRecipeVersion": "ui-correction-approved-actor-presentation-r01",
+  "recipeEvidence": {
+    "recipeId": "mgjrpg-02",
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17"
+  },
+  "generationRuns": [
+    {
+      "runId": "batch-28-goblin-v02-matte",
+      "generator": "OpenAI built-in image generation capability",
+      "model": "not exposed by tool response",
+      "executedAt": "unknown",
+      "prompt": {
+        "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/PROMPTS.md",
+        "sha256": "9859dc2932f1bdb6efdf1149ffa23f0718bf3512a21054735aab922c00d096a6"
+      },
+      "references": [
+        {
+          "order": 1,
+          "role": "comparison-only",
+          "authorityKind": "comparison-only",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/goblin-legacy-input.png",
+          "sha256": "793142291d8be5d0629e83f3776c167e80351d502a1dd9a35b20c7664b754473"
+        },
+        {
+          "order": 2,
+          "role": "family-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/acorn-knight-family-input.webp",
+          "sha256": "cd31c31d1c12651dd39263af3d1d7ec9fccd921ef5aa4119ebf67e321f823bd5"
+        },
+        {
+          "order": 3,
+          "role": "family-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/orc-chieftain-family-input.webp",
+          "sha256": "4a438ad8036681ef8cb229afc377a95467cdfca4b9030108d1d08180509e8e2f"
+        },
+        {
+          "order": 4,
+          "role": "family-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/lizard-swordsman-family-input.webp",
+          "sha256": "77460b40cf151d6f20be31120ac6d220412c3b58f966ff02e9a95d487b76f870"
+        },
+        {
+          "order": 5,
+          "role": "family-authority",
+          "authorityKind": "approved-rendering-anchor",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/mushroom-imp-family-input.webp",
+          "sha256": "b06e7cde04983330f12c3d8dce596087406077c8600d5367a79db84a083b5c8b"
+        }
+      ],
+      "outputs": [
+        {
+          "outputId": "exec-4beea5bd-7235-4260-8bfe-2f86926150a9.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/goblin-v02-generator-original.png",
+          "sha256": "bf5a64ec6ebe18d6c8a201cc9315f38ababd841afdf367a21efccd4dd4e8b9bd",
+          "bytes": 1412404,
+          "disposition": "selected",
+          "reason": "Selected under the Human's explicit corrective direction against the approved mgjrpg-02 family contract."
+        },
+        {
+          "outputId": "exec-dd1c68b6-a069-4e0b-9477-1281e07101c5.png",
+          "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/goblin-v02-rejected-checkerboard-generator-original.png",
+          "sha256": "c3924e098e3b7a65e960852e2cee5fc1285e92b5e5f2601c8562bf0c39ff77bf",
+          "bytes": 1428319,
+          "disposition": "rejected",
+          "reason": "The provider painted a checkerboard into opaque RGB; it is provenance evidence only."
+        }
+      ],
+      "lineage": {
+        "editOfEdit": false,
+        "identityAuthorityEligible": false,
+        "renderingAuthorityEligible": false
+      },
+      "notes": "Exact prompt intent and ordered reference roles are preserved in the batch prompt record."
+    }
+  ],
+  "renderingContract": {
+    "profileId": "storybook-local-contour-v1",
+    "recipeId": "mgjrpg-02",
+    "treatmentClass": "character-contour",
+    "canaryReview": {
+      "reviewId": "mgjrpg-02-canary-v01",
+      "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+      "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d"
+    },
+    "authoredContour": "material-local-color-aware",
+    "extractionRole": "alpha-matte-only",
+    "stickerCutline": "forbidden"
+  },
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/PROMPTS.md",
+    "assetNamedInHistory": true,
+    "promptFile": {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/PROMPTS.md",
+      "sha256": "9859dc2932f1bdb6efdf1149ffa23f0718bf3512a21054735aab922c00d096a6"
+    },
+    "outputIds": [
+      "exec-4beea5bd-7235-4260-8bfe-2f86926150a9.png",
+      "exec-dd1c68b6-a069-4e0b-9477-1281e07101c5.png"
+    ],
+    "notes": "Exact submitted prompt and provider output identifier are retained."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/goblin-v02-generator-original.png",
+      "sha256": "bf5a64ec6ebe18d6c8a201cc9315f38ababd841afdf367a21efccd4dd4e8b9bd",
+      "bytes": 1412404,
+      "relationship": "selected immutable generator original",
+      "evidence": "Direct Human request for corrective generation and runtime publication."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/goblin-v02-rejected-checkerboard-generator-original.png",
+      "sha256": "c3924e098e3b7a65e960852e2cee5fc1285e92b5e5f2601c8562bf0c39ff77bf",
+      "bytes": 1428319,
+      "relationship": "rejected first generator output",
+      "evidence": "Retained to prove the opaque checkerboard failure; never used as an edit target or runtime source."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/goblin-legacy-input.png",
+      "sha256": "793142291d8be5d0629e83f3776c167e80351d502a1dd9a35b20c7664b754473",
+      "bytes": 253571,
+      "relationship": "immutable comparison-only generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/acorn-knight-family-input.webp",
+      "sha256": "cd31c31d1c12651dd39263af3d1d7ec9fccd921ef5aa4119ebf67e321f823bd5",
+      "bytes": 46318,
+      "relationship": "immutable family-authority generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/orc-chieftain-family-input.webp",
+      "sha256": "4a438ad8036681ef8cb229afc377a95467cdfca4b9030108d1d08180509e8e2f",
+      "bytes": 55364,
+      "relationship": "immutable family-authority generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/lizard-swordsman-family-input.webp",
+      "sha256": "77460b40cf151d6f20be31120ac6d220412c3b58f966ff02e9a95d487b76f870",
+      "bytes": 56500,
+      "relationship": "immutable family-authority generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    },
+    {
+      "path": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/references/mushroom-imp-family-input.webp",
+      "sha256": "b06e7cde04983330f12c3d8dce596087406077c8600d5367a79db84a083b5c8b",
+      "bytes": 40522,
+      "relationship": "immutable family-authority generation reference snapshot",
+      "evidence": "Copied byte-for-byte into the immutable Batch 28 evidence set before generation."
+    }
+  ],
+  "derivatives": [
+    {
+      "id": "goblin-enemy-presentation-512-r01",
+      "path": "public/assets/mgjrpg-02/presentation/goblin-v02-presentation-512-r01.webp",
+      "sha256": "0682307878f8e173f9f715da722b3c2a5ae83376b9714888caf688e009b92b5f",
+      "bytes": 124788,
+      "width": 512,
+      "height": 512,
+      "format": "webp",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 1048576,
+      "profile": "enemy-presentation-512",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "visible-contextual-presentation-only",
+      "encoder": {
+        "name": "Pillow WebP",
+        "version": "Pillow 12.2.0; libwebp 1.6.0",
+        "options": {
+          "lossless": true,
+          "quality": 100,
+          "method": 6,
+          "exact": true
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "grounded-actor",
+    "pivot": [
+      0.5,
+      0.9
+    ],
+    "visibleBounds": [
+      0.15234375,
+      0.060546875,
+      0.6953125,
+      0.87890625
+    ],
+    "safeInset": [
+      0.060546875,
+      0.15234375,
+      0.060546875,
+      0.15234375
+    ]
+  },
+  "build": {
+    "sourcePath": "docs/source-assets/production/mgjrpg-02/batch-28-missed-active-refresh/goblin-v02-generator-original.png",
+    "operation": "cutout-resize",
+    "profiles": [
+      {
+        "id": "enemy-presentation-512",
+        "outputPath": "public/assets/mgjrpg-02/presentation/goblin-v02-presentation-512-r01.webp",
+        "width": 512,
+        "height": 512,
+        "format": "webp",
+        "maxEncodedBytes": 124788,
+        "encoder": {
+          "options": {
+            "lossless": true,
+            "quality": 100,
+            "method": 6,
+            "exact": true
+          }
+        }
+      }
+    ],
+    "backgroundExtraction": {
+      "mode": "flat-impossible-matte",
+      "recipeId": "flat-impossible-matte-alpha-unblend-v1",
+      "rgb": [
+        245,
+        4,
+        247
+      ],
+      "clearDistance": 48,
+      "opaqueDistance": 144,
+      "minimumComponentPixels": 3
+    },
+    "registration": {
+      "targetBox": [
+        0.07,
+        0.06,
+        0.93,
+        0.94
+      ],
+      "align": [
+        0.5,
+        1.0
+      ],
+      "alphaThreshold": 3
+    }
+  },
+  "humanEdits": [
+    {
+      "kind": "deterministic-delivery-processing",
+      "script": "scripts/art_pipeline/ui_actor_presentation_candidates.py",
+      "description": "Rebuilt approved optical bytes exactly, then applied the same approved source extraction and family registration at 512px. No generated redraw, source alteration or optical upscale."
+    }
+  ],
+  "knownUnknowns": [
+    "Generator model build, seed and exact execution timestamp were not exposed.",
+    "Manual face and eye landmarks remain a Plan 05 registration gate; static alpha registration is authoritative here."
+  ],
+  "rights": {
+    "originClaim": "Created for Maze so Puzzle from project-owned prompts and internal references.",
+    "licenceStatus": "reviewed",
+    "reviewedBy": "Human project author",
+    "notes": "No named living artist or proprietary character was requested."
+  },
+  "rollback": {
+    "method": "Remove the actor presentation extension from the UI catalogue. Original approved optical assets and their records remain unchanged and available."
+  },
+  "approvalEvidence": {
+    "approvedBy": "Astra root orchestrator under Human correction and publication delegation",
+    "approvedAt": "2026-09-05T06:12:23.834844+00:00",
+    "scope": "runtime-publish",
+    "evidencePath": "docs/source-assets/publication/ui-correction-actor-presentation-approval.json",
+    "evidenceSha256": "6a959f164c00c21b2f5291114b94fd2818a5393a2c18806fc7ac8a3662cae4ea"
+  }
+}

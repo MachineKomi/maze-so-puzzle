@@ -7,10 +7,14 @@
 .play-shell { display: grid; grid-template-columns: var(--board-size) minmax(0,1fr); gap: var(--shell-gap); height: 100%; padding: 8px; min-width: 0; min-height: 0; align-items: center; }
 .maze-panel { position: relative; display: grid; width: var(--board-size); height: var(--board-size); min-width: 0; min-height: 0; border-radius: 20px; box-shadow: 0 3px 0 #85738c,0 8px 18px #3e2d5526; }
 .maze-board { position: relative; display: grid; width: 100%; height: 100%; aspect-ratio: 1; min-width: 0; min-height: 0; overflow: hidden; border: 4px solid #69597c; border-radius: 20px; background: #f8ead8; user-select: none; touch-action: none; cursor: crosshair; container: maze-board / size; }
-.deck-feedback .feedback-bar { display: flex; align-items: center; gap: 6px; padding: 4px 6px; border-top: 1px solid #ddcadb; font-size: 0.875rem; color: #594263; }
+.deck-feedback .feedback-bar { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 4px 8px; font-size: .9rem; color: #594263; }
 .feedback-icon { width: 22px; height: 22px; flex: 0 0 auto; }
 .deck-feedback img { width: 22px; height: 22px; flex: 0 0 auto; }
 .save-warning { position: absolute; z-index: 60; top: 8px; left: 8px; right: 8px; padding: 10px; color: #684120; background: #fff3cf; border: 2px solid #956927; border-radius: 10px; }
 .ambient-star, .rotate-message { display: none; }
 @media (min-width: 1600px) and (min-height: 900px) { .play-shell[data-layout] { --play-padding: 24px; } }
-@media (orientation: portrait) { .play-shell { grid-template-columns: minmax(0,1fr); align-content: start; overflow-y: auto; } .maze-panel { max-width: 100%; margin-inline: auto; } .adventure-hud { height: auto; } }
+@media (orientation: portrait) {
+ .rotate-message { position: fixed; z-index: 200; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 32px; text-align: center; background: radial-gradient(ellipse at 30% 20%,#fff1be,#efe5fb 60%,#ccece0); color: var(--plum); font-size: 1.4rem; }
+ .rotate-message img { width: min(180px,40vw); }
+ .rotate-message > span { font-size: 1.1rem; }
+}

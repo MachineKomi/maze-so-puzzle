@@ -1,5 +1,13 @@
 # Maze so Puzzle: For Ame to Solve!
 
+The current correction is **v0.22.0 FP-UI1 (UI-03)**, under final verification.
+It responds to the Human's v0.21.0 UI review with authored landscape screens,
+larger picture-led tools, a five-page Adventure Book and coherent smooth travel.
+See the [current root review](docs/reviews/2026-09-05-ui03-root-review.md) and
+[family checklist](docs/playtests/FP-UI1-checklist.md). The 0.20.1 packaging notes
+below describe retained historical comparison files until the new release note
+and immutable artifact manifest are finalized.
+
 [![Browser build](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml/badge.svg)](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml)
 
 ![Ame and her animal friends beside a magical storybook maze](public/assets/title-background-v1.webp)

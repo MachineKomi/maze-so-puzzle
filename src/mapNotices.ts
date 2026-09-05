@@ -30,7 +30,7 @@ export function pickupToastFor(
       case "antidote-leaf-collected":
         return { icon: ASSETS.antidoteLeaf, text: "Picked up the Antidote Leaf!", kind: "pickup" };
       case "potion-collected":
-        return { icon: ASSETS.potion, text: `Picked up a Power Potion! +${event.amount} Power`, kind: "pickup" };
+        return { icon: ASSETS.potion, text: `Power Potion! ${event.powerBefore} + ${event.amount} = ${event.powerAfter}`, kind: "pickup" };
       case "key-collected":
         return { icon: resolveKeyArt(event.color).src, text: `Picked up the ${resolveKeyArt(event.color).label}!`, kind: "pickup" };
       case "treasure-collected":

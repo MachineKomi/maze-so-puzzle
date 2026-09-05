@@ -80,9 +80,13 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     b.board.dataset.travelState=moving ? "moving" : "settled";
     if(moving && frame.current===undefined && b.input.enabled && !document.hidden) {
       const token=generation.current;
-      frame.current=requestAnimationFrame(at=>{
+      frame.current=requestAnimationFrame(()=>{
         frame.current=undefined;
-        if(token===generation.current) paint(at);
+        // React commits retarget against performance.now(). Use that same
+        // clock when this callback actually runs: a busy frame's rAF timestamp
+        // may be old, which otherwise paints an old fraction then jerks ahead
+        // on the next healthy frame after the main thread becomes available.
+        if(token===generation.current) paint(performance.now());
       });
     }
   },[]);

@@ -1,5 +1,11 @@
 # Windows test builds
 
+**Current work: v0.22.0 FP-UI1 UI-03 correction.** Its final immutable manifest,
+PLAYTEST note and source-qualified portable are being prepared. Do not use the
+historical “current 0.20.1” wording below as the release state for UI-03. The
+v0.21.0 draft remains withheld following Human rejection and must not be published.
+See `../docs/reviews/2026-09-05-ui03-root-review.md` for current verification.
+
 This folder documents convenience copies of Windows x64 artifacts staged for
 local play testing. Executables are deliberately excluded from source history;
 publish the current pair as GitHub Release assets when a downloadable desktop

@@ -20,8 +20,9 @@ import {
   migrateCampaignAccess,
 } from "./campaign";
 
-export const PLAYER_PROGRESS_SCHEMA_VERSION = 5 as const;
-export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v5";
+export const PLAYER_PROGRESS_SCHEMA_VERSION = 6 as const;
+export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v6";
+export const VERSION_FIVE_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v5";
 export const VERSION_FOUR_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v4";
 export const VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v3";
 export const VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v2";
@@ -252,6 +253,8 @@ export interface PlayerProgress {
   readonly bestPerfectRescueStreak: number;
   /** Bounded durable receipts prevent a resumed pending exit from crediting twice. */
   readonly completionReceipts: readonly string[];
+  /** Enemy style IDs actually seen during normal play; unknown future IDs survive round trips. */
+  readonly discoveredEnemyIds: readonly string[];
 }
 
 export interface LevelRewardInput {
@@ -420,6 +423,30 @@ function mergeUnique<T extends string>(existing: readonly T[], added: readonly T
   return [...new Set([...existing, ...added])];
 }
 
+function sanitizeEnemyDiscoveries(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return [...new Set(value.flatMap((candidate: unknown) => {
+    if (typeof candidate !== "string") return [];
+    const id = candidate.trim();
+    // Preserve future catalogue IDs without accepting unsafe object keys or arbitrary payloads.
+    return /^[a-z][a-z0-9-]{0,95}$/.test(id)
+      && id !== "prototype" && id !== "constructor"
+      ? [id]
+      : [];
+  }))];
+}
+
+/** Learn about a visible enemy without awarding currency, rescues, or completion credit. */
+export function recordEnemyDiscoveries(
+  progress: PlayerProgress,
+  ids: readonly string[],
+): PlayerProgress {
+  const discoveredEnemyIds = mergeUnique(progress.discoveredEnemyIds, sanitizeEnemyDiscoveries(ids));
+  return discoveredEnemyIds.length === progress.discoveredEnemyIds.length
+    ? progress
+    : { ...progress, discoveredEnemyIds };
+}
+
 function knownSpecies(value: unknown, maximum: number = ANIMAL_SPECIES.length): AnimalSpecies[] {
   if (!Array.isArray(value)) return [];
   const unique = new Set(value.filter(isAnimalSpecies));
@@ -508,6 +535,7 @@ export function createDefaultPlayerProgress(unlockedLevelCount = 1): PlayerProgr
     currentPerfectRescueStreak: 0,
     bestPerfectRescueStreak: 0,
     completionReceipts: [],
+    discoveredEnemyIds: [],
   };
 }
 
@@ -616,6 +644,7 @@ function sanitizeProgressObject(
   value: Record<string, unknown>,
   includeVersionThreeFields: boolean,
   includeCompletionReceipts = false,
+  includeEnemyDiscoveries = false,
 ): PlayerProgress {
   const bestResultsByLevel = sanitizeBestResults(
     ownValue(value, "bestResultsByLevel"),
@@ -752,6 +781,9 @@ function sanitizeProgressObject(
     completionReceipts: includeCompletionReceipts
       ? sanitizeCompletionReceipts(ownValue(value, "completionReceipts"))
       : [],
+    discoveredEnemyIds: includeEnemyDiscoveries
+      ? sanitizeEnemyDiscoveries(ownValue(value, "discoveredEnemyIds"))
+      : [],
   };
 }
 
@@ -794,6 +826,10 @@ export function migratePlayerProgress(value: unknown): PlayerProgress {
 
   const schemaVersion = ownValue(value, "schemaVersion");
   if (schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION) {
+    return sanitizeProgressObject(value, true, true, true);
+  }
+
+  if (schemaVersion === 5) {
     return sanitizeVersionFive(value);
   }
 
@@ -1070,6 +1106,7 @@ export function applyLevelCompletion(
     completionReceipts: completionId
       ? [...current.completionReceipts, completionId].slice(-MAX_COMPLETION_RECEIPTS)
       : current.completionReceipts,
+    discoveredEnemyIds: current.discoveredEnemyIds,
   };
 }
 
@@ -1081,15 +1118,45 @@ function browserStorage(): ProgressStorage | null {
   }
 }
 
-/** Save a sanitized v5 snapshot. Returns false instead of throwing on failure. */
+function isUnsupportedProgressSnapshot(value: unknown): boolean {
+  if (!isRecord(value)) return false;
+  const schemaVersion = ownValue(value, "schemaVersion");
+  return typeof schemaVersion === "number"
+    && Number.isInteger(schemaVersion)
+    && schemaVersion > PLAYER_PROGRESS_SCHEMA_VERSION;
+}
+
+/** Let the UI explain why a profile from a newer build is being kept read-only. */
+export function hasUnsupportedProgressProfile(
+  storage: ProgressStorage | null | undefined = undefined,
+): boolean {
+  const target = storage === undefined ? browserStorage() : storage;
+  if (target === null) return false;
+  try {
+    const stored = target.getItem(PLAYER_PROGRESS_STORAGE_KEY);
+    return stored !== null && isUnsupportedProgressSnapshot(JSON.parse(stored) as unknown);
+  } catch {
+    return false;
+  }
+}
+
+/** Save a sanitized v6 snapshot. Never overwrite a profile from a newer schema. */
 export function writePlayerProgress(
   progress: PlayerProgress,
   storage: ProgressStorage | null | undefined = undefined,
 ): boolean {
   const target = storage === undefined ? browserStorage() : storage;
-  if (target === null) return false;
+  if (target === null || isUnsupportedProgressSnapshot(progress)) return false;
 
   try {
+    const stored = target.getItem(PLAYER_PROGRESS_STORAGE_KEY);
+    if (stored !== null) {
+      try {
+        if (isUnsupportedProgressSnapshot(JSON.parse(stored) as unknown)) return false;
+      } catch {
+        // A corrupt snapshot may be repaired; a valid newer snapshot may not.
+      }
+    }
     target.setItem(
       PLAYER_PROGRESS_STORAGE_KEY,
       JSON.stringify(migratePlayerProgress(progress)),
@@ -1101,9 +1168,10 @@ export function writePlayerProgress(
 }
 
 /**
- * Read v5 progress, falling back through v4, v3, v2 and the released numeric v1 save.
- * Successful legacy migrations are transparently copied to the v5 key. Every
- * storage and parsing failure returns a fresh default.
+ * Read v6 progress, falling back through v5, v4, v3, v2 and the numeric v1 save.
+ * Legacy migrations copy to v6 without changing their original keys. A newer
+ * schema stays untouched, returns a temporary default, and rejects all writes;
+ * callers use hasUnsupportedProgressProfile to explain the read-only session.
  */
 export function readPlayerProgress(
   storage: ProgressStorage | null | undefined = undefined,
@@ -1112,12 +1180,14 @@ export function readPlayerProgress(
   if (target === null) return createDefaultPlayerProgress();
 
   try {
-    const storedV5 = target.getItem(PLAYER_PROGRESS_STORAGE_KEY);
-    if (storedV5 !== null) {
+    const storedV6 = target.getItem(PLAYER_PROGRESS_STORAGE_KEY);
+    if (storedV6 !== null) {
       try {
-        const parsed = JSON.parse(storedV5) as unknown;
+        const parsed = JSON.parse(storedV6) as unknown;
+        if (isUnsupportedProgressSnapshot(parsed)) return createDefaultPlayerProgress();
         if (isRecord(parsed) && (
           parsed.schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION
+          || parsed.schemaVersion === 5
           || parsed.schemaVersion === 4
           || parsed.schemaVersion === 3
           || parsed.schemaVersion === 2
@@ -1128,6 +1198,20 @@ export function readPlayerProgress(
         }
       } catch {
         // A usable legacy save may still be present below.
+      }
+    }
+
+    const priorV5 = target.getItem(VERSION_FIVE_PLAYER_PROGRESS_STORAGE_KEY);
+    if (priorV5 !== null) {
+      try {
+        const parsed = JSON.parse(priorV5) as unknown;
+        if (isRecord(parsed) && parsed.schemaVersion === 5) {
+          const migrated = migratePlayerProgress(parsed);
+          writePlayerProgress(migrated, target);
+          return migrated;
+        }
+      } catch {
+        // Continue to older released formats.
       }
     }
 

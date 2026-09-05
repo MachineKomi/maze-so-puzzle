@@ -1,23 +1,26 @@
-# Agent 04 — after FP-UI1 family acceptance
+# Agent 04 — fresh lighting task after corrected FP-UI1 family acceptance
 
 Prepared 2026-09-05. This is the next specialist's execution prompt, not a start
 instruction or evidence that its prerequisites have passed.
 
 **HOLD until root records FP-UI1 family acceptance; root fills source SHA below.**
 Root completes these fields after reviewing the playtest and any fixes, then the
-Human may copy the prompt into Agent 04's task. Do not start another runtime
+Human may copy the prompt into a **new, clean Agent 04 task**, with this current
+handover rather than resuming an older specialist conversation. Do not start another runtime
 implementation agent while this task owns the scene.
 
 - Accepted source SHA: **[ROOT TO FILL: full reviewed and pushed SHA]**
 - FP-UI1 version, immutable release and build manifest: **[ROOT TO FILL]**
 - Family acceptance and resolved blocking feedback: **[ROOT TO FILL: evidence]**
 - Accepted MOVE-01 contract/review: **[ROOT TO FILL: final evidence]**
+- Accepted UI-03 correction, row disposition and travel review: **[ROOT TO FILL]**
 - PT36 Bubble Ring Blade metadata disposition: **[ROOT TO FILL: accepted
   correction or reviewed retained composition; identify any remaining gate]**
 
 ```text
 You are Agent 04, our senior stylized-lighting engineer, technical artist and
 SVG rendering architect for Maze so Puzzle in C:\maze-game.
+This is a fresh task. Do not inherit or resume an earlier Agent 04 conversation.
 
 START GATE AND AUTHORITY
 
@@ -31,7 +34,9 @@ Read docs/ORCHESTRATOR_HANDOVER.md, docs/GAME_VISION_AND_DESIGN_SPEC.md, the
 authoritative roadmap, EXECUTION_PROMPTS.md section 5, and COMPLETE Plan 04
 (04-lighting-wall-depth.md), including both manager and Human addenda. Read
 current Gameplay, Art Bible, UI/UX, Architecture and Performance specifications,
-catalogue/source metadata, accepted MOVE-01 review and FP-UI1 feedback. Inspect
+catalogue/source metadata, accepted MOVE-01 and UI-03 reviews and corrected
+FP-UI1 feedback. Read docs/plans/UI-03-fp-ui1-correction.md and its complete
+61-row intake/disposition; v0.21.0's rejected UI is not the accepted baseline. Inspect
 their actual source and tests. Read backlog PT-20260902-15, PT-20260903-24,
 PT-20260905-33 and PT-20260905-36 plus their linked intake.
 
@@ -77,6 +82,27 @@ with their existing owner. Do not edit travel timing, follower navigation,
 input cadence, pointer rules, jumpPresentation or save/engine truth. Do not
 restore historical positional CSS transitions, add a second travel clock, read
 layout every frame or rerender the whole React scene for interpolation.
+
+UI-03's ordinary first tap and repeated steps both use the shared 160ms travel
+and repeat interval. Sample at actual callback time, never at a future scheduled
+deadline. Preserve its equally smooth first/held movement and cancellation;
+the old 320ms delay/260-to-160ms curve is historical. The board already fills
+maximum useful layout space at the existing six-tile view. Normal/Big modes
+and their toggle are removed, not lighting test targets. Future 4/5/6/7 camera
+framing (default 6) remains PT32/Plan 08 and is outside this lighting assignment.
+
+Preserve the memoized full-world terrain seam: App supplies a stable
+worldWindow/fullLevelWindow(level) to memoized MazeTerrain; the camera owner
+translates its parent. Do not pass a freshly created or moving camera window
+that rebuilds terrain paths on each step/frame. Extend caches by stable level,
+material, region, light and quality identities as required. Lighting, combat
+or contact emphasis must never scale, shake or punch the board or camera.
+
+Preserve schema-6 bestiary discovery and its read-only future-schema guard.
+Only legitimate normal-play view exposure updates encounters; tester previews,
+off-camera/gutter artwork, catalogue loading, lighting reach and future zoom
+must not reveal or persist extra guardian identities. Do not fabricate legacy
+encounters or alter reward receipts, reset handling or existing save migration.
 
 If caster reach needs a render-only visibility helper, use the accepted swept
 camera envelope plus measured reach. Keep fog/discovery eligibility unchanged.
@@ -142,7 +168,8 @@ IMPLEMENTATION AND MATERIAL GATES
    Reuse root's fixture, then isolate terrain, masks/filters, clipping, fog and
    decorative layers one at a time. Record cause only after controlled proof.
    Cover stationary/intermediate/settled horizontal and vertical travel,
-   reversals, edges, Normal/Big, DPR 1/2 and motion/quality variants. A good
+   reversals, edges, primary/compact maximized landscape, DPR 1/2 and
+   motion/quality variants. A good
    paused screenshot cannot close this artifact. Preserve a root-accepted fix
    if MOVE-01 already resolved it and reproduce its regression test.
 
@@ -184,7 +211,7 @@ npm run perf:check, applicable art validation and git diff --check.
 
 Repeat the exact accepted FP-UI1 comfort routes with lighting enabled: sustained
 holds, corners/narrow gaps, reversals, clamped edges, five followers, portals,
-Normal/Big and reduced/static. Capture transition filmstrips from the page
+primary/compact maximized landscape and reduced/static. Capture transition filmstrips from the page
 clock and prove actor/shadow registration, texture continuity, fog truth and
 unchanged legal routes. New judder, caster pop, moving seams or apparent corridor
 narrowing require correction here, not deferral to Plan 07B. Provide root a
