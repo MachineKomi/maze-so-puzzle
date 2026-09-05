@@ -1,6 +1,8 @@
 # AUDIO-01 — timely music, satisfying sound and listening qualification
 
 Status: manager-scoped future work, 2026-09-05; no runtime implementation yet.
+Updated 2026-09-06: independent volume controls are explicitly authorized by the
+Human and scoped as AUDIO-01V below; they are not shipped yet.
 Source: [Human audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Backlog owner: PT-20260903-20, with PT23 transport and existing CR-AUDIO decisions.
 
@@ -14,6 +16,13 @@ does not stop implementation after accepted engineering predecessors.
 Victory should sound celebratory as it appears; doors, pickups and rescues should
 sound at their visual contact. Ordinary context changes should not create silent
 gaps while an otherwise enabled game fetches the next song.
+
+**AUDIO-01V, Astra implementation with Sol review:** after accepted PLAY-A, take
+one bounded per-device Music/SFX gain and settings checkpoint before the larger
+readiness work. It may precede PLAY-B/V22-UI-01 once the sole writer returns
+ownership. This does not reopen Sol's active pace scope, wait for all creative
+sound design, or claim that iPad camera performance is resolved. Route its compact
+controls through the existing Sound & comfort dialog and preserve the pace control.
 
 **AUDIO-01A, root/Astra implementation with Sol review:** advance the bounded
 readiness/continuity portion of Plan 07B to after the v0.22.1 device/performance
@@ -34,6 +43,58 @@ Read MUSIC, PT20/23, the Plan-07 manager addendum and audio phases, Plan 02,
 current music/transport/sound code, presentation cancellation and performance
 budgets before implementation. The older statement that all audio waits for 07B
 is superseded only for AUDIO-01A's explicitly bounded scope below.
+
+## V. Independent Music / Sound effects levels (early AUDIO-01V)
+
+Source: [Human iPad balance report](../user-playtests/2026-09-06-ipad-audio-balance.md).
+The iPad has much quieter effects relative to music than the phone/laptop/native
+comparisons. This is a listening observation, not proof of old hardware failure.
+
+- Two clearly labelled sliders, **Music** and **Sound effects**, with current
+  percentages, live bounded response and no new permanent HUD buttons. Support
+  touch, pointer and keyboard range adjustment, visible focus and semantic IDs
+  for later controller integration. Settings input must never move Ame.
+- Persist independent levels locally, separate from campaign progress. Reset
+  Progress preserves them; missing/invalid values have safe defaults; clamp
+  finite out-of-range values. Storage denial permits in-memory changes with the
+  established nonblocking warning. No account sync or hardware detection needed.
+- Default to the existing intended desktop mix for this correction: Music 22%
+  and SFX 100% of the existing authored cue envelopes. Give the Human room to
+  lower music independently. Any later global rebalance/boost needs measured
+  headroom and listening evidence; do not solve the iPad report by multiplying
+  every cue or rewriting all OST files.
+- Shared Mute overrides both channels without erasing either slider value.
+  Adjusting a slider while muted does not unmute. Unmute restores the selected
+  balance; zero is genuine channel silence, not a tiny audible gain floor.
+  Changes do not seek/restart the music or replay old effects.
+- Verify actual effective music gain on iPad; do not ship cosmetic sliders
+  backed solely by `HTMLAudioElement.volume` if that path is ineffective.
+  Apple's archived restriction is a hypothesis, not a current-device diagnosis.
+  Prefer a reusable bounded Web Audio gain path when required, with one owner
+  for media source creation, context activation, mute and teardown. Avoid double
+  attenuation when moving the current `0.22` level into a graph; never connect
+  both a direct and a gained route to the destination.
+- Respect gesture activation, hidden-page suspension, interruption and failures.
+  Do not download/decode entire songs into buffers merely to control volume or
+  introduce another audio library. Preserve current transport selection/history
+  and the later at-most-two-lane readiness bound. Existing per-cue synthesis
+  envelopes stay intact; smooth gain changes should not click or clip.
+- Add a short, deliberately triggered **Test sound** cue if needed for useful
+  adjustment; do not fire a melody on every slider tick or after cancellation.
+  Test with music playing, rapid adjustment and repeated cues, not only silence.
+
+Acceptance: independent endpoints/intermediate levels; mute/change/unmute;
+reload and Reset Progress; malformed/denied storage; track/context changes;
+gesture/hidden/resume/failure recovery; no duplicate media graph or leaked nodes;
+no music restart or stale SFX burst. Automated graph checks do not prove speaker
+audibility. Record separate physical iPad, phone, laptop web and Windows listening
+rows, including low system volume. Missing device results remain open. Compare
+the same cue/song/output route before changing global defaults.
+
+Update the canonical transport/fake or gain boundary and its conformance tests
+as needed, MUSIC, PT20/PT23, allocation and rollback. Ship only a reviewed
+versioned checkpoint with measured byte/graph costs; no frozen v0.22.2 rewrite.
+No requirement here authorizes microphone capture or OS system-volume changes.
 
 ## A. Characterize readiness, then correct it
 

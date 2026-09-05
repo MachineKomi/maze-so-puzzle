@@ -7,6 +7,13 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Latest audio intake, 2026-09-06:** iPad SFX are much quieter against BGM than
+  on phone/laptop/native. Independent per-device Music/Sound effects sliders
+  are authorized and scoped in AUDIO-01V after accepted PLAY-A; Astra implements,
+  Sol reviews. Not yet implemented. Preserve the active sole-writer assignment
+  and existing default mix; verify real gain behavior before blaming hardware.
+  [Source](user-playtests/2026-09-06-ipad-audio-balance.md).
+
 - **Latest physical result, 2026-09-06:** [Human v0.22.2 feedback](user-playtests/v0222-playtest-feedback.md) reports no obvious regression, perhaps slight improvement, but scrolling still stutters on iPad. Character/animation movement is smooth while the camera stays clamped; desktop browser does not exhibit the same symptom. The iPad gate is **not passed**. Possible thin lines need investigation, not a fabricated regression verdict. Older “awaiting P1” statements below record pre-feedback publication state. Astra owns next moving-terrain/filter isolation; Sol's independent pace slice stays separate. Texture-scale and Lanternlight level-design steer is routed in backlog/roadmap.
 
 - **Published current preview: v0.22.2 V22-CAMERA1**, runtime/tag `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`. Astra implemented fixed-origin, resize-safe percentage camera translation; actual GPT-5.6 Sol High independently approved source, geometry, final test observer and disclosed native Exit exception. It is a controlled experiment, **not a proven physical-iPad fix**. No pace, FOV, engine/content/save, art, audio or dependency change. Frozen attachment/test-observer checkpoint: `b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c`. [Current receipt](../release/V22-CAMERA1-v0.22.2-release-verification.json).
