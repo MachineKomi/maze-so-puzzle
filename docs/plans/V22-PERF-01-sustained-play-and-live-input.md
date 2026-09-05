@@ -1,8 +1,9 @@
 # V22-PERF-01 — sustained play and live-input correction
 
-Status: Astra candidate implemented on `codex/v22-perf-01-astra`; deterministic
-gates passed, sustained evidence in progress; Sol review and Human acceptance
-pending. The [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md)
+Status: Astra candidate implemented on `codex/v22-perf-01-astra`; bounded checks
+and measurements recorded. One recovery timeout, mixed sustained timing and task
+attribution remain unresolved. Sol review is next; no full engineering or Human
+acceptance is claimed. The [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md)
 owns measured status; this brief remains the unchanged acceptance contract.
 
 Owner: **GPT-6 Astra**

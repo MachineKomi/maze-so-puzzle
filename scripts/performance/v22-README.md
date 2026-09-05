@@ -86,6 +86,20 @@ session-window comparisons without per-frame bounding-box/style reads.
 Heavy JSON, traces and screenshots stay external. `summary.json` retains artifact
 hashes; only compact reviewed evidence should later enter repository documentation.
 
+The reviewed V22 matrix used `--row-ms=6000 --repetitions=3 --soak-ms=0`:
+every row completed two whole cycles/40 moves, extending the requested minimum.
+Do not describe those rows as twelve-second samples. Full sustained runs request
+600,000 ms; the separate Lite diagnostic requests 180,000 ms. These are repeated
+same-maze routes, not transition or retained-heap qualification.
+
+On a segment timeout the harness now writes `failed-segment.json` **before**
+releasing the gesture, with semantic state, focus/visibility, cursor/dialog state
+and collected metrics. This capture runs only after failure; successful timing,
+the ten-second timeout and exact-route assertions are unchanged. A failure summary
+or a crash directory containing only manifests is not a completed cohort. Preserve
+it and use a fresh output directory when investigating; never replace it with a
+successful retry. Captured LongTask `self` names are not causal stack attribution.
+
 ## Input and Full-visual regressions
 
 With the same ephemeral Playwright packages available:

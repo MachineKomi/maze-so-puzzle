@@ -7,12 +7,12 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- Candidate branch: `codex/v22-perf-01-astra`, based on clean pushed `main` at `461cab02b065a1d0f654c49189ed24108c22c5a8`. Astra is implementing the Human-authorized V22-PERF-01 correction. The public runtime/release is unchanged; this branch is not promotion authority. See the [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) for exact evidence and progress.
+- Candidate branch: `codex/v22-perf-01-astra`, based on clean pushed `main` at `461cab02b065a1d0f654c49189ed24108c22c5a8`. Runtime candidate `a92257a2ecb234c314b00ddaafb15c4d206771c2` is implemented; later commits preserve evidence/handoff only. The public runtime/release is unchanged; this branch is not promotion authority. See the [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) and [hash-bound evidence](reviews/v22-perf01-evidence.json).
 - Frozen UI-03 / FP-UI1 runtime: `68e303da680d5aec0ba71154949c5a2a0d1697ae`, **v0.22.0**.
-- Engineering disposition: reviewed, technically verified, committed, pushed and published.
+- Frozen v0.22.0 engineering disposition: reviewed, technically verified, committed, pushed and published. This does not describe acceptance of the later V22-PERF-01 candidate.
 - Human disposition: **POSITIVE, WITH OPEN CORRECTIONS**. Full v0.22.0 feedback and 51 cross-device images have now been independently reviewed by Astra and Sol. The Human reports a huge improvement and likes the desktop/iPad composition; sustained iPad performance, phone scaling and interrupted holds prevent full FP-UI1 acceptance. No blanket defect closure or Amelia/family qualification is claimed.
 - v0.21.0 was Human-rejected despite earlier engineering passes. v0.20.1 is the prior comparison baseline, not a claim of universal device qualification.
-- V22-PERF-01 candidate is active: runtime/input/static gates are green after the documented serial solver rerun; matched performance measurements are in progress. Sol's independent review and physical affected-iPad acceptance remain pending. No other specialist runtime writer is active.
+- V22-PERF-01 awaits **Sol HIGH independent review**. Focused input/static checks and both 36-row matrices completed. Codex interrupted one soak; the first recovery timed out. A subsequent ten-minute Full run and three-minute Lite supplement completed with correct state. The timeout is unexplained; Full sustained p95/p99 were worse on the contaminated host and long tasks remain unattributed. Do not call this fully engineering-green or promotion-ready. Physical affected-iPad acceptance remains pending; no runtime writer is active during review.
 - This document's handoff commit is discoverable with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`; the transfer capsule gives its exact SHA. Intake HEAD above is deliberately not the future commit containing this file.
 - On arrival, inspect `git status --short --branch`, HEAD, remote and active ownership. Do not infer a clean tree from this dated receipt.
 
@@ -36,19 +36,20 @@ The transfer push may create a newer documentation deployment/CI run. Check thos
 
 ## 3. Active work and next decision gate
 
-**Current task: GPT-6 Astra finishes the bounded
-[V22-PERF-01](plans/V22-PERF-01-sustained-play-and-live-input.md) candidate evidence.**
-Astra is the sole runtime writer; Sol is the later independent reviewer. The
-candidate is preserved on a recoverable `codex/` branch and is not merged,
-versioned, released or deployed to production before review.
+**Current task: GPT-5.6 Sol — HIGH independently reviews the bounded
+[V22-PERF-01](plans/V22-PERF-01-sustained-play-and-live-input.md) candidate.**
+Runtime review is read-only. Sol writes the dated verdict and updates this state,
+then commits/pushes that documentation-only handoff on the candidate branch.
+Do not merge, version, release or deploy during this review turn.
 
 The [candidate receipt](reviews/2026-09-05-v22-perf01-candidate.md) records the
-75-pass/two-unavailable-fixture browser matrix, 493 serial project tests,
-unchanged Full layout proof, locked desktop compile and explicitly rejected
-diagnostics. Longer matched cohorts are still running at this checkpoint. Next
-turn is **Sol HIGH, independent read-only candidate review**, not another
-implementation or release. Physical iPad, Tauri timing and family gates cannot
-be closed by desktop emulation.
+75-pass/two-unavailable-fixture browser matrix plus two final Lite supplements,
+493 serial project tests, Full layout proof, locked desktop compile, completed
+36+36 short rows and sustained Full/Lite samples. Neutral touch jitter drops
+App/MiniMap commits and repeated scene scans to zero; actual moves still save
+synchronously. Timing is report-only and mixed. Challenge the unexplained recovery
+timeout, worst tails, missing task attribution and 650-byte allocation explicitly.
+Physical iPad, Tauri timing and family gates cannot be closed by desktop emulation.
 
 - The [Astra assessment](reviews/2026-09-05-astra-v0220-review.md),
   [Sol assessment](reviews/2026-09-05-sol-v0220-review.md) and
@@ -64,8 +65,8 @@ be closed by desktop emulation.
 - It does **not** change phone/Book layout, FOV, cadence, terrain architecture,
   persistence durability, content, art/media, controller architecture or broad
   effects. Full quality preserves the praised v0.22.0 visuals.
-- When Astra reports a green candidate SHA/branch, switch to Sol for read-only
-  diff/evidence review. Only an accepted checkpoint is promoted to `main`, then
+- Sol now reviews the backed-up candidate's code and evidence, including its
+  unfulfilled gates; a backup is not a green verdict. Only an accepted checkpoint is promoted to `main`, then
   CI/Vercel and a v0.22.1 web/Windows performance-input preview are prepared for
   the Human's affected-iPad test.
 - If sustained performance remains poor, Astra owns one deeper isolated
@@ -173,5 +174,5 @@ Use an isolated checkout for historical source; never reset shared main/user wor
 - The Human governs vision, final family/visual/play-feel acceptance and material scope choices. The models lead routine implementation and tell the Human the next useful action. Claude is an occasional bounded independent reviewer, not an implementation resource or mandatory reviewer of every output.
 - Before a handoff, update this state, owned backlog/evidence and the joint ledger, inspect exact diffs, run proportionate checks, commit/push a meaningful reviewed checkpoint and verify remote agreement. Preserve unrelated work and immutable release/source-art records.
 - Use existing harnesses; do not weaken tests to hide failures. Run expensive browser/art/solver/build work serially on this memory-constrained host and distinguish host contention from product regressions.
-- Responses identify the active model (`# Astra:` or `# Sol:`) and end with a prominent next-model/reasoning handoff. The reconciled next owner is **Astra — XHIGH** for V22-PERF-01; after its candidate report, **Sol — HIGH** reviews it. Do not create/resume historical specialist tasks.
+- Responses identify the active model (`# Astra:` or `# Sol:`) and end with a prominent next-model/reasoning handoff. The next owner is **Sol — HIGH** for independent V22-PERF-01 candidate review, including unresolved evidence gates. Do not create/resume historical specialist tasks.
 - The independent Human/Opus review is complete. No runtime or Agent 04 launch occurred during either documentation turn. A fresh task can resume from this file without reconstructing the conversation.

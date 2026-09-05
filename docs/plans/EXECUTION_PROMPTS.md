@@ -8,9 +8,10 @@ The v0.22.0 Human/Opus review is reconciled. Read the independent
 [Astra](../reviews/2026-09-05-astra-v0220-review.md) and
 [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
 [88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The current task is **GPT-6 Astra — XHIGH** executing
-[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md), with Sol later
-reviewing the exact candidate read-only. Do not restart Agent 01, start Agent 04
+The current task is **GPT-5.6 Sol — HIGH** independently reviewing Astra's
+[V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md) candidate. Runtime
+review is read-only; preserve the verdict in a documentation-only checkpoint.
+Do not restart Agent 01, start Agent 04
 or automatically adopt Opus proposals. Preserve the praised desktop/iPad UI.
 Only one runtime writer; blocking device/family feedback and PT36 remain open.
 
@@ -62,12 +63,12 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. Astra — v0.22.0 sustained performance and held-input correction
+## Current. Sol — independent V22-PERF-01 candidate review
 
 The Human has issued the execution prompt below. Astra's candidate is on
 `codex/v22-perf-01-astra`; do not start a duplicate execution. Read the
 [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md) for current
-checks and measurement status. After Astra finishes, the next turn is:
+checks, completed measurements and unresolved gates. The next turn is:
 
 ```text
 # Sol:
@@ -89,9 +90,15 @@ keep desktop timing report-only and physical iPad/Tauri gates open. Distinguish
 measured work reductions from unproven device/FPS improvement. Report accepted
 parts, concrete defects and the exact next action. If ready, recommend promotion
 and the v0.22.1 affected-device preview; do not silently perform them.
+
+In particular, assess the unexplained recovery timeout, the subsequent completed
+ten-minute run, worse Full sustained p95/p99, occasional worse short-row tails,
+and missing >50ms task attribution. This is not a fully green candidate by
+assertion. Specify the smallest further investigation or explicit preview gate;
+do not replay every previous test or broaden the implementation automatically.
 ```
 
-Use **GPT-6 Astra, XHIGH** in this joint task and send:
+Previously issued execution prompt (history; do not start a duplicate run):
 
 ```text
 # Astra:

@@ -1,7 +1,9 @@
 # V22-PERF-01 — Astra candidate receipt
 
-Status: implementation and verification in progress on
-`codex/v22-perf-01-astra`; not merged, versioned, released or Human-accepted.
+Status: implementation and bounded local evidence recorded for **Sol's independent
+review** on `codex/v22-perf-01-astra`. Sustained-performance acceptance remains
+OPEN: one unexplained recovery timeout, mixed long-run timing and unattributed
+long tasks. Not fully engineering-green, merged, versioned, released or Human-accepted.
 Base: `461cab02b065a1d0f654c49189ed24108c22c5a8`.
 Frozen public runtime remains v0.22.0 `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
 The [scope contract](../plans/V22-PERF-01-sustained-play-and-live-input.md) owns
@@ -24,8 +26,11 @@ Sol's independent review is still required.
 ## Evidence boundaries and rejected attempts
 
 Raw evidence is outside runtime delivery under
-`C:/GameDev/maze-game-qa/performance/v22-perf-01/`. Compact hash-bound results
-will be attached below at the completed candidate checkpoint.
+`C:/GameDev/maze-game-qa/performance/v22-perf-01/`. The committed
+[machine-readable evidence](v22-perf01-evidence.json) preserves exact raw-summary
+and row hashes, conditions, before/after distributions, failure dispositions and
+limits. Raw traces/screenshots are not in Git; a clone recovers this review and
+the reproducible harness, not every external evidence file.
 
 1. An ephemeral Playwright install changed transitive build dependencies. It was
    rejected before the baseline: `npm ci --ignore-scripts` restored locked
@@ -103,6 +108,10 @@ will be attached below at the completed candidate checkpoint.
     changing the successful path, timeouts, route or assertions. A separate
     diagnostic run uses the identical frozen V4 source/dist. The failed run is
     not erased or upgraded by any later successful attempt.
+    The diagnostic run subsequently completed ten minutes/3,360 legal moves,
+    correct final save and zero page errors; it did not reproduce the timeout.
+    Therefore its failure-only capture did not fire. The earlier timeout's cause
+    remains unknown, rather than retrospectively attributed to load.
 
 The backed-up runtime checkpoint before that one-property correction is
 `5e244b3d52c46ee9528e9e08d07ee1630b250944`. V3 and V4 production JavaScript
@@ -209,7 +218,7 @@ not the harness's 12-second default; complete 20-move cycles extend the window.
   legal game state, route, browser, viewport and requested settings are matched.
 - Five-follower Lite has zero filtered scene images and two sampled running
   board animations, versus eight filtered images and 23–25 sampled animations
-  in the corresponding Full scenes. Lite's live joystick computes `none` while
+  in the corresponding Full-quality/Full-motion scenes. Lite's live joystick computes `none` while
   Full retains `blur(2px)`. Counts vary with animation phase; this directly proves
   the named work is disabled, not how much iPad GPU time is saved.
 
@@ -218,6 +227,69 @@ and durations are retained; the LongTask API's `self` label is not a function-
 level stack. Short single-factor traces did not establish a cause for those
 separate events. Attribution and clean-host variance are open evidence gates;
 do not relabel them as persistence, follower, raster or GPU faults.
+
+### Full sustained results
+
+Both completed runs replay the same ordinary 20-move corridor cycle with five
+legally rescued friends for at least ten minutes. They are sequential time-based
+samples, not equal-move totals or a controlled clean-host experiment.
+
+| Full-quality sample | Baseline | Final V4 diagnostic |
+| --- | ---: | ---: |
+| Completed cycles / legal moves | 163 / 3,260 | 168 / 3,360 |
+| p95 / p99 frame interval | 16.9 / 33.3 ms | 33.3 / 50.0 ms |
+| Longest frame interval | 6,611 ms | 566.2 ms |
+| LongTask entries / strictly >50 ms | 12 / 11 | 3 / 3 |
+| Longest task (API label `self`) | 4,765 ms | 233 ms |
+| Resource-count samples | 55 throughout | 55 throughout |
+| DOM-node samples | 781, final 784 | 784 throughout |
+| Sampled JS heap range | 10.79–25.63 MB | 7.77–25.07 MB |
+
+The candidate's p95/p99 and input-to-rAF proxies were **worse** in this long
+sample, despite fewer extreme stalls. Reference p95 <=20 ms and zero >50 ms
+tasks are not met by that sample. Neither a net sustained improvement nor a
+causal regression is established on this nonstationary host: candidate free RAM
+started at only 230,797,312 bytes versus baseline 834,973,696, and the samples
+span the app crash/restart. Do not advertise a sustained-performance fix.
+
+All successful rows retained five followers and matching saved positions/steps;
+no hidden-page event was observed. Three permanent, normally hidden cursor nodes
+account for the candidate's stable DOM count by design, but this is not retained-
+heap or multi-maze qualification. Heap snapshots lack forced GC and exclude
+image/GPU/native allocations; the recorder itself retains per-frame data.
+
+### Lite sustained supplement
+
+The separate three-minute Lite samples completed 1,000 baseline and 1,020
+candidate legal moves, with correct saves, five followers, 55 resource entries
+throughout and zero page errors. Baseline p95/p99 were 49.8/66.6 ms, maximum
+frame 1,665.4 ms, and two >50 ms tasks. Candidate p95/p99 were 16.9/33.3 ms,
+maximum frame 66.8 ms, and zero LongTask entries. This supports testing Lite on
+the affected device; it is one sequential, contaminated host sample—not a
+qualified improvement percentage or a ten-minute Lite pass.
+
+## Recovery and final verification
+
+- Runtime bytes remained fixed at `a92257a` throughout recovery. The additional
+  harness change captures state only after a failed segment; successful driving,
+  timing and assertions are unchanged. Its syntax check passed. The passing
+  diagnostic run did not exercise that failure capture, which is disclosed.
+- After all browser runs, `npm ci --ignore-scripts` restored the locked dependency
+  tree and removed the three ephemeral Playwright packages. No package or Cargo
+  manifest/lockfile changed. Final `npm run build` and `npm run perf:check` passed
+  with locked Rolldown 1.2.6; source/dist fingerprints exactly match frozen V4.
+  The existing serial 493-test and browser results are not presented as newly
+  rerun after documentation-only changes. The build retains its existing >500 kB
+  chunk-size warning; no warning threshold was raised.
+- All 90 local Markdown links in the seven changed handoff documents resolved;
+  `git diff --check` passed. Final source/public/Tauri/manifest comparison against
+  `a92257a` found zero runtime drift. The compact JSON's hashes bind each completed
+  raw row, failed-recovery summary and interrupted-run manifests separately.
+- The internal Astra audit independently checked completed matrix/counter raw
+  hashes, legal state checks, frozen source files and delivered HTML/JS/CSS.
+  Its final pass verified all 111 hash-bound references and all twelve paired
+  distributions against raw evidence, including both completed Lite supplements.
+  This is evidence checking, **not Sol's independent acceptance**.
 
 ## Static allocation
 
@@ -232,7 +304,15 @@ candidate before promotion. No dependency, version, media or save-schema change.
 
 ## Review/release gate
 
-Only the candidate branch is backed up. Sol reviews the exact diff and evidence
-before promotion. Main/v0.22.0 release attachments are untouched. A v0.22.1
-preview and affected-iPad fresh/sustained Full/Lite retest follow acceptance;
-V22-UI-01, Agent 04 and PT36 stay held as specified by the joint state.
+Only the candidate branch is backed up. Sol reviews the exact diff and evidence,
+including the failed recovery, worse Full sustained percentiles and unmet causal
+attribution requirement. The short counters and completed long run do not erase
+those gaps. Sol should distinguish correctness acceptance from performance
+qualification and specify the smallest next investigation or accepted-preview
+gate; no promotion is implied by this receipt.
+
+Main/v0.22.0 release attachments are untouched. A v0.22.1 preview and affected-
+iPad fresh/sustained Full/Lite retest require the explicit review decision.
+V22-UI-01, Agent 04 and PT36 remain held. Preserve a dated Sol verdict and the
+updated joint state in a documentation-only candidate commit/push before the
+next runtime or publication turn.

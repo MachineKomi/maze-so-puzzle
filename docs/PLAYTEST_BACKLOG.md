@@ -26,8 +26,9 @@ Only one runtime writer; Agent 04 remains held under the canonical gates.
 V22-PERF-01 implementation is now a candidate on `codex/v22-perf-01-astra`.
 The [receipt](reviews/2026-09-05-v22-perf01-candidate.md) records held-success,
 fresh blocker, selection and tester-final-flow regression checks plus hot-path
-and Lite changes. Matched sustained evidence and Sol review are not complete at
-this checkpoint. No Human card is closed; the public v0.22.0 build is unchanged,
+and Lite changes. Local comparisons and Full/Lite sustained samples are recorded,
+but a recovery timeout remains unexplained and Full sustained timing is mixed;
+task attribution and Sol review are still open. No Human card is closed; the public v0.22.0 build is unchanged,
 and affected-iPad testing still determines whether V22-UI-01 can begin.
 
 **Historical Human rejection, 2026-09-05:** FP-UI1/v0.21.0 overall UI acceptance FAILED;

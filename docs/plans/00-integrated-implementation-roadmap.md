@@ -16,9 +16,10 @@ economy and HUD/minimap redesign proposals are not adopted. Agent 04 stays held
 for these gates and PT36. Preserve 09 → 10 → 11. **Only one runtime writer**.
 
 V22-PERF-01's [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md)
-records green deterministic/input checks and in-progress matched performance
-evidence on `codex/v22-perf-01-astra`. Next is Sol's independent review of the
-exact completed candidate; no merge, v0.22.1 release or successor plan is
+records focused input/static checks and completed, report-only performance
+comparisons on `codex/v22-perf-01-astra`. An unexplained recovery timeout, mixed
+Full sustained timing and missing task attribution remain open. Next is Sol's
+independent review of the exact candidate; no merge, v0.22.1 release or successor plan is
 authorized merely by that branch existing.
 
 Status: manager-reviewed execution authority

@@ -1,0 +1,3086 @@
+{
+  "schema": "maze-v22-perf01-reviewed-candidate/v1",
+  "stateDate": "2026-09-05",
+  "runtimeCommit": "a92257a2ecb234c314b00ddaafb15c4d206771c2",
+  "baseCommit": "461cab02b065a1d0f654c49189ed24108c22c5a8",
+  "classification": "contaminated-report-only; not release/Human/device acceptance",
+  "externalRoot": "C:/GameDev/maze-game-qa/performance/v22-perf-01",
+  "host": {
+    "cpu": "11th Gen Intel(R) Core(TM) i7-1165G7 @ 2.80GHz",
+    "browser": "152.0.4191.62",
+    "viewport": {
+      "width": 1194,
+      "height": 834
+    },
+    "dpr": 2,
+    "cpuThrottlingRate": 1,
+    "network": "local static production; no throttling",
+    "thermal": "unavailable"
+  },
+  "interpretation": {
+    "grain": "One normal-run row per condition/repetition; counter builds separate from shipping timing",
+    "matrixSettings": "12 conditions x3, minimum6000ms, complete20-move cycles; exactly40 measured moves each",
+    "soakSettings": "Full intended600000ms; Lite180000ms; same23x23 maze, five followers, board input. Complete cycles extend minimum duration.",
+    "rounding": "Derived displayed millisecond values rounded to0.001ms; raw evidence authoritative",
+    "hashNamespaces": "ManifestDigest hashes sorted file-record JSON, not manifest file bytes. Build fingerprints use existing provenance algorithm; build checkout commits can predate uncommitted snapshot changes, so content fingerprints—not commit labels alone—identify delivered bytes. Canonical fixture JSON and pretty fixture file hashes intentionally differ.",
+    "frameMeasurement": "rAF intervals are not presentation-to-display/GPU frame measurements; input-rAF is a proxy; final metric transfer included in elapsedMs/CDP aggregate, not sampleEndFromRafMs.",
+    "limitations": [
+      "Sequential, nonstationary development host; strong free-RAM variation; no thermal control.",
+      "Candidate Full recovery follows Codex crash/restart; cannot infer causal before/after percentage speedup.",
+      "Random BGM track not fixed across contexts; exact media workload not matched.",
+      "Counters/injected builds measure work, not shipping frame-time authority; v3/v4 JS byte-identical.",
+      "Same-maze loops do not qualify multi-maze asset transitions or retained heap; no forcedGC, collector retains arrays, JS heap excludes image/GPU/native memory.",
+      "Unattributed long tasks and occasional worse candidate tails remain open; no zero-stutter or physical-iPad/Tauri success claim."
+    ],
+    "referenceTargets": {
+      "referenceP95Ms": 20,
+      "definedLowEndP95Ms": 33.3,
+      "p99Ms": null,
+      "note": "No existing numeric p99 target. This unthrottled desktop is not the defined low-end cohort. Timing targets remain report-only."
+    }
+  },
+  "level": {
+    "id": "moonlit-friendship-quest",
+    "name": "Moonlit Friendship Quest",
+    "revision": 3,
+    "fingerprint": "g-bf6b46f2",
+    "width": 23,
+    "height": 23
+  },
+  "route": {
+    "start": {
+      "x": 1,
+      "y": 21
+    },
+    "direction": "up",
+    "length": 10,
+    "pointKey": "1,21",
+    "cycle": [
+      "up",
+      "up",
+      "up",
+      "up",
+      "up",
+      "up",
+      "up",
+      "up",
+      "up",
+      "up",
+      "down",
+      "down",
+      "down",
+      "down",
+      "down",
+      "down",
+      "down",
+      "down",
+      "down",
+      "down"
+    ],
+    "explanation": "Intersection of ordinary engine-moved reachable tiles at 0/2/5 legal perfect-route prefixes; no synthetic content or rescue IDs."
+  },
+  "productionBuilds": [
+    {
+      "name": "baseline",
+      "provenance": {
+        "schema": "maze-performance-build-provenance/v1",
+        "generatedAtUtc": "2026-09-05T16:40:10.996Z",
+        "commit": "461cab02b065a1d0f654c49189ed24108c22c5a8",
+        "runtimeInputsSha256": "c4c79737b0828b0e7e5e9a10a7318c8b828f507507dbd82c997dd54cf80b5817",
+        "distFingerprintSha256": "395a36626977796b26bc7acae60014d8686ed43ee0a33e916f071316eb170856",
+        "buildCommand": "npm run build"
+      }
+    },
+    {
+      "name": "candidate-v3",
+      "provenance": {
+        "schema": "maze-performance-build-provenance/v1",
+        "generatedAtUtc": "2026-09-05T17:28:20.227Z",
+        "commit": "461cab02b065a1d0f654c49189ed24108c22c5a8",
+        "runtimeInputsSha256": "35923b068d1985cf94d6af56ff9ebb3cc80416f2d67dc8e9f46c4b2704e0b407",
+        "distFingerprintSha256": "489fedf94d12a1775213cb6055f0c9b98767d8d4213d0d7fff9474d72975695b",
+        "buildCommand": "npm run build"
+      }
+    },
+    {
+      "name": "candidate-v4",
+      "provenance": {
+        "schema": "maze-performance-build-provenance/v1",
+        "generatedAtUtc": "2026-09-05T17:52:14.050Z",
+        "commit": "5e244b3d52c46ee9528e9e08d07ee1630b250944",
+        "runtimeInputsSha256": "eb80b41462ce79e9997895c08215bbcd921eb45b13505e8975786f1c97e9662d",
+        "distFingerprintSha256": "f485ae42fead041b9d0419e73030fc1b85f7b2c7b60e01232427ff85cfaea315",
+        "buildCommand": "npm run build"
+      }
+    }
+  ],
+  "cohorts": [
+    {
+      "name": "baseline-counters-r3-cohort",
+      "summary": {
+        "path": "baseline-counters-r3-cohort/summary.json",
+        "bytes": 18503,
+        "sha256": "e81adf086ce4965f838ae86bb2ae64a9ff92d626daf1cc7de7c3ee0714b69f17"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T17:06:53.652Z",
+      "finishedAt": "2026-09-05T17:07:47.009Z",
+      "freeRamStart": 1356992512,
+      "freeRamEnd": 870621184,
+      "deliveryManifestDigest": "5fc58c728d459a674387f850119f1f2ab7e343a885a32c68e5d64e76e4d594db",
+      "sourceManifestDigest": "f5e37930ef353642bd28a8250083b8ea74941ba1c7e09dcbcebe6d4ed46386fc",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "baseline-counters-r3-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "0d05ea50e389a03e02cc01c58c4f447f04390073491ed25fa44bc23fed83cbfd",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=baseline-counters-r3",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/src",
+        "--only=counters",
+        "--instrumented=true",
+        "--repetitions=1",
+        "--row-ms=4000",
+        "--soak-ms=0"
+      ],
+      "rows": [
+        {
+          "name": "0-board-5-full-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 2,
+          "moves": 40,
+          "semanticOk": true,
+          "frames": 422,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 17.1,
+          "maxFrameMs": 66.3,
+          "framesOver50": 1,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 7100.3,
+          "wallElapsedIncludingCollectionMs": 7162,
+          "inputToFirstRafP95Ms": 12,
+          "inputToSecondRafP95Ms": 28.8,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 88,
+            "minimapRender": 48,
+            "minimapCellDerivation": 25392,
+            "minimapCommit": 48,
+            "appCommit": 48,
+            "board:querySelectorAll:[data-follower-id]": 48,
+            "board:querySelector:.camera-world": 48,
+            "board:querySelector:.player-layer": 48,
+            "board:querySelector:[data-travel-actor=\"replacement\"]": 48,
+            "board:querySelectorAll:[data-travel-camera-anchor]": 48
+          },
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 40,
+              "total": 4.399999916553497,
+              "p95": 0.30000001192092896,
+              "max": 0.3999999761581421
+            },
+            "activeRunRemoveMs": {
+              "count": 80,
+              "total": 0.10000002384185791,
+              "p95": 0,
+              "max": 0.10000002384185791
+            },
+            "activeRunTotalMs": {
+              "count": 40,
+              "total": 20.899999797344208,
+              "p95": 0.9000000357627869,
+              "max": 1.199999988079071
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 473,
+            "RecalcStyleCount": 605,
+            "LayoutDuration": 0.108518,
+            "RecalcStyleDuration": 0.7835030000000001,
+            "ScriptDuration": 0.35723099999999997,
+            "TaskDuration": 3.060118
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "baseline-counters-r3-cohort/0-board-5-full-full-normal.json",
+            "bytes": 25490,
+            "sha256": "294bb8a00260caa8a948d2b7c3c33a78054a2376034976122e16f440d733c52c"
+          }
+        },
+        {
+          "name": "1-keyboard-5-full-full-normal",
+          "input": "keyboard",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 2,
+          "moves": 40,
+          "semanticOk": true,
+          "frames": 404,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 17.1,
+          "maxFrameMs": 17.1,
+          "framesOver50": 0,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 6729.8,
+          "wallElapsedIncludingCollectionMs": 6775,
+          "inputToFirstRafP95Ms": 11.7,
+          "inputToSecondRafP95Ms": 28.2,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": false,
+              "joystickBlur": null,
+              "joystickWebkitBlur": null,
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 80,
+            "minimapRender": 40,
+            "minimapCellDerivation": 21160,
+            "minimapCommit": 40,
+            "appCommit": 40,
+            "board:querySelectorAll:[data-follower-id]": 40,
+            "board:querySelector:.camera-world": 40,
+            "board:querySelector:.player-layer": 40,
+            "board:querySelector:[data-travel-actor=\"replacement\"]": 40,
+            "board:querySelectorAll:[data-travel-camera-anchor]": 40
+          },
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 40,
+              "total": 4.3000001311302185,
+              "p95": 0.20000004768371582,
+              "max": 0.30000001192092896
+            },
+            "activeRunRemoveMs": {
+              "count": 80,
+              "total": 0.30000007152557373,
+              "p95": 0,
+              "max": 0.10000002384185791
+            },
+            "activeRunTotalMs": {
+              "count": 40,
+              "total": 22.000000059604645,
+              "p95": 0.9000000357627869,
+              "max": 1.4000000357627869
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 446,
+            "RecalcStyleCount": 566,
+            "LayoutDuration": 0.096001,
+            "RecalcStyleDuration": 0.76814,
+            "ScriptDuration": 0.334154,
+            "TaskDuration": 2.7582480000000005
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "baseline-counters-r3-cohort/1-keyboard-5-full-full-normal.json",
+            "bytes": 18142,
+            "sha256": "970653fc30dee4f166042459f7a8687a12df39c59fb7da260103af47f9e5fb0b"
+          }
+        },
+        {
+          "name": "2-pad-5-full-full-normal",
+          "input": "pad",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 2,
+          "moves": 40,
+          "semanticOk": true,
+          "frames": 415,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 17,
+          "maxFrameMs": 33.4,
+          "framesOver50": 0,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 6931.7,
+          "wallElapsedIncludingCollectionMs": 6979,
+          "inputToFirstRafP95Ms": 11.9,
+          "inputToSecondRafP95Ms": 28.4,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": false,
+              "joystickBlur": null,
+              "joystickWebkitBlur": null,
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 80,
+            "minimapRender": 40,
+            "minimapCellDerivation": 21160,
+            "minimapCommit": 40,
+            "appCommit": 40,
+            "board:querySelectorAll:[data-follower-id]": 40,
+            "board:querySelector:.camera-world": 40,
+            "board:querySelector:.player-layer": 40,
+            "board:querySelector:[data-travel-actor=\"replacement\"]": 40,
+            "board:querySelectorAll:[data-travel-camera-anchor]": 40
+          },
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 40,
+              "total": 4.000000059604645,
+              "p95": 0.20000004768371582,
+              "max": 0.40000003576278687
+            },
+            "activeRunRemoveMs": {
+              "count": 80,
+              "total": 0.19999998807907104,
+              "p95": 0,
+              "max": 0.10000002384185791
+            },
+            "activeRunTotalMs": {
+              "count": 40,
+              "total": 18.69999998807907,
+              "p95": 0.7000000476837158,
+              "max": 1
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 458,
+            "RecalcStyleCount": 590,
+            "LayoutDuration": 0.09844999999999998,
+            "RecalcStyleDuration": 0.730363,
+            "ScriptDuration": 0.342205,
+            "TaskDuration": 2.8794459999999997
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "baseline-counters-r3-cohort/2-pad-5-full-full-normal.json",
+            "bytes": 29271,
+            "sha256": "50612b8c101b8950d5d7e50cdc2ee6d1e4a0b2825ff7f61f7edc70bad9e651ae"
+          }
+        },
+        {
+          "name": "3-board-5-full-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 0,
+          "moves": 0,
+          "semanticOk": true,
+          "frames": 92,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 17,
+          "maxFrameMs": 17,
+          "framesOver50": 0,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 1541.8,
+          "wallElapsedIncludingCollectionMs": 1608,
+          "inputToFirstRafP95Ms": null,
+          "inputToSecondRafP95Ms": null,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 30,
+            "minimapRender": 30,
+            "minimapCellDerivation": 15870,
+            "minimapCommit": 30,
+            "appCommit": 30,
+            "board:querySelectorAll:[data-follower-id]": 30,
+            "board:querySelector:.camera-world": 30,
+            "board:querySelector:.player-layer": 30,
+            "board:querySelector:[data-travel-actor=\"replacement\"]": 30,
+            "board:querySelectorAll:[data-travel-camera-anchor]": 30
+          },
+          "timeCosts": {},
+          "cdpDeltas": {
+            "LayoutCount": 127,
+            "RecalcStyleCount": 127,
+            "LayoutDuration": 0.020270999999999997,
+            "RecalcStyleDuration": 0.08473300000000006,
+            "ScriptDuration": 0.11050100000000002,
+            "TaskDuration": 0.5996809999999999
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "baseline-counters-r3-cohort/3-board-5-full-full-normal.json",
+            "bytes": 4859,
+            "sha256": "e770675cd2e1df29008e89033f8796a43215c1f26c1ed46a89ab99c076cef901"
+          }
+        },
+        {
+          "name": "4-keyboard-5-full-full-normal",
+          "input": "keyboard",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 0,
+          "moves": 0,
+          "semanticOk": true,
+          "frames": 8,
+          "frameP95Ms": 66.7,
+          "frameP99Ms": 66.7,
+          "maxFrameMs": 66.7,
+          "framesOver50": 1,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 190.1,
+          "wallElapsedIncludingCollectionMs": 219,
+          "inputToFirstRafP95Ms": 12.9,
+          "inputToSecondRafP95Ms": 79.6,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": false,
+              "joystickBlur": null,
+              "joystickWebkitBlur": null,
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 6,
+            "minimapRender": 4,
+            "minimapCellDerivation": 2116,
+            "minimapCommit": 4,
+            "appCommit": 4,
+            "board:querySelectorAll:[data-follower-id]": 4,
+            "board:querySelector:.camera-world": 4,
+            "board:querySelector:.player-layer": 4,
+            "board:querySelector:[data-travel-actor=\"replacement\"]": 4,
+            "board:querySelectorAll:[data-travel-camera-anchor]": 4
+          },
+          "timeCosts": {},
+          "cdpDeltas": {
+            "LayoutCount": 13,
+            "RecalcStyleCount": 26,
+            "LayoutDuration": 0.005665000000000003,
+            "RecalcStyleDuration": 0.01638099999999998,
+            "ScriptDuration": 0.019197999999999993,
+            "TaskDuration": 0.08948599999999995
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "baseline-counters-r3-cohort/4-keyboard-5-full-full-normal.json",
+            "bytes": 4375,
+            "sha256": "219cba5ad7b13f5dd64bae9877b23d812b0697d6863536ef00cb1adec14d4165"
+          }
+        }
+      ]
+    },
+    {
+      "name": "candidate-v3-counters-cohort",
+      "summary": {
+        "path": "candidate-v3-counters-cohort/summary.json",
+        "bytes": 17165,
+        "sha256": "7739e72d299499b14f40ef720d2e68a9d1da39562c8734b69871e620575e3ef9"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T17:34:45.066Z",
+      "finishedAt": "2026-09-05T17:35:46.700Z",
+      "freeRamStart": 1023852544,
+      "freeRamEnd": 847224832,
+      "deliveryManifestDigest": "54c28acc8c16991303bd5fc90060313a8b85c33af86549131981949ac197ea64",
+      "sourceManifestDigest": "f5d6c985d3be059f33696dc315ea3b03793d5106dbee4e7fa3199cd84848d99e",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "candidate-v3-counters-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "0eea2ce6d07b9eac1018136b75205d7e4c3db25f167a13e5d8f732a7bc24975b",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=candidate-v3-counters",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v3/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v3/src",
+        "--only=counters",
+        "--instrumented=true",
+        "--repetitions=1",
+        "--row-ms=4000",
+        "--soak-ms=0"
+      ],
+      "rows": [
+        {
+          "name": "0-board-5-full-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 2,
+          "moves": 40,
+          "semanticOk": true,
+          "frames": 427,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 17.1,
+          "maxFrameMs": 17.3,
+          "framesOver50": 0,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 7120.1,
+          "wallElapsedIncludingCollectionMs": 7187,
+          "inputToFirstRafP95Ms": 11.6,
+          "inputToSecondRafP95Ms": 28.2,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 80,
+            "minimapRender": 40,
+            "minimapCellDerivation": 21160,
+            "minimapCommit": 40,
+            "appCommit": 40
+          },
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 40,
+              "total": 3.8000000715255737,
+              "p95": 0.20000004768371582,
+              "max": 0.3999999761581421
+            },
+            "activeRunRemoveMs": {
+              "count": 80,
+              "total": 0,
+              "p95": 0,
+              "max": 0
+            },
+            "activeRunTotalMs": {
+              "count": 40,
+              "total": 17.99999988079071,
+              "p95": 0.699999988079071,
+              "max": 0.8999999761581421
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 490,
+            "RecalcStyleCount": 665,
+            "LayoutDuration": 0.11315200000000003,
+            "RecalcStyleDuration": 0.739091,
+            "ScriptDuration": 0.31978699999999993,
+            "TaskDuration": 2.8637749999999995
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "candidate-v3-counters-cohort/0-board-5-full-full-normal.json",
+            "bytes": 26278,
+            "sha256": "bfb926ab3274cb4966a73697dacaab7111bef38ee92d2725c3908e0557ea50c3"
+          }
+        },
+        {
+          "name": "1-keyboard-5-full-full-normal",
+          "input": "keyboard",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 2,
+          "moves": 40,
+          "semanticOk": true,
+          "frames": 400,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 17,
+          "maxFrameMs": 33.3,
+          "framesOver50": 0,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 6680.2,
+          "wallElapsedIncludingCollectionMs": 6779,
+          "inputToFirstRafP95Ms": 11.8,
+          "inputToSecondRafP95Ms": 28.6,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 80,
+            "minimapRender": 40,
+            "minimapCellDerivation": 21160,
+            "minimapCommit": 40,
+            "appCommit": 40
+          },
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 40,
+              "total": 3.699999690055847,
+              "p95": 0.19999998807907104,
+              "max": 0.20000004768371582
+            },
+            "activeRunRemoveMs": {
+              "count": 80,
+              "total": 0.10000002384185791,
+              "p95": 0,
+              "max": 0.10000002384185791
+            },
+            "activeRunTotalMs": {
+              "count": 40,
+              "total": 16.499999940395355,
+              "p95": 0.699999988079071,
+              "max": 1.399999976158142
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 444,
+            "RecalcStyleCount": 564,
+            "LayoutDuration": 0.10982000000000003,
+            "RecalcStyleDuration": 0.646693,
+            "ScriptDuration": 0.28290999999999994,
+            "TaskDuration": 2.8014370000000004
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "candidate-v3-counters-cohort/1-keyboard-5-full-full-normal.json",
+            "bytes": 18251,
+            "sha256": "97042eb8f5531a9a022d76ee8e59ab4eb94b91e1f1b362c41fad799b8f31278d"
+          }
+        },
+        {
+          "name": "2-pad-5-full-full-normal",
+          "input": "pad",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 2,
+          "moves": 40,
+          "semanticOk": true,
+          "frames": 409,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 17.1,
+          "maxFrameMs": 17.5,
+          "framesOver50": 0,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 6816.5,
+          "wallElapsedIncludingCollectionMs": 6879,
+          "inputToFirstRafP95Ms": 11.9,
+          "inputToSecondRafP95Ms": 28.7,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 80,
+            "minimapRender": 40,
+            "minimapCellDerivation": 21160,
+            "minimapCommit": 40,
+            "appCommit": 40
+          },
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 40,
+              "total": 3.600000023841858,
+              "p95": 0.19999998807907104,
+              "max": 0.30000001192092896
+            },
+            "activeRunRemoveMs": {
+              "count": 80,
+              "total": 0.19999998807907104,
+              "p95": 0,
+              "max": 0.10000002384185791
+            },
+            "activeRunTotalMs": {
+              "count": 40,
+              "total": 17.00000011920929,
+              "p95": 0.699999988079071,
+              "max": 0.699999988079071
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 452,
+            "RecalcStyleCount": 583,
+            "LayoutDuration": 0.09380400000000003,
+            "RecalcStyleDuration": 0.732475,
+            "ScriptDuration": 0.31854200000000005,
+            "TaskDuration": 2.7288689999999995
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "candidate-v3-counters-cohort/2-pad-5-full-full-normal.json",
+            "bytes": 28955,
+            "sha256": "1bdc1e8a7ed405c8f0bceb3dfe4e7a4744c86704b762d89d65913698ca2406ba"
+          }
+        },
+        {
+          "name": "3-board-5-full-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 0,
+          "moves": 0,
+          "semanticOk": true,
+          "frames": 92,
+          "frameP95Ms": 17,
+          "frameP99Ms": 17.2,
+          "maxFrameMs": 17.2,
+          "framesOver50": 0,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 1540.3,
+          "wallElapsedIncludingCollectionMs": 1609,
+          "inputToFirstRafP95Ms": null,
+          "inputToSecondRafP95Ms": null,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {},
+          "timeCosts": {},
+          "cdpDeltas": {
+            "LayoutCount": 126,
+            "RecalcStyleCount": 186,
+            "LayoutDuration": 0.03156300000000001,
+            "RecalcStyleDuration": 0.08750599999999997,
+            "ScriptDuration": 0.017689999999999984,
+            "TaskDuration": 0.5213990000000002
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "candidate-v3-counters-cohort/3-board-5-full-full-normal.json",
+            "bytes": 4522,
+            "sha256": "4b829683bcf71ab5c368fbb25252d6a58984b4cfc328cfdb639d666bcdb597b1"
+          }
+        },
+        {
+          "name": "4-keyboard-5-full-full-normal",
+          "input": "keyboard",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": 0,
+          "cycles": 0,
+          "moves": 0,
+          "semanticOk": true,
+          "frames": 9,
+          "frameP95Ms": 83.1,
+          "frameP99Ms": 83.1,
+          "maxFrameMs": 83.1,
+          "framesOver50": 1,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 219.4,
+          "wallElapsedIncludingCollectionMs": 249,
+          "inputToFirstRafP95Ms": 3.3,
+          "inputToSecondRafP95Ms": 83.3,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {
+            "appRender": 4,
+            "appCommit": 4
+          },
+          "timeCosts": {},
+          "cdpDeltas": {
+            "LayoutCount": 14,
+            "RecalcStyleCount": 29,
+            "LayoutDuration": 0.005249000000000004,
+            "RecalcStyleDuration": 0.025258000000000003,
+            "ScriptDuration": 0.022448000000000023,
+            "TaskDuration": 0.11005399999999987
+          },
+          "resources": [],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "candidate-v3-counters-cohort/4-keyboard-5-full-full-normal.json",
+            "bytes": 4179,
+            "sha256": "4dc3406e2e8d931c28b6ac7851e09800ce7c51b6d4d5dd44140d910d9296443c"
+          }
+        }
+      ]
+    },
+    {
+      "name": "baseline-matrix-cohort",
+      "summary": {
+        "path": "baseline-matrix-cohort/summary.json",
+        "bytes": 100319,
+        "sha256": "16c6fcc5786385a1e54e4d71021cbde9871743b0189c9b6c7d60be92f5efe4d5"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T17:36:37.655Z",
+      "finishedAt": "2026-09-05T17:45:27.450Z",
+      "freeRamStart": 1118445568,
+      "freeRamEnd": 946876416,
+      "deliveryManifestDigest": "adb278b2ba556cc241ce6d5e807dcbbe048e96abb33f28671bcfacc0659866a2",
+      "sourceManifestDigest": "f5e37930ef353642bd28a8250083b8ea74941ba1c7e09dcbcebe6d4ed46386fc",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "baseline-matrix-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "0eea2ce6d07b9eac1018136b75205d7e4c3db25f167a13e5d8f732a7bc24975b",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=baseline-matrix",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/src",
+        "--only=matrix",
+        "--repetitions=3",
+        "--row-ms=6000",
+        "--soak-ms=0"
+      ],
+      "matrix": {
+        "rowCount": 36,
+        "allSemanticOk": true,
+        "movesPerRow": [
+          40
+        ],
+        "pageErrors": [],
+        "p95Within20ms": 12,
+        "maxFrameMs": 1382.2,
+        "longTaskEntries": 46,
+        "tasksStrictlyOver50": [
+          {
+            "row": "3-board-2-lite-full-normal",
+            "relativeStartMs": 1703.9,
+            "durationMs": 51,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "3-board-2-lite-full-normal",
+            "relativeStartMs": 2817,
+            "durationMs": 67,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "3-board-2-lite-full-normal",
+            "relativeStartMs": 4624.6,
+            "durationMs": 73,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "3-board-2-lite-full-normal",
+            "relativeStartMs": 6466.1,
+            "durationMs": 67,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "3-board-2-lite-full-normal",
+            "relativeStartMs": 7029.9,
+            "durationMs": 406,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "3-board-2-lite-full-normal",
+            "relativeStartMs": 7436.9,
+            "durationMs": 414,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 476.7,
+            "durationMs": 76,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 568.4,
+            "durationMs": 87,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 656.1,
+            "durationMs": 52,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 1687.4,
+            "durationMs": 68,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 1990.2,
+            "durationMs": 62,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 2895.4,
+            "durationMs": 67,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 4252.1,
+            "durationMs": 78,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 4908,
+            "durationMs": 89,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 5395.3,
+            "durationMs": 133,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "4-board-5-full-full-normal",
+            "relativeStartMs": 5790.4,
+            "durationMs": 54,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "9-pad-5-lite-full-normal",
+            "relativeStartMs": 3758.5,
+            "durationMs": 55,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "12-board-0-full-full-normal",
+            "relativeStartMs": 1610.6,
+            "durationMs": 86,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "12-board-0-full-full-normal",
+            "relativeStartMs": 1788.9,
+            "durationMs": 95,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "12-board-0-full-full-normal",
+            "relativeStartMs": 1891.5,
+            "durationMs": 90,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "12-board-0-full-full-normal",
+            "relativeStartMs": 2209.8,
+            "durationMs": 52,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "12-board-0-full-full-normal",
+            "relativeStartMs": 2893.5,
+            "durationMs": 53,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "12-board-0-full-full-normal",
+            "relativeStartMs": 5645.7,
+            "durationMs": 52,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "12-board-0-full-full-normal",
+            "relativeStartMs": 7053.2,
+            "durationMs": 74,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "13-board-0-lite-full-normal",
+            "relativeStartMs": 2146.6,
+            "durationMs": 80,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "13-board-0-lite-full-normal",
+            "relativeStartMs": 6458.2,
+            "durationMs": 51,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 1881.6,
+            "durationMs": 70,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 2080.5,
+            "durationMs": 77,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 5056,
+            "durationMs": 62,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 5179.5,
+            "durationMs": 51,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 5260.2,
+            "durationMs": 52,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 5313.9,
+            "durationMs": 64,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 5774.1,
+            "durationMs": 94,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 5935.1,
+            "durationMs": 91,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 6067.3,
+            "durationMs": 72,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 6534.6,
+            "durationMs": 54,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 6604.9,
+            "durationMs": 52,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 6819.1,
+            "durationMs": 64,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 7168.5,
+            "durationMs": 76,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "14-board-2-full-full-normal",
+            "relativeStartMs": 7657.8,
+            "durationMs": 51,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "22-board-5-full-reduced-normal",
+            "relativeStartMs": 1369.4,
+            "durationMs": 54,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "25-board-0-lite-full-normal",
+            "relativeStartMs": 991.6,
+            "durationMs": 58,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "27-board-2-lite-full-normal",
+            "relativeStartMs": 900,
+            "durationMs": 55,
+            "attribution": "unattributed; API name=self"
+          },
+          {
+            "row": "27-board-2-lite-full-normal",
+            "relativeStartMs": 1052.7,
+            "durationMs": 61,
+            "attribution": "unattributed; API name=self"
+          }
+        ],
+        "rawRowEvidence": [
+          {
+            "path": "baseline-matrix-cohort/0-board-0-full-full-normal.json",
+            "bytes": 25234,
+            "sha256": "b4779fa971c7a9bd2593c5e35427422722b93741a9ac2280b8de0ab45ce42b30"
+          },
+          {
+            "path": "baseline-matrix-cohort/1-board-0-lite-full-normal.json",
+            "bytes": 24274,
+            "sha256": "96016af16adc652cef9a0d6e14e4207bdd66eda86ff0df0d6a23825d9f41622a"
+          },
+          {
+            "path": "baseline-matrix-cohort/2-board-2-full-full-normal.json",
+            "bytes": 26179,
+            "sha256": "a9b93868d74289157a50695810940ac789e546d12e40efbcedf29657791d337b"
+          },
+          {
+            "path": "baseline-matrix-cohort/3-board-2-lite-full-normal.json",
+            "bytes": 23479,
+            "sha256": "6de255b957762b4a7f1cc1100fca866c666a5af7c0aada861e9822b5aa03ec5f"
+          },
+          {
+            "path": "baseline-matrix-cohort/4-board-5-full-full-normal.json",
+            "bytes": 22363,
+            "sha256": "cbad95f3c424b711be864860f5e9f2cd8e3fd01cf6e48ec4815a86d71d0c9d82"
+          },
+          {
+            "path": "baseline-matrix-cohort/5-board-5-lite-full-normal.json",
+            "bytes": 19885,
+            "sha256": "1b1f18cc5244f49b5caf787a0d1248ac6cea36fcd86e4e6990f764997c2e0c9f"
+          },
+          {
+            "path": "baseline-matrix-cohort/6-keyboard-5-full-full-normal.json",
+            "bytes": 12394,
+            "sha256": "e27737cb9b4f2e5ce59fd2e949b3914cf52a4c238251cd9b1e98abc92501bb41"
+          },
+          {
+            "path": "baseline-matrix-cohort/7-keyboard-5-lite-full-normal.json",
+            "bytes": 15105,
+            "sha256": "a907690d3b7935b2012e33eb5b962ef50873cc9f917212f590ca1f69f075ce0e"
+          },
+          {
+            "path": "baseline-matrix-cohort/8-pad-5-full-full-normal.json",
+            "bytes": 28159,
+            "sha256": "71ce6ab09a8aa2b0e5ac6460d6995a1b7dacfe9cdc16f309375120813f50cde8"
+          },
+          {
+            "path": "baseline-matrix-cohort/9-pad-5-lite-full-normal.json",
+            "bytes": 27617,
+            "sha256": "55af07c0018e3a052a5aefb717f41cc731b3c2f4a2c02ca3a2826382ef12ca13"
+          },
+          {
+            "path": "baseline-matrix-cohort/10-board-5-full-reduced-normal.json",
+            "bytes": 20268,
+            "sha256": "468ad4b7b77f9a0d4fb03fdb204cc8748bc205d4aadedb8420bbf3ab264db5ba"
+          },
+          {
+            "path": "baseline-matrix-cohort/11-board-5-lite-reduced-normal.json",
+            "bytes": 19302,
+            "sha256": "52fd158c5ead9fff7dd86c34049620b93cfedaf749664090d4bdc78ab56c0c08"
+          },
+          {
+            "path": "baseline-matrix-cohort/12-board-0-full-full-normal.json",
+            "bytes": 24801,
+            "sha256": "dd580904a62b1a6f7aa12d611c68c29172368f32657ccedb647fa3b6f83390dd"
+          },
+          {
+            "path": "baseline-matrix-cohort/13-board-0-lite-full-normal.json",
+            "bytes": 20863,
+            "sha256": "34150f5e36c2e276d63f2c523259838190ca95c956b7fcf5763d710ab81978b9"
+          },
+          {
+            "path": "baseline-matrix-cohort/14-board-2-full-full-normal.json",
+            "bytes": 20217,
+            "sha256": "fb241bebd55121cbbde3fc0053031d4561db3fc42a87dccfdc0cc80f3bc896de"
+          },
+          {
+            "path": "baseline-matrix-cohort/15-board-2-lite-full-normal.json",
+            "bytes": 20488,
+            "sha256": "79ec648f8b4d0a0375a9a0c406b8c0d1b4ca2b45076c98d4c60a8d33494911b2"
+          },
+          {
+            "path": "baseline-matrix-cohort/16-board-5-full-full-normal.json",
+            "bytes": 23811,
+            "sha256": "63b808c0481cf9d2633d1595f116327149da89893034e384c06b6961c65e5b8b"
+          },
+          {
+            "path": "baseline-matrix-cohort/17-board-5-lite-full-normal.json",
+            "bytes": 25352,
+            "sha256": "fec4f2d08f965d7c9e9a4e04042759c36ee4a4e3435e4bdf703c5c4b3bb4528c"
+          },
+          {
+            "path": "baseline-matrix-cohort/18-keyboard-5-full-full-normal.json",
+            "bytes": 17619,
+            "sha256": "bd1f6aea3da352b71595e5c8d6d39dd4686bd90c5c6bb6d53cd00d457f41a359"
+          },
+          {
+            "path": "baseline-matrix-cohort/19-keyboard-5-lite-full-normal.json",
+            "bytes": 14499,
+            "sha256": "6ec0adf88899993d90027d99188bb28a18d9d20d417115a217730cb5a0afaabd"
+          },
+          {
+            "path": "baseline-matrix-cohort/20-pad-5-full-full-normal.json",
+            "bytes": 25305,
+            "sha256": "c60720cb2dbe72303b0ec50451d253b9de3ec4ac94b1a2d467820ca8c4678b6a"
+          },
+          {
+            "path": "baseline-matrix-cohort/21-pad-5-lite-full-normal.json",
+            "bytes": 25223,
+            "sha256": "a07685264ac6c11f4f6c4aa08aa574759580d91c8c09bea0e291a21a1cf18754"
+          },
+          {
+            "path": "baseline-matrix-cohort/22-board-5-full-reduced-normal.json",
+            "bytes": 23204,
+            "sha256": "759e9cc72b622c6201afdae14d9bdbb97fd7a28052dcc4ed1025fa0e11552e7f"
+          },
+          {
+            "path": "baseline-matrix-cohort/23-board-5-lite-reduced-normal.json",
+            "bytes": 21477,
+            "sha256": "86693c45931bba2e0bb82ae7bf18ad786aeeaae2b410643d3b846c6a43922b15"
+          },
+          {
+            "path": "baseline-matrix-cohort/24-board-0-full-full-normal.json",
+            "bytes": 25688,
+            "sha256": "7db90e2005090d1ace66732627735227b07bc86ce743a517cfc05f0381323d06"
+          },
+          {
+            "path": "baseline-matrix-cohort/25-board-0-lite-full-normal.json",
+            "bytes": 24243,
+            "sha256": "ccf5f1c743b92ea402e0144abff6cec09c6b9a52d1784e7f9fa0d829c48cc4f0"
+          },
+          {
+            "path": "baseline-matrix-cohort/26-board-2-full-full-normal.json",
+            "bytes": 25575,
+            "sha256": "e457cbac8aea58658a322ad1612df98005f8f80c1d4259d92c00e5ecad7dbc8e"
+          },
+          {
+            "path": "baseline-matrix-cohort/27-board-2-lite-full-normal.json",
+            "bytes": 19865,
+            "sha256": "8e5ff13efc5c09984ff069976f47741457563b00561bb679bac82941fd06be5a"
+          },
+          {
+            "path": "baseline-matrix-cohort/28-board-5-full-full-normal.json",
+            "bytes": 25345,
+            "sha256": "5086bb488d76f17f30a7fb07475069687987bb26fc4c2a91ed2a801126610e00"
+          },
+          {
+            "path": "baseline-matrix-cohort/29-board-5-lite-full-normal.json",
+            "bytes": 24368,
+            "sha256": "8ff9c207133a63297f01971ed5c28f671c1afdabc3ca210c768d6e4de6bb6349"
+          },
+          {
+            "path": "baseline-matrix-cohort/30-keyboard-5-full-full-normal.json",
+            "bytes": 17412,
+            "sha256": "46e00ed77796f9adc0d5486125ac1046ee272159dd6c5e2bc3490bf539004ec0"
+          },
+          {
+            "path": "baseline-matrix-cohort/31-keyboard-5-lite-full-normal.json",
+            "bytes": 17430,
+            "sha256": "d709c51941be86431d044c6a980faf1cb69fe6f5ad16de5a949cb1de160fdbb9"
+          },
+          {
+            "path": "baseline-matrix-cohort/32-pad-5-full-full-normal.json",
+            "bytes": 27892,
+            "sha256": "43400e56906690c2c2007c9665ec5e3061ce9617f409b90c176cbffeb369d5b4"
+          },
+          {
+            "path": "baseline-matrix-cohort/33-pad-5-lite-full-normal.json",
+            "bytes": 28250,
+            "sha256": "0cb48c7808784fc418e9aadcff6a2041ba5950bf3f67d0f4f0ccc01fe1591b02"
+          },
+          {
+            "path": "baseline-matrix-cohort/34-board-5-full-reduced-normal.json",
+            "bytes": 24567,
+            "sha256": "994f0b66ab87569424df1a2decadd64270946b69d27851993d93eed9b566a69a"
+          },
+          {
+            "path": "baseline-matrix-cohort/35-board-5-lite-reduced-normal.json",
+            "bytes": 23917,
+            "sha256": "b35c1093c3704cbb327779760fb542431294d5b5b9a7de47089d3ced928febd9"
+          }
+        ],
+        "activeEffects": [
+          {
+            "condition": "board/0/full/full",
+            "filteredImages": 5,
+            "boardAnimations": 18,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "board/0/lite/full",
+            "filteredImages": 5,
+            "boardAnimations": 18,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "board/2/full/full",
+            "filteredImages": 6,
+            "boardAnimations": 20,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "board/2/lite/full",
+            "filteredImages": 6,
+            "boardAnimations": 18,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "board/5/full/full",
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "board/5/lite/full",
+            "filteredImages": 8,
+            "boardAnimations": 24,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "keyboard/5/full/full",
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": false,
+              "joystickBlur": null,
+              "joystickWebkitBlur": null,
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "keyboard/5/lite/full",
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": false,
+              "joystickBlur": null,
+              "joystickWebkitBlur": null,
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "pad/5/full/full",
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": false,
+              "joystickBlur": null,
+              "joystickWebkitBlur": null,
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "pad/5/lite/full",
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": false,
+              "joystickBlur": null,
+              "joystickWebkitBlur": null,
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "board/5/full/reduced",
+            "filteredImages": 8,
+            "boardAnimations": 0,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "reduced"
+            },
+            "quality": "full",
+            "motion": "reduced"
+          },
+          {
+            "condition": "board/5/lite/reduced",
+            "filteredImages": 8,
+            "boardAnimations": 0,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "lite",
+              "motion": "reduced"
+            },
+            "quality": "lite",
+            "motion": "reduced"
+          }
+        ]
+      }
+    },
+    {
+      "name": "candidate-v4-matrix-cohort",
+      "summary": {
+        "path": "candidate-v4-matrix-cohort/summary.json",
+        "bytes": 94240,
+        "sha256": "8a557b2a16b45732aadcedc4e7f9a7402ca77c0d9ac3b20cb3d9ddc31dfbf0c3"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T17:55:28.293Z",
+      "finishedAt": "2026-09-05T18:04:38.547Z",
+      "freeRamStart": 611241984,
+      "freeRamEnd": 1185050624,
+      "deliveryManifestDigest": "1d59beb18ccff204138cb0caaf706dd38cfd71bc92e40d8e370d00420d6df640",
+      "sourceManifestDigest": "b11869b944d40cecdec07956f6e556158ee01d0581a1334efdcd1b5da5203136",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "candidate-v4-matrix-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "0eea2ce6d07b9eac1018136b75205d7e4c3db25f167a13e5d8f732a7bc24975b",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=candidate-v4-matrix",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/src",
+        "--only=matrix",
+        "--repetitions=3",
+        "--row-ms=6000",
+        "--soak-ms=0",
+        "--screenshots=true"
+      ],
+      "matrix": {
+        "rowCount": 36,
+        "allSemanticOk": true,
+        "movesPerRow": [
+          40
+        ],
+        "pageErrors": [],
+        "p95Within20ms": 33,
+        "maxFrameMs": 582.9,
+        "longTaskEntries": 0,
+        "tasksStrictlyOver50": [],
+        "rawRowEvidence": [
+          {
+            "path": "candidate-v4-matrix-cohort/0-board-0-full-full-normal.json",
+            "bytes": 25460,
+            "sha256": "00ca5dc12956505181ec1099dcbc4c0ad443670ac681a4011a7c16c79b5d3a75"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/1-board-0-lite-full-normal.json",
+            "bytes": 25053,
+            "sha256": "58ac0e05e5fabc1b06084a6c2fd0b0f63e736cdee1124ef9ca04f55c2a82a49c"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/2-board-2-full-full-normal.json",
+            "bytes": 25121,
+            "sha256": "323f0ec099cd200c1ca7af9f6d611aece58a65ed325ddac77c4d13dd2f1f5ba1"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/3-board-2-lite-full-normal.json",
+            "bytes": 24834,
+            "sha256": "187ef0fcf094bd2d6d62965cbfe3d8036e5a93e8b99ac59222bfb6794ea05aba"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/4-board-5-full-full-normal.json",
+            "bytes": 24187,
+            "sha256": "d9265d5cc8ec84aee557e10bb7db4c0c74227fdc0eda7dd56b475d260cd73558"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/5-board-5-lite-full-normal.json",
+            "bytes": 25583,
+            "sha256": "5fa70fea921313a27922166eb9d137f3d28bed49849759459a9033682863d75d"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/6-keyboard-5-full-full-normal.json",
+            "bytes": 17910,
+            "sha256": "3171be6b84c015ff63ffd6b0dcfc07fa814c31673c025629fc1ac65b2b43dba7"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/7-keyboard-5-lite-full-normal.json",
+            "bytes": 17477,
+            "sha256": "2754b31c32591f8502c62df1ece2b508413a14851d16eeeff69e2f546d7a8cad"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/8-pad-5-full-full-normal.json",
+            "bytes": 28474,
+            "sha256": "35c637514e44f8342f8b88657c59d4c74069cd9963302198703001ba982df2f6"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/9-pad-5-lite-full-normal.json",
+            "bytes": 27967,
+            "sha256": "189e13c0ee89b00f607d727381b5842d458fadad486c32f2746d8b5bad1a8916"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/10-board-5-full-reduced-normal.json",
+            "bytes": 23740,
+            "sha256": "dc9f0ab070301e7f840b61632056afa92d7f9298cb54fb6a6298e8d8b9cbb010"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/11-board-5-lite-reduced-normal.json",
+            "bytes": 25293,
+            "sha256": "7d857c4f190e7f419c843790916e4608fa6e5a20bc1eaa0987c1467957f669c1"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/12-board-0-full-full-normal.json",
+            "bytes": 25179,
+            "sha256": "18a070310666ecdb88a8242a9b7cd5979545c4a85dd2f40e7de226c20f9c96b1"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/13-board-0-lite-full-normal.json",
+            "bytes": 25157,
+            "sha256": "b476fcf3ae2c91ae0f4922281f3fe77c7203f88205ba7cde9367cb9483a5cb70"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/14-board-2-full-full-normal.json",
+            "bytes": 25518,
+            "sha256": "428050c99b5c47682b437a2694bce1bd7657ddc45183877560fb76b011c3d585"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/15-board-2-lite-full-normal.json",
+            "bytes": 24500,
+            "sha256": "a28dca69c1f345d4d37997693dd8b9434e8882c2576f246ec5033c785594b933"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/16-board-5-full-full-normal.json",
+            "bytes": 25784,
+            "sha256": "4e1e1c3aa11aee49163e17552bba05a0af842a5f4cbd100f0f3d514f4dd04203"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/17-board-5-lite-full-normal.json",
+            "bytes": 25797,
+            "sha256": "2cac0c49ea7cde8a1c16a8ca520638e7b85251a85b27ef4f94c72ffa054c7b17"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/18-keyboard-5-full-full-normal.json",
+            "bytes": 17193,
+            "sha256": "82634ae803c8d701a0a59c6b4a146649d091caf3de3824ed057cc6d166d81d8d"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/19-keyboard-5-lite-full-normal.json",
+            "bytes": 16770,
+            "sha256": "00f58213bd638e2bfed435ab9b67e1928e7aa99713f0b8d630628f6cabb2fbda"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/20-pad-5-full-full-normal.json",
+            "bytes": 27727,
+            "sha256": "a3fd416e41963b833c3e686d547819f3be5f25e0554e0b551bf5f52aaefb73ad"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/21-pad-5-lite-full-normal.json",
+            "bytes": 28085,
+            "sha256": "ee3b20077afcb416932cf78477de486ed42ffc30f950d0d9822882d85aa28b18"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/22-board-5-full-reduced-normal.json",
+            "bytes": 23243,
+            "sha256": "99a0c1bb324f918b3c349ba61585b250799b935abe4e4f5a325fc554ba553c9e"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/23-board-5-lite-reduced-normal.json",
+            "bytes": 25252,
+            "sha256": "563d89def57a396839bcba64fbfe8f5a485c627702ac1847629703e992951a8e"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/24-board-0-full-full-normal.json",
+            "bytes": 25163,
+            "sha256": "3f6a603ea9109dd8ac9b38f1e78ed9604719495e29d2de4896a27ff4af443569"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/25-board-0-lite-full-normal.json",
+            "bytes": 24440,
+            "sha256": "d6eb2cf9e4bf5a58d7141df9f33083614027c7c6bc28b5828d2aceb816dac648"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/26-board-2-full-full-normal.json",
+            "bytes": 25068,
+            "sha256": "c17268ec6e3362fb1ef6d9e5c4c2475221965918d87a0c30216040e4e5792b33"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/27-board-2-lite-full-normal.json",
+            "bytes": 23975,
+            "sha256": "74abd09313aff4ba2a6465ded4edd98d62dac45dc3578f4a3cb8cf2c11e42260"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/28-board-5-full-full-normal.json",
+            "bytes": 25396,
+            "sha256": "67ead3c694196e6cd30c11666501d96f60799a1acfe5dd49d825f89ffda49295"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/29-board-5-lite-full-normal.json",
+            "bytes": 24626,
+            "sha256": "1f3f57bb9107c864af6c017e6ef17af3958bac51066ddce3d7675b8a7d34b116"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/30-keyboard-5-full-full-normal.json",
+            "bytes": 17066,
+            "sha256": "3235b2252fe4e7303b99dedd4e399227f5d934d6c5100a9df30625d505b5107d"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/31-keyboard-5-lite-full-normal.json",
+            "bytes": 16872,
+            "sha256": "c032880d3962bb6d86d6438061d90191ca0df8f16eca789156c680b8d39199a1"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/32-pad-5-full-full-normal.json",
+            "bytes": 27935,
+            "sha256": "a4bd9263ec42116da42176d8305b7079eab78d34d905409a39f49d1296b51570"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/33-pad-5-lite-full-normal.json",
+            "bytes": 28175,
+            "sha256": "ed842fbc75265d966e1ab126c0ca8b22271454dfb3c1d0ceca2d8c8c91cb3c6f"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/34-board-5-full-reduced-normal.json",
+            "bytes": 24900,
+            "sha256": "b655fcb315297adbe51428c2a25d1dc01da92839cc777e6ab45c3374f31ab1b3"
+          },
+          {
+            "path": "candidate-v4-matrix-cohort/35-board-5-lite-reduced-normal.json",
+            "bytes": 24403,
+            "sha256": "2f225d4db5a98d3da6655a52173a86f401be80b4d5315ceb4141fdb046daf8a1"
+          }
+        ],
+        "activeEffects": [
+          {
+            "condition": "board/0/full/full",
+            "filteredImages": 5,
+            "boardAnimations": 18,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "board/0/lite/full",
+            "filteredImages": 0,
+            "boardAnimations": 2,
+            "joystickBlur": "none",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "none",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "board/2/full/full",
+            "filteredImages": 6,
+            "boardAnimations": 20,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "board/2/lite/full",
+            "filteredImages": 0,
+            "boardAnimations": 2,
+            "joystickBlur": "none",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "none",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "board/5/full/full",
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "board/5/lite/full",
+            "filteredImages": 0,
+            "boardAnimations": 2,
+            "joystickBlur": "none",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "none",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "keyboard/5/full/full",
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "keyboard/5/lite/full",
+            "filteredImages": 0,
+            "boardAnimations": 2,
+            "joystickBlur": "none",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "none",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "pad/5/full/full",
+            "filteredImages": 8,
+            "boardAnimations": 25,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          {
+            "condition": "pad/5/lite/full",
+            "filteredImages": 0,
+            "boardAnimations": 2,
+            "joystickBlur": "none",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "none",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          {
+            "condition": "board/5/full/reduced",
+            "filteredImages": 8,
+            "boardAnimations": 0,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "reduced"
+            },
+            "quality": "full",
+            "motion": "reduced"
+          },
+          {
+            "condition": "board/5/lite/reduced",
+            "filteredImages": 0,
+            "boardAnimations": 0,
+            "joystickBlur": "none",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "none",
+              "quality": "lite",
+              "motion": "reduced"
+            },
+            "quality": "lite",
+            "motion": "reduced"
+          }
+        ]
+      }
+    },
+    {
+      "name": "baseline-full-soak-cohort",
+      "summary": {
+        "path": "baseline-full-soak-cohort/summary.json",
+        "bytes": 9195,
+        "sha256": "e8e9df3a4a536acc1963e27e3be6105950c985f3e7e0fe66151f528ad31601c3"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T18:04:57.703Z",
+      "finishedAt": "2026-09-05T18:15:22.343Z",
+      "freeRamStart": 834973696,
+      "freeRamEnd": 361082880,
+      "deliveryManifestDigest": "adb278b2ba556cc241ce6d5e807dcbbe048e96abb33f28671bcfacc0659866a2",
+      "sourceManifestDigest": "f5e37930ef353642bd28a8250083b8ea74941ba1c7e09dcbcebe6d4ed46386fc",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "baseline-full-soak-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "0eea2ce6d07b9eac1018136b75205d7e4c3db25f167a13e5d8f732a7bc24975b",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=baseline-full-soak",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/src",
+        "--only=soak",
+        "--repetitions=1",
+        "--soak-ms=600000",
+        "--soak-quality=full"
+      ],
+      "rows": [
+        {
+          "name": "0-board-5-full-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": null,
+          "cycles": 163,
+          "moves": 3260,
+          "semanticOk": true,
+          "frames": 34007,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 33.3,
+          "maxFrameMs": 6611,
+          "framesOver50": 47,
+          "longTaskEntries": 12,
+          "tasksStrictlyOver50": [
+            {
+              "relativeStartMs": 303646.6,
+              "durationMs": 3062,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 306715.2,
+              "durationMs": 832,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 307548,
+              "durationMs": 1087,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 308635.3,
+              "durationMs": 2721,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 311356.7,
+              "durationMs": 4765,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 316122.5,
+              "durationMs": 1296,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 317470.9,
+              "durationMs": 68,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 577791.1,
+              "durationMs": 51,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 583121.3,
+              "durationMs": 62,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 600160.2,
+              "durationMs": 104,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 603014.9,
+              "durationMs": 55,
+              "attribution": "unattributed; API name=self"
+            }
+          ],
+          "sampleEndFromRafMs": 603730.6,
+          "wallElapsedIncludingCollectionMs": 612635,
+          "inputToFirstRafP95Ms": 23.1,
+          "inputToSecondRafP95Ms": 40.1,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {},
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 3260,
+              "total": 479.59999853372574,
+              "p95": 0.20000004768371582,
+              "max": 38.40000003576279
+            },
+            "activeRunRemoveMs": {
+              "count": 6520,
+              "total": 21.699999630451202,
+              "p95": 0,
+              "max": 0.40000003576278687
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 38338,
+            "RecalcStyleCount": 49101,
+            "LayoutDuration": 10.858130000000001,
+            "RecalcStyleDuration": 67.612155,
+            "ScriptDuration": 33.346266,
+            "TaskDuration": 279.775067
+          },
+          "resources": [
+            {
+              "at": 67784.20000004768,
+              "usedJsHeapBytes": 14406788,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 128134.60000002384,
+              "usedJsHeapBytes": 11990783,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 188399.70000004768,
+              "usedJsHeapBytes": 15972039,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 248653.70000004768,
+              "usedJsHeapBytes": 25629510,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 309424.10000002384,
+              "usedJsHeapBytes": 19059643,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 369871.3000000119,
+              "usedJsHeapBytes": 10786655,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 430156.10000002384,
+              "usedJsHeapBytes": 14075734,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 491057.3000000119,
+              "usedJsHeapBytes": 12178999,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 547942.9000000358,
+              "usedJsHeapBytes": 21642700,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 611337.7000000477,
+              "usedJsHeapBytes": 20252423,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            }
+          ],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "baseline-full-soak-cohort/0-board-5-full-full-normal.json",
+            "bytes": 1997030,
+            "sha256": "01ca34fafe4d39b31fd8be93b91825bacd1d82d4115c999c13e371421292b2ea"
+          }
+        }
+      ]
+    },
+    {
+      "name": "candidate-v4-full-soak-recovery-cohort",
+      "summary": {
+        "path": "candidate-v4-full-soak-recovery-cohort/summary.json",
+        "bytes": 3804,
+        "sha256": "48d9f08bea94a65007a33526b51755ebd0bb292518da18d372bc2f4ab17d9b30"
+      },
+      "status": "failed-not-completed",
+      "failure": "page.waitForFunction: Timeout 10000ms exceeded.",
+      "failedSegment": null,
+      "startedAt": "2026-09-05T18:34:33.719Z",
+      "finishedAt": "2026-09-05T18:36:47.538Z",
+      "freeRamStart": 1061011456,
+      "freeRamEnd": 508276736,
+      "deliveryManifestDigest": "1d59beb18ccff204138cb0caaf706dd38cfd71bc92e40d8e370d00420d6df640",
+      "sourceManifestDigest": "b11869b944d40cecdec07956f6e556158ee01d0581a1334efdcd1b5da5203136",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "candidate-v4-full-soak-recovery-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "0eea2ce6d07b9eac1018136b75205d7e4c3db25f167a13e5d8f732a7bc24975b",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=candidate-v4-full-soak-recovery",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/src",
+        "--only=soak",
+        "--soak-ms=600000",
+        "--soak-quality=full",
+        "--screenshots=true"
+      ],
+      "rows": []
+    },
+    {
+      "name": "candidate-v4-full-soak-diagnostic-cohort",
+      "summary": {
+        "path": "candidate-v4-full-soak-diagnostic-cohort/summary.json",
+        "bytes": 8381,
+        "sha256": "d44a213e2c7d633bd0de3e3a5879c69d02d7ae08197140104593746108f6427c"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T18:40:06.724Z",
+      "finishedAt": "2026-09-05T18:50:29.774Z",
+      "freeRamStart": 230797312,
+      "freeRamEnd": 641806336,
+      "deliveryManifestDigest": "1d59beb18ccff204138cb0caaf706dd38cfd71bc92e40d8e370d00420d6df640",
+      "sourceManifestDigest": "b11869b944d40cecdec07956f6e556158ee01d0581a1334efdcd1b5da5203136",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "candidate-v4-full-soak-diagnostic-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "5d94642541b0f5ba59d814183464e4fb9e7992ffcbf552d4e286008534e8b83f",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=candidate-v4-full-soak-diagnostic",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/src",
+        "--only=soak",
+        "--soak-ms=600000",
+        "--soak-quality=full",
+        "--repetitions=1",
+        "--screenshots=true"
+      ],
+      "rows": [
+        {
+          "name": "0-board-5-full-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "full",
+          "motion": "full",
+          "repetition": null,
+          "cycles": 168,
+          "moves": 3360,
+          "semanticOk": true,
+          "frames": 32981,
+          "frameP95Ms": 33.3,
+          "frameP99Ms": 50,
+          "maxFrameMs": 566.2,
+          "framesOver50": 177,
+          "longTaskEntries": 3,
+          "tasksStrictlyOver50": [
+            {
+              "relativeStartMs": 57336.4,
+              "durationMs": 103,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 57522.9,
+              "durationMs": 233,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 162770.1,
+              "durationMs": 86,
+              "attribution": "unattributed; API name=self"
+            }
+          ],
+          "sampleEndFromRafMs": 602128.5,
+          "wallElapsedIncludingCollectionMs": 605067,
+          "inputToFirstRafP95Ms": 42.6,
+          "inputToSecondRafP95Ms": 59.3,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": "blur(2px)",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "full",
+              "motion": "full"
+            },
+            "quality": "full",
+            "motion": "full"
+          },
+          "counters": {},
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 3360,
+              "total": 454.9000024199486,
+              "p95": 0.30000001192092896,
+              "max": 3.900000035762787
+            },
+            "activeRunRemoveMs": {
+              "count": 6720,
+              "total": 33.199999928474426,
+              "p95": 0,
+              "max": 0.5
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 37717,
+            "RecalcStyleCount": 52090,
+            "LayoutDuration": 11.517121000000001,
+            "RecalcStyleDuration": 64.283321,
+            "ScriptDuration": 29.248984,
+            "TaskDuration": 281.555123
+          },
+          "resources": [
+            {
+              "at": 71703.39999997616,
+              "usedJsHeapBytes": 7765787,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 132420.89999997616,
+              "usedJsHeapBytes": 12369899,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 190738.19999998808,
+              "usedJsHeapBytes": 25073064,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 251343,
+              "usedJsHeapBytes": 23810244,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 311971.7999999523,
+              "usedJsHeapBytes": 19256650,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 372474.2999999523,
+              "usedJsHeapBytes": 15896083,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 433010.5,
+              "usedJsHeapBytes": 20730033,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 493727.59999996424,
+              "usedJsHeapBytes": 20458475,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 550782.6999999881,
+              "usedJsHeapBytes": 11076520,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 612497.6999999881,
+              "usedJsHeapBytes": 11775554,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            }
+          ],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "candidate-v4-full-soak-diagnostic-cohort/0-board-5-full-full-normal.json",
+            "bytes": 2003411,
+            "sha256": "44fa01074a72cd6b629a82a61581f2be10ee6b08163190392fdd8cea5d3541d8"
+          }
+        }
+      ]
+    },
+    {
+      "name": "baseline-lite-soak-cohort",
+      "summary": {
+        "path": "baseline-lite-soak-cohort/summary.json",
+        "bytes": 6764,
+        "sha256": "e844701450d728b5e885e36f2cdd025444a59024c2a75204e3ca6231e16c4886"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T18:51:43.419Z",
+      "finishedAt": "2026-09-05T18:54:58.119Z",
+      "freeRamStart": 742944768,
+      "freeRamEnd": 671481856,
+      "deliveryManifestDigest": "adb278b2ba556cc241ce6d5e807dcbbe048e96abb33f28671bcfacc0659866a2",
+      "sourceManifestDigest": "f5e37930ef353642bd28a8250083b8ea74941ba1c7e09dcbcebe6d4ed46386fc",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "baseline-lite-soak-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "5d94642541b0f5ba59d814183464e4fb9e7992ffcbf552d4e286008534e8b83f",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=baseline-lite-soak",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/baseline/src",
+        "--only=soak",
+        "--soak-ms=180000",
+        "--soak-quality=lite",
+        "--repetitions=1",
+        "--screenshots=true"
+      ],
+      "rows": [
+        {
+          "name": "0-board-5-lite-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "lite",
+          "motion": "full",
+          "repetition": null,
+          "cycles": 50,
+          "moves": 1000,
+          "semanticOk": true,
+          "frames": 9088,
+          "frameP95Ms": 49.8,
+          "frameP99Ms": 66.6,
+          "maxFrameMs": 1665.4,
+          "framesOver50": 227,
+          "longTaskEntries": 2,
+          "tasksStrictlyOver50": [
+            {
+              "relativeStartMs": 3845,
+              "durationMs": 920,
+              "attribution": "unattributed; API name=self"
+            },
+            {
+              "relativeStartMs": 4772.2,
+              "durationMs": 85,
+              "attribution": "unattributed; API name=self"
+            }
+          ],
+          "sampleEndFromRafMs": 181844.3,
+          "wallElapsedIncludingCollectionMs": 182669,
+          "inputToFirstRafP95Ms": 42.3,
+          "inputToSecondRafP95Ms": 59.6,
+          "activeEffects": {
+            "filteredImages": 8,
+            "boardAnimations": 23,
+            "joystickBlur": null,
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "blur(2px)",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          "counters": {},
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 1000,
+              "total": 138.10000014305115,
+              "p95": 0.30000001192092896,
+              "max": 8.899999976158142
+            },
+            "activeRunRemoveMs": {
+              "count": 2000,
+              "total": 10.299999833106995,
+              "p95": 0,
+              "max": 0.5999999642372131
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 10323,
+            "RecalcStyleCount": 13624,
+            "LayoutDuration": 2.902824,
+            "RecalcStyleDuration": 15.797466,
+            "ScriptDuration": 10.054401,
+            "TaskDuration": 84.951046
+          },
+          "resources": [
+            {
+              "at": 69869.39999997616,
+              "usedJsHeapBytes": 19806527,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 127302.69999998808,
+              "usedJsHeapBytes": 20312387,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 189066.80000001192,
+              "usedJsHeapBytes": 13006631,
+              "resources": 55,
+              "domNodes": 781,
+              "followers": 5,
+              "hidden": false
+            }
+          ],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "baseline-lite-soak-cohort/0-board-5-lite-full-normal.json",
+            "bytes": 564050,
+            "sha256": "a407d354274fb1bb588a5f5690b5cd16eec6005d4c675cb821d6a6288944b55a"
+          }
+        }
+      ]
+    },
+    {
+      "name": "candidate-v4-lite-soak-cohort",
+      "summary": {
+        "path": "candidate-v4-lite-soak-cohort/summary.json",
+        "bytes": 6607,
+        "sha256": "e2cdd438b678ac26c8801e8df3fc8da8696fdc198098a044ae35b6718d12f834"
+      },
+      "status": "completed-report-only",
+      "failure": null,
+      "failedSegment": null,
+      "startedAt": "2026-09-05T18:55:23.784Z",
+      "finishedAt": "2026-09-05T18:58:34.692Z",
+      "freeRamStart": 1287278592,
+      "freeRamEnd": 1049337856,
+      "deliveryManifestDigest": "1d59beb18ccff204138cb0caaf706dd38cfd71bc92e40d8e370d00420d6df640",
+      "sourceManifestDigest": "b11869b944d40cecdec07956f6e556158ee01d0581a1334efdcd1b5da5203136",
+      "fixtureCanonicalJsonSha256": "c2fa69fd6332388d25799d00a376ed52927d45dfbe8e3fdbf1238d0744dc86bd",
+      "fixturePrettyFile": {
+        "path": "candidate-v4-lite-soak-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      "harnessSha256": {
+        "v22-cohort.mjs": "5d94642541b0f5ba59d814183464e4fb9e7992ffcbf552d4e286008534e8b83f",
+        "v22-fixtures.mjs": "a2d57b734a293f4994814e7b5200fc194149b0d4ff776f6a487585ae20a0bbe0",
+        "v22-instrumented-build.mjs": "584f3b55123d93df03f4b3246869ee158abd5e272a081144f0d6172552d74636"
+      },
+      "commandArguments": [
+        "--phase=candidate-v4-lite-soak",
+        "--dist=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/dist",
+        "--source=C:/GameDev/maze-game-qa/performance/v22-perf-01/candidate-v4/src",
+        "--only=soak",
+        "--soak-ms=180000",
+        "--soak-quality=lite",
+        "--repetitions=1",
+        "--screenshots=true"
+      ],
+      "rows": [
+        {
+          "name": "0-board-5-lite-full-normal",
+          "input": "board",
+          "followers": 5,
+          "quality": "lite",
+          "motion": "full",
+          "repetition": null,
+          "cycles": 51,
+          "moves": 1020,
+          "semanticOk": true,
+          "frames": 10552,
+          "frameP95Ms": 16.9,
+          "frameP99Ms": 33.3,
+          "maxFrameMs": 66.8,
+          "framesOver50": 3,
+          "longTaskEntries": 0,
+          "tasksStrictlyOver50": [],
+          "sampleEndFromRafMs": 180845,
+          "wallElapsedIncludingCollectionMs": 181659,
+          "inputToFirstRafP95Ms": 13.5,
+          "inputToSecondRafP95Ms": 30.1,
+          "activeEffects": {
+            "filteredImages": 0,
+            "boardAnimations": 0,
+            "joystickBlur": "none",
+            "liveInput": {
+              "originPresent": true,
+              "joystickBlur": "none",
+              "quality": "lite",
+              "motion": "full"
+            },
+            "quality": "lite",
+            "motion": "full"
+          },
+          "counters": {},
+          "timeCosts": {
+            "activeRunStorageMs": {
+              "count": 1020,
+              "total": 120.80000001192093,
+              "p95": 0.20000004768371582,
+              "max": 0.5
+            },
+            "activeRunRemoveMs": {
+              "count": 2040,
+              "total": 7.8999998569488525,
+              "p95": 0,
+              "max": 0.10000002384185791
+            }
+          },
+          "cdpDeltas": {
+            "LayoutCount": 1478,
+            "RecalcStyleCount": 15342,
+            "LayoutDuration": 2.121214,
+            "RecalcStyleDuration": 11.352898999999999,
+            "ScriptDuration": 8.257761,
+            "TaskDuration": 67.97556900000001
+          },
+          "resources": [
+            {
+              "at": 66150,
+              "usedJsHeapBytes": 10594696,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 126399.69999998808,
+              "usedJsHeapBytes": 16853547,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            },
+            {
+              "at": 186584.89999997616,
+              "usedJsHeapBytes": 14606971,
+              "resources": 55,
+              "domNodes": 784,
+              "followers": 5,
+              "hidden": false
+            }
+          ],
+          "hiddenEvents": [],
+          "errors": [],
+          "raw": {
+            "path": "candidate-v4-lite-soak-cohort/0-board-5-lite-full-normal.json",
+            "bytes": 619679,
+            "sha256": "e6575f0dcd48e1df3a27a2f260b90ad289527748c063c1db4f3634a70eb34437"
+          }
+        }
+      ]
+    }
+  ],
+  "pairedMatrix": [
+    {
+      "condition": "board/0/full/full",
+      "beforeP95Ms": [
+        16.9,
+        49.9,
+        16.8
+      ],
+      "afterP95Ms": [
+        16.8,
+        16.9,
+        16.9
+      ],
+      "beforeP99Ms": [
+        17.1,
+        99.3,
+        17
+      ],
+      "afterP99Ms": [
+        49.8,
+        17,
+        17.1
+      ]
+    },
+    {
+      "condition": "board/0/lite/full",
+      "beforeP95Ms": [
+        33.3,
+        50.1,
+        33.3
+      ],
+      "afterP95Ms": [
+        16.8,
+        16.8,
+        16.9
+      ],
+      "beforeP99Ms": [
+        33.4,
+        183.2,
+        50
+      ],
+      "afterP99Ms": [
+        16.9,
+        16.9,
+        17
+      ]
+    },
+    {
+      "condition": "board/2/full/full",
+      "beforeP95Ms": [
+        16.8,
+        66.5,
+        16.8
+      ],
+      "afterP95Ms": [
+        16.9,
+        16.9,
+        16.9
+      ],
+      "beforeP99Ms": [
+        16.8,
+        83.3,
+        16.9
+      ],
+      "afterP99Ms": [
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "condition": "board/2/lite/full",
+      "beforeP95Ms": [
+        49.9,
+        50.1,
+        33.4
+      ],
+      "afterP95Ms": [
+        16.9,
+        16.9,
+        16.9
+      ],
+      "beforeP99Ms": [
+        83.3,
+        333.2,
+        200
+      ],
+      "afterP99Ms": [
+        17,
+        17,
+        17.1
+      ]
+    },
+    {
+      "condition": "board/5/full/full",
+      "beforeP95Ms": [
+        66.7,
+        33.3,
+        16.9
+      ],
+      "afterP95Ms": [
+        33.3,
+        16.8,
+        16.9
+      ],
+      "beforeP99Ms": [
+        116.7,
+        50,
+        33.3
+      ],
+      "afterP99Ms": [
+        50,
+        16.9,
+        17
+      ]
+    },
+    {
+      "condition": "board/5/lite/full",
+      "beforeP95Ms": [
+        66.7,
+        16.9,
+        33.3
+      ],
+      "afterP95Ms": [
+        16.8,
+        16.8,
+        16.9
+      ],
+      "beforeP99Ms": [
+        83.4,
+        33.4,
+        50
+      ],
+      "afterP99Ms": [
+        16.9,
+        16.9,
+        17
+      ]
+    },
+    {
+      "condition": "keyboard/5/full/full",
+      "beforeP95Ms": [
+        66.6,
+        16.8,
+        16.8
+      ],
+      "afterP95Ms": [
+        16.8,
+        16.9,
+        16.9
+      ],
+      "beforeP99Ms": [
+        83.2,
+        33.3,
+        33.3
+      ],
+      "afterP99Ms": [
+        17,
+        17,
+        17.1
+      ]
+    },
+    {
+      "condition": "keyboard/5/lite/full",
+      "beforeP95Ms": [
+        33.6,
+        49.8,
+        16.9
+      ],
+      "afterP95Ms": [
+        16.8,
+        16.9,
+        16.9
+      ],
+      "beforeP99Ms": [
+        67.2,
+        50.1,
+        17
+      ],
+      "afterP99Ms": [
+        16.9,
+        17,
+        17
+      ]
+    },
+    {
+      "condition": "pad/5/full/full",
+      "beforeP95Ms": [
+        16.8,
+        33.3,
+        16.9
+      ],
+      "afterP95Ms": [
+        16.8,
+        16.9,
+        16.9
+      ],
+      "beforeP99Ms": [
+        17,
+        50,
+        17
+      ],
+      "afterP99Ms": [
+        17,
+        17,
+        17
+      ]
+    },
+    {
+      "condition": "pad/5/lite/full",
+      "beforeP95Ms": [
+        33.4,
+        50,
+        16.9
+      ],
+      "afterP95Ms": [
+        16.9,
+        16.8,
+        16.8
+      ],
+      "beforeP99Ms": [
+        50,
+        133.2,
+        33
+      ],
+      "afterP99Ms": [
+        17,
+        16.9,
+        16.9
+      ]
+    },
+    {
+      "condition": "board/5/full/reduced",
+      "beforeP95Ms": [
+        33.4,
+        33.4,
+        33.2
+      ],
+      "afterP95Ms": [
+        33.3,
+        33.4,
+        16.8
+      ],
+      "beforeP99Ms": [
+        83.2,
+        50.2,
+        33.3
+      ],
+      "afterP99Ms": [
+        34.1,
+        33.5,
+        16.9
+      ]
+    },
+    {
+      "condition": "board/5/lite/reduced",
+      "beforeP95Ms": [
+        50,
+        33.5,
+        33.3
+      ],
+      "afterP95Ms": [
+        16.9,
+        16.8,
+        16.8
+      ],
+      "beforeP99Ms": [
+        50.1,
+        49.9,
+        33.4
+      ],
+      "afterP99Ms": [
+        33.3,
+        33.3,
+        17
+      ]
+    }
+  ],
+  "otherEvidence": [
+    {
+      "path": "input-v3/playwright-results.json",
+      "bytes": 127188,
+      "sha256": "3d350ab8e119558202eb4120dea4ed7e3146f576690f70a8e255766388aeef2e"
+    },
+    {
+      "path": "input-v4-lite/playwright-results.json",
+      "bytes": 6475,
+      "sha256": "0695fddc48fbc5059ba9c295d04a5067c531635858a4b4337ae8c4c1133bde29"
+    },
+    {
+      "path": "shared-v3/browser-cohort.json",
+      "bytes": 54463,
+      "sha256": "c810838210c7bace5d5dbabce500b80ca094349b2f60b1cc546cea40ea232d4d"
+    },
+    {
+      "path": "visual/summary.json",
+      "bytes": 123009,
+      "sha256": "d538ba5d9f819277c27ae244c5b36dabec281d136720f9beb2428d4fb13bb9be"
+    }
+  ],
+  "interruptedEvidence": {
+    "path": "candidate-v4-full-soak-cohort",
+    "status": "crash-interrupted; no completed row or summary; excluded",
+    "files": [
+      {
+        "path": "candidate-v4-full-soak-cohort/fixtures.json",
+        "bytes": 24067,
+        "sha256": "247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3"
+      },
+      {
+        "path": "candidate-v4-full-soak-cohort/source-manifest.json",
+        "bytes": 21122,
+        "sha256": "af8bc50bd6a5a516a2a0e65afa48d9579d9c8e67e42784d3ba77ac0bacfc6189"
+      },
+      {
+        "path": "candidate-v4-full-soak-cohort/delivery-manifest.json",
+        "bytes": 80565,
+        "sha256": "e6c666e5b34b8fbf88b298aa9067e7fdc9236c2f512535eec44d0e3e2903a65b"
+      }
+    ]
+  },
+  "rejectedEvidence": [
+    {
+      "path": "candidate-v3-matrix-cohort",
+      "reason": "Stopped20/36 rows after discovering standard Lite blur override missing in production. No final timing acceptance."
+    },
+    {
+      "path": "baseline-counters-cohort",
+      "reason": "Development NODE_ENV in diagnostic build."
+    },
+    {
+      "path": "baseline-counters-r2-cohort",
+      "reason": "Frozen JS loader did not freeze imported CSS."
+    }
+  ],
+  "nextGate": "Independent Sol review, including the unexplained recovery timeout, worse Full soak p95/p99 and unfulfilled task-attribution requirement. Not fully engineering-green or promotion-ready by assertion. Main/version/release untouched; only an accepted preview proceeds to affected-iPad testing."
+}
