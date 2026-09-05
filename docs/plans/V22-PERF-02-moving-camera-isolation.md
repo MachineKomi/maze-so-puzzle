@@ -1,6 +1,14 @@
 # V22-PERF-02 — isolate moving-camera cost on the affected iPad
 
-Prepared 2026-09-05 by Astra. Active next runtime slice; Sol reviews read-only.
+Prepared 2026-09-05 by Astra. Updated 2026-09-06: PERF-02A is published as
+**v0.22.2 V22-CAMERA1**, exact runtime `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`.
+Actual GPT-5.6 Sol High independently accepted the coordinate/source evidence,
+final test-observer correction and bounded native Exit exception. See the
+[source review](../reviews/2026-09-05-v22-perf02-camera-preview.md) and
+[release receipt](../../release/V22-CAMERA1-v0.22.2-release-verification.json).
+Engineering/delivery pass; physical iPad efficacy remains pending. No further
+camera change is in flight. If P1 still fails, resume the follow-on isolation
+below. Safe independent art/pace/rescue seams may proceed under Human authority.
 Baseline: published v0.22.1 `8442b79`, accepted R1 input corrections unchanged.
 Read current main/working-tree status and the [joint state](../JOINT_ORCHESTRATION_STATE.md)
 before execution. The independent Tessera candidate is backed up on its branch;

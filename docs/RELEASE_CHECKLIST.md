@@ -1,6 +1,37 @@
 # Release checklist
 
-## Current V22-PERF1 performance/input preview — v0.22.1
+## Current V22-CAMERA1 experimental preview — v0.22.2
+
+Frozen runtime/tag: `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`.
+Publication attachments: `b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c`.
+See [manifest](../release/V22-CAMERA1-v0.22.2-manifest.json),
+[receipt](../release/V22-CAMERA1-v0.22.2-release-verification.json), and
+[short playtest note](../release/V22-CAMERA1-v0.22.2-PLAYTEST.md).
+
+- [x] Actual Sol independent review; fixed-origin percentage translation, no
+  game rules, input cadence, FOV, art, audio, dependency or save-schema change.
+- [x] 499/499 serial project tests, TypeScript/build/static gates, production
+  audit and locked native build. Existing budget: JS gzip9 153,274/153,307,
+  CSS 23,512/30,227; public 164,988,031/164,988,031. No new allocation.
+- [x] 96 mount/resize and 76 moving samples: zero sampled geometry violations.
+  Final selected input run 18 passes plus unchanged isolated rerun 1/1 after a
+  clock-setup failure. Retain preliminary failures, not a fabricated full rerun.
+- [x] Canonical journeys 6/6 after fixing the old observer's percent-as-pixels
+  parsing; original 5/6 retained. Tolerances and frozen runtime unchanged.
+- [x] Windows WebView2 152.0.4191.62: Maze-2 geometry/movement and OS normal
+  close/reopen/resume at eight steps passed in a new synthetic test profile.
+  Title Exit failed separately; use X/Alt+F4. UI-NATIVE-EXIT-01 owns correction.
+- [x] Exact runtime CI 33997389203 verify/desktop passed; Vercel production
+  `2BdmrPnd1rho9P1Agcj9WJHxgaLR` succeeded. Canonical raw HTML/JS/CSS match
+  the native build's same-source LF-entry dist without normalization.
+- [x] GitHub prerelease 383399096; four public downloads independently verified.
+  Portable 173,379,584 bytes, SHA-256
+  `e6753a7a62ad2f6f8525154b578b3ac3068342b52f795779f01d2391288ea7e9`.
+- [ ] Physical iPad Maze-2 efficacy and sustained/native performance. No signing,
+  installer, offline, clean-machine or family acceptance claim. Keep v0.22.1
+  immutable; safe next seams must not rewrite this controlled comparison.
+
+## Historical V22-PERF1 performance/input preview — v0.22.1
 
 Published runtime/tag: `8442b79db11a59e23f23c59f213116e7b8f54592`.
 Accepted R1 runtime: `91678d1a7f97055dc2f167f8a3e7106226817306`; Sol review

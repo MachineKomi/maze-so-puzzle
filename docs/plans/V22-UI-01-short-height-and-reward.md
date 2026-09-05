@@ -54,6 +54,11 @@ used; do not claim normal-text failure is accessibility behavior.
 
 ### 3.2 Exact Human refinements
 
+- UI-NATIVE-EXIT-01 (engineering intake 2026-09-06): title Exit currently closes
+  web content but can leave the Tauri window/process alive. Add platform-aware
+  normal close with browser-safe fallback; verify process exit and save/reopen.
+  Normal OS X/Alt+F4 is the verified workaround in the v0.22.2 camera preview.
+
 - Replace four boxed pad buttons at rest with larger open dark-plum code-native
   chevrons that feel drawn into the pad. Keep ≥48px sectors and clear pressed,
   suggested, focus and disabled states.

@@ -1,0 +1,248 @@
+{
+  "schema": "maze-family-preview-publication-receipt/v1",
+  "version": "0.22.2",
+  "preview": "V22-CAMERA1",
+  "status": "PUBLISHED_AND_PUBLIC_DOWNLOADS_VERIFIED",
+  "preparedAtUtc": "2026-09-05T23:07:24.678Z",
+  "runtimeSourceCommit": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+  "packagingDocumentationCommit": "b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c",
+  "publication": {
+    "at": "2026-09-05T23:04:16.223Z",
+    "runtimeSourceCommit": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "releaseId": 383399096,
+    "releaseUrl": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.2",
+    "tag": {
+      "ref": "refs/tags/v0.22.2",
+      "node_id": "REF_kwDOUKIx0rFyZWZzL3RhZ3MvdjAuMjIuMg",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs/tags/v0.22.2",
+      "object": {
+        "sha": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+        "type": "commit",
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits/820ed39f00e8c6bd808a0c084ccc2c67396ebb13"
+      }
+    },
+    "prerelease": true,
+    "draft": false,
+    "publishedAt": "2026-09-05T23:04:03Z",
+    "downloads": [
+      {
+        "name": "Maze-so-Puzzle-0.22.2-V22-CAMERA1-820ed39-locked-portable.exe",
+        "bytes": 173379584,
+        "sha256": "e6753a7a62ad2f6f8525154b578b3ac3068342b52f795779f01d2391288ea7e9",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.2/Maze-so-Puzzle-0.22.2-V22-CAMERA1-820ed39-locked-portable.exe",
+        "httpStatus": 200,
+        "assetId": 546409696,
+        "githubDigest": "sha256:e6753a7a62ad2f6f8525154b578b3ac3068342b52f795779f01d2391288ea7e9",
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-CAMERA1-v0.22.2-manifest.json",
+        "bytes": 21497,
+        "sha256": "3c261aea3d481b98a3e8d90bb7b00016109ddee80097ecb6225b30b3fc00ca19",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.2/V22-CAMERA1-v0.22.2-manifest.json",
+        "httpStatus": 200,
+        "assetId": 546411058,
+        "githubDigest": "sha256:3c261aea3d481b98a3e8d90bb7b00016109ddee80097ecb6225b30b3fc00ca19",
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-CAMERA1-v0.22.2-PLAYTEST.md",
+        "bytes": 3021,
+        "sha256": "d5d885e7434fa394861630cdb18e36ec38f7d7cf81fbe4eb8af231d3946e541c",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.2/V22-CAMERA1-v0.22.2-PLAYTEST.md",
+        "httpStatus": 200,
+        "assetId": 546411064,
+        "githubDigest": "sha256:d5d885e7434fa394861630cdb18e36ec38f7d7cf81fbe4eb8af231d3946e541c",
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-CAMERA1-v0.22.2-SHA256SUMS.txt",
+        "bytes": 326,
+        "sha256": "a1d66c1c5765dd62b1271c28f6dedf28145d2ab9254694d9dd4b5314152d0acb",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.2/V22-CAMERA1-v0.22.2-SHA256SUMS.txt",
+        "httpStatus": 200,
+        "assetId": 546411070,
+        "githubDigest": "sha256:a1d66c1c5765dd62b1271c28f6dedf28145d2ab9254694d9dd4b5314152d0acb",
+        "independentPublicDownloadMatch": true
+      }
+    ]
+  },
+  "ci": {
+    "runId": 33997389203,
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33997389203",
+    "headSha": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 101390186898,
+        "name": "verify",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33997389203/job/101390186898"
+      },
+      {
+        "id": 101390186964,
+        "name": "desktop",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33997389203/job/101390186964"
+      }
+    ]
+  },
+  "web": {
+    "canonicalUrl": "https://maze-so-puzzle.vercel.app/",
+    "verifiedAtUtc": "2026-09-05T23:01:37.382Z",
+    "allBytesMatch": true,
+    "files": [
+      {
+        "path": "/",
+        "status": 200,
+        "bytes": 1070,
+        "sha256": "2fe4549b873375130cd75fbc0ec69fc564f6d83bc8fec0094dee36b6026c740f",
+        "localSha256": "2fe4549b873375130cd75fbc0ec69fc564f6d83bc8fec0094dee36b6026c740f",
+        "match": true
+      },
+      {
+        "path": "/assets/index-Crk0m1JT.js",
+        "status": 200,
+        "bytes": 563765,
+        "sha256": "22507ba86f72b08ce949e8b300d68de9f47845b6e9d7fe6580d2d473573c6965",
+        "localSha256": "22507ba86f72b08ce949e8b300d68de9f47845b6e9d7fe6580d2d473573c6965",
+        "match": true
+      },
+      {
+        "path": "/assets/index-B5gBig9q.css",
+        "status": 200,
+        "bytes": 116102,
+        "sha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "localSha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "match": true
+      }
+    ],
+    "statuses": [
+      {
+        "id": 53612131445,
+        "state": "success",
+        "context": "Vercel",
+        "url": "https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/2BdmrPnd1rho9P1Agcj9WJHxgaLR"
+      }
+    ],
+    "deployments": [
+      {
+        "id": 6286775028,
+        "sha": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+        "environment": "Production",
+        "statuses": [
+          {
+            "id": 17881518034,
+            "state": "success",
+            "url": "https://maze-so-puzzle-l2nsn6luo-jasons-projects-6714ffa7.vercel.app"
+          }
+        ]
+      },
+      {
+        "id": 6286627501,
+        "sha": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+        "environment": "Preview",
+        "statuses": [
+          {
+            "id": 17881136341,
+            "state": "success",
+            "url": "https://maze-so-puzzle-47j5s0pyh-jasons-projects-6714ffa7.vercel.app"
+          }
+        ]
+      }
+    ]
+  },
+  "native": {
+    "status": "pass",
+    "scope": "Maze2 geometry, three steps, normal OS close/reopen/resume at eight steps, second OS close",
+    "runtime": "152.0.4191.62",
+    "profile": {
+      "identifier": "com.ame.mazesopuzzle.preview.fpui1",
+      "smokeIsolation": "New synthetic WebView2 profile; no Human profile copied or modified",
+      "privateRawProfilePublished": false
+    },
+    "limits": [
+      "No native timing qualification",
+      "No physical iPad/Safari evidence",
+      "Unchanged minimum-window configuration not requalified in this smoke",
+      "No signing/installer/clean-machine qualification"
+    ],
+    "titleExit": "Not qualified: closes web content but leaves native window. Both failed attempts retained; separate follow-up accepted by Sol as nonblocking for this camera experiment."
+  },
+  "build": {
+    "schema": "maze-performance-build-provenance/v1",
+    "generatedAtUtc": "2026-09-05T22:43:55.405Z",
+    "commit": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "runtimeInputsSha256": "8dc7519bfbd91fa24ea3e4b0df962df37b75a03ca6de3aa5331e5d56766d7b17",
+    "distFingerprintSha256": "b7a3a502949f4644c840b81830e94b57dad5dd9bcfeb2dc4ac01dc7d884e30fe",
+    "buildCommand": "npm run build"
+  },
+  "budgets": {
+    "jsGzip9Bytes": 153274,
+    "jsLimit": 153307,
+    "jsHeadroom": 33,
+    "cssGzip9Bytes": 23512,
+    "cssLimit": 30227,
+    "publicDeliveryBytes": 164988031,
+    "publicLimit": 164988031,
+    "newAllocation": false
+  },
+  "checks": {
+    "project": {
+      "command": "npm test -- --maxWorkers=1",
+      "passed": 499,
+      "files": 49,
+      "durationSeconds": 100.68,
+      "evidence": "Observed successful exact-frozen-source command output in orchestrator task; no standalone raw project JSON report was emitted"
+    },
+    "typescriptAndProductionBuild": "passed",
+    "performanceContracts": "passed",
+    "desktop": "cargo check --locked and optimized no-bundle native build passed",
+    "productionAudit": "0 vulnerabilities",
+    "diffCheck": "passed",
+    "input": "Final selected run 18 passes / 1 Playwright clock-setup failure; unchanged isolated rerun 1/1 pass. Not a single 19/19 run.",
+    "cameraGeometry": "96 mount/return/resize samples and 76 moving samples, zero sampled violations; 20-step final route zero world left/top mutations.",
+    "visual": "24 baseline/candidate title/Home/five-follower-maze captures across four viewports; geometry regression check, not pixel equivalence or device qualification.",
+    "canonical": {
+      "startTime": "2026-09-05T23:01:00.925Z",
+      "duration": 30705.063,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "canonicalObserverCorrection": "First canonical run5/6: old observer read percentage world offsets as pixels. Corrected test-only percentage conversion, unchanged assertion tolerances/runtime; complete rerun6/6. Corrected observer hash recorded above and committed separately from frozen runtime."
+  },
+  "review": {
+    "reviewer": "Actual GPT-5.6 Sol High delegated read-only",
+    "author": "GPT-6 Astra",
+    "source": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "decisions": [
+      "Approved fixed-origin percentage coordinate experiment after source/algebra/hash-bound evidence review.",
+      "Recommended percentages to eliminate new world dependence on cached pixel dimensions before ResizeObserver.",
+      "Approved final canonical test-observer percent-to-pixel correction; unchanged assertions and runtime.",
+      "Title Exit defect does not block narrow camera preview: normal OS close works and save survives; disclose and route UI-NATIVE-EXIT-01."
+    ],
+    "caveat": "Future rectangular board would need separate X/Y dimensions in historical square-board observer; runtime camera denominator already handles grid axes independently."
+  },
+  "attachmentPolicy": "The four downloaded assets and tag are immutable. Later documentation updates do not rewrite them.",
+  "openGates": [
+    "Minimum graphics helped the physical iPad only slightly in v0.22.1. No v0.22.2 iPad result yet.",
+    "Measured LayoutCount did not improve; busy-host frame timings are report-only and do not prove iPad benefit.",
+    "Earlier route/parser/clock/solver-contention failures are retained in the source review; no test timeouts or geometry tolerances increased.",
+    "Pace modes, stationary rescues, Tessera repair, phone UI and audio readiness are not included.",
+    "No sustained native timing, signing, installer, offline, clean-machine, physical iPad/TV/controller or family acceptance.",
+    "Title Exit leaves an empty native window; normal OS window close/save/reopen verified. Separate UI-NATIVE-EXIT-01 follow-up, not fixed here."
+  ],
+  "rollback": {
+    "runtime": "8442b79db11a59e23f23c59f213116e7b8f54592",
+    "release": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1",
+    "instructions": "Close preview normally before switching; preserve private profile backup and immutable artifacts. Canonical URL moves; coordinate reviewed redeploy/revert, never reset shared history."
+  },
+  "next": "P1 affected-iPad Maze2; resume PERF-02 isolation if poor. Otherwise/while feedback pending, separate Tessera publication then actual Sol PLAY-A pace with Astra review, followed by stationary rescue. No current runtime writer.",
+  "evidenceRoots": [
+    "C:/GameDev/maze-game-qa/releases/v0222",
+    "C:/GameDev/maze-game-qa/output/playwright/perf02"
+  ],
+  "privacy": "Only compact summaries/hashes committed. Raw screenshots and synthetic/private profiles not shipped; no Human profile copied or edited."
+}

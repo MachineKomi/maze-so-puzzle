@@ -1,6 +1,6 @@
 # Family playtest checklist
 
-Updated: 2026-09-05. Owner: Sol/Astra orchestrators.
+Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 The Human will test when available; safe development continues meanwhile.
 Keep completed observations and build identities when newer builds arrive.
 
@@ -8,9 +8,11 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- [Download the v0.22.1 Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.1/Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe)
-  — this desktop build is available. Its [release page](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1)
-  contains the original playtest instructions and checksums.
+- [Download the v0.22.2 Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.2/Maze-so-Puzzle-0.22.2-V22-CAMERA1-820ed39-locked-portable.exe)
+  — a focused camera experiment, not a proven iPad fix. Its
+  [release page](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.2)
+  has instructions/checksums. Close Windows with X or Alt+F4; the title Exit
+  button has a separately queued native-window issue.
 - [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
 
 You do not need to complete everything in one sitting. The affected iPad movement
@@ -23,6 +25,7 @@ to create a cold test; preserving your progress is more important.
 | --- | --- | --- |
 | v0.22.0 | Prior release; reported phone still showed this version when BGM became prompt | Audio observation below is useful context, not a v0.22.1 performance result. |
 | v0.22.1 V22-PERF1, runtime `8442b79` | Published web/Windows performance and input preview | P1–P4 below. Music, speeds, stationary rescue and Dolphin pixels are unchanged. |
+| v0.22.2 V22-CAMERA1, runtime `820ed39` | Published web/Windows camera-origin experiment | P1 is the priority: Maze 2 iPad taps and scenery scrolling. P2/P4 regression checks as convenient. No new audio, pace, rescue, Dolphin or phone-UI change. |
 | ART-HOTFIX-01 successor | In development; no new build claimed here yet | P5 becomes testable only after its exact build/link is recorded. |
 
 ## Specific checks and results
@@ -47,7 +50,7 @@ failure before implementation can proceed.
 
 ### P1 — Movement on the affected iPad (highest value)
 
-For the next corrected candidate, begin with Maze 2 (Shiny Sword), not only a
+For **v0.22.2**, begin with Maze 2 (Shiny Sword), not only a
 late 23×23 level: ordinary straight movement, frequent turns and a single tap.
 Report whether the maze scrolling and Ame's movement now feel coordinated. If
 convenient, compare early edge-clamped movement with movement where the scenery
@@ -66,6 +69,10 @@ Include iPad model, iPadOS, browser/home-screen app, charging/Low Power Mode and
 rough play duration. A short natural session is useful; a longer session can
 come later. v0.22.1's reported iPad run failed; the individual settings comparison
 and any successor-build acceptance remain pending.
+
+v0.22.2 outcome: **awaiting Human feedback**. Desktop geometry and native
+save/reopen pass; neither proves physical iPad performance. It is fine to report
+only “better / unchanged / worse” before doing any longer comparisons.
 
 ### P2 — Holding through interactions
 

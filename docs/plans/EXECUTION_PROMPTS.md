@@ -4,6 +4,17 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
+**Current handoff, 2026-09-06:** Astra's PERF-02A is published and actual-Sol-
+reviewed as **v0.22.2 V22-CAMERA1**, frozen `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`.
+[Receipt](../../release/V22-CAMERA1-v0.22.2-release-verification.json).
+No writer is currently running. P1 is now Maze 2 on the affected iPad in v0.22.2;
+efficacy is unproven. If still poor, Astra resumes the next isolated PERF-02
+probe. While feedback is pending, root completes the separate Tessera publication
+integration, then assigns actual Sol PLAY-A pace and Astra read-only review,
+followed by PLAY-B stationary rescue. UI-NATIVE-EXIT-01 is queued in V22-UI-01.
+Do not rerun the completed camera implementation or infer all performance gates
+passed. Older in-flight wording below is historical, superseded by this handoff.
+
 The v0.22.0 Human/Opus review is reconciled. Read the independent
 [Astra](../reviews/2026-09-05-astra-v0220-review.md) and
 [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the

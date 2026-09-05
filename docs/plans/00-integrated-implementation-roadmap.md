@@ -4,6 +4,16 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
+**Current delivery, 2026-09-06:** PERF-02A is published as **v0.22.2 V22-CAMERA1**
+at `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`, with actual Sol independent review,
+web/Windows functional checks and verified public downloads. See its
+[receipt](../../release/V22-CAMERA1-v0.22.2-release-verification.json).
+Physical iPad improvement is **not established**; prioritize P1 Maze 2. A failed
+result resumes the next controlled PERF-02 moving-surface/terrain probe. Pending
+feedback does not prevent separate Tessera publication and reviewed PLAY-A/PLAY-B
+work. UI-NATIVE-EXIT-01 joins V22-UI-01; the current workaround is normal OS close.
+The following v0.22.1 publication paragraphs are retained as historical context.
+
 The joint review of the complete v0.22.0 playtest, 51 images and final Opus pack
 is complete. Read the independent [Astra](../reviews/2026-09-05-astra-v0220-review.md)
 and [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments plus the
@@ -54,7 +64,9 @@ The Human has explicitly asked development to continue while playtesting is
 deferred. Missing affected-device feedback remains open evidence rather than a
 blanket execution stop. Preserve the fixed v0.22.1 artifacts for comparison;
 review each subsequent candidate and keep its changes identifiable. The current
-next step is ART-HOTFIX-01, then V22-PERF-02, V22-PLAY-01 and V22-UI-01 as scoped. Actual
+next step after the delivered PERF-02A experiment is separate ART-HOTFIX-01
+integration, then V22-PLAY-01 and V22-UI-01 as scoped, subject to any required
+PERF-02 return from the new iPad result. Actual
 regressions still warrant correction before dependent presentation work.
 
 [AUDIO-01](AUDIO-01-readiness-and-sound-design.md) advances bounded BGM/SFX
@@ -96,7 +108,7 @@ allocation and final project/art/performance checks; Git backup precedes MOVE-01
 Preserve the original assignment as history. See the complete 17-item v0.20.1 intake at
 `../playtests/2026-09-05-v0201-wishlist.md` and §5.13D below.
 
-Current sequence: **01/MOVE-01 engineering history → UI-03 corrected FP-UI1 publication → V22-PERF-01-R1 / v0.22.1 (device feedback pending without blocking independent work) → ART-HOTFIX-01 → V22-PLAY-01 → V22-UI-01 → AUDIO-01A → V22-HOLE-01 → root PT36 preflight → 04 → 02 → remaining UI-02 → 08 → 05 → 07B /
+Current sequence: **01/MOVE-01 engineering history → UI-03 corrected FP-UI1 publication → V22-PERF-01-R1 / v0.22.1 → V22-PERF-02A / v0.22.2 (device result pending; return to PERF-02 if needed) → ART-HOTFIX-01 → V22-PLAY-01 → V22-UI-01 → AUDIO-01A → V22-HOLE-01 → root PT36 preflight → 04 → 02 → remaining UI-02 → ALT-P1-01 → 08 → 05 → 07B /
 FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
 RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
 fresh specialist tasks from root-prepared prompts. Root may delegate independent read-only/documentation

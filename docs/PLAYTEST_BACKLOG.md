@@ -4,6 +4,22 @@
 release/acceptance and execution state. This backlog owns intake, routing and
 acceptance slices; earlier dated status paragraphs are historical evidence.
 
+## New engineering intake — 2026-09-06
+
+**UI-NATIVE-EXIT-01 — title Exit leaves an empty Windows window.** During
+v0.22.2 packaging, the unchanged `FrontDoorScreen` `window.close()` path closed
+the web content/CDP page but left the native window/process alive. Normal OS
+window X/Alt+F4 closed it; reopening restored the eight-step saved run. Two
+failed Exit attempts remain in external release evidence. This is not an iPad
+finding or an accepted Exit pass. Sol reviewed it as nonblocking for the narrow
+camera experiment, with explicit release instructions to use normal window close.
+
+Owner: Sol in V22-UI-01, Astra review. Implement a platform-aware normal-close
+action using the existing Tauri authority, preserving browser-safe close guidance,
+save durability and profile isolation. Verify title Exit actually terminates the
+native process, then reopen/resume; retain a safe web fallback. No frozen release
+or historical artifact is rewritten. Status: confirmed in native smoke, queued.
+
 The [complete v0.22.0 Human feedback](user-playtests/v0220-playtest-feedback.md)
 reports a huge improvement, especially on iPad/desktop, with specific remaining
 defects and refinements. [V22-01–20](reviews/2026-09-05-astra-v0220-review.md)
