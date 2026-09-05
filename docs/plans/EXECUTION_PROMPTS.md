@@ -75,8 +75,11 @@ checks and measurement status. After Astra finishes, the next turn is:
 Independently review Astra's exact V22-PERF-01 candidate on
 codex/v22-perf-01-astra. Read JOINT_ORCHESTRATION_STATE, the candidate receipt,
 scope contract, compact evidence and exact base-to-candidate diff. Verify HEAD
-and origin before relying on the handoff. Review read-only: do not alter runtime,
-merge main, version, release or deploy during this turn.
+and origin before relying on the handoff. Runtime review is read-only: do not
+alter runtime, merge main, version, release or deploy during this turn. Preserve
+your verdict in a dated Sol review and update joint orchestration status; commit
+and push that documentation-only handoff on the candidate branch so it survives
+a task/device change.
 
 Challenge input-source ownership, success-chain suspension and current-direction
 resumption, cancellation/blockers, scene binding lifecycle, unchanged Full

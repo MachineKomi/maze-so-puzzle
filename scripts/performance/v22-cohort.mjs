@@ -193,6 +193,30 @@ async function segment(page, cdp, input, direction, length, observeLive = false)
   try {
     await page.waitForFunction(expected => Number(/^\d+/.exec(document.querySelector(".step-pill")?.getAttribute("aria-label") ?? "")?.[0]) >= expected,
       before.steps + length, { polling: "raf", timeout: 10_000 });
+  } catch (error) {
+    // Read only after failure, before releasing the gesture. Do not alter the
+    // measured success path, timeout, route or final-state assertions.
+    let observed;
+    try {
+      observed = await page.evaluate(() => {
+        const board = document.querySelector(".maze-board");
+        const cursor = document.querySelector(".touch-joystick");
+        return { at: performance.now(), hidden: document.hidden, focused: document.hasFocus(),
+          activeElement: document.activeElement?.className,
+          semantic: document.querySelector(".maze-map-card .sr-only")?.textContent,
+          steps: document.querySelector(".step-pill")?.getAttribute("aria-label"),
+          travel: board?.getAttribute("data-travel-state"),
+          cursor: cursor?.outerHTML, dialogs: [...document.querySelectorAll('[role="dialog"]')].map(node => node.textContent),
+          metrics: window.__v22Metrics };
+      });
+    } catch (captureError) { observed = { captureError: captureError.message }; }
+    const failure = { classification: "failed-row-not-completed-evidence", input, direction, before,
+      expectedSteps: before.steps + length, length, observed, message: error.message };
+    const file = resolve(output, "failed-segment.json");
+    const bytes = JSON.stringify(failure);
+    await writeFile(file, bytes);
+    inventory.failedSegment = { artifact: file, sha256: hash(bytes) };
+    throw error;
   } finally {
     if (input === "keyboard") await page.keyboard.up(keys[direction]);
     else await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });

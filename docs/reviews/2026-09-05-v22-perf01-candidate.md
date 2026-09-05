@@ -66,7 +66,8 @@ will be attached below at the completed candidate checkpoint.
    effect dependencies did not see the newly mounted board. Candidate-v3 adds
    explicit screen/mount binding invalidation and ignores key-up events from a
    retired input source. The rejected v2 report remains external; final acceptance
-  requires its complete77-case rerun including Static first board tap/reentry.
+   required its complete 77-case rerun including Static first board tap/reentry;
+   that rerun passed as recorded below.
 
 9. Default-parallel `npm run check` completed 491/493 assertions but timed out
    two unchanged solver cases (Friendship Crown Vault and generated size variety).
@@ -81,7 +82,27 @@ will be attached below at the completed candidate checkpoint.
     completed raw rows; its partial/rejected receipt is retained, with no invented
     final summary. V4 uses one standard source declaration; the build emits both
     standard and prefixed `none`. A live trusted-touch computed-style regression
-    now guards this. Baseline36 rows remain valid; final candidate rows are rerun.
+    now guards this. Baseline 36 rows remain valid; the final candidate matrix
+    subsequently completed all 36 rows.
+
+11. Codex crashed during the first candidate Full ten-minute run. Recovery found
+    only its fixture and source/delivery manifests: no surviving harness process,
+    completed raw row or final summary. `candidate-v4-full-soak-cohort` is
+    incomplete and excluded, not a timing or gameplay pass. The recovery run
+    uses a new output directory and the same frozen V4 bytes. The crash/restart
+    also separates host sessions; sustained before/after timings cannot be
+    treated as a controlled causal comparison.
+
+12. The first recovery (`candidate-v4-full-soak-recovery-cohort`) failed the
+    unchanged ten-second segment wait after approximately two minutes of run
+    setup/play. It produced an inventory failure but no completed row. Its
+    available-RAM readings fell from 1,061,011,456 to 508,276,736 bytes; that is
+    context, **not proof of the cause**. The original harness discarded live
+    game state on failure. A failure-only capture now preserves the pre-release
+    semantic state, cursor, focus, dialogs and accumulated metrics without
+    changing the successful path, timeouts, route or assertions. A separate
+    diagnostic run uses the identical frozen V4 source/dist. The failed run is
+    not erased or upgraded by any later successful attempt.
 
 The backed-up runtime checkpoint before that one-property correction is
 `5e244b3d52c46ee9528e9e08d07ee1630b250944`. V3 and V4 production JavaScript
@@ -128,7 +149,75 @@ not a claimed new full 79-case rerun.
   `35923b068d1985cf94d6af56ff9ebb3cc80416f2d67dc8e9f46c4b2704e0b407`;
   frozen v3 dist fingerprint:
   `489fedf94d12a1775213cb6055f0c9b98767d8d4213d0d7fff9474d72975695b`.
-  Longer counter/matrix/soak comparisons are in progress, not yet acceptance.
+  Counters and the complete matrix are reported below; physical acceptance is
+  still separate from these engineering checks.
+
+## Directly measured work reduction
+
+Separate production diagnostic builds count committed work; their timings are
+not shipping performance authority. Baseline and candidate fixture JSON hashes
+match exactly (`247e99a8d7e5686a4e0005cfb182ddd7fd26e3fe749e4a6a24e2a90f464a47d3`).
+V3 counters apply to V4's byte-identical JS and unchanged Full scene rules.
+
+| Probe | Frozen baseline | Candidate | Required semantics |
+| --- | --- | --- | --- |
+| 30 neutral trusted-touch jitters: App commits | 30 | 0 | Zero moves in both |
+| Same jitters: MiniMap commits / constructed cells | 30 / 15,870 | 0 / 0 | Same view/reveal/objects |
+| Same jitters: follower DOM scans | 30 | 0 | Same actors/order |
+| Two Sound open/close cycles: App commits | 4 | 4 | UI still updates |
+| Same Sound cycles: MiniMap commits / cells / follower scans | 4 / 2,116 / 4 | 0 / 0 / 0 | Zero moves in both |
+| 40 ordinary board-driven moves: App commits | 48 | 40 | Exactly 40 legal moves |
+| Same ordinary moves: repeated follower DOM scans | 48 | 0 | Bound nodes reused, geometry still checked |
+
+The minimap still intentionally updates for actual movement; the keyboard/pad
+40-move rows construct 21,160 cells. The candidate does not claim to eliminate
+all minimap work or avoid its semantic updates. Forty synchronous active-run
+saves remain forty; measured complete save calls total approximately 18.7–22 ms
+before and 16.5–18 ms after on this host. These small noisy timing differences
+do not justify a save-policy change or a causal performance claim.
+
+Final V4 runtime-input fingerprint:
+`eb80b41462ce79e9997895c08215bbcd921eb45b13505e8975786f1c97e9662d`;
+dist fingerprint:
+`f485ae42fead041b9d0419e73030fc1b85f7b2c7b60e01232427ff85cfaea315`.
+Runtime checkpoint: `a92257a2ecb234c314b00ddaafb15c4d206771c2` on the candidate
+branch. Later evidence-only commits must not change those delivered bytes.
+
+## Production matrix and evidence quality
+
+The completed matrix has **36 baseline and 36 final V4 rows**: twelve conditions
+times three sequential samples, covering 0/2/5 legal followers, board drag,
+keyboard and fixed pad, Full/Lite and separate Reduced motion. Each row made
+exactly 40 legal moves and returned to the expected position with matching
+normal saved state and no page errors. The configured minimum was 6 seconds,
+not the harness's 12-second default; complete 20-move cycles extend the window.
+
+- Baseline per-row p95 ranged 16.8–66.7 ms and p99 16.8–333.2 ms; V4 p95
+  16.8–33.4 ms and p99 16.9–50.0 ms. Reference p95 <=20 ms was observed in
+  12/36 baseline rows and 33/36 candidate rows. This is a report-only comparison,
+  not a qualified target pass or a low-end device result. No numeric p99 target
+  is currently defined by the performance budget; none is invented here.
+- Baseline recorded 46 LongTask entries, 44 strictly over 50 ms (worst 414 ms).
+  V4 recorded zero, **but its worst frame interval was still 582.9 ms** versus
+  baseline 1,382.2 ms. Some individual candidate frame tails were worse, including
+  zero-follower Full and five-follower Lite/Reduced. Zero LongTasks does not mean
+  zero stutter, or establish that a GPU/renderer problem has been solved.
+- Same-condition baseline p95 varied 16.9 →49.9 →16.8 ms without a code change.
+  Available host RAM also varied sharply; thermal state was not measured.
+  Sequential ordering, active development, randomly selected BGM and the later
+  crash/restart prevent a causal percentage-speedup claim. Only frozen code,
+  legal game state, route, browser, viewport and requested settings are matched.
+- Five-follower Lite has zero filtered scene images and two sampled running
+  board animations, versus eight filtered images and 23–25 sampled animations
+  in the corresponding Full scenes. Lite's live joystick computes `none` while
+  Full retains `blur(2px)`. Counts vary with animation phase; this directly proves
+  the named work is disabled, not how much iPad GPU time is saved.
+
+All observed >50 ms tasks remain explicitly **unattributed**. Their timestamps
+and durations are retained; the LongTask API's `self` label is not a function-
+level stack. Short single-factor traces did not establish a cause for those
+separate events. Attribution and clean-host variance are open evidence gates;
+do not relabel them as persistence, follower, raster or GPU faults.
 
 ## Static allocation
 
