@@ -1,9 +1,12 @@
 # V22-PERF-01 — sustained play and live-input correction
 
 Status: R1 is [independently accepted](../reviews/2026-09-05-sol-v22-perf01-r1-review.md)
-for a bounded v0.22.1 performance/input preview. Its delayed-chain and reverse
-ThumbPad takeover corrections are engineering-green; promotion/publication remains
-a separate Astra transaction. One recovery timeout, mixed sustained timing and
+and published as the bounded v0.22.1 V22-PERF1 performance/input preview at
+`8442b79db11a59e23f23c59f213116e7b8f54592`. Its delayed-chain and reverse
+ThumbPad takeover corrections are engineering-green; the separate Astra release
+transaction is complete. See the [publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
+and [affected-iPad playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md).
+One recovery timeout, mixed sustained timing and
 task attribution remain unresolved; no sustained-performance or Human/device
 acceptance is claimed. The
 [candidate receipt](../reviews/2026-09-05-v22-perf01-candidate.md) owns measured

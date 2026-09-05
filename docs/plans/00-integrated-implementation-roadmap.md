@@ -8,11 +8,16 @@ The joint review of the complete v0.22.0 playtest, 51 images and final Opus pack
 is complete. Read the independent [Astra](../reviews/2026-09-05-astra-v0220-review.md)
 and [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments plus the
 [reconciled 88-row ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The active candidate slice is
+The published engineering checkpoint is
 [V22-PERF-01](V22-PERF-01-sustained-play-and-live-input.md): Astra's narrow
 [R1](../reviews/2026-09-05-v22-perf01-r1-response.md) closes Sol's two returned
 input defects and is now [accepted](../reviews/2026-09-05-sol-v22-perf01-r1-review.md)
-for a bounded v0.22.1 preview promotion.
+and published as the bounded v0.22.1 V22-PERF1 preview. Runtime/tag source is
+`8442b79db11a59e23f23c59f213116e7b8f54592`; frozen attachment documentation is
+`487afcffb2f91b433f79cc67d5ce4fd29a013552`. The
+[publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
+records exact-source CI/Vercel, 26 canonical journeys, actual native saved-run/
+held-interaction/minimum checks and all four independently verified public downloads.
 It precedes affected-iPad qualification, the bounded Dolphin/pace/rescue work,
 and Sol-owned phone/Book/pad/pickup/victory refinement, while
 preserving the praised desktop/iPad UI. Claude's broad architecture, 9–15 FOV,
@@ -25,9 +30,12 @@ comparisons on `codex/v22-perf-01-astra`. An unexplained recovery timeout, mixed
 Full sustained timing and missing task attribution remain open. Sol's
 [original review](../reviews/2026-09-05-sol-v22-perf01-candidate-review.md)
 required actual final-phase unlock ownership and complete ThumbPad reset; the R1
-review accepts both for promotion. No successor feature plan is authorized merely
-by the candidate existing; clean v0.22.1 publication and affected-iPad evidence
-remain the current gate.
+review accepts both; clean v0.22.1 publication is complete. The current gate is
+the Human's affected-iPad Full+Full fresh/sustained, Lite+Full and Lite+Reduced
+comparison in the same large ordinary maze with about five followers. Green
+routes to ART-HOTFIX-01 then V22-PLAY-01; continued Lite+Reduced stutter routes
+to V22-PERF-02 isolation. V22-UI-01 and Agent 04 remain held. No next runtime
+slice began during publication.
 
 Status: manager-reviewed execution authority
 

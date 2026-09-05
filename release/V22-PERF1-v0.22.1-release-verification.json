@@ -1,0 +1,276 @@
+{
+  "schema": "maze-preview-publication-receipt/v1",
+  "version": "0.22.1",
+  "preview": "V22-PERF1",
+  "status": "PUBLISHED_AND_PUBLIC_DOWNLOADS_VERIFIED",
+  "runtimeSourceCommit": "8442b79db11a59e23f23c59f213116e7b8f54592",
+  "acceptedRuntimeCommit": "91678d1a7f97055dc2f167f8a3e7106226817306",
+  "reviewCommit": "c19128b7a45bc2179370bf55cfc8ab5851dbf008",
+  "packagingDocumentationCommit": "487afcffb2f91b433f79cc67d5ce4fd29a013552",
+  "publicationReceiptCommit": "Discover with git log -1 --format=%H -- release/V22-PERF1-v0.22.1-release-verification.json; exact final documentation SHA is in the handoff.",
+  "publicVerification": {
+    "at": "2026-09-05T21:00:52.875Z",
+    "runtimeSourceCommit": "8442b79db11a59e23f23c59f213116e7b8f54592",
+    "releaseId": 383372738,
+    "releaseUrl": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1",
+    "tag": {
+      "ref": "refs/tags/v0.22.1",
+      "node_id": "REF_kwDOUKIx0rFyZWZzL3RhZ3MvdjAuMjIuMQ",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs/tags/v0.22.1",
+      "object": {
+        "sha": "8442b79db11a59e23f23c59f213116e7b8f54592",
+        "type": "commit",
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits/8442b79db11a59e23f23c59f213116e7b8f54592"
+      }
+    },
+    "prerelease": true,
+    "draft": false,
+    "publishedAt": "2026-09-05T21:00:39Z",
+    "downloads": [
+      {
+        "name": "Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe",
+        "bytes": 173379584,
+        "sha256": "8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.1/Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe",
+        "httpStatus": 200,
+        "assetId": 546307515,
+        "githubDigest": "sha256:8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c",
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-PERF1-v0.22.1-manifest.json",
+        "bytes": 26867,
+        "sha256": "6c724cbc31513cc15b41d1f45734c312bf17c6c976fb518d1d92dfd428222e9c",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.1/V22-PERF1-v0.22.1-manifest.json",
+        "httpStatus": 200,
+        "assetId": 546308777,
+        "githubDigest": "sha256:6c724cbc31513cc15b41d1f45734c312bf17c6c976fb518d1d92dfd428222e9c",
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-PERF1-v0.22.1-PLAYTEST.md",
+        "bytes": 3653,
+        "sha256": "a634414821d4908aea147b7412b1d24d1dcbaecff236109433aab6bd694b283e",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.1/V22-PERF1-v0.22.1-PLAYTEST.md",
+        "httpStatus": 200,
+        "assetId": 546308784,
+        "githubDigest": "sha256:a634414821d4908aea147b7412b1d24d1dcbaecff236109433aab6bd694b283e",
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-PERF1-v0.22.1-SHA256SUMS.txt",
+        "bytes": 320,
+        "sha256": "4e9b130a7dbe0a39163f8c237d89a4f2265e6fbf0eb3ff8000046f451dd1b825",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.1/V22-PERF1-v0.22.1-SHA256SUMS.txt",
+        "httpStatus": 200,
+        "assetId": 546308791,
+        "githubDigest": "sha256:4e9b130a7dbe0a39163f8c237d89a4f2265e6fbf0eb3ff8000046f451dd1b825",
+        "independentPublicDownloadMatch": true
+      }
+    ]
+  },
+  "canonicalWeb": {
+    "canonicalUrl": "https://maze-so-puzzle.vercel.app/",
+    "verifiedAtUtc": "2026-09-05T20:57:03.166Z",
+    "allBytesMatch": true,
+    "files": [
+      {
+        "path": "/",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bytes": 1070,
+        "sha256": "1cbf3cbdab0c22d294ddb2f65721e915ecbcaa422dccf64aa9040e7d067212b8",
+        "localSha256": "1cbf3cbdab0c22d294ddb2f65721e915ecbcaa422dccf64aa9040e7d067212b8",
+        "match": true
+      },
+      {
+        "path": "/assets/index-DFSTcLiu.js",
+        "status": 200,
+        "contentType": "application/javascript; charset=utf-8",
+        "bytes": 563683,
+        "sha256": "b729083bd940e6f48b45687c47a6d81133e21601d4dcc90c6ea1b3416f25569b",
+        "localSha256": "b729083bd940e6f48b45687c47a6d81133e21601d4dcc90c6ea1b3416f25569b",
+        "match": true
+      },
+      {
+        "path": "/assets/index-B5gBig9q.css",
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 116102,
+        "sha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "localSha256": "1304e1872b2cf2a628de859af9cdaff76c918b032448817de81450d98e7eb8a1",
+        "match": true
+      }
+    ],
+    "vercelStatuses": [
+      {
+        "id": 53609530882,
+        "state": "success",
+        "context": "Vercel",
+        "targetUrl": "https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/6XHZa3JELH5SKtUoGc1j2X8Src4c",
+        "createdAt": "2026-09-05T20:50:41Z"
+      }
+    ],
+    "deployments": [
+      {
+        "id": 6285663984,
+        "sha": "8442b79db11a59e23f23c59f213116e7b8f54592",
+        "environment": "Production",
+        "statuses": [
+          {
+            "id": 17878766409,
+            "state": "success",
+            "environment": "Production",
+            "environmentUrl": "https://maze-so-puzzle-38c2xilzc-jasons-projects-6714ffa7.vercel.app",
+            "createdAt": "2026-09-05T20:50:41Z"
+          }
+        ]
+      },
+      {
+        "id": 6285381715,
+        "sha": "8442b79db11a59e23f23c59f213116e7b8f54592",
+        "environment": "Preview",
+        "statuses": [
+          {
+            "id": 17878079704,
+            "state": "success",
+            "environment": "Preview",
+            "environmentUrl": "https://maze-so-puzzle-m4gg2dw3v-jasons-projects-6714ffa7.vercel.app",
+            "createdAt": "2026-09-05T20:20:13Z"
+          }
+        ]
+      }
+    ]
+  },
+  "exactRuntimeCI": {
+    "runId": 33991271551,
+    "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33991271551",
+    "headSha": "8442b79db11a59e23f23c59f213116e7b8f54592",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 101373826857,
+        "name": "desktop",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33991271551/job/101373826857"
+      },
+      {
+        "id": 101373827057,
+        "name": "verify",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33991271551/job/101373827057"
+      }
+    ]
+  },
+  "checks": {
+    "project": {
+      "passed": 493,
+      "files": 49,
+      "durationSeconds": 56.28,
+      "scenarioFixtures": 4
+    },
+    "input": {
+      "startTime": "2026-09-05T20:26:25.178Z",
+      "duration": 243348.84100000001,
+      "expected": 87,
+      "skipped": 2,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "shared": {
+      "startTime": "2026-09-05T20:33:03.805Z",
+      "duration": 66229.492,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "canonical": {
+      "startTime": "2026-09-05T20:57:16.439Z",
+      "duration": 75423.60299999999,
+      "expected": 26,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "desktop": "cargo check --locked passed",
+    "productionAudit": "0 vulnerabilities",
+    "diffCheck": "passed",
+    "visualScope": "Accepted Full/Lite runtime preserved byte-for-byte as Git objects, excluding coordinated version metadata",
+    "webReferenceProject": {
+      "passed": 493,
+      "failed": 0,
+      "files": 49
+    },
+    "documentationEol": "Packaging attributes retain LF for RELEASE_CHECKLIST.md, preserving the existing documentation test without editing its assertion."
+  },
+  "native": {
+    "status": "pass",
+    "method": "Real production Windows WebView2 connected through local CDP; hidden normal launch, screenshot/DOM/semantic observations; no runtime hook",
+    "finalState": {
+      "steps": 10,
+      "position": {
+        "x": 5,
+        "y": 13
+      }
+    },
+    "profileOriginalUnchanged": true,
+    "clientMinimum": "960×540 verified",
+    "durationSeconds": 24.5
+  },
+  "buildIdentity": {
+    "native": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-05T20:36:52.758Z",
+      "commit": "8442b79db11a59e23f23c59f213116e7b8f54592",
+      "runtimeInputsSha256": "aa4de2d033e64a00ea9062f3d0f9fbc7c44e8530f0d48bd5ce40979111f805d4",
+      "distFingerprintSha256": "cd798cf5c887178691dcdec211e853ea7ba270baf1f5688fbf96580729b2bd4f",
+      "buildCommand": "npm run build"
+    },
+    "webReference": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-05T20:56:57.596Z",
+      "commit": "8442b79db11a59e23f23c59f213116e7b8f54592",
+      "runtimeInputsSha256": "f83bec2836ac16a9c43ae1eb5b0eba4c97050ec80ba50dc0078456920bfd2a32",
+      "distFingerprintSha256": "a56b0954d45a289fe86db81fd85d969a174500b3cc9a2f278f103e386df5d830",
+      "buildCommand": "npm run build"
+    },
+    "htmlCheckoutIdentity": {
+      "native": {
+        "bytes": 1090,
+        "sha256": "7765d22ce1f594b954d502d917bf2e457d99e64024100e47d302304a83468d88",
+        "sourceCheckout": "Windows CRLF"
+      },
+      "canonicalReference": {
+        "bytes": 1070,
+        "sha256": "1cbf3cbdab0c22d294ddb2f65721e915ecbcaa422dccf64aa9040e7d067212b8",
+        "sourceCheckout": "Committed LF"
+      },
+      "difference": "Only CR line terminators differ. Canonical HTML/JS/CSS are compared as exact raw bytes to the clean LF reference; the native binary remains the original immutable clean Windows build."
+    },
+    "rawCanonicalHtmlJsCssParity": true,
+    "nativeAndWebJsCssByteIdentical": true
+  },
+  "immutableAttachments": "Three frozen text attachments are unchanged from packagingDocumentationCommit and match the public downloads. The checksum file hashes the other three assets; this later receipt binds all four, including the checksum file.",
+  "scope": "Six version-metadata files are the only runtime changes relative to accepted R1. Release documentation/attributes are separate. No successor feature work began.",
+  "openGates": [
+    "Affected physical iPad/Safari fresh/sustained Full+Full, Lite+Full, Lite+Reduced comparison in the same large 23x23 maze with about five followers.",
+    "Full sustained performance remains mixed/report-only: original unexplained recovery timeout, worse Full p95/p99, occasional tails and missing >50ms causal attribution remain open.",
+    "Existing soaks cover one corridor in one maze; multi-maze music/resource retention and timed Tauri/WebView2 remain unqualified.",
+    "Two authored jump-door/jump-combat fixtures remain unavailable; actual jump-rescue coverage does not fabricate those variants.",
+    "Phone/Book/victory, pace modes, stationary rescue, Tessera and Alex are separate future work.",
+    "Human/family acceptance, clean-machine install, signing, offline, controller/TV/Steam Deck and accessibility speech qualification remain open.",
+    "Agent 04 and V22-UI-01 remain held. Green device comparison routes to ART-HOTFIX-01 then V22-PLAY-01; continued Lite+Reduced stutter routes to V22-PERF-02."
+  ],
+  "nextAction": "Human affected-iPad Full+Full fresh/sustained, Lite+Full and Lite+Reduced comparison. Astra HIGH evaluates the result. Green routes to ART-HOTFIX-01 then V22-PLAY-01; persistent Lite+Reduced stutter routes to V22-PERF-02. V22-UI-01 and Agent 04 remain held.",
+  "rollback": {
+    "portable": "Retain immutable v0.22.0 FP-UI1 68e303d portable; close preview before switching; same profile namespace and unchanged schemas; preserve profile backup.",
+    "web": "Redeploy prior verified runtime 68e303da680d5aec0ba71154949c5a2a0d1697ae after coordination; canonical URL moves. No shared-history reset.",
+    "source": "Use a separate reviewed revert transaction; do not overwrite main, frozen evidence or prior binaries."
+  },
+  "evidenceRoot": "C:/GameDev/maze-game-qa/releases/v0221",
+  "privateProfilesPublished": false
+}

@@ -1,6 +1,56 @@
 # Release checklist
 
-## Current UI-03 correction — v0.22.0
+## Current V22-PERF1 performance/input preview — v0.22.1
+
+Published runtime/tag: `8442b79db11a59e23f23c59f213116e7b8f54592`.
+Accepted R1 runtime: `91678d1a7f97055dc2f167f8a3e7106226817306`; Sol review
+checkpoint: `c19128b7a45bc2179370bf55cfc8ab5851dbf008`. Frozen text attachments:
+`487afcffb2f91b433f79cc67d5ce4fd29a013552`. See the immutable
+[manifest](../release/V22-PERF1-v0.22.1-manifest.json),
+[publication receipt](../release/V22-PERF1-v0.22.1-release-verification.json)
+and [short playtest note](../release/V22-PERF1-v0.22.1-PLAYTEST.md).
+
+- [x] Verify exact source/remote ancestry and use isolated locked worktrees;
+  preserve accepted runtime except seven version fields across six metadata files.
+- [x] Pass 493/493 serial project tests, four scenario fixtures, TypeScript/build,
+  static budgets, production audit (0 vulnerabilities) and diff checks. A separate
+  same-SHA web-reference checkout also passed 493/493 after restoring committed LF
+  HTML/checklist line endings. Original failed attempts are retained.
+- [x] Pass 87 production input checks with the two unchanged unavailable authored
+  jump-door/jump-combat skips, plus the unchanged shared browser cohort (1/1).
+- [x] Pass locked Cargo compile (2m26s) and optimized no-installer build (10m31s).
+  Verify unsigned x64 PE/file/product version 0.22.1 and source/stage/final identity:
+  `Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe`, 173,379,584 bytes,
+  SHA-256 `8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c`.
+- [x] Observe actual native Title/Home/existing save, successful battle and held
+  continuation/release, normal close/reopen/resume at ten steps and 960×540 client
+  minimum. The 24.5-second smoke passed; the 334-file original FP-UI1 profile
+  remained hash-identical after testing a private copy. Namespace remains
+  `com.ame.mazesopuzzle.preview.fpui1` for the intended comparison.
+- [x] Fast-forward main after local gates; verify exact runtime
+  [CI 33991271551](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/33991271551)
+  (verify and desktop succeeded) and Vercel production `6XHZa3JELH5SKtUoGc1j2X8Src4c`.
+  Canonical raw HTML/JS/CSS match the clean same-SHA LF-entry reference; its JS/CSS
+  also match the immutable native build. Visible v0.22.1 and all 26 canonical
+  saved-run/input journeys passed. No normalized-byte substitute is claimed.
+- [x] Publish only portable/manifest/playtest/checksums as
+  [GitHub prerelease 383372738](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1),
+  tag exact runtime; independently download all four public assets and verify
+  filenames, sizes and SHA-256 values. Preserve v0.22.0 and frozen attachments.
+- [x] Retain current allocation: gzip9 JS 153,261/153,307 (46 bytes left), CSS
+  23,512/30,227, public 164,988,031/164,988,031. No additional allocation or media.
+- [ ] Human affected-iPad Full+Full fresh/sustained, Lite+Full and Lite+Reduced
+  comparison in the same 23×23 ordinary maze with about five followers.
+- [ ] Close sustained-performance, unexplained recovery timeout/tails/attribution,
+  multi-maze/music/resource-retention and timed Tauri/WebView2 gates with new evidence.
+- [ ] Complete later phone/Book/victory, pace/rescue/art and family qualification.
+  V22-UI-01/Agent 04 stay held. Green device evidence routes to ART-HOTFIX-01 then
+  V22-PLAY-01; persistent Lite+Reduced stutter routes to V22-PERF-02.
+
+No new installer, signing, clean-machine, offline, physical-iPad or family pass
+is claimed. The following release records are historical, not current gate status.
+
+## Historical UI-03 correction — v0.22.0
 
 The current release work follows the Human's rejection of v0.21.0 and subsequent
 authorization to implement UI-03. The historical Plan01/MOVE approvals below do

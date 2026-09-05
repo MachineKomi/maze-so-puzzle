@@ -1,6 +1,32 @@
 # Windows test builds
 
-**Current preview: v0.22.0 FP-UI1 UI-03 correction, ready for family playtesting.**
+**Current preview: v0.22.1 V22-PERF1 performance/input preview.**
+
+Play the [canonical web version](https://maze-so-puzzle.vercel.app/) or download
+the [GitHub prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1).
+Runtime/tag source is `8442b79db11a59e23f23c59f213116e7b8f54592`.
+All four public downloads were independently verified against frozen local bytes:
+
+- [Unsigned x64 portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.1/Maze-so-Puzzle-0.22.1-V22-PERF1-8442b79-locked-portable.exe)
+- [Manifest](V22-PERF1-v0.22.1-manifest.json)
+- [Short playtest note](V22-PERF1-v0.22.1-PLAYTEST.md)
+- [Checksums](V22-PERF1-v0.22.1-SHA256SUMS.txt)
+
+Portable: **173,379,584 bytes**, SHA-256
+`8e1e2e692efc38823bc32e56c3d559db3fe2bc8e8c27830340fbed4f567ac92c`.
+The [publication receipt](V22-PERF1-v0.22.1-release-verification.json) records
+exact CI/Vercel, canonical byte parity and 26 functional journeys, native
+held-interaction/reopen/minimum checks and public asset verification. The existing
+FP-UI1 save namespace is preserved. No installer is included.
+
+Affected-iPad sustained performance and family acceptance remain open. Compare
+Full+Full, Lite+Full and Lite+Reduced using the playtest note. This release contains
+the accepted performance/input changes; the pace, stationary-rescue, Tessera and
+phone/Book/victory updates remain separate work.
+
+## Prior v0.22.0 FP-UI1 comparison archive
+
+**Previous preview: v0.22.0 FP-UI1 UI-03 correction.**
 Its source is `68e303da680d5aec0ba71154949c5a2a0d1697ae`. The
 [GitHub prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0)
 is published and all four public downloads match their tested local bytes.

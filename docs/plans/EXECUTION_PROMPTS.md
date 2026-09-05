@@ -8,13 +8,15 @@ The v0.22.0 Human/Opus review is reconciled. Read the independent
 [Astra](../reviews/2026-09-05-astra-v0220-review.md) and
 [Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
 [88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The current task is **GPT-6 Astra — HIGH** promoting and publishing the
-independently accepted V22-PERF-01-R1 as a tightly bounded v0.22.1
-performance/input preview. Read Sol's
+The v0.22.1 V22-PERF1 preview is published from
+`8442b79db11a59e23f23c59f213116e7b8f54592`. The current gate is the **Human's
+affected-iPad comparison**, followed by **GPT-6 Astra — HIGH** evaluating the
+result. See the [publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
+and [playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md). Read Sol's
 [R1 acceptance](../reviews/2026-09-05-sol-v22-perf01-r1-review.md) and the
 [R1 response](../reviews/2026-09-05-v22-perf01-r1-response.md).
-Use a clean isolated checkout and preserve the accepted runtime except for
-coordinated version metadata and release evidence.
+The completed publication below used clean isolated checkouts and preserved the
+accepted runtime except coordinated version metadata; it is now history.
 Do not restart Agent 01, start Agent 04
 or automatically adopt Opus proposals. Preserve the praised desktop/iPad UI.
 Only one runtime writer; blocking device/family feedback and PT36 remain open.
@@ -67,7 +69,25 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. Astra — v0.22.1 V22-PERF1 preview publication
+## Current. Human — affected-iPad v0.22.1 comparison
+
+Use the [published preview](https://maze-so-puzzle.vercel.app/) and
+[playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md). Compare Full+Full
+fresh and sustained, Lite+Full, and Lite+Reduced on the affected iPad in the same
+ordinary 23×23 maze with about five followers. Record the device/environment,
+duration/transitions, responsiveness/smoothness and held/steered/released input.
+
+**Next model: Astra — HIGH** evaluates that evidence. Green routes to
+ART-HOTFIX-01 then V22-PLAY-01; continued Lite+Reduced stutter routes to the
+already-scoped V22-PERF-02 isolation. V22-UI-01 and Agent 04 remain held. Do not
+repeat publication or start another feature solely because this checkpoint exists.
+
+### Completed Astra — v0.22.1 V22-PERF1 preview publication (history)
+
+Completed 5 September 2026: runtime/tag `8442b79`, frozen attachment checkpoint
+`487afcf`, [GitHub prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1)
+with all four public assets independently hash-verified. Full source identities,
+checks and remaining gates are in the publication receipt linked above.
 
 ```text
 # Astra:
