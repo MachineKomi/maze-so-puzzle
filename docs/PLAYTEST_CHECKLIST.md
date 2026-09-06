@@ -6,7 +6,11 @@ Keep completed observations and build identities when newer builds arrive.
 
 ## Start here
 
-- **In preparation: v0.22.8 HOLE-01A / P12.** Not yet a published build.
+- **Current: v0.22.8 HOLE-01A / P12.** Web and Windows are published; all
+  four downloads independently verified. Frozen `3acaf5872dd921f15929c330eeae46053b2a6362`.
+  [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.8/Maze-so-Puzzle-0.22.8-HOLE-01A-3acaf58-locked-portable.exe) ·
+  [Short playtest note](../release/HOLE-01A-v0.22.8-PLAYTEST.md) ·
+  [Publication receipt](../release/HOLE-01A-v0.22.8-release-verification.json).
   With Spring Boots, check one-hole crossings, both directions, all three paces;
   long dividing trenches should cross across their width, never along their
   length. Try Lanternlight's junction and Grand Parade's door after the jump:
@@ -17,14 +21,14 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- **Current: v0.22.7 AUDIO-01A**, frozen
+- **Fallback: v0.22.7 AUDIO-01A**, frozen
   `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Web and Windows are published;
   all four release downloads are independently verified. **P11 is the new music-
   readiness check**; P5–P10 remain cumulative.
   [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.7/Maze-so-Puzzle-0.22.7-AUDIO-01A-9b82228-locked-portable.exe) ·
   [Short playtest note](../release/AUDIO-01A-v0.22.7-PLAYTEST.md) ·
   [Publication receipt](../release/AUDIO-01A-v0.22.7-release-verification.json).
-- **Fallback: v0.22.6 AUDIO-01V2**, frozen
+- **Historical fallback: v0.22.6 AUDIO-01V2**, frozen
   `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, is engineering-accepted and web-
   published. **Windows is published with all four downloads independently
   verified**. P10 is ready on either platform. [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.6/Maze-so-Puzzle-0.22.6-AUDIO-01V2-e628898-locked-portable.exe) · see its
@@ -42,19 +46,19 @@ Keep completed observations and build identities when newer builds arrive.
   The [v0.22.4 playtest note](../release/V22-RESCUE1-v0.22.4-PLAYTEST.md)
   has instructions/checksums. This remains an older rollback; on v0.22.4
   close Windows with X or Alt+F4 because its title Exit can leave the window open.
-- [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
+- [Decisions/steer list](HUMAN_DECISIONS.md) — no answer blocks proof repair;
+  Phase 2 artwork will need approval when its compact candidate gallery is ready.
 
 You do not need to complete everything in one sitting. The affected iPad movement
-comparison remains open; P11 is the new readiness check and P5–P10 remain
-cumulative. v0.22.7 changes music readiness, not camera/FOV, saves, gameplay or content.
+comparison remains open; P12 is the new crossing check and P5–P11 remain
+cumulative. v0.22.8 changes traversal/content rules, not camera, audio or pit art.
 Please do not clear game data to create a cold test; preserving your progress
 is more important.
 
-**Save compatibility:** all sixteen old-rules unfinished campaign saves restart
-through updated-maze messaging in v0.22.4. Durable completions, unlocks, earned
-friends, rewards and currency survive; old bests remain historical. v0.22.5 adds
-no further unfinished-run restart. Close older Windows builds before using this
-one; they share a save namespace.
+**Save compatibility:** v0.22.8 rules revision 3 restarts older-rules unfinished
+campaign/generated runs through updated-maze messaging. Durable completions,
+unlocks, earned friends, rewards and currency survive; old bests remain historical.
+Close older Windows builds before using this one; they share a save namespace.
 
 ## Build register
 
@@ -68,6 +72,7 @@ one; they share a save namespace.
 | v0.22.5 V22-PHONE1, frozen `7282665` | Published web/Windows; all four downloads verified. Bounded compact gameplay/Book and native Title Exit | P9 new; P5–P8 cumulative. No camera/FOV/audio/save/gameplay/content change or additional restart from v0.22.4. |
 | v0.22.6 AUDIO-01V2, frozen `e628898` | Engineering/native accepted; web/Windows published with all four public downloads verified | P10 now; P5–P9 remain cumulative. No iPad camera fix or completed readiness/mastering. |
 | v0.22.7 AUDIO-01A, frozen `9b82228` | Web/Windows published; four public downloads verified. Prepare one next song, confirmed fades and bounded fallback/recovery | P11 new; P5–P10 cumulative. Not final physical/hidden-page/acoustic/mastering or iPad camera acceptance. |
+| v0.22.8 HOLE-01A, frozen `3acaf58` | Web/Windows published; four downloads verified. One-hole rules/content and safe landings; current pit art retained | P12 new; P5–P11 cumulative. Older-rules unfinished runs restart with notice; durable progress survives. Connected art and iPad camera acceptance remain open. |
 
 ## Specific checks and results
 
@@ -276,6 +281,27 @@ versus headphones and the scene if something sounds wrong. Media/graph checks
 are not speaker measurements; physical iPad/Safari and all-range mastering are
 still open. There is no new camera change, so do not repeat that known failure
 just for this release. P5–P10 remain cumulative; no progress reset needed.
+
+### P12 — One-hole crossings and safe landings (v0.22.8 HOLE-01A)
+
+- [ ] With Spring Boots, cross a single hole in both directions at Chill,
+  Regular and Zippy when convenient. One crossing is one deliberate action;
+  long thin trenches cross across their width, not along their length.
+- [ ] Try Wishing Woods, Lanternlight's junction and Grand Parade's door after
+  the jump. Land first, then approach a door/enemy/cage; no remote interaction.
+- [ ] Release or steer during a jump: no stale extra step, duplicate pickup or
+  permanently missing friends. If Ame/weapon briefly disappears in flight,
+  report it: two early native captures raised a first-paint concern, not a
+  confirmed continuous-rendering failure. Jump-to-portal sequencing also has
+  synthetic automated coverage; report any such crossing you encounter.
+- [ ] Earned friends/rewards/unlocks remain after updating. An old unfinished
+  maze intentionally restarts with a notice; do not clear data. On Windows,
+  close normally and reopen a new-rules run: position/friends/pace should return.
+
+Existing pit sprites are unchanged; cleaner joined artwork is a later gate.
+Do not reproduce the known iPad camera failure again solely for this build.
+Tell us build/device, maze, pace and what looked or felt wrong. P5–P11 remain
+available; you need not complete everything in one sitting.
 
 ## Easy reply format
 

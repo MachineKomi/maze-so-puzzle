@@ -1,6 +1,7 @@
 # V22-HOLE-01 — single-width crossings and connected ditches
 
-Status: Phase 1 candidate in implementation; Phase 2 connected-ditch art remains pending.
+Status: Phase 1 engineering-accepted and published in v0.22.8; Phase 2 connected-
+ditch art/topology awaits proof repair, technical qualification and Human art approval.
 Date: 2026-09-05. Backlog: PT-20260905-49.
 Source: [audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Owner: root rules/content integration with independent Sol/Astra review; bounded
@@ -29,13 +30,17 @@ length/shape of the obstacle, not permission to jump two or three holes in serie
 Preserve all published comparison builds. Tessera, movement pace, stationary
 rescue, bounded compact UI and audio calibration are already delivered through
 v0.22.6; do not repeat those seams or require a repeated known iPad failure.
-Run after AUDIO-01A publication in the sequential queue and before Plan 04. V22-PLAY's
-stationary-rescue rules are then established before jump landings are adjusted.
+Phase 1 followed AUDIO-01A publication and is now delivered. Phase 2 remains in
+the sequential queue before root PT36 and Plan04. V22-PLAY's stationary-rescue
+contract remains authoritative for adjacent interactions.
 Plan 04 consumes the joined hole occupancy/receiver boundaries; Plan 02/05 consume
 the accepted single-jump events; Plan 09 consumes the resulting current campaign,
 generator version and rule. Do not reopen completed Plan 03 as a full asset pass.
 
 ## Phase 1 — audit and make the content/rule change safe
+
+This is the completed Phase 1 assignment and preflight history; current delivery
+and evidence are recorded below. Do not rerun the old baseline instructions.
 
 - Read current engine, generator, solver/reachability/hints, contentIdentity,
   campaign revisions/order history, session/progress, travel/presentation and
@@ -62,9 +67,9 @@ generator version and rule. Do not reopen completed Plan 03 as a full asset pass
   while retaining durable completions, friends, rewards and unlocks. Preserve
   old best-step records as historical when no longer comparable. Recompute
   required/perfect routes and update documentation/expectations atomically.
-  Current fingerprints already include `GAMEPLAY_RULES_REVISION = 2`: bump and
-  reuse that authority, not a second version mechanism. The current generator
-  has a `surprise-v5-...` recipe and hard-coded content revision 1; version its
+  Preflight fingerprints included `GAMEPLAY_RULES_REVISION = 2`: bump and
+  reuse that authority, not a second version mechanism. The preflight generator
+  had a `surprise-v5-...` recipe and hard-coded content revision 1; version its
   recipe deliberately. An engine-only edit is insufficient. Audit the independent
   `session.maximumMovementStride` save plausibility bound as well as transitions.
 
@@ -95,7 +100,7 @@ negative regressions and truthful single-width teaching. Keep the existing
 
 ### Phase 1 contract locked with independent Sol review (2026-09-06)
 
-First candidate: HOLE-01A / v0.22.8, based on published v0.22.7 `9b82228`.
+Delivered checkpoint: HOLE-01A / v0.22.8, based on published v0.22.7 `9b82228`.
 Impossible +2 geometry (second hole, wall, bounds) blocks before suggesting
 Spring Boots. Eligible geometry then requires Spring Boots and any pre-existing
 hazard protection. Unresolved door/enemy/cage cannot be a landing, regardless
@@ -113,8 +118,49 @@ existing updated-maze notice and previous bests remain historical. No new save
 schema, art, camera policy or particle system. Source-only checks are not physical
 play-feel acceptance. Phase 2 and root PT36 still precede full Plan 04 rollout.
 
+### Phase 1 published evidence (2026-09-06)
+
+Frozen `3acaf5872dd921f15929c330eeae46053b2a6362` is engineering/native accepted
+and published on web/Windows with four independent downloads verified. See
+[acceptance](../reviews/2026-09-06-v0228-engineering-acceptance.md),
+[Sol final review](../reviews/2026-09-06-hole01a-sol-native-final-review.md),
+[manifest](../../release/HOLE-01A-v0.22.8-manifest.json) and
+[receipt](../../release/HOLE-01A-v0.22.8-release-verification.json).
+623 project tests, current ordinary/perfect routes, production browser 20,
+synthetic exact-App jump→portal 15 and real browser pad 3 passed. Actual native
+keyboard/pad jumps and normal close/reopen preserved run/progress/preferences.
+These separate cohorts do not prove continuous native paint or physical comfort.
+P12 and cumulative P5–P11 remain open; v0.22.7 is the immediate immutable fallback.
+
+Fresh art unit tests pass 136; **fresh full-art validation failed**. Root/Sol accept
+only inherited static-art qualification: 1,535 tracked blobs across 16 scopes are
+identical to validated v0.22.5 through v0.22.7; original 0-error/429-warning evidence
+is bound to the published manifest. The ignored-proof/EOL/stale-manifest failures
+remain recorded and must be repaired before new art or a fresh-clone pass claim.
+
+Two early native jump captures showed Power/boots before Ame/weapon painted;
+a later mid-jump capture was complete. The async image/remount path is inherited,
+not a proved new rules defect. Keep a bounded first-paint/native-capture follow-up
+if actual blanking is visible; do not claim uninterrupted actor/follower visibility
+from settled screenshots or DOM roots. No iPad-camera improvement is claimed.
+
 ## Phase 2 — small, clean art set and topology-aware rendering
 
+- First repair only historical ignored-proof availability and LF/CRLF byte-
+  authority reproducibility, retaining original evidence and approved sources.
+  Do not rewrite hashes simply to silence failures or borrow Phase 1's unchanged-
+  input art acceptance after publishing changed inputs. This bounded repair is
+  not a new art-direction exercise or a full Plan03 restart.
+  The [reviewed preflight](../reviews/2026-09-06-art-proof-reproducibility-preflight.md)
+  separates the mandatory v14 index plus 48 children (restore exact archived
+  bytes, never regenerate approval) from optional ambient-canary current-input
+  compatibility (explicit selection, with historical integrity kept distinct).
+  Residual manifest staleness needs a non-writing field-level diff; it is not
+  wholly explained by EOL. Preserve mandatory missing/tampered-evidence failures.
+- New clean-pit/ditch art publication is blocked on explicit Human approval and
+  technical topology/alpha/readability/performance qualification. Proof repair
+  and compact candidate preparation can proceed while family tests are pending;
+  no approval follows from silence. Root Astra owns delivery, actual Sol reviews.
 - Generate a cleaner plum/aubergine pit with a clear rim, simple inner sidewall
   and dark depth: broad shapes, material-coloured contours, minimal scratches,
   micro-ledges and ornament. Preserve readability on all approved floor families.
@@ -140,6 +186,9 @@ play-feel acceptance. Phase 2 and root PT36 still precede full Plan 04 rollout.
   assets for rollback; Plan 12 remains the final archive owner.
 
 ## Phase 3 — verify and publish a reviewable checkpoint
+
+Phase 1's published preview does not waive these remaining Phase 2 art/topology
+checks. After their accepted checkpoint, root PT36 still precedes Plan04.
 
 Prove all four directions, missing equipment, one-hole success, two/three-hole
 rejection, blocked/map-edge landing, one-tile strip crossing versus longitudinal

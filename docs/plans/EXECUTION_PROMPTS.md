@@ -4,15 +4,29 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-**Active work:** finish HOLE-01A v0.22.8 Phase 1 browser/native/publication
-qualification, root Astra with independent actual Sol review. Rules revision 3,
-`surprise-v6` / generated content revision 2 and seven minimally adjusted maps
-are implemented. The rules2/v5/revision1 baseline below is historical; do not
-restore only the old jump loop or old positive multi-hole fixtures. Existing pit
-art remains. Next after publication: Phase 2 connected ditch art/topology, root
-PT36, then Plan04. No physical acceptance is implied by source qualification.
+**Current handoff, 2026-09-06: v0.22.8 HOLE-01A Phase 1 is engineering/native
+accepted and web/Windows published, with all four public downloads verified.**
+Frozen `3acaf5872dd921f15929c330eeae46053b2a6362`; read the
+[acceptance](../reviews/2026-09-06-v0228-engineering-acceptance.md),
+[Sol final review](../reviews/2026-09-06-hole01a-sol-native-final-review.md),
+[manifest](../../release/HOLE-01A-v0.22.8-manifest.json) and
+[receipt](../../release/HOLE-01A-v0.22.8-release-verification.json).
+Rules revision 3, `surprise-v6` / generated content revision 2 and eight hole-to-
+floor edits in seven maps are delivered; existing pit art remains. Older-rules
+unfinished mazes restart with the updated-maze notice; durable progress survives.
+623 project tests and 136 fresh art unit tests pass. Full-art validation is
+inherited for identical inputs, not a fresh validator pass. Native keyboard/pad,
+save/preferences and normal reopen are accepted within the documented limits;
+inherited async actor first-paint/capture evidence does not prove continuous
+Ame/weapon/follower paint. Keep that bounded follow-up and P12 open.
 
-**Current handoff, 2026-09-06:** **v0.22.7 AUDIO-01A** is frozen at
+**Next: root Astra owns bounded proof/EOL repair and Phase 2 preparation;
+actual Sol independently reviews.** New clean pit/connected-ditch art needs
+Human approval and technical qualification before publication. Phase 2 then
+root PT36 precede Plan04. Do not repeat completed Phase 1 or audio work, restore
+the old jump loop, or infer physical/iPad acceptance. P5–P11 remain cumulative.
+
+**Immediate fully published fallback: v0.22.7 AUDIO-01A** is frozen at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/native review is
 accepted; **web/Windows and all four public downloads are verified**. Final 578 project
 tests pass; JS gzip +1,560 bytes, CSS/public unchanged. Read the
@@ -23,13 +37,10 @@ resource evidence are separate cohorts, not a final endurance/whole-mix pass.
 [Publication receipt](../../release/AUDIO-01A-v0.22.7-release-verification.json)
 and [Sol final native review](../reviews/2026-09-06-audio01a-sol-native-final-review.md)
 close the engineering/publication transaction without closing physical gates.
-**Next: root Astra implements V22-HOLE-01; actual Sol independently reviews.**
-Atomic rules/content precedes connected-ditch art; no blocking Human decision
-is open for the first slice. P11 is ready. Do not repeat audio implementation.
-Cumulative P5–P10, physical/hidden-tab/
-acoustic/max-mix and iPad camera gates remain open.
+Its completed audio implementation is not the next assignment. Physical/hidden-
+tab/acoustic/max-mix and iPad camera gates remain open.
 
-**Immediate fully published fallback: v0.22.6 AUDIO-01V2** at
+**Historical fully published fallback: v0.22.6 AUDIO-01V2** at
 `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`; all four downloads are verified in
 its [receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
 
@@ -54,8 +65,8 @@ which already contains Tessera repair, PLAY-A and AUDIO-01V. Do not rerun them.
 v0.22.4's rules revision 2 restarts older unfinished authored runs in all sixteen mazes;
 durable completions/unlocks/rewards/history survive. No physical gate is implied.
 
-v0.22.5/6/7 publication is complete. Root Astra owns the next hole implementation
-and serial runtime/heavy slot; actual Sol independently reviews.
+Releases through v0.22.8 are published. Root Astra owns the Phase 2 proof/art/
+topology work and serial runtime/heavy slot; actual Sol independently reviews.
 The accepted UI-01A prototype is not the next assignment. Home/dialog/victory
 propagation, full 200% text coverage, HUD pace/settings art and remaining optical
 work stay open for later scoped review. The
@@ -71,32 +82,41 @@ later UI tranche, not Exit. V23-12 is **Plan14 after RC-01**, planning-only JRPG
 spinoff/mode exploration; no permanent XP or combat rewrite now. Root assigns
 each seam serially; these hooks do not reopen the completed compact prototype.
 
-## Next — V22-HOLE-01 atomic rules/content, then connected ditches
+## Next — V22-HOLE-01 Phase 2: proof repair, then approved connected ditches
 
-AUDIO-01A publication is complete. Root Astra is the single runtime writer;
-actual Sol independently reviews. No new Human answer blocks the atomic first
-slice. Read the complete
-[hole plan](V22-HOLE-01-single-crossings-and-ditches.md), current engine,
-generator, identities, saves, hints/solver, travel and Human trench intent.
-First deliver one atomic rules/content slice using existing art: one hole along
-the movement axis, safe eligible landing, minimally reshaped seven multi-width
-authored crossings, preserved room-dividing strips, revised generator recipe,
-matching hints/tests/fingerprints and ordinary/perfect route verification.
+Root Astra is the single runtime writer; actual Sol independently reviews.
+Read the complete [hole plan](V22-HOLE-01-single-crossings-and-ditches.md),
+Human trench intent, Phase 1 acceptance/native limits, current art pipeline,
+catalogue and terrain/travel owners. First resolve only the ignored historical
+proof availability and LF/CRLF byte-authority reproducibility defect. Preserve
+original evidence; never regenerate hashes merely to make a failing check green.
+Use the [reviewed preflight](../reviews/2026-09-06-art-proof-reproducibility-preflight.md):
+restore the exact mandatory v14 index and 48 children; make optional legacy-canary
+compatibility explicit, not a waiver of required evidence. Diagnose residual
+manifest staleness with a non-writing field diff before reviewing any refresh.
+Fresh 136 art unit tests and inherited unchanged-input validator acceptance are
+different evidence. New Phase 2 art cannot inherit that no-change rationale.
 
-Historical preflight correction, now incorporated into the current Hole plan:
-global `GAMEPLAY_RULES_REVISION` is already 2 and generated IDs use `surprise-v5`.
-Reuse/bump these owners, not a parallel version system. Generated contentRevision
-is still 1. Audit jump-to-door/enemy remote interactions, jump-to-portal event
-sequencing and the composed jump-plus-portal save-distance bound; cages already
-reject remote rescue. Preserve Crown Vault's `(12,9)`–`(12,15)` one-wide trench
-and Lanternlight's `(8,4)` crossing (zero-based). Do not only restrict the engine
-and strand existing maps, or treat old1/2/3-hole-positive tests as the new rule.
+Then prepare the smallest clean-pit/connected-ditch source set and a compact named
+gallery. Human approval is required before publishing new art; safe proof repair
+and candidate preparation can proceed without awaiting physical P12. Prove all
+16 cardinal masks, isolated/strip/elbow/T/+ boundaries, diagonal separation,
+alpha, fractional camera/DPR/readability, neutral-light rotation and bounded cost.
+Do not reopen Plan03 wholesale or create a second camera/terrain/travel owner.
 
-Then address connected-ditch topology/rendering and bounded new art review;
-do not reopen Plan03 wholesale. Preserve the shared camera/travel owner, every
-pace/motion mode, live-input cancellation and durable progress. Existing iPad
-stutter remains open and is not fixed by this seam. Root PT36 and Plan04 remain
-held until their own prerequisites; Plans04/02/05/09 consume accepted hole truth.
+Preserve the published Phase 1 rule: rules revision3, `surprise-v6`, generated
+contentRevision2, seven minimally revised authored maps, safe immediate landings
+and one-action ordered jump→portal. Preserve Crown Vault's `(12,9)`–`(12,15)`
+one-wide trench and Lanternlight's `(8,4)` crossing (zero-based), every pace/motion
+mode, live-input cancellation, existing audio and durable progress. Rules2/v5/
+revision1 and old multi-hole-positive fixtures are preflight history, not current
+authority. Do not repeat the atomic cutover.
+
+Retain a bounded inherited async jump-actor first-paint/native-capture follow-up:
+two early captures preceded Ame/weapon paint, a later mid-jump frame was complete.
+Investigate actual visible blanking if observed; settled nodes do not prove
+continuous paint. No camera fix or physical acceptance is implied. After Phase 2,
+root PT36 still precedes Plan04; Plans04/02/05/09 consume the accepted hole truth.
 
 ## UI-01A — completed compact fit assignment (history)
 
@@ -205,7 +225,10 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. v0.22.7 published and verified; V22-HOLE-01 next; cumulative checks
+## Historical v0.22.7 handoff — published audio before HOLE-01A
+
+The following records the predecessor handoff. HOLE-01A Phase 1 is now published;
+the current Phase 2 assignment and fallback are at the top of this document.
 
 Root completed v0.22.5 final native qualification/publication: web and Windows
 are verified. Actual final-source process exit and save/settings recovery passed,
@@ -213,7 +236,7 @@ not merely browser close mocks or compilation.
 Frozen AUDIO-01V2 `e628898` is accepted and published with actual Sol review and
 verified public downloads. AUDIO-01A `9b822281` engineering/native acceptance
 and web/Windows publication with four independent downloads are complete.
-Next implementation is V22-HOLE-01, root Astra with actual Sol review;
+At that handoff the next implementation was V22-HOLE-01, root Astra with actual Sol review;
 accepted audio/compact UI is not repeated. Missing
 physical feedback does not blanket-stop independent work; preserve open
 P1/P5–P10 and the verified v0.22.6 fallback. PERF-02C
@@ -221,7 +244,7 @@ requires its own serial writer, matched source and disclosed performance limits.
 
 Read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md) and
 [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) before selecting their
-turns: AUDIO-01A is frozen and published; V22-HOLE-01 rules/content now precedes
+turns: AUDIO-01A is frozen and published; V22-HOLE-01 rules/content then preceded
 connected-ditch art, root PT36 and Plan04.
 Only the assigned runtime writer runs implementation/heavy checks; v0.22.5/6
 transactions and the v0.22.7 publication transaction are complete.
@@ -239,8 +262,9 @@ checks and concrete questions without inventing approval from silence.
 Use the [cumulative checklist](../PLAYTEST_CHECKLIST.md) and record the displayed
 version before a natural session. Existing iPad failures are received evidence;
 do not request the same reproduction merely to permit engineering progress.
-P11 is ready for published v0.22.7 readiness/continuity; P10 retains calibrated
-balance checks, and P5–P10 remain cumulative. Do not request a
+P12 is ready for published v0.22.8 one-width jumps and safe landings; P11 retains
+readiness/continuity and P10 calibrated balance checks. P5–P11 remain cumulative.
+The older-rules unfinished-run restart preserves durable progress. Do not request a
 data reset or claim default listening acceptance. P9 is the v0.22.5 compact
 gameplay/Book/native Exit check; its Windows part
 is now available in the independently verified published download. P5–P8 remain cumulative, including stationary

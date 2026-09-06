@@ -1,6 +1,35 @@
 # Release checklist
 
-## Current published checkpoint — v0.22.7 AUDIO-01A
+## Current published checkpoint — v0.22.8 HOLE-01A
+
+Frozen runtime/tag `3acaf5872dd921f15929c330eeae46053b2a6362`.
+[Acceptance](reviews/2026-09-06-v0228-engineering-acceptance.md),
+[Sol final review](reviews/2026-09-06-hole01a-sol-native-final-review.md),
+[manifest](../release/HOLE-01A-v0.22.8-manifest.json) and
+[public-download receipt](../release/HOLE-01A-v0.22.8-release-verification.json).
+
+- [x] Single-width rules3, generated recipev6/revision2, seven authored map
+  revisions/eight cells and save/hint/solver/presentation contracts delivered together.
+- [x] 623 project tests; final48 focused/fixture assertions; TypeScript/build,
+  performance/audit and locked native build. No media or camera change.
+- [x] 136 fresh art unit tests; full validator inherited only for1535 unchanged
+  tracked inputs. Fresh full validator failed; ignored-proof/EOL repair stays open.
+- [x] Corrected production20/20, synthetic compound15/15 and browser pointer3/3.
+- [x] Actual native keyboard/pad three jumps96→99, two follower roots restored,
+  Zippy preference and exact raw game/progress/preferences after normal close/reopen.
+- [x] CI34022523242 verify/desktop and Production6290975438 success; canonical
+  HTML/JS/CSS exact parity. Release383518285: four public downloads byte/hash verified.
+  Portable173469696B, SHA-256
+  `a99fcfc30f587a961659ff555d559b883b8cb8b0d6c5068edac24ada2b6058e9`.
+- [ ] P12 and cumulative P5–P11; transient native actor first-paint follow-up;
+  physical device/continuous paint/iPad camera/audio mastering/signing/clean machine.
+- [ ] Phase2 proof/EOL repair, Human art approval and topology/alpha/readability/
+  performance qualification, then root PT36 before Plan04. No gate waived.
+
+Previous published fallback is v0.22.7. Rules3 intentionally restarts unfinished
+older-rules mazes while preserving durable progress; do not clear Human saves.
+
+## Historical published checkpoint / fallback — v0.22.7 AUDIO-01A
 
 Frozen runtime/tag `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`.
 [Acceptance](reviews/2026-09-06-v0227-engineering-acceptance.md),

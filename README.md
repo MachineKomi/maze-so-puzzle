@@ -1,11 +1,13 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published preview is **v0.22.7 AUDIO-01A**: bounded next-song
-preparation and confirmed music fades, with continuity during slow or failed
-incoming requests. It preserves calibrated sound choices, compact gameplay/Book,
-native Title Exit, three movement paces, refreshed art and stationary rescues.
-Frozen runtime: `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`.
+The current published preview is **v0.22.8 HOLE-01A**: clearer single-hole
+jumps, safe landings and preserved room-dividing trench puzzles. Seven story
+mazes and generated crossings align with the new rules. Existing pit artwork
+remains; cleaner connected ditches are the next separate art phase.
+Frozen runtime: `3acaf5872dd921f15929c330eeae46053b2a6362`.
 Web and Windows are published; all four release downloads are independently verified.
+Older-rules unfinished mazes restart with an updated-maze notice; earned friends,
+rewards, achievements, unlocks and historical records survive. Do not clear saves.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
 The remaining iPad camera issue and broader UI/audio improvements are still open.
@@ -72,18 +74,21 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The published AUDIO-01A Windows handoff contains four files:
+The published HOLE-01A Windows handoff contains four files:
 
-- `Maze-so-Puzzle-0.22.7-AUDIO-01A-9b82228-locked-portable.exe`
-- [AUDIO-01A artifact manifest](release/AUDIO-01A-v0.22.7-manifest.json)
-- [AUDIO-01A playtest instructions](release/AUDIO-01A-v0.22.7-PLAYTEST.md)
-- [AUDIO-01A SHA-256 checksums](release/AUDIO-01A-v0.22.7-SHA256SUMS.txt)
+- `Maze-so-Puzzle-0.22.8-HOLE-01A-3acaf58-locked-portable.exe`
+- [HOLE-01A artifact manifest](release/HOLE-01A-v0.22.8-manifest.json)
+- [HOLE-01A playtest instructions](release/HOLE-01A-v0.22.8-PLAYTEST.md)
+- [HOLE-01A SHA-256 checksums](release/HOLE-01A-v0.22.8-SHA256SUMS.txt)
 
-Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.7/Maze-so-Puzzle-0.22.7-AUDIO-01A-9b82228-locked-portable.exe).
-It is 173,470,208 bytes; SHA-256
-`5cff755c021134aaa67409751613131c9dd3c809b8b2241b6cce81809ab39b00`.
-The [publication receipt](release/AUDIO-01A-v0.22.7-release-verification.json)
+Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.8/Maze-so-Puzzle-0.22.8-HOLE-01A-3acaf58-locked-portable.exe).
+It is 173,469,696 bytes; SHA-256
+`a99fcfc30f587a961659ff555d559b883b8cb8b0d6c5068edac24ada2b6058e9`.
+The [publication receipt](release/HOLE-01A-v0.22.8-release-verification.json)
 binds the independent public downloads to the tested source and native artifact.
+The [v0.22.7 release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.7)
+remains the immutable previous-build fallback; arbitrary downgrade save safety is
+not promised. Close one build before starting another against its shared profile.
 This is an unsigned preview. Very high Music/SFX together may distort; physical
 listening and final audio qualification remain open. On an existing
 profile, set both sliders to 75% to try the new default balance without resetting

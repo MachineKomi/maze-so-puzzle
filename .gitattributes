@@ -70,6 +70,9 @@ release/AUDIO-01V2-v0.22.6-SHA256SUMS.txt -text
 release/AUDIO-01A-v0.22.7-manifest.json -text
 release/AUDIO-01A-v0.22.7-PLAYTEST.md -text
 release/AUDIO-01A-v0.22.7-SHA256SUMS.txt -text
+release/HOLE-01A-v0.22.8-manifest.json -text
+release/HOLE-01A-v0.22.8-PLAYTEST.md -text
+release/HOLE-01A-v0.22.8-SHA256SUMS.txt -text
 
 # The documentation consistency contract intentionally checks an LF-wrapped phrase.
 docs/RELEASE_CHECKLIST.md text eol=lf

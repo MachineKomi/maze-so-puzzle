@@ -6,15 +6,30 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
-### PT49 / HOLE-01A v0.22.8 — Phase 1 in qualification
+### PT49 / HOLE-01A v0.22.8 — Phase 1 published; Phase 2 pending
 
 Single-width Spring jumps, truthful landing blockers, seven minimally normalized
 authored maps and versioned generator/save rules are implemented. Clear landings
 prevent remote door/combat/rescue; permitted portal landings present both phases.
-Project623/art136 pass. Browser/native/source freeze and publication are pending.
-P12 is queued, with the unfinished-run restart warning and preserved durable
-progress. Existing hole art remains; Phase 2 connected topology/art and PT36 are
-not delivered or waived. v0.22.7 remains the published build during qualification.
+Frozen `3acaf5872dd921f15929c330eeae46053b2a6362` is engineering/native accepted
+and web/Windows published; all four public downloads are verified in the
+[receipt](../release/HOLE-01A-v0.22.8-release-verification.json). Read the
+[acceptance](reviews/2026-09-06-v0228-engineering-acceptance.md) and
+[Sol native review](reviews/2026-09-06-hole01a-sol-native-final-review.md).
+623 project tests and 136 fresh art unit tests pass. Full art-validator evidence
+is inherited for unchanged inputs; the fresh validator failed and is not waived
+for future art. P12 is ready, with the unfinished-run restart warning and preserved
+durable progress; P5–P11 remain cumulative. v0.22.7 is the immediate fallback.
+
+Next: root Astra repairs bounded [proof/EOL reproducibility](reviews/2026-09-06-art-proof-reproducibility-preflight.md), then prepares
+Phase 2 connected topology/art with actual Sol review and Human art approval
+before publication. Root PT36 remains before04. Existing hole art is unchanged;
+PT49 is not complete and no physical/iPad acceptance is inferred.
+Retain the inherited async jump-actor first-paint/capture follow-up: two early
+native captures lacked Ame/weapon paint, while a later mid-jump frame was complete.
+This is not proved continuous visibility or a new engine/save defect. Investigate
+with bounded paint evidence if family-visible blanking is reported; do not hide
+the limitation behind settled-frame or follower-root assertions.
 
 ### AUDIO-01A / v0.22.7 readiness checkpoint — published and verified
 
@@ -29,12 +44,11 @@ physical/hidden-tab/acoustic/rendered-whole-mix-max limitations. Engineering/nat
 review is accepted; **web/Windows and all four public downloads are verified** in
 the [publication receipt](../release/AUDIO-01A-v0.22.7-release-verification.json).
 [Sol final native review](reviews/2026-09-06-audio01a-sol-native-final-review.md)
-retains the preview boundaries. v0.22.6 is the immediate published fallback.
+retains the preview boundaries. At that checkpoint v0.22.6 was the immediate fallback.
 P11 is ready; P5–P10 and the iPad camera gate remain open.
 
-Next implementation: root Astra owns PT49/V22-HOLE-01 with actual Sol independent
-review; atomic rules/content first, then connected ditch rendering/art. No
-blocking Human decision is open for the first slice. PT20/23 no longer require
+That historical handoff led to published HOLE-01A Phase 1 above; Phase 2 proof
+repair/art/topology is now next, with its own Human art gate. PT20/23 no longer require
 rebuilding readiness; Plan 02 keeps
 creative sound trials, 07B final qualification and 10 the Garden consumer.
 
@@ -293,7 +307,7 @@ supersede stale descriptions without closing their unimplemented successors:
 | 46 | Alex approved as a future optional Player-1 direction; exact model/runtime absent | ALT-P1-01 Human art/canon gate and equal selected-lead implementation before 08/05/09/10/11 |
 | 47 | Current 256px Tessera field alpha defect confirmed; approved corrected presentation/master exists | ART-HOTFIX-01 versioned field derivative/publication and actual-consumer proof |
 | 48 | Current engine/test explicitly move Ame into a rescued cage tile | V22-PLAY-01 stationary engine/solver/save/presentation contract before 02/05 |
-| 49 | Human requests one-hole crossing depth, preserved dividing trenches and cleaner joined hole art; current engine supports multi-hole runs | V22-HOLE-01 rules/content/art seam before 04; 02/05/09 consume it; no implementation yet |
+| 49 | HOLE-01A v0.22.8 `3acaf58` publishes one-hole rules/content while preserving dividing trenches; existing art remains | P12 open; bounded proof/EOL repair then Phase 2 connected art/topology with Human approval, PT36 before04; 02/05/09 consume accepted contracts |
 
 Do not substitute this table for exact source/tests. Evidence is carried from
 accepted records, not freshly rerun in this documentation review. Before a card
@@ -2846,7 +2860,10 @@ Family retest and later Plan05/08/10 non-regression remain open.
 ### PT-20260905-49 — Single-width jumps and clean connected ditches
 
 - Type/priority: Rules/content clarity plus visual refinement; P1.
-- Delivery: Captured, routed, implementation pending. Source:
+- Delivery: Phase 1 engineering-accepted and published in v0.22.8 HOLE-01A
+  (`3acaf58`); P12 physical checks remain open. Phase 2 clean pit/connected-ditch
+  rendering awaits bounded proof/EOL reproducibility repair, Human art approval
+  and technical qualification. **PT49 is not complete.** Source:
   [Human follow-up](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 - Owner: root [V22-HOLE-01](plans/V22-HOLE-01-single-crossings-and-ditches.md),
   after reviewed engineering predecessors and queued play/UI seams, before 04.
@@ -2866,7 +2883,13 @@ Family retest and later Plan05/08/10 non-regression remain open.
   historical bests. Never restrict the engine alone and strand an existing maze.
 - Inspect real jumping/followers in every pace/motion mode, valid portal landings,
   release/held cancellation, terrain/light/DPR and all cardinal adjacency cases.
-  Human artwork review and independent code review precede publication.
+  Human artwork review precedes new-art publication; independent code review
+  precedes each release. Phase 1 kept existing art, so does not approve Phase 2.
+- Retain the [native first-paint follow-up](reviews/2026-09-06-hole01a-sol-native-final-review.md):
+  early captures preceded the inherited async Ame/weapon paint; one later jump
+  frame and settled frames were complete. Do not claim continuous actor/follower
+  visibility. Bound any investigation to observed presentation, preserving the
+  accepted one-action engine/save/cancellation contract.
 
 ## 6. Programme integration and gates
 
