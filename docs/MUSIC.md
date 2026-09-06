@@ -1,6 +1,14 @@
 # Music
 
-## Calibrated balance — AUDIO-01V2 candidate, 2026-09-06
+## Calibrated balance — AUDIO-01V2 / v0.22.6, published 2026-09-06
+
+Frozen runtime `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa` is engineering/native
+accepted and published on web/Windows; all four public downloads are verified.
+[Acceptance](reviews/2026-09-06-v0226-engineering-acceptance.md),
+[manifest](../release/AUDIO-01V2-v0.22.6-manifest.json),
+[playtest](../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
+[receipt](../release/AUDIO-01V2-v0.22.6-release-verification.json) own exact evidence.
+Physical P10/P8 listening remains open. AUDIO-01A is the next separate implementation.
 
 New preferences use Music gain.10 and SFX gain1, both displayed75%. Music uses
 the reviewed piecewise curve; SFX reaches4/3 at100%. Existing raw gain choices
@@ -10,7 +18,7 @@ version is never overwritten. Campaign Reset still preserves comfort settings.
 
 [Joint decision](reviews/2026-09-06-audio01v2-joint-decision.md) and
 [Sol's measurement review](reviews/2026-09-06-audio01v2-sol-final-review.md)
-approve only a qualified preview after integration checks. Default Music plus
+accept this bounded preview with completed integration checks. Default Music plus
 boosted SFX retained sample margin at48/44.1kHz. Max Music plus SFX can overshoot
 full scale even at the old SFX maximum; visible guidance advises lowering either
 if distortion is heard. This is not all-range clip-free or physical listening

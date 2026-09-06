@@ -1,9 +1,14 @@
 # AUDIO-01 — timely music, satisfying sound and listening qualification
 
-Status: AUDIO-01V candidate implemented and independently reviewed2026-09-06;
-AUDIO-01A/B remain future work. [V evidence](../reviews/2026-09-06-audio01v-candidate.md).
-Updated 2026-09-06: independent volume controls are explicitly authorized by the
-Human and scoped as AUDIO-01V below; joint state owns actual publication status.
+Status, 2026-09-06: AUDIO-01V2 is accepted and published as v0.22.6 at
+`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`; web/Windows and all four public
+downloads are verified. [Acceptance](../reviews/2026-09-06-v0226-engineering-acceptance.md),
+[manifest](../../release/AUDIO-01V2-v0.22.6-manifest.json),
+[playtest](../../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
+[receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
+**Next: AUDIO-01A**, root Astra implementation / actual Sol independent review.
+P10/P8 physical listening and final mastering remain open; do not repeat V/V2.
+The earlier AUDIO-01V assignment below is history, not current launch authority.
 Source: [Human audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Backlog owner: PT-20260903-20, with PT23 transport and existing CR-AUDIO decisions.
 
@@ -18,7 +23,7 @@ Victory should sound celebratory as it appears; doors, pickups and rescues shoul
 sound at their visual contact. Ordinary context changes should not create silent
 gaps while an otherwise enabled game fetches the next song.
 
-**AUDIO-01V, Astra implementation with Sol review:** after accepted PLAY-A, take
+**Historical AUDIO-01V assignment, Astra implementation with Sol review:** after accepted PLAY-A, take
 one bounded per-device Music/SFX gain and settings checkpoint before the larger
 readiness work. It may precede PLAY-B/V22-UI-01 once the sole writer returns
 ownership. This does not reopen Sol's active pace scope, wait for all creative
@@ -47,28 +52,29 @@ is superseded only for AUDIO-01A's explicitly bounded scope below.
 
 ## V. Independent Music / Sound effects levels (early AUDIO-01V)
 
-**Follow-up AUDIO-01V2,2026-09-06 (queued):** the Human liked the sliders but
+**Completed AUDIO-01V2, 2026-09-06:** the Human liked the sliders but
 prefers the old effective Music10%/SFX100% balance on phone/desktop, with both
 calibrated UI controls defaulting to75% and adjustment room above. This supersedes
-the initial22/100 default below for the next implementation, not frozen v0.22.3/4.
-Read [V23-01](../playtests/2026-09-06-v0223-v0224-intake.md). Define explicit gain
-curves and versioned migration preserving existing effective choices; zero is
+the initial22/100 default below in v0.22.6, not frozen v0.22.3/4.
+Read [V23-01](../playtests/2026-09-06-v0223-v0224-intake.md). The implemented gain
+curves and versioned migration preserve existing effective choices; zero is
 silence,100% offers measured usable headroom with disclosed combination limits,
 and mute leaves both preferences intact.
-Verify actual graph response/clipping and disclose any unavoidable saturated
-legacy value rather than silently reset it. Pair this small correction with the
-next qualified UI checkpoint when ownership permits; no new art/OST mastering
-or full readiness redesign is needed merely to calibrate these controls.
+Actual graph response, preserved legacy gains, browser and native controls/reopen
+are reviewed in the acceptance above. No art/OST mastering or readiness controller
+was added. This completed correction is separate from AUDIO-01A below.
 
 The [reconciled Astra/Sol implementation boundary](../reviews/2026-09-06-audio01v2-joint-decision.md)
 selects Sol's usable piecewise music curve and concrete future-version write
 protection. Actual48/44.1kHz sample/overlap review now conditionally approves4/3
 for a qualified preview around the new default, not all-range clip-free audio.
 The existing max-Music overlap already exceeds full scale; the boost modestly
-increases it. Keep the visible high-combination warning and physical P8 gate.
+increases it. Keep the visible high-combination warning and physical P10/P8 gates.
 See the joint decision and independent Sol final review for exact evidence;
 neither a loose bound nor fake GainNodes substitutes for those measurements.
 This follows the frozen v0.22.5 UI/Exit publication and does not change that build.
+
+### Historical AUDIO-01V requirements (v0.22.3; defaults superseded by V2)
 
 Source: [Human iPad balance report](../user-playtests/2026-09-06-ipad-audio-balance.md).
 The iPad has much quieter effects relative to music than the phone/laptop/native

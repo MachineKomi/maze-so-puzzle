@@ -8,10 +8,13 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- **Next candidate: v0.22.6 AUDIO-01V2**, frozen
-  `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, is in native/final qualification.
-  Publication, downloads and their checksums are **pending**. P10 below is queued
-  for when it is available; do not assume a candidate is already the live build.
+- **v0.22.6 AUDIO-01V2**, frozen
+  `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, is engineering-accepted and web-
+  published. **Windows is published with all four downloads independently
+  verified**. P10 is ready on either platform. [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.6/Maze-so-Puzzle-0.22.6-AUDIO-01V2-e628898-locked-portable.exe) · see its
+  [playtest note](../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
+  [frozen manifest](../release/AUDIO-01V2-v0.22.6-manifest.json) and
+  [publication receipt](../release/AUDIO-01V2-v0.22.6-release-verification.json).
 - v0.22.5 V22-PHONE1, frozen `7282665f8631051785176b701b1a7f14b7fe24a3`:
   Web and Windows published; final native checks and all four public downloads
   independently verified. Compact gameplay/Book and native Title Exit are the
@@ -21,13 +24,13 @@ Keep completed observations and build identities when newer builds arrive.
   — stationary rescue, plus inherited Dolphin repair, speeds and audio levels.
   Published; all four downloads independently byte/hash verified.
   The [v0.22.4 playtest note](../release/V22-RESCUE1-v0.22.4-PLAYTEST.md)
-  has instructions/checksums. This remains the published rollback; on v0.22.4
+  has instructions/checksums. This remains an older rollback; on v0.22.4
   close Windows with X or Alt+F4 because its title Exit can leave the window open.
 - [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
 
 You do not need to complete everything in one sitting. The affected iPad movement
-comparison remains open; P9 is the new v0.22.5 check and P5–P8 remain cumulative.
-v0.22.5 does not change camera/FOV, audio, saves, gameplay or content from v0.22.4.
+comparison remains open; P10 is the new calibrated-audio check and P5–P9 remain
+cumulative. v0.22.6 changes audio controls, not camera/FOV, saves, gameplay or content.
 Please do not clear game data to create a cold test; preserving your progress
 is more important.
 
@@ -47,7 +50,7 @@ one; they share a save namespace.
 | v0.22.3 V22-COMFORT1, runtime `b834a8e` | Web/Windows comfort preview: Dolphin field repair, Chill/Regular/Zippy and independent Music/SFX | P5/P6/P8; P2/P4 regression as convenient. No camera or stationary-rescue fix claimed. |
 | v0.22.4 V22-RESCUE1, runtime `45d8437` | Published web/Windows. Stationary rescue with unchanged steps and deliberate follow-up movement | P7 first; P5/P6/P8 remain cumulative. Not a new camera/phone-layout/audio-default fix. |
 | v0.22.5 V22-PHONE1, frozen `7282665` | Published web/Windows; all four downloads verified. Bounded compact gameplay/Book and native Title Exit | P9 new; P5–P8 cumulative. No camera/FOV/audio/save/gameplay/content change or additional restart from v0.22.4. |
-| v0.22.6 AUDIO-01V2, frozen `e628898` | Qualification in progress; web/Windows publication, downloads and checksums pending | P10 when available; P5–P9 remain cumulative. Calibrated controls do not fix the iPad camera or complete readiness/mastering. |
+| v0.22.6 AUDIO-01V2, frozen `e628898` | Engineering/native accepted; web/Windows published with all four public downloads verified | P10 now; P5–P9 remain cumulative. No iPad camera fix or completed readiness/mastering. |
 
 ## Specific checks and results
 
@@ -215,11 +218,11 @@ Final native qualification/publication passed; physical P9 acceptance is separat
 Home/dialog/victory propagation, full 200% text coverage, visible HUD pace,
 settings artwork and other optical refinements remain open; P9 does not close them.
 
-### P10 — Calibrated Music/SFX balance (v0.22.6 qualification)
+### P10 — Calibrated Music/SFX balance (v0.22.6)
 
-Frozen candidate: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Publication status,
-checksums and downloads remain pending in joint state; do not assume it is live.
-When v0.22.6 is available:
+Frozen runtime: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Engineering/native
+acceptance and web/Windows publication passed, including all four independent
+public downloads. Please try when convenient:
 
 - [ ] Your existing volume choices should sound unchanged when you first open
   it, though the percentages may look different. Opening/closing Sound, changing

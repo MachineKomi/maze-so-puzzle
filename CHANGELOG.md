@@ -4,12 +4,15 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.6 — AUDIO-01V2 (publication qualification)
+## 0.22.6 — AUDIO-01V2
 
-Frozen candidate: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Final native
-qualification, independent review and web/Windows publication are still pending;
-this entry describes implemented changes, not a published-release receipt.
-The cumulative checklist queues P10 for when this build is available.
+Frozen runtime: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`.
+[Engineering/native acceptance](docs/reviews/2026-09-06-v0226-engineering-acceptance.md),
+exact-source CI, web deployment and all four independent public Windows-release
+downloads passed. The [publication receipt](release/AUDIO-01V2-v0.22.6-release-verification.json),
+[frozen manifest](release/AUDIO-01V2-v0.22.6-manifest.json)
+and [playtest note](release/AUDIO-01V2-v0.22.6-PLAYTEST.md) identify scope and limits;
+P10 is available on web/Windows, with cumulative prior checks retained.
 
 - Music and Sound effects now use calibrated controls:75%/75% represents the
   preferred quieter-music/clearer-effects balance. New profiles use this default;

@@ -1,6 +1,35 @@
 # Release checklist
 
-## Current published checkpoint — v0.22.5 V22-PHONE1
+## Current published checkpoint — v0.22.6 AUDIO-01V2
+
+Frozen runtime/tag: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`.
+Web and Windows published; four independent public downloads verified in the
+[receipt](../release/AUDIO-01V2-v0.22.6-release-verification.json).
+See [engineering acceptance](reviews/2026-09-06-v0226-engineering-acceptance.md),
+[independent Sol review](reviews/2026-09-06-audio01v2-sol-final-review.md),
+[manifest](../release/AUDIO-01V2-v0.22.6-manifest.json) and
+[P10/cumulative checks](PLAYTEST_CHECKLIST.md).
+
+- [x] Calibrated new 75/75 defaults; exact legacy effective-gain preservation,
+  conservative future-version write refusal and visible high-mix warning.
+- [x] 551 project tests, frozen TypeScript/build/byte gates, locked native check
+  and no-bundle release build; independent source/browser/native review.
+- [x] Real graph and six browser cases; two native isolated profiles, four normal
+  closes, restored custom/legacy gains and byte-identical one-step maze save.
+- [x] Exact-source CI `34014896142` verify/desktop and Production `6289670118`
+  successful; deployed HTML/JS/CSS match frozen build bytes.
+- [x] GitHub prerelease `383480270`; source/stage/final/download portable matches,
+  173,468,672 bytes, SHA-256
+  `847502332571c2a9d0afc3fe8f8e2f850e497a17bab0e586eee76a04bbf45dc9`.
+- [ ] Physical P10 listening, high-combination mix judgment and P5–P9 remain open.
+  No all-range clipping-free, hidden-page production, iPad-camera, installer,
+  signing or sustained-performance qualification is inferred.
+
+v0.22.5 is the immutable rollback. No new save-rule restart or media change.
+Older builds can clamp boosted SFX when writing preferences; never clear saves.
+Next runtime work is AUDIO-01A, not another calibration or compact-UI restart.
+
+## Historical published checkpoint — v0.22.5 V22-PHONE1
 
 Use [joint state](JOINT_ORCHESTRATION_STATE.md) for the latest writer, accepted
 candidate and deployment status. Published v0.22.5 web/Windows artifacts and all

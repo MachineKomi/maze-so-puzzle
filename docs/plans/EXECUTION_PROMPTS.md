@@ -5,14 +5,17 @@ selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
 **Current handoff, 2026-09-06:** **v0.22.6 AUDIO-01V2** is frozen at
-`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`; root Astra owns final native
-qualification/publication and actual Sol the independent final review. Release
-acceptance, checksums, exact-source CI/deployment and public downloads are
-**pending**. Do not rerun the calibrated-control implementation or assume it is
-already deployed. P10 is queued and P5–P9 remain cumulative. AUDIO-01A follows
-the qualified release handoff as the next separate implementation.
+`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Root Astra and actual Sol accepted
+engineering/native controls and save/reopen. Exact-source CI, web/Windows
+publication and all four independent public downloads passed. Read
+[acceptance](../reviews/2026-09-06-v0226-engineering-acceptance.md),
+[manifest](../../release/AUDIO-01V2-v0.22.6-manifest.json),
+[playtest](../../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
+[receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
+**Next: AUDIO-01A, root Astra implementation / actual Sol independent review.**
+Do not repeat V2 implementation/publication. P10 is ready; P5–P9 remain cumulative.
 
-**Last fully verified published checkpoint: v0.22.5 V22-PHONE1** is frozen at
+**Immediate fully published fallback: v0.22.5 V22-PHONE1** is frozen at
 `7282665f8631051785176b701b1a7f14b7fe24a3`. Native Exit `19f08a1` and compact
 gameplay/Book UI-01A `840293d` (evidence `517667d`) are independently accepted;
 read the [Exit review](../reviews/2026-09-06-ui-native-exit-01-astra-review.md)
@@ -23,7 +26,7 @@ unfinished-run restart from v0.22.4. P9 adds phone 780/844/568 pad/full-minimap/
 feedback separation, fixed Book header/tabs with body-only scroll and complete
 card, and native Title Exit pointer/keyboard/reopen; P5–P8 remain cumulative.
 
-**Published rollback:** PLAY-B v0.22.4 at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
+**Historical published rollback:** PLAY-B v0.22.4 at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
 Web/Windows publication and all four independent public-download checks are
 **complete**; [receipt](../../release/V22-RESCUE1-v0.22.4-release-verification.json).
 Read [PLAY-B acceptance](../reviews/2026-09-06-play-b-astra-review.md)
@@ -33,8 +36,8 @@ which already contains Tessera repair, PLAY-A and AUDIO-01V. Do not rerun them.
 v0.22.4's rules revision 2 restarts older unfinished authored runs in all sixteen mazes;
 durable completions/unlocks/rewards/history survive. No physical gate is implied.
 
-v0.22.5 native qualification/publication is complete. Root currently owns
-v0.22.6 AUDIO-01V2 final qualification and its serial heavy slot.
+v0.22.5 and v0.22.6 publication are complete. Root next owns AUDIO-01A and
+its serial runtime/heavy slot; actual Sol independently reviews.
 The accepted UI-01A prototype is not the next assignment. Home/dialog/victory
 propagation, full 200% text coverage, HUD pace/settings art and remaining optical
 work stay open for later scoped review. The
@@ -43,33 +46,14 @@ without efficacy; no hint ships. No physical iPad/phone acceptance or PT36-befor
 approval follows from compact UI acceptance or release publication.
 
 Read the complete [new Human intake](../playtests/2026-09-06-v0223-v0224-intake.md)
-before later assignments. V23-01 is the active **AUDIO-01V2** qualification below,
+before later assignments. V23-01 is the completed **AUDIO-01V2** calibration,
 before AUDIO-01A; it is not included in v0.22.5. V23-04 adds
 immediately visible HUD pace and intentional speaker+cog settings art to the
 later UI tranche, not Exit. V23-12 is **Plan14 after RC-01**, planning-only JRPG
 spinoff/mode exploration; no permanent XP or combat rewrite now. Root assigns
 each seam serially; these hooks do not reopen the completed compact prototype.
 
-## Current — finish AUDIO-01V2 qualification/publication
-
-Root Astra owns delivery of frozen source
-`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`; actual Sol independently reviews.
-Implementation is complete enough for final qualification, not a published pass.
-Keep the isolated candidate clean; collect actual Windows controls/save/reopen,
-final-source browser/graph, build/byte and independent review evidence. Follow the
-[joint decision](../reviews/2026-09-06-audio01v2-joint-decision.md), including
-its source/preflight/review reading list and actual measured allocation records;
-the prototype ceiling is not permission to consume unmeasured bytes. Preserve
-the C1 music curve, new 75/75 defaults, raw-gain preservation, future-writer
-refusal and compact-visible warning. Source-derived sample review conditionally
-permits 4/3 SFX with disclosed maximum-combination limitations, not all-range
-clip-free sound; no silent clamp or unreviewed compressor.
-After acceptance, create the versioned exact-source web/Windows release and
-independently verify canonical raw bytes and all public attachments. Commit/push
-the evidence and update current status. No publication/CI/checksum result is
-assumed from this prompt. P10 and physical P8 remain separate from engineering.
-
-## Next after that handoff — AUDIO-01A readiness/continuity
+## Next — AUDIO-01A readiness/continuity
 
 Root Astra takes the next bounded runtime assignment; actual Sol independently
 reviews it. Read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md), MUSIC,
@@ -189,13 +173,13 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. v0.22.6 qualification; AUDIO-01A next; cumulative Human checks
+## Current. v0.22.6 published; AUDIO-01A next; cumulative Human checks
 
 Root completed v0.22.5 final native qualification/publication: web and Windows
 are verified. Actual final-source process exit and save/settings recovery passed,
 not merely browser close mocks or compilation.
-Root Astra is now qualifying frozen AUDIO-01V2 `e628898` with actual Sol review;
-release publication is pending and accepted compact UI is not repeated. Missing
+Frozen AUDIO-01V2 `e628898` is accepted and published with actual Sol review and
+verified public downloads. Next is AUDIO-01A; accepted V2/compact UI is not repeated. Missing
 physical feedback does not blanket-stop independent work; preserve open
 P1/P5–P10 and the verified v0.22.5 fallback. PERF-02C
 requires its own serial writer, matched source and disclosed performance limits.
@@ -205,7 +189,7 @@ Read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md) and
 turns: the early AUDIO-01V2 calibration precedes broader AUDIO-01A, then
 V22-HOLE-01 precedes the root PT36 gate and Plan 04. Only the assigned runtime
 writer runs implementation/heavy checks; the v0.22.5 transaction is complete
-and v0.22.6 qualification/publication must be closed before the next runtime seam.
+and v0.22.6 qualification/publication is also complete.
 Plan 02 must deliver the existing CR-AUDIO creative trials using the shared
 readiness seam; 07B qualifies/finishes rather than recreates it. Plans 04/02/05/09
 consume the single-width rule and connected hole footprint; old successful
@@ -220,7 +204,7 @@ checks and concrete questions without inventing approval from silence.
 Use the [cumulative checklist](../PLAYTEST_CHECKLIST.md) and record the displayed
 version before a natural session. Existing iPad failures are received evidence;
 do not request the same reproduction merely to permit engineering progress.
-P10 is queued for calibrated v0.22.6 audio once published; do not request a
+P10 is ready for published calibrated v0.22.6 audio; do not request a
 data reset or claim default listening acceptance. P9 is the v0.22.5 compact
 gameplay/Book/native Exit check; its Windows part
 is now available in the independently verified published download. P5–P8 remain cumulative, including stationary
