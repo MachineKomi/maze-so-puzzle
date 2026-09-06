@@ -24,6 +24,9 @@ describe("calibrated controls with raw-gain authority", () => {
       expect(musicGain(musicPosition(gain)) / gain).toBeCloseTo(1, 12);
       expect(sfxGain(sfxPosition(gain)) / gain).toBeCloseTo(1, 12);
     }
+    for (const gain of [1.00000000001, 1.125, 1.3, MAX_SFX_VOLUME]) {
+      expect(sfxGain(sfxPosition(gain))).toBeCloseTo(gain, 14);
+    }
   });
   it("keeps the music slope continuous at the default and clamps invalid input", () => {
     const h = 1e-7;

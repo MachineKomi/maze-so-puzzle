@@ -18,6 +18,9 @@ content, assets, camera or layout scope is included.
   displayed whole percentage. Writes recheck storage and refuse any unknown
   calibration marker, including a newer payload arriving since mount. The
   existing nonblocking warning and usable in-memory settings remain.
+  This refusal deliberately includes malformed explicit markers (null/string/0):
+  an unfamiliar declared format is not assumed safe to overwrite. Malformed JSON,
+  absent markers or unrecognized ordinary fields still use repairable defaults.
 - Only actual range changes convert UI position into gain. Zero, mute, hidden
   cancellation, existing20ms ramps, one streamed-music graph and per-cue envelopes
   remain unchanged. Test sound remains explicitly triggered, not per slider tick.
@@ -38,6 +41,13 @@ production pointer/keyboard/reload/future-storage/Reset checks, full project tes
 final budget/desktop and native calibration/save-reopen remain required before
 promotion. Physical listening remains P8, not inferred from numeric gains or
 offline rendered samples. No default or maximum loudness acceptance yet.
+
+Preliminary actual Sol source review found no runtime blocker. It requested an
+explicit unknown-marker repair policy (above), inverse samples above SFX1 (added),
+and actual browser proof of fractional gains through unrelated changes. Full
+promotion/headroom review remains open. The first post-allocation perf invocation
+found matching byte limits but correctly rejected stale build provenance after
+tests/ledger changed; a fresh build and complete rerun are required.
 
 ## Rollback and compatibility
 
