@@ -1,5 +1,14 @@
 # Lighting and wall-depth implementation plan
 
+## Current Human correction — WALL-04A-R1
+
+04-A's **visual goal is not accepted**: depth is too subtle/disappointing,
+shadows too small and lower-corner highlights misaligned. Execute the bounded
+[research/repair brief](WALL-04A-R1-convincing-depth.md) before claiming convincing
+wall depth. Its stronger internal-height comparison supersedes the old shallow
+numeric caps for R1 only. Real3D is an allowed measured alternative, not a mandate
+or an assumed performance win. 04-B regions/ditches and04-C actor gates remain.
+
 ## 04-A delivered — v0.22.9 WALL-04A, 2026-09-06
 
 The bounded wall-only slice is published at frozen

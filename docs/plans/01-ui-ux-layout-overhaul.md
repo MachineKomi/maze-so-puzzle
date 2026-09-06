@@ -1,5 +1,13 @@
 # UI/UX and Layout Overhaul Plan
 
+**2026-09-06 PT50 / BOOK-02A:** [latest Human discovery contract](../playtests/2026-09-06-depth-discovery-and-celebration.md)
+supersedes unknown-card question marks/blank-only policies: actual grey
+silhouettes, no unknown visible copy, legitimate encounter reveals color/name/
+one-liner, X/Y on both tabs. Root/UI owns friend discovery persistence and legacy
+rescue inference; Plan09 roster coverage, Plan10 separate Garden indicator.
+PT51/Plan02 adds in-maze achievement sticker fanfare; PT35 victory joy remains
+unaccepted polish, not already satisfied by finite confetti alone.
+
 **Latest Human-directed correction, 2026-09-05:** The completed Plan-01 engineering checkpoint failed Human visual/UX playtest. UI-03 is the authorized correction and supersedes conflicting historical layout/visibility choices here. Read `UI-03-fp-ui1-correction.md` and the full comparison intake before proposing further UI work.
 
 **Post-v0.22.0 routing, 2026-09-05:** UI-03 subsequently produced a Human-praised

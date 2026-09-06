@@ -1,5 +1,14 @@
 # Graphics and VFX overhaul plan
 
+## Latest celebration requirement — 2026-09-06
+
+Consume [PT35/PT51 intake](../playtests/2026-09-06-depth-discovery-and-celebration.md):
+larger exuberant victory friends, occasional short flips, finite fireworks and
+confetti; large achievement-sticker fanfare during maze play. Queue exact-once
+earned events, preserve controls/completion truth, mute and reduced/static.
+Use existing approved stickers now; three new collection stickers depend on
+Plan09 obtainable roster / Plan10 Garden truth. No fictional Garden/XP progress.
+
 ## VFX-02A implemented candidate — 2026-09-06
 
 Bounded reward-first code, independent Sol source review and24-case production

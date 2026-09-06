@@ -6,6 +6,27 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### PT15 / PT35 / PT37 / new PT50–51 — depth and collection delight
+
+Latest [Human intake](playtests/2026-09-06-depth-discovery-and-celebration.md)
+**reopens WALL-04A visual acceptance**: depth too subtle, shadows too small,
+lower-corner bevel misaligned. [WALL-04A-R1](plans/WALL-04A-R1-convincing-depth.md)
+owns research, stronger relief and an evidence-based real3D escalation.
+
+**PT-20260906-50:** Friends/Bestiary use grey actual-sprite silhouettes with no
+visible unknown-card copy; legitimate encounter reveals color/name/one-liner.
+Both show X/Y; friend rescue count only after discovery. BOOK-02A owns initial
+delivery/migration, Plan09 obtainable roster, Plan10 distinct Garden membership
+icon. This supersedes blank pages, question marks and the old unknown-art-fetch
+prohibition, not fog/tester discovery safety.
+
+**PT-20260906-51:** matching sticker achievements for meeting all friends,
+completing Bestiary and filling Garden species. Plan09/10 own roster/ownership
+rules; Plan02/UI owns in-maze large-art fanfare and exact-once presentation.
+PT35 is reinforced: bigger joyous friends, rare flips, bounded fireworks/confetti
+and rewarding victory composition. Full acceptance criteria/sequence are in the
+intake. These are captured requirements, not completed features.
+
 ### PT22 / V23-06 / V23-07 / V23-09 — VFX-02A first presentation slice
 
 In qualification for0.22.10: existing committed Gold/Science pickups and potion/

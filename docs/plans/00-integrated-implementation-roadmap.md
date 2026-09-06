@@ -4,6 +4,16 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
+**Latest Human priority,2026-09-06:** [depth/discovery/celebration intake](../playtests/2026-09-06-depth-discovery-and-celebration.md).
+04-A's engineering delivery did not meet the visual goal. Next bounded work is
+[WALL-04A-R1](WALL-04A-R1-convincing-depth.md): stronger relief, exact corner rims
+and floor cast, with researched Canvas/real3D alternatives if it still falls short.
+Then BOOK-02A implements PT50 silhouettes/friend encounter truth/X/Y; Plan02
+owns richer victory and in-maze sticker fanfare alongside continuous pickup glow.
+Plan09 owns obtainable roster/collection achievements; Plan10 owns distinct
+Garden membership and all-Garden achievement. No early Garden or permanent XP.
+Existing0.22.10 native qualification remains pending, not closed by newer work.
+
 **Active qualification: v0.22.10 VFX-02A reward-first.** Source and browser
 checks are complete; frozen/native publication follows. Read the
 [candidate](../reviews/2026-09-06-vfx02a-candidate.md) and [VFX Bible](../VFX_BIBLE.md).

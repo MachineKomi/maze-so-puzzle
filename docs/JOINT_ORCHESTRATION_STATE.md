@@ -7,6 +7,14 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Latest priority / in progress:** [WALL-04A-R1](plans/WALL-04A-R1-convincing-depth.md)
+  responds to Human's still-unmet depth/rim goal. Research and source diagnosis
+  captured; stronger same-footprint relief is being prototyped, not accepted or
+  deployed. Sol independently confirmed top=original∩raised geometry; rear and
+  front contributing contours must both supply the rim. [New intake](playtests/2026-09-06-depth-discovery-and-celebration.md)
+  also routes PT50 Book silhouettes/discovery/X/Y, PT51 collection achievements,
+  Garden membership and larger victory/fanfare. No Garden or XP execution yet.
+
 - **Authorized storage cleanup, 2026-09-06:** Human confirmed a full-repo ZIP
   backed up externally and approved deleting superseded unused delivery art and
   the eleven named obsolete worktrees. The eleven are removed (~17.55 GiB);

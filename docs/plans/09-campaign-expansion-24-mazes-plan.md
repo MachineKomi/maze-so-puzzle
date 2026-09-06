@@ -1,5 +1,13 @@
 # Plan 09 — expand the authored campaign from 16 to 24 mazes
 
+Human2026-09-06 [PT50/51 collection contract](../playtests/2026-09-06-depth-discovery-and-celebration.md):
+audit every counted Book friend/guardian against obtainable campaign/Surprise
+placements before enabling all-met achievements. Freeze eligible roster revision
+and stable IDs; preserve earned awards if the roster grows. Supply concise
+revealed card lore, all-friends-met and complete-Bestiary achievement definitions
+and art briefs. Garden ownership/all-Garden award remain Plan10, never inferred
+from encounter or rescue counts. No question marks/repeated unknown-card prose.
+
 Human2026-09-06: [V23-08/10 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
 requires approved enemy coverage in campaign, Surprise pools and bestiary, plus
 seed/version/options recipe capture for curating good Surprise layouts. Player

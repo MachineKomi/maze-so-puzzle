@@ -1,5 +1,13 @@
 # Plan 10 — Couch Co-op and Friend Garden Implementation Plan
 
+Human2026-09-06 [PT50/51](../playtests/2026-09-06-depth-discovery-and-celebration.md):
+Book discovery and rescue are not Garden ownership. Add a small Garden/gate icon
+beside each discovered friend's name only when that species really belongs to
+any owned Garden. Add an exact-once all-Garden-species achievement with matching
+approved sticker art and fair obtainable roster, distinct from all-friends-met
+and Bestiary completion. Preserve already-earned awards when rosters grow.
+This does not advance Garden implementation ahead of Plan09/greybox gates.
+
 Human2026-09-06: [V23-11 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
 adds rare friend eggs from enemies/chests after Garden/egg ownership exists,
 with bounded higher chances from stronger enemies. Specify stable rolls,
