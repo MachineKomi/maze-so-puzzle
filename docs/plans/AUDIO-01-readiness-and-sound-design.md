@@ -59,6 +59,12 @@ legacy value rather than silently reset it. Pair this small correction with the
 next qualified UI checkpoint when ownership permits; no new art/OST mastering
 or full readiness redesign is needed merely to calibrate these controls.
 
+The [reconciled Astra/Sol implementation boundary](../reviews/2026-09-06-audio01v2-joint-decision.md)
+selects Sol's usable piecewise music curve and concrete future-version write
+protection. SFX headroom still requires actual sample/overlap qualification;
+neither the preflight's loose bound nor fake GainNodes approves a boosted ceiling.
+This follows the frozen v0.22.5 UI/Exit publication and does not change that build.
+
 Source: [Human iPad balance report](../user-playtests/2026-09-06-ipad-audio-balance.md).
 The iPad has much quieter effects relative to music than the phone/laptop/native
 comparisons. This is a listening observation, not proof of old hardware failure.
