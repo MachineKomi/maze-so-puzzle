@@ -3,7 +3,8 @@
 Status: Phase 1 engineering-accepted and published in v0.22.8. Phase 2 has a
 Human-selected rounded-square Candidate B (2026-09-06) and source-only connected
 geometry preview; runtime publication/topology qualification remains outstanding.
-The bounded proof repair is under independent review/clean-checkout qualification.
+The bounded proof repair is independently source-accepted and clean-checkout
+qualified; [evidence](../reviews/2026-09-06-hole02-proof-and-source-checkpoint.md).
 Date: 2026-09-05. Backlog: PT-20260905-49.
 Source: [audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Owner: root rules/content integration with independent Sol/Astra review; bounded

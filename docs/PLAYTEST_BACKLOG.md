@@ -22,7 +22,8 @@ for future art. P12 is ready, with the unfinished-run restart warning and preser
 durable progress; P5–P11 remain cumulative. v0.22.7 is the immediate fallback.
 
 Current: bounded proof recovery/current-validation repair and two pit originals
-are implemented; clean-checkout qualification is underway. Human prefers B and
+are implemented; clean-checkout qualification passed (142art tests,0errors/429
+historical warnings). Human prefers B and
 delegates implementation, recorded in [D01](HUMAN_DECISIONS.md). Connected
 topology/runtime publication still needs technical and independent review.
 The [joint next-focus review](reviews/2026-09-06-v0228-next-focus-disposition.md)

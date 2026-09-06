@@ -25,8 +25,8 @@ separates wall-only value/depth work from ditch/region and actor/held grounding.
 The latter surfaces retain HOLE-02/PT36 gates; they no longer blanket-block
 04-A. Human selected pit Candidate B and delegated implementation judgment;
 topology/alpha/readability/performance qualification is still required. The
-[proof recovery flow](../source-assets/evidence/README.md) is now implemented
-and being qualified from a clean checkout. Do not reopen Plan03 wholesale.
+[proof recovery flow](../source-assets/evidence/README.md) is implemented and
+[qualified from a clean checkout](../reviews/2026-09-06-hole02-proof-and-source-checkpoint.md):142art tests,0current-art errors/429historical warnings. Do not reopen Plan03 wholesale.
 **Reward-first Plan02** prototypes may proceed against the accepted scene seam;
 publish after bounded 04-A/performance review, without waiting for unrelated
 region completion. Persistent XP is still Plan14, not newly authorized state.

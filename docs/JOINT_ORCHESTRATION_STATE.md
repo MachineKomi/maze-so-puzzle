@@ -350,12 +350,14 @@ is claimed. Raw evidence and private profile copies remain external under
 verified.** Exact source, CI, web parity and four public downloads are in §2.
 Keep the frozen release checkout clean; do not repeat accepted audio or rules work.
 
-**Current candidate work:** root Astra implemented explicit legacy/current art
+**Preparation checkpoint complete:** root Astra implemented explicit legacy/current art
 checks, exact approved-v14 archive/recovery, field-level manifest diagnostics and
 two clean pit originals. Actual Sol conditionally accepted the source repair,
 requiring documented clean-checkout recovery/validation before a portability
-claim. Full current-art validation passed locally (0 errors/429 historical
-warnings); final modified-source and clean-checkout qualification is in progress.
+claim. That condition is met at final source `96b898d`: mandatory validation
+fails before recovery, restores49 original bound files, then passes0errors/
+429historical warnings.142 art tests and21terrain tests pass. See
+[checkpoint evidence](reviews/2026-09-06-hole02-proof-and-source-checkpoint.md).
 Human selected rounded-square **B** and explicitly delegated design/implementation
 while busy; no repeated approval question is needed. Connected geometry preview
 is source-only and not a shipped art replacement. Runtime v0.22.8 is unchanged.

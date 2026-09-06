@@ -27,8 +27,8 @@ actual Sol independently reviews.** Read the new tranche authority at the top of
 Wall-only 04-A is no longer blanket-held by ditch art or PT36; their affected
 receiver/region and actor/held work remains gated. Human selected pit Candidate B
 and delegated implementation judgment. Proof recovery and the selected-source
-gallery are implemented; clean-checkout and runtime integration still need
-qualification. Begin reward-first Plan02 prototypes; preserve authoritative
+gallery are implemented; [clean-checkout recovery is qualified](../reviews/2026-09-06-hole02-proof-and-source-checkpoint.md).
+Runtime pit integration remains open. Begin reward-first Plan02 prototypes; preserve authoritative
 awards and defer persistent XP. Do not repeat completed Phase1/audio work or
 infer physical/iPad acceptance. P5–P11 remain cumulative.
 
