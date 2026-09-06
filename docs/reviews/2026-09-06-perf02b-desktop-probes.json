@@ -1,0 +1,305 @@
+{
+  "schema": 1,
+  "classification": "contaminated-report-only; external desktop diagnostic, not iPad qualification",
+  "baseline": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+  "startedAt": "2026-09-05T23:47:37.317Z",
+  "externalRoot": "C:/GameDev/maze-game-qa/performance/v22-perf02b",
+  "geometry": {
+    "rows": 15,
+    "allStateValid": true,
+    "allRestored": true,
+    "geometryViolations": 0,
+    "legalMeasuredMoves": 120,
+    "measuredWindowsMs": 30851,
+    "completeCohortElapsedMs": 78892
+  },
+  "limits": [
+    "Headless desktop Edge 152 at 1194×834 DPR1, board 682×682; affected iPad not connected.",
+    "15 sequential short rows, one per override with interleaved baselines; not a qualified repeated performance comparison.",
+    "Free host memory varied substantially and other team processes were active.",
+    "rAF intervals are callback cadence, not displayed-frame latency. CDP trace totals cover trace boundaries around the timer window and can include boundary work.",
+    "CDP LayerTree and tracing add overhead. Paint trace counts/durations exclude complete GPU/raster cost; zero CompositeLayers entries means unavailable in this trace configuration, not zero composition.",
+    "Tester run; synchronous active-run persistence is intentionally absent, and no durability conclusion is made.",
+    "Full ambient animations remain enabled during measurements. Audio was not toggled; playback state was not measured. No long-session, background or follower cohort.",
+    "Terrain-hidden/solid-fill probes retain loaded source resources; no intrinsic-resolution or decoded-memory conclusion."
+  ],
+  "hostFreeMemoryRange": {
+    "minimum": 389156864,
+    "maximum": 1805639680
+  },
+  "rows": [
+    {
+      "index": 0,
+      "mode": "baseline",
+      "file": "row-00-baseline.json",
+      "sha256": "d2204e3e7a75b98b8d5b00eafd422ffc9297e7291af0fff088ef2186497547d9",
+      "stateValid": true,
+      "rafP95Ms": 16.899999999997817,
+      "paintEvents": 342,
+      "paintTraceMs": 275.98,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 1,
+      "mode": "terrain-hidden",
+      "file": "row-01-terrain-hidden.json",
+      "sha256": "b2fd83d44e5eed8bb52b5c6c635273e7b021f8c49f4f5414804f2d42b13d573f",
+      "stateValid": true,
+      "rafP95Ms": 16.799999999999272,
+      "paintEvents": 343,
+      "paintTraceMs": 302.27,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 2,
+      "mode": "baseline",
+      "file": "row-02-baseline.json",
+      "sha256": "db49850db211040d6521b73924df71dc9757478d827042e129a5a938b8839e63",
+      "stateValid": true,
+      "rafP95Ms": 16.900000000001455,
+      "paintEvents": 358,
+      "paintTraceMs": 465.447,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 3,
+      "mode": "floor-filter-off",
+      "file": "row-03-floor-filter-off.json",
+      "sha256": "28827ceaaf2087bc61c48f00a7c3b63dda54c6e82290be17803d5a6a8b4bd1ff",
+      "stateValid": true,
+      "rafP95Ms": 16.80000000000291,
+      "paintEvents": 355,
+      "paintTraceMs": 409.578,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 4,
+      "mode": "baseline",
+      "file": "row-04-baseline.json",
+      "sha256": "685e0547bfb6a0ffd83e40f586fb51be6af6fc37c043855821395a70d058a27e",
+      "stateValid": true,
+      "rafP95Ms": 16.80000000000291,
+      "paintEvents": 364,
+      "paintTraceMs": 490.301,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 5,
+      "mode": "wall-filter-off",
+      "file": "row-05-wall-filter-off.json",
+      "sha256": "2df407cbfab6d4eeaf7b38faf16eeaa459def16daaf9c1bb8a2c2633df083336",
+      "stateValid": true,
+      "rafP95Ms": 16.80000000000291,
+      "paintEvents": 341,
+      "paintTraceMs": 301.238,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 6,
+      "mode": "baseline",
+      "file": "row-06-baseline.json",
+      "sha256": "23d7dfea87f26e7e1bc7b9a410716f663adf4ec502eb6a37d714795e62811e1e",
+      "stateValid": true,
+      "rafP95Ms": 16.80000000000291,
+      "paintEvents": 345,
+      "paintTraceMs": 342.085,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 7,
+      "mode": "depth-off",
+      "file": "row-07-depth-off.json",
+      "sha256": "9d8bb86d7194003a11b0a0a35b361de5c812273fb178398c70005bfaa2225f60",
+      "stateValid": true,
+      "rafP95Ms": 16.900000000001455,
+      "paintEvents": 348,
+      "paintTraceMs": 414.288,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 8,
+      "mode": "baseline",
+      "file": "row-08-baseline.json",
+      "sha256": "74b54620197da30a017d35c97965064a336870ccd781bc270966103fb7b3476a",
+      "stateValid": true,
+      "rafP95Ms": 16.900000000001455,
+      "paintEvents": 408,
+      "paintTraceMs": 316.472,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 9,
+      "mode": "highlight-normal",
+      "file": "row-09-highlight-normal.json",
+      "sha256": "bb78659144d4fffc7b600f3cbb54e5dab920ff9eb5938c2fcbd1d0e4b8e3284e",
+      "stateValid": true,
+      "rafP95Ms": 16.900000000001455,
+      "paintEvents": 417,
+      "paintTraceMs": 337.543,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 10,
+      "mode": "baseline",
+      "file": "row-10-baseline.json",
+      "sha256": "7c68be442b3d1f7412ea4253213a59485aeffe85d5bbd9e4e4e318fd6a5574d0",
+      "stateValid": true,
+      "rafP95Ms": 16.89999999999418,
+      "paintEvents": 342,
+      "paintTraceMs": 311.081,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 11,
+      "mode": "solid-fills",
+      "file": "row-11-solid-fills.json",
+      "sha256": "ec356c2c3f28b2b939cab970a9c1703ac96e90be18374f8a75056926116e12df",
+      "stateValid": true,
+      "rafP95Ms": 17,
+      "paintEvents": 360,
+      "paintTraceMs": 377.854,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 12,
+      "mode": "baseline",
+      "file": "row-12-baseline.json",
+      "sha256": "29488eabf90c060a0f04e69d7af2b8a38f669dd3f4f13dfb4c06d7190aef84f7",
+      "stateValid": true,
+      "rafP95Ms": 16.89999999999418,
+      "paintEvents": 417,
+      "paintTraceMs": 380.09,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    },
+    {
+      "index": 13,
+      "mode": "own-layer-hint",
+      "file": "row-13-own-layer-hint.json",
+      "sha256": "92c57ff895687ad66a68494a205528202f60222610bdc66ce16a6a3c4ea7cb89",
+      "stateValid": true,
+      "rafP95Ms": 16.89999999999418,
+      "paintEvents": 260,
+      "paintTraceMs": 276.267,
+      "layers": {
+        "before": 18,
+        "after": 22,
+        "worldLayerId": "159",
+        "compositingReasons": {
+          "compositingReasons": [
+            "Has a trivial 3d transform."
+          ],
+          "compositingReasonIds": [
+            "Trivial3DTransform"
+          ]
+        }
+      }
+    },
+    {
+      "index": 14,
+      "mode": "baseline",
+      "file": "row-14-baseline.json",
+      "sha256": "80decc9b90fccd9029adb09f04736be0869b26758cb9fb0eb4d1df800a04d0eb",
+      "stateValid": true,
+      "rafP95Ms": 16.90000000000873,
+      "paintEvents": 343,
+      "paintTraceMs": 348.514,
+      "layers": {
+        "before": 17,
+        "after": 21,
+        "worldLayerId": null,
+        "compositingReasons": null
+      }
+    }
+  ],
+  "artifacts": {
+    "summary.json": {
+      "bytes": 29380,
+      "sha256": "28cf3a72b3f5bf9363dd515ad7d39ffa1dfe44ed4cd925ce3506c7151d01ac51"
+    },
+    "audit.json": {
+      "bytes": 5727,
+      "sha256": "2f1d8f5af997c65806777820a7d8c618ff0784de159c27e8f7f6a350312611bf"
+    },
+    "README.md": {
+      "bytes": 3884,
+      "sha256": "18473a4fa8565d381102f02a0d144416bd4551e456df95818460a3a0941fb2e9"
+    },
+    "geometry.json": {
+      "bytes": 40273,
+      "sha256": "0b8fb8197fe3aad8ec4eb901c901d49af9fb9124e110282982e7d0e0edb6c0e8"
+    },
+    "baseline-board.png": {
+      "bytes": 544601,
+      "sha256": "0e361ef7f4a98a220bb6f2eb11960547581c8ef2c03f9086ef9889b3576c070a"
+    },
+    "own-layer-hint-board.png": {
+      "bytes": 544465,
+      "sha256": "12e46ae5c72fb0e278c9dfd00e14e151cdf5bb0c1879d2e5bac82971561dcc3e"
+    }
+  }
+}

@@ -7,6 +7,13 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Latest audio intake, 2026-09-06:** iPad SFX are much quieter against BGM than
+  on phone/laptop/native. Independent per-device Music/Sound effects sliders
+  are authorized and scoped in AUDIO-01V after accepted PLAY-A; Astra implements,
+  Sol reviews. Not yet implemented. Preserve the active sole-writer assignment
+  and existing default mix; verify real gain behavior before blaming hardware.
+  [Source](user-playtests/2026-09-06-ipad-audio-balance.md).
+
 - **Latest physical result, 2026-09-06:** [Human v0.22.2 feedback](user-playtests/v0222-playtest-feedback.md) reports no obvious regression, perhaps slight improvement, but scrolling still stutters on iPad. Character/animation movement is smooth while the camera stays clamped; desktop browser does not exhibit the same symptom. The iPad gate is **not passed**. Possible thin lines need investigation, not a fabricated regression verdict. Older “awaiting P1” statements below record pre-feedback publication state. Astra owns next moving-terrain/filter isolation; Sol's independent pace slice stays separate. Texture-scale and Lanternlight level-design steer is routed in backlog/roadmap.
 
 - **Published current preview: v0.22.2 V22-CAMERA1**, runtime/tag `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`. Astra implemented fixed-origin, resize-safe percentage camera translation; actual GPT-5.6 Sol High independently approved source, geometry, final test observer and disclosed native Exit exception. It is a controlled experiment, **not a proven physical-iPad fix**. No pace, FOV, engine/content/save, art, audio or dependency change. Frozen attachment/test-observer checkpoint: `b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c`. [Current receipt](../release/V22-CAMERA1-v0.22.2-release-verification.json).
@@ -105,18 +112,31 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Current next action, 2026-09-06:** PERF-02A's first physical P1 result is
-received: scrolling still stutters. Astra is completing separate Tessera
-integration on `codex/v22-tessera-integration`; main/runtime v0.22.2 stay intact.
-Actual Sol completed read-only PLAY-A preflight and awaits sole-writer handoff.
-The next performance lane is controlled moving-terrain/filter isolation.
-Do not claim its percentage-coordinate change improves frame delivery merely
-because it removes world left/top rebasing. If it remains poor, Astra resumes
-the next isolated moving-surface/terrain-cost probe from PERF-02 before broader
-rendering work. While that physical result is pending, root can finish the
-separate Tessera manifest/publication integration, then appoint actual Sol as
-the sole PLAY-A pace writer with Astra review; PLAY-B stationary rescue follows.
-Keep each seam/build distinguishable and every existing gate below open.
+**Current next action, 2026-09-06:** **Astra is sole runtime owner**, following
+actual Sol's explicit PLAY-A handback. Clean pushed candidate branch
+`codex/v22-tessera-integration` at
+`c766228ff25064c1df973bfb9b2bd2940ca86fce`, worktree
+`C:/GameDev/maze-game-v22-tessera-integration`, contains accepted Tessera art
+(`f6d54e1`) and pace runtime (`07897d9`). [Astra acceptance](reviews/2026-09-06-play-a-astra-acceptance.md)
+records source, visual, exact browser-evidence and independently rerun static/
+15-test review. Sol's full project502/502, pace6/6, inherited5/5 and UI1/1 pass;
+JS153514, CSS23510, public165031011, exact +230JS allocation. These are not yet
+deployed or physical-device accepted; main/runtime v0.22.2 remain intact.
+
+Merge latest main documentation into that isolated branch, then implement
+**AUDIO-01V** (independent Music/SFX levels) as a bounded Astra seam with Sol
+review. Preserve the current intended default mix and prove effective gain;
+no blanket cue amplification. Publish a properly versioned web/Windows successor
+after its own packaging gates; do not deploy unversioned candidate runtime.
+If audio cannot finish within a bounded checkpoint, ship accepted art/pace
+separately with explicit exclusions. PLAY-B and V22-UI-01 remain separate work.
+
+PERF-02A's physical P1 still fails. [PERF-02B desktop probes](reviews/2026-09-06-perf02b-moving-terrain-review.md)
+completed15/15 with no reproduced fault. One world-layer hint is a candidate for
+further DPR/large-world/resource/seam checks, not a published iPad fix. All raw
+timings are contaminated/report-only. Keep each seam/build distinguishable and
+every existing device/family gate open. The older queue paragraphs below are
+history, not a competing writer assignment.
 
 **New physical feedback, 2026-09-05:** the Human's
 [v0.22.1 web playtest](user-playtests/v0221-playtest-feedback.md) reports buttery

@@ -1,5 +1,15 @@
 # Music
 
+## Independent balance follow-up — 2026-09-06 (planned)
+
+The Human reports very quiet SFX relative to BGM on iPad, while phone, laptop web
+and Windows are broadly balanced. [Source and compatibility hypothesis](user-playtests/2026-09-06-ipad-audio-balance.md).
+[AUDIO-01V](plans/AUDIO-01-readiness-and-sound-design.md) adds separate persisted
+Music/Sound effects sliders in Sound & comfort after accepted PLAY-A, ahead of
+the larger readiness pass. Preserve shared mute, transport and current intended
+defaults; verify effective gain rather than assuming a media-element volume
+assignment changes speaker output on iPad. No mix change is shipped by this note.
+
 ## Readiness follow-up — 2026-09-05 (planned)
 
 The Human reports promptly switching music on a phone still displaying v0.22.0,

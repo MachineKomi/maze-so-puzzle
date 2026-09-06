@@ -246,9 +246,9 @@ coverage as eight levels are inserted.
   route, cross-input parity and non-reading/non-colour/reduced/static clue parity.
   Equivalent equipment families reuse that literacy rather than each receiving
   a separate tutorial level.
-- Freeze generated sizes so at least 90% of the declared seed cohort is <=16 on
-  either axis. Every larger result must include meaningful room/event structure
-  and pass the same event-gap and terminal-branch rules.
+- Freeze and report generated size/topology cohorts without a mandatory <=16
+  percentage. Larger results must earn their space with meaningful rooms/events
+  and pass the same event-gap, terminal-branch, solver and performance rules.
 - Version and exercise at least three deterministic generated topology families:
   classic labyrinth, room-and-spoke, and loop/garden/chamber. Topology-family
   selection uses an isolated deterministic stream and participates in generation

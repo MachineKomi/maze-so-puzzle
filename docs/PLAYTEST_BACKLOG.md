@@ -6,6 +6,17 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### PT20/PT23 — independent device-local Music and SFX levels
+
+[Human intake](user-playtests/2026-09-06-ipad-audio-balance.md): iPad SFX are very
+quiet against BGM at low device volume; phone/laptop/native are broadly balanced.
+Add two persisted sliders within Sound & comfort, retain shared mute and values
+across Reset Progress, and test actual iPad gain behavior. Do not infer an old
+hardware defect or globally amplify all cues. **AUDIO-01V** is a separate early
+Astra implementation / Sol review after accepted PLAY-A, before larger readiness
+work; Plan02/07B keep creative sound/mastering. Routed, not implemented; physical
+balance acceptance remains open. No change to the in-flight pace assignment.
+
 ### v0.22.2 physical feedback and design steer
 
 [Verbatim Human record](user-playtests/v0222-playtest-feedback.md). Limited quick

@@ -6,6 +6,18 @@ Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementa
 
 ### Execution refinement — 2026-09-05
 
+**Human scale refinement, 2026-09-06 (PT15):** existing bricks/leaves often read
+too large, and faint decorative overlays almost always do. Compare smaller
+world-space repeat periods per material family at actual gameplay scale, keeping
+approved source pixels and wall/floor roles. Current base repeats are roughly
+3–4.5tiles; dressing repeats are13–14tiles and existing tests require>=10. Those
+old lower-bound tests are not design authority: explicitly update them alongside
+reviewed calibration. Do not blindly shrink every source file or conflate visual
+repeat scale with decoded memory. Freeze PERF-02 comparison baselines first;
+validate stationary/fractional-camera seams, shimmer, contrast and all declared
+receivers. Record the final pair/scale matrix for Plan09, including room-rich
+20×20+ layouts. [Human feedback](../user-playtests/v0222-playtest-feedback.md).
+
 **PT49 predecessor:** [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md)
 lands the Human's cleaner connected pit art and single-width crossing contract.
 Consume its cardinal occupancy/boundary data for receiver exclusion, interior

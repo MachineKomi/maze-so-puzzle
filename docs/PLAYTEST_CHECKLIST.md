@@ -107,6 +107,14 @@ recorded as positive; the cause remains unknown. Remembered laptop victory silen
 remains an open issue. No audio-code fix is claimed in v0.22.1. AUDIO-01A will
 add a build-specific comparison when it ships.
 
+Audio balance follow-up, 2026-09-06: the Human already reports very quiet iPad
+SFX against music at low system volume; phone/laptop/Windows are broadly balanced.
+No need to reproduce that observation now. Independent Music/Sound effects
+sliders are planned as AUDIO-01V, not available in v0.22.2. When its exact build
+is listed, we will ask whether lowering Music makes door/rescue/pickup effects
+clear at comfortable device volume, and whether the chosen balance survives
+mute/unmute and reopening. A missing slider in today's build is expected.
+
 ### P4 — Laptop comparison and ordinary recovery
 
 - [ ] Web and Windows app: smooth holds/turns, then close normally and reopen.
