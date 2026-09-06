@@ -1,6 +1,18 @@
 # Release checklist
 
-## Current V22-CAMERA1 experimental preview — v0.22.2
+## Current published checkpoint — v0.22.4 V22-RESCUE1
+
+Use [joint state](JOINT_ORCHESTRATION_STATE.md) for the latest writer, accepted
+candidate and deployment status. Published v0.22.4 web/Windows artifacts and all
+four downloaded files are verified in the immutable
+[receipt](../release/V22-RESCUE1-v0.22.4-release-verification.json).
+[Family checks](PLAYTEST_CHECKLIST.md) remain separate: publication does not
+close the reported iPad camera issue or confirm physical rescue/pace/mix comfort.
+The accepted native Exit and in-progress compact UI candidate are not in v0.22.4.
+Do not restart historical unchecked release steps below; their original build
+identities and freeze-time evidence are retained as history.
+
+## Historical V22-CAMERA1 experimental preview — v0.22.2
 
 Frozen runtime/tag: `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`.
 Publication attachments: `b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c`.

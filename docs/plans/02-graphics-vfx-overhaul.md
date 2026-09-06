@@ -9,6 +9,18 @@ without letting decorative simulation decide engine rewards/solvability. Permane
 XP remains Plan14 exploration. Missing science/Power token art is a bounded
 dependency; accept real gameplay beauty and worst-case cost together.
 
+**Root source finding,2026-09-06:** current `scene.css` `colour-key-hover`
+switches from two `drop-shadow()` functions to `brightness()` followed by two
+shadows; `colour-door-breathe` also changes the leading function type.
+These lists cannot interpolate pairwise, consistent with the reported buzz:
+[Filter Effects §14.1](https://www.w3.org/TR/filter-effects-1/#interpolation-of-filters)
+specifies discrete fallback for incompatible lists. This is a source/spec
+explanation, not yet an observed browser phase trace. Confirm computed filters
+across the cycle before and after the repair. Do not simply turn discrete
+filters into continuously rerasterized blur chains: prefer the bounded retained
+halo/opacity design below, preserving nonzero baseline colour, approved sprite
+edges and Lite/Reduced/Static behavior. No glow fix ships in v0.22.4 or UI-01A.
+
 **Latest Human-directed correction, 2026-09-05:** UI-03 advances bounded victory confetti/friend dances and removes whole-board combat scaling. Preserve its motion preferences, stable scene geometry and joyful static fallback. This plan still owns the richer coordinated VFX programme; do not reintroduce camera punches or use timing reductions to erase delight without evidence.
 
 ## 0. Manager-reviewed execution addendum
