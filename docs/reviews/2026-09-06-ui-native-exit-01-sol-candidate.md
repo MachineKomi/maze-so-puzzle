@@ -49,6 +49,13 @@ storage warnings remain the only durability authority.
 - A focused production-browser run passed 3/3 in 7.22s: no bridge/manual-close
   guidance plus Play, rejected bridge plus Play, and late rejected promise after
   Play/unmount with no page error or stale notice.
+- One additional actual Tauri WebView2 launch simulated both an unavailable
+  page-visible public bridge and a rejected close promise. Each case showed the
+  neutral manual-close status, kept PID 38848 open, kept Play usable, produced no
+  page error, and restored the real bridge on reload. Computer Use then closed
+  that owned window normally with OS Alt+F4; the PID and port 9242 terminated.
+  This is simulated client failure-injection in a native host, not proof of a
+  real capability denial.
 - `npm run check:desktop` passed with the locked Cargo graph. The serial native
   command
   `node node_modules/@tauri-apps/cli/tauri.js build --no-bundle --ci -- --locked`
@@ -99,9 +106,9 @@ namespace and close function, with no page errors.
 Primary native evidence is under
 `C:/GameDev/maze-game-qa/output/ui-native-exit-01/e5a4a77cfc78/`, including
 `native-summary.json`, three source/state records, Computer Use screenshots,
-the copied executable and both retained observer failures. The summary is 4,762
+the copied executable and both retained observer failures. The summary is 6,399
 bytes with SHA-256
-`9136143bf2d59dd52140669cb8de62e57d52d085285365127226a37ae182eef0`.
+`d23b3a76c0ef041c5cb5355767fa3ff2016f5ebcb02f71cc7e2bd2f6fa1e2f5d`.
 Focused browser
 evidence is
 `C:/GameDev/maze-game-qa/output/playwright/ui-native-exit-01-browser/playwright-results.json`
