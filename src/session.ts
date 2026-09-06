@@ -369,13 +369,23 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
   }
 
   const distanceFromStart = Math.abs(position.x - level.start.x) + Math.abs(position.y - level.start.y);
-  // Pickups, rescues and doors resolve on movement steps. Combat deliberately
-  // resolves in place without increasing `steps`, so defeated enemies cannot
-  // participate in this movement-only plausibility bound.
-  const movementResolvedCount = collected.size + rescued.size + opened.size;
+  const movementStride = maximumMovementStride(level);
+  const stationaryObjectsArePlausible = [...rescued, ...defeated, ...opened].every((id) => {
+    const object = objectsById.get(id);
+    return object !== undefined
+      && Math.abs(object.at.x - level.start.x) + Math.abs(object.at.y - level.start.y)
+        <= steps * movementStride + 1;
+  });
+  const openedDoorsMatchKeys = [...opened].every((id) => {
+    const object = objectsById.get(id);
+    return object?.kind === "door" && keys.includes(object.color);
+  });
   if (
-    distanceFromStart > steps * maximumMovementStride(level)
-    || movementResolvedCount > steps
+    distanceFromStart > steps * movementStride
+    || collected.size > steps
+    || !stationaryObjectsArePlausible
+    || !openedDoorsMatchKeys
+    || (defeated.size > 0 && !hasSword)
   ) {
     return null;
   }

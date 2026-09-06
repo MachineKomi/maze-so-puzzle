@@ -10,7 +10,7 @@ export interface PowerSearchResult { readonly opportunities: readonly PowerOppor
  * Gameplay owns any later shared/generalized suggestion service. */
 export function* createPowerOpportunitySearch(level: LevelDefinition, initial: GameState, blockerId: string, maxStates = 2048): Generator<void,PowerSearchResult> {
   const potionIds = new Set(level.objects.filter(o => o.kind === "potion").map(o => o.id));
-  const signature = (state: GameState) => progressionStateSignature(state, false, potionIds);
+  const signature = (state: GameState) => progressionStateSignature(state, potionIds);
   const queue = [initial], seen = new Set([signature(initial)]);
   const found = new Map<string, PowerOpportunity>();
   const candidates = level.objects.filter((o): o is PowerOpportunity =>

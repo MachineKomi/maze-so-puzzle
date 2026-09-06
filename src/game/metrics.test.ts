@@ -8,17 +8,23 @@ describe("campaign route-quality metrics", () => {
     expect(Object.keys(report)).toHaveLength(16);
     for (const level of CURATED_LEVELS) {
       const metric = report[level.id]!;
-      expect(metric.ordinaryMoves).toBeGreaterThan(0);
-      expect(metric.perfectMoves).toBeGreaterThanOrEqual(metric.ordinaryMoves);
+      expect(metric.ordinaryInputs).toBeGreaterThan(0);
+      expect(metric.perfectInputs).toBeGreaterThanOrEqual(metric.ordinaryInputs);
+      expect(metric.ordinaryMovementSteps).toBeLessThanOrEqual(metric.ordinaryInputs);
+      expect(metric.perfectMovementSteps).toBeLessThanOrEqual(metric.perfectInputs);
       expect(metric.ordinaryRescues).toBe(0);
       expect(metric.perfectRescues).toBe(level.objects.filter((item) => item.kind === "animal").length);
       expect(Number.isFinite(metric.routeActivityDensity)).toBe(true);
       expect(metric.prerequisiteDepth).toBeNull();
     }
-    expect(CURATED_LEVELS.slice(8).map((level) => report[level.id]!.ordinaryMoves))
-      .toEqual([182, 150, 204, 164, 29, 104, 47, 62]);
-    expect(CURATED_LEVELS.slice(8).map((level) => report[level.id]!.perfectMoves))
-      .toEqual([196, 205, 214, 174, 43, 178, 59, 78]);
+    expect(CURATED_LEVELS.map((level) => report[level.id]!.ordinaryInputs))
+      .toEqual([6, 38, 65, 82, 71, 95, 120, 123, 182, 150, 204, 164, 29, 104, 47, 62]);
+    expect(CURATED_LEVELS.map((level) => report[level.id]!.perfectInputs))
+      .toEqual([7, 52, 80, 91, 78, 108, 150, 140, 195, 206, 210, 169, 44, 176, 58, 75]);
+    expect(CURATED_LEVELS.map((level) => report[level.id]!.ordinaryMovementSteps))
+      .toEqual([6, 36, 62, 78, 66, 90, 114, 116, 179, 146, 197, 158, 28, 100, 44, 54]);
+    expect(CURATED_LEVELS.map((level) => report[level.id]!.perfectMovementSteps))
+      .toEqual([6, 48, 74, 84, 70, 100, 140, 130, 189, 198, 199, 158, 40, 168, 50, 62]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.rawBranchPoints))
       .toEqual([2, 6, 5, 8, 7, 6, 11, 11, 14, 18, 14, 16, 13, 10, 37, 40]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.meaningfulStateChanges))
@@ -27,7 +33,7 @@ describe("campaign route-quality metrics", () => {
       .toEqual([0, 0, 0, 0, 0, 0, 4, 2, 64, 44, 49, 27, 5, 21, 0, 1]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.longestQuietRun))
       .toEqual([6, 8, 13, 13, 9, 14, 16, 15, 42, 48, 24, 20, 11, 27, 9, 9]);
-    expect(Math.max(...CURATED_LEVELS.slice(8).map((level) => report[level.id]!.ordinaryMoves)))
+    expect(Math.max(...CURATED_LEVELS.slice(8).map((level) => report[level.id]!.ordinaryInputs)))
       .toBeLessThanOrEqual(210);
     expect(Math.max(...CURATED_LEVELS.slice(8).map((level) => report[level.id]!.longestQuietRun)))
       .toBeLessThanOrEqual(62);
@@ -41,7 +47,8 @@ describe("campaign route-quality metrics", () => {
       map: ["######", "#@s2E#", "#....#", "#....#", "#....#", "######"],
     });
     expect(measureLevel(combat)).toMatchObject({
-      ordinaryMoves: 4,
+      ordinaryInputs: 4,
+      ordinaryMovementSteps: 3,
       meaningfulStateChanges: 2,
       retraversalMoves: 0,
     });

@@ -47,7 +47,9 @@ function progressedPlayingState(level: LevelDefinition): GameState {
     const result = movePlayer(level, state, direction);
     expect(
       result.moved || result.events.some(
-        (event) => event.type === "enemy-defeated" || event.type === "door-opened",
+        (event) => event.type === "enemy-defeated"
+          || event.type === "door-opened"
+          || event.type === "animal-rescued",
       ),
     ).toBe(true);
     expect(result.state).not.toBe(state);
@@ -127,6 +129,96 @@ describe("active run persistence", () => {
     });
     expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game).toEqual(game);
   });
+
+  it("accepts a zero-step save immediately after a stationary rescue", () => {
+    const level = parseAsciiLevel({
+      id: "stationary-rescue-save",
+      name: "Stationary Rescue Save",
+      objective: "Test",
+      map: ["#####", "#@qE#", "#...#", "#...#", "#####"],
+    });
+    const game = movePlayer(level, createInitialGameState(level), "right").state;
+
+    expect(game).toMatchObject({
+      position: level.start,
+      steps: 0,
+      rescuedAnimalIds: [level.objects.find((object) => object.kind === "animal")?.id],
+    });
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game).toEqual(game);
+  });
+
+  it("rejects impossible remote stationary interactions and missing capabilities", () => {
+    const rescueLevel = parseAsciiLevel({
+      id: "remote-rescue-save",
+      name: "Remote Rescue Save",
+      objective: "Test",
+      map: ["#######", "#@..qE#", "#.....#", "#.....#", "#.....#", "#.....#", "#######"],
+    });
+    const animal = rescueLevel.objects.find((object) => object.kind === "animal");
+    expect(animal?.kind).toBe("animal");
+    if (!animal || animal.kind !== "animal") throw new Error("Missing animal fixture.");
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(rescueLevel, {
+      ...createInitialGameState(rescueLevel),
+      rescuedAnimalIds: [animal.id],
+    }), [rescueLevel])).toBeNull();
+
+    const doorLevel = parseAsciiLevel({
+      id: "door-without-key-save",
+      name: "Door Without Key Save",
+      objective: "Test",
+      map: ["######", "#@R.E#", "#....#", "#....#", "#....#", "######"],
+    });
+    const door = doorLevel.objects.find((object) => object.kind === "door");
+    expect(door?.kind).toBe("door");
+    if (!door || door.kind !== "door") throw new Error("Missing door fixture.");
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(doorLevel, {
+      ...createInitialGameState(doorLevel),
+      openedDoorIds: [door.id],
+    }), [doorLevel])).toBeNull();
+
+    const enemyLevel = parseAsciiLevel({
+      id: "enemy-without-sword-save",
+      name: "Enemy Without Sword Save",
+      objective: "Test",
+      initialPower: 2,
+      map: ["######", "#@1.E#", "#....#", "#....#", "#....#", "######"],
+    });
+    const enemy = enemyLevel.objects.find((object) => object.kind === "enemy");
+    expect(enemy?.kind).toBe("enemy");
+    if (!enemy || enemy.kind !== "enemy") throw new Error("Missing enemy fixture.");
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(enemyLevel, {
+      ...createInitialGameState(enemyLevel),
+      power: enemyLevel.initialPower + enemy.power,
+      defeatedEnemyIds: [enemy.id],
+    }), [enemyLevel])).toBeNull();
+  });
+
+  it("round-trips every authored ordinary and perfect route under current rules", () => {
+    for (const level of CURATED_LEVELS) {
+      for (const options of [{ avoidAnimals: true }, { requireAllAnimals: true }]) {
+        const solution = solveLevel(level, options);
+        expect(solution.solvable, `${level.name} ${JSON.stringify(options)}`).toBe(true);
+        let game = createInitialGameState(level);
+        for (const direction of solution.directions) {
+          const result = movePlayer(level, game, direction);
+          game = result.state;
+          if (result.events.some((event) => (
+            event.type === "animal-rescued"
+            || event.type === "door-opened"
+            || event.type === "enemy-defeated"
+            || event.type === "hole-jumped"
+            || event.type === "portal-warped"
+          ))) {
+            expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game, level.name)
+              .toEqual(game);
+          }
+        }
+        expect(game.status, level.name).toBe("won");
+        expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game, level.name)
+          .toEqual(game);
+      }
+    }
+  }, 120_000);
 
   it("rejects stale revision and fingerprint snapshots without touching durable progress", () => {
     const level = storyLevel();

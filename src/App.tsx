@@ -65,7 +65,7 @@ import {
   type CameraWindow,
   type TileKey,
 } from "./game/exploration";
-import { advanceFollowerProcession, createFollowerProcession, followerTargets } from "./game/followerTrail";
+import { advanceFollowerProcession, createFollowerProcession, followerTargets, joinFollowerProcession } from "./game/followerTrail";
 import { useSceneTravel } from "./ui/game/useSceneTravel";
 import { getProgressiveHint, hintStateKey } from "./game/hints";
 import { getRequiredPath } from "./game/reachability";
@@ -418,6 +418,15 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
             tone: "careful",
             sound: "bump",
           };
+        case "caged-friend": {
+          const animal = getObjectAt(level, event.target);
+          return {
+            icon: animal?.kind === "animal" ? resolveAnimalArt(animal.species).src : ASSETS.navMazes,
+            text: "Land beside the cage to help this friend.",
+            tone: "careful",
+            sound: "bump",
+          };
+        }
         case "wall":
         case "out-of-bounds":
           return { icon: ASSETS.navMazes, text: "Boop! A wall.", tone: "plain", sound: "bump" };
@@ -1402,6 +1411,16 @@ function App() {
     const nextFeedback = hasInteraction
       ? feedbackFor(result.events, level)
       : { icon: ASSETS.goal, text: level.objective, tone: "plain" as const, sound: "step" as const };
+    const rescuedEvent = result.events.find(
+      (event): event is Extract<GameEvent, { type: "animal-rescued" }> => event.type === "animal-rescued",
+    );
+    const rescuedAnimal = rescuedEvent
+      ? level.objects.find(
+          (object): object is Extract<LevelObject, { kind: "animal" }> => (
+            object.kind === "animal" && object.id === rescuedEvent.objectId
+          ),
+        )
+      : undefined;
     setGame(result.state);
     if (guidedObjectId && result.state.collectedObjectIds.includes(guidedObjectId)) {
       setGuidedObjectId(null);
@@ -1409,6 +1428,8 @@ function App() {
     if (result.moved) {
       lastMovedDirection.current = direction;
       setProcession(current=>advanceFollowerProcession(current,result.state.position,result.state.rescuedAnimalIds,travelDiscontinuity));
+    } else if (rescuedEvent && rescuedAnimal) {
+      setProcession((current) => joinFollowerProcession(current, rescuedEvent.objectId, rescuedAnimal.at));
     }
     if (result.moved && explorationMode) {
       setRevealedTiles((revealed) => revealVisibleTiles(
@@ -1425,9 +1446,6 @@ function App() {
     }
     const defeatedEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "enemy-defeated" }> => event.type === "enemy-defeated",
-    );
-    const rescuedEvent = result.events.find(
-      (event): event is Extract<GameEvent, { type: "animal-rescued" }> => event.type === "animal-rescued",
     );
     const jumpedEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "hole-jumped" }> => event.type === "hole-jumped",
@@ -1501,23 +1519,8 @@ function App() {
       }
       playSound("bump", mutedRef.current);
     } else if (rescuedEvent) {
-      const animal = level.objects.find(
-        (object): object is Extract<LevelObject, { kind: "animal" }> => (
-          object.kind === "animal" && object.id === rescuedEvent.objectId
-        ),
-      );
-      if (animal && jumpedEvent) {
-        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump", true);
-        const jumpSequence = presentationSequence.current;
-        const rescueDuration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : RESCUE_PRESENTATION_MS;
-        schedulePresentationTimer(
-          jumpSequence,
-          () => beginRescuePresentation(rescuedEvent, animal),
-          Math.max(100, jumpDuration - 20),
-        );
-        presentationDuration = Math.max(100, jumpDuration - 20) + rescueDuration;
-      } else if (animal) {
-        presentationDuration = beginRescuePresentation(rescuedEvent, animal);
+      if (rescuedAnimal) {
+        presentationDuration = beginRescuePresentation(rescuedEvent, rescuedAnimal);
       }
     } else if (jumpedEvent && !openedDoorEvent) {
       presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
@@ -2074,7 +2077,11 @@ function App() {
     if (shouldConfirmMazeSwitch({
       hasActiveRun,
       status: game.status,
-      steps: game.steps,
+      hasProgress: game.steps > 0
+        || game.collectedObjectIds.length > 0
+        || game.rescuedAnimalIds.length > 0
+        || game.defeatedEnemyIds.length > 0
+        || game.openedDoorIds.length > 0,
       currentLevelId: level.id,
     }, nextLevel.id)) {
       modalReturnFocus.current = document.activeElement instanceof HTMLElement

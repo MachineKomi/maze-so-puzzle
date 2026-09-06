@@ -40,7 +40,6 @@ export interface LevelValidation {
 
 export function progressionStateSignature(
   state: GameState,
-  includeAnimals: boolean,
   statefulCollectibleIds: ReadonlySet<string>,
 ): string {
   // Engine-owned arrays are kept sorted. Equipment and reusable keys already
@@ -61,7 +60,7 @@ export function progressionStateSignature(
     state.hasAntidoteLeaf ? 1 : 0,
     state.keys.join(","),
     progressionCollectibles.join(","),
-    includeAnimals ? state.rescuedAnimalIds.join(",") : "",
+    state.rescuedAnimalIds.join(","),
     state.defeatedEnemyIds.join(","),
     state.openedDoorIds.join(","),
     state.status,
@@ -233,7 +232,7 @@ export function solveLevel(
       errors: ["Initial solver state must be a playing state for this level."],
     };
   }
-  const initialSignature = progressionStateSignature(initial, requireAllAnimals, statefulCollectibleIds);
+  const initialSignature = progressionStateSignature(initial, statefulCollectibleIds);
   const queue: GameState[] = [initial];
   const signatures: string[] = [initialSignature];
   const seen = new Set<string>([initialSignature]);
@@ -261,7 +260,7 @@ export function solveLevel(
         continue;
       }
 
-      const nextSignature = progressionStateSignature(result.state, requireAllAnimals, statefulCollectibleIds);
+      const nextSignature = progressionStateSignature(result.state, statefulCollectibleIds);
       // A successful combat changes Power and clears the enemy without moving
       // Ame. Treat any genuine state transition as a searchable edge; blocked
       // movement and too-strong encounters retain the current signature.
