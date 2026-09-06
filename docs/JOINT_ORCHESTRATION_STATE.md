@@ -7,6 +7,12 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Git continuation:** clean backed-up `codex/jump-camera-delight`; main is
+  docs closure d04a691. Smoke-helper correction03026dd and this operations note
+  stay on the development branch for the next runtime slice. The docs closure
+  was actually skipped by Vercel; do not push the later script change to main
+  merely to publish docs, because scripts correctly require a web build.
+
 - **Live web0.22.13 delivers tall walls, crisp dressing and the jump-camera fix.**
   Source e59d0f9, runtime dfe04a93; exact-source CI and one Git-integrated Vercel
   deployment passed. [Public receipt](reviews/2026-09-06-v02213-public-verification.md)

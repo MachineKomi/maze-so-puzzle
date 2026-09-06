@@ -57,3 +57,11 @@ roadmap and Human decisions remain intact. All outputs are recorded in the
 [artifact ledger](../LOCAL_ARTIFACT_LEDGER.md); none were deleted or archived.
 Documentation closure compares the full range from last-success e59d0f9 and
 uses the unchanged [Vercel guard](../VERCEL_DEPLOYMENT.md), without a new build.
+
+Final operations verification: docs closure `d04a6911964af5f057baa23ea173b6f7db7a091e`
+was pushed to main; Vercel reported **Canceled by Ignored Build Step** at
+[the skipped checkpoint](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/6hfewD4rxitWR4rD4WoVKB1EfqKC).
+No second game payload was built. The known-clear-path helper correction is
+backed up as03026dd on `codex/jump-camera-delight` only. Scripts are deliberately
+not docs-exempt: carry that correction with the next qualified runtime release,
+not an unchanged-game main push. Main remains at docs closure d04a691.
