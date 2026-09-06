@@ -122,6 +122,14 @@ has been reproduced or reviewed. Do not interrupt that task or edit its files.
   regenerated consumers. Compare readable foreground placement in the existing
   static body, movement and combat compositions before freezing Plan-05 sockets.
   Do not patch a weapon-name CSS exception or change its identity here.
+  The [2026-09-06 attachment preflight](../reviews/2026-09-06-pt36-attachment-preflight.md)
+  establishes that rear placement was deliberate and that the old Twilight
+  capture was unequipped. Before closing this gate, inspect an equipped current
+  scene at the top camera edge, during body sway, and across the jump handoff:
+  those paths currently differ from the shared static attachment contract.
+  Root has reviewed the source and historical actual-size sheet, not accepted
+  current posed alignment or a foreground replacement. This does not authorize
+  moving the weapon layer without comparing face and hand occlusion.
 - `PT-20260905-38`/`39`: retain actual-size evidence of any sprite softening
   during scale/warp motion, distinguishing texture sampling from new lighting
   blur. Plan 05 owns the motion correction; 07B qualifies integrated sampling.
