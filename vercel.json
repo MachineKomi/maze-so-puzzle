@@ -2,6 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "vite",
   "installCommand": "npm ci",
+  "ignoreCommand": "node scripts/deployment/ignore-build.mjs",
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "git": {
+    "deploymentEnabled": {
+      "codex/**": false,
+      "codex/preview/**": true
+    }
+  }
 }

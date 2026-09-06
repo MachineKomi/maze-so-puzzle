@@ -1,16 +1,61 @@
 # Vercel deployment
 
-The browser game is ready to deploy as a static Vite project on Vercel's Hobby
-plan. It needs no paid features, serverless functions, database, environment
-variables, or external services.
+The browser game is a static Vite project: no backend, serverless functions or
+database. The Human upgraded the existing team to **Pro** on 2026-09-06 after a
+Deployment Storage warning. Do not change its plan, retention or billing settings.
 
-Production URL: [maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/)
+Production URL: [mazesopuzzle.com](https://mazesopuzzle.com/).
+Existing alias: [maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/).
+Both served identical frozen v0.22.10 HTML/JS/CSS on 2026-09-06. Browser saves are
+origin-local: the new domain does **not** automatically inherit saves from the
+old alias. Keep the old alias available; never clear saves to migrate domains.
 
 The Vercel project is already connected to
-`MachineKomi/maze-so-puzzle`. A push to GitHub `main` starts a production build
-and updates the canonical URL automatically when that build succeeds. Branches
-and pull requests can receive separate Vercel preview URLs, whose local browser
-saves are intentionally separate from production.
+`MachineKomi/maze-so-puzzle`. Runtime/build-input changes on `main` still start a
+production build. The repository-owned deployment safeguard skips proven non-web
+changes, while GitHub backup pushes and CI continue. See the
+[storage investigation and evidence](reviews/2026-09-06-vercel-storage-investigation.md).
+
+## Backup is not deployment
+
+- Commit and push meaningful checkpoints frequently. Do not reduce backup cadence.
+- `vercel.json` runs `node scripts/deployment/ignore-build.mjs` before installation.
+  Vercel's convention is **exit 0 = skip; exit 1 = build**.
+- Compare **VERCEL_GIT_PREVIOUS_SHA** (last successful project/branch deployment)
+  to **VERCEL_GIT_COMMIT_SHA**, not `HEAD^`. A docs commit following an unshipped
+  runtime commit must still build. Renames include both removed and added paths.
+- Only `docs/`, `release/`, `.github/`, `src-tauri/` and root Markdown are exempt.
+  These do not enter the current browser bundle. Unknown files, `src/`, `public/`,
+  package/lock/config files, and scripts always build. Revisit the exemptions if
+  future Vite production code imports documentation or desktop assets.
+- Missing environment/SHA, missing shallow-history baseline, mismatched checkout
+  or Git errors **build conservatively**. Do not substitute a guessed parent to
+  suppress a build. Long doc-only sequences may therefore cause an occasional
+  safe fallback build with Vercel's shallow checkout.
+- Routine `codex/**` branch auto-deployments are disabled. An intentionally named
+  `codex/preview/<purpose>` branch opts in; `main` and non-Codex branches retain
+  their default Git deployment eligibility. Vercel permits a matching `true`
+  rule to override the broader `false` rule. Existing branches/deployments remain.
+  Agents must bring this configuration forward before pushing an older branch.
+- For a deliberate unchanged-source/environment recovery deployment, the operator
+  can use Redeploy and uncheck **Use project's Ignore Build Step**, or temporarily
+  set `MSP_FORCE_DEPLOY=1` for that environment, deploy and then
+  remove the override. This bypasses the diff gate, not Git branch eligibility.
+  Never leave it enabled routinely. No override is needed for normal game changes.
+- Intentional skipped builds can show as canceled/ignored in Vercel; this is not
+  failed game QA. They still count toward deployment/concurrency quotas, but do
+  not proceed to install/build/upload another full game output. A docs
+  checkpoint's source SHA need not have a new production
+  deployment. Verify game releases at their actual runtime commit and raw bytes.
+- This prevents future waste; it does not reclaim retained historical storage.
+  Any retention change, deployment deletion or asset archive needs explicit Human
+  approval with exact targets and preserved rollback/download needs first.
+
+Validate with `node --test scripts/deployment/ignore-build.test.mjs`; CI runs this
+without extra dependencies. For the three real-history regressions, additionally
+set `MSP_DEPLOY_HISTORY_TESTS=1` in a clone retaining the referenced historical
+commits. CI intentionally retains a shallow checkout instead of downloading old
+art history solely for those optional cases.
 
 ## Import from GitHub
 
@@ -18,29 +63,37 @@ saves are intentionally separate from production.
    `MachineKomi/maze-so-puzzle`.
 2. Choose **Add New → Project**, then import `MachineKomi/maze-so-puzzle`.
 3. Keep the repository root as the project root.
-4. Confirm that the plan shown for the account/team is **Hobby** before deploying.
+4. Use the Human-selected existing team and plan; do not purchase/change a plan.
 5. Vercel should read the committed `vercel.json` settings:
    - Framework Preset: `Vite`
    - Install Command: `npm ci`
    - Build Command: `npm run build`
    - Output Directory: `dist`
-6. Leave Environment Variables empty and deploy.
+   - Ignored Build Step: `node scripts/deployment/ignore-build.mjs`
+6. No application secrets are needed. Keep Vercel system environment variables
+   available for the build guard. Do not disable the guard for routine deployment.
 
-Git integration creates preview deployments for branches and production
-deployments from `main`. No rewrite is currently needed because the game has one
+Git integration follows the branch/diff policy above. No rewrite is currently needed because the game has one
 document and does not use client-side URL routing.
 
 ## Publish an update
 
 1. Run `npm run check` locally and review the exact source diff.
 2. Push the verified commit to GitHub `main`.
-3. Allow the existing Vercel Git integration to build and promote it. Do not
-   create a second Vercel project or enable a paid feature.
+3. Allow the existing Vercel Git integration to build and promote web changes.
+   Docs-only pushes should skip. Do not create a second project or duplicate CLI
+   deployment for an already-running Git deployment.
 4. Open the canonical production URL and confirm its build label and the key
    smoke checks below. GitHub Actions and Vercel build independently, so a green
    local gate and a post-deployment smoke test are both required.
 
 ## Verify the deployment
+
+Use the current [release checklist](RELEASE_CHECKLIST.md),
+[family checks](PLAYTEST_CHECKLIST.md) and [joint state](JOINT_ORCHESTRATION_STATE.md).
+Do not restart the old release-specific checks below as current requirements.
+
+## Historical v0.19-era smoke checklist (retained evidence)
 
 - For the Plan 03 static-art cutover, confirm the current catalogue and visible
   weapon label use **Bubble Ring Blade**. The historical `bubble-bow` ID is a

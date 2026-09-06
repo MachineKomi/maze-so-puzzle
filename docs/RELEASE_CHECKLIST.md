@@ -1,5 +1,14 @@
 # Release checklist
 
+## Deployment operations guard
+
+Follow [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md): keep frequent GitHub backups,
+but skip proven documentation-only web deployments and opt routine Codex previews
+in explicitly. `node --test scripts/deployment/ignore-build.test.mjs` is a CI gate.
+Verify real runtime releases, not the presence of a deployment on every docs SHA.
+Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
+browser saves. No retention/deletion/archive without explicit Human approval.
+
 ## Active qualification — v0.22.10 VFX-02A
 
 Current published fallback is v0.22.9 WALL-04A at cbe8ab8; its

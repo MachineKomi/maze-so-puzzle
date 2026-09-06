@@ -351,6 +351,11 @@ available; you need not complete everything in one sitting.
 
 ### P13 — Raised walls, texture clarity and ghost edge (v0.22.9 WALL-04A)
 
+Human result received2026-09-06: improved but insufficient depth; shadows too
+small and lower-corner highlight alignment wrong while upper bends align. This
+visual gate is **not passed**. No need to repeat that verdict on the same build;
+the next wall candidate must demonstrate a material improvement and aligned bends.
+
 - [ ] Do walls feel raised while the walkable paths remain obvious? Try
   Springstep Sky Hollow, one leafy maze and one dark/crystal maze. Report any
   floor that looks like a wall, overly heavy edge or narrowed-looking corridor.

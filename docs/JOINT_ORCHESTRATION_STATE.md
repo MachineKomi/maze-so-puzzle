@@ -7,6 +7,24 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Deployment operations, 2026-09-06:** Human's screenshots confirm24.07GB
+  Deployment Storage in the selected MsP view, redundant docs-only deployments
+  and duplicate branch/main builds. [Investigation](reviews/2026-09-06-vercel-storage-investigation.md)
+  and [deployment policy](VERCEL_DEPLOYMENT.md) own the non-destructive guard.
+  User upgraded to Pro and selected **mazesopuzzle.com**; old alias stays available
+  because browser saves are origin-local. Both domains' HTML/JS/CSS equal frozen
+  e28d44b. No retention/deletion/archive is authorized. Backup commits continue;
+  runtime and frozen dist remain unchanged. Ops commits may advance main beyond
+  e28d44b: do not relabel the staged Windows artifact or relax exact-source checks.
+  Finish pending native qualification against its recorded frozen inputs/artifact.
+
+- **Human wall correction, 2026-09-06:** WALL-04A looks better but is not 3D
+  enough; shadows are too small and the highlight follows the upper corner bend
+  but not the lower bend. P13 depth/art acceptance is explicitly **not passed**.
+  Next wall correction must review shared rounded-corner geometry, stronger
+  visible side-face/contact/cast depth and performance together; no broad live
+  filters or thickness that hides the walkable route. Do not call full Plan04 done.
+
 - **In qualification: v0.22.10 VFX-02A, root Astra runtime writer.** Bounded
   committed Gold/Science/maze-Power scatter, static-wall bounce, presented-Ame
   homing, trails and grouped collection sound are implemented.640 project tests,

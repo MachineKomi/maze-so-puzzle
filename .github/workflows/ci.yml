@@ -26,6 +26,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Test deployment safeguards
+        run: node --test scripts/deployment/ignore-build.test.mjs
+
       - name: Test and build
         run: npm run check
 

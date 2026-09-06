@@ -31,7 +31,9 @@ qualification and the remaining programme are separate from automated checks.
 ## Play the browser build
 
 The canonical browser address is
-[maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/). Its displayed
+[mazesopuzzle.com](https://mazesopuzzle.com/). The existing
+[Vercel alias](https://maze-so-puzzle.vercel.app/) remains available; browser saves
+are separate per hostname, so existing saves do not automatically move. Its displayed
 version can advance while Windows publication is being qualified. Consult the
 [joint state](docs/JOINT_ORCHESTRATION_STATE.md) and exact release receipt rather
 than assuming that a source push has also published a tested desktop download.
@@ -52,12 +54,13 @@ npm run preview
 
 ## Deploy the browser game
 
-The GitHub repository is connected to the zero-backend Vercel Hobby project at
-[maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/). A push to
-`main` automatically builds and promotes the new production deployment; other
-branches can receive preview deployments. The committed settings select Vite,
-`npm ci`, `npm run build`, and `dist` with no environment variables or paid
-services. See the [Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md).
+The GitHub repository is connected to the existing static Vercel project, now on
+the Human-selected Pro team, at [mazesopuzzle.com](https://mazesopuzzle.com/).
+Web changes on `main` build and promote automatically. Proven documentation-only
+changes skip deployment while backups and CI continue. Routine `codex/*` branches
+do not auto-deploy; `codex/preview/*` explicitly opts in. The committed settings
+select Vite, `npm ci`, `npm run build`, and `dist`; no game backend is required.
+See the [Vercel deployment guide](docs/VERCEL_DEPLOYMENT.md).
 
 ## Play or build the Windows app
 
