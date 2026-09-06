@@ -11,6 +11,10 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   Deployment Storage in the selected MsP view, redundant docs-only deployments
   and duplicate branch/main builds. [Investigation](reviews/2026-09-06-vercel-storage-investigation.md)
   and [deployment policy](VERCEL_DEPLOYMENT.md) own the non-destructive guard.
+  Safeguard is pushed, independently reviewed by Sol and live-verified: docs
+  checkpoint3a5bfb6 was canceled by the Ignored Build Step. Corrected ops checkpoint
+  f6db008 passed CI34040663389 verify/desktop and Vercel production; all game bytes
+  remain identical. Old hosted storage remains; no reclamation is claimed.
   User upgraded to Pro and selected **mazesopuzzle.com**; old alias stays available
   because browser saves are origin-local. Both domains' HTML/JS/CSS equal frozen
   e28d44b. No retention/deletion/archive is authorized. Backup commits continue;

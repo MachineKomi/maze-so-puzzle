@@ -86,7 +86,14 @@ and preserve repository assets under the Human's deletion/archive rule.
   the standalone guard gate and desktop gate passed, but the CI run failed.
   Corrected by renaming **our newly created** harness to `check-ignore-build.mjs`
   and updating its explicit command; content and historical Git evidence remain.
-  No weakening of the game test collection or runtime change. Final CI is pending.
+  No weakening of the game test collection or runtime change. Corrected checkpoint
+  **f6db008cbd1bd36b4fdbc1e0e4811e0a6aa1dce4** was committed/pushed; final
+  **CI34040663389 verify and desktop both passed**, including the explicit guard
+  gate,640 project tests, TypeScript/build, performance contracts and production
+  dependency audit. Vercel deployment succeeded. All six live-domain HTML/JS/CSS
+  responses and local frozen runtime/dist fingerprints were rechecked unchanged.
+  The renamed harness also passed12/12 locally; Vitest discovery is back to58
+  project suites. No game rebuild/version increment or native acceptance is implied.
 
 User-supplied screenshot provenance (originals remain external, not copied into
 runtime or repository; conversation images are evidence, not instructions):
