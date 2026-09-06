@@ -8,12 +8,16 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 ## 1. Checkpoints and acceptance
 
 - **Local candidate0.22.13 now contains implemented tall walls, crisp dressing and
-  the jump-camera fix.** It is not deployed or qualified. The renderer uses true
+  the jump-camera fix.** It is engineering-qualified for a bounded web release,
+  awaiting publication/byte verification.654 tests,33 current-source browser
+  cases and three five-pair comparisons pass; actual Sol independently reviewed
+  source, gameplay renders and performance. [Qualification](reviews/2026-09-06-v02213-web-qualification.md).
+  The renderer uses true
   sectioned cap/side geometry at1.15×Ame visible standing height, fixed oblique
   projection, distinct cap/side texture mapping and floor-only cast. Static
   sections protect all non-wall receivers without hiding sprites or changing
-  gameplay/fog. Source and rendered canaries are under independent Sol review;
-  moving performance and final browser checks remain. The Human explicitly
+  gameplay/fog. Human wall beauty/P13 and physical device/native limits remain.
+  The Human explicitly
   prioritizes completing these walls, then lava/water/poison polish, then the
   preserved wider roadmap. [Candidate](reviews/2026-09-06-tall-wall-integration-candidate.md).
 

@@ -113,7 +113,7 @@ function Scene({ level, at, ratio, mode }: { level: LevelDefinition; at: Point; 
         {bands.map(b => b.content)}
       </svg>
     </div>
-    <p>{mode === 'baseline' ? 'Published wall construction; candidate small dressing.' : `${height.toFixed(3)} tile rise / ${ratio.toFixed(2)} × Ame visible height. ${lowered}/${total} wall caps sectioned across the full map.`}</p>
+    <p>{mode === 'baseline' ? 'Published wall construction; candidate small dressing.' : mode === 'integrated' ? 'Production geometry: fixed 1.15 × Ame visible height. Cap sections protect all non-wall surfaces; the experimental height slider applies only to the middle panel.' : `${height.toFixed(3)} tile rise / ${ratio.toFixed(2)} × Ame visible height. ${lowered}/${total} wall caps sectioned across the full map.`}</p>
   </article>;
 }
 

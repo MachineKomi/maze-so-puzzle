@@ -24,7 +24,12 @@ one existing rAF and three reused local CSS animation handles, no added scene
 nodes or backing surfaces. Full and Lite use the same finite path; no ambient work.
 Final measured allocation and qualification precede publication.
 
-Current evidence:650 project tests/build passed before the three animation-handle
+Final continuation: the jump is integrated with tall walls in0.22.13. The
+[source-matched qualification](2026-09-06-v02213-web-qualification.md) records
+654 tests,33 browser cases, genuine final Sol review and the real cost of
+continuous camera motion. Earlier candidate evidence below remains historical.
+
+Earlier evidence:650 project tests/build passed before the three animation-handle
 clock refinement; the refined source builds. Two old-source phone/desktop motion
 diagnostics reproduce the fixed camera; seven candidate browser cases pass for
 phone/desktop tracking, Lite/Reduced/Static, resize and blur. These do not yet

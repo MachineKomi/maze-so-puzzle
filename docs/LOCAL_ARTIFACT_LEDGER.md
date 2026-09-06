@@ -16,6 +16,12 @@ All following packets are retained under `C:/GameDev/maze-game-qa/performance/`:
 | `jump-camera-final-20260906/` |40 /11,099,172|22/23 pass; real Sound Static→Full race retained. Not final acceptance despite folder name.|
 | `jump-camera-quality-repair-20260906/` |12 /453,015|6/7 pass; specificity-only attempted correction failed because of CSS cascade layers.|
 | `jump-camera-layer-repair-20260906/` |20 /2,705,162|13/13 corrected jump/interaction cases passed with production styles. Before tall-wall integration.|
+| `wall-jump-five-pairs-20260906/` |29 /75,382,206|24 serialized routes vs exact public0.22.12; warmups retained,24 compressed traces and4 captures.|
+| `wall-ordinary-five-pairs-20260906/` |29 /100,282,820|24 ordinary routes; one33.4ms candidate warmup retained separately from measured pairs.|
+| `wall-only-depth-control-20260906/` |4 /716,281|Instrumented candidate HTML/JS/CSS plus identity; exactly one tall→depth default literal. Attribution only, never a release baseline.|
+| `wall-only-jump-attribution-20260906/` |29 /78,225,365|24 same-clock routes isolate tall vs depth cost. Paired reports bind served entry/media hashes.|
+| `tall-wall-release-browser-20260906/` |96 /91,856,854|28/28 cases,40 actual campaign frames and8 zero-spill detached SVG pixel proofs.|
+| `tall-wall-generated-book-20260906/` |7 /4,434,564|5/5 maximum23×23 generated, Book persistence, phone input and audio regressions.|
 
 Tall-wall visual iterations under `C:/GameDev/maze-game-qa/art-proof/`, created
 by root on this branch from existing approved media with installed Playwright:
@@ -30,9 +36,14 @@ by root on this branch from existing approved media with installed Playwright:
 
 Reusable source: `scripts/art_review/jump-clock.{html,tsx}` and
 `tall-wall-lab.{html,tsx,css}`, `capture-tall-wall-lab.mjs`; no production imports.
-The root dev-server session25905 ended after captures. `dist/` is rebuilt in
-place, not copied; current candidate entryJS594615B/CSS119481B. Source hashes
-and final output sizes will be refreshed when qualification freezes. No added
+The root dev-server session25905 ended after captures; final browser/performance
+runners have closed their owned servers/contexts. `dist/` is rebuilt in
+place, not copied; frozen candidate entryJS594615B/CSS119481B, runtime dfe04a93.
+[Qualification](reviews/2026-09-06-v02213-web-qualification.md) binds the checks.
+New reusable helpers are `prepare-wall-isolation.mjs`, `tall-walls.pw.ts` and
+`verify-web-release.mjs` under `scripts/performance/`. The lab caption was corrected
+to distinguish fixed production geometry from the middle-panel height slider;
+retained earlier images are not silently regenerated. No added
 dependency environment, native package, repo/worktree copy or archive. All
 failed and exploratory images remain held; this ledger authorizes no cleanup.
 

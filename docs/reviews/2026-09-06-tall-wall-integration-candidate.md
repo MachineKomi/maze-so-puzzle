@@ -1,8 +1,12 @@
 # Tall walls, small dressing and jump camera — local0.22.13 candidate
 
-Astra,2026-09-06. Branch `codex/jump-camera-delight`; live web remains0.22.12.
-This is implemented WIP, not deployment, performance acceptance or Human beauty
-closure. The [Human intake](../user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
+Astra,2026-09-06. Branch `codex/jump-camera-delight`; runtime dfe04a93.
+**Final update:** [web qualification](2026-09-06-v02213-web-qualification.md)
+records654 project tests,33 current-source browser cases, three five-pair
+comparisons and actual final Sol review. Engineering release-ready within that
+scope; public deployment and Human beauty closure remain separate. The earlier
+candidate narrative below preserves the implementation and qualification sequence.
+The [Human intake](../user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
 and [WALL-04B](../plans/WALL-04B-tall-walls-and-readable-paths.md) own the target.
 
 The first actual SVG canary proved that full tall caps obscure Ame and routes.

@@ -31,6 +31,21 @@ needed merely to transfer files; P13 waits for a qualified revised wall.
   P14 below. Windows still uses the separately published v0.22.9 fallback;
   browser qualification does not establish a new native package or iPad result.
 
+### P16 — visibly tall walls, crisp details and a smooth jump
+
+Only when the browser displays0.22.13, compare Little Star Trail and a later
+maze with stone/foliage walls. Primary question: do the wall faces now look
+convincingly tall, solid and beautifully lit next to Ame? This is a new physical
+comparison for the still-open P13 judgment, not a declaration that it is resolved.
+Follow an ordinary corridor and turn, collect a held item/rescue a friend, then
+jump a hole. Paths, feet, sword, goal and hazards should remain easy to read;
+the camera should move through the jump without a landing jerk. Small surface
+details should feel like set dressing rather than oversized faded textures or
+collectibles. Record build/device/maze/settings and anything that looks wrong.
+Agents have completed the bounded engineering checks; this does not request
+a repeat of every historical test or claim an iPad/native result. Lava/water/
+poison polish is the next visual slice after this wall delivery.
+
 ### P15 — coherent phone layout, audible rewards and an inviting Book
 
 Only when the browser actually displays0.22.12, use the normal landscape phone

@@ -2,12 +2,15 @@
 
 ## Current execution boundary — 2026-09-06
 
-Planning only until the next Human implementation prompt. WALL-04A-R1 source is
-committed candidate0.22.11, not a new prototype assignment or a deployed release.
-Its [qualification brief](WALL-04A-R1-convincing-depth.md) and recovery receipt
-own the unresolved timing/visual gate. Compare fairly; the new laptop and later
-shadow-isolation result do not establish a cause or pass. If held, isolate a
-qualified predecessor before other work; do not carry unqualified walls to release.
+Execution is authorized. WALL-04A-R1/0.22.11 remains held after the new-host
+comparison; its historical evidence is preserved. The Human's0.22.12 rejection
+and subsequent execution steer now own the target: walls visibly taller than
+Ame, convincing3D faces and clean beautiful lighting. [WALL-04B](WALL-04B-tall-walls-and-readable-paths.md)
+is implemented in local0.22.13 and undergoing final qualification. It uses
+sectioned geometry rather than promoting R1. After this wall delivery, qualify
+lava/water/poison polish in the affected receiver and actor gates below, before
+returning to richer celebrations and learning. No new Human prompt is required.
+The laptop and old shadow-isolation result do not establish a cause or pass.
 
 HOLE-02/04-B/04-C/PT36 qualify affected terrain/regions/held and actor grounding
 before their05/07B/full09 consumers. They do not blanket-block Book, LEARN or08
