@@ -197,7 +197,7 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Release/review owner: root Astra; next runtime owner: actual Sol for UI-01A.** PLAY-B is accepted,
+**Release/review and runtime owner: root Astra for v0.22.5 packaging.** PLAY-B is accepted,
 merged and frozen for v0.22.4 at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
 PLAY-B has handed back. Root completed native, canonical-web and public-download
 gates and pushed receipt checkpoint `bcaab81`. Source push alone was not used
@@ -213,20 +213,18 @@ is +249 JSgzip9, zero CSS/public/decoded/deps; whole native PE +43520B. All owne
 processes/ports closed and heavy slot returned. Published v0.22.4 still needs
 X/Alt+F4. Bundle Exit with the next accepted UI preview, intended v0.22.5.
 
-**Sole writer: actual Sol, UI-01A compact fit correction.** Clean merged base
-`033f8748c0ca4292f86506539371e404fab7ddd0` on `codex/v22-ui-short-height`,
-isolated `C:/GameDev/maze-game-ui-exit`. Candidate runtime `6e7cfe40` / evidence
-tip `e66deec6` is pushed but **returned, not accepted**: root's final visual
-review found the full map heading overlapping Bag at780×312. The earlier
-map-body-only assertion missed this. Sol must correct the complete map-card/
-equipment relationship and recapture all compact proofs;543 passing tests do
-not waive the visible miss. The narrow Book word break and clipped feedback
-were corrected in that candidate and must stay corrected. Sol owns the serial
-heavy slot; root reviews/docs only. No camera experiment is in flight. The
-external v0225 PHONE1 release kit is prepared but has no frozen SHA or acceptance.
+**UI-01A is independently accepted for preview integration.** Corrected runtime
+`840293dd3414b5f3b8c8c5040352752847005093`, evidence tip
+`517667da7bf54dfd763b31a2a2a3cf3f31944f5e`, supersedes the returned `6e7cfe4`
+whose full map heading overlapped Bag at780×312. Root reviewed the corrected
+actual screens, full-card descendant assertions and exact allocation:
+JS−32/CSS+413 gzip9, zero media/deps. See [Astra acceptance](reviews/2026-09-06-ui01a-astra-review.md).
+Root owns frozen-source, native and web release gates in
+`C:/GameDev/maze-game-v0225-release`; candidate acceptance is not publication.
+Sol reviews AUDIO-01V2 preflight read-only. No camera experiment is in flight.
 
-Then Sol prototypes **V22-UI-01 short-height gameplay and Book fit** before
-propagating it. Preserve the praised desktop/iPad composition and six-tile
+Continue **V22-UI-01 short-height propagation** only after this bounded preview.
+Preserve the praised desktop/iPad composition and six-tile
 camera, live input, pace/audio preferences and reviewed rescue semantics. Read
 the [UI plan](plans/V22-UI-01-short-height-and-reward.md) and
 [technical preflight](reviews/2026-09-06-v22-ui01-preflight.md). The preflight is
