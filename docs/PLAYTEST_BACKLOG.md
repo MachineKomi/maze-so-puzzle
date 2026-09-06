@@ -21,9 +21,13 @@ is inherited for unchanged inputs; the fresh validator failed and is not waived
 for future art. P12 is ready, with the unfinished-run restart warning and preserved
 durable progress; P5–P11 remain cumulative. v0.22.7 is the immediate fallback.
 
-Next: root Astra repairs bounded [proof/EOL reproducibility](reviews/2026-09-06-art-proof-reproducibility-preflight.md), then prepares
-Phase 2 connected topology/art with actual Sol review and Human art approval
-before publication. Root PT36 remains before04. Existing hole art is unchanged;
+Current: bounded proof recovery/current-validation repair and two pit originals
+are implemented; clean-checkout qualification is underway. Human prefers B and
+delegates implementation, recorded in [D01](HUMAN_DECISIONS.md). Connected
+topology/runtime publication still needs technical and independent review.
+The [joint next-focus review](reviews/2026-09-06-v0228-next-focus-disposition.md)
+releases isolated wall-only 04-A and reward-first preparation; PT36 gates only
+the affected actor/held-grounding surface. Existing runtime hole art is unchanged;
 PT49 is not complete and no physical/iPad acceptance is inferred.
 Retain the inherited async jump-actor first-paint/capture follow-up: two early
 native captures lacked Ame/weapon paint, while a later mid-jump frame was complete.

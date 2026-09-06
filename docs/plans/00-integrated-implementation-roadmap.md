@@ -19,13 +19,18 @@ is inherited for identical inputs, not a fresh pass. Two early native captures
 preceded Ame/weapon paint; a later mid-jump capture was complete. Keep the inherited
 async actor first-paint/capture follow-up; continuous visibility is not proved.
 
-**Next: root Astra prepares Phase 2; actual Sol independently reviews.** Repair
-the bounded [proof/EOL reproducibility defect](../reviews/2026-09-06-art-proof-reproducibility-preflight.md) before new art validation,
-then produce the compact clean-pit/connected-ditch candidate set. New art
-publication requires Human approval and topology/alpha/readability/performance
-qualification. Do not reopen Plan03 wholesale or repeat accepted rules/audio work.
-Phase 2 then root **PT36 precede Plan04**. P12 is ready; P5–P11, physical/audio
-qualification and the iPad camera gate remain open.
+**Next: visible wall-depth tranche 04-A and qualified HOLE-02 integration.**
+The [Astra/Sol review](../reviews/2026-09-06-v0228-next-focus-disposition.md)
+separates wall-only value/depth work from ditch/region and actor/held grounding.
+The latter surfaces retain HOLE-02/PT36 gates; they no longer blanket-block
+04-A. Human selected pit Candidate B and delegated implementation judgment;
+topology/alpha/readability/performance qualification is still required. The
+[proof recovery flow](../source-assets/evidence/README.md) is now implemented
+and being qualified from a clean checkout. Do not reopen Plan03 wholesale.
+**Reward-first Plan02** prototypes may proceed against the accepted scene seam;
+publish after bounded 04-A/performance review, without waiting for unrelated
+region completion. Persistent XP is still Plan14, not newly authorized state.
+P12/P5–P11 and physical/audio/iPad camera gates remain open.
 
 **Immediate fully published fallback:** v0.22.7 AUDIO-01A is frozen at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/native review is
@@ -581,7 +586,7 @@ One versioned Mimic-family registry maps those visual triplets onto a shared
 mechanic; authored policy profiles use one probability/economy implementation,
 not per-family bespoke rules. Plan 02 implements
 one cancellable, bounded presentation: a chest strike/reveal,
-short collision-free ballistic spray with coloured trails, magnetic homing to
+short wall-aware ballistic spray with coloured trails, magnetic homing to
 Ame, exact amount feedback, and satisfying audio. It consumes already-committed
 outcomes and never calculates currency or chance. Plan 05 may add a few
 registered chest/Mimic frames. Plan 09 implements and places the actual Mimic

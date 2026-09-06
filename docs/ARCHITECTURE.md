@@ -550,7 +550,17 @@ production build. Plan 03 adds a separate provenance chain: the publication
 check rebuilds every selected derivative in a temporary directory and
 byte-compares it, `npm run art:test` covers record/batch contracts, and
 `npm run art:check` validates strict-v2 publication evidence plus the regenerated
-manifest. Catalogue tests must prove active versus dormant loading, exact
+manifest.
+
+Current-art validation is independent of accidental optional legacy-canary
+files. Historical output self-consistency and current-input compatibility are
+explicit CLI modes. The approved v14 index/children remain mandatory; a clean
+checkout uses the committed [proof archive/recovery procedure](source-assets/evidence/README.md)
+before the non-writing standard gate. Raw-byte hashes and historical approval
+bytes are not normalized. The generated current manifest has a field-level
+non-writing drift report to distinguish new inputs from checkout EOL mistakes.
+
+Catalogue tests must prove active versus dormant loading, exact
 achievement coverage, the historical Bubble Bow resolver alias, and Green Tea
 Skeleton's friend-only taxonomy. Retirement-ledger validation proves all exact
 prior URLs remain rollback-held but deliberately does not claim reachability or

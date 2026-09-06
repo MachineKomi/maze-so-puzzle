@@ -1,0 +1,9 @@
+{
+  "schema": "maze-hole02-human-review/v1",
+  "decision": {
+    "path": "docs/source-assets/calibrations/hole02/human-selection.json",
+    "sha256": "1161669217cdee7af0e80eccef0d56b470e4b792f9a15051e32b5d4b0f1b3aa4",
+    "bytes": 992
+  },
+  "scope": "Human selects B and delegates technical execution; not a completed runtime playtest"
+}

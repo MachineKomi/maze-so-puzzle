@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import json
 import tempfile
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -601,6 +602,39 @@ def build_manifest() -> tuple[dict[str, Any], list[str]]:
     return manifest, sorted(set(errors))
 
 
+def manifest_field_changes(recorded: Any, current: Any, path: str = "$") -> list[dict[str, Any]]:
+    """Non-writing semantic diff; byte policy is still checked separately."""
+    if type(recorded) is not type(current):
+        return [{"field": path, "recorded": recorded, "current": current}]
+    if isinstance(recorded, dict):
+        changes = []
+        for key in sorted(recorded.keys() | current.keys()):
+            field = f"{path}.{key}"
+            if key not in recorded:
+                changes.append({"field": field, "change": "added", "current": current[key]})
+            elif key not in current:
+                changes.append({"field": field, "change": "removed", "recorded": recorded[key]})
+            else:
+                changes.extend(manifest_field_changes(recorded[key], current[key], field))
+        return changes
+    if isinstance(recorded, list):
+        # Inventory arrays use stable paths/IDs, so insertions do not swamp the diff.
+        identity = next((key for key in ("path", "recordId", "name") if all(isinstance(row, dict) and key in row for row in [*recorded, *current]) and len({row[key] for row in recorded}) == len(recorded) and len({row[key] for row in current}) == len(current)), None)
+        if identity and (recorded or current):
+            return manifest_field_changes({row[identity]: row for row in recorded}, {row[identity]: row for row in current}, path)
+        changes = []
+        for index in range(max(len(recorded), len(current))):
+            field = f"{path}[{index}]"
+            if index >= len(recorded):
+                changes.append({"field": field, "change": "added", "current": current[index]})
+            elif index >= len(current):
+                changes.append({"field": field, "change": "removed", "recorded": recorded[index]})
+            else:
+                changes.extend(manifest_field_changes(recorded[index], current[index], field))
+        return changes
+    return [] if recorded == current else [{"field": path, "recorded": recorded, "current": current}]
+
+
 def compare_manifest() -> list[str]:
     manifest, errors = build_manifest()
     if not MANIFEST_PATH.is_file():
@@ -608,7 +642,14 @@ def compare_manifest() -> list[str]:
     expected = json_bytes(manifest)
     actual = MANIFEST_PATH.read_bytes()
     if actual != expected:
-        errors.append("docs/source-assets/manifest.json is stale; run art:manifest -- --write")
+        try:
+            changes = manifest_field_changes(json.loads(actual), manifest)
+            errors.extend(f"manifest drift: {json.dumps(change, ensure_ascii=False, sort_keys=True)}" for change in changes)
+            if not changes:
+                errors.append("manifest byte-format drift: semantic fields match, but canonical serialized bytes differ")
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            errors.append(f"manifest JSON cannot be compared: {exc}")
+        errors.append("docs/source-assets/manifest.json is stale; inspect field drift before art:manifest -- --write")
     return sorted(set(errors))
 
 

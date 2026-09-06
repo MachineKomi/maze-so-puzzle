@@ -6,6 +6,7 @@
 *.icns binary
 *.exe binary
 *.mp3 binary
+*.zip binary
 
 # These reviewed artifacts are hashed as bytes. Preserve their recorded line
 # endings through checkout; do not reinterpret an approval as normalized text.
@@ -39,6 +40,7 @@ docs/source-assets/publication/home-hero-v05-cleanup-approval.json text eol=crlf
 # byte authorities above take precedence only where more specific below.
 scripts/art_pipeline.py text eol=lf
 scripts/art_pipeline/** text eol=lf
+scripts/art_review/** text eol=lf
 public/assets/fonts/* -text
 
 # Immutable FP-UI1 release attachments are verified against downloaded bytes.

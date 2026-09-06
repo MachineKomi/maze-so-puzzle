@@ -1,5 +1,36 @@
 # Graphics and VFX overhaul plan
 
+## 2026-09-06 joint refinement — reward-first delivery
+
+The [Astra/Sol next-focus review](../reviews/2026-09-06-v0228-next-focus-disposition.md)
+refines the all-Plan04 prerequisite below: prototype reward presentation now;
+publish its first bounded tranche against accepted **04-A** scene/performance
+seams without waiting for unrelated region or held-grounding completion. Do not
+claim all of Plan02 is done with this first feature.
+
+First visible target: committed Gold/Science pickups and maze-Power awards
+scatter, bounce within static wall bounds, then accelerate into Ame's **presented**
+position, with short coloured trails and a musical, throttled collection chain.
+Group large values into representative tokens with exact text; cap all live
+tokens/effects stage-wide. Compare a single viewport-sized, DPR-bounded Canvas
+surface with a reused DOM pool; pick using actual frames/paint and clarity,
+not a promise that either technology is always faster. No physics dependency.
+Substeps/swept checks must prevent wall tunnelling at long frames/corners; clamp
+elapsed time and settle interrupted presentation to the already committed total.
+No visual particle grants currency, controls solvability, or delays a save.
+
+Current SFX already has shared calibrated gain and a 24-voice cap. Aggregate
+arrivals and limit pitched cues; preserve mute/hide/cancel and the music mix.
+Master compression is an optional measured remedy after peak/listening tests,
+not an assumed ten-line prerequisite. Reduced/static retain an exact readable
+receipt with no mandatory travel. Avoid a filtered node or timer per token.
+
+Existing awards can ship before new drop rules. If enemy/rescue Gold/Science
+drop tables are advanced from Plan09, root must explicitly review and version
+the authoritative seeded outcome/save contract in that bounded tranche; VFX
+cannot invent awards. Permanent XP/account levels remain Plan14 exploration,
+so do not label maze-Power tokens as persistent EXP or create a false XP meter.
+
 **Human refinement,2026-09-06:** read the [v0223/24 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
 V23-06/07/09 and V24-02 before implementation. Continuous base-plus-breathing
 colour-aware pickup glow and bounded twinkles replace abrupt dark/buzz pulses.

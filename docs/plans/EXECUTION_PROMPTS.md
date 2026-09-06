@@ -20,11 +20,17 @@ save/preferences and normal reopen are accepted within the documented limits;
 inherited async actor first-paint/capture evidence does not prove continuous
 Ame/weapon/follower paint. Keep that bounded follow-up and P12 open.
 
-**Next: root Astra owns bounded proof/EOL repair and Phase 2 preparation;
-actual Sol independently reviews.** New clean pit/connected-ditch art needs
-Human approval and technical qualification before publication. Phase 2 then
-root PT36 precede Plan04. Do not repeat completed Phase 1 or audio work, restore
-the old jump loop, or infer physical/iPad acceptance. P5–P11 remain cumulative.
+**Next: root Astra delivers bounded 04-A wall form and HOLE-02 integration;
+actual Sol independently reviews.** Read the new tranche authority at the top of
+[Plan04](04-lighting-wall-depth.md) and the
+[joint next-focus review](../reviews/2026-09-06-v0228-next-focus-disposition.md).
+Wall-only 04-A is no longer blanket-held by ditch art or PT36; their affected
+receiver/region and actor/held work remains gated. Human selected pit Candidate B
+and delegated implementation judgment. Proof recovery and the selected-source
+gallery are implemented; clean-checkout and runtime integration still need
+qualification. Begin reward-first Plan02 prototypes; preserve authoritative
+awards and defer persistent XP. Do not repeat completed Phase1/audio work or
+infer physical/iPad acceptance. P5–P11 remain cumulative.
 
 **Immediate fully published fallback: v0.22.7 AUDIO-01A** is frozen at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/native review is

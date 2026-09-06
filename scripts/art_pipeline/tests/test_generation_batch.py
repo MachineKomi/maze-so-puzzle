@@ -184,7 +184,7 @@ class GenerationBatchProvenanceTests(unittest.TestCase):
         owners: dict[str, list[str]] = defaultdict(list)
         _validate_generation_batch_documents(errors, warnings, owners)
         self.assertEqual(errors, [])
-        self.assertEqual(len(owners), 279)
+        self.assertEqual(len(owners), 281)  # Two HOLE-02 originals, no runtime derivatives.
         owner_counts = {
             owner: sum(values == [owner] for values in owners.values())
             for owner in {

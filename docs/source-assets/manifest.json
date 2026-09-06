@@ -45,8 +45,8 @@
       },
       {
         "path": "scripts/art_pipeline/cli.py",
-        "sha256": "c6cce2a793f106b9b2d545b805a5b82d857cd0d19c5e1684c082d21aa160c2bb",
-        "bytes": 5243
+        "sha256": "8f6f468dee3b6a624b66dc48ed428e26f8544d67b2bd43dee531deb5cbd1ec19",
+        "bytes": 5803
       },
       {
         "path": "scripts/art_pipeline/cutout.py",
@@ -59,14 +59,19 @@
         "bytes": 2595
       },
       {
+        "path": "scripts/art_pipeline/hole02_candidates.py",
+        "sha256": "56c57d93c6f13a60efa97f79242c5620ace87d6cfe9229afa4fe1ffea369ade6",
+        "bytes": 9890
+      },
+      {
         "path": "scripts/art_pipeline/home_hero_v05_cleanup.py",
         "sha256": "de332d6aa8c0b6793af08c5359eceae96201f62f5680c05cf03e0ad6d120b24f",
         "bytes": 16751
       },
       {
         "path": "scripts/art_pipeline/manifest.py",
-        "sha256": "62ce96527e8d25e1612f75170cb9605e3fc1fb233ec13199966558d10ea4e7de",
-        "bytes": 27789
+        "sha256": "e5a2849d4e35ba6943d08f810bad54be7d3312e3f8f987db87bb4629d7cbbf1b",
+        "bytes": 30367
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02.py",
@@ -149,6 +154,11 @@
         "bytes": 2928
       },
       {
+        "path": "scripts/art_pipeline/proof_archive.py",
+        "sha256": "7eee0f33088650dfde01a2ed782c86e5594886f7708f0a3da9fc1a962e141c0d",
+        "bytes": 8710
+      },
+      {
         "path": "scripts/art_pipeline/proofs.py",
         "sha256": "81fe913d8ca83fdf3abeacc703ce5751e8e175f8ff2e50e4303e5aac21cb2c66",
         "bytes": 52127
@@ -175,8 +185,8 @@
       },
       {
         "path": "scripts/art_pipeline/tests/test_generation_batch.py",
-        "sha256": "8601717e92225be760b8a0eb4a12dd6ec1a2838714d097e1edfc565b40c2b140",
-        "bytes": 14194
+        "sha256": "b2a0ca7beedec8cc91536e9a805ed407e8a0915e3df190ab8e66bd755bd0145e",
+        "bytes": 14244
       },
       {
         "path": "scripts/art_pipeline/tests/test_home_hero_v04_publication.py",
@@ -249,6 +259,11 @@
         "bytes": 6277
       },
       {
+        "path": "scripts/art_pipeline/tests/test_proof_reproducibility.py",
+        "sha256": "99ce062f4fd897d10f1ee6c106073a2bcc2a027fd39e6d0d6f48aeacb911c52a",
+        "bytes": 7266
+      },
+      {
         "path": "scripts/art_pipeline/tests/test_proofs.py",
         "sha256": "756c6a6369445cae29b52462f13ca39739a68f61789480ac9c3f7a3be54e535a",
         "bytes": 3567
@@ -290,8 +305,8 @@
       },
       {
         "path": "scripts/art_pipeline/validate.py",
-        "sha256": "897e30bb3dd961e3f338ed6a295bfa6cfba8cfe4c3ef43fd930e8c901869c31c",
-        "bytes": 145060
+        "sha256": "7c42d28d74ba30109eb8b57eb822e30144bfc2898bd8ad956462b6b50f088659",
+        "bytes": 146154
       }
     ],
     "requirements": {
@@ -318,6 +333,14 @@
         "bytes": 22723,
         "referencedBy": [
           "ame-v02-source"
+        ]
+      },
+      {
+        "path": "docs/source-assets/production/hole02-pits/PROMPTS.md",
+        "sha256": "c4810527a8273a305656610375d5079e622d74cca7189b407c44c6295d6babec",
+        "bytes": 3756,
+        "referencedBy": [
+          "batch:hole02-pits"
         ]
       },
       {
@@ -792,6 +815,26 @@
       }
     ],
     "generationBatches": [
+      {
+        "path": "docs/source-assets/production/hole02-pits/run-record.json",
+        "sha256": "27269d52737eb247a3bc913b662127b61d95e7329df4c0e00a1182d36819ed81",
+        "bytes": 4533,
+        "batchId": "hole02-pits",
+        "revision": 1,
+        "status": "reviewed",
+        "promptFile": {
+          "path": "docs/source-assets/production/hole02-pits/PROMPTS.md",
+          "sha256": "c4810527a8273a305656610375d5079e622d74cca7189b407c44c6295d6babec",
+          "bytes": 3756,
+          "fidelity": "exact"
+        },
+        "runCount": 2,
+        "generatorOriginalEncodedBytes": 2142114,
+        "generatorOriginalDecodedBytesUpperBound": 12580128,
+        "approvedDerivativeCount": 0,
+        "approvedDerivativeEncodedBytes": 0,
+        "approvedDerivativeDecodedBytesUpperBound": 0
+      },
       {
         "path": "docs/source-assets/production/mgjrpg-02/batch-01/run-record.json",
         "sha256": "3613defa434028b002a9eadecec099fd2d9d8101e9be122aaba94852894171dc",
@@ -1314,6 +1357,11 @@
     ],
     "calibrations": [
       {
+        "path": "docs/source-assets/calibrations/hole02/human-selection.json",
+        "sha256": "1161669217cdee7af0e80eccef0d56b470e4b792f9a15051e32b5d4b0f1b3aa4",
+        "bytes": 992
+      },
+      {
         "path": "docs/source-assets/calibrations/mgjrpg-02/v01/ame-c-rendering-assay-a-generator-original.png",
         "sha256": "d69d70392eabca57806d5bc68146310904378f649ff28110e50484d3c9d5beae",
         "bytes": 993396
@@ -1505,19 +1553,19 @@
     "runtimeImageCount": 368,
     "runtimeEncodedBytes": 65771989,
     "runtimeDecodedBytesUpperBound": 411582176,
-    "sourceImageCount": 428,
-    "sourceEncodedBytes": 611353545,
+    "sourceImageCount": 430,
+    "sourceEncodedBytes": 613495659,
     "unreferencedSourceImageCount": 12,
-    "generationBatchCount": 25,
-    "generationBatchOutputCount": 254,
-    "generationBatchEncodedBytes": 384765189,
-    "generationBatchDecodedBytesUpperBound": 1597702248,
+    "generationBatchCount": 26,
+    "generationBatchOutputCount": 256,
+    "generationBatchEncodedBytes": 386907303,
+    "generationBatchDecodedBytesUpperBound": 1610282376,
     "renderingRecipeFileCount": 1,
     "renderingRecipeBytes": 8645,
     "canaryReviewFileCount": 2,
     "canaryReviewBytes": 19377,
-    "calibrationAuthorityFileCount": 37,
-    "calibrationAuthorityBytes": 31968084,
+    "calibrationAuthorityFileCount": 38,
+    "calibrationAuthorityBytes": 31969076,
     "sourceStatusCounts": [
       {
         "name": "legacy-runtime-only",
@@ -17135,6 +17183,36 @@
       "colorMetadata": [],
       "referencedBy": [
         "portal-violet-moon-v01-source"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/hole02-pits/pit-a-generator-original.png",
+      "sha256": "298aeaee0a963dde76cb7edef3e892ca7de6187d9be344530c69edf09c0f03ca",
+      "bytes": 1034420,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:hole02-pits"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/hole02-pits/pit-b-generator-original.png",
+      "sha256": "fd4242d62e919ac019e084223a95d7792860b24db12e539423f6d0ffb3f175ec",
+      "bytes": 1107694,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "batch:hole02-pits"
       ]
     },
     {

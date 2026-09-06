@@ -1,0 +1,262 @@
+{
+  "schema": "maze-approved-proof-archive/v1",
+  "archive": {
+    "path": "docs/source-assets/evidence/mgjrpg02-v14-approved-proof.zip",
+    "sha256": "8a0e7551dec6d7a130959a43c012957a64acd9da81b0ff337c2a308e3f0d072a",
+    "bytes": 8737476
+  },
+  "approval": {
+    "path": "docs/source-assets/reviews/mgjrpg-02-canary-v01.json",
+    "sha256": "a52a4e395bc71d7b3b0e00af40282916624b9922b44b0c58d9c51f2018d5123d",
+    "bytes": 17824
+  },
+  "packetRoot": "artifacts/art-proofs/mgjrpg-02/v14",
+  "method": "Exact existing approved bytes; no proof regeneration, EOL conversion or approval changes. ZIP timestamp is a reproducibility constant, not evidence of file creation time.",
+  "files": [
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-actual-size.png",
+      "sha256": "23f2dd8ae486f021f72b05d4963f08012259ff8116e595712d8a5b7f7540a002",
+      "bytes": 221504
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-contour-background-closeups.png",
+      "sha256": "736c6107d33985fa33c754a511dcd19d713389c1ca90b8b0583d2fe0484f43f9",
+      "bytes": 2121174
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-fresh-source-comparison.png",
+      "sha256": "8b54ce48bebf8c8f3de5001857c41a1890fb4492e5b58d82c7218217ec7d82c4",
+      "bytes": 833806
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/ame-full-sprite-actual-size-backgrounds.png",
+      "sha256": "1e387d5bbd356ae400d777ad6e65f631b9c622df7863fb9d07b02fd4910d72b0",
+      "bytes": 410874
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-current-103.png",
+      "sha256": "30e5df46ec43e1077b4bb4380a144011680f453c9bd59d5c0d3de86f2a53374c",
+      "bytes": 10580
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-current-155.png",
+      "sha256": "7a5cddc57acbb1d60a5e37551bb98e5f1689caac3f0ea50eaf037cf0fd012c21",
+      "bytes": 20942
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-current-40.png",
+      "sha256": "dcd4a589dbab56b0c29d590ce32814db200f51f4e536157c488fba9b4339f4f5",
+      "bytes": 2422
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-current-56.png",
+      "sha256": "1ef0f3b3a341aeda5f4ccfba45a273a48decd8266a4e890557ee19319213d52b",
+      "bytes": 3931
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-current-64.png",
+      "sha256": "9dd9133d94485c36bab370505527f68d6351bf58716d17ecd4bca122d1d8777a",
+      "bytes": 4909
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-current-77.png",
+      "sha256": "6f44aa35ab2311215e1ff4e0c4963191e4f1f4d4efeafe70bbb90494f73b4135",
+      "bytes": 6518
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-current-84.png",
+      "sha256": "157b46c60091252d88b0ccee09d48a3c19c38a0f8078b78049714f25cb99f6cc",
+      "bytes": 7515
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-01-103.png",
+      "sha256": "997a846d2a434c729b3d15a3b460d55d28ff3f1d55f374d79af5c3548c81517e",
+      "bytes": 10069
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-01-155.png",
+      "sha256": "04efc197f247ad3a8733f9fcc782717e594769aadbb5fe5600c7f70d6800d658",
+      "bytes": 19972
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-01-40.png",
+      "sha256": "bc2d5b4f13807e1d3003eaf2dd4af8bf5e64e7c35e7d57fc54fb59ba3ad98f70",
+      "bytes": 2317
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-01-56.png",
+      "sha256": "1c096e6b8d3e7d369f15167927f01b93ff67e0922a55877e90e6f158fce83d85",
+      "bytes": 3780
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-01-64.png",
+      "sha256": "08ffaebf9c0b46c4eee639fda5974b7a004d80b172387a2d58268d8ecd470ab6",
+      "bytes": 4692
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-01-77.png",
+      "sha256": "6413d840d961e4cc9c9e0b83cb57199af65e300d5697e256433c3f8659a3aa1a",
+      "bytes": 6206
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-01-84.png",
+      "sha256": "43b7ca49e923637c1a785394c17824894aa05189fb8998274f0b85785cb3b347",
+      "bytes": 7195
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-02-103.png",
+      "sha256": "1025af0b71e59f7bf550fc31739b57d72e1a714eae578e872a420b6847ca5fd6",
+      "bytes": 10003
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-02-155.png",
+      "sha256": "f702a1ca9db9b0972a9bdb654143e4aefb2305770678e7cd9f84337a474c9264",
+      "bytes": 19775
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-02-40.png",
+      "sha256": "d62a85f4ded5b17477061bed02e4b03e3e00a27580d975a61a24545c2b2cec5e",
+      "bytes": 2305
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-02-56.png",
+      "sha256": "5c99275c7eddda5da675035b5a7dcc466e90b35f76379b1ec367d236a52d3685",
+      "bytes": 3760
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-02-64.png",
+      "sha256": "7878cc83b9e1a1b5037d2d3ddec83b8915ae6fdb88dfe59857dca8c66a0be562",
+      "bytes": 4683
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-02-77.png",
+      "sha256": "ee3134f5490cc97ff83be60436bc7d6e04f5f4b676a31a14a939a5174bbe4a79",
+      "bytes": 6293
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-fresh-02-84.png",
+      "sha256": "238de2c7a7d749914d1d2e368a5690513c95bfd25c6c1c107a146ee5f66f0ecd",
+      "bytes": 7193
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-prior-b-103.png",
+      "sha256": "91da52972f3844129a3cb3c075ab6ebebc828ca86d0c44ee6c49e97eeff5780a",
+      "bytes": 10480
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-prior-b-155.png",
+      "sha256": "8d34a66fd818d8d5cfa6c65ff16ad45b64aecdc8d9a56e5fb0e25daf24792424",
+      "bytes": 20721
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-prior-b-40.png",
+      "sha256": "3d69264b6edefdbdc6d61423d6f63254c9b0878796e65019a2d9e74532f73145",
+      "bytes": 2358
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-prior-b-56.png",
+      "sha256": "4fc7fec83bc7c2eac6043792fe542ffb416aee225544659d375326004300ceef",
+      "bytes": 3927
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-prior-b-64.png",
+      "sha256": "587c790ce204f6f11e61ab607200b877b88b14cda81597c26a55dc284ec6d74d",
+      "bytes": 4819
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-prior-b-77.png",
+      "sha256": "80c927f7e414f446257dabbc38a5302d0ac153b325cac90932506d6a680a4299",
+      "bytes": 6457
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/ame-prior-b-84.png",
+      "sha256": "db223c61f237d369988ebe4981b26fb58a21fffb59d656e6dbd1e6d81838ac4a",
+      "bytes": 7392
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/rose-floor-pad-current-64.png",
+      "sha256": "cdec2622a2cc7223ec75118370427e7a000551f3e74db3c1d440a5993c453cc5",
+      "bytes": 7416
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/rose-floor-pad-current-84.png",
+      "sha256": "701f75a900d8e341547def7a4b1a7c7676e32fc3193e9b9316495d68290c0380",
+      "bytes": 11889
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/rose-floor-pad-fresh-64.png",
+      "sha256": "d0a5e9195d86c3833b817976400ef1760e070a9c77db3b0f33410490cdb3d055",
+      "bytes": 7222
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/delivery/rose-floor-pad-fresh-84.png",
+      "sha256": "93532d92ffc12e3eddaff7ed81a567678f4a5465b69b2d744bb356511525c3e9",
+      "bytes": 11572
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/derived/ame-current-registered-512.png",
+      "sha256": "029415f5de8cef31277344ebc44b89314ae70137a42f0eb5fe6feb48267d9dec",
+      "bytes": 173151
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/derived/ame-fresh-01-registered-512.png",
+      "sha256": "4c387a5d975de47325bebd3117011047fa1aef0b9ce8868b4f121a27bcf058de",
+      "bytes": 163406
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/derived/ame-fresh-02-registered-512.png",
+      "sha256": "9fade0d48644690db93f33c303dd23b65cb462f8681d10a6cbecbeb99e57506e",
+      "bytes": 156795
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/derived/ame-prior-b-registered-512.png",
+      "sha256": "c88f90ab2e609cfeca563073a0639fc423d28af137ff9567188d45676350ba32",
+      "bytes": 170604
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/derived/rose-floor-pad-current-registered-512.png",
+      "sha256": "e4adda9eaf31fa47d686719367f68af35d857d2a32088cc86c5ed4d1f3e77b42",
+      "bytes": 288680
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/derived/rose-floor-pad-fresh-registered-512.png",
+      "sha256": "0f10d659c35169bf79f7e5cbd92157a83cdfd1487fa5c7c8c693aef3f33f0242",
+      "bytes": 278515
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/future-enemy-comparison.png",
+      "sha256": "8e5c803bf1e5476d0aa4c36733f2e6a540926614bcbb9121ffa2635d740076ba",
+      "bytes": 1164377
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/index.html",
+      "sha256": "af5bd72591b05c6eae0a51e8479ad80fbfcc27f2bba5662acbb5dd4b737cfaa4",
+      "bytes": 14574
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/mgjrpg-02-selection-report.json",
+      "sha256": "84fc17e77cb2faefe007a4d8ce23610a06408149ad05760bd4bed18f628c8372",
+      "bytes": 30873
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/proof-index.json",
+      "sha256": "763335189a1f95fb0823f12d4aaa156362bb16d9ad7ca5928d8af7588dbd4ff5",
+      "bytes": 24890
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/rose-floor-pad-actual-size.png",
+      "sha256": "278da1cc6c85293c0455b331ffc63b5f7d525bb74d46d8c1659de553d8de4a13",
+      "bytes": 143058
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/rose-floor-pad-comparison.png",
+      "sha256": "18d9fa5745fa09cd9108a7dbc720c1c2820b5607eb1cd58f2bd92d315198e958",
+      "bytes": 850707
+    },
+    {
+      "path": "artifacts/art-proofs/mgjrpg-02/v14/selection-reference-map.png",
+      "sha256": "ef4898679267a43594a88e1ee4c3b9d53e95ca05fa101390d3f333fb923d7913",
+      "bytes": 1540996
+    }
+  ]
+}

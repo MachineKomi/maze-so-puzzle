@@ -302,11 +302,14 @@ MGJRPG_02_SELECTION_RUN_REFERENCES = {
 def _validate_proof_bundle(
     records: list[tuple[Path, dict[str, Any]]],
     errors: list[dict[str, str]],
+    *,
+    current_inputs: bool = True,
 ) -> None:
-    """Validate an optional ignored proof bundle without creating or updating it."""
+    """Explicit legacy audit; artifact integrity and live compatibility are distinct."""
 
     index_path = PROOF_ROOT / "canary" / "proof-index.json"
     if not index_path.is_file():
+        errors.append(_message("error", "proof-index-missing", posix_relative(index_path), "Selected legacy canary is unavailable"))
         return
     label = posix_relative(index_path)
     try:
@@ -354,8 +357,9 @@ def _validate_proof_bundle(
                     )
         return path
 
-    for row in index.get("pipelineInputs", []):
-        verify_file(row, f"{label}:pipelineInputs", proof_only=False)
+    if current_inputs:
+        for row in index.get("pipelineInputs", []):
+            verify_file(row, f"{label}:pipelineInputs", proof_only=False)
     for row in index.get("outputs", []):
         verify_file(row, f"{label}:outputs", image=True)
     for key in ("html", "browserHarness", "inventory"):
@@ -368,6 +372,8 @@ def _validate_proof_bundle(
         owner = f"{label}:candidateDerivatives"
         verify_file(row, owner, image=True)
         if not isinstance(row, dict):
+            continue
+        if not current_inputs:
             continue
         record_entry = record_map.get(str(row.get("recordId")))
         if record_entry is None:
@@ -399,6 +405,21 @@ def _validate_proof_bundle(
                         f"{key} records {row.get(key)!r}; current value is {value!r}",
                     )
                 )
+
+
+def validate_legacy_canary(mode: str) -> dict[str, Any]:
+    if mode not in {"artifacts", "current-inputs"}:
+        raise ValueError("Legacy canary mode must be artifacts or current-inputs")
+    errors: list[dict[str, str]] = []
+    records = [(path, read_json(path)) for path in canonical_record_paths()] if mode == "current-inputs" else []
+    _validate_proof_bundle(records, errors, current_inputs=mode == "current-inputs")
+    return {
+        "schema": "maze-art-legacy-canary-audit/v1",
+        "mode": mode,
+        "ok": not errors,
+        "errors": errors,
+        "scope": "Recorded proof outputs only; historical inputs and approval are not revalidated" if mode == "artifacts" else "Recorded proof outputs plus compatibility with current repository inputs",
+    }
 
 
 def _message(kind: str, code: str, path: str, detail: str) -> dict[str, str]:
@@ -3399,8 +3420,6 @@ def validate_all() -> dict[str, Any]:
             )
         )
 
-    _validate_proof_bundle(records, errors)
-
     if MANIFEST_PATH.is_file() or records:
         for detail in compare_manifest():
             errors.append(_message("error", "manifest", posix_relative(MANIFEST_PATH), detail))
@@ -3411,6 +3430,7 @@ def validate_all() -> dict[str, Any]:
     return {
         "schema": "maze-art-validation/v1",
         "ok": not errors,
+        "legacyCanary": "not-selected; use --check-legacy-canary for an explicit historical audit",
         "summary": {
             "recordCount": len(records),
             "runtimeImageCount": len(runtime_paths),

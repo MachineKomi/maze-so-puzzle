@@ -6,6 +6,17 @@ Keep completed observations and build identities when newer builds arrive.
 
 ## Start here
 
+- **Latest received observation (2026-09-06, ~08:30):** wife compared Chrome
+  and Safari on the iPad; Chrome felt smoother, both imperfect. Build/settings
+  unknown. [Recorded observation](user-playtests/2026-09-06-ipad-chrome-safari-comparison.md).
+  No need to repeat the unchanged comparison. A future controlled diagnostic
+  will provide exact build/setting instructions. iPadOS version is useful when
+  convenient; absence of that answer does not hold independent delivery.
+- **Hole art:** Candidate B is selected; no further art-choice question now.
+  Once the new sprite/connected renderer ships, its release will add explicit
+  pit/strip/junction and floor-readability checks here. Current P12 still tests
+  the shipped rules with old art, not that future renderer.
+
 - **Current: v0.22.8 HOLE-01A / P12.** Web and Windows are published; all
   four downloads independently verified. Frozen `3acaf5872dd921f15929c330eeae46053b2a6362`.
   [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.8/Maze-so-Puzzle-0.22.8-HOLE-01A-3acaf58-locked-portable.exe) ·

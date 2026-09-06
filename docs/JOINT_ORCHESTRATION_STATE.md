@@ -19,8 +19,9 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   [receipt](../release/HOLE-01A-v0.22.8-release-verification.json).
   Release packaging/docs checkpoint `a02dbd9e5cc4597e617e68af40e267d0dc0fee64`
   is pushed; the later receipt binds those Git blobs to the uploaded attachments.
-  P12 and P5–P11 remain open. Phase2 proof/EOL repair and Human-approved ditch
-  art/topology, then root PT36, still precede Plan04. No iPad-camera acceptance.
+  P12 and P5–P11 remain open. Current bounded 04-A wall-only work is independently
+  runnable; Phase2/PT36 still gate ditch/region and actor/held integration, not
+  all lighting work. See §3 and §5. No iPad-camera acceptance.
 
 - **Immediate published fallback: v0.22.7 AUDIO-01A.**
   Frozen runtime `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` is pushed to main.
@@ -349,15 +350,30 @@ is claimed. Raw evidence and private profile copies remain external under
 verified.** Exact source, CI, web parity and four public downloads are in §2.
 Keep the frozen release checkout clean; do not repeat accepted audio or rules work.
 
-**Next: root Astra prepares V22-HOLE-01 Phase2; actual Sol reviews.** First repair
-the bounded ignored-proof/EOL reproducibility defect, preserving original byte
-authorities and rejected evidence. Do not rewrite hashes just to silence errors.
-Then prepare clean pit/connected-ditch art in a compact named gallery; new-art
-publication requires Human approval and topology/alpha/readability/performance
-qualification. Preserve rules3, `surprise-v6` / revision2, accepted travel/input/
-save contracts, calibrated gains and all original assets. Phase1 does not waive
-Phase2 or root PT36 before04. Proof repair/preparation can proceed while family
-P12/P5–P11 are pending; the iPad camera issue remains unresolved.
+**Current candidate work:** root Astra implemented explicit legacy/current art
+checks, exact approved-v14 archive/recovery, field-level manifest diagnostics and
+two clean pit originals. Actual Sol conditionally accepted the source repair,
+requiring documented clean-checkout recovery/validation before a portability
+claim. Full current-art validation passed locally (0 errors/429 historical
+warnings); final modified-source and clean-checkout qualification is in progress.
+Human selected rounded-square **B** and explicitly delegated design/implementation
+while busy; no repeated approval question is needed. Connected geometry preview
+is source-only and not a shipped art replacement. Runtime v0.22.8 is unchanged.
+
+**Next delivery:** isolated **04-A** wall/floor value and scale, filter-free wall
+form/light-facing edges; qualified HOLE-02 integration; reward-first Plan02.
+The [Astra/Sol next-focus review](reviews/2026-09-06-v0228-next-focus-disposition.md)
+supersedes the blanket Phase2/PT36 hold. Only their affected ditch/receiver and
+actor/held surfaces remain gated; do not claim full Plan04 acceptance. Preserve
+rules3, `surprise-v6`/revision2, current input/travel/save and calibrated audio.
+Family P12/P5–P11 may remain pending during safe delivery.
+
+Latest Human device report: wife compared Chrome/Safari on iPad at ~08:30 today,
+unknown build/settings; Chrome smoother but residual camera stutter. Record is
+[here](user-playtests/2026-09-06-ipad-chrome-safari-comparison.md). It is not a
+controlled engine diagnosis or acceptance. Claude's full-world mask premise is
+confirmed in source, actual raster cost unmeasured. Existing audio has shared
+gain buses and a24-voice cap; it is not direct-to-destination per voice.
 
 Remaining V22-UI-01 propagation includes Home/dialog/victory, full200% text,
 HUD pace/settings art and remaining optical refinements. Preserve the praised
@@ -384,8 +400,8 @@ timing. Contaminated desktop evidence cannot close those gates.
 
 The Human authorizes safe progress while playtesting is deferred; missing
 physical results do not blanket-block these independent engineering seams.
-AUDIO-01A, V22-HOLE-01, root PT36 and the later programme remain in §5. Agent04
-is not released by this handoff. Maintain the cumulative
+AUDIO-01A, V22-HOLE-01, root PT36 and the later programme remain in §5. Only
+the bounded wall-only 04-A slice is released; full Plan04 is not. Maintain the cumulative
 [PLAYTEST_CHECKLIST](PLAYTEST_CHECKLIST.md) and
 [HUMAN_DECISIONS](HUMAN_DECISIONS.md); record concrete Human answers separately
 and never infer acceptance from silence.
@@ -428,12 +444,9 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.8 HOLE-01A Phase1 is published at `3acaf5872dd921f15929c330eeae46053b2a6362`; v0.22.7 is the immediate published fallback. Do not repeat accepted audio/Exit/UI-01A/rules work. Remaining V22-UI-01 proceeds in later bounded increments. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved. Resolve root PT36 before Plan04.
-2. **V22-HOLE-01 Phase2** proof/EOL repair, Human-approved
-   joined ditch art and topology; root PT36; then **04** lighting, wall depth and terrain
-   topology/regions. The Human's deferred feedback does not alone stop these
-   independent steps; retain actual safety/dependency/engineering review gates.
-3. **02** VFX, effect lifecycle, feedback and reward showers; then **remaining UI-02** polish. UI-03 already delivered Book/tab/detail/focus/victory foundations; reconcile residual work rather than rebuilding them.
+1. v0.22.8 HOLE-01A Phase1 is published at `3acaf5872dd921f15929c330eeae46053b2a6362`; v0.22.7 is fallback. Do not repeat accepted audio/Exit/UI/rules work. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved.
+2. Finish bounded proof repair qualification; **04-A wall-only depth/value** may proceed independently of HOLE-02/PT36. Human-selected B/connected-ditch integration qualifies separately. **04-B** consumes accepted ditch/region boundaries; **04-C actor/held grounding** waits for PT36. Keep one runtime writer and actual independent review; these are scoped slices, not waived full-plan gates.
+3. **02 reward-first** prototype, then publication against accepted 04-A scene/performance seams; later complete remaining VFX/lifecycle/material and **UI-02** polish. New drop rules need root's engine/save review; persistent XP remains Plan14. UI-03 already delivered Book/tab/detail/focus/victory foundations; preserve them.
 4. **ALT-P1-01** Human-gated Alex model/canon and equal optional lead-player integration.
 5. **08** normalized input, controllers/Xbox/Steam Deck and bounded zoom.
 6. **05** limited sprite animation.

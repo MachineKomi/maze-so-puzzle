@@ -1,0 +1,128 @@
+{
+  "schema": "maze-art-generation-batch/v1",
+  "batchId": "hole02-pits",
+  "revision": 1,
+  "status": "reviewed",
+  "recordedOn": "2026-09-06",
+  "recipeEvidence": {
+    "path": "docs/source-assets/recipes/mgjrpg-02.json",
+    "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+    "bytes": 8645
+  },
+  "decisionEvidence": {
+    "path": "docs/source-assets/calibrations/hole02/human-selection.json",
+    "sha256": "1161669217cdee7af0e80eccef0d56b470e4b792f9a15051e32b5d4b0f1b3aa4",
+    "bytes": 992
+  },
+  "promptFile": {
+    "path": "docs/source-assets/production/hole02-pits/PROMPTS.md",
+    "sha256": "c4810527a8273a305656610375d5079e622d74cca7189b407c44c6295d6babec",
+    "bytes": 3756,
+    "fidelity": "exact"
+  },
+  "reviewEvidence": {
+    "path": "docs/source-assets/production/hole02-pits/human-review.json",
+    "sha256": "dbc7007c85d5b8cd7e167d31c6413eb1c5c13941366dd45df3b33b6a13211707",
+    "bytes": 339
+  },
+  "generator": {
+    "provider": "OpenAI",
+    "interface": "Codex built-in ImageGen",
+    "model": "not exposed",
+    "seed": "not exposed"
+  },
+  "referenceRegistry": {
+    "house-recipe": {
+      "path": "docs/source-assets/recipes/mgjrpg-02.json",
+      "sha256": "4646cabfe26e633fd025472cd4ca6d39ed524e264730dddf3c0e4fe72ae3be17",
+      "bytes": 8645,
+      "authorityKind": "written style context, not submitted raster reference"
+    }
+  },
+  "runs": [
+    {
+      "runId": "hole02-a",
+      "promptBlockId": "hole02-a",
+      "generationMode": "fresh-blank-canvas-no-image-references",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "house-recipe",
+          "role": "written-specification-context-only; NOT an image supplied to ImageGen"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/hole02-pits/pit-a-generator-original.png",
+        "sha256": "298aeaee0a963dde76cb7edef3e892ca7de6187d9be344530c69edf09c0f03ca",
+        "bytes": 1034420,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064,
+        "outputId": "exec-6e26bcc2-a003-4638-822f-97de868763a2.png"
+      },
+      "disposition": {
+        "status": "art-director-rejected-source",
+        "reason": "Retained as immutable comparison; B better fits the tile/ditch construction."
+      },
+      "lineage": {
+        "previousBatchOutputUsed": false,
+        "editOfEdit": false,
+        "imageReferencesSent": []
+      }
+    },
+    {
+      "runId": "hole02-b",
+      "promptBlockId": "hole02-b",
+      "generationMode": "fresh-blank-canvas-no-image-references",
+      "orderedReferences": [
+        {
+          "order": 1,
+          "referenceId": "house-recipe",
+          "role": "written-specification-context-only; NOT an image supplied to ImageGen"
+        }
+      ],
+      "output": {
+        "path": "docs/source-assets/production/hole02-pits/pit-b-generator-original.png",
+        "sha256": "fd4242d62e919ac019e084223a95d7792860b24db12e539423f6d0ffb3f175ec",
+        "bytes": 1107694,
+        "width": 1254,
+        "height": 1254,
+        "format": "png",
+        "mode": "RGBA",
+        "alphaMode": "straight",
+        "decodedBytesUpperBound": 6290064,
+        "outputId": "exec-fcac60dc-997d-4f63-aed0-42ecdaf23a97.png"
+      },
+      "disposition": {
+        "status": "human-approved-source",
+        "reason": "Human preferred B and delegated technical implementation."
+      },
+      "lineage": {
+        "previousBatchOutputUsed": false,
+        "editOfEdit": false,
+        "imageReferencesSent": []
+      }
+    }
+  ],
+  "nativeCanvasException": "Native 1254x1254 RGBA retained; field registration occurs only in review derivatives.",
+  "lineagePolicy": "Independent blank-canvas generation. No historical pixels edited. No image references sent.",
+  "counts": {
+    "runCount": 2,
+    "rejectedBackgroundInvalidCount": 0,
+    "pendingHumanCandidateCount": 0,
+    "humanApprovedSourceCount": 1,
+    "artDirectorRejectedSourceCount": 1,
+    "generatorOriginalEncodedBytes": 2142114,
+    "generatorOriginalDecodedBytesUpperBound": 12580128
+  },
+  "reviewProtocol": "B selected by Human; technical qualification still required before publication.",
+  "rights": "Original game asset prompts; no named franchise or artist; no external image inputs. Not legal clearance.",
+  "runtimeImpact": {
+    "files": 0,
+    "bytes": 0
+  },
+  "rollback": "No runtime publication in this source/preflight checkpoint."
+}

@@ -1044,6 +1044,23 @@ still owns the final-release audit rather than reopening this accepted set.
 
 ## Research basis
 
+### HOLE-02 selected direction — 2026-09-06
+
+The Human prefers the newly authored rounded-square **Candidate B** and delegates
+design/implementation judgment pending the next playtest. See the exact
+[selection](source-assets/calibrations/hole02/human-selection.json) and
+[generation record](source-assets/production/hole02-pits/run-record.json).
+Use its narrow rose-mauve rim, broad plum inner wall and large dark aubergine
+opening as the pit direction. No costume-like outline, stepping stones or
+pebble/micro-ledge noise. Original A remains a non-selected comparison.
+Connected sections must share a continuous void and exposed-boundary rims;
+source-only code geometry previews are not literal pieces from the bitmap.
+No new runtime art has been published in this selection checkpoint. Keep
+neutral light, safe floor boundaries, diagonal separation and all16 cardinal
+masks; technical checks precede publication. No broad art-style reopening.
+
+### Earlier research evidence
+
 The evidence register and access date (2026-09-02) are preserved in Plan 03
 section 18. Its primary references cover transformation grammar, cute-face
 perception, contour threat, age-rating guidance, icon standards, WCAG/Xbox

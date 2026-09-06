@@ -1,11 +1,22 @@
 # V22-HOLE-01 — single-width crossings and connected ditches
 
-Status: Phase 1 engineering-accepted and published in v0.22.8; Phase 2 connected-
-ditch art/topology awaits proof repair, technical qualification and Human art approval.
+Status: Phase 1 engineering-accepted and published in v0.22.8. Phase 2 has a
+Human-selected rounded-square Candidate B (2026-09-06) and source-only connected
+geometry preview; runtime publication/topology qualification remains outstanding.
+The bounded proof repair is under independent review/clean-checkout qualification.
 Date: 2026-09-05. Backlog: PT-20260905-49.
 Source: [audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Owner: root rules/content integration with independent Sol/Astra review; bounded
 art generation uses the approved house style and Human batch review.
+
+Current gate refinement: wall-only **Plan04-A** may proceed independently of this
+art/topology work and PT36. Plan04-B receiver/ditch work consumes this qualified
+surface; actor/held grounding still needs PT36. See the current addendum in
+[Plan04](04-lighting-wall-depth.md). This supersedes the blanket sequence below.
+Candidate B selection/delegated execution is recorded in
+[Human selection](../source-assets/calibrations/hole02/human-selection.json).
+No new selection question is needed; technical/gameplay integration and later
+Human playtest acceptance are not implied by the preference.
 
 Latest queue authorization: safe implementation may continue while physical
 playtesting is pending. Preserve outstanding evidence and reviewed predecessor

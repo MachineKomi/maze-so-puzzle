@@ -14,7 +14,7 @@ from mgjrpg02_options import generate_mgjrpg02_options
 from mgjrpg02_selection import generate_mgjrpg02_selection
 from migrate_legacy import migrate_legacy
 from proofs import generate_canary_proofs
-from validate import validate_all
+from validate import validate_all, validate_legacy_canary
 
 
 def _print(value: Any) -> None:
@@ -27,6 +27,7 @@ def parser() -> argparse.ArgumentParser:
     )
     action = command.add_mutually_exclusive_group(required=True)
     action.add_argument("--check", action="store_true", help="validate without writing files")
+    action.add_argument("--check-legacy-canary", choices=("artifacts", "current-inputs"), help="explicit historical canary audit; never part of the current-art gate")
     action.add_argument("--manifest", action="store_true", help="inspect or explicitly write the generated manifest")
     action.add_argument(
         "--proof",
@@ -49,6 +50,13 @@ def parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
     try:
+        if arguments.check_legacy_canary:
+            if arguments.write or arguments.id or arguments.profile:
+                raise ValueError("--check-legacy-canary is non-writing and accepts no --write/--id/--profile")
+            report = validate_legacy_canary(arguments.check_legacy_canary)
+            _print(report)
+            return 0 if report["ok"] else 1
+
         if arguments.check:
             if arguments.write or arguments.id or arguments.profile:
                 raise ValueError("--check is non-writing and accepts no --write/--id/--profile options")

@@ -1,5 +1,41 @@
 # Lighting and wall-depth implementation plan
 
+## 2026-09-06 joint delivery split — current execution authority
+
+[Astra/Sol next-focus review](../reviews/2026-09-06-v0228-next-focus-disposition.md)
+narrows the predecessor gates below; it does not waive full Plan04 acceptance.
+
+- **04-A, next visible tranche:** existing wall/floor value hierarchy and repeat
+  scale; signed, filter-free wall side/contact faces and light-facing highlights;
+  a single resolved light per level. Build a small representative scene rack,
+  then integrate into the existing MazeTerrain owner with no gameplay changes.
+  Fix Springstep's inverted read by inspecting the actual art composite, not
+  assuming treatment multipliers equal luminance. Keep corridors fully readable.
+  Do not change the six-tile camera, held attachment, actor lighting, region
+  assignments, hole silhouette or collision rules in this tranche.
+- **04-B:** accepted hole/ditch joins, receiver/topology and visual-region
+  integration. HOLE-02 qualification is a predecessor to this affected surface.
+- **04-C:** actor/held grounding and remaining all-material/light-direction
+  coverage. Root PT36's equipped composition review precedes held lighting,
+  not unrelated wall-only 04-A work.
+
+Use existing approved textures first. A source-only pit preference does not prove
+connected runtime seams; conversely, waiting for those seams must not hold the
+wall-only prototype. Test fractional travel and tight/concave geometry; no floor
+narrowing or new shimmering. Lite/static retain structural depth. Budget before
+adding paths, avoid full-maze filtered layers, and measure the resulting cost.
+Depth may be cheaper than the current blur; that remains a measured outcome,
+not a promise. No blanket `will-change`/paint-containment change is authorized.
+
+Include a controlled hazard-filter diagnostic only if it can preserve identical
+maze/route/pace/quality and unambiguously report its setting/build. The full-world
+morphology/blur masks are verified; actual iPad raster cost is not. Physical
+on-device evidence remains separate from desktop engineering checks. This
+diagnostic should not delay visibly better walls when device testing is pending.
+
+Publish a bounded playable 04-A checkpoint after source/visual/native/performance
+review. Record remaining 04-B/04-C work as open, not silently complete Plan04.
+
 Human2026-09-06 [V23-03](../playtests/2026-09-06-v0223-v0224-intake.md): Sky Hollow
 feels inverted because bright walls/dark floor break the learned hierarchy.
 Review light readable navigable floors against darker bounded walls across every

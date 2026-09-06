@@ -1,0 +1,11 @@
+{
+  "schema": "maze-human-art-selection/v1",
+  "recordedOn": "2026-09-06",
+  "source": "Human message in Sol Astra MsP Collab, following two newly generated pit candidates",
+  "selectedOutputId": "exec-fcac60dc-997d-4f63-aed0-42ecdaf23a97.png",
+  "selectedSha256": "fd4242d62e919ac019e084223a95d7792860b24db12e539423f6d0ffb3f175ec",
+  "quote": "for the record this is my favourite hole and probably easiest to make into a 2+ tile long continuous hole / ditch.",
+  "delegationQuote": "However I will defer to and trust your judgement on art and design and implementation until I'm able to complete the next play test",
+  "interpretation": "Candidate B is Human-preferred. Root may progress art/design/implementation without another candidate-selection question. Technical alpha, topology, registration, visual and performance checks remain required. Neither untested runtime results nor connected-geometry pixels are described as already Human-playtested.",
+  "currentRuntimeChanged": false
+}
