@@ -14,12 +14,13 @@ the agents; only material product/art choices need to come back here.
 | D04 | iPad test environment (optional clarification) | Eighth-generation iPad / 32GB. Wife's ~08:30 Chrome/Safari A/B on 2026-09-06 found Chrome smoother but still imperfect; build/settings not recorded. [Observation](user-playtests/2026-09-06-ipad-chrome-safari-comparison.md). iPadOS/browser version would help when convenient, but is not required to proceed. |
 | D05 | Device mix comfort (optional, 2026-09-06) | Human selected old Music10%/SFX100% on phone/desktop and requests this balance as calibrated75/75 defaults. v0.22.6 AUDIO-01V2 at `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa` is engineering-accepted and published on web/Windows with all public downloads verified. No reconfirmation needed. P10 checks the calibrated mix and preserved choices; P8 listening/background checks remain cumulative. Very high combined levels may distort; final mastering/listening remain open. No new-device purchase requested. |
 
-Current update: v0.22.8 HOLE-01A single-width rules/content is published on web/
-Windows with four independent downloads verified. No immediate decision is needed;
-[P12](PLAYTEST_CHECKLIST.md#p12--one-hole-crossings-and-safe-landings-v0228-hole-01a)
-collects crossing/save feedback. P5–P11 remain cumulative; D05's calibrated
-preferences are unchanged. Next proof/EOL repair is engineering work; concrete
-Phase2 has the D01 selected direction; technical checks precede publication.
+Current update: v0.22.9 WALL-04A is published on web/Windows with four independent
+downloads verified. No immediate decision is needed. P13 in the
+[playtest checklist](PLAYTEST_CHECKLIST.md) collects raised-wall, texture/contrast,
+ghost-edge and device-regression feedback. P5–P12 remain cumulative. The next
+delivery is bounded reward showers/magnetic collection; D01's connected hole
+direction and D05's calibrated preferences remain unchanged. Technical and
+independent checks still precede each publication.
 
 Agents must add a dated concrete question/candidate, recommendation, affected
 scope and whether it blocks only that slice before requesting a new decision.

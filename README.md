@@ -1,13 +1,12 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published preview is **v0.22.8 HOLE-01A**: clearer single-hole
-jumps, safe landings and preserved room-dividing trench puzzles. Seven story
-mazes and generated crossings align with the new rules. Existing pit artwork
-remains; cleaner connected ditches are the next separate art phase.
-Frozen runtime: `3acaf5872dd921f15929c330eeae46053b2a6362`.
+The current published preview is **v0.22.9 WALL-04A**: rounded raised walls,
+coloured light-facing edges, smaller texture repeats and clearer floor/wall
+contrast. It also fixes a drifting dark frame edge in some maze views.
+Frozen runtime: `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`.
 Web and Windows are published; all four release downloads are independently verified.
-Older-rules unfinished mazes restart with an updated-maze notice; earned friends,
-rewards, achievements, unlocks and historical records survive. Do not clear saves.
+v0.22.8 runs remain compatible; no new gameplay/save migration in this release.
+Earned friends, rewards and progress remain intact. Do not clear saves.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
 The remaining iPad camera issue and broader UI/audio improvements are still open.
@@ -74,19 +73,19 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The published HOLE-01A Windows handoff contains four files:
+The published WALL-04A Windows handoff contains four files:
 
-- `Maze-so-Puzzle-0.22.8-HOLE-01A-3acaf58-locked-portable.exe`
-- [HOLE-01A artifact manifest](release/HOLE-01A-v0.22.8-manifest.json)
-- [HOLE-01A playtest instructions](release/HOLE-01A-v0.22.8-PLAYTEST.md)
-- [HOLE-01A SHA-256 checksums](release/HOLE-01A-v0.22.8-SHA256SUMS.txt)
+- `Maze-so-Puzzle-0.22.9-WALL-04A-cbe8ab8-locked-portable.exe`
+- [WALL-04A artifact manifest](release/WALL-04A-v0.22.9-manifest.json)
+- [WALL-04A playtest instructions](release/WALL-04A-v0.22.9-PLAYTEST.md)
+- [WALL-04A SHA-256 checksums](release/WALL-04A-v0.22.9-SHA256SUMS.txt)
 
-Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.8/Maze-so-Puzzle-0.22.8-HOLE-01A-3acaf58-locked-portable.exe).
-It is 173,469,696 bytes; SHA-256
-`a99fcfc30f587a961659ff555d559b883b8cb8b0d6c5068edac24ada2b6058e9`.
-The [publication receipt](release/HOLE-01A-v0.22.8-release-verification.json)
+Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.9/Maze-so-Puzzle-0.22.9-WALL-04A-cbe8ab8-locked-portable.exe).
+It is 173,471,744 bytes; SHA-256
+`4bf84655dc589447344397c26847351990156743529a623d4aaafedfad46a441`.
+The [publication receipt](release/WALL-04A-v0.22.9-release-verification.json)
 binds the independent public downloads to the tested source and native artifact.
-The [v0.22.7 release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.7)
+The [v0.22.8 release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.8)
 remains the immutable previous-build fallback; arbitrary downgrade save safety is
 not promised. Close one build before starting another against its shared profile.
 This is an unsigned preview. Very high Music/SFX together may distort; physical

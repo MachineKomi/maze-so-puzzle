@@ -4,7 +4,26 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-**Current checkpoint, 2026-09-06:** **v0.22.8 HOLE-01A Phase 1 is engineering-
+**Current checkpoint, 2026-09-06: v0.22.9 WALL-04A published and verified.**
+Frozen `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`: rounded raised walls,
+signed material-coloured bevels, floor-only contact, smaller texture repeats,
+Springstep's pale floor and the reproduced PT33 dark-frame fix. No new media,
+save/rules/camera/actor/hole/audio change. Root and actual Sol accepted source,
+36 browser combinations and final native controls/reopen;631 project and142 art
+tests pass. CI/Production/canonical bytes and four public downloads verified in
+the [receipt](../../release/WALL-04A-v0.22.9-release-verification.json).
+[Acceptance](../reviews/2026-09-06-v0229-engineering-acceptance.md).
+P13 and P5–P12 remain cumulative; iPad and fullPlan04 remain unaccepted.
+
+**Next visible delivery: reward-first Plan02.** Use accepted04-A wall/render
+seams for bounded wall-bouncing Gold/Science/maze-Power showers, magnetic arrival,
+trails and coordinated sound. Prototype and measure before publication. New
+drop tables need explicit root engine/save review; permanent XP remainsPlan14.
+Do not delay this independent tranche for unrelated region/held-grounding gates.
+Human-selected B/HOLE-02,04-B/04-C/PT36 qualify separately. The detailed Plan02
+top addendum controls scope; this does not close its broader VFX programme.
+
+**Immediate fallback: v0.22.8 HOLE-01A Phase 1 is engineering-
 accepted and web/Windows published, with all four public downloads verified.**
 Frozen source `3acaf5872dd921f15929c330eeae46053b2a6362`; read the
 [acceptance](../reviews/2026-09-06-v0228-engineering-acceptance.md),
@@ -19,7 +38,7 @@ is inherited for identical inputs, not a fresh pass. Two early native captures
 preceded Ame/weapon paint; a later mid-jump capture was complete. Keep the inherited
 async actor first-paint/capture follow-up; continuous visibility is not proved.
 
-**Next: visible wall-depth tranche 04-A and qualified HOLE-02 integration.**
+**Earlier sequencing decision, now consumed by04-A; HOLE-02 remains pending.**
 The [Astra/Sol review](../reviews/2026-09-06-v0228-next-focus-disposition.md)
 separates wall-only value/depth work from ditch/region and actor/held grounding.
 The latter surfaces retain HOLE-02/PT36 gates; they no longer blanket-block
@@ -32,7 +51,7 @@ publish after bounded 04-A/performance review, without waiting for unrelated
 region completion. Persistent XP is still Plan14, not newly authorized state.
 P12/P5–P11 and physical/audio/iPad camera gates remain open.
 
-**Immediate fully published fallback:** v0.22.7 AUDIO-01A is frozen at
+**Historical fully published fallback:** v0.22.7 AUDIO-01A is frozen at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/native review is
 accepted; **web/Windows and all four public downloads are verified** in the
 [receipt](../../release/AUDIO-01A-v0.22.7-release-verification.json).

@@ -1,5 +1,20 @@
 # Windows test builds
 
+## v0.22.9 WALL-04A — current published preview
+
+Frozen runtime/tag `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`. Raised rounded
+walls, smaller material repeats, clearer floor/wall contrast and the reproduced
+ghost-frame fix. No gameplay/save, camera, audio or new loot changes.
+
+- [Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.9/Maze-so-Puzzle-0.22.9-WALL-04A-cbe8ab8-locked-portable.exe)
+- [Manifest](WALL-04A-v0.22.9-manifest.json) · [Playtest](WALL-04A-v0.22.9-PLAYTEST.md) · [Checksums](WALL-04A-v0.22.9-SHA256SUMS.txt) · [Receipt](WALL-04A-v0.22.9-release-verification.json)
+
+Unsigned x64 portable173471744B; SHA256
+`4bf84655dc589447344397c26847351990156743529a623d4aaafedfad46a441`.
+All four public downloads match tested files. No installer/signing or physical
+iPad acceptance. v0.22.8 is the immediate published fallback; older records below
+are retained history. No save reset is needed when updating from v0.22.8.
+
 ## v0.22.4 V22-RESCUE1 — published
 
 Frozen runtime/tag target: `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.

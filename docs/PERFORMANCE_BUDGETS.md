@@ -1,5 +1,19 @@
 # Performance budgets and evidence contract
 
+## WALL-04A published allocation — 2026-09-06
+
+v0.22.9 frozen `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`: gzip9 JS158643
+(+1474), CSS24041 (+61), public165031011 (unchanged). Named allocation1500/61/0
+is within the reviewed prototype4000/250/0. Decoded image inventory411582176B
+is unchanged; it is not resident GPU/heap usage. Structural wall depth adds no
+per-tile effect nodes, wall filters, animation or ordinary-camera geometry work.
+Existing hazard filters remain. Final36 browser combinations recorded zero
+terrain mutations while moving; loaded-host frame timings are report-only.
+Native portable173471744B (+2048 versus v0.22.8).
+[Acceptance](reviews/2026-09-06-v0229-engineering-acceptance.md). Physical iPad,
+clean-host timing and later VFX load remain separate gates; no universal smoothness
+claim or automatic allocation for future loot effects.
+
 ## AUDIO-01A readiness candidate allocation —2026-09-06
 
 Astra allocates1600 gzip9 JS bytes versus v0.22.6 for bounded streamed handover,

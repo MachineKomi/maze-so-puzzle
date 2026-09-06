@@ -1,11 +1,26 @@
 # Lighting and wall-depth implementation plan
 
+## 04-A delivered — v0.22.9 WALL-04A, 2026-09-06
+
+The bounded wall-only slice is published at frozen
+`cbe8ab879bd58c0a08a770209ebfeb649f684e2b`. Rounded inward front faces,
+material-local light-facing bevels, floor-only contact, smaller repeats and
+Springstep's pale floor hierarchy are integrated. PT33's drifting partial-width
+frame is fixed. See the [implemented contract](../LIGHTING_AND_DEPTH_SPEC.md),
+[acceptance](../reviews/2026-09-06-v0229-engineering-acceptance.md) and
+[publication receipt](../../release/WALL-04A-v0.22.9-release-verification.json).
+No new art, gameplay/save rules, camera or actor/held changes. P13 is open.
+
+The next visible delivery is reward-first Plan02 against this accepted seam.
+04-B ditch/region receivers, exterior cast, richer continuous corner response
+and 04-C/PT36 actor/held grounding remain open. This is not full Plan04 closure.
+
 ## 2026-09-06 joint delivery split — current execution authority
 
 [Astra/Sol next-focus review](../reviews/2026-09-06-v0228-next-focus-disposition.md)
 narrows the predecessor gates below; it does not waive full Plan04 acceptance.
 
-- **04-A, next visible tranche:** existing wall/floor value hierarchy and repeat
+- **04-A, delivered tranche:** existing wall/floor value hierarchy and repeat
   scale; signed, filter-free wall side/contact faces and light-facing highlights;
   a single resolved light per level. Build a small representative scene rack,
   then integrate into the existing MazeTerrain owner with no gameplay changes.

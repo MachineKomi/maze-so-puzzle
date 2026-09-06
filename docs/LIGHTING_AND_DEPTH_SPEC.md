@@ -1,7 +1,10 @@
-# Wall depth and lighting — 04-A candidate
+# Wall depth and lighting — implemented 04-A contract
 
-Root Astra owns this bounded runtime slice after `67db82c`; independent Sol
-reviews it. It is not full Plan04 completion or an iPad performance claim.
+Published v0.22.9 WALL-04A, frozen `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`.
+Root Astra implemented; actual Sol independently accepted source/browser/native.
+[Acceptance](reviews/2026-09-06-v0229-engineering-acceptance.md) and
+[receipt](../release/WALL-04A-v0.22.9-release-verification.json) bind evidence.
+This is not full Plan04 completion or an iPad performance claim; P13 is open.
 
 ## Player-visible contract
 

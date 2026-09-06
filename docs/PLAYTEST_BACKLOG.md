@@ -6,6 +6,27 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### PT33 / PT15 / V23-03 — WALL-04A v0.22.9 published
+
+Raised rounded wall faces, coloured signed bevels and floor-only contact now
+replace the old blurred wall silhouette. Floor/wall/dressing repeats are smaller;
+moon-slate is visibly lighter so Springstep's floors do not read as walls.
+No approved pixels, gameplay, saves, camera or actor attachments were changed.
+
+PT33 was reproduced as a selector collision: the theme ornament and dark viewport
+frame shared an animated 30%-width pseudo-element. Separate ownership and explicit
+frame bounds remove the reproduced interior edge in Twilight/Rainbow. Browser
+36/36 moving combinations and actual native controls/reopen pass. This does not
+prove every possible thin-line report has the same cause. P13 asks for family
+confirmation, texture/contrast feedback and any device regression. iPad remains open.
+
+Frozen `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`;
+[acceptance](reviews/2026-09-06-v0229-engineering-acceptance.md),
+[receipt](../release/WALL-04A-v0.22.9-release-verification.json).
+Next is Plan02's bounded wall-bouncing Gold/Science/maze-Power presentation,
+magnet collection, trails and sound. Permanent XP is not silently implemented.
+Connected hole art, 04-B/04-C/PT36, all existing family checks remain open.
+
 ### PT49 / HOLE-01A v0.22.8 — Phase 1 published; Phase 2 pending
 
 Single-width Spring jumps, truthful landing blockers, seven minimally normalized

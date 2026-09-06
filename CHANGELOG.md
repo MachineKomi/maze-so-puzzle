@@ -4,7 +4,21 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.8 — HOLE-01A (candidate)
+## 0.22.9 — WALL-04A
+
+- Rounded raised wall faces, material-coloured light-facing edges and floor-only
+  contact make maze boundaries feel more solid. Full/Lite/Static retain depth.
+- Smaller floor/wall/dressing repetition and a lighter moon-slate floor improve
+  scale and the floor/wall distinction, especially Springstep Sky Hollow.
+- Fixed the animated partial-width dark frame that could appear as a ghost line
+  in Rainbow Power Parade and Twilight Treasure Loop.
+- No new runtime images, gameplay/save rules, camera or audio change. Existing
+  v0.22.8 runs remain compatible. This is wall-only Plan04-A, not all lighting
+  or the upcoming loot effects; physical iPad smoothness remains open.
+- [Verified release](release/WALL-04A-v0.22.9-release-verification.json) and
+  [playtest checks](release/WALL-04A-v0.22.9-PLAYTEST.md).
+
+## 0.22.8 — HOLE-01A
 
 - Spring Boots cross one hole along the direction of travel. Long one-tile-wide
   dividing trenches still permit crossings across their width, not length.

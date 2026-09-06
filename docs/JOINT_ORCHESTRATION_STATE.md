@@ -7,7 +7,26 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **Current preview: v0.22.8 HOLE-01A, Phase 1 published and verified.**
+- **Current preview: v0.22.9 WALL-04A, published and verified.** Frozen runtime
+  `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`; root Astra and actual Sol accepted
+  source/browser/final native. CI34034034559 and Production6293082169 succeeded;
+  canonical web bytes and all four independent public downloads match tested
+  files. Rounded raised walls, signed coloured bevels, floor-only contact,
+  smaller material repeats, pale moon-slate floor and PT33 frame/ornament split.
+  No new images, rules/save migration, camera, actor/held, hole or audio changes.
+  [Acceptance](reviews/2026-09-06-v0229-engineering-acceptance.md),
+  [Sol review](reviews/2026-09-06-wall04a-sol-final-review.md),
+  [receipt](../release/WALL-04A-v0.22.9-release-verification.json).
+  Package documentation `a28141e2b34d5289152bca86952bfeacfa2c0b03` binds frozen
+  attachments. Portable173471744B SHA256
+  `4bf84655dc589447344397c26847351990156743529a623d4aaafedfad46a441`.
+  Main-checkout rebuild was requalified with actual native controls/reopen;
+  superseded first-build evidence is not promoted.631 project/142 art tests,
+  current art0 errors/429 historical warnings,36 moving browser cases pass.
+  P13/P5–P12 and iPad remain open. Next visible delivery is reward-first Plan02.
+  04-B/04-C/PT36/HOLE-02 remain scoped future work, not blanket blockers.
+
+- **Immediate fallback: v0.22.8 HOLE-01A, Phase 1 published and verified.**
   Frozen runtime `3acaf5872dd921f15929c330eeae46053b2a6362`; root Astra and
   actual Sol accepted source/browser/native. CI34022523242 and Production6290975438
   succeeded; canonical web bytes and all four public downloads match tested files.
@@ -23,7 +42,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   runnable; Phase2/PT36 still gate ditch/region and actor/held integration, not
   all lighting work. See §3 and §5. No iPad-camera acceptance.
 
-- **Immediate published fallback: v0.22.7 AUDIO-01A.**
+- **Historical published fallback: v0.22.7 AUDIO-01A.**
   Frozen runtime `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` is pushed to main.
   Root Astra and actual Sol accepted source, browser and locked native evidence.
   Exact-source CI/Production and canonical raw-byte parity passed; all four
@@ -362,13 +381,18 @@ Human selected rounded-square **B** and explicitly delegated design/implementati
 while busy; no repeated approval question is needed. Connected geometry preview
 is source-only and not a shipped art replacement. Runtime v0.22.8 is unchanged.
 
-**Next delivery:** isolated **04-A** wall/floor value and scale, filter-free wall
-form/light-facing edges; qualified HOLE-02 integration; reward-first Plan02.
+**Next delivery:** **Plan02 reward-first** against published04-A scene seams:
+bounded wall-bouncing Gold/Science/maze-Power, magnetic collection, trails and
+coordinated sound. No permanent XP claim. Read the complete current Plan02 and
+its top addendum before writing; preserve authoritative exactly-once awards and
+save/solver truth. New enemy/rescue drop tables need an explicit root-reviewed
+seeded rules/save tranche, not decorative particles that grant currency.
+Qualified HOLE-02 integration follows separately; 04-A walls are now delivered.
 The [Astra/Sol next-focus review](reviews/2026-09-06-v0228-next-focus-disposition.md)
 supersedes the blanket Phase2/PT36 hold. Only their affected ditch/receiver and
 actor/held surfaces remain gated; do not claim full Plan04 acceptance. Preserve
 rules3, `surprise-v6`/revision2, current input/travel/save and calibrated audio.
-Family P12/P5–P11 may remain pending during safe delivery.
+Family P13/P5–P12 may remain pending during safe delivery.
 
 Latest Human device report: wife compared Chrome/Safari on iPad at ~08:30 today,
 unknown build/settings; Chrome smoother but residual camera stutter. Record is
@@ -446,9 +470,9 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.8 HOLE-01A Phase1 is published at `3acaf5872dd921f15929c330eeae46053b2a6362`; v0.22.7 is fallback. Do not repeat accepted audio/Exit/UI/rules work. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved.
-2. Finish bounded proof repair qualification; **04-A wall-only depth/value** may proceed independently of HOLE-02/PT36. Human-selected B/connected-ditch integration qualifies separately. **04-B** consumes accepted ditch/region boundaries; **04-C actor/held grounding** waits for PT36. Keep one runtime writer and actual independent review; these are scoped slices, not waived full-plan gates.
-3. **02 reward-first** prototype, then publication against accepted 04-A scene/performance seams; later complete remaining VFX/lifecycle/material and **UI-02** polish. New drop rules need root's engine/save review; persistent XP remains Plan14. UI-03 already delivered Book/tab/detail/focus/victory foundations; preserve them.
+1. v0.22.9 WALL-04A is published at `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`; v0.22.8 is fallback. Do not repeat accepted audio/Exit/UI/hole-rules/wall work. Proof recovery is qualified. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved.
+2. **02 reward-first** is the next runtime tranche against accepted04-A. Bound wall-aware scatter/magnet/trail/sound cost and preserve exact-once rewards. Explicitly review new drop rules before changing engine/save state; permanent XP remains Plan14. Later complete remaining VFX/lifecycle/material and **UI-02** polish; preserve UI-03 foundations.
+3. Human-selected B/connected-ditch integration qualifies separately. **04-B** consumes accepted ditch/region boundaries; **04-C actor/held grounding** waits for PT36. Keep one runtime writer and actual independent review; these are scoped slices, not waived whole-plan gates. No need to wait for Human P13 to begin independent bounded reward work.
 4. **ALT-P1-01** Human-gated Alex model/canon and equal optional lead-player integration.
 5. **08** normalized input, controllers/Xbox/Steam Deck and bounded zoom.
 6. **05** limited sprite animation.

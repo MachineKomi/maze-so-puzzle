@@ -6,6 +6,14 @@ Keep completed observations and build identities when newer builds arrive.
 
 ## Start here
 
+- **Current: v0.22.9 WALL-04A / P13.** Raised walls, smaller texture repeats,
+  clearer floor/wall contrast and the reproduced dark ghost-edge fix. No new
+  save migration, camera change or loot physics in this release.
+  [Windows download](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.9/Maze-so-Puzzle-0.22.9-WALL-04A-cbe8ab8-locked-portable.exe) ·
+  [Short playtest note](../release/WALL-04A-v0.22.9-PLAYTEST.md) ·
+  [Verified release](../release/WALL-04A-v0.22.9-release-verification.json).
+  Start with P13 below when convenient; P5–P12 remain cumulative.
+
 - **Latest received observation (2026-09-06, ~08:30):** wife compared Chrome
   and Safari on the iPad; Chrome felt smoother, both imperfect. Build/settings
   unknown. [Recorded observation](user-playtests/2026-09-06-ipad-chrome-safari-comparison.md).
@@ -17,7 +25,7 @@ Keep completed observations and build identities when newer builds arrive.
   pit/strip/junction and floor-readability checks here. Current P12 still tests
   the shipped rules with old art, not that future renderer.
 
-- **Current: v0.22.8 HOLE-01A / P12.** Web and Windows are published; all
+- **Immediate fallback: v0.22.8 HOLE-01A / P12.** Web and Windows are published; all
   four downloads independently verified. Frozen `3acaf5872dd921f15929c330eeae46053b2a6362`.
   [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.8/Maze-so-Puzzle-0.22.8-HOLE-01A-3acaf58-locked-portable.exe) ·
   [Short playtest note](../release/HOLE-01A-v0.22.8-PLAYTEST.md) ·
@@ -32,7 +40,7 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- **Fallback: v0.22.7 AUDIO-01A**, frozen
+- **Historical fallback: v0.22.7 AUDIO-01A**, frozen
   `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Web and Windows are published;
   all four release downloads are independently verified. **P11 is the new music-
   readiness check**; P5–P10 remain cumulative.
@@ -61,8 +69,8 @@ Keep completed observations and build identities when newer builds arrive.
   Phase 2 artwork will need approval when its compact candidate gallery is ready.
 
 You do not need to complete everything in one sitting. The affected iPad movement
-comparison remains open; P12 is the new crossing check and P5–P11 remain
-cumulative. v0.22.8 changes traversal/content rules, not camera, audio or pit art.
+comparison remains open; P13 is the new wall check and P5–P12 remain
+cumulative. v0.22.9 changes wall/texture/frame presentation, not gameplay or audio.
 Please do not clear game data to create a cold test; preserving your progress
 is more important.
 
@@ -313,6 +321,22 @@ Existing pit sprites are unchanged; cleaner joined artwork is a later gate.
 Do not reproduce the known iPad camera failure again solely for this build.
 Tell us build/device, maze, pace and what looked or felt wrong. P5–P11 remain
 available; you need not complete everything in one sitting.
+
+### P13 — Raised walls, texture clarity and ghost edge (v0.22.9 WALL-04A)
+
+- [ ] Do walls feel raised while the walkable paths remain obvious? Try
+  Springstep Sky Hollow, one leafy maze and one dark/crystal maze. Report any
+  floor that looks like a wall, overly heavy edge or narrowed-looking corridor.
+- [ ] Twilight Treasure Loop / Rainbow Power Parade: stand still briefly, then
+  move in both directions. Is the drifting dark interior line gone?
+- [ ] Briefly compare Full, Lite and Static. Walls keep their structural shape;
+  no flickering seams, distracting repetition or oversized faint dressing.
+- [ ] Does camera travel on your usual device feel unchanged, better or worse?
+  Note build/browser/device/quality. Eighth-generation iPad smoothness remains
+  unresolved; this release is not presented as its proven fix.
+
+No need to reset progress or finish every check at once. v0.22.8 saves remain
+compatible. Any holes/actor-visibility/audio findings still belong to P5–P12.
 
 ## Easy reply format
 

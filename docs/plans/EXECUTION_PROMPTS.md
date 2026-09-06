@@ -4,7 +4,35 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-**Current handoff, 2026-09-06: v0.22.8 HOLE-01A Phase 1 is engineering/native
+**Current handoff,2026-09-06: v0.22.9 WALL-04A is published and verified.**
+Frozen runtime `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`; root Astra and actual
+Sol accepted source/browser/final native. CI/Production and canonical bytes
+passed; all four public downloads match the tested files. Read
+[acceptance](../reviews/2026-09-06-v0229-engineering-acceptance.md),
+[Sol review](../reviews/2026-09-06-wall04a-sol-final-review.md) and
+[receipt](../../release/WALL-04A-v0.22.9-release-verification.json).
+Rounded raised walls, coloured bevels, smaller repeats, floor hierarchy and the
+PT33 frame fix are delivered; no new media, gameplay/save, camera or loot changes.
+
+**Next assignment: root Astra implements bounded Plan02 reward-first; actual
+Sol reviews independently.** Read the complete current
+[Plan02](02-graphics-vfx-overhaul.md), its top reward-first addendum and current
+vision/gameplay/art/lighting/audio/presentation contracts. Begin with committed
+Gold/Science/maze-Power scatter, wall bounce, magnetic collection, trails and
+throttled musical arrivals. Authoritative awards commit exactly once independently
+of cancellable decorative simulation. Compare bounded renderer options with real
+frames/cost and game-scale visuals; no physics dependency or per-token filters.
+New enemy/rescue drop tables require explicit root engine/save review/versioning;
+permanent XP remains Plan14. Preserve reduced/static feedback, camera/input,
+save/solver truth and the new wall ownership. Publish the bounded accepted tranche,
+not a claim that all Plan02 is complete. P13 can remain pending; list new family
+checks at its release. No repeated art approval or blanket PT36/HOLE-02 blocker.
+
+Human-selected pit B/connected HOLE-02 and04-B/04-C/PT36 remain separately scoped.
+631 project/142 art tests and36 browser combinations passed for WALL-04A;
+physical iPad/clean-host and inherited actor first-paint gates remain open.
+
+**Historical v0.22.8 HOLE-01A Phase 1 is engineering/native
 accepted and web/Windows published, with all four public downloads verified.**
 Frozen `3acaf5872dd921f15929c330eeae46053b2a6362`; read the
 [acceptance](../reviews/2026-09-06-v0228-engineering-acceptance.md),
@@ -20,8 +48,8 @@ save/preferences and normal reopen are accepted within the documented limits;
 inherited async actor first-paint/capture evidence does not prove continuous
 Ame/weapon/follower paint. Keep that bounded follow-up and P12 open.
 
-**Next: root Astra delivers bounded 04-A wall form and HOLE-02 integration;
-actual Sol independently reviews.** Read the new tranche authority at the top of
+**Earlier assignment, consumed for04-A; HOLE-02 integration remains open.**
+Root Astra implemented, actual Sol reviewed. Read tranche authority at the top of
 [Plan04](04-lighting-wall-depth.md) and the
 [joint next-focus review](../reviews/2026-09-06-v0228-next-focus-disposition.md).
 Wall-only 04-A is no longer blanket-held by ditch art or PT36; their affected
@@ -32,7 +60,7 @@ Runtime pit integration remains open. Begin reward-first Plan02 prototypes; pres
 awards and defer persistent XP. Do not repeat completed Phase1/audio work or
 infer physical/iPad acceptance. P5–P11 remain cumulative.
 
-**Immediate fully published fallback: v0.22.7 AUDIO-01A** is frozen at
+**Historical fully published fallback: v0.22.7 AUDIO-01A** is frozen at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/native review is
 accepted; **web/Windows and all four public downloads are verified**. Final 578 project
 tests pass; JS gzip +1,560 bytes, CSS/public unchanged. Read the
@@ -71,8 +99,8 @@ which already contains Tessera repair, PLAY-A and AUDIO-01V. Do not rerun them.
 v0.22.4's rules revision 2 restarts older unfinished authored runs in all sixteen mazes;
 durable completions/unlocks/rewards/history survive. No physical gate is implied.
 
-Releases through v0.22.8 are published. Root Astra owns the Phase 2 proof/art/
-topology work and serial runtime/heavy slot; actual Sol independently reviews.
+Releases through v0.22.9 are published. Root Astra owns the next bounded reward-
+first tranche and serial runtime/heavy slot; actual Sol independently reviews.
 The accepted UI-01A prototype is not the next assignment. Home/dialog/victory
 propagation, full 200% text coverage, HUD pace/settings art and remaining optical
 work stay open for later scoped review. The
