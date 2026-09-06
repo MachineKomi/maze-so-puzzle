@@ -4,28 +4,36 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-## Current programme contract — 2026-09-06 refinement
+## Current programme contract — 2026-09-06 candidate qualification
 
-**Planning checkpoint; implementation awaits the Human's next prompt.** The
-[new-host receipt](../migrations/2026-09-06-new-laptop-recovery.md) records recovery;
-the [vision and programme review](../reviews/2026-09-06-vision-and-programme-refinement.md)
-records current source synthesis and actual Sol's independent challenge.
-This contract and section4 replace conflicting older execution assignments.
-The dated release/intake notes below retain their historical evidence value.
+**PHONE-02, audio 65/85 and BOOK-02A are implemented and in qualification** on
+`codex/phone02-book`, runtime `aad4bc511ea99066779c0a79527c2cf63a78fcf6`, intended
+**v0.22.12, still undeployed**. Read the [candidate record](../reviews/2026-09-06-phone02-book-candidate.md)
+for exact evidence and final closure. Current evidence is 649 project tests,
+17 focused browser cases plus 2 boundary cases passed; actual Sol independently
+reviewed source and 29 images with no blocker. Broader browser/performance
+qualification remains pending; this is not release or physical-device acceptance.
+This contract and section4 replace conflicting older execution assignments;
+dated release/intake notes below retain their historical evidence value.
 
 Web is **0.22.10**; published Windows is **0.22.9**. WALL-04A-R1 / **0.22.11** is
-committed WIP with an unresolved performance gate. Native0.22.10 is independently
-unfinished. Claude's four text inputs are restored; QA playtests have partially
-arrived with a copying-in-progress note. Migration wall/worktree/native inputs,
-transfer completeness and art-ledger/environment reconciliation remain open.
-No new-host iPad pass exists.
+**held** after the fair new-host comparison found +37.4% raster-task work; that is
+a trace-work proxy, not a user-latency percentage. The accepted v0.22.10 wall was
+restored in `e926737` before this candidate. The [wall decision](../reviews/2026-09-06-new-host-wall-decision.md)
+preserves the old-host frame concern and later non-specific shadow isolation.
+Native0.22.10 is independently unfinished: its exact staged executable is now
+[recovered](../reviews/2026-09-06-restored-folder-reconciliation.md), not accepted
+or published. Transfer completeness and art-ledger/environment reconciliation
+remain open. No new-host iPad pass exists.
 
-The next implementation prompt resumes the bounded wall qualification decision,
-then Book discovery, a small delight tranche, readable learning help and an early
-existing-rule puzzle canary. Plan09's read-only roster/design/recipe preflight
-can run alongside wall/Book. Controls need stable semantic UI and lead identity,
-not completion of unrelated ditch/region art. Full campaign production remains
-after controls, selective animation and07B. See the actionable order in section4.
+The immediate task is to finish this candidate's broad/performance and release
+checks. **After its qualified release: bounded DELIGHT-02B, then LEARN-01**, then
+the isolated existing-rule Plan09-P1 canary. [Plan09-P0](../reviews/2026-09-06-plan09-p0-obtainable-roster.md)
+has supplied the frozen 32-friend/12-guardian obtainability audit and recipe gaps;
+do not restart it or BOOK-02A implementation. Controls still need stable semantic
+UI and lead identity, not unrelated ditch/region art completion. Full campaign
+production remains after controls, selective animation and07B. Section4 preserves
+the wider dependency chain.
 
 Keep beautiful calm exploration, clear choices and voluntary return at the center.
 Finish one visible player benefit and its evidence before adding another broad
@@ -33,7 +41,8 @@ system. Every slice has performance/accessibility/motion/save gates;07B integrat
 the product and cannot serve as permission to postpone regressions until later.
 One runtime writer; genuine independent Sol source/render review. Claude is an
 occasional bounded advisor, not a mandatory approval gate. No new mechanics,
-permanent XP, asset deletion or deployment is authorized by this planning update.
+permanent XP or asset deletion follows from this status update. Publish only
+qualified changes through the preserved Vercel guard and release checklist.
 
 ## Dated checkpoints and source context
 
@@ -434,9 +443,9 @@ Do not rerun their original implementation prompts.
 
 | Order | Smallest useful delivery | Dependencies and acceptance before advancing |
 |---|---|---|
-| 0 | **[WALL-04A-R1 qualification](WALL-04A-R1-convincing-depth.md)** — convincing depth and smooth travel | Freeze live0.22.10 comparison and candidate; use the defined alternating new-host A/B, equal travel, frame distributions/traces and actual-size rim/route review.72 inherited browser cases are functional evidence. Old-host regression is unresolved; later shadow isolation found no shadow-specific cause. Promote only the qualified bounded candidate. If visually weak, one same-scene orthographic3D comparison; if cost fails, diagnose the demonstrated cost, not speculative universal optimizations. Keep R1 held and use a qualified predecessor for independent work if needed. |
-| 0a, alongside0–1 | **Plan09-P0: read-only design/roster/recipe preflight** | Audit currently obtainable canonical IDs and actual routes for Book X/Y; inventory first-use teaching, room/return opportunities and complete Surprise recipe identity. Produce a roster snapshot and two canary briefs. No runtime/map/generator/save mutation; missing full campaign integration does not block this audit. |
-| 1 | **[BOOK-02A](BOOK-02A-silhouettes-and-discovery.md)** — a collection worth discovering | Consume P0's playable denominator and current reveal authority. Grey actual silhouettes, legitimate friend encounter persistence, conservative species-rescue migration, color/name/lore on encounter, truthful X/Y. Preserve existing enemy discovery/five pages. No Garden badge or unimplemented collection award. Root save review + independent source/render/migration/resource evidence. |
+| 0, held optimization lane | **[WALL-04A-R1](WALL-04A-R1-convincing-depth.md)** — convincing depth and smooth travel | New-host alternating A/B and actual Sol review completed; R1 remains held at +37.4% raster-work proxy. Accepted wall restored in `e926737`; independent phone/Book qualification proceeds there. Preserve inherited72 functional cases, old-host timing and non-specific shadow isolation. Next wall work is the bounded pass-attribution experiment in the wall decision, not an automatic promotion or backend rewrite. |
+| 0a, evidence supplied | **Plan09-P0: read-only design/roster/recipe preflight** | Completed source audit supplies obtainable32/12, actual admissions, teaching reconciliation and complete Surprise-recipe gaps. Use its snapshot for Book and later P1; it is source/test evidence, not a fresh generator/solver run or completed recipe UI. No production map/fingerprint/save mutation. |
+| 1, current qualification | **PHONE-02 / audio65–85 / [BOOK-02A](BOOK-02A-silhouettes-and-discovery.md)** | Runtime `aad4bc5`, intended undeployed0.22.12: coordinated phone stage, explicit new default mix, grey actual silhouettes, legitimate friend encounter persistence and truthful32/12 counters. Schema7 preserves the same v6 key/future-write protection; existing v2 audio choices remain.649 project +17 focused +2 boundary cases pass; actual Sol source/29-image review has no blocker. Finish broad/performance and exact-source release gates before2. No Garden/new awards or R1 inclusion. |
 | 2 | **[DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md)** — presence, celebration and reward truth | Three bounded checkpoints: continuous pickup glow/readable receipts; larger friend-led victory; earned-sticker in-maze fanfare. Preserve delivered Canvas showers and arithmetic. PT10 Stay/Book/Next truth, exact-once awards, finite effects, mute, reduced/static and moving-scene cost gate every checkpoint. Then stop broad Plan02 expansion. |
 | 3 | **[LEARN-01](LEARN-01-readable-reasoning-and-help.md)** — understandable next possibilities | Add exact Power shortfall and clearer picture-led requested hints, retaining existing gain equations and four engine-valid zero-rescue hint tiers. No new rule/search/store. Prove spoiler, focus, cancellation, text and reward truth; record family comprehension separately. |
 | 4 | **Plan09-P1: isolated existing-rule learning canary** | After stable wall/UI/LEARN seams, compare one first-use pocket and one Lanternlight-style room/changed-state return. Isolated fixtures only: no production chapter/fingerprint/save/generator mutation. Engine-valid ordinary/perfect routes plus plausible wrong turn, requested-help recovery and observed reasoning. Current rules first; a new-mechanic recommendation needs a separate Human decision. No invented educational efficacy. |

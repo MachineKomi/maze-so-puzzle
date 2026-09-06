@@ -38,7 +38,7 @@ test("UI Sound port conformance and legal too-strong teaching",async({page})=>{
   for(let maze=1;maze<=CURATED_LEVELS.length&&!witness;maze++) {
     const level=CURATED_LEVELS[maze-1]!,initial=createInitialGameState(level);
     const potionIds=new Set(level.objects.filter(o=>o.kind==="potion").map(o=>o.id));
-    const signature=(state:typeof initial)=>progressionStateSignature(state,false,potionIds);
+    const signature=(state:typeof initial)=>progressionStateSignature(state,potionIds);
     const queue=[{state:initial,path:[] as Direction[]}],seen=new Set([signature(initial)]);
     for(let head=0;head<queue.length&&head<4096&&!witness;head++)for(const direction of ["up","left","right","down"] as const) {
       const {state,path}=queue[head]!,probe=movePlayer(level,state,direction);
@@ -150,9 +150,9 @@ for (const [width,height] of sizes) test(`UI geometry ${width}x${height}: author
       const board=g.elements[".maze-board"]!,deck=g.elements[".adventure-hud"]!,map=g.elements[".maze-minimap"]!,mapCard=g.elements[".maze-map-card"]!,mapHeading=g.elements[".maze-map-heading"]!;
       expect(Math.abs(board.width-board.height)).toBeLessThan(.1);
       expect(board.right).toBeLessThanOrEqual(deck.x);
-      expect(g.stageTransform).toBe("none");expect(g.rootOverflow).toBe(false);
+      if (height >= 450) expect(g.stageTransform).toBe("none"); else expect(g.stageTransform).not.toBe("none"); expect(g.rootOverflow).toBe(false);
       // Short landscape uses its authored compact deck, including 960×540.
-      expect(map.width).toBeGreaterThanOrEqual(width<650?96:height<600?128:width>=1280?192:160);
+      expect(map.width).toBeGreaterThanOrEqual(height<450?144*height/720-.1:width<650?96:height<600?128:width>=1280?192:160);
       // UI03 deliberately enlarges the heading art to 30px. Measure empty
       // space around its real box, rather than treating that artwork as waste.
       expect(mapHeading.y-mapCard.y).toBeGreaterThanOrEqual(0);
@@ -162,7 +162,7 @@ for (const [width,height] of sizes) test(`UI geometry ${width}x${height}: author
       expect(mapCard.bottom-map.bottom).toBeLessThan(55);
       expect(g.bag).toHaveLength(expected.bagTotal);expect(g.friends).toHaveLength(expected.rescueTotal);
       for(const item of [...g.bag,...g.friends]) {expect(item.x).toBeGreaterThanOrEqual(deck.x);expect(item.right).toBeLessThanOrEqual(deck.right);expect(item.y).toBeGreaterThanOrEqual(deck.y);expect(item.bottom).toBeLessThanOrEqual(deck.bottom);expect(item.bottom).toBeLessThanOrEqual(height);}
-      for(const target of g.targets) {const minimum=target.id==="hint"||target.id?.startsWith("move:")?48:44;expect(target.width,`${target.id} width`).toBeGreaterThanOrEqual(minimum);expect(target.height,`${target.id} height`).toBeGreaterThanOrEqual(minimum);}
+      for(const target of g.targets) {const minimum=(target.id==="hint"||target.id?.startsWith("move:")?48:44)*(height<450?height/720:1)-.1;expect(target.width,`${target.id} width`).toBeGreaterThanOrEqual(minimum);expect(target.height,`${target.id} height`).toBeGreaterThanOrEqual(minimum);}
       expect(deck.scrollWidth).toBeLessThanOrEqual(deck.clientWidth);
       expect(deck.scrollHeight,`deck scroll ${maze}/${mode}`).toBeLessThanOrEqual(deck.clientHeight+1);
       expect(parseFloat(g.objectiveFont)).toBeGreaterThanOrEqual(16);
@@ -191,9 +191,11 @@ test("UI overlays: focus, inertness, held input, safe return and Sound preferenc
   await page.locator('[data-focus-id="sound:mute"]').click();await page.locator('[data-focus-id="sound:next"]').click();await page.locator('[data-focus-id="sound:previous"]').click();await page.locator('[data-focus-id="sound:shuffle"]').click();
   await expect(page.getByRole("button",{name:/loop/i})).toHaveCount(0);await screen(page,"sound-comfort-960");
   await page.keyboard.press("Escape");await expect(page.locator('[data-focus-id="more"]')).toBeFocused();
+  const retainedPreference=await page.evaluate(()=>JSON.parse(localStorage.getItem("maze-so-puzzle-presentation-v1")!));
   await action(page,"home");await page.getByRole("button",{name:"Reset progress",exact:true}).click();
   await screen(page,"reset-safe-default");await expect(page.getByRole("button",{name:"Keep my adventure"})).toBeFocused();await page.getByRole("button",{name:"Yes, reset everything"}).click();
-  const preference=await page.evaluate(()=>JSON.parse(localStorage.getItem("maze-so-puzzle-presentation-v1")!));expect(preference).toEqual({motion:"reduced",quality:"lite",pace:"zippy"});
+  const preference=await page.evaluate(()=>JSON.parse(localStorage.getItem("maze-so-puzzle-presentation-v1")!));
+  expect(preference).toEqual(retainedPreference);expect(preference).toMatchObject({motion:"reduced",quality:"lite",pace:"zippy"});
 });
 
 test("UI front door, approved Home hero, Book, all modal sizes and text spacing",async({page})=>{
@@ -251,12 +253,10 @@ test("UI legal perfect route preserves pending completion and focus defaults",as
   await page.setViewportSize({width:960,height:540});await page.emulateMedia({reducedMotion:"reduce"});await pick(page,1);
   const level=CURATED_LEVELS[0]!;const solution=solveLevel(level,{requireAllAnimals:true});expect(solution.solvable).toBe(true);
   await page.locator(".maze-board").focus();
-  let expected=createInitialGameState(level);
-  for(const direction of solution.directions){
+  for(const step of deriveRoute(level,solution.directions)){
     await expect(page.locator(busy)).toHaveCount(0);
-    await page.waitForTimeout(110);
-    expected=movePlayer(level,expected,direction).state;
-    await page.keyboard.press(key[direction]);
+    await replayRouteStep(page,step);
+    const expected=step.result.state;
     await expect(page.locator(".step-pill")).toHaveAttribute("aria-label",`${expected.steps} ${expected.steps===1?"step":"steps"}`);
   }
   await expect(page.getByRole("heading",{name:"Maze solved!"})).toBeVisible();await screen(page,"perfect-completion");

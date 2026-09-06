@@ -4,31 +4,39 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-## Current dispatch contract — planning checkpoint, 2026-09-06
+## Current dispatch contract — candidate qualification, 2026-09-06
 
-Implementation waits for the Human's next execution prompt. This section and
+Implementation is Human-authorized. PHONE-02 / audio65–85 / BOOK-02A is now
+implemented on `codex/phone02-book`, runtime
+`aad4bc511ea99066779c0a79527c2cf63a78fcf6`, intended **v0.22.12, undeployed**.
+The [candidate record](../reviews/2026-09-06-phone02-book-candidate.md) owns exact
+closeout:649 project tests,17 focused plus2 boundary cases passed; actual Sol's
+independent source/29-image visual review found no blocker. Broader browser and
+performance checks remain pending. This section and
 [roadmap section4](00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates)
-replace conflicting older assignments. Read the [programme review](../reviews/2026-09-06-vision-and-programme-refinement.md)
-for source synthesis and actual Sol's independent dependency challenge.
-Migration recovery is complete enough to plan; QA/art/native transfer remains
-partial. Claude inputs are restored. Web0.22.10, Windows0.22.9 and candidate
-0.22.11 remain distinct. The latter is unpromoted; no prompt below authorizes a
-release, deletion, archiving or a claim of physical-device acceptance.
+replace conflicting older assignments. Web0.22.10, published Windows0.22.9,
+held R1/0.22.11 and this candidate remain distinct. Native0.22.10's staged binary
+is recovered, not accepted or published. Transfer completeness/art reconciliation
+remain open. Do not infer physical-device approval or cleanup authority.
 
-On the next implementation instruction, the root orchestrator must:
+The root orchestrator now continues:
 
 1. Verify actual root/branch/HEAD/dirty ownership, current joint state and changed
    Human input. Keep one runtime writer, assign actual Sol independent review and
    serialize builds/performance jobs. Preserve foreign work and origin-local saves.
-2. Resume **WALL-04A-R1 qualification**, using its complete brief, migration
-   handoff, paused evidence and new-host receipt. Freeze paired inputs, run only
-   the defined shortest fair comparison and actual-size review, and name any
-   failed gate. Do not reimplement the completed R1 source or dismiss old timing.
-   A held R1 does not authorize deploying it alongside an otherwise good Book.
-3. In parallel, assign a read-only **Plan09-P0** roster/reachability/teaching and
-   complete Surprise-recipe audit. Its obtainable-ID output is a Book prerequisite;
-   it changes no production map, content fingerprint, seed behavior or save.
-4. Advance through [BOOK-02A](BOOK-02A-silhouettes-and-discovery.md), then
+2. Finish **PHONE-02 / audio / BOOK-02A qualification**: the corrected broad
+   browser run, paired performance/resource evidence and exact-source release
+   checks. Preserve preliminary failures and distinguish focused/boundary cohorts
+   from broad-suite acceptance. Do not rerun completed implementation or include
+   held R1. The [wall decision](../reviews/2026-09-06-new-host-wall-decision.md)
+   records +37.4% raster-work proxy and restoration of accepted wall in `e926737`;
+   preserve old-host timing and the non-specific shadow isolation. A later bounded
+   attribution experiment owns R1's next step.
+3. Consume the completed [Plan09-P0 audit](../reviews/2026-09-06-plan09-p0-obtainable-roster.md):
+   frozen32/12, actual obtainability, teaching reconciliation and recipe gaps.
+   Do not repeat the audit or treat it as delivered recipe UI/new content. Keep
+   schema7/same-v6-key future-write protection and existing v2 gain choices intact.
+4. **After this candidate's qualified release**, advance to bounded
    [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md), then
    [LEARN-01](LEARN-01-readable-reasoning-and-help.md), each as a bounded reviewed
    checkpoint. Read the complete owning plans/specs and source, freeze the exact

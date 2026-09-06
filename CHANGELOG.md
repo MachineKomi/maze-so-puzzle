@@ -4,7 +4,22 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.11 — WALL-04A-R1 (web preview)
+## 0.22.12 — shared phone composition and Book discovery (candidate)
+
+- Short landscape phones keep the coordinated desktop layout, with a relatively
+  larger direction pad, smaller map/Bag and matching dialogs. Home and Title
+  recommend a larger screen; small physical phone controls remain a tradeoff.
+- Fresh audio defaults are65% music /85% SFX. Recommended balance applies these
+  deliberately without starting or unmuting music; existing gains are preserved.
+- Friends and Bestiary show approved grey silhouettes until met, then full
+  colour/name/details. Counters distinguish32friend species and12guardians from
+  repeat rescues. Normal visible caged encounters persist before rescue.
+- Progress schema7 preserves existing species-proven history and does not infer
+  species from aggregate old rescue counts. No new currency, awards or Garden.
+- Retains the accepted0.22.10 wall treatment; R1 is held. No new media or packages.
+  Web qualification is pending; Windows and physical-device acceptance are separate.
+
+## 0.22.11 — WALL-04A-R1 (held WIP, never deployed)
 
 - More substantial raised wall faces, compressed side-face material detail,
   stronger colored grounding and directional floor shadows.
@@ -14,7 +29,7 @@ than promising long-term save or API compatibility.
   the0.22.10 reward showers. Physical iPad and Human depth acceptance remain open;
   native release qualification is separate.
 
-## 0.22.10 — VFX-02A (release candidate)
+## 0.22.10 — VFX-02A (live web; native qualification unfinished)
 
 - Gold stars, Science atoms and rose Power beads scatter, bounce against walls
   and gather into the currently rendered Ame, with short trails and grouped

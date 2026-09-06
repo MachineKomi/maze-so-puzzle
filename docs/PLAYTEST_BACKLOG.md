@@ -1,14 +1,30 @@
 # Maze so Puzzle — playtest backlog
 
-## Current planning reconciliation — 2026-09-06
+## Current candidate and remaining routing — 2026-09-06
 
-This is a docs-only refinement, not delivery or acceptance. The [roadmap](plans/00-integrated-implementation-roadmap.md)
-and [source synthesis](reviews/2026-09-06-vision-and-programme-refinement.md) route
-PT50/37 to [BOOK-02A](plans/BOOK-02A-silhouettes-and-discovery.md); PT35/51 plus
-PT10 reward wording to [DELIGHT-02B](plans/DELIGHT-02B-glow-and-celebration.md);
-PT09/19 and picture-led requested help to [LEARN-01](plans/LEARN-01-readable-reasoning-and-help.md).
-Plan09-P0 provides current obtainable roster/recipe/design evidence early;09-P1
-is an isolated existing-rule canary after LEARN. Full24 production remains after
+**PHONE-02 / audio65–85 / BOOK-02A is implemented and in qualification**, runtime
+`aad4bc511ea99066779c0a79527c2cf63a78fcf6` on `codex/phone02-book`, intended
+**v0.22.12, not deployed**. The [candidate record](reviews/2026-09-06-phone02-book-candidate.md)
+owns closure: 649 project tests, 17 focused plus 2 boundary browser cases passed;
+actual Sol's independent source/29-image review found no blocker. Broad browser
+and performance qualification remain pending; PT50/37 and phone/mix feedback are
+not closed by implementation or screenshots alone.
+
+The candidate gives phones the requested coordinated desktop-style composition,
+uses new Music65/SFX85 defaults with explicit Recommended balance while preserving
+saved v2 choices, and implements actual silhouettes/legitimate encounters with
+frozen32-friend/12-guardian counters. No Garden membership or new awards are added.
+R1 remains held after +37.4% raster-work proxy in the [new-host comparison](reviews/2026-09-06-new-host-wall-decision.md);
+the accepted v0.22.10 wall is restored. Live web remains0.22.10, published Windows
+0.22.9. Native0.22.10's staged binary is recovered but qualification is unfinished.
+
+After qualified release, the [roadmap](plans/00-integrated-implementation-roadmap.md)
+routes the next bounded work to **DELIGHT-02B, then LEARN-01**. PT35/51 and
+PT10 reward wording belong to [DELIGHT-02B](plans/DELIGHT-02B-glow-and-celebration.md);
+PT09/19 and picture-led requested help belong to [LEARN-01](plans/LEARN-01-readable-reasoning-and-help.md).
+[Plan09-P0](reviews/2026-09-06-plan09-p0-obtainable-roster.md) now supplies current
+obtainable roster/recipe/design evidence;09-P1 remains an isolated existing-rule
+canary after LEARN. Full24 production remains after
 08/05/07B. Lanternlight's latest room/return guidance supersedes older large-map
 quotas. No card is closed merely by routing it into a new brief.
 

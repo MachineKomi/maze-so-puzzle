@@ -7,17 +7,28 @@
 Owner: runtime writer Astra; source baseline `e926737` on `codex/phone02-book`.
 These are qualification outputs for the **undeployed intended v0.22.12** candidate,
 not a release receipt. The [candidate record](reviews/2026-09-06-phone02-book-candidate.md)
-owns results and limits. File counts below measure only completed first-pass and
-prototype folders, around 19:27 UTC; subsequent runs are listed without a size
-claim. Preserve failed evidence alongside corrected reruns.
+owns results and limits. Completed folders were remeasured after the first paired
+comparison; the active r4 folder is deliberately not given a final size.
+Preserve failed evidence alongside corrected reruns. No deletion is authorized.
 
 | Path | Measured files / bytes | Purpose and retention |
 | --- | ---: | --- |
 | `C:/GameDev/maze-game-qa/performance/phone02-book-20260906/` | 49 / 13,126,403 | Completed first phone/Book pass: 13 passed, 4 failed. Retain reports, geometry, captures and failure traces through qualification. |
 | `output/playwright/phone02-book/` | 2 / 1,437,522 | `prototype-book.png` (465,274 bytes), `prototype-game.png` (972,248 bytes). Layout exploration, not acceptance proof. |
-| `C:/GameDev/maze-game-qa/performance/phone02-book-20260906-r2/` | Not yet inventoried | Completed focused rerun: 17/17 passed in 39.799 seconds. Retain; later reader/slot edits still require final-source checks. |
-| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906/` | Not yet inventoried | Broader first run: 3 passed, 8 failed, 69 not run. Runtime owner attributes failures to inherited movement-probe parsing; retain the original report. |
-| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906-r2/` | Pending; ongoing run | Corrected broader probe run. Do not infer completion or measure a moving output tree. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-20260906-r2/` | 45 / 11,730,390 | Focused17/17; actual Sol independently inspected29PNGs. Before final reader/slot changes. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906/` | 25 / 15,481,238 | 3pass/8fail/69not run. Independently confirmed stale percent-as-pixel movement probe. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906-r2/` | 85 / 34,883,636 | 30pass/6fail/44not run; inherited admission cadence/follower/anchor probes and a test variable typo. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906-r3/` | 278 / 123,151,069 | Remaining51:36pass/8fail/7not run. Real dense/enlarged fitter issues plus stale solver/audio/preference probes. Retain failures and independent review. |
+| `C:/GameDev/maze-game-qa/performance/phone02-celebration-resize-20260906/` | 16 / 2,462,824 | Longest normal five-friend victory passes all6viewports after awaiting responsive settlement. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-boundaries-20260906/` | 3 / 91,796 | 2/2 cold-vs-resize threshold and missing-silhouette fallback cases. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-paired-20260906/` | 19 / 61,106,026 |14paired routes,4screenshots,report and14gzip traces; pre-final horizontal-fit correction at aad4bc5. Diagnostic identity in candidate record; do not promote as final-source qualification. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906-r4/` | Active; final inventory pending |82functional browser cases, new boundary tests included; old output-only sheet and long baseline collector are excluded from this regression count. |
+
+The exploratory dev server on127.0.0.1:5173 was stopped after use. Test-owned
+4173/1421 servers live only for their serialized runner. No persistent user
+browser profile or copied dependency installation was created. The paired
+harness writes compressed traces directly, reducing repeated trace disk cost;
+the earlier uncompressed wall evidence remains held for the wall decision.
 
 `dist/` has been rebuilt **in place** during candidate iteration; A02 below is
 the dated initial inventory, not its current content/size. No repository,

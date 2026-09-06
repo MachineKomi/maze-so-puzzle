@@ -37,15 +37,18 @@ test("UI review actual media URL across live contexts and Sound snapshot",async(
   });
   await page.setViewportSize({width:960,height:540});await page.goto("/");await page.getByRole("button",{name:"Play",exact:true}).click();
   const records:unknown[]=[];
+  const playing = () => page.evaluate(() => ((window as any).__uiActualAudio as HTMLAudioElement[]).filter(a => a.src && !a.paused).map(a => ({url:decodeURI(new URL(a.src).pathname),muted:a.muted})));
   async function actual(context:string,step:string) {
-    const media=await page.evaluate(()=>{const audio=(window as any).__uiActualAudio.at(-1) as HTMLAudioElement;return {url:decodeURI(new URL(audio.src).pathname),muted:audio.muted};});
+    // Two reusable lanes overlap for400ms; construction order is not authority.
+    await expect.poll(async () => (await playing()).map(a => MUSIC_CATALOGUE.find(t => t.url === a.url)?.context)).toEqual([context]);
+    const media=(await playing())[0]!;
     const track=MUSIC_CATALOGUE.find(t=>t.url===media.url);expect(track?.context).toBe(context);records.push({step,...media,id:track!.id});return track!;
   }
   async function sound(context:string,step:string) {
     const trigger=page.getByRole("button",{name:"Open Sound and comfort",exact:true});
     if(await trigger.count())await trigger.click();else await openUiAction(page,"sound");
-    const track=await actual(context,step);await expect(page.locator(".sound-track")).toHaveText(track.id.replaceAll("-"," "));
-    for(const muted of [true,false]) {await page.locator('[data-focus-id="sound:mute"]').click();expect((await page.evaluate(()=>(window as any).__uiActualAudio.at(-1).muted))).toBe(muted);await expect(page.locator(".sound-track")).toHaveText(track.id.replaceAll("-"," "));}
+    const track=await actual(context,step);await expect(page.locator(".sound-track")).toHaveText(`Selected: ${track.id.replaceAll("-"," ")}`);
+    for(const muted of [true,false]) {await page.locator('[data-focus-id="sound:mute"]').click();expect(await playing()).toEqual([{url:track.url,muted}]);await expect(page.locator(".sound-track")).toHaveText(`Selected: ${track.id.replaceAll("-"," ")}`);}
     await page.keyboard.press("Escape");return track;
   }
   await sound("title","fresh Home");await page.getByRole("button",{name:/Begin adventure/}).click();await actual("story","first story");await page.getByRole("button",{name:"Start the maze",exact:true}).click();
@@ -65,7 +68,7 @@ test("UI review power latency and engine cost", async ({ page }) => {
   for (const maze of [7,12,15,16]) {
     const level=CURATED_LEVELS[maze-1]!,initial=createInitialGameState(level);
     const potions=new Set(level.objects.filter(o=>o.kind==="potion").map(o=>o.id));
-    const signature=(s:typeof initial)=>progressionStateSignature(s,false,potions);
+    const signature=(s:typeof initial)=>progressionStateSignature(s,potions);
     const queue=[{state:initial,path:[] as Direction[]}],seen=new Set([signature(initial)]);
     let witness: {state:typeof initial;path:Direction[];direction:Direction;blocker:string}|undefined;
     for(let head=0;head<queue.length&&head<4096&&!witness;head++)for(const direction of DIRECTIONS) {
@@ -126,7 +129,7 @@ test("UI review compact 200 percent named reader keeps objective and movement ac
       if(atEnd){await page.keyboard.press("End");await expect.poll(()=>reader.evaluate(e=>e.scrollTop)).toBeGreaterThan(0);}
       for(const id of ["hint","move:up","move:left","move:right","move:down"]) {
         const control=page.locator(`[data-focus-id="${id}"]`),r=(await control.boundingBox())!;
-        expect(r.width).toBeGreaterThanOrEqual(48);expect(r.height).toBeGreaterThanOrEqual(48);expect(r.y).toBeGreaterThanOrEqual(12);expect(r.y+r.height).toBeLessThanOrEqual(height-12);
+        const minimum=48*(height<450?(height-24)/720:1)-.1; expect(r.width).toBeGreaterThanOrEqual(minimum);expect(r.height).toBeGreaterThanOrEqual(minimum);expect(r.y).toBeGreaterThanOrEqual(12);expect(r.y+r.height).toBeLessThanOrEqual(height-12);
         expect(await control.evaluate(e=>{const r=e.getBoundingClientRect();return e.contains(document.elementFromPoint(r.x+r.width/2,r.y+r.height/2));})).toBe(true);
       }
     }
@@ -152,7 +155,7 @@ test("UI review compact simultaneous geometry", async ({ page }) => {
     for (const maze of [1,8,12,15,16]) {
       await pick(page, maze);
       if (inset) await page.addStyleTag({content:`:root {--safe-top:12px;--safe-bottom:12px;--safe-left:12px;--safe-right:12px;}`});
-      await expect(page.locator(".play-shell")).toHaveAttribute("data-layout","compact-landscape");
+      await expect(page.locator(".play-shell")).toHaveAttribute("data-layout",height<450?"primary-landscape":"compact-landscape");
       {
         const mode="maximized";
         await expect(page.locator(".play-shell")).toHaveAttribute("data-mode",mode);
@@ -174,10 +177,10 @@ test("UI review compact simultaneous geometry", async ({ page }) => {
           expect(r.top).toBeGreaterThanOrEqual(inset);expect(r.bottom).toBeLessThanOrEqual(height-inset);
         }
         expect(geometry.scroll[0]).toBeLessThanOrEqual(geometry.scroll[1]!+1);
-        expect(geometry.statuses.every(s=>s.tag==="SPAN")).toBe(true);
+        expect(geometry.statuses.every(s=>s.tag===(height<450?"BUTTON":"SPAN"))).toBe(true);
         expect(geometry.statuses.every(s=>s.uncovered)).toBe(true);
         for (const target of geometry.targets) {
-          const minimum=target.id==="more"?44:48;
+          const minimum=(height<450?32*(height-2*inset)/720:target.id==="more"?44:48)-.1;
           expect(target.box.width).toBeGreaterThanOrEqual(minimum);expect(target.box.height).toBeGreaterThanOrEqual(minimum);
         }
         if (maze===12) await page.screenshot({path:resolve(output,`compact-${width}-${inset}-${mode}.png`)});
@@ -241,7 +244,7 @@ test("UI review long dialog native keyboard reading and exact return", async ({ 
     await page.keyboard.press("Shift+Tab");expect(await page.evaluate(()=>!!document.activeElement?.closest('[role="dialog"]'))).toBe(true);
     await page.keyboard.press("Escape");
     if(fixture==="story") await expect(page.getByRole("button",{name:"story proof",exact:true})).toBeFocused();
-    else await expect(page.locator('[data-focus-id="more"]')).toBeFocused();
+    else await expect(page.locator(`[data-focus-id="${height<450?"help":"more"}"]`)).toBeFocused();
   }
 });
 
@@ -363,10 +366,10 @@ test("UI review earned reward failures keep a stable fallback across size and DP
           return frames;
         });
         expect(samples).toEqual(Array.from({ length: 32 }, () => ({ width: 64, role: "optical", src: optical, natural: 256 })));
-        // Real compact layout now needs only the available 256px rendition.
+        // The fitted200logical frame needs only the available256px rendition.
         await page.setViewportSize({ width: 568, height: 320 });
         await expect(image).toHaveAttribute("data-art-role", "presentation");
-        await expect.poll(() => image.evaluate(element => element.getBoundingClientRect().width)).toBe(128);
+        await expect.poll(() => image.evaluate(element => element.getBoundingClientRect().width)).toBeCloseTo(200*320/720,3);
         await page.setViewportSize({ width: 960, height: 540 });
         await expect(image).toHaveAttribute("data-art-role", "optical");
         await expect.poll(() => image.evaluate(element => element.getBoundingClientRect().width)).toBe(64);

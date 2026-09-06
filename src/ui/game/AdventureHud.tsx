@@ -60,10 +60,13 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
       const minimumMap = hud.closest("[data-phone-fit]") ? 144 : hud.parentElement!.clientWidth >= 1280 ? 192 : 164;
       let mapSize = Math.max(minimumMap, Math.min(idealMap, Math.floor(height - mapChrome)));
       const headers = [...equipment.querySelectorAll<HTMLElement>("h3")].reduce((sum, heading) => sum + heading.offsetHeight + parseFloat(getComputedStyle(heading).marginBottom), 0);
+      const minimumSlot = phone ? 32 : 48;
       const fit = (mapWidth: number) => {
       const equipmentWidth = width - mapWidth - 14;
       let best = { columns: 1, size: 0 };
-      for (let columns = 1; columns <= Math.max(model.friends.length, model.slots.length, 1); columns++) {
+      // A layout must still fit after the minimum control size is applied.
+      const maxColumns = Math.max(1, Math.floor((equipmentWidth + 6) / (minimumSlot + 6)));
+      for (let columns = 1; columns <= Math.min(maxColumns, Math.max(model.friends.length, model.slots.length, 1)); columns++) {
         const friendRows = Math.ceil(model.friends.length / columns), bagRows = Math.ceil(model.slots.length / columns);
         const rows = friendRows + bagRows;
         const emptyBag = model.slots.length ? 0 : equipment.querySelector<HTMLElement>(".bag-card p")?.offsetHeight ?? 0;
@@ -77,7 +80,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
       // largest map that allows 64px portraits, retaining 48px real controls.
       while (best.size < 64 && mapSize > minimumMap) { mapSize--; best = fit(mapSize); }
       hud.style.setProperty("--map-size", `${mapSize}px`);
-      overview.style.setProperty("--fitted-slot-size", `${Math.max(hud.closest("[data-phone-fit]") ? 32 : 48, Math.floor(best.size))}px`);
+      overview.style.setProperty("--fitted-slot-size", `${Math.max(minimumSlot, Math.floor(best.size))}px`);
       overview.style.setProperty("--fitted-columns", `${best.columns}`);
     };
     hud.style.removeProperty("--map-size"); overview.style.removeProperty("--fitted-slot-size"); overview.style.removeProperty("--fitted-columns");
@@ -85,7 +88,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
     for (const element of [overview, ...hud.querySelectorAll<HTMLElement>(".hud-header,.objective-card,.deck-controls,.rescue-card h3,.bag-card h3")]) observer.observe(element);
     update();
     return () => observer.disconnect();
-  }, [compact, model.friends.length, model.slots.length]);
+  }, [compact, phone, model.friends.length, model.slots.length]);
   const hint = <button className="objective-hint-button" data-focus-id="hint" onClick={e => onHint(e.currentTarget)} aria-label="Show objective and a gentle hint for this maze"><CatalogueImage art={NAVIGATION_ART["nav-help"]} alt="" /><span>{reader ? "Objective & Hint" : "Hint"}</span></button>;
   return <aside ref={hudRef} className="adventure-hud" aria-label="Ame and adventure bag" data-focus-group="adventure-deck" data-reader={reader || undefined} data-scroll-region={reader ? undefined : "adventure-deck"}>
     {reader && <div className="objective-dock">{hint}</div>}

@@ -2,12 +2,20 @@
 
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
-**Current Human instruction,2026-09-06: planning first.** Claude's four inputs
+**Current Human instruction,2026-09-06: execute and deliver.** The Human has
+authorized logical roadmap/backlog execution, meaningful backup commits and
+qualified deployments. [Phone/audio intake](user-playtests/2026-09-06-phone-composition-and-default-mix.md)
+prioritizes a proportional desktop composition on phones and a better default
+mix. Smaller physical phone controls are an explicit Human tradeoff, not a
+48px accessibility claim. Astra writes runtime; actual Sol independently reviews.
+The new-host wall comparison holds R1; phone/audio and BOOK-02A proceed on the
+accepted wall predecessor. No additional execution permission is required.
+
+**Earlier planning instruction, now completed.** Claude's four inputs
 are now restored. Review feedback/vision and refine the existing roadmap; the
-Human will provide the next implementation prompt. [Programme review](reviews/2026-09-06-vision-and-programme-refinement.md)
+Human subsequently provided the implementation prompt above. [Programme review](reviews/2026-09-06-vision-and-programme-refinement.md)
 and [roadmap](plans/00-integrated-implementation-roadmap.md) capture the recommended
-order and actual Sol's independent challenge. This instruction takes precedence
-over older safe-development/active-assignment prose below for this planning turn.
+order and actual Sol's independent challenge. This paragraph records that earlier planning turn.
 No new product choice is needed to finish the plan. No feature implementation,
 wall promotion, native acceptance or iPad success follows from it.
 
@@ -15,7 +23,8 @@ wall promotion, native acceptance or iPad success follows from it.
 [docs-only deployment guard instructions](VERCEL_DEPLOYMENT.md), and log generated
 build/proof/dependency/worktree paths in the [artifact ledger](LOCAL_ARTIFACT_LEDGER.md)
 for periodic Human review. No deletion or archiving without explicit approval.
-QA/art/native transfer remains partial; missing files are in transit, not lost.
+QA, Claude and two Tessera holds have arrived; [reconciliation](reviews/2026-09-06-restored-folder-reconciliation.md)
+records recovered native/proof identities and remaining missing packets.
 
 **Laptop migration pause:** Human requested development stop and a remote WIP
 handoff. No product choice is blocking; the transfer checklist is in
@@ -26,7 +35,7 @@ on the new laptop before publishing0.22.11. Earlier open physical checks remain.
 continue while playtesting is deferred. Routine engineering choices belong to
 the agents; only material product/art choices need to come back here.
 
-WALL-04A-R1 / v0.22.11 is the next stronger-wall web preview. P13 asks whether
+WALL-04A-R1 / v0.22.11 is now held WIP, not the next release. P13 asks whether
 its substantial faces/shadows and corrected rounded rims now meet the intended
 look. No immediate answer blocks BOOK-02A silhouettes/discovery work. If still
 underwhelming, the R1 brief requires a same-scene real orthographic-3D comparison,

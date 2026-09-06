@@ -7,6 +7,54 @@ restoration commit `e926737a5c0e927ebec4c8b8b80c80dfe8923e16` on
 `codex/phone02-book`, with the current runtime changes still being qualified.
 This document is a progress receipt, not a release acceptance or deployment record.
 
+## Latest qualification progress
+
+- Runtime/checkpoint6fee35a is backed up on GitHub; aad4bc5 labels0.22.12 and
+  assigns bounded1500JS/400CSS gzip9 bytes. The held R1 allowance is returned,
+  rather than being silently spent on unrelated UI.
+- Project649/649 passed before the final horizontal-fit correction. Guard12/12
+  including real-history cases and production audit0vulnerabilities pass.
+- Actual Sol independently inspected29r2captures and the physical-pointer,
+  image-rendition, focus, audio and discovery source. No static visual blocker;
+  smallest phone controls remain the explicitly authorized physical-size tradeoff.
+- Broader iterations are retained in the [ledger](../LOCAL_ARTIFACT_LEDGER.md).
+  Sol verified accepted camera percentages had been parsed as pixels by the old
+  test. Other repaired probes used obsolete solver arguments,110ms instead of
+  accepted200ms admission, old stationary-follower expectations or paused audio
+  preloads. Behavior assertions remain; tests were not removed to obtain a pass.
+- Two genuine fitter boundaries were corrected: enlarged text must clear stale
+  columns before a zero-height early return; column choice must respect minimum
+  control width before clamping. The longest celebration already fit after the
+  ResizeObserver settled; its6viewport test now waits for that observable state.
+- Broad r4 completed79pass/3fail in7.9minutes. The remaining cases expected
+  obsolete bare Sound text, a removed phone More invoker, or an unscaled128px
+  presentation frame. Corrections retain exact semantics, actual sole-playing
+  audio after the400ms crossfade, correct focus return and physical fit dimensions.
+  The focused3/3 rerun passed in19.6s on the unchanged final runtime bundle
+  `index-BPKRGxyO.js`. Thus82distinct functional browser cases pass across r4
+  and the focused correction; this is not described as one82/82clean run.
+  Final-source project checks and paired performance are next.
+
+### First paired diagnostic, before final horizontal-fit correction
+
+`C:/GameDev/maze-game-qa/performance/phone02-book-paired-20260906/report.json`,
+SHA256`15ede81bac62e39f107a2a7210f7b8effa70c7b068819d80bdf2530ee03eb403`.
+Chromium151.0.7922.34, DSF2, same-host alternating frozen live0.22.10 and
+candidateaad4bc5. All14routes include16accepted moves and return to the same
+position, with0terrain mutations,0errors and0broken images. Four are warmups.
+
+| Viewport | Measured pairs | Mean baseline/candidate RasterTask ms | Change | Largest p95 |
+| --- | ---: | ---: | ---: | ---: |
+|780x312|3|1329.077 /1361.582|+2.45%|16.8ms|
+|1193x833|2|4115.4625 /4281.573|+4.04%|16.8ms|
+
+No sampled frame exceeded20ms. RasterTask durations overlap and are a workload
+proxy, not additive GPU time. This limited diagnostic is not a claim of physical
+iPad/native efficacy. CandidateJS SHA256
+`b00178bb90f457b852bab55911988d89c5d40ea66c90f3dfc4c3ff5a324dfbdf`;
+the report records every served asset hash. The later horizontal-fit source
+requires its own final build comparison before release acceptance.
+
 ## Authority and predecessor
 
 The [Human phone/default-mix instruction](../user-playtests/2026-09-06-phone-composition-and-default-mix.md)

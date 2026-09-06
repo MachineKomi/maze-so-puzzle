@@ -1,14 +1,14 @@
 # Family playtest checklist
 
-**Planning update,2026-09-06:** [refined programme](plans/00-integrated-implementation-roadmap.md)
-is ready for the next Human execution prompt. No new build or family assignment
-is created by this docs checkpoint. Keep P13/P14 and earlier pending observations.
+**Execution update,2026-09-06:** [refined programme](plans/00-integrated-implementation-roadmap.md)
+is authorized and running. Phone/audio/Book0.22.12 is in qualification, not yet
+deployed. Keep P13/P14 and earlier pending observations.
 Future previews should add one primary question and an affected regression journey:
 Book encounter-before-rescue and X/Y meaning; victory Stay/Book/Next reward truth;
 help/Power-gap understanding; then an existing-rule choice/return puzzle. Record
 build/device/settings and actual help used. Do not turn one family into invented
 percentages or request repeated unchanged iPad comparisons. The full new-host
-wall diagnostic remains agent work before a useful changed physical comparison.
+wall diagnostic is complete and holds R1; a future revised wall still needs a useful changed physical comparison.
 
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 The Human will test when available; safe development continues meanwhile.
@@ -26,11 +26,25 @@ testing the version actually shown online; its live version remains0.22.10.
 The new-laptop handoff owns resumption. No additional playtest is needed merely
 to transfer files; P13 will become useful once the wall candidate is published.
 
-- **Next web preview in qualification: v0.22.11 WALL-04A-R1 / P13.** Stronger
+- **Held wall candidate: v0.22.11 WALL-04A-R1 / P13.** Stronger
   wall faces, continuous corner rims and a larger floor cast. Check P13 first
   once the game displays 0.22.11. The inherited v0.22.10 reward effects remain
   P14 below. Windows still uses the separately published v0.22.9 fallback;
   browser qualification does not establish a new native package or iPad result.
+
+### P15 — coherent phone layout, audible rewards and an inviting Book
+
+Only when the browser actually displays0.22.12, use the normal landscape phone
+journey: Home → continue/start → collect something → Book → resume.
+Primary question: does the whole interface now look intentionally composed and
+feel usable, including the relatively larger pad and smaller map/Bag?
+Check the fresh65/85 music/SFX balance or deliberately press Recommended balance
+in Sound; existing personal levels are preserved. Record the device and setting.
+In Friends/Bestiary, an unseen species is a grey shape; seeing a caged friend
+counts as meeting it before rescue. Does X/32 or X/12 read clearly as species
+met, distinct from happy rescues? Note what feels delightful or confusing.
+No repeated unchanged iPad test, Windows0.22.12 claim or numeric family success
+rate is implied. R1 depth and richer celebrations remain separate work.
 
 ### P14 — reward showers and magnetic collection
 
