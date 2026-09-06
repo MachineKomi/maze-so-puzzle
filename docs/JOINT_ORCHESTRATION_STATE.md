@@ -69,6 +69,14 @@ PERF-02 moving-terrain diagnostics remain a
 separate read-only investigation until writer ownership is available. V22-UI-01
 and AUDIO-01A follow. Do not silently begin Plan04 or treat physical gates as passed.
 
+Prepared after publication: [PERF-02C](reviews/2026-09-06-perf02c-layer-preflight.md)
+single-layer mechanism experiment and [UI-01 preflight](reviews/2026-09-06-v22-ui01-preflight.md).
+Both are Astra-team technical preparation, not actual Sol acceptance or runtime
+changes. Root reconciled UI-01's obsolete all-performance-first wording: after
+PLAY-B review, independent Exit/short-height work can advance against frozen
+references, but never alongside a matched camera experiment. No Human decision
+blocks these engineering seams. Sol remains the only active runtime writer.
+
 ### Historical v0.22.2 — experiment delivered, iPad scrolling still unresolved
 
 - [Web](https://maze-so-puzzle.vercel.app/), visible 0.22.2 and exact raw

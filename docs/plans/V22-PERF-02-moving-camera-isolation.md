@@ -16,6 +16,19 @@ it need not delay this movement investigation or contaminate its A/B comparison.
 
 ## New evidence and purpose
 
+### PERF-02C preflight — 2026-09-06
+
+[Layer preflight](../reviews/2026-09-06-perf02c-layer-preflight.md) is reviewed by
+root Astra against current camera/world ownership. Approve its first bounded
+engineering experiment after PLAY-B writer handback: one exploration-world
+`transform: translateZ(0)` rule in Full/Lite, preserving travel-owned individual
+`translate` and excluding Static. This is not approval to publish the hint or
+claim an iPad fix. Begin with a restored baseline/hint/baseline mechanism check;
+only advance if worthwhile to the specified DPR/large-world/visual/lifetime gates.
+No broad renderer or art reduction. Root must review any unmeasured compositor
+memory risk before offering a clearly identified physical-device experiment.
+No layout changes or other heavy cohort may overlap its matched measurements.
+
 ### PERF-02B external desktop isolation — 2026-09-06
 
 [Reviewed results](../reviews/2026-09-06-perf02b-moving-terrain-review.md): 15/15

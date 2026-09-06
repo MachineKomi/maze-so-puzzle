@@ -16,6 +16,14 @@ V22-UI-01/AUDIO-01A remain next; PERF-02 bounded camera work continues separatel
 Safe progress need not wait for physical feedback; physical acceptance is never
 inferred from an engineering pass or from the Human sleeping.
 
+Near-term sequencing clarification: PLAY-B is active; after independent review,
+PERF-02C's [bounded layer experiment](../reviews/2026-09-06-perf02c-layer-preflight.md)
+and V22-UI-01's [native Exit/short-height seams](../reviews/2026-09-06-v22-ui01-preflight.md)
+have prepared technical briefs. Root assigns them serially against frozen sources.
+Physical camera feedback does not block independent UI fixes; UI geometry may
+not change during matched camera measurements. No new experiment is a promised
+performance fix, and no preflight is implementation acceptance.
+
 **Latest Human result, 2026-09-06:** v0.22.2 scrolling still stutters on iPad
 while clamped-camera character motion is smooth. Resume PERF-02 moving-terrain/
 filter isolation without asking to retest the same failure. Separate Tessera

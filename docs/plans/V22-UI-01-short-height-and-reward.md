@@ -1,6 +1,7 @@
 # V22-UI-01 — short-height fit, collections and reward warmth
 
-Status: queued joint contract; starts only after the complete performance correction is accepted
+Status: queued joint contract; starts after sole-writer handback and a frozen,
+reviewed engineering baseline. Physical iPad performance acceptance stays open.
 
 Owner: **GPT-5.6 Sol**
 Independent reviewer: **GPT-6 Astra**
@@ -12,9 +13,24 @@ screens feel like the same game at a smaller, coordinated scale—not an oversiz
 scrolling web page. Complete the Human's requested Bestiary, pad, Book, pickup
 and victory refinements without changing puzzle framing or input semantics.
 
-V22-PERF-01 and any required second renderer-isolation tranche must be reviewed
-and accepted before this work starts. Do not change layout while a matched
-performance baseline or corrective performance tranche is in flight.
+Engineering prerequisite reconciliation, Astra 2026-09-06: V22-PERF-01/R1 and
+PERF-02A are reviewed/published; the Human's iPad scrolling result still fails.
+Under the latest express continuation authority, that physical feedback gate
+does not block independent Exit/UI corrections indefinitely. PLAY-B remains the
+current sole-writer task. After it returns and root reviews its candidate,
+UI-NATIVE-EXIT-01 may proceed independently; short-height work may start only
+against an explicitly frozen source and reference views, with no matched camera
+measurement/correction simultaneously in flight. Preserve the six-tile camera,
+cadence, renderer and accepted performance constraints. Rebase/remeasure later
+camera experiments against the actual UI source; never reuse unmatched timing.
+
+[Technical preflight](../reviews/2026-09-06-v22-ui01-preflight.md) identifies
+the missing native close bridge/permission and conflicting compact deck/map/pad
+minima. It is an Astra-team preflight, not Sol acceptance or runtime completion.
+Do not start a replacement scaling engine: the current code already considers
+height. Prototype the existing coordinated fit seam first, then review it before
+propagating. Native API/permission choice needs source/security review and actual
+process-exit evidence, not only a mocked browser close or compile pass.
 
 ## 2. Locked preservation
 
