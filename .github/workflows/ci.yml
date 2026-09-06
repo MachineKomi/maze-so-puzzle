@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Test deployment safeguards
-        run: node --test scripts/deployment/ignore-build.test.mjs
+        run: node --test scripts/deployment/check-ignore-build.mjs
 
       - name: Test and build
         run: npm run check

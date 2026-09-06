@@ -4,7 +4,7 @@
 
 Follow [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md): keep frequent GitHub backups,
 but skip proven documentation-only web deployments and opt routine Codex previews
-in explicitly. `node --test scripts/deployment/ignore-build.test.mjs` is a CI gate.
+in explicitly. `node --test scripts/deployment/check-ignore-build.mjs` is a CI gate.
 Verify real runtime releases, not the presence of a deployment on every docs SHA.
 Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
 browser saves. No retention/deletion/archive without explicit Human approval.

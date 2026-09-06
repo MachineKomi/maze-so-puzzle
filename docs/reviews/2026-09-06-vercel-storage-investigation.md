@@ -40,8 +40,9 @@ See [deployment policy](../VERCEL_DEPLOYMENT.md). Keep backup/CI cadence. Skip o
 known non-web diffs from last successful deployment; fail toward building on
 uncertainty. Disable automatic routine Codex previews with an explicit preview
 branch opt-in. Keep normal game releases on main. No dependencies or runtime
-source/public/version changes. No remote settings or retention change. No file,
-branch, deployment, release, asset or history was deleted, archived or moved.
+source/public/version changes. No remote settings or retention change. No
+pre-existing file, branch, deployment, release, asset or history was deleted,
+archived or moved; only the newly added test harness was renamed during correction.
 
 Existing retained storage is **not** reclaimed by this guard. A separate exact
 deletion/retention proposal needs Human approval. Do not move the OST to a new
@@ -74,9 +75,18 @@ and preserve repository assets under the Human's deletion/archive rule.
 - Guard/config checkpoint **a79cc423d89a24e8d77feb1439583663163a2b6b** was
   committed and pushed. Production6294301708 succeeded, as expected for a
   deployment-configuration change; all six canonical-domain HTML/JS/CSS requests
-  still match the frozen game bytes. CI34040408843 was in progress at this record.
-  This documentation-only evidence checkpoint is the first live skip check.
-  A local skip result alone is not proof of Vercel cancellation or reclaimed storage.
+  still match the frozen game bytes.
+- Live documentation checkpoint **3a5bfb6827d013b30692ea160a71aec4a67c97e0**
+  received Vercel success with the explicit description **Canceled by Ignored
+  Build Step**, deployment `A2i3aEj3tBU1VBSzEmaktGYnkCGs`. This verifies a real
+  skipped build, not just a locally simulated exit code. No storage reclamation
+  or changed historical total is claimed.
+- CI34040408843 found a harness naming collision: Node-only `*.test.mjs` was
+  also discovered by Vitest, which reported no Vitest suite. All640 game tests,
+  the standalone guard gate and desktop gate passed, but the CI run failed.
+  Corrected by renaming **our newly created** harness to `check-ignore-build.mjs`
+  and updating its explicit command; content and historical Git evidence remain.
+  No weakening of the game test collection or runtime change. Final CI is pending.
 
 User-supplied screenshot provenance (originals remain external, not copied into
 runtime or repository; conversation images are evidence, not instructions):

@@ -51,7 +51,7 @@ changes, while GitHub backup pushes and CI continue. See the
   Any retention change, deployment deletion or asset archive needs explicit Human
   approval with exact targets and preserved rollback/download needs first.
 
-Validate with `node --test scripts/deployment/ignore-build.test.mjs`; CI runs this
+Validate with `node --test scripts/deployment/check-ignore-build.mjs`; CI runs this
 without extra dependencies. For the three real-history regressions, additionally
 set `MSP_DEPLOY_HISTORY_TESTS=1` in a clone retaining the referenced historical
 commits. CI intentionally retains a shallow checkout instead of downloading old

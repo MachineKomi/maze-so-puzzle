@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+// Explicit node --test entry point; do not use Vitest's *.test.* filename pattern.
 import { execFileSync, spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
