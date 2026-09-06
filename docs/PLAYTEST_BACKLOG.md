@@ -1602,8 +1602,11 @@ XP crystals are a future visual reservation only, conditional on approved
 persistent progression after Plan 14.
 
 Good chests spray reward sprites outward with simple semi-random 2D physics,
-currency-coloured particle trails and no wall/object collision, then pull the
-sprites into Ame magnetically with satisfying collection audio. Reuse this
+currency-coloured trails and bounded static maze-wall collision, then pull the
+sprites into Ame magnetically with satisfying collection audio. The2026-09-06
+V23-06 refinement supersedes the original no-wall-collision request; arbitrary
+actor/cage rigid-body collisions are not required. Keep loot in navigable space
+without stranded rewards, wall tunnelling or unbounded physics work. Reuse this
 celebration for ordinary Gold chests and bags. Every rescued friend releases a
 bounded Gold-Star reward; every defeated enemy releases Gold Stars and Science
 in addition to the existing Power result.
@@ -1673,9 +1676,12 @@ outcome. This therefore requires gameplay/save/solver work, not only VFX.
 - Reward sprites are visual representatives, not necessarily one DOM/canvas
   object per credited unit. Cap and pool them; large rewards communicate exact
   totals through text while preserving a generous-looking bounded burst.
-- Particles ignore maze collision and other objects as requested. Their seeded
-  visual variation is reproducible in tests but may vary between distinct
-  events. It cannot change gameplay truth.
+- Per the2026-09-06 V23-06 refinement, representative loot particles bounce from
+  static maze walls and remain in navigable space during scattering/collection;
+  do not reinstate the superseded collision-free recipe. Actor/cage collisions
+  are not required. Seeded visual variation is reproducible in tests but may
+  vary between events; it cannot change committed gameplay truth. Bounded
+  homing/cancellation must reconcile totals without inaccessible lost rewards.
 - Rapid sequential rewards join the shared interaction-celebration queue from
   `PT-20260902-01`; they may overlap only within the bounded Plan-02 policy and
   must remain readable rather than becoming visual/audio clutter.

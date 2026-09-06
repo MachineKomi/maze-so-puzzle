@@ -693,10 +693,16 @@ reachable. A fixture is interface proof, not evidence of shipped Mimic gameplay.
    the ordinary battle or too-strong sequence; do not stack two locks or skip the
    readable reveal to meet an arbitrary duration.
 3. For a reward, emit a capped seeded group of representative Gold/Science
-   sprites, a short collision-free outward spray, then homing into the collecting
+   sprites, a short outward spray with bounded static maze-wall bounces, then
+   homing into the collecting
    actor's **rendered** anchor. Shared wallet/notice feedback acknowledges the
    exact credited total. The Human's magnetic destination is Ame; a subsequent
    small wallet acknowledgement is separate from the old chest-to-wallet flight.
+   V23-06 supersedes the original collision-free recipe: keep the displayed loot
+   in navigable space, avoid tunnelling/stranding, and use a bounded collection
+   fallback if the collector moves beyond the local effect. No generic rigid-body
+   engine or actor collisions are required. These are visual representatives of
+   committed outcomes, never a second reward ledger or prerequisite for saving.
 4. Reserve the event's nodes before starting. Large rewards use exact text and
    grouped sprites; never one node, voice or timer per unit. Routine rewards
    finish quickly, while rare chest/rescue milestones can spend more of the same

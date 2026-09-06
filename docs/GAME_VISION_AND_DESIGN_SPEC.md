@@ -377,6 +377,14 @@ not claims about the active UI candidate. The roadmap sequences delivery.
   currency-aware comparison. No hidden reroll or power change after reveal.
 - Reward sprays follow the moving collector with subtle, satisfying sound and
   restrained gold/Science sparkle, independent of exact-once wallet credit.
+  The2026-09-06 Human refinement asks for bounded static wall bounces, keeping
+  scattered loot inside navigable rooms/corridors rather than passing through
+  walls. Individual maze-Power tokens should make combat gains visibly tangible:
+  scatter, magnetic collection and arrival count-up, without losing required
+  Power or making solvability depend on decorative simulation. Plan02 owns the
+  reviewed visual/interaction timing; these are planned improvements, not current
+  runtime claims. Gold, science, maze Power and any later XP need distinct small-
+  scale silhouettes/colour cues, not several confusingly similar potion sprites.
   Repeated large showers must remain pleasant and performant. Rainbow XP crystal
   presentation is recorded for a future approved progression design, not early
   authorization to add persistent XP or levels.
