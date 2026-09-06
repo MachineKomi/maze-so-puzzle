@@ -58,6 +58,9 @@ release/V22-CAMERA1-v0.22.2-SHA256SUMS.txt -text
 release/V22-COMFORT1-v0.22.3-manifest.json -text
 release/V22-COMFORT1-v0.22.3-PLAYTEST.md -text
 release/V22-COMFORT1-v0.22.3-SHA256SUMS.txt -text
+release/V22-RESCUE1-v0.22.4-manifest.json -text
+release/V22-RESCUE1-v0.22.4-PLAYTEST.md -text
+release/V22-RESCUE1-v0.22.4-SHA256SUMS.txt -text
 
 # The documentation consistency contract intentionally checks an LF-wrapped phrase.
 docs/RELEASE_CHECKLIST.md text eol=lf

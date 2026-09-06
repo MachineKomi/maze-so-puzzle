@@ -8,7 +8,11 @@ This record is not physical-device acceptance or a publication receipt.
 
 Initial committed candidate: `e0cdd77100ab34048ccc8e08f0e01452e5dd1903`,
 based on `c77e7d7e428e1db17ef4fd223cfc9c5614bbe638` (v0.22.3 runtime).
-Final handback and publication remain pending at this review checkpoint.
+Final runtime `f3f090a7f8a5b8eb76382f31161345eb8a3d630f`, evidence handback
+`b6f0003e4bfb71c332c42f6437a3ae8b9ea7ab8d`: **accepted for integration and
+versioned-preview qualification**. Publication and physical acceptance remain
+separate. Astra reviewed the final committed delta and hash-checked the full
+input and final save browser reports against Sol's record.
 
 Astra inspected engine contact/pit semantics, App presentation/follower binding,
 the follower trail, exact solver and positions-only reachability, save/navigation
@@ -40,16 +44,23 @@ rescue or synthetic jump. Loose pickups remain walk-over interactions.
    protected; nevertheless this weakens the global compatibility contract.
    Astra requested that recognized v1 runs fail closed with updated-maze copy,
    preserving durable progress and valid fingerprint-matched v2/v3 migration.
-   Final corrected code/tests must be reviewed before acceptance.
+   Final source removes that migrator, consistently reports recognized v1 as
+   updated content, and retains fingerprint-matched v2/v3 paths. Astra reviewed
+   the correction and synthetic revision-1/quota tests; accepted.
 3. **Metrics documentation — reconciliation requested.** Routes now distinguish
    directional inputs from movement steps. The measured before/after table is
    retained, but a few current per-level narrative costs still used older values;
-   Sol is reconciling those against the already measured report.
+   Sol reconciled those against the already measured report; accepted.
 
-Sol reported 533/533 project tests and 19/19 focused browser checks at the initial
-candidate. The full serial input suite, requested migration corrections and
-final evidence are still pending; do not promote those partial counts into a
-nonexistent final all-pass run. Final source and report hashes belong below.
+Sol reported 533 project tests, then 23 focused session tests after the final
+helper correction, plus TypeScript/build. Browser: 95 passed / 3 intentionally
+skipped / 0 unexpected in the full cohort, 19 focused passed, and 2 final
+save/cancellation checks passed. The three unavailable authored combined
+jump/door, jump/battle and jump/rescue routes were not replaced with fabricated
+saves. Full report SHA-256
+`fc7586992c8f56df9440e339cfcca2523ba6d9fa44fba9c394801f097e3e19b0`;
+final save report `049d82907564d0e7813370e067e39efd638618d5fa67673eb06ccaea4fe78218`.
+See [complete Sol handback](2026-09-06-v22-play01b-stationary-rescue-candidate.md).
 
 ## Compatibility, cost and release conditions
 
@@ -66,6 +77,8 @@ unchanged; decoded image upper bound 411,582,176 unchanged; dependencies unchang
 Approved cap remains +900 gzip9 JS / zero other growth, with final actual delta
 allocated rather than the whole cap. Earlier 23,512-byte CSS wording is not the
 source-matched frozen b834a8e artifact and is not the comparison authority.
+Final correction reduces JS to 155,090: **+215 gzip9 bytes**, not +265. Astra
+accepts the exact +215 named allocation; the other zero-growth limits hold.
 
 After clean final handback, Astra will integrate only reviewed source/doc changes,
 freeze v0.22.4, verify production and actual Windows rescue/save/reopen behavior,
