@@ -2,8 +2,8 @@
 
 Date: 2026-09-06. Branch: `codex/v22-ui-short-height`. Clean merged base:
 `033f8748c0ca4292f86506539371e404fab7ddd0` (accepted native Exit plus current
-main documentation/test repairs). Runtime checkpoint:
-`6e7cfe40c858302db700d8cfa3ce18d6a4b49624`. Status: qualified candidate for
+main documentation/test repairs). Superseding runtime checkpoint:
+`840293dd3414b5f3b8c8c5040352752847005093`. Status: qualified candidate for
 independent Astra review; it is not merged, versioned or published.
 
 ## Bounded implementation
@@ -16,6 +16,10 @@ independent Astra review; it is not merged, versioned or published.
   40 px feedback row coexist. The feedback row sizes its actual icon and
   `.feedback-bar` child, including two-line instructional copy; it does not
   ellipsize or hide that copy.
+- At 780x312, the complete Friends and Bag collections form a labelled horizontal
+  shelf above the map. The map starts at y=137 after the shelf ends at y=131.77;
+  feedback starts at y=258 after the map ends at y=255. The unchanged 152 px pad
+  remains horizontally disjoint.
 - At heights through 420 px, the Adventure Book keeps its header and five
   minimum-48 px tabs fixed while only `.book-scroll` scrolls. One complete
   132 px achievement card fits. Narrow tabs stack icon and label, and all tab
@@ -44,8 +48,9 @@ engine-derived route prefix SHA-256 is
 | 568×320 + safe area | 184 square | 96 | 40 | 152 | 0 / 0 | 132 px, visible |
 | 960×540 native minimum | 504 square | 192 | 40 | 152 | 0 / 0 | 158 px, visible |
 
-Every pad direction measured at least 48 px. Every friend/bag slot stayed inside
-the HUD, map/pad/feedback rectangles were pairwise disjoint, all Book tab labels
+Every pad direction measured at least 48 px. Every friend/bag label and slot
+stayed inside the HUD and was individually disjoint from the complete map card;
+map/pad/feedback rectangles were pairwise disjoint, all Book tab labels
 used one line, and fixed Book chrome was byte-equal geometrically before/after
 body scrolling. Primary 1920×1080, 1280×720, 1194×834 and 1024×768 PlayShell,
 board, HUD, map, feedback, pad, Book chrome and Book-card dimensions matched the
@@ -63,15 +68,17 @@ are source-derived engine/save fixtures, not rewritten DOM labels.
 Frozen baseline geometry is
 `C:/GameDev/maze-game-qa/ui01a/evidence/baseline/geometry.json` (SHA-256
 `176cc06ae567a044d38b8466c9beb5fd14ee9db3873efcad2dd47b9928ca9d98`).
-Candidate geometry is
-`C:/GameDev/maze-game-qa/ui01a/evidence/candidate-final/geometry.json`
+Final portable candidate geometry is
+`C:/GameDev/maze-game-qa/ui01a/evidence/candidate-portable-final-r2/geometry.json`
 (SHA-256
-`90591e30aa9451a1829f761bfa7061b7f841b28a357bfb9a7e5ddc70ee5027f9`).
+`0f1a76ec25745c2401f129450bb2bb8a48bb670296b1330d29974bd4e65e6ccc`).
 The focused content record is adjacent as `content-fit.json` (SHA-256
-`998d0ff21fdc9d7e3a3a7d21a9cdd82c6ade90f154fa7d357bcf1d256ccd7d3a`).
+`ed3ff79a0887613dacd95d3e09413de69c4b7ec743812be989c3dfb33f032c38`).
 
 Selected visual hashes:
 
+- final portable 780 gameplay
+  `33b6efc80fcecc1021938dd4cbca7c360870fc68b001a2040edd1ee177121ade`;
 - final 568 gameplay `b050682cc5491d9d5c54dd378ed4b7763aac1c267f1f2626fa1cb24cd2bb176a`;
   Book `71c80a558f90e36e3559bdf2726687f0a2ccbd47c2608c99be54ffd432e18c67`;
   long feedback `94fc0c9185bdec8f651d9a63617170fb2f411cfc83353222248e3d8dee386220`;
@@ -93,7 +100,16 @@ Selected visual hashes:
   actual pad movement, More and Hint dialogs, keyboard Book tabs, enlarged-text
   reader mode, actual long rescue feedback, longest objective and large totals.
   Results SHA-256:
-  `cf6e8289dce3986340fed96195a2a18e41503e368826100e28248e46a086471f`.
+  `001c6023e3d98192189beec7e5ef79d70defcecf1f0c6a02ebdc0c0890d96de9`.
+- The corrected repository-relative `v22-ui-compact.pw.ts` runner passed 2/2
+  serially in 14.3 seconds against the frozen runtime. It repeats all four compact
+  geometry/Book cases plus the real-copy/large-value fit proof using the existing
+  external Playwright loader, with no package or lockfile addition. Its first
+  retained attempt correctly failed because the harness had not scrolled the
+  independent Book body to the representative card; the corrected observer uses
+  the established `scrollIntoView` setup and passed without runtime changes.
+  Final portable results SHA-256:
+  `fce6ed7d078c3bd26e63fa362bdfc2f1cb74e7cdbe8941f7001048f0ee7c1d00`.
 - `git diff --check` passed apart from non-mutating Windows line-ending notices.
   Package manifests, lockfiles, public/media trees and native files have no diff.
 
@@ -103,14 +119,17 @@ Against accepted Exit base `033f8748`:
 
 - JavaScript gzip-9: 155,339 → 155,307, net **−32 bytes**. Allocated JS growth:
   **0 bytes** (well inside the approved +1,200 maximum).
-- CSS gzip-9: 23,563 → 23,910, net and allocated **+347 bytes** (inside the
+- CSS gzip-9: 23,563 → 23,976, net and allocated **+413 bytes** (inside the
   approved +1,800 maximum).
 - Public delivery: 165,031,011 → 165,031,011; media, decoded-image inventory and
   dependencies: **zero growth**.
 
 ## Retained corrections and limits
 
-The first fit allowed the 780 px collection shelf to overlap the map; a 24 px
+The first fit allowed the 780 px collection shelf to overlap the map, and the
+initial submitted checkpoint still let the Bag label/slots collide with the map
+heading. The final 780-specific horizontal shelf and descendant-level assertion
+close both defects without shrinking the map/pad or hiding labels. A 24 px
 feedback host also clipped its inherited 30 px child, and the first 568 px Book
 capture split “Achievements” mid-word. All three were treated as product misses,
 not waived: compact slots/map tiers were reconciled, feedback was sized from its
