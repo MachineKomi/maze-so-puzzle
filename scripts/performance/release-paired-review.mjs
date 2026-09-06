@@ -52,7 +52,7 @@ const report = { date: new Date().toISOString(), head: execFileSync('git', ['rev
   scope: 'Headless local Chromium same-host paired frame/trace diagnostic; no physical iPad, native, GPU-time or Human beauty acceptance. Trace durations overlap and are not additive.', rows: [] };
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
-  for (const cohort of [{ width: 780, height: 312, pairs: 3 }, { width: 1193, height: 833, pairs: 2 }]) {
+  for (const cohort of [{ width: 780, height: 312, pairs: 5 }, { width: 1193, height: 833, pairs: 5 }]) {
     for (let pair = -1; pair < cohort.pairs; pair++) {
       for (const mode of pair % 2 === 0 ? ['baseline', 'candidate'] : ['candidate', 'baseline']) {
         servingMode = mode;
