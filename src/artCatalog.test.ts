@@ -119,10 +119,14 @@ describe("art catalog", () => {
     expectArtReferences(Object.values(DOOR_ART));
     expectArtReferences(Object.values(TERRAIN_DRESSING_ART));
     for (const dressing of Object.values(TERRAIN_DRESSING_ART)) {
-      expect(dressing.periodTiles).toBeGreaterThanOrEqual(5);
-      expect(dressing.periodTiles).toBeLessThanOrEqual(6.5);
-      expect(dressing.opacity).toBeGreaterThan(0);
-      expect(dressing.opacity).toBeLessThanOrEqual(0.2);
+      expect(dressing.detailTiles[0]).toBeGreaterThan(0);
+      expect(dressing.detailTiles[1]).toBeLessThan(1);
+      for (const [x, y, width, height] of dressing.frames) {
+        expect(Math.min(x, y)).toBeGreaterThanOrEqual(0);
+        expect(Math.min(width, height)).toBeGreaterThan(0);
+        expect(x + width).toBeLessThanOrEqual(dressing.width);
+        expect(y + height).toBeLessThanOrEqual(dressing.height);
+      }
     }
   });
 

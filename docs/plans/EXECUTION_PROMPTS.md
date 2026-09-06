@@ -34,7 +34,12 @@ The root orchestrator now continues:
    frozen32/12, actual obtainability, teaching reconciliation and recipe gaps.
    Do not repeat the audit or treat it as delivered recipe UI/new content. Keep
    schema7/same-v6-key future-write protection and existing v2 gain choices intact.
-4. **Now advance** to bounded
+4. **Latest Human priority supersedes this earlier dispatch:** finish the jump
+   camera, implement/qualify [WALL-04B](WALL-04B-tall-walls-and-readable-paths.md)
+   and small crisp surface dressing, then the affected lava/water/poison polish.
+   Astra has integrated a local tall-wall candidate; finish actual source/render/
+   performance qualification and deployment, not another planning handoff.
+   Afterwards advance to bounded
    [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md), then
    [LEARN-01](LEARN-01-readable-reasoning-and-help.md), each as a bounded reviewed
    checkpoint. Read the complete owning plans/specs and source, freeze the exact

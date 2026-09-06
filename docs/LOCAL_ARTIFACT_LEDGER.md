@@ -12,6 +12,29 @@ All following packets are retained under `C:/GameDev/maze-game-qa/performance/`:
 | `jump-camera-baseline-v02212/` |4 /710,289|Exact qualified0.22.12 HTML/JS/CSS and identity JSON, before replacing dist in place. Shared unchanged public media; no full build copy.|
 | `jump-camera-before-20260906/` |7 /1,645,384|Two old-source camera traces/captures and real-route fixture packet.|
 | `jump-camera-after-20260906/` |12 /1,690,330|Seven candidate browser cases, including Full/Lite/Reduced/Static, resize and blur.|
+| `jump-camera-boundaries-20260906/` |16 /1,697,911|Earlier11-case boundary proof; isolated fixture originally omitted production CSS layers.|
+| `jump-camera-final-20260906/` |40 /11,099,172|22/23 pass; real Sound Static→Full race retained. Not final acceptance despite folder name.|
+| `jump-camera-quality-repair-20260906/` |12 /453,015|6/7 pass; specificity-only attempted correction failed because of CSS cascade layers.|
+| `jump-camera-layer-repair-20260906/` |20 /2,705,162|13/13 corrected jump/interaction cases passed with production styles. Before tall-wall integration.|
+
+Tall-wall visual iterations under `C:/GameDev/maze-game-qa/art-proof/`, created
+by root on this branch from existing approved media with installed Playwright:
+
+| Folder | Files / bytes | Purpose |
+| --- | ---: | --- |
+| `tall-wall-lab-20260906/` |5 /2,595,926|Full-height versus whole-section lowering; lowered variant loses visual height.|
+| `tall-wall-section-20260906/` |5 /2,420,791|Clipped cap experiment; side wedge defect retained.|
+| `tall-wall-volume-20260906/` |5 /2,419,423|True mapped rectilinear volume; initial light/material review.|
+| `tall-wall-lit-20260906/` |6 /2,919,331|1.15×Ame, broad cap/side value separation; includes actual Springstep terrain.|
+| `tall-wall-integrated-20260906/` |6 /3,691,555|Right panel uses the integrated runtime renderer. Static comparison, not gameplay/performance acceptance.|
+
+Reusable source: `scripts/art_review/jump-clock.{html,tsx}` and
+`tall-wall-lab.{html,tsx,css}`, `capture-tall-wall-lab.mjs`; no production imports.
+The root dev-server session25905 ended after captures. `dist/` is rebuilt in
+place, not copied; current candidate entryJS594615B/CSS119481B. Source hashes
+and final output sizes will be refreshed when qualification freezes. No added
+dependency environment, native package, repo/worktree copy or archive. All
+failed and exploratory images remain held; this ledger authorizes no cleanup.
 
 `scripts/performance/jump-camera.pw.ts` is reusable source. The candidate receipt,
 latest Human intake and tall-wall plan are durable Markdown. Further prototype

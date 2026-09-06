@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Maze so Puzzle - For Ame to Solve!",
-  "version": "0.22.12",
+  "version": "0.22.13",
   "identifier": "com.ame.mazesopuzzle.preview.fpui1",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -25,7 +25,9 @@
       }
     ],
     "security": {
-      "capabilities": ["main-window"],
+      "capabilities": [
+        "main-window"
+      ],
       "csp": {
         "default-src": "'self'",
         "connect-src": "'self' ipc: http://ipc.localhost",
@@ -46,7 +48,9 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis"],
+    "targets": [
+      "nsis"
+    ],
     "icon": [
       "icons/ame-v03/32x32.png",
       "icons/ame-v03/128x128.png",

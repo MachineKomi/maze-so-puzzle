@@ -27,7 +27,12 @@ Native0.22.10 is independently unfinished: its exact staged executable is now
 or published. Transfer completeness and art-ledger/environment reconciliation
 remain open. No new-host iPad pass exists.
 
-The immediate task is **bounded DELIGHT-02B, then LEARN-01**, then
+The Human's later feedback takes priority: finish the jump-camera correction,
+deliver [WALL-04B tall walls and crisp dressing](WALL-04B-tall-walls-and-readable-paths.md),
+then improve lava/water/poison surfaces through the existing Plan04/HOLE-02
+receiver and motion gates. These are implemented/qualified in bounded slices;
+do not stop at a plan or call the wall beauty finding resolved without feedback.
+Then return to **DELIGHT-02B and LEARN-01**, then
 the isolated existing-rule Plan09-P1 canary. [Plan09-P0](../reviews/2026-09-06-plan09-p0-obtainable-roster.md)
 has supplied the frozen 32-friend/12-guardian obtainability audit and recipe gaps;
 do not restart it or BOOK-02A implementation. Controls still need stable semantic

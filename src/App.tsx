@@ -1023,7 +1023,7 @@ function App() {
     // intent is cleared, but the already-captured segment must finish normally.
     enabled:screen==="game" && (!modalOpen || soundOpen) && preferences.quality!=="static",
     discontinuity:portalPresentation!==null,
-    jump:jumpPresentation, animateJump:motion==="full",
+    jump:jumpPresentation, animateJump:motion==="full" && preferences.quality!=="static",
     durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
   });
 

@@ -33,6 +33,30 @@
   },
   "allocations": [
     {
+      "id": "wall04b-section-and-small-dressing",
+      "owner": "lighting",
+      "status": "approved",
+      "compressedJsBytes": 2000,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra admits a bounded2000 gzip9 JS bytes for static tall wall section geometry and sparse cropped-source dressing. Combined with the500-byte jump allowance, current0.22.13 measures+1982 JS/-21 CSS versus live0.22.12; no new media/dependency. This allocation does not qualify moving cost or release acceptance.",
+      "evidencePath": "docs/reviews/2026-09-06-tall-wall-integration-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete tall wall geometry, renderer and dressing seam to af70dd0 while retaining the qualified jump repair, all saves and existing deployment guard. R1 remains held separately."
+    },
+    {
+      "id": "jump-camera-shared-clock",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 500,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates500 gzip9 JS bytes for the single-owner jump/camera trajectory and synchronized local poses; the pre-version candidate is+425 JS and reduces CSS versus live0.22.12. No new nodes, media or dependency. Final matched jump performance remains a release gate.",
+      "evidencePath": "docs/reviews/2026-09-06-jump-camera-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete jump/camera/pose seam to qualified0.22.12 af70dd0, retaining all durable saves and the held wall separation."
+    },
+    {
       "id": "phone02-book02a-encounter-composition",
       "owner": "ui",
       "status": "approved",

@@ -1,5 +1,17 @@
 # Wall depth and lighting — implemented 04-A / R1 contract
 
+## Current Human target — unresolved, web0.22.12
+
+The [latest feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
+requires walls convincingly taller than Ame, clean3D faces and beautiful lighting.
+Live0.22.12 retains04a-v1; R1/0.22.11 is held, never deployed. Neither closes
+Human wall appearance. [WALL-04B](plans/WALL-04B-tall-walls-and-readable-paths.md)
+now owns a genuine tall extrusion/readability comparison after jump-camera repair.
+Projected height may extend beyond the collision footprint; local cutaway,
+clear paths/actors, fog/input registration and measured cost are part of the
+solution. The shallow same-footprint restrictions below remain historical
+contracts, not limits that override this new Human target.
+
 ## R1 stronger-relief correction — v0.22.11 web preview
 
 The Human found 04-A too subtle and its lower-corner highlight misaligned.

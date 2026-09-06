@@ -1,5 +1,8 @@
 /* One resolved motion authority; surface quality is independent of motion preference. */
-:root:is([data-motion="reduced"],[data-quality="static"]) *,
+/* Jump poses are owned by the committed game-stage attributes and travel
+ * clock. The root updates in a later parent layout effect; canceling these
+ * handles here would recreate unbound animations during Static → Full. */
+:root:is([data-motion="reduced"],[data-quality="static"]) *:not(.jump-presentation-body,.jump-presentation-shadow,.jump-spring-squash),
 :root:is([data-motion="reduced"],[data-quality="static"]) *::before,
 :root:is([data-motion="reduced"],[data-quality="static"]) *::after {
  animation: none; transition: none; scroll-behavior: auto;

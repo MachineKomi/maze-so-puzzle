@@ -64,7 +64,7 @@ describe("04-A wall shape and light", () => {
 describe("04-A SVG ownership", () => {
   it("renders the exact wall silhouette, fixed side, bounded groups and no depth filter in every campaign", () => {
     for(const level of CURATED_LEVELS) {
-      const html=renderToStaticMarkup(<MazeTerrain level={level} camera={fullWindow(level)} />);
+      const html=renderToStaticMarkup(<MazeTerrain level={level} camera={fullWindow(level)} wallMode="depth" />);
       expect(html).toContain('data-wall-lighting="04a-v1"');
       expect(html).not.toContain('wall-depth');
       expect(html).not.toContain('mix-blend-mode');
@@ -75,7 +75,7 @@ describe("04-A SVG ownership", () => {
       expect(html).toContain('clip-rule="evenodd"');
       const sides=html.match(/<mask[^>]*wall-side[\s\S]*?<\/mask>/)?.[0];
       expect(sides).toContain('translate(0 -');
-      const flipped=renderToStaticMarkup(<MazeTerrain level={{...level,lightDirection:"top"}} camera={fullWindow(level)} />);
+      const flipped=renderToStaticMarkup(<MazeTerrain level={{...level,lightDirection:"top"}} camera={fullWindow(level)} wallMode="depth" />);
       const shift=flipped.match(/<mask[^>]*wall-side[\s\S]*?<\/mask>/)?.[0];
       expect(shift).toBe(sides);
     }

@@ -24,3 +24,24 @@ genuinely tall wall rendering before DELIGHT-02B and LEARN-01. The wider roadmap
 remains intact. R1's old-host timing, new-host raster-work HOLD and inconclusive
 shadow isolation remain evidence, not an explanation to dismiss the visual request.
 No physical iPad, native or Human beauty acceptance is inferred.
+
+## Additional surface-dressing correction
+
+The Human again requests execution and qualified deployments. Existing wall/floor
+overlays remain much too large, blurry-looking and faint. Their purpose is to
+break up repeated materials with appropriately sized imperfections and natural
+details: cracks in bricks, dirt/dust, sticks and leaves on floors. Scatter them
+semi-randomly across their appropriate surfaces. Do not use oversized stretched
+images, added blur or blanket transparency to hide a poor scale/composition.
+
+Source inspection confirms four crisp transparent dressing sheets, currently
+stretched over 5–6.5 tiles at 0.08–0.17 opacity. Reuse their original pixels as
+small stable variations, clip to the owning surface, preserve natural alpha
+edges and gameplay readability. Wall height remains a separate unresolved outcome;
+a dressing correction must not be described as solving the tall-wall request.
+
+The Human subsequently stresses actual wall implementation and seeing the refined
+final3D effect. Taller convincing walls come first, then improved lava, water and
+poison floor effects and other visual polish. The intended result is a game that
+looks and feels more polished, complete and premium. This is execution steering;
+no additional planning approval is required.

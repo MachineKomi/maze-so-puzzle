@@ -986,13 +986,13 @@
 :root:is([data-motion=reduced],[data-quality=static]) .maze-board.rescue-active .player-layer {
   animation: none;
 }
-:root:is([data-motion=reduced],[data-quality=static]) .jump-presentation-body {
+.game-stage:is([data-motion=reduced],[data-quality=static]) .jump-presentation-body {
   animation: none;
 }
-:root:is([data-motion=reduced],[data-quality=static]) .jump-presentation-shadow {
+.game-stage:is([data-motion=reduced],[data-quality=static]) .jump-presentation-shadow {
   animation: none;
 }
-:root:is([data-motion=reduced],[data-quality=static]) .jump-spring-squash {
+.game-stage:is([data-motion=reduced],[data-quality=static]) .jump-spring-squash {
   animation: none;
 }
 :root:is([data-motion=reduced],[data-quality=static]) .rescue-happy-burst {

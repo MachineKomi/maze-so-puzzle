@@ -7,6 +7,16 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Local candidate0.22.13 now contains implemented tall walls, crisp dressing and
+  the jump-camera fix.** It is not deployed or qualified. The renderer uses true
+  sectioned cap/side geometry at1.15×Ame visible standing height, fixed oblique
+  projection, distinct cap/side texture mapping and floor-only cast. Static
+  sections protect all non-wall receivers without hiding sprites or changing
+  gameplay/fog. Source and rendered canaries are under independent Sol review;
+  moving performance and final browser checks remain. The Human explicitly
+  prioritizes completing these walls, then lava/water/poison polish, then the
+  preserved wider roadmap. [Candidate](reviews/2026-09-06-tall-wall-integration-candidate.md).
+
 - **Latest priority: jump camera, then genuinely tall walls.** The Human's
   [v0.22.12 feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
   explicitly leaves wall appearance unresolved and requires walls taller than
@@ -36,7 +46,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   pairs per viewport. [Actual Sol](reviews/2026-09-06-phone02-book-sol-final-review.md)
   independently found no blocker within this bounded web scope.
   [Public verification](reviews/2026-09-06-v02212-public-verification.md) binds
-  canonical/alias bytes and browser smoke. Next: DELIGHT-02B A/B/C, then LEARN-01;
+  canonical/alias bytes and browser smoke. Later wall/hazard steer above precedes DELIGHT-02B/LEARN-01;
   read their owning plans before edits. No renewed Human execution prompt needed.
 
 - **Recovery boundary retained:** [receipt](migrations/2026-09-06-new-laptop-recovery.md)

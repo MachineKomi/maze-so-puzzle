@@ -21,7 +21,9 @@ const fixtures=CURATED_LEVELS.flatMap(level=>{
   const revealed=new Set(route.slice(0,index+1).flatMap(s=>getVisibleTileKeys(level,s.before.position)));
   const snapshot=createActiveRunSnapshot({level,game:step.before,mode:"normal",runId:`run-jump-camera-${level.id}-${index}`,revealedTiles:revealed});
   if(!snapshot)throw Error('Invalid real-route snapshot');
-  return [{level,step,jump,snapshot,index,from,to}];
+  const prior=route[index-1];
+  const approachSnapshot=prior?createActiveRunSnapshot({level,game:prior.before,mode:'normal',runId:`run-jump-approach-${level.id}-${index}`,revealedTiles:revealed}):null;
+  return [{level,step,jump,snapshot,index,from,to,prior,approachSnapshot}];
  });
 });
 const progress={...createDefaultPlayerProgress(),unlockedLevelCount:16,unlockedLevelIds:CURATED_LEVELS.map(l=>l.id)};
@@ -67,6 +69,7 @@ for(const [width,height] of [[780,312],[1280,720]])test(`JUMP camera follows air
  }
 });
 for(const mode of ['lite','reduced','static','resize','blur'])test(`JUMP bounded handoff ${mode}`,async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  test.skip(before,'Baseline diagnostic only');const f=fixtures.find(f=>!f.step.result.events.some(e=>e.type==='portal-warped'))!;
  await page.setViewportSize({width:780,height:312});await enter(page,f,mode==='static'?'static':mode==='lite'?'lite':'full',mode==='reduced'?'reduced':'full');
  await startSamples(page);await page.keyboard.press(keyForDirection[f.step.direction]);await expect(page.locator('.jump-presentation')).toBeVisible();
@@ -77,4 +80,39 @@ for(const mode of ['lite','reduced','static','resize','blur'])test(`JUMP bounded
  const rows=await page.evaluate(()=>{const p=(window as any).jumpProof;p.running=false;return p.rows;});
  await writeFile(resolve(output,`${mode}.json`),JSON.stringify(rows,null,2));
  if(mode==='reduced'||mode==='static')for(const r of rows.filter((r:any)=>r.jump)){expect(r.camera.x).toBeCloseTo(f.to.left,4);expect(r.camera.y).toBeCloseTo(f.to.top,4);}
+ expect(errors).toEqual([]);
+});
+
+for(const scenario of ['delayed','quality','geometry','portal'])test(`JUMP isolated shared-clock boundary ${scenario}`,async({page})=>{
+ test.skip(before,'Candidate hook integration');const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:1421/scripts/art_review/jump-clock.html');
+ await page.waitForFunction(()=>Boolean((window as any).jumpHarness));
+ await page.evaluate(s=>(window as any).jumpHarness.start(s==='portal',s==='delayed'?120:0),scenario);
+ if(scenario==='quality')await page.evaluate(()=>{const h=(window as any).jumpHarness;h.quality('static');h.quality('full');});
+ if(scenario==='geometry')await page.evaluate(()=>(window as any).jumpHarness.resize());
+ await page.waitForTimeout(55);
+ const middle=await page.evaluate(()=>({scene:(window as any).jumpHarness.scene(),animations:document.querySelector('.jump-presentation')?.getAnimations({subtree:true}).map(a=>({state:a.playState,time:a.currentTime}))}));
+ await writeFile(resolve(output,`clock-${scenario}.json`),JSON.stringify(middle,null,2));
+ expect(middle.animations).toHaveLength(3);for(const a of middle.animations!){expect(a.state).toBe('paused');expect(a.time).toBe(middle.animations![0]!.time);}
+ if(scenario==='quality'||scenario==='geometry'){expect(middle.scene.position).toEqual({x:7,y:3});expect(middle.animations![0]!.time).toBe(460);}
+ else {expect(middle.scene.position.x).toBeGreaterThan(5);expect(middle.scene.position.x).toBeLessThan(7);expect(middle.scene.camera.top).toBe(1);}
+ await expect(page.locator('.jump-presentation')).toHaveCount(0);
+ const end=await page.evaluate(()=>(window as any).jumpHarness.scene());
+ expect(end.position).toEqual(scenario==='portal'?{x:10,y:9}:{x:7,y:3});
+ expect(errors).toEqual([]);
+});
+
+test('JUMP rapid ordinary approach and live Sound quality toggle',async({page})=>{
+ test.skip(before,'Candidate continuity');const f=fixtures.find(f=>f.approachSnapshot&&f.prior?.result.events.every(e=>e.type==='moved'))!;
+ expect(f).toBeTruthy();const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.setViewportSize({width:780,height:312});await enter(page,{...f,snapshot:f.approachSnapshot!,step:f.prior!});
+ await startSamples(page);await page.keyboard.press(keyForDirection[f.prior!.direction]);await page.waitForTimeout(70);await page.keyboard.press(keyForDirection[f.step.direction]);
+ await expect(page.locator('.jump-presentation')).toBeVisible();
+ await page.locator('[data-focus-id="sound"]').click();await page.locator('input[name="quality"][value="static"]').check();await page.locator('input[name="quality"][value="full"]').check();
+ const animations=await page.locator('.jump-presentation').evaluate(e=>e.getAnimations({subtree:true}).map(a=>({state:a.playState,time:a.currentTime})));
+ await writeFile(resolve(output,'rapid-sound-animation-handles.json'),JSON.stringify(animations,null,2));
+ expect(animations).toHaveLength(3);for(const a of animations){expect(a.state).toBe('paused');expect(a.time).toBe(460);}
+ await page.keyboard.press('Escape');await expect(page.locator('.jump-presentation')).toHaveCount(0);await expectUiRouteState(page,f.step.result.state);
+ const rows=await page.evaluate(()=>{const p=(window as any).jumpProof;p.running=false;return p.rows;});
+ await writeFile(resolve(output,'rapid-and-sound.json'),JSON.stringify({rows,animations},null,2));expect(errors).toEqual([]);
 });

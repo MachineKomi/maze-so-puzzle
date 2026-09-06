@@ -346,6 +346,29 @@ export function createRoundedCellUnionGeometry(
   if (occupied.size === 0) return { ...EMPTY_PATH, edges: [], corners: [] };
 
   const loops = traceBoundaryLoops(collectBoundaryEdges(bounds, occupied)).map(removeCollinearPoints);
+  return geometryFromLoops(loops, radius);
+}
+
+/** Trace adjacent rectangles on non-uniform axes. Used for physical wall
+ * sections: round after mapping, so narrow caps retain correct world radii. */
+export function createRectilinearUnionGeometry(
+  columns: readonly number[], rows: readonly number[], isOccupied: CellPredicate,
+  radius = DEFAULT_TERRAIN_CORNER_RADIUS,
+): RoundedTerrainGeometry {
+  for (const axis of [columns, rows]) {
+    if (axis.length < 2 || axis.some((n, i) => !Number.isFinite(n) || i > 0 && n <= axis[i - 1]!)) {
+      throw new RangeError("Rectilinear axes must be finite and strictly increasing.");
+    }
+  }
+  validateRadius(radius);
+  const bounds = { left: 0, top: 0, right: columns.length - 2, bottom: rows.length - 2 };
+  const occupied = collectOccupiedCells(bounds, isOccupied);
+  const loops = traceBoundaryLoops(collectBoundaryEdges(bounds, occupied))
+    .map(loop => removeCollinearPoints(loop.map(p => ({ x: columns[p.x]!, y: rows[p.y]! }))));
+  return geometryFromLoops(loops, radius);
+}
+
+function geometryFromLoops(loops: readonly (readonly Point[])[], radius: number): RoundedTerrainGeometry {
   return {
     d: loops.map((loop) => loopPath(loop, radius)).filter(Boolean).join(" "),
     fillRule: "evenodd",

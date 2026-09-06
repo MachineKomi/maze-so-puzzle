@@ -176,12 +176,17 @@ export interface TerrainTextureArt extends ArtReference {
 }
 
 export interface TerrainDressingArt extends ArtReference {
+  readonly id: string;
+  readonly width: number;
+  readonly height: number;
   readonly sourceRecordId: string;
   readonly runtimeStatus: "active";
-  /** Width and height of the sparse transparent repeat, in maze tiles. */
+  /** World-anchored scatter repeat, not the size of an illustration. */
   readonly periodTiles: number;
-  /** Decorations should enrich the material without competing with gameplay. */
-  readonly opacity: number;
+  /** Longest side of an individual detail, in maze tiles. */
+  readonly detailTiles: readonly [number, number];
+  /** Intact detail regions in the unchanged source sheet, in source pixels. */
+  readonly frames: readonly (readonly [number, number, number, number])[];
 }
 
 export interface TerrainRenderTreatment {
@@ -373,26 +378,30 @@ export const TERRAIN_DRESSING_ART = {
   garden: {
     ...MGJRPG02_ART["terrain-dressing-garden"],
     label: "Tiny garden flowers and moss",
-    periodTiles: 5.5,
-    opacity: 0.16,
+    periodTiles: 12,
+    detailTiles: [0.18, 0.30],
+    frames: [[12, 15, 224, 199], [321, 32, 184, 172], [25, 326, 151, 170], [213, 377, 110, 103], [356, 407, 91, 88]],
   },
   vines: {
     ...MGJRPG02_ART["terrain-dressing-vines"],
     label: "Soft ivy and moss",
-    periodTiles: 6,
-    opacity: 0.17,
+    periodTiles: 12,
+    detailTiles: [0.25, 0.42],
+    frames: [[59, 14, 198, 288], [286, 138, 196, 350], [129, 288, 136, 133]],
   },
   crystal: {
     ...MGJRPG02_ART["terrain-dressing-crystal"],
     label: "Pearls and crystal glints",
-    periodTiles: 5,
-    opacity: 0.08,
+    periodTiles: 12,
+    detailTiles: [0.12, 0.18],
+    frames: [[32, 12, 149, 162], [215, 37, 122, 127], [370, 21, 124, 158], [20, 186, 105, 122], [276, 298, 100, 108]],
   },
   autumn: {
     ...MGJRPG02_ART["terrain-dressing-autumn"],
     label: "Tiny leaves and acorn confetti",
-    periodTiles: 6.5,
-    opacity: 0.09,
+    periodTiles: 12,
+    detailTiles: [0.17, 0.29],
+    frames: [[240, 66, 117, 110], [352, 66, 149, 209], [201, 369, 101, 119], [9, 273, 179, 218], [303, 289, 181, 182]],
   },
 } as const satisfies Readonly<Record<string, TerrainDressingArt>>;
 

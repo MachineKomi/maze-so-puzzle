@@ -7,6 +7,10 @@ adds continuous camera follow through hole jumps. Wall depth/height is **not
 resolved**: require walls convincingly taller than Ame, clean corners and
 beautiful lighting. Current shallow walls and held R1 do not close that target.
 Jump repair and a genuinely tall rendering comparison precede DELIGHT-02B.
+Latest additions require implementation/delivery of that wall result, then
+lava/water/poison polish. Huge faint dressing overlays must become small, crisp,
+opaque-at-renderer details scattered over eligible surfaces. The local0.22.13
+candidate implements wall/dressing/jump changes; qualification is pending.
 
 ## Current delivery and remaining routing — 2026-09-06
 

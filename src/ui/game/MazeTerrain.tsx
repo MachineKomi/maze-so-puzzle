@@ -1,6 +1,8 @@
 import { memo, useId, useMemo } from "react";
 import { ASSETS } from "../../assets";
-import { resolveTerrainTheme, type TerrainRenderTreatment } from "../../artCatalog";
+import { resolveTerrainTheme, type TerrainRenderTreatment, type TerrainDressingArt } from "../../artCatalog";
+import { createDressingStamps } from "../../game/terrainDressing";
+import { createTallWallGeometry, TALL_WALL_REVISION } from "../../game/tallWalls";
 import { getTerrainAt } from "../../game/engine";
 import { createRoundedTerrainGeometry, createRoundedTerrainPath } from "../../game/terrainGeometry";
 import { buildWallLighting, resolveWallLight, WALL_LIGHTING_PROFILES, WALL_LIGHTING_REVISION } from "../../game/wallLighting";
@@ -17,20 +19,35 @@ export function lightVector(level: LevelDefinition): { readonly x: number; reado
   return resolveWallLight(level).cast;
 }
 
+function DressingPattern({ id, art, seed }: { id: string; art: TerrainDressingArt; seed: string }) {
+  const stamps = useMemo(() => createDressingStamps(art, seed), [art, seed]);
+  return <pattern id={id} patternUnits="userSpaceOnUse" width={art.periodTiles} height={art.periodTiles}>
+    {stamps.map(({ frame, size, x, y, rotation }, i) => <svg key={i}
+      x={x - size / 2} y={y - size / 2} width={size} height={size}
+      viewBox={frame.join(" ")} preserveAspectRatio="xMidYMid meet"
+      transform={`rotate(${rotation} ${x} ${y})`} overflow="hidden">
+      <image href={art.src} width={art.width} height={art.height} />
+    </svg>)}
+  </pattern>;
+}
+
 export const MazeTerrain = memo(function MazeTerrain({
   level,
   camera,
-  wallMode = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("wallLighting") === "legacy" ? "legacy" : "depth",
+  wallMode = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("wallLighting") === "legacy" ? "legacy" : "tall",
 }: {
   readonly level: LevelDefinition;
   readonly camera: CameraWindow;
   /** Explicit comparison/rollback switch; never changes terrain rules. */
-  readonly wallMode?: "legacy" | "depth";
+  readonly wallMode?: "legacy" | "depth" | "tall";
 }) {
   const patternPrefix = useId().replace(/:/g, "");
   const theme = resolveTerrainTheme(level.terrainThemeId);
   const floorPatternId = `${patternPrefix}-floor`;
   const wallPatternId = `${patternPrefix}-wall`;
+  const wallSidePatternId = `${patternPrefix}-wall-side-texture`;
+  const wallCapPatternId = `${patternPrefix}-wall-cap-texture`;
+  const wallCapClipId = `${patternPrefix}-wall-cap-clip`;
   const waterPatternId = `${patternPrefix}-water`;
   const lavaPatternId = `${patternPrefix}-lava`;
   const poisonPatternId = `${patternPrefix}-poison`;
@@ -42,6 +59,7 @@ export const MazeTerrain = memo(function MazeTerrain({
   const lavaMaskId = `${patternPrefix}-lava-mask`;
   const poisonMaskId = `${patternPrefix}-poison-mask`;
   const floorDressingPatternId = `${patternPrefix}-floor-dressing`;
+  const dressingExclusionId = `${patternPrefix}-dressing-exclusions`;
   const wallDressingPatternId = `${patternPrefix}-wall-dressing`;
   const wallDepthFilterId = `${patternPrefix}-wall-depth`;
   const wallClipId = `${patternPrefix}-wall-clip`;
@@ -53,6 +71,7 @@ export const MazeTerrain = memo(function MazeTerrain({
   const profile = WALL_LIGHTING_PROFILES[theme.wall.wallLightingProfile ?? "stone"];
   const walls = useMemo(() => createRoundedTerrainGeometry(level, camera, "wall", 0.13), [level, camera]);
   const depth = useMemo(() => buildWallLighting(walls, light.toLight, profile), [walls, light.toLight.x, light.toLight.y, profile]);
+  const tall = useMemo(() => wallMode === "tall" ? createTallWallGeometry(level, walls, light.toLight) : null, [level, walls, wallMode, light.toLight.x, light.toLight.y]);
   const water = createRoundedTerrainPath(level, camera, "water", 0.16);
   const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
   const poison = createRoundedTerrainPath(level, camera, "poison", 0.16);
@@ -74,7 +93,7 @@ export const MazeTerrain = memo(function MazeTerrain({
         viewBox={`${camera.left} ${camera.top} ${camera.width} ${camera.height}`}
         preserveAspectRatio="none"
         aria-hidden="true"
-        data-wall-lighting={wallMode === "depth" ? WALL_LIGHTING_REVISION : "legacy"}
+        data-wall-lighting={wallMode === "tall" ? TALL_WALL_REVISION : wallMode === "depth" ? WALL_LIGHTING_REVISION : "legacy"}
         data-wall-profile={theme.wall.wallLightingProfile}
       >
         <defs>
@@ -87,6 +106,15 @@ export const MazeTerrain = memo(function MazeTerrain({
             <rect width={theme.wall.periodTiles} height={theme.wall.periodTiles} fill={theme.wall.fallbackColor} />
             <image href={theme.wall.src} x="0" y="0" width={theme.wall.periodTiles} height={theme.wall.periodTiles} preserveAspectRatio="none" style={{ filter: terrainTreatmentFilter(theme.wallTreatment) }} />
           </pattern>
+          {tall && <>
+            <pattern id={wallSidePatternId} patternUnits="userSpaceOnUse" width={theme.wall.periodTiles} height={theme.wall.periodTiles * .72}>
+              <image href={theme.wall.src} width={theme.wall.periodTiles} height={theme.wall.periodTiles * .72} preserveAspectRatio="none" style={{ filter: terrainTreatmentFilter(theme.wallTreatment) }} />
+            </pattern>
+            <pattern id={wallCapPatternId} patternUnits="userSpaceOnUse" width={theme.wall.periodTiles} height={theme.wall.periodTiles} patternTransform={`translate(${tall.dx} ${-tall.height})`}>
+              <image href={theme.wall.src} width={theme.wall.periodTiles} height={theme.wall.periodTiles} style={{ filter: terrainTreatmentFilter(theme.wallTreatment) }} />
+            </pattern>
+            <clipPath id={wallCapClipId}><path d={tall.cap.d} clipRule="evenodd" transform={`translate(${tall.dx} ${-tall.height})`} /></clipPath>
+          </>}
           <pattern id={waterPatternId} patternUnits="userSpaceOnUse" width="4.6" height="4.6">
             <image href={ASSETS.water} x="0" y="0" width="4.6" height="4.6" preserveAspectRatio="none" />
           </pattern>
@@ -181,40 +209,12 @@ export const MazeTerrain = memo(function MazeTerrain({
               <path d={poison.d} fill="white" fillRule={poison.fillRule} filter={`url(#${hazardInsetFilterId})`} />
             </mask>
           )}
-          {theme.floorDressing && (
-            <pattern
-              id={floorDressingPatternId}
-              patternUnits="userSpaceOnUse"
-              width={theme.floorDressing.periodTiles}
-              height={theme.floorDressing.periodTiles}
-            >
-              <image
-                href={theme.floorDressing.src}
-                x="0"
-                y="0"
-                width={theme.floorDressing.periodTiles}
-                height={theme.floorDressing.periodTiles}
-                preserveAspectRatio="none"
-              />
-            </pattern>
-          )}
-          {theme.wallDressing && (
-            <pattern
-              id={wallDressingPatternId}
-              patternUnits="userSpaceOnUse"
-              width={theme.wallDressing.periodTiles}
-              height={theme.wallDressing.periodTiles}
-            >
-              <image
-                href={theme.wallDressing.src}
-                x="0"
-                y="0"
-                width={theme.wallDressing.periodTiles}
-                height={theme.wallDressing.periodTiles}
-                preserveAspectRatio="none"
-              />
-            </pattern>
-          )}
+          {theme.floorDressing && <DressingPattern id={floorDressingPatternId} art={theme.floorDressing} seed={`${level.id}:floor`} />}
+          {theme.floorDressing && <mask id={dressingExclusionId} maskUnits="userSpaceOnUse" x={camera.left} y={camera.top} width={camera.width} height={camera.height}>
+            <rect x={camera.left} y={camera.top} width={camera.width} height={camera.height} fill="white" />
+            {[level.start, level.exit, ...level.objects.map(object => object.at)].map((at, i) => <rect key={i} x={at.x} y={at.y} width="1" height="1" fill="black" />)}
+          </mask>}
+          {theme.wallDressing && <DressingPattern id={wallDressingPatternId} art={theme.wallDressing} seed={`${level.id}:wall`} />}
         </defs>
 
         <rect
@@ -233,7 +233,7 @@ export const MazeTerrain = memo(function MazeTerrain({
             width={camera.width}
             height={camera.height}
             fill={`url(#${floorDressingPatternId})`}
-            opacity={theme.floorDressing.opacity}
+            mask={`url(#${dressingExclusionId})`}
             clipPath={`url(#${floorClipId})`}
           />
         )}
@@ -254,7 +254,8 @@ export const MazeTerrain = memo(function MazeTerrain({
             filter={`url(#${wallDepthFilterId})`}
           />
         )}
-        {walls.d && wallMode === "depth" && <path className="terrain-wall-contact" d={walls.d} fill="none" stroke="#50425f" strokeWidth="0.055" opacity="0.22" clipPath={`url(#${floorClipId})`} />}
+        {tall && <path className="terrain-wall-cast" d={tall.shadow} fill="#33283f" opacity=".16" clipPath={`url(#${floorClipId})`} />}
+        {walls.d && wallMode !== "legacy" && <path className="terrain-wall-contact" d={walls.d} fill="none" stroke="#50425f" strokeWidth="0.055" opacity="0.22" clipPath={`url(#${floorClipId})`} />}
         {walls.d && (
           <path
             className="terrain-wall"
@@ -274,13 +275,12 @@ export const MazeTerrain = memo(function MazeTerrain({
             transform={`translate(${shadow.x * -0.025} ${shadow.y * -0.025})`}
           />
         )}
-        {walls.d && theme.wallDressing && (
+        {walls.d && theme.wallDressing && !tall && (
           <path
             className="terrain-wall-dressing"
             d={walls.d}
             fill={`url(#${wallDressingPatternId})`}
             fillRule={walls.fillRule}
-            opacity={theme.wallDressing.opacity}
             mask={wallMode === "depth" ? `url(#${wallTopMaskId})` : undefined}
           />
         )}
@@ -291,6 +291,13 @@ export const MazeTerrain = memo(function MazeTerrain({
             <path className="terrain-wall-highlight" d={depth.lit} fill={profile.highlight} opacity="0.55" />
           </g>
           <path className="terrain-wall-contour" d={walls.d} fill="none" stroke={profile.shade} strokeWidth="0.025" opacity="0.75" />
+        </g>}
+        {tall && <g className="terrain-tall-walls" clipPath={`url(#${wallClipId})`}>
+          {tall.sides.map((d, index) => d && <g key={index}><path d={d} fill={`url(#${wallSidePatternId})`} /><path d={d} fill="#241e31" opacity={.22 + index * .065} /></g>)}
+          <path d={tall.cap.d} fill={`url(#${wallCapPatternId})`} fillRule="evenodd" transform={`translate(${tall.dx} ${-tall.height})`} />
+          <path d={tall.cap.d} fill={profile.highlight} opacity=".16" fillRule="evenodd" transform={`translate(${tall.dx} ${-tall.height})`} />
+          {theme.wallDressing && <path className="terrain-wall-dressing" d={walls.d} fill={`url(#${wallDressingPatternId})`} fillRule="evenodd" clipPath={`url(#${wallCapClipId})`} />}
+          <path d={tall.rim} fill="none" stroke={profile.highlight} strokeWidth=".023" opacity=".40" />
         </g>}
       </svg>
       {holes.map((hole) => (

@@ -2,6 +2,12 @@
 
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
+**Latest continuation:** implement and deliver the tall-wall result, then
+lava/water/poison polish. The Human emphasizes visible premium finish and again
+authorizes qualified deployment. Surface dressing must be smaller, crisp,
+appropriately placed and semi-random; remove added blur/fading. This steers the
+active work, not a new planning pause. [Intake](user-playtests/2026-09-06-jump-camera-and-tall-walls.md).
+
 **Latest v0.22.12 steer:** [jump camera and tall walls](user-playtests/2026-09-06-jump-camera-and-tall-walls.md).
 The wall appearance remains explicitly unresolved. Target walls taller than Ame,
 convincing3D faces/depth, clean beautiful lighting; a2D illusion is acceptable.

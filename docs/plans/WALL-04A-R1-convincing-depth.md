@@ -1,5 +1,13 @@
 # WALL-04A-R1 — convincing depth without losing the paths
 
+**Current disposition: HOLD, not deployed.** New-host workload comparison is
+recorded in the [wall decision](../reviews/2026-09-06-new-host-wall-decision.md).
+The Human's subsequent0.22.12 feedback explicitly leaves wall beauty unresolved
+and requires taller-than-Ame walls. [WALL-04B](WALL-04B-tall-walls-and-readable-paths.md)
+supersedes another shallow-relief iteration. Preserve all R1 evidence; no new
+permission is needed for the authorized bounded comparison. Older planning/next
+labels below describe that checkpoint, not the current assignment.
+
 ## Current qualification stop rule — 2026-09-06
 
 Planning checkpoint; no implementation/measurement run until the Human's next
