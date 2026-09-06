@@ -235,14 +235,21 @@ accepted native Exit and compact gameplay/Book UI-01A. Final engineering
 qualification is complete; see [acceptance](reviews/2026-09-06-v0225-engineering-acceptance.md).
 Do not mutate this source or repeat the completed UI prototype.
 
-**Next sole runtime writer: Astra — AUDIO-01V2**. Actual Sol's
+**Active sole runtime writer: Astra — AUDIO-01V2**. Actual Sol's
 [independent review](reviews/2026-09-06-audio01v2-sol-review.md) and the
 [joint decision](reviews/2026-09-06-audio01v2-joint-decision.md) are complete.
 Use the agreed C1 music curve, fresh calibrated75/75 defaults, exact existing
 gain preservation and future-version writer refusal. SFX above gain1 still
 requires measured cue/overlap peak safety; do not silently clamp or add a limiter.
 No new audio cues/readiness/media/UI/camera work enters this bounded seam.
-AUDIO-01A follows separately. No runtime writer or camera experiment is in flight.
+AUDIO-01A follows separately; no camera experiment is in flight.
+The isolated candidate is backed up on `codex/audio-calibration`, checkout
+`C:/GameDev/maze-game-audio-calibration`, checkpoint
+`01e75216d4c3c85d39d555137fbbd362065c5db1`. Full551 project tests, TypeScript/build
+and exact342-byte JS allocation passed; CSS/media/dependencies are unchanged.
+Actual Sol's preliminary source review found no blocker. The proposed4/3 SFX
+ceiling remains unapproved pending source-derived offline peak evidence, followed
+by browser/native integration and final independent review. v0.22.5 remains live.
 
 Remaining V22-UI-01 propagation includes Home/dialog/victory, full200% text,
 HUD pace/settings art and remaining optical refinements. Preserve the praised
