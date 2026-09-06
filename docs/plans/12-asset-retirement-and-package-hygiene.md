@@ -1,7 +1,23 @@
 # Plan 12 — asset retirement and package hygiene
 
-Status: final sweep pending after accepted Plan 13 consumer freeze; bounded early
-delivery cleanup authorized 2026-09-06. Prepared 2026-09-05.
+## Current Human storage instruction — 2026-09-06
+
+The30-file/eleven-worktree early batch below is completed historical authority,
+not permission for another batch. No deletion **or archiving** without explicit
+Human approval. Use the [local artifact ledger](../LOCAL_ARTIFACT_LEDGER.md) for
+build/cache/worktree inventory and exact-target review. This plan's final source/
+asset consumer audit remains after13; local build-output review can occur earlier.
+The present turn changes documentation only; no cleanup is executed.
+
+Prepare the concrete path/hash/size/consumer/recovery proposal before requesting
+approval. Archive copying begins only once that exact archival action is covered;
+actual removal additionally requires verified recovery/external-backup evidence
+and explicit approval covering those exact removal targets. Reuse prior approval
+when it truly covers the same action/targets; do not ask routine questions twice.
+
+
+Status: final sweep pending after accepted Plan13 consumer freeze and exact-target
+Human authority; bounded early cleanup was completed2026-09-06. Prepared 2026-09-05.
 Owner: root release manager. Human external-backup confirmation is mandatory.
 
 ## Authorized early storage checkpoint — 2026-09-06
@@ -12,7 +28,7 @@ worktrees. This overrides the wait/copy/ask-again sequence only for the bounded
 [early batch](../source-assets/retirement/early-assets-2026-09-06.json).
 [Decision](../reviews/2026-09-06-early-asset-cleanup.md) records backup limits.
 
-Remove only exact-hash delivery candidates without current consumers or tool
+The historical batch removed only exact-hash delivery candidates without current consumers or tool
 dependencies; retain active/dormant art, fallbacks, source masters and stable
 new-art paths. Revalidate source-record ownership, replacement existence,
 retained-byte parity, clean output and current build/asset contracts. Keep a
@@ -40,7 +56,7 @@ No new artwork or gameplay is in scope. This plan does not authorize removing
 masters, exact prompts, rights/provenance, proof sheets, Git history or sole
 surviving copies. Only individually evidenced delivery copies are candidates.
 
-## Stage A — classify and copy, retaining repository files
+## Stage A — classify, obtain archival approval, then copy
 
 1. Start from the accepted consumer-freeze SHA. Rebuild actual reachability from
    typed catalogues, generated recipes, CSS, story, UI details, fallback paths,
@@ -52,7 +68,9 @@ surviving copies. Only individually evidenced delivery copies are candidates.
    reconstruction tool is still reachable until that dependency is resolved.
 3. An approved asset missing its promised consumer returns to Plan 09/13 or an
    explicit Human defer gate. New exclusions cannot be invented to improve size.
-4. Resolve and verify the absolute archive path stays within the intended
+4. Present the exact-target path/hash/size/consumer/recovery proposal and obtain
+   explicit Human approval for its archive copying before creating an archive.
+   Then resolve and verify the absolute archive path stays within the intended
    non-runtime archive root, outside `public`, `dist` and all package inputs.
    Ensure it is ignored. Copy each eligible file to a new immutable batch;
    preserve its original relative path, byte count and SHA-256 in an index and
@@ -69,8 +87,11 @@ Ask the Human to confirm that this exact hash-indexed batch has been copied to
 external storage. Record the response, date, batch ID and covered files without
 exposing private drive details. A local archive, silent timeout, prior approval
 for another batch or Git history alone is not external-backup confirmation.
-Complete all Stage-A work before asking; the approval must refer to a concrete
-reviewable archive. Wait at this gate, not halfway through preparing it.
+For external-backup/removal confirmation, complete the already-approved archive
+and restore checks first so the decision refers to concrete verified recovery.
+The earlier archival approval is separate from this backup/removal condition;
+if an existing exact-target instruction covers both, verify its conditions rather
+than manufacturing another permission round.
 
 ## Stage B — separately reviewed removal
 

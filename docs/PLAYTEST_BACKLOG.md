@@ -1,5 +1,23 @@
 # Maze so Puzzle — playtest backlog
 
+## Current planning reconciliation — 2026-09-06
+
+This is a docs-only refinement, not delivery or acceptance. The [roadmap](plans/00-integrated-implementation-roadmap.md)
+and [source synthesis](reviews/2026-09-06-vision-and-programme-refinement.md) route
+PT50/37 to [BOOK-02A](plans/BOOK-02A-silhouettes-and-discovery.md); PT35/51 plus
+PT10 reward wording to [DELIGHT-02B](plans/DELIGHT-02B-glow-and-celebration.md);
+PT09/19 and picture-led requested help to [LEARN-01](plans/LEARN-01-readable-reasoning-and-help.md).
+Plan09-P0 provides current obtainable roster/recipe/design evidence early;09-P1
+is an isolated existing-rule canary after LEARN. Full24 production remains after
+08/05/07B. Lanternlight's latest room/return guidance supersedes older large-map
+quotas. No card is closed merely by routing it into a new brief.
+
+Remaining visible follow-through stays named: pace/sound/settings/pad optical
+access, Book tabs/lore/focus, six-sprite review, joined pits/ring attachment,
+living goal spiral/poison variation, purposeful acting and reproducible Surprise
+favourites. Garden ownership/new collection awards retain09/10 gates. Physical
+comfort/whole-mix/native/comprehension evidence stays cumulative and distinct.
+
 [JOINT_ORCHESTRATION_STATE.md](JOINT_ORCHESTRATION_STATE.md) owns current
 release/acceptance and execution state. This backlog owns intake, routing and
 acceptance slices; earlier dated status paragraphs are historical evidence.
@@ -29,7 +47,8 @@ intake. These are captured requirements, not completed features.
 
 ### PT22 / V23-06 / V23-07 / V23-09 — VFX-02A first presentation slice
 
-In qualification for0.22.10: existing committed Gold/Science pickups and potion/
+Published on web0.22.10, native qualification still pending: existing committed
+Gold/Science pickups and potion/
 combat maze-Power use bounded wall-bouncing, magnetic representative tokens,
 short trails and grouped calibrated sound. The Science unit uses the requested
 teal atom motif. No new engine drop tables, Mimic rewards, rescue Gold, egg drops
@@ -474,17 +493,17 @@ remain necessary where called out below.
 | `PT-20260902-06` | Long-corridor variety | P1 | Routed | Not retested | Plan 09 and generator quality work |
 | `PT-20260902-07` | Smooth camera/play feel | P0 | UI-03 candidate | Browser reviewed; Human pending | Root UI-03 travel correction; FP-UI1 comfort retest; Plan 07B requalifies |
 | `PT-20260902-08` | Anchored touch joystick | P0 | UI-03 candidate | Browser input checks; physical iPad pending | Root UI-03 hybrid pad; Plan 08 remaining input/controller parity |
-| `PT-20260902-09` | Strong-enemy teaching | P0 | Routed | Not retested | Plan 01 with gameplay-owned suggestions |
-| `PT-20260902-10` | Completion choices | P0 | Pending-save contract implemented; reward wording follow-up | Existing Stay/Book discrepancy traced, not an audio regression; family comprehension open | Root 03M contract, remaining UI/victory and08;10 extension |
+| `PT-20260902-09` | Strong-enemy teaching | P0 | Routed | Not retested | LEARN-01 exact deficit/picture help, preserving gameplay-owned suggestions |
+| `PT-20260902-10` | Completion choices | P0 | Pending-save contract implemented; reward wording follow-up | Existing Stay/Book discrepancy traced, not an audio regression; family comprehension open | Root 03M banking preserved; DELIGHT-02B projected/banked clarity and08;10 extension |
 | `PT-20260902-11` | More and optional battles | P1 | Routed | Not retested | Plan 09 |
-| `PT-20260902-12` | Varied, smaller level portfolio | P0 | Routed | Automated | Plan 09 authored and generated-topology phases |
+| `PT-20260902-12` | Varied, purposeful level portfolio | P0 | Routed | Automated; family reasoning open | Plan09-P0/P1 and production; latest Lanternlight room/return criteria, no large-map quota |
 | `PT-20260902-13` | Remove portal glyph clutter | P2 | Accepted | Manager-tested | v0.20.1 recorded removal; preserve in 01/02 |
 | `PT-20260902-14` | Spikes and ice traversal | Epic | Needs decision | Not retested | Dedicated mechanics specification |
 | `PT-20260902-15` | Richer materials and obstacle VFX | P1 | Routed | Not retested | Plans 04 and 02; Plan 07B qualifies |
 | `PT-20260902-16` | Rewarded dead ends; quiet minimap | P1 | Routed | Not retested | Plan 09/generator plus Plan 01 |
 | `PT-20260902-17` | World and lore enrichment | P1 | Routed | Not retested | Plan 09; Plans 10 and 11 consume canon |
 | `PT-20260902-18` | Expressive portrait and emotion marks | P1 | Routed | Not retested | Plans 03, 01 and 02; Plans 05/07B support |
-| `PT-20260902-19` | Guided mechanic-introduction trails | P0 | Routed | Not retested | Plan 09 design gate; Plans 01/08 support |
+| `PT-20260902-19` | Guided mechanic-introduction trails | P0 | Routed | Not retested | LEARN-01 -> isolated09-P1 canary ->09 production;08 supports |
 | `PT-20260903-20` | Continuous contextual original OST | P0 | AUDIO-01A published/verified | Final 20 focused transitions; inherited 53/about 603 seconds resources; native accepted; P11/physical/audio-max gates open | Root AUDIO-01A; 02 creative sound; 07B final qualification; 01/08/10 consumers |
 | `PT-20260903-21` | Verified retirement of superseded runtime assets | P1 | Routed | Not retested | Plan 03 classification; Plan 07B tooling; final Plan 12 sweep |
 | `PT-20260903-22` | Mimic reveal and magnetic reward showers | P1 | Routed | Not retested | Gameplay contract/Plan 09 plus Plans 02/03/05/07B; Plan 13 fallback |
@@ -497,7 +516,7 @@ remain necessary where called out below.
 | `PT-20260904-29` | Living goal-portal spiral | P1 | Routed | Not retested | Plan 02; Plan 07B qualifies; Plan 13 fallback |
 | `PT-20260904-30` | Cast review and compact VN interludes | P1 | Routed | Not retested | Plan 01 shell; Plan 09 canon/content; Plan 11 consumes |
 | `PT-20260904-31` | AI-generated voice-acting exploration | Epic | Needs decision | Not retested | Plan 14 opportunity review; explicit follow-on only |
-| `PT-20260905-32` | Adjustable camera zoom: 4–7 tiles | P1 | Routed | Not retested | Future Plan 08 after accepted UI/MOVE-01/04/02; Plan 07B requalifies |
+| `PT-20260905-32` | Adjustable camera zoom: 4–7 tiles | P1 | Routed | Not retested | Plan08 after stable UI/lead/input contracts; affected renderer checks, then07B |
 | `PT-20260905-33` | Faint moving dark viewport edge | P1 | Routed | Not retested | Plan 04 diagnosis/fix; root MOVE-01 observes regression |
 | `PT-20260905-34` | Beautiful modality-aware focus | P1 | UI-03 candidate | Browser reviewed; Human pending | Root UI-03; UI-02 remaining polish; Plan08 input policy |
 | `PT-20260905-35` | No-scroll victory and individual friend dances | P1 | UI-03 candidate | Normal landscape checked; explicit compact/text differences | Root UI-03; Plan02 broader lifecycle, UI-02 remaining polish, Plan05 frames |
@@ -510,6 +529,8 @@ remain necessary where called out below.
 | `PT-20260905-42` | Deeper puzzles and Surprise difficulty choice | P1 | Routed | Not retested | Plan 09 authored/generated design and UI; final qualification |
 | `PT-20260905-43` | Monster/treasure rooms and maze profiles | P1 | Routed | Not retested | Plan 09 authored/generated content; Plan 10 supply audit |
 | `PT-20260905-44` | Intuitive new-mechanic exploration | Epic | Routed exploration; new rules need decision | Not retested | Plan 09 design preflight; selected rule needs approved spec; Plan 14 revisits deferred ideas |
+| `PT-20260906-50` | Book silhouettes, encounter truth and obtainable X/Y | P1 | Routed | Not implemented/retested | BOOK-02A with09-P0 eligibility;09 final roster;10 actual Garden indicator |
+| `PT-20260906-51` | Collection stickers and richer achievement fanfare | P1 | Routed | Not implemented/retested | DELIGHT-02B existing earned-art fanfare;09 all-met/Bestiary awards;10 all-Garden award |
 
 ## 5. Backlog items
 
@@ -2949,6 +2970,30 @@ Family retest and later Plan05/08/10 non-regression remain open.
   visibility. Bound any investigation to observed presentation, preserving the
   accepted one-action engine/save/cancellation contract.
 
+### PT-20260906-50 — Book silhouettes and truthful collection
+
+Source: [latest Human intake](playtests/2026-09-06-depth-discovery-and-celebration.md).
+Status: Routed; no implementation/family acceptance. BOOK-02A owns grey actual
+friend/guardian silhouettes without visible unknown copy, legitimate encounter
+reveal before rescue/completion, persistent friend discovery, conservative
+species-rescue migration and obtainable unique X/Y. Read its full acceptance
+matrix. Root reviews save/reveal authority; Sol independently reviews source and
+rendered states. Plan09-P0 supplies current denominator evidence;09 integrates the
+final roster. Plan10 alone supplies actual Garden membership. No catalogue/tester
+entry, aggregate rescue total or lore visit can fabricate an encounter.
+
+### PT-20260906-51 — collection awards and admiration
+
+Source: same latest Human intake. Status: Routed; no new awards implemented.
+DELIGHT-02B provides bounded in-maze fanfare for **existing earned** stickers and
+richer finite victory with PT10 projected/banked receipt truth. Plan09 separately
+qualifies all-friends-met and complete-Bestiary awards against a versioned
+obtainable roster, including original matching sticker art and retained prior
+awards when the roster grows. Plan10 qualifies all-Garden against actual species
+ownership. Effects never own awards or invent Garden/XP progress. Test simultaneous
+awards, cancellation/reload, muted/reduced/static play and compact readability;
+family delight/comprehension remains observed separately from unit/browser success.
+
 ## 6. Programme integration and gates
 
 **Audio/hole follow-up, 2026-09-05.** PT20's existing preparation/crossfade and
@@ -3202,8 +3247,9 @@ superseded tests; they are useful provenance.
 At each specialist acceptance checkpoint, update only the cards genuinely touched
 by that change and attach exact evidence. After Plan 11, filter the ledger and
 execute bounded Plan 13 closure. Once Plan 13 records that no pointer-producing
-work remains, perform Plan 12's archive-first package-hygiene sweep, then the
-root `RC-01` qualification.
+work remains, prepare Plan12's exact-target package-hygiene proposal. No archiving
+or deletion proceeds without explicit Human approval; then qualify the actual
+retained/approved-cleaned product through root `RC-01`.
 
 Execution plans:
 

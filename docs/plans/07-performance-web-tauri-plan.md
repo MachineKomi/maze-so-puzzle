@@ -1,5 +1,28 @@
 # Web and Tauri performance optimization plan
 
+## Continuous gates and remaining07B — 2026-09-06
+
+Planning checkpoint; no new measurement runs until the next execution prompt.
+07A is completed. Every wall/Book/VFX/help/control/content slice now measures its
+own affected idle/moving/interaction/lifecycle resources and protects its frozen
+predecessor;07B integrates the combined product after selective05 and before
+full09. It does not retroactively excuse earlier regressions.
+
+The next narrow exception is WALL-04A-R1's defined same-host paired comparison.
+Keep old-host p95 regression evidence and the inconclusive shadow isolation
+separate. Freeze browser/viewport/DPR/fonts/assets/options/scene/travel, alternate
+pairs after warmup, compare frame distributions and available traces.72 browser
+cases are not FPS qualification. No explanation based solely on laptop age or
+missing trace categories; no repeated blanket containment experiment without
+new evidence. Use the recovery receipt's exact assets and evidence limitations.
+
+Physical iPad comfort remains a target gate; Chrome/Safari family differences
+are valid observations without an established cause. Prepare one bounded changed
+comparison when useful, not another unchanged request. Full/Lite/Static must
+remain readable and provide real resource relief. Native0.22.10 and later Windows
+packages need exact artifacts, launch/reopen/control/package evidence; compiling
+alone is not acceptance. Log every build/trace/profile in the local artifact ledger.
+
 ## 0. Manager-reviewed two-pass execution addendum
 
 This agent runs twice. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and current repository authority before each pass.

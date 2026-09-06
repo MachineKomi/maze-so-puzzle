@@ -2,12 +2,20 @@
 
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
-**New-laptop resumption:** Human resumed the existing migration checkout and
-confirmed QA/Claude folders are still being transferred (USB is planned).
-[Recovery receipt](migrations/2026-09-06-new-laptop-recovery.md) records readiness
-and provenance gaps. No new product choice is needed. Controlled wall review,
-then BOOK-02A and richer celebrations remain the current order; no publication,
-Human beauty or physical-device acceptance is inferred from recovery.
+**Current Human instruction,2026-09-06: planning first.** Claude's four inputs
+are now restored. Review feedback/vision and refine the existing roadmap; the
+Human will provide the next implementation prompt. [Programme review](reviews/2026-09-06-vision-and-programme-refinement.md)
+and [roadmap](plans/00-integrated-implementation-roadmap.md) capture the recommended
+order and actual Sol's independent challenge. This instruction takes precedence
+over older safe-development/active-assignment prose below for this planning turn.
+No new product choice is needed to finish the plan. No feature implementation,
+wall promotion, native acceptance or iPad success follows from it.
+
+**Operational instruction:** keep meaningful checkpoints backed up, maintain
+[docs-only deployment guard instructions](VERCEL_DEPLOYMENT.md), and log generated
+build/proof/dependency/worktree paths in the [artifact ledger](LOCAL_ARTIFACT_LEDGER.md)
+for periodic Human review. No deletion or archiving without explicit approval.
+QA/art/native transfer remains partial; missing files are in transit, not lost.
 
 **Laptop migration pause:** Human requested development stop and a remote WIP
 handoff. No product choice is blocking; the transfer checklist is in

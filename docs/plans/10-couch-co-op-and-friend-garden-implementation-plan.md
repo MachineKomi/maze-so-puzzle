@@ -1,5 +1,22 @@
 # Plan 10 — Couch Co-op and Friend Garden Implementation Plan
 
+## Current dependency and reward contract — planning reconciliation, 2026-09-06
+
+This is planning only, pending the Human's next implementation prompt. Full
+Plan09 acceptance is the prerequisite; its early 09-P0 audit and isolated 09-P1
+teaching canary do not satisfy that gate. Consume the final roster, actual Solo
+obtainability, qualified controls and reward/save contracts before beginning the
+existing greybox sequence. The existing family continuation gate still precedes
+production characters, durable Garden writes, 24 mail overlays and six routes.
+
+Rare earned Eggs from enemies/chests join the same protected Egg queue and bag
+as other Egg sources (§11.4A); they do not introduce a second species lottery.
+The 5-Science price and proposed acquisition cadence are hypotheses for the
+existing Phase-0 supply review and Human tuning decision. Include every new Egg
+source in that review. Welcome voluntary replay and collection while keeping
+story completion, Solo access and a satisfying Garden free of compulsory farming.
+These refinements do not authorize early co-op, a new currency or changed bag odds.
+
 Human2026-09-06 [PT50/51](../playtests/2026-09-06-depth-discovery-and-celebration.md):
 Book discovery and rescue are not Garden ownership. Add a small Garden/gate icon
 beside each discovered friend's name only when that species really belongs to
@@ -10,8 +27,9 @@ This does not advance Garden implementation ahead of Plan09/greybox gates.
 
 Human2026-09-06: [V23-11 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
 adds rare friend eggs from enemies/chests after Garden/egg ownership exists,
-with bounded higher chances from stronger enemies. Specify stable rolls,
-duplicates/pity and save safety; tune in Plan13 if necessary. No campaign grind
+with bounded higher chances from stronger enemies. Specify stable source rolls,
+protected-bag eligibility, duplicates/pity and save safety in Plan10; Plan13 may
+refine an already qualified cadence. No campaign grind
 requirement or bypass of greybox/family gates is implied.
 
 > **Human-approved future implementation plan. No implementation is authorized before Plan 09 is accepted and closed.**
@@ -828,6 +846,27 @@ or returning to Adventure. First-crack preload is possible only once an exact
 reward is bound. Test depleted eligible pools, three simultaneous reservations,
 new rescue arrival and reload, without adding duplicates or changing bag odds.
 
+### 11.4A Rare earned Egg sources
+
+Consume the Human's [V23-11 request](../playtests/2026-09-06-v0223-v0224-intake.md)
+only after Garden/Egg ownership exists. An eligible enemy/chest reward can mint
+one Egg into the same queue, with the same protected bag, rescued-species
+eligibility, reservations and exact-once lifecycle above. Rarity describes the
+source drop, not a hidden rarity ranking among friends or a second species roll.
+
+- Specify the authoritative resolved enemy/chest reward event, stable source ID,
+  pinned policy/roll version, bounded chance and any pity behavior before coding.
+  Stronger enemies may have higher bounded chances; numerical rates remain a
+  tuning hypothesis. Hits, reveal frames, particles and reload cannot reroll or
+  duplicate the source reward.
+- Preserve source receipts across reload, recovery and reward presentation.
+  Inventory-full and no-eligible-friend cases use the existing queue/waiting-card
+  behavior; neither discards earned Eggs nor rewrites a reserved bag result.
+- Count these Eggs alongside Welcome, mail and Science exchange sources in
+  the final-roster cadence model. No friend becomes exclusive to a rare drop,
+  co-op, repeated farming, or Surprise luck. Proposed source pity must be explicit
+  and compatible with the bag; it cannot silently change the 5/1/1/1 category mix.
+
 ### 11.5 Science-funded Solo Eggs
 
 The working exchange is **5 available Science for one Friend Egg**, subject to the Phase 0 post–Plan 09 supply/farming audit and a Human tuning gate.
@@ -844,6 +883,14 @@ scienceAvailable = scienceDiscoveredLifetime
 - Seat 1 alone confirms the exchange. Copy frames it as powering the Garden Post/Observatory, not buying a creature.
 - No real money, premium currency, advertising, or purchase pressure exists.
 - If the post–Plan 09 audit shows that 5 causes trivial saturation or unreasonable grind, tune the price before public migration, never by silently changing a live partially completed reward bag.
+
+Model normal varied play separately from optimal short-level farming, using the
+actual final roster and all Egg/Science sources. The goal is a satisfying first
+friend, repeated meaningful Garden visits and a reasonable full-roster journey;
+do not fund a larger roster by assuming families repeat an unwanted route.
+Voluntary favourite replays and collection are welcome. Leaving a waiting Egg,
+playing without rescues, or declining completionism incurs no punishment and
+never blocks the ordinary story ending or continued Solo play.
 
 ### 11.6 Residents and care
 
@@ -1380,6 +1427,11 @@ Plan 09 accepted
   campaign, multiplying an old estimate, or funding new friends through grind.
   Preserve bound Egg identities and existing durable discoveries across roster
   versions; new eligibility cannot reroll an already reserved reward.
+- Include V23-11 enemy/chest Egg sources in the same supply and source-receipt
+  audit, with bounded Power-linked chance/pity hypotheses. Compare varied play
+  with deliberate replay/farming; report both without treating voluntary replay
+  itself as a defect. Freeze the qualified acquisition policy before public
+  Garden migration rather than deferring its first safe specification to Plan13.
 - Carry PT42's selected/resolved difficulty and learned-rule contract through
   ordinary Duo entry/exit and shared menu focus. Separate Duo records remain
   truthful about permissive cargo play. Neither joining nor leaving may reroll

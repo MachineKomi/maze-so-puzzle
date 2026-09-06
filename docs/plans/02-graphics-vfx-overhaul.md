@@ -1,5 +1,16 @@
 # Graphics and VFX overhaul plan
 
+## Current remaining tranche — 2026-09-06
+
+Planning checkpoint; implementation awaits the next Human prompt. After wall
+qualification and BOOK-02A, execute [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md):
+continuous pickup glow/readable receipts, friend-led victory and earned-sticker
+fanfare. Its PT10 projected/banked reward truth is mandatory. Then advance
+LEARN-01 and the early Plan09 canary; broad ambient polish must not hold them.
+Living goal spiral, poison variation and other event/hazard cards remain named
+work with their owning terrain/presentation seams before affected05/07B consumers.
+Use one existing director/Canvas/audio owner; no new engine awards or XP here.
+
 ## Latest celebration requirement — 2026-09-06
 
 Consume [PT35/PT51 intake](../playtests/2026-09-06-depth-discovery-and-celebration.md):
@@ -9,10 +20,11 @@ earned events, preserve controls/completion truth, mute and reduced/static.
 Use existing approved stickers now; three new collection stickers depend on
 Plan09 obtainable roster / Plan10 Garden truth. No fictional Garden/XP progress.
 
-## VFX-02A implemented candidate — 2026-09-06
+## VFX-02A delivered on web0.22.10; native qualification pending — 2026-09-06
 
 Bounded reward-first code, independent Sol source review and24-case production
-browser qualification are complete; native/frozen publication is in progress.
+browser qualification are complete and web0.22.10 is published. The separately
+frozen native0.22.10 artifact still awaits its own qualification/publication.
 [VFX Bible](../VFX_BIBLE.md) now owns the delivered seam, including typed combat
 transfer starts530/960/1400ms (contacts and2220ms total unchanged), grouped exact
 values, one24/12-token Canvas, wall substeps, live presented-Ame homing and
@@ -78,9 +90,9 @@ edges and Lite/Reduced/Static behavior. No glow fix ships in v0.22.4 or UI-01A.
 
 ## 0. Manager-reviewed execution addendum
 
-This addendum is execution authority and supersedes any conflict in the planning body. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and the implementation-time Art Bible, UI/UX spec, Lighting spec, and Gameplay spec before changing code.
+This addendum governs the remaining full programme subject to the current bounded DELIGHT-02B exception and roadmap order above; it does not override that later authority. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, and the implementation-time Art Bible, UI/UX spec, Lighting spec, and Gameplay spec before changing code.
 
-Execution begins only after Plans 07A, 06, 03, root checkpoint 03M, 01, the Human-approved pre-FP-UI1 movement-comfort checkpoint, and 04 are accepted. Re-resolve every symbol against current `HEAD`; consume the landed scene/render/anchor and 03M completion/door/Mimic/reward contracts rather than independently refactoring `MazeTerrain`, `App.tsx`, styles, gameplay state, or input state.
+Consume the accepted07A/06/03/03M/01/movement foundations. DELIGHT-02B begins after the wall qualification decision and BOOK-02A against qualified scene seams; unrelated04-B/C/PT36/HOLE-02 completion is not its prerequisite. Later Plan02 work that uses those terrain/grounding surfaces retains their affected predecessor gates. Re-resolve every symbol against current `HEAD`; consume the landed scene/render/anchor and 03M completion/door/Mimic/reward contracts rather than independently refactoring `MazeTerrain`, `App.tsx`, styles, gameplay state, or input state.
 
 ### Execution refinement — 2026-09-05
 

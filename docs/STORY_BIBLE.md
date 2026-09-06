@@ -127,14 +127,19 @@ are not villains, sources of suffering, or permission to introduce new attacks.
 Every one remains an enthusiastic guardian under the Polite Sword Rule.
 Weapons, horns, wings, coils, size, bubbles and teeth communicate personality
 and challenge silhouette only. They do not imply damage, weapon reach, charm,
-chase, constriction, drowning, poison, sacrifice or status effects. Under
-`PT-20260903-22`, each approved Mimic family first appears as its matching closed
+chase, constriction, drowning, poison, sacrifice or status effects. The historical
+03M v1 form of `PT-20260903-22` says each approved Mimic family first appears as its matching closed
 chest. Its first interaction commits one deterministic, save-stable result: a
 good reward chest 65% of the time or the visible Mimic guardian 35% of the time.
-The family changes the chest's look and personality, not those rules. Until that
-exact gameplay contract is implemented, each closed/open/enemy art triplet
-remains reserved or dormant and must not be substituted with an always-visible
-encounter. The
+That historical probability stays pinned for content using that version; it is
+not a mandatory probability for future placements. Newer Human PT22 direction
+routes prospective policies to [Plan 09](plans/09-campaign-expansion-24-mazes-plan.md):
+designer-owned, versioned and solvability-safe outcomes, with required-path
+placements proved safe for every permitted result. The Story Bible does not
+override those gameplay policies or reinterpret historical ordinary Candy Mimic
+encounters. Each future closed/open/enemy art triplet remains reserved or dormant
+until its owning gameplay contract and runtime admission are qualified; artwork
+alone does not admit a disguised family or substitute an always-visible encounter. The
 Succubus and Cultist need explicit Human review of child-facing names as well as
 art. Exact visual and safety construction lives in
 `docs/enemies/ENEMY_FAMILY_SHEET.md`.

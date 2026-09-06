@@ -1,5 +1,20 @@
 # UI-02 — Adventure Book, focus and victory polish
 
+## Current split and authority — 2026-09-06
+
+Planning checkpoint; implementation awaits the next Human prompt. PT50 supersedes
+older visible-all-Friends and question-mark/no-silhouette restrictions below.
+[BOOK-02A](BOOK-02A-silhouettes-and-discovery.md) now owns that first discovery/store
+slice before the bounded [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md) victory/
+fanfare tranche. [LEARN-01](LEARN-01-readable-reasoning-and-help.md) follows, then
+remaining Book/lore/focus/optical work prepares08. Preserve the delivered five-page
+core and earned sticker viewer. Do not wait for all speculative Plan02 work.
+
+Astra assigns one runtime writer and actual Sol independent review; no new
+Human-created specialist task or repeated permission is a routine prerequisite.
+Root reviews all encounter/save/receipt changes. Unknown actual silhouettes are
+intentional shape disclosure; hidden names/lore/locations remain protected.
+
 **Latest Human-directed correction, 2026-09-05:** UI-03 now implements the five-page Book, discovered bestiary, large cards, visible grey locked achievements, restrained focus and no-scroll victory layout before the corrected FP-UI1. Do not repeat or undo these slices. After Human playtest, this plan owns only remaining Book polish and newly evidenced defects. Read `UI-03-fp-ui1-correction.md` first.
 
 **v0.22.0 split, 2026-09-05:** the Human found that phone victory does scroll,
@@ -11,10 +26,10 @@ UI-02 keeps only effect-integrated verification and residual evidence-backed
 polish; do not book the same Bestiary/victory work twice.
 
 Status: core slices promoted into UI-03; remaining polish follows family evidence.
-Prepared: 2026-09-05. Owner: a fresh UI specialist task, started by the Human
-from a root-prepared prompt after Plan 02; root reviews persistence semantics,
-acceptance, checkpoint and release evidence. Root assigns disjoint ownership if
-the Human authorizes parallel work; never overlap active runtime files.
+Prepared: 2026-09-05; owner sequencing refined2026-09-06. Astra assigns the single
+runtime writer; actual Sol reviews independently. Root owns persistence semantics,
+acceptance, checkpoint and release evidence. Parallel source/design review is
+read-only unless explicitly assigned disjoint files; never overlap runtime writes.
 
 Source: `../playtests/2026-09-05-v0201-wishlist.md`, items 3, 4, 10 and 11;
 `PT-20260905-34` (focus), `PT-20260905-35` (victory), and
@@ -32,7 +47,8 @@ guardians and friends have inviting, original lore cards. Focus is
 clear and carefully styled for the current input method. Victory feels like a
 complete celebration, with every item on its popup visible without scrolling.
 
-Execute **after accepted 02 and before 08**. Read the vision, integrated roadmap,
+Execute in the current **BOOK-02A -> bounded DELIGHT-02B -> LEARN-01 -> remaining
+UI focus/optical ->08** sequence. Broad Plan02 completion is not a predecessor. Read the vision, integrated roadmap,
 this complete plan, intake/backlog cards, accepted Gameplay/Art/UI/Lighting/VFX
 specs, root MOVE-01 contract, current progress/reset/active-run modules and
 Plan 08's input ownership before editing. Historical Plan 01 prose and the
@@ -86,9 +102,11 @@ composition, ornaments and interaction styling must remain original Maze work.
 - Empty, partly discovered and complete pages should feel intentional. The
   former locked-achievement concealment rule is superseded by UI-03: display
   recognizable grey real achievement art and its earning goal, with colourful
-  earned cards. Undiscovered bestiary entries
-  use a consistent mystery treatment and never leak hidden names/lore through
-  alt text, accessible names, tooltips, filter results or eager asset requests.
+  earned cards. Undiscovered friend/guardian entries use grey actual approved
+  sprite silhouettes with no visible unknown-card copy or question mark. Neutral
+  accessible labels reveal no identity; hidden names/lore/locations stay protected.
+  Bounded mounted-page silhouette requests are allowed; eager full lore-card or
+  catalogue-wide presentation loads are not. BOOK-02A owns exact resource proof.
 
 ## 2. Encounter truth and persistence
 
@@ -124,11 +142,13 @@ before adding card content. Store semantic discovery, not a render-side guess.
   do not prove which enemy species were encountered. Start unknown enemy history
   conservatively and explain the difference in welcoming copy; never fabricate
   discoveries by scanning a completed level's current object list.
-- **Friends:** preserve documented rescue totals and unknown historical species
-  honestly. Preserve access to existing friend names/records rather than
-  silently converting the already visible roll-call into a new locked reward
-  system. Every visible friend entry opens its card; a lore visit does not
-  fabricate a rescue. Encounter-earned concealment applies to the new bestiary.
+- **Friends (PT50 supersedes the earlier visible roll-call policy):** record
+  legitimate caged-friend encounters before rescue/completion, deduplicated and
+  durable through the same progress owner. Species-specific old rescues prove
+  encounter; aggregate totals do not. Preserve unclassified history without
+  fabricating identity. Grey silhouettes reveal color/name/lore on encounter.
+  X/Y uses the reviewed obtainable roster, separate from rescue totals and future
+  Plan10 Garden ownership. BOOK-02A owns conservative migration and failure tests.
 - **Failure:** malformed/old saves and unavailable/full storage receive explicit
   safe handling. An unsupported future profile must not be replaced by defaults
   when recording an encounter. Freeze a read-only/fallback policy and prove no

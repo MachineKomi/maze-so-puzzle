@@ -1,7 +1,38 @@
 # WALL-04A-R1 — convincing depth without losing the paths
 
+## Current qualification stop rule — 2026-09-06
+
+Planning checkpoint; no implementation/measurement run until the Human's next
+execution prompt. R1 source is already committed in candidate0.22.11. Use the
+[migration evidence](../migrations/wall04ar1-paused-evidence.json) and
+[new-host receipt](../migrations/2026-09-06-new-laptop-recovery.md) before resuming.
+642 fresh project tests and72 inherited browser cases do not close performance.
+Old Full p95 was16.9ms in all three baseline runs versus16.9/33.3/33.2ms in R1.
+The later cast-on/off comparison found no shadow-specific cause. Neither result
+is explained away by migration, and no iPad pass follows from local Chromium.
+
+Freeze baseline/candidate with the same serving/browser/fonts/assets/profile,
+1193×833 DPR2 Full/full-motion scene and an engine-derived equal-travel route.
+Discard warmup, run the prescribed three alternating pairs, inspect frame
+spacing/distribution and available traces plus actual-size art, then confirm the
+compact DPR2 case. Serialize work. Record scene/input/settings/source hashes and
+all failures; do not compare different step counts or call absent trace events0ms.
+Use existing proof and helpers; do not start a broad72-case rerun without a new
+change or unresolved functional concern. Per-frame path invariance is supporting
+source evidence, not proof of cheap painting/compositing.
+
+If clean comparisons pass, finish the bounded root/Sol qualification and retain
+Human P13/physical-iPad and separate native gates. If cost fails, hold R1 and
+investigate only the evidenced source. If relief still fails visually, use the
+same-scene orthographic3D comparison below, not endless opacity variants. Freeze
+that comparison's cost/quality envelope before coding. Record a promote/hold/
+replace recommendation with the precise failed gate. Safe Book/help work can use
+an isolated qualified predecessor while R1 remains held; never deploy held R1
+accidentally inside a later feature. No global renderer rewrite is authorized.
+
 Owner: Astra implementation, Sol independent review. Base: `feb04e1` / web0.22.10.
-Status: research complete; bounded prototype in progress, not visual acceptance.
+Status: committed R1 WIP; source/visual review inherited, performance/promotion
+unfinished. The diagnosis below describes the pre-R1 baseline, not missing R1 work.
 Human source: [depth/discovery intake](../playtests/2026-09-06-depth-discovery-and-celebration.md).
 
 ## Diagnosis and recommendation

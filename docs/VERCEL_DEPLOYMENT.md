@@ -16,6 +16,37 @@ production build. The repository-owned deployment safeguard skips proven non-web
 changes, while GitHub backup pushes and CI continue. See the
 [storage investigation and evidence](reviews/2026-09-06-vercel-storage-investigation.md).
 
+## Routine documentation checkpoints
+
+Keep documentation, planning and review checkpoints on the current working
+branch. The migration branch `codex/migration-wall04ar1-20260906` is covered by
+the existing `codex/**` auto-deployment exclusion. Do not move its unqualified
+0.22.11 wall candidate onto `main` merely to publish documentation.
+
+Before a docs-only commit, inspect `git status --short` and the exact staged
+paths with `git diff --cached --name-status`; stage only the intended files.
+Check changed links, relevant documentation contracts and `git diff --check`.
+Do not run `npm ci`, a game/native build or a release worktree solely to create
+a documentation checkpoint. Commit and push the reviewed checkpoint for backup;
+no version bump, preview branch, Vercel CLI deployment, Redeploy or force override
+is needed. Record newly created local outputs in the
+[artifact ledger](LOCAL_ARTIFACT_LEDGER.md), without copying their payloads into
+the documentation commit.
+
+Judge deployment eligibility from the complete range since Vercel's last
+successful deployment. A docs-only final commit can follow unshipped game work;
+that range must still build on an eligible branch. Conversely, a safely skipped
+docs checkpoint needs no replacement deployment to acquire a new source SHA.
+Do not change the guard or spoof its baseline to make a mixed range look like
+documentation. Missing baseline evidence intentionally permits a conservative
+build. The guard rules and tested exit convention below remain authoritative.
+
+For a qualified game release, use the existing Git integration once. Avoid a
+duplicate manual/CLI deployment or a routine preview followed by the identical
+production payload. An explicit preview should serve a concrete review need.
+Local cache removal cannot reclaim hosted deployment storage; any hosted
+retention/deletion proposal remains a separate exact-target Human decision.
+
 ## Backup is not deployment
 
 - Commit and push meaningful checkpoints frequently. Do not reduce backup cadence.
@@ -81,8 +112,9 @@ document and does not use client-side URL routing.
 1. Run `npm run check` locally and review the exact source diff.
 2. Push the verified commit to GitHub `main`.
 3. Allow the existing Vercel Git integration to build and promote web changes.
-   Docs-only pushes should skip. Do not create a second project or duplicate CLI
-   deployment for an already-running Git deployment.
+   A proven docs-only range since the last successful deployment should skip;
+   the final commit title alone does not establish that range. Do not create a
+   second project or duplicate CLI deployment for an already-running Git deployment.
 4. Open the canonical production URL and confirm its build label and the key
    smoke checks below. GitHub Actions and Vercel build independently, so a green
    local gate and a post-deployment smoke test are both required.

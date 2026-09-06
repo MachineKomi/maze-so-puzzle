@@ -1,5 +1,19 @@
 # UI/UX and Layout Overhaul Plan
 
+## Current remaining remit — 2026-09-06
+
+Planning checkpoint; implementation waits for the next Human prompt. Core UI-03
+is delivered and the Human praises its warm type/art/landscape composition.
+Preserve it. [BOOK-02A](BOOK-02A-silhouettes-and-discovery.md),
+[DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md) and [LEARN-01](LEARN-01-readable-reasoning-and-help.md)
+own the next bounded presentation/teaching changes. UI-02 then closes evidenced
+Book tabs/lore traversal, focus/return, enlarged text, Home/dialog/victory optical
+propagation, visible pace access, intentional sound/cog art and subtle pad cues
+before08 consumes stable semantic actions. No adaptive9–15 FOV or shell rebuild.
+Each new surface must pass actual-size/resource/motion checks immediately;07B
+is later integration, not the first performance gate. The current roadmap
+supersedes old launch instructions and completed implementation tasks below.
+
 **2026-09-06 PT50 / BOOK-02A:** [latest Human discovery contract](../playtests/2026-09-06-depth-discovery-and-celebration.md)
 supersedes unknown-card question marks/blank-only policies: actual grey
 silhouettes, no unknown visible copy, legitimate encounter reveals color/name/

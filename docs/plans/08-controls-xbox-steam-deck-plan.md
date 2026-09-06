@@ -1,5 +1,20 @@
 # Controls, Xbox Controller, and Steam Deck Plan
 
+## Current dependency refinement — 2026-09-06
+
+Implementation awaits the next Human prompt and the current roadmap sequence.
+Before08, freeze Book/help/detail/achievement overlay actions, focus and live-input
+suspension contracts plus an internal active-lead interface. Ame is the only
+admitted lead until Human-approved Alex canon/art exists. Do not add persisted
+selection, a chooser, placeholder Alex or migration just to generalize dispatch.
+An approved Alex later gets identical capability through this seam before final
+lead acting/full09/10. His art is not a blanket input-implementation blocker.
+
+HOLE-02/PT36/04-B/C gate their affected terrain/grounding consumers, not08 semantic
+controls. Consume current pace/cancel/release/steer rules and the approved future
+4/5/6/7 camera span/default6 choice; no adaptive9–15 FOV or second game clock.
+Keep physical Xbox/Deck/iPad evidence distinct from synthetic browser cases.
+
 **Accepted shared contract, 2026-09-06:** PLAY-A is published in v0.22.3;
 PLAY-B source is independently accepted and frozen for v0.22.4 at `45d8437`.
 Use stationary rescue with unchanged origin/steps, cage-anchored follower join,
@@ -48,7 +63,7 @@ preference changes framing, not the HUD layout or gameplay/reveal rules.
 
 ## 0. Manager-reviewed execution addendum
 
-Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, VFX and UI-02 Book/focus specs, this complete plan, and current code before implementation. Execution occurs after Plans 07A, 06, 03, root checkpoint 03M, 01, root movement checkpoint MOVE-01, 04, 02, and UI-02, and before Plan 05 animation. `UI-02-adventure-book-and-focus-polish.md` owns the bounded intervening UI return; this does not expand Agent 01's running assignment.
+Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Gameplay, Art, UI/UX, Lighting, VFX and UI-02 Book/focus specs, this complete plan, and current code before implementation. Execution consumes the accepted foundations and current bounded BOOK-02A/DELIGHT-02B/LEARN-01/UI focus and active-lead contracts before Plan05 animation. Unrelated HOLE-02/PT36/04-B/C work is not a blanket predecessor; affected terrain/grounding remains gated for its own consumers. The current roadmap and UI-02 split own the intervening UI return; no historical Agent01 assignment restarts.
 
 ### Ownership and architecture amendments
 

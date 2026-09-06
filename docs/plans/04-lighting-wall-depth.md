@@ -1,5 +1,20 @@
 # Lighting and wall-depth implementation plan
 
+## Current execution boundary — 2026-09-06
+
+Planning only until the next Human implementation prompt. WALL-04A-R1 source is
+committed candidate0.22.11, not a new prototype assignment or a deployed release.
+Its [qualification brief](WALL-04A-R1-convincing-depth.md) and recovery receipt
+own the unresolved timing/visual gate. Compare fairly; the new laptop and later
+shadow-isolation result do not establish a cause or pass. If held, isolate a
+qualified predecessor before other work; do not carry unqualified walls to release.
+
+HOLE-02/04-B/04-C/PT36 qualify affected terrain/regions/held and actor grounding
+before their05/07B/full09 consumers. They do not blanket-block Book, LEARN or08
+semantic controls. Preserve selected pit B and face-protecting held composition
+until actual proof justifies a correction. No broad03 restart or canonical-master
+shadow baking. Latest roadmap order supersedes historical next-work prose below.
+
 ## Current Human correction — WALL-04A-R1
 
 04-A's **visual goal is not accepted**: depth is too subtle/disappointing,

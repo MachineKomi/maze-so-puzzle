@@ -4,18 +4,61 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-**OVERRIDE: Human paused development for laptop migration,2026-09-06.**
-The next first-turn prompt is [NEW_LAPTOP_PROMPT](../migrations/NEW_LAPTOP_PROMPT.md).
-Recover `codex/migration-wall04ar1-20260906` at `C:/GameDev/maze-game`, inspect
-the paused WALL-04A-R1 gate, and do not execute the older active assignment below
-without reconciling the current handoff. No0.22.11 deployment has occurred.
+## Current dispatch contract — planning checkpoint, 2026-09-06
 
-**Recovered on new host:** [recovery receipt](../migrations/2026-09-06-new-laptop-recovery.md)
-records the exact checkout, passing project/build/static checks and pending
-external evidence/art/native prerequisites. Astra owns the next controlled wall
-qualification, with actual Sol independent review; then BOOK-02A and Plan02's
-richer celebrations. The migration/recovery override still outranks assignments
-below. No release is authorized by a helper or documentation checkpoint.
+Implementation waits for the Human's next execution prompt. This section and
+[roadmap section4](00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates)
+replace conflicting older assignments. Read the [programme review](../reviews/2026-09-06-vision-and-programme-refinement.md)
+for source synthesis and actual Sol's independent dependency challenge.
+Migration recovery is complete enough to plan; QA/art/native transfer remains
+partial. Claude inputs are restored. Web0.22.10, Windows0.22.9 and candidate
+0.22.11 remain distinct. The latter is unpromoted; no prompt below authorizes a
+release, deletion, archiving or a claim of physical-device acceptance.
+
+On the next implementation instruction, the root orchestrator must:
+
+1. Verify actual root/branch/HEAD/dirty ownership, current joint state and changed
+   Human input. Keep one runtime writer, assign actual Sol independent review and
+   serialize builds/performance jobs. Preserve foreign work and origin-local saves.
+2. Resume **WALL-04A-R1 qualification**, using its complete brief, migration
+   handoff, paused evidence and new-host receipt. Freeze paired inputs, run only
+   the defined shortest fair comparison and actual-size review, and name any
+   failed gate. Do not reimplement the completed R1 source or dismiss old timing.
+   A held R1 does not authorize deploying it alongside an otherwise good Book.
+3. In parallel, assign a read-only **Plan09-P0** roster/reachability/teaching and
+   complete Surprise-recipe audit. Its obtainable-ID output is a Book prerequisite;
+   it changes no production map, content fingerprint, seed behavior or save.
+4. Advance through [BOOK-02A](BOOK-02A-silhouettes-and-discovery.md), then
+   [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md), then
+   [LEARN-01](LEARN-01-readable-reasoning-and-help.md), each as a bounded reviewed
+   checkpoint. Read the complete owning plans/specs and source, freeze the exact
+   contract and affected evidence before edits, and update the implementation
+   specification when behavior changes. No new Garden/XP or duplicate VFX02A work.
+5. Assign **Plan09-P1** isolated existing-rule teaching fixtures after LEARN.
+   Use one first-use pocket and one room/changed-state-return comparison with
+   ordinary/perfect engine proofs and honest comprehension evidence. This is not
+   permission for full campaign production, generator mutation or new mechanics.
+6. Finish required UI focus/accessibility/optical work and the internal active-lead
+   seam, then08 controls. Ame alone is admitted until Alex canon/art is approved;
+   no early chooser or save migration. Terrain/held grounding work gates its own
+   consumers before05/07B/full09, not unrelated08 semantic actions. Follow the
+   remaining roadmap order through selective05,07B,09,10 and final convergence.
+
+A slice handoff contains: player outcome and explicit non-goals; current source
+and owner contracts; dependency/gate snapshot; acceptance examples; exact diff,
+meaningful tests/geometry/frame/resource evidence; actual independent findings and
+resolutions; unresolved Human/device gates; rollback; updated specs/backlog and
+artifact paths. A historical prompt is a reference, not a fresh assignment.
+
+Commit/push meaningful checkpoints using [docs-only deployment instructions](../VERCEL_DEPLOYMENT.md)
+and log new local build/proof/worktree outputs in the [artifact ledger](../LOCAL_ARTIFACT_LEDGER.md).
+Do not build merely to back up documentation. Runtime publication requires the
+current release gates; native compilation alone does not accept a Windows release.
+
+## Historical assignments and source context
+
+Everything below is retained dated context, including labels such as active/next.
+It does not override the current dispatch contract or latest Human instruction.
 
 **Active assignment: finish v0.22.10 VFX-02A qualification/publication.** Root
 Astra owns runtime/build/release; actual Sol independently reviews. Read

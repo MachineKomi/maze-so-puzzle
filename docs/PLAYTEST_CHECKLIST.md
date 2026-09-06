@@ -1,5 +1,15 @@
 # Family playtest checklist
 
+**Planning update,2026-09-06:** [refined programme](plans/00-integrated-implementation-roadmap.md)
+is ready for the next Human execution prompt. No new build or family assignment
+is created by this docs checkpoint. Keep P13/P14 and earlier pending observations.
+Future previews should add one primary question and an affected regression journey:
+Book encounter-before-rescue and X/Y meaning; victory Stay/Book/Next reward truth;
+help/Power-gap understanding; then an existing-rule choice/return puzzle. Record
+build/device/settings and actual help used. Do not turn one family into invented
+percentages or request repeated unchanged iPad comparisons. The full new-host
+wall diagnostic remains agent work before a useful changed physical comparison.
+
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 The Human will test when available; safe development continues meanwhile.
 Keep completed observations and build identities when newer builds arrive.

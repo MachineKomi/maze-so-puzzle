@@ -1,5 +1,30 @@
 # Plan 09 — expand the authored campaign from 16 to 24 mazes
 
+## Current execution contract — planning reconciliation, 2026-09-06
+
+This contract supersedes older whole-plan start wording below. This update is
+planning only; implementation waits for the Human's next implementation prompt.
+
+- **09-P0, during wall qualification/Book work:** read-only source/evidence
+  preflight of the eligible friend/guardian roster, actual obtainable placements,
+  existing ordinary/perfect reachability evidence, and current Surprise recipe
+  identity/compatibility. Record gaps and dependencies; do not change levels,
+  generators, saves, eligibility or achievement state. This supplies BOOK-02A
+  with honest denominator inputs without claiming the final campaign is ready.
+- **09-P1, after [LEARN-01](LEARN-01-readable-reasoning-and-help.md):** a bounded
+  existing-rule teaching canary, limited to design and isolated test fixtures.
+  Compare one first-use pocket and one return-after-growing-stronger layout;
+  specify prediction, visible clue, safe wrong turn, feedback and payoff. Prove
+  ordinary zero-rescue, exact-perfect and current-state Hint routes through the
+  engine in the isolated fixtures. No canonical map, campaign order, fingerprint,
+  generator, production save or new mechanic changes belong to this tranche.
+  Family observation may remain pending while independent design/review proceeds;
+  fixture success is not child-learning or production-content acceptance.
+- **Full 09, after Plan 08, Plan 05 and Plan 07B and the other consumed predecessor
+  contracts are qualified:** the production phases below integrate and qualify
+  the final campaign, generated content, roster awards and bounded recipe/replay
+  UI. Early preflight/canary completion does not close Plan 09 or unlock Plan 10.
+
 Human2026-09-06 [PT50/51 collection contract](../playtests/2026-09-06-depth-discovery-and-celebration.md):
 audit every counted Book friend/guardian against obtainable campaign/Surprise
 placements before enabling all-met achievements. Freeze eligible roster revision
@@ -10,13 +35,15 @@ from encounter or rescue counts. No question marks/repeated unknown-card prose.
 
 Human2026-09-06: [V23-08/10 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
 requires approved enemy coverage in campaign, Surprise pools and bestiary, plus
-seed/version/options recipe capture for curating good Surprise layouts. Player
-favourites/replay UI may finish in Plan13; do not confuse seed-only reproducibility
-with a stable saved level across generator revisions. Preserve Green Tea Skeleton
+seed/version/options recipe capture for curating good Surprise layouts. Bounded
+player favourites/replay UI belongs to Plan09's production generator tranche
+(§10.5); Plan13 may refine it after qualification. Do not confuse seed-only
+reproducibility with a stable saved level across generator revisions. Preserve Green Tea Skeleton
 as a friend while introducing the distinct approved enemy skeleton families.
 
-Status: manager-authored implementation plan; execute only after checkpoint 03M,
-Plans 01–08, UI-02, and both Plan-07 passes are accepted
+Status: manager-authored implementation plan; early 09-P0/09-P1 have the bounded
+scope above. Full production consumes checkpoint 03M, Plans 01–08, UI-02, and
+both Plan-07 passes at their accepted current contracts.
 
 Owner: root integration agent
 
@@ -70,7 +97,8 @@ contain an unresolved cage, door or enemy: land on eligible floor, then resolve
 the stationary interaction from an adjacent square. Connected ditch art/topology
 is a separate Phase-2 predecessor, not part of the existing-art HOLE-01A preview.
 
-UI-02 lands after 02/before 08 and owns the Book interface/discovery foundation.
+The current UI-02 split is BOOK-02A -> bounded DELIGHT-02B -> LEARN-01 ->
+remaining UI/focus before08. It owns the Book interface/discovery foundation.
 Consume its five tabs, selected-card viewer, encounter entry IDs, root-reviewed
 migration and current lore. This plan completes final 24-maze/friend/guardian
 content and true discoverability through those APIs; it does not build a rival
@@ -101,11 +129,11 @@ Expand the campaign to 24 authored, story-backed mazes:
 
 The expansion should feel like the game discovered more imagination, not merely more length. Each addition must be fair, legibly solvable, funny, educational, visually and aurally distinctive, rewarding to explore, and worth replaying. Later chapters become more puzzly through meaningful inference and combination while remaining safe, intuitive, and recoverable for Ame, with optional family help welcomed.
 
-This plan is executed by the root manager only after the specialist systems are stable, because the new content must use their final gameplay, art, layout, lighting, VFX, animation, controller, persistence, and performance contracts.
+Full production is executed by the root manager after the specialist systems are stable, because new content must use their final gameplay, art, layout, lighting, VFX, animation, controller, persistence, and performance contracts. The bounded 09-P0/09-P1 learning work above can inform that integration earlier.
 
 ## 2. Read-first execution gate
 
-At execution time, do not assume the repository still resembles the planning baseline. Begin from a clean, reviewed, pushed checkpoint after Plan 07B and read in full:
+For full production, do not assume the repository still resembles the planning baseline. Begin from a clean, reviewed, pushed checkpoint after Plan 07B and read in full. Early 09-P0/09-P1 must re-read the current contracts relevant to their isolated scope; they do not implement missing production foundations:
 
 1. `docs/GAME_VISION_AND_DESIGN_SPEC.md`.
 2. `docs/plans/00-integrated-implementation-roadmap.md`.
@@ -320,7 +348,7 @@ artifact containing:
 11. Neighbour comparison proving the chapter is not accidentally near-identical
     in mood, enemy/friend ensemble, material regions, asset family, route grammar,
     or payoff, plus the updated campaign-wide coverage/debut, topology-variety,
-    large-level-exception and teaching-pocket ledgers.
+    spatial-interest/pacing and teaching-pocket ledgers.
 
 Do not approve a map solely from ASCII appearance, route length, or one solver pass.
 
@@ -893,7 +921,39 @@ actual final roster before any durable Garden migration.
   compatibility,
   and exact golden seeds remain stable for each supported historical version.
 
+### 10.5 Reusable Surprise recipes and bounded replay UI
+
+This is part of Plan09 production, not an unspecified Plan13 feature. Let the
+player save a liked Surprise layout, find it again and deliberately replay it
+through the existing menu/control patterns. Keep the first tranche small; a
+catalogue redesign, cloud account or sharing service is not required.
+
+- Capture the complete resolved recipe: seed, topology/rules version, generated
+  content and presentation-roster versions, requested/resolved difficulty, and
+  all options/eligibility inputs that affect the reconstructed maze. Inspect
+  current source before choosing its serialized form; a seed alone is inadequate.
+- Preserve stable recipe identity and a legible player-facing label. Replaying
+  a favourite uses its pinned recipe, not today's preference or newest roster.
+  Store favourite metadata in a distinct versioned field/record under the existing
+  progress/save owner, separate in meaning from completion/current-run records.
+  Do not create a second persistence store or an independent reset policy.
+- Specify supported-version reconstruction and retention before shipping. An
+  unsupported old recipe receives an honest unavailable/compatibility result;
+  never silently generate a different maze under its old name or discard it.
+- A saved recipe restarts the layout. It is not mid-run resume and does not
+  promise to restore collected items, position, Power or a partial generated run.
+  Launch must use existing explicit active-run replacement/return safeguards.
+- Verify capture → save/reload → select → replay against the same resolved
+  level fingerprint and pinned historical fixtures; changed current preferences
+  cannot alter it. Check malformed/unsupported recipes, save failure, duplicate
+  capture, controller/touch return focus and active-run preservation. Evidence
+  must distinguish reusable layouts from unsupported generated-run persistence.
+
 ## 11. Implementation phases
+
+These are full-production phases after the predecessor gates. Consume 09-P0's
+inventory and 09-P1's canary findings as inputs, rebaseline them against current
+source, and keep any unobserved family-learning claim explicitly pending.
 
 ### Phase 0 — integrated audit and design freeze
 
@@ -981,11 +1041,16 @@ play evidence rather than treating a speculative ASCII map as immutable.
   Record cohort/solver workload and runtime so validation stays reproducible on
   the actual host. Do not silently drop slow seeds or weaken completeness when
   adding roster variety increases search cost.
+- Integrate §10.5's bounded recipe capture, favourites and replay UI as its own
+  reviewable slice of the production generator tranche. Prove versioned layout
+  reconstruction and safe launch before widening generated-content cohorts;
+  do not imply that recipe storage adds generated mid-run resume.
 
 Exit: the full campaign migration matrix passes with placeholder/test definitions
 behind a development boundary; the new generated topology version exercises all
 frozen families through golden seeds and solver/Hint/structural tests; no
-historical seed, record or campaign access is reinterpreted.
+historical seed, record or campaign access is reinterpreted, and bounded recipe
+capture/replay passes its persistence, compatibility and active-run safety checks.
 
 ### Phase 2 — inherited-campaign remediation
 
@@ -1011,8 +1076,8 @@ historical seed, record or campaign access is reinterpreted.
   eight new chapters. Record whether compacting reduced fatigue without weakening
   puzzle identity, wonder or satisfying combat.
 
-Exit: the inherited sixteen already satisfy the final large-level cap, topology
-portfolio, Rainbow Power Parade, terminal-reward and teaching contracts; durable
+Exit: the inherited sixteen satisfy the 24×24 ceiling, spatial-interest/pacing,
+topology portfolio, Rainbow Power Parade, terminal-reward and teaching contracts; durable
 progress is preserved and changed active runs fail or migrate exactly as specified.
 
 ### Phase 3 — four inserted chapters
@@ -1033,9 +1098,10 @@ Exit: all four integrate without flattening adjacent chapters or relocking retur
 - Implement slots 21–24 sequentially, validating the arc before increasing capstone complexity.
 - Preserve Chapter 20's full payoff and ensure Chapter 21 feels like a welcome encore.
 - Keep Science thematic/non-consumptive and use only approved mechanics.
-- Maintain the topology portfolio and large-level cap; the sole default new
-  >16 set piece is Chapter 24 unless the Phase-0 whole-campaign audit explicitly
-  trades that exception with another level.
+- Maintain the varied topology portfolio and 24×24 ceiling. Room-rich 20×20+
+  chapters are welcome where their spatial relationships, discoveries and pacing
+  earn the travel. There is no maximum-four large-level quota, prescribed six-map
+  shrink operation, or rule reserving a >16 new chapter for Chapter 24.
 
 Exit: 21–24 form a coherent curve; Chapter 24 has multiple fair orderings and optional mastery rather than a single endurance corridor.
 
@@ -1285,3 +1351,6 @@ Plan 09 is complete only when:
     skippable/replayable contract; every new/revised chapter's intended discovery,
     recovery and payoff has concrete design and family evidence with sample
     limits disclosed rather than inferred from solver success.
+16. reusable Surprise recipe capture, favourites and replay pass §10.5's pinned
+    reconstruction, compatibility, persistence, input/focus and active-run safety
+    checks; the UI clearly distinguishes replaying a layout from mid-run resume.

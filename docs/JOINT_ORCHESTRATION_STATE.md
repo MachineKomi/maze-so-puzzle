@@ -7,17 +7,39 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **CURRENT: new-laptop recovery, 2026-09-06.** Human resumed this existing
-  project at the exact migration branch/checkpoint. [Recovery receipt](migrations/2026-09-06-new-laptop-recovery.md)
-  owns verified tooling, restored proofs, fresh checks and remaining transfer
-  gaps. Astra is the single writer/heavy-check owner; actual GPT-5.6 Sol reviewed
-  wall source and scoped helper fixes independently. Fresh 642 project tests,
-  build/static budgets and 12 deployment-guard checks pass; fresh art checks
-  expose ledger-byte and historical environment reproducibility limits. External
-  QA/Claude evidence is in transit by Human USB/upload. Live web remains0.22.10,
-  Windows0.22.9, candidate0.22.11 unpromoted. Next is the controlled frozen local
-  wall A/B and visible review, then BOOK-02A and richer Plan02 celebrations.
-  No deployment, native acceptance, Human beauty or iPad pass follows.
+- **CURRENT: roadmap refinement,2026-09-06; implementation awaits the next Human prompt.**
+  Human restored four Claude inputs to `C:/GameDev/maze-game-claude-review` and
+  requested a deep review of vision, feedback and plans before further execution.
+  [Programme synthesis](reviews/2026-09-06-vision-and-programme-refinement.md)
+  records source identities, current-code corrections and actual Sol's independent
+  review. [Roadmap section4](plans/00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates)
+  and [dispatch](plans/EXECUTION_PROMPTS.md) now own the remaining sequence:
+  wall qualification + read-only09-P0 -> BOOK-02A -> bounded DELIGHT-02B -> LEARN-01
+  -> isolated09-P1 teaching canary -> focus/lead interface and08. Affected terrain/
+  grounding and approved Alex integration precede selective05/07B/full09; then10
+  and the wider final programme. No implementation launched by this plan update.
+  One runtime writer; actual Sol independent review, Claude bounded advice only.
+
+- **Recovery boundary retained:** [receipt](migrations/2026-09-06-new-laptop-recovery.md)
+  owns exact tooling/restored proofs and prior fresh642 project/build/static/12guard
+  checks. Claude text is present. QA now contains partial playtests/v0220 and
+  v02210 plus the Human's copying-in-progress README; migration wall/worktree
+  packet and native0.22.10 attachment remain absent. Completeness/hash verification
+  is pending; see the18:44 UTC artifact-ledger arrival note.
+  Full-art validation has ledger-byte errors and a historical environment/zlib
+  reproduction mismatch. Live web remains0.22.10, published Windows0.22.9,
+  candidate0.22.11 unpromoted and native0.22.10 separately unfinished. New-host
+  matched wall timing remains the first engineering gate. No physical iPad,
+  Human wall beauty, native release or educational success is implied.
+  [Docs-only deployment instructions](VERCEL_DEPLOYMENT.md) preserve backup pushes
+  without routine web builds; [artifact ledger](LOCAL_ARTIFACT_LEDGER.md) records
+  generated local outputs/holds and exact-target cleanup review. No deletion or
+  archiving without explicit Human approval; historical approvals below are scoped.
+
+### Historical checkpoint notes
+
+These dated receipts retain the status at that checkpoint. Their active/next
+labels are historical; the current contract above and §3/§5 govern execution.
 
 - **MIGRATION CHECKPOINT: historical pause,2026-09-06.** Human stopped development
   before the wall release/performance gate closed. Resume from
@@ -32,9 +54,9 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   is implied. Read the handoff before merging this branch or running any release.
 
 - **Latest priority / in progress:** [WALL-04A-R1](plans/WALL-04A-R1-convincing-depth.md)
-  responds to Human's still-unmet depth/rim goal. Research and source diagnosis
-  captured; stronger same-footprint relief is being prototyped, not accepted or
-  deployed. Sol independently confirmed top=original∩raised geometry; rear and
+  responds to Human's still-unmet depth/rim goal. Stronger same-footprint
+  relief is committed WIP; qualification is pending, not a new implementation
+  assignment or deployed preview. Sol independently confirmed top=original∩raised geometry; rear and
   front contributing contours must both supply the rim. [New intake](playtests/2026-09-06-depth-discovery-and-celebration.md)
   also routes PT50 Book silhouettes/discovery/X/Y, PT51 collection achievements,
   Garden membership and larger victory/fanfare. No Garden or XP execution yet.
@@ -220,9 +242,12 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - Release worktrees use locked dependencies and external browser tooling, without Playwright junctions in their dependency trees. The original candidate checkout's ignored tooling junctions remain local-only history. Native QA used a hash-verified private copy of the FP-UI1 profile; all 334 original files remained unchanged.
 - Discover this handoff's exact documentation commit with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`. Inspect branch, HEAD, origin and `git status --short --branch` on arrival; dated receipts do not imply the current checkout is clean.
 
-## 2. Release and deployment
+## 2. Historical release and deployment evidence
 
-### Current v0.22.8 HOLE-01A — web/Windows published and independently verified
+Current web/Windows/candidate identities are in §1 and the recovery receipt.
+The records below preserve earlier releases and their original evidence limits.
+
+### Historical v0.22.8 HOLE-01A — web/Windows published and independently verified
 
 - Frozen source/tag `3acaf5872dd921f15929c330eeae46053b2a6362`.
 - Exact-source CI34022523242 verify/desktop success and Production6290975438
@@ -269,7 +294,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   installer/signing and iPad-camera acceptance are not implied. v0.22.6 fallback
   preserves the same save rules and preferences; never erase player data.
 
-### Immediate fallback v0.22.6 AUDIO-01V2 — published and independently verified
+### Historical fallback v0.22.6 AUDIO-01V2 — published and independently verified
 
 - Frozen runtime/tag: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`.
   [Root acceptance](reviews/2026-09-06-v0226-engineering-acceptance.md) and
@@ -449,72 +474,42 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Current checkpoint complete: v0.22.8 HOLE-01A Phase1 published and independently
-verified.** Exact source, CI, web parity and four public downloads are in §2.
-Keep the frozen release checkout clean; do not repeat accepted audio or rules work.
+**Planning turn only.** Human will prompt implementation after reviewing this
+refinement. Use the current contract in §1, the [programme synthesis](reviews/2026-09-06-vision-and-programme-refinement.md)
+and [execution packet](plans/EXECUTION_PROMPTS.md). Earlier completed assignments
+are preserved in Git and dated receipts; they are not current launch authority.
 
-**Preparation checkpoint complete:** root Astra implemented explicit legacy/current art
-checks, exact approved-v14 archive/recovery, field-level manifest diagnostics and
-two clean pit originals. Actual Sol conditionally accepted the source repair,
-requiring documented clean-checkout recovery/validation before a portability
-claim. That condition is met at final source `96b898d`: mandatory validation
-fails before recovery, restores49 original bound files, then passes0errors/
-429historical warnings.142 art tests and21terrain tests pass. See
-[checkpoint evidence](reviews/2026-09-06-hole02-proof-and-source-checkpoint.md).
-Human selected rounded-square **B** and explicitly delegated design/implementation
-while busy; no repeated approval question is needed. Connected geometry preview
-is source-only and not a shipped art replacement. Runtime v0.22.8 is unchanged.
+At the next execution prompt, Astra owns the shortest defined frozen local wall
+A/B and actual-size review; Sol challenges source and evidence independently.
+The old-host p95 regression and later inconclusive cast isolation both remain
+open evidence. Do not infer that a different laptop fixes them. If R1 is held,
+independent Book/help work can use an isolated qualified predecessor; no later
+feature release may accidentally carry unqualified R1. Human P13 is separate.
 
-**Next delivery:** **Plan02 reward-first** against published04-A scene seams:
-bounded wall-bouncing Gold/Science/maze-Power, magnetic collection, trails and
-coordinated sound. No permanent XP claim. Read the complete current Plan02 and
-its top addendum before writing; preserve authoritative exactly-once awards and
-save/solver truth. New enemy/rescue drop tables need an explicit root-reviewed
-seeded rules/save tranche, not decorative particles that grant currency.
-Qualified HOLE-02 integration follows separately; 04-A walls are now delivered.
-The [Astra/Sol next-focus review](reviews/2026-09-06-v0228-next-focus-disposition.md)
-supersedes the blanket Phase2/PT36 hold. Only their affected ditch/receiver and
-actor/held surfaces remain gated; do not claim full Plan04 acceptance. Preserve
-rules3, `surprise-v6`/revision2, current input/travel/save and calibrated audio.
-Family P13/P5–P12 may remain pending during safe delivery.
+Read-only09-P0 supplies obtainable roster and teaching/recipe evidence during
+wall/Book work. BOOK-02A, DELIGHT-02B and LEARN-01 then deliver bounded player
+benefits before an isolated09-P1 canary. Current runtime already contains reward
+showers, gain equations and enemy discovery; do not restart those implementations.
+Plan09 production owns new content/reward/Mimic/roster rules and reusable Surprise
+recipes; Plan10 owns real Garden membership and its Egg/co-op gates.
 
-Latest Human device report: wife compared Chrome/Safari on iPad at ~08:30 today,
-unknown build/settings; Chrome smoother but residual camera stutter. Record is
-[here](user-playtests/2026-09-06-ipad-chrome-safari-comparison.md). It is not a
-controlled engine diagnosis or acceptance. Claude's full-world mask premise is
-confirmed in source, actual raster cost unmeasured. Existing audio has shared
-gain buses and a24-voice cap; it is not direct-to-destination per voice.
+Missing QA/native/art transfers limit historical proof and native qualification,
+not reading/design. The new-host full-art ledger/environment discrepancies need
+source-authority reconciliation before fresh art qualification. Selected pit B
+remains approved direction; no repeated selection question is needed. Native
+0.22.10's exact artifact and launch/reopen qualification are separately pending.
 
-Remaining V22-UI-01 propagation includes Home/dialog/victory, full200% text,
-HUD pace/settings art and remaining optical refinements. Preserve the praised
-primary composition, six-tile camera and reviewed input/rescue contracts.
-The [completed assignment](plans/EXECUTION_PROMPTS.md#ui-01a--completed-compact-fit-assignment-history)
-is historical; later propagation needs its own bounded review.
+Physical iPad comfort remains open. Preserve the Human's Chrome/Safari comparison
+without claiming a known engine cause or demanding an unchanged retest. Prepare
+one useful changed diagnostic when local evidence warrants it. PERF-02C showed
+no demonstrated benefit, not a general compositor conclusion. Existing audio has
+shared buses and a24-voice cap; whole-mix/physical listening gates remain open.
 
-**PERF-02C completed as a diagnostic, not a runtime candidate.** The
-[three-row review](reviews/2026-09-06-perf02c-triplet-review.md) preserves all
-failed harness attempts, successful restoration and unchanged source/build.
-One warm-cache, low-memory Edge triplet cannot establish iPad benefit. No further
-experiment is queued automatically. Any future Safari/camera trial needs a new
-explicit bounded assignment and matched source/geometry; independent UI/audio
-work continues. The [audio-calibration preflight](reviews/2026-09-06-audio01v2-preflight.md)
-is historical preparation; the later conditional peak decision does not provide
-physical-speaker qualification. Current native/publication evidence is in §2.
-
-Physical iPad scrolling acceptance remains open after the reported v0.22.1 and
-v0.22.2 failures. Do not demand another reproduction of an already reported
-failure, blame device age, or call Chill pace a camera remedy. Original
-performance limits remain: unexplained recovery timeout, mixed Full sustained
-tails, missing causal attribution, and unqualified multi-maze/resource/native
-timing. Contaminated desktop evidence cannot close those gates.
-
-The Human authorizes safe progress while playtesting is deferred; missing
-physical results do not blanket-block these independent engineering seams.
-AUDIO-01A, V22-HOLE-01, root PT36 and the later programme remain in §5. Only
-the bounded wall-only 04-A slice is released; full Plan04 is not. Maintain the cumulative
-[PLAYTEST_CHECKLIST](PLAYTEST_CHECKLIST.md) and
-[HUMAN_DECISIONS](HUMAN_DECISIONS.md); record concrete Human answers separately
-and never infer acceptance from silence.
+Track one primary family question plus an affected regression journey per preview
+in the [cumulative checklist](PLAYTEST_CHECKLIST.md). Missing voluntary family
+results do not blanket-block independent engineering after execution resumes;
+never infer acceptance from silence. Continue meaningful guarded Git backups and
+record local artifacts; no deployment, deletion or archiving during this plan turn.
 
 ## 4. Binding Human decisions and experience to preserve
 
@@ -531,7 +526,7 @@ and never infer acceptance from silence.
 - Pickup amounts should be discovered on collection, not advertised in tiny tile-corner labels. Preserve readable post-pickup arithmetic and puzzle-critical enemy/player/gate information.
 - Preserve Sound settings and convenient quick mute. Current compact-phone More menu is a declared layout tradeoff for family review, not blanket approval of every phone screen.
 - Ame remains recognizably young, blonde and blue-eyed; clean chunky JRPG art uses material-local coloured contours. Do not reopen completed art approvals or resurrect rejected calibration/outline work.
-- Alex is a Human-approved future optional Player-1 character for the Human's son, with blue eyes and blonde to slightly brown-blonde hair; Ame remains the default. His model/canon and runtime selection require a later Human gate, equal capabilities and an ALT-P1-01 seam before Plans 08/05/09/10 consume the selected lead and Plan 11 may depict him. Chill pace—not a weaker ruleset—provides beginner comfort.
+- Alex is a Human-approved future optional Player-1 character for the Human's son, with blue eyes and blonde to slightly brown-blonde hair; Ame remains the default. His model/canon remains Human-gated. Freeze an internal active-lead seam with Ame only before08; do not add a chooser or persistence until Alex canon/art is approved. Integrate equal optional selection before final05 lead acting and full09/10;11 consumes approved canon. Chill pace—not a weaker ruleset—provides beginner comfort.
 - All 32 friends have authored rescues in the existing 16 mazes and generated eligibility; Unicorn appears in Maze 1 and Tea-Time Skeleton in Maze 2. The tea-drinking skeleton is a friend. Home v05 preserves the corrected horn and adds the expressly authorized precise alpha cleanup; do not restore earlier damaged cutouts.
 - Tessera Dolphin's 256px field alpha defect was repaired and published in v0.22.3 from the approved recovery master. Preserve that versioned repair and character identity; P5 remains the separate Human field/follower check.
 - Campaign growth is 16→24 (four inserted, four later), with purposeful asset ecology, harmonious floor/wall pairings, deeper intuitive solvable puzzles, varied rooms, optional decisions and gentle teaching. New mechanics require design/solver/family gates; wishlist wording is not immediate runtime authorization.
@@ -550,23 +545,17 @@ and never infer acceptance from silence.
 
 ## 5. Remaining programme sequence
 
-Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity; 03 art; root 03M music compatibility; 01/MOVE-01 engineering history; UI-03 technical FP-UI1 release. These do not imply every future performance or family gate passed.
+[Roadmap section4](plans/00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates)
+is the single detailed dependency table. The [dispatch packet](plans/EXECUTION_PROMPTS.md)
+links the executable briefs. Wall qualification + read-only09-P0 -> BOOK-02A ->
+DELIGHT-02B -> LEARN-01 -> isolated09-P1 -> UI/focus/lead interface ->08. Affected
+terrain/held/actor grounding and approved Alex integration precede selective05,
+then07B -> full09 ->10 ->11 ->13 -> proposed12 cleanup ->RC-01 ->14 ->15.
 
-After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
-
-1. v0.22.9 WALL-04A is published at `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`; v0.22.8 is fallback. Do not repeat accepted audio/Exit/UI/hole-rules/wall work. Proof recovery is qualified. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved.
-2. **02 reward-first** is the next runtime tranche against accepted04-A. Bound wall-aware scatter/magnet/trail/sound cost and preserve exact-once rewards. Explicitly review new drop rules before changing engine/save state; permanent XP remains Plan14. Later complete remaining VFX/lifecycle/material and **UI-02** polish; preserve UI-03 foundations.
-3. Human-selected B/connected-ditch integration qualifies separately. **04-B** consumes accepted ditch/region boundaries; **04-C actor/held grounding** waits for PT36. Keep one runtime writer and actual independent review; these are scoped slices, not waived whole-plan gates. No need to wait for Human P13 to begin independent bounded reward work.
-4. **ALT-P1-01** Human-gated Alex model/canon and equal optional lead-player integration.
-5. **08** normalized input, controllers/Xbox/Steam Deck and bounded zoom.
-6. **05** limited sprite animation.
-7. **07B** integrated performance/audio/delivery qualification → **FP-CORE2**.
-8. **09** campaign expansion/content ecology/deeper puzzles → **FP-CAMPAIGN**.
-9. **10** optional co-op/Friend Garden, greybox and Human gate → **FP-COOP**.
-10. **11** branding/front-door audit → **13** backlog polish → **12** archive-first asset retirement.
-11. **RC-01** integrated qualification → **14** planning-only opportunities → Human-approved follow-ons, if any → **15** final `docs/REUSABLE_AGENTIC_GAME_DEV_PLAYBOOK.md`.
-
-Read the full roadmap, specialist plan and manager addenda before executing. Plan IDs are not execution-prompt section numbers. The prepared [Agent 04 prompt](plans/AGENT04-after-FP-UI1.md) remains unissued/held.
+This preserves the wider programme while advancing learning/design evidence and
+removing unrelated art prerequisites from semantic controls. Plans are not
+execution authorization during the current Human-requested planning pause. No
+historical Agent04/01 task should be restarted from an old active heading.
 
 ## 6. Historical v0.22.0 evidence and continuing practical limits
 
@@ -587,7 +576,7 @@ Open risks/gates:
 | Product/visual/family | Detailed Human findings and 51 images received and independently Astra/Sol-reviewed. Desktop/iPad presentation is strongly positive; V22 correction slices, physical sustained comfort and final family acceptance remain open. |
 | Movement/input | Physical touch, single taps/holds/corners, long follower chains and comfort still require family evidence; controller/Steam Deck, couch/TV and screen-reader speech remain unqualified. Plan 08 owns the future canonical input policy. |
 | Architecture | Astra and Sol independently checked and reconciled the current Opus claims, including explicit corrections. Preserve scene/coordinate/layer/motion seams, effect cancellation and one writer. No speculative full clock/renderer/hub rewrite is approved. |
-| Performance | Tiny remaining JS budget/full public allocation; bounded timing only. Human evidence shows reduced effects/movement help on iPad without solving responsiveness; laptop web and Tauri are also imperfect. Terrain/effects/zoom/animation need integrated low-end sustained measurement before 07B qualification. |
+| Performance | Use current measured allocation from the recovery receipt; historical near-full budgets are not current headroom. Bounded timing only. Human evidence shows reduced effects/movement help on iPad without solving responsiveness; laptop web and Tauri are also imperfect. Terrain/effects/zoom/animation need integrated low-end sustained measurement before 07B qualification. |
 | Solver/content | More mechanics, procedural loops/difficulty and Mimic RNG must preserve solver tractability and solvability. No code-review suggestion is automatically good family puzzle design. |
 | PT36 visuals | Ring attachment currently uses layer 1 vs actor 2/other weapons 3; root must review canonical attachment metadata/composition before Agent 04 grounding. Do not infer a renderer defect or fix by weapon-name CSS. |
 | Delivery/save | Unsigned portable, no clean-host install or offline qualification. Schema 6 protects future-version saves and preview isolation, but downgrade safety is not promised. |
@@ -601,7 +590,7 @@ Read in this order, then only the relevant owned plan/backlog slices:
 3. [Architecture](ARCHITECTURE.md), [gameplay specification](GAMEPLAY_DESIGN_SPEC.md), [Story Bible](STORY_BIBLE.md), [Art Bible](ART_BIBLE.md), [UI contracts](UI_UX_SPEC.md), [performance budgets](PERFORMANCE_BUDGETS.md).
 4. [UI-03 plan](plans/UI-03-fp-ui1-correction.md), [61-row Human intake](playtests/2026-09-05-v021-ui-correction-intake.md), [feedback audit](reviews/2026-09-05-ui03-feedback-audit.md), [root review](reviews/2026-09-05-ui03-root-review.md), [modal-cost review](reviews/2026-09-05-ui03-final-modal-cost.md), [dialog review](reviews/2026-09-05-ui03-dialog-review.md), [inspiration research](reviews/2026-09-05-ui-inspiration-research.md).
 5. [MOVE-01 contract](plans/MOVE-01-smooth-travel-and-camera.md), [earlier movement review](reviews/2026-09-05-move01-review.md); UI-03's later correction evidence supersedes earlier claims about first-tap quality.
-6. Current v0.22.8 qualification in §2, [manifest](../release/HOLE-01A-v0.22.8-manifest.json), [acceptance](reviews/2026-09-06-v0228-engineering-acceptance.md), [receipt](../release/HOLE-01A-v0.22.8-release-verification.json) and [Sol final review](reviews/2026-09-06-hole01a-sol-native-final-review.md). Also read the [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md) and [release checklist](RELEASE_CHECKLIST.md).
+6. Current recovery/qualification in §1 and the linked migration receipt, then historical v0.22.8 evidence in §2, [manifest](../release/HOLE-01A-v0.22.8-manifest.json), [acceptance](reviews/2026-09-06-v0228-engineering-acceptance.md), [receipt](../release/HOLE-01A-v0.22.8-release-verification.json) and [Sol final review](reviews/2026-09-06-hole01a-sol-native-final-review.md). Also read the [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md) and [release checklist](RELEASE_CHECKLIST.md).
 
 Historical Agent 01 assignments and approvals remain evidence, not instructions to rerun them. UI-03 art additions reuse approved actors: 44 larger actor renditions, authorized Home alpha cleanup and contextual Tessera repair; field identities were retained. Consult publication/provenance records before any later asset work.
 
@@ -613,7 +602,7 @@ Historical Agent 01 assignments and approvals remain evidence, not instructions 
 | v0.21.0 rejected | Source `2924fd73f60229dd244eeba21c05f66afb4eb8b0` in GitHub history. Local `release/Maze-so-Puzzle-0.21.0-FP-UI1-2924fd7-portable.exe`, 165,352,448 bytes, SHA-256 `9d353f8b055afb883da5cb2bf4f51f7fea669279ed4e946a0acf4e7c69be000c`. **No public tag/release**; historical planned download links are unpublished drafts. Source recovery is cross-device; this local binary is not. |
 | v0.22.0 rollback | Frozen `68e303da680d5aec0ba71154949c5a2a0d1697ae` and [immutable prior release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0). Withheld same-version `2f8fa6a` (Home clipping) and non-locked `68e303d` binaries are not approved substitutes. |
 
-Current v0.22.8 and immediate v0.22.7 fallback identities are in §2, followed by earlier releases. Close the preview before switching binaries; the unchanged FP-UI1 namespace shares progress. v0.22.8 rules3 intentionally restarts older-rules unfinished campaign/generated mazes with the update notice; durable progress survives and bests become historical. The v0.22.6 presentation marker/boosted SFX retain their older-downgrade caveat. Never clear Human saves, restore only the old traversal loop or promise arbitrary downgrade safety. Fresh full-art validation needs the recorded ignored-proof/EOL repair; a clone alone currently lacks those ignored historical proofs.
+Current web0.22.10, Windows0.22.9, candidate0.22.11 and the independently staged native0.22.10 are distinguished in §1 and the recovery receipt. Older immutable release identities follow in §2. Close the preview before switching binaries; the unchanged FP-UI1 namespace shares progress. v0.22.8 rules3 intentionally restarts older-rules unfinished campaign/generated mazes with the update notice; durable progress survives and bests become historical. The v0.22.6 presentation marker/boosted SFX retain their older-downgrade caveat. Never clear Human saves, restore only the old traversal loop or promise arbitrary downgrade safety. Fresh full-art validation has the new-host ledger-byte/environment gaps recorded in the recovery receipt; the49-file v14 packet has been restored, while additional external evidence is still in transit.
 
 Historical Vercel identities: v0.20.1 `6tAUShfZgbNfnNhcCkCjAjrbMmGi`; v0.21.0 `5MHu8ECwrntLAkCDczWQGun5STib`. Do not confuse those recorded deployments with today's canonical URL or promise their permanent availability.
 

@@ -1,5 +1,34 @@
 # Maze so Puzzle — game vision and design authority
 
+## Current product intent — Human refinement, 2026-09-06
+
+Build a beautiful, readable, responsive and satisfying adventure for Ame and
+Alex: cosy and approachable, with enough curiosity, surprise and thoughtful
+choices to invite voluntary replay. Learning happens through noticing, comparing,
+predicting, safely trying, remembering and returning with new understanding.
+Use clear pictures and short optional help; avoid forced quizzes, punishment or
+grind. Collection and celebration should reward discovery without obscuring it.
+
+Preserve the praised warm type, large original art, landscape maze/deck/minimap,
+short friendly story and forgiving rules. Equal Power wins, reusable tools and
+optional rescues can support real sequencing/spatial puzzles. Room-rich larger
+mazes and changed-state returns are welcome; tedious winding is not depth.
+The24×24 limit remains; old maximum-four-large/shrink-six quotas are superseded
+by the latest Lanternlight clarification and Plan09's reasoning/rhythm criteria.
+
+PT50's grey actual silhouettes, legitimate friend/guardian encounter reveal and
+obtainable X/Y supersede older visible-all-Friends/question-mark instructions.
+Garden membership requires actual Plan10 ownership. Richer friend-led victory
+and earned-sticker fanfare remain finite, readable, mute/motion-aware and honest
+about projected versus banked rewards. Permanent XP/JRPG expansion remains14.
+
+The [current roadmap](plans/00-integrated-implementation-roadmap.md) sequences
+wall qualification -> Book -> bounded delight -> learning help -> an early
+existing-rule fixture canary, then stable controls and the wider programme.
+This is planned intent, not implementation or release acceptance. Physical
+comfort, comprehension and delight require observations beyond engine/tests.
+See [source synthesis](reviews/2026-09-06-vision-and-programme-refinement.md).
+
 **Latest Human-directed correction, 2026-09-05:** The latest Human comparison requests a warm, picture-led, tactile landscape interface with substantial readable type, large canonical art, authored left-copy/right-cast front-door composition, proper Book pages and joyful victories. UI-03 and its 61-row intake are the current correction authority. Landscape remains primary; portrait uses a safe rotate invitation. A first-step flash/camera jerk is unacceptable even when later held motion is smoother.
 
 **v0.22.0 Human playtest authority, 2026-09-05:** preserve the now-praised
