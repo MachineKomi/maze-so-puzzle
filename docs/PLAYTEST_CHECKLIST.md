@@ -6,6 +6,11 @@ Keep completed observations and build identities when newer builds arrive.
 
 ## Start here
 
+**New laptop recovered:** [readiness receipt](migrations/2026-09-06-new-laptop-recovery.md).
+Web remains0.22.10, published Windows0.22.9 and R1/0.22.11 is unpromoted.
+Fresh engineering checks do not close P13, P14 or physical iPad acceptance.
+No new family test is requested for migration; agents own the controlled wall A/B.
+
 **Migration pause:** v0.22.11 below is saved WIP, not yet deployed. Continue
 testing the version actually shown online; its live version remains0.22.10.
 The new-laptop handoff owns resumption. No additional playtest is needed merely

@@ -7,7 +7,19 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **AUTHORITATIVE PAUSE: laptop migration,2026-09-06.** Human stopped development
+- **CURRENT: new-laptop recovery, 2026-09-06.** Human resumed this existing
+  project at the exact migration branch/checkpoint. [Recovery receipt](migrations/2026-09-06-new-laptop-recovery.md)
+  owns verified tooling, restored proofs, fresh checks and remaining transfer
+  gaps. Astra is the single writer/heavy-check owner; actual GPT-5.6 Sol reviewed
+  wall source and scoped helper fixes independently. Fresh 642 project tests,
+  build/static budgets and 12 deployment-guard checks pass; fresh art checks
+  expose ledger-byte and historical environment reproducibility limits. External
+  QA/Claude evidence is in transit by Human USB/upload. Live web remains0.22.10,
+  Windows0.22.9, candidate0.22.11 unpromoted. Next is the controlled frozen local
+  wall A/B and visible review, then BOOK-02A and richer Plan02 celebrations.
+  No deployment, native acceptance, Human beauty or iPad pass follows.
+
+- **MIGRATION CHECKPOINT: historical pause,2026-09-06.** Human stopped development
   before the wall release/performance gate closed. Resume from
   [NEW_LAPTOP_HANDOFF](migrations/2026-09-06-new-laptop-handoff.md), not the
   older active assignments below. All live-repo WIP is on remote branch

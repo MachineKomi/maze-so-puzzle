@@ -1,6 +1,16 @@
+// Run from the repo root. Pass reviewFixtures=<absolute fixtures.json URL> and
+// reviewBundle=<frozen module path> on the candidate page; reviewOutput may
+// select a fresh relative/absolute folder.
 async page => {
-  const path='C:/maze-game/output/playwright/walls04-rack/';
-  const data=await (await page.request.get('http://127.0.0.1:4194/output/playwright/walls04-rack/fixtures.json')).json();
+  const { target, fixturesUrl, expectedBundle, outputDir }=await page.evaluate(()=>{
+    const params=new URL(location.href).searchParams;
+    return {target:location.origin,fixturesUrl:params.get('reviewFixtures'),expectedBundle:params.get('reviewBundle'),
+      outputDir:params.get('reviewOutput') || 'output/playwright/walls04-rack-new-host'};
+  });
+  if(!fixturesUrl||!expectedBundle)throw new Error('Set reviewFixtures and reviewBundle to explicit frozen inputs');
+  const fixtureResponse=await page.request.get(fixturesUrl);
+  if(!fixtureResponse.ok())throw new Error('Fixture request failed: '+fixtureResponse.status());
+  const data=await fixtureResponse.json();
   const browser=page.context().browser();
   const rows=[];
   for(const dpr of [1,2]) for(const quality of ['full','lite','static']) for(const motion of ['full','reduced']) for(const fixture of data.fixtures) {
@@ -12,10 +22,12 @@ async page => {
       localStorage.setItem(data.keys.progress,JSON.stringify(data.progress));
       localStorage.setItem(data.keys.preferences,JSON.stringify({...data.preferences,quality,motion}));
     },{data,fixture,quality,motion});
-    await p.goto('http://127.0.0.1:4195/');
+    await p.goto(target);
     await p.getByRole('button',{name:'Play',exact:true}).click();
     await p.getByRole('button',{name:/^Continue/}).click();
     await p.locator('.maze-terrain-svg').waitFor();
+    const bundle=await p.locator('script[type="module"]').getAttribute('src');
+    if(bundle!==expectedBundle)throw new Error('Frozen bundle mismatch: '+bundle);
     await p.bringToFront();
     await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));
     const before=await p.evaluate(()=>({step:document.querySelector('.step-pill')?.getAttribute('aria-label'),world:getComputedStyle(document.querySelector('.camera-world')).translate}));
@@ -40,9 +52,9 @@ async page => {
     const moving=new Set(after.samples.map(s=>s.world)).size;
     if(moving<2)throw new Error(`Camera did not move: ${fixture.id}/${quality}/${motion}`);
     const deltas=after.frames.slice(1).map((t,i)=>t-after.frames[i]).sort((a,b)=>a-b);
-    rows.push({id:fixture.id,dpr,quality,motion,before,afterStep:after.step,terrainMutations:after.mutations,frameCount:after.frames.length,movingTransforms:moving,maxFrameMs:deltas.at(-1),p95FrameMs:deltas[Math.floor(deltas.length*.95)],ghostInvalidSamples:bad.length,errors});
-    if(dpr===1&&quality==='full'&&motion==='full')await p.screenshot({path:path+'game-'+fixture.id+'.png'});
+    rows.push({id:fixture.id,bundle,dpr,quality,motion,before,afterStep:after.step,terrainMutations:after.mutations,frameCount:after.frames.length,movingTransforms:moving,maxFrameMs:deltas.at(-1),p95FrameMs:deltas[Math.floor(deltas.length*.95)],ghostInvalidSamples:bad.length,errors});
+    if(dpr===1&&quality==='full'&&motion==='full')await p.screenshot({path:outputDir+'/game-'+fixture.id+'.png'});
     await ctx.close();
   }
-  return {status:'pass',scope:'local Chromium report-only; not iPad or clean-host performance',cases:rows.length,movingCases:rows.filter(r=>r.movingTransforms>1).length,terrainMutations:rows.reduce((n,r)=>n+r.terrainMutations,0),rows};
+  return {status:'pass',target,fixturesUrl,expectedBundle,outputDir,scope:'local Chromium report-only; not iPad or clean-host performance',cases:rows.length,movingCases:rows.filter(r=>r.movingTransforms>1).length,terrainMutations:rows.reduce((n,r)=>n+r.terrainMutations,0),rows};
 }

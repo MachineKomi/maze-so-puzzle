@@ -2,6 +2,13 @@
 
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
+**New-laptop resumption:** Human resumed the existing migration checkout and
+confirmed QA/Claude folders are still being transferred (USB is planned).
+[Recovery receipt](migrations/2026-09-06-new-laptop-recovery.md) records readiness
+and provenance gaps. No new product choice is needed. Controlled wall review,
+then BOOK-02A and richer celebrations remain the current order; no publication,
+Human beauty or physical-device acceptance is inferred from recovery.
+
 **Laptop migration pause:** Human requested development stop and a remote WIP
 handoff. No product choice is blocking; the transfer checklist is in
 [NEW_LAPTOP_HANDOFF](migrations/2026-09-06-new-laptop-handoff.md). Resume engineering

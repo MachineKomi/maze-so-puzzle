@@ -1,9 +1,23 @@
 // Playwright CLI run-code callback: same warmed save, alternating baseline/R1.
 // Trace/rAF diagnostics from a loaded host, not a clean-cohort or iPad benchmark.
+// Explicit URL parameters: reviewFixtures, reviewBaseline, reviewCandidate
+// (candidate defaults to this page's origin). Keep frozen bundle checks below.
+// This preserves the historical short diagnostic; use the recovery report's
+// longer matched-route protocol for promotion, not this p95 sample alone.
 async page => {
-  const castIsolation = await page.evaluate(() => new URL(location.href).searchParams.get('reviewProbe') === 'cast');
-  const data = await (await page.request.get('http://127.0.0.1:4190/output/playwright/walls04-rack/fixtures.json')).json();
+  const { castIsolation, fixturesUrl, baselineUrl, candidateUrl } = await page.evaluate(() => {
+    const params = new URL(location.href).searchParams;
+    return { castIsolation: params.get('reviewProbe') === 'cast',
+      fixturesUrl: params.get('reviewFixtures'), baselineUrl: params.get('reviewBaseline'),
+      candidateUrl: params.get('reviewCandidate') || location.origin };
+  });
+  if (!fixturesUrl) throw new Error('Set reviewFixtures to the explicit fixtures.json URL');
+  if (!castIsolation && !baselineUrl) throw new Error('Set reviewBaseline to the explicit frozen baseline URL');
+  const fixtureResponse = await page.request.get(fixturesUrl);
+  if (!fixtureResponse.ok()) throw new Error('Fixture request failed: ' + fixtureResponse.status());
+  const data = await fixtureResponse.json();
   const fixture = data.fixtures.find(f => f.id === 'twilight-treasure-loop');
+  if (!fixture) throw new Error('Missing Twilight normal-save fixture');
   const browser = page.context().browser();
   const rows = [];
   for (const quality of (castIsolation ? ['full', 'lite'] : ['full', 'static'])) for (let repeat = 0; repeat < 3; repeat++) for (const candidate of (repeat % 2 ? [true, false] : [false, true])) {
@@ -14,7 +28,7 @@ async page => {
       localStorage.setItem(data.keys.progress, JSON.stringify(data.progress));
       localStorage.setItem(data.keys.preferences, JSON.stringify({ ...data.preferences, quality, motion: quality === 'static' ? 'reduced' : 'full' }));
     }, { data, fixture, quality });
-    await p.goto(candidate || castIsolation ? 'http://127.0.0.1:4189/' : 'https://mazesopuzzle.com/');
+    await p.goto(candidate || castIsolation ? candidateUrl : baselineUrl);
     await p.getByRole('button', { name: 'Play', exact: true }).click();
     await p.getByRole('button', { name: /^Continue/ }).click();
     await p.locator('.maze-terrain-svg').waitFor();
@@ -57,5 +71,5 @@ async page => {
     rows.push({ candidate, quality, repeat, bundle: expected, transforms: samples.transforms, p95FrameMs: timings[Math.floor(timings.length * .95)], trace: summary });
     await ctx.close();
   }
-  return { castIsolation, scope: 'Alternating candidate/live baseline OR cast-on/off same-candidate diagnostic, decoded image/font barrier; loaded Windows Chromium DPR2, not hardware acceptance; trace durations include other game work and are not additive', rows };
+  return { castIsolation, fixturesUrl, baselineUrl, candidateUrl, scope: 'Alternating frozen baseline/candidate OR cast-on/off same-candidate diagnostic, decoded image/font barrier; short Windows Chromium DPR2 sample, not hardware acceptance; trace durations include other game work and are not additive', rows };
 }

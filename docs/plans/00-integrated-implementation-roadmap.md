@@ -9,6 +9,11 @@ WALL-04A-R1 branch using the [handoff](../migrations/2026-09-06-new-laptop-hando
 Do not treat its version0.22.11 as deployed or auto-launch a historical prompt.
 New-host preflight/performance review precedes wall promotion; BOOK-02A follows.
 
+**Recovery update:** the Human has resumed the exact migration checkout.
+[New-host receipt](../migrations/2026-09-06-new-laptop-recovery.md) owns tooling,
+fresh checks and remaining transfer/provenance gaps. The next engineering action
+is the controlled wall comparison, not any older active assignment below.
+
 **Latest Human priority,2026-09-06:** [depth/discovery/celebration intake](../playtests/2026-09-06-depth-discovery-and-celebration.md).
 04-A's engineering delivery did not meet the visual goal. Next bounded work is
 [WALL-04A-R1](WALL-04A-R1-convincing-depth.md): stronger relief, exact corner rims

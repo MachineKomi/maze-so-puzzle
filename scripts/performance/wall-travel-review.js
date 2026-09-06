@@ -1,12 +1,22 @@
 // Playwright CLI run-code callback. Dev/review tooling only; never shipped.
-// Open the candidate with ?reviewLane=desktop-1 (or compact-2, etc.) first.
+// Open the candidate with reviewLane=desktop-1 (or compact-2, etc.) and
+// reviewFixtures=<absolute fixtures.json URL>. Run tooling from the repo root;
+// reviewOutput optionally selects a fresh output directory (relative or absolute).
 // Fixtures are engine-produced normal saves, not tester-granted progress.
 async page => {
-  const { lane, target } = await page.evaluate(() => ({ lane: new URL(location.href).searchParams.get('reviewLane') || 'desktop-1', target: location.origin }));
+  const { lane, target, fixturesUrl, outputDir } = await page.evaluate(() => {
+    const params = new URL(location.href).searchParams;
+    return { lane: params.get('reviewLane') || 'desktop-1', target: location.origin,
+      fixturesUrl: params.get('reviewFixtures'),
+      outputDir: params.get('reviewOutput') || 'output/playwright/wall04ar1-new-host' };
+  });
+  if (!fixturesUrl) throw new Error('Set reviewFixtures to the explicit fixtures.json URL');
   const compact = lane.startsWith('compact');
   const dpr = Number(lane.split('-')[1]);
-  if (![1, 2].includes(dpr)) throw new Error('Expected desktop/compact-1/2 lane');
-  const data = await (await page.request.get('http://127.0.0.1:4190/output/playwright/walls04-rack/fixtures.json')).json();
+  if (!/^(desktop|compact)-[12]$/.test(lane)) throw new Error('Expected desktop/compact-1/2 lane');
+  const fixtureResponse = await page.request.get(fixturesUrl);
+  if (!fixtureResponse.ok()) throw new Error('Fixture request failed: ' + fixtureResponse.status());
+  const data = await fixtureResponse.json();
   const browser = page.context().browser();
   const rows = [];
   for (const quality of ['full', 'lite', 'static']) for (const motion of ['full', 'reduced']) for (const fixture of data.fixtures) {
@@ -65,8 +75,8 @@ async page => {
     if (bad.length || errors.length || after.mutations || after.broken || after.wallNodes !== 1 || after.castNodes !== 2 || after.step === before.step || moving < 2 || after.quality !== quality) throw new Error(JSON.stringify({ fixture: fixture.id, lane, quality, motion, bad: bad.slice(0, 2), errors, before, after }));
     const deltas = after.frames.slice(1).map((t, i) => t - after.frames[i]).sort((a, b) => a - b);
     rows.push({ id: fixture.id, lane, viewport, dpr, quality, motion, beforeStep: before.step, afterStep: after.step, terrainMutations: after.mutations, movingTransforms: moving, p95FrameMs: deltas[Math.floor(deltas.length * .95)], maxFrameMs: deltas.at(-1), metricsMs, ghostInvalidSamples: bad.length, errors });
-    if (quality === 'full' && motion === 'full') await p.screenshot({ path: `C:/maze-game/output/playwright/wall04ar1/${lane}-${fixture.id}.png` });
+    if (quality === 'full' && motion === 'full') await p.screenshot({ path: `${outputDir}/${lane}-${fixture.id}.png` });
     await ctx.close();
   }
-  return { status: 'pass', scope: 'Loaded-host Chromium diagnostics, not iPad or clean-host FPS qualification', lane, cases: rows.length, rows };
+  return { status: 'pass', scope: 'Functional/mutation Chromium diagnostics, not iPad or clean-host FPS qualification', target, fixturesUrl, outputDir, lane, cases: rows.length, rows };
 }

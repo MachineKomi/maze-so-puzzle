@@ -10,6 +10,13 @@ Recover `codex/migration-wall04ar1-20260906` at `C:/GameDev/maze-game`, inspect
 the paused WALL-04A-R1 gate, and do not execute the older active assignment below
 without reconciling the current handoff. No0.22.11 deployment has occurred.
 
+**Recovered on new host:** [recovery receipt](../migrations/2026-09-06-new-laptop-recovery.md)
+records the exact checkout, passing project/build/static checks and pending
+external evidence/art/native prerequisites. Astra owns the next controlled wall
+qualification, with actual Sol independent review; then BOOK-02A and Plan02's
+richer celebrations. The migration/recovery override still outranks assignments
+below. No release is authorized by a helper or documentation checkpoint.
+
 **Active assignment: finish v0.22.10 VFX-02A qualification/publication.** Root
 Astra owns runtime/build/release; actual Sol independently reviews. Read
 [candidate evidence](../reviews/2026-09-06-vfx02a-candidate.md) and
