@@ -20,6 +20,7 @@
 .book-volume { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; filter: drop-shadow(0 8px 12px #5a426018); }
 .book-tabs { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 10px; padding: 0 28px; flex: 0 0 auto; align-items: end; }
 .book-tabs button { --tab-color: #e3d4f4; display: flex; justify-content: center; align-items: center; gap: 10px; min-width: 0; min-height: 72px; padding: 10px 12px 16px; border: 2px solid #c7afd7; border-bottom: 0; border-radius: 22px 22px 0 0; background: linear-gradient(160deg,#fff9ec,var(--tab-color)); box-shadow: inset 0 2px 0 #fffc; font-size: 1rem; font-weight: 600; line-height: 1.15; position: relative; }
+.book-tabs button span { white-space: nowrap; }
 .book-tabs [data-book-tab="mazes"] { --tab-color: #e0d9fb; }
 .book-tabs [data-book-tab="friends"] { --tab-color: #f6d9d9; }
 .book-tabs [data-book-tab="bestiary"] { --tab-color: #d9ece4; }
@@ -128,4 +129,32 @@ button.book-character-card:active { transform: translateY(2px); box-shadow: inse
 @media (max-width: 700px) { .book-heading h1 { font-size: 1.45rem; } .book-heading .book-eyebrow { display: none; } .book-header button { gap: 4px; padding: 5px 8px; min-height: 48px; font-size: .9rem; border-width: 2px; } .book-header button img { width: 30px; height: 30px; } .book-header .book-sound { width: 48px; } .book-header .book-back { flex-direction: column; gap: 0; } .book-header .book-back img { width: 28px; height: 28px; } .book-header .book-back span { font-size: .78rem; } .book-header-actions { gap: 4px; } .book-character-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .badge-grid, .maze-record-grid { grid-template-columns: minmax(0,1fr); } .book-page-heading { align-items: start; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; } .book-page-heading h2 { font-size: 1.35rem; } .book-page-heading p { font-size: 1rem; } .book-count { padding: 6px 10px; font-size: .9rem; } .book-tabs button { font-size: .83rem; } .book-field-note { gap: 10px; padding: 12px; } .book-field-note > img { width: 56px; height: 56px; } .book-stats { gap: 12px; } .book-stats article { gap: 12px; padding: 14px; } .book-stats img { width: 58px; height: 58px; } .book-stats b { font-size: 1.8rem; } .book-stats strong { font-size: .95rem; } }
 @media (max-height: 500px) { .achievements-screen { padding: 8px 10px 13px; gap: 7px; } .book-header { gap: 10px; } .book-heading .book-eyebrow { display: none; } .book-heading h1 { font-size: 1.4rem; } .book-header button { min-height: 44px; padding: 3px 10px; border-width: 2px; font-size: .95rem; gap: 5px; } .book-header button img { width: 32px; height: 32px; } .book-header .book-back { flex-direction: row; gap: 5px; } .book-header .book-back span { font-size: .95rem; } .book-header .book-sound { width: 46px; } .book-tabs button { flex-direction: row; min-height: 48px; padding: 4px 6px 8px; border-radius: 16px 16px 0 0; gap: 5px; font-size: .88rem; } .book-tabs button img { width: 30px; height: 30px; } .book-tabs [data-book-tab="bestiary"] img { width: 29px; height: 29px; } .book-scroll { padding-top: 14px; } .book-character-art { height: 120px; } .book-character-card .book-character-art img { width: 112px; height: 112px; } .book-unknown-art { height: 120px; } }
 @media (max-width: 620px) and (max-height: 500px) { .book-header { gap: 6px; } .book-heading h1 { font-size: 1.15rem; } .book-header button { padding-inline: 5px; font-size: .82rem; gap: 3px; } .book-header .book-back span { font-size: .82rem; } .book-header button img { width: 27px; height: 27px; } .book-header .book-sound { width: 44px; } .book-tabs { gap: 4px; padding-inline: 4px; } .book-tabs button { flex-direction: column; min-height: 56px; padding: 3px 2px 7px; gap: 1px; font-size: .8rem; } .book-tabs button img { width: 27px; height: 27px; } .book-tabs [data-book-tab="bestiary"] img { width: 26px; height: 26px; } }
+@media (max-height: 420px) {
+ .achievements-screen { padding: 4px 6px 9px; gap: 4px; overflow: hidden; }
+ .book-header { min-height: 48px; }
+ .book-heading h1 { font-size: 1.1rem; }
+ .book-header button { min-height: 48px; padding: 3px 7px; }
+ .book-header button img { width: 28px; height: 28px; }
+ .book-header .book-sound { width: 48px; }
+ .book-tabs { gap: 4px; padding-inline: 5px; }
+ .book-tabs button { flex-direction: row; min-height: 48px; padding: 3px 4px 7px; gap: 3px; font-size: .78rem; }
+ .book-tabs button img,.book-tabs [data-book-tab="bestiary"] img { width: 26px; height: 26px; }
+ .book-paper { padding: 3px 4px 8px 15px; border-width: 2px; }
+ .book-paper::before { inset-block: 9px; left: 7px; width: 4px; }
+ .book-scroll { padding: 8px 7px 10px 2px; scroll-padding: 7px; }
+ .book-page-heading { gap: 8px; margin-bottom: 10px; }
+ .book-page-heading h2 { font-size: 1.15rem; }
+ .book-page-heading p { margin-top: 3px; font-size: .88rem; line-height: 1.2; }
+ .book-count { padding: 4px 8px; font-size: .78rem; }
+ .badge-grid { gap: 8px; }
+ .badge-card { min-height: 132px; padding: 8px 10px; gap: 10px; border-width: 2px; border-radius: 18px; }
+ .badge-art-wrap { width: 72px; flex-basis: 72px; height: 80px; }
+ .badge-art-wrap img { width: 72px; height: 72px; }
+ .badge-copy strong { font-size: 1rem; }
+ .badge-description { margin-top: 4px; font-size: .88rem; line-height: 1.2; }
+}
+@media (max-width: 620px) and (max-height: 420px) {
+ .book-tabs button { flex-direction: column; gap: 0; padding-inline: 2px; font-size: .72rem; white-space: nowrap; }
+ .book-tabs button img,.book-tabs [data-book-tab="bestiary"] img { width: 24px; height: 24px; }
+}
 @media (forced-colors: active) { .book-paper, .book-character-card, .badge-card, .maze-record-card, .book-stats article, .book-tabs button { border: 2px solid CanvasText; box-shadow: none; } .book-tabs button[aria-selected="true"] { border-bottom: 3px solid Highlight; } .badge-card.locked .badge-art-wrap img { opacity: .6; } }

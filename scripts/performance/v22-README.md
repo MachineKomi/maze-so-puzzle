@@ -124,3 +124,24 @@ The final runner's `playwright-results.json` owns test verdicts; per-test lifecy
 attachments are captured before that verdict is assigned. See the
 [R1 response](../../docs/reviews/2026-09-05-v22-perf01-r1-response.md) for rejected
 attempts, locked-toolchain preparation and evidence boundaries.
+
+## Compact gameplay and Book regression
+
+`v22-ui-compact.pw.ts` protects the reviewed 844x390, 780x312, 568x320 and
+960x540 compact layouts. It restores current engine-derived saves, applies the
+recorded safe areas and checks the complete map card against every friend/bag
+label and slot as well as feedback and the pad. It also checks 48px pad sectors,
+whole Book tab labels, one complete Book card, real multi-line rescue feedback,
+the longest authored objective and large saved totals. Screenshots and JSON stay
+outside the repository.
+
+With the established external Playwright toolchain and import hook:
+
+```powershell
+$env:MAZE_UI_EVIDENCE_DIR='C:/GameDev/maze-game-qa/ui-compact/fresh-run'
+node --import file:///C:/GameDev/maze-game-qa/releases/v0221/playwright-loader.mjs C:/GameDev/maze-game-qa/performance/v22-perf-01/r1-tools/node_modules/playwright/cli.js test --config scripts/performance/v22-ui-compact.config.mjs
+```
+
+Use a fresh external evidence directory and an unused `MAZE_PERF_PORT` when the
+default 4198 is occupied. Build the exact candidate first; the config serves only
+its production `dist` and refuses evidence paths inside the repository.

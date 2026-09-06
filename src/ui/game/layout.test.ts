@@ -5,7 +5,7 @@ import { CURATED_LEVELS } from "../../game/levels";
 import { createInitialGameState } from "../../game/engine";
 
 describe("physical play layout", () => {
-  for (const [w,h,mapMin] of [[1920,1080,192],[1280,720,192],[1194,834,160],[1024,768,160],[960,540,128],[844,390,120],[568,320,96]]) {
+  for (const [w,h,mapMin] of [[1920,1080,192],[1280,720,192],[1194,834,160],[1024,768,160],[960,540,128],[844,390,120],[780,312,96],[568,320,96]]) {
     it(`keeps square board and useful map at ${w}×${h}`, () => {
       const layout = calculatePlayLayout(w! - 16,h! - 16);
       expect(layout.board + layout.deck + layout.gap).toBe(w! - 16);
@@ -22,6 +22,11 @@ describe("physical play layout", () => {
   }
   it("has deterministic finite fallbacks", () => {
     expect(calculatePlayLayout(NaN,Infinity,false).board).toBe(1);
+  });
+  it("uses one measured compact-height authority for the minimap", () => {
+    expect(calculatePlayLayout(760, 292).map).toBe(96);
+    expect(calculatePlayLayout(820, 350).map).toBe(128);
+    expect(calculatePlayLayout(940, 450).map).toBe(192);
   });
 });
 describe("typed equipment registry", () => {

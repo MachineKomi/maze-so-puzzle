@@ -121,6 +121,8 @@
  .utility-row { gap: 5px; } .utility-row button { min-height: 52px; } .utility-row img { width: 30px; height: 30px; }
 }
 .play-shell[data-layout="compact-landscape"] .adventure-hud { padding: 4px 6px; gap: 4px; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) { display: grid; grid-template-columns: minmax(0,1fr) 152px; grid-template-rows: auto auto minmax(0,1fr) 40px; overflow: hidden; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) .hud-reader { display: contents; }
 .play-shell[data-layout="compact-landscape"] .hud-header { position: relative; padding-right: 104px; }
 .play-shell[data-layout="compact-landscape"] .hud-title h2 { font-size: .875rem; }
 .play-shell[data-layout="compact-landscape"] .level-kicker { display: none; }
@@ -135,13 +137,15 @@
 .play-shell[data-layout="compact-landscape"] :is(.power-counter,.wallet-pill) b { font-size: 1rem; }
 .play-shell[data-layout="compact-landscape"] :is(.power-counter,.wallet-pill) small { font-size: .7rem; }
 .play-shell[data-layout="compact-landscape"] .step-pill { display: none; }
-.play-shell[data-layout="compact-landscape"] .objective-card { min-height: 0; padding: 4px 6px; border-radius: 12px; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) :is(.hud-header,.objective-card) { grid-column: 1 / -1; }
+.play-shell[data-layout="compact-landscape"] .objective-card { min-height: 0; padding: 2px 6px; border-radius: 12px; }
 .play-shell[data-layout="compact-landscape"] .objective-card h3 { display: none; }
-.play-shell[data-layout="compact-landscape"] .objective-card p { font-size: 1rem; }
+.play-shell[data-layout="compact-landscape"] .objective-card p { font-size: .875rem; line-height: 1.15; }
 /* Compact landscape is composed around a collection shelf above map and pad. */
-.play-shell[data-layout="compact-landscape"] .adventure-overview { --slot-size: 44px; flex: 1 1 0; grid-template-columns: var(--map-size) minmax(0,1fr); grid-template-rows: auto minmax(152px,1fr); gap: 3px 8px; align-content: start; align-items: end; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) .adventure-overview { grid-column: 1 / -1; grid-row: 3 / 5; }
+.play-shell[data-layout="compact-landscape"] .adventure-overview { --slot-size: 30px; flex: 1 1 0; grid-template-columns: var(--map-size) minmax(0,1fr); grid-template-rows: auto minmax(0,1fr); gap: 2px 8px; align-content: stretch; align-items: end; }
 .play-shell[data-layout="compact-landscape"] .adventure-equipment { grid-column: 1/-1; grid-row: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start; }
-.play-shell[data-layout="compact-landscape"] .maze-map-card { grid-column: 1; grid-row: 2; margin-bottom: 2px; }
+.play-shell[data-layout="compact-landscape"] .maze-map-card { grid-column: 1; grid-row: 2; align-self: end; margin-bottom: 43px; }
 .play-shell[data-layout="compact-landscape"] :is(.rescue-list,.inventory-grid) { gap: 3px; }
 .play-shell[data-layout="compact-landscape"] :is(.rescue-friend,.inventory-slot) { border-radius: 10px; border-width: 1px; }
 .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) h3 { font-size: .75rem; margin-bottom: 3px; }
@@ -149,32 +153,43 @@
 .play-shell[data-layout="compact-landscape"] .maze-map-heading { font-size: .75rem; }
 .play-shell[data-layout="compact-landscape"] .maze-map-heading img { width: 18px; height: 18px; }
 .play-shell[data-layout="compact-landscape"] :is(.maze-map-key,.maze-map-nudge) { display: none; }
-.play-shell[data-layout="compact-landscape"] .deck-controls { position: absolute; right: 8px; bottom: 8px; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) .deck-controls { grid-column: 2; grid-row: 3 / 5; align-self: end; justify-self: end; }
 .play-shell[data-layout="compact-landscape"] .thumb-pad { width: 152px; height: 152px; border-radius: 23px; }
-.play-shell[data-layout="compact-landscape"] .deck-feedback { display: none; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) .deck-feedback { grid-column: 1; grid-row: 4; z-index: 2; display: grid; width: 100%; height: 40px; min-height: 0; overflow: hidden; padding-inline: 3px; border-radius: 8px; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) .deck-feedback .feedback-bar { min-width: 0; gap: 3px; padding: 2px 3px; font-size: .7rem; line-height: 1.1; text-align: center; }
+.play-shell[data-layout="compact-landscape"] .adventure-hud:not([data-reader]) .deck-feedback img { width: 20px; height: 20px; }
 .play-shell[data-emergency] :is(.power-counter,.wallet-pill) img { display: none; }
-.play-shell[data-emergency] .adventure-overview { --slot-size: 30px; }
+.play-shell[data-emergency] .adventure-overview { --slot-size: 24px; }
 .play-shell[data-emergency] .maze-map-heading img { display: none; }
 @media (max-height: 449px) {
- .play-shell[data-layout="compact-landscape"] .adventure-equipment { display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
+ .play-shell[data-layout="compact-landscape"] .adventure-equipment { display: flex; flex-direction: column; align-items: stretch; gap: 1px; }
  .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) { display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 4px; align-items: center; }
  .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) h3 { margin: 0; gap: 1px 3px; line-height: 1.05; }
+}
+@media (max-height: 340px) {
+ .play-shell[data-layout="compact-landscape"] .adventure-overview { --slot-size: 24px; }
+}
+@media (min-width: 740px) and (max-height: 340px) {
+ .play-shell[data-layout="compact-landscape"] .adventure-equipment { display: flex; flex-direction: row; gap: 4px; }
+ .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) { display: flex; flex-direction: row; align-items: center; gap: 4px; min-width: 0; }
+ .play-shell[data-layout="compact-landscape"] .rescue-card { flex: 0 0 190px; }
+ .play-shell[data-layout="compact-landscape"] .bag-card { flex: 1 1 0; }
+ .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) h3 { flex: 0 0 54px; width: 54px; }
+ .play-shell[data-layout="compact-landscape"] :is(.rescue-list,.inventory-grid) { display: flex; flex-wrap: nowrap; }
 }
 /* Narrow phones keep the complete collection in two labelled picture rows,
    leaving the full bottom-right control footprint clear. */
 .play-shell[data-emergency] .adventure-hud { padding: 0 4px; gap: 1px; }
 .play-shell[data-emergency] .hud-header { gap: 2px; min-height: 48px; }
 .play-shell[data-emergency] .objective-card { padding: 0 4px; border-width: 1px; }
-.play-shell[data-emergency] .adventure-overview { grid-template-rows: auto minmax(152px,1fr); gap: 2px 8px; }
+.play-shell[data-emergency] .adventure-overview { grid-template-rows: auto minmax(0,1fr); gap: 1px 8px; }
 .play-shell[data-emergency] .adventure-equipment { display: flex; flex-direction: column; align-items: stretch; gap: 2px; }
 .play-shell[data-emergency] :is(.rescue-card,.bag-card) { display: grid; grid-template-columns: 62px minmax(0,1fr); gap: 4px; align-items: center; }
 .play-shell[data-emergency] :is(.rescue-card,.bag-card) h3 { margin: 0; gap: 1px 3px; line-height: 1.05; flex-wrap: nowrap; }
 .play-shell[data-emergency] :is(.rescue-list,.inventory-grid) { gap: 2px; }
 /* At the 568x320 safe-area extreme these are a status strip, with every
    full-size inspection control in More; the movement buttons remain 48px. */
-.play-shell[data-emergency] .adventure-overview { --slot-size: 24px; }
 .play-shell[data-emergency] .objective-card p { line-height: 1.15; }
-.play-shell[data-emergency] .deck-controls { bottom: 0; }
 .adventure-hud[data-enlarged] .adventure-overview { flex: 0 0 auto; min-height: min-content; }
 
 @media (min-height: 450px) {
