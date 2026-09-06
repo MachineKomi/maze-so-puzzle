@@ -3,6 +3,7 @@ import type { CameraWindow, GridSize } from "../../game/exploration";
 import type { Point } from "../../game/types";
 import { TileTraveller, travelCamera } from "../../tileTravel";
 import { cameraWorldTranslation } from "../../cameraMotion";
+import { jumpGroundPosition, type JumpTravel } from "../../jumpPresentation";
 
 export interface SceneTravelSnapshot {
   readonly position: Point;
@@ -22,6 +23,8 @@ interface TravelInput {
   readonly runKey: string;
   readonly enabled: boolean;
   readonly discontinuity: boolean;
+  readonly jump: JumpTravel | null;
+  readonly animateJump: boolean;
   readonly durationMs: number;
   readonly onGeometryReset: () => void;
 }
@@ -31,6 +34,8 @@ interface Binding {
   world: HTMLElement;
   player: HTMLElement;
   replacement: HTMLElement | null;
+  jumper: HTMLElement | null;
+  jumpAnimations: Animation[];
   anchors: HTMLElement[];
   followers: {id:string;point:Point;node:HTMLElement}[];
   width: number;
@@ -48,6 +53,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
   const frame=useRef<number | undefined>(undefined);
   const generation=useRef(0);
   const observer=useRef<ResizeObserver | null>(null);
+  const settledJump=useRef<JumpTravel | null>(null);
 
   const cancelFrame=useCallback(()=>{
     generation.current++;
@@ -58,7 +64,9 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
   const paint=useCallback((now:number)=>{
     const b=binding.current, actor=leader.current;
     if(!b || !actor) return;
-    const point=actor.sample(now);
+    const jump=b.input.jump;
+    const jumping=jump!==null && settledJump.current!==jump && b.input.enabled && b.input.animateJump;
+    const point=jump ? (jumping ? jumpGroundPosition(jump,now) : jump.to) : actor.sample(now);
     const camera=b.input.discontinuity ? b.input.camera : travelCamera(b.input.grid,point,b.input.camera);
     const cellX=b.width/camera.width, cellY=b.height/camera.height;
     const dx=(b.input.camera.left-camera.left)*cellX;
@@ -69,15 +77,21 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     b.world.style.translate=cameraWorldTranslation(b.input.grid,camera);
     translate(b.player,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     if(b.replacement) translate(b.replacement,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
+    if(b.jumper && jump) translate(b.jumper,dx+(point.x-jump.from.x)*cellX,dy+(point.y-jump.from.y)*cellY);
+    // Local CSS poses use this same clock, including a delayed React mount or
+    // cancellation. These are three cached animation handles, never layout reads.
+    if(jump) for(const animation of b.jumpAnimations) animation.currentTime=jumping
+      ? Math.max(0,Math.min(jump.durationMs,now-jump.startedAt)) : jump.durationMs;
     for(const node of b.anchors) translate(node,dx,dy);
-    let moving=actor.moving;
+    let moving=jump ? jumping && now<jump.startedAt+jump.durationMs : actor.moving;
     const positions=b.followers.map(follower=>{
       const travel=followers.current.get(follower.id)!;
       const at=travel.sample(now); moving ||= travel.moving;
       translate(follower.node,(at.x-follower.point.x)*cellX,(at.y-follower.point.y)*cellY);
       return {id:follower.id,point:at};
     });
-    const bounds=actor.bounds;
+    const bounds=jump ? {left:Math.min(jump.from.x,jump.to.x),top:Math.min(jump.from.y,jump.to.y),
+      right:Math.max(jump.from.x,jump.to.x),bottom:Math.max(jump.from.y,jump.to.y)} : actor.bounds;
     const first=travelCamera(b.input.grid,{x:bounds.left,y:bounds.top},b.input.camera);
     const last=travelCamera(b.input.grid,{x:bounds.right,y:bounds.bottom},b.input.camera);
     snapshot.current={position:point,camera,followers:positions,contentSize:{width:b.width,height:b.height},
@@ -101,6 +115,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     const b=binding.current;
     if(!b) return;
     const now=performance.now();
+    settledJump.current=b.input.jump;
     leader.current?.settle(b.input.position,now);
     for(const f of b.followers) followers.current.get(f.id)?.settle(f.point,now);
     paint(now);
@@ -110,12 +125,14 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     const board=input.boardRef.current;
     if(!board) { cancelFrame(); binding.current=null; observer.current?.disconnect(); return; }
     const prior=binding.current, now=performance.now();
+    if(prior?.input.jump!==input.jump) settledJump.current=null;
+    if(!input.enabled || !input.animateJump || document.hidden) settledJump.current=input.jump;
     const boundary=!prior || prior.board!==board || prior.input.runKey!==input.runKey ||
-      prior.input.discontinuity!==input.discontinuity || !input.enabled || document.hidden;
+      prior.input.discontinuity!==input.discontinuity || prior.input.jump!==input.jump || !input.enabled || document.hidden;
     if(boundary) { cancelFrame(); leader.current=new TileTraveller(input.position,now); followers.current.clear(); }
     else leader.current!.retarget(input.position,now,input.durationMs);
     const discover=!prior || prior.board!==board || prior.input.runKey!==input.runKey ||
-      prior.input.bindingKey!==input.bindingKey ||
+      prior.input.bindingKey!==input.bindingKey || prior.input.animateJump!==input.animateJump ||
       prior.input.followers.map(f=>f.id).join(":")!==input.followers.map(f=>f.id).join(":");
     const nodes=discover ? Array.from(board.querySelectorAll<HTMLElement>("[data-follower-id]")) : prior.followers.map(f=>f.node);
     const boundFollowers=input.followers.flatMap(f=>{
@@ -127,9 +144,14 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       return [{...f,node}];
     });
     for(const id of followers.current.keys()) if(!boundFollowers.some(f=>f.id===id)) followers.current.delete(id);
+    const jumper=discover ? board.querySelector<HTMLElement>('[data-travel-actor="jump"]') : prior.jumper;
+    const jumpAnimations=discover ? (jumper?.getAnimations({subtree:true})??[])
+      .filter(animation=>animation instanceof CSSAnimation && animation.animationName.startsWith("spring-jump-")) : prior.jumpAnimations;
+    if(discover) for(const animation of jumpAnimations) animation.pause();
     binding.current={input,board,world:discover ? board.querySelector<HTMLElement>(".camera-world")! : prior.world,
       player:discover ? board.querySelector<HTMLElement>(".player-layer")! : prior.player,
       replacement:discover ? board.querySelector<HTMLElement>('[data-travel-actor="replacement"]') : prior.replacement,
+      jumper,jumpAnimations,
       anchors:discover ? Array.from(board.querySelectorAll<HTMLElement>("[data-travel-camera-anchor]")) : prior.anchors,followers:boundFollowers,
       width:prior?.board===board ? prior.width : board.clientWidth,
       height:prior?.board===board ? prior.height : board.clientHeight};
@@ -147,7 +169,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     }
     paint(now);
   },[input.boardRef,input.grid,input.position,input.camera,input.followers,input.bindingKey,input.runKey,
-    input.enabled,input.discontinuity,input.durationMs,input.onGeometryReset,cancelFrame,paint,settle]);
+    input.enabled,input.discontinuity,input.jump,input.animateJump,input.durationMs,input.onGeometryReset,cancelFrame,paint,settle]);
 
   useLayoutEffect(()=>{
     const hide=()=>{ if(document.hidden) settle(); };

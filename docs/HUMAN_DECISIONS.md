@@ -2,6 +2,13 @@
 
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
+**Latest v0.22.12 steer:** [jump camera and tall walls](user-playtests/2026-09-06-jump-camera-and-tall-walls.md).
+The wall appearance remains explicitly unresolved. Target walls taller than Ame,
+convincing3D faces/depth, clean beautiful lighting; a2D illusion is acceptable.
+Research/plan/implementation are authorized. Finish the bounded jump-camera fix,
+then address this wall target before celebration polish. No further Human input
+is needed to start. Geometry/source tests cannot manufacture Human beauty approval.
+
 **Current Human instruction,2026-09-06: execute and deliver.** The Human has
 authorized logical roadmap/backlog execution, meaningful backup commits and
 qualified deployments. [Phone/audio intake](user-playtests/2026-09-06-phone-composition-and-default-mix.md)

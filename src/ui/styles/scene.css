@@ -877,7 +877,6 @@
   place-items: center;
   overflow: visible;
   pointer-events: none;
-  animation: spring-jump-travel var(--jump-duration, 540ms) cubic-bezier(0.2, 0.72, 0.22, 1) both;
 }
 .jump-presentation-shadow {
   position: absolute;
@@ -986,10 +985,6 @@
 }
 :root:is([data-motion=reduced],[data-quality=static]) .maze-board.rescue-active .player-layer {
   animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .jump-presentation {
-  animation: none;
-  transform: translate(var(--jump-x), var(--jump-y));
 }
 :root:is([data-motion=reduced],[data-quality=static]) .jump-presentation-body {
   animation: none;
@@ -1725,11 +1720,6 @@
   38% { transform: translateY(-8%) rotate(-2deg); }
   55% { transform: translateY(0) rotate(2deg); }
   72% { transform: translateY(-5%) rotate(1deg); }
-}
-
-@keyframes spring-jump-travel {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(var(--jump-x), var(--jump-y)); }
 }
 
 @keyframes spring-jump-shadow {

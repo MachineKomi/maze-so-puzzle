@@ -293,6 +293,7 @@ interface RescuePresentation {
 }
 
 interface JumpPresentation {
+  readonly startedAt: number;
   readonly from: Point;
   readonly to: Point;
   readonly holeCount: number;
@@ -831,12 +832,7 @@ function App() {
   const worldWindow = useMemo(() => fullLevelWindow(level), [level]);
   const cameraWindow = useMemo(() => {
     if (!explorationMode) return worldWindow;
-    const cameraFocus = jumpPresentation
-      ? {
-          x: Math.round((jumpPresentation.from.x + jumpPresentation.to.x) / 2),
-          y: Math.round((jumpPresentation.from.y + jumpPresentation.to.y) / 2),
-        }
-      : game.position;
+    const cameraFocus = jumpPresentation?.to ?? game.position;
     return getCameraWindow(level, cameraFocus, DEFAULT_FOV_SIZE);
   }, [explorationMode, game.position, jumpPresentation, level, worldWindow]);
   const fullMapTiles = useMemo(() => new Set(level.terrain.flatMap((row, y) =>
@@ -1026,7 +1022,8 @@ function App() {
     // Sound may change pace while a tile is in flight. Input is inert and held
     // intent is cleared, but the already-captured segment must finish normally.
     enabled:screen==="game" && (!modalOpen || soundOpen) && preferences.quality!=="static",
-    discontinuity:jumpPresentation!==null || portalPresentation!==null,
+    discontinuity:portalPresentation!==null,
+    jump:jumpPresentation, animateJump:motion==="full",
     durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
   });
 
@@ -1218,6 +1215,7 @@ function App() {
     setPresentedPower(null);
     setPresentedEnemyPower(null);
     setJumpPresentation({
+      startedAt: performance.now(),
       from: event.from,
       to: event.to,
       holeCount: motion.holeCount,
@@ -1236,7 +1234,7 @@ function App() {
     // A portal continuation replaces this phase atomically: never expose the
     // already-committed destination or followers between the two animations.
     if (!continues) {
-      schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
+      schedulePresentationTimer(sequence, () => setJumpPresentation(null), duration);
       finishPresentationAfter(duration);
     }
     return duration;
@@ -2516,13 +2514,11 @@ function App() {
                 <div
                   data-scene-slot="effects"
                   className="jump-presentation"
-                  data-travel-camera-anchor=""
+                  data-travel-actor="jump"
                   data-sfx-cue="spring-boots-boing"
                   data-hole-count={jumpPresentation.holeCount}
                   style={{
                     ...cameraLayerStyle(jumpPresentation.from, cameraWindow),
-                    "--jump-x": `${(jumpPresentation.to.x - jumpPresentation.from.x) * 100}%`,
-                    "--jump-y": `${(jumpPresentation.to.y - jumpPresentation.from.y) * 100}%`,
                     "--jump-duration": `${jumpPresentation.durationMs}ms`,
                     "--jump-apex": `${jumpPresentation.apexPercent}%`,
                     "--jump-descent": `${jumpPresentation.descentPercent}%`,

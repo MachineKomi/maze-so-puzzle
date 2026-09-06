@@ -2,6 +2,23 @@
 
 ## Execution outputs — 2026-09-06
 
+### Jump camera / tall-wall continuation
+
+Astra owns runtime on `codex/jump-camera-delight`, starting fromaf70dd0.
+All following packets are retained under `C:/GameDev/maze-game-qa/performance/`:
+
+| Folder | Files / bytes | Purpose |
+| --- | ---: | --- |
+| `jump-camera-baseline-v02212/` |4 /710,289|Exact qualified0.22.12 HTML/JS/CSS and identity JSON, before replacing dist in place. Shared unchanged public media; no full build copy.|
+| `jump-camera-before-20260906/` |7 /1,645,384|Two old-source camera traces/captures and real-route fixture packet.|
+| `jump-camera-after-20260906/` |12 /1,690,330|Seven candidate browser cases, including Full/Lite/Reduced/Static, resize and blur.|
+
+`scripts/performance/jump-camera.pw.ts` is reusable source. The candidate receipt,
+latest Human intake and tall-wall plan are durable Markdown. Further prototype
+outputs and final qualification will add their exact paths/measurements here.
+No dependency install, full repo/worktree copy, deletion or archiving is authorized
+by this log. Test servers end with their runners; timing work remains serialized.
+
 ### Completed web0.22.12 qualification and publication
 
 Owner Astra. Runtime `e18c6ee`; final source/harness `5013ea7`.

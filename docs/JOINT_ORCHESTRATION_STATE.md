@@ -7,6 +7,14 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Latest priority: jump camera, then genuinely tall walls.** The Human's
+  [v0.22.12 feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
+  explicitly leaves wall appearance unresolved and requires walls taller than
+  Ame, with convincing3D depth and clean beautiful lighting. R1 remains held;
+  the wall rendering comparison now precedes DELIGHT-02B/LEARN-01. Astra owns
+  runtime on `codex/jump-camera-delight`; actual Sol independently reviews.
+  Research and implementation can proceed without further Human input.
+
 - **CURRENT: execution authorized by the Human,2026-09-06.** Astra is the sole
   runtime writer; actual Sol independently reviews source and rendered evidence.
   [Latest phone/audio feedback](user-playtests/2026-09-06-phone-composition-and-default-mix.md)
@@ -561,14 +569,15 @@ archiving still require explicit exact-target Human approval.
 
 [Roadmap section4](plans/00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates)
 is the single detailed dependency table. The [dispatch packet](plans/EXECUTION_PROMPTS.md)
-links the executable briefs. Wall qualification + read-only09-P0 -> BOOK-02A ->
-DELIGHT-02B -> LEARN-01 -> isolated09-P1 -> UI/focus/lead interface ->08. Affected
+links the executable briefs. PHONE-02/BOOK-02A and read-only09-P0 are delivered.
+Current next: jump-camera repair -> tall-wall comparison/resolution -> DELIGHT-02B
+-> LEARN-01 -> isolated09-P1 -> UI/focus/lead interface ->08. Affected
 terrain/held/actor grounding and approved Alex integration precede selective05,
 then07B -> full09 ->10 ->11 ->13 -> proposed12 cleanup ->RC-01 ->14 ->15.
 
 This preserves the wider programme while advancing learning/design evidence and
 removing unrelated art prerequisites from semantic controls. Plans are not
-execution authorization during the current Human-requested planning pause. No
+themselves a substitute for qualification; current Human execution is authorized. No
 historical Agent04/01 task should be restarted from an old active heading.
 
 ## 6. Historical v0.22.0 evidence and continuing practical limits

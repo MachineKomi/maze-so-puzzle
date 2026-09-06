@@ -1,5 +1,13 @@
 # Maze so Puzzle — playtest backlog
 
+## Latest intake — jump camera and unresolved tall walls
+
+[Human v0.22.12 feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
+adds continuous camera follow through hole jumps. Wall depth/height is **not
+resolved**: require walls convincingly taller than Ame, clean corners and
+beautiful lighting. Current shallow walls and held R1 do not close that target.
+Jump repair and a genuinely tall rendering comparison precede DELIGHT-02B.
+
 ## Current delivery and remaining routing — 2026-09-06
 
 **PHONE-02 / audio65–85 / BOOK-02A is live on web0.22.12**, source `5013ea7`,
