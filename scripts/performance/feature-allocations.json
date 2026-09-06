@@ -37,14 +37,14 @@
       "owner": "audio",
       "status": "approved",
       "compressedJsBytes": 395,
-      "compressedCssBytes": 0,
+      "compressedCssBytes": 4,
       "runtimePublicBytes": 0,
       "reason": "Astra allocates the measured 395 gzip9 JavaScript bytes for the bounded calibration/persistence/slider candidate and measured high-combination warning, within the jointly authorized 1600-byte prototype cap. Physical listening and release promotion remain separate.",
       "evidencePath": "docs/reviews/2026-09-06-audio01v2-candidate.md",
       "reviewBy": "2026-10-06",
       "rollbackPoint": "Revert the complete AUDIO-01V2 calibration, preference-version reader/writer and slider mapping to b837e74b7d5fa7d6193779c8464410580cafaffc, preserving the frozen v0.22.5 release. Keep raw-gain authority; older builds clamp newly boosted SFX above one only if they rewrite preferences.",
       "dependencies": "Human V23-01 balance request, completed v0.22.5 publication, Astra/Sol joint calibration decision. Actual Sol source review and actual rendered cue/overlap peak review remain required before promotion.",
-      "notes": "Candidate155702 JSgzip9 versus baseline155307; new ceiling155757 retains55 bytes inherited margin. CSS23976/public165031011, media, decoded-image inventory, dependencies, camera, gameplay and campaign saves unchanged. No new runtime limiter, cue mastering or readiness controller."
+      "notes": "Candidate155702 JSgzip9 versus baseline155307; new ceiling155757 retains55 bytes inherited margin. CSS23980 is +4bytes to keep the nested mix warning visible at short heights; public165031011, media, decoded-image inventory, dependencies, camera, gameplay and campaign saves unchanged. No new runtime limiter, cue mastering or readiness controller."
     },
     {
       "id": "ui-plan01-physical-shell-font",

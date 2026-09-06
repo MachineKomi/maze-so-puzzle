@@ -210,6 +210,26 @@ Final native qualification/publication passed; physical P9 acceptance is separat
 Home/dialog/victory propagation, full 200% text coverage, visible HUD pace,
 settings artwork and other optical refinements remain open; P9 does not close them.
 
+### P10 — Calibrated Music/SFX balance (v0.22.6 qualification)
+
+Publication status and downloads are owned by joint state; do not assume a
+candidate is live. When v0.22.6 is available:
+
+- [ ] Your existing volume choices should sound unchanged when you first open
+  it, though the percentages may look different. Opening/closing Sound, changing
+  pace/quality and reopening the app should not change the chosen balance.
+- [ ] For the requested new balance, set **Music75% and Sound effects75%** in
+  Sound & comfort. This corresponds to old Music10%/SFX100%. No Reset Progress
+  is needed. Is it comfortable on phone, iPad, laptop web and Windows, especially
+  at low device volume? Tell us which balance you prefer on each device.
+- [ ] Adjust each slider independently; try Test sound, mute/change/unmute and
+  zero. There should be no unexpected burst, click, track restart or lost choice.
+  Above75% effects can get louder. If very high settings sound crackly, lower
+  either slider; all-controls-maximum mixing is not yet finally mastered.
+
+P5–P9 remain cumulative. This build does not change the iPad camera or close its
+known stuttering issue. Physical listening is separate from engineering checks.
+
 ## Easy reply format
 
 `Build / device / browser or Windows app / maze / settings / check ID / what I saw`

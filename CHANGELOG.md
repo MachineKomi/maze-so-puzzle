@@ -4,6 +4,18 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.22.6 — AUDIO-01V2 (publication qualification)
+
+- Music and Sound effects now use calibrated controls:75%/75% represents the
+  preferred quieter-music/clearer-effects balance. New profiles use this default;
+  existing volume choices are preserved exactly. No need to reset progress.
+- Sound effects have useful adjustment above the default. Very high Music and
+  Sound effects together may distort; lower either if heard. Final mastering and
+  physical listening remain open, not implied by this preview.
+- Opening Sound or changing another comfort setting never rounds a saved gain.
+  Unknown future preference versions are preserved, with a nonblocking save warning.
+- No camera, gameplay, maze/save-rule, artwork, dependency or OST-file changes.
+
 ## Unreleased — post-0.20.1 Agent 01 baseline
 
 ### Changed

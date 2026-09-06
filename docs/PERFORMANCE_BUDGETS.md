@@ -2,9 +2,11 @@
 
 ## AUDIO-01V2 calibration candidate allocation — 2026-09-06
 
-Root allocates exactly342 gzip9 JS bytes against v0.22.5's155307 measured total:
-candidate155702 including the measured high-combination warning; ceiling155757 retains55 inherited bytes. CSS23976/public165031011
-remain unchanged, with no media/decoded-image/dependency growth. This stays below
+Root allocates exactly395 gzip9 JS bytes against v0.22.5's155307 measured total:
+candidate155702 including the measured high-combination warning; ceiling155757 retains55 inherited bytes.
+Root also allocates exactly4 CSSgzip9 bytes (23980 total) to keep the nested mix
+warning visible in short landscape dialogs. Public165031011 remains unchanged,
+with no media/decoded-image/dependency growth. The JavaScript stays below
 the joint1600-byte prototype maximum. The initial unallocated287-byte overrun
 was rejected before this named allocation; do not relabel that run passed.
 [Candidate/gates](reviews/2026-09-06-audio01v2-candidate.md). Byte approval does

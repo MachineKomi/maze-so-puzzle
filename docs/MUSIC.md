@@ -1,5 +1,24 @@
 # Music
 
+## Calibrated balance — AUDIO-01V2 candidate, 2026-09-06
+
+New preferences use Music gain.10 and SFX gain1, both displayed75%. Music uses
+the reviewed piecewise curve; SFX reaches4/3 at100%. Existing raw gain choices
+remain exact, including through unrelated comfort edits. Opening settings never
+rewrites them. A version2 marker permits boosted SFX; an unfamiliar explicit
+version is never overwritten. Campaign Reset still preserves comfort settings.
+
+[Joint decision](reviews/2026-09-06-audio01v2-joint-decision.md) and
+[Sol's measurement review](reviews/2026-09-06-audio01v2-sol-final-review.md)
+approve only a qualified preview after integration checks. Default Music plus
+boosted SFX retained sample margin at48/44.1kHz. Max Music plus SFX can overshoot
+full scale even at the old SFX maximum; visible guidance advises lowering either
+if distortion is heard. This is not all-range clip-free or physical listening
+acceptance. AUDIO-01A/07B must resolve output headroom/mastering before final audio
+qualification and include the new two-stream crossfade case. No limiter,
+compressor, whole-OST decode, new cues or readiness controller is added here.
+Joint state owns actual publication; the following v0.22.3 section is historical.
+
 ## Independent balance follow-up — 2026-09-06 (v0.22.3)
 
 Delivered in V22-COMFORT1, frozen runtime `b834a8e`. Final519 tests, canonical

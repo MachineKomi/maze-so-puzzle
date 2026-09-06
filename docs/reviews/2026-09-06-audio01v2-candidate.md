@@ -27,6 +27,19 @@ content, assets, camera or layout scope is included.
 
 ## Current evidence and gates
 
+The v0.22.6 versioned candidate passed a fresh serial551/551 test run. r3 passed
+all six production fresh/legacy/future cases at844x390 and1194x834, including
+fractional storage, actual input, shared mute and actual20ms gain schedules.
+Earlier r1/r2 failed on an idle AudioParam getter; a separate real silent graph
+proved correctly scheduled zero remains silent when positive input returns.
+The corrected observer requires proper zero automation and no connected/live
+effects, with active Test verifying actual gain. No runtime mute fix was needed.
+Sol then caught a genuine CSS issue: the compact `.sound-persistence` rule hid
+the new warning. Restricting it to the direct-child reset note costs exactly4
+CSSgzip9 bytes; the nested warning remains ordinary readable text. Root approves
+that bounded allocation (23980 CSS total). r4 visibility/final-source browser
+and native checks must pass before publication.
+
 Source-bound full check at01e7521:551/551 across52files, TypeScript/build and a
 fresh performance check passed. Independent Sol source/48k/44.1k sample-peak
 review now conditionally accepts4/3 for a qualified preview: see

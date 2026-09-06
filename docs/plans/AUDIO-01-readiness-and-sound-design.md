@@ -53,7 +53,8 @@ calibrated UI controls defaulting to75% and adjustment room above. This supersed
 the initial22/100 default below for the next implementation, not frozen v0.22.3/4.
 Read [V23-01](../playtests/2026-09-06-v0223-v0224-intake.md). Define explicit gain
 curves and versioned migration preserving existing effective choices; zero is
-silence,100% offers safe usable headroom, mute leaves both preferences intact.
+silence,100% offers measured usable headroom with disclosed combination limits,
+and mute leaves both preferences intact.
 Verify actual graph response/clipping and disclose any unavoidable saturated
 legacy value rather than silently reset it. Pair this small correction with the
 next qualified UI checkpoint when ownership permits; no new art/OST mastering
@@ -61,8 +62,12 @@ or full readiness redesign is needed merely to calibrate these controls.
 
 The [reconciled Astra/Sol implementation boundary](../reviews/2026-09-06-audio01v2-joint-decision.md)
 selects Sol's usable piecewise music curve and concrete future-version write
-protection. SFX headroom still requires actual sample/overlap qualification;
-neither the preflight's loose bound nor fake GainNodes approves a boosted ceiling.
+protection. Actual48/44.1kHz sample/overlap review now conditionally approves4/3
+for a qualified preview around the new default, not all-range clip-free audio.
+The existing max-Music overlap already exceeds full scale; the boost modestly
+increases it. Keep the visible high-combination warning and physical P8 gate.
+See the joint decision and independent Sol final review for exact evidence;
+neither a loose bound nor fake GainNodes substitutes for those measurements.
 This follows the frozen v0.22.5 UI/Exit publication and does not change that build.
 
 Source: [Human iPad balance report](../user-playtests/2026-09-06-ipad-audio-balance.md).
@@ -155,6 +160,12 @@ No requirement here authorizes microphone capture or OS system-volume changes.
    budget their peak overlap. No full-OST or full-playlist download/decode, new
    service worker, third-party service, audio library or UI redesign in this seam.
    Keep all 42 songs/context pools and current transport behavior compatible.
+8. Resolve the measured max-Music/SFX output-headroom limitation before final
+   all-range audio qualification. Compare conservative headroom/mastering and
+   bounded output protection, including two active crossfade streams and dense
+   authored cues at both sample rates. Preserve the chosen default balance and
+   stored-gain authority; do not quietly impose a compressor or reset old choices.
+   Record sample and true-peak limitations separately from physical listening.
 
 ## B. Creative sound design under Plan 02
 
