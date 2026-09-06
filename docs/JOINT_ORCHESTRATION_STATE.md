@@ -50,7 +50,10 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - [Primary WebKit research](reviews/2026-09-06-ipad-webkit-research.md) finds
   relevant repaint/composition, SVG and layer-memory risks, not evidence that
   smooth scrolling is impossible on this iPad or a matching confirmed bug.
-  PERF-02C remains a bounded diagnostic, not an accepted camera fix.
+  The [completed PERF-02C triplet](reviews/2026-09-06-perf02c-triplet-review.md)
+  isolated the extra world layer on Edge but demonstrated no improvement:
+  Paint count fell while summed Paint duration rose; rAF p95 was unchanged.
+  No layer hint is shipped and no automatic larger matrix is authorized.
 
 - **Recorded v0.22.2 physical result, 2026-09-06:** [Human feedback](user-playtests/v0222-playtest-feedback.md) reports no obvious regression, perhaps slight improvement, but scrolling still stutters on iPad. Character/animation movement is smooth while the camera stays clamped; desktop browser does not exhibit the same symptom. The iPad gate is **not passed**. Possible thin lines need investigation, not a fabricated regression verdict. Moving-terrain/filter isolation remains a separate serial workstream; completed pace work is not its remedy. Texture-scale and Lanternlight level-design steer is routed in backlog/roadmap.
 
@@ -197,7 +200,7 @@ is claimed. Raw evidence and private profile copies remain external under
 **Release owner: root Astra; runtime owner: actual Sol in the isolated Exit task.** PLAY-B is accepted,
 merged and frozen for v0.22.4 at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
 PLAY-B has handed back. Root completed native, canonical-web and public-download
-gates and is committing the receipt checkpoint. Source push alone was not used
+gates and pushed receipt checkpoint `bcaab81`. Source push alone was not used
 as publication acceptance.
 Do not mutate the frozen runtime to fold later feedback into this release.
 
@@ -210,8 +213,10 @@ layout change. Repair native normal close through the smallest permitted
 platform seam; require actual process exit plus save/settings recovery. Source
 candidate `e5a4a77cfc786e94b9e57f08ec95ca70cccdc1dc` is clean/pushed with8 focused
 tests and TypeScript passed. Root's source inspection finds no blocker; actual
-native/browser/static qualification remains pending. Root retains the serial
-slot for the bounded PERF-02C pilot, then returns it to Sol for Exit validation.
+native/browser qualification remains pending. The bounded PERF-02C pilot is
+complete and its browser/preview processes are closed. Sol now owns the serial
+heavy-job slot for Exit validation. Candidate JS gzip9 is155339 (+249); CSS,
+public assets and decoded-image inventory are unchanged. Final gates remain open.
 The current X/Alt+F4 workaround remains
 until the separately versioned Exit fix is qualified; it is not part of v0.22.4.
 
@@ -222,14 +227,14 @@ the [UI plan](plans/V22-UI-01-short-height-and-reward.md) and
 [technical preflight](reviews/2026-09-06-v22-ui01-preflight.md). The preflight is
 Astra-team preparation, not actual Sol acceptance or a second implementation.
 
-**PERF-02C remains a separate serial experiment**, not a competing writer:
-[bounded layer preflight](reviews/2026-09-06-perf02c-layer-preflight.md). Pin its
-actual source, Regular pace and reference views afresh. Do not change UI geometry
-during matched camera measurements or compare new UI timing with an old baseline.
-Its [PERF-02B probes](reviews/2026-09-06-perf02b-moving-terrain-review.md) completed
-15/15 without reproducing the iPad fault; the layer hint is a hypothesis, not a
-published performance fix. Root may explicitly sequence that bounded experiment
-between independently frozen UI seams, retaining one writer and actual review.
+**PERF-02C completed as a diagnostic, not a runtime candidate.** The
+[three-row review](reviews/2026-09-06-perf02c-triplet-review.md) preserves all
+failed harness attempts, successful restoration and unchanged source/build.
+One warm-cache, low-memory Edge triplet cannot establish iPad benefit. No further
+experiment is queued automatically. Any future Safari/camera trial needs a new
+explicit bounded assignment and matched source/geometry; independent UI/audio
+work continues. The [audio-calibration preflight](reviews/2026-09-06-audio01v2-preflight.md)
+is preparation only; its proposed boosted SFX ceiling is not acoustically qualified.
 
 Physical iPad scrolling acceptance remains open after the reported v0.22.1 and
 v0.22.2 failures. Do not demand another reproduction of an already reported
@@ -284,7 +289,7 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.4 is published and independently verified. Finish the bounded PERF-02C pilot and return the serial heavy slot to actual Sol for UI-NATIVE-EXIT-01 qualification; root independently reviews before integration. Then assign short-height V22-UI-01 and calibrated AUDIO-01V2 in reviewed increments. iPad scrolling remains unresolved; no layout mutations during matched camera measurements. Preserve actual dependency gates and resolve root PT36 before04.
+1. v0.22.4 is published and independently verified. PERF-02C is complete without demonstrated efficacy; no camera hint ships. Actual Sol owns the serial heavy slot for UI-NATIVE-EXIT-01 qualification; root independently reviews before integration. Then assign short-height V22-UI-01 and calibrated AUDIO-01V2 in reviewed increments. iPad scrolling remains unresolved; no layout mutations during future matched camera measurements. Preserve actual dependency gates and resolve root PT36 before04.
 2. **AUDIO-01V2** early calibrated default/control conversion, separately assigned
    after the active Exit seam and before broader **AUDIO-01A** music/SFX readiness;
    then **V22-HOLE-01** single-width

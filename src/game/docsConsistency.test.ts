@@ -4,6 +4,8 @@ import gameplaySpec from "../../docs/GAMEPLAY_DESIGN_SPEC.md?raw";
 import checklist from "../../docs/RELEASE_CHECKLIST.md?raw";
 import story from "../../docs/STORY_BIBLE.md?raw";
 import readme from "../../README.md?raw";
+import { PLAYER_PROGRESS_SCHEMA_VERSION } from "../progress";
+import { ACTIVE_RUN_SCHEMA_VERSION } from "../session";
 import { CURATED_LEVELS } from "./levels";
 import { measureLevel } from "./metrics";
 
@@ -19,8 +21,8 @@ describe("gameplay documentation consistency", () => {
   it("keeps current persistence, onboarding, and optional-rescue authority aligned", () => {
     expect(readme).toContain("6 × 6 maze is fully visible");
     expect(readme).toContain("Gold and Science Points are records of discovery");
-    expect(architecture).toContain("schema-v5 progress");
-    expect(architecture).toContain("schema-v3 snapshot");
+    expect(architecture).toContain(`schema-v${PLAYER_PROGRESS_SCHEMA_VERSION} progress`);
+    expect(architecture).toContain(`schema-v${ACTIVE_RUN_SCHEMA_VERSION} snapshot`);
     expect(architecture).toContain("four-tier Required Path help");
     expect(story).toContain("rescuing friends remains a kind optional act");
     expect(checklist).toContain("ordinary solution with zero\n  rescues");

@@ -326,7 +326,8 @@ contextual rendition remains distinct from the repaired 256px field derivative.
   synchronized between devices.
 - Full reset is an explicit destructive UI flow available from the title and
   Adventure Book. After confirmation, `resetProgress.ts` deletes only
-  `maze-so-puzzle-progress-v5`, `maze-so-puzzle-progress-v4`, `maze-so-puzzle-progress-v3`,
+  `maze-so-puzzle-progress-v6`, `maze-so-puzzle-progress-v5`,
+  `maze-so-puzzle-progress-v4`, `maze-so-puzzle-progress-v3`,
   `maze-so-puzzle-progress-v2`, `maze-so-puzzle-progress-v1`,
   `maze-so-puzzle-active-run-v3`, `maze-so-puzzle-active-run-v2`, and
   `maze-so-puzzle-active-run-v1`; unrelated

@@ -18,10 +18,11 @@ inherited physical/family checks remain separate from engineering acceptance.
 
 **One active runtime writer:** actual Sol owns UI-NATIVE-EXIT-01 in isolated
 `C:/GameDev/maze-game-ui-exit` / `codex/v22-ui-native-exit` from `45d8437`;
-Astra independently reviews. Root is frozen-release/documentation-only and
-holds the heavy-job slot for a bounded PERF-02C pilot before handing it to Sol
-for Exit qualification. Exit source candidate `e5a4a77` has8 focused tests/TS
-passed, but no native/browser/static qualification yet. The Exit candidate has a
+Astra independently reviews. Root is frozen-release/documentation-only; the
+[PERF-02C triplet](../reviews/2026-09-06-perf02c-triplet-review.md) is complete
+without demonstrated efficacy and Sol now holds the heavy slot for Exit
+qualification. Exit source candidate `e5a4a77` has8 focused tests/TS and static
+measurement passed, but no native/browser qualification yet. The Exit candidate has a
 bounded +400 gzip9 JS cap with zero media/dependency/layout change, and does not
 enter frozen v0.22.4. After its separate review, prototype short-height gameplay
 and Book before propagating V22-UI-01 changes. Read the

@@ -21,8 +21,9 @@ durable completions/unlocks/rewards/history survive. No physical gate is implied
 while Sol writes. At most +400 gzip9 JS bytes is authorized for this bounded
 candidate, measured rather than automatically consumed; zero media, dependency
 or layout change. Source candidate `e5a4a77` is clean/pushed;8 tests and TS pass.
-Root finishes the bounded PERF-02C diagnostic, then returns the heavy slot to
-Sol for Exit qualification. No actual native Exit pass is claimed yet.
+The [PERF-02C diagnostic](../reviews/2026-09-06-perf02c-triplet-review.md) is complete
+without demonstrated efficacy; no hint ships. Sol now owns the heavy slot for
+Exit qualification. No actual native Exit pass is claimed yet.
 No candidate Exit fix is folded into that release. After the separate Exit
 handback/review, prototype short-height gameplay/Book before broader UI changes.
 [UI plan](V22-UI-01-short-height-and-reward.md) and
