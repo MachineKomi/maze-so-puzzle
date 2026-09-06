@@ -337,8 +337,8 @@
       },
       {
         "path": "docs/source-assets/production/hole02-pits/PROMPTS.md",
-        "sha256": "c4810527a8273a305656610375d5079e622d74cca7189b407c44c6295d6babec",
-        "bytes": 3756,
+        "sha256": "f6a50d4ac6e2da06200b0eb59bf1ae655d6c2976fa3ea84c7dea262f3a46407d",
+        "bytes": 3755,
         "referencedBy": [
           "batch:hole02-pits"
         ]
@@ -817,15 +817,15 @@
     "generationBatches": [
       {
         "path": "docs/source-assets/production/hole02-pits/run-record.json",
-        "sha256": "27269d52737eb247a3bc913b662127b61d95e7329df4c0e00a1182d36819ed81",
+        "sha256": "804bfe182d99035ec13cb12a9fb10610746b7112afa2901548f40bffb25b726c",
         "bytes": 4533,
         "batchId": "hole02-pits",
         "revision": 1,
         "status": "reviewed",
         "promptFile": {
           "path": "docs/source-assets/production/hole02-pits/PROMPTS.md",
-          "sha256": "c4810527a8273a305656610375d5079e622d74cca7189b407c44c6295d6babec",
-          "bytes": 3756,
+          "sha256": "f6a50d4ac6e2da06200b0eb59bf1ae655d6c2976fa3ea84c7dea262f3a46407d",
+          "bytes": 3755,
           "fidelity": "exact"
         },
         "runCount": 2,
