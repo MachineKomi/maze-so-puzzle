@@ -2354,6 +2354,7 @@ function App() {
               onLostPointerCapture={finishBoardPointer}
               onContextMenu={(event) => event.preventDefault()}
             >
+              <span className="terrain-ambient-decoration" aria-hidden="true" />
               <div className="camera-world" data-scene-slot="world" style={cameraWorldStyle(level, cameraWindow)} aria-hidden="true">
                 <MazeTerrain level={level} camera={worldWindow} />
 

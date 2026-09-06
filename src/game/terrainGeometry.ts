@@ -27,6 +27,21 @@ export interface RoundedCellUnionPath {
   readonly loopCount: number;
 }
 
+/** Merged exposed edges from the same traced loops as the rounded silhouette.
+ * Material lies on the right; normals point into non-wall space. */
+export interface TerrainBoundaryEdge {
+  readonly start: Point;
+  readonly end: Point;
+  readonly entry: Point;
+  readonly exit: Point;
+  readonly normal: Point;
+}
+
+export interface RoundedTerrainGeometry extends RoundedCellUnionPath {
+  readonly edges: readonly TerrainBoundaryEdge[];
+  readonly corners: readonly RoundedCorner[];
+}
+
 type TerrainGrid = Pick<LevelDefinition, "width" | "height" | "terrain">;
 type TerrainCamera = Pick<CameraWindow, "left" | "top" | "right" | "bottom">;
 
@@ -42,11 +57,12 @@ interface Edge {
   readonly direction: 0 | 1 | 2 | 3;
 }
 
-interface RoundedCorner {
+export interface RoundedCorner {
   readonly entry: Point;
   readonly exit: Point;
   readonly radius: number;
   readonly sweep: 0 | 1;
+  readonly center: Point;
 }
 
 // Larger radii can cross a one-cell feature and change the source grid's
@@ -260,6 +276,8 @@ function roundedCorners(loop: readonly Point[], radius: number): readonly Rounde
         y: point.y + outgoing.y * effectiveRadius,
       },
       radius: effectiveRadius,
+      center: { x: point.x - incoming.x * effectiveRadius + outgoing.x * effectiveRadius,
+        y: point.y - incoming.y * effectiveRadius + outgoing.y * effectiveRadius },
       // Positive cross products are visually clockwise in SVG coordinates.
       sweep: turn > 0 ? 1 : 0,
     };
@@ -312,17 +330,37 @@ export function createRoundedCellUnionPath(
   isOccupied: CellPredicate,
   radius = DEFAULT_TERRAIN_CORNER_RADIUS,
 ): RoundedCellUnionPath {
+  const { d, fillRule, loopCount } = createRoundedCellUnionGeometry(bounds, isOccupied, radius);
+  return { d, fillRule, loopCount };
+}
+
+export function createRoundedCellUnionGeometry(
+  bounds: CellUnionBounds,
+  isOccupied: CellPredicate,
+  radius = DEFAULT_TERRAIN_CORNER_RADIUS,
+): RoundedTerrainGeometry {
   validateBounds(bounds);
   validateRadius(radius);
 
   const occupied = collectOccupiedCells(bounds, isOccupied);
-  if (occupied.size === 0) return EMPTY_PATH;
+  if (occupied.size === 0) return { ...EMPTY_PATH, edges: [], corners: [] };
 
-  const loops = traceBoundaryLoops(collectBoundaryEdges(bounds, occupied));
+  const loops = traceBoundaryLoops(collectBoundaryEdges(bounds, occupied)).map(removeCollinearPoints);
   return {
     d: loops.map((loop) => loopPath(loop, radius)).filter(Boolean).join(" "),
     fillRule: "evenodd",
     loopCount: loops.length,
+    corners: loops.flatMap((loop) => roundedCorners(loop, radius)),
+    edges: loops.flatMap((loop) => {
+      const corners = roundedCorners(loop, radius);
+      return loop.map((start, index) => {
+        const next = (index + 1) % loop.length;
+        const end = loop[next]!;
+        const tangent = unitVector(start, end);
+        return { start, end, entry: corners[index]!.exit, exit: corners[next]!.entry,
+          normal: { x: tangent.y, y: -tangent.x } };
+      });
+    }),
   };
 }
 
@@ -349,6 +387,16 @@ export function createRoundedTerrainPath(
   selection: TerrainKind | TerrainPredicate,
   radius = DEFAULT_TERRAIN_CORNER_RADIUS,
 ): RoundedCellUnionPath {
+  const { d, fillRule, loopCount } = createRoundedTerrainGeometry(level, camera, selection, radius);
+  return { d, fillRule, loopCount };
+}
+
+export function createRoundedTerrainGeometry(
+  level: TerrainGrid,
+  camera: TerrainCamera,
+  selection: TerrainKind | TerrainPredicate,
+  radius = DEFAULT_TERRAIN_CORNER_RADIUS,
+): RoundedTerrainGeometry {
   validateTerrainCamera(level, camera);
   const matches: TerrainPredicate = typeof selection === "function"
     ? selection
@@ -360,7 +408,7 @@ export function createRoundedTerrainPath(
     bottom: Math.min(level.height - 1, camera.bottom + 1),
   };
 
-  return createRoundedCellUnionPath(
+  return createRoundedCellUnionGeometry(
     gutterBounds,
     (x, y) => {
       const terrain = level.terrain[y]?.[x];

@@ -119,7 +119,8 @@ describe("art catalog", () => {
     expectArtReferences(Object.values(DOOR_ART));
     expectArtReferences(Object.values(TERRAIN_DRESSING_ART));
     for (const dressing of Object.values(TERRAIN_DRESSING_ART)) {
-      expect(dressing.periodTiles).toBeGreaterThanOrEqual(10);
+      expect(dressing.periodTiles).toBeGreaterThanOrEqual(5);
+      expect(dressing.periodTiles).toBeLessThanOrEqual(6.5);
       expect(dressing.opacity).toBeGreaterThan(0);
       expect(dressing.opacity).toBeLessThanOrEqual(0.2);
     }
@@ -265,8 +266,8 @@ describe("art catalog", () => {
       for (const texture of [theme.floor, theme.wall]) {
         expect(texture.src).toMatch(/^\/assets\/mgjrpg-02\/terrain\/[a-z0-9-]+\.webp$/);
         expect(texture.label.trim().length).toBeGreaterThan(0);
-        expect(texture.periodTiles).toBeGreaterThanOrEqual(3);
-        expect(texture.periodTiles).toBeLessThanOrEqual(4.5);
+        expect(texture.periodTiles).toBeGreaterThanOrEqual(2.4);
+        expect(texture.periodTiles).toBeLessThanOrEqual(3);
         expect(texture.fallbackColor).toMatch(color);
         expect(texture.dominantColor).toMatch(/^(gold|rose|blue|green|earth|violet|sage|indigo)$/);
         expect(texture.visualLightness).toBeGreaterThanOrEqual(0);

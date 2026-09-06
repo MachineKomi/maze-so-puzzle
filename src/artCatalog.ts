@@ -159,6 +159,8 @@ export const TERRAIN_COLOR_FAMILIES = [
 export type TerrainColorFamily = (typeof TERRAIN_COLOR_FAMILIES)[number];
 
 export interface TerrainTextureArt extends ArtReference {
+  /** Required on wall entries; profiles are versioned presentation, not collision. */
+  readonly wallLightingProfile?: import("./game/wallLighting").WallLightingProfileId;
   readonly sourceRecordId: string;
   readonly runtimeStatus: Extract<RuntimeArtStatus, "active" | "dormant">;
   /** Width and height of one seamless image repeat, measured in maze tiles. */
@@ -196,6 +198,7 @@ export interface TerrainThemeArt {
   readonly wall: TerrainTextureArt;
   readonly floorTreatment: TerrainRenderTreatment;
   readonly wallTreatment: TerrainRenderTreatment;
+  readonly floorWash?: { readonly color: string; readonly opacity: number };
   readonly floorDressing?: TerrainDressingArt;
   readonly wallDressing?: TerrainDressingArt;
 }
@@ -245,7 +248,7 @@ export const FLOORS = {
   sunnyStone: {
     ...MGJRPG02_ART["floor-sunny-stone"],
     label: "Sunny stone path",
-    periodTiles: 3.4,
+    periodTiles: 2.7,
     fallbackColor: "#f8d991",
     dominantColor: "gold",
     visualLightness: 81,
@@ -253,7 +256,7 @@ export const FLOORS = {
   roseBrick: {
     ...MGJRPG02_ART["floor-rose-brick"],
     label: "Rose courtyard bricks",
-    periodTiles: 4.2,
+    periodTiles: 2.8,
     fallbackColor: "#efb8ad",
     dominantColor: "rose",
     visualLightness: 82,
@@ -261,7 +264,7 @@ export const FLOORS = {
   moonSlate: {
     ...MGJRPG02_ART["floor-moon-slate"],
     label: "Moonlit slate",
-    periodTiles: 3.8,
+    periodTiles: 2.8,
     fallbackColor: "#aeb9d8",
     dominantColor: "blue",
     visualLightness: 69,
@@ -269,7 +272,7 @@ export const FLOORS = {
   meadowGrass: {
     ...MGJRPG02_ART["floor-meadow-grass"],
     label: "Flower meadow grass",
-    periodTiles: 3.6,
+    periodTiles: 2.6,
     fallbackColor: "#81c95d",
     dominantColor: "green",
     visualLightness: 73,
@@ -277,7 +280,7 @@ export const FLOORS = {
   woodlandDirt: {
     ...MGJRPG02_ART["floor-woodland-dirt"],
     label: "Woodland pebble trail",
-    periodTiles: 3.8,
+    periodTiles: 3,
     fallbackColor: "#d9a36f",
     dominantColor: "earth",
     visualLightness: 68,
@@ -285,7 +288,7 @@ export const FLOORS = {
   pearlShell: {
     ...MGJRPG02_ART["floor-pearl-shell"],
     label: "Pearl shell mosaic",
-    periodTiles: 4.1,
+    periodTiles: 2.8,
     fallbackColor: "#cfe6eb",
     dominantColor: "blue",
     visualLightness: 83,
@@ -293,7 +296,7 @@ export const FLOORS = {
   peachLeafstone: {
     ...MGJRPG02_ART["floor-peach-leafstone"],
     label: "Peach leaf-stone path",
-    periodTiles: 4.1,
+    periodTiles: 2.8,
     fallbackColor: "#f5c6af",
     dominantColor: "rose",
     visualLightness: 81,
@@ -304,7 +307,8 @@ export const WALLS = {
   lavenderStone: {
     ...MGJRPG02_ART["wall-lavender-stone"],
     label: "Lavender stone wall",
-    periodTiles: 3.4,
+    wallLightingProfile: "stone",
+    periodTiles: 2.4,
     fallbackColor: "#7775b6",
     dominantColor: "violet",
     visualLightness: 56,
@@ -312,7 +316,8 @@ export const WALLS = {
   sandstone: {
     ...MGJRPG02_ART["wall-golden-sandstone"],
     label: "Golden sandstone wall",
-    periodTiles: 4.2,
+    wallLightingProfile: "pale",
+    periodTiles: 3,
     fallbackColor: "#e5af58",
     dominantColor: "gold",
     visualLightness: 83,
@@ -320,7 +325,8 @@ export const WALLS = {
   mossyRuin: {
     ...MGJRPG02_ART["wall-mossy-ruin"],
     label: "Mossy storybook ruins",
-    periodTiles: 4,
+    wallLightingProfile: "pale",
+    periodTiles: 2.8,
     fallbackColor: "#91a96e",
     dominantColor: "sage",
     visualLightness: 71,
@@ -328,7 +334,8 @@ export const WALLS = {
   darkDungeon: {
     ...MGJRPG02_ART["wall-dark-dungeon"],
     label: "Moon-dark dungeon wall",
-    periodTiles: 4,
+    wallLightingProfile: "dark",
+    periodTiles: 2.6,
     fallbackColor: "#3d3a63",
     dominantColor: "indigo",
     visualLightness: 19,
@@ -336,7 +343,8 @@ export const WALLS = {
   hedge: {
     ...MGJRPG02_ART["wall-hedge"],
     label: "Flowering garden hedge",
-    periodTiles: 3.6,
+    wallLightingProfile: "foliage",
+    periodTiles: 2.6,
     fallbackColor: "#3f9c55",
     dominantColor: "green",
     visualLightness: 60,
@@ -344,7 +352,8 @@ export const WALLS = {
   amethystCrystal: {
     ...MGJRPG02_ART["wall-amethyst-crystal"],
     label: "Amethyst crystal wall",
-    periodTiles: 4.1,
+    wallLightingProfile: "crystal",
+    periodTiles: 2.8,
     fallbackColor: "#6d4a9b",
     dominantColor: "violet",
     visualLightness: 33,
@@ -352,7 +361,8 @@ export const WALLS = {
   berryBramble: {
     ...MGJRPG02_ART["wall-berry-bramble"],
     label: "Enchanted berry bramble",
-    periodTiles: 4.1,
+    wallLightingProfile: "bramble",
+    periodTiles: 2.8,
     fallbackColor: "#4c284d",
     dominantColor: "indigo",
     visualLightness: 21,
@@ -363,25 +373,25 @@ export const TERRAIN_DRESSING_ART = {
   garden: {
     ...MGJRPG02_ART["terrain-dressing-garden"],
     label: "Tiny garden flowers and moss",
-    periodTiles: 13,
+    periodTiles: 5.5,
     opacity: 0.16,
   },
   vines: {
     ...MGJRPG02_ART["terrain-dressing-vines"],
     label: "Soft ivy and moss",
-    periodTiles: 13,
+    periodTiles: 6,
     opacity: 0.17,
   },
   crystal: {
     ...MGJRPG02_ART["terrain-dressing-crystal"],
     label: "Pearls and crystal glints",
-    periodTiles: 14,
+    periodTiles: 5,
     opacity: 0.08,
   },
   autumn: {
     ...MGJRPG02_ART["terrain-dressing-autumn"],
     label: "Tiny leaves and acorn confetti",
-    periodTiles: 14,
+    periodTiles: 6.5,
     opacity: 0.09,
   },
 } as const satisfies Readonly<Record<string, TerrainDressingArt>>;
@@ -482,6 +492,7 @@ export const TERRAIN_THEMES = {
     label: "Moonlit Moat",
     floor: FLOORS.moonSlate,
     wall: WALLS.hedge,
+    floorWash: { color: "#e9edf9", opacity: 0.44 },
     floorTreatment: { brightness: 1.04, saturation: 0.94, contrast: 1 },
     wallTreatment: { brightness: 0.99, saturation: 1.06, contrast: 1.02 },
   },
@@ -507,6 +518,7 @@ export const TERRAIN_THEMES = {
     label: "Moonbeam Castle",
     floor: FLOORS.moonSlate,
     wall: WALLS.darkDungeon,
+    floorWash: { color: "#e9edf9", opacity: 0.44 },
     floorTreatment: { brightness: 1.04, saturation: 0.94, contrast: 1 },
     wallTreatment: { brightness: 1.13, saturation: 0.92, contrast: 0.95 },
   },
@@ -532,6 +544,7 @@ export const TERRAIN_THEMES = {
     label: "Springstep Hollow",
     floor: FLOORS.moonSlate,
     wall: WALLS.lavenderStone,
+    floorWash: { color: "#e9edf9", opacity: 0.44 },
     floorTreatment: { brightness: 1.04, saturation: 0.94, contrast: 1 },
     wallTreatment: { brightness: 1.01, saturation: 1, contrast: 1 },
   },

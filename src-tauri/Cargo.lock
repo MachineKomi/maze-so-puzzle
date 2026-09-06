@@ -1767,7 +1767,7 @@ dependencies = [
 
 [[package]]
 name = "maze-so-puzzle"
-version = "0.22.8"
+version = "0.22.9"
 dependencies = [
  "tauri",
  "tauri-build",

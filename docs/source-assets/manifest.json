@@ -317,8 +317,8 @@
     "runtimeContracts": [
       {
         "path": "src/artCatalog.ts",
-        "sha256": "5b991c42c6c2501be3481ffdaf86202afa6557f5db035449ffa9179fb82abedc",
-        "bytes": 36277
+        "sha256": "590693f03ede5ecbacb6d7ae6c918ab774a595db654b8c064ad5a4a88cb48f62",
+        "bytes": 36924
       },
       {
         "path": "src/assets.ts",

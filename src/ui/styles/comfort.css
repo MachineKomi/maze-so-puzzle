@@ -26,6 +26,7 @@
 }
 :root[data-quality="lite"] :is(.pet-follower, .animal-stack)::after,
 :root[data-quality="lite"] .maze-board::after { animation: none; content: none; }
+:root[data-quality="lite"] .terrain-ambient-decoration { display: none; }
 :root[data-quality="lite"] :is(.object-kind-enemy, .pet-follower, .player-layer)::before {
  filter: none; background: radial-gradient(ellipse, #352a5242 0%, #352a5218 46%, transparent 72%);
 }

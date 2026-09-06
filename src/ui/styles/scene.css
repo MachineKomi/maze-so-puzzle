@@ -288,14 +288,14 @@
 .object-kind-enemy[data-enemy-motion="hop"] .object-enemy {
   animation: enemy-motion-hop 1.08s ease-in-out infinite;
 }
-.maze-board[data-terrain-theme="pearl-grotto"]::after {
+.terrain-ambient-decoration { position: absolute; pointer-events: none; }
+.maze-board[data-terrain-theme="pearl-grotto"] > .terrain-ambient-decoration {
   position: absolute;
   z-index: 18;
   top: 9%;
   right: 7%;
   width: 30%;
   color: rgba(255,255,255,.66);
-  content: "✦　·　✧";
   font-size: clamp(9px, 1.6cqw, 20px);
   letter-spacing: .45em;
   text-align: right;
@@ -303,7 +303,8 @@
   text-shadow: 0 0 7px rgba(203,170,255,.78);
   animation: terrain-ambient-drift 4.4s ease-in-out infinite;
 }
-.maze-board[data-terrain-theme="harvest-bramble"]::after {
+.maze-board[data-terrain-theme="pearl-grotto"] > .terrain-ambient-decoration::before { content: "✦　·　✧"; }
+.maze-board[data-terrain-theme="harvest-bramble"] > .terrain-ambient-decoration {
   position: absolute;
   z-index: 18;
   top: 9%;
@@ -315,9 +316,9 @@
   pointer-events: none;
   animation: terrain-ambient-drift 4.4s ease-in-out infinite;
   color: rgba(255,226,184,.72);
-  content: "❀　·　✦";
   text-shadow: 0 0 7px rgba(255,154,143,.62);
 }
+.maze-board[data-terrain-theme="harvest-bramble"] > .terrain-ambient-decoration::before { content: "❀　·　✦"; }
 :root:is([data-motion=reduced],[data-quality=static]) .object-kind-animal .animal-sprite {
   animation: none;
 }
@@ -336,8 +337,9 @@
 :root:is([data-motion=reduced],[data-quality=static]) .rescue-presentation::after {
   animation: none;
 }
-:root:is([data-motion=reduced],[data-quality=static]) .maze-board[data-terrain-theme]::after {
+:root:is([data-motion=reduced],[data-quality=static]) .terrain-ambient-decoration {
   animation: none;
+  opacity: .55;
 }
 .maze-terrain-svg > .terrain-water {
   stroke: none;
@@ -549,6 +551,11 @@
   position: absolute;
   z-index: 25;
   inset: 0;
+  width: auto;
+  height: auto;
+  animation: none;
+  transform: none;
+  opacity: 1;
   border-radius: inherit;
   box-shadow: inset 0 0 clamp(11px, 2.2cqw, 20px) rgba(51, 45, 71, 0.2);
   content: "";
@@ -1055,7 +1062,6 @@
 }
 .terrain-wall-highlight {
   pointer-events: none;
-  mix-blend-mode: screen;
 }
 .object-treasure {
   width: 84%;

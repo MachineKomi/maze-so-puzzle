@@ -33,6 +33,19 @@
   },
   "allocations": [
     {
+      "id": "lighting-04a-wall-depth-pt33",
+      "owner": "lighting",
+      "status": "approved",
+      "compressedJsBytes": 1500,
+      "compressedCssBytes": 61,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates 1500 gzip9 JS bytes for the measured 1474-byte wall-only candidate plus bounded release-version variance, within the 4000-byte prototype cap. Exact measured CSS growth is61 bytes. No texture, media, dependency or decoded-image growth.",
+      "evidencePath": "docs/reviews/2026-09-06-wall04a-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete 04-A geometry/rendering, material calibration and PT33 CSS ownership seam to 67db82cc122d903c815591f5e402ed00b0e0cdfd. Retain approved hole source/proof tooling, audio, all saves and frozen v0.22.8. No asset rollback or progress migration is needed.",
+      "notes": "Two signed compound bevel paths and constant-count masks, cached canonical wall topology. New wall depth is unfiltered; existing hazard masks and bounded texture corrections remain. Physical iPad performance and full Plan04 completion are not claimed. Actual native/release gates remain separate from this byte allocation."
+    },
+    {
       "id": "audio01a-bounded-readiness",
       "owner": "audio",
       "status": "approved",
