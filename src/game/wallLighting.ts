@@ -14,14 +14,14 @@ export function resolveWallLight(level: Pick<LevelDefinition, "id" | "lightDirec
 
 /** Versioned, catalogue-selected material response. No asset/name inference. */
 export const WALL_LIGHTING_PROFILES = {
-  stone: { height: .25, bevel: .05, highlight: "#fff1cf", shade: "#63507c", side: "#675379", sideOpacity: .62 },
-  pale: { height: .24, bevel: .045, highlight: "#fff0ca", shade: "#55664d", side: "#51604e", sideOpacity: .64 },
-  dark: { height: .25, bevel: .055, highlight: "#c8b8e8", shade: "#665277", side: "#4e3d68", sideOpacity: .48 },
-  foliage: { height: .20, bevel: .045, highlight: "#d4e9ae", shade: "#48624e", side: "#425d49", sideOpacity: .58 },
-  crystal: { height: .26, bevel: .045, highlight: "#efdaff", shade: "#70578f", side: "#624786", sideOpacity: .58 },
-  bramble: { height: .23, bevel: .045, highlight: "#edb9d0", shade: "#785272", side: "#664359", sideOpacity: .52 },
+  stone: { height: .12, bevel: .05, highlight: "#fff1cf", shade: "#63507c", side: "#675379", sideOpacity: .36 },
+  pale: { height: .11, bevel: .045, highlight: "#fff0ca", shade: "#55664d", side: "#51604e", sideOpacity: .42 },
+  dark: { height: .13, bevel: .055, highlight: "#bbabda", shade: "#51445f", side: "#382e50", sideOpacity: .32 },
+  foliage: { height: .085, bevel: .045, highlight: "#d4e9ae", shade: "#48624e", side: "#425d49", sideOpacity: .34 },
+  crystal: { height: .12, bevel: .045, highlight: "#efdaff", shade: "#70578f", side: "#513c75", sideOpacity: .36 },
+  bramble: { height: .10, bevel: .045, highlight: "#edb9d0", shade: "#785272", side: "#53344f", sideOpacity: .32 },
 } as const;
-export const WALL_LIGHTING_REVISION = "04a-r1";
+export const WALL_LIGHTING_REVISION = "04a-v1";
 export type WallLightingProfileId = keyof typeof WALL_LIGHTING_PROFILES;
 
 function point(p: Point): string {
@@ -31,17 +31,15 @@ function quad(a: Point, b: Point, c: Point, d: Point) {
   return `M${point(a)}L${point(b)}L${point(c)}L${point(d)}Z`;
 }
 
-/** The cap is W intersected with W shifted up. Its inward boundary band is the
- * union of BOTH contributing contour bands, clipped to that same intersection.
- * Original rear rims remain; the projected front rim follows the complete exact
- * arc, not a discontinuous per-normal lift. Each response is one nonzero-filled
- * path so coincident vertical strips cannot accumulate translucent paint. */
+/** Two signed compound paths, independent of cell count. Convex arcs use three
+ * broad sectors; masks use the exact original silhouette.
+ * Side faces are screen-down and INSIDE the footprint, never on walkable floor. */
 export function buildWallLighting(geometry: RoundedTerrainGeometry, toLight: Point,
-  profile: { readonly height: number; readonly bevel: number }) {
+  profile: typeof WALL_LIGHTING_PROFILES[WallLightingProfileId]) {
   const lit: string[] = [], shade: string[] = [];
-  for (const lift of [0, profile.height]) {
   for (const edge of geometry.edges) {
     const { normal, entry, exit } = edge;
+    const lift = normal.y > 0 ? profile.height : 0;
     const a = { x: entry.x, y: entry.y - lift }, b = { x: exit.x, y: exit.y - lift };
     const c = { x: b.x - normal.x * profile.bevel, y: b.y - normal.y * profile.bevel };
     const d = { x: a.x - normal.x * profile.bevel, y: a.y - normal.y * profile.bevel };
@@ -59,6 +57,7 @@ export function buildWallLighting(geometry: RoundedTerrainGeometry, toLight: Poi
     for (let i = 0; i < 3; i++) {
       const a = from + sign * i * Math.PI / 6, b = a + sign * Math.PI / 6;
       const nx = Math.cos((a + b) / 2) * sign, ny = Math.sin((a + b) / 2) * sign;
+      const lift = ny > .01 ? profile.height : 0;
       const at = (angle: number, r: number) => ({ x: center.x + Math.cos(angle) * r,
         y: center.y + Math.sin(angle) * r - lift });
       const innerRadius = radius - sign * profile.bevel;
@@ -68,31 +67,5 @@ export function buildWallLighting(geometry: RoundedTerrainGeometry, toLight: Poi
       else if (response < -.1) shade.push(d);
     }
   }
-  }
   return { lit: lit.join(""), shade: shade.join("") };
-}
-
-/** Cardinal finite sweep: translated cap plus outward edge/arc ribbons. Render
- * the cap (evenodd) and ribbons (nonzero) inside ONE opacity group, then clip to
- * the receiver. This preserves holes without doubled overlap or detached corner
- * shadows. Supports the current cardinal light contract; no diagonal shortcut. */
-export function buildWallCast(geometry: RoundedTerrainGeometry, cast: Point, height: number) {
-  const distance = Math.min(.24, height * .85);
-  const offset = { x: cast.x * distance, y: cast.y * distance };
-  const shift = (p: Point) => ({ x: p.x + offset.x, y: p.y + offset.y });
-  const ribbons: string[] = [];
-  for (const { entry, exit, normal } of geometry.edges) {
-    if (normal.x * cast.x + normal.y * cast.y > .01) {
-      ribbons.push(quad(entry, shift(entry), shift(exit), exit));
-    }
-  }
-  for (const { entry, exit, center, radius, sweep } of geometry.corners) {
-    if (!radius) continue;
-    const from = Math.atan2(entry.y - center.y, entry.x - center.x);
-    const sign = sweep ? 1 : -1;
-    const mid = from + sign * Math.PI / 4;
-    if (sign * (Math.cos(mid) * cast.x + Math.sin(mid) * cast.y) <= .01) continue;
-    ribbons.push(`M${point(entry)}L${point(shift(entry))}A${radius} ${radius} 0 0 ${sweep} ${point(shift(exit))}L${point(exit)}A${radius} ${radius} 0 0 ${1 - sweep} ${point(entry)}Z`);
-  }
-  return { offset, ribbons: ribbons.join("") };
 }
