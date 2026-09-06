@@ -8,6 +8,10 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
+- **Next candidate: v0.22.6 AUDIO-01V2**, frozen
+  `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, is in native/final qualification.
+  Publication, downloads and their checksums are **pending**. P10 below is queued
+  for when it is available; do not assume a candidate is already the live build.
 - v0.22.5 V22-PHONE1, frozen `7282665f8631051785176b701b1a7f14b7fe24a3`:
   Web and Windows published; final native checks and all four public downloads
   independently verified. Compact gameplay/Book and native Title Exit are the
@@ -43,6 +47,7 @@ one; they share a save namespace.
 | v0.22.3 V22-COMFORT1, runtime `b834a8e` | Web/Windows comfort preview: Dolphin field repair, Chill/Regular/Zippy and independent Music/SFX | P5/P6/P8; P2/P4 regression as convenient. No camera or stationary-rescue fix claimed. |
 | v0.22.4 V22-RESCUE1, runtime `45d8437` | Published web/Windows. Stationary rescue with unchanged steps and deliberate follow-up movement | P7 first; P5/P6/P8 remain cumulative. Not a new camera/phone-layout/audio-default fix. |
 | v0.22.5 V22-PHONE1, frozen `7282665` | Published web/Windows; all four downloads verified. Bounded compact gameplay/Book and native Title Exit | P9 new; P5–P8 cumulative. No camera/FOV/audio/save/gameplay/content change or additional restart from v0.22.4. |
+| v0.22.6 AUDIO-01V2, frozen `e628898` | Qualification in progress; web/Windows publication, downloads and checksums pending | P10 when available; P5–P9 remain cumulative. Calibrated controls do not fix the iPad camera or complete readiness/mastering. |
 
 ## Specific checks and results
 
@@ -212,8 +217,9 @@ settings artwork and other optical refinements remain open; P9 does not close th
 
 ### P10 — Calibrated Music/SFX balance (v0.22.6 qualification)
 
-Publication status and downloads are owned by joint state; do not assume a
-candidate is live. When v0.22.6 is available:
+Frozen candidate: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Publication status,
+checksums and downloads remain pending in joint state; do not assume it is live.
+When v0.22.6 is available:
 
 - [ ] Your existing volume choices should sound unchanged when you first open
   it, though the percentages may look different. Opening/closing Sound, changing

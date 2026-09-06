@@ -64,6 +64,9 @@ release/V22-RESCUE1-v0.22.4-SHA256SUMS.txt -text
 release/V22-PHONE1-v0.22.5-manifest.json -text
 release/V22-PHONE1-v0.22.5-PLAYTEST.md -text
 release/V22-PHONE1-v0.22.5-SHA256SUMS.txt -text
+release/AUDIO-01V2-v0.22.6-manifest.json -text
+release/AUDIO-01V2-v0.22.6-PLAYTEST.md -text
+release/AUDIO-01V2-v0.22.6-SHA256SUMS.txt -text
 
 # The documentation consistency contract intentionally checks an LF-wrapped phrase.
 docs/RELEASE_CHECKLIST.md text eol=lf

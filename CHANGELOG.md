@@ -6,6 +6,11 @@ than promising long-term save or API compatibility.
 
 ## 0.22.6 — AUDIO-01V2 (publication qualification)
 
+Frozen candidate: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Final native
+qualification, independent review and web/Windows publication are still pending;
+this entry describes implemented changes, not a published-release receipt.
+The cumulative checklist queues P10 for when this build is available.
+
 - Music and Sound effects now use calibrated controls:75%/75% represents the
   preferred quieter-music/clearer-effects balance. New profiles use this default;
   existing volume choices are preserved exactly. No need to reset progress.

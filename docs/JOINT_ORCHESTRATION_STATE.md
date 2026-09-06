@@ -7,6 +7,16 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Current qualification candidate: v0.22.6 AUDIO-01V2**, source
+  `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Root Astra owns final native
+  qualification and release; actual Sol owns the independent final review.
+  Calibrated Music/SFX controls preserve existing effective gains and give new
+  profiles the requested 75%/75% mix. The high-combination warning must remain
+  visible. **Publication, release checksums, exact-source CI/deployment and public
+  download verification are pending**; this candidate is not a release receipt.
+  P10 is queued for this build; P5–P9 and the existing iPad camera gate stay open.
+  The last fully verified published fallback is v0.22.5 below. AUDIO-01A is next
+  after this bounded qualification/publication transaction, not another V2 rewrite.
 - **Current published preview: v0.22.5 V22-PHONE1**, source
   `7282665f8631051785176b701b1a7f14b7fe24a3`. Web and Windows are published;
   final native checks and all four independent public downloads passed.
@@ -76,6 +86,27 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - Discover this handoff's exact documentation commit with `git log -1 --format=%H -- docs/JOINT_ORCHESTRATION_STATE.md`. Inspect branch, HEAD, origin and `git status --short --branch` on arrival; dated receipts do not imply the current checkout is clean.
 
 ## 2. Release and deployment
+
+### v0.22.6 AUDIO-01V2 — qualification in progress, publication pending
+
+- Frozen candidate source: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`.
+  Root reports native build/staging complete and is performing actual Windows
+  UI/control/normal-close/reopen checks; compilation is not native acceptance.
+- Final independent review: actual Sol owns
+  [its review record](reviews/2026-09-06-audio01v2-sol-final-review.md).
+  Final acceptance, native evidence envelope and publication receipt: **pending**.
+- Runtime CI, Production deployment, canonical raw-byte parity, portable byte/
+  SHA-256 identity, GitHub release/tag and four public download matches:
+  **pending root verification and publication**. No value from v0.22.5 is reused
+  as evidence for this build. External release work is under
+  `C:/GameDev/maze-game-qa/releases/v0226`.
+- This is calibrated controls and conservative preference migration, not OST
+  mastering or the broader readiness work. Very high combined levels can distort;
+  source-derived peak checks do not establish all-range or physical-speaker safety.
+  No new iPad camera, engine/content/save-rule, artwork or OST-file change.
+- Safe published fallback: v0.22.5 `7282665f8631051785176b701b1a7f14b7fe24a3`.
+  Older code may clamp boosted SFX if it rewrites settings; do not promise
+  byte-identical presentation preferences through a downgrade. Never clear saves.
 
 ### Current v0.22.5 — published and independently downloaded
 
@@ -229,27 +260,31 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**v0.22.5 is published; root Astra owns the next audio implementation, actual Sol reviews.**
+**v0.22.6 AUDIO-01V2 is in final qualification; root Astra owns delivery, actual Sol reviews.**
 Frozen source `7282665f8631051785176b701b1a7f14b7fe24a3` contains independently
 accepted native Exit and compact gameplay/Book UI-01A. Final engineering
 qualification is complete; see [acceptance](reviews/2026-09-06-v0225-engineering-acceptance.md).
 Do not mutate this source or repeat the completed UI prototype.
 
-**Active sole runtime writer: Astra — AUDIO-01V2**. Actual Sol's
+**Active sole runtime/heavy owner: Astra — AUDIO-01V2 qualification/publication**. Actual Sol's
 [independent review](reviews/2026-09-06-audio01v2-sol-review.md) and the
 [joint decision](reviews/2026-09-06-audio01v2-joint-decision.md) are complete.
 Use the agreed C1 music curve, fresh calibrated75/75 defaults, exact existing
-gain preservation and future-version writer refusal. SFX above gain1 still
-requires measured cue/overlap peak safety; do not silently clamp or add a limiter.
-No new audio cues/readiness/media/UI/camera work enters this bounded seam.
+gain preservation and future-version writer refusal. Source-derived cue/overlap
+review conditionally permits 4/3 SFX for a qualified preview with its visible
+high-combination warning, not all-range clip-free output or physical acceptance.
+Do not silently clamp or add an unreviewed limiter.
+No new audio cues/readiness/media, broader UI redesign or camera work enters this seam.
 AUDIO-01A follows separately; no camera experiment is in flight.
-The isolated candidate is backed up on `codex/audio-calibration`, checkout
+The isolated candidate is on `codex/audio-calibration`, checkout
 `C:/GameDev/maze-game-audio-calibration`, checkpoint
-`01e75216d4c3c85d39d555137fbbd362065c5db1`. Full551 project tests, TypeScript/build
-and exact342-byte JS allocation passed; CSS/media/dependencies are unchanged.
-Actual Sol's preliminary source review found no blocker. The proposed4/3 SFX
-ceiling remains unapproved pending source-derived offline peak evidence, followed
-by browser/native integration and final independent review. v0.22.5 remains live.
+`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, matching main at the qualification
+handoff. Keep that candidate checkout clean while documentation evolves on main.
+The candidate includes the bounded compact warning-visibility correction.
+Earlier 551-test/source-derived peak/browser records remain evidence at their
+recorded SHAs; root must bind final qualification to the frozen version, not
+relabel earlier checks. Native UI/reopen, final review and release proofs remain
+pending; v0.22.5 is the last fully verified published release.
 
 Remaining V22-UI-01 propagation includes Home/dialog/victory, full200% text,
 HUD pace/settings art and remaining optical refinements. Preserve the praised
@@ -264,7 +299,8 @@ One warm-cache, low-memory Edge triplet cannot establish iPad benefit. No furthe
 experiment is queued automatically. Any future Safari/camera trial needs a new
 explicit bounded assignment and matched source/geometry; independent UI/audio
 work continues. The [audio-calibration preflight](reviews/2026-09-06-audio01v2-preflight.md)
-is preparation only; its proposed boosted SFX ceiling is not acoustically qualified.
+is historical preparation; the later conditional peak decision does not provide
+physical-speaker qualification or close the final native/publication gates.
 
 Physical iPad scrolling acceptance remains open after the reported v0.22.1 and
 v0.22.2 failures. Do not demand another reproduction of an already reported
@@ -319,9 +355,9 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.5 publication is complete; do not repeat accepted Exit/UI-01A. Root Astra next implements AUDIO-01V2 under the joint decision, actual Sol reviews. Remaining V22-UI-01 proceeds in later bounded increments. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved. Resolve root PT36 before Plan 04.
-2. **AUDIO-01V2** early calibrated default/control conversion, separately assigned
-   after published v0.22.5 and before broader **AUDIO-01A** music/SFX readiness;
+1. Complete v0.22.6 AUDIO-01V2 qualification/publication at `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, root Astra with actual Sol independent review. v0.22.5 publication is complete; do not repeat accepted Exit/UI-01A. Remaining V22-UI-01 proceeds in later bounded increments. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved. Resolve root PT36 before Plan 04.
+2. After the bounded **AUDIO-01V2** release handoff, advance broader
+   **AUDIO-01A** music/SFX readiness as the next separate runtime assignment;
    then **V22-HOLE-01** single-width
    crossings and joined ditch art; then **04** lighting, wall depth and terrain
    topology/regions. The Human's deferred feedback does not alone stop these

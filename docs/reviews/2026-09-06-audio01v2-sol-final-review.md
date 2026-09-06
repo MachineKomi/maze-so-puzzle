@@ -1,11 +1,13 @@
 # AUDIO-01V2 — Sol independent source and peak review
 
-Date: 2026-09-06. Independent read-only review of the AUDIO-01V2 candidate at
-source checkpoint `01e75216d4c3c85d39d555137fbbd362065c5db1`, its calibration,
-migration, graph and Sound UI changes, and the source-bound 48 kHz / 44.1 kHz
-OfflineAudioContext evidence. This is conditional engineering approval for a
-qualified preview. It is not physical listening, final audio qualification,
-all-range clip-free acceptance or publication authority.
+Date: 2026-09-06. Independent read-only review of the AUDIO-01V2 candidate from
+source checkpoint `01e75216d4c3c85d39d555137fbbd362065c5db1` through the clean
+provisional v0.22.6 freeze `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, its
+calibration, migration, graph and Sound UI changes, and the source-bound 48 kHz /
+44.1 kHz OfflineAudioContext and production-browser evidence. I approve this
+exact source/browser freeze for a qualified preview, subject to native
+qualification and the limits below. This is not physical listening, final audio
+qualification, all-range clip-free acceptance or publication authority.
 
 ## Source verdict
 
@@ -81,21 +83,96 @@ Do not describe 100% as universally safe, claim the full range clip-free, or add
 an unreviewed compressor/limiter in this seam. Unified output protection,
 mastering and final all-range qualification remain AUDIO-01A/07B work.
 
+## Production graph and UI proof
+
+The final six-case production-browser run passed all 60 labelled rows across
+844x390 and 1194x834 fresh, legacy and unfamiliar-version profiles. It exercised
+pointer and keyboard sliders, exact raw fractional preservation across unrelated
+edits and reload, future-format write refusal, Reset Progress preservation,
+mute/change/unmute, zero and Test sound. The observer wrapped the browser's
+actual AudioContext factories without replacing or rerouting the production
+graph. It found the media source connected only through the music gain, element
+volume `1`, no slider-driven oscillator flood, exactly one two-note Test cue,
+and no track restart or seek from level changes.
+
+Final run: `C:/GameDev/maze-game-qa/audio01v2/ui-attempts/r4/summary.json`,
+SHA-256 `de607cee4b1d931620f50ffd035a6d2097defe15cde19a6af555af4a8da87abf`.
+Its before/after identity is the clean freeze `e628898b`; all retained gain
+ramps schedule exactly 20 ms. A separate actual-graph maximum observation
+reached Music `1` and SFX `1.33333337` without changing the playing source or
+time.
+
+The first production attempt was correctly rejected when a muted, disconnected
+SFX GainNode continued to report its prior `.733` parameter value. The isolated
+diagnostic proved this is an idle getter artifact, not audible output: the
+disconnected input rendered zero; scheduling zero while disconnected still
+reported the stale getter; reconnecting the same positive input reported and
+rendered zero. Actual OfflineAudioContext default/maximum ramps stayed within
+`1.285e-6` worst error and rendered exact zero by 60 ms. Diagnostic:
+`C:/GameDev/maze-game-qa/audio01v2/idle-param-r1/result.json`, SHA-256
+`b1ed7765963fc7108260af8ee0bb6c81fc320f91c16e9eb09c1b67b543840720`.
+The corrected production gate therefore requires immediate zero scheduling plus
+no live connected SFX voices while idle; it still requires the active getter for
+Test sound.
+
+My review found and blocked one real short-height UI miss before freeze: the
+existing landscape rule visually clipped every `.sound-persistence`, including
+the new maximum-mix warning. The final four-byte selector narrowing hides only
+the direct-child reset note. In r4 the warning is readable at 16 px in a
+305x64.8 px box on 844x390, with `clip-path:none`, all nine sampled interior hit
+points owned by the warning, its bottom above the fixed footer, and dialog scroll
+restored after inspection. At 1194x834 it is 397x43.2 px with no scroll. The
+source now meets the visible-warning condition on which the `4/3` decision rests.
+
+The freeze also has 551 passing source tests, TypeScript/production build and
+audit passes, and source/game/art/public input equivalence recorded for v0.22.6.
+
+## Native disposition
+
+I approve the focused native gate for the same exact freeze after independently
+reading the source-bound summary, assertion script and selected observations and
+screenshots. The staged portable is 173,468,672 bytes with SHA-256
+`847502332571c2a9d0afc3fe8f8e2f850e497a17bab0e586eee76a04bbf45dc9`;
+the actual host used WebView2 `152.0.4191.62`.
+
+Native evidence:
+
+- `C:/GameDev/maze-game-qa/releases/v0226/native-summary.json`, SHA-256
+  `73a0db794d6074df1e716ba28b46623062cb1eaa81aaa4350cc8f8fed9e7203b`;
+- `C:/GameDev/maze-game-qa/releases/v0226/review-native.mjs`, SHA-256
+  `2dd937dd6fea94b346246c5f032ef14ded6e7c6c738c36b41224d8f01826133d`.
+
+The assertions bind every retained JSON observation to `e628898b`, require the
+real native bridge and an error-free observed graph, and cover two isolated
+profiles with four normal Alt+F4 process/debug-endpoint closes. A fresh profile
+opened at 75/75 without a read-time preference write; real pointer/keyboard
+changes exercised Music zero/max, SFX `4/3` and one two-oscillator Test cue.
+Mute and change-while-muted scheduled immediate zero on both channels with no
+live connected SFX voices; unmute restored the chosen raw gains. Music 50% and
+SFX 100% then survived a normal close/reopen as raw `.044444444444444446` and
+`1.3333333333333333`.
+
+The labelled synthetic legacy seed `.123456789` / `.642314159` remained exact
+through a real pace change to Zippy and normal restart while the display stayed
+78/48. Separately, a real Up move produced exactly one Little Star Trail step at
+`{x:1,y:3}`; the active-run v3 bytes and visible maze state were identical after
+normal restart and Continue. This closes functional native persistence and
+graph/UI smoke only. It does not turn the synthetic legacy seed into an organic
+upgrade observation or establish acoustic quality.
+
 ## Remaining gates
 
-Before promotion, retain source identity and close only these bounded gates:
+The bounded source, production-browser and native functional gates are closed
+for exact freeze `e628898b`. The browser/native runs never actually entered the
+hidden state, so unchanged hidden/mute logic has source and unit coverage but no
+new production hidden-page proof. That limitation is not a claim of failure and
+must not be rewritten as fresh browser coverage. This review also does not cover
+installer/signing, clean-machine behavior, full campaign replay or sustained
+timing.
 
-- production browser proof that fresh 75/75 anchors, pointer and keyboard range
-  changes, fractional legacy gains, unrelated pace/quality changes, reload,
-  future-version refusal and Reset Progress behave without rounded-storage drift;
-- real graph proof for exact default/max gain response, the 20 ms ramp,
-  mute/change/unmute, zero/hidden cancellation, no Test sound per slider tick,
-  and unchanged track identity/time;
-- full serial project tests, production build/budget/provenance, and focused
-  native close/reopen persistence at the frozen candidate;
-- later phone/iPad/laptop/native listening at default and high combinations.
-  Missing physical listening stays explicit and cannot be inferred from these
-  offline samples.
+Phone/iPad/laptop/native listening at default and high combinations remains
+open. Missing physical listening cannot be inferred from the offline samples,
+desktop Chromium graph observations or a native functional smoke.
 
 No AUDIO-01A prefetch/crossfade, new cues, mastering, dependencies, media or UI
 redesign is authorized by this review. Rollback remains the complete calibration,
