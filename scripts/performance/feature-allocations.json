@@ -33,9 +33,22 @@
   },
   "allocations": [
     {
+      "id": "phone02-book02a-encounter-composition",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 1500,
+      "compressedCssBytes": 400,
+      "runtimePublicBytes": 0,
+      "reason": "Astra authorizes a bounded 1500 gzip9 JS / 400 CSS bytes for shared phone stage fitting, encounter-based Book discovery and deliberate audio rebalance. The current pre-version build is +1137 JS / +261 CSS versus live0.22.10; final-source measurements and paired frame/raster review remain release gates.",
+      "evidencePath": "docs/reviews/2026-09-06-phone02-book-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Return the complete runtime to accepted0.22.10 d9c7697. Retain schema7 bytes at the existing progress-v6 storage key: old builds must treat the newer schema as read-only, never rewrite or delete it to force compatibility. Prefer a forward repair if schema7 has been written.",
+      "notes": "No media or dependency growth. Held R1 paint work is absent and its allowance is returned below. Physical phone comfort, native and family acceptance are distinct. This byte allocation does not grant release acceptance."
+    },
+    {
       "id": "lighting-04ar1-convincing-relief",
       "owner": "lighting",
-      "status": "approved",
+      "status": "repaid",
       "compressedJsBytes": 400,
       "compressedCssBytes": 0,
       "runtimePublicBytes": 0,
@@ -43,7 +56,7 @@
       "evidencePath": "docs/reviews/2026-09-06-wall04ar1-candidate.md",
       "reviewBy": "2026-10-06",
       "rollbackPoint": "Restore complete R1 wall/profile/version seam to feb04e1; preserve reward effects, asset cleanup, requirements and saves. No new asset, save migration or dependency.",
-      "notes": "Zero CSS/public/media/decoded-image growth. Four added constant wall paint paths, zero wall filters/timers. Cardinal cast and original footprint preserved. Physical iPad and Human beauty acceptance remain open."
+      "notes": "2026-09-06: R1 held after new-host paired raster-work regression. Its400-byte allowance is returned on the phone/Book delivery branch with all R1 runtime paths absent; source and original allocation remain preserved on the migration branch. Zero CSS/public/media growth. Physical iPad and Human beauty acceptance remain open."
     },
     {
       "id": "vfx02a-committed-reward-canvas",
