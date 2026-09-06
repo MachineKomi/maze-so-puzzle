@@ -1,6 +1,6 @@
 # Human decisions and steer
 
-Updated: 2026-09-05. Owner: Sol/Astra orchestrators.
+Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
 **No blocking answer is needed now.** The Human authorized safe development to
 continue while playtesting is deferred. Routine engineering choices belong to
@@ -9,9 +9,10 @@ the agents; only material product/art choices need to come back here.
 | ID | Item | Status / next useful Human action |
 | --- | --- | --- |
 | D01 | New simplified hole/ditch artwork | Not ready for decision. V22-HOLE-01 will link a compact candidate gallery when there are actual options. Single-width jumps and preserved dividing trenches are already requested, not waiting for reconfirmation. |
-| D02 | Chill/Regular/Zippy comfort | Names and three-mode direction are settled. When the implementation is playable, compare pace with Ame/Alex; no timing number is required from the Human beforehand. |
+| D02 | Chill/Regular/Zippy comfort | Delivered in v0.22.3; P6 asks which pace suits Ame/Alex/you. No timing number or response is required before PLAY-B proceeds. |
 | D03 | Music loop control | Lower-priority existing PT23 decision, not a blocker for readiness work. Current loop transport remains unavailable until a concrete proposed behavior is ready for review. |
 | D04 | iPad test environment (optional clarification, 2026-09-05) | Eighth-generation iPad / 32GB storage is recorded. When convenient, tell us the iPadOS version, Safari versus home-screen app, and the Quality/Motion settings used for the v0.22.1 run. This helps reproduce the movement-only issue; no answer is required before the performance investigation proceeds. |
+| D05 | Device mix comfort (optional, 2026-09-06) | v0.22.3 exposes independent Music/Sound effects. P8 asks which percentages work comfortably on iPad and whether mute/background recovery behaves. No new-device purchase or blocking decision is requested. |
 
 Agents must add a dated concrete question/candidate, recommendation, affected
 scope and whether it blocks only that slice before requesting a new decision.

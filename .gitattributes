@@ -12,6 +12,8 @@
 docs/source-assets/**/*.json text eol=lf
 docs/source-assets/**/*.md text eol=lf
 requirements-art.txt text eol=lf
+docs/AI_ASSET_PROMPTS.md text eol=lf
+index.html text eol=lf
 src/artCatalog.ts text eol=lf
 src/assets.ts text eol=lf
 docs/plans/AGENT01-review-follow-up.md text eol=lf

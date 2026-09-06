@@ -1,5 +1,16 @@
 # Performance budgets and evidence contract
 
+## AUDIO-01V published allocation — 2026-09-06
+
+v0.22.3 `b834a8e` measures154875 gzip9 JS /23563 gzip9 CSS /165031011 public
+bytes. AUDIO-01V adds exactly1361 JS and53 CSS against accepted PLAY-A; no media,
+decoded-image inventory or dependency increase. Named ceilings154898 /30280 /
+165031011 pass, retaining23 bytes JS margin. Shared audio ownership uses one lazy
+context, two channel gains and at most24 SFX voices; full tracks stay streamed.
+The [final acceptance](reviews/2026-09-06-v0223-engineering-acceptance.md) records
+the measured gain and resource lifecycle checks, not physical listening success.
+This allocation does not authorize future PLAY-B or AUDIO-01A growth.
+
 ## V22-PLAY-01 PLAY-A pace allocation — 2026-09-06
 
 Against accepted Tessera checkpoint `a653a7b`, the bounded PLAY-A candidate

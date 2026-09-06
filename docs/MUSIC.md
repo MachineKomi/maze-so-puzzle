@@ -1,6 +1,11 @@
 # Music
 
-## Independent balance follow-up — 2026-09-06 (candidate implemented)
+## Independent balance follow-up — 2026-09-06 (v0.22.3)
+
+Delivered in V22-COMFORT1, frozen runtime `b834a8e`. Final519 tests, canonical
+browser journeys and native save/reopen passed. [Engineering acceptance](reviews/2026-09-06-v0223-engineering-acceptance.md).
+Physical listening is P8 in the cumulative checklist; readiness/crossfades below
+remain planned and are not implied by the new sliders.
 
 The Human reports very quiet SFX relative to BGM on iPad, while phone, laptop web
 and Windows are broadly balanced. [Source and compatibility hypothesis](user-playtests/2026-09-06-ipad-audio-balance.md).

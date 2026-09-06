@@ -7,10 +7,20 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Current runtime: v0.22.3 V22-COMFORT1**, frozen `b834a8e6775ec024fc9f854c7a7ced8c096b6627`.
+  Accepted Tessera field alpha repair + PLAY-A Chill/Regular/Zippy + AUDIO-01V
+  independent Music/SFX levels. Exact-source CI/deployment,519 project tests,
+  136 art tests,12 canonical journeys and native normal close/reopen passed.
+  [Final acceptance](reviews/2026-09-06-v0223-engineering-acceptance.md).
+  Web is live; four frozen release attachments are prepared in this checkpoint;
+  public-upload verification is recorded only in the later publication receipt.
+  P5/P6/P8 Human acceptance remains open; **no iPad camera fix** is included.
+  The older current-preview wording below is retained as publication history.
+
 - **Latest audio intake, 2026-09-06:** iPad SFX are much quieter against BGM than
   on phone/laptop/native. Independent per-device Music/Sound effects sliders
   are authorized and scoped in AUDIO-01V after accepted PLAY-A; Astra implements,
-  Sol reviews. Not yet implemented. Preserve the active sole-writer assignment
+  Sol reviews. Implemented and qualified in v0.22.3; physical listening pending. Preserve the active sole-writer assignment
   and existing default mix; verify real gain behavior before blaming hardware.
   [Source](user-playtests/2026-09-06-ipad-audio-balance.md).
 
@@ -27,7 +37,31 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 2. Release and deployment
 
-### Current v0.22.2 — experiment delivered, device result pending
+### Current v0.22.3 — comfort preview
+
+- [Web](https://maze-so-puzzle.vercel.app/): exact raw frozen HTML/JS/CSS match;
+  CI34001890372 and Production6287529696 passed at `b834a8e`.
+- Windows portable173424128 bytes, unsigned x64, version0.22.3; SHA-256
+  `3d1d2f5d1f00e3f94d4d7f5c5a7baf74485783d0ecca2c73baf808a29b042110`.
+  [Release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.3).
+  Upload/public-download status must be read from the later publication receipt,
+  not inferred from these prepared filenames.
+- [Manifest](../release/V22-COMFORT1-v0.22.3-manifest.json) and
+  [playtest note](../release/V22-COMFORT1-v0.22.3-PLAYTEST.md) preserve scope,
+  exact checks, byte budgets, failed attempts and rollback to v0.22.2.
+- Native WebView2 152.0.4191.62: new synthetic profile, seeded Maze2, live settings,
+  normal OS close/reopen twice, same run/pace/levels restored. Title Exit still
+  needs its separately queued repair. No signing/installer/physical listening pass.
+
+Next: finish release transaction; then PLAY-B stationary rescue with Sol as sole
+runtime writer in an isolated worktree and Astra read-only technical reviewer.
+[Sol preflight](reviews/2026-09-06-play-b-sol-preflight.md) finds no Human blocker.
+Before handing off, explicitly allocate the proposed bounded growth and record
+the actual starting SHA/worktree. PERF-02 moving-terrain diagnostics remain a
+separate read-only investigation until writer ownership is available. V22-UI-01
+and AUDIO-01A follow. Do not silently begin Plan04 or treat physical gates as passed.
+
+### Historical v0.22.2 — experiment delivered, iPad scrolling still unresolved
 
 - [Web](https://maze-so-puzzle.vercel.app/), visible 0.22.2 and exact raw
   HTML/JS/CSS parity against final same-SHA LF-entry dist. Runtime CI

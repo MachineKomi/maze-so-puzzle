@@ -4,6 +4,15 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
+**Newest handoff, 2026-09-06:** v0.22.3 V22-COMFORT1 frozen runtime `b834a8e`
+combines accepted Tessera field repair, PLAY-A and AUDIO-01V. Root completes
+public-release verification, then hands PLAY-B stationary rescue to actual Sol
+as sole isolated runtime writer; Astra independently reviews. Read
+[PLAY-B preflight](../reviews/2026-09-06-play-b-sol-preflight.md) and current joint
+state for the exact authorization/allocation/start SHA. P5/P6/P8 are new family
+checks; iPad camera stutter remains unresolved. Do not rerun completed slices or
+treat historical writer assignments below as current. No Human blocker exists.
+
 **Current handoff, 2026-09-06:** Astra's PERF-02A is published and actual-Sol-
 reviewed as **v0.22.2 V22-CAMERA1**, frozen `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`.
 [Receipt](../../release/V22-CAMERA1-v0.22.2-release-verification.json).

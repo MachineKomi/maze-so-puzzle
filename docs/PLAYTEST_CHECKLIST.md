@@ -8,15 +8,16 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- [Download the v0.22.2 Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.2/Maze-so-Puzzle-0.22.2-V22-CAMERA1-820ed39-locked-portable.exe)
-  — a focused camera experiment, not a proven iPad fix. Its
-  [release page](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.2)
+- [Download the v0.22.3 Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.3/Maze-so-Puzzle-0.22.3-V22-COMFORT1-b834a8e-locked-portable.exe)
+  — Dolphin repair, movement speeds and separate audio levels. Its
+  [release page](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.3)
   has instructions/checksums. Close Windows with X or Alt+F4; the title Exit
   button has a separately queued native-window issue.
 - [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
 
 You do not need to complete everything in one sitting. The affected iPad movement
-comparison below is the most useful first check. Please do not clear game data
+comparison remains open; for v0.22.3, P6 pace and P8 audio are most useful.
+This build does not change the camera. Please do not clear game data
 to create a cold test; preserving your progress is more important.
 
 ## Build register
@@ -26,7 +27,7 @@ to create a cold test; preserving your progress is more important.
 | v0.22.0 | Prior release; reported phone still showed this version when BGM became prompt | Audio observation below is useful context, not a v0.22.1 performance result. |
 | v0.22.1 V22-PERF1, runtime `8442b79` | Published web/Windows performance and input preview | P1–P4 below. Music, speeds, stationary rescue and Dolphin pixels are unchanged. |
 | v0.22.2 V22-CAMERA1, runtime `820ed39` | Published web/Windows camera-origin experiment | P1 is the priority: Maze 2 iPad taps and scenery scrolling. P2/P4 regression checks as convenient. No new audio, pace, rescue, Dolphin or phone-UI change. |
-| ART-HOTFIX-01 successor | In development; no new build claimed here yet | P5 becomes testable only after its exact build/link is recorded. |
+| v0.22.3 V22-COMFORT1, runtime `b834a8e` | Web/Windows comfort preview: Dolphin field repair, Chill/Regular/Zippy and independent Music/SFX | P5/P6/P8; P2/P4 regression as convenient. No camera or stationary-rescue fix claimed. |
 
 ## Specific checks and results
 
@@ -110,10 +111,8 @@ add a build-specific comparison when it ships.
 Audio balance follow-up, 2026-09-06: the Human already reports very quiet iPad
 SFX against music at low system volume; phone/laptop/Windows are broadly balanced.
 No need to reproduce that observation now. Independent Music/Sound effects
-sliders are planned as AUDIO-01V, not available in v0.22.2. When its exact build
-is listed, we will ask whether lowering Music makes door/rescue/pickup effects
-clear at comfortable device volume, and whether the chosen balance survives
-mute/unmute and reopening. A missing slider in today's build is expected.
+sliders are delivered as AUDIO-01V in v0.22.3. See P8 below. They were not
+available in v0.22.2; timely cross-screen BGM handover is still separate AUDIO-01A.
 
 ### P4 — Laptop comparison and ordinary recovery
 
@@ -122,14 +121,44 @@ mute/unmute and reopening. A missing slider in today's build is expected.
 - [ ] Any regression in the already-liked desktop/iPad layout? Report device,
   maze and version; screenshots/video are optional, not a prerequisite.
 
-### P5 — Dolphin field repair (wait for successor build)
+### P5 — Dolphin field repair (v0.22.3)
 
-- [ ] After ART-HOTFIX-01 is available, find Tessera Dolphin in a cage, then as a
+- [ ] Find Tessera Dolphin (Maze9, Springstep Sky Hollow) in a cage, then as a
   follower. Are the coral tail and flippers complete instead of transparent?
 - [ ] Does the Dolphin remain the expected size and position? Book/detail art
   should keep its already-correct appearance.
 
-Pending build; do not expect v0.22.1 to pass this repair check.
+Available in v0.22.3; Human acceptance pending.
+
+### P6 — Choose a comfortable pace (v0.22.3)
+
+- [ ] Open Sound & comfort; cycle Movement pace: Chill, Regular, Zippy. Which
+  suits Alex, Ame and you? Regular is the middle choice; Chill is slower, Zippy faster.
+- [ ] Try single taps, holds and turns. No extra steps after release or bursts
+  after a pause. Doors/battles/rescues should keep their own readable timing.
+- [ ] Reopen: does the chosen pace persist? On iPad distinguish slower pacing
+  feeling nicer from actual scenery scrolling becoming smooth. No camera fix claimed.
+
+### P7 — Stationary rescue (not yet shipped)
+
+PLAY-B will add a build-specific check when Ame remains beside a cage throughout
+rescue, then either turns away or moves forward on the next accepted input.
+v0.22.3 still has the previous rescue behavior; do not retest it as a correction.
+
+### P8 — Device audio balance (v0.22.3)
+
+- [ ] At comfortable low device volume, use separate Music/Sound effects sliders
+  in Sound & comfort. Does lowering Music make pickups, doors, battles and rescues
+  clear on iPad? Test sound is a convenient first check. Tell us preferred percentages.
+- [ ] Mute/unmute, change levels while muted, and reopen. Levels should persist;
+  moving a slider while muted must not unmute the game. A slider must not move Ame.
+- [ ] Background and return, then tap normally. Any missing music, burst of old
+  sound effects, or brief unwanted old song when your first action is Mute/Next?
+- [ ] Phone/laptop/Windows: any new distortion, clipping, unwanted volume jumps
+  or disrupted track playback? Defaults remain Music22% / Sound effects100%.
+
+These are physical listening checks; automated gain measurements passed but do
+not prove the balance through the iPad speakers. Do not buy new hardware for this test.
 
 ## Easy reply format
 

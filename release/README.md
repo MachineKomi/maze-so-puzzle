@@ -1,6 +1,32 @@
 # Windows test builds
 
-**Current preview: v0.22.1 V22-PERF1 performance/input preview.**
+## v0.22.3 V22-COMFORT1
+
+Current runtime/tag: `b834a8e6775ec024fc9f854c7a7ced8c096b6627`.
+The [web game](https://maze-so-puzzle.vercel.app/) includes the Dolphin field repair,
+Chill/Regular/Zippy pace and independent Music/SFX sliders. This is not an iPad
+camera fix or stationary-rescue update. The intended22/100 audio defaults are preserved.
+
+- [Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.3/Maze-so-Puzzle-0.22.3-V22-COMFORT1-b834a8e-locked-portable.exe)
+- [Manifest](V22-COMFORT1-v0.22.3-manifest.json) · [Playtest](V22-COMFORT1-v0.22.3-PLAYTEST.md) · [Checksums](V22-COMFORT1-v0.22.3-SHA256SUMS.txt)
+- [Release page](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.3)
+
+Unsigned x64 portable,173424128 bytes, SHA-256
+`3d1d2f5d1f00e3f94d4d7f5c5a7baf74485783d0ecca2c73baf808a29b042110`.
+Same FP-UI1 save namespace; no installer. Close with X/Alt+F4: title Exit remains
+separately queued. Family listening/pace and affected-iPad scrolling remain open.
+The later publication receipt records actual upload/download verification; this
+packaging checkpoint freezes attachments before upload.
+
+## Historical v0.22.2 camera experiment
+
+[Release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.2) ·
+[Receipt](V22-CAMERA1-v0.22.2-release-verification.json).
+The family reported continuing iPad camera stutter. Keep this comparison intact.
+
+## Historical v0.22.1 performance/input preview
+
+**Prior preview: v0.22.1 V22-PERF1 performance/input preview.**
 
 Play the [canonical web version](https://maze-so-puzzle.vercel.app/) or download
 the [GitHub prerelease](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.1).

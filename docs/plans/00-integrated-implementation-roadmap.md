@@ -4,6 +4,18 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
+**Current frozen preview, 2026-09-06:** v0.22.3 V22-COMFORT1 (`b834a8e`)
+combines accepted Tessera repair, PLAY-A pace and AUDIO-01V device mix. Web/native
+engineering qualification passed; P5/P6/P8 remain Human checks. See
+[acceptance](../reviews/2026-09-06-v0223-engineering-acceptance.md) and joint state
+for public-download status. No camera or stationary-rescue correction claimed.
+After publication, authorize PLAY-B under one runtime owner and independent
+review; its [preflight](../reviews/2026-09-06-play-b-sol-preflight.md) covers cage
+approach, followers, saves, solver equivalence and separate input/step metrics.
+V22-UI-01/AUDIO-01A remain next; PERF-02 bounded camera work continues separately.
+Safe progress need not wait for physical feedback; physical acceptance is never
+inferred from an engineering pass or from the Human sleeping.
+
 **Latest Human result, 2026-09-06:** v0.22.2 scrolling still stutters on iPad
 while clamped-camera character motion is smooth. Resume PERF-02 moving-terrain/
 filter isolation without asking to retest the same failure. Separate Tessera
