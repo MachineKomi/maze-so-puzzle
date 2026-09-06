@@ -48,7 +48,9 @@ try { for (const [width, height] of [[780, 312], [1280, 720]]) {
     await page.getByRole('button', { name: 'Start the maze', exact: true }).click();
     await page.locator('.maze-board').waitFor({ state: 'visible' }); await page.waitForTimeout(600);
     if (await page.locator('.maze-terrain-svg').getAttribute('data-wall-lighting') !== '04b-section-v1') throw Error('Wrong wall construction');
-    await page.keyboard.press('ArrowRight'); await page.waitForTimeout(400);
+    // Right from the first maze's start rescues an adjacent friend without a
+    // movement step. Up is the authored clear path for this movement assertion.
+    await page.keyboard.press('ArrowUp'); await page.waitForTimeout(400);
     const steps = await page.locator('.step-pill').getAttribute('aria-label');
     if (steps !== '1 step') throw Error(`Input failed: ${steps}`);
     const geometry = await page.locator('.game-stage').evaluate(e => ({ phone: e.hasAttribute('data-phone-fit'), rect: e.getBoundingClientRect().toJSON() }));
@@ -56,7 +58,7 @@ try { for (const [width, height] of [[780, 312], [1280, 720]]) {
     await page.locator('[data-focus-id="sound"]').click();
     if (await page.locator('#music-volume').inputValue() !== '65') throw Error('Game mix changed');
     await page.keyboard.press('Escape'); await settle(page); await page.screenshot({ path: resolve(output, `game-${width}.png`) });
-    receipt.browser.push({ width, height, count, music, sfx, steps, errors, geometry, wall: '04b-section-v1', journey: 'Play, Friends, Sound, Home, Begin adventure, Start the maze, ArrowRight, Sound, resume' });
+    receipt.browser.push({ width, height, count, music, sfx, steps, errors, geometry, wall: '04b-section-v1', journey: 'Play, Friends, Sound, Home, Begin adventure, Start the maze, ArrowUp, Sound, resume' });
     if (errors.length) throw Error(JSON.stringify(errors));
   } finally { await context.close(); }
 } } finally { await browser.close(); await writeFile(resolve(output, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n'); }
