@@ -2,15 +2,29 @@
 
 Latest Human refinement2026-09-06: [V23-02/04 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
 adds visible right-panel Chill/walk/Zippy control, Regular default, and coherent
-speaker+cog settings icon. Reproduce possible phone pad/minimap overlap. These
+speaker+cog settings icon. The bounded UI-01A correction addresses the reported
+phone pad/minimap overlap; physical P9 acceptance remains open. These
 belong to the short-height/control composition slice, not the independent native
 Exit fix; preserve praised desktop/iPad placement and existing focus contracts.
 
-Status: UI-NATIVE-EXIT-01 independently accepted on branch19f08a1, not published.
-UI-01A compact gameplay/Book prototype is the next bounded Sol assignment; read
-the current execution prompt before editing. Physical iPad acceptance stays open.
+Checkpoint 2026-09-06: native Exit `19f08a1` and compact gameplay/Book UI-01A
+`840293d` (evidence `517667d`) are independently accepted; see the
+[Exit review](../reviews/2026-09-06-ui-native-exit-01-astra-review.md) and
+[UI review](../reviews/2026-09-06-ui01a-astra-review.md). v0.22.5 V22-PHONE1 is
+frozen at `7282665f8631051785176b701b1a7f14b7fe24a3`.
+Web and Windows published; final native checks and all four public downloads
+independently verified. No camera/FOV/audio/save/gameplay/content change or additional
+unfinished-run restart from v0.22.4. P9 covers compact fit/Book/native Exit;
+P5–P8 remain cumulative, and physical iPad camera acceptance stays open.
 
-Owner: **GPT-5.6 Sol**
+Next runtime writer: root Astra for the separate
+[AUDIO-01V2 joint decision](../reviews/2026-09-06-audio01v2-joint-decision.md),
+with actual Sol reviewing; v0.22.5 publication is complete. Do not restart
+the UI-01A prototype. Remaining Home/dialog/victory propagation, full 200% text
+coverage, HUD pace/settings art and optical refinements need later scoped review;
+the full UI plan and root PT36-before-04 gate are not closed by this checkpoint.
+
+Remaining UI owner: **GPT-5.6 Sol**, when separately assigned
 Independent reviewer: **GPT-6 Astra**
 
 ## 1. Outcome
@@ -24,19 +38,18 @@ Engineering prerequisite reconciliation, Astra 2026-09-06: V22-PERF-01/R1 and
 PERF-02A are reviewed/published; the Human's iPad scrolling result still fails.
 Under the latest express continuation authority, that physical feedback gate
 does not block independent Exit/UI corrections indefinitely. PLAY-B is released
-in v0.22.4 and native Exit is independently accepted. Short-height work starts only
-against an explicitly frozen source and reference views, with no matched camera
-measurement/correction simultaneously in flight. Preserve the six-tile camera,
+in v0.22.4; native Exit and bounded UI-01A are now independently accepted. Further
+short-height work uses an explicitly frozen source and reference views, with no
+matched camera measurement/correction simultaneously in flight. Preserve the six-tile camera,
 cadence, renderer and accepted performance constraints. Rebase/remeasure later
 camera experiments against the actual UI source; never reuse unmatched timing.
 
-[Technical preflight](../reviews/2026-09-06-v22-ui01-preflight.md) identifies
-the missing native close bridge/permission and conflicting compact deck/map/pad
-minima. It is an Astra-team preflight, not Sol acceptance or runtime completion.
-Do not start a replacement scaling engine: the current code already considers
-height. Prototype the existing coordinated fit seam first, then review it before
-propagating. Native API/permission choice needs source/security review and actual
-process-exit evidence, not only a mocked browser close or compile pass.
+The historical [technical preflight](../reviews/2026-09-06-v22-ui01-preflight.md)
+identified the native close bridge/permission and conflicting compact deck/map/pad
+minima addressed by the accepted seams. Preserve their reviewed close and existing
+height-aware fit owners; do not start a replacement scaling engine. Further
+propagation needs its own review. Actual final-native process exit/reopen remains
+a release gate, not a mocked browser close or compile-only assertion.
 
 ## 2. Locked preservation
 
@@ -52,9 +65,10 @@ process-exit evidence, not only a mocked browser close or compile pass.
 
 ### 3.1 Short-height system
 
-Prototype one representative 844×390/568×320 gameplay and Book state before
-propagating the rule. Coordinate available height, deck minima, typography,
-optical art and internal spacing; a global scalar is an option, not authority.
+UI-01A's bounded gameplay/Book fit was accepted at 844×390, 780×312 and 568×320, with
+primary geometry preserved and 960×540 covered. Keep that evidence; remaining
+Home/dialog/victory propagation is not yet accepted. Coordinate available height,
+deck minima, typography, optical art and internal spacing; a global scalar is an option, not authority.
 Never shrink required hit areas with the visible art/text.
 
 At normal text size:
@@ -76,10 +90,10 @@ used; do not claim normal-text failure is accessibility behavior.
 
 ### 3.2 Exact Human refinements
 
-- UI-NATIVE-EXIT-01 (engineering intake 2026-09-06): title Exit currently closes
-  web content but can leave the Tauri window/process alive. Add platform-aware
-  normal close with browser-safe fallback; verify process exit and save/reopen.
-  Normal OS X/Alt+F4 is the verified workaround in the v0.22.2 camera preview.
+- UI-NATIVE-EXIT-01: platform-aware normal close with browser-safe fallback is
+  published in v0.22.5. Final-release pointer/keyboard process exit and save/settings
+  reopen passed root's native qualification; physical P9 remains separate. Normal OS X/Alt+F4 is the workaround
+  for older builds without the repair.
 
 - Replace four boxed pad buttons at rest with larger open dark-plum code-native
   chevrons that feel drawn into the pad. Keep ≥48px sectors and clear pressed,
@@ -130,7 +144,7 @@ primary composition or introduce filler.
 
 - 1920×1080, 1280×720, 1194×834 and 1024×768 retain the approved Title/Home,
   maze/map/HUD and Book density in side-by-side captures.
-- 960×540, 844×390 and 568×320, including safe-area cases and the physical
+- 960×540, 844×390, 780×312 and 568×320, including safe-area cases and the physical
   Samsung, meet every normal-text fit rule above.
 - 0/1/partial/all Bestiary, all five Book tabs, maximum card copy, friend/enemy
   lore edges, Sound/Comfort, long story and maximum-content victory are covered.

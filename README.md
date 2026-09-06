@@ -1,25 +1,20 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current correction is **v0.22.0 FP-UI1 (UI-03)**, ready for family playtesting.
-It responds to the Human's v0.21.0 UI review with authored landscape screens,
-larger picture-led tools, a five-page Adventure Book and coherent smooth travel.
-The release runtime source is `68e303da680d5aec0ba71154949c5a2a0d1697ae`.
-See the [current root review](docs/reviews/2026-09-05-ui03-root-review.md) and
-[family checklist](docs/playtests/FP-UI1-checklist.md). The frozen
-[artifact manifest](release/FP-UI1-v0.22.0-manifest.json),
-[build playtest note](release/FP-UI1-v0.22.0-PLAYTEST.md) and
-[checksums](release/FP-UI1-v0.22.0-SHA256SUMS.txt) identify the
-[published preview](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0).
-All four public downloads matched the tested local files; the
-[publication receipt](release/FP-UI1-v0.22.0-release-verification.json) records
-that later transaction. Retained 0.20.1 files are historical comparison builds.
+The current published preview is **v0.22.5 V22-PHONE1**: compact landscape
+gameplay/Book corrections and working native Title Exit, retaining the existing
+three movement paces, separate audio controls, refreshed art and stationary rescues.
+Frozen runtime: `7282665f8631051785176b701b1a7f14b7fe24a3`.
+Web and Windows are published; all four release downloads are independently verified.
+See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
+and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
+The remaining iPad camera issue and broader UI/audio improvements are still open.
 
 [![Browser build](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml/badge.svg)](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml)
 
 ![Ame and her animal friends beside a magical storybook maze](public/assets/title-background-v1.webp)
 
 A browser-first fantasy puzzle adventure for all ages, with an optional Windows
-desktop build powered by Tauri 2. The current UI-03 preview has verified web,
+desktop build powered by Tauri 2. Released previews have verified web,
 artifact and native journeys. Family playtesting, physical-device
 qualification and the remaining programme are separate from automated checks.
 
@@ -34,12 +29,10 @@ qualification and the remaining programme are separate from automated checks.
 ## Play the browser build
 
 The canonical browser address is
-[maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/). Root's current
-comparison confirms exact entry JavaScript/CSS byte identity with the clean
-locked build. All 47 new art delivery files (8,008,395 bytes) returned HTTP 200
-and matched their local hashes; six canonical-web journeys passed. The locked
-Windows artifact passed native Title/Home, Hint, single movement, close/reopen
-and minimum-layout checks. The release is ready for family feedback.
+[maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/). Its displayed
+version can advance while Windows publication is being qualified. Consult the
+[joint state](docs/JOINT_ORCHESTRATION_STATE.md) and exact release receipt rather
+than assuming that a source push has also published a tested desktop download.
 
 ```powershell
 npm ci
@@ -78,16 +71,18 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The published FP-UI1 Windows handoff contains four files:
+The published V22-PHONE1 Windows handoff contains four files:
 
-- `release/Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe`
-- [FP-UI1 artifact manifest](release/FP-UI1-v0.22.0-manifest.json)
-- [FP-UI1 playtest instructions](release/FP-UI1-v0.22.0-PLAYTEST.md)
-- [FP-UI1 SHA-256 checksums](release/FP-UI1-v0.22.0-SHA256SUMS.txt)
+- `Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe`
+- [V22-PHONE1 artifact manifest](release/V22-PHONE1-v0.22.5-manifest.json)
+- [V22-PHONE1 playtest instructions](release/V22-PHONE1-v0.22.5-PLAYTEST.md)
+- [V22-PHONE1 SHA-256 checksums](release/V22-PHONE1-v0.22.5-SHA256SUMS.txt)
 
-Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.0/Maze-so-Puzzle-0.22.0-FP-UI1-68e303d-locked-portable.exe).
-It is 173,378,560 bytes; SHA-256
-`b230c5681806737e884e1638fce0fdadf1a3155952e35cc5d73b8b76bdf77329`.
+Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.5/Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe).
+It is 173,468,160 bytes; SHA-256
+`bf0ab23182999b6ef95c050d2a6ba7bcd4cfe86636f6e95c16334a43b856e987`.
+The [publication receipt](release/V22-PHONE1-v0.22.5-release-verification.json)
+binds the independent public downloads to the tested source and native artifact.
 Executables stay out of Git history; the portable and three release records
 form the verified GitHub Release asset set. The rejected v0.21.0 draft and the
 superseded v0.22.0 candidate from `2f8fa6a` remain withheld.
@@ -98,7 +93,7 @@ lockfile. `npm ci` restored Rolldown 1.2.6 without changing that lockfile.
 The `-locked-portable.exe` suffix distinguishes the replacement; a displayed
 version of 0.22.0 alone is insufficient to identify the verified artifact.
 
-This FP-UI1 build uses `com.ame.mazesopuzzle.preview.fpui1`, separate from the
+Current previews retain `com.ame.mazesopuzzle.preview.fpui1`, separate from the
 older preview profile `com.ame.mazesopuzzle.preview`. Saved progress belongs to
 the selected WebView profile, not the executable's folder. The local build
 commands above do not by themselves establish the final release profile or
@@ -114,7 +109,7 @@ Historical 0.20.1 comparison copies remain archived:
 
 Their historical hashes and older archive records are in
 [release/SHA256SUMS.txt](release/SHA256SUMS.txt). Their earlier six-second smoke
-launch and build comparisons do not qualify the current FP-UI1 candidate.
+launch and build comparisons do not qualify the current preview.
 
 ## Controls
 
@@ -130,10 +125,10 @@ launch and build comparisons do not qualify the current FP-UI1 candidate.
   rescues a friend, enters a portal, or routes around a door or enemy.
 - Bottom-right thumb pad: tap an arrow for one square, hold to continue, or drag
   within the pad to steer. Mouse and touch use the same control.
-- Ordinary first taps and held steps use the same 160 ms travel interval. Ame
-  and the camera move smoothly along the legal tile path; presentation lag stays
+- Ordinary first taps and held steps use the selected Chill/Regular/Zippy pace. Ame
+  and the camera interpolate along the legal tile path; presentation lag stays
   bounded when inputs arrive quickly. Late callbacks use their actual time and
-  never replay a burst of missed moves.
+  never replay a burst of missed moves. Physical iPad camera stutter remains open.
 - The UI-03 landscape layout uses real CSS pixels: a square maze on the left and
   an information/control deck on the right. Compact landscape phones keep
   essential controls available and group secondary actions and details in More.
@@ -163,7 +158,7 @@ Open the production URL in Safari, tap **Share**, choose **More**, then
 icon uses the bundled Ame artwork and opens without Safari's normal tab chrome.
 Turn the iPad sideways to play.
 
-## Current UI-03 correction
+## Historical UI-03 foundation — v0.22.0
 
 - Title and Home use the paintings' intended left-side menu space and right-side
   cast. Home allocates menu height before the logo, including fresh and saved
@@ -178,8 +173,8 @@ Turn the iPad sideways to play.
 - Rounded story portraits, deliberate Enter/body-click progression, celebratory
   friend dances and confetti, restrained focus treatment, quick mute and the
   separate Sound and comfort panel address the v0.21.0 review.
-- First taps and held steps share precise tile rules and smooth 160ms visual
-  travel. The bottom-right thumb pad supports tap, hold and drag steering.
+- This historical build used 160ms visual travel; current previews use the
+  selected Chill/Regular/Zippy pace. The thumb pad supports tap, hold and drag.
 
 The [UI specification](docs/UI_UX_SPEC.md),
 [UI-03 root review](docs/reviews/2026-09-05-ui03-root-review.md) and
@@ -539,7 +534,7 @@ multi-hole jumps, unsafe landing rejection, legacy active-run migration,
 prerequisite detours, all sixteen authored ordinary/perfect-rescue routes,
 dominant-colour theme compatibility, context-specific soundtrack selection, the
 6 x 6 even camera, variable 9–23 room-aware generation, solver-safe connected hazards,
-pointer intent/corner assistance, the shared 160ms first/held travel cadence, variable
+pointer intent/corner assistance, the selected-pace first/held travel cadence, variable
 1–5 friend totals, immutable strong-enemy warnings, poison/antidote traversal
 and migration, theme lightness and colour compatibility, transparent terrain
 dressing, rescued-pet trails, persistent minimap reveal, dedicated Rose Heart,
@@ -551,12 +546,11 @@ migrations, current-state reachability, progressive hints, route-quality
 metrics, fixed Surprise seeds, complete friend/enemy personality maps, scoped
 large-maze object mounting, and below-fold portrait lazy loading.
 
-The final FP-UI1 artifact record will identify the exact source, portable bytes,
-SHA-256 and native checks. A build succeeding or `main` being pushed does not
-establish a verified executable or deployed browser version. Clean-machine
-installation, signing, offline qualification and physical-device checks are not
-claimed by this pending handoff. The earlier 0.20.1 package checks remain
-historical evidence only.
+The [v0.22.5 publication receipt](release/V22-PHONE1-v0.22.5-release-verification.json)
+records the exact source, portable bytes, SHA-256, native checks and four verified
+public downloads. Source push alone never proves desktop publication. Signing,
+installer/clean-machine/offline qualification and physical-device comfort remain
+open. Earlier package records remain historical evidence.
 
 The browser matrix, remaining release gates, and Windows artifact
 record are kept in

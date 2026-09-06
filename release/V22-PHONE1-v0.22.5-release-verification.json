@@ -1,0 +1,2592 @@
+{
+  "schema": "maze-family-preview-publication-receipt/v1",
+  "version": "0.22.5",
+  "preview": "V22-PHONE1",
+  "status": "PUBLISHED_AND_PUBLIC_DOWNLOADS_VERIFIED",
+  "preparedAtUtc": "2026-09-06T04:35:33.288Z",
+  "runtimeSourceCommit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+  "packagingDocumentationCommit": "d65bfc9419d3ca499a189b34e70285c80795a015",
+  "publication": {
+    "schema": "maze-family-preview-public-downloads/v1",
+    "at": "2026-09-06T04:35:04.975Z",
+    "runtimeSourceCommit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+    "releaseId": 383463903,
+    "releaseURL": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.5",
+    "tag": {
+      "ref": "refs/tags/v0.22.5",
+      "node_id": "REF_kwDOUKIx0rFyZWZzL3RhZ3MvdjAuMjIuNQ",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs/tags/v0.22.5",
+      "object": {
+        "sha": "7282665f8631051785176b701b1a7f14b7fe24a3",
+        "type": "commit",
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits/7282665f8631051785176b701b1a7f14b7fe24a3"
+      }
+    },
+    "prerelease": true,
+    "downloads": [
+      {
+        "name": "Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe",
+        "bytes": 173468160,
+        "sha256": "bf0ab23182999b6ef95c050d2a6ba7bcd4cfe86636f6e95c16334a43b856e987",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.5/Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe",
+        "assetId": 546724047,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-PHONE1-v0.22.5-manifest.json",
+        "bytes": 130109,
+        "sha256": "a0ef7fcc131557ce98782f60a2fd71fa8338d129b118e36c34e8bc9f09362040",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.5/V22-PHONE1-v0.22.5-manifest.json",
+        "assetId": 546725226,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-PHONE1-v0.22.5-PLAYTEST.md",
+        "bytes": 3598,
+        "sha256": "b0372c484348f9dda135b11d647c134d188727be945e279639983dab9e019bd2",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.5/V22-PHONE1-v0.22.5-PLAYTEST.md",
+        "assetId": 546725236,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-PHONE1-v0.22.5-SHA256SUMS.txt",
+        "bytes": 323,
+        "sha256": "91071080dacaf6711d51feb28c0780646ef968b3a1fb0d40a7bb661f6ad3fd87",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.5/V22-PHONE1-v0.22.5-SHA256SUMS.txt",
+        "assetId": 546725242,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      }
+    ],
+    "manifestSHA256": "a0ef7fcc131557ce98782f60a2fd71fa8338d129b118e36c34e8bc9f09362040"
+  },
+  "build": {
+    "command": "node node_modules/@tauri-apps/cli/tauri.js build --no-bundle --ci -- --locked",
+    "provenance": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-06T03:52:25.967Z",
+      "commit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+      "runtimeInputsSha256": "5df9a334e5066073f2a5bd837d8830191783a650455698c08dfe4e1338634226",
+      "distFingerprintSha256": "9d82283965e1a5cc77c38a412de00c2947a97c8ef0a40108d44103eaece138fd",
+      "buildCommand": "npm run build"
+    },
+    "staticBudgets": {
+      "compressedJsBytes": {
+        "actual": 155307,
+        "limit": 155362
+      },
+      "compressedCssBytes": {
+        "actual": 23976,
+        "limit": 30693
+      },
+      "runtimePublicBytes": {
+        "actual": 165031011,
+        "limit": 165031011
+      }
+    }
+  },
+  "checks": {
+    "project": {
+      "status": "pass",
+      "command": "npm test -- --maxWorkers=1",
+      "result": "543/543 tests, 51 files, fresh serial",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/project-tests.log"
+      ]
+    },
+    "typescriptAndBuild": {
+      "status": "pass",
+      "command": "npm run build; final build provenance guard",
+      "result": "TypeScript/Vite pass; frozen source/dist match",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/build.log",
+        "C:/GameDev/maze-game-qa/releases/v0225/verify-build-r2.json"
+      ]
+    },
+    "performanceContracts": {
+      "status": "pass",
+      "command": "npm run perf:check",
+      "result": "11 scenarios and deterministic bytes pass; timings report-only",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/perf-check.log"
+      ]
+    },
+    "art": {
+      "status": "pass",
+      "command": "npm run art:check; exact unchanged art input comparison",
+      "result": "Fresh zero errors, 429 warnings after historical proof restoration; 136 art tests inherited byte-unchanged, not rerun",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/art-check.log",
+        "C:/GameDev/maze-game-qa/releases/v0225/art-check-r2.log",
+        "C:/GameDev/maze-game-qa/releases/v0225/compatibility.json"
+      ]
+    },
+    "desktop": {
+      "status": "pass",
+      "command": "npm run check:desktop; tauri build --no-bundle --ci -- --locked; native UI",
+      "result": "Locked build and actual final portable native checks pass",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/desktop-check.log",
+        "C:/GameDev/maze-game-qa/releases/v0225/native-build.log",
+        "C:/GameDev/maze-game-qa/releases/v0225/portable-stage.json",
+        "C:/GameDev/maze-game-qa/releases/v0225/native-summary.json",
+        "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-summary.json"
+      ]
+    },
+    "productionAudit": {
+      "status": "pass",
+      "command": "npm audit --omit=dev --audit-level=high",
+      "result": "Zero production vulnerability findings",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/audit.log"
+      ]
+    },
+    "paceAndAudio": {
+      "status": "pass",
+      "command": "Selected canonical PLAY-A; native-inherited-smoke; range-smoke",
+      "result": "Three paces/held/cancellation pass; settings and keyboard/pointer ranges restored. No listening/effective-gain recalibration claim",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/canonical/playwright-results.json",
+        "C:/GameDev/maze-game-qa/releases/v0225/native-summary.json",
+        "C:/GameDev/maze-game-qa/releases/v0225/range-smoke.json"
+      ]
+    },
+    "stationaryRescue": {
+      "status": "pass",
+      "command": "Canonical PLAY-B; exact engine fixture; actual final Windows smoke",
+      "result": "10 canonical rescue checks; 53 native visible-origin samples; zero-step rescue and normal close/reopen pass",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/canonical/playwright-results.json",
+        "C:/GameDev/maze-game-qa/releases/v0225/native-fixture.json",
+        "C:/GameDev/maze-game-qa/releases/v0225/native-summary.json"
+      ]
+    },
+    "nativeTitleExit": {
+      "status": "pass",
+      "command": "Actual Computer Use pointer/Tab/Enter; native-title-exit-smoke-v3",
+      "result": "Exact portable cold pointer PID23560 and keyboard PID36288 close; reopen PID13448 preserves run/preferences. Partial cold subcheck reuse disclosed",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-summary.json"
+      ]
+    },
+    "compactLayout": {
+      "status": "pass",
+      "command": "Final-source browser proof; canonical compact tests; Astra visual inspection",
+      "result": "Eight-view geometry/content/input and primary preservation; actual screens reviewed. Two canonical compact tests",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/compact-ui-summary.json"
+      ]
+    },
+    "compatibility": {
+      "status": "pass",
+      "command": "node verify-compatibility.mjs release-config.json; native current fixture/reopen",
+      "result": "Engine/content/save/rules/media/audio/camera unchanged from v0.22.4; no additional restart",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0225/compatibility.json",
+        "C:/GameDev/maze-game-qa/releases/v0225/native-summary.json"
+      ]
+    }
+  },
+  "ci": {
+    "runId": 34009976109,
+    "headSHA": "7282665f8631051785176b701b1a7f14b7fe24a3",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "verify",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34009976109/job/101423969156"
+      },
+      {
+        "name": "desktop",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34009976109/job/101423969247"
+      }
+    ]
+  },
+  "web": {
+    "schema": "maze-family-preview-web-verification/v1",
+    "at": "2026-09-06T04:01:06.195Z",
+    "runtimeSourceCommit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+    "canonicalURL": "https://maze-so-puzzle.vercel.app/",
+    "allBytesMatch": true,
+    "files": [
+      {
+        "path": "/",
+        "httpStatus": 200,
+        "bytes": 1070,
+        "sha256": "d6399634063e4e8fec58fb9f2b79de068e974ff86345d95855523d740e73ed63",
+        "localSHA256": "d6399634063e4e8fec58fb9f2b79de068e974ff86345d95855523d740e73ed63",
+        "match": true
+      },
+      {
+        "path": "/assets/index-C5n1eRC7.js",
+        "httpStatus": 200,
+        "bytes": 569417,
+        "sha256": "882a4c2085c950ae014d73a19915ff96fca47382461e321a3fa5c8b72eb3e595",
+        "localSHA256": "882a4c2085c950ae014d73a19915ff96fca47382461e321a3fa5c8b72eb3e595",
+        "match": true
+      },
+      {
+        "path": "/assets/index-B8w1uSFD.css",
+        "httpStatus": 200,
+        "bytes": 119554,
+        "sha256": "7e1429a361ef9c0e06ae4d8ca2e25f72c14564bfbec7dbb0c9218571e540c3b4",
+        "localSHA256": "7e1429a361ef9c0e06ae4d8ca2e25f72c14564bfbec7dbb0c9218571e540c3b4",
+        "match": true
+      }
+    ],
+    "build": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-06T03:52:25.967Z",
+      "commit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+      "runtimeInputsSha256": "5df9a334e5066073f2a5bd837d8830191783a650455698c08dfe4e1338634226",
+      "distFingerprintSha256": "9d82283965e1a5cc77c38a412de00c2947a97c8ef0a40108d44103eaece138fd",
+      "buildCommand": "npm run build"
+    },
+    "ci": {
+      "id": 34009976109,
+      "name": "Browser build",
+      "node_id": "WFR_kwLOUKIx0s8AAAAH6ycNLQ",
+      "head_branch": "main",
+      "head_sha": "7282665f8631051785176b701b1a7f14b7fe24a3",
+      "path": ".github/workflows/ci.yml",
+      "display_title": "release: freeze v0.22.5 compact UI and native Exit preview",
+      "run_number": 129,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "workflow_id": 347003157,
+      "check_suite_id": 92153459977,
+      "check_suite_node_id": "CS_kwDOUKIx0s8AAAAVdMY1CQ",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109",
+      "html_url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34009976109",
+      "pull_requests": [],
+      "created_at": "2026-09-06T03:49:59Z",
+      "updated_at": "2026-09-06T03:51:53Z",
+      "actor": {
+        "login": "MachineKomi",
+        "id": 136615872,
+        "node_id": "U_kgDOCCSXwA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MachineKomi",
+        "html_url": "https://github.com/MachineKomi",
+        "followers_url": "https://api.github.com/users/MachineKomi/followers",
+        "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+        "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+        "repos_url": "https://api.github.com/users/MachineKomi/repos",
+        "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [],
+      "run_started_at": "2026-09-06T03:49:59Z",
+      "triggering_actor": {
+        "login": "MachineKomi",
+        "id": 136615872,
+        "node_id": "U_kgDOCCSXwA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MachineKomi",
+        "html_url": "https://github.com/MachineKomi",
+        "followers_url": "https://api.github.com/users/MachineKomi/followers",
+        "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+        "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+        "repos_url": "https://api.github.com/users/MachineKomi/repos",
+        "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109/jobs",
+      "logs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109/logs",
+      "check_suite_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/check-suites/92153459977",
+      "artifacts_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109/artifacts",
+      "cancel_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109/cancel",
+      "rerun_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/workflows/347003157",
+      "head_commit": {
+        "id": "7282665f8631051785176b701b1a7f14b7fe24a3",
+        "tree_id": "e4f263e10e2545a05546e909089fffe8ef2876d6",
+        "message": "release: freeze v0.22.5 compact UI and native Exit preview",
+        "timestamp": "2026-09-06T03:46:04Z",
+        "author": {
+          "name": "jjackson3d",
+          "email": "jjackson3d@gmail.com"
+        },
+        "committer": {
+          "name": "jjackson3d",
+          "email": "jjackson3d@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1352806866,
+        "node_id": "R_kgDOUKIx0g",
+        "name": "maze-so-puzzle",
+        "full_name": "MachineKomi/maze-so-puzzle",
+        "private": false,
+        "owner": {
+          "login": "MachineKomi",
+          "id": 136615872,
+          "node_id": "U_kgDOCCSXwA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/MachineKomi",
+          "html_url": "https://github.com/MachineKomi",
+          "followers_url": "https://api.github.com/users/MachineKomi/followers",
+          "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+          "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+          "repos_url": "https://api.github.com/users/MachineKomi/repos",
+          "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/MachineKomi/maze-so-puzzle",
+        "description": "A fun family friendly maze game - runs in browser as a webapp and as a desktop app wrapped with tauri",
+        "fork": false,
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "forks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/forks",
+        "keys_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/teams",
+        "hooks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/hooks",
+        "issue_events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/events",
+        "assignees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/tags",
+        "blobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/languages",
+        "stargazers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/stargazers",
+        "contributors_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contributors",
+        "subscribers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscribers",
+        "subscription_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscription",
+        "commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/merges",
+        "archive_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/downloads",
+        "issues_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/labels{/name}",
+        "releases_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments"
+      },
+      "head_repository": {
+        "id": 1352806866,
+        "node_id": "R_kgDOUKIx0g",
+        "name": "maze-so-puzzle",
+        "full_name": "MachineKomi/maze-so-puzzle",
+        "private": false,
+        "owner": {
+          "login": "MachineKomi",
+          "id": 136615872,
+          "node_id": "U_kgDOCCSXwA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/MachineKomi",
+          "html_url": "https://github.com/MachineKomi",
+          "followers_url": "https://api.github.com/users/MachineKomi/followers",
+          "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+          "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+          "repos_url": "https://api.github.com/users/MachineKomi/repos",
+          "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/MachineKomi/maze-so-puzzle",
+        "description": "A fun family friendly maze game - runs in browser as a webapp and as a desktop app wrapped with tauri",
+        "fork": false,
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "forks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/forks",
+        "keys_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/teams",
+        "hooks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/hooks",
+        "issue_events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/events",
+        "assignees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/tags",
+        "blobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/languages",
+        "stargazers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/stargazers",
+        "contributors_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contributors",
+        "subscribers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscribers",
+        "subscription_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscription",
+        "commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/merges",
+        "archive_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/downloads",
+        "issues_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/labels{/name}",
+        "releases_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments"
+      }
+    },
+    "jobs": {
+      "total_count": 2,
+      "jobs": [
+        {
+          "id": 101423969156,
+          "run_id": 34009976109,
+          "workflow_name": "Browser build",
+          "head_branch": "main",
+          "run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109",
+          "run_attempt": 1,
+          "node_id": "CR_kwDOUKIx0s8AAAAXnVbzhA",
+          "head_sha": "7282665f8631051785176b701b1a7f14b7fe24a3",
+          "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/jobs/101423969156",
+          "html_url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34009976109/job/101423969156",
+          "status": "completed",
+          "conclusion": "success",
+          "created_at": "2026-09-06T03:50:00Z",
+          "started_at": "2026-09-06T03:50:02Z",
+          "completed_at": "2026-09-06T03:51:10Z",
+          "name": "verify",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-09-06T03:50:02Z",
+              "completed_at": "2026-09-06T03:50:03Z"
+            },
+            {
+              "name": "Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-09-06T03:50:03Z",
+              "completed_at": "2026-09-06T03:50:16Z"
+            },
+            {
+              "name": "Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-09-06T03:50:16Z",
+              "completed_at": "2026-09-06T03:50:17Z"
+            },
+            {
+              "name": "Install locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-09-06T03:50:17Z",
+              "completed_at": "2026-09-06T03:50:19Z"
+            },
+            {
+              "name": "Test and build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-09-06T03:50:19Z",
+              "completed_at": "2026-09-06T03:51:06Z"
+            },
+            {
+              "name": "Validate performance contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-09-06T03:51:06Z",
+              "completed_at": "2026-09-06T03:51:07Z"
+            },
+            {
+              "name": "Audit production dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-09-06T03:51:07Z",
+              "completed_at": "2026-09-06T03:51:07Z"
+            },
+            {
+              "name": "Post Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-09-06T03:51:07Z",
+              "completed_at": "2026-09-06T03:51:09Z"
+            },
+            {
+              "name": "Post Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-09-06T03:51:09Z",
+              "completed_at": "2026-09-06T03:51:09Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-09-06T03:51:09Z",
+              "completed_at": "2026-09-06T03:51:09Z"
+            }
+          ],
+          "check_run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/check-runs/101423969156",
+          "labels": [
+            "ubuntu-latest"
+          ],
+          "runner_id": 1000000292,
+          "runner_name": "GitHub Actions 1000000292",
+          "runner_group_id": 0,
+          "runner_group_name": "GitHub Actions"
+        },
+        {
+          "id": 101423969247,
+          "run_id": 34009976109,
+          "workflow_name": "Browser build",
+          "head_branch": "main",
+          "run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34009976109",
+          "run_attempt": 1,
+          "node_id": "CR_kwDOUKIx0s8AAAAXnVbz3w",
+          "head_sha": "7282665f8631051785176b701b1a7f14b7fe24a3",
+          "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/jobs/101423969247",
+          "html_url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34009976109/job/101423969247",
+          "status": "completed",
+          "conclusion": "success",
+          "created_at": "2026-09-06T03:50:00Z",
+          "started_at": "2026-09-06T03:50:02Z",
+          "completed_at": "2026-09-06T03:51:52Z",
+          "name": "desktop",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-09-06T03:50:03Z",
+              "completed_at": "2026-09-06T03:50:05Z"
+            },
+            {
+              "name": "Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-09-06T03:50:05Z",
+              "completed_at": "2026-09-06T03:50:24Z"
+            },
+            {
+              "name": "Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-09-06T03:50:24Z",
+              "completed_at": "2026-09-06T03:50:30Z"
+            },
+            {
+              "name": "Use stable Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-09-06T03:50:30Z",
+              "completed_at": "2026-09-06T03:50:51Z"
+            },
+            {
+              "name": "Cache Rust build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-09-06T03:50:51Z",
+              "completed_at": "2026-09-06T03:51:07Z"
+            },
+            {
+              "name": "Install locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-09-06T03:51:07Z",
+              "completed_at": "2026-09-06T03:51:18Z"
+            },
+            {
+              "name": "Check Windows desktop build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-09-06T03:51:18Z",
+              "completed_at": "2026-09-06T03:51:45Z"
+            },
+            {
+              "name": "Post Cache Rust build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-09-06T03:51:45Z",
+              "completed_at": "2026-09-06T03:51:45Z"
+            },
+            {
+              "name": "Post Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-09-06T03:51:45Z",
+              "completed_at": "2026-09-06T03:51:48Z"
+            },
+            {
+              "name": "Post Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-09-06T03:51:48Z",
+              "completed_at": "2026-09-06T03:51:50Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-09-06T03:51:50Z",
+              "completed_at": "2026-09-06T03:51:50Z"
+            }
+          ],
+          "check_run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/check-runs/101423969247",
+          "labels": [
+            "windows-latest"
+          ],
+          "runner_id": 1000000293,
+          "runner_name": "GitHub Actions 1000000293",
+          "runner_group_id": 0,
+          "runner_group_name": "GitHub Actions"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "statuses": [
+        {
+          "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/7282665f8631051785176b701b1a7f14b7fe24a3",
+          "avatar_url": "https://avatars.githubusercontent.com/in/8329?v=4",
+          "id": 53617323103,
+          "node_id": "SC_kwDOUKIx0s8AAAAMe9dsXw",
+          "state": "success",
+          "description": "Deployment has completed",
+          "target_url": "https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/Cdc5fxARWYP3hHeGFUqXztum7MLp",
+          "context": "Vercel",
+          "created_at": "2026-09-06T03:50:35Z",
+          "updated_at": "2026-09-06T03:50:35Z"
+        }
+      ],
+      "sha": "7282665f8631051785176b701b1a7f14b7fe24a3",
+      "total_count": 1,
+      "repository": {
+        "id": 1352806866,
+        "node_id": "R_kgDOUKIx0g",
+        "name": "maze-so-puzzle",
+        "full_name": "MachineKomi/maze-so-puzzle",
+        "private": false,
+        "owner": {
+          "login": "MachineKomi",
+          "id": 136615872,
+          "node_id": "U_kgDOCCSXwA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/MachineKomi",
+          "html_url": "https://github.com/MachineKomi",
+          "followers_url": "https://api.github.com/users/MachineKomi/followers",
+          "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+          "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+          "repos_url": "https://api.github.com/users/MachineKomi/repos",
+          "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/MachineKomi/maze-so-puzzle",
+        "description": "A fun family friendly maze game - runs in browser as a webapp and as a desktop app wrapped with tauri",
+        "fork": false,
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "forks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/forks",
+        "keys_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/teams",
+        "hooks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/hooks",
+        "issue_events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/events",
+        "assignees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/tags",
+        "blobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/languages",
+        "stargazers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/stargazers",
+        "contributors_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contributors",
+        "subscribers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscribers",
+        "subscription_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscription",
+        "commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/merges",
+        "archive_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/downloads",
+        "issues_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/labels{/name}",
+        "releases_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments"
+      },
+      "commit_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits/7282665f8631051785176b701b1a7f14b7fe24a3",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits/7282665f8631051785176b701b1a7f14b7fe24a3/status"
+    },
+    "production": [
+      {
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6288858311",
+        "id": 6288858311,
+        "node_id": "DE_kwDOUKIx0s8AAAABdthcxw",
+        "task": "deploy",
+        "original_environment": "Production",
+        "environment": "Production",
+        "description": null,
+        "created_at": "2026-09-06T03:50:35Z",
+        "updated_at": "2026-09-06T03:50:35Z",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6288858311/statuses",
+        "repository_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "creator": {
+          "login": "vercel[bot]",
+          "id": 35613825,
+          "node_id": "MDM6Qm90MzU2MTM4MjU=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/8329?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/vercel%5Bbot%5D",
+          "html_url": "https://github.com/apps/vercel",
+          "followers_url": "https://api.github.com/users/vercel%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/vercel%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/vercel%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/vercel%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/vercel%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/vercel%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/vercel%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/vercel%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/vercel%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "sha": "7282665f8631051785176b701b1a7f14b7fe24a3",
+        "ref": "7282665f8631051785176b701b1a7f14b7fe24a3",
+        "payload": {},
+        "transient_environment": false,
+        "production_environment": false,
+        "performed_via_github_app": null,
+        "statuses": [
+          {
+            "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6288858311/statuses/17886842974",
+            "id": 17886842974,
+            "node_id": "DES_kwDOUKIx0s8AAAAEKiOQXg",
+            "state": "success",
+            "creator": {
+              "login": "vercel[bot]",
+              "id": 35613825,
+              "node_id": "MDM6Qm90MzU2MTM4MjU=",
+              "avatar_url": "https://avatars.githubusercontent.com/in/8329?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/vercel%5Bbot%5D",
+              "html_url": "https://github.com/apps/vercel",
+              "followers_url": "https://api.github.com/users/vercel%5Bbot%5D/followers",
+              "following_url": "https://api.github.com/users/vercel%5Bbot%5D/following{/other_user}",
+              "gists_url": "https://api.github.com/users/vercel%5Bbot%5D/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/vercel%5Bbot%5D/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/vercel%5Bbot%5D/subscriptions",
+              "organizations_url": "https://api.github.com/users/vercel%5Bbot%5D/orgs",
+              "repos_url": "https://api.github.com/users/vercel%5Bbot%5D/repos",
+              "events_url": "https://api.github.com/users/vercel%5Bbot%5D/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/vercel%5Bbot%5D/received_events",
+              "type": "Bot",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "description": "Deployment has completed",
+            "environment": "Production",
+            "target_url": "https://maze-so-puzzle-20ab26c1m-jasons-projects-6714ffa7.vercel.app",
+            "created_at": "2026-09-06T03:50:35Z",
+            "updated_at": "2026-09-06T03:50:35Z",
+            "deployment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6288858311",
+            "repository_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+            "environment_url": "https://maze-so-puzzle-20ab26c1m-jasons-projects-6714ffa7.vercel.app",
+            "log_url": "https://maze-so-puzzle-20ab26c1m-jasons-projects-6714ffa7.vercel.app",
+            "performed_via_github_app": null
+          }
+        ]
+      }
+    ]
+  },
+  "native": {
+    "schema": "maze-native-family-smoke/v1",
+    "status": "pass",
+    "runtimeSourceCommit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+    "version": "0.22.5",
+    "webView2Version": "152.0.4191.62",
+    "portable": {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/attachments/Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe",
+      "bytes": 173468160,
+      "sha256": "bf0ab23182999b6ef95c050d2a6ba7bcd4cfe86636f6e95c16334a43b856e987"
+    },
+    "fixture": {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/native-fixture.json",
+      "bytes": 10661,
+      "sha256": "61e396e7e22e04213ee39f727b28090cdba77bee4420e5d28f4ee824b83ecf82"
+    },
+    "profile": "Fresh synthetic profile under external v0225 evidence; no Human profile copied or changed",
+    "settings": {
+      "beforeClose": {
+        "motion": "full",
+        "quality": "full",
+        "pace": "zippy",
+        "musicVolume": 0.12,
+        "sfxVolume": 0.64
+      },
+      "afterReopen": {
+        "motion": "full",
+        "quality": "full",
+        "pace": "zippy",
+        "musicVolume": 0.12,
+        "sfxVolume": 0.64
+      }
+    },
+    "stationaryRescue": {
+      "passed": true,
+      "rescuedId": "little-star-trail-animal-rainbow-horn-unicorn",
+      "positionAndStepsUnchanged": true,
+      "visibleOriginSamples": 53,
+      "rescuePresentations": 1,
+      "postRescueMoves": [
+        {
+          "phase": "turn-away",
+          "key": "ArrowUp",
+          "position": {
+            "x": 1,
+            "y": 3
+          },
+          "steps": 1,
+          "rescuedAnimalIds": [
+            "little-star-trail-animal-rainbow-horn-unicorn"
+          ]
+        },
+        {
+          "phase": "return-to-origin",
+          "key": "ArrowDown",
+          "position": {
+            "x": 1,
+            "y": 4
+          },
+          "steps": 2,
+          "rescuedAnimalIds": [
+            "little-star-trail-animal-rainbow-horn-unicorn"
+          ]
+        },
+        {
+          "phase": "enter-cleared-cage",
+          "key": "ArrowRight",
+          "position": {
+            "x": 2,
+            "y": 4
+          },
+          "steps": 3,
+          "rescuedAnimalIds": [
+            "little-star-trail-animal-rainbow-horn-unicorn"
+          ]
+        },
+        {
+          "phase": "return-from-cleared-cage",
+          "key": "ArrowLeft",
+          "position": {
+            "x": 1,
+            "y": 4
+          },
+          "steps": 4,
+          "rescuedAnimalIds": [
+            "little-star-trail-animal-rainbow-horn-unicorn"
+          ]
+        }
+      ],
+      "normalCloseReopenPassed": true,
+      "beforeCloseRun": {
+        "schemaVersion": 3,
+        "runId": "run-v0225-native-stationary-rescue",
+        "levelId": "little-star-trail",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-da9a47f7",
+        "game": {
+          "levelId": "little-star-trail",
+          "position": {
+            "x": 1,
+            "y": 4
+          },
+          "power": 2,
+          "hasSword": false,
+          "hasBoots": false,
+          "hasSpringBoots": false,
+          "hasAntidoteLeaf": false,
+          "keys": [],
+          "collectedObjectIds": [],
+          "rescuedAnimalIds": [
+            "little-star-trail-animal-rainbow-horn-unicorn"
+          ],
+          "defeatedEnemyIds": [],
+          "openedDoorIds": [],
+          "goldStarsCollected": 0,
+          "sciencePointsCollected": 0,
+          "exitArmed": true,
+          "status": "playing",
+          "steps": 4
+        },
+        "revealedTiles": [],
+        "hintUsesByState": {}
+      },
+      "afterReopenRun": {
+        "schemaVersion": 3,
+        "runId": "run-v0225-native-stationary-rescue",
+        "levelId": "little-star-trail",
+        "contentRevision": 3,
+        "gameplayFingerprint": "g-da9a47f7",
+        "game": {
+          "levelId": "little-star-trail",
+          "position": {
+            "x": 1,
+            "y": 4
+          },
+          "power": 2,
+          "hasSword": false,
+          "hasBoots": false,
+          "hasSpringBoots": false,
+          "hasAntidoteLeaf": false,
+          "keys": [],
+          "collectedObjectIds": [],
+          "rescuedAnimalIds": [
+            "little-star-trail-animal-rainbow-horn-unicorn"
+          ],
+          "defeatedEnemyIds": [],
+          "openedDoorIds": [],
+          "goldStarsCollected": 0,
+          "sciencePointsCollected": 0,
+          "exitArmed": true,
+          "status": "playing",
+          "steps": 4
+        },
+        "revealedTiles": [],
+        "hintUsesByState": {}
+      }
+    },
+    "records": [
+      {
+        "name": "01-native-title",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0225/native-attempts/r1/01-native-title.png",
+          "bytes": 1446135,
+          "sha256": "36050bb7fd9036aeedd4add559ac46573fe7c3f9097b00c3c25f84151ee1afc3"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle\nPlay\nExit\nv0.22.5",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "name": "02-native-maze",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0225/native-attempts/r1/02-native-maze.png",
+          "bytes": 981273,
+          "sha256": "c3160004d8bc956e09bd64a3b813d01c5bd29295a195db4254516aee9bb175f3"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\n2\n\nAme is at column 2, row 5. Up: open path. Right: caged rainbow-horn unicorn. Down: wall. Left: wall.\n\nFollow the paths to the star!\nStory maze 1 of 16\nLittle Star Trail\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n0 steps\nRight now\n\nFollow the paths to the star!\n\nHint\nMy map\n100%\nNow\nExplored\nMystery\n\nAme is at column 2, row 5. The sparkling exit is at column 5, row 2. Discovered landmarks: caged rainbow-horn unicorn at column 3, row 5; star sword at column 5, row 5.\n\nFriends\n0/1\nOptional\nAdventure bag\n0/1\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "name": "03-native-sound-pace",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0225/native-attempts/r1/03-native-sound-pace.png",
+          "bytes": 463284,
+          "sha256": "193448b1a21eb4aff13d2b930826f153c345d7888a99d5518ddade638f07489e"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\n2\n\nAme is at column 2, row 5. Up: open path. Right: caged rainbow-horn unicorn. Down: wall. Left: wall.\n\nFollow the paths to the star!\nStory maze 1 of 16\nLittle Star Trail\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n0 steps\nRight now\n\nFollow the paths to the star!\n\nHint\nMy map\n100%\nNow\nExplored\nMystery\n\nAme is at column 2, row 5. The sparkling exit is at column 5, row 2. Discovered landmarks: caged rainbow-horn unicorn at column 3, row 5; star sword at column 5, row 5.\n\nFriends\n0/1\nOptional\nAdventure bag\n0/1\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory\nSound & comfort\n\nMaze Sunset Bowling Club A\n\nMute\nPrevious\nNext track\nShuffle\nMusic\n12%\nSound effects\n64%\nTest sound\nMotion\nUse device setting\nFull\nReduced\nSurface quality\nfull\nlite\nstatic\nMovement pace\nZippy →\n\nThese comfort settings stay when you reset your adventure.\n\nBack to the adventure",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "name": "04-native-rescued-at-origin",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0225/native-attempts/r1/04-native-rescued-at-origin.png",
+          "bytes": 985218,
+          "sha256": "d55a0fc29bb423958fb1ff9353e2332e6606f573eb359fe35c72204714b10f91"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\n2\n\nAme is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.\n\nRainbow-Horn Unicorn is free! What a lovely friend!\nStory maze 1 of 16\nLittle Star Trail\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n0 steps\nRight now\n\nFollow the paths to the star!\n\nHint\nMy map\n100%\nNow\nExplored\nMystery\n\nAme is at column 2, row 5. The sparkling exit is at column 5, row 2. Discovered landmarks: star sword at column 5, row 5.\n\nFriends\n1/1\nOptional\nAdventure bag\n0/1\n\nRainbow-Horn Unicorn is free! What a lovely friend!\n\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "stationaryRescueProbe": {
+          "origin": {
+            "x": 0.2528409090909091,
+            "y": 0.7471590909090909,
+            "boardWidth": 704,
+            "boardHeight": 704,
+            "left": "116px",
+            "top": "464px",
+            "width": "116px",
+            "height": "116px",
+            "travelTranslate": "0px",
+            "poseTransform": "none"
+          },
+          "insertions": 1,
+          "samples": [
+            {
+              "at": 2352.7999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2360.899999976158,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2378.599999964237,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2393.399999976158,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2410,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2426.2999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2442.7999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2459.7999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2476.7999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2498.099999964237,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2513.599999964237,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2526.599999964237,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2542.899999976158,
+              "x": 0.2528409090909091,
+              "y": 0.7471590909090909,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0, 0, 1, 0, 0)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2560.2999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7470543384552002,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, -0.000277375, 0.000277375, 1, 0, -0.0737408)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2577.7999999523163,
+              "x": 0.252840903672305,
+              "y": 0.7462676438418302,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999997, -0.0023606, 0.0023606, 0.999997, 0, -0.627572)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2594,
+              "x": 0.2528409090909091,
+              "y": 0.7446719082919034,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999978, -0.00658618, 0.00658618, 0.999978, 0, -1.75096)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2611.7999999523163,
+              "x": 0.2528409145095132,
+              "y": 0.7423202341253107,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999918, -0.0128134, 0.0128134, 0.999918, 0, -3.40656)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2627.899999976158,
+              "x": 0.252840903672305,
+              "y": 0.7396252372048118,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999801, -0.019949, 0.019949, 0.999801, 0, -5.30384)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2651.699999988079,
+              "x": 0.2528409090909091,
+              "y": 0.7371655160730536,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.99965, -0.0264608, 0.0264608, 0.99965, 0, -7.03548)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2659.399999976158,
+              "x": 0.2528409145095132,
+              "y": 0.7352933883666992,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999506, -0.0314163, 0.0314163, 0.999506, 0, -8.35346)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2676.699999988079,
+              "x": 0.2528409090909091,
+              "y": 0.7342441298744895,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999415, -0.0341933, 0.0341933, 0.999415, 0, -9.09214)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2693.7999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7339850555766713,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999392, -0.0348584, 0.0348584, 0.999392, 0, -9.27453)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2710.5,
+              "x": 0.2528409090909091,
+              "y": 0.7344157479026101,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999469, -0.0325785, 0.0325785, 0.999469, 0, -8.97131)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2726.599999964237,
+              "x": 0.2528409145095132,
+              "y": 0.7355983690782026,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999654, -0.0263181, 0.0263181, 0.999654, 0, -8.13877)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2744.199999988079,
+              "x": 0.2528409090909091,
+              "y": 0.7374407594854181,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999863, -0.0165625, 0.0165625, 0.999863, 0, -6.84169)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2760.2999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.739840334111994,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999993, -0.00385479, 0.00385479, 0.999993, 0, -5.1524)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2776.899999976158,
+              "x": 0.2528409145095132,
+              "y": 0.7423598983071067,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999955, 0.00948909, -0.00948909, 0.999955, 0, -3.37863)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2793.699999988079,
+              "x": 0.252840903672305,
+              "y": 0.744571404023604,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999775, 0.0212001, -0.0212001, 0.999775, 0, -1.82174)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2811.2999999523163,
+              "x": 0.252840903672305,
+              "y": 0.7461548285050825,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999562, 0.0295834, -0.0295834, 0.999562, 0, -0.707017)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2826.099999964237,
+              "x": 0.252840903672305,
+              "y": 0.74698636748574,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999422, 0.0339853, -0.0339853, 0.999422, 0, -0.121589)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2843.699999988079,
+              "x": 0.2528409090909091,
+              "y": 0.7471438104456122,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999392, 0.0348672, -0.0348672, 0.999392, 0, -0.0107551)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2860,
+              "x": 0.2528409090909091,
+              "y": 0.7468164183876731,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999416, 0.034174, -0.034174, 0.999416, 0, -0.241232)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2876,
+              "x": 0.252840903672305,
+              "y": 0.7460456761446866,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.99947, 0.0325421, -0.0325421, 0.99947, 0, -0.78384)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2892.699999988079,
+              "x": 0.2528409090909091,
+              "y": 0.7448284842751243,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999551, 0.0299648, -0.0299648, 0.999551, 0, -1.64075)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2909.599999964237,
+              "x": 0.252840903672305,
+              "y": 0.7432939789511941,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999643, 0.0267153, -0.0267153, 0.999643, 0, -2.72104)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2927.2999999523163,
+              "x": 0.2528409090909091,
+              "y": 0.7417207197709517,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999727, 0.0233834, -0.0233834, 0.999727, 0, -3.82861)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2945.099999964237,
+              "x": 0.2528409090909091,
+              "y": 0.7404103495857932,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999788, 0.0206082, -0.0206082, 0.999788, 0, -4.7511)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2960.399999976158,
+              "x": 0.252840903672305,
+              "y": 0.7394653883847323,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999827, 0.0186066, -0.0186066, 0.999827, 0, -5.41637)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2977.7999999523163,
+              "x": 0.252840903672305,
+              "y": 0.7389922792261298,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999845, 0.0176045, -0.0176045, 0.999845, 0, -5.74944)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 2993.699999988079,
+              "x": 0.2528409145095132,
+              "y": 0.7389320243488658,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999848, 0.0174279, -0.0174279, 0.999848, 0, -5.79185)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3010,
+              "x": 0.2528409090909091,
+              "y": 0.739067554473877,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999853, 0.0171408, -0.0171408, 0.999853, 0, -5.69643)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3025.899999976158,
+              "x": 0.2528409090909091,
+              "y": 0.7393621097911488,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999864, 0.0165169, -0.0165169, 0.999864, 0, -5.48908)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3043,
+              "x": 0.2528409090909091,
+              "y": 0.7398262023925781,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999879, 0.0155339, -0.0155339, 0.999879, 0, -5.16237)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3059.199999988079,
+              "x": 0.2528409090909091,
+              "y": 0.740469520742243,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.9999, 0.0141711, -0.0141711, 0.9999, 0, -4.70945)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3076,
+              "x": 0.252840903672305,
+              "y": 0.7412528558210894,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999922, 0.0125119, -0.0125119, 0.999922, 0, -4.158)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3093,
+              "x": 0.2528409145095132,
+              "y": 0.7421452348882501,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999944, 0.0106215, -0.0106215, 0.999944, 0, -3.52974)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3109.399999976158,
+              "x": 0.2528409145095132,
+              "y": 0.7431098114360463,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999963, 0.00857819, -0.00857819, 0.999963, 0, -2.8507)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3126.2999999523163,
+              "x": 0.2528409145095132,
+              "y": 0.7440806085413153,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999979, 0.00652168, -0.00652168, 0.999979, 0, -2.16727)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3143.899999976158,
+              "x": 0.2528409090909091,
+              "y": 0.7449582273309882,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999989, 0.00466248, -0.00466248, 0.999989, 0, -1.54942)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3159.899999976158,
+              "x": 0.2528409145095132,
+              "y": 0.7457239844582297,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999995, 0.00304025, -0.00304025, 0.999995, 0, -1.01032)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3177,
+              "x": 0.2528409090909091,
+              "y": 0.7463341409509833,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(0.999998, 0.00174763, -0.00174763, 0.999998, 0, -0.580765)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3193.5,
+              "x": 0.2528409145095132,
+              "y": 0.7467684312300249,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0.000827613, -0.000827613, 1, 0, -0.275029)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            },
+            {
+              "at": 3209.699999988079,
+              "x": 0.2528409090909091,
+              "y": 0.747042482549494,
+              "boardWidth": 704,
+              "boardHeight": 704,
+              "left": "116px",
+              "top": "464px",
+              "width": "116px",
+              "height": "116px",
+              "travelTranslate": "0px",
+              "poseTransform": "matrix(1, 0.000247038, -0.000247038, 1, 0, -0.0820947)",
+              "status": "Ame is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.",
+              "steps": 0,
+              "visible": true
+            }
+          ]
+        }
+      },
+      {
+        "rescuedSave": {
+          "schemaVersion": 3,
+          "runId": "run-v0225-native-stationary-rescue",
+          "levelId": "little-star-trail",
+          "contentRevision": 3,
+          "gameplayFingerprint": "g-da9a47f7",
+          "game": {
+            "levelId": "little-star-trail",
+            "position": {
+              "x": 1,
+              "y": 4
+            },
+            "power": 2,
+            "hasSword": false,
+            "hasBoots": false,
+            "hasSpringBoots": false,
+            "hasAntidoteLeaf": false,
+            "keys": [],
+            "collectedObjectIds": [],
+            "rescuedAnimalIds": [
+              "little-star-trail-animal-rainbow-horn-unicorn"
+            ],
+            "defeatedEnemyIds": [],
+            "openedDoorIds": [],
+            "goldStarsCollected": 0,
+            "sciencePointsCollected": 0,
+            "exitArmed": true,
+            "status": "playing",
+            "steps": 0
+          },
+          "revealedTiles": [],
+          "hintUsesByState": {}
+        },
+        "beforeCloseRun": {
+          "schemaVersion": 3,
+          "runId": "run-v0225-native-stationary-rescue",
+          "levelId": "little-star-trail",
+          "contentRevision": 3,
+          "gameplayFingerprint": "g-da9a47f7",
+          "game": {
+            "levelId": "little-star-trail",
+            "position": {
+              "x": 1,
+              "y": 4
+            },
+            "power": 2,
+            "hasSword": false,
+            "hasBoots": false,
+            "hasSpringBoots": false,
+            "hasAntidoteLeaf": false,
+            "keys": [],
+            "collectedObjectIds": [],
+            "rescuedAnimalIds": [
+              "little-star-trail-animal-rainbow-horn-unicorn"
+            ],
+            "defeatedEnemyIds": [],
+            "openedDoorIds": [],
+            "goldStarsCollected": 0,
+            "sciencePointsCollected": 0,
+            "exitArmed": true,
+            "status": "playing",
+            "steps": 4
+          },
+          "revealedTiles": [],
+          "hintUsesByState": {}
+        }
+      },
+      {
+        "name": "05-native-away-and-cleared-cage",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0225/native-attempts/r1/05-native-away-and-cleared-cage.png",
+          "bytes": 978456,
+          "sha256": "7f14fdf7875665a0fe10548e76ae585a3e227e38daee574cbc29fb075f0d5f92"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\n2\n\nAme is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.\n\nFollow the paths to the star!\nStory maze 1 of 16\nLittle Star Trail\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n4 steps\nRight now\n\nFollow the paths to the star!\n\nHint\nMy map\n100%\nNow\nExplored\nMystery\n\nAme is at column 2, row 5. The sparkling exit is at column 5, row 2. Discovered landmarks: star sword at column 5, row 5.\n\nFriends\n1/1\nOptional\nAdventure bag\n0/1\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "normalOSWindowClose": true,
+        "pid": 22580
+      },
+      {
+        "name": "06-native-reopened-rescue-and-settings",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0225/native-attempts/r1/06-native-reopened-rescue-and-settings.png",
+          "bytes": 462445,
+          "sha256": "86f38ea5104853276351af67aba35725982a57795bc5c58c4874087fe4e65636"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\n2\n\nAme is at column 2, row 5. Up: open path. Right: open path. Down: wall. Left: wall.\n\nFollow the paths to the star!\nStory maze 1 of 16\nLittle Star Trail\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n4 steps\nRight now\n\nFollow the paths to the star!\n\nHint\nMy map\n100%\nNow\nExplored\nMystery\n\nAme is at column 2, row 5. The sparkling exit is at column 5, row 2. Discovered landmarks: star sword at column 5, row 5.\n\nFriends\n1/1\nOptional\nAdventure bag\n0/1\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory\nSound & comfort\n\nMaze Poggle Puzzle Room A\n\nMute\nPrevious\nNext track\nShuffle\nMusic\n12%\nSound effects\n64%\nTest sound\nMotion\nUse device setting\nFull\nReduced\nSurface quality\nfull\nlite\nstatic\nMovement pace\nZippy →\n\nThese comfort settings stay when you reset your adventure.\n\nBack to the adventure",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "normalOSWindowClose": true,
+        "pid": 31576
+      }
+    ],
+    "errors": [],
+    "scope": "Actual native title/Home, seeded current-engine cage contact, stationary visible player/unchanged steps, turn-away and cleared-cage entry, one rescued ID after normal OS close/reopen, inherited pace/sliders/mute and preference restoration",
+    "limits": [
+      "Discrete-input single-cage smoke, not all-side/held-input/mid-effect close or full solver/migration/follower/reward qualification; require separate PLAY-B evidence.",
+      "No actual effective-gain or acoustic audibility claim from these UI assertions; use separate AUDIO-01V graph/listening evidence.",
+      "Inherited regression smoke only: no camera-performance fix, compact-layout acceptance, native sustained-timing, physical-iPad efficacy, installer, signing, offline or clean-machine qualification.",
+      "Title Exit is not used by this inherited smoke; PHONE1 manifest separately requires actual native Exit evidence."
+    ]
+  },
+  "nativeTitleExit": {
+    "schema": "maze-native-title-exit-release-review/v1",
+    "status": "pass",
+    "runtimeSourceCommit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+    "portable": {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/attachments/Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe",
+      "bytes": 173468160,
+      "sha256": "bf0ab23182999b6ef95c050d2a6ba7bcd4cfe86636f6e95c16334a43b856e987"
+    },
+    "reviewer": "Root Astra — actual Computer Use operator and final review",
+    "method": "Actual root Computer Use navigation and trusted pointer/keyboard Title Exit events; synthetic-profile-only QA input buffer written synchronously at capture and read after saved-profile reopen; actual process identity/exits independently read from Windows. Root observed focus, activated actual controls and checked returned window inventory/process termination. Cold completed subcheck from exit-r2, saved keyboard/reopen from exit-r4; no all-attempts-pass claim.",
+    "coldTitleExit": {
+      "passed": true,
+      "ownedPid": 23560,
+      "windowHandleBefore": 7936866,
+      "windowClosed": true,
+      "windowClosureBasis": "The previously observed owning native process no longer exists after a trusted real Title Exit activation; root must also inspect actual window disappearance.",
+      "processExited": true,
+      "debugEndpointClosed": true,
+      "method": "Root Computer Use pointer activation of native Title Exit",
+      "events": [
+        {
+          "type": "pointerdown",
+          "key": null,
+          "button": 0,
+          "pointerType": "mouse",
+          "isTrusted": true,
+          "exitFocused": false,
+          "at": 44362.299999952316,
+          "label": "cold",
+          "pid": 23560,
+          "receivedAt": "2026-09-06T04:11:21.070Z"
+        },
+        {
+          "type": "click",
+          "key": null,
+          "button": 0,
+          "pointerType": "mouse",
+          "isTrusted": true,
+          "exitFocused": true,
+          "at": 44364.69999998808,
+          "label": "cold",
+          "pid": 23560,
+          "receivedAt": "2026-09-06T04:11:21.071Z"
+        }
+      ],
+      "reuse": {
+        "classification": "REUSED_COMPLETED_COLD_SUBCHECK_FROM_PRIOR_ATTEMPT",
+        "sourceAttempt": "exit-r2",
+        "runtimeSourceCommit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+        "portable": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0225/attachments/Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe",
+          "bytes": 173468160,
+          "sha256": "bf0ab23182999b6ef95c050d2a6ba7bcd4cfe86636f6e95c16334a43b856e987"
+        },
+        "evidence": [
+          {
+            "path": "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-attempts/exit-r2/cold-pointer-exit.json",
+            "bytes": 994,
+            "sha256": "c887242dc70ae2d3633b9dbbd054b4a229a27aaa03e6d6580b14b3757bd72c49"
+          },
+          {
+            "path": "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-attempts/exit-r2/failure.json",
+            "bytes": 11306,
+            "sha256": "c9940a92374aca7133313c89d0fe9a925748e7f4a6360089b9394a4a8cb940b4"
+          }
+        ],
+        "freshColdRunInThisAttempt": false,
+        "priorOverallAttemptStatus": "Failed later at saved-keyboard console delivery; only its already-completed cold pointer subcheck is reused, not the full cohort.",
+        "rootAuthorization": "Root explicitly selected this exact PID/source/portable-bound cold subcheck instead of repeating cold launch after console delivery races."
+      }
+    },
+    "savedTitleExit": {
+      "passed": true,
+      "inputEvidenceStatus": "VERIFIED_DURABLE_AFTER_REOPEN",
+      "ownedPid": 36288,
+      "windowHandleBefore": 8002908,
+      "windowClosed": true,
+      "windowClosureBasis": "The previously observed owning native process no longer exists after a trusted real Title Exit activation; root must also inspect actual window disappearance.",
+      "processExited": true,
+      "debugEndpointClosed": true,
+      "method": "Root Computer Use Tab traversal and Enter on focused native Title Exit",
+      "events": [
+        {
+          "type": "keydown",
+          "key": "Enter",
+          "button": null,
+          "pointerType": null,
+          "isTrusted": true,
+          "exitFocused": true,
+          "at": 57866.30000001192
+        },
+        {
+          "type": "click",
+          "key": null,
+          "button": 0,
+          "pointerType": "",
+          "isTrusted": true,
+          "exitFocused": true,
+          "at": 57867.30000001192
+        }
+      ],
+      "durableInputEvidence": {
+        "path": "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-attempts/exit-r4/saved-keyboard-input-after-reopen.json",
+        "bytes": 1394,
+        "sha256": "4b95705364ce6eb95cf5cbd72c18a9501eba13c3809023f857ec3b7b447701aa"
+      },
+      "consoleEvents": [
+        {
+          "type": "keydown",
+          "key": "Enter",
+          "button": null,
+          "pointerType": null,
+          "isTrusted": true,
+          "exitFocused": true,
+          "at": 57866.30000001192,
+          "label": "saved",
+          "pid": 36288,
+          "receivedAt": "2026-09-06T04:22:57.617Z"
+        },
+        {
+          "type": "click",
+          "key": null,
+          "button": 0,
+          "pointerType": "",
+          "isTrusted": true,
+          "exitFocused": true,
+          "at": 57867.30000001192,
+          "label": "saved",
+          "pid": 36288,
+          "receivedAt": "2026-09-06T04:22:57.618Z"
+        }
+      ]
+    },
+    "savedRunAndPreferencesAfterReopen": {
+      "passed": true,
+      "runAndPreferencesSemanticallyEqual": true,
+      "reopenedPid": 13448,
+      "preferences": {
+        "motion": "reduced",
+        "quality": "lite",
+        "pace": "zippy",
+        "musicVolume": 0.12,
+        "sfxVolume": 0.64
+      }
+    },
+    "ordinaryOSCloseRegression": {
+      "passed": true,
+      "evidence": "C:/GameDev/maze-game-qa/releases/v0225/native-summary.json",
+      "separateInheritedRescueCheck": true,
+      "normalClosePids": [
+        22580,
+        31576
+      ]
+    },
+    "evidencePaths": [
+      "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-attempts/exit-r4/observations.json",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r2\\cold-pointer-exit.json",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r2\\failure.json",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\cold-pointer-reuse.json",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-before-exit-resumed.png",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-before-exit-sound.png",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-keyboard-ready.png",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-keyboard-ready.json",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-keyboard-keyboard-focus.png",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-keyboard-exit.json",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-keyboard-input-after-reopen.json",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-after-reopen-resumed.png",
+      "C:\\GameDev\\maze-game-qa\\releases\\v0225\\native-title-exit-attempts\\exit-r4\\saved-after-reopen-sound.png",
+      "C:/GameDev/maze-game-qa/releases/v0225/native-summary.json",
+      "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-smoke-v3.mjs",
+      "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-attempts/exit-r1/failure.json",
+      "C:/GameDev/maze-game-qa/releases/v0225/native-title-exit-attempts/exit-r3/failure.json"
+    ],
+    "limitations": [
+      "Cold pointer qualification reuses only completed exit-r2 cold PID 23560/window 7936866 for this exact source and portable. The prior overall saved-observer failure remains failed and preserved; this attempt makes no fresh cold-run claim.",
+      "QA-only localStorage input evidence is written by the observational capture listener in new synthetic profiles; application save/preferences keys are not changed by this observer. Console delivery is supplementary for saved keyboard Exit, not its acceptance authority.",
+      "Raw observation only: root must review actual Computer Use/window evidence before the release-review envelope is marked pass.",
+      "The final ordinary OS cleanup is not the inherited stationary-rescue close/reopen regression; link that fresh separate native summary.",
+      "Visible-tile order/content may be canonically recomputed on mount; core run identity/game, hints, durable progress and preferences are asserted semantically, not byte-for-byte localStorage equality.",
+      "Synthetic existing raw 12/64 and Zippy preferences only; no acoustic, AUDIO-01V2 calibration, compact layout, signing, installer, physical-device or sustained-performance claim.",
+      "No close/destroy/window.close/browser.close API, synthetic click, scripted keypress, force-kill or CDP browser-close surrogate is used."
+    ]
+  },
+  "compactUI": {
+    "schema": "maze-compact-ui-release-review/v1",
+    "status": "pass",
+    "runtimeSourceCommit": "7282665f8631051785176b701b1a7f14b7fe24a3",
+    "baselineSourceCommit": "45d843774d0335aa0ae1ee51aa9ca2f70f235b31",
+    "reviewer": "Astra — independent source, visual and final-browser review",
+    "rows": [
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1920x1080-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1920x1080-book-achievements.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1280x720-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1280x720-book-achievements.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1194,
+          "height": 834
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1194x834-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1194,
+          "height": 834
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1194x834-book-achievements.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1024,
+          "height": 768
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1024x768-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 1024,
+          "height": 768
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/1024x768-book-achievements.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/844x390-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/844x390-book-achievements.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 780,
+          "height": 312
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/780x312-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 780,
+          "height": 312
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/780x312-book-achievements.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 568,
+          "height": 320
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/568x320-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 568,
+          "height": 320
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/568x320-book-achievements.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "surface": "gameplay",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/960x540-gameplay.png"
+        ]
+      },
+      {
+        "viewport": {
+          "width": 960,
+          "height": 540
+        },
+        "surface": "book",
+        "status": "pass",
+        "normalText": true,
+        "sourceBoundEvidencePaths": [
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/identity-before.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/served-identity.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/geometry.json",
+          "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/960x540-book-achievements.png"
+        ]
+      }
+    ],
+    "checks": {
+      "gameplayRequiredControlsVisible": true,
+      "boardSquareAndSixTiles": true,
+      "noGameplayDocumentOrDeckScroll": true,
+      "onlyBookCollectionBodyScrolls": true,
+      "safeAreaControlsUsable": true,
+      "primaryCompositionPreserved": true,
+      "rangeAndHeldInputRegressionPassed": true
+    },
+    "evidencePaths": [
+      "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/summary.json",
+      "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/playwright-results.json",
+      "C:/GameDev/maze-game-qa/releases/v0225/browser-proof-attempts/r1/final-source/content-fit.json",
+      "C:/GameDev/maze-game-qa/releases/v0225/canonical/playwright-results.json",
+      "C:/GameDev/maze-game-qa/releases/v0225/range-smoke.json"
+    ],
+    "limitations": [
+      "Normal-text synthetic safe areas and browser geometry are not physical-phone/iPad comfort or all-screen accessibility acceptance.",
+      "Exact primary comparator was captured at Exit-base033f8748 with unchanged v0.22.4 primary geometry; not a new physical or v0.22.4 baseline capture.",
+      "Compact More-menu and small board at568 remain disclosed tradeoffs; Home/dialog/victory/full200percent text/HUD pace art are later scope."
+    ]
+  },
+  "reviewAuthority": {
+    "reviewer": "Root Astra; actual Sol authored independently reviewed Exit/UI seams",
+    "reviewedSource": "7282665f8631051785176b701b1a7f14b7fe24a3",
+    "decision": "Accept bounded v0.22.5 V22-PHONE1 family preview; physical acceptance remains open.",
+    "recordPath": "C:/maze-game/docs/reviews/2026-09-06-v0225-engineering-acceptance.md"
+  },
+  "attachmentPolicy": "Four uploaded attachments and exact-source tag stay immutable; this receipt is a later documentation checkpoint.",
+  "openGates": [
+    "Physical iPad scrolling remains unresolved. No camera-performance change or promotion hint ships.",
+    "Bounded compact gameplay/Book and native Exit only; Home/dialog/victory/200 percent text/HUD pace/settings art and broader UI remain.",
+    "Fresh art validator required unchanged ignored historical v14 proofs restored externally; 136 art tests inherited from byte-unchanged inputs, not rerun. 429 historical warnings.",
+    "Failed art/source-status and native observer attempts preserved. Native Exit cold completed subcheck from exit-r2; keyboard/reopen exit-r4; not a clean first-attempt claim.",
+    "Same rules/content/save schema as v0.22.4; no additional restart. Older pre-v0.22.4 unfinished-run migration still applies.",
+    "Unsigned x64 portable only. No installer, signing, clean-machine, offline, sustained-native, physical-family or acoustic acceptance.",
+    "AUDIO-01V2 calibrated 75/75 defaults not in this build. Existing chosen gains unchanged.",
+    "Raw screenshots/traces and synthetic profiles remain external; Git backs up compact hashed release records, not private profiles."
+  ],
+  "rollback": {
+    "runtime": "45d843774d0335aa0ae1ee51aa9ca2f70f235b31",
+    "release": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.4",
+    "instructions": "Keep earlier downloads immutable. Coordinate a reviewed revert/redeploy without rewriting shared history or deleting player data."
+  },
+  "helperRecords": [
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/release-lib.mjs",
+      "bytes": 8734,
+      "sha256": "1fad8b07b8692fd57b60110771af535399566e227e8361242101050b0af2923c"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/stage-native.ps1",
+      "bytes": 3616,
+      "sha256": "0c911218a9f9189f0e70920643833218ac753938eb5ded6dc251ef9d97add5d2"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/verify-build.mjs",
+      "bytes": 246,
+      "sha256": "a443629949dbd3354b36462ba182424b672219b2fb2cb9d77976339a94d6d9eb"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/web-verify.mjs",
+      "bytes": 1047,
+      "sha256": "7ad3ec3f83587484ac2bc7386192559422806fb55040b09118fe02ec15170b5a"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/make-manifest.mjs",
+      "bytes": 8135,
+      "sha256": "c06186f32720c303c0421f0e97f136be1d55827a7a90045ca451290ea21da003"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/publish.mjs",
+      "bytes": 5124,
+      "sha256": "e24cdfc27db41cec1cdc3895aa198a5f57fca02a5f34d0d44f4ad6d494af0b83"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/make-receipt.mjs",
+      "bytes": 2738,
+      "sha256": "9d09fe94602b4be9559d72cb2bec09c4df64a4a37ee92daf806efb9a6bbb2f39"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/native-inherited-smoke.mjs",
+      "bytes": 18373,
+      "sha256": "68ff99cfca554cf4889166ac1a0d777dd143729380a265fae34ac18cd9738f59"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0225/derive-native-fixture.mjs",
+      "bytes": 8675,
+      "sha256": "0719696416c647b5560dc5457f2507452bddbb51676b7d961b32a43e9481c53e"
+    }
+  ]
+}

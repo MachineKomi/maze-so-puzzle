@@ -8,23 +8,30 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
+- v0.22.5 V22-PHONE1, frozen `7282665f8631051785176b701b1a7f14b7fe24a3`:
+  Web and Windows published; final native checks and all four public downloads
+  independently verified. Compact gameplay/Book and native Title Exit are the
+  new P9 checks. [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.5/Maze-so-Puzzle-0.22.5-V22-PHONE1-7282665-locked-portable.exe)
+  · [Short playtest note](../release/V22-PHONE1-v0.22.5-PLAYTEST.md).
 - [v0.22.4 Windows release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.4)
   — stationary rescue, plus inherited Dolphin repair, speeds and audio levels.
   Published; all four downloads independently byte/hash verified.
   The [v0.22.4 playtest note](../release/V22-RESCUE1-v0.22.4-PLAYTEST.md)
-  has instructions/checksums. Close Windows with X or Alt+F4; the title Exit
-  button has a separately queued native-window issue.
+  has instructions/checksums. This remains the published rollback; on v0.22.4
+  close Windows with X or Alt+F4 because its title Exit can leave the window open.
 - [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
 
 You do not need to complete everything in one sitting. The affected iPad movement
-comparison remains open; for v0.22.4, P7 rescue is the most useful new check.
-This build does not change the camera. Please do not clear game data
-to create a cold test; preserving your progress is more important.
+comparison remains open; P9 is the new v0.22.5 check and P5–P8 remain cumulative.
+v0.22.5 does not change camera/FOV, audio, saves, gameplay or content from v0.22.4.
+Please do not clear game data to create a cold test; preserving your progress
+is more important.
 
 **Save compatibility:** all sixteen old-rules unfinished campaign saves restart
 through updated-maze messaging in v0.22.4. Durable completions, unlocks, earned
-friends, rewards and currency survive; old bests remain historical. Close older
-Windows builds before using this one; they share a save namespace.
+friends, rewards and currency survive; old bests remain historical. v0.22.5 adds
+no further unfinished-run restart. Close older Windows builds before using this
+one; they share a save namespace.
 
 ## Build register
 
@@ -35,6 +42,7 @@ Windows builds before using this one; they share a save namespace.
 | v0.22.2 V22-CAMERA1, runtime `820ed39` | Published web/Windows camera-origin experiment | P1 is the priority: Maze 2 iPad taps and scenery scrolling. P2/P4 regression checks as convenient. No new audio, pace, rescue, Dolphin or phone-UI change. |
 | v0.22.3 V22-COMFORT1, runtime `b834a8e` | Web/Windows comfort preview: Dolphin field repair, Chill/Regular/Zippy and independent Music/SFX | P5/P6/P8; P2/P4 regression as convenient. No camera or stationary-rescue fix claimed. |
 | v0.22.4 V22-RESCUE1, runtime `45d8437` | Published web/Windows. Stationary rescue with unchanged steps and deliberate follow-up movement | P7 first; P5/P6/P8 remain cumulative. Not a new camera/phone-layout/audio-default fix. |
+| v0.22.5 V22-PHONE1, frozen `7282665` | Published web/Windows; all four downloads verified. Bounded compact gameplay/Book and native Title Exit | P9 new; P5–P8 cumulative. No camera/FOV/audio/save/gameplay/content change or additional restart from v0.22.4. |
 
 ## Specific checks and results
 
@@ -172,12 +180,35 @@ These checks are ready for v0.22.4; no Human rescue acceptance is claimed yet.
 
 Received quick v0.22.3/24 feedback: sliders and three paces feel good; preferred
 phone/desktop mix is old Music10%/SFX100%. Calibrated75/75 controls and visible
-right-panel pace are queued, not in this build. iPad camera remains unsmooth;
-do not repeat the known failure just for us. Possible phone pad/minimap overlap
+right-panel pace are queued, not in v0.22.5. The separate next audio slice follows
+the [AUDIO-01V2 joint decision](reviews/2026-09-06-audio01v2-joint-decision.md).
+iPad camera remains unsmooth; do not repeat the known failure just for us.
+Possible phone pad/minimap overlap
 and Sky Hollow floor/wall confusion are routed. [Full intake](playtests/2026-09-06-v0223-v0224-intake.md).
 
 These are physical listening checks; automated gain measurements passed but do
 not prove the balance through the iPad speakers. Do not buy new hardware for this test.
+
+### P9 — Compact phone fit and native Title Exit (v0.22.5)
+
+- [ ] On a landscape phone (especially 780×312, 844×390 or 568×320), can you see
+  the whole board, full minimap including its heading, Friends/Bag, feedback and
+  pad together? Try a rescue/long message: nothing should overlap or require
+  page/deck scrolling, and the pad should remain easy to tap/hold/drag.
+- [ ] In the Book, do the header and tabs stay fixed while only the collection
+  body scrolls? Labels should not split words, and at least one complete card
+  should fit. Report the tab and device if something is cut off.
+- [ ] In the published v0.22.5 Windows download, try Title Exit by pointer,
+  then by keyboard on another visit. Does the window actually close? Reopen and
+  check the same saved run and Sound & comfort preferences return.
+- [ ] On desktop/iPad, has the familiar board/HUD/Book placement stayed intact?
+
+The bounded engineering candidates are accepted: [compact UI `840293d`, evidence
+`517667d`](reviews/2026-09-06-ui01a-astra-review.md) and
+[native Exit `19f08a1`](reviews/2026-09-06-ui-native-exit-01-astra-review.md).
+Final native qualification/publication passed; physical P9 acceptance is separate.
+Home/dialog/victory propagation, full 200% text coverage, visible HUD pace,
+settings artwork and other optical refinements remain open; P9 does not close them.
 
 ## Easy reply format
 
@@ -185,5 +216,5 @@ not prove the balance through the iPad speakers. Do not buy new hardware for thi
 
 A few plain-language sentences are enough. We will transfer your feedback into
 the build register, keep unresolved rows open, and tell you which new checks
-matter next. Planned hole art, pace choices and later sound design are added as
+matter next. Planned hole art, HUD pace placement and later sound design are added as
 testable rows only when there is a concrete candidate/build to assess.

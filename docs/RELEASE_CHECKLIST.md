@@ -1,14 +1,18 @@
 # Release checklist
 
-## Current published checkpoint — v0.22.4 V22-RESCUE1
+## Current published checkpoint — v0.22.5 V22-PHONE1
 
 Use [joint state](JOINT_ORCHESTRATION_STATE.md) for the latest writer, accepted
-candidate and deployment status. Published v0.22.4 web/Windows artifacts and all
+candidate and deployment status. Published v0.22.5 web/Windows artifacts and all
 four downloaded files are verified in the immutable
-[receipt](../release/V22-RESCUE1-v0.22.4-release-verification.json).
+[receipt](../release/V22-PHONE1-v0.22.5-release-verification.json).
 [Family checks](PLAYTEST_CHECKLIST.md) remain separate: publication does not
 close the reported iPad camera issue or confirm physical rescue/pace/mix comfort.
-The accepted native Exit and in-progress compact UI candidate are not in v0.22.4.
+Native Title Exit and compact gameplay/Book are included; actual pointer/keyboard
+process exit, save/settings reopen, eight-view layout checks, 543 project tests
+and 23 canonical journeys passed. Physical P9 remains open; this does not finish
+the broader phone/UI programme or calibrate the audio defaults. v0.22.4 is the
+immediate immutable rollback, with no further save/rules restart in v0.22.5.
 Do not restart historical unchecked release steps below; their original build
 identities and freeze-time evidence are retained as history.
 

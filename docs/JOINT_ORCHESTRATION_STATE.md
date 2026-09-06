@@ -7,7 +7,16 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **Current published preview: v0.22.4 V22-RESCUE1**, source
+- **Current published preview: v0.22.5 V22-PHONE1**, source
+  `7282665f8631051785176b701b1a7f14b7fe24a3`. Web and Windows are published;
+  final native checks and all four independent public downloads passed.
+  Compact gameplay/Book and real native Title Exit are the only new runtime scope.
+  [Final acceptance](reviews/2026-09-06-v0225-engineering-acceptance.md),
+  [frozen manifest](../release/V22-PHONE1-v0.22.5-manifest.json),
+  [publication receipt](../release/V22-PHONE1-v0.22.5-release-verification.json).
+  No additional save/rules/content/camera/FOV/audio change or restart from v0.22.4.
+  P9 is new; P5–P8 and the existing iPad camera failure remain open.
+- **Immediate immutable rollback: v0.22.4 V22-RESCUE1**, source
   `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`. PLAY-B stationary rescue is
   independently accepted and merged. Web and Windows are published; all four
   downloads are independently byte/hash verified. See the
@@ -18,7 +27,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   authored runs restart with the updated-maze notice, while durable completions,
   unlocks, rewards and historical bests survive. P7 and all applicable inherited
   physical/family checks remain open. No camera or native Title Exit fix is included.
-- **Immediate immutable rollback: v0.22.3 V22-COMFORT1**, frozen `b834a8e6775ec024fc9f854c7a7ced8c096b6627`.
+- **Historical rollback: v0.22.3 V22-COMFORT1**, frozen `b834a8e6775ec024fc9f854c7a7ced8c096b6627`.
   Accepted Tessera field alpha repair + PLAY-A Chill/Regular/Zippy + AUDIO-01V
   independent Music/SFX levels. Exact-source CI/deployment,519 project tests,
   136 art tests,12 canonical journeys and native normal close/reopen passed.
@@ -43,7 +52,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   separate early AUDIO-01V2 calibrated 75%/75% controls before AUDIO-01A, with
   the default perceived mix matching old Music10%/SFX100% and versioned conversion
   preserving existing users' chosen effective gains. V23-04 belongs to later
-  UI HUD pace/settings work, not the active Exit-only scope. V23-12 is Plan14
+  UI HUD pace/settings work, not the completed Exit repair. V23-12 is Plan14
   exploration after RC-01; no JRPG/progression rewrite is authorized now. Positive
   pace feedback is not a blanket physical/camera/save/rescue acceptance.
 
@@ -68,13 +77,36 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 2. Release and deployment
 
-### Current v0.22.4 — published and independently downloaded
+### Current v0.22.5 — published and independently downloaded
+
+- Frozen runtime `7282665f8631051785176b701b1a7f14b7fe24a3`; accepted native
+  Exit runtime `e5a4a77` and corrected compact UI `840293d`, evidence `517667d`.
+  [Astra final acceptance](reviews/2026-09-06-v0225-engineering-acceptance.md).
+- 543 project tests, fresh art validation (0 errors / 429 warnings), inherited
+  136 art tests, build/static/locked desktop/audit pass. Eight-view final browser
+  3/3, canonical 23/23, separate volume-range/reload two-view pass. Runtime CI
+  34009976109 and Production 6288858311 succeeded; canonical raw entry bytes match.
+- Final unsigned x64 portable 173,468,160 B, SHA-256
+  `bf0ab23182999b6ef95c050d2a6ba7bcd4cfe86636f6e95c16334a43b856e987`.
+  Actual WebView2 152.0.4191.62: 53 stationary-rescue samples, preserved run/settings
+  after normal close/reopen. Real cold pointer Exit PID23560 and saved keyboard
+  Exit PID36288 close; reopened PID13448 preserves state/preferences. Observer
+  failures and reuse of one completed cold subcheck are explicitly retained.
+- Packaging documentation `d65bfc9419d3ca499a189b34e70285c80795a015` is pushed.
+  [GitHub prerelease 383463903](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.5)
+  has four independently downloaded, byte/hash-matched attachments. The
+  [receipt](../release/V22-PHONE1-v0.22.5-release-verification.json) records them.
+- No new media, save/content/camera/FOV/audio behavior. Final JSgzip9
+  155307/155362, CSS23976/30693, public165031011/165031011. Physical P9 and prior
+  family gates remain open. No installer/signing/sustained performance claim.
+
+### Historical v0.22.4 — immediate rollback, independently downloaded
 
 - Frozen source: `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`; accepted PLAY-B
   runtime `f3f090a7f8a5b8eb76382f31161345eb8a3d630f`, Sol evidence handback
   `b6f0003e4bfb71c332c42f6437a3ae8b9ea7ab8d`.
-- Root Astra owns release/review documentation; actual Sol's accepted Exit and
-  next isolated UI-01A candidate are tracked separately in §3.
+- At this checkpoint, Exit and UI-01A were separate candidates; both subsequently
+  shipped in v0.22.5. This subsection preserves the v0.22.4 evidence.
 - Exact-source CI34004670826 and Production6287989870 passed. Canonical raw
   HTML/JS/CSS match.533 project tests,22 canonical journeys and actual Windows
   rescue/normal-close/reopen pass;136 art tests are inherited from byte-unchanged
@@ -95,7 +127,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - Immediate rollback is the complete v0.22.3 release below; never roll back only
   the rules fingerprint while retaining PLAY-B engine/save behavior.
 
-### Historical v0.22.3 — immediate rollback
+### Historical v0.22.3
 
 - [Web](https://maze-so-puzzle.vercel.app/): exact raw frozen HTML/JS/CSS match;
   CI34001890372 and Production6287529696 passed at `b834a8e`.
@@ -197,41 +229,26 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Release/review and runtime owner: root Astra for v0.22.5 packaging.** PLAY-B is accepted,
-merged and frozen for v0.22.4 at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
-PLAY-B has handed back. Root completed native, canonical-web and public-download
-gates and pushed receipt checkpoint `bcaab81`. Source push alone was not used
-as publication acceptance.
-Do not mutate the frozen runtime to fold later feedback into this release.
+**v0.22.5 is published; root Astra owns the next audio implementation, actual Sol reviews.**
+Frozen source `7282665f8631051785176b701b1a7f14b7fe24a3` contains independently
+accepted native Exit and compact gameplay/Book UI-01A. Final engineering
+qualification is complete; see [acceptance](reviews/2026-09-06-v0225-engineering-acceptance.md).
+Do not mutate this source or repeat the completed UI prototype.
 
-**UI-NATIVE-EXIT-01 is independently accepted, not yet published.** Sol's clean,
-pushed `codex/v22-ui-native-exit` is `19f08a164161656164fac787847798342cbf4674`,
-runtime `e5a4a77`. [Final Astra review](reviews/2026-09-06-ui-native-exit-01-astra-review.md).
-541 project tests, browser fallback, actual pointer/keyboard process close,
-save/preferences recovery and simulated native failures passed. Exact allocation
-is +249 JSgzip9, zero CSS/public/decoded/deps; whole native PE +43520B. All owned
-processes/ports closed and heavy slot returned. Published v0.22.4 still needs
-X/Alt+F4. Bundle Exit with the next accepted UI preview, intended v0.22.5.
+**Next sole runtime writer: Astra — AUDIO-01V2**. Actual Sol's
+[independent review](reviews/2026-09-06-audio01v2-sol-review.md) and the
+[joint decision](reviews/2026-09-06-audio01v2-joint-decision.md) are complete.
+Use the agreed C1 music curve, fresh calibrated75/75 defaults, exact existing
+gain preservation and future-version writer refusal. SFX above gain1 still
+requires measured cue/overlap peak safety; do not silently clamp or add a limiter.
+No new audio cues/readiness/media/UI/camera work enters this bounded seam.
+AUDIO-01A follows separately. No runtime writer or camera experiment is in flight.
 
-**UI-01A is independently accepted for preview integration.** Corrected runtime
-`840293dd3414b5f3b8c8c5040352752847005093`, evidence tip
-`517667da7bf54dfd763b31a2a2a3cf3f31944f5e`, supersedes the returned `6e7cfe4`
-whose full map heading overlapped Bag at780×312. Root reviewed the corrected
-actual screens, full-card descendant assertions and exact allocation:
-JS−32/CSS+413 gzip9, zero media/deps. See [Astra acceptance](reviews/2026-09-06-ui01a-astra-review.md).
-Root owns frozen-source, native and web release gates in
-`C:/GameDev/maze-game-v0225-release`; candidate acceptance is not publication.
-Sol reviews AUDIO-01V2 preflight read-only. No camera experiment is in flight.
-
-Continue **V22-UI-01 short-height propagation** only after this bounded preview.
-Preserve the praised desktop/iPad composition and six-tile
-camera, live input, pace/audio preferences and reviewed rescue semantics. Read
-the [UI plan](plans/V22-UI-01-short-height-and-reward.md) and
-[technical preflight](reviews/2026-09-06-v22-ui01-preflight.md). The preflight is
-Astra-team preparation, not actual Sol acceptance or a second implementation.
-The [UI-01A assignment](plans/EXECUTION_PROMPTS.md#ui-01a--first-compact-fit-proof)
-is not the whole UI plan: prove gameplay/Book fit, then review before propagation.
-No main merge/version/deployment until the selected preview slice is accepted.
+Remaining V22-UI-01 propagation includes Home/dialog/victory, full200% text,
+HUD pace/settings art and remaining optical refinements. Preserve the praised
+primary composition, six-tile camera and reviewed input/rescue contracts.
+The [completed assignment](plans/EXECUTION_PROMPTS.md#ui-01a--completed-compact-fit-assignment-history)
+is historical; later propagation needs its own bounded review.
 
 **PERF-02C completed as a diagnostic, not a runtime candidate.** The
 [three-row review](reviews/2026-09-06-perf02c-triplet-review.md) preserves all
@@ -295,9 +312,9 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.4 is published and independently verified. PERF-02C completed without efficacy; no camera hint ships. Native Exit is independently accepted on its preserved branch. Actual Sol owns UI-01A compact gameplay/Book prototype and the serial heavy slot; root reviews before propagation. Continue remaining V22-UI-01 and AUDIO-01V2 in reviewed increments; bundle an accepted UI checkpoint with Exit for v0.22.5. iPad scrolling remains unresolved. Preserve dependency gates and resolve root PT36 before04.
+1. v0.22.5 publication is complete; do not repeat accepted Exit/UI-01A. Root Astra next implements AUDIO-01V2 under the joint decision, actual Sol reviews. Remaining V22-UI-01 proceeds in later bounded increments. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved. Resolve root PT36 before Plan 04.
 2. **AUDIO-01V2** early calibrated default/control conversion, separately assigned
-   after the active Exit seam and before broader **AUDIO-01A** music/SFX readiness;
+   after published v0.22.5 and before broader **AUDIO-01A** music/SFX readiness;
    then **V22-HOLE-01** single-width
    crossings and joined ditch art; then **04** lighting, wall depth and terrain
    topology/regions. The Human's deferred feedback does not alone stop these
@@ -347,7 +364,7 @@ Read in this order, then only the relevant owned plan/backlog slices:
 3. [Architecture](ARCHITECTURE.md), [gameplay specification](GAMEPLAY_DESIGN_SPEC.md), [Story Bible](STORY_BIBLE.md), [Art Bible](ART_BIBLE.md), [UI contracts](UI_UX_SPEC.md), [performance budgets](PERFORMANCE_BUDGETS.md).
 4. [UI-03 plan](plans/UI-03-fp-ui1-correction.md), [61-row Human intake](playtests/2026-09-05-v021-ui-correction-intake.md), [feedback audit](reviews/2026-09-05-ui03-feedback-audit.md), [root review](reviews/2026-09-05-ui03-root-review.md), [modal-cost review](reviews/2026-09-05-ui03-final-modal-cost.md), [dialog review](reviews/2026-09-05-ui03-dialog-review.md), [inspiration research](reviews/2026-09-05-ui-inspiration-research.md).
 5. [MOVE-01 contract](plans/MOVE-01-smooth-travel-and-camera.md), [earlier movement review](reviews/2026-09-05-move01-review.md); UI-03's later correction evidence supersedes earlier claims about first-tap quality.
-6. Current v0.22.4 qualification in §2, [manifest](../release/V22-RESCUE1-v0.22.4-manifest.json), [receipt](../release/V22-RESCUE1-v0.22.4-release-verification.json) and [PLAY-B review](reviews/2026-09-06-play-b-astra-review.md). Also read the [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md) and [release checklist](RELEASE_CHECKLIST.md).
+6. Current v0.22.5 qualification in §2, [manifest](../release/V22-PHONE1-v0.22.5-manifest.json), [acceptance](reviews/2026-09-06-v0225-engineering-acceptance.md) and [audio joint decision](reviews/2026-09-06-audio01v2-joint-decision.md). Also read the [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md) and [release checklist](RELEASE_CHECKLIST.md).
 
 Historical Agent 01 assignments and approvals remain evidence, not instructions to rerun them. UI-03 art additions reuse approved actors: 44 larger actor renditions, authorized Home alpha cleanup and contextual Tessera repair; field identities were retained. Consult publication/provenance records before any later asset work.
 
@@ -359,7 +376,7 @@ Historical Agent 01 assignments and approvals remain evidence, not instructions 
 | v0.21.0 rejected | Source `2924fd73f60229dd244eeba21c05f66afb4eb8b0` in GitHub history. Local `release/Maze-so-Puzzle-0.21.0-FP-UI1-2924fd7-portable.exe`, 165,352,448 bytes, SHA-256 `9d353f8b055afb883da5cb2bf4f51f7fea669279ed4e946a0acf4e7c69be000c`. **No public tag/release**; historical planned download links are unpublished drafts. Source recovery is cross-device; this local binary is not. |
 | v0.22.0 rollback | Frozen `68e303da680d5aec0ba71154949c5a2a0d1697ae` and [immutable prior release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0). Withheld same-version `2f8fa6a` (Home clipping) and non-locked `68e303d` binaries are not approved substitutes. |
 
-Published v0.22.4 and its immediate v0.22.3 rollback identities are in §2, followed by earlier releases. Close the preview through OS X/Alt+F4 before switching binaries; the unchanged FP-UI1 namespace deliberately shares comparison progress. Rules revision2 invalidates older unfinished authored runs, so do not promise active-run continuity in either direction or restore only one half of the rules/save seam.
+Current v0.22.5 and immediate v0.22.4 rollback identities are in §2, followed by earlier releases. Close the preview before switching binaries; the unchanged FP-UI1 namespace deliberately shares comparison progress. v0.22.5 changes no rules/content/schema from v0.22.4 and introduces no additional restart. The earlier v0.22.4 rules revision2 still invalidates older unfinished authored runs; do not restore only one half of that rules/save seam or promise arbitrary downgrade safety.
 
 Historical Vercel identities: v0.20.1 `6tAUShfZgbNfnNhcCkCjAjrbMmGi`; v0.21.0 `5MHu8ECwrntLAkCDczWQGun5STib`. Do not confuse those recorded deployments with today's canonical URL or promise their permanent availability.
 
