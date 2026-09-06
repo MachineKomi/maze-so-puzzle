@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 const audioInstances: FakeAudio[] = [];
 let playResult: "resolve" | "reject" = "resolve";
 
-class FakeAudio {
+class FakeAudio extends EventTarget {
   src: string;
   loop = false;
   preload = "";
@@ -28,6 +28,7 @@ class FakeAudio {
   });
 
   constructor(src: string) {
+    super();
     this.src = src;
     audioInstances.push(this);
   }
@@ -67,12 +68,12 @@ describe("background music", () => {
     for (const context of ["title", "story", "maze", "adventure-book", "maze", "victory", "maze", "title"] as const) {
       port.setContext(context);
       await port.startFromUserGesture();
-      expect(audioInstances.at(-1)?.src).toBe(musicTrackById(port.getSnapshot().currentTrackId)?.url);
+      const audio = audioInstances.find(candidate => candidate.src === musicTrackById(port.getSnapshot().currentTrackId)?.url);
+      expect(audio?.paused).toBe(false);
       expect(port.getSnapshot().context).toBe(context);
-      const audio = audioInstances.at(-1);
       port.setMuted(true); expect(audio?.muted).toBe(true);
       port.setMuted(false); expect(audio?.muted).toBe(false);
-      await port.startFromUserGesture();expect(audioInstances.at(-1)).toBe(audio);
+      await port.startFromUserGesture();expect(audio?.paused).toBe(false);
     }
     port.dispose();
   });

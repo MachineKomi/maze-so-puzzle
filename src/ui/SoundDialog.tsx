@@ -19,7 +19,7 @@ export function SoundDialog({ transport, onClose, returnFocus }: { transport: Mu
   return <DialogShell title="Sound & comfort" onClose={onClose} returnFocus={returnFocus} footer={<button className="primary-button" onClick={onClose}>Back to the adventure</button>}>
     <div className="sound-layout">
     <section className="sound-player" aria-label="Music controls">
-    <p className="sound-track">{musicTrackById(snapshot.currentTrackId)?.id.replaceAll("-", " ") ?? "Maze music"}</p>
+    <p className="sound-track">Selected: {musicTrackById(snapshot.currentTrackId)?.id.replaceAll("-", " ") ?? "Maze music"}</p>
     <div className="sound-controls" data-focus-group="sound">
       <button data-focus-id="sound:mute" aria-pressed={snapshot.muted} onClick={() => act(() => transport.setMuted(!snapshot.muted))}>{snapshot.muted ? "Unmute" : "Mute"}</button>
       <button data-focus-id="sound:previous" disabled={!snapshot.canPrevious} onClick={() => act(() => transport.previous())}>Previous</button>

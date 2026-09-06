@@ -15,7 +15,9 @@ import {
   disposeMusic,
   setMusicMuted,
   startMusicFromUserGesture,
+  prepareMusic, musicPlaybackSnapshot,
 } from "./music";
+import type { MusicPlaybackState } from "./musicPlayback";
 import { disposeAudioMix } from "./audioMix";
 
 export interface MusicTransportSnapshot {
@@ -27,6 +29,8 @@ export interface MusicTransportSnapshot {
   readonly canShuffle: boolean;
   /** Loop controls remain deliberately unavailable until the Human policy gate. */
   readonly loopAvailable: false;
+  /** Selection above is not a claim of acoustic playback or listening history. */
+  readonly playback?: MusicPlaybackState;
 }
 
 export interface MusicTransportPort {
@@ -46,6 +50,8 @@ interface MusicTransportEffects {
   readonly setMuted?: (muted: boolean) => void;
   readonly start?: () => Promise<boolean>;
   readonly dispose?: () => void;
+  readonly prepareTrack?: (track?: MusicTrackDefinition) => void;
+  readonly playback?: () => MusicPlaybackState;
 }
 
 function hash(value: string): number {
@@ -65,6 +71,7 @@ class MusicTransportAdapter implements MusicTransportPort {
   private mazeEntry = 0;
   private lastMazeTrackId: string | undefined;
   private readonly mazePicker;
+  private startSequence = 0;
   private readonly history: string[] = [DEFAULT_TITLE_TRACK.id];
   private historyIndex = 0;
   private readonly listeners = new Set<(snapshot: MusicTransportSnapshot) => void>();
@@ -83,6 +90,7 @@ class MusicTransportAdapter implements MusicTransportPort {
       canNext: pool.length > 1,
       canShuffle: pool.length > 1,
       loopAvailable: false,
+      ...(this.effects.playback ? { playback: this.effects.playback() } : {}),
     });
   }
 
@@ -98,6 +106,7 @@ class MusicTransportAdapter implements MusicTransportPort {
   }
 
   private select(track: MusicTrackDefinition, addToHistory = true): MusicTransportSnapshot {
+    this.startSequence++;
     this.currentTrackId = track.id;
     if (track.context === "maze") { this.lastMazeTrackId = track.id; this.mazePicker.noteTrackStarted(track.url); }
     if (addToHistory) {
@@ -106,6 +115,10 @@ class MusicTransportAdapter implements MusicTransportPort {
       this.historyIndex = this.history.length - 1;
     }
     this.effects.selectTrack?.(track);
+    const likely = this.context === "maze" ? "victory" : this.context === "story" ? "maze" : this.context === "title" ? "story" : undefined;
+    const nextUrl = likely === "maze" ? this.mazePicker.peekForMaze(this.mazeEntry + 1)
+      : likely ? MUSIC_POOLS[likely][0]?.url : undefined;
+    this.effects.prepareTrack?.(nextUrl ? musicTrackByUrl(nextUrl) : undefined);
     return this.publish();
   }
 
@@ -159,11 +172,20 @@ class MusicTransportAdapter implements MusicTransportPort {
   async startFromUserGesture(): Promise<boolean> {
     this.effects.selectTrack?.(musicTrackById(this.currentTrackId)!);
     this.effects.setMuted?.(this.muted);
+    const sequence = this.startSequence;
+    const ready = await (this.effects.start?.() ?? true);
+    if (ready || sequence !== this.startSequence || this.muted || this.effects.playback?.().phase !== "failed") return ready;
+    // One alternate per deliberate transition, never a pool-wide retry storm.
+    const pool = MUSIC_POOLS[this.context], index = pool.findIndex(track => track.id === this.currentTrackId);
+    const fallback = pool[(index + 1) % pool.length];
+    if (!fallback || fallback.id === this.currentTrackId) return false;
+    this.select(fallback);
     return this.effects.start?.() ?? true;
   }
 
   dispose(): void {
     this.listeners.clear();
+    this.startSequence++;
     this.effects.dispose?.();
   }
 }
@@ -177,6 +199,8 @@ export function createCurrentMusicTransport(): MusicTransportPort {
     selectTrack: (track) => configureMusic({ trackUrl: track.url }),
     setMuted: setMusicMuted,
     start: startMusicFromUserGesture,
+    prepareTrack: track => prepareMusic(track?.url),
+    playback: musicPlaybackSnapshot,
     dispose: () => { disposeMusic(); disposeAudioMix(); },
   }, createMusicRunSeed());
 }

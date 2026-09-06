@@ -1,5 +1,5 @@
 import { DEFAULT_MAZE_TRACK, DEFAULT_TITLE_TRACK, MUSIC_POOLS } from "./musicCatalogue";
-import { activateAudioFromUserGesture, connectMusicElement, DEFAULT_MUSIC_VOLUME, disconnectAudio, setAudioMusicLevel, setAudioMuted, setAudioPageHidden } from "./audioMix";
+import { createMusicPlayback } from "./musicPlayback";
 
 /** Transitional aliases retained only for the current v0.19 player call sites. */
 export const MUSIC_TRACKS = {
@@ -30,6 +30,8 @@ export interface MazeMusicPicker {
   noteTrackStarted(trackUrl: string): void;
   /** Draw the next song from the session's shuffled, no-repeat playlist. */
   trackForMaze(mazeKey: MazeMusicKey): string;
+  /** Reserve without consuming a song or listening/history entry. */
+  peekForMaze(mazeKey: MazeMusicKey): string;
 }
 
 function stableHash(value: string): number {
@@ -89,13 +91,7 @@ export function createMazeMusicPicker(
     cycle += 1;
   };
 
-  return {
-    runSeed: normalizedSeed,
-    tracks,
-    noteTrackStarted(nextTrackUrl: string): void {
-      previousTrackUrl = nextTrackUrl.trim() || previousTrackUrl;
-    },
-    trackForMaze(mazeKey: MazeMusicKey): string {
+  const choose = (mazeKey: MazeMusicKey, consume: boolean): string => {
       if (deck.length === 0) refillDeck(mazeKey);
       if (tracks.length > 1 && deck[0] === previousTrackUrl) {
         const alternativeIndex = deck.findIndex((candidate) => candidate !== previousTrackUrl);
@@ -103,10 +99,16 @@ export function createMazeMusicPicker(
           [deck[0], deck[alternativeIndex]] = [deck[alternativeIndex]!, deck[0]!];
         }
       }
-      const selected = deck.shift() ?? DEFAULT_MUSIC_TRACK_URL;
-      previousTrackUrl = selected;
+      const selected = deck[0] ?? DEFAULT_MUSIC_TRACK_URL;
+      if (consume) { deck.shift(); previousTrackUrl = selected; }
       return selected;
-    },
+  };
+  return {
+    runSeed: normalizedSeed,
+    tracks,
+    noteTrackStarted(nextTrackUrl: string): void { previousTrackUrl = nextTrackUrl.trim() || previousTrackUrl; },
+    trackForMaze: key => choose(key, true),
+    peekForMaze: key => choose(key, false),
   };
 }
 
@@ -135,219 +137,17 @@ export interface MusicOptions {
   readonly volume?: number;
 }
 
-let trackUrl: string = DEFAULT_MUSIC_TRACK_URL;
-let volume = DEFAULT_MUSIC_VOLUME;
-let muted = false;
-let player: HTMLAudioElement | undefined;
-let playerConnection: ReturnType<typeof connectMusicElement>;
-let generation = 0;
-let pageHidden = false;
-let activelyPlayingPlayer: HTMLAudioElement | undefined;
-let visibilityPausedPlayer: {
-  readonly audio: HTMLAudioElement;
-  readonly generation: number;
-} | undefined;
-
-function clampVolume(value: number): number {
-  if (!Number.isFinite(value)) return DEFAULT_MUSIC_VOLUME;
-  return Math.min(1, Math.max(0, value));
-}
-
-function safelyPause(audio: HTMLAudioElement): void {
-  try {
-    audio.pause();
-  } catch {
-    // Background music is optional and must never interrupt gameplay.
-  }
-}
-
-function createPlayer(): HTMLAudioElement | undefined {
-  if (typeof Audio === "undefined") return undefined;
-
-  try {
-    const audio = new Audio(trackUrl);
-    audio.loop = true;
-    audio.preload = "none";
-    audio.volume = volume;
-    audio.muted = muted;
-    audio.setAttribute("playsinline", "");
-    player = audio;
-    return audio;
-  } catch {
-    return undefined;
-  }
-}
-
-/**
- * Changes the track or volume before playback. Reconfiguring an active player
- * disposes it; the replacement still waits for the next user gesture.
- */
+const playback = createMusicPlayback(DEFAULT_MUSIC_TRACK_URL);
 export function configureMusic(options: MusicOptions = {}): void {
-  const nextTrackUrl = options.trackUrl?.trim() || trackUrl;
-  const nextVolume = options.volume === undefined ? volume : clampVolume(options.volume);
-  const trackChanged = nextTrackUrl !== trackUrl;
-
-  trackUrl = nextTrackUrl;
-  volume = nextVolume;
-  setAudioMusicLevel(volume);
-
-  if (trackChanged) {
-    disposeMusic();
-    return;
-  }
-
-  if (player) player.volume = playerConnection ? 1 : volume;
+  playback.configure(options.trackUrl?.trim() || playback.snapshot().requestedUrl, options.volume);
 }
-
-/**
- * Call synchronously from a click, tap, or key handler. Nothing in this module
- * attempts autoplay, so browser gesture policies remain respected. A missing
- * track or rejected play request resolves to `false` instead of throwing.
- */
-export async function startMusicFromUserGesture(): Promise<boolean> {
-  if (playerConnection?.context.state === "closed") disposeMusic();
-  const audio = player ?? createPlayer();
-  if (!audio || pageHidden) return false;
-
-  audio.loop = true;
-  audio.muted = muted;
-  const attemptGeneration = generation;
-
-  try {
-    try { playerConnection ??= connectMusicElement(audio); }
-    catch { disposeMusic(); return false; } // A diverted element cannot become a direct fallback.
-    audio.volume = playerConnection ? 1 : volume;
-    // Both starts happen synchronously in the activation; awaiting one first
-    // can lose the browser's transient activation before the other starts.
-    const activation = playerConnection ? activateAudioFromUserGesture() : Promise.resolve(true);
-    const [ready] = await Promise.all([activation, audio.play()]);
-    if (attemptGeneration !== generation || player !== audio) {
-      safelyPause(audio);
-      return false;
-    }
-    if (!ready) { safelyPause(audio); return false; }
-    if (pageHidden) {
-      activelyPlayingPlayer = undefined;
-      visibilityPausedPlayer = { audio, generation: attemptGeneration };
-      safelyPause(audio);
-      return true;
-    }
-    activelyPlayingPlayer = audio;
-    return true;
-  } catch {
-    // Includes autoplay denial, an absent file, and unsupported codecs.
-    return false;
-  }
-}
-
-/** Keeps the music position while muted so toggling sound feels instant. */
-export function setMusicMuted(nextMuted: boolean): void {
-  muted = nextMuted;
-  setAudioMuted(nextMuted);
-  if (player) player.muted = nextMuted;
-}
-
-async function resumeVisibilityPausedPlayer(
-  audio: HTMLAudioElement,
-  expectedGeneration: number,
-): Promise<void> {
-  try {
-    const activation = playerConnection ? activateAudioFromUserGesture() : Promise.resolve(true);
-    const [ready] = await Promise.all([activation, audio.play()]);
-    if (
-      !ready
-      ||
-      expectedGeneration !== generation
-      || player !== audio
-      || muted
-      || pageHidden
-    ) {
-      safelyPause(audio);
-      if (!muted && expectedGeneration === generation && player === audio) {
-        visibilityPausedPlayer = { audio, generation: expectedGeneration };
-      }
-      return;
-    }
-    activelyPlayingPlayer = audio;
-  } catch {
-    if (!muted && expectedGeneration === generation && player === audio) {
-      visibilityPausedPlayer = { audio, generation: expectedGeneration };
-    }
-  }
-}
-
-/** Retry only an interrupted current song, never a stopped or previously failed song. */
-export function recoverMusicFromUserGesture(): void {
-  const paused = visibilityPausedPlayer;
-  if (!paused || muted || pageHidden || paused.generation !== generation || paused.audio !== player) return;
-  visibilityPausedPlayer = undefined;
-  void resumeVisibilityPausedPlayer(paused.audio, paused.generation);
-}
-
-/**
- * Pause active BGM while its page is hidden, then resume only that exact
- * still-current player when the page returns. This never creates a player or
- * turns a previously stopped/failed track into autoplay.
- */
-export function setMusicPageHidden(hidden: boolean): void {
-  setAudioPageHidden(hidden);
-  if (pageHidden === hidden) return;
-  pageHidden = hidden;
-
-  if (hidden) {
-    const audio = player;
-    let wasPlaying = audio !== undefined && activelyPlayingPlayer === audio;
-    if (audio && wasPlaying) {
-      try {
-        wasPlaying = !audio.paused;
-      } catch {
-        // The successful play result tracked above is the safe fallback.
-      }
-    }
-    activelyPlayingPlayer = undefined;
-    visibilityPausedPlayer = wasPlaying && audio
-      ? { audio, generation }
-      : undefined;
-    if (wasPlaying && audio) safelyPause(audio);
-    return;
-  }
-
-  const paused = visibilityPausedPlayer;
-  visibilityPausedPlayer = undefined;
-  if (!paused || muted || paused.generation !== generation || player !== paused.audio) return;
-  void resumeVisibilityPausedPlayer(paused.audio, paused.generation);
-}
-
-/** Pauses and rewinds while retaining the reusable audio element. */
-export function stopMusic(): void {
-  if (!player) return;
-  generation += 1;
-  activelyPlayingPlayer = undefined;
-  visibilityPausedPlayer = undefined;
-  safelyPause(player);
-  try {
-    player.currentTime = 0;
-  } catch {
-    // Some browsers reject seeks before media metadata is available.
-  }
-}
-
-/** Releases the media request and audio element, suitable for React cleanup. */
-export function disposeMusic(): void {
-  generation += 1;
-  const audio = player;
-  player = undefined;
-  disconnectAudio(playerConnection?.source);
-  playerConnection = undefined;
-  activelyPlayingPlayer = undefined;
-  visibilityPausedPlayer = undefined;
-  if (!audio) return;
-
-  safelyPause(audio);
-  try {
-    audio.removeAttribute("src");
-    audio.load();
-  } catch {
-    // The media element may already have been detached by its host environment.
-  }
-}
+export const prepareMusic = playback.prepare;
+export const musicPlaybackSnapshot = playback.snapshot;
+/** Also used after established activation for semantic screen transitions.
+ * The name does not assert that a repeat timer creates a browser gesture. */
+export const startMusicFromUserGesture = playback.start;
+export const setMusicMuted = playback.setMuted;
+export const recoverMusicFromUserGesture = playback.recover;
+export const setMusicPageHidden = playback.setHidden;
+export const stopMusic = playback.stop;
+export const disposeMusic = playback.dispose;

@@ -83,17 +83,20 @@ export function activateAudioFromUserGesture(): Promise<boolean> {
 }
 
 /** Caller retains one connection per media element; track disposal is not graph disposal. */
-export function connectMusicElement(audio: HTMLMediaElement): { context: AudioContext; source: MediaElementAudioSourceNode } | undefined {
+export function connectMusicElement(audio: HTMLMediaElement, initialWeight = 1): { context: AudioContext; source: MediaElementAudioSourceNode; envelope: GainNode } | undefined {
   const current = ensureGraph();
   if (!current) return undefined; // Legacy media-only environment; volume is best-effort there.
   let source: MediaElementAudioSourceNode | undefined;
+  let envelope: GainNode | undefined;
   try {
     try { source = current.context.createMediaElementSource(audio); }
     catch { return undefined; } // No source exists: direct media is a safe best-effort fallback.
-    source.connect(current.music);
+    envelope = current.context.createGain();
+    envelope.gain.value = initialWeight;
+    source.connect(envelope); envelope.connect(current.music);
     audio.volume = 1; // Exactly one attenuation owner, including on iPad.
-    return { context: current.context, source };
-  } catch (error) { disconnectAudio(source); throw error; }
+    return { context: current.context, source, envelope };
+  } catch (error) { disconnectAudio(source); disconnectAudio(envelope); throw error; }
 }
 
 export function readyEffectsOutput(): { context: AudioContext; output: GainNode } | undefined {

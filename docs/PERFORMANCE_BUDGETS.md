@@ -1,5 +1,17 @@
 # Performance budgets and evidence contract
 
+## AUDIO-01A readiness candidate allocation —2026-09-06
+
+Astra allocates1600 gzip9 JS bytes versus v0.22.6 for bounded streamed handover,
+prediction and cancellation. Prototype measured157209 versus155702 (+1507),
+before version freeze; final build must remain within the allocated ceiling.
+CSS, media and dependencies do not grow. At most two media elements hold URLs;
+two per-lane envelopes feed the existing Music master, with one shared context.
+Largest song4083290B; conservative two-file encoded bound8166580B. This is not
+a resident-memory or transferred-byte promise. Browser preloading is a hint.
+[Candidate and rollback](reviews/2026-09-06-audio01a-candidate.md) own scope.
+No all-range peak, acoustic, iPad or sustained low-end acceptance is inferred.
+
 ## AUDIO-01V2 calibration candidate allocation — 2026-09-06
 
 Root allocates exactly395 gzip9 JS bytes against v0.22.5's155307 measured total:

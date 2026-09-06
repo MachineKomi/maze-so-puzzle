@@ -2,13 +2,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { contexts, installAudioContext, resetAudioFakes } from "./test/audioFakes";
 
 const players: FakeAudio[] = [];
-class FakeAudio {
+class FakeAudio extends EventTarget {
   loop = false; preload = ""; volume = 1; muted = false; paused = true; currentTime = 12;
   readonly play = vi.fn(async () => { this.paused = false; });
   readonly pause = vi.fn(() => { this.paused = true; });
   readonly load = vi.fn(); readonly setAttribute = vi.fn();
   readonly removeAttribute = vi.fn((name: string) => { if (name === "src") this.src = ""; });
-  constructor(public src: string) { players.push(this); }
+  constructor(public src = "") { super(); players.push(this); }
 }
 beforeEach(() => { resetAudioFakes(); players.length = 0; vi.resetModules(); installAudioContext(); vi.stubGlobal("Audio", FakeAudio); });
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); vi.useRealTimers(); });
@@ -18,20 +18,20 @@ describe("independent device audio mix", () => {
     const mix = await import("./audioMix"), calibration = await import("./audioCalibration"), music = await import("./music");
     await music.startMusicFromUserGesture();
     const ctx = contexts[0]!, audio = players[0]!;
-    expect(ctx.gains.map(node => node.gain.value)).toEqual([.1, 1]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([.1, 1]);
     mix.setAudioLevels({musicVolume:calibration.musicGain(1),sfxVolume:calibration.sfxGain(1)});
     music.configureMusic({volume:calibration.musicGain(1)});
-    expect(ctx.gains.map(node => node.gain.value)).toEqual([1, 4/3]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([1, 4/3]);
     expect(audio.volume).toBe(1); expect(audio.currentTime).toBe(12);
     expect(audio.play).toHaveBeenCalledOnce(); expect(ctx.sources).toHaveLength(1);
     mix.setAudioMuted(true); mix.setAudioLevels({musicVolume:.1,sfxVolume:1.2});
-    expect(ctx.gains.map(node => node.gain.value)).toEqual([0,0]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([0,0]);
     mix.setAudioMuted(false);
-    expect(ctx.gains.map(node => node.gain.value)).toEqual([.1,1.2]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([.1,1.2]);
     mix.setAudioLevels({musicVolume:9,sfxVolume:9});
-    expect(ctx.gains.map(node => node.gain.value)).toEqual([1,4/3]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([1,4/3]);
     mix.setAudioLevels({musicVolume:NaN,sfxVolume:NaN});
-    expect(ctx.gains.map(node => node.gain.value)).toEqual([.1,1]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([.1,1]);
   });
   it("does not allocate or play while preferences and mute are initialized", async () => {
     const mix = await import("./audioMix");
@@ -43,20 +43,24 @@ describe("independent device audio mix", () => {
     const music = await import("./music");
     expect(await music.startMusicFromUserGesture()).toBe(true);
     const ctx = contexts[0]!, audio = players[0]!;
-    expect(ctx.sources).toHaveLength(1); expect(ctx.gains).toHaveLength(2);
-    expect(ctx.sources[0]!.connect).toHaveBeenCalledWith(ctx.gains[0]);
+    expect(ctx.sources).toHaveLength(1); expect(ctx.gains).toHaveLength(3);
+    expect(ctx.sources[0]!.connect).toHaveBeenCalledWith(ctx.gains[2]);
+    expect(ctx.gains[2]!.connect).toHaveBeenCalledWith(ctx.gains[0]);
     expect(audio.volume).toBe(1); expect(ctx.gains[0]!.gain.value).toBe(.1);
     music.configureMusic({ volume: .08 });
     expect(ctx.gains[0]!.gain.value).toBe(.08); expect(audio.volume).toBe(1);
     expect(audio.currentTime).toBe(12); expect(audio.play).toHaveBeenCalledTimes(1);
     await music.startMusicFromUserGesture(); expect(ctx.sources).toHaveLength(1);
   });
-  it("disconnects only the previous source on a track change; app disposal closes the graph", async () => {
+  it("retains the old source until confirmed handover; app disposal closes the graph", async () => {
+    vi.useFakeTimers();
     const music = await import("./music"), mix = await import("./audioMix");
     await music.startMusicFromUserGesture(); const ctx = contexts[0]!, old = players[0]!;
     music.configureMusic({ trackUrl: "/next.mp3" });
-    expect(ctx.sources[0]!.disconnect).toHaveBeenCalledOnce(); expect(old.src).toBe(""); expect(ctx.close).not.toHaveBeenCalled();
-    await music.startMusicFromUserGesture(); expect(contexts).toHaveLength(1); expect(ctx.sources).toHaveLength(2);
+    expect(ctx.sources[0]!.disconnect).not.toHaveBeenCalled(); expect(old.src).not.toBe(""); expect(ctx.close).not.toHaveBeenCalled();
+    const transition = music.startMusicFromUserGesture(); expect(contexts).toHaveLength(1); expect(ctx.sources).toHaveLength(2);
+    await vi.advanceTimersByTimeAsync(400); await transition;
+    expect(ctx.sources[0]!.disconnect).toHaveBeenCalledOnce(); expect(ctx.gains[2]!.disconnect).toHaveBeenCalledOnce(); expect(old.src).toBe("");
     music.disposeMusic(); mix.disposeAudioMix(); expect(ctx.close).toHaveBeenCalledOnce();
     await music.startMusicFromUserGesture(); expect(contexts).toHaveLength(2); expect(players).toHaveLength(3);
   });

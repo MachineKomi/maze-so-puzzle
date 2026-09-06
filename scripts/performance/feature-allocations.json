@@ -33,6 +33,19 @@
   },
   "allocations": [
     {
+      "id": "audio01a-bounded-readiness",
+      "owner": "audio",
+      "status": "approved",
+      "compressedJsBytes": 1600,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates 1600 gzip9 JS bytes for the measured approximately1507-byte readiness controller plus release-version variance, within the6400-byte prototype ceiling. No media, CSS or dependencies grow. Independent source and actual playback qualification remain separate from byte allocation.",
+      "evidencePath": "docs/reviews/2026-09-06-audio01a-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete two-lane musicPlayback and per-lane audioMix envelope/transport-preparation seam to released v0.22.6 e628898bb4e501034f184a7a92c9e5e6d2b7a4aa. Preserve calibrated preferences, all saves, art, cues, OST and gameplay.",
+      "notes": "At most two attached streamed resources, one native AudioContext, two optional music-lane envelopes, no full-PCM decode or playlist fetch. Largest catalogue song4083290B gives conservative two-file encoded upper bound8166580B, not a browser memory guarantee. Constant-sum crossfade does not qualify high Music/SFX peaks or physical listening."
+    },
+    {
       "id": "audio01v2-calibrated-controls",
       "owner": "audio",
       "status": "approved",

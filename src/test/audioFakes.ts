@@ -34,6 +34,7 @@ export class FakeAudioContext {
   readonly sources: FakeNode[] = [];
   private listeners: (() => void)[] = [];
   readonly addEventListener = vi.fn((event: string, callback: () => void) => { if (event === "statechange") this.listeners.push(callback); });
+  readonly removeEventListener = vi.fn((event: string, callback: () => void) => { if (event === "statechange") this.listeners = this.listeners.filter(listener => listener !== callback); });
   readonly resume = vi.fn(async () => { this.setState("running"); });
   readonly close = vi.fn(async () => { this.setState("closed"); });
   setState(state: AudioContextState): void { this.state = state; this.listeners.forEach(fn => fn()); }

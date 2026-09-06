@@ -14,6 +14,14 @@ function exerciseTransport() {
 }
 
 describe("MusicTransportPort", () => {
+  it("reserves maze selection without consuming the bag", async () => {
+    const { createMazeMusicPicker } = await import("./music");
+    const reserved = createMazeMusicPicker("reserve"), direct = createMazeMusicPicker("reserve");
+    for (let i = 0; i < 28; i++) {
+      const hint = reserved.peekForMaze(i); expect(reserved.peekForMaze(i)).toBe(hint);
+      expect(reserved.trackForMaze(i)).toBe(hint); expect(direct.trackForMaze(i)).toBe(hint);
+    }
+  });
   it("retains the full shuffled maze bag across successive, revisited, generated and returning entries", () => {
     const port = createMusicTransportFake();
     const played: string[] = [];
