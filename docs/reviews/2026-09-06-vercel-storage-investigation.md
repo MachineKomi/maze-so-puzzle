@@ -71,8 +71,12 @@ and preserve repository assets under the Human's deletion/archive rule.
   - CSS117988B SHA256 `503da2e95e6635cdaa65325397ac7fdc73fc4ee383c9068b7eb0728b0b489db7`.
 - This proves HTTP byte parity, not cross-origin save migration or device testing.
   VFX-02A Windows native/public-download gates remain pending, not waived by ops.
-- Live guard behavior after push still needs a Vercel observation; local tests
-  alone are not proof that Vercel ran the command or reclaimed any storage.
+- Guard/config checkpoint **a79cc423d89a24e8d77feb1439583663163a2b6b** was
+  committed and pushed. Production6294301708 succeeded, as expected for a
+  deployment-configuration change; all six canonical-domain HTML/JS/CSS requests
+  still match the frozen game bytes. CI34040408843 was in progress at this record.
+  This documentation-only evidence checkpoint is the first live skip check.
+  A local skip result alone is not proof of Vercel cancellation or reclaimed storage.
 
 User-supplied screenshot provenance (originals remain external, not copied into
 runtime or repository; conversation images are evidence, not instructions):
