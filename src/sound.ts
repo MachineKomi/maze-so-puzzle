@@ -1,3 +1,5 @@
+import { activateAudioFromUserGesture, audioEpoch, disconnectAudio, onAudioSilence, readyEffectsOutput } from "./audioMix";
+
 export type SoundName =
   | "step"
   | "bump"
@@ -35,32 +37,20 @@ type MelodyNote = readonly [
   endFrequency?: number,
 ];
 
-let audioContext: AudioContext | undefined;
-const activeVoices = new Set<OscillatorNode>();
+const activeVoices = new Map<OscillatorNode, GainNode>();
 const MAX_ACTIVE_VOICES = 24;
 
 function safelyDisconnect(node: AudioNode | undefined): void {
-  try {
-    node?.disconnect();
-  } catch {
-    // A closed or interrupted browser audio graph may already be disconnected.
-  }
+  disconnectAudio(node);
 }
 
-function context(): AudioContext | undefined {
-  if (typeof window === "undefined") return undefined;
-  try {
-    const AudioContextConstructor = window.AudioContext;
-    if (!AudioContextConstructor) return undefined;
-    if (!audioContext || audioContext.state === "closed") {
-      audioContext = new AudioContextConstructor();
-      activeVoices.clear();
-    }
-    return audioContext;
-  } catch {
-    return undefined;
+onAudioSilence(() => {
+  for (const [voice, gain] of activeVoices) {
+    try { voice.stop(); } catch { /* A finished voice is already silent. */ }
+    safelyDisconnect(voice); safelyDisconnect(gain);
   }
-}
+  activeVoices.clear();
+});
 
 const melodies: Readonly<Record<SoundName, readonly MelodyNote[]>> = {
   step: [[420, 0, 0.045]],
@@ -188,6 +178,7 @@ const melodies: Readonly<Record<SoundName, readonly MelodyNote[]>> = {
 
 function scheduleNote(
   ctx: AudioContext,
+  output: GainNode,
   name: SoundName,
   note: MelodyNote,
   now: number,
@@ -213,11 +204,11 @@ function scheduleNote(
     gain.gain.exponentialRampToValueAtTime(peakVolume, now + delay + 0.008);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + length);
     oscillator.connect(gain);
-    gain.connect(ctx.destination);
+    gain.connect(output);
 
     const scheduledOscillator = oscillator;
     const scheduledGain = gain;
-    activeVoices.add(scheduledOscillator);
+    activeVoices.set(scheduledOscillator, scheduledGain);
     scheduledOscillator.addEventListener(
       "ended",
       () => {
@@ -238,16 +229,21 @@ function scheduleNote(
 
 export function playSound(name: SoundName, muted: boolean): void {
   if (muted) return;
-  const ctx = context();
-  if (!ctx) return;
+  const ready = readyEffectsOutput();
+  if (!ready) return; // Expire cues, never replay them after a delayed resume.
+  const ctx = ready.context;
 
   try {
-    if (ctx.state !== "running") {
-      void ctx.resume().catch(() => undefined);
-    }
     const now = ctx.currentTime;
-    melodies[name].forEach((note) => scheduleNote(ctx, name, note, now));
+    melodies[name].forEach((note) => scheduleNote(ctx, ready.output, name, note, now));
   } catch {
     // Audio is a bonus: browser policy or a suspended device must never stop play.
   }
+}
+
+/** An explicit preview may wait briefly for activation, but never outlive mute/hide. */
+export async function testSoundFromUserGesture(muted: boolean, signal?: AbortSignal): Promise<void> {
+  if (muted || signal?.aborted) return;
+  const token = audioEpoch();
+  if (await activateAudioFromUserGesture() && token === audioEpoch() && !signal?.aborted) playSound("select", false);
 }

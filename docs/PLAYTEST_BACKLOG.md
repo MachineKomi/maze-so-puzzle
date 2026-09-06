@@ -14,8 +14,9 @@ Add two persisted sliders within Sound & comfort, retain shared mute and values
 across Reset Progress, and test actual iPad gain behavior. Do not infer an old
 hardware defect or globally amplify all cues. **AUDIO-01V** is a separate early
 Astra implementation / Sol review after accepted PLAY-A, before larger readiness
-work; Plan02/07B keep creative sound/mastering. Routed, not implemented; physical
-balance acceptance remains open. No change to the in-flight pace assignment.
+work; Plan02/07B keep creative sound/mastering. [Candidate implemented and Sol-reviewed](reviews/2026-09-06-audio01v-candidate.md);
+versioned preview qualification is underway, physical balance acceptance remains
+open. No camera fix or larger readiness completion is implied.
 
 ### v0.22.2 physical feedback and design steer
 

@@ -101,7 +101,8 @@ import {
 } from "./progress";
 import { playSound, type SoundName } from "./sound";
 import { createCurrentMusicTransport } from "./musicTransport";
-import { setMusicPageHidden } from "./music";
+import { recoverMusicFromUserGesture, setMusicPageHidden } from "./music";
+import { activateAudioFromUserGesture } from "./audioMix";
 import { CatalogueImage, PresentationArt } from "./ui/CatalogueImage";
 import { resolveUiArt, type UiArt } from "./ui/art";
 import { DialogShell as Modal } from "./ui/dialogs/DialogShell";
@@ -779,6 +780,19 @@ function App() {
   const [testerToolsRequested] = useState(debugMazeQueryEnabled);
 
   useEffect(() => musicTransport.subscribe(snapshot => setMuted(snapshot.muted)), [musicTransport]);
+  useEffect(() => {
+    const activate = (event: Event) => {
+      if (event.isTrusted) { void activateAudioFromUserGesture(); recoverMusicFromUserGesture(); }
+    };
+    // Capture prepares effects before gameplay handlers. Keep recovery available
+    // after device interruption; no event listener is consumed by a denied start.
+    window.addEventListener("pointerdown", activate, true);
+    window.addEventListener("keydown", activate, true);
+    return () => {
+      window.removeEventListener("pointerdown", activate, true);
+      window.removeEventListener("keydown", activate, true);
+    };
+  }, []);
   useEffect(() => {
     if (screen !== "front-door" && screen !== "title") return;
     musicTransport.setContext("title");

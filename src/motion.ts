@@ -1,15 +1,16 @@
 /** Durable comfort preferences, kept separate from campaign progress. */
+import { audioLevel, DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME, type AudioLevels } from "./audioMix";
 export type MotionPreference = "system" | "full" | "reduced";
 export type MotionMode = "full" | "reduced";
 export type SurfaceQuality = "full" | "lite" | "static";
 export type MovementPace = "chill" | "regular" | "zippy";
 export const PRESENTATION_PREFERENCES_KEY = "maze-so-puzzle-presentation-v1";
-export interface PresentationPreferences {
+export interface PresentationPreferences extends AudioLevels {
   readonly motion: MotionPreference;
   readonly quality: SurfaceQuality;
   readonly pace: MovementPace;
 }
-export const DEFAULT_PRESENTATION_PREFERENCES: PresentationPreferences = { motion: "system", quality: "full", pace: "regular" };
+export const DEFAULT_PRESENTATION_PREFERENCES: PresentationPreferences = { motion: "system", quality: "full", pace: "regular", musicVolume: DEFAULT_MUSIC_VOLUME, sfxVolume: DEFAULT_SFX_VOLUME };
 export function resolveMotion(preference: MotionPreference, systemReduced: boolean): MotionMode {
   return preference === "system" ? systemReduced ? "reduced" : "full" : preference;
 }
@@ -20,6 +21,8 @@ export function readPresentationPreferences(storage?: Pick<Storage, "getItem">):
       motion: ["system", "full", "reduced"].includes(value?.motion) ? value.motion : "system",
       quality: ["full", "lite", "static"].includes(value?.quality) ? value.quality : "full",
       pace: ["chill", "regular", "zippy"].includes(value?.pace) ? value.pace : "regular",
+      musicVolume: audioLevel(value?.musicVolume, DEFAULT_MUSIC_VOLUME),
+      sfxVolume: audioLevel(value?.sfxVolume, DEFAULT_SFX_VOLUME),
     };
   } catch { return DEFAULT_PRESENTATION_PREFERENCES; }
 }

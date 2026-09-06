@@ -1,8 +1,9 @@
 # AUDIO-01 — timely music, satisfying sound and listening qualification
 
-Status: manager-scoped future work, 2026-09-05; no runtime implementation yet.
+Status: AUDIO-01V candidate implemented and independently reviewed2026-09-06;
+AUDIO-01A/B remain future work. [V evidence](../reviews/2026-09-06-audio01v-candidate.md).
 Updated 2026-09-06: independent volume controls are explicitly authorized by the
-Human and scoped as AUDIO-01V below; they are not shipped yet.
+Human and scoped as AUDIO-01V below; joint state owns actual publication status.
 Source: [Human audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Backlog owner: PT-20260903-20, with PT23 transport and existing CR-AUDIO decisions.
 

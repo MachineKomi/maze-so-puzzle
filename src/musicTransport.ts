@@ -16,6 +16,7 @@ import {
   setMusicMuted,
   startMusicFromUserGesture,
 } from "./music";
+import { disposeAudioMix } from "./audioMix";
 
 export interface MusicTransportSnapshot {
   readonly context: MusicContext;
@@ -176,7 +177,7 @@ export function createCurrentMusicTransport(): MusicTransportPort {
     selectTrack: (track) => configureMusic({ trackUrl: track.url }),
     setMuted: setMusicMuted,
     start: startMusicFromUserGesture,
-    dispose: disposeMusic,
+    dispose: () => { disposeMusic(); disposeAudioMix(); },
   }, createMusicRunSeed());
 }
 

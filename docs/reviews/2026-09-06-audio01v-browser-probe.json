@@ -1,0 +1,175 @@
+{
+  "schema": "maze-audio01v-browser-probe/v1",
+  "candidateBase": "9114bd979c817409ae3fb0e32b803eb8dc5a915a",
+  "environment": "Edge desktop, external analyser instrumentation, not physical iPad or speaker qualification",
+  "sampling": "350ms settling before ratio checks. Inactive SFX gain.value and immediate analyser windows can retain previous rendered values; no instant acoustic mute claim is inferred from stale buffers.",
+  "result": {
+    "levels": [
+      {
+        "contexts": 1,
+        "state": "running",
+        "gains": [
+          1,
+          0.9100000262260437
+        ],
+        "sources": 1,
+        "media": 1,
+        "volume": 1,
+        "paused": false,
+        "time": 44.908534,
+        "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting.mp3",
+        "raw": 0.09607649714121562,
+        "mixed": 0.09607649714121562,
+        "selected": 100,
+        "ratio": 1
+      },
+      {
+        "contexts": 1,
+        "state": "running",
+        "gains": [
+          0.10000000149011612,
+          0.9100000262260437
+        ],
+        "sources": 1,
+        "media": 1,
+        "volume": 1,
+        "paused": false,
+        "time": 45.269333,
+        "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting.mp3",
+        "raw": 0.1461407003637914,
+        "mixed": 0.014614070309051277,
+        "selected": 10,
+        "ratio": 0.10000000186581928
+      },
+      {
+        "contexts": 1,
+        "state": "running",
+        "gains": [
+          0,
+          0.9100000262260437
+        ],
+        "sources": 1,
+        "media": 1,
+        "volume": 1,
+        "paused": false,
+        "time": 45.64,
+        "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting.mp3",
+        "raw": 0.11931450750923885,
+        "mixed": 0,
+        "selected": 0,
+        "ratio": 0
+      },
+      {
+        "contexts": 1,
+        "state": "running",
+        "gains": [
+          0.2199999988079071,
+          0.9100000262260437
+        ],
+        "sources": 1,
+        "media": 1,
+        "volume": 1,
+        "paused": false,
+        "time": 46.008566,
+        "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting.mp3",
+        "raw": 0.10273388032159197,
+        "mixed": 0.022601453491783826,
+        "selected": 22,
+        "ratio": 0.21999999825796118
+      }
+    ],
+    "screenshots": [
+      "audio-levels-1194x834.png",
+      "audio-levels-568x320.png"
+    ],
+    "identity": "Maze so Puzzle: For Ame to Solve!",
+    "muted": {
+      "contexts": 1,
+      "state": "running",
+      "gains": [
+        0,
+        0.9100000262260437
+      ],
+      "sources": 1,
+      "media": 1,
+      "volume": 1,
+      "paused": false,
+      "time": 46.053445,
+      "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting.mp3",
+      "raw": 0.12201608882336173,
+      "mixed": 0.02684353944943095
+    },
+    "unmuted": {
+      "contexts": 1,
+      "state": "running",
+      "gains": [
+        0.07999999821186066,
+        0.9100000262260437
+      ],
+      "sources": 1,
+      "media": 1,
+      "volume": 1,
+      "paused": false,
+      "time": 46.198667,
+      "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting.mp3",
+      "raw": 0.16454904559016717,
+      "mixed": 0.013163923338566478
+    },
+    "sfxPlaying": {
+      "contexts": 1,
+      "state": "running",
+      "gains": [
+        0.07999999821186066,
+        0.9100000262260437
+      ],
+      "sources": 1,
+      "media": 1,
+      "volume": 1,
+      "paused": false,
+      "time": 46.26,
+      "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting.mp3",
+      "raw": 0.16256978593696397,
+      "mixed": 0.013005582574778185
+    },
+    "next": {
+      "contexts": 1,
+      "state": "running",
+      "gains": [
+        0.07999999821186066,
+        0.9100000262260437
+      ],
+      "sources": 2,
+      "media": 2,
+      "volume": 1,
+      "paused": false,
+      "time": 0.28,
+      "url": "http://127.0.0.1:4183/assets/ost/title/MsP%20Title%201%20a%20little%20world%20waiting%20B.mp3",
+      "raw": 0.13408094857540542,
+      "mixed": 0.010726475641116352
+    },
+    "phone": {
+      "width": 568,
+      "scrollWidth": 568,
+      "sliders": [
+        {
+          "id": "music-volume",
+          "width": 191.296875,
+          "height": 36
+        },
+        {
+          "id": "sfx-volume",
+          "width": 191.296875,
+          "height": 36
+        }
+      ]
+    },
+    "saved": {
+      "motion": "system",
+      "quality": "full",
+      "pace": "regular",
+      "musicVolume": 0.08,
+      "sfxVolume": 0.91
+    },
+    "reload": "passed"
+  }
+}

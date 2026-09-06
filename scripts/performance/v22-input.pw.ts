@@ -12,7 +12,7 @@ import { DIRECTIONS, DIRECTION_DELTAS, type Direction, type GameState } from "..
 import { applyLevelCompletion, createDefaultPlayerProgress, PLAYER_PROGRESS_STORAGE_KEY } from "../../src/progress";
 import { ACTIVE_RUN_STORAGE_KEY } from "../../src/session";
 import { DEFAULT_STEP_TRAVEL_MS, MOVEMENT_PACE_MS } from "../../src/movementControls";
-import { PRESENTATION_PREFERENCES_KEY, type MovementPace, type PresentationPreferences } from "../../src/motion";
+import { DEFAULT_PRESENTATION_PREFERENCES, PRESENTATION_PREFERENCES_KEY, type MovementPace, type PresentationPreferences } from "../../src/motion";
 import { deriveRoute, expectUiRouteState, keyForDirection, readUiRouteState, replayRouteStep, selectTesterLevel } from "./gameplay-browser";
 import { SUCCESS_EVENTS, continuationDirections, deliberateBlockerFixture, finalMazeFixture, findInputFixture, isOrdinaryMove, savedFixture, successFixture, type InputFixture } from "./v22-input-fixtures";
 
@@ -63,7 +63,7 @@ async function saveEvidence(page: Page, info: TestInfo, fixture?: InputFixture) 
   await page.evaluate(() => (window as TraceWindow).__v22Input?.stop());
 }
 
-async function loadSaved(page: Page, fixture: InputFixture, suffix: string, progress = createDefaultPlayerProgress(CURATED_LEVELS.length), preferences?: PresentationPreferences) {
+async function loadSaved(page: Page, fixture: InputFixture, suffix: string, progress = createDefaultPlayerProgress(CURATED_LEVELS.length), preferences?: Partial<PresentationPreferences>) {
   const snapshot = savedFixture(fixture, suffix);
   await page.addInitScript(({ runKey, progressKey, snapshot, progress, preferencesKey, preferences }) => {
     localStorage.clear();
@@ -226,7 +226,7 @@ for (const [pace, source] of [
 ] as const satisfies readonly (readonly [MovementPace, Source])[]) {
   test(`PLAY-A ${pace} gives ${source} an immediate first step and one shared held cadence`, async ({ page }, info) => {
     const fixture=findInputFixture(events=>events.length===1 && events[0]?.type==="moved", {sameDirectionContinuation:true})!;
-    const preferences: PresentationPreferences={motion:"full",quality:"full",pace};
+    const preferences: PresentationPreferences={...DEFAULT_PRESENTATION_PREFERENCES,motion:"full",quality:"full",pace};
     await loadSaved(page,fixture,`play-a-${pace}-${source}`,undefined,preferences);
     const start=new Date("2026-09-06T00:00:00Z");
     await page.clock.install({time:start});await page.clock.pauseAt(start);

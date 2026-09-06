@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 import { readPresentationPreferences, resolveMotion, writePresentationPreferences, type MotionMode, type PresentationPreferences } from "../motion";
+import { setAudioLevels } from "../audioMix";
+import { configureMusic } from "../music";
 
 const PresentationContext = createContext<{
   preferences: PresentationPreferences;
@@ -13,6 +15,10 @@ export function PresentationProvider({ children }: { children: ReactNode }) {
   const [systemReduced, setSystemReduced] = useState(() => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [saveFailed, setSaveFailed] = useState(false);
   const motion = resolveMotion(preferences.motion, systemReduced);
+  useLayoutEffect(() => {
+    setAudioLevels(preferences);
+    configureMusic({ volume: preferences.musicVolume });
+  }, [preferences.musicVolume, preferences.sfxVolume]);
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
     const change = () => setSystemReduced(query.matches);

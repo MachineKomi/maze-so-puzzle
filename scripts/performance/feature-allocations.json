@@ -351,6 +351,20 @@
       "rollbackPoint": "Revert the complete PLAY-A pace commit to accepted Tessera checkpoint a653a7b2fcf8730fe5d011c080591d499da9f068. Preserve ART-HOTFIX-01 files/records, schema6 campaign progress, schema3 active runs and the v0.22.2 camera translation; the additive pace field needs no save migration or asset rollback.",
       "dependencies": "Accepted Tessera integration a653a7b, Human continuation authority, build-ready V22-PLAY-01 brief, existing V22-PERF-01 input ownership and PERF-02A single scene-travel owner; independent Astra candidate review remains required before promotion.",
       "notes": "New JS ceiling 153537 retains the inherited 23-byte margin; measured candidate is 153514. CSS is 23510 under the unchanged 30227 ceiling; public remains 165031011. No media, decoded inventory, dependency, engine, save-schema, camera or special-presentation change. Family comfort and affected-iPad efficacy remain pending."
+    },
+    {
+      "id": "audio01v-independent-device-mix",
+      "owner": "audio",
+      "status": "approved",
+      "compressedJsBytes": 1361,
+      "compressedCssBytes": 53,
+      "runtimePublicBytes": 0,
+      "reason": "Astra approves exact measured bounded AUDIO-01V growth: two persisted channel controls, shared lazy gain graph, explicit activation/cancellation and interrupted-track recovery. No media or dependency growth.",
+      "evidencePath": "docs/reviews/2026-09-06-audio01v-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete AUDIO-01V commit to 9114bd979c817409ae3fb0e32b803eb8dc5a915a, preserving accepted Tessera and PLAY-A. Restore music and SFX ownership together; do not partially revert only one graph consumer.",
+      "dependencies": "Human independent-level authorization; accepted PLAY-A; actual Sol independent source review; final preview qualification and physical listening remain separate.",
+      "notes": "Measured154875 JSgzip9 and23563 CSS, public165031011 unchanged. No iPad audibility/camera claim. Existing23-byte JS margin retained; two gains, one shared context,24 scheduled SFX voices maximum."
     }
   ]
 }

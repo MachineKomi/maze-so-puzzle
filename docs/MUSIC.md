@@ -1,6 +1,6 @@
 # Music
 
-## Independent balance follow-up — 2026-09-06 (planned)
+## Independent balance follow-up — 2026-09-06 (candidate implemented)
 
 The Human reports very quiet SFX relative to BGM on iPad, while phone, laptop web
 and Windows are broadly balanced. [Source and compatibility hypothesis](user-playtests/2026-09-06-ipad-audio-balance.md).
@@ -8,7 +8,13 @@ and Windows are broadly balanced. [Source and compatibility hypothesis](user-pla
 Music/Sound effects sliders in Sound & comfort after accepted PLAY-A, ahead of
 the larger readiness pass. Preserve shared mute, transport and current intended
 defaults; verify effective gain rather than assuming a media-element volume
-assignment changes speaker output on iPad. No mix change is shipped by this note.
+assignment changes speaker output on iPad. The [reviewed AUDIO-01V candidate](reviews/2026-09-06-audio01v-candidate.md)
+implements these controls through a shared streamed-music/SFX gain graph. Defaults
+remain22/100; no whole-file decode, new library, prefetch or creative cue change.
+Mute and backgrounding cancel scheduled effects; track teardown retains the graph,
+App teardown releases it. A rejected interruption recovery can retry the exact
+current song on a fresh gesture. Source-creation fallback is best-effort only.
+See joint state for publication; physical device listening remains unqualified.
 
 ## Readiness follow-up — 2026-09-05 (planned)
 

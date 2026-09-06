@@ -1,4 +1,5 @@
 import { DEFAULT_MAZE_TRACK, DEFAULT_TITLE_TRACK, MUSIC_POOLS } from "./musicCatalogue";
+import { activateAudioFromUserGesture, connectMusicElement, DEFAULT_MUSIC_VOLUME, disconnectAudio, setAudioMusicLevel, setAudioMuted, setAudioPageHidden } from "./audioMix";
 
 /** Transitional aliases retained only for the current v0.19 player call sites. */
 export const MUSIC_TRACKS = {
@@ -127,7 +128,7 @@ export function createMusicRunSeed(): string {
 }
 
 export const DEFAULT_MUSIC_TRACK_URL = DEFAULT_MAZE_TRACK.url;
-export const DEFAULT_MUSIC_VOLUME = 0.22;
+export { DEFAULT_MUSIC_VOLUME } from "./audioMix";
 
 export interface MusicOptions {
   readonly trackUrl?: string;
@@ -138,6 +139,7 @@ let trackUrl: string = DEFAULT_MUSIC_TRACK_URL;
 let volume = DEFAULT_MUSIC_VOLUME;
 let muted = false;
 let player: HTMLAudioElement | undefined;
+let playerConnection: ReturnType<typeof connectMusicElement>;
 let generation = 0;
 let pageHidden = false;
 let activelyPlayingPlayer: HTMLAudioElement | undefined;
@@ -187,13 +189,14 @@ export function configureMusic(options: MusicOptions = {}): void {
 
   trackUrl = nextTrackUrl;
   volume = nextVolume;
+  setAudioMusicLevel(volume);
 
   if (trackChanged) {
     disposeMusic();
     return;
   }
 
-  if (player) player.volume = volume;
+  if (player) player.volume = playerConnection ? 1 : volume;
 }
 
 /**
@@ -202,20 +205,27 @@ export function configureMusic(options: MusicOptions = {}): void {
  * track or rejected play request resolves to `false` instead of throwing.
  */
 export async function startMusicFromUserGesture(): Promise<boolean> {
+  if (playerConnection?.context.state === "closed") disposeMusic();
   const audio = player ?? createPlayer();
   if (!audio || pageHidden) return false;
 
   audio.loop = true;
-  audio.volume = volume;
   audio.muted = muted;
   const attemptGeneration = generation;
 
   try {
-    await audio.play();
+    try { playerConnection ??= connectMusicElement(audio); }
+    catch { disposeMusic(); return false; } // A diverted element cannot become a direct fallback.
+    audio.volume = playerConnection ? 1 : volume;
+    // Both starts happen synchronously in the activation; awaiting one first
+    // can lose the browser's transient activation before the other starts.
+    const activation = playerConnection ? activateAudioFromUserGesture() : Promise.resolve(true);
+    const [ready] = await Promise.all([activation, audio.play()]);
     if (attemptGeneration !== generation || player !== audio) {
       safelyPause(audio);
       return false;
     }
+    if (!ready) { safelyPause(audio); return false; }
     if (pageHidden) {
       activelyPlayingPlayer = undefined;
       visibilityPausedPlayer = { audio, generation: attemptGeneration };
@@ -233,6 +243,7 @@ export async function startMusicFromUserGesture(): Promise<boolean> {
 /** Keeps the music position while muted so toggling sound feels instant. */
 export function setMusicMuted(nextMuted: boolean): void {
   muted = nextMuted;
+  setAudioMuted(nextMuted);
   if (player) player.muted = nextMuted;
 }
 
@@ -241,23 +252,36 @@ async function resumeVisibilityPausedPlayer(
   expectedGeneration: number,
 ): Promise<void> {
   try {
-    await audio.play();
+    const activation = playerConnection ? activateAudioFromUserGesture() : Promise.resolve(true);
+    const [ready] = await Promise.all([activation, audio.play()]);
     if (
+      !ready
+      ||
       expectedGeneration !== generation
       || player !== audio
       || muted
       || pageHidden
     ) {
       safelyPause(audio);
-      if (pageHidden && !muted && expectedGeneration === generation && player === audio) {
+      if (!muted && expectedGeneration === generation && player === audio) {
         visibilityPausedPlayer = { audio, generation: expectedGeneration };
       }
       return;
     }
     activelyPlayingPlayer = audio;
   } catch {
-    // Visibility-driven playback is optional and browser policy may reject it.
+    if (!muted && expectedGeneration === generation && player === audio) {
+      visibilityPausedPlayer = { audio, generation: expectedGeneration };
+    }
   }
+}
+
+/** Retry only an interrupted current song, never a stopped or previously failed song. */
+export function recoverMusicFromUserGesture(): void {
+  const paused = visibilityPausedPlayer;
+  if (!paused || muted || pageHidden || paused.generation !== generation || paused.audio !== player) return;
+  visibilityPausedPlayer = undefined;
+  void resumeVisibilityPausedPlayer(paused.audio, paused.generation);
 }
 
 /**
@@ -266,6 +290,7 @@ async function resumeVisibilityPausedPlayer(
  * turns a previously stopped/failed track into autoplay.
  */
 export function setMusicPageHidden(hidden: boolean): void {
+  setAudioPageHidden(hidden);
   if (pageHidden === hidden) return;
   pageHidden = hidden;
 
@@ -312,6 +337,8 @@ export function disposeMusic(): void {
   generation += 1;
   const audio = player;
   player = undefined;
+  disconnectAudio(playerConnection?.source);
+  playerConnection = undefined;
   activelyPlayingPlayer = undefined;
   visibilityPausedPlayer = undefined;
   if (!audio) return;

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { MusicTransportPort } from "../musicTransport";
 import { musicTrackById } from "../musicCatalogue";
 import { usePresentation } from "./PresentationProvider";
 import { DialogShell } from "./dialogs/DialogShell";
+import { testSoundFromUserGesture } from "../sound";
 
 const PACE_VALUES = ["chill", "regular", "zippy"] as const;
 const PACE_LABELS = { chill: "Chill", regular: "Regular", zippy: "Zippy" } as const;
@@ -10,6 +11,8 @@ const PACE_LABELS = { chill: "Chill", regular: "Regular", zippy: "Zippy" } as co
 export function SoundDialog({ transport, onClose, returnFocus }: { transport: MusicTransportPort; onClose: () => void; returnFocus: HTMLElement | null }) {
   const [snapshot, setSnapshot] = useState(() => transport.getSnapshot());
   const presentation = usePresentation();
+  const testRequest = useRef<AbortController | null>(null);
+  useEffect(() => () => testRequest.current?.abort(), []);
   useEffect(() => transport.subscribe(setSnapshot), [transport]);
   const act = (action: () => unknown) => { action(); void transport.startFromUserGesture(); };
   return <DialogShell title="Sound & comfort" onClose={onClose} returnFocus={returnFocus} footer={<button className="primary-button" onClick={onClose}>Back to the adventure</button>}>
@@ -21,6 +24,16 @@ export function SoundDialog({ transport, onClose, returnFocus }: { transport: Mu
       <button data-focus-id="sound:previous" disabled={!snapshot.canPrevious} onClick={() => act(() => transport.previous())}>Previous</button>
       <button data-focus-id="sound:next" disabled={!snapshot.canNext} onClick={() => act(() => transport.next())}>Next track</button>
       <button data-focus-id="sound:shuffle" disabled={!snapshot.canShuffle} onClick={() => act(() => transport.shuffle())}>Shuffle</button>
+    </div>
+    <div className="sound-levels">
+      {(["musicVolume", "sfxVolume"] as const).map(channel => <label key={channel} htmlFor={channel === "musicVolume" ? "music-volume" : "sfx-volume"}>
+        <span>{channel === "musicVolume" ? "Music" : "Sound effects"} <output aria-hidden="true">{Math.round(presentation.preferences[channel] * 100)}%</output></span>
+        <input id={channel === "musicVolume" ? "music-volume" : "sfx-volume"} type="range" min="0" max="100" step="1" data-focus-id={`sound:${channel}`} value={Math.round(presentation.preferences[channel] * 100)} aria-valuetext={`${Math.round(presentation.preferences[channel] * 100)} percent`} onChange={event => presentation.update({ [channel]: Number(event.currentTarget.value) / 100 })} />
+      </label>)}
+      <button type="button" data-focus-id="sound:test" disabled={snapshot.muted || presentation.preferences.sfxVolume === 0} onClick={() => {
+        testRequest.current?.abort(); testRequest.current = new AbortController();
+        void testSoundFromUserGesture(snapshot.muted, testRequest.current.signal);
+      }}>Test sound</button>
     </div>
     </section>
     <fieldset><legend>Motion</legend><div className="preference-options">{(["system", "full", "reduced"] as const).map(value => <label key={value}><input type="radio" name="motion" value={value} checked={presentation.preferences.motion === value} onChange={() => presentation.update({ motion: value })} />{value === "system" ? "Use device setting" : value === "full" ? "Full" : "Reduced"}</label>)}</div></fieldset>

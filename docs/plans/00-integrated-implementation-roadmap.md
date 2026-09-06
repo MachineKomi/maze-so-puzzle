@@ -24,7 +24,10 @@ implementation / Sol review after PLAY-A returns accepted ownership, before
 PLAY-B/V22-UI-01 or the larger AUDIO-01A readiness pass. Preserve current intended
 default mix and prove effective gain; do not globally compensate for one device.
 This supersedes the older all-audio-after-UI ordering only for this scoped seam.
-It does not interrupt Sol's active assignment or close the iPad camera gate.
+PLAY-A and AUDIO-01V now have engineering acceptance; versioned preview
+qualification follows. [Audio candidate](../reviews/2026-09-06-audio01v-candidate.md).
+Neither closes the iPad camera gate; next independent slices remain PLAY-B,
+V22-UI-01 and AUDIO-01A, with bounded PERF-02 experiments separately tracked.
 
 **Current delivery, 2026-09-06:** PERF-02A is published as **v0.22.2 V22-CAMERA1**
 at `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`, with actual Sol independent review,

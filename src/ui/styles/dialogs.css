@@ -70,6 +70,10 @@ fieldset { margin: 0; border: 1px solid #c5afc9; border-radius: 12px; min-width:
 .sound-layout { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 14px; align-items: stretch; }
 .sound-player { grid-row: 1 / 4; display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 18px; border: 2px solid #fffaf0; border-radius: 24px; background: linear-gradient(135deg,#fff0c9,#f6e8f7 70%,#e6f4ec); box-shadow: 0 3px 0 #b8a2ba30; }
 .sound-track { font-weight: 600; overflow-wrap: anywhere; }
+.sound-levels { display: grid; gap: 8px; }
+.sound-levels label { display: grid; gap: 2px; }
+.sound-levels label > span { display: flex; justify-content: space-between; gap: 12px; }
+.sound-levels input { width: 100%; min-width: 0; height: 36px; accent-color: #986099; cursor: pointer; }
 .sound-controls button { min-height: 48px; padding: 8px; }
 .sound-layout fieldset { padding: 8px 12px 10px; border-color: #d5bddb; background: #fffbf4a6; }
 .sound-layout legend { padding: 0 6px; font-size: 1rem; font-weight: 600; }
