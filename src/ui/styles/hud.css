@@ -169,6 +169,14 @@
 @media (max-height: 340px) {
  .play-shell[data-layout="compact-landscape"] .adventure-overview { --slot-size: 24px; }
 }
+@media (min-width: 740px) and (max-height: 340px) {
+ .play-shell[data-layout="compact-landscape"] .adventure-equipment { display: flex; flex-direction: row; gap: 4px; }
+ .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) { display: flex; flex-direction: row; align-items: center; gap: 4px; min-width: 0; }
+ .play-shell[data-layout="compact-landscape"] .rescue-card { flex: 0 0 190px; }
+ .play-shell[data-layout="compact-landscape"] .bag-card { flex: 1 1 0; }
+ .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) h3 { flex: 0 0 54px; width: 54px; }
+ .play-shell[data-layout="compact-landscape"] :is(.rescue-list,.inventory-grid) { display: flex; flex-wrap: nowrap; }
+}
 /* Narrow phones keep the complete collection in two labelled picture rows,
    leaving the full bottom-right control footprint clear. */
 .play-shell[data-emergency] .adventure-hud { padding: 0 4px; gap: 1px; }
