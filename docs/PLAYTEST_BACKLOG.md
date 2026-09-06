@@ -10,11 +10,14 @@ Jump repair and a genuinely tall rendering comparison precede DELIGHT-02B.
 Latest additions require implementation/delivery of that wall result, then
 lava/water/poison polish. Huge faint dressing overlays must become small, crisp,
 opaque-at-renderer details scattered over eligible surfaces. The local0.22.13
-candidate implements wall/dressing/jump changes; qualification is pending.
+release now implements wall/dressing/jump changes and is
+[qualified/published](reviews/2026-09-06-v02213-public-verification.md).
+P13 remains open, with a changed P16 journey; no Human beauty claim. Next is
+lava/water/poison scale/motion/receiver polish, then DELIGHT-02B/LEARN-01.
 
 ## Current delivery and remaining routing — 2026-09-06
 
-**PHONE-02 / audio65–85 / BOOK-02A is live on web0.22.12**, source `5013ea7`,
+**PHONE-02 / audio65–85 / BOOK-02A shipped in web0.22.12 and remains in0.22.13**, source `5013ea7`,
 runtime `e18c6ee`. [Qualification](reviews/2026-09-06-v02212-web-qualification.md)
 and [public verification](reviews/2026-09-06-v02212-public-verification.md) bind649
 project tests,83 distinct browser cases across retained runs, five paired runs
@@ -27,11 +30,11 @@ uses new Music65/SFX85 defaults with explicit Recommended balance while preservi
 saved v2 choices, and implements actual silhouettes/legitimate encounters with
 frozen32-friend/12-guardian counters. No Garden membership or new awards are added.
 R1 remains held after +37.4% raster-work proxy in the [new-host comparison](reviews/2026-09-06-new-host-wall-decision.md);
-the accepted v0.22.10 wall is restored. Live web is0.22.12, published Windows
+the accepted v0.22.10 wall was restored for0.22.12. Live web is0.22.13, published Windows
 0.22.9. Native0.22.10's staged binary is recovered but qualification is unfinished.
 
 Following this release, the [roadmap](plans/00-integrated-implementation-roadmap.md)
-routes the next bounded work to **DELIGHT-02B, then LEARN-01**. PT35/51 and
+routes the next bounded work to **lava/water/poison polish, then DELIGHT-02B and LEARN-01**. PT35/51 and
 PT10 reward wording belong to [DELIGHT-02B](plans/DELIGHT-02B-glow-and-celebration.md);
 PT09/19 and picture-led requested help belong to [LEARN-01](plans/LEARN-01-readable-reasoning-and-help.md).
 [Plan09-P0](reviews/2026-09-06-plan09-p0-obtainable-roster.md) now supplies current

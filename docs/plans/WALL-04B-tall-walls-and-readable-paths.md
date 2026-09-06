@@ -16,6 +16,12 @@ benchmark, dependency installation or runtime edit was performed to write it.
 
 ## Evidence and the material change required
 
+**Delivery update:** [web0.22.13 is published](../reviews/2026-09-06-v02213-public-verification.md),
+source e59d0f9/runtime dfe04a93.654 tests,33 browser cases, three paired
+comparisons and actual independent Sol review qualify the bounded engineering
+slice. Human beauty remains unresolved/P13 with the new P16 comparison. The
+original exploration contract below is retained; it does not restart prototypes.
+
 ### Active implementation refinement
 
 Astra implemented the SVG canary and a production candidate on2026-09-06.

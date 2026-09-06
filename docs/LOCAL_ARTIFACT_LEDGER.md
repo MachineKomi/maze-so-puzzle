@@ -22,6 +22,9 @@ All following packets are retained under `C:/GameDev/maze-game-qa/performance/`:
 | `wall-only-jump-attribution-20260906/` |29 /78,225,365|24 same-clock routes isolate tall vs depth cost. Paired reports bind served entry/media hashes.|
 | `tall-wall-release-browser-20260906/` |96 /91,856,854|28/28 cases,40 actual campaign frames and8 zero-spill detached SVG pixel proofs.|
 | `tall-wall-generated-book-20260906/` |7 /4,434,564|5/5 maximum23×23 generated, Book persistence, phone input and audio regressions.|
+| `tall-wall-public-20260906/` |2 /398,857|Public bytes match; smoke incorrectly expected adjacent rescue to increment steps. Failed assertion retained.|
+| `tall-wall-public-corrected-20260906/` |6 /5,761,296|Known clear ArrowUp route; two public journeys pass,4 decoded captures, receipt and small corrected helper.|
+| Repository `dist/` |387 /156,257,917|Exact published0.22.13 payload, rebuilt in place; no full build/repo copy.|
 
 Tall-wall visual iterations under `C:/GameDev/maze-game-qa/art-proof/`, created
 by root on this branch from existing approved media with installed Playwright:

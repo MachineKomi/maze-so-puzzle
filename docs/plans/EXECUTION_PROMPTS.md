@@ -4,7 +4,19 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-## Current dispatch contract — after web0.22.12, 2026-09-06
+## Current dispatch contract — after web0.22.13, 2026-09-06
+
+Tall walls/crisp dressing/jump camera are delivered at e59d0f9/runtime dfe04a93.
+[Qualification and actual Sol review](../reviews/2026-09-06-v02213-web-qualification.md)
+and [public receipt](../reviews/2026-09-06-v02213-public-verification.md) bind654
+tests,33 browser cases and the cost/limit decision. Do not repeat wall
+implementation or treat P13 as Human-approved. Next: a bounded lava/water/poison
+material-scale and motion pass using current connected receivers. Capture all
+three together in Moonlit Friendship Quest, compare existing texture scale and
+distinct ripple/heat/bubble language, then Full/Lite/Static/reduced, camera-edge,
+hazard/held grounding and serialized moving cost. Preserve zero-height surfaces,
+rules, saved content and approved masters. Do not make connected pit replacement
+a dependency unless that surface actually changes. Then DELIGHT-02B/LEARN-01.
 
 Implementation is Human-authorized. PHONE-02 / audio65–85 / BOOK-02A is now
 **live on web0.22.12**, source `5013ea7`, runtime `e18c6ee`.
@@ -13,7 +25,7 @@ Implementation is Human-authorized. PHONE-02 / audio65–85 / BOOK-02A is now
 83 distinct passing browser cases across retained runs, five measured pairs per
 scoped viewport and actual independent Sol acceptance. This section and
 [roadmap section4](00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates)
-replace conflicting older assignments. Web0.22.12, published Windows0.22.9,
+replace conflicting older assignments. Web0.22.13, published Windows0.22.9,
 and held R1/0.22.11 remain distinct. Native0.22.10's staged binary
 is recovered, not accepted or published. Transfer completeness/art reconciliation
 remain open. Do not infer physical-device approval or cleanup authority.
@@ -34,11 +46,9 @@ The root orchestrator now continues:
    frozen32/12, actual obtainability, teaching reconciliation and recipe gaps.
    Do not repeat the audit or treat it as delivered recipe UI/new content. Keep
    schema7/same-v6-key future-write protection and existing v2 gain choices intact.
-4. **Latest Human priority supersedes this earlier dispatch:** finish the jump
-   camera, implement/qualify [WALL-04B](WALL-04B-tall-walls-and-readable-paths.md)
-   and small crisp surface dressing, then the affected lava/water/poison polish.
-   Astra has integrated a local tall-wall candidate; finish actual source/render/
-   performance qualification and deployment, not another planning handoff.
+4. **Latest Human priority supersedes this earlier dispatch:** consume delivered
+   jump camera/[WALL-04B](WALL-04B-tall-walls-and-readable-paths.md)/small crisp
+   dressing in0.22.13, then execute affected lava/water/poison polish above.
    Afterwards advance to bounded
    [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md), then
    [LEARN-01](LEARN-01-readable-reasoning-and-help.md), each as a bounded reviewed

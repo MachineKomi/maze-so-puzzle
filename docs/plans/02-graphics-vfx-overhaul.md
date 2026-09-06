@@ -2,8 +2,10 @@
 
 ## Current remaining tranche — 2026-09-06
 
-Planning checkpoint; implementation awaits the next Human prompt. After wall
-qualification and BOOK-02A, execute [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md):
+Execution is authorized. BOOK-02A shipped0.22.12; tall walls/dressing/jump camera
+shipped0.22.13. The latest Human priority advances a bounded lava/water/poison
+scale, contained motion and receiver polish pass through the affected Plan04
+gates before [DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md):
 continuous pickup glow/readable receipts, friend-led victory and earned-sticker
 fanfare. Its PT10 projected/banked reward truth is mandatory. Then advance
 LEARN-01 and the early Plan09 canary; broad ambient polish must not hold them.

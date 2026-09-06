@@ -2,7 +2,8 @@
 
 Astra,2026-09-06. Runtime `dfe04a93bcfd06a5548d51a4523b3625382ab0f1` on
 `codex/jump-camera-delight`. This record tracks engineering qualification;
-publication requires its separate public receipt. The Human's wall beauty
+publication is now verified in the [public receipt](2026-09-06-v02213-public-verification.md)
+at final source e59d0f9. The Human's wall beauty
 judgment remains unresolved/P13. Windows remains0.22.9; staged native0.22.10,
 physical iPad, acoustic and full sustained-device acceptance remain separate.
 

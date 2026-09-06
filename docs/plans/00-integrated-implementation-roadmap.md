@@ -6,7 +6,14 @@ owns programme dependencies; dated checkpoint paragraphs below are history.
 
 ## Current programme contract — 2026-09-06 web delivery
 
-**PHONE-02, audio65/85 and BOOK-02A are live on web0.22.12**, source `5013ea7`,
+**Tall walls, crisp dressing and jump camera are live on web0.22.13**, source
+e59d0f9/runtime dfe04a93. [Qualification](../reviews/2026-09-06-v02213-web-qualification.md)
+records654 tests,33 current-source browser cases, three five-pair comparisons
+and genuine independent Sol review. [Public verification](../reviews/2026-09-06-v02213-public-verification.md)
+binds both origins and actual public journeys. P13/Human beauty stays open via
+P16. This is separate from held R1 and native qualification.
+
+**PHONE-02, audio65/85 and BOOK-02A shipped in web0.22.12 and remain included**, source `5013ea7`,
 runtime `e18c6ee`, on `main` and `codex/phone02-book`.
 [Qualification](../reviews/2026-09-06-v02212-web-qualification.md), actual independent
 [Sol review](../reviews/2026-09-06-phone02-book-sol-final-review.md) and
@@ -17,7 +24,7 @@ the full Plan07 matrix remain separate unfinished qualification.
 This contract and section4 replace conflicting older execution assignments;
 dated release/intake notes below retain their historical evidence value.
 
-Web is **0.22.12**; published Windows is **0.22.9**. WALL-04A-R1 / **0.22.11** is
+Web is **0.22.13**; published Windows is **0.22.9**. WALL-04A-R1 / **0.22.11** is
 **held** after the fair new-host comparison found +37.4% raster-task work; that is
 a trace-work proxy, not a user-latency percentage. The accepted v0.22.10 wall was
 restored in `e926737` before this candidate. The [wall decision](../reviews/2026-09-06-new-host-wall-decision.md)
@@ -27,9 +34,9 @@ Native0.22.10 is independently unfinished: its exact staged executable is now
 or published. Transfer completeness and art-ledger/environment reconciliation
 remain open. No new-host iPad pass exists.
 
-The Human's later feedback takes priority: finish the jump-camera correction,
-deliver [WALL-04B tall walls and crisp dressing](WALL-04B-tall-walls-and-readable-paths.md),
-then improve lava/water/poison surfaces through the existing Plan04/HOLE-02
+The Human's later feedback takes priority. Jump camera and
+[WALL-04B tall walls/crisp dressing](WALL-04B-tall-walls-and-readable-paths.md)
+are delivered; now improve lava/water/poison surfaces through the existing Plan04/HOLE-02
 receiver and motion gates. These are implemented/qualified in bounded slices;
 do not stop at a plan or call the wall beauty finding resolved without feedback.
 Then return to **DELIGHT-02B and LEARN-01**, then

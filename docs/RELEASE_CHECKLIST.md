@@ -17,7 +17,25 @@ Verify real runtime releases, not the presence of a deployment on every docs SHA
 Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
 browser saves. No retention/deletion/archive without explicit Human approval.
 
-## Current published web — v0.22.12 PHONE-02 / audio / BOOK-02A
+## Current published web — v0.22.13 tall walls / dressing / jump camera
+
+Source e59d0f9, runtime dfe04a93. [Qualification and actual Sol review](reviews/2026-09-06-v02213-web-qualification.md)
+and [public verification](reviews/2026-09-06-v02213-public-verification.md) bind closure.
+
+- [x]654 project tests,33 current-source browser cases,40 campaign frames,
+  eight zero-spill SVG pixel proofs and maximum23×23 generated movement.
+- [x]Three serialized five-pair comparisons per viewport; higher jump raster
+  work disclosed, wall-only attribution approximately flat, measured p99/max16.8ms.
+- [x]Build, budgets,12 deployment guards and production audit; exact-source CI.
+- [x]One Git-integrated deployment, canonical/alias byte parity and two isolated
+  public journeys with version, walls, Book, mix, movement and fitted geometry.
+- [ ]P13/Human wall beauty (new P16 journey), physical iPad/low-end/thermal and
+  full Plan07; latest Windows0.22.9 and native0.22.10 still separate.
+
+Next: affected lava/water/poison surface polish, then DELIGHT-02B and LEARN-01.
+No cleanup or archive is authorized. Docs-only closure uses last-success e59d0f9.
+
+## Prior published web — v0.22.12 PHONE-02 / audio / BOOK-02A
 
 Source `5013ea7ea2c985487b9824ffd2ffbd6a9fb8079f`, runtime `e18c6ee`, is
 **published and hash-verified** through the existing Git/Vercel integration.

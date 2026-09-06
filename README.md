@@ -1,15 +1,16 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published preview is **v0.22.9 WALL-04A**: rounded raised walls,
-coloured light-facing edges, smaller texture repeats and clearer floor/wall
-contrast. It also fixes a drifting dark frame edge in some maze views.
-Frozen runtime: `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`.
-Web and Windows are published; all four release downloads are independently verified.
-v0.22.8 runs remain compatible; no new gameplay/save migration in this release.
+The current published **web preview is v0.22.13** at
+[mazesopuzzle.com](https://mazesopuzzle.com/): tall sectioned wall faces, crisp
+sparse surface details and smooth camera tracking through hole jumps. It keeps
+the shared phone composition, improved default audio balance and Adventure Book
+discovery from0.22.12. [Verified release](docs/reviews/2026-09-06-v02213-public-verification.md).
+Latest fully published **Windows remains v0.22.9**; native0.22.10 qualification
+is separately unfinished. No new gameplay/save migration in this wall release.
 Earned friends, rewards and progress remain intact. Do not clear saves.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
-The remaining iPad camera issue and broader UI/audio improvements are still open.
+Human wall appearance, physical iPad and the wider visual/audio programme stay open.
 
 [![Browser build](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml/badge.svg)](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml)
 

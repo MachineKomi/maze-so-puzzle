@@ -1,18 +1,24 @@
-# Wall depth and lighting — implemented 04-A / R1 contract
+# Wall depth and lighting — implemented WALL-04B contract
 
-## Current Human target — unresolved, web0.22.12
+## Current Human target — still open for beauty review, web0.22.13
 
 The [latest feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
 requires walls convincingly taller than Ame, clean3D faces and beautiful lighting.
-Live0.22.12 retains04a-v1; R1/0.22.11 is held, never deployed. Neither closes
-Human wall appearance. [WALL-04B](plans/WALL-04B-tall-walls-and-readable-paths.md)
-now owns a genuine tall extrusion/readability comparison after jump-camera repair.
-Projected height may extend beyond the collision footprint; local cutaway,
-clear paths/actors, fog/input registration and measured cost are part of the
-solution. The shallow same-footprint restrictions below remain historical
-contracts, not limits that override this new Human target.
+Live0.22.13 implements `04b-section-v1`, independently engineering-reviewed and
+[publicly verified](reviews/2026-09-06-v02213-public-verification.md). R1/0.22.11
+is still held, never deployed. [WALL-04B](plans/WALL-04B-tall-walls-and-readable-paths.md)
+and [qualification](reviews/2026-09-06-v02213-web-qualification.md) own the new seam.
+Height0.88814140625tile is1.15×Ame's unchanged visible standing height;
+projection `(x+0.18z,y-z)`. True rear/east cap sections preserve tall front faces
+while final rounded wall-footprint clipping protects every non-wall receiver.
+Five fixed side-light groups, separate cap/side texture mapping, restrained rim
+and one floor-only cast establish depth. No new rAF, media, actor plane or rules.
+Small seeded dressing uses intact approved sheet regions, natural alpha and no
+renderer blur/fade; semantic object/start/exit floor cells remain clear. Full/
+Lite/Static keep structural depth. The historical shallow/R1 contracts below
+do not override this implemented seam. P13/Human beauty and device limits remain.
 
-## R1 stronger-relief correction — v0.22.11 web preview
+## Historical held R1 stronger-relief candidate — v0.22.11, never deployed
 
 The Human found 04-A too subtle and its lower-corner highlight misaligned.
 [R1 research/brief](plans/WALL-04A-R1-convincing-depth.md) and

@@ -7,9 +7,10 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **Local candidate0.22.13 now contains implemented tall walls, crisp dressing and
-  the jump-camera fix.** It is engineering-qualified for a bounded web release,
-  awaiting publication/byte verification.654 tests,33 current-source browser
+- **Live web0.22.13 delivers tall walls, crisp dressing and the jump-camera fix.**
+  Source e59d0f9, runtime dfe04a93; exact-source CI and one Git-integrated Vercel
+  deployment passed. [Public receipt](reviews/2026-09-06-v02213-public-verification.md)
+  binds both origins and two real public journeys.654 tests,33 current-source browser
   cases and three five-pair comparisons pass; actual Sol independently reviewed
   source, gameplay renders and performance. [Qualification](reviews/2026-09-06-v02213-web-qualification.md).
   The renderer uses true
@@ -21,28 +22,29 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   prioritizes completing these walls, then lava/water/poison polish, then the
   preserved wider roadmap. [Candidate](reviews/2026-09-06-tall-wall-integration-candidate.md).
 
-- **Latest priority: jump camera, then genuinely tall walls.** The Human's
+- **Latest delivered priority: jump camera and tall walls; Human beauty remains open.** The Human's
   [v0.22.12 feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
   explicitly leaves wall appearance unresolved and requires walls taller than
   Ame, with convincing3D depth and clean beautiful lighting. R1 remains held;
-  the wall rendering comparison now precedes DELIGHT-02B/LEARN-01. Astra owns
+  lava/water/poison surface polish now precedes DELIGHT-02B/LEARN-01. Astra owns
   runtime on `codex/jump-camera-delight`; actual Sol independently reviews.
   Research and implementation can proceed without further Human input.
 
-- **CURRENT: execution authorized by the Human,2026-09-06.** Astra is the sole
+- **Execution remains authorized by the Human,2026-09-06.** Astra is the sole
   runtime writer; actual Sol independently reviews source and rendered evidence.
   [Latest phone/audio feedback](user-playtests/2026-09-06-phone-composition-and-default-mix.md)
-  takes priority immediately after the bounded wall decision. [New-host decision](reviews/2026-09-06-new-host-wall-decision.md)
+  was delivered in0.22.12 and remains included. [New-host decision](reviews/2026-09-06-new-host-wall-decision.md)
   holds R1: paired frame timing is smooth, but raster-work proxy rises37.4%.
   Preserve R1 on the migration branch and deliver phone composition/audio balance,
-  then BOOK-02A on the explicitly accepted wall predecessor. [Plan09-P0](reviews/2026-09-06-plan09-p0-obtainable-roster.md)
+  then BOOK-02A on the explicitly accepted wall predecessor (completed0.22.12).
+  New0.22.13 uses separately qualified sectioned walls, not held R1. [Plan09-P0](reviews/2026-09-06-plan09-p0-obtainable-roster.md)
   records32friends/12guardians. Continue bounded DELIGHT-02B, LEARN-01 and the
   [remaining roadmap](plans/00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates).
   Claude remains bounded advice. Native acceptance and physical iPad evidence are
   separate from web qualification. Restored folders are reconciled in the
   [arrival receipt](reviews/2026-09-06-restored-folder-reconciliation.md).
 
-- **Live web: 0.22.12**, source `5013ea7ea2c985487b9824ffd2ffbd6a9fb8079f`,
+- **Prior published web: 0.22.12**, source `5013ea7ea2c985487b9824ffd2ffbd6a9fb8079f`,
   runtime `e18c6ee`, backed up on `main` and `codex/phone02-book`. PHONE-02,
   fresh/recommended Music65/SFX85 and BOOK-02A are delivered on accepted walls.
   [Qualification](reviews/2026-09-06-v02212-web-qualification.md) records649 tests,
@@ -60,7 +62,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   The final migration wall packet/consolidated patch backup remain absent.
   Historical copied worktree pointers are preserved, not relinked as active checkouts.
   Full-art validation has ledger-byte errors and a historical environment/zlib
-  reproduction mismatch. Live web is0.22.12, published Windows0.22.9,
+  reproduction mismatch. Live web is0.22.13, published Windows0.22.9,
   candidate0.22.11 unpromoted and native0.22.10 separately unfinished. New-host
   matched wall timing now supports the R1 HOLD above. No physical iPad,
   Human wall beauty, native release or educational success is implied.
