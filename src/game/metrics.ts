@@ -3,9 +3,12 @@ import { solveLevel } from "./solver";
 import { DIRECTIONS, type Direction, type GameState, type LevelDefinition } from "./types";
 
 export interface RouteQualityMetrics {
-  readonly ordinaryMoves: number;
-  readonly perfectMoves: number;
-  readonly rescueCost: number;
+  readonly ordinaryInputs: number;
+  readonly perfectInputs: number;
+  readonly rescueInputCost: number;
+  readonly ordinaryMovementSteps: number;
+  readonly perfectMovementSteps: number;
+  readonly rescueMovementCost: number;
   readonly rawBranchPoints: number;
   readonly meaningfulStateChanges: number;
   /** Pending a counterfactual dependency analysis; never inferred from route event count. */
@@ -102,9 +105,12 @@ export function measureLevel(level: LevelDefinition): RouteQualityMetrics {
   const route = analyseRoute(level, ordinary.directions);
   const weightedActivity = route.decisions + route.changes * 2;
   return {
-    ordinaryMoves: ordinary.directions.length,
-    perfectMoves: perfect.directions.length,
-    rescueCost: perfect.directions.length - ordinary.directions.length,
+    ordinaryInputs: ordinary.directions.length,
+    perfectInputs: perfect.directions.length,
+    rescueInputCost: perfect.directions.length - ordinary.directions.length,
+    ordinaryMovementSteps: ordinary.finalState.steps,
+    perfectMovementSteps: perfect.finalState.steps,
+    rescueMovementCost: perfect.finalState.steps - ordinary.finalState.steps,
     rawBranchPoints: route.decisions,
     meaningfulStateChanges: route.changes,
     prerequisiteDepth: null,

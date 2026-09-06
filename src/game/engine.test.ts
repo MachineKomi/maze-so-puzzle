@@ -404,7 +404,7 @@ describe("keys, doors, potions and boots", () => {
 });
 
 describe("animal rescues", () => {
-  it("rescues an animal exactly once and tracks it separately from inventory", () => {
+  it("rescues an animal from beside the cage, then enters on the next input", () => {
     const corridor = level("animal-rescue", "#@....E.#");
     const animal = {
       id: "animal-rescue-bunny-1",
@@ -416,7 +416,9 @@ describe("animal rescues", () => {
     const initial = createInitialGameState(rescueLevel);
 
     const rescued = movePlayer(rescueLevel, initial, "right");
-    expect(rescued.moved).toBe(true);
+    expect(rescued.moved).toBe(false);
+    expect(rescued.state.position).toEqual(initial.position);
+    expect(rescued.state.steps).toBe(0);
     expect(rescued.state.rescuedAnimalIds).toEqual([animal.id]);
     expect(rescued.state.collectedObjectIds).toEqual([]);
     expect(rescued.events[0]).toEqual({
@@ -426,9 +428,80 @@ describe("animal rescues", () => {
     });
     expect(isObjectResolved(animal, rescued.state)).toBe(true);
 
-    const back = movePlayer(rescueLevel, rescued.state, "left").state;
+    const entered = movePlayer(rescueLevel, rescued.state, "right");
+    expect(entered.moved).toBe(true);
+    expect(entered.state.position).toEqual(animal.at);
+    expect(entered.state.steps).toBe(1);
+    expect(entered.events.some((event) => event.type === "animal-rescued")).toBe(false);
+
+    const back = movePlayer(rescueLevel, entered.state, "left").state;
     const revisit = movePlayer(rescueLevel, back, "right");
     expect(revisit.state.rescuedAnimalIds).toEqual([animal.id]);
     expect(revisit.events.some((event) => event.type === "animal-rescued")).toBe(false);
+  });
+
+  it.each([
+    ["right", ["#####", "#..E#", "#@q.#", "#...#", "#####"]],
+    ["left", ["#####", "#E..#", "#.q@#", "#...#", "#####"]],
+    ["down", ["#####", "#.@E#", "#.q.#", "#...#", "#####"]],
+    ["up", ["#####", "#.qE#", "#.@.#", "#...#", "#####"]],
+  ] as const)("supports a stationary rescue from the %s side", (direction, map) => {
+    const rescueLevel = parseAsciiLevel({
+      id: `animal-rescue-${direction}`,
+      name: `Animal rescue ${direction}`,
+      objective: "Test",
+      map,
+    });
+    const initial = createInitialGameState(rescueLevel);
+    const rescued = movePlayer(rescueLevel, initial, direction);
+
+    expect(rescued).toMatchObject({
+      moved: false,
+      state: { position: initial.position, steps: 0 },
+      events: [{ type: "animal-rescued" }],
+    });
+  });
+
+  it("blocks a spring jump onto an unresolved cage but allows the resolved landing", () => {
+    const rescueLevel = level("animal-jump-landing", "#@jooqE.#");
+    const initial = createInitialGameState(rescueLevel);
+    const equipped = movePlayer(rescueLevel, initial, "right").state;
+    const animal = rescueLevel.objects.find((object) => object.kind === "animal");
+    expect(animal?.kind).toBe("animal");
+    if (!animal || animal.kind !== "animal") throw new Error("Missing animal fixture.");
+
+    const blocked = movePlayer(rescueLevel, equipped, "right");
+    expect(blocked.moved).toBe(false);
+    expect(blocked.state).toBe(equipped);
+    expect(blocked.events).toEqual([{
+      type: "blocked",
+      reason: "caged-friend",
+      target: animal.at,
+    }]);
+
+    const alreadyRescued = { ...equipped, rescuedAnimalIds: [animal.id] };
+    const landed = movePlayer(rescueLevel, alreadyRescued, "right");
+    expect(landed.moved).toBe(true);
+    expect(landed.state.position).toEqual(animal.at);
+    expect(landed.events.map((event) => event.type)).toEqual(["hole-jumped", "moved"]);
+  });
+
+  it("allows Ame to turn away immediately after a stationary rescue", () => {
+    const rescueLevel = parseAsciiLevel({
+      id: "animal-rescue-turn-away",
+      name: "Animal rescue turn away",
+      objective: "Test",
+      map: ["######", "#...E#", "#.@q.#", "#....#", "#....#", "######"],
+    });
+    const initial = createInitialGameState(rescueLevel);
+    const rescued = movePlayer(rescueLevel, initial, "right").state;
+    const turnedAway = movePlayer(rescueLevel, rescued, "left");
+
+    expect(turnedAway.moved).toBe(true);
+    expect(turnedAway.state).toMatchObject({
+      position: { x: 1, y: 2 },
+      steps: 1,
+      rescuedAnimalIds: rescued.rescuedAnimalIds,
+    });
   });
 });

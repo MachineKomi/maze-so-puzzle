@@ -5,7 +5,12 @@ export const MAX_FOLLOWER_TRAIL_LENGTH = 24;
 export interface FollowerProcession {
   readonly trail: readonly Point[];
   readonly steps: number;
-  readonly slots: readonly { readonly id: string; readonly joinedAt: number }[];
+  readonly slots: readonly {
+    readonly id: string;
+    readonly joinedAt: number;
+    /** Cage coordinate shown until Ame makes the first post-rescue move. */
+    readonly joinedFrom?: Point;
+  }[];
 }
 
 export function createFollowerProcession(point: Point, ids: readonly string[] = []): FollowerProcession {
@@ -36,10 +41,25 @@ export function advanceFollowerProcession(
   };
 }
 
+/** Add a stationary rescue without disturbing the existing follower train. */
+export function joinFollowerProcession(
+  current: FollowerProcession,
+  id: string,
+  joinedFrom: Point,
+): FollowerProcession {
+  if (current.slots.some((slot) => slot.id === id)) return current;
+  return {
+    ...current,
+    slots: [...current.slots, { id, joinedAt: current.steps, joinedFrom }],
+  };
+}
+
 /** Assign identity before clipping. New/resumed friends gather, then unspool. */
 export function followerTargets(current: FollowerProcession): readonly {id:string;point:Point}[] {
   return current.slots.map((slot,index)=>({
     id:slot.id,
-    point:current.trail[Math.min(index+1,current.steps-slot.joinedAt)] ?? current.trail.at(-1)!,
+    point:current.steps===slot.joinedAt && slot.joinedFrom
+      ? slot.joinedFrom
+      : current.trail[Math.min(index+1,current.steps-slot.joinedAt)] ?? current.trail.at(-1)!,
   }));
 }

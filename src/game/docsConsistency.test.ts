@@ -12,7 +12,7 @@ describe("gameplay documentation consistency", () => {
     for (const [index, level] of CURATED_LEVELS.entries()) {
       const metric = measureLevel(level);
       expect(gameplaySpec, level.name).toContain(`| ${index + 1} | ${level.name.replaceAll("'", "’")}`);
-      expect(gameplaySpec, level.name).toContain(`${metric.ordinaryMoves} / ${metric.perfectMoves}`);
+      expect(gameplaySpec, level.name).toContain(`${metric.ordinaryInputs} / ${metric.perfectInputs}`);
     }
   }, 120_000);
 

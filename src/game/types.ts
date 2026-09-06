@@ -245,6 +245,7 @@ export type BlockedReason =
   | "needs-spring-boots"
   | "needs-antidote-leaf"
   | "needs-key"
+  | "caged-friend"
   | "game-over";
 
 export type GameEvent =

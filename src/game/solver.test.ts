@@ -91,6 +91,38 @@ describe("solver interaction gates", () => {
     ]);
   });
 
+  it("retains stationary rescue state before entering a required cage tile", () => {
+    const level = parseAsciiLevel({
+      id: "stationary-rescue-gate",
+      name: "Stationary Rescue Gate",
+      objective: "Rescue, then walk forward.",
+      map: [
+        "#########",
+        "#@q.E...#",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+        "#########",
+      ],
+    });
+
+    const result = solveLevel(level, { requireAllAnimals: true });
+    expect(result).toMatchObject({
+      solvable: true,
+      reason: "solved",
+      directions: ["right", "right", "right", "right"],
+      finalState: { status: "won", steps: 3 },
+    });
+    expect(result.finalState?.rescuedAnimalIds).toHaveLength(1);
+    expect(solveLevel(level, { avoidAnimals: true })).toMatchObject({
+      solvable: false,
+      reason: "unsolvable",
+    });
+  });
+
   it("does not treat contact with an underpowered enemy as movement or progress", () => {
     const level = parseAsciiLevel({
       id: "strong-enemy-gate",

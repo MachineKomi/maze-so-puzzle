@@ -47,7 +47,9 @@ function progressedPlayingState(level: LevelDefinition): GameState {
     const result = movePlayer(level, state, direction);
     expect(
       result.moved || result.events.some(
-        (event) => event.type === "enemy-defeated" || event.type === "door-opened",
+        (event) => event.type === "enemy-defeated"
+          || event.type === "door-opened"
+          || event.type === "animal-rescued",
       ),
     ).toBe(true);
     expect(result.state).not.toBe(state);
@@ -128,6 +130,96 @@ describe("active run persistence", () => {
     expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game).toEqual(game);
   });
 
+  it("accepts a zero-step save immediately after a stationary rescue", () => {
+    const level = parseAsciiLevel({
+      id: "stationary-rescue-save",
+      name: "Stationary Rescue Save",
+      objective: "Test",
+      map: ["#####", "#@qE#", "#...#", "#...#", "#####"],
+    });
+    const game = movePlayer(level, createInitialGameState(level), "right").state;
+
+    expect(game).toMatchObject({
+      position: level.start,
+      steps: 0,
+      rescuedAnimalIds: [level.objects.find((object) => object.kind === "animal")?.id],
+    });
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game).toEqual(game);
+  });
+
+  it("rejects impossible remote stationary interactions and missing capabilities", () => {
+    const rescueLevel = parseAsciiLevel({
+      id: "remote-rescue-save",
+      name: "Remote Rescue Save",
+      objective: "Test",
+      map: ["#######", "#@..qE#", "#.....#", "#.....#", "#.....#", "#.....#", "#######"],
+    });
+    const animal = rescueLevel.objects.find((object) => object.kind === "animal");
+    expect(animal?.kind).toBe("animal");
+    if (!animal || animal.kind !== "animal") throw new Error("Missing animal fixture.");
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(rescueLevel, {
+      ...createInitialGameState(rescueLevel),
+      rescuedAnimalIds: [animal.id],
+    }), [rescueLevel])).toBeNull();
+
+    const doorLevel = parseAsciiLevel({
+      id: "door-without-key-save",
+      name: "Door Without Key Save",
+      objective: "Test",
+      map: ["######", "#@R.E#", "#....#", "#....#", "#....#", "######"],
+    });
+    const door = doorLevel.objects.find((object) => object.kind === "door");
+    expect(door?.kind).toBe("door");
+    if (!door || door.kind !== "door") throw new Error("Missing door fixture.");
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(doorLevel, {
+      ...createInitialGameState(doorLevel),
+      openedDoorIds: [door.id],
+    }), [doorLevel])).toBeNull();
+
+    const enemyLevel = parseAsciiLevel({
+      id: "enemy-without-sword-save",
+      name: "Enemy Without Sword Save",
+      objective: "Test",
+      initialPower: 2,
+      map: ["######", "#@1.E#", "#....#", "#....#", "#....#", "######"],
+    });
+    const enemy = enemyLevel.objects.find((object) => object.kind === "enemy");
+    expect(enemy?.kind).toBe("enemy");
+    if (!enemy || enemy.kind !== "enemy") throw new Error("Missing enemy fixture.");
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(enemyLevel, {
+      ...createInitialGameState(enemyLevel),
+      power: enemyLevel.initialPower + enemy.power,
+      defeatedEnemyIds: [enemy.id],
+    }), [enemyLevel])).toBeNull();
+  });
+
+  it("round-trips every authored ordinary and perfect route under current rules", () => {
+    for (const level of CURATED_LEVELS) {
+      for (const options of [{ avoidAnimals: true }, { requireAllAnimals: true }]) {
+        const solution = solveLevel(level, options);
+        expect(solution.solvable, `${level.name} ${JSON.stringify(options)}`).toBe(true);
+        let game = createInitialGameState(level);
+        for (const direction of solution.directions) {
+          const result = movePlayer(level, game, direction);
+          game = result.state;
+          if (result.events.some((event) => (
+            event.type === "animal-rescued"
+            || event.type === "door-opened"
+            || event.type === "enemy-defeated"
+            || event.type === "hole-jumped"
+            || event.type === "portal-warped"
+          ))) {
+            expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game, level.name)
+              .toEqual(game);
+          }
+        }
+        expect(game.status, level.name).toBe("won");
+        expect(sanitizeActiveRunSnapshot(rawSnapshot(level, game), [level])?.game, level.name)
+          .toEqual(game);
+      }
+    }
+  }, 120_000);
+
   it("rejects stale revision and fingerprint snapshots without touching durable progress", () => {
     const level = storyLevel();
     expect(sanitizeActiveRunSnapshot({
@@ -175,7 +267,7 @@ describe("active run persistence", () => {
     expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
   });
 
-  it("migrates a valid legacy active run when authored content is still revision 1", () => {
+  it("fails closed on a legacy active run even when authored content is still revision 1", () => {
     const storage = new MemoryStorage();
     const level = parseAsciiLevel({
       id: "legacy-revision-one",
@@ -184,25 +276,28 @@ describe("active run persistence", () => {
       contentRevision: 1,
       map: ["#####", "#@.E#", "#...#", "#...#", "#####"],
     });
-    const game = movePlayer(level, createInitialGameState(level), "right").state;
-    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
+    const prior = {
       schemaVersion: 1,
       levelId: level.id,
-      game,
+      game: movePlayer(level, createInitialGameState(level), "right").state,
       revealedTiles: [],
-    }));
+    };
+    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
 
-    expect(readActiveRun([level], storage)).toMatchObject({
-      schemaVersion: 3,
-      runId: expect.stringMatching(/^migrated-/),
-      levelId: level.id,
-      contentRevision: 1,
-      gameplayFingerprint: level.gameplayFingerprint,
-      game,
-      hintUsesByState: {},
+    expect(readActiveRunResult([level], storage)).toEqual({
+      snapshot: null,
+      discardedUpdatedRun: true,
     });
     expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
-    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+
+    const misplaced = new MemoryStorage();
+    misplaced.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
+    expect(readActiveRunResult([level], misplaced)).toEqual({
+      snapshot: null,
+      discardedUpdatedRun: true,
+    });
+    expect(misplaced.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
   });
 
   it("migrates a valid schema-v2 active run with a stable derived run ID", () => {
@@ -225,21 +320,11 @@ describe("active run persistence", () => {
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
   });
 
-  it("resumes a valid legacy run in memory when migration storage is full", () => {
+  it("resumes a matching schema-v2 run in memory when migration storage is full", () => {
     const storage = new MemoryStorage();
-    const level = parseAsciiLevel({
-      id: "legacy-quota",
-      name: "Legacy quota",
-      objective: "Test",
-      contentRevision: 1,
-      map: ["#####", "#@.E#", "#...#", "#...#", "#####"],
-    });
-    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
-      schemaVersion: 1,
-      levelId: level.id,
-      game: createInitialGameState(level),
-      revealedTiles: [],
-    }));
+    const level = storyLevel(1);
+    const prior = { ...rawSnapshot(level), schemaVersion: 2, runId: undefined };
+    storage.setItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
     const quotaStorage: ActiveRunStorage = {
       getItem: (key) => storage.getItem(key),
       setItem: () => { throw new Error("quota"); },
@@ -248,9 +333,10 @@ describe("active run persistence", () => {
 
     expect(readActiveRunResult([level], quotaStorage).snapshot).toMatchObject({
       levelId: level.id,
-      contentRevision: 1,
+      contentRevision: level.contentRevision,
+      gameplayFingerprint: level.gameplayFingerprint,
     });
-    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
+    expect(storage.getItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
   });
 

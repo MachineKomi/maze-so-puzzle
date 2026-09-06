@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { advanceFollowerProcession, createFollowerProcession, followerTargets, MAX_FOLLOWER_TRAIL_LENGTH, recordFollowerStep } from "./followerTrail";
+import { advanceFollowerProcession, createFollowerProcession, followerTargets, joinFollowerProcession, MAX_FOLLOWER_TRAIL_LENGTH, recordFollowerStep } from "./followerTrail";
 
 describe("rescued friend procession",()=>{
   it("retains repeated visits and bounds long histories",()=>{
@@ -12,6 +12,24 @@ describe("rescued friend procession",()=>{
     train=advanceFollowerProcession(train,{x:2,y:1},["alpaca","zebra"]);
     expect(train.slots.map(s=>s.id)).toEqual(["zebra","alpaca"]);
     expect(followerTargets(train)).toEqual([{id:"zebra",point:{x:1,y:1}},{id:"alpaca",point:{x:2,y:1}}]);
+  });
+  it("holds a stationary rescue at its cage, then joins from Ame's prior square",()=>{
+    let train=createFollowerProcession({x:2,y:2},["first"]);
+    train=advanceFollowerProcession(train,{x:3,y:2},["first"]);
+    const before=structuredClone(train);
+    train=joinFollowerProcession(train,"new",{x:3,y:3});
+    expect(train.trail).toEqual(before.trail);
+    expect(train.steps).toBe(before.steps);
+    expect(followerTargets(train)).toEqual([
+      {id:"first",point:{x:2,y:2}},
+      {id:"new",point:{x:3,y:3}},
+    ]);
+
+    train=advanceFollowerProcession(train,{x:4,y:2},["first","new"]);
+    expect(followerTargets(train)).toEqual([
+      {id:"first",point:{x:3,y:2}},
+      {id:"new",point:{x:3,y:2}},
+    ]);
   });
   it("follows the same corridor off camera through loops and reversal",()=>{
     let train=createFollowerProcession({x:0,y:0},["a","b","c","d","e"]);

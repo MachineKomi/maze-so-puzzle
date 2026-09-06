@@ -36,17 +36,17 @@ export function getNextStoryIndex(
 export interface MazeSwitchSnapshot {
   readonly hasActiveRun: boolean;
   readonly status: GameStatus;
-  readonly steps: number;
+  readonly hasProgress: boolean;
   readonly currentLevelId: string;
 }
 
-/** A moved, still-playable run must not be replaced silently. */
+/** A changed, still-playable run must not be replaced silently. */
 export function shouldConfirmMazeSwitch(
   current: MazeSwitchSnapshot,
   nextLevelId: string,
 ): boolean {
   return current.hasActiveRun
     && current.status === "playing"
-    && current.steps > 0
+    && current.hasProgress
     && current.currentLevelId !== nextLevelId;
 }

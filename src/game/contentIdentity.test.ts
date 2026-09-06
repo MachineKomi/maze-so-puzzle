@@ -108,22 +108,22 @@ describe("authored content identity", () => {
     expect(CURATED_LEVELS.map(({ id, contentRevision, gameplayFingerprint: fingerprint }) => (
       [id, contentRevision, fingerprint]
     ))).toEqual([
-      ["little-star-trail", 3, "g-a426cac1"],
-      ["shiny-sword", 3, "g-e731085d"],
-      ["splashy-boots", 3, "g-73530a88"],
-      ["rainbow-picnic", 3, "g-f0db5e48"],
-      ["toasty-toes", 3, "g-bfee41e1"],
-      ["moonbeam-moat", 3, "g-247ecae8"],
-      ["wishing-woods", 3, "g-de70ec9d"],
-      ["ames-grand-parade", 3, "g-80fd1b6f"],
-      ["springstep-sky-hollow", 3, "g-9364ca97"],
-      ["lanternlight-labyrinth", 3, "g-93c18f9e"],
-      ["twilight-treasure-loop", 3, "g-99c8195c"],
-      ["moonlit-friendship-quest", 3, "g-bf6b46f2"],
-      ["rose-heart-roundabout", 3, "g-b83edf75"],
-      ["clover-comeback-carnival", 3, "g-e4a6f74c"],
-      ["friendship-crown-vault", 4, "g-8a888218"],
-      ["rainbow-power-parade", 3, "g-b4b7c32b"],
+      ["little-star-trail", 3, "g-da9a47f7"],
+      ["shiny-sword", 3, "g-7076adaf"],
+      ["splashy-boots", 3, "g-b2047ab6"],
+      ["rainbow-picnic", 3, "g-510d6362"],
+      ["toasty-toes", 3, "g-f8c1704f"],
+      ["moonbeam-moat", 3, "g-937db122"],
+      ["wishing-woods", 3, "g-33675a07"],
+      ["ames-grand-parade", 3, "g-a8a50e65"],
+      ["springstep-sky-hollow", 3, "g-10a9ff01"],
+      ["lanternlight-labyrinth", 3, "g-3eea1e54"],
+      ["twilight-treasure-loop", 3, "g-8c27dbaa"],
+      ["moonlit-friendship-quest", 3, "g-26763d04"],
+      ["rose-heart-roundabout", 3, "g-6578e01b"],
+      ["clover-comeback-carnival", 3, "g-11c194f2"],
+      ["friendship-crown-vault", 4, "g-8f843f6e"],
+      ["rainbow-power-parade", 3, "g-25b3d8e1"],
     ]);
   });
 });

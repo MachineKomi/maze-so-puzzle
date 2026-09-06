@@ -174,6 +174,31 @@ export function movePlayer(
   }
 
   let object = getObjectAt(level, target);
+  if (object?.kind === "animal" && !state.rescuedAnimalIds.includes(object.id)) {
+    if (jumpedHoles.length > 0) {
+      return blocked(state, {
+        type: "blocked",
+        reason: "caged-friend",
+        target,
+      });
+    }
+
+    // Rescue is an interaction from the adjacent square. The accepted input
+    // opens the cage exactly once; entering the cleared square is a deliberate
+    // next move, just like doors and combat.
+    return {
+      state: {
+        ...state,
+        rescuedAnimalIds: addSorted(state.rescuedAnimalIds, object.id),
+      },
+      moved: false,
+      events: [{
+        type: "animal-rescued",
+        objectId: object.id,
+        species: object.species,
+      }],
+    };
+  }
   const events: GameEvent[] = [];
   if (jumpedHoles.length > 0) {
     events.push({
@@ -287,15 +312,6 @@ export function movePlayer(
         to: target,
       });
     }
-  }
-
-  if (object?.kind === "animal" && !rescuedAnimalIds.includes(object.id)) {
-    rescuedAnimalIds = addSorted(rescuedAnimalIds, object.id);
-    events.push({
-      type: "animal-rescued",
-      objectId: object.id,
-      species: object.species,
-    });
   }
 
   if (

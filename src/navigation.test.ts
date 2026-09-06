@@ -43,7 +43,7 @@ describe("shouldConfirmMazeSwitch", () => {
   const activeRun = {
     hasActiveRun: true,
     status: "playing" as const,
-    steps: 7,
+    hasProgress: true,
     currentLevelId: "two",
   };
 
@@ -55,8 +55,12 @@ describe("shouldConfirmMazeSwitch", () => {
     expect(shouldConfirmMazeSwitch(activeRun, "two")).toBe(false);
   });
 
-  it("allows a zero-step run to be replaced", () => {
-    expect(shouldConfirmMazeSwitch({ ...activeRun, steps: 0 }, "three")).toBe(false);
+  it("allows an untouched run to be replaced", () => {
+    expect(shouldConfirmMazeSwitch({ ...activeRun, hasProgress: false }, "three")).toBe(false);
+  });
+
+  it("protects changed progress even when movement steps remain zero", () => {
+    expect(shouldConfirmMazeSwitch({ ...activeRun, hasProgress: true }, "three")).toBe(true);
   });
 
   it("does not protect a completed or lost run", () => {
