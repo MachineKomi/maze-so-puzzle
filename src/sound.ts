@@ -182,7 +182,7 @@ function scheduleNote(
   name: SoundName,
   note: MelodyNote,
   now: number,
-): void {
+): OscillatorNode | undefined {
   if (activeVoices.size >= MAX_ACTIVE_VOICES) return;
 
   const [frequency, delay, length, peakVolume = 0.045, waveform, endFrequency] = note;
@@ -220,11 +220,39 @@ function scheduleNote(
     );
     scheduledOscillator.start(now + delay);
     scheduledOscillator.stop(now + delay + length + 0.02);
+    return scheduledOscillator;
   } catch {
     if (oscillator) activeVoices.delete(oscillator);
     safelyDisconnect(oscillator);
     safelyDisconnect(gain);
   }
+}
+
+export interface SoundHandle { cancel(): void }
+
+/** One soft, pitched grouped arrival through the existing calibrated bus/cap.
+ * This owns only its note; cancelling it cannot silence a combat/music owner. */
+export function playRewardArrival(step: number, muted: boolean): SoundHandle {
+  const empty = { cancel() {} };
+  if (muted) return empty;
+  const ready = readyEffectsOutput();
+  if (!ready) return empty;
+  const frequency = [784, 880, 1047, 1175, 1319][Math.max(0, Math.min(4, Math.floor(step)))]!;
+  const oscillator = scheduleNote(ready.context, ready.output, "powerTick",
+    [frequency, 0, .065, .018, "sine", frequency * 1.12], ready.context.currentTime);
+  let cancelled = false;
+  return { cancel() {
+    if (!oscillator || cancelled) return;
+    cancelled = true;
+    const gain = activeVoices.get(oscillator);
+    if (!gain) return;
+    try {
+      const now = ready.context.currentTime;
+      gain.gain.cancelScheduledValues(now);
+      gain.gain.setTargetAtTime(.0001, now, .004);
+      oscillator.stop(now + .016);
+    } catch { /* Already ended or device disconnected. */ }
+  } };
 }
 
 export function playSound(name: SoundName, muted: boolean): void {

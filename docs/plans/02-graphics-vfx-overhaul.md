@@ -1,5 +1,18 @@
 # Graphics and VFX overhaul plan
 
+## VFX-02A implemented candidate — 2026-09-06
+
+Bounded reward-first code, independent Sol source review and24-case production
+browser qualification are complete; native/frozen publication is in progress.
+[VFX Bible](../VFX_BIBLE.md) now owns the delivered seam, including typed combat
+transfer starts530/960/1400ms (contacts and2220ms total unchanged), grouped exact
+values, one24/12-token Canvas, wall substeps, live presented-Ame homing and
+cancellable musical arrivals. No engine rewards, drop rules, XP or save change.
+This supersedes historical implementation assumptions below, not wholePlan02.
+Next bounded slice: continuous baseline-plus-breathing pickup glows and restrained
+twinkles; then remaining event/receipt/hazard polish. HOLE-02 is independent.
+
+
 ## 2026-09-06 joint refinement — reward-first delivery
 
 The [Astra/Sol next-focus review](../reviews/2026-09-06-v0228-next-focus-disposition.md)

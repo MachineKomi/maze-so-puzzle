@@ -6,6 +6,33 @@ Keep completed observations and build identities when newer builds arrive.
 
 ## Start here
 
+- **Next preview in qualification: v0.22.10 VFX-02A / P14.** The new check is
+  reward scatter/bounce/magnetic collection. Publication links will be updated
+  only after verification; v0.22.9 below remains the published fallback for now.
+
+### P14 — reward showers and magnetic collection
+
+When the displayed build is0.22.10 or newer:
+
+1. Pick up Gold, Science and a Power potion; fight a weak enemy. Do the chunky
+   stars/atoms/rose Power beads scatter and gather into Ame satisfyingly? Combat
+   should show beads after its bashes; no permanent EXP is being awarded yet.
+2. Try a narrow corridor and an open room, then keep moving/turn while collecting.
+   Tokens should bounce off walls, follow visible Ame and not leave stuck effects.
+   Large awards use grouped representatives; amounts must remain exact.
+3. Listen for the short ascending collection notes. They should respect SFX/mute
+   and not drown out music. Note device and mix settings if harsh or inaudible.
+4. Try Full, Lite and Static/reduced motion. Lite has fewer tokens; Static/reduced
+   keep exact existing feedback with no flying loot. Home/resize/background during
+   an effect must not cause delayed showers or sounds afterward.
+5. Check smoothness and save/reopen. The existing iPad camera issue remains open;
+   distinguish ordinary camera motion from any new pickup/combat slowdown.
+
+Please report build, device, maze and anything that felt confusing or unsatisfying.
+No need to complete every inherited checklist in one sitting.
+
+### Earlier published checkpoints
+
 - **Current: v0.22.9 WALL-04A / P13.** Raised walls, smaller texture repeats,
   clearer floor/wall contrast and the reproduced dark ghost-edge fix. No new
   save migration, camera change or loot physics in this release.

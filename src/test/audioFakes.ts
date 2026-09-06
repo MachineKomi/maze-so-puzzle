@@ -7,6 +7,7 @@ export class FakeParam {
   readonly linearRampToValueAtTime = vi.fn((value: number, _at: number) => { this.value = value; });
   readonly cancelScheduledValues = vi.fn();
   readonly cancelAndHoldAtTime = vi.fn();
+  readonly setTargetAtTime = vi.fn();
 }
 export class FakeNode {
   readonly connect = vi.fn();

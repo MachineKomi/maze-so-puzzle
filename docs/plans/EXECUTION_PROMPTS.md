@@ -4,6 +4,16 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
+**Active assignment: finish v0.22.10 VFX-02A qualification/publication.** Root
+Astra owns runtime/build/release; actual Sol independently reviews. Read
+[candidate evidence](../reviews/2026-09-06-vfx02a-candidate.md) and
+[VFX Bible](../VFX_BIBLE.md). Code and24 browser cases are complete. Do not repeat
+implementation or expand drop rules; finish locked native/reopen, source freeze,
+CI/Production, immutable portable and public-download checks. P14 is cumulative.
+After publication, proceed with the bounded continuous pickup-glow/twinkle slice
+of Plan02; retain clean single-writer ownership and physical-device limits.
+
+
 **Current handoff,2026-09-06: v0.22.9 WALL-04A is published and verified.**
 Frozen runtime `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`; root Astra and actual
 Sol accepted source/browser/final native. CI/Production and canonical bytes

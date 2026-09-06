@@ -1,4 +1,6 @@
 import { MazeTerrain, lightVector } from "./ui/game/MazeTerrain";
+import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
+import { rewardSeed } from "./vfx/rewardPhysics";
 import { MiniMap } from "./ui/game/MiniMap";
 import { cameraLayerStyle, cameraNoticeStyle, isInsideWindow } from "./ui/game/sceneGeometry";
 import { describeObject } from "./ui/game/descriptions";
@@ -112,7 +114,7 @@ import { usePresentation } from "./ui/PresentationProvider";
 import { getCurrentInputBlock, type UiInteractionState } from "./ui/interactionState";
 import { PlayShell } from "./ui/game/PlayShell";
 import { usePowerGuidance } from "./ui/game/usePowerGuidance";
-import { MazeViewport, measuredFlight } from "./ui/game/MazeViewport";
+import { MazeViewport } from "./ui/game/MazeViewport";
 import { AdventureHud, type ArtDetail } from "./ui/game/AdventureHud";
 import { buildAdventureHudModel } from "./ui/game/hudModel";
 import { getNextStoryIndex, shouldConfirmMazeSwitch } from "./navigation";
@@ -307,14 +309,6 @@ interface DoorOpeningPresentation {
   readonly color: KeyColor;
   readonly at: Point;
   readonly doorSrc: string;
-}
-
-interface TreasurePresentation {
-  readonly id: number;
-  readonly currency: "gold" | "science";
-  readonly amount: number;
-  readonly at: Point;
-  readonly cameraAtStart: CameraWindow;
 }
 
 function prefersReducedMotion(): boolean {
@@ -746,7 +740,7 @@ function App() {
   const [jumpPresentation, setJumpPresentation] = useState<JumpPresentation | null>(null);
   const [portalPresentation, setPortalPresentation] = useState<PortalPresentation | null>(null);
   const [doorOpeningPresentation, setDoorOpeningPresentation] = useState<DoorOpeningPresentation | null>(null);
-  const [treasurePresentation, setTreasurePresentation] = useState<TreasurePresentation | null>(null);
+  const rewardPort = useRef(EMPTY_REWARD_PORT);
   const [presentedPower, setPresentedPower] = useState<number | null>(null);
   const [presentedEnemyPower, setPresentedEnemyPower] = useState<number | null>(null);
   const appFrameRef = useRef<HTMLElement>(null);
@@ -784,7 +778,6 @@ function App() {
   const blockerBumps = useRef(new Map<string, number>());
   const presentationTimers = useRef(new Set<number>());
   const presentationSequence = useRef(0);
-  const treasureTimer = useRef<number | undefined>(undefined);
   const modalReturnFocus = useRef<HTMLElement | null>(null);
   const frontDoorPlayRef = useRef<HTMLButtonElement>(null);
   const titlePlayRef = useRef<HTMLButtonElement>(null);
@@ -1024,7 +1017,7 @@ function App() {
     bindingKey:[screen, battlePresentation && isInsideWindow(battlePresentation.at,cameraWindow) ? battlePresentation.objectId : "",
       rescuePresentation && isInsideWindow(rescuePresentation.at,cameraWindow) ? rescuePresentation.objectId : "",
       doorOpeningPresentation && isInsideWindow(doorOpeningPresentation.at,cameraWindow) ? doorOpeningPresentation.objectId : "",
-      !!jumpPresentation, !!portalPresentation, mapPickupToast?.id, treasurePresentation?.id].join(":"),
+      !!jumpPresentation, !!portalPresentation, mapPickupToast?.id].join(":"),
     runKey:`${runId}:${travelEpoch.current}`,
     // Sound may change pace while a tile is in flight. Input is inert and held
     // intent is cleared, but the already-captured segment must finish normally.
@@ -1047,6 +1040,7 @@ function App() {
   }, [activeObjects,battlePresentation?.objectId,cameraWindow,explorationMode,revealedTiles]);
 
   const clearPresentationWork = useCallback(() => {
+    rewardPort.current.cancel();
     presentationSequence.current += 1;
     presentationTimers.current.forEach((timer) => window.clearTimeout(timer));
     presentationTimers.current.clear();
@@ -1111,6 +1105,7 @@ function App() {
   ): number => {
     clearPresentationWork();
     const sequence = presentationSequence.current;
+    const rewardStartedAt = performance.now();
     const reducedMotion = prefersReducedMotion();
     const plan = createCombatVictoryPlan({
       powerBefore: event.powerBefore,
@@ -1140,14 +1135,26 @@ function App() {
       schedulePresentationTimer(sequence, () => {
         setPresentedPower(step.playerPower);
         setPresentedEnemyPower(step.enemyPower);
-      }, step.atMs);
+      }, Math.max(0, rewardStartedAt + step.atMs - performance.now()));
     });
     plan.cues.forEach((cue) => {
+      if (!reducedMotion && cue.kind === "power-tick") return;
       schedulePresentationTimer(
         sequence,
         () => playSound(COMBAT_CUE_SOUNDS[cue.kind], mutedRef.current),
         cue.atMs,
       );
+    });
+    if (!reducedMotion) plan.clashes.forEach(clash => {
+      const steps = plan.transferSteps.filter(step => step.clashIndex === clash.index);
+      let prior = plan.transferSteps.filter(step => step.clashIndex < clash.index).at(-1)?.transferredPower ?? 0;
+      const values = steps.map(step => { const amount = step.transferredPower - prior; prior = step.transferredPower; return amount; });
+      const amount = values.reduce((sum, value) => sum + value, 0);
+      if (amount) rewardPort.current.emit({
+        kind: "power", at: enemy.at, amount, seed: rewardSeed(`${runId}:${event.objectId}:${clash.index}`),
+        bornAt: rewardStartedAt + clash.impactMs,
+        arrivals: steps.map(step => step.atMs - clash.impactMs), values,
+      });
     });
 
     const duration = plan.durationMs;
@@ -1162,7 +1169,7 @@ function App() {
     }, Math.max(100, duration - 30));
     finishPresentationAfter(duration);
     return duration;
-  }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer, showMapNotice]);
+  }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer, showMapNotice, runId]);
 
   const beginRescuePresentation = useCallback((
     event: Extract<GameEvent, { type: "animal-rescued" }>,
@@ -1337,8 +1344,6 @@ function App() {
     }
     mapPickupSequence.current += 1;
     setMapPickupToast(null);
-    if (treasureTimer.current !== undefined) window.clearTimeout(treasureTimer.current);
-    setTreasurePresentation(null);
     setLevel(nextLevel);
     setGame(createInitialGameState(nextLevel));
     setRunId(createActiveRunId());
@@ -1467,19 +1472,15 @@ function App() {
     if (treasureEvent) {
       const treasure = level.objects.find((object) => object.kind === "treasure" && object.id === treasureEvent.objectId);
       if (treasure?.kind === "treasure") {
-        if (treasureTimer.current !== undefined) window.clearTimeout(treasureTimer.current);
-        setTreasurePresentation({
-          id: mapPickupSequence.current + 1,
-          currency: treasureEvent.currency,
-          amount: treasureEvent.amount,
-          at: treasure.at,
-          cameraAtStart:sceneTravel.current.camera,
-        });
-        treasureTimer.current = window.setTimeout(() => {
-          setTreasurePresentation(null);
-          treasureTimer.current = undefined;
-        }, prefersReducedMotion() ? 180 : 1050);
+        rewardPort.current.emit({ kind: treasureEvent.currency, amount: treasureEvent.amount,
+          at: treasure.at, seed: rewardSeed(`${runId}:${treasure.id}`) });
       }
+    }
+    const potionEvent = result.events.find(event => event.type === "potion-collected");
+    if (potionEvent) {
+      const potion = level.objects.find(object => object.id === potionEvent.objectId);
+      if (potion) rewardPort.current.emit({ kind: "power", amount: potionEvent.amount,
+        at: potion.at, seed: rewardSeed(`${runId}:${potion.id}`) });
     }
     let presentationDuration = 0;
     if (defeatedEvent) {
@@ -2213,19 +2214,6 @@ function App() {
   const nextMazeLabel = completion?.testerRun
     ? campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length ? "Next test maze" : "Surprise test maze"
     : campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze";
-  const treasureFlightStyle = useMemo(() => {
-    if(!treasurePresentation) return undefined;
-    const board = boardRef.current;
-    const target = appFrameRef.current?.querySelector<HTMLElement>(`[data-ui-anchor="${treasurePresentation.currency}"]`);
-    const shell = appFrameRef.current?.querySelector<HTMLElement>(".play-shell");
-    if (!board || !target || !shell) return undefined;
-    const borderRect=board.getBoundingClientRect();
-    const contentRect={left:borderRect.left+board.clientLeft,top:borderRect.top+board.clientTop,
-      width:sceneTravel.current.contentSize.width,height:sceneTravel.current.contentSize.height};
-    return measuredFlight(contentRect, target.getBoundingClientRect(), shell.getBoundingClientRect(),
-      (treasurePresentation.at.x - treasurePresentation.cameraAtStart.left + .5) / treasurePresentation.cameraAtStart.width,
-      (treasurePresentation.at.y - treasurePresentation.cameraAtStart.top + .5) / treasurePresentation.cameraAtStart.height) as CSSProperties;
-  }, [treasurePresentation]);
   const toggleMuted = () => {
     musicTransport.setMuted(!muted);
     if (muted) void musicTransport.startFromUserGesture();
@@ -2314,13 +2302,6 @@ function App() {
         <div className="ambient-star star-two" aria-hidden="true">✧</div>
 
         <PlayShell blocked={modalOpen}>
-          {treasurePresentation && (
-            <div className={`treasure-flight treasure-flight-${treasurePresentation.currency}`} style={treasureFlightStyle} aria-hidden="true">
-              <CatalogueImage src={treasurePresentation.currency === "gold" ? ASSETS.treasureGoldChest : ASSETS.treasureScienceGears} alt="" />
-              {Array.from({ length: 8 }, (_, index) => <i key={index} style={{ "--mote": index } as CSSProperties}>{treasurePresentation.currency === "gold" ? "★" : "✦"}</i>)}
-              <b>+{treasurePresentation.amount}</b>
-            </div>
-          )}
           <MazeViewport name={level.name}>
             <div
               ref={boardRef}
@@ -2482,7 +2463,7 @@ function App() {
                     "--power-flight-y": `${(battlePresentation.from.y - battlePresentation.at.y) * 100}%`,
                   } as CSSProperties}
                 >
-                  <div className="battle-combatant battle-ame" data-travel-actor="replacement" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
+                  <div className="battle-combatant battle-ame" data-reward-anchor="ame" data-travel-actor="replacement" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
                     <CatalogueImage usage="field" className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
                     {game.hasSword && <CatalogueImage usage="field" className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
@@ -2504,18 +2485,6 @@ function App() {
                       <i style={{ "--spark-angle": `${index * 30}deg` } as CSSProperties} key={index} />
                     ))}
                   </div>
-                  <span
-                    className="battle-power-transfer"
-                    data-travel-camera-anchor=""
-                    style={cameraLayerStyle(battlePresentation.at, cameraWindow)}
-                  >
-                    {Array.from({ length: Math.max(3, battlePresentation.clashCount * 2) }, (_, index) => (
-                      <i
-                        style={{ "--mote-delay": `${385 + index * 220}ms` } as CSSProperties}
-                        key={index}
-                      >✦</i>
-                    ))}
-                  </span>
                 </div>
               )}
 
@@ -2591,6 +2560,7 @@ function App() {
 
               <div
                 data-scene-slot="actors"
+                data-reward-anchor={battlePresentation || jumpPresentation || portalPresentation ? undefined : "ame"}
                 className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
                 style={cameraLayerStyle(game.position, cameraWindow)}
                 aria-hidden="true"
@@ -2599,6 +2569,10 @@ function App() {
                 {game.hasSword && <CatalogueImage usage="field" className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
                 <span className="power-badge player-power">{displayedPower}</span>
               </div>
+
+              <RewardLayer port={rewardPort} level={level} scene={sceneTravel} muted={muted}
+                active={pageVisible && !modalOpen && !jumpPresentation && !portalPresentation && motion === "full"}
+                quality={preferences.quality} />
 
               {mapPickupToast && (
                 <div

@@ -17,6 +17,22 @@ afterEach(() => {
 });
 
 describe("playSound", () => {
+  it("owns and cancels a single calibrated reward voice without touching other cues", async () => {
+    installAudioContext();
+    const { playSound, playRewardArrival } = await import("./sound");
+    await activate();
+    playSound("step", false);
+    const handle = playRewardArrival(2, false);
+    const ctx = contexts[0]!;
+    expect(ctx.oscillators).toHaveLength(2);
+    expect(ctx.oscillators[1]!.frequency.setValueAtTime).toHaveBeenCalledWith(1047, 4);
+    handle.cancel();
+    expect(ctx.oscillators[0]!.stop).toHaveBeenCalledTimes(1);
+    expect(ctx.oscillators[1]!.stop).toHaveBeenCalledTimes(2);
+    expect(() => playRewardArrival(0, true).cancel()).not.toThrow();
+    ctx.oscillators.forEach(voice => voice.finish());
+    expect(() => handle.cancel()).not.toThrow();
+  });
   it("keeps muted and unsupported environments silent", async () => {
     const { playSound } = await import("./sound");
 

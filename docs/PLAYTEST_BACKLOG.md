@@ -6,6 +6,17 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### PT22 / V23-06 / V23-07 / V23-09 — VFX-02A first presentation slice
+
+In qualification for0.22.10: existing committed Gold/Science pickups and potion/
+combat maze-Power use bounded wall-bouncing, magnetic representative tokens,
+short trails and grouped calibrated sound. The Science unit uses the requested
+teal atom motif. No new engine drop tables, Mimic rewards, rescue Gold, egg drops
+or permanent XP are introduced. Those parts remain open with their owning plans;
+this is not a blanket closure of PT22. P14 collects feel/readability/sound/device
+feedback. [VFX contract](VFX_BIBLE.md), [candidate](reviews/2026-09-06-vfx02a-candidate.md).
+
+
 ### PT33 / PT15 / V23-03 — WALL-04A v0.22.9 published
 
 Raised rounded wall faces, coloured signed bevels and floor-only contact now

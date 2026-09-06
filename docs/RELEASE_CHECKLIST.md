@@ -1,6 +1,16 @@
 # Release checklist
 
-## Current published checkpoint — v0.22.8 HOLE-01A
+## Active qualification — v0.22.10 VFX-02A
+
+Current published fallback is v0.22.9 WALL-04A at cbe8ab8; its
+[receipt](../release/WALL-04A-v0.22.9-release-verification.json) owns qualification.
+Reward-first0.22.10 must pass the [VFX contract](VFX_BIBLE.md), actual Sol review,
+post-version tests/build/performance/art/audit, locked native controls and normal
+reopen, frozen-source CI/Production and four independent public downloads.
+Only then update current publication. P14/P5–P13 and iPad remain Human gates;
+new drop tables and permanent XP are not in this release.
+
+## Historical published checkpoint — v0.22.8 HOLE-01A
 
 Frozen runtime/tag `3acaf5872dd921f15929c330eeae46053b2a6362`.
 [Acceptance](reviews/2026-09-06-v0228-engineering-acceptance.md),

@@ -1,5 +1,14 @@
 # Project audit
 
+## VFX-02A qualification — 2026-09-06
+
+Bounded committed reward presentation is implemented with independent actual Sol
+source review,640 project tests,24 production cases and100 cancellation cycles.
+The [candidate](reviews/2026-09-06-vfx02a-candidate.md) records equivalent renderer
+comparison, rejected/limited evidence and budgets. Native/frozen/publication gates
+remain distinct; no complete Plan02, iPad or new economy claim is made.
+
+
 ## Root UI engineering checkpoint — 2026-09-05
 
 The [later root review](reviews/2026-09-05-plan01-return-review.md) accepts the

@@ -6,6 +6,12 @@ Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 continue while playtesting is deferred. Routine engineering choices belong to
 the agents; only material product/art choices need to come back here.
 
+VFX-02A qualification adds no blocking choice. P14 in the playtest checklist
+asks for family reaction to original code-native Gold stars, teal Science atoms
+and rose maze-Power beads, wall bounce/homing and collection sound. These are
+effect symbols, not a replacement of approved world sprites or permanent XP.
+
+
 | ID | Item | Status / next useful Human action |
 | --- | --- | --- |
 | D01 | New simplified hole/ditch artwork | 2026-09-06: Human preferred rounded-square Candidate B and delegated art/design/implementation judgment while busy. [Selection](source-assets/calibrations/hole02/human-selection.json). No new answer needed. Technical connected rendering, publication and later playtest remain distinct gates. |

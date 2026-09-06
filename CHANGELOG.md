@@ -4,6 +4,18 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.22.10 — VFX-02A (release candidate)
+
+- Gold stars, Science atoms and rose Power beads scatter, bounce against walls
+  and gather into the currently rendered Ame, with short trails and grouped
+  musical pickup notes. Combat releases Power at its three existing contacts.
+- Replaces the chest-to-wallet flight and old combat motes. Exact awards/saves
+  remain engine-owned; no new enemy currency, XP or drop tables yet.
+- One bounded, transient Canvas replaces many particle nodes. Lite lowers the
+  token cap; Static/Reduced retain exact notices without flying rewards.
+- No new downloaded art/audio/dependencies, camera change or save migration.
+  Physical iPad camera smoothness and family effect preferences remain open.
+
 ## 0.22.9 — WALL-04A
 
 - Rounded raised wall faces, material-coloured light-facing edges and floor-only

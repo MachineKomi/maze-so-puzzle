@@ -7,6 +7,17 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **In qualification: v0.22.10 VFX-02A, root Astra runtime writer.** Bounded
+  committed Gold/Science/maze-Power scatter, static-wall bounce, presented-Ame
+  homing, trails and grouped collection sound are implemented.640 project tests,
+  24 production cases and100 lifecycle cycles pass; actual Sol source review
+  found no remaining source blocker after clock/cancellation/radius corrections.
+  [Candidate](reviews/2026-09-06-vfx02a-candidate.md) and
+  [VFX contract](VFX_BIBLE.md) own scope. Frozen/native/publication gates are
+  still in progress. No engine/save/new-drop/XP change. Next independent slice
+  is continuous pickup glow and restrained twinkles; connected HOLE-02 remains
+  separately runnable. P14 will collect family reaction; P5–P13 remain open.
+
 - **Current preview: v0.22.9 WALL-04A, published and verified.** Frozen runtime
   `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`; root Astra and actual Sol accepted
   source/browser/final native. CI34034034559 and Production6293082169 succeeded;

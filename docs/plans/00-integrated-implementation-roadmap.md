@@ -4,6 +4,15 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
+**Active qualification: v0.22.10 VFX-02A reward-first.** Source and browser
+checks are complete; frozen/native publication follows. Read the
+[candidate](../reviews/2026-09-06-vfx02a-candidate.md) and [VFX Bible](../VFX_BIBLE.md).
+This delivers committed pickup/Power presentation, not new drops or permanent XP.
+Next bounded visible work is pickup glow/twinkle consistency, followed by the
+remaining Plan02 event/hazard/receipt work. Human-selected HOLE-02 connected art
+can run separately; 04-B/04-C/PT36 remain explicit gates for their own surfaces.
+
+
 **Current checkpoint, 2026-09-06: v0.22.9 WALL-04A published and verified.**
 Frozen `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`: rounded raised walls,
 signed material-coloured bevels, floor-only contact, smaller texture repeats,

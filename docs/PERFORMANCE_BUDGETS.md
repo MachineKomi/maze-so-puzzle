@@ -1,5 +1,16 @@
 # Performance budgets and evidence contract
 
+## VFX-02A candidate allocation — 2026-09-06
+
+v0.22.10 candidate: gzip9 JS161288 (+2645), CSS23655 (-386), public165031011
+(unchanged). Named allocation2700/0/0 is within prototype6500/600/0. Image
+decoded inventory411582176B remains unchanged. A transient Canvas adds at most
+9MiB backing storage plus three64px glyph atlases; it returns1x1 while idle.
+Full24/Lite12 tokens share one callback. Same-workload comparison favors Canvas
+locally; neither Paint events nor loaded-host timings qualify physical iPad/GPU
+performance. [Candidate evidence and limits](reviews/2026-09-06-vfx02a-candidate.md).
+
+
 ## WALL-04A published allocation — 2026-09-06
 
 v0.22.9 frozen `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`: gzip9 JS158643

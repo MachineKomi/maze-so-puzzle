@@ -87,7 +87,7 @@ const STANDARD_CLASHES: readonly CombatClashBeat[] = [
     startMs: 120,
     impactMs: 330,
     endMs: 560,
-    transferStartMs: 350,
+    transferStartMs: 530,
     transferEndMs: 630,
   },
   {
@@ -95,7 +95,7 @@ const STANDARD_CLASHES: readonly CombatClashBeat[] = [
     startMs: 570,
     impactMs: 760,
     endMs: 990,
-    transferStartMs: 780,
+    transferStartMs: 960,
     transferEndMs: 1060,
   },
   {
@@ -103,7 +103,7 @@ const STANDARD_CLASHES: readonly CombatClashBeat[] = [
     startMs: 1020,
     impactMs: 1200,
     endMs: 1500,
-    transferStartMs: 1220,
+    transferStartMs: 1400,
     transferEndMs: 1730,
   },
 ] as const;

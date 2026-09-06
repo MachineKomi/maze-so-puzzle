@@ -33,6 +33,19 @@
   },
   "allocations": [
     {
+      "id": "vfx02a-committed-reward-canvas",
+      "owner": "vfx",
+      "status": "approved",
+      "compressedJsBytes": 2700,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates 2700 gzip9 JS bytes for the measured 2645-byte reward-first candidate, within the reviewed 6500-byte prototype cap. CSS decreases386 bytes; no media, dependency or decoded-image inventory growth. Independent Sol source review and actual browser evidence support this bounded implementation; native/publication gates remain separate.",
+      "evidencePath": "docs/reviews/2026-09-06-vfx02a-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete reward renderer/physics/glyph/audio and combat typed-timing seam to frozen v0.22.9 cbe8ab879bd58c0a08a770209ebfeb649f684e2b. Preserve current saves, rule revisions, wall presentation and approved assets. No data migration or asset deletion is required.",
+      "notes": "Measured161288 JSgzip9,23655 CSS,165031011 public. Full24/Lite12 shared tokens, one rAF, transient viewport Canvas<=1536px peraxis/DPR1.5/9MiB, released1x1 when idle. Same-workload Canvas/DOM comparison,24 production cases and100 lifecycle cycles are local loaded-host evidence, not iPad or acoustic qualification."
+    },
+    {
       "id": "lighting-04a-wall-depth-pt33",
       "owner": "lighting",
       "status": "approved",

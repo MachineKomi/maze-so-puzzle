@@ -7,6 +7,13 @@ state.
 
 ## Runtime flow
 
+VFX-02A adds one presentation-only `src/vfx/RewardLayer.tsx` owner and imperative
+event/cancel port. Immutable committed pickup/combat events seed bounded tile-space
+physics; read-only scene travel and the unique visible Ame anchor project onto
+a transient viewport Canvas. No engine/save/camera mutation, React frame state,
+per-token timer, image download or second reward ledger. [VFX Bible](VFX_BIBLE.md)
+owns cap, cancellation, exact typed combat timing and calibrated sound contracts.
+
 UI-03 retains one presentation-only travel owner in `src/ui/game/useSceneTravel.ts`,
 using the pure orthogonal `TileTraveller` in `src/tileTravel.ts`. It writes CSS
 `translate` through refs, caches ResizeObserver content geometry and exposes a
