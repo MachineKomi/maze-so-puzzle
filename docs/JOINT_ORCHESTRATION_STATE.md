@@ -12,8 +12,8 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   independent Music/SFX levels. Exact-source CI/deployment,519 project tests,
   136 art tests,12 canonical journeys and native normal close/reopen passed.
   [Final acceptance](reviews/2026-09-06-v0223-engineering-acceptance.md).
-  Web is live; four frozen release attachments are prepared in this checkpoint;
-  public-upload verification is recorded only in the later publication receipt.
+  Web and Windows are published; all four public downloads verified byte-identical.
+  [Publication receipt](../release/V22-COMFORT1-v0.22.3-release-verification.json).
   P5/P6/P8 Human acceptance remains open; **no iPad camera fix** is included.
   The older current-preview wording below is retained as publication history.
 
@@ -44,8 +44,9 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - Windows portable173424128 bytes, unsigned x64, version0.22.3; SHA-256
   `3d1d2f5d1f00e3f94d4d7f5c5a7baf74485783d0ecca2c73baf808a29b042110`.
   [Release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.3).
-  Upload/public-download status must be read from the later publication receipt,
-  not inferred from these prepared filenames.
+  GitHub prerelease383420350 has four independently downloaded and hash-matched
+  attachments. Packaging documentation `c77e7d7` is pushed and byte-identical.
+  [Publication receipt](../release/V22-COMFORT1-v0.22.3-release-verification.json).
 - [Manifest](../release/V22-COMFORT1-v0.22.3-manifest.json) and
   [playtest note](../release/V22-COMFORT1-v0.22.3-PLAYTEST.md) preserve scope,
   exact checks, byte budgets, failed attempts and rollback to v0.22.2.
@@ -53,11 +54,18 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   normal OS close/reopen twice, same run/pace/levels restored. Title Exit still
   needs its separately queued repair. No signing/installer/physical listening pass.
 
-Next: finish release transaction; then PLAY-B stationary rescue with Sol as sole
-runtime writer in an isolated worktree and Astra read-only technical reviewer.
+Next: PLAY-B stationary rescue with actual Sol as sole runtime writer in
+`C:/GameDev/maze-game-play-b`, branch `codex/v22-play-b`, starting at pushed
+`c77e7d7e428e1db17ef4fd223cfc9c5614bbe638`. Astra is read-only technical reviewer;
+root may update distinct release/orchestration documents but not runtime.
 [Sol preflight](reviews/2026-09-06-play-b-sol-preflight.md) finds no Human blocker.
-Before handing off, explicitly allocate the proposed bounded growth and record
-the actual starting SHA/worktree. PERF-02 moving-terrain diagnostics remain a
+Astra authorizes up to +900 JS gzip9 bytes for the bounded PLAY-B candidate,
+zero CSS/public/assets/decoded-image/dependency growth; measure the exact delta,
+request review before exceeding it, do not allocate unused capacity as growth.
+Acceptance requires state/route/follower/save/navigation proof; fail-closed old
+active runs must be disclosed while all durable progress survives. Candidate
+branch commits/pushes are backups, not main promotion or family acceptance.
+PERF-02 moving-terrain diagnostics remain a
 separate read-only investigation until writer ownership is available. V22-UI-01
 and AUDIO-01A follow. Do not silently begin Plan04 or treat physical gates as passed.
 
@@ -327,7 +335,7 @@ Read in this order, then only the relevant owned plan/backlog slices:
 3. [Architecture](ARCHITECTURE.md), [gameplay specification](GAMEPLAY_DESIGN_SPEC.md), [Story Bible](STORY_BIBLE.md), [Art Bible](ART_BIBLE.md), [UI contracts](UI_UX_SPEC.md), [performance budgets](PERFORMANCE_BUDGETS.md).
 4. [UI-03 plan](plans/UI-03-fp-ui1-correction.md), [61-row Human intake](playtests/2026-09-05-v021-ui-correction-intake.md), [feedback audit](reviews/2026-09-05-ui03-feedback-audit.md), [root review](reviews/2026-09-05-ui03-root-review.md), [modal-cost review](reviews/2026-09-05-ui03-final-modal-cost.md), [dialog review](reviews/2026-09-05-ui03-dialog-review.md), [inspiration research](reviews/2026-09-05-ui-inspiration-research.md).
 5. [MOVE-01 contract](plans/MOVE-01-smooth-travel-and-camera.md), [earlier movement review](reviews/2026-09-05-move01-review.md); UI-03's later correction evidence supersedes earlier claims about first-tap quality.
-6. [Current release manifest](../release/V22-CAMERA1-v0.22.2-manifest.json), [publication receipt](../release/V22-CAMERA1-v0.22.2-release-verification.json), [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md), [release checklist](RELEASE_CHECKLIST.md).
+6. [Current release manifest](../release/V22-COMFORT1-v0.22.3-manifest.json), [publication receipt](../release/V22-COMFORT1-v0.22.3-release-verification.json), [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md), [release checklist](RELEASE_CHECKLIST.md).
 
 Historical Agent 01 assignments and approvals remain evidence, not instructions to rerun them. UI-03 art additions reuse approved actors: 44 larger actor renditions, authorized Home alpha cleanup and contextual Tessera repair; field identities were retained. Consult publication/provenance records before any later asset work.
 
@@ -339,7 +347,7 @@ Historical Agent 01 assignments and approvals remain evidence, not instructions 
 | v0.21.0 rejected | Source `2924fd73f60229dd244eeba21c05f66afb4eb8b0` in GitHub history. Local `release/Maze-so-Puzzle-0.21.0-FP-UI1-2924fd7-portable.exe`, 165,352,448 bytes, SHA-256 `9d353f8b055afb883da5cb2bf4f51f7fea669279ed4e946a0acf4e7c69be000c`. **No public tag/release**; historical planned download links are unpublished drafts. Source recovery is cross-device; this local binary is not. |
 | v0.22.0 rollback | Frozen `68e303da680d5aec0ba71154949c5a2a0d1697ae` and [immutable prior release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0). Withheld same-version `2f8fa6a` (Home clipping) and non-locked `68e303d` binaries are not approved substitutes. |
 
-Current v0.22.2 and prior v0.22.1 identities are in §2. Close the preview through OS X/Alt+F4 before switching binaries; the unchanged FP-UI1 namespace deliberately shares comparison progress.
+Current v0.22.3 and prior v0.22.2/v0.22.1 identities are in §2. Close the preview through OS X/Alt+F4 before switching binaries; the unchanged FP-UI1 namespace deliberately shares comparison progress.
 
 Historical Vercel identities: v0.20.1 `6tAUShfZgbNfnNhcCkCjAjrbMmGi`; v0.21.0 `5MHu8ECwrntLAkCDczWQGun5STib`. Do not confuse those recorded deployments with today's canonical URL or promise their permanent availability.
 

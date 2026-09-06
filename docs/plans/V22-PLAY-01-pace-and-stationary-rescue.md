@@ -2,6 +2,18 @@
 
 Prepared 2026-09-05 by Astra from PT45/PT48 and current repository inspection.
 Status: build-ready bounded brief; implementation and independent review pending.
+
+Current authorization, 2026-09-06: PLAY-A is complete in published v0.22.3
+`b834a8e`; do not rerun it. PLAY-B is authorized to actual Sol in isolated
+`C:/GameDev/maze-game-play-b` / `codex/v22-play-b`, starting `c77e7d7`.
+Astra independently reviews. [Sol preflight](../reviews/2026-09-06-play-b-sol-preflight.md)
+is incorporated into the implementation contract. Candidate cap: at most +900
+gzip9 JS / zero CSS, public/assets/decoded-image/dependencies against v0.22.3;
+record exact measured allocation and request review before exceeding the cap.
+Old active runs must fail closed with clear updated-maze copy if the rules
+fingerprint changes; durable progress/history/unlocks remain. Stop and report
+any authored/generated cage with no legal adjacent rescue approach; do not
+silently weaken jump legality, solver limits, or save plausibility.
 Sol is the proposed sole runtime writer; Astra reviews each seam before promotion.
 The newly received v0.22.1 iPad movement failure puts V22-PERF-02 ahead of this
 brief in the runtime queue. Pace is not a substitute for fixing movement lag.

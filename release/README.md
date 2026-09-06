@@ -15,8 +15,8 @@ Unsigned x64 portable,173424128 bytes, SHA-256
 `3d1d2f5d1f00e3f94d4d7f5c5a7baf74485783d0ecca2c73baf808a29b042110`.
 Same FP-UI1 save namespace; no installer. Close with X/Alt+F4: title Exit remains
 separately queued. Family listening/pace and affected-iPad scrolling remain open.
-The later publication receipt records actual upload/download verification; this
-packaging checkpoint freezes attachments before upload.
+The [publication receipt](V22-COMFORT1-v0.22.3-release-verification.json) records
+GitHub prerelease383420350 and all four public downloads matching frozen bytes.
 
 ## Historical v0.22.2 camera experiment
 

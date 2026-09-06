@@ -1,0 +1,1015 @@
+{
+  "schema": "maze-family-preview-publication-receipt/v1",
+  "version": "0.22.3",
+  "preview": "V22-COMFORT1",
+  "status": "PUBLISHED_AND_PUBLIC_DOWNLOADS_VERIFIED",
+  "preparedAtUtc": "2026-09-06T00:57:51.179Z",
+  "runtimeSourceCommit": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+  "packagingDocumentationCommit": "c77e7d7e428e1db17ef4fd223cfc9c5614bbe638",
+  "publication": {
+    "schema": "maze-family-preview-public-downloads/v1",
+    "at": "2026-09-06T00:57:18.231Z",
+    "runtimeSourceCommit": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+    "releaseId": 383420350,
+    "releaseURL": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.3",
+    "tag": {
+      "ref": "refs/tags/v0.22.3",
+      "node_id": "REF_kwDOUKIx0rFyZWZzL3RhZ3MvdjAuMjIuMw",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs/tags/v0.22.3",
+      "object": {
+        "sha": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+        "type": "commit",
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits/b834a8e6775ec024fc9f854c7a7ced8c096b6627"
+      }
+    },
+    "prerelease": true,
+    "downloads": [
+      {
+        "name": "Maze-so-Puzzle-0.22.3-V22-COMFORT1-b834a8e-locked-portable.exe",
+        "bytes": 173424128,
+        "sha256": "3d1d2f5d1f00e3f94d4d7f5c5a7baf74485783d0ecca2c73baf808a29b042110",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.3/Maze-so-Puzzle-0.22.3-V22-COMFORT1-b834a8e-locked-portable.exe",
+        "assetId": 546531979,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-COMFORT1-v0.22.3-manifest.json",
+        "bytes": 53810,
+        "sha256": "12d2662b6ce9edf592f3045cf2cb1aa4b47a557f2fb8625e3d33628c6ec42d76",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.3/V22-COMFORT1-v0.22.3-manifest.json",
+        "assetId": 546533417,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-COMFORT1-v0.22.3-PLAYTEST.md",
+        "bytes": 2747,
+        "sha256": "affeb27cfaf76b947be9018d58c9aad4822b0b640c5ba94ecb16cc88d3d876c4",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.3/V22-COMFORT1-v0.22.3-PLAYTEST.md",
+        "assetId": 546533429,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      },
+      {
+        "name": "V22-COMFORT1-v0.22.3-SHA256SUMS.txt",
+        "bytes": 329,
+        "sha256": "97314251a2cd6177ec26d910957a2c25c1220617179c4e50a924c22a0ce34212",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.3/V22-COMFORT1-v0.22.3-SHA256SUMS.txt",
+        "assetId": 546533438,
+        "httpStatus": 200,
+        "independentPublicDownloadMatch": true
+      }
+    ],
+    "manifestSHA256": "12d2662b6ce9edf592f3045cf2cb1aa4b47a557f2fb8625e3d33628c6ec42d76"
+  },
+  "build": {
+    "command": "node node_modules/@tauri-apps/cli/tauri.js build --no-bundle --ci -- --locked",
+    "provenance": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-06T00:33:44.392Z",
+      "commit": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+      "runtimeInputsSha256": "98e6dd7d2fd74191c7c21590ad95bb7c1e4924f453f9cd476a603a10361d6b76",
+      "distFingerprintSha256": "b3ed0d3a0af0e75a4a63dde8d61fd40622f381078c1b60d27b1c2df9d4a160e8",
+      "buildCommand": "npm run build"
+    },
+    "staticBudgets": {
+      "jsGzip9Bytes": 154875,
+      "jsAllowed": 154898,
+      "cssGzip9Bytes": 23563,
+      "cssAllowed": 30280,
+      "publicBytes": 165031011,
+      "publicAllowed": 165031011
+    }
+  },
+  "checks": {
+    "project": {
+      "status": "pass",
+      "command": "npm run check",
+      "result": "519/519 tests across50 files, TypeScript and production build passed in fresh frozen checkout",
+      "evidencePaths": [
+        "C:/maze-game/docs/reviews/2026-09-06-v0223-engineering-acceptance.md"
+      ]
+    },
+    "typescriptAndBuild": {
+      "status": "pass",
+      "command": "npm run check; npm run tauri -- build --no-bundle --ci -- --locked",
+      "result": "TypeScript/build passed including native beforeBuild",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0223/native-build.log"
+      ]
+    },
+    "performanceContracts": {
+      "status": "pass",
+      "command": "npm run perf:check",
+      "result": "All deterministic gates passed: JS154875 CSS23563 public165031011",
+      "evidencePaths": [
+        "C:/maze-game/docs/reviews/2026-09-06-v0223-engineering-acceptance.md"
+      ]
+    },
+    "art": {
+      "status": "pass",
+      "command": "npm run art:check; npm run art:test",
+      "result": "Final r3 zero errors429 historical warnings;136 tests passed; earlier CRLF failures retained",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0223/art-check-r3.log",
+        "C:/GameDev/maze-game-qa/releases/v0223/art-test.log"
+      ]
+    },
+    "desktop": {
+      "status": "pass",
+      "command": "npm run check:desktop; locked no-bundle Tauri build; native-smoke.mjs release-config.json r2",
+      "result": "Compile/build passed; native normal close/reopen and settings/save persistence passed in WebView2 152.0.4191.62",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0223/desktop-check.log",
+        "C:/GameDev/maze-game-qa/releases/v0223/native-summary.json"
+      ]
+    },
+    "productionAudit": {
+      "status": "pass",
+      "command": "npm ci; npm audit --omit=dev",
+      "result": "Zero vulnerabilities reported",
+      "evidencePaths": [
+        "C:/maze-game/docs/reviews/2026-09-06-v0223-engineering-acceptance.md"
+      ]
+    },
+    "paceAndAudio": {
+      "status": "pass",
+      "command": "Existing canonical browser journeys; production Edge audio gain/UI probe; native smoke",
+      "result": "12 canonical journeys; measured gain, persistence and blocked storage tests; no physical loudness or iPad camera claim",
+      "evidencePaths": [
+        "C:/GameDev/maze-game-qa/releases/v0223/canonical/playwright-results.json",
+        "C:/maze-game/docs/reviews/2026-09-06-audio01v-browser-probe.json"
+      ]
+    }
+  },
+  "ci": {
+    "runId": 34001890372,
+    "headSHA": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "verify",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34001890372/job/101402110820"
+      },
+      {
+        "name": "desktop",
+        "conclusion": "success",
+        "url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34001890372/job/101402110911"
+      }
+    ]
+  },
+  "web": {
+    "schema": "maze-family-preview-web-verification/v1",
+    "at": "2026-09-06T00:48:47.118Z",
+    "runtimeSourceCommit": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+    "canonicalURL": "https://maze-so-puzzle.vercel.app/",
+    "allBytesMatch": true,
+    "files": [
+      {
+        "path": "/",
+        "httpStatus": 200,
+        "bytes": 1070,
+        "sha256": "f7235b41d5fffac3db872817bbe3bf1177d84c3b12bf8ffe8a320f20dc6d2658",
+        "localSHA256": "f7235b41d5fffac3db872817bbe3bf1177d84c3b12bf8ffe8a320f20dc6d2658",
+        "match": true
+      },
+      {
+        "path": "/assets/index-DBWUGGQQ.js",
+        "httpStatus": 200,
+        "bytes": 568574,
+        "sha256": "0c3986b67b5b4f3b24f9e88ce1c259e82c22e3f5bfbbc536fdc6f3d43427e803",
+        "localSHA256": "0c3986b67b5b4f3b24f9e88ce1c259e82c22e3f5bfbbc536fdc6f3d43427e803",
+        "match": true
+      },
+      {
+        "path": "/assets/index-CvgFqWZo.css",
+        "httpStatus": 200,
+        "bytes": 116346,
+        "sha256": "1f23b663b12699e2b878cb363d885e5b7702a4393fc9f7ce305371026f0202bc",
+        "localSHA256": "1f23b663b12699e2b878cb363d885e5b7702a4393fc9f7ce305371026f0202bc",
+        "match": true
+      }
+    ],
+    "build": {
+      "schema": "maze-performance-build-provenance/v1",
+      "generatedAtUtc": "2026-09-06T00:33:44.392Z",
+      "commit": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+      "runtimeInputsSha256": "98e6dd7d2fd74191c7c21590ad95bb7c1e4924f453f9cd476a603a10361d6b76",
+      "distFingerprintSha256": "b3ed0d3a0af0e75a4a63dde8d61fd40622f381078c1b60d27b1c2df9d4a160e8",
+      "buildCommand": "npm run build"
+    },
+    "ci": {
+      "id": 34001890372,
+      "name": "Browser build",
+      "node_id": "WFR_kwLOUKIx0s8AAAAH6qusRA",
+      "head_branch": "main",
+      "head_sha": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+      "path": ".github/workflows/ci.yml",
+      "display_title": "chore(release): freeze v0.22.3 comfort preview",
+      "run_number": 115,
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "workflow_id": 347003157,
+      "check_suite_id": 92133685278,
+      "check_suite_node_id": "CS_kwDOUKIx0s8AAAAVc5h4Hg",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372",
+      "html_url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34001890372",
+      "pull_requests": [],
+      "created_at": "2026-09-06T00:40:09Z",
+      "updated_at": "2026-09-06T00:41:40Z",
+      "actor": {
+        "login": "MachineKomi",
+        "id": 136615872,
+        "node_id": "U_kgDOCCSXwA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MachineKomi",
+        "html_url": "https://github.com/MachineKomi",
+        "followers_url": "https://api.github.com/users/MachineKomi/followers",
+        "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+        "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+        "repos_url": "https://api.github.com/users/MachineKomi/repos",
+        "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [],
+      "run_started_at": "2026-09-06T00:40:09Z",
+      "triggering_actor": {
+        "login": "MachineKomi",
+        "id": 136615872,
+        "node_id": "U_kgDOCCSXwA",
+        "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/MachineKomi",
+        "html_url": "https://github.com/MachineKomi",
+        "followers_url": "https://api.github.com/users/MachineKomi/followers",
+        "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+        "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+        "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+        "repos_url": "https://api.github.com/users/MachineKomi/repos",
+        "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372/jobs",
+      "logs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372/logs",
+      "check_suite_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/check-suites/92133685278",
+      "artifacts_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372/artifacts",
+      "cancel_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372/cancel",
+      "rerun_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/workflows/347003157",
+      "head_commit": {
+        "id": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+        "tree_id": "5fa3ced53358376de88bb33768ca3a629015a452",
+        "message": "chore(release): freeze v0.22.3 comfort preview",
+        "timestamp": "2026-09-06T00:27:49Z",
+        "author": {
+          "name": "jjackson3d",
+          "email": "jjackson3d@gmail.com"
+        },
+        "committer": {
+          "name": "jjackson3d",
+          "email": "jjackson3d@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1352806866,
+        "node_id": "R_kgDOUKIx0g",
+        "name": "maze-so-puzzle",
+        "full_name": "MachineKomi/maze-so-puzzle",
+        "private": false,
+        "owner": {
+          "login": "MachineKomi",
+          "id": 136615872,
+          "node_id": "U_kgDOCCSXwA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/MachineKomi",
+          "html_url": "https://github.com/MachineKomi",
+          "followers_url": "https://api.github.com/users/MachineKomi/followers",
+          "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+          "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+          "repos_url": "https://api.github.com/users/MachineKomi/repos",
+          "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/MachineKomi/maze-so-puzzle",
+        "description": "A fun family friendly maze game - runs in browser as a webapp and as a desktop app wrapped with tauri",
+        "fork": false,
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "forks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/forks",
+        "keys_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/teams",
+        "hooks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/hooks",
+        "issue_events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/events",
+        "assignees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/tags",
+        "blobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/languages",
+        "stargazers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/stargazers",
+        "contributors_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contributors",
+        "subscribers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscribers",
+        "subscription_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscription",
+        "commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/merges",
+        "archive_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/downloads",
+        "issues_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/labels{/name}",
+        "releases_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments"
+      },
+      "head_repository": {
+        "id": 1352806866,
+        "node_id": "R_kgDOUKIx0g",
+        "name": "maze-so-puzzle",
+        "full_name": "MachineKomi/maze-so-puzzle",
+        "private": false,
+        "owner": {
+          "login": "MachineKomi",
+          "id": 136615872,
+          "node_id": "U_kgDOCCSXwA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/MachineKomi",
+          "html_url": "https://github.com/MachineKomi",
+          "followers_url": "https://api.github.com/users/MachineKomi/followers",
+          "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+          "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+          "repos_url": "https://api.github.com/users/MachineKomi/repos",
+          "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/MachineKomi/maze-so-puzzle",
+        "description": "A fun family friendly maze game - runs in browser as a webapp and as a desktop app wrapped with tauri",
+        "fork": false,
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "forks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/forks",
+        "keys_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/teams",
+        "hooks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/hooks",
+        "issue_events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/events",
+        "assignees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/tags",
+        "blobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/languages",
+        "stargazers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/stargazers",
+        "contributors_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contributors",
+        "subscribers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscribers",
+        "subscription_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscription",
+        "commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/merges",
+        "archive_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/downloads",
+        "issues_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/labels{/name}",
+        "releases_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments"
+      }
+    },
+    "jobs": {
+      "total_count": 2,
+      "jobs": [
+        {
+          "id": 101402110820,
+          "run_id": 34001890372,
+          "workflow_name": "Browser build",
+          "head_branch": "main",
+          "run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372",
+          "run_attempt": 1,
+          "node_id": "CR_kwDOUKIx0s8AAAAXnAlrZA",
+          "head_sha": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+          "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/jobs/101402110820",
+          "html_url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34001890372/job/101402110820",
+          "status": "completed",
+          "conclusion": "success",
+          "created_at": "2026-09-06T00:40:09Z",
+          "started_at": "2026-09-06T00:40:11Z",
+          "completed_at": "2026-09-06T00:41:08Z",
+          "name": "verify",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-09-06T00:40:11Z",
+              "completed_at": "2026-09-06T00:40:12Z"
+            },
+            {
+              "name": "Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-09-06T00:40:12Z",
+              "completed_at": "2026-09-06T00:40:26Z"
+            },
+            {
+              "name": "Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-09-06T00:40:26Z",
+              "completed_at": "2026-09-06T00:40:27Z"
+            },
+            {
+              "name": "Install locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-09-06T00:40:27Z",
+              "completed_at": "2026-09-06T00:40:30Z"
+            },
+            {
+              "name": "Test and build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-09-06T00:40:30Z",
+              "completed_at": "2026-09-06T00:41:05Z"
+            },
+            {
+              "name": "Validate performance contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-09-06T00:41:05Z",
+              "completed_at": "2026-09-06T00:41:06Z"
+            },
+            {
+              "name": "Audit production dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-09-06T00:41:06Z",
+              "completed_at": "2026-09-06T00:41:06Z"
+            },
+            {
+              "name": "Post Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-09-06T00:41:06Z",
+              "completed_at": "2026-09-06T00:41:07Z"
+            },
+            {
+              "name": "Post Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-09-06T00:41:07Z",
+              "completed_at": "2026-09-06T00:41:07Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-09-06T00:41:07Z",
+              "completed_at": "2026-09-06T00:41:07Z"
+            }
+          ],
+          "check_run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/check-runs/101402110820",
+          "labels": [
+            "ubuntu-latest"
+          ],
+          "runner_id": 1000000264,
+          "runner_name": "GitHub Actions 1000000264",
+          "runner_group_id": 0,
+          "runner_group_name": "GitHub Actions"
+        },
+        {
+          "id": 101402110911,
+          "run_id": 34001890372,
+          "workflow_name": "Browser build",
+          "head_branch": "main",
+          "run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/runs/34001890372",
+          "run_attempt": 1,
+          "node_id": "CR_kwDOUKIx0s8AAAAXnAlrvw",
+          "head_sha": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+          "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/actions/jobs/101402110911",
+          "html_url": "https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34001890372/job/101402110911",
+          "status": "completed",
+          "conclusion": "success",
+          "created_at": "2026-09-06T00:40:09Z",
+          "started_at": "2026-09-06T00:40:12Z",
+          "completed_at": "2026-09-06T00:41:40Z",
+          "name": "desktop",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-09-06T00:40:12Z",
+              "completed_at": "2026-09-06T00:40:14Z"
+            },
+            {
+              "name": "Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-09-06T00:40:14Z",
+              "completed_at": "2026-09-06T00:40:29Z"
+            },
+            {
+              "name": "Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-09-06T00:40:29Z",
+              "completed_at": "2026-09-06T00:40:38Z"
+            },
+            {
+              "name": "Use stable Rust",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-09-06T00:40:38Z",
+              "completed_at": "2026-09-06T00:40:57Z"
+            },
+            {
+              "name": "Cache Rust build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-09-06T00:40:57Z",
+              "completed_at": "2026-09-06T00:41:13Z"
+            },
+            {
+              "name": "Install locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-09-06T00:41:13Z",
+              "completed_at": "2026-09-06T00:41:19Z"
+            },
+            {
+              "name": "Check Windows desktop build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-09-06T00:41:19Z",
+              "completed_at": "2026-09-06T00:41:34Z"
+            },
+            {
+              "name": "Post Cache Rust build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-09-06T00:41:34Z",
+              "completed_at": "2026-09-06T00:41:34Z"
+            },
+            {
+              "name": "Post Use Node.js 22",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-09-06T00:41:34Z",
+              "completed_at": "2026-09-06T00:41:37Z"
+            },
+            {
+              "name": "Post Check out source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-09-06T00:41:37Z",
+              "completed_at": "2026-09-06T00:41:38Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-09-06T00:41:38Z",
+              "completed_at": "2026-09-06T00:41:38Z"
+            }
+          ],
+          "check_run_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/check-runs/101402110911",
+          "labels": [
+            "windows-latest"
+          ],
+          "runner_id": 1000000265,
+          "runner_name": "GitHub Actions 1000000265",
+          "runner_group_id": 0,
+          "runner_group_name": "GitHub Actions"
+        }
+      ]
+    },
+    "statuses": {
+      "state": "success",
+      "statuses": [
+        {
+          "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+          "avatar_url": "https://avatars.githubusercontent.com/in/8329?v=4",
+          "id": 53614064348,
+          "node_id": "SC_kwDOUKIx0s8AAAAMe6Wy3A",
+          "state": "success",
+          "description": "Deployment has completed",
+          "target_url": "https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/D2JUX8gLqeBU7CjEuL5MDCwhp6Y5",
+          "context": "Vercel",
+          "created_at": "2026-09-06T00:40:41Z",
+          "updated_at": "2026-09-06T00:40:41Z"
+        }
+      ],
+      "sha": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+      "total_count": 1,
+      "repository": {
+        "id": 1352806866,
+        "node_id": "R_kgDOUKIx0g",
+        "name": "maze-so-puzzle",
+        "full_name": "MachineKomi/maze-so-puzzle",
+        "private": false,
+        "owner": {
+          "login": "MachineKomi",
+          "id": 136615872,
+          "node_id": "U_kgDOCCSXwA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/136615872?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/MachineKomi",
+          "html_url": "https://github.com/MachineKomi",
+          "followers_url": "https://api.github.com/users/MachineKomi/followers",
+          "following_url": "https://api.github.com/users/MachineKomi/following{/other_user}",
+          "gists_url": "https://api.github.com/users/MachineKomi/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/MachineKomi/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/MachineKomi/subscriptions",
+          "organizations_url": "https://api.github.com/users/MachineKomi/orgs",
+          "repos_url": "https://api.github.com/users/MachineKomi/repos",
+          "events_url": "https://api.github.com/users/MachineKomi/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/MachineKomi/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/MachineKomi/maze-so-puzzle",
+        "description": "A fun family friendly maze game - runs in browser as a webapp and as a desktop app wrapped with tauri",
+        "fork": false,
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "forks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/forks",
+        "keys_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/teams",
+        "hooks_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/hooks",
+        "issue_events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/events",
+        "assignees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/tags",
+        "blobs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/languages",
+        "stargazers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/stargazers",
+        "contributors_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contributors",
+        "subscribers_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscribers",
+        "subscription_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/subscription",
+        "commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/merges",
+        "archive_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/downloads",
+        "issues_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/labels{/name}",
+        "releases_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments"
+      },
+      "commit_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits/b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+      "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/commits/b834a8e6775ec024fc9f854c7a7ced8c096b6627/status"
+    },
+    "production": [
+      {
+        "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6287529696",
+        "id": 6287529696,
+        "node_id": "DE_kwDOUKIx0s8AAAABdsQW4A",
+        "task": "deploy",
+        "original_environment": "Production",
+        "environment": "Production",
+        "description": null,
+        "created_at": "2026-09-06T00:40:41Z",
+        "updated_at": "2026-09-06T00:40:41Z",
+        "statuses_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6287529696/statuses",
+        "repository_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+        "creator": {
+          "login": "vercel[bot]",
+          "id": 35613825,
+          "node_id": "MDM6Qm90MzU2MTM4MjU=",
+          "avatar_url": "https://avatars.githubusercontent.com/in/8329?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/vercel%5Bbot%5D",
+          "html_url": "https://github.com/apps/vercel",
+          "followers_url": "https://api.github.com/users/vercel%5Bbot%5D/followers",
+          "following_url": "https://api.github.com/users/vercel%5Bbot%5D/following{/other_user}",
+          "gists_url": "https://api.github.com/users/vercel%5Bbot%5D/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/vercel%5Bbot%5D/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/vercel%5Bbot%5D/subscriptions",
+          "organizations_url": "https://api.github.com/users/vercel%5Bbot%5D/orgs",
+          "repos_url": "https://api.github.com/users/vercel%5Bbot%5D/repos",
+          "events_url": "https://api.github.com/users/vercel%5Bbot%5D/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/vercel%5Bbot%5D/received_events",
+          "type": "Bot",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "sha": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+        "ref": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+        "payload": {},
+        "transient_environment": false,
+        "production_environment": false,
+        "performed_via_github_app": null,
+        "statuses": [
+          {
+            "url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6287529696/statuses/17883452088",
+            "id": 17883452088,
+            "node_id": "DES_kwDOUKIx0s8AAAAEKe_SuA",
+            "state": "success",
+            "creator": {
+              "login": "vercel[bot]",
+              "id": 35613825,
+              "node_id": "MDM6Qm90MzU2MTM4MjU=",
+              "avatar_url": "https://avatars.githubusercontent.com/in/8329?v=4",
+              "gravatar_id": "",
+              "url": "https://api.github.com/users/vercel%5Bbot%5D",
+              "html_url": "https://github.com/apps/vercel",
+              "followers_url": "https://api.github.com/users/vercel%5Bbot%5D/followers",
+              "following_url": "https://api.github.com/users/vercel%5Bbot%5D/following{/other_user}",
+              "gists_url": "https://api.github.com/users/vercel%5Bbot%5D/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/vercel%5Bbot%5D/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/vercel%5Bbot%5D/subscriptions",
+              "organizations_url": "https://api.github.com/users/vercel%5Bbot%5D/orgs",
+              "repos_url": "https://api.github.com/users/vercel%5Bbot%5D/repos",
+              "events_url": "https://api.github.com/users/vercel%5Bbot%5D/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/vercel%5Bbot%5D/received_events",
+              "type": "Bot",
+              "user_view_type": "public",
+              "site_admin": false
+            },
+            "description": "Deployment has completed",
+            "environment": "Production",
+            "target_url": "https://maze-so-puzzle-dqvs026la-jasons-projects-6714ffa7.vercel.app",
+            "created_at": "2026-09-06T00:40:41Z",
+            "updated_at": "2026-09-06T00:40:41Z",
+            "deployment_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle/deployments/6287529696",
+            "repository_url": "https://api.github.com/repos/MachineKomi/maze-so-puzzle",
+            "environment_url": "https://maze-so-puzzle-dqvs026la-jasons-projects-6714ffa7.vercel.app",
+            "log_url": "https://maze-so-puzzle-dqvs026la-jasons-projects-6714ffa7.vercel.app",
+            "performed_via_github_app": null
+          }
+        ]
+      }
+    ]
+  },
+  "native": {
+    "schema": "maze-native-family-smoke/v1",
+    "status": "pass",
+    "runtimeSourceCommit": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+    "version": "0.22.3",
+    "webView2Version": "152.0.4191.62",
+    "portable": {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/attachments/Maze-so-Puzzle-0.22.3-V22-COMFORT1-b834a8e-locked-portable.exe",
+      "bytes": 173424128,
+      "sha256": "3d1d2f5d1f00e3f94d4d7f5c5a7baf74485783d0ecca2c73baf808a29b042110"
+    },
+    "fixture": {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/native-fixture.json",
+      "bytes": 7806,
+      "sha256": "60169a5409268c45fc452f2fa04deb4ee86671a7d7866ed037534e09de8934ce"
+    },
+    "profile": "Fresh synthetic profile under external v0223 evidence; no Human profile copied or changed",
+    "settings": {
+      "beforeClose": {
+        "motion": "full",
+        "quality": "full",
+        "pace": "zippy",
+        "musicVolume": 0.12,
+        "sfxVolume": 0.64
+      },
+      "afterReopen": {
+        "motion": "full",
+        "quality": "full",
+        "pace": "zippy",
+        "musicVolume": 0.12,
+        "sfxVolume": 0.64
+      }
+    },
+    "records": [
+      {
+        "name": "01-native-title",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0223/native-attempts/r2/01-native-title.png",
+          "bytes": 1446270,
+          "sha256": "46a81e10f70f5e105bb9a11d8a66f1d6da094cd16f3c8f587641ea67bf28b359"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle\nPlay\nExit\nv0.22.3",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "name": "02-native-maze",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0223/native-attempts/r2/02-native-maze.png",
+          "bytes": 772329,
+          "sha256": "b8f03efa5b2f715b2dacd8cad6b098a5c19dd60c5f1c67cc344381199474405a"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\nHEART\n2\n\nAme is at column 8, row 8. Up: open path. Right: open path. Down: open path. Left: wall.\n\nFind the sword and Rose Heart Key!\nStory maze 2 of 16\nShiny Sword\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n4 steps\nRight now\n\nFind the sword and Rose Heart Key!\n\nHint\nMy map\n30%\nNow\nExplored\nMystery\n\nAme is at column 8, row 8. The exit has not been discovered yet. Discovered landmarks: caged fox at column 8, row 6; comet spear at column 10, row 6; rose heart key at column 6, row 8.\n\nFriends\n0/2\nOptional\nAdventure bag\n0/2\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "name": "03-native-sound-pace",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0223/native-attempts/r2/03-native-sound-pace.png",
+          "bytes": 463369,
+          "sha256": "c8f0a7eb4bab8e5d879b0ad14d4d5a2498160e92f22582302d31bf1c798cc0c2"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\nHEART\n2\n\nAme is at column 8, row 8. Up: open path. Right: open path. Down: open path. Left: wall.\n\nFind the sword and Rose Heart Key!\nStory maze 2 of 16\nShiny Sword\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n4 steps\nRight now\n\nFind the sword and Rose Heart Key!\n\nHint\nMy map\n30%\nNow\nExplored\nMystery\n\nAme is at column 8, row 8. The exit has not been discovered yet. Discovered landmarks: caged fox at column 8, row 6; comet spear at column 10, row 6; rose heart key at column 6, row 8.\n\nFriends\n0/2\nOptional\nAdventure bag\n0/2\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory\nSound & comfort\n\nMaze Snowflakes Star Keys B\n\nMute\nPrevious\nNext track\nShuffle\nMusic\n12%\nSound effects\n64%\nTest sound\nMotion\nUse device setting\nFull\nReduced\nSurface quality\nfull\nlite\nstatic\nMovement pace\nZippy →\n\nThese comfort settings stay when you reset your adventure.\n\nBack to the adventure",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "name": "04-native-movement",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0223/native-attempts/r2/04-native-movement.png",
+          "bytes": 779281,
+          "sha256": "b79b0d5382bded7b3c36736db113a692ad114086e2f882c2a4a0df3ccbd404b2"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\nHEART\n2\n\nAme is at column 8, row 7. Up: caged fox. Right: wall. Down: open path. Left: wall.\n\nFind the sword and Rose Heart Key!\nStory maze 2 of 16\nShiny Sword\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n7 steps\nRight now\n\nFind the sword and Rose Heart Key!\n\nHint\nMy map\n35%\nNow\nExplored\nMystery\n\nAme is at column 8, row 7. The exit has not been discovered yet. Discovered landmarks: caged fox at column 8, row 6; comet spear at column 10, row 6; rose heart key at column 6, row 8.\n\nFriends\n0/2\nOptional\nAdventure bag\n0/2\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "normalOSWindowClose": true,
+        "pid": 30616
+      },
+      {
+        "name": "05-native-reopened-settings",
+        "screenshot": {
+          "path": "C:/GameDev/maze-game-qa/releases/v0223/native-attempts/r2/05-native-reopened-settings.png",
+          "bytes": 461126,
+          "sha256": "ba9d2e125738b146009a72bd6d15f8610bba36d34c3c46551bb63a8eb6c9a72e"
+        },
+        "url": "http://tauri.localhost/",
+        "text": "Maze so Puzzle: For Ame to Solve!\nHEART\n2\n\nAme is at column 8, row 7. Up: caged fox. Right: wall. Down: open path. Left: wall.\n\nFind the sword and Rose Heart Key!\nStory maze 2 of 16\nShiny Sword\nPower\n2\n2\nGold\n0\n0\nScience\n0\n0\n7 steps\nRight now\n\nFind the sword and Rose Heart Key!\n\nHint\nMy map\n35%\nNow\nExplored\nMystery\n\nAme is at column 8, row 7. The exit has not been discovered yet. Discovered landmarks: caged fox at column 8, row 6; comet spear at column 10, row 6; rose heart key at column 6, row 8.\n\nFriends\n0/2\nOptional\nAdventure bag\n0/2\n▲\n◀\n▶\n▼\nHome\nMazes\nBook\nHelp\nMute\nSound\nRestart\nStory\nSound & comfort\n\nMaze Poggle Puzzle Room A\n\nMute\nPrevious\nNext track\nShuffle\nMusic\n12%\nSound effects\n64%\nTest sound\nMotion\nUse device setting\nFull\nReduced\nSurface quality\nfull\nlite\nstatic\nMovement pace\nZippy →\n\nThese comfort settings stay when you reset your adventure.\n\nBack to the adventure",
+        "dimensions": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      {
+        "normalOSWindowClose": true,
+        "pid": 30152
+      }
+    ],
+    "errors": [],
+    "scope": "Actual native title/Home, seeded saved maze, pace/sliders/mute UI, ordinary movement, normal OS close/reopen and save/preferences persistence",
+    "limits": [
+      "No actual effective-gain or acoustic audibility claim from these UI assertions; use separate AUDIO-01V graph/listening evidence.",
+      "No native sustained-timing, physical-iPad efficacy, installer, signing, offline or clean-machine qualification.",
+      "Title Exit is not used or accepted by this smoke."
+    ]
+  },
+  "reviewAuthority": {
+    "reviewer": "Astra final engineering qualification; actual Sol independent accepted-component source review",
+    "reviewedSource": "b834a8e6775ec024fc9f854c7a7ced8c096b6627",
+    "decision": "Accepted for versioned family preview; frozen checks by Astra, not a Sol or physical-device test claim",
+    "recordPath": "C:/maze-game/docs/reviews/2026-09-06-v0223-engineering-acceptance.md"
+  },
+  "attachmentPolicy": "Four uploaded attachments and exact-source tag stay immutable; this receipt is a later documentation checkpoint.",
+  "openGates": [
+    "Physical iPad, phone, laptop and Windows listening and pace comfort remain Human checks; graph attenuation is not speaker-output evidence.",
+    "No camera-performance fix; iPad scrolling remains unresolved. No stationary rescue or phone UI correction in this build.",
+    "No predictive music readiness/crossfade or creative sound-design pass; first interrupted Mute/Next gesture needs physical listening.",
+    "Unsigned portable only: no installer, signing, clean-machine, offline or sustained performance qualification.",
+    "Native title Exit still has a separately queued window-close issue; use OS X/Alt+F4.",
+    "Original failed art line-ending and native-close timeout attempts remain rejected evidence. Raw external proofs/private test profiles are not all in Git."
+  ],
+  "rollback": {
+    "runtime": "820ed39f00e8c6bd808a0c084ccc2c67396ebb13",
+    "release": "https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.2",
+    "instructions": "Keep earlier downloads immutable. Coordinate a reviewed revert/redeploy without rewriting shared history or deleting player data."
+  },
+  "helperRecords": [
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/release-lib.mjs",
+      "bytes": 8630,
+      "sha256": "2b5b3211086bc610c0c2578fa35a5f871aa84e8212509424f4a01f136fac8785"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/stage-native.ps1",
+      "bytes": 3531,
+      "sha256": "c10cb167a9577abc3f67b4ef819d614b6ca62636123d44665db8a239dfece80a"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/verify-build.mjs",
+      "bytes": 151,
+      "sha256": "0f4a98d7cf6cdf36915acf363f5ff57e513091c01878421151ca08cbc11ec255"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/web-verify.mjs",
+      "bytes": 952,
+      "sha256": "2e2d7947930c28d927da61ed36119325eec2ba7190bea5a34e044083c1cd9430"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/make-manifest.mjs",
+      "bytes": 5088,
+      "sha256": "d66764e8acfe3a7b07e6fb40f55ad91d5543b68ad217ac2491f8ee801c5b5dfc"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/publish.mjs",
+      "bytes": 5029,
+      "sha256": "b49eab239f5be998d8421a0b6c13789be0e6c5b60b6198f2bab5d06cc17102ac"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/make-receipt.mjs",
+      "bytes": 2563,
+      "sha256": "7f4188d07b379f2a41e4e21eb90ff8d6e36134b1c82b5886907f9914afc50c91"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/native-smoke.mjs",
+      "bytes": 10951,
+      "sha256": "bbe72f4a49eab718419a01179d54434fb03b97500fc7f854c11958e59c36338a"
+    },
+    {
+      "path": "C:/GameDev/maze-game-qa/releases/v0223/derive-native-fixture.mjs",
+      "bytes": 6825,
+      "sha256": "0474d9162b08be2bda471bac4b220ba6d7a561089506886a27e03c2d4120ff5e"
+    }
+  ]
+}

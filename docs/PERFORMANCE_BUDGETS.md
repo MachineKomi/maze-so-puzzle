@@ -11,6 +11,13 @@ The [final acceptance](reviews/2026-09-06-v0223-engineering-acceptance.md) recor
 the measured gain and resource lifecycle checks, not physical listening success.
 This allocation does not authorize future PLAY-B or AUDIO-01A growth.
 
+Subsequent PLAY-B authorization: Astra permits at most +900 JS gzip9 bytes over
+v0.22.3's154875 for the stationary-rescue candidate (provisional maximum155775,
+with inherited23-byte margin handled separately in the exact ledger). Zero
+CSS/public/assets/decoded-image/dependency growth. This is a review cap, not a
+measured allocation or performance claim. Sol records only actual candidate
+growth and requests review before exceeding it. AUDIO-01A remains unallocated.
+
 ## V22-PLAY-01 PLAY-A pace allocation — 2026-09-06
 
 Against accepted Tessera checkpoint `a653a7b`, the bounded PLAY-A candidate
