@@ -1,5 +1,18 @@
 # Local artifact ledger and cleanup review
 
+## Execution outputs — 2026-09-06
+
+- `scripts/performance/new-host-wall-ab.mjs`: Astra-owned reusable bounded paired
+  harness; tracked source. Frozen baseline/candidate hash checks, isolated profiles,
+  same-origin assets, equal 16-step reversible route and retained frame/trace data.
+- `output/playwright/new-host-wall-ab-20260906/`: completed Astra wall diagnostic
+  output from the above script at planning HEAD `0c951e6`, unchanged frozen runtime.
+  Records warmups and three desktop pairs plus one compact pair, raw traces and
+  four captures. 17 files / 448,999,668 bytes; retained for held R1 optimization; no cleanup
+  authorization. Uses existing baseline/dist/assets, no duplicate repository/build.
+- New Human intake and Plan09-P0 roster review are durable Markdown source, not
+  build caches. Additional PHONE-02 runtime proof outputs will be logged here.
+
 **Planning checkpoint addition,2026-09-06:** five durable Markdown files were
 created in this turn: this ledger, `plans/BOOK-02A-silhouettes-and-discovery.md`,
 `plans/DELIGHT-02B-glow-and-celebration.md`, `plans/LEARN-01-readable-reasoning-and-help.md`

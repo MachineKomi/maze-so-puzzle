@@ -7,18 +7,17 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **CURRENT: roadmap refinement,2026-09-06; implementation awaits the next Human prompt.**
-  Human restored four Claude inputs to `C:/GameDev/maze-game-claude-review` and
-  requested a deep review of vision, feedback and plans before further execution.
-  [Programme synthesis](reviews/2026-09-06-vision-and-programme-refinement.md)
-  records source identities, current-code corrections and actual Sol's independent
-  review. [Roadmap section4](plans/00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates)
-  and [dispatch](plans/EXECUTION_PROMPTS.md) now own the remaining sequence:
-  wall qualification + read-only09-P0 -> BOOK-02A -> bounded DELIGHT-02B -> LEARN-01
-  -> isolated09-P1 teaching canary -> focus/lead interface and08. Affected terrain/
-  grounding and approved Alex integration precede selective05/07B/full09; then10
-  and the wider final programme. No implementation launched by this plan update.
-  One runtime writer; actual Sol independent review, Claude bounded advice only.
+- **CURRENT: execution authorized by the Human,2026-09-06.** Astra is the sole
+  runtime writer; actual Sol independently reviews source and rendered evidence.
+  [Latest phone/audio feedback](user-playtests/2026-09-06-phone-composition-and-default-mix.md)
+  takes priority immediately after the bounded wall decision. [New-host decision](reviews/2026-09-06-new-host-wall-decision.md)
+  holds R1: paired frame timing is smooth, but raster-work proxy rises37.4%.
+  Preserve R1 on the migration branch and deliver phone composition/audio balance,
+  then BOOK-02A on the explicitly accepted wall predecessor. [Plan09-P0](reviews/2026-09-06-plan09-p0-obtainable-roster.md)
+  records32friends/12guardians. Continue bounded DELIGHT-02B, LEARN-01 and the
+  [remaining roadmap](plans/00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates).
+  Claude remains bounded advice. Native acceptance and physical iPad evidence are
+  separate from web qualification. New restored folders are being reconciled.
 
 - **Recovery boundary retained:** [receipt](migrations/2026-09-06-new-laptop-recovery.md)
   owns exact tooling/restored proofs and prior fresh642 project/build/static/12guard
