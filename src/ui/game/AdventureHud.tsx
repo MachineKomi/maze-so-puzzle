@@ -33,7 +33,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
   const [reader, setReader] = useState(false);
   useLayoutEffect(() => {
     const paragraph = objectiveRef.current!;
-    const update = () => setReader(compact && (parseFloat(getComputedStyle(paragraph).fontSize) >= 24 || model.objective.length > 160));
+    const update = () => setReader(compact && parseFloat(getComputedStyle(paragraph).fontSize) >= 24);
     // Inline paragraphs have no ResizeObserver box; observe their block parent.
     update(); const observer = new ResizeObserver(update); observer.observe(paragraph.parentElement!);
     return () => observer.disconnect();
@@ -49,12 +49,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
       const idealMap = parseFloat(getComputedStyle(hud.parentElement!).getPropertyValue("--map-size"));
       if (!Number.isFinite(idealMap) || height <= 0) return;
       const mapChrome = map.getBoundingClientRect().height - minimap.getBoundingClientRect().height;
-      if (compact) {
-        const minimum = innerWidth < 650 ? 96 : 128;
-        const available = height - equipment.getBoundingClientRect().height - 3 - mapChrome - 2;
-        hud.style.setProperty("--map-size", `${Math.max(minimum, Math.min(idealMap, Math.floor(available)))}px`);
-        return;
-      }
+      if (compact) return;
       const enlarged = parseFloat(getComputedStyle(document.documentElement).fontSize) >= 24;
       hud.toggleAttribute("data-enlarged", enlarged);
       if (enlarged) { hud.style.removeProperty("--map-size"); overview.style.removeProperty("--fitted-slot-size"); overview.style.removeProperty("--fitted-columns"); return; }
