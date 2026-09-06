@@ -16,16 +16,15 @@ All sixteen authored fingerprints change under rules revision 2; disclose the
 old unfinished-run restart while preserving durable progress/history. P7 and
 inherited physical/family checks remain separate from engineering acceptance.
 
-**One active runtime writer:** actual Sol owns UI-NATIVE-EXIT-01 in isolated
-`C:/GameDev/maze-game-ui-exit` / `codex/v22-ui-native-exit` from `45d8437`;
-Astra independently reviews. Root is frozen-release/documentation-only; the
-[PERF-02C triplet](../reviews/2026-09-06-perf02c-triplet-review.md) is complete
-without demonstrated efficacy and Sol now holds the heavy slot for Exit
-qualification. Exit source candidate `e5a4a77` has8 focused tests/TS and static
-measurement passed, but no native/browser qualification yet. The Exit candidate has a
-bounded +400 gzip9 JS cap with zero media/dependency/layout change, and does not
-enter frozen v0.22.4. After its separate review, prototype short-height gameplay
-and Book before propagating V22-UI-01 changes. Read the
+**Native Exit is accepted on its branch, not yet published:** actual Sol's
+`19f08a164161656164fac787847798342cbf4674`; [Astra review](../reviews/2026-09-06-ui-native-exit-01-astra-review.md).
+The [PERF-02C triplet](../reviews/2026-09-06-perf02c-triplet-review.md) completed
+without efficacy; no hint ships. Next sole writer actual Sol owns **UI-01A compact
+gameplay/Book prototype**, on `codex/v22-ui-short-height` in reused isolated
+`C:/GameDev/maze-game-ui-exit`. Root reviews/docs only; Sol owns the serial heavy
+slot. Freeze the merged base/reference views; prove fit before propagation.
+Bundle Exit with the next accepted UI preview (intended v0.22.5), not a separate
+one-button release or an overwrite of v0.22.4. Read the
 [technical preflight](../reviews/2026-09-06-v22-ui01-preflight.md).
 
 PERF-02C's [bounded layer experiment](../reviews/2026-09-06-perf02c-layer-preflight.md)
@@ -44,7 +43,7 @@ and require safe headroom/mute/persistence evidence. V23-04 belongs to the later
 UI HUD pace/settings tranche, including intentional speaker+cog art. V23-12 is
 **Plan14 after RC-01**, exploring an optional JRPG mode or separate spinoff only
 after the current programme is completed and polished. No combat/XP rewrite or
-extra work enters Sol's active Exit-only assignment. Root assigns all seams serially.
+extra work enters the bounded UI-01A prototype. Root assigns all seams serially.
 
 **Recorded v0.22.2 Human result, 2026-09-06:** scrolling still stutters on iPad
 while clamped-camera character motion is smooth. Resume PERF-02 moving-terrain/

@@ -136,3 +136,20 @@ changes; reset independence; mute/change/unmute; zero cancellation; current trac
 identity/time unchanged; direct-media and real graph response; native close/reopen.
 Physical iPad/phone/desktop listening remains separate. No two-lane preparation,
 new sound palette, art, layout or dependency is required for this calibration.
+
+## Root candidate refinement — smoother music adjustment
+
+Root Astra prefers the following curve for the later implementation candidate,
+after a separate read-only numerical challenge by the same Astra-team reviewer:
+`a = log(.10) / log(.75)`, `musicGain(u) = u^a`, inverse `u = g^(1/a)`.
+Explicit zero/default/maximum guards preserve exact 0, .75↔.10 and 1 anchors.
+This supersedes the piecewise music curve above as a proposal, not as shipped
+behavior or actual Sol/listening acceptance. Raw stored gains remain authority.
+
+At74/75/76%, gains are approximately .089813/.10/.111184 (about .92 dB per
+percentage point near the default), avoiding the piecewise slope discontinuity.
+The tradeoff is strong attenuation in the lower half:50% maps to .003896;
+legacy .01 displays56.25%, and .22 about82.7643%. This is not a uniformly
+perceptual scale. Preserve tiny positive gains without an artificial floor,
+and never write rounded display percentages back on unrelated preference changes.
+The provisional SFX headroom and real peak qualification remain unresolved.

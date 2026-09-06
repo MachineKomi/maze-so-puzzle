@@ -15,17 +15,17 @@ which already contains Tessera repair, PLAY-A and AUDIO-01V. Do not rerun them.
 Rules revision 2 restarts older unfinished authored runs in all sixteen mazes;
 durable completions/unlocks/rewards/history survive. No physical gate is implied.
 
-**One active runtime writer:** actual Sol owns **UI-NATIVE-EXIT-01** in
-`C:/GameDev/maze-game-ui-exit`, branch `codex/v22-ui-native-exit`, from
-`45d8437`. Astra independently reviews; root is release/documentation-only
-while Sol writes. At most +400 gzip9 JS bytes is authorized for this bounded
-candidate, measured rather than automatically consumed; zero media, dependency
-or layout change. Source candidate `e5a4a77` is clean/pushed;8 tests and TS pass.
-The [PERF-02C diagnostic](../reviews/2026-09-06-perf02c-triplet-review.md) is complete
-without demonstrated efficacy; no hint ships. Sol now owns the heavy slot for
-Exit qualification. No actual native Exit pass is claimed yet.
-No candidate Exit fix is folded into that release. After the separate Exit
-handback/review, prototype short-height gameplay/Book before broader UI changes.
+**Native Exit is accepted, not released:** Sol checkpoint
+`19f08a164161656164fac787847798342cbf4674` on preserved `codex/v22-ui-native-exit`;
+[final Astra review](../reviews/2026-09-06-ui-native-exit-01-astra-review.md).
+541 tests and actual pointer/keyboard close, recovery and simulated native failure
+cases passed; +249 JSgzip9, zero CSS/media/deps. The
+[PERF-02C diagnostic](../reviews/2026-09-06-perf02c-triplet-review.md) completed
+without efficacy; no hint ships. Bundle Exit with the next accepted UI preview,
+intended v0.22.5; do not rewrite v0.22.4 or release one button separately.
+**Next sole runtime writer: actual Sol, UI-01A below**, on
+`codex/v22-ui-short-height` in reused isolated `C:/GameDev/maze-game-ui-exit`,
+accepted Exit plus current main docs/test fixes. Astra reviews independently.
 [UI plan](V22-UI-01-short-height-and-reward.md) and
 [technical preflight](../reviews/2026-09-06-v22-ui01-preflight.md) define the seam.
 
@@ -37,7 +37,45 @@ versioned conversion, and prove safe headroom/mute/persistence. V23-04 adds
 immediately visible HUD pace and intentional speaker+cog settings art to the
 later UI tranche, not Exit. V23-12 is **Plan14 after RC-01**, planning-only JRPG
 spinoff/mode exploration; no permanent XP or combat rewrite now. Root assigns
-each seam serially; these hooks do not expand Sol's active Exit-only ownership.
+each seam serially; these hooks do not expand the bounded prototype below.
+
+## UI-01A — first compact fit proof
+
+Actual Sol: record the exact clean merged base; preserve the accepted Exit branch.
+Read current main's joint state, complete UI plan/preflight and V23-02/04 intake.
+You own this runtime prototype and the serial heavy slot; Astra owns review/docs.
+
+Implement coordinated **gameplay and Book** short-height fit using existing
+physical layout/ResizeObserver owners. First freeze representative primary
+screens at1920×1080,1280×720,1194×834,1024×768, then correct844×390,780×312,
+568×320. Prove board, Power/currency, objective, complete collections, minimap,
+feedback, Hint/More and ≥48px pad sectors coexist at normal text without overlap,
+clipping or page/deck scrolling. Reserve the real pad footprint; hidden feedback
+and shrunken hit targets are not fitting. Book header/tabs remain visible, only
+body scrolls, at least one complete representative card fits. Use dense/long
+authored content, not just Maze1; preserve full details/lore and reader accessibility.
+
+Expected scope: `src/ui/game/layout*`, `PlayShell`, `AdventureHud`, compact HUD/
+Book CSS and narrowly required Book markup/tests. Confirm actual paths. No
+engine, camera/FOV/travel, input lifecycle, save/audio, deps, media or primary
+redesign. Home/dialog/victory propagation, Bestiary/lore navigation, pad artwork/
+hover polish, HUD pace and speaker+cog art remain subsequent reviewed increments;
+keep new Human requirements visible, not silently dropped. Do not do all UI-01 now.
+
+Use source-derived synthetic states/existing external tooling. Check rectangles,
+normal/200% text, focused pad/input/pace/rescue/save regressions and side-by-side
+primary captures. Tests/build/budgets run serially. Prototype cap is +1200 JSgzip9
+and +1800 CSSgzip9 versus accepted Exit, book only measured attributable growth;
+zero media/deps. Bring unexpected constraints to Astra rather than weaken gates.
+No physical-phone/iPad performance claim from desktop emulation.
+
+Return a clean pushed candidate, representative screenshots, exact fit/primary
+preservation results, failures/remaining scope and bytes. Root reviews the actual
+proof before propagation/main/version/release. No new Human answer blocks this
+prototype. Do not regenerate approved art or touch frozen v0.22.4. If the extreme
+viewport cannot satisfy the contract, report its concrete tradeoff, not a fake pass.
+
+## Continuing programme authority
 
 PERF-02C is a separate serial experiment at an explicitly frozen source;
 never change UI geometry during matched camera measurements or run another

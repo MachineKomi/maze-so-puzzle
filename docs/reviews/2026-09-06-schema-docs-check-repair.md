@@ -25,3 +25,7 @@ deployment6288238697 succeeded. Canonical HTML/JS/CSS were independently checked
 byte-identical to frozen v0.22.4. Its runtime-source CI34004670826 and immutable
 release qualification remain unchanged; the later documentation failure is not
 evidence of a newly changed runtime or a reason to overwrite its attachments.
+
+Fresh checkpoint `89a53aa2fbb05d508780ccf866c23e75985c2304` passed
+[CI34006762339](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34006762339),
+including verify and desktop. The original failed run remains separate history.

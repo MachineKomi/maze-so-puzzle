@@ -6,8 +6,9 @@ speaker+cog settings icon. Reproduce possible phone pad/minimap overlap. These
 belong to the short-height/control composition slice, not the independent native
 Exit fix; preserve praised desktop/iPad placement and existing focus contracts.
 
-Status: queued joint contract; starts after sole-writer handback and a frozen,
-reviewed engineering baseline. Physical iPad performance acceptance stays open.
+Status: UI-NATIVE-EXIT-01 independently accepted on branch19f08a1, not published.
+UI-01A compact gameplay/Book prototype is the next bounded Sol assignment; read
+the current execution prompt before editing. Physical iPad acceptance stays open.
 
 Owner: **GPT-5.6 Sol**
 Independent reviewer: **GPT-6 Astra**
@@ -22,9 +23,8 @@ and victory refinements without changing puzzle framing or input semantics.
 Engineering prerequisite reconciliation, Astra 2026-09-06: V22-PERF-01/R1 and
 PERF-02A are reviewed/published; the Human's iPad scrolling result still fails.
 Under the latest express continuation authority, that physical feedback gate
-does not block independent Exit/UI corrections indefinitely. PLAY-B remains the
-current sole-writer task. After it returns and root reviews its candidate,
-UI-NATIVE-EXIT-01 may proceed independently; short-height work may start only
+does not block independent Exit/UI corrections indefinitely. PLAY-B is released
+in v0.22.4 and native Exit is independently accepted. Short-height work starts only
 against an explicitly frozen source and reference views, with no matched camera
 measurement/correction simultaneously in flight. Preserve the six-tile camera,
 cadence, renderer and accepted performance constraints. Rebase/remeasure later

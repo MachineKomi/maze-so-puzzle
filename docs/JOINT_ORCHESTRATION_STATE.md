@@ -73,8 +73,8 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - Frozen source: `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`; accepted PLAY-B
   runtime `f3f090a7f8a5b8eb76382f31161345eb8a3d630f`, Sol evidence handback
   `b6f0003e4bfb71c332c42f6437a3ae8b9ea7ab8d`.
-- Root Astra owns only this frozen release and documentation; actual Sol owns
-  the separately isolated UI-NATIVE-EXIT-01 runtime candidate (§3).
+- Root Astra owns release/review documentation; actual Sol's accepted Exit and
+  next isolated UI-01A candidate are tracked separately in §3.
 - Exact-source CI34004670826 and Production6287989870 passed. Canonical raw
   HTML/JS/CSS match.533 project tests,22 canonical journeys and actual Windows
   rescue/normal-close/reopen pass;136 art tests are inherited from byte-unchanged
@@ -197,28 +197,28 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Release owner: root Astra; runtime owner: actual Sol in the isolated Exit task.** PLAY-B is accepted,
+**Release/review owner: root Astra; next runtime owner: actual Sol for UI-01A.** PLAY-B is accepted,
 merged and frozen for v0.22.4 at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
 PLAY-B has handed back. Root completed native, canonical-web and public-download
 gates and pushed receipt checkpoint `bcaab81`. Source push alone was not used
 as publication acceptance.
 Do not mutate the frozen runtime to fold later feedback into this release.
 
-**Active independent runtime task:** actual Sol is the sole runtime writer for
-**UI-NATIVE-EXIT-01** in `C:/GameDev/maze-game-ui-exit`, branch
-`codex/v22-ui-native-exit`, from frozen `45d8437`; Astra independently reviews.
-Root does not edit runtime/main while Sol writes. The candidate may use at most
-+400 gzip9 JS bytes, allocating only measured growth, with zero media/dependency/
-layout change. Repair native normal close through the smallest permitted
-platform seam; require actual process exit plus save/settings recovery. Source
-candidate `e5a4a77cfc786e94b9e57f08ec95ca70cccdc1dc` is clean/pushed with8 focused
-tests and TypeScript passed. Root's source inspection finds no blocker; actual
-native/browser qualification remains pending. The bounded PERF-02C pilot is
-complete and its browser/preview processes are closed. Sol now owns the serial
-heavy-job slot for Exit validation. Candidate JS gzip9 is155339 (+249); CSS,
-public assets and decoded-image inventory are unchanged. Final gates remain open.
-The current X/Alt+F4 workaround remains
-until the separately versioned Exit fix is qualified; it is not part of v0.22.4.
+**UI-NATIVE-EXIT-01 is independently accepted, not yet published.** Sol's clean,
+pushed `codex/v22-ui-native-exit` is `19f08a164161656164fac787847798342cbf4674`,
+runtime `e5a4a77`. [Final Astra review](reviews/2026-09-06-ui-native-exit-01-astra-review.md).
+541 project tests, browser fallback, actual pointer/keyboard process close,
+save/preferences recovery and simulated native failures passed. Exact allocation
+is +249 JSgzip9, zero CSS/public/decoded/deps; whole native PE +43520B. All owned
+processes/ports closed and heavy slot returned. Published v0.22.4 still needs
+X/Alt+F4. Bundle Exit with the next accepted UI preview, intended v0.22.5.
+
+**Next sole writer: actual Sol, UI-01A compact fit prototype.** Root prepares
+`codex/v22-ui-short-height` in the reused isolated `C:/GameDev/maze-game-ui-exit`
+checkout from accepted Exit plus current main documentation/test corrections.
+The preserved Exit branch remains unchanged. Sol records the exact merged base
+before editing and owns the serial heavy slot. Root reviews/docs only; no camera
+experiment is in flight.
 
 Then Sol prototypes **V22-UI-01 short-height gameplay and Book fit** before
 propagating it. Preserve the praised desktop/iPad composition and six-tile
@@ -226,6 +226,9 @@ camera, live input, pace/audio preferences and reviewed rescue semantics. Read
 the [UI plan](plans/V22-UI-01-short-height-and-reward.md) and
 [technical preflight](reviews/2026-09-06-v22-ui01-preflight.md). The preflight is
 Astra-team preparation, not actual Sol acceptance or a second implementation.
+The [UI-01A assignment](plans/EXECUTION_PROMPTS.md#ui-01a--first-compact-fit-proof)
+is not the whole UI plan: prove gameplay/Book fit, then review before propagation.
+No main merge/version/deployment until the selected preview slice is accepted.
 
 **PERF-02C completed as a diagnostic, not a runtime candidate.** The
 [three-row review](reviews/2026-09-06-perf02c-triplet-review.md) preserves all
@@ -289,7 +292,7 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.4 is published and independently verified. PERF-02C is complete without demonstrated efficacy; no camera hint ships. Actual Sol owns the serial heavy slot for UI-NATIVE-EXIT-01 qualification; root independently reviews before integration. Then assign short-height V22-UI-01 and calibrated AUDIO-01V2 in reviewed increments. iPad scrolling remains unresolved; no layout mutations during future matched camera measurements. Preserve actual dependency gates and resolve root PT36 before04.
+1. v0.22.4 is published and independently verified. PERF-02C completed without efficacy; no camera hint ships. Native Exit is independently accepted on its preserved branch. Actual Sol owns UI-01A compact gameplay/Book prototype and the serial heavy slot; root reviews before propagation. Continue remaining V22-UI-01 and AUDIO-01V2 in reviewed increments; bundle an accepted UI checkpoint with Exit for v0.22.5. iPad scrolling remains unresolved. Preserve dependency gates and resolve root PT36 before04.
 2. **AUDIO-01V2** early calibrated default/control conversion, separately assigned
    after the active Exit seam and before broader **AUDIO-01A** music/SFX readiness;
    then **V22-HOLE-01** single-width
