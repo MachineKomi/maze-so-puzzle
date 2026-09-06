@@ -1,5 +1,7 @@
 # Plan 14 — gameplay, progression and quality-of-life opportunity review
 
+**2026-09-06 current execution override:** HAZARD-02 is the active bounded web0.22.14 candidate after published tall walls/jump0.22.13. Then execute [LOOT-03](LOOT-03-physical-collection-and-progression.md): persistent physical authored pickups → enemy Gold/Science → mixed chests/Mimic lifecycle → recognition XP → rare eggs after protected usable inventory. The latest explicit Human request supersedes older no-new-XP/presentation-only reward restrictions for these slices. DELIGHT-02B/LEARN-01 and the wider roadmap remain next. [Human review queue](../HUMAN_REVIEW_QUEUE.md) is nonblocking unless a concrete dependent decision is required.
+
 Human2026-09-06 [V23-12](../playtests/2026-09-06-v0223-v0224-intake.md) explicitly
 requests a post-completion JRPG exploration: separate spinoff versus optional
 mode, persistent levels/optional grinding, friends as potential fighters,

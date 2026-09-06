@@ -252,9 +252,9 @@ describe("art catalog", () => {
       expect(hazard.reducedMotionCue.trim().length).toBeGreaterThan(0);
       expect(hazard.runtimeStatus).toBe("active");
     }
-    expect(HAZARD_ART.water.periodTiles).toBe(4.6);
-    expect(HAZARD_ART.lava.periodTiles).toBe(4.6);
-    expect(HAZARD_ART.poison.periodTiles).toBe(4.2);
+    expect(HAZARD_ART.water.periodTiles).toBe(2.4);
+    expect(HAZARD_ART.lava.periodTiles).toBe(2.2);
+    expect(HAZARD_ART.poison.periodTiles).toBe(2.1);
     expect(HAZARD_ART.hole.periodTiles).toBeNull();
   });
 

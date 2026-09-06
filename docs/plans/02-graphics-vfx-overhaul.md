@@ -1,5 +1,7 @@
 # Graphics and VFX overhaul plan
 
+**2026-09-06 current execution override:** HAZARD-02 is the active bounded web0.22.14 candidate after published tall walls/jump0.22.13. Then execute [LOOT-03](LOOT-03-physical-collection-and-progression.md): persistent physical authored pickups → enemy Gold/Science → mixed chests/Mimic lifecycle → recognition XP → rare eggs after protected usable inventory. The latest explicit Human request supersedes older no-new-XP/presentation-only reward restrictions for these slices. DELIGHT-02B/LEARN-01 and the wider roadmap remain next. [Human review queue](../HUMAN_REVIEW_QUEUE.md) is nonblocking unless a concrete dependent decision is required.
+
 ## Current remaining tranche — 2026-09-06
 
 Execution is authorized. BOOK-02A shipped0.22.12; tall walls/dressing/jump camera

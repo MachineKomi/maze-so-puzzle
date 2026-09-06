@@ -2,6 +2,25 @@
 
 ## Execution outputs — 2026-09-06
 
+### HAZARD-02 / physical-loot intake
+
+Astra owns `codex/hazard-surface-polish`, fromf546630. Outputs under
+`C:/GameDev/maze-game-qa/performance/`, retained for qualification and review.
+
+| Folder | Files / bytes | Purpose |
+| --- | ---: | --- |
+| `hazard-baseline-v02213/` |4 /715,732|Exact published0.22.13 entry files and identity; unchanged public assets shared, no full build copy.|
+| `hazard-browser-20260906/` |38 /25,474,123|First15 passing browser cases,24 actual hazard scene/mode contexts, captures/cycle probes and route fixtures; before absent base-owner correction.|
+
+Node24.19.0 and installed Playwright1.62.1; source runner and paths in
+[HAZARD-02](plans/HAZARD-02-readable-living-surfaces.md). Rebuild existing `dist/`
+in place. Initial unit failures (two cases: private parser import and too-small
+bubble edge margin) were corrected before the first656-test pass. Final source
+review additionally gates absent base image owners. No new dependency, media,
+repo clone, native package, deletion or archive. Final measured/public outputs
+will be added at closure.
+
+
 ### Jump camera / tall-wall continuation
 
 Astra owns runtime on `codex/jump-camera-delight`, starting fromaf70dd0.

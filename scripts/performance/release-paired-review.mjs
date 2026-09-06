@@ -19,7 +19,7 @@ if (!playwrightPath) throw Error('Set MAZE_PLAYWRIGHT_PATH to the installed Play
 const { chromium } = await import(pathToFileURL(playwrightPath).href);
 await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
-const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === 'twilight-treasure-loop');
+const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
 if (!fixture || (!jumpReview && (fixture.direction !== 'right' || fixture.count < 4))) throw Error('Expected frozen engine-derived route');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');

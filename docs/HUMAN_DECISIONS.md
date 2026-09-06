@@ -1,5 +1,7 @@
 # Human decisions and steer
 
+**Latest adopted instruction:** continue qualified delivery and keep one visible [Human review queue](HUMAN_REVIEW_QUEUE.md), flagged at each response end. [Physical loot/account-level feedback](user-playtests/2026-09-06-physical-loot-and-account-level.md) authorizes the [LOOT-03](plans/LOOT-03-physical-collection-and-progression.md) slices after HAZARD-02. Stronger bursts must settle before finite-range collection; enemy Gold/Science only on defeat; mixed chest/Mimic rewards, rare eggs and holographic XP are requested. Recognition-only levels and eggs after usable inventory are Astra/Sol recommended defaults, not invented Human decisions.
+
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
 **Latest continuation:** implement and deliver the tall-wall result, then

@@ -1,5 +1,7 @@
 # Maze so Puzzle — playtest backlog
 
+**Latest loot/camera intake:** [physical collection and account level](user-playtests/2026-09-06-physical-loot-and-account-level.md) is adopted by [LOOT-03](plans/LOOT-03-physical-collection-and-progression.md), immediately after HAZARD-02. It includes slower forceful multiaxis bursts/bounce/settle, finite range/graded vacuum, physical spin/trails, final-defeat Gold/Science, mixed chest and richer Mimic rewards, very rare eggs and rainbow account-XP crystals. All are planned, not shipped by0.22.14. The repeated camera report names0.22.12, before0.22.13 repair. [Queue](HUMAN_REVIEW_QUEUE.md) keeps fresh walls/jump observation and future loot feel visible.
+
 ## Latest intake — jump camera and unresolved tall walls
 
 [Human v0.22.12 feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)

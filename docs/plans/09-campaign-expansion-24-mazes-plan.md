@@ -1,5 +1,7 @@
 # Plan 09 — expand the authored campaign from 16 to 24 mazes
 
+**2026-09-06 current execution override:** HAZARD-02 is the active bounded web0.22.14 candidate after published tall walls/jump0.22.13. Then execute [LOOT-03](LOOT-03-physical-collection-and-progression.md): persistent physical authored pickups → enemy Gold/Science → mixed chests/Mimic lifecycle → recognition XP → rare eggs after protected usable inventory. The latest explicit Human request supersedes older no-new-XP/presentation-only reward restrictions for these slices. DELIGHT-02B/LEARN-01 and the wider roadmap remain next. [Human review queue](../HUMAN_REVIEW_QUEUE.md) is nonblocking unless a concrete dependent decision is required.
+
 ## Current execution contract — planning reconciliation, 2026-09-06
 
 This contract supersedes older whole-plan start wording below. This update is

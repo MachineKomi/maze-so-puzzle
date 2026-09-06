@@ -39,7 +39,7 @@ The Human's later feedback takes priority. Jump camera and
 are delivered; now improve lava/water/poison surfaces through the existing Plan04/HOLE-02
 receiver and motion gates. These are implemented/qualified in bounded slices;
 do not stop at a plan or call the wall beauty finding resolved without feedback.
-Then return to **DELIGHT-02B and LEARN-01**, then
+Then execute **[LOOT-03](LOOT-03-physical-collection-and-progression.md)**: honest physical pickups, enemy/chest/Mimic rewards and recognition XP in save-safe slices; rare eggs follow usable inventory. Then return to **DELIGHT-02B and LEARN-01**, then
 the isolated existing-rule Plan09-P1 canary. [Plan09-P0](../reviews/2026-09-06-plan09-p0-obtainable-roster.md)
 has supplied the frozen 32-friend/12-guardian obtainability audit and recipe gaps;
 do not restart it or BOOK-02A implementation. Controls still need stable semantic
@@ -52,8 +52,7 @@ Finish one visible player benefit and its evidence before adding another broad
 system. Every slice has performance/accessibility/motion/save gates;07B integrates
 the product and cannot serve as permission to postpone regressions until later.
 One runtime writer; genuine independent Sol source/render review. Claude is an
-occasional bounded advisor, not a mandatory approval gate. No new mechanics,
-permanent XP or asset deletion follows from this status update. Publish only
+occasional bounded advisor, not a mandatory approval gate. The latest Human intake explicitly authorizes bounded physical loot and account XP through LOOT-03; broader mechanics remain scoped by their plans. No asset deletion follows. Publish only
 qualified changes through the preserved Vercel guard and release checklist.
 
 ## Dated checkpoints and source context
@@ -458,6 +457,7 @@ Do not rerun their original implementation prompts.
 | 0, held optimization lane | **[WALL-04A-R1](WALL-04A-R1-convincing-depth.md)** — convincing depth and smooth travel | New-host alternating A/B and actual Sol review completed; R1 remains held at +37.4% raster-work proxy. Accepted wall restored in `e926737`; independent phone/Book qualification proceeds there. Preserve inherited72 functional cases, old-host timing and non-specific shadow isolation. Next wall work is the bounded pass-attribution experiment in the wall decision, not an automatic promotion or backend rewrite. |
 | 0a, evidence supplied | **Plan09-P0: read-only design/roster/recipe preflight** | Completed source audit supplies obtainable32/12, actual admissions, teaching reconciliation and complete Surprise-recipe gaps. Use its snapshot for Book and later P1; it is source/test evidence, not a fresh generator/solver run or completed recipe UI. No production map/fingerprint/save mutation. |
 | 1, delivered web0.22.12 | **PHONE-02 / audio65–85 / [BOOK-02A](BOOK-02A-silhouettes-and-discovery.md)** | Source5013ea7/runtimee18c6ee: coordinated phone stage, explicit new default mix, actual silhouettes, legitimate encounter persistence and32/12 counters. Schema7 keeps the v6 key/future-write protection; saved audio choices remain.649 project tests,83 distinct browser cases across retained runs, five pairs per scoped viewport and actual independent Sol acceptance; public bytes/smoke verified. Human P15/native/full Plan07 remain open. No Garden/new awards or R1 inclusion. |
+| 1c, after HAZARD-02 | **[LOOT-03](LOOT-03-physical-collection-and-progression.md)** | Authoritative persistent pickups before reward tables; enemy defeat currencies before mixed chests/Mimics; account recognition through profile/completion ownership; eggs only after usable protected inventory. Source/save/solver/render/performance gates per slice. Latest Human instruction overrides older presentation-only and XP ideation limits. |
 | 2 | **[DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md)** — presence, celebration and reward truth | Three bounded checkpoints: continuous pickup glow/readable receipts; larger friend-led victory; earned-sticker in-maze fanfare. Preserve delivered Canvas showers and arithmetic. PT10 Stay/Book/Next truth, exact-once awards, finite effects, mute, reduced/static and moving-scene cost gate every checkpoint. Then stop broad Plan02 expansion. |
 | 3 | **[LEARN-01](LEARN-01-readable-reasoning-and-help.md)** — understandable next possibilities | Add exact Power shortfall and clearer picture-led requested hints, retaining existing gain equations and four engine-valid zero-rescue hint tiers. No new rule/search/store. Prove spoiler, focus, cancellation, text and reward truth; record family comprehension separately. |
 | 4 | **Plan09-P1: isolated existing-rule learning canary** | After stable wall/UI/LEARN seams, compare one first-use pocket and one Lanternlight-style room/changed-state return. Isolated fixtures only: no production chapter/fingerprint/save/generator mutation. Engine-valid ordinary/perfect routes plus plausible wrong turn, requested-help recovery and observed reasoning. Current rules first; a new-mechanic recommendation needs a separate Human decision. No invented educational efficacy. |

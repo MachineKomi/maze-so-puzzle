@@ -1,5 +1,7 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current work:** [HAZARD-02](plans/HAZARD-02-readable-living-surfaces.md) web0.22.14 qualification is active; live remains0.22.13 until its public receipt. Sole runtime writer Astra, actual Sol reviews independently. Then execute [LOOT-03](plans/LOOT-03-physical-collection-and-progression.md) before remaining DELIGHT-02B/LEARN-01. [Human review queue](HUMAN_REVIEW_QUEUE.md) must be flagged in every development closeout. This current override supersedes older next/active assignments below.
+
 State date: 2026-09-06. Current operating state for **Sol Astra MsP Collab**.
 Replace this state when it changes; keep history in dated records and Git.
 Human instructions outrank repository assumptions. This file owns current status;
@@ -7,7 +9,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **Git continuation:** clean backed-up `codex/jump-camera-delight`; main is
+- **Git continuation:** Astra now writes the bounded HAZARD-02 candidate on `codex/hazard-surface-polish`, from backed-up f546630. Main is
   docs closure d04a691. Smoke-helper correction03026dd and this operations note
   stay on the development branch for the next runtime slice. The docs closure
   was actually skipped by Vercel; do not push the later script change to main
