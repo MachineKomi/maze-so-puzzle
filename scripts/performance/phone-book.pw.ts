@@ -53,6 +53,30 @@ test("BOOK02 unavailable silhouette art stays neutral without granting discoveri
   await capture(page,"missing-friend-art");
 });
 
+test("BOOK02 mounted field-art memory stays bounded on phone DPR3 and tablet DPR2", async ({ browser }) => {
+  const rows = [];
+  for (const [width,height,deviceScaleFactor] of [[780,312,3],[1194,834,2]]) {
+    const context=await browser.newContext({viewport:{width,height},deviceScaleFactor,baseURL:"http://127.0.0.1:4173"});
+    try {
+      const page=await context.newPage(); const faults:string[]=[]; page.on("pageerror",e=>faults.push(e.message));
+      await home(page); await page.getByRole("button",{name:"Ame's adventure book",exact:true}).click();
+      for (const [tab,total] of [["Friends",32],["Bestiary",12]] as const) {
+        await page.getByRole("tab",{name:tab,exact:true}).click();
+        await expect(page.locator(".book-unknown-card")).toHaveCount(total);
+        await page.waitForTimeout(300);
+        const images=await page.locator(".book-character-grid img").evaluateAll(es=>es.map(e=>{const i=e as HTMLImageElement;return {url:i.currentSrc,width:i.naturalWidth,height:i.naturalHeight};}));
+        expect(images.filter(i=>i.width>0).length).toBeGreaterThan(0);
+        const decoded=images.reduce((sum,i)=>sum+i.width*i.height*4,0);
+        expect(decoded).toBeLessThanOrEqual(total*256*256*4);
+        expect(images.every(i=>!i.url.includes("/presentation/"))).toBe(true);
+        rows.push({width,height,deviceScaleFactor,tab,decoded,images});
+      }
+      expect(faults).toEqual([]);
+    } finally { await context.close(); }
+  }
+  await writeFile(resolve(output,"retina-book-resources.json"),JSON.stringify(rows,null,2));
+});
+
 for (const [width, height, inset] of [[780,312,0],[844,390,0],[568,320,0],[780,312,12],[844,390,12],[1194,834,0],[1280,720,0],[960,540,0]]) {
   test(`PHONE02 composed geometry ${width}x${height} inset${inset}`, async ({ page }) => {
     await page.setViewportSize({ width: width!, height: height! });

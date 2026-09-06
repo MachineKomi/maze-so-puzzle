@@ -126,9 +126,15 @@ size and freeze the roster/migration contract. Then implement and verify:
    readable tabs, silhouettes, X/Y, names and card controls. Pointer/touch/keyboard
    navigation and close/return do not move the player; Plan08 consumes stable IDs.
 6. Lazy image/decode failure preserves layout; repeated page switching/open/close
-   releases work. Record new bytes, active requests and decoded image bounds.
-   Compare against the same predecessor; do not accept a collection-page preload
-   merely because compressed delivery still fits a global cap.
+   releases component observers/work. Record new bytes, active requests and decoded
+   image bounds. Browser decoded caches are not assumed released on page unmount.
+   Root disposition,2026-09-06: the mounted32Friends /12Bestiary field-art working
+   set is accepted within measured8MiB /3MiB RGBA bounds at the tested resolutions.
+   Native lazy-loading margins load the full mounted roster in current Chromium;
+   do not claim viewport-only activation. This is a bounded deliberate feature
+   cost, not approval for hidden tabs, whole-catalogue or unknown presentation
+   preloads. A global compressed cap alone is insufficient evidence; retain the
+   page/resource measurements and affected DPR qualification in the candidate record.
 
 Use focused store/encounter/migration and UI tests plus affected shared browser
 scenarios. Root runs required full integration/release checks once the slice is

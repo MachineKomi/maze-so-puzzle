@@ -33,7 +33,26 @@ This document is a progress receipt, not a release acceptance or deployment reco
   The focused3/3 rerun passed in19.6s on the unchanged final runtime bundle
   `index-BPKRGxyO.js`. Thus82distinct functional browser cases pass across r4
   and the focused correction; this is not described as one82/82clean run.
-  Final-source project checks and paired performance are next.
+  Final-source project649/649 plus build passed at e18c6ee with the same
+  `index-BPKRGxyO.js` bundle. Paired performance remains next.
+
+### Mounted Book resource disposition
+
+Astra explicitly accepts the bounded mounted-page field-art working set as an
+engineering tradeoff within the authorized Book feature. The plan's overly broad
+preload acceptance sentence is amended; this is root's decision, not invented
+Human or Sol assent. Current browser lazy margins fetch all32Friends or12Bestiary
+sprites on the mounted page. Observed natural dimensions are256x256:8MiB and3MiB
+RGBA upper bounds, respectively. Hidden Book tabs are unmounted; this does not
+prove browser decoded-cache reclamation or viewport-only image activation.
+
+The dedicated final-runtime browser test passes at phone780x312DPR3 and
+tablet1194x834DPR2, with explicit decoded-size bounds and no unknown presentation
+URLs. Evidence: `C:/GameDev/maze-game-qa/performance/phone02-book-retina-20260906/phone-book/retina-book-resources.json`.
+This adds one distinct test to the82regressions above:83functional cases pass
+across the recorded runs. Earlier full-journey encoded resource totals include
+Home/Title and must not be presented as incremental Book bytes. Future larger
+rosters or higher-resolution activation require a new resource decision.
 
 ### First paired diagnostic, before final horizontal-fit correction
 
