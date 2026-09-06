@@ -566,7 +566,7 @@ function referencesUpdatedContent(
   if (!level) return false;
   const schemaVersion = ownValue(value, "schemaVersion");
   return schemaVersion === 1
-    ? level.contentRevision !== 1
+    ? true
     : (schemaVersion === 2 || schemaVersion === ACTIVE_RUN_SCHEMA_VERSION)
       && (
         ownValue(value, "contentRevision") !== level.contentRevision
@@ -643,35 +643,13 @@ export function readActiveRunResult(
         return { snapshot: null, discardedUpdatedRun: false };
       }
       const levelId = ownValue(legacy, "levelId");
-      const level = typeof levelId === "string"
-        ? curatedLevels.find((candidate) => candidate.id === levelId && candidate.source === "curated")
-        : undefined;
-      // Revision 1 is the only content whose old snapshot did not need a
-      // fingerprint. Revised maps fail closed and retain durable progress.
-      if (!level || level.contentRevision !== 1) {
-        const discardedUpdatedRun = referencesUpdatedContent(legacy, curatedLevels);
-        safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-        return { snapshot: null, discardedUpdatedRun };
-      }
-      const migrated = sanitizeActiveRunSnapshot({
-        ...legacy,
-        schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
-        runId: migratedRunId(legacy),
-        contentRevision: level.contentRevision,
-        gameplayFingerprint: level.gameplayFingerprint,
-        hintUsesByState: {},
-      }, curatedLevels);
-      if (!migrated) {
-        safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-        return { snapshot: null, discardedUpdatedRun: false };
-      }
-      try {
-        target.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(migrated));
-        safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-      } catch {
-        // Keep the valid v1 source intact and still resume it in memory.
-      }
-      return { snapshot: migrated, discardedUpdatedRun: false };
+      // Schema v1 never carried a rules fingerprint, so even a revision-1 map
+      // cannot prove compatibility with the current global gameplay rules.
+      // Fail closed for a recognized story maze and retain durable progress.
+      const discardedUpdatedRun = typeof levelId === "string"
+        && curatedLevels.some((candidate) => candidate.id === levelId && candidate.source === "curated");
+      safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
+      return { snapshot: null, discardedUpdatedRun };
     } catch {
       safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
       return { snapshot: null, discardedUpdatedRun: false };

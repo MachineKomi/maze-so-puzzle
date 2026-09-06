@@ -458,12 +458,12 @@ Hint tiers are Goal (remind the current need), Principle (state the rule), Direc
 | 4 | Apply reusable keys across multiple doors | Medium; colour/shape matching | Two loops, low dead travel | Identify the next required colour, not the nearest friend |
 | 5 | Recall boots at lava and sequence Power | Medium; familiar rule in new skin | Dense events with short quiet spans | “Warm lava uses the same boots rule” before coordinates |
 | 6 | Master three key colours and route order | Medium-high; working-memory load | Three gates, restrained retraversal | One current colour/prerequisite at a time |
-| 7 | Distinguish optional strong guardian from required route | Medium-high; temptation and recovery | Ordinary skips guardian; perfect adds meaningful 33 | Required Path explicitly leaves guardian/friend optional |
-| 8 | Recall mixed mechanics without a new rule | Medium-high | Stable 120-input mastery course | Re-anchor to the next required state change |
-| 9 | Introduce Spring Boots and complete-hole-run jump | High; current endurance risk | State-gated shortcut, 14 rescue inputs | Principle tier explains “straight across the whole run” |
+| 7 | Distinguish optional strong guardian from required route | Medium-high; temptation and recovery | Ordinary skips guardian; perfect adds 30 inputs | Required Path explicitly leaves guardian/friend optional |
+| 8 | Recall mixed mechanics without a new rule | Medium-high | Stable 123-input mastery course | Re-anchor to the next required state change |
+| 9 | Introduce Spring Boots and complete-hole-run jump | High; current endurance risk | State-gated shortcut, 13 rescue inputs | Principle tier explains “straight across the whole run” |
 | 10 | Read rooms and return through a shortcut | High; room orientation and rescue cost | Ordinary 150 inputs / 146 movement steps; optional room drives most perfect cost | Name functional room/landmark, not raw coordinates alone |
 | 11 | Deep prerequisite chain and changed exit meaning | High; 204 inputs but frequent events | Fourteen required state changes, four optional friends | Next prerequisite only; avoid revealing later chain |
-| 12 | Combine leaf, poison, boots, Spring Boots, keys | High but denser than baseline | 70 ordinary inputs removed; rescues cost 10 | Engine route ensures leaf precedes poison and boots precede hazards |
+| 12 | Combine leaf, poison, boots, Spring Boots, keys | High but denser than historical baseline | 67 ordinary inputs removed from the historical 231-input route (now 164); rescues cost 5 inputs | Engine route ensures leaf precedes poison and boots precede hazards |
 | 13 | Introduce persistent portal pairs in a compact board | Medium; novel topology | 29 / 44 inputs; 28 / 40 movement steps | Explain matching flower pair, then next step through it |
 | 14 | Apply three portal pairs to a comeback Power route | High; expensive perfect detours | Ordinary remains purposeful; rescue mastery is optional | Distinguish “come back stronger” from “wrong way” |
 | 15 | Master a three-pair quadrant relay plus three reusable keys | High reasoning, low execution burden | 47 / 58 inputs; 44 / 50 movement steps; three doors required | State current quadrant, portal motif, and next key/door |

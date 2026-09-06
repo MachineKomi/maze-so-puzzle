@@ -7,7 +7,7 @@ import { createHash } from "node:crypto";
 import { movePlayer } from "../../src/game/engine";
 import { getCameraWindow } from "../../src/game/exploration";
 import { CURATED_LEVELS } from "../../src/game/levels";
-import { advanceFollowerProcession, createFollowerProcession, followerTargets } from "../../src/game/followerTrail";
+import { advanceFollowerProcession, createFollowerProcession, followerTargets, joinFollowerProcession } from "../../src/game/followerTrail";
 import { DIRECTIONS, DIRECTION_DELTAS, type Direction, type GameState } from "../../src/game/types";
 import { applyLevelCompletion, createDefaultPlayerProgress, PLAYER_PROGRESS_STORAGE_KEY } from "../../src/progress";
 import { ACTIVE_RUN_STORAGE_KEY } from "../../src/session";
@@ -520,51 +520,112 @@ for (const chained of ["door-opened", "enemy-defeated", "animal-rescued"] as con
   });
 }
 
-for (const motion of ["full", "reduced"] as const) for (const action of ["held", "released", "hidden"] as const) {
-  test(`R1 stalled jump-rescue ${motion} ${action} waits for the actual final phase`, async ({ page }, info) => {
-    const fixture = findInputFixture(events => events.some(event => event.type === "hole-jumped") && events.some(event => event.type === "animal-rescued"), { differentDirectionContinuation: true });
-    expect(fixture, "The delayed-handoff regression requires a real authored jump-rescue route").toBeTruthy();
-    await loadSaved(page, fixture!, `r1-stalled-${motion}-${action}`, undefined, { motion, quality: "full", pace: "regular" });
+for (const preferences of [
+  { motion: "full", quality: "full", duration: 900 },
+  { motion: "full", quality: "lite", duration: 900 },
+  { motion: "reduced", quality: "full", duration: 180 },
+  { motion: "full", quality: "static", duration: 180 },
+] as const) for (const action of ["held", "released"] as const) {
+  test(`PLAY-B stationary rescue ${preferences.quality}-${preferences.motion} ${action} keeps its fixed final unlock`, async ({ page }, info) => {
+    const fixture = successFixture("animal-rescued", true);
+    await loadSaved(page, fixture, `play-b-rescue-${preferences.quality}-${preferences.motion}-${action}`, undefined, {
+      motion: preferences.motion,
+      quality: preferences.quality,
+      pace: "regular",
+    });
     const time = new Date("2026-09-05T12:00:00Z");
     await page.clock.install({ time });
     await page.clock.pauseAt(time);
     await page.evaluate(() => (window as TraceWindow).__v22Input?.stop());
     await record(page);
     const controls = await driver(page, "keyboard");
-    const direction = continuationDirections(fixture!).find(candidate => candidate !== fixture!.direction)!;
+    const direction = continuationDirections(fixture).find(candidate => candidate !== fixture.direction)!;
     try {
-      await controls.start(fixture!.direction);
-      await expect(page.locator(".jump-presentation")).toHaveCount(1);
-      await controls.steer(direction);
-      // Clock.fastForward fires overdue callbacks once at the advanced time,
-      // reproducing a blocked event loop across both original phase deadlines.
-      // Phase two must receive its full duration from its actual late start.
-      await page.clock.fastForward(5000);
+      await controls.start(fixture.direction);
       await expect(page.locator(".rescue-presentation")).toHaveCount(1);
-      await expectUiRouteState(page, fixture!.result.state);
+      await expectUiRouteState(page, fixture.result.state);
+      expect(fixture.result.moved).toBe(false);
+      expect(fixture.result.state.position).toEqual(fixture.before.position);
+      expect(fixture.result.state.steps).toBe(fixture.before.steps);
+      await controls.steer(direction);
       if (action === "released") await controls.release();
-      if (action === "hidden") await page.evaluate(() => {
-        Object.defineProperty(document, "visibilityState", { configurable: true, get: () => "hidden" });
-        Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
-        document.dispatchEvent(new Event("visibilitychange"));
-      });
-      await page.clock.runFor(DEFAULT_STEP_TRAVEL_MS);
-      await expectUiRouteState(page, fixture!.result.state);
-      const duration = motion === "reduced" ? 180 : 900;
-      await page.clock.runFor(duration - DEFAULT_STEP_TRAVEL_MS);
+      await page.clock.runFor(preferences.duration - 1);
+      await expectUiRouteState(page, fixture.result.state);
+      await page.clock.runFor(1);
       await expect(page.locator(busySelector)).toHaveCount(0);
       await page.clock.runFor(DEFAULT_STEP_TRAVEL_MS - 1);
-      await expectUiRouteState(page, fixture!.result.state);
+      await expectUiRouteState(page, fixture.result.state);
       await page.clock.runFor(1);
-      const next = action === "held" ? movePlayer(fixture!.level, fixture!.result.state, direction).state : fixture!.result.state;
+      const next = action === "held" ? movePlayer(fixture.level, fixture.result.state, direction).state : fixture.result.state;
       await expectUiRouteState(page, next);
       await controls.release();
       await page.clock.runFor(DEFAULT_STEP_TRAVEL_MS * 3);
       await expectUiRouteState(page, next);
-      if (action === "held") assertFreshResume(await trace(page), fixture!.result.state.steps);
-    } finally { await controls.release(); await saveEvidence(page, info, fixture!); }
+      if (action === "held") assertFreshResume(await trace(page), fixture.result.state.steps);
+    } finally { await controls.release(); await saveEvidence(page, info, fixture); }
   });
 }
+
+test("PLAY-B hidden cancellation stops a committed rescue without replaying input", async ({ page }, info) => {
+  const fixture = successFixture("animal-rescued", true);
+  await loadSaved(page, fixture, "play-b-rescue-hidden");
+  const controls = await driver(page, "keyboard");
+  try {
+    await controls.start(fixture.direction);
+    await waitForPresentation(page);
+    await page.evaluate(() => {
+      Object.defineProperty(document, "visibilityState", { configurable: true, get: () => "hidden" });
+      Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
+      document.dispatchEvent(new Event("visibilitychange"));
+    });
+    await expect(page.locator(busySelector)).toHaveCount(0);
+    await controls.release();
+    await page.waitForTimeout(1000);
+    await expectUiRouteState(page, fixture.result.state);
+  } finally { await controls.release(); await saveEvidence(page, info, fixture); }
+});
+
+test("PLAY-B reload preserves a zero-step rescue and maze switching remains guarded", async ({ page }, info) => {
+  const fixture = successFixture("animal-rescued", true);
+  await loadSaved(page, fixture, "play-b-rescue-reload");
+  const controls = await driver(page, "keyboard");
+  let restored: Page | undefined;
+  try {
+    await controls.start(fixture.direction);
+    await waitForPresentation(page);
+    await controls.release();
+    const rescued = fixture.result.events.find(event => event.type === "animal-rescued");
+    expect(rescued).toBeTruthy();
+    await expect.poll(() => page.evaluate(({ key, objectId }) => {
+      const raw = localStorage.getItem(key);
+      if (!raw) return false;
+      const snapshot = JSON.parse(raw) as { game?: { steps?: number; rescuedAnimalIds?: string[] } };
+      return snapshot.game?.steps === 0 && snapshot.game.rescuedAnimalIds?.includes(objectId) === true;
+    }, { key: ACTIVE_RUN_STORAGE_KEY, objectId: rescued!.objectId })).toBe(true);
+
+    // A fresh page shares origin storage without inheriting loadSaved's page-only
+    // initialization script, so this is a genuine production reload/read path.
+    restored = await page.context().newPage();
+    await restored.goto("/", { waitUntil: "domcontentloaded" });
+    await restored.locator(".front-door-play").click();
+    await expect(restored.locator(".title-play-button")).toContainText(fixture.level.name);
+    await restored.getByRole("button", { name: "Choose a maze" }).click();
+    const alternative = CURATED_LEVELS.find(candidate => candidate.id !== fixture.level.id)!;
+    await restored.getByRole("dialog", { name: "Choose a maze" }).getByRole("button").filter({ hasText: alternative.name }).click();
+    const guard = restored.getByRole("dialog", { name: "Start a different maze?" });
+    await expect(guard).toContainText(`${fixture.level.name} is waiting at 0 steps`);
+    await guard.getByRole("button", { name: "Keep this maze" }).click();
+    await expect(restored.getByRole("region", { name: `${fixture.level.name} maze` })).toBeVisible();
+    await expectUiRouteState(restored, fixture.result.state);
+    await record(restored);
+  } finally {
+    await controls.release();
+    if (restored) {
+      await saveEvidence(restored, info, fixture);
+      await restored.close();
+    }
+  }
+});
 
 test.describe("R1 reverse ThumbPad takeover", () => {
   test.use({ hasTouch: true });
@@ -746,6 +807,11 @@ for (const kind of SUCCESS_EVENTS) {
     const advance = (result: ReturnType<typeof movePlayer>) => {
       if (result.moved) procession = advanceFollowerProcession(procession, result.state.position, result.state.rescuedAnimalIds,
         result.events.some(event => event.type === "hole-jumped" || event.type === "portal-warped"));
+      else {
+        const rescued = result.events.find(event => event.type === "animal-rescued");
+        const animal = rescued && fixture.level.objects.find(object => object.id === rescued.objectId);
+        if (rescued && animal?.kind === "animal") procession = joinFollowerProcession(procession, rescued.objectId, animal.at);
+      }
       state = result.state;
     };
     await check();

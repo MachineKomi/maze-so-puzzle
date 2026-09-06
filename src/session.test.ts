@@ -267,7 +267,7 @@ describe("active run persistence", () => {
     expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
   });
 
-  it("migrates a valid legacy active run when authored content is still revision 1", () => {
+  it("fails closed on a legacy active run even when authored content is still revision 1", () => {
     const storage = new MemoryStorage();
     const level = parseAsciiLevel({
       id: "legacy-revision-one",
@@ -276,25 +276,28 @@ describe("active run persistence", () => {
       contentRevision: 1,
       map: ["#####", "#@.E#", "#...#", "#...#", "#####"],
     });
-    const game = movePlayer(level, createInitialGameState(level), "right").state;
-    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
+    const prior = {
       schemaVersion: 1,
       levelId: level.id,
-      game,
+      game: movePlayer(level, createInitialGameState(level), "right").state,
       revealedTiles: [],
-    }));
+    };
+    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
 
-    expect(readActiveRun([level], storage)).toMatchObject({
-      schemaVersion: 3,
-      runId: expect.stringMatching(/^migrated-/),
-      levelId: level.id,
-      contentRevision: 1,
-      gameplayFingerprint: level.gameplayFingerprint,
-      game,
-      hintUsesByState: {},
+    expect(readActiveRunResult([level], storage)).toEqual({
+      snapshot: null,
+      discardedUpdatedRun: true,
     });
     expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
-    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+
+    const misplaced = new MemoryStorage();
+    misplaced.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
+    expect(readActiveRunResult([level], misplaced)).toEqual({
+      snapshot: null,
+      discardedUpdatedRun: true,
+    });
+    expect(misplaced.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
   });
 
   it("migrates a valid schema-v2 active run with a stable derived run ID", () => {
@@ -317,21 +320,11 @@ describe("active run persistence", () => {
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
   });
 
-  it("resumes a valid legacy run in memory when migration storage is full", () => {
+  it("resumes a matching schema-v2 run in memory when migration storage is full", () => {
     const storage = new MemoryStorage();
-    const level = parseAsciiLevel({
-      id: "legacy-quota",
-      name: "Legacy quota",
-      objective: "Test",
-      contentRevision: 1,
-      map: ["#####", "#@.E#", "#...#", "#...#", "#####"],
-    });
-    storage.setItem(LEGACY_ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
-      schemaVersion: 1,
-      levelId: level.id,
-      game: createInitialGameState(level),
-      revealedTiles: [],
-    }));
+    const level = storyLevel(1);
+    const prior = { ...rawSnapshot(level), schemaVersion: 2, runId: undefined };
+    storage.setItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
     const quotaStorage: ActiveRunStorage = {
       getItem: (key) => storage.getItem(key),
       setItem: () => { throw new Error("quota"); },
@@ -340,9 +333,10 @@ describe("active run persistence", () => {
 
     expect(readActiveRunResult([level], quotaStorage).snapshot).toMatchObject({
       levelId: level.id,
-      contentRevision: 1,
+      contentRevision: level.contentRevision,
+      gameplayFingerprint: level.gameplayFingerprint,
     });
-    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
+    expect(storage.getItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
   });
 

@@ -103,7 +103,9 @@ export function deliberateBlockerFixture(kind: "power" | "capability"): InputFix
           blockerCache.set(kind, fixture);
           return fixture;
         }
-        if (result.state.status !== "playing" || (!result.moved && !result.events.some(event => event.type === "door-opened"))) continue;
+        if (result.state.status !== "playing" || (!result.moved && !result.events.some(event => (
+          event.type === "door-opened" || event.type === "animal-rescued"
+        )))) continue;
         const nextKey = key(result.state);
         if (seen.has(nextKey)) continue;
         seen.add(nextKey);
