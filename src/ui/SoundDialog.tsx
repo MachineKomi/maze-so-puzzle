@@ -40,6 +40,7 @@ export function SoundDialog({ transport, onClose, returnFocus }: { transport: Mu
         void testSoundFromUserGesture(snapshot.muted, testRequest.current.signal);
       }}>Test sound</button>
     </div>
+    <p className="sound-persistence">Very high Music and Sound effects together may distort; lower either if you hear it.</p>
     </section>
     <fieldset><legend>Motion</legend><div className="preference-options">{(["system", "full", "reduced"] as const).map(value => <label key={value}><input type="radio" name="motion" value={value} checked={presentation.preferences.motion === value} onChange={() => presentation.update({ motion: value })} />{value === "system" ? "Use device setting" : value === "full" ? "Full" : "Reduced"}</label>)}</div></fieldset>
     <fieldset><legend>Surface quality</legend><div className="preference-options">{(["full", "lite", "static"] as const).map(value => <label key={value}><input type="radio" name="quality" value={value} checked={presentation.preferences.quality === value} onChange={() => presentation.update({ quality: value })} />{value}</label>)}</div></fieldset>

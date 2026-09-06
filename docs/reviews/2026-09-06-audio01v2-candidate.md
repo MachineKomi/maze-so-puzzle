@@ -27,6 +27,18 @@ content, assets, camera or layout scope is included.
 
 ## Current evidence and gates
 
+Source-bound full check at01e7521:551/551 across52files, TypeScript/build and a
+fresh performance check passed. Independent Sol source/48k/44.1k sample-peak
+review now conditionally accepts4/3 for a qualified preview: see
+[final independent review](2026-09-06-audio01v2-sol-final-review.md) and the updated
+[joint decision](2026-09-06-audio01v2-joint-decision.md). Default mix measurements
+retain margin; max Music+SFX is not all-range clip-free. The required visible
+warning adds53 JSgzip9 bytes: final candidate155702, **+395** over155307.
+Root allocates exactly395 total, ceiling155757; zero CSS/media growth.
+Production UI/real graph/native and final qualification remain pending.
+
+### Retained earlier attempts
+
 Initial focused numeric/storage/music/mix/sound/reset run:57 tests across6 files
 passed; TypeScript and Vite production build passed. Added real-ceiling graph and
 campaign-Reset exclusion cases; focused rerun59/59 and TypeScript passed.

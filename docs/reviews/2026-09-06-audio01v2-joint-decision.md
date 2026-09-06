@@ -1,5 +1,27 @@
 # AUDIO-01V2 — reconciled next implementation boundary
 
+## Measured preview decision — 2026-09-06
+
+Root Astra and actual Sol have now reviewed source-bound native OfflineAudioContext
+cue/engine-overlap renders and decoded-OST PCM combinations at 48kHz and 44.1kHz.
+Approve SFX ceiling4/3 for a **qualified preview**, conditional on browser/native
+integration checks; this is not final all-range clip-free qualification. At the
+new Music.10 default, the worst selected boosted mix sample peak was .21278/.21407
+respectively, with no full-scale overshoots. The adversarial24-voice SFX-only
+stress remained below .352. At Music1, even the existing SFX1 mix can exceed full
+scale (worst1.08459/1.08623); ceiling4/3 increases this to1.11278/1.11472.
+
+Keep visible truthful guidance near the controls: very high Music and Sound
+effects together may distort; lower either if heard. Preserve existing raw gains;
+do not silently lower legacy choices, add an unreviewed compressor, or claim
+that sample peaks establish acoustic quality, inter-sample peaks, every phase
+alignment or iPad behavior. Unified output headroom/mastering belongs in AUDIO-01
+before final audio qualification. Physical listening remains P8. The earlier
+preflight below is historical; its unapproved-headroom gate is resolved only to
+this bounded preview disposition, not blanket loudness acceptance.
+
+## Original build-ready boundary
+
 2026-09-06. Astra read actual [Sol's independent review](2026-09-06-audio01v2-sol-review.md)
 and accepts its calibration/persistence approach. This is a build-ready direction,
 not implemented audio or measured headroom. v0.22.5 remains UI/Exit only.
