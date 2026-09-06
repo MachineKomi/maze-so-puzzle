@@ -17,6 +17,8 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   [Acceptance](reviews/2026-09-06-v0228-engineering-acceptance.md),
   [Sol final review](reviews/2026-09-06-hole01a-sol-native-final-review.md),
   [receipt](../release/HOLE-01A-v0.22.8-release-verification.json).
+  Release packaging/docs checkpoint `a02dbd9e5cc4597e617e68af40e267d0dc0fee64`
+  is pushed; the later receipt binds those Git blobs to the uploaded attachments.
   P12 and P5–P11 remain open. Phase2 proof/EOL repair and Human-approved ditch
   art/topology, then root PT36, still precede Plan04. No iPad-camera acceptance.
 
