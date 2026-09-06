@@ -1,7 +1,26 @@
 # Plan 12 — asset retirement and package hygiene
 
-Status: pending after accepted Plan 13 consumer freeze. Prepared 2026-09-05.
+Status: final sweep pending after accepted Plan 13 consumer freeze; bounded early
+delivery cleanup authorized 2026-09-06. Prepared 2026-09-05.
 Owner: root release manager. Human external-backup confirmation is mandatory.
+
+## Authorized early storage checkpoint — 2026-09-06
+
+The Human confirmed a recent full-repo ZIP backed up externally and explicitly
+authorized direct deletion of superseded unused assets, plus the eleven audited
+worktrees. This overrides the wait/copy/ask-again sequence only for the bounded
+[early batch](../source-assets/retirement/early-assets-2026-09-06.json).
+[Decision](../reviews/2026-09-06-early-asset-cleanup.md) records backup limits.
+
+Remove only exact-hash delivery candidates without current consumers or tool
+dependencies; retain active/dormant art, fallbacks, source masters and stable
+new-art paths. Revalidate source-record ownership, replacement existence,
+retained-byte parity, clean output and current build/asset contracts. Keep a
+Git restoration anchor and tombstones; do not claim final Plan 12/13, native
+release qualification or Human/device gates complete. No Git history or hosted
+deployment deletion. The early batch is 30 files / 9,488,260 bytes; 104 ledger
+candidates remain held for documented dependencies. The normal process below
+continues to govern later final retirement unless the Human changes it.
 
 ## Outcome and authority
 

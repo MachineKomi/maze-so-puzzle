@@ -2,6 +2,14 @@
 
 ## Deployment operations guard
 
+At release closure, audit temporary worktrees for uncommitted/ignored evidence
+and active processes; preserve unique files and remote anchors, then request
+Human approval for exact obsolete roots. Remove approved roots through Git,
+not a broad recursive folder deletion. Do not keep a full checkout per release.
+The [2026-09-06 cleanup receipt](reviews/2026-09-06-approved-worktree-cleanup.md)
+records eleven approved removals. Art delivery cleanup follows the separate
+[bounded Plan 12 authority](plans/12-asset-retirement-and-package-hygiene.md).
+
 Follow [VERCEL_DEPLOYMENT.md](VERCEL_DEPLOYMENT.md): keep frequent GitHub backups,
 but skip proven documentation-only web deployments and opt routine Codex previews
 in explicitly. `node --test scripts/deployment/check-ignore-build.mjs` is a CI gate.

@@ -501,6 +501,9 @@ def loading_phase(spec: Spec) -> str:
 
 
 def build_plan() -> dict[str, Any]:
+    from retirement import load_retirements, previous_delivery_metadata
+
+    retired = load_retirements()
     run_index = batches()
     v05 = read_json(V05_DECISION_PATH)
     v05_runs = {
@@ -533,10 +536,9 @@ def build_plan() -> dict[str, Any]:
         previous_bytes = None
         if spec.previous_path:
             previous = ROOT / "public" / spec.previous_path.lstrip("/")
-            if not previous.is_file():
-                raise FileNotFoundError(f"rollback asset missing: {spec.previous_path}")
-            previous_sha = sha256_file(previous)
-            previous_bytes = previous.stat().st_size
+            # Previous URLs are rollback metadata, not input pixels. Explicit
+            # Human-approved tombstones preserve that metadata after cleanup.
+            previous_sha, previous_bytes = previous_delivery_metadata(previous, retired)
         rows.append({
             "stableId": spec.stable_id,
             "label": spec.label,

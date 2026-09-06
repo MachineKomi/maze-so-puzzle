@@ -14,11 +14,13 @@ ROOT = PACKAGE.parents[1]
 sys.path.insert(0, str(PACKAGE))
 
 from model import read_json, sha256_file, validate_record_shape
+from retirement import EARLY_STATE, load_retirements, previous_delivery_metadata
 
 
 class Mgjrpg02PublicationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
+        cls.retired = load_retirements()
         cls.map_path = (
             ROOT
             / "docs/source-assets/publication/mgjrpg-02-plan03-runtime-map.json"
@@ -311,13 +313,14 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
         self.assertTrue(all(row["runtimeConsumerDependency"] is False for row in deferred))
         self.assertTrue(all("Plan 05" in row["entryGate"] for row in deferred))
 
-    def test_all_prior_runtime_files_are_retained_for_plan12(self) -> None:
+    def test_prior_runtime_files_are_retained_or_explicitly_retired(self) -> None:
         rows = [row for row in self.mapping["entries"] if row["previousPath"]]
         self.assertEqual(len(rows), 100)
         for row in rows:
             previous = ROOT / "public" / row["previousPath"].lstrip("/")
-            self.assertTrue(previous.is_file(), row["previousPath"])
-            self.assertEqual(sha256_file(previous), row["previousSha256"])
+            digest, size = previous_delivery_metadata(previous, self.retired)
+            self.assertEqual(digest, row["previousSha256"])
+            self.assertEqual(size, row["previousBytes"])
 
     def test_retirement_ledger_matches_publication_and_manifest_contracts(self) -> None:
         ledger_path = (
@@ -379,7 +382,8 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
             len(set(manifest_superseded)),
             "duplicate superseded manifest path",
         )
-        self.assertEqual(set(entries_by_path), set(manifest_superseded))
+        self.assertEqual(set(entries_by_path), set(manifest_superseded) | set(self.retired))
+        self.assertEqual({row["path"] for row in manifest["retiredRuntimeImages"]}, set(self.retired))
 
         archive_root = ledger["policy"]["archiveRoot"].replace("\\", "/").strip("/")
         self.assertFalse(
@@ -390,10 +394,12 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
         for entry in entries:
             with self.subTest(asset=entry["assetPath"]):
                 asset = ROOT / entry["assetPath"]
-                self.assertTrue(asset.is_file())
-                self.assertEqual(asset.stat().st_size, entry["bytes"])
-                self.assertEqual(sha256_file(asset), entry["sha256"])
-                self.assertEqual(entry["state"], "rollback-hold")
+                digest, size = previous_delivery_metadata(asset, self.retired)
+                self.assertEqual(size, entry["bytes"])
+                self.assertEqual(digest, entry["sha256"])
+                expected_state = EARLY_STATE if entry["assetPath"] in self.retired else "rollback-hold"
+                self.assertEqual(entry["state"], expected_state)
+                self.assertEqual(asset.is_file(), expected_state == "rollback-hold")
                 self.assertIs(entry["eligibleForPlan12"], False)
                 self.assertEqual(entry["runtimeReferences"], [])
                 self.assertTrue(entry["replacementPaths"])
@@ -415,9 +421,9 @@ class Mgjrpg02PublicationTests(unittest.TestCase):
             with self.subTest(previous=previous_path, replacement=row["runtimePath"]):
                 previous = ROOT / previous_path
                 ledger_entry = entries_by_path[previous_path]
-                self.assertTrue(previous.is_file())
-                self.assertEqual(previous.stat().st_size, row["previousBytes"])
-                self.assertEqual(sha256_file(previous), row["previousSha256"])
+                digest, size = previous_delivery_metadata(previous, self.retired)
+                self.assertEqual(size, row["previousBytes"])
+                self.assertEqual(digest, row["previousSha256"])
                 self.assertEqual(ledger_entry["bytes"], row["previousBytes"])
                 self.assertEqual(ledger_entry["sha256"], row["previousSha256"])
                 self.assertIn(row["runtimePath"], ledger_entry["replacementPaths"])

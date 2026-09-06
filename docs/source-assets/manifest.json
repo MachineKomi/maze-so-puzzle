@@ -19,6 +19,23 @@
     "brandInventoryExclusionReason": "Phase-2 brand provenance; docs/source-assets/app-icon.png remains an actionable unreferenced-source warning."
   },
   "inputs": {
+    "deliveryRetirement": [
+      {
+        "path": "docs/source-assets/retirement/early-assets-2026-09-06.json",
+        "sha256": "dfcc6e28a95a33c4e097bba26dd59037b1b704f6a69305b79f7aa7b8e22e3f1a",
+        "bytes": 54513
+      },
+      {
+        "path": "docs/source-assets/retirement/asset-retirement-ledger.json",
+        "sha256": "7bf495f7ac0c01400c33ca05d7b5016fe3a3051cb9c87a8b5359dfb2bfe2ba10",
+        "bytes": 623530
+      },
+      {
+        "path": "docs/source-assets/retirement/asset-retirement-ledger.schema.json",
+        "sha256": "16c83fbfc02878b9ee8077d1c5523dbb08751235c809db8a3c9c5c3aef5e60b3",
+        "bytes": 11762
+      }
+    ],
     "recordSchema": {
       "path": "docs/source-assets/schema/art-source.schema.json",
       "sha256": "23a126d8566a55725aea00147a1be1d711b771ed19156a83760841899a12ae58"
@@ -70,8 +87,8 @@
       },
       {
         "path": "scripts/art_pipeline/manifest.py",
-        "sha256": "e5a2849d4e35ba6943d08f810bad54be7d3312e3f8f987db87bb4629d7cbbf1b",
-        "bytes": 30367
+        "sha256": "6e595b1bf08492d8b70b56d3c35c4a14da3478dbedf0514eb701d4a889c5d0c0",
+        "bytes": 31194
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02.py",
@@ -125,8 +142,8 @@
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02_publish.py",
-        "sha256": "45c3daa6a1521cdcd26e21dff571d0241fb1c88865a42fddb5a3c27b81523fc5",
-        "bytes": 82543
+        "sha256": "e580db7ac9d2325b98a051cc508cb3f6c923c180b488f734382b8c8d75ca09db",
+        "bytes": 82664
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02_selection.py",
@@ -169,6 +186,11 @@
         "bytes": 7519
       },
       {
+        "path": "scripts/art_pipeline/retirement.py",
+        "sha256": "1cb17094cde44419817e2766641f99696ff36da6fe1b99cba926eb4dfe604b2e",
+        "bytes": 5242
+      },
+      {
         "path": "scripts/art_pipeline/tessera_alpha_recovery.py",
         "sha256": "31f44ce248f615e76ce4a89218c707babd4ec8b95dd24058a2e7a6837969ee5e",
         "bytes": 13983
@@ -182,6 +204,11 @@
         "path": "scripts/art_pipeline/tests/test_cutout.py",
         "sha256": "ff859bcc0c6c844cc1de3842846c804d34458002484b37c8b676280bb048cf1d",
         "bytes": 7828
+      },
+      {
+        "path": "scripts/art_pipeline/tests/test_delivery_retirement.py",
+        "sha256": "55608c41242c0df644a27529898330b95af6d9060afca868c5b3ba77d68bd104",
+        "bytes": 5377
       },
       {
         "path": "scripts/art_pipeline/tests/test_generation_batch.py",
@@ -230,8 +257,8 @@
       },
       {
         "path": "scripts/art_pipeline/tests/test_mgjrpg02_publication.py",
-        "sha256": "ca252fe4fc2a12dda23972c5fd4ad7ff6aaad008acd3c632c8f61fd653485624",
-        "bytes": 20677
+        "sha256": "6b086f88c3abe8c63ca31d66e02da1c14b9e3bb2b1808eb8a894d6456f30166e",
+        "bytes": 21166
       },
       {
         "path": "scripts/art_pipeline/tests/test_mgjrpg02_selection.py",
@@ -305,8 +332,8 @@
       },
       {
         "path": "scripts/art_pipeline/validate.py",
-        "sha256": "7c42d28d74ba30109eb8b57eb822e30144bfc2898bd8ad956462b6b50f088659",
-        "bytes": 146154
+        "sha256": "1abc2a5c0b9f9b99f7c0e9080b03f2d81f22788cf608a2708bcfe27babb0c9be",
+        "bytes": 146668
       }
     ],
     "requirements": {
@@ -1550,9 +1577,9 @@
   },
   "summary": {
     "recordCount": 368,
-    "runtimeImageCount": 368,
-    "runtimeEncodedBytes": 65771989,
-    "runtimeDecodedBytesUpperBound": 411582176,
+    "runtimeImageCount": 338,
+    "runtimeEncodedBytes": 56283729,
+    "runtimeDecodedBytesUpperBound": 368918240,
     "sourceImageCount": 430,
     "sourceEncodedBytes": 613495659,
     "unreferencedSourceImageCount": 12,
@@ -1608,9 +1635,9 @@
     },
     {
       "name": "cage",
-      "count": 20,
-      "bytes": 4239262,
-      "decodedBytesUpperBound": 17825792
+      "count": 13,
+      "bytes": 2444503,
+      "decodedBytesUpperBound": 10485760
     },
     {
       "name": "character",
@@ -1626,9 +1653,9 @@
     },
     {
       "name": "enemy",
-      "count": 50,
-      "bytes": 6104645,
-      "decodedBytesUpperBound": 31981568
+      "count": 44,
+      "bytes": 4543286,
+      "decodedBytesUpperBound": 25690112
     },
     {
       "name": "friend",
@@ -1638,15 +1665,15 @@
     },
     {
       "name": "hazard",
-      "count": 11,
-      "bytes": 3925172,
-      "decodedBytesUpperBound": 28835840
+      "count": 9,
+      "bytes": 3184596,
+      "decodedBytesUpperBound": 26738688
     },
     {
       "name": "item",
-      "count": 28,
-      "bytes": 3232061,
-      "decodedBytesUpperBound": 14614528
+      "count": 24,
+      "bytes": 2331193,
+      "decodedBytesUpperBound": 11337728
     },
     {
       "name": "lock",
@@ -1656,9 +1683,9 @@
     },
     {
       "name": "navigation",
-      "count": 20,
-      "bytes": 437004,
-      "decodedBytesUpperBound": 1802240
+      "count": 16,
+      "bytes": 280308,
+      "decodedBytesUpperBound": 1212416
     },
     {
       "name": "portal",
@@ -1680,9 +1707,9 @@
     },
     {
       "name": "terrain",
-      "count": 30,
-      "bytes": 13821850,
-      "decodedBytesUpperBound": 119537664
+      "count": 23,
+      "bytes": 9487848,
+      "decodedBytesUpperBound": 96468992
     },
     {
       "name": "weapon",
@@ -1712,23 +1739,23 @@
     },
     {
       "name": "superseded",
-      "count": 134,
-      "bytes": 41231881,
-      "decodedBytesUpperBound": 195549088
+      "count": 104,
+      "bytes": 31743621,
+      "decodedBytesUpperBound": 152885152
     }
   ],
   "runtimeByFormat": [
     {
       "name": "png",
-      "count": 89,
-      "bytes": 32986139,
-      "decodedBytesUpperBound": 148897792
+      "count": 67,
+      "bytes": 24358679,
+      "decodedBytesUpperBound": 110100480
     },
     {
       "name": "webp",
-      "count": 279,
-      "bytes": 32785850,
-      "decodedBytesUpperBound": 262684384
+      "count": 271,
+      "bytes": 31925050,
+      "decodedBytesUpperBound": 258817760
     }
   ],
   "records": [
@@ -10143,22 +10170,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/animal-cage.png",
-      "sha256": "0a957a8a5638aec5f158a0f110e5ab80bdbdd220b8285c697e366445dc1abfcb",
-      "bytes": 259172,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "animal-cage-v01-source",
-      "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/animal-capybara-v1.png",
       "sha256": "f2db2ead6d7433ec23065f5c65ba24d788046d92e8c6760aea786452e5d25012",
       "bytes": 260434,
@@ -10527,22 +10538,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/boots.png",
-      "sha256": "9d15d23d7747dcab691fc94a22b423b0fb2e9b995a07256d46351f81a1a1b9a6",
-      "bytes": 302111,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "boots-v01-source",
-      "family": "item",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/cage-garden-vine-front-v2.png",
       "sha256": "db36be8500203069a6b22dc6b59b81845affe16976faf90a05bbf99c7ecc6413",
       "bytes": 303317,
@@ -10554,25 +10549,6 @@
       "decodedBytesUpperBound": 1048576,
       "colorMetadata": [],
       "recordId": "cage-garden-vine-front-v02-source",
-      "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/cage-garden-vine-front-v4.png",
-      "sha256": "386e06db557d57aad71e0aca065a9603aca74c0e84f9319419b0a2515f4c5f5b",
-      "bytes": 255708,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [
-        "gamma",
-        "srgb"
-      ],
-      "recordId": "cage-garden-vine-front-v04-source",
       "family": "cage",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -10594,22 +10570,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/cage-garden-vine-v1.png",
-      "sha256": "a7280f8560832f5a7378ec59d303a923ee5b53a4c13f157bb17e6bfe44b50f87",
-      "bytes": 333153,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "cage-garden-vine-v01-source",
-      "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/cage-golden-heart-front-v2.png",
       "sha256": "045350b7b6d056e6745951f806de0731900978b3b2f7aab41fdccb18263d55af",
       "bytes": 215533,
@@ -10621,25 +10581,6 @@
       "decodedBytesUpperBound": 1048576,
       "colorMetadata": [],
       "recordId": "cage-golden-heart-front-v02-source",
-      "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/cage-golden-heart-front-v4.png",
-      "sha256": "b1e95c11f80628d4cccc5c275a4ee5476c888b63a42f95db262d22718d532e76",
-      "bytes": 187462,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [
-        "gamma",
-        "srgb"
-      ],
-      "recordId": "cage-golden-heart-front-v04-source",
       "family": "cage",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -10672,25 +10613,6 @@
       "decodedBytesUpperBound": 1048576,
       "colorMetadata": [],
       "recordId": "cage-moon-silver-front-v02-source",
-      "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/cage-moon-silver-front-v4.png",
-      "sha256": "13be403862609c71aaf2fb79fd411f6f936c77275512cac1f8edf9b59e047a5b",
-      "bytes": 222084,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [
-        "gamma",
-        "srgb"
-      ],
-      "recordId": "cage-moon-silver-front-v04-source",
       "family": "cage",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -10744,25 +10666,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/cage-storybook-wood-front-v4.png",
-      "sha256": "677f2567b27238fba8fc91951fa3e3d562ef304681df78f0e8781ab4526aef2c",
-      "bytes": 229854,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [
-        "gamma",
-        "srgb"
-      ],
-      "recordId": "cage-storybook-wood-front-v04-source",
-      "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/cage-storybook-wood-front-v5.webp",
       "sha256": "6b6ef01b2209828e8bdbad65e01b46a9423aaa0b123a25f4b6250102059497ca",
       "bytes": 182314,
@@ -10775,38 +10678,6 @@
       "colorMetadata": [],
       "recordId": "cage-storybook-wood-front-v05-source",
       "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/cage-storybook-wood-v1.png",
-      "sha256": "ccbf05783c2cd9841b47557e1c04bb6ed700fd8690c57ef2f1ecb3a61e72799d",
-      "bytes": 307326,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "cage-storybook-wood-v01-source",
-      "family": "cage",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/coin-pouch.png",
-      "sha256": "d47b3f32f967b71c942c3d517df52ad5021dfcc6e96d566feea6605452707eb5",
-      "bytes": 326649,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "coin-pouch-v01-source",
-      "family": "item",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
     },
@@ -10849,22 +10720,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/enemy-acorn-knight-v1.png",
-      "sha256": "3ce31ae371ec74073bff560ee2fc09c949b8e7c2d05579bdfd93b1eef10eb607",
-      "bytes": 302579,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "enemy-acorn-knight-v01-source",
-      "family": "enemy",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/enemy-blueberry-slime-v1.png",
       "sha256": "358b0f43c986806e9c14d1b5a3ac1beefe65895a80cc080b3595b424b8ca9124",
       "bytes": 199023,
@@ -10881,22 +10736,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/enemy-bubble-dragon-v1.png",
-      "sha256": "ed0d89a443defd9ca998dc1eaa4927367f56d2dac189d544892c908b7e7e2e8c",
-      "bytes": 306994,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "enemy-bubble-dragon-v01-source",
-      "family": "enemy",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/enemy-candy-mimic-v1.png",
       "sha256": "dac508a079956f93a45aa554c928e236de89ad191959ff29a7142a1d7c59d84a",
       "bytes": 283898,
@@ -10908,22 +10747,6 @@
       "decodedBytesUpperBound": 1048576,
       "colorMetadata": [],
       "recordId": "enemy-candy-mimic-v01-source",
-      "family": "enemy",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/enemy-clockwork-crab-v1.webp",
-      "sha256": "3d124382dfd070e51d57273033ed6a5f9343efbc72727f0a1b405797d25812ff",
-      "bytes": 214946,
-      "width": 512,
-      "height": 512,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "enemy-clockwork-crab-v01-source",
       "family": "enemy",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -10961,38 +10784,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/enemy-moon-bat-v1.png",
-      "sha256": "9bba8777a6233328555ae72f8d1f219999b9b3086df59e115b9a9aee57ce18a7",
-      "bytes": 238705,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "enemy-moon-bat-v01-source",
-      "family": "enemy",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/enemy-mushroom-imp-v1.png",
-      "sha256": "5d3114bdb868a96812e5ff157ce17c5c7314e8042b259783b06716d85959a20b",
-      "bytes": 281085,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "enemy-mushroom-imp-v01-source",
-      "family": "enemy",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/enemy-pebble-golem-v1.png",
       "sha256": "a12283f126905055a79f9845442e690e5046a8fb186fa201408e646a88a09a05",
       "bytes": 382960,
@@ -11004,22 +10795,6 @@
       "decodedBytesUpperBound": 1048576,
       "colorMetadata": [],
       "recordId": "enemy-pebble-golem-v01-source",
-      "family": "enemy",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/enemy-pumpkin-sprite-v1.webp",
-      "sha256": "7e98d790c724771531e439ee28dc67d0368122292b055615f481755eed470879",
-      "bytes": 217050,
-      "width": 512,
-      "height": 512,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "enemy-pumpkin-sprite-v01-source",
       "family": "enemy",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -11057,38 +10832,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/floor-peach-leafstone-v1.png",
-      "sha256": "0b4d53cc7fe4a1370dc969c02ff8af448d217c502ef2ea8b19c12a63e5f2befe",
-      "bytes": 837214,
-      "width": 1024,
-      "height": 1024,
-      "format": "png",
-      "mode": "P",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 4194304,
-      "colorMetadata": [],
-      "recordId": "floor-peach-leafstone-v01-source",
-      "family": "terrain",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/floor-pearl-shell-v1.png",
-      "sha256": "a0fe9ec779ca1ef62b22467287944d84f0acb3cf03d814d95d5e929e96ec88e0",
-      "bytes": 776702,
-      "width": 1024,
-      "height": 1024,
-      "format": "png",
-      "mode": "P",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 4194304,
-      "colorMetadata": [],
-      "recordId": "floor-pearl-shell-v01-source",
-      "family": "terrain",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/floor-rose-brick-v1.png",
       "sha256": "9160dfcf92acc6af2c94fcbfdc02f5a9dc6ecd13a9d2e793e6792044b5df5c0f",
       "bytes": 593725,
@@ -11100,22 +10843,6 @@
       "decodedBytesUpperBound": 4194304,
       "colorMetadata": [],
       "recordId": "floor-rose-brick-v01-source",
-      "family": "terrain",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/floor-v2.png",
-      "sha256": "171986acc9de70a10d215cdcbb39ae63a240b994fe0069e20f04fb332b680a08",
-      "bytes": 345877,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGB",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "floor-v02-source",
       "family": "terrain",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -11250,22 +10977,6 @@
       "decodedBytesUpperBound": 4194304,
       "colorMetadata": [],
       "recordId": "lava-v02-source",
-      "family": "hazard",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/lava.png",
-      "sha256": "79c2d2afb5683a2aa7d83f89a7023b100756611557bc16a041daa4cdf12e32d6",
-      "bytes": 362158,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGB",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "lava-v01-source",
       "family": "hazard",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -15159,22 +14870,6 @@
       "approvalStatus": "approved"
     },
     {
-      "path": "public/assets/nav-book-v1.webp",
-      "sha256": "cc6e2bce98e4a7aa4a97f322795da4f13a3a9223c4ef44ef8719aea20010ff85",
-      "bytes": 39984,
-      "width": 192,
-      "height": 192,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 147456,
-      "colorMetadata": [],
-      "recordId": "nav-book-v01-source",
-      "family": "navigation",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/nav-help-v1.webp",
       "sha256": "7fa047dfa5c7bb78e506f07d88cf5497da5d843c5e0ff356de8acf0926686b04",
       "bytes": 38380,
@@ -15202,54 +14897,6 @@
       "decodedBytesUpperBound": 147456,
       "colorMetadata": [],
       "recordId": "nav-home-v01-source",
-      "family": "navigation",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/nav-mazes-v1.webp",
-      "sha256": "2239300fb6214222d3a79ecac5e0e7c5485ba8b060976e6365032df522b01efd",
-      "bytes": 39740,
-      "width": 192,
-      "height": 192,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 147456,
-      "colorMetadata": [],
-      "recordId": "nav-mazes-v01-source",
-      "family": "navigation",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/nav-restart-v1.webp",
-      "sha256": "df340068f61b6c10b5d103e5183d3735e1928ede43d86e20361c5692bb8ac8a4",
-      "bytes": 39230,
-      "width": 192,
-      "height": 192,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 147456,
-      "colorMetadata": [],
-      "recordId": "nav-restart-v01-source",
-      "family": "navigation",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/nav-sound-v1.webp",
-      "sha256": "1b2ded285dc17bf16d07f3c09b4f9d3fd47e415f58c15606287ebaee0de8485c",
-      "bytes": 37742,
-      "width": 192,
-      "height": 192,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 147456,
-      "colorMetadata": [],
-      "recordId": "nav-sound-v01-source",
       "family": "navigation",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -15655,38 +15302,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/treasure-gold-chest-v1.webp",
-      "sha256": "9e99fad6dc318707214520aaf49e58a71bdb06b4f7b3fd6624b1319b77613fb8",
-      "bytes": 162116,
-      "width": 384,
-      "height": 384,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 589824,
-      "colorMetadata": [],
-      "recordId": "treasure-gold-chest-v01-source",
-      "family": "item",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/treasure-science-beaker-v1.webp",
-      "sha256": "5d5b1cd0044aceff5369df16b8591b4895192223d50e8ac796df4912f3cb211f",
-      "bytes": 109992,
-      "width": 384,
-      "height": 384,
-      "format": "webp",
-      "mode": "RGBA",
-      "alphaMode": "straight",
-      "decodedBytesUpperBound": 589824,
-      "colorMetadata": [],
-      "recordId": "treasure-science-beaker-v01-source",
-      "family": "item",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/treasure-science-gears-v1.webp",
       "sha256": "fec8e7ce80dd53c7e8cad7d70274a1dd44e31434b6ecf646b487f761607f8ee2",
       "bytes": 152034,
@@ -15735,22 +15350,6 @@
       "approvalStatus": "historical"
     },
     {
-      "path": "public/assets/wall-dark-dungeon-v1.png",
-      "sha256": "f6e94564f355fd467f443c48fc1c532455d8bb338bb921692c814ce037ac688f",
-      "bytes": 705590,
-      "width": 1024,
-      "height": 1024,
-      "format": "png",
-      "mode": "P",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 4194304,
-      "colorMetadata": [],
-      "recordId": "wall-dark-dungeon-v01-source",
-      "family": "terrain",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
       "path": "public/assets/wall-hedge-v1.png",
       "sha256": "2fc3f2f455811f4770460c95ff8aff3dfeeecc3f28c968b29e82cb4486a44ca0",
       "bytes": 846192,
@@ -15762,54 +15361,6 @@
       "decodedBytesUpperBound": 4194304,
       "colorMetadata": [],
       "recordId": "wall-hedge-v01-source",
-      "family": "terrain",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/wall-mossy-ruin-v1.png",
-      "sha256": "4bfab69daff66ade3b569641cb268227a8fd23d809fb58702ba537225fd9c139",
-      "bytes": 740792,
-      "width": 1024,
-      "height": 1024,
-      "format": "png",
-      "mode": "P",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 4194304,
-      "colorMetadata": [],
-      "recordId": "wall-mossy-ruin-v01-source",
-      "family": "terrain",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/wall-sandstone-v1.png",
-      "sha256": "dc8844d2b3bd3a8b42cac21f2958772991d3cac7a59206cdaabf2769bb41a073",
-      "bytes": 572843,
-      "width": 1024,
-      "height": 1024,
-      "format": "png",
-      "mode": "P",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 4194304,
-      "colorMetadata": [],
-      "recordId": "wall-sandstone-v01-source",
-      "family": "terrain",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/wall-v2.png",
-      "sha256": "e0751540239caeeefe13d771d8343f67489b8c98ad762ae3186c73e98722343c",
-      "bytes": 354984,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGB",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "wall-v02-source",
       "family": "terrain",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -15842,22 +15393,6 @@
       "decodedBytesUpperBound": 4194304,
       "colorMetadata": [],
       "recordId": "water-v02-source",
-      "family": "hazard",
-      "runtimeStatus": "superseded",
-      "approvalStatus": "historical"
-    },
-    {
-      "path": "public/assets/water.png",
-      "sha256": "cba6d5d1fde179edc25a694640b035bac5b7d40c3d815ed78aafab7b86b58d29",
-      "bytes": 378418,
-      "width": 512,
-      "height": 512,
-      "format": "png",
-      "mode": "RGB",
-      "alphaMode": "opaque",
-      "decodedBytesUpperBound": 1048576,
-      "colorMetadata": [],
-      "recordId": "water-v01-source",
       "family": "hazard",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
@@ -15973,6 +15508,401 @@
       "family": "weapon",
       "runtimeStatus": "superseded",
       "approvalStatus": "historical"
+    }
+  ],
+  "retiredRuntimeImages": [
+    {
+      "path": "public/assets/animal-cage.png",
+      "recordId": "animal-cage-v01-source",
+      "sha256": "0a957a8a5638aec5f158a0f110e5ab80bdbdd220b8285c697e366445dc1abfcb",
+      "bytes": 259172,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/cage-golden-heart-front-v5.webp",
+        "public/assets/cage-storybook-wood-front-v5.webp",
+        "public/assets/cage-moon-silver-front-v5.webp",
+        "public/assets/cage-garden-vine-front-v5.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/boots.png",
+      "recordId": "boots-v01-source",
+      "sha256": "9d15d23d7747dcab691fc94a22b423b0fb2e9b995a07256d46351f81a1a1b9a6",
+      "bytes": 302111,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/items/splash-boots-v02-prop-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/cage-garden-vine-front-v4.png",
+      "recordId": "cage-garden-vine-front-v04-source",
+      "sha256": "386e06db557d57aad71e0aca065a9603aca74c0e84f9319419b0a2515f4c5f5b",
+      "bytes": 255708,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/cage-garden-vine-front-v5.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/cage-garden-vine-v1.png",
+      "recordId": "cage-garden-vine-v01-source",
+      "sha256": "a7280f8560832f5a7378ec59d303a923ee5b53a4c13f157bb17e6bfe44b50f87",
+      "bytes": 333153,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/cage-garden-vine-front-v5.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/cage-golden-heart-front-v4.png",
+      "recordId": "cage-golden-heart-front-v04-source",
+      "sha256": "b1e95c11f80628d4cccc5c275a4ee5476c888b63a42f95db262d22718d532e76",
+      "bytes": 187462,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/cage-golden-heart-front-v5.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/cage-moon-silver-front-v4.png",
+      "recordId": "cage-moon-silver-front-v04-source",
+      "sha256": "13be403862609c71aaf2fb79fd411f6f936c77275512cac1f8edf9b59e047a5b",
+      "bytes": 222084,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/cage-moon-silver-front-v5.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/cage-storybook-wood-front-v4.png",
+      "recordId": "cage-storybook-wood-front-v04-source",
+      "sha256": "677f2567b27238fba8fc91951fa3e3d562ef304681df78f0e8781ab4526aef2c",
+      "bytes": 229854,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/cage-storybook-wood-front-v5.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/cage-storybook-wood-v1.png",
+      "recordId": "cage-storybook-wood-v01-source",
+      "sha256": "ccbf05783c2cd9841b47557e1c04bb6ed700fd8690c57ef2f1ecb3a61e72799d",
+      "bytes": 307326,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/cage-storybook-wood-front-v5.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/coin-pouch.png",
+      "recordId": "coin-pouch-v01-source",
+      "sha256": "d47b3f32f967b71c942c3d517df52ad5021dfcc6e96d566feea6605452707eb5",
+      "bytes": 326649,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/items/gold-bag-v02-prop-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/enemy-acorn-knight-v1.png",
+      "recordId": "enemy-acorn-knight-v01-source",
+      "sha256": "3ce31ae371ec74073bff560ee2fc09c949b8e7c2d05579bdfd93b1eef10eb607",
+      "bytes": 302579,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/enemies/acorn-knight-v02-enemy-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/enemy-bubble-dragon-v1.png",
+      "recordId": "enemy-bubble-dragon-v01-source",
+      "sha256": "ed0d89a443defd9ca998dc1eaa4927367f56d2dac189d544892c908b7e7e2e8c",
+      "bytes": 306994,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/enemies/bubble-dragon-v02-enemy-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/enemy-clockwork-crab-v1.webp",
+      "recordId": "enemy-clockwork-crab-v01-source",
+      "sha256": "3d124382dfd070e51d57273033ed6a5f9343efbc72727f0a1b405797d25812ff",
+      "bytes": 214946,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/enemies/clockwork-crab-v02-enemy-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/enemy-moon-bat-v1.png",
+      "recordId": "enemy-moon-bat-v01-source",
+      "sha256": "9bba8777a6233328555ae72f8d1f219999b9b3086df59e115b9a9aee57ce18a7",
+      "bytes": 238705,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/enemies/moon-bat-v02-enemy-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/enemy-mushroom-imp-v1.png",
+      "recordId": "enemy-mushroom-imp-v01-source",
+      "sha256": "5d3114bdb868a96812e5ff157ce17c5c7314e8042b259783b06716d85959a20b",
+      "bytes": 281085,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/enemies/mushroom-imp-v02-enemy-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/enemy-pumpkin-sprite-v1.webp",
+      "recordId": "enemy-pumpkin-sprite-v01-source",
+      "sha256": "7e98d790c724771531e439ee28dc67d0368122292b055615f481755eed470879",
+      "bytes": 217050,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/enemies/pumpkin-sprite-v02-enemy-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/floor-peach-leafstone-v1.png",
+      "recordId": "floor-peach-leafstone-v01-source",
+      "sha256": "0b4d53cc7fe4a1370dc969c02ff8af448d217c502ef2ea8b19c12a63e5f2befe",
+      "bytes": 837214,
+      "width": 1024,
+      "height": 1024,
+      "decodedBytesUpperBound": 4194304,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/terrain/floor-peach-leafstone-v02-terrain-periodic-1024-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/floor-pearl-shell-v1.png",
+      "recordId": "floor-pearl-shell-v01-source",
+      "sha256": "a0fe9ec779ca1ef62b22467287944d84f0acb3cf03d814d95d5e929e96ec88e0",
+      "bytes": 776702,
+      "width": 1024,
+      "height": 1024,
+      "decodedBytesUpperBound": 4194304,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/terrain/floor-pearl-shell-v02-terrain-periodic-1024-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/floor-v2.png",
+      "recordId": "floor-v02-source",
+      "sha256": "171986acc9de70a10d215cdcbb39ae63a240b994fe0069e20f04fb332b680a08",
+      "bytes": 345877,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/floor-v3.png"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/lava.png",
+      "recordId": "lava-v01-source",
+      "sha256": "79c2d2afb5683a2aa7d83f89a7023b100756611557bc16a041daa4cdf12e32d6",
+      "bytes": 362158,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/lava-v2.png"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/nav-book-v1.webp",
+      "recordId": "nav-book-v01-source",
+      "sha256": "cc6e2bce98e4a7aa4a97f322795da4f13a3a9223c4ef44ef8719aea20010ff85",
+      "bytes": 39984,
+      "width": 192,
+      "height": 192,
+      "decodedBytesUpperBound": 147456,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-book-v02-navigation-optical-128-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/nav-mazes-v1.webp",
+      "recordId": "nav-mazes-v01-source",
+      "sha256": "2239300fb6214222d3a79ecac5e0e7c5485ba8b060976e6365032df522b01efd",
+      "bytes": 39740,
+      "width": 192,
+      "height": 192,
+      "decodedBytesUpperBound": 147456,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-mazes-v04-navigation-optical-128-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/nav-restart-v1.webp",
+      "recordId": "nav-restart-v01-source",
+      "sha256": "df340068f61b6c10b5d103e5183d3735e1928ede43d86e20361c5692bb8ac8a4",
+      "bytes": 39230,
+      "width": 192,
+      "height": 192,
+      "decodedBytesUpperBound": 147456,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-restart-v02-navigation-optical-128-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/nav-sound-v1.webp",
+      "recordId": "nav-sound-v01-source",
+      "sha256": "1b2ded285dc17bf16d07f3c09b4f9d3fd47e415f58c15606287ebaee0de8485c",
+      "bytes": 37742,
+      "width": 192,
+      "height": 192,
+      "decodedBytesUpperBound": 147456,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/navigation/nav-sound-v03-navigation-optical-128-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/treasure-gold-chest-v1.webp",
+      "recordId": "treasure-gold-chest-v01-source",
+      "sha256": "9e99fad6dc318707214520aaf49e58a71bdb06b4f7b3fd6624b1319b77613fb8",
+      "bytes": 162116,
+      "width": 384,
+      "height": 384,
+      "decodedBytesUpperBound": 589824,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/items/gold-chest-v02-prop-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/treasure-science-beaker-v1.webp",
+      "recordId": "treasure-science-beaker-v01-source",
+      "sha256": "5d5b1cd0044aceff5369df16b8591b4895192223d50e8ac796df4912f3cb211f",
+      "bytes": 109992,
+      "width": 384,
+      "height": 384,
+      "decodedBytesUpperBound": 589824,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/items/science-beaker-v02-prop-field-256-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/wall-dark-dungeon-v1.png",
+      "recordId": "wall-dark-dungeon-v01-source",
+      "sha256": "f6e94564f355fd467f443c48fc1c532455d8bb338bb921692c814ce037ac688f",
+      "bytes": 705590,
+      "width": 1024,
+      "height": 1024,
+      "decodedBytesUpperBound": 4194304,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/terrain/wall-dark-dungeon-v02-terrain-periodic-1024-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/wall-mossy-ruin-v1.png",
+      "recordId": "wall-mossy-ruin-v01-source",
+      "sha256": "4bfab69daff66ade3b569641cb268227a8fd23d809fb58702ba537225fd9c139",
+      "bytes": 740792,
+      "width": 1024,
+      "height": 1024,
+      "decodedBytesUpperBound": 4194304,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/terrain/wall-mossy-ruin-v02-terrain-periodic-1024-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/wall-sandstone-v1.png",
+      "recordId": "wall-sandstone-v01-source",
+      "sha256": "dc8844d2b3bd3a8b42cac21f2958772991d3cac7a59206cdaabf2769bb41a073",
+      "bytes": 572843,
+      "width": 1024,
+      "height": 1024,
+      "decodedBytesUpperBound": 4194304,
+      "replacementPaths": [
+        "public/assets/mgjrpg-02/terrain/wall-golden-sandstone-v02-terrain-periodic-1024-r01.webp"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/wall-v2.png",
+      "recordId": "wall-v02-source",
+      "sha256": "e0751540239caeeefe13d771d8343f67489b8c98ad762ae3186c73e98722343c",
+      "bytes": 354984,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/wall-v3.png"
+      ],
+      "gitBlobRestoreVerified": true
+    },
+    {
+      "path": "public/assets/water.png",
+      "recordId": "water-v01-source",
+      "sha256": "cba6d5d1fde179edc25a694640b035bac5b7d40c3d815ed78aafab7b86b58d29",
+      "bytes": 378418,
+      "width": 512,
+      "height": 512,
+      "decodedBytesUpperBound": 1048576,
+      "replacementPaths": [
+        "public/assets/water-v2.png"
+      ],
+      "gitBlobRestoreVerified": true
     }
   ],
   "sourceImages": [

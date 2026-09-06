@@ -7,6 +7,20 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Authorized storage cleanup, 2026-09-06:** Human confirmed a full-repo ZIP
+  backed up externally and approved deleting superseded unused delivery art and
+  the eleven named obsolete worktrees. The eleven are removed (~17.55 GiB);
+  [receipt](reviews/2026-09-06-approved-worktree-cleanup.md) preserves paths,
+  commits and recovery. Main, QA/review evidence, two Tessera holds and other
+  unapproved worktrees remain. [Early asset batch](source-assets/retirement/early-assets-2026-09-06.json)
+  removes 30 exact superseded delivery files /9,488,260B, with 104 dependency
+  holds retained. Source masters, active/dormant art and current catalogue paths
+  are unchanged. Validation/deployment closure is recorded in
+  [early report](source-assets/retirement/PLAN12_EARLY_REPORT.md).
+  Final Plan12/13 gates, old hosted deployments and Git history remain untouched.
+  This changes the public inventory, not v0.22.10's JS/CSS or gameplay; do not
+  overwrite/relabel its previously frozen Windows artifact with this new payload.
+
 - **Deployment operations, 2026-09-06:** Human's screenshots confirm24.07GB
   Deployment Storage in the selected MsP view, redundant docs-only deployments
   and duplicate branch/main builds. [Investigation](reviews/2026-09-06-vercel-storage-investigation.md)
@@ -17,7 +31,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   remain identical. Old hosted storage remains; no reclamation is claimed.
   User upgraded to Pro and selected **mazesopuzzle.com**; old alias stays available
   because browser saves are origin-local. Both domains' HTML/JS/CSS equal frozen
-  e28d44b. No retention/deletion/archive is authorized. Backup commits continue;
+  e28d44b. No hosted-deployment deletion or retention change is authorized. Backup commits continue;
   runtime and frozen dist remain unchanged. Ops commits may advance main beyond
   e28d44b: do not relabel the staged Windows artifact or relax exact-source checks.
   Finish pending native qualification against its recorded frozen inputs/artifact.

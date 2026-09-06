@@ -14,6 +14,7 @@ from jsonschema.exceptions import SchemaError
 
 from cutout import alpha_component_sizes
 from manifest import compare_manifest
+from retirement import derivative_matches, load_retirements
 from model import (
     CALIBRATION_ROOT,
     CANARY_REVIEW_SCHEMA,
@@ -2751,6 +2752,11 @@ def validate_all() -> dict[str, Any]:
     source_owners: dict[str, list[str]] = defaultdict(list)
     recipes: dict[str, tuple[Path, dict[str, Any]]] = {}
     reviews: dict[str, tuple[Path, dict[str, Any]]] = {}
+    try:
+        retired = load_retirements()
+    except (ValueError, OSError, KeyError) as exc:
+        retired = {}
+        errors.append(_message("error", "retirement-authority", "delivery retirement", str(exc)))
 
     for required in (SCHEMA_PATH, ROOT / PROMPT_HISTORY_PATH):
         if not required.is_file():
@@ -2815,6 +2821,10 @@ def validate_all() -> dict[str, Any]:
             if path_value.startswith(("public/assets/", "src-tauri/icons/")):
                 runtime_destination_declared = True
             derivative_owners[path_value].append(record_id)
+            if path_value in retired:
+                if not derivative_matches(record, derivative, retired):
+                    errors.append(_message("error", "retired-derivative-mismatch", label, path_value))
+                continue
             path = _validate_file_evidence(
                 derivative,
                 owner=label,

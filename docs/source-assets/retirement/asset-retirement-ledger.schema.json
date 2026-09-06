@@ -100,6 +100,7 @@
         "export-staged",
         "external-backup-confirmed",
         "retired-from-runtime",
+        "retired-early-delivery",
         "restored"
       ]
     },
@@ -200,6 +201,7 @@
           ]
         },
         "state": { "$ref": "#/$defs/state" },
+        "earlyRetirement": { "const": "early-assets-2026-09-06.json" },
         "eligibleForPlan12": { "type": "boolean" },
         "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "bytes": { "type": "integer", "minimum": 1 },
@@ -303,8 +305,12 @@
       },
       "allOf": [
         {
+          "if": { "properties": { "state": { "const": "retired-early-delivery" } }, "required": ["state"] },
+          "then": { "required": ["earlyRetirement"] }
+        },
+        {
           "if": { "properties": { "eligibleForPlan12": { "const": false } }, "required": ["eligibleForPlan12"] },
-          "then": { "properties": { "state": { "enum": ["classified", "rollback-hold", "restored"] } } }
+          "then": { "properties": { "state": { "enum": ["classified", "rollback-hold", "restored", "retired-early-delivery"] } } }
         },
         {
           "if": { "properties": { "eligibleForPlan12": { "const": true } }, "required": ["eligibleForPlan12"] },
@@ -330,7 +336,7 @@
           },
           "then": {
             "properties": {
-              "state": { "const": "rollback-hold" },
+              "state": { "enum": ["rollback-hold", "retired-early-delivery"] },
               "eligibleForPlan12": { "const": false },
               "currentReferences": {
                 "contains": {

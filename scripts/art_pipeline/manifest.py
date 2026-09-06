@@ -9,6 +9,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+from retirement import RETIREMENT_ROOT, RECEIPT_NAME, derivative_matches, load_retirements
+
 from model import (
     CANARY_REVIEW_SCHEMA,
     CALIBRATION_ROOT,
@@ -128,6 +130,10 @@ def _aggregate(rows: list[dict[str, Any]], key: str) -> list[dict[str, Any]]:
 
 def build_manifest() -> tuple[dict[str, Any], list[str]]:
     errors: list[str] = []
+    try:
+        retired = load_retirements()
+    except (ValueError, OSError, KeyError) as exc:
+        return {}, [f"Invalid delivery retirement authority: {exc}"]
     records: list[tuple[Path, dict[str, Any]]] = []
     record_ids: set[str] = set()
     derivative_owners: dict[str, list[str]] = defaultdict(list)
@@ -333,6 +339,10 @@ def build_manifest() -> tuple[dict[str, Any], list[str]]:
         for derivative in record.get("derivatives", []):
             raw_path = str(derivative.get("path", ""))
             derivative_owners[raw_path].append(record_id)
+            if raw_path in retired:
+                if not derivative_matches(record, derivative, retired):
+                    errors.append(f"{record_id}: retired derivative identity differs: {raw_path}")
+                continue
             path = _resolve_recorded_path(raw_path)
             if path is None or not path.is_file():
                 errors.append(f"{record_id}: derivative is missing or invalid: {raw_path}")
@@ -456,7 +466,7 @@ def build_manifest() -> tuple[dict[str, Any], list[str]]:
 
     runtime_paths = {row["path"] for row in runtime_rows}
     for derivative_path, owners in sorted(derivative_owners.items()):
-        if derivative_path.startswith("public/assets/") and derivative_path not in runtime_paths:
+        if derivative_path.startswith("public/assets/") and derivative_path not in runtime_paths and derivative_path not in retired:
             errors.append(
                 f"{derivative_path}: record derivative is absent from the runtime image inventory "
                 f"({', '.join(owners)})"
@@ -542,6 +552,10 @@ def build_manifest() -> tuple[dict[str, Any], list[str]]:
             "brandInventoryExclusionReason": "Phase-2 brand provenance; docs/source-assets/app-icon.png remains an actionable unreferenced-source warning.",
         },
         "inputs": {
+            "deliveryRetirement": [
+                _fingerprint(ROOT / RETIREMENT_ROOT / name)
+                for name in (RECEIPT_NAME, "asset-retirement-ledger.json", "asset-retirement-ledger.schema.json")
+            ],
             "recordSchema": {
                 "path": posix_relative(SCHEMA_PATH),
                 "sha256": sha256_file(SCHEMA_PATH),
@@ -597,6 +611,7 @@ def build_manifest() -> tuple[dict[str, Any], list[str]]:
         "runtimeByFormat": _aggregate(runtime_rows, "format"),
         "records": record_rows,
         "runtimeImages": runtime_rows,
+        "retiredRuntimeImages": [retired[path] for path in sorted(retired)],
         "sourceImages": source_rows,
     }
     return manifest, sorted(set(errors))

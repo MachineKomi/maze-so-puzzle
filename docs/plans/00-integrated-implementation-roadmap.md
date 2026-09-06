@@ -560,6 +560,14 @@ a root-reviewed committed and pushed checkpoint.
 
 ### 5.10 Soundtrack delivery and final asset retirement
 
+**Early cleanup exception, 2026-09-06:** Human confirmed the full local repo is
+backed up externally and authorized direct deletion of proven superseded unused
+delivery art. [Plan 12](12-asset-retirement-and-package-hygiene.md) now includes a
+bounded 30-file / 9,488,260-byte early batch with exact tombstones; 104 dependency
+holds and all active/dormant art remain. The final consumer freeze and later
+package sweep are not closed by this housekeeping checkpoint. Eleven separately
+approved obsolete worktrees were also removed; their history/evidence survives.
+
 The Human-delivered original soundtrack is now present in six approved physical
 pools under `public/assets/ost/`: `title`, `story`, `maze`, `victory`, `garden`
 and `adventure-book`. Its 42 MP3s are content authority. Checkpoint 03M replaced
