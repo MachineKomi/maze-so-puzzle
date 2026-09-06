@@ -1,3 +1,4 @@
+import { DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME } from "./audioCalibration";
 import { expect, it } from "vitest";
 import { DEFAULT_PRESENTATION_PREFERENCES, PRESENTATION_PREFERENCES_KEY, readPresentationPreferences, resolveMotion, writePresentationPreferences } from "./motion";
 it("defaults, clamps and round-trips device channel levels without changing progress", () => {
@@ -5,7 +6,7 @@ it("defaults, clamps and round-trips device channel levels without changing prog
   const storage = {getItem: () => saved, setItem: (_key: string, value: string) => { saved = value; }};
   expect(readPresentationPreferences(storage)).toMatchObject({musicVolume: 0, sfxVolume: 1});
   saved = JSON.stringify({musicVolume: "100", sfxVolume: null});
-  expect(readPresentationPreferences(storage)).toMatchObject({musicVolume: .1, sfxVolume: 1});
+  expect(readPresentationPreferences(storage)).toMatchObject({musicVolume: DEFAULT_MUSIC_VOLUME, sfxVolume: DEFAULT_SFX_VOLUME});
   writePresentationPreferences({...DEFAULT_PRESENTATION_PREFERENCES, musicVolume: .08, sfxVolume: .91}, storage);
   expect(readPresentationPreferences(storage)).toMatchObject({musicVolume: .08, sfxVolume: .91});
 });
@@ -21,9 +22,9 @@ it("handles malformed and denied preference storage without touching progress", 
   expect([...values.keys()]).toEqual([PRESENTATION_PREFERENCES_KEY]);
   expect(readPresentationPreferences(storage)).toEqual({...DEFAULT_PRESENTATION_PREFERENCES,motion:"reduced",quality:"lite",pace:"zippy"});
   values.set(PRESENTATION_PREFERENCES_KEY,JSON.stringify({motion:"full",quality:"static"}));
-  expect(readPresentationPreferences(storage)).toEqual({...DEFAULT_PRESENTATION_PREFERENCES,motion:"full",quality:"static",pace:"regular",musicVolume:.22});
+  expect(readPresentationPreferences(storage)).toEqual({...DEFAULT_PRESENTATION_PREFERENCES,motion:"full",quality:"static",pace:"regular",musicVolume:.22,sfxVolume:1});
   values.set(PRESENTATION_PREFERENCES_KEY,JSON.stringify({motion:"reduced",quality:"lite",pace:"turbo"}));
-  expect(readPresentationPreferences(storage)).toEqual({...DEFAULT_PRESENTATION_PREFERENCES,motion:"reduced",quality:"lite",pace:"regular",musicVolume:.22});
+  expect(readPresentationPreferences(storage)).toEqual({...DEFAULT_PRESENTATION_PREFERENCES,motion:"reduced",quality:"lite",pace:"regular",musicVolume:.22,sfxVolume:1});
   values.set(PRESENTATION_PREFERENCES_KEY,"not-json");
   expect(readPresentationPreferences(storage)).toEqual(DEFAULT_PRESENTATION_PREFERENCES);
   expect(writePresentationPreferences(DEFAULT_PRESENTATION_PREFERENCES,{getItem:() => null,setItem:() => { throw Error("denied"); }})).toBe(false);

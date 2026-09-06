@@ -148,7 +148,8 @@ export async function replayRouteStep(page: Page, step: DerivedRouteStep): Promi
       }), { timeout:1_500 }).toBe(true);
       await expect.poll(() => page.locator(blockingPresentationSelector).count(), { timeout:8_000 }).toBe(0);
     }
-    await page.waitForTimeout(90);
+    // PLAY-A accepts discrete inputs at the same200ms Regular cadence as holds.
+    await page.waitForTimeout(220);
     await expectUiRouteState(page, step.result.state);
   } finally {
     if (blocking) await page.evaluate(() => {

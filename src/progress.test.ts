@@ -8,6 +8,7 @@ import {
   LEGACY_PLAYER_PROGRESS_STORAGE_KEY,
   migratePlayerProgress,
   PLAYER_PROGRESS_STORAGE_KEY,
+  PLAYER_PROGRESS_SCHEMA_VERSION,
   readPlayerProgress,
   REWARD_LABELS,
   STICKER_LABELS,
@@ -65,7 +66,7 @@ describe("player progress migration and persistence", () => {
     const second = createDefaultPlayerProgress();
 
     expect(first).toEqual({
-      schemaVersion: 6,
+      schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
       unlockedLevelCount: 1,
       campaignOrderVersion: 2,
       unlockedLevelIds: ["little-star-trail"],
@@ -86,6 +87,7 @@ describe("player progress migration and persistence", () => {
       bestPerfectRescueStreak: 0,
       completionReceipts: [],
       discoveredEnemyIds: [],
+      discoveredFriendIds: [],
     });
     expect(first.stickers).not.toBe(second.stickers);
     expect(first.bestResultsByLevel).not.toBe(second.bestResultsByLevel);
@@ -100,7 +102,7 @@ describe("player progress migration and persistence", () => {
   ])("migrates a v1 value %j", (stored, expectedUnlocked) => {
     const migrated = migratePlayerProgress(stored);
 
-    expect(migrated.schemaVersion).toBe(6);
+    expect(migrated.schemaVersion).toBe(PLAYER_PROGRESS_SCHEMA_VERSION);
     expect(migrated.unlockedLevelCount).toBe(expectedUnlocked);
     expect(migrated.gold).toBe(0);
   });
@@ -116,7 +118,7 @@ describe("player progress migration and persistence", () => {
     };
 
     expect(loaded.unlockedLevelCount).toBe(4);
-    expect(copied).toMatchObject({ schemaVersion: 6, unlockedLevelCount: 4 });
+    expect(copied).toMatchObject({ schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION, unlockedLevelCount: 4 });
   });
 
   it("prefers a valid v2 save and sanitizes unsafe values", () => {
@@ -145,7 +147,7 @@ describe("player progress migration and persistence", () => {
     const loaded = readPlayerProgress(storage);
 
     expect(loaded).toMatchObject({
-      schemaVersion: 6,
+      schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
       unlockedLevelCount: 1,
       gold: 14,
       stickers: ["animal-friend"],
@@ -172,7 +174,7 @@ describe("player progress migration and persistence", () => {
       bestRescuedSpecies: [],
     });
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 6 });
+      .toMatchObject({ schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION });
   });
 
   it("migrates v2 species and generated history conservatively", () => {
@@ -197,7 +199,7 @@ describe("player progress migration and persistence", () => {
     });
 
     expect(migrated).toMatchObject({
-      schemaVersion: 6,
+      schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION,
       totalMazesCompleted: 1,
       totalCompletions: 2,
       generatedCompletions: 0,
@@ -321,13 +323,13 @@ describe("player progress migration and persistence", () => {
 
     expect(readPlayerProgress(storage).unlockedLevelCount).toBe(6);
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 6, unlockedLevelCount: 6 });
+      .toMatchObject({ schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION, unlockedLevelCount: 6 });
 
     storage.values.set(PLAYER_PROGRESS_STORAGE_KEY, "{broken");
     storage.values.set(VERSION_THREE_PLAYER_PROGRESS_STORAGE_KEY, "{broken");
     expect(readPlayerProgress(storage).unlockedLevelCount).toBe(4);
     expect(JSON.parse(storage.values.get(PLAYER_PROGRESS_STORAGE_KEY) ?? "null"))
-      .toMatchObject({ schemaVersion: 6, unlockedLevelCount: 4 });
+      .toMatchObject({ schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION, unlockedLevelCount: 4 });
   });
 
   it("preserves unknown future campaign identity through sanitize, apply, and storage", () => {
@@ -437,7 +439,7 @@ describe("player progress migration and persistence", () => {
     }));
 
     const loaded = readPlayerProgress(storage);
-    expect(loaded).toMatchObject({ schemaVersion: 6, unlockedLevelCount: 3 });
+    expect(loaded).toMatchObject({ schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION, unlockedLevelCount: 3 });
     expect(loaded.completionReceipts).toEqual([]);
   });
 

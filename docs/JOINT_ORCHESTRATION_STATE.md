@@ -17,18 +17,27 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   records32friends/12guardians. Continue bounded DELIGHT-02B, LEARN-01 and the
   [remaining roadmap](plans/00-integrated-implementation-roadmap.md#4-remaining-execution-order-and-delivery-gates).
   Claude remains bounded advice. Native acceptance and physical iPad evidence are
-  separate from web qualification. New restored folders are being reconciled.
+  separate from web qualification. Restored folders are reconciled in the
+  [arrival receipt](reviews/2026-09-06-restored-folder-reconciliation.md).
+
+- **Player-facing candidate:** `codex/phone02-book`, accepted-wall restoration
+  `e926737`, implements PHONE-02, fresh/recommended audio65/85 and BOOK-02A.
+  [Candidate record](reviews/2026-09-06-phone02-book-candidate.md) owns qualification.
+  649 project tests pass; focused browser17/17 and actual Sol's independent29-image
+  review pass at the recorded snapshots. Broader regression/probe repairs and
+  paired performance remain in progress. This is backed-up WIP, not deployed;
+  intended release0.22.12 is not yet frozen. No native/iPad acceptance is implied.
 
 - **Recovery boundary retained:** [receipt](migrations/2026-09-06-new-laptop-recovery.md)
   owns exact tooling/restored proofs and prior fresh642 project/build/static/12guard
-  checks. Claude text is present. QA now contains partial playtests/v0220 and
-  v02210 plus the Human's copying-in-progress README; migration wall/worktree
-  packet and native0.22.10 attachment remain absent. Completeness/hash verification
-  is pending; see the18:44 UTC artifact-ledger arrival note.
+  checks. Claude, QA, both Tessera holds and the exact staged native0.22.10
+  attachment are recovered; the latter is identity-verified but not release-accepted.
+  The final migration wall packet/consolidated patch backup remain absent.
+  Historical copied worktree pointers are preserved, not relinked as active checkouts.
   Full-art validation has ledger-byte errors and a historical environment/zlib
   reproduction mismatch. Live web remains0.22.10, published Windows0.22.9,
   candidate0.22.11 unpromoted and native0.22.10 separately unfinished. New-host
-  matched wall timing remains the first engineering gate. No physical iPad,
+  matched wall timing now supports the R1 HOLD above. No physical iPad,
   Human wall beauty, native release or educational success is implied.
   [Docs-only deployment instructions](VERCEL_DEPLOYMENT.md) preserve backup pushes
   without routine web builds; [artifact ledger](LOCAL_ARTIFACT_LEDGER.md) records

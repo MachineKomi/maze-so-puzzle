@@ -2,20 +2,21 @@ import { createElement, createRef } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ASSETS, STICKER_ART } from "../../assets";
-import { resolveEnemyArt } from "../../artCatalog";
-import { ENEMY_BOOK_LORE } from "../../bookLore";
+import { resolveAnimalArt, resolveEnemyArt } from "../../artCatalog";
+import { FRIEND_BOOK_LORE, ENEMY_BOOK_LORE } from "../../bookLore";
 import { CURATED_LEVELS } from "../../game/levels";
-import { ENEMY_STYLE_IDS } from "../../game/types";
+import { ANIMAL_SPECIES, ENEMY_STYLE_IDS } from "../../game/types";
 import { createDefaultPlayerProgress } from "../../progress";
-import { AchievementsScreen, BookBestiary, BookKeepsakes } from "./AdventureBook";
+import { AchievementsScreen, BookFriends, BookBestiary, BookKeepsakes } from "./AdventureBook";
 
 const noDetail = () => {};
 
 describe("Book earned discovery and keepsakes", () => {
-  it("does not reveal or request any undiscovered guardian identity", () => {
+  it("shows actual grey sprite shapes without unknown names, lore or actions", () => {
     const markup = renderToStaticMarkup(createElement(BookBestiary, { discoveredEnemyIds: [], onDetail: noDetail }));
     for (const id of ENEMY_STYLE_IDS) {
-      expect(markup).not.toContain(resolveEnemyArt(id).src);
+      expect(markup).toContain(resolveEnemyArt(id).src);
+      expect(markup).not.toContain(`book-guardian:${id}`);
       expect(markup).not.toContain(resolveEnemyArt(id).label);
       expect(markup).not.toContain(ENEMY_BOOK_LORE[id]);
     }
@@ -29,7 +30,7 @@ describe("Book earned discovery and keepsakes", () => {
     expect(markup).toContain("Moon Bat");
     expect(markup).toContain("1 / 12 met");
     expect(markup).toContain("book-guardian:moon-bat");
-    expect(markup).not.toContain(resolveEnemyArt("goblin").src);
+    expect(markup).not.toContain("book-guardian:goblin");
     expect(markup).not.toContain("a-future-monster");
   });
 
@@ -72,4 +73,23 @@ describe("Book earned discovery and keepsakes", () => {
     expect(markup).toContain(ASSETS.storyProfessorPoggle);
     expect(markup).not.toContain(resolveEnemyArt("goblin").src);
   });
+});
+
+it("keeps all unknown friend cards silent and counts unique encounters separately from rescues", () => {
+  const progress = createDefaultPlayerProgress();
+  const empty = renderToStaticMarkup(createElement(BookFriends, { progress, onDetail: noDetail }));
+  expect(empty.match(/class="book-character-card book-unknown-card"/g)).toHaveLength(32);
+  expect(empty).toContain("0 / 32 met");
+  for (const id of ANIMAL_SPECIES) {
+    expect(empty).not.toContain(resolveAnimalArt(id).label);
+    expect(empty).not.toContain(FRIEND_BOOK_LORE[id]);
+    expect(empty).not.toContain(`book-friend:${id}`);
+  }
+  const partial = renderToStaticMarkup(createElement(BookFriends, { progress: { ...progress,
+    discoveredFriendIds: ["bunny", "bunny", "future-friend"], totalAnimalsRescued: 6 }, onDetail: noDetail }));
+  expect(partial).toContain("1 / 32 met");
+  expect(partial).toContain("6 happy rescues");
+  expect(partial).toContain("book-friend:bunny");
+  expect(partial).not.toContain("book-friend:fox");
+  expect(partial).not.toContain("future-friend");
 });

@@ -1,3 +1,4 @@
+import { DEFAULT_MUSIC_VOLUME } from "./audioCalibration";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const audioInstances: FakeAudio[] = [];
@@ -171,7 +172,7 @@ describe("background music", () => {
     expect(DEFAULT_MUSIC_TRACK_URL).toBe("/assets/ost/maze/MsP Maze Moonlit Friendship Quest.mp3");
     expect(audio?.loop).toBe(true);
     expect(audio?.preload).toBe("none");
-    expect(audio?.volume).toBe(0.10);
+    expect(audio?.volume).toBe(DEFAULT_MUSIC_VOLUME);
     expect(audio?.setAttribute).toHaveBeenCalledWith("playsinline", "");
     expect(audio?.play).toHaveBeenCalledOnce();
   });

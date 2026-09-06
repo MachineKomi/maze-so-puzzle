@@ -70,6 +70,7 @@ export function FrontDoorScreen({ playRef, muted, onPlay, blocked }: FrontDoorSc
         )}
       </div>
       <span className="front-door-version">v{BUILD_VERSION}</span>
+      <p className="large-screen-note">For the best adventure, try a tablet, desktop monitor or TV.</p>
     </section>
   );
 }

@@ -1,5 +1,55 @@
 # UI / UX implementation specification
 
+## PHONE-02 / BOOK-02A candidate — 2026-09-06
+
+Current implementation is an **undeployed candidate, intended v0.22.12**, on
+`codex/phone02-book` after accepted-wall restoration commit `e926737`. Live web
+remains v0.22.10; R1's v0.22.11 wall candidate is held. Published Windows remains
+v0.22.9 and native v0.22.10 qualification is separately unfinished. See the
+[candidate/evidence record](reviews/2026-09-06-phone02-book-candidate.md).
+
+The [Human's phone/default-mix instruction](user-playtests/2026-09-06-phone-composition-and-default-mix.md)
+supersedes older phone-specific minimum-target and More-heavy composition rules
+where they conflict. In landscape, an **outer viewport height below 450 CSS px**
+selects a shared 720-logical-pixel stage fitted into the available safe content
+slot. Title, Home, gameplay, Book and portaled dialogs use the same composition.
+Other viewports keep their existing physical layout. Phone ThumbPad is 200
+logical pixels with proportionately smaller secondary controls; this is the
+requested desktop-style hierarchy, **not a claim of 48-physical-pixel targets**.
+Discreet Title/Home copy recommends a tablet, monitor or TV; it does not replace
+working phone controls. Enlarged reading and unobscured actions remain required.
+
+Safe-area padding belongs to the outer slot once. Board hit coordinates, actor
+positions and DOM bounds remain physical; layout measurements remain logical.
+Dialogs inherit stage scale and origin, with portrait inertness and focus return.
+Image rendition selection uses rendered physical extent (`logical size × scale`)
+and DPR. Reward-canvas coordinates and backing resolution account for the same
+scale and retain bounded pixel work. These are shared-surface requirements, not
+permission to shrink fonts or scale individual controls independently.
+
+Book uses frozen obtainable revision `obtainable-20260906`: **32 friends and 12
+guardians**, sourced by [Plan09-P0](reviews/2026-09-06-plan09-p0-obtainable-roster.md).
+Both unknown page types now show grey silhouettes of actual approved sprites,
+with neutral accessible labels and no identity/lore dialog. This supersedes the
+older visible-all-friends rule below. Normal visible encounters, including caged
+friends before rescue, persist immediately; hidden/tester/Book visits do not.
+X/Y counts unique eligible encounters; rescue totals remain separate. The
+[runtime contract](reviews/2026-09-06-book02a-runtime-contract.md) owns schema 7
+at the existing v6 key, migration proof, future-write protection and rollback.
+No Garden membership or new collection awards are introduced.
+
+Fresh Sound & comfort defaults are **Music 65 / SFX 85** slider positions.
+Existing valid calibration-v2 gains are preserved. **Recommended balance** is
+an explicit user action that changes only those gains and keeps mute unchanged;
+the [audio plan](plans/AUDIO-01-readiness-and-sound-design.md) owns the mix contract.
+
+Focused phone/Book browser pass r2 completed 17/17 after four first-pass failures.
+Subsequent reader/slot changes, the broader suite and final independent visual
+review still require closure in the candidate record. Automated viewport checks
+do not establish physical-device, family, acoustic or native release acceptance.
+Earlier sections retain their dated implementation history; this section governs
+the candidate where those older phone, Book-discovery or default-mix rules differ.
+
 ## V22-PLAY-01 PLAY-A pace contract
 
 Sound & comfort exposes one labelled, keyboard-operable cycle control with the

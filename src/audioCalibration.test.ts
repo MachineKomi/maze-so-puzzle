@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { MAX_SFX_VOLUME, musicGain, musicPosition, sfxGain, sfxPosition } from "./audioCalibration";
+import { DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME, MAX_SFX_VOLUME, musicGain, musicPosition, sfxGain, sfxPosition } from "./audioCalibration";
 
 describe("calibrated controls with raw-gain authority", () => {
-  it("has exact silence, 75-percent defaults and real upper headroom", () => {
+  it("has exact silence, 75-percent reference points and real upper headroom", () => {
     expect([musicGain(0), musicGain(.75), musicGain(1)]).toEqual([0, .1, 1]);
     expect([musicPosition(0), musicPosition(.1), musicPosition(1)]).toEqual([0, .75, 1]);
     expect([sfxGain(0), sfxGain(.75), sfxGain(1)]).toEqual([0, 1, MAX_SFX_VOLUME]);
@@ -28,7 +28,7 @@ describe("calibrated controls with raw-gain authority", () => {
       expect(sfxGain(sfxPosition(gain))).toBeCloseTo(gain, 14);
     }
   });
-  it("keeps the music slope continuous at the default and clamps invalid input", () => {
+  it("keeps the music slope continuous at the reference point and clamps invalid input", () => {
     const h = 1e-7;
     expect((musicGain(.75) - musicGain(.75 - h)) / h).toBeCloseTo((musicGain(.75 + h) - musicGain(.75)) / h, 5);
     for (const forward of [musicGain, sfxGain]) {
@@ -38,4 +38,11 @@ describe("calibrated controls with raw-gain authority", () => {
       expect(forward(Infinity)).toBe(forward(.75));
     }
   });
+});
+
+it("recommends quieter music and clearer cues without moving the saved-gain curve", () => {
+  expect(musicPosition(DEFAULT_MUSIC_VOLUME)).toBeCloseTo(.65, 14);
+  expect(sfxPosition(DEFAULT_SFX_VOLUME)).toBeCloseTo(.85, 14);
+  expect(musicGain(.75)).toBe(.1);
+  expect(sfxGain(.75)).toBe(1);
 });

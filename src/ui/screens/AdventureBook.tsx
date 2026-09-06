@@ -1,9 +1,10 @@
+import { BOOK_FRIEND_IDS, BOOK_GUARDIAN_IDS } from "../../bookRoster";
 import { useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { ASSETS, STICKER_ART, MEDAL_ART, BADGE_ART } from "../../assets";
 import { resolveAnimalArt, resolveEnemyArt } from "../../artCatalog";
 import { FRIEND_BOOK_LORE, ENEMY_BOOK_LORE } from "../../bookLore";
 import { CURATED_LEVELS } from "../../game/levels";
-import { ANIMAL_SPECIES, ENEMY_STYLE_IDS, type LevelDefinition } from "../../game/types";
+import { ANIMAL_SPECIES, type LevelDefinition } from "../../game/types";
 import { animalPersonality } from "../../game/visualPersonality";
 import { hasCurrentGameplay } from "../../game/contentIdentity";
 import { STICKER_LABELS, ACHIEVEMENT_LABELS, BADGE_IDS, BADGE_LABELS, type PlayerProgress } from "../../progress";
@@ -28,21 +29,30 @@ function PageHeading({ eyebrow, title, count, children }: { eyebrow: string; tit
   return <div className="book-page-heading"><div><span className="book-eyebrow">{eyebrow}</span><h2>{title}</h2>{children && <p>{children}</p>}</div>{count && <span className="book-count">{count}</span>}</div>;
 }
 
+function UnknownPage({ art, label }: { art: string; label: string }) {
+  return <article className="book-character-card book-unknown-card" aria-label={label}>
+    <span className="book-character-art book-silhouette" aria-hidden="true"><CatalogueImage src={art} usage="field" displayPx={128} alt="" loading="lazy" /></span>
+  </article>;
+}
+
 export function BookFriends({ progress, onDetail }: { progress: PlayerProgress; onDetail: DetailHandler }) {
+  const discovered = new Set(progress.discoveredFriendIds);
+  const count = BOOK_FRIEND_IDS.filter(id => discovered.has(id)).length;
   const classifiedRescues = ANIMAL_SPECIES.reduce((total, species) => total + progress.rescuesBySpecies[species], 0);
   const unclassifiedRescues = Math.max(0, progress.totalAnimalsRescued - classifiedRescues);
   return <>
-    <PageHeading eyebrow="The friends along the way" title="Little friends, lovely stories" count={`${progress.totalAnimalsRescued} helped`}>Choose a friend to take a closer look.</PageHeading>
+    <PageHeading eyebrow="The friends along the way" title="Little friends, lovely stories" count={`${count} / ${BOOK_FRIEND_IDS.length} met`}>Meet little friends to fill their pages. {progress.totalAnimalsRescued} happy rescues so far.</PageHeading>
     <div className="book-character-grid friend-ledger-grid">
-      {ANIMAL_SPECIES.map(species => {
+      {BOOK_FRIEND_IDS.map((species, index) => {
         const art = resolveAnimalArt(species);
+        if (!discovered.has(species)) return <UnknownPage key={species} art={art.src} label={`Friend page ${index + 1}: not met yet`} />;
         const rescues = progress.rescuesBySpecies[species];
         const personality = animalPersonality(species);
         return <button key={species} className={`book-character-card book-friend-card${rescues ? " has-memory" : ""}`} data-focus-id={`book-friend:${species}`}
           onClick={event => onDetail({ art: art.src, label: art.label, description: `${personality.greeting}. ${FRIEND_BOOK_LORE[species]} ${rescues ? `${rescues} ${rescues === 1 ? "happy rescue" : "happy rescues"} recorded in Ame's Book.` : "A lovely friend to look out for on your travels."}` }, event.currentTarget)}>
           <span className="book-character-art"><CatalogueImage src={art.src} usage="field" displayPx={128} alt="" loading="lazy" /></span>
           <strong>{art.label}</strong><span className="book-character-greeting">{personality.greeting}</span>
-          <span className="book-rescue-count">{rescues ? <><b>{rescues}</b> {rescues === 1 ? "happy rescue" : "happy rescues"}</> : "An adventure awaits"}</span>
+          <span className="book-rescue-count">{rescues ? <><b>{rescues}</b> {rescues === 1 ? "happy rescue" : "happy rescues"}</> : "Met on an adventure"}</span>
         </button>;
       })}
       {unclassifiedRescues > 0 && <article className="book-character-card book-earlier-friends"><CatalogueImage src={ASSETS.rewardAnimalFriendSticker} alt="" loading="lazy" /><strong>Earlier friends</strong><p>{unclassifiedRescues} happy rescues from before the roll-call began.</p></article>}
@@ -50,17 +60,17 @@ export function BookFriends({ progress, onDetail }: { progress: PlayerProgress; 
   </>;
 }
 
-/** Discovery is supplied by normal-play progress. Unknown identities never enter markup or image requests. */
+/** Discovery is supplied by normal-play progress. Only the intentionally requested sprite shape is exposed before discovery. */
 export function BookBestiary({ discoveredEnemyIds, onDetail }: { discoveredEnemyIds: readonly string[]; onDetail: DetailHandler }) {
   const discovered = new Set(discoveredEnemyIds);
-  const count = ENEMY_STYLE_IDS.filter(id => discovered.has(id)).length;
+  const count = BOOK_GUARDIAN_IDS.filter(id => discovered.has(id)).length;
   return <>
-    <PageHeading eyebrow="Poggle's field notes" title="Meet the maze guardians" count={`${count} / ${ENEMY_STYLE_IDS.length} met`}>A page for every guardian you meet on your adventures.</PageHeading>
+    <PageHeading eyebrow="Poggle's field notes" title="Meet the maze guardians" count={`${count} / ${BOOK_GUARDIAN_IDS.length} met`}>A page for every guardian you meet on your adventures.</PageHeading>
     <div className="book-field-note"><CatalogueImage src={ASSETS.storyProfessorPoggle} alt="" /><p>Puzzlewild guardians love a friendly challenge. Find a maze weapon, then match or beat their Power to help them scoot aside.</p></div>
     <div className="book-character-grid bestiary-grid">
-      {ENEMY_STYLE_IDS.map((id, index) => {
-        if (!discovered.has(id)) return <article className="book-character-card book-unknown-card" key={id} aria-label={`Guardian page ${index + 1}: not met yet`}><span className="book-unknown-art" aria-hidden="true">?</span><strong>A guardian to meet</strong><span className="book-character-greeting">A new story is waiting somewhere in the Puzzlewild.</span><span className="book-rescue-count">Not met yet</span></article>;
+      {BOOK_GUARDIAN_IDS.map((id, index) => {
         const art = resolveEnemyArt(id);
+        if (!discovered.has(id)) return <UnknownPage key={id} art={art.src} label={`Guardian page ${index + 1}: not met yet`} />;
         return <button className="book-character-card book-guardian-card" key={id} data-focus-id={`book-guardian:${id}`} onClick={event => onDetail({ art: art.src, label: art.label, description: ENEMY_BOOK_LORE[id] }, event.currentTarget)}>
           <span className="book-character-art"><CatalogueImage src={art.src} usage="field" displayPx={128} alt="" loading="lazy" /></span><strong>{art.label}</strong><span className="book-character-greeting">{ENEMY_BOOK_LORE[id]}</span><span className="book-rescue-count">Met on an adventure</span>
         </button>;

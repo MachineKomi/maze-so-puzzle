@@ -6,7 +6,7 @@ import { CURATED_LEVELS } from "../../src/game/levels";
 import { solveLevel } from "../../src/game/solver";
 import { createInitialGameState, movePlayer } from "../../src/game/engine";
 import { DIRECTIONS, DIRECTION_DELTAS, type Direction } from "../../src/game/types";
-import { advanceFollowerProcession, createFollowerProcession, followerTargets } from "../../src/game/followerTrail";
+import { advanceFollowerProcession, joinFollowerProcession, createFollowerProcession, followerTargets } from "../../src/game/followerTrail";
 import { deriveRoute, heldSegment, selectTesterLevel, replayRouteStep, expectUiRouteState, keyForDirection } from "./gameplay-browser";
 
 const output = resolve(process.env.MAZE_PERF_EVIDENCE_DIR!, "movement");
@@ -23,13 +23,15 @@ async function travelState(page:Page) {
     const rect=board.getBoundingClientRect(),cols=Number(board.style.getPropertyValue("--grid-size"));
     const size={x:parseFloat(getComputedStyle(board).width)-board.clientLeft*2,y:parseFloat(getComputedStyle(board).height)-board.clientTop*2};
     const cell={x:size.x/cols,y:size.y/cols};
-    const translation=(element:HTMLElement)=>{const parts=getComputedStyle(element).translate.split(" ");return {x:parseFloat(parts[0]!)||0,y:parseFloat(parts[1]!)||0};};
+    // PERF-02 uses percent world translation; resolve against its full box.
+    const translation=(element:HTMLElement)=>{const parts=getComputedStyle(element).translate.split(" ");const extent=element===world?{x:parseFloat(world.style.width)*size.x/100,y:parseFloat(world.style.height)*size.y/100}:{x:element.clientWidth,y:element.clientHeight};const px=(v:string|undefined,n:number)=>(parseFloat(v??"0")||0)*(v?.endsWith("%")?n/100:1);return {x:px(parts[0],extent.x),y:px(parts[1],extent.y)};};
     const w=translation(world),p=translation(player);
     const logicalCamera={x:-parseFloat(world.style.left)*cols/100,y:-parseFloat(world.style.top)*cols/100};
     const logical={x:parseFloat(player.style.left)*cols/100+logicalCamera.x,y:parseFloat(player.style.top)*cols/100+logicalCamera.y};
     const position={x:logical.x+(p.x-w.x)/cell.x,y:logical.y+(p.y-w.y)/cell.y};
     const camera={x:logicalCamera.x-w.x/cell.x,y:logicalCamera.y-w.y/cell.y};
-    return {position,logical,camera,cell,center:{x:rect.left+board.clientLeft+(position.x-camera.x+.5)*cell.x,y:rect.top+board.clientTop+(position.y-camera.y+.5)*cell.y},state:board.dataset.travelState,
+    const sx=rect.width/board.offsetWidth,sy=rect.height/board.offsetHeight;
+    return {position,logical,camera,cell:{x:cell.x*sx,y:cell.y*sy},center:{x:rect.left+(board.clientLeft+(position.x-camera.x+.5)*cell.x)*sx,y:rect.top+(board.clientTop+(position.y-camera.y+.5)*cell.y)*sy},state:board.dataset.travelState,
       followers:Array.from(board.querySelectorAll<HTMLElement>("[data-follower-id]")).map(f=>{const t=translation(f);return {id:f.dataset.followerId,
         x:parseFloat(f.style.left)*Number(world.style.width.replace("%",""))/100*cols/100+t.x/cell.x,
         y:parseFloat(f.style.top)*Number(world.style.height.replace("%",""))/100*cols/100+t.y/cell.y};})};
@@ -178,6 +180,7 @@ for(const kind of ["door-opened","enemy-defeated","hole-jumped","portal-warped"]
     await page.emulateMedia({reducedMotion:"no-preference"});
     await page.keyboard.press(keyForDirection[route[index-1]!.direction]);
     await page.waitForTimeout(70);const approach=await travelState(page);
+    await page.waitForTimeout(150); // complete the accepted Regular input interval
     await page.keyboard.press(keyForDirection[step.direction]);await expectUiRouteState(page,step.result.state);
     const selector={"door-opened":".door-opening-presentation","enemy-defeated":".battle-presentation","hole-jumped":".jump-presentation","portal-warped":".portal-presentation"}[kind];
     await expect(page.locator(selector)).toHaveCount(1);
@@ -188,7 +191,8 @@ for(const kind of ["door-opened","enemy-defeated","hole-jumped","portal-warped"]
       await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
       const stationary=await travelState(page);expect(stationary.position.x).toBeCloseTo(step.before.position.x,4);expect(stationary.position.y).toBeCloseTo(step.before.position.y,4);
       const translated=await page.evaluate(()=>[...document.querySelectorAll<HTMLElement>("[data-travel-camera-anchor]")].map(e=>({actual:e.style.translate,world:document.querySelector<HTMLElement>(".camera-world")!.style.translate})));
-      for(const anchor of translated)expect(anchor.actual).toBe(anchor.world);
+      // Full-world translation is absolute; camera-relative anchors are settled at zero.
+      for(const anchor of translated)expect(anchor.actual.split(" ").every(value=>parseFloat(value)===0)).toBe(true);
     }
     await page.screenshot({path:resolve(output,`interaction-${kind}.png`)});
     await expect(page.locator(selector)).toHaveCount(0);await page.waitForTimeout(380);await expectUiRouteState(page,step.result.state);
@@ -218,6 +222,10 @@ test("MOVE five friends follow real corridors, reverse and stay off camera",asyn
     if(step.result.state.status!=="playing")break;
     await replayRouteStep(page,step);state=step.result.state;
     if(step.result.moved)procession=advanceFollowerProcession(procession,state.position,state.rescuedAnimalIds,step.result.events.some(e=>e.type==="hole-jumped"||e.type==="portal-warped"));
+    if(!step.result.moved) for(const event of step.result.events) if(event.type==="animal-rescued") {
+      const animal=level.objects.find(o=>o.id===event.objectId)!;
+      procession=joinFollowerProcession(procession,event.objectId,animal.at);
+    }
     await check();
   }
   expect(state.rescuedAnimalIds).toHaveLength(5);

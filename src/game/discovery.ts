@@ -22,3 +22,11 @@ export function enemyDiscoveriesForView(
       : []
   )))];
 }
+
+/** Same gameplay exposure as guardians; rescues also prove the specific friend. */
+export function friendDiscoveriesForView(level: LevelDefinition, position: Point, rescuedAnimalIds: readonly string[] = []): readonly string[] {
+  const visible = new Set(getVisibleTileKeys(level, position));
+  const rescued = new Set(rescuedAnimalIds);
+  return [...new Set(level.objects.flatMap(object => object.kind === "animal"
+    && (visible.has(toTileKey(object.at)) || rescued.has(object.id)) ? [object.species] : []))];
+}

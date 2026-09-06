@@ -129,6 +129,7 @@ export function TitleScreen({
         aria-label={`Playable build ${BUILD_VERSION}. Open the secret tester maze picker.`}
         title="Secret tester maze picker"
       >Playable build {BUILD_VERSION} <CatalogueImage src={ASSETS.navMazes} alt="" /></button>
+      <p className="large-screen-note">For the best adventure, try a tablet, desktop monitor or TV.</p>
     </section>
   );
 }

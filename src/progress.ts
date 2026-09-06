@@ -20,7 +20,9 @@ import {
   migrateCampaignAccess,
 } from "./campaign";
 
-export const PLAYER_PROGRESS_SCHEMA_VERSION = 6 as const;
+export const PLAYER_PROGRESS_SCHEMA_VERSION = 7 as const;
+// Keep this established key so released v6 readers see the future schema and
+// refuse writes; moving to a new key would expose a stale writable profile.
 export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v6";
 export const VERSION_FIVE_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v5";
 export const VERSION_FOUR_PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v4";
@@ -255,6 +257,7 @@ export interface PlayerProgress {
   readonly completionReceipts: readonly string[];
   /** Enemy style IDs actually seen during normal play; unknown future IDs survive round trips. */
   readonly discoveredEnemyIds: readonly string[];
+  readonly discoveredFriendIds: readonly string[];
 }
 
 export interface LevelRewardInput {
@@ -447,6 +450,12 @@ export function recordEnemyDiscoveries(
     : { ...progress, discoveredEnemyIds };
 }
 
+/** A friend encounter is independent of rescue/completion rewards. */
+export function recordFriendDiscoveries(progress: PlayerProgress, ids: readonly string[]): PlayerProgress {
+  const discoveredFriendIds = mergeUnique(progress.discoveredFriendIds, sanitizeEnemyDiscoveries(ids));
+  return discoveredFriendIds.length === progress.discoveredFriendIds.length ? progress : { ...progress, discoveredFriendIds };
+}
+
 function knownSpecies(value: unknown, maximum: number = ANIMAL_SPECIES.length): AnimalSpecies[] {
   if (!Array.isArray(value)) return [];
   const unique = new Set(value.filter(isAnimalSpecies));
@@ -536,6 +545,7 @@ export function createDefaultPlayerProgress(unlockedLevelCount = 1): PlayerProgr
     bestPerfectRescueStreak: 0,
     completionReceipts: [],
     discoveredEnemyIds: [],
+    discoveredFriendIds: [],
   };
 }
 
@@ -645,6 +655,7 @@ function sanitizeProgressObject(
   includeVersionThreeFields: boolean,
   includeCompletionReceipts = false,
   includeEnemyDiscoveries = false,
+  includeFriendDiscoveries = false,
 ): PlayerProgress {
   const bestResultsByLevel = sanitizeBestResults(
     ownValue(value, "bestResultsByLevel"),
@@ -781,6 +792,11 @@ function sanitizeProgressObject(
     completionReceipts: includeCompletionReceipts
       ? sanitizeCompletionReceipts(ownValue(value, "completionReceipts"))
       : [],
+    discoveredFriendIds: mergeUnique(
+      includeFriendDiscoveries ? sanitizeEnemyDiscoveries(ownValue(value, "discoveredFriendIds")) : [],
+      [...ANIMAL_SPECIES.filter(id => rescuesBySpecies[id] > 0),
+        ...results.flatMap(result => [...result.bestRescuedSpecies, ...(result.historicalBestRescuedSpecies ?? [])])],
+    ),
     discoveredEnemyIds: includeEnemyDiscoveries
       ? sanitizeEnemyDiscoveries(ownValue(value, "discoveredEnemyIds"))
       : [],
@@ -826,6 +842,10 @@ export function migratePlayerProgress(value: unknown): PlayerProgress {
 
   const schemaVersion = ownValue(value, "schemaVersion");
   if (schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION) {
+    return sanitizeProgressObject(value, true, true, true, true);
+  }
+
+  if (schemaVersion === 6) {
     return sanitizeProgressObject(value, true, true, true);
   }
 
@@ -1107,6 +1127,7 @@ export function applyLevelCompletion(
       ? [...current.completionReceipts, completionId].slice(-MAX_COMPLETION_RECEIPTS)
       : current.completionReceipts,
     discoveredEnemyIds: current.discoveredEnemyIds,
+    discoveredFriendIds: mergeUnique(current.discoveredFriendIds, rescuedSpecies),
   };
 }
 
@@ -1140,7 +1161,7 @@ export function hasUnsupportedProgressProfile(
   }
 }
 
-/** Save a sanitized v6 snapshot. Never overwrite a profile from a newer schema. */
+/** Save a sanitized current snapshot. Never overwrite a profile from a newer schema. */
 export function writePlayerProgress(
   progress: PlayerProgress,
   storage: ProgressStorage | null | undefined = undefined,
@@ -1168,7 +1189,7 @@ export function writePlayerProgress(
 }
 
 /**
- * Read v6 progress, falling back through v5, v4, v3, v2 and the numeric v1 save.
+ * Read schema7/v6 progress at the established key, falling back through v5, v4, v3, v2 and the numeric v1 save.
  * Legacy migrations copy to v6 without changing their original keys. A newer
  * schema stays untouched, returns a temporary default, and rejects all writes;
  * callers use hasUnsupportedProgressProfile to explain the read-only session.
@@ -1187,6 +1208,7 @@ export function readPlayerProgress(
         if (isUnsupportedProgressSnapshot(parsed)) return createDefaultPlayerProgress();
         if (isRecord(parsed) && (
           parsed.schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION
+          || parsed.schemaVersion === 6
           || parsed.schemaVersion === 5
           || parsed.schemaVersion === 4
           || parsed.schemaVersion === 3

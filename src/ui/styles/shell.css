@@ -18,3 +18,17 @@
  .rotate-message img { width: min(180px,40vw); }
  .rotate-message > span { font-size: 1.1rem; }
 }
+
+/* PHONE-02: keep the desktop composition and its proportional hierarchy. */
+.dialog-stage { position: fixed; inset: 0; z-index: 100; container: game-stage / size; pointer-events: none; }
+.dialog-stage > .modal-backdrop { pointer-events: auto; }
+.game-stage[data-phone-fit] .play-shell { padding: 8px; }
+.large-screen-note { display: none; }
+[data-phone-fit] .large-screen-note { display: block; position: absolute; inset: auto 3% 8px; text-align: center; font-size: .9rem; color: #493858; background: #fff8eae8; border-radius: 12px; padding: 5px 12px; }
+
+.app-frame:has(.game-stage[data-phone-fit]) { padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left); }
+
+.game-stage[data-phone-fit], .dialog-stage[data-phone-fit] { --safe-top: 0px; --safe-bottom: 0px; --safe-left: 0px; --safe-right: 0px; }
+[data-phone-fit] .large-screen-note { font-size: var(--phone-note-font,11px); line-height: 1.2; }
+
+.game-stage-slot { overflow: hidden; }

@@ -42,8 +42,8 @@ export function RewardLayer({ port, level, scene, active, quality, muted }: {
       // travel translate, not the hidden ordinary actor or logical next tile.
       const rect = anchors[0]!.getBoundingClientRect(), bounds = canvas.getBoundingClientRect();
       const target = {
-        x: visual.camera.left + (rect.left + rect.width * .5 - bounds.left) / width * visual.camera.width,
-        y: visual.camera.top + (rect.top + rect.height * .5 - bounds.top) / height * visual.camera.height,
+        x: visual.camera.left + (rect.left + rect.width * .5 - bounds.left) / bounds.width * visual.camera.width,
+        y: visual.camera.top + (rect.top + rect.height * .5 - bounds.top) / bounds.height * visual.camera.height,
       };
       if (!Number.isFinite(target.x + target.y) || !rewardSpaceOpen(level.terrain, target.x, target.y)) { cancel(); return; }
       let collected = 0;
@@ -110,7 +110,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted }: {
       if (!tokens.length) {
         ({ width, height } = scene.current.contentSize);
         if (width <= 0 || height <= 0) return;
-        scale = Math.min(devicePixelRatio || 1, 1.5, 1536 / width, 1536 / height);
+        scale = Math.min((devicePixelRatio || 1) * canvas.getBoundingClientRect().width / width, 1.5, 1536 / width, 1536 / height);
         canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
         ctx.setTransform(scale, 0, 0, scale, 0, 0); previous = now; pitch = 0;
       }

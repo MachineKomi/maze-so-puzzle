@@ -1,4 +1,5 @@
-import { Children, isValidElement, useId, useLayoutEffect, useRef, useState, type ReactNode, type KeyboardEvent } from "react";
+import { StageFitContext } from "../ResponsiveStage";
+import { useContext, Children, isValidElement, useId, useLayoutEffect, useRef, useState, type ReactNode, type KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 
 export type DialogVariant = "standard" | "blocker" | "hint" | "story" | "celebration";
@@ -21,6 +22,7 @@ const initialControl = (dialog: HTMLElement) => dialog.querySelector<HTMLElement
   ?? dialog.querySelector<HTMLElement>("h2") ?? dialog;
 
 export function DialogShell({ title, children, onClose, returnFocus, variant = "standard", footer, showClose, onAdvance, advanceOnBodyClick = false }: DialogShellProps) {
+  const fit = useContext(StageFitContext);
   const ref = useRef<HTMLElement>(null);
   const [portrait, setPortrait] = useState(() => window.matchMedia("(orientation: portrait)").matches);
   const portraitFocus = useRef<HTMLElement | null>(null);
@@ -57,7 +59,12 @@ export function DialogShell({ title, children, onClose, returnFocus, variant = "
       // React removes background inertness in the same commit; restore afterwards.
       queueMicrotask(() => {
         if (stack.length && stack.at(-1) !== remaining) return;
+        // A responsive composition may recreate the invoker while portrait is
+        // inert. Recover its stable semantic control, not a detached DOM node.
+        const replacement = previous?.dataset.focusId
+          ? document.querySelector<HTMLElement>(`[data-focus-id="${CSS.escape(previous.dataset.focusId)}"]`) : null;
         const target = previous?.isConnected && !previous.closest("[inert]") ? previous
+          : replacement?.isConnected && !replacement.closest("[inert]") ? replacement
           : remaining ?? document.querySelector<HTMLElement>("[data-focus-id='maze-board'], .title-play-button, .front-door-play");
         target?.focus({ preventScroll: true });
       });
@@ -95,7 +102,7 @@ export function DialogShell({ title, children, onClose, returnFocus, variant = "
     else if (event.shiftKey && (active === first || !controls.includes(active as HTMLElement))) { event.preventDefault(); lastControl.focus(); }
     else if (!event.shiftKey && (active === lastControl || !controls.includes(active as HTMLElement))) { event.preventDefault(); first.focus(); }
   };
-  return createPortal(<div className="modal-backdrop" role="presentation" inert={portrait || undefined} aria-hidden={portrait || undefined}>
+  return createPortal(<div className="dialog-stage" data-phone-fit={fit.phone || undefined} style={fit.phone ? { left: fit.left, top: fit.top, width: fit.width, height: fit.height, transform: `scale(${fit.scale})`, transformOrigin: "top left" } : undefined}><div className="modal-backdrop" role="presentation" inert={portrait || undefined} aria-hidden={portrait || undefined}>
     <section ref={ref} className={`modal-card dialog-${variant}`} data-focus-group="dialog" role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1} onKeyDown={keyDown}
       onClick={event => {
         const selection = document.getSelection();
@@ -108,5 +115,5 @@ export function DialogShell({ title, children, onClose, returnFocus, variant = "
       <div className="dialog-body" data-scroll-region="dialog-body" role="region" aria-label={`${title} content`} tabIndex={0}>{body}</div>
       {actions && <footer className="dialog-footer">{actions}</footer>}
     </section>
-  </div>, document.body);
+  </div></div>, document.body);
 }

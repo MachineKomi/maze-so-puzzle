@@ -68,7 +68,7 @@ map at 1920×1080 and 62px art/164px map at 1194×834; 1280×720 and 1024×768 r
 height-constrained at 57px and 54px art respectively. This is an explicit map/art
 tradeoff, not a claim that every map or icon is larger at every size.
 
-Compact landscape begins below 600px content height or 800px width. Its normal
+The older compact fallback begins below 600px content height or 800px width. Its normal
 deck minimum is 440px; emergency width below 650px reserves 352px. A 568×320 view
 therefore has an approximately 204px square board (188px with 12px safe insets),
 a 96px map and 24px noninteractive status summaries. Short landscape uses two
@@ -91,9 +91,13 @@ no horizontal overflow in HUD/counters/objective/friend/bag containers. See
 observations do not claim the pending integrated production run passed, nor
 replace physical-device, performance or Human visual acceptance.
 
-The Adventure Book mounts one of five semantic pages. Schema 6 adds only
-`discoveredEnemyIds`, copied forward from older progress with an empty truthful
-discovery ledger. Normal visible/defeated guardians qualify; hidden objects,
+The Adventure Book mounts one of five semantic pages. Schema7 retains the v6
+storage key so an older runtime detects unsupported future data and refuses writes.
+It adds `discoveredFriendIds` beside `discoveredEnemyIds`. Species-specific rescue
+records prove historical friend encounters; aggregate rescues do not. Frozen
+`bookRoster.ts` sets define32/12 obtainable identities. Unknown cards expose only
+approved grey sprite shapes; known cards reveal names/lore. Discovery grants no
+currency or rescue credit. Normal visible/defeated guardians qualify; hidden objects,
 tester play, portrait and modal-paused scenes do not. The existing receipt,
 currency, layout-history and rescue data remain authoritative. A newer schema
 under the current key opens a temporary read-only session and leaves both its
@@ -173,7 +177,7 @@ contextual rendition remains distinct from the repaired 256px field derivative.
    rounded SVG paths in stable world coordinates, including holes, diagonal
    contacts, and the camera gutter used by the renderer.
 12. `src/campaign.ts` owns versioned campaign order/history and ID-based access
-    migration. `src/progress.ts` stores sanitized schema-v6 progress, stable
+    migration. `src/progress.ts` stores sanitized schema-v7 progress, stable
     unlocked story IDs, revision-scoped route records, and a bounded completion-
     receipt ledger in browser `localStorage`; old best steps remain explicitly
     historical after a map edit and a resumed pending exit cannot bank twice.
@@ -622,3 +626,19 @@ variance is qualified; see
 - Add background contexts through `MUSIC_TRACKS` and the existing gesture-safe
   controller. Keep short event stings separate from `MAZE_MUSIC_TRACKS`; preserve
   complete seeded shuffle cycles and the no-immediate-repeat rule.
+
+## PHONE-02 coordinated stage and audio defaults
+
+Short landscape screens (physical content height below450px) use one720px-high
+logical stage fitted to their available safe-area rectangle. Stage container
+queries keep desktop composition across gameplay, Book, Home/Title and portaled
+dialogs. There is no second camera or save owner. Pointer bounds and reward
+anchors use physical rectangles; image demand and transient Canvas backing sizes
+account for the stage scale. Desktop/tablet retain unscaled composition. Small
+phone controls are an explicit Human-directed tradeoff; 48px physical claims
+from older compact receipts do not apply to this new treatment. Text enlargement
+retains scroll and deliberate input isolation; physical-device comfort is separate.
+
+Fresh recommended gains are Music0.07511111111111113 / SFX1.1333333333333333,
+shown as65%/85% on the unchanged calibration-v2 curve. Existing exact gains/mute
+are preserved. Sound & comfort offers Recommended balance for deliberate adoption.

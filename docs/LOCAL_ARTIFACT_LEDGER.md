@@ -2,6 +2,50 @@
 
 ## Execution outputs — 2026-09-06
 
+### PHONE-02 / BOOK-02A candidate output snapshot
+
+Owner: runtime writer Astra; source baseline `e926737` on `codex/phone02-book`.
+These are qualification outputs for the **undeployed intended v0.22.12** candidate,
+not a release receipt. The [candidate record](reviews/2026-09-06-phone02-book-candidate.md)
+owns results and limits. File counts below measure only completed first-pass and
+prototype folders, around 19:27 UTC; subsequent runs are listed without a size
+claim. Preserve failed evidence alongside corrected reruns.
+
+| Path | Measured files / bytes | Purpose and retention |
+| --- | ---: | --- |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-20260906/` | 49 / 13,126,403 | Completed first phone/Book pass: 13 passed, 4 failed. Retain reports, geometry, captures and failure traces through qualification. |
+| `output/playwright/phone02-book/` | 2 / 1,437,522 | `prototype-book.png` (465,274 bytes), `prototype-game.png` (972,248 bytes). Layout exploration, not acceptance proof. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-20260906-r2/` | Not yet inventoried | Completed focused rerun: 17/17 passed in 39.799 seconds. Retain; later reader/slot edits still require final-source checks. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906/` | Not yet inventoried | Broader first run: 3 passed, 8 failed, 69 not run. Runtime owner attributes failures to inherited movement-probe parsing; retain the original report. |
+| `C:/GameDev/maze-game-qa/performance/phone02-book-full-20260906-r2/` | Pending; ongoing run | Corrected broader probe run. Do not infer completion or measure a moving output tree. |
+
+`dist/` has been rebuilt **in place** during candidate iteration; A02 below is
+the dated initial inventory, not its current content/size. No repository,
+dependency tree or build copy was created for these runs. The provenance marker
+`node_modules/.cache/maze-performance/build-provenance.json` observed at 19:27 UTC
+records `npm run build`, generated `2026-09-06T19:24:45.544Z`, parent HEAD `e926737`,
+runtime-input SHA-256 `b645645b52302cad10d805839eb4d0610beabb6887131935b3847a3adca5d0de`
+and dist SHA-256 `6c30e17573d030f9476b32944931471c4c2c6551198023ea3c9569c197194f88`.
+This is an intermediate observed build identity; later builds replace the marker
+and must supply their own final identity before release.
+
+`scripts/performance/phone-book.pw.ts` is reusable candidate proof source.
+`scripts/performance/installed-playwright-hook.mjs` maps `@playwright/test` to the
+already installed runtime selected by `MAZE_PLAYWRIGHT_PATH` through Node 24's
+optional import hook. It creates no shim package, dependency installation or
+lockfile change. Contract/review/spec Markdown records are durable source.
+
+The [19:03–19:06 UTC restored-folder reconciliation](reviews/2026-09-06-restored-folder-reconciliation.md)
+supersedes the earlier dated absence observations for newly arrived folders.
+The staged v0.22.10 portable executable is now recovered with its exact recorded
+hash (173,473,280 bytes); this establishes artifact identity, not launch/native
+release acceptance. Restored sibling/worktree copies have obsolete `.git` links
+and are evidence archives, not verified usable checkouts. The expected migration
+packet is still missing in that receipt. No cleanup, relinking or global rewrite
+of historical source/evidence paths is authorized by this reconciliation.
+
+### Retained wall diagnostic and planning source
+
 - `scripts/performance/new-host-wall-ab.mjs`: Astra-owned reusable bounded paired
   harness; tracked source. Frozen baseline/candidate hash checks, isolated profiles,
   same-origin assets, equal 16-step reversible route and retained frame/trace data.

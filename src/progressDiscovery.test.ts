@@ -139,12 +139,12 @@ describe("bestiary discovery persistence", () => {
   it("rechecks the stored schema before every write and refuses a newer in-memory snapshot", () => {
     const storage = new MemoryStorage();
     const progress = readPlayerProgress(storage);
-    const future = JSON.stringify({ schemaVersion: 7, futureReward: "from another tab" });
+    const future = JSON.stringify({ schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION + 1, futureReward: "from another tab" });
     storage.values.set(PLAYER_PROGRESS_STORAGE_KEY, future);
     expect(writePlayerProgress(progress, storage)).toBe(false);
     expect(storage.getItem(PLAYER_PROGRESS_STORAGE_KEY)).toBe(future);
     const emptyStorage = new MemoryStorage();
-    expect(writePlayerProgress({ ...progress, schemaVersion: 7 } as unknown as PlayerProgress, emptyStorage)).toBe(false);
+    expect(writePlayerProgress({ ...progress, schemaVersion: PLAYER_PROGRESS_SCHEMA_VERSION + 1 } as unknown as PlayerProgress, emptyStorage)).toBe(false);
     expect(emptyStorage.values.size).toBe(0);
   });
 

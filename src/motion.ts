@@ -36,7 +36,7 @@ function normalizePreferences(value?: Record<string, unknown>): PresentationPref
     audioCalibrationVersion: AUDIO_CALIBRATION_VERSION,
     motion: motion ?? "system", quality: quality ?? "full", pace: pace ?? "regular",
     musicVolume: audioLevel(value?.musicVolume, current ? DEFAULT_MUSIC_VOLUME : .22),
-    sfxVolume: current ? sfxLevel(value?.sfxVolume) : audioLevel(value?.sfxVolume, DEFAULT_SFX_VOLUME),
+    sfxVolume: current ? sfxLevel(value?.sfxVolume) : audioLevel(value?.sfxVolume, 1),
   };
 }
 export function readPresentationPreferences(storage?: Pick<Storage, "getItem">): PresentationPreferences {

@@ -1,3 +1,5 @@
+import { ResponsiveStage } from "./ui/ResponsiveStage";
+import { physicalContentRect } from "./ui/stageFit";
 import { MazeTerrain, lightVector } from "./ui/game/MazeTerrain";
 import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
 import { rewardSeed } from "./vfx/rewardPhysics";
@@ -51,7 +53,7 @@ import {
   pointsEqual,
   stayAfterPendingCompletion,
 } from "./game/engine";
-import { enemyDiscoveriesForView } from "./game/discovery";
+import { friendDiscoveriesForView, enemyDiscoveriesForView } from "./game/discovery";
 import { FRIEND_BOOK_LORE } from "./bookLore";
 import { heldWeaponStyle } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
@@ -92,6 +94,7 @@ import {
   calculateLevelReward,
   readPlayerProgress,
   recordEnemyDiscoveries,
+  recordFriendDiscoveries,
   hasUnsupportedProgressProfile,
   writePlayerProgress,
   type BadgeId,
@@ -930,12 +933,13 @@ function App() {
     // Current-run defeat receipts are direct encounter evidence, including a
     // guardian removed from the visible object layer during its celebration.
     const met = level.objects.flatMap(object => object.kind === "enemy" && game.defeatedEnemyIds.includes(object.id) ? [object.style ?? "goblin"] : []);
-    const next = recordEnemyDiscoveries(progress, [...visible,...met]);
+    const next = recordFriendDiscoveries(recordEnemyDiscoveries(progress, [...visible,...met]),
+      friendDiscoveriesForView(level, game.position, game.rescuedAnimalIds));
     if (next === progress) return;
     setProgress(next);
     const saved=writePlayerProgress(next);
     if (!saved) { setSaveWarning("progress"); setUnsupportedProfile(hasUnsupportedProgressProfile()); }
-  }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, progress]);
+  }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, game.rescuedAnimalIds, progress]);
 
   const setTouchCursor = useCallback((cursor: TouchCursor | null) => {
     const node = touchCursorRef.current;
@@ -1695,12 +1699,12 @@ function App() {
   const moveDirectionFromPointer = useCallback((clientX: number, clientY: number, previousDirection: Direction | null = null): PointerIntent | null => {
     const board=boardRef.current;
     if (!board) return null;
-    const rect=board.getBoundingClientRect();
+    const rect=physicalContentRect(board);
     const visual=sceneTravel.current;
-    const cellWidth = visual.contentSize.width / cameraWindow.width;
-    const cellHeight = visual.contentSize.height / cameraWindow.height;
-    const centerX = rect.left+board.clientLeft + (visual.position.x - visual.camera.left + 0.5) * cellWidth;
-    const centerY = rect.top+board.clientTop + (visual.position.y - visual.camera.top + 0.5) * cellHeight;
+    const cellWidth = rect.width / cameraWindow.width;
+    const cellHeight = rect.height / cameraWindow.height;
+    const centerX = rect.left + (visual.position.x - visual.camera.left + 0.5) * cellWidth;
+    const centerY = rect.top + (visual.position.y - visual.camera.top + 0.5) * cellHeight;
     return pointerIntentFromTileOffset(
       (clientX - centerX) / cellWidth,
       (clientY - centerY) / cellHeight,
@@ -1794,9 +1798,7 @@ function App() {
     event.preventDefault();
     beginInputSource("board");
     clearBoardPointer();
-    const borderRect = event.currentTarget.getBoundingClientRect();
-    const rect={left:borderRect.left+event.currentTarget.clientLeft,top:borderRect.top+event.currentTarget.clientTop,
-      width:sceneTravel.current.contentSize.width,height:sceneTravel.current.contentSize.height};
+    const rect = physicalContentRect(event.currentTarget);
     const origin = { x: event.clientX, y: event.clientY };
     const intent = pointerDirectionRef.current(origin.x, origin.y);
     const direction = intent?.direction ?? null;
@@ -2244,7 +2246,7 @@ function App() {
   return (
     <main ref={appFrameRef} className="app-frame">
       <div className="game-stage-slot" inert={portrait || undefined} aria-hidden={portrait || undefined}>
-        <section className={`game-stage screen-${screen}`} aria-label="Maze so Puzzle game" data-motion={motion} data-quality={preferences.quality}>
+        <ResponsiveStage className={`game-stage screen-${screen}`} aria-label="Maze so Puzzle game" data-motion={motion} data-quality={preferences.quality}>
         {(saveWarning || unsupportedProfile) && (
           <p className="save-warning" role="alert">
             {unsupportedProfile
@@ -2900,7 +2902,7 @@ function App() {
           </Modal>
         )}
 
-        </section>
+        </ResponsiveStage>
       </div>
 
       <div className="rotate-message" role="status">

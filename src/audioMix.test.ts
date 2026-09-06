@@ -1,3 +1,4 @@
+import { DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME } from "./audioCalibration";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { contexts, installAudioContext, resetAudioFakes } from "./test/audioFakes";
 
@@ -18,7 +19,7 @@ describe("independent device audio mix", () => {
     const mix = await import("./audioMix"), calibration = await import("./audioCalibration"), music = await import("./music");
     await music.startMusicFromUserGesture();
     const ctx = contexts[0]!, audio = players[0]!;
-    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([.1, 1]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME]);
     mix.setAudioLevels({musicVolume:calibration.musicGain(1),sfxVolume:calibration.sfxGain(1)});
     music.configureMusic({volume:calibration.musicGain(1)});
     expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([1, 4/3]);
@@ -31,7 +32,7 @@ describe("independent device audio mix", () => {
     mix.setAudioLevels({musicVolume:9,sfxVolume:9});
     expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([1,4/3]);
     mix.setAudioLevels({musicVolume:NaN,sfxVolume:NaN});
-    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([.1,1]);
+    expect(ctx.gains.slice(0, 2).map(node => node.gain.value)).toEqual([DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME]);
   });
   it("does not allocate or play while preferences and mute are initialized", async () => {
     const mix = await import("./audioMix");
@@ -46,7 +47,7 @@ describe("independent device audio mix", () => {
     expect(ctx.sources).toHaveLength(1); expect(ctx.gains).toHaveLength(3);
     expect(ctx.sources[0]!.connect).toHaveBeenCalledWith(ctx.gains[2]);
     expect(ctx.gains[2]!.connect).toHaveBeenCalledWith(ctx.gains[0]);
-    expect(audio.volume).toBe(1); expect(ctx.gains[0]!.gain.value).toBe(.1);
+    expect(audio.volume).toBe(1); expect(ctx.gains[0]!.gain.value).toBe(DEFAULT_MUSIC_VOLUME);
     music.configureMusic({ volume: .08 });
     expect(ctx.gains[0]!.gain.value).toBe(.08); expect(audio.volume).toBe(1);
     expect(audio.currentTime).toBe(12); expect(audio.play).toHaveBeenCalledTimes(1);

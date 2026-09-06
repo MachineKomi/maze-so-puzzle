@@ -1,4 +1,5 @@
-import { useLayoutEffect, useRef, useState, useSyncExternalStore, type ImgHTMLAttributes } from "react";
+import { StageFitContext } from "./ResponsiveStage";
+import { useContext, useLayoutEffect, useRef, useState, useSyncExternalStore, type ImgHTMLAttributes } from "react";
 import type { RuntimeArtUsage } from "../artCatalog";
 import { resolveUiArt, selectArtRendition, type UiArt } from "./art";
 
@@ -74,9 +75,10 @@ function subscribeDpr(listener: () => void) {
 export function CatalogueImage({ art: identity, src, fallbackSrc, usage = "optical", displayPx = 48, alt = "", onError, ...props }: CatalogueImageProps) {
   const element = useRef<HTMLImageElement>(null);
   const [renderedSize, setRenderedSize] = useState(displayPx);
+  const fit = useContext(StageFitContext);
   const dpr = useSyncExternalStore(subscribeDpr, readDpr, serverDpr);
   const art = resolveUiArt(identity ?? src ?? "");
-  const selected = art ? selectArtRendition(art, usage, renderedSize, dpr) : undefined;
+  const selected = art ? selectArtRendition(art, usage, renderedSize * fit.scale, dpr) : undefined;
   const [failed, setFailed] = useState<readonly string[]>([]);
   const requested = selected?.src ?? src;
   const absolute = (url: string) => typeof document === "undefined" ? url : new URL(url, document.baseURI).href;

@@ -1,7 +1,8 @@
 /** Slider positions are presentation only; persisted values are effective gains. */
 export const AUDIO_CALIBRATION_VERSION = 2;
-export const DEFAULT_MUSIC_VOLUME = 0.10;
-export const DEFAULT_SFX_VOLUME = 1;
+const MUSIC_CURVE_ANCHOR = 0.10;
+export const DEFAULT_MUSIC_VOLUME = MUSIC_CURVE_ANCHOR * (.65 / .75) ** 2;
+export const DEFAULT_SFX_VOLUME = (4 / 3) * .85;
 // Candidate ceiling: publication requires the AUDIO-01V2 rendered-peak review.
 export const MAX_SFX_VOLUME = 4 / 3;
 
@@ -14,14 +15,14 @@ export function sfxLevel(value: unknown): number {
 }
 export function musicGain(position: number): number {
   const u = audioLevel(position, .75);
-  if (u <= .75) return DEFAULT_MUSIC_VOLUME * (u / .75) ** 2;
+  if (u <= .75) return MUSIC_CURVE_ANCHOR * (u / .75) ** 2;
   const x = 4 * u - 3;
-  return DEFAULT_MUSIC_VOLUME + x / 15 + 5 * x * x / 6;
+  return MUSIC_CURVE_ANCHOR + x / 15 + 5 * x * x / 6;
 }
 export function musicPosition(gain: number): number {
   const g = audioLevel(gain, DEFAULT_MUSIC_VOLUME);
-  if (g <= DEFAULT_MUSIC_VOLUME) return .75 * Math.sqrt(g / DEFAULT_MUSIC_VOLUME);
-  const d = g - DEFAULT_MUSIC_VOLUME;
+  if (g <= MUSIC_CURVE_ANCHOR) return .75 * Math.sqrt(g / MUSIC_CURVE_ANCHOR);
+  const d = g - MUSIC_CURVE_ANCHOR;
   // Rationalized positive quadratic root retains precision near the join.
   const x = 2 * d / (Math.sqrt(1 / 225 + 10 * d / 3) + 1 / 15);
   return (3 + x) / 4;

@@ -94,7 +94,7 @@
 .objective-dock { flex: 0 0 auto; } .objective-dock button { width: 100%; }
 .adventure-hud[data-reader] .hud-reader { display: flex; flex: 1; flex-direction: column; gap: 8px; min-height: 0; overflow: auto; }
 .phone-more,.phone-hint { display: none; }
-@media (min-height: 601px) and (max-height: 800px) {
+@container game-stage (min-height: 601px) and (max-height: 800px) {
  .adventure-hud { padding: 12px; gap: 8px; }
  .controls-card p { display: none; }
 }
@@ -106,7 +106,7 @@
  .utility-row button { min-height: 52px; font-size: .75rem; }
  .utility-row img { width: 28px; height: 28px; }
 }
-@media (max-height: 600px) {
+@container game-stage (max-height: 600px) {
  .adventure-hud { padding: 8px; gap: 5px; border-radius: 20px; }
  .hud-header { gap: 4px; } .level-kicker { display: none; } .hud-title h2 { font-size: 1.1rem; } .power-counter img { width: 44px; height: 44px; }
  .wallet-pill img { width: 34px; height: 34px; } .hud-counters { gap: 5px; }
@@ -161,15 +161,15 @@
 .play-shell[data-emergency] :is(.power-counter,.wallet-pill) img { display: none; }
 .play-shell[data-emergency] .adventure-overview { --slot-size: 24px; }
 .play-shell[data-emergency] .maze-map-heading img { display: none; }
-@media (max-height: 449px) {
+@container game-stage (max-height: 449px) {
  .play-shell[data-layout="compact-landscape"] .adventure-equipment { display: flex; flex-direction: column; align-items: stretch; gap: 1px; }
  .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) { display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 4px; align-items: center; }
  .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) h3 { margin: 0; gap: 1px 3px; line-height: 1.05; }
 }
-@media (max-height: 340px) {
+@container game-stage (max-height: 340px) {
  .play-shell[data-layout="compact-landscape"] .adventure-overview { --slot-size: 24px; }
 }
-@media (min-width: 740px) and (max-height: 340px) {
+@container game-stage (min-width: 740px) and (max-height: 340px) {
  .play-shell[data-layout="compact-landscape"] .adventure-equipment { display: flex; flex-direction: row; gap: 4px; }
  .play-shell[data-layout="compact-landscape"] :is(.rescue-card,.bag-card) { display: flex; flex-direction: row; align-items: center; gap: 4px; min-width: 0; }
  .play-shell[data-layout="compact-landscape"] .rescue-card { flex: 0 0 190px; }
@@ -192,7 +192,7 @@
 .play-shell[data-emergency] .objective-card p { line-height: 1.15; }
 .adventure-hud[data-enlarged] .adventure-overview { flex: 0 0 auto; min-height: min-content; }
 
-@media (min-height: 450px) {
+@container game-stage (min-height: 450px) {
  .play-shell[data-layout="compact-landscape"] .adventure-hud { padding: 10px; gap: 8px; }
  .play-shell[data-layout="compact-landscape"] .hud-title h2 { font-size: 1.1rem; }
  .play-shell[data-layout="compact-landscape"] :is(.power-counter,.wallet-pill) img { width: 36px; height: 36px; }
@@ -209,3 +209,11 @@
 .play-shell[data-layout="compact-landscape"] .adventure-hud[data-reader] .hud-reader { margin-bottom: 160px; flex: 1 1 0; }
 .play-shell[data-layout="compact-landscape"] .adventure-hud[data-reader] .objective-dock .objective-hint-button { display: flex; gap: 8px; align-items: center; justify-content: center; width: 100%; min-height: 48px; }
 .play-shell[data-layout="compact-landscape"] .adventure-hud[data-reader] .objective-dock img { width: 28px; height: 28px; }
+
+/* Shared composition with a modest relative pad emphasis on short screens. */
+.game-stage[data-phone-fit] .thumb-pad { width: 200px; height: 200px; }
+.game-stage[data-phone-fit] .power-counter img { width: 56px; height: 56px; }
+.game-stage[data-phone-fit] .wallet-pill img { width: 44px; height: 44px; }
+.game-stage[data-phone-fit] .deck-feedback { height: 36px; flex-basis: 36px; }
+
+.game-stage[data-phone-fit] .adventure-hud[data-reader] .objective-dock .objective-hint-button { display: flex; align-items: center; justify-content: center; gap: 8px; }

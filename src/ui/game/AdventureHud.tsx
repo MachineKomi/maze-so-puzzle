@@ -1,3 +1,4 @@
+import { StageFitContext } from "../ResponsiveStage";
 import { useContext, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type PointerEvent, type ButtonHTMLAttributes, type RefObject } from "react";
 import { ThumbPad } from "./ThumbPad";
 import { FRIEND_BOOK_LORE } from "../../bookLore";
@@ -28,16 +29,17 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
   stopHold: (event: PointerEvent<HTMLElement>) => void; enabled?: boolean; suggested: Direction | null; tester: boolean; feedback: ReactNode;
 }) {
   const compact = useContext(CompactPlayContext);
+  const phone = useContext(StageFitContext).phone;
   const hudRef = useRef<HTMLElement>(null);
   const objectiveRef = useRef<HTMLParagraphElement>(null);
   const [reader, setReader] = useState(false);
   useLayoutEffect(() => {
     const paragraph = objectiveRef.current!;
-    const update = () => setReader(compact && parseFloat(getComputedStyle(paragraph).fontSize) >= 24);
+    const update = () => setReader((compact || phone) && parseFloat(getComputedStyle(paragraph).fontSize) >= 24);
     // Inline paragraphs have no ResizeObserver box; observe their block parent.
     update(); const observer = new ResizeObserver(update); observer.observe(paragraph.parentElement!);
     return () => observer.disconnect();
-  }, [compact, model.objective]);
+  }, [compact, phone, model.objective]);
   useLayoutEffect(() => {
     const hud = hudRef.current!;
     const overview = hud.querySelector<HTMLElement>(".adventure-overview")!;
@@ -45,24 +47,26 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
     const update = () => {
       const map = hud.querySelector<HTMLElement>(".maze-map-card")!;
       const minimap = map.querySelector<HTMLElement>(".maze-minimap")!;
-      const width = overview.clientWidth, height = overview.clientHeight;
-      const idealMap = parseFloat(getComputedStyle(hud.parentElement!).getPropertyValue("--map-size"));
-      if (!Number.isFinite(idealMap) || height <= 0) return;
-      const mapChrome = map.getBoundingClientRect().height - minimap.getBoundingClientRect().height;
       if (compact) return;
       const enlarged = parseFloat(getComputedStyle(document.documentElement).fontSize) >= 24;
       hud.toggleAttribute("data-enlarged", enlarged);
+      // Enlarged content can exhaust the available height. Clear the fitted
+      // columns before that early return so the reader can wrap and scroll.
       if (enlarged) { hud.style.removeProperty("--map-size"); overview.style.removeProperty("--fitted-slot-size"); overview.style.removeProperty("--fitted-columns"); return; }
-      const minimumMap = innerWidth >= 1280 ? 192 : 164;
+      const width = overview.clientWidth, height = overview.clientHeight;
+      const idealMap = parseFloat(getComputedStyle(hud.parentElement!).getPropertyValue("--map-size"));
+      if (!Number.isFinite(idealMap) || height <= 0) return;
+      const mapChrome = map.offsetHeight - minimap.offsetHeight;
+      const minimumMap = hud.closest("[data-phone-fit]") ? 144 : hud.parentElement!.clientWidth >= 1280 ? 192 : 164;
       let mapSize = Math.max(minimumMap, Math.min(idealMap, Math.floor(height - mapChrome)));
-      const headers = [...equipment.querySelectorAll<HTMLElement>("h3")].reduce((sum, heading) => sum + heading.getBoundingClientRect().height + parseFloat(getComputedStyle(heading).marginBottom), 0);
+      const headers = [...equipment.querySelectorAll<HTMLElement>("h3")].reduce((sum, heading) => sum + heading.offsetHeight + parseFloat(getComputedStyle(heading).marginBottom), 0);
       const fit = (mapWidth: number) => {
       const equipmentWidth = width - mapWidth - 14;
-      let best = { columns: 1, size: 48 };
+      let best = { columns: 1, size: 0 };
       for (let columns = 1; columns <= Math.max(model.friends.length, model.slots.length, 1); columns++) {
         const friendRows = Math.ceil(model.friends.length / columns), bagRows = Math.ceil(model.slots.length / columns);
         const rows = friendRows + bagRows;
-        const emptyBag = model.slots.length ? 0 : equipment.querySelector(".bag-card p")?.getBoundingClientRect().height ?? 0;
+        const emptyBag = model.slots.length ? 0 : equipment.querySelector<HTMLElement>(".bag-card p")?.offsetHeight ?? 0;
         const size = Math.min(112, (equipmentWidth - (columns - 1) * 6) / columns, (height - headers - 16 - Math.max(0, friendRows - 1) * 6 - Math.max(0, bagRows - 1) * 6 - emptyBag) / Math.max(1, rows));
         if (size > best.size) best = { columns, size };
       }
@@ -73,7 +77,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
       // largest map that allows 64px portraits, retaining 48px real controls.
       while (best.size < 64 && mapSize > minimumMap) { mapSize--; best = fit(mapSize); }
       hud.style.setProperty("--map-size", `${mapSize}px`);
-      overview.style.setProperty("--fitted-slot-size", `${Math.max(48, Math.floor(best.size))}px`);
+      overview.style.setProperty("--fitted-slot-size", `${Math.max(hud.closest("[data-phone-fit]") ? 32 : 48, Math.floor(best.size))}px`);
       overview.style.setProperty("--fitted-columns", `${best.columns}`);
     };
     hud.style.removeProperty("--map-size"); overview.style.removeProperty("--fitted-slot-size"); overview.style.removeProperty("--fitted-columns");
@@ -99,7 +103,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
       {compact && !reader && <div className="phone-hint">{hint}</div>}
       {compact && <button className="phone-more" data-focus-id="more" onClick={e => onMore(e.currentTarget)}>More <span aria-hidden="true">···</span></button>}
     </header>
-    <section className="objective-card" aria-labelledby="objective-title"><div><h3 id="objective-title">Right now</h3><p ref={objectiveRef}>{model.objective}</p></div>{!compact && hint}</section>
+    <section className="objective-card" aria-labelledby="objective-title"><div><h3 id="objective-title">Right now</h3><p ref={objectiveRef}>{model.objective}</p></div>{!compact && !reader && hint}</section>
     <div className="adventure-overview" data-dense={Math.max(model.friends.length,model.slots.length) > 6 || undefined} style={{"--collection-columns": Math.min(3,Math.max(1,Math.max(model.friends.length,model.slots.length)))} as CSSProperties}>
       {map}
       <div className="adventure-equipment">

@@ -174,7 +174,7 @@ async function replayRouteStep(page: Page, step: DerivedRouteStep) {
       await expect.poll(() => page.evaluate(() => (window as Window & {__uiPresentation?:{seen:boolean}}).__uiPresentation?.seen)).toBe(true);
       await expect(page.locator(selectors)).toHaveCount(0, { timeout: 8000 });
     }
-    await page.waitForTimeout(90);
+    await page.waitForTimeout(220); // accepted Regular discrete-input cadence
     await expectUiRouteState(page, step.result.state);
   } finally {
     if (blocking) await page.evaluate(() => {
@@ -273,8 +273,8 @@ for (const saved of [false, true]) {
         expect(box.right).toBeLessThanOrEqual(geometry.copy.right);
       }
       for (const box of geometry.controls) {
-        expect(box.width).toBeGreaterThanOrEqual(48);
-        expect(box.height).toBeGreaterThanOrEqual(48);
+        expect(box.width).toBeGreaterThanOrEqual(height < 450 ? 48 * height / 720 - .1 : 48);
+        expect(box.height).toBeGreaterThanOrEqual(height < 450 ? 48 * height / 720 - .1 : 48);
       }
       await evidence(page, `home-${saved ? "saved" : "fresh"}-${width}`, geometry);
       await page.addStyleTag({ content:"html {font-size:200%;} p,button,h2 {line-height:1.5;letter-spacing:.12em;word-spacing:.16em;} p {margin-bottom:2em;}" });
@@ -329,7 +329,7 @@ for (const viewport of [{ width: 1920, height: 1080 }, { width: 1194, height: 83
     expect(geometry.body.x).toBeLessThanOrEqual(viewport.width);
     expect(geometry.body.y).toBeLessThanOrEqual(viewport.height);
     await evidence(page, `landscape-${viewport.width}-${viewport.height}`, geometry);
-    if (viewport.height < 600) {
+    if (viewport.height >= 450 && viewport.height < 600) {
       await expect(page.locator(".play-shell")).toHaveAttribute("data-layout", "compact-landscape");
       await page.locator('[data-focus-id="more"]').click();
       for (const id of ["home", "mazes", "book", "help", "sound", "restart", "story"]) {
@@ -549,8 +549,9 @@ test("UI03 focused pad Enter repeats cannot queue an extra step after release", 
   await evidence(page, "pad-enter-repeat-release", { first:first.state.position, returned:returned.state.position, afterSpace:afterSpace.position });
 });
 
-test("UI03 Book has five real pages, readable grey locked keepsakes and no undiscovered enemy images", async ({ page }) => {
+test("UI03 Book has five real pages, readable grey locked keepsakes and intentional unknown sprite silhouettes", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
+  await page.addInitScript(({key, progress}) => localStorage.setItem(key, JSON.stringify(progress)), { key: PLAYER_PROGRESS_STORAGE_KEY, progress: { ...createDefaultPlayerProgress(), discoveredFriendIds: ["bunny"] } });
   await ordinaryHome(page);
   await page.getByRole("button", { name: "Ame's adventure book", exact: true }).click();
   await expect(page.getByRole("tab")).toHaveCount(5);
@@ -571,9 +572,10 @@ test("UI03 Book has five real pages, readable grey locked keepsakes and no undis
   page.on("request", request => requests.push(request.url()));
   await page.getByRole("tab", { name: "Bestiary", exact: true }).click();
   await expect(page.locator(".book-unknown-card")).toHaveCount(ENEMY_STYLE_IDS.length);
-  await expect(page.locator(".bestiary-grid img, .bestiary-grid source")).toHaveCount(0);
+  await expect(page.locator(".bestiary-grid .book-silhouette img")).toHaveCount(12);
+  expect(await page.locator(".book-unknown-card").allTextContents()).toEqual(Array(12).fill(""));
   const enemyPaths = ENEMY_STYLE_IDS.map(id => resolveEnemyArt(id).src.replace(/\.[^.]+$/, ""));
-  expect(requests.filter(url => enemyPaths.some(path => url.includes(path)))).toEqual([]);
+  expect(requests.filter(url => /presentation/.test(url) && enemyPaths.some(path => url.includes(path)))).toEqual([]);
   await evidence(page, "book-undiscovered-bestiary");
   await page.getByRole("tab", { name: "Friends", exact: true }).click();
   const friend = page.locator(".book-friend-card").first();
@@ -748,7 +750,7 @@ test("UI03 a newer profile preserves its progress and active run through startup
     runId:"run-future-profile-review", mode:"normal", level, game:initial, revealedTiles:[],
   });
   expect(snapshot).not.toBeNull();
-  const progressRaw = JSON.stringify({ ...createDefaultPlayerProgress(), schemaVersion:7, gold:987, futureMarker:{ preserve:"newer-profile" } });
+  const progressRaw = JSON.stringify({ ...createDefaultPlayerProgress(), schemaVersion:99, gold:987, futureMarker:{ preserve:"newer-profile" } });
   const runRaw = JSON.stringify({ ...snapshot, schemaVersion:99, futureMarker:{ preserve:"newer-active-run" } });
   const stored = { progressKey:PLAYER_PROGRESS_STORAGE_KEY, runKey:ACTIVE_RUN_STORAGE_KEY, progressRaw, runRaw };
   await page.addInitScript(values => {
@@ -808,6 +810,11 @@ test("UI03 five-friend normal victory with the longest outro and newly earned re
   expect(new Set(animations).size, "Different friends keep their own little celebration dances").toBeGreaterThan(1);
   for (const viewport of [{ width: 1920, height: 1080 }, { width: 1194, height: 834 }, { width: 1024, height: 768 }, { width: 960, height: 540 }, { width: 844, height: 390 }, { width: 568, height: 320 }]) {
     await page.setViewportSize(viewport);
+    // The fitted stage settles through ResizeObserver after the viewport event.
+    await expect.poll(async () => {
+      const bounds = (await page.locator(".dialog-celebration .dialog-footer").boundingBox())!;
+      return bounds.y + bounds.height;
+    }).toBeLessThanOrEqual(viewport.height);
     await assertNoScroll(page.locator(".dialog-celebration, .dialog-celebration .dialog-body"));
     const footer = (await page.locator(".dialog-celebration .dialog-footer").boundingBox())!;
     expect(footer.y + footer.height).toBeLessThanOrEqual(viewport.height);

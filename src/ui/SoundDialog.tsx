@@ -4,7 +4,7 @@ import { musicTrackById } from "../musicCatalogue";
 import { usePresentation } from "./PresentationProvider";
 import { DialogShell } from "./dialogs/DialogShell";
 import { testSoundFromUserGesture } from "../sound";
-import { musicGain, musicPosition, sfxGain, sfxPosition } from "../audioCalibration";
+import { DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME, musicGain, musicPosition, sfxGain, sfxPosition } from "../audioCalibration";
 
 const PACE_VALUES = ["chill", "regular", "zippy"] as const;
 const PACE_LABELS = { chill: "Chill", regular: "Regular", zippy: "Zippy" } as const;
@@ -40,6 +40,7 @@ export function SoundDialog({ transport, onClose, returnFocus }: { transport: Mu
         void testSoundFromUserGesture(snapshot.muted, testRequest.current.signal);
       }}>Test sound</button>
     </div>
+    <button type="button" data-focus-id="sound:recommended" onClick={() => presentation.update({ musicVolume: DEFAULT_MUSIC_VOLUME, sfxVolume: DEFAULT_SFX_VOLUME })}>Recommended balance</button>
     <p className="sound-persistence">Very high Music and Sound effects together may distort; lower either if you hear it.</p>
     </section>
     <fieldset><legend>Motion</legend><div className="preference-options">{(["system", "full", "reduced"] as const).map(value => <label key={value}><input type="radio" name="motion" value={value} checked={presentation.preferences.motion === value} onChange={() => presentation.update({ motion: value })} />{value === "system" ? "Use device setting" : value === "full" ? "Full" : "Reduced"}</label>)}</div></fieldset>

@@ -1,5 +1,34 @@
 # AUDIO-01 — timely music, satisfying sound and listening qualification
 
+## Current default-mix candidate — 2026-09-06
+
+The [Human reports SFX too quiet relative to music on all devices](../user-playtests/2026-09-06-phone-composition-and-default-mix.md).
+The current, **undeployed intended v0.22.12** candidate changes fresh defaults to
+**Music 65 / SFX 85** slider positions and adds an explicit **Recommended balance**
+button. It keeps calibration version 2 and its existing gain curves: Music 65
+maps to approximately `0.0751111`, SFX 85 to `1.1333333`; slider values are not
+percentages of perceived loudness. The 75-position music anchor remains `0.10`
+and the SFX ceiling remains `4/3`. No transport, song, palette or mastering change
+is included.
+
+Valid saved v2 gain choices remain unchanged, including mute. Fresh/malformed
+values use the new defaults through the existing preference validation; legacy
+calibration migration retains its established policy. Recommended balance updates
+the two gains only: it does not unmute, start audio, change progress or reset other
+comfort choices. Reset Progress still preserves comfort settings. Zero silence,
+the maximum-combination warning, gesture gating and preview cancellation remain.
+Source seams are `src/audioCalibration.ts`, `src/motion.ts` and
+`src/ui/SoundDialog.tsx`; the [candidate record](../reviews/2026-09-06-phone02-book-candidate.md)
+separates current source, focused browser evidence and outstanding qualification.
+
+Focused r2 browser checks passed 17/17, including fresh 65/85 and explicit balance
+while muted; broader final-source checks and independent visual review are still
+pending. This is not an acoustic listening verdict or a new native acceptance.
+Live web remains v0.22.10, published Windows v0.22.9; native v0.22.10 remains
+unfinished. The following AUDIO-01A/V2 publication records are historical and do
+not declare this new default mix published or make their old next-task routing
+the current assignment.
+
 Status, 2026-09-06: AUDIO-01A implementation is frozen for v0.22.7 at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`; engineering/native review is
 accepted and **web/Windows are published with all four public downloads verified**.
