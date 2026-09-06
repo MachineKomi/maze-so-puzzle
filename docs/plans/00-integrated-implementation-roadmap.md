@@ -4,6 +4,11 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
+**Execution paused for laptop migration,2026-09-06.** Resume the unpromoted
+WALL-04A-R1 branch using the [handoff](../migrations/2026-09-06-new-laptop-handoff.md).
+Do not treat its version0.22.11 as deployed or auto-launch a historical prompt.
+New-host preflight/performance review precedes wall promotion; BOOK-02A follows.
+
 **Latest Human priority,2026-09-06:** [depth/discovery/celebration intake](../playtests/2026-09-06-depth-discovery-and-celebration.md).
 04-A's engineering delivery did not meet the visual goal. Next bounded work is
 [WALL-04A-R1](WALL-04A-R1-convincing-depth.md): stronger relief, exact corner rims

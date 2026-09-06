@@ -1,4 +1,37 @@
-# Wall depth and lighting — implemented 04-A contract
+# Wall depth and lighting — implemented 04-A / R1 contract
+
+## R1 stronger-relief correction — v0.22.11 web preview
+
+The Human found 04-A too subtle and its lower-corner highlight misaligned.
+[R1 research/brief](plans/WALL-04A-R1-convincing-depth.md) and
+[candidate evidence](reviews/2026-09-06-wall04ar1-candidate.md) supersede the
+earlier height, cast and bevel construction below. This is not full Plan04,
+physical-iPad acceptance, or proof that the Human's beauty goal is met.
+
+- Top remains `W ∩ translate(W,0,-height)`; side remains `W − top`. Both complete
+  original and uniformly raised contour bands supply the top rim. This aligns
+  front arcs while retaining the unshifted rear rim; never shift arc fragments
+  by their lighting response. Same-response bands share one nonzero fill.
+- Profile revision `04a-r1`: height 0.20–0.26 tile, bevel 0.045–0.055 tile.
+  Opaque material-colored face plus compressed existing texture makes the
+  front read separately from the top. Solid geometry stays inside the original
+  wall footprint; one-tile top thickness remains at least 0.74 tile.
+- A finite cardinal cast uses a translated cap plus straight/rounded swept
+  ribbons in one opacity group, clipped to ordinary floor. Current maximum
+  reach is 0.221 tile; absolute cap 0.24. Contact reaches 0.0375 tile. No cast
+  paints a hazard/pit or changes traversal; all actors remain above terrain.
+- Four additional constant paint paths, no additional wall filters, new media,
+  dependencies, CSS, ambient animation, camera/rules/save changes. Group
+  opacity can still incur compositing work; do not equate “no blur” with free.
+- Full/Lite/Static retain structural depth. The dev-only material rack and
+  production camera review cover exact-scale joins and the old ghost-edge
+  cases. Local Chromium is not a physical Safari/WebView performance cohort.
+
+If this still disappoints visually, compare a real orthographic 3D wall slice
+against the same scene and cost budget rather than endlessly tweaking opacity.
+Current research and the renderer-alternative gate are in the R1 brief.
+
+## Historical 04-A delivery
 
 Published v0.22.9 WALL-04A, frozen `cbe8ab879bd58c0a08a770209ebfeb649f684e2b`.
 Root Astra implemented; actual Sol independently accepted source/browser/native.

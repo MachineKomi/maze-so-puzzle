@@ -33,6 +33,19 @@
   },
   "allocations": [
     {
+      "id": "lighting-04ar1-convincing-relief",
+      "owner": "lighting",
+      "status": "approved",
+      "compressedJsBytes": 400,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates at most400gzip9 JS bytes within the2000 prototype cap for corrected dual-contour bevels, material side projection and bounded floor-only finite cast. Pre-version candidate measured+307; final-version measurement and independent review remain release gates.",
+      "evidencePath": "docs/reviews/2026-09-06-wall04ar1-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Restore complete R1 wall/profile/version seam to feb04e1; preserve reward effects, asset cleanup, requirements and saves. No new asset, save migration or dependency.",
+      "notes": "Zero CSS/public/media/decoded-image growth. Four added constant wall paint paths, zero wall filters/timers. Cardinal cast and original footprint preserved. Physical iPad and Human beauty acceptance remain open."
+    },
+    {
       "id": "vfx02a-committed-reward-canvas",
       "owner": "vfx",
       "status": "approved",

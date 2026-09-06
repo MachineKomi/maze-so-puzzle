@@ -4,6 +4,12 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
+**OVERRIDE: Human paused development for laptop migration,2026-09-06.**
+The next first-turn prompt is [NEW_LAPTOP_PROMPT](../migrations/NEW_LAPTOP_PROMPT.md).
+Recover `codex/migration-wall04ar1-20260906` at `C:/GameDev/maze-game`, inspect
+the paused WALL-04A-R1 gate, and do not execute the older active assignment below
+without reconciling the current handoff. No0.22.11 deployment has occurred.
+
 **Active assignment: finish v0.22.10 VFX-02A qualification/publication.** Root
 Astra owns runtime/build/release; actual Sol independently reviews. Read
 [candidate evidence](../reviews/2026-09-06-vfx02a-candidate.md) and

@@ -1,0 +1,2603 @@
+{
+  "schema": "maze-wall04ar1-paused-evidence/v1",
+  "disposition": "DEVELOPMENT PAUSED FOR LAPTOP MIGRATION; not a deployment/performance release pass",
+  "candidateVersion": "0.22.11",
+  "candidateBundle": "/assets/index-fV--7I7N.js",
+  "baselineBundle": "/assets/index-T8J736ZB.js",
+  "cases": 72,
+  "lanes": [
+    {
+      "status": "pass",
+      "scope": "Loaded-host Chromium diagnostics, not iPad or clean-host FPS qualification",
+      "lane": "desktop-1",
+      "cases": 18,
+      "rows": [
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 19,
+          "p95FrameMs": 50.09999999999991,
+          "maxFrameMs": 66.5,
+          "metricsMs": {
+            "TaskDuration": 401.61199999999997,
+            "LayoutDuration": 20.118,
+            "RecalcStyleDuration": 56.858
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 12,
+          "p95FrameMs": 116.19999999999982,
+          "maxFrameMs": 116.59999999999991,
+          "metricsMs": {
+            "TaskDuration": 443.29400000000004,
+            "LayoutDuration": 17.179,
+            "RecalcStyleDuration": 76.416
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 21,
+          "p95FrameMs": 50,
+          "maxFrameMs": 66.5,
+          "metricsMs": {
+            "TaskDuration": 367.83299999999997,
+            "LayoutDuration": 10.200000000000001,
+            "RecalcStyleDuration": 61.486
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 18,
+          "p95FrameMs": 66.60000000000014,
+          "maxFrameMs": 66.70000000000027,
+          "metricsMs": {
+            "TaskDuration": 239.744,
+            "LayoutDuration": 59.277,
+            "RecalcStyleDuration": 11.870000000000001
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "27 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 12,
+          "p95FrameMs": 66.60000000000014,
+          "maxFrameMs": 83.29999999999995,
+          "metricsMs": {
+            "TaskDuration": 238.531,
+            "LayoutDuration": 4.2059999999999995,
+            "RecalcStyleDuration": 9.543
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 22,
+          "p95FrameMs": 49.69999999999982,
+          "maxFrameMs": 50,
+          "metricsMs": {
+            "TaskDuration": 187.50900000000001,
+            "LayoutDuration": 4.464,
+            "RecalcStyleDuration": 14.215
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 18,
+          "p95FrameMs": 50,
+          "maxFrameMs": 216.60000000000014,
+          "metricsMs": {
+            "TaskDuration": 464.58000000000004,
+            "LayoutDuration": 6.632,
+            "RecalcStyleDuration": 229.513
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "27 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 14,
+          "p95FrameMs": 50,
+          "maxFrameMs": 50.10000000000002,
+          "metricsMs": {
+            "TaskDuration": 234.841,
+            "LayoutDuration": 5.725,
+            "RecalcStyleDuration": 11.519
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 22,
+          "p95FrameMs": 49.89999999999998,
+          "maxFrameMs": 50.000000000000114,
+          "metricsMs": {
+            "TaskDuration": 241.051,
+            "LayoutDuration": 3.9690000000000003,
+            "RecalcStyleDuration": 16.692999999999998
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 27,
+          "p95FrameMs": 33.30000000000018,
+          "maxFrameMs": 33.40000000000009,
+          "metricsMs": {
+            "TaskDuration": 192.58800000000002,
+            "LayoutDuration": 4.641,
+            "RecalcStyleDuration": 11.714
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 18,
+          "p95FrameMs": 149.9000000000001,
+          "maxFrameMs": 399.70000000000005,
+          "metricsMs": {
+            "TaskDuration": 176.239,
+            "LayoutDuration": 7.994,
+            "RecalcStyleDuration": 44.045
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 25,
+          "p95FrameMs": 33.40000000000009,
+          "maxFrameMs": 33.5,
+          "metricsMs": {
+            "TaskDuration": 191.94,
+            "LayoutDuration": 4.473000000000001,
+            "RecalcStyleDuration": 18.354
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 83.20000000000005,
+          "metricsMs": {
+            "TaskDuration": 205.05100000000002,
+            "LayoutDuration": 73.724,
+            "RecalcStyleDuration": 22.019000000000002
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 66.5,
+          "metricsMs": {
+            "TaskDuration": 166.149,
+            "LayoutDuration": 7.061,
+            "RecalcStyleDuration": 8.765
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.800000000000182,
+          "maxFrameMs": 49.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 178.174,
+            "LayoutDuration": 3.96,
+            "RecalcStyleDuration": 7.319
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 19.299999999999955,
+          "maxFrameMs": 49.89999999999998,
+          "metricsMs": {
+            "TaskDuration": 161.42,
+            "LayoutDuration": 9.994,
+            "RecalcStyleDuration": 10.651000000000002
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.800000000000182,
+          "maxFrameMs": 83.19999999999993,
+          "metricsMs": {
+            "TaskDuration": 222.353,
+            "LayoutDuration": 5.9750000000000005,
+            "RecalcStyleDuration": 8.383
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-1",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 33.299999999999955,
+          "maxFrameMs": 33.40000000000009,
+          "metricsMs": {
+            "TaskDuration": 234.19,
+            "LayoutDuration": 5.2459999999999996,
+            "RecalcStyleDuration": 11.083
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "status": "pass",
+      "scope": "Loaded-host Chromium diagnostics, not iPad or clean-host FPS qualification",
+      "lane": "desktop-2",
+      "cases": 18,
+      "rows": [
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 34,
+          "p95FrameMs": 33.299999999999955,
+          "maxFrameMs": 50.09999999999991,
+          "metricsMs": {
+            "TaskDuration": 423.978,
+            "LayoutDuration": 13.866,
+            "RecalcStyleDuration": 49.35
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 28,
+          "p95FrameMs": 33.399999999999864,
+          "maxFrameMs": 66.60000000000002,
+          "metricsMs": {
+            "TaskDuration": 376.402,
+            "LayoutDuration": 9.171000000000001,
+            "RecalcStyleDuration": 61.774
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 29,
+          "p95FrameMs": 33.399999999999864,
+          "maxFrameMs": 50,
+          "metricsMs": {
+            "TaskDuration": 356.45500000000004,
+            "LayoutDuration": 12.065,
+            "RecalcStyleDuration": 57.626
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 26,
+          "p95FrameMs": 33.40000000000009,
+          "maxFrameMs": 116.59999999999991,
+          "metricsMs": {
+            "TaskDuration": 177.25500000000002,
+            "LayoutDuration": 7.233,
+            "RecalcStyleDuration": 11.394
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 23,
+          "p95FrameMs": 33.39999999999998,
+          "maxFrameMs": 33.40000000000009,
+          "metricsMs": {
+            "TaskDuration": 196.68099999999998,
+            "LayoutDuration": 4.539,
+            "RecalcStyleDuration": 12.357
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 31,
+          "p95FrameMs": 33.299999999999955,
+          "maxFrameMs": 50.000000000000114,
+          "metricsMs": {
+            "TaskDuration": 166.27700000000002,
+            "LayoutDuration": 2.871,
+            "RecalcStyleDuration": 11.919
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 34,
+          "p95FrameMs": 33.200000000000045,
+          "maxFrameMs": 33.30000000000018,
+          "metricsMs": {
+            "TaskDuration": 191.965,
+            "LayoutDuration": 3.639,
+            "RecalcStyleDuration": 13.705
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 22,
+          "p95FrameMs": 33.39999999999998,
+          "maxFrameMs": 66.59999999999991,
+          "metricsMs": {
+            "TaskDuration": 204.603,
+            "LayoutDuration": 4.2509999999999994,
+            "RecalcStyleDuration": 14.11
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 31,
+          "p95FrameMs": 33.30000000000007,
+          "maxFrameMs": 33.39999999999998,
+          "metricsMs": {
+            "TaskDuration": 201.044,
+            "LayoutDuration": 3.133,
+            "RecalcStyleDuration": 16.453
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 33,
+          "p95FrameMs": 33.299999999999955,
+          "maxFrameMs": 33.39999999999998,
+          "metricsMs": {
+            "TaskDuration": 187.801,
+            "LayoutDuration": 4.3790000000000004,
+            "RecalcStyleDuration": 12.545
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 28,
+          "p95FrameMs": 33.39999999999998,
+          "maxFrameMs": 33.5,
+          "metricsMs": {
+            "TaskDuration": 186.64700000000002,
+            "LayoutDuration": 4.26,
+            "RecalcStyleDuration": 13.456
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 35,
+          "p95FrameMs": 16.899999999999977,
+          "maxFrameMs": 33.499999999999886,
+          "metricsMs": {
+            "TaskDuration": 181.61,
+            "LayoutDuration": 4.225,
+            "RecalcStyleDuration": 15.956999999999999
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 104.349,
+            "LayoutDuration": 6.025,
+            "RecalcStyleDuration": 6.888
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 99.605,
+            "LayoutDuration": 4.681,
+            "RecalcStyleDuration": 7.805000000000001
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 86.84400000000001,
+            "LayoutDuration": 2.5730000000000004,
+            "RecalcStyleDuration": 6.463
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 106.67599999999999,
+            "LayoutDuration": 7.125,
+            "RecalcStyleDuration": 7.3309999999999995
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.899999999999864,
+          "maxFrameMs": 16.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 109.39,
+            "LayoutDuration": 6.356,
+            "RecalcStyleDuration": 7.4799999999999995
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "desktop-2",
+          "viewport": {
+            "width": 1193,
+            "height": 833
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 17,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 95.77,
+            "LayoutDuration": 4.016,
+            "RecalcStyleDuration": 8.88
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "status": "pass",
+      "scope": "Loaded-host Chromium diagnostics, not iPad or clean-host FPS qualification",
+      "lane": "compact-1",
+      "cases": 18,
+      "rows": [
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.800000000000068,
+          "maxFrameMs": 16.800000000000182,
+          "metricsMs": {
+            "TaskDuration": 335.88500000000005,
+            "LayoutDuration": 12.834,
+            "RecalcStyleDuration": 47.987
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 37,
+          "p95FrameMs": 16.800000000000182,
+          "maxFrameMs": 33.30000000000007,
+          "metricsMs": {
+            "TaskDuration": 336.231,
+            "LayoutDuration": 10.216,
+            "RecalcStyleDuration": 56.751000000000005
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 16.800000000000182,
+          "metricsMs": {
+            "TaskDuration": 348.757,
+            "LayoutDuration": 10.855,
+            "RecalcStyleDuration": 57.644
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 16.800000000000068,
+          "metricsMs": {
+            "TaskDuration": 174.691,
+            "LayoutDuration": 7.012,
+            "RecalcStyleDuration": 9.453
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 30,
+          "p95FrameMs": 33.39999999999998,
+          "maxFrameMs": 49.80000000000007,
+          "metricsMs": {
+            "TaskDuration": 197.188,
+            "LayoutDuration": 4.758,
+            "RecalcStyleDuration": 10.255
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 23,
+          "p95FrameMs": 33.5,
+          "maxFrameMs": 66.59999999999991,
+          "metricsMs": {
+            "TaskDuration": 217.62900000000002,
+            "LayoutDuration": 6.228,
+            "RecalcStyleDuration": 10.093
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 33.299999999999955,
+          "metricsMs": {
+            "TaskDuration": 185.635,
+            "LayoutDuration": 3.839,
+            "RecalcStyleDuration": 12.947000000000001
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 34,
+          "p95FrameMs": 33.10000000000002,
+          "maxFrameMs": 49.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 217.407,
+            "LayoutDuration": 3.1679999999999997,
+            "RecalcStyleDuration": 18.576999999999998
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 16.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 193.362,
+            "LayoutDuration": 2.7230000000000003,
+            "RecalcStyleDuration": 19.262
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.800000000000182,
+          "maxFrameMs": 16.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 174.579,
+            "LayoutDuration": 4.522,
+            "RecalcStyleDuration": 11.035
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 33.30000000000018,
+          "metricsMs": {
+            "TaskDuration": 199.06500000000003,
+            "LayoutDuration": 3.6020000000000003,
+            "RecalcStyleDuration": 12.55
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 17,
+          "maxFrameMs": 33.30000000000001,
+          "metricsMs": {
+            "TaskDuration": 167.292,
+            "LayoutDuration": 2.999,
+            "RecalcStyleDuration": 13.603
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 16.799999999999955,
+          "metricsMs": {
+            "TaskDuration": 102.937,
+            "LayoutDuration": 7.273,
+            "RecalcStyleDuration": 2.9650000000000003
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 33.40000000000009,
+          "metricsMs": {
+            "TaskDuration": 95.68499999999999,
+            "LayoutDuration": 4.684,
+            "RecalcStyleDuration": 3.8040000000000003
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "13 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 5,
+          "p95FrameMs": 33.200000000000045,
+          "maxFrameMs": 183.10000000000014,
+          "metricsMs": {
+            "TaskDuration": 105.878,
+            "LayoutDuration": 5.577999999999999,
+            "RecalcStyleDuration": 4.443
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 16.899999999999864,
+          "metricsMs": {
+            "TaskDuration": 86.89099999999999,
+            "LayoutDuration": 7.279,
+            "RecalcStyleDuration": 2.101
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.800000000000068,
+          "maxFrameMs": 16.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 91.139,
+            "LayoutDuration": 4.5329999999999995,
+            "RecalcStyleDuration": 2.738
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-1",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 1,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.800000000000068,
+          "maxFrameMs": 16.899999999999864,
+          "metricsMs": {
+            "TaskDuration": 82.06400000000001,
+            "LayoutDuration": 3.5,
+            "RecalcStyleDuration": 2.245
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "status": "pass",
+      "scope": "Loaded-host Chromium diagnostics, not iPad or clean-host FPS qualification",
+      "lane": "compact-2",
+      "cases": 18,
+      "rows": [
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 33.30000000000007,
+          "metricsMs": {
+            "TaskDuration": 294.663,
+            "LayoutDuration": 13.196,
+            "RecalcStyleDuration": 43.919
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 33.299999999999955,
+          "metricsMs": {
+            "TaskDuration": 386.299,
+            "LayoutDuration": 12.113999999999999,
+            "RecalcStyleDuration": 70.62400000000001
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 16.899999999999977,
+          "metricsMs": {
+            "TaskDuration": 350.96,
+            "LayoutDuration": 9.544,
+            "RecalcStyleDuration": 66.326
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 40,
+          "p95FrameMs": 16.899999999999864,
+          "maxFrameMs": 16.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 159.93,
+            "LayoutDuration": 5.838,
+            "RecalcStyleDuration": 6.868
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 34,
+          "p95FrameMs": 33.200000000000045,
+          "maxFrameMs": 49.90000000000009,
+          "metricsMs": {
+            "TaskDuration": 212.126,
+            "LayoutDuration": 4.226999999999999,
+            "RecalcStyleDuration": 12
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "full",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 33.19999999999993,
+          "metricsMs": {
+            "TaskDuration": 192.14700000000002,
+            "LayoutDuration": 3.594,
+            "RecalcStyleDuration": 15.214
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 40,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 176.68900000000002,
+            "LayoutDuration": 3.822,
+            "RecalcStyleDuration": 16.592
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 37,
+          "p95FrameMs": 16.899999999999864,
+          "maxFrameMs": 33.40000000000009,
+          "metricsMs": {
+            "TaskDuration": 218.65200000000002,
+            "LayoutDuration": 4.166,
+            "RecalcStyleDuration": 19.548
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 16.899999999999864,
+          "maxFrameMs": 33.30000000000007,
+          "metricsMs": {
+            "TaskDuration": 179.368,
+            "LayoutDuration": 2.69,
+            "RecalcStyleDuration": 18.81
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 16.800000000000182,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 152.781,
+            "LayoutDuration": 4.193,
+            "RecalcStyleDuration": 6.978
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 38,
+          "p95FrameMs": 17,
+          "maxFrameMs": 33.30000000000001,
+          "metricsMs": {
+            "TaskDuration": 189.29600000000002,
+            "LayoutDuration": 5.567,
+            "RecalcStyleDuration": 13.941
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "lite",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 39,
+          "p95FrameMs": 16.899999999999977,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 156.454,
+            "LayoutDuration": 2.612,
+            "RecalcStyleDuration": 12.138
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 102.228,
+            "LayoutDuration": 8.312999999999999,
+            "RecalcStyleDuration": 4.819
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.800000000000068,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 78.07600000000001,
+            "LayoutDuration": 2.934,
+            "RecalcStyleDuration": 2.458
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "full",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 16.800000000000182,
+          "metricsMs": {
+            "TaskDuration": 82.69800000000001,
+            "LayoutDuration": 4.829,
+            "RecalcStyleDuration": 2.007
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "springstep-sky-hollow",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "4 steps",
+          "afterStep": "7 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.800000000000182,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 91.574,
+            "LayoutDuration": 6.392,
+            "RecalcStyleDuration": 2.0309999999999997
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "twilight-treasure-loop",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "25 steps",
+          "afterStep": "28 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.90000000000009,
+          "maxFrameMs": 17,
+          "metricsMs": {
+            "TaskDuration": 89.88799999999999,
+            "LayoutDuration": 3.8289999999999997,
+            "RecalcStyleDuration": 2.149
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        },
+        {
+          "id": "rainbow-power-parade",
+          "lane": "compact-2",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "dpr": 2,
+          "quality": "static",
+          "motion": "reduced",
+          "beforeStep": "9 steps",
+          "afterStep": "12 steps",
+          "terrainMutations": 0,
+          "movingTransforms": 4,
+          "p95FrameMs": 16.799999999999955,
+          "maxFrameMs": 16.899999999999864,
+          "metricsMs": {
+            "TaskDuration": 89.74300000000001,
+            "LayoutDuration": 4.074000000000001,
+            "RecalcStyleDuration": 1.9300000000000002
+          },
+          "ghostInvalidSamples": 0,
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "paintComparison": {
+    "scope": "Alternating local candidate/live frozen baseline, decoded image/font barrier; loaded Windows Chromium DPR2, not hardware acceptance; trace durations include other game work and are not additive",
+    "rows": [
+      {
+        "candidate": false,
+        "quality": "full",
+        "repeat": 0,
+        "bundle": "/assets/index-T8J736ZB.js",
+        "transforms": 39,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 250,
+            "totalMs": 286.264
+          },
+          "RasterTask": {
+            "events": 374,
+            "totalMs": 21.829
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 87,
+            "totalMs": 24.612
+          },
+          "UpdateLayoutTree": {
+            "events": 125,
+            "totalMs": 81.639
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "full",
+        "repeat": 0,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 35,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 236,
+            "totalMs": 276.981
+          },
+          "RasterTask": {
+            "events": 358,
+            "totalMs": 29.902
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 77,
+            "totalMs": 16.587
+          },
+          "UpdateLayoutTree": {
+            "events": 111,
+            "totalMs": 58.122
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "full",
+        "repeat": 1,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 30,
+        "p95FrameMs": 33.30000000000018,
+        "trace": {
+          "Paint": {
+            "events": 221,
+            "totalMs": 271.749
+          },
+          "RasterTask": {
+            "events": 333,
+            "totalMs": 25.084
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 74,
+            "totalMs": 17.846
+          },
+          "UpdateLayoutTree": {
+            "events": 103,
+            "totalMs": 69.918
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "full",
+        "repeat": 1,
+        "bundle": "/assets/index-T8J736ZB.js",
+        "transforms": 37,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 245,
+            "totalMs": 292.106
+          },
+          "RasterTask": {
+            "events": 363,
+            "totalMs": 25.136
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 85,
+            "totalMs": 25.207
+          },
+          "UpdateLayoutTree": {
+            "events": 121,
+            "totalMs": 84.583
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "full",
+        "repeat": 2,
+        "bundle": "/assets/index-T8J736ZB.js",
+        "transforms": 38,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 246,
+            "totalMs": 278.505
+          },
+          "RasterTask": {
+            "events": 367,
+            "totalMs": 27.085
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 86,
+            "totalMs": 18.334
+          },
+          "UpdateLayoutTree": {
+            "events": 123,
+            "totalMs": 68.447
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "full",
+        "repeat": 2,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 35,
+        "p95FrameMs": 33.19999999999982,
+        "trace": {
+          "Paint": {
+            "events": 238,
+            "totalMs": 290.994
+          },
+          "RasterTask": {
+            "events": 354,
+            "totalMs": 25.85
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 82,
+            "totalMs": 20.456
+          },
+          "UpdateLayoutTree": {
+            "events": 116,
+            "totalMs": 65.881
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "static",
+        "repeat": 0,
+        "bundle": "/assets/index-T8J736ZB.js",
+        "transforms": 3,
+        "p95FrameMs": 17,
+        "trace": {
+          "Paint": {
+            "events": 3,
+            "totalMs": 13.362
+          },
+          "RasterTask": {
+            "events": 8,
+            "totalMs": 1.88
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 2,
+            "totalMs": 7.405
+          },
+          "UpdateLayoutTree": {
+            "events": 2,
+            "totalMs": 0.057
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "static",
+        "repeat": 0,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 4,
+        "p95FrameMs": 17,
+        "trace": {
+          "Paint": {
+            "events": 5,
+            "totalMs": 28.719
+          },
+          "RasterTask": {
+            "events": 12,
+            "totalMs": 3.842
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 12.905
+          },
+          "UpdateLayoutTree": {
+            "events": 3,
+            "totalMs": 0.082
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "static",
+        "repeat": 1,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 4,
+        "p95FrameMs": 16.899999999999864,
+        "trace": {
+          "Paint": {
+            "events": 5,
+            "totalMs": 14.594
+          },
+          "RasterTask": {
+            "events": 12,
+            "totalMs": 3.1
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 9.904
+          },
+          "UpdateLayoutTree": {
+            "events": 3,
+            "totalMs": 0.077
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "static",
+        "repeat": 1,
+        "bundle": "/assets/index-T8J736ZB.js",
+        "transforms": 4,
+        "p95FrameMs": 16.900000000000546,
+        "trace": {
+          "Paint": {
+            "events": 5,
+            "totalMs": 17.136
+          },
+          "RasterTask": {
+            "events": 12,
+            "totalMs": 2.618
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 10.807
+          },
+          "UpdateLayoutTree": {
+            "events": 3,
+            "totalMs": 0.096
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "static",
+        "repeat": 2,
+        "bundle": "/assets/index-T8J736ZB.js",
+        "transforms": 4,
+        "p95FrameMs": 16.899999999999864,
+        "trace": {
+          "Paint": {
+            "events": 5,
+            "totalMs": 17.965
+          },
+          "RasterTask": {
+            "events": 12,
+            "totalMs": 3.292
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 10.599
+          },
+          "UpdateLayoutTree": {
+            "events": 3,
+            "totalMs": 0.096
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "static",
+        "repeat": 2,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 4,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 5,
+            "totalMs": 16.188
+          },
+          "RasterTask": {
+            "events": 12,
+            "totalMs": 3.228
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 13.373
+          },
+          "UpdateLayoutTree": {
+            "events": 3,
+            "totalMs": 0.088
+          }
+        }
+      }
+    ]
+  },
+  "castIsolation": {
+    "castIsolation": true,
+    "scope": "Alternating candidate/live baseline OR cast-on/off same-candidate diagnostic, decoded image/font barrier; loaded Windows Chromium DPR2, not hardware acceptance; trace durations include other game work and are not additive",
+    "rows": [
+      {
+        "candidate": false,
+        "quality": "full",
+        "repeat": 0,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 37,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 244,
+            "totalMs": 286.409
+          },
+          "RasterTask": {
+            "events": 366,
+            "totalMs": 28.52
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 79,
+            "totalMs": 20.033
+          },
+          "UpdateLayoutTree": {
+            "events": 115,
+            "totalMs": 59.153
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "full",
+        "repeat": 0,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 33,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 231,
+            "totalMs": 248.575
+          },
+          "RasterTask": {
+            "events": 352,
+            "totalMs": 29.067
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 82,
+            "totalMs": 15.619
+          },
+          "UpdateLayoutTree": {
+            "events": 114,
+            "totalMs": 53.317
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "full",
+        "repeat": 1,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 34,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 233,
+            "totalMs": 247.289
+          },
+          "RasterTask": {
+            "events": 354,
+            "totalMs": 26.041
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 78,
+            "totalMs": 16.164
+          },
+          "UpdateLayoutTree": {
+            "events": 111,
+            "totalMs": 53.807
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "full",
+        "repeat": 1,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 37,
+        "p95FrameMs": 17,
+        "trace": {
+          "Paint": {
+            "events": 247,
+            "totalMs": 243.616
+          },
+          "RasterTask": {
+            "events": 370,
+            "totalMs": 25.261
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 82,
+            "totalMs": 17.728
+          },
+          "UpdateLayoutTree": {
+            "events": 118,
+            "totalMs": 65.589
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "full",
+        "repeat": 2,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 38,
+        "p95FrameMs": 16.90000000000009,
+        "trace": {
+          "Paint": {
+            "events": 247,
+            "totalMs": 274.622
+          },
+          "RasterTask": {
+            "events": 371,
+            "totalMs": 23.668
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 83,
+            "totalMs": 21.943
+          },
+          "UpdateLayoutTree": {
+            "events": 120,
+            "totalMs": 74.338
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "full",
+        "repeat": 2,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 36,
+        "p95FrameMs": 16.800000000000182,
+        "trace": {
+          "Paint": {
+            "events": 242,
+            "totalMs": 240.031
+          },
+          "RasterTask": {
+            "events": 363,
+            "totalMs": 26.06
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 79,
+            "totalMs": 16.298
+          },
+          "UpdateLayoutTree": {
+            "events": 114,
+            "totalMs": 53.603
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "lite",
+        "repeat": 0,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 33,
+        "p95FrameMs": 33.30000000000018,
+        "trace": {
+          "Paint": {
+            "events": 112,
+            "totalMs": 151.487
+          },
+          "RasterTask": {
+            "events": 161,
+            "totalMs": 18.641
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 12.615
+          },
+          "UpdateLayoutTree": {
+            "events": 69,
+            "totalMs": 14.626
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "lite",
+        "repeat": 0,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 29,
+        "p95FrameMs": 33.5,
+        "trace": {
+          "Paint": {
+            "events": 92,
+            "totalMs": 123.738
+          },
+          "RasterTask": {
+            "events": 128,
+            "totalMs": 17.155
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 10.634
+          },
+          "UpdateLayoutTree": {
+            "events": 57,
+            "totalMs": 11.765
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "lite",
+        "repeat": 1,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 32,
+        "p95FrameMs": 33.399999999999864,
+        "trace": {
+          "Paint": {
+            "events": 107,
+            "totalMs": 136.634
+          },
+          "RasterTask": {
+            "events": 154,
+            "totalMs": 20.101
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 7.356
+          },
+          "UpdateLayoutTree": {
+            "events": 68,
+            "totalMs": 11.404
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "lite",
+        "repeat": 1,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 32,
+        "p95FrameMs": 33.200000000000045,
+        "trace": {
+          "Paint": {
+            "events": 109,
+            "totalMs": 150.443
+          },
+          "RasterTask": {
+            "events": 158,
+            "totalMs": 19.91
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 8.861
+          },
+          "UpdateLayoutTree": {
+            "events": 69,
+            "totalMs": 13.065
+          }
+        }
+      },
+      {
+        "candidate": false,
+        "quality": "lite",
+        "repeat": 2,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 30,
+        "p95FrameMs": 33.30000000000018,
+        "trace": {
+          "Paint": {
+            "events": 101,
+            "totalMs": 154.463
+          },
+          "RasterTask": {
+            "events": 146,
+            "totalMs": 24.047
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 12.056
+          },
+          "UpdateLayoutTree": {
+            "events": 64,
+            "totalMs": 12.373
+          }
+        }
+      },
+      {
+        "candidate": true,
+        "quality": "lite",
+        "repeat": 2,
+        "bundle": "/assets/index-fV--7I7N.js",
+        "transforms": 32,
+        "p95FrameMs": 33.30000000000018,
+        "trace": {
+          "Paint": {
+            "events": 105,
+            "totalMs": 131.173
+          },
+          "RasterTask": {
+            "events": 150,
+            "totalMs": 22.958
+          },
+          "CompositeLayers": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "UpdateLayerTree": {
+            "events": 0,
+            "totalMs": 0
+          },
+          "Layout": {
+            "events": 3,
+            "totalMs": 7.343
+          },
+          "UpdateLayoutTree": {
+            "events": 67,
+            "totalMs": 11.932
+          }
+        }
+      }
+    ]
+  },
+  "caveats": [
+    "Loaded-host timing is not iPad qualification.",
+    "First baseline/candidate Full test showed slower candidate p95 in two of three repeats.",
+    "Later cast-on/off comparison did not reproduce a cast-specific difference; this does not clear the earlier signal.",
+    "Zero CompositeLayers events means unavailable evidence, not zero GPU cost."
+  ]
+}

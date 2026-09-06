@@ -2,9 +2,20 @@
 
 Updated: 2026-09-06. Owner: Sol/Astra orchestrators.
 
+**Laptop migration pause:** Human requested development stop and a remote WIP
+handoff. No product choice is blocking; the transfer checklist is in
+[NEW_LAPTOP_HANDOFF](migrations/2026-09-06-new-laptop-handoff.md). Resume engineering
+on the new laptop before publishing0.22.11. Earlier open physical checks remain.
+
 **No blocking answer is needed now.** The Human authorized safe development to
 continue while playtesting is deferred. Routine engineering choices belong to
 the agents; only material product/art choices need to come back here.
+
+WALL-04A-R1 / v0.22.11 is the next stronger-wall web preview. P13 asks whether
+its substantial faces/shadows and corrected rounded rims now meet the intended
+look. No immediate answer blocks BOOK-02A silhouettes/discovery work. If still
+underwhelming, the R1 brief requires a same-scene real orthographic-3D comparison,
+not a request for the Human to choose a rendering library. iPad remains open.
 
 VFX-02A qualification adds no blocking choice. P14 in the playtest checklist
 asks for family reaction to original code-native Gold stars, teal Science atoms
@@ -20,7 +31,7 @@ effect symbols, not a replacement of approved world sprites or permanent XP.
 | D04 | iPad test environment (optional clarification) | Eighth-generation iPad / 32GB. Wife's ~08:30 Chrome/Safari A/B on 2026-09-06 found Chrome smoother but still imperfect; build/settings not recorded. [Observation](user-playtests/2026-09-06-ipad-chrome-safari-comparison.md). iPadOS/browser version would help when convenient, but is not required to proceed. |
 | D05 | Device mix comfort (optional, 2026-09-06) | Human selected old Music10%/SFX100% on phone/desktop and requests this balance as calibrated75/75 defaults. v0.22.6 AUDIO-01V2 at `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa` is engineering-accepted and published on web/Windows with all public downloads verified. No reconfirmation needed. P10 checks the calibrated mix and preserved choices; P8 listening/background checks remain cumulative. Very high combined levels may distort; final mastering/listening remain open. No new-device purchase requested. |
 
-Current update: v0.22.9 WALL-04A is published on web/Windows with four independent
+Historical update: v0.22.9 WALL-04A is published on web/Windows with four independent
 downloads verified. No immediate decision is needed. P13 in the
 [playtest checklist](PLAYTEST_CHECKLIST.md) collects raised-wall, texture/contrast,
 ghost-edge and device-regression feedback. P5–P12 remain cumulative. The next

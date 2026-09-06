@@ -7,6 +7,18 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **AUTHORITATIVE PAUSE: laptop migration,2026-09-06.** Human stopped development
+  before the wall release/performance gate closed. Resume from
+  [NEW_LAPTOP_HANDOFF](migrations/2026-09-06-new-laptop-handoff.md), not the
+  older active assignments below. All live-repo WIP is on remote branch
+  `codex/migration-wall04ar1-20260906`; main/live remain unchanged. New repo path
+  is `C:/GameDev/maze-game`. Candidate version0.22.11 is **not deployed**.
+  Source/visual checks pass; old-host A/B frame-time signal needs a controlled
+  new-host review. Seventy-two browser cases and both paint diagnostics are
+  preserved in [paused evidence](migrations/wall04ar1-paused-evidence.json).
+  No new Windows release, Human wall acceptance, iPad pass or Book implementation
+  is implied. Read the handoff before merging this branch or running any release.
+
 - **Latest priority / in progress:** [WALL-04A-R1](plans/WALL-04A-R1-convincing-depth.md)
   responds to Human's still-unmet depth/rim goal. Research and source diagnosis
   captured; stronger same-footprint relief is being prototyped, not accepted or

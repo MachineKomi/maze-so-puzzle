@@ -6,9 +6,16 @@ Keep completed observations and build identities when newer builds arrive.
 
 ## Start here
 
-- **Next preview in qualification: v0.22.10 VFX-02A / P14.** The new check is
-  reward scatter/bounce/magnetic collection. Publication links will be updated
-  only after verification; v0.22.9 below remains the published fallback for now.
+**Migration pause:** v0.22.11 below is saved WIP, not yet deployed. Continue
+testing the version actually shown online; its live version remains0.22.10.
+The new-laptop handoff owns resumption. No additional playtest is needed merely
+to transfer files; P13 will become useful once the wall candidate is published.
+
+- **Next web preview in qualification: v0.22.11 WALL-04A-R1 / P13.** Stronger
+  wall faces, continuous corner rims and a larger floor cast. Check P13 first
+  once the game displays 0.22.11. The inherited v0.22.10 reward effects remain
+  P14 below. Windows still uses the separately published v0.22.9 fallback;
+  browser qualification does not establish a new native package or iPad result.
 
 ### P14 — reward showers and magnetic collection
 
@@ -33,7 +40,7 @@ No need to complete every inherited checklist in one sitting.
 
 ### Earlier published checkpoints
 
-- **Current: v0.22.9 WALL-04A / P13.** Raised walls, smaller texture repeats,
+- **Latest published Windows fallback: v0.22.9 WALL-04A / P13.** Raised walls, smaller texture repeats,
   clearer floor/wall contrast and the reproduced dark ghost-edge fix. No new
   save migration, camera change or loot physics in this release.
   [Windows download](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.9/Maze-so-Puzzle-0.22.9-WALL-04A-cbe8ab8-locked-portable.exe) ·
@@ -349,12 +356,18 @@ Do not reproduce the known iPad camera failure again solely for this build.
 Tell us build/device, maze, pace and what looked or felt wrong. P5–P11 remain
 available; you need not complete everything in one sitting.
 
-### P13 — Raised walls, texture clarity and ghost edge (v0.22.9 WALL-04A)
+### P13 — Stronger walls, corner alignment and ghost edge (v0.22.11 WALL-04A-R1)
 
 Human result received2026-09-06: improved but insufficient depth; shadows too
 small and lower-corner highlight alignment wrong while upper bends align. This
 visual gate is **not passed**. No need to repeat that verdict on the same build;
-the next wall candidate must demonstrate a material improvement and aligned bends.
+the R1 candidate must demonstrate a material improvement and aligned bends.
+Please compare the newer web preview, not the unchanged v0.22.9 Windows binary.
+
+- [ ] Are the wall front faces and shadows now convincingly raised, or still
+  too subtle? Check both upper and lower bends. A screenshot of any remaining
+  detached/misaligned highlight is especially useful. “Still disappointing”
+  is valid feedback; the next alternative is a controlled real-3D comparison.
 
 - [ ] Do walls feel raised while the walkable paths remain obvious? Try
   Springstep Sky Hollow, one leafy maze and one dark/crystal maze. Report any
