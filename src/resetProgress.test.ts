@@ -9,6 +9,7 @@ import {
   VERSION_TWO_PLAYER_PROGRESS_STORAGE_KEY,
 } from "./progress";
 import { resetAllGameProgress, resetAllGameProgressResult } from "./resetProgress";
+import { PRESENTATION_PREFERENCES_KEY } from "./motion";
 import {
   ACTIVE_RUN_STORAGE_KEY,
   LEGACY_ACTIVE_RUN_STORAGE_KEY,
@@ -38,6 +39,17 @@ class MemoryStorage {
 }
 
 describe("full game progress reset", () => {
+  it("preserves exact calibrated and future comfort settings when resetting campaign progress", () => {
+    for (const version of [2, 3]) {
+      const storage = new MemoryStorage();
+      const preferences = JSON.stringify({audioCalibrationVersion:version,musicVolume:.0123456789,sfxVolume:1.25,pace:"zippy"});
+      storage.values.set(PRESENTATION_PREFERENCES_KEY, preferences);
+      storage.values.set(PLAYER_PROGRESS_STORAGE_KEY, "old progress");
+      expect(resetAllGameProgressResult(storage).cleared).toBe(true);
+      expect(storage.values.get(PRESENTATION_PREFERENCES_KEY)).toBe(preferences);
+      expect(storage.removedKeys).not.toContain(PRESENTATION_PREFERENCES_KEY);
+    }
+  });
   it("removes every released game save while preserving unrelated storage", () => {
     const storage = new MemoryStorage();
     for (const key of GAME_KEYS) storage.values.set(key, `saved:${key}`);

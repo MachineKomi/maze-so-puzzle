@@ -1,10 +1,7 @@
 /** One lazy output graph. Music remains streamed, never whole-file decoded. */
-export const DEFAULT_MUSIC_VOLUME = 0.22;
-export const DEFAULT_SFX_VOLUME = 1;
+import { audioLevel, sfxLevel, DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME } from "./audioCalibration";
+export { audioLevel, DEFAULT_MUSIC_VOLUME, DEFAULT_SFX_VOLUME } from "./audioCalibration";
 export interface AudioLevels { readonly musicVolume: number; readonly sfxVolume: number }
-export function audioLevel(value: unknown, fallback: number): number {
-  return typeof value === "number" && Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : fallback;
-}
 
 interface MixGraph { context: AudioContext; music: GainNode; sfx: GainNode; resume?: Promise<boolean> }
 let graph: MixGraph | undefined;
@@ -104,7 +101,7 @@ export function readyEffectsOutput(): { context: AudioContext; output: GainNode 
     ? { context: graph.context, output: graph.sfx } : undefined;
 }
 export function setAudioLevels(next: AudioLevels): void {
-  levels = { musicVolume: audioLevel(next.musicVolume, DEFAULT_MUSIC_VOLUME), sfxVolume: audioLevel(next.sfxVolume, DEFAULT_SFX_VOLUME) };
+  levels = { musicVolume: audioLevel(next.musicVolume, DEFAULT_MUSIC_VOLUME), sfxVolume: sfxLevel(next.sfxVolume) };
   if (levels.sfxVolume === 0) cancelCues();
   applyLevels();
 }

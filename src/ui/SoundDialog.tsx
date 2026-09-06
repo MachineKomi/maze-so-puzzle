@@ -4,6 +4,7 @@ import { musicTrackById } from "../musicCatalogue";
 import { usePresentation } from "./PresentationProvider";
 import { DialogShell } from "./dialogs/DialogShell";
 import { testSoundFromUserGesture } from "../sound";
+import { musicGain, musicPosition, sfxGain, sfxPosition } from "../audioCalibration";
 
 const PACE_VALUES = ["chill", "regular", "zippy"] as const;
 const PACE_LABELS = { chill: "Chill", regular: "Regular", zippy: "Zippy" } as const;
@@ -26,10 +27,14 @@ export function SoundDialog({ transport, onClose, returnFocus }: { transport: Mu
       <button data-focus-id="sound:shuffle" disabled={!snapshot.canShuffle} onClick={() => act(() => transport.shuffle())}>Shuffle</button>
     </div>
     <div className="sound-levels">
-      {(["musicVolume", "sfxVolume"] as const).map(channel => <label key={channel} htmlFor={channel === "musicVolume" ? "music-volume" : "sfx-volume"}>
-        <span>{channel === "musicVolume" ? "Music" : "Sound effects"} <output aria-hidden="true">{Math.round(presentation.preferences[channel] * 100)}%</output></span>
-        <input id={channel === "musicVolume" ? "music-volume" : "sfx-volume"} type="range" min="0" max="100" step="1" data-focus-id={`sound:${channel}`} value={Math.round(presentation.preferences[channel] * 100)} aria-valuetext={`${Math.round(presentation.preferences[channel] * 100)} percent`} onChange={event => presentation.update({ [channel]: Number(event.currentTarget.value) / 100 })} />
-      </label>)}
+      {(["musicVolume", "sfxVolume"] as const).map(channel => {
+        const music = channel === "musicVolume";
+        const percent = Math.round((music ? musicPosition : sfxPosition)(presentation.preferences[channel]) * 100);
+        return <label key={channel} htmlFor={music ? "music-volume" : "sfx-volume"}>
+          <span>{music ? "Music" : "Sound effects"} <output aria-hidden="true">{percent}%</output></span>
+          <input id={music ? "music-volume" : "sfx-volume"} type="range" min="0" max="100" step="1" data-focus-id={`sound:${channel}`} value={percent} aria-valuetext={`${percent} percent`} onChange={event => presentation.update({ [channel]: (music ? musicGain : sfxGain)(Number(event.currentTarget.value) / 100) })} />
+        </label>;
+      })}
       <button type="button" data-focus-id="sound:test" disabled={snapshot.muted || presentation.preferences.sfxVolume === 0} onClick={() => {
         testRequest.current?.abort(); testRequest.current = new AbortController();
         void testSoundFromUserGesture(snapshot.muted, testRequest.current.signal);

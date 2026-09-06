@@ -14,6 +14,25 @@ beforeEach(() => { resetAudioFakes(); players.length = 0; vi.resetModules(); ins
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); vi.useRealTimers(); });
 
 describe("independent device audio mix", () => {
+  it("uses calibrated defaults and real SFX headroom through the existing graph", async () => {
+    const mix = await import("./audioMix"), calibration = await import("./audioCalibration"), music = await import("./music");
+    await music.startMusicFromUserGesture();
+    const ctx = contexts[0]!, audio = players[0]!;
+    expect(ctx.gains.map(node => node.gain.value)).toEqual([.1, 1]);
+    mix.setAudioLevels({musicVolume:calibration.musicGain(1),sfxVolume:calibration.sfxGain(1)});
+    music.configureMusic({volume:calibration.musicGain(1)});
+    expect(ctx.gains.map(node => node.gain.value)).toEqual([1, 4/3]);
+    expect(audio.volume).toBe(1); expect(audio.currentTime).toBe(12);
+    expect(audio.play).toHaveBeenCalledOnce(); expect(ctx.sources).toHaveLength(1);
+    mix.setAudioMuted(true); mix.setAudioLevels({musicVolume:.1,sfxVolume:1.2});
+    expect(ctx.gains.map(node => node.gain.value)).toEqual([0,0]);
+    mix.setAudioMuted(false);
+    expect(ctx.gains.map(node => node.gain.value)).toEqual([.1,1.2]);
+    mix.setAudioLevels({musicVolume:9,sfxVolume:9});
+    expect(ctx.gains.map(node => node.gain.value)).toEqual([1,4/3]);
+    mix.setAudioLevels({musicVolume:NaN,sfxVolume:NaN});
+    expect(ctx.gains.map(node => node.gain.value)).toEqual([.1,1]);
+  });
   it("does not allocate or play while preferences and mute are initialized", async () => {
     const mix = await import("./audioMix");
     mix.setAudioLevels({ musicVolume: .4, sfxVolume: .6 }); mix.setAudioMuted(true); mix.setAudioPageHidden(true);
@@ -26,7 +45,7 @@ describe("independent device audio mix", () => {
     const ctx = contexts[0]!, audio = players[0]!;
     expect(ctx.sources).toHaveLength(1); expect(ctx.gains).toHaveLength(2);
     expect(ctx.sources[0]!.connect).toHaveBeenCalledWith(ctx.gains[0]);
-    expect(audio.volume).toBe(1); expect(ctx.gains[0]!.gain.value).toBe(.22);
+    expect(audio.volume).toBe(1); expect(ctx.gains[0]!.gain.value).toBe(.1);
     music.configureMusic({ volume: .08 });
     expect(ctx.gains[0]!.gain.value).toBe(.08); expect(audio.volume).toBe(1);
     expect(audio.currentTime).toBe(12); expect(audio.play).toHaveBeenCalledTimes(1);

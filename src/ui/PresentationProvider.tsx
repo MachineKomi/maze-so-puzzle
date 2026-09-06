@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useLayoutEffect, useState, type ReactNode } from "react";
-import { readPresentationPreferences, resolveMotion, writePresentationPreferences, type MotionMode, type PresentationPreferences } from "../motion";
+import { readPresentationPreferences, resolveMotion, writePresentationPreferences, type MotionMode, type PresentationPreferences, type PresentationPatch } from "../motion";
 import { setAudioLevels } from "../audioMix";
 import { configureMusic } from "../music";
 
@@ -7,7 +7,7 @@ const PresentationContext = createContext<{
   preferences: PresentationPreferences;
   motion: MotionMode;
   saveFailed: boolean;
-  update: (patch: Partial<PresentationPreferences>) => void;
+  update: (patch: PresentationPatch) => void;
 } | null>(null);
 
 export function PresentationProvider({ children }: { children: ReactNode }) {

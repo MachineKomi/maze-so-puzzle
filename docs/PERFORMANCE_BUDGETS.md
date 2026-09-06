@@ -1,5 +1,16 @@
 # Performance budgets and evidence contract
 
+## AUDIO-01V2 calibration candidate allocation — 2026-09-06
+
+Root allocates exactly342 gzip9 JS bytes against v0.22.5's155307 measured total:
+candidate155649; ceiling155704 retains55 inherited bytes. CSS23976/public165031011
+remain unchanged, with no media/decoded-image/dependency growth. This stays below
+the joint1600-byte prototype maximum. The initial unallocated287-byte overrun
+was rejected before this named allocation; do not relabel that run passed.
+[Candidate/gates](reviews/2026-09-06-audio01v2-candidate.md). Byte approval does
+not approve SFX boost, acoustic balance or publication; actual sample-peak and
+Sol review gates remain separate.
+
 ## AUDIO-01V published allocation — 2026-09-06
 
 v0.22.3 `b834a8e` measures154875 gzip9 JS /23563 gzip9 CSS /165031011 public
