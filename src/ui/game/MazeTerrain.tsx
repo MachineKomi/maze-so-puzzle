@@ -35,10 +35,12 @@ function DressingPattern({ id, art, seed }: { id: string; art: TerrainDressingAr
 export const MazeTerrain = memo(function MazeTerrain({
   level,
   camera,
+  volumeId,
   wallMode = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("wallLighting") === "legacy" ? "legacy" : "tall",
 }: {
   readonly level: LevelDefinition;
   readonly camera: CameraWindow;
+  readonly volumeId?: string;
   /** Explicit comparison/rollback switch; never changes terrain rules. */
   readonly wallMode?: "legacy" | "depth" | "tall";
 }) {
@@ -72,6 +74,7 @@ export const MazeTerrain = memo(function MazeTerrain({
   const walls = useMemo(() => createRoundedTerrainGeometry(level, camera, "wall", 0.13), [level, camera]);
   const depth = useMemo(() => buildWallLighting(walls, light.toLight, profile), [walls, light.toLight.x, light.toLight.y, profile]);
   const tall = useMemo(() => wallMode === "tall" ? createTallWallGeometry(level, walls, light.toLight) : null, [level, walls, wallMode, light.toLight.x, light.toLight.y]);
+  const groundWall = tall?.footprint ?? walls;
   const bubbles = useMemo(() => poisonBubbleMarks(level.id), [level.id]);
   const water = createRoundedTerrainPath(level, camera, "water", 0.16);
   const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
@@ -85,7 +88,7 @@ export const MazeTerrain = memo(function MazeTerrain({
   }
   // Visible ground complement, including rounded-away wall corners, but never
   // hazard or pit interiors. This is a receiver, not walkability geometry.
-  const floorD = `M${camera.left} ${camera.top}h${camera.width}v${camera.height}h${-camera.width}Z ${walls.d} ${water.d} ${lava.d} ${poison.d} ${holes.map(p => `M${p.x} ${p.y}h1v1h-1Z`).join(" ")}`;
+  const floorD = `M${camera.left} ${camera.top}h${camera.width}v${camera.height}h${-camera.width}Z ${groundWall.d} ${water.d} ${lava.d} ${poison.d} ${holes.map(p => `M${p.x} ${p.y}h1v1h-1Z`).join(" ")}`;
 
   return (
     <>
@@ -206,13 +209,13 @@ export const MazeTerrain = memo(function MazeTerrain({
             filter={`url(#${wallDepthFilterId})`}
           />
         )}
-        {tall && <path className="terrain-wall-cast" d={tall.shadow} fill="#33283f" opacity=".16" clipPath={`url(#${floorClipId})`} />}
-        {walls.d && wallMode !== "legacy" && <path className="terrain-wall-contact" d={walls.d} fill="none" stroke="#50425f" strokeWidth="0.055" opacity="0.22" clipPath={`url(#${floorClipId})`} />}
+        {tall && <path className="terrain-wall-cast" d={tall.shadow} fill="#33283f" opacity=".25" clipPath={`url(#${floorClipId})`} />}
+        {walls.d && wallMode !== "legacy" && <path className="terrain-wall-contact" d={groundWall.d} fill="none" stroke="#50425f" strokeWidth="0.055" opacity="0.28" clipPath={`url(#${floorClipId})`} />}
         {walls.d && (
           <path
             className="terrain-wall"
             d={walls.d}
-            fill={`url(#${wallPatternId})`}
+            fill={tall ? "none" : `url(#${wallPatternId})`}
             fillRule={walls.fillRule}
           />
         )}
@@ -244,12 +247,12 @@ export const MazeTerrain = memo(function MazeTerrain({
           </g>
           <path className="terrain-wall-contour" d={walls.d} fill="none" stroke={profile.shade} strokeWidth="0.025" opacity="0.75" />
         </g>}
-        {tall && <g className="terrain-tall-walls" clipPath={`url(#${wallClipId})`}>
+        {tall && <g className="terrain-tall-walls" id={volumeId}>
           {tall.sides.map((d, index) => d && <g key={index}><path d={d} fill={`url(#${wallSidePatternId})`} /><path d={d} fill="#241e31" opacity={.22 + index * .065} /></g>)}
           <path d={tall.cap.d} fill={`url(#${wallCapPatternId})`} fillRule="evenodd" transform={`translate(${tall.dx} ${-tall.height})`} />
           <path d={tall.cap.d} fill={profile.highlight} opacity=".16" fillRule="evenodd" transform={`translate(${tall.dx} ${-tall.height})`} />
-          {theme.wallDressing && <path className="terrain-wall-dressing" d={walls.d} fill={`url(#${wallDressingPatternId})`} fillRule="evenodd" clipPath={`url(#${wallCapClipId})`} />}
-          <path d={tall.rim} fill="none" stroke={profile.highlight} strokeWidth=".023" opacity=".40" />
+          {theme.wallDressing && <path className="terrain-wall-dressing" d={tall.cap.d} transform={`translate(${tall.dx} ${-tall.height})`} fill={`url(#${wallDressingPatternId})`} fillRule="evenodd" />}
+          <path d={tall.rim} fill="none" stroke={profile.highlight} strokeWidth=".035" opacity=".64" />
         </g>}
       </svg>
       {holes.map((hole) => (

@@ -5,9 +5,9 @@ export const REWARD_COLORS: Record<RewardKind, string> = { gold: "#f5bf4f", scie
 /** Original effect glyphs. Draw once to a small atlas, not every animation frame.
  * Broad values and coloured material contours; no glow filter or white cutline. */
 export function rewardGlyph(kind: RewardKind): HTMLCanvasElement {
-  const canvas = document.createElement("canvas"); canvas.width = canvas.height = 64;
+  const canvas = document.createElement("canvas"); canvas.width = canvas.height = 128;
   const c = canvas.getContext("2d")!;
-  c.translate(32, 32); c.lineJoin = "round"; c.lineCap = "round";
+  c.scale(2, 2); c.translate(32, 32); c.lineJoin = "round"; c.lineCap = "round";
   c.lineWidth = 3;
   if (kind === "gold") {
     c.beginPath();

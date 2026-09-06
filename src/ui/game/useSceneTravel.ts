@@ -32,6 +32,7 @@ interface Binding {
   input: TravelInput;
   board: HTMLDivElement;
   world: HTMLElement;
+  foreground: SVGSVGElement | null;
   player: HTMLElement;
   replacement: HTMLElement | null;
   jumper: HTMLElement | null;
@@ -75,6 +76,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     // Percentages use the full-world box, so even pre-ResizeObserver layout
     // changes keep the crop correct. Actors/anchors still need the pixel delta.
     b.world.style.translate=cameraWorldTranslation(b.input.grid,camera);
+    if(b.foreground) b.foreground.style.translate=b.world.style.translate;
     translate(b.player,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     if(b.replacement) translate(b.replacement,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     if(b.jumper && jump) translate(b.jumper,dx+(point.x-jump.from.x)*cellX,dy+(point.y-jump.from.y)*cellY);
@@ -149,6 +151,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       .filter(animation=>animation instanceof CSSAnimation && animation.animationName.startsWith("spring-jump-")) : prior.jumpAnimations;
     if(discover) for(const animation of jumpAnimations) animation.pause();
     binding.current={input,board,world:discover ? board.querySelector<HTMLElement>(".camera-world")! : prior.world,
+      foreground:discover ? board.querySelector<SVGSVGElement>(".maze-foreground") : prior.foreground,
       player:discover ? board.querySelector<HTMLElement>(".player-layer")! : prior.player,
       replacement:discover ? board.querySelector<HTMLElement>('[data-travel-actor="replacement"]') : prior.replacement,
       jumper,jumpAnimations,

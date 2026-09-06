@@ -59,7 +59,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted }: {
         const at = rewardProjection(token, visual.camera, visual.contentSize);
         const distance = Math.hypot(target.x - token.x, target.y - token.y);
         const alpha = Math.min(1, Math.max(0, (token.due - now) / 90));
-        const size = Math.min(30, cell * .3) * token.scale
+        const size = cell * .9 / (57 / 64) * token.scale
           * (now >= token.homingAt ? Math.max(.45, Math.min(1, distance / .3)) : 1);
         // Short in-plane trails stay in navigable space, not over wall tops.
         if (quality === "full" && token.trail.length > 1) {

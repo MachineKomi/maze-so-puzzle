@@ -65,4 +65,7 @@ it("uses repaired Tessera field pixels and retains the approved contextual prese
   expect(selectArtRendition(art, "optical", 64, 1).src).toBe(repairedField);
   expect(selectArtRendition(art, "field", 256, 1).src).toBe(repairedField);
   expect(selectArtRendition(art, "presentation", 200, 2).src).toBe(repairedPresentation);
+  expect(selectArtRendition(art, "field", 200, 2, true).src).toBe(repairedPresentation);
+  expect(selectArtRendition(art, "field", 100, 2, true).src).toBe(repairedField);
+  expect(selectArtRendition(art, "field", 200, 2, true).geometry?.visibleBounds).toBeDefined();
 });

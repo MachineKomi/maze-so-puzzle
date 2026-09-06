@@ -49,12 +49,16 @@ export function resolveUiArt(identity: string | UiArt): UiArt | undefined {
   return typeof identity === "string" ? byId.get(identity) ?? bySrc.get(identity)
     : withRenditions({ ...bySrc.get(identity.src), ...identity });
 }
-export function selectArtRendition(art: UiArt, usage: RuntimeArtUsage, displayPx: number, dpr = 1) {
-  const physicalNeed = Math.max(1, displayPx) * Math.max(1, Math.min(4, dpr));
-  const candidates = [...(art.variants ?? [])].filter((variant) => variant.usage === usage)
+export function selectArtRendition(art: UiArt, usage: RuntimeArtUsage, displayPx: number, dpr = 1, fieldDetail = false) {
+  // The largest reviewed candidate/canonical canvas difference is0.8%; keep
+  // sufficiency conservative while demand stays independent of the chosen file.
+  const physicalNeed = Math.max(1, displayPx) * Math.max(1, Math.min(4, dpr)) * (usage === "field" && fieldDetail ? 1.01 : 1);
+  const candidates = [...(art.variants ?? [])].filter((variant) => variant.usage === usage ||
+    usage === "field" && fieldDetail && variant.usage === "presentation" &&
+    variant.geometry?.class === art.geometry?.class)
     .sort((a, b) => Math.max(a.width, a.height) - Math.max(b.width, b.height));
   const selected = candidates.find((variant) => Math.max(variant.width, variant.height) >= physicalNeed) ?? candidates.at(-1);
-  return { src: selected?.src ?? art.src, role: selected?.usage ?? "optical", physicalNeed, fallback: !selected,
+  return { src: selected?.src ?? art.src, role: selected ? usage : "optical", physicalNeed, fallback: !selected,
     geometry: selected?.geometry,
     sufficientResolution: selected ? Math.max(selected.width, selected.height) >= physicalNeed : false } as const;
 }

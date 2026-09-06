@@ -1,7 +1,8 @@
 import type { CSSProperties } from "react";
 import { AME_ART, type WeaponArt } from "./artCatalog";
+import { measureFieldArt } from "./fieldArtLayout";
 
-export type HeldWeaponContext = "field" | "battle" | "portal";
+export type HeldWeaponContext = "field" | "battle" | "portal" | "jump";
 
 interface RegisteredActorCanvas {
   readonly scale: number;
@@ -15,10 +16,19 @@ interface RegisteredActorCanvas {
  * against Ame's registered canvas, not against her alpha-visible silhouette.
  */
 export const HELD_WEAPON_ACTOR_CANVAS = {
-  field: { scale: 0.92, left: 0.04, top: 0.09 },
-  battle: { scale: 0.94, left: 0.03, top: 0.07 },
-  portal: { scale: 0.94, left: 0.03, top: 0.07 },
+  field: measureFieldArt(AME_ART.geometry),
+  battle: measureFieldArt(AME_ART.geometry),
+  portal: measureFieldArt(AME_ART.geometry),
+  jump: measureFieldArt(AME_ART.geometry),
 } as const satisfies Readonly<Record<HeldWeaponContext, RegisteredActorCanvas>>;
+
+/** Preserve the existing boot attachment in Ame's canvas coordinates while
+ * resizing her whole pose; ground pickup boots use their own visible bounds. */
+export const JUMP_BOOTS_STYLE = {
+  "--jump-boots-left": (HELD_WEAPON_ACTOR_CANVAS.jump.left + HELD_WEAPON_ACTOR_CANVAS.jump.scale * (.41 - .03) / .94) * 100,
+  "--jump-boots-top": (HELD_WEAPON_ACTOR_CANVAS.jump.top + HELD_WEAPON_ACTOR_CANVAS.jump.scale * (.62 - .07) / .94) * 100,
+  "--jump-boots-size": HELD_WEAPON_ACTOR_CANVAS.jump.scale * .42 / .94 * 100,
+} as CSSProperties;
 
 export interface HeldWeaponPlacement {
   readonly left: number;

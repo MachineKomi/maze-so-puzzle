@@ -16,7 +16,7 @@ export const DIRECTION_DELTAS: Readonly<Record<Direction, Point>> = {
 };
 
 export type TerrainKind = "wall" | "floor" | "water" | "lava" | "poison" | "hole";
-export type LightDirection = "top" | "right" | "bottom" | "left";
+export type LightDirection = "top" | "right" | "bottom" | "left" | "top-right" | "bottom-right" | "bottom-left" | "top-left";
 export type TreasureCurrency = "gold" | "science";
 export type TreasureStyle = "gold-bag" | "gold-chest" | "science-gears" | "science-beaker";
 export type KeyColor = "red" | "blue" | "yellow";

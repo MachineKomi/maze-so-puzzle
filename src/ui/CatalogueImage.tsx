@@ -2,12 +2,15 @@ import { StageFitContext } from "./ResponsiveStage";
 import { useContext, useLayoutEffect, useRef, useState, useSyncExternalStore, type ImgHTMLAttributes } from "react";
 import type { RuntimeArtUsage } from "../artCatalog";
 import { resolveUiArt, selectArtRendition, type UiArt } from "./art";
+import { fieldArtStyle, type FieldArtRole } from "../fieldArtLayout";
 
 interface CatalogueImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   readonly art?: UiArt | string;
   readonly usage?: RuntimeArtUsage;
   readonly displayPx?: number;
   readonly fallbackSrc?: string;
+  readonly fieldRole?: FieldArtRole;
+  readonly fieldDetail?: boolean;
 }
 // One observer for all catalogue images, not one per tile. Only size changes
 // publish; scrolling/travel never reads layout or changes rendition state.
@@ -72,13 +75,13 @@ function subscribeDpr(listener: () => void) {
   };
 }
 /** Single image boundary. Legacy semantic URL projections resolve back to records. */
-export function CatalogueImage({ art: identity, src, fallbackSrc, usage = "optical", displayPx = 48, alt = "", onError, ...props }: CatalogueImageProps) {
+export function CatalogueImage({ art: identity, src, fallbackSrc, fieldRole, fieldDetail = false, usage = "optical", displayPx = 48, alt = "", onError, ...props }: CatalogueImageProps) {
   const element = useRef<HTMLImageElement>(null);
   const [renderedSize, setRenderedSize] = useState(displayPx);
   const fit = useContext(StageFitContext);
   const dpr = useSyncExternalStore(subscribeDpr, readDpr, serverDpr);
   const art = resolveUiArt(identity ?? src ?? "");
-  const selected = art ? selectArtRendition(art, usage, renderedSize * fit.scale, dpr) : undefined;
+  const selected = art ? selectArtRendition(art, usage, renderedSize * fit.scale, dpr, Boolean(fieldRole) || fieldDetail) : undefined;
   const [failed, setFailed] = useState<readonly string[]>([]);
   const requested = selected?.src ?? src;
   const absolute = (url: string) => typeof document === "undefined" ? url : new URL(url, document.baseURI).href;
@@ -91,19 +94,21 @@ export function CatalogueImage({ art: identity, src, fallbackSrc, usage = "optic
     // A capped optical fallback must not shrink its own rendition demand and
     // oscillate back into a large presentation. The authored frame still
     // follows real layout changes; field/optical images observe themselves.
-    const target = usage === "presentation"
+    const target = fieldRole && art?.geometry ? element.current.parentElement ?? element.current : usage === "presentation"
       ? element.current.closest('[data-art-anchor="presentation"]') ?? element.current
       : element.current;
-    return observeImageSize(target, setRenderedSize);
-  }, [resolved, usage]);
+    // Demand is measured from the stable tile and canonical canvas, not the
+    // selected rendition's slightly different alpha bounds (no resize loop).
+    return observeImageSize(target, size => setRenderedSize(fieldRole && art?.geometry ? size * .9 / art.geometry.visibleBounds[2] : size));
+  }, [resolved, usage, fieldRole, art]);
   const fallback = resolved !== requested || selected?.fallback;
   const geometry = resolved === selected?.src ? selected?.geometry ?? art?.geometry : art?.geometry;
   const opticalFallback = usage === "presentation" && resolved !== requested;
   const shared = { "data-art-id": art?.id ?? "unknown", "data-art-role": opticalFallback ? "optical" : selected?.role ?? "fallback", "data-art-fallback": fallback || undefined,
     "data-art-geometry": geometry?.class, "data-art-resolution-sufficient": !opticalFallback && selected?.sufficientResolution, "data-art-safe-inset": geometry?.safeInset.join(","), "data-art-visible-bounds": geometry?.visibleBounds.join(",") };
   if (!resolved) return <span className={`art-fallback ${props.className ?? ""}`} style={props.style} role={alt ? "img" : undefined} aria-label={alt || undefined} aria-hidden={props["aria-hidden"] ?? (!alt || undefined)} {...shared}>{alt || "◇"}</span>;
-  return <img {...props} {...shared} srcSet={responsive ? props.srcSet : undefined} sizes={responsive ? props.sizes : undefined} ref={element} width={props.width ?? art?.width} height={props.height ?? art?.height} src={resolved} alt={alt} decoding={props.decoding ?? "async"} draggable={props.draggable ?? false}
-    style={{ objectFit: art?.fit ?? (geometry?.class === "background" ? "cover" : "contain"), objectPosition: art?.focalPoint ? `${art.focalPoint[0]*100}% ${art.focalPoint[1]*100}%` : undefined, ...props.style, ...(opticalFallback ? {maxWidth:64,maxHeight:64} : {}) }}
+  return <img {...props} {...shared} data-field-layout={fieldRole && geometry ? fieldRole : undefined} srcSet={responsive ? props.srcSet : undefined} sizes={responsive ? props.sizes : undefined} ref={element} width={props.width ?? art?.width} height={props.height ?? art?.height} src={resolved} alt={alt} decoding={props.decoding ?? "async"} draggable={props.draggable ?? false}
+    style={{ objectFit: art?.fit ?? (geometry?.class === "background" ? "cover" : "contain"), objectPosition: art?.focalPoint ? `${art.focalPoint[0]*100}% ${art.focalPoint[1]*100}%` : undefined, ...(fieldRole && geometry ? fieldArtStyle(geometry, fieldRole) : {}), ...props.style, ...(opticalFallback ? {maxWidth:64,maxHeight:64} : {}) }}
     onError={(event) => {
       const failedUrl = event.currentTarget.currentSrc || event.currentTarget.src;
       setFailed(previous => previous.includes(failedUrl) ? previous : [...previous, failedUrl]);

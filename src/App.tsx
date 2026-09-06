@@ -1,6 +1,9 @@
 import { ResponsiveStage } from "./ui/ResponsiveStage";
 import { physicalContentRect } from "./ui/stageFit";
 import { MazeTerrain, lightVector } from "./ui/game/MazeTerrain";
+import { MazeForeground } from "./ui/game/MazeForeground";
+import { CagedFriend, cageComposition } from "./ui/game/CagedFriend";
+import { fieldActorStyle } from "./fieldArtLayout";
 import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
 import { rewardSeed } from "./vfx/rewardPhysics";
 import { MiniMap } from "./ui/game/MiniMap";
@@ -13,6 +16,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useId,
   useRef,
   useState,
   type CSSProperties,
@@ -55,7 +59,7 @@ import {
 } from "./game/engine";
 import { friendDiscoveriesForView, enemyDiscoveriesForView } from "./game/discovery";
 import { FRIEND_BOOK_LORE } from "./bookLore";
-import { heldWeaponStyle } from "./heldWeaponPresentation";
+import { heldWeaponStyle, JUMP_BOOTS_STYLE } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
 import { CURATED_LEVELS } from "./game/levels";
@@ -669,6 +673,7 @@ function pendingCompletionFor(
 }
 
 function App() {
+  const wallVolumeId = `wall-volume-${useId().replace(/:/g, "")}`;
   const [musicTransport] = useState(createCurrentMusicTransport);
   const { motion, preferences } = usePresentation();
   const [soundOpen, setSoundOpen] = useState(false);
@@ -2337,7 +2342,7 @@ function App() {
             >
               <span className="terrain-ambient-decoration" aria-hidden="true" />
               <div className="camera-world" data-scene-slot="world" style={cameraWorldStyle(level, cameraWindow)} aria-hidden="true">
-                <MazeTerrain level={level} camera={worldWindow} />
+                <MazeTerrain level={level} camera={worldWindow} volumeId={wallVolumeId} />
 
                 {worldObjects.map((object) => (
                   <div
@@ -2351,18 +2356,17 @@ function App() {
                     data-enemy-motion={object.kind === "enemy" ? enemyPersonality(object.style).motion : undefined}
                     data-key-color={object.kind === "key" || object.kind === "door" ? object.color : undefined}
                     key={object.id}
-                    style={worldLayerStyle(object.at, level)}
+                    style={{...worldLayerStyle(object.at, level), ...(object.kind === "enemy" ? fieldActorStyle(resolveUiArt(spriteFor(object))!.geometry!, object.at.y-cameraWindow.top) : {})}}
                   >
                     {object.kind === "animal" ? (
                       <div
                         className="animal-stack"
                         data-flourish={animalPersonality(object.species).flourish}
                       >
-                        <CatalogueImage usage="field" className="animal-sprite" src={animalArt(object.species)} alt="" draggable={false} />
-                        <CatalogueImage usage="field" className="animal-cage" src={resolveCageArt(object.cageStyle).src} alt="" draggable={false} />
+                        <CagedFriend friendSrc={animalArt(object.species)} cageSrc={resolveCageArt(object.cageStyle).src} />
                       </div>
                     ) : (
-                      <CatalogueImage usage="field" className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
+                      <CatalogueImage usage="field" fieldRole={object.kind === "portal" || object.kind === "door" ? undefined : object.kind === "enemy" ? "actor" : "item"} className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
                     )}
                     {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
                     {(object.kind === "key" || object.kind === "door") && (
@@ -2382,7 +2386,7 @@ function App() {
                         style={worldLayerStyle(point, level)}
                         key={animal.id}
                       >
-                        <CatalogueImage usage="field" src={animalArt(animal.species)} alt="" draggable={false} />
+                        <CatalogueImage usage="field" fieldRole="actor" src={animalArt(animal.species)} alt="" draggable={false} />
                       </div>
                     ))}
                   </div>
@@ -2463,13 +2467,13 @@ function App() {
                     "--power-flight-y": `${(battlePresentation.from.y - battlePresentation.at.y) * 100}%`,
                   } as CSSProperties}
                 >
-                  <div className="battle-combatant battle-ame" data-reward-anchor="ame" data-travel-actor="replacement" style={cameraLayerStyle(battlePresentation.from, cameraWindow)}>
-                    <CatalogueImage usage="field" className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    {game.hasSword && <CatalogueImage usage="field" className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
+                  <div className="battle-combatant battle-ame" data-reward-anchor="ame" data-travel-actor="replacement" style={{...cameraLayerStyle(battlePresentation.from, cameraWindow), ...fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}}>
+                    <CatalogueImage usage="field" fieldRole="actor" className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    {game.hasSword && <CatalogueImage usage="field" fieldDetail className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                   </div>
-                  <div className="battle-combatant battle-enemy" data-travel-camera-anchor="" style={cameraLayerStyle(battlePresentation.at, cameraWindow)}>
-                    <CatalogueImage usage="field" className="battle-sprite" src={battlePresentation.enemySrc} alt="" draggable={false} />
+                  <div className="battle-combatant battle-enemy" data-travel-camera-anchor="" style={{...cameraLayerStyle(battlePresentation.at, cameraWindow), ...fieldActorStyle(resolveUiArt(battlePresentation.enemySrc)!.geometry!, battlePresentation.at.y-cameraWindow.top)}}>
+                    <CatalogueImage usage="field" fieldRole="actor" className="battle-sprite" src={battlePresentation.enemySrc} alt="" draggable={false} />
                     <span className="power-badge enemy-power">{presentedEnemyPower ?? battlePresentation.enemyPower}</span>
                   </div>
                   <div
@@ -2496,12 +2500,12 @@ function App() {
                   data-animal-motion={animalPersonality(rescuePresentation.species).motion}
                   data-flourish={animalPersonality(rescuePresentation.species).flourish}
                   data-sfx-cue="cage-pop-and-friend-cheer"
-                  style={cameraLayerStyle(rescuePresentation.at, cameraWindow)}
+                  style={{...cameraLayerStyle(rescuePresentation.at, cameraWindow), ...cageComposition(animalArt(rescuePresentation.species), rescuePresentation.cageSrc).rescueStyle}}
                   aria-hidden="true"
                 >
-                  <CatalogueImage usage="field" className="rescue-presentation-pet" src={animalArt(rescuePresentation.species)} alt="" draggable={false} />
-                  <span className="rescue-cage-half cage-half-left"><CatalogueImage usage="field" src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
-                  <span className="rescue-cage-half cage-half-right"><CatalogueImage usage="field" src={rescuePresentation.cageSrc} alt="" draggable={false} /></span>
+                  <CatalogueImage usage="field" fieldRole="actor" className="rescue-presentation-pet" src={animalArt(rescuePresentation.species)} alt="" draggable={false} />
+                  <span className="rescue-cage-half cage-half-left"><CatalogueImage usage="field" src={rescuePresentation.cageSrc} style={cageComposition(animalArt(rescuePresentation.species), rescuePresentation.cageSrc).cageStyle} alt="" draggable={false} /></span>
+                  <span className="rescue-cage-half cage-half-right"><CatalogueImage usage="field" src={rescuePresentation.cageSrc} style={cageComposition(animalArt(rescuePresentation.species), rescuePresentation.cageSrc).cageStyle} alt="" draggable={false} /></span>
                   <span className="rescue-happy-burst">
                     {Array.from({ length: 7 }, (_, index) => (
                       <i style={{ "--heart-index": index } as CSSProperties} key={index}>{index % 2 ? "✦" : "♥"}</i>
@@ -2526,10 +2530,10 @@ function App() {
                   aria-hidden="true"
                 >
                   <i className="jump-presentation-shadow" />
-                  <div className="jump-presentation-body">
-                    <CatalogueImage usage="field" className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    <CatalogueImage usage="field" className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} />
-                    {game.hasSword && <CatalogueImage usage="field" className="jump-presentation-weapon" src={weaponArt.src} alt="" draggable={false} />}
+                  <div className="jump-presentation-body" style={fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}>
+                    <CatalogueImage usage="field" fieldRole="actor" className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    <CatalogueImage usage="field" fieldDetail className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} style={JUMP_BOOTS_STYLE} />
+                    {game.hasSword && <CatalogueImage usage="field" fieldDetail className="jump-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "jump")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                     <i className="jump-spring-squash" />
                   </div>
@@ -2547,9 +2551,9 @@ function App() {
                 >
                   <CatalogueImage usage="field" className="portal-presentation-pad" src={resolvePortalArt(portalPresentation.pair).src} alt="" draggable={false} />
                   <span className="portal-presentation-rings"><i /><i /><i /></span>
-                  <div className="portal-presentation-body">
-                    <CatalogueImage usage="field" className="portal-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    {game.hasSword && <CatalogueImage usage="field" className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "portal")} />}
+                  <div className="portal-presentation-body" style={fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}>
+                    <CatalogueImage usage="field" fieldRole="actor" className="portal-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                    {game.hasSword && <CatalogueImage usage="field" fieldDetail className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "portal")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
                   </div>
                   <span className="portal-presentation-sparkles">✦ <b>{resolvePortalArt(portalPresentation.pair).motif}</b> ✦</span>
@@ -2560,13 +2564,15 @@ function App() {
                 data-scene-slot="actors"
                 data-reward-anchor={battlePresentation || jumpPresentation || portalPresentation ? undefined : "ame"}
                 className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
-                style={cameraLayerStyle(game.position, cameraWindow)}
+                style={{...cameraLayerStyle(game.position, cameraWindow), ...fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}}
                 aria-hidden="true"
               >
-                <CatalogueImage usage="field" className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                {game.hasSword && <CatalogueImage usage="field" className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
+                <CatalogueImage usage="field" fieldRole="actor" className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                {game.hasSword && <CatalogueImage usage="field" fieldDetail className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
                 <span className="power-badge player-power">{displayedPower}</span>
               </div>
+
+              <MazeForeground level={level} volumeId={wallVolumeId} style={cameraWorldStyle(level, cameraWindow)} />
 
               <RewardLayer port={rewardPort} level={level} scene={sceneTravel} muted={muted}
                 active={pageVisible && !modalOpen && !jumpPresentation && !portalPresentation && motion === "full"}

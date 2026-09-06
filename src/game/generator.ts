@@ -1141,7 +1141,7 @@ function buildGeneratedLevel(
     terrain,
     objects,
     terrainThemeId: visuals.terrainThemeId,
-    lightDirection: (["top", "right", "bottom", "left"] as const)[seedHash % 4],
+    lightDirection: (["top", "right", "bottom", "left", "top-right", "bottom-right", "bottom-left", "top-left"] as const)[seedHash % 8],
     introducedMechanics: [...new Set([
       ...(difficulty === "movement"
         ? ["movement", "exit", ...recipe.map((entry) => entry.kind)]

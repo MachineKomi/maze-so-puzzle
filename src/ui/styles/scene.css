@@ -1,4 +1,59 @@
 /* Scene-only cascade consolidated from 6493110. Geometry, art, effect timing and world positioning are preserved. */
+/* WALL-04C artwork registration. Outer wrappers remain one logical tile. */
+.maze-board img[data-field-layout] {
+  position: absolute;
+  inset: auto;
+  left: 50%;
+  top: var(--field-ground);
+  width: var(--field-size);
+  height: auto;
+  max-width: none;
+  max-height: none;
+  translate: var(--field-x) var(--field-y);
+  transform: none;
+  transform-origin: 50% var(--field-pivot);
+  --field-motion-x: 0%;
+}
+.maze-board :is(.player-layer,.object-layer,.battle-combatant,.jump-presentation-body,.portal-presentation-body) > .power-badge {
+  top: var(--field-label-top, 0%);
+  bottom: auto;
+  translate: 0 -100%;
+}
+.maze-foreground {
+  position: absolute;
+  z-index: 26;
+  pointer-events: none;
+  overflow: hidden;
+}
+.maze-board :is(.player-layer,.object-kind-enemy,.pet-follower)::before {
+  bottom: auto;
+  top: 70%;
+  filter: none;
+}
+.maze-board .animal-stack { inset: 0; }
+.cage-friend-bay { position: absolute; overflow: hidden; }
+.maze-board .cage-friend-bay .animal-sprite { animation: none; transform: none; }
+.maze-board .rescue-cage-half { inset: 0; }
+.maze-board .jump-presentation-weapon {
+  z-index: var(--held-z);
+  inset: auto;
+  left: var(--held-left);
+  top: var(--held-top);
+  width: var(--held-size);
+  height: auto;
+  transform: rotate(var(--held-rotation));
+  transform-origin: var(--held-grip-x) var(--held-grip-y);
+}
+.maze-board .jump-presentation-sprite { z-index: 2; }
+.maze-board .jump-presentation-boots {
+  inset: auto;
+  left: calc(var(--jump-boots-left) * 1%);
+  top: calc(var(--jump-boots-top) * 1%);
+  width: calc(var(--jump-boots-size) * 1%);
+  height: auto;
+}
+.maze-board :is(.battle-combatant,.jump-presentation-body) { transform-origin: 50% 76.5%; }
+.maze-board .jump-presentation-shadow { bottom: auto; top: 68%; }
 .goal-sprite {
   position: absolute;
   z-index: 2;
@@ -475,7 +530,7 @@
   pointer-events: none;
 }
 /* Travel carries the actor and Power steadily; a small sprite-only sway adds life. */
-:root[data-motion="full"] .maze-board[data-travel-state="moving"] .player-sprite { animation: ame-travel-sway 640ms ease-in-out infinite; }
+:root[data-motion="full"] .maze-board[data-travel-state="moving"] .player-layer { animation: ame-travel-sway 640ms ease-in-out infinite; transform-origin: 50% 76.5%; }
 @keyframes ame-travel-sway { 0%,100% { rotate: -1deg; } 50% { rotate: 1deg; } }
 .player-layer.move-a::before {
   animation: step-spark-a 260ms ease-out;
@@ -1507,8 +1562,8 @@
 }
 
 @keyframes goblin-bob {
-  0%, 100% { transform: translateX(-50%) translateY(0) rotate(-1deg); }
-  50% { transform: translateX(-50%) translateY(-3%) rotate(1deg); }
+  0%, 100% { transform: translateX(var(--field-motion-x, -50%)) translateY(0) rotate(-1deg); }
+  50% { transform: translateX(var(--field-motion-x, -50%)) translateY(-3%) rotate(1deg); }
 }
 
 @keyframes portal-pad-breathe {
@@ -1563,19 +1618,19 @@
   90% { opacity: 0; transform: translateY(-11px) rotate(12deg) scale(.86); }
 }
 
-@keyframes enemy-motion-squish { 0%,100%{transform:translateX(-50%) scale(1)} 50%{transform:translateX(-50%) translateY(3%) scale(1.055,.92)} }
+@keyframes enemy-motion-squish { 0%,100%{transform:translateX(var(--field-motion-x, -50%)) scale(1)} 50%{transform:translateX(var(--field-motion-x, -50%)) translateY(3%) scale(1.055,.92)} }
 
-@keyframes enemy-motion-flutter { 0%,100%{transform:translateX(-50%) translateY(1%) rotate(-2deg)} 50%{transform:translateX(-50%) translateY(-8%) rotate(3deg)} }
+@keyframes enemy-motion-flutter { 0%,100%{transform:translateX(var(--field-motion-x, -50%)) translateY(1%) rotate(-2deg)} 50%{transform:translateX(var(--field-motion-x, -50%)) translateY(-8%) rotate(3deg)} }
 
-@keyframes enemy-motion-stomp { 0%,100%{transform:translateX(-50%) scale(1)} 36%{transform:translateX(-50%) translateY(-3%) rotate(-1deg)} 51%{transform:translateX(-50%) translateY(2%) scale(1.04,.96)} }
+@keyframes enemy-motion-stomp { 0%,100%{transform:translateX(var(--field-motion-x, -50%)) scale(1)} 36%{transform:translateX(var(--field-motion-x, -50%)) translateY(-3%) rotate(-1deg)} 51%{transform:translateX(var(--field-motion-x, -50%)) translateY(2%) scale(1.04,.96)} }
 
-@keyframes enemy-motion-skitter { 0%,100%{transform:translateX(-52%) rotate(-2deg)} 50%{transform:translateX(-46%) rotate(2deg)} }
+@keyframes enemy-motion-skitter { 0%,100%{transform:translateX(calc(var(--field-motion-x, -50%) - 2%)) rotate(-2deg)} 50%{transform:translateX(calc(var(--field-motion-x, -50%) + 4%)) rotate(2deg)} }
 
-@keyframes enemy-motion-swagger { 0%,100%{transform:translateX(-50%) rotate(-3deg)} 50%{transform:translateX(-50%) translateY(-4%) rotate(3deg)} }
+@keyframes enemy-motion-swagger { 0%,100%{transform:translateX(var(--field-motion-x, -50%)) rotate(-3deg)} 50%{transform:translateX(var(--field-motion-x, -50%)) translateY(-4%) rotate(3deg)} }
 
-@keyframes enemy-motion-bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-6%) scale(1.02)} }
+@keyframes enemy-motion-bob { 0%,100%{transform:translateX(var(--field-motion-x, -50%)) translateY(0)} 50%{transform:translateX(var(--field-motion-x, -50%)) translateY(-6%) scale(1.02)} }
 
-@keyframes enemy-motion-hop { 0%,100%{transform:translateX(-50%) translateY(0)} 44%{transform:translateX(-50%) translateY(-9%) rotate(3deg)} 63%{transform:translateX(-50%) scale(1.03,.96)} }
+@keyframes enemy-motion-hop { 0%,100%{transform:translateX(var(--field-motion-x, -50%)) translateY(0)} 44%{transform:translateX(var(--field-motion-x, -50%)) translateY(-9%) rotate(3deg)} 63%{transform:translateX(var(--field-motion-x, -50%)) scale(1.03,.96)} }
 
 @keyframes terrain-ambient-drift { 0%,100%{opacity:.36;transform:translate(0,3px)} 50%{opacity:.9;transform:translate(-7px,-7px)} }
 
@@ -1679,12 +1734,12 @@
 
 
 @keyframes rescued-friend-first-hop {
-  0%, 22% { transform: translateX(-50%) translateY(4%) scale(0.78, 0.7); opacity: 0.4; }
-  39% { transform: translateX(-50%) translateY(-38%) rotate(-4deg) scale(1.12, 0.94); opacity: 1; }
-  55% { transform: translateX(-50%) translateY(0) rotate(3deg) scale(0.92, 1.1); opacity: 1; }
-  72% { transform: translateX(-50%) translateY(-21%) rotate(3deg) scale(1.06, 0.96); opacity: 1; }
-  88% { transform: translateX(-50%) translateY(0) rotate(-2deg) scale(0.96, 1.05); opacity: 1; }
-  100% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+  0%, 13% { transform: translateX(var(--field-motion-x, -50%)) translateY(var(--rescue-start-y, 0%)); opacity: 1; clip-path: var(--rescue-clip, inset(0)); }
+  39% { transform: translateX(var(--field-motion-x, -50%)) translateY(-18%) rotate(-4deg) scale(1.04,.98); opacity: 1; clip-path: inset(0); }
+  55% { transform: translateX(var(--field-motion-x, -50%)) translateY(0) rotate(3deg) scale(0.92, 1.1); opacity: 1; }
+  72% { transform: translateX(var(--field-motion-x, -50%)) translateY(-10%) rotate(3deg) scale(1.03,.98); opacity: 1; }
+  88% { transform: translateX(var(--field-motion-x, -50%)) translateY(0) rotate(-2deg) scale(0.96, 1.05); opacity: 1; }
+  100% { transform: translateX(var(--field-motion-x, -50%)) translateY(0) scale(1); opacity: 1; clip-path: inset(0); }
 }
 
 @keyframes cage-left-pop-open {

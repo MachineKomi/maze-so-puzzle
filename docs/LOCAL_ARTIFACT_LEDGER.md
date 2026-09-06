@@ -1,5 +1,25 @@
 # Local artifact ledger and cleanup review
 
+## WALL-04C prototype outputs — 2026-09-07
+
+Astra, based on04b5da9 plus dirty runtime described in the [candidate receipt](reviews/2026-09-07-wall04c-candidate.md).
+Under `C:/GameDev/maze-game-qa/performance/`: `wall04c-prototype-20260907/`
+4files4535683B (first lab/game images and metadata); `wall04c-browser-first-20260907/`
+74files86768287B (17-case first-source pass, route fixtures/screens/JSON);
+`wall04c-racks-20260907/`22files19797797B (first9rack cases, including one retained
+resolution failure). Local dev server1421 stopped. Existingdist reused in place;
+no repo/media copy. Exact-source final evidence will use a separate named packet.
+
+`C:/Users/hawki/AppData/Local/ms-playwright/webkit-2336/`:343files177304497B,
+Playwright1.62.1 official WebKit26.5 test engine. Installed for cross-engine SVG
+proof, held unused because Windows Application Control blocks bundledlibsharpyuv.dll.
+DLL24576B SHA2561a1e74fd9d551465f8f30594e0916c5136c0a39da8de564a3e9f9fd352d244a6.
+No policy bypass or DLL replacement. Review this177MB optional tool hold at slice
+closure; no deletion without Human approval.
+
+The corrected14 baseline identity now additionally includes the paired harness's
+`rows` mapping of the same three verified entry hashes; no payload bytes changed.
+
 ## 2026-09-07 release closure and wall baseline
 
 Astra created/reused these external outputs; no deletion/archive authorized.

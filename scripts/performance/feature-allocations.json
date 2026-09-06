@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "wall04c-visible-art-and-foreground",
+      "owner": "lighting",
+      "status": "approved",
+      "compressedJsBytes": 500,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates500 gzip9 JS bytes for the Human-directed balanced physical wall/foreground and enlarged alpha-registered field art seam. Pre-final165884 JS exceeds the prior165557 ceiling by327; CSS24216 and public155542751 remain within existing limits. No new media or dependency. This bounded byte allocation does not qualify timing or release.",
+      "evidencePath": "docs/reviews/2026-09-07-wall04c-candidate.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Revert the complete WALL-04C wall/foreground/field-art/registration seam to04b5da9, preserving published0.22.14 hazards, saved progress and the deployment guard."
+    },
+    {
       "id": "wall04b-section-and-small-dressing",
       "owner": "lighting",
       "status": "approved",

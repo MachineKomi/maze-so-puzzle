@@ -10,7 +10,7 @@ describe("registered held-weapon presentation", () => {
   it("aligns every measured weapon grip to Ame's hand socket in every context", () => {
     const ameGrip = AME_ART.geometry.gripPoint!;
     for (const [id, weapon] of Object.entries(WEAPON_ART)) {
-      for (const context of ["field", "battle", "portal"] as const) {
+      for (const context of ["field", "battle", "portal", "jump"] as const) {
         const actor = HELD_WEAPON_ACTOR_CANVAS[context];
         const placement = measureHeldWeaponPlacement(weapon, context);
         const resolvedGripX = placement.left + placement.size * placement.gripX;
@@ -44,7 +44,7 @@ describe("registered held-weapon presentation", () => {
     const style = heldWeaponStyle(WEAPON_ART["moon-wand"], "field") as Record<string, string | number>;
     expect(style["--held-left"]).toMatch(/%$/);
     expect(style["--held-top"]).toMatch(/%$/);
-    expect(style["--held-size"]).toBe("62.3760%");
+    expect(style["--held-size"]).toBe("137.0274%");
     expect(style["--held-grip-x"]).toBe("33.6000%");
     expect(style["--held-grip-y"]).toBe("77.3000%");
     expect(style["--held-rotation"]).toBe("9deg");

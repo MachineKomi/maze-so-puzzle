@@ -46,7 +46,8 @@ async function startSamples(page:Page){await page.evaluate(()=>{
   const jump=board.querySelector<HTMLElement>('.jump-presentation'),actor=jump??board.querySelector<HTMLElement>('.player-layer')!;
   const a=actor.getBoundingClientRect(),cell=(b.width-2*board.clientLeft*b.width/board.offsetWidth)/cols;
   const camera={x:-parseFloat(world.style.translate)*parseFloat(world.style.width)/100*cols/100,y:-parseFloat(world.style.translate.split(' ')[1]!)*parseFloat(world.style.height)/100*cols/100};
-  sample.rows.push({time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
+  const foreground=board.querySelector<SVGSVGElement>(".maze-foreground");
+  sample.rows.push({foregroundDelta:foreground?Math.max(Math.abs(foreground.getBoundingClientRect().x-w.x),Math.abs(foreground.getBoundingClientRect().y-w.y)):null,time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
   if(sample.running)requestAnimationFrame(tick);
  };requestAnimationFrame(tick);
 });}
@@ -60,6 +61,7 @@ for(const [width,height] of [[780,312],[1280,720]])test(`JUMP camera follows air
  const rows=await page.evaluate(()=>{const p=(window as any).jumpProof;p.running=false;return p.rows;});
  await writeFile(resolve(output,`camera-${width}.json`),JSON.stringify({before,level:f.level.id,jump:f.jump,from:f.from,to:f.to,rows},null,2));
  await expectUiRouteState(page,f.step.result.state);expect(errors).toEqual([]);
+ for(const r of rows) expect(r.foregroundDelta).toBeLessThan(.5);
  if(!before){const air=rows.filter((r:any)=>r.jump);expect(air.length).toBeGreaterThan(6);
   const axis=f.from.left!==f.to.left?'x':'y',a=axis==='x'?f.from.left:f.from.top,z=axis==='x'?f.to.left:f.to.top;
   expect(new Set(air.map((r:any)=>r.camera[axis].toFixed(3))).size).toBeGreaterThan(6);
@@ -80,6 +82,7 @@ for(const mode of ['lite','reduced','static','resize','blur'])test(`JUMP bounded
  const rows=await page.evaluate(()=>{const p=(window as any).jumpProof;p.running=false;return p.rows;});
  await writeFile(resolve(output,`${mode}.json`),JSON.stringify(rows,null,2));
  if(mode==='reduced'||mode==='static')for(const r of rows.filter((r:any)=>r.jump)){expect(r.camera.x).toBeCloseTo(f.to.left,4);expect(r.camera.y).toBeCloseTo(f.to.top,4);}
+ for(const r of rows) expect(r.foregroundDelta).toBeLessThan(.5);
  expect(errors).toEqual([]);
 });
 

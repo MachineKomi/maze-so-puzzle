@@ -18,7 +18,8 @@ export interface RewardToken {
   value: number; trail: Point[]; arrived: boolean; expired: boolean; bounced: boolean;
 }
 export const REWARD_CAP = { full: 24, lite: 12 } as const;
-const RADIUS = .18;
+// Display envelope for the enlarged glyph, including its small scale variation.
+const RADIUS = .46;
 
 export function rewardSeed(text: string): number {
   let value = 2166136261;
@@ -53,7 +54,7 @@ export function makeRewardTokens(event: RewardEmission, now: number, slots: numb
       kind: event.kind, x: event.at.x + .5, y: event.at.y + .5,
       vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
       born: now, due: now + duration, homingAt: now + Math.min(240, duration * .42),
-      scale: .88 + rng() * .22, angle: rng() * Math.PI,
+      scale: .98 + rng() * .04, angle: rng() * Math.PI,
       value, trail: [], arrived: false, expired: false, bounced: false,
     };
   });

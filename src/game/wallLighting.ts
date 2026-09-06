@@ -8,7 +8,11 @@ export function resolveWallLight(level: Pick<LevelDefinition, "id" | "lightDirec
   ] ?? "top";
   const direction = level.lightDirection ?? fallback;
   const toLight = { top: { x: 0, y: -1 }, right: { x: 1, y: 0 },
-    bottom: { x: 0, y: 1 }, left: { x: -1, y: 0 } }[direction];
+    bottom: { x: 0, y: 1 }, left: { x: -1, y: 0 },
+    "top-right": { x: Math.SQRT1_2, y: -Math.SQRT1_2 },
+    "bottom-right": { x: Math.SQRT1_2, y: Math.SQRT1_2 },
+    "bottom-left": { x: -Math.SQRT1_2, y: Math.SQRT1_2 },
+    "top-left": { x: -Math.SQRT1_2, y: -Math.SQRT1_2 } }[direction];
   return { toLight, cast: { x: -toLight.x || 0, y: -toLight.y || 0 } };
 }
 

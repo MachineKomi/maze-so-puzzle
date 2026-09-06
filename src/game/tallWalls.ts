@@ -1,13 +1,15 @@
 import { createRectilinearUnionGeometry, type RoundedTerrainGeometry } from "./terrainGeometry";
 import type { LevelDefinition, Point } from "./types";
 
-/** A fixed dollhouse section, measured against the unchanged standing Ame art.
- * P(x,y,z)=(x+.18z,y-z). Full height is 1.15 × Ame's visible standing height.
- * Trim the rear/east cap where it would cover ANY non-wall cell. This is visual
- * receiver protection, not walkability: hazards retain their own surfaces/rules. */
-export const TALL_WALL_HEIGHT = .92 * (.90 - .060546875) * 1.15;
+/** Fixed dollhouse projection P(x,y,z)=(x+.18z,y-z). Equal exposed cap
+ * widths, with a bounded foreground overlap. Logical terrain never changes. */
+export const TALL_WALL_HEIGHT = .81;
+export const WALL_REAR_OVERLAP = .28;
+export const WALL_CAP_WIDTH = 1 - TALL_WALL_HEIGHT + WALL_REAR_OVERLAP;
+// Halfway between the north wall's front foot and the south wall's rear foot.
+export const FIELD_GROUND_Y = (1 + TALL_WALL_HEIGHT - WALL_REAR_OVERLAP) / 2;
 export const TALL_WALL_SKEW = .18;
-export const TALL_WALL_REVISION = "04b-section-v1";
+export const TALL_WALL_REVISION = "04c-balanced-v1";
 const p = (p: Point) => `${Number(p.x.toFixed(5))} ${Number(p.y.toFixed(5))}`;
 const quad = (a: Point, b: Point, c: Point, d: Point) => `M${p(a)}L${p(b)}L${p(c)}L${p(d)}Z`;
 
@@ -25,17 +27,17 @@ function boundarySegments(geometry: RoundedTerrainGeometry, visit: (a: Point, b:
   }
 }
 
-export function createTallWallGeometry(level: Pick<LevelDefinition, "width" | "height" | "terrain">, base: RoundedTerrainGeometry, toLight: Point) {
+export function createTallWallGeometry(level: Pick<LevelDefinition, "width" | "height" | "terrain">, _base: RoundedTerrainGeometry, toLight: Point) {
   const h = TALL_WALL_HEIGHT, dx = h * TALL_WALL_SKEW;
   const wall = (x: number, y: number) => level.terrain[y]?.[x] === "wall";
-  // Both cuts leave the projected cap inside its blocked ground cell. Adjacent
-  // wall cells keep full caps, traced as one union without internal cell seams.
-  const columns = Array.from({ length: level.width }, (_, x) => [x, x + 1 - dx - .015]).flat().concat(level.width);
-  const rows = Array.from({ length: level.height }, (_, y) => [y, y + h + .015]).flat().concat(level.height);
+  const inset = (1 - WALL_CAP_WIDTH) / 2;
+  const columns = Array.from({ length: level.width }, (_, x) => [x, x + inset, x + 1 - inset]).flat().concat(level.width);
+  const rows = Array.from({ length: level.height }, (_, y) => [y, y + h - WALL_REAR_OVERLAP]).flat().concat(level.height);
   const cap = createRectilinearUnionGeometry(columns, rows, (sx, sy) => {
-    const x = Math.floor(sx / 2), y = Math.floor(sy / 2);
+    const x = Math.floor(sx / 3), y = Math.floor(sy / 2);
     return wall(x, y) && (sy % 2 === 1 || wall(x, y - 1))
-      && (sx % 2 === 0 || wall(x + 1, y) && (sy % 2 === 1 || wall(x + 1, y - 1)));
+      && (sx % 3 !== 0 || wall(x - 1, y) && (sy % 2 === 1 || wall(x - 1, y - 1)))
+      && (sx % 3 !== 2 || wall(x + 1, y) && (sy % 2 === 1 || wall(x + 1, y - 1)));
   }, .13);
   const lift = (v: Point) => ({ x: v.x + dx, y: v.y - h });
   const shades: string[][] = Array.from({ length: 5 }, () => []), rims: string[] = [];
@@ -48,9 +50,10 @@ export function createTallWallGeometry(level: Pick<LevelDefinition, "width" | "h
     if (response > .25) rims.push(`M${p(lift(a))}L${p(lift(b))}`);
   });
   const shadow: string[] = [];
-  const cast = { x: -toLight.x * .18, y: -toLight.y * .18 };
-  boundarySegments(base, (a, b, normal) => {
+  const cast = { x: -toLight.x * .30, y: -toLight.y * .30 };
+  boundarySegments(cap, (a, b, normal) => {
     if (normal.x * cast.x + normal.y * cast.y > .001) shadow.push(quad(a, b, { x: b.x + cast.x, y: b.y + cast.y }, { x: a.x + cast.x, y: a.y + cast.y }));
   });
-  return { cap, dx, height: h, sides: shades.map(paths => paths.join("")), rim: rims.join(""), shadow: shadow.join("") };
+  return { cap, footprint: cap, dx, height: h,
+    sides: shades.map(paths => paths.join("")), rim: rims.join(""), shadow: shadow.join("") };
 }
