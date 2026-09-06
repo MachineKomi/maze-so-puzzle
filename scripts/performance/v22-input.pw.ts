@@ -22,6 +22,10 @@ type Source = "keyboard" | "fixed-pad" | "board-drag";
 type Sample = { at: number; steps: number; presentation: string[]; dialog: string | null };
 type InputTrace = { samples: Sample[]; pointerId: number | null; observer: MutationObserver; stop: () => void };
 type TraceWindow = Window & { __v22Input?: InputTrace };
+type NativeExitProbeWindow = Window & {
+  __TAURI__?: { window: { getCurrentWindow: () => { close: () => Promise<void> } } };
+  __rejectNativeExit?: () => void;
+};
 type Driver = { start: (direction: Direction) => Promise<void>; steer: (direction: Direction) => Promise<void>; neutral: () => Promise<void>; release: () => Promise<void> };
 
 async function record(page: Page) {
@@ -163,6 +167,49 @@ function assertFreshResume(samples: readonly Sample[], interactionSteps: number)
 test.beforeAll(async () => { await mkdir(output, { recursive: true }); });
 test.use({ viewport: { width: 1194, height: 834 } });
 test.beforeEach(async ({ page }) => { await page.emulateMedia({ reducedMotion: "no-preference" }); });
+
+test("UI-NATIVE-EXIT browser fallback keeps the page and Play usable", async ({ page }) => {
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  expect(await page.evaluate(() => "__TAURI__" in window)).toBe(false);
+  await page.getByRole("button", { name: "Exit", exact: true }).click();
+  await expect(page.getByRole("status")).toContainText("This window stayed open");
+  expect(page.isClosed()).toBe(false);
+  await page.locator(".front-door-play").click();
+  await expect(page.locator(".title-screen")).toBeVisible();
+});
+
+test("UI-NATIVE-EXIT rejected bridge shows neutral guidance and permits Play", async ({ page }) => {
+  await page.addInitScript(() => {
+    (window as NativeExitProbeWindow).__TAURI__ = {
+      window: { getCurrentWindow: () => ({ close: () => Promise.reject(new Error("denied")) }) },
+    };
+  });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "Exit", exact: true }).click();
+  await expect(page.getByRole("status")).toContainText("This window stayed open");
+  await page.locator(".front-door-play").click();
+  await expect(page.locator(".title-screen")).toBeVisible();
+});
+
+test("UI-NATIVE-EXIT pending rejection cannot update an unmounted front door", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.addInitScript(() => {
+    let rejectClose!: (reason?: unknown) => void;
+    const pending = new Promise<void>((_resolve, reject) => { rejectClose = reject; });
+    const host = window as NativeExitProbeWindow;
+    host.__TAURI__ = { window: { getCurrentWindow: () => ({ close: () => pending }) } };
+    host.__rejectNativeExit = () => rejectClose(new Error("late denial"));
+  });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: "Exit", exact: true }).click();
+  await page.locator(".front-door-play").click();
+  await expect(page.locator(".title-screen")).toBeVisible();
+  await page.evaluate(() => (window as NativeExitProbeWindow).__rejectNativeExit?.());
+  await page.waitForTimeout(50);
+  await expect(page.locator(".front-door-exit-note")).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
 
 for (const takeover of ["held", "released"] as const) {
   test(`V22 input keyboard to ${takeover} pad during success keeps only the new physical source`, async ({ page }, info) => {

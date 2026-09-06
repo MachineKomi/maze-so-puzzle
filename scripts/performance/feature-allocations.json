@@ -379,6 +379,20 @@
       "rollbackPoint": "Revert the complete PLAY-B runtime, tests and gameplay-spec seam to released v0.22.3 checkpoint c77e7d7e428e1db17ef4fd223cfc9c5614bbe638. Preserve Tessera ART-HOTFIX-01, PLAY-A pace, AUDIO-01V, schema6 durable campaign progress and all approved assets; do not retain mixed old/new fingerprints or route metrics.",
       "dependencies": "Human continuation authority, authorized V22-PLAY-01 PLAY-B contract, released v0.22.3 baseline, actual Sol implementation and independent Astra source review; promotion/versioning/native publication remain root-owned.",
       "notes": "Measured155090 JSgzip9 and23563 CSS; runtime public165031011, asset bytes164967097 and decoded image upper bound411582176 are unchanged. Schema-v1 active runs and all pre-rules-2 active runs fail closed as updated mazes; durable Book progress, unlocks, rewards and records remain. Family/device acceptance is pending."
+    },
+    {
+      "id": "ui-native-exit-01-public-window-close",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 249,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra authorized at most 400 gzip9 JavaScript bytes for the bounded Title Exit correction. The exact source-matched candidate uses +249 bytes for a coalesced public Tauri window close request, contained unavailable/rejected outcomes and neutral browser-safe manual-close guidance.",
+      "evidencePath": "docs/reviews/2026-09-06-ui-native-exit-01-sol-candidate.md",
+      "reviewBy": "2026-10-06",
+      "rollbackPoint": "Revert the complete UI-NATIVE-EXIT-01 adapter, Title binding, global-API config and allow-close capability to frozen v0.22.4 checkpoint 45d843774d0335aa0ae1ee51aa9ca2f70f235b31. Preserve PLAY-B, Tessera, PLAY-A, AUDIO-01V, durable saves and approved media; never retain a bridge call without its capability or restore browser window.close as native fallback.",
+      "dependencies": "Human continuation authority, frozen v0.22.4 source, documented Tauri v2 public global window API, actual Sol implementation and independent Astra source review; actual native process-exit evidence and root promotion remain separate gates.",
+      "notes": "Measured155339 JSgzip9 and23563 CSS; public165031011, assets164967097 and decoded image upper bound411582176 unchanged. No dependency, Rust IPC, process plugin, save, geometry, camera, audio, gameplay or version change. Candidate unsigned x64 PE173468160B versus immutable v0.22.4 baseline173424640B: +43520B for the complete global-bridge/capability/embedded-runtime seam, not an isolated withGlobalTauri estimate. Actual pointer and keyboard Title Exit terminated the owned processes; exact synthetic run and preferences survived both reopens."
     }
   ]
 }
