@@ -1,6 +1,7 @@
 # Early delivery cleanup report — 2026-09-06
 
-Status: local validation complete; hosted deployment verification pending.
+Status: completed, committed, pushed and deployed. Cleanup checkpoint
+`c41b56daf389158a8fc4f437db494ea367285e2e`.
 Authority: [Human decision](../../reviews/2026-09-06-early-asset-cleanup.md).
 Exact list: [retirement receipt](early-assets-2026-09-06.json).
 
@@ -24,10 +25,10 @@ generator-size test hit its 30-second limit (first run overlapped art work).
 Serialized `npm test -- --maxWorkers=1` passed 640/640 across 58 files in 91.43s.
 No timeout or assertion changed. TypeScript and production build passed.
 The first manifest attempt caught the eight references described above; after
-restoration the full art suite passed 151/151 in 165.96s. Sol's final nested-status
-hardening then passed 10/10 focused retirement tests (including a new accidental
-reintroduction test); the current complete suite has 152 cases. The generated
-manifest was refreshed after that small tooling/test change.
+restoration the full art suite passed 151/151. Sol's final nested-status hardening
+then passed 10/10 focused retirement tests (including a new accidental
+reintroduction test), followed by the final complete 152/152 suite in 150.65s.
+The generated manifest was refreshed after that tooling/test change.
 Final art validator: zero errors, 425 explicitly classified historical/pending
 warnings (four fewer legacy alpha-border findings after removal). Original source,
 generation-reference and approval-proof checks remain enforced.
@@ -63,8 +64,26 @@ none of the 30 deleted delivery files; retained copies in dist also match hashes
 
 Before/after full public-file and 448 source-image hashes are in the external QA
 storage receipt at `C:/GameDev/maze-game-qa/storage/early-assets-2026-09-06-before.json`.
-Final deployment verification will close this report. This change does not fabricate final
+This change does not fabricate final
 Plan12/13 consumer acceptance or qualify a new Windows package.
+
+## Publication verification
+
+- Cleanup source `c41b56d` is pushed to origin/main; CI
+  [34043295552](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34043295552)
+  completed successfully for both verify and desktop. CI independently builds
+  from a fresh checkout without the removed files.
+- Vercel deployment `38vifJ32PHoD2vx638YS26KmWE84` succeeded.
+- Both `https://mazesopuzzle.com` and the old Vercel alias serve exact frozen
+  HTML/JS/CSS hashes listed above. On each domain all 30 cache-busted retired
+  paths no longer serve images (404 or the exact SPA HTML fallback), while
+  sampled current character/friend/enemy/navigation/terrain/story assets return
+  200 with exact hashes. The full 384-file HTTP hash comparison ran locally.
+- No new playtest is required specifically for this byte-identical presentation
+  cleanup. Existing P5–P14 and Human wall-depth/iPad feedback remain open.
+- The temporary port-4189 preview server and isolated browser were closed.
+- Final local C: free space observed: 54,479,073,280 bytes (~50.74 GiB). This is
+  a point-in-time filesystem observation, not an exact sum of logical file sizes.
 
 Version remains v0.22.10: only unused payload and development tooling change.
 The previously frozen Windows artifact and release evidence are not overwritten.

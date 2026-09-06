@@ -17,6 +17,11 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   holds retained. Source masters, active/dormant art and current catalogue paths
   are unchanged. Validation/deployment closure is recorded in
   [early report](source-assets/retirement/PLAN12_EARLY_REPORT.md).
+  Cleanup checkpoint c41b56d passed CI34043295552 verify/desktop and deployed
+  successfully. Final152 art tests and640 serialized game tests pass; art check
+  has0 errors/425 historical warnings. Both live domains preserve exact game
+  HTML/JS/CSS and no longer serve the30 retired images. Dist is156,247,330B,
+  down9,488,260B (5.72%). No extra Human playtest is needed for this cleanup.
   Final Plan12/13 gates, old hosted deployments and Git history remain untouched.
   This changes the public inventory, not v0.22.10's JS/CSS or gameplay; do not
   overwrite/relabel its previously frozen Windows artifact with this new payload.
