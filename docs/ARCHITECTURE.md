@@ -629,7 +629,7 @@ variance is qualified; see
 
 ## PHONE-02 coordinated stage and audio defaults
 
-Short landscape screens (physical content height below450px) use one720px-high
+Short landscape screens (outer viewport height below450px) use one720px-high
 logical stage fitted to their available safe-area rectangle. Stage container
 queries keep desktop composition across gameplay, Book, Home/Title and portaled
 dialogs. There is no second camera or save owner. Pointer bounds and reward

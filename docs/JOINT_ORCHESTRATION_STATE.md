@@ -20,13 +20,16 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   separate from web qualification. Restored folders are reconciled in the
   [arrival receipt](reviews/2026-09-06-restored-folder-reconciliation.md).
 
-- **Player-facing candidate:** `codex/phone02-book`, accepted-wall restoration
-  `e926737`, implements PHONE-02, fresh/recommended audio65/85 and BOOK-02A.
-  [Candidate record](reviews/2026-09-06-phone02-book-candidate.md) owns qualification.
-  649 project tests pass; focused browser17/17 and actual Sol's independent29-image
-  review pass at the recorded snapshots. Broader regression/probe repairs and
-  paired performance remain in progress. This is backed-up WIP, not deployed;
-  intended release0.22.12 is not yet frozen. No native/iPad acceptance is implied.
+- **Live web: 0.22.12**, source `5013ea7ea2c985487b9824ffd2ffbd6a9fb8079f`,
+  runtime `e18c6ee`, backed up on `main` and `codex/phone02-book`. PHONE-02,
+  fresh/recommended Music65/SFX85 and BOOK-02A are delivered on accepted walls.
+  [Qualification](reviews/2026-09-06-v02212-web-qualification.md) records649 tests,
+  83 distinct browser cases across retained runs and five matched performance
+  pairs per viewport. [Actual Sol](reviews/2026-09-06-phone02-book-sol-final-review.md)
+  independently found no blocker within this bounded web scope.
+  [Public verification](reviews/2026-09-06-v02212-public-verification.md) binds
+  canonical/alias bytes and browser smoke. Next: DELIGHT-02B A/B/C, then LEARN-01;
+  read their owning plans before edits. No renewed Human execution prompt needed.
 
 - **Recovery boundary retained:** [receipt](migrations/2026-09-06-new-laptop-recovery.md)
   owns exact tooling/restored proofs and prior fresh642 project/build/static/12guard
@@ -35,7 +38,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   The final migration wall packet/consolidated patch backup remain absent.
   Historical copied worktree pointers are preserved, not relinked as active checkouts.
   Full-art validation has ledger-byte errors and a historical environment/zlib
-  reproduction mismatch. Live web remains0.22.10, published Windows0.22.9,
+  reproduction mismatch. Live web is0.22.12, published Windows0.22.9,
   candidate0.22.11 unpromoted and native0.22.10 separately unfinished. New-host
   matched wall timing now supports the R1 HOLD above. No physical iPad,
   Human wall beauty, native release or educational success is implied.
@@ -482,30 +485,32 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Planning turn only.** Human will prompt implementation after reviewing this
-refinement. Use the current contract in §1, the [programme synthesis](reviews/2026-09-06-vision-and-programme-refinement.md)
-and [execution packet](plans/EXECUTION_PROMPTS.md). Earlier completed assignments
-are preserved in Git and dated receipts; they are not current launch authority.
+**Execution continues after qualified web0.22.12.** Use the current contract
+in §1, [programme synthesis](reviews/2026-09-06-vision-and-programme-refinement.md)
+and [execution packet](plans/EXECUTION_PROMPTS.md). Astra is the sole runtime
+writer; actual Sol independently reviews. Next is DELIGHT-02B A/B/C, then
+LEARN-01; complete owning-plan/spec reads and freeze the bounded acceptance
+contract before source edits. Earlier assignments are history, not current dispatch.
 
-At the next execution prompt, Astra owns the shortest defined frozen local wall
-A/B and actual-size review; Sol challenges source and evidence independently.
-The old-host p95 regression and later inconclusive cast isolation both remain
-open evidence. Do not infer that a different laptop fixes them. If R1 is held,
-independent Book/help work can use an isolated qualified predecessor; no later
-feature release may accidentally carry unqualified R1. Human P13 is separate.
+The completed new-host wall A/B holds R1 at+37.4% raster-work proxy. The old-host
+p95 concern and later inconclusive cast isolation remain evidence; no host-only
+cause is established. The accepted predecessor is now in web0.22.12. Any future
+wall experiment stays isolated from subsequent player improvements; Human P13
+is separate. No automatic R1 promotion or renderer rewrite follows.
 
-Read-only09-P0 supplies obtainable roster and teaching/recipe evidence during
-wall/Book work. BOOK-02A, DELIGHT-02B and LEARN-01 then deliver bounded player
-benefits before an isolated09-P1 canary. Current runtime already contains reward
+Completed read-only09-P0 supplies obtainable roster and teaching/recipe evidence.
+BOOK-02A is delivered; DELIGHT-02B and LEARN-01 precede an isolated09-P1 canary.
+Current runtime already contains reward
 showers, gain equations and enemy discovery; do not restart those implementations.
 Plan09 production owns new content/reward/Mimic/roster rules and reusable Surprise
 recipes; Plan10 owns real Garden membership and its Egg/co-op gates.
 
-Missing QA/native/art transfers limit historical proof and native qualification,
-not reading/design. The new-host full-art ledger/environment discrepancies need
+QA, Claude and both Tessera folders plus the staged native binary are recovered;
+the final migration wall/patch packet remains missing. These limits do not block
+unaffected work. The new-host full-art ledger/environment discrepancies need
 source-authority reconciliation before fresh art qualification. Selected pit B
 remains approved direction; no repeated selection question is needed. Native
-0.22.10's exact artifact and launch/reopen qualification are separately pending.
+0.22.10's artifact identity is verified; launch/reopen qualification stays pending.
 
 Physical iPad comfort remains open. Preserve the Human's Chrome/Safari comparison
 without claiming a known engine cause or demanding an unchanged retest. Prepare
@@ -517,7 +522,8 @@ Track one primary family question plus an affected regression journey per previe
 in the [cumulative checklist](PLAYTEST_CHECKLIST.md). Missing voluntary family
 results do not blanket-block independent engineering after execution resumes;
 never infer acceptance from silence. Continue meaningful guarded Git backups and
-record local artifacts; no deployment, deletion or archiving during this plan turn.
+record local artifacts. Qualified deployments are authorized; deletion and
+archiving still require explicit exact-target Human approval.
 
 ## 4. Binding Human decisions and experience to preserve
 
@@ -587,7 +593,7 @@ Open risks/gates:
 | Performance | Use current measured allocation from the recovery receipt; historical near-full budgets are not current headroom. Bounded timing only. Human evidence shows reduced effects/movement help on iPad without solving responsiveness; laptop web and Tauri are also imperfect. Terrain/effects/zoom/animation need integrated low-end sustained measurement before 07B qualification. |
 | Solver/content | More mechanics, procedural loops/difficulty and Mimic RNG must preserve solver tractability and solvability. No code-review suggestion is automatically good family puzzle design. |
 | PT36 visuals | Ring attachment currently uses layer 1 vs actor 2/other weapons 3; root must review canonical attachment metadata/composition before Agent 04 grounding. Do not infer a renderer defect or fix by weapon-name CSS. |
-| Delivery/save | Unsigned portable, no clean-host install or offline qualification. Schema 6 protects future-version saves and preview isolation, but downgrade safety is not promised. |
+| Delivery/save | Published Windows0.22.9 and staged0.22.10 remain separate; no clean-host/offline acceptance. Web schema7 uses the existing v6 key and future-write refusal. Never downgrade/delete profiles for rollback. |
 
 ## 7. Authoritative reading and exact evidence
 

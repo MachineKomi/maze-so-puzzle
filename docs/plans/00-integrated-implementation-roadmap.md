@@ -4,19 +4,20 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-## Current programme contract — 2026-09-06 candidate qualification
+## Current programme contract — 2026-09-06 web delivery
 
-**PHONE-02, audio 65/85 and BOOK-02A are implemented and in qualification** on
-`codex/phone02-book`, runtime `aad4bc511ea99066779c0a79527c2cf63a78fcf6`, intended
-**v0.22.12, still undeployed**. Read the [candidate record](../reviews/2026-09-06-phone02-book-candidate.md)
-for exact evidence and final closure. Current evidence is 649 project tests,
-17 focused browser cases plus 2 boundary cases passed; actual Sol independently
-reviewed source and 29 images with no blocker. Broader browser/performance
-qualification remains pending; this is not release or physical-device acceptance.
+**PHONE-02, audio65/85 and BOOK-02A are live on web0.22.12**, source `5013ea7`,
+runtime `e18c6ee`, on `main` and `codex/phone02-book`.
+[Qualification](../reviews/2026-09-06-v02212-web-qualification.md), actual independent
+[Sol review](../reviews/2026-09-06-phone02-book-sol-final-review.md) and
+[public verification](../reviews/2026-09-06-v02212-public-verification.md) own closure:
+649 project tests,83 distinct passing browser cases across retained runs and five
+matched performance pairs at each scoped viewport. Physical-device, native and
+the full Plan07 matrix remain separate unfinished qualification.
 This contract and section4 replace conflicting older execution assignments;
 dated release/intake notes below retain their historical evidence value.
 
-Web is **0.22.10**; published Windows is **0.22.9**. WALL-04A-R1 / **0.22.11** is
+Web is **0.22.12**; published Windows is **0.22.9**. WALL-04A-R1 / **0.22.11** is
 **held** after the fair new-host comparison found +37.4% raster-task work; that is
 a trace-work proxy, not a user-latency percentage. The accepted v0.22.10 wall was
 restored in `e926737` before this candidate. The [wall decision](../reviews/2026-09-06-new-host-wall-decision.md)
@@ -26,8 +27,7 @@ Native0.22.10 is independently unfinished: its exact staged executable is now
 or published. Transfer completeness and art-ledger/environment reconciliation
 remain open. No new-host iPad pass exists.
 
-The immediate task is to finish this candidate's broad/performance and release
-checks. **After its qualified release: bounded DELIGHT-02B, then LEARN-01**, then
+The immediate task is **bounded DELIGHT-02B, then LEARN-01**, then
 the isolated existing-rule Plan09-P1 canary. [Plan09-P0](../reviews/2026-09-06-plan09-p0-obtainable-roster.md)
 has supplied the frozen 32-friend/12-guardian obtainability audit and recipe gaps;
 do not restart it or BOOK-02A implementation. Controls still need stable semantic
@@ -445,7 +445,7 @@ Do not rerun their original implementation prompts.
 |---|---|---|
 | 0, held optimization lane | **[WALL-04A-R1](WALL-04A-R1-convincing-depth.md)** — convincing depth and smooth travel | New-host alternating A/B and actual Sol review completed; R1 remains held at +37.4% raster-work proxy. Accepted wall restored in `e926737`; independent phone/Book qualification proceeds there. Preserve inherited72 functional cases, old-host timing and non-specific shadow isolation. Next wall work is the bounded pass-attribution experiment in the wall decision, not an automatic promotion or backend rewrite. |
 | 0a, evidence supplied | **Plan09-P0: read-only design/roster/recipe preflight** | Completed source audit supplies obtainable32/12, actual admissions, teaching reconciliation and complete Surprise-recipe gaps. Use its snapshot for Book and later P1; it is source/test evidence, not a fresh generator/solver run or completed recipe UI. No production map/fingerprint/save mutation. |
-| 1, current qualification | **PHONE-02 / audio65–85 / [BOOK-02A](BOOK-02A-silhouettes-and-discovery.md)** | Runtime `aad4bc5`, intended undeployed0.22.12: coordinated phone stage, explicit new default mix, grey actual silhouettes, legitimate friend encounter persistence and truthful32/12 counters. Schema7 preserves the same v6 key/future-write protection; existing v2 audio choices remain.649 project +17 focused +2 boundary cases pass; actual Sol source/29-image review has no blocker. Finish broad/performance and exact-source release gates before2. No Garden/new awards or R1 inclusion. |
+| 1, delivered web0.22.12 | **PHONE-02 / audio65–85 / [BOOK-02A](BOOK-02A-silhouettes-and-discovery.md)** | Source5013ea7/runtimee18c6ee: coordinated phone stage, explicit new default mix, actual silhouettes, legitimate encounter persistence and32/12 counters. Schema7 keeps the v6 key/future-write protection; saved audio choices remain.649 project tests,83 distinct browser cases across retained runs, five pairs per scoped viewport and actual independent Sol acceptance; public bytes/smoke verified. Human P15/native/full Plan07 remain open. No Garden/new awards or R1 inclusion. |
 | 2 | **[DELIGHT-02B](DELIGHT-02B-glow-and-celebration.md)** — presence, celebration and reward truth | Three bounded checkpoints: continuous pickup glow/readable receipts; larger friend-led victory; earned-sticker in-maze fanfare. Preserve delivered Canvas showers and arithmetic. PT10 Stay/Book/Next truth, exact-once awards, finite effects, mute, reduced/static and moving-scene cost gate every checkpoint. Then stop broad Plan02 expansion. |
 | 3 | **[LEARN-01](LEARN-01-readable-reasoning-and-help.md)** — understandable next possibilities | Add exact Power shortfall and clearer picture-led requested hints, retaining existing gain equations and four engine-valid zero-rescue hint tiers. No new rule/search/store. Prove spoiler, focus, cancellation, text and reward truth; record family comprehension separately. |
 | 4 | **Plan09-P1: isolated existing-rule learning canary** | After stable wall/UI/LEARN seams, compare one first-use pocket and one Lanternlight-style room/changed-state return. Isolated fixtures only: no production chapter/fingerprint/save/generator mutation. Engine-valid ordinary/perfect routes plus plausible wrong turn, requested-help recovery and observed reasoning. Current rules first; a new-mechanic recommendation needs a separate Human decision. No invented educational efficacy. |

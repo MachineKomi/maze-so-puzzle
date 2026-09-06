@@ -2,6 +2,40 @@
 
 ## Execution outputs — 2026-09-06
 
+### Completed web0.22.12 qualification and publication
+
+Owner Astra. Runtime `e18c6ee`; final source/harness `5013ea7`.
+[Qualification](reviews/2026-09-06-v02212-web-qualification.md) and
+[public verification](reviews/2026-09-06-v02212-public-verification.md) bind results.
+These completed measurements supersede active-size placeholders below. All paths
+in this table are under `C:/GameDev/maze-game-qa/performance/` unless stated.
+
+| Folder | Files / bytes | Disposition and retention |
+| --- | ---: | --- |
+| `phone02-book-full-20260906-r4/` |423 /206,468,562|79/82 pass; three stale probes retained and corrected separately on unchanged runtime.|
+| `phone02-book-final-probes-20260906/` |13 /913,896|3/3 corrected probes pass; retain with broad run.|
+| `phone02-book-retina-20260906/` |3 /18,829|Additional resource case passes phoneDPR3/tabletDPR2.|
+| `phone02-book-final-20260906/` |4 /3,558|649 tests/build, budgets,12 guards and audit logs.|
+| `phone02-book-paired-final-20260906/` |19 /61,116,790|Despite its name, earlier3/2-pair diagnostic only; insufficient run count.|
+| `phone02-book-qualified-five-pairs-20260906/` |31 /98,230,617|Final24 routes:20 measured and4 warmups; compressed traces,4 captures, raw/aggregate/host JSON. Accepted scoped comparison.|
+| `phone02-book-public-20260906/` |7 /5,820,154|Source helper,4 decoded public captures, successful HTTP/browser receipt and incomplete story-smoke JSON; retain through P15.|
+| Repository `dist/` |387 /156,252,498|Rebuilt in place, frozen qualified payload. Rebuildable from exact source/toolchain; no extra build copy.|
+
+Paired helper `scripts/performance/release-paired-review.mjs` is tracked reusable
+source; its final five-run rule is in5013ea7. The public helper uses the installed
+Playwright1.62.1 through a file URL, Node24.19 and isolated disposable contexts.
+The first extended public smoke omitted normal story dismissal; final smoke
+explicitly clicks Start the maze. All owned servers/browser contexts are stopped.
+No new repo/worktree, dependency environment, native build or archive was created.
+No source/evidence deletion is authorized. Review these retained packets after
+P15/release follow-through; historical failures remain linked to corrected runs.
+
+Three new durable review documents (final Sol, web qualification, public
+verification) are small Git-backed source records, not disposable build output.
+Documentation-only closure updates the existing plans/specs/ledger without a
+new runtime build. The reported PowerShell popup prompted read-only diagnostics;
+its cause remains unknown, and no OS settings or user processes were changed.
+
 ### PHONE-02 / BOOK-02A candidate output snapshot
 
 Owner: runtime writer Astra; source baseline `e926737` on `codex/phone02-book`.

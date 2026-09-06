@@ -1,8 +1,8 @@
 # Family playtest checklist
 
 **Execution update,2026-09-06:** [refined programme](plans/00-integrated-implementation-roadmap.md)
-is authorized and running. Phone/audio/Book0.22.12 is in qualification, not yet
-deployed. Keep P13/P14 and earlier pending observations.
+is authorized and running. Phone/audio/Book0.22.12 is live and engineering-qualified
+within its recorded scope. P15 is ready; keep P13/P14 and earlier observations.
 Future previews should add one primary question and an affected regression journey:
 Book encounter-before-rescue and X/Y meaning; victory Stay/Book/Next reward truth;
 help/Power-gap understanding; then an existing-rule choice/return puzzle. Record
@@ -17,14 +17,13 @@ Keep completed observations and build identities when newer builds arrive.
 ## Start here
 
 **New laptop recovered:** [readiness receipt](migrations/2026-09-06-new-laptop-recovery.md).
-Web remains0.22.10, published Windows0.22.9 and R1/0.22.11 is unpromoted.
+Web is0.22.12, published Windows0.22.9 and R1/0.22.11 is unpromoted.
 Fresh engineering checks do not close P13, P14 or physical iPad acceptance.
 No new family test is requested for migration; agents own the controlled wall A/B.
 
-**Migration pause:** v0.22.11 below is saved WIP, not yet deployed. Continue
-testing the version actually shown online; its live version remains0.22.10.
-The new-laptop handoff owns resumption. No additional playtest is needed merely
-to transfer files; P13 will become useful once the wall candidate is published.
+**Held migration candidate:** v0.22.11 below is saved WIP, not deployed.
+Test the version actually shown online, now0.22.12. No additional playtest is
+needed merely to transfer files; P13 waits for a qualified revised wall.
 
 - **Held wall candidate: v0.22.11 WALL-04A-R1 / P13.** Stronger
   wall faces, continuous corner rims and a larger floor cast. Check P13 first

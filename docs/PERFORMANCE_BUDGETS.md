@@ -1,5 +1,29 @@
 # Performance budgets and evidence contract
 
+## PHONE-02 / BOOK-02A scoped web preview — 2026-09-06
+
+Candidate0.22.12 uses162449gzip9JS (+1161versus live0.22.10),23916CSS (+261),
+and155542751public bytes unchanged. Root allocates1500JS/400CSS, returning the
+unused held R1 allowance. [Qualification receipt](reviews/2026-09-06-v02212-web-qualification.md)
+binds exact payloads, checks and the independent review.
+
+Root's acceptance scope is the bounded web preview and affected behavior, not
+completion of the full Plan07 S01-S11/defined-low-end/native measurement matrix.
+The83functional browser cases cover the required layout/interaction viewports;
+matched moving-cost comparisons use780x312 and1193x833 to retain the recovered
+baseline workload. The final qualified-five-pairs report meets the five measured
+runs per row rule and records median/p95/worst. Actual Sol independently recomputed
+its aggregates: phone RasterTask mean+1.67%, desktop-4.48%, sampled worst frame
+16.8ms. Earlier3/2-pair reports remain diagnostics. Physical-device, native and
+full low-end programme qualification stay open.
+
+Mounted Book imagery is a deliberate, separately measured feature cost:32Friends
+at8MiB /12Bestiary at3MiB decoded RGBA upper bounds in observedDSF1 and
+phoneDPR3/tabletDPR2. Browser lazy-loading margins fetch the whole mounted roster;
+neither viewport-only activation nor cache reclamation on unmount is claimed.
+Hidden tabs and unknown presentation portraits are not preloaded. This is root's
+explicit bounded working-set disposition, not an inference from public bytes.
+
 ## VFX-02A candidate allocation — 2026-09-06
 
 v0.22.10 candidate: gzip9 JS161288 (+2645), CSS23655 (-386), public165031011

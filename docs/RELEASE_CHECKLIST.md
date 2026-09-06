@@ -17,12 +17,14 @@ Verify real runtime releases, not the presence of a deployment on every docs SHA
 Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
 browser saves. No retention/deletion/archive without explicit Human approval.
 
-## Current qualification — intended v0.22.12 PHONE-02 / audio / BOOK-02A
+## Current published web — v0.22.12 PHONE-02 / audio / BOOK-02A
 
-Runtime `aad4bc511ea99066779c0a79527c2cf63a78fcf6`, branch `codex/phone02-book`:
-implemented and in qualification, **not deployed**. The
-[candidate record](reviews/2026-09-06-phone02-book-candidate.md) owns detailed
-evidence/closure. Live web remains **0.22.10**; latest fully published Windows
+Source `5013ea7ea2c985487b9824ffd2ffbd6a9fb8079f`, runtime `e18c6ee`, is
+**published and hash-verified** through the existing Git/Vercel integration.
+[Qualification](reviews/2026-09-06-v02212-web-qualification.md),
+[actual Sol](reviews/2026-09-06-phone02-book-sol-final-review.md) and
+[public verification](reviews/2026-09-06-v02212-public-verification.md) own closure.
+Live web is **0.22.12**; latest fully published Windows
 remains **0.22.9**. R1/0.22.11 is held after +37.4% raster-work proxy in the
 [new-host comparison](reviews/2026-09-06-new-host-wall-decision.md); accepted
 v0.22.10 wall source was restored in `e926737` before this candidate.
@@ -30,18 +32,15 @@ v0.22.10 wall source was restored in `e926737` before this candidate.
 - [x] PHONE-02 shared fitted composition, fresh Music65/SFX85 with explicit
   Recommended balance and saved-v2 preservation; BOOK-02A frozen32/12 silhouettes,
   legitimate encounter persistence and schema7 at the same v6 storage key.
-- [x] 649 project tests;17 focused plus2 boundary browser cases passed. Actual
-  Sol's independent source/29-image visual review found no blocker. These are
-  bounded cohorts, not broad/performance or physical-device acceptance.
-- [ ] Close broader browser and paired performance/resource qualification on
-  the final runtime. Retain first failures, identify harness corrections and bind
-  each completed run to its actual source/build; do not manufacture a full pass.
-- [ ] Freeze final version/source/build identity and complete required post-version
-  tests/build/art/bundle/audit and deployment-guard checks. Inherited art evidence
-  requires identical admitted inputs; new-host art gaps are not silently waived.
-- [ ] Publish qualified web through the preserved Vercel guard; verify frozen-source
-  CI/Production and canonical bytes before updating current publication pointers.
-  A passing compile or deployment entry alone is not acceptance.
+- [x]649 project tests and83 distinct browser cases across retained runs. Actual
+  Sol's independent source, calculations and fresh visual review found no blocker.
+- [x]Five measured baseline/candidate pairs per scoped viewport, retained failures,
+  median/p95/worst and retina Book resource bounds. Full Plan07 matrix stays open.
+- [x]Final version/source/payload hashes, TypeScript/build, budgets, audit and12
+  deployment guards pass. Unchanged media inherits admitted evidence; historical
+  new-host art-ledger/environment gaps remain explicitly open.
+- [x]Exact-source CI and Production success; canonical and alias bytes match;
+  fresh public phone/desktop Book, audio and first-adventure smoke pass.
 - [ ] Keep any Windows release a separate locked-source controls/reopen/package
   and public-download transaction. This web candidate does not accept or publish
   the older staged native0.22.10 artifact.
@@ -54,7 +53,7 @@ family/device/comprehension/acoustic checks remain distinct from engineering gat
 
 ## Separate unfinished native qualification — v0.22.10 VFX-02A
 
-Web0.22.10 is live. Its exact staged portable binary is now
+Web0.22.10 was published before0.22.12. Its exact staged portable binary is now
 [recovered and hash-verified](reviews/2026-09-06-restored-folder-reconciliation.md),
 but remains **unaccepted and unpublished for Windows**. Latest published Windows
 is v0.22.9 WALL-04A at cbe8ab8; its

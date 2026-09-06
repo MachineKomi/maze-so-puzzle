@@ -4,7 +4,7 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.12 — shared phone composition and Book discovery (candidate)
+## 0.22.12 — shared phone composition and Book discovery (live web)
 
 - Short landscape phones keep the coordinated desktop layout, with a relatively
   larger direction pad, smaller map/Bag and matching dialogs. Home and Title
@@ -29,7 +29,7 @@ than promising long-term save or API compatibility.
   the0.22.10 reward showers. Physical iPad and Human depth acceptance remain open;
   native release qualification is separate.
 
-## 0.22.10 — VFX-02A (live web; native qualification unfinished)
+## 0.22.10 — VFX-02A (previous web; native qualification unfinished)
 
 - Gold stars, Science atoms and rose Power beads scatter, bounce against walls
   and gather into the currently rendered Ame, with short trails and grouped

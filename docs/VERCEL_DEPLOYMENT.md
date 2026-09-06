@@ -6,7 +6,8 @@ Deployment Storage warning. Do not change its plan, retention or billing setting
 
 Production URL: [mazesopuzzle.com](https://mazesopuzzle.com/).
 Existing alias: [maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/).
-Both served identical frozen v0.22.10 HTML/JS/CSS on 2026-09-06. Browser saves are
+Both serve identical frozen v0.22.12 HTML/JS/CSS, verified2026-09-06 in the
+[public receipt](reviews/2026-09-06-v02212-public-verification.md). Browser saves are
 origin-local: the new domain does **not** automatically inherit saves from the
 old alias. Keep the old alias available; never clear saves to migrate domains.
 

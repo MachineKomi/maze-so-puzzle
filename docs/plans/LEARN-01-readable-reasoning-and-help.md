@@ -1,8 +1,9 @@
 # LEARN-01 — readable reasoning and help
 
-Status: bounded execution brief, prepared 2026-09-06; implementation waits for
-the Human's next implementation prompt. This document approves no runtime work,
-release, new mechanic or completed family/device claim.
+Status: bounded execution brief, prepared2026-09-06; the Human's subsequent
+continuation instruction authorizes execution after the preceding bounded
+DELIGHT-02B tranche. No new permission is required to start that assigned scope.
+Release, new mechanics and completed family/device claims retain their own gates.
 Owner: Astra or the explicitly assigned single runtime writer; actual Sol reviews
 independently. Root owns scope, resource allocation, checkpoint and qualification.
 

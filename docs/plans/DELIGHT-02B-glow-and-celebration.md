@@ -1,6 +1,8 @@
 # DELIGHT-02B — clear rewards and joyful moments
 
-Prepared 2026-09-06; implementation waits for the next Human execution prompt.
+Prepared 2026-09-06; execution is authorized by the Human's subsequent continuation
+instruction. Queue after the qualified PHONE-02/BOOK-02A release; no renewed
+implementation permission is required. Current status lives in JOINT_ORCHESTRATION_STATE.
 Single runtime writer assigned by Astra; actual Sol independently reviews. This
 bounded Plan02/UI-02 tranche follows BOOK-02A and then hands off to LEARN-01.
 It does not hold the programme until every historical VFX idea is finished.

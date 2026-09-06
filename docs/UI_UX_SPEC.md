@@ -1,12 +1,13 @@
 # UI / UX implementation specification
 
-## PHONE-02 / BOOK-02A candidate — 2026-09-06
+## PHONE-02 / BOOK-02A delivered web contract — 2026-09-06
 
-Current implementation is an **undeployed candidate, intended v0.22.12**, on
-`codex/phone02-book` after accepted-wall restoration commit `e926737`. Live web
-remains v0.22.10; R1's v0.22.11 wall candidate is held. Published Windows remains
+Current implementation is **live web0.22.12**, source `5013ea7`, runtime `e18c6ee`,
+on `main` and `codex/phone02-book` after accepted-wall restoration `e926737`.
+R1's v0.22.11 wall candidate is held. Published Windows remains
 v0.22.9 and native v0.22.10 qualification is separately unfinished. See the
-[candidate/evidence record](reviews/2026-09-06-phone02-book-candidate.md).
+[qualification](reviews/2026-09-06-v02212-web-qualification.md) and
+[public verification](reviews/2026-09-06-v02212-public-verification.md).
 
 The [Human's phone/default-mix instruction](user-playtests/2026-09-06-phone-composition-and-default-mix.md)
 supersedes older phone-specific minimum-target and More-heavy composition rules

@@ -1,5 +1,10 @@
 # PHONE-02 / BOOK-02A / default-mix candidate
 
+**Now closed as web0.22.12:** [qualification](2026-09-06-v02212-web-qualification.md),
+[Sol review](2026-09-06-phone02-book-sol-final-review.md) and
+[public verification](2026-09-06-v02212-public-verification.md). The dated
+candidate snapshots below preserve the iteration history.
+
 Status snapshot, 2026-09-06: **candidate only, not deployed or fully qualified**.
 Intended version is **0.22.12**; the runtime owner will freeze the final version,
 commit and build identity after remaining checks. Source starts from accepted-wall
@@ -214,3 +219,11 @@ Next closeout: finish the corrected broader run and latest-source checks, obtain
 actual Sol's final independent disposition, freeze the version/source/build packet,
 then have the runtime owner record the qualified release decision. Until that
 record exists, this remains an undeployed candidate on the accepted wall baseline.
+# Closure — web0.22.12, 2026-09-06
+
+This candidate is now published at source `5013ea7`, runtime `e18c6ee`.
+[Final qualification](2026-09-06-v02212-web-qualification.md),
+[actual Sol review](2026-09-06-phone02-book-sol-final-review.md) and
+[public verification](2026-09-06-v02212-public-verification.md) supersede the
+pending statuses in the dated iteration history below. Earlier failures and
+insufficient-run diagnostics remain evidence; native/full-matrix/Human gates stay open.

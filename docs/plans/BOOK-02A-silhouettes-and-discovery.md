@@ -1,15 +1,15 @@
 # BOOK-02A — a Book of discoveries worth opening
 
-Prepared 2026-09-06; implementation is now Human-authorized and in qualification.
+Prepared 2026-09-06; implementation is delivered in qualified web0.22.12.
 Astra is the default runtime writer; actual Sol reviews independently. Root owns
 the encounter/save contract and qualification. This is the first Book slice,
 not a replacement of the five-page Book already delivered.
 
-## Current implementation candidate
+## Current delivered implementation
 
-The **undeployed intended v0.22.12** candidate follows accepted-wall restoration
-commit `e926737` on `codex/phone02-book`; R1 v0.22.11 remains held. Live web is
-v0.22.10, published Windows v0.22.9, and native v0.22.10 remains separately open.
+**Live web0.22.12**, source `5013ea7` / runtime `e18c6ee`, follows accepted-wall
+restoration `e926737` on `codex/phone02-book`; R1 v0.22.11 remains held.
+Published Windows is v0.22.9; native v0.22.10 remains separately open.
 The [Plan09-P0 audit](../reviews/2026-09-06-plan09-p0-obtainable-roster.md) and
 [frozen runtime contract](../reviews/2026-09-06-book02a-runtime-contract.md) now
 supply the required source contract: `obtainable-20260906`, **32 friends / 12
@@ -30,7 +30,9 @@ one unit and retain future-profile protection; never downgrade/delete schema 7.
 The [candidate record](../reviews/2026-09-06-phone02-book-candidate.md) retains the
 first browser failures and focused r2's 17/17 pass, including empty/partial/full
 pages, normal encounter/reload and phone input/focus. Subsequent source changes,
-broader final-source checks and Sol's final visual review remain pending there.
+broader final-source checks and Sol's final visual review are closed in the
+[qualification](../reviews/2026-09-06-v02212-web-qualification.md) and
+[public receipt](../reviews/2026-09-06-v02212-public-verification.md).
 The acceptance list below remains binding; passing a focused browser set does
 not close physical-device, family-comprehension or native release evidence.
 
