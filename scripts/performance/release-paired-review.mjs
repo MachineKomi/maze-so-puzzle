@@ -12,6 +12,7 @@ import { pathToFileURL } from 'node:url';
 const root = resolve(import.meta.dirname, '../..');
 const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/performance/phone02-book-paired-20260906');
 const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
+const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const baseline = resolve(root, process.env.MAZE_REVIEW_BASELINE || 'output/playwright/migration-preflight-20260906/live-baseline');
 const fixturesPath = resolve(root, process.env.MAZE_REVIEW_FIXTURES || 'output/playwright/walls04-rack-new-host/fixtures.json');
 const playwrightPath = process.env.MAZE_PLAYWRIGHT_PATH;
@@ -55,6 +56,7 @@ const origin = `http://127.0.0.1:${server.address().port}`;
 const browser = await chromium.launch({ headless: true });
 const report = { date: new Date().toISOString(), head: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), browser: browser.version(), hashes, served, fixture: fixture.id ?? fixture.level.id, route: jumpReview ? 'eight reversible one-hole jumps' : 'sixteen reversible ordinary steps', baselineIdentity,
   scope: 'Headless local Chromium same-host paired frame/trace diagnostic; no physical iPad, native, GPU-time or Human beauty acceptance. Trace durations overlap and are not additive.', rows: [] };
+if (idleReview) report.route = 'eight seconds idle with live ambient surfaces';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
   for (const cohort of [{ width: 780, height: 312, pairs: 5 }, { width: 1193, height: 833, pairs: 5 }]) {
@@ -92,7 +94,8 @@ try {
             }; requestAnimationFrame(tick);
           });
           // Four reversible four-step legs: deterministic 16 attempts, ~3.84s.
-          if(jumpReview) for(let step=0;step<8;step++){await page.keyboard.press(step%2?'ArrowLeft':'ArrowRight');await page.waitForTimeout(600);}
+          if(idleReview) await page.waitForTimeout(8000);
+          else if(jumpReview) for(let step=0;step<8;step++){await page.keyboard.press(step%2?'ArrowLeft':'ArrowRight');await page.waitForTimeout(600);}
           else for (const direction of ['Right', 'Left', 'Right', 'Left']) {
             for (let step = 0; step < 4; step++) { await page.keyboard.press(`Arrow${direction}`); await page.waitForTimeout(240); }
           }
@@ -115,7 +118,7 @@ try {
           if (pair === 0) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (jumpReview?8:16) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || row.transforms < (jumpReview&&mode==='baseline'?2:8) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (idleReview?0:jumpReview?8:16) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
         } finally { await ctx.close(); }
       }
     }
