@@ -14,6 +14,12 @@ the agents; only material product/art choices need to come back here.
 | D04 | iPad test environment (optional clarification, 2026-09-05) | Eighth-generation iPad / 32GB storage is recorded. When convenient, tell us the iPadOS version, Safari versus home-screen app, and the Quality/Motion settings used for the v0.22.1 run. This helps reproduce the movement-only issue; no answer is required before the performance investigation proceeds. |
 | D05 | Device mix comfort (optional, 2026-09-06) | Human selected old Music10%/SFX100% on phone/desktop and requests this balance as calibrated75/75 defaults. v0.22.6 AUDIO-01V2 at `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa` is engineering-accepted and published on web/Windows with all public downloads verified. No reconfirmation needed. P10 checks the calibrated mix and preserved choices; P8 listening/background checks remain cumulative. Very high combined levels may distort; final mastering/listening remain open. No new-device purchase requested. |
 
+Readiness update: v0.22.7 AUDIO-01A is published on web/Windows with independent
+download verification. No new decision is required; [P11](PLAYTEST_CHECKLIST.md#p11--prepared-music-and-confirmed-fades-v0227-audio-01a)
+collects optional listening/background feedback. D05's calibrated preferences
+remain unchanged. Next V22-HOLE-01's single-width rule is already requested;
+only the later concrete art candidates need D01 review.
+
 Agents must add a dated concrete question/candidate, recommendation, affected
 scope and whether it blocks only that slice before requesting a new decision.
 Record the Human's answer and its source/date; never infer approval from silence.

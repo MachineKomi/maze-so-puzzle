@@ -1,16 +1,20 @@
 # AUDIO-01 — timely music, satisfying sound and listening qualification
 
 Status, 2026-09-06: AUDIO-01A implementation is frozen for v0.22.7 at
-`9b822281197c9e9e65a8c9467fe5bd578dce1cbd`; engineering/release review is
-completing and **publication is in progress**. This is not a CI/deployment or
-public-download receipt. Root owns final acceptance/publication evidence.
+`9b822281197c9e9e65a8c9467fe5bd578dce1cbd`; engineering/native review is
+accepted and **web/Windows are published with all four public downloads verified**.
+[Publication receipt](../../release/AUDIO-01A-v0.22.7-release-verification.json)
+and [Sol final native review](../reviews/2026-09-06-audio01a-sol-native-final-review.md)
+bind exact runtime/portable/evidence and qualification limits.
 The [final browser check](../reviews/2026-09-06-audio01a-browser-review.md) and
 [Sol envelope review](../reviews/2026-09-06-audio01a-sol-envelope-review.md)
 record the bounded preview and its limits. Fully published fallback remains
 v0.22.6 `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`
 ([receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json)).
-**Next implementation: V22-HOLE-01**, atomic rules/content correction first,
-then connected-ditch rendering/art. P10/P8, cumulative physical checks, actual
+**Next implementation: V22-HOLE-01**, root Astra implementation / actual Sol
+independent review, atomic rules/content correction first, then connected-ditch
+rendering/art. No blocking Human decision is open for the first slice. P11 is
+ready; P5–P10 remain cumulative. Physical checks, actual
 hidden-tab/acoustic/whole-mix-max qualification and the iPad camera gate remain
 open. Do not repeat V/V2/A implementation or infer final audio qualification.
 Earlier assignments below preserve scope/history, not current launch authority.

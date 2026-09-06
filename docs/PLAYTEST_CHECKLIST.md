@@ -8,7 +8,14 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- **v0.22.6 AUDIO-01V2**, frozen
+- **Current: v0.22.7 AUDIO-01A**, frozen
+  `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Web and Windows are published;
+  all four release downloads are independently verified. **P11 is the new music-
+  readiness check**; P5–P10 remain cumulative.
+  [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.7/Maze-so-Puzzle-0.22.7-AUDIO-01A-9b82228-locked-portable.exe) ·
+  [Short playtest note](../release/AUDIO-01A-v0.22.7-PLAYTEST.md) ·
+  [Publication receipt](../release/AUDIO-01A-v0.22.7-release-verification.json).
+- **Fallback: v0.22.6 AUDIO-01V2**, frozen
   `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, is engineering-accepted and web-
   published. **Windows is published with all four downloads independently
   verified**. P10 is ready on either platform. [Download Windows](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.6/Maze-so-Puzzle-0.22.6-AUDIO-01V2-e628898-locked-portable.exe) · see its
@@ -29,8 +36,8 @@ Keep completed observations and build identities when newer builds arrive.
 - [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
 
 You do not need to complete everything in one sitting. The affected iPad movement
-comparison remains open; P10 is the new calibrated-audio check and P5–P9 remain
-cumulative. v0.22.6 changes audio controls, not camera/FOV, saves, gameplay or content.
+comparison remains open; P11 is the new readiness check and P5–P10 remain
+cumulative. v0.22.7 changes music readiness, not camera/FOV, saves, gameplay or content.
 Please do not clear game data to create a cold test; preserving your progress
 is more important.
 
@@ -51,6 +58,7 @@ one; they share a save namespace.
 | v0.22.4 V22-RESCUE1, runtime `45d8437` | Published web/Windows. Stationary rescue with unchanged steps and deliberate follow-up movement | P7 first; P5/P6/P8 remain cumulative. Not a new camera/phone-layout/audio-default fix. |
 | v0.22.5 V22-PHONE1, frozen `7282665` | Published web/Windows; all four downloads verified. Bounded compact gameplay/Book and native Title Exit | P9 new; P5–P8 cumulative. No camera/FOV/audio/save/gameplay/content change or additional restart from v0.22.4. |
 | v0.22.6 AUDIO-01V2, frozen `e628898` | Engineering/native accepted; web/Windows published with all four public downloads verified | P10 now; P5–P9 remain cumulative. No iPad camera fix or completed readiness/mastering. |
+| v0.22.7 AUDIO-01A, frozen `9b82228` | Web/Windows published; four public downloads verified. Prepare one next song, confirmed fades and bounded fallback/recovery | P11 new; P5–P10 cumulative. Not final physical/hidden-page/acoustic/mastering or iPad camera acceptance. |
 
 ## Specific checks and results
 
@@ -116,7 +124,7 @@ FOV and cadence. Pace is a separate comfort feature, not a claimed camera repair
 Historical v0.22.1–3 rescue moved into the cage tile. v0.22.4 changes this; use
 P7 alongside these held-input checks. Physical acceptance remains pending.
 
-### P3 — Music timing (observations, correction pending)
+### P3 — Music timing (historical observations; v0.22.7 comparison at P11)
 
 - [ ] Listen during Title/Home → Story → Maze → Victory → Book on phone,
   iPad or laptop when convenient. Which transitions have silence or late music?
@@ -127,8 +135,8 @@ P7 alongside these held-input checks. Physical acceptance remains pending.
 
 Phone v0.22.0 prompt playback and the new v0.22.1 phone/iPad prompt playback are
 recorded as positive; the cause remains unknown. Remembered laptop victory silence
-remains an open issue. No audio-code fix is claimed in v0.22.1. AUDIO-01A will
-add a build-specific comparison when it ships.
+remains a physical listening gate. No audio-code fix is claimed in v0.22.1.
+AUDIO-01A now ships in v0.22.7; P11 gives the build-specific comparison.
 
 Audio balance follow-up, 2026-09-06: the Human already reports very quiet iPad
 SFX against music at low system volume; phone/laptop/Windows are broadly balanced.
@@ -241,8 +249,8 @@ known stuttering issue. Physical listening is separate from engineering checks.
 
 ### P11 — Prepared music and confirmed fades (v0.22.7 AUDIO-01A)
 
-Frozen runtime `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`; release qualification
-is in progress. Use this row only once that version is available on your device.
+Frozen runtime `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`; web/Windows are
+published and all four downloads verified. This row is ready when convenient.
 
 - [ ] Home → Story → Maze → Victory → Book: does music arrive promptly with a
   pleasant short fade? At a win, listen for unwanted silence or a distracting

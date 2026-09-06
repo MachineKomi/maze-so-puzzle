@@ -1,15 +1,17 @@
 # Music
 
-## Readiness checkpoint — AUDIO-01A / v0.22.7, publication in progress
+## Readiness checkpoint — AUDIO-01A / v0.22.7, published and verified
 
 Frozen source `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` implements bounded
 current-plus-one preparation, at most two media lanes, and a confirmed-playback
 400 ms handover. Keep the outgoing song through a slow/failed incoming request;
 rapid retarget/failure cancellation shares the same lane and gain owners. The
 42-track catalogue, calibrated saved gains, shared mute and existing SFX remain.
-Final engineering/release acceptance is being completed; **publication is in
-progress**, not a verified deployment or Windows-download claim. v0.22.6 below
-remains the fully published fallback until the joint state records the successor.
+Root Astra and actual Sol accepted engineering/native qualification; **web and
+Windows are published, with all four independent public downloads verified**.
+The [publication receipt](../release/AUDIO-01A-v0.22.7-release-verification.json)
+binds exact source, CI/Production and download bytes; [Sol's final native review](reviews/2026-09-06-audio01a-sol-native-final-review.md)
+owns its qualification limits. v0.22.6 below remains the immediate rollback.
 
 Final source passes 578 project tests; JS gzip grows 1,560 bytes, with CSS/public
 bytes unchanged. The [final browser review](reviews/2026-09-06-audio01a-browser-review.md)
@@ -17,8 +19,8 @@ records 20 focused transitions. The pre-envelope cohort's 53 transitions/about
 603 seconds overall (600.505 seconds at its lifetime gate) are inherited only
 for lifecycle/resources, not relabelled as a final-source endurance or peak run.
 [Sol's envelope review](reviews/2026-09-06-audio01a-sol-envelope-review.md) accepts
-the paired decrease-first/common-timeline approach for this bounded preview,
-subject to final integration evidence; it is not a captured output-waveform test.
+the paired decrease-first/common-timeline approach for this bounded preview;
+final integration is accepted above, not a captured output-waveform test.
 
 Physical listening, actual hidden-tab behavior, inactive-autoplay/device
 interruption, acoustic onset/leading silence, rendered two-stream whole-mix
@@ -27,7 +29,9 @@ the high-combination warning; no limiter/compressor or clip-free promise was
 added. Plan 02 owns creative cues/mix; 07B owns final qualification; Plan 10
 activates Garden through this same transport. Next implementation is V22-HOLE-01,
 atomic rules/content first and then reviewed connected-ditch art, not a repeat
-of AUDIO-01A. See the cumulative playtest checklist for physical checks.
+of AUDIO-01A. Root Astra implements and actual Sol independently reviews; no
+blocking Human decision is open for that first slice. P11 is ready for this
+release; P5–P10 remain cumulative in the physical playtest checklist.
 
 ## Calibrated balance — AUDIO-01V2 / v0.22.6, published 2026-09-06
 

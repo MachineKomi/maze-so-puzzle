@@ -1,6 +1,33 @@
 # Release checklist
 
-## Current published checkpoint — v0.22.6 AUDIO-01V2
+## Current published checkpoint — v0.22.7 AUDIO-01A
+
+Frozen runtime/tag `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`.
+[Acceptance](reviews/2026-09-06-v0227-engineering-acceptance.md),
+[Sol final review](reviews/2026-09-06-audio01a-sol-native-final-review.md),
+[manifest](../release/AUDIO-01A-v0.22.7-manifest.json) and
+[public-download receipt](../release/AUDIO-01A-v0.22.7-release-verification.json).
+
+- [x] Bounded current-plus-one preparation, confirmed 400ms complementary fade,
+  cancellation/failure/recovery; unchanged calibrated gains and SFX scheduler.
+- [x] 578 project tests, TypeScript/build/performance/audit; locked optimized
+  native build. Art evidence inherited through verified unchanged input objects.
+- [x] Final20 focused browser transitions; pre-envelope53/603-second resource
+  cohort inherited separately. No final25/10-minute waveform claim.
+- [x] Actual Windows controls, saved one-step run/custom balance and normal
+  close/reopen; prepared Victory reuse. Both bound processes/endpoints closed.
+- [x] Exact-source CI34018756990 and Production6290315074 success, raw canonical
+  HTML/JS/CSS parity. GitHub prerelease383498636; four downloads independently
+  byte/hash verified. Portable173470208B, SHA-256
+  `5cff755c021134aaa67409751613131c9dd3c809b8b2241b6cce81809ab39b00`.
+- [ ] P11 physical listening/background and P5–P10 remain open; actual hidden-tab,
+  acoustic onset/clicks/true-peak/max-mix, clean-machine/offline, signing and
+  sustained-device qualification are not implied. No iPad camera fix.
+
+v0.22.6 is the immutable fallback. Next: V22-HOLE-01 rules/content, then ditch
+art; root PT36 remains before Plan04. No Human answer blocks safe next work.
+
+## Historical published checkpoint — v0.22.6 AUDIO-01V2
 
 Frozen runtime/tag: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`.
 Web and Windows published; four independent public downloads verified in the
@@ -27,7 +54,7 @@ See [engineering acceptance](reviews/2026-09-06-v0226-engineering-acceptance.md)
 
 v0.22.5 is the immutable rollback. No new save-rule restart or media change.
 Older builds can clamp boosted SFX when writing preferences; never clear saves.
-Next runtime work is AUDIO-01A, not another calibration or compact-UI restart.
+At that checkpoint, next runtime work was AUDIO-01A; it is now published above.
 
 ## Historical published checkpoint — v0.22.5 V22-PHONE1
 

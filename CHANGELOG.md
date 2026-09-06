@@ -4,6 +4,25 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.22.7 — AUDIO-01A
+
+Frozen runtime: `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`.
+Web and Windows published; four public downloads independently verified.
+[Acceptance](docs/reviews/2026-09-06-v0227-engineering-acceptance.md),
+[receipt](release/AUDIO-01A-v0.22.7-release-verification.json),
+[playtest](release/AUDIO-01A-v0.22.7-PLAYTEST.md).
+
+- Prepare one likely next song, including Victory during a maze, without loading
+  the whole soundtrack. Keep the old song through a delayed incoming request.
+- On Web Audio, fade between songs over 400 ms after playback is confirmed.
+  Rapid changes, mute and interruptions share bounded two-lane ownership; one
+  alternate follows a failed incoming track. Legacy fallback uses a confirmed cut.
+- Preserve volume choices and saved progress. No artwork, OST-file, gameplay,
+  maze, camera or layout change. Full playlist/history/loop UI remains later work.
+- 578 tests, static/build/native and independent source/browser/native review
+  passed. Physical listening, actual hidden-tab behavior, all-range mastering
+  and the known iPad camera issue remain open. P11 is the new family check.
+
 ## 0.22.6 — AUDIO-01V2
 
 Frozen runtime: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`.

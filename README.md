@@ -1,10 +1,10 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published preview is **v0.22.6 AUDIO-01V2**: calibrated Music/SFX
-controls with a quieter default music balance, useful effects adjustment and
-preserved existing preferences. It retains compact gameplay/Book, native Title
-Exit, three movement paces, refreshed art and stationary rescues.
-Frozen runtime: `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`.
+The current published preview is **v0.22.7 AUDIO-01A**: bounded next-song
+preparation and confirmed music fades, with continuity during slow or failed
+incoming requests. It preserves calibrated sound choices, compact gameplay/Book,
+native Title Exit, three movement paces, refreshed art and stationary rescues.
+Frozen runtime: `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`.
 Web and Windows are published; all four release downloads are independently verified.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
@@ -72,20 +72,20 @@ Build the standalone executable and NSIS installer:
 npm run desktop:build
 ```
 
-The published AUDIO-01V2 Windows handoff contains four files:
+The published AUDIO-01A Windows handoff contains four files:
 
-- `Maze-so-Puzzle-0.22.6-AUDIO-01V2-e628898-locked-portable.exe`
-- [AUDIO-01V2 artifact manifest](release/AUDIO-01V2-v0.22.6-manifest.json)
-- [AUDIO-01V2 playtest instructions](release/AUDIO-01V2-v0.22.6-PLAYTEST.md)
-- [AUDIO-01V2 SHA-256 checksums](release/AUDIO-01V2-v0.22.6-SHA256SUMS.txt)
+- `Maze-so-Puzzle-0.22.7-AUDIO-01A-9b82228-locked-portable.exe`
+- [AUDIO-01A artifact manifest](release/AUDIO-01A-v0.22.7-manifest.json)
+- [AUDIO-01A playtest instructions](release/AUDIO-01A-v0.22.7-PLAYTEST.md)
+- [AUDIO-01A SHA-256 checksums](release/AUDIO-01A-v0.22.7-SHA256SUMS.txt)
 
-Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.6/Maze-so-Puzzle-0.22.6-AUDIO-01V2-e628898-locked-portable.exe).
-It is 173,468,672 bytes; SHA-256
-`847502332571c2a9d0afc3fe8f8e2f850e497a17bab0e586eee76a04bbf45dc9`.
-The [publication receipt](release/AUDIO-01V2-v0.22.6-release-verification.json)
+Download the [verified Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.7/Maze-so-Puzzle-0.22.7-AUDIO-01A-9b82228-locked-portable.exe).
+It is 173,470,208 bytes; SHA-256
+`5cff755c021134aaa67409751613131c9dd3c809b8b2241b6cce81809ab39b00`.
+The [publication receipt](release/AUDIO-01A-v0.22.7-release-verification.json)
 binds the independent public downloads to the tested source and native artifact.
 This is an unsigned preview. Very high Music/SFX together may distort; physical
-listening and the broader audio-readiness work remain open. On an existing
+listening and final audio qualification remain open. On an existing
 profile, set both sliders to 75% to try the new default balance without resetting
 progress; existing choices otherwise keep their effective loudness.
 Executables stay out of Git history; the portable and three release records

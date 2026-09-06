@@ -6,7 +6,7 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
-### AUDIO-01A / v0.22.7 readiness checkpoint — publication in progress
+### AUDIO-01A / v0.22.7 readiness checkpoint — published and verified
 
 Frozen `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` implements bounded
 current-plus-one/two-lane preparation and confirmed-playback 400 ms handover.
@@ -15,13 +15,17 @@ Final 578 project tests pass; JS gzip +1,560 bytes, CSS/public unchanged.
 focused final-source transitions. Pre-envelope 53/about 603 seconds are inherited
 resource/lifecycle evidence only, not a final endurance or output-waveform run.
 [Sol's review](reviews/2026-09-06-audio01a-sol-envelope-review.md) preserves
-physical/hidden-tab/acoustic/rendered-whole-mix-max limitations. Engineering and
-release review is completing; **publication is in progress**, owned by root's
-final acceptance/receipt, not inferred from this backlog. v0.22.6 is the fully
-published fallback. P5–P10 and the iPad camera gate remain open.
+physical/hidden-tab/acoustic/rendered-whole-mix-max limitations. Engineering/native
+review is accepted; **web/Windows and all four public downloads are verified** in
+the [publication receipt](../release/AUDIO-01A-v0.22.7-release-verification.json).
+[Sol final native review](reviews/2026-09-06-audio01a-sol-native-final-review.md)
+retains the preview boundaries. v0.22.6 is the immediate published fallback.
+P11 is ready; P5–P10 and the iPad camera gate remain open.
 
-Next implementation: PT49/V22-HOLE-01 atomic rules/content first, then connected
-ditch rendering/art. PT20/23 no longer require rebuilding readiness; Plan 02 keeps
+Next implementation: root Astra owns PT49/V22-HOLE-01 with actual Sol independent
+review; atomic rules/content first, then connected ditch rendering/art. No
+blocking Human decision is open for the first slice. PT20/23 no longer require
+rebuilding readiness; Plan 02 keeps
 creative sound trials, 07B final qualification and 10 the Garden consumer.
 
 ### Latest v0.22.3/24 feedback — delivery routing
@@ -265,7 +269,7 @@ supersede stale descriptions without closing their unimplemented successors:
 | 08 | UI-03 supplies the bottom-right hybrid directional/drag pad, pointer cancellation and keyboard repeat guards; browser input evidence | Physical iPad/thumb reach; Plan 08 canonical input/controller parity and any newly evidenced corrections |
 | 10 | Recoverable pending exit and exactly-once save boundary retained; UI-03 supplies current Next/Stay/Restart presentation and reliable Enter | Family comprehension; Plan 08 input parity; Plan 10 Garden destination |
 | 13 | Redundant portal glyph removed in `d6b11c0`; recorded browser evidence | Root verifies preservation in Plan 01/02; no duplicate removal task |
-| 20/23 | All 42 tracks/six pools preserved; AUDIO-01A `9b822281` adds bounded two-lane preparation/confirmed 400 ms handover; final 578 tests, publication in progress | Physical/hidden-tab/acoustic/max-mix gates remain; 02 creative sound; 07B qualifies integrated audio; 08 input parity; 10 Garden |
+| 20/23 | All 42 tracks/six pools preserved; AUDIO-01A `9b822281` adds bounded two-lane preparation/confirmed 400 ms handover; final 578 tests, web/Windows and four downloads verified | P11 ready; physical/hidden-tab/acoustic/max-mix gates remain; 02 creative sound; 07B qualifies integrated audio; 08 input parity; 10 Garden |
 | 24 | All 32 friends have authored Solo rescues; union/intro tests and `556542e` | Plan 09 final enemy/friend ecology, teaching/scale remediation, generated families and 24-chapter themes |
 | 25 | UI-03 implements landscape composition, larger art/text, stable HUD/dialog geometry and presentation renditions; exact art/budget/browser evidence in root review | Family visual/readability acceptance, explicit compact/enlarged-text tradeoffs, later Plan 02 effects and 07B device qualification |
 | 26 | UI-03 restores artwork-aware title/Home placement, preserves approved identity and performs authorized v05 alpha cleanup; `68e303d` corrects the withheld native Home composition | Root replacement-native verification and FP-UI1 publication; family acceptance; later named previews and Plan 11 retain-first audit |
@@ -399,7 +403,7 @@ remain necessary where called out below.
 | `PT-20260902-17` | World and lore enrichment | P1 | Routed | Not retested | Plan 09; Plans 10 and 11 consume canon |
 | `PT-20260902-18` | Expressive portrait and emotion marks | P1 | Routed | Not retested | Plans 03, 01 and 02; Plans 05/07B support |
 | `PT-20260902-19` | Guided mechanic-introduction trails | P0 | Routed | Not retested | Plan 09 design gate; Plans 01/08 support |
-| `PT-20260903-20` | Continuous contextual original OST | P0 | AUDIO-01A frozen; publication in progress | Final 20 focused transitions; inherited 53/about 603 seconds resources; physical/audio-max gates open | Root AUDIO-01A; 02 creative sound; 07B final qualification; 01/08/10 consumers |
+| `PT-20260903-20` | Continuous contextual original OST | P0 | AUDIO-01A published/verified | Final 20 focused transitions; inherited 53/about 603 seconds resources; native accepted; P11/physical/audio-max gates open | Root AUDIO-01A; 02 creative sound; 07B final qualification; 01/08/10 consumers |
 | `PT-20260903-21` | Verified retirement of superseded runtime assets | P1 | Routed | Not retested | Plan 03 classification; Plan 07B tooling; final Plan 12 sweep |
 | `PT-20260903-22` | Mimic reveal and magnetic reward showers | P1 | Routed | Not retested | Gameplay contract/Plan 09 plus Plans 02/03/05/07B; Plan 13 fallback |
 | `PT-20260903-23` | Compact contextual BGM controls | P1 | Routed; Loop needs decision | Not retested | Root 03M port, Plan 01 surface, Plan 07B controller, Plan 08 input parity |
@@ -1326,8 +1330,8 @@ Root evaluates the evidence and sample limits before claiming teaching success.
 
 - Type: Audio architecture, navigation presentation and release media
 - Impact: P0 — release gate
-- Delivery: AUDIO-01A frozen at `9b822281`; engineering/release review completing,
-  publication in progress
+- Delivery: AUDIO-01A frozen at `9b822281`; engineering/native accepted,
+  web/Windows published and all four independent downloads verified
 - Verification: Final 578 tests and 20 focused browser transitions; pre-envelope
   53/about 603 seconds inherited only for resource/lifecycle evidence. Physical,
   actual hidden-tab/acoustic/rendered-whole-mix-max qualification remains open.
