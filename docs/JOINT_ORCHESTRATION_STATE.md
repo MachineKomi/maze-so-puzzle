@@ -213,12 +213,17 @@ is +249 JSgzip9, zero CSS/public/decoded/deps; whole native PE +43520B. All owne
 processes/ports closed and heavy slot returned. Published v0.22.4 still needs
 X/Alt+F4. Bundle Exit with the next accepted UI preview, intended v0.22.5.
 
-**Next sole writer: actual Sol, UI-01A compact fit prototype.** Root prepares
-`codex/v22-ui-short-height` in the reused isolated `C:/GameDev/maze-game-ui-exit`
-checkout from accepted Exit plus current main documentation/test corrections.
-The preserved Exit branch remains unchanged. Sol records the exact merged base
-before editing and owns the serial heavy slot. Root reviews/docs only; no camera
-experiment is in flight.
+**Sole writer: actual Sol, UI-01A compact fit correction.** Clean merged base
+`033f8748c0ca4292f86506539371e404fab7ddd0` on `codex/v22-ui-short-height`,
+isolated `C:/GameDev/maze-game-ui-exit`. Candidate runtime `6e7cfe40` / evidence
+tip `e66deec6` is pushed but **returned, not accepted**: root's final visual
+review found the full map heading overlapping Bag at780×312. The earlier
+map-body-only assertion missed this. Sol must correct the complete map-card/
+equipment relationship and recapture all compact proofs;543 passing tests do
+not waive the visible miss. The narrow Book word break and clipped feedback
+were corrected in that candidate and must stay corrected. Sol owns the serial
+heavy slot; root reviews/docs only. No camera experiment is in flight. The
+external v0225 PHONE1 release kit is prepared but has no frozen SHA or acceptance.
 
 Then Sol prototypes **V22-UI-01 short-height gameplay and Book fit** before
 propagating it. Preserve the praised desktop/iPad composition and six-tile
