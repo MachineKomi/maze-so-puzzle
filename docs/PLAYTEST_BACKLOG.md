@@ -6,6 +6,16 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### PT49 / HOLE-01A v0.22.8 — Phase 1 in qualification
+
+Single-width Spring jumps, truthful landing blockers, seven minimally normalized
+authored maps and versioned generator/save rules are implemented. Clear landings
+prevent remote door/combat/rescue; permitted portal landings present both phases.
+Project623/art136 pass. Browser/native/source freeze and publication are pending.
+P12 is queued, with the unfinished-run restart warning and preserved durable
+progress. Existing hole art remains; Phase 2 connected topology/art and PT36 are
+not delivered or waived. v0.22.7 remains the published build during qualification.
+
 ### AUDIO-01A / v0.22.7 readiness checkpoint — published and verified
 
 Frozen `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` implements bounded

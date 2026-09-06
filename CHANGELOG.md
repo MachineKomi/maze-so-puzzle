@@ -4,6 +4,19 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.22.8 — HOLE-01A (candidate)
+
+- Spring Boots cross one hole along the direction of travel. Long one-tile-wide
+  dividing trenches still permit crossings across their width, not length.
+- Seven story mazes have minimal hole-to-floor adjustments; Surprise mazes
+  reserve safe approaches and landings. A jump cannot remotely open a door,
+  fight an enemy or rescue a caged friend. Jump-to-portal animations run in order.
+- Rules/content identities are versioned: incompatible unfinished mazes restart
+  with an explanation, while earned friends, rewards, unlocks and historical
+  records survive. No new schema or progress reset.
+- Existing hole artwork remains; connected ditch artwork is the next phase.
+  No camera, audio, media or general UI change. Physical play-feel stays open.
+
 ## 0.22.7 — AUDIO-01A
 
 Frozen runtime: `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`.

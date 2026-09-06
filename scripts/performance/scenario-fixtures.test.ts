@@ -100,6 +100,6 @@ describe("Plan 07 performance scenario fixtures", () => {
     for (const level of levels) expect(solveLevel(level).solvable, level.id).toBe(true);
     const generatedIds = levels.map((level) => level.id);
     expect(new Set(generatedIds).size).toBe(generatedIds.length);
-    expect(generatedIds.every((id) => id.startsWith("surprise-v5-"))).toBe(true);
+    expect(generatedIds.every((id) => id.startsWith("surprise-v6-"))).toBe(true);
   });
 });

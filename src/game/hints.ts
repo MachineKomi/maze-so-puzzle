@@ -19,7 +19,7 @@ export function nextHintTier(previousUses: number): HintTier {
 }
 
 function labelFor(object: LevelObject | undefined, event?: GameEvent): string {
-  if (!object && event?.type === "hole-jumped") return "the complete run of holes";
+  if (!object && event?.type === "hole-jumped") return "the single-hole crossing";
   if (!object) return "the sparkling exit";
   switch (object.kind) {
     case "sword": return "the maze weapon";
@@ -38,13 +38,13 @@ function labelFor(object: LevelObject | undefined, event?: GameEvent): string {
 
 function principleFor(object: LevelObject | undefined, event?: GameEvent): string {
   if (!object && event?.type === "hole-jumped") {
-    return "Spring Boots jump straight over the complete row of holes to the first safe landing.";
+    return "Spring Boots jump straight across one hole to a clear landing. Cross a long ditch across its narrow side.";
   }
   if (!object) return "The sparkling star finishes the maze. You can leave optional friends and treasure for another adventure.";
   switch (object.kind) {
     case "sword": return "Ame needs the maze weapon before she can ask a guardian to move.";
     case "boots": return "Splash Boots make both water and warm lava safe to cross.";
-    case "spring-boots": return "Spring Boots jump straight over the complete row of holes to the first safe landing.";
+    case "spring-boots": return "Spring Boots cross exactly one hole when clear ground is immediately beyond it.";
     case "antidote-leaf": return "The Antidote Leaf makes the purple poison safe to cross.";
     case "potion": return "A Power Potion can make a guardian with a bigger number fair to challenge.";
     case "key": return `The ${object.color} key is reusable and opens every matching ${object.color} door.`;

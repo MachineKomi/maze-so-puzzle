@@ -7,6 +7,14 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **Active candidate: v0.22.8 HOLE-01A, Phase 1 qualification.** Root Astra owns
+  the single runtime/heavy slot; actual Sol independently reviews. Single-width
+  crossings use rules revision 3, `surprise-v6` / generated content revision 2,
+  and eight hole-to-floor edits in seven authored mazes. Existing art remains;
+  Phase 2 ditch art/topology and PT36 still precede Plan04. Project623/art136 pass.
+  Final browser, native and release verification are being completed; v0.22.7
+  below remains the published build. No physical or iPad-camera acceptance.
+
 - **Current preview: v0.22.7 AUDIO-01A, web/Windows published and verified.**
   Frozen runtime `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` is pushed to main.
   Root Astra and actual Sol accepted source, browser and locked native evidence.

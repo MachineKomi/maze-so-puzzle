@@ -138,8 +138,8 @@ contextual rendition remains distinct from the repaired 256px field derivative.
    deterministic generator in `src/game/generator.ts`. The generator selects a
    seeded odd size from unlocked 9–23 bands, grows solver-safe connected
    2–4-tile water/lava regions only beyond the splash-boots gate, and can place
-   seeded one-, two-, or three-square hole runs only after reachable Spring
-   Boots. Later
+   single-hole crossings only after reachable Spring
+   Boots, reserving clear approach/landing ground against hazards and later actors (recipe v6). Later
    adventure seeds carve 2×2 through 4×4 rooms, cluster rewards and rescues,
    add Power-gated room guardians, and place selected prerequisites on side
    branches to create intentional detours. Level records carry a content revision
@@ -154,7 +154,7 @@ contextual rendition remains distinct from the repaired 256px field derivative.
    solution. It can begin at a validated current state.
 9. `src/game/reachability.ts`, `src/game/hints.ts`, and `src/game/metrics.ts`
    derive current-state reachability, four-tier Required Path help, and campaign
-   route-quality reports from engine transitions. Portals and complete hole-run
+   route-quality reports from engine transitions. Portals and single-hole
    jumps therefore cannot drift from UI reasoning. Reachability exposes whether
    its state budget completed; route metrics distinguish raw branches from
    demonstrated player decisions and leave causal prerequisite depth pending.
@@ -175,8 +175,8 @@ contextual rendition remains distinct from the repaired 256px field derivative.
     progressive-hint state, and recoverable pending completion. It fails closed
     on changed content, reports that narrow restart case to the player, and
     rejects tester, generated, corrupt, and inconsistent states.
-    Global gameplay-rules revision 2 is included in authored/generated content
-    fingerprints. Pre-rules-2 active runs and fingerprint-less schema-v1 runs
+    Global gameplay-rules revision 3 is included in authored/generated content
+    fingerprints. Pre-rules-3 active runs and fingerprint-less schema-v1 runs
     fail closed; durable Book/campaign records survive. Stationary interactions
     are validated independently of movement-pickup counts, with distance and
     capability checks retained. A zero-step rescue still protects maze switching.
@@ -255,13 +255,15 @@ contextual rendition remains distinct from the repaired 256px field derivative.
   identity, while `artCatalog.ts` resolves that identity to paired colour,
   motif, label, and sprite metadata without CSS hue rotation.
 - Ground holes are engine terrain, not decorative art. A normal step is blocked
-  until Spring Boots are collected; one directional input then scans across the
-  consecutive hole run and lands on the first valid non-hole square. The engine
-  emits the complete jump path so the UI can animate it, while the solver uses
-  the exact same transition and cannot assume a safe landing. A hole at a plus
-  junction therefore controls both axes but never permits a mid-air turn. The
-  presentation derives a longer duration and higher arc from the emitted
-  one-, two-, or three-hole path without changing engine timing.
+  until Spring Boots are collected; one directional input crosses exactly one
+  hole to the immediate +2 tile. Impossible width/wall/bounds block before a
+  misleading equipment hint. Hazards require existing protection; unresolved
+  doors/enemies/cages block without remote interaction. Resolved objects, pickups,
+  exits and flower pads are eligible. Jump→portal commits once and presents a
+  460ms jump followed by the portal phase under one held-input suspension; save
+  stride includes both. Long dividing trenches remain crossable across their
+  width, never length. Junction jumps cannot turn in mid-air. Reduced motion uses
+  the short existing phase, and walking pace cannot change reach or jump timing.
 - Poison is connected engine terrain. It blocks until an `antidote-leaf`
   object has been collected; engine, solver, structural validation, art
   preloading, minimap, accessibility descriptions, and active-run migration use

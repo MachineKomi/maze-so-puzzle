@@ -69,25 +69,25 @@ describe("engine-consistent progressive hints", () => {
     expect(hint.text).not.toContain("maze weapon");
   });
 
-  it("explains the complete-hole-run rule immediately before a required jump", () => {
+  it("explains the single-width rule immediately before a required jump", () => {
     const level = parseAsciiLevel({
       id: "hint-hole-principle",
       name: "Hole principle",
       objective: "Exit",
-      map: ["#########", "#@j..ooE#", "#.......#", "#########", "#########", "#########", "#########", "#########", "#########"],
+      map: ["#########", "#@j..o.E#", ...Array<string>(7).fill("#########")],
     });
     let state = createInitialGameState(level);
     for (const direction of ["right", "right", "right"] as const) {
       state = movePlayer(level, state, direction).state;
     }
 
-    expect(getProgressiveHint(level, state, 0).text).toContain("complete run of holes");
+    expect(getProgressiveHint(level, state, 0).text).toContain("single-hole crossing");
     const principle = getProgressiveHint(level, state, 1).text;
-    expect(principle).toContain("complete row of holes");
-    expect(principle).toContain("first safe landing");
+    expect(principle).toContain("one hole");
+    expect(principle).toContain("clear landing");
   });
 
-  it("uses portal and complete multi-hole engine transitions", () => {
+  it("uses portal and single-hole engine transitions", () => {
     const portal = parseAsciiLevel({
       id: "hint-portal",
       name: "Portal",
@@ -100,13 +100,13 @@ describe("engine-consistent progressive hints", () => {
     });
     expect(getRequiredPath(portal, createInitialGameState(portal))).toEqual(["right", "right"]);
 
-    const holes = parseAsciiLevel({ id: "hint-holes", name: "Holes", objective: "Exit", map: ["#########", "#@j..ooE#", "#.......#", "#########", "#########", "#########", "#########", "#########", "#########"] });
+    const holes = parseAsciiLevel({ id: "hint-holes", name: "Holes", objective: "Exit", map: ["#########", "#@j..o.E#", "#########"] });
     let state = movePlayer(holes, createInitialGameState(holes), "right").state;
     state = movePlayer(holes, state, "right").state;
     state = movePlayer(holes, state, "right").state;
     const reachability = getEngineReachability(holes, state);
     expect(reachability.positions.has("5,1")).toBe(false);
-    expect(reachability.positions.has("6,1")).toBe(false);
+    expect(reachability.positions.has("6,1")).toBe(true);
     expect(reachability.positions.has("7,1")).toBe(true);
   });
 

@@ -25,7 +25,10 @@ receivers. Record the final pair/scale matrix for Plan09, including room-rich
 20×20+ layouts. [Human feedback](../user-playtests/v0222-playtest-feedback.md).
 
 **PT49 predecessor:** [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md)
-lands the Human's cleaner connected pit art and single-width crossing contract.
+has two separately reviewed slices. HOLE-01A Phase 1 establishes single-width
+rules/content using existing pit art. Phase 2 supplies cleaner connected ditch
+art and cardinal boundaries. Phase-1 publication does not deliver Phase-2 art
+or clear Plan04's predecessor/PT36 gates.
 Consume its cardinal occupancy/boundary data for receiver exclusion, interior
 depth and exposed rims, extending the shared terrain model rather than creating
 another adjacency cache. Rotated pieces must not rotate baked light direction;
@@ -71,7 +74,7 @@ seam examples and measured cost so it can place purposeful places with no new
 renderer work. All regions share one light.
 
 Requalify the FP-UI1 sustained-travel route with lighting on: holds, corners,
-reversals, outer edges, five followers, portal cuts and Normal/Big layout changes.
+reversals, outer edges, five followers, portal cuts and responsive viewport changes.
 No new judder, texture crawl, caster pop or visible corridor narrowing is
 accepted. Full/lower tiers must preserve that evidence and the same route truth.
 Use the existing shared harness and budget ledger; a later Plan 07B pass does
@@ -110,7 +113,7 @@ has been reproduced or reviewed. Do not interrupt that task or edit its files.
   isolate terrain filters/masks, camera clipping, light/shadow and decorative
   overlays one at a time. Record the responsible layer only after a controlled
   comparison. Require settled and intermediate-frame evidence across horizontal
-  and vertical travel, reversals, clamped edges, Normal/Big and reduced/static
+  and vertical travel, reversals, clamped edges, responsive viewports and reduced/static
   modes. A paused good frame alone cannot close this moving artifact. Root
   observes the same route during MOVE-01; an attributable early regression is
   handled there, while this plan owns the unresolved terrain/lighting repair.
@@ -1425,7 +1428,7 @@ Real-transition filmstrip:
 3. Include moves where walls, holes, hazards, wall dressing, and entity shadows enter/leave each camera edge.
 4. Inspect for clipped blur, one-frame pattern reset, entity/shadow pop, double paint, or empty gutter.
 5. Run the perimeter route and a central route on the largest level, plus portal relocation through the accepted cut/handoff policy.
-6. Reuse the accepted FP-UI1 route with continuous held input, fast direction changes, five followers and Normal/Big changes. Sample the full swept viewport, not only the original source/target pair; compare actor and shadow registration at the same render timestamp.
+6. Reuse the accepted movement route with continuous held input, fast direction changes, five followers and responsive viewport changes. Sample the full swept viewport, not only the original source/target pair; compare actor and shadow registration at the same render timestamp.
 
 The full-world model should need no terrain gutter today. The explicit future crop-gutter formula in section 9 becomes mandatory before any optimization changes that assumption.
 

@@ -303,7 +303,7 @@ describe("keys, doors, potions and boots", () => {
     expect(state.power).toBe(4);
   });
 
-  it("blocks ground holes until spring boots are collected, then leaps a whole run", () => {
+  it("blocks a single hole until spring boots are collected", () => {
     const noSpringBootsLevel = level("no-spring-boots", "#@o...E.#");
     const blocked = movePlayer(
       noSpringBootsLevel,
@@ -318,7 +318,7 @@ describe("keys, doors, potions and boots", () => {
       target: { x: 2, y: 1 },
     });
 
-    const springBootsLevel = level("with-spring-boots", "#@joo.E.#");
+    const springBootsLevel = level("with-spring-boots", "#@jo..E.#");
     let state = createInitialGameState(springBootsLevel);
     const collected = movePlayer(springBootsLevel, state, "right");
     state = collected.state;
@@ -327,34 +327,32 @@ describe("keys, doors, potions and boots", () => {
 
     const jumped = movePlayer(springBootsLevel, state, "right");
     expect(jumped.moved).toBe(true);
-    expect(jumped.state.position).toEqual({ x: 5, y: 1 });
+    expect(jumped.state.position).toEqual({ x: 4, y: 1 });
     expect(jumped.state.steps).toBe(2);
     expect(jumped.events[0]).toEqual({
       type: "hole-jumped",
       from: { x: 2, y: 1 },
-      over: [{ x: 3, y: 1 }, { x: 4, y: 1 }],
-      to: { x: 5, y: 1 },
+      over: [{ x: 3, y: 1 }],
+      to: { x: 4, y: 1 },
     });
     expect(jumped.events.at(-1)).toEqual({
       type: "moved",
       from: { x: 2, y: 1 },
-      to: { x: 5, y: 1 },
+      to: { x: 4, y: 1 },
     });
   });
 
-  it("supports a three-hole leap as one straight movement input", () => {
+  it("rejects the historical three-hole leap without moving or changing state", () => {
     const springBootsLevel = level("three-hole-jump", "#@joooE.#");
     let state = createInitialGameState(springBootsLevel);
     state = movePlayer(springBootsLevel, state, "right").state;
     const jumped = movePlayer(springBootsLevel, state, "right");
 
-    expect(jumped.state.position).toEqual({ x: 6, y: 1 });
-    expect(jumped.events[0]).toEqual({
-      type: "hole-jumped",
-      from: { x: 2, y: 1 },
-      over: [{ x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }],
-      to: { x: 6, y: 1 },
-    });
+    expect(jumped.state).toBe(state);
+    expect(jumped.moved).toBe(false);
+    expect(jumped.events).toEqual([{
+      type: "blocked", reason: "hole-too-wide", target: { x: 4, y: 1 }, terrain: "hole",
+    }]);
   });
 
   it("crosses the centre of a plus junction only in the chosen straight direction", () => {
@@ -463,7 +461,7 @@ describe("animal rescues", () => {
   });
 
   it("blocks a spring jump onto an unresolved cage but allows the resolved landing", () => {
-    const rescueLevel = level("animal-jump-landing", "#@jooqE.#");
+    const rescueLevel = level("animal-jump-landing", "#@joq.E.#");
     const initial = createInitialGameState(rescueLevel);
     const equipped = movePlayer(rescueLevel, initial, "right").state;
     const animal = rescueLevel.objects.find((object) => object.kind === "animal");

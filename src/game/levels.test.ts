@@ -113,14 +113,14 @@ describe("curated campaign levels", () => {
       82,
       71,
       95,
-      120,
-      123,
+      121,
+      124,
       182,
-      150,
-      204,
-      164,
+      151,
+      206,
+      165,
       29,
-      104,
+      105,
       47,
       62,
     ]);
@@ -157,9 +157,7 @@ describe("curated campaign levels", () => {
       );
       const holeCount = level.terrain.flat().filter((tile) => tile === "hole").length;
       expect(springBoots, level.name).toHaveLength(1);
-      expect(holeCount, level.name).toBeGreaterThanOrEqual(2);
-      expect(largestConnectedTerrainRegion(level, "hole"), level.name)
-        .toBeGreaterThanOrEqual(2);
+      expect(holeCount, level.name).toBeGreaterThanOrEqual(1);
 
       const solution = solveLevel(level);
       let state = createInitialGameState(level);
@@ -186,7 +184,7 @@ describe("curated campaign levels", () => {
     }
   });
 
-  it("varies authored Spring Boots puzzles across one, two, and three holes", () => {
+  it("keeps every authored jump single-width, including a four-way pit", () => {
     const jumpLengths = new Set<number>();
     for (const level of CURATED_LEVELS) {
       const perfectRoute = solveLevel(level, { requireAllAnimals: true });
@@ -199,7 +197,7 @@ describe("curated campaign levels", () => {
         }
       }
     }
-    expect([...jumpLengths].sort()).toEqual([1, 2, 3]);
+    expect([...jumpLengths]).toEqual([1]);
 
     const crossroad = { x: 8, y: 4 };
     expect(LANTERNLIGHT_LABYRINTH_LEVEL.terrain[crossroad.y]?.[crossroad.x]).toBe("hole");
@@ -393,7 +391,7 @@ describe("curated campaign levels", () => {
       requireAllAnimals: true,
     });
 
-    expect(ordinaryWin.directions).toHaveLength(150);
+    expect(ordinaryWin.directions).toHaveLength(151);
     expect(ordinaryWin.finalState).toMatchObject({
       power: 17,
       hasSword: true,
@@ -404,7 +402,7 @@ describe("curated campaign levels", () => {
     });
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(3);
     expect(ordinaryWin.finalState?.openedDoorIds).toHaveLength(1);
-    expect(perfectRescueWin.directions).toHaveLength(206);
+    expect(perfectRescueWin.directions).toHaveLength(207);
     expect(perfectRescueWin.finalState?.rescuedAnimalIds).toHaveLength(ANIMALS_PER_LEVEL);
 
     const monsterTreasureRoom = LANTERNLIGHT_LABYRINTH_LEVEL.objects.filter(
@@ -482,7 +480,7 @@ describe("curated campaign levels", () => {
       requireAllAnimals: true,
     });
 
-    expect(ordinaryWin.directions).toHaveLength(120);
+    expect(ordinaryWin.directions).toHaveLength(121);
     expect(ordinaryWin.finalState).toMatchObject({
       power: 20,
       rescuedAnimalIds: [],
@@ -491,7 +489,7 @@ describe("curated campaign levels", () => {
     expect(ordinaryWin.finalState?.defeatedEnemyIds).toHaveLength(3);
     expect(ordinaryWin.finalState?.defeatedEnemyIds).not.toContain(guardian.id);
 
-    expect(perfectRescueWin.directions).toHaveLength(150);
+    expect(perfectRescueWin.directions).toHaveLength(151);
     expect(perfectRescueWin.finalState).toMatchObject({
       power: 29,
       status: "won",

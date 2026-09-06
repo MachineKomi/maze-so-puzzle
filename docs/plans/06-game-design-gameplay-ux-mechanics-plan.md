@@ -1,5 +1,10 @@
 # Game Design, Gameplay UX, and Mechanics Improvement Plan
 
+Historical implementation plan: later Human-approved V22-HOLE-01 supersedes
+this document's complete-run/multi-hole jump examples. Current runtime,
+GAMEPLAY_DESIGN_SPEC and HOLE-01A own crossing legality; do not restore historical
+positive two/three-hole requirements.
+
 ## 0. Manager-reviewed execution addendum
 
 This plan executes after the Plan-07A measurement-only pre-pass and before all presentation tracks. Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, this plan in full, current story/architecture/release documentation, and current source/tests. The execution prompt authorizes implementation; the original planning-only wording remains provenance for the research pass.

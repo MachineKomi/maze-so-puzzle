@@ -1,6 +1,6 @@
 # V22-HOLE-01 — single-width crossings and connected ditches
 
-Status: Human-requested direction; manager-scoped, implementation pending.
+Status: Phase 1 candidate in implementation; Phase 2 connected-ditch art remains pending.
 Date: 2026-09-05. Backlog: PT-20260905-49.
 Source: [audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Owner: root rules/content integration with independent Sol/Astra review; bounded
@@ -92,6 +92,26 @@ maximum of the separate distances. Define eligible landings consistently. Replac
 old positive length-2/3 generator/level tests and complete-row hint teaching with
 negative regressions and truthful single-width teaching. Keep the existing
 `tileTravel`/`useSceneTravel` owner and test all paces, cancellation and followers.
+
+### Phase 1 contract locked with independent Sol review (2026-09-06)
+
+First candidate: HOLE-01A / v0.22.8, based on published v0.22.7 `9b82228`.
+Impossible +2 geometry (second hole, wall, bounds) blocks before suggesting
+Spring Boots. Eligible geometry then requires Spring Boots and any pre-existing
+hazard protection. Unresolved door/enemy/cage cannot be a landing, regardless
+of equipment; resolved versions are floor again. Passive pickups, exit and
+portal are eligible. Jump→portal emits jump, warp, moved once, increments one
+step and presents both phases without an intermediate unlock or duplicate save.
+The same cancellation generation owns both; followers stay hidden through both.
+
+Seven authored maps gain revision 4 through eight hole→floor edits, no object
+movement/renumbering. Rules revision 3 applies globally; recipe `surprise-v6`
+and generated content revision 2 reserve both approach and landing against
+hazards, cages and later guardians.
+Durable progress survives; previous unfinished authored runs restart with the
+existing updated-maze notice and previous bests remain historical. No new save
+schema, art, camera policy or particle system. Source-only checks are not physical
+play-feel acceptance. Phase 2 and root PT36 still precede full Plan 04 rollout.
 
 ## Phase 2 — small, clean art set and topology-aware rendering
 

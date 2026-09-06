@@ -6,6 +6,15 @@ Keep completed observations and build identities when newer builds arrive.
 
 ## Start here
 
+- **In preparation: v0.22.8 HOLE-01A / P12.** Not yet a published build.
+  With Spring Boots, check one-hole crossings, both directions, all three paces;
+  long dividing trenches should cross across their width, never along their
+  length. Try Lanternlight's junction and Grand Parade's door after the jump:
+  no remote door opening, battle or rescue. Release/turn during a jump; no stale
+  extra move or missing friends afterward. Existing hole art remains for now.
+  This rule update intentionally restarts unfinished mazes with the updated-maze
+  notice; earned friends/rewards/unlocks survive. Do not clear game data.
+
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
 - **Current: v0.22.7 AUDIO-01A**, frozen

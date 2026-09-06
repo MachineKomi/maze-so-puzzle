@@ -68,11 +68,12 @@ describe("deterministic surprise mazes", () => {
   });
 
   it.each([
-    ["golden-move", "movement", 9, "g-bc6b2eca"],
-    ["golden-grow", "growing", 13, "g-f0bad000"],
-    ["golden-adventure", "adventure", 17, "g-ac5de06a"],
+    ["golden-move", "movement", 9, "g-d850eba4"],
+    ["golden-grow", "growing", 13, "g-b21118fc"],
+    ["golden-adventure", "adventure", 17, "g-d391b2bc"],
   ] as const)("keeps fixed seed %s on its reviewed gameplay fingerprint", (seed, difficulty, size, fingerprint) => {
     const level = generateSurpriseMaze({ seed, difficulty, size });
+    expect(level.contentRevision).toBe(2);
     expect(level.gameplayFingerprint).toBe(fingerprint);
   });
 
@@ -297,7 +298,7 @@ describe("deterministic surprise mazes", () => {
     expect(enemyStyles.size).toBeGreaterThan(1);
     expect(cageStyles.size).toBeGreaterThan(1);
     expect(animalSpecies.size).toBeGreaterThan(ANIMALS_PER_LEVEL);
-    expect([...holeRunLengths].sort()).toEqual([1, 2, 3]);
+    expect([...holeRunLengths]).toEqual([1]);
   }, 30_000);
 
   it("keeps rescues optional for a previously failing adventure seed", () => {

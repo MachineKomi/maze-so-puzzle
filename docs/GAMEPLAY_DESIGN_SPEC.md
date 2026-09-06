@@ -10,7 +10,7 @@ The invariant rules are:
 
 - Equal Power wins. Stronger enemies block safely; they never hurt, reset, or remove progress.
 - Every maze has one generic weapon capability, expressed through visual variants.
-- Matching keys are reusable. Boots gate water/lava, the Antidote Leaf gates poison, and Spring Boots jump straight over a complete contiguous hole run.
+- Matching keys are reusable. Boots gate water/lava, the Antidote Leaf gates poison, and Spring Boots jump straight across one hole to the immediately following eligible landing.
 - Portal pairs persist and always connect the same two semantic objects.
 - Ordinary completion can rescue zero friends. Perfect completion rescues exactly every available friend.
 - Required Path hints target an ordinary zero-rescue solution. Optional friends and treasure are never presented as prerequisites.
@@ -433,14 +433,14 @@ The baseline is the reviewed Plan 06 audit. “After” is the current engine-de
 | 4 | Rainbow Picnic | 15×15 | 80 / 92 | 82 / 91 | 8 / 9 | 0% / 13 | Two reusable-key loops |
 | 5 | Toasty Toes | 13×13 | 69 / 77 | 71 / 78 | 7 / 10 | 0% / 9 | Lava recall and Power ordering |
 | 6 | Moonbeam Moat | 15×15 | 92 / 104 | 95 / 108 | 6 / 11 | 0% / 14 | Three-colour route planning |
-| 7 | Wishing Woods | 17×17 | 117 / 150 | 120 / 150 | 11 / 13 | 3% / 16 | Optional strong-guardian rescue |
-| 8 | Ame’s Grand Parade | 17×17 | 120 / 140 | 123 / 140 | 11 / 15 | 2% / 15 | Mixed-mechanic recall |
+| 7 | Wishing Woods | 17×17 | 117 / 150 | 121 / 151 | 11 / 13 | 3% / 16 | Optional strong-guardian rescue |
+| 8 | Ame’s Grand Parade | 17×17 | 120 / 140 | 124 / 141 | 11 / 15 | 2% / 15 | Mixed-mechanic recall |
 | 9 | Springstep Sky Hollow | 19×19 | 193 / 217 | 182 / 195 | 14 / 8 | 35% / 42 | Spring Boots unlock a state-gated hole shortcut; still a child-test focus |
-| 10 | Lanternlight Labyrinth | 23×23 | 173 / 216 | 150 / 206 | 18 / 9 | 29% / 48 | Room shortcut reduces ordinary endurance; rescue room remains substantial |
-| 11 | Twilight Treasure Loop | 21×21 | 235 / 245 | 204 / 210 | 14 / 14 | 24% / 24 | Exit follows the blue-door chain; dense prerequisites remain the challenge |
-| 12 | Moonlit Friendship Quest | 23×23 | 231 / 241 | 164 / 169 | 16 / 14 | 16% / 20 | Cross-map shortcut preserves leaf/tool/key ordering |
+| 10 | Lanternlight Labyrinth | 23×23 | 173 / 216 | 151 / 207 | 18 / 9 | 29% / 48 | Room shortcut reduces ordinary endurance; rescue room remains substantial |
+| 11 | Twilight Treasure Loop | 21×21 | 235 / 245 | 206 / 212 | 14 / 14 | 24% / 24 | Exit follows the blue-door chain; dense prerequisites remain the challenge |
+| 12 | Moonlit Friendship Quest | 23×23 | 231 / 241 | 165 / 170 | 16 / 14 | 16% / 20 | Cross-map shortcut preserves leaf/tool/key ordering |
 | 13 | Rose Heart Roundabout | 13×13 | 105 / 117 | 29 / 44 | 13 / 2 | 17% / 11 | Compact two-portal literacy and one key gate |
-| 14 | Clover Comeback Carnival | 17×17 | 103 / 177 | 104 / 176 | 10 / 8 | 20% / 27 | Portal/Power comeback with expensive optional mastery |
+| 14 | Clover Comeback Carnival | 17×17 | 103 / 177 | 105 / 177 | 10 / 8 | 20% / 27 | Portal/Power comeback with expensive optional mastery |
 | 15 | Friendship Crown Vault | 17×17 | 231 / 260 | 47 / 58 | 37 / 9 | 0% / 9 | Three-pair relay; all three reusable-key doors required; five rescues optional |
 | 16 | Rainbow Power Parade | 17×17 | 411 / 411 | 62 / 75 | 40 / 11 | 2% / 9 | Power-99 loop, Sunny Key return, compact optional rooms |
 
@@ -459,11 +459,11 @@ Hint tiers are Goal (remind the current need), Principle (state the rule), Direc
 | 5 | Recall boots at lava and sequence Power | Medium; familiar rule in new skin | Dense events with short quiet spans | “Warm lava uses the same boots rule” before coordinates |
 | 6 | Master three key colours and route order | Medium-high; working-memory load | Three gates, restrained retraversal | One current colour/prerequisite at a time |
 | 7 | Distinguish optional strong guardian from required route | Medium-high; temptation and recovery | Ordinary skips guardian; perfect adds 30 inputs | Required Path explicitly leaves guardian/friend optional |
-| 8 | Recall mixed mechanics without a new rule | Medium-high | Stable 123-input mastery course | Re-anchor to the next required state change |
-| 9 | Introduce Spring Boots and complete-hole-run jump | High; current endurance risk | State-gated shortcut, 13 rescue inputs | Principle tier explains “straight across the whole run” |
-| 10 | Read rooms and return through a shortcut | High; room orientation and rescue cost | Ordinary 150 inputs / 146 movement steps; optional room drives most perfect cost | Name functional room/landmark, not raw coordinates alone |
-| 11 | Deep prerequisite chain and changed exit meaning | High; 204 inputs but frequent events | Fourteen required state changes, four optional friends | Next prerequisite only; avoid revealing later chain |
-| 12 | Combine leaf, poison, boots, Spring Boots, keys | High but denser than historical baseline | 67 ordinary inputs removed from the historical 231-input route (now 164); rescues cost 5 inputs | Engine route ensures leaf precedes poison and boots precede hazards |
+| 8 | Recall mixed mechanics without a new rule | Medium-high | Stable 124-input mastery course | Re-anchor to the next required state change |
+| 9 | Recall Spring Boots and single-width crossings | High; current endurance risk | State-gated shortcut, 13 rescue inputs | Principle tier explains “straight across one hole to a clear landing” |
+| 10 | Read rooms and return through a shortcut | High; room orientation and rescue cost | Ordinary 151 inputs / 147 movement steps; optional room drives most perfect cost | Name functional room/landmark, not raw coordinates alone |
+| 11 | Deep prerequisite chain and changed exit meaning | High; 206 inputs but frequent events | Fourteen required state changes, four optional friends | Next prerequisite only; avoid revealing later chain |
+| 12 | Combine leaf, poison, boots, Spring Boots, keys | High but denser than historical baseline | 66 ordinary inputs removed from the historical 231-input route (now 165); rescues cost 5 inputs | Engine route ensures leaf precedes poison and boots precede hazards |
 | 13 | Introduce persistent portal pairs in a compact board | Medium; novel topology | 29 / 44 inputs; 28 / 40 movement steps | Explain matching flower pair, then next step through it |
 | 14 | Apply three portal pairs to a comeback Power route | High; expensive perfect detours | Ordinary remains purposeful; rescue mastery is optional | Distinguish “come back stronger” from “wrong way” |
 | 15 | Master a three-pair quadrant relay plus three reusable keys | High reasoning, low execution burden | 47 / 58 inputs; 44 / 50 movement steps; three doors required | State current quadrant, portal motif, and next key/door |
@@ -483,7 +483,7 @@ These are semantic hooks for the art, audio, lighting, VFX, animation, UI, and c
 | 6 | Externalize colour order | Keys do not disappear | Moonbeam gates align | Poggle’s nearly-correct map note | Three-colour hub | Three moat friends | Alternate key order | Strong colour+shape semantics; map markers |
 | 7 | Leave and return intentionally | Strong guardian is optional now | Woods guardian remembers Ame | Guardian’s tiny treasure hoard | Guardian fork | Kitten miniboss rescue | Return at higher Power / perfect run | Nonmodal Power marker; changed-state return cue |
 | 8 | Recall without prompts | Mixed rules form one parade route | Mechanic parade | Sprig announces the wrong parade order | Parade crossroads | Three spectators | Smooth mastery route | Layered musical/event callbacks |
-| 9 | Inspect landing beyond holes | One input clears the complete run | First boing shortcut | Spring Boots “do not do corners” | Star-hole bridge | Three sky cages | Find shorter spring route | Landing preview, jump cadence, distinct hole landmark |
+| 9 | Inspect landing beyond holes | One input crosses one hole | First boing shortcut | Spring Boots “do not do corners” | Star-hole bridge | Three sky cages | Find shorter spring route | Landing preview, jump cadence, distinct hole landmark |
 | 10 | Chunk space into rooms | A room link replaces a long loop | Treasure/monster room reveal | Monster guarding stationery | Lantern room names | Rich rescue/treasure room | Perfect-room sweep | Room-name copy, ambient audio zones, later lighting cue |
 | 11 | Hold a prerequisite plan | Blue-door return completes the chain | Twilight exit appears after work | Mimic’s “definitely normal chest” | Blue-door/exit chamber | Four side-trail friends | Optimize 14-event chain | Blocker history, clue visibility, landmark labels |
 | 12 | Combine old rules calmly | Shortcut collapses the return | Moonlit mixed-hazard crossing | Leaf treated as heroic salad | Poison garden / moon bridge | Five close detours | Ten-input perfect delta | Hazard-specific audio and accessible status copy |

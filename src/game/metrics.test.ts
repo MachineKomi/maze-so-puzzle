@@ -18,13 +18,13 @@ describe("campaign route-quality metrics", () => {
       expect(metric.prerequisiteDepth).toBeNull();
     }
     expect(CURATED_LEVELS.map((level) => report[level.id]!.ordinaryInputs))
-      .toEqual([6, 38, 65, 82, 71, 95, 120, 123, 182, 150, 204, 164, 29, 104, 47, 62]);
+      .toEqual([6, 38, 65, 82, 71, 95, 121, 124, 182, 151, 206, 165, 29, 105, 47, 62]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.perfectInputs))
-      .toEqual([7, 52, 80, 91, 78, 108, 150, 140, 195, 206, 210, 169, 44, 176, 58, 75]);
+      .toEqual([7, 52, 80, 91, 78, 108, 151, 141, 195, 207, 212, 170, 44, 177, 58, 75]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.ordinaryMovementSteps))
-      .toEqual([6, 36, 62, 78, 66, 90, 114, 116, 179, 146, 197, 158, 28, 100, 44, 54]);
+      .toEqual([6, 36, 62, 78, 66, 90, 115, 117, 179, 147, 199, 159, 28, 101, 44, 54]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.perfectMovementSteps))
-      .toEqual([6, 48, 74, 84, 70, 100, 140, 130, 189, 198, 199, 158, 40, 168, 50, 62]);
+      .toEqual([6, 48, 74, 84, 70, 100, 141, 131, 189, 199, 201, 159, 40, 169, 50, 62]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.rawBranchPoints))
       .toEqual([2, 6, 5, 8, 7, 6, 11, 11, 14, 18, 14, 16, 13, 10, 37, 40]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.meaningfulStateChanges))

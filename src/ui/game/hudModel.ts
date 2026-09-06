@@ -13,7 +13,7 @@ export interface EquipmentDefinition {
 export const EQUIPMENT_REGISTRY: readonly EquipmentDefinition[] = [
   { id: "weapon", matches: o => o.kind === "sword", art: o => resolveWeaponArt(o.kind === "sword" ? o.style : undefined) as UiArt, found: g => g.hasSword, description: "A maze weapon lets Ame challenge guardians. Match or beat their Power to win." },
   { id: "boots", matches: o => o.kind === "boots", art: () => PICKUP_ART.boots, found: g => g.hasBoots, description: "Splash Boots make water and warm magical lava safe to cross." },
-  { id: "spring-boots", matches: o => o.kind === "spring-boots", art: () => PICKUP_ART.springBoots, found: g => g.hasSpringBoots, description: "Spring Boots jump straight across a whole run of holes to a safe landing." },
+  { id: "spring-boots", matches: o => o.kind === "spring-boots", art: () => PICKUP_ART.springBoots, found: g => g.hasSpringBoots, description: "Spring Boots jump straight across one hole to a clear landing." },
   { id: "antidote-leaf", matches: o => o.kind === "antidote-leaf", art: () => PICKUP_ART.antidoteLeaf, found: g => g.hasAntidoteLeaf, description: "The Antidote Leaf makes purple poison safe to cross." },
   ...(["red", "yellow", "blue"] as const).map((color: KeyColor): EquipmentDefinition => ({ id: `key-${color}`, matches: o => o.kind === "key" && o.color === color, art: () => resolveKeyArt(color), found: g => g.keys.includes(color), description: "This reusable key opens doors with the same colour and shape. It stays in your bag." })),
 ];

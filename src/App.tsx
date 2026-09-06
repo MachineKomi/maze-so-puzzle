@@ -409,6 +409,10 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
           };
         case "needs-spring-boots":
           return { icon: ASSETS.springBoots, text: "Find spring boots to hop across!", tone: "careful", sound: "bump" };
+        case "hole-too-wide":
+          return { icon: ASSETS.springBoots, text: "Spring Boots cross one hole. Find a narrow crossing!", tone: "careful", sound: "bump" };
+        case "occupied-jump-landing":
+          return { icon: ASSETS.springBoots, text: "Find a clear space to land. Approach this from solid ground!", tone: "careful", sound: "bump" };
         case "needs-antidote-leaf":
           return { icon: ASSETS.antidoteLeaf, text: "Find the antidote leaf before crossing purple poison!", tone: "careful", sound: "bump" };
         case "needs-key":
@@ -1194,7 +1198,7 @@ function App() {
     clearPresentationWork();
     const sequence = presentationSequence.current;
     const reducedMotion = prefersReducedMotion();
-    const motion = getJumpPresentationMotion(event.over.length);
+    const motion = getJumpPresentationMotion();
     const duration = reducedMotion ? REDUCED_PRESENTATION_MS : motion.durationMs;
     setBattlePresentation(null);
     setRescuePresentation(null);
@@ -1211,9 +1215,6 @@ function App() {
       descentPercent: motion.descentPercent,
     });
     playSound("jump", mutedRef.current);
-    if (!reducedMotion && motion.holeCount === 3) {
-      schedulePresentationTimer(sequence, () => playSound("jump", mutedRef.current), Math.round(duration * 0.48));
-    }
     if (landingSound !== "jump") {
       schedulePresentationTimer(
         sequence,
@@ -1221,8 +1222,12 @@ function App() {
         reducedMotion ? 45 : duration - 105,
       );
     }
-    schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
-    if (!continues) finishPresentationAfter(duration);
+    // A portal continuation replaces this phase atomically: never expose the
+    // already-committed destination or followers between the two animations.
+    if (!continues) {
+      schedulePresentationTimer(sequence, () => setJumpPresentation(null), Math.max(100, duration - 20));
+      finishPresentationAfter(duration);
+    }
     return duration;
   }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer]);
 
@@ -1483,25 +1488,7 @@ function App() {
           object.kind === "enemy" && object.id === defeatedEvent.objectId
         ),
       );
-      if (enemy && jumpedEvent) {
-        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump", true);
-        const jumpSequence = presentationSequence.current;
-        const battleDuration = createCombatVictoryPlan({
-          powerBefore: defeatedEvent.powerBefore,
-          enemyPower: defeatedEvent.enemyPower,
-          powerAfter: defeatedEvent.powerAfter,
-        }, { reducedMotion: prefersReducedMotion() }).durationMs;
-        const battleFrom = {
-          x: enemy.at.x - DIRECTION_DELTAS[direction].x,
-          y: enemy.at.y - DIRECTION_DELTAS[direction].y,
-        };
-        schedulePresentationTimer(
-          jumpSequence,
-          () => beginBattlePresentation(defeatedEvent, enemy, direction, battleFrom),
-          Math.max(100, jumpDuration - 20),
-        );
-        presentationDuration = Math.max(100, jumpDuration - 20) + battleDuration;
-      } else if (enemy) {
+      if (enemy) {
         presentationDuration = beginBattlePresentation(defeatedEvent, enemy, direction, game.position);
       }
     } else if (tooStrongEvent) {
@@ -1522,8 +1509,13 @@ function App() {
       if (rescuedAnimal) {
         presentationDuration = beginRescuePresentation(rescuedEvent, rescuedAnimal);
       }
-    } else if (jumpedEvent && !openedDoorEvent) {
-      presentationDuration = beginJumpPresentation(jumpedEvent, nextFeedback.sound);
+    } else if (jumpedEvent) {
+      presentationDuration = beginJumpPresentation(jumpedEvent, portalEvent ? "jump" : nextFeedback.sound, Boolean(portalEvent));
+      if (portalEvent) {
+        schedulePresentationTimer(presentationSequence.current,
+          () => beginPortalPresentation(portalEvent), presentationDuration);
+        presentationDuration += prefersReducedMotion() ? REDUCED_PRESENTATION_MS : PORTAL_PRESENTATION_MS;
+      }
     } else if (portalEvent) {
       presentationDuration = beginPortalPresentation(portalEvent);
     } else if (openedDoorEvent) {
@@ -1532,17 +1524,7 @@ function App() {
           object.kind === "door" && object.id === openedDoorEvent.objectId
         ),
       );
-      if (door && jumpedEvent) {
-        const jumpDuration = beginJumpPresentation(jumpedEvent, "jump", true);
-        const jumpSequence = presentationSequence.current;
-        const doorDuration = prefersReducedMotion() ? REDUCED_PRESENTATION_MS : DOOR_OPEN_PRESENTATION_MS;
-        schedulePresentationTimer(
-          jumpSequence,
-          () => beginDoorOpeningPresentation(openedDoorEvent, door),
-          Math.max(100, jumpDuration - 20),
-        );
-        presentationDuration = Math.max(100, jumpDuration - 20) + doorDuration;
-      } else if (door) {
+      if (door) {
         presentationDuration = beginDoorOpeningPresentation(openedDoorEvent, door);
       }
     }

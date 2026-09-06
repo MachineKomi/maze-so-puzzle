@@ -56,6 +56,12 @@ Use the shared ditch art/topology without creating a renderer or reviving old
 multi-hole teaching. Preserve AUDIO-01's prepared cue/track boundary in new
 story/victory transitions; Plan 09 requalifies the expanded content closure.
 
+HOLE-01A uses rules revision 3, generated recipe `surprise-v6` and generated
+content revision 2. A visible friend may be beyond a jump, but the landing cannot
+contain an unresolved cage, door or enemy: land on eligible floor, then resolve
+the stationary interaction from an adjacent square. Connected ditch art/topology
+is a separate Phase-2 predecessor, not part of the existing-art HOLE-01A preview.
+
 UI-02 lands after 02/before 08 and owns the Book interface/discovery foundation.
 Consume its five tabs, selected-card viewer, encounter entry IDs, root-reviewed
 migration and current lore. This plan completes final 24-maze/friend/guardian
@@ -266,7 +272,7 @@ Initial budgets are hypotheses to validate through the final metric tool and pla
 |---:|---|---|---|---|
 | 3 | 9–11 square; 25–45 | Use a revealed landmark and minimap to choose between two short routes; recall weapon/key relation without adding a rule. | The Pocket Map comically points to itself, then a discovered shortcut makes the map visibly “right.” Replay offers rescue versus shortest route. | Quiet bright theme, early friend pair, literal map flourish, small Poggle reaction, restrained first map-discovery cue. |
 | 8 | 13–15 square; 55–90 | Sort two or three known requirements and choose a useful order around a readable hub. | A tempting star-cake/treasure branch is genuinely optional; its route later reconnects through an existing key/door or changed-state shortcut, while the treasure remains only a reward rather than the answer or trigger. | Celebratory terrain, varied key/door art, treasure/SFX spotlight, comedic Sprig payoff, different weapon/enemy/cage family from neighbours. |
-| 12 | 13–15 square; 55–95 | Predict several complete Spring-jump landings with different consequences; no mid-air turn and no endurance corridor. | A four-way bounce garden reveals that the same central geometry answers two axes; optional landing produces a friend celebration. | Airy/light theme, clear hole silhouettes, jump VFX/animation showcase, boing sound variation, intentional diagonal authored light. |
+| 12 | 13–15 square; 55–95 | Predict several single-hole Spring-jump landings with different consequences; no mid-air turn and no endurance corridor. | A four-way bounce garden reveals that the same central geometry answers two axes; an optional jump lands on clear approach floor, followed by a separate adjacent cage rescue and friend celebration. | Airy/light theme, clear hole silhouettes, jump VFX/animation showcase, boing sound variation, intentional diagonal authored light. |
 | 16 | 14–16 square; 70–115 | Recall Antidote Leaf and mixed traversal, distinguish poison from water/lava, then prepare for portal reasoning through a changed return. | A moon garden appears to repeat until distinct glowleaf landmarks make the safe plan click; optional path reveals a funny nocturnal friend tableau. | Poison static/motion showcase, Leaf pickup, contrasting hazard sound/shape, moonlit material/light, calm pre-portal pacing. |
 | 21 | 11–13 square; 45–80 | Decompression: several valid route orders, short callbacks, and a clearly optional perfect route. | Sprig's promised tiny rainbow changes the celebration/mood without undoing the victory. Replay invites an alternate ordering. | Broad friend/weapon/theme variety, warm homecoming music or reserved friendship cue if qualified, gentle rainbow VFX, rich reduced tableau. |
 | 22 | 14–16 square; 65–110 | Revise a portal-hub plan when Poggle's map is genuinely for somewhere else; each return should change available understanding or access. | The map's “mistake” becomes the solution. At least one portal relationship is inferable before use and satisfying after. | Portal-family showcase, Poggle expressions, distinct hub landmarks, controlled effect flavors and controller-friendly focus/Hint. |

@@ -4,6 +4,13 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
+**Active work:** HOLE-01A v0.22.8 Phase 1 qualification, root Astra/actual Sol.
+Rules revision 3, generated `surprise-v6` / content revision 2 and seven minimally
+adjusted maps are implemented. Existing pit art remains. Finish final browser,
+native and publication gates, then Phase 2 connected ditch art/topology, root PT36,
+and Plan04. Do not repeat the completed atomic implementation or audio passes.
+v0.22.7 below remains the published fallback until the new receipt is verified.
+
 **Current checkpoint, 2026-09-06:** v0.22.7 AUDIO-01A is frozen at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/native review is
 accepted; **web/Windows and all four public downloads are verified** in the

@@ -38,6 +38,7 @@ export interface GenerateMazeOptions {
 
 export const MIN_GENERATED_MAZE_SIZE = 9;
 export const MAX_GENERATED_MAZE_SIZE = 23;
+export const GENERATED_CONTENT_REVISION = 2;
 export { ABSOLUTE_MAZE_SIZE_LIMIT };
 
 type RandomSource = () => number;
@@ -701,11 +702,12 @@ function movePrerequisitesOntoBranches(
 
 interface HoleSegment {
   readonly holes: readonly Point[];
+  readonly approach: Point;
   readonly landing: Point;
   readonly crossroad: boolean;
 }
 
-/** Selects a straight, safely landable one-, two-, or three-tile jump. */
+/** Selects a one-hole crossing with clear ground on both sides. */
 function chooseHoleSegment(
   terrain: readonly (readonly TerrainKind[])[],
   criticalPath: readonly Point[],
@@ -714,65 +716,25 @@ function chooseHoleSegment(
   reserved: ReadonlySet<string>,
   random: RandomSource,
 ): HoleSegment | undefined {
-  const preferredLength = ([1, 2, 3] as const)[Math.floor(random() * 3)] ?? 1;
-  const lengthOrder = [preferredLength, ...shuffle(
-    ([1, 2, 3] as const).filter((length) => length !== preferredLength),
-    random,
-  )];
-  for (const length of lengthOrder) {
-    const candidates: Array<HoleSegment & { readonly startIndex: number }> = [];
-    for (
-      let startIndex = Math.max(1, minimumPathIndex);
-      startIndex + length < criticalPath.length;
-      startIndex += 1
-    ) {
-      const approach = criticalPath[startIndex - 1];
-      const firstHole = criticalPath[startIndex];
-      const landing = criticalPath[startIndex + length];
-      if (approach === undefined || firstHole === undefined || landing === undefined) continue;
-      const dx = firstHole.x - approach.x;
-      const dy = firstHole.y - approach.y;
-      const holes = criticalPath.slice(startIndex, startIndex + length);
-      const isStraight = holes.every((point, index) => {
-        const previous = index === 0 ? approach : holes[index - 1];
-        return previous !== undefined && point.x - previous.x === dx && point.y - previous.y === dy;
-      }) && landing.x - (holes.at(-1)?.x ?? landing.x) === dx
-        && landing.y - (holes.at(-1)?.y ?? landing.y) === dy;
-      if (
-        !isStraight ||
-        holes.some((point) => reserved.has(pointKey(point))) ||
-        reserved.has(pointKey(landing))
-      ) {
-        continue;
-      }
-      candidates.push({
-        holes,
-        landing,
-        startIndex,
-        crossroad: length === 1 && floorNeighbors(terrain, firstHole).length === 4,
-      });
-    }
-
-    const preferCrossroad = length === 1 && random() < 0.6;
-    const crossroadCandidates = candidates.filter((candidate) => candidate.crossroad);
-    const eligible = preferCrossroad && crossroadCandidates.length > 0
-      ? crossroadCandidates
-      : candidates;
-    const selected = shuffle(eligible, random)
-      .sort(
-        (left, right) =>
-          Math.abs(left.startIndex - preferredPathIndex) -
-          Math.abs(right.startIndex - preferredPathIndex),
-      )[0];
-    if (selected !== undefined) {
-      return {
-        holes: selected.holes,
-        landing: selected.landing,
-        crossroad: selected.crossroad,
-      };
-    }
+  const candidates: Array<HoleSegment & { readonly startIndex: number }> = [];
+  for (let startIndex = Math.max(1, minimumPathIndex);
+    startIndex + 1 < criticalPath.length; startIndex += 1) {
+    const approach = criticalPath[startIndex - 1];
+    const hole = criticalPath[startIndex];
+    const landing = criticalPath[startIndex + 1];
+    if (!approach || !hole || !landing) continue;
+    if (hole.x - approach.x !== landing.x - hole.x
+      || hole.y - approach.y !== landing.y - hole.y
+      || [approach, hole, landing].some((point) => reserved.has(pointKey(point)))) continue;
+    candidates.push({
+      holes: [hole], approach, landing, startIndex,
+      crossroad: floorNeighbors(terrain, hole).length === 4,
+    });
   }
-  return undefined;
+  const crossroads = candidates.filter((candidate) => candidate.crossroad);
+  const eligible = random() < 0.6 && crossroads.length > 0 ? crossroads : candidates;
+  return shuffle(eligible, random).sort((left, right) =>
+    Math.abs(left.startIndex - preferredPathIndex) - Math.abs(right.startIndex - preferredPathIndex))[0];
 }
 
 function chooseAnimalPoints(
@@ -919,9 +881,8 @@ function buildGeneratedLevel(
   }
   const placements = branched.placements;
 
-  // v5 adds single-door rooms and room encounters without changing the safely
-  // ordered main progression recipe.
-  const id = `surprise-v5-${seedIdentity(seedText)}-${difficulty}-${size}`;
+  // v6 keeps room encounters and reserves safe single-hole crossings.
+  const id = `surprise-v6-${seedIdentity(seedText)}-${difficulty}-${size}`;
   const objects: LevelObject[] = [];
   const hazards: HazardSeed[] = [];
   for (let index = 0; index < recipe.length; index += 1) {
@@ -1005,6 +966,7 @@ function buildGeneratedLevel(
       reservedBeforeTerrain.add(pointKey(hole));
     }
     reservedBeforeTerrain.add(pointKey(holeSegment.landing));
+    reservedBeforeTerrain.add(pointKey(holeSegment.approach));
   }
 
   if (hazards.length > 0) {
@@ -1034,6 +996,7 @@ function buildGeneratedLevel(
     pointKey(exit),
     ...objects.map((object) => pointKey(object.at)),
     ...branched.reservedBranchTiles,
+    ...(holeSegment ? [pointKey(holeSegment.approach), pointKey(holeSegment.landing)] : []),
   ]);
   const animalPoints = chooseAnimalPoints(
     terrain,
@@ -1064,6 +1027,8 @@ function buildGeneratedLevel(
     pointKey(start),
     pointKey(exit),
     ...objects.map((object) => pointKey(object.at)),
+    // Keep both landings free of later cages/guardians and bonus placements.
+    ...(holeSegment ? [pointKey(holeSegment.approach), pointKey(holeSegment.landing)] : []),
   ]);
   const bonusDeadEnds: Point[] = [];
   for (let y = 1; y < terrain.length - 1; y += 1) {
@@ -1146,7 +1111,7 @@ function buildGeneratedLevel(
   }
 
   const identityInput = {
-    contentRevision: 1,
+    contentRevision: GENERATED_CONTENT_REVISION,
     width: size,
     height: size,
     initialPower: 2,
@@ -1157,7 +1122,7 @@ function buildGeneratedLevel(
   };
   return {
     schemaVersion: 1,
-    contentRevision: 1,
+    contentRevision: GENERATED_CONTENT_REVISION,
     gameplayFingerprint: gameplayFingerprint(identityInput),
     id,
     name: "Surprise Maze",

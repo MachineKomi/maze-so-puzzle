@@ -186,25 +186,9 @@ function positionObjectIsResolved(
   }
 }
 
-/** One input can clear a straight run of holes and land on the following tile. */
+/** A one-hole approach may immediately activate a portal: compose, don't max. */
 function maximumMovementStride(level: LevelDefinition): number {
-  let maximumHoleRun = 0;
-
-  for (const row of level.terrain) {
-    let run = 0;
-    for (const terrain of row) {
-      run = terrain === "hole" ? run + 1 : 0;
-      maximumHoleRun = Math.max(maximumHoleRun, run);
-    }
-  }
-
-  for (let x = 0; x < level.width; x += 1) {
-    let run = 0;
-    for (let y = 0; y < level.height; y += 1) {
-      run = level.terrain[y]?.[x] === "hole" ? run + 1 : 0;
-      maximumHoleRun = Math.max(maximumHoleRun, run);
-    }
-  }
+  const approachStride = level.terrain.some((row) => row.includes("hole")) ? 2 : 1;
 
   let maximumPortalStride = 1;
   const portals = level.objects.filter(
@@ -219,11 +203,11 @@ function maximumMovementStride(level: LevelDefinition): number {
       maximumPortalStride,
       Math.abs(entrance.at.x - destination.at.x)
         + Math.abs(entrance.at.y - destination.at.y)
-        + 1,
+        + approachStride,
     );
   }
 
-  return Math.max(maximumHoleRun + 1, maximumPortalStride);
+  return Math.max(approachStride, maximumPortalStride);
 }
 
 function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | null {

@@ -1,7 +1,16 @@
 # Agent 04 — fresh lighting task after corrected FP-UI1 family acceptance
 
-Prepared 2026-09-05. This is the next specialist's execution prompt, not a start
-instruction or evidence that its prerequisites have passed.
+Prepared 2026-09-05. Historical draft, NOT a current launch prompt.
+
+**2026-09-06 superseding gate:** read JOINT_ORCHESTRATION_STATE and the roadmap
+for current accepted source and completed correction slices. Do not repeat their
+implementation from the v0.22.0 baseline below. Plan04 still requires accepted
+V22-HOLE-01 Phase-2 ditch topology/art and root PT36; HOLE-01A Phase-1 rules alone
+do not clear either. Root must replace the old source/gate fields before issuance.
+Outstanding physical checks remain explicit; their absence is not a blanket
+stop on independently safe work authorized by the Human.
+
+The remaining v0.22.0 text is historical preparation, not current launch authority.
 
 **HOLD: V22-PERF-01, V22-UI-01, family acceptance and root PT36 preflight are
 not yet recorded.** The v0.22.0 Human playtest is positive but found a sustained

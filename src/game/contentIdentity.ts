@@ -1,7 +1,7 @@
 import type { LevelDefinition, LevelObject, TerrainKind } from "./types";
 
 /** Bump when engine semantics change without changing authored level data. */
-export const GAMEPLAY_RULES_REVISION = 2;
+export const GAMEPLAY_RULES_REVISION = 3;
 
 function stableObject(object: LevelObject): readonly unknown[] {
   const common = [object.id, object.kind, object.at.x, object.at.y] as const;

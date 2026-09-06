@@ -620,9 +620,9 @@ Preserve `getJumpPresentationMotion()` durations and apex/descent values. Expres
 - 84–100%: destination ring, soft boot compression, landing cue at the plan's contact time;
 - remove rings before the presentation subtree, not 20 ms after they are clipped.
 
-One/two/three-hole jumps vary trail length and a small `×N` hole marker, not particle density. Water/lava landing derives the destination terrain and composes its material contact primitive. Rescue and door events that follow are sequenced after landing; portal uses the explicit bridge above.
+V22-HOLE-01 supersedes multi-hole variants: only single-hole jumps, with no `×N` marker. Water/lava landing requires existing protection and composes its material contact primitive. Unresolved rescue/door/enemy landings block; resolved tiles are floor again. Jump→portal is the only passive two-phase bridge and commits once.
 
-**Reduced motion:** retain the current 140 ms destination placement. Add a static boots + `×N` arc badge spanning the logical direction and one destination ring; no spatial travel or scale pulse.
+**Reduced motion:** retain the current 140 ms destination placement. Add a static boots arc badge spanning the logical direction and one destination ring; no spatial travel or scale pulse or multi-hole counter.
 
 ### 7.10 Rescue and cages
 
@@ -1269,7 +1269,7 @@ Tauri tests use the real WebView2 build, not only Chromium screenshots. Phone po
 | Splashy Boots / Rainbow Picnic (`:348-428`) | potion exact Power, boots, water crossing/blocked edge, water against different terrain themes |
 | Wishing Woods (`:458-495`) | lava at initial camera, mixed hazards, spring boots, holes, item contrast on lush floor |
 | Ame's Grand Parade (`:497-537`) | water at initial camera, Power chain, all key colours, dense object hierarchy |
-| Lanternlight Labyrinth (`:581-640`) | one/two/three-hole jumps, treasure/currency, large camera movement |
+| Lanternlight Labyrinth | single-hole and junction jumps, treasure/currency, large camera movement |
 | Twilight Treasure Loop (`:642-692`) | long measured treasure flight, holes, lava/water, optional objects, adaptive HUD anchor |
 | Moonlit Friendship Quest (`:694-750`) | poison close-up, leaf pickup, safe/blocked poison, rescue, mixed long route, cancellation soak |
 | Rose Heart Roundabout / Clover Carnival (`:752-828`) | portal departure and arrival, portal relay, jump/portal composition if available |
@@ -1285,7 +1285,7 @@ Pause via the Web Animations API and/or deterministic plan clock, not arbitrary 
 - Pickup: 0/80/220/420/620 ms and final notice; each category; smallest scale.
 - Combat: 0/120/330/630/760/1060/1200/1500/1730/1900/2220 ms; Power 1 and larger enemy; reduced 0/60/95/180.
 - Rescue: 0/130/280/520/720/870/900 ms; each cage style; reduced result.
-- Jump: source hold, launch, apex, descent, landing, cleanup for one/two/three holes; each material landing; reduced result.
+- Jump: source hold, launch, apex, descent, landing, cleanup for one-hole crossings; multi-width rejection, protected material landings, portal continuation and reduced result.
 - Portal: 0/120/220/260/480/695/720 ms; both pair directions; reduced cut.
 - Door: 0/100/260/420/700/835/860 ms for heart/star/sun; reduced open threshold.
 - Treasure: source/reveal, outward spray, homing, moving-actor arrival, separate wallet acknowledgement, anchor invalidation and reduced exact receipt.

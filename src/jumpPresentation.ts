@@ -6,16 +6,14 @@ export interface JumpPresentationMotion {
 }
 
 /**
- * Longer Spring Boots jumps travel farther, stay airborne longer, and rise a
- * little higher. The engine remains tile-authoritative; this only tunes the
- * cheerful presentation layered over the completed move.
+ * One input crosses one hole. Pace changes walking, never jump reach or the
+ * readable arc; the engine remains the sole movement authority.
  */
-export function getJumpPresentationMotion(holeCount: number): JumpPresentationMotion {
-  const normalizedCount = Math.max(1, Math.min(3, Math.floor(holeCount)));
+export function getJumpPresentationMotion(): JumpPresentationMotion {
   return {
-    holeCount: normalizedCount,
-    durationMs: 460 + (normalizedCount - 1) * 125,
-    apexPercent: -58 - (normalizedCount - 1) * 17,
-    descentPercent: -30 - (normalizedCount - 1) * 10,
+    holeCount: 1,
+    durationMs: 460,
+    apexPercent: -58,
+    descentPercent: -30,
   };
 }

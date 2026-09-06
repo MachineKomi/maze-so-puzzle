@@ -391,6 +391,30 @@ describe("active run persistence", () => {
     )?.game).toEqual(game);
   });
 
+  it("round-trips the single committed state after a jump directly onto a portal", () => {
+    const level = parseAsciiLevel({
+      id: "saved-jump-portal", name: "Saved jump portal", objective: "Hop then whoosh",
+      map: ["#############", "#@joH#####HE#", "#############"],
+      objectIds: { "4,1": "saved-jump-portal-portal-entry", "10,1": "saved-jump-portal-portal-twin" },
+    });
+    const equipped = movePlayer(level, createInitialGameState(level), "right").state;
+    const result = movePlayer(level, equipped, "right");
+    expect(result.events.map((event) => event.type)).toEqual(["hole-jumped", "portal-warped", "moved"]);
+    expect(result.state).toMatchObject({ position: { x: 10, y: 1 }, steps: 2 });
+    expect(sanitizeActiveRunSnapshot(rawSnapshot(level, result.state), [level])?.game).toEqual(result.state);
+    const storage = new MemoryStorage();
+    storage.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(rawSnapshot(level, result.state)));
+    expect(readActiveRun([level], storage)?.game).toEqual(result.state);
+  });
+
+  it("rejects a rules-v2 active run even on an unchanged revision-3 map", () => {
+    const level = storyLevel(0);
+    expect(level.contentRevision).toBe(3);
+    expect(sanitizeActiveRunSnapshot({
+      ...rawSnapshot(level), gameplayFingerprint: "g-da9a47f7",
+    }, CURATED_LEVELS)).toBeNull();
+  });
+
   it("round-trips a run immediately after a long flower-portal hop", () => {
     const portalLevel = parseAsciiLevel({
       id: "saved-portal-hop",

@@ -575,7 +575,7 @@ export const MOONBEAM_MOAT_LEVEL = parseAuthoredLevel({
 });
 
 export const WISHING_WOODS_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "wishing-woods",
   objectIds: {
     "9,1": "wishing-woods-enemy-north-watch",
@@ -606,7 +606,7 @@ export const WISHING_WOODS_LEVEL = parseAuthoredLevel({
     "#################",
     "#r.......9..#~..#",
     "#.#########.#~#.#",
-    "#...#.oo.b#...#.#",
+    "#...#.o..b#...#.#",
     "#.#.#.###.#####.#",
     "#j#.R...#...#..u#",
     "#######.###.#.###",
@@ -624,7 +624,7 @@ export const WISHING_WOODS_LEVEL = parseAuthoredLevel({
 });
 
 export const AMES_GRAND_PARADE_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "ames-grand-parade",
   objectIds: {
     "11,9": "ames-grand-parade-potion-north-garden",
@@ -665,7 +665,7 @@ export const AMES_GRAND_PARADE_LEVEL = parseAuthoredLevel({
     "#...#.#.#.#...#a#",
     "#.###.#^#.#.#####",
     "#R#..y#^#.#p....#",
-    "#o#.###.#.#####.#",
+    "#.#.###.#.#####.#",
     "#o#.#f..#..2..#7#",
     "#.#.###.#####.#.#",
     "#.#.B.#.#..p..#.#",
@@ -676,7 +676,7 @@ export const AMES_GRAND_PARADE_LEVEL = parseAuthoredLevel({
 });
 
 export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "springstep-sky-hollow",
   name: "Springstep Sky Hollow",
   objective: "Explore the side paths, then bounce across the starry holes!",
@@ -700,7 +700,7 @@ export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAuthoredLevel({
   },
   map: [
     "###################",
-    "#...#...oo........#",
+    "#...#...o.........#",
     "#.#.#.#######.#####",
     "#.#b#.#E....#.....#",
     "#.###8####q.#####.#",
@@ -722,7 +722,7 @@ export const SPRINGSTEP_SKY_HOLLOW_LEVEL = parseAuthoredLevel({
 });
 
 export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "lanternlight-labyrinth",
   objectIds: {
     "2,1": "lanternlight-labyrinth-enemy-entry-imp",
@@ -777,7 +777,7 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAuthoredLevel({
     "#.#.#######.###.###.#.#",
     "#.....#.......#...#...#",
     "#####.#######.###.#####",
-    "#.oo.8#..u#.....#.....#",
+    "#.o..8#..u#.....#.....#",
     "#.#####^#.###.#######.#",
     "#..j..^^#..4#.#.......#",
     "###########.###.#####.#",
@@ -795,7 +795,7 @@ export const LANTERNLIGHT_LABYRINTH_LEVEL = parseAuthoredLevel({
 });
 
 export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "twilight-treasure-loop",
   name: "Twilight Treasure Loop",
   objective: "Search the side trails for every tool, then unlock the twilight star!",
@@ -820,7 +820,7 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
     "off-route-prerequisites",
     "optional-miniboss-rescue",
     "four-friend-challenge",
-    "three-hole-jump",
+    "single-hole-crossing",
   ],
   animalSpeciesByCoordinate: {
     "13,1": "cloudstep-pegasus",
@@ -842,9 +842,9 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
     "#.#.#4#####.#^#.###.#",
     "#.#.#...#...#E#.#bp.#",
     "#.#.###.#####.#.###.#",
-    "#.#...#.....#B#...#o#",
+    "#.#...#.....#B#...#.#",
     "#.###.#####.#.###.#o#",
-    "#...#.....#.#.....#o#",
+    "#...#.....#.#.....#.#",
     "#.#.#####.#.#######.#",
     "#.#..g#..v#.~~#.....#",
     "#s#2###.#####.#.#####",
@@ -854,7 +854,7 @@ export const TWILIGHT_TREASURE_LOOP_LEVEL = parseAuthoredLevel({
 });
 
 export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "moonlit-friendship-quest",
   objectIds: {
     "21,1": "moonlit-friendship-quest-potion-north-vial",
@@ -916,7 +916,7 @@ export const MOONLIT_FRIENDSHIP_QUEST_LEVEL = parseAuthoredLevel({
     "#.#.#l#.#~#####.#.#.###",
     "#.#.#f#.#.....#.#.#7..#",
     "#.#.###.###.#j#o#.###.#",
-    "#.#..4#%#h#.#d#o#.....#",
+    "#.#..4#%#h#.#d#.#.....#",
     "#.###.#%#u#.###.#######",
     "#..@#.....#.........bp#",
     "#######################",
@@ -965,7 +965,7 @@ export const ROSE_HEART_ROUNDABOUT_LEVEL = parseAuthoredLevel({
 });
 
 export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAuthoredLevel({
-  contentRevision: 3,
+  contentRevision: 4,
   id: "clover-comeback-carnival",
   objectIds: {
     "15,1": "clover-comeback-carnival-portal-mint-north",
@@ -1016,7 +1016,7 @@ export const CLOVER_COMEBACK_CARNIVAL_LEVEL = parseAuthoredLevel({
     "#M..k...#C..#.9b#",
     "#######.###.#.###",
     "#..i..#.#M#o#...#",
-    "#.###.#.#.#o###.#",
+    "#.###.#.#.#.###.#",
     "#...#..f#.#.#...#",
     "###.#####.#.#.#B#",
     "#c7....d#.....#E#",

@@ -10,7 +10,7 @@ import { solveLevel } from "./solver";
 describe("portal level design stats", () => {
   it.each([
     ["Rose Heart Roundabout", ROSE_HEART_ROUNDABOUT_LEVEL, 29, 44, 1],
-    ["Clover Comeback Carnival", CLOVER_COMEBACK_CARNIVAL_LEVEL, 104, 176, 21],
+    ["Clover Comeback Carnival", CLOVER_COMEBACK_CARNIVAL_LEVEL, 105, 177, 21],
     ["Friendship Crown Vault", FRIENDSHIP_CROWN_VAULT_LEVEL, 47, 58, 0],
   ] as const)(
     "%s requires portal travel and keeps rescue detours optional",

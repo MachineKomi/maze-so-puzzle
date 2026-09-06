@@ -131,22 +131,11 @@ export function movePlayer(
   }
   const jumpedHoles: Point[] = [];
   if (terrain === "hole") {
-    if (!state.hasSpringBoots) {
-      return blocked(state, {
-        type: "blocked",
-        reason: "needs-spring-boots",
-        target,
-        terrain,
-      });
-    }
-
-    while (terrain === "hole") {
-      jumpedHoles.push(target);
-      target = {
-        x: target.x + delta.x,
-        y: target.y + delta.y,
-      };
-      terrain = getTerrainAt(level, target);
+    jumpedHoles.push(target);
+    target = { x: target.x + delta.x, y: target.y + delta.y };
+    terrain = getTerrainAt(level, target);
+    if (terrain === "hole") {
+      return blocked(state, { type: "blocked", reason: "hole-too-wide", target, terrain });
     }
 
     if (terrain === undefined) {
@@ -154,6 +143,12 @@ export function movePlayer(
     }
     if (terrain === "wall") {
       return blocked(state, { type: "blocked", reason: "wall", target });
+    }
+    if (!state.hasSpringBoots) {
+      return blocked(state, {
+        type: "blocked", reason: "needs-spring-boots",
+        target: attemptedTarget, terrain: "hole",
+      });
     }
   }
   if ((terrain === "water" || terrain === "lava") && !state.hasBoots) {
@@ -174,6 +169,14 @@ export function movePlayer(
   }
 
   let object = getObjectAt(level, target);
+  // A jump needs space to land, not permission to interact remotely. Resolved
+  // actors/doors are floor again; passive pickups and flower pads remain legal.
+  if (jumpedHoles.length > 0 && (
+    (object?.kind === "door" && !state.openedDoorIds.includes(object.id))
+    || (object?.kind === "enemy" && !state.defeatedEnemyIds.includes(object.id))
+  )) {
+    return blocked(state, { type: "blocked", reason: "occupied-jump-landing", target });
+  }
   if (object?.kind === "animal" && !state.rescuedAnimalIds.includes(object.id)) {
     if (jumpedHoles.length > 0) {
       return blocked(state, {

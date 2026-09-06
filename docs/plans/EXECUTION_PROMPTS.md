@@ -4,6 +4,14 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
+**Active work:** finish HOLE-01A v0.22.8 Phase 1 browser/native/publication
+qualification, root Astra with independent actual Sol review. Rules revision 3,
+`surprise-v6` / generated content revision 2 and seven minimally adjusted maps
+are implemented. The rules2/v5/revision1 baseline below is historical; do not
+restore only the old jump loop or old positive multi-hole fixtures. Existing pit
+art remains. Next after publication: Phase 2 connected ditch art/topology, root
+PT36, then Plan04. No physical acceptance is implied by source qualification.
+
 **Current handoff, 2026-09-06:** **v0.22.7 AUDIO-01A** is frozen at
 `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/native review is
 accepted; **web/Windows and all four public downloads are verified**. Final 578 project

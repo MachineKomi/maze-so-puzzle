@@ -246,6 +246,8 @@ export type BlockedReason =
   | "needs-antidote-leaf"
   | "needs-key"
   | "caged-friend"
+  | "hole-too-wide"
+  | "occupied-jump-landing"
   | "game-over";
 
 export type GameEvent =
