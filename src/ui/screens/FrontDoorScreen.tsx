@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ASSETS } from "../../assets";
+import { createNativeExitController } from "../../nativeExit";
 import { playSound } from "../../sound";
 import { CatalogueImage } from "../CatalogueImage";
 import { BUILD_VERSION } from "../version";
@@ -13,11 +14,21 @@ interface FrontDoorScreenProps {
 
 export function FrontDoorScreen({ playRef, muted, onPlay, blocked }: FrontDoorScreenProps) {
   const [exitNotice, setExitNotice] = useState(false);
+  const mounted = useRef(false);
+  const exitController = useRef<ReturnType<typeof createNativeExitController> | null>(null);
+  if (!exitController.current) exitController.current = createNativeExitController(window);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => { mounted.current = false; };
+  }, []);
 
   const requestExit = () => {
     playSound("menu", muted);
-    window.close();
-    window.setTimeout(() => setExitNotice(true), 180);
+    setExitNotice(false);
+    void exitController.current!.request().then((outcome) => {
+      if (mounted.current && outcome !== "requested") setExitNotice(true);
+    });
   };
 
   return (
@@ -54,7 +65,7 @@ export function FrontDoorScreen({ playRef, muted, onPlay, blocked }: FrontDoorSc
         </div>
         {exitNotice && (
           <p className="front-door-exit-note" role="status">
-            Your browser keeps this tab open. It is safe to close it whenever you are ready.
+            This window stayed open. Use its usual close button when you’re ready—or keep playing.
           </p>
         )}
       </div>

@@ -3,5 +3,5 @@
   "identifier": "main-window",
   "description": "Minimal permissions for the main game window",
   "windows": ["main"],
-  "permissions": ["core:default"]
+  "permissions": ["core:default", "core:window:allow-close"]
 }
