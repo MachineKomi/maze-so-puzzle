@@ -1,5 +1,16 @@
 # Wall depth and lighting — implemented WALL-04B contract
 
+**Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
+
+## HAZARD-02 candidate contract — web0.22.14
+
+Connected water/lava/poison remain zero-height floor surfaces. Base and local FX
+share exact rounded even-odd clipping, without erosion, blur, blend mode or whole
+receiver opacity animation. Catalog repeat periods are2.4/2.2/2.1tiles. Wall casts
+still exclude hazards and pits; no new lip, receiver, traversal rule or collision.
+Absent families emit no base image/pattern or FX owner. [HAZARD-02](plans/HAZARD-02-readable-living-surfaces.md) owns qualification; P13 beauty remains open.
+
+
 ## Current Human target — still open for beauty review, web0.22.13
 
 The [latest feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)

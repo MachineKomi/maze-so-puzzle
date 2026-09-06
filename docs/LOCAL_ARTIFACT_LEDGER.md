@@ -1,5 +1,21 @@
 # Local artifact ledger and cleanup review
 
+## 2026-09-07 release closure and wall baseline
+
+Astra created/reused these external outputs; no deletion/archive authorized.
+All paths are beneath `C:/GameDev/maze-game-qa/performance/`:
+
+| Directory | Files / bytes | Purpose and hold |
+| --- | --- | --- |
+| hazard-public-20260906 |3 /426209|First failed visible-version smoke, diagnosis and compiled correction comparison; retain failure evidence. |
+| hazard-public-corrected-20260907 |5 /5755790|Final0856104 public receipt and four phone/desktop screenshots; reproduce with `scripts/performance/verify-web-release.mjs`, installed Playwright1.62.1. Release evidence hold. |
+| wall04c-baseline-v02214 |4 /715151|Initial mislabeled14 entry payload; retain identity, do not use as corrected baseline. |
+| wall04c-baseline-v02214-label-fixed |4 /715196|Verified0856104 HTML/JS/CSS and identity only; shared unchanged public media. WALL-04C paired baseline. |
+
+Existing `dist/` reused in place for the label fix;387files156257279B, no new repo/media copy.
+Runtime source/fingerprints/public SHA values are in the7September public receipt.
+Review these retained evidence/caches at WALL-04C closure; no automatic cleanup.
+
 ## Execution outputs — 2026-09-06
 
 ### HAZARD-02 / physical-loot intake
@@ -17,8 +33,23 @@ Node24.19.0 and installed Playwright1.62.1; source runner and paths in
 in place. Initial unit failures (two cases: private parser import and too-small
 bubble edge margin) were corrected before the first656-test pass. Final source
 review additionally gates absent base image owners. No new dependency, media,
-repo clone, native package, deletion or archive. Final measured/public outputs
-will be added at closure.
+repo clone, native package, deletion or archive. Final source ada4cbc/harness ebdb958 and bd54001 outputs are retained:
+
+| Folder | Files / bytes | Purpose |
+| --- | ---: | --- |
+| `hazard-final-browser-20260906/` |38 /25,447,295|15 passing final-source cases,24 material/mode contexts, images and route fixtures.|
+| `hazard-five-pairs-20260906/` |30 /104,940,044|24 moving rows,24 compressed traces,4 captures, full report/summary.|
+| `hazard-idle-five-pairs-20260906/` |30 /124,164,533|24 eight-second idle rows with nonempty hazard assertion; full traces/frames/warmups.|
+| Repository `dist/` |387 /156,257,279|Frozen0.22.14 built in place; supersedes reusable0.22.13 build output, not its external entry baseline.|
+| QA `playtests/v02213/wall-perspective/` |2 /2,736,824|Human annotated/original screenshot inputs retained byte-for-byte.|
+
+Human image SHA-256: annotated
+`d39af99cb893a5d27e8812ee5868326bd1875f0711fd7e04489b697f610ebc80`;
+original `1b0dcabe25783b0926b99faca6f46eefd10539401c92a18fce1b984b2f15c65b`.
+These are preserved inputs, not disposable generated images. Public verification
+outputs will be recorded after deployment. A storage review is appropriate after
+wall refinement; no evidence, cache, input or hosted deployment is deleted or
+archived automatically.
 
 
 ### Jump camera / tall-wall continuation

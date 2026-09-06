@@ -1,5 +1,7 @@
 # Maze so Puzzle — playtest backlog
 
+**Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
+
 **Latest loot/camera intake:** [physical collection and account level](user-playtests/2026-09-06-physical-loot-and-account-level.md) is adopted by [LOOT-03](plans/LOOT-03-physical-collection-and-progression.md), immediately after HAZARD-02. It includes slower forceful multiaxis bursts/bounce/settle, finite range/graded vacuum, physical spin/trails, final-defeat Gold/Science, mixed chest and richer Mimic rewards, very rare eggs and rainbow account-XP crystals. All are planned, not shipped by0.22.14. The repeated camera report names0.22.12, before0.22.13 repair. [Queue](HUMAN_REVIEW_QUEUE.md) keeps fresh walls/jump observation and future loot feel visible.
 
 ## Latest intake — jump camera and unresolved tall walls

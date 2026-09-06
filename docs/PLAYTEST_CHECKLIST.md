@@ -1,5 +1,7 @@
 # Family playtest checklist
 
+**Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
+
 **Execution update,2026-09-06:** [refined programme](plans/00-integrated-implementation-roadmap.md)
 is authorized and running. Tall walls/dressing/jump0.22.13 is live and engineering-qualified
 within its recorded scope. P16 is ready; keep P13/P14/P15 and earlier observations.

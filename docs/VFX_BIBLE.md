@@ -1,5 +1,21 @@
 # Reward-first VFX contract — VFX-02A
 
+## Current hazard and loot continuation — 2026-09-06
+
+HAZARD-02 candidate0.22.14 replaces whole-surface pulsing and filtered masks with
+local water crests, small molten cores/currents and seven deterministic poison
+bubble owners per pattern. Bubbles vary duration3.8–6.2s, phase, size and drift;
+translation uses each mark's own bounding box. Full has local motion, Lite no FX,
+Reduced/Static composed still marks. No new JS animation loop or media. See
+[contract](plans/HAZARD-02-readable-living-surfaces.md).
+
+The Human now requests real physical collection and persistent rainbow XP.
+[LOOT-03](plans/LOOT-03-physical-collection-and-progression.md) supersedes the older
+presentation-only restriction for its explicit future slices, but today's reward
+renderer still credits through the old immediate engine behavior. Do not describe
+decorative particles as persistent pickups until the run/save/claim owner ships.
+
+
 Candidate, 2026-09-06. Root Astra implements; actual Sol independently reviews.
 Baseline is published v0.22.9, source cbe8ab8, current docs 7ad3816.
 This is a bounded first Plan02 slice, not the whole VFX overhaul.

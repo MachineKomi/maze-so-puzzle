@@ -6,8 +6,8 @@ Deployment Storage warning. Do not change its plan, retention or billing setting
 
 Production URL: [mazesopuzzle.com](https://mazesopuzzle.com/).
 Existing alias: [maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/).
-Both serve identical frozen v0.22.13 HTML/JS/CSS, verified2026-09-06 in the
-[public receipt](reviews/2026-09-06-v02213-public-verification.md). Browser saves are
+Both serve identical frozen v0.22.14 HTML/JS/CSS, verified2026-09-07 in the
+[public receipt](reviews/2026-09-07-v02214-public-verification.md). Browser saves are
 origin-local: the new domain does **not** automatically inherit saves from the
 old alias. Keep the old alias available; never clear saves to migrate domains.
 
@@ -16,6 +16,15 @@ The Vercel project is already connected to
 production build. The repository-owned deployment safeguard skips proven non-web
 changes, while GitHub backup pushes and CI continue. See the
 [storage investigation and evidence](reviews/2026-09-06-vercel-storage-investigation.md).
+
+## Web build input boundary
+
+`.vercelignore` excludes native/source evidence directories. Tests inside `src/`
+are still part of the app TypeScript graph during `npm run build`; they must not
+import excluded `src-tauri/` or `docs/` files, even if full-clone CI passes. Keep
+web release-identity tests to package/lock/UI inputs and native checks in their
+own lane. The0.22.14 correction retained a real TS2307 deployment failure that
+exposed this boundary; do not relax `.vercelignore` to package native evidence.
 
 ## Routine documentation checkpoints
 
@@ -372,3 +381,9 @@ the refreshed Poggle/Sprig portraits, repaired Home hero and separate title
 environment. Direct HEAD requests for all four corrective art paths succeeded.
 This verifies deployment and static reachability, not the pending physical
 iPad/TV/phone, clean-machine installation or qualified performance gates.
+# Latest verified web release
+
+Web0.22.14 is live from0856104: [public receipt](reviews/2026-09-07-v02214-public-verification.md).
+The version-consistency test deliberately imports only web/package/lock inputs:
+`src-tauri/` is excluded by `.vercelignore`; do not make app compilation depend on it.
+Docs-only closure must still follow the unchanged ignored-build procedure below.

@@ -1,5 +1,7 @@
 # Sequential specialist execution prompts
 
+**Latest sequencing override:** the Human now accepts0.22.13 tall3D walls and asks [WALL-04C refinements](../user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md). Finish the already-frozen HAZARD-02 qualification/publication, then balance wall thickness/height with bounded30% rear-tile occlusion, stronger cast/rim and eight lights before LOOT-03. Do not preserve the obsolete unresolved0.22.13 direction or no-occlusion restriction as a Human gate.
+
 **2026-09-06 current execution override:** HAZARD-02 is the active bounded web0.22.14 candidate after published tall walls/jump0.22.13. Then execute [LOOT-03](LOOT-03-physical-collection-and-progression.md): persistent physical authored pickups → enemy Gold/Science → mixed chests/Mimic lifecycle → recognition XP → rare eggs after protected usable inventory. The latest explicit Human request supersedes older no-new-XP/presentation-only reward restrictions for these slices. DELIGHT-02B/LEARN-01 and the wider roadmap remain next. [Human review queue](../HUMAN_REVIEW_QUEUE.md) is nonblocking unless a concrete dependent decision is required.
 
 Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
