@@ -1,6 +1,25 @@
 # Windows test builds
 
-## v0.22.3 V22-COMFORT1
+## v0.22.4 V22-RESCUE1 — published
+
+Frozen runtime/tag target: `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
+Stationary cage rescue: Ame stays beside the friend with unchanged steps, then
+the next accepted movement may turn away or enter the cleared tile. Inherits
+v0.22.3 pace, Dolphin and audio. No new iPad camera or phone-layout fix.
+
+- [Release/downloads](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.4)
+- [Manifest](V22-RESCUE1-v0.22.4-manifest.json) · [Playtest](V22-RESCUE1-v0.22.4-PLAYTEST.md) · [Checksums](V22-RESCUE1-v0.22.4-SHA256SUMS.txt)
+
+Unsigned x64 portable173424640 bytes, SHA-256
+`9888f8f2bbd4f6c2f6210e3eecf0104d852f3928cc03a74b338772647e28e7c0`.
+All sixteen old active campaign runs restart on the new rules fingerprint;
+durable progress survives. Close older binaries before opening this shared-save
+preview. Use X/Alt+F4; Title Exit repair is separate. The
+[publication receipt](V22-RESCUE1-v0.22.4-release-verification.json) records
+prerelease383434235 and four independently hash-matched public downloads.
+v0.22.3 remains immutable rollback.
+
+## Historical v0.22.3 V22-COMFORT1
 
 Current runtime/tag: `b834a8e6775ec024fc9f854c7a7ced8c096b6627`.
 The [web game](https://maze-so-puzzle.vercel.app/) includes the Dolphin field repair,

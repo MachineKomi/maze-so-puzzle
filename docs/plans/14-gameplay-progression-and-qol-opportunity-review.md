@@ -1,5 +1,14 @@
 # Plan 14 — gameplay, progression and quality-of-life opportunity review
 
+Human2026-09-06 [V23-12](../playtests/2026-09-06-v0223-v0224-intake.md) explicitly
+requests a post-completion JRPG exploration: separate spinoff versus optional
+mode, persistent levels/optional grinding, friends as potential fighters,
+auto-by-default turn-based battles with a compact manual move set, readable
+encounter buildup or visible patrols, and family co-op potential. Compare costs
+and the option to leave Maze so Puzzle complete and build a separate game.
+This is ideation only after current programme polish/RC-01, not authorization
+to rewrite current combat, add persistent XP or invent new launch dependencies.
+
 Status: execution brief only, prepared 2026-09-05. Final opportunity review is
 pending RC-01; no recommendation or new feature is approved by this document.
 Owner: root with Human decisions. Complete the eventual review in this same

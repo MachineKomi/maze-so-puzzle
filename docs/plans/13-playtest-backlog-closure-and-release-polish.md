@@ -1,5 +1,11 @@
 # Plan 13 — backlog closure and release polish
 
+Human2026-09-06 [intake](../playtests/2026-09-06-v0223-v0224-intake.md) adds
+Surprise Maze favourites/replay (V23-08), Garden egg-drop tuning after Plan10
+(V23-11), and any unfinished approved glow/art/roster/UI corrections. Seed-only
+replay across generator changes is not sufficient. This plan does not absorb
+the explicitly post-completion JRPG exploration; that stays in Plan14.
+
 Status: pending implementation after accepted Plan 11. Prepared 2026-09-05.
 Owner: root or the Human-triggered specialist named in its execution prompt.
 This plan precedes Plan 12 because polish may still change asset consumers.

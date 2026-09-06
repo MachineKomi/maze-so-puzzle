@@ -1,5 +1,11 @@
 # Lighting and wall-depth implementation plan
 
+Human2026-09-06 [V23-03](../playtests/2026-09-06-v0223-v0224-intake.md): Sky Hollow
+feels inverted because bright walls/dark floor break the learned hierarchy.
+Review light readable navigable floors against darker bounded walls across every
+authored pairing. Depth and neutral lighting reinforce this semantic clarity;
+do not defer the confusion merely because future wall shading may help.
+
 ## 0. Manager-reviewed execution addendum
 
 Read `docs/GAME_VISION_AND_DESIGN_SPEC.md`, `docs/plans/00-integrated-implementation-roadmap.md`, the accepted Art Bible, UI/UX spec, and this complete plan before implementation. Execution is gated on Plans 07A, 06, 03, root checkpoint 03M, 01, and the Human-approved movement-comfort checkpoint before FP-UI1. This addendum supersedes conflicting planning details.

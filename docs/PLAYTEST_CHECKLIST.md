@@ -8,17 +8,23 @@ Keep completed observations and build identities when newer builds arrive.
 
 - [Play online](https://maze-so-puzzle.vercel.app/) — this address follows the
   latest deployment; note the version shown before reporting.
-- [Download the v0.22.3 Windows portable](https://github.com/MachineKomi/maze-so-puzzle/releases/download/v0.22.3/Maze-so-Puzzle-0.22.3-V22-COMFORT1-b834a8e-locked-portable.exe)
-  — Dolphin repair, movement speeds and separate audio levels. Its
-  [release page](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.3)
+- [v0.22.4 Windows release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.4)
+  — stationary rescue, plus inherited Dolphin repair, speeds and audio levels.
+  Published; all four downloads independently byte/hash verified.
+  The [v0.22.4 playtest note](../release/V22-RESCUE1-v0.22.4-PLAYTEST.md)
   has instructions/checksums. Close Windows with X or Alt+F4; the title Exit
   button has a separately queued native-window issue.
 - [Decisions/steer list](HUMAN_DECISIONS.md) — no blocking answer needed today.
 
 You do not need to complete everything in one sitting. The affected iPad movement
-comparison remains open; for v0.22.3, P6 pace and P8 audio are most useful.
+comparison remains open; for v0.22.4, P7 rescue is the most useful new check.
 This build does not change the camera. Please do not clear game data
 to create a cold test; preserving your progress is more important.
+
+**Save compatibility:** all sixteen old-rules unfinished campaign saves restart
+through updated-maze messaging in v0.22.4. Durable completions, unlocks, earned
+friends, rewards and currency survive; old bests remain historical. Close older
+Windows builds before using this one; they share a save namespace.
 
 ## Build register
 
@@ -28,6 +34,7 @@ to create a cold test; preserving your progress is more important.
 | v0.22.1 V22-PERF1, runtime `8442b79` | Published web/Windows performance and input preview | P1–P4 below. Music, speeds, stationary rescue and Dolphin pixels are unchanged. |
 | v0.22.2 V22-CAMERA1, runtime `820ed39` | Published web/Windows camera-origin experiment | P1 is the priority: Maze 2 iPad taps and scenery scrolling. P2/P4 regression checks as convenient. No new audio, pace, rescue, Dolphin or phone-UI change. |
 | v0.22.3 V22-COMFORT1, runtime `b834a8e` | Web/Windows comfort preview: Dolphin field repair, Chill/Regular/Zippy and independent Music/SFX | P5/P6/P8; P2/P4 regression as convenient. No camera or stationary-rescue fix claimed. |
+| v0.22.4 V22-RESCUE1, runtime `45d8437` | Published web/Windows. Stationary rescue with unchanged steps and deliberate follow-up movement | P7 first; P5/P6/P8 remain cumulative. Not a new camera/phone-layout/audio-default fix. |
 
 ## Specific checks and results
 
@@ -90,9 +97,8 @@ FOV and cadence. Pace is a separate comfort feature, not a claimed camera repair
 - [ ] On laptop, try touch/drag pad then keyboard or board control. Does the old
   pad release cleanly? No need to force this if your device cannot combine inputs.
 
-Current v0.22.1 rescue still moves into the cage tile. Its separately requested
-stationary-rescue correction is pending; report only unexpected input behavior
-here. Pending.
+Historical v0.22.1–3 rescue moved into the cage tile. v0.22.4 changes this; use
+P7 alongside these held-input checks. Physical acceptance remains pending.
 
 ### P3 — Music timing (observations, correction pending)
 
@@ -139,11 +145,18 @@ Available in v0.22.3; Human acceptance pending.
 - [ ] Reopen: does the chosen pace persist? On iPad distinguish slower pacing
   feeling nicer from actual scenery scrolling becoming smooth. No camera fix claimed.
 
-### P7 — Stationary rescue (not yet shipped)
+### P7 — Stationary rescue (v0.22.4)
 
-PLAY-B will add a build-specific check when Ame remains beside a cage throughout
-rescue, then either turns away or moves forward on the next accepted input.
-v0.22.3 still has the previous rescue behavior; do not retest it as a correction.
+- [ ] Tap into Maze1's unicorn cage (or any friend), then release. Ame stays
+  visible beside it, cheers, rescues once and gains no movement step.
+- [ ] Turn away, or move into the now-cleared tile. Existing followers should
+  not collapse; the new friend joins from the cage.
+- [ ] Hold into another cage, release or change direction during the effect.
+  Does subsequent movement match your intention without an unwanted extra step?
+- [ ] Close normally and reopen after rescue. Same new-rules run and rescued
+  friend should return. No need to interrupt an animation deliberately.
+
+These checks are ready for v0.22.4; no Human rescue acceptance is claimed yet.
 
 ### P8 — Device audio balance (v0.22.3)
 
@@ -156,6 +169,12 @@ v0.22.3 still has the previous rescue behavior; do not retest it as a correction
   sound effects, or brief unwanted old song when your first action is Mute/Next?
 - [ ] Phone/laptop/Windows: any new distortion, clipping, unwanted volume jumps
   or disrupted track playback? Defaults remain Music22% / Sound effects100%.
+
+Received quick v0.22.3/24 feedback: sliders and three paces feel good; preferred
+phone/desktop mix is old Music10%/SFX100%. Calibrated75/75 controls and visible
+right-panel pace are queued, not in this build. iPad camera remains unsmooth;
+do not repeat the known failure just for us. Possible phone pad/minimap overlap
+and Sky Hollow floor/wall confusion are routed. [Full intake](playtests/2026-09-06-v0223-v0224-intake.md).
 
 These are physical listening checks; automated gain measurements passed but do
 not prove the balance through the iPad speakers. Do not buy new hardware for this test.
