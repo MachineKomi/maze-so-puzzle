@@ -47,6 +47,18 @@ is superseded only for AUDIO-01A's explicitly bounded scope below.
 
 ## V. Independent Music / Sound effects levels (early AUDIO-01V)
 
+**Follow-up AUDIO-01V2,2026-09-06 (queued):** the Human liked the sliders but
+prefers the old effective Music10%/SFX100% balance on phone/desktop, with both
+calibrated UI controls defaulting to75% and adjustment room above. This supersedes
+the initial22/100 default below for the next implementation, not frozen v0.22.3/4.
+Read [V23-01](../playtests/2026-09-06-v0223-v0224-intake.md). Define explicit gain
+curves and versioned migration preserving existing effective choices; zero is
+silence,100% offers safe usable headroom, mute leaves both preferences intact.
+Verify actual graph response/clipping and disclose any unavoidable saturated
+legacy value rather than silently reset it. Pair this small correction with the
+next qualified UI checkpoint when ownership permits; no new art/OST mastering
+or full readiness redesign is needed merely to calibrate these controls.
+
 Source: [Human iPad balance report](../user-playtests/2026-09-06-ipad-audio-balance.md).
 The iPad has much quieter effects relative to music than the phone/laptop/native
 comparisons. This is a listening observation, not proof of old hardware failure.

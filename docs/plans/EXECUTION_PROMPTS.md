@@ -4,47 +4,54 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-**Newest handoff, 2026-09-06:** v0.22.3 V22-COMFORT1 frozen runtime `b834a8e`
-combines accepted Tessera field repair, PLAY-A and AUDIO-01V. Root completes
-public-release verification, then hands PLAY-B stationary rescue to actual Sol
-as sole isolated runtime writer; Astra independently reviews. Read
-[PLAY-B preflight](../reviews/2026-09-06-play-b-sol-preflight.md) and current joint
-state for the exact authorization/allocation/start SHA. P5/P6/P8 are new family
-checks; iPad camera stutter remains unresolved. Do not rerun completed slices or
-treat historical writer assignments below as current. No Human blocker exists.
+**Current handoff, 2026-09-06:** PLAY-B is independently accepted, merged and
+frozen for **v0.22.4** at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
+Web source is pushed; final canonical verification and Windows publication are
+**pending**, owned by root Astra. Read [PLAY-B acceptance](../reviews/2026-09-06-play-b-astra-review.md)
+and [Sol handback](../reviews/2026-09-06-v22-play01b-stationary-rescue-candidate.md).
+The last fully verified release/rollback is v0.22.3 V22-COMFORT1 `b834a8e`,
+which already contains Tessera repair, PLAY-A and AUDIO-01V. Do not rerun them.
+Rules revision 2 restarts older unfinished authored runs in all sixteen mazes;
+durable completions/unlocks/rewards/history survive. No physical gate is implied.
 
-**Current handoff, 2026-09-06:** Astra's PERF-02A is published and actual-Sol-
-reviewed as **v0.22.2 V22-CAMERA1**, frozen `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`.
-[Receipt](../../release/V22-CAMERA1-v0.22.2-release-verification.json).
-No writer is currently running. P1 is now Maze 2 on the affected iPad in v0.22.2;
-efficacy is unproven. If still poor, Astra resumes the next isolated PERF-02
-probe. While feedback is pending, root completes the separate Tessera publication
-integration, then assigns actual Sol PLAY-A pace and Astra read-only review,
-followed by PLAY-B stationary rescue. UI-NATIVE-EXIT-01 is queued in V22-UI-01.
-Do not rerun the completed camera implementation or infer all performance gates
-passed. Older in-flight wording below is historical, superseded by this handoff.
+**One active runtime writer:** actual Sol owns **UI-NATIVE-EXIT-01** in
+`C:/GameDev/maze-game-ui-exit`, branch `codex/v22-ui-native-exit`, from
+`45d8437`. Astra independently reviews; root is release/documentation-only
+while Sol writes. At most +400 gzip9 JS bytes is authorized for this bounded
+candidate, measured rather than automatically consumed; zero media, dependency
+or layout change. Root holds the heavy-test slot for frozen v0.22.4 qualification.
+No candidate Exit fix is folded into that release. After the separate Exit
+handback/review, prototype short-height gameplay/Book before broader UI changes.
+[UI plan](V22-UI-01-short-height-and-reward.md) and
+[technical preflight](../reviews/2026-09-06-v22-ui01-preflight.md) define the seam.
 
-The v0.22.0 Human/Opus review is reconciled. Read the independent
+Read the complete [new Human intake](../playtests/2026-09-06-v0223-v0224-intake.md)
+before later assignments. V23-01 queues a separate early **AUDIO-01V2** before
+AUDIO-01A: calibrated defaults displayed as Music75%/SFX75% must match the old
+perceived Music10%/SFX100% mix, preserve existing chosen effective gains through
+versioned conversion, and prove safe headroom/mute/persistence. V23-04 adds
+immediately visible HUD pace and intentional speaker+cog settings art to the
+later UI tranche, not Exit. V23-12 is **Plan14 after RC-01**, planning-only JRPG
+spinoff/mode exploration; no permanent XP or combat rewrite now. Root assigns
+each seam serially; these hooks do not expand Sol's active Exit-only ownership.
+
+PERF-02C is a separate serial experiment at an explicitly frozen source;
+never change UI geometry during matched camera measurements or run another
+runtime writer beside Sol. The iPad scrolling gate remains open after the
+reported v0.22.1/v0.22.2 failures. Native Exit, phone fit and physical/family
+acceptance are not closed by publication. No new Human blocker is required.
+
+Historical review anchors: independent
 [Astra](../reviews/2026-09-05-astra-v0220-review.md) and
-[Sol](../reviews/2026-09-05-sol-v0220-review.md) assessments and the
-[88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md).
-The v0.22.1 V22-PERF1 preview is published from
-`8442b79db11a59e23f23c59f213116e7b8f54592`. The Human's affected-iPad comparison
-remains outstanding; their latest instruction permits safe development meanwhile.
-**ART-HOTFIX-01 candidate `c724c95` is pushed on its isolated branch. Astra now
-implements [V22-PERF-02A](V22-PERF-02-moving-camera-isolation.md); Sol reviews
-read-only.** The newly received [physical feedback](../user-playtests/v0221-playtest-feedback.md)
-now prioritizes Astra's V22-PERF-02 movement/camera isolation before the prepared
-PLAY-A/PLAY-B seams: phone smooth, eighth-generation iPad movement poor from
-Maze 2 despite responsive menus/interaction effects/BGM. See the [publication receipt](../../release/V22-PERF1-v0.22.1-release-verification.json)
-and [playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md). Read Sol's
-[R1 acceptance](../reviews/2026-09-05-sol-v22-perf01-r1-review.md) and the
-[R1 response](../reviews/2026-09-05-v22-perf01-r1-response.md).
-The completed publication below used clean isolated checkouts and preserved the
-accepted runtime except coordinated version metadata; it is now history.
-Do not restart Agent 01, start Agent 04
-or automatically adopt Opus proposals. Preserve the praised desktop/iPad UI.
-Only one runtime writer; blocking device/family feedback and PT36 remain open.
+[Sol](../reviews/2026-09-05-sol-v0220-review.md) v0.22.0 assessments,
+[88-row joint ledger](../reviews/2026-09-05-sol-astra-opus5-v4-disposition.md),
+[R1 acceptance](../reviews/2026-09-05-sol-v22-perf01-r1-review.md),
+[v0.22.1 receipt](../../release/V22-PERF1-v0.22.1-release-verification.json),
+[v0.22.2 receipt](../../release/V22-CAMERA1-v0.22.2-release-verification.json)
+and [v0.22.3 receipt](../../release/V22-COMFORT1-v0.22.3-release-verification.json).
+Those assignments/releases remain evidence, not instructions to restart work.
+Preserve the praised desktop/iPad UI, do not automatically adopt Opus proposals,
+and do not start Agent04 before its actual prerequisites and root PT36 gate.
 
 Status: manager-reviewed copy/paste runbook
 
@@ -94,23 +101,22 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. Root — continue safe work; accumulate Human checks
+## Current. Root publication; Sol's isolated Exit seam; cumulative Human checks
 
-The latest Human instruction permits progress while tomorrow's playtest is
-pending. Start the bounded ART-HOTFIX-01 candidate from the approved corrected
-Tessera source and independently review it. That bounded candidate is now pushed;
-finish its publication integration separately without delaying
-[V22-PERF-02A](V22-PERF-02-moving-camera-isolation.md) in response to the failed
-iPad movement run. Afterwards advance
-[V22-PLAY-01](V22-PLAY-01-pace-and-stationary-rescue.md): Sol implements PLAY-A
-pace first; Astra independently reviews it before PLAY-B stationary rescue.
-Missing Human performance feedback alone does not halt independent work;
-keep real engineering dependencies and one runtime writer. Record exact new
-builds and preserve immutable v0.22.1 for later comparison.
+Root completes the frozen v0.22.4 native/canonical/public-download transaction
+without changing runtime, then records and pushes exact evidence. Sol's active
+UI-NATIVE-EXIT-01 assignment is isolated as specified above; coordinate heavy
+checks with root's release slot. Require actual native process termination and
+save/settings recovery, not a browser close mock or compile-only assertion.
+The next UI tranche is a reviewed short-height gameplay/Book prototype, not a
+one-shot redesign. Missing physical feedback does not blanket-stop independent
+work; preserve open P1/P5/P6/P7/P8 results and the v0.22.3 rollback. PERF-02C
+requires its own serial writer, matched source and disclosed performance limits.
 
 Read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md) and
 [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) before selecting their
-turns: after queued play/UI work, AUDIO-01A then V22-HOLE-01 precede Plan 04.
+turns: the early AUDIO-01V2 calibration precedes broader AUDIO-01A, then
+V22-HOLE-01 precedes Plan 04. None starts alongside the active Exit writer.
 Plan 02 must deliver the existing CR-AUDIO creative trials using the shared
 readiness seam; 07B qualifies/finishes rather than recreates it. Plans 04/02/05/09
 consume the single-width rule and connected hole footprint; old successful
@@ -120,18 +126,15 @@ End every response with [PLAYTEST_CHECKLIST](../PLAYTEST_CHECKLIST.md) and
 [HUMAN_DECISIONS](../HUMAN_DECISIONS.md). Update build-specific outstanding
 checks and concrete questions without inventing approval from silence.
 
-### Pending Human evidence — affected-iPad v0.22.1 comparison
+### Pending Human evidence — successor-specific physical checks
 
-Use the [published preview](https://maze-so-puzzle.vercel.app/) and
-[playtest note](../../release/V22-PERF1-v0.22.1-PLAYTEST.md). Compare Full+Full
-fresh and sustained, Lite+Full, and Lite+Reduced on the affected iPad in the same
-ordinary 23×23 maze with about five followers. Record the device/environment,
-duration/transitions, responsiveness/smoothness and held/steered/released input.
-
-**Astra — HIGH** evaluates the evidence when supplied. Continued Lite+Reduced
-stutter raises the already-scoped V22-PERF-02 isolation priority. The latest
-Human authorization allows safe queued work meanwhile; do not infer a physical
-pass or restart publication of the already frozen preview.
+Use the [cumulative checklist](../PLAYTEST_CHECKLIST.md) and record the displayed
+version before a natural session. Existing iPad failures are received evidence;
+do not request the same reproduction merely to permit engineering progress.
+After v0.22.4 qualifies, P7 covers stationary rescue; inherited pace/audio/art
+checks remain separate. A new P1 camera comparison needs an identified matching
+successor or bounded diagnostic, not a claim that rescue or pace fixes scrolling.
+Astra evaluates supplied evidence; no physical result is inferred from silence.
 
 ### Completed Astra — v0.22.1 V22-PERF1 preview publication (history)
 

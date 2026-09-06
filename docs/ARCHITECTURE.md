@@ -166,7 +166,7 @@ contextual rendition remains distinct from the repaired 256px field derivative.
    rounded SVG paths in stable world coordinates, including holes, diagonal
    contacts, and the camera gutter used by the renderer.
 12. `src/campaign.ts` owns versioned campaign order/history and ID-based access
-    migration. `src/progress.ts` stores sanitized schema-v5 progress, stable
+    migration. `src/progress.ts` stores sanitized schema-v6 progress, stable
     unlocked story IDs, revision-scoped route records, and a bounded completion-
     receipt ledger in browser `localStorage`; old best steps remain explicitly
     historical after a map edit and a resumed pending exit cannot bank twice.
@@ -175,6 +175,11 @@ contextual rendition remains distinct from the repaired 256px field derivative.
     progressive-hint state, and recoverable pending completion. It fails closed
     on changed content, reports that narrow restart case to the player, and
     rejects tester, generated, corrupt, and inconsistent states.
+    Global gameplay-rules revision 2 is included in authored/generated content
+    fingerprints. Pre-rules-2 active runs and fingerprint-less schema-v1 runs
+    fail closed; durable Book/campaign records survive. Stationary interactions
+    are validated independently of movement-pickup counts, with distance and
+    capability checks retained. A zero-step rescue still protects maze switching.
 14. `src/resetProgress.ts` provides the UI-independent full-reset boundary. It
     removes only the current, v3, v2, legacy, and active-run Maze so Puzzle keys,
     isolates each storage failure, and returns both a fresh default value and an
@@ -227,6 +232,9 @@ contextual rendition remains distinct from the repaired 256px field derivative.
     exit never is.
 21. `src/game/followerTrail.ts` keeps a bounded loop-free history of squares Ame
     has left and selects distinct visible footprints for rescued friends.
+    PLAY-B adds a new rescued ID at its cage anchor without resetting existing
+    slots; its next real move joins the ordinary trail. Cosmetic procession is
+    not persisted and retains the established gather-on-load fallback.
 22. `src/cameraMotion.ts` converts engine/world coordinates into one smoothly
     translated full-maze render surface. The 6 × 6 camera clips that world rather
     than rebuilding a different set of local tiles every step, so terrain,

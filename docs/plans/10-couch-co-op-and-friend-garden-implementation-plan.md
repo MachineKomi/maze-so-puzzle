@@ -1,5 +1,11 @@
 # Plan 10 — Couch Co-op and Friend Garden Implementation Plan
 
+Human2026-09-06: [V23-11 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
+adds rare friend eggs from enemies/chests after Garden/egg ownership exists,
+with bounded higher chances from stronger enemies. Specify stable rolls,
+duplicates/pity and save safety; tune in Plan13 if necessary. No campaign grind
+requirement or bypass of greybox/family gates is implied.
+
 > **Human-approved future implementation plan. No implementation is authorized before Plan 09 is accepted and closed.**
 >
 > **Prepared:** 2026-09-03

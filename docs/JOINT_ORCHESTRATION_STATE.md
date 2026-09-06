@@ -7,7 +7,18 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
-- **Current runtime: v0.22.3 V22-COMFORT1**, frozen `b834a8e6775ec024fc9f854c7a7ced8c096b6627`.
+- **Current frozen release candidate: v0.22.4**, source
+  `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`. PLAY-B stationary rescue is
+  independently accepted and merged. Web source is pushed; final canonical
+  verification and Windows publication are **pending**, owned by root Astra.
+  Do not infer a completed release from the version, merge or push. See the
+  [Astra acceptance](reviews/2026-09-06-play-b-astra-review.md) and
+  [Sol handback](reviews/2026-09-06-v22-play01b-stationary-rescue-candidate.md).
+  Rules revision 2 changes all sixteen authored fingerprints: older unfinished
+  authored runs restart with the updated-maze notice, while durable completions,
+  unlocks, rewards and historical bests survive. P7 and all applicable inherited
+  physical/family checks remain open. No camera or native Title Exit fix is included.
+- **Last fully verified published rollback: v0.22.3 V22-COMFORT1**, frozen `b834a8e6775ec024fc9f854c7a7ced8c096b6627`.
   Accepted Tessera field alpha repair + PLAY-A Chill/Regular/Zippy + AUDIO-01V
   independent Music/SFX levels. Exact-source CI/deployment,519 project tests,
   136 art tests,12 canonical journeys and native normal close/reopen passed.
@@ -15,18 +26,35 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   Web and Windows are published; all four public downloads verified byte-identical.
   [Publication receipt](../release/V22-COMFORT1-v0.22.3-release-verification.json).
   P5/P6/P8 Human acceptance remains open; **no iPad camera fix** is included.
-  The older current-preview wording below is retained as publication history.
+  The canonical web address may advance before Windows publication; verify its
+  displayed build and exact bytes rather than assuming both channels agree.
 
 - **Latest audio intake, 2026-09-06:** iPad SFX are much quieter against BGM than
   on phone/laptop/native. Independent per-device Music/Sound effects sliders
-  are authorized and scoped in AUDIO-01V after accepted PLAY-A; Astra implements,
-  Sol reviews. Implemented and qualified in v0.22.3; physical listening pending. Preserve the active sole-writer assignment
-  and existing default mix; verify real gain behavior before blaming hardware.
+  were implemented by Astra and reviewed by Sol in AUDIO-01V after PLAY-A.
+  Implemented and qualified in v0.22.3; physical listening remains separately
+  tracked. AUDIO-01V2 below supersedes the original default-mix choice; verify
+  real gain behavior before blaming hardware.
   [Source](user-playtests/2026-09-06-ipad-audio-balance.md).
 
-- **Latest physical result, 2026-09-06:** [Human v0.22.2 feedback](user-playtests/v0222-playtest-feedback.md) reports no obvious regression, perhaps slight improvement, but scrolling still stutters on iPad. Character/animation movement is smooth while the camera stays clamped; desktop browser does not exhibit the same symptom. The iPad gate is **not passed**. Possible thin lines need investigation, not a fabricated regression verdict. Older “awaiting P1” statements below record pre-feedback publication state. Astra owns next moving-terrain/filter isolation; Sol's independent pace slice stays separate. Texture-scale and Lanternlight level-design steer is routed in backlog/roadmap.
+- **Latest Human intake, 2026-09-06:** the
+  [v0.22.3/v0.22.4 routing record](playtests/2026-09-06-v0223-v0224-intake.md)
+  captures all fourteen items and the pace/glow follow-up. V23-01 queues the
+  separate early AUDIO-01V2 calibrated 75%/75% controls before AUDIO-01A, with
+  the default perceived mix matching old Music10%/SFX100% and versioned conversion
+  preserving existing users' chosen effective gains. V23-04 belongs to later
+  UI HUD pace/settings work, not the active Exit-only scope. V23-12 is Plan14
+  exploration after RC-01; no JRPG/progression rewrite is authorized now. Positive
+  pace feedback is not a blanket physical/camera/save/rescue acceptance.
 
-- **Published current preview: v0.22.2 V22-CAMERA1**, runtime/tag `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`. Astra implemented fixed-origin, resize-safe percentage camera translation; actual GPT-5.6 Sol High independently approved source, geometry, final test observer and disclosed native Exit exception. It is a controlled experiment, **not a proven physical-iPad fix**. No pace, FOV, engine/content/save, art, audio or dependency change. Frozen attachment/test-observer checkpoint: `b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c`. [Current receipt](../release/V22-CAMERA1-v0.22.2-release-verification.json).
+- [Primary WebKit research](reviews/2026-09-06-ipad-webkit-research.md) finds
+  relevant repaint/composition, SVG and layer-memory risks, not evidence that
+  smooth scrolling is impossible on this iPad or a matching confirmed bug.
+  PERF-02C remains a bounded diagnostic, not an accepted camera fix.
+
+- **Recorded v0.22.2 physical result, 2026-09-06:** [Human feedback](user-playtests/v0222-playtest-feedback.md) reports no obvious regression, perhaps slight improvement, but scrolling still stutters on iPad. Character/animation movement is smooth while the camera stays clamped; desktop browser does not exhibit the same symptom. The iPad gate is **not passed**. Possible thin lines need investigation, not a fabricated regression verdict. Moving-terrain/filter isolation remains a separate serial workstream; completed pace work is not its remedy. Texture-scale and Lanternlight level-design steer is routed in backlog/roadmap.
+
+- **Historical preview: v0.22.2 V22-CAMERA1**, runtime/tag `820ed39f00e8c6bd808a0c084ccc2c67396ebb13`. Astra implemented fixed-origin, resize-safe percentage camera translation; actual GPT-5.6 Sol High independently approved source, geometry, final test observer and disclosed native Exit exception. It is a controlled experiment, **not a proven physical-iPad fix**. No pace, FOV, engine/content/save, art, audio or dependency change. Frozen attachment/test-observer checkpoint: `b0e6e7c42b2d3fec6656d3e12590bc36563e1f9c`. [Historical receipt](../release/V22-CAMERA1-v0.22.2-release-verification.json).
 - **Prior immutable preview: v0.22.1 V22-PERF1**, runtime/tag source `8442b79db11a59e23f23c59f213116e7b8f54592`. This is the independently accepted R1 runtime `91678d1a7f97055dc2f167f8a3e7106226817306` with only seven coordinated version fields changed across six files.
 - Sol's pushed review checkpoint is `c19128b7a45bc2179370bf55cfc8ab5851dbf008`; its [R1 verdict](reviews/2026-09-05-sol-v22-perf01-r1-review.md) accepts preview promotion, not sustained performance or physical-device success. Original [candidate](reviews/2026-09-05-v22-perf01-candidate.md), [R1 response](reviews/2026-09-05-v22-perf01-r1-response.md), rejected attempts and hash-bound measurements remain history.
 - Astra completed the bounded publication transaction from an isolated worktree. Main fast-forwarded from `461cab02b065a1d0f654c49189ed24108c22c5a8`; frozen attachment documentation is `487afcffb2f91b433f79cc67d5ce4fd29a013552`. Later publication documentation is separate. The [receipt](../release/V22-PERF1-v0.22.1-release-verification.json) binds the immutable public artifacts and exact runtime CI/deployment.
@@ -37,7 +65,25 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 2. Release and deployment
 
-### Current v0.22.3 — comfort preview
+### Current v0.22.4 — publication transaction pending
+
+- Frozen source: `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`; accepted PLAY-B
+  runtime `f3f090a7f8a5b8eb76382f31161345eb8a3d630f`, Sol evidence handback
+  `b6f0003e4bfb71c332c42f6437a3ae8b9ea7ab8d`.
+- Root Astra owns only this frozen release and documentation; actual Sol owns
+  the separately isolated UI-NATIVE-EXIT-01 runtime candidate (§3). Web source is pushed, but final
+  canonical raw-byte verification, native qualification and Windows publication
+  are not recorded complete here. Fill actual final identities only from receipts.
+- Scope: stationary adjacent rescue, truthful cage/hole traversal, follower
+  joining, save/navigation guards and distinct route-input/movement-step metrics.
+  Accepted implementation allocation: +215 gzip9 JS bytes; zero CSS/public/
+  decoded-image/dependency growth. Release-version bytes are measured separately.
+- Inherits v0.22.3 Tessera repair, pace and audio controls. No camera, short-height,
+  Title Exit, signing/installer or physical-device acceptance is implied.
+- Immediate rollback is the complete v0.22.3 release below; never roll back only
+  the rules fingerprint while retaining PLAY-B engine/save behavior.
+
+### Historical v0.22.3 — last fully verified publication and rollback
 
 - [Web](https://maze-so-puzzle.vercel.app/): exact raw frozen HTML/JS/CSS match;
   CI34001890372 and Production6287529696 passed at `b834a8e`.
@@ -53,29 +99,6 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 - Native WebView2 152.0.4191.62: new synthetic profile, seeded Maze2, live settings,
   normal OS close/reopen twice, same run/pace/levels restored. Title Exit still
   needs its separately queued repair. No signing/installer/physical listening pass.
-
-Next: PLAY-B stationary rescue with actual Sol as sole runtime writer in
-`C:/GameDev/maze-game-play-b`, branch `codex/v22-play-b`, starting at pushed
-`c77e7d7e428e1db17ef4fd223cfc9c5614bbe638`. Astra is read-only technical reviewer;
-root may update distinct release/orchestration documents but not runtime.
-[Sol preflight](reviews/2026-09-06-play-b-sol-preflight.md) finds no Human blocker.
-Astra authorizes up to +900 JS gzip9 bytes for the bounded PLAY-B candidate,
-zero CSS/public/assets/decoded-image/dependency growth; measure the exact delta,
-request review before exceeding it, do not allocate unused capacity as growth.
-Acceptance requires state/route/follower/save/navigation proof; fail-closed old
-active runs must be disclosed while all durable progress survives. Candidate
-branch commits/pushes are backups, not main promotion or family acceptance.
-PERF-02 moving-terrain diagnostics remain a
-separate read-only investigation until writer ownership is available. V22-UI-01
-and AUDIO-01A follow. Do not silently begin Plan04 or treat physical gates as passed.
-
-Prepared after publication: [PERF-02C](reviews/2026-09-06-perf02c-layer-preflight.md)
-single-layer mechanism experiment and [UI-01 preflight](reviews/2026-09-06-v22-ui01-preflight.md).
-Both are Astra-team technical preparation, not actual Sol acceptance or runtime
-changes. Root reconciled UI-01's obsolete all-performance-first wording: after
-PLAY-B review, independent Exit/short-height work can advance against frozen
-references, but never alongside a matched camera experiment. No Human decision
-blocks these engineering seams. Sol remains the only active runtime writer.
 
 ### Historical v0.22.2 — experiment delivered, iPad scrolling still unresolved
 
@@ -162,98 +185,54 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**Current next action, 2026-09-06:** **Astra is sole runtime owner**, following
-actual Sol's explicit PLAY-A handback. Clean pushed candidate branch
-`codex/v22-tessera-integration` at
-`c766228ff25064c1df973bfb9b2bd2940ca86fce`, worktree
-`C:/GameDev/maze-game-v22-tessera-integration`, contains accepted Tessera art
-(`f6d54e1`) and pace runtime (`07897d9`). [Astra acceptance](reviews/2026-09-06-play-a-astra-acceptance.md)
-records source, visual, exact browser-evidence and independently rerun static/
-15-test review. Sol's full project502/502, pace6/6, inherited5/5 and UI1/1 pass;
-JS153514, CSS23510, public165031011, exact +230JS allocation. These are not yet
-deployed or physical-device accepted; main/runtime v0.22.2 remain intact.
+**Release owner: root Astra; runtime owner: actual Sol in the isolated Exit task.** PLAY-B is accepted,
+merged and frozen for v0.22.4 at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
+PLAY-B has handed back. Root completes the pending native,
+canonical-web and public-download gates, record exact evidence, and commit/push
+the reviewed documentation checkpoint. Source push is not publication acceptance.
+Do not mutate the frozen runtime to fold later feedback into this release.
 
-Merge latest main documentation into that isolated branch, then implement
-**AUDIO-01V** (independent Music/SFX levels) as a bounded Astra seam with Sol
-review. Preserve the current intended default mix and prove effective gain;
-no blanket cue amplification. Publish a properly versioned web/Windows successor
-after its own packaging gates; do not deploy unversioned candidate runtime.
-If audio cannot finish within a bounded checkpoint, ship accepted art/pace
-separately with explicit exclusions. PLAY-B and V22-UI-01 remain separate work.
+**Active independent runtime task:** actual Sol is the sole runtime writer for
+**UI-NATIVE-EXIT-01** in `C:/GameDev/maze-game-ui-exit`, branch
+`codex/v22-ui-native-exit`, from frozen `45d8437`; Astra independently reviews.
+Root does not edit runtime/main while Sol writes. The candidate may use at most
++400 gzip9 JS bytes, allocating only measured growth, with zero media/dependency/
+layout change. Repair native normal close through the smallest permitted
+platform seam; require actual process exit plus save/settings recovery. Root
+retains the heavy-job slot for v0.22.4 canonical/native/publication work; Sol must
+coordinate before heavy verification. The current X/Alt+F4 workaround remains
+until the separately versioned Exit fix is qualified; it is not part of v0.22.4.
 
-PERF-02A's physical P1 still fails. [PERF-02B desktop probes](reviews/2026-09-06-perf02b-moving-terrain-review.md)
-completed15/15 with no reproduced fault. One world-layer hint is a candidate for
-further DPR/large-world/resource/seam checks, not a published iPad fix. All raw
-timings are contaminated/report-only. Keep each seam/build distinguishable and
-every existing device/family gate open. The older queue paragraphs below are
-history, not a competing writer assignment.
+Then Sol prototypes **V22-UI-01 short-height gameplay and Book fit** before
+propagating it. Preserve the praised desktop/iPad composition and six-tile
+camera, live input, pace/audio preferences and reviewed rescue semantics. Read
+the [UI plan](plans/V22-UI-01-short-height-and-reward.md) and
+[technical preflight](reviews/2026-09-06-v22-ui01-preflight.md). The preflight is
+Astra-team preparation, not actual Sol acceptance or a second implementation.
 
-**New physical feedback, 2026-09-05:** the Human's
-[v0.22.1 web playtest](user-playtests/v0221-playtest-feedback.md) reports buttery
-smooth movement on their phone, but severe movement lag on an eighth-generation
-iPad from Maze 2 onward, despite smooth Maze 1, menus, stationary interaction
-animations and prompt BGM. The iPad has 32GB storage, not a reported RAM value.
-The later [minimum-settings follow-up](user-playtests/2026-09-05-v0221-graphics-minimum-follow-up.md)
-reports only slight relief; phone model is Samsung S25 Plus or similar. Exact
-OS/browser/named Quality/Motion settings are not yet recorded. This failed
-observed iPad run now prioritizes **V22-PERF-02 movement/camera isolation before
-V22-PLAY-01**. The bounded Tessera candidate is pushed at
-`c724c954fd302d22f391d25e88ab467301ac047c` on `codex/tessera-field-hotfix`;
-Astra inspected its repaired field pixels and exact one-row catalogue change,
-but canonical manifest/publication integration remains pending. It must not delay
-the independent [PERF-02A coordinate experiment](plans/V22-PERF-02-moving-camera-isolation.md).
-Do not wait
-for another reproduction before investigating, blame device age, declare all
-mobile devices qualified, or treat Chill pace as the performance remedy.
+**PERF-02C remains a separate serial experiment**, not a competing writer:
+[bounded layer preflight](reviews/2026-09-06-perf02c-layer-preflight.md). Pin its
+actual source, Regular pace and reference views afresh. Do not change UI geometry
+during matched camera measurements or compare new UI timing with an old baseline.
+Its [PERF-02B probes](reviews/2026-09-06-perf02b-moving-terrain-review.md) completed
+15/15 without reproducing the iPad fault; the layer hint is a hypothesis, not a
+published performance fix. Root may explicitly sequence that bounded experiment
+between independently frozen UI seams, retaining one writer and actual review.
 
-**Latest Human authorization, 2026-09-05:** playtesting is deferred until the
-Human has time tomorrow; continue safe implementation in the meantime. Missing
-device feedback is an open acceptance row, not a blanket stop on subsequent
-work. Do not mark those rows passed or alter the immutable v0.22.1 comparison.
-Keep one runtime writer, evidence-based sequencing and real dependency checks.
-The **ART-HOTFIX-01** Sol candidate is backed up, visually reviewed by Astra and
-awaiting final publication integration from the approved recovery master.
-**Astra's PERF-02A runtime work is complete and Sol-reviewed**; physical efficacy
-is pending, with no active writer. The [V22-PLAY-01 brief](plans/V22-PLAY-01-pace-and-stationary-rescue.md)
-is prepared for the following separately reviewed pace and rescue seams.
+Physical iPad scrolling acceptance remains open after the reported v0.22.1 and
+v0.22.2 failures. Do not demand another reproduction of an already reported
+failure, blame device age, or call Chill pace a camera remedy. Original
+performance limits remain: unexplained recovery timeout, mixed Full sustained
+tails, missing causal attribution, and unqualified multi-maze/resource/native
+timing. Contaminated desktop evidence cannot close those gates.
 
-Every response ends with links to [PLAYTEST_CHECKLIST](PLAYTEST_CHECKLIST.md)
-and [HUMAN_DECISIONS](HUMAN_DECISIONS.md). Keep build-specific tests cumulative
-and track real questions without requiring answers to routine implementation
-choices. Current feedback is preserved in the
-[audio/hole intake](user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
-
-**Received Human evidence: affected-iPad v0.22.1 movement remains poor; settings-
-specific comparison is still outstanding.** Publication is complete. Follow the
-[playtest note](../release/V22-PERF1-v0.22.1-PLAYTEST.md) on the affected iPad in
-the same ordinary 23×23 maze with about five followers: Full quality + Full
-motion fresh and sustained, then Lite + Full, then Lite + Reduced. Record model,
-iPadOS, browser/PWA, charging/Low Power Mode, duration, maze transitions and
-whether each setting actually feels responsive and smooth.
-
-Also hold, steer and release through successful doors, battles, rescues and jumps
-as encountered; on desktop try pad→keyboard/board takeover. Sol's delayed-chain
-unlock and stale-pad defects are closed in this preview. Desktop lifecycle checks
-cannot establish physical latency, background behavior, GPU cost or sustained
-smoothness.
-
-Original performance limitations remain open: the unexplained recovery timeout,
-mixed/worse Full sustained p95/p99, occasional tails, missing >50 ms causal
-attribution, repeated single-corridor soaks, multi-maze/music/resource retention
-and timed Tauri/WebView2. No broad contaminated performance cohorts were repeated
-for publication and no physical-iPad success is inferred.
-
-- **ART-HOTFIX-01**, then **V22-PLAY-01** pace/stationary-rescue work may proceed
-  as separately reviewable seams under the latest Human authorization.
-- The newly reported Maze-2-onward movement failure routes directly to
-  **V22-PERF-02** movement/camera/renderer isolation; the as-yet-unspecified
-  Quality/Motion setting does not prevent investigation. The controlled
-  Full/Lite/Motion comparison remains useful follow-up evidence.
-- **V22-UI-01 and Agent 04 retain engineering/dependency and PT36 gates**;
-  pending family feedback alone does not stop safe preparation/implementation.
-  Tessera, Chill/Regular/Zippy,
-  stationary rescue, Alex, phone/Book/victory and later feature work did not enter
-  this release transaction. Preserve the programme, especially 09 → 10 → 11.
+The Human authorizes safe progress while playtesting is deferred; missing
+physical results do not blanket-block these independent engineering seams.
+AUDIO-01A, V22-HOLE-01, root PT36 and the later programme remain in §5. Agent04
+is not released by this handoff. Maintain the cumulative
+[PLAYTEST_CHECKLIST](PLAYTEST_CHECKLIST.md) and
+[HUMAN_DECISIONS](HUMAN_DECISIONS.md); record concrete Human answers separately
+and never infer acceptance from silence.
 
 ## 4. Binding Human decisions and experience to preserve
 
@@ -272,7 +251,7 @@ for publication and no physical-iPad success is inferred.
 - Ame remains recognizably young, blonde and blue-eyed; clean chunky JRPG art uses material-local coloured contours. Do not reopen completed art approvals or resurrect rejected calibration/outline work.
 - Alex is a Human-approved future optional Player-1 character for the Human's son, with blue eyes and blonde to slightly brown-blonde hair; Ame remains the default. His model/canon and runtime selection require a later Human gate, equal capabilities and an ALT-P1-01 seam before Plans 08/05/09/10 consume the selected lead and Plan 11 may depict him. Chill pace—not a weaker ruleset—provides beginner comfort.
 - All 32 friends have authored rescues in the existing 16 mazes and generated eligibility; Unicorn appears in Maze 1 and Tea-Time Skeleton in Maze 2. The tea-drinking skeleton is a friend. Home v05 preserves the corrected horn and adds the expressly authorized precise alpha cleanup; do not restore earlier damaged cutouts.
-- Tessera Dolphin's published 256px field rendition has a confirmed alpha defect that removes coral tail/flipper regions. Repair it from the already approved bounded alpha-recovery master as a new versioned derivative; do not redesign the character.
+- Tessera Dolphin's 256px field alpha defect was repaired and published in v0.22.3 from the approved recovery master. Preserve that versioned repair and character identity; P5 remains the separate Human field/follower check.
 - Campaign growth is 16→24 (four inserted, four later), with purposeful asset ecology, harmonious floor/wall pairings, deeper intuitive solvable puzzles, varied rooms, optional decisions and gentle teaching. New mechanics require design/solver/family gates; wishlist wording is not immediate runtime authorization.
 - Mimic surprise must never create an unsolvable route. Loot colours/sound, room variety, difficulty icons, original cute spooky cast and other wishlist details remain owned by their backlog cards/plans.
 - Preserve the original contextual OST and existing music transport. Optional co-op keeps single-player default; greybox/family review must show shared laughter rather than sibling distress before costly production.
@@ -293,8 +272,10 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.1 failed the Human's iPad movement test; PERF-02A is now the published v0.22.2 camera experiment awaiting P1. If it fails, prioritize the next isolated PERF-02 probe. Otherwise/while feedback is pending, finish separate Tessera field-alpha publication, then V22-PLAY-01 pace/stationary rescue and V22-UI-01 (including native Exit) as independently reviewed seams. Preserve settings/device rows and fix actual regressions before dependent work. Resolve root PT36 attachment preflight before 04.
-2. **AUDIO-01A** bounded music/SFX readiness, then **V22-HOLE-01** single-width
+1. Root completes v0.22.4 native/canonical/publication qualification for accepted PLAY-B while Sol owns only the separate UI-NATIVE-EXIT-01 candidate. Tessera, PLAY-A and AUDIO-01V are already published in v0.22.3. After independent Exit review, assign the short-height V22-UI-01 prototype and remaining reviewed UI corrections. Physical iPad scrolling remains unresolved after v0.22.2; PERF-02C runs only as an explicitly assigned serial experiment at a frozen source, never alongside another runtime writer or UI geometry changes. Preserve actual dependency gates and resolve root PT36 before 04.
+2. **AUDIO-01V2** early calibrated default/control conversion, separately assigned
+   after the active Exit seam and before broader **AUDIO-01A** music/SFX readiness;
+   then **V22-HOLE-01** single-width
    crossings and joined ditch art; then **04** lighting, wall depth and terrain
    topology/regions. The Human's deferred feedback does not alone stop these
    independent steps; retain actual safety/dependency/engineering review gates.
@@ -319,7 +300,7 @@ Read the full roadmap, specialist plan and manager addenda before executing. Pla
 - Exact locked native portable: Title/Home, saved 37→38-step movement, Hint/Escape, normal close/reopen/resume at 38, 960×540 resize/layout; captures 30–37. Native compilation alone was not used as this evidence.
 - Bounded modal review: 12 × 2.5 s blur/no-blur samples at desktop DPR1 and iPad-sized DPR2; p95 16.8–16.9 ms, no observed >50 ms frames/long tasks. CPU trace differences are not GPU measurements, sustained performance or physical iPad qualification.
 - Static victory: zero active animations and identical screenshots across a 4-second sample; 12 stationary clipped confetti tips were recorded. Full/reduced motion and centered close affordance were separately observed. Compact decorative omissions and 200% accessible reader behaviour are documented, not hidden.
-- Final gzip9: **152,379 JS / 23,130 CSS bytes**; public delivery **164,988,031 bytes**. Ceilings **152,557 / 30,227 / 164,988,031**: that historical build left 178 JS bytes and filled public allocation; current v0.22.1 leaves 46 JS bytes under its reviewed allocation (§2). Additional work needs measured allocation decisions, not silent budget growth.
+- Final gzip9: **152,379 JS / 23,130 CSS bytes**; public delivery **164,988,031 bytes**. Ceilings **152,557 / 30,227 / 164,988,031**: that historical build left 178 JS bytes and filled public allocation; the later v0.22.1 left 46 JS bytes under its own reviewed allocation (§2). Neither is current headroom. Additional work needs measured allocation decisions, not silent budget growth.
 - Release documentation and committed proofs are cross-device. Some raw traces, full native captures and private profile backups remain local under `C:/Users/hellb/Documents/Maze so Puzzle/release-evidence/FP-UI1-v0.22.0`; the manifest records hashes/paths. A Git clone cannot reconstruct all ignored/local evidence. Never publish private profiles.
 
 Open risks/gates:
@@ -343,7 +324,7 @@ Read in this order, then only the relevant owned plan/backlog slices:
 3. [Architecture](ARCHITECTURE.md), [gameplay specification](GAMEPLAY_DESIGN_SPEC.md), [Story Bible](STORY_BIBLE.md), [Art Bible](ART_BIBLE.md), [UI contracts](UI_UX_SPEC.md), [performance budgets](PERFORMANCE_BUDGETS.md).
 4. [UI-03 plan](plans/UI-03-fp-ui1-correction.md), [61-row Human intake](playtests/2026-09-05-v021-ui-correction-intake.md), [feedback audit](reviews/2026-09-05-ui03-feedback-audit.md), [root review](reviews/2026-09-05-ui03-root-review.md), [modal-cost review](reviews/2026-09-05-ui03-final-modal-cost.md), [dialog review](reviews/2026-09-05-ui03-dialog-review.md), [inspiration research](reviews/2026-09-05-ui-inspiration-research.md).
 5. [MOVE-01 contract](plans/MOVE-01-smooth-travel-and-camera.md), [earlier movement review](reviews/2026-09-05-move01-review.md); UI-03's later correction evidence supersedes earlier claims about first-tap quality.
-6. [Current release manifest](../release/V22-COMFORT1-v0.22.3-manifest.json), [publication receipt](../release/V22-COMFORT1-v0.22.3-release-verification.json), [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md), [release checklist](RELEASE_CHECKLIST.md).
+6. Current v0.22.4 qualification status in §2 and [PLAY-B review](reviews/2026-09-06-play-b-astra-review.md); until its receipt is complete, the last fully verified [release manifest](../release/V22-COMFORT1-v0.22.3-manifest.json) and [publication receipt](../release/V22-COMFORT1-v0.22.3-release-verification.json) belong to v0.22.3. Also read the [cumulative checklist](PLAYTEST_CHECKLIST.md), [feedback template](playtests/FP-UI1-feedback-template.md) and [release checklist](RELEASE_CHECKLIST.md).
 
 Historical Agent 01 assignments and approvals remain evidence, not instructions to rerun them. UI-03 art additions reuse approved actors: 44 larger actor renditions, authorized Home alpha cleanup and contextual Tessera repair; field identities were retained. Consult publication/provenance records before any later asset work.
 
@@ -355,7 +336,7 @@ Historical Agent 01 assignments and approvals remain evidence, not instructions 
 | v0.21.0 rejected | Source `2924fd73f60229dd244eeba21c05f66afb4eb8b0` in GitHub history. Local `release/Maze-so-Puzzle-0.21.0-FP-UI1-2924fd7-portable.exe`, 165,352,448 bytes, SHA-256 `9d353f8b055afb883da5cb2bf4f51f7fea669279ed4e946a0acf4e7c69be000c`. **No public tag/release**; historical planned download links are unpublished drafts. Source recovery is cross-device; this local binary is not. |
 | v0.22.0 rollback | Frozen `68e303da680d5aec0ba71154949c5a2a0d1697ae` and [immutable prior release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.0). Withheld same-version `2f8fa6a` (Home clipping) and non-locked `68e303d` binaries are not approved substitutes. |
 
-Current v0.22.3 and prior v0.22.2/v0.22.1 identities are in §2. Close the preview through OS X/Alt+F4 before switching binaries; the unchanged FP-UI1 namespace deliberately shares comparison progress.
+Frozen v0.22.4 and its immediate v0.22.3 rollback identities are in §2, followed by earlier releases. Final v0.22.4 publication is pending. Close the preview through OS X/Alt+F4 before switching binaries; the unchanged FP-UI1 namespace deliberately shares comparison progress. Rules revision 2 invalidates older unfinished authored runs, so do not promise active-run continuity in either direction or restore only one half of the rules/save seam.
 
 Historical Vercel identities: v0.20.1 `6tAUShfZgbNfnNhcCkCjAjrbMmGi`; v0.21.0 `5MHu8ECwrntLAkCDczWQGun5STib`. Do not confuse those recorded deployments with today's canonical URL or promise their permanent availability.
 

@@ -1,5 +1,12 @@
 # Controls, Xbox Controller, and Steam Deck Plan
 
+**Accepted shared contract, 2026-09-06:** PLAY-A is published in v0.22.3;
+PLAY-B source is independently accepted and frozen for v0.22.4 at `45d8437`.
+Use stationary rescue with unchanged origin/steps, cage-anchored follower join,
+900ms Full/Lite or 180ms Reduced/Static unlock, then the selected pace only for
+the next genuinely held eligible move. Release/steer/cancellation remain live.
+Do not restore walk-in rescue or add a controller-only timing policy.
+
 **Human follow-up dependency, 2026-09-05:** before this plan executes,
 `V22-PLAY-01` will establish one shared three-mode Player-1 pace policy—**Chill,
 Regular and Zippy**—and stationary adjacent cage-rescue semantics. Consume that

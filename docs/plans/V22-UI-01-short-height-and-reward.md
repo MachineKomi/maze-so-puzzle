@@ -1,5 +1,11 @@
 # V22-UI-01 — short-height fit, collections and reward warmth
 
+Latest Human refinement2026-09-06: [V23-02/04 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
+adds visible right-panel Chill/walk/Zippy control, Regular default, and coherent
+speaker+cog settings icon. Reproduce possible phone pad/minimap overlap. These
+belong to the short-height/control composition slice, not the independent native
+Exit fix; preserve praised desktop/iPad placement and existing focus contracts.
+
 Status: queued joint contract; starts after sole-writer handback and a frozen,
 reviewed engineering baseline. Physical iPad performance acceptance stays open.
 

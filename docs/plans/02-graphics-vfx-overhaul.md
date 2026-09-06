@@ -1,5 +1,14 @@
 # Graphics and VFX overhaul plan
 
+**Human refinement,2026-09-06:** read the [v0223/24 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
+V23-06/07/09 and V24-02 before implementation. Continuous base-plus-breathing
+colour-aware pickup glow and bounded twinkles replace abrupt dark/buzz pulses.
+Wall-aware tile collision for scattered loot now supersedes this plan's earlier
+wall-ignoring effect constraint. Present committed maze-Power as collected units
+without letting decorative simulation decide engine rewards/solvability. Permanent
+XP remains Plan14 exploration. Missing science/Power token art is a bounded
+dependency; accept real gameplay beauty and worst-case cost together.
+
 **Latest Human-directed correction, 2026-09-05:** UI-03 advances bounded victory confetti/friend dances and removes whole-board combat scaling. Preserve its motion preferences, stable scene geometry and joyful static fallback. This plan still owns the richer coordinated VFX programme; do not reintroduce camera punches or use timing reductions to erase delight without evidence.
 
 ## 0. Manager-reviewed execution addendum

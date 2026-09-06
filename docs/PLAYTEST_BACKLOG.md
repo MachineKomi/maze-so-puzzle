@@ -6,6 +6,21 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### Latest v0.22.3/24 feedback — delivery routing
+
+[Complete fourteen-item intake plus pace/glow follow-ups](playtests/2026-09-06-v0223-v0224-intake.md)
+is the current authority for V23-01–12 and V24-01–02. Near term: calibrated
+75/75 audio defaults at the Human's preferred effective mix; visible pace and
+sound/settings affordances; phone pad/minimap correction. Plan04 owns Sky Hollow
+floor/wall clarity. Plan02 owns continuous coloured pickup glows/twinkles and
+bounded wall-aware loot scatter, superseding the older no-wall-effects rule.
+Plans09/10/13 own roster use, Surprise favourites and later rare Garden eggs;
+Plan14 holds the explicitly post-completion JRPG mode/spinoff exploration.
+No persistent XP or Power-rule rewrite is approved by a presentation request.
+
+Pace/slider feedback is positive but limited; iPad scrolling remains unresolved.
+The Human's original source is retained unedited, not replaced by this routing.
+
 ### PT20/PT23 — independent device-local Music and SFX levels
 
 [Human intake](user-playtests/2026-09-06-ipad-audio-balance.md): iPad SFX are very
@@ -2745,6 +2760,12 @@ Family retest and later Plan05/08/10 non-regression remain open.
 
 ### PT-20260905-48 — Stationary adjacent cage rescue
 
+- Engineering update, 2026-09-06: PLAY-B implemented by actual Sol and accepted
+  by Astra; v0.22.4 source freeze `45d8437`. Native/publication qualification
+  remains root-owned and P7 family acceptance is pending. Direct rescue now
+  stays beside the cage, with a cage-anchored follower and protected zero-step
+  saves. All earlier active campaign runs restart under the changed rules;
+  durable Book/campaign rewards survive. [Independent review](reviews/2026-09-06-play-b-astra-review.md).
 - Type/impact: Core interaction consistency and presentation correctness; P0.
 - Delivery: Accepted requirement; routed to `V22-PLAY-01` before Plan 02/05.
   Verification: current engine/test audit confirms v0.22.0 still moves into cage.

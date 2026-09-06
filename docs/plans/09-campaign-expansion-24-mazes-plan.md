@@ -1,5 +1,12 @@
 # Plan 09 — expand the authored campaign from 16 to 24 mazes
 
+Human2026-09-06: [V23-08/10 intake](../playtests/2026-09-06-v0223-v0224-intake.md)
+requires approved enemy coverage in campaign, Surprise pools and bestiary, plus
+seed/version/options recipe capture for curating good Surprise layouts. Player
+favourites/replay UI may finish in Plan13; do not confuse seed-only reproducibility
+with a stable saved level across generator revisions. Preserve Green Tea Skeleton
+as a friend while introducing the distinct approved enemy skeleton families.
+
 Status: manager-authored implementation plan; execute only after checkpoint 03M,
 Plans 01–08, UI-02, and both Plan-07 passes are accepted
 
