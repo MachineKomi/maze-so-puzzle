@@ -87,3 +87,27 @@ resource existed before the winning move. A failed first delay-helper attempt
 is retained/excluded. Revisit is not a proven cache hit; held-repeat wins still
 had transient Chromium activation. These are framework/media timing observations,
 not acoustic onset, a timing distribution or physical Safari evidence.
+
+## Pre-publication envelope correction
+
+The first frozen candidate `16deeb2` completed a603-second real-browser run:
+53 actual UI transitions, with at most2 assigned media URLs, connected sources,
+playing elements and pending MP3 requests. The600505ms lifecycle portion alone
+made33 context changes. Prepared Victory reused its existing element; delayed
+and HTTP503 incoming requests retained the old stream. This is explicitly
+pre-fix evidence, not final-source or acoustic/headroom acceptance. Its summary
+SHA256 is `058bee03f0489cd0d080a31bd298bca8617c57783c24cd2268b095b330ebf2d6`.
+
+Sol's follow-up review found that reversed fade command order and immediate
+failure restoration could briefly exceed unity combined lane weight for a
+render quantum. Root corrected this before publication: paired envelopes share
+one sampled audio time and decrease the obsolete lane first; failed standby
+disconnection precedes a20ms survivor restore, with no immediate unity step.
+Two regression tests check the ordering under an advancing context clock.
+
+The corrected candidate passes578/578 full tests and68/68 focused audio tests,
+TypeScript/build, performance contracts and production audit (zero findings).
+Final JSgzip9 is157262 (+1560 versus v0.22.6), within1600 allocation; CSS/media
+unchanged. A final-source focused browser rerun and actual packaged Windows
+qualification remain required. The ten-minute resource observations may be
+inherited only with explicit review of this envelope-only source difference.

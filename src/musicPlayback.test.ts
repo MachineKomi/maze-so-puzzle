@@ -73,6 +73,33 @@ describe("bounded streamed music readiness", () => {
     await vi.advanceTimersByTimeAsync(400); await c; expect(player.snapshot().playingUrl).toBe("/c.mp3"); player.dispose();
   });
 
+  it("uses one clock sample and decreases before increasing both fade directions", async () => {
+    const player = await create(); await player.start();
+    const context = contexts[0]!;
+    let clock = 4;
+    Object.defineProperty(context, "currentTime", { configurable: true, get: () => (clock += 128 / 48000) });
+    player.configure("/b.mp3"); const transition = player.start(); await flush();
+    const [a, b] = context.gains.slice(2);
+    const end = (gain: typeof a) => gain!.gain.linearRampToValueAtTime.mock.lastCall![1];
+    const order = (gain: typeof a) => gain!.gain.linearRampToValueAtTime.mock.invocationCallOrder.at(-1)!;
+    expect(end(a)).toBe(end(b)); expect(order(a)).toBeLessThan(order(b));
+    player.configure("/c.mp3");
+    expect(end(a)).toBe(end(b)); expect(order(b)).toBeLessThan(order(a));
+    await vi.advanceTimersByTimeAsync(20); expect(await transition).toBe(false); player.dispose();
+  });
+
+  it("disconnects a failed incoming lane before a20ms survivor restore, without a unity step", async () => {
+    const player = await create(); await player.start(); player.configure("/b.mp3");
+    const transition = player.start(); await flush();
+    const context = contexts[0]!, outgoing = context.gains[2]!, incoming = context.gains[3]!;
+    outgoing.gain.setValueAtTime.mockClear(); outgoing.gain.linearRampToValueAtTime.mockClear();
+    media[1]!.dispatchEvent(new Event("waiting"));
+    expect(outgoing.gain.setValueAtTime).not.toHaveBeenCalled();
+    expect(outgoing.gain.linearRampToValueAtTime).toHaveBeenLastCalledWith(1, 4.02);
+    expect(incoming.disconnect.mock.invocationCallOrder[0]).toBeLessThan(outgoing.gain.linearRampToValueAtTime.mock.invocationCallOrder[0]!);
+    expect(await transition).toBe(false); player.dispose();
+  });
+
   it.each(["waiting", "error"])("restores outgoing if incoming emits %s during fade", async event => {
     const player = await create(); await player.start(); player.configure("/b.mp3"); const transition = player.start(); await flush();
     media[1]!.dispatchEvent(new Event(event)); await vi.advanceTimersByTimeAsync(1000);

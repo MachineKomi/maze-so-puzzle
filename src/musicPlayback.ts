@@ -29,10 +29,10 @@ export function createMusicPlayback(initialUrl: string) {
   const publish = (next: MusicPlaybackPhase) => { phase = next; };
   const snapshot = (): MusicPlaybackState => ({ requestedUrl: requested, playingUrl: current?.confirmed ? current.url : undefined, phase });
   const pause = (lane: Lane) => { lane.expectedPause = true; try { lane.audio.pause(); } catch { /* Detached media never blocks play. */ } };
-  const weight = (lane: Lane, value: number, seconds = 0) => {
+  const weight = (lane: Lane, value: number, seconds = 0, at?: number) => {
     const connection = lane.connection;
     if (connection) {
-      const param = connection.envelope.gain, now = connection.context.currentTime;
+      const param = connection.envelope.gain, now = at ?? connection.context.currentTime;
       try {
         if (param.cancelAndHoldAtTime) param.cancelAndHoldAtTime(now);
         else { const previous = param.value; param.cancelScheduledValues(now); param.setValueAtTime(previous, now); }
@@ -40,6 +40,12 @@ export function createMusicPlayback(initialUrl: string) {
         else param.setValueAtTime(value, now);
       } catch { /* Closed graph is recovered on the next start. */ }
     } else { try { lane.audio.volume = value * volume; } catch { /* Best-effort legacy path. */ } }
+  };
+  const crossfade = (from: Lane, to: Lane, seconds: number) => {
+    const at = from.connection?.context.currentTime;
+    // One timeline, decreasing lane first: a render-queue split can underlap,
+    // but must not briefly add a raised lane to an undiminished outgoing lane.
+    weight(from, 0, seconds, at); weight(to, 1, seconds, at);
   };
   const release = (lane: Lane | undefined) => {
     if (!lane || lane.released) return;
@@ -50,14 +56,18 @@ export function createMusicPlayback(initialUrl: string) {
   const cancelFade = () => {
     if (!fade) return;
     clearTimeout(fade.timer); fade.finish(false); fade = undefined;
-    if (current) weight(current, 1);
   };
-  const clearStandby = () => { cancelFade(); release(standby); standby = undefined; };
+  const clearStandby = () => {
+    const wasFading = !!fade;
+    cancelFade(); release(standby); standby = undefined;
+    // Disconnect the failed/obsolete lane before gently restoring the survivor.
+    if (wasFading && current) weight(current, 1, .02);
+  };
   const retargetFade = () => {
     if (!fade || !current || !standby) return;
     clearTimeout(fade.timer); fade.finish(false);
     const obsolete = standby;
-    weight(current, 1, .02); weight(obsolete, 0, .02);
+    crossfade(obsolete, current, .02);
     let finish!: (ready: boolean) => void;
     const promise = new Promise<boolean>(resolve => { finish = resolve; });
     const timer = setTimeout(() => {
@@ -191,10 +201,10 @@ export function createMusicPlayback(initialUrl: string) {
     target.audio.muted = muted;
     const promise = new Promise<boolean>(resolve => { finish = resolve; });
     // Complementary linear weights: two songs never double the Music bus gain.
-    weight(outgoing, 0, MUSIC_FADE_MS / 1000); weight(target, 1, MUSIC_FADE_MS / 1000);
+    crossfade(outgoing, target, MUSIC_FADE_MS / 1000);
     const recover = () => {
       if (standby !== target || !fade) return;
-      clearStandby(); weight(outgoing, 1, .02); publish("failed");
+      clearStandby(); publish("failed");
     };
     target.audio.addEventListener("waiting", recover);
     target.audio.addEventListener("error", recover);
