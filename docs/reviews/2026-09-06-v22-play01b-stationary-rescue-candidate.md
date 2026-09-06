@@ -3,8 +3,8 @@
 Date: 2026-09-06. Baseline: released v0.22.3 source
 `c77e7d7e428e1db17ef4fd223cfc9c5614bbe638` (runtime freeze
 `b834a8e6775ec024fc9f854c7a7ced8c096b6627`). Runtime core checkpoint:
-`e0cdd77100ab34048ccc8e08f0e01452e5dd1903`. Final candidate checkpoint:
-`[FINAL_CANDIDATE_COMMIT]`. Status: complete engineering candidate for
+`e0cdd77100ab34048ccc8e08f0e01452e5dd1903`. Final runtime/evidence checkpoint:
+`f3f090a7f8a5b8eb76382f31161345eb8a3d630f`. Status: complete engineering candidate for
 independent Astra review; not merged, versioned, released or family/device
 accepted.
 
@@ -106,10 +106,16 @@ are byte-identical at 116,346 raw / 23,563 gzip-9 with SHA-256
 no package or lockfile content changed. Checkout-specific lockfile line endings
 are not a runtime dependency change.
 
-Final clean inventory: `[FINAL_INVENTORY_PATH]`, SHA-256
-`[FINAL_INVENTORY_SHA256]`; runtime-input SHA-256
-`[FINAL_RUNTIME_INPUT_SHA256]`, dist fingerprint SHA-256
-`[FINAL_DIST_FINGERPRINT_SHA256]`.
+Final clean inventory:
+`C:\Users\hellb\AppData\Local\Temp\maze-so-puzzle-performance\f3f090a7f8a5\inventory-2026-09-06T01-37-49.668Z.json`
+(368,084 bytes), SHA-256
+`57228bd7912fcf72fa6942b3e868eb9e874aa32c81c397d44bd13fbf4af15bb9`;
+runtime-input SHA-256
+`4844b7649661b0232f8a7aea5a2ad904be8353c933af8817396f486009d5579f`,
+dist fingerprint SHA-256
+`9bb41bcc238284d48a19dd54f81aa959dd1752cf5179f790003e1d9463e427be`.
+The inventory is accepted static evidence with a clean worktree, clean runtime
+inputs and exact runtime-input/dist matches.
 
 ## Verification
 
