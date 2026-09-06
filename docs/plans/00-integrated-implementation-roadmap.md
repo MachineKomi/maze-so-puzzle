@@ -4,13 +4,13 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-**Current frozen release candidate, 2026-09-06:** v0.22.4 at
+**Current published preview, 2026-09-06:** v0.22.4 at
 `45d843774d0335aa0ae1ee51aa9ca2f70f235b31` contains independently accepted,
-merged PLAY-B stationary rescue. Web source is pushed; final canonical
-verification and Windows publication are **pending**, owned by root Astra.
+merged PLAY-B stationary rescue. Web and Windows are **published**, with all
+four independent downloads verified; [receipt](../../release/V22-RESCUE1-v0.22.4-release-verification.json).
 Read the [Astra review](../reviews/2026-09-06-play-b-astra-review.md) and
 [Sol handback](../reviews/2026-09-06-v22-play01b-stationary-rescue-candidate.md).
-The last fully verified release and immediate rollback is v0.22.3 `b834a8e`,
+The immediate immutable rollback is v0.22.3 `b834a8e`,
 already containing Tessera repair, PLAY-A and AUDIO-01V. Do not rerun those seams.
 All sixteen authored fingerprints change under rules revision 2; disclose the
 old unfinished-run restart while preserving durable progress/history. P7 and
@@ -19,7 +19,9 @@ inherited physical/family checks remain separate from engineering acceptance.
 **One active runtime writer:** actual Sol owns UI-NATIVE-EXIT-01 in isolated
 `C:/GameDev/maze-game-ui-exit` / `codex/v22-ui-native-exit` from `45d8437`;
 Astra independently reviews. Root is frozen-release/documentation-only and
-holds the heavy-job slot for v0.22.4 qualification. The Exit candidate has a
+holds the heavy-job slot for a bounded PERF-02C pilot before handing it to Sol
+for Exit qualification. Exit source candidate `e5a4a77` has8 focused tests/TS
+passed, but no native/browser/static qualification yet. The Exit candidate has a
 bounded +400 gzip9 JS cap with zero media/dependency/layout change, and does not
 enter frozen v0.22.4. After its separate review, prototype short-height gameplay
 and Book before propagating V22-UI-01 changes. Read the

@@ -6,10 +6,11 @@ rules; dated assignments below preserve historical context, not launch authority
 
 **Current handoff, 2026-09-06:** PLAY-B is independently accepted, merged and
 frozen for **v0.22.4** at `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
-Web source is pushed; final canonical verification and Windows publication are
-**pending**, owned by root Astra. Read [PLAY-B acceptance](../reviews/2026-09-06-play-b-astra-review.md)
+Web/Windows publication and all four independent public-download checks are
+**complete**; [receipt](../../release/V22-RESCUE1-v0.22.4-release-verification.json).
+Read [PLAY-B acceptance](../reviews/2026-09-06-play-b-astra-review.md)
 and [Sol handback](../reviews/2026-09-06-v22-play01b-stationary-rescue-candidate.md).
-The last fully verified release/rollback is v0.22.3 V22-COMFORT1 `b834a8e`,
+The immediate immutable rollback is v0.22.3 V22-COMFORT1 `b834a8e`,
 which already contains Tessera repair, PLAY-A and AUDIO-01V. Do not rerun them.
 Rules revision 2 restarts older unfinished authored runs in all sixteen mazes;
 durable completions/unlocks/rewards/history survive. No physical gate is implied.
@@ -19,7 +20,9 @@ durable completions/unlocks/rewards/history survive. No physical gate is implied
 `45d8437`. Astra independently reviews; root is release/documentation-only
 while Sol writes. At most +400 gzip9 JS bytes is authorized for this bounded
 candidate, measured rather than automatically consumed; zero media, dependency
-or layout change. Root holds the heavy-test slot for frozen v0.22.4 qualification.
+or layout change. Source candidate `e5a4a77` is clean/pushed;8 tests and TS pass.
+Root finishes the bounded PERF-02C diagnostic, then returns the heavy slot to
+Sol for Exit qualification. No actual native Exit pass is claimed yet.
 No candidate Exit fix is folded into that release. After the separate Exit
 handback/review, prototype short-height gameplay/Book before broader UI changes.
 [UI plan](V22-UI-01-short-height-and-reward.md) and
@@ -103,8 +106,8 @@ Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the 
 
 ## Current. Root publication; Sol's isolated Exit seam; cumulative Human checks
 
-Root completes the frozen v0.22.4 native/canonical/public-download transaction
-without changing runtime, then records and pushes exact evidence. Sol's active
+Root completed the frozen v0.22.4 native/canonical/public-download transaction
+without changing runtime and is backing up its receipt. Sol's active
 UI-NATIVE-EXIT-01 assignment is isolated as specified above; coordinate heavy
 checks with root's release slot. Require actual native process termination and
 save/settings recovery, not a browser close mock or compile-only assertion.

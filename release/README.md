@@ -1,6 +1,6 @@
 # Windows test builds
 
-## v0.22.4 V22-RESCUE1 — publication completing
+## v0.22.4 V22-RESCUE1 — published
 
 Frozen runtime/tag target: `45d843774d0335aa0ae1ee51aa9ca2f70f235b31`.
 Stationary cage rescue: Ame stays beside the friend with unchanged steps, then
@@ -14,8 +14,10 @@ Unsigned x64 portable173424640 bytes, SHA-256
 `9888f8f2bbd4f6c2f6210e3eecf0104d852f3928cc03a74b338772647e28e7c0`.
 All sixteen old active campaign runs restart on the new rules fingerprint;
 durable progress survives. Close older binaries before opening this shared-save
-preview. Use X/Alt+F4; Title Exit repair is separate. Publication receipt follows
-independent download verification. Until then v0.22.3 is the verified rollback.
+preview. Use X/Alt+F4; Title Exit repair is separate. The
+[publication receipt](V22-RESCUE1-v0.22.4-release-verification.json) records
+prerelease383434235 and four independently hash-matched public downloads.
+v0.22.3 remains immutable rollback.
 
 ## Historical v0.22.3 V22-COMFORT1
 

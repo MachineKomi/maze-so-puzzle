@@ -3,14 +3,15 @@
 Prepared 2026-09-05 by Astra from PT45/PT48 and current repository inspection.
 Status, 2026-09-06: PLAY-A published in v0.22.3. PLAY-B implemented by actual
 Sol, independently reviewed by Astra, and frozen for v0.22.4 at `45d8437`.
-Final native/publication qualification remains root-owned; family acceptance
-is separate. Read [Astra review](../reviews/2026-09-06-play-b-astra-review.md)
+Native/canonical/publication qualification is complete, with all four public
+downloads verified in the [receipt](../../release/V22-RESCUE1-v0.22.4-release-verification.json).
+Family acceptance is separate. Read [Astra review](../reviews/2026-09-06-play-b-astra-review.md)
 and [Sol handback](../reviews/2026-09-06-v22-play01b-stationary-rescue-candidate.md).
 Final named allocation is +215 gzip9 JS / zero CSS/public/decoded/dependencies.
 The authorization and implementation instructions below are historical contracts,
 not instructions to rerun the completed slice. Runtime ownership returned to Astra.
 
-Current authorization, 2026-09-06: PLAY-A is complete in published v0.22.3
+Historical execution authorization, 2026-09-06: PLAY-A is complete in published v0.22.3
 `b834a8e`; do not rerun it. PLAY-B is authorized to actual Sol in isolated
 `C:/GameDev/maze-game-play-b` / `codex/v22-play-b`, starting `c77e7d7`.
 Astra independently reviews. [Sol preflight](../reviews/2026-09-06-play-b-sol-preflight.md)

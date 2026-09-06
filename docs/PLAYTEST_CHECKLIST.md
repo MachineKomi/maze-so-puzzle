@@ -10,7 +10,7 @@ Keep completed observations and build identities when newer builds arrive.
   latest deployment; note the version shown before reporting.
 - [v0.22.4 Windows release](https://github.com/MachineKomi/maze-so-puzzle/releases/tag/v0.22.4)
   — stationary rescue, plus inherited Dolphin repair, speeds and audio levels.
-  Publication is being finalized; use v0.22.3 until the v0.22.4 assets appear.
+  Published; all four downloads independently byte/hash verified.
   The [v0.22.4 playtest note](../release/V22-RESCUE1-v0.22.4-PLAYTEST.md)
   has instructions/checksums. Close Windows with X or Alt+F4; the title Exit
   button has a separately queued native-window issue.
@@ -34,7 +34,7 @@ Windows builds before using this one; they share a save namespace.
 | v0.22.1 V22-PERF1, runtime `8442b79` | Published web/Windows performance and input preview | P1–P4 below. Music, speeds, stationary rescue and Dolphin pixels are unchanged. |
 | v0.22.2 V22-CAMERA1, runtime `820ed39` | Published web/Windows camera-origin experiment | P1 is the priority: Maze 2 iPad taps and scenery scrolling. P2/P4 regression checks as convenient. No new audio, pace, rescue, Dolphin or phone-UI change. |
 | v0.22.3 V22-COMFORT1, runtime `b834a8e` | Web/Windows comfort preview: Dolphin field repair, Chill/Regular/Zippy and independent Music/SFX | P5/P6/P8; P2/P4 regression as convenient. No camera or stationary-rescue fix claimed. |
-| v0.22.4 V22-RESCUE1, runtime `45d8437` | Web exact-byte verified; Windows publication completing. Stationary rescue with unchanged steps and deliberate follow-up movement | P7 first; P5/P6/P8 remain cumulative. Not a new camera/phone-layout/audio-default fix. |
+| v0.22.4 V22-RESCUE1, runtime `45d8437` | Published web/Windows. Stationary rescue with unchanged steps and deliberate follow-up movement | P7 first; P5/P6/P8 remain cumulative. Not a new camera/phone-layout/audio-default fix. |
 
 ## Specific checks and results
 
