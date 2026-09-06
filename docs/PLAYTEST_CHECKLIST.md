@@ -239,6 +239,27 @@ public downloads. Please try when convenient:
 P5–P9 remain cumulative. This build does not change the iPad camera or close its
 known stuttering issue. Physical listening is separate from engineering checks.
 
+### P11 — Prepared music and confirmed fades (v0.22.7 AUDIO-01A)
+
+Frozen runtime `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`; release qualification
+is in progress. Use this row only once that version is available on your device.
+
+- [ ] Home → Story → Maze → Victory → Book: does music arrive promptly with a
+  pleasant short fade? At a win, listen for unwanted silence or a distracting
+  tail from the previous song. First visits and later visits are both useful.
+- [ ] Try Next, Previous and Shuffle, including two quick changes. The latest
+  selection should take over without a pile-up, wrong song or loudness jump.
+- [ ] Mute during a change, then unmute. Your balance should remain intact and
+  no old effects should burst out. Background briefly, return and tap once if
+  audio needs permission to resume; report persistent silence or wrong music.
+- [ ] Windows: close normally and reopen. Same run and comfort choices return.
+
+A short natural session on any convenient device is enough. Mention speakers
+versus headphones and the scene if something sounds wrong. Media/graph checks
+are not speaker measurements; physical iPad/Safari and all-range mastering are
+still open. There is no new camera change, so do not repeat that known failure
+just for this release. P5–P10 remain cumulative; no progress reset needed.
+
 ## Easy reply format
 
 `Build / device / browser or Windows app / maze / settings / check ID / what I saw`

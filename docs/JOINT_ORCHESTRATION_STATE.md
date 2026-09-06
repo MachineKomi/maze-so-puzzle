@@ -7,6 +7,18 @@ the vision/specifications own product contracts and the roadmap owns dependencie
 
 ## 1. Checkpoints and acceptance
 
+- **v0.22.7 AUDIO-01A is engineering-accepted; publication is in progress.**
+  Frozen runtime `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` is pushed to main.
+  Root Astra and actual Sol accepted source, browser and locked native evidence.
+  [Acceptance](reviews/2026-09-06-v0227-engineering-acceptance.md),
+  [Sol final review](reviews/2026-09-06-audio01a-sol-native-final-review.md).
+  Current plus one prepared track, confirmed 400ms handover and bounded failure/
+  retarget/recovery; no media/camera/gameplay/save-rule change. 578 tests passed;
+  final20 focused browser transitions plus separate inherited603-second resource
+  evidence. Actual native controls and two normal closes/reopen passed. P11 and
+  physical/hidden-page/acoustic/mastering gates remain open. Do not call the new
+  Windows download published until its four public attachments are verified.
+
 - **Current preview: v0.22.6 AUDIO-01V2**, frozen source
   `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Engineering and actual native
   controls/save/reopen are accepted by root Astra and actual Sol. Web is published
@@ -17,7 +29,7 @@ the vision/specifications own product contracts and the roadmap owns dependencie
   [playtest note](../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
   [publication receipt](../release/AUDIO-01V2-v0.22.6-release-verification.json).
   P10 is available on web/Windows; P5–P9 and the iPad camera gate remain open.
-  AUDIO-01A is next; do not repeat V2 implementation or its completed release.
+  This is the fully published fallback while AUDIO-01A finishes publication.
 - **Immediate published fallback: v0.22.5 V22-PHONE1**, source
   `7282665f8631051785176b701b1a7f14b7fe24a3`. Web and Windows are published;
   final native checks and all four independent public downloads passed.
@@ -268,20 +280,21 @@ is claimed. Raw evidence and private profile copies remain external under
 
 ## 3. Active work and next decision gate
 
-**v0.22.6 is complete and published. Next owner: root Astra — AUDIO-01A, actual
-Sol independently reviews.** Engineering/native acceptance, exact-source CI,
-web parity and all four public Windows-release downloads are verified in §2.
-No V2 implementation/publication or accepted native Exit/compact UI prototype
-needs to be repeated. Physical P10 and inherited gates remain separate.
+**Current owner: root Astra — finish v0.22.7 AUDIO-01A publication.** Actual Sol
+has accepted source/envelope/browser/native evidence. The exact frozen release
+checkout is `C:/GameDev/maze-game-v0227-release` at `9b82228`; keep it clean.
+External packaging is `C:/GameDev/maze-game-qa/releases/v0227`; root alone owns
+network writes and release. Do not repeat accepted audio implementation/native
+checks. Complete exact-source CI/Production parity, four immutable attachments
+and independent downloads, then commit the receipt and reconcile current state.
 
-**Next: AUDIO-01A**, root Astra implementation with actual Sol independent review.
-Read its bounded readiness plan before characterization or changes. Preserve V2's
-calibrated raw gains, conservative persistence, shared mute and visible warning.
-The 4/3 ceiling is a preview decision with known maximum-combination limits, not
-all-range or speaker qualification; review two-stream headroom before crossfades.
-Keep frozen source `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa` and its isolated
-checkout `C:/GameDev/maze-game-audio-calibration` clean. Later documentation on
-main is separate from that runtime. No camera experiment is in flight.
+**Next implementation: V22-HOLE-01**, root rules/content with independent Sol
+review, initially using existing art, then connected ditch rendering/art gate.
+Reuse rules revision2 and current generator recipe authority rather than invent
+new version systems. Preserve V2's raw gains, conservative persistence, mute and
+high-mix warning. No camera experiment is in flight; physical P11/P5–P10 remain
+separate. The preflight in the Hole plan names the seven crossings and jump→portal/
+landing/save-stride seams to revalidate before writing.
 
 Remaining V22-UI-01 propagation includes Home/dialog/victory, full200% text,
 HUD pace/settings art and remaining optical refinements. Preserve the praised
@@ -352,10 +365,8 @@ Completed foundations: 07A measurement; 06 gameplay/save/hints/content identity;
 
 After the joint review and required Human decisions, retain the existing sequence until explicitly reconciled/approved:
 
-1. v0.22.6 AUDIO-01V2 is published and independently verified at `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Do not repeat accepted V2/Exit/UI-01A. Remaining V22-UI-01 proceeds in later bounded increments. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved. Resolve root PT36 before Plan 04.
-2. Advance from the completed **AUDIO-01V2** release handoff to broader
-   **AUDIO-01A** music/SFX readiness as the next separate runtime assignment;
-   then **V22-HOLE-01** single-width
+1. Finish the accepted v0.22.7 AUDIO-01A publication at `9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. v0.22.6 remains the fully published fallback. Do not repeat accepted audio/Exit/UI-01A implementation. Remaining V22-UI-01 proceeds in later bounded increments. PERF-02C demonstrated no benefit and no camera hint ships; iPad scrolling remains unresolved. Resolve root PT36 before Plan 04.
+2. **V22-HOLE-01** single-width
    crossings and joined ditch art; then **04** lighting, wall depth and terrain
    topology/regions. The Human's deferred feedback does not alone stop these
    independent steps; retain actual safety/dependency/engineering review gates.

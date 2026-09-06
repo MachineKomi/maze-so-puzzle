@@ -6,6 +6,24 @@ acceptance slices; earlier dated status paragraphs are historical evidence.
 
 ## New engineering intake — 2026-09-06
 
+### AUDIO-01A / v0.22.7 readiness checkpoint — publication in progress
+
+Frozen `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` implements bounded
+current-plus-one/two-lane preparation and confirmed-playback 400 ms handover.
+Final 578 project tests pass; JS gzip +1,560 bytes, CSS/public unchanged.
+[Final browser review](reviews/2026-09-06-audio01a-browser-review.md) records 20
+focused final-source transitions. Pre-envelope 53/about 603 seconds are inherited
+resource/lifecycle evidence only, not a final endurance or output-waveform run.
+[Sol's review](reviews/2026-09-06-audio01a-sol-envelope-review.md) preserves
+physical/hidden-tab/acoustic/rendered-whole-mix-max limitations. Engineering and
+release review is completing; **publication is in progress**, owned by root's
+final acceptance/receipt, not inferred from this backlog. v0.22.6 is the fully
+published fallback. P5–P10 and the iPad camera gate remain open.
+
+Next implementation: PT49/V22-HOLE-01 atomic rules/content first, then connected
+ditch rendering/art. PT20/23 no longer require rebuilding readiness; Plan 02 keeps
+creative sound trials, 07B final qualification and 10 the Garden consumer.
+
 ### Latest v0.22.3/24 feedback — delivery routing
 
 [Complete fourteen-item intake plus pace/glow follow-ups](playtests/2026-09-06-v0223-v0224-intake.md)
@@ -247,7 +265,7 @@ supersede stale descriptions without closing their unimplemented successors:
 | 08 | UI-03 supplies the bottom-right hybrid directional/drag pad, pointer cancellation and keyboard repeat guards; browser input evidence | Physical iPad/thumb reach; Plan 08 canonical input/controller parity and any newly evidenced corrections |
 | 10 | Recoverable pending exit and exactly-once save boundary retained; UI-03 supplies current Next/Stay/Restart presentation and reliable Enter | Family comprehension; Plan 08 input parity; Plan 10 Garden destination |
 | 13 | Redundant portal glyph removed in `d6b11c0`; recorded browser evidence | Root verifies preservation in Plan 01/02; no duplicate removal task |
-| 20/23 | All 42 original tracks catalogued, six pools and canonical MusicTransportPort/current adapter; UI-03 retains Sound & Comfort and quick mute | AUDIO-01A advances bounded preparation/continuity; 02 creative sound; 07B completes/qualifies integrated audio; 08 input parity; 10 Garden |
+| 20/23 | All 42 tracks/six pools preserved; AUDIO-01A `9b822281` adds bounded two-lane preparation/confirmed 400 ms handover; final 578 tests, publication in progress | Physical/hidden-tab/acoustic/max-mix gates remain; 02 creative sound; 07B qualifies integrated audio; 08 input parity; 10 Garden |
 | 24 | All 32 friends have authored Solo rescues; union/intro tests and `556542e` | Plan 09 final enemy/friend ecology, teaching/scale remediation, generated families and 24-chapter themes |
 | 25 | UI-03 implements landscape composition, larger art/text, stable HUD/dialog geometry and presentation renditions; exact art/budget/browser evidence in root review | Family visual/readability acceptance, explicit compact/enlarged-text tradeoffs, later Plan 02 effects and 07B device qualification |
 | 26 | UI-03 restores artwork-aware title/Home placement, preserves approved identity and performs authorized v05 alpha cleanup; `68e303d` corrects the withheld native Home composition | Root replacement-native verification and FP-UI1 publication; family acceptance; later named previews and Plan 11 retain-first audit |
@@ -371,7 +389,7 @@ remain necessary where called out below.
 | `PT-20260902-07` | Smooth camera/play feel | P0 | UI-03 candidate | Browser reviewed; Human pending | Root UI-03 travel correction; FP-UI1 comfort retest; Plan 07B requalifies |
 | `PT-20260902-08` | Anchored touch joystick | P0 | UI-03 candidate | Browser input checks; physical iPad pending | Root UI-03 hybrid pad; Plan 08 remaining input/controller parity |
 | `PT-20260902-09` | Strong-enemy teaching | P0 | Routed | Not retested | Plan 01 with gameplay-owned suggestions |
-| `PT-20260902-10` | Completion choices | P0 | Routed | Not retested | Root 03M contract, Plan 01/08; Plan 10 extension |
+| `PT-20260902-10` | Completion choices | P0 | Pending-save contract implemented; reward wording follow-up | Existing Stay/Book discrepancy traced, not an audio regression; family comprehension open | Root 03M contract, remaining UI/victory and08;10 extension |
 | `PT-20260902-11` | More and optional battles | P1 | Routed | Not retested | Plan 09 |
 | `PT-20260902-12` | Varied, smaller level portfolio | P0 | Routed | Automated | Plan 09 authored and generated-topology phases |
 | `PT-20260902-13` | Remove portal glyph clutter | P2 | Accepted | Manager-tested | v0.20.1 recorded removal; preserve in 01/02 |
@@ -381,7 +399,7 @@ remain necessary where called out below.
 | `PT-20260902-17` | World and lore enrichment | P1 | Routed | Not retested | Plan 09; Plans 10 and 11 consume canon |
 | `PT-20260902-18` | Expressive portrait and emotion marks | P1 | Routed | Not retested | Plans 03, 01 and 02; Plans 05/07B support |
 | `PT-20260902-19` | Guided mechanic-introduction trails | P0 | Routed | Not retested | Plan 09 design gate; Plans 01/08 support |
-| `PT-20260903-20` | Continuous contextual original OST | P0 | Routed | Not retested | Root 03M catalogue/port, then Plan 07B; Plans 01/02/08/10 support |
+| `PT-20260903-20` | Continuous contextual original OST | P0 | AUDIO-01A frozen; publication in progress | Final 20 focused transitions; inherited 53/about 603 seconds resources; physical/audio-max gates open | Root AUDIO-01A; 02 creative sound; 07B final qualification; 01/08/10 consumers |
 | `PT-20260903-21` | Verified retirement of superseded runtime assets | P1 | Routed | Not retested | Plan 03 classification; Plan 07B tooling; final Plan 12 sweep |
 | `PT-20260903-22` | Mimic reveal and magnetic reward showers | P1 | Routed | Not retested | Gameplay contract/Plan 09 plus Plans 02/03/05/07B; Plan 13 fallback |
 | `PT-20260903-23` | Compact contextual BGM controls | P1 | Routed; Loop needs decision | Not retested | Root 03M port, Plan 01 surface, Plan 07B controller, Plan 08 input parity |
@@ -790,8 +808,10 @@ find more Power.
 
 - Type: Progression, save semantics, modal UX and controls
 - Impact: P0 — next-playtest gate
-- Delivery: Routed
-- Verification: Not retested
+- Delivery: Pending-completion contract implemented; narrow reward-wording
+  follow-up remains
+- Verification: Existing Stay/Book behavior traced during native engineering
+  review; family comprehension and later controller/Garden slices remain open
 - Primary owner: Root checkpoint 03M, then Plan 01
 - Supporting owners: Plan 08 controls; Plan 10 adds Friend Garden destination
 - Target gate: Semantic contract before Plan 01; Friend Garden slice before Plan
@@ -802,7 +822,7 @@ find more Power.
 Next maze is the default. Once the Friend Garden exists, also offer **Take a
 break**.
 
-**Current-checkpoint audit.** Confirmed open. Entering the star immediately marks
+**Historical pre-03M audit.** Confirmed open at that checkpoint. Entering the star immediately marks
 the engine run won; the app commits progression/rewards and clears the active run.
 The current modal has only Next and Play Again. Therefore this cannot safely be
 implemented as three superficial buttons.
@@ -835,6 +855,21 @@ does not reopen immediately. Next commits durable completion/rewards/unlocks
 exactly once; Restart awards nothing. Reload restores the pending choice. Each
 new pending-completion ID may present victory once, but presentation is never the
 durable commit authority. Checkpoint 03M lands and tests this before Plan 01.
+
+**2026-09-06 native engineering finding — pending reward wording.** In a fresh
+ordinary Maze1 run, the victory screen previews +15 gold/new sticker; choosing
+Stay and then Book shows 0/16 cleared. Read-only tracing confirms this is the
+existing intended provisional-completion contract, not an AUDIO-01A save
+regression: `pendingCompletionFor` projects rewards, Stay resumes without banking,
+and only Next writes durable completion. The same behavior exists in v0.22.6 and
+originates in `45dfda27` (2026-09-04). However “New sticker”, “Total” and “Chapter
+complete” look like banked rewards. Route a narrow P1 comprehension/copy treatment
+to the remaining UI/victory owner; retain the satisfying celebration and clear
+Stay/Next choice. Do not silently change save semantics, bank twice, or call this
+data loss. Acceptance: the player can understand that Next confirms the reward;
+Stay retains the run; leave/re-enter star and Next records one completion/reward,
+which Book and normal reopen retain. Family comprehension remains open. No
+runtime change or new UI acceptance is claimed by this note.
 
 ### PT-20260902-11 — More battles and optional encounter rooms
 
@@ -1291,8 +1326,11 @@ Root evaluates the evidence and sample limits before claiming teaching success.
 
 - Type: Audio architecture, navigation presentation and release media
 - Impact: P0 — release gate
-- Delivery: Routed
-- Verification: Not retested
+- Delivery: AUDIO-01A frozen at `9b822281`; engineering/release review completing,
+  publication in progress
+- Verification: Final 578 tests and 20 focused browser transitions; pre-envelope
+  53/about 603 seconds inherited only for resource/lifecycle evidence. Physical,
+  actual hidden-tab/acoustic/rendered-whole-mix-max qualification remains open.
 - Primary owners: Root checkpoint 03M for delivered-catalogue compatibility and
   the canonical `MusicTransportPort`; Plan 07B for the complete contextual
   controller, continuity, loading and performance qualification
@@ -1320,7 +1358,7 @@ Puzzle OST in its six intended physical folders and removed the old root files.
 Delivery does not by itself prove catalogue integration, mastering, rights or
 platform playback.
 
-**Current-checkpoint audit.** Confirmed delivered but not integrated. The six
+**Historical pre-03M audit.** Confirmed delivered but not integrated then. The six
 physical pools contain 42 parseable MP3s / 99,151,313 bytes / about 68m25s:
 `title` 6, `story` 6, `maze` 14, `victory` 4, `garden` 6 and
 `adventure-book` 6. There are no root-level MP3s, non-MP3 files, exact SHA-256

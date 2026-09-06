@@ -4,18 +4,25 @@ Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-**Current checkpoint, 2026-09-06:** v0.22.6 AUDIO-01V2 is frozen at
-`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Root Astra and actual Sol accept
-engineering/native controls/save/reopen; exact-source CI and web deployment passed.
-**Web/Windows are published and all four public downloads independently verified**.
-See [acceptance](../reviews/2026-09-06-v0226-engineering-acceptance.md),
-[manifest](../../release/AUDIO-01V2-v0.22.6-manifest.json) and
-[playtest](../../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
-[receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
-AUDIO-01A readiness is the next separate implementation; no V2 repeat is needed.
-P10 is ready on web/Windows; P5–P9 and the iPad camera gate remain cumulative.
+**Current checkpoint, 2026-09-06:** v0.22.7 AUDIO-01A is frozen at
+`9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/release review is
+completing; **publication is in progress**, not a verified CI/deployment/download
+claim. Final 578 project tests pass; JS gzip +1,560 bytes, CSS/public unchanged.
+The bounded two-lane controller performs confirmed-playback 400 ms handover.
+[Final browser review](../reviews/2026-09-06-audio01a-browser-review.md) records
+20 focused final-source transitions; inherited pre-envelope 53/about 603 seconds
+are resource/lifecycle evidence only, not a final-source endurance/whole-mix run.
+[Sol envelope review](../reviews/2026-09-06-audio01a-sol-envelope-review.md)
+preserves the physical/hidden-tab/acoustic/rendered-max-mix limitations.
+Root completes final acceptance/publication before the next writer handoff.
+**Next implementation: V22-HOLE-01 atomic rules/content, then connected-ditch art.**
+P5–P10, physical listening and the iPad camera/PT36 gates remain open.
 
-**Immediate fully published fallback:** v0.22.5 V22-PHONE1 is frozen at
+**Immediate fully published fallback:** v0.22.6 AUDIO-01V2 at
+`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`, with all four public downloads
+verified in its [receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
+
+**Historical fully published fallback:** v0.22.5 V22-PHONE1 is frozen at
 `7282665f8631051785176b701b1a7f14b7fe24a3` with independently accepted
 native Exit `19f08a1` and compact gameplay/Book UI-01A `840293d` (evidence
 `517667d`); read the [Exit review](../reviews/2026-09-06-ui-native-exit-01-astra-review.md)
@@ -39,8 +46,9 @@ old unfinished-run restart while preserving durable progress/history. P7 and
 inherited physical/family checks remain separate from engineering acceptance.
 
 The [PERF-02C triplet](../reviews/2026-09-06-perf02c-triplet-review.md) completed
-without efficacy; no hint ships. v0.22.5 publication is complete; root Astra
-next owns AUDIO-01A after the completed v0.22.6 publication transaction.
+without efficacy; no hint ships. v0.22.5/6 publication is complete; root Astra
+owns the frozen AUDIO-01A final acceptance/publication transaction, followed by
+the separate V22-HOLE-01 rules/content and connected-art slices.
 Do not restart the accepted UI-01A prototype. Home/dialog/victory propagation,
 full 200% text coverage, HUD pace/settings art and remaining optical refinements
 stay open for later scoped UI work. PT36 remains held before Plan04; neither
@@ -57,7 +65,7 @@ inferring Human acceptance. AUDIO-01A and the existing later dependencies remain
 in the [v0.22.3/v0.22.4 record](../playtests/2026-09-06-v0223-v0224-intake.md).
 **Completed AUDIO-01V2: root Astra implementation, actual Sol review**, under
 [AUDIO-01V2's joint decision](../reviews/2026-09-06-audio01v2-joint-decision.md)
-the accepted frozen v0.22.6 runtime above, before AUDIO-01A. Calibrated 75%/75%
+the accepted frozen v0.22.6 fallback above, before AUDIO-01A. Calibrated 75%/75%
 defaults match old Music10%/SFX100%; preserve exact existing effective gains with
 version-aware persistence. Actual cue/overlap sample review conditionally permits
 4/3 SFX for a qualified preview with a visible high-combination warning; it does
@@ -196,7 +204,7 @@ allocation and final project/art/performance checks; Git backup precedes MOVE-01
 Preserve the original assignment as history. See the complete 17-item v0.20.1 intake at
 `../playtests/2026-09-05-v0201-wishlist.md` and §5.13D below.
 
-Current sequence: **01/MOVE-01 engineering history → UI-03 / v0.22.0 → V22-PERF-01-R1 / v0.22.1 → PERF-02A / v0.22.2 (iPad scrolling still unresolved) → Tessera + PLAY-A + AUDIO-01V / v0.22.3 published → PLAY-B / v0.22.4 published → accepted native Exit + compact UI-01A / v0.22.5 published → AUDIO-01V2 / v0.22.6 published and verified → AUDIO-01A → V22-HOLE-01 → root PT36 gate → 04 → 02 → remaining UI-02 → ALT-P1-01 → 08 → 05 → 07B /
+Current sequence: **01/MOVE-01 engineering history → UI-03 / v0.22.0 → V22-PERF-01-R1 / v0.22.1 → PERF-02A / v0.22.2 (iPad scrolling still unresolved) → Tessera + PLAY-A + AUDIO-01V / v0.22.3 published → PLAY-B / v0.22.4 published → accepted native Exit + compact UI-01A / v0.22.5 published → AUDIO-01V2 / v0.22.6 published and verified → AUDIO-01A / v0.22.7 frozen, publication in progress → V22-HOLE-01 atomic rules/content → connected-ditch art → root PT36 gate → 04 → 02 → remaining UI-02 → ALT-P1-01 → 08 → 05 → 07B /
 FP-CORE2 → 09 / FP-CAMPAIGN → 10 greybox gate / FP-COOP → 11 → 13 → 12 →
 RC-01 → 14 → approved follow-ons, if any → 15**. The Human normally starts
 fresh specialist tasks from root-prepared prompts. Root may delegate independent read-only/documentation
@@ -327,8 +335,8 @@ For desired behaviour, the game-vision document wins. For current behaviour, exe
 | 5C | **ART-HOTFIX-01 — Tessera field-alpha repair** | May proceed while Human tests are pending under the latest authorization; preserve the immutable v0.22.1 comparison. Derive a new versioned 256px field rendition from the approved alpha-recovery master. | Versioned derivative/catalogue/provenance/allocation update; alpha and actual-size proof; cage, follower, Book/victory consumer checks; independent review. |
 | 5D | **[V22-PLAY-01](V22-PLAY-01-pace-and-stationary-rescue.md) — pace and stationary-contact correction** | Implements the Human's three-speed accessibility/play-feel choice and makes cage rescue follow the established stationary door/combat interaction principle before VFX/animation consume timing. | Chill/Regular/Zippy preference across current input sources with persistence and Zippy stress evidence; engine/solver/reachability/content-identity/save fixtures for stationary exactly-once rescue; family tuning gate. |
 | 5E | **[V22-UI-01](V22-UI-01-short-height-and-reward.md) — native Exit, short-height and reward correction** | Native Exit and compact gameplay/Book UI-01A are accepted for frozen v0.22.5; final native qualification/publication passed. Preserve primary geometry and never change UI during matched PERF-02 measurements. Home/dialog/victory propagation, full 200% text, HUD pace/settings art and remaining optical work need later scoped Sol implementation/Astra review; do not rerun the compact prototype. | Candidate Exit/reopen and compact gameplay/Book proof retained; final-release and physical P9 checks separate. Full Bestiary/lore/pad/pickup/victory matrix remains open. |
-| 5F | **[AUDIO-01V2 → AUDIO-01A](AUDIO-01-readiness-and-sound-design.md) — calibrated controls, then readiness/continuity** | v0.22.6 `e628898` engineering/native is accepted by Astra/Sol; web/Windows publication and all public downloads verified. Preserve 75%/75% defaults, exact gain-preserving persistence and reviewed 4/3 SFX with a visible combination warning. Next, AUDIO-01A bounded current-plus-one preparation, confirmed handover and synthesized-SFX readiness. | Physical P10 listening stays separate. Next: cold/warm/context/held-win/failure evidence, bounded streams/voices, canonical transport compatibility, truthful audibility limits and independent review. |
-| 5G | **[V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) — one-tile crossings/ditches** | Establishes revised jump rules, safe existing/generated maps and clean connected pit art before lighting/effects/animation depend on them. | Solver/hint/save/content-revision agreement; preserved dividing strips; approved joined art/topology/alpha; all-direction/motion/pace evidence. |
+| 5F | **[AUDIO-01V2 → AUDIO-01A](AUDIO-01-readiness-and-sound-design.md) — calibrated controls, then readiness/continuity** | v0.22.6 fallback is fully published. AUDIO-01A frozen `9b822281` implements two-lane bounded preparation and confirmed 400 ms handover; final 578 tests, +1,560 JS gzip bytes, CSS/public unchanged. Engineering/release review completing; publication in progress. Preserve calibrated raw gains and high-combination warning. | Final 20 focused transitions and inherited pre-envelope 53/about 603 seconds resources are separate evidence. Physical listening, real hidden-tab/interruption, acoustic and rendered whole-mix max/true-peak qualification remain open; root owns release receipt. |
+| 5G | **[V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) — one-tile crossings/ditches** | Next implementation: atomic single-width rules/content/generator/save/hint correction using existing art first; then bounded connected-ditch rendering and art review before lighting/effects/animation depend on them. | Solver/hint/save/content-revision agreement; preserved dividing strips; approved joined art/topology/alpha; all-direction/motion/pace evidence. |
 | 6 | **04 — Lighting and wall depth** | Uses final art materials and the final MazeViewport/scene slots, consuming V22-HOLE-01 occupancy/boundaries. It creates the single terrain topology/render-model seam, coherent light resolver, wall layers, grounding wrappers, and bounded presentation-only multi-theme region support before effects attach to them. | Lighting spec, resolved-light API, cached topology/render model, validated one-to-four-region terrain-theme seam over one gameplay topology, world masks/layer tokens, dedicated contact/cast/sparkle surfaces, tier evidence. |
 | 7 | **02 — Graphics and VFX** | Consumes final art tokens/assets, terrain/light layers, UI anchors, and gameplay events. It owns the shared presentation director, cancellation, semantic effect grammar, hazard motion, varied flourishes, and the reusable bounded reward-shower presentation from `PT-20260903-22`. | VFX Bible, presentation-director contract, anchor/timing/cancellation APIs, effect variants, deterministic visual-only reward burst/homing recipes, reduced/static recipes, sound/lifecycle evidence. |
 | 7A | **UI-02 — Fresh specialist: remaining Book, focus and victory polish** | Preserves the bounded Book/bestiary/cards, focus and victory work promoted into UI-03 for the corrected FP-UI1. After Human playtest and Plan 02's celebration work, addresses remaining evidence-backed polish before 08 qualifies navigation. Root reviews any necessary encounter/save changes. | Preserve the five accessible Book pages, schema6 encounter-earned bestiary and conservative migration, large art/lore cards, grey locked achievements, restrained focus, ordinary no-scroll victory, individual dances and stable control IDs. Review only remaining defects or agreed polish with budget/geometry evidence; do not rebuild the completed core. See `UI-02-adventure-book-and-focus-polish.md`. |
@@ -954,9 +962,10 @@ work is reviewed/published, while physical iPad scrolling acceptance remains
 open. The Human's continuation authority permits independent UI corrections
 after reviewed PLAY-B handback: Sol's native Exit and compact gameplay/Book
 UI-01A are now published in v0.22.5, with final native qualification and all
-four independent public-download checks complete. AUDIO-01V2 is now the frozen
-v0.22.6 accepted runtime `e628898`, with web/Windows and all public downloads
-verified; AUDIO-01A follows its completed release handoff as the next separate seam;
+four independent public-download checks complete. AUDIO-01V2 is the fully published
+v0.22.6 fallback `e628898`. AUDIO-01A is now frozen at `9b822281` for v0.22.7,
+with engineering/release review completing and publication in progress. The next
+implementation is V22-HOLE-01's atomic rules/content slice, then connected art;
 remaining UI propagation stays open. These are not permission
 to bypass an actual regression or to overlap runtime writers. Freeze source and
 reference views; no UI geometry changes may run during matched camera experiments.

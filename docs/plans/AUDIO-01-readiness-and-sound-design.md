@@ -1,14 +1,19 @@
 # AUDIO-01 — timely music, satisfying sound and listening qualification
 
-Status, 2026-09-06: AUDIO-01V2 is accepted and published as v0.22.6 at
-`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`; web/Windows and all four public
-downloads are verified. [Acceptance](../reviews/2026-09-06-v0226-engineering-acceptance.md),
-[manifest](../../release/AUDIO-01V2-v0.22.6-manifest.json),
-[playtest](../../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
-[receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
-**Next: AUDIO-01A**, root Astra implementation / actual Sol independent review.
-P10/P8 physical listening and final mastering remain open; do not repeat V/V2.
-The earlier AUDIO-01V assignment below is history, not current launch authority.
+Status, 2026-09-06: AUDIO-01A implementation is frozen for v0.22.7 at
+`9b822281197c9e9e65a8c9467fe5bd578dce1cbd`; engineering/release review is
+completing and **publication is in progress**. This is not a CI/deployment or
+public-download receipt. Root owns final acceptance/publication evidence.
+The [final browser check](../reviews/2026-09-06-audio01a-browser-review.md) and
+[Sol envelope review](../reviews/2026-09-06-audio01a-sol-envelope-review.md)
+record the bounded preview and its limits. Fully published fallback remains
+v0.22.6 `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`
+([receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json)).
+**Next implementation: V22-HOLE-01**, atomic rules/content correction first,
+then connected-ditch rendering/art. P10/P8, cumulative physical checks, actual
+hidden-tab/acoustic/whole-mix-max qualification and the iPad camera gate remain
+open. Do not repeat V/V2/A implementation or infer final audio qualification.
+Earlier assignments below preserve scope/history, not current launch authority.
 Source: [Human audio/hole follow-up](../user-playtests/2026-09-05-audio-readiness-and-hole-crossings.md).
 Backlog owner: PT-20260903-20, with PT23 transport and existing CR-AUDIO decisions.
 
@@ -22,6 +27,27 @@ does not stop implementation after accepted engineering predecessors.
 Victory should sound celebratory as it appears; doors, pickups and rescues should
 sound at their visual contact. Ordinary context changes should not create silent
 gaps while an otherwise enabled game fetches the next song.
+
+### AUDIO-01A implementation checkpoint
+
+The two-lane controller prepares at most one next song and retains the current
+song until confirmed incoming playback, then performs a 400 ms handover. Paired
+lane ramps share one AudioContext timeline and decrease the outgoing lane first;
+rapid retargets use the reviewed 20 ms correction, with disconnect-before-restore
+on failure. No new OST files, mastering stage or creative SFX palette was added.
+Final source passes 578 project tests; JS gzip delta is +1,560 bytes, CSS/public
+unchanged. Twenty focused final-source browser transitions passed. The inherited
+pre-envelope 53-transition/about-603-second resource cohort (600.505 seconds at
+the lifetime gate) is lifecycle/resource evidence only, not a final-source
+25-transition/ten-minute rerun or rendered peak/audio measurement.
+
+Physical listening, genuine hidden-tab behavior, inactive-autoplay and physical
+interruption recovery, acoustic onset/leading silence, rendered two-lane dense
+whole-mix sample/true peaks and max-slider/mastering remain open. The source
+convex-bound argument is not measured waveform or speaker evidence. Keep the
+existing high-combination warning and calibrated preferences. The remaining
+requirements below continue to guide Plan 02/07B qualification and Plan 10
+Garden integration; they do not require recreating the accepted transport.
 
 **Historical AUDIO-01V assignment, Astra implementation with Sol review:** after accepted PLAY-A, take
 one bounded per-device Music/SFX gain and settings checkpoint before the larger

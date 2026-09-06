@@ -1,5 +1,34 @@
 # Music
 
+## Readiness checkpoint — AUDIO-01A / v0.22.7, publication in progress
+
+Frozen source `9b822281197c9e9e65a8c9467fe5bd578dce1cbd` implements bounded
+current-plus-one preparation, at most two media lanes, and a confirmed-playback
+400 ms handover. Keep the outgoing song through a slow/failed incoming request;
+rapid retarget/failure cancellation shares the same lane and gain owners. The
+42-track catalogue, calibrated saved gains, shared mute and existing SFX remain.
+Final engineering/release acceptance is being completed; **publication is in
+progress**, not a verified deployment or Windows-download claim. v0.22.6 below
+remains the fully published fallback until the joint state records the successor.
+
+Final source passes 578 project tests; JS gzip grows 1,560 bytes, with CSS/public
+bytes unchanged. The [final browser review](reviews/2026-09-06-audio01a-browser-review.md)
+records 20 focused transitions. The pre-envelope cohort's 53 transitions/about
+603 seconds overall (600.505 seconds at its lifetime gate) are inherited only
+for lifecycle/resources, not relabelled as a final-source endurance or peak run.
+[Sol's envelope review](reviews/2026-09-06-audio01a-sol-envelope-review.md) accepts
+the paired decrease-first/common-timeline approach for this bounded preview,
+subject to final integration evidence; it is not a captured output-waveform test.
+
+Physical listening, actual hidden-tab behavior, inactive-autoplay/device
+interruption, acoustic onset/leading silence, rendered two-stream whole-mix
+sample/true peaks and max-slider/mastering qualification remain open. Retain
+the high-combination warning; no limiter/compressor or clip-free promise was
+added. Plan 02 owns creative cues/mix; 07B owns final qualification; Plan 10
+activates Garden through this same transport. Next implementation is V22-HOLE-01,
+atomic rules/content first and then reviewed connected-ditch art, not a repeat
+of AUDIO-01A. See the cumulative playtest checklist for physical checks.
+
 ## Calibrated balance — AUDIO-01V2 / v0.22.6, published 2026-09-06
 
 Frozen runtime `e628898bb4e501034f184a7a92c9e5e6d2b7a4aa` is engineering/native
@@ -8,7 +37,8 @@ accepted and published on web/Windows; all four public downloads are verified.
 [manifest](../release/AUDIO-01V2-v0.22.6-manifest.json),
 [playtest](../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
 [receipt](../release/AUDIO-01V2-v0.22.6-release-verification.json) own exact evidence.
-Physical P10/P8 listening remains open. AUDIO-01A is the next separate implementation.
+Physical P10/P8 listening remains open. The subsequent AUDIO-01A checkpoint is
+recorded above; this paragraph preserves V2's publication evidence.
 
 New preferences use Music gain.10 and SFX gain1, both displayed75%. Music uses
 the reviewed piecewise curve; SFX reaches4/3 at100%. Existing raw gain choices
@@ -48,7 +78,7 @@ App teardown releases it. A rejected interruption recovery can retry the exact
 current song on a fresh gesture. Source-creation fallback is best-effort only.
 See joint state for publication; physical device listening remains unqualified.
 
-## Readiness follow-up — 2026-09-05 (planned)
+## Historical readiness follow-up — 2026-09-05 (then planned)
 
 The Human reports promptly switching music on a phone still displaying v0.22.0,
 and recalls delayed desktop victory music. Neither v0.22.1 nor this documentation

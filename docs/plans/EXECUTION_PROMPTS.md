@@ -4,18 +4,24 @@ Read [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md) before
 selecting a prompt. It owns current checkpoints, Human gates and collaboration
 rules; dated assignments below preserve historical context, not launch authority.
 
-**Current handoff, 2026-09-06:** **v0.22.6 AUDIO-01V2** is frozen at
-`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`. Root Astra and actual Sol accepted
-engineering/native controls and save/reopen. Exact-source CI, web/Windows
-publication and all four independent public downloads passed. Read
-[acceptance](../reviews/2026-09-06-v0226-engineering-acceptance.md),
-[manifest](../../release/AUDIO-01V2-v0.22.6-manifest.json),
-[playtest](../../release/AUDIO-01V2-v0.22.6-PLAYTEST.md) and
-[receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
-**Next: AUDIO-01A, root Astra implementation / actual Sol independent review.**
-Do not repeat V2 implementation/publication. P10 is ready; P5–P9 remain cumulative.
+**Current handoff, 2026-09-06:** **v0.22.7 AUDIO-01A** is frozen at
+`9b822281197c9e9e65a8c9467fe5bd578dce1cbd`. Engineering/release review is
+completing; **publication is in progress**, not verified here. Final 578 project
+tests pass; JS gzip +1,560 bytes, CSS/public unchanged. Read the
+[final browser review](../reviews/2026-09-06-audio01a-browser-review.md) and
+[Sol envelope review](../reviews/2026-09-06-audio01a-sol-envelope-review.md).
+Twenty final focused transitions plus inherited pre-envelope 53/about 603 seconds
+resource evidence are separate cohorts, not a final endurance/whole-mix pass.
+Root finishes final acceptance and public receipt before handing over the writer.
+**Next implementation: V22-HOLE-01, atomic rules/content then connected-ditch art.**
+Do not repeat audio implementation. Cumulative P5–P10, physical/hidden-tab/
+acoustic/max-mix and iPad camera gates remain open.
 
-**Immediate fully published fallback: v0.22.5 V22-PHONE1** is frozen at
+**Immediate fully published fallback: v0.22.6 AUDIO-01V2** at
+`e628898bb4e501034f184a7a92c9e5e6d2b7a4aa`; all four downloads are verified in
+its [receipt](../../release/AUDIO-01V2-v0.22.6-release-verification.json).
+
+**Historical fully published fallback: v0.22.5 V22-PHONE1** is frozen at
 `7282665f8631051785176b701b1a7f14b7fe24a3`. Native Exit `19f08a1` and compact
 gameplay/Book UI-01A `840293d` (evidence `517667d`) are independently accepted;
 read the [Exit review](../reviews/2026-09-06-ui-native-exit-01-astra-review.md)
@@ -36,8 +42,8 @@ which already contains Tessera repair, PLAY-A and AUDIO-01V. Do not rerun them.
 v0.22.4's rules revision 2 restarts older unfinished authored runs in all sixteen mazes;
 durable completions/unlocks/rewards/history survive. No physical gate is implied.
 
-v0.22.5 and v0.22.6 publication are complete. Root next owns AUDIO-01A and
-its serial runtime/heavy slot; actual Sol independently reviews.
+v0.22.5 and v0.22.6 publication are complete. Root owns the v0.22.7 release
+transaction and serial runtime/heavy slot until handoff; actual Sol reviews.
 The accepted UI-01A prototype is not the next assignment. Home/dialog/victory
 propagation, full 200% text coverage, HUD pace/settings art and remaining optical
 work stay open for later scoped review. The
@@ -53,18 +59,31 @@ later UI tranche, not Exit. V23-12 is **Plan14 after RC-01**, planning-only JRPG
 spinoff/mode exploration; no permanent XP or combat rewrite now. Root assigns
 each seam serially; these hooks do not reopen the completed compact prototype.
 
-## Next — AUDIO-01A readiness/continuity
+## Next — V22-HOLE-01 atomic rules/content, then connected ditches
 
-Root Astra takes the next bounded runtime assignment; actual Sol independently
-reviews it. Read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md), MUSIC,
-PT20/PT23, Plan07's audio phases and Plan02's sound ownership before work.
-First characterize cold/warm/context/held-win/background/failure transitions on
-the actual accepted source, then implement only evidenced readiness/continuity
-gaps behind the existing MusicTransportPort and shared gain/cancellation owners.
-Preserve calibrated preferences and current-plus-one bounds; do not preload
-the OST or add new mastering/cues/art/camera/engine scope by momentum. Existing
-physical iPad stutter is open but does not blanket-block this independent seam.
-V22-HOLE-01 follows; root PT36 and Plan04 remain held until their own prerequisites.
+After root closes the AUDIO-01A publication transaction, assign one runtime
+writer and actual independent Sol/Astra review. Read the complete
+[hole plan](V22-HOLE-01-single-crossings-and-ditches.md), current engine,
+generator, identities, saves, hints/solver, travel and Human trench intent.
+First deliver one atomic rules/content slice using existing art: one hole along
+the movement axis, safe eligible landing, minimally reshaped seven multi-width
+authored crossings, preserved room-dividing strips, revised generator recipe,
+matching hints/tests/fingerprints and ordinary/perfect route verification.
+
+Preflight correction: global `GAMEPLAY_RULES_REVISION` is already 2 and generated
+IDs already use `surprise-v5`; the plan's no-global-version statement is stale.
+Reuse/bump these owners, not a parallel version system. Generated contentRevision
+is still 1. Audit jump-to-door/enemy remote interactions, jump-to-portal event
+sequencing and the composed jump-plus-portal save-distance bound; cages already
+reject remote rescue. Preserve Crown Vault's `(12,9)`–`(12,15)` one-wide trench
+and Lanternlight's `(8,4)` crossing (zero-based). Do not only restrict the engine
+and strand existing maps, or treat old1/2/3-hole-positive tests as the new rule.
+
+Then address connected-ditch topology/rendering and bounded new art review;
+do not reopen Plan03 wholesale. Preserve the shared camera/travel owner, every
+pace/motion mode, live-input cancellation and durable progress. Existing iPad
+stutter remains open and is not fixed by this seam. Root PT36 and Plan04 remain
+held until their own prerequisites; Plans04/02/05/09 consume accepted hole truth.
 
 ## UI-01A — completed compact fit assignment (history)
 
@@ -173,23 +192,25 @@ Plan 07 intentionally runs twice: a measurement-only pre-pass first and the opti
 
 Plan 03 has deliberate Human approval pauses. Do not trigger Agent 01 until the complete approved production slate has clean transparent/registered/right-sized runtime derivatives, atomic catalogue publication, actual-game delivery-size proof, reconciled provenance/model/family/lifecycle documentation, and a versioned content-integration manifest, and its reviewed checkpoint is committed and pushed. Send bounded exceptions back to Agent 03 first.
 
-## Current. v0.22.6 published; AUDIO-01A next; cumulative Human checks
+## Current. v0.22.7 publication in progress; V22-HOLE-01 next; cumulative checks
 
 Root completed v0.22.5 final native qualification/publication: web and Windows
 are verified. Actual final-source process exit and save/settings recovery passed,
 not merely browser close mocks or compilation.
 Frozen AUDIO-01V2 `e628898` is accepted and published with actual Sol review and
-verified public downloads. Next is AUDIO-01A; accepted V2/compact UI is not repeated. Missing
+verified public downloads. AUDIO-01A `9b822281` engineering/release review is
+completing and publication is in progress. Next implementation is V22-HOLE-01;
+accepted audio/compact UI is not repeated. Missing
 physical feedback does not blanket-stop independent work; preserve open
-P1/P5–P10 and the verified v0.22.5 fallback. PERF-02C
+P1/P5–P10 and the verified v0.22.6 fallback. PERF-02C
 requires its own serial writer, matched source and disclosed performance limits.
 
 Read [AUDIO-01](AUDIO-01-readiness-and-sound-design.md) and
 [V22-HOLE-01](V22-HOLE-01-single-crossings-and-ditches.md) before selecting their
-turns: the early AUDIO-01V2 calibration precedes broader AUDIO-01A, then
-V22-HOLE-01 precedes the root PT36 gate and Plan 04. Only the assigned runtime
-writer runs implementation/heavy checks; the v0.22.5 transaction is complete
-and v0.22.6 qualification/publication is also complete.
+turns: AUDIO-01A's implementation is now frozen; finish its release transaction,
+then V22-HOLE-01 rules/content precedes connected-ditch art, root PT36 and Plan04.
+Only the assigned runtime writer runs implementation/heavy checks; v0.22.5/6
+transactions are complete, whereas v0.22.7 publication is not yet certified here.
 Plan 02 must deliver the existing CR-AUDIO creative trials using the shared
 readiness seam; 07B qualifies/finishes rather than recreates it. Plans 04/02/05/09
 consume the single-width rule and connected hole footprint; old successful

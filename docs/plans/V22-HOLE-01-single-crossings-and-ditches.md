@@ -26,9 +26,10 @@ length/shape of the obstacle, not permission to jump two or three holes in serie
 
 ## Sequence
 
-Preserve the published v0.22.1 comparison. Execute after its applicable device/
-performance gate and the already queued Tessera, V22-PLAY-01 and V22-UI-01 seams.
-Run after AUDIO-01A in the default sequential queue and before Plan 04. V22-PLAY's
+Preserve all published comparison builds. Tessera, movement pace, stationary
+rescue, bounded compact UI and audio calibration are already delivered through
+v0.22.6; do not repeat those seams or require a repeated known iPad failure.
+Run after AUDIO-01A publication in the sequential queue and before Plan 04. V22-PLAY's
 stationary-rescue rules are then established before jump landings are adjusted.
 Plan 04 consumes the joined hole occupancy/receiver boundaries; Plan 02/05 consume
 the accepted single-jump events; Plan 09 consumes the resulting current campaign,
@@ -61,9 +62,36 @@ generator version and rule. Do not reopen completed Plan 03 as a full asset pass
   while retaining durable completions, friends, rewards and unlocks. Preserve
   old best-step records as historical when no longer comparable. Recompute
   required/perfect routes and update documentation/expectations atomically.
-  Current fingerprints have no global rule version and generated revisions are
-  hard-coded to 1: an engine-only edit is insufficient. Audit the independent
+  Current fingerprints already include `GAMEPLAY_RULES_REVISION = 2`: bump and
+  reuse that authority, not a second version mechanism. The current generator
+  has a `surprise-v5-...` recipe and hard-coded content revision 1; version its
+  recipe deliberately. An engine-only edit is insufficient. Audit the independent
   `session.maximumMovementStride` save plausibility bound as well as transitions.
+
+### 2026-09-06 preflight — first atomic delivery slice
+
+Use current art for the rules/content preview; then pursue Phase 2 with its own
+Human art gate. Do not couple a safe rule correction to volume asset generation.
+Read-only geometric audit at `c114f8a` found these existing multi-width crossings
+(zero-based coordinates, not a new solver proof): Wishing Woods `(6,3)–(7,3)`;
+Ame's Grand Parade `(1,10)–(1,11)`; Springstep Sky Hollow `(8,1)–(9,1)`;
+Lanternlight Labyrinth `(2,9)–(3,9)`; Twilight Treasure Loop `(19,13)–(19,15)`;
+Moonlit Friendship Quest `(15,18)–(15,19)`; Clover Comeback Carnival
+`(11,11)–(11,12)`. Revalidate names/coordinates and approach/landing semantics
+against implementation HEAD before editing; preserve purpose with minimal maps.
+
+Preserve Friendship Crown Vault's north–south strip `(12,9)–(12,15)`, capped by
+walls north/south, with east–west one-width crossings. Preserve Lanternlight's
+isolated four-way pit `(8,4)` and Sky Hollow's isolated `(10,9)`.
+
+Audit three seams explicitly: remote door/combat resolution after a jump currently
+can happen from the origin (cage rejection already exists); jump→portal emits two
+events while App dispatch currently prioritizes the jump; save stride must cover
+the composed jump plus portal displacement, not underestimate it with a plain
+maximum of the separate distances. Define eligible landings consistently. Replace
+old positive length-2/3 generator/level tests and complete-row hint teaching with
+negative regressions and truthful single-width teaching. Keep the existing
+`tileTravel`/`useSceneTravel` owner and test all paces, cancellation and followers.
 
 ## Phase 2 — small, clean art set and topology-aware rendering
 
