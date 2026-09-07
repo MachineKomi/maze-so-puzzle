@@ -68,6 +68,13 @@ export function rewardSpaceOpen(terrain: readonly (readonly TerrainKind[])[], x:
   return true;
 }
 
+/** Start relative cosmetic effects at their first available foreground paint.
+ * Absolute combat deadlines never use this adjustment. */
+export function startRewardAppearance(token: RewardToken, now: number): void {
+  const delay = Math.max(0,now-token.born);
+  token.born += delay; token.due += delay; token.homingAt += delay;
+}
+
 /** Top-down decorative motion: <=.112 tile per8ms at the hard speed cap.
  * Axis separation reflects corner hits without ever crossing a wall. */
 export function advanceRewardToken(token: RewardToken, terrain: readonly (readonly TerrainKind[])[],

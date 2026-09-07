@@ -12,7 +12,7 @@ function storage() {
   return { values, getItem:(key:string)=>values.get(key)??null, setItem:(key:string,value:string)=>{values.set(key,value);}, removeItem:(key:string)=>{values.delete(key);} };
 }
 function input() { return {runId:"run-physical-save-test",mode:"normal" as const,level,
-  game:movePlayer(level,createInitialGameState(level),"right").state,revealedTiles:["1,1" as const],hintUsesByState:{route:2}}; }
+  game:movePlayer(level,createInitialGameState(level,"run-physical-save-test"),"right").state,revealedTiles:["1,1" as const],hintUsesByState:{route:2}}; }
 function legacy() {
   const current=input(), game={...current.game,goldStarsCollected:3,loot:legacyCreditedLoot(level,current.game)};
   const next=createActiveRunSnapshot({...current,game})!;
@@ -21,7 +21,7 @@ function legacy() {
 }
 describe("physical-loot durable migration",()=>{
   it("retains the authoritative v4 when any old-key cleanup fails",()=>{
-    const target=storage(), first=CURATED_LEVELS[0]!, current={runId:"run-cleanup-order",mode:"normal" as const,level:first,game:createInitialGameState(first),revealedTiles:[]};
+    const target=storage(), first=CURATED_LEVELS[0]!, current={runId:"run-cleanup-order",mode:"normal" as const,level:first,game:createInitialGameState(first,"run-cleanup-order"),revealedTiles:[]};
     expect(writeActiveRun(current,target)).toBe(true);
     const raw=target.getItem(ACTIVE_RUN_STORAGE_KEY);
     target.setItem(VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,"stale old record");
@@ -35,7 +35,7 @@ describe("physical-loot durable migration",()=>{
   });
   it.each([2,3])("keeps a sole schema%s migration source when writing v4 failed and navigation clears",schema=>{
     const first=CURATED_LEVELS[0]!, target=storage();
-    const snapshot=createActiveRunSnapshot({runId:"run-old-retention",mode:"normal",level:first,game:createInitialGameState(first),revealedTiles:[]})!;
+    const snapshot=createActiveRunSnapshot({runId:"run-old-retention",mode:"normal",level:first,game:createInitialGameState(first,"run-old-retention"),revealedTiles:[]})!;
     const old={...snapshot,schemaVersion:schema,gameplayFingerprint:gameplayFingerprintForRules(first,3)};
     const key=schema===3?VERSION_THREE_ACTIVE_RUN_STORAGE_KEY:VERSION_TWO_ACTIVE_RUN_STORAGE_KEY,raw=JSON.stringify(old);
     target.setItem(key,raw);const denied={...target,setItem(){throw Error("quota");}};
@@ -45,7 +45,7 @@ describe("physical-loot durable migration",()=>{
   it("migrates the exact rules-3 runId, counters, route and hints with only credited tombstones",()=>{
     const target=storage(), prior=legacy(); target.setItem(VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,JSON.stringify(prior));
     const result=readActiveRunResult([level],target);
-    expect(result.snapshot).toMatchObject({schemaVersion:4,runId:prior.runId,hintUsesByState:prior.hintUsesByState,
+    expect(result.snapshot).toMatchObject({schemaVersion:5,runId:prior.runId,hintUsesByState:prior.hintUsesByState,
       game:{goldStarsCollected:3,steps:1,collectedObjectIds:prior.game.collectedObjectIds}});
     expect(pendingLoot(result.snapshot!.game)).toBe(0);
     expect(result.snapshot!.game.loot.sources[0]).toMatchObject({credited:3,drops:[]});
@@ -95,6 +95,6 @@ describe("physical-loot durable migration",()=>{
     expect(readActiveRunResult([level],target)).toEqual({snapshot:null,discardedUpdatedRun:true});
     expect(target.getItem("unrelated-profile")).toBe("keep");
     const first=CURATED_LEVELS[0]!;
-    expect(sanitizeActiveRunSnapshot({...createActiveRunSnapshot({runId:"run-compatible-test",mode:"normal",level:first,game:createInitialGameState(first),revealedTiles:[]}),schemaVersion:3},CURATED_LEVELS)).toBeNull();
+    expect(sanitizeActiveRunSnapshot({...createActiveRunSnapshot({runId:"run-compatible-test",mode:"normal",level:first,game:createInitialGameState(first,"run-compatible-test"),revealedTiles:[]}),schemaVersion:3},CURATED_LEVELS)).toBeNull();
   });
 });

@@ -62,3 +62,16 @@ receipts, CAMERA-17 and the wider roadmap. Device observations do not block B.
 Docs closure uses actual successful2884250 as the unchanged guard's baseline.
 Record the observed ignored-build outcome separately; no replacement game build
 is required solely to align documentation and release SHAs.
+
+## Observed documentation closure
+
+Documentation checkpoint **ba3320839595f7cfd6f6af4a105a21ed0aaeeff4** is backed
+up on main and the current Codex branch. All15 changed paths are Markdown;
+444 local links resolve and the whitespace check passes. The unchanged guard
+returns0/SKIP against actual successful2884250 and the exact docs HEAD.
+
+Vercel actually reported **Canceled by Ignored Build Step** at06:54:50UTC:
+[deployment record](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/4ZifQi4dn7vPMjgR2BpfMscXQiFu).
+This is an observed remote skip, not only a local prediction. Public runtime
+remains2884250/d472037. This observation is backed up only on the existing Codex
+branch for the next runtime slice, avoiding a recursive main docs/build loop.

@@ -129,7 +129,7 @@ if(process.env.MAZE_PUBLIC_LOOT_FIXTURES) {
         }
       },{data,fixture});
       const enter=async()=>{await page.goto(origin);await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();await page.bringToFront();await settle(page);};
-      const read=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('maze-so-puzzle-active-run-v4')));
+      const read=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),process.env.MAZE_PUBLIC_LOOT_RUN_KEY||'maze-so-puzzle-active-run-v5');
       const source=run=>run.game.loot.sources.find(s=>s.sourceId===fixture.sourceId);
       const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
       await enter();await press(fixture.direction);await page.waitForTimeout(150);const early=await read();
@@ -142,6 +142,35 @@ if(process.env.MAZE_PUBLIC_LOOT_FIXTURES) {
       await press(fixture.approach);await page.waitForTimeout(1200);const approached=await read();
       if(source(approached).credited<=pending.credited||errors.length)throw Error('Public approach failed');
       receipt.loot.push({origin,early,settled,restored,approached,errors});
+    } finally {await context.close();}
+  }
+}
+if(process.env.MAZE_PUBLIC_ENEMY_FIXTURES) {
+  const bytes=await readFile(process.env.MAZE_PUBLIC_ENEMY_FIXTURES),data=JSON.parse(bytes),fixture=data.fixtures.find(f=>f.id==='enemy-first');
+  if(!fixture)throw Error('Expected engine-derived enemy fixture');
+  receipt.enemyFixtureSha256=sha(bytes);receipt.enemy=[];
+  for(const origin of ['https://mazesopuzzle.com','https://maze-so-puzzle.vercel.app']) {
+    const context=await browser.newContext({viewport:{width:844,height:390},deviceScaleFactor:3});
+    try {
+      const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+      await page.addInitScript(({data,fixture})=>{if(!sessionStorage.getItem('enemy-public')) {
+        localStorage.setItem(data.keys.run,JSON.stringify(fixture.snapshot));localStorage.setItem(data.keys.progress,JSON.stringify(data.progress));
+        localStorage.setItem(data.keys.preferences,JSON.stringify({...data.preferences,muted:true}));sessionStorage.setItem('enemy-public','1');
+      }},{data,fixture});
+      const enter=async()=>{await page.goto(origin);await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();await page.bringToFront();};
+      const read=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),process.env.MAZE_PUBLIC_ENEMY_RUN_KEY||'maze-so-puzzle-active-run-v5');
+      const press=()=>page.keyboard.press(`Arrow${fixture.direction[0].toUpperCase()+fixture.direction.slice(1)}`);
+      await enter();await press();await page.waitForTimeout(100);const during=await read();
+      if(during.game.power!==fixture.powerAfter||during.game.loot.sources.length!==2||during.game.loot.sources.some(s=>s.credited!==0))throw Error('Public defeat transaction failed');
+      await page.locator('.battle-presentation').waitFor({state:'hidden'});await page.waitForTimeout(180);
+      await page.screenshot({path:resolve(output,`enemy-${receipt.enemy.length}.png`)});
+      await page.waitForTimeout(1700);const settled=await read();await enter();await page.waitForTimeout(1000);const restored=await read();
+      if(JSON.stringify(restored.game)!==JSON.stringify(settled.game))throw Error('Public enemy reload drift');
+      await press();await page.waitForTimeout(1200);const approached=await read();
+      for(const expected of fixture.rewards){const source=approached.game.loot.sources.find(s=>s.objectId===fixture.objectId&&s.currency===expected.currency);
+        if(!source||source.amount!==expected.amount||source.credited+source.drops.reduce((n,d)=>n+d.amount,0)!==expected.amount)throw Error('Public enemy conservation failed');}
+      if(approached.game.power!==fixture.powerAfter||errors.length)throw Error('Public enemy approach failed');
+      receipt.enemy.push({origin,during,settled,restored,approached,errors});
     } finally {await context.close();}
   }
 }

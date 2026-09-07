@@ -228,7 +228,7 @@ for (const saved of [false, true]) {
       expect(next).toBeTruthy();
       game = next!.state;
     }
-    const snapshot = createActiveRunSnapshot({ runId:"run-home-layout-regression", mode:"normal", level, game, revealedTiles:[] });
+    const snapshot = createActiveRunSnapshot({ runId:game.loot.runId, mode:"normal", level, game, revealedTiles:[] });
     expect(snapshot).not.toBeNull();
     const progress = { ...createDefaultPlayerProgress(CURATED_LEVELS.length), gold:51, totalAnimalsRescued:3,
       bestResultsByLevel:Object.fromEntries(CURATED_LEVELS.slice(0,2).map((completed,index) => [completed.id, {
@@ -748,7 +748,7 @@ test("UI03 ordinary story, celebration and bestiary discovery survive reload wit
 test("UI03 a newer profile preserves its progress and active run through startup and temporary play", async ({ page }) => {
   const level = CURATED_LEVELS[0]!, initial = createInitialGameState(level);
   const snapshot = createActiveRunSnapshot({
-    runId:"run-future-profile-review", mode:"normal", level, game:initial, revealedTiles:[],
+    runId:initial.loot.runId, mode:"normal", level, game:initial, revealedTiles:[],
   });
   expect(snapshot).not.toBeNull();
   const progressRaw = JSON.stringify({ ...createDefaultPlayerProgress(), schemaVersion:99, gold:987, futureMarker:{ preserve:"newer-profile" } });

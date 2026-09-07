@@ -1,7 +1,7 @@
 import { pointsEqual } from "./game/engine";
 import { CURATED_LEVELS } from "./game/levels";
 import { gameplayFingerprintForRules } from "./game/contentIdentity";
-import { emptyLoot, legacyCreditedLoot, sanitizeLoot, finishLootClaims } from "./game/loot";
+import { emptyLoot, legacyCreditedLoot, migrateAuthoredLoot, sanitizeLoot, finishLootClaims } from "./game/loot";
 import type { TileKey } from "./game/exploration";
 import type {
   GameState,
@@ -12,8 +12,9 @@ import type {
 } from "./game/types";
 
 /** Durable normal-run snapshots, including a recoverable pending exit choice. */
-export const ACTIVE_RUN_SCHEMA_VERSION = 4 as const;
-export const ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v4";
+export const ACTIVE_RUN_SCHEMA_VERSION = 5 as const;
+export const ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v5";
+export const VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v4";
 export const VERSION_THREE_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v3";
 export const VERSION_TWO_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v2";
 export const LEGACY_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v1";
@@ -215,7 +216,8 @@ function maximumMovementStride(level: LevelDefinition): number {
   return Math.max(approachStride, maximumPortalStride);
 }
 
-function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | null {
+function sanitizeGameState(value: unknown, level: LevelDefinition,
+  prior?: { version: number; runId: string }): GameState | null {
   if (!isRecord(value)) return null;
   const status = ownValue(value, "status");
   if (
@@ -387,7 +389,9 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     status,
     steps,
   };
-  const loot = sanitizeLoot(ownValue(value, "loot"), level, game);
+  if (prior?.version === 4) return migrateAuthoredLoot(ownValue(value,"loot"),level,game,prior.runId);
+  const loot = prior ? sanitizeLoot(legacyCreditedLoot(level,game,prior.runId),level,game)
+    : sanitizeLoot(ownValue(value, "loot"), level, game);
   return loot ? { ...game, loot } : null;
 }
 
@@ -441,7 +445,7 @@ export function sanitizeActiveRunSnapshot(
 
   const game = sanitizeGameState(ownValue(value, "game"), level);
   const revealedTiles = sanitizeRevealedTiles(ownValue(value, "revealedTiles"), level);
-  if (!game || !revealedTiles) return null;
+  if (!game || game.loot.runId !== runId || !revealedTiles) return null;
   const rawHintUses = ownValue(value, "hintUsesByState");
   if (!isRecord(rawHintUses)) return null;
   if (Object.keys(rawHintUses).length > MAX_SAVED_HINT_STATES) return null;
@@ -508,33 +512,35 @@ function safelyRemove(storage: ActiveRunStorage, key = ACTIVE_RUN_STORAGE_KEY): 
   }
 }
 
-/** Only the exact rules-3 fingerprint admits an old run. Its resolved sources
- * become credited tombstones: no retroactive rewards or defeated-enemy drops. */
+/** Exact historical fingerprints only. v4 preserves pending treasure; all old
+ * defeated enemies retire without retroactive drops. */
 function migratePrior(value: unknown, levels: readonly LevelDefinition[]): ActiveRunSnapshot | null {
-  if (!isRecord(value) || (value.schemaVersion !== 3 && value.schemaVersion !== 2)) return null;
+  if (!isRecord(value) || ![2,3,4].includes(value.schemaVersion as number)) return null;
   const matches = levels.filter(l => l.id === value.levelId && l.source === "curated");
   const level = matches.length === 1 ? matches[0] : undefined;
   if (!level || value.contentRevision !== level.contentRevision
-    || value.gameplayFingerprint !== gameplayFingerprintForRules(level, 3) || !isRecord(value.game)) return null;
-  const game = value.game;
-  if (!Array.isArray(game.collectedObjectIds)) return null;
+    || value.gameplayFingerprint !== gameplayFingerprintForRules(level, value.schemaVersion === 4 ? 4 : 3)) return null;
+  const runId = value.schemaVersion === 2 ? migratedRunId(value) : value.runId;
+  if (typeof runId !== "string" || !RUN_ID_PATTERN.test(runId)) return null;
+  const game = sanitizeGameState(value.game,level,{ version: value.schemaVersion as number, runId });
+  if (!game) return null;
   return sanitizeActiveRunSnapshot({
     ...value, schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
-    runId: value.schemaVersion === 2 ? migratedRunId(value) : value.runId,
+    runId,
     gameplayFingerprint: level.gameplayFingerprint,
-    game: { ...game, loot: legacyCreditedLoot(level, game as unknown as GameState) },
+    game: finishLootClaims(game),
   }, levels);
 }
 
 function updatedContent(value: unknown, levels: readonly LevelDefinition[]): boolean {
-  if (!isRecord(value) || ![1,2,3,4].includes(value.schemaVersion as number)) return false;
+  if (!isRecord(value) || ![1,2,3,4,5].includes(value.schemaVersion as number)) return false;
   const level = levels.find(l => l.id === value.levelId && l.source === "curated");
   return !!level && (value.schemaVersion === 1 || value.contentRevision !== level.contentRevision
-    || value.gameplayFingerprint !== (value.schemaVersion === 4
-      ? level.gameplayFingerprint : gameplayFingerprintForRules(level, 3)));
+    || value.gameplayFingerprint !== (value.schemaVersion === 5
+      ? level.gameplayFingerprint : gameplayFingerprintForRules(level, value.schemaVersion === 4 ? 4 : 3)));
 }
 
-const PRIOR_KEYS = [VERSION_THREE_ACTIVE_RUN_STORAGE_KEY, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, LEGACY_ACTIVE_RUN_STORAGE_KEY] as const;
+const PRIOR_KEYS = [VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY, VERSION_THREE_ACTIVE_RUN_STORAGE_KEY, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, LEGACY_ACTIVE_RUN_STORAGE_KEY] as const;
 function removePrior(target: ActiveRunStorage): boolean {
   // Remove oldest first, stopping on failure. An authoritative newer record
   // remains to shadow every older key that could not be removed.
@@ -550,7 +556,7 @@ function protectedRecord(target: ActiveRunStorage, levels: readonly LevelDefinit
     if (raw !== null) {
       const value: unknown = JSON.parse(raw);
       return !sanitizeActiveRunSnapshot(value, levels)
-        && !(isRecord(value) && value.schemaVersion === 4 && updatedContent(value, levels));
+        && !(isRecord(value) && value.schemaVersion === 5 && updatedContent(value, levels));
     }
     for (const key of PRIOR_KEYS) {
       const prior = target.getItem(key);
@@ -577,7 +583,7 @@ export function writeActiveRun(input: ActiveRunInput,
   } catch { return false; }
 }
 
-/** Current key is authoritative, even when unreadable. A migration writes v4
+/** Current key is authoritative, even when unreadable. A migration writes v5
  * before attempting old-key cleanup; denied writes preserve the original bytes. */
 export function readActiveRunResult(curatedLevels: readonly LevelDefinition[],
   storage: ActiveRunStorage | null | undefined = undefined): ActiveRunReadResult {
@@ -597,7 +603,7 @@ export function readActiveRunResult(curatedLevels: readonly LevelDefinition[],
         catch { return { snapshot: settled, discardedUpdatedRun: false, persistence: "migration-unsaved" }; }
         return { snapshot: settled, discardedUpdatedRun: false };
       }
-      if (isRecord(parsed) && parsed.schemaVersion === 4 && updatedContent(parsed, curatedLevels)) {
+      if (isRecord(parsed) && parsed.schemaVersion === 5 && updatedContent(parsed, curatedLevels)) {
         const removed = removePrior(target) && safelyRemove(target);
         return { snapshot: null, discardedUpdatedRun: true, ...(!removed ? { persistence: "protected" as const } : {}) };
       }
@@ -637,7 +643,7 @@ export function clearActiveRun(storage: ActiveRunStorage | null | undefined = un
   // Do not discard the sole durable copy after a failed migration write.
   try {
     if (target.getItem(ACTIVE_RUN_STORAGE_KEY) === null
-      && [VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,VERSION_TWO_ACTIVE_RUN_STORAGE_KEY].some(key=>{
+      && [VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY,VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,VERSION_TWO_ACTIVE_RUN_STORAGE_KEY].some(key=>{
         const raw=target.getItem(key);
         return raw!==null && migratePrior(JSON.parse(raw),CURATED_LEVELS)!==null;
       })) return false;

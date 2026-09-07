@@ -694,8 +694,8 @@ function App() {
   const [testerPickerOpen, setTesterPickerOpen] = useState(debugMazeQueryEnabled);
   const [levelPickerOpen, setLevelPickerOpen] = useState(false);
   const [level, setLevel] = useState<LevelDefinition>(initialLevel);
-  const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
   const [runId, setRunId] = useState(() => initialRun?.runId ?? createActiveRunId());
+  const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel, runId));
   const [procession, setProcession] = useState(() => createFollowerProcession(
     initialRun?.game.position ?? initialLevel.start, initialRun?.game.rescuedAnimalIds,
   ));
@@ -1033,6 +1033,7 @@ function App() {
     durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
   });
   const lootView = useLootCollection({ game, setGame, level, runId, scene: sceneTravel, port: rewardPort,
+    withheldObjectId: battlePresentation?.objectId,
     enabled: screen === "game" && pageVisible && !modalOpen && !presentationActive,
     animate: motion === "full" && preferences.quality !== "static", limit: preferences.quality==="lite" ? 8 : 20 });
 
@@ -1160,11 +1161,13 @@ function App() {
       let prior = plan.transferSteps.filter(step => step.clashIndex < clash.index).at(-1)?.transferredPower ?? 0;
       const values = steps.map(step => { const amount = step.transferredPower - prior; prior = step.transferredPower; return amount; });
       const amount = values.reduce((sum, value) => sum + value, 0);
-      if (amount) rewardPort.current.emit({
+      // Future bashes must not occupy today's limited token slots. Emit each
+      // batch at its impact so Lite's four reserved Power slots can be reused.
+      if (amount) schedulePresentationTimer(sequence, () => rewardPort.current.emit({
         kind: "power", at: enemy.at, amount, seed: rewardSeed(`${runId}:${event.objectId}:${clash.index}`),
         bornAt: rewardStartedAt + clash.impactMs,
         arrivals: steps.map(step => step.atMs - clash.impactMs), values,
-      });
+      }), Math.max(0, rewardStartedAt + clash.impactMs - performance.now()));
     });
 
     const duration = plan.durationMs;
@@ -1356,8 +1359,9 @@ function App() {
     mapPickupSequence.current += 1;
     setMapPickupToast(null);
     setLevel(nextLevel);
-    setGame(createInitialGameState(nextLevel));
-    setRunId(createActiveRunId());
+    const nextRunId = createActiveRunId();
+    setGame(createInitialGameState(nextLevel, nextRunId));
+    setRunId(nextRunId);
     setProcession(createFollowerProcession(nextLevel.start));
     setRevealedTiles(isExplorationLevel(nextLevel)
       ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)

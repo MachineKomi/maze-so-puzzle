@@ -28,7 +28,7 @@ const fixtures = [CURATED_LEVELS[1]!, CURATED_LEVELS[9]!, CURATED_LEVELS[11]!].m
   const choice = options[0]; if (!choice || choice.delta < 2) throw Error(`No moving-camera route: ${level.id}`);
   const before = route[choice.start]!.before;
   return { id: level.id, level, direction: choice.direction, count: 4, before,
-    snapshot: createActiveRunSnapshot({ level, game: before, mode: "normal", runId: `run-camera17-${level.id}`,
+    snapshot: createActiveRunSnapshot({ level, game: before, mode: "normal", runId: before.loot.runId,
       revealedTiles: new Set(route.slice(0, choice.start + 1).flatMap(s => getVisibleTileKeys(level, s.before.position))) }) };
 });
 

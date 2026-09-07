@@ -543,8 +543,8 @@ Replay reasons are explicit but non-coercive: rescue every friend, improve the c
 
 - Every level has a positive `contentRevision` and deterministic `gameplayFingerprint` over gameplay-relevant structure.
 - Authored objects receive semantic IDs based on level, kind, and intrinsic qualifier. Every repeated semantic role must declare explicit coordinate-to-ID mappings, and a golden campaign identity test binds all authored revisions to fingerprints. IDs are never intended as display order.
-- Active runs use schema v3 and require a stable run ID plus an exact level ID, revision, and fingerprint. They persist both ordinary play and the pending exit choice. A mismatch fails closed by removing only the stale active run, preserves durable progress, and shows a non-modal explanation. Storage failures are surfaced rather than claiming a save or reset succeeded.
-- Progress uses schema v5 with campaign order version 2, stable `unlockedLevelIds`, and a bounded completion-receipt ledger for exactly-once exit commits. Legacy numeric/v2/v3/v4 saves migrate through historical order. Counts are compatibility/display caches and are clamped to the current campaign length.
+- Active runs use schema v5 with loot-ledger2 bound to the same run ID, exact level ID, revision and rules5 fingerprint. Ordinary play, grounded value and pending exit choice persist. Exact v4/rules4 and v2/v3/rules3 records migrate without retroactive enemy rewards; write the new key before prior cleanup. Changed-content runs fail closed with an explanation; malformed/future records stay byte-preserved and block routine writes/clears. Durable progress survives. Storage failures are surfaced rather than claiming success.
+- Progress uses schema v7 at the established progress-v6 key with campaign order version 2, stable `unlockedLevelIds`, and a bounded completion-receipt ledger for exactly-once exit commits. Legacy numeric/v2/v3/v4 saves migrate through historical order. Counts are compatibility/display caches and are clamped to the current campaign length.
 - Current-layout route records store revision/fingerprint. On fingerprint change, the previous step best becomes labelled historical evidence and cannot compete with the revised route.
 - Map editing order: establish IDs/revision tests; edit map; increment revision; update fingerprint-derived expectations, solver routes, metric report, scenarios, story/docs; exercise legacy and current saves. Never silently reuse a revision for changed gameplay.
 
@@ -589,3 +589,16 @@ Rollback points are independently reversible: progressive-hint presentation can 
 ## Evidence basis
 
 The design uses contingent and fading support rather than automatic answers; see [Wood, Bruner & Ross (1976)](https://doi.org/10.1111/j.1469-7610.1976.tb00381.x) and [Renkl, Atkinson & Große (2004)](https://doi.org/10.1023/B:TRUC.0000021815.74806.F6), accessed 2026-09-02. Cognitive-load separation follows [Sweller (1988)](https://doi.org/10.1207/s15516709cog1202_4), accessed 2026-09-02. Child-relevant landmarking is supported by [Lingwood et al. (2015)](https://doi.org/10.3389/fpsyg.2015.00174), accessed 2026-09-02. The route rubric treats T-junction/search statistics as partial proxies, following [Yokota et al. (2019)](https://doi.org/10.11239/jsmbe.57.58) and [Valenzuela et al. (2025)](https://doi.org/10.1016/j.entcom.2025.100925), accessed 2026-09-02. On-demand hints are deliberately measured because hints can impair as well as help performance; see [O’Rourke, Ballweber & Popović (2014)](https://doi.org/10.1145/2556325.2566248) and [Wauck & Fu (2017)](https://doi.org/10.1145/3025171.3025224), accessed 2026-09-02. Objective, input, and difficulty-accessibility requirements are adapted from [Microsoft XAG 107](https://learn.microsoft.com/en-us/gaming/accessibility/xbox-accessibility-guidelines/107), [XAG 108](https://learn.microsoft.com/en-us/gaming/accessibility/xbox-accessibility-guidelines/108), and [XAG 109](https://learn.microsoft.com/en-us/gaming/accessibility/xbox-accessibility-guidelines/109), accessed 2026-09-02.
+
+## LOOT-03 B candidate — enemy discovery rewards
+
+Rules5 adds optional final-defeat Gold/Science to ordinary enemies, including
+the currently visible Candy Mimic. Power1–3 gives Gold1–3/Science1–2; Power4–8
+gives2–4/1–2; Power9–19 gives3–5/2–3; Power20+ gives4–6/2–4, inclusive. Rolls
+are fixed by attempt, level, enemy, currency and rules. Power gain remains the
+existing immediate puzzle transition; cosmetic per-bash Power timing is unchanged.
+Gold/Science bounce and settle after the battle before ranged collection. They
+never change exit/perfect-rescue requirements. Pending value remains optional
+and stays durable until collected or deliberately abandoned on completion.
+See [B execution contract](plans/LOOT-03B-enemy-rewards-execution.md) for supply,
+legacy retirement, protection and the separately pending chest/Mimic lifecycle.

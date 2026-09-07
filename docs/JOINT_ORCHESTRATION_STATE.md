@@ -1,9 +1,23 @@
 # Maze so Puzzle — joint orchestration state
 
+**Active candidate — LOOT-03 B / web0.22.20:** Astra owns runtime on
+`codex/enemy-loot-rewards`; Sol independently reviews. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md)
+freezes rules5 enemy Gold/Science, schema5/ledger2 migration and qualification.
+Implementation,735 tests and all four five-pair cohorts are complete;
+[qualification](reviews/2026-09-07-v02220-web-qualification.md) records browser
+corrections, costs and the inherited cold Power limitation. **Live remains0.22.19**. No deployment
+is claimed until exact-source checks, Sol review, CI and public verification.
+The historical completed cold-reward investigation below is not a new assignment.
+
+
 **Live operating state — September7, web0.22.19:** release
 **28842506f2b6b690e9bd7fc0f18c12957029de98**, reviewed4991f93, frozen runtime
 d472037. Root stays on `codex/cold-reward-performance`. [Public receipt](reviews/2026-09-07-v02219-public-verification.md)
 verifies both origins and six fresh journeys after exact-head CI34092206239.
+Remote main is docs closureba33208, actually skipped by Vercel at06:54:50UTC.
+The [observed skip](reviews/2026-09-07-v02219-public-verification.md#observed-documentation-closure)
+is retained on this Codex branch only for the next runtime slice; no extra main
+push or game build is needed to align its documentation SHA.
 [Qualification](reviews/2026-09-07-v02219-web-qualification.md) and
 [actual independent Sol review](reviews/2026-09-07-cold-reward-sol-final-review.md)
 bind700 tests,43 final browser cases and four separate five-pair cohorts.

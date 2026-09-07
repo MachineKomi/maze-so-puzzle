@@ -194,21 +194,23 @@ contextual rendition remains distinct from the repaired 256px field derivative.
     unlocked story IDs, revision-scoped route records, and a bounded completion-
     receipt ledger in browser `localStorage`; old best steps remain explicitly
     historical after a map edit and a resumed pending exit cannot bank twice.
-13. `src/session.ts` validates and stores a schema-v4 snapshot for a normal
+13. `src/session.ts` validates and stores a schema-v5 snapshot for a normal
     authored run, including stable run ID, revision, fingerprint, reveal state,
     progressive-hint state, and recoverable pending completion. It fails closed
     on changed content, reports that narrow restart case to the player, and
     rejects tester, generated, corrupt, and inconsistent states.
-    Global gameplay-rules revision 4 is included in authored/generated content
-    fingerprints. Exact rules-3 runs migrate without changing their run ID,
-    existing credits or defeated IDs. Resolved treasures become fully credited
-    source tombstones. New rewards use the bounded ledger in `game/loot.ts`:
-    opening scatters value, admission waits750ms and a clear1.75-tile approach,
+    Global gameplay-rules revision 5 is included in authored/generated content
+    fingerprints. Exact v4/rules4 and v2/v3/rules3 runs migrate without changing their run ID,
+    existing credits or defeated IDs. Legacy rules3 treasures become fully credited
+    source tombstones; v4 retains its grounded ledger. Earlier defeated enemies
+    retire without new awards. New rewards use the bounded ledger in `game/loot.ts`:
+    opening/defeat scatters value, admission waits a visible750ms interval and a
+    clear1.75-tile approach,
     and one reducer credits accepted claims. Restoring/interruption settles
     accepted claims while grounded value remains. Completion settles accepted
     claims before its recoverable receipt; Stay preserves optional grounded loot.
     Future/malformed active records are preserved byte for byte and block routine
-    writes/clears. Migration writes v4 before removing the old key. Unmatched
+    writes/clears. Migration writes v5 before removing prior keys. Unmatched
     pre-rules-3 active runs and fingerprint-less schema-v1 runs
     fail closed; durable Book/campaign records survive. Stationary interactions
     are validated independently of movement-pickup counts, with distance and
@@ -364,7 +366,7 @@ contextual rendition remains distinct from the repaired 256px field derivative.
   `maze-so-puzzle-progress-v6`, `maze-so-puzzle-progress-v5`,
   `maze-so-puzzle-progress-v4`, `maze-so-puzzle-progress-v3`,
   `maze-so-puzzle-progress-v2`, `maze-so-puzzle-progress-v1`,
-  `maze-so-puzzle-active-run-v4`, `maze-so-puzzle-active-run-v3`, `maze-so-puzzle-active-run-v2`, and
+  `maze-so-puzzle-active-run-v5`, `maze-so-puzzle-active-run-v4`, `maze-so-puzzle-active-run-v3`, `maze-so-puzzle-active-run-v2`, and
   `maze-so-puzzle-active-run-v1`; unrelated
   origin storage is intentionally preserved, and the app reloads Story Maze 1.
 - Camera coordinates affect presentation only. Movement, collision, combat,
@@ -664,3 +666,19 @@ retains scroll and deliberate input isolation; physical-device comfort is separa
 Fresh recommended gains are Music0.07511111111111113 / SFX1.1333333333333333,
 shown as65%/85% on the unchanged calibration-v2 curve. Existing exact gains/mute
 are preserved. Sound & comfort offers Recommended balance for deliberate adoption.
+
+## LOOT-03 B candidate — rules5 / active schema5
+
+The schema-v5 snapshot binds loot-ledger2 to the attempt runId. `enemyRewards.ts`
+owns bounded independent Gold/Science channels; `movePlayer` creates both at
+successful defeat with unchanged immediate Power. The collection view withholds
+that encounter until the battle ends and prioritizes its new burst without
+displacing accepted claims. Explicit source kind/objectId replaces a treasure-only
+origin assumption. Potential future channels reserve64 semantic bundles.
+
+v4/rules4 migration validates the old authored ledger, settles accepted claims,
+retains grounded treasure and retires old defeated enemies without reward. Only
+a saturated old ledger compacts same-source grounded bundles into an existing
+legal landing to reserve new channels; no current campaign save needs this.
+v2/v3 retain credited-treasure migration. Key5 is written before old-key cleanup;
+malformed/future and denied-write records stay protected. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md).

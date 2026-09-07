@@ -81,9 +81,9 @@ describe("physical authored rewards", () => {
     for(const changed of [ {...source,sourceId:"foreign"}, {...source,credited:1}, {...source,currency:"science"},
       {...source,drops:[drop,drop]}, {...source,drops:[{...drop,phase:"credited"}]},
       {...source,drops:[{...drop,at:level.start}]}, {...source,drops:[{...drop,amount:NaN}]} ]) {
-      expect(sanitizeLoot({version:1,sources:[changed]},level,game)).toBeNull();
+      expect(sanitizeLoot({...game.loot,sources:[changed]},level,game)).toBeNull();
     }
-    expect(sanitizeLoot({version:2,sources:[source]},level,game)).toBeNull();
+    expect(sanitizeLoot({version:99,sources:[source]},level,game)).toBeNull();
     expect(sanitizeLoot({version:1,sources:[source,source]},level,game)).toBeNull();
   });
 });

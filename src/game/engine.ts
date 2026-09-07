@@ -59,11 +59,11 @@ export function isObjectResolved(object: LevelObject, state: GameState): boolean
   }
 }
 
-export function createInitialGameState(level: LevelDefinition): GameState {
+export function createInitialGameState(level: LevelDefinition, runId?: string): GameState {
   const lootErrors = authoredLootErrors(level);
   if (lootErrors.length) throw Error(lootErrors.join(" "));
   return {
-    loot: emptyLoot(),
+    loot: emptyLoot(runId),
     levelId: level.id,
     position: { ...level.start },
     power: level.initialPower,
@@ -297,6 +297,7 @@ export function movePlayer(
         ...state,
         power,
         defeatedEnemyIds,
+        loot: scatterTreasure(level, { ...state, power, defeatedEnemyIds }, object),
       },
       moved: false,
       events: [defeatedEvent],
