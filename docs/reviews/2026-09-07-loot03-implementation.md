@@ -27,8 +27,9 @@ missing device evidence. Continue the authorized complete authored-loot slice.
 - Canvas shares its existing bounded reward clock with Power. Full permits24
   total visual tokens, Lite12; reserve four slots for immediate-rule Power.
   A stable represented-ID set owns physical admission, so no hidden token is
-  collected. Newly represented/restored grounded value receives a fresh750ms
-  readable interval; static landings do not replay old bursts. Remaining semantic
+  collected. First admission to the bounded logical representation set starts
+  a750ms interval, including restored value; this is not a measurement of first
+  visible pixels or continuous on-screen time. Static landings do not replay old bursts. Remaining semantic
   value persists until approached. No perpetual idle animation or polling.
 - Canvas unavailability uses small original SVG glyphs in the existing camera
   world; Science keeps its distinct atom symbol. Static/Reduced/interruption
@@ -65,7 +66,12 @@ timing, final visual receipt and publication are not yet claimed by this section
 Actual Sol independently reviewed the pure ledger and then storage/controller/
 completion source. Sol accepted the bounded source reservation policy, flagged
 missing amount validation, deletion ordering and invisible over-cap claims.
-Those findings are being covered before promotion; this is not final acceptance.
+Those findings are fixed in frozen85f49ea. Sol subsequently found no remaining
+source or visual blocker in the reviewed web scope; final performance acceptance
+and publication remain separate. The final v18 production packet passes11 cases
+(10physical-loot plus denied completion-journal retry). Exact7de853c CI34085947721
+passes the full700-test/build lane, budgets/contracts/guard/audit and Windows
+compilation. Compilation is not native acceptance.
 
 1. Prove conservation, valid landings, duplicate/stale commands,64-source saturation,
    strict malformed/future protection, v3 migration and denied writes/cleanup.
