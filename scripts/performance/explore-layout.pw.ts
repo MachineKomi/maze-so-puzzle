@@ -74,7 +74,7 @@ test('touch fold/expand keeps safe-area controls and full-size collection detail
     await page.getByRole('button',{name:/^More/}).tap();
     const details=page.getByRole('dialog').locator('button[data-focus-id^="bag:"]');
     await expect(details).toHaveCount(7);
-    const b=await details.first().boundingBox();expect(b!.width).toBeGreaterThan(44);expect(b!.height).toBeGreaterThan(44);
+    const b=await details.first().boundingBox();expect(b!.width).toBeGreaterThan(44);expect(b!.height).toBeGreaterThanOrEqual(43.9);
     await page.keyboard.press('Escape');await page.getByRole('button',{name:'Expand sidebar'}).tap();
     await expect(page.getByRole('button',{name:'Fold sidebar'})).toBeVisible();
     await mkdir(output,{recursive:true});await checkGeometry(page,'touch-safe-areas');

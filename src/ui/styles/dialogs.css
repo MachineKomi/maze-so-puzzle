@@ -319,3 +319,6 @@ fieldset { margin: 0; border: 1px solid #c5afc9; border-radius: 12px; min-width:
  .dialog-celebration:has(.victory-stage) .dialog-body { gap:4px 8px; }
  .dialog-celebration:has(.victory-stage) .adventure-level { padding:4px 6px; }
 }
+
+/* Physical detail targets in the scaled phone portal. */
+.dialog-stage[data-phone-fit] .more-actions button { min-height: calc(44px / var(--stage-scale)); }

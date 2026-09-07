@@ -322,7 +322,6 @@
 }
 .play-shell[data-layout="explore"] .adventure-hud[data-reader] .objective-card { display: flex; }
 .game-stage[data-phone-fit] .play-shell[data-layout="explore"][data-folded] .maze-map-card { --map-size: 112px; }
-.dialog-stage[data-phone-fit] .more-actions button { min-height: calc(44px / var(--stage-scale)); }
 @container game-stage (max-height: 500px) {
  .play-shell[data-layout="explore"] .objective-card { display: none; }
  .play-shell[data-layout="explore"] .adventure-equipment { --slot-size: 36px; gap: 4px; }
