@@ -1,5 +1,46 @@
 # Maze so Puzzle — joint orchestration state
 
+**Live operating state — September7:** web **0.22.18 is published**, release
+**54c286ac2dcc15590fb781a96e0d6ed2009fa78e**, reviewed82ee7e9, frozen runtime85f49ea.
+Root remains on `codex/physical-authored-loot`, fast-forwarded to the release;
+documentation closure follows without another game build. [Public proof](reviews/2026-09-07-v02218-public-verification.md),
+[qualification](reviews/2026-09-07-v02218-web-qualification.md) and
+[actual Sol review](reviews/2026-09-07-loot03-sol-final-review.md) bind both public
+origins, six fresh journeys,700 tests,41 broader/11 overlapping final browser
+cases and four five-pair performance cohorts. Astra remains sole runtime writer.
+
+**LOOT-03 A is delivered:** authored Gold/Science tumble, bounce and settle before
+finite-range collection; distant value persists/reloads. The run ledger owns
+exact claims/credits, protected v4 migration and completion journaling/receipts.
+Power's immediate puzzle authority stays intact. No new media/dependencies.
+After migration, corrective builds must retain v4 compatibility; no v3-only
+rollback or save clearing. Windows0.22.9 remains published; native0.22.10 held.
+
+**Next runtime dispatch: LOOT-03 B.** Audit enemy counts/Power bands and campaign
+totals, freeze modest deterministic final-defeat Gold/Science tables, extend A's
+source/capacity/save owners without retroactive enemy awards, qualify and publish.
+Then mixed chests/Mimics; account recognition and usable-inventory-first eggs
+follow their dependencies. Preserve DELIGHT-02B/LEARN-01, connected HOLE-02,
+icon-led pace and the wider campaign/Garden/co-op roadmap. No new general
+execution permission is needed. Sol reviews independently; Claude remains optional.
+
+**Performance is not declared physically resolved.** CAMERA-17's bounded window,
+separate liquid paint and grouped minimap remain. Ordinary camera Raster is
+neutral versus17; longer loot has disclosed added work. Both versions have a
+cold source-opening hitch under CPU4; [bounded follow-up](plans/CAMERA-17-bounded-scene-performance.md#loot-03-retained-cold-opening-follow-up)
+is preserved. Q08/P19 on18 owns iPhone13/iPad8 camera/first-opening observation;
+smooth iPhone17 does not establish a RAM floor. No physical Apple/WebKit/3GB/
+native/GPU-residency/thermal success is inferred. Q05/P20 is now ready for loot
+feel; Q01/Q02/Q04/Q07 and optional Q03/Q06 remain in the [single queue](HUMAN_REVIEW_QUEUE.md).
+
+All owned local/public browsers and servers are stopped. [Artifact ledger](LOCAL_ARTIFACT_LEDGER.md):
+LOOT-03 has257files/193321020bytes including public proof; existing17 entry reused,
+no repository/media clone or native package. Retain failures/pilots for an exact
+Human cleanup review; nothing deleted/archived. Docs-only closure uses actual
+successful54c286a with the unchanged [Vercel guard](VERCEL_DEPLOYMENT.md).
+
+## Historical v0.22.17 checkpoint — superseded by the operating state above
+
 **Current delivery — September 7:** web **0.22.17 is live**, release
 **65acb82076e299e7764b508e0d83ff2f77dd96df**, reviewed checkpoint b41a5c4,
 frozen runtime eff0530. Root is on `codex/physical-authored-loot` from0c4535e;

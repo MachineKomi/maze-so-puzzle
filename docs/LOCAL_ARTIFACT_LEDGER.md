@@ -1,6 +1,6 @@
 # Local artifact ledger and cleanup review
 
-## LOOT-03 A — September7 active qualification
+## LOOT-03 A — September7 initial qualification record
 
 Production builds reuse `C:/GameDev/maze-game/dist` and the existing provenance
 file under `node_modules/.cache/maze-performance/`; no repository/media copy.
@@ -34,6 +34,17 @@ explicit Human cleanup review. No deletion/archive and no native package.
 Raw hashes, host/source/served identity and limitations are in the
 [web qualification](reviews/2026-09-07-v02218-web-qualification.md). Public
 verification will add one explicitly inventoried packet after deployment.
+
+### LOOT-03 public verification
+
+`C:/GameDev/maze-game-qa/performance/v02218-public-20260907/`: nine files,
+15389358bytes, Astra-owned, release54c286a/runtime85f49ea. Eight screenshots and
+one receipt from six fresh public journeys and both-origin exact-byte checks.
+Receipt SHA-25653c2434af4e3a68456200c828a7c3c09c7d85b17f3d45efeb69d988ef6e2979a.
+All owned contexts/browsers stopped. Hold as accepted release evidence; no
+deletion/archive. Combined LOOT-03 local/public packets are257files/193321020bytes;
+no duplicated media/repository or native build. Docs-only closure reuses these
+records and does not create another build or preview.
 
 ## CAMERA-17 baseline — September7
 

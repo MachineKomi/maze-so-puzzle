@@ -1,5 +1,16 @@
 # Human decisions and steer
 
+**September7 delivery, not new Human approval:** LOOT-03 A is live as web0.22.18,
+release54c286a/runtime85f49ea. [Public proof](reviews/2026-09-07-v02218-public-verification.md)
+binds both origins and six fresh journeys. Actual independent Sol accepts the
+source/visual/Chromium performance scope, including disclosed added loot work
+and the common cold-opening hitch. No Apple/3GB/native or Human feel acceptance.
+Q05/P20 is ready; Q08/P19 remains the priority real-device camera check on18.
+Continue B: deterministic final-defeat enemy Gold/Science, then mixed chests/
+Mimics, through the conserved ledger. Recognition-only XP and usable-inventory-first
+eggs remain adopted implementation defaults subject to optional Q03/Q06 steer.
+Meaningful checkpoints/deployment remain authorized; do not await another prompt.
+
 **September7 engineering delivery, not new Human approval:** CAMERA-17 is live
 as web0.22.17, release65acb82/runtime eff0530. [Public verification](reviews/2026-09-07-v02217-public-verification.md)
 binds both origins and four fresh journeys; [Sol's independent review](reviews/2026-09-07-camera17-sol-final-review.md)

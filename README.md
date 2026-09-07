@@ -1,6 +1,6 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published **web preview is v0.22.17** at
+The current published **web preview is v0.22.18** at
 [mazesopuzzle.com](https://mazesopuzzle.com/): balanced 3D wall volumes with clean
 projected edges, stronger directional lighting and larger grounded sprites that
 stand between rear and foreground walls. It keeps crisp surface details,
@@ -12,16 +12,19 @@ liquids have restored floor banks/shadow coverage with restrained material motio
 Camera paint now stays within a bounded window, animated liquids have their own
 paint layer, and the minimap uses fewer elements. Paired lab raster work falls
 26–70%; actual iPhone13/iPad8 comfort remains the priority Q08 playtest.
-[Verified release](docs/reviews/2026-09-07-v02217-public-verification.md).
+Gold and Science pickups now tumble, bounce and settle before nearby collection;
+distant drops stay on safe floor until Ame approaches, including after reload.
+[Verified release](docs/reviews/2026-09-07-v02218-public-verification.md).
 Latest fully published **Windows remains v0.22.9**; native0.22.10 qualification
-is separately unfinished. No new gameplay/save migration in this web release.
+is separately unfinished. Existing valid runs migrate to the protected v4 loot
+ledger without replaying rewards or losing their route.
 Earned friends, rewards and progress remain intact. Do not clear saves.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
 The Human accepted0.22.13's tall3D direction. Refined wall/sprite appearance,
 physical iPad and the wider visual/audio programme remain in the
-[Human review queue](docs/HUMAN_REVIEW_QUEUE.md). Next: physical authored-loot
-collection, with protected migration and conserved claims first.
+[Human review queue](docs/HUMAN_REVIEW_QUEUE.md). Next: deterministic final-defeat
+enemy Gold/Science rewards, then mixed chests and Mimics. XP and eggs follow.
 
 [![Browser build](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml/badge.svg)](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml)
 

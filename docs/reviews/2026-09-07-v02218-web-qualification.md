@@ -3,9 +3,9 @@
 Frozen runtime85f49eaf5c2e53d01491b6e7916b3c9bcc7e6523, PR9 on
 `codex/physical-authored-loot`. Astra is sole runtime writer; actual Sol reviews
 independently. All four paired cohorts and final browser checks are complete.
-Astra and actual Sol accept the bounded web candidate with the costs and remaining
-cold-opening issue below. Exact-head CI must precede promotion; public verification
-will separately establish the deployed bytes and fresh release journeys.
+Astra and actual Sol accepted the bounded web candidate with the costs and remaining
+cold-opening issue below. **[Published and publicly verified](2026-09-07-v02218-public-verification.md)**
+as release54c286a after exact82ee7e9 CI34087361117 passed both jobs.
 
 ## Delivered candidate scope
 

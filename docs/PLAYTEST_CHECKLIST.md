@@ -1,6 +1,31 @@
 # Family playtest checklist
 
-## New short journey — P19 / Q08, CAMERA-17
+## New short journey — P20 / Q05, physical authored loot
+
+**Ready on [published0.22.18](reviews/2026-09-07-v02218-public-verification.md).**
+Use an unlocked maze with Gold/Science: Rainbow Power Parade has Gold,
+Moonlit Friendship Quest has Science; there is no need to replay the campaign.
+
+- Open a pickup and pause. Are the spread, spin, two bounces, readable settled
+  interval and star/atom glyphs satisfying? The counter should rise on collection.
+- Let a distant bundle remain, then approach it. Does the accelerating pull feel
+  pleasant, with a clear boundary beyond which drops stay on the floor? Try a
+  corner; rewards should not fly through walls or hazards.
+- If convenient, reload while distant value remains, or finish and choose Stay.
+  Uncollected value should remain. Next explicitly leaves optional ground loot;
+  restarting abandons the current unbanked attempt. Do not clear progress.
+
+Note build/device/settings and any first-opening pause. P19/Q08 remains the
+priority affected-device camera observation. Full/Lite/Static/Reduced retain the
+same values; comfort modes reduce travel effects. Enemy Gold/Science, mixed
+chests/Mimics, rainbow account XP and eggs are subsequent work, not this release.
+This is a feel/readability observation, not a request to repeat every old test.
+
+## Priority device journey — P19 / Q08, CAMERA-17 retained in18
+
+Use current0.22.18 for this changed-build observation; its camera retains17's
+bounded renderer. Also mention any noticeable first Gold/Science opening pause.
+The original17 delivery statement below preserves its evidence identity.
 
 **Ready on [published0.22.17](reviews/2026-09-07-v02217-public-verification.md):**
 confirm the displayed version, then use the same browser and Full/Regular settings on iPhone13

@@ -1,11 +1,15 @@
 # LOOT-03 — physical collection and lasting adventure progress
 
-**Current September7 execution:** CAMERA-17/web0.22.17 is published. A is now
-being implemented and qualified on `codex/physical-authored-loot` with Astra as
-runtime writer and actual independent Sol review. The [implementation decisions
-and acceptance sequence](../reviews/2026-09-07-loot03-implementation.md) refine
-capacity, represented-ID admission, recovery and cleanup. Earlier starting-point
-descriptions below preserve the pre-implementation analysis, not current code.
+**Current September7 execution:** A is [published as web0.22.18](../reviews/2026-09-07-v02218-public-verification.md),
+release54c286a/runtime85f49ea. Astra remained runtime writer; actual independent
+Sol source/visual/performance review accepted the scoped web slice. The
+[implementation record](../reviews/2026-09-07-loot03-implementation.md) binds
+capacity, representation, recovery and cleanup. **Execute B next:** deterministic
+final-defeat enemy Gold/Science tables and campaign-total audit, then chest/Mimic
+lifecycle through the same ledger. Preserve Power and old resolved-enemy history.
+Q05/P20 now owns loot feel; Q08/P19 remains actual device evidence, including cold
+reward opening. Earlier starting-point descriptions below preserve historical
+pre-implementation analysis; they do not request redoing A.
 
 **September7 implementation readiness:** [source-owner audit and first-slice dispatch](../reviews/2026-09-07-loot03-readiness.md)
 identifies the v3/rules-3 migration and future active-save protections to build

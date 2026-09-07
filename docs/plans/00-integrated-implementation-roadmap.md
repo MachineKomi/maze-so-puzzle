@@ -1,5 +1,21 @@
 # Integrated implementation roadmap through final convergence
 
+**Current delivery — September7:** LOOT-03 A is
+[published as web0.22.18](../reviews/2026-09-07-v02218-public-verification.md),
+release54c286a/runtime85f49ea. The complete authored Gold/Science physical
+collection, protected migration and completion slice is delivered. Actual Sol
+independently accepted its source/visual/Chromium scope. Q05/P20 asks about feel;
+Q08/P19 remains actual iPhone13/iPad8 evidence, including cold source opening.
+
+**Execute B next:** audit enemy counts/Power bands and best/worst campaign totals,
+freeze modest deterministic final-defeat Gold/Science tables, extend A's stable
+source/conservation/migration owners without retroactive enemy awards, then
+qualify and publish. Mixed chests/Mimics follow that table foundation; recognition
+XP and usable-inventory-first eggs follow their profile/inventory dependencies.
+Keep the cold-opening performance follow-up, DELIGHT-02B, LEARN-01, connected
+HOLE-02, icon-led pace and the wider campaign/Garden/co-op roadmap. Earlier dated
+next-work statements below preserve their historical context, not live dispatch.
+
 **Latest Human priority — CAMERA-17:** address the reported iPhone13/iPad8 camera
 stutter before LOOT-03. [Bounded implementation/qualification plan](CAMERA-17-bounded-scene-performance.md)
 retains walls, materials and save/gameplay semantics. The successful iPhone17

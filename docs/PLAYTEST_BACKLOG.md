@@ -1,6 +1,19 @@
 # Maze so Puzzle — playtest backlog
 
-**Latest delivery:** [CAMERA-17](plans/CAMERA-17-bounded-scene-performance.md) is
+**Latest delivery:** LOOT-03 A is [published as web0.22.18](reviews/2026-09-07-v02218-public-verification.md),
+release54c286a/runtime85f49ea: authored Gold/Science bursts, bounce/settle, finite
+vacuum, persistent grounded value and protected v4 migration/completion. Q05/P20
+is ready. Next is B's deterministic enemy reward table/campaign-total audit,
+then mixed chests and Mimics. XP and inventory-before-eggs follow; Power remains
+immediate-rule. DELIGHT/LEARN/HOLE/pace and the wider roadmap are preserved.
+
+**Open performance follow-up:** Q08/P19 on18 still owns actual iPhone13/iPad8
+camera comfort. The [cold reward-opening diagnosis](plans/CAMERA-17-bounded-scene-performance.md#loot-03-retained-cold-opening-follow-up)
+is now a named bounded follow-up: both17/18 have an opening hitch under CPU4;
+new loot adds real layout/paint work. Do not label it fixed, infer a RAM floor
+or block independent reward-table work pending Human availability.
+
+**Previous delivery:** [CAMERA-17](plans/CAMERA-17-bounded-scene-performance.md) is
 [published as web0.22.17](reviews/2026-09-07-v02217-public-verification.md), release65acb82,
 frozen runtime eff0530. Q08/P19 is now ready for iPhone13/iPad8 playtesting; the
 reported stutter remains open until that observation. The successful iPhone17

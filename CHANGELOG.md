@@ -4,7 +4,7 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.18 — physical Gold and Science (candidate)
+## 0.22.18 — physical Gold and Science (published web)
 
 - Authored rewards burst out, tumble, bounce and settle before collection.
   Distant drops stay on the floor until Ame approaches; the pickup pull speeds
