@@ -1,6 +1,6 @@
 import type { Point, TerrainKind } from "../game/types";
 
-export type RewardKind = "gold" | "science" | "power";
+export type RewardKind = "gold" | "science" | "power" | "xp";
 export interface RewardEmission {
   readonly kind: RewardKind;
   readonly at: Point;

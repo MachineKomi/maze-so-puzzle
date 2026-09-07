@@ -47,7 +47,7 @@ describe('authored mixed chests and Mimics',()=>{
     const defeated=movePlayer(level,state,'right');
     expect(defeated.moved).toBe(false);expect(defeated.state.power).toBe(6);
     expect(defeated.state.chests[0]?.phase).toBe('defeated');expect(defeated.state.defeatedEnemyIds).toEqual([]);
-    expect(defeated.state.loot.sources).toHaveLength(2);
+    expect(defeated.state.loot.sources).toHaveLength(3);
     expect(progressionStateSignature(defeated.state,new Set())).not.toBe(signature);
     expect(sanitizeLoot(defeated.state.loot,level,defeated.state)).not.toBeNull();
   });

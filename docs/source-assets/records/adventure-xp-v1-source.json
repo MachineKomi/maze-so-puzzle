@@ -1,0 +1,93 @@
+{
+  "$schema": "../schema/art-source.schema.json",
+  "schemaVersion": 1,
+  "recordId": "adventure-xp-v1-source",
+  "id": "adventure-xp",
+  "artVersion": 1,
+  "family": "reward",
+  "runtimeStatus": "active",
+  "sourceStatus": "source-backed",
+  "approvalStatus": "candidate",
+  "validationProfile": "strict-v1",
+  "recipeVersion": "adventure-xp-native-alpha-v1",
+  "promptEvidence": {
+    "fidelity": "exact",
+    "historyPath": "docs/plans/LOOT-03C-adventure-xp-execution.md",
+    "assetNamedInHistory": true,
+    "outputIds": [
+      "exec-e2135ef3-bdaa-40e1-b126-74a39be2c665.png"
+    ],
+    "promptFile": {
+      "path": "docs/source-assets/production/adventure-xp-v1/prompt.txt",
+      "sha256": "3e1ee0ac0e73d82c9627f1efdcf8702c2ef84df852659fc2ccc8f3debe47017d"
+    },
+    "notes": "Built-in image_gen.imagegen, 2026-09-07. One fresh image; no references. Agent qualification is not Human art approval."
+  },
+  "sources": [
+    {
+      "path": "docs/source-assets/production/adventure-xp-v1/generator.png",
+      "sha256": "77cb5f5d504b1754c148ed28e34036c1b6521d63a8ded07c41c19fd79dd501f5",
+      "bytes": 778096,
+      "relationship": "generator-original",
+      "evidence": "Exact built-in output copied without alteration; native alpha preserved."
+    }
+  ],
+  "derivatives": [
+    {
+      "path": "public/assets/adventure-xp-v1.png",
+      "sha256": "d1b2a5dbb8dac34682c71ff082850fb5333462defcbb4513e4081175fcd62f1f",
+      "bytes": 12573,
+      "id": "field-and-book",
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "profile": "field-and-book",
+      "derivativeRevision": 1,
+      "runtimeStatus": "active",
+      "loadingPhase": "on-first-eligible-maze-or-book-completion",
+      "encoder": {
+        "name": "Pillow",
+        "version": "12.2.0",
+        "options": {
+          "optimize": true,
+          "resample": "premultiplied-LANCZOS",
+          "visibleHeight": 114,
+          "marginBoundsAlphaThreshold": 3
+        }
+      }
+    }
+  ],
+  "geometry": {
+    "class": "floating-crystal",
+    "pivot": [
+      0.5,
+      0.5
+    ],
+    "visibleBounds": [
+      0.296875,
+      0.0546875,
+      0.3984375,
+      0.890625
+    ],
+    "safeInset": [
+      0.0546875,
+      0.0546875,
+      0.0546875,
+      0.0546875
+    ]
+  },
+  "knownUnknowns": [
+    "Human tiny-sprite aesthetic feedback remains queued; generated source is taller and more painterly than the prompt's compact-facet target."
+  ],
+  "rights": {
+    "originClaim": "Original image generated for Maze so Puzzle using built-in imagegen.",
+    "licenceStatus": "pending-owner-review",
+    "notes": "No third-party reference image supplied; no Human rights review fabricated."
+  },
+  "rollback": {
+    "method": "Revert XP runtime references and this derivative as one feature; preserve source and proof for review. Existing reward art is untouched."
+  }
+}

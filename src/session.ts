@@ -2,7 +2,7 @@ import { pointsEqual } from "./game/engine";
 import { CURATED_LEVELS, LEGACY_CURATED_LEVELS } from "./game/levels";
 import { sanitizeChests } from "./game/chests";
 import { gameplayFingerprintForRules } from "./game/contentIdentity";
-import { emptyLoot, legacyCreditedLoot, migrateAuthoredLoot, sanitizeLoot, finishLootClaims } from "./game/loot";
+import { emptyLoot, legacyCreditedLoot, migrateAuthoredLoot, migratePreXpLoot, sanitizeLoot, finishLootClaims } from "./game/loot";
 import type { TileKey } from "./game/exploration";
 import type {
   GameState,
@@ -13,7 +13,7 @@ import type {
 } from "./game/types";
 
 /** Durable normal-run snapshots, including a recoverable pending exit choice. */
-export const ACTIVE_RUN_SCHEMA_VERSION = 6 as const;
+export const ACTIVE_RUN_SCHEMA_VERSION = 7 as const;
 // Retain the authoritative key: older builds protect the future schema here.
 export const ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v5";
 export const VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v4";
@@ -242,6 +242,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition,
   const rawHasAntidoteLeaf = ownValue(value, "hasAntidoteLeaf");
   const rawGoldStarsCollected = ownValue(value, "goldStarsCollected");
   const rawSciencePointsCollected = ownValue(value, "sciencePointsCollected");
+  const xpCollected = prior ? 0 : ownValue(value,"xpCollected");
+  if (typeof xpCollected !== "number" || !Number.isSafeInteger(xpCollected) || xpCollected < 0) return null;
   const rawExitArmed = ownValue(value, "exitArmed");
   // Levels containing Spring Boots changed topology in 0.9. An older snapshot
   // cannot prove which side of the new hole gate it belongs on, so discard only
@@ -397,11 +399,13 @@ function sanitizeGameState(value: unknown, level: LevelDefinition,
     openedDoorIds,
     goldStarsCollected,
     sciencePointsCollected,
+    xpCollected,
     exitArmed,
     status,
     steps,
   };
   if (prior?.version === 4) return migrateAuthoredLoot(ownValue(value,"loot"),level,game,prior.runId);
+  if (prior && prior.version >= 5) return migratePreXpLoot(ownValue(value,"loot"),level,game);
   const loot = prior && prior.version<5 ? sanitizeLoot(legacyCreditedLoot(level,game,prior.runId),level,game)
     : sanitizeLoot(ownValue(value, "loot"), level, game);
   return loot ? { ...game, loot } : null;
@@ -537,7 +541,13 @@ function safelyRemove(storage: ActiveRunStorage, key = ACTIVE_RUN_STORAGE_KEY): 
 /** Exact historical fingerprints only. v4 preserves pending treasure; all old
  * defeated enemies retire without retroactive drops. */
 function migratePrior(value: unknown, levels: readonly LevelDefinition[]): ActiveRunSnapshot | null {
-  if (!isRecord(value) || ![2,3,4,5].includes(value.schemaVersion as number)) return null;
+  if (!isRecord(value) || ![2,3,4,5,6].includes(value.schemaVersion as number)) return null;
+  if (value.schemaVersion === 6) {
+    const level = resolveActiveRunLevel(value as unknown as ActiveRunSnapshot,levels);
+    if (!level || typeof value.runId !== "string" || !RUN_ID_PATTERN.test(value.runId)) return null;
+    const game = sanitizeGameState(value.game,level,{version:6,runId:value.runId});
+    return game ? sanitizeActiveRunSnapshot({...value,schemaVersion:ACTIVE_RUN_SCHEMA_VERSION,game:finishLootClaims(game)},levels) : null;
+  }
   const candidates=levels.flatMap(l=>{
     const official=CURATED_LEVELS.find(o=>o.id===l.id);
     const historical=l.gameplayFingerprint===official?.gameplayFingerprint?LEGACY_CURATED_LEVELS.find(o=>o.id===l.id):undefined;
@@ -560,12 +570,12 @@ function migratePrior(value: unknown, levels: readonly LevelDefinition[]): Activ
 }
 
 function updatedContent(value: unknown, levels: readonly LevelDefinition[]): boolean {
-  if (!isRecord(value) || ![1,2,3,4,5,6].includes(value.schemaVersion as number)) return false;
-  if(value.schemaVersion===6&&resolveActiveRunLevel(value as unknown as ActiveRunSnapshot,levels))return false;
+  if (!isRecord(value) || ![1,2,3,4,5,6,7].includes(value.schemaVersion as number)) return false;
+  if((value.schemaVersion===6||value.schemaVersion===7)&&resolveActiveRunLevel(value as unknown as ActiveRunSnapshot,levels))return false;
   if(migratePrior(value,levels))return false;
   const level = levels.find(l => l.id === value.levelId && l.source === "curated");
   return !!level && (value.schemaVersion === 1 || value.contentRevision !== level.contentRevision
-    || value.gameplayFingerprint !== (value.schemaVersion === 6
+    || value.gameplayFingerprint !== ((value.schemaVersion === 6 || value.schemaVersion === 7)
       ? level.gameplayFingerprint : gameplayFingerprintForRules(level, value.schemaVersion === 5 ? 5 : value.schemaVersion === 4 ? 4 : 3)));
 }
 
@@ -586,7 +596,7 @@ function protectedRecord(target: ActiveRunStorage, levels: readonly LevelDefinit
       const value: unknown = JSON.parse(raw);
       return !sanitizeActiveRunSnapshot(value, levels)
         && !migratePrior(value,levels)
-        && !(isRecord(value) && value.schemaVersion === 6 && updatedContent(value, levels));
+        && !(isRecord(value) && (value.schemaVersion === 6 || value.schemaVersion === 7) && updatedContent(value, levels));
     }
     for (const key of PRIOR_KEYS) {
       const prior = target.getItem(key);
@@ -634,7 +644,7 @@ export function readActiveRunResult(curatedLevels: readonly LevelDefinition[],
         catch { return { snapshot: settled, discardedUpdatedRun: false, persistence: "migration-unsaved" }; }
         return { snapshot: settled, discardedUpdatedRun: false };
       }
-      if (isRecord(parsed) && parsed.schemaVersion === 6 && updatedContent(parsed, curatedLevels)) {
+      if (isRecord(parsed) && (parsed.schemaVersion === 6 || parsed.schemaVersion === 7) && updatedContent(parsed, curatedLevels)) {
         const removed = removePrior(target) && safelyRemove(target);
         return { snapshot: null, discardedUpdatedRun: true, ...(!removed ? { persistence: "protected" as const } : {}) };
       }

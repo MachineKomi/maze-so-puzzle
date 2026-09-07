@@ -6,13 +6,14 @@ save migration. Actual Sol supports bounded web publication;747 tests,
 105 distinct browser contracts and four five-pair cohorts qualify the frozen
 runtime e08775f. Reviewed df33b62/release c5f2305; both public origins verified.
 
-**Next: recognition-only rainbow XP, then protected usable inventory before eggs.**
+**In flight: LOOT-03 C rainbow XP, then protected usable inventory before eggs.**
+Candidate0.22.23 on `codex/adventure-xp`; [frozen contract](plans/LOOT-03C-adventure-xp-execution.md). Physical XP, protected saves and Book/completion progress are implemented; qualification is in progress. Web0.22.22 remains live until promotion.
 The authored chest/Mimic tranche of B is delivered; generated Mimics remain a
 separate versioned Plan09 tranche. ART-REWARD-01 proper generated reward artwork,
 HOLE-02, icon-led pace, HAZARD-CONTACT-01, DELIGHT/LEARN and campaign/Garden/co-op
 remain open. Q05/P22 covers new chest feel; Q08/P19 remains affected-device camera
 and cold first-Power observation. No physical Apple/3GB/native acceptance.
-Astra owns runtime on codex/chest-mimic-rewards; Sol independently reviews.
+Astra owns runtime on codex/adventure-xp; Sol independently reviews.
 Earlier dated active/next/live labels below are historical and superseded.
 
 Docs closure a6cd8cb is backed up on main and this branch. Vercel actually

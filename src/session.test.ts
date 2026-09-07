@@ -318,7 +318,7 @@ describe("active run persistence", () => {
 
     const migrated = readActiveRun(CURATED_LEVELS, storage);
     expect(migrated).toMatchObject({
-      schemaVersion: 6,
+      schemaVersion: 7,
       levelId: level.id,
       runId: expect.stringMatching(/^migrated-/),
     });
@@ -521,7 +521,7 @@ describe("active run persistence", () => {
     }, storage)).toBe(true);
 
     expect(readActiveRun(CURATED_LEVELS, storage)).toEqual({
-      schemaVersion: 6,
+      schemaVersion: 7,
       runId: "run-test-session-0003",
       levelId: level.id,
       contentRevision: level.contentRevision,
@@ -625,7 +625,7 @@ describe("active run persistence", () => {
     const game = progressedPlayingState(level,"run-test-session-0004");
     const duplicate = <T,>(values: readonly T[]): T[] => [...values].reverse().flatMap((value) => [value, value]);
     const sanitized = sanitizeActiveRunSnapshot({
-      schemaVersion: 6,
+      schemaVersion: 7,
       runId: "run-test-session-0004",
       levelId: level.id,
       contentRevision: level.contentRevision,

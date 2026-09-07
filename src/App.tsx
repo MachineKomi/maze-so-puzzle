@@ -6,6 +6,7 @@ import { CagedFriend, cageComposition } from "./ui/game/CagedFriend";
 import { fieldActorStyle } from "./fieldArtLayout";
 import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
 import { useLootCollection } from "./vfx/useLootCollection";
+import { AdventureLevel } from "./ui/AdventureLevel";
 import { finishLootClaims, pendingLoot } from "./game/loot";
 import { chestReceipt } from "./game/chests";
 import { rewardSeed } from "./vfx/rewardPhysics";
@@ -224,6 +225,9 @@ interface CompletionCelebration {
   readonly totalGold: number;
   readonly bonusGold: number;
   readonly sciencePoints: number;
+  readonly collectedXp: number;
+  readonly previousXp: number;
+  readonly projectedXp: number;
   readonly testerRun: boolean;
 }
 
@@ -635,6 +639,7 @@ function completionInputFor(
     gameplayFingerprint: level.gameplayFingerprint,
     bonusGold: game.goldStarsCollected,
     sciencePoints: game.sciencePointsCollected,
+    collectedXp: game.xpCollected,
   };
 }
 
@@ -665,6 +670,7 @@ function pendingCompletionFor(
       totalGold: progress.gold,
       bonusGold: game.goldStarsCollected,
       sciencePoints: game.sciencePointsCollected,
+      collectedXp: game.xpCollected, previousXp: progress.adventureXp, projectedXp: progress.adventureXp,
       testerRun: true,
     };
   }
@@ -689,6 +695,7 @@ function pendingCompletionFor(
     totalGold: projected.gold,
     bonusGold: game.goldStarsCollected,
     sciencePoints: game.sciencePointsCollected,
+    collectedXp: game.xpCollected, previousXp: progress.adventureXp, projectedXp: projected.adventureXp,
     testerRun: false,
   };
 }
@@ -1959,7 +1966,7 @@ function App() {
     }
     playSound("bump", muted);
     setRestartArmed(true);
-    setFeedback({ icon: ASSETS.navRestart, text: pendingLoot(game) ? "Restart again to leave the uncollected drops and begin anew." : "Tap restart once more.", tone: "plain", sound: "bump" });
+    setFeedback({ icon: ASSETS.navRestart, text: pendingLoot(game) ? "Restart again to leave the uncollected drops and unbanked XP and begin anew." : "Tap restart once more.", tone: "plain", sound: "bump" });
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     restartTimer.current = window.setTimeout(() => setRestartArmed(false), 2200);
   };
@@ -2658,7 +2665,7 @@ function App() {
             </div>
 
             <p className="sr-only" id="maze-status">{mazeStatus}</p>
-            <p className="sr-only" aria-live="polite" aria-atomic="true">Collected this adventure: {game.goldStarsCollected} Gold Stars, {game.sciencePointsCollected} Science Points. {pendingLoot(game)} optional reward points remain on the floor.</p>
+            <p className="sr-only" aria-live="polite" aria-atomic="true">Collected this adventure: {game.goldStarsCollected} Gold Stars, {game.sciencePointsCollected} Science Points, {game.xpCollected} Adventure XP. {pendingLoot(game)} optional reward points remain on the floor.</p>
 
             <div className="sr-only" data-scene-slot="feedback" aria-live={mapPickupToast || feedback.sound === "step" || feedback.sound === "select" ? "off" : "polite"} aria-atomic="true">
               <CatalogueImage className="feedback-icon" src={feedback.icon} alt="" />
@@ -2790,6 +2797,7 @@ function App() {
                 <span className="reward-badge">Total {completion.totalGold}</span>
               </div>
             )}
+            {!completion.testerRun && <AdventureLevel xp={completion.projectedXp} previousXp={completion.previousXp} collected={completion.collectedXp} temporary={unsupportedProfile} />}
             {!completion.testerRun && newCollectibles.length > 0 && (
               <div className="collection-strip reward-new" aria-label="New rewards">
                 {newCollectibles.map((item) => (
@@ -2954,7 +2962,7 @@ function App() {
           >
             <CatalogueImage className="modal-art" src={ASSETS.portrait} alt="Ame smiling with her adventure backpack" />
             <p className="modal-lead">
-              This will forget every maze record, gold star, Science Point, rescued friend, sticker, medal, badge, and the current maze.
+              This will forget every maze record, gold star, Science Point, Adventure XP and Level, rescued friend, sticker, medal, badge, and the current maze.
               You’ll begin again from Story Maze 1. This cannot be undone.
             </p>
             <div className="modal-actions">

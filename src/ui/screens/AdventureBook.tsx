@@ -1,3 +1,4 @@
+import { AdventureLevel } from "../AdventureLevel";
 import { BOOK_FRIEND_IDS, BOOK_GUARDIAN_IDS } from "../../bookRoster";
 import { useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { ASSETS, STICKER_ART, MEDAL_ART, BADGE_ART } from "../../assets";
@@ -196,6 +197,7 @@ export function AchievementsScreen({ onDetail, progress, unlockedLevelIds, activ
             </section>
           </>}
           {page === "stats" && <>
+            <AdventureLevel xp={progress.adventureXp} />
             <PageHeading eyebrow="Look how far you've come" title="Your adventure in little wonders">Every star and every homecoming has a place in the Book.</PageHeading>
             <div className="book-stats" aria-label="Adventure totals">{[
               { art: ASSETS.goal, value: progress.totalMazesCompleted, label: "Mazes solved" },

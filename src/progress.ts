@@ -20,7 +20,9 @@ import {
   migrateCampaignAccess,
 } from "./campaign";
 
-export const PLAYER_PROGRESS_SCHEMA_VERSION = 7 as const;
+import { boundedXp, COMPLETION_XP } from "./game/adventureXp";
+
+export const PLAYER_PROGRESS_SCHEMA_VERSION = 8 as const;
 // Keep this established key so released v6 readers see the future schema and
 // refuse writes; moving to a new key would expose a stale writable profile.
 export const PLAYER_PROGRESS_STORAGE_KEY = "maze-so-puzzle-progress-v6";
@@ -232,6 +234,7 @@ export interface PlayerProgress {
   readonly unlockedLevelIds: readonly string[];
   readonly gold: number;
   readonly sciencePoints: number;
+  readonly adventureXp: number;
   readonly stickers: readonly StickerId[];
   readonly medals: readonly RescueMedalId[];
   readonly badges: readonly BadgeId[];
@@ -304,6 +307,7 @@ export interface LevelCompletionInput {
   /** Optional treasures collected during this completed run. */
   readonly bonusGold?: number;
   readonly sciencePoints?: number;
+  readonly collectedXp?: number;
 }
 
 export interface ProgressStorage {
@@ -530,6 +534,7 @@ export function createDefaultPlayerProgress(unlockedLevelCount = 1): PlayerProgr
     unlockedLevelIds,
     gold: 0,
     sciencePoints: 0,
+    adventureXp: 0,
     stickers: [],
     medals: [],
     badges: [],
@@ -656,6 +661,7 @@ function sanitizeProgressObject(
   includeCompletionReceipts = false,
   includeEnemyDiscoveries = false,
   includeFriendDiscoveries = false,
+  includeXp = false,
 ): PlayerProgress {
   const bestResultsByLevel = sanitizeBestResults(
     ownValue(value, "bestResultsByLevel"),
@@ -772,6 +778,7 @@ function sanitizeProgressObject(
     unlockedLevelIds,
     gold: nonNegativeInteger(ownValue(value, "gold")),
     sciencePoints: nonNegativeInteger(ownValue(value, "sciencePoints")),
+    adventureXp: includeXp ? boundedXp(ownValue(value, "adventureXp")) : 0,
     stickers: uniqueKnownIds(ownValue(value, "stickers"), isStickerId),
     medals: mergeUnique(storedMedals, medalsForPerfectRescueCount(perfectRescueMazeCount)),
     badges: mergeUnique(storedBadges, badgesForMetrics(badgeMetrics)),
@@ -842,8 +849,10 @@ export function migratePlayerProgress(value: unknown): PlayerProgress {
 
   const schemaVersion = ownValue(value, "schemaVersion");
   if (schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION) {
-    return sanitizeProgressObject(value, true, true, true, true);
+    return sanitizeProgressObject(value, true, true, true, true, true);
   }
+
+  if (schemaVersion === 7) return sanitizeProgressObject(value, true, true, true, true);
 
   if (schemaVersion === 6) {
     return sanitizeProgressObject(value, true, true, true);
@@ -1104,6 +1113,7 @@ export function applyLevelCompletion(
     unlockedLevelIds,
     gold: current.gold + reward.gold + nonNegativeInteger(input.bonusGold),
     sciencePoints: current.sciencePoints + nonNegativeInteger(input.sciencePoints),
+    adventureXp: boundedXp(current.adventureXp + (completionId ? boundedXp(input.collectedXp) + COMPLETION_XP : 0)),
     stickers: mergeUnique(current.stickers, reward.stickerIds),
     medals: mergeUnique(
       current.medals,
@@ -1208,6 +1218,7 @@ export function readPlayerProgress(
         if (isUnsupportedProgressSnapshot(parsed)) return createDefaultPlayerProgress();
         if (isRecord(parsed) && (
           parsed.schemaVersion === PLAYER_PROGRESS_SCHEMA_VERSION
+          || parsed.schemaVersion === 7
           || parsed.schemaVersion === 6
           || parsed.schemaVersion === 5
           || parsed.schemaVersion === 4

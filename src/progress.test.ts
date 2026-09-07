@@ -71,7 +71,7 @@ describe("player progress migration and persistence", () => {
       campaignOrderVersion: 2,
       unlockedLevelIds: ["little-star-trail"],
       gold: 0,
-      sciencePoints: 0,
+      sciencePoints: 0, adventureXp: 0,
       stickers: [],
       medals: [],
       badges: [],

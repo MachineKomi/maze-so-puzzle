@@ -30,7 +30,7 @@ describe("v4 enemy-reward migration",()=>{
   it("retains grounded treasure, settles accepted value once and retires old defeated enemies",()=>{
     const old=prior(),target=storage();target.setItem(VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY,JSON.stringify(old));
     const result=readActiveRunResult([level],target),next=result.snapshot!;
-    expect(next.schemaVersion).toBe(6);expect(next.runId).toBe(runId);expect(next.game.loot.runId).toBe(runId);
+    expect(next.schemaVersion).toBe(7);expect(next.runId).toBe(runId);expect(next.game.loot.runId).toBe(runId);
     expect(next.game.loot.legacyRetiredEnemyIds).toEqual(old.game.defeatedEnemyIds);
     expect(next.game.loot.sources.every(s=>s.sourceKind==="treasure")).toBe(true);
     const grounded=old.game.loot.sources.flatMap(s=>s.drops).filter(d=>d.phase==="grounded");
@@ -42,7 +42,7 @@ describe("v4 enemy-reward migration",()=>{
     expect(readActiveRunResult([level],target)).toEqual(result);
     const approached=movePlayer(level,next.game,"left").state,defeated=movePlayer(level,approached,"down").state;
     expect(defeated.defeatedEnemyIds).toHaveLength(2);
-    expect(defeated.loot.sources.filter(s=>s.sourceKind==="enemy")).toHaveLength(2);
+    expect(defeated.loot.sources.filter(s=>s.sourceKind==="enemy")).toHaveLength(3);
     expect(sanitizeActiveRunSnapshot({...next,game:defeated},[level])?.game).toEqual(defeated);
   });
   it("rejects rebinding a persisted reward roll to another run",()=>{

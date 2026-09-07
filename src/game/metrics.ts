@@ -93,7 +93,7 @@ function solveInitial(level: LevelDefinition): GameState {
     loot: emptyLoot(), chests: [], levelId: level.id, position: { ...level.start }, power: level.initialPower,
     hasSword: false, hasBoots: false, hasSpringBoots: false, hasAntidoteLeaf: false,
     keys: [], collectedObjectIds: [], rescuedAnimalIds: [], defeatedEnemyIds: [], openedDoorIds: [],
-    goldStarsCollected: 0, sciencePointsCollected: 0, exitArmed: true, status: "playing", steps: 0,
+    goldStarsCollected: 0, sciencePointsCollected: 0, xpCollected: 0, exitArmed: true, status: "playing", steps: 0,
   };
 }
 

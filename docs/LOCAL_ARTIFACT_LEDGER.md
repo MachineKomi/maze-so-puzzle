@@ -813,3 +813,21 @@ archive, clone or native package. Documentation closure creates no game build.
 | v02222-public-20260907 |11|19652180|
 | chest22-public-canonical |19|4206837|
 | chest22-public-alias |19|5004742|
+
+## XP23 working artifacts — 2026-09-07
+
+Astra, `codex/adventure-xp`. No deletion/archive, clone, native build or extra
+deployment. Reuse the existing ignored `dist/` in place, plus its existing
+`node_modules/.cache/maze-performance` build marker. QA lives under sibling
+`C:/GameDev/maze-game-qa/performance`; retain until explicit Human cleanup review.
+
+- `release-v02222`: four frozen HTML/JS/CSS/identity files,754,409 bytes; no media or repository copy. Supplies the actual v22 entry for paired review.
+- `xp23-unit-initial.log`: failed unconstrained-worker run (process allocation/OOM); diagnostic only. Subsequent tests use `--maxWorkers=1`.
+- `xp23-unit-serial.log`, `xp23-unit-targeted.log`, `xp23-unit-final.log`, `xp23-build-initial.log`, `xp23-build.log`, `xp23-art-check.json`: compact iteration/check logs, including stale pre-XP assertions honestly retained.
+- `xp23-browser-pilot`:8 passing mounted XP journeys, screenshots and storage receipts.
+- `xp23-source`: supply and paired-fixture JSON, no browser traces or media copies.
+- Planned `xp23-browser-final`, `xp23-enemy-frames`, `xp23-enemy-work`, `xp23-camera-frames`, `xp23-camera-work`: bounded one-worker correctness and paired performance evidence; count at closeout. No video by default.
+- Generated original retained at `C:/Users/hawki/.codex/generated_images/01a077d5-fe35-7ce3-8c81-0c2f7f852500/exec-e2135ef3-bdaa-40e1-b126-74a39be2c665.png` (778,096 bytes). Exact immutable repo copy `docs/source-assets/production/adventure-xp-v1/generator.png`, plus prompt and structured source record, are durable provenance. Runtime derivative `public/assets/adventure-xp-v1.png` is12,573 bytes,128²,65,536 decoded bytes. Reproduce with `scripts/art_pipeline/adventure_xp.py` and the locked art Python. Only alpha≤3 margin trimming and premultiplied resize; no replacement matting or semantic alteration. Original remains intact.
+
+Sources, candidate art and review records are needed project assets/evidence,
+not proposed deletion candidates. Agent review does not invent Human art approval.

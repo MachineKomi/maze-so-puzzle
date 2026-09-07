@@ -162,3 +162,17 @@ button.book-character-card:active { transform: translateY(2px); box-shadow: inse
 .book-silhouette img { filter: brightness(0); opacity: .28; }
 .book-unknown-card { justify-content: center; min-height: 230px; }
 .book-silhouette .art-fallback { color: transparent; }
+.adventure-level { display:flex; align-items:center; gap:12px; padding:14px 18px; margin:12px 0; border:2px solid #baa3db; border-radius:18px; background:linear-gradient(115deg,#f8efff,#e7f6ed 70%,#fff0d7); color:#443557; text-align:left; }
+.adventure-level > img { width:64px; height:64px; object-fit:contain; flex:none; }
+.adventure-level-copy { min-width:0; flex:1; display:grid; gap:4px; }
+.adventure-level-copy > small { color:#675089; font-weight:800; }
+.adventure-level-copy > strong { font-size:1.16rem; }
+.adventure-level-copy > span { font-size:.78rem; font-weight:750; }
+.adventure-level-copy > p { margin:3px 0 0; font-size:.8rem; line-height:1.35; }
+.adventure-level progress { appearance:none; width:100%; height:10px; overflow:hidden; border:0; border-radius:8px; background:#d8cce8; }
+.adventure-level progress::-webkit-progress-bar { background:#d8cce8; }
+.adventure-level progress::-webkit-progress-value { background:linear-gradient(90deg,#9471cf,#57aaa4); border-radius:8px; }
+.adventure-level progress::-moz-progress-bar { background:#799bc0; border-radius:8px; }
+.adventure-level-up { border-color:#9e75ce; }
+:root[data-motion="full"]:not([data-quality="static"]) .adventure-level-up > img { animation:adventure-crystal-pop 650ms ease-out both; }
+@keyframes adventure-crystal-pop { 0% { transform:scale(.8) rotate(-12deg); } 45% { transform:scale(1.12) rotate(5deg); } 100% { transform:scale(1) rotate(0); } }

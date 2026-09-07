@@ -81,7 +81,7 @@ describe("bestiary discovery persistence", () => {
     const storage = new MemoryStorage();
     storage.values.set(VERSION_FIVE_PLAYER_PROGRESS_STORAGE_KEY, stored);
     const after = readPlayerProgress(storage);
-    expect(after).toEqual(before);
+    expect(after).toEqual({...before, adventureXp:0});
     expect(after.discoveredEnemyIds).toEqual([]);
     expect(storage.getItem(VERSION_FIVE_PLAYER_PROGRESS_STORAGE_KEY)).toBe(stored);
     expect(JSON.parse(storage.getItem(PLAYER_PROGRESS_STORAGE_KEY)!)).toEqual(after);

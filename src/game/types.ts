@@ -242,6 +242,7 @@ export interface GameState {
   readonly openedDoorIds: readonly string[];
   readonly goldStarsCollected: number;
   readonly sciencePointsCollected: number;
+  readonly xpCollected: number;
   /** False while an exit contact is pending or until Ame leaves after Stay here. */
   readonly exitArmed: boolean;
   readonly status: GameStatus;
