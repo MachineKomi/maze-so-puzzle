@@ -4,7 +4,41 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.12 — shared phone composition and Book discovery (live web)
+## 0.22.16 — clearer progression and living liquids (qualified candidate)
+
+- Book completion offers Next first, including with friends left to rescue;
+  final campaign completion clearly offers Surprise. Stay/Restart and safe
+  completion banking remain explicit. Tester runs no longer masquerade as a
+  normal Book resume.
+- Removes the tiny flashing yellow corner sparkle during movement and keeps
+  Ame's grounding shadow steady.
+- Restores connected liquid floor banks/fading edges under wall shadows, without
+  false floor strips between hazards. Slow texture currents, broad water ripples,
+  lava heat and varied poison bubbles replace racing white dashes. Comfort modes
+  retain clear still surfaces. No new assets or dependencies.
+- Preserves15's tall walls/large sprites. Scoped rendering cost is disclosed in
+  the qualification receipt; no physical-device or native acceptance is implied.
+
+## 0.22.15 — balanced walls and larger grounded artwork (published web)
+
+- Balances horizontal/vertical cap thickness, slightly lowers height and adds
+  bounded foreground overlap with stronger directional shade/rim and eight lights.
+- Enlarges alpha-visible Ame/enemy/friend/item artwork while preserving aspect
+  and grounding. Genuine perspective cutout and readable Power labels remain.
+
+## 0.22.14 — initial liquid surface revision (published, later refinement requested)
+
+- Crisp connected water/lava/poison with local surface effects and reduced/static
+  controls. Human feedback rejected the dashed appearance and missing floor lip;
+  this is revised in16, not treated as accepted beauty.
+
+## 0.22.13 — tall walls, small dressing and smooth jump camera (published web)
+
+- Convincing projected tall wall caps/sides and cutout replace shallow relief.
+  Small crisp dressing adds texture detail; one shared clock follows airborne
+  Ame and the camera. Human accepted the tall3D direction and requested15's refinements.
+
+## 0.22.12 — shared phone composition and Book discovery (previous web)
 
 - Short landscape phones keep the coordinated desktop layout, with a relatively
   larger direction pad, smaller map/Bag and matching dialogs. Home and Title

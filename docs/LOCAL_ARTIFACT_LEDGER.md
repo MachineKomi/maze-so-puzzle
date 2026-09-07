@@ -12,9 +12,18 @@ Under `C:/GameDev/maze-game-qa/performance/`, retained without deletion/archive:
 | book03-reviewed-20260907 |34 /7963002|Ten Book +three MOVE passes; Lite solid-fill expectation corrected to gradient proof. |
 | move02-modes-20260907 |14 /3984016|All four motion/quality variants pass. |
 | hazard03-baseline-v02215 |4 /721563|Exact verified public15 HTML/JS/CSS +identity only; unchanged media shared. |
+| hazard03-prototype-20260907 |7 /800748|Two fixture failures from a wall-interior floor sample; retained. |
+| hazard03-shores-20260907 |7 /804924|Two fixture failures from a point above the actual wall footprint; retained. |
+| hazard03-boundaries-20260907 |71 /28094071|Ten first-source shape/phase/campaign/mode passes; superseded by lean final proof. |
+| hazard03-idle-pilot-20260907 |13 /39975415|Rejected four-image/four-band one-pair cost diagnostic. |
+| hazard03-lean-idle-pilot-20260907 |13 /39859497|Two-image/two-band one-pair diagnostic; further cadence optimization needed. |
+| hazard03-cadence-idle-pilot-20260907 |13 /39743493|20Hz offset pilot; justified final comparison, not qualification itself. |
+| v02216-final-browser-20260907 |125 /38085091|Frozen09d5475,38 passing Book/MOVE/hazard/jump/completion cases. |
+| v02216-final-idle-20260907 |29 /104530832|Frozen09d5475 five matched idle pairs per viewport, exact entry identity/raw traces. |
+| v02216-final-moving-20260907 |29 /94240233|Frozen09d5475 five matched moving pairs per viewport, exact route/return/raw traces. |
 
-Next named hazard prototype/boundary/final/paired packets will be measured at
-closure. Existing dist reused; no repository/media clone. New hazard-rack and
+All paired/baseline/browser processes are now stopped. Public verification will
+be logged separately at closure. Existing dist reused; no repository/media clone. New hazard-rack and
 Book browser files are small reproducible source fixtures, not release payload.
 Baseline and reviewed owned servers/browsers stopped. Review failed diagnostic
 packets after publication; nothing is automatically deleted or archived.
