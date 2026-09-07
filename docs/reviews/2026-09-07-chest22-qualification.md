@@ -2,7 +2,7 @@
 
 Frozen runtime checkpoint **e08775f47c57b6108d7365045a67f73165caa192**,
 branch `codex/chest-mimic-rewards`, [PR13](https://github.com/MachineKomi/maze-so-puzzle/pull/13).
-Candidate only until the publication receipt exists. Astra is the sole runtime
+Now [published as web0.22.22](2026-09-07-v02222-public-verification.md). Astra is the sole runtime
 writer; [actual Sol review](2026-09-07-chest22-sol-review.md) owns the independent
 disposition. [Execution contract](../plans/LOOT-03B-authored-chests-and-mimics.md).
 
@@ -143,7 +143,8 @@ Raw report SHA-256 under external `performance/chest22-*`:
 aggregates and final identities. Sol independently recomputed the raw reports and
 supports bounded web promotion of frozen e08775f, with all measured costs and
 device limits retained. The linked review owns that actual disposition. Final
-reviewed-head CI and matching published bytes remain release requirements.
+reviewed df33b62 passed exact-head CI34114218300; the linked public receipt
+confirms release c5f2305 and matching published bytes.
 
 The inherited immediate-entry Power cosmetic expiry and physical iPhone13/iPad8
 camera observation remain open. Chromium CPU4 evidence cannot establish Apple,

@@ -800,3 +800,16 @@ Hold these unique packets for later explicit Human cleanup review.
 | release-v02221 |4|745180|
 
 The forthcoming published verification packets will be counted separately.
+
+## Chest22 published verification inventory
+
+Owner Astra; external root C:/GameDev/maze-game-qa/performance/. Both-origin
+public checks completed; all owned contexts stopped, old unowned4271 untouched.
+Hold as release evidence for later explicit Human cleanup review. No deletion,
+archive, clone or native package. Documentation closure creates no game build.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| v02222-public-20260907 |11|19652180|
+| chest22-public-canonical |19|4206837|
+| chest22-public-alias |19|5004742|

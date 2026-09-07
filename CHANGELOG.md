@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.22.22 — mixed chests and disguised Candy (candidate)
+## 0.22.22 — mixed chests and disguised Candy (published web)
 
 - Four authored chests open into Gold8–10 plus Science2–4, retaining the previous
   eight-Gold floor. A readable opening precedes the existing physical scatter,
@@ -15,7 +15,8 @@
   and walking hazard contact effects remain queued. Already-shipped fixes retain
   their original delivery status and open Human observation where applicable.
 
-Qualification is in progress; this entry does not announce deployment.
+Published after independent source/visual/performance review and exact-head CI.
+Both public origins match the qualified build; physical Apple/native acceptance remains open.
 
 ## 0.22.21 — field proportions and airborne depth (published web)
 

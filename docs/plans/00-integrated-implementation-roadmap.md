@@ -1,5 +1,20 @@
 # Integrated implementation roadmap through final convergence
 
+**Current delivery — web0.22.22:** [public receipt](../reviews/2026-09-07-v02222-public-verification.md) binds
+four authored mixed chests, disguised Power6 Candy and protected historical
+save migration. Actual Sol supports bounded web publication;747 tests,
+105 distinct browser contracts and four five-pair cohorts qualify the frozen
+runtime e08775f. Reviewed df33b62/release c5f2305; both public origins verified.
+
+**Next: recognition-only rainbow XP, then protected usable inventory before eggs.**
+The authored chest/Mimic tranche of B is delivered; generated Mimics remain a
+separate versioned Plan09 tranche. ART-REWARD-01 proper generated reward artwork,
+HOLE-02, icon-led pace, HAZARD-CONTACT-01, DELIGHT/LEARN and campaign/Garden/co-op
+remain open. Q05/P22 covers new chest feel; Q08/P19 remains affected-device camera
+and cold first-Power observation. No physical Apple/3GB/native acceptance.
+Astra owns runtime on codex/chest-mimic-rewards; Sol independently reviews.
+Earlier dated active/next/live labels below are historical and superseded.
+
 **Current web0.22.21 delivery:** [FIELD-21 receipt](../reviews/2026-09-07-v02221-public-verification.md) binds the
 proportion, compact-drop, jump-depth and perimeter fixes. Accepted interior walls
 are preserved. ART-REWARD-01 proper generated reward art remains queued.

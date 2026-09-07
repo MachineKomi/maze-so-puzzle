@@ -1,5 +1,9 @@
 # LOOT-03 B — authored mixed chests and disguised Mimics
 
+**Authored tranche published as web0.22.22.** [Public receipt](../reviews/2026-09-07-v02222-public-verification.md)
+binds frozen e08775f, reviewed df33b62 and release c5f2305. Generated Mimics stay
+with the later versioned Plan09 tranche. The contract below describes this delivery.
+
 September7,2026. In progress on `codex/chest-mimic-rewards`; Astra is the runtime
 writer and Sol independently reviews. Web0.22.21 remains published. This is a
 bounded implementation of the [parent sequence](LOOT-03-physical-collection-and-progression.md)

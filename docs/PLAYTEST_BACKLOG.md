@@ -1,5 +1,20 @@
 # Maze so Puzzle — playtest backlog
 
+**Current delivery — web0.22.22:** [public receipt](reviews/2026-09-07-v02222-public-verification.md) binds
+four authored mixed chests, disguised Power6 Candy and protected historical
+save migration. Actual Sol supports bounded web publication;747 tests,
+105 distinct browser contracts and four five-pair cohorts qualify the frozen
+runtime e08775f. Reviewed df33b62/release c5f2305; both public origins verified.
+
+**Next: recognition-only rainbow XP, then protected usable inventory before eggs.**
+The authored chest/Mimic tranche of B is delivered; generated Mimics remain a
+separate versioned Plan09 tranche. ART-REWARD-01 proper generated reward artwork,
+HOLE-02, icon-led pace, HAZARD-CONTACT-01, DELIGHT/LEARN and campaign/Garden/co-op
+remain open. Q05/P22 covers new chest feel; Q08/P19 remains affected-device camera
+and cold first-Power observation. No physical Apple/3GB/native acceptance.
+Astra owns runtime on codex/chest-mimic-rewards; Sol independently reviews.
+Earlier dated active/next/live labels below are historical and superseded.
+
 **September7 feedback recheck against21:** the requested v02213/v02214 file is
 unchanged and fully reconciled in the [current mapping](reviews/2026-09-07-playtest-feedback-reconciliation-v21.md).
 HOLE-02 connected pit art and Plan08/PT45 icon-led Chill/Walk/Zippy remain open.

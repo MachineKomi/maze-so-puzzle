@@ -1,5 +1,24 @@
 # Family playtest checklist
 
+## Current short journey — P22 / Q05
+
+**Ready on [published0.22.22](reviews/2026-09-07-v02222-public-verification.md).** In an already unlocked
+Lanternlight, Moonlit, Rainbow Power Parade or Twilight maze, start a new attempt
+when convenient. Existing in-flight saves deliberately retain their old layout;
+do not clear progress or replay the full campaign just for this check.
+
+- Open a normal chest: does the brief opening read clearly before Gold and
+  Science burst, bounce, settle and wait for nearby collection?
+- In Twilight, does the closed Candy chest reveal clearly and wait for a fresh
+  press before combat? Defeat should release richer Gold/Science once.
+- Pause for distant drops, approach them, and optionally reload. Do value labels,
+  saved loot and collection feel reliable?
+
+Q08/P19 on current22 remains the priority iPhone13/iPad8 camera/entry/first-reward
+observation. P21 scale/jump/perimeter and proper-art feedback remain useful;
+there is no new blocking decision. Rainbow XP and usable inventory before eggs
+are subsequent work.
+
 ## Current short journey — P21 / Q01, Q02, Q05
 
 **Ready on [published0.22.21](reviews/2026-09-07-v02221-public-verification.md).** Balanced walls are Human-accepted.
