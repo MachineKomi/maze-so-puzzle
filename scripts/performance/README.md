@@ -129,3 +129,25 @@ candidate value conservation is checked separately. Ordinary `shiny-sword`
 camera comparisons use the retained17 fixture and the same read-key override.
 Run five pairs plus warmups, alone; untraced frame cohorts and traced work cohorts
 remain distinct. Windows Chromium is not physical Apple or a3GB memory test.
+
+## Enemy20 qualification and cold-process discriminator
+
+`enemy-loot.pw.ts` emits `enemy-loot/paired-fixtures.json` from a real first-enemy
+checkpoint. For `release-paired-review.mjs`, set route `enemy`, fixture
+`enemy-first`, baseline key `maze-so-puzzle-active-run-v4`, candidate key
+`maze-so-puzzle-active-run-v5`, and the frozen19 entry path. Both sides start from
+the exact historical v3/rules3 prefix. The route defeats, waits, enters the cleared
+tile and returns; Power and candidate dual-channel conservation are checked.
+Use five alternating pairs plus warmups per profile, separate trace0/trace1
+cohorts, one local browser workload, and the source-matched existing `dist`.
+
+Default post-entry stabilization is500ms. Loaded Power tests use that explicit
+scope and prove idle with an unchanged ledger over1600ms; they do not qualify
+immediate cold appearance. The optional `potion`/`potion-first` route accepts a
+legal historical-prefix fixture with `powerAfter`, permits a clamped camera and
+records arrival/peak counters. `MAZE_REVIEW_ENTRY_SETTLE_MS=0`,
+`MAZE_REVIEW_CHANNEL=msedge`, `MAZE_REVIEW_FRESH_BROWSER=1` and one pilot pair
+create a fresh-process discriminator. Never pool it with loaded five-pair
+timings. [Retained diagnosis](../../docs/reviews/2026-09-07-enemy20-cold-power-diagnostic.md)
+shows why a fresh process on both sides matters. No dependency install or clone
+is required; all raw files remain in the external artifact ledger.

@@ -646,3 +646,44 @@ editing. Shared public media stays in the existing workspace; no clone or copy.
 `dist/` will be reused for20. Planned `enemy20-*` browser/frame/trace packets
 and public receipt stay in the same external QA performance root. Count/bytes
 will be recorded at closure. Hold all evidence; no deletion/archive/native build.
+
+### Enemy20 completed local qualification inventory
+
+Owner Astra; all below are under `C:/GameDev/maze-game-qa/performance/`.
+The serial browser/frame/trace owners have stopped. One existing `dist` was
+reused; the four-file19 entry shares existing media. Keep failed/pilot packets
+separate from qualified rows; no deletion/archive, repo/media clone or native
+package was created. Public verification will add one separately counted folder.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| enemy20-browser-pilot | 77 | 70451487 |
+| enemy20-camera-frames | 5 | 9932633 |
+| enemy20-camera-work | 25 | 9310949 |
+| enemy20-cold-power-diagnostic | 8 | 3514855 |
+| enemy20-cold-power-edge-paired | 5 | 6998452 |
+| enemy20-cold-power-fixture | 1 | 4540 |
+| enemy20-cold-power-fresh-edge | 1 | 140945 |
+| enemy20-cold-power-paired | 1 | 28704 |
+| enemy20-enemy-frames | 5 | 10068396 |
+| enemy20-enemy-work | 25 | 10022444 |
+| enemy20-final-browser | 134 | 88667151 |
+| enemy20-loaded-power-browser | 15 | 506078 |
+| enemy20-power-diagnostic | 5 | 830090 |
+| enemy20-power-first-paint | 11 | 2462799 |
+| enemy20-power-slots | 5 | 821183 |
+| enemy20-power-target-diagnostic | 5 | 832051 |
+| enemy20-regression-followup | 18 | 2073151 |
+| enemy20-settled-power-browser | 15 | 3752972 |
+| enemy20-summary | 2 | 12259 |
+| enemy20-visible-browser | 138 | 90313053 |
+| release-v02219 | 4 | 740307 |
+
+The four full paired cohorts and `enemy20-summary` bind runtime6f083f4/helpers
+ebb2b17. `enemy20-visible-browser` is54/55 with a stale fixed-time idle assertion;
+`enemy20-loaded-power-browser` supplies5/5 corrected loaded Power checks.
+Immediate-entry Power failures and fresh-Edge old19/new20 comparison remain
+held diagnostic evidence; they are not cold-success proofs. The
+[qualification](reviews/2026-09-07-v02220-web-qualification.md) owns exact scope
+and hashes. Reassess current consumers and seek exact-target Human approval
+before any later cleanup. The two tiny summary files are already counted above.

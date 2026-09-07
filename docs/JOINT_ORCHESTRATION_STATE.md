@@ -3,7 +3,9 @@
 **Active candidate — LOOT-03 B / web0.22.20:** Astra owns runtime on
 `codex/enemy-loot-rewards`; Sol independently reviews. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md)
 freezes rules5 enemy Gold/Science, schema5/ledger2 migration and qualification.
-Implementation and tests are in progress; **live remains0.22.19**. No deployment
+Implementation,735 tests and all four five-pair cohorts are complete;
+[qualification](reviews/2026-09-07-v02220-web-qualification.md) records browser
+corrections, costs and the inherited cold Power limitation. **Live remains0.22.19**. No deployment
 is claimed until exact-source checks, Sol review, CI and public verification.
 The historical completed cold-reward investigation below is not a new assignment.
 

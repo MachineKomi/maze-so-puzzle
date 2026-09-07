@@ -98,6 +98,38 @@ without claiming the additional enemy economy has shipped.
 
 ## B. Enemy reward tables, then chest and Mimic lifecycle
 
+Enemy tables/capacity/migration are now implemented in the20 candidate under the
+[frozen execution contract](LOOT-03B-enemy-rewards-execution.md); qualification
+and publication are separately recorded there. The next runtime slice is the
+chest/Mimic contract below. Do not combine it with account XP or campaign expansion.
+
+Execution order for that next slice:
+
+1. Audit approved closed/good-open/revealed family mappings and current authored
+   placements. Freeze a modest mixed Gold/Science chest table, its explicit
+   comparator, and a guaranteed richer Mimic minimum; include20's enemy supply
+   in the campaign/Plan10 audit. No new art selection is implied by this plan.
+2. Add the explicit chest state/committed outcome receipt, isolated deterministic
+   channels and designer Power/probability validation. Reuse the current ledger
+   for one source with optional Gold/Science channels; never create another
+   currency owner. Underpowered reveal earns nothing and leaves a safe return.
+3. Extend solver/joint-outcome proofs and save migration before authored cutover.
+   Preserve old rules/content reconstruction, existing enemy receipts, discoveries
+   and durable progress. Revise Twilight's visible Candy placement only with its
+   content/family/discovery migration; do not silently reinterpret old saves.
+4. Bind the approved reveal/open art and readable explanation to that committed
+   state, followed by the existing physical loot owner. Qualify actual opening,
+   underpowered return, victory, leave/reload, all modes and paired performance,
+   then publish the complete bounded slice. Recognition XP follows independently.
+
+For this current physical contract, “committed award” means conserved pending
+value, not immediate banked Gold/Science. Benign resolution and actual Mimic
+victory create sources; only the accepted-claim reducer credits them. Older
+presentation-only wording in Plan09 must not revive immediate currency credit.
+The Human's later LOOT-03 authorization also supersedes its old XP option-only
+boundary for the separately sequenced recognition slice. Historical v1 receipts
+and reconstruction stay unchanged.
+
 Use independent deterministic random channels keyed by run, level, source,
 reward kind and rules version. No frame RNG or reload reroll. Freeze explicit
 bounded monotonic reward tables by enemy Power band in code/tests and the design

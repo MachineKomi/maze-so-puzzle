@@ -88,7 +88,10 @@ No clone, media copy, native package, deletion or archive is authorized here.
 735 tests across74 files and production build pass. Corrected gzip9 JS173829
 (+1418 over19); named1400-byte allocation and inherited headroom leave56 bytes
 below173885. CSS/public/dependencies are unchanged. Earlier53 browser cases passed;
-the corrected55-case matrix and paired performance are in flight.
+the corrected matrix passed54/55, with a stale Lite idle assertion replaced by
+5/5 loaded Power checks. All four separate five-pair enemy/camera cohorts pass
+route/integrity gates. [Qualification and costs](../reviews/2026-09-07-v02220-web-qualification.md)
+retain the exact browser scopes and inherited cold Power cancellation.
 No performance or publication acceptance follows from compilation alone.
 
 Independent source review found that an unseen hidden/Home interval could age a
