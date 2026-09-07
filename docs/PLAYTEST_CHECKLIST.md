@@ -1,6 +1,23 @@
 # Family playtest checklist
 
-## Current short journey — P17 / Q01, web0.22.15
+## Current short journey — P18 / Q04 and Q07, web0.22.16
+
+**Ready:** [published0.22.16](reviews/2026-09-07-v02216-public-verification.md).
+Pause and walk beside water, lava and poison: do the floor banks, fading edges
+and wall shadows blend naturally, and does the restrained motion feel alive?
+Then select a middle story maze through the Book, finish and choose Next. It
+should advance; Stay remains available for further exploring. The final chapter
+explicitly offers Surprise. Record build, device, maze and comfort settings.
+
+The tiny moving yellow corner dot is removed; report it if it reappears. Q01/P17
+wall refinements and Q02 hole-jump camera can also be observed on16 independently.
+Q05 physical loot is not ready; Q03/Q06 remain optional direction checks.
+[Single queue](HUMAN_REVIEW_QUEUE.md) tracks these without blocking independent work.
+Windows remains0.22.9, native0.22.10 held. Chromium evidence does not establish
+physical iPad/WebKit, native, low-end or thermal acceptance. P17 and earlier
+records below retain their original build identities and historical status.
+
+## Previous short journey — P17 / Q01, web0.22.15
 
 **Ready:** [published0.22.15](reviews/2026-09-07-v02215-public-verification.md).
 The Human already accepted13's tall3D direction. This is observation of the

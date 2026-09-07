@@ -1,55 +1,41 @@
 # Maze so Puzzle — joint orchestration state
 
-**Active September7 slice:** Astra is sole runtime writer on
-`codex/book-completion-hazard-refinement`. Book/MOVE repair f2368ac is backed up:
-ten Book save/routing journeys and four corrected movement-mode checks pass.
-[Candidate](reviews/2026-09-07-book03-move02-candidate.md). HAZARD-03 is now an
-implemented local prototype undergoing independent visual/cost qualification;
-first diagonal/four-band pilot was rejected for extra rendering work, and a lean
-two-image/two-stroke prototype is being compared. Public remains0.22.15.
-No unqualified runtime has been promoted. [Plan](plans/HAZARD-03-connected-living-surfaces.md).
-Current facts in this paragraph supersede the older reproduce/next labels below.
+**Current delivery — September7:** web **0.22.16 is live**, release815deb0,
+frozen runtime09d5475, on main and `codex/book-completion-hazard-refinement`.
+[Public verification](reviews/2026-09-07-v02216-public-verification.md),
+[qualification](reviews/2026-09-07-v02216-web-qualification.md) and
+[actual Sol review](reviews/2026-09-07-v02216-sol-final-review.md) bind664 tests,
+38 browser cases, two five-pair cohorts per viewport and two fresh public journeys.
+Book Next/Surprise defaults and tester selection are fixed; the moving yellow dot
+is removed; connected liquid banks, wall shade and restrained material motion
+are delivered. Public15 wall/foreground/sprite geometry is retained.
 
-**September7 newest execution steer:** WALL-04C is delivered as web0.22.15.
-[New Human playtest routing](reviews/2026-09-07-playtest-routing.md)
-now requires reproduction/fix of the Book-selected campaign loop and
-HAZARD-03 before LOOT-03. Human feedback on published14 requires restored
-hazard floor lip/fade and more convincing motion. Connected-trench art and
-icon-led Chill/Walk/Zippy remain unfinished. This overrides older next-work labels.
+Full-mode idle RasterTask rises9.983% phone/15.496% desktop (ratios of medians),
+with moving+4.966/+3.247%. All40 measured samples max16.8ms, none over20/34ms.
+Astra and actual Sol accept this scoped cost, not parity. Physical iPad/WebKit,
+low-end/thermal and native qualification remain open. Windows0.22.9 is published;
+native0.22.10 and the older R1 candidate remain separately held.15's recorded
+jump RasterTask+22.110% is a separate unchanged comparison.
 
-**Human wall acceptance:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. WALL-04C delivers the subsequent balanced caps, slightly lower height, bounded foreground overlap, stronger cast/rim, eight lights, projected texture cutout and90%-visible-width grounded sprites. Q01/P17 now owns Human observation of15's refinements; jump Q02 remains independent. Neither earlier rejected walls nor older no-occlusion/unchanged-Ame assumptions override the later instructions.
+**Next runtime dispatch:** Astra stays sole runtime writer; Sol reviews independently.
+Implement [LOOT-03 A](reviews/2026-09-07-loot03-readiness.md) as one complete authored
+Gold/Science ledger/claim/presentation/completion slice. First protect v3/rules-3
+migration and future active-save inputs, prove conservation, then persistent
+bounce/settle/range collection. Keep Power's current immediate rule authority.
+Then enemy Gold/Science, mixed chests/Mimics, recognition XP and rare eggs after
+usable protected inventory. DELIGHT-02B/LEARN-01, connected HOLE-02, Plan08 icon-led
+pace and the wider roadmap remain. No new Human permission is needed.
 
-**Current delivery,2026-09-07:** **web0.22.15 is live**, release1e8b465/runtime e69f3e4,
-on `main` and `codex/wall-balance-sprite-depth`.
-[Public receipt](reviews/2026-09-07-v02215-public-verification.md) binds both origins
-and two fresh public journeys.664 tests,41-case matrix plus two label-repair
-journeys and three final five-pair cohorts pass. Actual Sol independently accepts
-the source/pixel/performance scope; desktop jump RasterTask+22.110% is explicitly
-retained, with measured maximum frame interval16.8ms. No second-engine/physical
-iPad/native/low-end/thermal acceptance follows. Windows0.22.9 remains published;
-native0.22.10 remains held. R1 is still held separately.
+Q04/Q07/P18 are ready on16; Q01/P17 wall refinement and Q02 jump observations
+remain independent.13's tall3D direction is Human-accepted; new beauty/feel is
+not inferred. Keep the [queue](HUMAN_REVIEW_QUEUE.md) visible at each closeout.
+All owned browsers/servers stopped. Generated outputs are in the
+[ledger](LOCAL_ARTIFACT_LEDGER.md); no deletion/archive or repository/media clone.
 
-**Next runtime dispatch:** Astra remains the sole runtime writer; actual Sol
-reviews independently. Reproduce Book-selected completion via explicit Next and
-default Enter, partial/perfect and middle/final chapters, including same-ID tester
-selection. Source triage points to the old Stay-primary branch but has not yet
-reproduced the Human's exact event. Preserve exactly-once rewards/save protection.
-Then HAZARD-03 restores lip/fade, shadow receivers and distinct restrained motion;
-the Human's rejected14 hazards remain present in15. Then
-[LOOT-03](plans/LOOT-03-physical-collection-and-progression.md), DELIGHT-02B/LEARN-01
-and the preserved roadmap. No further execution permission is needed.
-
-Keep the [Human queue](HUMAN_REVIEW_QUEUE.md) visible in closeouts. Record generated
-outputs in the [ledger](LOCAL_ARTIFACT_LEDGER.md); no deletion/archive. All owned
-WALL-04C test servers/browsers stopped. Follow [docs-only deployment rules](VERCEL_DEPLOYMENT.md)
-against actual successful release1e8b465. This state supersedes every older
-active/next/live label below; retained dated receipts describe their checkpoints.
-
-Docs closure3ffc44c is on main and actually skipped by Vercel's Ignored Build Step
-at01:05:54UTC. Its [observed receipt](reviews/2026-09-07-v02215-public-verification.md#observed-documentation-closure)
-is backed up on the current Codex branch without another main push. The next
-runtime slice should include that note normally; do not deploy solely to align
-documentation SHA with the unchanged public game.
+[Docs-only rules](VERCEL_DEPLOYMENT.md) now use actual successful release815deb0.
+Commit/push this documentation closure without rebuilding; the existing guard
+should skip its web build. Do not deploy solely to align a docs SHA with public
+bytes. These current facts supersede every older active/next/live label below.
 
 State date: 2026-09-07. Current operating state for **Sol Astra MsP Collab**.
 Replace this state when it changes; keep history in dated records and Git.

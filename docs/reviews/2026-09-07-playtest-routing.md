@@ -1,5 +1,12 @@
 # September7 playtest routing
 
+**Current delivery update:** items2–3 below are now delivered in
+[web0.22.16](2026-09-07-v02216-public-verification.md), together with the independently
+reported moving-yellow-dot repair. Q04/Q07/P18 are ready; Q01/P17 and Q02 remain
+independent. [LOOT-03 A](2026-09-07-loot03-readiness.md) is next, migration/conservation
+first. Connected-trench art and icon-led pace remain unfinished. The original
+triage below is dated history; it does not ask to repeat completed implementation.
+
 Astra read the complete Human-authored
 [v02213/v02214 feedback](../user-playtests/v02213-20260907-playtest-feedback.md).
 The original file is preserved verbatim. WALL-04C is now

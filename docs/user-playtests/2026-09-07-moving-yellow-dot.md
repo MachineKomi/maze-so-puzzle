@@ -18,3 +18,7 @@ the ground shadow is steady instead of sharing the sparkle pulse. Four separate
 Full/Lite/Reduced/Static journeys pass. [Candidate evidence](../reviews/2026-09-07-book03-move02-candidate.md).
 Implementation is backed up at f2368ac; publication and Human confirmation remain
 separate. No pickup effects, movement rule or sprite registration were removed.
+
+**Delivered in web0.22.16:** [public verification](../reviews/2026-09-07-v02216-public-verification.md)
+now completes the publication boundary. The original Human report above remains
+verbatim. P18 asks for a report only if the dot reappears; no blocking retest is required.

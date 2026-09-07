@@ -2,8 +2,9 @@
 
 **September7 implementation readiness:** [source-owner audit and first-slice dispatch](../reviews/2026-09-07-loot03-readiness.md)
 identifies the v3/rules-3 migration and future active-save protections to build
-before enabling physical authored-reward claims. Book/MOVE/HAZARD0.22.16 is being
-qualified first. The audit refines A's dependency order; it does not claim loot
+before enabling physical authored-reward claims. Book/MOVE/HAZARD0.22.16 is now
+[published](../reviews/2026-09-07-v02216-public-verification.md); execute A next.
+The audit refines A's dependency order; it does not claim loot
 implementation or introduce a new Human gate.
 
 Execution authorized by the Human's [2026-09-06 intake](../user-playtests/2026-09-06-physical-loot-and-account-level.md).

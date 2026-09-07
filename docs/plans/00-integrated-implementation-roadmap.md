@@ -1,20 +1,22 @@
 # Integrated implementation roadmap through final convergence
 
-**September7 execution override:** WALL-04C is delivered as live web0.22.15,
-release1e8b465/runtime e69f3e4. [Public verification](../reviews/2026-09-07-v02215-public-verification.md)
-and [independent Sol review](../reviews/2026-09-07-wall04c-sol-final-review.md)
-bind the balanced/cutout walls, larger grounded sprites and bounded cost decision.
-[New Human feedback](../reviews/2026-09-07-playtest-routing.md)
-now requires the bounded Book campaign-loop fix and HAZARD-03 lip/fade/motion
-revision before LOOT-03. HOLE-02 connected trenches and Plan08 icon-led
-Chill/Walk/Zippy remain named deliverables, not closed by rule/timing work.
-The remaining dependency roadmap stays intact; dated older status below is history.
+**September7 execution override:** Book/MOVE/HAZARD-03 is delivered in web0.22.16,
+release815deb0/runtime09d5475. [Public verification](../reviews/2026-09-07-v02216-public-verification.md)
+and [actual Sol review](../reviews/2026-09-07-v02216-sol-final-review.md) bind the
+progression/dot fixes and connected liquid border/shadow/motion revision.
+WALL-04C's accepted direction, larger grounded artwork and jump repair remain.
 
-The Human accepts0.22.13's tall3D direction; Q01/P17 now asks about15's refinements.
-Continue independent work while Human observations are pending. Latest Windows
-remains0.22.9; native0.22.10 and physical iPad/low-end/thermal qualification remain
-separate. The earlier release/dispatch paragraphs below retain historical context;
-they do not restart completed walls or supersede the new Book/hazard ordering.
+Next is [LOOT-03 A's complete authored-reward slice](../reviews/2026-09-07-loot03-readiness.md):
+migration/future-save protection and conservation first, then persistent physical
+claims/presentation/completion. Enemy Gold/Science, mixed chests/Mimics, recognition
+XP and usable-inventory-first eggs follow. Preserve DELIGHT-02B/LEARN-01,
+connected HOLE-02 and icon-led Plan08 pace as real unfinished deliverables.
+
+Q04/Q07/P18 are ready on16; Q01/P17 and Q02 stay open independently. Continuous
+Full-mode idle raster cost+9.983/+15.496% is accepted only within the measured
+Chromium scope. Windows remains0.22.9; native0.22.10, physical iPad/WebKit,
+low-end/thermal and new Human beauty acceptance remain separate. Historical
+checkpoint text below does not restart delivered work.
 
 Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap

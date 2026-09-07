@@ -1,28 +1,25 @@
 # Sequential specialist execution prompts
 
-## Current dispatch — after verified web0.22.15, September7
+## Current dispatch — after verified web0.22.16, September7
 
-WALL-04C is deployed: release1e8b465/runtime e69f3e4, with genuine independent Sol
-review and [public verification](../reviews/2026-09-07-v02215-public-verification.md).
-Root Astra remains sole runtime writer; actual Sol reviews bounded source/pixels/
-performance independently. No further Human permission is needed to continue.
+Book/MOVE/HAZARD-03 is [published](../reviews/2026-09-07-v02216-public-verification.md),
+release815deb0/runtime09d5475. Actual Sol independently accepted source/pixels and
+scoped performance; retain the material idle raster cost and device limitations.
+Astra remains sole runtime writer; no further Human permission is needed.
 
-Next reproduce Book-selected completion through actual Book navigation: explicit
-Next/default Enter, partial/perfect rescue, middle/final chapter, same-ID tester
-selection. The old Stay-primary branch is a source lead, not a reproduced cause.
-Implement next-story-primary with explicit Stay/Replay and truthful final-campaign
-destinations, preserving exact-once finalization, failed-save and future-profile
-protection. [Source triage and acceptance](../reviews/2026-09-07-playtest-routing.md)
-owns the regression cases. Qualify before publication.
+Execute [LOOT-03 A](../reviews/2026-09-07-loot03-readiness.md): pure ledger and
+rules-3/v3 migration, future active-save protection, then persistent authored
+Gold/Science burst/bounce/settle and finite legal-range claims, presentation and
+completion banking together. Prove source conservation and exactly-once credit;
+keep enemy/potion Power immediate. Preserve explicit Stay, pending-save retry,
+normal progression and the accepted walls/sprites. Take the frozen16 baseline
+before runtime edits; no extra repository/media copy.
 
-Then HAZARD-03 restores floor lip/fade and casts across liquid/transition/floor,
-replaces rejected dashes with distinct water/lava/poison motion, and proves
-connected shapes plus Full/Lite/Reduced/Static and nonempty idle/moving cost.
-Then LOOT-03 physical collection → enemy Gold/Science → mixed chests/Mimics →
-recognition XP → rare eggs after usable inventory. DELIGHT-02B/LEARN-01,
-HOLE-02 connected art, Plan08 icon-led pace and the wider dependency plan remain.
-Do not close these by routing alone. Q01/P17 is now ready on15, Q02 remains open;
-Q04/Q07/Q05 await their changed builds. Every closeout links the Human queue.
+Qualify and publish A before enabling enemy reward tables, mixed chests/Mimics,
+recognition XP and rare eggs after usable protected inventory. Keep
+DELIGHT-02B/LEARN-01, connected HOLE-02, Plan08 icon-led Chill/Walk/Zippy and the
+wider dependency roadmap. Q04/Q07/P18 are now ready on16; Q01/P17 and Q02 remain
+independent. Mention the [Human queue](../HUMAN_REVIEW_QUEUE.md) at each closeout.
 
 ## Historical dispatch context
 

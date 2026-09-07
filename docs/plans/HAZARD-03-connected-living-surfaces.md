@@ -1,5 +1,13 @@
 # HAZARD-03 — connected living surfaces
 
+**Delivered web0.22.16:** [qualification](../reviews/2026-09-07-v02216-web-qualification.md),
+[actual Sol review](../reviews/2026-09-07-v02216-sol-final-review.md) and
+[public verification](../reviews/2026-09-07-v02216-public-verification.md) close
+this implementation within the measured Chromium scope. Real Full idle raster
+cost and device limits remain explicit. Q04/P18 awaits Human appearance/feel;
+LOOT-03 A is next without waiting for that observation. The original plan below
+retains its preimplementation status as history.
+
 September7 implementation contract, Astra. Human authorizes this revision in
 [v02214 feedback](../user-playtests/v02213-20260907-playtest-feedback.md).
 Book completion and MOVE-02 are being qualified first on

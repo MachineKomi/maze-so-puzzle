@@ -1,5 +1,16 @@
 # Human decisions and steer
 
+**September7 delivery result, not new Human approval:** web0.22.16 is published,
+release815deb0/runtime09d5475. [Public receipt](reviews/2026-09-07-v02216-public-verification.md)
+and [actual Sol review](reviews/2026-09-07-v02216-sol-final-review.md) bind Book/MOVE
+and HAZARD-03 delivery. Astra and Sol accept the measured Chromium scope with
+real Full idle raster increases9.983%/15.496%; all40 measured samples max16.8ms.
+This is not performance parity, physical iPad/WebKit/native/thermal qualification
+or Human beauty acceptance. Q04/Q07/P18 request fresh observation; Q01/P17 and Q02
+remain independent. Next is LOOT-03 A, migration/conservation first. Recognition-only
+levels and usable-inventory-first eggs remain recommended defaults, not invented
+Human choices. Earlier delivery/next labels below retain their dated context.
+
 **September7 execution result, not new Human approval:** the latest wall/sprite
 instructions are implemented and published as web0.22.15, release1e8b465/runtime
 e69f3e4. [Public receipt](reviews/2026-09-07-v02215-public-verification.md) and

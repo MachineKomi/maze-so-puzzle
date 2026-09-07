@@ -1,6 +1,6 @@
 # UI / UX implementation specification
 
-## Book completion and movement detail —0.22.16 candidate
+## Book completion and movement detail — delivered web0.22.16
 
 Normal story completion always offers Next maze first, or the explicitly named
 Surprise maze after the final chapter. Partial friend rescue does not silently
@@ -15,7 +15,8 @@ The obsolete amber moving-corner sparkle and its movePulse owner are removed.
 Player grounding retains steady paint in Full/Lite/Reduced/Static. Existing
 travel, jump, wall overlap and reward effects retain their own presentation
 owners. [Source and browser evidence](reviews/2026-09-07-book03-move02-candidate.md).
-This is implemented candidate behavior; publication follows final qualification.
+This behavior is [published and verified](reviews/2026-09-07-v02216-public-verification.md);
+Q07/P18 retains the new Human observation request.
 
 ## WALL-04C field scale and depth — web0.22.15
 

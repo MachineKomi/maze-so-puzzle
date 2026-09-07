@@ -1,5 +1,14 @@
 # Maze so Puzzle — playtest backlog
 
+**September7 delivered update:** web0.22.16 publishes the Book completion/default
+Next repair, confirmed moving-yellow-dot removal and HAZARD-03 liquid banks,
+shadow coverage and restrained motion. [Public receipt](reviews/2026-09-07-v02216-public-verification.md).
+Q04/Q07/P18 are ready for changed-build feedback. WALL-04C remains delivered;
+Q01/P17 and Q02 jump observations stay independent. Next is
+[LOOT-03 A](reviews/2026-09-07-loot03-readiness.md), protected migration and conserved
+claims before physical collection. Wider roadmap items below remain; earlier
+in-flight/next labels are historical, not a request to redo delivered work.
+
 **September7 additional defect:** [moving yellow dot](user-playtests/2026-09-07-moving-yellow-dot.md).
 The Human reports a tiny flashing blurry yellow dot near the player tile's lower
 right, only while moving, on0.22.10 and possibly earlier. Nonurgent but required

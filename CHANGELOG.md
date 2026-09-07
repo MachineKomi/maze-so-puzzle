@@ -4,7 +4,7 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.16 — clearer progression and living liquids (qualified candidate)
+## 0.22.16 — clearer progression and living liquids (live web)
 
 - Book completion offers Next first, including with friends left to rescue;
   final campaign completion clearly offers Surprise. Stay/Restart and safe
@@ -51,7 +51,7 @@ than promising long-term save or API compatibility.
 - Progress schema7 preserves existing species-proven history and does not infer
   species from aggregate old rescue counts. No new currency, awards or Garden.
 - Retains the accepted0.22.10 wall treatment; R1 is held. No new media or packages.
-  Web qualification is pending; Windows and physical-device acceptance are separate.
+  Web qualification/publication completed; Windows and physical-device acceptance are separate.
 
 ## 0.22.11 — WALL-04A-R1 (held WIP, never deployed)
 

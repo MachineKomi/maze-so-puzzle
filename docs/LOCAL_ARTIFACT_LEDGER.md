@@ -21,12 +21,13 @@ Under `C:/GameDev/maze-game-qa/performance/`, retained without deletion/archive:
 | v02216-final-browser-20260907 |125 /38085091|Frozen09d5475,38 passing Book/MOVE/hazard/jump/completion cases. |
 | v02216-final-idle-20260907 |29 /104530832|Frozen09d5475 five matched idle pairs per viewport, exact entry identity/raw traces. |
 | v02216-final-moving-20260907 |29 /94240233|Frozen09d5475 five matched moving pairs per viewport, exact route/return/raw traces. |
+| v02216-public-20260907 |5 /5844552|Release815deb0 both-origin identity and two fresh public browser journeys; receipt/four screenshots. |
 
-All paired/baseline/browser processes are now stopped. Public verification will
-be logged separately at closure. Existing dist reused; no repository/media clone. New hazard-rack and
+All paired/baseline/public browser processes are stopped. The public packet is
+logged above. Existing dist reused; no repository/media clone. New hazard-rack and
 Book browser files are small reproducible source fixtures, not release payload.
-Baseline and reviewed owned servers/browsers stopped. Review failed diagnostic
-packets after publication; nothing is automatically deleted or archived.
+Baseline and reviewed owned servers/browsers stopped. Failed diagnostics and the three superseded pilot packets are now eligible for
+a future Human cleanup review; nothing is automatically deleted or archived.
 
 ## WALL-04C review and qualification outputs — September7
 

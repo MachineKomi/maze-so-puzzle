@@ -41,3 +41,8 @@ Retain all failed diagnostic packets. Existing dist reused; no media/dependencie
 added. Pre-release gzip9 JS165915/CSS24026, public155542751B, within current caps.
 Build passes; final combined source, project suite, browser/performance and
 public qualification still required. Next implement [HAZARD-03](../plans/HAZARD-03-connected-living-surfaces.md).
+
+**Publication update:** the final qualified behavior is delivered in
+[web0.22.16](2026-09-07-v02216-public-verification.md). This candidate record retains
+its original source/test identities; the final qualification and public receipt
+own release acceptance and its limits.

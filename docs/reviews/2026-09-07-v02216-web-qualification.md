@@ -4,7 +4,9 @@ Frozen runtime **09d5475c522c410cbe723d4e0dd8bd76945400f6**, PR7,
 `codex/book-completion-hazard-refinement`. Astra sole runtime writer; actual Sol
 independently reviews source, pixels and raw paired reports. Qualification is
 accepted by Astra and [actual Sol](2026-09-07-v02216-sol-final-review.md).
-Publication awaits the release push and public verification.
+Publication completed at release815deb052e8e921e0a10356870af3c0e02d9f84f after exact
+release CI34075470855 passed. [Public verification](2026-09-07-v02216-public-verification.md)
+binds both origins and two fresh browser journeys.
 The exact preceding public build is0.22.15/1e8b465.
 
 Book completion now makes Next/Surprise primary after partial or perfect rescue.

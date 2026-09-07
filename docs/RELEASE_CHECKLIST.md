@@ -17,7 +17,24 @@ Verify real runtime releases, not the presence of a deployment on every docs SHA
 Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
 browser saves. No retention/deletion/archive without explicit Human approval.
 
-## Current published web — v0.22.15 balanced walls and grounded sprites
+## Current published web — v0.22.16 Book progression and living liquids
+
+Release815deb0, frozen runtime09d5475. [Qualification](reviews/2026-09-07-v02216-web-qualification.md),
+[actual Sol review](reviews/2026-09-07-v02216-sol-final-review.md) and
+[public verification](reviews/2026-09-07-v02216-public-verification.md) own closure.
+
+- [x]664 tests/67 files, TypeScript/build, budgets, production audit and exact runtime/release CI.
+- [x]38 current-source browser cases, no skips/flakes; two five-pair cohorts per viewport.
+- [x]Real Full idle raster cost+9.983%/+15.496% accepted within measured Chromium scope; all40 measured samples max16.8ms.
+- [x]One Git-integrated deployment; both origins match frozen HTML/JS/CSS; two fresh public journeys pass.
+- [ ]Q04/Q07/P18 Human observations, independent Q01/P17 and Q02, physical iPad/WebKit/low-end/thermal and native acceptance.
+
+Windows0.22.9 remains published; native0.22.10 held. Next is LOOT-03 A with protected
+migration/conservation first. Docs-only closure uses actual success815deb0; guard
+unchanged, no rebuild/version bump. No deletion/archive is authorized. Older
+release and next-work labels below retain their historical context.
+
+## Historical published web — v0.22.15 balanced walls and grounded sprites
 
 Release1e8b465, runtime e69f3e4. [Qualification](reviews/2026-09-07-v02215-web-qualification.md),
 [actual Sol review](reviews/2026-09-07-wall04c-sol-final-review.md) and

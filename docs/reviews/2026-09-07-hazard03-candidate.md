@@ -56,3 +56,8 @@ in the qualification receipt. No new asset allocation or broad timing waiver.
 Rollback the complete hazard seam to15 while retaining Book/MOVE and saves.
 The existing Vercel guard remains untouched. Generated packets are logged for
 Human cleanup review; no deletion/archive or repository/media clone.
+
+**Publication update:** the final qualified behavior is delivered in
+[web0.22.16](2026-09-07-v02216-public-verification.md). This candidate record retains
+its original source/test identities; the final qualification and public receipt
+own release acceptance and its limits.

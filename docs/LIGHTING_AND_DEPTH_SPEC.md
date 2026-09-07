@@ -1,6 +1,6 @@
 # Wall depth and lighting — implemented WALL-04C contract
 
-## Connected liquid revision —0.22.16 candidate
+## Connected liquid revision — delivered web0.22.16
 
 HAZARD-03 preserves the accepted WALL-04C geometry below. Cast/contact now use
 the ground complement excluding actual wall footprints and pit voids, including
@@ -18,7 +18,9 @@ generic racing dashes. Lite freezes currents and hides FX; Reduced/Static freeze
 all ambient motion but retain identity/borders/shade. No new media, timer, RNG,
 collision or save data. [Candidate and cost trail](reviews/2026-09-07-hazard03-candidate.md).
 This supersedes older hazard-excluding receiver and no-lip descriptions below;
-publication still awaits frozen-source browser/performance qualification.
+[publication and verification are complete](reviews/2026-09-07-v02216-public-verification.md).
+The scoped Full idle rendering cost is explicitly recorded; Q04/P18 beauty/feel
+feedback and physical-device acceptance remain separate.
 
 ## Current wall and field-art contract — web0.22.15
 
