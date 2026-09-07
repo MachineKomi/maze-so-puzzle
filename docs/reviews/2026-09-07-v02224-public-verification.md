@@ -63,3 +63,14 @@ Latest published Windows remains0.22.9; native0.22.10 qualification is unfinishe
 Use actual successful release6c9cddf as the guard baseline for the documentation
 closure. Preserve the Ignored Build Step; do not rebuild, bump the version or
 use a manual deployment for documentation. Record the actual skip after it occurs.
+
+### Observed documentation closure
+
+Documentation checkpoint **1fc0a5bcb47cf6faf92d9c6535e3bf24ea1281b4** is backed up
+on main and codex/friend-victory. The unchanged local guard returned SKIP against
+the actual successful6c9cddf baseline. Vercel then reported **Canceled by Ignored
+Build Step** at **15:36:14 UTC** for the [documentation deployment](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/2nxyjmkugUNqhwcZNmZ2tRxLu2nF).
+It did not install/build/upload another game payload. This observed receipt is
+backed up on the Codex branch only for the next runtime slice; no recursive main
+push or replacement deployment is needed. All owned QA/public helpers are closed;
+the older unowned4271 preview and all retained artifacts are untouched.

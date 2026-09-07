@@ -2,6 +2,11 @@
 
 **Current delivery — web0.22.24:** [public receipt](reviews/2026-09-07-v02224-public-verification.md) records the [friend-led victory](plans/DELIGHT-24-friend-victory.md), DELIGHT-02B checkpoint B. Frozen d880b223, reviewed ee9e994, release6c9cddf; actual independent Sol supports this bounded web release. Both origins are verified. Astra remains the runtime writer on codex/friend-victory. Next: remaining A pickup presence and C post-write earned fanfare, then LEARN-01 including STORY-RESCUE-01. Rare eggs wait for the usable Plan10 Garden and its Plan09/greybox dependencies; an empty Book inventory is not that home. Q10/P24 is ready; Q09/P23 and Q08/P19 remain open. Earlier active/next/live labels below are historical.
 
+Docs closure1fc0a5b is backed up on main and this branch. Vercel actually skipped
+it at15:36:14 UTC through the unchanged Ignored Build Step; [observed receipt](reviews/2026-09-07-v02224-public-verification.md#observed-documentation-closure).
+The observation is backed up on this Codex branch only for the next runtime slice.
+All owned QA processes are stopped; unowned4271 and all artifacts are preserved.
+
 **Current delivery — web0.22.23:** [release receipt](reviews/2026-09-07-v02223-public-verification.md) records [SCENE-23](plans/SCENE-23-depth-and-scale.md) and [LOOT-03 C rainbow XP](plans/LOOT-03C-adventure-xp-execution.md). Taller doors, pickup/held weapon parity, shared ground depth, larger above-wall Power and boot-free jump presentation are delivered. Astra owns runtime; actual independent Sol supports the bounded web scope. Next: protected usable inventory before eggs; ART-REWARD-01 and the wider roadmap remain open. Q09/P23 is the scene/XP playtest; Q08/P19 physical Apple/cold-Power and native qualification remain separate. Earlier active/next/live labels below are historical.
 
 Docs closure687ae8a is backed up on main and this branch. Vercel actually skipped
