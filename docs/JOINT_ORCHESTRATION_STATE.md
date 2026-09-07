@@ -2,8 +2,8 @@
 
 **Current delivery — September 7:** web **0.22.17 is live**, release
 **65acb82076e299e7764b508e0d83ff2f77dd96df**, reviewed checkpoint b41a5c4,
-frozen runtime eff0530. Root is on `codex/bounded-camera-performance`,
-fast-forwarded to the release; remote main owns that release.
+frozen runtime eff0530. Root is on `codex/bounded-camera-performance`;
+remote main is documentation closure81387a3, retaining that release payload.
 [Public verification](reviews/2026-09-07-v02217-public-verification.md),
 [qualification](reviews/2026-09-07-v02217-web-qualification.md) and
 [Sol's independent review](reviews/2026-09-07-camera17-sol-final-review.md)
@@ -48,8 +48,10 @@ failed/pilot packets are candidates for a later exact-target cleanup review,
 not approval to delete/archive. No full repository/media clone or native package.
 
 [Docs-only rules](VERCEL_DEPLOYMENT.md) now use actual successful65acb82.
-The next documentation closure must skip through the unchanged deployment guard;
-record its actual ignored-build result without another game build. Earlier
+Documentation closure81387a3 actually skipped through the unchanged deployment
+guard at04:15:40UTC. Its [observed receipt](reviews/2026-09-07-v02217-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only; include it with the next runtime slice
+without another main push or game build just to record the skip. Earlier
 live/active/next labels below retain historical provenance and are superseded
 by this current state.
 
