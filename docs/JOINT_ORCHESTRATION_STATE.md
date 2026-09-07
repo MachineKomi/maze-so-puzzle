@@ -2,8 +2,10 @@
 
 **Live operating state — September7:** web **0.22.18 is published**, release
 **54c286ac2dcc15590fb781a96e0d6ed2009fa78e**, reviewed82ee7e9, frozen runtime85f49ea.
-Root remains on `codex/physical-authored-loot`, fast-forwarded to the release;
-documentation closure follows without another game build. [Public proof](reviews/2026-09-07-v02218-public-verification.md),
+Root remains on `codex/physical-authored-loot`; remote main is documentation
+closuree55c7e0. Vercel actually skipped it at05:45:56UTC; the [observed receipt](reviews/2026-09-07-v02218-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only for the next runtime slice, with no
+additional main push/build. [Public proof](reviews/2026-09-07-v02218-public-verification.md),
 [qualification](reviews/2026-09-07-v02218-web-qualification.md) and
 [actual Sol review](reviews/2026-09-07-loot03-sol-final-review.md) bind both public
 origins, six fresh journeys,700 tests,41 broader/11 overlapping final browser
