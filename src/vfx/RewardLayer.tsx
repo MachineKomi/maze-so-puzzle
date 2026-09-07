@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { useContext, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { lootLineClear } from "../game/loot";
 import type { LevelDefinition } from "../game/types";
@@ -8,6 +8,8 @@ import { playRewardArrival, type SoundHandle } from "../sound";
 import { advanceRewardToken, makeRewardTokens, REWARD_CAP, rewardProjection, rewardSpaceOpen, type RewardEmission, type RewardToken } from "./rewardPhysics";
 import { REWARD_COLORS, rewardGlyph } from "./rewardGlyphs";
 import { lootPose, type LootView } from "./useLootCollection";
+import { StageFitContext } from "../ui/ResponsiveStage";
+import { drawRewardNumber, rewardNumbers } from "./rewardNumbers";
 
 export interface RewardPort { emit(event: RewardEmission): void; cancel(): void; wake(): void }
 export const EMPTY_REWARD_PORT: RewardPort = { emit() {}, cancel() {}, wake() {} };
@@ -18,6 +20,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
   loot: RefObject<LootView>;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { scale: stageScale } = useContext(StageFitContext);
   const [fallback, setFallback] = useState(false);
   const [, repaintFallback] = useState(0);
   const mutedRef = useRef(muted); mutedRef.current = muted;
@@ -33,6 +36,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
     }
     loot.current.canvasAvailable=true;
     const glyphs = { gold: rewardGlyph("gold"), science: rewardGlyph("science"), power: rewardGlyph("power") };
+    const numbers = rewardNumbers();
     let tokens: RewardToken[] = [], frame: number | undefined, previous = 0, lastArrival = -Infinity, pitch = 0;
     let width = 0, height = 0, scale = 1, voice: SoundHandle | undefined;
     let peak = 0, bounces = 0, arrivals = 0;
@@ -45,7 +49,9 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       if (size.width <= 0 || size.height <= 0) return false;
       if (width !== size.width || height !== size.height || canvas.width === 1) {
         ({ width, height } = size);
-        scale = Math.max(.1, Math.min((devicePixelRatio || 1) * canvas.getBoundingClientRect().width / width, 1.5, 1536 / width, 1536 / height));
+        // The stage already owns its physical scale. Reading a Canvas DOM box
+        // here forces the just-updated scene to lay out inside the first draw.
+        scale = Math.max(.1, Math.min((devicePixelRatio || 1) * stageScale, 1.5, 1536 / width, 1536 / height));
         canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
       }
@@ -103,9 +109,8 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
         ctx.save(); ctx.translate(at.x,at.y-pose.lift*cell); ctx.rotate(pose.angle);
         ctx.globalAlpha = 1; ctx.drawImage(glyphs[source.currency],-size/2,-size/2,size,size); ctx.restore();
         if (drop.amount > 1) {
-          ctx.globalAlpha = 1; ctx.font = `bold ${Math.max(11,cell*.26)}px sans-serif`; ctx.textAlign="center";
-          ctx.lineWidth=3; ctx.strokeStyle="#fff9e9"; ctx.strokeText(String(drop.amount),at.x,at.y+cell*.09);
-          ctx.fillStyle="#553677"; ctx.fillText(String(drop.amount),at.x,at.y+cell*.09);
+          ctx.globalAlpha = 1;
+          drawRewardNumber(ctx,numbers,drop.amount,at.x,at.y+cell*.09,Math.max(11,cell*.26));
         }
         if (pose.moving && quality === "full") {
           ctx.globalAlpha=1; ctx.strokeStyle="#fff2ae"; ctx.lineWidth=2;
@@ -182,7 +187,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       if (!tokens.length) {
         ({ width, height } = scene.current.contentSize);
         if (width <= 0 || height <= 0) return;
-        scale = Math.min((devicePixelRatio || 1) * canvas.getBoundingClientRect().width / width, 1.5, 1536 / width, 1536 / height);
+        scale = Math.max(.1, Math.min((devicePixelRatio || 1) * stageScale, 1.5, 1536 / width, 1536 / height));
         canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
         ctx.setTransform(scale, 0, 0, scale, 0, 0); previous = now; pitch = 0;
       }
@@ -192,18 +197,25 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
     } };
     const visibility = () => { if (document.hidden) cancel(); else wake(); };
     const resize = () => { cancel(); wake(); };
+    // Window resize fires before layout/scene measurements settle. Redraw the
+    // resting loot after the board's size notification, with the shared scene
+    // snapshot updated by its owner before our next animation frame.
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry && (Math.abs(entry.contentRect.width-width)>.5 || Math.abs(entry.contentRect.height-height)>.5)) resize();
+    });
+    observer.observe(canvas.parentElement!);
     wake();
     document.addEventListener("visibilitychange", visibility);
     window.addEventListener("blur", cancel);
     window.addEventListener("focus", wake);
     window.addEventListener("resize", resize);
     return () => {
-      cancel(); port.current = EMPTY_REWARD_PORT;
+      observer.disconnect(); cancel(); port.current = EMPTY_REWARD_PORT;
       document.removeEventListener("visibilitychange", visibility);
-      window.removeEventListener("blur", cancel); window.removeEventListener("resize", cancel);
+      window.removeEventListener("blur", cancel);
       window.removeEventListener("focus", wake); window.removeEventListener("resize", resize);
     };
-  }, [active, level, port, quality, scene, loot]);
+  }, [active, level, port, quality, scene, loot, stageScale]);
   const world=canvasRef.current?.parentElement?.querySelector(".camera-world");
   return <><canvas ref={canvasRef} width={1} height={1} className="vfx-rewards" data-vfx-kind="committed-rewards" aria-hidden="true" />
     {fallback && world && createPortal(loot.current.game.loot.sources.flatMap(s=>s.drops.map(d=>({s,d})))

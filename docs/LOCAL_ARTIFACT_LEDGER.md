@@ -1,5 +1,53 @@
 # Local artifact ledger and cleanup review
 
+## Cold reward-opening diagnosis — September7 active
+
+Owner Astra, branch `codex/cold-reward-performance` from3a01ad4. A four-file
+`C:/GameDev/maze-game-qa/performance/reward-cold-baseline-v02218/` snapshot retains
+verified18 HTML/JS/CSS and identity, sharing unchanged current media. Reuse one
+existing dist/runtime and installed browser; no dependency installation or
+repository/media clone. Completed packets beneath the same performance parent:
+
+| Folder | Files | Bytes | Disposition |
+| --- | ---: | ---: | --- |
+| reward-cold-baseline-v02218 |4|739446|Frozen public18 comparison entry. |
+| reward-cold-probe-v02218 |13|16258317|Instrumented18→18 first-phase diagnostic. |
+| reward-cold-stage-scale-probe |13|16268658|Rejected scale-only hitch hypothesis; work shifted to font. |
+| reward-cold-number-atlas-probe |13|16363223|Instrumented draw-phase reduction; not final qualification. |
+| reward-cold-mount-probe |5|13491207|Fresh Continue→DOM/second-rAF proxy; transferred startup cost retained. |
+| reward-cold-browser-r1 |14|17458216|Four real stale-backing failures; one invalid readback-equality assertion. |
+| reward-cold-browser-r2 |7|7054271|One stale-backing failure, corrected isolated invalid-draw/digit proof passes. |
+| reward-cold-browser-r3 |14|18907644|Five corrected cache/fallback/resize/visual checks pass. |
+
+`reward-cold-final-browser` holds frozen067ee53 regression in progress. Planned
+`reward-cold-loot-frames`, `reward-cold-loot-work`, `reward-cold-camera-frames`
+and `reward-cold-camera-work` hold separate five-pair comparisons; final counts
+follow. Each measurement owns/stops its browser/server, raw wrappers never run in
+qualifying cohorts. Retain all packets for explicit Human cleanup review.
+No deletion/archive or native build.
+
+### Cold-reward final local inventory
+
+All15 `reward-cold-*` packets under the external performance parent now total
+**350 files /291252353 bytes**. In addition to the completed diagnostic table:
+
+| Folder | Files | Bytes | Disposition |
+| --- | ---: | ---: | --- |
+| reward-cold-final-browser |103|73391219|067ee53,42/43; initial observer cancelled synchronous densePower. Retained failure. |
+| reward-cold-corrected-browser |102|71972054|Frozen d472037,43/43 pass, including corrected initial notification. |
+| reward-cold-loot-frames |5|10866321|Five untraced pairs/profile plus separate800ms mount sampler; slower entry disclosed. |
+| reward-cold-loot-work |25|9199599|Five separate traced loot pairs/profile; duplicate screenshots omitted. |
+| reward-cold-camera-frames |5|9930948|Five ordinary frame pairs/profile, essentially neutral. |
+| reward-cold-camera-work |25|9331919|Five separate ordinary traced pairs/profile; duplicate screenshots omitted. |
+| reward-cold-summary |2|19311|Reproducible aggregate and final source/dist integrity receipt. |
+
+One reusable d472037 dist build remains. All owned measurement/browser processes
+are stopped. Hold the corrected matrix, paired reports and baseline for recovery;
+retain failed/pilot packets until explicit Human cleanup approval. Raw hashes and
+scope are in the [v19 qualification](reviews/2026-09-07-v02219-web-qualification.md).
+No repository/media clone, native build, deletion or archiving. Public verification
+will add one separately inventoried packet; docs closure reuses these records.
+
 ## LOOT-03 A — September7 initial qualification record
 
 Production builds reuse `C:/GameDev/maze-game/dist` and the existing provenance

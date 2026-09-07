@@ -65,3 +65,18 @@ Apple/WebKit/native/thermal acceptance nor a minimum RAM threshold is establishe
 Documentation closure must use actual successful54c286a as the guard baseline.
 Record its actual ignored-build result separately; do not rebuild the game solely
 to align documentation and release SHAs.
+
+## Observed documentation closure
+
+Documentation checkpoint **e55c7e0ede9b0c5f71c89be6dd72631363e0bbf5** is backed
+up on main and the working Codex branch. All14 changed paths are Markdown;
+430 checked local links resolve and the whitespace check passes. With actual
+successful54c286a as baseline and the exact documentation HEAD, the unchanged
+guard returns exit0/SKIP for the documentation-only range.
+
+GitHub's raw Vercel status reports **Canceled by Ignored Build Step** at
+05:45:56UTC, [deployment record](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/AbSqobKoBBc1YJMzkMudR7HHzM6d).
+This is an observed remote skip, not just a local prediction. Public runtime
+remains54c286a/85f49ea. This observation is committed/pushed only on the existing
+Codex branch and can join the next runtime slice; no second main push or build
+is needed to record it. All qualification/public processes remain stopped.

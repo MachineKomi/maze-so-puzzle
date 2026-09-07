@@ -2,8 +2,10 @@
 
 **Live operating state — September7:** web **0.22.18 is published**, release
 **54c286ac2dcc15590fb781a96e0d6ed2009fa78e**, reviewed82ee7e9, frozen runtime85f49ea.
-Root remains on `codex/physical-authored-loot`, fast-forwarded to the release;
-documentation closure follows without another game build. [Public proof](reviews/2026-09-07-v02218-public-verification.md),
+Root is now on `codex/cold-reward-performance`; remote main is documentation
+closuree55c7e0. Vercel actually skipped it at05:45:56UTC; the [observed receipt](reviews/2026-09-07-v02218-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only for the next runtime slice, with no
+additional main push/build. [Public proof](reviews/2026-09-07-v02218-public-verification.md),
 [qualification](reviews/2026-09-07-v02218-web-qualification.md) and
 [actual Sol review](reviews/2026-09-07-loot03-sol-final-review.md) bind both public
 origins, six fresh journeys,700 tests,41 broader/11 overlapping final browser
@@ -16,7 +18,14 @@ Power's immediate puzzle authority stays intact. No new media/dependencies.
 After migration, corrective builds must retain v4 compatibility; no v3-only
 rollback or save clearing. Windows0.22.9 remains published; native0.22.10 held.
 
-**Next runtime dispatch: LOOT-03 B.** Audit enemy counts/Power bands and campaign
+**In flight: bounded cold reward-opening correction.** Stage-scale reuse alone
+moved layout work to the first font assignment. A shared digit cache reduces the
+instrumented first draw, with a measured startup/cache tradeoff. A new resize
+regression check caught and corrected stale settled-loot backing. Five new
+browser checks pass; final uninstrumented pairs/source qualification are pending.
+[Working evidence and limits](reviews/2026-09-07-cold-reward-opening.md).
+
+**Next after this correction: LOOT-03 B.** Audit enemy counts/Power bands and campaign
 totals, freeze modest deterministic final-defeat Gold/Science tables, extend A's
 source/capacity/save owners without retroactive enemy awards, qualify and publish.
 Then mixed chests/Mimics; account recognition and usable-inventory-first eggs
