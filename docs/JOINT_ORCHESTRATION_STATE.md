@@ -1,5 +1,11 @@
 # Maze so Puzzle — joint orchestration state
 
+Documentation closure ac055e5 is backed up on main and this branch. Vercel
+actually skipped it at16:47:58 UTC through the unchanged Ignored Build Step;
+[observed receipt](reviews/2026-09-07-v02225-public-verification.md#observed-documentation-closure).
+This observation is branch-only for the next runtime slice. All owned QA helpers
+are stopped; unowned4271 and all retained artifacts remain untouched.
+
 **Current delivery — web0.22.25:** [public receipt](reviews/2026-09-07-v02225-public-verification.md) verifies spacious exploration, the folding essentials sidebar and reversible Classic view on both origins. Frozen c931bc3, reviewed4359772, releasec267308; actual independent Sol supports bounded web publication. Astra owns runtime on codex/expansive-exploration. Q11/P25 is ready; physical Apple/3GB/native acceptance remains open. Next: DELIGHT A pickup presence and C post-write earned fanfare, then LEARN-01 including STORY-RESCUE-01. Preserve the wider roadmap and usable Garden dependencies before rare eggs. Earlier current/live/next labels below are historical.
 
 

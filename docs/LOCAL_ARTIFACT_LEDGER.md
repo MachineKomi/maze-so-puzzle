@@ -1,5 +1,9 @@
 # Local artifact ledger and cleanup review
 
+EXPLORE25 closure guard adds one97-byte log, explore25-doc-guard.log. Complete
+local/public/guard slice: **628 files /289262283 bytes**. Actual Vercel docs skip
+is recorded in the public receipt; this observation remains branch-only.
+
 ## EXPLORE25 artifact island — completed
 
 Created four-file `C:/GameDev/maze-game-qa/performance/release-v02224` from verified live24 dist entry bytes (HTML/JS/CSS/identity only, shared unchanged public media). `explore25-baseline`, `explore25-layout-r1` and subsequent explore25-* evidence remain external; one in-place dist was rebuilt. Completed local/public inventories are below. No files deleted/archived, no repo or media clone; unowned port4271 is preserved.
