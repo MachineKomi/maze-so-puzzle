@@ -6,8 +6,8 @@ Audited baseline: `4f34ee78bb65421308b07ef7f16af28c91be1ec4` / live web0.22.22
 XP checkpoint reviewed: `581ee002d351dd984f05a8b4c171b6ba36c05a6a`
 Combined XP/SCENE-23 freeze reviewed: `42523f740ac97d0fe64ace603593ec18f12c8c0b`
 Browser-wrapper revision reviewed: `585f76bc8fc8d4d85ecc3b5e7b13da75383aeab9`
-Power-size correction reviewed: working tree atop `585f76bc8fc8d4d85ecc3b5e7b13da75383aeab9`
-Status: provisional source and visual review; final source-matched browser and paired-performance disposition pending
+Final candidate reviewed: `6ee51c4a3f1d6b18c39e309cea26111aff1e3df3`
+Status: supports bounded web promotion; physical Apple/native performance and Human art acceptance remain open
 
 ## Required bounded cut
 
@@ -93,4 +93,42 @@ The combined freeze moves grounded objects, followers, Ame, battle actors, chest
 
 The reviewed pilot images show materially taller doors, the same 92.6094 CSS-pixel Star Sword canvas before and after pickup, no visible jump-boots art, and Ame above foreground walls at controlled departure, apex and landing. The separate label remains visible above walls. The 780 and 1080 door images are persuasive direction evidence; the current test records a 1.256-tile visible door height and 1.120-tile width. The first SCENE-23 styling retained a fixed 28px pre-transform ceiling on the Power font, which made the physical phone label too small. The reviewed working-tree correction uses an exact 34% of tile font with a 1.6% of tile stroke. Its new bounding-box height/tile ratio is the correct post-stage-scale contract. Because an element bounding box does not include painted stroke or shadow overflow, final qualification still needs the promised physical edge screenshots or pixel margin, plus a distinct-row crossing in both vertical directions, portal and battle replacement motion through a camera rebase, top and bottom edge weapon clipping, and the final four-handle jump clock. The source correctly caches four jump-related CSS animation handles—three actor/ground handles plus one label handle—and should not be described as a three-handle total.
 
-I see no further source-level blocker in the `42523f740ac97d0fe64ace603593ec18f12c8c0b` logic plus the reviewed `585f76bc8fc8d4d85ecc3b5e7b13da75383aeab9` wrappers and current Power-size correction. That is not a promotion recommendation yet: the 18-case scene packet predates the final migration/copy changes, the current 122-case browser run is still in progress, and paired frame/work evidence is outstanding. Physical iPhone/iPad behavior, native/WebKit behavior, Human acceptance of the crystal art and the separate replacement-art backlog remain open.
+I see no further source-level blocker in the `42523f740ac97d0fe64ace603593ec18f12c8c0b` logic or the final wrapper and Power-size correction at `6ee51c4a3f1d6b18c39e309cea26111aff1e3df3`.
+
+## Final frozen evidence
+
+The final build is bound to runtime-input SHA-256 `793236438ae68281d8ea50d8f6e4b0f59112e7c126d184c1e621d7b6faecdd2d` and dist fingerprint `327e3474136558dab6c72cd9813b8de1fb3380afe3efa3974050470c31b38836`. The integrity record resolves candidate JavaScript SHA-256 `31293669817e69ab59f8987de38466a81edf491dab222ab41db47641e7843e7f`, CSS SHA-256 `7fc186629601802ccbd3ba0474055be9f3a6d75175a0748a85a28a0c4656c27f`, and the reviewed XP derivative SHA-256 `d1b2a5dbb8dac34682c71ff082850fb5333462defcbb4513e4081175fcd62f1f`.
+
+The broad browser result must be read as 120 passes and two subpixel-probe failures out of 122, followed by a separate 26/26 affected-source run after the measured-pixel tolerance repair. It is not one clean 122-case run. The repaired tolerance remains below 0.025 painted CSS pixel, just above Chromium's 1/64-pixel quantization, while the checks still require the exact semantic end state. Together the passes cover the two affected contracts plus final Power sizing, phone/tablet top-edge routes, actor depth, weapon parity, jumps and replacement handoffs.
+
+I independently viewed the final phone and tablet scene images. The Power line measures 17.0896 physical CSS pixels at 780 and 32.1875 at 1080, with height/tile ratios 0.339978 and 0.340046. Its complete outline remains inside the top edge in the five-friend captures and it does not become disproportionate at the larger layout. The jump packet records actor z27, wall z26, ground z25 and label z60 at departure, apex and landing; the images show airborne Ame above the wall while the ground effect remains below it. Door opening, portal, battle and held-weapon evidence is consistent with the final source.
+
+## Independent performance recomputation
+
+Each report contains 24 rows: four warmups and five measured baseline/candidate pairs for both 844×390 DPR3 and 1080×810 DPR2, under local Chromium 152 with CPU throttling 4. Frame cohorts are untraced; work cohorts collect traces and layer inventories separately. All 96 saved rows retain their route assertions, exact return position, zero terrain mutations, zero page errors and zero broken images. The raw enemy route description still says “dual-currency conservation,” but its candidate rows contain and conserve Gold, Science and XP; that label is stale and must not be used to imply XP was absent.
+
+| Untraced route/profile | Median maximum, baseline → candidate | Worst maximum | Frames >20 ms | Frames >34 ms |
+| --- | ---: | ---: | ---: | ---: |
+| Enemy 844 | 49.834 → 33.300 ms | 66.868 → 33.700 ms | 10 → 4 | 5 → 0 |
+| Enemy 1080 | 49.834 → 16.938 ms | 66.800 → 33.400 ms | 8 → 2 | 5 → 0 |
+| Camera 844 | 33.300 → 16.900 ms | 33.500 → 33.400 ms | 4 → 1 | 0 → 0 |
+| Camera 1080 | 33.200 → 17.000 ms | 33.400 → 33.500 ms | 3 → 2 | 0 → 0 |
+
+Every measured row has p95 at or below 16.8 ms. The candidate introduces no untraced tail regression in these cohorts; the enemy route has materially fewer long intervals, while ordinary camera movement is neutral to better on the measured counts.
+
+The traced work medians show bounded costs rather than parity. On the enemy route, Paint changes 566.005→581.629 ms (+2.760%) at 844 and 571.806→585.417 ms (+2.380%) at 1080. UpdateLayoutTree changes 324.583→343.820 ms (+19.237 ms, +5.927%) and 306.951→316.333 ms (+9.382 ms, +3.057%). Raster changes +1.013% and +1.605%; Layout changes −1.776% and +6.082%. The five-pair distributions are small and not perfectly aligned—for example, the 844 Paint ratio of medians is +2.760% while its paired median is −0.071%—so these totals support a modest-work conclusion, not precise causal attribution.
+
+On the ordinary camera route, Paint changes −2.274% and −2.020%, and RasterTask changes −6.506% and −6.876%. UpdateLayoutTree increases by 34.254 ms (+9.581%) at 844 and 32.365 ms (+10.027%) at 1080 over the complete route; Layout increases by 1.358 and 4.344 ms. Median total layer count changes 17→18 and 16→17 on the enemy route, and 20→22 and 19→21 on the camera route. The largest reported surface is unchanged. Summed `drawsContent` CSS rectangles increase about 11.4–11.6% on the enemy route and about 1.0% on the camera route, but these rectangles are not an allocated-memory measurement.
+
+The four report SHA-256 values are:
+
+- enemy frames: `052d502a6de19cd44f2b396aef4a998ef651cfecb784127f92bf7da6627cdf51`;
+- enemy work: `7bfbc64899191679260e4fffca10aa7a01fa8222f34208a5618ad29dbd4a4c9d`;
+- camera frames: `297b5c280da3c1e6938a7934c80e38939b2dbfaafc30265de71787284b13a4bb`;
+- camera work: `1911a5ba5b6d075ace5568ed160ec148bd9ea192fd6cc939f1ba426a0c0dbab9`.
+
+## Disposition and limits
+
+I support promotion of `6ee51c4a3f1d6b18c39e309cea26111aff1e3df3` for the bounded web scope. The protected-save correction, exactly-once XP banking, three-channel conservation, recognition-only profile model and SCENE-23 depth/scale changes are coherent. The final Chromium evidence covers their relevant functional and visual boundaries. The measured Paint, layout-tree and layer costs are proportionate to the retained actor/label planes and visible XP presentation, and the untraced frame cohorts do not expose a release-blocking regression.
+
+This decision does not qualify physical iPhone or iPad behavior, WebKit/native behavior, thermal or GPU limits, allocated RAM, a cold process, or Human acceptance of the crystal art. The generated-art replacement backlog also remains separate. Those limits should remain in the release record rather than being inferred from local Windows Chromium evidence.
