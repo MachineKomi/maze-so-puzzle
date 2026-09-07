@@ -35,29 +35,51 @@ test("Classic is reversible and the whole first maze stays intact",async({page})
   await page.getByRole('button',{name:/^More/}).click();
   await page.getByRole('button',{name:'Use classic square view'}).click();
   await expect(page.locator('.play-shell')).toHaveAttribute('data-layout','primary-landscape');
+  await expect(page.getByRole('button',{name:'Layout & more'})).toBeFocused();
   const b=await page.locator('.maze-board').boundingBox();expect(b!.width).toBeCloseTo(b!.height,0);
   await page.getByRole('button',{name:'Layout & more'}).click();
   await page.getByRole('button',{name:'Use spacious maze view'}).click();
   await expect(page.locator('.play-shell')).toHaveAttribute('data-layout','explore');
+  await expect(page.locator('[data-focus-id="more"]:visible')).toBeFocused();
   await page.screenshot({path:resolve(output,'whole-tutorial.png')});
 });
 
-for(const folded of [false,true])test(`enlarged reader keeps controls and details accessible ${folded}`,async({page})=>{
-  await mkdir(output,{recursive:true});await page.setViewportSize({width:844,height:390});
+for(const [width,height] of [[844,390],[1280,720]])for(const folded of [false,true])test(`enlarged reader keeps controls and details accessible ${width} ${folded}`,async({page})=>{
+  await mkdir(output,{recursive:true});await page.setViewportSize({width,height});
   await selectTesterLevel(page,level);
   if(folded)await page.getByRole('button',{name:'Fold sidebar'}).click();
   await page.evaluate(()=>{document.documentElement.style.fontSize='32px';});
   await expect(page.locator('.adventure-hud')).toHaveAttribute('data-reader','true');
   const reader=page.getByRole('region',{name:'Full objective and adventure status'});
+  const box=await reader.boundingBox();expect(box!.height).toBeGreaterThan(30);
   await reader.focus();await page.keyboard.press('End');
+  const scroll=await reader.evaluate(e=>({top:e.scrollTop,height:e.clientHeight,total:e.scrollHeight}));
+  expect(scroll.total).toBeGreaterThan(scroll.height);await expect.poll(()=>reader.evaluate(e=>e.scrollTop)).toBeGreaterThan(0);
+  await page.locator('.bag-card').scrollIntoViewIfNeeded();await expect(page.locator('.bag-card')).toBeInViewport();
   await expect(page.locator('.thumb-pad')).toBeInViewport();
   await page.getByRole('button',{name:/^More/}).click();
   await page.getByRole('button',{name:'Objective & gentle hint'}).click();
   await expect(page.getByRole('dialog')).toBeVisible();
-  await page.screenshot({path:resolve(output,`enlarged-hint-${folded}.png`)});
+  await page.screenshot({path:resolve(output,`enlarged-hint-${width}-${folded}.png`)});
 });
 
 const jump=findInputFixture(events=>events.some(e=>e.type==='hole-jumped')&&!events.some(e=>e.type==='portal-warped'))!;
+test('touch fold/expand keeps safe-area controls and full-size collection details',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:844,height:390},deviceScaleFactor:3,hasTouch:true});
+  try {
+    const page=await context.newPage();await selectTesterLevel(page,level);
+    await page.addStyleTag({content:':root { --safe-left: 24px; --safe-right: 12px; --safe-bottom: 8px; }'});
+    await page.getByRole('button',{name:'Fold sidebar'}).tap();
+    await expect(page.getByRole('button',{name:'Expand sidebar'})).toBeVisible();
+    await page.getByRole('button',{name:/^More/}).tap();
+    const details=page.getByRole('dialog').locator('button[data-focus-id^="bag:"]');
+    await expect(details).toHaveCount(7);
+    const b=await details.first().boundingBox();expect(b!.width).toBeGreaterThan(44);expect(b!.height).toBeGreaterThan(44);
+    await page.keyboard.press('Escape');await page.getByRole('button',{name:'Expand sidebar'}).tap();
+    await expect(page.getByRole('button',{name:'Fold sidebar'})).toBeVisible();
+    await mkdir(output,{recursive:true});await checkGeometry(page,'touch-safe-areas');
+  }finally{await context.close();}
+});
 const walk=findInputFixture(events=>events.length===1&&events[0]?.type==='moved')!;
 async function enterFixture(page:import('@playwright/test').Page,f:typeof walk,quality='full',motion='full') {
   await page.addInitScript(({snapshot,progress,preferences,keys})=>{
@@ -113,7 +135,7 @@ async function checkGeometry(page: import("@playwright/test").Page, name:string)
     expect(item.rect.bottom,`${name} ${item.name} bottom`).toBeLessThanOrEqual(bounds.bottom+1);
   }
 }
-for (const [width, height] of [[1280,720],[1194,834],[844,390],[960,540],[1920,1080],[568,320],[2560,1080]]) {
+for (const [width, height] of [[1280,720],[1194,834],[844,390],[960,540],[1920,1080],[568,320],[2560,1080],[900,500],[780,450]]) {
   test(`exploration composition ${width}x${height}`, async ({ page }) => {
     await mkdir(output, { recursive: true });
     await page.setViewportSize({ width, height });
@@ -121,6 +143,12 @@ for (const [width, height] of [[1280,720],[1194,834],[844,390],[960,540],[1920,1
     await page.evaluate(() => document.fonts.ready);
     await page.screenshot({ path: resolve(output, `${width}x${height}-${baseline ? "baseline" : "expanded"}.png`) });
     if (baseline) return;
+    if(height<450){
+      await expect(page.locator('button.inventory-slot,button.rescue-friend')).toHaveCount(0);
+      for(const control of await page.locator('.explore-toolbar button,.thumb-pad button').all()) {
+        const r=await control.boundingBox();expect(r!.width).toBeGreaterThanOrEqual(24);expect(r!.height).toBeGreaterThanOrEqual(24);
+      }
+    }
     await checkGeometry(page,`${width}x${height}-expanded`);
     const board = page.locator(".maze-board");
     const before = await board.boundingBox();

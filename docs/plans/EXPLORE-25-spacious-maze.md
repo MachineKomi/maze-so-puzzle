@@ -7,8 +7,12 @@ runtime writer on `codex/expansive-exploration`; Sol independently reviews.
 Baseline: live web0.22.24, runtime d880b223, recovered clean ba59cd7.
 
 The expanded rail starts at34% of logical available width, bounded360–520px;
-compact uses240px. Content changes do not resize it. Adjust only from actual
-dense-rack, phone/tablet/desktop and enlarged-text evidence. Keep Power, currencies,
+compact uses240px, or288px below600px logical height so map and pad can
+sit side by side. Content changes do not resize it. Adjust only from actual
+dense-rack, phone/tablet/desktop and enlarged-text evidence. Below500px logical height the
+objective preview moves to More; the map/pad dock and complete collections stay
+visible. Phone and short-layout collection icons are labelled status images,
+with full-size inspection buttons in More. Keep Power, currencies,
 friends, Bag, minimap, pad and a persistent expand/More control available. More
 contains all actions/details and a Classic square view switch. Session-only view
 preferences do not modify run/profile schemas. Preserve focus and clear held
@@ -17,6 +21,9 @@ movement/jump cancellation; no second camera animation loop.
 
 The maze pane consumes the remainder with square physical cells, not stretched
 SVG art. The short viewport axis starts at6 cells; neither axis exceeds12.
+On ultrawide panes, the12-cell long-axis cap can bring the short axis below6;
+this intentional zoom keeps the whole pane useful and preserves square cells
+without growing the backing. Six is a starting scale, not a minimum FOV.
 Retained backing rounds outward to whole tiles plus the existing four-cell
 gutter. Whole-map lessons fit intact and centred. Fractional viewport extents
 are `[left,left+width)` and `[top,top+height)`; legacy right/bottom retain last-cell

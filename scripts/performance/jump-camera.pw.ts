@@ -143,7 +143,8 @@ test('JUMP rapid ordinary approach and live Sound quality toggle',async({page})=
  await page.setViewportSize({width:780,height:312});await enter(page,{...f,snapshot:f.approachSnapshot!,step:f.prior!});
  await startSamples(page);await page.keyboard.press(keyForDirection[f.prior!.direction]);await page.waitForTimeout(70);await page.keyboard.press(keyForDirection[f.step.direction]);
  await expect(page.locator('.jump-presentation')).toBeVisible();
- await page.locator('[data-focus-id="sound"]').click();await page.locator('input[name="quality"][value="static"]').check();await page.locator('input[name="quality"][value="full"]').check();
+ if(!await page.locator('[data-focus-id="sound"]:visible').count()) await page.locator('[data-focus-id="more"]:visible').click();
+ await page.locator('[data-focus-id="sound"]:visible').click();await page.locator('input[name="quality"][value="static"]').check();await page.locator('input[name="quality"][value="full"]').check();
  const animations=await page.locator('.jump-presentation,.jump-ground').evaluateAll(nodes=>nodes.flatMap(e=>e.getAnimations({subtree:true})).map(a=>({state:a.playState,time:a.currentTime})));
  await writeFile(resolve(output,'rapid-sound-animation-handles.json'),JSON.stringify(animations,null,2));
  expect(animations).toHaveLength(3);for(const a of animations){expect(a.state).toBe('paused');expect(a.time).toBe(460);}

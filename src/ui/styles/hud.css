@@ -306,3 +306,25 @@
 .play-shell[data-layout="explore"] .adventure-hud[data-reader] .maze-map-card { order: 4; flex: 0 0 auto; }
 .play-shell[data-layout="explore"] .adventure-hud[data-reader] .deck-feedback { grid-area: 3/1/4/-1; }
 .play-shell[data-layout="explore"] .adventure-hud[data-reader] .deck-controls { grid-area: 4/1/5/-1; justify-self: end; }
+
+.game-stage[data-phone-fit] .play-shell[data-layout="explore"] .explore-toolbar button { min-height: calc(28px / var(--stage-scale)); min-width: calc(36px / var(--stage-scale)); font-size: calc(11px / var(--stage-scale)); }
+.game-stage[data-phone-fit] .play-shell[data-layout="explore"] .objective-hint-button { min-height: calc(28px / var(--stage-scale)); min-width: calc(28px / var(--stage-scale)); }
+.game-stage[data-phone-fit] .play-shell[data-layout="explore"][data-folded] .maze-map-card { --map-size: 120px; }
+.game-stage[data-phone-fit] .play-shell[data-layout="explore"][data-folded] .adventure-equipment { --slot-size: 30px; }
+.game-stage[data-phone-fit] .play-shell[data-layout="explore"] .adventure-equipment { --slot-size: clamp(44px,calc((100cqw - 36px)/7),56px); gap: 4px; }
+.game-stage[data-phone-fit] .play-shell[data-layout="explore"][data-folded] .adventure-equipment { --slot-size: 30px; }
+@container game-stage (max-height: 600px) {
+ .play-shell[data-layout="explore"][data-folded] .adventure-hud { grid-template-columns: minmax(0,1fr) auto; grid-template-rows: auto auto minmax(0,1fr) 24px auto; }
+ .play-shell[data-layout="explore"][data-folded] .adventure-equipment { grid-area: 3/1/4/-1; }
+ .play-shell[data-layout="explore"][data-folded] .maze-map-card { grid-area: 5/1/6/2; --map-size: 96px; }
+ .play-shell[data-layout="explore"][data-folded] .deck-feedback { grid-area: 4/1/5/-1; }
+ .play-shell[data-layout="explore"][data-folded] .deck-controls { grid-area: 5/2/6/3; }
+}
+.play-shell[data-layout="explore"] .adventure-hud[data-reader] .objective-card { display: flex; }
+.game-stage[data-phone-fit] .play-shell[data-layout="explore"][data-folded] .maze-map-card { --map-size: 112px; }
+.dialog-stage[data-phone-fit] .more-actions button { min-height: calc(44px / var(--stage-scale)); }
+@container game-stage (max-height: 500px) {
+ .play-shell[data-layout="explore"] .objective-card { display: none; }
+ .play-shell[data-layout="explore"] .adventure-equipment { --slot-size: 36px; gap: 4px; }
+ .play-shell[data-layout="explore"] .thumb-pad { width: 132px; height: 132px; }
+}

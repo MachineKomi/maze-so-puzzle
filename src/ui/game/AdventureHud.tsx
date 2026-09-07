@@ -32,6 +32,7 @@ export function AdventureHud({ explore = false, folded = false, onToggle, model,
   const classicCompact = useContext(CompactPlayContext);
   const compact = explore ? folded : classicCompact;
   const phone = useContext(StageFitContext).phone;
+  const statusOnly = compact || (explore && (phone || classicCompact));
   const hudRef = useRef<HTMLElement>(null);
   const objectiveRef = useRef<HTMLParagraphElement>(null);
   const [reader, setReader] = useState(false);
@@ -103,9 +104,9 @@ export function AdventureHud({ explore = false, folded = false, onToggle, model,
       <div className="hud-title"><span className="level-kicker" aria-label={tester ? `${chapter} · Tester preview · not saved` : chapter}>{compact ? chapter.replace(/^Story maze /,"Maze ") : chapter}{tester ? compact ? " · Test" : " · Preview · not saved" : ""}</span><h2>{name}</h2></div>
       {!explore && !compact && <button data-focus-id="more" onClick={e=>onMore(e.currentTarget)}>Layout & more</button>}
       <div className="hud-counters">
-        <div className="power-counter" data-ui-anchor="power"><CatalogueImage art={STORY_ART.amePortrait} alt="Ame" /><span><small>Power</small><TabularNumber value={power} /></span></div>
-        <div className="wallet-pill" data-ui-anchor="gold"><CatalogueImage art={TREASURE_CATALOG_ART["gold-bag"]} alt="" /><span><small>Gold</small><TabularNumber value={gold} /></span></div>
-        <div className="wallet-pill science-wallet" data-ui-anchor="science"><CatalogueImage art={TREASURE_CATALOG_ART["science-gears"]} alt="" /><span><small>Science</small><TabularNumber value={science} /></span></div>
+        <div className="power-counter" role="group" aria-label={`Power ${power}`} data-ui-anchor="power"><CatalogueImage art={STORY_ART.amePortrait} alt="Ame" /><span><small>Power</small><TabularNumber value={power} /></span></div>
+        <div className="wallet-pill" role="group" aria-label={`Gold ${gold}`} data-ui-anchor="gold"><CatalogueImage art={TREASURE_CATALOG_ART["gold-bag"]} alt="" /><span><small>Gold</small><TabularNumber value={gold} /></span></div>
+        <div className="wallet-pill science-wallet" role="group" aria-label={`Science ${science}`} data-ui-anchor="science"><CatalogueImage art={TREASURE_CATALOG_ART["science-gears"]} alt="" /><span><small>Science</small><TabularNumber value={science} /></span></div>
         <span className="step-pill" aria-label={`${steps} ${steps === 1 ? "step" : "steps"}`}>{steps} steps</span>
       </div>
       {compact && !reader && <div className="phone-hint">{hint}</div>}
@@ -116,12 +117,12 @@ export function AdventureHud({ explore = false, folded = false, onToggle, model,
       {map}
       <div className="adventure-equipment">
         <section className="rescue-card" aria-labelledby="rescue-title"><h3 id="rescue-title">Friends <span>{model.rescued}/{model.rescueTotal}</span><small>Optional</small></h3>
-          <ul className="rescue-list">{model.friends.map(friend => <li key={friend.id}><StatusCell compact={compact} className={`rescue-friend ${friend.rescued ? "rescued" : "waiting"}`} data-focus-id={`friend:${friend.id}`} aria-label={`${friend.label}: ${friend.rescued ? "rescued" : "waiting in the maze"}`} onClick={e => onDetail({ art: friend.art as UiArt, label: friend.label, description: `${FRIEND_BOOK_LORE[friend.species ?? "bunny"]} ${friend.rescued ? "Safe with Ame!" : "Waiting in the maze. You can always return to help."}` }, e.currentTarget)}>
+          <ul className="rescue-list">{model.friends.map(friend => <li key={friend.id}><StatusCell compact={statusOnly} className={`rescue-friend ${friend.rescued ? "rescued" : "waiting"}`} data-focus-id={`friend:${friend.id}`} aria-label={`${friend.label}: ${friend.rescued ? "rescued" : "waiting in the maze"}`} onClick={e => onDetail({ art: friend.art as UiArt, label: friend.label, description: `${FRIEND_BOOK_LORE[friend.species ?? "bunny"]} ${friend.rescued ? "Safe with Ame!" : "Waiting in the maze. You can always return to help."}` }, e.currentTarget)}>
             <CatalogueImage art={friend.art as UiArt} alt="" />{!friend.rescued && <CatalogueImage className="rescue-cage" src={friend.cage.src} alt="" />}
           </StatusCell></li>)}</ul>
         </section>
         <section className="bag-card" aria-labelledby="bag-title" data-ui-anchor="bag"><h3 id="bag-title">{compact ? "Bag" : "Adventure bag"} <span>{model.bagFound}/{model.bagTotal}</span></h3>
-          <ul className="inventory-grid">{model.slots.map(slot => <li key={slot.id} data-ui-anchor={`bag:${slot.id}`}><StatusCell compact={compact} className={`inventory-slot ${slot.found ? "found" : "missing"}`} data-focus-id={`bag:${slot.id}`} aria-label={`${slot.label}: ${slot.found ? "found" : "not found"}`} onClick={e => onDetail({ art: slot.art, label: slot.label, description: `${slot.found ? "Found." : "Still to find."} ${slot.description}` }, e.currentTarget)}><CatalogueImage art={slot.art} alt="" /></StatusCell></li>)}</ul>
+          <ul className="inventory-grid">{model.slots.map(slot => <li key={slot.id} data-ui-anchor={`bag:${slot.id}`}><StatusCell compact={statusOnly} className={`inventory-slot ${slot.found ? "found" : "missing"}`} data-focus-id={`bag:${slot.id}`} aria-label={`${slot.label}: ${slot.found ? "found" : "not found"}`} onClick={e => onDetail({ art: slot.art, label: slot.label, description: `${slot.found ? "Found." : "Still to find."} ${slot.description}` }, e.currentTarget)}><CatalogueImage art={slot.art} alt="" /></StatusCell></li>)}</ul>
           {model.bagTotal === 0 && <p>Bag ready!</p>}
         </section>
       </div>

@@ -64,6 +64,16 @@ for(const [quality,motion,width,height,noCanvas] of [
       else expect(await page.locator('[data-loot-fallback]').count()).toBeGreaterThan(0);
       await page.screenshot({path:resolve(output,`${event.currency}-${quality}-${motion}-${width}-${noCanvas}-settled.png`)});
       await page.waitForTimeout(350);expect(await read()).toEqual(settled);
+      // EXPLORE25: grounded world loot survives an actual viewport resize;
+      // folding cannot claim, duplicate or relocate its persistent bundles.
+      if(quality==='full' && motion==='full' && !noCanvas) {
+        await page.getByRole('button',{name:'Fold sidebar'}).click();
+        await page.waitForTimeout(250);expect(await read()).toEqual(settled);
+        const resized=await page.locator('canvas.vfx-rewards').evaluate((c:HTMLCanvasElement)=>({width:c.width,height:c.height,tokens:Number(c.dataset.tokens)}));
+        expect(resized.width).toBeGreaterThan(canvas.width);expect(resized.tokens).toBeGreaterThan(0);
+        await page.getByRole('button',{name:'Expand sidebar'}).click();
+        await page.waitForTimeout(250);expect(await read()).toEqual(settled);
+      }
       await enter();await page.waitForTimeout(1000);expect(await read()).toEqual(settled);
       // A real adjacent movement toward the distant, straight two-tile bundle
       // brings it into range; no debug teleport or artificial reward mutation.

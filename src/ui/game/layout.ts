@@ -17,7 +17,7 @@ export function calculatePlayLayout(width: number, height: number, _legacyBig = 
  * lessons are fitted intact. Board border is excluded from the cell metric. */
 export function calculateExploreLayout(width: number, height: number, grid: {width:number;height:number}, folded = false) {
   const w = Math.max(1, width), h = Math.max(1, height), gap = 8;
-  const deck = Math.min(w * .55, folded ? 240 : Math.max(360, Math.min(520, w * .34)));
+  const deck = Math.min(w * .55, folded ? h < 600 ? 288 : 240 : Math.max(360, Math.min(520, w * .34)));
   const paneWidth = Math.max(9, w - deck - gap), paneHeight = Math.max(9, h);
   const whole = grid.width <= 6 && grid.height <= 6;
   const tile = whole ? Math.min((paneWidth-8)/grid.width, (paneHeight-8)/grid.height)
