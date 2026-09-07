@@ -1,5 +1,10 @@
 # FIELD-21 — proportions, airborne layering and closed perimeter
 
+**Delivered as web0.22.21.** [Public receipt](../reviews/2026-09-07-v02221-public-verification.md) and
+[qualification](../reviews/2026-09-07-field21-qualification.md) bind runtime6cc9f86
+and actual independent Sol review. P21 covers the new refinements.
+ART-REWARD-01 below remains open; resume remaining mixed chest/Mimic work.
+
 September 7: Human-directed correction of web v0.22.20. Source3be18d2,
 branch `codex/field-scale-refinement`. Astra writes runtime; Sol independently
 reviews. [Human intake](../user-playtests/2026-09-07-balanced-wall-acceptance-and-relative-scale.md)

@@ -1,5 +1,12 @@
 # Integrated implementation roadmap through final convergence
 
+**Current web0.22.21 delivery:** [FIELD-21 receipt](../reviews/2026-09-07-v02221-public-verification.md) binds the
+proportion, compact-drop, jump-depth and perimeter fixes. Accepted interior walls
+are preserved. ART-REWARD-01 proper generated reward art remains queued.
+Next: remaining B mixed chests/actual disguised Mimics, then recognition-only XP
+and usable inventory before eggs. Q01/Q02/Q05 use P21; Q08/P19 and cold Power
+remain open. Wider roadmap preserved. Earlier active/next labels are historical.
+
 **Current delivery — web0.22.20:** the enemy portion of LOOT-03 B is
 [published](../reviews/2026-09-07-v02220-public-verification.md), release135bb3a,
 reviewed5dc99c3/runtime6f083f4. A's physical authored collection,19's first-draw/

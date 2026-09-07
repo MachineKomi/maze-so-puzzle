@@ -1,5 +1,9 @@
 # Balanced walls accepted; relative scale and edge corrections
 
+**Engineering response:** [web0.22.21](../reviews/2026-09-07-v02221-public-verification.md) delivers scale,
+airborne layering and perimeter fixes. Generated reward sprites remain queued.
+P21 asks about the new corrections; original feedback below is preserved.
+
 Human feedback, September 7, 2026, following published web v0.22.20.
 
 The Human explicitly accepts the balanced 3D walls: the effect looks perfect,

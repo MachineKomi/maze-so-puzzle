@@ -1,5 +1,17 @@
 # Release checklist
 
+## Current published web — v0.22.21 FIELD-21
+
+Release **12f484f6f438a8ac44a6316ffbc212b600416518**, reviewed **4bd97e76110e0d3611ba46f1356474e4917b4d9b**,
+frozen runtime **6cc9f86bf6f21f741c3fc75f40ea408612e2726f**.
+[Public verification](reviews/2026-09-07-v02221-public-verification.md) and [qualification](reviews/2026-09-07-field21-qualification.md).
+
+- [x]736 project tests, build/typecheck/audit/budgets; exact reviewed-head CI34106603183.
+- [x]80 distinct final browser contracts, four separate five-pair cohorts and actual independent Sol review.
+- [x]One normal Git deployment; exact files on both origins, eight standard and eight additional jump public cases.
+- [ ]P21/Q01/Q02/Q05 refinements; ART-REWARD-01 proper reward art.
+- [ ]Q08/P19, PERF-COLD-POWER and physical/native acceptance remain open.
+
 ## Deployment operations guard
 
 At release closure, audit temporary worktrees for uncommitted/ignored evidence

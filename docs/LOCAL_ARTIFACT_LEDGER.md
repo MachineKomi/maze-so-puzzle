@@ -1,5 +1,22 @@
 # Local artifact ledger and cleanup review
 
+## Current release inventory — web0.22.21
+
+Local qualification remains461 files /296653434 bytes across12 folders. Public
+verification adds these sets under C:/GameDev/maze-game-qa/performance/:
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| v02221-public-20260907 |11|19652779|
+| field21-public-jump-canonical |15|4792284|
+| field21-public-jump-alias |15|4784263|
+
+Combined slice total: **502 files /325882760 bytes across15 folders**.
+[Receipt](reviews/2026-09-07-v02221-public-verification.md) binds hashes and scope. Owned browsers/helpers stopped,
+unowned4271 untouched. One dist reused; no new repository/media clone, native
+package, deletion or archive. Retain for explicit Human cleanup review.
+Do not create further duplicate local qualification racks.
+
 ## FIELD-21 — active correction, September7
 
 Owner Astra, branch `codex/field-scale-refinement`, starting3be18d2. Frozen20

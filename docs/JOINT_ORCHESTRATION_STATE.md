@@ -1,5 +1,25 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current delivery — web0.22.21:** [public proof](reviews/2026-09-07-v02221-public-verification.md).
+Release **12f484f6f438a8ac44a6316ffbc212b600416518**, reviewed **4bd97e76110e0d3611ba46f1356474e4917b4d9b**,
+frozen runtime **6cc9f86bf6f21f741c3fc75f40ea408612e2726f**.
+FIELD-21 delivers relative proportions, compact reward glyphs, above-wall jump
+bodies with grounded shadows, and closed outer caps. Preserve the explicitly
+Human-accepted balanced interior walls. Actual independent Sol supports the
+bounded web scope;736 tests,80 final browser contracts and four five-pair cohorts
+pass. Both origins match the qualified files; eight standard and eight additional
+jump public cases pass.
+
+**Next: remaining LOOT-03 B mixed chests and actual disguised Mimics**, followed
+by recognition-only rainbow XP and protected usable inventory before eggs.
+ART-REWARD-01 proper generated replacement reward sprites remains required and
+queued. Preserve DELIGHT/LEARN/HOLE/pace and the campaign/Garden/co-op roadmap.
+Astra writes runtime on `codex/field-scale-refinement`; Sol reviews independently.
+Q01/Q02/Q05 now use P21; Q08/P19 and PERF-COLD-POWER remain open. No physical
+Apple/3GB/native acceptance; Windows stays0.22.9, native0.22.10 separately held.
+No new general permission is needed. Earlier active/next labels below are
+historical and superseded by this dispatch.
+
 **Current Human override — FIELD-21:** balanced interior walls are explicitly
 accepted. [Scale/jump/perimeter correction](plans/FIELD-21-scale-jump-and-perimeter.md)
 now precedes chests: Astra writes on `codex/field-scale-refinement`; Sol independently

@@ -1,5 +1,12 @@
 # Sequential specialist execution prompts
 
+**Current web0.22.21 delivery:** [FIELD-21 receipt](../reviews/2026-09-07-v02221-public-verification.md) binds the
+proportion, compact-drop, jump-depth and perimeter fixes. Accepted interior walls
+are preserved. ART-REWARD-01 proper generated reward art remains queued.
+Next: remaining B mixed chests/actual disguised Mimics, then recognition-only XP
+and usable inventory before eggs. Q01/Q02/Q05 use P21; Q08/P19 and cold Power
+remain open. Wider roadmap preserved. Earlier active/next labels are historical.
+
 ## Current dispatch — after verified web0.22.16, September7
 
 Book/MOVE/HAZARD-03 is [published](../reviews/2026-09-07-v02216-public-verification.md),

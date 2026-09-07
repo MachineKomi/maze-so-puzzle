@@ -1,5 +1,12 @@
 # Maze so Puzzle — playtest backlog
 
+**Current web0.22.21 delivery:** [FIELD-21 receipt](reviews/2026-09-07-v02221-public-verification.md) binds the
+proportion, compact-drop, jump-depth and perimeter fixes. Accepted interior walls
+are preserved. ART-REWARD-01 proper generated reward art remains queued.
+Next: remaining B mixed chests/actual disguised Mimics, then recognition-only XP
+and usable inventory before eggs. Q01/Q02/Q05 use P21; Q08/P19 and cold Power
+remain open. Wider roadmap preserved. Earlier active/next labels are historical.
+
 **Latest Human feedback — FIELD-21 / ART-REWARD-01:** [intake](user-playtests/2026-09-07-balanced-wall-acceptance-and-relative-scale.md)
 accepts balanced wall shape/lighting, but reports giant Ame/rewards, airborne wall
 occlusion and gaps outside the perimeter. [Active correction](plans/FIELD-21-scale-jump-and-perimeter.md)

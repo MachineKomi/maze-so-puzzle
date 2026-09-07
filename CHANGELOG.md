@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.22.21 — field proportions and airborne depth (published web)
+
+- Reduces Ame's height by about24% and caps tall actor/item silhouettes while
+  preserving aspect, feet, equipment and natural creature proportions.
+- Makes Gold/Science/Power drops compact and readable. Proper generated
+  replacement reward sprites remain queued.
+- Draws airborne Ame and equipment above all walls while shadows stay grounded;
+  normal depth returns on landing.
+- Closes outer-map gaps with thicker exterior caps, preserving accepted interior
+  walls and lighting. Gameplay, saves and reward values are unchanged.
+
 This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.

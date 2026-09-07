@@ -1,5 +1,12 @@
 # Human decisions and steer
 
+**September7 engineering delivery, not new Human acceptance:** [web0.22.21](reviews/2026-09-07-v02221-public-verification.md)
+implements FIELD-21, release12f484f/runtime6cc9f86. Accepted wall
+design is preserved; Q01/Q02/Q05 P21 ask about new proportions, jump, border and
+small rewards. ART-REWARD-01 artwork, Q08/cold/Apple/native remain open. Resume
+remaining B chests/Mimics; Q03/Q06 defaults remain recognition-only XP and usable
+inventory before eggs.
+
 **September7 explicit Human visual acceptance:** the balanced 3D wall effect is
 accepted as perfect/stunning. [Exact intake and new issues](user-playtests/2026-09-07-balanced-wall-acceptance-and-relative-scale.md).
 Preserve its interior shape/lighting; correct relative scale, small reward tokens,

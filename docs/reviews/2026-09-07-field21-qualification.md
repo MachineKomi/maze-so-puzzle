@@ -2,7 +2,7 @@
 
 Candidate frozen runtime **6cc9f86bf6f21f741c3fc75f40ea408612e2726f**,
 branch `codex/field-scale-refinement`, [PR12](https://github.com/MachineKomi/maze-so-puzzle/pull/12).
-Live remains web0.22.20 until final independent review, CI and public verification.
+Now [published as web0.22.21](2026-09-07-v02221-public-verification.md); the receipt binds identity and public behavior.
 [Human intake](../user-playtests/2026-09-07-balanced-wall-acceptance-and-relative-scale.md)
 explicitly accepts balanced interior walls. [Execution contract](../plans/FIELD-21-scale-jump-and-perimeter.md).
 Astra is sole runtime writer; Sol independently reviews actual source and visuals.
@@ -54,7 +54,7 @@ cover80 distinct final browser contracts (46+32+2), not one single80-case run.
 The original61-entry numeric audit is supplemented by the three-key rack;
 unchanged doors/portals/goals retain their square layout. Exact runtime CI
 [34104347051](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34104347051)
-passed; final helper/review checkpoint CI is required before merge.
+passed. Final reviewed checkpoint4bd97e7 also passed exact-head CI34106603183 before merge.
 
 Runtime-input SHA-256 **fe526de999fdee6d036d99bd0f1aba088c125f26c1d5e6eb8d12d543cd68be6e**.
 Dist fingerprint **7b42516916d0b991c8917838787d40dfddd9dd580ec7f9df65757657ccd70d38**.

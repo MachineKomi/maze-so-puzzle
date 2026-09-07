@@ -1,8 +1,8 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published **web preview is v0.22.20** at
+The current published **web preview is v0.22.21** at
 [mazesopuzzle.com](https://mazesopuzzle.com/): balanced 3D wall volumes with clean
-projected edges, stronger directional lighting and larger grounded sprites that
+projected edges, stronger directional lighting and proportioned grounded sprites that
 stand between rear and foreground walls. It keeps crisp surface details,
 smooth camera tracking through hole jumps,
 the shared phone composition, improved default audio balance and Adventure Book
@@ -21,14 +21,17 @@ Enemies now scatter both Gold and Science after defeat, with modest rewards
 scaled by enemy Power. Drops remain collectible after reload; per-hit Power
 keeps its puzzle rules. The inherited cold first-Power cosmetic stall remains
 under investigation alongside the real-device camera check.
-[Verified release](docs/reviews/2026-09-07-v02220-public-verification.md).
+Ame and tall items now have sensible height limits, reward drops are small,
+and airborne Ame clears every wall with ground shadows remaining below.
+Thicker exterior caps close map-edge gaps. Proper reward artwork stays queued.
+[Verified release](docs/reviews/2026-09-07-v02221-public-verification.md).
 Latest fully published **Windows remains v0.22.9**; native0.22.10 qualification
 is separately unfinished. Existing valid runs migrate to the protected v5 loot
 ledger without replaying rewards or losing their route.
 Earned friends, rewards and progress remain intact. Do not clear saves.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
-The Human accepted0.22.13's tall3D direction. Refined wall/sprite appearance,
+The Human explicitly accepts the balanced3D walls. New sprite proportions,
 physical iPad and the wider visual/audio programme remain in the
 [Human review queue](docs/HUMAN_REVIEW_QUEUE.md). Next: mixed chests and actual disguised Mimics, then recognition-only rainbow
 account XP and a protected usable inventory before enabling egg drops.

@@ -1,5 +1,21 @@
 # Family playtest checklist
 
+## Current short journey — P21 / Q01, Q02, Q05
+
+**Ready on [published0.22.21](reviews/2026-09-07-v02221-public-verification.md).** Balanced walls are Human-accepted.
+In any suitable unlocked maze, check only these new refinements:
+
+- Compare Ame beside enemies/friends/items in horizontal and vertical corridors.
+- Jump horizontally over a hole: head/equipment clear every wall and normal
+  foreground overlap returns on landing.
+- Look for floor slivers outside the outer walls.
+- Bash an enemy or open Gold/Science: drops should be small and readable.
+  Proper generated replacement art is still queued.
+
+Note device/maze/settings if anything looks wrong. Q08/P19 camera/entry/first
+rewards remains a separate priority on current21; no need to replay the full
+campaign or clear saves. P20 collection/reload observations remain useful.
+
 ## New short journey — P20 / Q05, physical authored and enemy loot
 
 **Ready on [published0.22.20](reviews/2026-09-07-v02220-public-verification.md).**
