@@ -35,7 +35,21 @@ test(`cold counts preserve collection and resized backing DPR${dpr} atlasFailure
     },{snapshot:savedFixture(f,'cold-count-resize'),keys:{run:ACTIVE_RUN_STORAGE_KEY,progress:PLAYER_PROGRESS_STORAGE_KEY,preferences:PRESENTATION_PREFERENCES_KEY},
       progress:createDefaultPlayerProgress(16),preferences:DEFAULT_PRESENTATION_PREFERENCES,failedAtlas});
     await page.goto('/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();
-    await page.bringToFront();await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);await page.waitForTimeout(1800);
+    await page.bringToFront();
+    await page.evaluate(()=>{
+      const c=document.querySelector('canvas.vfx-rewards')!,rows:any[]=[];(window as any).emptyRewardRows=rows;
+      const observer=new MutationObserver(records=>rows.push(...records.map(r=>({name:r.attributeName,old:r.oldValue}))));
+      observer.observe(c,{attributes:true,attributeOldValue:true,attributeFilter:['width','height','data-running']});
+      (window as any).emptyRewardObserver=observer;
+    });
+    for(const [width,height] of [[1080,810],[780,312]]){await page.setViewportSize({width,height});await page.waitForTimeout(250);}
+    const empty=await page.evaluate(()=>{
+      (window as any).emptyRewardObserver.disconnect();const c=document.querySelector<HTMLCanvasElement>('canvas.vfx-rewards')!;
+      return{width:c.width,height:c.height,running:c.dataset.running,rows:(window as any).emptyRewardRows};
+    });
+    expect(empty.width).toBe(1);expect(empty.height).toBe(1);expect(empty.running).toBe('false');
+    expect(empty.rows.every((r:any)=>r.name==='data-running'?r.old!=='true':r.old===null||r.old==='1')).toBe(true);
+    await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);await page.waitForTimeout(1800);
     const counts=await page.evaluate(()=>(window as any).countProbe);
     expect(counts.bounds).toBe(0);expect(counts.stroke>0).toBe(failedAtlas);expect(counts.fill>0).toBe(failedAtlas);
     expect(counts.atlasFailure>0).toBe(failedAtlas);
@@ -54,7 +68,7 @@ test(`cold counts preserve collection and resized backing DPR${dpr} atlasFailure
       expect(backing.running).toBe('false');expect(await read()).toEqual(settled);rows.push({width,height,backing});
       if(dpr===3)await page.screenshot({path:resolve(output,`count-${width}-fallback${failedAtlas}.png`)});
     }
-    expect(errors).toEqual([]);await writeFile(resolve(output,`resize-dpr${dpr}-fallback${failedAtlas}.json`),JSON.stringify({counts,settled,rows,errors},null,2));
+    expect(errors).toEqual([]);await writeFile(resolve(output,`resize-dpr${dpr}-fallback${failedAtlas}.json`),JSON.stringify({counts,empty,settled,rows,errors},null,2));
   } finally {await ctx.close();}
 });
 

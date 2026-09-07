@@ -10,7 +10,7 @@ import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { platform, release, cpus, totalmem } from 'node:os';
 import { readBuildProvenance } from './build-provenance.mjs';
-import { installColdOpeningProbe } from './cold-opening-probe.mjs';
+import { installColdOpeningProbe, installMountSample } from './cold-opening-probe.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/performance/phone02-book-paired-20260906');
@@ -19,6 +19,7 @@ const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const pairCount = Number(process.env.MAZE_REVIEW_PAIRS ?? 5);
 const coldProbe = process.env.MAZE_REVIEW_COLD_PROBE === '1';
+const mountSample = process.env.MAZE_REVIEW_MOUNT === '1';
 if(coldProbe && pairCount!==1) throw Error('Cold wrappers are diagnostic only; use one pilot pair');
 const cpuRate = Number(process.env.MAZE_REVIEW_CPU_RATE ?? 1);
 const captureTrace = process.env.MAZE_REVIEW_TRACE !== '0';
@@ -86,6 +87,7 @@ report.captureTrace=captureTrace;report.captureLayers=captureLayers;
 report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
 report.saveKeys={seed:data.keys.run,baseline:process.env.MAZE_REVIEW_BASELINE_RUN_KEY||data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
 report.coldOpeningProbe=coldProbe;
+report.mountSample=mountSample;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
@@ -106,9 +108,10 @@ try {
           await page.goto(`${origin}/${mode}`);
           await page.getByRole('button', { name: 'Play', exact: true }).click();
           const client = await ctx.newCDPSession(page), events = [];
-          if(coldProbe) {
+          if(coldProbe || mountSample) {
             await client.send('Emulation.setCPUThrottlingRate',{rate:cpuRate});
-            await installColdOpeningProbe(page);
+            if(coldProbe) await installColdOpeningProbe(page);
+            if(mountSample) await installMountSample(page);
           }
           await page.getByRole('button', { name: /^Continue/ }).click();
           await page.locator('.maze-terrain-svg').waitFor();
@@ -117,6 +120,7 @@ try {
           if (bundle !== (mode === 'baseline' ? baselineBundle : candidateBundle)) throw Error('Wrong entry module');
           await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
           await page.waitForTimeout(500);
+          if(mountSample) await page.waitForFunction(()=>window.__mazeMountSample?.done);
           await client.send('Emulation.setCPUThrottlingRate',{rate:cpuRate});
           let layers=[];
           client.on('LayerTree.layerTreeDidChange',e=>{layers=e.layers??[];});
@@ -142,8 +146,11 @@ try {
               if (!window.wallAb.done) requestAnimationFrame(tick);
             }; requestAnimationFrame(tick);
           });
-          const resources = () => page.evaluate(() => ({ nodes:document.querySelectorAll('*').length,
-            heapBytes:performance.memory?.usedJSHeapSize??null, images:document.images.length }));
+          const resources = () => page.evaluate(() => {
+            const c=document.querySelector('canvas.vfx-rewards');
+            return { nodes:document.querySelectorAll('*').length, heapBytes:performance.memory?.usedJSHeapSize??null,
+              images:document.images.length,reward:c?{width:c.width,height:c.height,running:c.dataset.running,tokens:c.dataset.tokens}:null };
+          });
           const resourcesBefore=await resources();
           // Four reversible four-step legs per cycle; preserve engine-derived direction.
           if(lootReview) {
@@ -160,7 +167,7 @@ try {
           }
           const sample = await page.evaluate(key => {
             window.wallAb.done = true; window.wallAbObserver.disconnect();
-            return { ...window.wallAb, coldProbe:window.__mazeColdProbe, save: JSON.parse(localStorage.getItem(key)), brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
+            return { ...window.wallAb, mount:window.__mazeMountSample, coldProbe:window.__mazeColdProbe, save: JSON.parse(localStorage.getItem(key)), brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
           }, report.saveKeys[mode]);
           if(captureTrace) { const complete = new Promise(resolve => client.once('Tracing.tracingComplete', resolve));
             await client.send('Tracing.end'); await complete; }
@@ -171,7 +178,7 @@ try {
           }));
           const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: fixture.snapshot.game.steps, stepsAfter: sample.save?.game?.steps,
             resourcesBefore,resourcesAfter:await resources(),loot:sample.save?.game?.loot??null,
-            gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,coldProbe:sample.coldProbe,
+            gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,coldProbe:sample.coldProbe,mount:sample.mount,
             dpr:cohort.dpr,cpuRate,rebases:sample.rebases,windows:sample.windows,
             rebaseAdjacentDeltas:deltas.filter((_,i)=>[i,i+1].some(j=>j>0&&sample.windows[j]?.join()!==sample.windows[j-1]?.join())),
             layers:layers.map(({width,height,drawsContent,backendNodeId,paintCount})=>({width,height,drawsContent,backendNodeId,paintCount})),
@@ -181,7 +188,7 @@ try {
           await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2));
           if (pair === 0) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
-          console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined }));
+          console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined,mount:undefined }));
           if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
           if(lootReview) {
             const source=row.loot?.sources.find(s=>s.sourceId===fixture.sourceId);

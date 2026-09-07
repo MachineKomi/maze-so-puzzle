@@ -57,3 +57,16 @@ This is explicit byte cost, not a performance or release waiver.
 Next: frozen uninstrumented frame/work comparisons and full physical-loot/Power/
 resize/camera browser checks, actual independent Sol review and exact-source CI.
 Publication remains pending those results; live18 remains unchanged.
+
+The first broad frozen067ee53 run passed42/43 cases. The immediate dense-Power
+harness exposed the observer's initial notification cancelling freshly emitted
+tokens. The correction now ignores notifications whose size already matches the
+allocated scene size; real resize still wakes. Added empty-ledger resize checks
+require1x1 backing and no running reward frame. Final correction measures172411
+JSgzip9 (+408 over18), within172485. Fresh final checks must bind this correction.
+
+Sol supports the measured startup trade conditionally: final five-pair comparison
+must show a repeatable first-source improvement without a material regression
+in the combined cold journey's long-frame counts. The final frame packet adds a
+separate800ms Continue sampler (no Canvas/prototype wrappers), with DOM mount and
+frame intervals reported independently. No physical Apple acceptance is inferred.

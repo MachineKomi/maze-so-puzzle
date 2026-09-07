@@ -200,7 +200,9 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
     // Window resize fires before layout/scene measurements settle. Redraw the
     // resting loot after the board's size notification, with the shared scene
     // snapshot updated by its owner before our next animation frame.
-    const observer = new ResizeObserver(resize);
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry && (Math.abs(entry.contentRect.width-width)>.5 || Math.abs(entry.contentRect.height-height)>.5)) resize();
+    });
     observer.observe(canvas.parentElement!);
     wake();
     document.addEventListener("visibilitychange", visibility);

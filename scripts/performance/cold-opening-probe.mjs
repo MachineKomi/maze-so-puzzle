@@ -1,5 +1,25 @@
 // Diagnostic wrappers only. They perturb scheduling and must never be enabled
 // in qualifying frame/work cohorts. No production import or Human save access.
+// This separate bounded sampler has no prototype wrappers. Include it when
+// comparing the startup/interaction trade, and report its own sampling overhead.
+export async function installMountSample(page) {
+  await page.evaluate(()=>{
+    window.addEventListener('click',event=>{
+      if(!event.target.closest('button')?.textContent?.trim().startsWith('Continue'))return;
+      const start=performance.now(),sample={start,frames:[start],done:false,terrainAt:null};
+      window.__mazeMountSample=sample;
+      const observer=new MutationObserver(()=>{
+        if(document.querySelector('.maze-terrain-svg')) {sample.terrainAt=performance.now()-start;observer.disconnect();}
+      });observer.observe(document.body,{childList:true,subtree:true});
+      const tick=()=>{
+        sample.frames.push(performance.now());
+        if(performance.now()-start<800)requestAnimationFrame(tick);
+        else {sample.done=true;observer.disconnect();}
+      };requestAnimationFrame(tick);
+    },{capture:true,once:true});
+  });
+}
+
 export async function installColdOpeningProbe(page) {
   await page.evaluate(() => {
     const records=[], start=performance.now();
