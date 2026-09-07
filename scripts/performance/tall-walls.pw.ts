@@ -22,7 +22,7 @@ for (const [width, height] of [[780, 312], [1194, 834]]) {
       for (const start of points) {
         const before = route[start]!.before;
         const revealed = new Set(route.slice(0, start + 1).flatMap(s => getVisibleTileKeys(level, s.before.position)));
-        const snapshot = createActiveRunSnapshot({ level, game: before, mode: "normal", runId: `run-tall-${index}-${start}`, revealedTiles: revealed });
+        const snapshot = createActiveRunSnapshot({ level, game: before, mode: "normal", runId: before.loot.runId, revealedTiles: revealed });
         expect(snapshot).toBeTruthy();
         const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 2 });
         try {

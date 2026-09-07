@@ -142,7 +142,7 @@ for (const perfect of [false, true]) {
     const route = routeFor(index, perfect), last = route.at(-1)!;
     // First enter this chapter through the real Book, then restore a current,
     // engine-derived late-run snapshot. This tests routing, not a full final-maze replay.
-    const snapshot = createActiveRunSnapshot({ runId: `run-book-final-${perfect}`, mode: "normal", level,
+    const snapshot = createActiveRunSnapshot({ runId: last.before.loot.runId, mode: "normal", level,
       game: last.before, revealedTiles: [] });
     expect(snapshot).not.toBeNull();
     await page.evaluate(({ key, snapshot }) => localStorage.setItem(key, JSON.stringify(snapshot)), { key: ACTIVE_RUN_STORAGE_KEY, snapshot });

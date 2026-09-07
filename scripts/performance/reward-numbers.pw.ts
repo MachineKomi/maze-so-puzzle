@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { findInputFixture, savedFixture } from './v22-input-fixtures';
+import { findInputFixture, savedFixture, authoredLootFixture } from './v22-input-fixtures';
 import { ACTIVE_RUN_STORAGE_KEY } from '../../src/session';
 import { PLAYER_PROGRESS_STORAGE_KEY, createDefaultPlayerProgress } from '../../src/progress';
 import { PRESENTATION_PREFERENCES_KEY, DEFAULT_PRESENTATION_PREFERENCES } from '../../src/motion';
@@ -10,7 +10,7 @@ const output=resolve(process.env.MAZE_PERF_EVIDENCE_DIR!,'reward-numbers');
 test.beforeAll(async()=>{await mkdir(output,{recursive:true});});
 for(const [dpr,failedAtlas] of [[1,false],[2,false],[3,false],[3,true]] as const)
 test(`cold counts preserve collection and resized backing DPR${dpr} atlasFailure${failedAtlas}`,async({browser})=>{
-  const f=findInputFixture(events=>events.some(e=>e.type==='treasure-opened'&&e.currency==='gold'))!;
+  const f=authoredLootFixture(findInputFixture(events=>events.some(e=>e.type==='treasure-opened'&&e.currency==='gold'))!);
   const ctx=await browser.newContext({viewport:{width:780,height:312},deviceScaleFactor:dpr});
   try {
     const page=await ctx.newPage(),errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));

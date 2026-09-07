@@ -17,7 +17,7 @@ describe("physical loot presentation boundary",()=>{
     expect(lootPose(motion,{x:2,y:2},{x:1,y:1},501,true)).toMatchObject({x:2.5,y:2.5,lift:0,moving:false});
   });
   it("holds a stable Lite set, releases distant slots on approach and prioritizes accepted claims",()=>{
-    const loot:LootLedger={version:1,sources:[{sourceId:"capacity",currency:"gold",amount:12,credited:0,
+    const loot:LootLedger={version:2,runId:"run-capacity-test",legacyRetiredEnemyIds:[],sources:[{sourceId:"capacity",sourceKind:"treasure",objectId:"capacity",currency:"gold",amount:12,credited:0,
       drops:Array.from({length:12},(_,i)=>({id:String(i),amount:1,at:{x:i,y:2},phase:"grounded"}))}]};
     const game={...createInitialGameState(CURATED_LEVELS[0]!),loot};
     const first=representedLoot(game,new Set(),{x:3,y:2},8);

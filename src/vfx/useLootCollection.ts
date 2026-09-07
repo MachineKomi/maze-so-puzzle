@@ -16,12 +16,14 @@ export function lootReadableDelay(motion: LootMotion): number {
   return motion.path.length>1 ? Math.max(LOOT_SETTLE_MS,motion.scatterMs+250) : LOOT_SETTLE_MS;
 }
 
-export function representedLoot(game: GameState, prior: ReadonlySet<string>, ground: Point, limit: number): Set<string> {
-  const drops=game.loot.sources.flatMap(s=>s.drops);
+export function representedLoot(game: GameState, prior: ReadonlySet<string>, ground: Point, limit: number, withheldObjectId?: string, priorityObjectId?: string): Set<string> {
+  const drops=game.loot.sources.filter(s=>s.objectId!==withheldObjectId).flatMap(s=>s.drops);
+  const priority = new Set(game.loot.sources.filter(s=>s.objectId===priorityObjectId).flatMap(s=>s.drops.map(d=>d.id)));
   // Stable within the nearby view. Accepted IDs retain their slot until credit;
   // approaching distant drops frees offscreen slots without hiding an attraction.
   const candidates=drops.filter(d=>d.phase==="claiming" || Math.abs(d.at.x-ground.x)<=5 && Math.abs(d.at.y-ground.y)<=5);
   candidates.sort((a,b)=>Number(b.phase==="claiming")-Number(a.phase==="claiming")
+    || Number(priority.has(b.id))-Number(priority.has(a.id))
     || Number(prior.has(b.id))-Number(prior.has(a.id))
     || Math.hypot(a.at.x-ground.x,a.at.y-ground.y)-Math.hypot(b.at.x-ground.x,b.at.y-ground.y));
   return new Set(candidates.slice(0,limit).map(d=>d.id));
@@ -29,10 +31,10 @@ export function representedLoot(game: GameState, prior: ReadonlySet<string>, gro
 
 /** Semantic deadlines belong to the run, never to a Canvas frame. At rest this
  * owner has no timer; ordinary movement/ledger changes wake admission again. */
-export function useLootCollection({ game, setGame, level, runId, scene, port, enabled, animate, limit }: {
+export function useLootCollection({ game, setGame, level, runId, scene, port, enabled, animate, limit, withheldObjectId }: {
   game: GameState; setGame: Dispatch<SetStateAction<GameState>>; level: LevelDefinition; runId: string;
   scene: RefObject<SceneTravelSnapshot>; port: RefObject<RewardPort>; enabled: boolean; animate: boolean;
-  limit: number;
+  limit: number; withheldObjectId?: string;
 }): RefObject<LootView> {
   const view = useMemo<{current:LootView}>(() => ({ current: { game, motions: new Map<string, LootMotion>(), animate, represented: new Set<string>() } }), [runId]);
   const owner = useRef(runId); owner.current = runId;
@@ -43,12 +45,18 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
   },[animate,limit,setGame]);
   const first = useRef(view);
   const fresh = useRef(true);
+  const encounter = useRef<{ withheld?: string; priority?: string; runId: string }>({runId});
+  if (encounter.current.runId !== runId) encounter.current = {runId};
   if (first.current !== view) { first.current = view; fresh.current = true; }
   useLayoutEffect(() => {
     const now = performance.now(), ids = new Set<string>();
-    view.current.represented=representedLoot(game,view.current.represented,game.position,limit);
+    if (encounter.current.withheld && !withheldObjectId) encounter.current.priority = encounter.current.withheld;
+    encounter.current.withheld = withheldObjectId;
+    view.current.represented=representedLoot(game,view.current.represented,game.position,limit,withheldObjectId,encounter.current.priority);
     for (const source of game.loot.sources) {
-      const object = level.objects.find(o => o.id === source.sourceId)!;
+      if (source.objectId === withheldObjectId) continue;
+      const object = level.objects.find(o => o.id === source.objectId);
+      if (!object) continue;
       for (const drop of source.drops) {
         ids.add(drop.id);
         let motion = view.current.motions.get(drop.id);
@@ -69,7 +77,7 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
     fresh.current = false;
     view.current.game = game; view.current.animate = animate;
     port.current.wake();
-  }, [game, level, runId, view, scene, port, animate, limit]);
+  }, [game, level, runId, view, scene, port, animate, limit, withheldObjectId]);
 
   useEffect(() => {
     if (!view.current.motions.size) return;
@@ -122,7 +130,7 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
       document.removeEventListener("visibilitychange", tick); window.removeEventListener("focus", tick);
       window.removeEventListener("blur", interrupt); window.removeEventListener("resize", interrupt);
     };
-  }, [game, level, runId, view, scene, port, enabled, animate, setGame]);
+  }, [game, level, runId, view, scene, port, enabled, animate, setGame, withheldObjectId]);
   return view;
 }
 

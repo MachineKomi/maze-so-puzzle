@@ -5,6 +5,7 @@ import { CURATED_LEVELS } from "../../src/game/levels";
 import { solveLevel } from "../../src/game/solver";
 import { DIRECTIONS, type Direction, type GameEvent, type GameState, type LevelDefinition, type MoveResult } from "../../src/game/types";
 import { createActiveRunSnapshot, type ActiveRunSnapshot } from "../../src/session";
+import { legacyCreditedLoot } from "../../src/game/loot";
 
 export const SUCCESS_EVENTS = ["door-opened", "enemy-defeated", "animal-rescued", "portal-warped", "hole-jumped"] as const;
 export type SuccessEvent = typeof SUCCESS_EVENTS[number];
@@ -119,11 +120,21 @@ export function deliberateBlockerFixture(kind: "power" | "capability"): InputFix
 
 export function savedFixture(fixture: Pick<InputFixture, "level" | "before" | "revealed">, suffix: string): ActiveRunSnapshot {
   const snapshot = createActiveRunSnapshot({
-    runId: `run-v22-input-${suffix.replace(/[^a-zA-Z0-9-]/g, "-")}`,
+    runId: fixture.before.loot.runId,
     mode: "normal", level: fixture.level, game: fixture.before, revealedTiles: fixture.revealed,
   });
-  if (!snapshot) throw new Error(`Current snapshot normalizer rejected ${fixture.level.id} at ${fixture.before.steps}`);
+  if (!snapshot) throw new Error(`Current snapshot normalizer rejected ${suffix}: ${fixture.level.id} at ${fixture.before.steps}`);
   return snapshot;
+}
+
+/** An explicitly migrated historical prefix isolates authored pickup behavior
+ * from new enemy drops already earned earlier on a solver-only route. */
+export function authoredLootFixture(fixture: InputFixture): InputFixture {
+  const loot = legacyCreditedLoot(fixture.level,fixture.before);
+  const before = {...fixture.before,loot,
+    goldStarsCollected:loot.sources.filter(s=>s.currency==='gold').reduce((n,s)=>n+s.credited,0),
+    sciencePointsCollected:loot.sources.filter(s=>s.currency==='science').reduce((n,s)=>n+s.credited,0)};
+  return {...fixture,before,result:movePlayer(fixture.level,before,fixture.direction)};
 }
 
 export function finalMazeFixture(): InputFixture {

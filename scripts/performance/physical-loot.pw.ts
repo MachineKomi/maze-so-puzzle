@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { findInputFixture, savedFixture } from './v22-input-fixtures';
+import { findInputFixture, savedFixture, authoredLootFixture } from './v22-input-fixtures';
 import { ACTIVE_RUN_STORAGE_KEY, VERSION_THREE_ACTIVE_RUN_STORAGE_KEY } from '../../src/session';
 import { PLAYER_PROGRESS_STORAGE_KEY, createDefaultPlayerProgress } from '../../src/progress';
 import { PRESENTATION_PREFERENCES_KEY, DEFAULT_PRESENTATION_PREFERENCES } from '../../src/motion';
@@ -11,7 +11,7 @@ import { CURATED_LEVELS } from '../../src/game/levels';
 import { solveLevel } from '../../src/game/solver';
 
 const output=resolve(process.env.MAZE_PERF_EVIDENCE_DIR!,'physical-loot');
-const fixtures=['gold','science'].map(currency=>findInputFixture(events=>events.some(e=>e.type==='treasure-opened'&&e.currency===currency))!);
+const fixtures=['gold','science'].map(currency=>findInputFixture(events=>events.some(e=>e.type==='treasure-opened'&&e.currency===currency))!).map(authoredLootFixture);
 test.beforeAll(async()=>{
   await mkdir(output,{recursive:true});expect(fixtures.every(Boolean)).toBe(true);
   const f=fixtures[0]!, current=savedFixture(f,'paired-physical-gold'), ledger=legacyCreditedLoot(f.level,current.game);
@@ -122,7 +122,7 @@ test('LOOT03 accepted-claim crash fixture settles before Stay/Next and repeated 
     .find(({game})=>game?.loot.sources.some(s=>s.drops.length>1))!;
   expect(candidate).toBeTruthy();const {level}=candidate;
   const source=candidate.game.loot.sources.find(s=>s.drops.length>1)!, drop=source.drops[0]!;
-  const game={...candidate.game,loot:{version:1 as const,sources:candidate.game.loot.sources.map(s=>s.sourceId===source.sourceId
+  const game={...candidate.game,loot:{...candidate.game.loot,sources:candidate.game.loot.sources.map(s=>s.sourceId===source.sourceId
     ? {...s,drops:s.drops.map(d=>d.id===drop.id?{...d,phase:'claiming' as const}:d)}:s)}};
   const snapshot=savedFixture({level,before:game,revealed:new Set()},'claiming-crash');
   await page.addInitScript(({snapshot,keys,progress})=>{if(!sessionStorage.getItem('crash-fixture')){

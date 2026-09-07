@@ -1,5 +1,13 @@
 # Maze so Puzzle — joint orchestration state
 
+**Active candidate — LOOT-03 B / web0.22.20:** Astra owns runtime on
+`codex/enemy-loot-rewards`; Sol independently reviews. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md)
+freezes rules5 enemy Gold/Science, schema5/ledger2 migration and qualification.
+Implementation and tests are in progress; **live remains0.22.19**. No deployment
+is claimed until exact-source checks, Sol review, CI and public verification.
+The historical completed cold-reward investigation below is not a new assignment.
+
+
 **Live operating state — September7, web0.22.19:** release
 **28842506f2b6b690e9bd7fc0f18c12957029de98**, reviewed4991f93, frozen runtime
 d472037. Root stays on `codex/cold-reward-performance`. [Public receipt](reviews/2026-09-07-v02219-public-verification.md)

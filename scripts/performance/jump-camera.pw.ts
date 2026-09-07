@@ -19,10 +19,10 @@ const fixtures=CURATED_LEVELS.flatMap(level=>{
   const from=getCameraWindow(level,jump.from),to=getCameraWindow(level,jump.to);
   if(from.left===to.left&&from.top===to.top)return [];
   const revealed=new Set(route.slice(0,index+1).flatMap(s=>getVisibleTileKeys(level,s.before.position)));
-  const snapshot=createActiveRunSnapshot({level,game:step.before,mode:"normal",runId:`run-jump-camera-${level.id}-${index}`,revealedTiles:revealed});
+  const snapshot=createActiveRunSnapshot({level,game:step.before,mode:"normal",runId:step.before.loot.runId,revealedTiles:revealed});
   if(!snapshot)throw Error('Invalid real-route snapshot');
   const prior=route[index-1];
-  const approachSnapshot=prior?createActiveRunSnapshot({level,game:prior.before,mode:'normal',runId:`run-jump-approach-${level.id}-${index}`,revealedTiles:revealed}):null;
+  const approachSnapshot=prior?createActiveRunSnapshot({level,game:prior.before,mode:'normal',runId:prior.before.loot.runId,revealedTiles:revealed}):null;
   return [{level,step,jump,snapshot,index,from,to,prior,approachSnapshot}];
  });
 });

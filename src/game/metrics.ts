@@ -1,3 +1,4 @@
+import { emptyLoot } from "./loot";
 import { movePlayer, pointKey } from "./engine";
 import { solveLevel } from "./solver";
 import { DIRECTIONS, type Direction, type GameState, type LevelDefinition } from "./types";
@@ -89,7 +90,7 @@ function analyseRoute(level: LevelDefinition, directions: readonly Direction[]):
 function solveInitial(level: LevelDefinition): GameState {
   // Lazy local import avoided: an initial solve always exposes a valid starting state shape.
   return {
-    loot: { version: 1, sources: [] }, levelId: level.id, position: { ...level.start }, power: level.initialPower,
+    loot: emptyLoot(), levelId: level.id, position: { ...level.start }, power: level.initialPower,
     hasSword: false, hasBoots: false, hasSpringBoots: false, hasAntidoteLeaf: false,
     keys: [], collectedObjectIds: [], rescuedAnimalIds: [], defeatedEnemyIds: [], openedDoorIds: [],
     goldStarsCollected: 0, sciencePointsCollected: 0, exitArmed: true, status: "playing", steps: 0,

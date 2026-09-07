@@ -91,7 +91,7 @@ for (const theme of ["sunny-stone", "ember-keep"]) test(`HAZARD03 connected shap
 });
 const scenes = ["water", "lava", "poison"].map(kind => ({ kind, ...fixture(kind) }));
 function snapshot(f: typeof scenes[number]) {
-  return createActiveRunSnapshot({ level: f.level, game: f.route[f.start]!.before, mode: "normal", runId: `run-hazard-${f.level.id}`,
+  return createActiveRunSnapshot({ level: f.level, game: f.route[f.start]!.before, mode: "normal", runId: f.route[f.start]!.before.loot.runId,
     revealedTiles: new Set(f.route.slice(0, f.start + 1).flatMap(s => getVisibleTileKeys(f.level, s.before.position))) });
 }
 test.beforeAll(async () => {

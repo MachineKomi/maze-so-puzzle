@@ -194,7 +194,7 @@ contextual rendition remains distinct from the repaired 256px field derivative.
     unlocked story IDs, revision-scoped route records, and a bounded completion-
     receipt ledger in browser `localStorage`; old best steps remain explicitly
     historical after a map edit and a resumed pending exit cannot bank twice.
-13. `src/session.ts` validates and stores a schema-v4 snapshot for a normal
+13. `src/session.ts` validates and stores a schema-v5 snapshot for a normal
     authored run, including stable run ID, revision, fingerprint, reveal state,
     progressive-hint state, and recoverable pending completion. It fails closed
     on changed content, reports that narrow restart case to the player, and
@@ -664,3 +664,19 @@ retains scroll and deliberate input isolation; physical-device comfort is separa
 Fresh recommended gains are Music0.07511111111111113 / SFX1.1333333333333333,
 shown as65%/85% on the unchanged calibration-v2 curve. Existing exact gains/mute
 are preserved. Sound & comfort offers Recommended balance for deliberate adoption.
+
+## LOOT-03 B candidate — rules5 / active schema5
+
+The schema-v5 snapshot binds loot-ledger2 to the attempt runId. `enemyRewards.ts`
+owns bounded independent Gold/Science channels; `movePlayer` creates both at
+successful defeat with unchanged immediate Power. The collection view withholds
+that encounter until the battle ends and prioritizes its new burst without
+displacing accepted claims. Explicit source kind/objectId replaces a treasure-only
+origin assumption. Potential future channels reserve64 semantic bundles.
+
+v4/rules4 migration validates the old authored ledger, settles accepted claims,
+retains grounded treasure and retires old defeated enemies without reward. Only
+a saturated old ledger compacts same-source grounded bundles into an existing
+legal landing to reserve new channels; no current campaign save needs this.
+v2/v3 retain credited-treasure migration. Key5 is written before old-key cleanup;
+malformed/future and denied-write records stay protected. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md).

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { gameplayFingerprintForRules } from "./game/contentIdentity";
-import { createInitialGameState, movePlayer, stayAfterPendingCompletion } from "./game/engine";
+import { createInitialGameState as engineInitial, movePlayer, stayAfterPendingCompletion } from "./game/engine";
 import { CURATED_LEVELS, parseAsciiLevel } from "./game/levels";
 import { solveLevel } from "./game/solver";
 import type { GameState, LevelDefinition } from "./game/types";
@@ -34,16 +34,18 @@ class MemoryStorage implements ActiveRunStorage {
   }
 }
 
+function createInitialGameState(level: LevelDefinition, runId = "run-test-session-0001") { return engineInitial(level,runId); }
+
 function storyLevel(index = 0): LevelDefinition {
   const level = CURATED_LEVELS[index];
   if (!level) throw new Error(`Missing test story level ${index}.`);
   return level;
 }
 
-function progressedPlayingState(level: LevelDefinition): GameState {
+function progressedPlayingState(level: LevelDefinition, runId = "run-test-session-0001"): GameState {
   const solution = solveLevel(level);
   expect(solution.solvable).toBe(true);
-  let state = createInitialGameState(level);
+  let state = createInitialGameState(level,runId);
   for (const direction of solution.directions.slice(0, -1)) {
     const result = movePlayer(level, state, direction);
     expect(
@@ -62,7 +64,7 @@ function progressedPlayingState(level: LevelDefinition): GameState {
 
 function rawSnapshot(level: LevelDefinition, game: GameState = createInitialGameState(level)): ActiveRunSnapshot {
   return {
-    schemaVersion: 4,
+    schemaVersion: 5,
     runId: "run-test-session-0001",
     levelId: level.id,
     contentRevision: level.contentRevision,
@@ -95,7 +97,7 @@ describe("active run persistence", () => {
       runId: "run-test-session-0002",
       mode: "normal",
       level,
-      game: createInitialGameState(level),
+      game: createInitialGameState(level,"run-test-session-0002"),
       revealedTiles: [],
       hintUsesByState,
     });
@@ -315,7 +317,7 @@ describe("active run persistence", () => {
 
     const migrated = readActiveRun(CURATED_LEVELS, storage);
     expect(migrated).toMatchObject({
-      schemaVersion: 4,
+      schemaVersion: 5,
       levelId: level.id,
       runId: expect.stringMatching(/^migrated-/),
     });
@@ -507,7 +509,7 @@ describe("active run persistence", () => {
   it("round-trips a validated normal curated run", () => {
     const storage = new MemoryStorage();
     const level = storyLevel(1);
-    const game = progressedPlayingState(level);
+    const game = progressedPlayingState(level,"run-test-session-0003");
 
     expect(writeActiveRun({
       runId: "run-test-session-0003",
@@ -518,7 +520,7 @@ describe("active run persistence", () => {
     }, storage)).toBe(true);
 
     expect(readActiveRun(CURATED_LEVELS, storage)).toEqual({
-      schemaVersion: 4,
+      schemaVersion: 5,
       runId: "run-test-session-0003",
       levelId: level.id,
       contentRevision: level.contentRevision,
@@ -619,10 +621,10 @@ describe("active run persistence", () => {
 
   it("deduplicates and normalizes valid state and revealed arrays against the level", () => {
     const level = storyLevel(1);
-    const game = progressedPlayingState(level);
+    const game = progressedPlayingState(level,"run-test-session-0004");
     const duplicate = <T,>(values: readonly T[]): T[] => [...values].reverse().flatMap((value) => [value, value]);
     const sanitized = sanitizeActiveRunSnapshot({
-      schemaVersion: 4,
+      schemaVersion: 5,
       runId: "run-test-session-0004",
       levelId: level.id,
       contentRevision: level.contentRevision,

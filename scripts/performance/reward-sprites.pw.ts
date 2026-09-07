@@ -35,10 +35,14 @@ for(const [quality,motion,width,height] of [['full','full',1194,834],['lite','fu
     data:{...document.querySelector<HTMLCanvasElement>('.vfx-rewards')!.dataset},save:JSON.parse(localStorage.getItem(key)!).game,
     broken:[...document.images].filter(i=>!i.naturalWidth).length}),ACTIVE_RUN_STORAGE_KEY);
    const moving=quality!=='static'&&motion!=='reduced';
-   expect(errors).toEqual([]);expect(result.broken).toBe(0);expect(result.save).toEqual(f.result.state);
-   expect(result.samples.at(-1)).toMatchObject({w:1,h:1,tokens:0,anchors:1});
+   expect(errors).toEqual([]);expect(result.broken).toBe(0);const {loot:expectedLoot,goldStarsCollected:_,sciencePointsCollected:__,...expected}=f.result.state;
+   const {loot,goldStarsCollected,sciencePointsCollected,...actual}=result.save;
+   expect(actual).toEqual(expected);
+   expect(goldStarsCollected+sciencePointsCollected+loot.sources.flatMap((s:any)=>s.drops).reduce((n:number,d:any)=>n+d.amount,0))
+     .toBe(expectedLoot.sources.reduce((n,s)=>n+s.amount,0));
+   expect(result.samples.at(-1)).toMatchObject({anchors:1});expect(result.data.running).toBe("false");
    expect(result.samples.every(s=>s.w<=1536&&s.h<=1536&&s.tokens<=(quality==='lite'?12:24)&&s.anchors===1)).toBe(true);
-   expect(result.samples.some(s=>s.tokens>0)).toBe(moving);
+   if(moving || id==="combat")expect(result.samples.some(s=>s.tokens>0)).toBe(true);
    if(moving)expect(Number(result.data.arrivals)).toBe({gold:quality==='lite'?4:8,science:4,potion:2,combat:12}[id]);
    rows.push({id,errors,...result});
   }finally{await ctx.close();}

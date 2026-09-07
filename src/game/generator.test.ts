@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { gameplayFingerprintForRules } from "./contentIdentity";
 import {
   areTerrainTexturesCompatible,
   resolveTerrainTheme,
@@ -68,13 +69,14 @@ describe("deterministic surprise mazes", () => {
   });
 
   it.each([
-    ["golden-move", "movement", 9, "g-0f41eb23"],
-    ["golden-grow", "growing", 13, "g-b150e6c7"],
-    ["golden-adventure", "adventure", 17, "g-cf673949"],
-  ] as const)("keeps fixed seed %s on its reviewed gameplay fingerprint", (seed, difficulty, size, fingerprint) => {
+    ["golden-move", "movement", 9, "g-f04e6e26", "g-0f41eb23"],
+    ["golden-grow", "growing", 13, "g-731065ea", "g-b150e6c7"],
+    ["golden-adventure", "adventure", 17, "g-495fcae6", "g-cf673949"],
+  ] as const)("keeps fixed seed %s on its reviewed gameplay fingerprint", (seed, difficulty, size, fingerprint, priorFingerprint) => {
     const level = generateSurpriseMaze({ seed, difficulty, size });
     expect(level.contentRevision).toBe(2);
     expect(level.gameplayFingerprint).toBe(fingerprint);
+    expect(gameplayFingerprintForRules(level,4)).toBe(priorFingerprint);
   });
 
   it("provides the numeric-difficulty UI wrapper", () => {

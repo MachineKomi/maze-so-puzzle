@@ -694,8 +694,8 @@ function App() {
   const [testerPickerOpen, setTesterPickerOpen] = useState(debugMazeQueryEnabled);
   const [levelPickerOpen, setLevelPickerOpen] = useState(false);
   const [level, setLevel] = useState<LevelDefinition>(initialLevel);
-  const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel));
   const [runId, setRunId] = useState(() => initialRun?.runId ?? createActiveRunId());
+  const [game, setGame] = useState<GameState>(() => initialRun?.game ?? createInitialGameState(initialLevel, runId));
   const [procession, setProcession] = useState(() => createFollowerProcession(
     initialRun?.game.position ?? initialLevel.start, initialRun?.game.rescuedAnimalIds,
   ));
@@ -1033,6 +1033,7 @@ function App() {
     durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
   });
   const lootView = useLootCollection({ game, setGame, level, runId, scene: sceneTravel, port: rewardPort,
+    withheldObjectId: battlePresentation?.objectId,
     enabled: screen === "game" && pageVisible && !modalOpen && !presentationActive,
     animate: motion === "full" && preferences.quality !== "static", limit: preferences.quality==="lite" ? 8 : 20 });
 
@@ -1356,8 +1357,9 @@ function App() {
     mapPickupSequence.current += 1;
     setMapPickupToast(null);
     setLevel(nextLevel);
-    setGame(createInitialGameState(nextLevel));
-    setRunId(createActiveRunId());
+    const nextRunId = createActiveRunId();
+    setGame(createInitialGameState(nextLevel, nextRunId));
+    setRunId(nextRunId);
     setProcession(createFollowerProcession(nextLevel.start));
     setRevealedTiles(isExplorationLevel(nextLevel)
       ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)

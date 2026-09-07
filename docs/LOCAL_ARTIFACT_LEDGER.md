@@ -636,3 +636,13 @@ camera fixture. Both public origins match frozen bytes; four fresh journeys
 pass. Receipt SHA-256bb914ef94898b2bc740c3bf354ff3eea5cfbe47a7af10c78fe003339b30c1741.
 All browsers/contexts are stopped. Hold as accepted release evidence; no
 deletion/archive. Documentation closure creates no build or source clone.
+
+## LOOT-03 B — September7 candidate
+
+Owner Astra. `C:/GameDev/maze-game-qa/performance/release-v02219/` holds exactly
+four files (HTML/JS/CSS plus identity); entry bytes739660 plus a small identity
+JSON. Source761ffec/runtime8ad63a5, checked against the build provenance before
+editing. Shared public media stays in the existing workspace; no clone or copy.
+`dist/` will be reused for20. Planned `enemy20-*` browser/frame/trace packets
+and public receipt stay in the same external QA performance root. Count/bytes
+will be recorded at closure. Hold all evidence; no deletion/archive/native build.
