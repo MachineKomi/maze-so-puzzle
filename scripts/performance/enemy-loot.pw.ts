@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { findInputFixture, savedFixture } from './v22-input-fixtures';
-import { ACTIVE_RUN_STORAGE_KEY } from '../../src/session';
+import { findInputFixture, savedFixture, authoredLootFixture, routeCheckpoints } from './v22-input-fixtures';
+import { movePlayer } from '../../src/game/engine';
+import { DIRECTIONS } from '../../src/game/types';
+import { ACTIVE_RUN_STORAGE_KEY, VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY } from '../../src/session';
+import { gameplayFingerprintForRules } from '../../src/game/contentIdentity';
 import { PLAYER_PROGRESS_STORAGE_KEY, createDefaultPlayerProgress } from '../../src/progress';
 import { PRESENTATION_PREFERENCES_KEY, DEFAULT_PRESENTATION_PREFERENCES } from '../../src/motion';
 
@@ -11,7 +14,13 @@ const f=findInputFixture(events=>events.some(e=>e.type==='enemy-defeated'))!;
 const event=f.result.events.find(e=>e.type==='enemy-defeated')!;
 const keys={run:ACTIVE_RUN_STORAGE_KEY,progress:PLAYER_PROGRESS_STORAGE_KEY,preferences:PRESENTATION_PREFERENCES_KEY};
 test.beforeAll(async()=>{await mkdir(output,{recursive:true});expect(f.before.defeatedEnemyIds).toEqual([]);
-  await writeFile(resolve(output,'fixture.json'),JSON.stringify({keys,fixture:f,snapshot:savedFixture(f,'enemy20')},null,2));});
+  await writeFile(resolve(output,'fixture.json'),JSON.stringify({keys,fixture:f,snapshot:savedFixture(f,'enemy20')},null,2));
+  const {loot:_,...oldGame}=f.before;
+  const snapshot={...savedFixture(f,'enemy20-paired'),schemaVersion:3,gameplayFingerprint:gameplayFingerprintForRules(f.level,3),game:oldGame};
+  await writeFile(resolve(output,'paired-fixtures.json'),JSON.stringify({keys:{...keys,run:'maze-so-puzzle-active-run-v3'},
+    preferences:DEFAULT_PRESENTATION_PREFERENCES,progress:createDefaultPlayerProgress(16),fixtures:[{id:'enemy-first',snapshot,
+      direction:f.direction,objectId:event.objectId,powerAfter:event.powerAfter,rewards:f.result.state.loot.sources.map(s=>({currency:s.currency,amount:s.amount}))}]},null,2));
+});
 
 for(const [quality,motion,width,height,noCanvas] of [
   ['full','full',844,390,false],['full','full',1080,810,false],['lite','full',844,390,false],
@@ -80,4 +89,50 @@ test('reload during battle preserves earned enemy value without replay or duplic
   for(const source of after.loot.sources)expect(source.credited+source.drops.reduce((n:number,d:any)=>n+d.amount,0))
     .toBe(during.loot.sources.find((s:any)=>s.sourceId===source.sourceId).amount);
   await writeFile(resolve(output,'battle-reload.json'),JSON.stringify({during,after},null,2));
+});
+
+test('production v4 migration keeps distant grounded treasure and retires past enemies',async({page})=>{
+  const reached=routeCheckpoints().filter(c=>c.before.defeatedEnemyIds.length>0).flatMap(c=>DIRECTIONS.map(direction=>
+    ({...c,direction,result:movePlayer(c.level,c.before,direction)}))).find(c=>c.result.events.some(e=>e.type==='treasure-opened'&&e.currency==='gold'))!;
+  const treasure=authoredLootFixture(reached);
+  const game=treasure.result.state, current=savedFixture({...treasure,before:game},'v4-enemy-migration');
+  expect(game.defeatedEnemyIds.length).toBeGreaterThan(0);
+  const old={...current,schemaVersion:4,gameplayFingerprint:gameplayFingerprintForRules(treasure.level,4),game:{...game,
+    loot:{version:1,sources:game.loot.sources.map(({sourceKind:_,objectId:__,...s})=>s)}}};
+  const far=game.loot.sources.flatMap(s=>s.drops).filter(d=>Math.hypot(d.at.x-game.position.x,d.at.y-game.position.y)>1.75);
+  expect(far.length).toBeGreaterThan(0);
+  await page.addInitScript(({old,key,keys,progress})=>{if(!sessionStorage.getItem('old-four')){
+    localStorage.setItem(key,JSON.stringify(old));localStorage.setItem(keys.progress,JSON.stringify(progress));sessionStorage.setItem('old-four','1');
+  }},{old,key:VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY,keys,progress:createDefaultPlayerProgress(16)});
+  await page.goto('/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();await page.waitForTimeout(1500);
+  const restored=await page.evaluate(({key,prior})=>({current:JSON.parse(localStorage.getItem(key)!),prior:localStorage.getItem(prior)}),{key:keys.run,prior:VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY});
+  expect(restored.prior).toBeNull();expect(restored.current.runId).toBe(current.runId);
+  expect(restored.current.game.loot.legacyRetiredEnemyIds).toEqual([...game.defeatedEnemyIds].sort());
+  expect(restored.current.game.loot.sources.every((s:any)=>s.sourceKind==='treasure')).toBe(true);
+  for(const drop of far)expect(restored.current.game.loot.sources.flatMap((s:any)=>s.drops)).toContainEqual(drop);
+  expect(restored.current.game.goldStarsCollected+restored.current.game.sciencePointsCollected+
+    restored.current.game.loot.sources.flatMap((s:any)=>s.drops).reduce((n:number,d:any)=>n+d.amount,0)).toBe(game.loot.sources.reduce((n,s)=>n+s.amount,0));
+  await writeFile(resolve(output,'production-v4-migration.json'),JSON.stringify({old,restored},null,2));
+});
+
+for(const lite of [false,true])test(`saturated loot releases enemy then new treasure Lite${lite}`,async({page})=>{
+  await page.goto('http://127.0.0.1:1421/');await page.bringToFront();
+  const result=await page.evaluate(async(lite)=>{
+    const {mountRewardPriorityHarness}=await import('/scripts/art_review/physical-loot-harness.tsx');
+    document.getElementById('root')!.style.display='none';const host=document.createElement('div');document.body.append(host);
+    const h=mountRewardPriorityHarness(host,lite),initial=h.read();h.defeat();await new Promise(r=>setTimeout(r,100));
+    const during=h.read();h.release();await new Promise(r=>setTimeout(r,800));const released=h.read();
+    h.treasure();await new Promise(r=>setTimeout(r,800));const treasure=h.read();h.unmount();host.remove();return{initial,during,released,treasure};
+  },lite);
+  const visible=(row:any)=>row.represented.filter((s:any)=>s.ids.length);
+  expect(visible(result.initial)).toHaveLength(lite?8:20);
+  expect(visible(result.during).some((s:any)=>s.objectId==='priority-enemy')).toBe(false);
+  expect(visible(result.released).filter((s:any)=>s.objectId==='priority-enemy').map((s:any)=>s.currency).sort()).toEqual(['gold','science']);
+  expect(visible(result.treasure).some((s:any)=>s.objectId==='priority-treasure')).toBe(true);
+  for(const row of [result.released,result.treasure]) {
+    const ids=visible(row).flatMap((s:any)=>s.ids);expect(ids.length).toBeLessThanOrEqual(lite?8:20);expect(ids.every((id:string)=>row.shown.includes(id))).toBe(true);
+    expect(row.game.goldStarsCollected+row.game.sciencePointsCollected).toBe(0);
+    for(const source of row.game.loot.sources)expect(source.drops.reduce((n:number,d:any)=>n+d.amount,0)).toBe(source.amount);
+  }
+  await writeFile(resolve(output,`saturation-${lite}.json`),JSON.stringify(result,null,2));
 });

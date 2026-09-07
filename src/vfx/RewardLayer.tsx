@@ -5,7 +5,7 @@ import type { LevelDefinition } from "../game/types";
 import type { SurfaceQuality } from "../motion";
 import type { SceneTravelSnapshot } from "../ui/game/useSceneTravel";
 import { playRewardArrival, type SoundHandle } from "../sound";
-import { advanceRewardToken, makeRewardTokens, REWARD_CAP, rewardProjection, rewardSpaceOpen, type RewardEmission, type RewardToken } from "./rewardPhysics";
+import { advanceRewardToken, makeRewardTokens, startRewardAppearance, REWARD_CAP, rewardProjection, rewardSpaceOpen, type RewardEmission, type RewardToken } from "./rewardPhysics";
 import { REWARD_COLORS, rewardGlyph } from "./rewardGlyphs";
 import { lootPose, type LootView } from "./useLootCollection";
 import { StageFitContext } from "../ui/ResponsiveStage";
@@ -38,6 +38,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
     const glyphs = { gold: rewardGlyph("gold"), science: rewardGlyph("science"), power: rewardGlyph("power") };
     const numbers = rewardNumbers();
     let tokens: RewardToken[] = [], frame: number | undefined, previous = 0, lastArrival = -Infinity, pitch = 0;
+    const firstPaint = new WeakSet<RewardToken>();
     let width = 0, height = 0, scale = 1, voice: SoundHandle | undefined;
     let peak = 0, bounces = 0, arrivals = 0;
     let lastCredit = loot.current.game.goldStarsCollected + loot.current.game.sciencePointsCollected;
@@ -119,9 +120,11 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
         }
       }
       for (const token of tokens) {
+        const starting = firstPaint.delete(token);
+        if (starting) startRewardAppearance(token,now);
         if (now < token.born) continue;
         const bounced = token.bounced;
-        advanceRewardToken(token, level.terrain, target, Math.max(token.born, previous), now);
+        advanceRewardToken(token, level.terrain, target, starting ? now : Math.max(token.born, previous), now);
         if (!bounced && token.bounced) bounces++;
         if (token.arrived) { collected++; continue; }
         if (token.expired) continue;
@@ -191,7 +194,9 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
         canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
         ctx.setTransform(scale, 0, 0, scale, 0, 0); previous = now; pitch = 0;
       }
-      tokens.push(...makeRewardTokens(event, event.bornAt ?? now, Math.min(quality === "lite" ? 4 : 8, REWARD_CAP[quality] - physical().length - tokens.length)));
+      const incoming = makeRewardTokens(event, event.bornAt ?? now, Math.min(quality === "lite" ? 4 : 8, REWARD_CAP[quality] - physical().length - tokens.length));
+      if (event.bornAt === undefined) for (const token of incoming) firstPaint.add(token);
+      tokens.push(...incoming);
       peak = Math.max(peak, tokens.length); canvas.dataset.running = tokens.length ? "true" : "false";
       if (tokens.length && frame === undefined) frame = requestAnimationFrame(tick);
     } };

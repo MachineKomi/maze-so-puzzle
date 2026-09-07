@@ -1161,11 +1161,13 @@ function App() {
       let prior = plan.transferSteps.filter(step => step.clashIndex < clash.index).at(-1)?.transferredPower ?? 0;
       const values = steps.map(step => { const amount = step.transferredPower - prior; prior = step.transferredPower; return amount; });
       const amount = values.reduce((sum, value) => sum + value, 0);
-      if (amount) rewardPort.current.emit({
+      // Future bashes must not occupy today's limited token slots. Emit each
+      // batch at its impact so Lite's four reserved Power slots can be reused.
+      if (amount) schedulePresentationTimer(sequence, () => rewardPort.current.emit({
         kind: "power", at: enemy.at, amount, seed: rewardSeed(`${runId}:${event.objectId}:${clash.index}`),
         bornAt: rewardStartedAt + clash.impactMs,
         arrivals: steps.map(step => step.atMs - clash.impactMs), values,
-      });
+      }), Math.max(0, rewardStartedAt + clash.impactMs - performance.now()));
     });
 
     const duration = plan.durationMs;

@@ -1,11 +1,20 @@
 import { describe, expect, it } from "vitest";
 import { createCombatVictoryPlan } from "../combatPresentation";
-import { advanceRewardToken, makeRewardTokens, REWARD_CAP, rewardProjection, rewardSeed, rewardSpaceOpen } from "./rewardPhysics";
+import { advanceRewardToken, makeRewardTokens, startRewardAppearance, REWARD_CAP, rewardProjection, rewardSeed, rewardSpaceOpen } from "./rewardPhysics";
 import type { TerrainKind } from "../game/types";
 
 const terrain = ["#####", "#...#", "###.#", "#...#", "#####"].map(row => [...row].map(c => c === "#" ? "wall" : "floor")) as TerrainKind[][];
 const emission = { kind: "gold" as const, at: { x: 1, y: 1 }, amount: 8, seed: 23 };
 describe("committed reward representatives", () => {
+  it("preserves a relative effect's visible duration after a slow first foreground paint",()=>{
+    const token=makeRewardTokens({...emission,kind:"power",amount:1},0,1)[0]!;
+    const duration=token.due-token.born,wait=token.homingAt-token.born;
+    startRewardAppearance(token,220);
+    expect(token.born).toBe(220);expect(token.due-token.born).toBe(duration);expect(token.homingAt-token.born).toBe(wait);
+    advanceRewardToken(token,terrain,{x:1.5,y:1.5},220,220);expect(token.expired).toBe(false);
+    // A later long gap retains the established cancellation rule; no catch-up burst.
+    advanceRewardToken(token,terrain,{x:1.5,y:1.5},220,341);expect(token.expired).toBe(true);
+  });
   it("partitions every small and huge amount exactly without per-point particles", () => {
     for (const amount of [1, 2, 3, 8, 99, 123456, Number.MAX_SAFE_INTEGER]) for (const slots of [0, 1, 2, 3, 4, 5, 6, 7, 8]) {
       const tokens = makeRewardTokens({ ...emission, amount }, 0, slots);

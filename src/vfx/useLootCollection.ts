@@ -45,13 +45,17 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
   },[animate,limit,setGame]);
   const first = useRef(view);
   const fresh = useRef(true);
-  const encounter = useRef<{ withheld?: string; priority?: string; runId: string }>({runId});
-  if (encounter.current.runId !== runId) encounter.current = {runId};
+  const encounter = useRef<{ known: Set<string>; priority?: string; runId: string }>({runId,known:new Set()});
+  if (encounter.current.runId !== runId) encounter.current = {runId,known:new Set()};
   if (first.current !== view) { first.current = view; fresh.current = true; }
   useLayoutEffect(() => {
     const now = performance.now(), ids = new Set<string>();
-    if (encounter.current.withheld && !withheldObjectId) encounter.current.priority = encounter.current.withheld;
-    encounter.current.withheld = withheldObjectId;
+    // The latest released origin gets its readable burst, including a treasure
+    // opened after an enemy. Restored sources are already grounded, not new bursts.
+    for (const source of game.loot.sources) if (source.objectId !== withheldObjectId) {
+      if (!fresh.current && !encounter.current.known.has(source.objectId)) encounter.current.priority = source.objectId;
+      encounter.current.known.add(source.objectId);
+    }
     view.current.represented=representedLoot(game,view.current.represented,game.position,limit,withheldObjectId,encounter.current.priority);
     for (const source of game.loot.sources) {
       if (source.objectId === withheldObjectId) continue;

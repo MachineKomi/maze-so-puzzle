@@ -17,6 +17,7 @@ const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/
 const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
+const enemyReview = process.env.MAZE_REVIEW_ROUTE === 'enemy';
 const pairCount = Number(process.env.MAZE_REVIEW_PAIRS ?? 5);
 const coldProbe = process.env.MAZE_REVIEW_COLD_PROBE === '1';
 const mountSample = process.env.MAZE_REVIEW_MOUNT === '1';
@@ -40,7 +41,7 @@ await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
 const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
-if (!fixture || (!jumpReview && (!reverse[fixture.direction] || fixture.count < 4))) throw Error('Expected frozen engine-derived route');
+if (!fixture || (!jumpReview && (!reverse[fixture.direction] || (!enemyReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
 if (idleReview && !(fixture.visibleHazardCells > 0)) throw Error('Idle hazard comparison requires a nonempty visible-hazard fixture');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');
@@ -92,6 +93,7 @@ report.coldOpeningProbe=coldProbe;
 report.mountSample=mountSample;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
+if (enemyReview) report.route='defeat first enemy, pause2700ms, enter cleared tile, pause1300ms, return, pause500ms; unchanged Power and candidate dual-currency conservation';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
   for (const cohort of profiles) {
@@ -161,7 +163,13 @@ try {
           });
           const resourcesBefore=await resources();
           // Four reversible four-step legs per cycle; preserve engine-derived direction.
-          if(lootReview) {
+          if(enemyReview) {
+            const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
+            await press(fixture.direction);await page.waitForTimeout(2700);
+            await press(fixture.direction);await page.waitForTimeout(1300);
+            await press(reverse[fixture.direction]);await page.waitForTimeout(500);
+          }
+          else if(lootReview) {
             const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
             await press(fixture.direction);await page.waitForTimeout(1500);
             await press(fixture.approach);await page.waitForTimeout(900);
@@ -197,10 +205,17 @@ try {
           if (pair === 0 && captureScreenshots) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined,mount:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (enemyReview?2:lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
           if(lootReview) {
             const source=row.loot?.sources.find(s=>s.sourceId===fixture.sourceId);
             if(mode==='candidate' && (!source || source.credited<=0 || source.credited+source.drops.reduce((n,d)=>n+d.amount,0)!==fixture.amount)) throw Error('Physical reward not conserved');
+          }
+          if(enemyReview) {
+            if(sample.save?.game?.power!==fixture.powerAfter || !sample.save?.game?.defeatedEnemyIds.includes(fixture.objectId)) throw Error('Enemy comparison missed real defeat');
+            if(mode==='candidate') for(const expected of fixture.rewards) {
+              const source=row.loot?.sources.find(s=>s.objectId===fixture.objectId&&s.currency===expected.currency);
+              if(!source || source.amount!==expected.amount || source.credited+source.drops.reduce((n,d)=>n+d.amount,0)!==expected.amount) throw Error('Enemy reward not conserved');
+            }
           }
         } finally { await ctx.close(); }
       }
