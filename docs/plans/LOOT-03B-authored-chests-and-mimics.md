@@ -50,6 +50,27 @@ until an obtainable production placement exists. No XP or egg awards here.
 
 ## Qualification and release
 
+The current source audit passes746 tests before the additional preload test.
+All four affected campaign mazes have all-rescue/all-chest solutions, with a
+maximum113806 admitted states. Twilight's Candy is a **required** encounter,
+allowed by Plan09's later designer policy; replay proves sufficient Power before
+defeat without its own reward. Its ordinary/perfect routes now take208/214 inputs;
+Lanternlight151/208, Moonlit165/170, Rainbow Power Parade63/76. Terrain, positions
+and movement-step counts are unchanged; opening adds stationary inputs.
+
+Total repeatable per-campaign authored/encounter supply is Gold154–263 versus
+legacy144–244 and Science99–161 versus85–138. The ordinary49-enemy subtotal is
+Gold98–196/Science62–114; the separate Candy chest supplies Gold12–15/Science7–9.
+These are all-loot extrema, not automatic completion awards or promised spend.
+
+Forward activation is recorded in
+[`loot03b-chest-activation.json`](../source-assets/publication/loot03b-chest-activation.json).
+Run the activation script with the dedicated locked art environment, then
+`scripts/art_pipeline.py --manifest --write` and `--check`. Only three approved
+status rows change; all media, v06 approval and historical Plan03 maps remain
+unchanged. The active inventory gains165234 encoded bytes/786432 theoretical
+RGBA bytes previously dormant, not new download files or measured RAM.
+
 Unit/save tests must exercise replay, forged receipts, rewards/capacity,
 historical in-flight runs, denied storage writes and future/malformed protection.
 Browser proof covers good opening, reveal, too-strong return, final defeat,

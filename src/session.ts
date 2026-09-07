@@ -613,7 +613,7 @@ export function writeActiveRun(input: ActiveRunInput,
   } catch { return false; }
 }
 
-/** Current key is authoritative, even when unreadable. A migration writes v5
+/** Current key is authoritative, even when unreadable. A migration writes v6
  * before attempting old-key cleanup; denied writes preserve the original bytes. */
 export function readActiveRunResult(curatedLevels: readonly LevelDefinition[],
   storage: ActiveRunStorage | null | undefined = undefined): ActiveRunReadResult {

@@ -66,7 +66,7 @@ import { FRIEND_BOOK_LORE } from "./bookLore";
 import { heldWeaponStyle, JUMP_BOOTS_STYLE } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
-import { CURATED_LEVELS } from "./game/levels";
+import { CURATED_LEVELS, getCuratedLevel } from "./game/levels";
 import {
   DEFAULT_FOV_SIZE,
   getCameraWindow,
@@ -1950,10 +1950,11 @@ function App() {
     else if (heldInputSource.current === "pad") scheduleDpadRepeat(selectedTravelDuration.current);
   };
 
+  const restartCurrentLevel=()=>loadLevel(!testerRun&&level.source==="curated"?getCuratedLevel(level.id)??level:level);
   const armRestart = () => {
     if (restartArmed) {
       playSound("select", muted);
-      loadLevel(level);
+      restartCurrentLevel();
       return;
     }
     playSound("bump", muted);
@@ -2109,6 +2110,7 @@ function App() {
         || game.collectedObjectIds.length > 0
         || game.rescuedAnimalIds.length > 0
         || game.defeatedEnemyIds.length > 0
+        || game.chests.length > 0 || pendingLoot(game)>0
         || game.openedDoorIds.length > 0,
       currentLevelId: level.id,
     }, nextLevel.id)) {
@@ -2839,7 +2841,7 @@ function App() {
           <PresentationArt art={artDetail.art} label={artDetail.label} /><p className="modal-lead">{artDetail.description}</p>
           <button className="primary-button" onClick={() => setArtDetail(null)}>Back to the adventure</button>
         </Modal>}
-        {screen === "game" && game.status === "lost" && <Modal title="Let's try again" onClose={() => loadLevel(level)}><p>A fresh start is ready.</p><button className="primary-button" onClick={() => loadLevel(level)}>Restart</button></Modal>}
+        {screen === "game" && game.status === "lost" && <Modal title="Let's try again" onClose={restartCurrentLevel}><p>A fresh start is ready.</p><button className="primary-button" onClick={restartCurrentLevel}>Restart</button></Modal>}
         {levelPickerOpen && (
           <Modal title="Choose a maze" onClose={closeLevelPicker} returnFocus={modalReturnFocus.current}>
             <p className="modal-lead level-picker-lead">Replay any unlocked story maze and bring home friends you missed.</p>

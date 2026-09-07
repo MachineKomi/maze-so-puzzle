@@ -6,7 +6,7 @@ import {ACTIVE_RUN_STORAGE_KEY} from '../../src/session';
 import {PLAYER_PROGRESS_STORAGE_KEY,createDefaultPlayerProgress} from '../../src/progress';
 import {PRESENTATION_PREFERENCES_KEY,DEFAULT_PRESENTATION_PREFERENCES} from '../../src/motion';
 import {LEGACY_CURATED_LEVELS} from '../../src/game/levels';
-import {createInitialGameState} from '../../src/game/engine';
+import {createInitialGameState,movePlayer} from '../../src/game/engine';
 import {createActiveRunSnapshot} from '../../src/session';
 
 const output=resolve(process.env.MAZE_PERF_EVIDENCE_DIR!,'chests');
@@ -15,7 +15,16 @@ const mimic=findInputFixture(events=>events.some(e=>e.type==='chest-opened'&&e.o
 const keys={run:ACTIVE_RUN_STORAGE_KEY,progress:PLAYER_PROGRESS_STORAGE_KEY,preferences:PRESENTATION_PREFERENCES_KEY};
 const arrow=(d:string)=>`Arrow${d[0]!.toUpperCase()}${d.slice(1)}`;
 test.beforeAll(async()=>{await mkdir(output,{recursive:true});expect(good).toBeTruthy();expect(mimic).toBeTruthy();
-  await writeFile(resolve(output,'fixtures.json'),JSON.stringify({good,mimic,keys},null,2));});
+  await writeFile(resolve(output,'fixtures.json'),JSON.stringify({good,mimic,keys},null,2));
+  const level=LEGACY_CURATED_LEVELS.find(l=>l.id===good.level.id)!;
+  const before=good.prefix.reduce((g,d)=>movePlayer(level,g,d).state,createInitialGameState(level,good.before.loot.runId));
+  expect(before.position).toEqual(good.before.position);expect(before.power).toBe(good.before.power);
+  const {chests:_,...oldGame}=before,event=good.result.events.find(e=>e.type==='chest-opened')!;
+  const baseline={...createActiveRunSnapshot({level,game:before,runId:before.loot.runId,mode:'normal',revealedTiles:good.revealed}),schemaVersion:5,game:oldGame};
+  await writeFile(resolve(output,'paired-fixtures.json'),JSON.stringify({keys,preferences:DEFAULT_PRESENTATION_PREFERENCES,progress:createDefaultPlayerProgress(16),
+    fixtures:[{id:'authored-chest',snapshot:savedFixture(good,'chest-pair'),baselineSnapshot:baseline,direction:good.direction,objectId:event.objectId,
+      rewards:good.result.state.loot.sources.filter(s=>s.objectId===event.objectId).map(s=>({currency:s.currency,amount:s.amount}))}]},null,2));
+});
 
 for(const [quality,motion,width,height] of [
   ['full','full',844,390],['full','full',1080,810],['full','full',1440,900],
@@ -85,15 +94,19 @@ for(const outcome of ['good','mimic'] as const)test(`reload interrupts ${outcome
   await writeFile(resolve(output,`${outcome}-reload.json`),JSON.stringify({during,after},null,2));
 });
 
-test('public runtime resumes v21 Twilight as its original visible Candy layout',async({page})=>{
+test('production runtime resumes v21 Twilight and restarts on the new layout',async({page})=>{
   const level=LEGACY_CURATED_LEVELS.find(l=>l.id==='twilight-treasure-loop')!,runId='run-chest-old-twilight';
   const game=createInitialGameState(level,runId),{chests:_,...oldGame}=game;
   const snapshot={...createActiveRunSnapshot({level,game,runId,mode:'normal',revealedTiles:[]}),schemaVersion:5,game:oldGame};
-  await page.addInitScript(({keys,snapshot,progress})=>{localStorage.setItem(keys.run,JSON.stringify(snapshot));localStorage.setItem(keys.progress,JSON.stringify(progress));},
+  await page.addInitScript(({keys,snapshot,progress})=>{if(!sessionStorage.getItem('legacy-start')){localStorage.setItem(keys.run,JSON.stringify(snapshot));localStorage.setItem(keys.progress,JSON.stringify(progress));sessionStorage.setItem('legacy-start','1');}},
     {keys,snapshot,progress:createDefaultPlayerProgress(16)});
   await page.goto('/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();
   const restored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),keys.run);
   expect(restored.schemaVersion).toBe(6);expect(restored.gameplayFingerprint).toBe(level.gameplayFingerprint);expect(restored.game.chests).toEqual([]);
   expect(restored.game.position).toEqual(game.position);
-  await writeFile(resolve(output,'legacy-twilight.json'),JSON.stringify({snapshot,restored},null,2));
+  await page.getByRole('button',{name:'Restart',exact:true}).click();await page.getByRole('button',{name:'Again!',exact:true}).click();
+  await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).gameplayFingerprint,keys.run)).not.toBe(level.gameplayFingerprint);
+  const restarted=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),keys.run);
+  expect(restarted.runId).not.toBe(runId);expect(restarted.game.chests).toEqual([]);
+  await writeFile(resolve(output,'legacy-twilight.json'),JSON.stringify({snapshot,restored,restarted},null,2));
 });

@@ -18,6 +18,7 @@ const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const enemyReview = process.env.MAZE_REVIEW_ROUTE === 'enemy';
+const chestReview = process.env.MAZE_REVIEW_ROUTE === 'chest';
 const potionReview = process.env.MAZE_REVIEW_ROUTE === 'potion';
 const entrySettleMs = Number(process.env.MAZE_REVIEW_ENTRY_SETTLE_MS ?? 500);
 if (![0,500].includes(entrySettleMs)) throw Error('Use immediate or loaded entry');
@@ -44,7 +45,8 @@ await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
 const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
-if (!fixture || (!jumpReview && (!reverse[fixture.direction] || (!enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
+if (!fixture || (!jumpReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
+if(chestReview&&!fixture.baselineSnapshot)throw Error('Chest comparison requires the actual historical object graph');
 if (idleReview && !(fixture.visibleHazardCells > 0)) throw Error('Idle hazard comparison requires a nonempty visible-hazard fixture');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');
@@ -102,6 +104,7 @@ report.entrySettleMs=entrySettleMs; report.freshBrowser=freshBrowser;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
 if (enemyReview) report.route='defeat first enemy, pause2700ms, enter cleared tile, pause1300ms, return, pause500ms; unchanged Power and candidate dual-currency conservation';
+if (chestReview) report.route='same authored chest slot: baseline walk-over8Gold versus candidate stationary mixed opening; pause1400ms, candidate enters cleared tile, pause1300ms, both return, pause500ms. Two movements each; the new opening input/beat is an explicit feature cost.';
 if (potionReview) report.route='collect real Power potion, pause1700ms, return, pause500ms; immediate-entry cosmetic-stall comparison with unchanged semantic Power';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
@@ -114,11 +117,12 @@ try {
         try {
           const page = await ctx.newPage(); const errors = [];
           page.on('pageerror', e => errors.push(String(e)));
-          await page.addInitScript(({ data, fixture }) => {
-            localStorage.setItem(data.keys.run, JSON.stringify(fixture.snapshot));
+          const snapshot=chestReview&&mode==='baseline'?fixture.baselineSnapshot:fixture.snapshot;
+          await page.addInitScript(({ data, snapshot }) => {
+            localStorage.setItem(data.keys.run, JSON.stringify(snapshot));
             localStorage.setItem(data.keys.progress, JSON.stringify(data.progress));
             localStorage.setItem(data.keys.preferences, JSON.stringify({ ...data.preferences, quality: 'full', motion: 'full', pace: 'regular' }));
-          }, { data, fixture });
+          }, { data, snapshot });
           await page.goto(`${origin}/${mode}`);
           await page.getByRole('button', { name: 'Play', exact: true }).click();
           const client = await ctx.newCDPSession(page), events = [];
@@ -178,6 +182,12 @@ try {
             await press(fixture.direction);await page.waitForTimeout(1700);
             await press(reverse[fixture.direction]);await page.waitForTimeout(500);
           }
+          else if(chestReview) {
+            const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
+            await press(fixture.direction);await page.waitForTimeout(1400);
+            if(mode==='candidate')await press(fixture.direction);
+            await page.waitForTimeout(1300);await press(reverse[fixture.direction]);await page.waitForTimeout(500);
+          }
           else if(enemyReview) {
             const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
             await press(fixture.direction);await page.waitForTimeout(2700);
@@ -220,7 +230,17 @@ try {
           if (pair === 0 && captureScreenshots) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined,mount:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (enemyReview||potionReview?2:lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (chestReview||enemyReview||potionReview?2:lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (chestReview||potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if(chestReview){
+            const sources=row.loot.sources.filter(s=>s.objectId===fixture.objectId);
+            if(sources.length!==(mode==='baseline'?1:2))throw Error('Chest comparison missed reward');
+            for(const s of sources)if(s.credited+s.drops.reduce((n,d)=>n+d.amount,0)!==s.amount)throw Error('Chest reward conservation failed');
+            if(sample.save.game.power!==snapshot.game.power)throw Error('Benign chest changed Power');
+            if(mode==='candidate'){
+              if(sample.save.game.chests.find(c=>c.objectId===fixture.objectId)?.phase!=='good-open')throw Error('Chest did not open');
+              for(const expected of fixture.rewards)if(sources.find(s=>s.currency===expected.currency)?.amount!==expected.amount)throw Error('Chest reward drift');
+            }else if(sources[0].amount!==8)throw Error('Baseline chest identity changed');
+          }
           if(potionReview && sample.save?.game?.power!==fixture.powerAfter) throw Error('Potion semantic credit changed');
           if(lootReview) {
             const source=row.loot?.sources.find(s=>s.sourceId===fixture.sourceId);
