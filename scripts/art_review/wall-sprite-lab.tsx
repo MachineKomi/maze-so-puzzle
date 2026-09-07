@@ -38,6 +38,30 @@ function ArtRack() {
     </div>
   </section>)}</main>;
 }
+function ProportionRack() {
+  const set=q.has('weapons')?WEAPON_ART:q.has('enemies')?ENEMY_ART:q.has('items')?{...PICKUP_ART,...TREASURE_CATALOG_ART}:ANIMAL_ART;
+  const start=Number(q.get('start')??0),items=Object.entries(set).slice(start,start+16);
+  const level={...scene,width:7,height:7,exit:{x:5,y:5},terrainThemeId:CURATED_LEVELS[8]!.terrainThemeId,
+    terrain:['WWWWWWW','W.....W','WWWWW.W','W.....W','W.WWWWW','W.....W','WWWWWWW'].map(row=>[...row].map(c=>c==='W'?'wall':'floor'))} as LevelDefinition;
+  const camera={left:0,top:0,right:6,bottom:6,width:7,height:7};
+  const role=q.has('weapons')||q.has('items')?'item':'actor';
+  return <main style={{display:'grid',gridTemplateColumns:'repeat(3,330px)',gap:16,padding:16,background:'#eadfd4'}}>{items.map(([name,art],i)=>{
+    const id=`proportion-${i}`;
+    return <section key={name}><h2 style={{fontSize:17,margin:0}}>{name} · horizontal / vertical</h2>
+      <div className="maze-board" style={{position:'relative',width:330,height:330,display:'block',containerType:'inline-size'}}>
+        <MazeTerrain level={level} camera={camera} volumeId={id}/>
+        {[{x:2,y:3},{x:5,y:2}].map(at=><div key={at.x} className="object-layer" style={worldLayerStyle(at,level)}>
+          <CatalogueImage usage="field" fieldRole={role} art={art}/>
+        </div>)}
+        <div className="player-layer" style={{...worldLayerStyle({x:3,y:3},level),...fieldActorStyle(AME_ART.geometry)}}>
+          <CatalogueImage usage="field" fieldRole="actor" className="player-sprite" art={AME_ART}/>
+          <span className="power-badge player-power">12</span>
+        </div>
+        <MazeForeground level={level} volumeId={id} style={{inset:0,width:'100%',height:'100%'}}/>
+      </div>
+    </section>;
+  })}</main>;
+}
 function Rack({direction}:{direction:LightDirection}) {
   const id=useId().replace(/:/g,''), level={...scene,lightDirection:direction,terrainThemeId:CURATED_LEVELS[Number(q.get('theme')??8)]!.terrainThemeId};
   const camera={left:0,top:0,right:5,bottom:5,width:6,height:6};
@@ -58,4 +82,4 @@ function Rack({direction}:{direction:LightDirection}) {
     <MazeForeground level={level} volumeId={id} style={{inset:0,width:'100%',height:'100%'}} />
   </div></section>;
 }
-createRoot(document.getElementById('root')!).render(q.has('art')?<ArtRack/>:<main style={{display:'flex',flexWrap:'wrap',gap:24,padding:24,background:'#eadfd4'}}>{(q.has('all')?lights:[q.get('light') as LightDirection || 'top-left']).map(direction=><Rack key={direction} direction={direction}/>)}</main>);
+createRoot(document.getElementById('root')!).render(q.has('compare')?<ProportionRack/>:q.has('art')?<ArtRack/>:<main style={{display:'flex',flexWrap:'wrap',gap:24,padding:24,background:'#eadfd4'}}>{(q.has('all')?lights:[q.get('light') as LightDirection || 'top-left']).map(direction=><Rack key={direction} direction={direction}/>)}</main>);

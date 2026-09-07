@@ -44,7 +44,7 @@ describe("registered held-weapon presentation", () => {
     const style = heldWeaponStyle(WEAPON_ART["moon-wand"], "field") as Record<string, string | number>;
     expect(style["--held-left"]).toMatch(/%$/);
     expect(style["--held-top"]).toMatch(/%$/);
-    expect(style["--held-size"]).toBe("137.0274%");
+    expect(style["--held-size"]).toBe("104.1408%");
     expect(style["--held-grip-x"]).toBe("33.6000%");
     expect(style["--held-grip-y"]).toBe("77.3000%");
     expect(style["--held-rotation"]).toBe("9deg");

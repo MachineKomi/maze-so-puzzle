@@ -879,14 +879,18 @@
   width: 84%;
   height: 84%;
 }
-.jump-presentation {
+.jump-presentation, .jump-ground {
   position: absolute;
-  z-index: 25;
+  /* Airborne body, equipment and badge clear every wall; landing restores
+   * the ordinary actor below the foreground's z-index 26. */
+  z-index: 27;
   display: grid;
   place-items: center;
   overflow: visible;
   pointer-events: none;
 }
+.jump-ground { z-index: 25; }
+.jump-ground .jump-spring-squash { bottom: auto; top: 68%; }
 .jump-presentation-shadow {
   position: absolute;
   z-index: 1;

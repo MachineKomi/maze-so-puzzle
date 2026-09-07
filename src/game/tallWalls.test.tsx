@@ -10,10 +10,10 @@ import { MazeTerrain } from "../ui/game/MazeTerrain";
 
 describe("tall wall sections", () => {
   it("balances exposed cap widths and grounds actors between actual foot edges", () => {
-    const level = {...CURATED_LEVELS[0]!, width: 1, height: 1, terrain: [["wall"]]} as LevelDefinition;
-    const base = createRoundedCellUnionGeometry({left:0,top:0,right:0,bottom:0},()=>true,.13);
+    const level = {...CURATED_LEVELS[0]!, width: 3, height: 3, terrain: [["floor","floor","floor"],["floor","wall","floor"],["floor","floor","floor"]]} as LevelDefinition;
+    const base = createRoundedCellUnionGeometry({left:0,top:0,right:2,bottom:2},(x,y)=>x===1&&y===1,.13);
     const g = createTallWallGeometry(level,base,{x:0,y:-1});
-    const points = g.cap.edges.flatMap(e=>[e.start,e.end]);
+    const points = g.cap.edges.flatMap(e=>[e.start,e.end]).map(p=>({x:p.x-1,y:p.y-1}));
     const width = Math.max(...points.map(p=>p.x))-Math.min(...points.map(p=>p.x));
     const depth = Math.max(...points.map(p=>p.y))-Math.min(...points.map(p=>p.y));
     expect(width).toBeCloseTo(depth); expect(width).toBeCloseTo(.47);
@@ -54,7 +54,7 @@ describe("tall wall sections", () => {
       expect(tall.sides).toHaveLength(5);
       if(level.id.startsWith('mask-')) continue;
       const html = renderToStaticMarkup(<MazeTerrain level={level} camera={camera} />);
-      expect(html).toContain('data-wall-lighting="04c-balanced-v1"');
+      expect(html).toContain('data-wall-lighting="04c-balanced-v2"');
       expect(html).toContain('class="terrain-tall-walls"');
       expect(html).toMatch(/class="terrain-wall"[^>]*fill="none"/);
       expect(html).not.toContain('class="terrain-wall-contour"');

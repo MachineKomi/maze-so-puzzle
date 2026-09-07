@@ -9,7 +9,7 @@ export const WALL_CAP_WIDTH = 1 - TALL_WALL_HEIGHT + WALL_REAR_OVERLAP;
 // Halfway between the north wall's front foot and the south wall's rear foot.
 export const FIELD_GROUND_Y = (1 + TALL_WALL_HEIGHT - WALL_REAR_OVERLAP) / 2;
 export const TALL_WALL_SKEW = .18;
-export const TALL_WALL_REVISION = "04c-balanced-v1";
+export const TALL_WALL_REVISION = "04c-balanced-v2";
 const p = (p: Point) => `${Number(p.x.toFixed(5))} ${Number(p.y.toFixed(5))}`;
 const quad = (a: Point, b: Point, c: Point, d: Point) => `M${p(a)}L${p(b)}L${p(c)}L${p(d)}Z`;
 
@@ -33,11 +33,17 @@ export function createTallWallGeometry(level: Pick<LevelDefinition, "width" | "h
   const inset = (1 - WALL_CAP_WIDTH) / 2;
   const columns = Array.from({ length: level.width }, (_, x) => [x, x + inset, x + 1 - inset]).flat().concat(level.width);
   const rows = Array.from({ length: level.height }, (_, y) => [y, y + h - WALL_REAR_OVERLAP]).flat().concat(level.height);
+  // Close the exterior strips beyond the viewport, including the rounded
+  // corners and lifted south cap. Interior cap edges/feet stay identical.
+  columns[0] = -dx - .13;
+  columns[columns.length - 1] = level.width + .13;
+  rows[0] = -.13;
+  rows[rows.length - 1] = level.height + h + .13;
   const cap = createRectilinearUnionGeometry(columns, rows, (sx, sy) => {
     const x = Math.floor(sx / 3), y = Math.floor(sy / 2);
-    return wall(x, y) && (sy % 2 === 1 || wall(x, y - 1))
-      && (sx % 3 !== 0 || wall(x - 1, y) && (sy % 2 === 1 || wall(x - 1, y - 1)))
-      && (sx % 3 !== 2 || wall(x + 1, y) && (sy % 2 === 1 || wall(x + 1, y - 1)));
+    return wall(x, y) && (y === 0 || sy % 2 === 1 || wall(x, y - 1))
+      && (x === 0 || sx % 3 !== 0 || wall(x - 1, y) && (y === 0 || sy % 2 === 1 || wall(x - 1, y - 1)))
+      && (x === level.width - 1 || sx % 3 !== 2 || wall(x + 1, y) && (y === 0 || sy % 2 === 1 || wall(x + 1, y - 1)));
   }, .13);
   const lift = (v: Point) => ({ x: v.x + dx, y: v.y - h });
   const shades: string[][] = Array.from({ length: 5 }, () => []), rims: string[] = [];

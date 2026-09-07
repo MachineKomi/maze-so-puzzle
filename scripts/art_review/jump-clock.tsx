@@ -19,8 +19,9 @@ function Harness(){
  <div ref={boardRef} className="maze-board" style={{position:'relative',width,height:width,overflow:'hidden','--grid-size':6} as React.CSSProperties}>
  <div className="camera-world" style={{position:'absolute',...cameraWorldStyle(grid as any,camera),background:'repeating-conic-gradient(#eee 0 25%,#bbb 0 50%) 0 / 16.666% 16.666%'}}/>
  <div className="player-layer" style={{position:'absolute',...cameraLayerStyle(position,camera),visibility:jump?'hidden':'visible'}}/>
+ {jump&&<div className="jump-ground" style={{...cameraLayerStyle(from,camera),'--jump-duration':'460ms'} as React.CSSProperties}><i className="jump-presentation-shadow"/><i className="jump-spring-squash"/></div>}
  {jump&&<div className="jump-presentation" data-travel-actor="jump" style={{...cameraLayerStyle(from,camera),'--jump-duration':'460ms','--jump-apex':`${getJumpPresentationMotion().apexPercent}%`,'--jump-descent':'-30%'} as React.CSSProperties}>
- <i className="jump-presentation-shadow"/><div className="jump-presentation-body"><span style={{fontSize:48}}>★</span><i className="jump-spring-squash"/></div></div>}
+ <div className="jump-presentation-body"><span style={{fontSize:48}}>★</span></div></div>}
  </div></div>;
 }
 createRoot(document.getElementById('proof')!).render(<Harness/>);

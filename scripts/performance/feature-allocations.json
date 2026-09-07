@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "field21-proportions-airborne-and-perimeter",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 384,
+      "compressedCssBytes": 64,
+      "runtimePublicBytes": 0,
+      "reason": "Astra bounds the Human-requested shared actor/item sizing, small reward visuals, closed exterior geometry and airborne layering to 384 gzip9 JS/64 CSS bytes. Final source including the shared-clock ground-shadow split measures174011 JS/24191 CSS gzip9, +182 JS/+21 CSS over20. Final source, paired performance and independent review remain required; no media/dependency/cache growth.",
+      "evidencePath": "docs/plans/FIELD-21-scale-jump-and-perimeter.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Revert only FIELD21 presentation to released20 runtime6f083f4 if required, preserving v5/rules5 saves, enemy rewards, accepted interior walls, CAMERA17 and the deployment guard. Never clear saves or restore old schema writers."
+    },
+    {
       "id": "loot03b-enemy-channels-and-protected-v5",
       "owner": "vfx",
       "status": "approved",

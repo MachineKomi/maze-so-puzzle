@@ -48,7 +48,7 @@ async function startSamples(page:Page){await page.evaluate(()=>{
   const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
   const camera={x:pane.x-parseFloat(world.style.translate)*parseFloat(world.style.width)/100*cols/100,y:pane.y-parseFloat(world.style.translate.split(' ')[1]!)*parseFloat(world.style.height)/100*cols/100};
   const foreground=board.querySelector<SVGSVGElement>(".maze-foreground");
-  sample.rows.push({foregroundDelta:foreground?Math.max(Math.abs(foreground.getBoundingClientRect().x-w.x),Math.abs(foreground.getBoundingClientRect().y-w.y)):null,time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
+  sample.rows.push({actorZ:Number(getComputedStyle(actor).zIndex),foregroundZ:foreground?Number(getComputedStyle(foreground).zIndex):null,foregroundDelta:foreground?Math.max(Math.abs(foreground.getBoundingClientRect().x-w.x),Math.abs(foreground.getBoundingClientRect().y-w.y)):null,time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
   if(sample.running)requestAnimationFrame(tick);
  };requestAnimationFrame(tick);
 });}
@@ -62,6 +62,7 @@ for(const [width,height] of [[780,312],[1280,720]])test(`JUMP camera follows air
  const rows=await page.evaluate(()=>{const p=(window as any).jumpProof;p.running=false;return p.rows;});
  await writeFile(resolve(output,`camera-${width}.json`),JSON.stringify({before,level:f.level.id,jump:f.jump,from:f.from,to:f.to,rows},null,2));
  await expectUiRouteState(page,f.step.result.state);expect(errors).toEqual([]);
+ for(const r of rows) if(r.jump)expect(r.actorZ).toBeGreaterThan(r.foregroundZ);else expect(r.actorZ).toBeLessThan(r.foregroundZ);
  for(const r of rows) expect(r.foregroundDelta).toBeLessThan(.5);
  if(!before){const air=rows.filter((r:any)=>r.jump);expect(air.length).toBeGreaterThan(6);
   const axis=f.from.left!==f.to.left?'x':'y',a=axis==='x'?f.from.left:f.from.top,z=axis==='x'?f.to.left:f.to.top;
@@ -87,6 +88,30 @@ for(const mode of ['lite','reduced','static','resize','blur'])test(`JUMP bounded
  expect(errors).toEqual([]);
 });
 
+for(const width of [780,1280])test(`FIELD21 horizontal jump depth at departure apex landing ${width}`,async({page})=>{
+ const f=fixtures.find(f=>f.step.direction==='right'&&f.step.result.events.every(e=>['moved','hole-jumped'].includes(e.type)))!;
+ expect(f).toBeTruthy();await page.setViewportSize({width,height:width===780?312:720});
+ await page.clock.install({time:new Date('2026-09-07T00:00:00Z')});await enter(page,f);
+ await page.clock.pauseAt(new Date('2026-09-07T01:00:00Z'));
+ await page.keyboard.press(keyForDirection[f.step.direction]);const rows=[];let prior=0;
+ for(const [name,time]of [['departure',16],['apex',192],['landing',416]] as const){
+  await page.clock.runFor(time-prior);prior=time;
+  const row=await page.evaluate(()=>{
+   const actor=document.querySelector<HTMLElement>('.jump-presentation')!,ground=document.querySelector<HTMLElement>('.jump-ground')!,wall=document.querySelector('.maze-foreground')!;
+   return{actorZ:Number(getComputedStyle(actor).zIndex),groundZ:Number(getComputedStyle(ground).zIndex),wallZ:Number(getComputedStyle(wall).zIndex),
+    actorTranslate:actor.style.translate,groundTranslate:ground.style.translate,
+    clocks:[...actor.getAnimations({subtree:true}),...ground.getAnimations({subtree:true})].map(a=>a.currentTime)};
+  });
+  expect(row.actorZ).toBeGreaterThan(row.wallZ);expect(row.groundZ).toBeLessThan(row.wallZ);
+  expect(row.actorTranslate).toBe(row.groundTranslate);expect(row.clocks).toHaveLength(3);
+  expect(new Set(row.clocks).size).toBe(1);rows.push({name,time,...row});
+  await page.locator('.maze-board').screenshot({path:resolve(output,`depth-${width}-${name}.png`)});
+ }
+ await page.clock.runFor(160);await expect(page.locator('.jump-presentation,.jump-ground')).toHaveCount(0);
+ await expectUiRouteState(page,f.step.result.state);
+ await writeFile(resolve(output,`depth-${width}.json`),JSON.stringify({scope:'Real input and engine checkpoint; controlled clock visual proof, not timing',level:f.level.id,rows},null,2));
+});
+
 for(const scenario of ['delayed','quality','geometry','portal'])test(`JUMP isolated shared-clock boundary ${scenario}`,async({page})=>{
  test.skip(before,'Candidate hook integration');const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('http://127.0.0.1:1421/scripts/art_review/jump-clock.html');
@@ -95,7 +120,7 @@ for(const scenario of ['delayed','quality','geometry','portal'])test(`JUMP isola
  if(scenario==='quality')await page.evaluate(()=>{const h=(window as any).jumpHarness;h.quality('static');h.quality('full');});
  if(scenario==='geometry')await page.evaluate(()=>(window as any).jumpHarness.resize());
  await page.waitForTimeout(55);
- const middle=await page.evaluate(()=>({scene:(window as any).jumpHarness.scene(),animations:document.querySelector('.jump-presentation')?.getAnimations({subtree:true}).map(a=>({state:a.playState,time:a.currentTime}))}));
+ const middle=await page.evaluate(()=>({scene:(window as any).jumpHarness.scene(),animations:[...document.querySelectorAll('.jump-presentation,.jump-ground')].flatMap(e=>e.getAnimations({subtree:true})).map(a=>({state:a.playState,time:a.currentTime}))}));
  await writeFile(resolve(output,`clock-${scenario}.json`),JSON.stringify(middle,null,2));
  expect(middle.animations).toHaveLength(3);for(const a of middle.animations!){expect(a.state).toBe('paused');expect(a.time).toBe(middle.animations![0]!.time);}
  if(scenario==='quality'||scenario==='geometry'){expect(middle.scene.position).toEqual({x:7,y:3});expect(middle.animations![0]!.time).toBe(460);}
@@ -113,7 +138,7 @@ test('JUMP rapid ordinary approach and live Sound quality toggle',async({page})=
  await startSamples(page);await page.keyboard.press(keyForDirection[f.prior!.direction]);await page.waitForTimeout(70);await page.keyboard.press(keyForDirection[f.step.direction]);
  await expect(page.locator('.jump-presentation')).toBeVisible();
  await page.locator('[data-focus-id="sound"]').click();await page.locator('input[name="quality"][value="static"]').check();await page.locator('input[name="quality"][value="full"]').check();
- const animations=await page.locator('.jump-presentation').evaluate(e=>e.getAnimations({subtree:true}).map(a=>({state:a.playState,time:a.currentTime})));
+ const animations=await page.locator('.jump-presentation,.jump-ground').evaluateAll(nodes=>nodes.flatMap(e=>e.getAnimations({subtree:true})).map(a=>({state:a.playState,time:a.currentTime})));
  await writeFile(resolve(output,'rapid-sound-animation-handles.json'),JSON.stringify(animations,null,2));
  expect(animations).toHaveLength(3);for(const a of animations){expect(a.state).toBe('paused');expect(a.time).toBe(460);}
  await page.keyboard.press('Escape');await expect(page.locator('.jump-presentation')).toHaveCount(0);await expectUiRouteState(page,f.step.result.state);
