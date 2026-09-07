@@ -33,9 +33,11 @@ All owned browsers/servers stopped. Generated outputs are in the
 [ledger](LOCAL_ARTIFACT_LEDGER.md); no deletion/archive or repository/media clone.
 
 [Docs-only rules](VERCEL_DEPLOYMENT.md) now use actual successful release815deb0.
-Commit/push this documentation closure without rebuilding; the existing guard
-should skip its web build. Do not deploy solely to align a docs SHA with public
-bytes. These current facts supersede every older active/next/live label below.
+Docs closure1b3bfec is on main and was actually canceled by Vercel's Ignored Build
+Step at02:26:19UTC. Its [observed receipt](reviews/2026-09-07-v02216-public-verification.md#observed-documentation-closure)
+is backed up on the current Codex branch without another main push. Include
+that note normally with the next runtime slice; do not deploy solely to align
+a docs SHA with public bytes. These facts supersede older active/next/live labels.
 
 State date: 2026-09-07. Current operating state for **Sol Astra MsP Collab**.
 Replace this state when it changes; keep history in dated records and Git.
