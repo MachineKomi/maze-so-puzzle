@@ -137,25 +137,21 @@
   transform-origin: var(--held-grip-x) var(--held-grip-y);
 }
 .object-sword {
-  animation: item-shine 2.8s ease-in-out infinite;
   inset: 15%;
   width: 70%;
   height: 70%;
 }
 .object-potion {
-  animation: item-shine 2.8s ease-in-out infinite;
   inset: 15%;
   width: 70%;
   height: 70%;
 }
 .object-boots {
-  animation: item-shine 2.8s ease-in-out infinite;
   inset: 15%;
   width: 70%;
   height: 70%;
 }
 .object-key {
-  animation: item-shine 2.8s ease-in-out infinite;
   inset: 15%;
   width: 70%;
   height: 70%;
@@ -168,6 +164,25 @@
   transform-origin: 50% 100%;
   width: 82%;
   height: 82%;
+}
+/* DELIGHT26: quiet pickups always retain their light. The static backing uses
+ * the existing tile/depth owner; no breathing filter, new node or frame owner. */
+.maze-board .object-layer:is(.object-kind-sword,.object-kind-potion,.object-kind-boots,.object-kind-spring-boots,.object-kind-antidote-leaf,.object-kind-key,.object-kind-treasure)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 13%;
+  top: 23%;
+  width: 74%;
+  height: 66%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(ellipse, #fff5d6b8 0%, #ffe6a477 28%, var(--pickup-glow, #ffd87950) 48%, transparent 72%);
+}
+.maze-board .object-kind-key { --pickup-glow: var(--lock-glow); }
+.maze-board .object-layer:is(.object-kind-sword,.object-kind-potion,.object-kind-boots,.object-kind-spring-boots,.object-kind-antidote-leaf,.object-kind-key,.object-kind-treasure) > .maze-object {
+  animation: none;
+  filter: drop-shadow(0 2px 2px #371b3e57) drop-shadow(0 0 2px #fff1b3a6);
 }
 .object-portal {
   inset: 4%;
@@ -1041,7 +1056,6 @@
   width: 84%;
   height: 84%;
   filter: drop-shadow(0 4px 3px rgba(79,56,105,.2));
-  animation: treasure-idle 1.25s ease-in-out infinite alternate;
 }
 .treasure-amount {
   background: #fff4bb;
@@ -1362,9 +1376,6 @@
   --lock-core: #ffd75b;
   --lock-glow: rgba(255, 184, 38, 0.94);
 }
-.object-layer[data-key-color] .object-key {
-  animation: colour-key-hover 2s ease-in-out infinite;
-}
 .object-layer[data-key-color] .object-door {
   animation: colour-door-breathe 2.4s ease-in-out infinite;
 }
@@ -1499,11 +1510,6 @@
 @keyframes goal-glow {
   0%, 100% { filter: drop-shadow(0 1px 2px rgba(92, 62, 104, 0.2)); transform: scale(0.96) rotate(-1deg); }
   50% { filter: drop-shadow(0 0 7px rgba(255, 218, 87, 0.74)); transform: scale(1.04) rotate(1deg); }
-}
-
-@keyframes item-shine {
-  0%, 100% { filter: drop-shadow(0 1px 1px rgba(62, 47, 70, 0.18)); transform: translateY(0); }
-  50% { filter: drop-shadow(0 0 5px rgba(255, 229, 117, 0.72)); transform: translateY(-3%); }
 }
 
 @keyframes goblin-bob {
@@ -1727,7 +1733,6 @@
   100% { opacity: 0; transform: scale(1.18); }
 }
 
-@keyframes treasure-idle { to { transform:translateY(-4%) rotate(1.5deg); filter:drop-shadow(0 6px 4px rgba(79,56,105,.17)) brightness(1.06); } }
 
 
 
@@ -1795,17 +1800,6 @@
   76% { opacity: .86; transform: translate(var(--bubble-drift), -55%) scale(1); }
   88% { opacity: .6; transform: translate(var(--bubble-drift), -65%) scale(1.18); }
   100% { opacity: 0; transform: translate(var(--bubble-drift), -70%) scale(1.23); }
-}
-
-@keyframes colour-key-hover {
-  0%, 100% {
-    transform: translateY(1%) scale(0.97);
-    filter: drop-shadow(0 0 3px var(--lock-glow)) drop-shadow(0 2px 2px rgba(54, 35, 67, 0.3));
-  }
-  50% {
-    transform: translateY(-5%) scale(1.045);
-    filter: brightness(1.09) drop-shadow(0 0 8px var(--lock-glow)) drop-shadow(0 0 13px var(--lock-core));
-  }
 }
 
 @keyframes colour-door-breathe {

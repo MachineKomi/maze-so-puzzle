@@ -48,7 +48,7 @@ const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woo
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
 if (!fixture || (!jumpReview && !victoryReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
 if(chestReview&&!fixture.baselineSnapshot)throw Error('Chest comparison requires the actual historical object graph');
-if (idleReview && !(fixture.visibleHazardCells > 0)) throw Error('Idle hazard comparison requires a nonempty visible-hazard fixture');
+if (idleReview && !(fixture.visibleHazardCells > 0 || fixture.visiblePickupCount > 0)) throw Error('Idle comparison requires visible hazards or authored pickups');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');
 const candidateBundle = index.match(/src="(\/assets\/[^"]+\.js)"/)[1];
@@ -112,6 +112,7 @@ report.captureTrace=captureTrace;report.captureLayers=captureLayers;
 report.captureScreenshots=captureScreenshots;
 report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
 report.candidateFolded=process.env.MAZE_REVIEW_FOLDED==='1';
+report.baselineFolded=process.env.MAZE_REVIEW_BASELINE_FOLDED==='1';
 report.saveKeys={seed:data.keys.run,baseline:process.env.MAZE_REVIEW_BASELINE_RUN_KEY||data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
 report.coldOpeningProbe=coldProbe;
 report.mountSample=mountSample;
@@ -152,7 +153,7 @@ try {
           await page.getByRole('button', { name: /^Continue/ }).click();
           if(victoryReview)await page.locator('.dialog-celebration').waitFor();
           await page.locator('.maze-terrain-svg').waitFor();
-          if(mode==='candidate' && report.candidateFolded) await page.getByRole('button',{name:'Fold sidebar'}).click();
+          if(mode==='candidate' ? report.candidateFolded : report.baselineFolded) await page.getByRole('button',{name:'Fold sidebar'}).click();
           if(mode==='candidate' && report.candidateStyle) await page.addStyleTag({content:report.candidateStyle});
           const bundle = await page.locator('script[type="module"]').getAttribute('src');
           if (bundle !== (mode === 'baseline' ? baselineBundle : candidateBundle)) throw Error('Wrong entry module');
@@ -192,7 +193,10 @@ try {
           });
           const resources = () => page.evaluate(() => {
             const c=document.querySelector('canvas.vfx-rewards');
+            const board=document.querySelector('.maze-board').getBoundingClientRect();
+            const pickups=[...document.querySelectorAll('.object-kind-sword,.object-kind-potion,.object-kind-boots,.object-kind-spring-boots,.object-kind-antidote-leaf,.object-kind-key,.object-kind-treasure')].filter(el=>{const r=el.getBoundingClientRect();return r.right>board.left&&r.left<board.right&&r.bottom>board.top&&r.top<board.bottom;});
             return { nodes:document.querySelectorAll('*').length, heapBytes:performance.memory?.usedJSHeapSize??null,
+              visiblePickups:pickups.length,pickupAnimations:pickups.flatMap(el=>el.getAnimations({subtree:true})).length,
               images:document.images.length,reward:c?{width:c.width,height:c.height,running:c.dataset.running,tokens:c.dataset.tokens,arrivals:c.dataset.arrivals,peak:c.dataset.peak}:null };
           });
           const resourcesBefore=await resources();

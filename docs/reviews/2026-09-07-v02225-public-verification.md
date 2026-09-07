@@ -73,6 +73,15 @@ Step; no rebuild, version bump or manual deployment for documentation. Record
 the actual skip after it occurs. No files deleted or archived, no repo/media
 clone or native package. Owned QA browsers are closed; unowned4271 is preserved.
 
+### Observed documentation closure
+
+Documentation checkpoint **ac055e576e572a077ac752a3efbd98dfff6866bf** is backed up
+on main and codex/expansive-exploration. The unchanged local guard returned SKIP
+against actual successful c267308. Vercel reported **Canceled by Ignored Build
+Step** at **16:47:58 UTC** for the [documentation deployment](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/CTqqoNG2jAGmUxvtvifMgrLqQnsG).
+No further game payload was built. This observation is backed up on the Codex
+branch only for the next runtime slice, avoiding a recursive main push.
+
 ## Public evidence inventory
 
 | Packet | Files | Bytes | Report SHA256 |

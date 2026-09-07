@@ -1,5 +1,10 @@
 # Integrated implementation roadmap through final convergence
 
+**Current work — DELIGHT26 A:** [steady pickup presence](DELIGHT-26-calm-pickup-presence.md)
+is in qualification after published25. C durable-earned keepsake presentation
+follows separately, then LEARN-01. Keep the existing accepted geometry/reward
+owners and broader controls/campaign/Garden roadmap; no broad ambient expansion.
+
 **Current delivery — web0.22.25:** [public receipt](../reviews/2026-09-07-v02225-public-verification.md) verifies spacious exploration, the folding essentials sidebar and reversible Classic view on both origins. Frozen c931bc3, reviewed4359772, releasec267308; actual independent Sol supports bounded web publication. Astra owns runtime on codex/expansive-exploration. Q11/P25 is ready; physical Apple/3GB/native acceptance remains open. Next: DELIGHT A pickup presence and C post-write earned fanfare, then LEARN-01 including STORY-RESCUE-01. Preserve the wider roadmap and usable Garden dependencies before rare eggs. Earlier current/live/next labels below are historical.
 
 

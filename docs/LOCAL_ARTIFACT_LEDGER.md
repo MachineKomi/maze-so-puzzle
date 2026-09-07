@@ -1,5 +1,19 @@
 # Local artifact ledger and cleanup review
 
+## DELIGHT26 active artifact island
+
+Four frozen release-v02225 entry/identity files share unchanged public media.
+New presence26-* baseline, pickup/browser, timing, summary and publication
+proofs stay under C:/GameDev/maze-game-qa/performance. One existing dist in place;
+no repo/media copy, new dependency, native package, deletion or archive. Count
+files/bytes at closeout and preserve unowned4271. Baseline14 and candidate56
+initial collection/visual checks are retained; final colored-key/dense and
+source-matched proof follows. C earned-keepsake fanfare remains next.
+
+EXPLORE25 closure guard adds one97-byte log, explore25-doc-guard.log. Complete
+local/public/guard slice: **628 files /289262283 bytes**. Actual Vercel docs skip
+is recorded in the public receipt; this observation remains branch-only.
+
 ## EXPLORE25 artifact island — completed
 
 Created four-file `C:/GameDev/maze-game-qa/performance/release-v02224` from verified live24 dist entry bytes (HTML/JS/CSS/identity only, shared unchanged public media). `explore25-baseline`, `explore25-layout-r1` and subsequent explore25-* evidence remain external; one in-place dist was rebuilt. Completed local/public inventories are below. No files deleted/archived, no repo or media clone; unowned port4271 is preserved.
@@ -1038,3 +1052,36 @@ logs; no deletion/archive or repo/media clone. All owned browser helpers closed.
 | v02225-public-20260907 |5|5656644|4efc6ddcf9365c2ea98c9aeab4b5853a7376e7de3ae1508c691ee31dc23c7349|
 | explore25-public-canonical |14|3956911|2e587c7b285c3e7e6e4b8c3fcaafc4c4f16cc34dace09284d100c1785e99288a|
 | explore25-public-alias |14|3833683|645fa568bf323eafc728f59546504c65ca012acde1a9da0143bf1660bbe371a2|
+
+## DELIGHT26 completed local qualification
+
+Snapshot before this small inventory receipt: **427 files /159988555 bytes**.
+External performance root only. Retain failed fixture attempts and all proof for
+explicit Human cleanup review. No deletion/archive, repo/media clone or native
+package. One in-place dist; unowned4271 untouched.
+
+| Packet | Files | Bytes |
+| --- | ---: | ---: |
+| presence26-baseline |30|9062636|
+| presence26-baseline.log |1|1917|
+| presence26-browser |114|35573714|
+| presence26-browser.log |1|5932|
+| presence26-check.log |1|1285|
+| presence26-dense |4|21075|
+| presence26-dense-r2 |6|2670268|
+| presence26-dense-r2.log |1|738|
+| presence26-dense.log |1|2776|
+| presence26-final-browser |198|81699069|
+| presence26-final-browser.log |1|12041|
+| presence26-frozen-build.log |1|947|
+| presence26-idle-frames |1|1435560|
+| presence26-idle-frames.log |1|27904|
+| presence26-idle-work |25|15774375|
+| presence26-idle-work.log |1|28308|
+| presence26-moving-frames |1|854488|
+| presence26-moving-frames.log |1|33200|
+| presence26-moving-work |25|11926481|
+| presence26-moving-work.log |1|33786|
+| presence26-summary |7|36518|
+| presence26-summary.log |1|6442|
+| release-v02225 |4|779095|
