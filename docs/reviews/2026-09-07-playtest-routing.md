@@ -39,3 +39,22 @@ This routing supersedes claims that hazard beauty is merely awaiting its first
 feedback. Q04 now records a requested revision; no repeat of the rejected14
 playtest is needed. Q01's next walls/sprites build and Q02's post13 jump check
 remain independent. No new Human decision blocks these authorized fixes.
+
+## Book-loop source triage,1f8ab73
+
+Programme independently traced Book→`requestEnterLevel`→normal `enterLevel`.
+The actual Next handler uses current-level-derived `campaignIndex+1`; an
+explicit Next restart is not yet reproduced. A concrete loop-like branch is
+the older PT10 missing-friend policy: **Stay here is primary and initially
+focused**; Enter resumes/disarms the same exit without banking. Book then
+labels that run Current and resumes it. Same-ID Book selection also retains
+tester mode because its active-run view omits mode. Neither source observation
+is a claimed reproduction of the Human's exact event.
+
+Next slice must begin through actual Book selection and cover explicit Next
+versus default Enter, partial/perfect completion, middle/final chapters and
+same-ID tester selection. Adopt the newer next-story-primary request, retain
+explicit Stay/Restart, preserve provisional reward wording and exactly-once
+finalize/save-failure/future-profile protection. Do not add a Choose-maze action
+that bypasses the completion transaction. Existing Home-launched tests expecting
+Stay focus need an explicit latest-steer update, not silent test weakening.

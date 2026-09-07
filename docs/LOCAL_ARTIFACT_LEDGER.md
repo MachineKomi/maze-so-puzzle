@@ -10,6 +10,8 @@ Under `C:/GameDev/maze-game-qa/performance/`, retained with no deletion/archive:
 | wall04c-racks-reviewed-20260907 |28 /21589064|13 passing expanded art racks;18 light/theme frames,32friends,12enemies,8weapons,8items and four cage/outlier sets. Actual Sol reviewed pixels/metadata. |
 | wall04c-moving-pilot-20260907 |13 /37978158|One pilot pair per viewport, explicitly non-qualifying. |
 | wall04c-moving-final-20260907 |29 /97458143|Five moving pairs per viewport plus warmups, raw traces/hashes,5f8fe38 before field-icon eligibility narrowing. |
+| wall04c-qualified-browser-20260907 |116 /117204022|Final1f8ab73:41 cases all pass, no skips/flakes; actual campaign/maximum-maze/movement/41case output,16rewardcontexts and24token cap. |
+| wall04c-grayscale-20260907 |4 /7075322|Actual-source two8-light grayscale sheets, receipt and standalone reproscript. Owned Vite1421/browser stopped on completion. |
 
 The64,847B `src/ui/__snapshots__/fieldDetailContract.test.ts.snap` is intentional
 source contract evidence:58 reviewed source/geometry tuples, no image copies.

@@ -202,15 +202,18 @@ for(const kind of ["door-opened","enemy-defeated","hole-jumped","portal-warped"]
   });
 }
 
-test("MOVE five friends follow real corridors, reverse and stay off camera",async({page})=>{
+for(const [width,height] of [[780,312],[1194,834]]) test(`MOVE five friends follow real corridors and preserve edge Power ${width}`,async({page})=>{
   const level=CURATED_LEVELS.find(l=>l.id==="moonlit-friendship-quest")!;
   const route=deriveRoute(level,solveLevel(level,{requireAllAnimals:true}).directions);
-  await page.setViewportSize({width:960,height:540});await selectTesterLevel(page,level);await page.emulateMedia({reducedMotion:"reduce"});await page.locator(".maze-board").focus();
+  await page.setViewportSize({width:width!,height:height!});await selectTesterLevel(page,level);await page.emulateMedia({reducedMotion:"reduce"});await page.locator(".maze-board").focus();
   let procession=createFollowerProcession(level.start),state=createInitialGameState(level);const records=[];
   let offCamera=false;
   const check=async()=>{
     await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
     const painted=await travelState(page),expected=followerTargets(procession);
+    const badge=await page.locator('.player-layer > .player-power').boundingBox(),board=await page.locator('.maze-board').boundingBox();
+    expect(badge!.y, 'Complete Power line stays below the board edge').toBeGreaterThanOrEqual(board!.y+2);
+    expect(badge!.y+badge!.height).toBeLessThanOrEqual(board!.y+board!.height-2);
     expect(painted.followers.map(f=>f.id)).toEqual(expected.map(f=>f.id));
     for(let i=0;i<expected.length;i++){
       const f=painted.followers[i]!,e=expected[i]!;expect(f.x).toBeCloseTo(e.point.x,4);expect(f.y).toBeCloseTo(e.point.y,4);
@@ -237,8 +240,8 @@ test("MOVE five friends follow real corridors, reverse and stay off camera",asyn
     procession=advanceFollowerProcession(procession,state.position,state.rescuedAnimalIds);await check();
   }
   expect(offCamera).toBe(true);
-  await page.screenshot({path:resolve(output,"five-friends-reversed.png")});
-  await writeFile(resolve(output,"five-friends.json"),JSON.stringify({levelId:level.id,offCamera,records},null,2));
+  await page.screenshot({path:resolve(output,`five-friends-reversed-${width}.png`)});
+  await writeFile(resolve(output,`five-friends-${width}.json`),JSON.stringify({levelId:level.id,offCamera,records},null,2));
 });
 
 test("MOVE ordinary save, Book, reload, restart and hidden-page cancellation",async({page,context})=>{

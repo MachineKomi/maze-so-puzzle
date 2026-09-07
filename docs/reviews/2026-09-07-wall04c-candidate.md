@@ -81,6 +81,17 @@ within moving scope; final candidate hash/jump/idle/browser binding remains.
 The Human's new hazard/Book/holes/pace feedback is preserved in the
 [September7 routing](2026-09-07-playtest-routing.md).
 
+Actual Sol found a final41-case screenshot issue despite passing assertions:
+the Power20 label clipped at the board top in the five-friend reversal at row1.
+The source clamp now reserves.36tile instead of.16 for the complete badge
+line/stroke. Body and ground registration are unchanged. Both full five-friend
+journeys/reversals at780×312 and1194×834 pass an added2px board-edge containment
+assertion at every settled checkpoint. Retain the former clipped image honestly.
+Pre-label five-pair jump evidence at1f8ab73 shows4.79%/17.01% median Raster rise
+and no frame>16.8ms. Actual Sol independently accepts source/count attribution
+to the translated foreground paint graph and larger artwork within Chromium
+scope. Post-label source-matched moving/jump/idle evidence is still required.
+
 Pre-final measured gzip9 JS165884, CSS24216, public155542751B. Versus live14:
 +1275JS/+375CSS/no media. The prior JS ceiling165557 is exceeded by327bytes.
 Astra allocates **500gzip9 JS bytes**, no CSS/public allowance, specifically for

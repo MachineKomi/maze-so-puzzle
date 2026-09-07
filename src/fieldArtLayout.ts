@@ -22,6 +22,9 @@ export function fieldArtStyle(geometry: ArtGeometry, role: FieldArtRole): CSSPro
     "--field-pivot": `${frame.anchor * 100}%` } as CSSProperties;
 }
 export function fieldActorStyle(geometry: ArtGeometry, rowsAbove = Infinity): CSSProperties {
-  return { "--field-label-top": `${Math.max(measureFieldArt(geometry).head - .04, .16 - rowsAbove) * 100}%`,
+  // Badge line box is .23tile at the normal .25tile type size. Reserve .36
+  // for its complete line/stroke/shadow at the board edge, including row1's
+  // taller-than-tile actor; moving the image/feet would break registration.
+  return { "--field-label-top": `${Math.max(measureFieldArt(geometry).head - .04, .36 - rowsAbove) * 100}%`,
     "--field-ground": `${FIELD_GROUND_Y * 100}%` } as CSSProperties;
 }
