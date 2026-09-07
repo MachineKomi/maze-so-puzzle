@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { CURATED_LEVELS } from "../../src/game/levels";
 import { solveLevel } from "../../src/game/solver";
@@ -30,6 +30,55 @@ const fixtures = [CURATED_LEVELS[1]!, CURATED_LEVELS[9]!, CURATED_LEVELS[11]!].m
   return { id: level.id, level, direction: choice.direction, count: 4, before,
     snapshot: createActiveRunSnapshot({ level, game: before, mode: "normal", runId: `run-camera17-${level.id}`,
       revealedTiles: new Set(route.slice(0, choice.start + 1).flatMap(s => getVisibleTileKeys(level, s.before.position))) }) };
+});
+
+// Deterministic clock proof, kept separate from real-time performance samples.
+// Capture the actual frame immediately before and after the travel owner rebases.
+for (const dpr of [1, 2, 3]) test(`CAMERA17 adjacent rebase pixels DPR${dpr}`, async ({ browser }) => {
+  const data = JSON.parse(await readFile(resolve(process.env.MAZE_CAMERA_HAZARD_FIXTURES ?? "../maze-game-qa/performance/v02216-final-browser-20260907/hazards/fixtures.json"), "utf8"));
+  const f = data.fixtures.find((f: any) => f.id === "hazard-moving");
+  const context = await browser.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: dpr });
+  try {
+    const page = await context.newPage();
+    await page.clock.install({ time: new Date("2026-09-07T00:00:00Z") });
+    await page.addInitScript(({ data, f }) => {
+      localStorage.setItem(data.keys.run, JSON.stringify(f.snapshot)); localStorage.setItem(data.keys.progress, JSON.stringify(data.progress));
+      localStorage.setItem(data.keys.preferences, JSON.stringify({ ...data.preferences, quality: "full", motion: "full", pace: "regular", muted: true }));
+    }, { data, f });
+    await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click(); await page.getByRole("button", { name: /^Continue/ }).click();
+    await page.locator(".maze-board").waitFor();
+    await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
+    await page.clock.pauseAt(new Date("2026-09-07T01:00:00Z"));
+    await page.evaluate(() => { for (const a of document.getAnimations()) { a.pause(); a.currentTime = 0; } });
+    const clip = (await page.locator(".maze-board").boundingBox())!;
+    const geometry = () => page.evaluate(() => {
+      const board = document.querySelector(".maze-board")!, world = board.querySelector<HTMLElement>(".camera-world")!;
+      const svg = board.querySelector<SVGSVGElement>(".maze-terrain-svg")!, box = svg.viewBox.baseVal;
+      const t = world.style.translate.split(" ").map(parseFloat);
+      return { window: svg.getAttribute("viewBox"), camera: [box.x - (t[0] || 0) * box.width / 100, box.y - (t[1] || 0) * box.height / 100],
+        liquid: board.querySelector(".maze-liquid-svg")!.getAttribute("viewBox"), foreground: board.querySelector(".maze-foreground")!.getAttribute("viewBox"),
+        state: (board as HTMLElement).dataset.travelState };
+    });
+    let previous = { geometry: await geometry(), png: await page.screenshot({ clip }) };
+    const pairs = []; let rebase = 0;
+    for (let step = 0; step < 4 && rebase < 2; step++) {
+      await page.keyboard.press("ArrowRight");
+      for (let frame = 0; frame < 15; frame++) {
+        await page.clock.runFor(16);
+        const current = { geometry: await geometry(), png: await page.screenshot({ clip }) };
+        expect(current.geometry.window).toBe(current.geometry.liquid); expect(current.geometry.window).toBe(current.geometry.foreground);
+        expect(Math.abs(current.geometry.camera[0]! - previous.geometry.camera[0]!)).toBeLessThan(.081);
+        if (current.geometry.window !== previous.geometry.window) {
+          await writeFile(resolve(out, `rebase-dpr${dpr}-${rebase}-before.png`), previous.png);
+          await writeFile(resolve(out, `rebase-dpr${dpr}-${rebase}-after.png`), current.png);
+          pairs.push({ before: previous.geometry, after: current.geometry }); rebase++;
+        }
+        previous = current;
+      }
+    }
+    expect(rebase).toBeGreaterThan(0);
+    await writeFile(resolve(out, `rebase-dpr${dpr}.json`), JSON.stringify({ scope: "Controlled 16ms clock and paused ambient poses; visual continuity, not performance timing", dpr, clip, pairs }, null, 2));
+  } finally { await context.close(); }
 });
 test.beforeAll(async () => {
   await mkdir(out, { recursive: true });

@@ -217,7 +217,10 @@ for(const [width,height] of [[780,312],[1194,834]]) test(`MOVE five friends foll
     expect(badge!.y+badge!.height).toBeLessThanOrEqual(board!.y+board!.height-2);
     expect(painted.followers.map(f=>f.id)).toEqual(expected.map(f=>f.id));
     for(let i=0;i<expected.length;i++){
-      const f=painted.followers[i]!,e=expected[i]!;expect(f.x).toBeCloseTo(e.point.x,4);expect(f.y).toBeCloseTo(e.point.y,4);
+      const f=painted.followers[i]!,e=expected[i]!;
+      // Computed layout is quantized to 1/64 CSS px; compare in painted pixels.
+      expect(Math.abs(f.x-e.point.x)*painted.cell.x).toBeLessThan(.025);
+      expect(Math.abs(f.y-e.point.y)*painted.cell.y).toBeLessThan(.025);
       offCamera ||= f.x<painted.camera.x||f.x>painted.camera.x+5||f.y<painted.camera.y||f.y>painted.camera.y+5;
     }
     records.push(painted);

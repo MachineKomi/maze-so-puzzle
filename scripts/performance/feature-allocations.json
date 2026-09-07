@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "camera17-bounded-world-and-grouped-map",
+      "owner": "controls",
+      "status": "approved",
+      "compressedJsBytes": 800,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates800 gzip9 JS bytes for bounded world/foreground/mask paint extents, static/liquid separation and grouped exploration-map rendering. Version17 measures167006 JS,749 above the prior166257 ceiling and934 above live16;51 bytes cover release/platform compression variation. CSS24220 and public155542751 remain within existing ceilings. No dependency or media growth. This byte allocation alone does not accept timing, Apple playability or release.",
+      "evidencePath": "docs/plans/CAMERA-17-bounded-scene-performance.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Revert the complete CAMERA-17 camera-window, travel-binding, terrain-layer, map and associated CSS seam to web0.22.16 runtime09d5475c522c410cbe723d4e0dd8bd76945400f6. Keep existing saves, accepted tall walls, liquid materials, Book/MOVE fixes and the Vercel guard. No deletion or save downgrade."
+    },
+    {
       "id": "hazard03-connected-living-surfaces",
       "owner": "vfx",
       "status": "approved",

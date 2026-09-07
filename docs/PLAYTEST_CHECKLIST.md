@@ -1,5 +1,20 @@
 # Family playtest checklist
 
+## New short journey — P19 / Q08, CAMERA-17
+
+**Not live yet:** engineering qualification is in progress. Once the changed
+build is published, use the same browser and Full/Regular settings on iPhone13
+and iPad8. Try campaign maze2, then Lanternlight Labyrinth; walk back and forth,
+turn quickly and jump over a hole away from the outer camera clamp. Check wall/
+sprite alignment, unexplored map fog and whether camera stutter persists or
+worsens after a few minutes. Note build, device, OS and browser version. The
+smooth iPhone17 is a useful optional control; no need to replay the whole game.
+
+The [new report](user-playtests/2026-09-07-modest-device-camera-stutter.md) does not
+establish a RAM floor. Local Chromium/CPU throttling cannot close physical Apple,
+3GB, thermal or Safari acceptance. Q08 owns this observation; other P18/P17
+visual and progression observations remain useful independently.
+
 ## Current short journey — P18 / Q04 and Q07, web0.22.16
 
 **Ready:** [published0.22.16](reviews/2026-09-07-v02216-public-verification.md).

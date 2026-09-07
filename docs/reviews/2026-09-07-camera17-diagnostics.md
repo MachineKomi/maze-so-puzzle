@@ -58,3 +58,21 @@ Small candidate entry snapshots preserve the first two measured renderers;
 media is shared, not cloned. Inventory belongs to the
 [artifact ledger](../LOCAL_ARTIFACT_LEDGER.md). No files were deleted/archived.
 Physical iPhone13/iPad8, WebKit, low-memory and thermal acceptance remain open.
+
+## Promotion control and corrected tests
+
+`camera17-promotion-control` freezes0f7ffd8's entry. The ablation report compares
+that identical JS/CSS with versus without the bounded transform/will-change
+hints (containment retained). One measured pair, CPU4, normal trace without
+snapshot/layer capture: removing promotion decreases Paint653.449→385.346ms
+phone and678.249→392.050ms tablet, but increases Raster1604.536→2157.434ms
+(+34.46%) and1781.366→3913.778ms (+119.71%). Tablet intervals over20ms rise1→6;
+phone2→1, none over34ms. Retain bounded promotion, subject to final paired review.
+This is an engineering tradeoff and not measured Apple compositor behavior.
+
+The corrected complete unit run passes672/672, including three map fog/guidance/
+marker-precedence checks. Final version17 browser matrix is now running; initial
+failed reports above remain preserved. Version17 allocation is800 gzip9 JS bytes
+above the prior ceiling; measured167006 JS/24220 CSS/public155542751. No assets,
+dependencies, save or engine changes. The initial unallocated749-byte excess was
+correctly rejected before the explicit named allocation.

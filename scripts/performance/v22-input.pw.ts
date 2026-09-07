@@ -815,21 +815,22 @@ for (const kind of SUCCESS_EVENTS) {
         };
         const cellX = board.clientWidth / cols, cellY = board.clientHeight / cols;
         const worldTranslation = (world.style.translate || "0px").split(" ");
+        const windowBox = board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
         const worldTiles = (axis: number, size: number, cell: number) => {
           const value = worldTranslation[axis] ?? "0px";
           return parseFloat(value) * (value.endsWith("%") ? size / 100 : 1 / cell);
         };
         const playerTranslation = translation(player);
         // Measure the composed offset, not the old left/top-only implementation.
-        const camera = { x: -parseFloat(world.style.left) * cols / 100 - worldTiles(0, grid.width, cellX),
-          y: -parseFloat(world.style.top) * cols / 100 - worldTiles(1, grid.height, cellY) };
+        const camera = { x: windowBox.x - worldTiles(0, windowBox.width, cellX),
+          y: windowBox.y - worldTiles(1, windowBox.height, cellY) };
         return {
           camera,
           worldOrigin: { left: world.style.left, top: world.style.top },
           player: { x: parseFloat(player.style.left) * cols / 100 + camera.x + playerTranslation[0]! / cellX,
             y: parseFloat(player.style.top) * cols / 100 + camera.y + playerTranslation[1]! / cellY },
           followers: [...board.querySelectorAll<HTMLElement>("[data-follower-id]")].map(node => ({
-            id: node.dataset.followerId!, point: { x: parseFloat(node.style.left) * grid.width / 100, y: parseFloat(node.style.top) * grid.height / 100 },
+            id: node.dataset.followerId!, point: { x: parseFloat(getComputedStyle(node).left) / cellX + windowBox.x, y: parseFloat(getComputedStyle(node).top) / cellY + windowBox.y },
           })),
           translations: [player, ...board.querySelectorAll<HTMLElement>("[data-follower-id]")].map(translation),
         };

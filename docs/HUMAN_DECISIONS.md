@@ -1,5 +1,13 @@
 # Human decisions and steer
 
+**September7 latest Human priority:** investigate and fix modest-device camera
+stutter, implementing the [CAMERA-17 plan](plans/CAMERA-17-bounded-scene-performance.md)
+before LOOT-03. The [reported iPhone13/iPad8 failures and iPhone17 success](user-playtests/2026-09-07-modest-device-camera-stutter.md)
+are all retained; no RAM minimum or Apple-wide cause is established. Astra owns
+runtime; actual Sol independently reviews. Physical confirmation remains Q08/P19;
+source/lab success must not manufacture Human acceptance. Authorized roadmap and
+qualified deployment continue without requiring another execution prompt.
+
 **September7 delivery result, not new Human approval:** web0.22.16 is published,
 release815deb0/runtime09d5475. [Public receipt](reviews/2026-09-07-v02216-public-verification.md)
 and [actual Sol review](reviews/2026-09-07-v02216-sol-final-review.md) bind Book/MOVE

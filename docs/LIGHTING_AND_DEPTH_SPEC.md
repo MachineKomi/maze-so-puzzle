@@ -1,5 +1,19 @@
 # Wall depth and lighting — implemented WALL-04C contract
 
+## CAMERA-17 paint ownership candidate
+
+Accepted wall topology, caps/sides, foreground occlusion, art scale, light
+direction and global texture phase remain. The moving world and foreground
+are bounded to the view plus four tiles per axis (normally10×10). Static terrain,
+liquid and foreground viewBoxes and static mask regions rebase atomically in the
+same existing travel owner. No per-frame wall geometry generation is introduced.
+
+Animated liquid base/FX and their local clip definitions occupy a separate lower
+SVG. Static floor fills the dry complement above it; banks, cast/contact and walls
+retain their order. This separates animated paint from the expensive static wall
+graph without removing Full effects. [Plan/qualification boundary](plans/CAMERA-17-bounded-scene-performance.md)
+owns the candidate; joint state owns actual release status.
+
 ## Connected liquid revision — delivered web0.22.16
 
 HAZARD-03 preserves the accepted WALL-04C geometry below. Cast/contact now use

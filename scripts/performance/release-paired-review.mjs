@@ -1,4 +1,4 @@
-// Release comparison against frozen live0.22.10; records served hashes and gzip traces.
+// Release comparison against a frozen entry; records served hashes and optional gzip traces.
 // Run alone after the source-matched build, with no dev edits or other browser jobs.
 import { gzipSync } from "node:zlib";
 import { createServer } from 'node:http';
@@ -8,6 +8,8 @@ import { resolve, extname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
+import { platform, release, cpus, totalmem } from 'node:os';
+import { readBuildProvenance } from './build-provenance.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/performance/phone02-book-paired-20260906');
@@ -17,6 +19,9 @@ const pairCount = Number(process.env.MAZE_REVIEW_PAIRS ?? 5);
 const cpuRate = Number(process.env.MAZE_REVIEW_CPU_RATE ?? 1);
 const captureTrace = process.env.MAZE_REVIEW_TRACE !== '0';
 const captureLayers = process.env.MAZE_REVIEW_LAYERS === '1';
+const cycles = Number(process.env.MAZE_REVIEW_CYCLES ?? 1);
+if (!Number.isInteger(cycles) || cycles < 1 || cycles > 16) throw Error('Use 1-16 reversible route cycles');
+if (!Number.isFinite(cpuRate) || cpuRate < 1 || cpuRate > 8) throw Error('Unsupported CPU throttle');
 const profiles = process.env.MAZE_REVIEW_PROFILES ? JSON.parse(process.env.MAZE_REVIEW_PROFILES)
   : [{width:780,height:312,dpr:2},{width:1193,height:833,dpr:2}];
 if (![1,5].includes(pairCount)) throw Error('Use one pilot pair or five qualification pairs');
@@ -28,7 +33,8 @@ const { chromium } = await import(pathToFileURL(playwrightPath).href);
 await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
 const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
-if (!fixture || (!jumpReview && (fixture.direction !== 'right' || fixture.count < 4))) throw Error('Expected frozen engine-derived route');
+const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
+if (!fixture || (!jumpReview && (!reverse[fixture.direction] || fixture.count < 4))) throw Error('Expected frozen engine-derived route');
 if (idleReview && !(fixture.visibleHazardCells > 0)) throw Error('Idle hazard comparison requires a nonempty visible-hazard fixture');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');
@@ -36,6 +42,8 @@ const candidateBundle = index.match(/src="(\/assets\/[^"]+\.js)"/)[1];
 const baselineIndex=await readFile(resolve(baseline,'index.html'),'utf8');
 const baselineBundle=baselineIndex.match(/src="(\/assets\/[^"]+\.js)"/)[1];
 const hashes = { baseline: sha(await readFile(resolve(baseline, baselineBundle.slice(1)))), candidate: sha(await readFile(resolve(root,'dist',candidateBundle.slice(1)))) };
+const buildIdentity = await readBuildProvenance();
+if (!buildIdentity.runtimeInputsMatch || !buildIdentity.distMatches) throw Error('Candidate build is not source matched');
 const baselineIdentity=process.env.MAZE_REVIEW_BASELINE ? JSON.parse(await readFile(resolve(baseline,'identity.json'),'utf8')) : null;
 if(baselineIdentity) for(const row of baselineIdentity.rows) {const b=await readFile(resolve(baseline,row.file));if(b.length!==row.bytes||sha(b)!==row.sha256)throw Error('Frozen entry drift');}
 else if (hashes.baseline !== 'e4cb4b603e531a4a67da0bab5bae26599bf594237d9005fb699a8b5a043b135a') throw Error('Frozen baseline drift');
@@ -66,6 +74,10 @@ const report = { date: new Date().toISOString(), head: execFileSync('git', ['rev
   scope: 'Headless local Chromium same-host paired frame/trace diagnostic; no physical iPad, native, GPU-time or Human beauty acceptance. Trace durations overlap and are not additive.', rows: [] };
 report.pairCount=pairCount; report.pilot=pairCount!==5;
 report.cpuRate=cpuRate;
+report.cycles=cycles;
+report.buildIdentity=buildIdentity;
+report.host={platform:platform(),release:release(),cpu:cpus()[0]?.model,logicalCpus:cpus().length,totalMemoryBytes:totalmem(),node:process.version,
+  lockSha256:sha(await readFile(resolve(root,'package-lock.json'))),powerAndThermal:'Not controlled; diagnostic host, no physical low-memory qualification'};
 report.captureTrace=captureTrace;report.captureLayers=captureLayers;
 report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
@@ -119,11 +131,14 @@ try {
               if (!window.wallAb.done) requestAnimationFrame(tick);
             }; requestAnimationFrame(tick);
           });
-          // Four reversible four-step legs: deterministic 16 attempts, ~3.84s.
+          const resources = () => page.evaluate(() => ({ nodes:document.querySelectorAll('*').length,
+            heapBytes:performance.memory?.usedJSHeapSize??null, images:document.images.length }));
+          const resourcesBefore=await resources();
+          // Four reversible four-step legs per cycle; preserve engine-derived direction.
           if(idleReview) await page.waitForTimeout(8000);
           else if(jumpReview) for(let step=0;step<8;step++){await page.keyboard.press(step%2?'ArrowLeft':'ArrowRight');await page.waitForTimeout(600);}
-          else for (const direction of ['Right', 'Left', 'Right', 'Left']) {
-            for (let step = 0; step < 4; step++) { await page.keyboard.press(`Arrow${direction}`); await page.waitForTimeout(240); }
+          else for (let cycle=0;cycle<cycles;cycle++) for (const direction of [fixture.direction, reverse[fixture.direction], fixture.direction, reverse[fixture.direction]]) {
+            for (let step = 0; step < 4; step++) { await page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`); await page.waitForTimeout(240); }
           }
           const sample = await page.evaluate(key => {
             window.wallAb.done = true; window.wallAbObserver.disconnect();
@@ -137,6 +152,7 @@ try {
             return [name, { count: entries.length, totalMs: entries.length ? entries.reduce((n, e) => n + (e.dur || 0), 0) / 1000 : null }];
           }));
           const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: fixture.snapshot.game.steps, stepsAfter: sample.save?.game?.steps,
+            resourcesBefore,resourcesAfter:await resources(),
             dpr:cohort.dpr,cpuRate,rebases:sample.rebases,windows:sample.windows,
             rebaseAdjacentDeltas:deltas.filter((_,i)=>[i,i+1].some(j=>j>0&&sample.windows[j]?.join()!==sample.windows[j-1]?.join())),
             layers:layers.map(({width,height,drawsContent,backendNodeId,paintCount})=>({width,height,drawsContent,backendNodeId,paintCount})),
@@ -147,9 +163,11 @@ try {
           if (pair === 0) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (idleReview?0:jumpReview?8:16) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
         } finally { await ctx.close(); }
       }
     }
   }
+  const finalIdentity=await readBuildProvenance();
+  if(!finalIdentity.runtimeInputsMatch||!finalIdentity.distMatches||finalIdentity.marker.runtimeInputsSha256!==buildIdentity.marker.runtimeInputsSha256) throw Error('Candidate changed during measurement');
 } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }

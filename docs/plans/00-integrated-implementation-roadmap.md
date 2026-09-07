@@ -1,5 +1,12 @@
 # Integrated implementation roadmap through final convergence
 
+**Latest Human priority — CAMERA-17:** address the reported iPhone13/iPad8 camera
+stutter before LOOT-03. [Bounded implementation/qualification plan](CAMERA-17-bounded-scene-performance.md)
+retains walls, materials and save/gameplay semantics. The successful iPhone17
+observation does not establish a RAM floor. Public16 stays live during testing;
+the current orchestration state owns release status. Resume the loot sequence
+below after this correction; physical efficacy remains a distinct Q08/P19 check.
+
 **September7 execution override:** Book/MOVE/HAZARD-03 is delivered in web0.22.16,
 release815deb0/runtime09d5475. [Public verification](../reviews/2026-09-07-v02216-public-verification.md)
 and [actual Sol review](../reviews/2026-09-07-v02216-sol-final-review.md) bind the

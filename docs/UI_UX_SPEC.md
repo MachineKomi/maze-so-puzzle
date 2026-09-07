@@ -1,5 +1,19 @@
 # UI / UX implementation specification
 
+## CAMERA-17 candidate contract
+
+The existing travel owner coordinates camera, actors, followers and foreground
+against a bounded FOV+4 paint window. World geometry/pattern phase stay global;
+integer origins and all dependent offsets change together before paint. There is
+no second movement clock, per-frame React state, gameplay or save change.
+
+The minimap groups static terrain into paths. Seen union and current-view clips
+preserve fog and remembered/current distinction, with sparse object/player/exit
+markers and the same accessible location/exploration descriptions. Guidance can
+mark an unknown objective without counting/revealing its terrain. Last active
+object per shared tile retains precedence. [Plan and limits](plans/CAMERA-17-bounded-scene-performance.md).
+Current release status belongs to the joint orchestration state.
+
 ## Book completion and movement detail — delivered web0.22.16
 
 Normal story completion always offers Next maze first, or the explicitly named

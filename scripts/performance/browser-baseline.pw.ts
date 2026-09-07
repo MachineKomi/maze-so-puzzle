@@ -323,7 +323,8 @@ test("production-preview browser baseline cohort", async ({ browser, browserName
     await expectUiRouteState(page, segment.before);
     const before = await readUiRouteState(page);
     const minimapTileCount = await page.locator(".minimap-tile").count();
-    expect(minimapTileCount).toBe(movementLevel.width * movementLevel.height);
+    expect(minimapTileCount).toBe(0);
+    await expect(page.locator('.minimap-terrain')).toHaveAttribute('viewBox', `0 0 ${movementLevel.width} ${movementLevel.height}`);
     await resetMotionWindow(page);
     const start = performance.now();
     try {
@@ -369,7 +370,8 @@ test("production-preview browser baseline cohort", async ({ browser, browserName
     const ready = performance.now() - start;
     await resetMotionWindow(page);
     const minimapTileCount = await page.locator(".minimap-tile").count();
-    expect(minimapTileCount).toBe(largeMazeLevel.width * largeMazeLevel.height);
+    expect(minimapTileCount).toBe(0);
+    await expect(page.locator('.minimap-terrain')).toHaveAttribute('viewBox', `0 0 ${largeMazeLevel.width} ${largeMazeLevel.height}`);
     largeMazeSamples.push(await collectSample(page, ready, {
       levelId: largeMazeLevel.id,
       grid: `${largeMazeLevel.width}x${largeMazeLevel.height}`,
