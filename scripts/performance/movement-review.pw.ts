@@ -26,15 +26,16 @@ async function travelState(page:Page) {
     // PERF-02 uses percent world translation; resolve against its full box.
     const translation=(element:HTMLElement)=>{const parts=getComputedStyle(element).translate.split(" ");const extent=element===world?{x:parseFloat(world.style.width)*size.x/100,y:parseFloat(world.style.height)*size.y/100}:{x:element.clientWidth,y:element.clientHeight};const px=(v:string|undefined,n:number)=>(parseFloat(v??"0")||0)*(v?.endsWith("%")?n/100:1);return {x:px(parts[0],extent.x),y:px(parts[1],extent.y)};};
     const w=translation(world),p=translation(player);
-    const logicalCamera={x:-parseFloat(world.style.left)*cols/100,y:-parseFloat(world.style.top)*cols/100};
+    const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
+    const logicalCamera={x:pane.x,y:pane.y};
     const logical={x:parseFloat(player.style.left)*cols/100+logicalCamera.x,y:parseFloat(player.style.top)*cols/100+logicalCamera.y};
     const position={x:logical.x+(p.x-w.x)/cell.x,y:logical.y+(p.y-w.y)/cell.y};
     const camera={x:logicalCamera.x-w.x/cell.x,y:logicalCamera.y-w.y/cell.y};
     const sx=rect.width/board.offsetWidth,sy=rect.height/board.offsetHeight;
     return {position,logical,camera,cell:{x:cell.x*sx,y:cell.y*sy},center:{x:rect.left+(board.clientLeft+(position.x-camera.x+.5)*cell.x)*sx,y:rect.top+(board.clientTop+(position.y-camera.y+.5)*cell.y)*sy},state:board.dataset.travelState,
       followers:Array.from(board.querySelectorAll<HTMLElement>("[data-follower-id]")).map(f=>{const t=translation(f);return {id:f.dataset.followerId,
-        x:parseFloat(f.style.left)*Number(world.style.width.replace("%",""))/100*cols/100+t.x/cell.x,
-        y:parseFloat(f.style.top)*Number(world.style.height.replace("%",""))/100*cols/100+t.y/cell.y};})};
+        x:pane.x+parseFloat(getComputedStyle(f).left)/cell.x+t.x/cell.x,
+        y:pane.y+parseFloat(getComputedStyle(f).top)/cell.y+t.y/cell.y};})};
   });
 }
 
@@ -216,7 +217,10 @@ for(const [width,height] of [[780,312],[1194,834]]) test(`MOVE five friends foll
     expect(badge!.y+badge!.height).toBeLessThanOrEqual(board!.y+board!.height-2);
     expect(painted.followers.map(f=>f.id)).toEqual(expected.map(f=>f.id));
     for(let i=0;i<expected.length;i++){
-      const f=painted.followers[i]!,e=expected[i]!;expect(f.x).toBeCloseTo(e.point.x,4);expect(f.y).toBeCloseTo(e.point.y,4);
+      const f=painted.followers[i]!,e=expected[i]!;
+      // Computed layout is quantized to 1/64 CSS px; compare in painted pixels.
+      expect(Math.abs(f.x-e.point.x)*painted.cell.x).toBeLessThan(.025);
+      expect(Math.abs(f.y-e.point.y)*painted.cell.y).toBeLessThan(.025);
       offCamera ||= f.x<painted.camera.x||f.x>painted.camera.x+5||f.y<painted.camera.y||f.y>painted.camera.y+5;
     }
     records.push(painted);

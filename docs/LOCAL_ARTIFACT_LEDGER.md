@@ -1,5 +1,13 @@
 # Local artifact ledger and cleanup review
 
+## CAMERA-17 baseline — September7
+
+`C:/GameDev/maze-game-qa/performance/camera17-baseline-v02216/` retains exactly
+the verified16 HTML/JS/CSS plus identity (four files; entry bytes719841 plus
+identity). Unchanged media is shared. No repository/media clone or deletion.
+Subsequent candidate builds reuse existing dist; named diagnostic outputs will
+be inventoried at each checkpoint.
+
 ## Book/MOVE recovery and HAZARD-03 prototype — September7
 
 Under `C:/GameDev/maze-game-qa/performance/`, retained without deletion/archive:
@@ -444,3 +452,73 @@ any later recursive mutation. No deletion command is provided by this ledger.
 Hosted Vercel storage and local disk storage require separate proposals; follow
 the [deployment policy](VERCEL_DEPLOYMENT.md) to avoid duplicate hosted outputs
 while continuing frequent Git backup checkpoints.
+
+### CAMERA-17 diagnostic checkpoint inventory
+
+All under `C:/GameDev/maze-game-qa/performance/`. Temporary browsers/servers from
+these completed runs are stopped; preserve failed proofs and entry snapshots.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| camera17-baseline-v02216 | 4 | 720464 |
+| camera17-functional-20260907 | 108 | 43329051 |
+| camera17-map-frames-pilot-20260907 | 5 | 9565836 |
+| camera17-split-pilot-20260907 | 16 | 34374517 |
+| camera17-window-pilot-20260907 | 16 | 33955640 |
+
+These are diagnostics, not accepted release cohorts. No deletion/archive.
+
+### CAMERA-17 final local inventory — September 7
+
+This supersedes the initial partial inventory above. Astra owns these outputs
+under `C:/GameDev/maze-game-qa/performance/`; all diagnostic processes have stopped.
+30 folders, 631 files, 459033994 bytes measured at this checkpoint.
+No repository/media clone or native build was created. The four-file16 and17
+entry snapshots share the unchanged media already in the reusable build.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| camera17-baseline-v02216 | 4 | 720464 |
+| camera17-final-browser-20260907 | 191 | 90231233 |
+| camera17-final-hazard-frames | 5 | 10150175 |
+| camera17-final-hazard-work | 16 | 10712931 |
+| camera17-functional-20260907 | 108 | 43329051 |
+| camera17-hazard-promotion-ablation | 13 | 13245322 |
+| camera17-map-frames-pilot-20260907 | 5 | 9565836 |
+| camera17-map-palette-baseline | 11 | 2549796 |
+| camera17-map-palette-fixed | 9 | 434944 |
+| camera17-promotion-ablation-20260907 | 13 | 13288807 |
+| camera17-promotion-control | 4 | 724854 |
+| camera17-rebase-browser-20260907 | 23 | 9796661 |
+| camera17-release-v02217 | 4 | 724736 |
+| camera17-reviewed-browser | 34 | 22243021 |
+| camera17-reviewed-hazard-frames | 5 | 10149520 |
+| camera17-reviewed-hazard-work | 29 | 21340395 |
+| camera17-reviewed-layers | 5 | 9579006 |
+| camera17-reviewed-maze10-frames | 5 | 10645530 |
+| camera17-reviewed-maze10-work | 29 | 19833440 |
+| camera17-reviewed-maze2-frames | 5 | 10085578 |
+| camera17-reviewed-maze2-layers | 5 | 9547460 |
+| camera17-reviewed-maze2-work | 29 | 18808571 |
+| camera17-reviewed-reference | 5 | 7095206 |
+| camera17-reviewed-sustained | 3 | 6704389 |
+| camera17-small-all-promotion-ablation | 5 | 9560215 |
+| camera17-small-parent-promotion-ablation | 13 | 12538052 |
+| camera17-small-promotion-ablation | 5 | 7845868 |
+| camera17-small-unpromoted-work | 16 | 9252776 |
+| camera17-split-pilot-20260907 | 16 | 34374517 |
+| camera17-window-pilot-20260907 | 16 | 33955640 |
+
+The `reviewed-*` cohorts bind runtime eff0530; the broader final/rebase functional
+runs bind the same renderer before the final map-fill repair. The qualification
+receipt explains which checks carry forward and which were rerun on eff0530.
+Pilots, rejected variants, black-map proofs and interrupted comparisons remain
+held diagnostics, not release performance claims. Reports retain source hashes,
+commands/settings, browser/host identity and served bytes; reproduction uses
+`scripts/performance/README.md`. The `release-v02217` snapshot and current `dist/`
+remain held for public byte verification and rollback comparison.
+
+A cleanup review is now useful for the accumulated failed/pilot screenshot and
+trace packets. This is an inventory, not approval to delete/archive. Preserve
+accepted evidence, user inputs and rollback consumers before proposing exact
+reviewed targets to the Human; no automatic cleanup was performed.

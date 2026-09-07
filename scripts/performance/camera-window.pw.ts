@@ -1,0 +1,203 @@
+import { test, expect } from "@playwright/test";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { CURATED_LEVELS } from "../../src/game/levels";
+import { solveLevel } from "../../src/game/solver";
+import { movePlayer } from "../../src/game/engine";
+import { getCameraWindow, getVisibleTileKeys } from "../../src/game/exploration";
+import { ACTIVE_RUN_STORAGE_KEY, createActiveRunSnapshot } from "../../src/session";
+import { PLAYER_PROGRESS_STORAGE_KEY, createDefaultPlayerProgress } from "../../src/progress";
+import { DEFAULT_PRESENTATION_PREFERENCES, PRESENTATION_PREFERENCES_KEY } from "../../src/motion";
+import { deriveRoute, expectUiRouteState, keyForDirection, replayRouteStep } from "./gameplay-browser";
+import type { Direction } from "../../src/game/types";
+
+const out = resolve(process.env.MAZE_PERF_EVIDENCE_DIR!, "camera-window");
+const keys = { run: ACTIVE_RUN_STORAGE_KEY, progress: PLAYER_PROGRESS_STORAGE_KEY, preferences: PRESENTATION_PREFERENCES_KEY };
+const progress = { ...createDefaultPlayerProgress(), unlockedLevelCount: 16, unlockedLevelIds: CURATED_LEVELS.map(l => l.id) };
+const reverse: Record<Direction, Direction> = { up: "down", down: "up", left: "right", right: "left" };
+const fixtures = [CURATED_LEVELS[1]!, CURATED_LEVELS[9]!, CURATED_LEVELS[11]!].map(level => {
+  const route = deriveRoute(level, solveLevel(level, { requireAllAnimals: true }).directions);
+  const options = route.flatMap((step, start) => {
+    const leg = route.slice(start, start + 4);
+    if (leg.length !== 4 || !leg.every(s => s.direction === step.direction && s.result.moved && s.result.events.every(e => e.type === "moved"))) return [];
+    const from = getCameraWindow(level, step.before.position), to = getCameraWindow(level, leg.at(-1)!.result.state.position);
+    let state = leg.at(-1)!.result.state;
+    for (let i = 0; i < 4; i++) { const r = movePlayer(level, state, reverse[step.direction]); if (!r.moved || r.events.some(e => e.type !== "moved")) return []; state = r.state; }
+    return [{ start, direction: step.direction, delta: Math.abs(from.left - to.left) + Math.abs(from.top - to.top) }];
+  }).sort((a, b) => b.delta - a.delta);
+  const choice = options[0]; if (!choice || choice.delta < 2) throw Error(`No moving-camera route: ${level.id}`);
+  const before = route[choice.start]!.before;
+  return { id: level.id, level, direction: choice.direction, count: 4, before,
+    snapshot: createActiveRunSnapshot({ level, game: before, mode: "normal", runId: `run-camera17-${level.id}`,
+      revealedTiles: new Set(route.slice(0, choice.start + 1).flatMap(s => getVisibleTileKeys(level, s.before.position))) }) };
+});
+
+// Deterministic clock proof, kept separate from real-time performance samples.
+// Capture the actual frame immediately before and after the travel owner rebases.
+for (const dpr of [1, 2, 3]) test(`CAMERA17 adjacent rebase pixels DPR${dpr}`, async ({ browser }) => {
+  const data = JSON.parse(await readFile(resolve(process.env.MAZE_CAMERA_HAZARD_FIXTURES ?? "../maze-game-qa/performance/v02216-final-browser-20260907/hazards/fixtures.json"), "utf8"));
+  const f = data.fixtures.find((f: any) => f.id === "hazard-moving");
+  const context = await browser.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: dpr });
+  try {
+    const page = await context.newPage();
+    await page.clock.install({ time: new Date("2026-09-07T00:00:00Z") });
+    await page.addInitScript(({ data, f }) => {
+      localStorage.setItem(data.keys.run, JSON.stringify(f.snapshot)); localStorage.setItem(data.keys.progress, JSON.stringify(data.progress));
+      localStorage.setItem(data.keys.preferences, JSON.stringify({ ...data.preferences, quality: "full", motion: "full", pace: "regular", muted: true }));
+    }, { data, f });
+    await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click(); await page.getByRole("button", { name: /^Continue/ }).click();
+    await page.locator(".maze-board").waitFor();
+    await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
+    await page.clock.pauseAt(new Date("2026-09-07T01:00:00Z"));
+    await page.evaluate(() => { for (const a of document.getAnimations()) { a.pause(); a.currentTime = 0; } });
+    const clip = (await page.locator(".maze-board").boundingBox())!;
+    const geometry = () => page.evaluate(() => {
+      const board = document.querySelector(".maze-board")!, world = board.querySelector<HTMLElement>(".camera-world")!;
+      const svg = board.querySelector<SVGSVGElement>(".maze-terrain-svg")!, box = svg.viewBox.baseVal;
+      const t = world.style.translate.split(" ").map(parseFloat);
+      return { window: svg.getAttribute("viewBox"), camera: [box.x - (t[0] || 0) * box.width / 100, box.y - (t[1] || 0) * box.height / 100],
+        liquid: board.querySelector(".maze-liquid-svg")!.getAttribute("viewBox"), foreground: board.querySelector(".maze-foreground")!.getAttribute("viewBox"),
+        state: (board as HTMLElement).dataset.travelState };
+    });
+    let previous = { geometry: await geometry(), png: await page.screenshot({ clip }) };
+    const pairs = []; let rebase = 0;
+    for (let step = 0; step < 4 && rebase < 2; step++) {
+      await page.keyboard.press("ArrowRight");
+      for (let frame = 0; frame < 15; frame++) {
+        await page.clock.runFor(16);
+        const current = { geometry: await geometry(), png: await page.screenshot({ clip }) };
+        expect(current.geometry.window).toBe(current.geometry.liquid); expect(current.geometry.window).toBe(current.geometry.foreground);
+        expect(Math.abs(current.geometry.camera[0]! - previous.geometry.camera[0]!)).toBeLessThan(.081);
+        if (current.geometry.window !== previous.geometry.window) {
+          await writeFile(resolve(out, `rebase-dpr${dpr}-${rebase}-before.png`), previous.png);
+          await writeFile(resolve(out, `rebase-dpr${dpr}-${rebase}-after.png`), current.png);
+          pairs.push({ before: previous.geometry, after: current.geometry }); rebase++;
+        }
+        previous = current;
+      }
+    }
+    expect(rebase).toBeGreaterThan(0);
+    await writeFile(resolve(out, `rebase-dpr${dpr}.json`), JSON.stringify({ scope: "Controlled 16ms clock and paused ambient poses; visual continuity, not performance timing", dpr, clip, pairs }, null, 2));
+  } finally { await context.close(); }
+});
+test.beforeAll(async () => {
+  await mkdir(out, { recursive: true });
+  await writeFile(resolve(out, "fixtures.json"), JSON.stringify({ keys, progress, preferences: DEFAULT_PRESENTATION_PREFERENCES, fixtures }, null, 2));
+});
+
+for (const dpr of [1, 3]) test(`CAMERA17 minimap painted palette DPR${dpr}`, async ({ browser }) => {
+  const f = fixtures[0]!, context = await browser.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: dpr });
+  try {
+    const page = await context.newPage();
+    await page.addInitScript(({ keys, progress, snapshot, preferences }) => {
+      localStorage.setItem(keys.run, JSON.stringify(snapshot)); localStorage.setItem(keys.progress, JSON.stringify(progress));
+      localStorage.setItem(keys.preferences, JSON.stringify(preferences));
+    }, { keys, progress, snapshot: f.snapshot, preferences: { ...DEFAULT_PRESENTATION_PREFERENCES, muted: true } });
+    await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click(); await page.getByRole("button", { name: /^Continue/ }).click();
+    await page.locator(".maze-board").waitFor(); await page.waitForTimeout(400);
+    const view = new Set(getVisibleTileKeys(f.level, f.before.position)), seen = new Set([...f.snapshot.revealedTiles, ...view]);
+    const occupied = new Set([...f.level.objects.map(o => `${o.at.x},${o.at.y}`), `${f.level.exit.x},${f.level.exit.y}`, `${f.before.position.x},${f.before.position.y}`]);
+    const colors: Record<string, number[]> = { floor: [246,217,145], wall: [116,115,162] };
+    const samples: { x: number; y: number; state: string; expected: number[] }[] = [];
+    for (const state of ["current-floor", "current-wall", "remembered", "mystery"]) {
+      outer: for (let y=1;y<f.level.height-1;y++) for(let x=1;x<f.level.width-1;x++) {
+        const key=`${x},${y}`, kind=f.level.terrain[y]![x]!;
+        if(occupied.has(key)) continue;
+        if(state.startsWith("current") ? !view.has(key)||kind!==state.slice(8) : state==="remembered" ? !seen.has(key)||view.has(key)||!colors[kind] : seen.has(key)) continue;
+        let expected=state==="mystery"?[58,55,79]:colors[kind]!;
+        if(state==="remembered") { const l=expected[0]!*.2126+expected[1]!*.7152+expected[2]!*.0722; expected=expected.map((c,i)=>(l+(c-l)*.56)*.9*.86+[58,55,79][i]!*.14); }
+        samples.push({x,y,state,expected}); break outer;
+      }
+    }
+    expect(samples).toHaveLength(4);
+    const png = await page.locator(".minimap-terrain").screenshot();
+    const pixels = await page.evaluate(async ({ data, samples, width, height }) => {
+      const img = new Image(); img.src=`data:image/png;base64,${data}`; await img.decode();
+      const c=document.createElement("canvas"); c.width=img.width;c.height=img.height;const ctx=c.getContext("2d")!;ctx.drawImage(img,0,0);
+      return samples.map(s=>({...s,pixel:[...ctx.getImageData(Math.floor((s.x+.5)/width*c.width),Math.floor((s.y+.5)/height*c.height),1,1).data]}));
+    }, { data: png.toString("base64"), samples, width: f.level.width, height: f.level.height });
+    await writeFile(resolve(out, `map-palette-dpr${dpr}.png`), png);
+    await writeFile(resolve(out, `map-palette-dpr${dpr}.json`), JSON.stringify(pixels, null, 2));
+    for(const sample of pixels) for(let channel=0;channel<3;channel++) expect(Math.abs(sample.pixel[channel]!-sample.expected[channel]!),sample.state).toBeLessThanOrEqual(4);
+  } finally { await context.close(); }
+});
+
+for (const profile of [{ width: 844, height: 390, dpr: 3 }, { width: 1080, height: 810, dpr: 2 }]) {
+  for (const f of fixtures) test(`CAMERA17 continuous bounded world and map ${f.id} ${profile.width}`, async ({ browser }) => {
+    const context = await browser.newContext({ viewport: profile, deviceScaleFactor: profile.dpr });
+    try {
+      const page = await context.newPage(), errors: string[] = [];
+      page.on("pageerror", e => errors.push(e.message));
+      await page.addInitScript(({ keys, progress, preferences, snapshot }) => {
+        localStorage.setItem(keys.run, JSON.stringify(snapshot)); localStorage.setItem(keys.progress, JSON.stringify(progress));
+        localStorage.setItem(keys.preferences, JSON.stringify({ ...preferences, quality: "full", motion: "full", muted: true }));
+      }, { keys, progress, preferences: DEFAULT_PRESENTATION_PREFERENCES, snapshot: f.snapshot });
+      await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click();
+      await page.getByRole("button", { name: /^Continue/ }).click(); await expectUiRouteState(page, f.before);
+      await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
+      const geometry = await page.locator(".maze-board").evaluate(board => {
+        const staticSvg = board.querySelector<SVGSVGElement>(".maze-terrain-svg")!;
+        return { staticAnimations: staticSvg.getAnimations({ subtree: true }).length,
+          masks: staticSvg.querySelectorAll('mask[maskUnits="userSpaceOnUse"]').length,
+          liquid: board.querySelectorAll(".maze-liquid-svg").length,
+          mapNodes: document.querySelector(".maze-minimap")!.querySelectorAll("*").length,
+          tileNodes: document.querySelectorAll(".minimap-tile").length,
+          contained: getComputedStyle(board.querySelector(".camera-world")!).contain };
+      });
+      expect(geometry.staticAnimations).toBe(0); expect(geometry.masks).toBeGreaterThan(0);
+      expect(geometry.tileNodes).toBe(0); expect(geometry.mapNodes).toBeLessThan(90); expect(geometry.contained).toContain("paint");
+      if (!f.level.terrain.flat().some(t => ["water", "lava", "poison"].includes(t))) expect(geometry.liquid).toBe(0);
+      await page.evaluate(() => {
+        const board = document.querySelector<HTMLElement>(".maze-board")!, world = board.querySelector<HTMLElement>(".camera-world")!;
+        const result = { rows: [] as any[], active: true }; (window as any).camera17 = result;
+        const sample = (time: number) => {
+          const svg = board.querySelector<SVGSVGElement>(".maze-terrain-svg")!, box = svg.viewBox.baseVal;
+          const values = world.style.translate.split(" ").map(parseFloat), columns = Number(board.style.getPropertyValue("--grid-size"));
+          const camera = { x: box.x - (values[0] || 0) * box.width / 100, y: box.y - (values[1] || 0) * box.height / 100 };
+          const foreground = board.querySelector<SVGSVGElement>(".maze-foreground")!;
+          const b = board.getBoundingClientRect(), w = world.getBoundingClientRect(), front = foreground.getBoundingClientRect();
+          const player = board.querySelector<HTMLElement>(".player-layer")!.getBoundingClientRect();
+          const cell = (b.width - 2 * board.clientLeft * b.width / board.offsetWidth) / columns;
+          result.rows.push({ time, camera, window: [box.x, box.y, box.width, box.height],
+            sameForeground: svg.getAttribute("viewBox") === foreground.getAttribute("viewBox"),
+            sameLiquid: !board.querySelector(".maze-liquid-svg") || svg.getAttribute("viewBox") === board.querySelector(".maze-liquid-svg")!.getAttribute("viewBox"),
+            frontError: Math.max(Math.abs(w.x - front.x), Math.abs(w.y - front.y)),
+            actor: { x: (player.x - b.x - board.clientLeft * b.width / board.offsetWidth) / cell + camera.x,
+              y: (player.y - b.y - board.clientTop * b.height / board.offsetHeight) / cell + camera.y },
+            state: board.dataset.travelState });
+          if (result.active) requestAnimationFrame(sample);
+        }; requestAnimationFrame(sample);
+      });
+      let state = f.before;
+      for (const direction of [f.direction, reverse[f.direction], f.direction, reverse[f.direction]]) for (let n = 0; n < 4; n++) {
+        const result = movePlayer(f.level, state, direction); await replayRouteStep(page, { before: state, direction, result }); state = result.state;
+      }
+      await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state", "settled");
+      const rows = await page.evaluate(() => { (window as any).camera17.active = false; return (window as any).camera17.rows as any[]; });
+      expect(rows.length).toBeGreaterThan(40);
+      for (const row of rows) {
+        expect(row.window[2]).toBeLessThanOrEqual(10); expect(row.window[3]).toBeLessThanOrEqual(10);
+        expect(row.sameForeground && row.sameLiquid).toBe(true); expect(row.frontError).toBeLessThan(.1);
+        expect(row.camera.x).toBeGreaterThanOrEqual(row.window[0] - .001); expect(row.camera.y).toBeGreaterThanOrEqual(row.window[1] - .001);
+        expect(row.camera.x + 6).toBeLessThanOrEqual(row.window[0] + row.window[2] + .001);
+        expect(row.camera.y + 6).toBeLessThanOrEqual(row.window[1] + row.window[3] + .001);
+      }
+      const end = rows.at(-1)!, expectedCamera = getCameraWindow(f.level, state.position);
+      expect(end.camera.x).toBeCloseTo(expectedCamera.left, 4); expect(end.camera.y).toBeCloseTo(expectedCamera.top, 4);
+      expect(end.actor.x).toBeCloseTo(state.position.x, 3); expect(end.actor.y).toBeCloseTo(state.position.y, 3);
+      const map = await page.locator(".maze-minimap").evaluate(el => {
+        const dot = el.querySelector<HTMLElement>(".minimap-player-cell")!;
+        return { left: parseFloat(dot.style.left), top: parseFloat(dot.style.top), markers: el.querySelectorAll(".map-marker").length };
+      });
+      expect(map.left).toBeCloseTo(state.position.x / f.level.width * 100, 4); expect(map.top).toBeCloseTo(state.position.y / f.level.height * 100, 4);
+      await page.screenshot({ path: resolve(out, `${f.id}-${profile.width}.png`) });
+      await writeFile(resolve(out, `${f.id}-${profile.width}.json`), JSON.stringify({ geometry, rows, map, errors }, null, 2));
+      expect(errors).toEqual([]); await expectUiRouteState(page, state);
+      // Resize/rotation-equivalent geometry must settle all shared surfaces.
+      await page.setViewportSize({ width: profile.width - 30, height: profile.height + 10 });
+      await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state", "settled");
+      await page.keyboard.press(keyForDirection[f.direction]); await page.waitForTimeout(350);
+      await expectUiRouteState(page, movePlayer(f.level, state, f.direction).state);
+    } finally { await context.close(); }
+  });
+}

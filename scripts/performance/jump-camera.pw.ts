@@ -45,7 +45,8 @@ async function startSamples(page:Page){await page.evaluate(()=>{
   const cols=Number(board.style.getPropertyValue('--grid-size')),w=world.getBoundingClientRect(),b=board.getBoundingClientRect();
   const jump=board.querySelector<HTMLElement>('.jump-presentation'),actor=jump??board.querySelector<HTMLElement>('.player-layer')!;
   const a=actor.getBoundingClientRect(),cell=(b.width-2*board.clientLeft*b.width/board.offsetWidth)/cols;
-  const camera={x:-parseFloat(world.style.translate)*parseFloat(world.style.width)/100*cols/100,y:-parseFloat(world.style.translate.split(' ')[1]!)*parseFloat(world.style.height)/100*cols/100};
+  const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
+  const camera={x:pane.x-parseFloat(world.style.translate)*parseFloat(world.style.width)/100*cols/100,y:pane.y-parseFloat(world.style.translate.split(' ')[1]!)*parseFloat(world.style.height)/100*cols/100};
   const foreground=board.querySelector<SVGSVGElement>(".maze-foreground");
   sample.rows.push({foregroundDelta:foreground?Math.max(Math.abs(foreground.getBoundingClientRect().x-w.x),Math.abs(foreground.getBoundingClientRect().y-w.y)):null,time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
   if(sample.running)requestAnimationFrame(tick);

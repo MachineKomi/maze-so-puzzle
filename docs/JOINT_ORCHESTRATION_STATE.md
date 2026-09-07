@@ -1,5 +1,12 @@
 # Maze so Puzzle — joint orchestration state
 
+**New Human priority — September7:** [CAMERA-17](plans/CAMERA-17-bounded-scene-performance.md)
+interrupts LOOT-03 for camera playability on iPhone13/iPad8. Astra writes only on
+`codex/bounded-camera-performance`; actual Sol reviews independently. Public16
+remains live while the bounded-window/map candidate is measured. The iPhone17
+report does not establish a RAM threshold. Older next-dispatch text below is
+superseded until this movement correction is qualified and published.
+
 **Current delivery — September7:** web **0.22.16 is live**, release815deb0,
 frozen runtime09d5475, on main and `codex/book-completion-hazard-refinement`.
 [Public verification](reviews/2026-09-07-v02216-public-verification.md),
@@ -33,9 +40,11 @@ All owned browsers/servers stopped. Generated outputs are in the
 [ledger](LOCAL_ARTIFACT_LEDGER.md); no deletion/archive or repository/media clone.
 
 [Docs-only rules](VERCEL_DEPLOYMENT.md) now use actual successful release815deb0.
-Commit/push this documentation closure without rebuilding; the existing guard
-should skip its web build. Do not deploy solely to align a docs SHA with public
-bytes. These current facts supersede every older active/next/live label below.
+Docs closure1b3bfec is on main and was actually canceled by Vercel's Ignored Build
+Step at02:26:19UTC. Its [observed receipt](reviews/2026-09-07-v02216-public-verification.md#observed-documentation-closure)
+is backed up on the current Codex branch without another main push. Include
+that note normally with the next runtime slice; do not deploy solely to align
+a docs SHA with public bytes. These facts supersede older active/next/live labels.
 
 State date: 2026-09-07. Current operating state for **Sol Astra MsP Collab**.
 Replace this state when it changes; keep history in dated records and Git.

@@ -10,7 +10,8 @@ import { buildWallLighting, resolveWallLight, WALL_LIGHTING_PROFILES, WALL_LIGHT
 import type { LevelDefinition, Point } from "../../game/types";
 import { toTileKey, type CameraWindow } from "../../game/exploration";
 import { CatalogueImage } from "../CatalogueImage";
-import { cameraLayerStyle, isInsideWindow } from "./sceneGeometry";
+import { worldLayerStyle } from "../../cameraMotion";
+import { isInsideWindow } from "./sceneGeometry";
 
 function terrainTreatmentFilter(treatment: TerrainRenderTreatment): string {
   return `brightness(${treatment.brightness}) saturate(${treatment.saturation}) contrast(${treatment.contrast})`;
@@ -96,6 +97,7 @@ export const MazeTerrain = memo(function MazeTerrain({
   // still excludes liquids. Neither complement changes walkability geometry.
   const receiverD = `M${camera.left} ${camera.top}h${camera.width}v${camera.height}h${-camera.width}Z ${groundWall.d} ${holes.map(p => `M${p.x} ${p.y}h1v1h-1Z`).join(" ")}`;
   const floorD = `${receiverD} ${water.d} ${lava.d} ${poison.d}`;
+  const dryFloorD = `M${camera.left} ${camera.top}h${camera.width}v${camera.height}h${-camera.width}Z ${water.d} ${lava.d} ${poison.d}`;
 
   return (
     <>
@@ -127,42 +129,11 @@ export const MazeTerrain = memo(function MazeTerrain({
             </pattern>
             <clipPath id={wallCapClipId}><path d={tall.cap.d} clipRule="evenodd" transform={`translate(${tall.dx} ${-tall.height})`} /></clipPath>
           </>}
-          {(['water', 'lava', 'poison'] as const).map((kind, i) => {
-            if (![water.d, lava.d, poison.d][i]) return null;
-            const art = HAZARD_ART[kind];
-            return <pattern key={kind} id={[waterPatternId, lavaPatternId, poisonPatternId][i]} patternUnits="userSpaceOnUse" width={art.periodTiles} height={art.periodTiles}>
-              <rect width={art.periodTiles} height={art.periodTiles} fill={art.fallbackColor} />
-              <g className={`hazard-current hazard-current-${kind}`} style={{ '--current-period': `${art.periodTiles}px` } as CSSProperties}>
-                {[-1, 0].map(x => <image key={x} href={art.src}
-                  x={x * art.periodTiles} width={art.periodTiles} height={art.periodTiles} preserveAspectRatio="none" />)}
-              </g>
-            </pattern>;
-          })}
-          {water.d && <pattern id={waterFxPatternId} patternUnits="userSpaceOnUse" width="2.4" height="2.4">
-            <g className="water-ripple-marks">
-              <ellipse cx=".6" cy=".68" rx=".42" ry=".23" />
-              <ellipse cx="1.75" cy="1.7" rx=".48" ry=".29" />
-              <ellipse cx="1.86" cy=".46" rx=".26" ry=".16" />
-            </g>
-          </pattern>}
-          {lava.d && <><radialGradient id={lavaHeatId}><stop stopColor="#ffdc79" stopOpacity=".62" /><stop offset="1" stopColor="#ff7818" stopOpacity="0" /></radialGradient>
-          <pattern id={lavaFxPatternId} patternUnits="userSpaceOnUse" width="2.2" height="2.2">
-            <g className="lava-shimmer-marks">
-              <ellipse cx=".52" cy=".64" rx=".38" ry=".24" fill={`url(#${lavaHeatId})`} />
-              <ellipse cx="1.55" cy="1.48" rx=".42" ry=".34" fill={`url(#${lavaHeatId})`} />
-            </g>
-          </pattern></>}
-          {poison.d && <pattern id={poisonFxPatternId} patternUnits="userSpaceOnUse" width="3.6" height="3.6">
-            <g className="poison-bubble-marks">{bubbles.map((bubble, i) => <g key={i} className="poison-bubble"
-              style={{ animationDuration: `${bubble.duration}s`, animationDelay: `${bubble.delay}s`, '--bubble-drift': `${bubble.drift}%` } as CSSProperties}>
-              <circle cx={bubble.x} cy={bubble.y} r={bubble.radius} />
-              <path className="poison-bubble-glint" d={`M${bubble.x - bubble.radius * .52} ${bubble.y - bubble.radius * .1}q0 ${-bubble.radius * .48} ${bubble.radius * .45} ${-bubble.radius * .5}`} />
-            </g>)}</g>
-          </pattern>}
           {wallMode === "legacy" && <filter id={wallDepthFilterId} x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="0.055" />
           </filter>}
           <clipPath id={wallClipId}><path d={walls.d} clipRule="evenodd" /></clipPath>
+          {shore && <clipPath id={`${patternPrefix}-dry-floor`}><path d={dryFloorD} clipRule="evenodd" /></clipPath>}
           <clipPath id={floorClipId}><path d={floorD} clipRule="evenodd" /></clipPath>
           <clipPath id={shadowClipId}><path d={receiverD} clipRule="evenodd" /></clipPath>
           <mask id={wallTopMaskId} maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x={camera.left} y={camera.top} width={camera.width} height={camera.height}>
@@ -185,6 +156,7 @@ export const MazeTerrain = memo(function MazeTerrain({
 
         <rect
           className="terrain-floor"
+          clipPath={shore ? `url(#${patternPrefix}-dry-floor)` : undefined}
           x={camera.left}
           y={camera.top}
           width={camera.width}
@@ -203,12 +175,6 @@ export const MazeTerrain = memo(function MazeTerrain({
             clipPath={`url(#${floorClipId})`}
           />
         )}
-        {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} clipPath={`url(#${waterMaskId})`} />}
-        {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} clipPath={`url(#${lavaMaskId})`} />}
-        {poison.d && <path className="terrain-poison" d={poison.d} fill={`url(#${poisonPatternId})`} fillRule={poison.fillRule} clipPath={`url(#${poisonMaskId})`} />}
-        {water.d && <path className="terrain-water-fx" d={water.d} fill={`url(#${waterFxPatternId})`} fillRule={water.fillRule} clipPath={`url(#${waterMaskId})`} />}
-        {lava.d && <path className="terrain-lava-fx" d={lava.d} fill={`url(#${lavaFxPatternId})`} fillRule={lava.fillRule} clipPath={`url(#${lavaMaskId})`} />}
-        {poison.d && <path className="terrain-poison-fx" d={poison.d} fill={`url(#${poisonFxPatternId})`} fillRule={poison.fillRule} clipPath={`url(#${poisonMaskId})`} />}
         {[water, lava, poison].map((region, i) => region.d && <g key={i} className="terrain-hazard-lip"
           data-kind={['water', 'lava', 'poison'][i]} clipPath={`url(#${[waterMaskId, lavaMaskId, poisonMaskId][i]})`}
           fill="none" stroke={`url(#${floorPatternId})`} strokeLinejoin="round">
@@ -272,13 +238,56 @@ export const MazeTerrain = memo(function MazeTerrain({
           <path d={tall.rim} fill="none" stroke={profile.highlight} strokeWidth=".035" opacity=".64" />
         </g>}
       </svg>
+      {shore && <svg className="maze-liquid-svg" viewBox={`${camera.left} ${camera.top} ${camera.width} ${camera.height}`} preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          {[water, lava, poison].map((region,i) => region.d && <clipPath key={i} id={`${[waterMaskId,lavaMaskId,poisonMaskId][i]}-local`}><path d={region.d} clipRule="evenodd" /></clipPath>)}
+          {(['water', 'lava', 'poison'] as const).map((kind, i) => {
+            if (![water.d, lava.d, poison.d][i]) return null;
+            const art = HAZARD_ART[kind];
+            return <pattern key={kind} id={[waterPatternId, lavaPatternId, poisonPatternId][i]} patternUnits="userSpaceOnUse" width={art.periodTiles} height={art.periodTiles}>
+              <rect width={art.periodTiles} height={art.periodTiles} fill={art.fallbackColor} />
+              <g className={`hazard-current hazard-current-${kind}`} style={{ '--current-period': `${art.periodTiles}px` } as CSSProperties}>
+                {[-1, 0].map(x => <image key={x} href={art.src}
+                  x={x * art.periodTiles} width={art.periodTiles} height={art.periodTiles} preserveAspectRatio="none" />)}
+              </g>
+            </pattern>;
+          })}
+          {water.d && <pattern id={waterFxPatternId} patternUnits="userSpaceOnUse" width="2.4" height="2.4">
+            <g className="water-ripple-marks">
+              <ellipse cx=".6" cy=".68" rx=".42" ry=".23" />
+              <ellipse cx="1.75" cy="1.7" rx=".48" ry=".29" />
+              <ellipse cx="1.86" cy=".46" rx=".26" ry=".16" />
+            </g>
+          </pattern>}
+          {lava.d && <><radialGradient id={lavaHeatId}><stop stopColor="#ffdc79" stopOpacity=".62" /><stop offset="1" stopColor="#ff7818" stopOpacity="0" /></radialGradient>
+          <pattern id={lavaFxPatternId} patternUnits="userSpaceOnUse" width="2.2" height="2.2">
+            <g className="lava-shimmer-marks">
+              <ellipse cx=".52" cy=".64" rx=".38" ry=".24" fill={`url(#${lavaHeatId})`} />
+              <ellipse cx="1.55" cy="1.48" rx=".42" ry=".34" fill={`url(#${lavaHeatId})`} />
+            </g>
+          </pattern></>}
+          {poison.d && <pattern id={poisonFxPatternId} patternUnits="userSpaceOnUse" width="3.6" height="3.6">
+            <g className="poison-bubble-marks">{bubbles.map((bubble, i) => <g key={i} className="poison-bubble"
+              style={{ animationDuration: `${bubble.duration}s`, animationDelay: `${bubble.delay}s`, '--bubble-drift': `${bubble.drift}%` } as CSSProperties}>
+              <circle cx={bubble.x} cy={bubble.y} r={bubble.radius} />
+              <path className="poison-bubble-glint" d={`M${bubble.x - bubble.radius * .52} ${bubble.y - bubble.radius * .1}q0 ${-bubble.radius * .48} ${bubble.radius * .45} ${-bubble.radius * .5}`} />
+            </g>)}</g>
+          </pattern>}
+        </defs>
+        {water.d && <path className="terrain-water" d={water.d} fill={`url(#${waterPatternId})`} fillRule={water.fillRule} clipPath={`url(#${waterMaskId}-local)`} />}
+        {lava.d && <path className="terrain-lava" d={lava.d} fill={`url(#${lavaPatternId})`} fillRule={lava.fillRule} clipPath={`url(#${lavaMaskId}-local)`} />}
+        {poison.d && <path className="terrain-poison" d={poison.d} fill={`url(#${poisonPatternId})`} fillRule={poison.fillRule} clipPath={`url(#${poisonMaskId}-local)`} />}
+        {water.d && <path className="terrain-water-fx" d={water.d} fill={`url(#${waterFxPatternId})`} fillRule={water.fillRule} clipPath={`url(#${waterMaskId}-local)`} />}
+        {lava.d && <path className="terrain-lava-fx" d={lava.d} fill={`url(#${lavaFxPatternId})`} fillRule={lava.fillRule} clipPath={`url(#${lavaMaskId}-local)`} />}
+        {poison.d && <path className="terrain-poison-fx" d={poison.d} fill={`url(#${poisonFxPatternId})`} fillRule={poison.fillRule} clipPath={`url(#${poisonMaskId}-local)`} />}
+      </svg>}
       {holes.map((hole) => (
-        <div className="terrain-hole-layer" style={cameraLayerStyle(hole, camera)} key={toTileKey(hole)} aria-hidden="true">
+        <div className="terrain-hole-layer" style={worldLayerStyle(hole, level)} key={toTileKey(hole)} aria-hidden="true">
           <CatalogueImage usage="field" src={ASSETS.hole} alt="" draggable={false} />
         </div>
       ))}
       {isInsideWindow(level.exit, camera) && (
-        <div className="goal-layer" style={cameraLayerStyle(level.exit, camera)} aria-hidden="true">
+        <div className="goal-layer" style={worldLayerStyle(level.exit, level)} aria-hidden="true">
           <CatalogueImage usage="field" className="goal-sprite" src={ASSETS.goal} alt="" draggable={false} />
         </div>
       )}

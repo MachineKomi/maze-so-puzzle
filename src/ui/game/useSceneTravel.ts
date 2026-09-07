@@ -2,7 +2,7 @@ import { useCallback, useLayoutEffect, useRef, type RefObject } from "react";
 import type { CameraWindow, GridSize } from "../../game/exploration";
 import type { Point } from "../../game/types";
 import { TileTraveller, travelCamera } from "../../tileTravel";
-import { cameraWorldTranslation } from "../../cameraMotion";
+import { boundedWorldWindow, cameraWorldTranslation } from "../../cameraMotion";
 import { jumpGroundPosition, type JumpTravel } from "../../jumpPresentation";
 
 export interface SceneTravelSnapshot {
@@ -33,6 +33,10 @@ interface Binding {
   board: HTMLDivElement;
   world: HTMLElement;
   foreground: SVGSVGElement | null;
+  terrain: SVGSVGElement | null;
+  liquid: SVGSVGElement | null;
+  masks: SVGMaskElement[];
+  window?: CameraWindow;
   player: HTMLElement;
   replacement: HTMLElement | null;
   jumper: HTMLElement | null;
@@ -73,9 +77,25 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     const dx=(b.input.camera.left-camera.left)*cellX;
     const dy=(b.input.camera.top-camera.top)*cellY;
     const translate=(node:HTMLElement,x:number,y:number)=>{node.style.translate=`${x.toFixed(5)}px ${y.toFixed(5)}px`;};
-    // Percentages use the full-world box, so even pre-ResizeObserver layout
-    // changes keep the crop correct. Actors/anchors still need the pixel delta.
-    b.world.style.translate=cameraWorldTranslation(b.input.grid,camera);
+    const window=boundedWorldWindow(b.input.grid,camera,b.window);
+    if(window!==b.window) {
+      // One atomic pre-paint rebase: keep global geometry/texture phase and
+      // bound both expensive paint surfaces, including mask backing regions.
+      const box=`${window.left} ${window.top} ${window.width} ${window.height}`;
+      b.terrain?.setAttribute("viewBox",box);
+      b.liquid?.setAttribute("viewBox",box);
+      b.foreground?.setAttribute("viewBox",box);
+      b.world.style.setProperty("--world-left",String(window.left));
+      b.world.style.setProperty("--world-top",String(window.top));
+      b.world.style.setProperty("--world-tile-x",`${100/window.width}%`);
+      b.world.style.setProperty("--world-tile-y",`${100/window.height}%`);
+      for(const mask of b.masks) for(const [name,value] of Object.entries({x:window.left,y:window.top,width:window.width,height:window.height}))
+        mask.setAttribute(name,String(value));
+      b.window=window;
+    }
+    // Percentage translation still scales correctly during resize; this time
+    // it resolves against the bounded window, not a maze-sized backing store.
+    b.world.style.translate=cameraWorldTranslation(window,camera,window);
     if(b.foreground) b.foreground.style.translate=b.world.style.translate;
     translate(b.player,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     if(b.replacement) translate(b.replacement,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
@@ -98,7 +118,8 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     const last=travelCamera(b.input.grid,{x:bounds.right,y:bounds.bottom},b.input.camera);
     snapshot.current={position:point,camera,followers:positions,contentSize:{width:b.width,height:b.height},
       cameraEnvelope:{left:first.left,top:first.top,right:last.right,bottom:last.bottom}};
-    b.board.dataset.travelState=moving ? "moving" : "settled";
+    const state=moving ? "moving" : "settled";
+    if(b.board.dataset.travelState!==state) b.board.dataset.travelState=state;
     if(moving && frame.current===undefined && b.input.enabled && !document.hidden) {
       const token=generation.current;
       frame.current=requestAnimationFrame(()=>{
@@ -152,6 +173,10 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     if(discover) for(const animation of jumpAnimations) animation.pause();
     binding.current={input,board,world:discover ? board.querySelector<HTMLElement>(".camera-world")! : prior.world,
       foreground:discover ? board.querySelector<SVGSVGElement>(".maze-foreground") : prior.foreground,
+      terrain:discover ? board.querySelector<SVGSVGElement>(".maze-terrain-svg") : prior.terrain,
+      liquid:discover ? board.querySelector<SVGSVGElement>(".maze-liquid-svg") : prior.liquid,
+      masks:discover ? Array.from(board.querySelectorAll<SVGMaskElement>('.maze-terrain-svg mask[maskUnits="userSpaceOnUse"]')) : prior.masks,
+      window:prior?.input.grid===input.grid ? prior.window : undefined,
       player:discover ? board.querySelector<HTMLElement>(".player-layer")! : prior.player,
       replacement:discover ? board.querySelector<HTMLElement>('[data-travel-actor="replacement"]') : prior.replacement,
       jumper,jumpAnimations,

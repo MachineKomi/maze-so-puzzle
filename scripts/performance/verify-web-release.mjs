@@ -64,5 +64,53 @@ try { for (const [width, height] of [[780, 312], [1280, 720]]) {
     receipt.browser.push({ width, height, count, music, sfx, steps, errors, geometry, wall, hazard, journey: 'Play, Friends, Sound, Home, Begin adventure, Start the maze, ArrowUp, Sound, resume' });
     if (errors.length) throw Error(JSON.stringify(errors));
   } finally { await context.close(); }
-} } finally { await browser.close(); await writeFile(resolve(output, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n'); }
+}
+// Optional current-engine camera route, restored only in fresh owned contexts.
+// This checks published behavior, not physical-device frame performance.
+if (process.env.MAZE_PUBLIC_CAMERA_FIXTURES) {
+  const fixtureBytes = await readFile(process.env.MAZE_PUBLIC_CAMERA_FIXTURES);
+  const data = JSON.parse(fixtureBytes), fixture = data.fixtures.find(f => f.id === 'shiny-sword');
+  if (!fixture || fixture.count !== 4) throw Error('Expected engine-derived four-step camera fixture');
+  receipt.cameraFixtureSha256 = sha(fixtureBytes); receipt.camera = [];
+  const reverse = { left: 'right', right: 'left', up: 'down', down: 'up' };
+  for (const [origin, width, height, dpr] of [
+    ['https://mazesopuzzle.com', 844, 390, 3],
+    ['https://maze-so-puzzle.vercel.app', 1080, 810, 2],
+  ]) {
+    const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: dpr });
+    try {
+      const page = await context.newPage(), errors = []; page.on('pageerror', e => errors.push(e.message));
+      await page.addInitScript(({ data, fixture }) => {
+        localStorage.setItem(data.keys.run, JSON.stringify(fixture.snapshot));
+        localStorage.setItem(data.keys.progress, JSON.stringify(data.progress));
+        localStorage.setItem(data.keys.preferences, JSON.stringify({ ...data.preferences, quality: 'full', motion: 'full', pace: 'regular', muted: true }));
+      }, { data, fixture });
+      await page.goto(origin); await page.getByRole('button', { name: 'Play', exact: true }).click();
+      await page.getByRole('button', { name: /^Continue/ }).click();
+      await page.locator('.maze-board').waitFor(); await settle(page); await page.waitForTimeout(400);
+      const camera = () => page.evaluate(() => {
+        const world = document.querySelector('.camera-world'), terrain = document.querySelector('.maze-terrain-svg');
+        const box = terrain.viewBox.baseVal, parts = world.style.translate.split(' ').map(parseFloat);
+        return { x: box.x - (parts[0] || 0) * box.width / 100, y: box.y - (parts[1] || 0) * box.height / 100,
+          width: box.width, height: box.height, aligned: terrain.getAttribute('viewBox') === document.querySelector('.maze-foreground').getAttribute('viewBox') };
+      });
+      const before = await camera(); let turn;
+      for (const direction of [fixture.direction, reverse[fixture.direction]]) {
+        if (!direction) throw Error('Unexpected camera direction');
+        for (let step = 0; step < 4; step++) { await page.keyboard.press(`Arrow${direction[0].toUpperCase() + direction.slice(1)}`); await page.waitForTimeout(300); }
+        if (!turn) turn = await camera();
+      }
+      const after = await camera(), saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), data.keys.run);
+      if (Math.abs(turn.x - before.x) + Math.abs(turn.y - before.y) < 1
+        || Math.abs(after.x - before.x) + Math.abs(after.y - before.y) > .0001
+        || [before, turn, after].some(c => !c.aligned || c.width > 10 || c.height > 10)
+        || saved.game.steps !== fixture.snapshot.game.steps + 8
+        || JSON.stringify(saved.game.position) !== JSON.stringify(fixture.snapshot.game.position)
+        || errors.length) throw Error(`Public camera route failed ${JSON.stringify({ before, turn, after, errors })}`);
+      await page.screenshot({ path: resolve(output, `camera-${width}.png`) });
+      receipt.camera.push({ origin, width, height, dpr, before, turn, after, steps: saved.game.steps, errors });
+    } finally { await context.close(); }
+  }
+}
+} finally { await browser.close(); await writeFile(resolve(output, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n'); }
 console.log(JSON.stringify(receipt));
