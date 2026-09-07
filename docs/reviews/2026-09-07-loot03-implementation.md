@@ -20,7 +20,8 @@ missing device evidence. Continue the authorized complete authored-loot slice.
   for presentation; exclude hazards, holes, start/exit, portals and unresolved
   interactions. Around-corner vacuum waits for a clear glyph-sized straight path.
 - Outward350–550ms with two diminishing bounces, then a pause: earliest admission
-  is750ms. Range1.75tiles, clamped250–700ms accelerating attraction. Sample Ame's
+  is750ms and always at least250ms after the throw (up to800ms total).
+  Range1.75tiles, clamped250–700ms accelerating attraction. Sample Ame's
   travelling ground point, not a battle-lunge DOM box. Accepted claims cannot be
   revoked. One reducer owns credit, including recovery and interruptions.
 - Canvas shares its existing bounded reward clock with Power. Full permits24
@@ -42,6 +43,21 @@ missing device evidence. Continue the authorized complete authored-loot slice.
   removes oldest first and stops on failure, retaining the newer authoritative
   record so a stale older adventure cannot reappear. Full confirmed reset owns
   its separate explicit key allowlist.
+- After public migration, recovery must keep v4 compatible: disable visual
+  animation in a corrective build if needed, while retaining the ledger and
+  credit reducer. A v3-only rollback is not a safe active-run recovery strategy.
+
+## Pre-freeze checks
+
+Checkpoint0bfc808 is backed up. The first production matrix passed7 cases;
+expanded `loot03-browser-r3` passed41 (15Book/MOVE/completion,11camera/map,
+10physical-loot including capacity/crash recovery,5Power/overlay cases).
+Sol freshly inspected phone/tablet/fallback images and found a wall-covered Gold
+count. Counts now sit centrally; old misleading opening toast is also corrected.
+New empty-ledger motion does not wake/allocate Canvas. Current version18 measures
+172003 JSgzip9 (+4922 over17),24170 CSS and155542751 public bytes. Named5200JS
+allocation is requested, pending final timing and review. Final source checks,
+timing, final visual receipt and publication are not yet claimed by this section.
 
 ## Independent review and qualification sequence
 

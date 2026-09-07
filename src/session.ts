@@ -637,7 +637,10 @@ export function clearActiveRun(storage: ActiveRunStorage | null | undefined = un
   // Do not discard the sole durable copy after a failed migration write.
   try {
     if (target.getItem(ACTIVE_RUN_STORAGE_KEY) === null
-      && [VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,VERSION_TWO_ACTIVE_RUN_STORAGE_KEY].some(key=>target.getItem(key)!==null)) return false;
+      && [VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,VERSION_TWO_ACTIVE_RUN_STORAGE_KEY].some(key=>{
+        const raw=target.getItem(key);
+        return raw!==null && migratePrior(JSON.parse(raw),CURATED_LEVELS)!==null;
+      })) return false;
   } catch { return false; }
   return removePrior(target) && safelyRemove(target);
 }

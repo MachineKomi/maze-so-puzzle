@@ -4,7 +4,26 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
-## 0.22.16 — clearer progression and living liquids (live web)
+## 0.22.18 — physical Gold and Science (candidate)
+
+- Authored rewards burst out, tumble, bounce and settle before collection.
+  Distant drops stay on the floor until Ame approaches; the pickup pull speeds
+  up nearby. Gold stars have new facets, with distinct Science glyphs, trails,
+  sparkles and centred readable bundle counts.
+- Real pending value survives normal-run reloads. Old runs migrate without
+  replaying already-credited rewards; malformed/future saves remain protected.
+  Stay keeps optional drops available, while Next explains what remains behind.
+- Power keeps its existing puzzle rules and per-bash presentation. Enemy Gold/
+  Science, mixed chests/Mimics, account XP and eggs remain subsequent work.
+
+## 0.22.17 — bounded camera rendering (published web)
+
+- Bounds world/foreground/mask paint to the visible maze plus a small gutter,
+  separates animated liquids from static terrain, and groups minimap paths.
+- Paired local lab raster work falls26–70%. Physical iPhone13/iPad8 camera
+  comfort remains Q08; these measurements do not establish a RAM minimum.
+
+## 0.22.16 — clearer progression and living liquids (published web)
 
 - Book completion offers Next first, including with friends left to rescue;
   final campaign completion clearly offers Surprise. Stay/Restart and safe

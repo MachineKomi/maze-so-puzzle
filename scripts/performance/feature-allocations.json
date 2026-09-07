@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "loot03-authored-collection-and-protected-v4",
+      "owner": "vfx",
+      "status": "requested",
+      "compressedJsBytes": 5200,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Request5200 gzip9 JS bytes for the complete authored Gold/Science source ledger, strict v4 migration/protection, represented-ID claim timer, bounded shared Canvas/SVG fallback and completion journal. Candidate18 measures172003 versus live17 167081 (+4922),4846 above the previous ceiling. No CSS/media/dependency growth. Timing, actual Sol review and release acceptance remain separate.",
+      "evidencePath": "docs/reviews/2026-09-07-loot03-implementation.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Before publication the complete candidate can remain held at17. After v4 saves are written, use a forward-compatible corrective release retaining v4 validation, conserved ledger, claim reducer and completion receipts; disable animated presentation if necessary. Do not deploy a v3-only writer or delete/downgrade v4 family saves. Preserve CAMERA-17, accepted wall/sprite geometry and the Vercel guard."
+    },
+    {
       "id": "camera17-bounded-world-and-grouped-map",
       "owner": "controls",
       "status": "approved",

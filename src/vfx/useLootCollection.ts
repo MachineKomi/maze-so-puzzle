@@ -12,6 +12,10 @@ export interface LootMotion {
 }
 export interface LootView { game: GameState; motions: Map<string, LootMotion>; animate: boolean; represented: Set<string>; canvasAvailable?: boolean }
 
+export function lootReadableDelay(motion: LootMotion): number {
+  return motion.path.length>1 ? Math.max(LOOT_SETTLE_MS,motion.scatterMs+250) : LOOT_SETTLE_MS;
+}
+
 export function representedLoot(game: GameState, prior: ReadonlySet<string>, ground: Point, limit: number): Set<string> {
   const drops=game.loot.sources.flatMap(s=>s.drops);
   // Stable within the nearby view. Accepted IDs retain their slot until credit;
@@ -32,6 +36,11 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
 }): RefObject<LootView> {
   const view = useMemo<{current:LootView}>(() => ({ current: { game, motions: new Map<string, LootMotion>(), animate, represented: new Set<string>() } }), [runId]);
   const owner = useRef(runId); owner.current = runId;
+  const presentation = useRef({animate,limit});
+  useLayoutEffect(()=>{
+    if(presentation.current.animate!==animate || presentation.current.limit!==limit) setGame(finishLootClaims);
+    presentation.current={animate,limit};
+  },[animate,limit,setGame]);
   const first = useRef(view);
   const fresh = useRef(true);
   if (first.current !== view) { first.current = view; fresh.current = true; }
@@ -63,6 +72,7 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
   }, [game, level, runId, view, scene, port, animate, limit]);
 
   useEffect(() => {
+    if (!view.current.motions.size) return;
     let timer: number | undefined, stopped = false;
     const commit = (reduce: (current: GameState) => GameState) => setGame(current =>
       owner.current === runId && current.levelId === level.id ? reduce(current) : current);
@@ -89,7 +99,7 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
         } else {
           if (!view.current.represented.has(drop.id) || motion.shownAt===undefined) continue;
           const elapsedMs = now-Math.max(motion.born,motion.shownAt);
-          if (elapsedMs < LOOT_SETTLE_MS) waiting = true;
+          if (elapsedMs < lootReadableDelay(motion)) waiting = true;
           else ready.push({ id: drop.id, elapsedMs });
         }
       }

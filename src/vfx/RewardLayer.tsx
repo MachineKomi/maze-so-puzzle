@@ -104,8 +104,8 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
         ctx.globalAlpha = 1; ctx.drawImage(glyphs[source.currency],-size/2,-size/2,size,size); ctx.restore();
         if (drop.amount > 1) {
           ctx.globalAlpha = 1; ctx.font = `bold ${Math.max(11,cell*.26)}px sans-serif`; ctx.textAlign="center";
-          ctx.lineWidth=3; ctx.strokeStyle="#fff9e9"; ctx.strokeText(String(drop.amount),at.x,at.y+cell*.39);
-          ctx.fillStyle="#553677"; ctx.fillText(String(drop.amount),at.x,at.y+cell*.39);
+          ctx.lineWidth=3; ctx.strokeStyle="#fff9e9"; ctx.strokeText(String(drop.amount),at.x,at.y+cell*.09);
+          ctx.fillStyle="#553677"; ctx.fillText(String(drop.amount),at.x,at.y+cell*.09);
         }
         if (pose.moving && quality === "full") {
           ctx.globalAlpha=1; ctx.strokeStyle="#fff2ae"; ctx.lineWidth=2;
@@ -171,7 +171,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       }
     };
     const wake = () => {
-      if (!document.hidden && frame === undefined) {
+      if (!document.hidden && frame === undefined && (tokens.length || loot.current.motions.size || canvas.width>1)) {
         canvas.dataset.running = "true"; frame = requestAnimationFrame(tick);
       }
     };
@@ -212,6 +212,6 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
           top:`calc((${d.at.y} - var(--world-top)) * var(--world-tile-y))`,width:"var(--world-tile-x)",height:"var(--world-tile-y)"}}>
         {s.currency==="gold" ? <path d="M0,-.4 .1,-.13 .38,-.12 .17,.07 .23,.35 0,.2 -.23,.35 -.17,.07 -.38,-.12 -.1,-.13Z" fill="#ffc842" stroke="#785032" strokeWidth=".035" />
           : <g fill="none" stroke="#458a94" strokeWidth=".065">{[0,60,-60].map(angle=><ellipse key={angle} rx=".39" ry=".15" transform={`rotate(${angle})`} />)}<circle r=".12" fill="#a8efce" /></g>}
-        {d.amount>1 && <text fontSize=".23" textAnchor="middle" y=".44" fill="#38205e" stroke="#fff9e9" strokeWidth=".025" paintOrder="stroke">{d.amount}</text>}
+        {d.amount>1 && <text fontSize=".23" textAnchor="middle" y=".09" fill="#38205e" stroke="#fff9e9" strokeWidth=".025" paintOrder="stroke">{d.amount}</text>}
       </svg>),world)}</>;
 }
