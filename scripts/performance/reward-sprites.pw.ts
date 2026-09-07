@@ -53,15 +53,15 @@ for(const [quality,motion,width,height] of [['full','full',1194,834],['lite','fu
     broken:[...document.images].filter(i=>!i.naturalWidth).length}),ACTIVE_RUN_STORAGE_KEY);
    await writeFile(resolve(output,`probe-${quality}-${motion}-${id}.json`),JSON.stringify(result,null,2));
    const moving=quality!=='static'&&motion!=='reduced';
-   expect(errors).toEqual([]);expect(result.broken).toBe(0);const {loot:expectedLoot,goldStarsCollected:_,sciencePointsCollected:__,...expected}=f.result.state;
-   const {loot,goldStarsCollected,sciencePointsCollected,...actual}=result.save;
+   expect(errors).toEqual([]);expect(result.broken).toBe(0);const {loot:expectedLoot,goldStarsCollected:_,sciencePointsCollected:__,xpCollected:___,...expected}=f.result.state;
+   const {loot,goldStarsCollected,sciencePointsCollected,xpCollected,...actual}=result.save;
    expect(actual).toEqual(expected);
-   expect(goldStarsCollected+sciencePointsCollected+loot.sources.flatMap((s:any)=>s.drops).reduce((n:number,d:any)=>n+d.amount,0))
+   expect(goldStarsCollected+sciencePointsCollected+xpCollected+loot.sources.flatMap((s:any)=>s.drops).reduce((n:number,d:any)=>n+d.amount,0))
      .toBe(expectedLoot.sources.reduce((n,s)=>n+s.amount,0));
    expect(result.samples.at(-1)).toMatchObject({anchors:1});expect(result.data.running).toBe("false");
    expect(result.samples.every(s=>s.w<=1536&&s.h<=1536&&s.tokens<=(quality==='lite'?12:24)&&s.anchors===1)).toBe(true);
    if(moving || id==="combat")expect(result.samples.some(s=>s.tokens>0)).toBe(true);
-   if(moving)expect(Number(result.data.arrivals) - (goldStarsCollected-f.before.goldStarsCollected) - (sciencePointsCollected-f.before.sciencePointsCollected)).toBe(id==="potion"?2:12);
+   if(moving)expect(Number(result.data.arrivals) - (goldStarsCollected-f.before.goldStarsCollected) - (sciencePointsCollected-f.before.sciencePointsCollected) - (xpCollected-f.before.xpCollected)).toBe(id==="potion"?2:12);
    rows.push({id,errors,...result});
   }finally{await ctx.close();}
  }

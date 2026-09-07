@@ -1,3 +1,4 @@
+import { sceneDepth } from "./sceneDepth";
 import { useCallback, useLayoutEffect, useRef, type RefObject } from "react";
 import type { CameraWindow, GridSize } from "../../game/exploration";
 import type { Point } from "../../game/types";
@@ -32,6 +33,8 @@ interface Binding {
   input: TravelInput;
   board: HTMLDivElement;
   world: HTMLElement;
+  actorPlane: HTMLElement;
+  label: HTMLElement;
   foreground: SVGSVGElement | null;
   terrain: SVGSVGElement | null;
   liquid: SVGSVGElement | null;
@@ -86,10 +89,12 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       b.terrain?.setAttribute("viewBox",box);
       b.liquid?.setAttribute("viewBox",box);
       b.foreground?.setAttribute("viewBox",box);
-      b.world.style.setProperty("--world-left",String(window.left));
-      b.world.style.setProperty("--world-top",String(window.top));
-      b.world.style.setProperty("--world-tile-x",`${100/window.width}%`);
-      b.world.style.setProperty("--world-tile-y",`${100/window.height}%`);
+      for (const plane of [b.world,b.actorPlane]) {
+      plane.style.setProperty("--world-left",String(window.left));
+      plane.style.setProperty("--world-top",String(window.top));
+      plane.style.setProperty("--world-tile-x",`${100/window.width}%`);
+      plane.style.setProperty("--world-tile-y",`${100/window.height}%`);
+      }
       for(const mask of b.masks) for(const [name,value] of Object.entries({x:window.left,y:window.top,width:window.width,height:window.height}))
         mask.setAttribute(name,String(value));
       b.window=window;
@@ -97,13 +102,18 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     // Percentage translation still scales correctly during resize; this time
     // it resolves against the bounded window, not a maze-sized backing store.
     b.world.style.translate=cameraWorldTranslation(window,camera,window);
+    b.actorPlane.style.translate=b.world.style.translate;
     if(b.foreground) b.foreground.style.translate=b.world.style.translate;
-    translate(b.player,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
-    if(b.replacement) translate(b.replacement,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
+    translate(b.player,(point.x-b.input.position.x)*cellX,(point.y-b.input.position.y)*cellY);
+    const depth=String(sceneDepth(point.y,4));
+    if(b.player.style.zIndex!==depth)b.player.style.zIndex=depth;
+    translate(b.label,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
+    if(b.replacement) {translate(b.replacement,(point.x-b.input.position.x)*cellX,(point.y-b.input.position.y)*cellY);b.replacement.style.zIndex=depth;}
     if(b.jumper && jump) translate(b.jumper,dx+(point.x-jump.from.x)*cellX,dy+(point.y-jump.from.y)*cellY);
     if(b.jumpGround && jump) translate(b.jumpGround,dx+(point.x-jump.from.x)*cellX,dy+(point.y-jump.from.y)*cellY);
     // Local CSS poses use this same clock, including a delayed React mount or
-    // cancellation. These are three cached animation handles, never layout reads.
+    // cancellation. Four cached handles cover actor, label and ground effects;
+    // they never require per-frame layout reads.
     if(jump) for(const animation of b.jumpAnimations) animation.currentTime=jumping
       ? Math.max(0,Math.min(jump.durationMs,now-jump.startedAt)) : jump.durationMs;
     for(const node of b.anchors) translate(node,dx,dy);
@@ -112,6 +122,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       const travel=followers.current.get(follower.id)!;
       const at=travel.sample(now); moving ||= travel.moving;
       translate(follower.node,(at.x-follower.point.x)*cellX,(at.y-follower.point.y)*cellY);
+      const depth=String(sceneDepth(at.y,3));if(follower.node.style.zIndex!==depth)follower.node.style.zIndex=depth;
       return {id:follower.id,point:at};
     });
     const bounds=jump ? {left:Math.min(jump.from.x,jump.to.x),top:Math.min(jump.from.y,jump.to.y),
@@ -171,10 +182,12 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     for(const id of followers.current.keys()) if(!boundFollowers.some(f=>f.id===id)) followers.current.delete(id);
     const jumper=discover ? board.querySelector<HTMLElement>('[data-travel-actor="jump"]') : prior.jumper;
     const jumpGround=discover ? board.querySelector<HTMLElement>('.jump-ground') : prior.jumpGround;
-    const jumpAnimations=discover ? [...jumper?.getAnimations({subtree:true})??[],...jumpGround?.getAnimations({subtree:true})??[]]
+    const label=discover ? board.querySelector<HTMLElement>('[data-travel-actor="label"]')! : prior.label;
+    const jumpAnimations=discover ? [...label.getAnimations({subtree:true}),...jumper?.getAnimations({subtree:true})??[],...jumpGround?.getAnimations({subtree:true})??[]]
       .filter(animation=>animation instanceof CSSAnimation && animation.animationName.startsWith("spring-jump-")) : prior.jumpAnimations;
     if(discover) for(const animation of jumpAnimations) animation.pause();
     binding.current={input,board,world:discover ? board.querySelector<HTMLElement>(".camera-world")! : prior.world,
+      actorPlane:discover ? board.querySelector<HTMLElement>(".camera-actors")! : prior.actorPlane, label,
       foreground:discover ? board.querySelector<SVGSVGElement>(".maze-foreground") : prior.foreground,
       terrain:discover ? board.querySelector<SVGSVGElement>(".maze-terrain-svg") : prior.terrain,
       liquid:discover ? board.querySelector<SVGSVGElement>(".maze-liquid-svg") : prior.liquid,

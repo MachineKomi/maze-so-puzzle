@@ -44,7 +44,7 @@ describe("bounded enemy reward rules", () => {
     expect(result.moved).toBe(false); expect(result.state.position).toEqual(before.position);
     expect(result.state.power).toBe(before.power+1); expect(result.state.steps).toBe(before.steps);
     const sources=result.state.loot.sources;
-    expect(sources.map(s=>s.currency).sort()).toEqual(["gold","science"]);
+    expect(sources.map(s=>s.currency).sort()).toEqual(["gold","science","xp"]);
     expect(sources.every(s=>s.sourceKind === "enemy" && s.objectId===result.state.defeatedEnemyIds[0] && s.credited===0)).toBe(true);
     expect(result.state.goldStarsCollected+result.state.sciencePointsCollected).toBe(0);
     expect(sanitizeLoot(result.state.loot,level,result.state)).toEqual(result.state.loot);
@@ -71,21 +71,21 @@ describe("bounded enemy reward rules", () => {
       expect(lootFloor(level,game,drop.at)).toBe(true);
       game=finishLootClaims(beginLootClaims(level,game,[{id:drop.id,elapsedMs:750}],drop.at));
     }
-    expect(pendingLoot(game)).toBe(0);expect(game.goldStarsCollected+game.sciencePointsCollected).toBe(total);
+    expect(pendingLoot(game)).toBe(0);expect(game.goldStarsCollected+game.sciencePointsCollected+game.xpCollected).toBe(total);
     expect(finishLootClaims(game)).toBe(game);expect(sanitizeLoot(game.loot,level,game)).toEqual(game.loot);
   });
-  it("reserves both final channels at exactly64 and rejects65 before play", () => {
+  it("reserves three final channels at63 and a treasure at64; rejects65 before play", () => {
     const terrain=Array.from({length:19},(_,y)=>Array.from({length:19},(_,x)=>!x||!y||x===18||y===18?"wall" as const:"floor" as const));
-    const objects:LevelObject[]=Array.from({length:32},(_,i)=>({id:`enemy-${i}`,kind:"enemy",power:99,style:"blueberry-slime",at:{x:2+i%15,y:2+Math.floor(i/15)}}));
-    const fixture={...level,width:19,height:19,terrain,objects,exit:{x:17,y:17}};
+    const objects:LevelObject[]=Array.from({length:21},(_,i)=>({id:`enemy-${i}`,kind:"enemy",power:99,style:"blueberry-slime",at:{x:2+i%15,y:2+Math.floor(i/15)}}));
+    const fixture={...level,width:19,height:19,terrain,objects:[...objects,{id:"treasure-64",kind:"treasure" as const,currency:"gold" as const,amount:1,style:"gold-chest" as const,at:{x:17,y:16}}],exit:{x:17,y:17}};
     let game=createInitialGameState(fixture);
     for(const object of objects) if(object.kind==="enemy") {
       game={...game,defeatedEnemyIds:[...game.defeatedEnemyIds,object.id]};game={...game,loot:scatterTreasure(fixture,game,object)};
       expect(game.loot.sources.flatMap(s=>s.drops).length).toBeLessThanOrEqual(64);
     }
-    expect(game.loot.sources).toHaveLength(64);expect(game.loot.sources.flatMap(s=>s.drops)).toHaveLength(64);
+    expect(game.loot.sources).toHaveLength(63);expect(game.loot.sources.flatMap(s=>s.drops)).toHaveLength(63);
     expect(sanitizeLoot(game.loot,fixture,game)).not.toBeNull();
-    expect(authoredLootErrors({...fixture,objects:[...objects,{id:"extra",kind:"treasure",amount:1,currency:"gold",style:"gold-chest",at:{x:17,y:16}}]}).join()).toContain("64");
+    expect(authoredLootErrors({...fixture,objects:[...fixture.objects,{id:"extra",kind:"treasure",amount:1,currency:"gold",style:"gold-chest",at:{x:17,y:16}}]}).join()).toContain("64");
   });
   it("audits the current49 ordinary-enemy supply envelope separately from the disguised Mimic", () => {
     const enemies=CURATED_LEVELS.flatMap(l=>l.objects.filter(o=>o.kind==="enemy"));expect(enemies).toHaveLength(49);
@@ -94,7 +94,7 @@ describe("bounded enemy reward rules", () => {
     for(const current of CURATED_LEVELS) {
       expect(authoredLootErrors(current),current.id).toEqual([]);
       // Even the worst legal v4 treasure state leaves room for every new enemy channel.
-      expect(current.objects.reduce((n,o)=>n+(o.kind==="treasure"?4:o.kind==="enemy"?2:0),0)).toBeLessThanOrEqual(64);
+      expect(current.objects.reduce((n,o)=>n+(o.kind==="treasure"?4:o.kind==="enemy"||o.kind==="chest"?3:0),0)).toBeLessThanOrEqual(64);
     }
   });
   it("compacts only grounded legacy value when future channels need space",()=>{
@@ -110,7 +110,7 @@ describe("bounded enemy reward rules", () => {
     const enemy=fixture.objects.at(-1)!;if(enemy.kind!=="enemy")throw Error("fixture");
     const resolved={...migrated,defeatedEnemyIds:[enemy.id]};
     const next={...resolved,loot:scatterTreasure(fixture,resolved,enemy)};
-    expect(next.loot.sources.filter(s=>s.sourceKind==="enemy")).toHaveLength(2);
+    expect(next.loot.sources.filter(s=>s.sourceKind==="enemy")).toHaveLength(3);
     expect(sanitizeLoot(next.loot,fixture,next)).not.toBeNull();
   });
   it("rejects potential source-key collisions before consuming any source",()=>{

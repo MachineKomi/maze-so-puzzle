@@ -48,7 +48,7 @@ async function startSamples(page:Page){await page.evaluate(()=>{
   const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
   const camera={x:pane.x-parseFloat(world.style.translate)*parseFloat(world.style.width)/100*cols/100,y:pane.y-parseFloat(world.style.translate.split(' ')[1]!)*parseFloat(world.style.height)/100*cols/100};
   const foreground=board.querySelector<SVGSVGElement>(".maze-foreground");
-  sample.rows.push({actorZ:Number(getComputedStyle(actor).zIndex),foregroundZ:foreground?Number(getComputedStyle(foreground).zIndex):null,foregroundDelta:foreground?Math.max(Math.abs(foreground.getBoundingClientRect().x-w.x),Math.abs(foreground.getBoundingClientRect().y-w.y)):null,time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
+  sample.rows.push({actorZ:Number(getComputedStyle(actor.closest('.camera-actors')??actor).zIndex),foregroundZ:foreground?Number(getComputedStyle(foreground).zIndex):null,foregroundDelta:foreground?Math.max(Math.abs(foreground.getBoundingClientRect().x-w.x),Math.abs(foreground.getBoundingClientRect().y-w.y)):null,time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
   if(sample.running)requestAnimationFrame(tick);
  };requestAnimationFrame(tick);
 });}
@@ -98,11 +98,15 @@ for(const width of [780,1280])test(`FIELD21 horizontal jump depth at departure a
   await page.clock.runFor(time-prior);prior=time;
   const row=await page.evaluate(()=>{
    const actor=document.querySelector<HTMLElement>('.jump-presentation')!,ground=document.querySelector<HTMLElement>('.jump-ground')!,wall=document.querySelector('.maze-foreground')!;
+   const label=document.querySelector<HTMLElement>('.player-label-layer')!,l=label.getBoundingClientRect(),a=actor.getBoundingClientRect();
    return{actorZ:Number(getComputedStyle(actor).zIndex),groundZ:Number(getComputedStyle(ground).zIndex),wallZ:Number(getComputedStyle(wall).zIndex),
+    labelZ:Number(getComputedStyle(label).zIndex),labelDelta:Math.hypot(l.x-a.x,l.y-a.y),labelClocks:label.getAnimations({subtree:true}).map(a=>a.currentTime),boots:actor.querySelectorAll('.jump-presentation-boots').length,
     actorTranslate:actor.style.translate,groundTranslate:ground.style.translate,
     clocks:[...actor.getAnimations({subtree:true}),...ground.getAnimations({subtree:true})].map(a=>a.currentTime)};
   });
   expect(row.actorZ).toBeGreaterThan(row.wallZ);expect(row.groundZ).toBeLessThan(row.wallZ);
+  expect(row.labelZ).toBeGreaterThan(row.actorZ);expect(row.labelDelta).toBeLessThan(.5);expect(row.boots).toBe(0);
+  expect(row.labelClocks).toHaveLength(1);expect(row.labelClocks[0]).toBe(row.clocks[0]);
   expect(row.actorTranslate).toBe(row.groundTranslate);expect(row.clocks).toHaveLength(3);
   expect(new Set(row.clocks).size).toBe(1);rows.push({name,time,...row});
   await page.locator('.maze-board').screenshot({path:resolve(output,`depth-${width}-${name}.png`)});

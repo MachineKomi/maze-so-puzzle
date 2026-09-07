@@ -613,3 +613,32 @@ qualified by engine replay attaining sufficient Power before defeat. Existing
 v5 runs retain their historical layouts/rewards. Generated revision2 is unchanged.
 The maintained route table below reflects the candidate's extra opening inputs;
 this is not a publication receipt.
+
+## Adventure XP — LOOT-03 C candidate
+
+Rainbow crystals from ordinary final defeats contain2/4/6/10 XP for Power
+1–3/4–8/9–19/20+. A defeated Mimic doubles this; reveal and benign chests give
+no XP. Drops use the same physical settling, legal floor, readable pause and
+range-based attraction as Gold/Science. Per-hit Power is unchanged. Collected
+XP belongs to the active attempt; Stay retains it, restart abandons it, and
+moving on banks it with solve10 through one completion receipt. Grounded XP
+left behind is excluded. Tester and unsupported-profile play do not save XP.
+
+Adventure Level is recognition only. Each next level costs20,30,40…XP;
+Level99 is the bounded numeric cap. Current campaign supply is160 solve XP
+plus at most210 physical XP (Level5–8 for one pass). Replay and generated maze
+completions also earn XP; no stats, purchases or benefits depend on it. Old
+profiles start with XP0; historical collections are not invented. Book progress
+is saved progress, while the exit preview becomes permanent only on moving on.
+[Implementation and qualification contract](plans/LOOT-03C-adventure-xp-execution.md).
+
+## Scene23 presentation refinement candidate
+
+A door should read as a passage for Ame: taller natural-proportion frames and
+substantial jambs. A weapon keeps its scale when picked up. Grounded characters,
+friends and objects overlap according to their contact with the path, not their
+sprite family; an opening door dissolves behind Ame. The Power number remains
+readable above wall art. Airborne Ame clears all walls, with one matching Power
+label, a grounded shadow and a brief spring effect; no boots sprite is attached
+to her jump. Collision, accepted wall shape and gameplay rules stay unchanged.
+[Implementation/acceptance](plans/SCENE-23-depth-and-scale.md).

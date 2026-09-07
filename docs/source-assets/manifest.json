@@ -56,6 +56,11 @@
         "bytes": 79
       },
       {
+        "path": "scripts/art_pipeline/adventure_xp.py",
+        "sha256": "8f35a94dbdefd8ab656b092ec1778b98fa9fd1bc6ed48fdff7b546265d8428c1",
+        "bytes": 3592
+      },
+      {
         "path": "scripts/art_pipeline/builder.py",
         "sha256": "fa7d9a145e8c150dc7969ff05bd586c43f29a96061bca37ff6cc263ad1c6e498",
         "bytes": 28614
@@ -365,6 +370,14 @@
         "bytes": 22723,
         "referencedBy": [
           "ame-v02-source"
+        ]
+      },
+      {
+        "path": "docs/source-assets/production/adventure-xp-v1/prompt.txt",
+        "sha256": "3e1ee0ac0e73d82c9627f1efdcf8702c2ef84df852659fc2ccc8f3debe47017d",
+        "bytes": 1473,
+        "referencedBy": [
+          "adventure-xp-v1-source"
         ]
       },
       {
@@ -1581,12 +1594,12 @@
     ]
   },
   "summary": {
-    "recordCount": 368,
-    "runtimeImageCount": 338,
-    "runtimeEncodedBytes": 56283729,
-    "runtimeDecodedBytesUpperBound": 368918240,
-    "sourceImageCount": 430,
-    "sourceEncodedBytes": 613495659,
+    "recordCount": 369,
+    "runtimeImageCount": 339,
+    "runtimeEncodedBytes": 56296302,
+    "runtimeDecodedBytesUpperBound": 368983776,
+    "sourceImageCount": 431,
+    "sourceEncodedBytes": 614273755,
     "unreferencedSourceImageCount": 12,
     "generationBatchCount": 26,
     "generationBatchOutputCount": 256,
@@ -1609,13 +1622,17 @@
       },
       {
         "name": "source-backed",
-        "count": 244
+        "count": 245
       }
     ],
     "approvalStatusCounts": [
       {
         "name": "approved",
         "count": 240
+      },
+      {
+        "name": "candidate",
+        "count": 1
       },
       {
         "name": "design-approved",
@@ -1700,9 +1717,9 @@
     },
     {
       "name": "reward",
-      "count": 48,
-      "bytes": 8880074,
-      "decodedBytesUpperBound": 38535168
+      "count": 49,
+      "bytes": 8892647,
+      "decodedBytesUpperBound": 38600704
     },
     {
       "name": "story",
@@ -1726,9 +1743,9 @@
   "runtimeByStatus": [
     {
       "name": "active",
-      "count": 205,
-      "bytes": 21889252,
-      "decodedBytesUpperBound": 200566592
+      "count": 206,
+      "bytes": 21901825,
+      "decodedBytesUpperBound": 200632128
     },
     {
       "name": "deprecated",
@@ -1752,9 +1769,9 @@
   "runtimeByFormat": [
     {
       "name": "png",
-      "count": 67,
-      "bytes": 24358679,
-      "decodedBytesUpperBound": 110100480
+      "count": 68,
+      "bytes": 24371252,
+      "decodedBytesUpperBound": 110166016
     },
     {
       "name": "webp",
@@ -1809,6 +1826,26 @@
       "renderingProfile": "storybook-local-contour-v1",
       "generationRunCount": 1,
       "derivativeRecipeVersion": "ui-correction-approved-actor-presentation-r01",
+      "sourceCount": 1,
+      "derivativeCount": 1
+    },
+    {
+      "path": "docs/source-assets/records/adventure-xp-v1-source.json",
+      "sha256": "87cf3298d9202265cec66452607d35b9528751feb82805c5786fd46c8fbf06bb",
+      "recordId": "adventure-xp-v1-source",
+      "schemaVersion": 1,
+      "id": "adventure-xp",
+      "artVersion": 1,
+      "family": "reward",
+      "runtimeStatus": "active",
+      "sourceStatus": "source-backed",
+      "approvalStatus": "candidate",
+      "validationProfile": "strict-v1",
+      "artRecipeVersion": "adventure-xp-native-alpha-v1",
+      "recipeEvidence": null,
+      "renderingProfile": null,
+      "generationRunCount": 0,
+      "derivativeRecipeVersion": null,
       "sourceCount": 1,
       "derivativeCount": 1
     },
@@ -10095,6 +10132,22 @@
   ],
   "runtimeImages": [
     {
+      "path": "public/assets/adventure-xp-v1.png",
+      "sha256": "d1b2a5dbb8dac34682c71ff082850fb5333462defcbb4513e4081175fcd62f1f",
+      "bytes": 12573,
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 65536,
+      "colorMetadata": [],
+      "recordId": "adventure-xp-v1-source",
+      "family": "reward",
+      "runtimeStatus": "active",
+      "approvalStatus": "candidate"
+    },
+    {
       "path": "public/assets/ame-portrait.png",
       "sha256": "095f112b3a33a30ea12ee396bfed236520ee8b2ea01f122ef78d5078187bd896",
       "bytes": 440678,
@@ -17118,6 +17171,21 @@
       "colorMetadata": [],
       "referencedBy": [
         "portal-violet-moon-v01-source"
+      ]
+    },
+    {
+      "path": "docs/source-assets/production/adventure-xp-v1/generator.png",
+      "sha256": "77cb5f5d504b1754c148ed28e34036c1b6521d63a8ded07c41c19fd79dd501f5",
+      "bytes": 778096,
+      "width": 1254,
+      "height": 1254,
+      "format": "png",
+      "mode": "RGBA",
+      "alphaMode": "straight",
+      "decodedBytesUpperBound": 6290064,
+      "colorMetadata": [],
+      "referencedBy": [
+        "adventure-xp-v1-source"
       ]
     },
     {

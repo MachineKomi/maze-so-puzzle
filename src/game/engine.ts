@@ -81,6 +81,7 @@ export function createInitialGameState(level: LevelDefinition, runId?: string): 
     openedDoorIds: [],
     goldStarsCollected: 0,
     sciencePointsCollected: 0,
+    xpCollected: 0,
     exitArmed: true,
     status: "playing",
     steps: 0,

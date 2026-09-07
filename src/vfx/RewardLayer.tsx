@@ -6,7 +6,7 @@ import type { SurfaceQuality } from "../motion";
 import type { SceneTravelSnapshot } from "../ui/game/useSceneTravel";
 import { playRewardArrival, type SoundHandle } from "../sound";
 import { advanceRewardToken, makeRewardTokens, startRewardAppearance, REWARD_CAP, rewardProjection, rewardSpaceOpen, type RewardEmission, type RewardToken } from "./rewardPhysics";
-import { REWARD_COLORS, REWARD_DIAMETER, rewardGlyph } from "./rewardGlyphs";
+import { REWARD_COLORS, REWARD_DIAMETER, rewardGlyph, loadXpGlyph, XP_CRYSTAL_SRC } from "./rewardGlyphs";
 import { lootPose, type LootView } from "./useLootCollection";
 import { StageFitContext } from "../ui/ResponsiveStage";
 import { drawRewardNumber, rewardNumbers } from "./rewardNumbers";
@@ -35,13 +35,13 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       return ()=>{port.current=EMPTY_REWARD_PORT;};
     }
     loot.current.canvasAvailable=true;
-    const glyphs = { gold: rewardGlyph("gold"), science: rewardGlyph("science"), power: rewardGlyph("power") };
+    const glyphs = { gold: rewardGlyph("gold"), science: rewardGlyph("science"), power: rewardGlyph("power"), xp: rewardGlyph("xp") };
     const numbers = rewardNumbers();
     let tokens: RewardToken[] = [], frame: number | undefined, previous = 0, lastArrival = -Infinity, pitch = 0;
     const firstPaint = new WeakSet<RewardToken>();
     let width = 0, height = 0, scale = 1, voice: SoundHandle | undefined;
     let peak = 0, bounces = 0, arrivals = 0;
-    let lastCredit = loot.current.game.goldStarsCollected + loot.current.game.sciencePointsCollected;
+    let lastCredit = loot.current.game.goldStarsCollected + loot.current.game.sciencePointsCollected + loot.current.game.xpCollected;
     const cap = quality === "lite" ? 12 : 24;
     const physical = () => loot.current.game.loot.sources.flatMap(source => source.drops.map(drop => ({ source, drop })))
       .filter(({drop}) => loot.current.represented.has(drop.id)).slice(0,cap-4);
@@ -81,7 +81,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
           y: visual.camera.top + (rect.top + rect.height*.5-bounds.top)/bounds.height*visual.camera.height };
       }
       if (!Number.isFinite(target.x + target.y) || !rewardSpaceOpen(level.terrain, target.x, target.y)) tokens = [];
-      const credit = loot.current.game.goldStarsCollected + loot.current.game.sciencePointsCollected;
+      const credit = loot.current.game.goldStarsCollected + loot.current.game.sciencePointsCollected + loot.current.game.xpCollected;
       let collected = Math.max(0,credit-lastCredit); lastCredit = credit;
       ctx.clearRect(0, 0, width, height);
       const cell = Math.min(width / visual.camera.width, height / visual.camera.height);
@@ -209,13 +209,14 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       if (entry && (Math.abs(entry.contentRect.width-width)>.5 || Math.abs(entry.contentRect.height-height)>.5)) resize();
     });
     observer.observe(canvas.parentElement!);
+    const unloadXp = level.objects.some(o=>o.kind==="enemy"||o.kind==="chest") ? loadXpGlyph(glyphs.xp,wake) : () => {};
     wake();
     document.addEventListener("visibilitychange", visibility);
     window.addEventListener("blur", cancel);
     window.addEventListener("focus", wake);
     window.addEventListener("resize", resize);
     return () => {
-      observer.disconnect(); cancel(); port.current = EMPTY_REWARD_PORT;
+      unloadXp(); observer.disconnect(); cancel(); port.current = EMPTY_REWARD_PORT;
       document.removeEventListener("visibilitychange", visibility);
       window.removeEventListener("blur", cancel);
       window.removeEventListener("focus", wake); window.removeEventListener("resize", resize);
@@ -228,7 +229,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
         style={{position:"absolute",pointerEvents:"none",zIndex:23,left:`calc((${d.at.x} - var(--world-left)) * var(--world-tile-x))`,
           top:`calc((${d.at.y} - var(--world-top)) * var(--world-tile-y))`,width:"var(--world-tile-x)",height:"var(--world-tile-y)"}}>
         <g transform={`scale(${REWARD_DIAMETER[s.currency]/.8})`}>{s.currency==="gold" ? <path d="M0,-.4 .1,-.13 .38,-.12 .17,.07 .23,.35 0,.2 -.23,.35 -.17,.07 -.38,-.12 -.1,-.13Z" fill="#ffc842" stroke="#785032" strokeWidth=".035" />
-          : <g fill="none" stroke="#458a94" strokeWidth=".065">{[0,60,-60].map(angle=><ellipse key={angle} rx=".39" ry=".15" transform={`rotate(${angle})`} />)}<circle r=".12" fill="#a8efce" /></g>}</g>
+          : s.currency==="xp" ? <><path d="M0-.4 .17-.1 0 .4-.17-.1Z" fill="#a7dfd5" /><image href={XP_CRYSTAL_SRC} x="-.45" y="-.45" width=".9" height=".9" /></> : <g fill="none" stroke="#458a94" strokeWidth=".065">{[0,60,-60].map(angle=><ellipse key={angle} rx=".39" ry=".15" transform={`rotate(${angle})`} />)}<circle r=".12" fill="#a8efce" /></g>}</g>
         {d.amount>1 && <text fontSize=".18" textAnchor="middle" y=".224" fill="#38205e" stroke="#fff9e9" strokeWidth=".025" paintOrder="stroke">{d.amount}</text>}
       </svg>),world)}</>;
 }

@@ -59,13 +59,26 @@ if (!buildIdentity.runtimeInputsMatch || !buildIdentity.distMatches) throw Error
 const baselineIdentity=process.env.MAZE_REVIEW_BASELINE ? JSON.parse(await readFile(resolve(baseline,'identity.json'),'utf8')) : null;
 if(baselineIdentity) for(const row of baselineIdentity.rows) {const b=await readFile(resolve(baseline,row.file));if(b.length!==row.bytes||sha(b)!==row.sha256)throw Error('Frozen entry drift');}
 else if (hashes.baseline !== 'e4cb4b603e531a4a67da0bab5bae26599bf594237d9005fb699a8b5a043b135a') throw Error('Frozen baseline drift');
-if (execFileSync('git',['diff','--name-only',baselineIdentity?.source ?? 'd9c76976c0e1926fd6020f3071f32a6a37e762a7','--','public'],{cwd:root,encoding:'utf8'}).trim()) throw Error('Baseline fallback requires unchanged public media');
+const baselineRef=baselineIdentity?.source ?? 'd9c76976c0e1926fd6020f3071f32a6a37e762a7';
+const candidateOnlyMedia=data.candidateOnlyMedia ?? [];
+for(const entry of candidateOnlyMedia) {
+  if(!/^public\/assets\/[a-z0-9-]+\.png$/.test(entry.path))throw Error('Invalid candidate-only media path');
+  try {execFileSync('git',['cat-file','-e',baselineRef+':'+entry.path],{cwd:root,stdio:'ignore'});throw Error('Candidate-only media existed in baseline');}
+  catch(error){if(!error.status)throw error;}
+  if(sha(await readFile(resolve(root,entry.path)))!==entry.sha256)throw Error('Candidate-only media drift');
+}
+const changedMedia=execFileSync('git',['diff','--name-status',baselineRef,'--','public'],{cwd:root,encoding:'utf8'}).trim();
+for(const line of changedMedia?changedMedia.split(/\r?\n/):[]) {
+  const [status,path]=line.split('\t');
+  if(status!=='A'||!candidateOnlyMedia.some(e=>e.path===path))throw Error('Baseline fallback requires unchanged existing public media');
+}
 const served = { baseline: {}, candidate: {} }; let servingMode = 'baseline';
 const hashCache = new Map();
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.webp': 'image/webp', '.png': 'image/png', '.woff2': 'font/woff2', '.mp3': 'audio/mpeg', '.svg': 'image/svg+xml' };
 const server = createServer(async (req, res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    if(servingMode==='baseline'&&candidateOnlyMedia.some(e=>'/'+e.path.slice(7)===pathname)){res.writeHead(404);res.end();return;}
     const relative = pathname === '/baseline' ? null : pathname.replace(/^\/+/, '');
     const candidates = relative === null ? [resolve(baseline, 'index.html')]
       : pathname === '/candidate' ? [resolve(root, 'dist/index.html')]
@@ -87,7 +100,7 @@ const freshBrowser=process.env.MAZE_REVIEW_FRESH_BROWSER==='1';
 if(freshBrowser && pairCount!==1) throw Error('Fresh-process comparison is diagnostic only');
 let browser = await chromium.launch({ headless: true,channel });
 const report = { date: new Date().toISOString(), head: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), browser: browser.version(), hashes, served, fixture: fixture.id ?? fixture.level.id, route: jumpReview ? 'eight reversible one-hole jumps' : 'sixteen reversible ordinary steps', baselineIdentity,
-  scope: 'Headless local Chromium same-host paired frame/trace diagnostic; no physical iPad, native, GPU-time or Human beauty acceptance. Trace durations overlap and are not additive.', rows: [] };
+  candidateOnlyMedia, scope: 'Headless local Chromium same-host paired frame/trace diagnostic; no physical iPad, native, GPU-time or Human beauty acceptance. Trace durations overlap and are not additive.', rows: [] };
 report.pairCount=pairCount; report.pilot=pairCount!==5;
 report.cpuRate=cpuRate;
 report.cycles=cycles;
@@ -117,12 +130,13 @@ try {
         try {
           const page = await ctx.newPage(); const errors = [];
           page.on('pageerror', e => errors.push(String(e)));
-          const snapshot=chestReview&&mode==='baseline'?fixture.baselineSnapshot:fixture.snapshot;
+          const snapshot=mode==='baseline'&&fixture.baselineSnapshot?fixture.baselineSnapshot:fixture.snapshot;
+          const seededData=mode==='baseline'&&data.baselineProgress?{...data,progress:data.baselineProgress}:data;
           await page.addInitScript(({ data, snapshot }) => {
             localStorage.setItem(data.keys.run, JSON.stringify(snapshot));
             localStorage.setItem(data.keys.progress, JSON.stringify(data.progress));
             localStorage.setItem(data.keys.preferences, JSON.stringify({ ...data.preferences, quality: 'full', motion: 'full', pace: 'regular' }));
-          }, { data, snapshot });
+          }, { data:seededData, snapshot });
           await page.goto(`${origin}/${mode}`);
           await page.getByRole('button', { name: 'Play', exact: true }).click();
           const client = await ctx.newCDPSession(page), events = [];

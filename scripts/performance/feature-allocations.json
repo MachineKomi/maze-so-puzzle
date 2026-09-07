@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "scene23-ground-depth-and-readable-scale",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 400,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra bounds the Human-requested door/weapon scale, shared ground-depth plane, readable Power layer and boots-art removal. Initial combined build measures178568 JSgzip9, +348 versus XP-only581ee00; no media/dependency growth. This allocation is not timing or physical-device acceptance.",
+      "evidencePath": "docs/plans/SCENE-23-depth-and-scale.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Revert the complete scene slice to XP checkpoint581ee00 before publication if qualification fails; retain forward-compatible XP saves, accepted walls and the Vercel guard. Never clear progress or restore older schema writers."
+    },
+    {
       "id": "loot03b-authored-chests-and-historical-runs",
       "owner": "gameplay",
       "status": "approved",
@@ -315,7 +327,7 @@
       "compressedJsBytes": 600,
       "compressedCssBytes": 0,
       "runtimePublicBytes": 107396,
-      "reason": "The Human-requested post-v0.20.1 correction replaces two mistakenly retained legacy families—Goblin and Violet Moon—with deterministic transparent mgjrpg-02 derivatives, and assigns all 32 already-published friends across the existing 16 authored story mazes. The complete candidate measures +559 gzip-9 JavaScript bytes, +0 CSS bytes, and exactly +107,396 public-runtime bytes over the accepted v0.20.1 ceiling.",
+      "reason": "The Human-requested post-v0.20.1 correction replaces two mistakenly retained legacy families\u2014Goblin and Violet Moon\u2014with deterministic transparent mgjrpg-02 derivatives, and assigns all 32 already-published friends across the existing 16 authored story mazes. The complete candidate measures +559 gzip-9 JavaScript bytes, +0 CSS bytes, and exactly +107,396 public-runtime bytes over the accepted v0.20.1 ceiling.",
       "evidencePath": "docs/PERFORMANCE_BUDGETS.md#post-v0201-goblin-violet-and-authored-friend-roster-allocation",
       "reviewBy": "2026-10-04",
       "rollbackPoint": "Restore the Goblin and Violet Moon catalogue pointers and prior level content revisions/friend assignments from v0.20.1 tag checkpoint 4bca5322b6026e6a03a5b5a0f8e44aac1655d58a. Keep the two versioned derivatives and immutable source evidence until Plan 12.",

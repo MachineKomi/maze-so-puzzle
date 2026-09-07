@@ -190,7 +190,7 @@ contextual rendition remains distinct from the repaired 256px field derivative.
    rounded SVG paths in stable world coordinates, including holes, diagonal
    contacts, and the camera gutter used by the renderer.
 12. `src/campaign.ts` owns versioned campaign order/history and ID-based access
-    migration. `src/progress.ts` stores sanitized schema-v7 progress, stable
+    migration. `src/progress.ts` stores sanitized schema-v8 progress, stable
     unlocked story IDs, revision-scoped route records, and a bounded completion-
     receipt ledger in browser `localStorage`; old best steps remain explicitly
     historical after a map edit and a resumed pending exit cannot bank twice.
@@ -682,7 +682,7 @@ a saturated old ledger compacts same-source grounded bundles into an existing
 legal landing to reserve new channels; no current campaign save needs this.
 v2/v3 retain credited-treasure migration. Key5 is written before old-key cleanup;
 malformed/future and denied-write records stay protected. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md).
-# Authored chest continuation — schema-v6 snapshot
+# Authored chest continuation — delivered v0.22.22, schema6
 
 The current candidate adds explicit chest receipts and two-channel physical
 loot. Schema6 keeps the authoritative active-run-v5 key so v21 protects new
@@ -691,4 +691,48 @@ runs; old collected chest and visible Candy rewards do not gain retroactive
 Science or Mimic premium. New attempts use the four mixed chests and Twilight's
 Power6 disguised Candy. Generator2 remains pinned to rules5. See the
 [execution contract](plans/LOOT-03B-authored-chests-and-mimics.md). This paragraph
-describes the candidate; web0.22.21 remains published until qualification.
+describes the chest implementation published as web0.22.22.
+
+## Adventure XP candidate — schema-v7 snapshot / schema-v8 progress
+
+`adventureXp.ts` owns recognition rules1 and a derived level curve. Ledger3
+adds collected physical XP independently of Gold/Science RNG and immediate
+puzzle Power. Ordinary final defeats award2/4/6/10 by Power band; defeated
+Mimics award double. A labelled solve10 bonus is computed at the existing
+completion receipt, without a new floor source. Stay does not bank; moving on
+writes the won run journal, then the profile receipt, then clears the run.
+The existing failure/retry ordering remains authoritative.
+
+Profile7 migrates to8 with XP0 and all existing known fields preserved. The
+established progress-v6 key makes older readers protect future records. Run6
+migrates at active-run-v5, retains exact current or historical graph identity,
+and retires only new XP for already resolved origins. Gold/Science sources are
+preserved. Grounded migration compaction, if necessary, conserves value while
+reserving unresolved channels. Current authored maximum is24 channels and
+the sampled generated maximum22, below64. Visible caps remain24/12.
+
+One full story pass gives160 solve XP and at most210 collected crystal XP,
+reaching Level5–8 depending on collection. Replays earn recognition too; a
+noncombat replay gives10. Level99/49,490XP is only a numeric safety cap, with
+no unlocks/stat rewards or completion checklist. The Book shows saved progress;
+completion shows an explicitly pending preview. Crystal decoding is deferred,
+128×128/65,536 decoded bytes, with a code facet fallback and no new clock.
+See the [XP execution contract](plans/LOOT-03C-adventure-xp-execution.md).
+
+## Scene23 candidate: one solid depth order
+
+Terrain remains in its retained camera world. A second transparent actor plane
+uses the same bounded window, origin and travel transform. Objects, friends,
+Ame and combat/rescue replacements sort by ground Y (sixteenth-tile steps),
+with object/friend/Ame tie ranks. This separates solid ordering from artwork
+height and the wall-cap pass. An opening door dissolves below solid actors;
+closed doors remain ordinary depth-sorted scenery. Root wall caps26, airborne
+Ame27, portal46 and the single Power label60 have explicit presentation roles.
+The label shares movement and pose clocks; four cached jump animation handles
+cover actor, label and two grounded effects. No new rAF owner or frame layout
+read is added. Lite continues removing field image filters in the actor plane.
+
+Doors use alpha-bound1.12-width/1.35-height limits; floor weapons exactly reuse
+the registered held canvas scale. Actor clearance and accepted wall geometry
+are unchanged. Jump boots imagery/attachment rules are removed, while pickup,
+inventory, jumping ability and the finite ring remain. [Scene contract](plans/SCENE-23-depth-and-scale.md).

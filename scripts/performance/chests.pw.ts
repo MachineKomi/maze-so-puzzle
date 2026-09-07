@@ -9,6 +9,7 @@ import {LEGACY_CURATED_LEVELS} from '../../src/game/levels';
 import {createInitialGameState,movePlayer} from '../../src/game/engine';
 import {createActiveRunSnapshot} from '../../src/session';
 
+function preXp(game:any) { const {xpCollected, ...old}=game; return {...old,loot:{version:2,runId:game.loot.runId,legacyRetiredEnemyIds:game.loot.legacyRetiredEnemyIds,sources:game.loot.sources.filter((s:any)=>s.currency!=='xp')}}; }
 const output=resolve(process.env.MAZE_PERF_EVIDENCE_DIR!,'chests');
 const good=findInputFixture(events=>events.some(e=>e.type==='chest-opened'&&e.outcome==='good'))!;
 const mimic=findInputFixture(events=>events.some(e=>e.type==='chest-opened'&&e.outcome==='mimic'))!;
@@ -19,7 +20,7 @@ test.beforeAll(async()=>{await mkdir(output,{recursive:true});expect(good).toBeT
   const level=LEGACY_CURATED_LEVELS.find(l=>l.id===good.level.id)!;
   const before=good.prefix.reduce((g,d)=>movePlayer(level,g,d).state,createInitialGameState(level,good.before.loot.runId));
   expect(before.position).toEqual(good.before.position);expect(before.power).toBe(good.before.power);
-  const {chests:_,...oldGame}=before,event=good.result.events.find(e=>e.type==='chest-opened')!;
+  const {chests:_,...oldGame}=preXp(before),event=good.result.events.find(e=>e.type==='chest-opened')!;
   const baseline={...createActiveRunSnapshot({level,game:before,runId:before.loot.runId,mode:'normal',revealedTiles:good.revealed}),schemaVersion:5,game:oldGame};
   await writeFile(resolve(output,'paired-fixtures.json'),JSON.stringify({keys,preferences:DEFAULT_PRESENTATION_PREFERENCES,progress:createDefaultPlayerProgress(16),
     fixtures:[{id:'authored-chest',snapshot:savedFixture(good,'chest-pair'),baselineSnapshot:baseline,direction:good.direction,objectId:event.objectId,
@@ -67,7 +68,7 @@ for(const [quality,motion,width,height] of [
       await expect(page.locator('.battle-presentation')).toHaveCount(0);
     }
     await page.waitForTimeout(2000);const settled=await read();
-    const rewards=settled.loot.sources.filter((s:any)=>s.objectId===event.objectId);expect(rewards).toHaveLength(2);
+    const rewards=settled.loot.sources.filter((s:any)=>s.objectId===event.objectId);expect(rewards).toHaveLength(outcome==='good'?2:3);
     for(const s of rewards)expect(s.credited+s.drops.reduce((n:number,d:any)=>n+d.amount,0)).toBe(s.amount);
     expect(rewards.find((s:any)=>s.currency==='gold').amount).toBeGreaterThanOrEqual(outcome==='good'?8:11);
     await page.screenshot({path:resolve(output,`${label}-settled.png`)});
@@ -94,15 +95,31 @@ for(const outcome of ['good','mimic'] as const)test(`reload interrupts ${outcome
   await writeFile(resolve(output,`${outcome}-reload.json`),JSON.stringify({during,after},null,2));
 });
 
+for(const phase of ['good-open','revealed','defeated'] as const)test(`XP23 migrates v22 chest ${phase} without losing receipts or minting XP`,async({page})=>{
+  const f=phase==='good-open'?good:mimic;
+  const game=phase==='defeated'?movePlayer(f.level,f.result.state,f.direction).state:f.result.state;
+  expect(game.chests.some(c=>c.phase===phase)).toBe(true);
+  const snapshot={...createActiveRunSnapshot({level:f.level,game,runId:game.loot.runId,mode:'normal',revealedTiles:f.revealed}),schemaVersion:6,game:preXp(game)};
+  await page.addInitScript(({keys,snapshot,progress,preferences})=>{
+    localStorage.setItem(keys.run,JSON.stringify(snapshot));localStorage.setItem(keys.progress,JSON.stringify(progress));localStorage.setItem(keys.preferences,JSON.stringify(preferences));
+  },{keys,snapshot,progress:createDefaultPlayerProgress(16),preferences:{...DEFAULT_PRESENTATION_PREFERENCES,quality:'static'}});
+  await page.goto('/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();
+  const restored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),keys.run);
+  expect(restored.schemaVersion).toBe(7);expect(restored.game.chests).toEqual(game.chests);expect(restored.game.power).toBe(game.power);
+  expect(restored.game.xpCollected).toBe(0);expect(restored.game.loot.sources.some((s:any)=>s.currency==='xp')).toBe(false);
+  for(const source of snapshot.game.loot.sources){const after=restored.game.loot.sources.find((s:any)=>s.sourceId===source.sourceId);expect(after.amount).toBe(source.amount);expect(after.credited+after.drops.reduce((n:number,d:any)=>n+d.amount,0)).toBe(source.amount);}
+  await writeFile(resolve(output,`v22-${phase}.json`),JSON.stringify({snapshot,restored},null,2));
+});
+
 test('production runtime resumes v21 Twilight and restarts on the new layout',async({page})=>{
   const level=LEGACY_CURATED_LEVELS.find(l=>l.id==='twilight-treasure-loop')!,runId='run-chest-old-twilight';
-  const game=createInitialGameState(level,runId),{chests:_,...oldGame}=game;
+  const game=createInitialGameState(level,runId),{chests:_,...oldGame}=preXp(game);
   const snapshot={...createActiveRunSnapshot({level,game,runId,mode:'normal',revealedTiles:[]}),schemaVersion:5,game:oldGame};
   await page.addInitScript(({keys,snapshot,progress})=>{if(!sessionStorage.getItem('legacy-start')){localStorage.setItem(keys.run,JSON.stringify(snapshot));localStorage.setItem(keys.progress,JSON.stringify(progress));sessionStorage.setItem('legacy-start','1');}},
     {keys,snapshot,progress:createDefaultPlayerProgress(16)});
   await page.goto('/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();
   const restored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),keys.run);
-  expect(restored.schemaVersion).toBe(6);expect(restored.gameplayFingerprint).toBe(level.gameplayFingerprint);expect(restored.game.chests).toEqual([]);
+  expect(restored.schemaVersion).toBe(7);expect(restored.gameplayFingerprint).toBe(level.gameplayFingerprint);expect(restored.game.chests).toEqual([]);
   expect(restored.game.position).toEqual(game.position);
   await page.getByRole('button',{name:'Restart',exact:true}).click();await page.getByRole('button',{name:'Again!',exact:true}).click();
   await expect.poll(()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).gameplayFingerprint,keys.run)).not.toBe(level.gameplayFingerprint);

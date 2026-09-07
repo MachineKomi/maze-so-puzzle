@@ -25,14 +25,16 @@ async function travelState(page:Page) {
     const cell={x:size.x/cols,y:size.y/cols};
     // PERF-02 uses percent world translation; resolve against its full box.
     const translation=(element:HTMLElement)=>{const parts=getComputedStyle(element).translate.split(" ");const extent=element===world?{x:parseFloat(world.style.width)*size.x/100,y:parseFloat(world.style.height)*size.y/100}:{x:element.clientWidth,y:element.clientHeight};const px=(v:string|undefined,n:number)=>(parseFloat(v??"0")||0)*(v?.endsWith("%")?n/100:1);return {x:px(parts[0],extent.x),y:px(parts[1],extent.y)};};
-    const w=translation(world),p=translation(player);
+    const w=translation(world);
     const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
     const logicalCamera={x:pane.x,y:pane.y};
-    const logical={x:parseFloat(player.style.left)*cols/100+logicalCamera.x,y:parseFloat(player.style.top)*cols/100+logicalCamera.y};
-    const position={x:logical.x+(p.x-w.x)/cell.x,y:logical.y+(p.y-w.y)/cell.y};
     const camera={x:logicalCamera.x-w.x/cell.x,y:logicalCamera.y-w.y/cell.y};
     const sx=rect.width/board.offsetWidth,sy=rect.height/board.offsetHeight;
-    return {position,logical,camera,cell:{x:cell.x*sx,y:cell.y*sy},center:{x:rect.left+(board.clientLeft+(position.x-camera.x+.5)*cell.x)*sx,y:rect.top+(board.clientTop+(position.y-camera.y+.5)*cell.y)*sy},state:board.dataset.travelState,
+    // Read the painted actor rectangle: the retained actor plane uses calc()
+    // world registration, so parsing its inline left/top as a percent is invalid.
+    const painted=player.getBoundingClientRect();
+    const position={x:camera.x+(painted.x-rect.x-board.clientLeft*sx)/(cell.x*sx),y:camera.y+(painted.y-rect.y-board.clientTop*sy)/(cell.y*sy)};
+    return {position,camera,cell:{x:cell.x*sx,y:cell.y*sy},center:{x:painted.x+painted.width/2,y:painted.y+painted.height/2},state:board.dataset.travelState,
       followers:Array.from(board.querySelectorAll<HTMLElement>("[data-follower-id]")).map(f=>{const t=translation(f);return {id:f.dataset.followerId,
         x:pane.x+parseFloat(getComputedStyle(f).left)/cell.x+t.x/cell.x,
         y:pane.y+parseFloat(getComputedStyle(f).top)/cell.y+t.y/cell.y};})};
@@ -121,7 +123,8 @@ for(const [width,height] of [[1920,1080],[1280,720],[1194,834],[1024,768],[960,5
       const reversed=movePlayer(level,movePlayer(level,initial,direction).state,opposite[direction]).state;
       await expectUiRouteState(page,reversed);
       await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
-      const stopped=await travelState(page);expect(stopped.position.x).toBeCloseTo(initial.position.x,4);expect(stopped.position.y).toBeCloseTo(initial.position.y,4);
+      const stopped=await travelState(page);
+      for(const axis of ['x','y'] as const)expect(Math.abs(stopped.position[axis]-initial.position[axis])*stopped.cell[axis]).toBeLessThan(.025);
       await page.getByRole("button",{name:`Move ${direction}`,exact:true}).click();
       const after=movePlayer(level,reversed,direction).state;await expectUiRouteState(page,after);
       await action(page,"hint");
@@ -190,7 +193,8 @@ for(const kind of ["door-opened","enemy-defeated","hole-jumped","portal-warped"]
     else {
       expect(step.result.state.position).toEqual(step.before.position);
       await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
-      const stationary=await travelState(page);expect(stationary.position.x).toBeCloseTo(step.before.position.x,4);expect(stationary.position.y).toBeCloseTo(step.before.position.y,4);
+      const stationary=await travelState(page);
+      for(const axis of ['x','y'] as const)expect(Math.abs(stationary.position[axis]-step.before.position[axis])*stationary.cell[axis]).toBeLessThan(.025);
       const translated=await page.evaluate(()=>[...document.querySelectorAll<HTMLElement>("[data-travel-camera-anchor]")].map(e=>({actual:e.style.translate,world:document.querySelector<HTMLElement>(".camera-world")!.style.translate})));
       // Full-world translation is absolute; camera-relative anchors are settled at zero.
       for(const anchor of translated)expect(anchor.actual.split(" ").every(value=>parseFloat(value)===0)).toBe(true);
@@ -212,7 +216,7 @@ for(const [width,height] of [[780,312],[1194,834]]) test(`MOVE five friends foll
   const check=async()=>{
     await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
     const painted=await travelState(page),expected=followerTargets(procession);
-    const badge=await page.locator('.player-layer > .player-power').boundingBox(),board=await page.locator('.maze-board').boundingBox();
+    const badge=await page.locator('.player-label-layer .player-power').boundingBox(),board=await page.locator('.maze-board').boundingBox();
     expect(badge!.y, 'Complete Power line stays below the board edge').toBeGreaterThanOrEqual(board!.y+2);
     expect(badge!.y+badge!.height).toBeLessThanOrEqual(board!.y+board!.height-2);
     expect(painted.followers.map(f=>f.id)).toEqual(expected.map(f=>f.id));

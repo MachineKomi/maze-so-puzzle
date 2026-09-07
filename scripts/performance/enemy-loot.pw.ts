@@ -53,14 +53,14 @@ for(const [quality,motion,width,height,noCanvas] of [
     await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);
     await page.waitForTimeout(60);const during=await read();
     expect(during.power).toBe(event.powerAfter);expect(during.goldStarsCollected+during.sciencePointsCollected).toBe(0);
-    expect(during.loot.sources).toHaveLength(2);expect(during.loot.sources.every((s:any)=>s.objectId===event.objectId&&s.credited===0)).toBe(true);
+    expect(during.loot.sources).toHaveLength(3);expect(during.loot.sources.every((s:any)=>s.objectId===event.objectId&&s.credited===0)).toBe(true);
     await expect(page.locator('.battle-presentation')).toHaveCount(0);
     await page.waitForTimeout(180);
     const burst=await read();expect(burst.goldStarsCollected+burst.sciencePointsCollected).toBe(0);
     const label=`${quality}-${motion}-${width}-${noCanvas}`;
     await page.screenshot({path:resolve(output,`${label}-burst.png`)});
     await page.waitForTimeout(1800);const settled=await read();
-    expect(settled.loot.sources.map((s:any)=>s.currency).sort()).toEqual(['gold','science']);
+    expect(settled.loot.sources.map((s:any)=>s.currency).sort()).toEqual(['gold','science','xp']);
     for(const source of settled.loot.sources) expect(source.credited+source.drops.reduce((n:number,d:any)=>n+d.amount,0)).toBe(during.loot.sources.find((s:any)=>s.sourceId===source.sourceId).amount);
     const samples=await page.evaluate(()=>(window as any).enemySamples as any[]);
     expect(samples.some(s=>s.battle)).toBe(true);expect(samples.filter(s=>s.battle).every(s=>s.loot===0)).toBe(true);
@@ -70,7 +70,7 @@ for(const [quality,motion,width,height,noCanvas] of [
     // Enter the real cleared enemy square; never teleport toward a reward.
     await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);await page.waitForTimeout(1300);
     const approached=await read();expect(approached.defeatedEnemyIds).toEqual(settled.defeatedEnemyIds);
-    expect(approached.power).toBe(settled.power);expect(approached.loot.sources).toHaveLength(2);
+    expect(approached.power).toBe(settled.power);expect(approached.loot.sources).toHaveLength(3);
     expect(approached.goldStarsCollected+approached.sciencePointsCollected).toBeGreaterThanOrEqual(settled.goldStarsCollected+settled.sciencePointsCollected);
     expect(errors).toEqual([]);
     await writeFile(resolve(output,`${label}.json`),JSON.stringify({during,burst,settled,approached,samples,errors},null,2));
@@ -88,7 +88,7 @@ test('reload during battle preserves earned enemy value without replay or duplic
   await enter();await expect(page.locator('.battle-presentation')).toHaveCount(0);await page.waitForTimeout(1600);
   const after=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).game,keys.run);
   expect(after.power).toBe(during.power);expect(after.defeatedEnemyIds).toEqual(during.defeatedEnemyIds);
-  expect(after.loot.sources).toHaveLength(2);
+  expect(after.loot.sources).toHaveLength(3);
   for(const source of after.loot.sources)expect(source.credited+source.drops.reduce((n:number,d:any)=>n+d.amount,0))
     .toBe(during.loot.sources.find((s:any)=>s.sourceId===source.sourceId).amount);
   await writeFile(resolve(output,'battle-reload.json'),JSON.stringify({during,after},null,2));
@@ -140,7 +140,7 @@ for(const lite of [false,true])test(`saturated loot releases enemy then new trea
   const visible=(row:any)=>row.represented.filter((s:any)=>s.ids.length);
   expect(visible(result.initial)).toHaveLength(lite?8:20);
   expect(visible(result.during).some((s:any)=>s.objectId==='priority-enemy')).toBe(false);
-  expect(visible(result.released).filter((s:any)=>s.objectId==='priority-enemy').map((s:any)=>s.currency).sort()).toEqual(['gold','science']);
+  expect(visible(result.released).filter((s:any)=>s.objectId==='priority-enemy').map((s:any)=>s.currency).sort()).toEqual(['gold','science','xp']);
   expect(visible(result.treasure).some((s:any)=>s.objectId==='priority-treasure')).toBe(true);
   for(const row of [result.released,result.treasure]) {
     const ids=visible(row).flatMap((s:any)=>s.ids);expect(ids.length).toBeLessThanOrEqual(lite?8:20);expect(ids.every((id:string)=>row.motions.includes(id))).toBe(true);

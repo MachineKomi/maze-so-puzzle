@@ -1,5 +1,8 @@
 # Human decisions and steer
 
+**September7 explicit new scene steer:** [five-point intake](user-playtests/2026-09-07-doors-depth-power-and-jump.md) requires taller doors, matching pickup/held weapon scale, larger always-readable Power, consistent ground-depth sprites and removal of boots artwork from jumps. SCENE-23 is authorized alongside XP; this does not reopen accepted wall geometry or imply acceptance of the implementation.
+
+
 **September7 engineering delivery, not new Human acceptance:** [web0.22.21](reviews/2026-09-07-v02221-public-verification.md)
 implements FIELD-21, release12f484f/runtime6cc9f86. Accepted wall
 design is preserved; Q01/Q02/Q05 P21 ask about new proportions, jump, border and

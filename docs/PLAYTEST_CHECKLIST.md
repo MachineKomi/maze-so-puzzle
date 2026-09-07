@@ -1,5 +1,23 @@
 # Family playtest checklist
 
+
+## Pending short journey — P23 / Q09
+
+Candidate0.22.23 is implemented but not yet published/qualified. Once ready:
+
+- Compare a door beside Ame and weapon pickup versus held size.
+- Walk vertically/horizontally past friends and objects; check grounded depth,
+  opening doors behind Ame and readable Power above walls.
+- Jump horizontally: no boots artwork, Ame and her Power move together above
+  every wall, with ordinary grounded depth returning at landing.
+- Defeat an enemy: rainbow XP should burst, settle and collect nearby. Finish,
+  inspect pending XP/Level, choose Stay if desired, then Next to bank it once.
+  The Book Stats page should show the saved Adventure Level.
+
+Q08/P19 physical Apple/cold-Power observations remain separate; no blocking
+new decision. Recognition-only XP and inventory-before-eggs are current defaults.
+
+
 ## Current short journey — P22 / Q05
 
 **Ready on [published0.22.22](reviews/2026-09-07-v02222-public-verification.md).** In an already unlocked

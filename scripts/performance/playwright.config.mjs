@@ -26,7 +26,7 @@ process.env.MAZE_PERF_EVIDENCE_DIR = evidenceRoot;
 
 export default defineConfig({
   testDir: import.meta.dirname,
-  testMatch: ["chests.pw.ts", "camera-window.pw.ts", "browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts", "ui-correction.pw.ts", "phone-book.pw.ts", "book-completion.pw.ts", "jump-camera.pw.ts", "tall-walls.pw.ts", "hazard-surfaces.pw.ts", "wall-sprites.pw.ts", "reward-sprites.pw.ts", "physical-loot.pw.ts", "reward-numbers.pw.ts", "enemy-loot.pw.ts"],
+  testMatch: ["scene-depth.pw.ts", "adventure-xp.pw.ts", "chests.pw.ts", "camera-window.pw.ts", "browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts", "ui-correction.pw.ts", "phone-book.pw.ts", "book-completion.pw.ts", "jump-camera.pw.ts", "tall-walls.pw.ts", "hazard-surfaces.pw.ts", "wall-sprites.pw.ts", "reward-sprites.pw.ts", "physical-loot.pw.ts", "reward-numbers.pw.ts", "enemy-loot.pw.ts"],
   fullyParallel: false,
   workers: 1,
   retries: 0,

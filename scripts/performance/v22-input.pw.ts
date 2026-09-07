@@ -824,11 +824,14 @@ for (const kind of SUCCESS_EVENTS) {
         // Measure the composed offset, not the old left/top-only implementation.
         const camera = { x: windowBox.x - worldTiles(0, windowBox.width, cellX),
           y: windowBox.y - worldTiles(1, windowBox.height, cellY) };
+        const retainedActor=!!player.closest('.camera-actors');
+        const origin=retainedActor?{x:parseFloat(getComputedStyle(player).left)/cellX+windowBox.x,y:parseFloat(getComputedStyle(player).top)/cellY+windowBox.y}
+          :{x:parseFloat(player.style.left)*cols/100+camera.x,y:parseFloat(player.style.top)*cols/100+camera.y};
         return {
           camera,
           worldOrigin: { left: world.style.left, top: world.style.top },
-          player: { x: parseFloat(player.style.left) * cols / 100 + camera.x + playerTranslation[0]! / cellX,
-            y: parseFloat(player.style.top) * cols / 100 + camera.y + playerTranslation[1]! / cellY },
+          player: { x: origin.x + playerTranslation[0]! / cellX,
+            y: origin.y + playerTranslation[1]! / cellY },
           followers: [...board.querySelectorAll<HTMLElement>("[data-follower-id]")].map(node => ({
             id: node.dataset.followerId!, point: { x: parseFloat(getComputedStyle(node).left) / cellX + windowBox.x, y: parseFloat(getComputedStyle(node).top) / cellY + windowBox.y },
           })),

@@ -1,19 +1,31 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current in-flight scope, September7: candidate0.22.23 combines [LOOT-03 C rainbow XP](plans/LOOT-03C-adventure-xp-execution.md) and [SCENE-23](plans/SCENE-23-depth-and-scale.md).** The latest Human doors/weapon scale, Power readability, solid sprite depth and jump boots feedback is being implemented and qualified by Astra, with independent Sol review. Branch `codex/adventure-xp`; web0.22.22 remains live. Next is protected usable inventory before eggs. The wider roadmap and physical Apple/cold-Power/native open items remain intact. Older active/next labels below are historical.
+
+
 **Current delivery — web0.22.22:** [public receipt](reviews/2026-09-07-v02222-public-verification.md) binds
 four authored mixed chests, disguised Power6 Candy and protected historical
 save migration. Actual Sol supports bounded web publication;747 tests,
 105 distinct browser contracts and four five-pair cohorts qualify the frozen
 runtime e08775f. Reviewed df33b62/release c5f2305; both public origins verified.
 
-**Next: recognition-only rainbow XP, then protected usable inventory before eggs.**
+**In flight: LOOT-03 C rainbow XP, then protected usable inventory before eggs.**
+Candidate0.22.23 on `codex/adventure-xp`; [frozen contract](plans/LOOT-03C-adventure-xp-execution.md). Physical XP, protected saves and Book/completion progress are implemented; qualification is in progress. Web0.22.22 remains live until promotion.
 The authored chest/Mimic tranche of B is delivered; generated Mimics remain a
 separate versioned Plan09 tranche. ART-REWARD-01 proper generated reward artwork,
 HOLE-02, icon-led pace, HAZARD-CONTACT-01, DELIGHT/LEARN and campaign/Garden/co-op
 remain open. Q05/P22 covers new chest feel; Q08/P19 remains affected-device camera
 and cold first-Power observation. No physical Apple/3GB/native acceptance.
-Astra owns runtime on codex/chest-mimic-rewards; Sol independently reviews.
+Astra owns runtime on codex/adventure-xp; Sol independently reviews.
 Earlier dated active/next/live labels below are historical and superseded.
+
+Docs closure a6cd8cb is backed up on main and this branch. Vercel actually
+skipped it at11:09:13UTC through the unchanged Ignored Build Step. The
+[observed receipt](reviews/2026-09-07-v02222-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only for the next runtime slice; no extra
+main push or game build is needed to align documentation SHAs. All owned QA
+processes stopped; unowned4271 is untouched. Retain the artifact ledger for
+explicit Human cleanup review.
 
 **Current delivery — web0.22.21:** [public proof](reviews/2026-09-07-v02221-public-verification.md).
 Release **12f484f6f438a8ac44a6316ffbc212b600416518**, reviewed **4bd97e76110e0d3611ba46f1356474e4917b4d9b**,

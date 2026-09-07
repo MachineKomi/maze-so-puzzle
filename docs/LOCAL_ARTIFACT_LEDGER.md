@@ -813,3 +813,89 @@ archive, clone or native package. Documentation closure creates no game build.
 | v02222-public-20260907 |11|19652180|
 | chest22-public-canonical |19|4206837|
 | chest22-public-alias |19|5004742|
+
+## XP23 working artifacts — 2026-09-07
+
+Astra, `codex/adventure-xp`. No deletion/archive, clone, native build or extra
+deployment. Reuse the existing ignored `dist/` in place, plus its existing
+`node_modules/.cache/maze-performance` build marker. QA lives under sibling
+`C:/GameDev/maze-game-qa/performance`; retain until explicit Human cleanup review.
+
+- `release-v02222`: four frozen HTML/JS/CSS/identity files,754,409 bytes; no media or repository copy. Supplies the actual v22 entry for paired review.
+- `xp23-unit-initial.log`: failed unconstrained-worker run (process allocation/OOM); diagnostic only. Subsequent tests use `--maxWorkers=1`.
+- `xp23-unit-serial.log`, `xp23-unit-targeted.log`, `xp23-unit-final.log`, `xp23-build-initial.log`, `xp23-build.log`, `xp23-art-check.json`: compact iteration/check logs, including stale pre-XP assertions honestly retained.
+- `xp23-browser-pilot`:8 passing mounted XP journeys, screenshots and storage receipts.
+- `xp23-source`: supply and paired-fixture JSON, no browser traces or media copies.
+- Planned `xp23-browser-final`, `xp23-enemy-frames`, `xp23-enemy-work`, `xp23-camera-frames`, `xp23-camera-work`: bounded one-worker correctness and paired performance evidence; count at closeout. No video by default.
+- Generated original retained at `C:/Users/hawki/.codex/generated_images/01a077d5-fe35-7ce3-8c81-0c2f7f852500/exec-e2135ef3-bdaa-40e1-b126-74a39be2c665.png` (778,096 bytes). Exact immutable repo copy `docs/source-assets/production/adventure-xp-v1/generator.png`, plus prompt and structured source record, are durable provenance. Runtime derivative `public/assets/adventure-xp-v1.png` is12,573 bytes,128²,65,536 decoded bytes. Reproduce with `scripts/art_pipeline/adventure_xp.py` and the locked art Python. Only alpha≤3 margin trimming and premultiplied resize; no replacement matting or semantic alteration. Original remains intact.
+
+Sources, candidate art and review records are needed project assets/evidence,
+not proposed deletion candidates. Agent review does not invent Human art approval.
+
+### XP23 scene extension and interrupted attempts
+
+The user steered the active task with scene feedback. `xp23-browser-final` and
+`xp23-unit-qualified.log` from the interrupted XP-only attempt are incomplete,
+not passing receipts. Retain them for provenance. New bounded logs:
+`xp23-scene-build.log`, `xp23-scene-build2.log`, `xp23-scene-pilot.log`,
+`xp23-unit-combined.log`; `xp23-scene-pilot` contains18 passing scene/jump cases,
+small screenshots and geometry JSON. Planned final packet is `xp23-combined-browser`
+and its log; reuse existing dist in place. No deletion or duplicate repo.
+
+### XP23 final qualification packets
+
+- `xp23-unit-final-qualified.log`:757 passing unit tests. `xp23-sol-fixes-tests.log`
+  preserves the disproved completion-race test assumption; the engine already
+  settles accepted claims on goal entry. `xp23-sol-fixes-qualified.log`:13 pass.
+- `xp23-combined-browser`:101/117 pass; retained stale coordinate/label/currency
+  test failures. `xp23-final-browser`:120/122 pass; two remaining subpixel probe
+  tolerance failures, subsequently measured in painted pixels. It also contains
+  two mounted XP draw-size/alpha-provenance proofs and three v22 chest migrations.
+- `xp23-final-scene`:final26-case follow-up for physical Power scale/stroke,
+  subpixel tolerance, edge labels, followers, jumps and replacement handoffs.
+  The accepted logical runtime is42523f7, final font correction6ee51c4.
+- `xp23-final-build.log`, `xp23-release-build.log`, `xp23-perf-check.log` record
+  in-place builds and budget checks. The latest release-candidate dist remains
+  the one existing ignored tree; no native build or cloned release repo.
+- `xp23-source/sol-xp-crystal-tiny-grayscale.png`:Sol derivative-only legibility
+  board,768x640,34617 bytes; retained independent source review. No runtime asset
+  or original generator image changed.
+- Planned paired packets remain `xp23-enemy-frames`, `xp23-enemy-work`,
+  `xp23-camera-frames`, `xp23-camera-work`, with compact logs. Work cohorts alone
+  retain compressed traces/layer metadata; no video or work-cohort screenshots.
+  Final sizes and report identities will be recorded at qualification closeout.
+
+No files are deleted or archived. The failed/interrupted packets are useful
+provenance and can become cleanup-review candidates after acceptance, requiring
+explicit Human approval. All generated art/source records remain durable assets.
+
+### XP23 completed qualification inventory
+
+All owned local qualification workloads finished. Retain these packets until
+explicit Human cleanup review. Partial/failed browser packets are not clean-pass
+receipts. No files deleted, archived or extra repository cloned. Summary files
+include a small reproducible JavaScript aggregator and raw-report hashes.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| xp23-browser-final |30|5841827|
+| xp23-browser-pilot |21|2265822|
+| xp23-camera-frames |5|9688381|
+| xp23-camera-work |25|11083950|
+| xp23-combined-browser |290|144757885|
+| xp23-enemy-frames |5|9797555|
+| xp23-enemy-work |25|11635559|
+| xp23-final-browser |289|135739456|
+| xp23-final-scene |54|13681955|
+| xp23-scene-pilot |38|7268459|
+| xp23-source |3|62438|
+| xp23-summary |3|12222|
+
+Root XP23 logs/JSON: 25 files, 416547 bytes.
+Public verification packets will be counted separately after deployment.
+
+The small `xp23-summary/verify-public-bytes.mjs` helper checks both public
+origins against frozen HTML/JS/CSS/crystal hashes; its `public-bytes.json` is
+created only after actual deployment. Standard public smoke will use
+`v02223-public-20260907`, followed by `xp23-public-canonical` and
+`xp23-public-alias` for actual scene, XP and airborne routes.
