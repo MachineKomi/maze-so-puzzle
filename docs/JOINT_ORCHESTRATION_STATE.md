@@ -1,11 +1,15 @@
 # Maze so Puzzle — joint orchestration state
 
-**Current work — DELIGHT26 checkpoint A:** [calm pickup presence](plans/DELIGHT-26-calm-pickup-presence.md)
-on codex/calm-pickup-presence, Astra sole runtime writer and actual independent
-Sol review. Frozen candidate fd1f9e6; web0.22.25 remains live until qualification.
-Seven authored collectible kinds now use steady tile-local light, with no
-pickup animation, new JS/media or gameplay change. C durable-earned fanfare
-follows separately, then LEARN-01; preserve the wider roadmap and device queue.
+**Current delivery — web0.22.26:** [public receipt](reviews/2026-09-07-v02226-public-verification.md)
+closes DELIGHT26 checkpoint A, calm pickup presence. Frozen fd1f9e6,
+reviewed2433171, releasefc32f86; actual independent Sol supports publication.
+Both origins pass exact-byte verification, plus11 pickup contracts each.
+Astra remains sole runtime writer on codex/calm-pickup-presence. Q12/P26 is ready.
+Next: C durable-earned keepsake fanfare, then LEARN-01 including STORY-RESCUE-01.
+Use the verified C handoff in the [A contract](plans/DELIGHT-26-calm-pickup-presence.md).
+Preserve the wider roadmap, accepted walls/spacious HUD, usable Garden dependency,
+ART-REWARD-01 and open physical Apple/cold-Power/native queue. Earlier current,
+active and next assignments below are historical.
 
 Documentation closure ac055e5 is backed up on main and this branch. Vercel
 actually skipped it at16:47:58 UTC through the unchanged Ignored Build Step;

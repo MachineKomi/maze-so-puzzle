@@ -3,7 +3,9 @@
 Frozen runtime **fd1f9e64abe93135a58c810e461f9efe0f52618a**, candidate web0.22.26.
 Published25 runtime c931bc3 is the comparison. [Contract](../plans/DELIGHT-26-calm-pickup-presence.md)
 and [actual independent Sol review](2026-09-07-presence26-sol-review.md) govern
-this bounded checkpoint. **Status: local qualification complete; actual independent Sol supports bounded web promotion. Exact reviewed-head CI precedes merge.**
+this bounded checkpoint. **Status: published web0.22.26 after local qualification,
+actual independent Sol support and successful exact reviewed-head CI.** The
+[public receipt](2026-09-07-v02226-public-verification.md) binds both origins.
 
 ## Delivered candidate behavior
 
@@ -48,8 +50,12 @@ All raw evidence lives under C:/GameDev/maze-game-qa/performance.
 
 The union is **91 distinct affected contracts with passing latest results**,
 not one clean91-case run. Full project suite: **769 tests in78 files**.
-Frozen runtime CI34145915910 passed. Final reviewed-head CI is required before
-promotion; Windows compilation does not establish native acceptance.
+Frozen runtime CI34145915910 passed. Final reviewed head
+2433171a3c779bfb248312c50a9f61981e70e98d passed Browser build236,
+[CI34147305567](https://github.com/MachineKomi/maze-so-puzzle/actions/runs/34147305567),
+before PR17 merged as fc32f8631404e5a8ebcc5d73cbdcfa89c48cda2f.
+The release and reviewed trees are identical. Windows compilation does not
+establish native acceptance.
 
 ## Resources and source identity
 

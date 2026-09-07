@@ -1,8 +1,9 @@
 # Family playtest checklist
 
-## P26 / Q12 — calm pickup presence (candidate)
+## P26 / Q12 — calm pickup presence (published0.22.26)
 
-Publication is pending. In any unlocked maze, look at equipment, keys, potions
+Ready on [published0.22.26](reviews/2026-09-07-v02226-public-verification.md).
+In any unlocked maze, look at equipment, keys, potions
 and treasure while standing still, then collect one. Does the steady light make
 the item inviting and easy to spot without distracting from the maze? If useful,
 compare Full and Lite. Report device/maze for a glow crossing a wall, unclear

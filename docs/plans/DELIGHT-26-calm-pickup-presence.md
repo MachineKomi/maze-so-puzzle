@@ -1,5 +1,9 @@
 # DELIGHT-26 — calm, continuous pickup presence
 
+**Delivered web0.22.26:** [public receipt](../reviews/2026-09-07-v02226-public-verification.md).
+A is complete; C below is the next authorized slice, then LEARN-01. Actual Sol
+supports bounded publication; physical Apple/native and Q12 remain open.
+
 Authorized DELIGHT-02B checkpoint A after published25. Astra is sole runtime
 writer on codex/calm-pickup-presence; Sol independently reviews. C durable-earned
 keepsake fanfare remains next, then LEARN-01. B friend victory stays delivered.

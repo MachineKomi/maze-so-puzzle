@@ -1,7 +1,8 @@
 # Maze so Puzzle — playtest backlog
 
-**DELIGHT26 A in qualification:** seven authored collectible types retain a
-steady glow; [contract](plans/DELIGHT-26-calm-pickup-presence.md). C follows next.
+**DELIGHT26 A delivered on web0.22.26:** seven authored collectible types retain a
+steady glow; [public receipt](reviews/2026-09-07-v02226-public-verification.md),
+[contract](plans/DELIGHT-26-calm-pickup-presence.md). Q12/P26 is ready; C follows next.
 The C review also confirmed the projected precommit rewardSoundTimer can fire
 after Stay; replace it with sound owned by actual post-write earned presentation.
 Do not move banking earlier or emit on failed/future-profile writes.

@@ -1,9 +1,10 @@
 # Sequential specialist execution prompts
 
-**Current execution — DELIGHT26 A:** [calm pickup presence](DELIGHT-26-calm-pickup-presence.md)
-is the bounded candidate after published25 spacious exploration. Astra owns
-runtime on codex/calm-pickup-presence; actual Sol independently reviews. C
-successful-write earned fanfare follows next, then LEARN-01 including the
+**Current delivery — DELIGHT26 A:** [calm pickup presence](DELIGHT-26-calm-pickup-presence.md)
+is published as web0.22.26; [public receipt](../reviews/2026-09-07-v02226-public-verification.md).
+Astra owns runtime on codex/calm-pickup-presence; actual Sol independently reviewed.
+C successful-write earned fanfare follows next using the A contract's verified
+save-boundary handoff, then LEARN-01 including the
 authored rescue-outro mismatch. Earlier current/active/live assignments below
 are historical. Preserve the usable Garden dependencies and physical-device queue.
 
