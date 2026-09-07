@@ -108,3 +108,24 @@ Timing budgets are report-only until the variance qualification described in
 checks may block immediately. `npm run build` writes a source/dist fingerprint
 under ignored `node_modules/.cache/`; `perf:check` rejects a stale or modified
 `dist/` rather than assuming it came from the current tree.
+
+## LOOT-03 paired runs across the save migration
+
+Use the existing installed Playwright runtime via `MAZE_PLAYWRIGHT_PATH` and
+`installed-playwright-hook.mjs`; no package installation or new repository copy
+is needed on the restored laptop. `physical-loot.pw.ts` writes an opt-in paired
+fixture from current legal campaign checkpoints. Its seed is the exact compatible
+v3/rules3 form, shared by public17 and candidate18. Set
+`MAZE_REVIEW_CANDIDATE_RUN_KEY=maze-so-puzzle-active-run-v4`: only the candidate
+result-read key changes after real migration. The report logs both keys, served
+bytes and validated route endpoints; never read the removed v3 key and mistake
+it for an unchanged game.
+
+For `release-paired-review.mjs`, use `MAZE_REVIEW_ROUTE=loot`, fixture ID
+`physical-gold`, and the generated `physical-loot/paired-fixtures.json`. The
+same four real inputs open Gold, pause, approach the far drop, pause and retrace.
+The old immediate-credit effect and new physical effect intentionally differ;
+candidate value conservation is checked separately. Ordinary `shiny-sword`
+camera comparisons use the retained17 fixture and the same read-key override.
+Run five pairs plus warmups, alone; untraced frame cohorts and traced work cohorts
+remain distinct. Windows Chromium is not physical Apple or a3GB memory test.

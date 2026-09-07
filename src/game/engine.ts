@@ -1,3 +1,4 @@
+import { emptyLoot, authoredLootErrors, scatterTreasure, finishLootClaims } from "./loot";
 import {
   DIRECTION_DELTAS,
   type Direction,
@@ -59,7 +60,10 @@ export function isObjectResolved(object: LevelObject, state: GameState): boolean
 }
 
 export function createInitialGameState(level: LevelDefinition): GameState {
+  const lootErrors = authoredLootErrors(level);
+  if (lootErrors.length) throw Error(lootErrors.join(" "));
   return {
+    loot: emptyLoot(),
     levelId: level.id,
     position: { ...level.start },
     power: level.initialPower,
@@ -221,8 +225,9 @@ export function movePlayer(
   let rescuedAnimalIds = state.rescuedAnimalIds;
   let defeatedEnemyIds = state.defeatedEnemyIds;
   let openedDoorIds = state.openedDoorIds;
-  let goldStarsCollected = state.goldStarsCollected;
-  let sciencePointsCollected = state.sciencePointsCollected;
+  const goldStarsCollected = state.goldStarsCollected;
+  const sciencePointsCollected = state.sciencePointsCollected;
+  let loot = state.loot;
 
   if (object?.kind === "door" && !openedDoorIds.includes(object.id)) {
     if (!keys.includes(object.color)) {
@@ -364,25 +369,8 @@ export function movePlayer(
         break;
       }
       case "treasure": {
-        if (object.currency === "gold") {
-          goldStarsCollected += object.amount;
-          events.push({
-            type: "treasure-collected",
-            objectId: object.id,
-            currency: object.currency,
-            amount: object.amount,
-            total: goldStarsCollected,
-          });
-        } else {
-          sciencePointsCollected += object.amount;
-          events.push({
-            type: "treasure-collected",
-            objectId: object.id,
-            currency: object.currency,
-            amount: object.amount,
-            total: sciencePointsCollected,
-          });
-        }
+        loot = scatterTreasure(level, { ...state, collectedObjectIds }, object);
+        events.push({ type: "treasure-opened", objectId: object.id, currency: object.currency, amount: object.amount });
         break;
       }
     }
@@ -396,6 +384,7 @@ export function movePlayer(
   const won = armedForTarget && pointsEqual(target, level.exit);
   const nextState: GameState = {
     ...state,
+    loot,
     position: target,
     power,
     hasSword,
@@ -419,7 +408,7 @@ export function movePlayer(
     events.push({ type: "level-won", steps: nextSteps, power });
   }
 
-  return { state: nextState, moved: true, events };
+  return { state: won ? finishLootClaims(nextState) : nextState, moved: true, events };
 }
 
 /** Return from the pending completion choice without retriggering on the exit tile. */

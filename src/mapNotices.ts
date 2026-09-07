@@ -33,10 +33,10 @@ export function pickupToastFor(
         return { icon: ASSETS.potion, text: `Power Potion! ${event.powerBefore} + ${event.amount} = ${event.powerAfter}`, kind: "pickup" };
       case "key-collected":
         return { icon: resolveKeyArt(event.color).src, text: `Picked up the ${resolveKeyArt(event.color).label}!`, kind: "pickup" };
-      case "treasure-collected":
+      case "treasure-opened":
         return event.currency === "gold"
-          ? { icon: ASSETS.treasureGoldChest, text: `Collected ${event.amount} Gold Stars!`, kind: "pickup" }
-          : { icon: ASSETS.treasureScienceGears, text: `Collected ${event.amount} Science Points!`, kind: "pickup" };
+          ? { icon: ASSETS.treasureGoldChest, text: `${event.amount} Gold Stars scattered!`, kind: "pickup" }
+          : { icon: ASSETS.treasureScienceGears, text: `${event.amount} Science Points scattered!`, kind: "pickup" };
       default:
         break;
     }

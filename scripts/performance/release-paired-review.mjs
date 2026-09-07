@@ -15,6 +15,7 @@ const root = resolve(import.meta.dirname, '../..');
 const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/performance/phone02-book-paired-20260906');
 const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
+const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const pairCount = Number(process.env.MAZE_REVIEW_PAIRS ?? 5);
 const cpuRate = Number(process.env.MAZE_REVIEW_CPU_RATE ?? 1);
 const captureTrace = process.env.MAZE_REVIEW_TRACE !== '0';
@@ -80,7 +81,9 @@ report.host={platform:platform(),release:release(),cpu:cpus()[0]?.model,logicalC
   lockSha256:sha(await readFile(resolve(root,'package-lock.json'))),powerAndThermal:'Not controlled; diagnostic host, no physical low-memory qualification'};
 report.captureTrace=captureTrace;report.captureLayers=captureLayers;
 report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
+report.saveKeys={seed:data.keys.run,baseline:data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
+if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; baseline immediate credit versus physical collection';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
   for (const cohort of profiles) {
@@ -135,7 +138,14 @@ try {
             heapBytes:performance.memory?.usedJSHeapSize??null, images:document.images.length }));
           const resourcesBefore=await resources();
           // Four reversible four-step legs per cycle; preserve engine-derived direction.
-          if(idleReview) await page.waitForTimeout(8000);
+          if(lootReview) {
+            const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
+            await press(fixture.direction);await page.waitForTimeout(1500);
+            await press(fixture.approach);await page.waitForTimeout(900);
+            await press(reverse[fixture.approach]);await page.waitForTimeout(300);
+            await press(reverse[fixture.direction]);await page.waitForTimeout(1500);
+          }
+          else if(idleReview) await page.waitForTimeout(8000);
           else if(jumpReview) for(let step=0;step<8;step++){await page.keyboard.press(step%2?'ArrowLeft':'ArrowRight');await page.waitForTimeout(600);}
           else for (let cycle=0;cycle<cycles;cycle++) for (const direction of [fixture.direction, reverse[fixture.direction], fixture.direction, reverse[fixture.direction]]) {
             for (let step = 0; step < 4; step++) { await page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`); await page.waitForTimeout(240); }
@@ -143,7 +153,7 @@ try {
           const sample = await page.evaluate(key => {
             window.wallAb.done = true; window.wallAbObserver.disconnect();
             return { ...window.wallAb, save: JSON.parse(localStorage.getItem(key)), brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
-          }, data.keys.run);
+          }, mode === 'candidate' ? (process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY || data.keys.run) : data.keys.run);
           if(captureTrace) { const complete = new Promise(resolve => client.once('Tracing.tracingComplete', resolve));
             await client.send('Tracing.end'); await complete; }
           const deltas = sample.frames.slice(1).map((t, i) => t - sample.frames[i]), sorted = [...deltas].sort((a, b) => a - b);
@@ -152,7 +162,8 @@ try {
             return [name, { count: entries.length, totalMs: entries.length ? entries.reduce((n, e) => n + (e.dur || 0), 0) / 1000 : null }];
           }));
           const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: fixture.snapshot.game.steps, stepsAfter: sample.save?.game?.steps,
-            resourcesBefore,resourcesAfter:await resources(),
+            resourcesBefore,resourcesAfter:await resources(),loot:sample.save?.game?.loot??null,
+            gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,
             dpr:cohort.dpr,cpuRate,rebases:sample.rebases,windows:sample.windows,
             rebaseAdjacentDeltas:deltas.filter((_,i)=>[i,i+1].some(j=>j>0&&sample.windows[j]?.join()!==sample.windows[j-1]?.join())),
             layers:layers.map(({width,height,drawsContent,backendNodeId,paintCount})=>({width,height,drawsContent,backendNodeId,paintCount})),
@@ -163,7 +174,11 @@ try {
           if (pair === 0) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if(lootReview) {
+            const source=row.loot?.sources.find(s=>s.sourceId===fixture.sourceId);
+            if(mode==='candidate' && (!source || source.credited<=0 || source.credited+source.drops.reduce((n,d)=>n+d.amount,0)!==fixture.amount)) throw Error('Physical reward not conserved');
+          }
         } finally { await ctx.close(); }
       }
     }

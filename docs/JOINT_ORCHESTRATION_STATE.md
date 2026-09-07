@@ -2,8 +2,8 @@
 
 **Current delivery — September 7:** web **0.22.17 is live**, release
 **65acb82076e299e7764b508e0d83ff2f77dd96df**, reviewed checkpoint b41a5c4,
-frozen runtime eff0530. Root is on `codex/bounded-camera-performance`,
-fast-forwarded to the release; remote main owns that release.
+frozen runtime eff0530. Root is on `codex/physical-authored-loot` from0c4535e;
+remote main is documentation closure81387a3, retaining that release payload.
 [Public verification](reviews/2026-09-07-v02217-public-verification.md),
 [qualification](reviews/2026-09-07-v02217-web-qualification.md) and
 [Sol's independent review](reviews/2026-09-07-camera17-sol-final-review.md)
@@ -31,7 +31,9 @@ motion remain;15 wall/foreground/larger-sprite geometry and13's Human-accepted
 tall-wall direction are preserved. Q01/P17, Q02, Q04/Q07/P18 remain independent
 family observations, not a reason to redo delivered source work.
 
-**Next runtime dispatch:** Astra remains sole runtime writer; Sol reviews
+**Active runtime dispatch:** [LOOT-03 A implementation](reviews/2026-09-07-loot03-implementation.md)
+is in progress, with pure ledger, v4 migration, collection and completion owners
+under test. It is not deployed. Astra remains sole runtime writer; Sol reviews
 independently. Resume [LOOT-03 A](reviews/2026-09-07-loot03-readiness.md) as the
 complete authored Gold/Science ledger/claim/presentation/completion slice.
 Protect v3/rules-3 migration and future active-save inputs first, prove value
@@ -42,14 +44,16 @@ DELIGHT-02B/LEARN-01, connected HOLE-02, Plan08 icon-led pace and the wider
 roadmap. No new execution permission is needed.
 
 [Human queue](HUMAN_REVIEW_QUEUE.md) remains visible at each closeout. All owned
-browsers/servers are stopped. The [artifact ledger](LOCAL_ARTIFACT_LEDGER.md)
+browsers/servers are scoped to active qualification. The [artifact ledger](LOCAL_ARTIFACT_LEDGER.md)
 records459033994 bytes of CAMERA-17 diagnostics plus10383251 public proof bytes;
 failed/pilot packets are candidates for a later exact-target cleanup review,
 not approval to delete/archive. No full repository/media clone or native package.
 
 [Docs-only rules](VERCEL_DEPLOYMENT.md) now use actual successful65acb82.
-The next documentation closure must skip through the unchanged deployment guard;
-record its actual ignored-build result without another game build. Earlier
+Documentation closure81387a3 actually skipped through the unchanged deployment
+guard at04:15:40UTC. Its [observed receipt](reviews/2026-09-07-v02217-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only; include it with the next runtime slice
+without another main push or game build just to record the skip. Earlier
 live/active/next labels below retain historical provenance and are superseded
 by this current state.
 

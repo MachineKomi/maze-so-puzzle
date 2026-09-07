@@ -1,5 +1,40 @@
 # Local artifact ledger and cleanup review
 
+## LOOT-03 A — September7 active qualification
+
+Production builds reuse `C:/GameDev/maze-game/dist` and the existing provenance
+file under `node_modules/.cache/maze-performance/`; no repository/media copy.
+The frozen17 four-file baseline at `performance/camera17-release-v02217` is reused.
+Under `C:/GameDev/maze-game-qa/performance/`, `loot03-browser-r1` is an interrupted
+initial browser run retained for review; `loot03-browser-r2` is the first complete
+candidate attempt. Both contain only test output/screenshots, not duplicate media.
+Final counts and pass/fail dispositions will be recorded at qualification.
+No deletion/archive or native package was performed.
+
+### LOOT-03 final local qualification inventory
+
+Astra-owned outputs below are under `C:/GameDev/maze-game-qa/performance/`.
+Eight folders,248 files,177931662bytes. All owned local browser/measurement
+processes are stopped. Current `dist/` is the one reusable final85f49ea build;
+the existing four-file17 snapshot supplies the comparison without a media clone.
+Hold final proofs and baseline for release/recovery; retain diagnostics for an
+explicit Human cleanup review. No deletion/archive and no native package.
+
+| Folder | Files | Bytes | Disposition |
+| --- | ---: | ---: | --- |
+| loot03-browser-r1 |5|4333714|Interrupted initial run; build/provenance refreshed, later entry hash unchanged. |
+| loot03-browser-r2 |33|28596867|Seven passes; superseded count/toast images, retained diagnostic. |
+| loot03-browser-r3 |104|58212687|41 passing broader pre-freeze cases, source scope in qualification. |
+| loot03-final-browser |38|28806787|11 frozen85f49ea cases, actual final images and migration fixture. |
+| loot03-camera-frames |5|9925286|Five untraced ordinary pairs/profile; phone50.034ms outlier retained. |
+| loot03-camera-work |29|18405802|Five separate ordinary traced pairs/profile. |
+| loot03-loot-frames |5|10835013|Five physical-loot untraced pairs/profile; common cold opening hitch. |
+| loot03-loot-work |29|18815506|Five separate loot traced pairs/profile; added work/cold tail disclosed. |
+
+Raw hashes, host/source/served identity and limitations are in the
+[web qualification](reviews/2026-09-07-v02218-web-qualification.md). Public
+verification will add one explicitly inventoried packet after deployment.
+
 ## CAMERA-17 baseline — September7
 
 `C:/GameDev/maze-game-qa/performance/camera17-baseline-v02216/` retains exactly

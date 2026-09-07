@@ -100,7 +100,8 @@ if (process.env.MAZE_PUBLIC_CAMERA_FIXTURES) {
         for (let step = 0; step < 4; step++) { await page.keyboard.press(`Arrow${direction[0].toUpperCase() + direction.slice(1)}`); await page.waitForTimeout(300); }
         if (!turn) turn = await camera();
       }
-      const after = await camera(), saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), data.keys.run);
+      const resultKey=process.env.MAZE_PUBLIC_CAMERA_RUN_KEY||data.keys.run;
+      const after = await camera(), saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key)), resultKey);
       if (Math.abs(turn.x - before.x) + Math.abs(turn.y - before.y) < 1
         || Math.abs(after.x - before.x) + Math.abs(after.y - before.y) > .0001
         || [before, turn, after].some(c => !c.aligned || c.width > 10 || c.height > 10)
@@ -108,8 +109,40 @@ if (process.env.MAZE_PUBLIC_CAMERA_FIXTURES) {
         || JSON.stringify(saved.game.position) !== JSON.stringify(fixture.snapshot.game.position)
         || errors.length) throw Error(`Public camera route failed ${JSON.stringify({ before, turn, after, errors })}`);
       await page.screenshot({ path: resolve(output, `camera-${width}.png`) });
-      receipt.camera.push({ origin, width, height, dpr, before, turn, after, steps: saved.game.steps, errors });
+      receipt.camera.push({ origin, width, height, dpr, before, turn, after, steps: saved.game.steps, seedKey:data.keys.run,resultKey,errors });
     } finally { await context.close(); }
+  }
+}
+if(process.env.MAZE_PUBLIC_LOOT_FIXTURES) {
+  const fixtureBytes=await readFile(process.env.MAZE_PUBLIC_LOOT_FIXTURES),data=JSON.parse(fixtureBytes),fixture=data.fixtures.find(f=>f.id==='physical-gold');
+  if(!fixture)throw Error('Expected current authored loot fixture');
+  receipt.lootFixtureSha256=sha(fixtureBytes);receipt.loot=[];
+  for(const origin of ['https://mazesopuzzle.com','https://maze-so-puzzle.vercel.app']) {
+    const context=await browser.newContext({viewport:{width:844,height:390},deviceScaleFactor:3});
+    try {
+      const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+      await page.addInitScript(({data,fixture})=>{
+        if(!sessionStorage.getItem('public-loot-fixture')) {
+          localStorage.setItem(data.keys.run,JSON.stringify(fixture.snapshot));localStorage.setItem(data.keys.progress,JSON.stringify(data.progress));
+          localStorage.setItem(data.keys.preferences,JSON.stringify({...data.preferences,muted:true,motion:'full',quality:'full'}));
+          sessionStorage.setItem('public-loot-fixture','1');
+        }
+      },{data,fixture});
+      const enter=async()=>{await page.goto(origin);await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();await page.bringToFront();await settle(page);};
+      const read=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('maze-so-puzzle-active-run-v4')));
+      const source=run=>run.game.loot.sources.find(s=>s.sourceId===fixture.sourceId);
+      const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
+      await enter();await press(fixture.direction);await page.waitForTimeout(150);const early=await read();
+      if(!source(early)||source(early).credited!==0)throw Error('Loot credited before settling');
+      await page.waitForTimeout(1600);const settled=await read(),pending=source(settled);
+      if(!pending.drops.length||pending.credited<=0||pending.credited+pending.drops.reduce((n,d)=>n+d.amount,0)!==fixture.amount)throw Error('Loot did not remain conserved and distant');
+      await page.screenshot({path:resolve(output,`loot-${receipt.loot.length}.png`)});
+      await enter();await page.waitForTimeout(900);const restored=await read();
+      if(JSON.stringify(restored.game)!==JSON.stringify(settled.game))throw Error('Grounded loot changed on reload');
+      await press(fixture.approach);await page.waitForTimeout(1200);const approached=await read();
+      if(source(approached).credited<=pending.credited||errors.length)throw Error('Public approach failed');
+      receipt.loot.push({origin,early,settled,restored,approached,errors});
+    } finally {await context.close();}
   }
 }
 } finally { await browser.close(); await writeFile(resolve(output, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n'); }

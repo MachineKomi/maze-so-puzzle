@@ -1,29 +1,56 @@
-import { useLayoutEffect, useRef, type RefObject } from "react";
+import { useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { createPortal } from "react-dom";
+import { lootLineClear } from "../game/loot";
 import type { LevelDefinition } from "../game/types";
 import type { SurfaceQuality } from "../motion";
 import type { SceneTravelSnapshot } from "../ui/game/useSceneTravel";
 import { playRewardArrival, type SoundHandle } from "../sound";
 import { advanceRewardToken, makeRewardTokens, REWARD_CAP, rewardProjection, rewardSpaceOpen, type RewardEmission, type RewardToken } from "./rewardPhysics";
 import { REWARD_COLORS, rewardGlyph } from "./rewardGlyphs";
+import { lootPose, type LootView } from "./useLootCollection";
 
-export interface RewardPort { emit(event: RewardEmission): void; cancel(): void }
-export const EMPTY_REWARD_PORT: RewardPort = { emit() {}, cancel() {} };
+export interface RewardPort { emit(event: RewardEmission): void; cancel(): void; wake(): void }
+export const EMPTY_REWARD_PORT: RewardPort = { emit() {}, cancel() {}, wake() {} };
 
-export function RewardLayer({ port, level, scene, active, quality, muted }: {
+export function RewardLayer({ port, level, scene, active, quality, muted, loot }: {
   port: RefObject<RewardPort>; level: LevelDefinition; scene: RefObject<SceneTravelSnapshot>;
   active: boolean; quality: SurfaceQuality; muted: boolean;
+  loot: RefObject<LootView>;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [fallback, setFallback] = useState(false);
+  const [, repaintFallback] = useState(0);
   const mutedRef = useRef(muted); mutedRef.current = muted;
   useLayoutEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas || !active || quality === "static") { port.current = EMPTY_REWARD_PORT; return; }
+    if (!canvas || !active) { port.current = EMPTY_REWARD_PORT; return; }
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      loot.current.canvasAvailable=false; setFallback(true);
+      const wake=()=>repaintFallback(n=>n+1);
+      port.current={emit(){},cancel(){},wake};
+      return ()=>{port.current=EMPTY_REWARD_PORT;};
+    }
+    loot.current.canvasAvailable=true;
     const glyphs = { gold: rewardGlyph("gold"), science: rewardGlyph("science"), power: rewardGlyph("power") };
     let tokens: RewardToken[] = [], frame: number | undefined, previous = 0, lastArrival = -Infinity, pitch = 0;
     let width = 0, height = 0, scale = 1, voice: SoundHandle | undefined;
     let peak = 0, bounces = 0, arrivals = 0;
+    let lastCredit = loot.current.game.goldStarsCollected + loot.current.game.sciencePointsCollected;
+    const cap = quality === "lite" ? 12 : 24;
+    const physical = () => loot.current.game.loot.sources.flatMap(source => source.drops.map(drop => ({ source, drop })))
+      .filter(({drop}) => loot.current.represented.has(drop.id)).slice(0,cap-4);
+    const allocate = () => {
+      const size = scene.current.contentSize;
+      if (size.width <= 0 || size.height <= 0) return false;
+      if (width !== size.width || height !== size.height || canvas.width === 1) {
+        ({ width, height } = size);
+        scale = Math.max(.1, Math.min((devicePixelRatio || 1) * canvas.getBoundingClientRect().width / width, 1.5, 1536 / width, 1536 / height));
+        canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
+        ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      }
+      return true;
+    };
     const cancel = () => {
       if (frame !== undefined) cancelAnimationFrame(frame);
       frame = undefined; tokens = []; voice?.cancel(); voice = undefined;
@@ -34,21 +61,58 @@ export function RewardLayer({ port, level, scene, active, quality, muted }: {
       frame = undefined;
       if (document.hidden || !canvas.isConnected) { cancel(); return; }
       const now = performance.now(), visual = scene.current;
-      if (visual.contentSize.width !== width || visual.contentSize.height !== height) { cancel(); return; }
+      if (!allocate()) return;
       const board = canvas.parentElement!;
       const anchors = board.querySelectorAll<HTMLElement>('[data-reward-anchor="ame"]');
       if (anchors.length !== 1) { cancel(); return; }
       // Read before Canvas writes. This includes the current battle lunge and
       // travel translate, not the hidden ordinary actor or logical next tile.
-      const rect = anchors[0]!.getBoundingClientRect(), bounds = canvas.getBoundingClientRect();
-      const target = {
-        x: visual.camera.left + (rect.left + rect.width * .5 - bounds.left) / bounds.width * visual.camera.width,
-        y: visual.camera.top + (rect.top + rect.height * .5 - bounds.top) / bounds.height * visual.camera.height,
-      };
-      if (!Number.isFinite(target.x + target.y) || !rewardSpaceOpen(level.terrain, target.x, target.y)) { cancel(); return; }
-      let collected = 0;
+      let target = { x: visual.position.x+.5, y: visual.position.y+.5 };
+      if (tokens.length) {
+        const rect = anchors[0]!.getBoundingClientRect(), bounds = canvas.getBoundingClientRect();
+        target = { x: visual.camera.left + (rect.left + rect.width*.5-bounds.left)/bounds.width*visual.camera.width,
+          y: visual.camera.top + (rect.top + rect.height*.5-bounds.top)/bounds.height*visual.camera.height };
+      }
+      if (!Number.isFinite(target.x + target.y) || !rewardSpaceOpen(level.terrain, target.x, target.y)) tokens = [];
+      const credit = loot.current.game.goldStarsCollected + loot.current.game.sciencePointsCollected;
+      let collected = Math.max(0,credit-lastCredit); lastCredit = credit;
       ctx.clearRect(0, 0, width, height);
       const cell = Math.min(width / visual.camera.width, height / visual.camera.height);
+      const drops = physical();
+      tokens = tokens.slice(0, cap-drops.length);
+      peak = Math.max(peak, drops.length+tokens.length);
+      let movingLoot = false;
+      for (const { source, drop } of drops) {
+        const motion = loot.current.motions.get(drop.id);
+        if (!motion) continue;
+        const pose = lootPose(motion, drop.at, visual.position, now, loot.current.animate);
+        movingLoot ||= pose.moving;
+        const at = rewardProjection(pose, visual.camera, visual.contentSize);
+        // Rotation fits the90%-tile visible envelope at every angle.
+        const size = cell*.9/(57/64)*pose.scale;
+        if (pose.moving && quality === "full") {
+          const prior=lootPose(motion,drop.at,visual.position,now-45,true);
+          if(lootLineClear(level,loot.current.game,{x:pose.x-.5,y:pose.y-.5},{x:prior.x-.5,y:prior.y-.5})) {
+            const tail=rewardProjection(prior,visual.camera,visual.contentSize);
+            ctx.globalAlpha=.65;ctx.strokeStyle=REWARD_COLORS[source.currency];ctx.lineWidth=cell*.08;ctx.lineCap="round";
+            ctx.beginPath();ctx.moveTo(tail.x,tail.y);ctx.lineTo(at.x,at.y);ctx.stroke();
+          }
+        }
+        ctx.globalAlpha = .22; ctx.fillStyle = "#332340";
+        ctx.beginPath(); ctx.ellipse(at.x,at.y+cell*.27,cell*.3,cell*.08,0,0,Math.PI*2); ctx.fill();
+        ctx.save(); ctx.translate(at.x,at.y-pose.lift*cell); ctx.rotate(pose.angle);
+        ctx.globalAlpha = 1; ctx.drawImage(glyphs[source.currency],-size/2,-size/2,size,size); ctx.restore();
+        if (drop.amount > 1) {
+          ctx.globalAlpha = 1; ctx.font = `bold ${Math.max(11,cell*.26)}px sans-serif`; ctx.textAlign="center";
+          ctx.lineWidth=3; ctx.strokeStyle="#fff9e9"; ctx.strokeText(String(drop.amount),at.x,at.y+cell*.09);
+          ctx.fillStyle="#553677"; ctx.fillText(String(drop.amount),at.x,at.y+cell*.09);
+        }
+        if (pose.moving && quality === "full") {
+          ctx.globalAlpha=1; ctx.strokeStyle="#fff2ae"; ctx.lineWidth=2;
+          ctx.beginPath(); ctx.moveTo(at.x-cell*.35,at.y-5);ctx.lineTo(at.x-cell*.35,at.y+5);
+          ctx.moveTo(at.x-cell*.35-5,at.y);ctx.lineTo(at.x-cell*.35+5,at.y);ctx.stroke();
+        }
+      }
       for (const token of tokens) {
         if (now < token.born) continue;
         const bounced = token.bounced;
@@ -94,17 +158,25 @@ export function RewardLayer({ port, level, scene, active, quality, muted }: {
         voice?.cancel(); voice = playRewardArrival(pitch++ % 5, mutedRef.current); lastArrival = now;
       }
       tokens = tokens.filter(token => !token.arrived && !token.expired);
-      canvas.dataset.tokens = String(tokens.length); canvas.dataset.bounces = String(bounces);
+      canvas.dataset.tokens = String(tokens.length+drops.length); canvas.dataset.loot = String(drops.length); canvas.dataset.bounces = String(bounces);
       canvas.dataset.arrivals = String(arrivals); canvas.dataset.peak = String(peak);
       previous = now;
-      if (tokens.length) frame = requestAnimationFrame(tick);
+      const movingCamera = Math.hypot(visual.position.x-loot.current.game.position.x,visual.position.y-loot.current.game.position.y) > .001;
+      if (tokens.length || movingLoot || (drops.length && movingCamera)) frame = requestAnimationFrame(tick);
       else {
         // Release the backing surface but let the final tiny cue finish. It is
         // still cancelled by this owner's navigation/visibility cleanup.
-        canvas.width = canvas.height = 1; canvas.dataset.running = "false";
+        if (!drops.length) canvas.width = canvas.height = 1;
+        canvas.dataset.running = "false";
       }
     };
-    port.current = { cancel, emit(event) {
+    const wake = () => {
+      if (!document.hidden && frame === undefined && (tokens.length || loot.current.motions.size || canvas.width>1)) {
+        canvas.dataset.running = "true"; frame = requestAnimationFrame(tick);
+      }
+    };
+    port.current = { cancel, wake, emit(event) {
+      if (quality === "static" || !loot.current.animate) return;
       if (document.hidden || !document.hasFocus() || !canvas.isConnected) return;
       const now = performance.now();
       if (!tokens.length) {
@@ -114,18 +186,32 @@ export function RewardLayer({ port, level, scene, active, quality, muted }: {
         canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
         ctx.setTransform(scale, 0, 0, scale, 0, 0); previous = now; pitch = 0;
       }
-      tokens.push(...makeRewardTokens(event, event.bornAt ?? now, Math.min(quality === "lite" ? 4 : 8, REWARD_CAP[quality] - tokens.length)));
+      tokens.push(...makeRewardTokens(event, event.bornAt ?? now, Math.min(quality === "lite" ? 4 : 8, REWARD_CAP[quality] - physical().length - tokens.length)));
       peak = Math.max(peak, tokens.length); canvas.dataset.running = tokens.length ? "true" : "false";
       if (tokens.length && frame === undefined) frame = requestAnimationFrame(tick);
     } };
-    document.addEventListener("visibilitychange", cancel);
+    const visibility = () => { if (document.hidden) cancel(); else wake(); };
+    const resize = () => { cancel(); wake(); };
+    wake();
+    document.addEventListener("visibilitychange", visibility);
     window.addEventListener("blur", cancel);
-    window.addEventListener("resize", cancel);
+    window.addEventListener("focus", wake);
+    window.addEventListener("resize", resize);
     return () => {
       cancel(); port.current = EMPTY_REWARD_PORT;
-      document.removeEventListener("visibilitychange", cancel);
+      document.removeEventListener("visibilitychange", visibility);
       window.removeEventListener("blur", cancel); window.removeEventListener("resize", cancel);
+      window.removeEventListener("focus", wake); window.removeEventListener("resize", resize);
     };
-  }, [active, level, port, quality, scene]);
-  return <canvas ref={canvasRef} width={1} height={1} className="vfx-rewards" data-vfx-kind="committed-rewards" aria-hidden="true" />;
+  }, [active, level, port, quality, scene, loot]);
+  const world=canvasRef.current?.parentElement?.querySelector(".camera-world");
+  return <><canvas ref={canvasRef} width={1} height={1} className="vfx-rewards" data-vfx-kind="committed-rewards" aria-hidden="true" />
+    {fallback && world && createPortal(loot.current.game.loot.sources.flatMap(s=>s.drops.map(d=>({s,d})))
+      .filter(({d})=>loot.current.represented.has(d.id)).map(({s,d})=><svg key={d.id} data-loot-fallback={s.currency} aria-hidden="true" viewBox="-.5 -.5 1 1"
+        style={{position:"absolute",pointerEvents:"none",zIndex:23,left:`calc((${d.at.x} - var(--world-left)) * var(--world-tile-x))`,
+          top:`calc((${d.at.y} - var(--world-top)) * var(--world-tile-y))`,width:"var(--world-tile-x)",height:"var(--world-tile-y)"}}>
+        {s.currency==="gold" ? <path d="M0,-.4 .1,-.13 .38,-.12 .17,.07 .23,.35 0,.2 -.23,.35 -.17,.07 -.38,-.12 -.1,-.13Z" fill="#ffc842" stroke="#785032" strokeWidth=".035" />
+          : <g fill="none" stroke="#458a94" strokeWidth=".065">{[0,60,-60].map(angle=><ellipse key={angle} rx=".39" ry=".15" transform={`rotate(${angle})`} />)}<circle r=".12" fill="#a8efce" /></g>}
+        {d.amount>1 && <text fontSize=".23" textAnchor="middle" y=".09" fill="#38205e" stroke="#fff9e9" strokeWidth=".025" paintOrder="stroke">{d.amount}</text>}
+      </svg>),world)}</>;
 }

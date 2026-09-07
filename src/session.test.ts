@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { gameplayFingerprintForRules } from "./game/contentIdentity";
 import { createInitialGameState, movePlayer, stayAfterPendingCompletion } from "./game/engine";
 import { CURATED_LEVELS, parseAsciiLevel } from "./game/levels";
 import { solveLevel } from "./game/solver";
@@ -61,7 +62,7 @@ function progressedPlayingState(level: LevelDefinition): GameState {
 
 function rawSnapshot(level: LevelDefinition, game: GameState = createInitialGameState(level)): ActiveRunSnapshot {
   return {
-    schemaVersion: 3,
+    schemaVersion: 4,
     runId: "run-test-session-0001",
     levelId: level.id,
     contentRevision: level.contentRevision,
@@ -295,9 +296,10 @@ describe("active run persistence", () => {
     misplaced.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
     expect(readActiveRunResult([level], misplaced)).toEqual({
       snapshot: null,
-      discardedUpdatedRun: true,
+      discardedUpdatedRun: false,
+      persistence: "protected",
     });
-    expect(misplaced.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(misplaced.getItem(ACTIVE_RUN_STORAGE_KEY)).toBe(JSON.stringify(prior));
   });
 
   it("migrates a valid schema-v2 active run with a stable derived run ID", () => {
@@ -306,13 +308,14 @@ describe("active run persistence", () => {
     const prior = {
       ...rawSnapshot(level),
       schemaVersion: 2,
+      gameplayFingerprint: gameplayFingerprintForRules(level, 3),
       runId: undefined,
     };
     storage.setItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
 
     const migrated = readActiveRun(CURATED_LEVELS, storage);
     expect(migrated).toMatchObject({
-      schemaVersion: 3,
+      schemaVersion: 4,
       levelId: level.id,
       runId: expect.stringMatching(/^migrated-/),
     });
@@ -323,7 +326,7 @@ describe("active run persistence", () => {
   it("resumes a matching schema-v2 run in memory when migration storage is full", () => {
     const storage = new MemoryStorage();
     const level = storyLevel(1);
-    const prior = { ...rawSnapshot(level), schemaVersion: 2, runId: undefined };
+    const prior = { ...rawSnapshot(level), schemaVersion: 2, runId: undefined, gameplayFingerprint: gameplayFingerprintForRules(level, 3) };
     storage.setItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, JSON.stringify(prior));
     const quotaStorage: ActiveRunStorage = {
       getItem: (key) => storage.getItem(key),
@@ -515,7 +518,7 @@ describe("active run persistence", () => {
     }, storage)).toBe(true);
 
     expect(readActiveRun(CURATED_LEVELS, storage)).toEqual({
-      schemaVersion: 3,
+      schemaVersion: 4,
       runId: "run-test-session-0003",
       levelId: level.id,
       contentRevision: level.contentRevision,
@@ -543,18 +546,19 @@ describe("active run persistence", () => {
     expect(sanitizeActiveRunSnapshot(rawSnapshot(level, stayed), [level])?.game).toEqual(stayed);
   });
 
-  it("fails closed and removes malformed JSON or the wrong schema", () => {
+  it("protects malformed JSON or a future schema without falling back", () => {
     const storage = new MemoryStorage();
     storage.setItem(ACTIVE_RUN_STORAGE_KEY, "{broken");
     expect(readActiveRun(CURATED_LEVELS, storage)).toBeNull();
-    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBe("{broken");
 
     storage.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify({
       ...rawSnapshot(storyLevel()),
       schemaVersion: 99,
     }));
     expect(readActiveRun(CURATED_LEVELS, storage)).toBeNull();
-    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(JSON.parse(storage.getItem(ACTIVE_RUN_STORAGE_KEY)!).schemaVersion).toBe(99);
+    expect(clearActiveRun(storage)).toBe(false);
   });
 
   it("rejects foreign level and object ids instead of partially restoring them", () => {
@@ -618,7 +622,7 @@ describe("active run persistence", () => {
     const game = progressedPlayingState(level);
     const duplicate = <T,>(values: readonly T[]): T[] => [...values].reverse().flatMap((value) => [value, value]);
     const sanitized = sanitizeActiveRunSnapshot({
-      schemaVersion: 3,
+      schemaVersion: 4,
       runId: "run-test-session-0004",
       levelId: level.id,
       contentRevision: level.contentRevision,
@@ -650,7 +654,7 @@ describe("active run persistence", () => {
     ]);
   });
 
-  it("never persists tester or generated runs and clears stale normal data", () => {
+  it("invalid writes cannot erase a saved normal run; navigation owns explicit clearing", () => {
     const storage = new MemoryStorage();
     const level = storyLevel();
     storage.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(rawSnapshot(level)));
@@ -662,8 +666,8 @@ describe("active run persistence", () => {
       game: createInitialGameState(level),
       revealedTiles: [],
     }, storage)).toBe(false);
-    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
-    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBeNull();
+    expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBe(JSON.stringify(rawSnapshot(level)));
+    expect(storage.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY)).toBe("stale legacy run");
 
     const generated = { ...level, id: "generated-test", source: "generated" as const };
     expect(createActiveRunSnapshot({

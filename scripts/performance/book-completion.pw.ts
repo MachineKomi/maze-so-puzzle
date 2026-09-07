@@ -191,6 +191,20 @@ test("BOOK03 newer profile stays byte-exact while the temporary session advances
   expect((await storage(page)).progress).toBe(future); expect((await storage(page)).run).toBeNull();
 });
 
+test("LOOT03 denied won-journal write holds Next without banking and allows a safe retry",async({page})=>{
+  await seedProgress(page);await selectBook(page,0);await finish(page,0);
+  const before=await storage(page);
+  await page.evaluate(key=>{
+    const original=Storage.prototype.setItem;(window as any).denyRunSave=true;
+    Storage.prototype.setItem=function(name,value){if(name===key&&(window as any).denyRunSave)throw Error('journal denied');original.call(this,name,value);};
+  },ACTIVE_RUN_STORAGE_KEY);
+  await page.getByRole('button',{name:/^Next maze/}).click();
+  await expect(page.locator('.dialog-celebration')).toBeVisible();await expect(page.locator('.save-warning')).toBeVisible();
+  expect(await storage(page)).toEqual(before);
+  await page.evaluate(()=>{(window as any).denyRunSave=false;});await page.getByRole('button',{name:/^Next maze/}).click();await beginStory(page);
+  expect((await progressOf(page)).totalCompletions).toBe(1);expect((await progressOf(page)).completionReceipts).toHaveLength(1);
+});
+
 for (const mode of ["full", "lite", "static", "reduced"]) test(`MOVE02 ${mode} movement has no yellow corner sparkle and keeps a steady ground shadow`, async ({ page }) => {
   await page.setViewportSize({ width: 1194, height: 834 });
   await page.emulateMedia({ reducedMotion: "no-preference" });

@@ -63,3 +63,19 @@ Safari/device-side evidence before choosing the next renderer/input change.
 The following documentation closure must use actual successful65acb82 as the
 guard baseline. Do not build again solely to align a documentation SHA with
 the published runtime. Record the actual ignored-build result separately.
+
+## Observed documentation closure
+
+Documentation-only checkpoint **81387a35c4d7abdb7ac81a724a06e0db9c1e60fd** is
+backed up on main and the current Codex branch. All16 changed paths are Markdown;
+489 checked local links resolve and the whitespace check passes. The unchanged
+guard compares actual successful65acb82 to the exact documentation HEAD and
+returns exit0/SKIP: only documentation/release/CI/desktop files changed.
+
+GitHub's raw Vercel status reports **Canceled by Ignored Build Step** at
+04:15:40 UTC, [deployment record](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/H9LmkTzVEoBHndK3msSPfQBFQmY6).
+This is the observed skip, not merely a local prediction. The published game
+remains the qualified65acb82 payload. This observation is committed/pushed only
+on the existing Codex branch and can join the next runtime slice normally;
+there is no second main push, rebuild, version bump or manual deployment to
+record the skip. No files are deleted or archived.

@@ -419,7 +419,7 @@ describe("curated campaign levels", () => {
       state = result.state;
       progressionEvents.push(
         ...result.events
-          .filter((event) => event.type !== "moved" && event.type !== "level-won" && event.type !== "treasure-collected")
+          .filter((event) => event.type !== "moved" && event.type !== "level-won" && event.type !== "treasure-opened")
           .map((event) => event.type),
       );
     }

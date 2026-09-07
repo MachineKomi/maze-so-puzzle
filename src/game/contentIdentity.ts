@@ -1,7 +1,7 @@
 import type { LevelDefinition, LevelObject, TerrainKind } from "./types";
 
 /** Bump when engine semantics change without changing authored level data. */
-export const GAMEPLAY_RULES_REVISION = 3;
+export const GAMEPLAY_RULES_REVISION = 4;
 
 function stableObject(object: LevelObject): readonly unknown[] {
   const common = [object.id, object.kind, object.at.x, object.at.y] as const;
@@ -27,7 +27,7 @@ export function fingerprintText(value: string): string {
   return `g-${(hash >>> 0).toString(16).padStart(8, "0")}`;
 }
 
-export function gameplayFingerprint(input: {
+export function gameplayFingerprintForRules(input: {
   readonly contentRevision: number;
   readonly width: number;
   readonly height: number;
@@ -36,9 +36,9 @@ export function gameplayFingerprint(input: {
   readonly exit: { readonly x: number; readonly y: number };
   readonly terrain: readonly (readonly TerrainKind[])[];
   readonly objects: readonly LevelObject[];
-}): string {
+}, rulesRevision: number): string {
   return fingerprintText(JSON.stringify([
-    GAMEPLAY_RULES_REVISION,
+    rulesRevision,
     input.contentRevision,
     input.width,
     input.height,
@@ -52,6 +52,10 @@ export function gameplayFingerprint(input: {
       left.id < right.id ? -1 : left.id > right.id ? 1 : 0
     )).map(stableObject),
   ]));
+}
+
+export function gameplayFingerprint(input: Parameters<typeof gameplayFingerprintForRules>[0]): string {
+  return gameplayFingerprintForRules(input, GAMEPLAY_RULES_REVISION);
 }
 
 export function hasCurrentGameplay(level: LevelDefinition, revision: number, fingerprint: string): boolean {

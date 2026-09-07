@@ -7,8 +7,10 @@ import {PLAYER_PROGRESS_STORAGE_KEY,createDefaultPlayerProgress} from '../../src
 import {PRESENTATION_PREFERENCES_KEY,DEFAULT_PRESENTATION_PREFERENCES} from '../../src/motion';
 
 const output=resolve(process.env.MAZE_PERF_EVIDENCE_DIR!,'enlarged-rewards');
-const kinds=['gold','science','potion','combat'] as const;
-const fixtures=kinds.map(id=>({id,fixture:findInputFixture(events=>events.some(e=>id==='potion'?e.type==='potion-collected':id==='combat'?e.type==='enemy-defeated'&&e.enemyPower>=7:e.type==='treasure-collected'&&e.currency===id))!}));
+// Physical Gold/Science now have their own real collection suite. These retain
+// immediate-rule Power semantics, including typed per-bash combat presentation.
+const kinds=['potion','combat'] as const;
+const fixtures=kinds.map(id=>({id,fixture:findInputFixture(events=>events.some(e=>id==='potion'?e.type==='potion-collected':e.type==='enemy-defeated'&&e.enemyPower>=7))!}));
 test.beforeAll(async()=>{await mkdir(output,{recursive:true});});
 for(const [quality,motion,width,height] of [['full','full',1194,834],['lite','full',780,312],['static','full',780,312],['full','reduced',780,312]] as const) test(`WALL04C enlarged rewards preserve real credit and cleanup ${quality}/${motion}`,async({browser})=>{
  const rows=[];

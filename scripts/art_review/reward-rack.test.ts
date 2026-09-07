@@ -13,7 +13,7 @@ it("derives opt-in committed reward browser fixtures from legal engine routes", 
     const fixture = findInputFixture(events => events.some(event =>
       kind === "potion" ? event.type === "potion-collected"
         : kind === "combat" ? event.type === "enemy-defeated" && event.enemyPower >= 7
-          : event.type === "treasure-collected" && event.currency === kind));
+          : event.type === "treasure-opened" && event.currency === kind));
     expect(fixture).toBeDefined();
     return { id: kind, direction: fixture!.direction, level: fixture!.level.id,
       events: fixture!.result.events, before: fixture!.before, after: fixture!.result.state,

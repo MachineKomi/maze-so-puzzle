@@ -18,8 +18,8 @@ describe("on-map notices", () => {
       [{ type: "antidote-leaf-collected", objectId: "leaf" }, ASSETS.antidoteLeaf],
       [{ type: "potion-collected", objectId: "potion", amount: 4, powerBefore: 2, powerAfter: 6 }, ASSETS.potion],
       [{ type: "key-collected", objectId: "key", color: "red" }, resolveKeyArt("red").src],
-      [{ type: "treasure-collected", objectId: "gold", currency: "gold", amount: 3, total: 3 }, ASSETS.treasureGoldChest],
-      [{ type: "treasure-collected", objectId: "science", currency: "science", amount: 2, total: 2 }, ASSETS.treasureScienceGears],
+      [{ type: "treasure-opened", objectId: "gold", currency: "gold", amount: 3 }, ASSETS.treasureGoldChest],
+      [{ type: "treasure-opened", objectId: "science", currency: "science", amount: 2 }, ASSETS.treasureScienceGears],
     ];
 
     for (const [event, expectedIcon] of cases) {

@@ -1,4 +1,5 @@
 import { createInitialGameState, getTerrainAt, isInBounds, movePlayer, pointKey, pointsEqual } from "./engine";
+import { authoredLootErrors } from "./loot";
 import {
   ANIMAL_SPECIES,
   ABSOLUTE_MAZE_SIZE_LIMIT,
@@ -88,7 +89,7 @@ function reconstructDirections(
 }
 
 export function getLevelStructureErrors(level: LevelDefinition): readonly string[] {
-  const errors: string[] = [];
+  const errors: string[] = authoredLootErrors(level);
 
   if (!Number.isSafeInteger(level.contentRevision) || level.contentRevision < 1) {
     errors.push("Content revision must be a positive integer.");

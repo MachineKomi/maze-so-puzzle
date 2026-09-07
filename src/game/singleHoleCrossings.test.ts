@@ -240,8 +240,8 @@ describe("single-hole committed pickups, exits and portals", () => {
     ["l", "antidote-leaf-collected", { hasAntidoteLeaf: true }],
     ["r", "key-collected", { keys: ["red"] }],
     ["p", "potion-collected", { power: 4 }],
-    ["k", "treasure-collected", { goldStarsCollected: 3 }],
-    ["i", "treasure-collected", { sciencePointsCollected: 2 }],
+    ["k", "treasure-opened", { goldStarsCollected: 0 }],
+    ["i", "treasure-opened", { sciencePointsCollected: 0 }],
   ] as const)("collects landing pickup %s exactly once, not once per jump frame or revisit", (token, eventType, expectedState) => {
     const level = corridor(`single-hole-pickup-${token}`, `@o${token}.E`);
     const before = equipped(level);
