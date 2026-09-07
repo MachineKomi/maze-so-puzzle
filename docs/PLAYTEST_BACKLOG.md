@@ -1,5 +1,19 @@
 # Maze so Puzzle — playtest backlog
 
+**Current delivery:** [web0.22.20](reviews/2026-09-07-v02220-public-verification.md),
+release135bb3a/runtime6f083f4, delivers B's final-defeat enemy Gold/Science and
+protected schema5 migration. Q05/P20 now covers authored and enemy loot. Next:
+remaining B mixed chests and actual disguised Mimics, then recognition XP and
+usable inventory before eggs. All wider roadmap items remain. Earlier dated
+next-work statements below are historical, superseded by this dispatch.
+
+**PERF-COLD-POWER — open:** [fresh-process19/20 diagnosis](reviews/2026-09-07-enemy20-cold-power-diagnostic.md)
+reproduces first-Power cosmetic expiry on both versions after later frame stalls;
+semantic Power is correct. Loaded browser success does not close this. Retain
+actual-device startup/first-reward observation before choosing a stall/audio
+policy change. Q08/P19 also keeps the original iPhone13/iPad8 camera defect open;
+no RAM minimum, Apple success or net cold-start speedup is established.
+
 **Latest delivery:** [web0.22.19](reviews/2026-09-07-v02219-public-verification.md)
 publishes the bounded cold-loot response/resize correction, release2884250/runtime
 d472037. It shortens the measured first-pickup hitch while adding some maze-entry

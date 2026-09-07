@@ -4,6 +4,27 @@ This file records the player-visible changes in each playable build. The project
 is still an active prototype, so version numbers identify test builds rather
 than promising long-term save or API compatibility.
 
+## 0.22.20 — enemy Gold and Science (published web)
+
+- Defeated enemies scatter both currencies, with modest deterministic ranges
+  based on enemy Power. Drops tumble, settle and wait for a nearby player;
+  surviving ground value and reward rolls persist across reloads.
+- Protected save migration preserves existing rewards and retired enemies.
+  Returning to an already-defeated enemy never grants another reward.
+- Both currency bursts remain visible after battle, including in Lite quality;
+  leaving the game cannot consume an unseen drop's settling interval. Combat
+  Power bursts are admitted per hit while retaining immediate puzzle rules.
+- Mixed chests, disguised Mimics, rainbow account XP and eggs follow. The inherited
+  cold first-Power cosmetic stall and actual affected-device camera result remain
+  open; this release does not claim they are resolved.
+
+## 0.22.19 — first-loot rendering and resizing (published web)
+
+- Reduces first-loot draw work through bounded shared digit rendering and refreshes
+  resting loot after stage resizing.
+- The paired lab first-pickup hitch is shorter, with slightly slower maze entry
+  and a small cache disclosed. Actual iPhone13/iPad8 comfort remains unconfirmed.
+
 ## 0.22.18 — physical Gold and Science (published web)
 
 - Authored rewards burst out, tumble, bounce and settle before collection.

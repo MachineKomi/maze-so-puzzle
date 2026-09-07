@@ -667,7 +667,7 @@ Fresh recommended gains are Music0.07511111111111113 / SFX1.1333333333333333,
 shown as65%/85% on the unchanged calibration-v2 curve. Existing exact gains/mute
 are preserved. Sound & comfort offers Recommended balance for deliberate adoption.
 
-## LOOT-03 B candidate — rules5 / active schema5
+## LOOT-03 B enemy portion — delivered web0.22.20 — rules5 / active schema5
 
 The schema-v5 snapshot binds loot-ledger2 to the attempt runId. `enemyRewards.ts`
 owns bounded independent Gold/Science channels; `movePlayer` creates both at

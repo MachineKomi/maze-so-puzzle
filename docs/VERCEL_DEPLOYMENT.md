@@ -6,8 +6,8 @@ Deployment Storage warning. Do not change its plan, retention or billing setting
 
 Production URL: [mazesopuzzle.com](https://mazesopuzzle.com/).
 Existing alias: [maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/).
-Both serve identical frozen v0.22.19 HTML/JS/CSS, verified2026-09-07 in the
-[public receipt](reviews/2026-09-07-v02219-public-verification.md). Browser saves are
+Both serve identical frozen v0.22.20 HTML/JS/CSS, verified2026-09-07 in the
+[public receipt](reviews/2026-09-07-v02220-public-verification.md). Browser saves are
 origin-local: the new domain does **not** automatically inherit saves from the
 old alias. Keep the old alias available; never clear saves to migrate domains.
 
@@ -28,8 +28,8 @@ exposed this boundary; do not relax `.vercelignore` to package native evidence.
 
 ## Routine documentation checkpoints
 
-Current last successful production release: **28842506f2b6b690e9bd7fc0f18c12957029de98**
-(web0.22.19). Use the actual successful deployment as the guard baseline; later
+Current last successful production release: **135bb3a322d300cc528e977d5f09784f06f9d5b9**
+(web0.22.20). Use the actual successful deployment as the guard baseline; later
 skipped documentation checkpoints do not require a replacement game build.
 
 Keep documentation, planning and review checkpoints on the current working

@@ -17,7 +17,22 @@ Verify real runtime releases, not the presence of a deployment on every docs SHA
 Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
 browser saves. No retention/deletion/archive without explicit Human approval.
 
-## Current published web — v0.22.17 camera rendering
+## Current published web — v0.22.20 enemy rewards
+
+Release135bb3a, reviewed5dc99c3, frozen runtime6f083f4.
+[Qualification](reviews/2026-09-07-v02220-web-qualification.md),
+[actual Sol review](reviews/2026-09-07-enemy20-sol-final-review.md),
+[public verification](reviews/2026-09-07-v02220-public-verification.md).
+
+- [x]735 project tests, TypeScript/build, budgets, audit and exact reviewed-head CI34100708572.
+- [x]55 distinct browser contracts across overlapping packets; corrected loaded Power and retained cold failures explicitly distinguished.
+- [x]Four five-pair enemy/camera frame/work cohorts; added work and remaining hitches disclosed.
+- [x]One normal Git deployment; both origins match frozen bytes and eight public journeys pass.
+- [ ]Q08/P19 physical iPhone13/iPad8 entry/camera/first rewards; PERF-COLD-POWER remains open.
+- [ ]Q05/P20 authored/enemy loot feel and other independent family observations.
+- [ ]Native acceptance: published Windows stays0.22.9;0.22.10 qualification remains held.
+
+## Previous published web — v0.22.17 camera rendering
 
 Release65acb82, reviewed checkpoint b41a5c4, frozen runtime eff0530.
 [Qualification](reviews/2026-09-07-v02217-web-qualification.md),

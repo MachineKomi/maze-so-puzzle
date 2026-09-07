@@ -1,6 +1,6 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published **web preview is v0.22.19** at
+The current published **web preview is v0.22.20** at
 [mazesopuzzle.com](https://mazesopuzzle.com/): balanced 3D wall volumes with clean
 projected edges, stronger directional lighting and larger grounded sprites that
 stand between rear and foreground walls. It keeps crisp surface details,
@@ -17,17 +17,21 @@ distant drops stay on safe floor until Ame approaches, including after reload.
 The19 correction reduces first-loot draw work and refreshes resting loot after
 resizing. It trades slightly slower maze entry for a shorter first-pickup hitch;
 the remaining hitch and actual Apple-device result are still open.
-[Verified release](docs/reviews/2026-09-07-v02219-public-verification.md).
+Enemies now scatter both Gold and Science after defeat, with modest rewards
+scaled by enemy Power. Drops remain collectible after reload; per-hit Power
+keeps its puzzle rules. The inherited cold first-Power cosmetic stall remains
+under investigation alongside the real-device camera check.
+[Verified release](docs/reviews/2026-09-07-v02220-public-verification.md).
 Latest fully published **Windows remains v0.22.9**; native0.22.10 qualification
-is separately unfinished. Existing valid runs migrate to the protected v4 loot
+is separately unfinished. Existing valid runs migrate to the protected v5 loot
 ledger without replaying rewards or losing their route.
 Earned friends, rewards and progress remain intact. Do not clear saves.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
 The Human accepted0.22.13's tall3D direction. Refined wall/sprite appearance,
 physical iPad and the wider visual/audio programme remain in the
-[Human review queue](docs/HUMAN_REVIEW_QUEUE.md). Next: deterministic final-defeat
-enemy Gold/Science rewards, then mixed chests and Mimics. XP and eggs follow.
+[Human review queue](docs/HUMAN_REVIEW_QUEUE.md). Next: mixed chests and actual disguised Mimics, then recognition-only rainbow
+account XP and a protected usable inventory before enabling egg drops.
 
 [![Browser build](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml/badge.svg)](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml)
 

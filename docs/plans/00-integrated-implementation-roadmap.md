@@ -1,28 +1,22 @@
 # Integrated implementation roadmap through final convergence
 
-**Latest runtime delivery:** the bounded cold-reward follow-up is
-[published as web0.22.19](../reviews/2026-09-07-v02219-public-verification.md),
-release2884250/runtime d472037. Actual independent Sol accepts the shorter first
-loot-response hitch/resize correction with slower board entry and cache costs.
-Q08/P19 remains affected-device evidence; no physical Apple success or RAM floor.
-**Execute LOOT-03 B next**, as detailed below. Do not repeat completed lab work
-without new evidence; preserve DELIGHT/LEARN/HOLE/pace and the wider roadmap.
+**Current delivery — web0.22.20:** the enemy portion of LOOT-03 B is
+[published](../reviews/2026-09-07-v02220-public-verification.md), release135bb3a,
+reviewed5dc99c3/runtime6f083f4. A's physical authored collection,19's first-draw/
+resize correction and B's final-defeat currencies/schema5 migration are delivered.
+Actual independent Sol accepted the bounded web scope. Q05/P20 asks about loot
+feel; Q08/P19 remains affected-device evidence, and PERF-COLD-POWER stays open.
+No physical Apple success or RAM minimum is inferred from Chromium qualification.
 
-**Current delivery — September7:** LOOT-03 A is
-[published as web0.22.18](../reviews/2026-09-07-v02218-public-verification.md),
-release54c286a/runtime85f49ea. The complete authored Gold/Science physical
-collection, protected migration and completion slice is delivered. Actual Sol
-independently accepted its source/visual/Chromium scope. Q05/P20 asks about feel;
-Q08/P19 remains actual iPhone13/iPad8 evidence, including cold source opening.
-
-**Execute B next:** audit enemy counts/Power bands and best/worst campaign totals,
-freeze modest deterministic final-defeat Gold/Science tables, extend A's stable
-source/conservation/migration owners without retroactive enemy awards, then
-qualify and publish. Mixed chests/Mimics follow that table foundation; recognition
-XP and usable-inventory-first eggs follow their profile/inventory dependencies.
-Keep the cold-opening performance follow-up, DELIGHT-02B, LEARN-01, connected
-HOLE-02, icon-led pace and the wider campaign/Garden/co-op roadmap. Earlier dated
-next-work statements below preserve their historical context, not live dispatch.
+**Execute remaining B next:** mixed Gold/Science chests and actual disguised
+Mimics. Follow the [parent execution sequence](LOOT-03-physical-collection-and-progression.md):
+approved art/state audit and richer reward tables, then conserved outcomes,
+joint solver/save/content migration, readable reveal and bounded physical collection,
+independent review, qualification and publication. Do not label B wholly complete.
+Recognition-only rainbow XP and protected usable-inventory-first eggs follow.
+Preserve DELIGHT-02B, LEARN-01, connected HOLE-02, icon-led pace and the wider
+campaign/Garden/co-op roadmap. Earlier dated next-work statements below retain
+historical context; they do not supersede this current dispatch.
 
 **Latest Human priority — CAMERA-17:** address the reported iPhone13/iPad8 camera
 stutter before LOOT-03. [Bounded implementation/qualification plan](CAMERA-17-bounded-scene-performance.md)

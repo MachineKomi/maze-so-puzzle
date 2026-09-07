@@ -1,16 +1,27 @@
 # Maze so Puzzle — joint orchestration state
 
-**Active candidate — LOOT-03 B / web0.22.20:** Astra owns runtime on
-`codex/enemy-loot-rewards`; Sol independently reviews. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md)
-freezes rules5 enemy Gold/Science, schema5/ledger2 migration and qualification.
-Implementation,735 tests and all four five-pair cohorts are complete;
-[qualification](reviews/2026-09-07-v02220-web-qualification.md) records browser
-corrections, costs and the inherited cold Power limitation. **Live remains0.22.19**. No deployment
-is claimed until exact-source checks, Sol review, CI and public verification.
-The historical completed cold-reward investigation below is not a new assignment.
+**Current live state — web0.22.20:** release
+**135bb3a322d300cc528e977d5f09784f06f9d5b9**, reviewed5dc99c3, frozen runtime6f083f4.
+Astra owns runtime on `codex/enemy-loot-rewards`; actual Sol independently reviewed
+and accepted the bounded source/visual/performance scope. [Public receipt](reviews/2026-09-07-v02220-public-verification.md)
+binds exact reviewed-head CI34100708572, one Git deployment, matching files on
+both origins and eight real public journeys. [Qualification](reviews/2026-09-07-v02220-web-qualification.md)
+retains735 tests,55 distinct overlapping browser contracts and four five-pair cohorts.
 
+The enemy portion of LOOT-03 B is delivered: final-defeat Gold/Science, persistent
+physical collection and protected schema5/ledger2 migration. **Next: remaining B
+mixed chests and actual disguised Mimics**, following the [parent sequence](plans/LOOT-03-physical-collection-and-progression.md).
+Then recognition-only XP and usable inventory before eggs; preserve DELIGHT/LEARN/
+HOLE/pace and campaign/Garden/co-op. No additional general permission is needed.
 
-**Live operating state — September7, web0.22.19:** release
+PERF-COLD-POWER and Q08/P19 remain open: immediate-entry cosmetic expiry reproduces
+on both19/20; ordinary camera tails are neutral here, and enemy work/hitches are
+disclosed. No Apple/3GB/WebKit or native acceptance. Published Windows remains0.22.9,
+native0.22.10 qualification remains held. Q05/P20 now covers authored and enemy loot.
+The following dated states preserve history; their branch and next-work statements
+are superseded by this current dispatch.
+
+**Historical operating state — September7, web0.22.19:** release
 **28842506f2b6b690e9bd7fc0f18c12957029de98**, reviewed4991f93, frozen runtime
 d472037. Root stays on `codex/cold-reward-performance`. [Public receipt](reviews/2026-09-07-v02219-public-verification.md)
 verifies both origins and six fresh journeys after exact-head CI34092206239.

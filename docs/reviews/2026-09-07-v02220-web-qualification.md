@@ -2,7 +2,8 @@
 
 Frozen runtime **6f083f416668281c97b2f59101124b4d41261763**, helper/docs checkpoint
 ebb2b17, branch `codex/enemy-loot-rewards`, [PR11](https://github.com/MachineKomi/maze-so-puzzle/pull/11).
-Local qualification is complete; live remains0.22.19 pending release. Astra
+[Published web0.22.20](2026-09-07-v02220-public-verification.md), release135bb3a,
+reviewed5dc99c3; exact reviewed-head CI34100708572 passes. Astra
 and [actual independent Sol](2026-09-07-enemy20-sol-final-review.md) accept this
 bounded web scope with the costs/limits below. Astra is sole runtime writer.
 
@@ -125,9 +126,10 @@ asserts the final identity too. There is no invented serialized after marker.
 
 ## Publication, queue and recovery
 
-Actual Sol independently recommends publication. Exact-head release CI and the
-existing Git-integrated Vercel deployment/public verification remain separate
-final steps. Q05/P20 owns reward feel; Q08/P19 owns physical affected-device
+Actual Sol independently recommended publication. Exact reviewed-head CI passed,
+the normal Git-integrated Vercel deployment succeeded and both origins match the
+qualified bytes; all eight actual public journeys pass. The linked public receipt
+records this separate release verification. Q05/P20 owns reward feel; Q08/P19 owns physical affected-device
 camera, entry and first-reward observations. Mixed chests/actual disguised Mimics
 follow this foundation, then recognition XP and usable inventory before eggs;
 DELIGHT/LEARN and the wider roadmap remain intact.

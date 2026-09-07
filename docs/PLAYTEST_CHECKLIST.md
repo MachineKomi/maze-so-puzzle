@@ -1,10 +1,12 @@
 # Family playtest checklist
 
-## New short journey — P20 / Q05, physical authored loot
+## New short journey — P20 / Q05, physical authored and enemy loot
 
-**Ready on [published0.22.19](reviews/2026-09-07-v02219-public-verification.md).**
+**Ready on [published0.22.20](reviews/2026-09-07-v02220-public-verification.md).**
 Use an unlocked maze with Gold/Science: Rainbow Power Parade has Gold,
-Moonlit Friendship Quest has Science; there is no need to replay the campaign.
+Moonlit Friendship Quest has Science. Defeat an enemy in any unlocked maze;
+Lanternlight has an early encounter. There is no need to replay the campaign.
+Gold/Science should appear after the battle, while Power keeps per-hit bursts.
 
 - Open a pickup and pause. Are the spread, spin, two bounces, readable settled
   interval and star/atom glyphs satisfying? The counter should rise on collection.
@@ -17,15 +19,17 @@ Moonlit Friendship Quest has Science; there is no need to replay the campaign.
 
 Note build/device/settings and any first-opening pause. P19/Q08 remains the
 priority affected-device camera observation. Full/Lite/Static/Reduced retain the
-same values; comfort modes reduce travel effects. Enemy Gold/Science, mixed
-chests/Mimics, rainbow account XP and eggs are subsequent work, not this release.
+same values; comfort modes reduce travel effects. Mixed chests/actual disguised
+Mimics, rainbow account XP and eggs remain subsequent work.
 This is a feel/readability observation, not a request to repeat every old test.
 
-## Priority device journey — P19 / Q08, CAMERA-17 retained in19
+## Priority device journey — P19 / Q08, CAMERA-17 retained in20
 
-Use current0.22.19 for this changed-build observation; its camera retains17's
-bounded renderer. Note both entry delay and any first Gold/Science opening pause;
-19 trades slightly slower board entry for a shorter first-loot hitch in the lab.
+Use current0.22.20 for this changed-build observation; its camera retains17's
+bounded renderer. Note entry delay and the first Power/Gold/Science effects.
+19's slower-entry/shorter-first-loot tradeoff remains; fresh-process19/20 evidence
+also retains missing first-Power cosmetics after later stalls (value is correct).
+Neither cold first-Power nor the affected-device camera defect is closed.
 The original17 delivery statement below preserves its evidence identity.
 
 **Ready on [published0.22.17](reviews/2026-09-07-v02217-public-verification.md):**

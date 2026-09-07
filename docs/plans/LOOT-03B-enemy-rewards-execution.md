@@ -1,6 +1,7 @@
 # LOOT-03 B — final-defeat Gold and Science
 
-September7 candidate, not yet published. Live web remains0.22.19. Astra is the
+The enemy portion is [published as web0.22.20](../reviews/2026-09-07-v02220-public-verification.md),
+release135bb3a/runtime6f083f4. Astra is the
 sole runtime writer; Sol independently reviews. Parent authority:
 [LOOT-03](LOOT-03-physical-collection-and-progression.md), latest Human execution
 request and [queue](../HUMAN_REVIEW_QUEUE.md). This implements ordinary enemy
@@ -74,7 +75,8 @@ Physical iPhone13/iPad8 comfort remains Q08/P19; local Chromium is not Apple/3GB
 acceptance. B does not redesign camera/walls, add media/dependencies, implement XP,
 eggs or chests, or change the16-maze order. A correction after publication must
 retain schema5/rules5 reward receipts and migrations; reverting to a v4-only
-writer risks abandoned new saves. Before qualification this candidate stays held.
+writer risks abandoned new saves. The qualified web slice is delivered; native and affected-device acceptance
+remain separate. Remaining B chest/Mimic work is not claimed complete.
 
 ## Artifact ownership
 
@@ -83,7 +85,7 @@ QA, sharing unchanged public media. Browser/trace packets remain outside the
 repository and are inventoried in the [artifact ledger](../LOCAL_ARTIFACT_LEDGER.md).
 No clone, media copy, native package, deletion or archive is authorized here.
 
-## Candidate evidence checkpoint
+## Delivered enemy evidence checkpoint
 
 735 tests across74 files and production build pass. Corrected gzip9 JS173829
 (+1418 over19); named1400-byte allocation and inherited headroom leave56 bytes

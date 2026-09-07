@@ -1,5 +1,21 @@
 # Local artifact ledger and cleanup review
 
+## Current release inventory — web0.22.20
+
+Owner Astra; existing repo/installed tools and dist reused. The completed enemy20
+local qualification inventory below is505 files /311484499 bytes across21 folders.
+Public verification adds `C:/GameDev/maze-game-qa/performance/v02220-public-20260907/`:
+**11 files /19807753 bytes**, ten screenshots plus65083-byte receipt. SHA-256
+f1ad97567258ee009c33c91255bc4914114546051457847c7ab5332102fe0a70.
+[Release receipt](reviews/2026-09-07-v02220-public-verification.md) binds exact scope.
+
+Combined enemy20 qualification/public evidence: **516 files /331292252 bytes**
+across22 folders, including the four-file frozen19 entry snapshot. This is the
+slice total, not all restored QA. Retain diagnostics, failures and qualification
+for explicit Human cleanup review. No archive/deletion, native package, repo or
+media clone. All QA/browser/server processes owned by this slice are stopped.
+Earlier active/candidate inventory headings below preserve dated provenance.
+
 ## Cold reward-opening diagnosis — September7 active
 
 Owner Astra, branch `codex/cold-reward-performance` from3a01ad4. A four-file

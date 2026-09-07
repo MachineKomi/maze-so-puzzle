@@ -1,5 +1,16 @@
 # Human decisions and steer
 
+**September7 engineering delivery, not new Human approval:** web0.22.20 is live,
+release135bb3a/reviewed5dc99c3/runtime6f083f4. [Public proof](reviews/2026-09-07-v02220-public-verification.md)
+and [actual Sol review](reviews/2026-09-07-enemy20-sol-final-review.md) qualify the
+enemy portion of B: modest final-defeat Gold/Science, persistent physical loot
+and protected schema5 migration. Existing immediate Power puzzles are retained.
+No Human feel, physical Apple/3GB/native or cold-stall acceptance is inferred.
+Q05/P20 covers enemy and authored loot; Q08/P19 and PERF-COLD-POWER remain open.
+Execute remaining mixed chests/actual disguised Mimics next. Recognition-only XP
+and usable-inventory-first eggs remain the adopted nonblocking Q03/Q06 defaults.
+The older delivery/next-work records below preserve history.
+
 **September7 engineering delivery, not new Human approval:** web0.22.19 is live,
 release2884250/runtime d472037. [Public proof](reviews/2026-09-07-v02219-public-verification.md)
 and actual independent Sol review accept a shorter first-loot hitch and corrected

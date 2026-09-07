@@ -1,5 +1,12 @@
 # Project audit
 
+**Current engineering checkpoint — web0.22.20:** [public receipt](reviews/2026-09-07-v02220-public-verification.md)
+binds release135bb3a/runtime6f083f4, exact reviewed-head CI, independent Sol review,
+735 tests,55 distinct overlapping browser contracts, four five-pair cohorts and
+eight live journeys. The enemy portion of B is delivered. Physical affected-device
+camera and cold first-Power observations remain open; no native or Human feel
+acceptance is inferred. Older audits below retain their dated scope.
+
 ## VFX-02A qualification — 2026-09-06
 
 Bounded committed reward presentation is implemented with independent actual Sol

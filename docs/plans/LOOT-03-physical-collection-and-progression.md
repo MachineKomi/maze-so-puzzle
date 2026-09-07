@@ -1,20 +1,18 @@
 # LOOT-03 — physical collection and lasting adventure progress
 
-**Latest follow-up:** [web0.22.19](../reviews/2026-09-07-v02219-public-verification.md)
-delivers A's bounded first-draw/resize optimization, with disclosed slower entry
-and cache costs. A's v4 ledger/gameplay semantics remain intact. **Execute B next**;
-Q08/P19 actual-device observation does not block table/capacity/migration work.
+**Current delivery — web0.22.20:** the enemy portion of B is
+[published](../reviews/2026-09-07-v02220-public-verification.md), release135bb3a,
+reviewed5dc99c3/runtime6f083f4. A's authored collection and19's bounded first-draw/
+resize follow-up remain delivered. B now adds deterministic final-defeat Gold/
+Science, capacity reservation and protected schema5 migration, independently
+reviewed by Sol. Existing Power puzzles and retired enemies are preserved.
 
-**Current September7 execution:** A is [published as web0.22.18](../reviews/2026-09-07-v02218-public-verification.md),
-release54c286a/runtime85f49ea. Astra remained runtime writer; actual independent
-Sol source/visual/performance review accepted the scoped web slice. The
-[implementation record](../reviews/2026-09-07-loot03-implementation.md) binds
-capacity, representation, recovery and cleanup. **Execute B next:** deterministic
-final-defeat enemy Gold/Science tables and campaign-total audit, then chest/Mimic
-lifecycle through the same ledger. Preserve Power and old resolved-enemy history.
-Q05/P20 now owns loot feel; Q08/P19 remains actual device evidence, including cold
-reward opening. Earlier starting-point descriptions below preserve historical
-pre-implementation analysis; they do not request redoing A.
+**Execute remaining B next:** mixed chests and the actual disguised Mimic lifecycle
+through the same ledger, following the detailed sequence in B below. Recognition
+XP and usable inventory before eggs follow. Q05/P20 covers authored and enemy loot;
+Q08/P19 and PERF-COLD-POWER retain actual-device/cold observations. Their open
+status does not silently pause independent authorized work. Earlier dated starting
+points below are historical, not assignments to redo delivered A or enemy B.
 
 **September7 implementation readiness:** [source-owner audit and first-slice dispatch](../reviews/2026-09-07-loot03-readiness.md)
 identifies the v3/rules-3 migration and future active-save protections to build
@@ -98,9 +96,9 @@ without claiming the additional enemy economy has shipped.
 
 ## B. Enemy reward tables, then chest and Mimic lifecycle
 
-Enemy tables/capacity/migration are now implemented in the20 candidate under the
+Enemy tables/capacity/migration are delivered in web0.22.20 under the
 [frozen execution contract](LOOT-03B-enemy-rewards-execution.md); qualification
-and publication are separately recorded there. The next runtime slice is the
+and public verification are linked there. The next runtime slice is the
 chest/Mimic contract below. Do not combine it with account XP or campaign expansion.
 
 Execution order for that next slice:
