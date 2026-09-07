@@ -20,6 +20,12 @@ Apple/3GB/native acceptance; Windows stays0.22.9, native0.22.10 separately held.
 No new general permission is needed. Earlier active/next labels below are
 historical and superseded by this dispatch.
 
+Docs closure8dedb15 is backed up on main and this branch; Vercel actually skipped
+it at09:43:41UTC through the unchanged Ignored Build Step. The [observed receipt](reviews/2026-09-07-v02221-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only for the next runtime slice. No new main
+push or game build is needed to align documentation SHAs. Working tree is clean
+at closure; owned QA processes are stopped and unowned4271 is untouched.
+
 **Current Human override — FIELD-21:** balanced interior walls are explicitly
 accepted. [Scale/jump/perimeter correction](plans/FIELD-21-scale-jump-and-perimeter.md)
 now precedes chests: Astra writes on `codex/field-scale-refinement`; Sol independently
