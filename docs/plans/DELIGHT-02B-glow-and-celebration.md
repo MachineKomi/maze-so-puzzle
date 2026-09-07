@@ -1,10 +1,9 @@
 # DELIGHT-02B — clear rewards and joyful moments
 
-**Current status2026-09-07:** B friend victory is published24; A steady pickup
-presence is [published26](../reviews/2026-09-07-v02226-public-verification.md).
-C successful-write earned keepsake fanfare remains next. Use the verified
-[C handoff](DELIGHT-26-calm-pickup-presence.md#c-handoff--verified-against-unchanged-app-owner-at-fd1f9e6),
-then continue LEARN-01; this does not close the broader roadmap.
+**Current status2026-09-07:** B friend victory is published24, A calm pickup
+presence published26, and C saved keepsakes [published27](../reviews/2026-09-07-v02227-public-verification.md).
+This bounded A/B/C tranche is delivered. Continue LEARN-01 including
+STORY-RESCUE-01; broader VFX and the wider roadmap remain open.
 
 Prepared 2026-09-06; execution is authorized by the Human's subsequent continuation
 instruction. Queue after the qualified PHONE-02/BOOK-02A release; no renewed

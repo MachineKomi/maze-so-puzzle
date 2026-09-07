@@ -1,5 +1,14 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current delivery — web0.22.27:** [public receipt](reviews/2026-09-07-v02227-public-verification.md) verifies
+one saved-keepsake celebration after successful Next, with no pre-commit or
+after-Stay cue. Actual independent Sol supports bounded publication. Astra owns
+runtime on codex/earned-keepsakes. Q13/P27 is ready. DELIGHT-02B A/B/C are delivered;
+next is LEARN-01: explicit Power shortfall, request-only picture-led hints and
+truthful rescue-dependent story endings (STORY-RESCUE-01). Preserve the wider
+roadmap, usable Garden dependencies before eggs, ART-REWARD-01, and open physical
+Apple/cold-Power/native qualification. Earlier current/next labels are historical.
+
 **Current work — DELIGHT27 C:** [earned keepsakes](plans/DELIGHT-27-earned-keepsakes.md)
 on codex/earned-keepsakes. Astra is sole runtime writer; actual Sol independently
 reviews source, visuals and qualification. Candidate27 derives actual newly

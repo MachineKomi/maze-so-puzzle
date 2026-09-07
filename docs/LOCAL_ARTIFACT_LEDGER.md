@@ -1,5 +1,13 @@
 # Local artifact ledger and cleanup review
 
+## DELIGHT27 completed local and public island
+
+All keepsake27-* entries, release-v02226 and v02227-public-20260907 total
+**260 files /54242127 bytes** before the documentation-guard log.
+The [public receipt](reviews/2026-09-07-v02227-public-verification.md) binds final reports. One existing dist, four
+baseline entry files sharing unchanged media; no repo/native clone, deletion or
+archive. Owned QA jobs ended; preserve unowned4271 and retained failed evidence.
+
 ## DELIGHT27 active artifact island
 
 New keepsake27-* browser/build/performance/release evidence stays external under

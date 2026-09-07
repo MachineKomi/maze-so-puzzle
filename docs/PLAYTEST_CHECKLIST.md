@@ -1,5 +1,15 @@
 # Family playtest checklist
 
+## P27 / Q13 — saved keepsakes (published0.22.27)
+
+Ready on [published27](reviews/2026-09-07-v02227-public-verification.md). When you naturally earn a new sticker,
+medal or badge, choose Next and dismiss the next chapter instructions. Is the
+brief Book card readable and satisfying, with clear artwork and no obstruction
+of Ame or the controls? It should disappear on movement and remain saved in the
+Book. Already owned awards do not replay; no reset or campaign replay is needed.
+Report device/maze/layout if it clips. Q08 physical Apple camera/cold-Power and
+Q11 spacious layout remain useful. No immediate decision blocks development.
+
 ## P26 / Q12 — calm pickup presence (published0.22.26)
 
 Ready on [published0.22.26](reviews/2026-09-07-v02226-public-verification.md).

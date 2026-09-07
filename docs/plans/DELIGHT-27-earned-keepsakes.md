@@ -1,5 +1,9 @@
 # DELIGHT27 — an earned keepsake moment
 
+**Delivered web0.22.27:** [public receipt](../reviews/2026-09-07-v02227-public-verification.md). Frozen fdc60f2,
+reviewed b6b6a71, release 4780e9525109c553a6b79ff388c56ea67ae708a9. Actual Sol independently supports the
+bounded web presentation. Q13/P27 is ready; physical Apple/native acceptance is open.
+
 Authorized DELIGHT-02B C after published26. Astra is sole runtime writer on
 codex/earned-keepsakes; actual Sol independently reviews. Live remains26 until
 qualification. This closes C, then LEARN-01 including STORY-RESCUE-01 is next.
