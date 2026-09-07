@@ -40,7 +40,7 @@ that 3 GB is insufficient or promising success without an affected-device test.
 ## Implementation sequence
 
 1. Freeze the exact16 HTML/JS/CSS and identity outside the repo; share unchanged
-   media. Capture native-speed and defined CPU-throttled routes at phone DPR3
+   media. Capture unthrottled and defined CPU-throttled browser routes at phone DPR3
    and tablet DPR2, including camera-moving small/large mazes and nonempty hazards.
    Confirm unused hazard animation count is zero on dry mazes. Keep trace runs
    separate from uninstrumented frame/geometry checks. Do not emulate RAM by
@@ -57,7 +57,8 @@ that 3 GB is insufficient or promising success without an affected-device test.
 3. Remove repeated travel-state writes. Replace the minimap's per-tile DOM grid
    with grouped terrain paths and sparse object/player overlays, preserving
    fog, current-view/remembered distinction, guided markers, colours, geometry and
-   accessible descriptions. Measure this separately before combining it.
+   accessible descriptions. Inspect its node cost separately; use a matched
+   control before attributing any part of the combined frame/work gain to it.
 4. Run genuine independent Sol review, focused correctness/visual cases and
    matched five-pair final production comparisons. Optimize further if results
    show new raster spikes or no material benefit. A renderer/asset rewrite is a
@@ -99,3 +100,37 @@ or repeatedly reinstall it. Add a selectable WebKit harness where supported,
 and label this machine's unavailable engine honestly. No Mac/Apple test result
 is invented. LOOT-03 resumes after this movement correction, followed by the
 preserved roadmap. Updated source/qualification receipts will own actual status.
+
+## Implemented candidate and remaining physical decision
+
+The final renderer candidate is eff0530, version0.22.17. Static/liquid separation
+was required: windowing alone increased phone raster work in the rejected pilot.
+The grouped map joins that renderer in the measured candidate; its isolated
+contribution is not established by comparing pilots with different trace settings.
+Intrinsic per-path map paint is required for SVG use instances, with actual
+current/remembered/mystery pixel checks; the first CSS-based palette was rejected.
+
+One ideal uncompressed RGBA backing has area ×4bytes. For a23×23 maze versus
+a10×10 window at equal tile scale/DPR, its pixel area falls81.10%; for31×31 it
+falls89.59%. That is a model per surface, not a measurement of resident Apple
+RAM, exact compositor allocation, texture-cache release or total application memory.
+Final Chromium layer dimensions and node counts are recorded separately in the
+[qualification receipt](../reviews/2026-09-07-v02217-web-qualification.md).
+The renderer retains full geometry in memory; it bounds painting, not the maze.
+
+The final promotion controls reject removing caches. Small-maze summed content
+rectangles increase58.57%/60.69%, but promoted17 reduces maze2 Raster work
+58.66%/65.82% against16; removing all hints increases phone Raster138.23%.
+Keep the measured cache policy, with no conditional device/RAM downgrade.
+This explicitly accepts more small-maze layers for less repeated rendering;
+actual Apple residency and feel remain unverified, rather than inferred from
+overlapping rectangles or rounded JS heap. The independent review and raw
+controls remain in the linked receipts.
+
+The final report must distinguish five-pair frame observations, trace-work
+proxies, separate layer inventory and sustained-route diagnostics. Main-thread
+CPU throttling is not low RAM, a slower GPU or thermal emulation. If Q08 still
+reports stutter, the next investigation is a Safari Web Inspector recording on
+an affected device: layer repaint/allocation versus main-thread input/save work,
+same maze/settings and OS. Only then select a further renderer/asset or input
+change. Do not declare a minimum RAM spec or silently force Lite based on brand.

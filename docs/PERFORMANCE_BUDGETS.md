@@ -1,5 +1,27 @@
 # Performance budgets and evidence contract
 
+## CAMERA-17 scoped web qualification — 0.22.17
+
+Frozen runtime eff0530: gzip9 JS167081/167157 ceiling, CSS24170/31158,
+public155542751B unchanged. The named900-byte JS allocation admits the bounded
+camera, split liquid/static scene and grouped-map seam; no media/dependency growth.
+Six final five-pair work rows (three routes, phoneDPR3/tabletDPR2, CPU4) show
+median Raster reductions26.38–70.35% against exact public16. Thirty separate
+untraced candidate samples have p95≤16.8ms, worst≤33.4ms, none over34ms;
+small-maze frame tails are essentially parity on this host. Unthrottled reference
+and a256-step diagnostic pass within their recorded scope.
+
+Promotion trades caching for layers: small maze2 has58.57%/60.69% more summed
+content rectangles. This is not allocated memory. Controls removing promotion
+increase raster work; the retained17 maze2 measures58.66%/65.82% less Raster
+than16. Astra and independently reviewing Sol accept this bounded rendering-work
+tradeoff for web publication. No total-RAM saving, Apple/3GB,
+thermal, native or complete Plan07 acceptance follows. Q08/P19 remains the
+affected-device product check. Exact receipts, outliers, hashes and limitations:
+[qualification](reviews/2026-09-07-v02217-web-qualification.md),
+[diagnostics](reviews/2026-09-07-camera17-diagnostics.md),
+[independent Sol decision](reviews/2026-09-07-camera17-sol-final-review.md).
+
 ## WALL-04C final scoped qualification — web0.22.15
 
 Frozen runtime e69f3e4: gzip9 JS165902/166057 ceiling, CSS24216/31158,

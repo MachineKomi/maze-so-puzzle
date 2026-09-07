@@ -76,3 +76,66 @@ failed reports above remain preserved. Version17 allocation is800 gzip9 JS bytes
 above the prior ceiling; measured167006 JS/24220 CSS/public155542751. No assets,
 dependencies, save or engine changes. The initial unallocated749-byte excess was
 correctly rejected before the explicit named allocation.
+
+## Palette blocker caught before release
+
+Root's later visual review found that the new minimap's terrain was black,
+despite correct grouped paths/fog/counts. The new descendant CSS fill selectors
+did not supply colour inside the SVG use instances. Sol's earlier positive map
+colour impression was not reliable; it is superseded by direct pixel evidence.
+Root stopped the running comparison batch before publication. The pre-palette
+`camera17-final-hazard-frames` (five pairs) and partial `camera17-final-hazard-work`
+are retained diagnostics, not the final accepted candidate.
+
+Two direct rendered-pixel regressions reproduce black current-floor/wall at
+DPR1/3 in `camera17-map-palette-baseline`. Intrinsic fill on each shared terrain
+path fixes the actual paint. Corrected DPR3 samples exactly match floor246/217/145,
+wall116/115/162 and mystery58/55/79; remembered matches the original colour/filter/
+opacity treatment. First DPR1 probe touched antialiased grid paint, differing by
+5 channels; the probe now samples tile centres rather than grid-adjacent pixels.
+That first1/2 report is preserved in `camera17-map-palette-fixed`.
+
+Freeze eff0530 retains the renderer/travel seam and fixes palette ownership.
+Allocation rises800→900JS because this required repair adds75gzip9 bytes;
+final167081JS/24170CSS, no media/dependency growth. Final-source camera/palette
+and performance reruns are required. The broad73-case report passed72; the
+remaining five-friend comparison differed by0.011px from an exact fraction due
+to layout quantization. Both full five-friend journeys pass with a strict0.025
+painted-pixel bound; three controlled16ms adjacent-rebase captures also pass.
+These functional/visual checks do not establish physical-device speed.
+
+## Compositor-cost controls on the corrected source
+
+All use frozen eff0530 as both control and candidate, with a logged injected
+CSS override only in candidate contexts. Containment and bounded geometry stay
+enabled. None of these overrides is committed runtime. A style element adds
+one diagnostic DOM node. No physical RAM conclusion follows from layer area.
+
+- `camera17-small-promotion-ablation`: removing only terrain/liquid child
+  translateZ removes two small layers but leaves the three large scene surfaces.
+  Content rectangles fall only0.22%/0.25%. This one-pair diagnostic accidentally
+  used the historical780×312/1193×833 DPR2 profiles, correctly recorded in raw
+  data; it is not the target phone/tablet qualification cohort.
+- `camera17-hazard-promotion-ablation`: same child-only removal, one pair at
+  target844×390/DPR3 and1080×810/DPR2, normal trace. Raster rises
+  1614.033→2467.359ms (+52.87%) and1874.341→2375.454ms (+26.74%). Reject removal.
+- `camera17-small-all-promotion-ablation`: removing all four root hints, one
+  target-profile pair with layers/no trace, reduces summed small-maze rectangles
+  to3931009phone/2528372tablet, below16's4213585/2715244. Frame tails remain near
+  parity, but this alone cannot decide whether removing caches is beneficial.
+- `camera17-small-unpromoted-work`: the same all-none override, five phone
+  pairs with normal trace, raises median Raster730.618→1740.518ms (+138.23%).
+  Both sides have six intervals over20ms and none over34ms. Root stops the run
+  after the completed phone cohort and tablet warmups: the repeated raster
+  penalty rejects this policy. Preserve the partial report, not a complete
+  two-profile qualification claim.
+- `camera17-small-parent-promotion-ablation`: retain both SVG child hints but
+  remove world/foreground hints, one pair with trace and layer instrumentation
+  together. Rectangles fall6681536→5276609phone/4363000→3425181tablet, but Raster
+  rises783.434→959.262ms (+22.44%) and1114.745→1640.138ms (+47.13%). These are
+  instrumented diagnostics; no frame-performance conclusion is drawn from them.
+
+The direct five-pair live16→eff0530 maze-2 work cohort decides the final caching
+tradeoff. The working goal is less rendering work during camera travel, not
+minimizing overlapping layer rectangles at any cost. Do not introduce an
+untested UA, RAM or small-maze downgrade from these rejected controls.
