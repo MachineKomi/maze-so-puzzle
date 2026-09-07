@@ -99,9 +99,11 @@ within each viewport/mode (not the median of individual paired ratios):
 
 The jump increase is real work, not a claim of equal cost. Desktop Raster median
 is5692.796→6951.478ms across roughly4.8seconds; parallel trace durations overlap.
-The second clipped paint graph and enlarged art raise task counts, while the
-same travel owner adds one foreground translation write without a new clock,
-React frame state or layout read. Jump styling adds30.771/36.023ms total per
+Task counts rise, consistent with the added clipped paint graph and travel work
+in source. No ablation causally apportions that increase between foreground,
+enlarged artwork and other presentation changes. The same travel owner adds one
+foreground translation write without a new clock, React frame state or layout
+read. Jump styling adds30.771/36.023ms total per
 phone/desktop sample (roughly.11/.13ms per displayed frame); desktop Layout adds
 3.468ms total. Astra accepts this bounded cost for the requested visible benefit
 and clean measured cadence. Sol independently accepts the cost within the same

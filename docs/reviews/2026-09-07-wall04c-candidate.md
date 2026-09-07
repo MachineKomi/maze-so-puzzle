@@ -94,9 +94,11 @@ line/stroke. Body and ground registration are unchanged. Both full five-friend
 journeys/reversals at780×312 and1194×834 pass an added2px board-edge containment
 assertion at every settled checkpoint. Retain the former clipped image honestly.
 Pre-label five-pair jump evidence at1f8ab73 shows4.79%/17.01% median Raster rise
-and no frame>16.8ms. Actual Sol independently accepts source/count attribution
-to the translated foreground paint graph and larger artwork within Chromium
-scope. Post-label source-matched moving/jump/idle evidence is still required.
+and no frame>16.8ms. Actual Sol accepts this bounded Chromium cost; increased
+counts are consistent with the additional paint/travel work in source, but no
+ablation apportions it between foreground, enlarged artwork and other changes.
+Post-label source-matched moving/jump/idle evidence is still required at this
+historical checkpoint; the final review linked above owns its completed result.
 
 Pre-final measured gzip9 JS165884, CSS24216, public155542751B. Versus live14:
 +1275JS/+375CSS/no media. The prior JS ceiling165557 is exceeded by327bytes.
