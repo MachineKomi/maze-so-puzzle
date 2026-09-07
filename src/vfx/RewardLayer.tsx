@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { useContext, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { lootLineClear } from "../game/loot";
 import type { LevelDefinition } from "../game/types";
@@ -8,6 +8,7 @@ import { playRewardArrival, type SoundHandle } from "../sound";
 import { advanceRewardToken, makeRewardTokens, REWARD_CAP, rewardProjection, rewardSpaceOpen, type RewardEmission, type RewardToken } from "./rewardPhysics";
 import { REWARD_COLORS, rewardGlyph } from "./rewardGlyphs";
 import { lootPose, type LootView } from "./useLootCollection";
+import { StageFitContext } from "../ui/ResponsiveStage";
 
 export interface RewardPort { emit(event: RewardEmission): void; cancel(): void; wake(): void }
 export const EMPTY_REWARD_PORT: RewardPort = { emit() {}, cancel() {}, wake() {} };
@@ -18,6 +19,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
   loot: RefObject<LootView>;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { scale: stageScale } = useContext(StageFitContext);
   const [fallback, setFallback] = useState(false);
   const [, repaintFallback] = useState(0);
   const mutedRef = useRef(muted); mutedRef.current = muted;
@@ -45,7 +47,9 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       if (size.width <= 0 || size.height <= 0) return false;
       if (width !== size.width || height !== size.height || canvas.width === 1) {
         ({ width, height } = size);
-        scale = Math.max(.1, Math.min((devicePixelRatio || 1) * canvas.getBoundingClientRect().width / width, 1.5, 1536 / width, 1536 / height));
+        // The stage already owns its physical scale. Reading a Canvas DOM box
+        // here forces the just-updated scene to lay out inside the first draw.
+        scale = Math.max(.1, Math.min((devicePixelRatio || 1) * stageScale, 1.5, 1536 / width, 1536 / height));
         canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
         ctx.setTransform(scale, 0, 0, scale, 0, 0);
       }
@@ -182,7 +186,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       if (!tokens.length) {
         ({ width, height } = scene.current.contentSize);
         if (width <= 0 || height <= 0) return;
-        scale = Math.min((devicePixelRatio || 1) * canvas.getBoundingClientRect().width / width, 1.5, 1536 / width, 1536 / height);
+        scale = Math.max(.1, Math.min((devicePixelRatio || 1) * stageScale, 1.5, 1536 / width, 1536 / height));
         canvas.width = Math.max(1, Math.floor(width * scale)); canvas.height = Math.max(1, Math.floor(height * scale));
         ctx.setTransform(scale, 0, 0, scale, 0, 0); previous = now; pitch = 0;
       }
@@ -203,7 +207,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       window.removeEventListener("blur", cancel); window.removeEventListener("resize", cancel);
       window.removeEventListener("focus", wake); window.removeEventListener("resize", resize);
     };
-  }, [active, level, port, quality, scene, loot]);
+  }, [active, level, port, quality, scene, loot, stageScale]);
   const world=canvasRef.current?.parentElement?.querySelector(".camera-world");
   return <><canvas ref={canvasRef} width={1} height={1} className="vfx-rewards" data-vfx-kind="committed-rewards" aria-hidden="true" />
     {fallback && world && createPortal(loot.current.game.loot.sources.flatMap(s=>s.drops.map(d=>({s,d})))

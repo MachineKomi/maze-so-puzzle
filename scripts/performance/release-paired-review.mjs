@@ -10,6 +10,7 @@ import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { platform, release, cpus, totalmem } from 'node:os';
 import { readBuildProvenance } from './build-provenance.mjs';
+import { installColdOpeningProbe } from './cold-opening-probe.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
 const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/performance/phone02-book-paired-20260906');
@@ -17,6 +18,8 @@ const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const pairCount = Number(process.env.MAZE_REVIEW_PAIRS ?? 5);
+const coldProbe = process.env.MAZE_REVIEW_COLD_PROBE === '1';
+if(coldProbe && pairCount!==1) throw Error('Cold wrappers are diagnostic only; use one pilot pair');
 const cpuRate = Number(process.env.MAZE_REVIEW_CPU_RATE ?? 1);
 const captureTrace = process.env.MAZE_REVIEW_TRACE !== '0';
 const captureLayers = process.env.MAZE_REVIEW_LAYERS === '1';
@@ -81,7 +84,8 @@ report.host={platform:platform(),release:release(),cpu:cpus()[0]?.model,logicalC
   lockSha256:sha(await readFile(resolve(root,'package-lock.json'))),powerAndThermal:'Not controlled; diagnostic host, no physical low-memory qualification'};
 report.captureTrace=captureTrace;report.captureLayers=captureLayers;
 report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
-report.saveKeys={seed:data.keys.run,baseline:data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
+report.saveKeys={seed:data.keys.run,baseline:process.env.MAZE_REVIEW_BASELINE_RUN_KEY||data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
+report.coldOpeningProbe=coldProbe;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; baseline immediate credit versus physical collection';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
@@ -110,6 +114,7 @@ try {
           await page.waitForTimeout(500);
           const client = await ctx.newCDPSession(page), events = [];
           await client.send('Emulation.setCPUThrottlingRate',{rate:cpuRate});
+          if(coldProbe) await installColdOpeningProbe(page);
           let layers=[];
           client.on('LayerTree.layerTreeDidChange',e=>{layers=e.layers??[];});
           if(captureLayers) await client.send('LayerTree.enable');
@@ -152,8 +157,8 @@ try {
           }
           const sample = await page.evaluate(key => {
             window.wallAb.done = true; window.wallAbObserver.disconnect();
-            return { ...window.wallAb, save: JSON.parse(localStorage.getItem(key)), brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
-          }, mode === 'candidate' ? (process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY || data.keys.run) : data.keys.run);
+            return { ...window.wallAb, coldProbe:window.__mazeColdProbe, save: JSON.parse(localStorage.getItem(key)), brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
+          }, report.saveKeys[mode]);
           if(captureTrace) { const complete = new Promise(resolve => client.once('Tracing.tracingComplete', resolve));
             await client.send('Tracing.end'); await complete; }
           const deltas = sample.frames.slice(1).map((t, i) => t - sample.frames[i]), sorted = [...deltas].sort((a, b) => a - b);
@@ -163,7 +168,7 @@ try {
           }));
           const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: fixture.snapshot.game.steps, stepsAfter: sample.save?.game?.steps,
             resourcesBefore,resourcesAfter:await resources(),loot:sample.save?.game?.loot??null,
-            gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,
+            gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,coldProbe:sample.coldProbe,
             dpr:cohort.dpr,cpuRate,rebases:sample.rebases,windows:sample.windows,
             rebaseAdjacentDeltas:deltas.filter((_,i)=>[i,i+1].some(j=>j>0&&sample.windows[j]?.join()!==sample.windows[j-1]?.join())),
             layers:layers.map(({width,height,drawsContent,backendNodeId,paintCount})=>({width,height,drawsContent,backendNodeId,paintCount})),
@@ -173,7 +178,7 @@ try {
           await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2));
           if (pair === 0) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
-          console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined }));
+          console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined }));
           if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
           if(lootReview) {
             const source=row.loot?.sources.find(s=>s.sourceId===fixture.sourceId);

@@ -1,5 +1,15 @@
 # Local artifact ledger and cleanup review
 
+## Cold reward-opening diagnosis — September7 active
+
+Owner Astra, branch `codex/cold-reward-performance` from3a01ad4. A four-file
+`C:/GameDev/maze-game-qa/performance/reward-cold-baseline-v02218/` snapshot will
+retain the already verified18 HTML/JS/CSS and identity, sharing current unchanged
+media. Diagnostic wrapper output goes to `reward-cold-probe-v02218/` beside it;
+wrapper timing is not qualification. Reuse existing dist/runtime and installed
+browser; no dependency installation or repository/media clone. Final counts and
+dispositions follow. No deletion/archive or native build.
+
 ## LOOT-03 A — September7 initial qualification record
 
 Production builds reuse `C:/GameDev/maze-game/dist` and the existing provenance
