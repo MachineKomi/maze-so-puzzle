@@ -436,13 +436,13 @@ The baseline is the reviewed Plan 06 audit. “After” is the current engine-de
 | 7 | Wishing Woods | 17×17 | 117 / 150 | 121 / 151 | 11 / 13 | 3% / 16 | Optional strong-guardian rescue |
 | 8 | Ame’s Grand Parade | 17×17 | 120 / 140 | 124 / 141 | 11 / 15 | 2% / 15 | Mixed-mechanic recall |
 | 9 | Springstep Sky Hollow | 19×19 | 193 / 217 | 182 / 195 | 14 / 8 | 35% / 42 | Spring Boots unlock a state-gated hole shortcut; still a child-test focus |
-| 10 | Lanternlight Labyrinth | 23×23 | 173 / 216 | 151 / 207 | 18 / 9 | 29% / 48 | Room shortcut reduces ordinary endurance; rescue room remains substantial |
-| 11 | Twilight Treasure Loop | 21×21 | 235 / 245 | 206 / 212 | 14 / 14 | 24% / 24 | Exit follows the blue-door chain; dense prerequisites remain the challenge |
+| 10 | Lanternlight Labyrinth | 23×23 | 151 / 208 | 151 / 207 | 18 / 9 | 29% / 48 | Room shortcut reduces ordinary endurance; rescue room remains substantial |
+| 11 | Twilight Treasure Loop | 21×21 | 208 / 214 | 206 / 212 | 14 / 14 | 24% / 24 | Exit follows the blue-door chain; dense prerequisites remain the challenge |
 | 12 | Moonlit Friendship Quest | 23×23 | 231 / 241 | 165 / 170 | 16 / 14 | 16% / 20 | Cross-map shortcut preserves leaf/tool/key ordering |
 | 13 | Rose Heart Roundabout | 13×13 | 105 / 117 | 29 / 44 | 13 / 2 | 17% / 11 | Compact two-portal literacy and one key gate |
 | 14 | Clover Comeback Carnival | 17×17 | 103 / 177 | 105 / 177 | 10 / 8 | 20% / 27 | Portal/Power comeback with expensive optional mastery |
 | 15 | Friendship Crown Vault | 17×17 | 231 / 260 | 47 / 58 | 37 / 9 | 0% / 9 | Three-pair relay; all three reusable-key doors required; five rescues optional |
-| 16 | Rainbow Power Parade | 17×17 | 411 / 411 | 62 / 75 | 40 / 11 | 2% / 9 | Power-99 loop, Sunny Key return, compact optional rooms |
+| 16 | Rainbow Power Parade | 17×17 | 63 / 76 | 62 / 75 | 40 / 11 | 2% / 9 | Power-99 loop, Sunny Key return, compact optional rooms |
 
 Chapters 9 and 10 remain the principal endurance risks. Both are below baseline and have functional shortcuts, but their physical retraversal and non-event runs require direct child testing before any claim that the friction is solved.
 
@@ -602,3 +602,14 @@ never change exit/perfect-rescue requirements. Pending value remains optional
 and stays durable until collected or deliberately abandoned on completion.
 See [B execution contract](plans/LOOT-03B-enemy-rewards-execution.md) for supply,
 legacy retirement, protection and the separately pending chest/Mimic lifecycle.
+# Authored chest continuation — candidate rules6
+
+The [authored chest contract](plans/LOOT-03B-authored-chests-and-mimics.md) activates
+four mixed chests (Gold8–10 plus Science2–4) and Twilight's disguised Power6 Candy.
+First contact is stationary and commits the outcome; a Mimic requires fresh
+input after its reveal. Final defeat alone releases premium currency; immediate
+Power remains unchanged. Twilight's placement is a required-path encounter,
+qualified by engine replay attaining sufficient Power before defeat. Existing
+v5 runs retain their historical layouts/rewards. Generated revision2 is unchanged.
+The maintained route table below reflects the candidate's extra opening inputs;
+this is not a publication receipt.

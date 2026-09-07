@@ -1858,3 +1858,10 @@
     transform: translate(-50%, -50%) scale(var(--burst-scale)) rotate(170deg);
   }
 }
+.chest-presentation { position: absolute; z-index: 32; pointer-events: none; }
+.chest-presentation[data-chest-state="closed"] { animation: chest-tap 200ms ease-out; }
+.chest-presentation[data-chest-state="good-open"] { animation: chest-unfold 350ms ease-out; }
+@keyframes chest-tap { 40% { transform: translateY(4%) rotate(-4deg); } 75% { transform: rotate(3deg); } }
+@keyframes chest-unfold { from { transform: translateY(3%) scale(.94); } to { transform: none; } }
+html[data-motion="reduced"] .chest-presentation,
+html[data-quality="static"] .chest-presentation { animation: none; }

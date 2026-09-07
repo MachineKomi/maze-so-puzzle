@@ -22,6 +22,7 @@ function labelFor(object: LevelObject | undefined, event?: GameEvent): string {
   if (!object && event?.type === "hole-jumped") return "the single-hole crossing";
   if (!object) return "the sparkling exit";
   switch (object.kind) {
+    case "chest": return "the closed chest";
     case "sword": return "the maze weapon";
     case "boots": return "the Splash Boots";
     case "spring-boots": return "the Spring Boots";
@@ -42,6 +43,7 @@ function principleFor(object: LevelObject | undefined, event?: GameEvent): strin
   }
   if (!object) return "The sparkling star finishes the maze. You can leave optional friends and treasure for another adventure.";
   switch (object.kind) {
+    case "chest": return "Bump a closed chest to see what is inside. A revealed guardian waits while you prepare.";
     case "sword": return "Ame needs the maze weapon before she can ask a guardian to move.";
     case "boots": return "Splash Boots make both water and warm lava safe to cross.";
     case "spring-boots": return "Spring Boots cross exactly one hole when clear ground is immediately beyond it.";
@@ -143,5 +145,6 @@ export function hintStateKey(state: GameState): string {
     state.rescuedAnimalIds,
     state.defeatedEnemyIds,
     state.openedDoorIds,
+    state.chests.map(c=>[c.objectId,c.phase]),
   ]));
 }

@@ -1,4 +1,5 @@
 import { emptyLoot, authoredLootErrors, scatterTreasure, finishLootClaims } from "./loot";
+import { chestReceipt, chestIsResolved, resolveChest, commitChest } from "./chests";
 import {
   DIRECTION_DELTAS,
   type Direction,
@@ -40,6 +41,7 @@ export function getObjectAt(
 
 export function isObjectResolved(object: LevelObject, state: GameState): boolean {
   switch (object.kind) {
+    case "chest": return chestIsResolved(state,object.id);
     case "enemy":
       return state.defeatedEnemyIds.includes(object.id);
     case "door":
@@ -63,6 +65,7 @@ export function createInitialGameState(level: LevelDefinition, runId?: string): 
   const lootErrors = authoredLootErrors(level);
   if (lootErrors.length) throw Error(lootErrors.join(" "));
   return {
+    chests: [],
     loot: emptyLoot(runId),
     levelId: level.id,
     position: { ...level.start },
@@ -178,6 +181,7 @@ export function movePlayer(
   if (jumpedHoles.length > 0 && (
     (object?.kind === "door" && !state.openedDoorIds.includes(object.id))
     || (object?.kind === "enemy" && !state.defeatedEnemyIds.includes(object.id))
+    || (object?.kind === "chest" && !chestIsResolved(state,object.id))
   )) {
     return blocked(state, { type: "blocked", reason: "occupied-jump-landing", target });
   }
@@ -205,6 +209,21 @@ export function movePlayer(
         species: object.species,
       }],
     };
+  }
+  if (object?.kind === "chest" && !chestIsResolved(state,object.id)) {
+    const receipt=chestReceipt(state,object.id);
+    if (!receipt) {
+      const resolved=resolveChest(state.loot.runId,level.id,object);
+      const next=commitChest(state,resolved);
+      return {state:resolved.outcome==="good"?{...next,loot:scatterTreasure(level,next,object)}:next,moved:false,
+        events:[{type:"chest-opened",objectId:object.id,outcome:resolved.outcome,power:resolved.power}]};
+    }
+    if (!state.hasSword) return blocked(state,{type:"blocked",reason:"needs-sword",target});
+    if (state.power<receipt.power) return {state,moved:false,events:[{type:"enemy-too-strong",objectId:object.id,
+      playerPower:state.power,enemyPower:receipt.power}]};
+    const next=commitChest({...state,power:state.power+receipt.power},{...receipt,phase:"defeated"});
+    return {state:{...next,loot:scatterTreasure(level,next,object)},moved:false,
+      events:[{type:"enemy-defeated",objectId:object.id,enemyPower:receipt.power,powerBefore:state.power,powerAfter:next.power}]};
   }
   const events: GameEvent[] = [];
   if (jumpedHoles.length > 0) {
@@ -325,7 +344,7 @@ export function movePlayer(
 
   if (
     object !== undefined &&
-    object.kind !== "enemy" &&
+    object.kind !== "enemy" && object.kind !== "chest" &&
     object.kind !== "door" &&
     object.kind !== "animal" &&
     object.kind !== "portal" &&

@@ -892,7 +892,7 @@ export const FUTURE_HAZARD_ART = {
 } as const satisfies Readonly<Record<string, ArtReference & { readonly runtimeStatus: "dormant" }>>;
 
 /**
- * State-family view for future Mimic consumers. Candy's revealed state is the
+ * State-family view for authored chest consumers. Candy's revealed state is the
  * exact ENEMY_ART object (not a second catalogue authority or delivery copy).
  */
 export const MIMIC_ART = {

@@ -54,7 +54,7 @@
         { "kind": "engine-event", "levelId": "springstep-sky-hollow", "eventType": "hole-jumped" },
         { "kind": "engine-event", "levelId": "rose-heart-roundabout", "eventType": "portal-warped" },
         { "kind": "engine-event", "levelId": "shiny-sword", "eventType": "door-opened" },
-        { "kind": "engine-event", "levelId": "rainbow-power-parade", "eventType": "treasure-opened" },
+        { "kind": "engine-event", "levelId": "rainbow-power-parade", "eventType": "chest-opened" },
         { "kind": "engine-event", "levelId": "little-star-trail", "eventType": "level-won" }
       ]
     },

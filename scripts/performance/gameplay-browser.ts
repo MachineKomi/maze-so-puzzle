@@ -114,8 +114,9 @@ const blockingPresentationSelector = [
   ".jump-presentation",
   ".portal-presentation",
   ".door-opening-presentation",
+  ".chest-presentation",
 ].join(", ");
-const blockingEventTypes = new Set(["enemy-defeated", "animal-rescued", "hole-jumped", "portal-warped", "door-opened"]);
+const blockingEventTypes = new Set(["enemy-defeated", "animal-rescued", "hole-jumped", "portal-warped", "door-opened", "chest-opened"]);
 interface RoutePresentationObservation {
   readonly armedAt: number;
   seenAt: number | null;

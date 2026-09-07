@@ -61,6 +61,20 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+it("preloads only the states obtainable in the current authored chest policies", async()=>{
+  const {preloadLevelArt}=await import("./assets");
+  const {MIMIC_ART}=await import("./artCatalog");
+  const base=levelWithRelevantArt();
+  preloadLevelArt({...base,objects:[
+    {id:"good",kind:"chest",at:{x:1,y:1},family:"classic-mimic",power:1,mimicChance:0,rewardRules:2},
+    {id:"mimic",kind:"chest",at:{x:2,y:1},family:"candy-mimic",power:6,mimicChance:100,rewardRules:2},
+  ]});
+  for(const art of [MIMIC_ART["classic-mimic"].closed,MIMIC_ART["classic-mimic"]["good-open"],MIMIC_ART["candy-mimic"].closed,MIMIC_ART["candy-mimic"].revealed])
+    expect(loadedSources).toContain(art.src);
+  expect(loadedSources).not.toContain(MIMIC_ART["classic-mimic"].revealed.src);
+  expect(loadedSources).not.toContain(MIMIC_ART["candy-mimic"]["good-open"].src);
+});
+
 describe("art preloading", () => {
   it("uses the current seamless terrain asset revisions", async () => {
     const { ASSETS } = await import("./assets");

@@ -1,0 +1,55 @@
+{
+  "id": "LOOT-03B-chest-activation",
+  "artApproval": {
+    "path": "docs/source-assets/calibrations/mgjrpg-02/v06/human-decision.json",
+    "sha256": "0efe136020a5116ad7df79b042e60aba786dc2925122a0a55cf6fe3aebf11e48"
+  },
+  "mechanicsAuthority": {
+    "path": "docs/user-playtests/2026-09-06-physical-loot-and-account-level.md",
+    "sha256": "ce2acd10f1e851b8246b63d7737cffc0f662327ca98d6bbd106784cae7eccdea"
+  },
+  "implementation": "docs/plans/LOOT-03B-authored-chests-and-mimics.md",
+  "scope": "Metadata activation only; original art approval and all source/runtime pixels unchanged.",
+  "unchangedDormant": [
+    "classic-mimic-revealed",
+    "candy-mimic-good-open"
+  ],
+  "entries": [
+    {
+      "id": "classic-mimic-closed",
+      "recordId": "classic-mimic-closed-mgjrpg02-v01-source",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-treasure-mimic-closed-v01-generator-original.png",
+      "sourceSha256": "292da436e91f13090647339dd625009e2c560a5519edfdc114c50d07ce673915",
+      "runtime": "public/assets/mgjrpg-02/items/classic-mimic-closed-v01-prop-field-256-r01.webp",
+      "runtimeSha256": "c9a2f5d6f46f224f2bfdd0d1d4846545da5d61e13ab28b0341c6c963747e8d3b",
+      "bytes": 50860,
+      "previousStatus": "dormant",
+      "runtimeStatus": "active",
+      "loadingPhase": "current-level-only"
+    },
+    {
+      "id": "classic-mimic-good-open",
+      "recordId": "classic-mimic-good-open-mgjrpg02-v01-source",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-treasure-star-reward-open-v01-generator-original.png",
+      "sourceSha256": "c21d94597d0600889a21fd2c5886b67944b3b8ac855f10a33f5032e46ec151db",
+      "runtime": "public/assets/mgjrpg-02/items/classic-mimic-good-open-v01-prop-field-256-r01.webp",
+      "runtimeSha256": "88a8c0c95837696b9120d0d7a2e2ee70250fb8c796410fab7d2d7845141f7e12",
+      "bytes": 61344,
+      "previousStatus": "dormant",
+      "runtimeStatus": "active",
+      "loadingPhase": "current-level-only"
+    },
+    {
+      "id": "candy-mimic-closed",
+      "recordId": "candy-mimic-closed-mgjrpg02-v01-source",
+      "source": "docs/source-assets/production/mgjrpg-02/batch-15-chests-pickups-hazards/chest-candy-mimic-closed-v01-generator-original.png",
+      "sourceSha256": "dc05abc175da18773ea5d68bc54560cc9197cb9dfbc608a2ad4e8ad3e4558005",
+      "runtime": "public/assets/mgjrpg-02/items/candy-mimic-closed-v01-enemy-field-256-r01.webp",
+      "runtimeSha256": "dcbf7967722258a6ad24f308717ae2dd41472b0a4f8bf260a154d23975732a4c",
+      "bytes": 53030,
+      "previousStatus": "dormant",
+      "runtimeStatus": "active",
+      "loadingPhase": "current-level-only"
+    }
+  ]
+}

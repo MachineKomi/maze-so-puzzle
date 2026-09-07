@@ -3,6 +3,7 @@ import { resolveEnemyArt, resolveWeaponArt, resolveKeyArt, resolveDoorArt, resol
 
 export function describeObject(object: LevelObject): string {
   switch (object.kind) {
+    case "chest": return "closed chest; bump to open";
     case "enemy": return `${resolveEnemyArt(object.style).label.toLowerCase()} with Power ${object.power}`;
     case "sword": return resolveWeaponArt(object.style).label.toLowerCase();
     case "boots": return "protective boots";

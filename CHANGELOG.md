@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.22.22 — mixed chests and disguised Candy (candidate)
+
+- Four authored chests open into Gold8–10 plus Science2–4, retaining the previous
+  eight-Gold floor. A readable opening precedes the existing physical scatter,
+  settling and finite-range collection.
+- Twilight's Power6 Candy starts in its matching closed chest. Reveal requires
+  fresh input before combat; final defeat releases premium Gold/Science once.
+  Its required route remains solver-proven with enough pre-encounter Power.
+- Protected schema6 preserves exact historical v5 runs and earned/pending loot.
+  Restart begins current content; ordinary resume continues the historical run.
+  Generator2, Book12, accepted walls and native release status remain unchanged.
+- Reconciled the September7 playtest file: connected trench art, icon-led paces
+  and walking hazard contact effects remain queued. Already-shipped fixes retain
+  their original delivery status and open Human observation where applicable.
+
+Qualification is in progress; this entry does not announce deployment.
+
 ## 0.22.21 — field proportions and airborne depth (published web)
 
 - Reduces Ame's height by about24% and caps tall actor/item silhouettes while

@@ -30,7 +30,7 @@ describe("v4 enemy-reward migration",()=>{
   it("retains grounded treasure, settles accepted value once and retires old defeated enemies",()=>{
     const old=prior(),target=storage();target.setItem(VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY,JSON.stringify(old));
     const result=readActiveRunResult([level],target),next=result.snapshot!;
-    expect(next.schemaVersion).toBe(5);expect(next.runId).toBe(runId);expect(next.game.loot.runId).toBe(runId);
+    expect(next.schemaVersion).toBe(6);expect(next.runId).toBe(runId);expect(next.game.loot.runId).toBe(runId);
     expect(next.game.loot.legacyRetiredEnemyIds).toEqual(old.game.defeatedEnemyIds);
     expect(next.game.loot.sources.every(s=>s.sourceKind==="treasure")).toBe(true);
     const grounded=old.game.loot.sources.flatMap(s=>s.drops).filter(d=>d.phase==="grounded");

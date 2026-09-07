@@ -172,6 +172,14 @@ export interface TreasureObject extends ObjectBase {
   readonly style: TreasureStyle;
 }
 
+export interface ChestObject extends ObjectBase {
+  readonly kind: "chest";
+  readonly family: import("./rewardRules").MimicFamilyId;
+  readonly mimicChance: number;
+  readonly power: number;
+  readonly rewardRules: 2;
+}
+
 export type LevelObject =
   | EnemyObject
   | SwordObject
@@ -183,7 +191,8 @@ export type LevelObject =
   | DoorObject
   | AnimalObject
   | PortalObject
-  | TreasureObject;
+  | TreasureObject
+  | ChestObject;
 
 export type LevelSource = "curated" | "generated";
 
@@ -217,6 +226,7 @@ export type GameStatus = "playing" | "won" | "lost";
  * by the engine so equivalent states have a stable representation.
  */
 export interface GameState {
+  readonly chests: readonly import("./chests").ChestReceipt[];
   readonly loot: import("./loot").LootLedger;
   readonly levelId: string;
   readonly position: Point;
@@ -252,6 +262,7 @@ export type BlockedReason =
   | "game-over";
 
 export type GameEvent =
+  | { readonly type: "chest-opened"; readonly objectId: string; readonly outcome: "good" | "mimic"; readonly power: number }
   | {
       readonly type: "blocked";
       readonly reason: BlockedReason;

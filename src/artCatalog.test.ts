@@ -375,17 +375,16 @@ describe("art catalog", () => {
       ...Object.values(FUTURE_ITEM_ART),
       ...Object.values(FUTURE_HAZARD_ART),
       MIMIC_ART["classic-mimic"].revealed,
-      MIMIC_ART["classic-mimic"].closed,
-      MIMIC_ART["classic-mimic"]["good-open"],
-      MIMIC_ART["candy-mimic"].closed,
       MIMIC_ART["candy-mimic"]["good-open"],
       WALLS.sandstone,
     ];
 
     expect(Object.values(ADDITIONAL_FRIEND_ART)).toHaveLength(17);
     expect(Object.values(ADDITIONAL_FRIEND_ART).every((entry) => entry.runtimeStatus === "active")).toBe(true);
-    expect(dormantEntries).toHaveLength(27);
+    expect(dormantEntries).toHaveLength(24);
     expect(dormantEntries.every((entry) => entry.runtimeStatus === "dormant")).toBe(true);
+    expect([MIMIC_ART["classic-mimic"].closed,MIMIC_ART["classic-mimic"]["good-open"],MIMIC_ART["candy-mimic"].closed]
+      .every(entry=>entry.runtimeStatus==="active")).toBe(true);
     expect(ADDITIONAL_FRIEND_ART["green-tea-skeleton"].family).toBe("friend");
     expect(Object.hasOwn(FUTURE_ENEMY_ART, "green-tea-skeleton")).toBe(false);
     expect(Object.hasOwn(ANIMAL_ART, "green-tea-skeleton")).toBe(true);
@@ -463,8 +462,8 @@ describe("art catalog", () => {
 
     expect(MGJRPG02_ART).toHaveProperty("ame");
     expect(generatedSources.size).toBe(153);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(126);
-    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(27);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "active")).toHaveLength(129);
+    expect(generatedEntries.filter((entry) => entry.runtimeStatus === "dormant")).toHaveLength(24);
     expect(catalogueSources).toEqual(generatedSources);
   });
 

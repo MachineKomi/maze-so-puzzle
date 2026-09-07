@@ -1,5 +1,8 @@
 * text=auto
 
+# LOOT03B activation cites these exact existing LF bytes as mechanics authority.
+docs/user-playtests/2026-09-06-physical-loot-and-account-level.md text eol=lf
+
 *.png binary
 *.webp binary
 *.ico binary

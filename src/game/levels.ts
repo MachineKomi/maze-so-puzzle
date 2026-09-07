@@ -13,7 +13,7 @@ import type {
   LightDirection,
   WeaponStyle,
 } from "./types";
-import { gameplayFingerprint } from "./contentIdentity";
+import { gameplayFingerprint, gameplayFingerprintForRules } from "./contentIdentity";
 
 export interface AsciiLevelOptions {
   readonly id: string;
@@ -1150,7 +1150,7 @@ export const RAINBOW_POWER_PARADE_LEVEL = parseAuthoredLevel({
   ],
 });
 
-export const CURATED_LEVELS: readonly LevelDefinition[] = [
+const AUTHORED_LAYOUTS: readonly LevelDefinition[] = [
   MOVEMENT_LEVEL,
   SWORD_AND_KEY_LEVEL,
   SPLASHY_BOOTS_LEVEL,
@@ -1168,6 +1168,26 @@ export const CURATED_LEVELS: readonly LevelDefinition[] = [
   FRIENDSHIP_CROWN_VAULT_LEVEL,
   RAINBOW_POWER_PARADE_LEVEL,
 ];
+
+/** Exact v21 object graphs remain available only to resume existing attempts. */
+export const LEGACY_CURATED_LEVELS = AUTHORED_LAYOUTS.map(level=>({
+  ...level, gameplayFingerprint: gameplayFingerprintForRules(level,5),
+}));
+export const CURATED_LEVELS: readonly LevelDefinition[] = AUTHORED_LAYOUTS.map(level=>{
+  const objects: LevelObject[] = level.objects.map(object=>{
+    if(object.kind==="treasure"&&object.style==="gold-chest")return {
+      id:object.id,at:object.at,kind:"chest",family:"classic-mimic",mimicChance:0,power:1,rewardRules:2,
+    };
+    if(level.id===TWILIGHT_TREASURE_LOOP_LEVEL.id&&object.kind==="enemy"&&object.style==="candy-mimic")return {
+      id:object.id,at:object.at,kind:"chest",family:"candy-mimic",mimicChance:100,power:object.power,rewardRules:2,
+    };
+    return object;
+  });
+  const changed=objects.some((o,i)=>o!==level.objects[i]);
+  if(!changed)return level;
+  const next={...level,objects,contentRevision:level.contentRevision+Number(changed)};
+  return {...next,gameplayFingerprint:gameplayFingerprint(next)};
+});
 
 /** Every friend intentionally placed across the hand-authored 16-maze campaign. */
 export const AUTHORED_CAMPAIGN_ANIMAL_SPECIES = Object.freeze(

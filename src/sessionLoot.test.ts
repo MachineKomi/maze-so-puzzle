@@ -45,7 +45,7 @@ describe("physical-loot durable migration",()=>{
   it("migrates the exact rules-3 runId, counters, route and hints with only credited tombstones",()=>{
     const target=storage(), prior=legacy(); target.setItem(VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,JSON.stringify(prior));
     const result=readActiveRunResult([level],target);
-    expect(result.snapshot).toMatchObject({schemaVersion:5,runId:prior.runId,hintUsesByState:prior.hintUsesByState,
+    expect(result.snapshot).toMatchObject({schemaVersion:6,runId:prior.runId,hintUsesByState:prior.hintUsesByState,
       game:{goldStarsCollected:3,steps:1,collectedObjectIds:prior.game.collectedObjectIds}});
     expect(pendingLoot(result.snapshot!.game)).toBe(0);
     expect(result.snapshot!.game.loot.sources[0]).toMatchObject({credited:3,drops:[]});

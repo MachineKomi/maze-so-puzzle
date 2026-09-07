@@ -1,4 +1,5 @@
 import { enemyRewardAmount, enemyRewardRange, SIMULATION_RUN_ID } from "./enemyRewards";
+import { chestIsResolved, chestPolicyErrors, chestReceipt, mimicRewardRanges } from "./chests";
 import type { GameState, LevelDefinition, LevelObject, Point, TreasureCurrency } from "./types";
 
 export const LOOT_CAPACITY = 64;
@@ -12,7 +13,7 @@ export interface LootDrop {
 }
 export interface LootSource {
   readonly sourceId: string;
-  readonly sourceKind: "treasure" | "enemy";
+  readonly sourceKind: "treasure" | "enemy" | "chest";
   readonly objectId: string;
   readonly currency: TreasureCurrency;
   readonly amount: number;
@@ -26,23 +27,31 @@ export interface LootLedger {
 }
 export const emptyLoot = (runId = SIMULATION_RUN_ID): LootLedger => ({ version: 2, runId, legacyRetiredEnemyIds: [], sources: [] });
 const currencies = ["gold", "science"] as const;
-type RewardOrigin = Extract<LevelObject, { kind: "treasure" | "enemy" }>;
+type RewardOrigin = Extract<LevelObject, { kind: "treasure" | "enemy" | "chest" }>;
 const sourceKey = (object: RewardOrigin, currency: TreasureCurrency) => object.kind === "treasure"
-  ? object.id : JSON.stringify(["enemy", object.id, currency]);
+  ? object.id : JSON.stringify([object.kind, object.id, currency]);
 const channels = (object: RewardOrigin) => object.kind === "treasure" ? [object.currency] : currencies;
 function rewardOrigins(level: LevelDefinition): RewardOrigin[] {
-  return level.objects.filter((o): o is RewardOrigin => o.kind === "treasure" || o.kind === "enemy");
+  return level.objects.filter((o): o is RewardOrigin => o.kind === "treasure" || o.kind === "enemy" || o.kind === "chest");
+}
+const resolved = (game: GameState, o: RewardOrigin) => o.kind === "treasure"
+  ? game.collectedObjectIds.includes(o.id) : o.kind === "chest" ? chestIsResolved(game,o.id) : game.defeatedEnemyIds.includes(o.id);
+function rewardAmount(level:LevelDefinition,game:GameState,o:RewardOrigin,currency:TreasureCurrency):number {
+  if(o.kind==="treasure")return o.amount;
+  if(o.kind==="enemy")return enemyRewardAmount(game.loot.runId,level.id,o.id,o.power,currency);
+  const receipt=chestReceipt(game,o.id);
+  if(!receipt||receipt.phase==="revealed")throw Error("Chest rewards require a resolved receipt");
+  return receipt.rewards.find(r=>r.currency===currency)!.amount;
 }
 function reservedLoot(level: LevelDefinition, game: GameState): number {
-  return rewardOrigins(level).reduce((n,o) => n + (o.kind === "treasure"
-    ? Number(!game.collectedObjectIds.includes(o.id)) : 2 * Number(!game.defeatedEnemyIds.includes(o.id))), 0);
+  return rewardOrigins(level).reduce((n,o) => n + channels(o).length * Number(!resolved(game,o)), 0);
 }
 const same = (a: Point, b: Point) => a.x === b.x && a.y === b.y;
 
 export function authoredLootErrors(level: LevelDefinition): string[] {
   const treasures = level.objects.filter(o => o.kind === "treasure");
   const errors = rewardOrigins(level).reduce((n,o) => n + channels(o).length, 0) > LOOT_CAPACITY
-    ? ["A level may contain at most 64 potential reward channels (two per enemy)."] : [];
+    ? ["A level may contain at most 64 potential reward channels (two per enemy or chest)."] : [];
   const keys = rewardOrigins(level).flatMap(o=>channels(o).map(c=>sourceKey(o,c)));
   if (new Set(keys).size !== keys.length) errors.push("Reward channel identities must be unique.");
   let total = 0;
@@ -55,6 +64,10 @@ export function authoredLootErrors(level: LevelDefinition): string[] {
     errors.push(`Enemy ${object.id} must have positive safe integer Power.`);
   for (const object of level.objects) if (object.kind === "enemy" && Number.isSafeInteger(object.power) && object.power > 0)
     total += currencies.reduce((n,c)=>n+enemyRewardRange(object.power,c)[1],0);
+  for(const object of level.objects)if(object.kind==="chest"){
+    errors.push(...chestPolicyErrors(object));
+    total+=currencies.reduce((n,c)=>n+mimicRewardRanges(object.power)[c][1],0);
+  }
   if (!Number.isSafeInteger(total)) errors.push("Reward totals must remain safe integers.");
   return errors;
 }
@@ -67,6 +80,7 @@ export function lootFloor(level: LevelDefinition, game: GameState, at: Point): b
     switch (o.kind) {
       case "portal": return false;
       case "enemy": return game.defeatedEnemyIds.includes(o.id);
+      case "chest": return chestIsResolved(game,o.id);
       case "animal": return game.rescuedAnimalIds.includes(o.id);
       case "door": return game.openedDoorIds.includes(o.id);
       default: return game.collectedObjectIds.includes(o.id);
@@ -98,6 +112,7 @@ export function pendingLoot(game: GameState): number {
  * the remaining channel of this defeat. Accepted claims never merge. */
 export function scatterTreasure(level: LevelDefinition, game: GameState,
   object: RewardOrigin): LootLedger {
+  if (!resolved(game,object)) return game.loot;
   const requested = channels(object).filter(currency => !game.loot.sources.some(s => s.sourceId === sourceKey(object,currency)));
   if (!requested.length || game.loot.legacyRetiredEnemyIds.includes(object.id)) return game.loot;
   const paths = lootLandingPaths(level, game, object.at);
@@ -107,8 +122,7 @@ export function scatterTreasure(level: LevelDefinition, game: GameState,
   const usedLandings = new Set<Point[]>();
   for (const [channelIndex,currency] of requested.entries()) {
     const sourceId = sourceKey(object,currency);
-    const amount = object.kind === "treasure" ? object.amount
-      : enemyRewardAmount(game.loot.runId, level.id, object.id, object.power, currency);
+    const amount = rewardAmount(level,game,object,currency);
     const unused = paths.filter(path => !usedLandings.has(path));
     const available = unused.length ? unused : paths;
     const slots = Math.min(4, amount, LOOT_CAPACITY - occupied - reserved - (requested.length-channelIndex-1),
@@ -219,10 +233,9 @@ function validateLoot(value: unknown, level: LevelDefinition, game: GameState, l
     || !Array.isArray(raw.sources) || !Array.isArray(raw.legacyRetiredEnemyIds)) return null;
   const retired = raw.legacyRetiredEnemyIds;
   if (new Set(retired).size !== retired.length || retired.some(id => typeof id !== "string" || !game.defeatedEnemyIds.includes(id))) return null;
-  const expected = rewardOrigins(level).flatMap(object => (object.kind === "treasure"
-    ? game.collectedObjectIds.includes(object.id) : game.defeatedEnemyIds.includes(object.id) && !retired.includes(object.id))
+  const expected = rewardOrigins(level).flatMap(object => (resolved(game,object) && !retired.includes(object.id))
     ? channels(object).map(currency => ({ object, currency, sourceId: sourceKey(object,currency),
-      amount: object.kind === "treasure" ? object.amount : enemyRewardAmount(raw.runId as string,level.id,object.id,object.power,currency) })) : []);
+      amount: rewardAmount(level,{...game,loot:{...game.loot,runId:raw.runId as string}},object,currency) })) : []);
   if (raw.sources.length !== expected.length || expected.length > LOOT_CAPACITY) return null;
   const sources: LootSource[] = [], seen = new Set<string>();
   let count = 0, gold = 0, science = 0;

@@ -14,6 +14,9 @@ export interface SolveOptions {
   readonly maxStates?: number;
   /** Require a route that rescues every animal before entering the exit. */
   readonly requireAllAnimals?: boolean;
+  readonly requireAllChests?: boolean;
+  /** Qualification witness: never defeat a disguised Mimic. */
+  readonly avoidMimics?: boolean;
   /** Search from a validated live state instead of restarting the level. */
   readonly initialState?: GameState;
   /** Ordinary-path contract: never step onto an unresolved optional rescue. */
@@ -64,6 +67,7 @@ export function progressionStateSignature(
     state.rescuedAnimalIds.join(","),
     state.defeatedEnemyIds.join(","),
     state.openedDoorIds.join(","),
+    ...state.chests.map(c=>JSON.stringify([c.objectId,c.phase])),
     state.status,
   ].join("|");
 }
@@ -254,6 +258,7 @@ export function solveLevel(
       if (result.state.status === "lost") {
         continue;
       }
+      if(options.avoidMimics&&result.state.chests.some(c=>c.phase==="defeated"))continue;
       if (
         options.avoidAnimals
         && result.state.rescuedAnimalIds.length > state.rescuedAnimalIds.length
@@ -283,6 +288,8 @@ export function solveLevel(
       parents.set(nextSignature, { previous: currentSignature, direction });
 
       if (result.state.status === "won") {
+        if(options.requireAllChests && result.state.chests.filter(c=>c.phase!=="revealed").length
+          !==level.objects.filter(o=>o.kind==="chest").length)continue;
         if (requireAllAnimals && result.state.rescuedAnimalIds.length !== animalCount) {
           continue;
         }

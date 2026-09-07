@@ -1,5 +1,19 @@
 # Maze so Puzzle — joint orchestration state
 
+**Active continuation — authored chest candidate:** Astra writes on
+`codex/chest-mimic-rewards`; Sol independently reviews. Web0.22.21 remains live.
+[Current execution contract](plans/LOOT-03B-authored-chests-and-mimics.md) scopes
+four additive mixed chests and Twilight's disguised Power6 Candy, preserving
+exact historical v5 runs. Source checkpoint:747 tests pass and build compiles;
+asset checks pass. The browser packets cover105 distinct contracts after three
+stale helper corrections. Four five-pair cohorts completed; actual Sol supports
+bounded web promotion of frozen e08775f. [Qualification](reviews/2026-09-07-chest22-qualification.md)
+records costs and retained hitches. Next: reviewed checkpoint/exact-head CI,
+normal Git publication and public verification. No native acceptance is inferred.
+[Feedback reconciliation](reviews/2026-09-07-playtest-feedback-reconciliation-v21.md)
+keeps unfinished hole/pace/contact work visible without reopening delivered fixes.
+Earlier clean-tree/branch labels below describe the v21 closure.
+
 **Current delivery — web0.22.21:** [public proof](reviews/2026-09-07-v02221-public-verification.md).
 Release **12f484f6f438a8ac44a6316ffbc212b600416518**, reviewed **4bd97e76110e0d3611ba46f1356474e4917b4d9b**,
 frozen runtime **6cc9f86bf6f21f741c3fc75f40ea408612e2726f**.
@@ -19,6 +33,12 @@ Q01/Q02/Q05 now use P21; Q08/P19 and PERF-COLD-POWER remain open. No physical
 Apple/3GB/native acceptance; Windows stays0.22.9, native0.22.10 separately held.
 No new general permission is needed. Earlier active/next labels below are
 historical and superseded by this dispatch.
+
+Docs closure8dedb15 is backed up on main and this branch; Vercel actually skipped
+it at09:43:41UTC through the unchanged Ignored Build Step. The [observed receipt](reviews/2026-09-07-v02221-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only for the next runtime slice. No new main
+push or game build is needed to align documentation SHAs. Working tree is clean
+at closure; owned QA processes are stopped and unowned4271 is untouched.
 
 **Current Human override — FIELD-21:** balanced interior walls are explicitly
 accepted. [Scale/jump/perimeter correction](plans/FIELD-21-scale-jump-and-perimeter.md)

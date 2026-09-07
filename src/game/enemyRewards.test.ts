@@ -87,10 +87,10 @@ describe("bounded enemy reward rules", () => {
     expect(sanitizeLoot(game.loot,fixture,game)).not.toBeNull();
     expect(authoredLootErrors({...fixture,objects:[...objects,{id:"extra",kind:"treasure",amount:1,currency:"gold",style:"gold-chest",at:{x:17,y:16}}]}).join()).toContain("64");
   });
-  it("audits the current50-enemy campaign supply envelope without spending or puzzle requirements", () => {
-    const enemies=CURATED_LEVELS.flatMap(l=>l.objects.filter(o=>o.kind==="enemy"));expect(enemies).toHaveLength(50);
+  it("audits the current49 ordinary-enemy supply envelope separately from the disguised Mimic", () => {
+    const enemies=CURATED_LEVELS.flatMap(l=>l.objects.filter(o=>o.kind==="enemy"));expect(enemies).toHaveLength(49);
     expect(["gold","science"].map(c=>[0,1].map(i=>enemies.reduce((n,o)=>n+enemyRewardRange(o.power,c as "gold"|"science")[i]!,0))))
-      .toEqual([[100,200],[63,116]]);
+      .toEqual([[98,196],[62,114]]);
     for(const current of CURATED_LEVELS) {
       expect(authoredLootErrors(current),current.id).toEqual([]);
       // Even the worst legal v4 treasure state leaves room for every new enemy channel.

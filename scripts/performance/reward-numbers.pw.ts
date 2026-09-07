@@ -10,7 +10,9 @@ const output=resolve(process.env.MAZE_PERF_EVIDENCE_DIR!,'reward-numbers');
 test.beforeAll(async()=>{await mkdir(output,{recursive:true});});
 for(const [dpr,failedAtlas] of [[1,false],[2,false],[3,false],[3,true]] as const)
 test(`cold counts preserve collection and resized backing DPR${dpr} atlasFailure${failedAtlas}`,async({browser})=>{
-  const f=authoredLootFixture(findInputFixture(events=>events.some(e=>e.type==='treasure-opened'&&e.currency==='gold'))!);
+  // The earliest remaining walk-over Gold has only unit drops. Open the real
+  // mixed chest to exercise count>1 and its text fallback after the reveal.
+  const f=findInputFixture(events=>events.some(e=>e.type==='chest-opened'&&e.outcome==='good'))!;
   const ctx=await browser.newContext({viewport:{width:780,height:312},deviceScaleFactor:dpr});
   try {
     const page=await ctx.newPage(),errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
@@ -49,7 +51,8 @@ test(`cold counts preserve collection and resized backing DPR${dpr} atlasFailure
     });
     expect(empty.width).toBe(1);expect(empty.height).toBe(1);expect(empty.running).toBe('false');
     expect(empty.rows.every((r:any)=>r.name==='data-running'?r.old!=='true':r.old===null||r.old==='1')).toBe(true);
-    await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);await page.waitForTimeout(1800);
+    await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);
+    await expect(page.locator('.chest-presentation')).toHaveCount(0);await page.waitForTimeout(1800);
     const counts=await page.evaluate(()=>(window as any).countProbe);
     expect(counts.bounds).toBe(0);expect(counts.stroke>0).toBe(failedAtlas);expect(counts.fill>0).toBe(failedAtlas);
     expect(counts.atlasFailure>0).toBe(failedAtlas);

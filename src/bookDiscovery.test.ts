@@ -10,7 +10,8 @@ describe("Book friend encounter truth", () => {
     expect(BOOK_FRIEND_IDS).toHaveLength(32); expect(BOOK_GUARDIAN_IDS).toHaveLength(12);
     expect(new Set(BOOK_FRIEND_IDS).size).toBe(32); expect(new Set(BOOK_GUARDIAN_IDS).size).toBe(12);
     for (const id of BOOK_FRIEND_IDS) expect(objects.some(o => o.kind === "animal" && o.species === id), id).toBe(true);
-    for (const id of BOOK_GUARDIAN_IDS) expect(objects.some(o => o.kind === "enemy" && (o.style ?? "goblin") === id), id).toBe(true);
+    for (const id of BOOK_GUARDIAN_IDS) expect(objects.some(o => o.kind === "enemy" && (o.style ?? "goblin") === id
+      || o.kind==="chest"&&o.family===id&&o.mimicChance>0), id).toBe(true);
   });
   it("learns a caged friend in the six-tile view, excluding the gutter until seen or rescued", () => {
     const level = { ...CURATED_LEVELS[0]!, width: 12, height: 10, objects: [

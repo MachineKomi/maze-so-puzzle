@@ -2,7 +2,10 @@ import { test, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { findInputFixture, savedFixture, authoredLootFixture, routeCheckpoints } from './v22-input-fixtures';
-import { movePlayer } from '../../src/game/engine';
+import { createInitialGameState, movePlayer } from '../../src/game/engine';
+import { LEGACY_CURATED_LEVELS } from '../../src/game/levels';
+import { solveLevel } from '../../src/game/solver';
+import { revealVisibleTiles } from '../../src/game/exploration';
 import { DIRECTIONS } from '../../src/game/types';
 import { ACTIVE_RUN_STORAGE_KEY, VERSION_FOUR_ACTIVE_RUN_STORAGE_KEY } from '../../src/session';
 import { gameplayFingerprintForRules } from '../../src/game/contentIdentity';
@@ -92,8 +95,18 @@ test('reload during battle preserves earned enemy value without replay or duplic
 });
 
 test('production v4 migration keeps distant grounded treasure and retires past enemies',async({page})=>{
-  const reached=routeCheckpoints().filter(c=>c.before.defeatedEnemyIds.length>0).flatMap(c=>DIRECTIONS.map(direction=>
-    ({...c,direction,result:movePlayer(c.level,c.before,direction)}))).find(c=>c.result.events.some(e=>e.type==='treasure-opened'&&e.currency==='gold'))!;
+  // A historical save must come from the actual historical object graph, not
+  // today's chest layout relabelled with a v4 schema/fingerprint.
+  const reached=(()=>{for(const level of LEGACY_CURATED_LEVELS){
+    let before=createInitialGameState(level),revealed=revealVisibleTiles([],level,before.position);
+    const prefix:typeof DIRECTIONS[number][]=[];
+    for(const direction of solveLevel(level,{requireAllAnimals:true}).directions){
+      const result=movePlayer(level,before,direction);
+      if(before.defeatedEnemyIds.length&&result.events.some(e=>e.type==='treasure-opened'&&e.currency==='gold'))
+        return{level,before,prefix,direction,result,revealed};
+      before=result.state;revealed=revealVisibleTiles(revealed,level,before.position);prefix.push(direction);
+    }
+  }throw Error('No historical enemy/treasure witness');})();
   const treasure=authoredLootFixture(reached);
   const game=treasure.result.state, current=savedFixture({...treasure,before:game},'v4-enemy-migration');
   expect(game.defeatedEnemyIds.length).toBeGreaterThan(0);

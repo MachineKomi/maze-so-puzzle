@@ -1,11 +1,12 @@
 import type { LevelDefinition, LevelObject, TerrainKind } from "./types";
 
 /** Bump when engine semantics change without changing authored level data. */
-export const GAMEPLAY_RULES_REVISION = 5;
+export const GAMEPLAY_RULES_REVISION = 6;
 
 function stableObject(object: LevelObject): readonly unknown[] {
   const common = [object.id, object.kind, object.at.x, object.at.y] as const;
   switch (object.kind) {
+    case "chest": return [...common,object.family,object.mimicChance,object.power,object.rewardRules];
     case "enemy": return [...common, object.power];
     case "potion": return [...common, object.amount];
     case "key":

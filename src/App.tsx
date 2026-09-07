@@ -7,6 +7,7 @@ import { fieldActorStyle } from "./fieldArtLayout";
 import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
 import { useLootCollection } from "./vfx/useLootCollection";
 import { finishLootClaims, pendingLoot } from "./game/loot";
+import { chestReceipt } from "./game/chests";
 import { rewardSeed } from "./vfx/rewardPhysics";
 import { MiniMap } from "./ui/game/MiniMap";
 import { cameraLayerStyle, cameraNoticeStyle, isInsideWindow } from "./ui/game/sceneGeometry";
@@ -40,6 +41,7 @@ import {
 import { createDoorBurstParticles, LOCK_MAGIC_EFFECTS } from "./magicEffects";
 import {
   KEY_COLOR_LABELS,
+  MIMIC_ART,
   KEY_MOTIF_LABELS,
   resolveAnimalArt,
   resolveCageArt,
@@ -64,7 +66,7 @@ import { FRIEND_BOOK_LORE } from "./bookLore";
 import { heldWeaponStyle, JUMP_BOOTS_STYLE } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
-import { CURATED_LEVELS } from "./game/levels";
+import { CURATED_LEVELS, getCuratedLevel } from "./game/levels";
 import {
   DEFAULT_FOV_SIZE,
   getCameraWindow,
@@ -134,6 +136,7 @@ import {
   clearActiveRun,
   createActiveRunId,
   readActiveRunResult,
+  resolveActiveRunLevel,
   writeActiveRun,
 } from "./session";
 import {
@@ -276,6 +279,12 @@ interface BattlePresentation {
   readonly clashCount: number;
 }
 
+interface ChestPresentation {
+  readonly object: Extract<LevelObject,{kind:"chest"}>;
+  readonly outcome:"good"|"mimic";
+  readonly opened:boolean;
+}
+
 interface TooStrongEncounter {
   readonly event: Extract<GameEvent, { type: "enemy-too-strong" }>;
   readonly enemySrc: string;
@@ -331,6 +340,10 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
   if (!event) return { icon: ASSETS.navMazes, text: "Move one square.", tone: "plain", sound: "step" };
 
   switch (event.type) {
+    case "chest-opened": return {icon:ASSETS.coinPouch,
+      text:event.outcome==="good"?"Treasure! Gold Stars and Science Points — gather the sparkling drops."
+        :`Surprise! A Mimic with Power ${event.power}. Prepare, then press toward it to challenge.`,
+      tone:event.outcome==="good"?"good":"careful",sound:"pickup"};
     case "level-won":
       return { icon: ASSETS.goal, text: "Maze solved!", tone: "good", sound: "win" };
     case "enemy-too-strong":
@@ -448,6 +461,7 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
 
 function enemyLabelForEvent(level: LevelDefinition, objectId: string): string {
   const object = level.objects.find((candidate) => candidate.id === objectId);
+  if(object?.kind==="chest")return MIMIC_ART[object.family].revealed.label;
   return resolveEnemyArt(object?.kind === "enemy" ? object.style : undefined).label;
 }
 
@@ -464,7 +478,8 @@ function describeMazePosition(level: LevelDefinition, state: GameState): string 
     if (!terrain || terrain === "wall") return `${label}: wall`;
     if (pointsEqual(target, level.exit)) return `${label}: sparkling exit`;
     const object = getObjectAt(level, target);
-    if (object && !isObjectResolved(object, state)) return `${label}: ${describeObject(object)}`;
+    if (object && !isObjectResolved(object, state)) return `${label}: ${object.kind==="chest"&&chestReceipt(state,object.id)?.phase==="revealed"
+      ? `${MIMIC_ART[object.family].revealed.label}, Power ${object.power}` : describeObject(object)}`;
     if (terrain === "water") return `${label}: water`;
     if (terrain === "lava") return `${label}: warm magical lava`;
     if (terrain === "poison") return `${label}: purple magical poison`;
@@ -478,8 +493,9 @@ function animalArt(species: AnimalSpecies): string {
   return resolveAnimalArt(species).src;
 }
 
-function spriteFor(object: Exclude<LevelObject, { kind: "animal" }>): string {
+function spriteFor(object: Exclude<LevelObject, { kind: "animal" }>,game?:GameState): string {
   switch (object.kind) {
+    case "chest": return MIMIC_ART[object.family][game&&chestReceipt(game,object.id)?.phase==="revealed"?"revealed":"closed"].src;
     case "enemy": return resolveEnemyArt(object.style).src;
     case "sword": return resolveWeaponArt(object.style).src;
     case "boots": return ASSETS.boots;
@@ -545,6 +561,9 @@ function blockerHintFor(
 
 function classForObject(object: LevelObject): string {
   return `maze-object object-${object.kind}`;
+}
+function isFieldGuardian(object:LevelObject,game:GameState):object is Extract<LevelObject,{kind:"enemy"|"chest"}> {
+  return object.kind==="enemy"||(object.kind==="chest"&&chestReceipt(game,object.id)?.phase==="revealed");
 }
 
 function isExplorationLevel(level: LevelDefinition): boolean {
@@ -686,7 +705,7 @@ function App() {
     : readActiveRunResult(CURATED_LEVELS));
   const initialRun = initialRunResult.snapshot;
   const initialLevel = initialRun
-    ? CURATED_LEVELS.find((candidate) => candidate.id === initialRun.levelId) ?? CURATED_LEVELS[0]!
+    ? resolveActiveRunLevel(initialRun) ?? CURATED_LEVELS[0]!
     : CURATED_LEVELS[0]!;
   const [screen, setScreen] = useState<AppScreen>("front-door");
   const [hasActiveRun, setHasActiveRun] = useState(initialRun !== null);
@@ -746,6 +765,7 @@ function App() {
   const [completion, setCompletion] = useState<CompletionCelebration | null>(null);
   const [restartArmed, setRestartArmed] = useState(false);
   const [battlePresentation, setBattlePresentation] = useState<BattlePresentation | null>(null);
+  const [chestPresentation,setChestPresentation]=useState<ChestPresentation|null>(null);
   const [rescuePresentation, setRescuePresentation] = useState<RescuePresentation | null>(null);
   const [jumpPresentation, setJumpPresentation] = useState<JumpPresentation | null>(null);
   const [portalPresentation, setPortalPresentation] = useState<PortalPresentation | null>(null);
@@ -851,9 +871,9 @@ function App() {
   );
   const activeObjects = useMemo(
     () => level.objects.filter((object) => !isObjectResolved(object, game)),
-    [game.collectedObjectIds, game.defeatedEnemyIds, game.openedDoorIds, game.rescuedAnimalIds, level],
+    [game.collectedObjectIds, game.defeatedEnemyIds, game.openedDoorIds, game.rescuedAnimalIds, game.chests, level],
   );
-  const minimapObjects = useMemo(() => activeObjects.filter(object => object.kind !== "treasure"), [activeObjects]);
+  const minimapObjects = useMemo(() => activeObjects.filter(object => object.kind !== "treasure" && object.kind!=="chest"), [activeObjects]);
   const animalObjects = useMemo(
     () => level.objects.filter(
       (object): object is Extract<LevelObject, { kind: "animal" }> => object.kind === "animal",
@@ -886,6 +906,7 @@ function App() {
   const displayedGold = progress.gold + (game.status === "playing" ? game.goldStarsCollected : 0);
   const displayedScience = progress.sciencePoints + (game.status === "playing" ? game.sciencePointsCollected : 0);
   const presentationActive = battlePresentation !== null
+    || chestPresentation !== null
     || rescuePresentation !== null
     || jumpPresentation !== null
     || portalPresentation !== null
@@ -935,13 +956,14 @@ function App() {
     // Current-run defeat receipts are direct encounter evidence, including a
     // guardian removed from the visible object layer during its celebration.
     const met = level.objects.flatMap(object => object.kind === "enemy" && game.defeatedEnemyIds.includes(object.id) ? [object.style ?? "goblin"] : []);
-    const next = recordFriendDiscoveries(recordEnemyDiscoveries(progress, [...visible,...met]),
+    const mimics=game.chests.filter(c=>c.outcome==="mimic").map(c=>c.family);
+    const next = recordFriendDiscoveries(recordEnemyDiscoveries(progress, [...visible,...met,...mimics]),
       friendDiscoveriesForView(level, game.position, game.rescuedAnimalIds));
     if (next === progress) return;
     setProgress(next);
     const saved=writePlayerProgress(next);
     if (!saved) { setSaveWarning("progress"); setUnsupportedProfile(hasUnsupportedProgressProfile()); }
-  }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, game.rescuedAnimalIds, progress]);
+  }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, game.rescuedAnimalIds, game.chests, progress]);
 
   const setTouchCursor = useCallback((cursor: TouchCursor | null) => {
     const node = touchCursorRef.current;
@@ -1033,7 +1055,7 @@ function App() {
     durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
   });
   const lootView = useLootCollection({ game, setGame, level, runId, scene: sceneTravel, port: rewardPort,
-    withheldObjectId: battlePresentation?.objectId,
+    withheldObjectId: battlePresentation?.objectId ?? chestPresentation?.object.id,
     enabled: screen === "game" && pageVisible && !modalOpen && !presentationActive,
     animate: motion === "full" && preferences.quality !== "static", limit: preferences.quality==="lite" ? 8 : 20 });
 
@@ -1045,12 +1067,13 @@ function App() {
     const top=Math.floor(Math.min(envelope.top,cameraWindow.top))-1;
     const right=Math.ceil(Math.max(envelope.right,cameraWindow.right))+1;
     const bottom=Math.ceil(Math.max(envelope.bottom,cameraWindow.bottom))+1;
-    return activeObjects.filter(object=>object.id!==battlePresentation?.objectId &&
+    return activeObjects.filter(object=>object.id!==battlePresentation?.objectId && object.id!==chestPresentation?.object.id &&
       (!explorationMode || (revealedTiles.has(toTileKey(object.at)) &&
         object.at.x>=left && object.at.x<=right && object.at.y>=top && object.at.y<=bottom)));
-  }, [activeObjects,battlePresentation?.objectId,cameraWindow,explorationMode,revealedTiles]);
+  }, [activeObjects,battlePresentation?.objectId,chestPresentation?.object.id,cameraWindow,explorationMode,revealedTiles]);
 
   const clearPresentationWork = useCallback(() => {
+    setChestPresentation(null);
     rewardPort.current.cancel();
     presentationSequence.current += 1;
     presentationTimers.current.forEach((timer) => window.clearTimeout(timer));
@@ -1110,7 +1133,7 @@ function App() {
 
   const beginBattlePresentation = useCallback((
     event: Extract<GameEvent, { type: "enemy-defeated" }>,
-    enemy: Extract<LevelObject, { kind: "enemy" }>,
+    enemy: Extract<LevelObject, { kind: "enemy" | "chest" }>,
     direction: Direction,
     from: Point,
   ): number => {
@@ -1131,7 +1154,7 @@ function App() {
     setPresentedPower(event.powerBefore);
     setBattlePresentation({
       objectId: event.objectId,
-      enemySrc: resolveEnemyArt(enemy.style).src,
+      enemySrc: enemy.kind==="chest"?MIMIC_ART[enemy.family].revealed.src:resolveEnemyArt(enemy.style).src,
       enemyPower: event.enemyPower,
       from,
       at: enemy.at,
@@ -1183,6 +1206,23 @@ function App() {
     finishPresentationAfter(duration);
     return duration;
   }, [clearPresentationWork, finishPresentationAfter, schedulePresentationTimer, showMapNotice, runId]);
+
+  const beginChestPresentation=useCallback((event:Extract<GameEvent,{type:"chest-opened"}>,object:Extract<LevelObject,{kind:"chest"}>)=>{
+    clearPresentationWork();
+    clearHeldInput();
+    inputLocked.current=true;
+    const sequence=presentationSequence.current;
+    const duration=1000;
+    setChestPresentation({object,outcome:event.outcome,opened:false});
+    playSound("doorOpen",mutedRef.current);
+    schedulePresentationTimer(sequence,()=>{
+      setChestPresentation({object,outcome:event.outcome,opened:true});
+      playSound(event.outcome==="good"?"reward":"bump",mutedRef.current);
+    },200);
+    schedulePresentationTimer(sequence,()=>setChestPresentation(null),duration);
+    finishPresentationAfter(duration);
+    return duration;
+  },[clearPresentationWork,clearHeldInput,schedulePresentationTimer,finishPresentationAfter]);
 
   const beginRescuePresentation = useCallback((
     event: Extract<GameEvent, { type: "animal-rescued" }>,
@@ -1487,10 +1527,14 @@ function App() {
         at: potion.at, seed: rewardSeed(`${runId}:${potion.id}`) });
     }
     let presentationDuration = 0;
-    if (defeatedEvent) {
+    const openedChestEvent=result.events.find(event=>event.type==="chest-opened");
+    if(openedChestEvent){
+      const chest=level.objects.find(o=>o.id===openedChestEvent.objectId);
+      if(chest?.kind==="chest")presentationDuration=beginChestPresentation(openedChestEvent,chest);
+    } else if (defeatedEvent) {
       const enemy = level.objects.find(
-        (object): object is Extract<LevelObject, { kind: "enemy" }> => (
-          object.kind === "enemy" && object.id === defeatedEvent.objectId
+        (object): object is Extract<LevelObject, { kind: "enemy" | "chest" }> => (
+          (object.kind === "enemy" || object.kind==="chest") && object.id === defeatedEvent.objectId
         ),
       );
       if (enemy) {
@@ -1498,15 +1542,15 @@ function App() {
       }
     } else if (tooStrongEvent) {
       const enemy = level.objects.find(
-        (object): object is Extract<LevelObject, { kind: "enemy" }> => (
-          object.kind === "enemy" && object.id === tooStrongEvent.objectId
+        (object): object is Extract<LevelObject, { kind: "enemy" | "chest" }> => (
+          (object.kind === "enemy" || object.kind==="chest") && object.id === tooStrongEvent.objectId
         ),
       );
       // Every safe collision requires a fresh deliberate press. Otherwise one
       // held input floods the live region and bump audio at accelerated cadence.
       clearHeldInput();
       if (enemy) {
-        const art = resolveEnemyArt(enemy.style);
+        const art = enemy.kind==="chest"?MIMIC_ART[enemy.family].revealed:resolveEnemyArt(enemy.style);
         setTooStrongEncounter({ event: tooStrongEvent, enemySrc: art.src, enemyLabel: art.label });
       }
       playSound("bump", mutedRef.current);
@@ -1534,7 +1578,7 @@ function App() {
       }
     }
     if (presentationDuration > 0) suspendHeldRepeat();
-    if (!defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && !portalEvent && !openedDoorEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
+    if (!openedChestEvent && !defeatedEvent && !tooStrongEvent && !rescuedEvent && !jumpedEvent && !portalEvent && !openedDoorEvent && (nextFeedback.sound !== "bump" || performance.now() - lastBumpSoundAt.current >= 200)) {
       playSound(nextFeedback.sound, muted);
       if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
     }
@@ -1572,7 +1616,7 @@ function App() {
         attemptMoveRef.current(nextMove.direction, nextMove.lateralOffset, nextMove.travelDurationMs, nextMove.repeated);
       }
     }, result.moved ? proposedTravelDuration : BUMP_CADENCE_MS);
-  }, [beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, suspendHeldRepeat, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
+  }, [beginChestPresentation, beginBattlePresentation, beginDoorOpeningPresentation, beginJumpPresentation, beginPortalPresentation, beginRescuePresentation, campaignIndex, clearHeldInput, suspendHeldRepeat, explorationMode, game, guidedObjectId, level, inputBlock.gameplayInputAllowed, muted, progress, runId, schedulePresentationTimer, screen, showMapNotice, testerRun]);
 
   const dismissStory = useCallback(() => {
     setStoryOpen(false);
@@ -1906,10 +1950,11 @@ function App() {
     else if (heldInputSource.current === "pad") scheduleDpadRepeat(selectedTravelDuration.current);
   };
 
+  const restartCurrentLevel=()=>loadLevel(!testerRun&&level.source==="curated"?getCuratedLevel(level.id)??level:level);
   const armRestart = () => {
     if (restartArmed) {
       playSound("select", muted);
-      loadLevel(level);
+      restartCurrentLevel();
       return;
     }
     playSound("bump", muted);
@@ -2065,6 +2110,7 @@ function App() {
         || game.collectedObjectIds.length > 0
         || game.rescuedAnimalIds.length > 0
         || game.defeatedEnemyIds.length > 0
+        || game.chests.length > 0 || pendingLoot(game)>0
         || game.openedDoorIds.length > 0,
       currentLevelId: level.id,
     }, nextLevel.id)) {
@@ -2347,7 +2393,9 @@ function App() {
 
                 {worldObjects.map((object) => (
                   <div
-                    className={`object-layer object-kind-${object.kind}${object.at.y === cameraWindow.top ? " camera-edge-top" : ""}`}
+                    className={`object-layer object-kind-${isFieldGuardian(object,game)?"enemy":object.kind}${object.at.y === cameraWindow.top ? " camera-edge-top" : ""}`}
+                    data-object-id={object.id}
+                    data-chest-phase={object.kind==="chest"?chestReceipt(game,object.id)?.phase??"closed":undefined}
                     data-animal-motion={object.kind === "animal" ? animalPersonality(object.species).motion : undefined}
                     data-flourish={object.kind === "animal"
                       ? animalPersonality(object.species).flourish
@@ -2357,7 +2405,7 @@ function App() {
                     data-enemy-motion={object.kind === "enemy" ? enemyPersonality(object.style).motion : undefined}
                     data-key-color={object.kind === "key" || object.kind === "door" ? object.color : undefined}
                     key={object.id}
-                    style={{...worldLayerStyle(object.at, level), ...(object.kind === "enemy" ? fieldActorStyle(resolveUiArt(spriteFor(object))!.geometry!, object.at.y-cameraWindow.top) : {})}}
+                    style={{...worldLayerStyle(object.at, level), ...(isFieldGuardian(object,game) ? fieldActorStyle(resolveUiArt(spriteFor(object,game))!.geometry!, object.at.y-cameraWindow.top) : {})}}
                   >
                     {object.kind === "animal" ? (
                       <div
@@ -2367,9 +2415,9 @@ function App() {
                         <CagedFriend friendSrc={animalArt(object.species)} cageSrc={resolveCageArt(object.cageStyle).src} />
                       </div>
                     ) : (
-                      <CatalogueImage usage="field" fieldRole={object.kind === "portal" || object.kind === "door" ? undefined : object.kind === "enemy" ? "actor" : "item"} className={classForObject(object)} src={spriteFor(object)} alt="" draggable={false} />
+                      <CatalogueImage usage="field" fieldRole={object.kind === "portal" || object.kind === "door" ? undefined : isFieldGuardian(object,game) ? "actor" : "item"} className={classForObject(object)} src={spriteFor(object,game)} alt="" draggable={false} />
                     )}
-                    {object.kind === "enemy" && <span className="power-badge enemy-power">{object.power}</span>}
+                    {isFieldGuardian(object,game) && <span className="power-badge enemy-power">{object.power}</span>}
                     {(object.kind === "key" || object.kind === "door") && (
                       <span className={`object-color-name color-name-${object.color}`}>{KEY_MOTIF_LABELS[object.color]}</span>
                     )}
@@ -2416,6 +2464,16 @@ function App() {
                   >✦</i>
                 </div>
 
+              {chestPresentation && isInsideWindow(chestPresentation.object.at,cameraWindow) && (
+                <div className="chest-presentation" data-scene-slot="effects" data-travel-camera-anchor=""
+                  data-chest-state={chestPresentation.opened?chestPresentation.outcome==="good"?"good-open":"revealed":"closed"}
+                  style={cameraLayerStyle(chestPresentation.object.at,cameraWindow)} aria-hidden="true">
+                  <CatalogueImage usage="field" fieldRole={chestPresentation.opened&&chestPresentation.outcome==="mimic"?"actor":"item"}
+                    className="maze-object" alt="" draggable={false}
+                    src={MIMIC_ART[chestPresentation.object.family][chestPresentation.opened?chestPresentation.outcome==="good"?"good-open":"revealed":"closed"].src}/>
+                  {chestPresentation.opened&&chestPresentation.outcome==="mimic"&&<span className="power-badge enemy-power">{chestPresentation.object.power}</span>}
+                </div>
+              )}
               {doorOpeningPresentation && isInsideWindow(doorOpeningPresentation.at, cameraWindow) && (
                 <div
                   data-scene-slot="effects"
@@ -2783,7 +2841,7 @@ function App() {
           <PresentationArt art={artDetail.art} label={artDetail.label} /><p className="modal-lead">{artDetail.description}</p>
           <button className="primary-button" onClick={() => setArtDetail(null)}>Back to the adventure</button>
         </Modal>}
-        {screen === "game" && game.status === "lost" && <Modal title="Let's try again" onClose={() => loadLevel(level)}><p>A fresh start is ready.</p><button className="primary-button" onClick={() => loadLevel(level)}>Restart</button></Modal>}
+        {screen === "game" && game.status === "lost" && <Modal title="Let's try again" onClose={restartCurrentLevel}><p>A fresh start is ready.</p><button className="primary-button" onClick={restartCurrentLevel}>Restart</button></Modal>}
         {levelPickerOpen && (
           <Modal title="Choose a maze" onClose={closeLevelPicker} returnFocus={modalReturnFocus.current}>
             <p className="modal-lead level-picker-lead">Replay any unlocked story maze and bring home friends you missed.</p>

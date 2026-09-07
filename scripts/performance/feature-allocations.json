@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "loot03b-authored-chests-and-historical-runs",
+      "owner": "gameplay",
+      "status": "approved",
+      "compressedJsBytes": 4000,
+      "compressedCssBytes": 400,
+      "runtimePublicBytes": 0,
+      "reason": "Astra bounds the authorized mixed chest/Mimic slice: deterministic receipts, conserved two-channel rewards, schema6 historical-run protection and a finite readable reveal. All public pixels and dependency locks stay unchanged. This byte allocation is not timing or physical-device acceptance.",
+      "evidencePath": "docs/plans/LOOT-03B-authored-chests-and-mimics.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Before publication keep web21. Once schema6 exists, use forward-compatible corrections retaining chest receipts and legacy/current graph resolution; never restore a v5-only writer, clear saves or reinterpret earned rewards. Preserve balanced walls, CAMERA17 and the Vercel guard."
+    },
+    {
       "id": "field21-proportions-airborne-and-perimeter",
       "owner": "ui",
       "status": "approved",

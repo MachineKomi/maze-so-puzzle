@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { gameplayFingerprint, gameplayFingerprintForRules } from "./contentIdentity";
-import { CURATED_LEVELS, parseAsciiLevel } from "./levels";
+import { CURATED_LEVELS, LEGACY_CURATED_LEVELS, parseAsciiLevel } from "./levels";
 
 describe("authored content identity", () => {
   it("uses semantic IDs that do not renumber when an unrelated kind is added", () => {
@@ -105,7 +105,7 @@ describe("authored content identity", () => {
   });
 
   it("preserves exact pre-loot rules-3 fingerprints for migration of unchanged authored content", () => {
-    expect(CURATED_LEVELS.map(level => (
+    expect(LEGACY_CURATED_LEVELS.map(level => (
       [level.id, level.contentRevision, gameplayFingerprintForRules(level, 3)]
     ))).toEqual([
       ["little-star-trail", 3, "g-8c174a58"],

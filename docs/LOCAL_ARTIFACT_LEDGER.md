@@ -1,5 +1,14 @@
 # Local artifact ledger and cleanup review
 
+## Chest/Mimic continuation — September7 active
+
+Astra owns runtime on `codex/chest-mimic-rewards`, from clean3c5d70c; Sol reviews
+independently. Four-file frozen21 HTML/JS/CSS/identity entry is at
+`C:/GameDev/maze-game-qa/performance/release-v02221/`, sharing existing public
+media. Reuse existing dist/tools. Future named `chest22-*` packets must record
+counts, bytes and dispositions here; avoid repeated full artwork racks. No repo/
+media clone, native package, deletion or archive. Older unowned4271 stays untouched.
+
 ## Current release inventory — web0.22.21
 
 Local qualification remains461 files /296653434 bytes across12 folders. Public
@@ -760,3 +769,34 @@ held diagnostic evidence; they are not cold-success proofs. The
 [qualification](reviews/2026-09-07-v02220-web-qualification.md) owns exact scope
 and hashes. Reassess current consumers and seek exact-target Human approval
 before any later cleanup. The two tiny summary files are already counted above.
+# Chest source qualification packet — September7
+
+`C:/GameDev/maze-game-qa/performance/chest22-source` contains the reproducible
+authored economy/route audit and subsequent unit-check logs. Retain until this
+candidate's release review; review for cleanup later only with Human approval.
+`scripts/performance/chest-audit.mjs` regenerates the audit without a browser or
+media copy. This is one named packet, alongside the four-file frozen v21 entry.
+
+## Chest22 completed local qualification inventory
+
+Owner Astra; external root `C:/GameDev/maze-game-qa/performance/`.
+Serial browser and paired owners have stopped. Keep failed/pilot evidence
+separate from final qualification; the105-case packet is102pass/3stale-helper
+failures, followed by9/9 corrected checks. No deletion/archive, repository/media
+clone or native package. One reused dist and four-file v21 entry share media.
+Hold these unique packets for later explicit Human cleanup review.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| chest22-browser-final |250|122570283|
+| chest22-browser-followup |23|21891750|
+| chest22-browser-pilot |9|1702941|
+| chest22-camera-frames |5|9858720|
+| chest22-camera-work |25|10131453|
+| chest22-chest-frames |5|10634766|
+| chest22-chest-work |25|6905747|
+| chest22-source |15|637217|
+| chest22-summary |2|17804|
+| release-v02221 |4|745180|
+
+The forthcoming published verification packets will be counted separately.

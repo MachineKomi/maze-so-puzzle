@@ -27,8 +27,8 @@
       },
       {
         "path": "docs/source-assets/retirement/asset-retirement-ledger.json",
-        "sha256": "7bf495f7ac0c01400c33ca05d7b5016fe3a3051cb9c87a8b5359dfb2bfe2ba10",
-        "bytes": 623530
+        "sha256": "04f028696f9b9ba0697791cff1c251b3a4649a09f5c386241abc08582a11d1da",
+        "bytes": 610813
       },
       {
         "path": "docs/source-assets/retirement/asset-retirement-ledger.schema.json",
@@ -109,6 +109,11 @@
         "path": "scripts/art_pipeline/mgjrpg02_home_hero_v04_publish.py",
         "sha256": "494bb27857ef593873fa26602296de4c166ae9a1cd9ca10664dac6579843c301",
         "bytes": 22438
+      },
+      {
+        "path": "scripts/art_pipeline/mgjrpg02_loot03b_activate.py",
+        "sha256": "816e338e38e5a01b9025ebd1b3cc833492b6cc23740ba832bfe894c3123c7532",
+        "bytes": 5607
       },
       {
         "path": "scripts/art_pipeline/mgjrpg02_options.py",
@@ -344,13 +349,13 @@
     "runtimeContracts": [
       {
         "path": "src/artCatalog.ts",
-        "sha256": "590693f03ede5ecbacb6d7ae6c918ab774a595db654b8c064ad5a4a88cb48f62",
-        "bytes": 36924
+        "sha256": "40c048147fa23b18b8cc02812964c141da1f7e3f700febb81e2c76c4956efd93",
+        "bytes": 37636
       },
       {
         "path": "src/assets.ts",
-        "sha256": "05fd01998aefd8481137fcdc30df640629aec4936a8982f2c047d48c1aeed404",
-        "bytes": 11136
+        "sha256": "bf5e39f5aa045d145862bdd185a70beca8d8a1502d582df54ff691a2c01c2026",
+        "bytes": 11416
       }
     ],
     "referencedPromptFiles": [
@@ -1721,9 +1726,9 @@
   "runtimeByStatus": [
     {
       "name": "active",
-      "count": 202,
-      "bytes": 21724018,
-      "decodedBytesUpperBound": 199780160
+      "count": 205,
+      "bytes": 21889252,
+      "decodedBytesUpperBound": 200566592
     },
     {
       "name": "deprecated",
@@ -1733,9 +1738,9 @@
     },
     {
       "name": "dormant",
-      "count": 28,
-      "bytes": 1651460,
-      "decodedBytesUpperBound": 12058624
+      "count": 25,
+      "bytes": 1486226,
+      "decodedBytesUpperBound": 11272192
     },
     {
       "name": "superseded",
@@ -3569,13 +3574,13 @@
     },
     {
       "path": "docs/source-assets/records/candy-mimic-closed-mgjrpg02-v01-source.json",
-      "sha256": "8b032be559e1dcd0bc7a6865deb5ed405338aeabc27fd5c0bb1d9f62f14c4ac2",
+      "sha256": "c1eab519bdf4d9614281979c6317b32a8b5535a9586dbecee04dd760926a6002",
       "recordId": "candy-mimic-closed-mgjrpg02-v01-source",
       "schemaVersion": 2,
       "id": "candy-mimic-closed",
       "artVersion": 1,
       "family": "item",
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "active",
       "sourceStatus": "source-backed",
       "approvalStatus": "approved",
       "validationProfile": "strict-v2",
@@ -3761,13 +3766,13 @@
     },
     {
       "path": "docs/source-assets/records/classic-mimic-closed-mgjrpg02-v01-source.json",
-      "sha256": "f34e32a216f77fa2837f7c08c52093487424d13f4f2922293641a2ca71999992",
+      "sha256": "2c3c4513791968ccbeea266a8fc02a1b6dc9a9924a37fd63cadf550654f8189d",
       "recordId": "classic-mimic-closed-mgjrpg02-v01-source",
       "schemaVersion": 2,
       "id": "classic-mimic-closed",
       "artVersion": 1,
       "family": "item",
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "active",
       "sourceStatus": "source-backed",
       "approvalStatus": "approved",
       "validationProfile": "strict-v2",
@@ -3785,13 +3790,13 @@
     },
     {
       "path": "docs/source-assets/records/classic-mimic-good-open-mgjrpg02-v01-source.json",
-      "sha256": "e14eef253ffb1e2962734a0999a544e8fe1be84f04daeebf4ebfa8efa11e67eb",
+      "sha256": "0a7e45842c0be090d74d069168e36bd81f9ae078d30826234aa9da44f49a9fb5",
       "recordId": "classic-mimic-good-open-mgjrpg02-v01-source",
       "schemaVersion": 2,
       "id": "classic-mimic-good-open",
       "artVersion": 1,
       "family": "item",
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "active",
       "sourceStatus": "source-backed",
       "approvalStatus": "approved",
       "validationProfile": "strict-v2",
@@ -12322,7 +12327,7 @@
       "colorMetadata": [],
       "recordId": "candy-mimic-closed-mgjrpg02-v01-source",
       "family": "item",
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "active",
       "approvalStatus": "approved"
     },
     {
@@ -12354,7 +12359,7 @@
       "colorMetadata": [],
       "recordId": "classic-mimic-closed-mgjrpg02-v01-source",
       "family": "item",
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "active",
       "approvalStatus": "approved"
     },
     {
@@ -12370,7 +12375,7 @@
       "colorMetadata": [],
       "recordId": "classic-mimic-good-open-mgjrpg02-v01-source",
       "family": "item",
-      "runtimeStatus": "dormant",
+      "runtimeStatus": "active",
       "approvalStatus": "approved"
     },
     {
