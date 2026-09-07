@@ -10,9 +10,10 @@ the linked cumulative records rather than deleting or overwriting them.
 | Q01 | Refined walls: balanced cap thickness, limited foreground overlap, stronger shadows/rim and eight-direction lighting. | **0.22.13 tall3D/lighting direction accepted by the Human.** New refinements requested; next changed-wall playtest not ready. [Actual feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md). |
 | Q02 | On0.22.13 or newer, jump over a hole while the camera is away from its outer clamp. Does it follow Ame smoothly? If it still jerks, note device, maze and motion/quality setting. | Open; the latest report names0.22.12, before the published repair. |
 | Q03 | Should persistent Adventure/account levels grant only recognition/cosmetics, or eventually change puzzle Power? | Nonblocking direction check. Recommended/default first implementation: recognition only, preserving solvable per-maze Power puzzles. |
-| Q04 | New hazard polish: compare water, lava and poison at normal play size, including Full versus reduced/static. | Ready on **0.22.14**, publicly verified7September. Appearance/motion feedback requested; technical qualification is not Human acceptance. |
+| Q04 | Revised hazard polish: restore the floor lip/fade and improve water/lava/poison behavior. | **Feedback received on0.22.14: revision required.** The Human rejects generic dashes and reports lost edges on PC/phone. [Routing](reviews/2026-09-07-playtest-routing.md). Next changed build not ready; no repeat14 test requested. |
 | Q05 | Physical loot: burst/bounce/settle, spin, pickup range and satisfaction. | Not ready; staged implementation follows the loot contract. No repeated old-build test requested. |
 | Q06 | Should rare eggs be enabled only once there is a visible usable egg inventory, or should eggs accumulate earlier? | Nonblocking direction check. Default: deliver protected usable inventory before enabling egg rewards. |
+| Q07 | Book-selected maze advances correctly after completion. | Human reports repeated same-maze loop. Reproduction/fix queued after WALL-04C; changed-build check not ready. |
 
 [Cumulative family checklist](PLAYTEST_CHECKLIST.md) retains P5–P16, phone/audio,
 Book comprehension and device limits. [Human decisions](HUMAN_DECISIONS.md) owns

@@ -55,7 +55,7 @@ export function selectArtRendition(art: UiArt, usage: RuntimeArtUsage, displayPx
   const physicalNeed = Math.max(1, displayPx) * Math.max(1, Math.min(4, dpr)) * (usage === "field" && fieldDetail ? 1.01 : 1);
   const candidates = [...(art.variants ?? [])].filter((variant) => variant.usage === usage ||
     usage === "field" && fieldDetail && variant.usage === "presentation" &&
-    variant.geometry?.class === art.geometry?.class)
+    variant.geometry?.class !== "icon" && variant.geometry?.class === art.geometry?.class)
     .sort((a, b) => Math.max(a.width, a.height) - Math.max(b.width, b.height));
   const selected = candidates.find((variant) => Math.max(variant.width, variant.height) >= physicalNeed) ?? candidates.at(-1);
   return { src: selected?.src ?? art.src, role: selected ? usage : "optical", physicalNeed, fallback: !selected,

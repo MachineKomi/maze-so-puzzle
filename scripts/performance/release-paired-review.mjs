@@ -13,6 +13,8 @@ const root = resolve(import.meta.dirname, '../..');
 const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/performance/phone02-book-paired-20260906');
 const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
+const pairCount = Number(process.env.MAZE_REVIEW_PAIRS ?? 5);
+if (![1,5].includes(pairCount)) throw Error('Use one pilot pair or five qualification pairs');
 const baseline = resolve(root, process.env.MAZE_REVIEW_BASELINE || 'output/playwright/migration-preflight-20260906/live-baseline');
 const fixturesPath = resolve(root, process.env.MAZE_REVIEW_FIXTURES || 'output/playwright/walls04-rack-new-host/fixtures.json');
 const playwrightPath = process.env.MAZE_PLAYWRIGHT_PATH;
@@ -57,10 +59,11 @@ const origin = `http://127.0.0.1:${server.address().port}`;
 const browser = await chromium.launch({ headless: true });
 const report = { date: new Date().toISOString(), head: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), browser: browser.version(), hashes, served, fixture: fixture.id ?? fixture.level.id, route: jumpReview ? 'eight reversible one-hole jumps' : 'sixteen reversible ordinary steps', baselineIdentity,
   scope: 'Headless local Chromium same-host paired frame/trace diagnostic; no physical iPad, native, GPU-time or Human beauty acceptance. Trace durations overlap and are not additive.', rows: [] };
+report.pairCount=pairCount; report.pilot=pairCount!==5;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
-  for (const cohort of [{ width: 780, height: 312, pairs: 5 }, { width: 1193, height: 833, pairs: 5 }]) {
+  for (const cohort of [{ width: 780, height: 312, pairs: pairCount }, { width: 1193, height: 833, pairs: pairCount }]) {
     for (let pair = -1; pair < cohort.pairs; pair++) {
       for (const mode of pair % 2 === 0 ? ['baseline', 'candidate'] : ['candidate', 'baseline']) {
         servingMode = mode;

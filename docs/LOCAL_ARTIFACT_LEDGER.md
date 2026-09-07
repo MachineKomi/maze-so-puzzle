@@ -1,5 +1,22 @@
 # Local artifact ledger and cleanup review
 
+## WALL-04C review and qualification outputs — September7
+
+Under `C:/GameDev/maze-game-qa/performance/`, retained with no deletion/archive:
+
+| Folder | Files / bytes | Purpose |
+| --- | ---: | --- |
+| wall04c-racks-final-20260907 |52 /434183|Retained13 blank rack failures: dev-only treasure import name was wrong; corrected before the next run. Initial missing Playwright adapter env stopped before browser. |
+| wall04c-racks-reviewed-20260907 |28 /21589064|13 passing expanded art racks;18 light/theme frames,32friends,12enemies,8weapons,8items and four cage/outlier sets. Actual Sol reviewed pixels/metadata. |
+| wall04c-moving-pilot-20260907 |13 /37978158|One pilot pair per viewport, explicitly non-qualifying. |
+| wall04c-moving-final-20260907 |29 /97458143|Five moving pairs per viewport plus warmups, raw traces/hashes,5f8fe38 before field-icon eligibility narrowing. |
+
+The64,847B `src/ui/__snapshots__/fieldDetailContract.test.ts.snap` is intentional
+source contract evidence:58 reviewed source/geometry tuples, no image copies.
+Existingdist reused. Next final browser/performance folders are separate named
+evidence packets; remeasure at slice closure. Review the optional177MB blocked
+WebKit install and retained prototypes then, with Human approval before cleanup.
+
 ## WALL-04C prototype outputs — 2026-09-07
 
 Astra, based on04b5da9 plus dirty runtime described in the [candidate receipt](reviews/2026-09-07-wall04c-candidate.md).

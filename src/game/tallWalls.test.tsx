@@ -4,6 +4,7 @@ import { CURATED_LEVELS } from "./levels";
 import { createRectilinearUnionGeometry, createRoundedCellUnionGeometry } from "./terrainGeometry";
 import { createTallWallGeometry, TALL_WALL_HEIGHT, WALL_REAR_OVERLAP, WALL_CAP_WIDTH, FIELD_GROUND_Y } from "./tallWalls";
 import { resolveWallLight } from "./wallLighting";
+import { gameplayFingerprint } from "./contentIdentity";
 import type { LevelDefinition, LightDirection } from "./types";
 import { MazeTerrain } from "../ui/game/MazeTerrain";
 
@@ -35,7 +36,7 @@ describe("tall wall sections", () => {
     }
     expect(() => createRectilinearUnionGeometry([0, 1, 1], axis, () => true)).toThrow();
   });
-  it("protects the top70% of non-wall cells across the campaign and512 local masks", () => {
+  it("keeps sampled cap edges in the allowed cells and renders the campaign wall volume", () => {
     const local = Array.from({length:512},(_,mask)=>({...CURATED_LEVELS[0]!,id:`mask-${mask}`,width:3,height:3,
       terrain:Array.from({length:3},(_,y)=>Array.from({length:3},(_,x)=>mask & 1<<(y*3+x) ? "wall" : "floor"))} as LevelDefinition));
     for (const level of [...CURATED_LEVELS,...local]) {
@@ -60,13 +61,30 @@ describe("tall wall sections", () => {
       expect(html).not.toContain('class="terrain-wall-side"');
     }
   });
-  it("supports all eight normalized lights without changing gameplay inputs", () => {
+  it("supports all eight normalized light vectors", () => {
     const directions:LightDirection[]=['top','top-right','right','bottom-right','bottom','bottom-left','left','top-left'];
     const vectors=directions.map(lightDirection=>resolveWallLight({id:'test',lightDirection}));
     for(let i=0;i<8;i++) {
       const v=vectors[i]!,opposite=vectors[(i+4)%8]!;
       expect(Math.hypot(v.toLight.x,v.toLight.y)).toBeCloseTo(1);
       expect(v.cast.x).toBeCloseTo(opposite.toLight.x); expect(v.cast.y).toBeCloseTo(opposite.toLight.y);
+    }
+  });
+  it("preserves every campaign gameplay fingerprint and input across all eight visual lights", () => {
+    const directions: LightDirection[] = ['top','top-right','right','bottom-right','bottom','bottom-left','left','top-left'];
+    for (const level of CURATED_LEVELS) {
+      expect(gameplayFingerprint(level), level.id).toBe(level.gameplayFingerprint);
+      const bounds = { left: 0, top: 0, right: level.width - 1, bottom: level.height - 1 };
+      for (const lightDirection of directions) {
+        const variant: LevelDefinition = { ...structuredClone(level), lightDirection };
+        const before = structuredClone(variant);
+        const label = `${level.id}: ${lightDirection}`;
+        expect(gameplayFingerprint(variant), label).toBe(level.gameplayFingerprint);
+        const base = createRoundedCellUnionGeometry(bounds, (x, y) => variant.terrain[y]?.[x] === "wall", .13);
+        createTallWallGeometry(variant, base, resolveWallLight(variant).toLight);
+        expect(variant, label).toEqual(before);
+        expect(gameplayFingerprint(variant), label).toBe(level.gameplayFingerprint);
+      }
     }
   });
 });

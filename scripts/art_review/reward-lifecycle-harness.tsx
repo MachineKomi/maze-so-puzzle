@@ -22,5 +22,8 @@ export function mountRewardHarness(host: HTMLElement) {
     const now = performance.now();
     for (const delay of [200, 600, 1000]) port.current.emit({ kind: "power", at: { x: 2, y: 3 }, amount: 6,
       seed: 2, bornAt: now + delay, arrivals: [240, 260, 280, 300, 320, 340] });
+  }, emitDense: () => {
+    for (const kind of ["gold", "science", "power"] as const)
+      port.current.emit({kind,at:{x:2,y:3},amount:8,seed:3});
   }, cancel: () => port.current.cancel(), unmount: () => flushSync(() => root.unmount()) };
 }

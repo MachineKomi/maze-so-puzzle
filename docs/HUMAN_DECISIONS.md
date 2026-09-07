@@ -1,5 +1,12 @@
 # Human decisions and steer
 
+**September7 new Human feedback:** [verbatim source](user-playtests/v02213-20260907-playtest-feedback.md)
+requests connected-trench art, icon-led Chill/Walk/Zippy, correction of Book
+maze-selection looping, and more convincing hazard motion with restored floor
+lip/fade under wall shadows. [Routing](reviews/2026-09-07-playtest-routing.md)
+preserves WALL-04C first, then the bounded progression regression and HAZARD-03
+before LOOT-03. These are authorized revisions; no further permission is needed.
+
 **Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
 
 **Latest adopted instruction:** continue qualified delivery and keep one visible [Human review queue](HUMAN_REVIEW_QUEUE.md), flagged at each response end. [Physical loot/account-level feedback](user-playtests/2026-09-06-physical-loot-and-account-level.md) authorizes the [LOOT-03](plans/LOOT-03-physical-collection-and-progression.md) slices after HAZARD-02. Stronger bursts must settle before finite-range collection; enemy Gold/Science only on defeat; mixed chest/Mimic rewards, rare eggs and holographic XP are requested. Recognition-only levels and eggs after usable inventory are Astra/Sol recommended defaults, not invented Human decisions.

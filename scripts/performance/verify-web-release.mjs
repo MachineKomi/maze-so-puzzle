@@ -47,7 +47,7 @@ try { for (const [width, height] of [[780, 312], [1280, 720]]) {
     await page.getByRole('button', { name: /Begin adventure/ }).click();
     await page.getByRole('button', { name: 'Start the maze', exact: true }).click();
     await page.locator('.maze-board').waitFor({ state: 'visible' }); await page.waitForTimeout(600);
-    if (await page.locator('.maze-terrain-svg').getAttribute('data-wall-lighting') !== '04b-section-v1') throw Error('Wrong wall construction');
+    if (await page.locator('.maze-terrain-svg').getAttribute('data-wall-lighting') !== '04c-balanced-v1') throw Error('Wrong wall construction');
     if (await page.locator('.maze-terrain-svg').getAttribute('data-hazard-surface') !== '02-crisp-local') throw Error('Wrong hazard surface revision');
     // Right from the first maze's start rescues an adjacent friend without a
     // movement step. Up is the authored clear path for this movement assertion.

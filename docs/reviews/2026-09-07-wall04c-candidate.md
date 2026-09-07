@@ -9,8 +9,8 @@ requests: equal exposed cap widths .47tile, height .81, rear overlap .28 (rim
 outer edge below .30), darker .30tile/.25opacity cast and .035/.64 rim, eight
 normalized light bearings. Physical ground footprints replace the old full-W
 paint/contact/cast exclusions. Only genuine cap/side volume remains; original W
-is unpainted logical metadata. The foreground reuses that volume in one SVG,
-clipped to directly rear-adjacent tile bottoms and translated by the existing
+is unpainted logical metadata. One paint graph is reused in a separate foreground
+SVG, clipped to directly rear-adjacent tile bottoms and translated by the existing
 travel owner, with no new animation clock or frame React state.
 
 Visible artwork occupies90%tile width with preserved proportions. Ame's visible
@@ -62,6 +62,24 @@ No policy bypass, library replacement or browser launch. Cross-SVG reuse is
 proven in Chromium only; no physical Safari/iPad or native acceptance.
 
 ## Bounded bytes and next qualification
+
+September7 review update:664 tests/67files and TypeScript/build pass after
+analytic fill/foreground/fingerprint proofs and the58-ID exact rendition
+contract. Actual Sol reviewed all13 expanded art racks: no remaining visual
+blocker within their Chromium scope. Observed insufficient-resolution items
+are Power Potion1.12× and Science Beaker1.286×; both remain readable in DSF2 stills.
+Five IDs remain conservatively eligible for documented absence of larger art.
+Reward/badge icons are now excluded from field-detail eligibility; all58 real
+field-detail outputs are unchanged. Final JS gzip9165902B, CSS24216B.
+
+The initial five moving pairs at5f8fe38 show no frame>16.8ms. Median-of-medians
+Raster rises.42%/6.21%, Paint1.53%/5.52% at780/1193. UpdateLayoutTree rises
+12.87%/17.60% (16.535/22.507ms over~3.84s); counts remain~469 and the shared
+clock adds one foreground translate write. Raster task counts increase;
+durations overlap and are not GPU time. Actual Sol accepts this bounded cost
+within moving scope; final candidate hash/jump/idle/browser binding remains.
+The Human's new hazard/Book/holes/pace feedback is preserved in the
+[September7 routing](2026-09-07-playtest-routing.md).
 
 Pre-final measured gzip9 JS165884, CSS24216, public155542751B. Versus live14:
 +1275JS/+375CSS/no media. The prior JS ceiling165557 is exceeded by327bytes.

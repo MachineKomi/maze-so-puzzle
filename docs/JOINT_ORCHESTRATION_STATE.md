@@ -1,5 +1,11 @@
 # Maze so Puzzle — joint orchestration state
 
+**September7 newest execution steer:** [new Human playtest routing](reviews/2026-09-07-playtest-routing.md)
+keeps WALL-04C first, then reproduces/fixes the Book-selected campaign loop and
+delivers HAZARD-03 before LOOT-03. Human feedback on published14 requires restored
+hazard floor lip/fade and more convincing motion. Connected-trench art and
+icon-led Chill/Walk/Zippy remain unfinished. This overrides older next-work labels.
+
 **Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
 
 **Current work,2026-09-07:** HAZARD-02 is live as **web0.22.14**, source0856104, [verified public receipt](reviews/2026-09-07-v02214-public-verification.md). Next active implementation is [WALL-04C](plans/WALL-04C-balanced-caps-and-foreground-depth.md), including projected texture cutout and90%-visible-width sprites, grounded and layered between walls. Sole runtime writer Astra, actual Sol reviews independently. Then execute [LOOT-03](plans/LOOT-03-physical-collection-and-progression.md), DELIGHT-02B/LEARN-01 and the preserved roadmap. [Human review queue](HUMAN_REVIEW_QUEUE.md) must be flagged in every development closeout. This current override supersedes all older checkpoint active/next/live labels below. Windows0.22.9 remains latest published; native0.22.10 remains separately held.

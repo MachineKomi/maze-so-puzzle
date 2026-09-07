@@ -6,7 +6,7 @@ import { MazeTerrain } from '../../src/ui/game/MazeTerrain';
 import { MazeForeground } from '../../src/ui/game/MazeForeground';
 import { CagedFriend } from '../../src/ui/game/CagedFriend';
 import { CatalogueImage } from '../../src/ui/CatalogueImage';
-import { AME_ART, WEAPON_ART, ANIMAL_ART, ENEMY_ART, PICKUP_ART, TREASURE_ART, CAGE_ART, resolveAnimalArt, resolveEnemyArt, resolveCageArt } from '../../src/artCatalog';
+import { AME_ART, WEAPON_ART, ANIMAL_ART, ENEMY_ART, PICKUP_ART, TREASURE_CATALOG_ART, CAGE_ART, resolveAnimalArt, resolveEnemyArt, resolveCageArt } from '../../src/artCatalog';
 import { fieldActorStyle } from '../../src/fieldArtLayout';
 import { heldWeaponStyle } from '../../src/heldWeaponPresentation';
 import { worldLayerStyle } from '../../src/cameraMotion';
@@ -21,7 +21,7 @@ const scene={...CURATED_LEVELS[0]!,width:6,height:6,start:{x:3,y:2},exit:{x:5,y:
 function ArtRack() {
   const cages=Object.values(CAGE_ART),friends=Object.entries(ANIMAL_ART);
   const start=Number(q.get('start')??0),count=Number(q.get('count')??16);
-  const rows=q.has('weapons')?Object.entries(WEAPON_ART):q.has('enemies')?Object.entries(ENEMY_ART):q.has('items')?Object.entries({...PICKUP_ART,...TREASURE_ART}):q.has('cage')?friends.filter(([id])=>['bunny','alpaca','tidecurl-hippocamp','mallowmusk-aroma-wisp'].includes(id)):friends.slice(start,start+count);
+  const rows=q.has('weapons')?Object.entries(WEAPON_ART):q.has('enemies')?Object.entries(ENEMY_ART):q.has('items')?Object.entries({...PICKUP_ART,...TREASURE_CATALOG_ART}):q.has('cage')?friends.filter(([id])=>['bunny','alpaca','tidecurl-hippocamp','mallowmusk-aroma-wisp'].includes(id)):friends.slice(start,start+count);
   return <main style={{display:'grid',gridTemplateColumns:'repeat(4,240px)',gap:16,padding:16,background:'#eee3d3'}}>{rows.map(([name,art],i)=><section key={name}>
     <h2 style={{fontSize:16,margin:0}}>{name}</h2><div className="maze-board" style={{position:'relative',width:240,height:245,display:'block',background:'#f5eacb',borderRadius:12,overflow:'hidden'}}>
       {q.has('weapons')?<div className="player-layer" style={{left:65,top:142,width:100,height:100}}>

@@ -1,0 +1,3054 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`freezes the complete reviewed field-detail set and registered rendition tuples 1`] = `
+[
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.05859375,
+          0.16015625,
+          0.05859375,
+          0.15625,
+        ],
+        "visibleBounds": [
+          0.15625,
+          0.05859375,
+          0.68359375,
+          0.8828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/acorn-knight-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.060546875,
+          0.158203125,
+          0.060546875,
+          0.16015625,
+        ],
+        "visibleBounds": [
+          0.16015625,
+          0.060546875,
+          0.681640625,
+          0.87890625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/acorn-knight-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "acorn-knight",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.25390625,
+          0.05859375,
+          0.25390625,
+        ],
+        "visibleBounds": [
+          0.25390625,
+          0.078125,
+          0.4921875,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/alpaca-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.255859375,
+          0.060546875,
+          0.255859375,
+        ],
+        "visibleBounds": [
+          0.255859375,
+          0.080078125,
+          0.48828125,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/alpaca-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "alpaca",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.16796875,
+          0.078125,
+          0.1640625,
+        ],
+        "visibleBounds": [
+          0.1640625,
+          0.078125,
+          0.66796875,
+          0.84375,
+        ],
+        "visualCenter": [
+          0.50589279,
+          0.46889026,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/items/antidote-leaf-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.16796875,
+          0.080078125,
+          0.166015625,
+        ],
+        "visibleBounds": [
+          0.166015625,
+          0.080078125,
+          0.666015625,
+          0.83984375,
+        ],
+        "visualCenter": [
+          0.50684657,
+          0.46904416,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/antidote-leaf-v02-presentation-512-r01.webp",
+    },
+    "family": "item",
+    "id": "antidote-leaf",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.203125,
+          0.0703125,
+          0.05859375,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.203125,
+          0.859375,
+          0.73828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/blueberry-slime-v03-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.19921875,
+          0.0703125,
+          0.060546875,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.19921875,
+          0.859375,
+          0.740234375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/blueberry-slime-v03-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "blueberry-slime",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.49567625,
+          0.46498173,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.078125,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.078125,
+          0.796875,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/breezeling-sylph-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.49569822,
+          0.46519521,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.103515625,
+          0.060546875,
+          0.103515625,
+        ],
+        "visibleBounds": [
+          0.103515625,
+          0.080078125,
+          0.79296875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/breezeling-sylph-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "breezeling-sylph",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.05859375,
+          0.07421875,
+          0.05859375,
+          0.078125,
+        ],
+        "visibleBounds": [
+          0.078125,
+          0.05859375,
+          0.84765625,
+          0.8828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/bubble-dragon-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.060546875,
+          0.078125,
+          0.060546875,
+          0.078125,
+        ],
+        "visibleBounds": [
+          0.078125,
+          0.060546875,
+          0.84375,
+          0.87890625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/bubble-dragon-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "bubble-dragon",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -90,
+        "gripPoint": [
+          0.5,
+          0.836,
+        ],
+        "heldRotationDegrees": 35,
+        "heldScale": 0.576,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.08984375,
+          0.078125,
+          0.08984375,
+        ],
+        "visibleBounds": [
+          0.08984375,
+          0.078125,
+          0.8203125,
+          0.84375,
+        ],
+        "zOrder": 1,
+      },
+      "src": "/assets/mgjrpg-02/weapons/bubble-ring-blade-v01-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -90,
+        "gripPoint": [
+          0.5,
+          0.836,
+        ],
+        "heldRotationDegrees": 35,
+        "heldScale": 0.576,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.08984375,
+          0.080078125,
+          0.091796875,
+        ],
+        "visibleBounds": [
+          0.091796875,
+          0.080078125,
+          0.818359375,
+          0.83984375,
+        ],
+        "zOrder": 1,
+      },
+      "src": "/assets/mgjrpg-02/presentation/bubble-ring-blade-v01-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "bubble-ring-blade",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.21875,
+          0.05859375,
+          0.21875,
+        ],
+        "visibleBounds": [
+          0.21875,
+          0.078125,
+          0.5625,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/bunny-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.21875,
+          0.060546875,
+          0.220703125,
+        ],
+        "visibleBounds": [
+          0.220703125,
+          0.080078125,
+          0.560546875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/bunny-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "bunny",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "baseline": 0.94140625,
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.94140625,
+        ],
+        "safeInset": [
+          0.05859375,
+          0.078125,
+          0.05859375,
+          0.078125,
+        ],
+        "stateAnchorBox": [
+          0.0703125,
+          0.05859375,
+          0.859375,
+          0.8828125,
+        ],
+        "stateFamilyId": "candy-mimic",
+        "visibleBounds": [
+          0.078125,
+          0.05859375,
+          0.84375,
+          0.8828125,
+        ],
+        "visualCenter": [
+          0.50774032,
+          0.48868628,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/candy-mimic-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "baseline": 0.94140625,
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.94140625,
+        ],
+        "safeInset": [
+          0.060546875,
+          0.080078125,
+          0.060546875,
+          0.078125,
+        ],
+        "stateAnchorBox": [
+          0.0703125,
+          0.05859375,
+          0.859375,
+          0.8828125,
+        ],
+        "stateFamilyId": "candy-mimic",
+        "visibleBounds": [
+          0.078125,
+          0.060546875,
+          0.841796875,
+          0.87890625,
+        ],
+        "visualCenter": [
+          0.50673052,
+          0.48874863,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/candy-mimic-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "candy-mimic",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.078125,
+          0.796875,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/capybara-v03-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.1015625,
+          0.060546875,
+          0.103515625,
+        ],
+        "visibleBounds": [
+          0.103515625,
+          0.080078125,
+          0.794921875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/capybara-v03-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "capybara",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.12890625,
+          0.05859375,
+          0.12890625,
+        ],
+        "visibleBounds": [
+          0.12890625,
+          0.078125,
+          0.7421875,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/chinchilla-v03-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.130859375,
+          0.060546875,
+          0.130859375,
+        ],
+        "visibleBounds": [
+          0.130859375,
+          0.080078125,
+          0.73828125,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/chinchilla-v03-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "chinchilla",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.27734375,
+          0.0703125,
+          0.05859375,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.27734375,
+          0.859375,
+          0.6640625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/clockwork-crab-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.275390625,
+          0.0703125,
+          0.060546875,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.275390625,
+          0.859375,
+          0.6640625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/clockwork-crab-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "clockwork-crab",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.48235938,
+          0.55000185,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.140625,
+          0.0703125,
+          0.05859375,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.140625,
+          0.859375,
+          0.80078125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/cloud-gremlin-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.48237942,
+          0.54901318,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.140625,
+          0.0703125,
+          0.060546875,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.140625,
+          0.859375,
+          0.798828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/cloud-gremlin-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "cloud-gremlin",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.08984375,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.08984375,
+          0.796875,
+          0.8515625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/cloudstep-pegasus-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.08203125,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.08203125,
+          0.80078125,
+          0.857421875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/cloudstep-pegasus-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "cloudstep-pegasus",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -54,
+        "gripPoint": [
+          0.32,
+          0.809,
+        ],
+        "heldRotationDegrees": -1,
+        "heldScale": 0.583,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.125,
+          0.078125,
+          0.125,
+        ],
+        "visibleBounds": [
+          0.125,
+          0.078125,
+          0.75,
+          0.84375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/weapons/comet-spear-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -54,
+        "gripPoint": [
+          0.32,
+          0.809,
+        ],
+        "heldRotationDegrees": -1,
+        "heldScale": 0.583,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.126953125,
+          0.080078125,
+          0.126953125,
+        ],
+        "visibleBounds": [
+          0.126953125,
+          0.080078125,
+          0.74609375,
+          0.83984375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/presentation/comet-spear-v02-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "comet-spear",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -52,
+        "gripPoint": [
+          0.324,
+          0.809,
+        ],
+        "heldRotationDegrees": -3,
+        "heldScale": 0.61,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.12109375,
+          0.078125,
+          0.12109375,
+        ],
+        "visibleBounds": [
+          0.12109375,
+          0.078125,
+          0.7578125,
+          0.84375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/weapons/cupcake-mace-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -52,
+        "gripPoint": [
+          0.324,
+          0.809,
+        ],
+        "heldRotationDegrees": -3,
+        "heldScale": 0.61,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.12109375,
+          0.080078125,
+          0.123046875,
+        ],
+        "visibleBounds": [
+          0.123046875,
+          0.080078125,
+          0.755859375,
+          0.83984375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/presentation/cupcake-mace-v02-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "cupcake-mace",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.19140625,
+          0.05859375,
+          0.1875,
+        ],
+        "visibleBounds": [
+          0.1875,
+          0.078125,
+          0.62109375,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/duckling-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.19140625,
+          0.060546875,
+          0.189453125,
+        ],
+        "visibleBounds": [
+          0.189453125,
+          0.080078125,
+          0.619140625,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/duckling-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "duckling",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.265625,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.265625,
+          0.796875,
+          0.67578125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/emberbelly-dragonling-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.2578125,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.2578125,
+          0.80078125,
+          0.681640625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/emberbelly-dragonling-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "emberbelly-dragonling",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.10546875,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.10546875,
+          0.796875,
+          0.8359375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/emberdown-phoenix-v01-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.09765625,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.09765625,
+          0.80078125,
+          0.841796875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/emberdown-phoenix-v01-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "emberdown-phoenix",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.16015625,
+          0.05859375,
+          0.15625,
+        ],
+        "visibleBounds": [
+          0.15625,
+          0.078125,
+          0.68359375,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/fawn-v03-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.16015625,
+          0.060546875,
+          0.16015625,
+        ],
+        "visibleBounds": [
+          0.16015625,
+          0.080078125,
+          0.6796875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/fawn-v03-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "fawn",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -48,
+        "gripPoint": [
+          0.262,
+          0.809,
+        ],
+        "heldRotationDegrees": -7,
+        "heldScale": 0.546,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.0859375,
+          0.078125,
+          0.0859375,
+        ],
+        "visibleBounds": [
+          0.0859375,
+          0.078125,
+          0.828125,
+          0.84375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/weapons/flower-sabre-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -48,
+        "gripPoint": [
+          0.262,
+          0.809,
+        ],
+        "heldRotationDegrees": -7,
+        "heldScale": 0.546,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.087890625,
+          0.080078125,
+          0.087890625,
+        ],
+        "visibleBounds": [
+          0.087890625,
+          0.080078125,
+          0.82421875,
+          0.83984375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/presentation/flower-sabre-v02-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "flower-sabre",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.12109375,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.12109375,
+          0.796875,
+          0.8203125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/fox-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.115234375,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.115234375,
+          0.80078125,
+          0.82421875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/fox-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "fox",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.05859375,
+          0.15234375,
+          0.05859375,
+          0.1484375,
+        ],
+        "visibleBounds": [
+          0.1484375,
+          0.05859375,
+          0.69921875,
+          0.8828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/goblin-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.060546875,
+          0.15234375,
+          0.060546875,
+          0.15234375,
+        ],
+        "visibleBounds": [
+          0.15234375,
+          0.060546875,
+          0.6953125,
+          0.87890625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/goblin-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "goblin",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.19921875,
+          0.05859375,
+          0.203125,
+        ],
+        "visibleBounds": [
+          0.203125,
+          0.078125,
+          0.59765625,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/green-tea-skeleton-v03-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.201171875,
+          0.060546875,
+          0.201171875,
+        ],
+        "visibleBounds": [
+          0.201171875,
+          0.080078125,
+          0.59765625,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/green-tea-skeleton-v03-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "green-tea-skeleton",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.0859375,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.0859375,
+          0.796875,
+          0.85546875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/griffin-cub-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.080078125,
+          0.80078125,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/griffin-cub-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "griffin-cub",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.140625,
+          0.05859375,
+          0.140625,
+        ],
+        "visibleBounds": [
+          0.140625,
+          0.078125,
+          0.71875,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/hedgehog-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.140625,
+          0.060546875,
+          0.142578125,
+        ],
+        "visibleBounds": [
+          0.142578125,
+          0.080078125,
+          0.716796875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/hedgehog-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "hedgehog",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.15625,
+          0.0703125,
+          0.05859375,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.15625,
+          0.859375,
+          0.78515625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/jelly-sorcerer-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.154296875,
+          0.0703125,
+          0.060546875,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.154296875,
+          0.859375,
+          0.78515625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/jelly-sorcerer-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "jelly-sorcerer",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.12890625,
+          0.078125,
+          0.12890625,
+        ],
+        "visibleBounds": [
+          0.12890625,
+          0.078125,
+          0.7421875,
+          0.84375,
+        ],
+        "visualCenter": [
+          0.48330146,
+          0.47265917,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/locks/key-blue-star-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.1328125,
+          0.080078125,
+          0.130859375,
+        ],
+        "visibleBounds": [
+          0.130859375,
+          0.080078125,
+          0.736328125,
+          0.83984375,
+        ],
+        "visualCenter": [
+          0.48245562,
+          0.47277938,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/key-blue-star-v02-presentation-512-r01.webp",
+    },
+    "family": "lock",
+    "id": "key-blue-star",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.0859375,
+          0.078125,
+          0.0859375,
+        ],
+        "visibleBounds": [
+          0.0859375,
+          0.078125,
+          0.828125,
+          0.84375,
+        ],
+        "visualCenter": [
+          0.46369548,
+          0.45414842,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/locks/key-rose-heart-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.08984375,
+          0.080078125,
+          0.087890625,
+        ],
+        "visibleBounds": [
+          0.087890625,
+          0.080078125,
+          0.822265625,
+          0.83984375,
+        ],
+        "visualCenter": [
+          0.46298195,
+          0.45436928,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/key-rose-heart-v02-presentation-512-r01.webp",
+    },
+    "family": "lock",
+    "id": "key-rose-heart",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.13671875,
+          0.078125,
+          0.13671875,
+        ],
+        "visibleBounds": [
+          0.13671875,
+          0.078125,
+          0.7265625,
+          0.84375,
+        ],
+        "visualCenter": [
+          0.48014682,
+          0.46304415,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/locks/key-sunny-sun-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.138671875,
+          0.080078125,
+          0.138671875,
+        ],
+        "visibleBounds": [
+          0.138671875,
+          0.080078125,
+          0.72265625,
+          0.83984375,
+        ],
+        "visualCenter": [
+          0.48026058,
+          0.46320885,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/key-sunny-sun-v02-presentation-512-r01.webp",
+    },
+    "family": "lock",
+    "id": "key-sunny-sun",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.13671875,
+          0.05859375,
+          0.13671875,
+        ],
+        "visibleBounds": [
+          0.13671875,
+          0.078125,
+          0.7265625,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/kitten-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.13671875,
+          0.060546875,
+          0.138671875,
+        ],
+        "visibleBounds": [
+          0.138671875,
+          0.080078125,
+          0.724609375,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/kitten-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "kitten",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.12109375,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.12109375,
+          0.796875,
+          0.8203125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/koala-v03-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.11328125,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.11328125,
+          0.80078125,
+          0.826171875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/koala-v03-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "koala",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.1328125,
+          0.05859375,
+          0.1328125,
+        ],
+        "visibleBounds": [
+          0.1328125,
+          0.078125,
+          0.734375,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/lamb-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.134765625,
+          0.060546875,
+          0.134765625,
+        ],
+        "visibleBounds": [
+          0.134765625,
+          0.080078125,
+          0.73046875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/lamb-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "lamb",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.49927299,
+          0.47152608,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.078125,
+          0.19140625,
+          0.05859375,
+          0.1875,
+        ],
+        "visibleBounds": [
+          0.1875,
+          0.078125,
+          0.62109375,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/lanternling-v01-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.50121857,
+          0.47170561,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.19140625,
+          0.060546875,
+          0.19140625,
+        ],
+        "visibleBounds": [
+          0.19140625,
+          0.080078125,
+          0.6171875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/lanternling-v01-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "lanternling",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -46,
+        "gripPoint": [
+          0.34,
+          0.758,
+        ],
+        "heldRotationDegrees": -9,
+        "heldScale": 0.624,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.125,
+          0.078125,
+          0.125,
+        ],
+        "visibleBounds": [
+          0.125,
+          0.078125,
+          0.75,
+          0.84375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/weapons/leaf-blade-v03-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -46,
+        "gripPoint": [
+          0.34,
+          0.758,
+        ],
+        "heldRotationDegrees": -9,
+        "heldScale": 0.624,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.126953125,
+          0.080078125,
+          0.126953125,
+        ],
+        "visibleBounds": [
+          0.126953125,
+          0.080078125,
+          0.74609375,
+          0.83984375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/presentation/leaf-blade-v03-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "leaf-blade",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.51957596,
+          0.5750954,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.13671875,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.13671875,
+          0.796875,
+          0.8046875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/mallowmusk-aroma-wisp-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.51968639,
+          0.57135798,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.130859375,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.130859375,
+          0.80078125,
+          0.80859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/mallowmusk-aroma-wisp-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "mallowmusk-aroma-wisp",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.125,
+          0.05859375,
+          0.125,
+        ],
+        "visibleBounds": [
+          0.125,
+          0.078125,
+          0.75,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/meadowstep-faunling-v01-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.125,
+          0.060546875,
+          0.126953125,
+        ],
+        "visibleBounds": [
+          0.126953125,
+          0.080078125,
+          0.748046875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/meadowstep-faunling-v01-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "meadowstep-faunling",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.18359375,
+          0.05859375,
+          0.1796875,
+        ],
+        "visibleBounds": [
+          0.1796875,
+          0.078125,
+          0.63671875,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/minerva-moon-owl-v01-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.18359375,
+          0.060546875,
+          0.18359375,
+        ],
+        "visibleBounds": [
+          0.18359375,
+          0.080078125,
+          0.6328125,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/minerva-moon-owl-v01-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "minerva-moon-owl",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.49600511,
+          0.6429959,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.30859375,
+          0.0703125,
+          0.05859375,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.30859375,
+          0.859375,
+          0.6328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/moon-bat-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.49601914,
+          0.64103747,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.306640625,
+          0.0703125,
+          0.060546875,
+          0.0703125,
+        ],
+        "visibleBounds": [
+          0.0703125,
+          0.306640625,
+          0.859375,
+          0.6328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/moon-bat-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "moon-bat",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -64,
+        "gripPoint": [
+          0.336,
+          0.773,
+        ],
+        "heldRotationDegrees": 9,
+        "heldScale": 0.678,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.22265625,
+          0.078125,
+          0.21875,
+        ],
+        "visibleBounds": [
+          0.21875,
+          0.078125,
+          0.55859375,
+          0.84375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/weapons/moon-wand-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -64,
+        "gripPoint": [
+          0.336,
+          0.773,
+        ],
+        "heldRotationDegrees": 9,
+        "heldScale": 0.678,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.22265625,
+          0.080078125,
+          0.220703125,
+        ],
+        "visibleBounds": [
+          0.220703125,
+          0.080078125,
+          0.556640625,
+          0.83984375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/presentation/moon-wand-v02-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "moon-wand",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.05859375,
+          0.17578125,
+          0.05859375,
+          0.171875,
+        ],
+        "visibleBounds": [
+          0.171875,
+          0.05859375,
+          0.65234375,
+          0.8828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/mushroom-imp-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.060546875,
+          0.17578125,
+          0.060546875,
+          0.17578125,
+        ],
+        "visibleBounds": [
+          0.17578125,
+          0.060546875,
+          0.6484375,
+          0.87890625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/mushroom-imp-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "mushroom-imp",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.1484375,
+          0.05859375,
+          0.1484375,
+        ],
+        "visibleBounds": [
+          0.1484375,
+          0.078125,
+          0.703125,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/otter-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.1484375,
+          0.060546875,
+          0.150390625,
+        ],
+        "visibleBounds": [
+          0.150390625,
+          0.080078125,
+          0.701171875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/otter-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "otter",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.05859375,
+          0.08984375,
+          0.05859375,
+          0.08984375,
+        ],
+        "visibleBounds": [
+          0.08984375,
+          0.05859375,
+          0.8203125,
+          0.8828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/pebble-golem-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.060546875,
+          0.091796875,
+          0.060546875,
+          0.091796875,
+        ],
+        "visibleBounds": [
+          0.091796875,
+          0.060546875,
+          0.81640625,
+          0.87890625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/pebble-golem-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "pebble-golem",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.13671875,
+          0.05859375,
+          0.140625,
+        ],
+        "visibleBounds": [
+          0.140625,
+          0.078125,
+          0.72265625,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/penguin-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.140625,
+          0.060546875,
+          0.138671875,
+        ],
+        "visibleBounds": [
+          0.138671875,
+          0.080078125,
+          0.720703125,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/penguin-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "penguin",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.52609221,
+          0.50696612,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.13671875,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.13671875,
+          0.796875,
+          0.8046875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/pitter-patter-parasol-v01-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.52622396,
+          0.50184785,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.12890625,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.12890625,
+          0.80078125,
+          0.810546875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/pitter-patter-parasol-v01-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "pitter-patter-parasol",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.05859375,
+          0.08203125,
+          0.05859375,
+          0.078125,
+        ],
+        "visibleBounds": [
+          0.078125,
+          0.05859375,
+          0.83984375,
+          0.8828125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/enemies/pumpkin-sprite-v02-enemy-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.060546875,
+          0.083984375,
+          0.060546875,
+          0.08203125,
+        ],
+        "visibleBounds": [
+          0.08203125,
+          0.060546875,
+          0.833984375,
+          0.87890625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/pumpkin-sprite-v02-presentation-512-r01.webp",
+    },
+    "family": "enemy",
+    "id": "pumpkin-sprite",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.1171875,
+          0.05859375,
+          0.1171875,
+        ],
+        "visibleBounds": [
+          0.1171875,
+          0.078125,
+          0.765625,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/puppy-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.1171875,
+          0.060546875,
+          0.119140625,
+        ],
+        "visibleBounds": [
+          0.119140625,
+          0.080078125,
+          0.763671875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/puppy-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "puppy",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.14453125,
+          0.05859375,
+          0.1484375,
+        ],
+        "visibleBounds": [
+          0.1484375,
+          0.078125,
+          0.70703125,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/rainbow-horn-unicorn-v01-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.1484375,
+          0.060546875,
+          0.146484375,
+        ],
+        "visibleBounds": [
+          0.146484375,
+          0.080078125,
+          0.705078125,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/rainbow-horn-unicorn-v01-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "rainbow-horn-unicorn",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.1015625,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.1015625,
+          0.796875,
+          0.83984375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/red-panda-v03-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.09765625,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.09765625,
+          0.80078125,
+          0.841796875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/red-panda-v03-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "red-panda",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.171875,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.171875,
+          0.796875,
+          0.76953125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/riddlekit-sphinx-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.1640625,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.1640625,
+          0.80078125,
+          0.775390625,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/riddlekit-sphinx-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "riddlekit-sphinx",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.078125,
+          0.1953125,
+          0.05859375,
+          0.1953125,
+        ],
+        "visibleBounds": [
+          0.1953125,
+          0.078125,
+          0.609375,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/ripplecap-kappa-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.1953125,
+          0.060546875,
+          0.197265625,
+        ],
+        "visibleBounds": [
+          0.197265625,
+          0.080078125,
+          0.607421875,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/ripplecap-kappa-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "ripplecap-kappa",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.1171875,
+          0.078125,
+          0.12109375,
+          0.078125,
+        ],
+        "visibleBounds": [
+          0.078125,
+          0.1171875,
+          0.84375,
+          0.76171875,
+        ],
+        "visualCenter": [
+          0.52973192,
+          0.50619879,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/items/splash-boots-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.119140625,
+          0.080078125,
+          0.12109375,
+          0.080078125,
+        ],
+        "visibleBounds": [
+          0.080078125,
+          0.119140625,
+          0.83984375,
+          0.759765625,
+        ],
+        "visualCenter": [
+          0.52958949,
+          0.50715853,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/splash-boots-v02-presentation-512-r01.webp",
+    },
+    "family": "item",
+    "id": "splash-boots",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.0859375,
+          0.078125,
+          0.0859375,
+          0.078125,
+        ],
+        "visibleBounds": [
+          0.078125,
+          0.0859375,
+          0.84375,
+          0.828125,
+        ],
+        "visualCenter": [
+          0.48285471,
+          0.49606086,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/items/spring-boots-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "item",
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.087890625,
+          0.080078125,
+          0.087890625,
+          0.080078125,
+        ],
+        "visibleBounds": [
+          0.080078125,
+          0.087890625,
+          0.83984375,
+          0.82421875,
+        ],
+        "visualCenter": [
+          0.4829395,
+          0.49609988,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/spring-boots-v02-presentation-512-r01.webp",
+    },
+    "family": "item",
+    "id": "spring-boots",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -50,
+        "gripPoint": [
+          0.344,
+          0.73,
+        ],
+        "heldRotationDegrees": -5,
+        "heldScale": 0.637,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.125,
+          0.078125,
+          0.125,
+        ],
+        "visibleBounds": [
+          0.125,
+          0.078125,
+          0.75,
+          0.84375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/weapons/star-sword-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -50,
+        "gripPoint": [
+          0.344,
+          0.73,
+        ],
+        "heldRotationDegrees": -5,
+        "heldScale": 0.637,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.126953125,
+          0.080078125,
+          0.126953125,
+        ],
+        "visibleBounds": [
+          0.126953125,
+          0.080078125,
+          0.74609375,
+          0.83984375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/presentation/star-sword-v02-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "star-sword",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -62,
+        "gripPoint": [
+          0.336,
+          0.789,
+        ],
+        "heldRotationDegrees": 7,
+        "heldScale": 0.57,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.078125,
+          0.09765625,
+          0.078125,
+          0.09765625,
+        ],
+        "visibleBounds": [
+          0.09765625,
+          0.078125,
+          0.8046875,
+          0.84375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/weapons/sun-mallet-v02-prop-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "weapon",
+        "forwardAxisDegrees": -62,
+        "gripPoint": [
+          0.336,
+          0.789,
+        ],
+        "heldRotationDegrees": 7,
+        "heldScale": 0.57,
+        "pivot": [
+          0.5,
+          0.55,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.09765625,
+          0.080078125,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.080078125,
+          0.802734375,
+          0.83984375,
+        ],
+        "zOrder": 3,
+      },
+      "src": "/assets/mgjrpg-02/presentation/sun-mallet-v02-presentation-512-r01.webp",
+    },
+    "family": "weapon",
+    "id": "sun-mallet",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.52284155,
+          0.46120434,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.078125,
+          0.14453125,
+          0.05859375,
+          0.14453125,
+        ],
+        "visibleBounds": [
+          0.14453125,
+          0.078125,
+          0.7109375,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/tessera-dolphin-v01-friend-field-256-r02.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.52373815,
+          0.46141922,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.14453125,
+          0.060546875,
+          0.146484375,
+        ],
+        "visibleBounds": [
+          0.146484375,
+          0.080078125,
+          0.708984375,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/tessera-dolphin-v01-presentation-512-r02.webp",
+    },
+    "family": "friend",
+    "id": "tessera-dolphin",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.19921875,
+          0.1015625,
+          0.05859375,
+          0.1015625,
+        ],
+        "visibleBounds": [
+          0.1015625,
+          0.19921875,
+          0.796875,
+          0.7421875,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/three-tumble-cerberus-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "grounded-actor",
+        "pivot": [
+          0.5,
+          0.9,
+        ],
+        "safeInset": [
+          0.193359375,
+          0.099609375,
+          0.060546875,
+          0.099609375,
+        ],
+        "visibleBounds": [
+          0.099609375,
+          0.193359375,
+          0.80078125,
+          0.74609375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/three-tumble-cerberus-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "three-tumble-cerberus",
+  },
+  {
+    "canonical": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.50867299,
+          0.51435074,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.078125,
+          0.23046875,
+          0.05859375,
+          0.2265625,
+        ],
+        "visibleBounds": [
+          0.2265625,
+          0.078125,
+          0.54296875,
+          0.86328125,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/friends/tidecurl-hippocamp-v02-friend-field-256-r01.webp",
+    },
+    "detail": {
+      "geometry": {
+        "class": "floating-actor",
+        "floatCenter": [
+          0.50960325,
+          0.51434223,
+        ],
+        "pivot": [
+          0.5,
+          0.84,
+        ],
+        "safeInset": [
+          0.080078125,
+          0.23046875,
+          0.060546875,
+          0.228515625,
+        ],
+        "visibleBounds": [
+          0.228515625,
+          0.080078125,
+          0.541015625,
+          0.859375,
+        ],
+      },
+      "src": "/assets/mgjrpg-02/presentation/tidecurl-hippocamp-v02-presentation-512-r01.webp",
+    },
+    "family": "friend",
+    "id": "tidecurl-hippocamp",
+  },
+]
+`;

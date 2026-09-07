@@ -1,5 +1,13 @@
 # Integrated implementation roadmap through final convergence
 
+**September7 execution override:** live web is0.22.14; WALL-04C/0.22.15 is backed-up
+WIP undergoing qualification. Finish those balanced/cutout walls and large
+grounded sprites first. [New Human feedback](../reviews/2026-09-07-playtest-routing.md)
+then requires the bounded Book campaign-loop fix and HAZARD-03 lip/fade/motion
+revision before LOOT-03. HOLE-02 connected trenches and Plan08 icon-led
+Chill/Walk/Zippy remain named deliverables, not closed by rule/timing work.
+The remaining dependency roadmap stays intact; dated older status below is history.
+
 **Latest sequencing override:** the Human now accepts0.22.13 tall3D walls and asks [WALL-04C refinements](../user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md). Finish the already-frozen HAZARD-02 qualification/publication, then balance wall thickness/height with bounded30% rear-tile occlusion, stronger cast/rim and eight lights before LOOT-03. Do not preserve the obsolete unresolved0.22.13 direction or no-occlusion restriction as a Human gate.
 
 Current operating state, release evidence and collaboration rules live in
