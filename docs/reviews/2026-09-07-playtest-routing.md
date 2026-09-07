@@ -2,11 +2,13 @@
 
 Astra read the complete Human-authored
 [v02213/v02214 feedback](../user-playtests/v02213-20260907-playtest-feedback.md).
-The original file is preserved verbatim. This is routing, not completion.
+The original file is preserved verbatim. WALL-04C is now
+[published0.22.15](2026-09-07-v02215-public-verification.md); items2–5 remain routing,
+not completion. Q01/P17 is ready on the changed wall/sprite build.
 
-1. **WALL-04C remains first:** finish the current wall/cutout/large grounded
-   sprite candidate and qualify it before publication. Human acceptance of
-   v0.22.13's tall3D direction remains valid.
+1. **WALL-04C delivered:** wall/cutout/large grounded sprites are qualified and
+   published in0.22.15. Human acceptance of13's direction remains valid; Q01/P17
+   owns new refinement feedback. Continue items2–3 without waiting for that reply.
 2. **Campaign-selection loop:** reproduce normal Book maze selection through
    completion. The reported same-maze restart is a bug, not intended campaign
    progression. Inspect normal versus tester selection and completed-maze

@@ -1,5 +1,16 @@
 # Human decisions and steer
 
+**September7 execution result, not new Human approval:** the latest wall/sprite
+instructions are implemented and published as web0.22.15, release1e8b465/runtime
+e69f3e4. [Public receipt](reviews/2026-09-07-v02215-public-verification.md) and
+[actual Sol review](reviews/2026-09-07-wall04c-sol-final-review.md) bind engineering
+acceptance, including desktop jump RasterTask+22.110% and measured16.8ms maximum
+frame interval.13's direction remains Human-accepted;15's balanced caps,
+projected cutout and larger grounded/occluded artwork await Q01/P17 observation.
+Next authorized work is Book completion routing, HAZARD-03, then LOOT-03 and the
+preserved roadmap. The Human's14 hazard rejection is not closed by this release.
+No iPad/native/low-end/thermal or new Human beauty acceptance is inferred.
+
 **September7 new Human feedback:** [verbatim source](user-playtests/v02213-20260907-playtest-feedback.md)
 requests connected-trench art, icon-led Chill/Walk/Zippy, correction of Book
 maze-selection looping, and more convincing hazard motion with restored floor

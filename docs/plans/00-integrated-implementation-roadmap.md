@@ -1,20 +1,26 @@
 # Integrated implementation roadmap through final convergence
 
-**September7 execution override:** live web is0.22.14; WALL-04C/0.22.15 is backed-up
-WIP undergoing qualification. Finish those balanced/cutout walls and large
-grounded sprites first. [New Human feedback](../reviews/2026-09-07-playtest-routing.md)
-then requires the bounded Book campaign-loop fix and HAZARD-03 lip/fade/motion
+**September7 execution override:** WALL-04C is delivered as live web0.22.15,
+release1e8b465/runtime e69f3e4. [Public verification](../reviews/2026-09-07-v02215-public-verification.md)
+and [independent Sol review](../reviews/2026-09-07-wall04c-sol-final-review.md)
+bind the balanced/cutout walls, larger grounded sprites and bounded cost decision.
+[New Human feedback](../reviews/2026-09-07-playtest-routing.md)
+now requires the bounded Book campaign-loop fix and HAZARD-03 lip/fade/motion
 revision before LOOT-03. HOLE-02 connected trenches and Plan08 icon-led
 Chill/Walk/Zippy remain named deliverables, not closed by rule/timing work.
 The remaining dependency roadmap stays intact; dated older status below is history.
 
-**Latest sequencing override:** the Human now accepts0.22.13 tall3D walls and asks [WALL-04C refinements](../user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md). Finish the already-frozen HAZARD-02 qualification/publication, then balance wall thickness/height with bounded30% rear-tile occlusion, stronger cast/rim and eight lights before LOOT-03. Do not preserve the obsolete unresolved0.22.13 direction or no-occlusion restriction as a Human gate.
+The Human accepts0.22.13's tall3D direction; Q01/P17 now asks about15's refinements.
+Continue independent work while Human observations are pending. Latest Windows
+remains0.22.9; native0.22.10 and physical iPad/low-end/thermal qualification remain
+separate. The earlier release/dispatch paragraphs below retain historical context;
+they do not restart completed walls or supersede the new Book/hazard ordering.
 
 Current operating state, release evidence and collaboration rules live in
 [JOINT_ORCHESTRATION_STATE.md](../JOINT_ORCHESTRATION_STATE.md). This roadmap
 owns programme dependencies; dated checkpoint paragraphs below are history.
 
-## Current programme contract — 2026-09-06 web delivery
+## Historical programme checkpoint — 2026-09-06 web delivery
 
 **Tall walls, crisp dressing and jump camera are live on web0.22.13**, source
 e59d0f9/runtime dfe04a93. [Qualification](../reviews/2026-09-06-v02213-web-qualification.md)

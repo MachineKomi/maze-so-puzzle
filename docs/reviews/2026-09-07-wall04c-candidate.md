@@ -1,5 +1,11 @@
 # WALL-04C — wall and field-art candidate
 
+**Historical candidate log:** the final runtime e69f3e4 is now published as
+web0.22.15 via release1e8b465. [Qualification](2026-09-07-v02215-web-qualification.md),
+[actual Sol final review](2026-09-07-wall04c-sol-final-review.md) and
+[public receipt](2026-09-07-v02215-public-verification.md) supersede WIP/live labels
+in the retained diagnostic chronology below.
+
 Astra sole runtime writer, branch `codex/wall-balance-sprite-depth`, based on
 04b5da9. **0.22.15 is WIP, not deployed or performance-qualified. Live is0.22.14.**
 The04b5da9 docs-only closure was actually canceled by Vercel's Ignored Build Step.

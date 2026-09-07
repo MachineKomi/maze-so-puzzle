@@ -7,6 +7,19 @@ state.
 
 ## Runtime flow
 
+WALL-04C uses `tallWalls.ts` projected volumes as the only wall silhouette.
+`MazeTerrain` defines and paints the volume; `MazeForeground` reuses that SVG
+definition in a second paint pass clipped to bounded foreground bands. The existing `useSceneTravel` owner
+translates both layers together. Gameplay tiles and engine state do not change.
+`fieldArtLayout.ts` derives 90%-visible-width scale and physical grounding from
+registered alpha/anchor metadata for actors and items. `CatalogueImage` observes
+the stable tile parent and selects eligible existing 512px detail art on demand.
+`fieldDetailContract.test.ts` freezes all58 eligible IDs and complete canonical/
+detail geometry/socket tuples; non-field icons cannot opt in. Cages, rescue
+crops, equipment, Power labels and replacement actors consume that registration.
+[Lighting/depth contract](LIGHTING_AND_DEPTH_SPEC.md) owns dimensions/layers;
+[release qualification](reviews/2026-09-07-v02215-web-qualification.md) owns proof.
+
 VFX-02A adds one presentation-only `src/vfx/RewardLayer.tsx` owner and imperative
 event/cancel port. Immutable committed pickup/combat events seed bounded tile-space
 physics; read-only scene travel and the unique visible Ame anchor project onto

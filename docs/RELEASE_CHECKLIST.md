@@ -17,7 +17,29 @@ Verify real runtime releases, not the presence of a deployment on every docs SHA
 Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
 browser saves. No retention/deletion/archive without explicit Human approval.
 
-## Current published web — v0.22.13 tall walls / dressing / jump camera
+## Current published web — v0.22.15 balanced walls and grounded sprites
+
+Release1e8b465, runtime e69f3e4. [Qualification](reviews/2026-09-07-v02215-web-qualification.md),
+[actual Sol review](reviews/2026-09-07-wall04c-sol-final-review.md) and
+[public verification](reviews/2026-09-07-v02215-public-verification.md) own closure.
+
+- [x]664 tests/67files, TypeScript/build, budgets, production audit and exact
+  runtime/release CI. Deployment guard unchanged; nine default cases pass and
+  three history-only cases are explicitly skipped in this checkpoint.
+- [x]41-case browser matrix plus two post-fix follower journeys; all artwork
+  families, campaign/max-generated routes, eight lights, grayscale and rewards.
+- [x]Three final five-pair comparisons per viewport. Desktop jump RasterTask
+  +22.110% independently accepted within scope; sampled frames at most16.8ms.
+- [x]One Git-integrated deployment; both origins match frozen HTML/JS/CSS;
+  two fresh public journeys pass version, walls, Book, mix, movement and fit.
+- [ ]Q01/P17 Human refinement review, physical iPad/WebKit/low-end/thermal and
+  full Plan07. Windows0.22.9/native0.22.10 remain separately published/held.
+
+Next: Book completion routing, HAZARD-03, LOOT-03 and the preserved roadmap.
+Docs-only closure compares against actual last-success1e8b465; no rebuild or
+version bump. No deletion/archive is authorized.
+
+## Historical published web — v0.22.13 tall walls / dressing / jump camera
 
 Source e59d0f9, runtime dfe04a93. [Qualification and actual Sol review](reviews/2026-09-06-v02213-web-qualification.md)
 and [public verification](reviews/2026-09-06-v02213-public-verification.md) bind closure.

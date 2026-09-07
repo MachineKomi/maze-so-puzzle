@@ -1,21 +1,46 @@
 # Maze so Puzzle — joint orchestration state
 
-**September7 newest execution steer:** [new Human playtest routing](reviews/2026-09-07-playtest-routing.md)
-keeps WALL-04C first, then reproduces/fixes the Book-selected campaign loop and
-delivers HAZARD-03 before LOOT-03. Human feedback on published14 requires restored
+**September7 newest execution steer:** WALL-04C is delivered as web0.22.15.
+[New Human playtest routing](reviews/2026-09-07-playtest-routing.md)
+now requires reproduction/fix of the Book-selected campaign loop and
+HAZARD-03 before LOOT-03. Human feedback on published14 requires restored
 hazard floor lip/fade and more convincing motion. Connected-trench art and
 icon-led Chill/Walk/Zippy remain unfinished. This overrides older next-work labels.
 
-**Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
+**Human wall acceptance:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. WALL-04C delivers the subsequent balanced caps, slightly lower height, bounded foreground overlap, stronger cast/rim, eight lights, projected texture cutout and90%-visible-width grounded sprites. Q01/P17 now owns Human observation of15's refinements; jump Q02 remains independent. Neither earlier rejected walls nor older no-occlusion/unchanged-Ame assumptions override the later instructions.
 
-**Current work,2026-09-07:** HAZARD-02 is live as **web0.22.14**, source0856104, [verified public receipt](reviews/2026-09-07-v02214-public-verification.md). Next active implementation is [WALL-04C](plans/WALL-04C-balanced-caps-and-foreground-depth.md), including projected texture cutout and90%-visible-width sprites, grounded and layered between walls. Sole runtime writer Astra, actual Sol reviews independently. Then execute [LOOT-03](plans/LOOT-03-physical-collection-and-progression.md), DELIGHT-02B/LEARN-01 and the preserved roadmap. [Human review queue](HUMAN_REVIEW_QUEUE.md) must be flagged in every development closeout. This current override supersedes all older checkpoint active/next/live labels below. Windows0.22.9 remains latest published; native0.22.10 remains separately held.
+**Current delivery,2026-09-07:** **web0.22.15 is live**, release1e8b465/runtime e69f3e4,
+on `main` and `codex/wall-balance-sprite-depth`.
+[Public receipt](reviews/2026-09-07-v02215-public-verification.md) binds both origins
+and two fresh public journeys.664 tests,41-case matrix plus two label-repair
+journeys and three final five-pair cohorts pass. Actual Sol independently accepts
+the source/pixel/performance scope; desktop jump RasterTask+22.110% is explicitly
+retained, with measured maximum frame interval16.8ms. No second-engine/physical
+iPad/native/low-end/thermal acceptance follows. Windows0.22.9 remains published;
+native0.22.10 remains held. R1 is still held separately.
 
-State date: 2026-09-06. Current operating state for **Sol Astra MsP Collab**.
+**Next runtime dispatch:** Astra remains the sole runtime writer; actual Sol
+reviews independently. Reproduce Book-selected completion via explicit Next and
+default Enter, partial/perfect and middle/final chapters, including same-ID tester
+selection. Source triage points to the old Stay-primary branch but has not yet
+reproduced the Human's exact event. Preserve exactly-once rewards/save protection.
+Then HAZARD-03 restores lip/fade, shadow receivers and distinct restrained motion;
+the Human's rejected14 hazards remain present in15. Then
+[LOOT-03](plans/LOOT-03-physical-collection-and-progression.md), DELIGHT-02B/LEARN-01
+and the preserved roadmap. No further execution permission is needed.
+
+Keep the [Human queue](HUMAN_REVIEW_QUEUE.md) visible in closeouts. Record generated
+outputs in the [ledger](LOCAL_ARTIFACT_LEDGER.md); no deletion/archive. All owned
+WALL-04C test servers/browsers stopped. Follow [docs-only deployment rules](VERCEL_DEPLOYMENT.md)
+against actual successful release1e8b465. This state supersedes every older
+active/next/live label below; retained dated receipts describe their checkpoints.
+
+State date: 2026-09-07. Current operating state for **Sol Astra MsP Collab**.
 Replace this state when it changes; keep history in dated records and Git.
 Human instructions outrank repository assumptions. This file owns current status;
 the vision/specifications own product contracts and the roadmap owns dependencies.
 
-## 1. Checkpoints and acceptance
+## 1. Prior checkpoints and acceptance history
 
 - **Git continuation:** Astra now writes the bounded HAZARD-02 candidate on `codex/hazard-surface-polish`, from backed-up f546630. Main is
   docs closure d04a691. Smoke-helper correction03026dd and this operations note

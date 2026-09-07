@@ -1,5 +1,24 @@
 # Performance budgets and evidence contract
 
+## WALL-04C final scoped qualification — web0.22.15
+
+Frozen runtime e69f3e4: gzip9 JS165902/166057 ceiling, CSS24216/31158,
+public155542751B unchanged. The reviewed500-byte JS allocation admits the
+foreground/registration seam; it provides no general rendering-time waiver.
+All three final moving/jump/nonempty-idle cohorts contain five measured pairs
+plus separate warmups at780×312 and1193×833, DPR2, Chromium on this host.
+All60 measured samples have maximum frame interval16.8ms and zero over20/34ms.
+Desktop jump RasterTask work increases22.110%, with all five paired increases
+21.185–27.284%; ordinary desktop movement is+5.506% and idle RasterTask is lower
+at both viewports. This material jump cost is accepted by Astra and actual Sol
+for the requested visual benefit within the bounded web scope. Overlapping
+trace durations are not additive, GPU time or physical-device frame timings.
+No whole-maze compositor cache was added. Full Plan07, low-end, physical iPad,
+thermal/energy and native qualification remain open. Exact hashes, totals,
+methodology and limits: [qualification](reviews/2026-09-07-v02215-web-qualification.md),
+[independent Sol decision](reviews/2026-09-07-wall04c-sol-final-review.md).
+The held R1 comparison remains a separate unchanged decision.
+
 ## PHONE-02 / BOOK-02A scoped web preview — 2026-09-06
 
 Candidate0.22.12 uses162449gzip9JS (+1161versus live0.22.10),23916CSS (+261),

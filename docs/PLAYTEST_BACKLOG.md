@@ -1,11 +1,19 @@
 # Maze so Puzzle — playtest backlog
 
-**September7 current intake:** [Human feedback and exact routing](reviews/2026-09-07-playtest-routing.md)
-keeps WALL-04C first, then the Book campaign-loop regression and HAZARD-03
+**September7 current delivery:** WALL-04C is live in0.22.15:
+[public verification](reviews/2026-09-07-v02215-public-verification.md).
+The changed Q01/P17 wall/sprite playtest is ready;13's accepted direction remains
+preserved. [Human feedback and exact routing](reviews/2026-09-07-playtest-routing.md)
+now prioritizes the Book campaign-loop regression and HAZARD-03
 edge/motion revision before LOOT-03. Connected HOLE-02 trench art and icon-led
 Chill/Walk/Zippy controls remain unfinished; shipped single-hole rules and saved
 pace timings do not close them. Published0.22.14 hazard appearance is explicitly
 revision-required, not Human-accepted. This supersedes older next-work labels.
+
+WALL-04C's source, browser and independent review gates are complete within the
+recorded Chromium scope. Physical-device/native/thermal and Human refinement
+observations remain separate. Earlier intake paragraphs below are historical;
+they do not ask to reimplement delivered walls or retest unchanged14 hazards.
 
 **Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
 

@@ -1,16 +1,21 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published **web preview is v0.22.13** at
-[mazesopuzzle.com](https://mazesopuzzle.com/): tall sectioned wall faces, crisp
-sparse surface details and smooth camera tracking through hole jumps. It keeps
+The current published **web preview is v0.22.15** at
+[mazesopuzzle.com](https://mazesopuzzle.com/): balanced 3D wall volumes with clean
+projected edges, stronger directional lighting and larger grounded sprites that
+stand between rear and foreground walls. It keeps crisp surface details,
+smooth camera tracking through hole jumps,
 the shared phone composition, improved default audio balance and Adventure Book
-discovery from0.22.12. [Verified release](docs/reviews/2026-09-06-v02213-public-verification.md).
+discovery from0.22.12. [Verified release](docs/reviews/2026-09-07-v02215-public-verification.md).
 Latest fully published **Windows remains v0.22.9**; native0.22.10 qualification
 is separately unfinished. No new gameplay/save migration in this wall release.
 Earned friends, rewards and progress remain intact. Do not clear saves.
 See [joint state](docs/JOINT_ORCHESTRATION_STATE.md) for current channel status
 and the [cumulative family checklist](docs/PLAYTEST_CHECKLIST.md).
-Human wall appearance, physical iPad and the wider visual/audio programme stay open.
+The Human accepted0.22.13's tall3D direction. Refined wall/sprite appearance,
+physical iPad and the wider visual/audio programme remain in the
+[Human review queue](docs/HUMAN_REVIEW_QUEUE.md). Next: Book completion routing,
+then the requested hazard revision and physical loot work.
 
 [![Browser build](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml/badge.svg)](https://github.com/MachineKomi/maze-so-puzzle/actions/workflows/ci.yml)
 

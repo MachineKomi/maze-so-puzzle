@@ -1,5 +1,34 @@
 # Sequential specialist execution prompts
 
+## Current dispatch — after verified web0.22.15, September7
+
+WALL-04C is deployed: release1e8b465/runtime e69f3e4, with genuine independent Sol
+review and [public verification](../reviews/2026-09-07-v02215-public-verification.md).
+Root Astra remains sole runtime writer; actual Sol reviews bounded source/pixels/
+performance independently. No further Human permission is needed to continue.
+
+Next reproduce Book-selected completion through actual Book navigation: explicit
+Next/default Enter, partial/perfect rescue, middle/final chapter, same-ID tester
+selection. The old Stay-primary branch is a source lead, not a reproduced cause.
+Implement next-story-primary with explicit Stay/Replay and truthful final-campaign
+destinations, preserving exact-once finalization, failed-save and future-profile
+protection. [Source triage and acceptance](../reviews/2026-09-07-playtest-routing.md)
+owns the regression cases. Qualify before publication.
+
+Then HAZARD-03 restores floor lip/fade and casts across liquid/transition/floor,
+replaces rejected dashes with distinct water/lava/poison motion, and proves
+connected shapes plus Full/Lite/Reduced/Static and nonempty idle/moving cost.
+Then LOOT-03 physical collection → enemy Gold/Science → mixed chests/Mimics →
+recognition XP → rare eggs after usable inventory. DELIGHT-02B/LEARN-01,
+HOLE-02 connected art, Plan08 icon-led pace and the wider dependency plan remain.
+Do not close these by routing alone. Q01/P17 is now ready on15, Q02 remains open;
+Q04/Q07/Q05 await their changed builds. Every closeout links the Human queue.
+
+## Historical dispatch context
+
+The following dated assignments retain their evidence and design intent.
+Their active/next/live labels are superseded by the current dispatch above.
+
 **Latest sequencing override:** the Human now accepts0.22.13 tall3D walls and asks [WALL-04C refinements](../user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md). Finish the already-frozen HAZARD-02 qualification/publication, then balance wall thickness/height with bounded30% rear-tile occlusion, stronger cast/rim and eight lights before LOOT-03. Do not preserve the obsolete unresolved0.22.13 direction or no-occlusion restriction as a Human gate.
 
 **2026-09-06 current execution override:** HAZARD-02 is the active bounded web0.22.14 candidate after published tall walls/jump0.22.13. Then execute [LOOT-03](LOOT-03-physical-collection-and-progression.md): persistent physical authored pickups → enemy Gold/Science → mixed chests/Mimic lifecycle → recognition XP → rare eggs after protected usable inventory. The latest explicit Human request supersedes older no-new-XP/presentation-only reward restrictions for these slices. DELIGHT-02B/LEARN-01 and the wider roadmap remain next. [Human review queue](../HUMAN_REVIEW_QUEUE.md) is nonblocking unless a concrete dependent decision is required.

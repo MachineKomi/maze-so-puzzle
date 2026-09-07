@@ -2,8 +2,10 @@
 
 Runtime source **e69f3e4191305106e7cc77de6bbfedd2296ccb68** on
 `codex/wall-balance-sprite-depth`, PR6. Astra sole runtime writer; actual Sol
-independent source/pixel/performance reviewer. **Qualified for one guarded
-Chromium web release; not yet deployed.** All paired runs and the
+independent source/pixel/performance reviewer. **Published and publicly verified
+as web0.22.15**, release source1e8b465 with exact release CI34071195810 passed.
+[Public receipt](2026-09-07-v02215-public-verification.md) binds both origins and
+two fresh public journeys. All paired runs and the
 [actual Sol closeout](2026-09-07-wall04c-sol-final-review.md) are complete.
 The published predecessor is
 corrected0.22.14/0856104.

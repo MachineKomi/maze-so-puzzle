@@ -6,8 +6,8 @@ Deployment Storage warning. Do not change its plan, retention or billing setting
 
 Production URL: [mazesopuzzle.com](https://mazesopuzzle.com/).
 Existing alias: [maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/).
-Both serve identical frozen v0.22.14 HTML/JS/CSS, verified2026-09-07 in the
-[public receipt](reviews/2026-09-07-v02214-public-verification.md). Browser saves are
+Both serve identical frozen v0.22.15 HTML/JS/CSS, verified2026-09-07 in the
+[public receipt](reviews/2026-09-07-v02215-public-verification.md). Browser saves are
 origin-local: the new domain does **not** automatically inherit saves from the
 old alias. Keep the old alias available; never clear saves to migrate domains.
 
@@ -383,7 +383,9 @@ This verifies deployment and static reachability, not the pending physical
 iPad/TV/phone, clean-machine installation or qualified performance gates.
 # Latest verified web release
 
-Web0.22.14 is live from0856104: [public receipt](reviews/2026-09-07-v02214-public-verification.md).
+Web0.22.15 is live from1e8b465/runtime e69f3e4:
+[public receipt](reviews/2026-09-07-v02215-public-verification.md).
+Use1e8b465 as the actual last-success baseline for the following docs-only closure.
 The version-consistency test deliberately imports only web/package/lock inputs:
 `src-tauri/` is excluded by `.vercelignore`; do not make app compilation depend on it.
-Docs-only closure must still follow the unchanged ignored-build procedure below.
+Docs-only closure must still follow the unchanged ignored-build procedure above.

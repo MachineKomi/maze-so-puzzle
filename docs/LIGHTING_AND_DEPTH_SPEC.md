@@ -1,8 +1,49 @@
-# Wall depth and lighting — implemented WALL-04B contract
+# Wall depth and lighting — implemented WALL-04C contract
+
+## Current wall and field-art contract — web0.22.15
+
+Runtime e69f3e4 implements `04c-balanced-v1`. The Human accepted13's tall3D
+direction, then requested balanced caps and larger grounded artwork. Exposed
+horizontal/vertical caps are .47tile, projected height .81, skew .18 and rear
+overlap .28. Construct rounded exterior unions after footprint mapping; paint
+only projected cap/side volume. The old flat W is logical metadata, not a painted
+underlay. Physical footprints own contact/cast exclusions. Cast reach .30 with
+opacity .25; rim width .035 with opacity .64. Eight normalized light bearings
+alter lighting, never wall geometry, level fingerprints or collision.
+
+One wall paint graph is reused by a separate foreground SVG. Its clips cover
+only the bottom .28 of directly rear-adjacent non-wall tiles; analytic interiors
+and actual pixel proofs protect the top70%. This layer is z26, above ordinary,
+battle, rescue and jump bodies, below semantic receipts/door/portal magic. It
+follows the existing scene-travel translation in the same clock, with no second
+rAF owner or per-frame React update. The wall behind an actor remains behind its
+body; the nearer wall can cover lower feet.
+
+Field actors/items use .90 of tile width measured against registered visible
+alpha bounds, preserve aspect ratio and may extend above a tile. Ground anchor
+.765 is midway between actual wall foot edges. Ame is now1.776tile visibly tall:
+the Human's latest enlargement supersedes the earlier unchanged-Ame height
+ratio, not her identity. Attached gear, replacement actors and label grounding
+share the registration. Power labels retain a board-relative .36tile lower
+bound for their bottom edge. Cages keep complete original frames and recognizable
+cropped friends; rescue begins at the same registration.
+
+[Qualification](reviews/2026-09-07-v02215-web-qualification.md) and
+[actual Sol review](reviews/2026-09-07-wall04c-sol-final-review.md) own cost,
+rendered-readability and engine limits. Cross-SVG reuse is proven in Chromium;
+WebKit was blocked by Windows Application Control. No native/iPad pass follows.
+The current hazard renderer below is retained but Human revision-required:
+HAZARD-03 must restore floor lip/fade, repair hazard shadow receivers and replace
+the rejected dashes. WALL-04C does not close that separate work.
+
+## Historical intake and predecessor contracts
+
+The following dated targets describe their checkpoints. The current contract
+above supersedes their active-work and unchanged-sprite/no-occlusion assumptions.
 
 **Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
 
-## HAZARD-02 candidate contract — web0.22.14
+## HAZARD-02 delivered contract — web0.22.14, appearance revision required
 
 Connected water/lava/poison remain zero-height floor surfaces. Base and local FX
 share exact rounded even-odd clipping, without erosion, blur, blend mode or whole
@@ -11,7 +52,7 @@ still exclude hazards and pits; no new lip, receiver, traversal rule or collisio
 Absent families emit no base image/pattern or FX owner. [HAZARD-02](plans/HAZARD-02-readable-living-surfaces.md) owns qualification; P13 beauty remains open.
 
 
-## Current Human target — still open for beauty review, web0.22.13
+## Historical WALL-04B contract — web0.22.13, direction subsequently accepted
 
 The [latest feedback](user-playtests/2026-09-06-jump-camera-and-tall-walls.md)
 requires walls convincingly taller than Ame, clean3D faces and beautiful lighting.

@@ -1,5 +1,29 @@
 # Family playtest checklist
 
+## Current short journey — P17 / Q01, web0.22.15
+
+**Ready:** [published0.22.15](reviews/2026-09-07-v02215-public-verification.md).
+The Human already accepted13's tall3D direction. This is observation of the
+new refinements, not a request to repeat that decision or every historical test.
+
+In a stone maze and one foliage maze, walk a horizontal corridor, turn into a
+vertical one, collect an item and rescue a friend. Do the caps feel balanced and
+the perspective edges clean? Do larger Ame/friends/enemies look grounded between
+the walls, with only lower feet covered by the nearer wall? Check faces, Power,
+held equipment, doors and small pickups, including near the upper camera edge.
+If practical, use one later hole jump away from the camera clamp for independent
+Q02: the camera should follow through the jump. Record build/device/maze/settings
+and any place where depth or scale obscures a useful clue.
+
+Q04 hazard feedback is already received and revision-required;15 retains that
+renderer, so no repeat14 hazard test is requested. Q07 Book progression and Q05
+physical loot checks await their changed builds. Q03/Q06 are optional direction
+checks. [Single queue](HUMAN_REVIEW_QUEUE.md) holds all open items.
+
+Windows remains0.22.9, native0.22.10 held. Automated Chromium does not establish
+physical iPad, native, low-end or thermal acceptance. The dated P5–P16 records
+below remain cumulative history, with their original build identities.
+
 **Latest Human wall acceptance,2026-09-06:** [v0.22.13 feedback](user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md) explicitly accepts the tall3D/lighting direction. Earlier unresolved depth/beauty labels below are superseded for that build/goal, not for all wall/device work. New WALL-04C refinements: balanced vertical/horizontal cap thickness, slightly lower height, up to30% rear-tile foreground occlusion, stronger cast/rim and eight compass lights. Finish frozen HAZARD-02, then this refinement before LOOT-03. Q01 tracks the new playtest; jump Q02 remains independent.
 
 **Execution update,2026-09-06:** [refined programme](plans/00-integrated-implementation-roadmap.md)

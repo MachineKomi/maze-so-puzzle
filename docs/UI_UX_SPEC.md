@@ -1,5 +1,22 @@
 # UI / UX implementation specification
 
+## WALL-04C field scale and depth — web0.22.15
+
+The Human requests larger artwork inside the unchanged logical tile grid.
+Ame, enemies, friends, items and decorative drops occupy approximately90% of
+tile width by visible alpha, with preserved proportions and unrestricted tile
+height. Grounded actors stand between the actual wall feet; rear walls stay
+behind them and front walls cover only lower feet in a bounded30% rear-tile
+band. Power labels remain readable inside the camera board, including its upper
+edge. Held equipment and replacement battle/rescue/jump actors stay registered.
+Complete cage frames retain recognizable cropped friends; rescue starts with
+the same crop. Larger drops keep their existing credit and timing semantics;
+physical collection is still the separate LOOT-03 plan. See the
+[implemented contract](LIGHTING_AND_DEPTH_SPEC.md),
+[qualification](reviews/2026-09-07-v02215-web-qualification.md) and
+[Human queue](HUMAN_REVIEW_QUEUE.md). Earlier release labels below are historical;
+the phone composition, audio balance and Book behavior remain included.
+
 ## PHONE-02 / BOOK-02A delivered web contract — 2026-09-06
 
 Current implementation is **live web0.22.12**, source `5013ea7`, runtime `e18c6ee`,

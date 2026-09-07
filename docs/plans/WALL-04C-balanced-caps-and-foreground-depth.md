@@ -1,5 +1,16 @@
 # WALL-04C — balanced caps, foreground depth and eight lights
 
+**Delivered web0.22.15**, release1e8b465/runtime e69f3e4.
+[Qualification](../reviews/2026-09-07-v02215-web-qualification.md),
+[actual Sol review](../reviews/2026-09-07-wall04c-sol-final-review.md) and
+[public receipt](../reviews/2026-09-07-v02215-public-verification.md) close the
+bounded implementation/Chromium release gates below. Final profile .81height,
+.47cap, .28overlap, .765ground and90% visible-art width. Desktop jump RasterTask
++22.110% is explicitly accepted within the recorded scope, not hidden behind
+frame timing. Q01/P17 Human refinement observation and physical-device/native
+qualification stay open. Do not restart the completed implementation from the
+original sequencing language below; next are Book completion and HAZARD-03.
+
 Authorized continuation of the Human-accepted0.22.13 tall-wall direction.
 [Actual feedback](../user-playtests/2026-09-06-v02213-wall-acceptance-and-refinement.md)
 supersedes the previous zero-occlusion rule. Finish HAZARD-02, then implement

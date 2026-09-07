@@ -17,6 +17,7 @@ Under `C:/GameDev/maze-game-qa/performance/`, retained with no deletion/archive:
 | wall04c-release-moving-20260907 |29 /99159900|Finale69f3e4 five-pair moving cohort, exact served hashes/raw traces. |
 | wall04c-release-jump-20260907 |29 /80407660|Finale69f3e4 five-pair jump cohort, exact served hashes/raw traces. |
 | wall04c-release-idle-20260907 |29 /103429276|Finale69f3e4 five-pair nonempty idle cohort, exact served hashes/raw traces. |
+| wall04c-public-20260907 |5 /5844671|Two isolated public Chromium journeys, four screenshots and exact canonical/alias byte receipt for release1e8b465. Processes stopped. |
 
 The64,847B `src/ui/__snapshots__/fieldDetailContract.test.ts.snap` is intentional
 source contract evidence:58 reviewed source/geometry tuples, no image copies.
