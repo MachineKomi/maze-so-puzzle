@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { gameplayFingerprint } from "./contentIdentity";
+import { gameplayFingerprint, gameplayFingerprintForRules } from "./contentIdentity";
 import { CURATED_LEVELS, parseAsciiLevel } from "./levels";
 
 describe("authored content identity", () => {
@@ -104,9 +104,9 @@ describe("authored content identity", () => {
     expect(fingerprint).toBe(level.gameplayFingerprint);
   });
 
-  it("locks every authored maze revision and gameplay fingerprint together", () => {
-    expect(CURATED_LEVELS.map(({ id, contentRevision, gameplayFingerprint: fingerprint }) => (
-      [id, contentRevision, fingerprint]
+  it("preserves exact pre-loot rules-3 fingerprints for migration of unchanged authored content", () => {
+    expect(CURATED_LEVELS.map(level => (
+      [level.id, level.contentRevision, gameplayFingerprintForRules(level, 3)]
     ))).toEqual([
       ["little-star-trail", 3, "g-8c174a58"],
       ["shiny-sword", 3, "g-ede2cc24"],

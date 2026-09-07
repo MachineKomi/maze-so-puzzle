@@ -16,6 +16,12 @@ export function rewardGlyph(kind: RewardKind): HTMLCanvasElement {
       c.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
     }
     c.closePath(); c.fillStyle = "#f5bf4f"; c.fill(); c.strokeStyle = "#b9773f"; c.stroke();
+    for (let i=0;i<5;i++) {
+      const a=i*Math.PI*2/5-Math.PI/2, b=a+Math.PI/5;
+      c.beginPath(); c.moveTo(0,0); c.lineTo(Math.cos(a)*25,Math.sin(a)*25);
+      c.lineTo(Math.cos(b)*12,Math.sin(b)*12); c.closePath();
+      c.fillStyle=["#fff1a2","#ffe079","#e8a02c","#d38e25","#ffda65"][i]!; c.fill();
+    }
     c.beginPath(); c.moveTo(0, -20); c.lineTo(-7, -3); c.lineTo(-17, -2);
     c.strokeStyle = "#fff0aa"; c.lineWidth = 5; c.stroke();
   } else if (kind === "science") {

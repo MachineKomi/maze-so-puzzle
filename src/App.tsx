@@ -5,6 +5,8 @@ import { MazeForeground } from "./ui/game/MazeForeground";
 import { CagedFriend, cageComposition } from "./ui/game/CagedFriend";
 import { fieldActorStyle } from "./fieldArtLayout";
 import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
+import { useLootCollection } from "./vfx/useLootCollection";
+import { finishLootClaims, pendingLoot } from "./game/loot";
 import { rewardSeed } from "./vfx/rewardPhysics";
 import { MiniMap } from "./ui/game/MiniMap";
 import { cameraLayerStyle, cameraNoticeStyle, isInsideWindow } from "./ui/game/sceneGeometry";
@@ -385,10 +387,10 @@ function feedbackFor(events: readonly GameEvent[], level: LevelDefinition): Feed
         tone: "good",
         sound: "portal",
       };
-    case "treasure-collected":
+    case "treasure-opened":
       return event.currency === "gold"
-        ? { icon: ASSETS.treasureGoldChest, text: `Found ${event.amount} Gold Stars!`, tone: "good", sound: "treasure" }
-        : { icon: ASSETS.treasureScienceGears, text: `Found ${event.amount} Science Points!`, tone: "good", sound: "science" };
+        ? { icon: ASSETS.treasureGoldChest, text: `${event.amount} Gold Stars scattered! Walk near them to collect.`, tone: "good", sound: "treasure" }
+        : { icon: ASSETS.treasureScienceGears, text: `${event.amount} Science Points scattered! Walk near them to collect.`, tone: "good", sound: "science" };
     case "key-collected":
       return {
         icon: resolveKeyArt(event.color).src,
@@ -737,7 +739,7 @@ function App() {
   const [guidedObjectId, setGuidedObjectId] = useState<string | null>(null);
   const [resetProgressOpen, setResetProgressOpen] = useState(false);
   const [resetProgressError, setResetProgressError] = useState(false);
-  const [saveWarning, setSaveWarning] = useState<"run" | "progress" | null>(null);
+  const [saveWarning, setSaveWarning] = useState<"run" | "progress" | null>(initialRunResult.persistence ? "run" : null);
   const [tooStrongEncounter, setTooStrongEncounter] = useState<TooStrongEncounter | null>(null);
   const [progress, setProgress] = useState<PlayerProgress>(readPlayerProgress);
   const [unsupportedProfile, setUnsupportedProfile] = useState(hasUnsupportedProgressProfile);
@@ -1030,6 +1032,9 @@ function App() {
     jump:jumpPresentation, animateJump:motion==="full" && preferences.quality!=="static",
     durationMs:travelDuration.current, onGeometryReset:clearHeldInput,
   });
+  const lootView = useLootCollection({ game, setGame, level, runId, scene: sceneTravel, port: rewardPort,
+    enabled: screen === "game" && pageVisible && !modalOpen && !presentationActive,
+    animate: motion === "full" && preferences.quality !== "static", limit: preferences.quality==="lite" ? 8 : 20 });
 
   const worldObjects = useMemo(() => {
     // Keep the complete painted/pending path plus the newly committed view.
@@ -1471,16 +1476,6 @@ function App() {
     const openedDoorEvent = result.events.find(
       (event): event is Extract<GameEvent, { type: "door-opened" }> => event.type === "door-opened",
     );
-    const treasureEvent = result.events.find(
-      (event): event is Extract<GameEvent, { type: "treasure-collected" }> => event.type === "treasure-collected",
-    );
-    if (treasureEvent) {
-      const treasure = level.objects.find((object) => object.kind === "treasure" && object.id === treasureEvent.objectId);
-      if (treasure?.kind === "treasure") {
-        rewardPort.current.emit({ kind: treasureEvent.currency, amount: treasureEvent.amount,
-          at: treasure.at, seed: rewardSeed(`${runId}:${treasure.id}`) });
-      }
-    }
     const potionEvent = result.events.find(event => event.type === "potion-collected");
     if (potionEvent) {
       const potion = level.objects.find(object => object.id === potionEvent.objectId);
@@ -1915,7 +1910,7 @@ function App() {
     }
     playSound("bump", muted);
     setRestartArmed(true);
-    setFeedback({ icon: ASSETS.navRestart, text: "Tap restart once more.", tone: "plain", sound: "bump" });
+    setFeedback({ icon: ASSETS.navRestart, text: pendingLoot(game) ? "Restart again to leave the uncollected drops and begin anew." : "Tap restart once more.", tone: "plain", sound: "bump" });
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     restartTimer.current = window.setTimeout(() => setRestartArmed(false), 2200);
   };
@@ -2165,9 +2160,16 @@ function App() {
       return;
     }
     if (game.status !== "won" || !completion) return;
+    const settled = finishLootClaims(game);
+    setGame(settled);
+    // The won attempt is the recovery journal for the profile receipt. A denied
+    // write holds this choice, so retry/reload cannot credit another attempt.
+    if (!hasUnsupportedProgressProfile() && level.source === "curated" && !writeActiveRun({
+      runId, mode: "normal", level, game: settled, revealedTiles, hintUsesByState,
+    })) { setSaveWarning("run"); return; }
     const nextProgress = applyLevelCompletion(
       progress,
-      completionInputFor(level, game, campaignIndex, completion.completionId),
+      completionInputFor(level, settled, campaignIndex, completion.completionId),
     );
     const progressSaved = writePlayerProgress(nextProgress);
     setSaveWarning((current) => progressSaved && current === "progress"
@@ -2570,8 +2572,7 @@ function App() {
               <MazeForeground level={level} volumeId={wallVolumeId} style={cameraWorldStyle(level, cameraWindow)} />
 
               <RewardLayer port={rewardPort} level={level} scene={sceneTravel} muted={muted}
-                active={pageVisible && !modalOpen && !jumpPresentation && !portalPresentation && motion === "full"}
-                quality={preferences.quality} />
+                active={pageVisible} loot={lootView} quality={preferences.quality} />
 
               {mapPickupToast && (
                 <div
@@ -2590,6 +2591,7 @@ function App() {
             </div>
 
             <p className="sr-only" id="maze-status">{mazeStatus}</p>
+            <p className="sr-only" aria-live="polite" aria-atomic="true">Collected this adventure: {game.goldStarsCollected} Gold Stars, {game.sciencePointsCollected} Science Points. {pendingLoot(game)} optional reward points remain on the floor.</p>
 
             <div className="sr-only" data-scene-slot="feedback" aria-live={mapPickupToast || feedback.sound === "step" || feedback.sound === "select" ? "off" : "polite"} aria-atomic="true">
               <CatalogueImage className="feedback-icon" src={feedback.icon} alt="" />
@@ -2734,6 +2736,7 @@ function App() {
             {!completion.testerRun && <p className="modal-lead">{unsupportedProfile
               ? "This adventure is temporary. Move on, or stay here to keep exploring."
               : "Moving on records this adventure. Stay here to keep exploring."}</p>}
+            {pendingLoot(game) > 0 && <p className="modal-lead">{pendingLoot(game)} optional reward points are still on the floor. Stay to collect them; moving on or restarting leaves them here.</p>}
             <div className="modal-actions">
               <button className="primary-button" onClick={nextLevel}>{nextMazeLabel} <span>→</span></button>
               <button className="secondary-button" onClick={stayHere}>Stay here</button>
@@ -2859,6 +2862,7 @@ function App() {
             <p className="modal-lead">
               <strong>{level.name}</strong> is waiting at {game.steps} {game.steps === 1 ? "step" : "steps"}.
               Starting <strong>{pendingAdventure.level.name}</strong> will restart this run.
+              {pendingLoot(game) > 0 && ` The ${pendingLoot(game)} uncollected reward points will stay behind.`}
             </p>
             {resetProgressError && (
               <p className="modal-lead" role="alert">

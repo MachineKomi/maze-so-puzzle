@@ -1,5 +1,16 @@
 # Local artifact ledger and cleanup review
 
+## LOOT-03 A — September7 active qualification
+
+Production builds reuse `C:/GameDev/maze-game/dist` and the existing provenance
+file under `node_modules/.cache/maze-performance/`; no repository/media copy.
+The frozen17 four-file baseline at `performance/camera17-release-v02217` is reused.
+Under `C:/GameDev/maze-game-qa/performance/`, `loot03-browser-r1` is an interrupted
+initial browser run retained for review; `loot03-browser-r2` is the first complete
+candidate attempt. Both contain only test output/screenshots, not duplicate media.
+Final counts and pass/fail dispositions will be recorded at qualification.
+No deletion/archive or native package was performed.
+
 ## CAMERA-17 baseline — September7
 
 `C:/GameDev/maze-game-qa/performance/camera17-baseline-v02216/` retains exactly

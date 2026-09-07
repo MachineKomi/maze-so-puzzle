@@ -80,6 +80,7 @@ report.host={platform:platform(),release:release(),cpu:cpus()[0]?.model,logicalC
   lockSha256:sha(await readFile(resolve(root,'package-lock.json'))),powerAndThermal:'Not controlled; diagnostic host, no physical low-memory qualification'};
 report.captureTrace=captureTrace;report.captureLayers=captureLayers;
 report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
+report.saveKeys={seed:data.keys.run,baseline:data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
@@ -143,7 +144,7 @@ try {
           const sample = await page.evaluate(key => {
             window.wallAb.done = true; window.wallAbObserver.disconnect();
             return { ...window.wallAb, save: JSON.parse(localStorage.getItem(key)), brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
-          }, data.keys.run);
+          }, mode === 'candidate' ? (process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY || data.keys.run) : data.keys.run);
           if(captureTrace) { const complete = new Promise(resolve => client.once('Tracing.tracingComplete', resolve));
             await client.send('Tracing.end'); await complete; }
           const deltas = sample.frames.slice(1).map((t, i) => t - sample.frames[i]), sorted = [...deltas].sort((a, b) => a - b);

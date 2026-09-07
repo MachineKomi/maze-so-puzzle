@@ -61,7 +61,7 @@ function analyseRoute(level: LevelDefinition, directions: readonly Direction[]):
       "level-won",
       "portal-warped",
       "hole-jumped",
-      "treasure-collected",
+      "treasure-opened",
       "animal-rescued",
     ].includes(event.type));
     const eventBoundary = result.events.some((event) => !["moved", "level-won"].includes(event.type));
@@ -89,7 +89,7 @@ function analyseRoute(level: LevelDefinition, directions: readonly Direction[]):
 function solveInitial(level: LevelDefinition): GameState {
   // Lazy local import avoided: an initial solve always exposes a valid starting state shape.
   return {
-    levelId: level.id, position: { ...level.start }, power: level.initialPower,
+    loot: { version: 1, sources: [] }, levelId: level.id, position: { ...level.start }, power: level.initialPower,
     hasSword: false, hasBoots: false, hasSpringBoots: false, hasAntidoteLeaf: false,
     keys: [], collectedObjectIds: [], rescuedAnimalIds: [], defeatedEnemyIds: [], openedDoorIds: [],
     goldStarsCollected: 0, sciencePointsCollected: 0, exitArmed: true, status: "playing", steps: 0,

@@ -217,6 +217,7 @@ export type GameStatus = "playing" | "won" | "lost";
  * by the engine so equivalent states have a stable representation.
  */
 export interface GameState {
+  readonly loot: import("./loot").LootLedger;
   readonly levelId: string;
   readonly position: Point;
   readonly power: number;
@@ -309,11 +310,10 @@ export type GameEvent =
       readonly to: Point;
     }
   | {
-      readonly type: "treasure-collected";
+      readonly type: "treasure-opened";
       readonly objectId: string;
       readonly currency: TreasureCurrency;
       readonly amount: number;
-      readonly total: number;
     }
   | {
       readonly type: "door-opened";

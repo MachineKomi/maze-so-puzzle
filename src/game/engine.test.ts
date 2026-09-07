@@ -73,7 +73,7 @@ describe("immutable movement", () => {
 });
 
 describe("optional maze treasures", () => {
-  it("collects Gold Stars and Science Points once without changing Power", () => {
+  it("opens authored sources once, leaving their value on the floor without changing Power", () => {
     const treasureLevel = level("treasure-corridor", "#@kivxE.#");
     let state = createInitialGameState(treasureLevel);
     const events: string[] = [];
@@ -85,11 +85,12 @@ describe("optional maze treasures", () => {
 
     expect(state).toMatchObject({
       power: 2,
-      goldStarsCollected: 11,
-      sciencePointsCollected: 6,
+      goldStarsCollected: 0,
+      sciencePointsCollected: 0,
     });
-    expect(events.filter((event) => event === "treasure-collected")).toHaveLength(4);
+    expect(events.filter((event) => event === "treasure-opened")).toHaveLength(4);
     expect(state.collectedObjectIds).toHaveLength(4);
+    expect(state.loot.sources.reduce((n,s) => n+s.amount,0)).toBe(17);
   });
 });
 

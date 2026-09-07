@@ -1,5 +1,12 @@
 # LOOT-03 — physical collection and lasting adventure progress
 
+**Current September7 execution:** CAMERA-17/web0.22.17 is published. A is now
+being implemented and qualified on `codex/physical-authored-loot` with Astra as
+runtime writer and actual independent Sol review. The [implementation decisions
+and acceptance sequence](../reviews/2026-09-07-loot03-implementation.md) refine
+capacity, represented-ID admission, recovery and cleanup. Earlier starting-point
+descriptions below preserve the pre-implementation analysis, not current code.
+
 **September7 implementation readiness:** [source-owner audit and first-slice dispatch](../reviews/2026-09-07-loot03-readiness.md)
 identifies the v3/rules-3 migration and future active-save protections to build
 before enabling physical authored-reward claims. Book/MOVE/HAZARD0.22.16 is now

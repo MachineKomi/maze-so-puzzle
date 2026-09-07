@@ -1,4 +1,7 @@
 import { pointsEqual } from "./game/engine";
+import { CURATED_LEVELS } from "./game/levels";
+import { gameplayFingerprintForRules } from "./game/contentIdentity";
+import { emptyLoot, legacyCreditedLoot, sanitizeLoot, finishLootClaims } from "./game/loot";
 import type { TileKey } from "./game/exploration";
 import type {
   GameState,
@@ -9,8 +12,9 @@ import type {
 } from "./game/types";
 
 /** Durable normal-run snapshots, including a recoverable pending exit choice. */
-export const ACTIVE_RUN_SCHEMA_VERSION = 3 as const;
-export const ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v3";
+export const ACTIVE_RUN_SCHEMA_VERSION = 4 as const;
+export const ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v4";
+export const VERSION_THREE_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v3";
 export const VERSION_TWO_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v2";
 export const LEGACY_ACTIVE_RUN_STORAGE_KEY = "maze-so-puzzle-active-run-v1";
 
@@ -48,6 +52,7 @@ export interface ActiveRunReadResult {
   readonly snapshot: ActiveRunSnapshot | null;
   /** True only when a known maze existed but its persisted content identity was obsolete. */
   readonly discardedUpdatedRun: boolean;
+  readonly persistence?: "protected" | "migration-unsaved" | "cleanup-failed";
 }
 
 type ObjectKind = LevelObject["kind"];
@@ -325,16 +330,6 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     (object) => object.kind === "antidote-leaf" && collected.has(object.id),
   );
   const calculatedPower = expectedPower(level, collected, defeated);
-  const calculatedGoldStars = level.objects.reduce((sum, object) => (
-    object.kind === "treasure" && object.currency === "gold" && collected.has(object.id)
-      ? sum + object.amount
-      : sum
-  ), 0);
-  const calculatedSciencePoints = level.objects.reduce((sum, object) => (
-    object.kind === "treasure" && object.currency === "science" && collected.has(object.id)
-      ? sum + object.amount
-      : sum
-  ), 0);
   if (
     hasSword !== collectedSword
     || hasBoots !== collectedBoots
@@ -343,8 +338,6 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     || !equalStrings(keys, derivedKeys)
     || calculatedPower === null
     || power !== calculatedPower
-    || goldStarsCollected !== calculatedGoldStars
-    || sciencePointsCollected !== calculatedSciencePoints
     || ((terrain === "water" || terrain === "lava") && !hasBoots)
     || (terrain === "poison" && !hasAntidoteLeaf)
     || !positionObjectIsResolved(objectAt(level, position), collected, rescued, defeated, opened)
@@ -374,7 +367,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     return null;
   }
 
-  return {
+  const game: GameState = {
+    loot: emptyLoot(),
     levelId: level.id,
     position,
     power,
@@ -393,6 +387,8 @@ function sanitizeGameState(value: unknown, level: LevelDefinition): GameState | 
     status,
     steps,
   };
+  const loot = sanitizeLoot(ownValue(value, "loot"), level, game);
+  return loot ? { ...game, loot } : null;
 }
 
 function parseTileKey(value: unknown, level: LevelDefinition): { readonly key: TileKey; readonly x: number; readonly y: number } | null {
@@ -512,157 +508,136 @@ function safelyRemove(storage: ActiveRunStorage, key = ACTIVE_RUN_STORAGE_KEY): 
   }
 }
 
-/**
- * Persist the current normal curated run. Non-persistable or invalid inputs
- * clear any stale run so a later reload can never resume the wrong adventure.
- */
-export function writeActiveRun(
-  input: ActiveRunInput,
-  storage: ActiveRunStorage | null | undefined = undefined,
-): boolean {
+/** Only the exact rules-3 fingerprint admits an old run. Its resolved sources
+ * become credited tombstones: no retroactive rewards or defeated-enemy drops. */
+function migratePrior(value: unknown, levels: readonly LevelDefinition[]): ActiveRunSnapshot | null {
+  if (!isRecord(value) || (value.schemaVersion !== 3 && value.schemaVersion !== 2)) return null;
+  const matches = levels.filter(l => l.id === value.levelId && l.source === "curated");
+  const level = matches.length === 1 ? matches[0] : undefined;
+  if (!level || value.contentRevision !== level.contentRevision
+    || value.gameplayFingerprint !== gameplayFingerprintForRules(level, 3) || !isRecord(value.game)) return null;
+  const game = value.game;
+  if (!Array.isArray(game.collectedObjectIds)) return null;
+  return sanitizeActiveRunSnapshot({
+    ...value, schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
+    runId: value.schemaVersion === 2 ? migratedRunId(value) : value.runId,
+    gameplayFingerprint: level.gameplayFingerprint,
+    game: { ...game, loot: legacyCreditedLoot(level, game as unknown as GameState) },
+  }, levels);
+}
+
+function updatedContent(value: unknown, levels: readonly LevelDefinition[]): boolean {
+  if (!isRecord(value) || ![1,2,3,4].includes(value.schemaVersion as number)) return false;
+  const level = levels.find(l => l.id === value.levelId && l.source === "curated");
+  return !!level && (value.schemaVersion === 1 || value.contentRevision !== level.contentRevision
+    || value.gameplayFingerprint !== (value.schemaVersion === 4
+      ? level.gameplayFingerprint : gameplayFingerprintForRules(level, 3)));
+}
+
+const PRIOR_KEYS = [VERSION_THREE_ACTIVE_RUN_STORAGE_KEY, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY, LEGACY_ACTIVE_RUN_STORAGE_KEY] as const;
+function removePrior(target: ActiveRunStorage): boolean {
+  // Remove oldest first, stopping on failure. An authoritative newer record
+  // remains to shadow every older key that could not be removed.
+  for (const key of [...PRIOR_KEYS].reverse()) if (!safelyRemove(target,key)) return false;
+  return true;
+}
+
+/** An authoritative malformed/future record blocks routine overwrites and
+ * deletion. Do not fall back to an older run hidden underneath it. */
+function protectedRecord(target: ActiveRunStorage, levels: readonly LevelDefinition[]): boolean {
+  try {
+    const raw = target.getItem(ACTIVE_RUN_STORAGE_KEY);
+    if (raw !== null) {
+      const value: unknown = JSON.parse(raw);
+      return !sanitizeActiveRunSnapshot(value, levels)
+        && !(isRecord(value) && value.schemaVersion === 4 && updatedContent(value, levels));
+    }
+    for (const key of PRIOR_KEYS) {
+      const prior = target.getItem(key);
+      if (prior === null) continue;
+      const value: unknown = JSON.parse(prior);
+      return !migratePrior(value, levels) && !updatedContent(value, levels);
+    }
+    return false;
+  } catch { return true; }
+}
+
+/** Persist only coherent normal runs. Invalid inputs never erase a save. */
+export function writeActiveRun(input: ActiveRunInput,
+  storage: ActiveRunStorage | null | undefined = undefined): boolean {
   const target = storage === undefined ? browserStorage() : storage;
   if (target === null) return false;
+  const levels = [...CURATED_LEVELS.filter(l => l.id !== input.level.id), input.level];
+  if (protectedRecord(target, levels)) return false;
   const snapshot = createActiveRunSnapshot(input);
-  if (!snapshot) {
-    safelyRemove(target);
-    safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
-    safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-    return false;
-  }
+  if (!snapshot) return false;
   try {
     target.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(snapshot));
-    safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
-    safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-    return true;
-  } catch {
-    return false;
-  }
+    return removePrior(target);
+  } catch { return false; }
 }
 
-function referencesUpdatedContent(
-  value: Record<string, unknown>,
-  curatedLevels: readonly LevelDefinition[],
-): boolean {
-  const levelId = ownValue(value, "levelId");
-  const level = typeof levelId === "string"
-    ? curatedLevels.find((candidate) => candidate.id === levelId && candidate.source === "curated")
-    : undefined;
-  if (!level) return false;
-  const schemaVersion = ownValue(value, "schemaVersion");
-  return schemaVersion === 1
-    ? true
-    : (schemaVersion === 2 || schemaVersion === ACTIVE_RUN_SCHEMA_VERSION)
-      && (
-        ownValue(value, "contentRevision") !== level.contentRevision
-        || ownValue(value, "gameplayFingerprint") !== level.gameplayFingerprint
-      );
-}
-
-/** Read, validate, and report the narrow user-visible updated-maze restart case. */
-export function readActiveRunResult(
-  curatedLevels: readonly LevelDefinition[],
-  storage: ActiveRunStorage | null | undefined = undefined,
-): ActiveRunReadResult {
+/** Current key is authoritative, even when unreadable. A migration writes v4
+ * before attempting old-key cleanup; denied writes preserve the original bytes. */
+export function readActiveRunResult(curatedLevels: readonly LevelDefinition[],
+  storage: ActiveRunStorage | null | undefined = undefined): ActiveRunReadResult {
   const target = storage === undefined ? browserStorage() : storage;
-  if (target === null) return { snapshot: null, discardedUpdatedRun: false };
+  const empty = { snapshot: null, discardedUpdatedRun: false } as const;
+  if (target === null) return empty;
   try {
     const stored = target.getItem(ACTIVE_RUN_STORAGE_KEY);
     if (stored !== null) {
-      let parsed: unknown;
-      try {
-        parsed = JSON.parse(stored) as unknown;
-      } catch {
-        safelyRemove(target);
-        parsed = null;
+      const parsed: unknown = JSON.parse(stored);
+      const snapshot = sanitizeActiveRunSnapshot(parsed, curatedLevels);
+      if (snapshot) {
+        const game = finishLootClaims(snapshot.game);
+        if (game === snapshot.game) return { snapshot, discardedUpdatedRun: false };
+        const settled = { ...snapshot, game };
+        try { target.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(settled)); }
+        catch { return { snapshot: settled, discardedUpdatedRun: false, persistence: "migration-unsaved" }; }
+        return { snapshot: settled, discardedUpdatedRun: false };
       }
-      if (parsed !== null) {
-        const snapshot = sanitizeActiveRunSnapshot(parsed, curatedLevels);
-        if (snapshot) return { snapshot, discardedUpdatedRun: false };
-        const discardedUpdatedRun = isRecord(parsed)
-          && referencesUpdatedContent(parsed, curatedLevels);
-        safelyRemove(target);
-        if (discardedUpdatedRun) {
-          safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-          return { snapshot: null, discardedUpdatedRun: true };
-        }
+      if (isRecord(parsed) && parsed.schemaVersion === 4 && updatedContent(parsed, curatedLevels)) {
+        const removed = removePrior(target) && safelyRemove(target);
+        return { snapshot: null, discardedUpdatedRun: true, ...(!removed ? { persistence: "protected" as const } : {}) };
       }
+      return { ...empty, persistence: "protected" };
     }
-
-    const versionTwoStored = target.getItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
-    if (versionTwoStored !== null) {
-      try {
-        const prior = JSON.parse(versionTwoStored) as unknown;
-        if (isRecord(prior) && ownValue(prior, "schemaVersion") === 2) {
-          const migrated = sanitizeActiveRunSnapshot({
-            ...prior,
-            schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
-            runId: migratedRunId(prior),
-          }, curatedLevels);
-          if (migrated) {
-            try {
-              target.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(migrated));
-              safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
-            } catch {
-              // Keep the valid v2 source intact and still resume it in memory.
-            }
-            return { snapshot: migrated, discardedUpdatedRun: false };
-          }
-          const discardedUpdatedRun = referencesUpdatedContent(prior, curatedLevels);
-          safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
-          if (discardedUpdatedRun) return { snapshot: null, discardedUpdatedRun: true };
-        } else {
-          safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
-        }
-      } catch {
-        safelyRemove(target, VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
+    for (const key of PRIOR_KEYS) {
+      const storedPrior = target.getItem(key);
+      if (storedPrior === null) continue;
+      const prior: unknown = JSON.parse(storedPrior);
+      const snapshot = migratePrior(prior, curatedLevels);
+      if (snapshot) {
+        try { target.setItem(ACTIVE_RUN_STORAGE_KEY, JSON.stringify(snapshot)); }
+        catch { return { snapshot, discardedUpdatedRun: false, persistence: "migration-unsaved" }; }
+        const removed = removePrior(target);
+        return { snapshot, discardedUpdatedRun: false, ...(!removed ? { persistence: "cleanup-failed" as const } : {}) };
       }
-    }
-
-    const legacyStored = target.getItem(LEGACY_ACTIVE_RUN_STORAGE_KEY);
-    if (legacyStored === null) return { snapshot: null, discardedUpdatedRun: false };
-    try {
-      const legacy = JSON.parse(legacyStored) as unknown;
-      if (!isRecord(legacy) || ownValue(legacy, "schemaVersion") !== 1) {
-        safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-        return { snapshot: null, discardedUpdatedRun: false };
+      if (updatedContent(prior, curatedLevels)) {
+        const removed = removePrior(target);
+        return { snapshot: null, discardedUpdatedRun: true, ...(!removed ? { persistence: "protected" as const } : {}) };
       }
-      const levelId = ownValue(legacy, "levelId");
-      // Schema v1 never carried a rules fingerprint, so even a revision-1 map
-      // cannot prove compatibility with the current global gameplay rules.
-      // Fail closed for a recognized story maze and retain durable progress.
-      const discardedUpdatedRun = typeof levelId === "string"
-        && curatedLevels.some((candidate) => candidate.id === levelId && candidate.source === "curated");
-      safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-      return { snapshot: null, discardedUpdatedRun };
-    } catch {
-      safelyRemove(target, LEGACY_ACTIVE_RUN_STORAGE_KEY);
-      return { snapshot: null, discardedUpdatedRun: false };
+      return { ...empty, persistence: "protected" };
     }
-  } catch {
-    return { snapshot: null, discardedUpdatedRun: false };
-  }
+    return empty;
+  } catch { return { ...empty, persistence: "protected" }; }
 }
 
-/** Compatibility helper for callers that need only the validated snapshot. */
-export function readActiveRun(
-  curatedLevels: readonly LevelDefinition[],
-  storage: ActiveRunStorage | null | undefined = undefined,
-): ActiveRunSnapshot | null {
+export function readActiveRun(curatedLevels: readonly LevelDefinition[],
+  storage: ActiveRunStorage | null | undefined = undefined): ActiveRunSnapshot | null {
   return readActiveRunResult(curatedLevels, storage).snapshot;
 }
 
-/** Remove an active-run snapshot without allowing storage errors to escape. */
-export function clearActiveRun(
-  storage: ActiveRunStorage | null | undefined = undefined,
-): boolean {
+/** Routine navigation preserves protected records. Explicit profile reset owns
+ * the separate, confirmed application-key removal allowlist. */
+export function clearActiveRun(storage: ActiveRunStorage | null | undefined = undefined): boolean {
   const target = storage === undefined ? browserStorage() : storage;
-  if (target === null) return false;
-  const currentRemoved = safelyRemove(target);
+  if (target === null || protectedRecord(target, CURATED_LEVELS)) return false;
+  // Do not discard the sole durable copy after a failed migration write.
   try {
-    target.removeItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY);
-    target.removeItem(LEGACY_ACTIVE_RUN_STORAGE_KEY);
-  } catch {
-    return false;
-  }
-  return currentRemoved;
+    if (target.getItem(ACTIVE_RUN_STORAGE_KEY) === null
+      && [VERSION_THREE_ACTIVE_RUN_STORAGE_KEY,VERSION_TWO_ACTIVE_RUN_STORAGE_KEY].some(key=>target.getItem(key)!==null)) return false;
+  } catch { return false; }
+  return removePrior(target) && safelyRemove(target);
 }

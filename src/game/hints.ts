@@ -68,7 +68,7 @@ function firstRequiredMoment(level: LevelDefinition, state: GameState, route: re
     const meaningful = result.events.find((event) => ![
       "moved",
       "level-won",
-      "treasure-collected",
+      "treasure-opened",
       "animal-rescued",
     ].includes(event.type));
     const target = result.events.find((event) => event.type === "moved");
