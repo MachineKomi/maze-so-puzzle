@@ -89,10 +89,12 @@ async function startRecording(page: Page, lightweight = false) {
         }), p = translate(player);
         const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
         const logicalCamera = { x: pane.x, y: pane.y };
-        const logical = { x: parseFloat(player.style.left) * cols / 100 + logicalCamera.x, y: parseFloat(player.style.top) * cols / 100 + logicalCamera.y };
+        const retainedActor=!!player.closest('.camera-actors');
+        const logical = retainedActor ? {x:parseFloat(getComputedStyle(player).left)/size+pane.x,y:parseFloat(getComputedStyle(player).top)/size+pane.y}
+          : { x: parseFloat(player.style.left) * cols / 100 + logicalCamera.x, y: parseFloat(player.style.top) * cols / 100 + logicalCamera.y };
         const at = performance.now();
         record.frames.push({ at, sampledAt: at, frameTime, logical, logicalCamera, worldTranslate:w, playerTranslate:p, travelState:board.dataset.travelState, board: light ? fixed.board : rect(board), hud: light ? fixed.hud : rect(hud),
-          position: { x: logical.x + (p.x - w.x) / size, y: logical.y + (p.y - w.y) / size },
+          position: { x: logical.x + (p.x - (retainedActor?0:w.x)) / size, y: logical.y + (p.y - (retainedActor?0:w.y)) / size },
           camera: { x: logicalCamera.x - w.x / size, y: logicalCamera.y - w.y / size },
           steps: document.querySelector(".step-pill")?.getAttribute("aria-label") ?? null,
         });
