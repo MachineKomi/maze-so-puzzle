@@ -21,6 +21,12 @@ native0.22.10 qualification remains held. Q05/P20 now covers authored and enemy 
 The following dated states preserve history; their branch and next-work statements
 are superseded by this current dispatch.
 
+Documentation closure5e3b07c is backed up on main and this Codex branch. Vercel
+actually skipped it at08:44:03UTC through the unchanged Ignored Build Step.
+The [observed receipt](reviews/2026-09-07-v02220-public-verification.md#observed-documentation-closure)
+is backed up on the Codex branch only for the next runtime slice; no extra main
+push or game build is needed to align its documentation SHA.
+
 **Historical operating state — September7, web0.22.19:** release
 **28842506f2b6b690e9bd7fc0f18c12957029de98**, reviewed4991f93, frozen runtime
 d472037. Root stays on `codex/cold-reward-performance`. [Public receipt](reviews/2026-09-07-v02219-public-verification.md)
