@@ -25,14 +25,16 @@ async function travelState(page:Page) {
     const cell={x:size.x/cols,y:size.y/cols};
     // PERF-02 uses percent world translation; resolve against its full box.
     const translation=(element:HTMLElement)=>{const parts=getComputedStyle(element).translate.split(" ");const extent=element===world?{x:parseFloat(world.style.width)*size.x/100,y:parseFloat(world.style.height)*size.y/100}:{x:element.clientWidth,y:element.clientHeight};const px=(v:string|undefined,n:number)=>(parseFloat(v??"0")||0)*(v?.endsWith("%")?n/100:1);return {x:px(parts[0],extent.x),y:px(parts[1],extent.y)};};
-    const w=translation(world),p=translation(player);
+    const w=translation(world);
     const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
     const logicalCamera={x:pane.x,y:pane.y};
-    const logical={x:parseFloat(player.style.left)*cols/100+logicalCamera.x,y:parseFloat(player.style.top)*cols/100+logicalCamera.y};
-    const position={x:logical.x+(p.x-w.x)/cell.x,y:logical.y+(p.y-w.y)/cell.y};
     const camera={x:logicalCamera.x-w.x/cell.x,y:logicalCamera.y-w.y/cell.y};
     const sx=rect.width/board.offsetWidth,sy=rect.height/board.offsetHeight;
-    return {position,logical,camera,cell:{x:cell.x*sx,y:cell.y*sy},center:{x:rect.left+(board.clientLeft+(position.x-camera.x+.5)*cell.x)*sx,y:rect.top+(board.clientTop+(position.y-camera.y+.5)*cell.y)*sy},state:board.dataset.travelState,
+    // Read the painted actor rectangle: the retained actor plane uses calc()
+    // world registration, so parsing its inline left/top as a percent is invalid.
+    const painted=player.getBoundingClientRect();
+    const position={x:camera.x+(painted.x-rect.x-board.clientLeft*sx)/(cell.x*sx),y:camera.y+(painted.y-rect.y-board.clientTop*sy)/(cell.y*sy)};
+    return {position,camera,cell:{x:cell.x*sx,y:cell.y*sy},center:{x:painted.x+painted.width/2,y:painted.y+painted.height/2},state:board.dataset.travelState,
       followers:Array.from(board.querySelectorAll<HTMLElement>("[data-follower-id]")).map(f=>{const t=translation(f);return {id:f.dataset.followerId,
         x:pane.x+parseFloat(getComputedStyle(f).left)/cell.x+t.x/cell.x,
         y:pane.y+parseFloat(getComputedStyle(f).top)/cell.y+t.y/cell.y};})};
@@ -212,7 +214,7 @@ for(const [width,height] of [[780,312],[1194,834]]) test(`MOVE five friends foll
   const check=async()=>{
     await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
     const painted=await travelState(page),expected=followerTargets(procession);
-    const badge=await page.locator('.player-layer > .player-power').boundingBox(),board=await page.locator('.maze-board').boundingBox();
+    const badge=await page.locator('.player-label-layer .player-power').boundingBox(),board=await page.locator('.maze-board').boundingBox();
     expect(badge!.y, 'Complete Power line stays below the board edge').toBeGreaterThanOrEqual(board!.y+2);
     expect(badge!.y+badge!.height).toBeLessThanOrEqual(board!.y+board!.height-2);
     expect(painted.followers.map(f=>f.id)).toEqual(expected.map(f=>f.id));
