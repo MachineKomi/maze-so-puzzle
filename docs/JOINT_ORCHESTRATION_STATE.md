@@ -1,5 +1,45 @@
 # Maze so Puzzle — joint orchestration state
 
+**Live operating state — September7, web0.22.19:** release
+**28842506f2b6b690e9bd7fc0f18c12957029de98**, reviewed4991f93, frozen runtime
+d472037. Root stays on `codex/cold-reward-performance`. [Public receipt](reviews/2026-09-07-v02219-public-verification.md)
+verifies both origins and six fresh journeys after exact-head CI34092206239.
+[Qualification](reviews/2026-09-07-v02219-web-qualification.md) and
+[actual independent Sol review](reviews/2026-09-07-cold-reward-sol-final-review.md)
+bind700 tests,43 final browser cases and four separate five-pair cohorts.
+Astra remains sole runtime writer. Vercel deployed once through Git; no override.
+
+**Cold reward correction is delivered.** First-loot max median66.7→50ms in both
+CPU4 layouts; settled-loot resizing is fixed. Maze entry is slightly slower,
+with a retained313.7ms tablet mount outlier and a368640-byte ideal RGBA cache
+plus browser overhead. Ordinary camera tails are neutral here. This is not a
+net cold-start win, removal of all stutter or physical Apple/3GB/WebKit success.
+Published Windows remains0.22.9; native0.22.10 qualification remains held.
+
+**Execute LOOT-03 B next:** audit enemy Power bands/counts and best/worst campaign
+totals; freeze modest deterministic final-defeat Gold/Science tables; extend the
+existing ledger/source/capacity/save owners without retroactive resolved-enemy
+awards. Preserve immediate-rule Power. Then mixed chests/Mimics, recognition-only
+XP and usable inventory before eggs, followed by DELIGHT-02B/LEARN-01 and the
+preserved campaign/Garden/co-op roadmap. No further general execution permission
+is needed. Do not repeat the completed lab investigation by default.
+
+Q08/P19 now requests19 entry/camera/first-opening observations on iPhone13/iPad8;
+Q05/P20 remains loot feel. These unresolved observations stay in the [single queue](HUMAN_REVIEW_QUEUE.md)
+and do not block independent B. If affected devices still stutter, obtain a
+same-maze/settings Safari recording before choosing another renderer change.
+Do not infer a RAM floor, invent Human/Sol agreement or downgrade by device brand.
+
+All owned processes are stopped. Cold-reward local/public packets are
+359files/306643419bytes in the [artifact ledger](LOCAL_ARTIFACT_LEDGER.md), with
+one reusable dist and a four-file18 entry; no repository/media clone, deletion,
+archive or native package. Docs closure uses actual successful2884250 as the
+unchanged [Vercel guard](VERCEL_DEPLOYMENT.md) baseline. Preserve v4 save/claim/
+completion compatibility in any correction. Earlier operating paragraphs below
+are historical checkpoints, not current assignments.
+
+## Historical v18 operating state
+
 **Live operating state — September7:** web **0.22.18 is published**, release
 **54c286ac2dcc15590fb781a96e0d6ed2009fa78e**, reviewed82ee7e9, frozen runtime85f49ea.
 Root is now on `codex/cold-reward-performance`; remote main is documentation

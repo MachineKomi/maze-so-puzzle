@@ -1,5 +1,12 @@
 # Cold reward opening — bounded diagnosis
 
+**Complete engineering follow-up:** [published web0.22.19](2026-09-07-v02219-public-verification.md),
+release2884250/runtime d472037. [Final qualification](2026-09-07-v02219-web-qualification.md)
+and [actual Sol disposition](2026-09-07-cold-reward-sol-final-review.md) accept
+the measured first-response/entry trade. Residual hitch, slower tablet entry and
+physical Apple observations remain open. Execute LOOT-03 B next; the dated
+hypotheses and intermediate next steps below preserve the investigation history.
+
 Active on `codex/cold-reward-performance` from3a01ad4. Live18 remains release54c286a,
 runtime85f49ea. The retained hitch is distinct from sustained Apple camera travel;
 Q08 remains actual device evidence. Astra writes runtime; actual Sol reviews.

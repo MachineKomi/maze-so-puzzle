@@ -138,6 +138,17 @@ change. Do not declare a minimum RAM spec or silently force Lite based on brand.
 
 ## LOOT-03 retained cold-opening follow-up
 
+**September7 follow-up delivered as [web0.22.19](../reviews/2026-09-07-v02219-public-verification.md):**
+stage-scale reuse plus shared number glyphs reduce the first-loot max median
+66.7→50ms at CPU4 in both layouts; a real resting-loot resize defect is fixed.
+Entry is slower, with tablet mount-max median253.6→281.5ms/worst313.7ms and a
+368640-byte ideal RGBA cache. Ordinary camera tails remain neutral on this host.
+[Final evidence](../reviews/2026-09-07-v02219-web-qualification.md) and actual Sol
+review accept the trade, not a net cold-start win or elimination of all stutter.
+This bounded lab investigation is complete. Q08/P19 remains real affected-device
+confirmation; if it still fails, follow the Safari-recording step above. Execute
+LOOT-03 B independently. The previous diagnosis dispatch below is historical.
+
 The [v18 qualification](../reviews/2026-09-07-v02218-web-qualification.md) compares
 public17 and physical authored-loot18. Ordinary camera Raster is essentially
 neutral. Both versions show one cold source-opening hitch in each CPU4 measured

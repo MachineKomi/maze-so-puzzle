@@ -1,5 +1,14 @@
 # Maze so Puzzle — playtest backlog
 
+**Latest delivery:** [web0.22.19](reviews/2026-09-07-v02219-public-verification.md)
+publishes the bounded cold-loot response/resize correction, release2884250/runtime
+d472037. It shortens the measured first-pickup hitch while adding some maze-entry
+cost; it does not remove every hitch or establish affected-device success.
+Q08/P19 now checks19 entry/camera/first pickup, and Q05/P20 retains loot feel.
+The lab follow-up is complete; next is LOOT-03 B's deterministic enemy reward
+tables and campaign-total audit, then mixed chests/Mimics. Preserve all wider
+roadmap items and earlier feedback below as history.
+
 **Latest delivery:** LOOT-03 A is [published as web0.22.18](reviews/2026-09-07-v02218-public-verification.md),
 release54c286a/runtime85f49ea: authored Gold/Science bursts, bounce/settle, finite
 vacuum, persistent grounded value and protected v4 migration/completion. Q05/P20

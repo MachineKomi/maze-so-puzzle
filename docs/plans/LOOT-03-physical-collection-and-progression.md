@@ -1,5 +1,10 @@
 # LOOT-03 — physical collection and lasting adventure progress
 
+**Latest follow-up:** [web0.22.19](../reviews/2026-09-07-v02219-public-verification.md)
+delivers A's bounded first-draw/resize optimization, with disclosed slower entry
+and cache costs. A's v4 ledger/gameplay semantics remain intact. **Execute B next**;
+Q08/P19 actual-device observation does not block table/capacity/migration work.
+
 **Current September7 execution:** A is [published as web0.22.18](../reviews/2026-09-07-v02218-public-verification.md),
 release54c286a/runtime85f49ea. Astra remained runtime writer; actual independent
 Sol source/visual/performance review accepted the scoped web slice. The

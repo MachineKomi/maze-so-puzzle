@@ -2,8 +2,9 @@
 
 Frozen runtime **d4720370a7e6d6407f35e5c5188e86817e71259c**, branch
 `codex/cold-reward-performance`, [PR10](https://github.com/MachineKomi/maze-so-puzzle/pull/10).
-All local gates and independent review are complete. Web18 remains live pending
-the qualified PR merge, guarded deployment and public verification.
+All local gates and independent review are complete. **[Published and publicly
+verified](2026-09-07-v02219-public-verification.md)** as release2884250 after
+exact4991f93 CI34092206239 passed both jobs.
 Astra is sole runtime writer; actual Sol independently reviews source/images/data.
 
 ## Scope and correctness

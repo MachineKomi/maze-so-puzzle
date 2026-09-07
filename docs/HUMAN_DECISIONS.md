@@ -1,5 +1,14 @@
 # Human decisions and steer
 
+**September7 engineering delivery, not new Human approval:** web0.22.19 is live,
+release2884250/runtime d472037. [Public proof](reviews/2026-09-07-v02219-public-verification.md)
+and actual independent Sol review accept a shorter first-loot hitch and corrected
+resting-loot resize, with slower maze entry and a small shared cache disclosed.
+No net cold-start speed or Apple/3GB/native/Human-feel acceptance. Q08/P19 on19
+and Q05/P20 remain open. Execute LOOT-03 B next; the completed lab follow-up does
+not require repeating without new evidence. Recognition-only XP/inventory-first
+eggs remain the adopted optional-steer defaults, not invented Human approval.
+
 **September7 delivery, not new Human approval:** LOOT-03 A is live as web0.22.18,
 release54c286a/runtime85f49ea. [Public proof](reviews/2026-09-07-v02218-public-verification.md)
 binds both origins and six fresh journeys. Actual independent Sol accepts the

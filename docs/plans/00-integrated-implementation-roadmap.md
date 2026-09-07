@@ -1,5 +1,13 @@
 # Integrated implementation roadmap through final convergence
 
+**Latest runtime delivery:** the bounded cold-reward follow-up is
+[published as web0.22.19](../reviews/2026-09-07-v02219-public-verification.md),
+release2884250/runtime d472037. Actual independent Sol accepts the shorter first
+loot-response hitch/resize correction with slower board entry and cache costs.
+Q08/P19 remains affected-device evidence; no physical Apple success or RAM floor.
+**Execute LOOT-03 B next**, as detailed below. Do not repeat completed lab work
+without new evidence; preserve DELIGHT/LEARN/HOLE/pace and the wider roadmap.
+
 **Current delivery — September7:** LOOT-03 A is
 [published as web0.22.18](../reviews/2026-09-07-v02218-public-verification.md),
 release54c286a/runtime85f49ea. The complete authored Gold/Science physical

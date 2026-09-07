@@ -2,7 +2,7 @@
 
 ## New short journey — P20 / Q05, physical authored loot
 
-**Ready on [published0.22.18](reviews/2026-09-07-v02218-public-verification.md).**
+**Ready on [published0.22.19](reviews/2026-09-07-v02219-public-verification.md).**
 Use an unlocked maze with Gold/Science: Rainbow Power Parade has Gold,
 Moonlit Friendship Quest has Science; there is no need to replay the campaign.
 
@@ -21,10 +21,11 @@ same values; comfort modes reduce travel effects. Enemy Gold/Science, mixed
 chests/Mimics, rainbow account XP and eggs are subsequent work, not this release.
 This is a feel/readability observation, not a request to repeat every old test.
 
-## Priority device journey — P19 / Q08, CAMERA-17 retained in18
+## Priority device journey — P19 / Q08, CAMERA-17 retained in19
 
-Use current0.22.18 for this changed-build observation; its camera retains17's
-bounded renderer. Also mention any noticeable first Gold/Science opening pause.
+Use current0.22.19 for this changed-build observation; its camera retains17's
+bounded renderer. Note both entry delay and any first Gold/Science opening pause;
+19 trades slightly slower board entry for a shorter first-loot hitch in the lab.
 The original17 delivery statement below preserves its evidence identity.
 
 **Ready on [published0.22.17](reviews/2026-09-07-v02217-public-verification.md):**

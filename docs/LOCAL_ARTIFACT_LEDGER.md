@@ -48,6 +48,16 @@ scope are in the [v19 qualification](reviews/2026-09-07-v02219-web-qualification
 No repository/media clone, native build, deletion or archiving. Public verification
 will add one separately inventoried packet; docs closure reuses these records.
 
+### v19 public packet
+
+`C:/GameDev/maze-game-qa/performance/v02219-public-20260907/`: nine files,
+15391066bytes, receiptf9cee5e69d2faabb797aafc5aa24ee8e606e7d9cbc0132230712aa5b9bad0083.
+Six fresh journeys and both-origin exact bytes pass on release2884250/runtime
+d472037; all owned public contexts/browsers stopped. Cold-reward local/public
+packets total359files/306643419bytes. Hold accepted evidence and retain earlier
+diagnostics until explicit Human cleanup review. No deletion/archive or clone.
+Docs closure uses the same build/evidence without generating another preview.
+
 ## LOOT-03 A — September7 initial qualification record
 
 Production builds reuse `C:/GameDev/maze-game/dist` and the existing provenance

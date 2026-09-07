@@ -1,6 +1,6 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published **web preview is v0.22.18** at
+The current published **web preview is v0.22.19** at
 [mazesopuzzle.com](https://mazesopuzzle.com/): balanced 3D wall volumes with clean
 projected edges, stronger directional lighting and larger grounded sprites that
 stand between rear and foreground walls. It keeps crisp surface details,
@@ -10,11 +10,14 @@ discovery from0.22.12. Book completion now offers Next first, the moving yellow
 dot is removed, and
 liquids have restored floor banks/shadow coverage with restrained material motion.
 Camera paint now stays within a bounded window, animated liquids have their own
-paint layer, and the minimap uses fewer elements. Paired lab raster work falls
-26–70%; actual iPhone13/iPad8 comfort remains the priority Q08 playtest.
+paint layer, and the minimap uses fewer elements. The16→17 paired lab comparison
+reduced raster work26–70%; actual iPhone13/iPad8 comfort remains Q08's priority.
 Gold and Science pickups now tumble, bounce and settle before nearby collection;
 distant drops stay on safe floor until Ame approaches, including after reload.
-[Verified release](docs/reviews/2026-09-07-v02218-public-verification.md).
+The19 correction reduces first-loot draw work and refreshes resting loot after
+resizing. It trades slightly slower maze entry for a shorter first-pickup hitch;
+the remaining hitch and actual Apple-device result are still open.
+[Verified release](docs/reviews/2026-09-07-v02219-public-verification.md).
 Latest fully published **Windows remains v0.22.9**; native0.22.10 qualification
 is separately unfinished. Existing valid runs migrate to the protected v4 loot
 ledger without replaying rewards or losing their route.
