@@ -26,6 +26,28 @@ follow. Each measurement owns/stops its browser/server, raw wrappers never run i
 qualifying cohorts. Retain all packets for explicit Human cleanup review.
 No deletion/archive or native build.
 
+### Cold-reward final local inventory
+
+All15 `reward-cold-*` packets under the external performance parent now total
+**350 files /291252353 bytes**. In addition to the completed diagnostic table:
+
+| Folder | Files | Bytes | Disposition |
+| --- | ---: | ---: | --- |
+| reward-cold-final-browser |103|73391219|067ee53,42/43; initial observer cancelled synchronous densePower. Retained failure. |
+| reward-cold-corrected-browser |102|71972054|Frozen d472037,43/43 pass, including corrected initial notification. |
+| reward-cold-loot-frames |5|10866321|Five untraced pairs/profile plus separate800ms mount sampler; slower entry disclosed. |
+| reward-cold-loot-work |25|9199599|Five separate traced loot pairs/profile; duplicate screenshots omitted. |
+| reward-cold-camera-frames |5|9930948|Five ordinary frame pairs/profile, essentially neutral. |
+| reward-cold-camera-work |25|9331919|Five separate ordinary traced pairs/profile; duplicate screenshots omitted. |
+| reward-cold-summary |2|19311|Reproducible aggregate and final source/dist integrity receipt. |
+
+One reusable d472037 dist build remains. All owned measurement/browser processes
+are stopped. Hold the corrected matrix, paired reports and baseline for recovery;
+retain failed/pilot packets until explicit Human cleanup approval. Raw hashes and
+scope are in the [v19 qualification](reviews/2026-09-07-v02219-web-qualification.md).
+No repository/media clone, native build, deletion or archiving. Public verification
+will add one separately inventoried packet; docs closure reuses these records.
+
 ## LOOT-03 A — September7 initial qualification record
 
 Production builds reuse `C:/GameDev/maze-game/dist` and the existing provenance
