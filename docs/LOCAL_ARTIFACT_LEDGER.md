@@ -1,5 +1,15 @@
 # Local artifact ledger and cleanup review
 
+## DELIGHT26 active artifact island
+
+Four frozen release-v02225 entry/identity files share unchanged public media.
+New presence26-* baseline, pickup/browser, timing, summary and publication
+proofs stay under C:/GameDev/maze-game-qa/performance. One existing dist in place;
+no repo/media copy, new dependency, native package, deletion or archive. Count
+files/bytes at closeout and preserve unowned4271. Baseline14 and candidate56
+initial collection/visual checks are retained; final colored-key/dense and
+source-matched proof follows. C earned-keepsake fanfare remains next.
+
 EXPLORE25 closure guard adds one97-byte log, explore25-doc-guard.log. Complete
 local/public/guard slice: **628 files /289262283 bytes**. Actual Vercel docs skip
 is recorded in the public receipt; this observation remains branch-only.
