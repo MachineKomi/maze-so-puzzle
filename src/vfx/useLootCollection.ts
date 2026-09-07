@@ -71,7 +71,6 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
             angle: (seed % 628) / 100, scatterMs: 350 + seed % 201 };
           view.current.motions.set(drop.id, motion);
         }
-        if(view.current.represented.has(drop.id) && motion.shownAt===undefined) motion.shownAt=now;
         if (drop.phase === "claiming" && motion.claimAt === undefined) {
           motion.claimAt = now; motion.claimMs = lootClaimDuration(Math.hypot(drop.at.x-scene.current.position.x, drop.at.y-scene.current.position.y));
         }
@@ -91,6 +90,11 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
     const interrupt = () => {
       if (timer !== undefined) window.clearTimeout(timer);
       timer = undefined;
+      // Time on Home, behind a modal or in a hidden tab is not time seen.
+      // Restart incomplete intervals; already readable grounded loot stays ready.
+      const now = performance.now();
+      for (const motion of view.current.motions.values()) if (motion.shownAt !== undefined
+        && now-motion.shownAt < lootReadableDelay(motion)) motion.shownAt = undefined;
       commit(finishLootClaims);
     };
     const tick = () => {
@@ -109,7 +113,8 @@ export function useLootCollection({ game, setGame, level, runId, scene, port, en
             || !lootLineClear(level, current, drop.at, ground)) due.add(drop.id);
           else waiting = true;
         } else {
-          if (!view.current.represented.has(drop.id) || motion.shownAt===undefined) continue;
+          if (!view.current.represented.has(drop.id)) continue;
+          motion.shownAt ??= now;
           const elapsedMs = now-Math.max(motion.born,motion.shownAt);
           if (elapsedMs < lootReadableDelay(motion)) waiting = true;
           else ready.push({ id: drop.id, elapsedMs });

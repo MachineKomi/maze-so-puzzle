@@ -39,7 +39,7 @@
       "compressedJsBytes": 1400,
       "compressedCssBytes": 0,
       "runtimePublicBytes": 0,
-      "reason": "Astra allocates1400 gzip9 JS bytes for bounded enemy reward tables, dual-source capacity, protected v5 migration, strict run binding and final-battle representation priority. Candidate measures173713 (+1302 over19),1228 above the previous ceiling. No CSS/media/dependency growth. This byte allocation is not performance, device or release acceptance; independent review and qualification remain required.",
+      "reason": "Astra allocates1400 gzip9 JS bytes for bounded enemy tables, dual-source capacity, protected v5 migration, strict run binding, source priority and visible reward timing. Frozen candidate measures173829 (+1418 over19), within173885 ceiling using inherited headroom. No CSS/media/dependency growth. Byte allocation is not device or release acceptance; independent review and qualification remain required.",
       "evidencePath": "docs/plans/LOOT-03B-enemy-rewards-execution.md",
       "reviewBy": "2026-10-07",
       "rollbackPoint": "Before release keep web19. After schema5 is written, use a forward-compatible correction retaining v5/rules5 reward receipts and prior migrations; preserve grounded and accepted value, completion idempotence, CAMERA17 and the Vercel guard. Do not roll back to a v4-only writer or clear saves."

@@ -63,7 +63,7 @@ export function mountRewardPriorityHarness(host:HTMLElement, lite:boolean) {
       release(){setWithheld(undefined);},
       treasure(){setGame(current=>{const resolved={...current,collectedObjectIds:[...current.collectedObjectIds,treasure.id]};return{...resolved,loot:scatterTreasure(level,resolved,treasure)};});},
       read(){return{game,represented:game.loot.sources.map(s=>({objectId:s.objectId,currency:s.currency,ids:s.drops.filter(d=>view.current.represented.has(d.id)).map(d=>d.id)})),
-        shown:[...view.current.motions].filter(([id,m])=>view.current.represented.has(id)&&m.shownAt!==undefined).map(([id])=>id)}}
+        motions:[...view.current.motions.keys()],shown:[...view.current.motions].filter(([id,m])=>view.current.represented.has(id)&&m.shownAt!==undefined).map(([id])=>id)}}
     };
     return <div style={{position:"relative",width:480,height:480}}><div className="camera-world"/>
       <div data-reward-anchor="ame" style={{position:"absolute",left:240,top:240,width:80,height:80}}/>

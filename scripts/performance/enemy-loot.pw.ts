@@ -130,9 +130,45 @@ for(const lite of [false,true])test(`saturated loot releases enemy then new trea
   expect(visible(result.released).filter((s:any)=>s.objectId==='priority-enemy').map((s:any)=>s.currency).sort()).toEqual(['gold','science']);
   expect(visible(result.treasure).some((s:any)=>s.objectId==='priority-treasure')).toBe(true);
   for(const row of [result.released,result.treasure]) {
-    const ids=visible(row).flatMap((s:any)=>s.ids);expect(ids.length).toBeLessThanOrEqual(lite?8:20);expect(ids.every((id:string)=>row.shown.includes(id))).toBe(true);
+    const ids=visible(row).flatMap((s:any)=>s.ids);expect(ids.length).toBeLessThanOrEqual(lite?8:20);expect(ids.every((id:string)=>row.motions.includes(id))).toBe(true);
+    expect(row.shown).toEqual([]); // Paused admission cannot count as visible reading time.
     expect(row.game.goldStarsCollected+row.game.sciencePointsCollected).toBe(0);
     for(const source of row.game.loot.sources)expect(source.drops.reduce((n:number,d:any)=>n+d.amount,0)).toBe(source.amount);
   }
   await writeFile(resolve(output,`saturation-${lite}.json`),JSON.stringify(result,null,2));
+});
+
+for(const boundary of ['hidden-battle','restored-home'] as const)test(`enemy loot readable interval survives ${boundary}`,async({page})=>{
+  const snapshot=savedFixture(boundary==='restored-home'?{...f,before:f.result.state}:f,`readable-${boundary}`);
+  await page.addInitScript(({snapshot,keys,progress})=>{
+    localStorage.setItem(keys.run,JSON.stringify(snapshot));localStorage.setItem(keys.progress,JSON.stringify(progress));
+  },{snapshot,keys,progress:createDefaultPlayerProgress(16)});
+  const read=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)!).game,keys.run);
+  const enter=async()=>{await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();await page.bringToFront();};
+  await page.goto('/');
+  if(boundary==='hidden-battle'){
+    await enter();await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);
+    await expect(page.locator('.battle-presentation')).toBeVisible();
+    // Explicit synthetic visibility signal exercises the production cancellation
+    // handler and hook. This is not evidence of browser background throttling.
+    await page.evaluate(()=>{
+      Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});
+      Object.defineProperty(document,'visibilityState',{configurable:true,get:()=> 'hidden'});
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await expect(page.locator('.battle-presentation')).toHaveCount(0);
+  }
+  await page.waitForTimeout(1200);const paused=await read();
+  expect(paused.goldStarsCollected+paused.sciencePointsCollected).toBe(0);
+  if(boundary==='restored-home')await enter();else await page.evaluate(()=>{
+    delete (document as any).hidden;delete (document as any).visibilityState;
+    document.dispatchEvent(new Event('visibilitychange'));
+  });
+  await page.waitForTimeout(350);const readable=await read();
+  expect(readable.goldStarsCollected+readable.sciencePointsCollected).toBe(0);
+  expect(readable.loot.sources.every((s:any)=>s.drops.every((d:any)=>d.phase==='grounded'))).toBe(true);
+  await page.waitForTimeout(1300);const after=await read();
+  expect(after.goldStarsCollected+after.sciencePointsCollected).toBeGreaterThan(0);
+  for(const source of after.loot.sources)expect(source.credited+source.drops.reduce((n:number,d:any)=>n+d.amount,0)).toBe(source.amount);
+  await writeFile(resolve(output,`readable-${boundary}.json`),JSON.stringify({boundary,syntheticVisibility:boundary==='hidden-battle',paused,readable,after},null,2));
 });

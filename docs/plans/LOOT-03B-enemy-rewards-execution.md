@@ -85,7 +85,16 @@ No clone, media copy, native package, deletion or archive is authorized here.
 
 ## Candidate evidence checkpoint
 
-734 tests across74 files and production build pass. Initial gzip9 JS173713
-(+1302 over19); named1400-byte allocation brings the ceiling to173885, with
-unchanged CSS/public/dependencies. Browser and paired performance are in flight.
+735 tests across74 files and production build pass. Corrected gzip9 JS173829
+(+1418 over19); named1400-byte allocation and inherited headroom leave56 bytes
+below173885. CSS/public/dependencies are unchanged. Earlier53 browser cases passed;
+the corrected55-case matrix and paired performance are in flight.
 No performance or publication acceptance follows from compilation alone.
+
+Independent source review found that an unseen hidden/Home interval could age a
+new drop. First-readable timing now starts only when enabled, visible and focused;
+interruption restarts incomplete intervals. Accepted claims still settle once.
+Production-browser tests cover hidden battle cancellation (explicit synthetic
+visibility signal) and a real Home delay before restoring grounded rewards.
+The Power correction separately admits combat bursts per impact and starts only
+implicit potion appearances at first paint; explicit combat clocks stay absolute.
