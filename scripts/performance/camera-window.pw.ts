@@ -85,6 +85,43 @@ test.beforeAll(async () => {
   await writeFile(resolve(out, "fixtures.json"), JSON.stringify({ keys, progress, preferences: DEFAULT_PRESENTATION_PREFERENCES, fixtures }, null, 2));
 });
 
+for (const dpr of [1, 3]) test(`CAMERA17 minimap painted palette DPR${dpr}`, async ({ browser }) => {
+  const f = fixtures[0]!, context = await browser.newContext({ viewport: { width: 844, height: 390 }, deviceScaleFactor: dpr });
+  try {
+    const page = await context.newPage();
+    await page.addInitScript(({ keys, progress, snapshot, preferences }) => {
+      localStorage.setItem(keys.run, JSON.stringify(snapshot)); localStorage.setItem(keys.progress, JSON.stringify(progress));
+      localStorage.setItem(keys.preferences, JSON.stringify(preferences));
+    }, { keys, progress, snapshot: f.snapshot, preferences: { ...DEFAULT_PRESENTATION_PREFERENCES, muted: true } });
+    await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click(); await page.getByRole("button", { name: /^Continue/ }).click();
+    await page.locator(".maze-board").waitFor(); await page.waitForTimeout(400);
+    const view = new Set(getVisibleTileKeys(f.level, f.before.position)), seen = new Set([...f.snapshot.revealedTiles, ...view]);
+    const occupied = new Set([...f.level.objects.map(o => `${o.at.x},${o.at.y}`), `${f.level.exit.x},${f.level.exit.y}`, `${f.before.position.x},${f.before.position.y}`]);
+    const colors: Record<string, number[]> = { floor: [246,217,145], wall: [116,115,162] };
+    const samples: { x: number; y: number; state: string; expected: number[] }[] = [];
+    for (const state of ["current-floor", "current-wall", "remembered", "mystery"]) {
+      outer: for (let y=1;y<f.level.height-1;y++) for(let x=1;x<f.level.width-1;x++) {
+        const key=`${x},${y}`, kind=f.level.terrain[y]![x]!;
+        if(occupied.has(key)) continue;
+        if(state.startsWith("current") ? !view.has(key)||kind!==state.slice(8) : state==="remembered" ? !seen.has(key)||view.has(key)||!colors[kind] : seen.has(key)) continue;
+        let expected=state==="mystery"?[58,55,79]:colors[kind]!;
+        if(state==="remembered") { const l=expected[0]!*.2126+expected[1]!*.7152+expected[2]!*.0722; expected=expected.map((c,i)=>(l+(c-l)*.56)*.9*.86+[58,55,79][i]!*.14); }
+        samples.push({x,y,state,expected}); break outer;
+      }
+    }
+    expect(samples).toHaveLength(4);
+    const png = await page.locator(".minimap-terrain").screenshot();
+    const pixels = await page.evaluate(async ({ data, samples, width, height }) => {
+      const img = new Image(); img.src=`data:image/png;base64,${data}`; await img.decode();
+      const c=document.createElement("canvas"); c.width=img.width;c.height=img.height;const ctx=c.getContext("2d")!;ctx.drawImage(img,0,0);
+      return samples.map(s=>({...s,pixel:[...ctx.getImageData(Math.floor((s.x+.5)/width*c.width),Math.floor((s.y+.5)/height*c.height),1,1).data]}));
+    }, { data: png.toString("base64"), samples, width: f.level.width, height: f.level.height });
+    await writeFile(resolve(out, `map-palette-dpr${dpr}.png`), png);
+    await writeFile(resolve(out, `map-palette-dpr${dpr}.json`), JSON.stringify(pixels, null, 2));
+    for(const sample of pixels) for(let channel=0;channel<3;channel++) expect(Math.abs(sample.pixel[channel]!-sample.expected[channel]!),sample.state).toBeLessThanOrEqual(4);
+  } finally { await context.close(); }
+});
+
 for (const profile of [{ width: 844, height: 390, dpr: 3 }, { width: 1080, height: 810, dpr: 2 }]) {
   for (const f of fixtures) test(`CAMERA17 continuous bounded world and map ${f.id} ${profile.width}`, async ({ browser }) => {
     const context = await browser.newContext({ viewport: profile, deviceScaleFactor: profile.dpr });

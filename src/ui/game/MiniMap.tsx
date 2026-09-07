@@ -6,6 +6,9 @@ import type { LevelDefinition, LevelObject, Point } from "../../game/types";
 import { CatalogueImage } from "../CatalogueImage";
 import { describeObject } from "./descriptions";
 
+// Intrinsic paint survives <use> cloning; ancestor-dependent CSS selectors do not.
+const TERRAIN_COLORS: Record<string, string> = { floor: "#f6d991", wall: "#7473a2", water: "#55bfc0", lava: "#ef8065", poison: "#a583c4", hole: "#272334" };
+
 interface MiniMapProps {
   readonly level: LevelDefinition;
   readonly position: Point;
@@ -88,7 +91,7 @@ export const MiniMap = memo(function MiniMap({
       >
         <svg className="minimap-terrain" viewBox={`0 0 ${level.width} ${level.height}`} preserveAspectRatio="none">
           <defs>
-            <g id={`${id}-terrain`}>{terrainPaths.map(({ kind, d }) => <path key={kind} className={`map-${kind}`} d={d} />)}</g>
+            <g id={`${id}-terrain`}>{terrainPaths.map(({ kind, d }) => <path key={kind} fill={TERRAIN_COLORS[kind]} d={d} />)}</g>
             <clipPath id={`${id}-seen`}><path d={seenPath} /></clipPath>
             <clipPath id={`${id}-view`}><path d={viewPath} /></clipPath>
             <pattern id={`${id}-grid`} patternUnits="userSpaceOnUse" width="1" height="1">
