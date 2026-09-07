@@ -8,6 +8,12 @@ const repoRoot = resolve(import.meta.dirname, "../..");
 const commit = execFileSync("git", ["rev-parse", "HEAD"], { cwd: repoRoot, encoding: "utf8" }).trim().slice(0, 12);
 const browserName = process.env.MAZE_PERF_BROWSER ?? "chromium";
 if (!["chromium", "webkit", "firefox"].includes(browserName)) throw Error("Unsupported performance browser");
+// Optional published jump verification reuses actual engine routes in fresh
+// contexts after byte identity is verified separately. No local servers needed.
+const publicJumpOrigin = process.env.MAZE_PUBLIC_JUMP_ORIGIN;
+if (publicJumpOrigin && !["https://mazesopuzzle.com", "https://maze-so-puzzle.vercel.app"].includes(publicJumpOrigin)) {
+  throw Error("Unsupported published jump origin");
+}
 const evidenceRoot = resolve(
   process.env.MAZE_PERF_EVIDENCE_DIR
     ?? resolve(tmpdir(), "maze-so-puzzle-performance", commit, runId),
@@ -32,7 +38,7 @@ export default defineConfig({
     ["json", { outputFile: resolve(evidenceRoot, "playwright-report.json") }],
   ],
   use: {
-    baseURL: "http://127.0.0.1:4173",
+    baseURL: publicJumpOrigin ?? "http://127.0.0.1:4173",
     browserName,
     launchOptions: browserName === "chromium" ? {
       channel: "msedge",
@@ -47,7 +53,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
     video: "off",
   },
-  webServer: [{
+  webServer: publicJumpOrigin ? undefined : [{
     command: "npm run preview -- --host 127.0.0.1 --port 4173 --strictPort",
     url: "http://127.0.0.1:4173",
     reuseExistingServer: false,

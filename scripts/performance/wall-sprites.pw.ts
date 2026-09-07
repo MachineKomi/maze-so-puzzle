@@ -31,11 +31,15 @@ for(const query of ['all&theme=8','all&theme=0','light=bottom-left&theme=9','lig
  }finally{await context.close();}
 });
 
-for(const query of ['compare&start=0','compare&start=16','compare&enemies','compare&items','compare&weapons'])test(`FIELD21 corridor proportions ${query}`,async({page})=>{
+for(const query of ['compare&start=0','compare&start=16','compare&enemies','compare&items','compare&weapons','compare&keys','compare&markers'])test(`FIELD21 corridor proportions ${query}`,async({page})=>{
  await page.setViewportSize({width:1050,height:900});
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(`http://127.0.0.1:1421/scripts/art_review/wall-sprite-lab.html?${query}`);
  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));});
+ const allImages=await page.locator('img').evaluateAll(images=>images.map(i=>({id:i.dataset.artId,loaded:!!i.naturalWidth})));
+ expect(allImages.every(i=>i.loaded)).toBe(true);
+ if(query.includes('keys'))expect(await page.locator('.object-key').count()).toBe(6);
+ if(query.includes('markers'))expect(await page.locator('.object-door,.object-portal,.object-layer .goal-sprite').count()).toBe(14);
  const rows=await page.locator('img[data-field-layout]').evaluateAll(images=>images.map(i=>{
   const image=i as HTMLImageElement,r=image.getBoundingClientRect(),tile=image.parentElement!.getBoundingClientRect();
   const [x,y,w,h]=image.dataset.artVisibleBounds!.split(',').map(Number);
@@ -44,7 +48,7 @@ for(const query of ['compare&start=0','compare&start=16','compare&enemies','comp
  }));
  for(const r of rows){expect(r.loaded).toBe(true);expect(r.left).toBeGreaterThanOrEqual(.048);expect(r.width).toBeLessThanOrEqual(.902);expect(r.height).toBeLessThanOrEqual(r.role==='item'?.902:1.352);}
  expect(errors).toEqual([]);const name=query.replaceAll(/[&=]/g,'-');
- await writeFile(resolve(output,`${name}.json`),JSON.stringify({errors,rows},null,2));
+ await writeFile(resolve(output,`${name}.json`),JSON.stringify({errors,rows,allImages},null,2));
  await page.screenshot({path:resolve(output,`${name}.png`),fullPage:true});
 });
 

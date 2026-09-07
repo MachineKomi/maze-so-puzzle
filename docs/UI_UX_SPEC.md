@@ -32,20 +32,24 @@ owners. [Source and browser evidence](reviews/2026-09-07-book03-move02-candidate
 This behavior is [published and verified](reviews/2026-09-07-v02216-public-verification.md);
 Q07/P18 retains the new Human observation request.
 
-## WALL-04C field scale and depth — web0.22.15
+## FIELD-21 field proportions and depth — web0.22.21
 
-The Human requests larger artwork inside the unchanged logical tile grid.
-Ame, enemies, friends, items and decorative drops occupy approximately90% of
-tile width by visible alpha, with preserved proportions and unrestricted tile
-height. Grounded actors stand between the actual wall feet; rear walls stay
+The Human accepts balanced interior walls and requests corrected relative scale.
+Actors and field items use at most90% tile width by visible alpha, with preserved
+proportions and respective height caps1.35/.90 tiles. Ame is1.35 high/.684 wide;
+broad/short creatures preserve their natural silhouettes. Gold/Science drops
+are.28 tile diameter, Power.22; generated replacement sprites remain queued.
+Grounded actors stand between the actual wall feet; rear walls stay
 behind them and front walls cover only lower feet in a bounded30% rear-tile
 band. Power labels remain readable inside the camera board, including its upper
 edge. Held equipment and replacement battle/rescue/jump actors stay registered.
 Complete cage frames retain recognizable cropped friends; rescue starts with
-the same crop. Larger drops keep their existing credit and timing semantics;
-physical collection is still the separate LOOT-03 plan. See the
+the same crop. Airborne Ame/equipment/badge draw above all walls, with shadow/
+ring on the ground below foreground walls; landing restores normal depth.
+Only exterior wall caps thicken to close frame gutters. Existing authored/enemy
+physical collection, save and Power rules remain unchanged. See the
 [implemented contract](LIGHTING_AND_DEPTH_SPEC.md),
-[qualification](reviews/2026-09-07-v02215-web-qualification.md) and
+[qualification](reviews/2026-09-07-field21-qualification.md) and
 [Human queue](HUMAN_REVIEW_QUEUE.md). Earlier release labels below are historical;
 the phone composition, audio balance and Book behavior remain included.
 

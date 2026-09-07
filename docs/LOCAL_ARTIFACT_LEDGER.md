@@ -10,6 +10,36 @@ jump/reward/browser checks and paired measurements; record final counts below.
 No new repository/media clone, native package, deletion or archive. Port4271
 is an older unowned preview; this slice owns only its newly launched helpers.
 
+### FIELD-21 completed local qualification inventory
+
+All folders below are under `C:/GameDev/maze-game-qa/performance/`. Total
+**461 files /296653434 bytes across12 folders**, including frozen20. Retain this
+named set for explicit Human cleanup review; do not create further duplicate
+local scene racks after qualification. Public release verification adds a small
+separately inventoried set. No deletion/archive or native/repository/media clone.
+
+| Folder | Files | Bytes | Purpose |
+| --- | ---: | ---: | --- |
+| release-v02220 |4|744438|Frozen entry only, shared media. |
+| field21-proportion-audit |1|17995|61-entry measured before/after alpha sizing. |
+| field21-baseline-racks |28|21595941|13 original20 visual cases. |
+| field21-browser |172|113324280|73 preliminary cases before ground split; historical supporting proof. |
+| field21-final-browser |100|55592593|46 final scene/rack/jump/perimeter cases. |
+| field21-final-loot |88|64231874|32 final loot/Power/save/count cases. |
+| field21-markers |6|758705|2 final extra key/door/portal/goal racks. |
+| field21-enemy-frames |5|10039547|Five untraced pairs/profile. |
+| field21-enemy-work |25|10289394|Five separately traced pairs/profile. |
+| field21-camera-frames |5|9906348|Five untraced ordinary camera pairs/profile. |
+| field21-camera-work |25|10136691|Five separately traced ordinary camera pairs/profile. |
+| field21-summary |2|15628|Reproducible aggregates and final source/dist identity. |
+
+One existing dist is reused. Local helpers and browsers owned by the slice have
+stopped; old unowned4271 remains untouched. [Qualification](reviews/2026-09-07-field21-qualification.md)
+distinguishes final80 contracts across46+32+2 from the earlier73. The final
+public jump check can reuse actual route/depth tests without local servers:
+set `MAZE_PUBLIC_JUMP_ORIGIN` to either existing public origin and select only
+`JUMP camera follows|FIELD21 horizontal jump depth`; verify public bytes first.
+
 ## Current release inventory — web0.22.20
 
 Owner Astra; existing repo/installed tools and dist reused. The completed enemy20
