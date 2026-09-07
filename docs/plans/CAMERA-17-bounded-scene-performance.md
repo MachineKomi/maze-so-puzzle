@@ -135,3 +135,21 @@ reports stutter, the next investigation is a Safari Web Inspector recording on
 an affected device: layer repaint/allocation versus main-thread input/save work,
 same maze/settings and OS. Only then select a further renderer/asset or input
 change. Do not declare a minimum RAM spec or silently force Lite based on brand.
+
+## LOOT-03 retained cold-opening follow-up
+
+The [v18 qualification](../reviews/2026-09-07-v02218-web-qualification.md) compares
+public17 and physical authored-loot18. Ordinary camera Raster is essentially
+neutral. Both versions show one cold source-opening hitch in each CPU4 measured
+loot run, with matching untraced worst66.7ms phone/83.3ms tablet;18 has added
+claim/credit layout work and a worse traced tablet tail. Do not call this fixed
+or attribute the full delay to RAM. Keep it separate from sustained camera travel.
+
+Next bounded performance diagnosis, when selected or supported by Q08 feedback:
+instrument keydown/engine, save validation/write, first Canvas allocation/draw,
+layout and first presented movement frame on the same opening. Compare cold and
+subsequent openings under identical settings; preserve the current baseline and
+normal movement controls. Test a concrete isolated change only after locating
+repeatable work. Do not preallocate a large idle Canvas or disable physical loot
+speculatively. Q08 can additionally report whether opening Gold/Science visibly
+pauses on the affected devices; this observation does not block enemy-table design.

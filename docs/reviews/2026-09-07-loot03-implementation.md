@@ -1,7 +1,10 @@
 # LOOT-03 A — authored physical collection
 
-In progress on `codex/physical-authored-loot`, based on0c4535e. Web0.22.17
-remains live. CAMERA-17 is locally qualified; physical iPhone13/iPad8 stutter
+Implemented and locally qualified on `codex/physical-authored-loot`, based on0c4535e.
+Frozen runtime85f49ea/version18 has actual independent Sol source/visual/performance
+acceptance within the [web qualification](2026-09-07-v02218-web-qualification.md).
+Publication/public verification remain the next step. Web0.22.17 remains live.
+CAMERA-17 is locally qualified; physical iPhone13/iPad8 stutter
 remains Q08/P19. Further speculative renderer changes would not resolve that
 missing device evidence. Continue the authorized complete authored-loot slice.
 
