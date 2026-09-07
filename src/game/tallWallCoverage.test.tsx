@@ -103,6 +103,17 @@ function forbiddenCells(level: LevelDefinition): Rect[] {
 }
 
 describe("tall wall continuous geometry coverage", () => {
+  it("fills exterior frame strips and corners without exposing floor beyond the perimeter", () => {
+    const level = { ...CURATED_LEVELS[0]!, width:5, height:5,
+      terrain: Array.from({length:5},(_,y)=>Array.from({length:5},(_,x)=>x===0||y===0||x===4||y===4?"wall":"floor")) } as LevelDefinition;
+    const base = createRoundedCellUnionGeometry({left:0,top:0,right:4,bottom:4},(x,y)=>level.terrain[y]?.[x]==="wall",.13);
+    const tall = createTallWallGeometry(level,base,{x:0,y:-1});
+    // Test the visible cap's actual interior membership, not just its bounds.
+    for (let coordinate=.005;coordinate<5;coordinate+=.05) for (const p of [
+      {x:.005,y:coordinate},{x:4.995,y:coordinate},
+      {x:coordinate,y:.005},{x:coordinate,y:4.995},
+    ]) expect(capContains(tall.cap,{x:p.x-tall.dx,y:p.y+tall.height}),JSON.stringify(p)).toBe(true);
+  });
   it("detects face interiors, curved bulges and wholly enclosed forbidden regions", () => {
     const r = { left: .4, right: .6, top: .4, bottom: .6 };
     expect(clippedArea([{ x: 0, y: .49 }, { x: 1, y: .49 }, { x: 1, y: .51 }, { x: 0, y: .51 }], r)).toBeCloseTo(.004);

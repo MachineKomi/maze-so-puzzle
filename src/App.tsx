@@ -2516,6 +2516,13 @@ function App() {
               )}
 
               {jumpPresentation && (
+                <div className="jump-ground" data-scene-slot="effects" aria-hidden="true"
+                  style={{...cameraLayerStyle(jumpPresentation.from,cameraWindow), "--jump-duration":`${jumpPresentation.durationMs}ms`} as CSSProperties}>
+                  <i className="jump-presentation-shadow" />
+                  <i className="jump-spring-squash" />
+                </div>
+              )}
+              {jumpPresentation && (
                 <div
                   data-scene-slot="effects"
                   className="jump-presentation"
@@ -2530,13 +2537,11 @@ function App() {
                   } as CSSProperties}
                   aria-hidden="true"
                 >
-                  <i className="jump-presentation-shadow" />
                   <div className="jump-presentation-body" style={fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}>
                     <CatalogueImage usage="field" fieldRole="actor" className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
                     <CatalogueImage usage="field" fieldDetail className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} style={JUMP_BOOTS_STYLE} />
                     {game.hasSword && <CatalogueImage usage="field" fieldDetail className="jump-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "jump")} />}
                     <span className="power-badge player-power">{displayedPower}</span>
-                    <i className="jump-spring-squash" />
                   </div>
                 </div>
               )}

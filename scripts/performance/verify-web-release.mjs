@@ -48,7 +48,7 @@ try { for (const [width, height] of [[780, 312], [1280, 720]]) {
     await page.getByRole('button', { name: 'Start the maze', exact: true }).click();
     await page.locator('.maze-board').waitFor({ state: 'visible' }); await page.waitForTimeout(600);
     const wall = await page.locator('.maze-terrain-svg').getAttribute('data-wall-lighting');
-    if (wall !== '04c-balanced-v1') throw Error('Wrong wall construction');
+    if (wall !== '04c-balanced-v2') throw Error('Wrong wall construction');
     const hazard = await page.locator('.maze-terrain-svg').getAttribute('data-hazard-surface');
     if (hazard !== '03-living-connected') throw Error('Wrong hazard surface revision');
     // Right from the first maze's start rescues an adjacent friend without a

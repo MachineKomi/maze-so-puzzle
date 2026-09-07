@@ -37,41 +37,50 @@ This supersedes older hazard-excluding receiver and no-lip descriptions below;
 The scoped Full idle rendering cost is explicitly recorded; Q04/P18 beauty/feel
 feedback and physical-device acceptance remain separate.
 
-## Current wall and field-art contract — web0.22.15
+## Current wall and field-art contract — FIELD-21 / web0.22.21
 
-Runtime e69f3e4 implements `04c-balanced-v1`. The Human accepted13's tall3D
-direction, then requested balanced caps and larger grounded artwork. Exposed
+Frozen runtime6cc9f86 implements `04c-balanced-v2`; publication status belongs
+to the joint state. The Human explicitly accepts the balanced interior shape
+and lighting in the [latest intake](user-playtests/2026-09-07-balanced-wall-acceptance-and-relative-scale.md). Exposed
 horizontal/vertical caps are .47tile, projected height .81, skew .18 and rear
 overlap .28. Construct rounded exterior unions after footprint mapping; paint
 only projected cap/side volume. The old flat W is logical metadata, not a painted
 underlay. Physical footprints own contact/cast exclusions. Cast reach .30 with
 opacity .25; rim width .035 with opacity .64. Eight normalized light bearings
-alter lighting, never wall geometry, level fingerprints or collision.
+alter lighting, never wall geometry, level fingerprints or collision. Only map-
+exterior cap strips extend beyond the clipped frame in v2 to close gutters and
+corners; open boundary tiles remain open and interior geometry stays unchanged.
 
 One wall paint graph is reused by a separate foreground SVG. Its clips cover
 only the bottom .28 of directly rear-adjacent non-wall tiles; analytic interiors
 and actual pixel proofs protect the top70%. This layer is z26, above ordinary,
-battle, rescue and jump bodies, below semantic receipts/door/portal magic. It
+battle and rescue bodies, below airborne Ame and semantic receipts/door/portal magic. It
 follows the existing scene-travel translation in the same clock, with no second
 rAF owner or per-frame React update. The wall behind an actor remains behind its
-body; the nearer wall can cover lower feet.
+body; the nearer wall can cover lower feet. A jump places body/equipment/badge
+at z27 while its separate shadow/ring stay at z25. Both roots translate from
+one point and all three cached animation handles use the same absolute clock.
+Landing and interruption restore the ordinary grounded layering.
 
-Field actors/items use .90 of tile width measured against registered visible
-alpha bounds, preserve aspect ratio and may extend above a tile. Ground anchor
-.765 is midway between actual wall foot edges. Ame is now1.776tile visibly tall:
-the Human's latest enlargement supersedes the earlier unchanged-Ame height
-ratio, not her identity. Attached gear, replacement actors and label grounding
+Field actors/items use at most .90 tile width measured against registered visible
+alpha bounds, preserving aspect ratio. Actors are capped at1.35 tile height;
+items at.90. Width is a clearance limit, not an instruction to inflate a narrow
+silhouette. Ground anchor.765 is midway between actual wall foot edges. Ame is
+now1.35 tile visibly tall and.684 wide; the former1.776 height is superseded.
+Attached gear, replacement actors, rendition demand and label grounding
 share the registration. Power labels retain a board-relative .36tile lower
 bound for their bottom edge. Cages keep complete original frames and recognizable
-cropped friends; rescue begins at the same registration.
+cropped friends; rescue begins at the same registration. Reward presentation
+diameters are.28 Gold/Science and.22 Power in Canvas and fallback; trail/shadow/
+count placement follows this separate small-token scale. Proper generated art
+remains ART-REWARD-01. Ledger quantities, save rules and collection are unchanged.
 
-[Qualification](reviews/2026-09-07-v02215-web-qualification.md) and
-[actual Sol review](reviews/2026-09-07-wall04c-sol-final-review.md) own cost,
+[Qualification](reviews/2026-09-07-field21-qualification.md) and
+[actual Sol review](reviews/2026-09-07-field21-sol-final-review.md) own cost,
 rendered-readability and engine limits. Cross-SVG reuse is proven in Chromium;
 WebKit was blocked by Windows Application Control. No native/iPad pass follows.
-The current hazard renderer below is retained but Human revision-required:
-HAZARD-03 must restore floor lip/fade, repair hazard shadow receivers and replace
-the rejected dashes. WALL-04C does not close that separate work.
+HAZARD-03 delivered the floor lip/fade, hazard receivers and replacement motion
+in16, as recorded above. Its Human material-feedback observation remains separate.
 
 ## Historical intake and predecessor contracts
 

@@ -85,3 +85,16 @@ DELIGHT/LEARN/HOLE/pace and the campaign/Garden/co-op roadmap remain intact.
 Documentation closure uses actual successful135bb3a as the unchanged deployment
 guard's baseline. Record the observed remote ignored-build result separately;
 no replacement game build is needed solely to align documentation SHAs.
+
+## Observed documentation closure
+
+Documentation checkpoint **5e3b07cca12ee684dabd219e1456cde58e412510** is backed
+up on main and the existing Codex branch. All 18 changed paths are Markdown;
+524 local links resolve and the whitespace check passes. The unchanged guard
+returns 0/SKIP against actual successful135bb3a and the exact docs HEAD.
+
+Vercel actually reported **Canceled by Ignored Build Step** at08:44:03UTC:
+[deployment record](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/34GkRRKw7ZosHAFMZGLZurk4TUsR).
+This is an observed remote skip, not just a local prediction. The public runtime
+remains135bb3a/6f083f4. This observation is backed up only on the existing Codex
+branch for the next runtime slice, avoiding a recursive main documentation loop.

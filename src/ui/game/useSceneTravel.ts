@@ -40,6 +40,7 @@ interface Binding {
   player: HTMLElement;
   replacement: HTMLElement | null;
   jumper: HTMLElement | null;
+  jumpGround: HTMLElement | null;
   jumpAnimations: Animation[];
   anchors: HTMLElement[];
   followers: {id:string;point:Point;node:HTMLElement}[];
@@ -100,6 +101,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     translate(b.player,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     if(b.replacement) translate(b.replacement,dx+(point.x-b.input.position.x)*cellX,dy+(point.y-b.input.position.y)*cellY);
     if(b.jumper && jump) translate(b.jumper,dx+(point.x-jump.from.x)*cellX,dy+(point.y-jump.from.y)*cellY);
+    if(b.jumpGround && jump) translate(b.jumpGround,dx+(point.x-jump.from.x)*cellX,dy+(point.y-jump.from.y)*cellY);
     // Local CSS poses use this same clock, including a delayed React mount or
     // cancellation. These are three cached animation handles, never layout reads.
     if(jump) for(const animation of b.jumpAnimations) animation.currentTime=jumping
@@ -168,7 +170,8 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
     });
     for(const id of followers.current.keys()) if(!boundFollowers.some(f=>f.id===id)) followers.current.delete(id);
     const jumper=discover ? board.querySelector<HTMLElement>('[data-travel-actor="jump"]') : prior.jumper;
-    const jumpAnimations=discover ? (jumper?.getAnimations({subtree:true})??[])
+    const jumpGround=discover ? board.querySelector<HTMLElement>('.jump-ground') : prior.jumpGround;
+    const jumpAnimations=discover ? [...jumper?.getAnimations({subtree:true})??[],...jumpGround?.getAnimations({subtree:true})??[]]
       .filter(animation=>animation instanceof CSSAnimation && animation.animationName.startsWith("spring-jump-")) : prior.jumpAnimations;
     if(discover) for(const animation of jumpAnimations) animation.pause();
     binding.current={input,board,world:discover ? board.querySelector<HTMLElement>(".camera-world")! : prior.world,
@@ -179,7 +182,7 @@ export function useSceneTravel(input: TravelInput): RefObject<SceneTravelSnapsho
       window:prior?.input.grid===input.grid ? prior.window : undefined,
       player:discover ? board.querySelector<HTMLElement>(".player-layer")! : prior.player,
       replacement:discover ? board.querySelector<HTMLElement>('[data-travel-actor="replacement"]') : prior.replacement,
-      jumper,jumpAnimations,
+      jumper,jumpGround,jumpAnimations,
       anchors:discover ? Array.from(board.querySelectorAll<HTMLElement>("[data-travel-camera-anchor]")) : prior.anchors,followers:boundFollowers,
       width:prior?.board===board ? prior.width : board.clientWidth,
       height:prior?.board===board ? prior.height : board.clientHeight};

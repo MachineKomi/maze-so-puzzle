@@ -2,7 +2,7 @@ import { StageFitContext } from "./ResponsiveStage";
 import { useContext, useLayoutEffect, useRef, useState, useSyncExternalStore, type ImgHTMLAttributes } from "react";
 import type { RuntimeArtUsage } from "../artCatalog";
 import { resolveUiArt, selectArtRendition, type UiArt } from "./art";
-import { fieldArtStyle, type FieldArtRole } from "../fieldArtLayout";
+import { fieldArtStyle, measureFieldArt, type FieldArtRole } from "../fieldArtLayout";
 
 interface CatalogueImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   readonly art?: UiArt | string;
@@ -99,7 +99,7 @@ export function CatalogueImage({ art: identity, src, fallbackSrc, fieldRole, fie
       : element.current;
     // Demand is measured from the stable tile and canonical canvas, not the
     // selected rendition's slightly different alpha bounds (no resize loop).
-    return observeImageSize(target, size => setRenderedSize(fieldRole && art?.geometry ? size * .9 / art.geometry.visibleBounds[2] : size));
+    return observeImageSize(target, size => setRenderedSize(fieldRole && art?.geometry ? size * measureFieldArt(art.geometry, fieldRole).scale : size));
   }, [resolved, usage, fieldRole, art]);
   const fallback = resolved !== requested || selected?.fallback;
   const geometry = resolved === selected?.src ? selected?.geometry ?? art?.geometry : art?.geometry;

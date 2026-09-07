@@ -6,7 +6,7 @@ import type { SurfaceQuality } from "../motion";
 import type { SceneTravelSnapshot } from "../ui/game/useSceneTravel";
 import { playRewardArrival, type SoundHandle } from "../sound";
 import { advanceRewardToken, makeRewardTokens, startRewardAppearance, REWARD_CAP, rewardProjection, rewardSpaceOpen, type RewardEmission, type RewardToken } from "./rewardPhysics";
-import { REWARD_COLORS, rewardGlyph } from "./rewardGlyphs";
+import { REWARD_COLORS, REWARD_DIAMETER, rewardGlyph } from "./rewardGlyphs";
 import { lootPose, type LootView } from "./useLootCollection";
 import { StageFitContext } from "../ui/ResponsiveStage";
 import { drawRewardNumber, rewardNumbers } from "./rewardNumbers";
@@ -95,28 +95,28 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
         const pose = lootPose(motion, drop.at, visual.position, now, loot.current.animate);
         movingLoot ||= pose.moving;
         const at = rewardProjection(pose, visual.camera, visual.contentSize);
-        // Rotation fits the90%-tile visible envelope at every angle.
-        const size = cell*.9/(57/64)*pose.scale;
+        const diameter = cell * REWARD_DIAMETER[source.currency];
+        const size = diameter/(57/64)*pose.scale;
         if (pose.moving && quality === "full") {
           const prior=lootPose(motion,drop.at,visual.position,now-45,true);
           if(lootLineClear(level,loot.current.game,{x:pose.x-.5,y:pose.y-.5},{x:prior.x-.5,y:prior.y-.5})) {
             const tail=rewardProjection(prior,visual.camera,visual.contentSize);
-            ctx.globalAlpha=.65;ctx.strokeStyle=REWARD_COLORS[source.currency];ctx.lineWidth=cell*.08;ctx.lineCap="round";
+            ctx.globalAlpha=.65;ctx.strokeStyle=REWARD_COLORS[source.currency];ctx.lineWidth=diameter*.13;ctx.lineCap="round";
             ctx.beginPath();ctx.moveTo(tail.x,tail.y);ctx.lineTo(at.x,at.y);ctx.stroke();
           }
         }
         ctx.globalAlpha = .22; ctx.fillStyle = "#332340";
-        ctx.beginPath(); ctx.ellipse(at.x,at.y+cell*.27,cell*.3,cell*.08,0,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(at.x,at.y+diameter*.3,diameter*.34,diameter*.09,0,0,Math.PI*2); ctx.fill();
         ctx.save(); ctx.translate(at.x,at.y-pose.lift*cell); ctx.rotate(pose.angle);
         ctx.globalAlpha = 1; ctx.drawImage(glyphs[source.currency],-size/2,-size/2,size,size); ctx.restore();
         if (drop.amount > 1) {
           ctx.globalAlpha = 1;
-          drawRewardNumber(ctx,numbers,drop.amount,at.x,at.y+cell*.09,Math.max(11,cell*.26));
+          drawRewardNumber(ctx,numbers,drop.amount,at.x,at.y+diameter*.8,Math.max(11,cell*.18));
         }
         if (pose.moving && quality === "full") {
           ctx.globalAlpha=1; ctx.strokeStyle="#fff2ae"; ctx.lineWidth=2;
-          ctx.beginPath(); ctx.moveTo(at.x-cell*.35,at.y-5);ctx.lineTo(at.x-cell*.35,at.y+5);
-          ctx.moveTo(at.x-cell*.35-5,at.y);ctx.lineTo(at.x-cell*.35+5,at.y);ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(at.x-diameter*.65,at.y-3);ctx.lineTo(at.x-diameter*.65,at.y+3);
+          ctx.moveTo(at.x-diameter*.65-3,at.y);ctx.lineTo(at.x-diameter*.65+3,at.y);ctx.stroke();
         }
       }
       for (const token of tokens) {
@@ -131,7 +131,7 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
         const at = rewardProjection(token, visual.camera, visual.contentSize);
         const distance = Math.hypot(target.x - token.x, target.y - token.y);
         const alpha = Math.min(1, Math.max(0, (token.due - now) / 90));
-        const size = cell * .9 / (57 / 64) * token.scale
+        const size = cell * REWARD_DIAMETER[token.kind] / (57 / 64) * token.scale
           * (now >= token.homingAt ? Math.max(.45, Math.min(1, distance / .3)) : 1);
         // Short in-plane trails stay in navigable space, not over wall tops.
         if (quality === "full" && token.trail.length > 1) {
@@ -227,8 +227,8 @@ export function RewardLayer({ port, level, scene, active, quality, muted, loot }
       .filter(({d})=>loot.current.represented.has(d.id)).map(({s,d})=><svg key={d.id} data-loot-fallback={s.currency} aria-hidden="true" viewBox="-.5 -.5 1 1"
         style={{position:"absolute",pointerEvents:"none",zIndex:23,left:`calc((${d.at.x} - var(--world-left)) * var(--world-tile-x))`,
           top:`calc((${d.at.y} - var(--world-top)) * var(--world-tile-y))`,width:"var(--world-tile-x)",height:"var(--world-tile-y)"}}>
-        {s.currency==="gold" ? <path d="M0,-.4 .1,-.13 .38,-.12 .17,.07 .23,.35 0,.2 -.23,.35 -.17,.07 -.38,-.12 -.1,-.13Z" fill="#ffc842" stroke="#785032" strokeWidth=".035" />
-          : <g fill="none" stroke="#458a94" strokeWidth=".065">{[0,60,-60].map(angle=><ellipse key={angle} rx=".39" ry=".15" transform={`rotate(${angle})`} />)}<circle r=".12" fill="#a8efce" /></g>}
-        {d.amount>1 && <text fontSize=".23" textAnchor="middle" y=".09" fill="#38205e" stroke="#fff9e9" strokeWidth=".025" paintOrder="stroke">{d.amount}</text>}
+        <g transform={`scale(${REWARD_DIAMETER[s.currency]/.8})`}>{s.currency==="gold" ? <path d="M0,-.4 .1,-.13 .38,-.12 .17,.07 .23,.35 0,.2 -.23,.35 -.17,.07 -.38,-.12 -.1,-.13Z" fill="#ffc842" stroke="#785032" strokeWidth=".035" />
+          : <g fill="none" stroke="#458a94" strokeWidth=".065">{[0,60,-60].map(angle=><ellipse key={angle} rx=".39" ry=".15" transform={`rotate(${angle})`} />)}<circle r=".12" fill="#a8efce" /></g>}</g>
+        {d.amount>1 && <text fontSize=".18" textAnchor="middle" y=".224" fill="#38205e" stroke="#fff9e9" strokeWidth=".025" paintOrder="stroke">{d.amount}</text>}
       </svg>),world)}</>;
 }

@@ -1,6 +1,8 @@
 import type { RewardKind } from "./rewardPhysics";
 
 export const REWARD_COLORS: Record<RewardKind, string> = { gold: "#f5bf4f", science: "#42aaa7", power: "#ee82bc" };
+// Small drops have their own visual scale, independent of field actors/items.
+export const REWARD_DIAMETER: Record<RewardKind, number> = { gold: .28, science: .28, power: .22 };
 
 /** Original effect glyphs. Draw once to a small atlas, not every animation frame.
  * Broad values and coloured material contours; no glow filter or white cutline. */

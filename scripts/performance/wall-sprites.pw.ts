@@ -18,7 +18,9 @@ for(const query of ['all&theme=8','all&theme=0','light=bottom-left&theme=9','lig
   await page.screenshot({path:resolve(output,`${name}.png`),fullPage:true});
   expect(errors).toEqual([]); expect(result.images.every(i=>!i.broken)).toBe(true);
   for(const i of result.images.filter(i=>i.field)) {
-   const bounds=i.alpha!.split(',').map(Number);expect(i.canvas*bounds[2]!).toBeGreaterThan(70);
+   const bounds=i.alpha!.split(',').map(Number);expect(i.canvas*bounds[2]!).toBeGreaterThan(35);
+   expect(i.canvas*bounds[2]!).toBeLessThanOrEqual(91);
+   expect(i.canvas*bounds[3]!).toBeLessThanOrEqual(i.field==='item'?91:136);
    if(i.physical>i.natural+2) {
     // These existing delivered items have no approved larger rendition. Keep
     // the explicit measured exception visible; don't invent or soften proof.
@@ -26,5 +28,43 @@ for(const query of ['all&theme=8','all&theme=0','light=bottom-left&theme=9','lig
     expect(i.sufficient).toBe('false'); expect(i.physical/i.natural).toBeLessThan(1.35);
    }
   }
+ }finally{await context.close();}
+});
+
+for(const query of ['compare&start=0','compare&start=16','compare&enemies','compare&items','compare&weapons','compare&keys','compare&markers'])test(`FIELD21 corridor proportions ${query}`,async({page})=>{
+ await page.setViewportSize({width:1050,height:900});
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(`http://127.0.0.1:1421/scripts/art_review/wall-sprite-lab.html?${query}`);
+ await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));});
+ const allImages=await page.locator('img').evaluateAll(images=>images.map(i=>({id:i.dataset.artId,loaded:!!i.naturalWidth})));
+ expect(allImages.every(i=>i.loaded)).toBe(true);
+ if(query.includes('keys'))expect(await page.locator('.object-key').count()).toBe(6);
+ if(query.includes('markers'))expect(await page.locator('.object-door,.object-portal,.object-layer .goal-sprite').count()).toBe(14);
+ const rows=await page.locator('img[data-field-layout]').evaluateAll(images=>images.map(i=>{
+  const image=i as HTMLImageElement,r=image.getBoundingClientRect(),tile=image.parentElement!.getBoundingClientRect();
+  const [x,y,w,h]=image.dataset.artVisibleBounds!.split(',').map(Number);
+  return{id:image.dataset.artId,role:image.dataset.fieldLayout,width:r.width*w!/tile.width,height:r.height*h!/tile.height,
+    left:(r.x+r.width*x!-tile.x)/tile.width,top:(r.y+r.height*y!-tile.y)/tile.height,loaded:!!image.naturalWidth};
+ }));
+ for(const r of rows){expect(r.loaded).toBe(true);expect(r.left).toBeGreaterThanOrEqual(.048);expect(r.width).toBeLessThanOrEqual(.902);expect(r.height).toBeLessThanOrEqual(r.role==='item'?.902:1.352);}
+ expect(errors).toEqual([]);const name=query.replaceAll(/[&=]/g,'-');
+ await writeFile(resolve(output,`${name}.json`),JSON.stringify({errors,rows,allImages},null,2));
+ await page.screenshot({path:resolve(output,`${name}.png`),fullPage:true});
+});
+
+for(const dpr of [1,2,3])test(`FIELD21 four perimeter edges eight lights DPR${dpr}`,async({browser})=>{
+ const context=await browser.newContext({viewport:{width:1050,height:900},deviceScaleFactor:dpr});
+ try{
+  const page=await context.newPage();await page.goto('http://127.0.0.1:1421/scripts/art_review/wall-sprite-lab.html?all&theme=8');
+  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));});
+  const rows=await page.locator('.terrain-tall-walls').evaluateAll(volumes=>volumes.map(volume=>{
+   const cap=volume.querySelector<SVGPathElement>('path[transform]')!,inverse=cap.transform.baseVal.consolidate()!.matrix.inverse(),gaps=[];
+   for(let at=.005;at<6;at+=.025)for(const p of [[.005,at],[5.995,at],[at,.005],[at,5.995]])
+    if(!cap.isPointInFill(new DOMPoint(p[0],p[1]).matrixTransform(inverse)))gaps.push(p);
+   return{light:volume.closest('section')!.querySelector('h2')!.textContent,gaps};
+  }));
+  expect(rows).toHaveLength(8);for(const row of rows)expect(row.gaps,row.light!).toEqual([]);
+  await page.locator('.maze-board').first().screenshot({path:resolve(output,`perimeter-dpr${dpr}.png`)});
+  await writeFile(resolve(output,`perimeter-dpr${dpr}.json`),JSON.stringify({scope:'Native SVG projected cap membership plus raster capture; unit proof separately checks continuous forbidden-area coverage',dpr,rows},null,2));
  }finally{await context.close();}
 });

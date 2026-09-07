@@ -7,7 +7,9 @@ export type FieldArtRole = "actor" | "item";
  * never pretend to be newly measured anatomical feet. */
 export function measureFieldArt(geometry: ArtGeometry, role: FieldArtRole = "actor", width = .9) {
   const [x, y, w, h] = geometry.visibleBounds;
-  const scale = width / w;
+  // Width is clearance, not a demand to inflate a narrow silhouette. Keep
+  // large detailed actors in proportion to broad creatures and ground items.
+  const scale = Math.min(width / w, (role === "actor" ? 1.35 : .9) / h);
   const anchor = role === "actor"
     ? geometry.groundLine ?? geometry.baseline ?? geometry.pivot[1]
     : y + h;

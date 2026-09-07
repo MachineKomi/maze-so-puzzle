@@ -35,7 +35,7 @@ for (const [width, height] of [[780, 312], [1194, 834]]) {
           await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click(); await page.getByRole("button", { name: /^Continue/ }).click();
           await expectUiRouteState(page, before);
           const terrain = page.locator('.maze-terrain-svg');
-          await expect(terrain).toHaveAttribute("data-wall-lighting", "04c-balanced-v1");
+          await expect(terrain).toHaveAttribute("data-wall-lighting", "04c-balanced-v2");
           await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
           await page.waitForTimeout(350);
           const initial = await terrain.innerHTML();
@@ -126,7 +126,7 @@ for (const [width, height] of [[780, 312], [1194, 834]]) {
       await page.getByRole("button", { name: "Surprise maze", exact: true }).click();
       await expect(page.getByRole("region", { name: `${level.name} maze`, exact: true })).toBeVisible();
       const terrain = page.locator('.maze-terrain-svg');
-      await expect(terrain).toHaveAttribute("data-wall-lighting", "04c-balanced-v1");
+      await expect(terrain).toHaveAttribute("data-wall-lighting", "04c-balanced-v2");
       const initial = await terrain.innerHTML();
       for (const step of route.slice(0, 24)) await replayRouteStep(page, step);
       expect(await terrain.innerHTML()).toBe(initial);

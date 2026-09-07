@@ -1,5 +1,11 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current Human override — FIELD-21:** balanced interior walls are explicitly
+accepted. [Scale/jump/perimeter correction](plans/FIELD-21-scale-jump-and-perimeter.md)
+now precedes chests: Astra writes on `codex/field-scale-refinement`; Sol independently
+reviews. Live remains0.22.20 until qualification and publication. Proper generated
+reward art is queued as ART-REWARD-01; current glyph shrinkage is not final art.
+
 **Current live state — web0.22.20:** release
 **135bb3a322d300cc528e977d5f09784f06f9d5b9**, reviewed5dc99c3, frozen runtime6f083f4.
 Astra owns runtime on `codex/enemy-loot-rewards`; actual Sol independently reviewed
@@ -20,6 +26,12 @@ disclosed. No Apple/3GB/WebKit or native acceptance. Published Windows remains0.
 native0.22.10 qualification remains held. Q05/P20 now covers authored and enemy loot.
 The following dated states preserve history; their branch and next-work statements
 are superseded by this current dispatch.
+
+Documentation closure5e3b07c is backed up on main and this Codex branch. Vercel
+actually skipped it at08:44:03UTC through the unchanged Ignored Build Step.
+The [observed receipt](reviews/2026-09-07-v02220-public-verification.md#observed-documentation-closure)
+is backed up on the Codex branch only for the next runtime slice; no extra main
+push or game build is needed to align its documentation SHA.
 
 **Historical operating state — September7, web0.22.19:** release
 **28842506f2b6b690e9bd7fc0f18c12957029de98**, reviewed4991f93, frozen runtime
