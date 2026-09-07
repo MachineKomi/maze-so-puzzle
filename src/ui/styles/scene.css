@@ -447,12 +447,7 @@
   background: #d79a2d;
 }
 .player-layer::before {
-  color: #fff1a6;
-  font-size: clamp(5px, calc(11cqw / var(--grid-size, 13)), 10px);
-  opacity: 0;
   pointer-events: none;
-  text-shadow: 0 0 4px #efab49;
-  animation: step-spark 420ms ease-out;
   content: "";
   position: absolute;
   z-index: -1;
@@ -464,26 +459,6 @@
   background: rgba(53,42,82,.26);
   filter: blur(3px);
   transform: translate(var(--cast-shadow-x, 0),var(--cast-shadow-y, 3px));
-}
-.player-layer::after {
-  position: absolute;
-  z-index: 3;
-  bottom: 2%;
-  color: #fff1a6;
-  font-size: clamp(5px, calc(11cqw / var(--grid-size, 13)), 10px);
-  content: "✦";
-  opacity: 0;
-  pointer-events: none;
-  text-shadow: 0 0 4px #efab49;
-  animation: step-spark 420ms ease-out;
-  right: 17%;
-  animation-delay: 55ms;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer::before {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer::after {
-  animation: none;
 }
 :root:is([data-motion=reduced],[data-quality=static]) .object-enemy {
   animation: none;
@@ -532,20 +507,6 @@
 /* Travel carries the actor and Power steadily; a small sprite-only sway adds life. */
 :root[data-motion="full"] .maze-board[data-travel-state="moving"] .player-layer { animation: ame-travel-sway 640ms ease-in-out infinite; transform-origin: 50% 76.5%; }
 @keyframes ame-travel-sway { 0%,100% { rotate: -1deg; } 50% { rotate: 1deg; } }
-.player-layer.move-a::before {
-  animation: step-spark-a 260ms ease-out;
-}
-.player-layer.move-a::after {
-  animation: step-spark-a 260ms ease-out;
-  animation-delay: 28ms;
-}
-.player-layer.move-b::before {
-  animation: step-spark-b 260ms ease-out;
-}
-.player-layer.move-b::after {
-  animation: step-spark-b 260ms ease-out;
-  animation-delay: 28ms;
-}
 .object-animal {
   width: 72%;
   height: 72%;
@@ -575,24 +536,6 @@
   inset: 0;
   width: 100%;
   height: 100%;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer.move-a {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer.move-b {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer.move-a::before {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer.move-a::after {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer.move-b::before {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .player-layer.move-b::after {
-  animation: none;
 }
 .maze-board.exploration-camera {
   cursor: pointer;
@@ -1634,10 +1577,6 @@
 
 @keyframes terrain-ambient-drift { 0%,100%{opacity:.36;transform:translate(0,3px)} 50%{opacity:.9;transform:translate(-7px,-7px)} }
 
-@keyframes step-spark {
-  0% { opacity: 0.8; transform: translateY(0) scale(0.5); }
-  100% { opacity: 0; transform: translateY(-85%) scale(1.2) rotate(25deg); }
-}
 
 @keyframes ame-hop-a {
   0% { transform: translateY(4%) scale(0.97); }
@@ -1651,15 +1590,6 @@
   100% { transform: translateY(0) scale(1); }
 }
 
-@keyframes step-spark-a {
-  0% { opacity: 0.74; transform: translateY(0) scale(0.52); }
-  100% { opacity: 0; transform: translateY(-72%) scale(1.08) rotate(20deg); }
-}
-
-@keyframes step-spark-b {
-  0% { opacity: 0.74; transform: translateY(0) scale(0.52); }
-  100% { opacity: 0; transform: translateY(-72%) scale(1.08) rotate(20deg); }
-}
 
 @keyframes battle-camera-punch {
   0%, 9%, 22%, 29%, 42%, 49%, 62%, 100% { transform: scale(1); }

@@ -315,7 +315,7 @@ test("UI ordinary completion, exactly-once reward, earned Book detail and safe m
   const level=CURATED_LEVELS[0]!;const route=deriveRoute(level,solveLevel(level,{avoidAnimals:true}).directions);
   await page.locator(".maze-board").focus();
   for(const step of route)await replayRouteStep(page,step);
-  await expect(page.getByRole("button",{name:"Stay here",exact:true})).toBeFocused();await screen(page,"optional-friend-missing-safe-stay");
+  await expect(page.getByRole("button",{name:/^Next maze/})).toBeFocused();await screen(page,"optional-friend-missing-next-default");
   await page.getByRole("button",{name:/^Next maze/}).evaluate((button:HTMLButtonElement)=>{button.click();button.click();});
   const progress=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),PLAYER_PROGRESS_STORAGE_KEY);expect(progress.totalCompletions).toBe(1);
   await page.getByRole("button",{name:"Start the maze"}).click();await action(page,"book");

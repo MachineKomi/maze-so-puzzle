@@ -1,5 +1,13 @@
 # Maze so Puzzle — playtest backlog
 
+**September7 additional defect:** [moving yellow dot](user-playtests/2026-09-07-moving-yellow-dot.md).
+The Human reports a tiny flashing blurry yellow dot near the player tile's lower
+right, only while moving, on0.22.10 and possibly earlier. Nonurgent but required
+before final release. Current-source reproduction/source diagnosis is in flight;
+do not close it by assuming it is a footstep effect. Book completion routing is
+the active bounded fix, followed by HAZARD-03; a narrow confirmed dot repair may
+join the same checkpoint.
+
 **September7 current delivery:** WALL-04C is live in0.22.15:
 [public verification](reviews/2026-09-07-v02215-public-verification.md).
 The changed Q01/P17 wall/sprite playtest is ready;13's accepted direction remains

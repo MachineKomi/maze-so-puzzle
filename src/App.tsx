@@ -719,7 +719,6 @@ function App() {
     sound: "step",
   });
   const [mapPickupToast, setMapPickupToast] = useState<MapPickupToast | null>(null);
-  const [movePulse, setMovePulse] = useState(0);
   const [bumpPulse, setBumpPulse] = useState(0);
   const [muted, setMuted] = useState(false);
   const [portrait, setPortrait] = useState(() => window.matchMedia("(orientation: portrait)").matches);
@@ -1358,7 +1357,6 @@ function App() {
     setRevealedTiles(isExplorationLevel(nextLevel)
       ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)
       : new Set());
-    setMovePulse(0);
     setBumpPulse(0);
     setCompletion(null);
     setTooStrongEncounter(null);
@@ -1541,7 +1539,6 @@ function App() {
       playSound(nextFeedback.sound, muted);
       if (nextFeedback.sound === "bump") lastBumpSoundAt.current = performance.now();
     }
-    if (result.moved) setMovePulse((value) => value + 1);
     else setBumpPulse((value) => value + 1);
 
     if (result.state.status === "won") {
@@ -2058,7 +2055,7 @@ function App() {
   };
 
   const requestEnterLevel = (nextLevel: LevelDefinition, sound: "select" | "title" = "select") => {
-    if (runInProgress && nextLevel.id === level.id) {
+    if (runInProgress && !testerRun && nextLevel.id === level.id) {
       resumeRun();
       return;
     }
@@ -2214,8 +2211,6 @@ function App() {
     ...completion.newMedalIds.map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id), kind: "New medal" })),
     ...completion.newBadgeIds.map((id) => ({ id, label: BADGE_LABELS[id].label, art: badgeArt(id), kind: "New badge" })),
   ] : [];
-  const allFriendsRescued = completion !== null
-    && completion.rescuedSpecies.length === animalObjects.length;
   const nextMazeLabel = completion?.testerRun
     ? campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length ? "Next test maze" : "Surprise test maze"
     : campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length ? "Next maze" : "Surprise maze";
@@ -2287,7 +2282,7 @@ function App() {
           <AchievementsScreen
             progress={progress}
             unlockedLevelIds={progress.unlockedLevelIds}
-            activeRun={runInProgress ? { levelId: level.id, name: level.name, steps: game.steps } : null}
+            activeRun={runInProgress && !testerRun ? { levelId: level.id, name: level.name, steps: game.steps } : null}
             blocked={modalOpen}
             headingRef={achievementsHeadingRef}
             muted={muted}
@@ -2563,7 +2558,7 @@ function App() {
               <div
                 data-scene-slot="actors"
                 data-reward-anchor={battlePresentation || jumpPresentation || portalPresentation ? undefined : "ame"}
-                className={`player-layer ${movePulse % 2 ? "move-a" : "move-b"}${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
+                className={`player-layer${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
                 style={{...cameraLayerStyle(game.position, cameraWindow), ...fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}}
                 aria-hidden="true"
               >
@@ -2736,18 +2731,12 @@ function App() {
                 ))}
               </div>
             )}
+            {!completion.testerRun && <p className="modal-lead">{unsupportedProfile
+              ? "This adventure is temporary. Move on, or stay here to keep exploring."
+              : "Moving on records this adventure. Stay here to keep exploring."}</p>}
             <div className="modal-actions">
-              {allFriendsRescued ? (
-                <>
-                  <button className="primary-button" onClick={nextLevel}>{nextMazeLabel} <span>→</span></button>
-                  <button className="secondary-button" onClick={stayHere}>Stay here</button>
-                </>
-              ) : (
-                <>
-                  <button className="primary-button" onClick={stayHere}>Stay here</button>
-                  <button className="secondary-button" onClick={nextLevel}>{nextMazeLabel} <span>→</span></button>
-                </>
-              )}
+              <button className="primary-button" onClick={nextLevel}>{nextMazeLabel} <span>→</span></button>
+              <button className="secondary-button" onClick={stayHere}>Stay here</button>
               <button className="secondary-button" aria-pressed={restartArmed} onClick={armRestart}>
                 {restartArmed ? "Yes, restart" : "Restart"}
               </button>
