@@ -35,6 +35,12 @@ WALL-04C test servers/browsers stopped. Follow [docs-only deployment rules](VERC
 against actual successful release1e8b465. This state supersedes every older
 active/next/live label below; retained dated receipts describe their checkpoints.
 
+Docs closure3ffc44c is on main and actually skipped by Vercel's Ignored Build Step
+at01:05:54UTC. Its [observed receipt](reviews/2026-09-07-v02215-public-verification.md#observed-documentation-closure)
+is backed up on the current Codex branch without another main push. The next
+runtime slice should include that note normally; do not deploy solely to align
+documentation SHA with the unchanged public game.
+
 State date: 2026-09-07. Current operating state for **Sol Astra MsP Collab**.
 Replace this state when it changes; keep history in dated records and Git.
 Human instructions outrank repository assumptions. This file owns current status;
