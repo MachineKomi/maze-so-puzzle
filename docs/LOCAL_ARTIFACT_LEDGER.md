@@ -1,5 +1,10 @@
 # Local artifact ledger and cleanup review
 
+DELIGHT27 closure adds the98-byte keepsake27-doc-guard.log. Completed local,
+public and guard slice: **261 files /54,242,225 bytes**. Actual Vercel docs skip
+is recorded in the public receipt; this observation is backed up branch-only.
+No deletion/archive or further build was needed.
+
 ## DELIGHT27 completed local and public island
 
 All keepsake27-* entries, release-v02226 and v02227-public-20260907 total

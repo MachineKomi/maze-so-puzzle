@@ -73,3 +73,14 @@ extra repository or native copy. Preserve unowned4271 and all failed proof histo
 Use actual successful release 4780e9525109c553a6b79ff388c56ea67ae708a9 as the unchanged Ignored Build Step
 baseline. Follow [docs-only instructions](../VERCEL_DEPLOYMENT.md#routine-documentation-checkpoints),
 commit/push documentation without rebuilding, and record the actual Vercel skip.
+
+### Observed documentation closure
+
+Documentation checkpoint **38f43cee6eb0b07625ba5233d9ce73f2fafc0735** is backed up
+on main and codex/earned-keepsakes. The unchanged local guard returned SKIP
+against actual successful release4780e95. Vercel reported **Canceled by Ignored
+Build Step at18:21:16 UTC** for the
+[documentation deployment](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/Ad93QALJaj6wvGthEtwGu8xr8VBP).
+No additional game payload was built. This observation is backed up on the
+Codex branch only, avoiding a recursive main push. The98-byte guard log brings
+this slice to **261 files /54,242,225 bytes**. No deletion or archive occurred.
