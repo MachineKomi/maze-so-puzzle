@@ -11,6 +11,8 @@ export async function installColdOpeningProbe(page) {
       try{return original.apply(receiver,args);}
       finally{record(name,at,performance.now()-at,detail);}
     };
+    const surface=canvas=>canvas.classList.contains('vfx-rewards')?'canvas'
+      :canvas.width===720&&canvas.height===128?'number-atlas':null;
     const rect=Element.prototype.getBoundingClientRect;
     Element.prototype.getBoundingClientRect=function(...args) {
       return this.matches('.vfx-rewards,[data-reward-anchor="ame"]')
@@ -26,10 +28,16 @@ export async function installColdOpeningProbe(page) {
     for(const name of ['clearRect','setTransform','drawImage','strokeText','fillText','stroke','fill']) {
       const original=CanvasRenderingContext2D.prototype[name];
       CanvasRenderingContext2D.prototype[name]=function(...args){
-        return this.canvas.classList.contains('vfx-rewards')
-          ?invoke(`canvas.${name}`,original,this,args):original.apply(this,args);
+        const target=surface(this.canvas);
+        return target?invoke(`${target}.${name}`,original,this,args):original.apply(this,args);
       };
     }
+    const font=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'font');
+    Object.defineProperty(CanvasRenderingContext2D.prototype,'font',{...font,set(value){
+      const target=surface(this.canvas);
+      if(target)invoke(`${target}.font`,font.set,this,[value],{value});
+      else font.set.call(this,value);
+    }});
     for(const name of ['getItem','setItem','removeItem']) {
       const original=Storage.prototype[name];
       Storage.prototype[name]=function(...args){
@@ -37,6 +45,17 @@ export async function installColdOpeningProbe(page) {
       };
     }
     const raf=requestAnimationFrame;
+    window.addEventListener('click',event=>{
+      if(!event.target.closest('button')?.textContent?.trim().startsWith('Continue'))return;
+      record('mount.click',performance.now(),0);
+      const observer=new MutationObserver(()=>{
+        if(document.querySelector('.maze-terrain-svg')) {
+          record('mount.terrain-dom',performance.now(),0); observer.disconnect();
+        }
+      });
+      observer.observe(document.body,{childList:true,subtree:true});
+      raf.call(window,()=>raf.call(window,()=>record('mount.second-frame',performance.now(),0)));
+    },true);
     window.requestAnimationFrame=function(callback){return raf.call(window,timestamp=>
       invoke('raf',callback,window,[timestamp],{callback:callback.name,source:callback.toString().slice(0,90)}));};
     window.addEventListener('keydown',event=>record('keydown',performance.now(),0,{key:event.key}),true);

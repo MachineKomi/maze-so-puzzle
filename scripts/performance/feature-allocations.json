@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "cold-reward-count-cache-and-resize",
+      "owner": "vfx",
+      "status": "approved",
+      "compressedJsBytes": 128,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra permits128 additional gzip9 JS bytes beyond existing ceiling/headroom for shared digit counts, stage-scale reuse and post-layout settled-loot resize. Pre-freeze measures172375 (+372 over18),18 bytes beyond the previous172357 ceiling. This is a byte allowance only; mount/cache costs, independent visual review and final uninstrumented performance must still qualify. No CSS/media/dependency growth.",
+      "evidencePath": "docs/reviews/2026-09-07-cold-reward-opening.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Restore only the RewardLayer/count-cache presentation seam to published18 runtime85f49ea if necessary. Preserve rules4/v4 saves, claims, completion receipts, CAMERA-17 and the deployment guard; never clear or downgrade saves."
+    },
+    {
       "id": "loot03-authored-collection-and-protected-v4",
       "owner": "vfx",
       "status": "approved",

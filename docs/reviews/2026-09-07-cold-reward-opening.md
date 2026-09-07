@@ -20,9 +20,40 @@ forcing a scene layout through allocation-time getBoundingClientRect. Keep the
 actual presented-Ame rectangle for immediate Power targeting. No large idle
 Canvas, resolution reduction, delayed claims or v4/gameplay change.
 
-Next: compare that isolated change, inspect actual dimensions/phone/tablet images,
-then determine whether first text shaping is another justified correction. Any
-shipping candidate needs clean uninstrumented comparisons, physical-loot/Power/
-resize/camera regression checks, independent Sol review, exact-source CI and
-guarded publication/public verification. If the measured change does not help,
-retain the finding and proceed B; do not broaden renderer changes speculatively.
+## Candidate correction and measured tradeoffs
+
+`reward-cold-stage-scale-probe` showed that scale reuse alone did not reduce the
+roughly30ms first callback: layout work moved to the first font assignment.
+`reward-cold-number-atlas-probe` then replaced physical-loot live text with one
+shared720x128 digit atlas. Measured first callbacks were30.9→5.6ms phone and
+32→5.3ms tablet. Power text/actual-Ame targeting remain unchanged. Main-Canvas
+failure retains SVG; auxiliary-atlas failure retains original visible text.
+
+The fresh-context `reward-cold-mount-probe` applies CPU4 before Continue, explicitly
+tags detached atlas work, and records click→terrain DOM/second rAF. Baseline
+second rAF323–337ms versus candidate355–371ms exposes roughly30–43ms added
+maze-entry latency. Wrapped atlas construction10–11ms. This is a paint opportunity
+proxy, not actual presented GPU pixels. The cache's ideal RGBA footprint is368640
+bytes plus browser overhead, once per page. Empty ledger still leaves a1x1 main
+reward Canvas and no reward rAF/timer, but auxiliary storage is not zero.
+Measured opening intervals66.6/66.7→50ms in this pilot still show a residual hitch.
+Do not describe phase wrappers or one-pair samples as final qualification.
+
+New tests caught a resting-loot resize defect: a phone→tablet switch kept1044px
+backing where852px was appropriate. A board ResizeObserver now wakes drawing
+after layout updates the shared scene snapshot. Lifecycle cleanup disconnects it.
+`reward-cold-browser-r3` passes5 new checks: DPR1/2/3 phone→tablet→phone, exact
+grounded save conservation, no first physical-draw bounds/text calls, atlas-only
+failure, all10 digit alpha bounds, composed2/10/99/123/456/789 at11/26/66px, and
+rejected invalid draws. Original fallback images are retained for comparison.
+The proportional outline is thinner at small sizes than the old fixed3px stroke;
+actual phone images remain readable for Astra, with actual Sol review pending.
+
+Candidate0.22.19 passes700 project tests, TypeScript/Vite and budget/contracts.
+JSgzip9 is172375 (+372 over18); a named128-byte allowance supplements the prior
+354-byte headroom, giving172485 ceiling. CSS/public/dependencies are unchanged.
+This is explicit byte cost, not a performance or release waiver.
+
+Next: frozen uninstrumented frame/work comparisons and full physical-loot/Power/
+resize/camera browser checks, actual independent Sol review and exact-source CI.
+Publication remains pending those results; live18 remains unchanged.

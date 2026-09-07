@@ -87,7 +87,7 @@ report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
 report.saveKeys={seed:data.keys.run,baseline:process.env.MAZE_REVIEW_BASELINE_RUN_KEY||data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
 report.coldOpeningProbe=coldProbe;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
-if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; baseline immediate credit versus physical collection';
+if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
   for (const cohort of profiles) {
@@ -105,6 +105,11 @@ try {
           }, { data, fixture });
           await page.goto(`${origin}/${mode}`);
           await page.getByRole('button', { name: 'Play', exact: true }).click();
+          const client = await ctx.newCDPSession(page), events = [];
+          if(coldProbe) {
+            await client.send('Emulation.setCPUThrottlingRate',{rate:cpuRate});
+            await installColdOpeningProbe(page);
+          }
           await page.getByRole('button', { name: /^Continue/ }).click();
           await page.locator('.maze-terrain-svg').waitFor();
           if(mode==='candidate' && report.candidateStyle) await page.addStyleTag({content:report.candidateStyle});
@@ -112,9 +117,7 @@ try {
           if (bundle !== (mode === 'baseline' ? baselineBundle : candidateBundle)) throw Error('Wrong entry module');
           await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
           await page.waitForTimeout(500);
-          const client = await ctx.newCDPSession(page), events = [];
           await client.send('Emulation.setCPUThrottlingRate',{rate:cpuRate});
-          if(coldProbe) await installColdOpeningProbe(page);
           let layers=[];
           client.on('LayerTree.layerTreeDidChange',e=>{layers=e.layers??[];});
           if(captureLayers) await client.send('LayerTree.enable');
