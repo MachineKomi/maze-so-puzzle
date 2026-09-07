@@ -56,7 +56,8 @@ Sol freshly inspected phone/tablet/fallback images and found a wall-covered Gold
 count. Counts now sit centrally; old misleading opening toast is also corrected.
 New empty-ledger motion does not wake/allocate Canvas. Current version18 measures
 172003 JSgzip9 (+4922 over17),24170 CSS and155542751 public bytes. Named5200JS
-allocation is requested, pending final timing and review. Final source checks,
+allocation is approved by Astra for byte cost alone, with354 bytes of reserve;
+it grants no timing or release waiver. Final source checks,
 timing, final visual receipt and publication are not yet claimed by this section.
 
 ## Independent review and qualification sequence
