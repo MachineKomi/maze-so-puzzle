@@ -18,6 +18,9 @@ const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const enemyReview = process.env.MAZE_REVIEW_ROUTE === 'enemy';
+const potionReview = process.env.MAZE_REVIEW_ROUTE === 'potion';
+const entrySettleMs = Number(process.env.MAZE_REVIEW_ENTRY_SETTLE_MS ?? 500);
+if (![0,500].includes(entrySettleMs)) throw Error('Use immediate or loaded entry');
 const pairCount = Number(process.env.MAZE_REVIEW_PAIRS ?? 5);
 const coldProbe = process.env.MAZE_REVIEW_COLD_PROBE === '1';
 const mountSample = process.env.MAZE_REVIEW_MOUNT === '1';
@@ -41,7 +44,7 @@ await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
 const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
-if (!fixture || (!jumpReview && (!reverse[fixture.direction] || (!enemyReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
+if (!fixture || (!jumpReview && (!reverse[fixture.direction] || (!enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
 if (idleReview && !(fixture.visibleHazardCells > 0)) throw Error('Idle hazard comparison requires a nonempty visible-hazard fixture');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');
@@ -76,7 +79,11 @@ const server = createServer(async (req, res) => {
 });
 await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 const origin = `http://127.0.0.1:${server.address().port}`;
-const browser = await chromium.launch({ headless: true });
+const channel=process.env.MAZE_REVIEW_CHANNEL;
+if(channel && channel!=='msedge') throw Error('Unsupported channel');
+const freshBrowser=process.env.MAZE_REVIEW_FRESH_BROWSER==='1';
+if(freshBrowser && pairCount!==1) throw Error('Fresh-process comparison is diagnostic only');
+let browser = await chromium.launch({ headless: true,channel });
 const report = { date: new Date().toISOString(), head: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(), browser: browser.version(), hashes, served, fixture: fixture.id ?? fixture.level.id, route: jumpReview ? 'eight reversible one-hole jumps' : 'sixteen reversible ordinary steps', baselineIdentity,
   scope: 'Headless local Chromium same-host paired frame/trace diagnostic; no physical iPad, native, GPU-time or Human beauty acceptance. Trace durations overlap and are not additive.', rows: [] };
 report.pairCount=pairCount; report.pilot=pairCount!==5;
@@ -91,15 +98,18 @@ report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
 report.saveKeys={seed:data.keys.run,baseline:process.env.MAZE_REVIEW_BASELINE_RUN_KEY||data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
 report.coldOpeningProbe=coldProbe;
 report.mountSample=mountSample;
+report.entrySettleMs=entrySettleMs; report.freshBrowser=freshBrowser;
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
 if (enemyReview) report.route='defeat first enemy, pause2700ms, enter cleared tile, pause1300ms, return, pause500ms; unchanged Power and candidate dual-currency conservation';
+if (potionReview) report.route='collect real Power potion, pause1700ms, return, pause500ms; immediate-entry cosmetic-stall comparison with unchanged semantic Power';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
 try {
   for (const cohort of profiles) {
     for (let pair = -1; pair < pairCount; pair++) {
       for (const mode of pair % 2 === 0 ? ['baseline', 'candidate'] : ['candidate', 'baseline']) {
         servingMode = mode;
+        if(freshBrowser && report.rows.length) {await browser.close();browser=await chromium.launch({headless:true,channel});}
         const ctx = await browser.newContext({ viewport: { width: cohort.width, height: cohort.height }, deviceScaleFactor: cohort.dpr });
         try {
           const page = await ctx.newPage(); const errors = [];
@@ -123,7 +133,7 @@ try {
           const bundle = await page.locator('script[type="module"]').getAttribute('src');
           if (bundle !== (mode === 'baseline' ? baselineBundle : candidateBundle)) throw Error('Wrong entry module');
           await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
-          await page.waitForTimeout(500);
+          if(entrySettleMs) await page.waitForTimeout(entrySettleMs);
           if(mountSample) {
             await page.waitForFunction(()=>window.__mazeMountSample?.done);
             if(!await page.evaluate(()=>{
@@ -159,11 +169,16 @@ try {
           const resources = () => page.evaluate(() => {
             const c=document.querySelector('canvas.vfx-rewards');
             return { nodes:document.querySelectorAll('*').length, heapBytes:performance.memory?.usedJSHeapSize??null,
-              images:document.images.length,reward:c?{width:c.width,height:c.height,running:c.dataset.running,tokens:c.dataset.tokens}:null };
+              images:document.images.length,reward:c?{width:c.width,height:c.height,running:c.dataset.running,tokens:c.dataset.tokens,arrivals:c.dataset.arrivals,peak:c.dataset.peak}:null };
           });
           const resourcesBefore=await resources();
           // Four reversible four-step legs per cycle; preserve engine-derived direction.
-          if(enemyReview) {
+          if(potionReview) {
+            const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
+            await press(fixture.direction);await page.waitForTimeout(1700);
+            await press(reverse[fixture.direction]);await page.waitForTimeout(500);
+          }
+          else if(enemyReview) {
             const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
             await press(fixture.direction);await page.waitForTimeout(2700);
             await press(fixture.direction);await page.waitForTimeout(1300);
@@ -205,7 +220,8 @@ try {
           if (pair === 0 && captureScreenshots) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined,mount:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (enemyReview?2:lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (enemyReview||potionReview?2:lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if(potionReview && sample.save?.game?.power!==fixture.powerAfter) throw Error('Potion semantic credit changed');
           if(lootReview) {
             const source=row.loot?.sources.find(s=>s.sourceId===fixture.sourceId);
             if(mode==='candidate' && (!source || source.credited<=0 || source.credited+source.drops.reduce((n,d)=>n+d.amount,0)!==fixture.amount)) throw Error('Physical reward not conserved');

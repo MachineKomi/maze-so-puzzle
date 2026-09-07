@@ -199,16 +199,18 @@ contextual rendition remains distinct from the repaired 256px field derivative.
     progressive-hint state, and recoverable pending completion. It fails closed
     on changed content, reports that narrow restart case to the player, and
     rejects tester, generated, corrupt, and inconsistent states.
-    Global gameplay-rules revision 4 is included in authored/generated content
-    fingerprints. Exact rules-3 runs migrate without changing their run ID,
-    existing credits or defeated IDs. Resolved treasures become fully credited
-    source tombstones. New rewards use the bounded ledger in `game/loot.ts`:
-    opening scatters value, admission waits750ms and a clear1.75-tile approach,
+    Global gameplay-rules revision 5 is included in authored/generated content
+    fingerprints. Exact v4/rules4 and v2/v3/rules3 runs migrate without changing their run ID,
+    existing credits or defeated IDs. Legacy rules3 treasures become fully credited
+    source tombstones; v4 retains its grounded ledger. Earlier defeated enemies
+    retire without new awards. New rewards use the bounded ledger in `game/loot.ts`:
+    opening/defeat scatters value, admission waits a visible750ms interval and a
+    clear1.75-tile approach,
     and one reducer credits accepted claims. Restoring/interruption settles
     accepted claims while grounded value remains. Completion settles accepted
     claims before its recoverable receipt; Stay preserves optional grounded loot.
     Future/malformed active records are preserved byte for byte and block routine
-    writes/clears. Migration writes v4 before removing the old key. Unmatched
+    writes/clears. Migration writes v5 before removing prior keys. Unmatched
     pre-rules-3 active runs and fingerprint-less schema-v1 runs
     fail closed; durable Book/campaign records survive. Stationary interactions
     are validated independently of movement-pickup counts, with distance and
@@ -364,7 +366,7 @@ contextual rendition remains distinct from the repaired 256px field derivative.
   `maze-so-puzzle-progress-v6`, `maze-so-puzzle-progress-v5`,
   `maze-so-puzzle-progress-v4`, `maze-so-puzzle-progress-v3`,
   `maze-so-puzzle-progress-v2`, `maze-so-puzzle-progress-v1`,
-  `maze-so-puzzle-active-run-v4`, `maze-so-puzzle-active-run-v3`, `maze-so-puzzle-active-run-v2`, and
+  `maze-so-puzzle-active-run-v5`, `maze-so-puzzle-active-run-v4`, `maze-so-puzzle-active-run-v3`, `maze-so-puzzle-active-run-v2`, and
   `maze-so-puzzle-active-run-v1`; unrelated
   origin storage is intentionally preserved, and the app reloads Story Maze 1.
 - Camera coordinates affect presentation only. Movement, collision, combat,

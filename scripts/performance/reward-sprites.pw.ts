@@ -25,6 +25,9 @@ for(const [quality,motion,width,height] of [['full','full',1194,834],['lite','fu
    },{snapshot:savedFixture(f,`large-reward-${id}`),quality,motion,keys:{run:ACTIVE_RUN_STORAGE_KEY,progress:PLAYER_PROGRESS_STORAGE_KEY,preferences:PRESENTATION_PREFERENCES_KEY},progress:createDefaultPlayerProgress(16),preferences:DEFAULT_PRESENTATION_PREFERENCES,diagnostic:process.env.MAZE_REWARD_DIAGNOSTIC==="1"});
    await page.goto(process.env.MAZE_REWARD_DIAGNOSTIC==='1'?'http://127.0.0.1:1421/':'/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();
    await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode()));});await page.bringToFront();
+   // Loaded-scene presentation contract, like the paired movement harness.
+   // Retain immediate-entry stall diagnostics separately; this is not cold QA.
+   if(process.env.MAZE_REWARD_DIAGNOSTIC!=='1')await page.waitForTimeout(500);
    await page.evaluate(()=>{
     const samples:unknown[]=[],start=performance.now();(window as any).rewardSamples=samples;
     const sample=()=>{const c=document.querySelector<HTMLCanvasElement>('.vfx-rewards')!;
@@ -32,6 +35,19 @@ for(const [quality,motion,width,height] of [['full','full',1194,834],['lite','fu
      if(performance.now()-start<4000)requestAnimationFrame(sample);};requestAnimationFrame(sample);
    });
    await page.keyboard.press(`Arrow${f.direction[0]!.toUpperCase()}${f.direction.slice(1)}`);await page.waitForTimeout(4200);
+   // Lite can expose an older pending bundle after the new encounter's claims
+   // free a slot. It still owes its own visible interval; 4200ms is not expiry.
+   const rest=()=>page.evaluate(key=>{
+    const game=JSON.parse(localStorage.getItem(key)!).game;
+    return {idle:document.querySelector<HTMLCanvasElement>('.vfx-rewards')!.dataset.running==='false'
+      && game.loot.sources.every((s:any)=>s.drops.every((d:any)=>d.phase!=='claiming')),
+      signature:JSON.stringify([game.goldStarsCollected,game.sciencePointsCollected,game.loot])};
+   },ACTIVE_RUN_STORAGE_KEY);
+   await expect.poll(async()=>{
+    const before=await rest();if(!before.idle)return false;
+    await page.waitForTimeout(1600);const after=await rest();
+    return after.idle&&before.signature===after.signature;
+   },{timeout:6000}).toBe(true);
    const result=await page.evaluate(key=>({samples:(window as any).rewardSamples as {w:number;h:number;tokens:number;anchors:number}[],
     widthProbe:(window as any).rewardWidthProbe,targets:(window as any).rewardTargets, data:{...document.querySelector<HTMLCanvasElement>('.vfx-rewards')!.dataset},save:JSON.parse(localStorage.getItem(key)!).game,
     broken:[...document.images].filter(i=>!i.naturalWidth).length}),ACTIVE_RUN_STORAGE_KEY);
