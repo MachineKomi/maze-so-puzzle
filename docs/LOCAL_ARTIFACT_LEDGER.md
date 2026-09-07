@@ -1,5 +1,34 @@
 # Local artifact ledger and cleanup review
 
+## DELIGHT24 completed local qualification — September7
+
+All folders below are under C:/GameDev/maze-game-qa/performance. Retain for explicit
+Human cleanup review. Total including20 root logs/fixture files: **259 files /
+63194855 bytes**. Source/dist identity and report hashes are in delight24-summary.
+The failed baseline/pilot/probe attempts remain honestly classified; no repeats
+of this local matrix are needed without a new change or unresolved concern.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| delight24-baseline |27|5640251|
+| delight24-baseline-qualified |19|1912161|
+| delight24-final-browser |25|4373273|
+| delight24-frames |1|2113587|
+| delight24-geometry |7|482565|
+| delight24-perf-pilot |1|723824|
+| delight24-pilot |27|4441851|
+| delight24-pilot2 |19|2215505|
+| delight24-regression |81|15580426|
+| delight24-summary |3|12098|
+| delight24-work |25|24445234|
+| release-v02223 |4|762643|
+
+The20 root files total491437 bytes. One existing dist is reused in place; frozen
+23 is only HTML/JS/CSS/identity sharing unchanged media. All owned local QA helpers
+have stopped; unowned4271 remains untouched. No repo/media clone, native package,
+deletion or archive. Planned public confirmation uses one v02224-public packet
+and bounded delight24-public-canonical/alias journeys; inventory those separately.
+
 ## Chest/Mimic continuation — September7 active
 
 Astra owns runtime on `codex/chest-mimic-rewards`, from clean3c5d70c; Sol reviews

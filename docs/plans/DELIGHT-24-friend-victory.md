@@ -56,3 +56,25 @@ independent review, relevant checks and exact-head CI. Preserve the Vercel guard
 Artifacts: one in-place dist; four-file frozen `release-v02223`; external
 `delight24-*` correctness/performance packets recorded in the artifact ledger.
 No deletion/archive or additional repository copy.
+
+## Next bounded A/C handoff — source checked at d880b223
+
+Independent Sol source review identifies the remaining A gap as quiet authored
+pickup presence. LOOT/SCENE already supply the bounded reward renderer, exact
+values, trails/homing, responsive receipts and weapon parity; do not rebuild or
+broadly enlarge them. Sword/potion/boots/key still animate filter-based item-shine,
+coloured keys another filter, and treasure filter/brightness. Start from a static
+backing on existing collectible wrappers, with only optional cheap opacity/scale
+accents in Full. Keep actual art/receipts unchanged unless measured comparison
+demonstrates a remaining gap. Test composite presence and all quality modes.
+
+C attaches to successful durable progress writing in nextLevel. Compute actual
+old→new sticker/medal/badge differences, emit only after the supported profile
+write succeeds, and keep the event ephemeral and bounded. Tester, Stay, denied
+writes, future-profile continuation and empty diffs emit nothing. A later run-clear
+failure does not undo an already successful profile write; explicitly prove safe
+retry without a second flourish. Present at the next safe scene boundary after
+story/critical overlays. Reload may omit decoration while the Book retains truth.
+Replace/reclassify the precommit rewardSoundTimer so C cannot double the cue.
+Freeze queue/coalescing, cancellation and write-failure cases before implementing;
+no extra save ledger, polling loop, earlier banking or Plan09/10 ownership.
