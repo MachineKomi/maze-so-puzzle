@@ -7,7 +7,7 @@
 .camera-actors .battle-impact { z-index:10000; }
 .player-label-layer { position:absolute; z-index:60; pointer-events:none; overflow:visible; }
 .player-label-body { position:relative; width:100%; height:100%; }
-.maze-board .player-label-body > .player-power { top:var(--field-label-top,0%); bottom:auto; translate:0 -100%; font-size:clamp(14px,calc(34cqw / var(--grid-size,13)),28px); line-height:1; }
+.maze-board .player-label-body > .player-power { top:var(--field-label-top,0%); bottom:auto; translate:0 -100%; font-size:calc(34cqw / var(--grid-size,13)); -webkit-text-stroke:calc(1.6cqw / var(--grid-size,13)) #39324f; line-height:1; }
 /* WALL-04C artwork registration. Outer wrappers remain one logical tile. */
 .maze-board img[data-field-layout] {
   position: absolute;

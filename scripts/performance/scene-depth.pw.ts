@@ -26,10 +26,11 @@ for(const [width,height,quality] of [[780,312,'full'],[1080,810,'full'],[780,312
   const board=document.querySelector('.maze-board')!.getBoundingClientRect(),label=document.querySelector('.player-label-layer')!,badge=label.querySelector('.player-power')!,b=badge.getBoundingClientRect();
   const frame=document.querySelector<HTMLImageElement>('img[data-field-layout="door"]')!,tile=frame.parentElement!.getBoundingClientRect(),r=frame.getBoundingClientRect(),bounds=frame.dataset.artVisibleBounds!.split(',').map(Number);
   const actors=document.querySelector('.camera-actors')!,solids=[...actors.querySelectorAll<HTMLElement>('.object-layer,.player-layer,[data-follower-id]')];
-  return{door:{width:r.width*bounds[2]!/tile.width,height:r.height*bounds[3]!/tile.height},font:parseFloat(getComputedStyle(badge).fontSize),labelZ:Number(getComputedStyle(label).zIndex),wallZ:Number(getComputedStyle(document.querySelector('.maze-foreground')!).zIndex),inside:b.top>=board.top&&b.bottom<=board.bottom,
+  return{door:{width:r.width*bounds[2]!/tile.width,height:r.height*bounds[3]!/tile.height},font:parseFloat(getComputedStyle(badge).fontSize),physicalLabelHeight:b.height,labelTileRatio:b.height/tile.height,labelZ:Number(getComputedStyle(label).zIndex),wallZ:Number(getComputedStyle(document.querySelector('.maze-foreground')!).zIndex),inside:b.top>=board.top&&b.bottom<=board.bottom,
    actorsZ:Number(getComputedStyle(actors).zIndex),solids:solids.map(s=>({y:s.getBoundingClientRect().top,z:Number(getComputedStyle(s).zIndex)}))};
  });
  expect(before.door.height).toBeGreaterThan(1.24);expect(before.door.width).toBeLessThan(1.13);expect(before.font).toBeGreaterThanOrEqual(14);expect(before.inside).toBe(true);
+ expect(before.physicalLabelHeight).toBeGreaterThanOrEqual(16);expect(before.labelTileRatio).toBeGreaterThan(.33);expect(before.labelTileRatio).toBeLessThan(.35);
  expect(before.labelZ).toBeGreaterThan(before.wallZ);expect(before.actorsZ).toBeLessThan(before.wallZ);
  for(const a of before.solids)for(const b of before.solids)if(a.y>b.y+2)expect(a.z).toBeGreaterThan(b.z);
  await page.locator('.maze-board').screenshot({path:resolve(output,`door-${width}-${quality}-before.png`)});

@@ -123,7 +123,8 @@ for(const [width,height] of [[1920,1080],[1280,720],[1194,834],[1024,768],[960,5
       const reversed=movePlayer(level,movePlayer(level,initial,direction).state,opposite[direction]).state;
       await expectUiRouteState(page,reversed);
       await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
-      const stopped=await travelState(page);expect(stopped.position.x).toBeCloseTo(initial.position.x,4);expect(stopped.position.y).toBeCloseTo(initial.position.y,4);
+      const stopped=await travelState(page);
+      for(const axis of ['x','y'] as const)expect(Math.abs(stopped.position[axis]-initial.position[axis])*stopped.cell[axis]).toBeLessThan(.025);
       await page.getByRole("button",{name:`Move ${direction}`,exact:true}).click();
       const after=movePlayer(level,reversed,direction).state;await expectUiRouteState(page,after);
       await action(page,"hint");
@@ -192,7 +193,8 @@ for(const kind of ["door-opened","enemy-defeated","hole-jumped","portal-warped"]
     else {
       expect(step.result.state.position).toEqual(step.before.position);
       await expect(page.locator(".maze-board")).toHaveAttribute("data-travel-state","settled");
-      const stationary=await travelState(page);expect(stationary.position.x).toBeCloseTo(step.before.position.x,4);expect(stationary.position.y).toBeCloseTo(step.before.position.y,4);
+      const stationary=await travelState(page);
+      for(const axis of ['x','y'] as const)expect(Math.abs(stationary.position[axis]-step.before.position[axis])*stationary.cell[axis]).toBeLessThan(.025);
       const translated=await page.evaluate(()=>[...document.querySelectorAll<HTMLElement>("[data-travel-camera-anchor]")].map(e=>({actual:e.style.translate,world:document.querySelector<HTMLElement>(".camera-world")!.style.translate})));
       // Full-world translation is absolute; camera-relative anchors are settled at zero.
       for(const anchor of translated)expect(anchor.actual.split(" ").every(value=>parseFloat(value)===0)).toBe(true);

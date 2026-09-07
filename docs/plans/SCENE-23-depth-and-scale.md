@@ -23,7 +23,8 @@ not change collision, accepted interior/exterior wall geometry, Power or saves.
    sit below foreground wall caps. Airborne Ame stays above every wall, with
    her shadow below the caps. Portal arrival remains an explicit magic pass.
 4. Give Ame one independent Power-label layer above walls/solids, at34% tile
-   size bounded14–28 CSS pixels. Share her travel, battle and jump pose clocks;
+   size without a fixed pre-scale cap. A proportional stroke stays readable after
+   the whole game stage scales down on a phone. Share travel, battle and jump pose clocks;
    reserve edge space. Preserve legendary/comfort presentation and one label
    through every replacement state.
 5. Remove jump boot artwork and obsolete attachment styling. Keep the brief

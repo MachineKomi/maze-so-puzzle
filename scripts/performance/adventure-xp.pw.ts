@@ -9,6 +9,7 @@ import {DIRECTIONS} from '../../src/game/types';
 import {createActiveRunSnapshot,ACTIVE_RUN_STORAGE_KEY} from '../../src/session';
 import {createDefaultPlayerProgress,PLAYER_PROGRESS_STORAGE_KEY} from '../../src/progress';
 import {DEFAULT_PRESENTATION_PREFERENCES,PRESENTATION_PREFERENCES_KEY} from '../../src/motion';
+import {routeCheckpoints,savedFixture} from './v22-input-fixtures';
 const output=resolve(process.env.MAZE_PERF_EVIDENCE_DIR!,'adventure-xp');
 const level=CURATED_LEVELS[1]!,runId='run-xp23-completion';
 let won=createInitialGameState(level,runId);
@@ -24,6 +25,32 @@ const progress={...createDefaultPlayerProgress(16),adventureXp:18};
 const arrow=(d:string)=>`Arrow${d[0]!.toUpperCase()}${d.slice(1)}`;
 const reverse={up:'down',down:'up',left:'right',right:'left'};
 test.beforeAll(async()=>{await mkdir(output,{recursive:true});await writeFile(resolve(output,'completed-fixture.json'),JSON.stringify({snapshot,progress},null,2));});
+
+for(const levelId of ['lanternlight-labyrinth','twilight-treasure-loop'])test(`XP23 mounted crystal ink ${levelId}`,async({page})=>{
+ const f=routeCheckpoints().filter(c=>c.level.id===levelId).flatMap(c=>DIRECTIONS.map(direction=>({...c,direction,result:movePlayer(c.level,c.before,direction)})))
+  .find(f=>f.result.events.some(e=>e.type==='enemy-defeated'))!;
+ expect(f).toBeTruthy();await page.setViewportSize({width:844,height:390});
+ await page.clock.install({time:new Date('2026-09-07T00:00:00Z')});
+ await page.addInitScript(({keys,snapshot,progress,preferences})=>{
+  localStorage.setItem(keys.run,JSON.stringify(snapshot));localStorage.setItem(keys.progress,JSON.stringify(progress));localStorage.setItem(keys.preferences,JSON.stringify(preferences));
+  const atlases=new WeakSet<HTMLCanvasElement>(),draw=CanvasRenderingContext2D.prototype.drawImage,rows:any[]=[];(window as any).xpInk=rows;
+  CanvasRenderingContext2D.prototype.drawImage=function(...args:any[]){
+   if(args[0] instanceof HTMLImageElement&&args[0].src.endsWith('/adventure-xp-v1.png'))atlases.add(this.canvas);
+   if(atlases.has(args[0])&&this.canvas.classList.contains('vfx-rewards')&&rows.length<128){
+    const m=this.getTransform(),r=this.canvas.getBoundingClientRect(),scale=r.width/this.canvas.width,size=args[3];
+    rows.push({canvasCss:size*Math.hypot(m.a,m.b)*scale,inkWidthCss:size*51/128*Math.hypot(m.a,m.b)*scale,inkHeightCss:size*114/128*Math.hypot(m.c,m.d)*scale,alpha:this.globalAlpha});
+   }
+   return draw.apply(this,args as any);
+  } as any;
+ },{keys,snapshot:savedFixture(f,'xp-ink'),progress:createDefaultPlayerProgress(16),preferences:{...DEFAULT_PRESENTATION_PREFERENCES,quality:'full',motion:'full',muted:true}});
+ await page.goto('/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();
+ await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));});
+ await page.clock.pauseAt(new Date('2026-09-07T01:00:00Z'));await page.keyboard.press(arrow(f.direction));
+ await page.clock.runFor(2400);const rows=await page.evaluate(()=>(window as any).xpInk);
+ expect(rows.length).toBeGreaterThan(0);for(const r of rows){expect(r.alpha).toBe(1);expect(r.inkHeightCss).toBeGreaterThan(5);expect(r.inkHeightCss).toBeLessThan(22);}
+ await page.locator('.maze-board').screenshot({path:resolve(output,`ink-${levelId}.png`)});
+ await writeFile(resolve(output,`ink-${levelId}.json`),JSON.stringify({scope:'Instrumented mounted drawImage size before rotation; visible alpha bbox51x114/128. Visual/source evidence, not timing.',levelId,rows},null,2));
+});
 
 for(const [quality,motion,width,height] of [['full','full',844,390],['full','full',1080,810],['lite','full',844,390],['static','full',844,390],['full','reduced',844,390]] as const)
 test(`XP completion, Stay, exactly-once bank and Book ${quality}/${motion}/${width}`,async({browser})=>{
