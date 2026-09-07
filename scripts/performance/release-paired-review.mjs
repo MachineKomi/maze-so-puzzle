@@ -17,6 +17,7 @@ const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/
 const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const victoryReview = process.env.MAZE_REVIEW_ROUTE === 'victory';
+const keepsakeReview = process.env.MAZE_REVIEW_ROUTE === 'keepsake';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const enemyReview = process.env.MAZE_REVIEW_ROUTE === 'enemy';
 const chestReview = process.env.MAZE_REVIEW_ROUTE === 'chest';
@@ -46,7 +47,7 @@ await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
 const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
-if (!fixture || (!jumpReview && !victoryReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
+if (!fixture || (!jumpReview && !victoryReview && !keepsakeReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
 if(chestReview&&!fixture.baselineSnapshot)throw Error('Chest comparison requires the actual historical object graph');
 if (idleReview && !(fixture.visibleHazardCells > 0 || fixture.visiblePickupCount > 0)) throw Error('Idle comparison requires visible hazards or authored pickups');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -118,6 +119,7 @@ report.coldOpeningProbe=coldProbe;
 report.mountSample=mountSample;
 report.entrySettleMs=entrySettleMs; report.freshBrowser=freshBrowser;
 if(victoryReview) report.route='eleven seconds decoded won-modal celebration, both entries paused before mount and resumed together at measurement start; no completion commit, cold-start or gameplay timing claim';
+if(keepsakeReview)report.route='Next commits the same earned rewards before measurement; then chapter dismissal, finite earned card and five seconds stationary. No cold-start claim.';
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
 if (enemyReview) report.route='defeat first enemy, pause2700ms, enter cleared tile, pause1300ms, return, pause500ms; unchanged Power and candidate declared-currency conservation';
@@ -152,6 +154,8 @@ try {
           const victoryPause=victoryReview?await page.addStyleTag({content:'.dialog-celebration * { animation-play-state:paused !important; }'}):null;
           await page.getByRole('button', { name: /^Continue/ }).click();
           if(victoryReview)await page.locator('.dialog-celebration').waitFor();
+          if(keepsakeReview){await page.locator('.dialog-celebration').waitFor();await page.getByRole('button',{name:/^Next maze/}).click();await page.locator('.dialog-story').waitFor();}
+          const routeSnapshot=keepsakeReview?await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),data.keys.run):fixture.snapshot;
           await page.locator('.maze-terrain-svg').waitFor();
           if(mode==='candidate' ? report.candidateFolded : report.baselineFolded) await page.getByRole('button',{name:'Fold sidebar'}).click();
           if(mode==='candidate' && report.candidateStyle) await page.addStyleTag({content:report.candidateStyle});
@@ -173,7 +177,7 @@ try {
           client.on('Tracing.dataCollected', ({ value }) => events.push(...value));
           if(captureTrace) await client.send('Tracing.start', { categories: 'devtools.timeline,disabled-by-default-devtools.timeline', transferMode: 'ReportEvents' });
           await page.evaluate(() => {
-            window.wallAb = { frames: [], positions: [], windows: [], done: false, mutations: 0, rebases: 0 };
+            window.wallAb = { frames: [], positions: [], windows: [], done: false, mutations: 0, rebases: 0, keepsakePeak:0 };
             window.wallAbObserver = new MutationObserver(records => {
               for(const m of records) {
                 if(m.type==='attributes' && m.target.matches('.maze-terrain-svg') && m.attributeName==='viewBox') window.wallAb.rebases++;
@@ -183,6 +187,7 @@ try {
             window.wallAbObserver.observe(document.querySelector('.maze-terrain-svg'), { attributes: true, childList: true, subtree: true });
             const tick = t => {
               window.wallAb.frames.push(t);
+              window.wallAb.keepsakePeak=Math.max(window.wallAb.keepsakePeak,document.querySelectorAll('.earned-keepsake').length);
               const world=document.querySelector('.camera-world');
               const box=document.querySelector('.maze-terrain-svg').viewBox.baseVal;
               const parts=world.style.translate.split(' ').map(parseFloat);
@@ -200,9 +205,11 @@ try {
               images:document.images.length,reward:c?{width:c.width,height:c.height,running:c.dataset.running,tokens:c.dataset.tokens,arrivals:c.dataset.arrivals,peak:c.dataset.peak}:null };
           });
           const resourcesBefore=await resources();
-          const victoryProgressBefore=victoryReview?await page.evaluate(key=>localStorage.getItem(key),data.keys.progress):null;
+          const victoryProgressBefore=(victoryReview||keepsakeReview)?await page.evaluate(key=>localStorage.getItem(key),data.keys.progress):null;
           // Four reversible four-step legs per cycle; preserve engine-derived direction.
-          if(victoryReview) {await victoryPause.evaluate(e=>e.remove());await page.waitForTimeout(11000);}
+          let keepsakeResources=null;
+          if(keepsakeReview){await page.getByRole('button',{name:'Start the maze',exact:true}).click();await page.waitForTimeout(1100);keepsakeResources=await resources();await page.waitForTimeout(4000);}
+          else if(victoryReview) {await victoryPause.evaluate(e=>e.remove());await page.waitForTimeout(11000);}
           else if(potionReview) {
             const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
             await press(fixture.direction);await page.waitForTimeout(1700);
@@ -243,23 +250,31 @@ try {
             const entries = events.filter(e => e.name === name && e.ph === 'X');
             return [name, { count: entries.length, totalMs: entries.length ? entries.reduce((n, e) => n + (e.dur || 0), 0) / 1000 : null }];
           }));
-          const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: fixture.snapshot.game.steps, stepsAfter: sample.save?.game?.steps,
+          const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: routeSnapshot.game.steps, stepsAfter: sample.save?.game?.steps,
+            keepsakePeak:sample.keepsakePeak,keepsakeResources,
             resourcesBefore,resourcesAfter:await resources(),victoryProgressBefore,victory:sample.victory,loot:sample.save?.game?.loot??null,
             gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,coldProbe:sample.coldProbe,mount:sample.mount,
             dpr:cohort.dpr,cpuRate,rebases:sample.rebases,windows:sample.windows,
             rebaseAdjacentDeltas:deltas.filter((_,i)=>[i,i+1].some(j=>j>0&&sample.windows[j]?.join()!==sample.windows[j-1]?.join())),
             layers:layers.map(({width,height,drawsContent,backendNodeId,paintCount})=>({width,height,drawsContent,backendNodeId,paintCount})),
-            positionBefore: fixture.snapshot.game.position, positionAfter: sample.save?.game?.position, transforms: new Set(sample.positions).size, mutations: sample.mutations,
+            positionBefore: routeSnapshot.game.position, positionAfter: sample.save?.game?.position, transforms: new Set(sample.positions).size, mutations: sample.mutations,
             p50: percentile(sorted, .5), p90: percentile(sorted, .9), p95: percentile(sorted, .95), max: sorted.at(-1), over20: deltas.filter(n => n > 20).length, over34: deltas.filter(n => n > 34).length, deltas, positions: sample.positions, trace, errors, brokenImages: sample.brokenImages };
           report.rows.push(row);
           await writeFile(resolve(output, 'report.json'), JSON.stringify(report, null, 2));
           if (pair === 0 && captureScreenshots) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined,mount:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (chestReview||enemyReview||potionReview?2:lootReview?4:(idleReview||victoryReview)?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || ((idleReview||victoryReview) ? row.transforms !== 1 : row.transforms < (chestReview||potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (chestReview||enemyReview||potionReview?2:lootReview?4:(idleReview||victoryReview||keepsakeReview)?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || ((idleReview||victoryReview||keepsakeReview) ? row.transforms !== 1 : row.transforms < (chestReview||potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
           if(victoryReview){
             if(!sample.victory || (mode==='candidate'&&sample.victory.running!==0))throw Error('Victory did not settle');
             if(sample.victory.progress!==victoryProgressBefore)throw Error('Victory changed unbanked profile');
+          }
+          if(keepsakeReview){
+            if(row.keepsakePeak!==(mode==='candidate'?1:0)||await page.locator('.earned-keepsake').count())throw Error('Earned card missing, multiplied or not expired');
+            const rewardFields=value=>{const {discoveredFriendIds,discoveredEnemyIds,...rewards}=JSON.parse(value);return rewards;};
+            // Start legitimately reveals visible species through the separate
+            // discovery owner. Every completion/reward field must stay fixed.
+            if(JSON.stringify(rewardFields(await page.evaluate(key=>localStorage.getItem(key),data.keys.progress)))!==JSON.stringify(rewardFields(victoryProgressBefore)))throw Error('Decoration changed committed rewards');
           }
           if(chestReview){
             const sources=row.loot.sources.filter(s=>s.objectId===fixture.objectId);

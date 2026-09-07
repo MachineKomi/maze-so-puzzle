@@ -26,7 +26,8 @@ process.env.MAZE_PERF_EVIDENCE_DIR = evidenceRoot;
 
 export default defineConfig({
   testDir: import.meta.dirname,
-  testMatch: ["pickup-presence.pw.ts", "explore-layout.pw.ts", "friend-victory.pw.ts", "scene-depth.pw.ts", "adventure-xp.pw.ts", "chests.pw.ts", "camera-window.pw.ts", "browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts", "ui-correction.pw.ts", "phone-book.pw.ts", "book-completion.pw.ts", "jump-camera.pw.ts", "tall-walls.pw.ts", "hazard-surfaces.pw.ts", "wall-sprites.pw.ts", "reward-sprites.pw.ts", "physical-loot.pw.ts", "reward-numbers.pw.ts", "enemy-loot.pw.ts"],
+  // C durable-earned contracts share the existing serial browser owner.
+  testMatch: ["earned-keepsakes.pw.ts", "pickup-presence.pw.ts", "explore-layout.pw.ts", "friend-victory.pw.ts", "scene-depth.pw.ts", "adventure-xp.pw.ts", "chests.pw.ts", "camera-window.pw.ts", "browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts", "ui-correction.pw.ts", "phone-book.pw.ts", "book-completion.pw.ts", "jump-camera.pw.ts", "tall-walls.pw.ts", "hazard-surfaces.pw.ts", "wall-sprites.pw.ts", "reward-sprites.pw.ts", "physical-loot.pw.ts", "reward-numbers.pw.ts", "enemy-loot.pw.ts"],
   fullyParallel: false,
   workers: 1,
   retries: 0,

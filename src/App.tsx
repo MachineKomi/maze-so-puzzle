@@ -122,6 +122,8 @@ import { CatalogueImage, PresentationArt } from "./ui/CatalogueImage";
 import { resolveUiArt, type UiArt } from "./ui/art";
 import { DialogShell as Modal } from "./ui/dialogs/DialogShell";
 import { StoryDialog } from "./ui/dialogs/StoryDialog";
+import { EarnedKeepsake } from "./ui/EarnedKeepsake";
+import { earnedKeepsakes, keepsakeCorner, type EarnedKeepsake as Keepsake } from "./ui/earnedKeepsakes";
 import { SoundDialog } from "./ui/SoundDialog";
 import { usePresentation } from "./ui/PresentationProvider";
 import { getCurrentInputBlock, type UiInteractionState } from "./ui/interactionState";
@@ -766,6 +768,8 @@ function App() {
   const [progress, setProgress] = useState<PlayerProgress>(readPlayerProgress);
   const [unsupportedProfile, setUnsupportedProfile] = useState(hasUnsupportedProgressProfile);
   const [completion, setCompletion] = useState<CompletionCelebration | null>(null);
+  const [earnedEvent,setEarnedEvent]=useState<{id:string;items:readonly Keepsake[]}|null>(null);
+  const closeEarnedEvent=useCallback(()=>setEarnedEvent(null),[]);
   const [restartArmed, setRestartArmed] = useState(false);
   const [battlePresentation, setBattlePresentation] = useState<BattlePresentation | null>(null);
   const [chestPresentation,setChestPresentation]=useState<ChestPresentation|null>(null);
@@ -805,7 +809,6 @@ function App() {
   const touchCursorRef = useRef<HTMLDivElement>(null);
   const lastBumpSoundAt = useRef(0);
   const restartTimer = useRef<number | undefined>(undefined);
-  const rewardSoundTimer = useRef<number | undefined>(undefined);
   const mapPickupTimer = useRef<number | undefined>(undefined);
   const mapPickupSequence = useRef(0);
   const blockerBumps = useRef(new Map<string, number>());
@@ -928,6 +931,9 @@ function App() {
   const inputBlock = { ...currentInputBlock, gameplayInputAllowed: currentInputBlock.gameplayInputAllowed && !portrait,
     backgroundInert: currentInputBlock.backgroundInert || portrait, clearHeldInput: currentInputBlock.clearHeldInput || portrait };
   const modalOpen = inputBlock.backgroundInert;
+  const earnedCorner=earnedEvent?keepsakeCorner(game.position.x-cameraWindow.left,
+    game.position.y-cameraWindow.top,cameraWindow.width,cameraWindow.height):null;
+  useEffect(()=>{if(screen!=="game"||portrait)setEarnedEvent(null);},[screen,portrait]);
   const hudModel = useMemo(() => buildAdventureHudModel(level, game), [level, game]);
   const powerGuidance = usePowerGuidance(level, game, tooStrongEncounter?.event.objectId);
 
@@ -1366,10 +1372,7 @@ function App() {
           window.clearTimeout(inputUnlockTimer.current);
           inputUnlockTimer.current = undefined;
         }
-        if (rewardSoundTimer.current !== undefined) {
-          window.clearTimeout(rewardSoundTimer.current);
-          rewardSoundTimer.current = undefined;
-        }
+        setEarnedEvent(null);
         inputLocked.current = false;
       }
     };
@@ -1389,6 +1392,7 @@ function App() {
   }, [screen]);
 
   const loadLevel = useCallback((nextLevel: LevelDefinition) => {
+    setEarnedEvent(null);
     cancelPresentations();
     if (inputUnlockTimer.current !== undefined) {
       window.clearTimeout(inputUnlockTimer.current);
@@ -1396,10 +1400,6 @@ function App() {
     }
     inputLocked.current = false;
     clearHeldInput();
-    if (rewardSoundTimer.current !== undefined) {
-      window.clearTimeout(rewardSoundTimer.current);
-      rewardSoundTimer.current = undefined;
-    }
     if (mapPickupTimer.current !== undefined) {
       window.clearTimeout(mapPickupTimer.current);
       mapPickupTimer.current = undefined;
@@ -1436,6 +1436,7 @@ function App() {
       queuedMove.current = null;
       return;
     }
+    setEarnedEvent(null);
     if (presentationSuspended.current) return;
     if (inputLocked.current) {
       queuedMove.current = { direction: requestedDirection, lateralOffset, travelDurationMs:proposedTravelDuration, repeated };
@@ -1595,12 +1596,6 @@ function App() {
       setCompletion(pending);
       musicTransport.setContext("victory");
       if (!mutedRef.current) void musicTransport.startFromUserGesture();
-      if (pending.newStickerIds.length > 0 || pending.newMedalIds.length > 0 || pending.newBadgeIds.length > 0) {
-        rewardSoundTimer.current = window.setTimeout(() => {
-          playSound(pending.newBadgeIds.length > 0 ? "stamp" : "reward", mutedRef.current);
-          rewardSoundTimer.current = undefined;
-        }, presentationDuration + 520);
-      }
     }
 
     if (inputUnlockTimer.current !== undefined) window.clearTimeout(inputUnlockTimer.current);
@@ -1734,7 +1729,6 @@ function App() {
     if (heldKeyTimer.current !== undefined) window.clearTimeout(heldKeyTimer.current);
     if (pointerHoldTimer.current !== undefined) window.clearTimeout(pointerHoldTimer.current);
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
-    if (rewardSoundTimer.current !== undefined) window.clearTimeout(rewardSoundTimer.current);
     musicTransport.dispose();
   }, [clearPresentationWork]);
 
@@ -2236,6 +2230,10 @@ function App() {
     } else {
       enterLevel(makeSurprise());
     }
+    // loadLevel clears prior decoration. Admit only after the actual write and
+    // next scene transition; projected victory arrays are never earned events.
+    const items=earnedKeepsakes(progress,nextProgress,progressSaved);
+    if(items.length)setEarnedEvent({id:completion.completionId,items});
   };
 
   const firstMoveNudge = campaignIndex === 0
@@ -2659,6 +2657,12 @@ function App() {
 
               <RewardLayer port={rewardPort} level={level} scene={sceneTravel} muted={muted}
                 active={pageVisible} loot={lootView} quality={preferences.quality} />
+
+              {earnedEvent && earnedCorner && <EarnedKeepsake key={earnedEvent.id}
+                items={earnedEvent.items} corner={earnedCorner} muted={muted}
+                animated={motion==="full" && preferences.quality!=="static"}
+                available={pageVisible && !portrait && !modalOpen && !presentationActive && game.status==="playing"}
+                onClose={closeEarnedEvent}/>}
 
               {mapPickupToast && (
                 <div

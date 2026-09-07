@@ -1,5 +1,11 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current work — DELIGHT27 C:** [earned keepsakes](plans/DELIGHT-27-earned-keepsakes.md)
+on codex/earned-keepsakes. Astra is sole runtime writer; actual Sol independently
+reviews source, visuals and qualification. Candidate27 derives actual newly
+saved IDs after Next; web26 remains live until qualified promotion. Next after C
+is LEARN-01 including STORY-RESCUE-01; preserve the wider roadmap and device queue.
+
 **Current delivery — web0.22.26:** [public receipt](reviews/2026-09-07-v02226-public-verification.md)
 closes DELIGHT26 checkpoint A, calm pickup presence. Frozen fd1f9e6,
 reviewed2433171, releasefc32f86; actual independent Sol supports publication.
@@ -10,6 +16,12 @@ Use the verified C handoff in the [A contract](plans/DELIGHT-26-calm-pickup-pres
 Preserve the wider roadmap, accepted walls/spacious HUD, usable Garden dependency,
 ART-REWARD-01 and open physical Apple/cold-Power/native queue. Earlier current,
 active and next assignments below are historical.
+
+Documentation closure c3e9e7c is backed up on main and this branch. Vercel
+actually skipped it at17:31:44UTC through the unchanged Ignored Build Step;
+[observed receipt](reviews/2026-09-07-v02226-public-verification.md#observed-documentation-closure).
+This observation is branch-only for the next runtime slice. Owned QA processes
+are closed; unowned4271 and all retained artifacts remain untouched.
 
 Documentation closure ac055e5 is backed up on main and this branch. Vercel
 actually skipped it at16:47:58 UTC through the unchanged Ignored Build Step;
