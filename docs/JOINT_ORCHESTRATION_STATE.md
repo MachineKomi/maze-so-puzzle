@@ -15,6 +15,14 @@ and cold first-Power observation. No physical Apple/3GB/native acceptance.
 Astra owns runtime on codex/chest-mimic-rewards; Sol independently reviews.
 Earlier dated active/next/live labels below are historical and superseded.
 
+Docs closure a6cd8cb is backed up on main and this branch. Vercel actually
+skipped it at11:09:13UTC through the unchanged Ignored Build Step. The
+[observed receipt](reviews/2026-09-07-v02222-public-verification.md#observed-documentation-closure)
+is backed up on this Codex branch only for the next runtime slice; no extra
+main push or game build is needed to align documentation SHAs. All owned QA
+processes stopped; unowned4271 is untouched. Retain the artifact ledger for
+explicit Human cleanup review.
+
 **Current delivery — web0.22.21:** [public proof](reviews/2026-09-07-v02221-public-verification.md).
 Release **12f484f6f438a8ac44a6316ffbc212b600416518**, reviewed **4bd97e76110e0d3611ba46f1356474e4917b4d9b**,
 frozen runtime **6cc9f86bf6f21f741c3fc75f40ea408612e2726f**.

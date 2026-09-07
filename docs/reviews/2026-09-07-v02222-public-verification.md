@@ -86,3 +86,13 @@ No deletion/archive, repository/media clone or native package.
 [Current P22/Q05 and device queue](../HUMAN_REVIEW_QUEUE.md),
 [cumulative playtests](../PLAYTEST_CHECKLIST.md),
 [Human decisions](../HUMAN_DECISIONS.md).
+
+## Observed documentation closure
+
+Documentation checkpoint **a6cd8cb61321fa55f5d9caceb6715470c29168cf** is backed up
+on main and the Codex branch. The unchanged guard returned SKIP against actual
+successful release c5f2305. Vercel then actually reported **Canceled by Ignored
+Build Step** at2026-09-07T11:09:13Z:
+[observed skipped deployment](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/4yC8kya8AHoFZ6a7PWpPbD3cGUGL).
+This receipt is backed up on the Codex branch only for the next runtime slice;
+no extra main push or game deployment is needed to align documentation SHAs.
