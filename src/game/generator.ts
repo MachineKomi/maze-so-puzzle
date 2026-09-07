@@ -1,5 +1,5 @@
 import { pointKey } from "./engine";
-import { gameplayFingerprint } from "./contentIdentity";
+import { gameplayFingerprintForRules } from "./contentIdentity";
 import { solveLevel, validateLevel } from "./solver";
 import type {
   AnimalSpecies,
@@ -1123,7 +1123,8 @@ function buildGeneratedLevel(
   return {
     schemaVersion: 1,
     contentRevision: GENERATED_CONTENT_REVISION,
-    gameplayFingerprint: gameplayFingerprint(identityInput),
+    // Revision2 retains its exact pre-chest identity and recipes.
+    gameplayFingerprint: gameplayFingerprintForRules(identityInput,5),
     id,
     name: "Surprise Maze",
     objective: difficulty === "movement"

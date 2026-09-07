@@ -10,6 +10,7 @@ import {
   DEFAULT_WEAPON_STYLE,
   DOOR_ART,
   ENEMY_ART,
+  MIMIC_ART,
   FRONT_DOOR_ART,
   HAZARD_ART,
   GOAL_ART,
@@ -259,6 +260,11 @@ export function preloadLevelArt(level: LevelDefinition): void {
         break;
       case "enemy":
         sources.add(resolveEnemyArt(object.style).src);
+        break;
+      case "chest":
+        sources.add(MIMIC_ART[object.family].closed.src);
+        if(object.mimicChance<100)sources.add(MIMIC_ART[object.family]["good-open"].src);
+        if(object.mimicChance>0)sources.add(MIMIC_ART[object.family].revealed.src);
         break;
       case "sword":
         sources.add(resolveWeaponArt(object.style).src);

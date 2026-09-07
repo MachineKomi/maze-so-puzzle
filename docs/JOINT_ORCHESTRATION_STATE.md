@@ -1,5 +1,16 @@
 # Maze so Puzzle — joint orchestration state
 
+**Active continuation — authored chest candidate:** Astra writes on
+`codex/chest-mimic-rewards`; Sol independently reviews. Web0.22.21 remains live.
+[Current execution contract](plans/LOOT-03B-authored-chests-and-mimics.md) scopes
+four additive mixed chests and Twilight's disguised Power6 Candy, preserving
+exact historical v5 runs. Source checkpoint:746 tests pass and build compiles;
+browser, asset activation, independent review and performance qualification
+remain in progress. Do not deploy this checkpoint or infer native acceptance.
+[Feedback reconciliation](reviews/2026-09-07-playtest-feedback-reconciliation-v21.md)
+keeps unfinished hole/pace/contact work visible without reopening delivered fixes.
+Earlier clean-tree/branch labels below describe the v21 closure.
+
 **Current delivery — web0.22.21:** [public proof](reviews/2026-09-07-v02221-public-verification.md).
 Release **12f484f6f438a8ac44a6316ffbc212b600416518**, reviewed **4bd97e76110e0d3611ba46f1356474e4917b4d9b**,
 frozen runtime **6cc9f86bf6f21f741c3fc75f40ea408612e2726f**.

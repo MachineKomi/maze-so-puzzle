@@ -18,21 +18,21 @@ describe("campaign route-quality metrics", () => {
       expect(metric.prerequisiteDepth).toBeNull();
     }
     expect(CURATED_LEVELS.map((level) => report[level.id]!.ordinaryInputs))
-      .toEqual([6, 38, 65, 82, 71, 95, 121, 124, 182, 151, 206, 165, 29, 105, 47, 62]);
+      .toEqual([6, 38, 65, 82, 71, 95, 121, 124, 182, 151, 208, 165, 29, 105, 47, 63]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.perfectInputs))
-      .toEqual([7, 52, 80, 91, 78, 108, 151, 141, 195, 207, 212, 170, 44, 177, 58, 75]);
+      .toEqual([7, 52, 80, 91, 78, 108, 151, 141, 195, 208, 214, 170, 44, 177, 58, 76]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.ordinaryMovementSteps))
       .toEqual([6, 36, 62, 78, 66, 90, 115, 117, 179, 147, 199, 159, 28, 101, 44, 54]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.perfectMovementSteps))
       .toEqual([6, 48, 74, 84, 70, 100, 141, 131, 189, 199, 201, 159, 40, 169, 50, 62]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.rawBranchPoints))
-      .toEqual([2, 6, 5, 8, 7, 6, 11, 11, 14, 18, 14, 16, 13, 10, 37, 40]);
+      .toEqual([2, 6, 5, 8, 7, 6, 11, 11, 14, 18, 15, 16, 13, 10, 37, 40]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.meaningfulStateChanges))
-      .toEqual([0, 4, 7, 9, 10, 11, 13, 15, 8, 9, 14, 14, 2, 8, 9, 11]);
+      .toEqual([0, 4, 7, 9, 10, 11, 13, 15, 8, 9, 16, 14, 2, 8, 9, 12]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.retraversalMoves))
       .toEqual([0, 0, 0, 0, 0, 0, 4, 2, 64, 44, 49, 27, 5, 21, 0, 1]);
     expect(CURATED_LEVELS.map((level) => report[level.id]!.longestQuietRun))
-      .toEqual([6, 8, 13, 13, 9, 14, 16, 15, 42, 48, 24, 20, 11, 27, 9, 9]);
+      .toEqual([6, 8, 13, 13, 9, 14, 16, 15, 42, 48, 24, 20, 11, 27, 9, 10]);
     expect(Math.max(...CURATED_LEVELS.slice(8).map((level) => report[level.id]!.ordinaryInputs)))
       .toBeLessThanOrEqual(210);
     expect(Math.max(...CURATED_LEVELS.slice(8).map((level) => report[level.id]!.longestQuietRun)))

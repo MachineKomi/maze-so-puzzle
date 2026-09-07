@@ -1,8 +1,7 @@
 import type { TreasureCurrency } from "./types";
-import { GAMEPLAY_RULES_REVISION } from "./contentIdentity";
 
 /** Rules 5: bounded optional rewards. Power remains the puzzle's own reward. */
-export const ENEMY_REWARD_RULES = GAMEPLAY_RULES_REVISION;
+export const ENEMY_REWARD_RULES = 5;
 export const SIMULATION_RUN_ID = "run-simulation-fixed";
 export const ENEMY_REWARD_BANDS = [
   { minimumPower: 1, gold: [1, 3], science: [1, 2] },

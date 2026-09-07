@@ -43,6 +43,7 @@ function levelCanEmit(level: LevelDefinition, eventType: EventType): boolean {
     case "animal-rescued": return hasObject("animal");
     case "portal-warped": return hasObject("portal");
     case "treasure-opened": return hasObject("treasure");
+    case "chest-opened": return hasObject("chest");
     case "door-opened": return hasObject("door") && hasObject("key");
     case "enemy-defeated": return hasObject("enemy") && hasObject("sword");
     case "enemy-too-strong": return hasObject("enemy");

@@ -6,6 +6,7 @@ import { solveLevel } from "./game/solver";
 import type { GameState, LevelDefinition } from "./game/types";
 import {
   ACTIVE_RUN_STORAGE_KEY,
+  ACTIVE_RUN_SCHEMA_VERSION,
   LEGACY_ACTIVE_RUN_STORAGE_KEY,
   VERSION_TWO_ACTIVE_RUN_STORAGE_KEY,
   clearActiveRun,
@@ -64,7 +65,7 @@ function progressedPlayingState(level: LevelDefinition, runId = "run-test-sessio
 
 function rawSnapshot(level: LevelDefinition, game: GameState = createInitialGameState(level)): ActiveRunSnapshot {
   return {
-    schemaVersion: 5,
+    schemaVersion: ACTIVE_RUN_SCHEMA_VERSION,
     runId: "run-test-session-0001",
     levelId: level.id,
     contentRevision: level.contentRevision,
@@ -317,7 +318,7 @@ describe("active run persistence", () => {
 
     const migrated = readActiveRun(CURATED_LEVELS, storage);
     expect(migrated).toMatchObject({
-      schemaVersion: 5,
+      schemaVersion: 6,
       levelId: level.id,
       runId: expect.stringMatching(/^migrated-/),
     });
@@ -339,7 +340,7 @@ describe("active run persistence", () => {
     expect(readActiveRunResult([level], quotaStorage).snapshot).toMatchObject({
       levelId: level.id,
       contentRevision: level.contentRevision,
-      gameplayFingerprint: level.gameplayFingerprint,
+      gameplayFingerprint: gameplayFingerprintForRules(level,5),
     });
     expect(storage.getItem(VERSION_TWO_ACTIVE_RUN_STORAGE_KEY)).not.toBeNull();
     expect(storage.getItem(ACTIVE_RUN_STORAGE_KEY)).toBeNull();
@@ -520,7 +521,7 @@ describe("active run persistence", () => {
     }, storage)).toBe(true);
 
     expect(readActiveRun(CURATED_LEVELS, storage)).toEqual({
-      schemaVersion: 5,
+      schemaVersion: 6,
       runId: "run-test-session-0003",
       levelId: level.id,
       contentRevision: level.contentRevision,
@@ -624,7 +625,7 @@ describe("active run persistence", () => {
     const game = progressedPlayingState(level,"run-test-session-0004");
     const duplicate = <T,>(values: readonly T[]): T[] => [...values].reverse().flatMap((value) => [value, value]);
     const sanitized = sanitizeActiveRunSnapshot({
-      schemaVersion: 5,
+      schemaVersion: 6,
       runId: "run-test-session-0004",
       levelId: level.id,
       contentRevision: level.contentRevision,

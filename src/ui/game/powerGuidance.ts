@@ -23,7 +23,7 @@ export function* createPowerOpportunitySearch(level: LevelDefinition, initial: G
     for (const direction of DIRECTIONS) {
       transitions++;
       const next = movePlayer(level, queue[head]!, direction).state;
-      if (next.defeatedEnemyIds.includes(blockerId)) { yield; continue; }
+      if (next.defeatedEnemyIds.includes(blockerId) || next.chests.some(c=>c.objectId===blockerId&&c.phase==="defeated")) { yield; continue; }
       for (const object of candidates) {
         if (object.kind === "enemy" && next.defeatedEnemyIds.includes(object.id)) found.set("enemy", found.get("enemy") ?? object);
         if (object.kind === "potion" && next.collectedObjectIds.includes(object.id)) found.set("potion", found.get("potion") ?? object);

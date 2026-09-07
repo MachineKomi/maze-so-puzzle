@@ -117,12 +117,12 @@ describe("curated campaign levels", () => {
       124,
       182,
       151,
-      206,
+      208,
       165,
       29,
       105,
       47,
-      62,
+      63,
     ]);
     expect(CURATED_LEVELS.every((level) => level.width <= 24 && level.height <= 24))
       .toBe(true);
@@ -346,7 +346,8 @@ describe("curated campaign levels", () => {
     );
     const enemyStyles = CURATED_LEVELS.flatMap((level) =>
       level.objects.flatMap((object) =>
-        object.kind === "enemy" && object.style !== undefined ? [object.style] : [],
+        object.kind === "enemy" && object.style !== undefined ? [object.style]
+          : object.kind==="chest"&&object.mimicChance>0?[object.family]:[],
       ),
     );
     const cageStyles = CURATED_LEVELS.flatMap((level) =>

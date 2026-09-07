@@ -1,5 +1,14 @@
 # Maze so Puzzle — playtest backlog
 
+**September7 feedback recheck against21:** the requested v02213/v02214 file is
+unchanged and fully reconciled in the [current mapping](reviews/2026-09-07-playtest-feedback-reconciliation-v21.md).
+HOLE-02 connected pit art and Plan08/PT45 icon-led Chill/Walk/Zippy remain open.
+Name the finite walking splash/lava underlight/poison cue follow-up
+**HAZARD-CONTACT-01** under Plan02/04, with bounded existing-clock effects and
+paired idle/movement cost. Book-loop and liquid-bank/shadow/surface fixes shipped
+in16; Q07/Q04 observations remain. Do not reimplement rejected14 dashes or infer
+that single-hole rules/camera already deliver connected trench artwork.
+
 **Current web0.22.21 delivery:** [FIELD-21 receipt](reviews/2026-09-07-v02221-public-verification.md) binds the
 proportion, compact-drop, jump-depth and perimeter fixes. Accepted interior walls
 are preserved. ART-REWARD-01 proper generated reward art remains queued.

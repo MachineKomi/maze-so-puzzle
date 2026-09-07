@@ -1,5 +1,14 @@
 # Local artifact ledger and cleanup review
 
+## Chest/Mimic continuation — September7 active
+
+Astra owns runtime on `codex/chest-mimic-rewards`, from clean3c5d70c; Sol reviews
+independently. Four-file frozen21 HTML/JS/CSS/identity entry is at
+`C:/GameDev/maze-game-qa/performance/release-v02221/`, sharing existing public
+media. Reuse existing dist/tools. Future named `chest22-*` packets must record
+counts, bytes and dispositions here; avoid repeated full artwork racks. No repo/
+media clone, native package, deletion or archive. Older unowned4271 stays untouched.
+
 ## Current release inventory — web0.22.21
 
 Local qualification remains461 files /296653434 bytes across12 folders. Public
@@ -760,3 +769,10 @@ held diagnostic evidence; they are not cold-success proofs. The
 [qualification](reviews/2026-09-07-v02220-web-qualification.md) owns exact scope
 and hashes. Reassess current consumers and seek exact-target Human approval
 before any later cleanup. The two tiny summary files are already counted above.
+# Chest source qualification packet — September7
+
+`C:/GameDev/maze-game-qa/performance/chest22-source` contains the reproducible
+authored economy/route audit and subsequent unit-check logs. Retain until this
+candidate's release review; review for cleanup later only with Human approval.
+`scripts/performance/chest-audit.mjs` regenerates the audit without a browser or
+media copy. This is one named packet, alongside the four-file frozen v21 entry.

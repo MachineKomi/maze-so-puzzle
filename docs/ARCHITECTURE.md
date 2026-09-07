@@ -682,3 +682,13 @@ a saturated old ledger compacts same-source grounded bundles into an existing
 legal landing to reserve new channels; no current campaign save needs this.
 v2/v3 retain credited-treasure migration. Key5 is written before old-key cleanup;
 malformed/future and denied-write records stay protected. [Execution contract](plans/LOOT-03B-enemy-rewards-execution.md).
+# Authored chest continuation — schema-v6 snapshot
+
+The current candidate adds explicit chest receipts and two-channel physical
+loot. Schema6 keeps the authoritative active-run-v5 key so v21 protects new
+records. Exact legacy curated graphs/rules5 remain resolvable for valid prior
+runs; old collected chest and visible Candy rewards do not gain retroactive
+Science or Mimic premium. New attempts use the four mixed chests and Twilight's
+Power6 disguised Candy. Generator2 remains pinned to rules5. See the
+[execution contract](plans/LOOT-03B-authored-chests-and-mimics.md). This paragraph
+describes the candidate; web0.22.21 remains published until qualification.
