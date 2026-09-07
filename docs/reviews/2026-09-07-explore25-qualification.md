@@ -4,7 +4,7 @@ Candidate web0.22.25, frozen runtime **c931bc3c8b69c1f52d8c7dacdd21771cd6b5ae5c*
 Baseline is published24 runtime d880b223. [Contract](../plans/EXPLORE-25-spacious-maze.md),
 [Human request](../user-playtests/2026-09-07-spacious-maze-request.md), and actual
 [independent Sol review](2026-09-07-explore25-sol-review.md) govern this slice.
-**Status: local qualification complete; actual independent Sol supports bounded web promotion. Exact reviewed-head CI precedes publication.**
+**Status: published0.22.25 after actual independent Sol support and exact reviewed-head CI34144445337. [Public receipt](2026-09-07-v02225-public-verification.md) binds both origins.**
 
 ## What changed
 
@@ -32,7 +32,7 @@ overlay obscures gameplay. No new animation loop or full-repository/media clone.
 All packets below are external under `C:/GameDev/maze-game-qa/performance`.
 The complete local project suite passes **769 tests in78 files**. The frozen
 runtime's exact-head CI34142703900 passes; Windows compilation is not native
-release acceptance. Final reviewed-head CI is still required before promotion.
+release acceptance. Final reviewed-head CI34144445337 subsequently passed before promotion.
 
 - `explore25-frozen-browser`:27 passed plus the retained phone More-target failure.
   It covers nine screen sizes, all Friends/Bag cells, square-cell geometry,

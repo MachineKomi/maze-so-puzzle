@@ -1,8 +1,8 @@
 # Family playtest checklist
 
-## P25 / Q11 — spacious exploration (candidate)
+## P25 / Q11 — spacious exploration (published0.22.25)
 
-Publication is pending qualification. When ready, use any unlocked scrolling
+Ready on [published0.22.25](reviews/2026-09-07-v02225-public-verification.md). Use any unlocked scrolling
 maze; no reset or campaign replay is needed.
 
 - Compare the default spacious maze with **More maze**, then **Expand**. Are the

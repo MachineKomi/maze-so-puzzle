@@ -1,8 +1,8 @@
 # Local artifact ledger and cleanup review
 
-## EXPLORE25 active artifact island
+## EXPLORE25 artifact island — completed
 
-Created four-file `C:/GameDev/maze-game-qa/performance/release-v02224` from verified live24 dist entry bytes (HTML/JS/CSS/identity only, shared unchanged public media). New `explore25-baseline`, `explore25-layout-r1` and subsequent explore25-* evidence remain external; one in-place dist is rebuilt. Final inventory follows qualification. No files deleted/archived, no repo or media clone; unowned port4271 is preserved.
+Created four-file `C:/GameDev/maze-game-qa/performance/release-v02224` from verified live24 dist entry bytes (HTML/JS/CSS/identity only, shared unchanged public media). `explore25-baseline`, `explore25-layout-r1` and subsequent explore25-* evidence remain external; one in-place dist was rebuilt. Completed local/public inventories are below. No files deleted/archived, no repo or media clone; unowned port4271 is preserved.
 
 
 DELIGHT24 closure guard adds one 98-byte log, delight24-doc-guard.log. The complete
@@ -1025,3 +1025,16 @@ One dist in place, four-file baseline only, no duplicate repo/media/native build
 | explore25-touch-final |4|1000837|
 | explore25-touch-r2 |7|1090642|
 | release-v02224 |4|767102|
+
+## EXPLORE25 public closeout inventory
+
+All explore25-* files, the four-file release-v02224 and public standard packet
+now total **627 files / 289262186 bytes** before the small guard log.
+This includes summary helpers/receipts, raw failed development evidence and public
+logs; no deletion/archive or repo/media clone. All owned browser helpers closed.
+
+| Packet | Files | Bytes | Report SHA256 |
+| --- | ---: | ---: | --- |
+| v02225-public-20260907 |5|5656644|4efc6ddcf9365c2ea98c9aeab4b5853a7376e7de3ae1508c691ee31dc23c7349|
+| explore25-public-canonical |14|3956911|2e587c7b285c3e7e6e4b8c3fcaafc4c4f16cc34dace09284d100c1785e99288a|
+| explore25-public-alias |14|3833683|645fa568bf323eafc728f59546504c65ca012acde1a9da0143bf1660bbe371a2|

@@ -1,5 +1,8 @@
 # EXPLORE-25 — spacious maze and folding adventure rail
 
+Delivered in web0.22.25: [public verification](../reviews/2026-09-07-v02225-public-verification.md).
+Q11/P25 queues Human layout/device feedback; no physical Apple/native acceptance is inferred.
+
 September7 Human explicitly asks for a non-square maze viewport consuming the
 space the HUD does not need, and a narrower compact essentials rail. This scope
 supersedes Plan01's square-view/no-shell-overhaul constraint. Astra is the sole

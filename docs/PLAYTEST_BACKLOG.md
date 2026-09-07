@@ -1,6 +1,6 @@
 # Maze so Puzzle — playtest backlog
 
-**Direct Human priority in flight: [EXPLORE-25](plans/EXPLORE-25-spacious-maze.md).** Spacious square-cell maze, folding essentials rail and reversible Classic view are implemented on codex/expansive-exploration; final qualification is pending. Live remains0.22.24. After this request, resume DELIGHT A/C then LEARN-01; preserve all wider roadmap/Garden dependencies and physical-device observations.
+**Current delivery — web0.22.25:** [public receipt](reviews/2026-09-07-v02225-public-verification.md) verifies spacious exploration, the folding essentials sidebar and reversible Classic view on both origins. Frozen c931bc3, reviewed4359772, releasec267308; actual independent Sol supports bounded web publication. Astra owns runtime on codex/expansive-exploration. Q11/P25 is ready; physical Apple/3GB/native acceptance remains open. Next: DELIGHT A pickup presence and C post-write earned fanfare, then LEARN-01 including STORY-RESCUE-01. Preserve the wider roadmap and usable Garden dependencies before rare eggs. Earlier current/live/next labels below are historical.
 
 
 **STORY-RESCUE-01 — inherited authored outro mismatch, found during DELIGHT24 QA.**
