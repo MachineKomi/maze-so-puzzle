@@ -58,3 +58,30 @@ explicit Stay/Restart, preserve provisional reward wording and exactly-once
 finalize/save-failure/future-profile protection. Do not add a Choose-maze action
 that bypasses the completion transaction. Existing Home-launched tests expecting
 Stay focus need an explicit latest-steer update, not silent test weakening.
+
+## Hazard source triage,e69f3e4
+
+Programme confirms HAZARD-02/ada4cbc deliberately replaced13's erode.055 and
+Gaussian.022 masks with exact full-region clip paths for both material and FX.
+That removed the floor margin/feather on every device. Separately, `floorD`
+subtracts full hazard paths and is also used for wall cast/contact; that older
+exclusion already existed in13. Current paint order is correct, but restoring
+an inset alone cannot fix the shadow receiver.
+
+HAZARD-03 first candidate: reuse the connected even-odd boundary and phase-matched
+floor pattern in narrow inside-clipped strokes, with a clear band and two or
+three stepped alpha bands approximating a feather. Prototype.04tile floor and
+.02–.03 transition; no morphology/blur/new pixels or internal tile seams.
+Split a cast receiver covering ground/liquid/lip/transition, excluding actual
+wall footprints and pit voids, from the dressing-only hazard exclusion.
+Keep absent-family gating and current2.4/2.2/2.1 texture periods.
+
+Remove racing white dashes. Compare restrained wrapped texture drift plus
+sparse broad water ripples, slow local lava currents/hot patches with crust,
+and deterministic varied poison bubbles/oily movement. Pattern animation can
+still repaint a large receiver: qualify genuinely nonempty idle and movement
+before accepting it. Finite foot splashes/underlight/gas can follow from existing
+committed movement and presentation ownership, with no new crossing rule.
+Prove isolated/strip/L/T/ring pools, mixed materials, cast across all receiver
+parts, bright/dark themes and Full/Lite/Reduced/Static. These are researched
+implementation leads, not shipped changes or Human-approved appearance.

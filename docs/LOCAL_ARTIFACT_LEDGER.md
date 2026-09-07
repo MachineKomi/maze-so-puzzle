@@ -12,12 +12,24 @@ Under `C:/GameDev/maze-game-qa/performance/`, retained with no deletion/archive:
 | wall04c-moving-final-20260907 |29 /97458143|Five moving pairs per viewport plus warmups, raw traces/hashes,5f8fe38 before field-icon eligibility narrowing. |
 | wall04c-qualified-browser-20260907 |116 /117204022|Final1f8ab73:41 cases all pass, no skips/flakes; actual campaign/maximum-maze/movement/41case output,16rewardcontexts and24token cap. |
 | wall04c-grayscale-20260907 |4 /7075322|Actual-source two8-light grayscale sheets, receipt and standalone reproscript. Owned Vite1421/browser stopped on completion. |
+| wall04c-jump-qualified-20260907 |29 /80417002|Pre-label1f8ab73 five-pair jump diagnostic; final label repair needed afterward, so retain as earlier evidence. |
+| wall04c-edge-label-20260907 |6 /1467545|Two complete five-friend routes and reversals, with Power-edge assertions and corrected780/1194 screenshots. |
+| wall04c-release-moving-20260907 |29 /99159900|Finale69f3e4 five-pair moving cohort, exact served hashes/raw traces. |
+| wall04c-release-jump-20260907 |29 /80407660|Finale69f3e4 five-pair jump cohort, exact served hashes/raw traces. |
+| wall04c-release-idle-20260907 |29 /103429276|Finale69f3e4 five-pair nonempty idle cohort, exact served hashes/raw traces. |
 
 The64,847B `src/ui/__snapshots__/fieldDetailContract.test.ts.snap` is intentional
 source contract evidence:58 reviewed source/geometry tuples, no image copies.
 Existingdist reused. Next final browser/performance folders are separate named
 evidence packets; remeasure at slice closure. Review the optional177MB blocked
 WebKit install and retained prototypes then, with Human approval before cleanup.
+
+All paired browser/server processes stopped at completion. Review is now due
+for the optional blocked WebKit tool and predecessor diagnostic packets after
+public verification; no deletion/archive authorized. Process lesson: finish
+independent pixel review before long final comparisons to avoid repeating
+trace packets for a later small semantic-label correction. No repository or
+full public-media copy was created for these comparisons.
 
 ## WALL-04C prototype outputs — 2026-09-07
 
