@@ -1,5 +1,16 @@
 # UI / UX implementation specification
 
+## DELIGHT24 — candidate friend-led victory
+
+The existing completion dialog presents rescued friends together at a larger
+scale, or Ame warmly when none were rescued. Ordinary compact layouts fit story,
+Gold, keepsakes and Adventure XP together with fixed Next/Stay/Restart actions.
+Enlarged text retains accessible body scrolling. Labels distinguish rewards
+ready to record from the durable Book: Stay does not bank, Next records once,
+and newer-profile sessions explicitly label temporary rewards. See the
+[bounded B contract](plans/DELIGHT-24-friend-victory.md); release state belongs
+to the joint orchestration state. Pickup presence and earned fanfare are separate.
+
 ## CAMERA-17 — delivered web0.22.17
 
 The existing travel owner coordinates camera, actors, followers and foreground

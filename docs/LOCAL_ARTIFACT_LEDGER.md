@@ -914,3 +914,19 @@ The final documentation closeout creates no game build.
 | xp23-summary |5|15012|
 
 Public logs: 3 files, 4843 bytes.
+
+## DELIGHT24 working artifacts — September7
+
+Astra owns codex/friend-victory. Reuse existing dist in place. Frozen external
+release-v02223 contains only HTML/JS/CSS/identity (four files), no media copies.
+Planned delight24-baseline, delight24-browser, delight24-frames, delight24-work
+and delight24-source retain bounded screenshots, fixtures, measurements and logs
+under C:/GameDev/maze-game-qa/performance. Count at qualification closeout.
+No deletion, archive, repository clone or native package.
+
+DELIGHT24 baseline attempt retained discovery-owner assertion failures; corrected
+baseline-qualified passes8/8. Pilot and geometry packets retain initial scroll
+failures (baseline body574/scroll808, first candidate590). Pilot2 passes8/8
+after fitting the whole reward spread. New lifecycle/full browser and unit/build
+logs use delight24-* names in the same external root; record final counts later.
+No deletion or duplicate repository.

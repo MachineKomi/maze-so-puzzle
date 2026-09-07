@@ -16,6 +16,7 @@ const root = resolve(import.meta.dirname, '../..');
 const output = resolve(root, process.env.MAZE_REVIEW_OUTPUT || '../maze-game-qa/performance/phone02-book-paired-20260906');
 const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
+const victoryReview = process.env.MAZE_REVIEW_ROUTE === 'victory';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const enemyReview = process.env.MAZE_REVIEW_ROUTE === 'enemy';
 const chestReview = process.env.MAZE_REVIEW_ROUTE === 'chest';
@@ -45,7 +46,7 @@ await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
 const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
-if (!fixture || (!jumpReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
+if (!fixture || (!jumpReview && !victoryReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
 if(chestReview&&!fixture.baselineSnapshot)throw Error('Chest comparison requires the actual historical object graph');
 if (idleReview && !(fixture.visibleHazardCells > 0)) throw Error('Idle hazard comparison requires a nonempty visible-hazard fixture');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -114,9 +115,10 @@ report.saveKeys={seed:data.keys.run,baseline:process.env.MAZE_REVIEW_BASELINE_RU
 report.coldOpeningProbe=coldProbe;
 report.mountSample=mountSample;
 report.entrySettleMs=entrySettleMs; report.freshBrowser=freshBrowser;
+if(victoryReview) report.route='eleven seconds decoded won-modal celebration, both entries paused before mount and resumed together at measurement start; no completion commit, cold-start or gameplay timing claim';
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
-if (enemyReview) report.route='defeat first enemy, pause2700ms, enter cleared tile, pause1300ms, return, pause500ms; unchanged Power and candidate dual-currency conservation';
+if (enemyReview) report.route='defeat first enemy, pause2700ms, enter cleared tile, pause1300ms, return, pause500ms; unchanged Power and candidate declared-currency conservation';
 if (chestReview) report.route='same authored chest slot: baseline walk-over8Gold versus candidate stationary mixed opening; pause1400ms, candidate enters cleared tile, pause1300ms, both return, pause500ms. Two movements each; the new opening input/beat is an explicit feature cost.';
 if (potionReview) report.route='collect real Power potion, pause1700ms, return, pause500ms; immediate-entry cosmetic-stall comparison with unchanged semantic Power';
 const percentile = (a, q) => a[Math.min(a.length - 1, Math.floor(a.length * q))];
@@ -145,7 +147,9 @@ try {
             if(coldProbe) await installColdOpeningProbe(page);
             if(mountSample) await installMountSample(page);
           }
+          const victoryPause=victoryReview?await page.addStyleTag({content:'.dialog-celebration * { animation-play-state:paused !important; }'}):null;
           await page.getByRole('button', { name: /^Continue/ }).click();
+          if(victoryReview)await page.locator('.dialog-celebration').waitFor();
           await page.locator('.maze-terrain-svg').waitFor();
           if(mode==='candidate' && report.candidateStyle) await page.addStyleTag({content:report.candidateStyle});
           const bundle = await page.locator('script[type="module"]').getAttribute('src');
@@ -190,8 +194,10 @@ try {
               images:document.images.length,reward:c?{width:c.width,height:c.height,running:c.dataset.running,tokens:c.dataset.tokens,arrivals:c.dataset.arrivals,peak:c.dataset.peak}:null };
           });
           const resourcesBefore=await resources();
+          const victoryProgressBefore=victoryReview?await page.evaluate(key=>localStorage.getItem(key),data.keys.progress):null;
           // Four reversible four-step legs per cycle; preserve engine-derived direction.
-          if(potionReview) {
+          if(victoryReview) {await victoryPause.evaluate(e=>e.remove());await page.waitForTimeout(11000);}
+          else if(potionReview) {
             const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
             await press(fixture.direction);await page.waitForTimeout(1700);
             await press(reverse[fixture.direction]);await page.waitForTimeout(500);
@@ -220,10 +226,10 @@ try {
           else for (let cycle=0;cycle<cycles;cycle++) for (const direction of [fixture.direction, reverse[fixture.direction], fixture.direction, reverse[fixture.direction]]) {
             for (let step = 0; step < 4; step++) { await page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`); await page.waitForTimeout(240); }
           }
-          const sample = await page.evaluate(key => {
+          const sample = await page.evaluate(({key,progressKey}) => {
             window.wallAb.done = true; window.wallAbObserver.disconnect();
-            return { ...window.wallAb, mount:window.__mazeMountSample, coldProbe:window.__mazeColdProbe, save: JSON.parse(localStorage.getItem(key)), brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
-          }, report.saveKeys[mode]);
+            return { ...window.wallAb, mount:window.__mazeMountSample, coldProbe:window.__mazeColdProbe, save: JSON.parse(localStorage.getItem(key)), victory:document.querySelector('.dialog-celebration')?{running:document.querySelector('.rescued-result-row').getAnimations({subtree:true}).filter(a=>a.playState==='running').length,progress:localStorage.getItem(progressKey)}:null, brokenImages: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
+          }, {key:report.saveKeys[mode],progressKey:data.keys.progress});
           if(captureTrace) { const complete = new Promise(resolve => client.once('Tracing.tracingComplete', resolve));
             await client.send('Tracing.end'); await complete; }
           const deltas = sample.frames.slice(1).map((t, i) => t - sample.frames[i]), sorted = [...deltas].sort((a, b) => a - b);
@@ -232,7 +238,7 @@ try {
             return [name, { count: entries.length, totalMs: entries.length ? entries.reduce((n, e) => n + (e.dur || 0), 0) / 1000 : null }];
           }));
           const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: fixture.snapshot.game.steps, stepsAfter: sample.save?.game?.steps,
-            resourcesBefore,resourcesAfter:await resources(),loot:sample.save?.game?.loot??null,
+            resourcesBefore,resourcesAfter:await resources(),victoryProgressBefore,victory:sample.victory,loot:sample.save?.game?.loot??null,
             gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,coldProbe:sample.coldProbe,mount:sample.mount,
             dpr:cohort.dpr,cpuRate,rebases:sample.rebases,windows:sample.windows,
             rebaseAdjacentDeltas:deltas.filter((_,i)=>[i,i+1].some(j=>j>0&&sample.windows[j]?.join()!==sample.windows[j-1]?.join())),
@@ -244,7 +250,11 @@ try {
           if (pair === 0 && captureScreenshots) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined,mount:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (chestReview||enemyReview||potionReview?2:lootReview?4:idleReview?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || (idleReview ? row.transforms !== 1 : row.transforms < (chestReview||potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (chestReview||enemyReview||potionReview?2:lootReview?4:(idleReview||victoryReview)?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || ((idleReview||victoryReview) ? row.transforms !== 1 : row.transforms < (chestReview||potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if(victoryReview){
+            if(!sample.victory || (mode==='candidate'&&sample.victory.running!==0))throw Error('Victory did not settle');
+            if(sample.victory.progress!==victoryProgressBefore)throw Error('Victory changed unbanked profile');
+          }
           if(chestReview){
             const sources=row.loot.sources.filter(s=>s.objectId===fixture.objectId);
             if(sources.length!==(mode==='baseline'?1:2))throw Error('Chest comparison missed reward');

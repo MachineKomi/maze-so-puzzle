@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "delight24-friend-led-finite-victory",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 1000,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra bounds the authorized DELIGHT02B B-only celebration: one mounted visibility latch, rescued-only stage with warm solo completion, finite CSS gestures and clearer pending receipts. No new media, dependency, schema, game rule or frame loop. Existing CSS ceiling applies; release still requires independent source/visual/performance review.",
+      "evidencePath": "docs/plans/DELIGHT-24-friend-victory.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Before publication keep web23. Revert this complete presentation slice to3457cf6 while preserving schema8/profile and schema7/run readers, accepted walls, XP receipts and all media."
+    },
+    {
       "id": "scene23-ground-depth-and-readable-scale",
       "owner": "ui",
       "status": "approved",

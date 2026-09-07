@@ -736,3 +736,15 @@ Doors use alpha-bound1.12-width/1.35-height limits; floor weapons exactly reuse
 the registered held canvas scale. Actor clearance and accepted wall geometry
 are unchanged. Jump boots imagery/attachment rules are removed, while pickup,
 inventory, jumping ability and the finite ring remain. [Scene contract](plans/SCENE-23-depth-and-scale.md).
+
+## DELIGHT24 candidate: finite victory presentation
+
+VictoryParade consumes the existing won result and page/motion visibility. It
+never commits awards or runs a frame loop. Five rescued actors at most share a
+stage; zero rescues presents Ame. Existing species CSS runs at most two cycles
+(maximum9.88 seconds), twelve finite decorative pieces and at most one suitable
+cosmetic flip. A one-way mounted quiet latch cancels on hidden/reduced/static
+and cannot replay on returning. Unmount clears presentation. The existing Next
+transaction remains the sole completion banking owner. XP and projected
+keepsakes share the compact victory grid; enlarged text retains body scrolling
+and fixed reachable actions. See [contract](plans/DELIGHT-24-friend-victory.md).

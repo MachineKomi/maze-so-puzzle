@@ -1,5 +1,7 @@
 # Integrated implementation roadmap through final convergence
 
+**Current execution — DELIGHT24, candidate web0.22.24:** [friend-led victory](DELIGHT-24-friend-victory.md) implements DELIGHT-02B checkpoint B. Astra writes on codex/friend-victory; Sol independently reviews. Web23 remains live. The earlier inventory-next pointer is corrected: rare eggs require the actual usable Plan10 Garden and its Plan09/greybox dependencies; an empty Book inventory is not that home. Execute B, then remaining A/C, then LEARN-01 while preserving Garden/eggs and the wider roadmap. No additional general permission is needed.
+
 **Current delivery — web0.22.23:** [release receipt](../reviews/2026-09-07-v02223-public-verification.md) records [SCENE-23](SCENE-23-depth-and-scale.md) and [LOOT-03 C rainbow XP](LOOT-03C-adventure-xp-execution.md). Taller doors, pickup/held weapon parity, shared ground depth, larger above-wall Power and boot-free jump presentation are delivered. Astra owns runtime; actual independent Sol supports the bounded web scope. Next: protected usable inventory before eggs; ART-REWARD-01 and the wider roadmap remain open. Q09/P23 is the scene/XP playtest; Q08/P19 physical Apple/cold-Power and native qualification remain separate. Earlier active/next/live labels below are historical.
 
 
