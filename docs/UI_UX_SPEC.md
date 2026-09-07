@@ -1,5 +1,22 @@
 # UI / UX implementation specification
 
+## Book completion and movement detail —0.22.16 candidate
+
+Normal story completion always offers Next maze first, or the explicitly named
+Surprise maze after the final chapter. Partial friend rescue does not silently
+make Stay the initial Enter action. Stay and Restart remain explicit. Moving on
+records the pending completion exactly once; denied supported writes keep the
+exit open for retry, while newer-profile temporary sessions explain that they
+are temporary and preserve stored bytes. Book active-run/resume applies only
+to normal play; selecting the same chapter from tester mode begins a normal run.
+Legitimate visible-friend discovery during that normal entry remains enabled.
+
+The obsolete amber moving-corner sparkle and its movePulse owner are removed.
+Player grounding retains steady paint in Full/Lite/Reduced/Static. Existing
+travel, jump, wall overlap and reward effects retain their own presentation
+owners. [Source and browser evidence](reviews/2026-09-07-book03-move02-candidate.md).
+This is implemented candidate behavior; publication follows final qualification.
+
 ## WALL-04C field scale and depth — web0.22.15
 
 The Human requests larger artwork inside the unchanged logical tile grid.

@@ -1,5 +1,15 @@
 # Maze so Puzzle — joint orchestration state
 
+**Active September7 slice:** Astra is sole runtime writer on
+`codex/book-completion-hazard-refinement`. Book/MOVE repair f2368ac is backed up:
+ten Book save/routing journeys and four corrected movement-mode checks pass.
+[Candidate](reviews/2026-09-07-book03-move02-candidate.md). HAZARD-03 is now an
+implemented local prototype undergoing independent visual/cost qualification;
+first diagonal/four-band pilot was rejected for extra rendering work, and a lean
+two-image/two-stroke prototype is being compared. Public remains0.22.15.
+No unqualified runtime has been promoted. [Plan](plans/HAZARD-03-connected-living-surfaces.md).
+Current facts in this paragraph supersede the older reproduce/next labels below.
+
 **September7 newest execution steer:** WALL-04C is delivered as web0.22.15.
 [New Human playtest routing](reviews/2026-09-07-playtest-routing.md)
 now requires reproduction/fix of the Book-selected campaign loop and

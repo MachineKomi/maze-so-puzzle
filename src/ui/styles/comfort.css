@@ -35,7 +35,7 @@
 }
 :root[data-quality="lite"] .terrain-wall-depth { filter: none; }
 :root[data-quality="lite"] :is(.terrain-water-fx, .terrain-lava-fx, .terrain-poison-fx) { display: none; }
-:root[data-quality="lite"] :is(.water-ripple-marks path, .lava-shimmer-marks circle, .lava-shimmer-marks path, .poison-bubble) { animation: none; }
+:root[data-quality="lite"] :is(.hazard-current, .water-ripple-marks ellipse, .lava-shimmer-marks ellipse, .poison-bubble) { animation: none; }
 /* Let the production prefixer emit both forms; a trailing authored prefixed
  * declaration can otherwise suppress the standard override during minification. */
 :root[data-quality="lite"] .touch-joystick-origin { backdrop-filter: none; }

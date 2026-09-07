@@ -26,14 +26,21 @@ describe("contained hazard surfaces", () => {
   it("renders connected hazards without blur/morphology or mark owners for absent hazards", () => {
     const level = parseAsciiLevel({ id: "hazard-proof", name: "Hazard proof", objective: "Proof", map: ["########", "#@.~^%E#", "#..~~%%#", "########"] });
     const markup = renderToStaticMarkup(<MazeTerrain level={level} camera={{ left: 0, top: 0, right: 7, bottom: 3, width: 8, height: 4 }} />);
-    expect(markup).not.toMatch(/feMorphology|feGaussianBlur|hazard-inset/);
+    expect(markup).not.toMatch(/feMorphology|feGaussianBlur/);
     for (const kind of ["water", "lava", "poison"]) {
       expect(markup).toMatch(new RegExp(`class="terrain-${kind}"[^>]+clip-path=`));
       expect(markup).toMatch(new RegExp(`class="terrain-${kind}-fx"[^>]+clip-path=`));
+      expect(markup).toContain(`class="terrain-hazard-lip" data-kind="${kind}"`);
     }
+    expect(markup.indexOf('class="terrain-hazard-lip"')).toBeLessThan(markup.indexOf('class="terrain-wall-cast"'));
+    const cast = markup.match(/class="terrain-wall-cast"[^>]+clip-path="url\(#([^)]+)\)"/)![1];
+    const dressing = markup.match(/class="terrain-floor-dressing"[^>]+clip-path="url\(#([^)]+)\)"/);
+    if (dressing) expect(dressing[1]).not.toBe(cast);
+    expect(markup).toContain(`id="${cast}"><path`);
     const dry = { ...level, terrain: level.terrain.map(row => row.map(t => ["water", "lava", "poison"].includes(t) ? "floor" as const : t)) };
     const dryMarkup = renderToStaticMarkup(<MazeTerrain level={dry} camera={{ left: 0, top: 0, right: 7, bottom: 3, width: 8, height: 4 }} />);
     expect(dryMarkup).not.toMatch(/class="(?:water-ripple-marks|lava-shimmer-marks|poison-bubble)"/);
+    expect(dryMarkup).not.toContain('class="terrain-hazard-lip"');
     for (const kind of ["water", "lava", "poison"] as const) {
       expect(dryMarkup).not.toContain(HAZARD_ART[kind].src);
       expect(dryMarkup).not.toMatch(new RegExp(`<pattern[^>]+id="[^"]+-${kind}(?:-fx)?"`));

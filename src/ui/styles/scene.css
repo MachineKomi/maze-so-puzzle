@@ -1299,33 +1299,32 @@
   transform-origin: center;
   opacity: 0.9;
 }
-.water-ripple-marks path {
+.hazard-current {
+  /* Ambient offsets advance only20 times/second, by <.004tile. Their slow
+   * current stays smooth at game scale without resampling textures every frame. */
+  animation: hazard-current-flow 32s steps(640) infinite;
+}
+.hazard-current-lava { animation-duration: 88s; animation-timing-function: steps(1760); }
+.hazard-current-poison { animation-duration: 64s; animation-timing-function: steps(1280); }
+.water-ripple-marks ellipse {
   fill: none;
   stroke: #e1fff4;
-  stroke-width: 0.03;
-  stroke-linecap: round;
-  stroke-dasharray: 0.35 0.13 0.12 0.19;
-  animation: water-ripple-travel 5.8s linear infinite;
-}
-.water-ripple-marks path:nth-child(2) { animation-delay: -2.3s; }
-.water-ripple-marks path:nth-child(3) { animation-delay: -4.1s; }
-.lava-shimmer-marks circle {
-  fill: #ffdc79;
+  stroke-width: 0.018;
   transform-box: fill-box;
   transform-origin: center;
-  animation: lava-core-pulse 3.6s ease-in-out infinite alternate;
+  opacity: .2;
+  animation: water-ripple-spread 6.8s ease-out infinite;
 }
-.lava-shimmer-marks circle:nth-child(2) {
-  animation-delay: -2.1s;
-  animation-duration: 4.7s;
+.water-ripple-marks ellipse:nth-child(2) { animation-delay: -3.3s; animation-duration: 8.2s; }
+.water-ripple-marks ellipse:nth-child(3) { animation-delay: -1.8s; animation-duration: 5.4s; }
+.lava-shimmer-marks ellipse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lava-core-pulse 6.8s ease-in-out infinite alternate;
 }
-.lava-shimmer-marks path {
-  fill: none;
-  stroke: #ffe9a2;
-  stroke-width: 0.038;
-  stroke-linecap: round;
-  stroke-dasharray: 0.16 0.38;
-  animation: lava-vein-flow 6.4s linear infinite;
+.lava-shimmer-marks ellipse:nth-child(2) {
+  animation-delay: -4.1s;
+  animation-duration: 9.7s;
 }
 .poison-bubble {
   fill: #a867c9;
@@ -1447,13 +1446,7 @@
   animation: none;
   opacity: 0.62;
 }
-:root:is([data-motion=reduced],[data-quality=static]) .water-ripple-marks path {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .lava-shimmer-marks circle {
-  animation: none;
-}
-:root:is([data-motion=reduced],[data-quality=static]) .lava-shimmer-marks path {
+:root:is([data-motion=reduced],[data-quality=static]) :is(.hazard-current, .water-ripple-marks ellipse, .lava-shimmer-marks ellipse) {
   animation: none;
 }
 :root:is([data-motion=reduced],[data-quality=static]) .poison-bubble {
@@ -1772,17 +1765,19 @@
   100% { opacity: 0; transform: translate3d(-50%, -78px, 0) scale(0.9); }
 }
 
-@keyframes water-ripple-travel {
-  to { stroke-dashoffset: -.79; }
+@keyframes hazard-current-flow {
+  to { transform: translateX(var(--current-period)); }
+}
+
+@keyframes water-ripple-spread {
+  0% { opacity: 0; transform: scale(.25); }
+  25% { opacity: .38; }
+  100% { opacity: 0; transform: scale(1.15); }
 }
 
 @keyframes lava-core-pulse {
   from { opacity: 0.55; transform: scale(0.8); }
   to { opacity: 0.95; transform: scale(1.15); }
-}
-
-@keyframes lava-vein-flow {
-  to { stroke-dashoffset: -.54; }
 }
 
 @keyframes poison-bubble-rise {

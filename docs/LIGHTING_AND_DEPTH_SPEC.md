@@ -1,5 +1,25 @@
 # Wall depth and lighting — implemented WALL-04C contract
 
+## Connected liquid revision —0.22.16 candidate
+
+HAZARD-03 preserves the accepted WALL-04C geometry below. Cast/contact now use
+the ground complement excluding actual wall footprints and pit voids, including
+liquids and their transition/lip. Dressing retains separate liquid exclusions.
+The.04tile floor bank and.03tile antialiased transition follow ordinary-floor
+boundaries only: one non-floor union clipped per material prevents false safe
+strips between water/lava/poison, walls and pits. Two strokes reuse the exact
+floor pattern phase/treatment/wash. No Gaussian/morphology or new render cache.
+
+Two copies of each existing material wrap one horizontal texture period at
+32/88/64 seconds for water/lava/poison. Ambient offsets sample20 times/second,
+at most.00375tile per update; actor/camera timing is unchanged. Broad expanding
+water ripples, slow lava hot patches and seeded local poison bubbles replace
+generic racing dashes. Lite freezes currents and hides FX; Reduced/Static freeze
+all ambient motion but retain identity/borders/shade. No new media, timer, RNG,
+collision or save data. [Candidate and cost trail](reviews/2026-09-07-hazard03-candidate.md).
+This supersedes older hazard-excluding receiver and no-lip descriptions below;
+publication still awaits frozen-source browser/performance qualification.
+
 ## Current wall and field-art contract — web0.22.15
 
 Runtime e69f3e4 implements `04c-balanced-v1`. The Human accepted13's tall3D

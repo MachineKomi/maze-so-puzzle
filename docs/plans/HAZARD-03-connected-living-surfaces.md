@@ -6,9 +6,11 @@ Book completion and MOVE-02 are being qualified first on
 `codex/book-completion-hazard-refinement`; published web remains0.22.15.
 No new Human decision blocks implementation. This plan is not a delivery claim.
 
-1. Restore a phase-matched floor lip around the connected liquid boundary:
-   .04tile clear floor plus a .03tile stepped transition inside the region.
-   Reuse the existing rounded even-odd path; no per-cell seams, blur or morphology.
+1. Restore a phase-matched floor lip at connected liquid/ordinary-floor edges:
+   .04tile clear floor plus a .03tile transition inside the region. Trace the
+   union of all non-floor cells, then clip its strokes inside each liquid, so
+   material/wall/pit interfaces never acquire a fake safe-floor strip. No per-cell
+   seams, blur or morphology. The lean candidate uses two antialiased strokes.
 2. Separate dressing eligibility from shadow receiving. Cast and contact shade
    ordinary floor, liquid, transition and lip; real wall footprints and pit voids
    remain excluded. The accepted tall-wall/foreground geometry is unchanged.
@@ -39,3 +41,14 @@ DELIGHT-02B/LEARN-01, connected HOLE-02 and Plan08 pace work.
 Record local captures/traces in the artifact ledger. Reuse dist in place; keep
 only baseline entry files, not another repository or media copy. No deletion
 or archive without explicit Human approval.
+
+Implementation references: [SVG pattern coordinate systems](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/pattern)
+and [even-odd clipping](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/clip-rule).
+These inform the coordinate/clip contract; browser phase/raster proof determines
+actual implementation behavior, and documentation compatibility is not iPad proof.
+
+First diagonal/four-band pilot was rejected for further optimization: one pair
+showed RasterTask+27.34% phone/+41.30% desktop despite steady16.8ms maxima. The
+lean candidate uses two wrapped image draws, single-axis drift and two border
+strokes. This combined change is not an ablation attributing individual costs.
+Final matched five-pair evidence remains required.

@@ -8,6 +8,7 @@ import { createActiveRunSnapshot, ACTIVE_RUN_STORAGE_KEY } from "../../src/sessi
 import { createDefaultPlayerProgress, PLAYER_PROGRESS_STORAGE_KEY } from "../../src/progress";
 import { DEFAULT_PRESENTATION_PREFERENCES, PRESENTATION_PREFERENCES_KEY } from "../../src/motion";
 import { deriveRoute, replayRouteStep, expectUiRouteState } from "./gameplay-browser";
+import { createHash } from "node:crypto";
 
 const out = resolve(process.env.MAZE_PERF_EVIDENCE_DIR!, "hazards");
 const progress = { ...createDefaultPlayerProgress(), unlockedLevelIds: CURATED_LEVELS.map(l => l.id), unlockedLevelCount: 16 };
@@ -22,6 +23,72 @@ function fixture(kind: string) {
   const candidates = routes.flatMap(({ level, route }) => route.slice(0, -3).map((s, start) => ({ level, route, start, area: count(level, s.before.position, kind) })));
   return candidates.sort((a, b) => b.area - a.area)[0]!;
 }
+
+for (const theme of ["sunny-stone", "ember-keep"]) test(`HAZARD03 connected shapes, eight lights and texture phases ${theme}`, async ({ page }) => {
+  await page.setViewportSize({ width: 1660, height: 980 });
+  const errors: string[] = []; page.on("pageerror", e => errors.push(e.message));
+  const rows = [];
+  for (const light of ["top", "top-right", "right", "bottom-right", "bottom", "bottom-left", "left", "top-left"]) {
+    await page.goto(`http://127.0.0.1:1421/scripts/performance/hazard-rack.html?theme=${theme}&light=${light}&tile=40`);
+    await expect(page.locator("section")).toHaveCount(28);
+    await page.evaluate(async () => {
+      await Promise.all([...document.querySelectorAll("svg image")].map(e => new Promise<void>((resolve, reject) => {
+        const image = new Image(); image.onload = () => resolve(); image.onerror = reject; image.src = e.getAttribute("href")!;
+      })));
+      document.getAnimations().forEach(a => { a.pause(); a.currentTime = 4000; });
+    });
+    const geometry = await page.locator('[data-shape="receiver"] svg').evaluateAll(elements => elements.map(svg => {
+      const cast = svg.querySelector(".terrain-wall-cast")!, contact = svg.querySelector(".terrain-wall-contact")!;
+      const id = cast.getAttribute("clip-path")!.slice(5, -1);
+      const clip = [...svg.querySelectorAll("clipPath")].find(p => p.id === id)!.querySelector("path")!;
+      const canvas = document.createElement("canvas"), ctx = canvas.getContext("2d")!;
+      const path = new Path2D(clip.getAttribute("d")!);
+      const contains = (x: number, y: number) => ctx.isPointInPath(path, x, y, "evenodd");
+      const castPath = new Path2D(cast.getAttribute("d")!);
+      const points = [[2.9, 1.99], [2.9, 2.02], [2.9, 2.055], [2.9, 2.15]];
+      return { sameContact: contact.getAttribute("clip-path") === cast.getAttribute("clip-path"),
+        receivers: points.map(([x, y]) => contains(x!, y!)),
+        castAtBoundary: points.map(([x, y]) => ctx.isPointInPath(castPath, x!, y!)),
+        pitExcluded: !contains(5.5, 2.5), wallExcluded: !contains(1.5, 1.75),
+        lipBeforeCast: [...svg.children].findIndex(e => e.classList.contains("terrain-hazard-lip")) < [...svg.children].indexOf(cast),
+      };
+    }));
+    for (const result of geometry) {
+      expect(result.sameContact).toBe(true); expect(result.receivers).toEqual([true, true, true, true]);
+      expect(result.pitExcluded).toBe(true); expect(result.wallExcluded).toBe(true); expect(result.lipBeforeCast).toBe(true);
+      if (light === "top-left") expect(result.castAtBoundary).toEqual([true, true, true, true]);
+    }
+    await page.screenshot({ path: resolve(out, `shapes-${theme}-${light}.png`), fullPage: true });
+    rows.push({ light, geometry });
+  }
+  // Capture actual pattern pixels at quarter-loop phases, with every other
+  // ambient effect frozen at one phase. No fallback gap or loop reset is hidden
+  // by a moving actor. A full period must return to the exact first image.
+  const phases = [];
+  const shoreInterfaces = await page.locator('[data-shape="mixed"] svg').evaluate(svg => {
+    const path = new Path2D(svg.querySelector('.terrain-hazard-lip path')!.getAttribute('d')!);
+    const ctx = document.createElement('canvas').getContext('2d')!; ctx.lineWidth = .14;
+    return { material: ctx.isPointInStroke(path, 2, 2.5), wall: ctx.isPointInStroke(path, 2, 2),
+      pit: ctx.isPointInStroke(path, 5, 2.5), floor: ctx.isPointInStroke(path, 1.02, 3.5) };
+  });
+  expect(shoreInterfaces).toEqual({ material: false, wall: false, pit: false, floor: true });
+  for (const kind of ["water", "lava", "poison"]) {
+    const target = page.locator(`section[data-shape="ring"][data-kind="${kind}"] .rack-board`);
+    const hashes = [];
+    for (const progress of [0, .25, .5, .75, 1]) {
+      await target.evaluate((node, progress) => {
+        const current = node.querySelector(".hazard-current")!;
+        for (const a of current.getAnimations()) { a.pause(); a.currentTime = Number(a.effect!.getTiming().duration) * progress; }
+      }, progress);
+      const png = await target.screenshot({ path: resolve(out, `phase-${theme}-${kind}-${progress}.png`) });
+      hashes.push(createHash("sha256").update(png).digest("hex"));
+    }
+    expect(new Set(hashes.slice(0, 4)).size).toBe(4); expect(hashes[4]).toBe(hashes[0]);
+    phases.push({ kind, hashes });
+  }
+  expect(errors).toEqual([]);
+  await writeFile(resolve(out, `shapes-${theme}.json`), JSON.stringify({ rows, phases, shoreInterfaces, errors }, null, 2));
+});
 const scenes = ["water", "lava", "poison"].map(kind => ({ kind, ...fixture(kind) }));
 function snapshot(f: typeof scenes[number]) {
   return createActiveRunSnapshot({ level: f.level, game: f.route[f.start]!.before, mode: "normal", runId: `run-hazard-${f.level.id}`,
@@ -39,7 +106,7 @@ test.beforeAll(async () => {
   await writeFile(resolve(out, "fixtures.json"), JSON.stringify({ keys, progress, preferences: { ...DEFAULT_PRESENTATION_PREFERENCES, muted: true }, fixtures: [{ id: "hazard-moving", level: selected.level, snapshot: snapshot(selected), direction: "right", count: 4, visibleHazardCells: selected.area }] }, null, 2));
 });
 for (const [width, height] of [[780, 312], [1194, 834]]) for (const mode of ["full", "lite", "static", "reduced"]) {
-  test(`HAZARD02 actual surfaces ${width} ${mode}`, async ({ browser }) => {
+  test(`HAZARD03 actual surfaces ${width} ${mode}`, async ({ browser }) => {
     const rows = [];
     for (const f of scenes) {
       const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 2 });
@@ -50,7 +117,7 @@ for (const [width, height] of [[780, 312], [1194, 834]]) for (const mode of ["fu
         }, { run: snapshot(f), progress, keys, preferences: { ...DEFAULT_PRESENTATION_PREFERENCES, muted: true, motion: mode === "reduced" ? "reduced" : "full", quality: ["lite", "static"].includes(mode) ? mode : "full" } });
         await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click(); await page.getByRole("button", { name: /^Continue/ }).click();
         await expectUiRouteState(page, f.route[f.start]!.before);
-        const svg = page.locator(".maze-terrain-svg"); await expect(svg).toHaveAttribute("data-hazard-surface", "02-crisp-local");
+        const svg = page.locator(".maze-terrain-svg"); await expect(svg).toHaveAttribute("data-hazard-surface", "03-living-connected");
         await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
         const initial = await svg.innerHTML();
         const proof = await page.evaluate(({ kind, mode }) => {
@@ -59,6 +126,13 @@ for (const [width, height] of [[780, 312], [1194, 834]]) for (const mode of ["fu
           const clip = base.getAttribute("clip-path")!, id = clip.slice(5, -1);
           const exactClip = [...svg.querySelectorAll('clipPath')].find(c => c.id === id)?.querySelector('path')?.getAttribute('d') === base.getAttribute('d');
           const animations = svg.getAnimations({ subtree: true });
+          const current = svg.querySelector(`.hazard-current-${kind}`)!;
+          const currentAnimation = current.getAnimations()[0];
+          const cadence: number[] = [];
+          if (mode === "full") for (const t of [0, 25, 50, 75, 100]) {
+            currentAnimation!.pause(); currentAnimation!.currentTime = t;
+            cadence.push(new DOMMatrix(getComputedStyle(current).transform).e);
+          }
           const samples = [];
           if (mode === "full") for (const t of [0, 400, 900, 1800, 2900, 4100, 5400, 6700]) {
             animations.forEach(a => { a.pause(); a.currentTime = t; });
@@ -68,10 +142,16 @@ for (const [width, height] of [[780, 312], [1194, 834]]) for (const mode of ["fu
           }
           animations.forEach(a => a.play());
           return { exactClip, sameFxClip: fx.getAttribute('clip-path') === clip, filter: getComputedStyle(base).filter, fxDisplay: getComputedStyle(fx).display,
-            animationCount: animations.length, samples, morphology: svg.querySelectorAll('feMorphology').length, errors: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
+            animationCount: animations.length, samples, cadence, morphology: svg.querySelectorAll('feMorphology').length, errors: [...document.images].filter(i => !i.complete || !i.naturalWidth).length };
         }, { kind: f.kind, mode });
         expect(proof.exactClip).toBe(true); expect(proof.sameFxClip).toBe(true); expect(proof.filter).toBe("none"); expect(proof.morphology).toBe(0); expect(proof.errors).toBe(0);
-        if (mode === "full") { expect(proof.animationCount).toBeGreaterThan(0); for (const phase of proof.samples) for (const bubble of phase) { expect(Math.abs(bubble.x)).toBeLessThan(.3); expect(Math.abs(bubble.y)).toBeLessThan(.4); } }
+        if (mode === "full") {
+          expect(proof.animationCount).toBeGreaterThan(0);
+          expect(proof.cadence[0]).toBe(proof.cadence[1]); expect(proof.cadence[2]).toBe(proof.cadence[3]);
+          expect(proof.cadence[2]).toBeGreaterThan(proof.cadence[0]!);
+          expect(proof.cadence[2]! - proof.cadence[0]!).toBeLessThanOrEqual(.003751);
+          for (const phase of proof.samples) for (const bubble of phase) { expect(Math.abs(bubble.x)).toBeLessThan(.3); expect(Math.abs(bubble.y)).toBeLessThan(.4); }
+        }
         else expect(proof.animationCount).toBe(0);
         if (mode === "lite") expect(proof.fxDisplay).toBe("none");
         if (mode === "full" || (f.kind === "poison" && mode === "static")) await page.screenshot({ path: resolve(out, `${width}-${f.kind}-${mode}.png`) });

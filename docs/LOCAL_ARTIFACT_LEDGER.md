@@ -1,5 +1,24 @@
 # Local artifact ledger and cleanup review
 
+## Book/MOVE recovery and HAZARD-03 prototype — September7
+
+Under `C:/GameDev/maze-game-qa/performance/`, retained without deletion/archive:
+
+| Folder | Files / bytes | Purpose |
+| --- | ---: | --- |
+| book03-baseline-20260907 |9 /721430|Two expected old Book focus/tester failures. |
+| move02-baseline-20260907 |7 /2020294|Confirmed yellow-dot baseline, expected regression failure. |
+| book03-candidate-20260907 |24 /4574849|Ten passes; corrected test expectation for legitimate normal discovery. |
+| book03-reviewed-20260907 |34 /7963002|Ten Book +three MOVE passes; Lite solid-fill expectation corrected to gradient proof. |
+| move02-modes-20260907 |14 /3984016|All four motion/quality variants pass. |
+| hazard03-baseline-v02215 |4 /721563|Exact verified public15 HTML/JS/CSS +identity only; unchanged media shared. |
+
+Next named hazard prototype/boundary/final/paired packets will be measured at
+closure. Existing dist reused; no repository/media clone. New hazard-rack and
+Book browser files are small reproducible source fixtures, not release payload.
+Baseline and reviewed owned servers/browsers stopped. Review failed diagnostic
+packets after publication; nothing is automatically deleted or archived.
+
 ## WALL-04C review and qualification outputs — September7
 
 Under `C:/GameDev/maze-game-qa/performance/`, retained with no deletion/archive:

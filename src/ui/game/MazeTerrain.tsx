@@ -66,6 +66,8 @@ export const MazeTerrain = memo(function MazeTerrain({
   const wallDepthFilterId = `${patternPrefix}-wall-depth`;
   const wallClipId = `${patternPrefix}-wall-clip`;
   const floorClipId = `${patternPrefix}-floor-clip`;
+  const shadowClipId = `${patternPrefix}-shadow-clip`;
+  const lavaHeatId = `${patternPrefix}-lava-heat`;
   const wallTopMaskId = `${patternPrefix}-wall-top`;
   const wallSideMaskId = `${patternPrefix}-wall-side`;
   const light = resolveWallLight(level);
@@ -79,6 +81,10 @@ export const MazeTerrain = memo(function MazeTerrain({
   const water = createRoundedTerrainPath(level, camera, "water", 0.16);
   const lava = createRoundedTerrainPath(level, camera, "lava", 0.16);
   const poison = createRoundedTerrainPath(level, camera, "poison", 0.16);
+  // A floor bank belongs only to an ordinary-floor boundary. Joining every
+  // non-floor family prevents fake safe strips between liquids, walls or pits.
+  const shore = water.d || lava.d || poison.d
+    ? createRoundedTerrainPath(level, camera, terrain => terrain !== "floor", .16) : null;
   const holes: Point[] = [];
   for (let y = camera.top; y <= camera.bottom; y += 1) {
     for (let x = camera.left; x <= camera.right; x += 1) {
@@ -86,9 +92,10 @@ export const MazeTerrain = memo(function MazeTerrain({
       if (getTerrainAt(level, point) === "hole") holes.push(point);
     }
   }
-  // Visible ground complement, including rounded-away wall corners, but never
-  // hazard or pit interiors. This is a receiver, not walkability geometry.
-  const floorD = `M${camera.left} ${camera.top}h${camera.width}v${camera.height}h${-camera.width}Z ${groundWall.d} ${water.d} ${lava.d} ${poison.d} ${holes.map(p => `M${p.x} ${p.y}h1v1h-1Z`).join(" ")}`;
+  // Shadow receiving includes liquid, its transition and exposed lip. Dressing
+  // still excludes liquids. Neither complement changes walkability geometry.
+  const receiverD = `M${camera.left} ${camera.top}h${camera.width}v${camera.height}h${-camera.width}Z ${groundWall.d} ${holes.map(p => `M${p.x} ${p.y}h1v1h-1Z`).join(" ")}`;
+  const floorD = `${receiverD} ${water.d} ${lava.d} ${poison.d}`;
 
   return (
     <>
@@ -99,7 +106,7 @@ export const MazeTerrain = memo(function MazeTerrain({
         aria-hidden="true"
         data-wall-lighting={wallMode === "tall" ? TALL_WALL_REVISION : wallMode === "depth" ? WALL_LIGHTING_REVISION : "legacy"}
         data-wall-profile={theme.wall.wallLightingProfile}
-        data-hazard-surface="02-crisp-local"
+        data-hazard-surface="03-living-connected"
       >
         <defs>
           <pattern id={floorPatternId} patternUnits="userSpaceOnUse" width={theme.floor.periodTiles} height={theme.floor.periodTiles}>
@@ -125,23 +132,26 @@ export const MazeTerrain = memo(function MazeTerrain({
             const art = HAZARD_ART[kind];
             return <pattern key={kind} id={[waterPatternId, lavaPatternId, poisonPatternId][i]} patternUnits="userSpaceOnUse" width={art.periodTiles} height={art.periodTiles}>
               <rect width={art.periodTiles} height={art.periodTiles} fill={art.fallbackColor} />
-              <image href={art.src} width={art.periodTiles} height={art.periodTiles} preserveAspectRatio="none" />
+              <g className={`hazard-current hazard-current-${kind}`} style={{ '--current-period': `${art.periodTiles}px` } as CSSProperties}>
+                {[-1, 0].map(x => <image key={x} href={art.src}
+                  x={x * art.periodTiles} width={art.periodTiles} height={art.periodTiles} preserveAspectRatio="none" />)}
+              </g>
             </pattern>;
           })}
           {water.d && <pattern id={waterFxPatternId} patternUnits="userSpaceOnUse" width="2.4" height="2.4">
             <g className="water-ripple-marks">
-              <path d="M.13 .52 Q.44 .31 .75 .5 T1.39 .51 M1.72 1.06 Q2.03 .9 2.26 1.05" />
-              <path d="M.27 1.79 Q.59 1.57 .96 1.75 T1.62 1.79 M1.62 .21 Q1.81 .1 2.01 .2" />
-              <path d="M1.29 2.19 Q1.59 2.03 1.93 2.18 M.08 1.13 Q.23 1.03 .43 1.14" />
+              <ellipse cx=".6" cy=".68" rx=".42" ry=".23" />
+              <ellipse cx="1.75" cy="1.7" rx=".48" ry=".29" />
+              <ellipse cx="1.86" cy=".46" rx=".26" ry=".16" />
             </g>
           </pattern>}
-          {lava.d && <pattern id={lavaFxPatternId} patternUnits="userSpaceOnUse" width="2.2" height="2.2">
+          {lava.d && <><radialGradient id={lavaHeatId}><stop stopColor="#ffdc79" stopOpacity=".62" /><stop offset="1" stopColor="#ff7818" stopOpacity="0" /></radialGradient>
+          <pattern id={lavaFxPatternId} patternUnits="userSpaceOnUse" width="2.2" height="2.2">
             <g className="lava-shimmer-marks">
-              <circle cx=".37" cy=".49" r=".085" />
-              <circle cx="1.55" cy="1.35" r=".12" />
-              <path d="M.14 1.51 Q.46 1.31 .66 1.58 T1.18 1.67 M1.31 .39 Q1.63 .58 1.91 .31" />
+              <ellipse cx=".52" cy=".64" rx=".38" ry=".24" fill={`url(#${lavaHeatId})`} />
+              <ellipse cx="1.55" cy="1.48" rx=".42" ry=".34" fill={`url(#${lavaHeatId})`} />
             </g>
-          </pattern>}
+          </pattern></>}
           {poison.d && <pattern id={poisonFxPatternId} patternUnits="userSpaceOnUse" width="3.6" height="3.6">
             <g className="poison-bubble-marks">{bubbles.map((bubble, i) => <g key={i} className="poison-bubble"
               style={{ animationDuration: `${bubble.duration}s`, animationDelay: `${bubble.delay}s`, '--bubble-drift': `${bubble.drift}%` } as CSSProperties}>
@@ -154,6 +164,7 @@ export const MazeTerrain = memo(function MazeTerrain({
           </filter>}
           <clipPath id={wallClipId}><path d={walls.d} clipRule="evenodd" /></clipPath>
           <clipPath id={floorClipId}><path d={floorD} clipRule="evenodd" /></clipPath>
+          <clipPath id={shadowClipId}><path d={receiverD} clipRule="evenodd" /></clipPath>
           <mask id={wallTopMaskId} maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x={camera.left} y={camera.top} width={camera.width} height={camera.height}>
             <path d={walls.d} fill="white" fillRule="evenodd" transform={`translate(0 ${-profile.height})`} />
           </mask>
@@ -198,6 +209,12 @@ export const MazeTerrain = memo(function MazeTerrain({
         {water.d && <path className="terrain-water-fx" d={water.d} fill={`url(#${waterFxPatternId})`} fillRule={water.fillRule} clipPath={`url(#${waterMaskId})`} />}
         {lava.d && <path className="terrain-lava-fx" d={lava.d} fill={`url(#${lavaFxPatternId})`} fillRule={lava.fillRule} clipPath={`url(#${lavaMaskId})`} />}
         {poison.d && <path className="terrain-poison-fx" d={poison.d} fill={`url(#${poisonFxPatternId})`} fillRule={poison.fillRule} clipPath={`url(#${poisonMaskId})`} />}
+        {[water, lava, poison].map((region, i) => region.d && <g key={i} className="terrain-hazard-lip"
+          data-kind={['water', 'lava', 'poison'][i]} clipPath={`url(#${[waterMaskId, lavaMaskId, poisonMaskId][i]})`}
+          fill="none" stroke={`url(#${floorPatternId})`} strokeLinejoin="round">
+          {[[.14, .4], [.08, 1]].map(([width, opacity]) =>
+            <path key={width} d={shore!.d} strokeWidth={width} opacity={opacity} />)}
+        </g>)}
         {walls.d && wallMode === "legacy" && (
           <path
             className="terrain-wall-depth"
@@ -209,8 +226,8 @@ export const MazeTerrain = memo(function MazeTerrain({
             filter={`url(#${wallDepthFilterId})`}
           />
         )}
-        {tall && <path className="terrain-wall-cast" d={tall.shadow} fill="#33283f" opacity=".25" clipPath={`url(#${floorClipId})`} />}
-        {walls.d && wallMode !== "legacy" && <path className="terrain-wall-contact" d={groundWall.d} fill="none" stroke="#50425f" strokeWidth="0.055" opacity="0.28" clipPath={`url(#${floorClipId})`} />}
+        {tall && <path className="terrain-wall-cast" d={tall.shadow} fill="#33283f" opacity=".25" clipPath={`url(#${shadowClipId})`} />}
+        {walls.d && wallMode !== "legacy" && <path className="terrain-wall-contact" d={groundWall.d} fill="none" stroke="#50425f" strokeWidth="0.055" opacity="0.28" clipPath={`url(#${shadowClipId})`} />}
         {walls.d && (
           <path
             className="terrain-wall"

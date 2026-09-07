@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "hazard03-connected-living-surfaces",
+      "owner": "vfx",
+      "status": "approved",
+      "compressedJsBytes": 200,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra allocates200 gzip9 JS bytes for ordinary-floor-only connected liquid banks, corrected wall-shadow receiving and wrapped ambient material. The lean pre-version combined Book/MOVE/hazard candidate measures166074 JS,172 above live15 and17 above the prior ceiling; CSS24074 is142 below live15 and public155542751 is unchanged. No new dependency/media. Byte allocation does not qualify timing or publication.",
+      "evidencePath": "docs/reviews/2026-09-07-hazard03-candidate.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Revert the complete HAZARD-03 terrain renderer and hazard CSS to published0.22.15 while retaining Book/MOVE corrections, current saves, accepted wall geometry and the Vercel guard. Prefer forward repair; no save migration or media deletion."
+    },
+    {
       "id": "wall04c-visible-art-and-foreground",
       "owner": "lighting",
       "status": "approved",
