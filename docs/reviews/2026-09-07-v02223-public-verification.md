@@ -78,3 +78,22 @@ inventory before rare eggs; preserve the wider roadmap and nonblocking queues.
 [Artifact ledger](../LOCAL_ARTIFACT_LEDGER.md) records outputs; no deletion/archive.
 The following docs-only closure will be checked from this actual successful
 release baseline, without a replacement game build.
+
+
+## Observed documentation closure
+
+Documentation checkpoint **687ae8a0ab7e27ebeac9e3d0b07ba175b39e9a21** is backed
+up on main and `codex/adventure-xp`. Before pushing, the unchanged guard compared
+that entire range against actual successful release **c40527bf819a29a93e425df79f32b23b082202b7**
+and returned0/SKIP for documentation-only inputs.497 changed-document relative
+links passed; no runtime/build input changed.
+
+Vercel's actual [documentation deployment status](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/Gxiqch3SSg7cnYZzYQH3Bn7ZeBZ9)
+reported **Canceled by Ignored Build Step** at2026-09-07T14:37:59Z with GitHub
+success status. This is a confirmed skip, not a failed runtime release. No
+replacement game build, CLI deployment or force override was created.
+
+This observed receipt is backed up on the Codex branch only for the next runtime
+slice, avoiding another main push just to make a documentation SHA agree with
+its own receipt. All owned local QA/public browser processes are stopped;
+unowned PID26132/port4271 is preserved. No files deleted or archived.
