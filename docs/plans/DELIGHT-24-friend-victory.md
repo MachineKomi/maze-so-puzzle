@@ -1,6 +1,7 @@
 # DELIGHT-24 — a friend-led victory
 
-Active bounded DELIGHT-02B checkpoint B, September7. Astra owns runtime on
+Published as [web0.22.24](../reviews/2026-09-07-v02224-public-verification.md).
+Bounded DELIGHT-02B checkpoint B, September 7. Astra owns runtime on
 `codex/friend-victory`; Sol independently reviews. Baseline is published web23,
 runtime6ee51c4, current recovered branch checkpoint3457cf6 (clean at intake).
 

@@ -1,5 +1,22 @@
 # Family playtest checklist
 
+## Current short journey — P24 / Q10
+
+Ready on [published0.22.24](reviews/2026-09-07-v02224-public-verification.md).
+Finish any already unlocked maze when convenient; there is no need to clear
+progress or replay the campaign just for this check.
+
+- With no, one or several rescued friends, does the shared celebration feel
+  joyful and readable? Friends should be larger and settle after a brief party.
+- Can you read Gold, keepsakes and Adventure XP together and reach Next/Stay?
+  Rewards are pending until moving on; Stay should keep the Book's saved totals.
+- If useful, try Lite or Reduced motion: the same rewards should remain clear
+  with calmer staging. Report device, maze and settings for any clipping.
+
+Q09/P23 scene/XP and Q08/P19 affected Apple/cold-Power checks remain open.
+The inherited Moonlit rescue-outro mismatch is already logged; no new blocking
+decision is needed before continuing pickup presence and earned fanfare work.
+
 
 ## Current short journey — P23 / Q09
 

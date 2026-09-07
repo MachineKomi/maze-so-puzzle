@@ -1,6 +1,6 @@
 # UI / UX implementation specification
 
-## DELIGHT24 — candidate friend-led victory
+## DELIGHT24 — delivered web0.22.24 friend-led victory
 
 The existing completion dialog presents rescued friends together at a larger
 scale, or Ame warmly when none were rescued. Ordinary compact layouts fit story,

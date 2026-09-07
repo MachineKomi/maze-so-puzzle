@@ -1,5 +1,22 @@
 # Local artifact ledger and cleanup review
 
+## DELIGHT24 public verification addition
+
+Under C:/GameDev/maze-game-qa/performance, public verification adds55 files /
+14403993 bytes, plus three logs /5239 bytes. The prior local inventory remains
+259 files /63194855 bytes; combined **317 files /77604087 bytes** before the tiny
+documentation-guard receipt. No further local/public matrix repeats are needed
+without new changes or failures. All owned browsers closed; unowned4271 retained.
+
+| Packet | Files | Bytes |
+| --- | ---: | ---: |
+| v02224-public-20260907 |5|5768930|
+| delight24-public-canonical |25|4312956|
+| delight24-public-alias |25|4322107|
+
+[Public receipt](reviews/2026-09-07-v02224-public-verification.md) binds hashes.
+Retain for explicit Human cleanup review; no deletion/archive or repo/media clone.
+
 ## DELIGHT24 completed local qualification — September7
 
 All folders below are under C:/GameDev/maze-game-qa/performance. Retain for explicit

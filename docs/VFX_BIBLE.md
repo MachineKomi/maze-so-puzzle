@@ -1,6 +1,6 @@
 # Reward-first VFX contract — VFX-02A
 
-## DELIGHT24 — candidate finite victory staging
+## DELIGHT24 — delivered web0.22.24 finite victory staging
 
 VictoryParade consumes the existing won result with at most five rescued friends
 and twelve decorative pieces. Existing species gestures play twice at most,

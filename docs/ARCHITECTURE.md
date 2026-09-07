@@ -737,7 +737,7 @@ the registered held canvas scale. Actor clearance and accepted wall geometry
 are unchanged. Jump boots imagery/attachment rules are removed, while pickup,
 inventory, jumping ability and the finite ring remain. [Scene contract](plans/SCENE-23-depth-and-scale.md).
 
-## DELIGHT24 candidate: finite victory presentation
+## DELIGHT24 delivered web0.22.24: finite victory presentation
 
 VictoryParade consumes the existing won result and page/motion visibility. It
 never commits awards or runs a frame loop. Five rescued actors at most share a

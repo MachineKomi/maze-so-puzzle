@@ -4,8 +4,9 @@ Frozen runtime: **d880b223cb62652213e271635e6551721979c879**, on
 `codex/friend-victory`, [PR15](https://github.com/MachineKomi/maze-so-puzzle/pull/15).
 Baseline: published web0.22.23 runtime6ee51c4a3f1d6b18c39e309cea26111aff1e3df3.
 Astra writes runtime; [actual independent Sol](2026-09-07-delight24-sol-review.md)
-owns the separate disposition and supports bounded web promotion. Local qualification is complete. Publication
-still requires the final reviewed-head CI and one Git-integrated deployment.
+owns the separate disposition and supports bounded web promotion. Local qualification is complete.
+[Published web0.22.24](2026-09-07-v02224-public-verification.md) passed final
+reviewed-head CI and both-origin public verification.
 
 ## Visible improvement and bounds
 

@@ -1,5 +1,24 @@
 # Release checklist
 
+## Current published web — v0.22.24 friend-led victory
+
+Frozen d880b223, reviewed ee9e994, release6c9cddf.
+[Public verification](reviews/2026-09-07-v02224-public-verification.md),
+[qualification](reviews/2026-09-07-delight24-qualification.md), and
+[actual independent Sol review](reviews/2026-09-07-delight24-sol-review.md).
+Earlier current/next labels below are dated historical records.
+
+- [x]757 project tests, budgets, final reviewed-head CI34138420723 including audit and Windows compilation.
+- [x]38 distinct local browser contracts, two serial five-pair cohorts and independent review; retained probe failure and33.234ms outlier disclosed.
+- [x]One normal Git deployment, exact entry files on both origins, two standard and26 victory public cases.
+- [ ]P24/Q10 celebration and reward readability; Q09/P23 scene/XP feedback.
+- [ ]Q08/P19 physical Apple, PERF-COLD-POWER and native acceptance remain open.
+
+Next: remaining DELIGHT A/C then LEARN-01. STORY-RESCUE-01, ART-REWARD-01,
+usable Garden before eggs and the wider roadmap remain queued. Windows0.22.9
+stays published; native0.22.10 qualification remains unfinished. Docs closure
+uses actual last-success6c9cddf; no duplicate build or deletion/archive.
+
 ## Current published web — v0.22.21 FIELD-21
 
 Release **12f484f6f438a8ac44a6316ffbc212b600416518**, reviewed **4bd97e76110e0d3611ba46f1356474e4917b4d9b**,
