@@ -1052,3 +1052,36 @@ logs; no deletion/archive or repo/media clone. All owned browser helpers closed.
 | v02225-public-20260907 |5|5656644|4efc6ddcf9365c2ea98c9aeab4b5853a7376e7de3ae1508c691ee31dc23c7349|
 | explore25-public-canonical |14|3956911|2e587c7b285c3e7e6e4b8c3fcaafc4c4f16cc34dace09284d100c1785e99288a|
 | explore25-public-alias |14|3833683|645fa568bf323eafc728f59546504c65ca012acde1a9da0143bf1660bbe371a2|
+
+## DELIGHT26 completed local qualification
+
+Snapshot before this small inventory receipt: **427 files /159988555 bytes**.
+External performance root only. Retain failed fixture attempts and all proof for
+explicit Human cleanup review. No deletion/archive, repo/media clone or native
+package. One in-place dist; unowned4271 untouched.
+
+| Packet | Files | Bytes |
+| --- | ---: | ---: |
+| presence26-baseline |30|9062636|
+| presence26-baseline.log |1|1917|
+| presence26-browser |114|35573714|
+| presence26-browser.log |1|5932|
+| presence26-check.log |1|1285|
+| presence26-dense |4|21075|
+| presence26-dense-r2 |6|2670268|
+| presence26-dense-r2.log |1|738|
+| presence26-dense.log |1|2776|
+| presence26-final-browser |198|81699069|
+| presence26-final-browser.log |1|12041|
+| presence26-frozen-build.log |1|947|
+| presence26-idle-frames |1|1435560|
+| presence26-idle-frames.log |1|27904|
+| presence26-idle-work |25|15774375|
+| presence26-idle-work.log |1|28308|
+| presence26-moving-frames |1|854488|
+| presence26-moving-frames.log |1|33200|
+| presence26-moving-work |25|11926481|
+| presence26-moving-work.log |1|33786|
+| presence26-summary |7|36518|
+| presence26-summary.log |1|6442|
+| release-v02225 |4|779095|

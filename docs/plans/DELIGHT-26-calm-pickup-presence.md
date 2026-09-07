@@ -37,3 +37,28 @@ Preserve the Vercel guard and prove the later docs-only skip.
 Q12/P26 will ask whether pickups are inviting and consistently visible without
 making the maze feel busy. Q11 spacious layout and Q08 affected Apple/cold Power
 remain open. No Human reply blocks this authorized presentation slice.
+
+## C handoff — verified against unchanged App owner at fd1f9e6
+
+Do not change banking to make an animation convenient. The next slice derives
+old→new eligible sticker/medal/badge IDs in nextLevel and admits an ephemeral
+presentation only after writePlayerProgress returns true. The Book remains the
+durable record even if all decoration is skipped.
+
+| Existing path | Durable result | Earned presentation |
+| --- | --- | --- |
+| Tester Next | No profile award | None |
+| Stay/reopen victory | Projected only | None |
+| Recovery-journal write denied | Next returns before profile write | None |
+| Supported profile write denied | Next holds for retry | None |
+| Unsupported future profile continues in memory | No durable profile write | None |
+| Supported profile write succeeds, IDs newly added | Earned once | Admit bounded ephemeral event |
+| Run-clear fails after successful profile write | Award is still durable | Do not undo or fabricate a second write |
+| Retry/reload with prior receipt or no new IDs | No newly earned difference | No replay |
+
+The current precommit rewardSoundTimer can fire after Stay; C replaces that
+timer with sound owned by actual earned presentation, respecting the existing
+SFX bus/mute and cancellation. Victory music can still celebrate solving.
+Freeze a nonblocking placement compatible with spacious/folded/Classic HUDs,
+bounded coalescing and safe story/critical-overlay boundaries before coding C.
+Do not add a parallel receipt ledger, storage polling or future collection awards.

@@ -1,5 +1,12 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current work — DELIGHT26 checkpoint A:** [calm pickup presence](plans/DELIGHT-26-calm-pickup-presence.md)
+on codex/calm-pickup-presence, Astra sole runtime writer and actual independent
+Sol review. Frozen candidate fd1f9e6; web0.22.25 remains live until qualification.
+Seven authored collectible kinds now use steady tile-local light, with no
+pickup animation, new JS/media or gameplay change. C durable-earned fanfare
+follows separately, then LEARN-01; preserve the wider roadmap and device queue.
+
 Documentation closure ac055e5 is backed up on main and this branch. Vercel
 actually skipped it at16:47:58 UTC through the unchanged Ignored Build Step;
 [observed receipt](reviews/2026-09-07-v02225-public-verification.md#observed-documentation-closure).

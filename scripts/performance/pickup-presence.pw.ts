@@ -59,10 +59,10 @@ test('dense authored pickup route keeps presence in folded and Classic views',as
   let state=f.before,valid=true;
   for(let i=0;i<4;i++){const result=movePlayer(f.level,state,direction);if(!isOrdinaryMove(result)){valid=false;break;}state=result.state;}
   if(!valid)continue;
-  const view=getCameraWindow(f.level,f.before.position,6),visible=visibleKeysInWindow(f.level,view);
+  const view=getCameraWindow(f.level,f.before.position,6),visible=new Set(visibleKeysInWindow(f.level,view));
   const count=f.level.objects.filter(o=>kinds.some(k=>k===o.kind)&&!isObjectResolved(o,f.before)&&visible.has(`${o.at.x},${o.at.y}`)).length;
   const hazards=[...visible].filter(key=>{const[x,y]=key.split(',').map(Number);return ['water','lava','poison'].includes(f.level.terrain[y!]![x!]!);}).length;
-  if(hazards&&(!best||count>best.count))best={f,direction,count,hazards};
+  if(!best||count>best.count)best={f,direction,count,hazards};
  }
  expect(best?.count).toBeGreaterThanOrEqual(3);const {f,direction,count,hazards}=best!;
  const snapshot=savedFixture(f,'presence26-dense'),progress=createDefaultPlayerProgress(16),preferences={...DEFAULT_PRESENTATION_PREFERENCES,muted:true};
@@ -78,5 +78,9 @@ test('dense authored pickup route keeps presence in folded and Classic views',as
   const held=await page.locator('.player-held-weapon').evaluateAll(images=>images.map(i=>getComputedStyle(i).filter));
   expect(held.every(filter=>!filter.includes('255, 241, 179'))).toBe(true);
  }
- for(let i=0;i<4;i++)await page.keyboard.press(keyForDirection[direction]);
+ let state=f.before;
+ for(let i=0;i<4;i++){
+  state=movePlayer(f.level,state,direction).state;
+  await page.keyboard.press(keyForDirection[direction]);await expectUiRouteState(page,state);await page.waitForTimeout(250);
+ }
 });

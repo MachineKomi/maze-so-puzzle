@@ -48,7 +48,7 @@ const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woo
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
 if (!fixture || (!jumpReview && !victoryReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
 if(chestReview&&!fixture.baselineSnapshot)throw Error('Chest comparison requires the actual historical object graph');
-if (idleReview && !(fixture.visibleHazardCells > 0)) throw Error('Idle hazard comparison requires a nonempty visible-hazard fixture');
+if (idleReview && !(fixture.visibleHazardCells > 0 || fixture.visiblePickupCount > 0)) throw Error('Idle comparison requires visible hazards or authored pickups');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const index = await readFile(resolve(root, 'dist/index.html'), 'utf8');
 const candidateBundle = index.match(/src="(\/assets\/[^"]+\.js)"/)[1];

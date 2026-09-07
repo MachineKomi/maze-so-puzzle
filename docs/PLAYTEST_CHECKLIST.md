@@ -1,5 +1,17 @@
 # Family playtest checklist
 
+## P26 / Q12 — calm pickup presence (candidate)
+
+Publication is pending. In any unlocked maze, look at equipment, keys, potions
+and treasure while standing still, then collect one. Does the steady light make
+the item inviting and easy to spot without distracting from the maze? If useful,
+compare Full and Lite. Report device/maze for a glow crossing a wall, unclear
+key colour, stutter or hard-to-read receipt. No reset or campaign replay needed.
+
+Q11/P25 spacious layout and Q08/P19 affected Apple/cold-Power remain open;
+Q10/P24 victory and Q09/P23 scale/XP observations are still useful. No decision
+blocks independent development. Earned-keepsake fanfare C is a separate next slice.
+
 ## P25 / Q11 — spacious exploration (published0.22.25)
 
 Ready on [published0.22.25](reviews/2026-09-07-v02225-public-verification.md). Use any unlocked scrolling

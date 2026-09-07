@@ -1,5 +1,14 @@
 # Reward-first VFX contract — VFX-02A
 
+## DELIGHT26 A — candidate calm pickup presence
+
+The [bounded A contract](plans/DELIGHT-26-calm-pickup-presence.md) replaces the
+seven authored pickup families' breathing filters with static tile-local light.
+Existing object wrappers, art, ground depth and collection owners remain; no
+new animation, DOM node, renderer, media, timer or sound. Lite keeps the backing
+after removing image filters. Frozen fd1f9e6 is in qualification against25.
+C successful-write earned fanfare remains next; B friend victory stays delivered.
+
 ## DELIGHT24 — delivered web0.22.24 finite victory staging
 
 VictoryParade consumes the existing won result with at most five rescued friends
