@@ -32,3 +32,8 @@
 [data-phone-fit] .large-screen-note { font-size: var(--phone-note-font,11px); line-height: 1.2; }
 
 .game-stage-slot { overflow: hidden; }
+
+/* EXPLORE-25: the pane consumes the rail's remainder; cells retain one scale. */
+.play-shell[data-layout="explore"] { grid-template-columns: minmax(0,1fr) var(--deck-width); }
+.play-shell[data-layout="explore"] .maze-panel { width: 100%; height: 100%; place-items: center; box-shadow: none; }
+.play-shell[data-layout="explore"] .maze-board { width: var(--board-width); height: var(--board-height); aspect-ratio: auto; box-shadow: 0 3px 0 #85738c,0 8px 18px #3e2d5526; }

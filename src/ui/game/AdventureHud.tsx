@@ -17,7 +17,8 @@ function StatusCell({ compact, ...props }: ButtonHTMLAttributes<HTMLButtonElemen
   return compact ? <span className={props.className} role="img" aria-label={props["aria-label"]}>{props.children}</span> : <button {...props} />;
 }
 
-export function AdventureHud({ model, name, chapter, power, gold, science, steps, map, actions, onMore, onHint, onDetail, onMove, onRead, startHold, steerHold, stopHold, resetPadGesture, enabled, suggested, tester, feedback }: {
+export function AdventureHud({ explore = false, folded = false, onToggle, model, name, chapter, power, gold, science, steps, map, actions, onMore, onHint, onDetail, onMove, onRead, startHold, steerHold, stopHold, resetPadGesture, enabled, suggested, tester, feedback }: {
+  explore?: boolean; folded?: boolean; onToggle?: (trigger:HTMLButtonElement)=>void;
   model: AdventureHudModel; name: string; chapter: string; power: number; gold: number; science: number; steps: number;
   map: ReactNode; actions: readonly UtilityAction[]; onHint: (trigger: HTMLButtonElement) => void;
   onMore: (trigger: HTMLButtonElement) => void;
@@ -28,18 +29,20 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
   resetPadGesture?: RefObject<(() => void) | null>;
   stopHold: (event: PointerEvent<HTMLElement>) => void; enabled?: boolean; suggested: Direction | null; tester: boolean; feedback: ReactNode;
 }) {
-  const compact = useContext(CompactPlayContext);
+  const classicCompact = useContext(CompactPlayContext);
+  const compact = explore ? folded : classicCompact;
   const phone = useContext(StageFitContext).phone;
   const hudRef = useRef<HTMLElement>(null);
   const objectiveRef = useRef<HTMLParagraphElement>(null);
   const [reader, setReader] = useState(false);
   useLayoutEffect(() => {
     const paragraph = objectiveRef.current!;
-    const update = () => setReader((compact || phone) && parseFloat(getComputedStyle(paragraph).fontSize) >= 24);
+    const update = () => setReader(explore ? parseFloat(getComputedStyle(document.documentElement).fontSize) >= 24 : (compact || phone) && parseFloat(getComputedStyle(paragraph).fontSize) >= 24);
     // Inline paragraphs have no ResizeObserver box; observe their block parent.
     update(); const observer = new ResizeObserver(update); observer.observe(paragraph.parentElement!);
+    if (explore) observer.observe(hudRef.current!.querySelector(".hud-header")!);
     return () => observer.disconnect();
-  }, [compact, phone, model.objective]);
+  }, [compact, phone, explore, model.objective]);
   useLayoutEffect(() => {
     const hud = hudRef.current!;
     const overview = hud.querySelector<HTMLElement>(".adventure-overview")!;
@@ -47,7 +50,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
     const update = () => {
       const map = hud.querySelector<HTMLElement>(".maze-map-card")!;
       const minimap = map.querySelector<HTMLElement>(".maze-minimap")!;
-      if (compact) return;
+      if (compact || explore) return;
       const enlarged = parseFloat(getComputedStyle(document.documentElement).fontSize) >= 24;
       hud.toggleAttribute("data-enlarged", enlarged);
       // Enlarged content can exhaust the available height. Clear the fitted
@@ -88,15 +91,17 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
     for (const element of [overview, ...hud.querySelectorAll<HTMLElement>(".hud-header,.objective-card,.deck-controls,.rescue-card h3,.bag-card h3")]) observer.observe(element);
     update();
     return () => observer.disconnect();
-  }, [compact, phone, model.friends.length, model.slots.length]);
+  }, [compact, explore, phone, model.friends.length, model.slots.length]);
   const hint = <button className="objective-hint-button" data-focus-id="hint" onClick={e => onHint(e.currentTarget)} aria-label="Show objective and a gentle hint for this maze"><CatalogueImage art={NAVIGATION_ART["nav-help"]} alt="" /><span>{reader ? "Objective & Hint" : "Hint"}</span></button>;
   return <aside ref={hudRef} className="adventure-hud" aria-label="Ame and adventure bag" data-focus-group="adventure-deck" data-reader={reader || undefined} data-scroll-region={reader ? undefined : "adventure-deck"}>
+    {explore && <div className="explore-toolbar"><button className="sidebar-toggle" data-focus-id="sidebar-toggle" aria-label={folded ? "Expand sidebar" : "Fold sidebar"} aria-expanded={!folded} aria-controls="adventure-details" onClick={e=>onToggle?.(e.currentTarget)}><span aria-hidden="true">{folded ? "‹" : "›"}</span><span>{folded ? "Expand" : "More maze"}</span></button><button data-focus-id="more" onClick={e=>onMore(e.currentTarget)}>More <span aria-hidden="true">···</span></button></div>}
     {reader && <div className="objective-dock">{hint}</div>}
-    <div className="hud-reader" data-scroll-region={reader ? "adventure-deck" : undefined} role={reader ? "region" : undefined} aria-label={reader ? "Full objective and adventure status" : undefined} tabIndex={reader ? 0 : undefined}
+    <div id="adventure-details" className="hud-reader" data-scroll-region={reader ? "adventure-deck" : undefined} role={reader ? "region" : undefined} aria-label={reader ? "Full objective and adventure status" : undefined} tabIndex={reader ? 0 : undefined}
       onFocus={e => { if (reader && e.target === e.currentTarget) onRead?.(); }}
       onKeyDown={e => { if (reader && e.target === e.currentTarget && ["ArrowUp","ArrowDown","ArrowLeft","ArrowRight","PageUp","PageDown","Home","End"," "].includes(e.key)) e.stopPropagation(); }}>
     <header className="hud-header">
       <div className="hud-title"><span className="level-kicker" aria-label={tester ? `${chapter} · Tester preview · not saved` : chapter}>{compact ? chapter.replace(/^Story maze /,"Maze ") : chapter}{tester ? compact ? " · Test" : " · Preview · not saved" : ""}</span><h2>{name}</h2></div>
+      {!explore && !compact && <button data-focus-id="more" onClick={e=>onMore(e.currentTarget)}>Layout & more</button>}
       <div className="hud-counters">
         <div className="power-counter" data-ui-anchor="power"><CatalogueImage art={STORY_ART.amePortrait} alt="Ame" /><span><small>Power</small><TabularNumber value={power} /></span></div>
         <div className="wallet-pill" data-ui-anchor="gold"><CatalogueImage art={TREASURE_CATALOG_ART["gold-bag"]} alt="" /><span><small>Gold</small><TabularNumber value={gold} /></span></div>
@@ -104,7 +109,7 @@ export function AdventureHud({ model, name, chapter, power, gold, science, steps
         <span className="step-pill" aria-label={`${steps} ${steps === 1 ? "step" : "steps"}`}>{steps} steps</span>
       </div>
       {compact && !reader && <div className="phone-hint">{hint}</div>}
-      {compact && <button className="phone-more" data-focus-id="more" onClick={e => onMore(e.currentTarget)}>More <span aria-hidden="true">···</span></button>}
+      {compact && !explore && <button className="phone-more" data-focus-id="more" onClick={e => onMore(e.currentTarget)}>More <span aria-hidden="true">···</span></button>}
     </header>
     <section className="objective-card" aria-labelledby="objective-title"><div><h3 id="objective-title">Right now</h3><p ref={objectiveRef}>{model.objective}</p></div>{!compact && !reader && hint}</section>
     <div className="adventure-overview" data-dense={Math.max(model.friends.length,model.slots.length) > 6 || undefined} style={{"--collection-columns": Math.min(3,Math.max(1,Math.max(model.friends.length,model.slots.length)))} as CSSProperties}>

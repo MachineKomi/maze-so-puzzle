@@ -37,6 +37,8 @@ async function enter(page:Page,fixture:typeof fixtures[number],quality="full",mo
  await expectUiRouteState(page,fixture.step.before);
  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));});
  await page.waitForTimeout(350);
+ const size=await page.locator('.maze-board').evaluate(b=>({width:Number((b as HTMLElement).style.getPropertyValue('--grid-size')),height:Number((b as HTMLElement).style.getPropertyValue('--grid-rows'))||Number((b as HTMLElement).style.getPropertyValue('--grid-size'))}));
+ fixture.from=getCameraWindow(fixture.level,fixture.jump.from,size);fixture.to=getCameraWindow(fixture.level,fixture.jump.to,size);
 }
 async function startSamples(page:Page){await page.evaluate(()=>{
  const board=document.querySelector<HTMLElement>('.maze-board')!,world=board.querySelector<HTMLElement>('.camera-world')!;
@@ -46,7 +48,7 @@ async function startSamples(page:Page){await page.evaluate(()=>{
   const jump=board.querySelector<HTMLElement>('.jump-presentation'),actor=jump??board.querySelector<HTMLElement>('.player-layer')!;
   const a=actor.getBoundingClientRect(),cell=(b.width-2*board.clientLeft*b.width/board.offsetWidth)/cols;
   const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
-  const camera={x:pane.x-parseFloat(world.style.translate)*parseFloat(world.style.width)/100*cols/100,y:pane.y-parseFloat(world.style.translate.split(' ')[1]!)*parseFloat(world.style.height)/100*cols/100};
+  const camera={x:pane.x-parseFloat(world.style.translate)*pane.width/100,y:pane.y-parseFloat(world.style.translate.split(' ')[1]!)*pane.height/100};
   const foreground=board.querySelector<SVGSVGElement>(".maze-foreground");
   sample.rows.push({actorZ:Number(getComputedStyle(actor.closest('.camera-actors')??actor).zIndex),foregroundZ:foreground?Number(getComputedStyle(foreground).zIndex):null,foregroundDelta:foreground?Math.max(Math.abs(foreground.getBoundingClientRect().x-w.x),Math.abs(foreground.getBoundingClientRect().y-w.y)):null,time,jump:!!jump,camera,actor:{x:(a.x-b.x)/cell,y:(a.y-b.y)/cell},world:{x:w.x,y:w.y},state:board.dataset.travelState});
   if(sample.running)requestAnimationFrame(tick);

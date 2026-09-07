@@ -1,5 +1,8 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current Human priority — EXPLORE-25 in flight:** [spacious maze and folding rail](plans/EXPLORE-25-spacious-maze.md) on codex/expansive-exploration, Astra sole runtime writer and independent Sol review. Web0.22.24 remains live. This direct request precedes remaining DELIGHT A/C; preserve that sequence afterward. Candidate is not yet qualified or deployed.
+
+
 **Current delivery — web0.22.24:** [public receipt](reviews/2026-09-07-v02224-public-verification.md) records the [friend-led victory](plans/DELIGHT-24-friend-victory.md), DELIGHT-02B checkpoint B. Frozen d880b223, reviewed ee9e994, release6c9cddf; actual independent Sol supports this bounded web release. Both origins are verified. Astra remains the runtime writer on codex/friend-victory. Next: remaining A pickup presence and C post-write earned fanfare, then LEARN-01 including STORY-RESCUE-01. Rare eggs wait for the usable Plan10 Garden and its Plan09/greybox dependencies; an empty Book inventory is not that home. Q10/P24 is ready; Q09/P23 and Q08/P19 remain open. Earlier active/next/live labels below are historical.
 
 Docs closure1fc0a5b is backed up on main and this branch. Vercel actually skipped

@@ -1,5 +1,10 @@
 # Local artifact ledger and cleanup review
 
+## EXPLORE25 active artifact island
+
+Created four-file `C:/GameDev/maze-game-qa/performance/release-v02224` from verified live24 dist entry bytes (HTML/JS/CSS/identity only, shared unchanged public media). New `explore25-baseline`, `explore25-layout-r1` and subsequent explore25-* evidence remain external; one in-place dist is rebuilt. Final inventory follows qualification. No files deleted/archived, no repo or media clone; unowned port4271 is preserved.
+
+
 DELIGHT24 closure guard adds one 98-byte log, delight24-doc-guard.log. The complete
 local/public/guard slice is **318 files /77604185 bytes**. The actual Vercel docs
 skip is recorded in the public receipt; this receipt update remains branch-only.

@@ -33,6 +33,18 @@
   },
   "allocations": [
     {
+      "id": "explore25-spacious-maze-and-folding-rail",
+      "owner": "ui",
+      "status": "approved",
+      "compressedJsBytes": 1500,
+      "compressedCssBytes": 0,
+      "runtimePublicBytes": 0,
+      "reason": "Astra bounds the explicit Human spacious exploration request: continuous bounded square-cell viewport, stable folding essentials rail, shared visible keys and reversible Classic presentation. Existing CSS ceiling applies. No media, dependency, new frame loop, schema, reward or collision change. Release still requires independent review and new worst-viewport timing.",
+      "evidencePath": "docs/plans/EXPLORE-25-spacious-maze.md",
+      "reviewBy": "2026-10-07",
+      "rollbackPoint": "Before publication keep live24. Revert complete EXPLORE25 layout/camera/visibility slice to ba59cd7 while preserving accepted walls, scene23 and delight24. Existing map and Book discoveries remain monotonic; Classic reverses composition only."
+    },
+    {
       "id": "delight24-friend-led-finite-victory",
       "owner": "ui",
       "status": "approved",

@@ -111,6 +111,7 @@ report.host={platform:platform(),release:release(),cpu:cpus()[0]?.model,logicalC
 report.captureTrace=captureTrace;report.captureLayers=captureLayers;
 report.captureScreenshots=captureScreenshots;
 report.candidateStyle=process.env.MAZE_REVIEW_CANDIDATE_STYLE??null;
+report.candidateFolded=process.env.MAZE_REVIEW_FOLDED==='1';
 report.saveKeys={seed:data.keys.run,baseline:process.env.MAZE_REVIEW_BASELINE_RUN_KEY||data.keys.run,candidate:process.env.MAZE_REVIEW_CANDIDATE_RUN_KEY||data.keys.run};
 report.coldOpeningProbe=coldProbe;
 report.mountSample=mountSample;
@@ -151,6 +152,7 @@ try {
           await page.getByRole('button', { name: /^Continue/ }).click();
           if(victoryReview)await page.locator('.dialog-celebration').waitFor();
           await page.locator('.maze-terrain-svg').waitFor();
+          if(mode==='candidate' && report.candidateFolded) await page.getByRole('button',{name:'Fold sidebar'}).click();
           if(mode==='candidate' && report.candidateStyle) await page.addStyleTag({content:report.candidateStyle});
           const bundle = await page.locator('script[type="module"]').getAttribute('src');
           if (bundle !== (mode === 'baseline' ? baselineBundle : candidateBundle)) throw Error('Wrong entry module');
