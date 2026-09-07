@@ -4,9 +4,12 @@
 `codex/chest-mimic-rewards`; Sol independently reviews. Web0.22.21 remains live.
 [Current execution contract](plans/LOOT-03B-authored-chests-and-mimics.md) scopes
 four additive mixed chests and Twilight's disguised Power6 Candy, preserving
-exact historical v5 runs. Source checkpoint:746 tests pass and build compiles;
-browser, asset activation, independent review and performance qualification
-remain in progress. Do not deploy this checkpoint or infer native acceptance.
+exact historical v5 runs. Source checkpoint:747 tests pass and build compiles;
+asset checks pass. The browser packets cover105 distinct contracts after three
+stale helper corrections. Four five-pair cohorts completed; actual Sol supports
+bounded web promotion of frozen e08775f. [Qualification](reviews/2026-09-07-chest22-qualification.md)
+records costs and retained hitches. Next: reviewed checkpoint/exact-head CI,
+normal Git publication and public verification. No native acceptance is inferred.
 [Feedback reconciliation](reviews/2026-09-07-playtest-feedback-reconciliation-v21.md)
 keeps unfinished hole/pace/contact work visible without reopening delivered fixes.
 Earlier clean-tree/branch labels below describe the v21 closure.

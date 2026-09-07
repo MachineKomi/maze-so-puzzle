@@ -50,7 +50,7 @@ until an obtainable production placement exists. No XP or egg awards here.
 
 ## Qualification and release
 
-The current source audit passes746 tests before the additional preload test.
+The current source audit passes747 tests including the preload test.
 All four affected campaign mazes have all-rescue/all-chest solutions, with a
 maximum113806 admitted states. Twilight's Candy is a **required** encounter,
 allowed by Plan09's later designer policy; replay proves sufficient Power before
