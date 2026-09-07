@@ -99,3 +99,14 @@ Use actual successful releasefc32f86 as the guard baseline. Follow
 [documentation-only instructions](../VERCEL_DEPLOYMENT.md#routine-documentation-checkpoints):
 scoped docs commit and backup, no rebuild/version bump/manual deployment. Preserve
 the existing Ignored Build Step and record its actual skip after the push.
+
+### Observed documentation closure
+
+Documentation checkpoint **c3e9e7c619810fc9f9b8b0ad7feb7a5d31a69378** is backed up
+on main and codex/calm-pickup-presence. The unchanged local guard returned SKIP
+against actual successful fc32f86. Vercel reported **Canceled by Ignored Build
+Step at17:31:44 UTC** for the
+[documentation deployment](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/5rnAKUnuejoM4QCvQZicsFPNeZQC).
+No additional game payload was built. This observed receipt is backed up on the
+Codex branch only, avoiding a recursive main push. The98-byte guard log brings
+this slice to **489 files /179619185 bytes**. No deletion or archive occurred.

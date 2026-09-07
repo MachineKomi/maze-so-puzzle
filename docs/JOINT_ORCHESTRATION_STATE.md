@@ -11,6 +11,12 @@ Preserve the wider roadmap, accepted walls/spacious HUD, usable Garden dependenc
 ART-REWARD-01 and open physical Apple/cold-Power/native queue. Earlier current,
 active and next assignments below are historical.
 
+Documentation closure c3e9e7c is backed up on main and this branch. Vercel
+actually skipped it at17:31:44UTC through the unchanged Ignored Build Step;
+[observed receipt](reviews/2026-09-07-v02226-public-verification.md#observed-documentation-closure).
+This observation is branch-only for the next runtime slice. Owned QA processes
+are closed; unowned4271 and all retained artifacts remain untouched.
+
 Documentation closure ac055e5 is backed up on main and this branch. Vercel
 actually skipped it at16:47:58 UTC through the unchanged Ignored Build Step;
 [observed receipt](reviews/2026-09-07-v02225-public-verification.md#observed-documentation-closure).

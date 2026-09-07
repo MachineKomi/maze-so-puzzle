@@ -9,6 +9,10 @@ adds57 files across three packets, plus logs. The
 Owned QA sessions ended successfully; no broad reruns without new changes/failures.
 No deletion/archive; one existing dist, shared media and unowned4271 preserved.
 
+The98-byte presence26-doc-guard.log brings the completed local/public/guard
+slice to **489 files /179619185 bytes**. Actual Vercel documentation skip is
+recorded in the public receipt; this observation is backed up on the branch only.
+
 Four frozen release-v02225 entry/identity files share unchanged public media.
 New presence26-* baseline, pickup/browser, timing, summary and publication
 proofs stay under C:/GameDev/maze-game-qa/performance. One existing dist in place;
