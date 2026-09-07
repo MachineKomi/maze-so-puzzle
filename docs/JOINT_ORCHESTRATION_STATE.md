@@ -1,5 +1,12 @@
 # Maze so Puzzle — joint orchestration state
 
+**New Human priority — September7:** [CAMERA-17](plans/CAMERA-17-bounded-scene-performance.md)
+interrupts LOOT-03 for camera playability on iPhone13/iPad8. Astra writes only on
+`codex/bounded-camera-performance`; actual Sol reviews independently. Public16
+remains live while the bounded-window/map candidate is measured. The iPhone17
+report does not establish a RAM threshold. Older next-dispatch text below is
+superseded until this movement correction is qualified and published.
+
 **Current delivery — September7:** web **0.22.16 is live**, release815deb0,
 frozen runtime09d5475, on main and `codex/book-completion-hazard-refinement`.
 [Public verification](reviews/2026-09-07-v02216-public-verification.md),

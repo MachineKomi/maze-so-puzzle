@@ -24,7 +24,7 @@ describe("smooth exploration camera geometry", () => {
       expect(worldHeight * y! / 100).toBeCloseTo(-row.top * boardHeight! / row.viewHeight, 5);
     }
   });
-  it("sizes the oversized world without rebasing its layout origin", () => {
+  it("bounds the world layout independently of the paint origin", () => {
     expect(cameraWorldStyle(level, {
       left: 4,
       top: 6,
@@ -35,8 +35,8 @@ describe("smooth exploration camera geometry", () => {
     })).toEqual({
       left: "0%",
       top: "0%",
-      width: "250%",
-      height: "250%",
+      width: `${10 / 6 * 100}%`,
+      height: `${10 / 6 * 100}%`,
     });
   });
 
@@ -55,7 +55,7 @@ describe("smooth exploration camera geometry", () => {
   it("changes only world size when the viewport changes, including a full-maze view", () => {
     const camera = { left: 2, top: 3, right: 8, bottom: 9, width: 7, height: 7 };
     expect(cameraWorldStyle(level, camera)).toEqual({
-      left: "0%", top: "0%", width: `${1500 / 7}%`, height: `${1500 / 7}%`,
+      left: "0%", top: "0%", width: `${11 / 7 * 100}%`, height: `${11 / 7 * 100}%`,
     });
     expect(cameraWorldStyle(level, { left: 0, top: 0, right: 14, bottom: 14, width: 15, height: 15 }))
       .toEqual({ left: "0%", top: "0%", width: "100%", height: "100%" });
@@ -69,15 +69,15 @@ describe("smooth exploration camera geometry", () => {
       bottom: 5,
       width: 6,
       height: 6,
-    })).toMatchObject({ left: "0%", top: "0%", width: "250%", height: "250%" });
+    })).toMatchObject({ left: "0%", top: "0%", width: `${10 / 6 * 100}%`, height: `${10 / 6 * 100}%` });
   });
 
   it("places every object in stable full-world coordinates", () => {
     expect(worldLayerStyle({ x: 3, y: 9 }, level)).toEqual({
-      left: "20%",
-      top: "60%",
-      width: `${100 / 15}%`,
-      height: `${100 / 15}%`,
+      left: `calc((3 - var(--world-left, 0)) * var(--world-tile-x, ${100 / 15}%))`,
+      top: `calc((9 - var(--world-top, 0)) * var(--world-tile-y, ${100 / 15}%))`,
+      width: `var(--world-tile-x, ${100 / 15}%)`,
+      height: `var(--world-tile-y, ${100 / 15}%)`,
     });
   });
 });

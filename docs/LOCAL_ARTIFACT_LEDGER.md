@@ -1,5 +1,13 @@
 # Local artifact ledger and cleanup review
 
+## CAMERA-17 baseline — September7
+
+`C:/GameDev/maze-game-qa/performance/camera17-baseline-v02216/` retains exactly
+the verified16 HTML/JS/CSS plus identity (four files; entry bytes719841 plus
+identity). Unchanged media is shared. No repository/media clone or deletion.
+Subsequent candidate builds reuse existing dist; named diagnostic outputs will
+be inventoried at each checkpoint.
+
 ## Book/MOVE recovery and HAZARD-03 prototype — September7
 
 Under `C:/GameDev/maze-game-qa/performance/`, retained without deletion/archive:
@@ -444,3 +452,18 @@ any later recursive mutation. No deletion command is provided by this ledger.
 Hosted Vercel storage and local disk storage require separate proposals; follow
 the [deployment policy](VERCEL_DEPLOYMENT.md) to avoid duplicate hosted outputs
 while continuing frequent Git backup checkpoints.
+
+### CAMERA-17 diagnostic checkpoint inventory
+
+All under `C:/GameDev/maze-game-qa/performance/`. Temporary browsers/servers from
+these completed runs are stopped; preserve failed proofs and entry snapshots.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| camera17-baseline-v02216 | 4 | 720464 |
+| camera17-functional-20260907 | 108 | 43329051 |
+| camera17-map-frames-pilot-20260907 | 5 | 9565836 |
+| camera17-split-pilot-20260907 | 16 | 34374517 |
+| camera17-window-pilot-20260907 | 16 | 33955640 |
+
+These are diagnostics, not accepted release cohorts. No deletion/archive.

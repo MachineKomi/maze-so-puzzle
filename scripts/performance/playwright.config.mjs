@@ -6,6 +6,8 @@ import { tmpdir } from "node:os";
 const runId = `browser-${new Date().toISOString().replaceAll(":", "-")}-${process.pid}`;
 const repoRoot = resolve(import.meta.dirname, "../..");
 const commit = execFileSync("git", ["rev-parse", "HEAD"], { cwd: repoRoot, encoding: "utf8" }).trim().slice(0, 12);
+const browserName = process.env.MAZE_PERF_BROWSER ?? "chromium";
+if (!["chromium", "webkit", "firefox"].includes(browserName)) throw Error("Unsupported performance browser");
 const evidenceRoot = resolve(
   process.env.MAZE_PERF_EVIDENCE_DIR
     ?? resolve(tmpdir(), "maze-so-puzzle-performance", commit, runId),
@@ -18,7 +20,7 @@ process.env.MAZE_PERF_EVIDENCE_DIR = evidenceRoot;
 
 export default defineConfig({
   testDir: import.meta.dirname,
-  testMatch: ["browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts", "ui-correction.pw.ts", "phone-book.pw.ts", "book-completion.pw.ts", "jump-camera.pw.ts", "tall-walls.pw.ts", "hazard-surfaces.pw.ts", "wall-sprites.pw.ts", "reward-sprites.pw.ts"],
+  testMatch: ["camera-window.pw.ts", "browser-baseline.pw.ts", "ui-overhaul.pw.ts", "ui-review-follow-up.pw.ts", "movement-review.pw.ts", "ui-correction.pw.ts", "phone-book.pw.ts", "book-completion.pw.ts", "jump-camera.pw.ts", "tall-walls.pw.ts", "hazard-surfaces.pw.ts", "wall-sprites.pw.ts", "reward-sprites.pw.ts"],
   fullyParallel: false,
   workers: 1,
   retries: 0,
@@ -31,11 +33,11 @@ export default defineConfig({
   ],
   use: {
     baseURL: "http://127.0.0.1:4173",
-    browserName: "chromium",
-    launchOptions: {
+    browserName,
+    launchOptions: browserName === "chromium" ? {
       channel: "msedge",
       executablePath: process.env.MAZE_PERF_EDGE_PATH,
-    },
+    } : {},
     headless: true,
     actionTimeout: 15_000,
     navigationTimeout: 30_000,

@@ -37,7 +37,7 @@ for (const theme of ["sunny-stone", "ember-keep"]) test(`HAZARD03 connected shap
       })));
       document.getAnimations().forEach(a => { a.pause(); a.currentTime = 4000; });
     });
-    const geometry = await page.locator('[data-shape="receiver"] svg').evaluateAll(elements => elements.map(svg => {
+    const geometry = await page.locator('[data-shape="receiver"] .maze-terrain-svg').evaluateAll(elements => elements.map(svg => {
       const cast = svg.querySelector(".terrain-wall-cast")!, contact = svg.querySelector(".terrain-wall-contact")!;
       const id = cast.getAttribute("clip-path")!.slice(5, -1);
       const clip = [...svg.querySelectorAll("clipPath")].find(p => p.id === id)!.querySelector("path")!;
@@ -65,7 +65,7 @@ for (const theme of ["sunny-stone", "ember-keep"]) test(`HAZARD03 connected shap
   // ambient effect frozen at one phase. No fallback gap or loop reset is hidden
   // by a moving actor. A full period must return to the exact first image.
   const phases = [];
-  const shoreInterfaces = await page.locator('[data-shape="mixed"] svg').evaluate(svg => {
+  const shoreInterfaces = await page.locator('[data-shape="mixed"] .maze-terrain-svg').evaluate(svg => {
     const path = new Path2D(svg.querySelector('.terrain-hazard-lip path')!.getAttribute('d')!);
     const ctx = document.createElement('canvas').getContext('2d')!; ctx.lineWidth = .14;
     return { material: ctx.isPointInStroke(path, 2, 2.5), wall: ctx.isPointInStroke(path, 2, 2),
@@ -119,14 +119,16 @@ for (const [width, height] of [[780, 312], [1194, 834]]) for (const mode of ["fu
         await expectUiRouteState(page, f.route[f.start]!.before);
         const svg = page.locator(".maze-terrain-svg"); await expect(svg).toHaveAttribute("data-hazard-surface", "03-living-connected");
         await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map(i => i.decode().catch(() => {}))); });
-        const initial = await svg.innerHTML();
+        const stableGeometry = () => page.locator(".maze-terrain-svg path,.maze-liquid-svg path").evaluateAll(paths=>paths.map(p=>p.getAttribute("d")));
+        const initial = await stableGeometry();
         const proof = await page.evaluate(({ kind, mode }) => {
           const svg = document.querySelector<SVGSVGElement>(".maze-terrain-svg")!;
-          const base = svg.querySelector(`.terrain-${kind}`)!, fx = svg.querySelector(`.terrain-${kind}-fx`)!;
+          const liquid = document.querySelector<SVGSVGElement>(".maze-liquid-svg")!;
+          const base = liquid.querySelector(`.terrain-${kind}`)!, fx = liquid.querySelector(`.terrain-${kind}-fx`)!;
           const clip = base.getAttribute("clip-path")!, id = clip.slice(5, -1);
-          const exactClip = [...svg.querySelectorAll('clipPath')].find(c => c.id === id)?.querySelector('path')?.getAttribute('d') === base.getAttribute('d');
-          const animations = svg.getAnimations({ subtree: true });
-          const current = svg.querySelector(`.hazard-current-${kind}`)!;
+          const exactClip = [...liquid.querySelectorAll('clipPath')].find(c => c.id === id)?.querySelector('path')?.getAttribute('d') === base.getAttribute('d');
+          const animations = liquid.getAnimations({ subtree: true });
+          const current = liquid.querySelector(`.hazard-current-${kind}`)!;
           const currentAnimation = current.getAnimations()[0];
           const cadence: number[] = [];
           if (mode === "full") for (const t of [0, 25, 50, 75, 100]) {
@@ -136,7 +138,7 @@ for (const [width, height] of [[780, 312], [1194, 834]]) for (const mode of ["fu
           const samples = [];
           if (mode === "full") for (const t of [0, 400, 900, 1800, 2900, 4100, 5400, 6700]) {
             animations.forEach(a => { a.pause(); a.currentTime = t; });
-            samples.push([...svg.querySelectorAll('.poison-bubble')].map(e => {
+            samples.push([...liquid.querySelectorAll('.poison-bubble')].map(e => {
               const m = new DOMMatrix(getComputedStyle(e).transform); return { x: m.e, y: m.f, opacity: getComputedStyle(e).opacity };
             }));
           }
@@ -161,7 +163,7 @@ for (const [width, height] of [[780, 312], [1194, 834]]) for (const mode of ["fu
           await page.screenshot({ path: resolve(out, `${width}-poison-grayscale.png`) });
         }
         for (const step of f.route.slice(f.start, f.start + 2)) await replayRouteStep(page, step);
-        expect(await svg.innerHTML()).toBe(initial); expect(errors).toEqual([]);
+        expect(await stableGeometry()).toEqual(initial); expect(errors).toEqual([]);
         rows.push({ kind: f.kind, level: f.level.id, start: f.start, visibleCells: f.area, proof, errors });
       } finally { await context.close(); }
     }

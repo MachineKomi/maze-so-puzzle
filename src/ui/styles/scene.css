@@ -90,6 +90,13 @@
   pointer-events: none;
   transition: none;
 }
+/* CAMERA-17: only the bounded FOV+gutter surfaces are promoted. The shared
+ * travel owner keeps their viewport, contents and translate in the same frame. */
+.maze-board :is(.camera-world, .maze-foreground) {
+  contain: paint;
+  transform: translateZ(0);
+  will-change: translate;
+}
 .maze-board.portal-active .camera-world {
   transition: none;
 }
@@ -396,15 +403,15 @@
   animation: none;
   opacity: .55;
 }
-.maze-terrain-svg > .terrain-water {
+.maze-liquid-svg > .terrain-water {
   stroke: none;
   filter: none;
 }
-.maze-terrain-svg > .terrain-lava {
+.maze-liquid-svg > .terrain-lava {
   stroke: none;
   filter: none;
 }
-.maze-terrain-svg > .terrain-poison {
+.maze-liquid-svg > .terrain-poison {
   stroke: none;
   filter: none;
 }
@@ -478,7 +485,7 @@
 :root:is([data-motion=reduced],[data-quality=static]) .goal-sprite {
   animation: none;
 }
-.maze-terrain-svg {
+.maze-terrain-svg, .maze-liquid-svg {
   position: absolute;
   z-index: 0;
   inset: 0;
@@ -488,6 +495,10 @@
   overflow: hidden;
   pointer-events: none;
 }
+/* Animated material paint is isolated below the static floor/wall surface.
+ * Current patterns can repaint without repainting the expensive wall graph. */
+.maze-terrain-svg { z-index: 1; }
+.maze-board :is(.maze-terrain-svg, .maze-liquid-svg) { transform: translateZ(0); }
 .goal-layer {
   position: absolute;
   z-index: 5;
@@ -1228,7 +1239,7 @@
   transition: none;
   will-change: auto;
 }
-:root:is([data-motion=reduced],[data-quality=static]) .camera-world {
+:root:is([data-motion=reduced],[data-quality=static]) :is(.camera-world,.maze-foreground) {
   transition: none;
   will-change: auto;
 }

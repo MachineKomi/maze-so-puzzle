@@ -87,7 +87,8 @@ async function startRecording(page: Page, lightweight = false) {
           width: parseFloat(world.style.width) * cols * size / 100,
           height: parseFloat(world.style.height) * cols * size / 100,
         }), p = translate(player);
-        const logicalCamera = { x: -parseFloat(world.style.left) * cols / 100, y: -parseFloat(world.style.top) * cols / 100 };
+        const pane=board.querySelector<SVGSVGElement>(".maze-terrain-svg")!.viewBox.baseVal;
+        const logicalCamera = { x: pane.x, y: pane.y };
         const logical = { x: parseFloat(player.style.left) * cols / 100 + logicalCamera.x, y: parseFloat(player.style.top) * cols / 100 + logicalCamera.y };
         const at = performance.now();
         record.frames.push({ at, sampledAt: at, frameTime, logical, logicalCamera, worldTranslate:w, playerTranslate:p, travelState:board.dataset.travelState, board: light ? fixed.board : rect(board), hud: light ? fixed.hud : rect(hud),

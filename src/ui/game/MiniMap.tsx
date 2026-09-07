@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useId, useMemo } from "react";
 import { ASSETS } from "../../assets";
 import { pointsEqual } from "../../game/engine";
 import { toTileKey, type TileKey, type CameraWindow } from "../../game/exploration";
@@ -18,6 +18,26 @@ interface MiniMapProps {
   readonly highlightedObjectId?: string | null;
 }
 
+/** Adjacent cells become short spans; no per-cell render tree is needed. */
+function mapPath(keys: Iterable<TileKey>): string {
+  const rows = new Map<number, Set<number>>();
+  for (const key of keys) {
+    const [x, y] = key.split(",").map(Number);
+    if (!rows.has(y!)) rows.set(y!, new Set());
+    rows.get(y!)!.add(x!);
+  }
+  const paths: string[] = [];
+  for (const [y, cells] of rows) {
+    const xs = [...cells].sort((a, b) => a - b);
+    for (let i = 0; i < xs.length;) {
+      const x = xs[i]!; let end = x + 1; i++;
+      while (xs[i] === end) { end++; i++; }
+      paths.push(`M${x} ${y}h${end - x}v1h${x - end}Z`);
+    }
+  }
+  return paths.join("");
+}
+
 export const MiniMap = memo(function MiniMap({
   level,
   position,
@@ -29,10 +49,24 @@ export const MiniMap = memo(function MiniMap({
   compact = false,
   highlightedObjectId = null,
 }: MiniMapProps) {
-  const visibleObjectByTile = useMemo(() => new Map(
-    objects.map((object) => [toTileKey(object.at), object] as const),
-  ), [objects]);
-  const exploredCount = useMemo(() => new Set([...revealed, ...currentView]).size, [currentView, revealed]);
+  const id = useId().replace(/:/g, "");
+  const terrainPaths = useMemo(() => {
+    const keys = new Map<string, TileKey[]>();
+    level.terrain.forEach((row, y) => row.forEach((kind, x) => {
+      if (!keys.has(kind)) keys.set(kind, []);
+      keys.get(kind)!.push(toTileKey({ x, y }));
+    }));
+    return [...keys].map(([kind, cells]) => ({ kind, d: mapPath(cells) }));
+  }, [level]);
+  const seenTiles = useMemo(() => new Set([...revealed, ...currentView]), [revealed, currentView]);
+  const exploredCount = seenTiles.size;
+  const seenPath = useMemo(() => mapPath(seenTiles), [seenTiles]);
+  const viewPath = useMemo(() => mapPath(currentView), [currentView]);
+  // Preserve the previous map's last-active-object marker when a tile has
+  // overlapping authored objects; a reveal must not introduce extra markers.
+  const markerObjects = useMemo(() => [...new Map(objects.map(object => [toTileKey(object.at), object])).values()], [objects]);
+  const cellStyle = (point: Point) => ({ left: `${point.x / level.width * 100}%`, top: `${point.y / level.height * 100}%`,
+    width: `${100 / level.width}%`, height: `${100 / level.height}%` });
   const exploredPercent = Math.round((exploredCount / (level.width * level.height)) * 100);
   const guidedObject = highlightedObjectId
     ? objects.find((object) => object.id === highlightedObjectId)
@@ -52,27 +86,25 @@ export const MiniMap = memo(function MiniMap({
         }}
         aria-hidden="true"
       >
-        {level.terrain.flatMap((row, y) => row.map((terrain, x) => {
-          const point = { x, y };
-          const tileKey = toTileKey(point);
-          const inView = currentView.has(tileKey);
-          const seen = inView || revealed.has(tileKey);
-          const candidate = visibleObjectByTile.get(tileKey);
-          const guided = candidate?.id === highlightedObjectId;
-          const object = seen || guided ? candidate : undefined;
-          const isPlayer = pointsEqual(position, point);
-          const isExit = seen && pointsEqual(level.exit, point);
-          return (
-            <i
-              key={tileKey}
-              className={`minimap-tile ${seen ? `map-${terrain} ${inView ? "in-view" : "remembered"}` : "map-fog"}`}
-            >
-              {isExit && <b className="map-marker marker-exit" />}
-              {object && <b className={`map-marker marker-${object.kind}${object.kind === "door" || object.kind === "key" ? ` marker-${object.color}` : object.kind === "portal" ? ` marker-${object.pair}` : ""}${guided ? " guided-marker" : ""}`} />}
-              {isPlayer && <b className="map-player" />}
-            </i>
-          );
-        }))}
+        <svg className="minimap-terrain" viewBox={`0 0 ${level.width} ${level.height}`} preserveAspectRatio="none">
+          <defs>
+            <g id={`${id}-terrain`}>{terrainPaths.map(({ kind, d }) => <path key={kind} className={`map-${kind}`} d={d} />)}</g>
+            <clipPath id={`${id}-seen`}><path d={seenPath} /></clipPath>
+            <clipPath id={`${id}-view`}><path d={viewPath} /></clipPath>
+            <pattern id={`${id}-grid`} patternUnits="userSpaceOnUse" width="1" height="1">
+              <rect width="1" height="1" fill="none" stroke="#fff4" strokeWidth=".5" vectorEffect="non-scaling-stroke" />
+            </pattern>
+          </defs>
+          <use href={`#${id}-terrain`} className="map-memory" clipPath={`url(#${id}-seen)`} />
+          <g clipPath={`url(#${id}-view)`}><use href={`#${id}-terrain`} />
+            <rect width={level.width} height={level.height} fill={`url(#${id}-grid)`} /></g>
+        </svg>
+        {seenTiles.has(toTileKey(level.exit)) && <i className="minimap-marker-cell" style={cellStyle(level.exit)}><b className="map-marker marker-exit" /></i>}
+        {markerObjects.filter(object => seenTiles.has(toTileKey(object.at)) || object.id === highlightedObjectId).map(object =>
+          <i key={object.id} className="minimap-marker-cell" style={cellStyle(object.at)}>
+            <b className={`map-marker marker-${object.kind}${object.kind === "door" || object.kind === "key" ? ` marker-${object.color}` : object.kind === "portal" ? ` marker-${object.pair}` : ""}${object.id === highlightedObjectId ? " guided-marker" : ""}`} />
+          </i>)}
+        <i className="minimap-player-cell" style={cellStyle(position)}><b className="map-player" /></i>
         <span
           className="map-camera-frame"
           style={{
