@@ -102,7 +102,7 @@ export function DialogShell({ title, children, onClose, returnFocus, variant = "
     else if (event.shiftKey && (active === first || !controls.includes(active as HTMLElement))) { event.preventDefault(); lastControl.focus(); }
     else if (!event.shiftKey && (active === lastControl || !controls.includes(active as HTMLElement))) { event.preventDefault(); first.focus(); }
   };
-  return createPortal(<div className="dialog-stage" data-phone-fit={fit.phone || undefined} style={fit.phone ? { left: fit.left, top: fit.top, width: fit.width, height: fit.height, transform: `scale(${fit.scale})`, transformOrigin: "top left" } : undefined}><div className="modal-backdrop" role="presentation" inert={portrait || undefined} aria-hidden={portrait || undefined}>
+  return createPortal(<div className="dialog-stage" data-phone-fit={fit.phone || undefined} style={fit.phone ? { left: fit.left, top: fit.top, width: fit.width, height: fit.height, transform: `scale(${fit.scale})`, transformOrigin: "top left", "--stage-scale": fit.scale } as React.CSSProperties : undefined}><div className="modal-backdrop" role="presentation" inert={portrait || undefined} aria-hidden={portrait || undefined}>
     <section ref={ref} className={`modal-card dialog-${variant}`} data-focus-group="dialog" role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1} onKeyDown={keyDown}
       onClick={event => {
         const selection = document.getSelection();

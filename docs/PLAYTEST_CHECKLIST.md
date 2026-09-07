@@ -1,5 +1,25 @@
 # Family playtest checklist
 
+## P25 / Q11 — spacious exploration (candidate)
+
+Publication is pending qualification. When ready, use any unlocked scrolling
+maze; no reset or campaign replay is needed.
+
+- Compare the default spacious maze with **More maze**, then **Expand**. Are the
+  remaining Bag/friends, Power, minimap and pad comfortable to read and use?
+- In **More**, try **Use classic square view** and return using **Layout & more**.
+  The layout can change back; already explored map and Book discoveries remain.
+- Walk, reverse and jump horizontally. Does the larger view retain convincing
+  walls, clear characters and smooth camera travel? Report device, browser,
+  quality and screen size for any clipping, target or stutter problem.
+- Phone collection icons are status indicators; **More** holds their full-size
+  detail buttons and **Objective & gentle hint**. Nothing essential requires
+  tapping a tiny icon. Enlarged text has a scrolling reader and fixed controls.
+
+Q10/P24 celebration, Q09/P23 scene/XP and Q08/P19 physical Apple/cold-Power
+observations remain useful; this queue does not block independent development.
+
+
 ## Current short journey — P24 / Q10
 
 Ready on [published0.22.24](reviews/2026-09-07-v02224-public-verification.md).

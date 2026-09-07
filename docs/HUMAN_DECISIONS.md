@@ -1,5 +1,8 @@
 # Human decisions and steer
 
+**September7 explicit UI steer:** [spacious exploration request](user-playtests/2026-09-07-spacious-maze-request.md) authorizes a non-square square-cell camera and width-changing folding essentials rail, superseding older square-only UI constraints. Newly visible real tiles reveal/discover consistently; Classic reverses presentation while knowledge remains monotonic. Implementation and physical-device acceptance remain open.
+
+
 **September7 explicit new scene steer:** [five-point intake](user-playtests/2026-09-07-doors-depth-power-and-jump.md) requires taller doors, matching pickup/held weapon scale, larger always-readable Power, consistent ground-depth sprites and removal of boots artwork from jumps. SCENE-23 is authorized alongside XP; this does not reopen accepted wall geometry or imply acceptance of the implementation.
 
 

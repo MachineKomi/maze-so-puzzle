@@ -1,5 +1,14 @@
 # Local artifact ledger and cleanup review
 
+## EXPLORE25 active artifact island
+
+Created four-file `C:/GameDev/maze-game-qa/performance/release-v02224` from verified live24 dist entry bytes (HTML/JS/CSS/identity only, shared unchanged public media). New `explore25-baseline`, `explore25-layout-r1` and subsequent explore25-* evidence remain external; one in-place dist is rebuilt. Final inventory follows qualification. No files deleted/archived, no repo or media clone; unowned port4271 is preserved.
+
+
+DELIGHT24 closure guard adds one 98-byte log, delight24-doc-guard.log. The complete
+local/public/guard slice is **318 files /77604185 bytes**. The actual Vercel docs
+skip is recorded in the public receipt; this receipt update remains branch-only.
+
 ## DELIGHT24 public verification addition
 
 Under C:/GameDev/maze-game-qa/performance, public verification adds55 files /
@@ -976,3 +985,43 @@ failures (baseline body574/scroll808, first candidate590). Pilot2 passes8/8
 after fitting the whole reward spread. New lifecycle/full browser and unit/build
 logs use delight24-* names in the same external root; record final counts later.
 No deletion or duplicate repository.
+
+## EXPLORE25 completed local qualification inventory
+
+External root: C:/GameDev/maze-game-qa/performance. Snapshot before this small
+inventory receipt: 589 files / 275806181 bytes. Retain failed
+development packets for explicit Human cleanup review; no deletion or archive.
+One dist in place, four-file baseline only, no duplicate repo/media/native build.
+
+| Packet | Files | Bytes |
+| --- | ---: | ---: |
+| explore25-access-final |38|16763468|
+| explore25-access-r3 |44|16966070|
+| explore25-access-r4 |38|15685399|
+| explore25-baseline |7|3888295|
+| explore25-camera-r1 |87|59848780|
+| explore25-contract-r1 |54|19433906|
+| explore25-contract-r2 |53|19082355|
+| explore25-final-unit.log |1|1762|
+| explore25-frozen-browser |65|22433632|
+| explore25-functional-final |39|26622360|
+| explore25-idle-frames |1|1611804|
+| explore25-idle-frames.log |1|109474|
+| explore25-jump-frames |1|1210343|
+| explore25-jump-frames.log |1|135758|
+| explore25-layout-r1 |12|8838505|
+| explore25-layout-r2 |32|14391071|
+| explore25-layout-r3 |32|14721897|
+| explore25-layout-r4 |32|14743643|
+| explore25-moving-frames |1|1048038|
+| explore25-moving-frames.log |1|115834|
+| explore25-moving-work |25|14478726|
+| explore25-moving-work.log |1|116313|
+| explore25-paired-fixtures.json |1|67740|
+| explore25-phone-confirmation |1|537213|
+| explore25-phone-confirmation.log |1|57604|
+| explore25-summary |4|30464|
+| explore25-summary.log |1|7146|
+| explore25-touch-final |4|1000837|
+| explore25-touch-r2 |7|1090642|
+| release-v02224 |4|767102|

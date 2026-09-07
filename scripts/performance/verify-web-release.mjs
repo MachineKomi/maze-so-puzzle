@@ -58,7 +58,8 @@ try { for (const [width, height] of [[780, 312], [1280, 720]]) {
     if (steps !== '1 step') throw Error(`Input failed: ${steps}`);
     const geometry = await page.locator('.game-stage').evaluate(e => ({ phone: e.hasAttribute('data-phone-fit'), rect: e.getBoundingClientRect().toJSON() }));
     if (geometry.rect.x < -.1 || geometry.rect.y < -.1 || geometry.rect.right > width + .1 || geometry.rect.bottom > height + .1) throw Error('Stage clips');
-    await page.locator('[data-focus-id="sound"]').click();
+    if(!await page.locator('[data-focus-id="sound"]:visible').count()) await page.locator('[data-focus-id="more"]:visible').click();
+    await page.locator('[data-focus-id="sound"]:visible').click();
     if (await page.locator('#music-volume').inputValue() !== '65') throw Error('Game mix changed');
     await page.keyboard.press('Escape'); await settle(page); await page.screenshot({ path: resolve(output, `game-${width}.png`) });
     receipt.browser.push({ width, height, count, music, sfx, steps, errors, geometry, wall, hazard, journey: 'Play, Friends, Sound, Home, Begin adventure, Start the maze, ArrowUp, Sound, resume' });

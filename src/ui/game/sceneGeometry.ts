@@ -3,10 +3,10 @@ import type { Point } from "../../game/types";
 import type { CameraWindow } from "../../game/exploration";
 
 export function isInsideWindow(point: Point, camera: CameraWindow): boolean {
-  return point.x >= camera.left
-    && point.x <= camera.right
-    && point.y >= camera.top
-    && point.y <= camera.bottom;
+  return point.x + .5 >= camera.left
+    && point.x + .5 < camera.left + camera.width
+    && point.y + .5 >= camera.top
+    && point.y + .5 < camera.top + camera.height;
 }
 
 export function cameraLayerStyle(point: Point, camera: CameraWindow): CSSProperties {

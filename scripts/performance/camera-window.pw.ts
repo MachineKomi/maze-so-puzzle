@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { CURATED_LEVELS } from "../../src/game/levels";
 import { solveLevel } from "../../src/game/solver";
 import { movePlayer } from "../../src/game/engine";
-import { getCameraWindow, getVisibleTileKeys } from "../../src/game/exploration";
+import { getCameraWindow, getVisibleTileKeys, visibleKeysInWindow } from "../../src/game/exploration";
 import { ACTIVE_RUN_STORAGE_KEY, createActiveRunSnapshot } from "../../src/session";
 import { PLAYER_PROGRESS_STORAGE_KEY, createDefaultPlayerProgress } from "../../src/progress";
 import { DEFAULT_PRESENTATION_PREFERENCES, PRESENTATION_PREFERENCES_KEY } from "../../src/motion";
@@ -95,7 +95,8 @@ for (const dpr of [1, 3]) test(`CAMERA17 minimap painted palette DPR${dpr}`, asy
     }, { keys, progress, snapshot: f.snapshot, preferences: { ...DEFAULT_PRESENTATION_PREFERENCES, muted: true } });
     await page.goto("/"); await page.getByRole("button", { name: "Play", exact: true }).click(); await page.getByRole("button", { name: /^Continue/ }).click();
     await page.locator(".maze-board").waitFor(); await page.waitForTimeout(400);
-    const view = new Set(getVisibleTileKeys(f.level, f.before.position)), seen = new Set([...f.snapshot.revealedTiles, ...view]);
+    const size=await page.locator('.maze-board').evaluate(b=>({width:Number((b as HTMLElement).style.getPropertyValue('--grid-size')),height:Number((b as HTMLElement).style.getPropertyValue('--grid-rows'))||6}));
+    const view = new Set(visibleKeysInWindow(f.level,getCameraWindow(f.level, f.before.position,size))), seen = new Set([...f.snapshot.revealedTiles, ...view]);
     const occupied = new Set([...f.level.objects.map(o => `${o.at.x},${o.at.y}`), `${f.level.exit.x},${f.level.exit.y}`, `${f.before.position.x},${f.before.position.y}`]);
     const colors: Record<string, number[]> = { floor: [246,217,145], wall: [116,115,162] };
     const samples: { x: number; y: number; state: string; expected: number[] }[] = [];
@@ -158,7 +159,7 @@ for (const profile of [{ width: 844, height: 390, dpr: 3 }, { width: 1080, heigh
           const b = board.getBoundingClientRect(), w = world.getBoundingClientRect(), front = foreground.getBoundingClientRect();
           const player = board.querySelector<HTMLElement>(".player-layer")!.getBoundingClientRect();
           const cell = (b.width - 2 * board.clientLeft * b.width / board.offsetWidth) / columns;
-          result.rows.push({ time, camera, window: [box.x, box.y, box.width, box.height],
+          result.rows.push({ time, camera, view: {width:columns,height:Number(board.style.getPropertyValue("--grid-rows")) || columns}, window: [box.x, box.y, box.width, box.height],
             sameForeground: svg.getAttribute("viewBox") === foreground.getAttribute("viewBox"),
             sameLiquid: !board.querySelector(".maze-liquid-svg") || svg.getAttribute("viewBox") === board.querySelector(".maze-liquid-svg")!.getAttribute("viewBox"),
             frontError: Math.max(Math.abs(w.x - front.x), Math.abs(w.y - front.y)),
@@ -176,13 +177,14 @@ for (const profile of [{ width: 844, height: 390, dpr: 3 }, { width: 1080, heigh
       const rows = await page.evaluate(() => { (window as any).camera17.active = false; return (window as any).camera17.rows as any[]; });
       expect(rows.length).toBeGreaterThan(40);
       for (const row of rows) {
-        expect(row.window[2]).toBeLessThanOrEqual(10); expect(row.window[3]).toBeLessThanOrEqual(10);
+        expect(row.window[2]).toBeLessThanOrEqual(Math.ceil(row.view.width)+4); expect(row.window[3]).toBeLessThanOrEqual(Math.ceil(row.view.height)+4);
+        expect(Math.max(row.window[2],row.window[3])).toBeLessThanOrEqual(16);
         expect(row.sameForeground && row.sameLiquid).toBe(true); expect(row.frontError).toBeLessThan(.1);
         expect(row.camera.x).toBeGreaterThanOrEqual(row.window[0] - .001); expect(row.camera.y).toBeGreaterThanOrEqual(row.window[1] - .001);
-        expect(row.camera.x + 6).toBeLessThanOrEqual(row.window[0] + row.window[2] + .001);
-        expect(row.camera.y + 6).toBeLessThanOrEqual(row.window[1] + row.window[3] + .001);
+        expect(row.camera.x + row.view.width).toBeLessThanOrEqual(row.window[0] + row.window[2] + .001);
+        expect(row.camera.y + row.view.height).toBeLessThanOrEqual(row.window[1] + row.window[3] + .001);
       }
-      const end = rows.at(-1)!, expectedCamera = getCameraWindow(f.level, state.position);
+      const end = rows.at(-1)!, expectedCamera = getCameraWindow(f.level, state.position, end.view);
       expect(end.camera.x).toBeCloseTo(expectedCamera.left, 4); expect(end.camera.y).toBeCloseTo(expectedCamera.top, 4);
       expect(end.actor.x).toBeCloseTo(state.position.x, 3); expect(end.actor.y).toBeCloseTo(state.position.y, 3);
       const map = await page.locator(".maze-minimap").evaluate(el => {

@@ -9,8 +9,8 @@ export function boundedWorldWindow(
   camera: CameraWindow,
   previous?: CameraWindow,
 ): CameraWindow {
-  const width = Math.min(grid.width, camera.width + 4);
-  const height = Math.min(grid.height, camera.height + 4);
+  const width = Math.min(grid.width, Math.ceil(camera.width) + 4);
+  const height = Math.min(grid.height, Math.ceil(camera.height) + 4);
   const axis = (at: number, view: number, size: number, limit: number, prior?: number) => {
     if (prior !== undefined && at >= prior + (prior > 0 ? .25 : 0)
       && at + view <= prior + size - (prior + size < limit ? .25 : 0)) return prior;
@@ -50,7 +50,7 @@ export function cameraWorldStyle(
   return {
     left: "0%",
     top: "0%",
-    width: `${(Math.min(level.width, camera.width + 4) / camera.width) * 100}%`,
-    height: `${(Math.min(level.height, camera.height + 4) / camera.height) * 100}%`,
+    width: `${(Math.min(level.width, Math.ceil(camera.width) + 4) / camera.width) * 100}%`,
+    height: `${(Math.min(level.height, Math.ceil(camera.height) + 4) / camera.height) * 100}%`,
   };
 }

@@ -73,8 +73,7 @@ import { CURATED_LEVELS, getCuratedLevel } from "./game/levels";
 import {
   DEFAULT_FOV_SIZE,
   getCameraWindow,
-  getVisibleTileKeys,
-  revealVisibleTiles,
+  visibleKeysInWindow,
   shouldUseExplorationView,
   toTileKey,
   type CameraWindow,
@@ -732,16 +731,11 @@ function App() {
   selectedTravelDuration.current = movementStepDuration(preferences.pace);
   const travelEpoch = useRef(0);
   const [runMode, setRunMode] = useState<RunMode>("normal");
-  const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(
-    () => isExplorationLevel(initialLevel)
-      ? revealVisibleTiles(
-        initialRun?.revealedTiles ?? [],
-        initialLevel,
-        initialRun?.game.position ?? initialLevel.start,
-        DEFAULT_FOV_SIZE,
-      )
-      : new Set(),
-  );
+  const [classicView, setClassicView] = useState(false);
+  const [foldedHud, setFoldedHud] = useState(false);
+  const [viewSize, setViewSize] = useState<{width:number;height:number}|null>(null);
+  const receiveViewSize = useCallback((next:{width:number;height:number}) => setViewSize(old => old?.width === next.width && old?.height === next.height ? old : next), [level.id]);
+  const [revealedTiles, setRevealedTiles] = useState<ReadonlySet<TileKey>>(() => new Set(initialRun?.revealedTiles ?? []));
   const [feedback, setFeedback] = useState<Feedback>({
     icon: ASSETS.goal,
     text: initialRun ? initialLevel.objective : "Help Ame find the star!",
@@ -868,15 +862,15 @@ function App() {
   const cameraWindow = useMemo(() => {
     if (!explorationMode) return worldWindow;
     const cameraFocus = jumpPresentation?.to ?? game.position;
-    return getCameraWindow(level, cameraFocus, DEFAULT_FOV_SIZE);
-  }, [explorationMode, game.position, jumpPresentation, level, worldWindow]);
+    return getCameraWindow(level, cameraFocus, classicView ? DEFAULT_FOV_SIZE : viewSize ?? DEFAULT_FOV_SIZE);
+  }, [classicView, viewSize, explorationMode, game.position, jumpPresentation, level, worldWindow]);
   const fullMapTiles = useMemo(() => new Set(level.terrain.flatMap((row, y) =>
     row.map((_, x) => toTileKey({ x, y })))), [level]);
   const currentViewTiles = useMemo(
     () => explorationMode
-      ? new Set(getVisibleTileKeys(level, game.position, DEFAULT_FOV_SIZE))
+      ? new Set(visibleKeysInWindow(level, cameraWindow))
       : fullMapTiles,
-    [explorationMode, game.position, level, fullMapTiles],
+    [explorationMode, cameraWindow, level, fullMapTiles],
   );
   const activeObjects = useMemo(
     () => level.objects.filter((object) => !isObjectResolved(object, game)),
@@ -959,20 +953,25 @@ function App() {
       : !saved && current !== "progress" ? "run" : current);
   }, [game, hasActiveRun, hintUsesByState, level, revealedTiles, runId, runMode]);
 
+  // Folding exposes real tiles. Map and Book share that view, never the paint gutter.
   useEffect(() => {
-    if (screen !== "game" || modalOpen || !pageVisible || document.hidden || runMode === "tester" || !hasActiveRun) return;
-    const visible = enemyDiscoveriesForView(level, game.position, game.defeatedEnemyIds);
+    if (!viewSize || screen !== "game" || modalOpen || !pageVisible || document.hidden || !explorationMode) return;
+    setRevealedTiles(old => [...currentViewTiles].every(key=>old.has(key)) ? old : new Set([...old,...currentViewTiles]));
+  }, [screen,modalOpen,pageVisible,explorationMode,currentViewTiles,viewSize]);
+  useEffect(() => {
+    if (!viewSize || screen !== "game" || modalOpen || !pageVisible || document.hidden || runMode === "tester" || !hasActiveRun) return;
+    const visible = enemyDiscoveriesForView(level, game.position, game.defeatedEnemyIds, currentViewTiles);
     // Current-run defeat receipts are direct encounter evidence, including a
     // guardian removed from the visible object layer during its celebration.
     const met = level.objects.flatMap(object => object.kind === "enemy" && game.defeatedEnemyIds.includes(object.id) ? [object.style ?? "goblin"] : []);
     const mimics=game.chests.filter(c=>c.outcome==="mimic").map(c=>c.family);
     const next = recordFriendDiscoveries(recordEnemyDiscoveries(progress, [...visible,...met,...mimics]),
-      friendDiscoveriesForView(level, game.position, game.rescuedAnimalIds));
+      friendDiscoveriesForView(level, game.position, game.rescuedAnimalIds, currentViewTiles));
     if (next === progress) return;
     setProgress(next);
     const saved=writePlayerProgress(next);
     if (!saved) { setSaveWarning("progress"); setUnsupportedProfile(hasUnsupportedProgressProfile()); }
-  }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, game.rescuedAnimalIds, game.chests, progress]);
+  }, [screen, modalOpen, pageVisible, runMode, hasActiveRun, level, game.position, game.defeatedEnemyIds, game.rescuedAnimalIds, game.chests, progress, currentViewTiles, viewSize]);
 
   const setTouchCursor = useCallback((cursor: TouchCursor | null) => {
     const node = touchCursorRef.current;
@@ -1077,9 +1076,9 @@ function App() {
     const right=Math.ceil(Math.max(envelope.right,cameraWindow.right))+1;
     const bottom=Math.ceil(Math.max(envelope.bottom,cameraWindow.bottom))+1;
     return activeObjects.filter(object=>object.id!==battlePresentation?.objectId && object.id!==chestPresentation?.object.id &&
-      (!explorationMode || (revealedTiles.has(toTileKey(object.at)) &&
+      (!explorationMode || ((revealedTiles.has(toTileKey(object.at)) || currentViewTiles.has(toTileKey(object.at))) &&
         object.at.x>=left && object.at.x<=right && object.at.y>=top && object.at.y<=bottom)));
-  }, [activeObjects,battlePresentation?.objectId,chestPresentation?.object.id,cameraWindow,explorationMode,revealedTiles]);
+  }, [activeObjects,battlePresentation?.objectId,chestPresentation?.object.id,cameraWindow,explorationMode,revealedTiles,currentViewTiles]);
 
   const clearPresentationWork = useCallback(() => {
     setChestPresentation(null);
@@ -1412,9 +1411,8 @@ function App() {
     setGame(createInitialGameState(nextLevel, nextRunId));
     setRunId(nextRunId);
     setProcession(createFollowerProcession(nextLevel.start));
-    setRevealedTiles(isExplorationLevel(nextLevel)
-      ? revealVisibleTiles([], nextLevel, nextLevel.start, DEFAULT_FOV_SIZE)
-      : new Set());
+    setRevealedTiles(new Set());
+    setViewSize(null);
     setBumpPulse(0);
     setCompletion(null);
     setTooStrongEncounter(null);
@@ -1503,14 +1501,6 @@ function App() {
       setProcession(current=>advanceFollowerProcession(current,result.state.position,result.state.rescuedAnimalIds,travelDiscontinuity));
     } else if (rescuedEvent && rescuedAnimal) {
       setProcession((current) => joinFollowerProcession(current, rescuedEvent.objectId, rescuedAnimal.at));
-    }
-    if (result.moved && explorationMode) {
-      setRevealedTiles((revealed) => revealVisibleTiles(
-        revealed,
-        level,
-        result.state.position,
-        DEFAULT_FOV_SIZE,
-      ));
     }
     setFeedback(nextFeedback);
     const nextPickupToast = pickupToastFor(result.events, level);
@@ -2362,7 +2352,7 @@ function App() {
         <div className="ambient-star star-one" aria-hidden="true">✦</div>
         <div className="ambient-star star-two" aria-hidden="true">✧</div>
 
-        <PlayShell blocked={modalOpen}>
+        <PlayShell blocked={modalOpen} grid={level} classic={classicView} folded={foldedHud} onViewSize={receiveViewSize}>
           <MazeViewport name={level.name}>
             <div
               ref={boardRef}
@@ -2371,9 +2361,10 @@ function App() {
               className={`maze-board${explorationMode ? " exploration-camera" : ""} ${bumpPulse % 2 ? "bump-a" : "bump-b"}${battlePresentation ? " battle-active" : ""}${rescuePresentation ? " rescue-active" : ""}${jumpPresentation ? " jump-active" : ""}${portalPresentation ? " portal-active" : ""}${doorOpeningPresentation ? " door-opening-active" : ""}`}
               data-terrain-theme={terrainTheme.id}
               style={{
-                gridTemplateColumns: `repeat(${cameraWindow.width}, minmax(0, 1fr))`,
-                gridTemplateRows: `repeat(${cameraWindow.height}, minmax(0, 1fr))`,
+                gridTemplateColumns: `repeat(${Math.ceil(cameraWindow.width)}, minmax(0, 1fr))`,
+                gridTemplateRows: `repeat(${Math.ceil(cameraWindow.height)}, minmax(0, 1fr))`,
                 "--grid-size": cameraWindow.width,
+                "--grid-rows": cameraWindow.height,
                 "--cast-shadow-x": `${mazeLight.x * 5}px`,
                 "--cast-shadow-y": `${mazeLight.y * 4}px`,
                 backgroundColor: terrainTheme.floor.fallbackColor,
@@ -2693,7 +2684,7 @@ function App() {
               <span>{feedback.text}</span>
             </div>
           </MazeViewport>
-          <AdventureHud model={hudModel} name={level.name}
+          <AdventureHud explore={!classicView} folded={foldedHud} onToggle={trigger => { clearHeldInput(); trigger.focus(); setFoldedHud(old=>!old); }} model={hudModel} name={level.name}
             chapter={isSurprise ? "Surprise maze" : `Story maze ${campaignIndex + 1} of ${CURATED_LEVELS.length}`}
             power={displayedPower} gold={displayedGold} science={displayedScience} steps={game.steps}
             tester={testerRun} suggested={suggestedMoveDirection} resetPadGesture={resetPadGesture}
@@ -2838,6 +2829,8 @@ function App() {
 
         {moreOpen && <Modal title="More adventures" onClose={() => setMoreOpen(false)} returnFocus={modalReturnFocus.current}>
           <h3>{level.name}</h3><p>{hudModel.objective}</p>
+          <button onClick={event=>{setMoreOpen(false);openHint((modalReturnFocus.current ?? event.currentTarget) as HTMLButtonElement);}}>Objective & gentle hint</button>
+          <button aria-pressed={classicView} onClick={() => { clearHeldInput(); setClassicView(old=>!old); setMoreOpen(false); }}>{classicView ? "Use spacious maze view" : "Use classic square view"}</button>
           <div className="more-actions">{utilityActions.map(action => <button key={action.id} data-focus-id={action.id} aria-pressed={action.pressed} onClick={event => { if (action.id !== "restart") setMoreOpen(false); action.run((modalReturnFocus.current ?? event.currentTarget) as HTMLButtonElement); }}>{action.art && <CatalogueImage art={action.art} alt="" />}<span>{action.label}</span></button>)}</div>
           <h3>Bag details</h3><div className="more-actions">{hudModel.slots.map(slot => <button key={slot.id} data-focus-id={`bag:${slot.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:slot.art,label:slot.label,description:`${slot.found ? "Found." : "Still to find."} ${slot.description}`},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={slot.art} alt="" /><span>{slot.label} · {slot.found ? "Found" : "Not found"}</span></button>)}</div>
           <h3>Friends details · optional</h3><div className="more-actions">{hudModel.friends.map(friend => <button key={friend.id} data-focus-id={`friend:${friend.id}`} onClick={() => { setMoreOpen(false); openArtDetail({art:friend.art as import("./ui/art").UiArt,label:friend.label,description:`${FRIEND_BOOK_LORE[friend.species ?? "bunny"]} ${friend.rescued ? "Safe with Ame!" : "Waiting in the maze. You can always return to help."}`},modalReturnFocus.current as HTMLButtonElement); }}><CatalogueImage art={friend.art as import("./ui/art").UiArt} alt="" /><span>{friend.label} · {friend.rescued ? "Rescued" : "Waiting"}</span></button>)}</div>
@@ -2915,7 +2908,7 @@ function App() {
                   <b>{index + 1}</b>
                   <span>
                     <strong>{candidate.name}</strong>
-                    <small>{candidate.width} × {candidate.height}{isExplorationLevel(candidate) ? " · 6 × 6 view" : ""}</small>
+                    <small>{candidate.width} × {candidate.height}{isExplorationLevel(candidate) ? " · Exploration view" : ""}</small>
                   </span>
                   <i aria-hidden="true">→</i>
                 </button>
