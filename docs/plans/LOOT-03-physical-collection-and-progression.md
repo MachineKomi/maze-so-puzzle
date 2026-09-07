@@ -1,5 +1,7 @@
 # LOOT-03 — physical collection and lasting adventure progress
 
+**September7 dependency correction:** D is queued behind an actual usable Plan10 Garden and its Plan09/greybox prerequisites. A standalone egg storage screen would not meet the approved hatching/bag/resident contract. Proceed with [DELIGHT24 B](DELIGHT-24-friend-victory.md), then remaining DELIGHT A/C and LEARN-01; preserve D for the usable Garden tranche. Earlier inventory-next labels are superseded.
+
 **Current web0.22.23:** [published XP/scene receipt](../reviews/2026-09-07-v02223-public-verification.md). LOOT-03 C physical rainbow XP and recognition-only Adventure Level are delivered. Next is protected usable inventory before rare eggs. Generated Mimics and proper Gold/Science/Power replacement art remain separate work. Earlier current/next labels below are historical.
 
 **Current delivery — web0.22.22:** [public receipt](../reviews/2026-09-07-v02222-public-verification.md) binds

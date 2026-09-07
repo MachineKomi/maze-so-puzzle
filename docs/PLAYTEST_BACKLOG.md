@@ -1,5 +1,16 @@
 # Maze so Puzzle — playtest backlog
 
+**STORY-RESCUE-01 — inherited authored outro mismatch, found during DELIGHT24 QA.**
+Moonlit's static outro says all five friends followed Ame home even on an actual
+no-rescue victory. Both23 baseline and24 candidate show this; actual stage,
+rescue count and rewards are correct. During the upcoming LEARN/story pass,
+audit rescue-dependent narrative across all chapters and make partial/no-rescue
+outros truthful and warm without treating optional friends or Hint use as failure.
+Source: src/story.ts Moonlit outro; proof: delight24-final-browser/friend-victory/
+844-none-full-full.png. This is an engineering QA finding, not Human feedback.
+
+**Current execution — DELIGHT24, candidate web0.22.24:** [friend-led victory](plans/DELIGHT-24-friend-victory.md) implements DELIGHT-02B checkpoint B. Astra writes on codex/friend-victory; Sol independently reviews. Web23 remains live. The earlier inventory-next pointer is corrected: rare eggs require the actual usable Plan10 Garden and its Plan09/greybox dependencies; an empty Book inventory is not that home. Execute B, then remaining A/C, then LEARN-01 while preserving Garden/eggs and the wider roadmap. No additional general permission is needed.
+
 **Current delivery — web0.22.23:** [release receipt](reviews/2026-09-07-v02223-public-verification.md) records [SCENE-23](plans/SCENE-23-depth-and-scale.md) and [LOOT-03 C rainbow XP](plans/LOOT-03C-adventure-xp-execution.md). Taller doors, pickup/held weapon parity, shared ground depth, larger above-wall Power and boot-free jump presentation are delivered. Astra owns runtime; actual independent Sol supports the bounded web scope. Next: protected usable inventory before eggs; ART-REWARD-01 and the wider roadmap remain open. Q09/P23 is the scene/XP playtest; Q08/P19 physical Apple/cold-Power and native qualification remain separate. Earlier active/next/live labels below are historical.
 
 

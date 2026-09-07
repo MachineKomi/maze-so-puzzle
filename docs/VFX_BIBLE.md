@@ -1,5 +1,17 @@
 # Reward-first VFX contract — VFX-02A
 
+## DELIGHT24 — candidate finite victory staging
+
+VictoryParade consumes the existing won result with at most five rescued friends
+and twelve decorative pieces. Existing species gestures play twice at most,
+ending by9.88 seconds. A pure run-ID hash selects an occasional suitable flip
+without advancing reward randomness. Lite uses one gesture cycle and six pieces;
+Reduced/Static show calm large artwork. Hiding or switching to calm motion latches
+that mounted stage quiet, so returning cannot replay it. No new media, timer,
+animation-frame owner or save schema. The projected victory sound is anticipation;
+it is not a durable-earned fanfare. [B contract](plans/DELIGHT-24-friend-victory.md)
+keeps A pickup presence and C successful-write fanfare distinct and queued.
+
 ## Current hazard and loot continuation — 2026-09-06
 
 HAZARD-02 candidate0.22.14 replaces whole-surface pulsing and filtered masks with

@@ -8,6 +8,7 @@ import { fieldActorStyle } from "./fieldArtLayout";
 import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
 import { useLootCollection } from "./vfx/useLootCollection";
 import { AdventureLevel } from "./ui/AdventureLevel";
+import { VictoryParade } from "./ui/VictoryParade";
 import { finishLootClaims, pendingLoot } from "./game/loot";
 import { chestReceipt } from "./game/chests";
 import { rewardSeed } from "./vfx/rewardPhysics";
@@ -2267,9 +2268,9 @@ function App() {
     : null,
   [game, hintOpen, hintUsesByState, currentHintKey, level]);
   const newCollectibles = completion ? [
-    ...completion.newStickerIds.map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id), kind: "New sticker" })),
-    ...completion.newMedalIds.map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id), kind: "New medal" })),
-    ...completion.newBadgeIds.map((id) => ({ id, label: BADGE_LABELS[id].label, art: badgeArt(id), kind: "New badge" })),
+    ...completion.newStickerIds.map((id) => ({ id, label: STICKER_LABELS[id].label, art: stickerArt(id), kind: unsupportedProfile ? "Temporary sticker" : "Sticker to record" })),
+    ...completion.newMedalIds.map((id) => ({ id, label: ACHIEVEMENT_LABELS[id].label, art: medalArt(id), kind: unsupportedProfile ? "Temporary medal" : "Medal to record" })),
+    ...completion.newBadgeIds.map((id) => ({ id, label: BADGE_LABELS[id].label, art: badgeArt(id), kind: unsupportedProfile ? "Temporary badge" : "Badge to record" })),
   ] : [];
   const nextMazeLabel = completion?.testerRun
     ? campaignIndex >= 0 && campaignIndex + 1 < CURATED_LEVELS.length ? "Next test maze" : "Surprise test maze"
@@ -2761,36 +2762,13 @@ function App() {
 
         {game.status === "won" && completion && !presentationActive && (
           <Modal title="Maze solved!" variant="celebration" returnFocus={modalReturnFocus.current}>
-            <div className="celebration-burst" aria-hidden="true">
-              {Array.from({ length: 12 }, (_, index) => <i className="confetti-piece" style={{ "--i": index } as CSSProperties} key={index} />)}
-            </div>
             <div className="win-summary">
               <CatalogueImage className="win-star-art" src={ASSETS.goal} alt="A sparkling golden star portal" />
               <div><strong>Wonderful, Ame!</strong><span>The star was found in {game.steps} {game.steps === 1 ? "step" : "steps"}.</span></div>
             </div>
-            <div
-              className="rescued-result-row"
-              data-friend-count={animalObjects.length}
-              style={{ "--friend-count": Math.max(1, animalObjects.length) } as CSSProperties}
-              aria-label={`${completion.rescuedSpecies.length} of ${animalObjects.length} animal friends rescued`}
-            >
-              {animalObjects.map((animal) => {
-                const rescued = completion.rescuedSpecies.includes(animal.species);
-                return (
-                  <div
-                    className={`rescued-result ${rescued ? "rescued" : ""}`}
-                    data-species={animal.species}
-                    data-animal-motion={animalPersonality(animal.species).motion}
-                    data-flourish={animalPersonality(animal.species).flourish}
-                    key={animal.id}
-                    title={animalPersonality(animal.species).greeting}
-                  >
-                    <CatalogueImage src={animalArt(animal.species)} alt={ANIMAL_LABELS[animal.species]} decoding="async" />
-                    <span>{rescued ? animalPersonality(animal.species).greeting : "Next time"}</span>
-                  </div>
-                );
-              })}
-            </div>
+            <VictoryParade active={pageVisible && motion === "full" && preferences.quality !== "static"} ameSrc={ASSETS.ame} flourish={rewardSeed(game.loot.runId) % 4 === 2}
+              friends={animalObjects.filter(animal => completion.rescuedSpecies.includes(animal.species))
+                .map(animal => ({id:animal.id,species:animal.species,src:animalArt(animal.species),label:ANIMAL_LABELS[animal.species]}))} />
             {animalObjects.length > 0 && completion.rescuedSpecies.length === animalObjects.length && <div className="perfect-banner"><CatalogueImage src={ASSETS.rewardAnimalFriendSticker} alt="" /> Perfect rescue! Every friend is safe!</div>}
             {levelStory && (
               <div className="story-outro-card">
@@ -2810,16 +2788,16 @@ function App() {
               <div className="reward-panel">
                 <CatalogueImage className="reward-pouch" src={ASSETS.coinPouch} alt="A pouch of gold star coins" />
                 <div className="reward-copy">
-                  <span>Maze reward</span>
+                  <span>{unsupportedProfile ? "Temporary reward" : "Ready to record"}</span>
                   <strong>+{completion.reward.gold} gold stars</strong>
                   <small className="reward-breakdown">Solve {completion.reward.goldBreakdown.completion} · Friends {completion.reward.goldBreakdown.animalRescue}{completion.reward.goldBreakdown.perfectRescue > 0 ? ` · Every friend ${completion.reward.goldBreakdown.perfectRescue}` : ""}{completion.reward.goldBreakdown.firstCompletion > 0 ? ` · New maze ${completion.reward.goldBreakdown.firstCompletion}` : ""}{completion.bonusGold > 0 ? ` · Found ${completion.bonusGold}` : ""}{completion.sciencePoints > 0 ? ` · Science +${completion.sciencePoints}` : ""}</small>
                 </div>
-                <span className="reward-badge">Total {completion.totalGold}</span>
+                <span className="reward-badge">{unsupportedProfile ? "Temporary total" : "After moving on"} {completion.totalGold}</span>
               </div>
             )}
             {!completion.testerRun && <AdventureLevel xp={completion.projectedXp} previousXp={completion.previousXp} collected={completion.collectedXp} temporary={unsupportedProfile} />}
             {!completion.testerRun && newCollectibles.length > 0 && (
-              <div className="collection-strip reward-new" aria-label="New rewards">
+              <div className="collection-strip reward-new" aria-label={unsupportedProfile ? "Temporary rewards" : "Rewards to record when you move on"}>
                 {newCollectibles.map((item) => (
                   <div className="collection-pop" key={item.id}>
                     <CatalogueImage className="modal-reward-art" src={item.art} alt="" />
