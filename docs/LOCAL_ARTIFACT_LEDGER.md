@@ -899,3 +899,18 @@ origins against frozen HTML/JS/CSS/crystal hashes; its `public-bytes.json` is
 created only after actual deployment. Standard public smoke will use
 `v02223-public-20260907`, followed by `xp23-public-canonical` and
 `xp23-public-alias` for actual scene, XP and airborne routes.
+
+### XP23 public verification inventory
+
+All owned browser/public processes stopped; unowned4271 untouched. Retain until
+explicit Human cleanup review; no deletion/archive, repo copy or native build.
+The final documentation closeout creates no game build.
+
+| Folder | Files | Bytes |
+| --- | ---: | ---: |
+| v02223-public-20260907 |5|5768863|
+| xp23-public-canonical |33|7734304|
+| xp23-public-alias |33|7735743|
+| xp23-summary |5|15012|
+
+Public logs: 3 files, 4843 bytes.

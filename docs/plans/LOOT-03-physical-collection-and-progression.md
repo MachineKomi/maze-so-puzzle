@@ -1,5 +1,7 @@
 # LOOT-03 — physical collection and lasting adventure progress
 
+**Current web0.22.23:** [published XP/scene receipt](../reviews/2026-09-07-v02223-public-verification.md). LOOT-03 C physical rainbow XP and recognition-only Adventure Level are delivered. Next is protected usable inventory before rare eggs. Generated Mimics and proper Gold/Science/Power replacement art remain separate work. Earlier current/next labels below are historical.
+
 **Current delivery — web0.22.22:** [public receipt](../reviews/2026-09-07-v02222-public-verification.md) binds
 four authored mixed chests, disguised Power6 Candy and protected historical
 save migration. Actual Sol supports bounded web publication;747 tests,

@@ -693,7 +693,7 @@ Power6 disguised Candy. Generator2 remains pinned to rules5. See the
 [execution contract](plans/LOOT-03B-authored-chests-and-mimics.md). This paragraph
 describes the chest implementation published as web0.22.22.
 
-## Adventure XP candidate — schema-v7 snapshot / schema-v8 progress
+## Adventure XP — schema-v7 snapshot / schema-v8 progress
 
 `adventureXp.ts` owns recognition rules1 and a derived level curve. Ledger3
 adds collected physical XP independently of Gold/Science RNG and immediate

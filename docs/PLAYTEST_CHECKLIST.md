@@ -1,9 +1,9 @@
 # Family playtest checklist
 
 
-## Pending short journey — P23 / Q09
+## Current short journey — P23 / Q09
 
-Candidate0.22.23 is implemented but not yet published/qualified. Once ready:
+Ready on [published0.22.23](reviews/2026-09-07-v02223-public-verification.md). Use an already unlocked maze when convenient; no need to replay or clear progress:
 
 - Compare a door beside Ame and weapon pickup versus held size.
 - Walk vertically/horizontally past friends and objects; check grounded depth,

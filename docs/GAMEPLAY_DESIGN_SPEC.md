@@ -614,7 +614,7 @@ v5 runs retain their historical layouts/rewards. Generated revision2 is unchange
 The maintained route table below reflects the candidate's extra opening inputs;
 this is not a publication receipt.
 
-## Adventure XP — LOOT-03 C candidate
+## Adventure XP — LOOT-03 C, web0.22.23
 
 Rainbow crystals from ordinary final defeats contain2/4/6/10 XP for Power
 1–3/4–8/9–19/20+. A defeated Mimic doubles this; reveal and benign chests give

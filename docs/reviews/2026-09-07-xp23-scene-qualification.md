@@ -3,9 +3,9 @@
 Frozen candidate **6ee51c4a3f1d6b18c39e309cea26111aff1e3df3**, branch
 `codex/adventure-xp`, [PR14](https://github.com/MachineKomi/maze-so-puzzle/pull/14).
 Astra owns runtime; [actual independent Sol review](2026-09-07-xp23-sol-review.md)
-owns its disposition. **All four source-matched performance cohorts are complete;
-Sol supports bounded web promotion. Web22 remains live until reviewed-head CI
-and Git promotion.**
+owns its disposition. **Published as [web0.22.23](2026-09-07-v02223-public-verification.md).
+Sol supports the bounded web scope; exact reviewed-head CI and public
+verification passed.**
 
 ## Scope and preservation
 

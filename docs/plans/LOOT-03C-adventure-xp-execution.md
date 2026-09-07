@@ -1,6 +1,6 @@
 # LOOT-03 C — Adventure XP
 
-Execution candidate, 2026-09-07. Astra is the sole runtime writer; Sol independently reviews source and mounted proof. Baseline: published v0.22.22; branch `codex/adventure-xp`. This implements the user's rainbow crystals from defeated enemies, separate from puzzle Power.
+Delivered in web0.22.23, 2026-09-07; [release receipt](../reviews/2026-09-07-v02223-public-verification.md). Astra is the sole runtime writer; Sol independently reviews source and mounted proof. Baseline: published v0.22.22; branch `codex/adventure-xp`. This implements the user's rainbow crystals from defeated enemies, separate from puzzle Power.
 
 ## Contract
 

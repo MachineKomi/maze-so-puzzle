@@ -2,7 +2,7 @@
 
 Owner Astra, independent review Sol; branch `codex/adventure-xp`. Bounded addition
 to candidate0.22.23 after [direct Human feedback](../user-playtests/2026-09-07-doors-depth-power-and-jump.md).
-Web0.22.22 stays live until combined qualification. XP is preserved; this does
+Published in web0.22.23; [release receipt](../reviews/2026-09-07-v02223-public-verification.md). XP is preserved; this does
 not change collision, accepted interior/exterior wall geometry, Power or saves.
 
 ## Sequence and acceptance

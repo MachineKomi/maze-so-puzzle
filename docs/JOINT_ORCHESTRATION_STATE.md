@@ -1,6 +1,6 @@
 # Maze so Puzzle — joint orchestration state
 
-**Current in-flight scope, September7: candidate0.22.23 combines [LOOT-03 C rainbow XP](plans/LOOT-03C-adventure-xp-execution.md) and [SCENE-23](plans/SCENE-23-depth-and-scale.md).** The latest Human doors/weapon scale, Power readability, solid sprite depth and jump boots feedback is being implemented and qualified by Astra, with independent Sol review. Branch `codex/adventure-xp`; web0.22.22 remains live. Next is protected usable inventory before eggs. The wider roadmap and physical Apple/cold-Power/native open items remain intact. Older active/next labels below are historical.
+**Current delivery — web0.22.23:** [release receipt](reviews/2026-09-07-v02223-public-verification.md) records [SCENE-23](plans/SCENE-23-depth-and-scale.md) and [LOOT-03 C rainbow XP](plans/LOOT-03C-adventure-xp-execution.md). Taller doors, pickup/held weapon parity, shared ground depth, larger above-wall Power and boot-free jump presentation are delivered. Astra owns runtime; actual independent Sol supports the bounded web scope. Next: protected usable inventory before eggs; ART-REWARD-01 and the wider roadmap remain open. Q09/P23 is the scene/XP playtest; Q08/P19 physical Apple/cold-Power and native qualification remain separate. Earlier active/next/live labels below are historical.
 
 
 **Current delivery — web0.22.22:** [public receipt](reviews/2026-09-07-v02222-public-verification.md) binds
