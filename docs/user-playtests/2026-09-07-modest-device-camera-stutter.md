@@ -18,3 +18,10 @@ or an Apple-wide defect. Hardware age, chip, browser/OS and graphics allocation
 are confounded. Preserve the successful iPhone17 observation fairly. Windows
 CPU throttling measures an engineering response, not an emulated3GB iPad.
 Affected-device confirmation remains in Q08/P19 after a changed build is live.
+
+## Changed-build delivery
+
+Web0.22.17 is now [published and verified](../reviews/2026-09-07-v02217-public-verification.md).
+Q08/P19 is ready for the short same-maze device comparison. The lab change reduces
+raster work, with a disclosed extra-layer tradeoff; it does not establish the
+physical cause or close this report without new affected-device observations.

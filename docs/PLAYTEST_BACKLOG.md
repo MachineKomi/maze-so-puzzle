@@ -1,10 +1,11 @@
 # Maze so Puzzle — playtest backlog
 
-**Latest priority:** [CAMERA-17](plans/CAMERA-17-bounded-scene-performance.md) now
-interrupts LOOT-03 for reported iPhone13/iPad8 camera stutter. The successful
-iPhone17 observation is retained and no RAM floor is inferred. The bounded
-scene/map candidate is under qualification; Q08/P19 awaits a changed public build.
-Resume the preserved loot sequence after this correction.
+**Latest delivery:** [CAMERA-17](plans/CAMERA-17-bounded-scene-performance.md) is
+[published as web0.22.17](reviews/2026-09-07-v02217-public-verification.md), release65acb82,
+frozen runtime eff0530. Q08/P19 is now ready for iPhone13/iPad8 playtesting; the
+reported stutter remains open until that observation. The successful iPhone17
+control is retained; no RAM floor is inferred. Independent work resumes the
+preserved LOOT-03 A sequence, with migration and conservation first.
 
 **September7 delivered update:** web0.22.16 publishes the Book completion/default
 Next repair, confirmed moving-yellow-dot removal and HAZARD-03 liquid banks,

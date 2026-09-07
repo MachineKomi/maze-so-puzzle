@@ -6,8 +6,8 @@ Deployment Storage warning. Do not change its plan, retention or billing setting
 
 Production URL: [mazesopuzzle.com](https://mazesopuzzle.com/).
 Existing alias: [maze-so-puzzle.vercel.app](https://maze-so-puzzle.vercel.app/).
-Both serve identical frozen v0.22.16 HTML/JS/CSS, verified2026-09-07 in the
-[public receipt](reviews/2026-09-07-v02216-public-verification.md). Browser saves are
+Both serve identical frozen v0.22.17 HTML/JS/CSS, verified2026-09-07 in the
+[public receipt](reviews/2026-09-07-v02217-public-verification.md). Browser saves are
 origin-local: the new domain does **not** automatically inherit saves from the
 old alias. Keep the old alias available; never clear saves to migrate domains.
 
@@ -28,8 +28,8 @@ exposed this boundary; do not relax `.vercelignore` to package native evidence.
 
 ## Routine documentation checkpoints
 
-Current last successful production release: **815deb052e8e921e0a10356870af3c0e02d9f84f**
-(web0.22.16). Use the actual successful deployment as the guard baseline; later
+Current last successful production release: **65acb82076e299e7764b508e0d83ff2f77dd96df**
+(web0.22.17). Use the actual successful deployment as the guard baseline; later
 skipped documentation checkpoints do not require a replacement game build.
 
 Keep documentation, planning and review checkpoints on the current working
@@ -387,9 +387,9 @@ This verifies deployment and static reachability, not the pending physical
 iPad/TV/phone, clean-machine installation or qualified performance gates.
 # Latest verified web release
 
-Web0.22.15 is live from1e8b465/runtime e69f3e4:
-[public receipt](reviews/2026-09-07-v02215-public-verification.md).
-Use1e8b465 as the actual last-success baseline for the following docs-only closure.
+Web0.22.17 is live from65acb82/runtime eff0530:
+[public receipt](reviews/2026-09-07-v02217-public-verification.md).
+Use65acb82 as the actual last-success baseline for the following docs-only closure.
 The version-consistency test deliberately imports only web/package/lock inputs:
 `src-tauri/` is excluded by `.vercelignore`; do not make app compilation depend on it.
 Docs-only closure must still follow the unchanged ignored-build procedure above.

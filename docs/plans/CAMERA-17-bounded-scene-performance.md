@@ -101,9 +101,10 @@ and label this machine's unavailable engine honestly. No Mac/Apple test result
 is invented. LOOT-03 resumes after this movement correction, followed by the
 preserved roadmap. Updated source/qualification receipts will own actual status.
 
-## Implemented candidate and remaining physical decision
+## Delivered implementation and remaining physical decision
 
-The final renderer candidate is eff0530, version0.22.17. Static/liquid separation
+The final renderer eff0530 is [published as0.22.17](../reviews/2026-09-07-v02217-public-verification.md)
+from release65acb82. Static/liquid separation
 was required: windowing alone increased phone raster work in the rejected pilot.
 The grouped map joins that renderer in the measured candidate; its isolated
 contribution is not established by comparing pilots with different trace settings.

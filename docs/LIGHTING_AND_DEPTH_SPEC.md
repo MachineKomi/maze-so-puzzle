@@ -1,6 +1,6 @@
 # Wall depth and lighting — implemented WALL-04C contract
 
-## CAMERA-17 paint ownership candidate
+## CAMERA-17 paint ownership — delivered web0.22.17
 
 Accepted wall topology, caps/sides, foreground occlusion, art scale, light
 direction and global texture phase remain. The moving world and foreground
@@ -12,7 +12,8 @@ Animated liquid base/FX and their local clip definitions occupy a separate lower
 SVG. Static floor fills the dry complement above it; banks, cast/contact and walls
 retain their order. This separates animated paint from the expensive static wall
 graph without removing Full effects. [Plan/qualification boundary](plans/CAMERA-17-bounded-scene-performance.md)
-owns the candidate; joint state owns actual release status.
+owns the measured tradeoff; [public verification](reviews/2026-09-07-v02217-public-verification.md)
+binds the delivered bytes. Physical Apple/3GB efficacy remains open.
 
 ## Connected liquid revision — delivered web0.22.16
 

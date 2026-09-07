@@ -2,8 +2,8 @@
 
 ## New short journey — P19 / Q08, CAMERA-17
 
-**Not live yet:** engineering qualification is in progress. Once the changed
-build is published, use the same browser and Full/Regular settings on iPhone13
+**Ready on [published0.22.17](reviews/2026-09-07-v02217-public-verification.md):**
+confirm the displayed version, then use the same browser and Full/Regular settings on iPhone13
 and iPad8. Try campaign maze2, then Lanternlight Labyrinth; walk back and forth,
 turn quickly and jump over a hole away from the outer camera clamp. Check wall/
 sprite alignment, unexplored map fog and whether camera stutter persists or

@@ -522,3 +522,13 @@ A cleanup review is now useful for the accumulated failed/pilot screenshot and
 trace packets. This is an inventory, not approval to delete/archive. Preserve
 accepted evidence, user inputs and rollback consumers before proposing exact
 reviewed targets to the Human; no automatic cleanup was performed.
+
+### CAMERA-17 public verification
+
+`C:/GameDev/maze-game-qa/performance/v02217-public-20260907/`: seven files,
+10383251 bytes; Astra-owned, source65acb82/runtime eff0530. Six screenshots and
+one receipt from `verify-web-release.mjs` with the retained current-engine
+camera fixture. Both public origins match frozen bytes; four fresh journeys
+pass. Receipt SHA-256bb914ef94898b2bc740c3bf354ff3eea5cfbe47a7af10c78fe003339b30c1741.
+All browsers/contexts are stopped. Hold as accepted release evidence; no
+deletion/archive. Documentation closure creates no build or source clone.

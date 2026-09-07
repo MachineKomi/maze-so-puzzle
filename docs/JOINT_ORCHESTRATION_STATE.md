@@ -1,50 +1,57 @@
 # Maze so Puzzle — joint orchestration state
 
-**New Human priority — September7:** [CAMERA-17](plans/CAMERA-17-bounded-scene-performance.md)
-interrupts LOOT-03 for camera playability on iPhone13/iPad8. Astra writes only on
-`codex/bounded-camera-performance`; actual Sol reviews independently. Public16
-remains live while the bounded-window/map candidate is measured. The iPhone17
-report does not establish a RAM threshold. Older next-dispatch text below is
-superseded until this movement correction is qualified and published.
+**Current delivery — September 7:** web **0.22.17 is live**, release
+**65acb82076e299e7764b508e0d83ff2f77dd96df**, reviewed checkpoint b41a5c4,
+frozen runtime eff0530. Root is on `codex/bounded-camera-performance`,
+fast-forwarded to the release; remote main owns that release.
+[Public verification](reviews/2026-09-07-v02217-public-verification.md),
+[qualification](reviews/2026-09-07-v02217-web-qualification.md) and
+[Sol's independent review](reviews/2026-09-07-camera17-sol-final-review.md)
+bind the exact source, both public origins and four fresh public journeys.
 
-**Current delivery — September7:** web **0.22.16 is live**, release815deb0,
-frozen runtime09d5475, on main and `codex/book-completion-hazard-refinement`.
-[Public verification](reviews/2026-09-07-v02216-public-verification.md),
-[qualification](reviews/2026-09-07-v02216-web-qualification.md) and
-[actual Sol review](reviews/2026-09-07-v02216-sol-final-review.md) bind664 tests,
-38 browser cases, two five-pair cohorts per viewport and two fresh public journeys.
-Book Next/Surprise defaults and tester selection are fixed; the moving yellow dot
-is removed; connected liquid banks, wall shade and restrained material motion
-are delivered. Public15 wall/foreground/sprite geometry is retained.
+CAMERA-17 bounds world/foreground/mask paint to FOV+4, isolates animated liquids
+from static walls/floor, and groups minimap terrain with correct colours/fog.
+672 project tests and78 distinct source-matched browser cases pass, including
+11final camera/map/resize/rebase cases on eff0530. Six five-pair work rows show
+26–70% lower Raster work; maze2 is58.66%/65.82% lower. Separate small-maze frame
+tails are essentially parity on this host; no physical success is inferred.
+Extra small-maze layers are an explicit caching tradeoff, not measured RAM.
+Rejected promotion controls, the traced50ms outlier, sustained/reference
+observations and raw hashes remain in the receipts.
 
-Full-mode idle RasterTask rises9.983% phone/15.496% desktop (ratios of medians),
-with moving+4.966/+3.247%. All40 measured samples max16.8ms, none over20/34ms.
-Astra and actual Sol accept this scoped cost, not parity. Physical iPad/WebKit,
-low-end/thermal and native qualification remain open. Windows0.22.9 is published;
-native0.22.10 and the older R1 candidate remain separately held.15's recorded
-jump RasterTask+22.110% is a separate unchanged comparison.
+**Reported iPhone13/iPad8 stutter remains open pending Q08/P19 on17.**
+The iPhone17 successful control does not establish a RAM floor. No physical
+Apple/WebKit/3GB/GPU-memory/thermal/native qualification is claimed. If stutter
+persists, collect exact-build Safari/device-side evidence to distinguish layer
+repaint/residency from input/save/main-thread work before choosing a further fix.
+Windows0.22.9 remains published; native0.22.10 and older R1 stay separately held.
 
-**Next runtime dispatch:** Astra stays sole runtime writer; Sol reviews independently.
-Implement [LOOT-03 A](reviews/2026-09-07-loot03-readiness.md) as one complete authored
-Gold/Science ledger/claim/presentation/completion slice. First protect v3/rules-3
-migration and future active-save inputs, prove conservation, then persistent
-bounce/settle/range collection. Keep Power's current immediate rule authority.
-Then enemy Gold/Science, mixed chests/Mimics, recognition XP and rare eggs after
-usable protected inventory. DELIGHT-02B/LEARN-01, connected HOLE-02, Plan08 icon-led
-pace and the wider roadmap remain. No new Human permission is needed.
+Prior16 Book Next/Surprise routing, moving-dot removal and liquid banks/shadows/
+motion remain;15 wall/foreground/larger-sprite geometry and13's Human-accepted
+tall-wall direction are preserved. Q01/P17, Q02, Q04/Q07/P18 remain independent
+family observations, not a reason to redo delivered source work.
 
-Q04/Q07/P18 are ready on16; Q01/P17 wall refinement and Q02 jump observations
-remain independent.13's tall3D direction is Human-accepted; new beauty/feel is
-not inferred. Keep the [queue](HUMAN_REVIEW_QUEUE.md) visible at each closeout.
-All owned browsers/servers stopped. Generated outputs are in the
-[ledger](LOCAL_ARTIFACT_LEDGER.md); no deletion/archive or repository/media clone.
+**Next runtime dispatch:** Astra remains sole runtime writer; Sol reviews
+independently. Resume [LOOT-03 A](reviews/2026-09-07-loot03-readiness.md) as the
+complete authored Gold/Science ledger/claim/presentation/completion slice.
+Protect v3/rules-3 migration and future active-save inputs first, prove value
+conservation, then persistent bounce/settle/range collection. Keep Power's
+current immediate rule authority. Enemy Gold/Science, mixed chests/Mimics,
+recognition XP and rare eggs follow usable protected inventory. Preserve
+DELIGHT-02B/LEARN-01, connected HOLE-02, Plan08 icon-led pace and the wider
+roadmap. No new execution permission is needed.
 
-[Docs-only rules](VERCEL_DEPLOYMENT.md) now use actual successful release815deb0.
-Docs closure1b3bfec is on main and was actually canceled by Vercel's Ignored Build
-Step at02:26:19UTC. Its [observed receipt](reviews/2026-09-07-v02216-public-verification.md#observed-documentation-closure)
-is backed up on the current Codex branch without another main push. Include
-that note normally with the next runtime slice; do not deploy solely to align
-a docs SHA with public bytes. These facts supersede older active/next/live labels.
+[Human queue](HUMAN_REVIEW_QUEUE.md) remains visible at each closeout. All owned
+browsers/servers are stopped. The [artifact ledger](LOCAL_ARTIFACT_LEDGER.md)
+records459033994 bytes of CAMERA-17 diagnostics plus10383251 public proof bytes;
+failed/pilot packets are candidates for a later exact-target cleanup review,
+not approval to delete/archive. No full repository/media clone or native package.
+
+[Docs-only rules](VERCEL_DEPLOYMENT.md) now use actual successful65acb82.
+The next documentation closure must skip through the unchanged deployment guard;
+record its actual ignored-build result without another game build. Earlier
+live/active/next labels below retain historical provenance and are superseded
+by this current state.
 
 State date: 2026-09-07. Current operating state for **Sol Astra MsP Collab**.
 Replace this state when it changes; keep history in dated records and Git.

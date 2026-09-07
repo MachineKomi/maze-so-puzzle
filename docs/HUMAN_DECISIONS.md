@@ -1,5 +1,14 @@
 # Human decisions and steer
 
+**September7 engineering delivery, not new Human approval:** CAMERA-17 is live
+as web0.22.17, release65acb82/runtime eff0530. [Public verification](reviews/2026-09-07-v02217-public-verification.md)
+binds both origins and four fresh journeys; [Sol's independent review](reviews/2026-09-07-camera17-sol-final-review.md)
+accepts the bounded web scope. Six paired lab rows reduce Raster work26–70%,
+including maze2 at58.66%/65.82%. More small-maze layers are a documented caching
+tradeoff; no actual RAM saving or affected-device success is inferred.
+Q08/P19 is ready; the reported Apple-device defect remains open. Resume LOOT-03 A
+independently while preserving the physical observation and wider roadmap.
+
 **September7 latest Human priority:** investigate and fix modest-device camera
 stutter, implementing the [CAMERA-17 plan](plans/CAMERA-17-bounded-scene-performance.md)
 before LOOT-03. The [reported iPhone13/iPad8 failures and iPhone17 success](user-playtests/2026-09-07-modest-device-camera-stutter.md)

@@ -17,7 +17,21 @@ Verify real runtime releases, not the presence of a deployment on every docs SHA
 Production now uses mazesopuzzle.com; retain the old Vercel alias and its separate
 browser saves. No retention/deletion/archive without explicit Human approval.
 
-## Current published web — v0.22.16 Book progression and living liquids
+## Current published web — v0.22.17 camera rendering
+
+Release65acb82, reviewed checkpoint b41a5c4, frozen runtime eff0530.
+[Qualification](reviews/2026-09-07-v02217-web-qualification.md),
+[independent Sol review](reviews/2026-09-07-camera17-sol-final-review.md),
+[public verification](reviews/2026-09-07-v02217-public-verification.md).
+
+- [x]672 project tests, TypeScript/build, budget/contracts, production audit and CI.
+- [x]78 distinct source-matched browser cases, final11camera/map/rebase cases on eff0530.
+- [x]Six five-pair work rows, separate frame cohorts, reference and sustained diagnostics; measured cache tradeoff retained.
+- [x]One Git-integrated deployment; both origins match frozen bytes; four public journeys including maze2 camera return pass.
+- [ ]Q08/P19 iPhone13/iPad8 confirmation; no physical Apple/3GB/WebKit/thermal/native acceptance inferred.
+- [ ]Remaining independent Q01/Q02/Q04/Q07 family observations and wider programme.
+
+## Previous published web — v0.22.16 Book progression and living liquids
 
 Release815deb0, frozen runtime09d5475. [Qualification](reviews/2026-09-07-v02216-web-qualification.md),
 [actual Sol review](reviews/2026-09-07-v02216-sol-final-review.md) and

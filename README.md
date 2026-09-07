@@ -1,6 +1,6 @@
 # Maze so Puzzle: For Ame to Solve!
 
-The current published **web preview is v0.22.16** at
+The current published **web preview is v0.22.17** at
 [mazesopuzzle.com](https://mazesopuzzle.com/): balanced 3D wall volumes with clean
 projected edges, stronger directional lighting and larger grounded sprites that
 stand between rear and foreground walls. It keeps crisp surface details,
@@ -9,7 +9,10 @@ the shared phone composition, improved default audio balance and Adventure Book
 discovery from0.22.12. Book completion now offers Next first, the moving yellow
 dot is removed, and
 liquids have restored floor banks/shadow coverage with restrained material motion.
-[Verified release](docs/reviews/2026-09-07-v02216-public-verification.md).
+Camera paint now stays within a bounded window, animated liquids have their own
+paint layer, and the minimap uses fewer elements. Paired lab raster work falls
+26–70%; actual iPhone13/iPad8 comfort remains the priority Q08 playtest.
+[Verified release](docs/reviews/2026-09-07-v02217-public-verification.md).
 Latest fully published **Windows remains v0.22.9**; native0.22.10 qualification
 is separately unfinished. No new gameplay/save migration in this web release.
 Earned friends, rewards and progress remain intact. Do not clear saves.

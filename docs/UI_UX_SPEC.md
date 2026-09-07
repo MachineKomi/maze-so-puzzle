@@ -1,6 +1,6 @@
 # UI / UX implementation specification
 
-## CAMERA-17 candidate contract
+## CAMERA-17 — delivered web0.22.17
 
 The existing travel owner coordinates camera, actors, followers and foreground
 against a bounded FOV+4 paint window. World geometry/pattern phase stay global;

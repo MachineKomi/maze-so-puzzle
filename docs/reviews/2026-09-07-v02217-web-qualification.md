@@ -2,7 +2,7 @@
 
 Frozen runtime **eff0530820760fa7a5f22ac5ae68327dad626653**, PR8,
 `codex/bounded-camera-performance`. Astra writes runtime; actual Sol reviews
-independently. **Qualified for scoped web publication; public verification pending.**
+independently. **Published and [publicly verified](2026-09-07-v02217-public-verification.md).**
 The [plan](../plans/CAMERA-17-bounded-scene-performance.md) preserves the Human
 report, Claude-report source/hash, research, implementation and acceptance.
 
