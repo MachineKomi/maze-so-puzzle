@@ -1,5 +1,12 @@
 # Human decisions and steer
 
+**September7 explicit Human visual acceptance:** the balanced 3D wall effect is
+accepted as perfect/stunning. [Exact intake and new issues](user-playtests/2026-09-07-balanced-wall-acceptance-and-relative-scale.md).
+Preserve its interior shape/lighting; correct relative scale, small reward tokens,
+jump-over-all-walls layering and the outside border. Q01 visual direction is
+accepted; new proportions/perimeter, Q02 airborne layering, Q05 reward artwork/
+scale and Q08 physical-device comfort remain distinct open observations.
+
 **September7 engineering delivery, not new Human approval:** web0.22.20 is live,
 release135bb3a/reviewed5dc99c3/runtime6f083f4. [Public proof](reviews/2026-09-07-v02220-public-verification.md)
 and [actual Sol review](reviews/2026-09-07-enemy20-sol-final-review.md) qualify the

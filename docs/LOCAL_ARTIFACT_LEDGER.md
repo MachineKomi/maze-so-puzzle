@@ -1,5 +1,15 @@
 # Local artifact ledger and cleanup review
 
+## FIELD-21 — active correction, September7
+
+Owner Astra, branch `codex/field-scale-refinement`, starting3be18d2. Frozen20
+entry snapshot: `C:/GameDev/maze-game-qa/performance/release-v02220/`, four files
+(HTML, JS, CSS, identity), sharing unchanged public media. Reuse existing dist.
+Planned `field21-*` packets retain proportion audit, before/after racks, real
+jump/reward/browser checks and paired measurements; record final counts below.
+No new repository/media clone, native package, deletion or archive. Port4271
+is an older unowned preview; this slice owns only its newly launched helpers.
+
 ## Current release inventory — web0.22.20
 
 Owner Astra; existing repo/installed tools and dist reused. The completed enemy20

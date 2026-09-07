@@ -1,5 +1,11 @@
 # Maze so Puzzle — playtest backlog
 
+**Latest Human feedback — FIELD-21 / ART-REWARD-01:** [intake](user-playtests/2026-09-07-balanced-wall-acceptance-and-relative-scale.md)
+accepts balanced wall shape/lighting, but reports giant Ame/rewards, airborne wall
+occlusion and gaps outside the perimeter. [Active correction](plans/FIELD-21-scale-jump-and-perimeter.md)
+precedes remaining chests. Proper generated small Gold/Science/Power sprites are
+required subsequent work; replacing emoji-like Canvas art remains open after sizing.
+
 **Current delivery:** [web0.22.20](reviews/2026-09-07-v02220-public-verification.md),
 release135bb3a/runtime6f083f4, delivers B's final-defeat enemy Gold/Science and
 protected schema5 migration. Q05/P20 now covers authored and enemy loot. Next:

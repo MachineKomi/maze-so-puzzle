@@ -1,5 +1,11 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current Human override — FIELD-21:** balanced interior walls are explicitly
+accepted. [Scale/jump/perimeter correction](plans/FIELD-21-scale-jump-and-perimeter.md)
+now precedes chests: Astra writes on `codex/field-scale-refinement`; Sol independently
+reviews. Live remains0.22.20 until qualification and publication. Proper generated
+reward art is queued as ART-REWARD-01; current glyph shrinkage is not final art.
+
 **Current live state — web0.22.20:** release
 **135bb3a322d300cc528e977d5f09784f06f9d5b9**, reviewed5dc99c3, frozen runtime6f083f4.
 Astra owns runtime on `codex/enemy-loot-rewards`; actual Sol independently reviewed
