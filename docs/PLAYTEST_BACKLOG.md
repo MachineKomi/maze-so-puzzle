@@ -1,5 +1,8 @@
 # Maze so Puzzle — playtest backlog
 
+**Direct Human priority in flight: [EXPLORE-25](plans/EXPLORE-25-spacious-maze.md).** Spacious square-cell maze, folding essentials rail and reversible Classic view are implemented on codex/expansive-exploration; final qualification is pending. Live remains0.22.24. After this request, resume DELIGHT A/C then LEARN-01; preserve all wider roadmap/Garden dependencies and physical-device observations.
+
+
 **STORY-RESCUE-01 — inherited authored outro mismatch, found during DELIGHT24 QA.**
 Moonlit's static outro says all five friends followed Ame home even on an actual
 no-rescue victory. Both23 baseline and24 candidate show this; actual stage,
