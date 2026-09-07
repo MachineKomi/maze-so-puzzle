@@ -10,6 +10,7 @@ import { enemyRewardAmount } from "./game/enemyRewards";
 import { ACTIVE_RUN_STORAGE_KEY, createActiveRunSnapshot, readActiveRunResult, writeActiveRun, clearActiveRun } from "./session";
 import { AdventureLevel } from "./ui/AdventureLevel";
 import type { GameState } from "./game/types";
+import { pendingCompletionFor } from "./App";
 
 const runId="run-adventure-xp-test";
 const level=parseAsciiLevel({id:"xp-test",name:"XP",objective:"Explore",objectIds:{"3,1":"xp-test-enemy-first","3,3":"xp-test-enemy-later"},
@@ -28,6 +29,21 @@ function preXp(game:GameState) {
 }
 
 describe("Adventure XP recognition and physical currency",()=>{
+  it("previews accepted goal-entry claims exactly as the completion journal, leaving grounded drops unbanked",()=>{
+    let game=defeat();
+    game=beginLootClaims(level,game,game.loot.sources.flatMap(s=>s.drops.map(d=>({id:d.id,elapsedMs:2000}))));
+    expect(game.loot.sources.some(s=>s.currency==='xp'&&s.drops.some(d=>d.phase==='claiming'))).toBe(true);
+    while(game.status==='playing')game=movePlayer(level,game,'right').state;
+    const before=createDefaultPlayerProgress(),settled=finishLootClaims(game);
+    expect(game.xpCollected).toBeGreaterThan(0);expect(settled).toBe(game);
+    const preview=pendingCompletionFor(level,game,before,0,runId,false);
+    expect(preview.collectedXp).toBe(settled.xpCollected);
+    expect(preview.bonusGold).toBe(settled.goldStarsCollected);
+    expect(preview.sciencePoints).toBe(settled.sciencePointsCollected);
+    expect(preview.projectedXp).toBe(applyLevelCompletion(before,{...input,collectedXp:settled.xpCollected}).adventureXp);
+    expect(pendingLoot(game)).toBeGreaterThanOrEqual(pendingLoot(settled));
+    expect(game.loot.sources.some(s=>s.drops.some(d=>d.phase==='claiming'))).toBe(false);
+  });
   it("freezes all band boundaries and derives every level from one bounded total",()=>{
     expect([1,3,4,8,9,19,20,999].map(p=>enemyXp(p))).toEqual([2,2,4,4,6,6,10,10]);
     expect([1,4,9,20].map(p=>enemyXp(p,true))).toEqual([4,8,12,20]);

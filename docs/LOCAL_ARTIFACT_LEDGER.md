@@ -831,3 +831,13 @@ deployment. Reuse the existing ignored `dist/` in place, plus its existing
 
 Sources, candidate art and review records are needed project assets/evidence,
 not proposed deletion candidates. Agent review does not invent Human art approval.
+
+### XP23 scene extension and interrupted attempts
+
+The user steered the active task with scene feedback. `xp23-browser-final` and
+`xp23-unit-qualified.log` from the interrupted XP-only attempt are incomplete,
+not passing receipts. Retain them for provenance. New bounded logs:
+`xp23-scene-build.log`, `xp23-scene-build2.log`, `xp23-scene-pilot.log`,
+`xp23-unit-combined.log`; `xp23-scene-pilot` contains18 passing scene/jump cases,
+small screenshots and geometry JSON. Planned final packet is `xp23-combined-browser`
+and its log; reuse existing dist in place. No deletion or duplicate repo.

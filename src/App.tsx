@@ -3,6 +3,7 @@ import { physicalContentRect } from "./ui/stageFit";
 import { MazeTerrain, lightVector } from "./ui/game/MazeTerrain";
 import { MazeForeground } from "./ui/game/MazeForeground";
 import { CagedFriend, cageComposition } from "./ui/game/CagedFriend";
+import { depthStyle } from "./ui/game/sceneDepth";
 import { fieldActorStyle } from "./fieldArtLayout";
 import { RewardLayer, EMPTY_REWARD_PORT } from "./vfx/RewardLayer";
 import { useLootCollection } from "./vfx/useLootCollection";
@@ -64,7 +65,7 @@ import {
 } from "./game/engine";
 import { friendDiscoveriesForView, enemyDiscoveriesForView } from "./game/discovery";
 import { FRIEND_BOOK_LORE } from "./bookLore";
-import { heldWeaponStyle, JUMP_BOOTS_STYLE } from "./heldWeaponPresentation";
+import { heldWeaponStyle } from "./heldWeaponPresentation";
 import { hasCurrentGameplay } from "./game/contentIdentity";
 import { generateSurpriseMaze, type MazeDifficulty } from "./game/generator";
 import { CURATED_LEVELS, getCuratedLevel } from "./game/levels";
@@ -643,7 +644,7 @@ function completionInputFor(
   };
 }
 
-function pendingCompletionFor(
+export function pendingCompletionFor(
   level: LevelDefinition,
   game: GameState,
   progress: PlayerProgress,
@@ -1966,7 +1967,7 @@ function App() {
     }
     playSound("bump", muted);
     setRestartArmed(true);
-    setFeedback({ icon: ASSETS.navRestart, text: pendingLoot(game) ? "Restart again to leave the uncollected drops and unbanked XP and begin anew." : "Tap restart once more.", tone: "plain", sound: "bump" });
+    setFeedback({ icon: ASSETS.navRestart, text: pendingLoot(game) || game.xpCollected > 0 ? "Restart again to leave this run's drops and unbanked XP and begin anew." : "Tap restart once more.", tone: "plain", sound: "bump" });
     if (restartTimer.current !== undefined) window.clearTimeout(restartTimer.current);
     restartTimer.current = window.setTimeout(() => setRestartArmed(false), 2200);
   };
@@ -2377,8 +2378,6 @@ function App() {
                 backgroundColor: terrainTheme.floor.fallbackColor,
                 touchAction: "none",
                 ...(battlePresentation ? {
-                  "--battle-focus-x": `${((battlePresentation.at.x - cameraWindow.left + 0.5) / cameraWindow.width) * 100}%`,
-                  "--battle-focus-y": `${((battlePresentation.at.y - cameraWindow.top + 0.5) / cameraWindow.height) * 100}%`,
                   "--battle-duration": `${battlePresentation.durationMs}ms`,
                 } : {}),
               } as CSSProperties}
@@ -2397,6 +2396,11 @@ function App() {
               <span className="terrain-ambient-decoration" aria-hidden="true" />
               <div className="camera-world" data-scene-slot="world" style={cameraWorldStyle(level, cameraWindow)} aria-hidden="true">
                 <MazeTerrain level={level} camera={worldWindow} volumeId={wallVolumeId} />
+              </div>
+              <div className="camera-actors" style={{...cameraWorldStyle(level,cameraWindow),
+                "--battle-focus-x":battlePresentation ? `calc((${battlePresentation.at.x + .5} - var(--world-left)) * var(--world-tile-x))` : undefined,
+                "--battle-focus-y":battlePresentation ? `calc((${battlePresentation.at.y + .5} - var(--world-top)) * var(--world-tile-y))` : undefined,
+              } as CSSProperties} aria-hidden="true">
 
                 {worldObjects.map((object) => (
                   <div
@@ -2412,7 +2416,7 @@ function App() {
                     data-enemy-motion={object.kind === "enemy" ? enemyPersonality(object.style).motion : undefined}
                     data-key-color={object.kind === "key" || object.kind === "door" ? object.color : undefined}
                     key={object.id}
-                    style={{...worldLayerStyle(object.at, level), ...(isFieldGuardian(object,game) ? fieldActorStyle(resolveUiArt(spriteFor(object,game))!.geometry!, object.at.y-cameraWindow.top) : {})}}
+                    style={{...worldLayerStyle(object.at, level), ...depthStyle(object.at.y), ...(isFieldGuardian(object,game) ? fieldActorStyle(resolveUiArt(spriteFor(object,game))!.geometry!, object.at.y-cameraWindow.top) : {})}}
                   >
                     {object.kind === "animal" ? (
                       <div
@@ -2422,7 +2426,7 @@ function App() {
                         <CagedFriend friendSrc={animalArt(object.species)} cageSrc={resolveCageArt(object.cageStyle).src} />
                       </div>
                     ) : (
-                      <CatalogueImage usage="field" fieldRole={object.kind === "portal" || object.kind === "door" ? undefined : isFieldGuardian(object,game) ? "actor" : "item"} className={classForObject(object)} src={spriteFor(object,game)} alt="" draggable={false} />
+                      <CatalogueImage usage="field" fieldRole={object.kind === "portal" ? undefined : object.kind === "door" ? "door" : object.kind === "sword" ? "weapon" : isFieldGuardian(object,game) ? "actor" : "item"} className={classForObject(object)} src={spriteFor(object,game)} alt="" draggable={false} />
                     )}
                     {isFieldGuardian(object,game) && <span className="power-badge enemy-power">{object.power}</span>}
                     {(object.kind === "key" || object.kind === "door") && (
@@ -2439,7 +2443,7 @@ function App() {
                         data-follower-id={animal.id}
                         data-animal-motion={animalPersonality(animal.species).motion}
                         data-flourish={animalPersonality(animal.species).flourish}
-                        style={worldLayerStyle(point, level)}
+                        style={{...worldLayerStyle(point, level), ...depthStyle(point.y,3)}}
                         key={animal.id}
                       >
                         <CatalogueImage usage="field" fieldRole="actor" src={animalArt(animal.species)} alt="" draggable={false} />
@@ -2447,34 +2451,10 @@ function App() {
                     ))}
                   </div>
                 )}
-              </div>
-
-                <div
-                  ref={touchCursorRef}
-                  hidden
-                  className="touch-joystick"
-                  aria-hidden="true"
-                  style={{
-                    position: "absolute",
-                    zIndex: 40,
-                    inset: 0,
-                    pointerEvents: "none",
-                  } as CSSProperties}
-                >
-                  <i
-                    className="touch-joystick-origin"
-                    style={{ position: "absolute", left: "var(--touch-origin-x)", top: "var(--touch-origin-y)", transform: "translate(-50%, -50%)" }}
-                  />
-                  <i
-                    className="touch-joystick-cursor"
-                    style={{ position: "absolute", left: "var(--touch-cursor-x)", top: "var(--touch-cursor-y)", transform: "translate(-50%, -50%)" }}
-                  >✦</i>
-                </div>
-
               {chestPresentation && isInsideWindow(chestPresentation.object.at,cameraWindow) && (
-                <div className="chest-presentation" data-scene-slot="effects" data-travel-camera-anchor=""
+                <div className="chest-presentation" data-scene-slot="effects"
                   data-chest-state={chestPresentation.opened?chestPresentation.outcome==="good"?"good-open":"revealed":"closed"}
-                  style={cameraLayerStyle(chestPresentation.object.at,cameraWindow)} aria-hidden="true">
+                  style={{...worldLayerStyle(chestPresentation.object.at,level),...depthStyle(chestPresentation.object.at.y)}} aria-hidden="true">
                   <CatalogueImage usage="field" fieldRole={chestPresentation.opened&&chestPresentation.outcome==="mimic"?"actor":"item"}
                     className="maze-object" alt="" draggable={false}
                     src={MIMIC_ART[chestPresentation.object.family][chestPresentation.opened?chestPresentation.outcome==="good"?"good-open":"revealed":"closed"].src}/>
@@ -2485,11 +2465,11 @@ function App() {
                 <div
                   data-scene-slot="effects"
                   className={`door-opening-presentation door-magic-${doorOpeningPresentation.color}`}
-                  data-travel-camera-anchor=""
+
                   data-key-color={doorOpeningPresentation.color}
                   data-sfx-cue="colour-lock-chime-and-magic-burst"
                   style={{
-                    ...cameraLayerStyle(doorOpeningPresentation.at, cameraWindow),
+                    ...worldLayerStyle(doorOpeningPresentation.at, level),
                     "--magic-core": LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].core,
                     "--magic-glow": LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].glow,
                     "--magic-pale": LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].pale,
@@ -2497,7 +2477,7 @@ function App() {
                   aria-hidden="true"
                 >
                   <span className="door-opening-halo" />
-                  <CatalogueImage usage="field" className="door-opening-sprite" src={doorOpeningPresentation.doorSrc} alt="" draggable={false} />
+                  <CatalogueImage usage="field" fieldRole="door" className="door-opening-sprite" src={doorOpeningPresentation.doorSrc} alt="" draggable={false} />
                   <b className="door-opening-motif">{LOCK_MAGIC_EFFECTS[doorOpeningPresentation.color].symbols[0]}</b>
                   <span className="door-opening-particles">
                     {createDoorBurstParticles(doorOpeningPresentation.color).map((particle, index) => (
@@ -2533,22 +2513,22 @@ function App() {
                     "--power-flight-y": `${(battlePresentation.from.y - battlePresentation.at.y) * 100}%`,
                   } as CSSProperties}
                 >
-                  <div className="battle-combatant battle-ame" data-reward-anchor="ame" data-travel-actor="replacement" style={{...cameraLayerStyle(battlePresentation.from, cameraWindow), ...fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}}>
+                  <div className="battle-combatant battle-ame" data-reward-anchor="ame" data-travel-actor="replacement" style={{...worldLayerStyle(battlePresentation.from, level), ...depthStyle(battlePresentation.from.y,4), ...fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}}>
                     <CatalogueImage usage="field" fieldRole="actor" className="battle-sprite" src={ASSETS.ame} alt="" draggable={false} />
                     {game.hasSword && <CatalogueImage usage="field" fieldDetail className="battle-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "battle")} />}
-                    <span className="power-badge player-power">{displayedPower}</span>
+
                   </div>
-                  <div className="battle-combatant battle-enemy" data-travel-camera-anchor="" style={{...cameraLayerStyle(battlePresentation.at, cameraWindow), ...fieldActorStyle(resolveUiArt(battlePresentation.enemySrc)!.geometry!, battlePresentation.at.y-cameraWindow.top)}}>
+                  <div className="battle-combatant battle-enemy"  style={{...worldLayerStyle(battlePresentation.at, level), ...depthStyle(battlePresentation.at.y), ...fieldActorStyle(resolveUiArt(battlePresentation.enemySrc)!.geometry!, battlePresentation.at.y-cameraWindow.top)}}>
                     <CatalogueImage usage="field" fieldRole="actor" className="battle-sprite" src={battlePresentation.enemySrc} alt="" draggable={false} />
                     <span className="power-badge enemy-power">{presentedEnemyPower ?? battlePresentation.enemyPower}</span>
                   </div>
                   <div
                     className="battle-impact"
-                    data-travel-camera-anchor=""
-                    style={cameraLayerStyle({
+
+                    style={worldLayerStyle({
                       x: (battlePresentation.from.x + battlePresentation.at.x) / 2,
                       y: (battlePresentation.from.y + battlePresentation.at.y) / 2,
-                    }, cameraWindow)}
+                    }, level)}
                   >
                     <b>✦</b>
                     {Array.from({ length: 12 }, (_, index) => (
@@ -2562,11 +2542,11 @@ function App() {
                 <div
                   data-scene-slot="effects"
                   className="rescue-presentation"
-                  data-travel-camera-anchor=""
+
                   data-animal-motion={animalPersonality(rescuePresentation.species).motion}
                   data-flourish={animalPersonality(rescuePresentation.species).flourish}
                   data-sfx-cue="cage-pop-and-friend-cheer"
-                  style={{...cameraLayerStyle(rescuePresentation.at, cameraWindow), ...cageComposition(animalArt(rescuePresentation.species), rescuePresentation.cageSrc).rescueStyle}}
+                  style={{...worldLayerStyle(rescuePresentation.at, level), ...depthStyle(rescuePresentation.at.y,3), ...cageComposition(animalArt(rescuePresentation.species), rescuePresentation.cageSrc).rescueStyle}}
                   aria-hidden="true"
                 >
                   <CatalogueImage usage="field" fieldRole="actor" className="rescue-presentation-pet" src={animalArt(rescuePresentation.species)} alt="" draggable={false} />
@@ -2579,6 +2559,43 @@ function App() {
                   </span>
                 </div>
               )}
+
+              <div
+                data-scene-slot="actors"
+                data-reward-anchor={battlePresentation || jumpPresentation || portalPresentation ? undefined : "ame"}
+                className={`player-layer${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
+                style={{...worldLayerStyle(game.position, level), ...depthStyle(game.position.y,4), ...fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}}
+                aria-hidden="true"
+              >
+                <CatalogueImage usage="field" fieldRole="actor" className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
+                {game.hasSword && <CatalogueImage usage="field" fieldDetail className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
+
+              </div>
+
+
+              </div>
+
+                <div
+                  ref={touchCursorRef}
+                  hidden
+                  className="touch-joystick"
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    zIndex: 40,
+                    inset: 0,
+                    pointerEvents: "none",
+                  } as CSSProperties}
+                >
+                  <i
+                    className="touch-joystick-origin"
+                    style={{ position: "absolute", left: "var(--touch-origin-x)", top: "var(--touch-origin-y)", transform: "translate(-50%, -50%)" }}
+                  />
+                  <i
+                    className="touch-joystick-cursor"
+                    style={{ position: "absolute", left: "var(--touch-cursor-x)", top: "var(--touch-cursor-y)", transform: "translate(-50%, -50%)" }}
+                  >✦</i>
+                </div>
 
               {jumpPresentation && (
                 <div className="jump-ground" data-scene-slot="effects" aria-hidden="true"
@@ -2604,9 +2621,9 @@ function App() {
                 >
                   <div className="jump-presentation-body" style={fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}>
                     <CatalogueImage usage="field" fieldRole="actor" className="jump-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                    <CatalogueImage usage="field" fieldDetail className="jump-presentation-boots" src={ASSETS.springBoots} alt="" draggable={false} style={JUMP_BOOTS_STYLE} />
+
                     {game.hasSword && <CatalogueImage usage="field" fieldDetail className="jump-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "jump")} />}
-                    <span className="power-badge player-power">{displayedPower}</span>
+
                   </div>
                 </div>
               )}
@@ -2625,22 +2642,25 @@ function App() {
                   <div className="portal-presentation-body" style={fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}>
                     <CatalogueImage usage="field" fieldRole="actor" className="portal-presentation-sprite" src={ASSETS.ame} alt="" draggable={false} />
                     {game.hasSword && <CatalogueImage usage="field" fieldDetail className="portal-presentation-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "portal")} />}
-                    <span className="power-badge player-power">{displayedPower}</span>
+
                   </div>
                   <span className="portal-presentation-sparkles">✦ <b>{resolvePortalArt(portalPresentation.pair).motif}</b> ✦</span>
                 </div>
               )}
 
-              <div
-                data-scene-slot="actors"
-                data-reward-anchor={battlePresentation || jumpPresentation || portalPresentation ? undefined : "ame"}
-                className={`player-layer${game.position.y === cameraWindow.top ? " camera-edge-top" : ""}${battlePresentation || jumpPresentation || portalPresentation ? " presentation-hidden" : ""}${displayedPower >= 99 ? " power-legendary" : ""}`}
-                style={{...cameraLayerStyle(game.position, cameraWindow), ...fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!, game.position.y-cameraWindow.top)}}
-                aria-hidden="true"
-              >
-                <CatalogueImage usage="field" fieldRole="actor" className="player-sprite" src={ASSETS.ame} alt="" draggable={false} />
-                {game.hasSword && <CatalogueImage usage="field" fieldDetail className="player-held-weapon" src={weaponArt.src} alt="" draggable={false} style={heldWeaponStyle(weaponArt, "field")} />}
-                <span className="power-badge player-power">{displayedPower}</span>
+              <div className={`player-label-layer${displayedPower >= 99 ? " power-legendary" : ""}${battlePresentation ? " battle-presentation-label battle-won" : ""}`} data-travel-actor="label" aria-hidden="true"
+                style={{...cameraLayerStyle(game.position,cameraWindow),
+                  "--jump-duration":jumpPresentation ? `${jumpPresentation.durationMs}ms` : undefined,
+                  "--jump-apex":jumpPresentation ? `${jumpPresentation.apexPercent}%` : undefined,
+                  "--jump-descent":jumpPresentation ? `${jumpPresentation.descentPercent}%` : undefined,
+                  "--battle-duration":battlePresentation ? `${battlePresentation.durationMs}ms` : undefined,
+                  "--battle-x":battlePresentation ? `${DIRECTION_DELTAS[battlePresentation.direction].x*46}%` : undefined,
+                  "--battle-y":battlePresentation ? `${DIRECTION_DELTAS[battlePresentation.direction].y*46}%` : undefined,
+                } as CSSProperties}>
+                <div className={`player-label-body${jumpPresentation ? " jump-presentation-body" : portalPresentation ? " portal-presentation-body" : battlePresentation ? " battle-ame" : ""}`}
+                  style={fieldActorStyle(resolveUiArt(ASSETS.ame)!.geometry!,game.position.y-cameraWindow.top,.44)}>
+                  <span className="power-badge player-power">{displayedPower}</span>
+                </div>
               </div>
 
               <MazeForeground level={level} volumeId={wallVolumeId} style={cameraWorldStyle(level, cameraWindow)} />

@@ -1,5 +1,8 @@
 # Integrated implementation roadmap through final convergence
 
+**Current in-flight scope, September7: candidate0.22.23 combines [LOOT-03 C rainbow XP](LOOT-03C-adventure-xp-execution.md) and [SCENE-23](SCENE-23-depth-and-scale.md).** The latest Human doors/weapon scale, Power readability, solid sprite depth and jump boots feedback is being implemented and qualified by Astra, with independent Sol review. Branch `codex/adventure-xp`; web0.22.22 remains live. Next is protected usable inventory before eggs. The wider roadmap and physical Apple/cold-Power/native open items remain intact. Older active/next labels below are historical.
+
+
 **Current delivery — web0.22.22:** [public receipt](../reviews/2026-09-07-v02222-public-verification.md) binds
 four authored mixed chests, disguised Power6 Candy and protected historical
 save migration. Actual Sol supports bounded web publication;747 tests,

@@ -631,3 +631,14 @@ completions also earn XP; no stats, purchases or benefits depend on it. Old
 profiles start with XP0; historical collections are not invented. Book progress
 is saved progress, while the exit preview becomes permanent only on moving on.
 [Implementation and qualification contract](plans/LOOT-03C-adventure-xp-execution.md).
+
+## Scene23 presentation refinement candidate
+
+A door should read as a passage for Ame: taller natural-proportion frames and
+substantial jambs. A weapon keeps its scale when picked up. Grounded characters,
+friends and objects overlap according to their contact with the path, not their
+sprite family; an opening door dissolves behind Ame. The Power number remains
+readable above wall art. Airborne Ame clears all walls, with one matching Power
+label, a grounded shadow and a brief spring effect; no boots sprite is attached
+to her jump. Collision, accepted wall shape and gameplay rules stay unchanged.
+[Implementation/acceptance](plans/SCENE-23-depth-and-scale.md).

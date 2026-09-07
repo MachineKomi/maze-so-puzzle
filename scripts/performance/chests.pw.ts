@@ -95,6 +95,22 @@ for(const outcome of ['good','mimic'] as const)test(`reload interrupts ${outcome
   await writeFile(resolve(output,`${outcome}-reload.json`),JSON.stringify({during,after},null,2));
 });
 
+for(const phase of ['good-open','revealed','defeated'] as const)test(`XP23 migrates v22 chest ${phase} without losing receipts or minting XP`,async({page})=>{
+  const f=phase==='good-open'?good:mimic;
+  const game=phase==='defeated'?movePlayer(f.level,f.result.state,f.direction).state:f.result.state;
+  expect(game.chests.some(c=>c.phase===phase)).toBe(true);
+  const snapshot={...createActiveRunSnapshot({level:f.level,game,runId:game.loot.runId,mode:'normal',revealedTiles:f.revealed}),schemaVersion:6,game:preXp(game)};
+  await page.addInitScript(({keys,snapshot,progress,preferences})=>{
+    localStorage.setItem(keys.run,JSON.stringify(snapshot));localStorage.setItem(keys.progress,JSON.stringify(progress));localStorage.setItem(keys.preferences,JSON.stringify(preferences));
+  },{keys,snapshot,progress:createDefaultPlayerProgress(16),preferences:{...DEFAULT_PRESENTATION_PREFERENCES,quality:'static'}});
+  await page.goto('/');await page.getByRole('button',{name:'Play',exact:true}).click();await page.getByRole('button',{name:/^Continue/}).click();
+  const restored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),keys.run);
+  expect(restored.schemaVersion).toBe(7);expect(restored.game.chests).toEqual(game.chests);expect(restored.game.power).toBe(game.power);
+  expect(restored.game.xpCollected).toBe(0);expect(restored.game.loot.sources.some((s:any)=>s.currency==='xp')).toBe(false);
+  for(const source of snapshot.game.loot.sources){const after=restored.game.loot.sources.find((s:any)=>s.sourceId===source.sourceId);expect(after.amount).toBe(source.amount);expect(after.credited+after.drops.reduce((n:number,d:any)=>n+d.amount,0)).toBe(source.amount);}
+  await writeFile(resolve(output,`v22-${phase}.json`),JSON.stringify({snapshot,restored},null,2));
+});
+
 test('production runtime resumes v21 Twilight and restarts on the new layout',async({page})=>{
   const level=LEGACY_CURATED_LEVELS.find(l=>l.id==='twilight-treasure-loop')!,runId='run-chest-old-twilight';
   const game=createInitialGameState(level,runId),{chests:_,...oldGame}=preXp(game);

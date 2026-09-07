@@ -718,3 +718,21 @@ no unlocks/stat rewards or completion checklist. The Book shows saved progress;
 completion shows an explicitly pending preview. Crystal decoding is deferred,
 128×128/65,536 decoded bytes, with a code facet fallback and no new clock.
 See the [XP execution contract](plans/LOOT-03C-adventure-xp-execution.md).
+
+## Scene23 candidate: one solid depth order
+
+Terrain remains in its retained camera world. A second transparent actor plane
+uses the same bounded window, origin and travel transform. Objects, friends,
+Ame and combat/rescue replacements sort by ground Y (sixteenth-tile steps),
+with object/friend/Ame tie ranks. This separates solid ordering from artwork
+height and the wall-cap pass. An opening door dissolves below solid actors;
+closed doors remain ordinary depth-sorted scenery. Root wall caps26, airborne
+Ame27, portal46 and the single Power label60 have explicit presentation roles.
+The label shares movement and pose clocks; four cached jump animation handles
+cover actor, label and two grounded effects. No new rAF owner or frame layout
+read is added. Lite continues removing field image filters in the actor plane.
+
+Doors use alpha-bound1.12-width/1.35-height limits; floor weapons exactly reuse
+the registered held canvas scale. Actor clearance and accepted wall geometry
+are unchanged. Jump boots imagery/attachment rules are removed, while pickup,
+inventory, jumping ability and the finite ring remain. [Scene contract](plans/SCENE-23-depth-and-scale.md).

@@ -21,7 +21,7 @@
 }
 /* V22-PERF-01 Lite recipe. Keep Full and Static unchanged. Ordinary travel and
  * bounded success presentations stay live; only ambient scene costs are cut. */
-:root[data-quality="lite"] .maze-board :is(.camera-world img, .player-sprite, .player-held-weapon) {
+:root[data-quality="lite"] .maze-board :is(.camera-world img, .camera-actors img, .player-sprite, .player-held-weapon) {
  filter: none;
 }
 :root[data-quality="lite"] .maze-board :is(.maze-object, .animal-sprite, .pet-follower-image, .pet-follower > img, .goal-sprite) {

@@ -326,7 +326,7 @@ function sanitizeGameState(value: unknown, level: LevelDefinition,
   const rawLoot=ownValue(value,"loot");
   const runId=prior?.runId ?? (isRecord(rawLoot)?rawLoot.runId:undefined);
   if(typeof runId!=="string")return null;
-  const chests=sanitizeChests(prior?[]:ownValue(value,"chests"),level,runId);
+  const chests=sanitizeChests(prior && prior.version < 6 ? [] : ownValue(value,"chests"),level,runId);
   if(!chests)return null;
   const resolvedChests=new Set(chests.filter(c=>c.phase!=="revealed").map(c=>c.objectId));
   const rescued = new Set(rescuedAnimalIds);

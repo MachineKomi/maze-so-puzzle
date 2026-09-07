@@ -33,7 +33,7 @@ try{
   const preXp=s=>{const {xpCollected,...game}=s.game;return{...s,schemaVersion:6,game:{...game,loot:{version:2,runId:s.runId,legacyRetiredEnemyIds:game.loot.legacyRetiredEnemyIds,sources:game.loot.sources.filter(s=>s.currency!=='xp')}}};};
   const snapshot=savedFixture(f,'xp23-pair');
   const camera=JSON.parse(await readFile(resolve('../maze-game-qa/performance/field21-final-browser/camera-window/fixtures.json'),'utf8')).fixtures.find(f=>f.id==='shiny-sword');
-  // Existing schema6 camera prefix remains valid under v22; v23 migrates that
+  // Existing schema5 camera prefix remains valid under v22; v23 migrates that
   // exact prefix, with no retroactive XP. Same physical route, both directions.
   const progress=createDefaultPlayerProgress(16),baselineProgress={...progress,schemaVersion:7};delete baselineProgress.adventureXp;
   const mediaPath='public/assets/adventure-xp-v1.png';

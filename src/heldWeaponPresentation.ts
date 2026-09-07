@@ -22,14 +22,6 @@ export const HELD_WEAPON_ACTOR_CANVAS = {
   jump: measureFieldArt(AME_ART.geometry),
 } as const satisfies Readonly<Record<HeldWeaponContext, RegisteredActorCanvas>>;
 
-/** Preserve the existing boot attachment in Ame's canvas coordinates while
- * resizing her whole pose; ground pickup boots use their own visible bounds. */
-export const JUMP_BOOTS_STYLE = {
-  "--jump-boots-left": (HELD_WEAPON_ACTOR_CANVAS.jump.left + HELD_WEAPON_ACTOR_CANVAS.jump.scale * (.41 - .03) / .94) * 100,
-  "--jump-boots-top": (HELD_WEAPON_ACTOR_CANVAS.jump.top + HELD_WEAPON_ACTOR_CANVAS.jump.scale * (.62 - .07) / .94) * 100,
-  "--jump-boots-size": HELD_WEAPON_ACTOR_CANVAS.jump.scale * .42 / .94 * 100,
-} as CSSProperties;
-
 export interface HeldWeaponPlacement {
   readonly left: number;
   readonly top: number;
