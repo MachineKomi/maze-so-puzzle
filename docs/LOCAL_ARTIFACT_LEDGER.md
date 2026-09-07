@@ -7,7 +7,10 @@ C:/GameDev/maze-game-qa/performance. Four verified release-v02226 entry/identity
 files share unchanged media. One existing dist rebuilt in place; no repository,
 media or native-package clone, no deletion/archive. Retain r1/r2 fixture failures
 and r3's actual narrow-card clipping plus future-profile fixture correction.
-Record final counts/bytes at publication; preserve unowned4271.
+Pre-publication inventory: **200 files /40,582,479 bytes**, including retained
+failed proofs and four frozen baseline entries. Final follow-ups cover audio,
+real-time CSS settling, medal/badge and recovered saves. Record public additions
+at publication; preserve unowned4271.
 
 ## DELIGHT26 completed local/public artifact island
 
