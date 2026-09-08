@@ -1,5 +1,14 @@
 # Local artifact ledger and cleanup review
 
+## LEARN28 active evidence island
+
+New learn28-* browser/build/timing/release outputs stay external under
+C:/GameDev/maze-game-qa/performance. Four release-v02227 entry/identity files
+share unchanged media; one dist rebuilt in place. Retain invalid run-ID,
+non-square fixture and overly broad colour-regex QA failures; runtime key-image
+ambiguity found by actual Sol was corrected to the generic help fallback.
+Record final counts at publication. No repo/native clone, deletion or archive.
+
 DELIGHT27 closure adds the98-byte keepsake27-doc-guard.log. Completed local,
 public and guard slice: **261 files /54,242,225 bytes**. Actual Vercel docs skip
 is recorded in the public receipt; this observation is backed up branch-only.

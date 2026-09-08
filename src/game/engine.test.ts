@@ -8,6 +8,17 @@ import {
 } from "./engine";
 import { parseAsciiLevel } from "./levels";
 
+it("keeps weapon precedence and exact low/equal/high comparisons at three-digit Power", () => {
+  for (const power of [1, 124, 125, 150]) for (const hasSword of [false, true]) {
+    const maze = parseAsciiLevel({ id: "learn-power", name: "Power", objective: "Exit", initialPower: power, enemyTokens: { M: { power: 125 } }, map: ["#######", "#@M.E##", ...Array<string>(5).fill("#######")] });
+    const initial = { ...createInitialGameState(maze), hasSword };
+    const result = movePlayer(maze, initial, "right");
+    if (!hasSword) { expect(result.events.some(e => e.type === "enemy-too-strong")).toBe(false); expect(result.state.power).toBe(power); expect(result.state.defeatedEnemyIds).toHaveLength(0); }
+    else if (power < 125) { expect(result.events).toContainEqual(expect.objectContaining({ type: "enemy-too-strong", playerPower: power, enemyPower: 125 })); expect(result.state).toBe(initial); }
+    else { expect(result.events).toContainEqual(expect.objectContaining({ type: "enemy-defeated", powerBefore: power, enemyPower: 125, powerAfter: power + 125 })); expect(result.state.power).toBe(power + 125); }
+  }
+});
+
 const level = (
   id: string,
   corridor: string,

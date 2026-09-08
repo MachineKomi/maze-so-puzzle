@@ -5,6 +5,41 @@ import { CURATED_LEVELS, parseAsciiLevel } from "./levels";
 import { getEngineReachability, getRequiredPath } from "./reachability";
 
 describe("engine-consistent progressive hints", () => {
+  it("uses generic tool pictures without adding hidden identity or early route metadata", () => {
+    for (const [token, picture] of [["s", "sword"], ["u", "boots"], ["j", "springBoots"], ["r", "navHelp"], ["b", "navHelp"], ["y", "navHelp"]] as const) {
+      // A required tool must actually unlock the exit route, not merely sit nearby.
+      const suffix = token === "s" ? "1" : token === "u" ? "~" : token === "j" ? "o" : token.toUpperCase();
+      const level = parseAsciiLevel({ id: `picture-${token}`, name: "Rule", objective: "Exit", initialPower: 1, map: ["#########", `#@${token}${suffix}.E###`, ...Array<string>(7).fill("#########")] });
+      const initial = createInitialGameState(level);
+      for (const tier of [0, 1] as const) {
+        const hint = getProgressiveHint(level, initial, tier);
+        expect(hint.picture, token).toBe(picture);
+        expect(hint.targetObjectId).toBeUndefined();
+        expect(hint.direction).toBeUndefined();
+        expect(hint.text).not.toMatch(/\b(red|blue|yellow)\b/);
+      }
+    }
+  });
+
+  it("does not promise all requirements are met when a required route is unavailable", () => {
+    const level = parseAsciiLevel({ id: "unreachable-hint", name: "Blocked", objective: "Exit", map: ["#####", "#@#E#", "#####"] });
+    const hint = getProgressiveHint(level, createInitialGameState(level), 3);
+    expect(hint.text).not.toContain("everything you need");
+    expect(hint.direction).toBeUndefined();
+    expect(hint.targetObjectId).toBeUndefined();
+    expect(hint.picture).toBe("navHelp");
+  });
+
+  it("keeps unknown guardian values out of generic hint text and pictures", () => {
+    const level = parseAsciiLevel({ id: "hidden-guardian", name: "Rule", objective: "Exit", initialPower: 150, enemyTokens: { M: { power: 125, style: "goblin" } }, map: ["#######", "#@M.E##", ...Array<string>(5).fill("#######")] });
+    for (const tier of [0, 1]) {
+      const hint = getProgressiveHint(level, { ...createInitialGameState(level), hasSword: true }, tier);
+      expect(hint.text).not.toMatch(/125|goblin/i);
+      expect(hint.picture).toBe("navHelp");
+      expect(hint.direction).toBeUndefined();
+      expect(hint.targetObjectId).toBeUndefined();
+    }
+  });
   it("uses a compact deterministic persistence key even with long semantic IDs", () => {
     const level = parseAsciiLevel({ id: "hint-key", name: "Hint key", objective: "Exit", map: ["#####", "#@.E#", "#...#", "#...#", "#####"] });
     const state = {
@@ -121,3 +156,4 @@ describe("engine-consistent progressive hints", () => {
     }
   }, 120_000);
 });
+

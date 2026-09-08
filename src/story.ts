@@ -114,7 +114,7 @@ export const STORY_LORE: readonly StoryLore[] = [
     quote: "‘Not yet’ is not the same thing as ‘never.’",
     puzzlePower: "Perseverance",
     tryThis: "If an idea does not work yet, learn something and try again.",
-    outro: "The guardian gave a gravelly cheer and the kitten bounded free. The best wish, it turned out, was a patient one.",
+    outro: "Another Wish Star found its way home. The best wish, it turned out, was a patient one.",
   },
   {
     levelId: "ames-grand-parade",
@@ -128,7 +128,7 @@ export const STORY_LORE: readonly StoryLore[] = [
     quote: "I shall play the royal kazoo! I have not found a kazoo.",
     puzzlePower: "Keep track",
     tryThis: "Pause and check: what have I found, and what is still missing?",
-    outro: "The parade reached the star with every flag, friend, and imaginary kazoo in exactly the right place.",
+    outro: "The parade reached the star, and Sprig played a triumphant tune on his imaginary kazoo.",
   },
   {
     levelId: "springstep-sky-hollow",
@@ -142,7 +142,7 @@ export const STORY_LORE: readonly StoryLore[] = [
     quote: "Hypothesis: boing. Result: considerably more boing.",
     puzzlePower: "Predict",
     tryThis: "Before moving, point to where you think Ame will land.",
-    outro: "Poggle recorded three results: up, down, and boing. Ame recorded the rescued friends, which was more useful.",
+    outro: "Poggle recorded three results: up, down, and boing. Ame added a fourth: another Wish Star found!",
   },
   {
     levelId: "lanternlight-labyrinth",
@@ -184,7 +184,7 @@ export const STORY_LORE: readonly StoryLore[] = [
     quote: "Look twice. The second look often finds the clue.",
     puzzlePower: "Careful observation",
     tryThis: "Name one detail that makes this place different from the last.",
-    outro: "All five friends followed Ame home beneath the moon. Each had remembered a different clue; together, they remembered the whole adventure.",
+    outro: "The Wish Star shone beneath the moon. Ame remembered the little clues that had helped her find the way.",
   },
   {
     levelId: "rose-heart-roundabout",
@@ -240,7 +240,7 @@ export const STORY_LORE: readonly StoryLore[] = [
     quote: "This time I brought a handkerchief the size of a tent.",
     puzzlePower: "Sequence and backtrack",
     tryThis: "Build Power in order, then return to the place that was blocked first.",
-    outro: "At Power 99, Ame sparkled like every colour at once. The last knot opened, the Star Map became whole, and Sprig’s next tiny sneeze made only one very small rainbow.",
+    outro: "Ame sparkled like every colour at once. The last knot opened, the Star Map became whole, and Sprig’s next tiny sneeze made only one very small rainbow.",
   },
 ] as const;
 
@@ -248,6 +248,14 @@ const STORY_BY_LEVEL_ID = new Map(STORY_LORE.map((entry) => [entry.levelId, entr
 
 export function storyForLevel(levelId: string): StoryLore | undefined {
   return STORY_BY_LEVEL_ID.get(levelId);
+}
+
+/** Optional rescues describe this attempt, never an earlier best or projected award. */
+export function storyRescueLine(rescued: number, total: number): string {
+  if (total === 0) return "";
+  if (rescued === total) return "Ame has company for the journey home!";
+  if (rescued === 0) return "The star is safe! You can return for the friends whenever you like.";
+  return `${rescued} ${rescued === 1 ? "friend is" : "friends are"} safe with Ame. You can return for the others whenever you like.`;
 }
 
 export interface StoryKeyIntent {
