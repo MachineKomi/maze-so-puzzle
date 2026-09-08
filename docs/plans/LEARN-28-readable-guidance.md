@@ -1,5 +1,9 @@
 # LEARN28 — readable reasoning and truthful endings
 
+**Delivered web0.22.28:** [public receipt](../reviews/2026-09-08-v02228-public-verification.md). Frozen aa6a0a1,
+reviewed 1576a729fbe84f5189612461724b5601d177573c, release d17c89d0b9ca408d881732724deb9e08d088bdaf. Actual Sol supports bounded publication;
+Q14/P28 and the isolated Plan09-P1 handoff are ready.
+
 Bounded implementation of [LEARN-01](LEARN-01-readable-reasoning-and-help.md),
 authorized continuation2026-09-08. Baseline is verified web0.22.27, runtime
 fdc60f279c2c08e0aed8992ecc6dea55a0b391c7; repository checkpointbc4166e.

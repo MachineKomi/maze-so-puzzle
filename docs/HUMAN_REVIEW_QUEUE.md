@@ -7,6 +7,7 @@ the linked cumulative records rather than deleting or overwriting them.
 
 | ID | Request | Status / effect on work |
 | --- | --- | --- |
+| Q14 | On web0.22.28, when a guardian is too strong, is the missing Power clear? Does a requested picture-led hint help you choose what to try? After a rescue or zero-rescue finish, does the ending describe what happened? | **P28 ready.** [Public receipt](reviews/2026-09-08-v02228-public-verification.md). Voluntary observation; no reset/replay required. Record unaided, requested Hint or parent help without treating help as failure. No blocking decision. |
 | Q13 | When you next earn a new sticker, medal or badge and choose Next, is the saved-keepsake card satisfying and understandable? Does it stay clear of Ame and controls, and disappear naturally when you move? | **P27 ready on web0.22.27.** [Public receipt](reviews/2026-09-07-v02227-public-verification.md). No blocking decision; existing Book awards do not replay. |
 | Q12 | On published web0.22.26, are equipment, keys, potions and treasure consistently easy to spot without making quiet exploration feel busy? Compare Full/Lite if useful, and note any glow crossing a wall or hiding a label. | **P26 ready.** [Public receipt](reviews/2026-09-07-v02226-public-verification.md). No blocking design decision. C is now delivered on27. |
 | Q11 | Compare spacious, folded and Classic views on an already unlocked scrolling maze. Do the larger maze and smaller rail feel comfortable, with friends/Bag, map and pad easy to use? Try fold/expand and a hole jump; report device and window size for clipping or stutter. | **Ready on published0.22.25: P25.** [Contract](plans/EXPLORE-25-spacious-maze.md). No blocking design decision. |
@@ -21,7 +22,7 @@ the linked cumulative records rather than deleting or overwriting them.
 | Q06 | Should rare eggs be enabled only once there is a visible usable egg inventory, or should eggs accumulate earlier? | Nonblocking direction check. Default: deliver protected usable inventory before enabling egg rewards. |
 | Q07 | On0.22.16, select a middle story maze through the Book, finish and choose Next: does it advance, with Stay still available? | **Ready on published0.22.16; P18.** Primary Next focus and tester/normal selection are repaired; routing/save checks pass. Final chapter explicitly offers Surprise. [Qualification](reviews/2026-09-07-v02216-web-qualification.md) distinguishes reproduced causes from the original interaction. |
 
-[Cumulative family checklist](PLAYTEST_CHECKLIST.md) retains P5–P27, phone/audio,
+[Cumulative family checklist](PLAYTEST_CHECKLIST.md) retains P5–P28, phone/audio,
 Book comprehension and device limits. [Human decisions](HUMAN_DECISIONS.md) owns
 accepted steer. [Latest loot intake](user-playtests/2026-09-06-physical-loot-and-account-level.md)
 preserves every new request. No unresolved queue item is permission to invent

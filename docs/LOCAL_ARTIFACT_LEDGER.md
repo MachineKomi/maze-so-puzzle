@@ -1,5 +1,13 @@
 # Local artifact ledger and cleanup review
 
+## LEARN28 completed local/public evidence
+
+All learn28-* entries, release-v02227 and v02228-public-20260908 total
+**455 files /44450706 bytes** before the docs-guard log. The
+[public receipt](reviews/2026-09-08-v02228-public-verification.md) binds reports. One existing dist, shared unchanged
+media, no repo/native clone, deletion or archive. Owned QA jobs ended; preserve
+unowned4271 and all retained failed proof history.
+
 ## LEARN28 active evidence island
 
 New learn28-* browser/build/timing/release outputs stay external under

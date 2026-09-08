@@ -1,5 +1,16 @@
 # Family playtest checklist
 
+## P28 / Q14 — readable reasoning (published0.22.28)
+
+Ready on [published28](reviews/2026-09-08-v02228-public-verification.md). In an already unlocked maze, ask voluntarily:
+what Power is missing, which action could help, and what changed afterwards?
+Try only as much requested Hint as wanted. Does the tool picture and short rule
+help without giving away too much? A zero/partial rescue ending should stay warm
+and truthful. Note device, text size and any clipping; enlarged short-phone text
+can scroll while actions stay fixed. No reset or campaign replay is needed.
+Record unaided play, requested help or parent support as context, not a score.
+Q08 Apple camera/cold-Power and Q11 layout remain open; no immediate blocker.
+
 ## P27 / Q13 — saved keepsakes (published0.22.27)
 
 Ready on [published27](reviews/2026-09-07-v02227-public-verification.md). When you naturally earn a new sticker,

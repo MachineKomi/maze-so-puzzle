@@ -1,5 +1,14 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current delivery — web0.22.28:** [public receipt](reviews/2026-09-08-v02228-public-verification.md) verifies
+exact Power shortfalls, generic picture-led requested hints and truthful current
+rescue endings. Astra owns runtime on codex/readable-reasoning; actual independent
+Sol supports bounded publication. Q14/P28 is ready. LEARN28's presentation slice
+is delivered; next is Plan09-P1's isolated first-use/room-return canary using the
+[source handoff](reviews/2026-09-08-learn28-plan09-handoff.md). Preserve the wider
+roadmap, usable Garden dependencies, ART-REWARD-01, and physical Apple/cold-Power/
+native/family-comprehension queue. Earlier current/next labels are historical.
+
 **Current work — LEARN28:** [readable guidance](plans/LEARN-28-readable-guidance.md)
 on codex/readable-reasoning. Astra owns runtime; actual Sol independently reviews.
 Exact Power shortfall, generic picture-led requested hints and truthful current

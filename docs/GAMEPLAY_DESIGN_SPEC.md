@@ -1,5 +1,14 @@
 # Gameplay design specification
 
+**Current delivery — web0.22.28:** [public receipt](reviews/2026-09-08-v02228-public-verification.md) verifies
+exact Power shortfalls, generic picture-led requested hints and truthful current
+rescue endings. Astra owns runtime on codex/readable-reasoning; actual independent
+Sol supports bounded publication. Q14/P28 is ready. LEARN28's presentation slice
+is delivered; next is Plan09-P1's isolated first-use/room-return canary using the
+[source handoff](reviews/2026-09-08-learn28-plan09-handoff.md). Preserve the wider
+roadmap, usable Garden dependencies, ART-REWARD-01, and physical Apple/cold-Power/
+native/family-comprehension queue. Earlier current/next labels are historical.
+
 Status: implemented gameplay authority for the sixteen-maze campaign on 2026-09-02. This document turns the manager-reviewed Plan 06 into maintained rules and testable contracts. `docs/plans/06-game-design-gameplay-ux-mechanics-plan.md` remains the decision record; source and tests remain runtime authority.
 
 ## Player promise

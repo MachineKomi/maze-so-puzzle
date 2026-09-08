@@ -1,5 +1,10 @@
 # LEARN-01 — readable reasoning and help
 
+**Presentation delivered as web0.22.28:** [public receipt](../reviews/2026-09-08-v02228-public-verification.md).
+The [Plan09-P1 handoff](../reviews/2026-09-08-learn28-plan09-handoff.md) is ready;
+isolated canary execution is next. Voluntary family comprehension, physical
+screen-reader/controller/device and broader integrated acceptance remain open.
+
 Status: bounded execution brief, prepared2026-09-06; the Human's subsequent
 continuation instruction authorizes execution after the preceding bounded
 DELIGHT-02B tranche. No new permission is required to start that assigned scope.
