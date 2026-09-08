@@ -1,5 +1,12 @@
 # Integrated implementation roadmap through final convergence
 
+**2026-09-08 Plan09-P1 checkpoint:** [isolated fixture qualification](../reviews/2026-09-08-plan09-p1-qualification.md)
+supplies a compact first-use Power comparison and room-return application study,
+with engine, mounted UI and independent review evidence. These are not production
+maps. Next is row 5's remaining UI focus/optical essentials and Ame-only active-lead
+interface, then row 6 shared controls. Web stays **0.22.28**; later "next P1"
+paragraphs preserve history. Family observation and full campaign gates remain open.
+
 **Current delivery — web0.22.28:** [public receipt](../reviews/2026-09-08-v02228-public-verification.md) verifies
 exact Power shortfalls, generic picture-led requested hints and truthful current
 rescue endings. Astra owns runtime on codex/readable-reasoning; actual independent

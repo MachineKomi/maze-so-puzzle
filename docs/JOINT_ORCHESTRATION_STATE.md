@@ -1,5 +1,14 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current checkpoint — Plan09-P1:** the [isolated learning comparisons](reviews/2026-09-08-plan09-p1-qualification.md)
+are implemented and tested on `codex/learning-canaries`; Astra owns the fixtures,
+Sol the independent review. Web remains qualified **0.22.28**. No production map,
+save, rule, version or deployment changes. The compact first-use pocket is the
+recommended observation canary; the room-return fixture is a secondary study.
+Next: remaining UI focus/optical essentials and the Ame-only active-lead interface,
+then shared controls. Full Plan09, Garden and physical-device acceptance retain
+their dependencies. The earlier "next P1" notes below are historical.
+
 Docs closure 17eaea3 is backed up on main. Vercel confirmed **Canceled by Ignored
 Build Step at 10:52:13 UTC on 2026-09-08**; the [public receipt](reviews/2026-09-08-v02228-public-verification.md#documentation-closure)
 records the observation on the working branch. Production remains web 0.22.28.

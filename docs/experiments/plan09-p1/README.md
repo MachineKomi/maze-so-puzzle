@@ -63,6 +63,32 @@ does not prove impossibility. Do not invent a Power-10 blocked-return sequence.
 
 ## Reproduce safely
 
+### Manual choice and travel annotations
+
+| Teaching segment | First-use | Room-return |
+| --- | --- | --- |
+| Clue to first view of growth guardian under default six-tile view | Already visible | 3 inputs along down/down/right |
+| Clue to defeating growth guardian | 4 inputs, including stationary defeat | 6 inputs, including stationary defeat |
+| After growth to remembered blocker threshold | 3 moves with Power 11 | 5 moves with Power 11 |
+| Threshold to newly accessible square | Defeat, then enter: 2 inputs | Defeat, then enter: 2 inputs |
+| Gold detour from initial start / shortest return to that start | 3 / 3 moves | 5 / 5 moves |
+
+The two outbound moves that revisit the weapon approach in the compact layout,
+and the courtyard approach in the room layout, lead to a new functional branch.
+They are preparation travel. The 3/5-move inbound segments now carry enough Power
+for the remembered blocker; these are state-enabled returns. The Gold branch is
+an optional out-and-back, not a required pacing burden. In the room fixture it
+also passes the weapon, so its whole route is not a pure false lead: Gold alone
+does not solve the deficit, while the weapon is useful. Neither proof claims that
+the treasure itself teaches the arithmetic. These annotations classify the named
+canary segments, not all repeated movement in the full campaign references.
+
+The effective choices are between regions or goals: prepare at the weaker
+guardian, explore optional treasure, or help the friend after opening the route.
+Walking left versus right around an empty room tile is not a new puzzle decision.
+The four- and nine-input ordinary event gaps above use the current event metric;
+they are not a measured child attention span or a new functional-landmark metric.
+
 Run from the repo root using installed locked dependencies. Evidence is external
 at `C:/GameDev/maze-game-qa/plan09-p1`; no clone, build, native package or media
 copy is needed. Preserve earlier logs/captures when changing a fixture.
@@ -90,6 +116,13 @@ saves to public origins. Normal development and builds retain the real campaign.
 There is no public experimental URL or hidden production route.
 
 ## Handoff and family observation
+
+[Independent Sol review](../../reviews/2026-09-08-plan09-p1-sol-review.md) supports
+closing this isolated comparison. Retain two observation cautions: the Gold bag's
+yellow star may be mistaken for the objective, and the wide phone can show both
+room guardians together where desktop relies on a remembered earlier view.
+The default six-tile clue-lead table above is not every mounted viewport's reveal
+sequence. An inherited "a 8-move" hint-copy defect is queued for the next UI slice.
 
 Engineering and independent review can close this bounded comparison, not child
 comprehension, physical Apple performance or production-content acceptance.

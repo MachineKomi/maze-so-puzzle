@@ -1,5 +1,13 @@
 # Plan 09 — expand the authored campaign from 16 to 24 mazes
 
+**Current bounded P1 checkpoint, 2026-09-08:** [playable comparisons and evidence](../reviews/2026-09-08-plan09-p1-qualification.md)
+implement the existing-rule first-use and room-return experiments. The compact
+canary is recommended for voluntary observation; no canonical maps or fingerprints
+changed. Its one-input friend is optional, not an optional spatial branch.
+Preserve Lanternlight's room composition while investigating its measured quiet
+travel in future production work. P1 does not close full Plan09 or unlock Plan10;
+controls, animation and integrated performance predecessors remain required.
+
 **2026-09-06 current execution override:** HAZARD-02 is the active bounded web0.22.14 candidate after published tall walls/jump0.22.13. Then execute [LOOT-03](LOOT-03-physical-collection-and-progression.md): persistent physical authored pickups → enemy Gold/Science → mixed chests/Mimic lifecycle → recognition XP → rare eggs after protected usable inventory. The latest explicit Human request supersedes older no-new-XP/presentation-only reward restrictions for these slices. DELIGHT-02B/LEARN-01 and the wider roadmap remain next. [Human review queue](../HUMAN_REVIEW_QUEUE.md) is nonblocking unless a concrete dependent decision is required.
 
 ## Current execution contract — planning reconciliation, 2026-09-06

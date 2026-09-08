@@ -7,7 +7,9 @@ browser reports, screenshots and retained failed logs live under
 `C:/GameDev/maze-game-qa/plan09-p1`. One temporary server on 1422, one serial Edge
 worker, existing dependencies and shared media. No build, repo clone, native
 output, deletion or archiving. The earlier unowned 4271 service is untouched.
-Final byte inventory and evidence hashes belong in the qualification receipt.
+The final pre-guard inventory is **328 files / 92,487,431 bytes**, primarily
+retained comparison screenshots. [Qualification](reviews/2026-09-08-plan09-p1-qualification.md)
+binds the final reports. All owned QA processes ended; port 1422 is closed.
 
 ## LEARN28 completed local/public evidence
 

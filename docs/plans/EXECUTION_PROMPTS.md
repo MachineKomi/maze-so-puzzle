@@ -1,5 +1,12 @@
 # Sequential specialist execution prompts
 
+**Current dispatch, 2026-09-08:** consume the [Plan09-P1 comparison](../reviews/2026-09-08-plan09-p1-qualification.md)
+and its independent disposition. Do not register the experimental maps in the
+campaign. Next execute the roadmap's remaining UI focus/optical essentials and
+Ame-only active-lead interface, preparing shared controls. Preserve the current
+single runtime writer and independent Sol reviewer. Earlier P1 start assignments
+are superseded by this implemented comparison; web remains qualified 0.22.28.
+
 **Current delivery — web0.22.28:** [public receipt](../reviews/2026-09-08-v02228-public-verification.md) verifies
 exact Power shortfalls, generic picture-led requested hints and truthful current
 rescue endings. Astra owns runtime on codex/readable-reasoning; actual independent

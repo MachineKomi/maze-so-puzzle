@@ -1,5 +1,14 @@
 # Family playtest checklist
 
+## P29 / Q15 — optional isolated learning comparison
+
+[Plan09-P1 experiments](experiments/plan09-p1/README.md) are available locally,
+outside the public campaign. This is not a request to find a new maze on web28.
+If convenient, observe what the player thinks is missing, what might help and
+what changes on returning. Record requested hints or parent support without
+grading help as failure. The compact and room fixtures both preserve zero-rescue
+completion. This optional feedback does not block UI/controls development.
+
 ## P28 / Q14 — readable reasoning (published0.22.28)
 
 Ready on [published28](reviews/2026-09-08-v02228-public-verification.md). In an already unlocked maze, ask voluntarily:

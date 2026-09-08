@@ -1,5 +1,20 @@
 # Maze so Puzzle — playtest backlog
 
+P1 review follow-ups: **UI-COPY-HINT-01**, remove inherited article agreement
+errors such as "a 8-move required path" in the next UI copy slice, preserving
+the engine-derived length. **LEARN-GOAL-01**, distinguish the goal star from
+optional Gold-star treasure in future teaching content and ART-REWARD-01;
+record observed confusion rather than assuming the Gold detour is understood.
+These do not block independent UI/controls development or close family testing.
+
+**2026-09-08 teaching/pacing checkpoint:** [Plan09-P1](reviews/2026-09-08-plan09-p1-qualification.md)
+now has two playable isolated experiments and current-campaign comparisons.
+Keep PT06/PT12's spatial variety and meaningful-return requirements open for full
+production work. Lanternlight's measured ordinary event gap is 48 inputs; its
+central Power-6 return is separate from its later Power-10 room composition.
+The compact first-use observation is optional Q15/P29; public guidance remains
+Q14/P28 on web0.22.28. Next independent work is UI focus/optical essentials.
+
 **Current delivery — web0.22.28:** [public receipt](reviews/2026-09-08-v02228-public-verification.md) verifies
 exact Power shortfalls, generic picture-led requested hints and truthful current
 rescue endings. Astra owns runtime on codex/readable-reasoning; actual independent
