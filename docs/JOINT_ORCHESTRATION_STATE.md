@@ -1,5 +1,18 @@
 # Maze so Puzzle — joint orchestration state
 
+**Current work — LEARN28:** [readable guidance](plans/LEARN-28-readable-guidance.md)
+on codex/readable-reasoning. Astra owns runtime; actual Sol independently reviews.
+Exact Power shortfall, generic picture-led requested hints and truthful current
+rescue endings are candidate28. Web27 remains live until qualified promotion.
+Next is Plan09-P1's isolated existing-rule learning canary, preserving the wider
+roadmap and physical Apple/cold-Power/native/family queue.
+
+Documentation closure38f43ce is backed up on main and this branch. Vercel
+actually skipped it at18:21:16UTC through the unchanged Ignored Build Step;
+[observed receipt](reviews/2026-09-07-v02227-public-verification.md#observed-documentation-closure).
+This observation is branch-only for the next runtime slice. Owned QA processes
+are closed; unowned4271 and all retained artifacts remain untouched.
+
 **Current delivery — web0.22.27:** [public receipt](reviews/2026-09-07-v02227-public-verification.md) verifies
 one saved-keepsake celebration after successful Next, with no pre-commit or
 after-Stay cue. Actual independent Sol supports bounded publication. Astra owns

@@ -18,6 +18,7 @@ const jumpReview = process.env.MAZE_REVIEW_ROUTE === 'jump';
 const idleReview = process.env.MAZE_REVIEW_ROUTE === 'idle';
 const victoryReview = process.env.MAZE_REVIEW_ROUTE === 'victory';
 const keepsakeReview = process.env.MAZE_REVIEW_ROUTE === 'keepsake';
+const guidanceReview = process.env.MAZE_REVIEW_ROUTE === 'guidance';
 const lootReview = process.env.MAZE_REVIEW_ROUTE === 'loot';
 const enemyReview = process.env.MAZE_REVIEW_ROUTE === 'enemy';
 const chestReview = process.env.MAZE_REVIEW_ROUTE === 'chest';
@@ -47,7 +48,7 @@ await mkdir(output, { recursive: true });
 const data = JSON.parse(await readFile(fixturesPath, 'utf8'));
 const fixture = jumpReview ? data.fixtures.find(f => f.level.id === 'wishing-woods' && f.step.direction === 'right' && f.step.result.events.every(e=>['hole-jumped','moved'].includes(e.type))) : data.fixtures.find(f => f.id === (process.env.MAZE_REVIEW_FIXTURE_ID || 'twilight-treasure-loop'));
 const reverse = { right: 'left', left: 'right', up: 'down', down: 'up' };
-if (!fixture || (!jumpReview && !victoryReview && !keepsakeReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
+if (!fixture || (!jumpReview && !victoryReview && !keepsakeReview && !guidanceReview && (!reverse[fixture.direction] || (!chestReview && !enemyReview && !potionReview && fixture.count < 4)))) throw Error('Expected frozen engine-derived route');
 if(chestReview&&!fixture.baselineSnapshot)throw Error('Chest comparison requires the actual historical object graph');
 if (idleReview && !(fixture.visibleHazardCells > 0 || fixture.visiblePickupCount > 0)) throw Error('Idle comparison requires visible hazards or authored pickups');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -120,6 +121,7 @@ report.mountSample=mountSample;
 report.entrySettleMs=entrySettleMs; report.freshBrowser=freshBrowser;
 if(victoryReview) report.route='eleven seconds decoded won-modal celebration, both entries paused before mount and resumed together at measurement start; no completion commit, cold-start or gameplay timing claim';
 if(keepsakeReview)report.route='Next commits the same earned rewards before measurement; then chapter dismissal, finite earned card and five seconds stationary. No cold-start claim.';
+if(guidanceReview)report.route='Actual underpowered encounter, four seconds for bounded search, request tier-one Required Path,800ms reading then dismiss and500ms rest. Unchanged position and Power.';
 if (idleReview) { report.route = 'eight seconds idle with live ambient surfaces'; report.visibleHazardCells = fixture.visibleHazardCells; }
 if (lootReview) report.route='open authored Gold, pause1500ms, approach distant bundle, pause900ms, retrace two steps, idle1500ms; conserved Gold8, implementations identified by served entry hashes';
 if (enemyReview) report.route='defeat first enemy, pause2700ms, enter cleared tile, pause1300ms, return, pause500ms; unchanged Power and candidate declared-currency conservation';
@@ -207,8 +209,23 @@ try {
           const resourcesBefore=await resources();
           const victoryProgressBefore=(victoryReview||keepsakeReview)?await page.evaluate(key=>localStorage.getItem(key),data.keys.progress):null;
           // Four reversible four-step legs per cycle; preserve engine-derived direction.
-          let keepsakeResources=null;
-          if(keepsakeReview){await page.getByRole('button',{name:'Start the maze',exact:true}).click();await page.waitForTimeout(1100);keepsakeResources=await resources();await page.waitForTimeout(4000);}
+          let keepsakeResources=null,guidance=null;
+          if(guidanceReview){
+            await page.evaluate(()=>{
+              window.learnProbe={input:0,commit:0,frame:0};
+              addEventListener('keydown',()=>window.learnProbe.input=performance.now(),{once:true,capture:true});
+              const observer=new MutationObserver(()=>{if(document.querySelector('.too-strong-equation')){window.learnProbe.commit=performance.now();observer.disconnect();requestAnimationFrame(()=>requestAnimationFrame(()=>window.learnProbe.frame=performance.now()));}});
+              observer.observe(document.body,{childList:true,subtree:true});
+            });
+            await page.keyboard.press(`Arrow${fixture.direction[0].toUpperCase()+fixture.direction.slice(1)}`);await page.waitForTimeout(4000);
+            guidance=await page.evaluate(()=>({...window.learnProbe,search:document.querySelector('.power-opportunities')?.dataset.searchState,exhausted:document.querySelector('.power-opportunities')?.dataset.searchExhausted,ids:[...document.querySelectorAll('[data-opportunity-id]')].map(e=>e.dataset.opportunityId)}));
+            guidance.resources=await resources();
+            if(guidance.search!=='complete'||!guidance.input||guidance.frame<=guidance.input)throw Error('Guidance route incomplete');
+            await page.getByRole('button',{name:'Show Required Path',exact:true}).click();await page.waitForTimeout(800);
+            if(!await page.locator('.hint-card').count())throw Error('Hint did not open');
+            await page.keyboard.press('Escape');await page.waitForTimeout(500);
+          }
+          else if(keepsakeReview){await page.getByRole('button',{name:'Start the maze',exact:true}).click();await page.waitForTimeout(1100);keepsakeResources=await resources();await page.waitForTimeout(4000);}
           else if(victoryReview) {await victoryPause.evaluate(e=>e.remove());await page.waitForTimeout(11000);}
           else if(potionReview) {
             const press=direction=>page.keyboard.press(`Arrow${direction[0].toUpperCase()+direction.slice(1)}`);
@@ -251,7 +268,7 @@ try {
             return [name, { count: entries.length, totalMs: entries.length ? entries.reduce((n, e) => n + (e.dur || 0), 0) / 1000 : null }];
           }));
           const row = { mode, pair, warmup: pair < 0, viewport: [cohort.width, cohort.height], bundle, stepsBefore: routeSnapshot.game.steps, stepsAfter: sample.save?.game?.steps,
-            keepsakePeak:sample.keepsakePeak,keepsakeResources,
+            keepsakePeak:sample.keepsakePeak,keepsakeResources,guidance,
             resourcesBefore,resourcesAfter:await resources(),victoryProgressBefore,victory:sample.victory,loot:sample.save?.game?.loot??null,
             gold:sample.save?.game?.goldStarsCollected,science:sample.save?.game?.sciencePointsCollected,coldProbe:sample.coldProbe,mount:sample.mount,
             dpr:cohort.dpr,cpuRate,rebases:sample.rebases,windows:sample.windows,
@@ -264,7 +281,8 @@ try {
           if (pair === 0 && captureScreenshots) await page.screenshot({ path: resolve(output, `${cohort.width}-${mode}.png`) });
           if(captureTrace) await writeFile(resolve(output, `${cohort.width}-${pair}-${mode}-trace.json.gz`), gzipSync(JSON.stringify({ traceEvents: events }), { level: 6 }));
           console.log(JSON.stringify({ ...row, deltas: undefined, positions: undefined,windows:undefined,layers:undefined,coldProbe:undefined,mount:undefined }));
-          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (chestReview||enemyReview||potionReview?2:lootReview?4:(idleReview||victoryReview||keepsakeReview)?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || ((idleReview||victoryReview||keepsakeReview) ? row.transforms !== 1 : row.transforms < (chestReview||potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if (errors.length || sample.brokenImages || row.stepsAfter - row.stepsBefore !== (chestReview||enemyReview||potionReview?2:lootReview?4:(idleReview||victoryReview||keepsakeReview||guidanceReview)?0:jumpReview?8:16*cycles) || JSON.stringify(row.positionBefore) !== JSON.stringify(row.positionAfter) || ((idleReview||victoryReview||keepsakeReview||guidanceReview) ? row.transforms !== 1 : row.transforms < (chestReview||potionReview?1:jumpReview&&mode==='baseline'?2:8)) || row.mutations) throw Error('Contaminated or unmatched route; retained report');
+          if(guidanceReview&&sample.save.game.power!==snapshot.game.power)throw Error('Guidance changed Power');
           if(victoryReview){
             if(!sample.victory || (mode==='candidate'&&sample.victory.running!==0))throw Error('Victory did not settle');
             if(sample.victory.progress!==victoryProgressBefore)throw Error('Victory changed unbanked profile');

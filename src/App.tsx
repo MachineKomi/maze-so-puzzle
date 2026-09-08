@@ -164,6 +164,7 @@ import {
 } from "./combatPresentation";
 import {
   storyForLevel,
+  storyRescueLine,
   type StorySpeaker,
 } from "./story";
 
@@ -175,6 +176,12 @@ const DIRECTION_ICONS: Record<Direction, string> = {
 };
 
 const COLOR_LABELS: Readonly<Record<KeyColor, string>> = KEY_COLOR_LABELS;
+
+function HintThought({ text }: { text: string }) {
+  // Existing hint copy stays the accessible authority; preserve its punctuation.
+  const end = text.indexOf(". ");
+  return <div className="hint-thought"><strong>{end < 0 ? text : text.slice(0, end + 1)}</strong>{end >= 0 && <p>{text.slice(end + 2)}</p>}</div>;
+}
 
 function lockPairLabel(color: KeyColor): string {
   return `${COLOR_LABELS[color]} ${KEY_MOTIF_LABELS[color]}`;
@@ -2732,8 +2739,8 @@ function App() {
           <Modal title="A little hint" variant="hint" onClose={closeHint} returnFocus={modalReturnFocus.current}>
             <p className="hint-objective"><strong>Right now:</strong> {hudModel.objective}</p>
             <div className="hint-card">
-              <CatalogueImage className="hint-spark" src={ASSETS.navHelp} alt="" />
-              <p>{currentHint.text}</p>
+              <CatalogueImage className="hint-spark" src={ASSETS[currentHint.picture]} alt="" displayPx={96} />
+              <HintThought text={currentHint.text} />
               <small>Hint {currentHint.tier + 1} of 4 · ask again for a little more help</small>
             </div>
             <button className="primary-button" onClick={closeHint}>Got it!</button>
@@ -2771,6 +2778,7 @@ function App() {
                 <div>
                   <small>Chapter {levelStory.chapter} complete · {levelStory.puzzlePower}</small>
                   <p>{levelStory.outro}</p>
+                  <p className="story-rescue-result">{storyRescueLine(game.rescuedAnimalIds.length, animalObjects.length)}</p>
                 </div>
               </div>
             )}
@@ -2823,8 +2831,10 @@ function App() {
               <b aria-hidden="true">&lt;</b>
               <span className="power-side enemy-side"><small>{tooStrongEncounter.enemyLabel}</small><strong>{tooStrongEncounter.event.enemyPower}</strong></span>
             </div></div>
-            <p className="modal-lead">Ame stayed safely one square away. Find more Power, then come back!</p>
-            <div className="power-opportunities" data-search-state={powerGuidance ? "complete" : "pending"} data-search-exhausted={powerGuidance?.exhausted} aria-busy={!powerGuidance}>{powerGuidance?.opportunities.map(object => <article key={object.id} data-opportunity-id={object.id}><CatalogueImage src={spriteFor(object)} alt={object.kind === "enemy" ? resolveEnemyArt(object.style).label : "Power Potion"} displayPx={64} /><strong>{object.kind === "enemy" ? "Fight weaker monsters" : "Find a Power Potion"}</strong><p>{object.kind === "enemy" ? `${resolveEnemyArt(object.style).label} · Power ${object.power}` : "A helpful potion is still in this maze."}</p></article>)}</div>
+            <p className="power-shortfall">Need {Math.max(0, tooStrongEncounter.event.enemyPower - tooStrongEncounter.event.playerPower)} more Power</p>
+            <p className="modal-lead">Ame stayed safely one square away. With the maze weapon, equal Power wins!</p>
+            <div className="power-opportunities" data-search-state={powerGuidance ? "complete" : "pending"} data-search-exhausted={powerGuidance?.exhausted} aria-busy={!powerGuidance}>{powerGuidance?.opportunities.map(object => <article key={object.id} data-opportunity-id={object.id}><CatalogueImage src={spriteFor(object)} alt={object.kind === "enemy" ? resolveEnemyArt(object.style).label : "Power Potion"} displayPx={64} /><strong>{object.kind === "enemy" ? "Challenge a smaller number" : "Find a Power Potion"}</strong><p>Gain {object.kind === "enemy" ? object.power : object.amount} Power</p></article>)}</div>
+            <p className="power-search-help" role="status">{!powerGuidance ? "Looking for a safe way to grow…" : powerGuidance.opportunities.length ? "You may need several finds. Keep comparing Power." : "Want help choosing a route? Try Show Required Path."}</p>
           </Modal>
         )}
 
