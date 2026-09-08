@@ -74,3 +74,10 @@ dist in place; no deletion/archive or extra repo/native copy. Preserve unowned42
 Use actual successful release d17c89d0b9ca408d881732724deb9e08d088bdaf as the unchanged Ignored Build Step
 baseline. Follow [docs-only instructions](../VERCEL_DEPLOYMENT.md#routine-documentation-checkpoints),
 back up scoped documentation without a rebuild, and record the actual Vercel skip.
+
+Observed closure: docs checkpoint **17eaea39e84214e3b160ebde14abc5850e9d5faf**
+was pushed to main and the working branch. The unchanged local guard returned
+SKIP against the successful release above. [Vercel's actual docs deployment](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/8GsGhDzKKzHmwVei2DfPpiSrn3UP)
+reported **Canceled by Ignored Build Step at 10:52:13 UTC on 2026-09-08**.
+This observation is backed up on the working branch only, avoiding a recursive
+documentation deployment. Production remains the qualified web 0.22.28 release.

@@ -1,5 +1,9 @@
 # Maze so Puzzle — joint orchestration state
 
+Docs closure 17eaea3 is backed up on main. Vercel confirmed **Canceled by Ignored
+Build Step at 10:52:13 UTC on 2026-09-08**; the [public receipt](reviews/2026-09-08-v02228-public-verification.md#documentation-closure)
+records the observation on the working branch. Production remains web 0.22.28.
+
 **Current delivery — web0.22.28:** [public receipt](reviews/2026-09-08-v02228-public-verification.md) verifies
 exact Power shortfalls, generic picture-led requested hints and truthful current
 rescue endings. Astra owns runtime on codex/readable-reasoning; actual independent

@@ -2,6 +2,11 @@
 
 ## LEARN28 completed local/public evidence
 
+Closure adds `C:/GameDev/maze-game-qa/performance/learn28-doc-guard.log` (97 bytes):
+the unchanged guard returned SKIP against release d17c89d. Actual Vercel docs
+checkpoint 17eaea3 was canceled by Ignored Build Step at 10:52:13 UTC, 2026-09-08.
+The listed artifact island now totals **456 files / 44,450,803 bytes**. No removal.
+
 All learn28-* entries, release-v02227 and v02228-public-20260908 total
 **455 files /44450706 bytes** before the docs-guard log. The
 [public receipt](reviews/2026-09-08-v02228-public-verification.md) binds reports. One existing dist, shared unchanged
