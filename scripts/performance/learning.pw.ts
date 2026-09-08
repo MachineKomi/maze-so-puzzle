@@ -40,7 +40,7 @@ for(const index of [1,2,8,9,12]){
  for(const direction of solveLevel(level,{avoidAnimals:true}).directions){
   const r=movePlayer(level,game,direction);
   if(r.events.some(e=>!['moved','animal-rescued','treasure-opened'].includes(e.type))){
-   const hint=getProgressiveHint(level,game,0);hints[hint.picture]??={level,game};
+   const hint=getProgressiveHint(level,game,0);const family=hint.text.includes('matching key')?'matching-key':hint.text.includes('matching door')?'matching-door':hint.picture;hints[family]??={level,game};
   }
   game=r.state;
  }
@@ -84,7 +84,7 @@ test(`learn Power ${width} large${large} ${quality}`,async({page})=>{
  await page.keyboard.press(arrow(f.direction!));await page.clock.runFor(1000);await expect(page.getByRole('heading',{name:'Too strong!',exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Show Required Path',exact:true}).click();await expect(page.getByRole('heading',{name:'A little hint'})).toBeVisible();
 });
-test('learn high Power and live opportunity gains',async({page})=>{
+test('learn later campaign Power and live opportunity gains',async({page})=>{
  await page.setViewportSize({width:844,height:390});const f=powers[1]!;await enter(page,f);await page.keyboard.press(arrow(f.direction!));
  for(let i=0;i<40&&await page.locator('.power-opportunities').getAttribute('data-search-state')!=='complete';i++)await page.clock.runFor(500);
  await expect(page.locator('.power-opportunities')).toHaveAttribute('data-search-state','complete');
@@ -93,12 +93,21 @@ test('learn high Power and live opportunity gains',async({page})=>{
  for(const card of await page.locator('[data-opportunity-id]').all()){const id=await card.getAttribute('data-opportunity-id'),o=f.level.objects.find(o=>o.id===id)!;expect(['enemy','potion']).toContain(o.kind);await expect(card).toContainText(`Gain ${o.kind==='enemy'?o.power:o.kind==='potion'?o.amount:0} Power`);}}
  await capture(page,'high-power');
 });
+for(const [width,height,large] of [[780,312,true],[1280,720,false]] as const)test(`learn three-digit typography stress ${width}`,async({page})=>{
+ await page.setViewportSize({width,height});const f=powers[0]!;await enter(page,f,{large});await page.keyboard.press(arrow(f.direction!));await page.clock.runFor(1200);
+ // Explicit typography-only stress on the real rendered modal, not an authored
+ // encounter or injected gameplay. Engine tests separately prove 125 comparisons.
+ await page.locator('.too-strong-equation').evaluate(e=>{const n=e.querySelectorAll('strong');n[0]!.textContent='125';n[1]!.textContent='250';});
+ await page.locator('.power-shortfall').evaluate(e=>e.textContent='Need 125 more Power');
+ await capture(page,`typography-only-125-250-${width}`);
+ const boxes=await page.locator('.too-strong-equation,.power-shortfall').evaluateAll(es=>es.map(e=>({client:e.clientWidth,scroll:e.scrollWidth})));expect(boxes.every(b=>b.scroll<=b.client+1)).toBe(true);
+});
 for(const [picture,f] of Object.entries(hints))test(`learn four hints ${picture}`,async({page})=>{
  await page.setViewportSize({width:780,height:312});await enter(page,f,{large:picture==='springBoots'});const before=await read(page);
  for(let tier=0;tier<4;tier++){
   await page.getByRole('button',{name:/^More/}).click();await page.getByRole('button',{name:'Objective & gentle hint'}).click();
   const expected=getProgressiveHint(f.level,f.game,tier);await expect(page.locator('.hint-card small')).toContainText(`Hint ${tier+1} of 4`);
-  if(!baseline){await expect(page.locator('.hint-thought')).toContainText(expected.text.split('. ')[0]);expect(expected.picture).toBe(picture);}
+  if(!baseline){await expect(page.locator('.hint-thought')).toContainText(expected.text.split('. ')[0]);expect(expected.picture).toBe(picture.startsWith('matching-')?'navHelp':picture);}
   await capture(page,`hint-${picture}-${tier}`);await page.getByRole('button',{name:'Got it!',exact:true}).click();await page.clock.runFor(500);
   expect((await read(page)).game).toEqual(before.game);
  }

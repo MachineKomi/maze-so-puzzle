@@ -645,7 +645,7 @@
     },
     {
       "id": "learn28-readable-guidance",
-      "owner": "Astra",
+      "owner": "ui",
       "status": "approved",
       "compressedJsBytes": 134,
       "compressedCssBytes": 0,
