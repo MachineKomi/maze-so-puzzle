@@ -94,3 +94,14 @@ or archived. Latest fully published Windows remains 0.22.9; native 0.22.10 is
 separately unfinished. Next is UI focus/optical essentials and the Ame-only
 active-lead seam before shared controls. Full Plan09 and usable Garden retain
 their prerequisite gates; P1 does not unlock broad campaign or egg production.
+
+## Backup and observed deployment guard
+
+Reviewed docs checkpoint **b3076f15d656cd670cc2c1f505538f8d1ce1b0e2** is backed
+up on main and `codex/learning-canaries`. The unchanged local guard returned
+SKIP against actual last successful web release d17c89d. [Vercel's checkpoint](https://vercel.com/jasons-projects-6714ffa7/maze-so-puzzle/AP47UthH8Qp16U1kRWQPhdvRnBjA)
+confirmed **Canceled by Ignored Build Step at 11:23:00 UTC on 2026-09-08**.
+Production remains web 0.22.28. This observation is committed on the working
+branch only to avoid another recursive documentation checkpoint on main.
+The 97-byte `docs-guard.log` brings the evidence island to **329 files /
+92,487,528 bytes**. All evidence is retained for later explicit cleanup review.

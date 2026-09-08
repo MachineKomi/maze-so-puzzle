@@ -1,5 +1,9 @@
 # Maze so Puzzle — joint orchestration state
 
+P1 docs closure b3076f1 is backed up on main. Vercel confirmed **Canceled by
+Ignored Build Step at 11:23:00 UTC on 2026-09-08**; the [qualification receipt](reviews/2026-09-08-plan09-p1-qualification.md#backup-and-observed-deployment-guard)
+records the observation. Web remains 0.22.28; no experimental content is deployed.
+
 **Current checkpoint — Plan09-P1:** the [isolated learning comparisons](reviews/2026-09-08-plan09-p1-qualification.md)
 are implemented and tested on `codex/learning-canaries`; Astra owns the fixtures,
 Sol the independent review. Web remains qualified **0.22.28**. No production map,

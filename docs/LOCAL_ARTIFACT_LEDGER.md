@@ -2,6 +2,11 @@
 
 ## Plan09-P1 isolated experiments — 2026-09-08
 
+Final closure adds `plan09-p1/docs-guard.log` (97 bytes), recording local SKIP.
+The evidence island totals **329 files / 92,487,528 bytes**. Vercel actually
+skipped b3076f1 at 11:23:00 UTC; see the linked qualification receipt. No build
+output, deletion or archive was created by this closure.
+
 Source/configuration lives under `docs/experiments/plan09-p1`; raw engine JSON,
 browser reports, screenshots and retained failed logs live under
 `C:/GameDev/maze-game-qa/plan09-p1`. One temporary server on 1422, one serial Edge
