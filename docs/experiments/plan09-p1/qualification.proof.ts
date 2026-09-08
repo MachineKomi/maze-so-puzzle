@@ -107,6 +107,13 @@ describe('Plan09-P1 isolated existing-rule canaries', () => {
     expect(new Set(Object.values(checkpoints).map(s => hintStateKey(s!))).size).toBe(3);
     for (const [name, game] of Object.entries(checkpoints).filter((entry): entry is [string, GameState] => !!entry[1])) {
       const hints = [0, 1, 2, 3].map(t => getProgressiveHint(level, game, t));
+      if (level.id.startsWith('p1-')) {
+        const expectedTarget = `${level.id}-enemy-power-${name === 'clue' ? 5 : 9}`;
+        for (const hint of hints.slice(2)) expect(hint.targetObjectId).toBe(expectedTarget);
+        const expectedDirection = name === 'return' ? 'up' : level.id === 'p1-first-use' ? (name === 'clue' ? 'right' : 'up') : (name === 'clue' ? 'down' : 'left');
+        expect(hints[3]!.direction).toBe(expectedDirection);
+        expect(hints[2]!.text).toContain(`Explore ${expectedDirection}`);
+      }
       for (const hint of hints.slice(0, 2)) { expect(hint.direction).toBeUndefined(); expect(hint.targetObjectId).toBeUndefined(); }
       expect(hints[3]!.direction).toBeDefined();
       const hinted = movePlayer(level, game, hints[3]!.direction!).state;

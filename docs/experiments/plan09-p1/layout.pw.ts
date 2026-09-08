@@ -6,7 +6,7 @@ import { CURATED_LEVELS } from '../../../src/game/levels';
 import { createActiveRunSnapshot, ACTIVE_RUN_STORAGE_KEY } from '../../../src/session';
 import { createDefaultPlayerProgress, PLAYER_PROGRESS_STORAGE_KEY } from '../../../src/progress';
 import { PRESENTATION_PREFERENCES_KEY } from '../../../src/motion';
-import { hintStateKey } from '../../../src/game/hints';
+import { hintStateKey, getProgressiveHint } from '../../../src/game/hints';
 const root = 'C:/GameDev/maze-game-qa/plan09-p1';
 const images = process.env.MAZE_P1_BROWSER_DIR ?? resolve(root, 'browser-final');
 const report = JSON.parse(readFileSync(resolve(root, 'engine-report.json'), 'utf8'));
@@ -19,7 +19,7 @@ for (const level of levels) for (const width of [780, 1280]) test(`${level.id} $
   const proof = report.find((r: any) => r.id === level.id);
   const checkpoints = { ...proof.checkpoints, ...(proof.roomContact ? { roomContact: proof.roomContact.game } : {}) };
   for (const [label, game] of Object.entries(checkpoints) as [string, any][]) {
-    const snapshot = createActiveRunSnapshot({ runId: game.loot.runId, mode: 'normal', level, game, revealedTiles: proof.explored[label] ?? [], hintUsesByState: { [hintStateKey(game)]: 2 } });
+    const snapshot = createActiveRunSnapshot({ runId: game.loot.runId, mode: 'normal', level, game, revealedTiles: proof.explored[label] ?? [], hintUsesByState: {} });
     expect(snapshot).not.toBeNull();
     await page.goto('/');
     await page.evaluate(({ snapshot, run, progress, prefs, defaults }) => {
@@ -44,14 +44,18 @@ for (const level of levels) for (const width of [780, 1280]) test(`${level.id} $
     const saved = await page.evaluate(k => JSON.parse(localStorage.getItem(k)!), ACTIVE_RUN_STORAGE_KEY);
     expect(saved.game.position).toEqual(game.position); expect(saved.game.power).toBe(game.power);
     // Real mounted help, then a fresh reload; fixtures never touch Human origins.
-    await page.getByRole('button', { name: /^More/ }).click();
-    await page.getByRole('button', { name: 'Objective & gentle hint' }).click();
-    await expect(page.getByRole('heading', { name: 'A little hint' })).toBeVisible();
-    await page.screenshot({ path: resolve(images, `${level.id}-${width}-${label}-hint.png`) });
+    for (let tier = 0; tier < 4; tier++) {
+      await page.getByRole('button', { name: /^More/ }).click();
+      await page.getByRole('button', { name: 'Objective & gentle hint' }).click();
+      await expect(page.locator('.hint-card small')).toContainText(`Hint ${tier + 1} of 4`);
+      await expect(page.locator('.hint-thought')).toContainText(getProgressiveHint(level, game, tier).text.split('. ')[0]!);
+      if (tier === 0 || tier === 3) await page.screenshot({ path: resolve(images, `${level.id}-${width}-${label}-hint-${tier}.png`) });
+      await page.getByRole('button', { name: 'Got it!', exact: true }).click();
+    }
     await page.reload();
     const resumed = await page.evaluate(k => JSON.parse(localStorage.getItem(k)!), ACTIVE_RUN_STORAGE_KEY);
     expect(resumed.game.position).toEqual(game.position); expect(resumed.game.power).toBe(game.power);
-    expect(resumed.hintUsesByState[hintStateKey(game)]).toBeGreaterThan(2);
+    expect(resumed.hintUsesByState[hintStateKey(game)]).toBe(4);
   }
   expect(errors).toEqual([]);
 });
